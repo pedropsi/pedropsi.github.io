@@ -1,0 +1,14 @@
+﻿<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+<h2>Email</h2>
+<p>Receive release alerts on ${v.NAME()}'s next projects directly in your inbox.</p>
+<div class="button centered" >${v.SUBSCRIBE_EMAIL()}</div>
+
+<h2>RSS</h2>
+<p>Follow the most recent posts and updates in the ${v.SITE_NAME()}.</p>
+<div class="button centered" >${v.SUBSCRIBE_RSS()}</div>
+
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

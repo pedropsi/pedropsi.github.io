@@ -1,0 +1,12 @@
+﻿<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+${v.MAIN_OUT(LatestHTML())}
+${v.SECTION_OUT(PopularHTML())}
+${v.SECTION_SUBSCRIBE()}
+${v.SECTION_OUT(HighlightsHTML())}
+${v.SECTION_OUT(RecentNewsHTML())}
+${v.FOOTER_AREA()}
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

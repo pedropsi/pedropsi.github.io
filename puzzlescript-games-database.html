@@ -1,0 +1,106 @@
+﻿<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+<h2>${v.TITLE_BOLD()}</h2>
+<p>${v.ONE_LINER()} Currently the database contains <b><span id="titlenumber" class="updatable">1350</span> puzzlescript games</b>, and is complete up to <b>December 31st 2019</b>.</p>
+<p>Whenever a new puzzlescript game is made, it will be added to this list by the community. <b>Found a missing title? Please add it now!</b></p>
+
+<h2>Adding a puzzlescript game to this list</h2>
+<p>To add a game to the "${v.TITLE_BOLD()}" list in one click, simply use this handy <a href="javascript:
+var jsCode=document.createElement('script');
+jsCode.setAttribute('src','https://pedropsi.github.io/codes/game/puzzlescript-tagger.js');
+jsCode.setAttribute('type','text/javascript');
+document.body.appendChild(jsCode);
+console.log('Bookmarklet run!');void 0">Submit PuzzleScript Game</a> bookmarklet!</p>
+
+<p>How? Simply add the bookmarklet above to your bookmarks (instructions below), then on a game page of your choice run (${v.CLICK()} on) the new bookmarklet, causing the current game to add itself the ${v.TITLE_BOLD()} page.</p>
+
+${v.BOOKMARKLET_BROWSER_TEXT()}
+
+<h3>Manual submission</h3>
+<p>You can also submit a game to the ${v.TITLE_BOLD()} by typing all details manually. This is only recommended when more practical than using the bookmarklet.</p>
+<div class="button" onclick="RequestPGDSubmission()">Submit a game to the ${v.TITLE_BOLD()}!</div>
+<p>As your edits will be immediately available on database refresh, please be type carefully - even though all game entries can be corrected or completed later, by any user.</p>
+
+<h3>Where to find new games to add</h3>
+<p>If you want to add a game to the ${v.TITLE_BOLD()} but don't know where to look, you're in luck - for 99% of all new puzzlescript games show up at one of these four channels:</p>
+${LinkGroupHTML("ps-source")}
+<p>This is what makes the ${v.TITLE_BOLD()} so convenient - a single page where new games are gathered, so you won't need to search yourself. Any new game contributions are thus very welcome!</p>
+
+<h2>Adding to or correcting game entries</h2>
+<p>To correct a game entry in the ${v.TITLE_BOLD()}, simply <kbd>right click</kbd> on it! This will display small form.</p>
+
+<h2>Conventions</h2>
+${v.LOZ_SYMBOL_TEXT()}
+
+${v.FILTER_TEXT()}
+
+<h3>Sorting</h3>
+<h4>Dates</h4>
+<p>By default, all game entries are sorted by date tier: most recently added games are atop, sorted by date of submission (e.g. today, this week, this fortnight, previous month etc...) - usually these are newly released games, but occasionally elusive old titles; all other games are grouped by year of first release.</p>
+<p>Games with yet unknown date of release have a 'unknown' tier but will self-correct (based on the creation date of the most recent gist) as soon as someone plays them in the console. Dates can also be manually added.</p>
+<h4>Author and Title</h4>
+<p>Within each date tier, all game entries are sorted alphabetically by author and then by title.</p>
+<h4>Custom</h4>
+<p>To sort the table differently, simply ${v.CLICK()} the table headers!</p>
+
+<h3>Game <sup class="label">labels</sup></h3>
+<p>A game title may be unfinished or in progress <sup class="label">beta</sup>, an extended or modified version of another game <sup class="label">mod</sup>, a port of another game to puzzlescript <sup class="label">demake</sup> and may have appended a version number  <sup class="label">v0.0.0</sup> and other notes <sup class="label">etc...</sup></p>
+<p>For demakes or mods, or when a tribute to a known former author was meant, new authors may be labelled <sup class="label">Former Author</sup>.</p>
+
+<h2>Troubleshooting</h2>
+<h3>Real-time submission vs display delays</h3>
+<p>Game entries are submitted in real time, and become immediately available on page (re)load.</p>
+<p>Please be aware that on page load, a cached version of the table is displayed first, because it may take a few seconds to fetch the up-to-date table in real time. Once fetched, there is a small alert and the tag <em>Up-to-date</em> will be added to the table title.</p>
+
+
+<h3>Game/Author formatting issues, missing or outdated</h3>
+<p>The bookmarklet will copy the information present in the original puzzlescript game file, and may discard some characters such as parentheses and punctuation marks. So if a game entry is incorrect or incomplete, please correct it now!</p>
+<p>Please note that the database doesn't track changes in game author/title after the submission. So please correct any outdated information as well!</p>
+
+
+<h3>Missing links</h3>
+<p>If a newly submitted game belongs to a known domain (e.g. puzzlescript.net), its link becomes immediately available. Otherwise, for security, it will be listed without a link (so people can google it themselves), until a periodic review. During this (infrequent) review, legitimate new domains will be added to the whitelist and their links enabled, whereas any suspicious submission will be removed.</p>
+
+<h3>Missing submitted game entries</h3>
+<h4>Hidden from view</h4>
+<p>If, after re-submitting the game and fetching the most recent version of the database, a game is still not shown, most likely it was manually hidden from view. This is extremely rare and only happens if the game:</p>
+<ul>
+	<li>is unplayable, despite loading correctly; or</li>
+	<li>has a more recent version (not mod) in the database.</li>
+</ul>
+<p>If you believe a game currently shown strictly meets the above criteria to be hidden from view, please ${v.A_CONTACT_ME()}.</p>
+
+<h4>Game prototypes and demonstrations of particular mechanics</h4>
+<p>All game prototypes not listed in the ${v.TITLE_BOLD()} are filed instead under ${v.A_GAME_TOOLS()} in a second database, alongside other useful examples of a particular mechanics of game components.</p>
+
+
+<h2>FAQ</h2>
+<h3>Why would you want to contribute to this database for free?</h3>
+<p>If you love (puzzlescript) games you'll love to have a definite public list with all titles.</p>
+
+<h3>How could such a huge list of puzzlescript games be compiled with moderate effort?</h3>
+<p>The bookmarklet is that quick and convenient - no typing involved. Have a try!</p>
+
+<h3>Is there any shorter, curated list with just the great titles?</h3>
+<p>You may be looking for ${v.NAME()}'s curated list of ${v.A_SELECTED_GAMES()}!</p>
+
+<h3>How could this long list of puzzlescript games become more useful?</h3>
+<p>Depending on traction, this collaborative list may gain a wiki-like character, so people could add detailed info like release year and tags, thus enabling better filtering. If pictures were added, this could become a puzzlescript gallery. Perhaps people would like to vote on their favourites!</p>
+
+<h3>Can this database be used in external projects?</h3>
+<p>For non-profit or educational projects, yes, as long as you cite it properly.</p>
+<p>For all other projects, please ${v.A_CONTACT_ME()} to discuss.</p>
+
+<h3>How to cite this database properly?</h3>
+<p>Just include all information below, using your favourite citing convention. If you are citing online, please ensure the link is clickable.</p>
+${v.AUTO_CITATION()}
+
+<h2>Changes</h2>
+<h3>01/2020</h3>
+<p>Filtering and manual submission/correction functionalities were added, plus game labels. Thanks to ${v.PERCONTI()} and ${v.PICKEL()} for the suggestions! Also a display bug was fixed - thanks ${v.LAVELLE()}!</p>
+
+${v.FEEDBACK()}
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

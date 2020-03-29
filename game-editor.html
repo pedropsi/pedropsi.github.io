@@ -1,0 +1,199 @@
+﻿<link rel="stylesheet" href="PuzzleScript/css/docs.css">
+<link rel="stylesheet" href="PuzzleScript/css/codemirror.css">
+<link rel="stylesheet" href="PuzzleScript/css/midnight.css">
+<link rel="stylesheet" href="PuzzleScript/css/dialog.css">
+<link rel="stylesheet" href="PuzzleScript/css/console.css">
+<link rel="stylesheet" href="PuzzleScript/css/gamecanvas.css">
+<link rel="stylesheet" href="PuzzleScript/css/soundbar.css">
+<link rel="stylesheet" href="PuzzleScript/css/layout.css">
+<link rel="stylesheet" href="PuzzleScript/css/toolbar.css">
+<link rel="stylesheet" href="PuzzleScript/css/show-hint.css">
+
+<div id="leftpanel">
+<form id="form1" name="form1"  action="javascript:void(0);"><textarea id="code" class="codeform" name="code" rows="20" cols="20" style="display:none;">
+title My Game
+author My Name Here
+homepage www.example.org
+
+========
+OBJECTS
+========
+
+Background
+Green
+
+Target
+DarkBlue
+
+Wall
+Brown
+
+Player
+Blue
+
+Crate
+Orange
+
+=======
+LEGEND
+=======
+
+. = Background
+# = Wall
+P = Player
+* = Crate
+@ = Crate and Target
+O = Target
+
+=======
+SOUNDS
+=======
+
+================
+COLLISIONLAYERS
+================
+
+Background
+Target
+Player, Wall, Crate
+
+======
+RULES
+======
+
+[ >  Player | Crate ] -> [  >  Player | > Crate  ]
+
+==============
+WINCONDITIONS
+==============
+
+All Target on Crate
+
+=======
+LEVELS
+=======
+
+#########
+#.......#
+#.....@.#
+#.P.*.O.#
+#.......#
+#.......#
+#########
+</textarea></form>
+</div>
+<div id="verticaldragbar"></div>
+
+<div id="uppertoolbar">
+	&nbsp;&nbsp;&nbsp;<a href="game-bar.html#editor"><h2>PuzzleScript + Game Bar</h2></a> - <a id="saveClickLink" href="javascript:void(0);">SAVE</a> - 
+
+	<form action="" style="display:inline;"><select id="loadDropDown" name="default" style="display:inline; width:100px"> -
+</select></form> - <form action="" style="display:inline;"> <select  id="exampleDropdown"  name="default" style="display:inline; width:150px">
+<option value="sokoban_basic">Load Example</option>
+<optgroup label="Tutorial">
+<option value="sokoban_basic">Basic</option>
+<option value="sokoban_eyeball">Eyeball</option>
+<option value="sokoban_match3">Match 3</option>
+<option value="randomrobots">Random Robots</option>
+<option value="randomspawner">Random Robot Spawner</option>
+</optgroup>
+<optgroup label="Elementary">
+<option value="blockfaker">Block Faker (Droqen)</option>
+<option value="byyourside">By Your Side (Draknek)</option>
+<option value="kettle">Kettle (increpare)</option>
+<option value="microban">Microban (D. Skinner)</option>
+<option value="nekopuzzle">Neko Puzzle (Lexaloffle)</option>
+<option value="notsnake">Notsnake (Terry Cavanagh)</option>
+<option value="zenpuzzlegarden">Zen Puzzle Garden (Lexaloffle)</option>
+</optgroup>
+<optgroup label="Intermediate">
+<option value="limerick">Lime Rick (kissmaj7)</option>
+<option value="octat">Octat (increpare)</option>
+<option value="constellationz">Constellation Z (increpare)</option>
+</optgroup>
+<optgroup label="Advanced">
+<option value="midas">Midas (Wanderlands)</option>
+<option value="whaleworld">2D Whale World (increpare)</option>
+<option value="blank">Blank Project</option>
+</optgroup>
+</select>
+</form>- <a id="runClickLink" href="javascript:void('Run the Game');">RUN</a> - <a id="rebuildClickLink" href="javascript:void('Rebuild without restarting');">REBUILD</a> - <a id="levelEditorClickLink" href="javascript:void('Open Level Editor');">LEVEL EDITOR</a> - <a id="exportClickLink" href="javascript:void('Export Standalone HTML Build');">EXPORT + GAME BAR</a> - <a id="shareClickLink" href="javascript:void('Generate Link To Game');">SHARE</a> - <a href="https://puzzlescript.net/Documentation/documentation.html"  target="Puzzle_Script_Documentation">DOCS</a>  - <a href="https://groups.google.com/forum/#!forum/puzzlescript">FORUM</a>
+</div>
+
+<div id="righttophalf">	
+	<div class="upperarea">
+		<canvas id="gameCanvas" ></canvas>
+	</div>
+</div>
+<div id="horizontaldragbar"></div>
+<div id="rightbottomhalf">
+	<div class="lowertoolbar">
+<div id="soundbar">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="soundbutton"><a id="clearConsoleClick" title="clears the console" href="javascript:void('Clear Console');"><img src="PuzzleScript/images/clearConsole.gif" alt="clear console contents"></a></span>
+	&nbsp;&nbsp;&nbsp;
+	<span class="soundbutton"><a id="newsound0" title="collect item sound" href="javascript:void('Generate Collect Item Sound');"><img src="PuzzleScript/images/audio1.gif"  alt="collect item sound"></a></span>
+	<span class="soundbutton"><a  id="newsound7" title="push sounds" href="javascript:void('Generate Push Sound');" ><img src="PuzzleScript/images/audio2.gif" alt="push sounds"></a></span>
+	<span class="soundbutton"><a id="newsound2" title="explosion sound" href="javascript:void('Generate Explosion Sound');" ><img src="PuzzleScript/images/audio3.gif" alt="explosion sound"></a></span>
+	<span class="soundbutton"><a id="newsound3" title="powerup sound" href="javascript:void('Generate Power-Up Sound');" ><img src="PuzzleScript/images/audio4.gif" alt="powerup sound"></a></span>
+	<span class="soundbutton"><a id="newsound9" title="bird tweet sound" href="javascript:void('Generate Bird Tweet Sound');"><img src="PuzzleScript/images/audio5.gif"  alt="bird tweet sound"></a></span>
+	<span class="soundbutton"><a id="newsound4" title="hurt sound" href="javascript:void('Generate Hurt Sound');" ><img src="PuzzleScript/images/audio6.gif" alt="hurt sound"></a></span>
+	<span class="soundbutton"><a id="newsound5" title="jump sound" href="javascript:void('Generate Jump Sound');"><img src="PuzzleScript/images/audio7.gif"  alt="jump sound"></a></span>
+	<span class="soundbutton"><a id="newsound1" title="pew pew sound" href="javascript:void('Generate Pew Pew Sound');"><img src="PuzzleScript/images/audio8.gif"  alt="pew pew pew"></a></span>
+	<span class="soundbutton"><a id="newsound6" title="selection sound" href="javascript:void('Generate Selection Sound');"><img src="PuzzleScript/images/audio9.gif"  alt="selection sound"></a></span>
+	<span class="soundbutton"><a id="newsound8" title="random sound" href="javascript:void('Generate Random Sound');"><img src="PuzzleScript/images/audio10.gif"  alt="random sound"></a></span>
+	</div></div>
+	<div class="lowerarea" id="lowerarea">
+<div id = "consoletextarea" >
+=================================<br>
+&nbsp;&nbsp;&nbsp;PuzzleScript Log V1.6.0 + Pedro PSI's Game Bar<br>
+=================================<br>
+</div>
+	</div>
+</div>
+
+<!--TOREPLACE-->
+<script src="PuzzleScript/js/Blob.js"></script>
+<script src="PuzzleScript/js/FileSaver.js"></script>
+
+<script src="PuzzleScript/js/jsgif/b64.js"></script>
+<script src="PuzzleScript/js/jsgif/LZWEncoder.js"></script>
+<script src="PuzzleScript/js/jsgif/NeuQuant.js"></script>
+<script src="PuzzleScript/js/jsgif/GIFEncoder.js"></script>
+
+<script src="PuzzleScript/js/debug.js"></script>
+<script src="PuzzleScript/js/globalVariables.js"></script>
+<script src="PuzzleScript/js/font.js"></script>
+<script src="PuzzleScript/js/rng.js"></script>
+<script src="PuzzleScript/js/riffwave.js"></script>
+<script src="PuzzleScript/js/sfxr.js"></script>
+<script src="PuzzleScript/js/codemirror/codemirror.js"></script>
+<script src="PuzzleScript/js/codemirror/active-line.js"></script>
+<script src="PuzzleScript/js/codemirror/dialog.js"></script>
+<script src="PuzzleScript/js/codemirror/search.js"></script>
+<script src="PuzzleScript/js/codemirror/searchcursor.js"></script>
+<script src="PuzzleScript/js/codemirror/match-highlighter.js"></script>
+<script src="PuzzleScript/js/codemirror/show-hint.js"></script>
+<script src="PuzzleScript/js/codemirror/anyword-hint.js"></script>
+<script src="PuzzleScript/js/colors.js"></script>
+<script src="PuzzleScript/js/graphics.js"></script>
+<script src="PuzzleScript/js/inputoutput.js"></script>
+<script src="PuzzleScript/js/mobile.js"></script>
+
+<script src="PuzzleScript/js/console.js"></script>
+<script src="PuzzleScript/js/buildStandalone.js"></script>
+<script src="PuzzleScript/js/engine.js"></script>
+<script src="PuzzleScript/js/parser.js"></script>
+<script src="PuzzleScript/js/editor.js"></script>
+<script src="PuzzleScript/js/compiler.js"></script>
+<script src="PuzzleScript/js/soundbar.js"></script>
+<script src="PuzzleScript/js/toolbar.js"></script>
+<script src="PuzzleScript/js/layout.js"></script>
+<script src="PuzzleScript/js/addlisteners.js"></script>
+<script src="PuzzleScript/js/addlisteners_editor.js"></script>
+<script src="PuzzleScript/js/makegif.js"></script>
+
+<!--ENDREPLACE-->
+
+<!--<script src="PuzzleScript/js/scripts.js"></script>-->
+
+

@@ -1,0 +1,43 @@
+﻿<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+<h2>About the ${v.TITLE_BOLD()}</h2>
+
+<p>This is a convenient ${v.TITLE_BOLD()} to test any game in the ${v.A_PS_DATABASE()} with ${v.A_GAME_BAR()} <b>right now</b>!</p>
+
+<h3>How to load a puzzlescript game to the console</h3>
+<p>the ${v.A_GAME_CONSOLE()}'s dropdown search menu lets you pick all currently playable entries in the ${v.A_PS_DATABASE()} (i.e. those containing a puzzlescript link).</p>
+<p>For games not currently listed, please add them now to the ${v.A_PS_DATABASE()}, which will make them immediately available to the console. Otherwise, you may also replace the game's PUZZLESCRIPT_ID with your game's puzzlescript ID at the end of the following URL: <code>${v.SITE()}/${v.LINK()}.html?game=PUZZLESCRIPT_ID</code>.</p>
+
+<h2>Known issues</h2>
+<h3>Sharing saved game progression</h3>
+<p>Game progression within the ${v.TITLE_BOLD()} is not (currently) shared with the original game page. For the time being, please imagine two different game cartridges. Thanks ${v.JCMILLER()} for reporting.</p>
+
+<h3>Game update delays</h3>
+<p>Games playable with the ${v.TITLE_BOLD()} sync with the most up-to-date gist, but if you have played a previous version of the game, this version may occasionally be cached. If the problem persists, clearing the site cache may be required.  Thanks ${v.NCRECC()} for reporting.</p>
+
+<h2>FAQ</h2>
+<h3> What is a puzzlescript id?</h3>
+<p>It's the long identifier after <code>puzzlescript.net/play.html?p=</code> or after <code>puzzlescript.net/editor.html?hack=</code>.</p>
+
+<h3> Why is this game bar slightly different from the published version?</h3>
+<p>Because this is the cutting-edge, sometimes experimental, version!</p>
+
+<h3>Who may link to a game played in this page?</h3>
+<p> If you are the game author or obtained permission from the author, you may. Otherwise, please be kind and use instead the original links the authors provided, which help them monitor game traction and possibly boost their revenue.</p>
+<p>If you really think a game should be played with the game bar, try to persuade the authors to add ${v.A_GAME_BAR()} to their own game page.</p>
+
+<h2>Legal info</h2>
+<h3>Particular games</h3>
+<p>All games playable in the ${v.TITLE()} are loaded in real time from a public github gist shared by the author, and not directly hosted nor verified by ${v.SITE_NAME()}. Also, if you are an author and want your game manually excluded from the ${v.TITLE()}, please ${v.A_REQUEST_IT()}. </p>
+
+<h3>Puzzlescript</h3>
+<p>${v.A_PUZZLESCRIPT()} is under this ${v.A_LICENSE_PUZZLESCRIPT()}.</p>
+
+<h3>The ${v.TITLE()}</h3>
+${v.DISCLAIMER()}
+
+${v.FEEDBACK()}
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

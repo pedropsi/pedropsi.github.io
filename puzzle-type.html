@@ -1,0 +1,71 @@
+<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+${v.HEADER()}
+${v.FIGURE_SIMPLE()}
+
+<h2>How to play</h2>
+
+<p>The screen displays only one word. Your goal is to type this word exactly as shown. However, your keyboard is behaving cryptically... and the word is also your only clue!</p>
+<p>All puzzles can be solved with logic, experimentation and creative thinking, perhaps even a search engine or pencil and paper. Solving a puzzle usually requires two steps: discovering which rules are in place, then using these rules to write the clue. Rules don't change nor ever rely on timing, so relax and take your time!</p>
+<p>Sometimes, characters may be coloured with a lighter tone. This indicates temporary characters, which may be transformed when certain conditions be (or fail to be) met.</p>
+<p>Most levels do not require English proficiency, but the common knowledge demanded by a few of the final levels had unfortunately to be expressed in words of a particular language. Non-native speakers, you can find these English words online easily!</p>
+<p>After beating certain puzzles, some people will enjoy replaying them, trying to push the rules to their limits or using the interface as a learning device. All levels were designed with this possibility in mind.</p>
+
+<h3>Controls - keyboard</h3>
+<p>Type any of the 26 uppercase letters of the latin alphabet, and undo by pressing <kbd>backspace</kbd> or <kbd>delete</kbd>. As a rule, other characters or spaces may not be typed, <b>unless the clue suggests otherwise</b>.</p>
+
+<h4>On-screen Keyboard</h4>
+<p>Press the keyboard button or <kbd>Alt</kbd>+<kbd>K</kbd> to open the <b>on-screen keyboard</b>.</p>
+
+${v.FEEDBACK_TEXT()}${v.NAVIGATION_TEXT()}${v.FULLSCREEN_TEXT()}${v.COMMUNITY()}
+
+
+<h2>Credits</h2>
+
+${v.CREDITS_AUTHORSHIP()}
+<h3>Sound effects</h3>
+<p>Sound effects by ${v.NAME_YEAR()}, made with ${v.A_MUSESCORE()}.</p>
+
+<h3>Game Engine</h3>
+${v.CREDITS_ENGINE_VANILLA()}
+<p>Inspect the <a ${v.BLANK()} href='codes/game/puzzle-type.js'><b>source</b></a> freely, but consider the option to ${v.A_SUPPORT()}!</p>
+
+<h3>Playtesting</h3>
+<p>Many thanks to ${v.MINOTALEN()}, ${v.DEUSOVI()}, ${v.MAGO()} for useful, actionable suggestions and even new level ideas!</p>
+
+<h2>Purchase</h2>
+<p>Head to the ${v.A_STORE()} to purchase ${v.TITLE_BOLD()}. Besides being a token of appreciation, every purchase supports the development of future games and tools!</p>
+
+<h3>System requirements</h3>
+<h4>Browsers - desktop</h4>
+<p>${v.TITLE_BOLD()} was tested and runs well with the following versions of Chrome (78), Firefox (70), Opera (65) and Edge (44), on Windows. ${v.L_OK()}</p>
+<p>On Safari, it currently doesn't work well, neither on Internet Explorer. ${v.L_PROBLEM()}</p>
+
+<h4>Browsers - mobile</h4>
+<p>${v.TITLE_BOLD()} was not thoroughly tested on mobile, and is currently not guaranteed to work well (or at all). Some slowness was reported on some Android devices ${v.L_PROBLEM()}.</p>
+
+<h4>Screen sizes</h4>
+<p>With a physical keyboard, ${v.TITLE_BOLD()} was designed to display well on all screen sizes, from extremely small (e.g 300px by 200px), to very large (1280px x 1024 and above). ${v.L_OK()}</p>
+<p>Typing with the on-screen keyboard may be cumbersome on very small screens, because the keys become quite small. So this combination 
+is not recommended.</p>
+
+<h2>F.A.Q.</h2>
+
+<h3>Which other puzzle games inspired ${v.TITLE_BOLD()}?</h3>
+<p>Keenly, ${v.MINOTALEN()} observed some gameplay similarities with ${v.A_DEVILS_CALCULATOR()}, while the interface is as minimal as the one found in ${v.A_NONE()}, a riddle game.</p>
+
+<h3>Which new design goals guided the making of ${v.TITLE_BOLD()}?</h3>
+<ul>
+<li>Making a compelling enigma with a minimal interface or decoration. ${v.L_DONE()}</li>
+<li>Extending the game-bar to any (non-puzzlescript) javascript game. ${v.L_DONE()}</li>
+<li>Creating a word game without language-dependent content. ${v.L_PART()}</li>
+<li>Making sound effects and music. ${v.L_PART()}</li>
+</ul>
+
+
+
+${v.PRESS_TEXT()}
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

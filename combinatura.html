@@ -1,0 +1,152 @@
+﻿<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+${v.HEADER()}
+${v.FIGURE_SIMPLE()}
+
+<h2>How to play</h2>
+<p>${v.CLICK()} on pairs of elements to tentatively combine them into new ones.</p>
+
+<h3>Goals</h3>
+<p>You choose your own goal when playing ${v.TITLE_BOLD()}. Here are some suggestions:</p>
+<ul>
+	<li><b>Find all</b> <span id="CardCounter">161</span> natural phenomena;</li>
+	<li><b>Explore</b> a virtual world of natural possibility and discover concepts that never before crossed your mind;</li>
+	<li><b>Learn</b> a new language, or widen your vocabulary while having fun;</li>
+	<li><b>Relax</b> in the world of ${v.TITLE_BOLD()}.</li>
+</ul>
+
+<h3>Language choices</h3>
+<p>Play ${v.TITLE_BOLD()} in <b>up to three languages</b> together to widen your vocabulary by visual association, or enter into <b>Zen mode</b>, for a relaxing challenge, unencumbered by words.</p>
+<p>To add or remove a language, press:</p>
+<ul>
+<li><kbd>Alt</kbd>/<kbd>Shift</kbd>+<kbd>D</kbd> - Deutsch</li>
+<li><kbd>Alt</kbd>/<kbd>Shift</kbd>+<kbd>E</kbd> - English</li>
+<li><kbd>Alt</kbd>/<kbd>Shift</kbd>+<kbd>F</kbd> - Français</li>
+<li><kbd>Alt</kbd>/<kbd>Shift</kbd>+<kbd>P</kbd> - Português</li>
+</ul>
+<p>Pressing <kbd>Z</kbd> will toggle <b>Zen mode</b>.</p>
+
+
+${v.FEEDBACK_TEXT()}${v.FULLSCREEN_TEXT()}${v.COMMUNITY()}
+
+<h2>Credits</h2>
+${v.CREDITS_AUTHORSHIP()}
+<h3>Game Engine</h3>
+${v.CREDITS_ENGINE_VANILLA()}
+<p>Inspect the <a ${v.BLANK()} href='codes/game/combinatura/combinatura.js'><b>source</b></a> freely, but consider the option to ${v.A_SUPPORT()}!</p>
+
+<h3>Special thanks</h3>
+<p>${v.QUESTIONER()}, for very useful feedback and suggestions.</p>
+
+<h3>Photography Credits</h3>
+<p>All natural phenomena images are either in the public domain or under the license stated below.</p>
+<p>All images were edited (cropped, resized and compressed).</p>
+
+<table class="top-left">
+	<thead><tr><th>Author</th><th>Card number</th><th>License</th></tr></thead>
+	<tbody>
+		<tr><td>Sirirak Boonruangjak</td> <td>4</td> <td>CC0</td></tr>		<tr><td>Goh Rhy Yan</td> <td>10</td> <td>Unsplash</td></tr>		<tr><td>John Fowler</td> <td>12</td> <td>Unsplash</td></tr>
+		<tr><td>Hauwah</td> <td>13</td> <td>GFDL</td></tr>
+		<tr><td>Olga Ernst & Hp.Baumeler</td> <td>14</td> <td>CC-BY-SA 4</td></tr>		<tr><td>Lyoha123</td> <td>16</td> <td>CC-BY-SA 3</td></tr>		<tr><td>NASA</td> <td>18</td> <td>CC0</td></tr>		<tr><td>Mink Mingle </td> <td>20</td> <td>Unsplash</td></tr>		<tr><td>Magda Ehlers</td> <td>24</td> <td>Public domain</td></tr>		<tr><td>Darkone</td> <td>26</td> <td>CC-BY-SA 2</td></tr>
+		<tr><td>myeviajes </td> <td>27</td> <td>CC0</td></tr>
+		<tr><td>robynm</td> <td>28</td> <td>CC0</td></tr>		<tr><td>Rosino</td> <td>30</td> <td>CC-BY-SA 2</td></tr>
+		<tr><td>Fabian Struwe</td> <td>31</td> <td>CC0</td></tr>
+		<tr><td>NASA</td> <td>34</td> <td>Public domain</td></tr>
+		<tr><td>dahu1</td> <td>35</td> <td>CC-BY-SA 3</td></tr>
+		<tr><td>Tim Mossholder </td> <td>36</td> <td>CC0</td></tr>		<tr><td>Gary Saldana</td> <td>42</td> <td>Unsplash</td></tr>
+		<tr><td>Reporter Free Lance</td> <td>43</td> <td>CC-BY 2</td></tr>		<tr><td>John Mark Arnold</td> <td>45</td> <td>CC0</td></tr>
+		<tr><td>Stef Maruch</td> <td>46</td> <td>CC-BY-SA 2</td></tr>
+		<tr><td>NOAA</td> <td>47</td> <td>Public domain</td></tr>
+		<tr><td>Paxson Woelber</td> <td>48</td> <td>CC-BY 3</td></tr>		<tr><td>  Frangle Plazma Goat</td> <td>50</td> <td>CC-BY-SA 3</td></tr>
+		<tr><td>Alexandr Trubetskoy</td> <td>51</td> <td>CC-BY-SA 3</td></tr>
+		<tr><td>AnDrew McKenzie</td> <td>52</td> <td>CC-BY-SA 3</td></tr>
+		<tr><td>NOAA</td> <td>53</td> <td>Public domain</td></tr>
+		<tr><td>Tiago Fioreze</td> <td>54</td> <td>GFDL</td></tr>
+		<tr><td>Matryokeshi</td> <td>55</td> <td>CC-BY-SA 3</td></tr>
+		<tr><td>Roberto Garrido</td> <td>56</td> <td>CC-BY 2</td></tr>
+		<tr><td>NASA</td> <td>57</td> <td>Public domain</td></tr>
+		<tr><td>NASA</td> <td>58</td> <td>Public domain</td></tr>
+		<tr><td>Laurentius</td> <td>59</td> <td>CC-BY-SA 3</td></tr>
+		<tr><td>Jens Buurgaard Nielsen</td> <td>60</td> <td>Public domain</td></tr>
+		<tr><td>Jef Poskanzer</td> <td>61</td> <td>CC-BY 2</td></tr>
+		<tr><td>DirkvdM </td> <td>62</td> <td>GFDL</td></tr>
+		<tr><td>Rosapicci</td> <td>63</td> <td>CC-BY-SA 4</td></tr>
+		<tr><td>L.vivian.richard</td> <td>64</td> <td>CC-BY-SA 3</td></tr>
+		<tr><td>MadGeographer</td> <td>65</td> <td>CC-BY-SA 3</td></tr>
+		<tr><td>Rüdiger Wenzel </td> <td>66</td> <td>CC-BY-SA 3</td></tr>
+		<tr><td>Rudolf Kirchner</td> <td>69</td> <td>CC0</td></tr>
+		<tr><td>Christine Westerback</td> <td>70</td> <td>CC-BY-SA 2</td></tr>
+		<tr><td>Snap55</td> <td>71</td> <td>CC-BY 3</td></tr>
+		<tr><td>NASA</td> <td>72</td> <td>Public domain</td></tr>
+		<tr><td>Luca Galuzzi (Lucag)</td> <td>73</td> <td>CC-BY-SA 2.5</td></tr>		<tr><td>BorisFromStockdale</td> <td>75</td> <td>CC-BY-SA 3</td></tr>
+		<tr><td>KeYang</td> <td>76</td> <td>CC0</td></tr>
+		<tr><td>Matt Lamers</td> <td>77</td> <td>Unsplash</td></tr>
+		<tr><td>Ikluft </td> <td>78</td> <td>CC-BY-SA 4</td></tr>
+		<tr><td>NASA</td> <td>79</td> <td>Public domain</td></tr>
+		<tr><td>NASA</td> <td>80</td> <td>Public domain</td></tr>
+		<tr><td>National Park Service</td> <td>81</td> <td>Public domain</td></tr>
+		<tr><td>NASA</td> <td>82</td> <td>Public domain</td></tr>
+		<tr><td>NASA</td> <td>83</td> <td>Public domain</td></tr>
+		<tr><td>NASA</td> <td>84</td> <td>Public domain</td></tr>
+		<tr><td>USGOV</td> <td>85</td> <td>Public domain</td></tr>
+		<tr><td>skitterphoto</td> <td>86</td> <td>CC0</td></tr>
+		<tr><td>FEMA</td> <td>87</td> <td>Public domain</td></tr>
+		<tr><td>NASA</td> <td>88</td> <td>Public domain</td></tr>
+		<tr><td>National Park Service</td> <td>89</td> <td>Public domain</td></tr>
+		<tr><td>Borealis55</td> <td>90</td> <td>Public domain</td></tr>
+		<tr><td>Paul Brennan</td> <td>91</td> <td>Public domain</td></tr>
+		<tr><td>Brazilian things</td> <td>92</td> <td>CC-BY-SA 4</td></tr>		<tr><td>Leon Brooks</td> <td>94</td> <td>CC0</td></tr>
+		<tr><td>NASA</td> <td>95</td> <td>Public domain</td></tr>
+		<tr><td>Katarzyna Kos</td> <td>96</td> <td>Unsplash</td></tr>
+		<tr><td>Eli Duke</td> <td>97</td> <td>CC-BY-SA 2</td></tr>
+		<tr><td>Mohd Nor Azmil Abdul Rahman</td> <td>98</td> <td>CC-BY 2</td></tr>
+		<tr><td>Axelle B</td> <td>99</td> <td>CC0</td></tr>
+		<tr><td>Tom Strecker </td> <td>100</td> <td>CC0</td></tr>
+		<tr><td>Andiseño Estudio</td> <td>101</td> <td>CC0</td></tr>
+		<tr><td>United States Geological Survey</td> <td>104</td> <td>Public domain</td></tr>
+		<tr><td>NOAA</td> <td>105</td> <td>Public domain</td></tr>
+		<tr><td>China Crisis</td> <td>106</td> <td>CC-BY 2.5</td></tr>
+		<tr><td>BBC</td> <td>107</td> <td>Copyright</td></tr>
+		<tr><td>Bruno Carlos</td> <td>108</td> <td>CC-BY-SA 3</td></tr>
+		<tr><td>Peter Griffin</td> <td>109</td> <td>CC0</td></tr>
+		<tr><td>Luc Viatour</td> <td>110</td> <td>CC-BY-SA 3</td></tr>		<tr><td>NASA</td> <td>112</td> <td>Public domain</td></tr>
+		<tr><td>kakilambe</td> <td>113</td> <td>CC0</td></tr>
+		<tr><td>Heinz Petelin</td> <td>114</td> <td>CC0</td></tr>
+		<tr><td>Christine Matthews</td> <td>115</td> <td>CC-BY-SA 2</td></tr>
+		<tr><td>United States Geological Survey </td> <td>116</td> <td>Public domain</td></tr>
+		<tr><td>ESO</td> <td>117</td> <td>CC-BY 4</td></tr>
+		<tr><td>Lysy</td> <td>118</td> <td>CC-BY-SA 3</td></tr>
+		<tr><td>Ilse Reijs and Jan-Noud Hutten</td> <td>119</td> <td>CC-BY 2</td></tr>
+		<tr><td>Rommel Natanauan </td> <td>120</td> <td>CC-BY-SA 4</td></tr>
+		<tr><td>NASA</td> <td>121</td> <td>Public domain</td></tr>		<tr><td>Mike Lehmann</td> <td>123</td> <td>GFDL</td></tr>
+		<tr><td>Stanley Howe</td> <td>124</td> <td>CC-BY-SA 2</td></tr>
+		<tr><td>astrojc</td> <td>125</td> <td>CC0</td></tr>
+		<tr><td>reefpix</td> <td>126</td> <td>CC-BY-SA 4</td></tr>
+		<tr><td>Diego Delso</td> <td>127</td> <td>CC-BY-SA 3</td></tr>		<tr><td>Lane Pearman</td> <td>129</td> <td>CC-BY 2</td></tr>
+		<tr><td>0x0077BE</td> <td>130</td> <td>CC0</td></tr>		<tr><td>Wojsyl</td> <td>134</td> <td>GFDL</td></tr>
+		<tr><td>Harli Marten</td> <td>137</td> <td>Unsplash</td></tr>
+		<tr><td>Llamnuds</td> <td>138</td> <td>Public domain</td></tr>
+		<tr><td>Tony Hisgett</td> <td>141</td> <td>CC-BY 2</td></tr>		<tr><td>Walter Baxter</td> <td>143</td> <td>CC-BY-SA 2</td></tr>
+		<tr><td>Christine Westerback</td> <td>144</td> <td>CC-BY-SA 2</td></tr>		<tr><td>Jahons Brad E</td> <td>146</td> <td>Public domain</td></tr>
+		<tr><td>Chris M Morris</td> <td>147</td> <td>CC-BY 2</td></tr>
+		<tr><td>Lauri </td> <td>148</td> <td>CC-BY-SA 3</td></tr>		<tr><td>Luc Viatour</td> <td>150</td> <td>CC-BY-SA 2.5</td></tr>
+		<tr><td>Ian Kirk</td> <td>151</td> <td>CC-BY 2</td></tr>
+		<tr><td>Pedro Szekely</td> <td>152</td> <td>CC-BY 2</td></tr>
+		<tr><td>Cowli33</td> <td>153</td> <td>CC-BY-SA 3</td></tr>
+		<tr><td>National Park Service</td> <td>154</td> <td>Public domain</td></tr>
+		<tr><td>Dobrych</td> <td>155</td> <td>CC-BY-SA 2</td></tr>
+		<tr><td>U.S. Air Force</td> <td>156</td> <td>Public domain</td></tr>
+		<tr><td>Andrew</td> <td>157</td> <td>CC-BY 2</td></tr>		<tr><td>Michael Sander </td> <td>159</td> <td>CC-BY-SA 3</td></tr>
+		<tr><td>Christian Haugen</td> <td>160</td> <td>CC-BY 2</td></tr></tbody>
+</table>
+
+<h3>Inspiration</h3>
+<p>${v.TITLE_BOLD()} was inspired by alchemy-style games such as <em>Doodle God</em> or <em>Little Alchemy</em>, but eschews the traditional <em>Earth, Fire, Water, Air</em> tetrad in favour of a fresher start with modern elements.</p>
+
+<h2>Project roadmap</h2>
+<p>${v.TITLE_BOLD()} is currently frozen in <b>alpha stage</b>, as major changes in <em>layout</em> would possible and <em>new cards or languages</em> could be added, but this is no longer in active development. All feedback is ${v.A_WELCOME()}!</p>
+
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

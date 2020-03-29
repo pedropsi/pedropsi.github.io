@@ -1,0 +1,18 @@
+﻿<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+${v.HEADER()}
+
+${v.HOWTO_TEXT()}${v.AVATAR_TEXT()}
+<p>Press ${v.ACTION_KEY()} on top of a <em>block</em> to pick it, press ${v.ACTION_KEY()} again to drop it.  
+${v.RESTART_TEXT()}
+
+${v.GAME_EXTRAS_TEXT()}
+
+${v.CREDITS()}
+
+<h3>Special thanks</h3>
+<p>${v.PUZZLESCRIPT_COMMUNITY()} ${v.AHLMAN()}, ${v.HAZELDEN()}, ${v.EDDERIOFER()}, ${v.JUNG()} and ${v.CHZ()} for varied levels of feedback.</p>
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

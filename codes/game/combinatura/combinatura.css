@@ -1,0 +1,173 @@
+:root {
+		--ztop:0;
+	  --tilesize:calc(10vw + 50px);
+		--tilescale:0.75;
+}
+
+.Gallery {
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-content: flex-start;
+	overflow: hidden;
+	background-color:var(--white);
+	padding:var(--h2) var(--w2) var(--h2) var(--w2);
+}
+
+.Combinacard {
+	width: var(--tilesize);
+	height:calc(var(--tilescale)*var(--tilesize));
+	margin:var(--h-4) var(--w-4) var(--w-4) var(--h-4);
+	overflow:hidden;
+	display:flex;
+	flex-direction: row;
+	justify-content:flex-end;
+}
+
+.Combinacard .image{
+	position: absolute;
+	width:var(--tilesize);
+	height:calc(var(--tilescale)*var(--tilesize));
+	background-size:cover;
+	filter: var(--bluefilter);
+	transition-duration: var(--durationOff);
+
+}
+
+.Combinacard .card-names{
+	height:calc(var(--tilescale)*var(--tilesize));
+	word-wrap: break-word;
+	align-content:center;
+	justify-content:flex-end;
+	transition-duration: var(--durationOff);
+  z-index: var(--ztop);
+}
+
+.zen .Combinacard .card-names{
+	background:var(--transparent);
+	transition-duration: var(--durationOff);
+}
+
+.Combinacard .card-names p {
+	background-color: var(--darkblue);
+	color:var(--white);
+	margin:0;
+	text-align: right;
+	padding:var(--h-8) var(--w1) var(--h-8) var(--w1);
+	transition-duration: var(--durationOff);}
+
+/*
+#combina-145 .card-names p {
+	font-size: calc(var(--tilesize)/12);
+}
+*/
+
+.Combinacard:hover .image{
+	filter: var(--bluefilter) brightness(1.1) saturate(3);
+	transition-duration: var(--durationOn);
+}
+
+.Combinacard.combi .image{
+	filter: brightness(100%) saturate(1.5);
+	transition-duration: var(--durationOff);
+}
+
+.Combinacard.combi .card-names p{
+	background-color:var(--white);
+	color: var(--darkblue);
+	transition-duration: 0.5s;
+}
+
+.size-medium{
+	--tilesize:calc(15vmin + 20px);
+}
+
+.size-mini{
+	--tilesize:calc(10vmin + 15px);
+}
+
+
+#Console .message.FoundNew{
+	background-color: var(--darkblue); 
+	color: var(--green);
+	border-bottom-color: var(--green); 
+} 
+
+#Console .message.languageadded{
+	color: var(--blue);
+	border-bottom-color: var(--blue); 
+}
+
+#Console .message.languageremoved {
+	background-color: var(--white); 
+	color: var(--blue);
+	border-bottom-color: var(--blue); 
+}
+
+#Console .message.zen{
+	background-color: var(--smokewhite); 
+	color: var(--lightblue);
+	border-bottom-color: var(--lightblue); 
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+#DexBar{
+	background-color: var(--white);
+	--tilesize:30px;
+}
+
+.Dex{
+	color:var(--blue);
+	border:4px solid var(--lightyellow);
+	margin:1px;
+	font-size: 90%;
+}
+
+.Dex > .Header{
+	align-items: center;
+}
+.Dex > .Header >.Name{
+	font-weight: bold;
+	padding:0;
+	margin:0;
+	margin-bottom: -8px;
+}
+.Dex > .Header >.button{
+	border-bottom: unset;
+	max-width:var(--tilesize);
+	height: 12px;
+	background-color: var(--lightyellow);
+}
+
+.dexcard {
+	transition-duration: 0.5s;
+	width:var(--tilesize);
+	height:calc(var(--tilescale)*var(--tilesize));
+	line-height: 0px;
+}
+
+.dexnumber {
+	margin-top:calc(-0.5*var(--tilescale)*var(--tilesize));
+	z-index: 99;
+	background-color: red;
+}
+
+.dexthumb {
+	background-size:cover;
+	height: 100%;
+	transition-duration: 0.5s;
+	z-index: 100;
+}
+
+.invisible{
+	display:none
+}

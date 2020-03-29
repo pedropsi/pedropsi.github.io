@@ -1,0 +1,7 @@
+﻿User-agent: *
+Disallow: /cms
+Disallow: /codes
+Disallow: /data
+Disallow: /hints
+Disallow: /media
+Sitemap: https://pedropsi.github.io/sitemap.xml

@@ -1,0 +1,20 @@
+﻿<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+${v.HEADER()}
+
+${v.HOWTO_TEXT()}<p><em>Dash horizontally</em> with ${v.LEFT_KEY()} / ${v.RIGHT_KEY()}. You cannot stop until you hit an obstacle, then you <em>fall down</em>.</p>
+<p><em>Elevate</em> yourself by pressing ${v.UP_KEY()}. <em>Lower</em> yourself to the previous position by pressing ${v.DOWN_KEY()}.</p>
+<p><em>Pick</em> a crate when standing on top of it by pressing ${v.DOWN_KEY()}. <em>Drop</em> it by pressing ${v.DOWN_KEY()} again.</p>
+${v.UNDO_RESTART_TEXT()}
+${v.GAME_EXTRAS_TEXT()}
+
+${v.CREDITS()}
+
+<h2>F.A.Q.</h2>
+<h3>How was the name Hastefulll chosen?</h3>
+<p>Hastefulll is a combination of the words <b>Haste</b> and <b>full</b>, in line with the main game goal: filling the entire board as quickly as possible (in the fewest tries).
+It is also a misspelled form of the adjective <b>hasteful</b>, an ill-thought-out substitute for the word <b>hasty</b>... hinting at the theme of lack of time.</p>
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

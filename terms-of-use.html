@@ -1,0 +1,24 @@
+﻿<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+<h2>General rule</h2>
+<p>All content in ${v.SITE_NAME()}, including the design and the <a href="${v.LOGO_PATH()}" ${v.BLANK()}>logo</a> is, unless otherwise stated, <b>${v.COPYRIGHT_TEXT()}</b>.</p>
+<p>However, with proper acknowledgement (a mention to ${v.NAME()} and a link back to the ${v.SITE()}), many uses are permitted, and even <em>encouraged</em>.</p>
+<p>In such cases, it is not <em>necessary</em> to ${v.A_LET_ME_KNOW()}, but this is of course appreciated!</p>
+
+<h3>Personal, Educational, Academic and Archival uses</h3>
+<p>All content (including source code) can be used freely, with proper acknowledgement.</p>
+
+<h3>Journalism, blogging and similar activities</h3>
+<p>Text, pictures, screenshots, video recordings may be reproduced freely, with proper acknowledgement.</p>
+
+<h3>Commercial use and all other uses</h3>
+<p>Written permission by ${v.NAME()} required, plus proper acknowledgement.</p>
+<p>Please ${v.A_CONTACT_ME()} to discuss bespoke licenses.</p>
+
+<h2>Specific rules</h2>
+<h3>Content marked with specific licenses</h3>
+<p>Some content is shared under the license ${v.LICENSE_CC_BY_NC_SA_4()} or similar. Specific licenses always take precedence over the general rule.</p>
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

@@ -1,0 +1,29 @@
+<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+${v.HEADER()}
+
+${v.HOWTO_TEXT()}<p><em>Move</em> with ${v.ARROWKEYS()}, and push blocks of different shapes.</p>
+<p>Level difficulty is shown by the number of stars (1 to 5).</p>
+
+${v.UNDO_RESTART_TEXT()}
+${v.GAME_EXTRAS_TEXT()}
+
+${v.CREDITS()}
+
+<h2>F.A.Q.</h2>
+
+<h3>Why is ${v.TITLE_BOLD()} in japanese?</h3>
+<p>Japanese culture values tidiness often.</p>
+
+<h3>Is there a version of ${v.TITLE_BOLD()} without the motion indicators?</h3>
+<p>Yes, in case you find them distracting. This was suggested by ${v.HAZELDEN()}.</p>
+<div class="button" onclick="LoadPuzzlescriptGame('23a48efa1bad64ee435e63882c0efeb2');">Remove motion indicators!</div>
+
+
+
+
+${v.PRESS_TEXT()}
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

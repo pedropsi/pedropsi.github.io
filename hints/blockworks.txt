@@ -1,0 +1,17 @@
+level 1 Intro -------------------------(every level is a line, separated by at least one empty line)
+
+level 2 Crates dictate ----------------(level titles may have multiple words)
+
+
+level 3 Nice Kite ---------------------(this level line is separated by more than one empty line)
+
+
+level 4.5.6 Upside down ---------------(word "level" is mandatory, numbers immediately after it are ignored)
+
+level Difficulty upwards --------------(level number is unnecesary, as it is inferred from the sequence of lines)
+
+level 6 The rise of the replicators -- any text after two or more dashes is ignored
+
+level 7 Absorbing                 ---- (trailing whitespace is ignored too)
+
+level 8 Inside the hourglass

@@ -1,0 +1,26 @@
+﻿<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+${v.HEADER()}
+
+${v.HOWTO_TEXT()}<p>The goal is marked by an <em>X</em>.</p>
+<p>Move your <em>avatar</em> by pressing ${v.LEFT_KEY()} or ${v.RIGHT_KEY()}. You may also <em>push blocks</em>. <em>Gravity</em> pulls <em>all downwards</em>.</p>  
+<p>Press ${v.UP_KEY()} to rotate the puzzle <em>clockwise</em> and ${v.DOWN_KEY()} to rotate it <em>counterclockwise</em>.</p>
+<p>Press ${v.ACTION_KEY()} to enter <em>Preview Mode</em>, in which you may rotate <em>clockwise</em> by pressing ${v.RIGHT_KEY()} and <em>counterclockwise</em> by pressing ${v.LEFT_KEY()}. In <em>Preview Mode</em>, nothing falls until you confirm, by pressing ${v.ACTION_KEY()} again.</p>
+${v.UNDO_RESTART_TEXT()}
+${v.GAME_EXTRAS_TEXT()}
+
+${v.CREDITS()}
+
+<h3>Special thanks</h3>
+<p>${v.PUZZLESCRIPT_COMMUNITY()} ${v.MATTISON()}, ${v.RICHARDSON()}, ${v.SCHUELLER()} and ${v.HAZELDEN()} for varying levels of feedback.</p>
+<p>${v.JOEL()} for spotting an important bug in block-pushing physics.</p>
+
+<h2>F.A.Q.</h2>
+<h3>Were puzzle games with a similar theme made after ${v.TITLE_BOLD()}?</h3>
+<p>For instance, ${v.A_ROTATE()} and ${v.A_MAPUZZLE()}.</p>
+
+
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

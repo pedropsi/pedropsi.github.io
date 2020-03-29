@@ -1,0 +1,332 @@
+<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+<h2>About the ${v.TITLE_BOLD()}</h2>
+<p>${v.TITLE_BOLD()} (LUL) is a simple yet expressive text format, used to specify level precedence in games with several levels. With a short line per level you will be able to specify from the most basic to the most complex level progressions.</p>
+<p>The basic rules are explained in the first section. In the second section these rules are applied to some common level progression scenarios, such as parallel tracks, branching tree, pyramid, grid and incomplete worlds.</p>
+<p>This specification is still a <b>draft</b>, yet to be incorporated in ${v.A_GAME_BAR()} and maybe elsewhere.</p>
+
+
+<h2>LUL rules</h2>
+<h3>Single level</h3>
+
+<h4>by number</h4>
+<p>Levels can be mentioned by their number (in the game level sequence) or by name.</p>
+<p>Thus the number <code>1</code> refers to the first level and <code>99</code> to the ninety-ninth level. There is no limit to the number of levels though!</p>
+
+<h4>by name</h4>
+<p>Levels may also have name labels. For instance, level 1 may be named <code>Welcome!</code> while level 99 may be labelled <code>Final boss...</code></p>
+
+<h4>current level</h4>
+<p>To reference the current level (the one to which the condition applies) please use the symbol <code>@</code>.</p>
+
+<h4>Labeling rules</h4>
+<p>All but the following symbols cannot be used in level names: [],(),  \\ / and @.</p>
+<p>If you name another level "9", but you need to mention the ninth level, you will need to label the latter.</p>
+<p>Please use different labels for different levels, otherwise all but the last duplicate label will be ignored.</p>
+
+<h4>Non-existent levels</h4>
+<p>Any non-existing levels will be ignored, however they are mentioned or labeled.</p>
+
+
+<h3>Groups of levels</h3>
+<h4>Disconnected groups</h4>
+<p>To define a group of levels, separate all levels with (any number of) spaces: <code>1 two 3 five 7</code> means levels 1, "two", 3, "five" and 7. You may also enclose them in parentheses: <code>(1 two 3 five 7)</code> without change of meaning.</p>
+
+<h5>Examples</h5>
+<ul>
+	<li><code>(1 3)</code>: levels 1 and 3;</li>
+	<li><code>(6 4)</code>: levels 4 and 6;</li>
+	<li><code>(7 10 13)</code>: levels 7, 10, and 13;</li>
+	<li><code>(10 secret)</code>: levels 10 and "secret".</li>
+</ul>
+
+
+<h4>Ranges</h4>
+<p>To define a level range, enclose a level group in square brackets. All levels between the extremes of that group will thus be included. Thus writing <code>[first last]</code> means all levels between level "first" and "last" (whichever comes later). If more than two levels are enclosed, only the extremes count, e.g <code>[1 2 5 4]</code> means the same as <code>[1 5]</code>.</p>
+
+<h5>Further examples</h5>
+<ul>
+	<li><code>[1 3]</code>: levels 1, 2 and 3;</li>
+	<li><code>[6 4]</code>: levels 4, 5 and 6;</li>
+	<li><code>[7 10 13]</code>: levels 7, 8, 9, 10, 11, 12, 13;</li>
+	<li><code>[10 secret]</code>: means all levels between 10 and "secret" or vice-versa, depending on level order.</li>
+</ul>
+
+<h5>Split labels</h5>
+<p>Please note that <code> first boss </code> may refer either to a group of two levels, named "first" and "boss", or the single a level named "first boss". The exact meaning will depend on the actual labels in existence. If both interpretations are possible, the longer names will take precedence - i.e. longer names are tried first, only if they fail to match any label are then the shorter names tried.</p>
+
+<h5>Combined ranges</h5>
+<p>Ranges can be combined too. For instance:, <code>([1 3] [11 13])</code> means levels 1,2,3,11,12,13, while <code>([1 3) (11 13)]</code> includes all levels between 1 and 13. Overlapping ranges are ok, and there is no limit to the number of ranges that may be combined, hence <code>[1 3] [2 4] [3 5] 6</code> simplifies to <code>[1 6]</code>.</p>
+
+<h3>Exclusion</h3>
+<p>To exclude a group of levels from a range, use the forward slash <code>  \\ </code>. So you can write <code>[1 10]  \\ 5</code> to refer to all levels between 1 and 10, except 5. You can also exclude any group of levels from any other group. Finally, if you try to exclude a level multiple times, or that wasn't there in the first place, it will be excluded anyway. </p>
+
+<h5>Further examples</h5>
+<ul>
+	<li><code>[1 5]  \\ 1</code>:				levels 2, 3, 4 and 5;</li>
+	<li><code>[1 5]  \\ [2 4]</code>: 			levels 1 and 5 only;</li>
+	<li><code>[1 5]  \\ (2 4)</code>:			levels 1, 3 and 5;</li>
+	<li><code>(1 2 3 4 5)  \\ [2 4]</code>: 	levels 1 and 5</li>
+	<li><code>(1 2 3 4 5)  \\ 6</code>:		levels 1, 2, 3, 4 and 5</li>
+	<li><code>(1 3 5)  \\ [4 5]</code>:		levels 1 and 3</li>
+	<li><code>(1 3 5)  \\ [(1 6 7)]</code>: 	levels 3 and 5</li>
+	<li><code>[1 3] [3 5]  \\ 3)]</code>:		levels 1, 2, 3, 4 and 5</li>
+	<li><code>([1 3] [3 5])  \\ 3)]</code>:	levels 1, 2, 4 and 5</li>
+	<li><code>[1 5]  \\ [2 4]  \\ 4</code>:		levels 1 and 5;</li>
+	<li><code>[1 5]  \\ ([2 4]  \\ 4)</code>:		levels 1, 4 and 5 (he fourth level is excluded from the exclusion group).</li>
+</ul>
+
+<h4>Successive exclusion</h4>
+<p>Exclusions can be applied successively from right to left: <code>[1 7]  \\ 2  \\ [3 5]  \\ (6 7)</code> excludes level 2, then 3 to 5, then 6 and 7 so that in the end, only level 1 remains. However, it is usually recommended to combine the exclusions into a single concise group, e.g. writing <code>[1 7]  \\ (2 7)</code>.</p>
+
+
+<h3>Position Arithmetic</h3>
+<h4>Increase</h4>
+<p>To mention a level after a previous one, use the plus sign <code>+</code>. Normal arithmethic applies, e.g. <code>1+1</code> is <code>2</code>, <code>one level + 3</code> is <code>another level</code> (three levels higher). Relative to the current level, <code>@+1</code> is the next level and <code>@+3</code> is three levels afterwards.</p>
+
+<h4>Decrease</h4>
+<p>To mention a level before a previous one, use the minus sign <code>-</code>. Normal arithmethic applies, e.g. <code>2-1</code> is <code>1</code>, <code>another level - 3</code> is <code>one level</code> (three levels lower). Relative to the current level, <code>@-1</code> is the previous level while <code>@-3</code> is three levels before.</p>
+<p>Increases and decreases can be combined naturally.</p>
+
+<h4>Distribute over ranges</h4>
+<p>The distributive property of <code>+</code> and <code>-</code> applies to both range types. So <code>(1 2 3)+5</code> means <code>(6 7 8)</code> and <code>[5 10]-4</code> means <code>[1 6]</code>.</p>
+<p>Ranges may also be added from other ranges. Every number from the first range is added to every other number from the second range, forming a new combined range. So <code>(1 2) + (5 10 15) </code> is <code>(5 6 11 12 16 17) </code>, and <code>[1 3] + (1 2) </code> is <code>(2 3 4 5)</code>. Overlapping results in the combined range are discarded normally: <code>(1 2) + (1 2)</code> is <code> [2 4] </code>.</p> 
+<p>Subtraction works in a similar manner, for instance: <code>[1 4] - [1 2]</code> is <code> [1 2 3] </code>, because non-existing numbers (below 1) are ignored.</p>
+
+<h4>Labeling conflict resolution</h4>
+<p>If there are levels labelled <code>quick</code>, <code>run</code> and <code>run-quick</code>, the latter means the label rather than the position of <code>run</code> minus the position of <code>quick</code>. But, if no level was labelled <code>run-quick</code>, then the subtraction applies.</p>
+
+
+
+<h3>Picking from a group</h3>
+<p>To pick a set number of levels from a group, use the divider <code>/</code> in this way: <code>[1 10]/2</code> this pick any two levels from range 1 to 10 while <code>(1 10)/1</code> picks one level, either 1 or 10. Picking more levels than the group allows is equivalent to selecting the entire group. <code>first area/7</code> requires seven levels from the first area. </p>
+<p>Similarly, picking zero or less is equivalent to picking none, e.g. <code>(1 10)/0</code> or <code>[1 3]/-1</code> both mean <code> </code> (unlocked by default). This is useful for instance when implementing level lookaheads, since the initial levels are usually unlocked due to a lookahead leeway larger than these initial positions - usually defined as a subtraction.</p>
+<p>Requesting a pick from an empty group will also mean unlocked by default (this situation may occur rarely, possibly due to misspellings).</p>
+
+<p><b>Picking from a group</b> is the only case in the ${v.TITLE_BOLD()} where the (dividing) number refers to a level count, rather than to the particular level's position.</p>
+
+<h3>Named groups</h3>
+<p>If there's a group of levels that is referred to very often, it may be useful to name this group. To do so, use the double dot as in the following examples.</p>
+<ul>
+	<li><code>water-world: [01 10]</code> - group named "water-world", containing levels 1 to 10;</li>
+	<li><code>ice-world: 11 [12 20]</code> - group named "ice-world", containing levels 11 to 20;</li>
+	<li><code>air-world: [21 30]</code> - group named "ice-world", containing levels 11 to 20;</li>
+	<li><code>bosses: 10 20 30 </code> - group named "bosses", containing levels 10, 20 and 30;</li>
+	<li><code>half-game: water-world [11 15] </code> - group named "half-game", containing levels 01-15.</li>
+</ul>
+
+<p>The same convention can be used to name a single level (here seen as a group with just one level).</p>
+
+
+
+<h3>Currency</h3>
+<p>This section is still under consideration. ${v.L_EXP()}<p>
+<p>A very flexible unlocking mechanism may involve some form of currency. Unlocking a level will provide currency, while some levels may require some currency as unlocking condition.</p>
+
+<p>Any number followed by the <code>£</code>,<code>€</code>,<code>$</code> or <code>¥</code> sign will be 
+interpreted as currency.</p>
+<p>Currencies are not interchangeable, e.g. <code>10£</code> is different from <code>10€</code>, meaning an unlocking conditions may combine different required amounts of various currencies.</p>
+
+<p>There are two ways in which currency can be requested as unlocking condition:</p>
+<ul>
+	<li>Minimum balance: a set amount of currency is required, but it won't be expended;</li>
+	<li>Expenditure: a certain amount must be expended.</li>
+</ul>
+
+
+<h4>Request currency</h4>
+<h5>Minimum balance</h5>
+<p>To request a currency balance (e.g. in <code>£</code>) above a certain value, write <code><b>N</b>£</code>, where <b>N</b> is a natural number. These credits will be preserved.</p>
+
+<h5>Examples</h5>
+<ul>
+	<li><code>1£</code>:					require a minimum balance of 1£;</li>
+	<li><code>1£ 2€</code>:				require a minimum balance of 1£ and 2€;</li>
+	<li><code>1£ 2€ 3£</code>:				require a minimum balance of 1£, 2€ and 3£;</li>
+	<li><code>1£ 5</code>:					require a minimum balance of 1£ plus unlocking level 5;</li>
+	<li><code>(1€ 4¥)/1]</code>: 			require a minimum balance of either 1€ or 4¥;</li>	<li><code>(4¥ 5)/1]</code>: 			require either beating level 5 or a minimum balance of 4¥;</li>
+</ul>
+
+<h5>Expenditure</h5>
+<p>To request an expenditure of a certain currency balance (e.g. in <code>£</code>) write <code><b>-N</b>£</code>, where <b>N</b> is a natural number. These credits will be expended.</p>
+<p>When both minimum balance and Expenditure conditions are combined, the expense is only made after verifying that the minimum balance is met. So <code>1£ -1£</code> verifies that a minimum balance of 1£ is present, then debits 1£. <code>-1£ 1£</code> has exactly the same meaning.</li>
+
+<h5>Examples</h5>
+<ul>
+	<li><code>-1£</code>:					require expending 1£;</li>
+	<li><code>-1£ -2€</code>:				require expending 1£ and 2€;</li>
+	<li><code>-1£ 2€</code>:				require expending 1£ and a minimum balance of 2€;</li>
+	<li><code>(-1£ 5)</code>:				require expending 1£ and beating level 5;</li>
+</ul>
+	
+<h5>Picking</h5>
+<p>Picking currencies must have special rules.</p>
+<p>Minimum balance has priority over expenditures. So <code>(-1£ 1£)/2</code> will only expend <code>-1£</code> unless the minimum balance of <code>-1£</code> fails to be met.</li>
+<p>Any impossible expenditures (due to lack of balance) won't be considered as valid alternatives. Then, among possible expenditures in different (or the same) currencies, those causing the least damage will be preferred. So <code>(-1£ -2€)/1</code> will expend <code>-1£</code> if this results in a higher balance of £ than €, and vice versa. If both cases fail, then the smallest expenditure will be preferred. If both expenditures are equal still, the first one is used.</li>
+
+<h5>Combining</h5>
+<p>Ranges will be interpreted as disconnected groups, e.g. <code>(-1£ -2€)</code> will be read as (-1£ -2€)</code>.</li></p>
+
+
+<h4>Providing currency</h4>
+<p>To debit your balance with a set amount of currency, write <code>+10£</code>. This is strictly not an unlocking condition, instead the debit will be awarded upon level completion. The converse rules apply.</p>
+
+
+<h2>Level progressions</h2>
+<h3>Linear progression</h3>
+<p>Linear progression means that levels are placed on a line, so that when you solve a previous level you unlock the following one(s).</p>
+<p>In these examples, assume there are 10 levels: «[«[1 10]</code></p>
+
+<h4>Linear progression, with 1-level lookahead</h4>
+<p>Solving one level unlocks only one following level.</p>
+<p>Conditions for each level:</p>
+<ul>
+	<li>level 1: <code> </code> (none, as the first level is unlocked);</li>
+	<li>level 2: <code>1</code> (to unlock level 2, level 1 must be solved first);</li>
+	<li>level 3: <code>2</code> (level 2 must be solved first);</li>
+	<li>level 4: <code>3</code> (etc...);</li>
+	<li>...</li>
+	<li>level 10: <code>9</code>;</li>
+</ul>
+
+<h4>Linear progression, with 3-level lookahead</h4>
+<p>Solving one level unlocks up to three levels afterwards.</p>
+<p>Conditions for each level:</p>
+<ul>
+	<li>levels 1 2 3: <code> </code> (none, as the first three levels are unlocked);</li>
+	<li>level 4: <code>[1 3]/1</code> (solving either 1, 2 or 3 is sufficient to unlock level 4);</li>
+	<li>level 5: <code>[1 4]/2</code> (solving 2 levels beforehand is sufficient);</li>
+	<li>level 6: <code>[1 5]/3</code> (a shorter way of expressing the same progression logic);</li>
+	<li>...</li>
+	<li>level 9: <code>[1 @-1]/(@-3)</code>; (an equivalent way of expressing the same progression logic..)</li>
+	<li>level 10: <code>[1 @-1]/(@-3)</code>; (... constant in every level.)</li>
+</ul>
+
+<h4>Linear progression, with n-level lookahead (general formula)</h4>
+<ul>
+<li>level @: <code>[1 @-1]/(@-n)</code>;</li>
+</ul>
+
+
+<h3>Branching tree</h3>
+<p>You start with a single level, but each solved level unlocks two levels, with 15 levels in total. The unlock conditions would be:</p>
+<ul>
+	<li>level 1: <code> </code> (none for the starting level);</li>
+	<li>levels (2 3): <code>1</code> (solving the first level unlocks levels 2 and 3;</li>
+	<li>level (4 5): <code>2</code>;</li>
+	<li>level (6 7): <code>3</code>;</li>
+	<li>level (8 9): <code>4</code>;</li>
+	<li>level (10 11): <code>5</code>;</li>
+	<li>level (12 13): <code>6</code>;</li>
+	<li>level (14 15): <code>7</code>;</li>
+</ul>
+
+<h3>Parallel tracks in sync</h3>
+<p>Imagine two parallel tracks, one named "day" and another "night", with 5 levels each, so 10 in total:</p>
+<ul>
+	<li><code>day :(1 3 5 7 9)</code></li>
+	<li><code>night:(2 4 6 8 10)</code></li>
+</ul>
+<p> Solving any level in one track unlocks the following level on the same track, plus the corresponding level on the parallel track.</p>
+<p>Conditions for each level:</p>
+<ul>
+	<li>levels (1 2): <code> </code> (none, as both first levels are unlocked);</li>
+	<li>levels (3 4): <code>(1 2)/1</code> (solve at least one level from one of the tracks);</li>
+	<li>levels (5 6): <code>(3 4)/1</code>;</li>
+	<li>levels (7 8): <code>(5 6)/1</code>;</li>
+	<li>levels (9 10):<code>(7 8)/1</code>;</li>
+</ul>
+
+<h3>Pyramid</h3>
+<p>Levels form a pyramid, with many easy levels at the base and a single final level at the apex.</p>
+<ul>
+	<li><code>base layer :[1 5]</code></li>
+	<li><code>middle layer:[6 8]</code></li>
+	<li><code>apex:9</code></li>
+</ul>
+
+<h4>Solve a full layer to unlock the next layer</h4>
+<p>Conditions for each level:</p>
+<ul>
+	<li>levels in base layer : <code> </code> (none as every level is unlocked);</li>
+	<li>levels in middle layer: <code>[1 5]</code> or simply <code>base layer</code>;</li>
+	<li>level 9, in apex: <code>[6 8]</code> or simply <code>middle layer</code>.</li>
+</ul>
+
+<h4>Solve all but one level per layer, to unlock the next layer</h4>
+<p>Conditions for each level:</p>
+<ul>
+	<li>levels in base layer : <code> </code>;</li>
+	<li>levels in middle layer: <code>base layer/3</code>;</li>
+	<li>level 9, in apex: <code>middle layer/2</code>.</li>
+</ul>
+
+
+<h3>Grid</h3>
+<p>Levels are arranged in a square grid, for example 4x4:</p>
+<ul>
+	<li><code>A1 B1 C1 D1</code></li>
+	<li><code>A2 B2 C2 D2</code></li>
+	<li><code>A3 B3 C3 D3</code></li>
+	<li><code>A4 B4 C4 D4</code></li>
+</ul>
+
+<h4>Adjacent levels, 4x4 Grid</h4>
+<p>Solving a level unlocks all adjacent levels in the grid</p>
+<p>Conditions for each level:</p>
+<ul>
+	<li>level A1: <code> </code> (none, starting level is unlocked);</li>
+	<li>level B1: <code>(A1 B2 C1)/1</code> (one adjacent level suffices);</li>
+	<li>level C1: <code>(B1 C2 D1)/1</code>;</li>
+	<li>level D1: <code>(C1 D2)/1</code> ;</li>
+	<li>level A2: <code>(A1 B2 A3)/1</code>;</li>
+	<li>level B2: <code>(A2 B1 C2 B3)/1</code> (one adjacent level suffices);</li>
+	<li>etc...</li>
+	<li>level C3: <code>(@-4 @-1 @+4 @+1)/1</code> (constant formula);</li>
+	<li>etc...</li>
+</ul>
+
+<h4>Adjacent levels, <b>N</b>xM Grid</h4>
+<p>General formula: <code> (@-<b>N</b> @-1 @+<b>N</b> @+1)/1</code>, where <b>N</b> is to be replaced by the actual (horizontal) grid length. In the previous example, <b>N</b> would be 4.</p>
+
+
+<h3>Incomplete worlds</h3>
+<p>Using the following setup of 30 levels divided in three "worlds", we can specify several conditions.</p>
+<ul>
+	<li><code>first world :[1 10]</code></li>
+	<li><code>second world:[11 20]</code></li>
+	<li><code>third world :[21 30]</code></li>
+</ul>
+
+<h4>Complete 7 levels from each world to unlock the next one</h4>
+<p>Conditions for each level:</p>
+<ul>
+	<li>1: none (first level is fully accessible);</li>
+	<li>levels 2 to 10 none, like in level 1;</li>
+	<li>level 11: <code>first world/7</code> (require solving seven levels from the first world)</li>
+	<li>levels 12 to 20 equal to the one in level 11;</li>
+	<li>level 21: <code>second world/7</code> (require solving seven levels from the second world)</li>
+	<li>levels 22 to 30 equal to the one in level 11;</li>
+</ul>
+
+<h4>Complete 7 levels from each world to unlock the next one, but with a maximal lookahead of three levels within each world</h4>
+<p>Conditions for each level:</p>
+<ul>
+	<li>levels 1 to 3: <code> </code> (none, as first three levels in first world fully accessible);</li>
+	<li>level 4: <code>(1 2 3)/1</code>;</li>
+	<li>level 5: <code>(1 2 3 4)/2</code>;</li>
+	<li>level 6: <code>(1 2 3 4 5)/3</code>;</li>
+	<li>level [7 10]: <code>[1 @]/(@-1-3)</code> (all but three levels until the current one);</li>
+	<li>levels [11 13]: <code>first world/7</code> (require solving seven levels from the first world)</li>
+	<li>levels [14 20]: <code>first world/7 [11 @]/(@-11-3)</code> seven levels form the first world plus all but three in the second world;</li>
+	<li>levels [21 23]: <code>second world/7</code> (require solving seven levels from the second world)</li>
+	<li>levels [24 30]: <code>second world/7 [21 @]/(@-21-3)</code>.</li>
+</ul>
+
+
+<h2>Special thanks</h2>
+<p>To ${v.MINOTALEN()} and ${v.GRANT()} for insightful ongoing discussions about the ${v.TITLE_BOLD()}!</p>
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

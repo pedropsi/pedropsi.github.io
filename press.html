@@ -1,0 +1,33 @@
+<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+<h2>Factsheet</h2>
+		<table>
+		<thead><th> </th><th> </th></thead>
+		<tr><td>Author:</td>
+			<td>${v.NAME()}</td></tr>
+		<tr><td>Address:</td>
+			<td>${v.LOCATION()}.</td></tr>
+		<tr><td>Founding date:</td>
+			<td>${v.DATE_FOUNDED()}</td></tr>
+		<tr><td>Website:</td>
+			<td>${v.SITE_LINK_SELF()}</td></tr>
+		<tr><td>External pages:</td>
+			<td>Github and twitter.</td></tr>
+		</table>
+
+<h2>${v.NAME()}'s Projects</h2>
+<p>Refer to this overview ${v.A_ABOUT()}.</p>
+		
+<h2>Project news</h2>
+<p>Even small steps may be important ${v.A_NEWS()}.</p>
+
+<h2>Press guidelines</h2>
+<p>Please acknowledge the author, link back to the source and ${v.A_LET_ME_KNOW()}.</p>
+<p>In doubt, refer to the full ${v.A_TERMS()}.</p>
+
+<h2>Contact</h2>
+<p>You can always ${v.A_CONTACT()} with questions.</p>
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

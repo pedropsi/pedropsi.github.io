@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" >
+	<channel>
+		<atom:link href="https://pedropsi.github.io/rss.xml" rel="self" type="application/rss+xml" />
+		<title>Creative Archive</title>
+		<link>https://pedropsi.github.io</link>
+		<description>Don't miss out on novelties from The Creative Archive!</description>
+		<language>en-US</language> 
+		<docs>https://cyber.harvard.edu/rss/rss.html</docs>
+		<copyright>© Pedro PSI 2010-2020.</copyright>
+		<image>
+			<link>https://pedropsi.github.io</link>
+			<title>Creative Archive</title>
+			<url>https://pedropsi.github.io/images/logo.png</url>
+		</image>
+		
+	<item>
+		<title><![CDATA[Strata Hedges mechanics draft]]></title>
+		<link>https://pedropsi.github.io/strata-hedges.html#RSS</link>
+		<guid>https://pedropsi.github.io/strata-hedges.html?guid=2020-04-01</guid>
+		<pubDate>Wed, 1 Apr 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/strata-hedges.png" width="180" height="180" alt="Strata Hedges" title="Strata Hedges"/>
+			
+<p>A first draft of <a href='strata-hedges.html'>Strata Hedges</a> was shared privately, showcasing the novel tridimensional mechanics.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[3D]]></category>
+<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Creative Archive Generator Update]]></title>
+		<link>https://pedropsi.github.io/generator.html#RSS</link>
+		<guid>https://pedropsi.github.io/generator.html?guid=2020-03-28</guid>
+		<pubDate>Sat, 28 Mar 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/strata-hedges.png" width="180" height="180" alt="Creative Archive page Generator" title="Creative Archive page Generator"/>
+			
+<p>The Creative Archive is now 100% generated in Javascript, thus bringing faster editing speeds. The new Generator uses <b>String Templates</b>.</p>
+<p>Good side effects include reduced page size, plus new functionalities such as multiple <a href='tag.html'>Tag</a> filtering.</p>
+<p>Bugs are to be expected.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Creative-Archive]]></category>
+<category><![CDATA[Sitemap]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Dark theme detection]]></title>
+		<link>https://pedropsi.github.io/undefined.html#RSS</link>
+		<guid>https://pedropsi.github.io/undefined.html?guid=2020-03-25</guid>
+		<pubDate>Wed, 25 Mar 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/strata-hedges.png" width="180" height="180" alt="Creative Archive page Generator" title="Creative Archive page Generator"/>
+			
+<p>Night mode will now activate when the operating system prefers a dark theme.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Creative-Archive]]></category>
+<category><![CDATA[Sitemap]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[PuzzleScript Editor + Game Bar]]></title>
+		<link>https://pedropsi.github.io/game-bar.html#RSS</link>
+		<guid>https://pedropsi.github.io/game-bar.html?guid=2020-02-02</guid>
+		<pubDate>Sun, 2 Feb 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.png" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>There is now a convenient Pedro PSI's <a href='game-editor.html'>Adapted Puzzlescript editor</a> which exports any PuzzleScript game with game bar by default.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Puzzlescript Components Database]]></title>
+		<link>https://pedropsi.github.io/undefined.html#RSS</link>
+		<guid>https://pedropsi.github.io/undefined.html?guid=2020-01-25</guid>
+		<pubDate>Sat, 25 Jan 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.png" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>A database of Puzzlescript components, prototypes and mechanic demonstrations was added to <a href='game-tools.html'>Game Tools</a> to complement the <a href='puzzlescript-games-database.html'>Puzzlescript games database</a>.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Gravirinth major update]]></title>
+		<link>https://pedropsi.github.io/gravirinth.html#RSS</link>
+		<guid>https://pedropsi.github.io/gravirinth.html?guid=2020-01-24</guid>
+		<pubDate>Fri, 24 Jan 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/gravirinth.png" width="180" height="180" alt="Gravirinth" title="Gravirinth"/>
+			
+<p><a href='gravirinth.html'>Gravirinth</a> now runs much faster thanks to <a href='https://twitter.com/Jack_L_Lance'>Jack Lance</a>'s <a href='https://jacklance.github.io/PuzzleScript/editor.html'>Large Maps Puzzlescript Fork</a>.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Platformer]]></category>
+<category><![CDATA[Puzzle]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Database Search + submission options]]></title>
+		<link>https://pedropsi.github.io/puzzlescript-games-database.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzlescript-games-database.html?guid=2020-01-12</guid>
+		<pubDate>Sun, 12 Jan 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzlescript-games-database.png" width="180" height="180" alt="Puzzlescript games database" title="Puzzlescript games database"/>
+			
+<p>The <a href='puzzlescript-games-database.html'>Puzzlescript games database</a> underwent several improvements. Among them, there are now more submission options, and search was added across all data categories. Search can be triggered by user input and indicated in the URL.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Community]]></category>
+<category><![CDATA[List]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Game bar icon embellishment]]></title>
+		<link>https://pedropsi.github.io/game-bar.html#RSS</link>
+		<guid>https://pedropsi.github.io/game-bar.html?guid=2020-01-11</guid>
+		<pubDate>Sat, 11 Jan 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.png" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>The Pedro PSI's <a href='game-bar.html'>game bar</a> now sports cross-platform icons, which activate a nice typewriter tooltip effect on hover, revealing the button function plus the corresponding keyboard shortcut.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Diverse improvements]]></title>
+		<link>https://pedropsi.github.io/undefined.html#RSS</link>
+		<guid>https://pedropsi.github.io/undefined.html?guid=2019-12-14</guid>
+		<pubDate>Sat, 14 Dec 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.png" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>All Creative Archive's PWAs are now are playable offline, so this feature is out of beta.</p>
+<p>TOCs show now collapsed by default.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Puzzlescript games database expansion]]></title>
+		<link>https://pedropsi.github.io/puzzlescript-games-database.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzlescript-games-database.html?guid=2019-12-11</guid>
+		<pubDate>Wed, 11 Dec 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzlescript-games-database.png" width="180" height="180" alt="Puzzlescript games database" title="Puzzlescript games database"/>
+			
+<p>The <a href='puzzlescript-games-database.html'>Puzzlescript games database</a> now sports over 1300 titles.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Community]]></category>
+<category><![CDATA[List]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Store opens]]></title>
+		<link>https://pedropsi.github.io/store.html#RSS</link>
+		<guid>https://pedropsi.github.io/store.html?guid=2019-12-07</guid>
+		<pubDate>Sat, 7 Dec 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/store.png" width="180" height="180" alt="Store" title="Store"/>
+			
+<p>The Creative Archive now has a dedicated <a href='store.html'>Store</a>, featuring pearls such as <a href='puzzle-type.html'>Puzzle Type</a>.<sup class='label Problem'>Experimental</sup></p>
+		]]>
+		</description>
+		<category><![CDATA[Creative-Archive]]></category>
+<category><![CDATA[Finance]]></category>
+<category><![CDATA[List]]></category>
+<category><![CDATA[Sitemap]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Game bar Minor changes]]></title>
+		<link>https://pedropsi.github.io/game-bar.html#RSS</link>
+		<guid>https://pedropsi.github.io/game-bar.html?guid=2019-12-07</guid>
+		<pubDate>Sat, 7 Dec 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.png" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			<p>Layout colour changes, especially in headers, and font variation added. Minor game bar updates.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[LUL in development]]></title>
+		<link>https://pedropsi.github.io/lul.html#RSS</link>
+		<guid>https://pedropsi.github.io/lul.html?guid=2019-12-01</guid>
+		<pubDate>Sun, 1 Dec 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/lul.png" width="180" height="180" alt="Level unlocking language" title="Level unlocking language"/>
+			
+<p>The <a href='lul.html'>Level Unlocking Language</a> draft is released for discussion.</p>
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Status page]]></title>
+		<link>https://pedropsi.github.io/status.html#RSS</link>
+		<guid>https://pedropsi.github.io/status.html?guid=2019-12-01</guid>
+		<pubDate>Sun, 1 Dec 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/status.png" width="180" height="180" alt="Status" title="Status"/>
+			
+<p>Users may now perform self-checks by visiting the <a href='status.html'>Status</a> page, which performs automatic tests.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Creative-Archive]]></category>
+<category><![CDATA[Resource]]></category>
+<category><![CDATA[Sitemap]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Level titles & selector improvements]]></title>
+		<link>https://pedropsi.github.io/game-bar.html#RSS</link>
+		<guid>https://pedropsi.github.io/game-bar.html?guid=2019-11-23</guid>
+		<pubDate>Sat, 23 Nov 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.png" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>The Pedro PSI's <a href='game-bar.html'>game bar</a> now supports assigning level titles from within the hints file. These titles will be shown atop the level selector window, which received some extra polish.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Progressive Web Apps (beta)]]></title>
+		<link>https://pedropsi.github.io/undefined.html#RSS</link>
+		<guid>https://pedropsi.github.io/undefined.html?guid=2019-11-09</guid>
+		<pubDate>Sat, 9 Nov 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.png" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>All Pedro PSI's games are now (Progressive) Web Apps, so you can now add them to your device's homescreen and play offline!</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Nicer tables]]></title>
+		<link>https://pedropsi.github.io/undefined.html#RSS</link>
+		<guid>https://pedropsi.github.io/undefined.html?guid=2019-11-02</guid>
+		<pubDate>Sat, 2 Nov 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.png" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>All tables in the Creative Archive are now sortable.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Puzzle type alpha]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2019-10-30</guid>
+		<pubDate>Wed, 30 Oct 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+<p>Puzzle type's alpha version was shared privately.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Towards Progressive Web Apps (PWA)]]></title>
+		<link>https://pedropsi.github.io/undefined.html#RSS</link>
+		<guid>https://pedropsi.github.io/undefined.html?guid=2019-10-26</guid>
+		<pubDate>Sat, 26 Oct 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+<p>The Creative Archive has suffered diverse optimisations towards transforming several pages into independent PWAs. Games, for instance, load faster. Plus diverse small accessibility improvements, as suggested by the Lighthouse tool.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Puzzle-type (alpha)]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2019-10-25</guid>
+		<pubDate>Fri, 25 Oct 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+<p>This upcoming cryptic puzzle is gaining shape. Animated logo. Sound effects. 14 levels, and counting.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Game-bar extension and auto-rotation]]></title>
+		<link>https://pedropsi.github.io/game-bar.html#RSS</link>
+		<guid>https://pedropsi.github.io/game-bar.html?guid=2019-10-19</guid>
+		<pubDate>Sat, 19 Oct 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.gif" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>The game-bar has been extended to work with any vanilla javascript game (besides puzzlescript), so it fits the upcoming minigame "Puzzle Type".</p>
+<p>On small screens, such as in mobile devices, the screen will rotate to landscape.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Puzzlescript game database & tools]]></title>
+		<link>https://pedropsi.github.io/puzzlescript-games-database.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzlescript-games-database.html?guid=2019-10-12</guid>
+		<pubDate>Sat, 12 Oct 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzlescript-games-database.gif" width="180" height="180" alt="Puzzlescript games database" title="Puzzlescript games database"/>
+			
+<p>The world's largest public puzzlescript game database was released for the first time.</p>
+<p>Some game making tools were listed, for future reference.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Community]]></category>
+<category><![CDATA[List]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Game bar keyboard shortcuts system]]></title>
+		<link>https://pedropsi.github.io/game-bar.html#RSS</link>
+		<guid>https://pedropsi.github.io/game-bar.html?guid=2019-10-02</guid>
+		<pubDate>Wed, 2 Oct 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.gif" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>A better keyboard shortcut system was added. Menu navigation using (<kbd>ctrl</kbd>+)<kbd>enter</kbd>, <kbd>space</kbd>, (<kbd>shift</kbd>+)<kbd>tab</kbd> and <kbd>arrows</kbd> has improved.</p>
+<p>GIF hints can now be played/paused with <kbd>enter</kbd> or <kbd>space</kbd>.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Skilleblokker launches]]></title>
+		<link>https://pedropsi.github.io/skilleblokker.html#RSS</link>
+		<guid>https://pedropsi.github.io/skilleblokker.html?guid=2019-09-21</guid>
+		<pubDate>Sat, 21 Sep 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/skilleblokker.gif" width="180" height="180" alt="Skilleblokker" title="Skilleblokker"/>
+			
+<p><a href='skilleblokker.html'>Skilleblokker</a> spillet utgitt!</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Bookmarklet]]></title>
+		<link>https://pedropsi.github.io/game-bar.html#RSS</link>
+		<guid>https://pedropsi.github.io/game-bar.html?guid=2019-09-19</guid>
+		<pubDate>Thu, 19 Sep 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.gif" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>The game bar now can be applied to any online puzzlescript game by means of a Pedro PSI's <a href='game-bar.html'>Game bar Bookmarklet</a>, a suggestion by <a href='https://twitter.com/minotalen'>minotalen</a>.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Hints system]]></title>
+		<link>https://pedropsi.github.io/game-bar.html#RSS</link>
+		<guid>https://pedropsi.github.io/game-bar.html?guid=2019-09-11</guid>
+		<pubDate>Wed, 11 Sep 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.gif" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>The game bar now includes support for Hints, a suggestion by <a href='https://twitter.com/minotalen'>minotalen</a>. Hints were added to <a href='platformer-template.html'>Platformer Template</a>.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Keyboard Keys styling]]></title>
+		<link>https://pedropsi.github.io/undefined.html#RSS</link>
+		<guid>https://pedropsi.github.io/undefined.html?guid=2019-09-07</guid>
+		<pubDate>Sat, 7 Sep 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.gif" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>Keyboard keys across the Creative Archive are now nicely <kbd>S</kbd> <kbd>T</kbd> <kbd>Y</kbd> <kbd>L</kbd> <kbd>E</kbd> <kbd>D</kbd>.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Undo: press and hold]]></title>
+		<link>https://pedropsi.github.io/game-bar.html#RSS</link>
+		<guid>https://pedropsi.github.io/game-bar.html?guid=2019-09-02</guid>
+		<pubDate>Mon, 2 Sep 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.gif" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>The game bar's undo button now supports <kbd>press and hold</kbd> to undo several moves at once, useful in touch devices.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Custom linear level progressions]]></title>
+		<link>https://pedropsi.github.io/game-bar.html#RSS</link>
+		<guid>https://pedropsi.github.io/game-bar.html?guid=2019-08-13</guid>
+		<pubDate>Tue, 13 Aug 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.gif" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>The game bar's level selector now supports linear level progression and boss levels.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Colour matching]]></title>
+		<link>https://pedropsi.github.io/game-bar.html#RSS</link>
+		<guid>https://pedropsi.github.io/game-bar.html?guid=2019-08-08</guid>
+		<pubDate>Thu, 8 Aug 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.gif" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>The game bar's colour now adapts automatically to the color scheme of the current game.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Fullscreen]]></title>
+		<link>https://pedropsi.github.io/game-bar.html#RSS</link>
+		<guid>https://pedropsi.github.io/game-bar.html?guid=2019-08-03</guid>
+		<pubDate>Sat, 3 Aug 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.gif" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>The game bar's now has a fullscreen mode. Activate it by pressing the button or <kbd>F</kbd>.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Logo hovering]]></title>
+		<link>https://pedropsi.github.io/undefined.html#RSS</link>
+		<guid>https://pedropsi.github.io/undefined.html?guid=2019-08-01</guid>
+		<pubDate>Thu, 1 Aug 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/game-bar.gif" width="180" height="180" alt="Puzzlescript Game Bar" title="Puzzlescript Game Bar"/>
+			
+<p>After a mathematical simplification, the Creative Archive's logo, converted to a svg vector, reveals a different pattern on hover.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Resource]]></category>
+<category><![CDATA[Tutorial]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Burokku Konekuta launches]]></title>
+		<link>https://pedropsi.github.io/burokku-konekuta.html#RSS</link>
+		<guid>https://pedropsi.github.io/burokku-konekuta.html?guid=2019-07-12</guid>
+		<pubDate>Fri, 12 Jul 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/burokku-konekuta.gif" width="180" height="180" alt="Burokku Konekuta" title="Burokku Konekuta"/>
+			
+<p><a href='burokku-konekuta.html'>Burokku Konekuta</a> がリリースされました!</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Plaformer Template minor update]]></title>
+		<link>https://pedropsi.github.io/platformer-template.html#RSS</link>
+		<guid>https://pedropsi.github.io/platformer-template.html?guid=2019-06-30</guid>
+		<pubDate>Sun, 30 Jun 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/platformer-template.gif" width="180" height="180" alt="Platformer Template" title="Platformer Template"/>
+			
+<ul>
+<li><b>level 31:</b> displaced a dash to remove one unintended solution; reduced level size by rearranging elements; simplified lesson;</li>
+<li><b>level 32:</b> switched places with former level 31.</li>
+</ul>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Platformer]]></category>
+<category><![CDATA[Puzzle]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Data-driven changes to Plaformer Template]]></title>
+		<link>https://pedropsi.github.io/platformer-template.html#RSS</link>
+		<guid>https://pedropsi.github.io/platformer-template.html?guid=2019-05-30</guid>
+		<pubDate>Thu, 30 May 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/platformer-template.gif" width="180" height="180" alt="Platformer Template" title="Platformer Template"/>
+			
+<p>Major data-driven changes to selected levels, based on average time required to win a level, plus several minor tweaks:
+<ul>
+<li><b>level 10:</b> displacement of a single block to try to guide players towards the elusive solution;</li>
+<li><b>level 26:</b> major redesign to make it easier;</li>
+<li><b>level 43:</b> major redesign and simplification while retaining the core ideas;</li>
+<li><b>level 44:</b> reduction of level size;</li>
+<li><b>level 46:</b> reduction of level size and decluttering;</li>
+<li><b>level 48:</b> major redesign to declutter and ramp up the challenge;</li>
+<li><b>level 50:</b> remotion of one single dash causing one unintended solution.</li>
+</ul>
+</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Platformer]]></category>
+<category><![CDATA[Puzzle]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Platformer-template launches]]></title>
+		<link>https://pedropsi.github.io/platformer-template.html#RSS</link>
+		<guid>https://pedropsi.github.io/platformer-template.html?guid=2019-05-19</guid>
+		<pubDate>Sun, 19 May 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/platformer-template.gif" width="180" height="180" alt="Platformer Template" title="Platformer Template"/>
+			
+<p><a href='platformer-template.html'>Platformer Template</a> matures into its final version.</p>
+
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Platformer]]></category>
+<category><![CDATA[Puzzle]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Tiaradventur princess behaviour]]></title>
+		<link>https://pedropsi.github.io/tiaradventur.html#RSS</link>
+		<guid>https://pedropsi.github.io/tiaradventur.html?guid=2019-01-30</guid>
+		<pubDate>Wed, 30 Jan 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/tiaradventur.gif" width="180" height="180" alt="Tiaradventur" title="Tiaradventur"/>
+			
+<p>The princess now stubbornly refuses to be left behind! On the last level, she will now consistently flee from the wolves and cause a fire - and gives clearer hints. It is also no longer possible to push an extra wolf into the last level.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+<category><![CDATA[Role-playing]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Whirpuzzle physics fix]]></title>
+		<link>https://pedropsi.github.io/whirlpuzzle.html#RSS</link>
+		<guid>https://pedropsi.github.io/whirlpuzzle.html?guid=2019-01-30</guid>
+		<pubDate>Wed, 30 Jan 2019 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/whirlpuzzle.gif" width="180" height="180" alt="Whirlpuzzle" title="Whirlpuzzle"/>
+			
+<p>Blocks that are stuck at some point in a sequence now won't push blocks located further away in the same sequence.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Abxtract Tractx update]]></title>
+		<link>https://pedropsi.github.io/abxtract-tractx.html#RSS</link>
+		<guid>https://pedropsi.github.io/abxtract-tractx.html?guid=2018-10-08</guid>
+		<pubDate>Mon, 8 Oct 2018 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/abxtract-tractx.gif" width="180" height="180" alt="Abxtract Tractx" title="Abxtract Tractx"/>
+			
+<p>Shortening of canvas size in <em>level 5</em>; improvements to colour contrast.</p>
+		]]>
+		</description>
+		<category><![CDATA[Art]]></category>
+<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Tiaradventur updates]]></title>
+		<link>https://pedropsi.github.io/tiaradventur.html#RSS</link>
+		<guid>https://pedropsi.github.io/tiaradventur.html?guid=2018-09-29</guid>
+		<pubDate>Sat, 29 Sep 2018 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/tiaradventur.gif" width="180" height="180" alt="Tiaradventur" title="Tiaradventur"/>
+			
+<p>Redesign of <em>level 3</em> to prevent unintended solution; minor tweaks to <em>levels 1, 2 and 4</em>; two crates removed from near the secret item; minor graphic changes (polishing margins, choosing smaller trees in key positions, fixing lamp flame animation); dialogue flow fix; player falling unintentionally into water disallowed; burning message added; diverse improvements of princess behaviour; fixes to auto-save system including a golden flash; new restart trigger; golden win animation.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+<category><![CDATA[Role-playing]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[PMGRP further improvements]]></title>
+		<link>https://pedropsi.github.io/pmgrp.html#RSS</link>
+		<guid>https://pedropsi.github.io/pmgrp.html?guid=2018-05-30</guid>
+		<pubDate>Wed, 30 May 2018 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/pmgrp.gif" width="180" height="180" alt="Play Mini Gemini Replay (PMGRP)" title="Play Mini Gemini Replay (PMGRP)"/>
+			
+<p>Redesign of <em>level 0</em>; layout changes to <em>levels 6 and 7</em>; improvements in <b>replay mode</b> (highlighting, slowing down); future and present self no longer swap colours.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Platformer]]></category>
+<category><![CDATA[Puzzle]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[PMGRP update]]></title>
+		<link>https://pedropsi.github.io/pmgrp.html#RSS</link>
+		<guid>https://pedropsi.github.io/pmgrp.html?guid=2018-05-20</guid>
+		<pubDate>Sun, 20 May 2018 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/pmgrp.gif" width="180" height="180" alt="Play Mini Gemini Replay (PMGRP)" title="Play Mini Gemini Replay (PMGRP)"/>
+			
+<p>Aesthetical changes (including a redesign of respawn and goal animations);  improvement of multi-crate pile physics and dropping; suppression of <em>level 11</em>; all level numbers incremented by 1.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Platformer]]></category>
+<category><![CDATA[Puzzle]]></category>
+<category><![CDATA[Puzzlescript]]></category>
+	</item>
+	
+	</channel>
+</rss>

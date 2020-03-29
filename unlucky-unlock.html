@@ -1,0 +1,13 @@
+﻿<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+${v.HEADER()}
+
+${v.HOWTO_TEXT()}<p>Move and push blocks with ${v.ARROWKEYS()}.</p>
+${v.UNDO_RESTART_TEXT()}
+${v.GAME_EXTRAS_TEXT()}
+
+${v.CREDITS()}  
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

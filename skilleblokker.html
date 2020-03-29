@@ -1,0 +1,28 @@
+<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+${v.HEADER()}
+
+${v.HOWTO_TEXT()}
+
+<p><em>Slide</em> with ${v.ARROWKEYS()}, and push apart blocks of different shapes.</p>
+<p>Level difficulty is shown by the number of stars (1 to 5).</p>
+
+${v.UNDO_RESTART_TEXT()}
+${v.GAME_EXTRAS_HINTS_TEXT()}
+
+${v.CREDITS()}
+
+<h2>F.A.Q.</h2>
+
+<h3>How is ${v.TITLE_BOLD()} related to Burokku Konekuta?</h3>
+<p>${v.TITLE_BOLD()} is the sequel and opposite twin of ${v.A_BUROKKU_KONEKUTA()}, following similar level structures and design conventions, but with an inverted goal and some extra twists, mostly relating to <b>sliding on ice</b>!</p>
+
+<h3>Why is ${v.TITLE_BOLD()} in norwegian?</h3>
+<p>The norwegian culture is marked by a colder climate.</p>
+
+${v.PRESS_TEXT()}
+
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

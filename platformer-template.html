@@ -1,0 +1,35 @@
+<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+${v.HEADER()}
+
+${v.HOWTO_TEXT()}<p><em>Move</em> with ${v.ARROWKEYS()}, which are used to interact with blocks of different shapes.</p>
+<p>Your perception of the goal and game rules should evolve as the game progresses.</p>
+
+${v.UNDO_RESTART_TEXT()}
+${v.GAME_EXTRAS_HINTS_TEXT()}
+
+${v.CREDITS()}
+
+<h3>Special thanks</h3>
+<p>${v.HUNKYDORY()} and ${v.ZABEL()} for spotting two rare yet important bugs.</p>
+<p>${v.MINOTALEN()} for suggesting the addition of hints and for several hint suggestions and improvements.</p>
+
+<h2>F.A.Q.</h2>
+<h3>Is ${v.TITLE_BOLD()} a real game or a game template?</h3>
+<p>Both! Because there is no better way to teach that to put the principles in practice, immediately. Questions like: <em>Why was this level not introduced before?</em> or <em>What is new in this level?</em> or <em>Could any element be removed while preserving the desired effect?</em> should guide your attention while playing.</p>
+
+<h3>Is ${v.TITLE_BOLD()} ${v.NAME()}'s last game?</h3>
+<p>${v.NAME()} intended to close 2018's cycle of puzzlescript games (${v.A_GAME_JOURNEY()}) by teaching others - ${v.TITLE_BOLD()} emerged naturally from this intention.</p>
+
+<h3>How is beating ${v.TITLE_BOLD()}'s an achievement?</h3>
+<p>It takes on average 4 enjoyable hours to solve all levels in ${v.TITLE_BOLD()}, but only 4% of all players so far qualified for the ${v.A_HOF_PT()}.</p>
+
+<h3>Does the high difficulty prevent ${v.TITLE_BOLD()}'s teaching goals?</h3>
+<p>Since all levels are accessible via the level selector, all players regardless of ability can follow every lesson.</p>
+
+
+${v.PRESS_TEXT()}
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

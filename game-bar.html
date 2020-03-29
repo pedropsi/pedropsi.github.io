@@ -1,0 +1,288 @@
+﻿<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+<h2>About the ${v.TITLE_BOLD()}</h2>
+
+<p>This is the "game bar" found in all ${v.A_GAMES()}. It features for instance undo/reset buttons, a beautiful level selector, a fullscreen mode, auto-rotation, plus optional hints, music, credits and how-to-play buttons. Sounds useful? Well... <b>You too</b> can use it, for free!<p>
+
+<p>This is how the ${v.TITLE_BOLD()} looks like:</p>
+${v.FIGURE_SIMPLE()}
+<p>The game bar's colours adapt to the foreground and background colours of your game.</p>
+
+<h3>Examples</h3>
+<p>Here are some games that use the ${v.TITLE_BOLD()}:</p>
+<ul>
+${LinkGroupHTML("with-game-bar")}
+<li>plus, of course, all ${v.A_GAMES()}.</li>
+</ul>
+
+<p>Check also the <em>game bar testing links</em> available for some games in the ${v.A_PS_DATABASE()}!</p>
+
+<p>Would you like to add your game to the list? Please ${v.A_LET_ME_KNOW()}!</p>
+
+<h3>Current version</h3>
+<p>Here is the ${v.A_GB_LATEST()} of the ${v.TITLE_BOLD()} .</p>
+
+<p>Please note the game-bar bookmarklet and code updates in real time to the most recent version. You can as well use any of the ${v.A_GB_VERSIONS()} instead.</p>
+
+<h2>How to preview the ${v.TITLE_BOLD()} in your own game</h2>
+<p>You can load your game directly in the ${v.A_GAME_CONSOLE()}, to see how it would look like with the game bar.</p>
+
+<h2>How to add the ${v.TITLE_BOLD()} to your own game</h2>
+<h3>Easy way</h3>
+<p>Just paste your game code in ${v.A_EDITOR()}, run it, then ${v.CLICK()} the <b>Export + Game Bar</b> option.</p>
+<p>This will create the standard puzlescript HTML page, with the ${v.TITLE_BOLD()} added. </p>
+
+<h3>Advanced way</h3>
+<p>Include the <b>javascript source</b> ${v.A_GB_SOURCE()} in a regular Puzzlescript export or in a custom page.</p>
+<p>To ensure the ${v.TITLE_BOLD()} overwrites all needed functions, please load it <b>after</b> the game has loaded fully, i.e. by placing at the end of the ${v.CSI()}body${v.CSF()} the snippet ${v.CSI()}script type="text/javascript" src="GameBar.js"${v.CSF()}${v.CSI()}/script${v.CSF()}.</p>
+
+<h2>Keyboard shortcuts</h2>
+<p>These are the default keyboard shortcuts for the ${v.TITLE_BOLD()}:</p>
+<ul>
+	<li>Navigation shortcuts:
+		<ul>
+			<li><kbd>Left</kbd>/<kbd>Right</kbd>: next/previous option;</li>
+			<li><kbd>Enter</kbd>: select current option;</li>
+			<li><kbd>Esc</kbd>: close current window;</li>
+			<li><kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd>: next/previous menu item.</li>
+		</ul>
+	</li>
+	<li>${v.LEVEL_KEY()}: toggle the level selector;</li>
+		<ul>
+			<li>${v.NUM_KEYS()}: pick a level;</li>
+		</ul>
+	<li>${v.HINT_KEY()}: toggle Hints;</li>
+	<li>${v.FULLSCREEN_KEY()}: Toggle Fullscreen</li>
+	<li>${v.MUSIC_KEY()}: Pause/Resume BGM playlist</li>
+</ul>
+
+<h2>Hints</h2>
+<p>A hints button will appear whenever a hint file is detected.</p>
+<p>Create a folder named <code>hints</code>, where you'll drop a <b>hints file</b> containing all hints. The <b>hints file</b> should be named exactly like the matching game <code>.html</code> page file, but with the <code>.txt</code> extension.</p>
+<p>If you have several game pages, you can drop one <b>hints file</b> per game into the common <code>hints</code> folder.</p> 
+
+<h3><b>hints file</b> text standard</h3>
+<p>The <b>hints file</b> textual format follows 7 rules:
+<ol>
+<li>Each hint ocupies exactly one line;</li>
+<li>hints belonging to the same level (hint groups) are placed in successive contiguous lines;</li>
+<li>hint groups are separated by one or more empty lines;</li>
+<li>if the first line in a hint group starts with the word <code>level</code>, the hint group will ignore this line. 
+	<ul><li>Thus a group consisting of the single line <code>level ...</code> will be interpreted as containing zero hints;</li></ul></li>
+<li>digits at the start of any hint line will be ignored;</li>
+<li>hint lines consisting solely of a reference to an image (see section below) will display that image.</li>
+<li><b>Important:</b>hint groups are assigned to each level by the order in which they appear;</li>
+</ol>
+</p>
+
+<h4>Example</h4>
+<p>As an example, see the hints file located at ${v.A_PT_HINTS()}, belonging to the ${v.A_PLATFORMER_TEMPLATE()} game page.</p>
+
+<h3>Hint images</h3>
+<p>To add hint images to one game:
+	<ol>
+		<li>Inside the <code>hints/</code> folder, make a new subfolder named like your <b>hints file</b> without the <code>.txt</code> extension.</li>
+		<li>Drop all hint images into this new subfolder.</li>
+		<li>Reference each image, amidst the hints, by its relative path inside this subfolder.</li>
+	</ol>
+</p>	
+<p>For multiple games, each game must have its own subfolder inside the the <code>hints/</code> folder.</p>
+
+<h4>Example</h4>
+<p>See ${v.A_PT_HINTS()} as well.</p>
+
+<h3>Animated hint images</h3>
+<p>Animated GIFs are supported, similarly to static images. They will show up as paused, but clicking on them or pressing <kbd>spacebar</kbd> will toggle animation.</p>
+
+<h4>Example</h4>
+<p>${v.A_SKILLEBLOKKER()} uses one animated gif hint, specified in file ${v.A_SB_HINTS()}.</p>
+
+
+<h3>Multi-line hints</h3>
+<p>Within one hint line, include as many HTML paragraph tags as required: ${v.CSI()}p${v.CSF()}<code><b>Line 1</b></code>${v.CSI()}/p${v.CSF()} ${v.CSI()}p${v.CSF()}<code><b>Line 2</b></code>${v.CSI()}/p${v.CSF()} etc.... This will cause an hint to display as multiple paragraphs.</p>
+
+<h2>Level titles </h2>
+<p>Level names ${v.L_EXP()} may be included in the hints file, as long as the following convention is respected:</p>
+<ol>
+<li>Each level name requires exactly one line;</li>
+<li>every level line is separated by at least one empty line, plus an optional group of hint lines inbetween;</li>
+<li>every level line starts with the word <code>level</code>;<li>
+<li>the following parts are discarded, in order:
+<ol>
+	<li>the word <code>level </code>, at the start of the line;</li>. 
+	<li>digits <code>1 2 3 4 5 6 7 8 9 0</code>, optionally separated by dots <code>.</code>, at the start of the line;</li>
+	<li>text following two dashes <code>--</code>;</li>
+	<li>trailing whitespace;</li>
+</ol>
+<li>after discarding the above, remaining text becomes the <b>level title</b>.</li>
+</ol>
+</p>
+<h3>Examples</h3>
+<p>For a simple example, see the level names specified in the hints file located at ${v.A_BW_HINTS()}, belonging to the ${v.A_BLOCKWORKS()} game page (no hints, only level titles). An example combining level titles with hints, is ${v.A_SB_HINTS()}, from game ${v.A_SKILLEBLOKKER()}.</p>
+
+<h2>Level sections</h2>
+<p>Level sections ${v.L_EXP()} may be appended to the level title by means of the section sign (§). For example, to assign the first level to a section named "Tutorial", within the hints file, write <code>level </em>1 optional level name</em> <b>§ Tutorial </b></code></p>
+<p>As soon as a section is assigned, all following levels will be assumed to belong to that section, until a new section is opened. So each section name is written only once.</p>
+<p>Section names instruct a better level selector layout. In the future, section names will also be useful when defining custom level progressions.</p>
+
+
+<h2>Custom level progressions</h2>
+<p>This set of features is still in development, subject to change. For now, you can add the following javascript code lines to your game page, either as an external script or inline.</p>
+
+<h3>Linear progression: <b>n</b> unsolved levels</h3>
+<p>To unlock just up to <b>n</b> unsolved levels, insert the line <code> function ObtainLevelLookahead(){return <b>n</b>;}; </code> where <b>n</b> is a natural number. The default value for <b>n</b> is <b>0</b>, meaning instead that all unsolved levels are unlocked. </p>
+<h4>Example (★ = solved level, • = locked level)</h4>
+<p>With linear progression set to <b>3</b>, here are some possible states:</p>
+<ul>
+<li> 1, 2 , 3 , 4•, 5•, 6•, 7• (starting state)</li>
+<li> 1★, 2 , 3 , 4, 5•, 6•, 7• (level 4 unlocked upon solving level 1)</li>
+<li> 1★, 2 , 3 , 4★, 5 , 6•, 7• (player skipped levels 2 and 3, solved level 4 and thus unlocked level 5)</li>
+<li> 1★, 2★, 3 , 4★, 5 , 6, 7• (player returned to solve level 2, thus unlocking level 6)</li>
+
+
+<h3>Gate levels (♛)</h3>
+<p>Any level may be marked as a "gate level" (♛), meaning that it 1) must be solved before reaching higher levels and 2) can only be accessed when all previous levels are solved.</p>
+<p>To mark a group of levels as "gate levels", insert the line <code> function ObtainGateLevels(){return [<b>a</b>,<b>b</b>,<b>c</b>];}; </code> where <b>a</b>,<b>b</b>,<b>c</b>, etc... are natural (level) numbers separated by commas. The default value is the empty array <code>[ ]</code> meaning no "gate levels". </p>
+<h4>Example</h4>
+<p>With linear progression set to <b>3</b>, but level 4 now being a gate level, here are some possible states:</p>
+<ul>
+<li> 1, 2 , 3 , 4♛•, 5•, 6•, 7• (starting state)</li>
+<li> 1★, 2 , 3 , 4♛•, 5•, 6•, 7• (gate level 4 remains locked after solving level 1)</li>
+<li> 1★, 2★, 3★, 4♛, 5•, 6•, 7• (solving levels 2 and 3 unlocks gate level 4, but subsequent levels 5 and 6 remain locked)</li>
+<li> 1★, 2★, 3★, 4♛★, 5 , 6, 7 (solving gate level 4 unlocks three further levels)</li>
+
+
+<h2>Music</h2>
+<h3>Just add the music files!</h3>
+<p>To control a music playlist via the game bar, each music track should be added to the page inside ${v.CSI()}audio class="music"${v.CSF()} tags, placed anywhere in the page. If these tags are detected, a music button will be revealed automatically.</p>
+
+<h2>Other buttons</h2>
+<h3>"Credits" button</h3>
+<p>To display a "Credits" button, provide an HTML element with <code>id="Credits"</code>, the button will then be revealed automatically.</p>
+
+<h3>"How to play" button</h3>
+<p>To display a "How to play" button, provide an HTML element with <code>id="How-to-play"</code>, the button will then be revealed automatically.</p>
+
+<h2>Advanced customisation</h2>
+<p>For advanced customisation, you'll need to add extra javascript code lines to your game page, either as an external script or inline.</p>
+<p>The ${v.TITLE_BOLD()} javascript code was written in a way that allows very easy customisation of key aspects: functions named <code>Obtain...</code> expect to be overwritten! Below is a non-exhaustive list:</p>
+<h3>Disable screen rotation (don't enforce landscape mode)</h3>
+<p>Add <code>function ObtainXYRotateCondition(x,y){return false};</code></p>
+<h3>Disable scrolling to game on page load </h3>
+<p>Add <code>ObtainInitialScroll=false;</code>. This is useful in itch.io game pages at high screen resolutions (e.g. 1080p).</p>
+<h3>Disable console messages that appear on game load</h3>
+<p>Add <code>ObtainInitialMessages=false;</code></p>
+<h3>Change the ${v.TITLE_BOLD()} colours</h3>
+<p>To change the background colour, add <code>function ObtainBGColor(){return <b>NEW_HEXCOLOUR_AS_STRING</b>;};</code></p>
+<p>To change the foreground colour, add <code>function ObtainFGColor(){return <b>NEW_HEXCOLOUR_AS_STRING</b>;};</code></p>
+<p>Intermediate colours are deduced from these extremes.</p>
+
+
+<h2>Troubleshoting</h2>
+
+<h3>You are hosting your game at the itch.io platform and...</h3>
+<h4> ... nothing shows.</h4>
+<p>Please ensure that the ${v.TITLE_BOLD()} <b>javascript source</b> is loaded from within the ${v.CSI()}iframe${v.CSF()} containing the game, rather than from the main itch page.</p>
+<h4> ... save progress is wiped when a <b>new game version</b> is uploaded.</h4>
+<p>Please add the line <code> ObtainStorageURL(){return state.metadata.title;} </code> to your page javascript code. This will associate the save files with your game title, probably a stabler value than the default page URL (which may change when uploading new game versions).</p>
+
+<h3>You ran the bookmarklet on itch.io and it doesn't show</h3>
+<p>The bookmarklet must be run from within any iframe containing the game (otherwise it can't connect with the game).</p>
+
+<h3>You use a modified version of Puzzlescript, now broken...</h3>
+<p>The ${v.TITLE_BOLD()} overwrites exactly <b>4</b> puzzlescript functions:</p>
+<ul>
+<li><code>function doWin()</code></li>
+<li><code>function nextLevel()</code></li>
+<li><code>function doSetupTitleScreenLevelContinue()</code></li>
+<li><code>function level4Serialization()</code></li>
+</ul>
+
+<p>If your Puzzlescript version relies on changes to any of these functions, it's likely those particular changes be erased. You're welcome to ${v.A_GB_FILE_ISSUE()}, so it can be taken a look at.</p>
+
+<h3>After publishing a game with the game bar, you changed the level order and now worry the player's save files might have become jumbled</h3>
+<p>Adding or reordering levels may indeed change the way a save file is interpreted. For example, suppose the following save file: 1★, 2★, 3★, 4, 5★, 6 (star denotes a beaten level) will be interpreted after the following changes:<p>
+<ul>
+<li> <b>Adding several final levels</b> (levels 7,8,9): 1★, 2★, 3★, 4, 5★, 6, 7, 8, 9 ${v.L_OK()};</li>
+<li> <b>Adding an intermediate level</b> (level 2.5): 1★, 2★, 2.5★, 3, 4★, 5, 6 ${v.L_PROBLEM()};</li>
+<li> <b>Reordering levels (worst case)</b> (switching levels 3 and 4): 1★, 2★, 4★, 3, 5★, 6 ${v.L_PROBLEM()};</li>
+<li> <b>Reordering levels (best case)</b> (switching levels 1 and 2): the save file becomes 2★, 1★, 3★, 4, 5★, 6 ${v.L_OK()}.</li>
+</ul>
+<p>With a jumbled save file, players can still play normally, while noticing that their progress changed for no apparent reason.</p> 
+
+<h3>After publishing a game with the game bar, you added/removed messages between the levels and now worry the player's save files might have become corrupt</h3>
+<p>Since v.5, adding level messages won't affect the saved files. Prior to v.4, players would probably have lost their progress as a result.</p>
+
+<h3>You found a different problem.</h3>
+<p>Please ${v.A_GB_FILE_ISSUE()} so it can be fixed sooner.</p>
+
+
+<h2>Bookmarklet</h2>
+<p>The ${v.TITLE_BOLD()} can also be added in real time to any online puzzlescript game with this handy <a href="javascript:
+var jsCode=document.createElement('script');
+jsCode.setAttribute('src','https://pedropsi.github.io/game-bar-source/GameBar/GameBar.js');
+jsCode.setAttribute('type','text/javascript');
+document.body.appendChild(jsCode);
+console.log('Bookmaklet run!');void 0">Game Bar bookmarklet</a>!</p>
+<p>Simply add the bookmarklet above to your bookmarks, then on a game page of your choice run (${v.CLICK()} on) the new bookmarklet to add the ${v.TITLE_BOLD()} to that ${v.A_SELECTED_GAME()}.</p>
+
+${v.BOOKMARKLET_BROWSER_TEXT()}
+
+
+
+<h2>Contributions</h2>
+<h3>Special thanks</h3>
+<p>To ${v.MINOTALEN()} for very active ongoing collaboration!</p>
+<p>To ${v.CUBESTUDIO()} for very insightful UX advice and other important suggestions.</p>
+<p>To ${v.KNAUF()} for using the bar, which resulted in diverse customisation improvements.</p>
+<p>To ${v.BUILDER()} for a useful suggestion.</p>
+
+<h3>Would you like to contribute?</h3>
+<p>Head to the official ${v.A_GB_REPOSITORY()}, submit a ${v.A_GB_PULL()} or ${v.A_GB_FILE_ISSUE()}.</p>
+
+
+<h2>FAQ</h2>
+<h3>How is ${v.TITLE_BOLD()}'s different from available alternatives?</h3>
+<p>${v.TITLE_BOLD()} was designed to be <b>a 1-step install</b>, <b>beautiful</b>, <b>intuitive</b> and <b>customisable</b>.</p>
+<p>Also, the ${v.TITLE_BOLD()} now supports hints and has a fullscreen mode! How cool is that?</p>
+
+<p>Full list of features:</p>
+<ul>
+<li>A level selector;</li>
+<li>Fullscreen mode;</li>
+<li>Auto-landscape mode (screen rotation);</li>
+<li>Hints system, including text and image hints;</li>
+<li>Mute/unmute control for a BGM playlist (optional);</li>
+<li>Non-linear level navigation:
+	<ul>
+		<li>All levels must be completed (no matter the order) before the game finishes;</li>
+		<li>Level unlocking:
+			<ul>
+			<li><b>N-level lookahead</b>: players can access up the following N unsolved levels, further levels are "locked";</li>
+			<li>Multiple <b>Gate levels (♛)</b>: gate levels only show up after all previous levels were beaten and lock further levels;</li>
+			</ul>
+		</li>
+	</ul>
+</li>
+<li>A rich set of keyboard shortcuts</li>
+</ul>
+
+<p>Notable alternatives to the ${v.TITLE_BOLD()} are listed under ${v.A_GAME_TOOLS()}.</p>
+
+<h3>Can you use ${v.TITLE_BOLD()} for free?</h3>
+<p>Yes, it's under a ${v.LICENSE_MIT()} license.</p>
+
+<h3>What are the differences between the shared ${v.TITLE_BOLD()} and the one <b>live</b> at the ${v.SITE_NAME()}?</h3>
+<p>The <b>live</b> ${v.TITLE_BOLD()} at the ${v.SITE_NAME()} is the cutting-edge, sometimes experimental version. As soon as the changes are consolidated, they will be added to the official ${v.TITLE_BOLD()} shared in this page. Any functions that depend on the ${v.SITE_NAME()}'s infrastructure to work or that lack general interest won't be included into the official ${v.TITLE_BOLD()}.</p>
+
+<h3>Does the ${v.TITLE_BOLD()} level selector handle checkpoints?</h3>
+<p>Only in case all checkpoints are concentrated in a single level (e.g. a open world map such as in ${v.A_TIARADVENTUR()}). Support for multiple levels with checkpoints is not planned, unless you ${v.A_GB_FILE_ISSUE()}.</p>
+
+<h3>Does the ${v.TITLE_BOLD()} hint system handle checkpoints?</h3>
+<p>No, sorry! But if this would make a difference, please ${v.A_GB_FILE_ISSUE()}.</p>
+
+${v.FEEDBACK()}
+
+`};try{v={...v,...Post}}catch{v=Post}</script>

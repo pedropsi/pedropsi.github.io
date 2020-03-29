@@ -1,0 +1,10 @@
+﻿<script src="codes/data-transfer.js"></script>
+<script src="data/page.js"></script>
+<script id="post">var Post={POST:()=>`
+
+<h2>About the ${v.TITLE()}</h2>
+<p>Any visitor to the ${v.SITE_NAME()} may leave a courteous message in this ${v.TITLE()}, live since the 25th of July, 2018. What are you waiting for?</p>
+${v.GUESTBOOK_ADD()}
+<p><b>NB:</b> refresh the page to see your message.</p>
+
+`};try{v={...v,...Post}}catch{v=Post}</script>
