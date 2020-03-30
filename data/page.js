@@ -30,7 +30,7 @@ function BuildCMSPage(){
 	var LOGO=v.LOGO_SVG();
 	
 	IndexTitles();
-	AddTitleIndex();
+	AddTitleIndex(".main .whiteboard");//First whiteboard where main content is
 
 	var sources=["codes/communication.js","codes/analytics.js"];
 	if(v.POSTSCRIPT)

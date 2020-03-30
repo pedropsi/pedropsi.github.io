@@ -1151,7 +1151,7 @@ function IndexTitles(){
 }
 
 function PageIndexHTML(indexArray){
-	return "<div class='index'>"+indexArray.map(IndexItemHTML).join("\
+	return "<div class='index'><a class='index-link h1' id='Table-of-Contents' href='#Table-of-Contents' onclick='ShowHideIndex()'>Table of contents</a>"+indexArray.map(IndexItemHTML).join("\
 	")+"</div>";
 }
 
@@ -1160,12 +1160,8 @@ function IndexItemHTML(e){
 		return "";
 	else{
 		var depth=e.getAttribute("data-index-depth")||"";
-		if(depth==="h1")
-			return "<a class='index-link "+depth+"' href='#"+e.id+"' onclick='ShowHideIndex()'>Table of contents</a>";
-		else{
-			var title=Shorten(e.textContent,50);
-			return "<a class='index-link "+depth+"' href='#"+e.id+"'>"+title+"</a>";
-		}
+		var title=Shorten(e.textContent,50);
+		return "<a class='index-link "+depth+"' href='#"+e.id+"'>"+title+"</a>";
 	}
 }
 
@@ -1180,12 +1176,12 @@ function Shorten(string,maxchars){
 	}
 }
 
-function AddTitleIndex(){
-	var indexArray=GetElements(".index-item");
+function AddTitleIndex(section){
+	var indexArray=GetElements(".index-item",section);
 	if(indexArray.length<=1)
 		return;
-	RemoveElement(".index");
-	PrependElement(PageIndexHTML(indexArray),".prose");
+	RemoveElement(".index",section);
+	PreAddElement(PageIndexHTML(indexArray),section);
 	Class(".h1","collapse");
 	ShowHideIndex();
 }
