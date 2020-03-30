@@ -218,6 +218,7 @@ MONO_OUT					:	(post)=>	`<div class="main">${v.NAVBAR()}${post}</div>${v.FOOTER_
 SECTION_OUT					:	(content)=>	`<section class="section"><div class="container">${content}</div></section>`,
 
 PAGE_TITLE					:	()=>	`<h1 class="title">${v.TITLE()}</h1>`,
+SHORTNAME					:	()=>	v.TITLE(),
 
 WHITEBOARD_OUT				:	(post)=>	`<div class="whiteboard"><div class="text ${v.STYLE()} post" id="post">${post}</div></div>`,
 WHITEBOARD					:	()=>		v.SECTION_OUT(v.POST_PLUS_LABELS(v)),
