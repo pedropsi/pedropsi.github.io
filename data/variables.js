@@ -367,14 +367,14 @@ L_EXP						:	()=>	LabelHTML("Experimental","Problem"),
 
 
 MANIFEST					:	()=>"",
-PWA_MANIFEST				:	()=>	`<link rel="manifest" id="manifest" href='data:application/manifest+json,${v.PWA_MANIFEST_CONTENT()}'/>`,
+PWA_MANIFEST				:	()=>	`<link rel="manifest" id="manifest" href='data:application/manifest+json,${console.log(v.PWA_MANIFEST_CONTENT()),v.PWA_MANIFEST_CONTENT()}'/>`,
 PWA_MANIFEST_CONTENT		:	()=>	`{${v.PWA_NAME()},${v.PWA_DISPLAY()},${v.PWA_ICONS()},${v.PWA_DESC()},${v.PWA_LANG()},${v.PWA_SCOPE()},${v.PWA_WORKER()}}`,
 
 DESCRIPTION					:	()=>	v.PARSER_MARKSHORT(v.POST()),
 WORD_LIMIT_SHORT			:	()=>300,
 
-PARSER_MARKSHORT			:(txt)=> txt.slice(0,v.WORD_LIMIT_SHORT()),
-PARSER_UNDERSCORE			:(txt)=> txt.replace(/\s+/ig,"_"),
+PARSER_MARKSHORT			:(txt)=> StripHTML(txt).slice(0,v.WORD_LIMIT_SHORT()),
+PARSER_UNDERSCORE			:(txt)=> StripHTML(txt).replace(/\s+/ig,"_"),
 
 ONE_LINER_U					:	()=>	v.PARSER_UNDERSCORE(v.ONE_LINER()),
 TITLE_BY_U					:	()=>	v.PARSER_UNDERSCORE(v.TITLE_BY()),

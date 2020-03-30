@@ -510,6 +510,27 @@ function AddRight(txt,symbol,n){
 	return PadRight(txt,symbol,txt.length+n);
 }
 
+
+//Stripping
+function StripHTML(string){
+	return FixedPoint(t=>t
+		.replace(/\<img[^\<\>]*\>/ig,"")
+		.replace(/\<(.*)[^\<\>]*\>([^\<\>]*)<\/\1\>/ig,"$2")
+	,string)
+}
+
+//Shortening
+function Shorten(string,maxchars){
+	if(!string)
+		return "";
+	else{
+		if(string.length<=maxchars)
+			return string;
+		else
+			return string.split("").splice(0,maxchars-3).join("")+"...";
+	}
+}
+
 //Sentence making
 function Enumerate(StringArray){
 	if(!StringArray.length)
@@ -1165,16 +1186,7 @@ function IndexItemHTML(e){
 	}
 }
 
-function Shorten(string,maxchars){
-	if(!string)
-		return "";
-	else{
-		if(string.length<=maxchars)
-			return string;
-		else
-			return string.split("").splice(0,maxchars-3).join("")+"...";
-	}
-}
+
 
 function AddTitleIndex(section){
 	var indexArray=GetElements(".index-item",section);
