@@ -3246,7 +3246,8 @@ function ConsoleMessageHTML(message,mID,mclass){
 	return '<div class="message '+mclass+'" id='+mID+'>'+message+'</div>';
 }
 
-function TextReadDuration(textstring){ //by counting number of words, 200ms per word (tagscount but won't hopefully have too many spaces)
+function TextReadDuration(textstring){ //by counting number of words, 250ms per word
+	var textstring=textstring.replace(/\<(span|svg).*\<\/\1\>/ig,""); //remove svg and span contents (text icons)
 	return Min(Max(1000,(textstring.split(" ").length)*250),10000);
 }
 
