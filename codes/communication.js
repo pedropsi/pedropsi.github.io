@@ -1037,7 +1037,8 @@ function RequestContact(){
 		destination:"Contact",
 		qtargetid:"contact-request",
 		qdisplay:LaunchEmbed,
-		closeonblur:false
+		closeonblur:false,
+		thanksmessage:"★ Thank you. Please await your reply! ★"
 	});
 }
 
