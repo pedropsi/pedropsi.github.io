@@ -40,6 +40,7 @@ function BuildCMSPage(){
 
 function PageFeatures(){
 	DynamicTables();
+	StartAnalytics();
 }
 
 ListenOnce("load",LoadCMS);

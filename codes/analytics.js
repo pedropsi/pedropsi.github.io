@@ -47,7 +47,7 @@ function DataUnit(datatype){
 					window.screen.width,
 					window.screen.colorDepth].join("x"),
 		"agent":window.navigator.userAgent,
-		"from":IsInnerLink(referrer)?FullPageIdentifier(referrer):referrer,
+		"from":IsInnerLink(referrer)?PageIdentifier(referrer):referrer,
 		"campaign":source?source:"none"
 		});		
 }
@@ -61,7 +61,7 @@ function FingerprintAction(type,target){
 }
 
 function FingerprintLink(ref){
-	var p=FullPageIdentifier(ref);
+	var p=PageIdentifier(ref);
 	if(p==="game-console")
 		p=p+"?game="+PageSearch("game",ref);
 	
@@ -168,7 +168,7 @@ function AnalyticsClearance(){
 
 function StartAnalytics(){
 	if(AnalyticsClearance()){
-		ListenOnce('DOMContentLoaded',RegisterOpen);
+		RegisterOpen();
 		MarkElements(".button",ElementClicked);
 		MarkElements(".mosaic",MosaicToggled);
 		MarkElements("#NightMode",NightModeToggled);
@@ -178,8 +178,6 @@ function StartAnalytics(){
 	////AnonimiseLinks();
 	};
 }
-
-StartAnalytics();
 
 //////////////////////////////////////////////////////////////////////
 Shout("analytics")
