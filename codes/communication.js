@@ -480,6 +480,21 @@ var DESTINATION_COMMENT={
 		}}
 	}
 	
+
+var DESTINATION_CONTACT={
+	url:DESTINATION_HOF.url,
+	headers:"[\"email\",\"name\",\"identifier\",\"message\",\"subject\",\"id\"]",
+	sheet:"Contact",
+	name:"Contact",
+	Data:function(qid){return{
+		identifier:PageIdentifier(),
+		message:FindData("message",qid),
+		name:FindData("name",qid),
+		email:FindData("email",qid),
+		subject:FindData("subject",qid)
+		}}
+	}
+
 var DESTINATION_SUBSCRIPTION={
 	url:DESTINATION_FEEDBACK.url,
 	headers:"[\"name\",\"address\"]",
@@ -571,6 +586,7 @@ function RegisterDestination(DESTINATION){
 [	DESTINATION_HOF,
 	DESTINATION_GUESTBOOK,
 	DESTINATION_COMMENT,
+	DESTINATION_CONTACT,
 	DESTINATION_FEEDBACK,
 	DESTINATION_SUBSCRIPTION,
 	DESTINATION_ORDER,
@@ -1018,7 +1034,7 @@ function RequestContact(){
 		}]
 	];
 	RequestDataPack(DFOpts,{
-		destination:"Feedback",
+		destination:"Contact",
 		qtargetid:"contact-request",
 		qdisplay:LaunchEmbed,
 		closeonblur:false
