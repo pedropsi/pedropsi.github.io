@@ -1065,12 +1065,26 @@ function StartNightMode(){
 function ActivateNightMode(){
 	Memory("nightmode",true);
 	Class(document.body,"nightmode");
+	if(!Memory("nightmode_on")){
+		Memory("nightmode_on",true);
+		ConsoleAddMany([
+		"Night mode active.",
+		`Find the ${ObtainSymbol("sun")} to change.`
+		]);
+	}
 	GetElement("NightMode").innerHTML=ObtainSymbol("sun");
 }
 
 function UnActivateNightMode(){
 	Memory("nightmode",false);
 	UnClass(document.body,"nightmode");
+	if(!Memory("nightmode_off")){
+		Memory("nightmode_off",true);
+		ConsoleAddMany([
+			`Bright mode active.`,
+			`Find the ${ObtainSymbol("moon")} to revert.`
+		]);
+	}
 	GetElement("NightMode").innerHTML=ObtainSymbol("moon");
 }
 
