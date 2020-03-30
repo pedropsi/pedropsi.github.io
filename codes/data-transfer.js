@@ -2972,14 +2972,18 @@ function SubmitValidAnswer(DP){
 }
 
 function InvalidateAnswer(DF){
+	var filled=FindData(DF.qfield,DF.pid)!=="";
 	var validator=DF.qvalidator(DF);
-	var invalid=(DF.qrequired&&!validator.valid);
+	var invalid=((DF.qrequired||filled)&&!validator.valid);
 	var qid=DF.qid;
 	var errorid="error-"+qid;
 	RemoveElement(errorid);
 	if(invalid){
 		FocusElement(qid);
-		AppendElement(ErrorHTML(validator.error,errorid),qid);
+		var errormessage=validator.error;
+		if(!DF.qrequired)
+			errormessage=errormessage+" Or leave this field empty instead...";
+		AppendElement(ErrorHTML(errormessage,errorid),qid);
 	}
 	return invalid;
 }
