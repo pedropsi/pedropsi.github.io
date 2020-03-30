@@ -2,6 +2,12 @@ function InString(string,n){
 	return string.replace(n,"")!==string;
 }
 
+function Today(){return new Date()};
+function Year(date){
+	var date=date||Today();
+	return Number(date.toLocaleDateString().replace(/.*\//,""));
+}
+
 function ReadGameData(){
 	var data=false;
 	if(InString(document.URL,"itch.io")){
@@ -69,6 +75,8 @@ function ReadGameData(){
 			};
 		}
 	}
+
+	data["year-edit"]=String(Year());
 	return data;
 };
 
