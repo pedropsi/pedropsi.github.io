@@ -99,6 +99,7 @@ HEAD_ICONS					:	()=>	`<link href="${v.FAVICON32()}" rel="icon" type="image/png"
 HEAD_THEME					:	()=>	`<meta name="theme-color" content="${v.THEMECOLOUR()}">`,
 
 TITLE						:	()=>	Capitalise(PageIdentifier().replace("-"," ")),
+LINK						:	()=>	PageIdentifier(),
 HEAD_DATA_GRAPH				:	()=>	`${v.HEAD_TITLE()}${v.HEAD_DESCRIPTION()}${v.HEAD_IMAGE()}${v.HEAD_LINK()}${v.HEAD_TYPE()}`,
 HEAD_TITLE					:	()=>	`<title>${v.TITLE()}</title><meta property="og:title" content="${v.TITLE()}"/>`,
 HEAD_DESCRIPTION			:	()=>	`<meta name="description" content="${v.DESCRIPTION()}"/><meta property="og:description" content="${v.DESCRIPTION()}"/>`,
