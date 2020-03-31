@@ -340,7 +340,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Direct",				
 
 	"Reverse",				//Positional,
-	"Alternate",			//Positional,
+//	"Alternate",			//Positional,
 	"Consonant",			//Positional, Alphabetical
 	"Follow",				//Positional, Retroactive
 	"Second",				//Retroactive
@@ -370,6 +370,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Yellow",				//Language, Knowledge, Retroactive
 	"Dividi",				//Retroactive, Mapping, Language
 
+	"Anagram",				// Word, Mapping, Retroactive
 	"Nucleus"				//Syllabe, Word, Language, Mapping, Knowledge, Retroactive
 	];
 
@@ -388,7 +389,7 @@ var LevelActions={
 		InputLetter(M);
 	},
 	"Second":Second,
-	"Alternate":Alternate,
+//	"Alternate":Alternate,
 	"Follow":function (L){
 		if(Letters.array.length>=1){
 			var last=Last(Letters.array);
@@ -482,6 +483,7 @@ var LevelActions={
 	},
 	"-----.-.....":Morse,
 	"Yellow":Yellow,
+	"Anagram":Anagram,
 	"Nucleus":Nucleus
 }
 
@@ -524,6 +526,39 @@ function Nigeria(L){
 		
 		PlaceEndCaret();
 	}
+
+function Anagram(L){
+	if(!Anagram.partial)
+		Anagram.partial="";
+	if(!Anagram.used)
+		Anagram.used=[];
+	if(!In("ANAGRAM".split(""),L)){
+		PlaceEndCaret();
+		return;
+	}
+	else{
+		InputLetter(L+"*");
+		Anagram.partial=Anagram.partial+L;
+		var anagr=Anagram.partial.toLowerCase();
+		console.log(Anagram.partial)
+
+		if(In(Anagrams,anagr)&&!In(Anagram.used,anagr)){
+			var S=Anagrams[anagr].toUpperCase();
+			DeleteLetters(Anagram.partial.length);
+			Anagram.partial="";
+			Anagram.used.push(anagr);
+			InputLetter(S);
+		}
+		
+		if(anagr.length>4){
+			DeleteLetters(Anagram.partial.length);
+			Anagram.partial="";
+			
+		}
+		PlaceEndCaret();
+			return;
+	}
+}
 
 function Nucleus(L){
 		if(!Nucleus.partial)
@@ -616,7 +651,7 @@ function Second(L){
 	InputLetter(L);
 }
 
-
+/*
 function Alternate(L){
 	if(!Alternate.n)
 		Alternate.n=0;
@@ -631,6 +666,7 @@ function Alternate(L){
 	
 	Alternate.n=1-Alternate.n;
 }
+*/
 
 function Consonant(L){
 	if(!Consonant.before)
@@ -1394,6 +1430,50 @@ var Hiragana={
 'pよ':'ぴょ'
 };
 
+var Anagrams={
+/*"agama":"a",
+"grama":"a",
+"grana":"a",
+"marga":"a",*/
+"agar":"r",
+"agma":"a",
+"anna":"a",
+"gama":"a",
+"gnar":"r",
+"gram":"m",
+"gran":"n",
+"maar":"r",
+"mana":"a",
+"mara":"a",
+"maga":"a",
+"raga":"a",
+"rang":"g",
+/*"aga":"a",
+"ama":"a",
+"ana":"a",
+"arm":"m",
+"gam":"m",
+"gan":"n",
+"gar":"r",
+"mag":"g",
+"man":"n",
+"mar":"r",
+"nag":"g",
+"nam":"m",
+"rag":"g",
+"ram":"m",
+"ran":"n",
+"aa":"a",
+"ag":"g",
+"am":"m",
+"an":"n",
+"ar":"r",
+"ma":"a",
+"na":"a"*/
+}
+
+
+
 
 var Nuclei={
 'actinium':'ac',
@@ -1678,6 +1758,7 @@ var LetterDisplay={
 	},
 	"Dividi":LetterDraftHTML,
 	"Nucleus":LetterDraftHTML,
+	"Anagram":LetterDraftHTML,
 	"Yellow":LetterDraftHTML,
 	"Nigeria":LetterDraftHTML
 }
@@ -1835,11 +1916,13 @@ function LoadLevelState(levelstate){
 	Letters.array=Clone(levelstate['letters']);
 	Caret(levelstate['caret']);
 	Second.n=levelstate['Second'];
-	Alternate.n=levelstate['Alternate'];
+//	Alternate.n=levelstate['Alternate'];
 	Consonant.before=levelstate['Consonant'];
 	Nucleus.partial=levelstate['Nucleus'];
+	Anagram.partial=First(levelstate['Anagram']);
+	Anagram.used=Rest(levelstate['Anagram']);
 	Nigeria.freeze=levelstate['Nigeria'];
-	Yellow.colour=levelstate['Nigeria'];
+	Yellow.colour=levelstate['Yellow'];
 	Nokia.last=levelstate['Nokia 1998'];
 	UpdateLevelSecretly();
 }
@@ -1853,8 +1936,9 @@ function LevelZeroState(){
 		'letters':[],
 		'caret':0,
 		'Second':0,
-		'Alternate':0,
+//		'Alternate':0,
 		'Consonant':false,
+		'Anagram':[""],
 		'Nucleus':[],
 		'Nigeria':false,
 		'Yellow':false,
@@ -1868,9 +1952,10 @@ function LevelState(){
 		'letters':Clone(Letters()),
 		'caret':Caret()[0],
 		'Second':Second.n?Second.n:0,
-		'Alternate':Alternate.n?Alternate.n:0,
+//		'Alternate':Alternate.n?Alternate.n:0,
 		'Consonant':Consonant.before?Consonant.before:false,
 		'Nucleus':Nucleus.partial?Clone(Nucleus.partial):[],
+		'Anagram':[Anagram.partial?Anagram.partial:""].concat(Anagram.used?Anagram.used:[]),
 		'Nigeria':Nigeria.freeze?Nigeria.freeze:false,
 		'Yellow':Yellow.colour?Yellow.colour:false,
 		'Nokia 1998':Nokia.last?Nokia.last:false
