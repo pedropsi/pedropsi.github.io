@@ -107,6 +107,7 @@ body{
 } 
 
 .nightmode div, .nightmode{
+	
 	--white:rgba(40,10,0,var(--t));
 	--smokewhite:rgba(50,10,0,var(--t));
 	--darkblue:rgba(255,100,50,var(--t));
@@ -901,7 +902,7 @@ tr:active .editTD{
 }
 
 .modal{	
-	--t:0.5;
+	--t:0.75;
 	position:fixed;
 	left:0;
 	top:0;
