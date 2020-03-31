@@ -6,10 +6,6 @@ function EnableTestMode(){
 	LoadAsync("test-behaviour","codes");
 }
 
-//HOF & Guestbook
-function DisplayFullURL(c){
-	return "https://script.google.com/macros/s/"+c+"/exec";
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Service workers

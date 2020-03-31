@@ -1349,6 +1349,9 @@ function ReplaceSVG(svg,source){
 function Online(){return navigator.onLine};
 function Offline(){return !Online()};
 
+//External resources
+function MacroURL(c){return "https://script.google.com/macros/s/"+c+"/exec";};
+
 //Fetch data from url
 function LoadData(url,SuccessF,header){
 	var rawFile=new XMLHttpRequest();
