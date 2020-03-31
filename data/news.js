@@ -1,4 +1,10 @@
 var NEWS={
+	N_37:{
+DATE:"2020-03-31",
+HEADER:()=>"One more level",
+PIECE:()=>`
+<p>One new level to replace an older one, keeping the total number constant.</p>
+	`,ID:"puzzle-type"},
 	N_36:{
 DATE:"2019-11-20",
 HEADER:()=>"On-screen keyboard",
