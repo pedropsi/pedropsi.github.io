@@ -230,7 +230,7 @@ WHITEBOARD_SIMPLE			:	()=>		v.SECTION_OUT(v.PAGE_TITLE()+v.WHITEBOARD_OUT(v.CONT
 
 LABELS						:	(page)=>	`<div class="tags buttonrow">${v.LABEL_DATE(page)}${v.LABEL_TAGS(page)}</div>`,
 LABEL_DATE					:	(page)=>	!page.DAY?"":`<a class="tag button" href="posts-by-date.html"><time datetime="${v.DATE(page)}">${v.DATE_TEXT(page)}</time></a>`,
-LABEL_TAGS					:	(page)=>	page.TAGS().map(v.LABEL_TAG).join("\n"),
+LABEL_TAGS					:	(page)=>	page.TAGS?page.TAGS().map(v.LABEL_TAG).join("\n"):"",
 LABEL_TAG					:	(tag)=>		`<a class="tag button" href="tag.html?search=${tag}">${tag}</a>`,
 
 FOOTER_AREA					:	()=>	`<footer class="footer">${v.FOOTER_LINES()}</footer>`,
