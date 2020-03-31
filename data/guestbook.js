@@ -1,15 +1,21 @@
-DisplayGuestbook();
-
 //////////////////////////////////////////////////
 // Guestbook
 function DisplayGuestbook(){
-	OverwriteData(DisplayFullURL("AKfycbzbI9ht52-sWmNcVi4SpQvjhyTtEdSJxTPpfqwuSDTPlQfJJfc"),"guestbook-area",MakeGuestbook);
+	LoadData(MacroURL("AKfycbzbI9ht52-sWmNcVi4SpQvjhyTtEdSJxTPpfqwuSDTPlQfJJfc"),DeployGuestbook);
 }
+
+function DeployGuestbook(jsonstring){
+	var gb=MakeGuestbook(jsonstring);
+	var targetID="guestbook-area";
+	ReplaceChildren(gb,targetID);
+};
+
 
 function MakeGuestbook(jsonstring){
 	var dataarray=JSON.parse(jsonstring);
 	function MakeComment(dataline){
-		if(dataline[0]==="") return "";
+		if(dataline[0]===""||(dataline[1]!==PageTitle()&&PageTitle()!=="Guestbook")) 
+			return "";
 		var au=SafeString(dataline[2]);
 		var id=SafeString(dataline[4]);
 		var rid=NextReplyMessageId(id,dataarray); //may duplicate in high traffic times
@@ -56,3 +62,4 @@ function NextReplyMessageId(id,dataarray){
 	return id+"»"+String(childrenThreadIds.length+1);
 }
 
+Shout("guestbook")

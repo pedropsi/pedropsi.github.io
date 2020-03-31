@@ -5,17 +5,19 @@ var DisplayIDs={
 	"hall-of-fame":"AKfycbx3VJTScX-y6L3I4KMql10hVBx_MpjoDfocNHzhR9nuRAQkedFi"
 };
 
-function MakeHOF(jsonstring){
-	return LoadTableHTML(jsonstring,Identity,["Date","Game","Winner","Score"])
+var identifier=PageIdentifier();
+
+function DeployHOF(jsonstring){
+	var table=LoadTableHTML(jsonstring,Identity,["Date","Game","Winner","Score"]);
+	var targetID=identifier+"-area";
+	ReplaceChildren(table,targetID);
+	DynamicTables()
 };
 
-function DisplayTable(){
-	var identifier=PageIdentifier();
-	if(!In(DisplayIDs,identifier))
-		return;
-	var url=DisplayFullURL(DisplayIDs[identifier]);
-	OverwriteData(url,identifier+"-area",MakeHOF);
-	ListenOnce("updated-"+identifier+"-area",DynamicTables);
+function DisplayHOF(){
+	var url=MacroURL(DisplayIDs[identifier]);
+	LoadData(url,DeployHOF);
 }
 
-DisplayTable()
+if(In(DisplayIDs,identifier))
+	DisplayHOF();

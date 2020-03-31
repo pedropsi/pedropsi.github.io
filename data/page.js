@@ -32,13 +32,20 @@ function BuildCMSPage(){
 	IndexTitles();
 	AddTitleIndex(".main .whiteboard");//First whiteboard where main content is
 
-	var sources=["codes/communication.js","codes/analytics.js"];
-	if(v.POSTSCRIPT)
-		sources=sources.concat(v.POSTSCRIPT());
+	var sources=["codes/communication.js","data/guestbook.js","codes/analytics.js"];
 	LoadSources(sources,PageFeatures);
+
+	if(v.POSTSCRIPT)
+		LoadSources(v.POSTSCRIPT(),Identity);
+
 }
 
 function PageFeatures(){
+	DisplayGuestbook();
+	PageFeaturesDOM();
+}
+
+function PageFeaturesDOM(){
 	DynamicTables();
 	StartAnalytics();
 }

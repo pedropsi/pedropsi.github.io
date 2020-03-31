@@ -115,7 +115,8 @@ SHEET_URL_RECORD			:	()=>	`${v.SHEET_URL()}e/2PACX-1vQwd7CTU3k1HsrT4fPLljY9HSW5e
 SHEET_URL_GAMES_LIST		:	()=>	`${v.SHEET_URL()}e/2PACX-1vQIyh0-r33j0GqPOAtttQEP-MiOZ2Zk_hggfcFMH5_hiclaUCZu30MRaO58h1Hty9UGWefP25gBB56a/pubhtml?gid=`,
 
 DISPLAY_LEGACY				:(idcode)=>`${v.SHEET_URL_RECORD()}${idcode}${v.SHEET_OPT()}`,
-DISPLAY_EXTERNAL			:	()=>	`<div id="${v.LINK()}-area" class="external-area">${v.DISPLAY_IFRAME()}</div>`,
+DISPLAY_EXTERNAL_OLD			:	()=>	`<div id="${v.LINK()}-area" class="external-area">${v.DISPLAY_IFRAME()}</div>`,
+DISPLAY_EXTERNAL			:	()=>	`<div id="${v.LINK()}-area" class="external-area">Loading...</div>`,
 DISPLAY_IFRAME				:	()=>	`<div class="section"><iframe src="${v.DISPLAY_LEGACY(v.DISPLAY_LEGACY_CODE())}" ${v.IFRAME_OPTS()}></iframe></div>`,
 
 DISPLAY_SCRIPT				:	()=>	`<script>DisplayTable()</script>`,
@@ -123,6 +124,7 @@ DISPLAY_SCRIPT				:	()=>	`<script>DisplayTable()</script>`,
 AREA_PRE					:	()=>	`<div class="container">`,
 TABULAR_AREA				:	()=>	`${v.AREA_PRE()}${v.DISPLAY_EXTERNAL()}${v.POST_PLUS_LABELS()}</div>`,
 GUESTBOOK_AREA				:	()=>	`${v.AREA_PRE()}<h1 class="title">${v.TITLE()}</h1><div class="whiteboard"><div class="text ${v.STYLE()} post" id="post">${v.POST()}</div></div>${v.LABELS(v)}${v.DISPLAY_EXTERNAL()}</div>`,
+GUESTBOOK_COMMENTS			:	()=>	`<div id="guestbook-area"></div>`,
 
 
 BUTTON_SOON					:	()=>	`<div>Coming soon...</div>`,
@@ -209,7 +211,7 @@ HTML_OUT					:(content)=>	`${v.HTML_DOCTYPE()}${v.HEAD()}<body class="body" id="
 
 PAGE_SIMPLE					:	()=>	v.MONO_OUT(v.WHITEBOARD_SIMPLE()),
 PAGE_BARE					:	()=>	v.MONO_OUT(v.CONTENT()),
-PAGE_POST					:	()=>	v.MAIN_OUT(v.WHITEBOARD())+v.SECTION_CHANGELOG()+v.FOOTER_AREA(),
+PAGE_POST					:	()=>	v.MAIN_OUT(v.WHITEBOARD())+v.SECTION_CHANGELOG()+v.SECTION_OUT(v.GUESTBOOK_COMMENTS())+v.FOOTER_AREA(),
 
 PAGE_UNSTYLED				:	()=>	`${v.HTML_DOCTYPE()}${v.HEAD_BARE()}<body class="body" id="${v.LINK()}">${v.CONTENT()}${v.FOOTER_AREA()}</body></html>`,
 

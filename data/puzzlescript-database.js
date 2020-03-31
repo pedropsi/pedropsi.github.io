@@ -1,83 +1,99 @@
 //////////////////////////////////////////////////////////////////////
 //Starter
 
-ListenOnce('puzzlescript-database-game',StartPGD);
-ListenOnce('puzzlescript-database-component',StartPGD);
+var targetID=Posfix(PageIdentifier(),"-area");
+var databaseTitle=PageTitle()||Capitalise(PageIdentifier());
+var PDGURL="https://script.google.com/macros/s/AKfycbyp6yZrpw7TIiOE8fg0wUkI0SMtTWUpYlki53OGLg5Pgc6ppLM/exec";
 
-function StartPGD(){
 if(PageIdentifier()==="puzzlescript-games-database"){
-	//var pgdtable=v.PGD();
-	GetElement(".main .section .container").innerHTML=v.PGD();
-	LoadPGDTable();
-}
-if(PageIdentifier()==="game-tools"){
-	GetElement("puzzlescript-database-component").innerHTML=v.PCD();
-	LoadPGDTable();
-}
-
-if(PageIdentifier()==="game-console"){
-	LoadPGD();
-	if(PageSearch("game")===""){
-		LoadGameHTML(GameFrameHTML());
-		ListenOnce("LoadPGD",LoadPGDMenu);
+	var headers=["Title","Author","Date"];
+	var RowGenerator=GameRowHTML;
+	function StartPGD(){
+		GetElement(".main .section .container").innerHTML=v.PGD();
+		LoadPGDTable();
 	}
-	else if(PageSearch("submit")!==""){
-		//auto-sub
-		function AutoSub(){
-			LoaderInFolder("codes/game")("puzzlescript-tagger");
+	ListenOnce('puzzlescript-database-game',StartPGD);
+}
+else if(PageIdentifier()==="game-tools"){
+	var headers=["Title","Author","Type","Tags"];
+	var RowGenerator=PrototypeExampleRowHTML;
+	function StartPGD(){
+		GetElement("puzzlescript-database-component").innerHTML=v.PCD();
+		LoadPGDTable();
+	}
+	ListenOnce('puzzlescript-database-component',StartPGD);
+}
+else if(PageIdentifier()==="game-console"){
+	function StartPGD(){
+		LoadPGD();
+		if(PageSearch("game")===""){
+			LoadGameHTML(GameFrameHTML());
+			ListenOnce("LoadPGD",LoadPGDMenu);
 		}
-		DelayUntil(GameInfoRetrieved,AutoSub);
+		else if(PageSearch("submit")!==""){	//auto-submission
+			function GameInfoRetrieved(){return typeof state!=="undefined"&&state.levels.length>0;};
+			function AutoSub(){LoaderInFolder("codes/game")("puzzlescript-tagger");};
+			DelayUntil(GameInfoRetrieved,AutoSub);
+		}
+		else
+			ListenOnce("LoadPGD",function(){DelayUntil(GameInfoRetrieved,AutoCheckYear)});
 	}
-	else
-		ListenOnce("LoadPGD",function(){DelayUntil(GameInfoRetrieved,AutoCheckYear)});
 }
-}
-/*
-if(PageIdentifier()==="game-editor"){
+/*else if(PageIdentifier()==="game-editor"){
 	LoadPGD();
 	ReplaceElement(PGDMenuHTML(),ParentElement("exampleDropdown")); //PS Editor Selector
 	ListenOnce("LoadPGD",LoadPGDMenu);
-}
-*/
+}*/
 
-function GameInfoRetrieved(){return typeof state!=="undefined"&&state.levels.length>0;}
 
-function PDGURL(){
-	return "https://script.google.com/macros/s/AKfycbyp6yZrpw7TIiOE8fg0wUkI0SMtTWUpYlki53OGLg5Pgc6ppLM/exec";
-}
+
+
 
 //////////////////////////////////////////////////////////////////////
-// PGD Loading functions, common
+// PGD Table
 
-function Whitelist(){ //Sort descending by expected number of submissions
-	return [
-		/^https\:\/\/[^\#\^\~\\\/\|\.\:\;\,\s\?\=\}\{\[\]\&\'\"\@\!]*\.itch\.io\/.*/,
-		/^https\:\/\/(www\.)?puzzlescript\.net\/play\.html\?p\=.*/,
-		/^https\:\/\/(www\.)?puzzlescript\.net\/editor\.html\?hack\=.*/,
-		/^https\:\/\/[^\#\^\~\\\/\|\.\:\;\,\s\?\=\}\{\[\]\&\'\"\@\!]*\.github\.io\/.*/i,
-		/^http\:\/\/htmlpreview\.github\.io\/\?https\:\/\/raw\.githubusercontent\.com\/.*/i,
-		/^https\:\/\/[^\#\^\~\\\/\|\.\:\;\,\s\?\=\}\{\[\]\&\'\"\@\!]*\.github\.io\/.*/i,
-		/^https\:\/\/(www\.)?increpare\.com\/.*/,
-		/^https?\:\/\/(www\.)?draknek\.org\/.*/,
-		/^https?\:\/\/(www\.)?ludumdare\.com\/compo\/.*/,
-		/^https\:\/\/(www\.)?newgrounds\.com\/portal\/view\/.*/,
-		/^https?\:\/\/(www\.)?jackkutilek\.com\/puzzlescript\/.*/,
-		/^https\:\/\/(www\.)?sokobond\.com\/.*/,
-		/^https\:\/\/(www\.)?streamingcolour\.com\/liveapps\/puzzlescript\/.*/,
-		/^https\:\/\/(www\.)?struct\.ca\/games\/.*/,
-		/^https\:\/\/benjamindav\.is\/.*/,
-		/^https\:\/\/axaxaxas\.herokuapp\.com\/games\/.*/,
-		/^https?\:\/\/www\.colami\.com/
-	];
+function LoadPGDTable(){
+	ReplaceChildren("<b>Please wait while recent submissions are fetched...</b>",".discard");	
+	Listen("LoadPGD",OverwritePGD);
+	LoadPGD();
 }
 
-function InWhitelist(string){
-	function Verify(condition){return InString(string,condition)}
-	return Whitelist().some(Verify);
+function LoadPGD(){
+	LoadData(PDGURL,RegisterPGDEntries);
+}
+
+function RegisterPGDEntries(data){
+	if(data!==""){
+		data=JSON.parse(data);
+		data.map(GameEntryData);
+		Shout("LoadPGD");
+	}
+}
+
+function OverwritePGD(){
+	DeployPGD(headers,RowGenerator,targetID);
+	ConsoleAdd(databaseTitle+" just refreshed!");
+	PageFeaturesDOM();
+	ReplaceChildren(TableLength(targetID),'titlenumber'); //Update page game title count
+}
+
+function DeployPGD(headers,RowGenerator,targetID){
+	var caption="<span class='discard'>"+databaseTitle+" <b>up-to-date</b>.</span>";
+	var rowArray=GameEntryData.list.map(RowGenerator);
+	var table=TableHTML(caption,headers,rowArray);
+	ReplaceChildren(table,targetID);
+	function TableSorter(header){SortTable(targetID,header,true)};
+	headers.map(TableSorter);
 }
 
 
-function DaysUpdated(u){
+
+
+
+//////////////////////////////////////////////////////////////////////
+// Formatting Entries
+
+function DaysUpdated(u){ //Lexicographic-chronologic
 	var updated="ages ago";
 	if(u<365)
 		updated="a year ago";
@@ -109,6 +125,35 @@ function MultiLabel(labelinfo){
 	}
 	return notes;
 }
+
+
+function LinkWhitelist(){ //Sort descending by expected number of submissions
+	return [
+		/^https\:\/\/(www\.)?puzzlescript\.net\/play\.html\?p\=.*/,
+		/^https\:\/\/[^\#\^\~\\\/\|\.\:\;\,\s\?\=\}\{\[\]\&\'\"\@\!]*\.itch\.io\/.*/,
+		/^https\:\/\/(www\.)?puzzlescript\.net\/editor\.html\?hack\=.*/,
+		/^https\:\/\/[^\#\^\~\\\/\|\.\:\;\,\s\?\=\}\{\[\]\&\'\"\@\!]*\.github\.io\/.*/i,
+		/^http\:\/\/htmlpreview\.github\.io\/\?https\:\/\/raw\.githubusercontent\.com\/.*/i,
+		/^https\:\/\/[^\#\^\~\\\/\|\.\:\;\,\s\?\=\}\{\[\]\&\'\"\@\!]*\.github\.io\/.*/i,
+		/^https\:\/\/(www\.)?increpare\.com\/.*/,
+		/^https?\:\/\/(www\.)?draknek\.org\/.*/,
+		/^https?\:\/\/(www\.)?ludumdare\.com\/compo\/.*/,
+		/^https\:\/\/(www\.)?newgrounds\.com\/portal\/view\/.*/,
+		/^https?\:\/\/(www\.)?jackkutilek\.com\/puzzlescript\/.*/,
+		/^https\:\/\/(www\.)?sokobond\.com\/.*/,
+		/^https\:\/\/(www\.)?streamingcolour\.com\/liveapps\/puzzlescript\/.*/,
+		/^https\:\/\/(www\.)?struct\.ca\/games\/.*/,
+		/^https\:\/\/benjamindav\.is\/.*/,
+		/^https\:\/\/axaxaxas\.herokuapp\.com\/games\/.*/,
+		/^https?\:\/\/www\.colami\.com/
+	];
+}
+
+function InLinkWhitelist(string){
+	function Verify(condition){return InString(string,condition)}
+	return LinkWhitelist().some(Verify);
+}
+
 
 function GameEntryData(dataline){
 	if(dataline.join("")==="")
@@ -174,7 +219,7 @@ function GameEntryData(dataline){
 	data["pageHTML"]=data["pageHTML"].replace("https://www.puzzlescript.net","");
 
 	//Generate the HTML entry
-	if(typeof Whitelist!=="undefined"&&InWhitelist(data.linkHTML)){
+	if(typeof LinkWhitelist!=="undefined"&&InLinkWhitelist(data.linkHTML)){
 		if(/.*puzzlescript\.net\/play.*/.test(data.linkHTML))
 			data.playlink="game-console.html?game="+PageSearch("p",data.linkHTML);
 		if(/.*puzzlescript\.net\/editor.*/.test(data.linkHTML))
@@ -220,20 +265,6 @@ function GameEntryData(dataline){
 };
 
 
-function LoadPGD(){
-	LoadData(PDGURL(),SavePGD);
-	function SavePGD(data){
-		if(data!==""){
-			data=JSON.parse(data);
-			data.map(GameEntryData);
-			Shout("LoadPGD");
-		}
-	}
-}
-
-//////////////////////////////////////////////////////////////////////
-// PGD Table
-
 function EditButtonTD(id){
 	var bu=ButtonHTML({
 		txt:ObtainSymbol("edit"),
@@ -256,46 +287,7 @@ function PrototypeExampleRowHTML(id){
 }
 
 
-function LoadPGDTable(){
-	
-	var targetID=PageIdentifier()+"-area";
-	var placeholderID=Posfix(PageIdentifier(),"-area");
-	var headers=["Title","Author","Date"];
-	var RowGenerator=GameRowHTML;
-	if(PageIdentifier()==="game-tools"){
-		headers=["Title","Author","Type","Tags"];
-		RowGenerator=PrototypeExampleRowHTML;
-	}
-	
-	WaitingPGD();
-	LoadPGD();
-	Listen("LoadPGD",UpdatePGD);
-	
-	function WaitingPGD(){//◊ 
-		ReplaceChildren("<b>Please wait while recent submissions are fetched...</b>",".discard");
-		DynamicTable("TABLE");
-		GetElement(targetID).id=placeholderID;
-		var newe=GetElements(".new");
-		if(newe.length>0)
-			newe.map(function(e){Deselect(e,"new")});
-	}
-	
-	function PGD(){
-		var caption="<span class='discard'>"+PageTitle()+" <b>up-to-date</b>.</span>";
-		var rowArray=GameEntryData.list.map(RowGenerator);
-		return TableHTML(caption,headers,rowArray);
-	}
-		
-	function UpdatePGD(){
-			ReplaceChildren(PGD(),placeholderID);
-			GetElement(placeholderID).id=targetID;
-			headers.map(function(header){SortTable(targetID,header,true)});
-			DynamicTables();
-			ConsoleAdd(PageTitle()+" just refreshed!");
-			OutLinks();
-			ReplaceChildren(TableLength(targetID),'titlenumber'); //Update page game title count
-	}
-}
+
 
 
 //////////////////////////////////////////////////////////////////////

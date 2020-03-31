@@ -1353,7 +1353,7 @@ function Offline(){return !Online()};
 function MacroURL(c){return "https://script.google.com/macros/s/"+c+"/exec";};
 
 //Fetch data from url
-function LoadData(url,SuccessF,header){
+function LoadDataFromNetwork(url,SuccessF,header){
 	var rawFile=new XMLHttpRequest();
 	rawFile.open("GET",url,true);
 	rawFile.onreadystatechange=function(){
@@ -1361,7 +1361,13 @@ function LoadData(url,SuccessF,header){
 			if(rawFile.status===404)
 				console.log("Nothing found at: ",url,", not necessarily an error!");
 			else if(rawFile.status===200||rawFile.status==0){
-				SuccessF(rawFile.responseText);
+				var data=rawFile.responseText;
+				if(data==="")
+					console.log("No data received from: ",url,". Connection problems?");
+				else{
+					Memory(url,rawFile.responseText,new Date());
+					SuccessF(data);
+				}
 			}
 		}
 	}
@@ -1370,6 +1376,71 @@ function LoadData(url,SuccessF,header){
 	rawFile.send(null);
 };
 
+function LoadData(url,SuccessF,header){
+	var saved=Memory(url);
+	if(saved&&!MemoryExpired(url))
+		SuccessF(saved);
+	else
+		LoadDataFromNetwork(url,SuccessF,header);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Persistent Memory
+
+function MemorySlot(name){
+	if(!name)
+		return MemorySlot['_list'];
+	
+	MemorySlot['_list']=Union([name],MemorySlot['_list']||[]);
+	
+	return PageRoot()+"_"+name.toLowerCase();
+}
+
+function Memory(name,data,days){
+	if(typeof data==="undefined"){
+		var data=null;
+		try{data=JSON.parse(localStorage[MemorySlot(name)])}
+		catch(err){}
+		return data;
+	}
+	try{
+		localStorage[MemorySlot(name)]=JSON.stringify(data);
+		//Set expiry date
+		try{localStorage[MemorySlot(name+"_exp")]=JSON.stringify(new Date())}
+		catch(err){}
+	}
+	catch(err){};
+}
+
+function MemoryExpired(name){
+	var expired=true;
+	try{
+		expired=localStorage[MemorySlot(name+"_exp")];
+		expired=Days(new Date(expired))>MemoryDuration();
+	}
+	catch(err){};
+	return expired;
+}
+
+function MemoryDuration(name,days){
+	if(days){//SET
+		try{localStorage[MemorySlot(name+"_days")]=Number(days)}
+		catch(err){}
+		return days;
+	}
+	else{//GET
+		var days=15;
+		try{
+			days=localStorage[MemorySlot(name+"_days")];
+			if(days)
+				days=Number(days);
+			else
+				days=15;
+		}
+		catch(err){};
+		return days;
+	}
+}
 ///////////////////////////////////////////////////////////////////////////////
 // Data Download
 //(https://stackoverflow.com/questions/13405129/javascript-create-and-save-file)
@@ -1391,6 +1462,8 @@ function Download(data,filename,typ){
 		}, 0); 
 	}
 }
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // DOM Manipulation
@@ -1618,14 +1691,16 @@ function Element(htmlOrElement){
 function AddElement(htmlOrElement,parentIDsel){
 	var e=Element(htmlOrElement);
 	var p=GetElement(parentIDsel);
-	p.appendChild(e);
+	if(p)
+		p.appendChild(e);
 	return e;
 };
 
 function PreAddElement(htmlOrElement,parentIDsel){
 	var e=Element(htmlOrElement);
 	var p=GetElement(parentIDsel);
-	p.prepend(e);
+	if(p)
+		p.prepend(e);
 	return e;
 };
 
@@ -1671,22 +1746,6 @@ function WrapElement(html,elemIDsel,newparentIdsel){
 	AppendElement(html,elemIDsel);
 	AddElement(GetElement(elemIDsel),newparentIdsel);
 }
-
-// Add HTML Data from external source to page
-function OverwriteData(source,destinationID,Transform){
-	function Overwrite(data){
-		if(Transform){
-			data=Transform(data);
-		}
-		if(data){
-			ReplaceChildren(data,destinationID);
-			Shout("updated-"+destinationID);
-		}
-		else
-			console.log("No data fetched. Connection problems?")
-	}
-	LoadData(source,Overwrite);
-};
 
 
 // Remove Children
@@ -4505,26 +4564,3 @@ function ObtainSymbol(name){
 //SVG Inliner
 
 
-
-///////////////////////////////////////////////////////////////////////////////
-//Settings Memory
-
-function MemorySlot(name){
-	if(!name)
-		return MemorySlot();
-	
-	MemorySlot['_list']=Union([name],MemorySlot['_list']||[]);
-	
-	return PageRoot()+"_"+name.toLowerCase();
-}
-
-function Memory(name,data){
-	if(typeof data==="undefined"){
-		var data=null;
-		try{data=JSON.parse(localStorage[MemorySlot(name)])}
-		catch(err){}
-		return data;
-	}
-	try{localStorage[MemorySlot(name)]=JSON.stringify(data)}
-	catch(err){};
-}

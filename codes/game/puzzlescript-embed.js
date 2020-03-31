@@ -86,9 +86,10 @@ function EnableMobile(){Mobile.enable(true);}
 // Compile the game
 function CompileGame(){
 	compile(["restart"], sourceCode);
-	
-	DelayUntil(function(){return (typeof PrepareGame!=="undefined");},PrepareGame);
-	ListenOnce('mousedown',EnableMobile,GetElement("gameCanvas"));
+	function P(){PrepareGame()};
+	DelayUntil(function(){return (typeof PrepareGame!=="undefined");},P);
+	function E(){ListenOnce('mousedown',EnableMobile,GetElement("gameCanvas"));}
+	DelayUntil(function(){return (typeof Mobile!=="undefined");},E);
 }
 
 
