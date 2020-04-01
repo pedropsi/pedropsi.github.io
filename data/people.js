@@ -92,6 +92,7 @@ FITZPATRICK:{TYPE:"Developer",NAME:"Ian Fitzpatrick",PERSONAL_PAGE:"http://ianfi
 AU:{TYPE:"Developer",NAME:"Dennis Au"},
 PALMERI:{TYPE:"Developer",NAME:"Jim Palmeri",TWITTER:"jimpalmeri"},
 PIXELARTM:{TYPE:"Developer",NAME:"Pixelartm",ITCH:"pixelartm"},
+DABRILA:{TYPE:"Developer",NAME:"Justas Dabrila",ITCH:"ssstormy",TWITTER:"justas_dabrila"},
 PRAUSE:{TYPE:"Developer",NAME:"Denis Prause",ALIAS:"Zejety",GITHUB_COM:"zejety"},
 PARACHOR:{TYPE:"Developer",NAME:"Parachor",ITCH:"parachor"},
 CROUBBLE:{TYPE:"Developer",NAME:"Crouble",ALIAS:"NarrowAdder",TWITTER:"Croubble",ITCH:"dazed-pidgeon"}
