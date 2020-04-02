@@ -6,7 +6,7 @@ var CMSGame={...WithImage,POSTSCRIPT:()=>v.PUZZLE_SCRIPT(),TYPE:()=>`Game`,CATEG
 
 
 var CMS={
-P_index:{...NoImage,LINK:()=>`index`,DESCRIPTION:()=>`${v.SITE_NAME()} home page.`, BODY:()=>v.POST_INDEX(),TITLE:()=>v.SITE_NAME(),DAY:()=>`1`,MONTH:()=>`12`,YEAR:()=>`2017`,TYPE:()=>`Home`,TAGS:()=>[`Sitemap`],TYPEGRAPH:()=>`website`},
+P_index:{...NoImage,LINK:()=>`index`,TITLE:()=>v.SITE_NAME(),DAY:()=>`1`,MONTH:()=>`12`,YEAR:()=>`2017`,TYPE:()=>`Home`,TAGS:()=>[`Sitemap`],DESCRIPTION:()=>`${v.SITE_NAME()} home page.`,TYPEGRAPH:()=>`website`},
 P_purpose:{...NoImage,LINK:()=>`purpose`,TITLE:()=>`The purpose of the ${v.SITE_NAME()}`,SHORTNAME:()=>`Purpose`,DAY:()=>`1`,MONTH:()=>`12`,YEAR:()=>`2017`,TAGS:()=>[`Creative-Archive`,`Post`],ONE_LINER:()=>`${v.SITE_NAME()}'s first post!`},
 P_support:{...NoImage,LINK:()=>`support`,TITLE:()=>`Support the ${v.SITE_NAME()}`,SHORTNAME:()=>`Suport`,DAY:()=>`8`,MONTH:()=>`2`,YEAR:()=>`2018`,TAGS:()=>[`Creative-Archive`,`Finance`,`Post`],ONE_LINER:()=>`Support the ${v.SITE_NAME()}!`},
 P_making_of:{...NoImage,LINK:()=>`making-of`,TITLE:()=>`The making of the ${v.SITE_NAME()}`,SHORTNAME:()=>`making-of`,DAY:()=>`15`,MONTH:()=>`12`,YEAR:()=>`2019`,TAGS:()=>[`Creative-Archive`,`Finance`,`Post`],ONE_LINER:()=>`Support the ${v.SITE_NAME()}!`},
