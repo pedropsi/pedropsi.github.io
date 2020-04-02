@@ -35,9 +35,10 @@
 		var(--blue)			60%,
 		var(--darkblue)); 
 	
-	--bluefilter:sepia(1) hue-rotate(180deg);
+	--lightfilter:sepia(1) hue-rotate(180deg) saturate(3);
+	--normalfilter:unset;
 	
-	
+		
 	--durationOff:1s;
 	--durationOn:0.33s;
 	--durationFade:1s;
@@ -133,12 +134,9 @@ body{
 		var(--blue)			60%,
 		var(--darkblue)); 
 	
-	--bluefilter: sepia(100%) saturate(400%) hue-rotate(310deg);
-  --redfilter: invert(20%) sepia(100%) saturate(400%) hue-rotate(310deg);
-}
-
-.nightmode img{
-	filter:var(--redfilter);
+	--lightfilter: sepia(100%) saturate(4) hue-rotate(310deg);
+	--normalfilter: sepia(100%) saturate(4) hue-rotate(310deg);
+	
 }
 
 div{
@@ -161,7 +159,7 @@ a{
 	transition-duration: var(--durationOff);
 }
 
-img{
+.image{
 		transition-duration: var(--durationOff);
 }
 
@@ -302,12 +300,12 @@ nav{
 	border-bottom-color:var(--turquoise); 
 }
 
-.card-supra img{
+.card-supra .image{
 	opacity:0.5;
-	filter:var(--bluefilter);
+	filter:var(--lightfilter);
 }
 
-.card-supra img,.card-supra svg{
+.card-supra .image{
 	max-height:var(--h16);
 	width:auto;
 }
@@ -360,15 +358,13 @@ p a:focus ,
 .mini:hover ,
 .mini:active,
 .mini:focus ,
-.card-supra:hover img,
-.card-supra:focus img,
-.card-supra:active img,
-.mini:hover img,
-.mini:focus img,
-.mini:active img,
+.card-supra:hover .image,
+.card-supra:focus .image,
+.card-supra:active .image,
+.mini:hover .image,
+.mini:focus .image,
+.mini:active .image,
 .selected{
-	opacity:unset;
-	filter:unset;
 	color:var(--turquoise);
 	text-decoration-color:currentColor;
 	background-color:var(--darkblue);
@@ -379,13 +375,14 @@ p a:focus ,
 	text-shadow:unset;
 }
 
-.card-supra:hover img,
-.card-supra:focus img,
-.card-supra:active img,
-.mini:hover img,
-.mini:focus img,
-.mini:active img{
-	filter: var(--redfilter);
+.card-supra:hover .image,
+.card-supra:focus .image,
+.card-supra:active .image,
+.mini:hover .image,
+.mini:focus .image,
+.mini:active .image{
+	opacity: unset;
+	filter: var(--normalfilter);
 }
 
 .mini .tag:hover{
@@ -398,7 +395,7 @@ p a:focus ,
 .nav-link:hover{text-decoration-line:none;}
 .nav-link{text-decoration-line:none;}
 
-a div:hover img{
+a div:hover .image{
 	background-color:var(--lightyellow);
 	transition-duration:var(--durationOff);
 	cursor:pointer;
@@ -518,7 +515,7 @@ div .index-link:focus {
 	content:" ▲"
 }
 
-img, svg{
+.image{
 	padding:var(--h-2) var(--w-2) var(--h-2) var(--w-2);
 	width:auto;
 	vertical-align:middle;
@@ -686,7 +683,7 @@ figure{
 	align-items: center;
 }
 
-figure img, figure svg{
+figure .image{
 	max-width:75%;
 	height:auto;
 }
@@ -1134,15 +1131,13 @@ tr:active .editTD{
 	border-bottom:var(--h-2) solid var(--smokewhite);
 }
 
-.mini img,.mini svg{
+.mini .image{
 	max-height:var(--h8);
 	height:auto;
 	padding:0;
 	margin:0;
-}
-
-.mini img{
-	filter:var(--bluefilter);
+	opacity: 0.5;
+	filter:var(--lightfilter);
 }
 
 @media only screen and (max-width:330px){
@@ -1154,16 +1149,16 @@ tr:active .editTD{
 		order:2;
 		width:100%;
 	}
-	.mini img, .mini svg{
+	.mini .image{
 		max-width:100%;
 		margin:var(--h2) var(--w-2) var(--h2) var(--w-2);
 		order:1
 	}
 }
 
-.mini:hover img,
-.mini:active img,
-.mini:focus img{
+.mini:hover .image,
+.mini:active .image,
+.mini:focus .image{
 	opacity:1;
 	transition-duration:var(--durationOn);
 }
