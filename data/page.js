@@ -85,9 +85,7 @@ function InlineSVG(){
 				"\"#FFF0e5\"":`"#FFF0e5- class="beije"`
 			}
 			svgHTML=StringReplace(StringReplace(svgHTML,palette),{"- class":"\" class"});
-			svgHTML=MakeElement(svgHTML);
-			svgHTML.width=width;
-			svgHTML.height=height;
+			svgHTML=svgHTML.replace(/svg width=..?\d*..? height=..?\d*..?/g,`svg width="${width}" height="${height}"`);
 			ReplaceElement(svgHTML,img)
 		};
 		if(InPosfix(src,".svg"))
