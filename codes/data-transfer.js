@@ -1935,7 +1935,11 @@ function ButtonHTML(optionsObj){
 };
 
 function AHTML(title,ref){
-	return ElementHTML({tag:"a",txt:title,attributes:{href:ref}});
+	var external=InPrefix(ref,"http");
+	var attribs={href:ref};
+	if(external)
+		attribs["rel"]="noreferrer noopener";
+	return ElementHTML({tag:"a",txt:title,attributes:attribs});
 }
 
 function LabelHTML(text,type){
