@@ -1379,9 +1379,9 @@ function LoadDataFromNetwork(url,SuccessF,header){
 function LoadData(url,SuccessF,header){
 	var saved=Memory(url);
 	if(saved&&!MemoryExpired(url))
-		SuccessF(saved);
+		return SuccessF(saved);
 	else
-		LoadDataFromNetwork(url,SuccessF,header);
+		return LoadDataFromNetwork(url,SuccessF,header);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
