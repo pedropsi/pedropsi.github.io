@@ -17,6 +17,19 @@ function LoadCMS(){
 }
 
 function LoadPrescript(){
+	v={
+		...DATA["Variables"],
+		...DATA["CMS"],
+		...DATA["Media"],
+		...DATA["People"],
+		...DATA["News"],
+		...DATA["Page"],
+		...v
+	};
+
+	DATA["Links"]=NormaliseVariables(DATA["Links"],LinkTemplate);
+	v={...v,...DATA["Links"]}
+
 	if(v.PRESCRIPT)
 		LoadSources(v.PRESCRIPT(),BuildCMSPage);
 	else

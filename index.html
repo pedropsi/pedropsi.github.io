@@ -1,8 +1,7 @@
 ﻿<!DOCTYPE html>
 <link href="codes/index.css" rel="stylesheet" type="text/css"/>
 <script src="codes/data-transfer.js"></script>
-<script src="data/page.js"></script>
-<script id="post">var Post={POST_INDEX:()=>`
+<script id="post">var v={POST:()=>`
 
 ${v.MAIN_OUT(LatestHTML())}
 ${v.SECTION_OUT(PopularHTML())}
@@ -11,4 +10,4 @@ ${v.SECTION_OUT(HighlightsHTML())}
 ${v.SECTION_OUT(RecentNewsHTML())}
 ${v.FOOTER_AREA()}
 
-`};try{v={...v,...Post}}catch{v=Post}</script>
+`};</script><script src="data/page.js"></script>

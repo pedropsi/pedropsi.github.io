@@ -61,7 +61,7 @@ A_SELECTED_GAME:{PAGE:"selected-puzzlescript-games",EXT:".html",TITLE:"particula
 A_SELECTED_GAMES:{PAGE:"selected-puzzlescript-games",EXT:".html",TITLE:"selected games"},
 A_SKILLEBLOKKER:{PAGE:"skilleblokker",EXT:".html",TITLE:"Skilleblokker"},
 A_SUBSCRIBE:{PAGE:"subscribe",EXT:".html",TITLE:"Subscribe"},
-A_SUPPORT:{PAGE:"support",EXT:".html",TITLE:`support the ${v.SITE_NAME()}`},
+A_SUPPORT:{PAGE:"support",EXT:".html",TITLE:()=>`support the ${v.SITE_NAME()}`},
 A_TERMS:{PAGE:"terms-of-use",EXT:".html",TITLE:"Terms of Use"},
 A_TETRASTROPHE:{PAGE:"tetrastrophe",EXT:".html",TITLE:"Tetrastrophe"},
 A_TIARADVENTUR:{PAGE:"tiaradventur",EXT:".html",TITLE:"Tiaradventur"},
@@ -94,7 +94,7 @@ A_BOOGIEWOOGIE:{PAGE:"https://jackkutilek.itch.io/boogie-woogie",TITLE:"Boogie W
 A_STRANGEWAREHOUSE:{PAGE:"https://ssstormy.itch.io/strange-warehouse",TITLE:"Strange Warehouse",AUTHOR:()=>v.DABRILA(),GROUP:"with-game-bar"},
 A_FIKITBAN:{PAGE:"https://ssstormy.itch.io/fitkitban",TITLE:"Fitkitban",AUTHOR:()=>v.DABRILA(),GROUP:"with-game-bar"},
 A_WELCOME:{PAGE:"contact",EXT:".html",TITLE:"welcome"},
-A_LET_ME_KNOW:{PAGE:"contact",EXT:".html",TITLE:`let ${v.NAME()} know`},
+A_LET_ME_KNOW:{PAGE:"contact",EXT:".html",TITLE:()=>`let ${v.NAME()} know`},
 A_CONTACT_ME:{PAGE:"contact",EXT:".html",TITLE:()=>`contact ${v.NAME()}`},
 A_REACH_OUT:{PAGE:"contact",EXT:".html",TITLE:"reach out"},
 A_GET_IN_TOUCH:{PAGE:"contact",EXT:".html",TITLE:"get in touch"},
@@ -106,7 +106,7 @@ A_STAY_TUNED:{PAGE:()=>v.RSS_PATH(),TITLE:"stay tuned",TYPE:"External"},
 A_STORE:{PAGE:"store",EXT:".html",TITLE:"Store"},
 A_GRAVIRINTH_ASCIINEMA:{PAGE:"https://asciinema.org/a/262824",TITLE:"Asciinema demo",AUTHOR:()=>v.SCHATZ(),GROUP:"mentioned",ID:"gravirinth"},
 A_MAKING_OF:{PAGE:"making-of",EXT:".html",TITLE:()=>`making of the ${v.SITE_NAME()}`},
-A_ABOUT:{PAGE:"about",EXT:".html",TITLE:`about the ${v.SITE_NAME()}`},
+A_ABOUT:{PAGE:"about",EXT:".html",TITLE:()=>`about the ${v.SITE_NAME()}`},
 A_LUL:{PAGE:"lul",EXT:".html",TITLE:"Level Unlocking Language"},
 A_TAG:{PAGE:"tag",EXT:".html",TITLE:"Tag"},
 A_PNGTOSVG:{PAGE:"https://www.pngtosvg.com/",TITLE:"PNG to SVG"},
@@ -161,8 +161,8 @@ function LinkGroupHTML(GroupObject){
 }
 
 
-var LinksNormalised=Clone(Links);
-NormaliseVariables(LinksNormalised,LinkTemplate);
-try{v=v={...v,...LinksNormalised}}
-catch{v=LinksNormalised}
+//var LinksNormalised=Clone(Links);
+//NormaliseVariables(LinksNormalised,LinkTemplate);
+
+if(DATA){DATA["Links"]=Links}else{var DATA={"Links":Links}}
 Shout("links");

@@ -89,6 +89,5 @@ return `
 	</script>`;
 }
 
-try{v={...v,...Store}}
-catch{v=Store}
+if(DATA){DATA["Store"]=Store}else{var DATA={"Store":Store}}
 Shout("store");

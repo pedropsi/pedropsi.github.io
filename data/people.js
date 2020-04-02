@@ -130,6 +130,5 @@ MapObject(People,function (v,k,o){
 	 o[k]=(()=>PersonTemplate(v));
 })
 
-try{v={...v,...People}}
-catch{v=People}
+if(DATA){DATA["People"]=People}else{var DATA={"People":People}}
 Shout("people");

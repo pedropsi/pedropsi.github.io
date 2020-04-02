@@ -49,8 +49,7 @@ S_puzzle_type_screenshot_1:{TYPE:"screenshot",TRACK:"puzzle-type-screenshot-1.pn
 S_puzzle_type_screenshot_2:{TYPE:"screenshot",TRACK:"puzzle-type-screenshot-2.png",DESCRIPTION:"puzzle-type screenshot 2",N:"2",FOLDER_SMALL:"puzzle-type",FOLDER_BIG:"puzzle-type",CONTEXT_ID:"puzzle-type"}
 }
 
-try{v={...v,...Media}}
-catch{v=Media}
+if(DATA){DATA["Media"]=Media}else{var DATA={"Media":Media}}
 Shout("media");
 
 function TrackHTML(MediaObj){

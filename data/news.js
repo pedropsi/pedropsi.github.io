@@ -1,4 +1,4 @@
-var NEWS={
+var News={
 	N_37:{
 DATE:"2020-03-31",
 HEADER:()=>"One more level",
@@ -317,8 +317,7 @@ PIECE:()=>`
 }
 
 
-try{v={...v,...NEWS}}
-catch{v={...NEWS}}
+if(DATA){DATA["News"]=News}else{var DATA={"News":News}}
 Shout("news");
 
 
@@ -335,7 +334,7 @@ function ChangelogEntryHTML(change){
 
 function ChangelogHTML(){
 	return SectionHTML({
-		Source:NEWS,
+		Source:News,
 		header:"<h2 class>Changelog</h2>",
 		include:{ID:PageIdentifier()},
 		ItemHTML:ChangelogEntryHTML,
@@ -353,7 +352,7 @@ function NewsEntryHTML(change){
 
 function NewsHTML(){
 	return SectionHTML({
-		Source:NEWS,
+		Source:News,
 		ItemHTML:NewsEntryHTML,
 		Sorter:SortNewsByDate
 	})
@@ -361,7 +360,7 @@ function NewsHTML(){
 
 function RecentNewsHTML(){
 	return SectionHTML({
-		Source:NEWS,
+		Source:News,
 		ItemHTML:NewsEntryHTML,
 		max:v.NEWS_LIMIT_RECENT(),
 		header:`<h1 class="title">Recent changes</h1>`,
@@ -372,7 +371,7 @@ function RecentNewsHTML(){
 
 function RSSXML(){
 	return SectionHTML({
-		Source:NEWS,
+		Source:News,
 		ItemHTML:RSSItemXML,
 		max:v.RSS_LIMIT(),
 		Sorter:SortNewsByDate,
@@ -454,7 +453,7 @@ function SitemapItemXML(PageObj){
 	var lastdate=v.DATE_YMD(PageObj);
 	
 	var id=PageObj.LINK();
-	var changes=BaseFilter(NEWS,{ID:id}).sort(SortNewsByDate).map(ch=>ch.DATE);
+	var changes=BaseFilter(News,{ID:id}).sort(SortNewsByDate).map(ch=>ch.DATE);
 		lastdate=changes[0]||lastdate;
 	var freq=FrequencyName(Days(new Date(lastdate)));//Days since last modification
 

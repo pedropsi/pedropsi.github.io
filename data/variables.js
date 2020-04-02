@@ -450,8 +450,7 @@ CSF							:	()=>	`<span>></span></code>`
 
 };
 
-try{v={...Variables,...v}}
-catch{v=Variables}
+if(DATA){DATA["Variables"]=Variables}else{var DATA={"Variables":Variables}}
 Shout("variables");
 
 //Variables
