@@ -223,7 +223,7 @@ function InlineSVG(){
 				"\"#0CFCBD\"":`"#0CFCBD- class="turquoise"`,
 				"\"#5DFF61\"":`"#5DFF61- class="green"`,
 				"\"#E9FE90\"":`"#E9FE90- class="yellow"`,
-				"\"#0098F6\"":`"#FFF9C8- class="lightyellow"`,
+				"\"#FFF9C8\"":`"#FFF9C8- class="lightyellow"`,
 				"\"#FFF0e5\"":`"#FFF0e5- class="beije"`
 			}
 			svgHTML=StringReplace(StringReplace(svgHTML,palette),{"- class":"\" class"});
