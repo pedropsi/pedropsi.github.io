@@ -85,7 +85,7 @@ function InlineSVG(){
 			svgHTML=StringReplace(StringReplace(svgHTML,palette),{"- class":"\" class"});
 			var width=Number(svgHTML.replace(/.*svg width=..?(\d*)..? height=..?(\d*)..?.*/g,"$1"));
 			var height=Number(svgHTML.replace(/.*svg width=..?(\d*)..? height=..?(\d*)..?.*/g,"$2"));
-			svgHTML=svgHTML.replace(/svg width=..?(\d*)..? height=..?(\d*)..?/g,`svg viewbox="-${width} -${height} ${width} ${height}"`);
+			svgHTML=svgHTML.replace(/svg width=..?(\d*)..? height=..?(\d*)..?/g,`svg viewbox="${width/2} ${height/2} ${width*3/2} ${height*3/2} width="100" height="100"`);
 			ReplaceElement(svgHTML,img)
 		};
 		if(InPosfix(src,".svg"))
