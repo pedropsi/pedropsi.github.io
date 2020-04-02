@@ -29,6 +29,7 @@ function BuildCMSPage(){
 	//document.body.id=PageIdentifier();
 	var LOGO=v.LOGO_SVG();
 	
+	InlineSVG();
 	IndexTitles();
 	AddTitleIndex(".main .whiteboard");//First whiteboard where main content is
 
@@ -63,3 +64,20 @@ try{v={...v,...Post}}catch{v=Post}</script>
 `;
 }
 
+
+function InlineSVG(){
+	var images=GetElements("img");
+	function ReplaceSource(img){
+		var src=img.src;
+		var alt=img.alt;
+		var title=img.title;
+		var width=img.width;
+		var height=img.height;
+		function ReplaceSVG(svgHTML){
+			ReplaceElement(svgHTML,img)
+		};
+		if(InPosfix(src,".svg"))
+			LoadData(src,ReplaceSVG)
+	}
+	images.map(ReplaceSource);
+}

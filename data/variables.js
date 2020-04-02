@@ -56,7 +56,7 @@ SITE_LINK_SELF				:	()=>	`<a href="${v.SITE()}">${v.SITE()}</a>`,
 LINK_URL					:	()=>	`${v.SITE()}/${v.LINK()}`,
 LINK_URL_SEARCH				:	()=>	`${v.LINK_URL()}.html?search=`,
 	
-LOGO_PATH					:	()=>	`images/logo.png`,
+LOGO_PATH					:	()=>	ImagePath("logo","svg"),
 LOGO_DESC					:	()=>	`${v.NAME()}'s ${v.LOGO_NAME()} logo, of the ${v.SITE_NAME()}`,
 LOGO_NAME					:	()=>	`${v.THEME_NAME()}`,
 THEMECOLOUR					:	()=>	`rgb(7,0,112)`,//THEMECOLOUR_DEFAULT
@@ -69,23 +69,17 @@ CSS_ABS						:	()=>	v.CSS_TAG(`${v.SITE()}/${v.CSS_PATH()}`),
 	
 CODES_FOLDER 				:	()=>	`codes`,
 CODES_FOLDER_URL			:	()=>	`${v.SITE()}/${v.CODES_FOLDER()}/`,
-	
-IMAGE						:	()=>	`${v.IMAGE_NAME()}.${v.IMAGE_EXT()}`,
-IMAGE_EXT_DEFAULT			:	()=>	`png`,
-IMAGE_180					:	()=>	`images/180/${v.IMAGE_NAME()}.${v.IMAGE_EXT()}`,
-IMAGE_192					:	()=>	`images/192/${v.IMAGE_NAME()}.${v.IMAGE_EXT()}`,
-IMAGE_512					:	()=>	`images/512/${v.IMAGE_NAME()}.${v.IMAGE_EXT()}`,
 
-IMAGEALT					:	()=>	`Octaflower, the ${v.SITE_NAME()}'s logo. A geometric lotus flower composed of eight rows of eight petals in rainbow progression.`,
-IMAGE_NAME					:	()=>	`${v.PLACEHOLDER_IMAGE_NAME()}`,
-IMAGE_EXT					:	()=>	`${v.IMAGE_EXT_DEFAULT()}`,
+IMAGE_180					:	()=>	ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),180),
+IMAGE_192					:	()=>	ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),192),
+IMAGE_512					:	()=>	ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),520),
 
-PLACEHOLDER_IMAGE_NAME		:	()=>	`logo`,
 IMAGE_NAME					:	()=>	`splash`,
-PLACEHOLDER_IMAGE			:	()=>	`${v.PLACEHOLDER_IMAGE_NAME()}.${v.IMAGE_EXT_DEFAULT()}`,
-APPLEICON					:	()=>	`images/180/${v.IMAGE_NAME()}.${v.IMAGE_EXT_DEFAULT()}`,
-FAVICON32					:	()=>	`images/favicon-32x32.png`,
-	
+IMAGE_EXT					:	()=>	`svg`,
+IMAGE_ALT					:	()=>	`Octaflower, the ${v.SITE_NAME()}'s logo. A geometric lotus flower composed of eight rows of eight petals in rainbow progression.`,
+
+APPLEICON					:	()=>	ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),180),
+FAVICON32					:	()=>	ImagePath("favicon-32x32","png"),
 
 BODY						:	()=>v.PAGE_POST(),
 
@@ -103,7 +97,7 @@ LINK						:	()=>	PageIdentifier(),
 HEAD_DATA_GRAPH				:	()=>	`${v.HEAD_TITLE()}${v.HEAD_DESCRIPTION()}${v.HEAD_IMAGE()}${v.HEAD_LINK()}${v.HEAD_TYPE()}`,
 HEAD_TITLE					:	()=>	`<title>${v.TITLE()}</title><meta property="og:title" content="${v.TITLE()}"/>`,
 HEAD_DESCRIPTION			:	()=>	`<meta name="description" content="${v.DESCRIPTION()}"/><meta property="og:description" content="${v.DESCRIPTION()}"/>`,
-HEAD_IMAGE					:	()=>	`<meta property="og:type" content="${v.TYPEGRAPH()}"/><meta property="og:image:alt" content="${v.IMAGEALT()}"/>`,
+HEAD_IMAGE					:	()=>	`<meta property="og:type" content="${v.TYPEGRAPH()}"/><meta property="og:image:alt" content="${v.IMAGE_ALT(v)}"/>`,
 HEAD_LINK					:	()=>	`<meta property="og:url" content="${v.SITE()}/${v.LINK()}.html"/>`,
 HEAD_TYPE					:	()=>	`<meta property="og:image" content="${v.SITE()}/${v.IMAGE_512()}"/>`,
 	
@@ -127,7 +121,6 @@ AREA_PRE					:	()=>	`<div class="container">`,
 TABULAR_AREA				:	()=>	`${v.AREA_PRE()}${v.DISPLAY_EXTERNAL()}${v.POST_PLUS_LABELS()}</div>`,
 GUESTBOOK_AREA				:	()=>	`${v.AREA_PRE()}<h1 class="title">${v.TITLE()}</h1><div class="whiteboard"><div class="text ${v.STYLE()} post" id="post">${v.POST()}</div></div>${v.LABELS(v)}${v.DISPLAY_EXTERNAL()}</div>`,
 GUESTBOOK_COMMENTS			:	()=>	`<div id="guestbook-area"></div>`,
-
 
 BUTTON_SOON					:	()=>	`<div>Coming soon...</div>`,
 
@@ -165,9 +158,9 @@ STYLE						:()=>`prose`,
 TYPEGRAPH					:()=>`article`,
 TYPE						:()=>`Post`,
 
-IMAGEALT					:()=>v.TITLE(),
-PICTURE						:(v,size)=>`<img src="images/${size}/${v.IMAGE_NAME()}.${v.IMAGE_EXT()}" width="${size}" height="${size}" alt="${v.IMAGEALT()}" title="${v.IMAGEALT()}" loading="lazy"/>`,
-PICTURE_RSS					:(v,size)=>`<img src="${v.SITE()}/images/${size}/${v.IMAGE_NAME()}.${v.IMAGE_EXT()}" width="${size}" height="${size}" alt="${v.IMAGEALT()}" title="${v.IMAGEALT()}"/>`,
+IMAGE_ALT					:()=>v.TITLE(),
+PICTURE						:(v,size)=>`<img src="${ImagePath(v.LINK(),v.IMAGE_EXT(),size)}" width="${size}" height="${size}" alt="${v.IMAGE_ALT(v)}" title="${v.IMAGE_ALT(v)}" loading="lazy"/>`,
+PICTURE_RSS					:(v,size)=>`<img src="${v.SITE()}/images/${size}/${v.IMAGE_NAME(v)}.${v.IMAGE_EXT()}" width="${size}" height="${size}" alt="${v.IMAGE_ALT(v)}" title="${v.IMAGE_ALT(v)}"/>`,
 PICTURE_DYNAMIC				:function(){if(window.innerWidth<512||window.innerHeight<512){return v.PICTURE(v,180)}else{return v.PICTURE(v,512)}},
 
 FIGURE						:	()=>	`<figure class="figure">${v.PICTURE_DYNAMIC()}<figcaption class="legend">${v.CONTENT()}</figcaption></figure>`,
@@ -397,7 +390,7 @@ PWA_WORKER					:	()=>	`"serviceworker":{"src":"${v.ORIGIN()}/cacher.js"}`,
 
 ORIENTATION					:()=>`landscape`,
 
-PWA_ICON_OBJ				:(size)=>`{"src":"${v.ORIGIN()}/images/${size}/${v.IMAGE_NAME()}.${v.IMAGE_EXT_DEFAULT()}","type":"image/${v.IMAGE_EXT_DEFAULT()}","sizes":"${size}x${size}"}`,
+PWA_ICON_OBJ				:(size)=>`{"src":"${v.ORIGIN()}/${ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),size)}","type":"image/${v.IMAGE_EXT()}","sizes":"${size}x${size}"}`,
 PWA_ICONS					:	()=>	`"icons":[${v.PWA_ICON_OBJ(512)},${v.PWA_ICON_OBJ(192)},${v.PWA_ICON_OBJ(180)}]`,
 
 NEWS_LIMIT_RECENT			:	()=>	3,

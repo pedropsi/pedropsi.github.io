@@ -10,7 +10,7 @@ PROD_PUZZLE_TYPE:{
 	DETAILS:()=>`<p>Desktop version.</p><p>All information in the official ${v.A_PUZZLE_TYPE()} page.</p>`,
 	IMAGE_NAME:()=>"puzzle-type",
 	IMAGE_EXT:()=>"gif",
-	IMAGEALT:()=>"Puzzle type",
+	IMAGE_ALT:()=>"Puzzle type",
 	PRODUCT_KEY:()=>"sku_GE9y0FHJHS0rtN",
 	STRIPE_KEY:()=>"pk_test_w0G0ENTYZ67hs4uUfdO7HYcp00whShrwUN",
 	SUCCESS_LINK:()=>"https://pedropsi.github.io/puzzle-type",
