@@ -83,10 +83,7 @@ function InlineSVG(){
 				"\"#FFF0e5\"":`"#FFF0e5- class="beije"`
 			}
 			svgHTML=StringReplace(StringReplace(svgHTML,palette),{"- class":"\" class"});
-		//	var width=Number(svgHTML.replace(/.*svg width=..?(\d*)..? height=..?(\d*)..?.*/g,"$1"));
-		//	var height=Number(svgHTML.replace(/.*svg width=..?(\d*)..? height=..?(\d*)..?.*/g,"$2"));
-			svgHTML=svgHTML.replace(/svg width=..?(\d*)..? height=..?(\d*)..?/g,`svg viewbox="0 0 1000 1000" width="100" height="100"`);
-			//svgHTML=svgHTML.replace(/overflow=..?hidden..?/g,`overflow="visible"`);
+			svgHTML=svgHTML.replace(/svg width=..?(\d*)..? height=..?(\d*)..?/g,`svg viewbox="0 0 1080 1080" width="100" height="100"`);
 		overflow="visible"
 			ReplaceElement(svgHTML,img)
 		};
