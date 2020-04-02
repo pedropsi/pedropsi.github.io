@@ -12,7 +12,7 @@ function GameAnalyticsClearance(){
 }
 
 function GameIdentifier(){
-	return document.body.id;
+	return PageIdentifier();
 }
 
 // Echo specifics
