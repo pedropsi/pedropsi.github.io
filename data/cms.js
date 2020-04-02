@@ -111,7 +111,7 @@ function PageCardHTML(page){
 	<a href="${page.LINK()}.html" class="card-supra">
 		<div class="card">
 			<h3>${page.TITLE()}</h3>
-				<img src="${path}" width="${size}" height="${size}" alt="${page.IMAGE_ALT(page)}" title="${page.IMAGE_ALT(page)}" loading="lazy"/>
+				<img class="image" src="${path}" width="${size}" height="${size}" alt="${page.IMAGE_ALT(page)}" title="${page.IMAGE_ALT(page)}" loading="lazy"/>
 		</div>
 	</a>`;
 }
@@ -129,7 +129,7 @@ function MiniCardHTML(page){
 			${v.LABELS(page)}
 		</div>
 		<a href="${page.LINK()}.html">
-			<img src="${path}" width="${size}" height="${size}" alt="${page.IMAGE_ALT(page)}" title="${page.IMAGE_ALT(page)}" loading="lazy"/>
+			<img class="image" src="${path}" width="${size}" height="${size}" alt="${page.IMAGE_ALT(page)}" title="${page.IMAGE_ALT(page)}" loading="lazy"/>
 		</a>
 	</div>`;
 }
@@ -227,7 +227,7 @@ function InlineSVG(){
 				"\"#FFF0e5\"":`"#FFF0e5- class="beije"`
 			}
 			svgHTML=StringReplace(StringReplace(svgHTML,palette),{"- class":"\" class"});
-			svgHTML=svgHTML.replace(/svg width=..?(\d*)..? height=..?(\d*)..?/g,`svg viewbox="0 0 1080 1080" width="100" height="100"`);
+			svgHTML=svgHTML.replace(/svg width=..?(\d*)..? height=..?(\d*)..?/g,`svg class="image" viewbox="0 0 1080 1080" width="100" height="100"`);
 			ReplaceElement(svgHTML,img)
 		};
 		if(InPosfix(src,".svg"))
