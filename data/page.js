@@ -74,6 +74,20 @@ function InlineSVG(){
 		var width=img.width;
 		var height=img.height;
 		function ReplaceSVG(svgHTML){
+			var palette={
+				"\"#002060\"":`"#002060- class="darkblue"`,
+				"\"#1A00DA\"":`"#1A00DA- class="blue"`,
+				"\"#0098F6\"":`"#0098F6- class="lightblue"`,
+				"\"#0CFCBD\"":`"#0CFCBD- class="turquoise"`,
+				"\"#5DFF61\"":`"#5DFF61- class="green"`,
+				"\"#E9FE90\"":`"#E9FE90- class="yellow"`,
+				"\"#0098F6\"":`"#FFF9C8- class="lightyellow"`,
+				"\"#FFF0e5\"":`"#FFF0e5- class="beije"`
+			}
+			svgHTML=StringReplace(StringReplace(svgHTML,palette),{"- class":"\" class"});
+			svgHTML=MakeElement(svgHTML);
+			svgHTML.width=width;
+			svgHTML.height=height;
 			ReplaceElement(svgHTML,img)
 		};
 		if(InPosfix(src,".svg"))
