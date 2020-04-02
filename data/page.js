@@ -29,7 +29,6 @@ function BuildCMSPage(){
 	//document.body.id=PageIdentifier();
 	var LOGO=v.LOGO_SVG();
 	
-	InlineSVG();
 	IndexTitles();
 	AddTitleIndex(".main .whiteboard");//First whiteboard where main content is
 
@@ -49,6 +48,7 @@ function PageFeatures(){
 function PageFeaturesDOM(){
 	DynamicTables();
 	StartAnalytics();
+	InlineSVG();
 }
 
 ListenOnce("load",LoadCMS);
@@ -65,29 +65,3 @@ try{v={...v,...Post}}catch{v=Post}</script>
 }
 
 
-function InlineSVG(){
-	var images=GetElements("img");
-	function ReplaceSource(img){
-		var src=img.src;
-		var alt=img.alt;
-		var title=img.title;
-		function ReplaceSVG(svgHTML){
-			var palette={
-				"\"#002060\"":`"#002060- class="darkblue"`,
-				"\"#1A00DA\"":`"#1A00DA- class="blue"`,
-				"\"#0098F6\"":`"#0098F6- class="lightblue"`,
-				"\"#0CFCBD\"":`"#0CFCBD- class="turquoise"`,
-				"\"#5DFF61\"":`"#5DFF61- class="green"`,
-				"\"#E9FE90\"":`"#E9FE90- class="yellow"`,
-				"\"#0098F6\"":`"#FFF9C8- class="lightyellow"`,
-				"\"#FFF0e5\"":`"#FFF0e5- class="beije"`
-			}
-			svgHTML=StringReplace(StringReplace(svgHTML,palette),{"- class":"\" class"});
-			svgHTML=svgHTML.replace(/svg width=..?(\d*)..? height=..?(\d*)..?/g,`svg viewbox="0 0 1080 1080" width="100" height="100"`);
-			ReplaceElement(svgHTML,img)
-		};
-		if(InPosfix(src,".svg"))
-			LoadData(src,ReplaceSVG)
-	}
-	images.map(ReplaceSource);
-}

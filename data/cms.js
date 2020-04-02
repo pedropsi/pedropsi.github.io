@@ -40,7 +40,6 @@ P_pmgrp:{...CMSGame,LINK:()=>`pmgrp`,CONTENT:()=>`de00799ea3c9bfb0be74d1030a04c1
 P_combinatura:{...WithImage,IMAGE_EXT:()=>"png",LINK:()=>`combinatura`,POSTSCRIPT:()=>v.GAME_SCRIPT(),TITLE:()=>`Combinatura`,DAY:()=>`6`,MONTH:()=>`7`,YEAR:()=>`2018`,TYPE:()=>`Game`,TAGS:()=>[`Game`,`Nature`,`Travel`],ONE_LINER:()=>`<p>${v.TITLE_BOLD()} is an exploration game that emphasises <b>learning</b> and <b>curiosity</b> about <b>natural phenomena</b>, especially in the domains of astronomy, geology, meteorology and ecology. As many obscure phenomena are discoverable in-Game, ${v.TITLE_BOLD()} teaches everyone something about the natural word.</p>`,TAGLINE:()=>"a game of exploration"},
 P_hastefulll:{...CMSGame,LINK:()=>`hastefulll`,CONTENT:()=>`8b10ae059158c0c4a93c05c9437d0706`,THEMECOLOUR:()=>`rgb(6,71,117)`,TITLE:()=>`Hastefulll`,DAY:()=>`12`,MONTH:()=>`7`,YEAR:()=>`2018`,TAGS:()=>[`Game`,`Platformer`,`Puzzle`,`Puzzlescript`],FEATURED:()=>true,ONE_LINER:()=>`<p>${v.TITLE_BOLD()} is a simple 7-level puzzle platformer about trying to leave a mark everywhere, as fast as possible. However, too much haste may have negative consequences!</p><p>Fill the board, but plan wisely. Haste makes waste!</p>`},
 P_tiaradventur:{...CMSGame,LINK:()=>`tiaradventur`,CONTENT:()=>`04e9b3dc13d2708e64a0adc4ddb916a0`,THEMECOLOUR:()=>`rgb(133,0,38)`,TITLE:()=>`Tiaradventur`,DAY:()=>`28`,MONTH:()=>`8`,YEAR:()=>`2018`,TAGS:()=>[`Game`,`Puzzle`,`Role-playing`,`Puzzlescript`],FEATURED:()=>true,ONE_LINER:()=>`<p>A desperate Princess, on a quest to find seven stolen tiaras, asks for your help. As a Hero in the making, you must not refuse, even in the face of danger! As the story unfolds, you may get to know the Princess better and understand what really is at stake.</p><p>The <em>legend of</em> ${v.TITLE_BOLD()} is yours to write! How much intelligence you dedicate to this <b>role-playing puzzle</b> is up to you...</p>`},
-P_nomadpage:{...WithImage,LINK:()=>`nomadpage`,CONTENT:()=>`https://addons.mozilla.org/en_US/firefox/addon/nomadpage/`,TITLE:()=>`NomadPage`,DAY:()=>`6`,MONTH:()=>`9`,YEAR:()=>`2018`,TAGS:()=>[`Add-on`],CATEGORIES:()=>[`productivity`,`news`],MANIFEST:()=>v.PWA_MANIFEST()},
 P_abxtract_tractx:{...CMSGame,LINK:()=>`abxtract-tractx`,CONTENT:()=>`44de3ef66dcfdce30c1eec78c3ea201c`,THEMECOLOUR:()=>`rgb(255,215,162)`,TITLE:()=>`Abxtract Tractx`,DAY:()=>`4`,MONTH:()=>`10`,YEAR:()=>`2018`,TAGS:()=>[`Art`,`Game`,`Puzzle`,`Puzzlescript`],FEATURED:()=>true,ONE_LINER:()=>`<p>Do you think Abstract Art is too simple to be considered art? Try reproducing all 6 iconic abstract paintings in the very puzzling ${v.TITLE_BOLD()}!</p>`},
 P_gravirinth:{...CMSGame,LINK:()=>`gravirinth`,CONTENT:()=>`c29dda29b38d830d4f48e6578494fb35`,THEMECOLOUR:()=>`rgb(25,4,52)`,TITLE:()=>`Gravirinth`,DAY:()=>`7`,MONTH:()=>`1`,YEAR:()=>`2019`,TAGS:()=>[`Game`,`Platformer`,`Puzzle`,`Puzzlescript`],FEATURED:()=>true,ONE_LINER:()=>`<p>According to legend, a forgotten civilization once mastered the power of gravity, which they used to travel across the Milky Way, in search for alien life. Eager at first to share their wisdom, soon they became aware that most alien life forms were not ready to receive this great power...</p><p>So an enigma was devised to test the intelligence of alien societies, a puzzle marvelous yet so obscure that finding it would be a challenge in the first place. Thus the ${v.TITLE_BOLD()} were born, each hidden into the most promising solar systems.</p><p>In the next millennia, few ${v.TITLE_BOLD()} were ever found, and even fewer yielded their secrets, a rare moment of great joy where two civilisations found they were not alone in the vast cosmos. In the Solar System too had once a ${v.TITLE_BOLD()} been found, but its location was lost to mankind...</p><p><b>...until Xeno, the Exoarchaeologist, arrived.</b> Will the ${v.TITLE_BOLD()} reveal its mysteries?</p>`,TRAILER:()=>"nq4ljKWdwsU",TRAILER_IMAGE:()=>"gravirinth/gravirinth-trailer.png",TAGLINE:()=>"an exoarchaeology expedition"},
 P_gravirinth_log:{...WithImage,LINK:()=>`gravirinth-log`,TITLE:()=>`Gravirinth changelog`,SHORTNAME:()=>`Grav. Log`,DAY:()=>`22`,MONTH:()=>`11`,YEAR:()=>`2018`,TAGS:()=>[`Creative-Archive`,`Log`,`Post`,`Puzzlescript`],IMAGE_EXT:()=>"png"},
@@ -207,4 +206,32 @@ function PostPageHTML(){
 	FilterObject(CMS,GetYear);
 	years=years.sort((a,b)=>a<b);
 	return years.map(ArchiveYearHTML).join("\n");
+}
+
+
+function InlineSVG(){
+	var images=GetElements("img");
+	function ReplaceSource(img){
+		var src=img.src;
+		var alt=img.alt;
+		var title=img.title;
+		function ReplaceSVG(svgHTML){
+			var palette={
+				"\"#002060\"":`"#002060- class="darkblue"`,
+				"\"#1A00DA\"":`"#1A00DA- class="blue"`,
+				"\"#0098F6\"":`"#0098F6- class="lightblue"`,
+				"\"#0CFCBD\"":`"#0CFCBD- class="turquoise"`,
+				"\"#5DFF61\"":`"#5DFF61- class="green"`,
+				"\"#E9FE90\"":`"#E9FE90- class="yellow"`,
+				"\"#0098F6\"":`"#FFF9C8- class="lightyellow"`,
+				"\"#FFF0e5\"":`"#FFF0e5- class="beije"`
+			}
+			svgHTML=StringReplace(StringReplace(svgHTML,palette),{"- class":"\" class"});
+			svgHTML=svgHTML.replace(/svg width=..?(\d*)..? height=..?(\d*)..?/g,`svg viewbox="0 0 1080 1080" width="100" height="100"`);
+			ReplaceElement(svgHTML,img)
+		};
+		if(InPosfix(src,".svg"))
+			LoadData(src,ReplaceSVG)
+	}
+	images.map(ReplaceSource);
 }

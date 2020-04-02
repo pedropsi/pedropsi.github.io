@@ -1060,6 +1060,7 @@ function StartNightMode(){
 
 function ActivateNightMode(){
 	Memory("nightmode",true);
+	UnClass(document.body,"daymode");
 	Class(document.body,"nightmode");
 	if(!Memory("nightmode_on")){
 		Memory("nightmode_on",true);
@@ -1074,6 +1075,7 @@ function ActivateNightMode(){
 function UnActivateNightMode(){
 	Memory("nightmode",false);
 	UnClass(document.body,"nightmode");
+	Class(document.body,"daymode");
 	if(!Memory("nightmode_off")){
 		Memory("nightmode_off",true);
 		ConsoleAddMany([
