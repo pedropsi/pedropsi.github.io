@@ -305,6 +305,9 @@ nav{
 .card-supra img{
 	opacity:0.5;
 	filter:var(--bluefilter);
+}
+
+.card-supra img,.card-supra svg{
 	max-height:var(--h16);
 	width:auto;
 }
@@ -515,7 +518,7 @@ div .index-link:focus {
 	content:" ▲"
 }
 
-img{
+img, svg{
 	padding:var(--h-2) var(--w-2) var(--h-2) var(--w-2);
 	width:auto;
 	background-color:var(--smokewhite);
@@ -684,7 +687,7 @@ figure{
 	align-items: center;
 }
 
-figure img{
+figure img, figure svg{
 	max-width:75%;
 	height:auto;
 }
@@ -1132,11 +1135,14 @@ tr:active .editTD{
 	border-bottom:var(--h-2) solid var(--smokewhite);
 }
 
-.mini img{
+.mini img,.mini svg{
 	max-height:var(--h8);
 	height:auto;
 	padding:0;
 	margin:0;
+}
+
+.mini img{
 	filter:var(--bluefilter);
 }
 
@@ -1149,7 +1155,7 @@ tr:active .editTD{
 		order:2;
 		width:100%;
 	}
-	.mini img{
+	.mini img, .mini svg{
 		max-width:100%;
 		margin:var(--h2) var(--w-2) var(--h2) var(--w-2);
 		order:1
