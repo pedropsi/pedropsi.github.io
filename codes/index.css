@@ -18,7 +18,7 @@
 	--lightgreen:rgba(12,252,189,var(--t))           ;
 	--yellow:rgba(240,248,175,var(--t))			/*#f0f8af*/;
 	--lightyellow:rgba(255,249,201,var(--t))	/*#fff9c9*/;
-	--beije:rgba(255,240,229,var(--t))                   ;
+	--beije:rgba(255,240,229,var(--t))      /*FFF0e5*/;             ;
 	
 	--rainbow:linear-gradient(115deg, 
 		var(--darkblue),
