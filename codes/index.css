@@ -571,26 +571,36 @@ li::before{
 
 svg .darkblue{
 	fill:var(--darkblue);
+	stop-color:var(--darkblue);
 }
 svg .blue{
 	fill:var(--blue);
+	stop-color:var(--blue);
 }
 svg .lightblue{
 	fill:var(--lightblue);
+	stop-color:var(--lightblue);
 }
 svg .turquoise{
 	fill:var(--turquoise);
+	stop-color:var(--turquoise);
 }
 svg .green{
 	fill:var(--green);
+	stop-color:var(--green);
 }
 svg .yellow{
 	fill:var(--yellow);
+	stop-color:var(--yellow);
 }
 svg .lightyellow{
 	fill:var(--lightyellow);
+	stop-color:var(--lightyellow);
 }
-
+svg .beije{
+	fill:var(--beije);
+	stop-color:var(--beije);	
+}
 .nav .logo:hover svg rect{
 	transition-duration:var(--durationOn);
 }
