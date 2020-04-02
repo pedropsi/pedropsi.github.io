@@ -1431,48 +1431,21 @@ var Hiragana={
 };
 
 var Anagrams={
-/*"agama":"a",
-"grama":"a",
-"grana":"a",
-"marga":"a",*/
 "agar":"r",
 "agma":"a",
-"anna":"a",
-"gama":"a",
-"gnar":"r",
+//"anna":"a",
+//"gaga":"a",
+//"gang":"g",
 "gram":"m",
 "gran":"n",
 "maar":"r",
+"maga":"a",
+//"mama":"a",
 "mana":"a",
 "mara":"a",
-"maga":"a",
 "raga":"a",
-"rang":"g",
-/*"aga":"a",
-"ama":"a",
-"ana":"a",
-"arm":"m",
-"gam":"m",
-"gan":"n",
-"gar":"r",
-"mag":"g",
-"man":"n",
-"mar":"r",
-"nag":"g",
-"nam":"m",
-"rag":"g",
-"ram":"m",
-"ran":"n",
-"aa":"a",
-"ag":"g",
-"am":"m",
-"an":"n",
-"ar":"r",
-"ma":"a",
-"na":"a"*/
+"rang":"g"
 }
-
-
 
 
 var Nuclei={
