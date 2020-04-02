@@ -6,6 +6,37 @@
 :root{
 	--t:0.90;
 
+--transparent:rgba(255,255,255,0);
+	--white:rgba(255,255,255,var(--t));			/*#FFF*/
+	--smokewhite:rgba(241,241,241,var(--t))		/*#f1f1f1*/;
+	
+	--darkblue:rgba(7,0,112,var(--t))			/*#070070*/;
+	--blue:rgba(0,15,255,var(--t))				/*#000FFF*/;
+	--lightblue:rgba(25,130,237,var(--t))		/*#1982ed*/;
+	--turquoise:rgba(59,248,222,var(--t))		/*#3bf8de*/;
+	--green:rgba(70,244,111,var(--t))			/*#46f46f*/;
+	--lightgreen:rgba(12,252,189,var(--t))           ;
+	--yellow:rgba(240,248,175,var(--t))			/*#f0f8af*/;
+	--lightyellow:rgba(255,249,201,var(--t))	/*#fff9c9*/;
+	--beije:rgba(255,240,229,var(--t))                   ;
+	
+	--rainbow:linear-gradient(115deg, 
+		var(--darkblue),
+		var(--blue)			67%,
+		var(--lightblue)	75%,
+		var(--turquoise)	82%,
+		var(--green)		88%,
+		var(--yellow)		93%,
+		var(--lightyellow)	97%,
+		var(--white)); 
+	
+	--moonbow:linear-gradient(115deg, 
+		var(--turquoise),
+		var(--blue)			60%,
+		var(--darkblue)); 
+	
+	--bluefilter:sepia(1) hue-rotate(180deg);
+	
 	
 	--durationOff:1s;
 	--durationOn:0.33s;
@@ -105,40 +136,6 @@ body{
 	--bluefilter: sepia(100%) saturate(400%) hue-rotate(310deg);
   --redfilter: invert(20%) sepia(100%) saturate(400%) hue-rotate(310deg);
 }
-
-.daymode div, .daymode{
-	
-	--transparent:rgba(255,255,255,0);
-	--white:rgba(255,255,255,var(--t));			/*#FFF*/
-	--smokewhite:rgba(241,241,241,var(--t))		/*#f1f1f1*/;
-	
-	--darkblue:rgba(7,0,112,var(--t))			/*#070070*/;
-	--blue:rgba(0,15,255,var(--t))				/*#000FFF*/;
-	--lightblue:rgba(25,130,237,var(--t))		/*#1982ed*/;
-	--turquoise:rgba(59,248,222,var(--t))		/*#3bf8de*/;
-	--green:rgba(70,244,111,var(--t))			/*#46f46f*/;
-	--lightgreen:rgba(12,252,189,var(--t))           ;
-	--yellow:rgba(240,248,175,var(--t))			/*#f0f8af*/;
-	--lightyellow:rgba(255,249,201,var(--t))	/*#fff9c9*/;
-	--beije:rgba(255,240,229,var(--t))                   ;
-	
-	--rainbow:linear-gradient(115deg, 
-		var(--darkblue),
-		var(--blue)			67%,
-		var(--lightblue)	75%,
-		var(--turquoise)	82%,
-		var(--green)		88%,
-		var(--yellow)		93%,
-		var(--lightyellow)	97%,
-		var(--white)); 
-	
-	--moonbow:linear-gradient(115deg, 
-		var(--turquoise),
-		var(--blue)			60%,
-		var(--darkblue)); 
-	
-	--bluefilter:sepia(1) hue-rotate(180deg);
-	}
 
 .nightmode img{
 	filter:var(--redfilter);
