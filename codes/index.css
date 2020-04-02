@@ -521,7 +521,6 @@ div .index-link:focus {
 img, svg{
 	padding:var(--h-2) var(--w-2) var(--h-2) var(--w-2);
 	width:auto;
-	background-color:var(--smokewhite);
 	vertical-align:middle;
 	display:inline-block;
 	max-width:100%;
