@@ -450,7 +450,7 @@ CSF							:	()=>	`<span>></span></code>`
 
 };
 
-try{v={...v,...Variables}}
+try{v={..Variables,...v}}
 catch{v=Variables}
 Shout("variables");
 
