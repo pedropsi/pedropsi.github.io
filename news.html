@@ -1,8 +1,7 @@
 ﻿<!DOCTYPE html>
 <link href="codes/index.css" rel="stylesheet" type="text/css"/>
 <script src="codes/data-transfer.js"></script>
-<script src="data/page.js"></script>
-<script id="post">var Post={POST:()=>`
+<script id="post">var v={POST:()=>`
 
 <p>This is the ${v.SITE_NAME()}'s news stream, live since <b>${v.DATE_TEXT(v)}</b>. Check back often to keep abreast of the most relevant developments, or ${v.A_SUBSCRIBE()}!</p>
 
@@ -11,4 +10,4 @@ ${NewsHTML()}
 ${v.SUBSCRIBE_ANNOUNCE()}
 ${v.GUESTBOOK_MESSAGE()}
 
-`};try{v={...v,...Post}}catch{v=Post}</script>
+`};</script><script src="data/page.js"></script>

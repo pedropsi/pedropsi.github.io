@@ -1,8 +1,7 @@
 ﻿<!DOCTYPE html>
 <link href="codes/index.css" rel="stylesheet" type="text/css"/>
 <script src="codes/data-transfer.js"></script>
-<script src="data/page.js"></script>
-<script id="post">var Post={POST:()=>`
+<script id="post">var v={POST:()=>`
 
 <h2>${v.TITLE_BOLD()}</h2>
 <p>${v.ONE_LINER()} Currently the database contains <b><span id="titlenumber" class="updatable">1350</span> puzzlescript games</b>, and is complete up to <b>December 31st 2019</b>.</p>
@@ -105,4 +104,4 @@ ${v.AUTO_CITATION()}
 
 ${v.FEEDBACK()}
 
-`};try{v={...v,...Post}}catch{v=Post}</script>
+`};</script><script src="data/page.js"></script>

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <link href="codes/index.css" rel="stylesheet" type="text/css"/>
 <script src="codes/data-transfer.js"></script>
-<script src="data/page.js"></script>
-<script id="post">var Post={POST:()=>`
+<script id="post">var v={POST:()=>`
 
 <p>The ${v.SITE_NAME()} does not collect <em>personal data</em> as defined in ${v.A_GDPR_A4()}, except when you <b>you explicitly choose</b> to communicate it, in which case ${v.A_GDPR()} will be <b>respected</b>.<p>
 <p>Moreover, the ${v.SITE_NAME()} is designed to minimise privacy risks. <b>Here's how!</b></p>
@@ -102,4 +101,4 @@ This information is kept <b>private</b> in a <em>Google</em> account. </p>
 <h2>More...</h2>
 <p><b>Suggestions for improvement of the ${v.SITE_NAME()}'s Privacy are always ${v.A_WELCOME()}!</b></p>
 
-`};try{v={...v,...Post}}catch{v=Post}</script>
+`};</script><script src="data/page.js"></script>

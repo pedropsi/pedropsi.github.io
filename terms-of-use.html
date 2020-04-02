@@ -1,8 +1,7 @@
 ﻿<!DOCTYPE html>
 <link href="codes/index.css" rel="stylesheet" type="text/css"/>
 <script src="codes/data-transfer.js"></script>
-<script src="data/page.js"></script>
-<script id="post">var Post={POST:()=>`
+<script id="post">var v={POST:()=>`
 
 <h2>General rule</h2>
 <p>All content in ${v.SITE_NAME()}, including the design and the <a href="${v.LOGO_PATH()}" ${v.BLANK()}>logo</a> is, unless otherwise stated, <b>${v.COPYRIGHT_TEXT()}</b>.</p>
@@ -23,4 +22,4 @@
 <h3>Content marked with specific licenses</h3>
 <p>Some content is shared under the license ${v.LICENSE_CC_BY_NC_SA_4()} or similar. Specific licenses always take precedence over the general rule.</p>
 
-`};try{v={...v,...Post}}catch{v=Post}</script>
+`};</script><script src="data/page.js"></script>
