@@ -84,7 +84,6 @@ function InlineSVG(){
 			}
 			svgHTML=StringReplace(StringReplace(svgHTML,palette),{"- class":"\" class"});
 			svgHTML=svgHTML.replace(/svg width=..?(\d*)..? height=..?(\d*)..?/g,`svg viewbox="0 0 1080 1080" width="100" height="100"`);
-		overflow="visible"
 			ReplaceElement(svgHTML,img)
 		};
 		if(InPosfix(src,".svg"))
