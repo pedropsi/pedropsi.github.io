@@ -57,6 +57,8 @@ ListenOnce("load",LoadCMS);
 
 function PageSkeletonHTML(){
 	return `
+<!DOCTYPE html>
+<link href="codes/index.css" rel="stylesheet" type="text/css"/>
 <script src="codes/data-transfer.js"></script>
 <script src="data/page.js"></script>
 <script id="post">var Post={POST:()=>""};
