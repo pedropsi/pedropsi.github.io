@@ -28,7 +28,6 @@ A_FOLKEMUSEUM:{PAGE:"https://norskfolkemuseum.no",TITLE:"Norsk Folkemuseum",AUTH
 A_GOPHERS:{PAGE:"https://what-gophers-go-for.github.io/",TITLE:"What Gophers Go For",AUTHOR:"Thinky Collective",GROUP:"with-game-bar"},
 A_LICENSE_PUZZLESCRIPT:{PAGE:"https://github.com/increpare/PuzzleScript/blob/master/README.md",TITLE:"MIT License"},
 A_MANIFOLD_GARDEN:{PAGE:"https://manifold.garden",TITLE:"Manifold Garden",AUTHOR:"William Chyr"},
-A_MATERIAL_ICONS:{PAGE:"https://material.io/tools/icons/",TITLE:"solid icons",AUTHOR:"Material Design"},
 A_11_LESSONS:{PAGE:"11-lessons-from-11-games",EXT:".html",TITLE:"11 lessons"},
 A_ABXTRACT_TRACTX:{PAGE:"abxtract-tractx",EXT:".html",TITLE:"Abxtract Tractx"},
 A_BLOCKWORKS:{PAGE:"blockworks",EXT:".html",TITLE:"Blockworks"},
