@@ -677,23 +677,19 @@ function PageURL(){
 	return ""+window.location;
 }
 
-
 function PageTag(url){
 	if(typeof url==="undefined")
 		return PageTag(PageURL());
 	else
-		return url.replace(/(.*#)/,"").replace(url,"");
+		return url.replace(/([^#]*#)/,"").replace(url,"");
 }
 
 function PageUnTag(url){
 	if(typeof url==="undefined")
 		return PageUnTag(PageURL());
 	else{
-		var u=url;
-		if(PageTag(u)==="")
-			return u.replace("#","");
-		else
-			return u.replace(CombineRegex(/\#/,ForwardRegex(PageTag(u))),"");
+		var tag="#"+PageTag(url);
+		return UnPosfix(url,tag);
 	}
 }
 
