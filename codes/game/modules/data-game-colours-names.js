@@ -976,6 +976,9 @@ function NamedColour(colorstring){
 	return c[0][3];
 }
 
-SaveTest(NamedColour,"#FFFFFF","White","hex to white");
-SaveTest(NamedColour,"#FF0000","Red","hex to red");
-SaveTest(NamedColour,"#000000","Black","hex to black");
+
+try{
+	SaveTest(NamedColour,"#FFFFFF","White","hex to white");
+	SaveTest(NamedColour,"#FF0000","Red","hex to red");
+	SaveTest(NamedColour,"#000000","Black","hex to black");
+}catch(err){}

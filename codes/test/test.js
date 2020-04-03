@@ -1,3 +1,88 @@
+/*
+function EnableTestMode(){
+	LoadAsync("test-behaviour","codes");
+}
+*/
+
+///////////////////////////////////////////////////////////////////////////////
+//Test suite saver
+//Run Test() to execute and report the tests on the list of saved functions
+//provided there is an element in the page labelled with the result of TestingAreaSelector()
+
+function TestFunction(functionname,testname){
+	var functionname=(typeof functionname==="string")?functionname:FunctionName(functionname);
+	var test=Test[functionname][testname];
+	if(test){
+		var result="___WRONGRESULT___";
+		try{
+			result=test["function"].apply(null,test["arguments"]);
+		}
+		catch(e){
+			console.log(e);
+		}
+		var expect=test["expected"];
+		var passed=(Equal(result,expect));
+		ReportTest(functionname,testname,test,passed,result,expect);
+		return passed;
+	}
+}
+
+var ErrorReport=[];
+
+function ReportTest(functionname,testname,test,passed,result,expect){
+	if(passed)
+		return;
+	var testfunctionid="test-"+functionname;
+	if(!GetElement(testfunctionid))
+		AddElement("<h3 class='test-function' id='"+testfunctionid+"'>"+functionname+"</h3>",TestingAreaSelector());
+
+	var testid=IDfy("test-"+functionname+" "+testname);
+	var testtitle="<h4>"+testname+"</h4>"+"<p><code>"+functionname+"("+UnExfix(JSON.stringify(test["arguments"]),"[","]")+")="+JSON.stringify(result)+"</code>";
+	
+	var testreport=(passed?LabelHTML("Passed","test"):(LabelHTML("Failed","test Problem")+"</p><p>Expected:<code>"+JSON.stringify(expect))+"</code></p>");
+
+	ErrorReport.push([functionname,testname]);
+	
+	RemoveElement(testid);
+	AppendElement("<div class='test-result' id='"+testid+"'>"+testtitle+testreport+"</div>",testfunctionid);
+}
+
+function Test(functionname){
+	if(!functionname&&Test.functions){
+		AddElement("<p>Tests complete!</p>",TestingAreaSelector());
+		var tests=Test.functions.map(Test);
+		if(ErrorReport.length>0)
+			RegisterStatus(ErrorReport);
+		return tests;
+	}
+
+	var functionname=(typeof functionname==="string")?functionname:FunctionName(functionname);
+	var tests=Test[functionname];
+
+	return Keys(tests).map(function(testname){TestFunction(functionname,testname)});
+}
+
+function SaveTest(F,argArray,result,testname){
+
+	var functionname=FunctionName(F)||String(F);
+
+	if(!Test.functions)
+		Test.functions=[];
+
+	if(!Test[functionname]){
+		Test[functionname]={};
+		Test.functions.push(functionname);
+	}
+	var argArray=IsArray(argArray)?argArray:[argArray];
+	var testname=testname?testname:(functionname+"("+argArray.map(String).join(",")+")");
+	
+	Test[functionname][testname]={"function":F,"arguments":argArray,"expected":result};
+}
+
+function TestingAreaSelector(){
+	return ".test-suite";
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Do nothing
 
@@ -363,6 +448,15 @@ SaveTest(PageUnHead,"http://pedropsi.github.io/folder/guestbook.html","pedropsi.
 SaveTest(PageUnHead,"folder/guestbook.html","folder/guestbook.html","relative");
 SaveTest(PageUnHead,"www.xxx.yyy","www.xxx.yyy","www yet relative");
 
+
+SaveTest(PageTag,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html#one","one","local tag");
+SaveTest(PageTag,"http://pedropsi.github.io/folder/guestbook.html#one","one","online tag");
+SaveTest(PageTag,"folder/guestbook.html#one#more","one#more","double chained tags");
+SaveTest(PageTag,"https://pedropsi.github.io/folder/guestbook.html#","","empty tag");
+
+
+SaveTest(PageUnTag,"https://pedropsi.github.io/gravirinth.html#$%F0%9F%93%B0%C2%BB","https://pedropsi.github.io/gravirinth.html","strange tag");
+
 SaveTest(PageIdentifier,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html","guestbook","file:///");
 SaveTest(PageIdentifier,"https://pedropsi.github.io/folder/guestbook.html","guestbook","https://");
 SaveTest(PageIdentifier,"http://pedropsi.github.io/folder/guestbook.html","guestbook","http://");
@@ -391,14 +485,6 @@ SaveTest(IsInnerLink,"folder/guestbook.html",true,"relative domain");
 SaveTest(IsInnerLink,"www.xxx.yyy",false,"online external www");
 SaveTest(IsInnerLink,"http://www.xxx.yyyl",false,"online external full http");
 SaveTest(IsInnerLink,"https://www.google.com/url?q=https%3A%2F%2Fpedropsi.github.io%2Fguestbook.html%23randomsomething",false,"from google");
-
-
-SaveTest(PageTag,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html#one","one","local tag");
-SaveTest(PageTag,"http://pedropsi.github.io/folder/guestbook.html#one","one","online tag");
-SaveTest(PageTag,"folder/guestbook.html#one#more","more","chained tags");
-SaveTest(PageTag,"https://pedropsi.github.io/folder/guestbook.html#","","empty tag");
-
-
 
 SaveTest(PageSearch,["source","https://pedropsi.github.io/anypage.html?source=homepage"],"homepage","present query string");
 SaveTest(PageSearch,["source","https://pedropsi.github.io/anypage.html?source=homepage&source=elsewhere"],"elsewhere","duplicates, prefer last parameter)");
@@ -723,10 +809,9 @@ SaveTest(SplitCD,["ana banana maria","lol","lol"],"","not present");
 
 */
 
-
 ///////////////////////////////////////////////////////////////////////////////
 //Run Tests only after loading the external resources below
-ListenOnce("TestReady",Test);
+//ListenOnce("TestReady",Test);
 
 ///////////////////////////////////////////////////////////////////////////////
 // To Improve
@@ -753,3 +838,8 @@ ListenOnce("TestReady",Test);
 	Listen(ReadySignal,TestF);
 	Listen(CleanupSignal,CleanupF);
 })();*/
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+Test()
