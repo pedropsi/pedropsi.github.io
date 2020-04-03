@@ -365,7 +365,7 @@ L_EXP						:	()=>	LabelHTML("Experimental","Problem"),
 
 
 MANIFEST					:	()=>"",
-PWA_MANIFEST				:	()=>	`<link rel="manifest" id="manifest" href='data:application/manifest+json,${console.log(v.PWA_MANIFEST_CONTENT()),v.PWA_MANIFEST_CONTENT()}'/>`,
+PWA_MANIFEST				:	()=>	`<link rel="manifest" id="manifest" href='data:application/manifest+json,${v.PWA_MANIFEST_CONTENT()}'/>`,
 PWA_MANIFEST_CONTENT		:	()=>	`{${v.PWA_NAME()},${v.PWA_DISPLAY()},${v.PWA_ICONS()},${v.PWA_DESC()},${v.PWA_LANG()},${v.PWA_SCOPE()},${v.PWA_WORKER()}}`,
 
 DESCRIPTION					:	()=>	v.PARSER_MARKSHORT(v.POST()),
