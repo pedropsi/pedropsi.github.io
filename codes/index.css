@@ -177,6 +177,7 @@ a{
 .section{
 	display:flex;
 	overflow:visible;
+	max-width: 100%;
 	height:auto;
 	flex-direction:column;
 	justify-content:space-between;
@@ -514,8 +515,10 @@ div .index-link:focus {
 .collapse::after{
 	content:" ▲"
 }
-
-.image{
+img{
+	height:auto;
+}
+.image, img{
 	padding:var(--h-2) var(--w-2) var(--h-2) var(--w-2);
 	width:auto;
 	vertical-align:middle;
