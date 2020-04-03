@@ -334,24 +334,23 @@
   100% { width: 100%; } 
 }  
 
-.logoname-supra{
-    width: 10%;
-    background-color: white;
+.logoname-supra{   
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 50%
-    
+    width: var(--boxwidth);
+    --boxheight:calc(var(--h8) + var(--w4));
+    --boxwidth:calc(5 * var(--boxheight));
 }
 
 .logoname{
-    height: var(--h32);
-    font-size: var(--h16);
+    height: calc(var(--boxheight));
+    font-size: var(--boxheight);
     font-weight: bold;
     font-feature-settings:normal;
-    background-color: gray;
-    width: 100%
+    width: 100%;
+    
 }
 
 .logoname div{
