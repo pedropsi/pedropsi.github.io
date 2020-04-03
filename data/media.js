@@ -149,7 +149,8 @@ function ImageCardHTML(ImageObj){
 		<div class="card">
 			<img 	src="images/${ImageObj.FOLDER_SMALL}/${ImageObj.TRACK}"}" 
 					alt="${ImageObj.DESCRIPTION}" 
-					title="${ImageObj.DESCRIPTION}" 
+					title="${ImageObj.DESCRIPTION}"
+					class="image"
 					loading="lazy"/>
 		</div>
 	</a>`;
