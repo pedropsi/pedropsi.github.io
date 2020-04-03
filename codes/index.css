@@ -252,7 +252,7 @@ nav{
 }
 
 .title{
-	padding:var(--h4) 0px var(--h4) 0px;
+	padding:var(--h4) 0 var(--h4) 0;
 	margin:var(--h4) 0 var(--h1) 0;
 	border: unset;
 	background-color:var(--white);
