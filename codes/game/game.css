@@ -345,6 +345,7 @@
 }
 
 .logoname{
+    margin-bottom: calc(var(--boxheight));
     height: calc(var(--boxheight));
     font-size: var(--boxheight);
     font-weight: bold;

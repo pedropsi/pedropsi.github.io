@@ -96,6 +96,7 @@ var ObtainKeyboardAllowed=true;
 // Load the game bar & prepare game
 
 var gameModules=[
+"data-game-intro",
 "data-game-colours",
 "data-game-colours-names",
 "data-game-extras",
