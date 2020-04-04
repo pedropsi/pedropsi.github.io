@@ -2682,16 +2682,16 @@ function CloseWindow(e){
 	CloseElement(ParentElement(e,".window"));
 }
 
-function CloseElement(targetIDsel){
-	var fading=GetElement(targetIDsel);
+function CloseElement(targetIDsel,parentIDsel){
+	var fading=GetElement(targetIDsel,parentIDsel);
 	if(fading){
 		fading.classList.add("closing");
 		setTimeout(function(){fading.remove();},1000);
 	}
 }
 
-function CloseElementNow(targetIDsel){
-	var fading=GetElement(targetIDsel);
+function CloseElementNow(targetIDsel,parentIDsel){
+	var fading=GetElement(targetIDsel,parentIDsel);
 	if(fading!==null){
 		fading.remove();
 	}
