@@ -1554,7 +1554,7 @@ table .label{
 }
 
 .product-container .product-image{
-	max-width: 75%;
+	max-width: var(--w32);
 	height: auto;
 }
 

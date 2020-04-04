@@ -8,7 +8,7 @@ PROD_PUZZLE_TYPE:{
 	CALL:()=>"Find out whether you're the <b>Puzzle type</b>!",
 	ONE_LINER:()=>"<p>Are you the <b>Puzzle-type</p>? Find out in this cryptic keyboard typing puzzle!</p>",
 	DETAILS:()=>`<p>Desktop version.</p><p>All information in the official ${v.A_PUZZLE_TYPE()} page.</p>`,
-	IMAGE_NAME:()=>"puzzle-type",
+	LINK:()=>"puzzle-type",
 	IMAGE_EXT:()=>"gif",
 	IMAGE_ALT:()=>"Puzzle type",
 	PRODUCT_KEY:()=>"sku_GE9y0FHJHS0rtN",
@@ -27,7 +27,7 @@ PROD_GIFT:{
 	CALL:()=>"Spread the good karma.",
 	ONE_LINER:()=>`<p>Do you like the ${v.SITE_NAME()}</p>? This is an option to show your appreciation!</p>`,
 	DETAILS:()=>`<p>Presents?</p>`,
-	IMAGE_NAME:()=>"store",
+	LINK:()=>"store",
 	CALL:()=>"Ho ho ho!",
 	IMAGEALT:()=>"Coming soon.",
 	ACTION_BUTTON:v.BUTTON_SOON,
@@ -46,7 +46,8 @@ function ProductHTML(ProdObj){
 	return `<div class="product-container">
 		<h2 class="product-title">${ProdObj.TITLE()}</h2>
 		<p class="product-tagline">${ProdObj.TAGLINE()}</p>
-		<div class="product_IMAGE">${v.PICTURE(ProdObj,180)}</div>
+		<div class="product-image">
+		${v.PICTURE(ProdObj,180)}</div>
 		<div class="product-details text">${ProdObj.DETAILS()}</div>
 		<div class="checkout">
 			<div class="product-call text">${ProdObj.CALL()}</div>
