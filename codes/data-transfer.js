@@ -2552,7 +2552,7 @@ function ToggleThisOnly(ev,thi,maxparent){
 // Select, Deselect and Toggle - given selector or element itself
 
 function Class(selectorE,clas){
-	var clas=clas||'selected';
+	var clas=UnPrefix(clas,".")||'selected';
 	var e=GetElement(selectorE);
 	if(e){
 		e.classList.remove(clas);
@@ -2562,7 +2562,7 @@ function Class(selectorE,clas){
 }
 
 function UnClass(selectorE,clas){
-	var clas=clas||'selected';
+	var clas=UnPrefix(clas,".")||'selected';
 	var e=GetElement(selectorE);
 	if(e)
 		e.classList.remove(clas);
