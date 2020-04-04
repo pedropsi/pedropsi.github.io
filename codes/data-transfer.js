@@ -2623,6 +2623,17 @@ function ShowElement(selectorE){
 	UnClass(selectorE,"hidden");
 }
 
+
+function UnFadeElement(e){
+	if(!e)
+		return;
+	ShowElement(e);
+	var o=e.style.opacity;
+	e.style.opacity=0;
+	Class(e,"opening");
+	setTimeout(function(){UnClass(e,"opening");e.style.opacity=o},1000);
+}
+
 function Show(selectorE){
 	var e=GetElements(selectorE);
 	if(e.length)
@@ -2666,20 +2677,26 @@ function ShowHide(selectorE){
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Closing functions
+// Opening / Closing functions
 
-function CloseWindow(e){
-	CloseElement(ParentElement(e,".window"));
+function OpenElement(e,parentIDsel){
+	if(!e)
+		return;
+	e=Element(e);
+	UnFadeElement(e);
+	AddElement(e,parentIDsel);
 }
 
 function CloseElement(targetIDsel,parentIDsel){
 	var fading=GetElement(targetIDsel,parentIDsel);
 	if(fading){
-		fading.classList.add("closing");
-		setTimeout(function(){fading.remove();},1000);
+		Class(fading,"closing");
+		setTimeout(function(){RemoveElement(targetIDsel,parentIDsel)},1000);
 	}
 }
 
+function CloseWindow(e){
+	CloseElement(ParentElement(e,".window"));
 }
 
 function Close(targetid){
