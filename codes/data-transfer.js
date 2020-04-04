@@ -1639,7 +1639,6 @@ function FirstChildren(targetIDsel){
 		return Array.from(e.children);
 }
 
-// Get Children Elements matching particular sleector
 function Children(targetIDsel,childIDselString){
 //	if(!childIDselString)
 //		return FirstChildren(targetIDsel);
@@ -1933,9 +1932,10 @@ function ButtonHTML(optionsObj){
 	return ElementHTML(o);
 };
 
-function AHTML(title,ref){
+function AHTML(title,ref,attribs){
 	var external=InPrefix(ref,"http");
-	var attribs={href:ref};
+	var attribs=attribs||{};
+	attribs["href"]=ref;
 	if(external)
 		attribs["rel"]="noreferrer noopener";
 	return ElementHTML({tag:"a",txt:title,attributes:attribs});
