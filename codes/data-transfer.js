@@ -1327,20 +1327,6 @@ function LoadStyle(sourcename){
 	head.appendChild(styleelement);
 }
 
-/*
-function LoadSVG(source){
-	var head=GetElement('head');
-	var script=document.createElement('script');
-	script.src=Posfix(UnPosfix(source,".js"),".svg");
-	script.id="svg-"+source.replace("/","").replace(".","");
-	head.appendChild(script);
-	return "<span id='"+source.replace("/","").replace(".","")+"'></span>";
-}
-
-function ReplaceSVG(svg,source){
-	GetElement(source.replace("/","").replace(".","")).innerHTML=svg;
-}*/
-
 ///////////////////////////////////////////////////////////////////////////////
 //Data Reception
 
