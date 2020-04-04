@@ -696,9 +696,9 @@ function PageUnTag(url){
 	}
 }
 
-function PageIdentifier(url){
+function PageIdentifierStrict(url){
 	if(typeof url==="undefined")
-		return PageIdentifier(PageURL());
+		return PageIdentifierStrict(PageURL());
 	else{
 		var urlAfter=PageUnTag(url).replace(/(.*\/)/,"");
 		if(IsMaybeRoot(urlAfter))
@@ -707,6 +707,11 @@ function PageIdentifier(url){
 			return urlAfter.replace(".html","").replace(".htm","").replace(/\?.*/g,"");
 	}
 }
+
+function PageIdentifier(url){
+	return PageIdentifierStrict()||"index";
+}
+
 
 function PageUnHead(url){
 	if(typeof url==="undefined")
@@ -763,7 +768,7 @@ function PageIdentifierExtension(url){
 	if(typeof url==="undefined")
 		return PageIdentifierExtension(PageURL());
 	else{
-		return url.replace(url.replace(ForwardRegex(PageIdentifier(url)),""),"");
+		return url.replace(url.replace(ForwardRegex(PageIdentifierStrict(url)),""),"");
 	}
 }
 
@@ -1485,7 +1490,8 @@ function IsQuerySelector(selector){
 
 function ParentSelector(targetIDsel){
 	var parentElement=ParentElement(targetIDsel);
-	return Prefix(UniqueId(parentElement),"#");
+	if(parentElement)
+		return Prefix(UniqueId(parentElement),"#");
 }
 
 function MakeQuerySelector(selector){
