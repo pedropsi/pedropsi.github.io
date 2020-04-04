@@ -1131,7 +1131,7 @@ function Navigate(url,samewindow){
 		window.location.href=url;
 	else{//NewTab
 		var id=GenerateId();
-		PreAddElement("<a href='"+url+"'target='_blank' id='"+id+"'> </a>","body");
+		PreAddElement(AHTML(" ",url,{"id":id}),"body");
 		GetElement(id).click();
 		RemoveElement(id);
 	}
