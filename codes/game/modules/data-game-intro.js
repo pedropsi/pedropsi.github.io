@@ -33,8 +33,19 @@ var LOGONAME=`
 </div></div>`;
 	
 function PlayIntro(){
-	RemoveChildren(".game");
+	PlayIntro.save=Children(".game");
+	PlayIntro.save.map(Hide);
 	Class(".game","intro");
-	GetElement(".game").innerHTML=LOGO;
-	AddElement(LOGONAME,".game");
+	OpenElement(LOGO,".intro");
+	OpenElement(LOGONAME,".intro");
+	setTimeout(HideIntro,3000)
+}
+
+function UnPlayIntro(){
+	CloseElement("svg",".intro");
+	CloseElement(".logoname-supra",".intro");
+	setTimeout(function(){
+		UnClass(".game","intro");
+		PlayIntro.save.map(UnFadeElement);
+	},3000);
 }
