@@ -163,7 +163,7 @@ function NightModeToggled(b){Listen("click", function(){RegisterNightModeToggled
 // Analytics Behaviour
 
 function AnalyticsClearance(){
-	return ((PageTag()!==clearance)&&!isFileLink(PageURL()))||(PageSearch("source")==="homescreen");
+	return ((PageTag()!==clearance)&&!IsFileLink(PageURL()))||(PageSearch("source")==="homescreen");
 }
 
 function StartAnalytics(){

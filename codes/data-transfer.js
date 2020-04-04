@@ -1070,41 +1070,41 @@ var UTF8={
 
 //SECONDARY
 
-function isRelativeLink(url){
+function IsRelativeLink(url){
 	return PageRelativePath(url)===url;
 }
 
-function isFileLink(url){
+function IsFileLink(url){
 	return PageHead(url)==="file:///";
 }
 
 function isLocalLink(url){
-	return isRelativeLink(url)||isFileLink(url);
+	return IsRelativeLink(url)||IsFileLink(url);
 }
 
-function isInOwnDomain(url){
+function IsInOwnDomain(url){
 	return url.replace(predomainshard,"")!==url;
 }
 
-function isIntraPageLink(url){
+function IsIntraPageLink(url){
 	var inpage=UnPrefix(url,"#");
 	return url!=inpage;
 }
 
-function isExtraPageLink(url){
-	return !isIntraPageLink(url);
+function IsExtraPageLink(url){
+	return !IsIntraPageLink(url);
 }
 
 function IsInnerLink(url){
-	return isExtraPageLink(url)&&(isLocalLink(url)||isInOwnDomain(url));
+	return IsExtraPageLink(url)&&(isLocalLink(url)||IsInOwnDomain(url));
 }
 
 function IsOuterLink(url){
-	return isExtraPageLink(url)&&!(isLocalLink(url)||isInOwnDomain(url));
+	return IsExtraPageLink(url)&&!(isLocalLink(url)||IsInOwnDomain(url));
 }
 
 function IsAbsolutableLink(url){
-	return isExtraPageLink(url)&&(isRelativeLink(url)||isInOwnDomain(url));
+	return IsExtraPageLink(url)&&(IsRelativeLink(url)||IsInOwnDomain(url));
 }
 
 //Glocal Files

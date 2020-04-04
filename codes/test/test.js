@@ -471,9 +471,9 @@ SaveTest(PageIdentifier,"https://pedropsi.github.io/puzzlescript-games-database#
 
 
 
-SaveTest(isRelativeLink,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html",false,"local");
-SaveTest(isRelativeLink,"http://pedropsi.github.io/folder/guestbook.html",false,"online");
-SaveTest(isRelativeLink,"folder/guestbook.html",true,"relative domain");
+SaveTest(IsRelativeLink,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html",false,"local");
+SaveTest(IsRelativeLink,"http://pedropsi.github.io/folder/guestbook.html",false,"online");
+SaveTest(IsRelativeLink,"folder/guestbook.html",true,"relative domain");
 
 SaveTest(isLocalLink,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html",true,"local");
 SaveTest(isLocalLink,"http://pedropsi.github.io/folder/guestbook.html",false,"online");
