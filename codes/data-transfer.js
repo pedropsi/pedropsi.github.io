@@ -424,10 +424,14 @@ function Capitalise(word){
 
 //Escape
 
+function Tokens(){
+	return ",;.:-_~^*+´`¨«»'?!'@£§#$%&/|(){}[]=";
+}
+
 function EscapeToken(token){
 	if(token===" ")
 		return "\\s";
-	if(!In(",;.:-_~^*+´`¨«»'?!'@£§#$%&/|(){}[]=",token))
+	if(!In(Tokens(),token))
 		return token;
 	else
 		return "\\"+token;
