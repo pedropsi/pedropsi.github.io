@@ -1639,9 +1639,11 @@ function FirstChildren(targetIDsel){
 		return Array.from(e.children);
 }
 
+// Get Children Elements matching particular selector
 function Children(targetIDsel,childIDselString){
-//	if(!childIDselString)
-//		return FirstChildren(targetIDsel);
+	if(typeof childIDselString==="undefined")
+		return FirstChildren(targetIDsel);
+
 	var es=[GetElement(targetIDsel)];
 	var match=MatchAnyElement(es,childIDselString);
 	while(es.length>0&&FirstChildren(es).length>0&&!match){
