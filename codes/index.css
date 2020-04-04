@@ -1450,7 +1450,7 @@ kbd{
 	cursor:none;
 }
 .hidden{
-	display:none;
+	display:none !important;
 }
 
 .label{
