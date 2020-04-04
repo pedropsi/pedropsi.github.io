@@ -2680,11 +2680,6 @@ function CloseElement(targetIDsel,parentIDsel){
 	}
 }
 
-function CloseElementNow(targetIDsel,parentIDsel){
-	var fading=GetElement(targetIDsel,parentIDsel);
-	if(fading!==null){
-		fading.remove();
-	}
 }
 
 function Close(targetid){
