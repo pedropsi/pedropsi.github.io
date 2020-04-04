@@ -1485,7 +1485,7 @@ function IsQuerySelector(selector){
 
 function ParentSelector(targetIDsel){
 	var parentElement=ParentElement(targetIDsel);
-	return "#"+UniqueId(parentElement);
+	return Prefix(UniqueId(parentElement),"#");
 }
 
 function MakeQuerySelector(selector){
