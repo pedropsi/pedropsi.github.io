@@ -709,7 +709,7 @@ function PageIdentifierStrict(url){
 }
 
 function PageIdentifier(url){
-	return PageIdentifierStrict()||"index";
+	return PageIdentifierStrict(url)||"index";
 }
 
 
