@@ -339,7 +339,7 @@ function ForbidCaret(){
 }
 
 function ForbidNumberActions(key){
-	return (!In(["Nokia 1998","Symmetric","Yellow"],CurLevelName())&&In(NumberCharacters,key));
+	return (!In(["Nokia 1998","Symmetric","Fuchsia"],CurLevelName())&&In(NumberCharacters,key));
 }
 
 function ForbidSymbolActions(key){
@@ -390,7 +390,7 @@ var LevelGoals=[			//Required types of thinking:
 	"CherishedWoman",		//Word, Retroactive
 	"Odd",					//Word, Positional, Retroactive
 
-	"Yellow",				//Language, Knowledge, Retroactive
+	"Fuchsia",				//Language, Knowledge, Retroactive
 	"Dividi",				//Retroactive, Mapping, Language
 
 	"Anagram",				// Word, Mapping, Retroactive
@@ -505,7 +505,7 @@ var LevelActions={
 		PlaceEndCaret();
 	},
 	"-----.-.....":Morse,
-	"Yellow":Yellow,
+	"Fuchsia":Fuchsia,
 	"Anagram":Anagram,
 	"Nucleus":Nucleus
 }
@@ -606,15 +606,15 @@ function Nucleus(L){
 	PlaceEndCaret();
 }
 
-function Yellow(L){
+function Fuchsia(L){
 	function Restart(){
-		Yellow.colour=false;
+		Fuchsia.colour=false;
 		ForbidCaret();
 		ClearLetters();
 	}
 	
-	if(!Yellow.colour)
-		Yellow.colour=false;
+	if(!Fuchsia.colour)
+		Fuchsia.colour=false;
 	else{
 		Restart();
 		return;
@@ -641,7 +641,7 @@ function Yellow(L){
 			AddSingleElement("<style class='overcolour'>.letter{color:"+hex+";border-bottom-color:"+hex+"} .letter.caret{background-color:"+hex+"}</style>",'BODY','.overcolour');
 			setTimeout(function(){RemoveElement(".overcolour");},1000);
 
-			Yellow.colour=true;
+			Fuchsia.colour=true;
 			return;
 		}
 	}
@@ -1757,7 +1757,7 @@ var LetterDisplay={
 	"Dividi":LetterDraftHTML,
 	"Nucleus":LetterDraftHTML,
 	"Anagram":LetterDraftHTML,
-	"Yellow":LetterDraftHTML,
+	"Fuchsia":LetterDraftHTML,
 	"Nigeria":LetterDraftHTML
 }
 
@@ -1920,7 +1920,7 @@ function LoadLevelState(levelstate){
 	Anagram.partial=First(levelstate['Anagram']);
 	Anagram.used=Rest(levelstate['Anagram']);
 	Nigeria.freeze=levelstate['Nigeria'];
-	Yellow.colour=levelstate['Yellow'];
+	Fuchsia.colour=levelstate['Fuchsia'];
 	Nokia.last=levelstate['Nokia 1998'];
 	UpdateLevelSecretly();
 }
@@ -1939,7 +1939,7 @@ function LevelZeroState(){
 		'Anagram':[""],
 		'Nucleus':[],
 		'Nigeria':false,
-		'Yellow':false,
+		'Fuchsia':false,
 		'Nokia 1998':false
 	};
 	return state;
@@ -1955,7 +1955,7 @@ function LevelState(){
 		'Nucleus':Nucleus.partial?Clone(Nucleus.partial):[],
 		'Anagram':[Anagram.partial?Anagram.partial:""].concat(Anagram.used?Anagram.used:[]),
 		'Nigeria':Nigeria.freeze?Nigeria.freeze:false,
-		'Yellow':Yellow.colour?Yellow.colour:false,
+		'Fuchsia':Fuchsia.colour?Fuchsia.colour:false,
 		'Nokia 1998':Nokia.last?Nokia.last:false
 	};
 	return state;
