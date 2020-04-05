@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Analytics and Actions
 var analyticsURL="https://script.google.com/macros/s/AKfycbwuyyGb7XP7H91GH_8tZrXh6y_fjbZg4vSxl6S8xvAAEdyoIHcS/exec";
-var clearance = "test";
+var clearance =["test","debug"];
 var dataHeaders={
 	"analytics":	"[\"identifier\",\"language\",\"timezone\",\"screen\",\"agent\",\"from\",\"campaign\",\"name\"]",
 	"actions":		"[\"identifier\",\"type\",\"target\",\"name\"]",
@@ -163,7 +163,7 @@ function NightModeToggled(b){Listen("click", function(){RegisterNightModeToggled
 // Analytics Behaviour
 
 function AnalyticsClearance(){
-	return ((PageTag()!==clearance)&&!IsFileLink(PageURL()))||(PageSearch("source")==="homescreen");
+	return (!In(clearance,PageTag())&&!IsFileLink(PageURL()))||(PageSearch("source")==="homescreen");
 }
 
 function StartAnalytics(){
