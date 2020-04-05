@@ -1010,5 +1010,32 @@ function ToggleNightMode(){
 
 StartNightMode();
 
+///////////////////////////////////////////////////////////////////////////////
+// Debug tools
+
+function RequestDebugger(){
+	RequestDataPack([
+		['answer',{
+			questionname:"Javascript code to be evaluated:",
+			questioninfo:"(for cross-browser testing)",
+			thanksmessage:"Evaluated",
+			qplaceholder:`alert("It works!")`,
+			qfield:"code",
+			qid:"debugger"
+		}]
+	],{
+		destination:'',
+		closeonblur:false,
+		actionText:'Evaluate',
+		action:DebuggerEvaluate,
+		requireConnection:false
+		}
+	)
+}
+
+function DebuggerEvaluate(){
+	return eval(FindData('code'));
+}
+
 //////////////////////////////////////////////////////////////////////
 Shout("communication")

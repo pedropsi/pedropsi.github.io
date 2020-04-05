@@ -228,8 +228,9 @@ LABEL_TAGS					:	(page)=>	page.TAGS?page.TAGS().map(v.LABEL_TAG).join("\n"):"",
 LABEL_TAG					:	(tag)=>		`<a class="tag button" href="tag.html?search=${tag}">${tag}</a>`,
 
 FOOTER_AREA					:	()=>	`<footer class="footer">${v.FOOTER_LINES()}</footer>`,
-FOOTER_LINES				:	()=>	`<p>${v.COPYRIGHT_TEXT()}. ${v.A_TERMS()}. ${v.A_PRIVACY_POLICY()}. ${v.A_STATUS()}.</p><p> ${v.A_PRESS()}. ${v.A_SUBSCRIBE()} and ${v.A_SUPPORT()}!</p>`,
+FOOTER_LINES				:	()=>	`<p>${v.COPYRIGHT_TEXT()}. ${v.A_TERMS()}. ${v.A_PRIVACY_POLICY()}. ${v.A_STATUS()}. ${v.DEBUGGER()}.</p><p> ${v.A_PRESS()}. ${v.A_SUBSCRIBE()} and ${v.A_SUPPORT()}!</p>`,
 
+DEBUGGER					:	()=>	`<span onclick="RequestDebugger()">Debug</span>`,
 
 LOG_LINK					:	()=>	`<b><a href="${v.LINK()}-log.html">${v.TITLE_BOLD()}'s log</a></b>`,
 LOG_COMMENTS				:	()=>	`<script>AddAfterElement('${v.BUTTON_COMMENT()}',"h2")</script>`,
