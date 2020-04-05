@@ -2164,7 +2164,7 @@ function DefaultDataPack(){
 		actionvalid:SubmitValidAnswer,	//action on valid submit: receives a DataPack
 		actionText:'Submit',			//text to display instead of "Submit"
 
-		qtargetid:document.body.id,		//Where to introduce form in page?
+		qtargetid:"BODY",				//Where to introduce form in page?
 		qdisplay:LaunchModal,			//Question display function :receives a DataPack
 
 		qonsubmit:LaunchConsoleThanks,	//Next modal on successful submit: receives a DataPack
