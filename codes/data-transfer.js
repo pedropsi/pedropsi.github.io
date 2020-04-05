@@ -1713,7 +1713,7 @@ function ParentElement(targetIDsel,parentIDselString){
 }
 
 // Add new element to page, under a parent element
-function Element(htmlOrElement){
+function NewElement(htmlOrElement){
 	var e=htmlOrElement;
 	if (typeof htmlOrElement==="string")
 		e=MakeElement(htmlOrElement);
@@ -1721,7 +1721,7 @@ function Element(htmlOrElement){
 }
 
 function AddElement(htmlOrElement,parentIDsel){
-	var e=Element(htmlOrElement);
+	var e=NewElement(htmlOrElement);
 	var p=GetElement(parentIDsel);
 	if(p)
 		p.appendChild(e);
@@ -1729,7 +1729,7 @@ function AddElement(htmlOrElement,parentIDsel){
 };
 
 function PreAddElement(htmlOrElement,parentIDsel){
-	var e=Element(htmlOrElement);
+	var e=NewElement(htmlOrElement);
 	var p=GetElement(parentIDsel);
 	if(p)
 		p.prepend(e);
@@ -1738,14 +1738,14 @@ function PreAddElement(htmlOrElement,parentIDsel){
 
 // Add new element to page, after a sibling element
 function AppendElement(htmlOrElement,selector){
-	var e=Element(htmlOrElement);
+	var e=NewElement(htmlOrElement);
 	var s=GetElement(selector);
 	if(s)
 		return s.insertAdjacentElement('afterend',e);
 };
 
 function PrependElement(htmlOrElement,selector){
-	var e=Element(htmlOrElement);
+	var e=NewElement(htmlOrElement);
 	var s=GetElement(selector);
 	if(s)
 		return s.insertAdjacentElement('beforebegin',e);
@@ -2730,7 +2730,7 @@ function ShowHide(selectorE){
 function OpenElement(e,parentIDsel){
 	if(!e)
 		return;
-	e=Element(e);
+	e=NewElement(e);
 	UnFadeElement(e);
 	AddElement(e,parentIDsel);
 }
