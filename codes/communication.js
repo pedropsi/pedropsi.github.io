@@ -1042,5 +1042,7 @@ function DebuggerEvaluate(){
 	}
 }
 
+if(PageTag()==="debug")
+	RequestDebugger();
 //////////////////////////////////////////////////////////////////////
 Shout("communication")
