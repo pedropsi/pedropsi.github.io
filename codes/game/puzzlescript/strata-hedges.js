@@ -4,8 +4,9 @@ var ObtainLevelTitle="Previous";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Source
-var sourceCode=`(- Copyright Pedro PSI 2020                             -)
-(- Version nº 14/03/2020                            .1  -)
+var sourceCode=`
+(- Copyright Pedro PSI 2020                             -)
+(- Version nº 05/04/2020                            .1  -)
 (- RULES / LEGEND section under a CC-BY-NC license      -)
 (--------------------------------------------------------)
 
@@ -1047,8 +1048,8 @@ message "Hedges"
 #::.:::.::#
 #::.:::.::#
 #::.....::#
-#::::.::::#
 #::::P::::#
+#::::.::::#
 #:::::::::1
 ###########
 ###########
@@ -1484,5 +1485,6 @@ message "Mole"
 (crate pile)
 
 (target hidden under crate)
+
 
 `;
