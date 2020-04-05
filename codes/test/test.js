@@ -11,25 +11,31 @@ function EnableTestMode(){
 
 function TestFunction(functionname,testname){
 	var functionname=(typeof functionname==="string")?functionname:FunctionName(functionname);
+	var verifiername="";
+
 	var test=Test[functionname][testname];
 	if(test){
 		var result="___WRONGRESULT___";
 		try{
 			result=test["function"].apply(null,test["arguments"]);
+			if(test.VerifierF){
+				result=test.VerifierF(result);
+				verifiername=FunctionName(test.VerifierF);
+			}
 		}
 		catch(e){
 			console.log(e);
 		}
 		var expect=test["expected"];
 		var passed=(Equal(result,expect));
-		ReportTest(functionname,testname,test,passed,result,expect);
+		ReportTest(functionname,testname,test,passed,result,expect,verifiername);
 		return passed;
 	}
 }
 
 var ErrorReport=[];
 
-function ReportTest(functionname,testname,test,passed,result,expect){
+function ReportTest(functionname,testname,test,passed,result,expect,verifiername){
 	if(passed)
 		return;
 	var testfunctionid="test-"+functionname;
@@ -37,7 +43,13 @@ function ReportTest(functionname,testname,test,passed,result,expect){
 		AddElement("<h3 class='test-function' id='"+testfunctionid+"'>"+functionname+"</h3>",TestingAreaSelector());
 
 	var testid=IDfy("test-"+functionname+" "+testname);
-	var testtitle="<h4>"+testname+"</h4>"+"<p><code>"+functionname+"("+UnExfix(JSON.stringify(test["arguments"]),"[","]")+")="+JSON.stringify(result)+"</code>";
+
+	var verifunctionname=functionname;
+	
+	if(verifiername)
+		verifunctionname=verifiername+"("+verifunctionname+")";
+
+	var testtitle="<h4>"+testname+"</h4>"+"<p><code>"+verifunctionname+"("+UnExfix(JSON.stringify(test["arguments"]),"[","]")+")="+JSON.stringify(result)+"</code>";
 	
 	var testreport=(passed?LabelHTML("Passed","test"):(LabelHTML("Failed","test Problem")+"</p><p>Expected:<code>"+JSON.stringify(expect))+"</code></p>");
 
@@ -62,7 +74,7 @@ function Test(functionname){
 	return Keys(tests).map(function(testname){TestFunction(functionname,testname)});
 }
 
-function SaveTest(F,argArray,result,testname){
+function SaveTest(F,argArray,result,testname,VerifierF){
 
 	var functionname=FunctionName(F)||String(F);
 
@@ -76,7 +88,7 @@ function SaveTest(F,argArray,result,testname){
 	var argArray=IsArray(argArray)?argArray:[argArray];
 	var testname=testname?testname:(functionname+"("+argArray.map(String).join(",")+")");
 	
-	Test[functionname][testname]={"function":F,"arguments":argArray,"expected":result};
+	Test[functionname][testname]={"function":F,"arguments":argArray,"expected":result,"VerifierF":VerifierF};
 }
 
 function TestingAreaSelector(){
@@ -544,7 +556,12 @@ SaveTest(Shorten,["1234567890",0],"...","zero");
 ///////////////////////////////////////////////////////////////////////////////
 // DOM Manipulation
 
+function GetElementV(clas){
+	return function Verify(result){return Classed(result,clas)};
+}
 
+SaveTest(GetElement,".rainbowline",true,"existing element of class .rainbowline",GetElementV("rainbowline"));
+SaveTest(GetElement,".rainbline",undefined,"non-existing element of class .rainbline",GetElementV("rainbline"))
 
 //////////////////////////////////////////////////
 // Scroll into
