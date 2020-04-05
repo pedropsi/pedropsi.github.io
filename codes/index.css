@@ -1034,6 +1034,7 @@ tr:active .editTD{
 	background-color:var(--smokewhite);
 	overflow-y: auto;
 	scrollbar-width: thin;
+	max-height: var(--h64);
 }
 
 .question{
