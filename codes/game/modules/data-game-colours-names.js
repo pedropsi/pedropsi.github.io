@@ -982,3 +982,7 @@ try{
 	SaveTest(NamedColour,"#FF0000","Red","hex to red");
 	SaveTest(NamedColour,"#000000","Black","hex to black");
 }catch(err){}
+
+
+////////////////////////////////////////////////////////////////////////////////
+Shout("data-game-colours-names")

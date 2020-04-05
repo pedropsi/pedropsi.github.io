@@ -1,6 +1,20 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Intro animation
 
+var NAME="Pedro PSI";
+
+var LOGONAME=`
+<div class="logoname-supra">
+<div class="logoname">
+	<div class="lightyellow">${NAME}</div>
+	<div class="yellow">${NAME}</div>
+	<div class="green">${NAME}</div>
+	<div class="turquoise">${NAME}</div>
+	<div class="lightblue">${NAME}</div>
+	<div class="blue">${NAME}</div>
+	<div class="darkblue">${NAME}</div>
+</div></div>`;
+
 var LOGO=`<?xml version="1.0"?>
 <svg viewBox="-16 -16 32 32" xmlns="http://www.w3.org/2000/svg" width=100 height=100>
 	<rect x="-5" y="-5" width="10" height="10" class="darkblue"		fill="#070070"></rect>
@@ -18,34 +32,25 @@ var LOGO=`<?xml version="1.0"?>
 	<rect x="-5" y="-5" width="10" height="10" class="lightyellow"	fill="#fff9c9" transform="scale(0.201010) rotate(0)"></rect>
 	<rect x="-5" y="-5" width="10" height="10" class="lightyellow"	fill="#fff9c9" transform="scale(0.201010) rotate(45)"></rect>
 </svg>`;
-
-var NAME="Pedro PSI";
-var LOGONAME=`
-<div class="logoname-supra">
-<div class="logoname">
-	<div class="lightyellow">${NAME}</div>
-	<div class="yellow">${NAME}</div>
-	<div class="green">${NAME}</div>
-	<div class="turquoise">${NAME}</div>
-	<div class="lightblue">${NAME}</div>
-	<div class="blue">${NAME}</div>
-	<div class="darkblue">${NAME}</div>
-</div></div>`;
 	
-function PlayIntro(){
-	PlayIntro.save=Children(".game");
+function PlayIntro(targetIDsel,SuccessF){
+	PlayIntro.save=Children(targetIDsel);
 	PlayIntro.save.map(Hide);
-	Class(".game","intro");
+	Class(targetIDsel,"intro");
 	OpenElement(LOGO,".intro");
 	OpenElement(LOGONAME,".intro");
-	setTimeout(HideIntro,3000)
+	setTimeout(function(){UnPlayIntro(targetIDsel,SuccessF)},2500)
 }
 
-function UnPlayIntro(){
+function UnPlayIntro(targetIDsel,SuccessF){
 	CloseElement("svg",".intro");
 	CloseElement(".logoname-supra",".intro");
 	setTimeout(function(){
-		UnClass(".game","intro");
+		UnClass(targetIDsel,"intro");
 		PlayIntro.save.map(UnFadeElement);
-	},3000);
+		setTimeout(SuccessF,1000);
+	},1000);
 }
+
+////////////////////////////////////////////////////////////////////////////////
+Shout("game-intro");

@@ -107,3 +107,6 @@ if(ObtainInterlevelMessage()){
 window.Mobile.GestureHandler.prototype.toggleMenu=RequestLevelSelector;
 if(typeof MobileInitialise!=="undefined")
 	MobileInitialise(window.Mobile.GestureHandler.prototype);
+
+////////////////////////////////////////////////////////////////////////////////
+Shout("data-game-overwrite")

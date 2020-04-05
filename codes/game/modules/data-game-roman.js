@@ -89,3 +89,6 @@ function SplitValidRoman(s,r){
 		return SplitValidRoman(s.slice(i-1,s.length),r);
 }
 
+
+////////////////////////////////////////////////////////////////////////////////
+Shout("data-game-roman")

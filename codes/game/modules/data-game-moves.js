@@ -169,3 +169,7 @@ function UpdateSelectData(lvlch,type){
 		"timing":LevelTime()
 	});
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+Shout("data-game-moves");
