@@ -1,14 +1,3 @@
-//Load helpers
-function UnPathExt(path){
-	return UnPosfix(UnPrefix(UnPrefix(UnPrefix(path,"codes/"),"test/"),"data/"),".js");
-}
-
-function LoadSources(sourceArray,SuccessF){
-	var shoutArray=sourceArray.map(UnPathExt);
-	sourceArray.map(LoadSource);
-	ListenAndOnce(shoutArray,SuccessF); 
-}
-
 
 //Page Build Sequence
 function LoadCMS(){

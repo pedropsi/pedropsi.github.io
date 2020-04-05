@@ -1288,8 +1288,19 @@ function FunctionDefined(name){
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-//Load scripts
+//Load resources
 
+function SourceIdentifier(path){
+	return PageIdentifier(UnPosfix(UnPosfix(path,".js"),".css"));
+}
+
+function LoadSources(sourceArray,SuccessF){
+	var shoutArray=sourceArray.filter(function(f){return InPosfix(f,".js")}).map(SourceIdentifier);		//discards non-js files plus the folder structure to preserve file name
+	sourceArray.map(LoadSource);											//loads asynchronously (each file MUST "Shout" its own identifier upon loading)
+	ListenAndOnce(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
+}
+
+//Load scripts
 function LoadSource(source){
 	if(InPosfix(source,".js"))
 		LoadScript(source);
