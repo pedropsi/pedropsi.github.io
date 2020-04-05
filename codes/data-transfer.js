@@ -1788,7 +1788,7 @@ function RemoveChildren(parentID){
 // Remove Element
 function RemoveElement(elementIDsel,parentIDsel){
 	var e=GetElement(elementIDsel,parentIDsel);
-	if(e){
+	if(e&&e.parentNode){
 		e.parentNode.removeChild(e);
 	}
 }
