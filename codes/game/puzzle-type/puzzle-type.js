@@ -14,21 +14,30 @@
 */
 
 function LoadGameHTML(frameHTML){
-	PrependElement(frameHTML,".main");
+
 }
 
 function GameFrameHTML(){
-	return "<div class='game-supra-Canvas'><div class='game' id='gameCanvas'>\
-				<div class='top'>\
-					<h1 class='goal'>Puzzle Type</h1>\
-					<h2 class='credits'>by Pedro PSI (2020)</h1>\
+	return "<div class='game-supra-Canvas'>\
+				<div class='game' id='gameCanvas'>\
 				</div>\
-				<div class='middle' id='letters'>\
-					<div class='letters'>Coming soon!</div>\
-				</div>\
-				<div class='bottom'>\
-				</div></div>\
 			</div>";
+}
+
+function GameTitleHTMLArray(){
+return ["<div class='top'>\
+			<h1 class='goal'>Puzzle Type</h1>\
+		</div>",
+		"<div class='middle' id='letters'>\
+		</div>"];
+}
+
+function ComingHTMLArray(){
+return ["<div class='top'>\
+			<h1 class='goal'>Puzzle Type</h1>\
+		</div>",
+		"<div class='middle' id='letters'>Coming soon!\
+		</div>"];
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -95,33 +104,50 @@ var ObtainKeyboardAllowed=true;
 ///////////////////////////////////////////////////////////////////////////////
 // Load the game bar & prepare game
 
-var gameModules=[
-"data-game-intro",
-"data-game-colours",
+var gameModulesEarly=[
+"codes/game/modules/data-game-extras.js",
+"codes/game/modules/data-game-moves.js",
+"codes/game/modules/data-game-colours.js",
+"data/game-intro.js"
+]
+
+var gameModulesLater=[
 "data-game-colours-names",
-"data-game-extras",
-"data-game-moves",
 "data-game-roman"
 ]
 
-gameModules.map(LoaderInFolder("codes/game/modules"));
+LoadSources(gameModulesEarly,GameIntro);
+gameModulesLater.map(LoaderInFolder("codes/game/modules"));
+
+function GameIntro(){
+	RemoveElement("game-supra-Canvas");
+	PrependElement(GameFrameHTML(),".main");
+	GameFocus();
+	LoadStyle(PageRoot()+"codes/game/puzzle-type/puzzle-type.css");
+	if(P())
+		setTimeout(function(){PlayIntro(".game",StartGame)},100);
+	else
+		ComingHTMLArray().map(function(html){OpenElement(html,"gameCanvas")});
+
+}
 
 function StartGame(){
+	GameFocus();
+	GameTitleHTMLArray().map(function(html){OpenElement(html,"gameCanvas")});
 	PrepareGame();
 	ResumeCapturingKeys(CaptureComboKey);
 	ObtainKeyActionsGameBar();
 	LoadGame();
 	ObtainTitleScreenLoader();
-	GameFocus();
+	
 };
 
 
-LoadAsync("cacher",".");
-ServiceWorker();
-LoadGameHTML(GameFrameHTML());
-LoadStyle(PageRoot()+"codes/game/puzzle-type/puzzle-type.css");
+//LoadAsync("cacher",".");
+//ServiceWorker();
+
+/*
 function P(){
-	DelayUntil(function(){return (typeof PrepareGame!=="undefined")},StartGame);
 	ServiceWorkerCache([
 		"media/puzzle-type/sound/startgame.mp3",
 		"media/puzzle-type/sound/wingame.mp3",
@@ -130,22 +156,18 @@ function P(){
 		"media/puzzle-type/sound/win3.mp3"
 	]);
 }
+*/
 
-
-var pagetag=PageTag();
-var tokens=["mago314","Deusovi","minotalen","test"];
-var apptokens=tokens.map(function(t){return "homescreen-"+t});
-var manifest=GetElement("manifest");
-
-if(In(tokens,pagetag)||Purchased()){
-	P();
+function P(){
+	var pagetag=PageTag();
+	var tokens=["mago314","Deusovi","minotalen","test"];
+	var apptokens=tokens.map(function(t){return "homescreen-"+t});
+	var manifest=GetElement("manifest");
 	manifest.href=manifest.href.replace("homescreen","homescreen-"+pagetag);
+	return In(tokens,pagetag)||Purchased()||In(apptokens,PageSearch("source"));
 }
-else if(In(apptokens,PageSearch("source"))){ 
-	P();
-}
-else
-	GetElement("manifest").href="";
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Keybinding
@@ -1444,6 +1466,8 @@ var Anagrams={
 //"mama":"a",
 "mana":"a",
 "mara":"a",
+"naga":"a",
+"nama":"a",
 "raga":"a",
 "rang":"g"
 }
@@ -1828,7 +1852,7 @@ function ObtainTitleScreenLoader(){
 	TitleScreen(true);
 	ReplaceChildren("<div class='top'><div class='title'></div><div class='credits'></div></div>",".top");
 	ReplaceChildren("Puzzle Type",".title");
-	ReplaceChildren("by Pedro PSI (2019)",".credits");
+	//ReplaceChildren("by Pedro PSI (2019)",".credits");
 	if(CurLevelNumber()>1||SolvedLevels().length>0)
 		Letters.array="CONTINUE".split("");
 	else
@@ -1941,4 +1965,3 @@ function Restart(){
 	LoadLevelState(LevelZeroState());
 	PulseSelect("RestartButton");
 }
-

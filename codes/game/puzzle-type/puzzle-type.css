@@ -14,7 +14,7 @@
     justify-content:center;
 }
 
-.top .title,.top .credits{
+.top .title {
    width: 100%;
    font-size:var(--w8);
    font-weight: bold;
@@ -24,10 +24,7 @@
    flex-direction: column;
    justify-content: center;
 }
-.top .credits{
-   font-size:var(--w4);
-   margin-top: var(--w4);
-}
+
 .top .title{
    margin-bottom: var(--w2);
    margin-bottom: var(--w2);

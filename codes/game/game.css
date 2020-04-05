@@ -232,7 +232,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;   
+    justify-content: center; 
+    --enlarge:0.1;
 }
 .intro svg{
     width: 100%;
@@ -272,49 +273,49 @@
 }
 
 .darkblue{
-    --scalei:2;
+    --scalei:calc(0.765367 * var(--enlarge));
     --scalef:1;
     --delay: 0ms;
     --durat: 2000ms;
     color:var(--darkblue);
 }
 .blue{
-    --scalei:calc(0.765367 * 2);
+    --scalei:calc(0.765367 * var(--enlarge));
     --scalef:0.765367;
     --delay: 250ms;
     --durat: 1750ms;
     color:var(--blue);
 }
  .lightblue{
-    --scalei:calc(0.585786 * 2);
+    --scalei:calc(0.585786 * var(--enlarge));
     --scalef:0.585786;
     --delay: 500ms;
     --durat: 1500ms;
      color:var(--blue);
 }
 .turquoise{
-    --scalei:calc(0.448342 * 2);
+    --scalei:calc(0.448342 * var(--enlarge));
     --scalef:0.448342;
     --delay: 750ms;
     --durat: 1250ms;
     color:var(--turquoise);
 }
  .green{
-    --scalei:calc(0.343146 * 2);
+    --scalei:calc(0.343146 * var(--enlarge));
     --scalef:0.343146;
     --delay: 1000ms;
     --durat: 1000ms;
      color:var(--green);
 }
  .yellow{
-    --scalei:calc(0.262632 * 2);
+    --scalei:calc(0.262632 * var(--enlarge));
     --scalef:0.262632;
     --delay: 1250ms;
     --durat: 750ms;
      color:var(--yellow);
 }
  .lightyellow{
-    --scalei:calc(0.201010 * 2);
+    --scalei:calc(0.201010 * var(--enlarge));
     --scalef:0.201010;
     --delay: 1500ms;
     --durat: 500ms;
