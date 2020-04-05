@@ -1034,7 +1034,12 @@ function RequestDebugger(){
 }
 
 function DebuggerEvaluate(){
-	return eval(FindData('code'));
+	try{
+		var result=eval(FindData('code'));
+		ConsoleAdd(String(result));
+	}catch(err){
+		ConsoleAdd(String(err));
+	}
 }
 
 //////////////////////////////////////////////////////////////////////
