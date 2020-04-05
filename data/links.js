@@ -124,7 +124,8 @@ A_SHAPECATCHER:{PAGE:"https://shapecatcher.com/",TITLE:"Shapecatcher"},
 A_LANCE_PS_FORK:{PAGE:"https://jacklance.github.io/PuzzleScript/editor.html",TITLE:"Large Maps Puzzlescript Fork",AUTHOR:()=>v.LANCE()},
 A_EDITOR:{PAGE:"game-editor",EXT:".html",TITLE:"Adapted Puzzlescript editor",AUTHOR:()=>v.NAME()},
 A_PUZZLE_COMMUNITY:{PAGE:"selected-puzzlescript-games",EXT:".html",TITLE:"Puzzle-making community"},
-A_SELENES_LABYRINTH:{PAGE:"https://jcgyo.itch.io/selenes-labyrinth",EXT:".html",TITLE:"Selene's Labyrinth",AUTHOR:()=>v.JCMILLER()}
+A_SELENES_LABYRINTH:{PAGE:"https://jcgyo.itch.io/selenes-labyrinth",EXT:".html",TITLE:"Selene's Labyrinth",AUTHOR:()=>v.JCMILLER()},
+A_SASQUATCH:{PAGE:"https://jcgyo.itch.io/sasquatch",EXT:".html",TITLE:"Sasquatch Sokoban",AUTHOR:()=>v.JCMILLER(),GROUP:"with-game-bar"}
 };
 
 function LinkTemplate(linkObj){
