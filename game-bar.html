@@ -35,9 +35,22 @@ ${LinkGroupHTML("with-game-bar")}
 <p>Just paste your game code in ${v.A_EDITOR()}, run it, then ${v.CLICK()} the <b>Export + Game Bar</b> option.</p>
 <p>This will create the standard puzlescript HTML page, with the ${v.TITLE_BOLD()} added. </p>
 
-<h3>Advanced way</h3>
+<h3>Middle way (live version)</h3>
 <p>Include the <b>javascript source</b> ${v.A_GB_SOURCE()} in a regular Puzzlescript export or in a custom page.</p>
 <p>To ensure the ${v.TITLE_BOLD()} overwrites all needed functions, please load it <b>after</b> the game has loaded fully, i.e. by placing at the end of the ${v.CSI()}body${v.CSF()} the snippet ${v.CSI()}script type="text/javascript" src="GameBar.js"${v.CSF()}${v.CSI()}/script${v.CSF()}.</p>
+
+<h3>Advanced way (customised version) </h3>
+<p>By default, including the <code>GameBar.js</code> source code will load the <b>live</b> version from ${v.SITE_NAME()}. If you need to make changes to the ${v.TITLE_BOLD()} source code, you should download a copy of the ${v.A_GB_LATEST()} and make your changes there. ${v.L_EXP()}</p>
+<p>So, after you make your changes, assuming you keep the folder structure intact:</p>
+	<ul>
+		<li>main page <code>your-page.html</code>, which runs <code>GameBar.js</code>, alongside</li>
+		<li>folder <code>codes</code>, where all your (possibly changed) game bar codes are located, in the same relative positions.</li>
+	</ul>
+
+<p>	You have to edit the file <code>GameBar.js</code>, variable <code>var FOLDER=GlocalPath(etc...)</code> to <code>var FOLDER="codes"</code></p>
+<p> Then, you'll have replicate these changes inside the file <code>data-game-extras.js</code>, by editing the same variable <code>var FOLDER=etc...</code> to <code>var FOLDER="codes"</code>.</p>
+<p> If you change the relative positions of the main page and <code>codes</code> folder, you'll need to change path accordingly. For example, write <code>"../codes"</code> to look in the parent directory instead.</p>
+<p> If you rename folder <code>"codes"</code> to <code>"your-folder"</code> rename the above changes accordingly.</p>
 
 <h2>Keyboard shortcuts</h2>
 <p>These are the default keyboard shortcuts for the ${v.TITLE_BOLD()}:</p>
