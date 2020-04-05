@@ -1,9 +1,9 @@
 var News={
 	N_37:{
 DATE:"2020-03-31",
-HEADER:()=>"Puzzle type - one more level",
+HEADER:()=>"Puzzle type +1 level, new screenshots",
 PIECE:()=>`
-<p>One new level to replace an older one, keeping the total number constant.</p>
+<p>One new level replaced an older one, keeping the total number constant. New screenshots were also added.</p>
 	`,ID:"puzzle-type"},
 	N_36:{
 DATE:"2019-11-20",
