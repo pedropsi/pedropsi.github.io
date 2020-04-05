@@ -28,6 +28,7 @@ else if(PageIdentifier()==="game-console"){
 		LoadPGD();
 		if(PageSearch("game")===""){
 			LoadGameHTML(GameFrameHTML());
+			LoadPGDMenu();
 			ListenOnce("LoadPGD",LoadPGDMenu);
 		}
 		else if(PageSearch("submit")!==""){	//auto-submission
@@ -38,6 +39,7 @@ else if(PageIdentifier()==="game-console"){
 		else
 			ListenOnce("LoadPGD",function(){DelayUntil(GameInfoRetrieved,AutoCheckYear)});
 	}
+	
 }
 /*else if(PageIdentifier()==="game-editor"){
 	LoadPGD();
@@ -294,6 +296,7 @@ function PrototypeExampleRowHTML(id){
 // PGD Menu
 
 function LoadGameHTML(frameHTML){
+	//RemoveElement(".game-console");
 	PrependElement(frameHTML,".main");
 }
 
@@ -302,9 +305,9 @@ function PGDMenuHTML(){
 }
 
 function GameFrameHTML(){
-	return "<div class='game-container game-console'>\
-				<p class='title'>Game Console</p>\
-				<img alt='game-console' width='180' height='180' src='images/180/game-console.png'/>\
+	return "<div class='game-container game-console' style=' background-color: var(--beije);	display: flex;	flex-direction: column;	align-items: center;	justify-content: center}'>\
+				<h2>Game Console</h2>\
+				<img class='image' alt='game-console' style='width:180px;height:180px' src='images/game-console.svg'/>\
 				"+PGDMenuHTML()+"\
 			</div>";
 }
