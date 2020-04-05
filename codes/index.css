@@ -448,6 +448,15 @@ h1,h2,h3,h4,h5,h6{
 	text-decoration:unset;
 }
 
+.whiteboard h1 a,
+.whiteboard h2 a,
+.whiteboard h3 a,
+.whiteboard h4 a,
+.whiteboard h5 a,
+.whiteboard h6 a{
+	text-decoration:none;
+}
+
 a.index-link.h1,
 h1{
 	--scaling:2;
@@ -1666,4 +1675,13 @@ p .icon{
 	background-color: var(--white);
 	padding: var(--h2) var(--w2) var(--h2) var(--w2);
 	margin: 0 var(--w2) var(--h2) var(--w2);
+}
+
+.scrollTop{
+	display: inline;
+	padding: unset;
+	margin: 0 0 0 var(--w4);
+	background-color: unset;
+	color: currentColor;
+	--sh:0;
 }

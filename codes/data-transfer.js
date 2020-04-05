@@ -1167,7 +1167,9 @@ function IndexSubTitle(t,h){
 	t.setAttribute("data-index-depth",h);
 	Class(t,"index-item");
 	t.id=t.id?t.id:IDfy(t.innerText); 
-	return t.id;}
+	AddScrollUpButton(t,h);
+	return t.id;
+}
 
 function IndexTag(h){
 	return MarkElements(".main "+h,IndexTitle(h));
@@ -1189,7 +1191,7 @@ function IndexItemHTML(e){
 		return "";
 	else{
 		var depth=e.getAttribute("data-index-depth")||"";
-		var title=Shorten(e.textContent,50);
+		var title=Shorten(e.textContent.replace(ObtainSymbol("scroll-up"),""),50);
 		return "<a class='index-link "+depth+"' href='#"+e.id+"'>"+title+"</a>";
 	}
 }
@@ -1214,6 +1216,13 @@ function ShowHideIndex(){
 	ShowHide(".h4");
 	ShowHide(".h5");
 	ShowHide(".h6");
+}
+
+function AddScrollUpButton(t,h){
+	var title=t.innerText;
+	t.innerHTML=AHTML(title,PageUnTag()+"#"+IDfy(title));
+	if(h==="h2")
+		AddElement(ScrollUpHTML(),t);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1955,6 +1964,10 @@ function AHTML(title,ref,attribs){
 function LabelHTML(text,type){
 	var type=type||text||"";
 	return "<sup class='label "+type+"'>"+text+"</sup>";
+}
+
+function ScrollUpHTML(){
+	return ButtonHTML({txt:ObtainSymbol("scroll-up"),attributes:{class:"scrollTop",onclick:"window.scrollTo(0,0)"}});
 }
 
 //Hidden Elements
@@ -4575,7 +4588,8 @@ function ObtainSymbol(name){
 		"wrench":IconHTML("M152 112 L 121 147 124 188 L 127 228 75 280 L 23 332 32 341 C 37 346,40 349,40 350 C 39 351,44 356,53 365 L 66 378 122 323 L 177 267 213 266 C 242 265,250 265,250 264 C 251 263,251 263,252 264 C 253 265,253 265,254 263 C 255 263,269 247,285 228 C 301 210,315 195,315 194 C 315 194,287 169,286 169 C 286 169,279 177,271 186 L 256 203 246 203 C 240 204,231 204,225 204 L 214 204 198 190 C 190 183,183 176,183 175 C 183 174,182 166,182 156 L 180 138 196 121 C 205 111,212 102,212 102 C 212 102,185 77,184 77 C 184 77,169 93,152 112"),
 		"edit":IconHTML("M206 131 L 85 252 118 284 L 151 317 272 196 L 392 75 360 43 L 327 10 206 131 M245 169 L 151 263 145 257 L 139 252 233 158 L 327 64 333 70 L 338 75 245 169 M51 321 C 34 355,20 383,21 383 C 21 383,144 322,145 321 C 145 321,83 258,83 258 C 82 258,68 286,51 321"),
 		"sun":SpanHTML(`<svg class='iconpath' viewBox="0 0 1012 1012" width="20" height="20" ><defs><clipPath id="pathsun"><path d="M96 46 1109 46 1109 1058 96 1058Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#pathsun)" transform="translate(-96 -46)"><path d="M418.5 552C418.5 450.103 501.103 367.5 603 367.5 704.897 367.5 787.5 450.103 787.5 552 787.5 653.897 704.897 736.5 603 736.5 501.103 736.5 418.5 653.897 418.5 552Z"  stroke-width="80" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/><path d="M603.5 81.5 603.5 220.563"  stroke-width="80" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>			<path d="M603.5 1022.56 603.5 883.5"  stroke-width="80" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>			<path d="M1073.56 552.5 934.5 552.5"  stroke-width="80" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>			<path d="M132.5 552.5 271.562 552.5"  stroke-width="80" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>			<path d="M935.135 218.928 836.803 317.26"  stroke-width="69.2708" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>			<path d="M269.865 884.197 368.197 785.865"  stroke-width="69.2708" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>			<path d="M935.135 884.197 836.803 785.866"  stroke-width="69.2708" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/><path d="M269.865 218.928 368.197 317.26"  stroke-width="69.2708" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/></g></svg>`),
-		"moon":SpanHTML(`<svg class='iconpath' viewBox="-150 0 660 809" width="20" height="20" ><defs><clipPath id="pathmoon"><path d="M1250 158 1760 158 1760 967 1250 967Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#pathmoon)" transform="translate(-1250 -158)"><path d="M1655.5 931.5C1451.71 931.5 1286.5 766.517 1286.5 563 1286.5 359.483 1451.71 194.5 1655.5 194.5 1451.71 347.138 1410.41 635.858 1563.25 839.375 1589.47 874.293 1620.53 905.312 1655.5 931.5Z"  stroke-width="80" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/></g></svg>`)
+		"moon":SpanHTML(`<svg class='iconpath' viewBox="-150 0 660 809" width="20" height="20" ><defs><clipPath id="pathmoon"><path d="M1250 158 1760 158 1760 967 1250 967Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#pathmoon)" transform="translate(-1250 -158)"><path d="M1655.5 931.5C1451.71 931.5 1286.5 766.517 1286.5 563 1286.5 359.483 1451.71 194.5 1655.5 194.5 1451.71 347.138 1410.41 635.858 1563.25 839.375 1589.47 874.293 1620.53 905.312 1655.5 931.5Z"  stroke-width="80" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/></g></svg>`),
+		"scroll-up":"▵"
 		};
 	if(!name)
 		return symbols;
