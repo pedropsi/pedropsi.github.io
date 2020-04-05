@@ -98,7 +98,7 @@ if(typeof ObtainTitleScreenLoader==="undefined")
 if(typeof ObtainPlayEndGameSound==="undefined")
 	function ObtainPlayEndGameSound(){tryPlayEndGameSound()};
 
-if(typeof ObtainLevelTitle==="undefined")
+if(typeof ObtainLevelTitle==="undefined"){
 	function ObtainLevelTitle(lvl){
 		if(!lvl)
 			return "";
@@ -107,13 +107,14 @@ if(typeof ObtainLevelTitle==="undefined")
 		else
 			return LevelGatedTitle(lvl);
 	}
-else if(ObtainLevelTitle==="Previous") //Case for title specified in message before the level
+}
+else if(ObtainLevelTitle==="Previous"){ //Case for title specified in message before the level
 	function ObtainLevelTitle(lvl){
 		var title= ObtainStateScreens()[LevelScreen(lvl)-1].message;
 		title=title.replace(/^[\-\"\_\:\'\s\n]*(level\s*\d*)*[\-\"\_\:\'\s\n]*/im,"").replace(/[\-\"\_\:\'\s\n]*$/im,"");
 		return title.replace(/[\-][\-\s]?/gi," ");
 	}
-
+}
 //Read move defaults
 if(typeof ObtainIsUndoMove==="undefined")
 	function ObtainIsUndoMove(move){return move==="Z"}
