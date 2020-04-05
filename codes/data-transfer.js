@@ -1186,7 +1186,7 @@ function IndexSubTitle(t,h){
 }
 
 function IndexTag(h){
-	return MarkElements(".main "+h,IndexTitle(h));
+	return MarkElements(".main .prose "+h,IndexTitle(h));
 }
 
 function IndexTitles(){
