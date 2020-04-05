@@ -46,7 +46,9 @@ S_burokku_konekuta_screenshot_2:{TYPE:"screenshot",TRACK:"burokku-konekuta-scree
 S_skilleblokker_screenshot_1:{TYPE:"screenshot",TRACK:"skilleblokker-screenshot-1.png",DESCRIPTION:"skilleblokker screenshot 1",N:"1",FOLDER_SMALL:"skilleblokker",FOLDER_BIG:"skilleblokker",CONTEXT_ID:"skilleblokker"},
 S_skilleblokker_screenshot_2:{TYPE:"screenshot",TRACK:"skilleblokker-screenshot-2.png",DESCRIPTION:"skilleblokker screenshot 2",N:"2",FOLDER_SMALL:"skilleblokker",FOLDER_BIG:"skilleblokker",CONTEXT_ID:"skilleblokker"},
 S_puzzle_type_screenshot_1:{TYPE:"screenshot",TRACK:"puzzle-type-screenshot-1.png",DESCRIPTION:"puzzle-type screenshot 1",N:"1",FOLDER_SMALL:"puzzle-type",FOLDER_BIG:"puzzle-type",CONTEXT_ID:"puzzle-type"},
-S_puzzle_type_screenshot_2:{TYPE:"screenshot",TRACK:"puzzle-type-screenshot-2.png",DESCRIPTION:"puzzle-type screenshot 2",N:"2",FOLDER_SMALL:"puzzle-type",FOLDER_BIG:"puzzle-type",CONTEXT_ID:"puzzle-type"}
+S_puzzle_type_screenshot_2:{TYPE:"screenshot",TRACK:"puzzle-type-screenshot-2.png",DESCRIPTION:"puzzle-type screenshot 2",N:"2",FOLDER_SMALL:"puzzle-type",FOLDER_BIG:"puzzle-type",CONTEXT_ID:"puzzle-type"},
+S_puzzle_type_screenshot_3:{TYPE:"screenshot",TRACK:"puzzle-type-screenshot-3.png",DESCRIPTION:"puzzle-type screenshot 3",N:"3",FOLDER_SMALL:"puzzle-type",FOLDER_BIG:"puzzle-type",CONTEXT_ID:"puzzle-type"},
+S_puzzle_type_screenshot_4:{TYPE:"screenshot",TRACK:"puzzle-type-screenshot-4.png",DESCRIPTION:"puzzle-type screenshot 4",N:"4",FOLDER_SMALL:"puzzle-type",FOLDER_BIG:"puzzle-type",CONTEXT_ID:"puzzle-type"}
 }
 
 if(DATA){DATA["Media"]=Media}else{var DATA={"Media":Media}}
@@ -163,6 +165,6 @@ function ScreenshotGalleryHTML(id){
 	var gallery=screenshots.map(ImageCardHTML).join("\n");
 	return `
 	<h3 class="images">Screenshots & Logo</h3>
-	<p>Download all screenshots and logo at once:<a class="download" title="Download all screenshots and logo" href="images/${v.LINK()}/${v.LINK()}-screenshots-logo.zip"><b>download all</b> (zip archive)</a></p>
+	<p>Download <a class="download" title="Download all!" href="images/${v.LINK()}/${v.LINK()}-screenshots.zip">all screenshots (zip archive)</a>.</p>
 	<div class="featured">${gallery}</div>`
 }
