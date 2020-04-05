@@ -422,6 +422,20 @@ function Capitalise(word){
 		return word;
 }
 
+var Prepositions=["aboard","about","above","across","after","against","along","amid","among","anti","around","as","at","before","behind","below","beneath","beside","besides","between","beyond","but","by","concerning","considering","de","despite","down","during","except","excepting","excluding","following","for","from","in","inside","into","like","minus","near","of","off","on","onto","opposite","outside","over","past","per","plus","regarding","round","save","since","than","through","to","toward","towards","under","underneath","unlike","until","up","upon","versus","vs","via","with","within","without"];
+var CommonWords=["a","an","the"].concat(Prepositions);
+
+function CapitaliseNoble(word){
+	if(In(CommonWords,word))
+		return word;
+	else
+		return Capitalise(word);
+}
+
+function CapitaliseSentence(sentence){
+	sentence.split(" ").map(CapitaliseNoble).join(" ");
+}
+
 //Escape
 
 function Tokens(){
