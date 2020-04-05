@@ -39,6 +39,8 @@ else if(PageIdentifier()==="game-console"){
 		else
 			ListenOnce("LoadPGD",function(){DelayUntil(GameInfoRetrieved,AutoCheckYear)});
 	}
+
+	ListenOnce('puzzlescript-database-game',StartPGD);
 	
 }
 /*else if(PageIdentifier()==="game-editor"){
