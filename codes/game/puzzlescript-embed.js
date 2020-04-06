@@ -57,32 +57,34 @@ function CompileGameASAP(){
 	function ReadyToCompile(){try{return compile&&sourceCode}catch(e){}};
 	DelayUntil(ReadyToCompile,CompileGameSource);
 	
-	function PrepareGameBar(){PrepareGame()};
 	function ReadyToGameBar(){try{return ReadyToCompile()&&PrepareGame&&canvasResize&&state}catch(e){}};
 	DelayUntil(ReadyToGameBar,PrepareGameBar);
 
 	function ReadyToMobile(){return (typeof Mobile!=="undefined");}
-	function EnableMobile(){Mobile.enable(true);}
-	function ReEnableMobile(){ListenOnce('mousedown',EnableMobile,GetElement("gameCanvas"));}
 	DelayUntil(ReadyToMobile,ReEnableMobile);
 }
 
+function CompileGameSource(){compile(["restart"],sourceCode);};
+function PrepareGameBar(){PrepareGame()};
+function ReEnableMobile(){ListenOnce('mousedown',EnableMobile,GetElement("gameCanvas"));}
+function EnableMobile(){Mobile.enable(true);}
 
 ///////////////////////////////////////////////////////////////////////////////
-//External / Mixed Load
+//External Load
 
 function LoadExternalModule(source,fork){
 	var externalsource="https://api.github.com/repos/"+fork+"/PuzzleScript/contents/js/"+source+".js";
 	
-	function ScheduleSourceEvaluation(data){
-		var data=atob(JSON.parse(data)["content"]);
-		EvaluateScheduled[source]=function(){LoadCode(data)};
-		Shout(source);
-	}
-	
+	function ScheduleExternalEvaluation(data){ExternalSchedule(source,data)}
 	function LoadInternalFallback(){InternalSchedule(source)};
 	
-	LoadData(externalsource,ScheduleSourceEvaluation,undefined,LoadInternalFallback);
+	LoadData(externalsource,ScheduleExternalEvaluation,undefined,LoadInternalFallback);
+}
+
+function ExternalSchedule(source,data){
+	var data=atob(JSON.parse(data)["content"]);
+	EvaluateScheduled[source]=function(){LoadCode(data)};
+	Shout(source);
 }
 
 function InternalSchedule(source){
@@ -103,19 +105,22 @@ function EvaluateScheduled(sourceArray){
 }
 
 function ExternalCompileASAP(fork){
-	var modules=CoreModules.concat(["COMPILED"]).concat(ExtraModules);
+	ConsoleAdd("<p>Requesting Puzzlescript Fork from <b>"+sourceFork+"</b></p>");
 
-	ListenAndOnce(modules,ExternalSubCompileASAP);
-	
+	var modules=CoreModules.concat(["COMPILE"]).concat(ExtraModules).concat(["GAMEBAR","MOBILE"]);//This is the order of evaluation
+	ListenAndOnce(modules,function(){EvaluateScheduled(modules)});
+
 	function LoadExternalModuleF(source){LoadExternalModule(source,fork)};
 	CoreModules.map(LoadExternalModuleF);
 	ExtraModules.map(InternalSchedule);
-	EvaluateScheduled["COMPILED"]=CompileGameSource;
-	Shout("COMPILED");
+	EvaluateScheduled["COMPILE"]=CompileGameSource;
+	Shout("COMPILE");
+	EvaluateScheduled["GAMEBAR"]=PrepareGameBar;
+	Shout("GAMEBAR");
+	EvaluateScheduled["MOBILE"]=ReEnableMobile;
+	Shout("MOBILE");
 
-	function ExternalSubCompileASAP(){
-		EvaluateScheduled(modules);
-	}
+	
 }
 
 
@@ -172,13 +177,9 @@ function RetrieveSourceAndFork(data){
 
 	if(sourceFork==="puzzlescript.net")
 		InternalCompileASAP();
-	else{
-		ConsoleAdd("Requesting special Puzzlescript fork: ",sourceFork,);
+	else
 		ExternalCompileASAP(sourceFork);
-	}
 }		
-
-function CompileGameSource(){compile(["restart"],sourceCode);};
 
 
 ///////////////////////////////////////////////////////////////////////////////
