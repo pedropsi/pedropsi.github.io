@@ -1415,12 +1415,12 @@ function LoadDataFromNetwork(url,SuccessF,header,FailureF){
 	rawFile.send(null);
 };
 
-function LoadData(url,SuccessF,header){
+function LoadData(url,SuccessF,header,FailureF){
 	var saved=Memory(url);
 	if(saved&&!MemoryExpired(url))
 		return SuccessF(saved);
 	else
-		return LoadDataFromNetwork(url,SuccessF,header);
+		return LoadDataFromNetwork(url,SuccessF,header,FailureF);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
