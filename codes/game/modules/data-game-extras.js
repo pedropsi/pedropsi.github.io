@@ -25,7 +25,7 @@ if(typeof ObtainBGColor==="undefined")
 	function ObtainBGColor(){return state.bgcolor;}
 
 if(PageTag()==="debug")
-	ConsoleAdd("DEBUG TEST: extras",ObtainBGColor);
+	ConsoleAdd("extras\n"+ObtainBGColor);
 
 if(typeof ObtainFGColor==="undefined")
 	function ObtainFGColor(){return state.fgcolor;}

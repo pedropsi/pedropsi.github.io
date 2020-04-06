@@ -48,7 +48,7 @@ function ObtainBGColor(){return ShiftBaseColour(window.getComputedStyle(document
 function ObtainFGColor(){return ShiftBaseColour(window.getComputedStyle(document.body)["color"]);}
 
 if(PageTag()==="debug")
-	ConsoleAdd("DEBUG TEST: puzzle-type",ObtainBGColor);
+	ConsoleAdd("puzzle-type\n"+ObtainBGColor);
 
 function ShiftBaseColour(basecolour){
 	return HEX(Huen(basecolour,(MaxLevel()-CurLevelNumber()+1)/(MaxLevel()-1)*360)).colour;
