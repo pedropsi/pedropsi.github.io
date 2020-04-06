@@ -1,4 +1,10 @@
 var News={
+	N_38:{
+DATE:"2020-04-06",
+HEADER:()=>"Game Console Fork support",
+PIECE:()=>`
+<p>The ${v.A_GAME_CONSOLE()} learned to request the appropriate PS fork for each game.</p>
+	`,ID:"game-console"},
 	N_37:{
 DATE:"2020-03-31",
 HEADER:()=>"Puzzle type +1 level, new screenshots",
