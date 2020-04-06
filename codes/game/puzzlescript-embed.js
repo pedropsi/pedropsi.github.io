@@ -107,7 +107,7 @@ function EvaluateScheduled(sourceArray){
 function ExternalCompileASAP(fork){
 	ConsoleAdd("<p>Requesting Puzzlescript Fork from <b>"+sourceFork+"</b></p>");
 
-	var modules=CoreModules.concat(["COMPILE"]).concat(ExtraModules).concat(["GAMEBAR","MOBILE"]);//This is the order of evaluation
+	var modules=CoreModules.concat(["COMPILE"]).concat(ExtraModules).concat(["GAMEBAR"/*,"MOBILE"*/]);//This is the order of evaluation
 	ListenAndOnce(modules,function(){EvaluateScheduled(modules)});
 
 	function LoadExternalModuleF(source){LoadExternalModule(source,fork)};
@@ -117,8 +117,8 @@ function ExternalCompileASAP(fork){
 	Shout("COMPILE");
 	EvaluateScheduled["GAMEBAR"]=PrepareGameBar;
 	Shout("GAMEBAR");
-	EvaluateScheduled["MOBILE"]=ReEnableMobile;
-	Shout("MOBILE");
+	//EvaluateScheduled["MOBILE"]=ReEnableMobile;
+	//Shout("MOBILE");
 
 	
 }
