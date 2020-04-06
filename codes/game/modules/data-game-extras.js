@@ -24,7 +24,7 @@ if(typeof ObtainBGColor==="undefined"){
 	function ObtainBGColor(){return state.bgcolor;}
 }
 
-try{ObtainFGColor}catch(e){
+try{ObtainFGColor()}catch(e){
 	function ObtainFGColor(){return state.fgcolor;}
 }
 
