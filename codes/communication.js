@@ -1035,7 +1035,7 @@ function RequestDebugger(){
 
 function DebuggerEvaluate(){
 	try{
-		var result=eval(FindData('code'));
+		var result=window.eval(FindData('code'));
 		ConsoleAdd(String(result));
 	}catch(err){
 		ConsoleAdd(String(err));
