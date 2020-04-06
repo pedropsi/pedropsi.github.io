@@ -24,7 +24,7 @@ var gameSelector=gameSelector?gameSelector:'#gameCanvas';
 if(typeof ObtainBGColor==="undefined")
 	function ObtainBGColor(){return state.bgcolor;}
 
-if(PageTagArray()==="debug")
+if(PageTag()==="debug")
 	ConsoleAdd("DEBUG TEST: extras",ObtainBGColor);
 
 if(typeof ObtainFGColor==="undefined")

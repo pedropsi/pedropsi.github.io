@@ -47,7 +47,7 @@ return ["<div class='top'>\
 function ObtainBGColor(){return ShiftBaseColour(window.getComputedStyle(document.body)["background-color"]);}
 function ObtainFGColor(){return ShiftBaseColour(window.getComputedStyle(document.body)["color"]);}
 
-if(PageTagArray()==="debug")
+if(PageTag()==="debug")
 	ConsoleAdd("DEBUG TEST: puzzle-type",ObtainBGColor);
 
 function ShiftBaseColour(basecolour){
