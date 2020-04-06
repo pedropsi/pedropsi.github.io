@@ -2,33 +2,11 @@ LoadAsync("cacher",".");
 ListenOnce('load',ServiceWorker);
 
 ///////////////////////////////////////////////////////////////////////////////
-//Load and compile the game
+//Find the Modules
 
-function PuzzlescriptPage(id){
-	
-	ConsoleAdd("Loading "+PageTitle()+"...");
-	
-	// Load the Game
-	if(!id)
-		LoaderInFolder("codes/game/puzzlescript")(PageIdentifier());
-	else
-		LoadExternalGame(id);
-
-	if(!PuzzlescriptPage.modules){
-		PuzzlescriptPage.modules=true;
-
-		// Add the game container to the page 
-		PreAddElement('<div id="puzzlescript-game" class="game">\
-						<canvas id="gameCanvas"></canvas>\
-					</div>',
-			"body");
-		
-		function JLRequire(){
-			return (PageIdentifier()==="gravirinth")?"-JL":"";
-		}
-		
-		// Load the Puzzlescript engine
-		var puzzlescriptModules=[
+function PuzzleScriptCoreModules(fork){
+	function JLRequire(){return (PageIdentifier()==="gravirinth")?"-JL":"";};
+	return [
 		//Puzzlescript modules
 		"globalVariables",
 		"debug_off",
@@ -43,68 +21,131 @@ function PuzzlescriptPage(id){
 		"parser"+JLRequire(),
 		"compiler"+JLRequire(),
 		"inputoutput",
-		"mobile",
-		//Extras
+		"mobile"
+	].map(PuzzlescriptGlobalPathF(fork))
+}
+
+function PuzzleScriptExtraModules(){
+	return [
 		"data-game-colours",
 		"data-game-extras",
 		"data-game-overwrite",
 		"data-game-moves"
-		]
-	
-		puzzlescriptModules.map(LoaderInFolder("codes/game/modules"));
-	
-	}
+	].map(PuzzlescriptLocalPath);
 }
 
-// External loads, when needed
-function LoadExternalGame(id){
+function PuzzlescriptLocalPath(moduleName){return "codes/game/modules/"+moduleName+".js";};
+
+function PuzzlescriptGlobalPathF(fork){
+	if(!fork||fork==="puzzlescript.net")
+		return PuzzlescriptLocalPath;
+	else
+		return function(moduleName){return "https://raw.githubusercontent.com/"+fork+"/PuzzleScript/master/js/"+moduleName+".js";}
+};
+
+//Forks in April 2020 (todo - remove need to update this list)
+var PuzzlescriptForks=["AbhijeetKrishnan","adparadise","aidansean","arpitgarg481","ASmallLemon","AStox","atapia2","Ayelis","baagii04","ben-reilly","BentSm","Bhanditz","bqqbarbhg","bvoq","calebjenkins","campugnatus","ckriech","ClementCariou","ColtonPhillips","crb233","crust","cyatheatree","dario-zubovic","denisoa","dittoslash","dlederle","Draknek","dubajj","ducky007","eigenbom","eshnil2000","Farbs","fourks","francoisvn","gabrielcury","gamebytes","gdavid04","guerre50","HaoDrang","harrycode","ianfitzpatrick","idunnowhat2do","instr3","JackLance","jcmiller11","JoeOsborn","dvehar","eichwulf","Johnicholas","jojoee","jtpercon","kaspal","lazerwalker","Legrandk","lsouza-daitan","luckyluc156","madewokherd","MakingBrowserGames","MarcinKonowalczyk","marcosdon","mcanthony","mechturk","milksob","mjunaidi","mq30","mrbohnke","MSylvia","ndrake","niilante","nwhitehead","olaron","oranebeast","otherlibrary","PBMCube","pedoc","pedropsi","philschatz","raggy","richlocke87","rikkiprince","rmmh","ronanroquais","roryokane","salty-horse","samanthaeschaffer","samfromcadott","sarvex","sfiera","sftrabbit","shangzuoyan","shuding","stefanita","Stephen-Gose-Game-Studio","ThatScar","timknauf","tmoritaa","Tophwells","tripodsan","v21","vibster","weeble","what-gophers-go-for","won21kr","zarawesome"]
+	PuzzlescriptForks=["puzzlescript.net"].concat(PuzzlescriptForks);//Default fork
+
+function InForkF(file){//Matches a particular readme file, in case the right fork is mentioned there
+	return function(fork){return In(file,fork)&&In(file,"this game by pasting the script")};
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Load the Modules (asynchronously)
+
+function PuzzlescriptPage(id){
+	// Add the game container to the top of the page
+	PreAddElement(	`<div id="puzzlescript-game" class="game">
+						<canvas id="gameCanvas">Loading...</canvas>
+					</div>`,
+				"body");
+	//Load the game
+	ConsoleAdd("Loading "+PageTitle()+"...");
+	if(!id)
+		LoadInternalGame(PageIdentifier());
+	else
+		LoadExternalGame(id);
+}
+
+
+function LoadInternalGame(id){//From Pedro PSI
+	LoaderInFolder("codes/game/puzzlescript")(id);
+	LoadModulesAndCompileASAP()
+}
+
+function LoadExternalGame(id){//From Github Gist
 	var url='https://api.github.com/gists/'+id;
-	function CompileReplace(data){
-		if(data==="")
-			return;
+
+	LoadData(url,RetrieveGameSource,"application/x-www-form-urlencoded");
+
+	function RetrieveGameSource(data){
 		var data=JSON.parse(data);
 		var fileObjects=data["files"];
 		var fileNames=Keys(fileObjects);
-		var i=0;
-		var found=false;
-		while(i<fileNames.length&&!found){
-			sourceCode = fileObjects[fileNames[i]]["content"];
-			found=In(sourceCode,"COLLISIONLAYERS");
-			i++;
+		
+		var foundSource=false;
+		var foundFork=false;
+		for(var i=0;i<fileNames.length;i++){
+			fileContent=fileObjects[fileNames[i]]["content"];
+
+			if(!foundSource)
+				if(foundSource=In(fileContent,"COLLISIONLAYERS"))
+					sourceCode=fileContent;
+
+			if(!foundFork){
+				sourceFork=PuzzlescriptForks.filter(InForkF(fileContent));
+				if(foundFork=sourceFork.length>0)
+					sourceFork=sourceFork[0];
+				else
+					sourceFork="puzzlescript.net";
+			}
+
+			console.log(sourceFork);
+
 		}
-		if(found){
+	
+		if(foundSource){
 			sourceYear=data["created_at"].replace(/\-.*/g,"");
-			DelayUntil(function(){return (typeof compile!=="undefined");},CompileGame);
 		}
+
+		LoadModulesAndCompileASAP(sourceFork);
 	}
-	LoadData(url,CompileReplace,"application/x-www-form-urlencoded");
 }
 
-// Enable mobile
-function EnableMobile(){Mobile.enable(true);}
+function LoadModulesAndCompileASAP(fork){
+	PuzzleScriptCoreModules(fork).map(LoadSource);
+	PuzzleScriptExtraModules().map(LoadSource);
+	CompileGameASAP();
+}
 
-// Compile the game
-function CompileGame(){
-	compile(["restart"], sourceCode);
-	function P(){PrepareGame()};
-	DelayUntil(function(){return (typeof PrepareGame!=="undefined");},P);
-	function E(){ListenOnce('mousedown',EnableMobile,GetElement("gameCanvas"));}
-	DelayUntil(function(){return (typeof Mobile!=="undefined");},E);
+
+// Compile the game, as soon as possible (i.e. the modules have loaded)
+function CompileGameASAP(){
+	function ReadyToCompile(){try{return compile&&sourceCode}catch(e){}};
+	function CompileGameSource(){compile(["restart"],sourceCode);};
+	DelayUntil(ReadyToCompile,CompileGameSource);
+	
+	function PrepareGameBar(){PrepareGame()};
+	function ReadyToGameBar(){try{return ReadyToCompile()&&PrepareGame&&canvasResize&&state}catch(e){}};
+	DelayUntil(ReadyToGameBar,PrepareGameBar);
+
+	function ReadyToMobile(){return (typeof Mobile!=="undefined");}
+	function EnableMobile(){Mobile.enable(true);}
+	function ReEnableMobile(){ListenOnce('mousedown',EnableMobile,GetElement("gameCanvas"));}
+	DelayUntil(ReadyToMobile,ReEnableMobile);
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
 // Start the game
 
-if(PageTitle()=="Game Console"){
+if(PageIdentifier()=="game-console"){
 	LoaderInFolder("data")("puzzlescript-database");
 	var game=PageSearch("game");
 	if(game!=="")
 		PuzzlescriptPage(game);
 }
-else{
+else
 	PuzzlescriptPage();
-	DelayUntil(function(){return (typeof compile!=="undefined")&&(typeof sourceCode!=="undefined");},CompileGame);
-}
-
-
