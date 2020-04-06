@@ -1387,17 +1387,22 @@ function Offline(){return !Online()};
 function MacroURL(c){return "https://script.google.com/macros/s/"+c+"/exec";};
 
 //Fetch data from url
-function LoadDataFromNetwork(url,SuccessF,header){
+function LoadDataFromNetwork(url,SuccessF,header,FailureF){
+	var FailureF=FailureF||Identity;
 	var rawFile=new XMLHttpRequest();
 	rawFile.open("GET",url,true);
 	rawFile.onreadystatechange=function(){
 		if(rawFile.readyState===4){
-			if(rawFile.status===404)
+			if(rawFile.status===404){
 				console.log("Nothing found at: ",url,", not necessarily an error!");
+				FailureF();
+			}
 			else if(rawFile.status===200||rawFile.status==0){
 				var data=rawFile.responseText;
-				if(data==="")
+				if(data===""){
 					console.log("No data received from: ",url,". Connection problems?");
+					FailureF();
+				}
 				else{
 					Memory(url,rawFile.responseText,new Date());
 					SuccessF(data);
