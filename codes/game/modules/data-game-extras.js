@@ -19,9 +19,13 @@ function GameHackURL(){
 //Game selector
 var gameSelector=gameSelector?gameSelector:'#gameCanvas';
 
+
 //Game Options
 if(typeof ObtainBGColor==="undefined")
 	function ObtainBGColor(){return state.bgcolor;}
+
+if(PageTagArray()==="debug")
+	ConsoleAdd("DEBUG TEST: extras",ObtainBGColor);
 
 if(typeof ObtainFGColor==="undefined")
 	function ObtainFGColor(){return state.fgcolor;}
