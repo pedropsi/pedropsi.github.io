@@ -20,13 +20,11 @@ function GameHackURL(){
 var gameSelector=gameSelector?gameSelector:'#gameCanvas';
 
 //Game Options
-if(typeof ObtainBGColor==="undefined"){
+if(typeof ObtainBGColor==="undefined")
 	function ObtainBGColor(){return state.bgcolor;}
-}
 
-try{ObtainFGColor}catch(e){
+if(typeof ObtainFGColor==="undefined")
 	function ObtainFGColor(){return state.fgcolor;}
-}
 
 if(typeof ObtainRestartAllowed==="undefined")
 	function ObtainRestartAllowed(){return !state.metadata.norestart;}
