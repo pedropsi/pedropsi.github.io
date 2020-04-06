@@ -1339,6 +1339,12 @@ function LoadScript(source){
 	head.appendChild(script);
 }
 
+function LoadCode(code){
+	var g = document.createElement('script');
+		g.text = code;
+	AddElement(g,"BODY");
+}
+
 function LoadAsync(sourcename,folder){
 	var head=GetElement('head');
 	var script=document.createElement('script');
