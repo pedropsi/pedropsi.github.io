@@ -1,4 +1,10 @@
 var News={
+	N_39:{
+DATE:"2020-04-07",
+HEADER:()=>"Puzzle type fix (for the Safari browser)",
+PIECE:()=>`
+<p>"Hoisting of functions inside conditionals" was the Javascript inconsistency blocking ${A_PUZZLE_TYPE()} on Safari - not anymore!</p>
+	`,ID:"puzzle-type"},
 	N_38:{
 DATE:"2020-04-06",
 HEADER:()=>"Game Console Fork support",
