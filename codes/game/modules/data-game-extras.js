@@ -25,33 +25,37 @@ if(PageTag()==="debug")
 
 //Game Options
 if(typeof ObtainBGColor==="undefined")
-	function ObtainBGColor(){return state.bgcolor;}
+	var ObtainBGColor=function(){return state.bgcolor;}
 
 if(PageTag()==="debug")
 	ConsoleAdd("extras after\n"+ObtainBGColor);
 
 if(typeof ObtainFGColor==="undefined"){
-	function ObtainFGColor(){return state.fgcolor;}
+	var ObtainFGColor=function(){return state.fgcolor;}
 }
 
+if(PageTag()==="debug")
+	ConsoleAdd("extras after\n"+ObtainBGColor);
+
+
 if(typeof ObtainRestartAllowed==="undefined")
-	function ObtainRestartAllowed(){return !state.metadata.norestart;}
+	var ObtainRestartAllowed=function(){return !state.metadata.norestart;}
 
 if(typeof ObtainUndoAllowed==="undefined")
-	function ObtainUndoAllowed(){return !state.metadata.noundo;}
+	var ObtainUndoAllowed=function(){return !state.metadata.noundo;}
 
 if(typeof ObtainUndo==="undefined")
-	function ObtainUndo(){
+	var ObtainUndo=function(){
 		PulseSelect("UndoButton");
 		CheckRegisterKey({keyCode:85});}
 
 if(typeof ObtainRestart==="undefined")
-	function ObtainRestart(){
+	var ObtainRestart=function(){
 		PulseSelect("RestartButton");
 		CheckRegisterKey({keyCode:82});}
 
 if(typeof ObtainAction==="undefined")
-	function ObtainAction(){
+	var ObtainAction=function(){
 		CheckRegisterKey({keyCode:88});}
 
 //Game display Options
@@ -64,11 +68,11 @@ if(typeof ObtainInitialMessages==="undefined")
 //	var ObtainInitialMessages=false;
 
 if(typeof ObtainXYRotateCondition==="undefined")
-	function ObtainXYRotateCondition(x,y){return x<y*1.05};
+	var ObtainXYRotateCondition=function(x,y){return x<y*1.05};
 //	function ObtainXYRotateCondition(x,y){return false};
 
 if(typeof ResizeCanvas==="undefined")
-	function ResizeCanvas(){canvasResize();}
+	var ResizeCanvas=function(){canvasResize();}
 
 if(typeof titleScreen==="undefined")
 	var titleScreen=true;
@@ -76,24 +80,24 @@ if(typeof titleScreen==="undefined")
 
 //Game and Level Navigation
 if(typeof ObtainLevelLookahead==="undefined")
-	function ObtainLevelLookahead(){return 0; //Max number of unsolved levels shown, in linear progression. Example: 0 = all, 1 =1, 2=2, etc...
+	var ObtainLevelLookahead=function(){return 0; //Max number of unsolved levels shown, in linear progression. Example: 0 = all, 1 =1, 2=2, etc...
 	};
 
 if(typeof ObtainGateLevels==="undefined")
-	function ObtainGateLevels(){return []; //Gated "boss" levels require beating all previous levels to show up; all previous levels + itself to show levels afterwards. Example: [] = no gate levels, [2,5] = levels 2 and 5 are gate levels.
+	var ObtainGateLevels=function(){return []; //Gated "boss" levels require beating all previous levels to show up; all previous levels + itself to show levels afterwards. Example: [] = no gate levels, [2,5] = levels 2 and 5 are gate levels.
 	};
 
 if(typeof ObtainStateScreens==="undefined")
-	function ObtainStateScreens(){return state.levels;}
+	var ObtainStateScreens=function(){return state.levels;}
 
 if(typeof ObtainNewGameCondition==="undefined")
-	function ObtainNewGameCondition(){return titleSelection===0}
+	var ObtainNewGameCondition=function(){return titleSelection===0}
 
 if(typeof ObtainLevelLoader==="undefined")
-	function ObtainLevelLoader(){loadLevelFromState(state,curlevel)};
+	var ObtainLevelLoader=function(){loadLevelFromState(state,curlevel)};
 
 if(typeof ObtainLevelTransition==="undefined")
-	function ObtainLevelTransition(){
+	var ObtainLevelTransition=function(){
 		textMode=false;
 		titleScreen=false;
 		quittingMessageScreen=false;
@@ -101,13 +105,13 @@ if(typeof ObtainLevelTransition==="undefined")
 	}
 
 if(typeof ObtainTitleScreenLoader==="undefined")
-	function ObtainTitleScreenLoader(){goToTitleScreen()};
+	var ObtainTitleScreenLoader=function(){goToTitleScreen()};
 
 if(typeof ObtainPlayEndGameSound==="undefined")
-	function ObtainPlayEndGameSound(){tryPlayEndGameSound()};
+	var ObtainPlayEndGameSound=function(){tryPlayEndGameSound()};
 
 if(typeof ObtainLevelTitle==="undefined"){
-	function ObtainLevelTitle(lvl){
+	var ObtainLevelTitle=function(lvl){
 		if(!lvl)
 			return "";
 		if(HasCheckpoint())
@@ -117,7 +121,7 @@ if(typeof ObtainLevelTitle==="undefined"){
 	}
 }
 else if(ObtainLevelTitle==="Previous"){ //Case for title specified in message before the level
-	function ObtainLevelTitle(lvl){
+	var ObtainLevelTitle=function(lvl){
 		var title= ObtainStateScreens()[LevelScreen(lvl)-1].message;
 		title=title.replace(/^[\-\"\_\:\'\s\n]*(level\s*\d*)*[\-\"\_\:\'\s\n]*/im,"").replace(/[\-\"\_\:\'\s\n]*$/im,"");
 		return title.replace(/[\-][\-\s]?/gi," ");
@@ -125,13 +129,13 @@ else if(ObtainLevelTitle==="Previous"){ //Case for title specified in message be
 }
 //Read move defaults
 if(typeof ObtainIsUndoMove==="undefined")
-	function ObtainIsUndoMove(move){return move==="Z"}
+	var ObtainIsUndoMove=function(move){return move==="Z"}
 
 if(typeof ObtainIsRestartMove==="undefined")
-	function ObtainIsRestartMove(move){return move==="R"}
+	var ObtainIsRestartMove=function(move){return move==="R"}
 
 if(typeof ObtainReadMove==="undefined")
-	function ObtainReadMove(move){
+	var ObtainReadMove=function(move){
 		switch (move) {
 			case 27:return "Q";break;
 			case 37:return "A";break;
@@ -147,10 +151,10 @@ if(typeof ObtainReadMove==="undefined")
 
 //Keybinding defaults
 if(typeof ObtainKeyActionsGameBar==="undefined")
-	ObtainKeyActionsGameBar=KeyActionsGameBar;
+	var ObtainKeyActionsGameBar=KeyActionsGameBar;
 
 if(typeof ObtainGameAction==="undefined")
-	function ObtainGameAction(key){
+	var ObtainGameAction=function(key){
 		Context(gameSelector)[ComboKeystring(key)]();
 		GameFocus();
 	}
@@ -163,12 +167,12 @@ if(typeof ObtainKeyboardKeys==="undefined")
 	var ObtainKeyboardKeys=GameKeyboardKeys;
 
 if(typeof ObtainKeyboardLauncher==="undefined")
-	function ObtainKeyboardLauncher(){
+	var ObtainKeyboardLauncher=function(){
 		return LaunchBalloon;
 	}
 
 if(typeof ObtainKeyboardTarget==="undefined")
-	function ObtainKeyboardTarget(){
+	var ObtainKeyboardTarget=function(){
 		return ".game-container";
 	}
 
@@ -180,7 +184,7 @@ if(GameConsole())
 	ObtainInterlevelMessage=False;
 
 if(typeof ObtainMainKey==="undefined")
-	function ObtainMainKey(action){
+	var ObtainMainKey=function(action){
 		if(!action)
 			return {
 				"undo":"Z",
