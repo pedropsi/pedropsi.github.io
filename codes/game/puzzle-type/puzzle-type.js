@@ -47,9 +47,6 @@ return ["<div class='top'>\
 function ObtainBGColor(){return ShiftBaseColour(window.getComputedStyle(document.body)["background-color"]);}
 function ObtainFGColor(){return ShiftBaseColour(window.getComputedStyle(document.body)["color"]);}
 
-if(PageTag()==="debug")
-	ConsoleAdd("puzzle-type\n"+ObtainBGColor);
-
 function ShiftBaseColour(basecolour){
 	return HEX(Huen(basecolour,(MaxLevel()-CurLevelNumber()+1)/(MaxLevel()-1)*360)).colour;
 }
