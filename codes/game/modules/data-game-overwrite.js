@@ -1,6 +1,6 @@
 
 if(typeof ObtainPlayEndLevelSound==="undefined")
-	function ObtainPlayEndLevelSound(){tryPlayEndLevelSound()};
+	var ObtainPlayEndLevelSound=function(){tryPlayEndLevelSound()};
 
 ////////////////////////////////////////////////////////////////////////////////
 //Puzzlescript overwrite
