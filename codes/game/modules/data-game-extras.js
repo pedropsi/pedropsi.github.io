@@ -1357,9 +1357,8 @@ function KeyActionsGameBar(){
 }
 
 //Game keybinding profile
-if(typeof ObtainKeyActionsGame==="undefined"){
-	
-	function ObtainKeyActionsGame(){
+if(typeof ObtainKeyActionsGame==="undefined")
+	var ObtainKeyActionsGame=function(){
 		return {
 			//Arrows
 			"left"		:InstructGameKeyF(37),
@@ -1387,11 +1386,13 @@ if(typeof ObtainKeyActionsGame==="undefined"){
 		};
 	}
 	
-	function InstructGameKeyF(newkey){
+if(typeof InstructGameKeyF==="undefined")
+	var InstructGameKeyF=function(newkey){
 		return function(ev){ev.keyCode=newkey;InstructGame(ev)}
 	}
 	
-	function InstructGame(event){
+if(typeof InstructGame==="undefined")
+	var InstructGame=function(event){
 		event.preventDefault();
 		var key=event.keyCode;
 	
@@ -1407,13 +1408,14 @@ if(typeof ObtainKeyActionsGame==="undefined"){
 			}
 	}
 	
-		//Execute key instructions
-	function CheckRegisterKey(event){
+	//Execute key instructions
+if(typeof CheckRegisterKey==="undefined")
+	var CheckRegisterKey=function(event){
 		checkKey(event,true);
 		RegisterMove(event.keyCode);
 	}
 		
-}
+
 
 
 //Keybind to game element
