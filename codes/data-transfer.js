@@ -4437,7 +4437,7 @@ function MonthName(n,monthArray){
 
 function Year(date){
 	var date=date||Today();
-	return Number(date.toLocaleDateString().replace(/.*\//,""));
+	return date.getFullYear();
 }
 function Month(date){
 	var date=date||Today();
