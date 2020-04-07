@@ -100,13 +100,13 @@ CROUBBLE:{TYPE:"Developer",NAME:"Crouble",ALIAS:"NarrowAdder",TWITTER:"Croubble"
 
 function PersonalPage(linkObj){
 	if(linkObj.ITCH)
-		return v.ITCH_URL()+Unfunctionalise(linkObj.ITCH);
+		return "https://"+Unfunctionalise(linkObj.ITCH)+v.ITCH_URL();
 	if(linkObj.TWITTER)
 		return v.TWITTER_URL()+Unfunctionalise(linkObj.TWITTER);
 	if(linkObj.GITHUB_IO)
-		return v.GITHUB_IO_URL()+Unfunctionalise(linkObj.GITHUB_IO);
+		return "https://"+Unfunctionalise(linkObj.GITHUB_IO)+v.GITHUB_IO_URL();
 	if(linkObj.GITHUB_COM)
-		return v.GITHUB_COM_URL()+Unfunctionalise(linkObj.GITHUB_COM);
+		return "https://"+Unfunctionalise(linkObj.GITHUB_COM)+v.GITHUB_COM_URL();
 	if(linkObj.PERSONAL_PAGE)
 		return Unfunctionalise(linkObj.PERSONAL_PAGE);
 	if(linkObj.GOOGLE_PLUS)
