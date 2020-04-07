@@ -36,7 +36,7 @@ function ComingHTMLArray(){
 return ["<div class='top'>\
 			<h1 class='goal'>Puzzle Type</h1>\
 		</div>",
-		"<div class='middle' id='letters'>Coming soon!\
+		"<div class='middle' id='letters'>Coming soon! (beta playtesting ongoing)\
 		</div>"];
 }
 
