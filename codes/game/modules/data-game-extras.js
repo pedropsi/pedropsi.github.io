@@ -30,8 +30,9 @@ if(typeof ObtainBGColor==="undefined")
 if(PageTag()==="debug")
 	ConsoleAdd("extras after\n"+ObtainBGColor);
 
-if(typeof ObtainFGColor==="undefined")
+if(typeof ObtainFGColor==="undefined"){
 	function ObtainFGColor(){return state.fgcolor;}
+}
 
 if(typeof ObtainRestartAllowed==="undefined")
 	function ObtainRestartAllowed(){return !state.metadata.norestart;}
