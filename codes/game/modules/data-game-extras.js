@@ -477,7 +477,7 @@ function AddGameBar(){
 // Focus on Game Canvas
 function GameFocus(DP){
 	document.activeElement.blur();
-	if(window.Mobile)
+	if(window.Mobile&&window.Mobile.GestureHandler)
 		window.Mobile.GestureHandler.prototype.fakeCanvasFocus();
 	setTimeout(function(){FocusElement(gameSelector);},100);
 };
