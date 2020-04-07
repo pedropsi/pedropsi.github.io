@@ -53,7 +53,7 @@ var SelectedGames=[
 {LINK:`2a4c5818a4efc5523edd`,TITLE:`Manni the Mountaineer`,AUTHOR_LINK:`https://github.com/zejety`,AUTHOR:`Denis Prause (Zejety)`,YEAR:2016,TAGS:["Exploring"," Platformer"," Sokoban"]},
 {LINK:`8b6e3c506bd45c02fa54`,TITLE:`Slide Rule`,AUTHOR_LINK:`https://twitter.com/jimpalmeri`,AUTHOR:`Jim Palmeri`,YEAR:2016,TAGS:["Ice"," Sokoban"]},
 {LINK:`https://heskhwis.itch.io/a-kishoutenketsu-in-the-countryside`,TITLE:`My first Kishoutenketsu`,AUTHOR_LINK:`https://twitter.com/HeskHwis`,AUTHOR:`Rémi Töötätä (HeskHwis)`,YEAR:2016,TAGS:["Fishing"]},
-{LINK:`https://parachor.itch.io/otherly`,TITLE:`Otherly`,AUTHOR_LINK:`https://parachor.itch.io/`,AUTHOR:`Parachor`,YEAR:2016,TAGS:["Platformer"]},
+{LINK:`https://parachor.itch.io/otherly`,TITLE:`Otherly`,AUTHOR_LINK:`https://parachor.itch.io/`,AUTHOR:`Parachor`,YEAR:2016,TAGS:["Demake","Platformer"]},
 {LINK:`https://www.puzzlescript.net/play.html?p=ff545124a5ea5bf23ba0eef071a56533`,TITLE:`PacPac`,AUTHOR_LINK:`https://twitter.com/10c8_`,AUTHOR:`William Fernandes (10c8)`,YEAR:2016,TAGS:["Demake"]},
 {LINK:`https://w.itch.io/robot-heist`,TITLE:`Robot Heist`,AUTHOR_LINK:`https://w.itch.io/`,AUTHOR:`Anna Anthropy`,YEAR:2016,TAGS:["Laser"," Team"," Sokoban"]},
 {LINK:`991339bc02d728fc7070`,TITLE:`Twinkle, twinkle, little square`,AUTHOR_LINK:`https://plus.google.com/u/0/112121953522427737858`,AUTHOR:`Mark Richardson (Hand-e-food)`,YEAR:2015,TAGS:["Connect"," Visual"]},
