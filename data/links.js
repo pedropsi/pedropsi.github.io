@@ -128,6 +128,9 @@ A_SELENES_LABYRINTH:{PAGE:"https://jcgyo.itch.io/selenes-labyrinth",EXT:".html",
 A_SASQUATCH:{PAGE:"https://jcgyo.itch.io/sasquatch",EXT:".html",TITLE:"Sasquatch Sokoban",AUTHOR:()=>v.JCMILLER(),GROUP:"with-game-bar"}
 };
 
+LinksNormalised=Clone(Links);
+
+
 function LinkTemplate(linkObj){
 	var title=Unfunctionalise(linkObj.TITLE);
 	var author=Unfunctionalise(linkObj.AUTHOR||"");
@@ -151,7 +154,7 @@ function LinkTemplate(linkObj){
 function LinkGroup(GroupObject){
 	if(typeof GroupObject==="string")
 		return LinkGroup({GROUP:GroupObject});
-	return BaseFilter(Links,GroupObject);
+	return BaseFilter(LinksNormalised,GroupObject);
 }
 
 function LinkGroupHTML(GroupObject){
@@ -162,8 +165,6 @@ function LinkGroupHTML(GroupObject){
 }
 
 
-//var LinksNormalised=Clone(Links);
-//NormaliseVariables(LinksNormalised,LinkTemplate);
 
 if(DATA){DATA["Links"]=Links}else{var DATA={"Links":Links}}
 Shout("links");
