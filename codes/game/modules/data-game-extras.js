@@ -20,12 +20,15 @@ function GameHackURL(){
 var gameSelector=gameSelector?gameSelector:'#gameCanvas';
 
 
+if(PageTag()==="debug")
+	ConsoleAdd("extras before\n"+ObtainBGColor);
+
 //Game Options
 if(typeof ObtainBGColor==="undefined")
 	function ObtainBGColor(){return state.bgcolor;}
 
 if(PageTag()==="debug")
-	ConsoleAdd("extras\n"+ObtainBGColor);
+	ConsoleAdd("extras after\n"+ObtainBGColor);
 
 if(typeof ObtainFGColor==="undefined")
 	function ObtainFGColor(){return state.fgcolor;}
