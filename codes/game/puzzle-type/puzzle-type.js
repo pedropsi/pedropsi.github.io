@@ -378,7 +378,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Tangles",				//Alphabetical, Cyclic, Proactive
 
 	"Symmetric",			//Spacial, Cyclic
-	"Topological",			//Spacial, Cyclic, Proactive
+	"Topological",			//Spacial, Cyclic, Retroactive
 
 	"Dvorak",				//Spacial, Cyclic, Mapping, Cultural
 	"Nokia 1998",			//Spacial, Mapping, Cultural
@@ -483,9 +483,12 @@ var LevelActions={
 	"Dividi":Dividi,
 	"Odd":function(L){
 		InputLetter(L);
-		if(In(Letters.array.join(""),"ODD")){
+		var odd=In(Letters.array.join(""),"ODD");
+		var even=In(Letters.array.join(""),"EVEN");
+		var offset=odd?1:0;
+		if(odd||even){
 			var LA=[];
-			for(var i=1;i<Letters.array.length;i=i+2){
+			for(var i=offset;i<Letters.array.length;i=i+2){
 				LA.push(Letters.array[i]);
 			}
 			Letters.array=LA;
