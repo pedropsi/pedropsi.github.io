@@ -378,7 +378,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Tangles",				//Alphabetical, Cyclic, Proactive
 
 	"Symmetric",			//Spacial, Cyclic
-	"Homeomorphic",			//Spacial, Cyclic, Proactive
+	"Topological",			//Spacial, Cyclic, Proactive
 
 	"Dvorak",				//Spacial, Cyclic, Mapping, Cultural
 	"Nokia 1998",			//Spacial, Mapping, Cultural
@@ -450,7 +450,7 @@ var LevelActions={
 			InputLetter(L);
 	},
 	"Symmetric":Symmetric,
-	"Homeomorphic":Homeomorphic,
+	"Topological":Topological,
 	"Dvorak":function (P){
 		var n=Letters.array.length;
 		var P=P;
@@ -819,14 +819,12 @@ function InversionSymmetric(O){
 	return In(["I","N","O","S","X","Z","0","8"],PureLetter(O));
 }
 
-//Homeomorphic
+//Topological
 
-function Homeomorphic(O){	
+function Topological(O){	
 	function InputBaseLetter(L){
-		if(In(["O","I"],HomeomorphicClass(L)))
+		if(In(["I"],HomeomorphicClass(L)))
 			InputLetter(L);
-		else if(In(["A","B","P","Q"],HomeomorphicClass(L)))
-			InputLetter("O");
 		else
 			InputLetter("I");
 	}
@@ -842,9 +840,8 @@ function Homeomorphic(O){
 			DeleteLetterAfter();
 			InputLetter(O);
 		}
-		else{
+		else
 			InputBaseLetter(O);
-		}
 	}
 	PlaceEndCaret();
 }
@@ -862,13 +859,13 @@ var Homeomorphism={
 }
 
 var HomeomorphismRequirement={
-	"A":["P"],
-	"B":["O"],
-	"H":["E"],
+	"A":["P","H"],
+	"B":["A"],
+	"H":["Y"],
 	"I":[],
-	"O":[],
-	"P":["O","I"],
-	"Q":["P","Y"],
+	"O":["I"],
+	"P":["O","Y"],
+	"Q":["P","X"],
 	"X":["Y"],
 	"Y":["I"]
 }
