@@ -1129,6 +1129,7 @@ var Gendered={
 	"bro":"sis",
 	"father":"mother",
 	"papa":"mama",
+	"grandpa":"grandma",
 	"uncle":"aunt",
 	"nephew":"niece",
 	"fiancé":"fiancée",
