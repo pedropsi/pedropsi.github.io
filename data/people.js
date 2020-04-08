@@ -95,7 +95,8 @@ PIXELARTM:{TYPE:"Developer",NAME:"Pixelartm",ITCH:"pixelartm"},
 DABRILA:{TYPE:"Developer",NAME:"Justas Dabrila",ITCH:"ssstormy",TWITTER:"justas_dabrila"},
 PRAUSE:{TYPE:"Developer",NAME:"Denis Prause",ALIAS:"Zejety",GITHUB_COM:"zejety"},
 PARACHOR:{TYPE:"Developer",NAME:"Parachor",ITCH:"parachor"},
-CROUBBLE:{TYPE:"Developer",NAME:"Crouble",ALIAS:"NarrowAdder",TWITTER:"Croubble",ITCH:"dazed-pidgeon"}
+CROUBBLE:{TYPE:"Developer",NAME:"Crouble",ALIAS:"NarrowAdder",TWITTER:"Croubble",ITCH:"dazed-pidgeon"},
+PLURMORANT:{TYPE:"Tester",NAME:"Plurmorant"}
 }
 
 function PersonalPage(linkObj){
