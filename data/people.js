@@ -78,7 +78,7 @@ FARBS:{TYPE:"Developer",NAME:"Farbs",TWITTER:"FarbsMcFarbs",PERSONAL_PAGE:"farbs
 HITCHMAN:{TYPE:"Developer",NAME:"Ryan Hitchman",PERSONAL_PAGE:"https://the8bitpimp.wordpress.com/"},
 WHITEHEAD:{TYPE:"Developer",NAME:"Nathan Whitehead",GITHUB_COM:"nwhitehead"},
 JD:{TYPE:"Developer",NAME:"Jonathan",ALIAS:"JD",ITCH:"jdersch"},
-DEUSOVI:{TYPE:"Developer",NAME:"Deusovi",},
+DEUSOVI:{TYPE:"Developer",NAME:"Deusovi"},
 MAGO:{TYPE:"Developer",NAME:"Daniel Hurtado",ALIAS:"mago314"},
 JOSHUASTONE:{TYPE:"Developer",NAME:"Joshua Stone",TWITTER:"IAmJoshuaStone"},
 ANTHROPY:{TYPE:"Developer",NAME:"Anna Anthropy",ITCH:"w"},
@@ -124,7 +124,12 @@ function PersonTemplate(linkObj){
 
 	var page=PersonalPage(linkObj);
 
-	return AHTML(name,page);
+	name=`<span class="name">${name}</span>`;
+
+	if(page!=="")
+		return AHTML(name,page);
+	else
+		return name;
 }
 
 MapObject(People,function (v,k,o){
