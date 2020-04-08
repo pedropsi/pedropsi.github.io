@@ -160,7 +160,7 @@ function P(){
 
 function P(){
 	var pagetag=PageTag();
-	var tokens=["Plurmorant","mago314","Deusovi","minotalen","test"];
+	var tokens=["PatrickEye","Plurmorant","mago314","Deusovi","minotalen","test"];
 	var apptokens=tokens.map(function(t){return "homescreen-"+t});
 	var manifest=GetElement("manifest");
 	manifest.href=manifest.href.replace("homescreen","homescreen-"+pagetag);
