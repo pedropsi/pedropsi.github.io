@@ -822,39 +822,55 @@ function InversionSymmetric(O){
 //Homeomorphic
 
 function Homeomorphic(O){	
-	var cla=HomeomorphicClass(O);
-	
-	function InHoCla(F){
-		return (HomeomorphicClass(F)===cla?1:0);
+	function InputBaseLetter(L){
+		if(In(["O","I"],HomeomorphicClass(L)))
+			InputLetter(L);
+		else if(In(["A","B","P","Q"],HomeomorphicClass(L)))
+			InputLetter("O");
+		else
+			InputLetter("I");
 	}
-	
-	function HomeomorphicAdvance(F,n){
-		var p=Homeomorphism[cla].indexOf(F);
-		return Homeomorphism[cla][(p+n)%(Homeomorphism[cla].length)];
+
+	if(Letters.array.length===0){
+		InputBaseLetter(O);
 	}
-	
-	var n=Letters.array.map(InHoCla);
-	if(n.length===0)
-		n=0
-	else
-		n=n.reduce(Accumulate);
-	
-	var O=HomeomorphicAdvance(O,n)
-	
-	InputLetter(O);
-	
+	else{
+		var L=Last(Letters.array);
+		var classO=HomeomorphicClass(O);
+		var classL=HomeomorphicClass(L);
+		if(In(HomeomorphismRequirement[classO],classL)){
+			DeleteLetterAfter();
+			InputLetter(O);
+		}
+		else{
+			InputBaseLetter(O);
+		}
+	}
+	PlaceEndCaret();
 }
 
 var Homeomorphism={
 	"A":["A","R"],
 	"B":["B"],
-	"C":["C","G","I","J","L","M","N","S","U","V","W","Z"],
-	"D":["D","O"],
-	"E":["E","F","T","Y"],
 	"H":["H","K"],
+	"I":["C","G","I","J","L","M","N","S","U","V","W","Z"],
+	"O":["D","O"],
 	"P":["P"],
 	"Q":["Q"],
-	"X":["X"]
+	"X":["X"],
+	"Y":["E","F","T","Y"],
+}
+
+var HomeomorphismRequirement={
+	"A":["P"],
+	"B":["O"],
+	"H":["E"],
+	"I":[],
+	"O":[],
+	"P":["O","I"],
+	"Q":["P","Y"],
+	"X":["Y"],
+	"Y":["I"]
 }
 
 function HomeomorphicClass(O){
@@ -866,7 +882,6 @@ function HomeomorphicClass(O){
 			if(In(Homeomorphism[classes[i]],O))
 				return classes[i];
 		}
-			
 		return null;
 	}
 }
@@ -1101,6 +1116,7 @@ var Gendered={
 	"masculine":"feminine",
 	"andro":"gineco",
 	"man":"woman",
+	"men":"women",
 	"boy":"girl",
 	//sociology
 	"mascularity":"feminacy",
