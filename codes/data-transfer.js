@@ -2517,7 +2517,7 @@ function LaunchKeyboardBalloon(DP){
 
 // On-screen Keyboard
 function DefaultKeyboardKeys(){
-	return [["1","2","3","4","5","6","7","8","9","0"],["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M",".","-"]]};
+	return [["1","2","3","4","5","6","7","8","9","0"],["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M","dot","dash"],["space"]]};
 
 function KeyboardRowsHTML(dataField,buttontype){
 	var kblines="";
@@ -2537,6 +2537,10 @@ function KeyboardHTML(dataField){
 	return LayoutHTML(dataField,KeyboardButtonHTML,'keyboard',KeyboardRowsHTML)
 }
 
+var KeyboardKeymap={
+	" ":"space"
+}
+
 function KeyboardButtonHTML(choice,dataFiel,i){
 	var buID='kb'+i;
 	var ID="choice-"+choice;
@@ -2547,7 +2551,7 @@ function KeyboardButtonHTML(choice,dataFiel,i){
 
 	var Kargs='(KeyboardButtonHTML.'+buID+',250,"'+buID+'");';
 	var Start='AutoRepeat'+Kargs;
-	var Stop='AutoStop'+Kargs+'FadeSelect('+'"choice-"+"'+choice+'");';
+	var Stop='AutoStop'+Kargs+'FadeSelect("'+ID+'");';
 
 	var buAttribs={
 		'onclick':'KeyboardButtonHTML.'+buID+'()',
@@ -4614,7 +4618,10 @@ function ObtainSymbol(name){
 		"edit":IconHTML("M206 131 L 85 252 118 284 L 151 317 272 196 L 392 75 360 43 L 327 10 206 131 M245 169 L 151 263 145 257 L 139 252 233 158 L 327 64 333 70 L 338 75 245 169 M51 321 C 34 355,20 383,21 383 C 21 383,144 322,145 321 C 145 321,83 258,83 258 C 82 258,68 286,51 321"),
 		"sun":SpanHTML(`<svg class='iconpath' viewBox="0 0 1012 1012" width="20" height="20" ><defs><clipPath id="pathsun"><path d="M96 46 1109 46 1109 1058 96 1058Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#pathsun)" transform="translate(-96 -46)"><path d="M418.5 552C418.5 450.103 501.103 367.5 603 367.5 704.897 367.5 787.5 450.103 787.5 552 787.5 653.897 704.897 736.5 603 736.5 501.103 736.5 418.5 653.897 418.5 552Z"  stroke-width="80" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/><path d="M603.5 81.5 603.5 220.563"  stroke-width="80" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>			<path d="M603.5 1022.56 603.5 883.5"  stroke-width="80" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>			<path d="M1073.56 552.5 934.5 552.5"  stroke-width="80" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>			<path d="M132.5 552.5 271.562 552.5"  stroke-width="80" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>			<path d="M935.135 218.928 836.803 317.26"  stroke-width="69.2708" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>			<path d="M269.865 884.197 368.197 785.865"  stroke-width="69.2708" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/>			<path d="M935.135 884.197 836.803 785.866"  stroke-width="69.2708" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/><path d="M269.865 218.928 368.197 317.26"  stroke-width="69.2708" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/></g></svg>`),
 		"moon":SpanHTML(`<svg class='iconpath' viewBox="-150 0 660 809" width="20" height="20" ><defs><clipPath id="pathmoon"><path d="M1250 158 1760 158 1760 967 1250 967Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#pathmoon)" transform="translate(-1250 -158)"><path d="M1655.5 931.5C1451.71 931.5 1286.5 766.517 1286.5 563 1286.5 359.483 1451.71 194.5 1655.5 194.5 1451.71 347.138 1410.41 635.858 1563.25 839.375 1589.47 874.293 1620.53 905.312 1655.5 931.5Z"  stroke-width="80" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/></g></svg>`),
-		"scroll-up":"▵"
+		"scroll-up":"▵",
+		"space":" ",	//keyboard useful
+		"dot":".",		//keyboard useful
+		"dash":"-"		//keyboard useful
 		};
 	if(!name)
 		return symbols;

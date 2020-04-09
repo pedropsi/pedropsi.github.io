@@ -90,7 +90,10 @@ function ObtainXYRotateCondition(x,y){return false;}
 
 //Onscreen Keyboard
 function ObtainKeyboardKeys(){
-	return DefaultKeyboardKeys().concat(GameKeyboardKeys());
+	var alphanumeric=Most(DefaultKeyboardKeys());
+	var gamekeys=First(GameKeyboardKeys());
+	var other=[First(gamekeys),First(Last(DefaultKeyboardKeys())),Last(gamekeys)];
+	return alphanumeric.concat([other]);
 }
 function ObtainKeyboardLauncher(){
 	return LaunchKeyboardBanner;
@@ -173,8 +176,8 @@ function P(){
 //Keybinding
 function ObtainKeyActionsGame(){
 	var keyactions={
-		".":InstructGameKeyF("."),
-		"-":InstructGameKeyF("-"),
+		"dot":InstructGameKeyF("dot"),
+		"dash":InstructGameKeyF("dash"),
 		"0":InstructGameKeyF("0"),
 		"1":InstructGameKeyF("1"),
 		"2":InstructGameKeyF("2"),
@@ -248,7 +251,7 @@ function ObtainKeyActionsGame(){
 		"Shift Backspace":ObtainRestart,
 		"Shift Delete":ObtainRestart,
 		
-		"Spacebar":InstructGameKeyF(" "),
+		"Spacebar":InstructGameKeyF("space"),
 		"Enter":InstructGameKeyF("Enter"),
 		"Left":InstructNothing,
 		"Up":InstructNothing,
@@ -288,6 +291,7 @@ function InstructGameKeyF(key){
 }
 
 function GameKey(key){
+	var key=ObtainSymbol(key); //accept keywords space, dot, dash
 	function Action(){return InstructGameAction(key);}
 	Throttle(Action,50,"Action");
 }
@@ -1132,7 +1136,7 @@ function InflateNumber(text){
 function InflateNumbers(text){
 	return NumberDivisions(text).map(InflateNumber).join("");
 }
-var Gendered={	//female shepherd hence unladylike //cherished woman//
+var Gendered={//cherished woman//
 	//grammatical
 	"he":"she",
 	"his":"her",
