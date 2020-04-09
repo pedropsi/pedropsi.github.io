@@ -248,7 +248,7 @@ function ObtainKeyActionsGame(){
 		"Shift Backspace":ObtainRestart,
 		"Shift Delete":ObtainRestart,
 		
-		"Spacebar":InstructGameKeyF("Enter"),
+		"Spacebar":InstructGameKeyF(" "),
 		"Enter":InstructGameKeyF("Enter"),
 		"Left":InstructNothing,
 		"Up":InstructNothing,
@@ -299,9 +299,10 @@ function LevelAction(key){
 		return;
 	 }	
 	
-	if(key==="Enter"||ForbidNumberActions(key)||ForbidSymbolActions(key)){
+	if(key==="Enter"||ForbidNumberActions(key)||ForbidSymbolActions(key)||ForbidSpaceActions(key)){
 		ForbidCaret();return;
 	}
+	
 	else{
 		LevelActions[CurLevelName()](key);
 		RegisterMove(key);
@@ -346,6 +347,10 @@ function ForbidSymbolActions(key){
 	return (!In(["-----.-....."],CurLevelName())&&In(["-","."],key));
 }
 
+function ForbidSpaceActions(key){
+	return (!In(["Female shepherd hence unladylike","Nigeria"],CurLevelName())&&In([" "],key));
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 function InPart(arrayOrObj,n){
@@ -387,7 +392,7 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Nigeria",				//Spacial, Word, Mapping, Knowledge, Retroactive
 	"Weightier",			//Word, Adjacent, Retroactive
-	"CherishedWoman",		//Word, Retroactive
+	"Female shepherd hence unladylike",		//Word, Retroactive
 	"Odd",					//Word, Positional, Retroactive
 
 	"Fuchsia",				//Language, Knowledge, Retroactive
@@ -495,7 +500,7 @@ var LevelActions={
 		}
 		PlaceEndCaret();		
 	},
-	"CherishedWoman":function(L){
+	"Female shepherd hence unladylike":function(L){
 		InputLetter(L);
 		Letters.array=StringReplaceOnceRuleArray(Letters.array.join(""),GenderReplacementRules).split("");
 		PlaceEndCaret();		
@@ -1106,47 +1111,99 @@ function InflateNumber(text){
 function InflateNumbers(text){
 	return NumberDivisions(text).map(InflateNumber).join("");
 }
-
-var Gendered={
+var Gendered={	//female shepherd hence unladylike //woman cherished // shepherd then lady // (shepherd lady) // when, kitchen, then  // madam // 
+	//grammatical
 	"he":"she",
 	"his":"her",
 	"him":"her",
-	"mr":"miss",
 	"male":"female",
 	"masculine":"feminine",
 	"andro":"gineco",
-	"man":"woman",
-	"men":"women",
-	"boy":"girl",
+	//animals
+	"cob":"pen",	//swan
+	"bull":"cow",
+	"ox":"cow",
+	"fox":"vixen",
+	"pig":"sow",
+	"ram":"ewe",
+	"horse":"mare",
+	"stallion":"mare",
+	"cock":"hen",
+	"colt":"filly",
+	"stag":"hind",
+	"gander":"goose",
+	"dog":"bitch",
+	"drone":"bee",
+	"drake":"duck",
+	"tiger":"tigress",
+	"lion":"lioness",
+	//religion
+	"adam":"eve",
 	//sociology
 	"mascularity":"feminacy",
 	"masculinity":"femininity",
 	"macho":"femea",
 	"machism":"feminism",
-	//family
+	//family, people
+	"man":"woman",
+	"men":"women",
+	"boy":"girl",
+	"lad":"lass",
 	"son":"daughter",
 	"brother":"sister",
 	"bro":"sis",
 	"father":"mother",
 	"papa":"mama",
 	"grandpa":"grandma",
+	"husband":"wife",
 	"uncle":"aunt",
 	"nephew":"niece",
 	"fiancé":"fiancée",
 	"bridegroom":"bride",
 	//titles
-	"lord":"lady",
-	"prince":"princess",
-	"king":"queen",
 	"emperor":"empress",
-	"actor":"actress",
+	"king":"queen",
+	"prince":"princess",
 	"duke":"duchess",
+	"marquess":"marchioness",
 	"count":"countess",
 	"earl":"countess",
 	"baron":"baroness",
+	"baronet":"baronetess",
 	"peer":"peeress",
-	"marquess":"marchioness",
-	"ambassador":"ambassadress"
+	"lord":"lady",
+	"gentleman":"lady",
+	"sir":"dame",//sire:dame
+	"monsieur":"madame",
+	"master":"mistress",
+	"mr":"miss",
+	//other titles,
+	"tsesarevich":"tsesarevna",
+	"graf":"grafin",
+	"margrave":"margravine",
+	"palsgrave":"palsgravine",
+	"burgrave":"burgravine",
+	"herzog":"herzogin",
+	"fuerst":"fuerstin",
+	"dauphan":"dauphine",
+	"infante":"infanta",
+	"krolewicz":"krolewna",//"królewicz":"królewna",
+	"knyaz":"knyaginya",
+	"herr":"frau",// junkherr, junkfrau
+	"viceroy":"vicereine",
+	"tsar":"tsaritsa",
+	"czar":"czaritsa",
+	"kaiser":"kaiserin",
+	"raja":"rani",//"maharaja":"maharani",
+	"sheik":"sheika",
+	"sultan":"sultana",
+	"khan":"khatun",
+	"rey":"reina",
+	"rei":"rainha",
+	//occupations
+	"ambassador":"ambassadress",
+	"actor":"actress",
+	"milkman":"milkmaid"
 	//etc...
 }
 
@@ -1356,7 +1413,7 @@ var Countries=[
 "New Zealand"
 ];
 
-Countries=Countries.map(function(c){return c.replace(/[\s\-]/g,"").toUpperCase()});
+Countries=Countries.map(function(c){return c.replace(/[\s\-]+/g," ").toUpperCase()});
 
 var Hiragana={
 'a':'あ',
