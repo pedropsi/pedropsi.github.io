@@ -1,4 +1,10 @@
 var News={
+	N_40:{
+DATE:"2020-04-10",
+HEADER:()=>"Puzzle type beta changes",
+PIECE:()=>`
+<p>Ongoing beta playtesting changes: clue HOMEOMORPHIC became TOPOLOGICAL (with new rules); CHERISHEDWOMAN became SHEP...LIKE (expanded ruleset, same logic); O** received a new keyword; NO*** **** lost the backspace glitch; small CSS tweaks and spacebar inputs support. Many thanks, ${v.PLURMORANT()}!</p>
+	`,ID:"puzzle-type"},
 	N_39:{
 DATE:"2020-04-07",
 HEADER:()=>"Puzzle type fix (for the Safari browser)",
