@@ -549,7 +549,11 @@ function Nigeria(L){
 		
 		InputLetter(L+"*");
 		
-		var i=Countries.indexOf(PureLetter(Letters.array.join("")))+1;
+		function UnSpace(string){
+			return string.replace(/\s*/g,"").replace(/^THE/,"").replace(/^REPUBLICOF/,"").replace(/^KINGDOMOF/,"").replace(/^THE/,"");
+		}
+
+		var i=Countries.map(UnSpace).indexOf(UnSpace(PureLetter(Letters.array.join(""))))+1;
 		if(i>0){
 			Letters.array=Countries[Min(Max(i,0),Countries.length-1)].split("");
 			Nigeria.freeze=true;
