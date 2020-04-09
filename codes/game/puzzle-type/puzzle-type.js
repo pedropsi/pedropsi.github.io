@@ -519,6 +519,13 @@ var LevelActions={
 }
 
 function Nokia(N){
+		var now=Date.now();
+		if(!Nokia.time)
+			Nokia.time=now;
+		
+		if(Nokia.caretevent)
+			clearTimeout(Nokia.caretevent);
+
 		if(!Nokia.last)
 			Nokia.last=[N,1];
 		
@@ -528,7 +535,7 @@ function Nokia(N){
 		}
 		else{
 			var keygroup=NokiaMapping[N];
-			if(Nokia.last[0]!==N||Nokia.last[1]>=keygroup.length){ //New Key
+			if(Nokia.last[0]!==N||Nokia.last[1]>=keygroup.length||(now-Nokia.time)>2000){ //New Key or timing exceeded
 				InputLetter(keygroup[0]);
 				Nokia.last=[N,1];
 			}
@@ -537,6 +544,16 @@ function Nokia(N){
 				InputLetter(keygroup[Nokia.last[1]]);
 				Nokia.last[1]=Nokia.last[1]+1;
 			}
+
+			Caret(Letters.array.length-1);
+			
+			Nokia.eventF=function(){
+				Nokia.caretevent=setTimeout(DrawEndCaret,2000);
+				Nokia.time=Date.now();
+			};
+
+			Nokia.eventF();
+			
 		}
 	}
 
@@ -1791,6 +1808,11 @@ function DrawCaret(){
 		
 }
 
+function DrawEndCaret(){
+	PlaceEndCaret();
+	DrawCaret();
+}
+
 function LetterPureHTML(L,cla){
 	var cla=cla?(' '+cla):'';
 	if(L===" ")
@@ -1999,7 +2021,8 @@ function LoadLevelState(levelstate){
 	Anagram.used=Rest(levelstate['Anagram']);
 	Nigeria.freeze=levelstate['Nigeria'];
 	Fuchsia.colour=levelstate['Fuchsia'];
-	Nokia.last=levelstate['Nokia 1998'];
+	Nokia.last=levelstate['Nokia 1998'][0];
+	Nokia.eventF=levelstate['Nokia 1998'][1];Nokia.eventF();//timed caret event
 	UpdateLevelSecretly();
 }
 
@@ -2018,7 +2041,7 @@ function LevelZeroState(){
 		'Nucleus':[],
 		'Nigeria':false,
 		'Fuchsia':false,
-		'Nokia 1998':false
+		'Nokia 1998':[false,Identity]
 	};
 	return state;
 }
@@ -2034,7 +2057,7 @@ function LevelState(){
 		'Anagram':[Anagram.partial?Anagram.partial:""].concat(Anagram.used?Anagram.used:[]),
 		'Nigeria':Nigeria.freeze?Nigeria.freeze:false,
 		'Fuchsia':Fuchsia.colour?Fuchsia.colour:false,
-		'Nokia 1998':Nokia.last?Nokia.last:false
+		'Nokia 1998':[Nokia.last?Nokia.last:false,Nokia.eventF?Nokia.eventF:Identity]
 	};
 	return state;
 }
