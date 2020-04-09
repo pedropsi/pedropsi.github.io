@@ -348,7 +348,7 @@ function ForbidSymbolActions(key){
 }
 
 function ForbidSpaceActions(key){
-	return (!In(["Female shepherd hence unladylike","Nigeria"],CurLevelName())&&In([" "],key));
+	return (!In(["Shepherdess hence unladylike","Nigeria"],CurLevelName())&&In([" "],key));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -392,7 +392,7 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Nigeria",				//Spacial, Word, Mapping, Knowledge, Retroactive
 	"Weightier",			//Word, Adjacent, Retroactive
-	"Female shepherd hence unladylike",		//Word, Retroactive
+	"Shepherdess hence unladylike",		//Word, Retroactive
 	"Odd",					//Word, Positional, Retroactive
 
 	"Fuchsia",				//Language, Knowledge, Retroactive
@@ -500,7 +500,7 @@ var LevelActions={
 		}
 		PlaceEndCaret();		
 	},
-	"Female shepherd hence unladylike":function(L){
+	"Shepherdess hence unladylike":function(L){
 		InputLetter(L);
 		Letters.array=StringReplaceOnceRuleArray(Letters.array.join(""),GenderReplacementRules).split("");
 		PlaceEndCaret();		
@@ -1111,7 +1111,7 @@ function InflateNumber(text){
 function InflateNumbers(text){
 	return NumberDivisions(text).map(InflateNumber).join("");
 }
-var Gendered={	//female shepherd hence unladylike //woman cherished // shepherd then lady // (shepherd lady) // when, kitchen, then  // madam // 
+var Gendered={	//female shepherd hence unladylike //cherished woman//
 	//grammatical
 	"he":"she",
 	"his":"her",
