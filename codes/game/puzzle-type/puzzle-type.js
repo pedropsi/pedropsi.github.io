@@ -363,6 +363,7 @@ function InPart(arrayOrObj,n){
 var LevelGoals=[			//Required types of thinking:
 	//Positional (position of letters in word), Spacial (position of letters in 2D system), Alphabetical (letters are ordered, and may correspond to numbers), Syllabe (syllabes as unit of input), Word (full words as units of input), Adjacent, Cyclic, Mapping (cyphers), Language, Knowledge, Cultural, Retroactive, Proactive,
 	"Direct",				
+	
 	"Reverse",				//Positional,
 	"Consonant",			//Positional, Alphabetical
 	"Follow",				//Positional, Retroactive
