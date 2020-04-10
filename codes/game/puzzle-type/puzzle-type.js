@@ -90,10 +90,7 @@ function ObtainXYRotateCondition(x,y){return false;}
 
 //Onscreen Keyboard
 function ObtainKeyboardKeys(){
-	var alphanumeric=Most(DefaultKeyboardKeys());
-	var gamekeys=First(GameKeyboardKeys());
-	var other=[First(gamekeys),First(Last(DefaultKeyboardKeys())),Last(gamekeys)];
-	return alphanumeric.concat([other]);
+	return DefaultKeyboardKeys();
 }
 function ObtainKeyboardLauncher(){
 	return LaunchKeyboardBanner;
@@ -176,8 +173,8 @@ function P(){
 //Keybinding
 function ObtainKeyActionsGame(){
 	var keyactions={
-		"dot":InstructGameKeyF("dot"),
-		"dash":InstructGameKeyF("dash"),
+		//"dot":InstructGameKeyF("dot"),
+		//"dash":InstructGameKeyF("dash"),
 		"0":InstructGameKeyF("0"),
 		"1":InstructGameKeyF("1"),
 		"2":InstructGameKeyF("2"),
@@ -303,7 +300,7 @@ function LevelAction(key){
 		return;
 	 }	
 	
-	if(key==="Enter"||ForbidNumberActions(key)||ForbidSymbolActions(key)||ForbidSpaceActions(key)){
+	if(key==="Enter"||ForbidNumberActions(key)||ForbidSpaceActions(key)){
 		ForbidCaret();return;
 	}
 	
@@ -345,10 +342,6 @@ function ForbidCaret(){
 
 function ForbidNumberActions(key){
 	return (!In(["Nokia 1998","Symmetric","⠍⠕⠗⠎⠑","Fuchsia"],CurLevelName())&&In(NumberCharacters,key));
-}
-
-function ForbidSymbolActions(key){
-	return (!In(["⠍⠕⠗⠎⠑"],CurLevelName())&&In(["-","."],key));
 }
 
 function ForbidSpaceActions(key){
@@ -763,7 +756,7 @@ function Morse(L){
 		var le=Letters.array[p];
 		console.log(p,le);
 		n=(p<Letters.array.length)?BrailleNumber(le):0;
-		n=Min(n+(dotdash[i]==="."?1:3),63);
+		n=Min(n+(dotdash[i]==="."?1:3),63); //dot=1, dash=3
 		Letters.array[p]=Braille(n);
 	}
 	Caret((p+1)%5);
