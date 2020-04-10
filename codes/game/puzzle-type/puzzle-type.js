@@ -1553,6 +1553,7 @@ var Hiragana={
 };
 
 var Anagrams={
+//anna, gaga, gang are excluded because anagram has only 1 n, 1 g, etc...
 "agar":"r",
 "agma":"a",
 //"anna":"a",
@@ -1562,13 +1563,15 @@ var Anagrams={
 "gran":"n",
 "maar":"r",
 "maga":"a",
-//"mama":"a",
 "mana":"a",
 "mara":"a",
 "naga":"a",
 "nama":"a",
 "raga":"a",
-"rang":"g"
+"rang":"g",
+//names of cities
+"nara":"a",
+"agra":"a"
 }
 
 
