@@ -344,11 +344,11 @@ function ForbidCaret(){
 }
 
 function ForbidNumberActions(key){
-	return (!In(["Nokia 1998","Symmetric","Fuchsia"],CurLevelName())&&In(NumberCharacters,key));
+	return (!In(["Nokia 1998","Symmetric","⠍⠕⠗⠎⠑","Fuchsia"],CurLevelName())&&In(NumberCharacters,key));
 }
 
 function ForbidSymbolActions(key){
-	return (!In(["-----.-....."],CurLevelName())&&In(["-","."],key));
+	return (!In(["⠍⠕⠗⠎⠑"],CurLevelName())&&In(["-","."],key));
 }
 
 function ForbidSpaceActions(key){
@@ -391,8 +391,9 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Dvorak",				//Spacial, Cyclic, Mapping, Cultural
 	"Nokia 1998",			//Spacial, Mapping, Cultural
-	"-----.-.....",			//Language, Mapping
+
 	"ひらがな",				//Syllabe, Mapping, Language
+	"⠍⠕⠗⠎⠑",				//Language, Mapping
 
 	"Nigeria",				//Spacial, Word, Mapping, Knowledge, Retroactive
 	"Weightier",			//Word, Adjacent, Retroactive
@@ -516,7 +517,7 @@ var LevelActions={
 		Letters.array=StringReplaceRulesObject(Letters.array.join("").toLowerCase(),Hiragana).toUpperCase().split("");
 		PlaceEndCaret();
 	},
-	"-----.-.....":Morse,
+	"⠍⠕⠗⠎⠑":Morse,
 	"Fuchsia":Fuchsia,
 	"Anagram":Anagram,
 	"Nucleus":Nucleus
@@ -754,7 +755,25 @@ function FlipArray(array){
 
 //Morse
 function Morse(L){
-	MorseCode[L.toLowerCase()].split("").map(InputLetter);
+	
+	var dotdash=MorseCode[L.toLowerCase()].split("");
+	var p,n;
+	for(var i=0;i<dotdash.length;i++){		
+		p=(Caret()[0]+i)%5;
+		var le=Letters.array[p];
+		console.log(p,le);
+		n=(p<Letters.array.length)?BrailleNumber(le):0;
+		n=Min(n+(dotdash[i]==="."?1:3),63);
+		Letters.array[p]=Braille(n);
+	}
+	Caret((p+1)%5);
+}
+
+function Braille(n){
+	return BrailleSorted[n];
+}
+function BrailleNumber(braille){
+	return BrailleSorted.indexOf(braille.toLowerCase());
 }
 
 //Dividi
@@ -1739,6 +1758,100 @@ var MorseCode={
 	".":".-.-.-"
 }
 
+var BrailleCode={
+"a":"⠁",
+"b":"⠃",
+"c":"⠉",
+"d":"⠙",
+"e":"⠑",
+"f":"⠋",
+"g":"⠛",
+"h":"⠓",
+"i":"⠊",
+"j":"⠚",
+"k":"⠅",
+"l":"⠇",
+"m":"⠍",
+"n":"⠝",
+"o":"⠕",
+"p":"⠏",
+"q":"⠟",
+"r":"⠗",
+"s":"⠎",
+"t":"⠞",
+"u":"⠥",
+"v":"⠧",
+"w":"⠺",
+"x":"⠭",
+"y":"⠽",
+"z":"⠵"
+}
+
+var BrailleSorted=[
+"⠀",
+"⠁",
+"⠂",
+"⠃",
+"⠄",
+"⠅",
+"⠆",
+"⠇",
+"⠈",
+"⠉",
+"⠊",
+"⠋",
+"⠌",
+"⠍",
+"⠎",
+"⠏",
+"⠐",
+"⠑",
+"⠒",
+"⠓",
+"⠔",
+"⠕",
+"⠖",
+"⠗",
+"⠘",
+"⠙",
+"⠚",
+"⠛",
+"⠜",
+"⠝",
+"⠞",
+"⠟",
+"⠠",
+"⠡",
+"⠢",
+"⠣",
+"⠤",
+"⠥",
+"⠦",
+"⠧",
+"⠨",
+"⠩",
+"⠪",
+"⠫",
+"⠬",
+"⠭",
+"⠮",
+"⠯",
+"⠰",
+"⠱",
+"⠲",
+"⠳",
+"⠴",
+"⠵",
+"⠶",
+"⠷",
+"⠸",
+"⠹",
+"⠺",
+"⠻",
+"⠼",
+"⠽",
+"⠾",
+"⠿"];
 
 ///////////////////////////////////////////////////////////////////////////////
 //Manage letters and carets
@@ -2021,7 +2134,6 @@ function LoadLevelState(levelstate){
 	Letters.array=Clone(levelstate['letters']);
 	Caret(levelstate['caret']);
 	Second.n=levelstate['Second'];
-//	Alternate.n=levelstate['Alternate'];
 	Consonant.before=levelstate['Consonant'];
 	Nucleus.partial=levelstate['Nucleus'];
 	Anagram.partial=First(levelstate['Anagram']);
@@ -2042,7 +2154,6 @@ function LevelZeroState(){
 		'letters':[],
 		'caret':0,
 		'Second':0,
-//		'Alternate':0,
 		'Consonant':false,
 		'Anagram':[""],
 		'Nucleus':[],
@@ -2058,7 +2169,6 @@ function LevelState(){
 		'letters':Clone(Letters()),
 		'caret':Caret()[0],
 		'Second':Second.n?Second.n:0,
-//		'Alternate':Alternate.n?Alternate.n:0,
 		'Consonant':Consonant.before?Consonant.before:false,
 		'Nucleus':Nucleus.partial?Clone(Nucleus.partial):[],
 		'Anagram':[Anagram.partial?Anagram.partial:""].concat(Anagram.used?Anagram.used:[]),
