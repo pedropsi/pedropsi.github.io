@@ -361,11 +361,9 @@ function InPart(arrayOrObj,n){
 ///////////////////////////////////////////////////////////////////////////////
 //Levels & Actions
 var LevelGoals=[			//Required types of thinking:
-	//Positional, Spacial, Alphabetical, Syllabe, Word, Adjacent, Cyclic, Mapping, Language, Knowledge, Cultural, Retroactive, Proactive,
+	//Positional (position of letters in word), Spacial (position of letters in 2D system), Alphabetical (letters are ordered, and may correspond to numbers), Syllabe (syllabes as unit of input), Word (full words as units of input), Adjacent, Cyclic, Mapping (cyphers), Language, Knowledge, Cultural, Retroactive, Proactive,
 	"Direct",				
-
 	"Reverse",				//Positional,
-//	"Alternate",			//Positional,
 	"Consonant",			//Positional, Alphabetical
 	"Follow",				//Positional, Retroactive
 	"Second",				//Retroactive
@@ -383,21 +381,21 @@ var LevelGoals=[			//Required types of thinking:
 	"Topological",			//Spacial, Cyclic, Retroactive
 
 	"Dvorak",				//Spacial, Cyclic, Mapping, Cultural
+
 	"Nokia 1998",			//Spacial, Mapping, Cultural
-
 	"ひらがな",				//Syllabe, Mapping, Language
-	"⠍⠕⠗⠎⠑",				//Language, Mapping
-
 	"Nigeria",				//Spacial, Word, Mapping, Knowledge, Retroactive
+
+	"Nucleus",				//Syllabe, Word, Language, Mapping, Knowledge, Retroactive
+
+	"Anagram",				//Word, Mapping, Retroactive
 	"Weightier",			//Word, Adjacent, Retroactive
-	"Shepherdess hence unladylike",		//Word, Retroactive
-	"Odd",					//Word, Positional, Retroactive
-
+	"Shepherdess hence unladylike",		//Word, Retroactive, Cultural
 	"Fuchsia",				//Language, Knowledge, Retroactive
-	"Dividi",				//Retroactive, Mapping, Language
 
-	"Anagram",				// Word, Mapping, Retroactive
-	"Nucleus"				//Syllabe, Word, Language, Mapping, Knowledge, Retroactive
+	"Odd",					//Word, Positional, Retroactive
+	"Dividi",				// Mapping, Language, Retroactive
+	"⠍⠕⠗⠎⠑"				//Language, Mapping, Knowledge, Retroactive
 	];
 
 
@@ -415,7 +413,7 @@ var LevelActions={
 		InputLetter(M);
 	},
 	"Second":Second,
-//	"Alternate":Alternate,
+
 	"Follow":function (L){
 		if(Letters.array.length>=1){
 			var last=Last(Letters.array);
@@ -700,23 +698,6 @@ function Second(L){
 	
 	InputLetter(L);
 }
-
-/*
-function Alternate(L){
-	if(!Alternate.n)
-		Alternate.n=0;
-	
-	if(Alternate.n){
-		InputLetter(L);
-		Caret(-1);
-	}else{
-		InputLetterBefore(L);
-		Caret(Letters().length);
-	}
-	
-	Alternate.n=1-Alternate.n;
-}
-*/
 
 function Consonant(L){
 	if(!Consonant.before)
