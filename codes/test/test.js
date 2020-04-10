@@ -148,6 +148,10 @@ SaveTest(Equal,[/a/g,/b/g],false,"regex - different source");
 
 ///////////////////////////////////////////////////////////////////////////////
 // Math
+
+SaveTest(Power,[2,0],1,"power of zero");
+SaveTest(Power,[2,3],8,"normal power");
+
 SaveTest(PoweredSum,[[],2],0,"zero-dimensional");
 SaveTest(PoweredSum,[[2],2],4,"monodimensional");
 SaveTest(PoweredSum,[[3,4],2],25,"tridimensional");

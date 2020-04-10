@@ -78,7 +78,7 @@ function Remainder(n,d){
 }
 
 function Power(n,exp){
-	if(!exp)
+	if(typeof exp==="undefined")
 		return function(m){return Math.pow(m,n)}
 	else
 		return Math.pow(n,exp);
