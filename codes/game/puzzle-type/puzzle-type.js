@@ -516,43 +516,46 @@ var LevelActions={
 }
 
 function Nokia(N){
-		var now=Date.now();
-		if(!Nokia.time)
-			Nokia.time=now;
-		
-		if(Nokia.caretevent)
-			clearTimeout(Nokia.caretevent);
-
-		if(!Nokia.last)
-			Nokia.last=[N,1];
-		
 		if(!NokiaMapping[N]){
 			ForbidCaret();
 			return;
 		}
+		
+		var now=Date.now();
+		if(!Nokia.time)
+			Nokia.time=now;
+		
+		if(!Letters.array.length){ //Start
+			var L=NokiaMapping[N][0];
+			InputLetter(L);
+		}
 		else{
-			var keygroup=NokiaMapping[N];
-			if(Nokia.last[0]!==N||Nokia.last[1]>=keygroup.length||(now-Nokia.time)>2000){ //New Key or timing exceeded
-				InputLetter(keygroup[0]);
-				Nokia.last=[N,1];
+			var last=Last(Letters.array);
+			var lastN=NokiaGroupNumber(last);
+			var lastGroup=NokiaMapping[lastN];
+			var lastPos=lastGroup.indexOf(last);
+			if(N!==lastN||lastPos>=lastGroup.length-1||(now-Nokia.time)>2000){ //New Key or timing exceeded
+				var L=NokiaMapping[N][0];
+				InputLetter(L);
 			}
 			else {//Modify
 				DeleteLetterAfter();
-				InputLetter(keygroup[Nokia.last[1]]);
-				Nokia.last[1]=Nokia.last[1]+1;
+				var M=lastGroup[lastPos+1];
+				InputLetter(M);
 			}
-
-			Caret(Letters.array.length-1);
-			
-			Nokia.eventF=function(){
-				Nokia.caretevent=setTimeout(DrawEndCaret,2000);
-				Nokia.time=Date.now();
-			};
-
-			Nokia.eventF();
-			
 		}
-	}
+		Caret(Letters.array.length-1);
+		Nokia.eventF=function(){
+			if(Nokia.caretevent){
+				Nokia.caretevent.map(clearTimeout);
+			}
+			Nokia.caretevent=[];
+			Nokia.caretevent.push(setTimeout(DrawEndCaret,2000));
+			Nokia.time=Date.now();
+		};
+
+		Nokia.eventF();
+}
 
 function Nigeria(L){
 		if(Nigeria.freeze){
@@ -926,8 +929,14 @@ var NokiaMapping={
 	"0":[" ","0"]
 }
 
-var NumberCharacters=Object.keys(NokiaMapping);
+function NokiaGroupNumber(L){
+	return Keys(NokiaMapping).filter(
+		function(k){return In(NokiaMapping[k],L)}
+	)[0];
+}
 
+
+var NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
 var Hexadecimal=["A","B","C","D","E","F"].concat(NumberCharacters);
 
 //Dvorak
