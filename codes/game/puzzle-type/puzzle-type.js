@@ -387,9 +387,8 @@ var LevelGoals=[			//Required types of thinking:
 	"ひらがな",				//Syllabe, Mapping, Language
 	"Nigeria",				//Spacial, Word, Mapping, Knowledge, Retroactive
 
+	"Anagram",				//Word, Mapping, Knowledge, Retroactive
 	"Nucleus",				//Syllabe, Word, Language, Mapping, Knowledge, Retroactive
-
-	"Anagram",				//Word, Mapping, Retroactive
 	"Weightier",			//Word, Adjacent, Retroactive
 	"Shepherdess hence unladylike",		//Word, Retroactive, Cultural
 	"Fuchsia",				//Language, Knowledge, Retroactive
@@ -592,7 +591,6 @@ function Anagram(L){
 		InputLetter(L+"*");
 		Anagram.partial=Anagram.partial+L;
 		var anagr=Anagram.partial.toLowerCase();
-		console.log(Anagram.partial)
 
 		if(In(Anagrams,anagr)&&!In(Anagram.used,anagr)){
 			var S=Anagrams[anagr].toUpperCase();
@@ -739,7 +737,6 @@ function Morse(L){
 	for(var i=0;i<dotdash.length;i++){		
 		p=(Caret()[0]+i)%5;
 		var le=Letters.array[p];
-		console.log(p,le);
 		n=(p<Letters.array.length)?BrailleNumber(le):0;
 		n=Min(n+(dotdash[i]==="."?1:3),63); //dot=1, dash=3
 		Letters.array[p]=Braille(n);
@@ -1927,8 +1924,6 @@ function LetterPureHTML(L,cla){
 var LetterDisplay={
 	"Tangles":LetterDraftHTML,
 	"Symmetric":function(L){
-		
-		console.log(L);
 		
 		var simclass="";
 		if(VerticalSymmetric(L))
