@@ -731,18 +731,36 @@ function FlipArray(array){
 
 //Morse
 function Morse(L){
-	
+	if(!Morse.line)
+		Morse.line=0;
 	var dotdash=MorseCode[L.toLowerCase()].split("");
-	var p,n;
+	var p,n,l,even;
 	for(var i=0;i<dotdash.length;i++){		
-		p=(Caret()[0]+i)%5;
-		var le=Letters.array[p];
-		n=(p<Letters.array.length)?BrailleNumber(le):0;
-		n=Min(n+(dotdash[i]==="."?1:3),63); //dot=1, dash=3
+		p=Caret()[0]*2+i;					//start horizontal position with caret
+		Morse.line=Morse.line+Floor(p/10);			//line number (0, 1 or 2)
+		even=(p+1)%2;						
+		console.log(i,p,even);
+		p=Floor(p%10/2);					//current horizontal position
+		n=(p<Letters.array.length)?BrailleNumber(Letters.array[p]):0; //prior information
+		n=Min(n+(dotdash[i]==="."?1:0)*Power(2,Morse.line+3*(even-1)),63);	//dot=1, dash=0
 		Letters.array[p]=Braille(n);
 	}
 	Caret((p+1)%5);
 }
+
+// function Morse(L){
+// 	var dotdash=MorseCode[L.toLowerCase()].split("");
+// 	var p,n;
+// 	for(var i=0;i<dotdash.length;i++){		
+// 		p=(Caret()[0]+i)%5;
+// 		var le=Letters.array[p];
+// 		n=(p<Letters.array.length)?BrailleNumber(le):0;
+// 		n=Min(n+(dotdash[i]==="."?1:3),63); //dot=1, dash=3
+// 		Letters.array[p]=Braille(n);
+// 	}
+// 	Caret((p+1)%5);
+// }
+
 
 function Braille(n){
 	return BrailleSorted[n];
@@ -2121,6 +2139,8 @@ function LoadLevelState(levelstate){
 	Fuchsia.colour=levelstate['Fuchsia'];
 	Nokia.last=levelstate['Nokia 1998'][0];
 	Nokia.eventF=levelstate['Nokia 1998'][1];Nokia.eventF();//timed caret event
+	Morse.line=levelstate['Morse'];
+
 	UpdateLevelSecretly();
 }
 
@@ -2138,7 +2158,8 @@ function LevelZeroState(){
 		'Nucleus':[],
 		'Nigeria':false,
 		'Fuchsia':false,
-		'Nokia 1998':[false,Identity]
+		'Nokia 1998':[false,Identity],
+		'Morse':0,
 	};
 	return state;
 }
@@ -2153,7 +2174,8 @@ function LevelState(){
 		'Anagram':[Anagram.partial?Anagram.partial:""].concat(Anagram.used?Anagram.used:[]),
 		'Nigeria':Nigeria.freeze?Nigeria.freeze:false,
 		'Fuchsia':Fuchsia.colour?Fuchsia.colour:false,
-		'Nokia 1998':[Nokia.last?Nokia.last:false,Nokia.eventF?Nokia.eventF:Identity]
+		'Nokia 1998':[Nokia.last?Nokia.last:false,Nokia.eventF?Nokia.eventF:Identity],
+		'Morse':Morse.line?Morse.line:0
 	};
 	return state;
 }
