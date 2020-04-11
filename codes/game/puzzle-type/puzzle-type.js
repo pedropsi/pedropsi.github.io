@@ -748,20 +748,6 @@ function Morse(L){
 	Caret((p+1)%5);
 }
 
-// function Morse(L){
-// 	var dotdash=MorseCode[L.toLowerCase()].split("");
-// 	var p,n;
-// 	for(var i=0;i<dotdash.length;i++){		
-// 		p=(Caret()[0]+i)%5;
-// 		var le=Letters.array[p];
-// 		n=(p<Letters.array.length)?BrailleNumber(le):0;
-// 		n=Min(n+(dotdash[i]==="."?1:3),63); //dot=1, dash=3
-// 		Letters.array[p]=Braille(n);
-// 	}
-// 	Caret((p+1)%5);
-// }
-
-
 function Braille(n){
 	return BrailleSorted[n];
 }
