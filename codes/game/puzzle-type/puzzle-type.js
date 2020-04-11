@@ -731,21 +731,31 @@ function FlipArray(array){
 
 //Morse
 function Morse(L){
-	if(!Morse.line)
-		Morse.line=0;
+	if(!Morse.position)
+		Morse.position=0;
+	
 	var dotdash=MorseCode[L.toLowerCase()].split("");
-	var p,n,l,even;
+
+	var p,n,l,even, pa;
 	for(var i=0;i<dotdash.length;i++){		
-		p=Caret()[0]*2+i;					//start horizontal position with caret
-		Morse.line=Morse.line+Floor(p/10);			//line number (0, 1 or 2)
+		p=Morse.position+i;							//start horizontal position with caret
+		l=Floor(p/10);								//line number (0, 1 or 2)
 		even=(p+1)%2;						
-		console.log(i,p,even);
-		p=Floor(p%10/2);					//current horizontal position
-		n=(p<Letters.array.length)?BrailleNumber(Letters.array[p]):0; //prior information
-		n=Min(n+(dotdash[i]==="."?1:0)*Power(2,Morse.line+3*(even-1)),63);	//dot=1, dash=0
-		Letters.array[p]=Braille(n);
+		pa=Floor((p%10)/2);							//caret horizontal position
+		n=(pa<Letters.array.length)?BrailleNumber(Letters.array[pa]):0; //prior information
+		n=Min(n+(dotdash[i]==="."?1:0)*Power(2,l+3*(1-even)),63);	//dot=1, dash=0
+		Letters.array[pa]=Braille(n);
 	}
-	Caret((p+1)%5);
+
+	Morse.position=p+1;
+	Caret(Floor(((p+1)%10)/2));
+
+	if(Morse.position>30){//Restart
+		Morse.position=0;
+		Letters.array=[];
+		Caret(0);
+	}
+
 }
 
 function Braille(n){
@@ -2125,7 +2135,7 @@ function LoadLevelState(levelstate){
 	Fuchsia.colour=levelstate['Fuchsia'];
 	Nokia.last=levelstate['Nokia 1998'][0];
 	Nokia.eventF=levelstate['Nokia 1998'][1];Nokia.eventF();//timed caret event
-	Morse.line=levelstate['Morse'];
+	Morse.position=levelstate['Morse'];
 
 	UpdateLevelSecretly();
 }
@@ -2161,7 +2171,7 @@ function LevelState(){
 		'Nigeria':Nigeria.freeze?Nigeria.freeze:false,
 		'Fuchsia':Fuchsia.colour?Fuchsia.colour:false,
 		'Nokia 1998':[Nokia.last?Nokia.last:false,Nokia.eventF?Nokia.eventF:Identity],
-		'Morse':Morse.line?Morse.line:0
+		'Morse':Morse.position?Morse.position:0
 	};
 	return state;
 }
