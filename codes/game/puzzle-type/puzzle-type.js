@@ -731,30 +731,38 @@ function FlipArray(array){
 
 //Morse
 function Morse(L){
-	if(!Morse.position)
-		Morse.position=0;
+	var s="⠍⠕⠗⠎⠑".length*2;
+	Morse.used=Morse.used||[];
+	var position=Morse.used.map(function(d){return MorseCode[d.toLowerCase()].length});
+	position=[0].concat(position).reduce(Accumulate);
+
+
+	if(In(Morse.used,L)){
+		ForbidCaret();
+		return;
+	}
 	
+	Morse.used.push(L);
+
 	var dotdash=MorseCode[L.toLowerCase()].split("");
 
 	var p,n,l,even, pa;
 	for(var i=0;i<dotdash.length;i++){		
-		p=Morse.position+i;							//start horizontal position with caret
-		l=Floor(p/10);								//line number (0, 1 or 2)
+		p=position+i;							//start horizontal position with caret
+		l=Floor(p/s);								//line number (0, 1 or 2)
 		even=(p+1)%2;						
-		pa=Floor((p%10)/2);							//caret horizontal position
+		pa=Floor((p%s)/2);							//caret horizontal position
 		n=(pa<Letters.array.length)?BrailleNumber(Letters.array[pa]):0; //prior information
 		n=Min(n+(dotdash[i]==="."?1:0)*Power(2,l+3*(1-even)),63);	//dot=1, dash=0
 		Letters.array[pa]=Braille(n);
 	}
 
-	Morse.position=p+1;
-	Caret(Floor(((p+1)%10)/2));
-
-	if(Morse.position>30){//Restart
-		Morse.position=0;
-		Letters.array=[];
-		Caret(0);
+	if(p>3*s){//Restart
+		Restart();
+		return;
 	}
+	else
+		Caret(Floor(((p+1)%s)/2));
 
 }
 
@@ -2135,7 +2143,7 @@ function LoadLevelState(levelstate){
 	Fuchsia.colour=levelstate['Fuchsia'];
 	Nokia.last=levelstate['Nokia 1998'][0];
 	Nokia.eventF=levelstate['Nokia 1998'][1];Nokia.eventF();//timed caret event
-	Morse.position=levelstate['Morse'];
+	Morse.used=levelstate['⠍⠕⠗⠎⠑'];
 
 	UpdateLevelSecretly();
 }
@@ -2155,7 +2163,7 @@ function LevelZeroState(){
 		'Nigeria':false,
 		'Fuchsia':false,
 		'Nokia 1998':[false,Identity],
-		'Morse':0,
+		'⠍⠕⠗⠎⠑':[],
 	};
 	return state;
 }
@@ -2171,7 +2179,7 @@ function LevelState(){
 		'Nigeria':Nigeria.freeze?Nigeria.freeze:false,
 		'Fuchsia':Fuchsia.colour?Fuchsia.colour:false,
 		'Nokia 1998':[Nokia.last?Nokia.last:false,Nokia.eventF?Nokia.eventF:Identity],
-		'Morse':Morse.position?Morse.position:0
+		'⠍⠕⠗⠎⠑':Morse.used?Morse.used:[]
 	};
 	return state;
 }
