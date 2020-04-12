@@ -1249,6 +1249,7 @@ var Gendered={//cherished woman//
 	"rei":"rainha",
 	//occupations
 	"ambassador":"ambassadress",
+	"shepherd":"shepherdess",
 	"actor":"actress",
 	"milkman":"milkmaid"
 	//etc...
