@@ -382,9 +382,9 @@ var LevelGoals=[			//Required types of thinking:
 	"Nokia 1998",			//Spacial, Mapping, Cultural
 	"ひらがな",				//Syllabe, Mapping, Language
 	"Nigeria",				//Spacial, Word, Mapping, Knowledge, Retroactive
-
 	"Anagram",				//Word, Mapping, Knowledge, Retroactive
 	"Nucleus",				//Syllabe, Word, Language, Mapping, Knowledge, Retroactive
+
 	"Weightier",			//Word, Adjacent, Retroactive
 	"Shepherdess hence unladylike",		//Word, Retroactive, Cultural
 	"Fuchsia",				//Language, Knowledge, Retroactive
@@ -392,7 +392,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Odd",					//Word, Positional, Retroactive
 	"Dividi",				// Mapping, Language, Retroactive
 	"⠍⠕⠗⠎⠑"				//Language, Mapping, Knowledge, Retroactive
-	];
+];
 
 
 var LevelActions={
