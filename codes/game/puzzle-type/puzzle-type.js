@@ -6,16 +6,12 @@
 
 /*
 // Level Ideas todo, maybe
---positional caret
---leetspeek
---calculatorspeak
---Fur elise must write the first notes (letters give sharps and bemol)
---phonetic alphabet?
+--FELL (split letters in half and add offsett halves by one)
+--CALCULATOR SPEAK 1I 2Z 3E 5S 7T 8B 0O
+--MUSICAL NOTES
+--GREEK OR PHONETIC ALPHABET
+--INFINITY (GO DOWN INSIDE AND INSIDE AND INSIDE....)
 */
-
-function LoadGameHTML(frameHTML){
-
-}
 
 function GameFrameHTML(){
 	return "<div class='game-supra-Canvas'>\
