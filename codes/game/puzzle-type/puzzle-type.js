@@ -2114,6 +2114,8 @@ function ObtainPlayEndGameSound(){
 ///////////////////////////////////////////////////////////////////////////////
 //Undo
 function Undo(){
+	RevertLevelState();
+
 	if(!Undo.backups)
 		SaveLevelState();
 	
@@ -2146,6 +2148,15 @@ function LoadLevelState(levelstate){
 	Morse.used=levelstate['⠍⠕⠗⠎⠑'];
 
 	UpdateLevelSecretly();
+}
+
+function RevertLevelState(){
+	var name=CurLevelName();
+	var reversions={
+		"⠍⠕⠗⠎⠑":function(){Morse.used.length?Morse.used.pop():Morse.used=[]},
+		"Anagram":function(){Anagram.used.length?Anagram.used.pop():Anagram.used=[]},
+	}
+	reversions[name]?reversions[name]():null;
 }
 
 function UndoClear(){
