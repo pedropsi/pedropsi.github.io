@@ -519,10 +519,25 @@ function Nokia(N){
 		var now=Date.now();
 		if(!Nokia.time)
 			Nokia.time=now;
+
+		Nokia.eventF=function(){
+			if(Nokia.caretevent){
+				Nokia.caretevent.map(clearTimeout);
+			}
+			Nokia.caretevent=[];
+			Nokia.caretevent.push(setTimeout(DrawLettersEndCaret,2000));
+			Nokia.time=Date.now();
+		};
 		
+		function NokiaInput(L){
+			InputLetter(L);
+			PlaceAtCaret();
+			Nokia.eventF();
+		}
+
 		if(!Letters.array.length){ //Start
 			var L=NokiaMapping[N][0];
-			InputLetter(L);
+			NokiaInput(L);
 		}
 		else{
 			var last=Last(Letters.array);
@@ -531,25 +546,21 @@ function Nokia(N){
 			var lastPos=lastGroup.indexOf(last);
 			if(N!==lastN||lastPos>=lastGroup.length-1||(now-Nokia.time)>2000){ //New Key or timing exceeded
 				var L=NokiaMapping[N][0];
-				InputLetter(L);
+				NokiaInput(L);
 			}
 			else {//Modify
 				DeleteLetterAfter();
 				var M=lastGroup[lastPos+1];
-				InputLetter(M);
+				if(lastPos+1<lastGroup.length-1){
+					NokiaInput(M);
+				}
+				else{
+					InputLetter(M);
+					PlaceEndCaret();
+				}
 			}
 		}
-		Caret(Letters.array.length-1);
-		Nokia.eventF=function(){
-			if(Nokia.caretevent){
-				Nokia.caretevent.map(clearTimeout);
-			}
-			Nokia.caretevent=[];
-			Nokia.caretevent.push(setTimeout(DrawEndCaret,2000));
-			Nokia.time=Date.now();
-		};
-
-		Nokia.eventF();
+		//Caret(Letters.array.length-1);//Class(".caret","temporary")
 }
 
 function Nigeria(L){
@@ -1863,6 +1874,13 @@ function PlaceEndCaret(beginning){
 		Caret(-1);
 }
 
+function PlaceAtCaret(beginning){
+	if(!beginning)
+		Caret(Letters.array.length-1);
+	else
+		Caret(0);
+}
+
 function Letters(letter,beginning,deleteletter){
 	if(!Letters.array)
 		Letters.array=[];
@@ -1928,7 +1946,8 @@ function DrawCaret(){
 		
 }
 
-function DrawEndCaret(){
+function DrawLettersEndCaret(){
+	DrawLetters();
 	PlaceEndCaret();
 	DrawCaret();
 }
