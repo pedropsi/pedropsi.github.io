@@ -1599,9 +1599,11 @@ var Anagrams={
 "nama":"a",
 "raga":"a",
 "rang":"g",
-//names of cities
+//proper names
 "nara":"a",
-"agra":"a"
+"agra":"a",
+"amna":"a",
+"rama":"a"
 }
 
 
