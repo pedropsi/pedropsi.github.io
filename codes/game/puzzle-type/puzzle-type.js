@@ -720,6 +720,11 @@ function Second(L){
 }
 
 function Consonant(L){
+	if(L==="Y"){//semi-vowel
+		ForbidCaret();
+		return;
+	}
+
 	if(!Consonant.before)
 		InputLetterBefore(L);
 	else
