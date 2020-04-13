@@ -337,7 +337,18 @@ function ForbidCaret(){
 }
 
 function ForbidNumberActions(key){
-	return (!In(["Nokia 1998","Symmetric","⠍⠕⠗⠎⠑","Fuchsia"],CurLevelName())&&In(NumberCharacters,key));
+	return (!In([
+		"Direct",
+		"Reverse",
+		"Second",
+		"Follow",
+		"Rotate",
+		"Symmetric",
+		"Topological",
+		"Nokia 1998",
+		"Fuchsia",
+		"Odd",
+		"⠍⠕⠗⠎⠑"],CurLevelName())&&In(NumberCharacters,key));
 }
 
 function ForbidSpaceActions(key){
@@ -904,14 +915,14 @@ function Topological(O){
 
 var Homeomorphism={
 	"A":["A","R"],
-	"B":["B"],
+	"B":["B","8"],
 	"H":["H","K"],
-	"I":["C","G","I","J","L","M","N","S","U","V","W","Z"],
-	"O":["D","O"],
-	"P":["P"],
-	"Q":["Q"],
+	"I":["C","G","I","J","L","M","N","S","U","V","W","Z","1","2","5","7"],
+	"O":["D","O","0"],
+	"P":["P","6","9"],
+	"Q":["Q","4"],
 	"X":["X"],
-	"Y":["E","F","T","Y"],
+	"Y":["E","F","T","Y","3"],
 }
 
 var HomeomorphismRequirement={
