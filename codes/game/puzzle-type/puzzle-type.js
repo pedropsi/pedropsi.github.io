@@ -974,8 +974,8 @@ function Topological(O){
 	function InputBaseLetter(L){
 		if(In(["I"],HomeomorphicClass(L)))
 			InputLetter(L);
-		else
-			InputLetter("I");
+		//else
+		//	InputLetter("I");
 	}
 
 	if(Letters.array.length===0){
