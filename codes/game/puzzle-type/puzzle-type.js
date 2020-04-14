@@ -2013,6 +2013,9 @@ function Caret(position){
 
 	if(typeof position==="undefined")
 		return Caret.array;
+
+	if(IsArray(position))
+		Caret.array=position;
 	else
 		Caret.array=[position];	
 }
@@ -2307,7 +2310,7 @@ function LevelZeroState(){
 function LevelState(){
 	var state={
 		'letters':Clone(Letters()),
-		'caret':Caret()[0],
+		'caret':Caret(),
 		'Second':Second.n?Second.n:0,
 		'Consonant':Consonant.before?Consonant.before:false,
 		'Fell':Fell.position?Fell.position:0,
