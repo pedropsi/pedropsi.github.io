@@ -292,15 +292,19 @@ function LevelAction(key){
 	if(key==="Escape"){
 		ObtainTitleScreenLoader();
 		return;
-	 }	
+	 }
 	
 	if(key==="Enter"||ForbidNumberActions(key)||ForbidSpaceActions(key)){
 		ForbidCaret();return;
 	}
 	
 	else{
-		LevelActions[CurLevelName()](key);
-		RegisterMove(key);
+		if(Letters.array.length===50)//Max Char Limit (arbitrary, to fit screen)
+			Restart();
+		else{
+			LevelActions[CurLevelName()](key);
+			RegisterMove(key);
+		}
 	}
 	UpdateLevel();
 	CheckWin();	
