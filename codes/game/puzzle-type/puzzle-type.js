@@ -922,7 +922,17 @@ FellHalves={
 	"W":"WW",
 	"X":"YX",
 	"Y":"YI",
-	"Z":"ZZ"
+	"Z":"ZZ",
+	"0":"08",
+	"1":"1I",
+	"2":"2Z",
+	"3":"33",
+	"4":"44",
+	"5":"E3",
+	"6":"68",
+	"7":"Z7",
+	"8":"88",
+	"9":"93"
 }
 
 var FellWholes=FlipKeysValues(FellHalves);
