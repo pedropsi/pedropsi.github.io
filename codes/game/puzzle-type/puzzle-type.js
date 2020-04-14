@@ -341,7 +341,7 @@ function ForbidNumberActions(key){
 		"Second",
 		"Follow",
 		"Rotate",
-		"Fell",
+		"Fillet",
 		"Symmetric",
 		"Topological",
 		"Nokia 1998",
@@ -388,7 +388,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Tangles",				//Alphabetical, Cyclic, Arithmethic, Proactive
 
 	"Symmetric",			//Shape, Retroactive
-	"Fell",					//Shape, Cyclic, Monoactive
+	"Fillet",					//Shape, Cyclic, Monoactive
 	"Topological",			//Shape, Growth, Monoactive
 
 	"Nokia 1998",			//Keyboard
@@ -463,7 +463,7 @@ var LevelActions={
 			InputLetter(L);
 	},
 	"Symmetric":Symmetric,
-	"Fell":Fell,
+	"Fillet":Fillet,
 	"Topological":Topological,
 	"Dvorak":function (P){
 		var n=Letters.array.map(function(L){return DvorakMapping["row_"+L]});
@@ -853,23 +853,24 @@ function Weightier(L){
 	return;}
 
 
-//Fell
+//Fillet
 
-function Fell(E){
-	if(!Fell.position)
-		Fell.position=0;
+function Fillet(E){
+	if(!Fillet.position)
+		Fillet.position=0;
 
-	var p=Fell.position;
-	var max="Fell".length;
+	var p=Fillet.position;
+	var max="Fillet".length;
 	var pnext=(p+1)%max;
 
-	Letters.array[p]=FellHalves[E][0]+(Letters.array[p]?SplitHalves(Letters.array[p])[1]:"_");
-	Letters.array[pnext]=(Letters.array[pnext]?SplitHalves(Letters.array[pnext])[0]:"_")+FellHalves[E][1];
+	Letters.array[p]=FilletHalves[E][0]+(Letters.array[p]?SplitHalves(Letters.array[p])[1]:"_");
+	Letters.array[pnext]=(Letters.array[pnext]?SplitHalves(Letters.array[pnext])[0]:"_")+FilletHalves[E][1];
 
 	Letters.array=Letters.array.map(CombineHalves);
 
-	Fell.position=pnext;
-	Caret.array=[pnext,(pnext+1)%max];
+	Fillet.position=pnext;
+	Caret(pnext);
+
 }
 
 function CombineHalves(AB){
@@ -878,24 +879,24 @@ function CombineHalves(AB){
 	
 	var A=AB[0];
 	var B=AB[1];
-	if(!FellHalves[A]||!FellHalves[B])
+	if(!FilletHalves[A]||!FilletHalves[B])
 		return AB;
 
-	var halves=FellHalves[A][0]+FellHalves[B][1];
-	if(In(FellWholes,halves))
-		return FellWholes[halves];
+	var halves=FilletHalves[A][0]+FilletHalves[B][1];
+	if(In(FilletWholes,halves))
+		return FilletWholes[halves];
 
 	return AB;
 }
 
 function SplitHalves(E){
 	if(E.length===1)
-		return FellHalves[E];
+		return FilletHalves[E];
 	else
 		return E
 }
 
-FellHalves={
+FilletHalves={
 	"_":"__",
 	"A":"AA",
 	"B":"PD",
@@ -935,7 +936,17 @@ FellHalves={
 	"9":"93"
 }
 
-var FellWholes=FlipKeysValues(FellHalves);
+var FilletWholes=FlipKeysValues(FilletHalves);
+
+/*//helpers for the word search
+function FilletAfter(T){
+	var I=FilletHalves[T][1];
+	return Values(FilletHalves).filter(wh=>(wh[1]===I)).map(i=>FilletWholes[i]);
+}
+
+var FilletPairs={};
+Values(FilletWholes).map(f=>FilletPairs[f]=FilletAfter(f).map(fa=>(f+fa).toLowerCase()));
+*/
 
 //Symmetric
 
@@ -2151,7 +2162,7 @@ var LetterDisplay={
 		return LetterPureHTML(S.outerHTML);
 		
 	},
-	"Fell":function(E){
+	"Fillet":function(E){
 		var combined=CombineHalves(E);
 		//Superimpose two halves
 		if(combined.length>1){
@@ -2325,7 +2336,7 @@ function LoadLevelState(levelstate){
 	Caret(levelstate['caret']);
 	Second.n=levelstate['Second'];
 	Consonant.before=levelstate['Consonant'];
-	Fell.position=levelstate['Fell'];
+	Fillet.position=levelstate['Fillet'];
 	Nucleus.partial=levelstate['Nucleus'];
 	Anagram.partial=First(levelstate['Anagram']);
 	Anagram.used=Rest(levelstate['Anagram']);
@@ -2357,7 +2368,7 @@ function LevelZeroState(){
 		'caret':0,
 		'Second':0,
 		'Consonant':false,
-		'Fell':0,
+		'Fillet':0,
 		'Anagram':[""],
 		'Nucleus':[],
 		'Nigeria':false,
@@ -2374,7 +2385,7 @@ function LevelState(){
 		'caret':Caret(),
 		'Second':Second.n?Second.n:0,
 		'Consonant':Consonant.before?Consonant.before:false,
-		'Fell':Fell.position?Fell.position:0,
+		'Fillet':Fillet.position?Fillet.position:0,
 		'Nucleus':Nucleus.partial?Clone(Nucleus.partial):[],
 		'Anagram':[Anagram.partial?Anagram.partial:""].concat(Anagram.used?Anagram.used:[]),
 		'Nigeria':Nigeria.freeze?Nigeria.freeze:false,
