@@ -90,7 +90,7 @@
    
 }
 
-.letter.caret{
+.letter.caret, .caret .half{
     background-color: var(--darkblue);
     border-bottom-color: var(--lightyellow);
     color:var(--lightyellow);
@@ -105,7 +105,6 @@
   0%,100%   { 
      background:var(--lightyellow);
      color:var(--darkblue);
-   
    }
   15%,85%   { 
      background:var(--darkblue);
@@ -114,7 +113,7 @@
 }
 
 
-.caret {
+.caret, .caret .half {
   -webkit-animation: Flicker 5s infinite; /* Safari 4+ */
   -moz-animation:    Flicker 5s infinite; /* Fx 5+ */
   -o-animation:      Flicker 5s infinite; /* Opera 12+ */
