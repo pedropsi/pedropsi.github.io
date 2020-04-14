@@ -352,7 +352,10 @@ function ForbidNumberActions(key){
 }
 
 function ForbidSpaceActions(key){
-	return (!In(["Shepherdess hence unladylike","Nigeria"],CurLevelName())&&In([" "],key));
+	return (!In([
+		"Shepherdess hence unladylike",
+		"Nigeria",
+		"Dvorak"],CurLevelName())&&In([" "],key));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -372,38 +375,38 @@ var LevelGoals=[			//Required types of thinking:
 	"Direct",				
 
 	"Reverse",				//Positional,
-	"Consonant",			//Positional, Alphabetical
-	"Follow",				//Positional, Retroactive
-	"Second",				//Retroactive
+	"Consonant",			//Positional, Language
+	"Follow",				//Positional, Monoactive
+	"Second",				//Retroactive, Subtractive
 	"Rotate",				//Positional, Spacial, Retroactive
 
-	"Oppose",				//Alphabetical, Mapping
-	"Rise",					//Alphabetical, Adjacent
-	"Falls",				//Alphabetical, Adjacent, Retroactive
+	"Oppose",				//Alphabetical
+	"Rise",					//Alphabetical 
+	"Falls",				//Alphabetical, Arithmethic, Retroactive
 
-	"Superior",				//Alphabetical, Retroactive
-	"Precedent",			//Alphabetical, Adjacent, Retroactive
-	"Tangles",				//Alphabetical, Cyclic, Proactive
+	"Superior",				//Alphabetical, Monoactive
+	"Precedent",			//Alphabetical, Retroactive
+	"Tangles",				//Alphabetical, Cyclic, Arithmethic, Proactive
 
-	"Fell",					//Spacial, Cyclic
-	"Symmetric",			//Spacial, Cyclic
-	"Topological",			//Spacial, Cyclic, Retroactive
+	"Symmetric",			//Shape, Retroactive
+	"Fell",					//Shape, Cyclic, Monoactive
+	"Topological",			//Shape, Growth, Monoactive
 
-	"Dvorak",				//Spacial, Cyclic, Mapping, Cultural
+	"Nokia 1998",			//Keyboard
+	"Dvorak",				//Keyboard, Cyclic
+	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
 
-	"Nokia 1998",			//Spacial, Mapping, Cultural
-	"ひらがな",				//Syllabe, Mapping, Language
-	"Nigeria",				//Spacial, Word, Mapping, Knowledge, Retroactive
-	"Anagram",				//Word, Mapping, Knowledge, Retroactive
-	"Nucleus",				//Syllabe, Word, Language, Mapping, Knowledge, Retroactive
+	"Nigeria",				//Word, Mapping, Geography
+	"Anagram",				//Word, Mapping, Language, Once
+	"Nucleus",				//Syllabe, Word, Science, Mapping
 
-	"Weightier",			//Word, Adjacent, Retroactive
-	"Shepherdess hence unladylike",		//Word, Retroactive, Cultural
-	"Fuchsia",				//Language, Knowledge, Retroactive
+	"Weightier",			//Keyword, Increment, Retroactive, Language
+	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
+	"Fuchsia",				//Encoding, Mapping
 
-	"Odd",					//Word, Positional, Retroactive
-	"Dividi",				// Mapping, Language, Retroactive
-	"⠍⠕⠗⠎⠑"				//Language, Mapping, Knowledge, Retroactive
+	"Odd",					//Keyword, Positional, Retroactive, Subtractive
+	"Dividi",				// Mapping, Arithmethic, Retroactive
+	"⠍⠕⠗⠎⠑"				//Encoding, Mapping, Once
 ];
 
 
@@ -1065,7 +1068,8 @@ var DvorakRows=[
 	"1234567890",
 	"PYFGCRL",
 	"AOEUIDHTNS",
-	"QJKXBMWVZ"
+	"QJKXBMWVZ",
+	" "
 ];
 
 function CyclicMapping(rowsArray){
