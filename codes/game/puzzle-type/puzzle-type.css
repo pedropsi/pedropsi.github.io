@@ -97,24 +97,22 @@
     width: calc(var(--h4) + var(--w2));
 }
 
-
 .win{
    --lightyellow:var(--blue);
 }
 
 @keyframes Flicker{
   0%,100%   { 
-     background-color:var(--lightyellow);
-   /*  border-bottom-color: var(--darkblue);*/
+     background:var(--lightyellow);
      color:var(--darkblue);
    
    }
   15%,85%   { 
-     background-color:var(--darkblue);
-    /* border-bottom-color: var(--lightyellow);*/
+     background:var(--darkblue);
      color:var(--lightyellow);
    }
 }
+
 
 .caret {
   -webkit-animation: Flicker 5s infinite; /* Safari 4+ */
@@ -131,6 +129,8 @@
   -o-animation:      unset; /* Opera 12+ */
   animation:         unset; /* IE 10+, Fx 29+ */
 }
+
+
 
 /*Level-specific*/
 .symmetry.horizontal,
@@ -174,6 +174,7 @@
    --s:calc(var(--h4) + var(--w2));
    width: var(--s);
 }
+
 .upper.half{
    padding-top: calc(var(--s)/5);
    clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%);
