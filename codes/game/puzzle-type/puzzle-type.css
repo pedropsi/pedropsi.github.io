@@ -123,6 +123,7 @@
 
 .caret.forbidden{
    background-color: var(--lightyellow);
+   color: var(--darkblue);
    -webkit-animation:unset; /* Safari 4+ */
   -moz-animation:    unset; /* Fx 5+ */
   -o-animation:      unset; /* Opera 12+ */
