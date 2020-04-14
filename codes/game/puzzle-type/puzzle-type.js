@@ -462,7 +462,8 @@ var LevelActions={
 	"Fell":Fell,
 	"Topological":Topological,
 	"Dvorak":function (P){
-		var n=Letters.array.length;
+		var n=Letters.array.map(function(L){return DvorakMapping["row_"+L]});
+			n=Count(n,DvorakMapping["row_"+P]);
 		var P=P;
 		for(var i=1;i<=n;i++)
 			if(In(DvorakMapping,P))
@@ -1060,36 +1061,28 @@ var Hexadecimal=["A","B","C","D","E","F"].concat(NumberCharacters);
 
 //Dvorak
 
-var DvorakMapping={
-	"A":"O",
-	"B":"M",
-	"C":"R",
-	"D":"H",
-	"E":"U",
-	"F":"G",
-	"G":"C",
-	"H":"T",
-	"I":"D",
-	"J":"K",
-	"K":"X",
-	"L":"P",
-	"M":"W",
-	"N":"S",
-	"O":"E",
-	"P":"Y",
-	"Q":"J",
-	"R":"L",
-	"S":"A",
-	"T":"N",
-	"U":"I",
-	"V":"Z",
-	"W":"V",
-	"X":"B",
-	"Y":"F",
-	"Z":"Q"
+var DvorakRows=[
+	"1234567890",
+	"PYFGCRL",
+	"AOEUIDHTNS",
+	"QJKXBMWVZ"
+];
+
+function CyclicMapping(rowsArray){
+	var mapping={};
+	var row;
+	for(var i=0;i<rowsArray.length;i++){
+		row=rowsArray[i];
+		for(var j=0;j<row.length;j++){
+			var A=row[j]
+			mapping[A]=row[(j+1)%(row.length)];
+			mapping["row_"+A]=i;
+		}
+	}
+	return mapping
 }
 
-var LetterCharacters=Object.keys(DvorakMapping);
+var DvorakMapping=CyclicMapping(DvorakRows);
 
 // Weightier
 var NumberPairs={
