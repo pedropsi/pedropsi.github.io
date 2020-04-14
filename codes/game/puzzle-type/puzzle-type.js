@@ -352,8 +352,14 @@ function ForbidNumberActions(key){
 
 function ForbidSpaceActions(key){
 	return (!In([
+		"Direct",
+		"Reverse",
+		"Second",
+		"Follow",
+		"Rotate",
 		"Shepherdess hence unladylike",
 		"Nigeria",
+		"Odd",
 		"Dvorak"],CurLevelName())&&In([" "],key));
 }
 
