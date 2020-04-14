@@ -1,7 +1,8 @@
 ﻿User-agent: *
-Disallow: /cms
+Allow: /data
+Allow: /codes/index.css
+Allow: /codes/data-transfer.js
 Disallow: /codes
-Disallow: /data
 Disallow: /hints
 Disallow: /media
 Sitemap: https://pedropsi.github.io/sitemap.xml
