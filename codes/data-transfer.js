@@ -285,6 +285,13 @@ function ContainsF(n){
 	return function(SAO){return In(SAO,n)};
 }
 
+function Count(array,itemOrF){
+	if(typeof itemOrF==="function")
+		return array.filter(F).length;
+	else
+		return array.filter(function(e){return e===itemOrF}).length;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Set functions
 
