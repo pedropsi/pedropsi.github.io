@@ -691,10 +691,12 @@ function Fuchsia(L){
 			var colour=NamedColour(hex);
 			Letters.array=colour.toUpperCase().split("");
 			
-			AddSingleElement("<style class='overcolour'>.letter{color:"+hex+";border-bottom-color:"+hex+"} .letter.caret{background-color:"+hex+"}</style>",'BODY','.overcolour');
+			PlaceEndCaret();
+			AddSingleElement("<style class='overcolour'>.letter{color:"+hex+";border-bottom-color:"+hex+"} .letter.caret{background:"+hex+" !important}</style>",'BODY','.overcolour');
 			setTimeout(function(){RemoveElement(".overcolour");},1000);
 
 			Fuchsia.colour=true;
+			
 			return;
 		}
 	}
