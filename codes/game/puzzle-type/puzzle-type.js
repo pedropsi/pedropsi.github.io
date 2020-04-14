@@ -6,7 +6,6 @@
 
 /*
 // Level Ideas todo, maybe
---FELL (split letters in half and add offsett halves by one)
 --CALCULATOR SPEAK 1I 2Z 3E 5S 7T 8B 0O
 --MUSICAL NOTES
 --GREEK OR PHONETIC ALPHABET
@@ -343,6 +342,7 @@ function ForbidNumberActions(key){
 		"Second",
 		"Follow",
 		"Rotate",
+		"Fell",
 		"Symmetric",
 		"Topological",
 		"Nokia 1998",
@@ -385,6 +385,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Precedent",			//Alphabetical, Adjacent, Retroactive
 	"Tangles",				//Alphabetical, Cyclic, Proactive
 
+	"Fell",					//Spacial, Cyclic
 	"Symmetric",			//Spacial, Cyclic
 	"Topological",			//Spacial, Cyclic, Retroactive
 
@@ -458,6 +459,7 @@ var LevelActions={
 			InputLetter(L);
 	},
 	"Symmetric":Symmetric,
+	"Fell":Fell,
 	"Topological":Topological,
 	"Dvorak":function (P){
 		var n=Letters.array.length;
@@ -821,6 +823,81 @@ function Weightier(L){
 	Letters.array=InflateNumbers(Letters.array.join("").toLowerCase()).toUpperCase().split("");
 	PlaceEndCaret();
 	return;}
+
+
+//Fell
+
+function Fell(E){
+	if(!Fell.position)
+		Fell.position=0;
+
+	var p=Fell.position;
+	var max="Fell".length;
+	var pnext=(p+1)%max;
+
+	Letters.array[p]=FellHalves[E][0]+(Letters.array[p]?SplitHalves(Letters.array[p])[1]:"_");
+	Letters.array[pnext]=(Letters.array[pnext]?SplitHalves(Letters.array[pnext])[0]:"_")+FellHalves[E][1];
+
+	Letters.array=Letters.array.map(CombineHalves);
+
+	Fell.position=pnext;
+	Caret.array=[pnext,(pnext+1)%max];
+}
+
+function CombineHalves(AB){
+	if(AB.length===1)
+		return AB;
+	
+	var A=AB[0];
+	var B=AB[1];
+	if(!FellHalves[A]||!FellHalves[B])
+		return AB;
+
+	var halves=FellHalves[A][0]+FellHalves[B][1];
+	if(In(FellWholes,halves))
+		return FellWholes[halves];
+
+	return AB;
+}
+
+function SplitHalves(E){
+	if(E.length===1)
+		return FellHalves[E];
+	else
+		return E
+}
+
+FellHalves={
+	"_":"__",
+	"A":"AA",
+	"B":"PD",
+	"C":"CO",
+	"D":"DD",
+	"E":"EE",
+	"F":"EI",
+	"G":"CG",
+	"H":"HH",
+	"I":"II",
+	"J":"IO",
+	"K":"KK",
+	"L":"IE",
+	"M":"MM",
+	"N":"NN",
+	"O":"OO",
+	"Q":"OQ",
+	"P":"PI",
+	"R":"PK",
+	"S":"SS",
+	"T":"TI",
+	"U":"UO",
+	"V":"VV",
+	"W":"WW",
+	"X":"YX",
+	"Y":"YI",
+	"Z":"ZZ"
+}
+
+var FellWholes=FlipKeysValues(FellHalves);
 
 //Symmetric
 
@@ -1949,19 +2026,21 @@ function UnDrawCaret(){
 
 function DrawCaret(){
 	if(Caret().length<1)
-		var p=Letters().length;
+		var positions=[Letters().length];
 	else
-		var p=Caret()[0];
+		var positions=Caret();
 	
 	UnDrawCaret();
-	
+	positions.map(DrawSingleCaret);	
+}
+
+function DrawSingleCaret(p){	
 	if(p<0)
 		PreAddElement(CaretHTML(),"#letters");
 	if(p>=Letters().length)
 		AddElement(CaretHTML(),"#letters");
 	else
 		Class(GetElement("#letters").children[p],"caret")
-		
 }
 
 function DrawLettersEndCaret(){
@@ -2008,6 +2087,16 @@ var LetterDisplay={
 		
 		return LetterPureHTML(S.outerHTML);
 		
+	},
+	"Fell":function(E){
+		var combined=CombineHalves(E);
+		//Superimpose two halves
+		if(combined.length>1){
+			S=MakeElement("<div class='superimpose'><div class='superimposed half upper'>"+PureLetter(E[0])+"</div><div class='half lower'>"+PureLetter(E[1])+"</div></div>");
+			return LetterPureHTML(S.outerHTML);
+		}
+		else
+			return LetterPureHTML(combined);
 	},
 	"Dividi":LetterDraftHTML,
 	"Nucleus":LetterDraftHTML,
@@ -2172,6 +2261,7 @@ function LoadLevelState(levelstate){
 	Caret(levelstate['caret']);
 	Second.n=levelstate['Second'];
 	Consonant.before=levelstate['Consonant'];
+	Fell.position=levelstate['Fell'];
 	Nucleus.partial=levelstate['Nucleus'];
 	Anagram.partial=First(levelstate['Anagram']);
 	Anagram.used=Rest(levelstate['Anagram']);
@@ -2203,6 +2293,7 @@ function LevelZeroState(){
 		'caret':0,
 		'Second':0,
 		'Consonant':false,
+		'Fell':0,
 		'Anagram':[""],
 		'Nucleus':[],
 		'Nigeria':false,
@@ -2219,6 +2310,7 @@ function LevelState(){
 		'caret':Caret()[0],
 		'Second':Second.n?Second.n:0,
 		'Consonant':Consonant.before?Consonant.before:false,
+		'Fell':Fell.position?Fell.position:0,
 		'Nucleus':Nucleus.partial?Clone(Nucleus.partial):[],
 		'Anagram':[Anagram.partial?Anagram.partial:""].concat(Anagram.used?Anagram.used:[]),
 		'Nigeria':Nigeria.freeze?Nigeria.freeze:false,
