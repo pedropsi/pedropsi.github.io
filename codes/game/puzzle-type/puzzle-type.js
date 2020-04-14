@@ -7,7 +7,6 @@
 /*
 // Level Ideas todo, maybe
 --CALCULATOR SPEAK 1I 2Z 3E 5S 7T 8B 0O
---MUSICAL NOTES
 --GREEK OR PHONETIC ALPHABET
 --INFINITY (GO DOWN INSIDE AND INSIDE AND INSIDE....)
 */
@@ -402,7 +401,9 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Weightier",			//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
+
 	"Fuchsia",				//Encoding, Mapping
+	"Deaf",				//Encoding, Mapping
 
 	"Odd",					//Keyword, Positional, Retroactive, Subtractive
 	"Dividi",				// Mapping, Arithmethic, Retroactive
@@ -523,6 +524,7 @@ var LevelActions={
 	},
 	"⠍⠕⠗⠎⠑":Morse,
 	"Fuchsia":Fuchsia,
+	"Deaf":Deaf,
 	"Anagram":Anagram,
 	"Nucleus":Nucleus
 }
@@ -698,6 +700,28 @@ function Fuchsia(L){
 	}
 	PlaceEndCaret();
 }
+
+function Deaf(L){
+	if(!In("ABCDEFG",L))
+		L="#";
+	InputLetter(L+"*");
+
+	var savednotes=Letters.array.filter(function(n){return !InPosfix(n,"*")});
+	var tempnotes=Letters.array.filter(function(n){return InPosfix(n,"*")});
+
+	if(tempnotes.length-Count(tempnotes,"#*")===3){//3 notes
+		
+		var chord=tempnotes.map(PureLetter).join("");
+			chord=FixedPoint(IncrementNote,chord);
+
+		Letters.array=savednotes;
+		if(In(MajorChords,chord))
+			Letters.array.push(MajorChords[chord])
+	}
+
+	PlaceEndCaret();
+}
+///
 
 function DeleteLetters(n,beginning){
 	var i=1;
@@ -1956,6 +1980,35 @@ var BrailleSorted=[
 "⠾",
 "⠿"];
 
+var NoteIncrements={
+	"A##":"B",
+	"B#":"C",
+	"C##":"D",
+	"D##":"E",
+	"E#":"F",
+	"F##":"G",
+	"G##":"A"
+}
+
+function IncrementNote(note){
+	return StringReplaceRulesObject(note,NoteIncrements);
+}
+
+var MajorChords={
+	"CEG":"G",
+	"C#FG#":"G#",
+	"DF#A":"A",
+	"D#GA#":"A",
+	"EG#B":"B",
+	"FAC":"C",
+	"F#A#C#":"C#",
+	"GBD":"D",
+	"G#CD#":"D#",
+	"AC#E":"E",
+	"A#DF":"F",
+	"BD#F#":"F#"
+};
+
 ///////////////////////////////////////////////////////////////////////////////
 //Manage letters and carets
 
@@ -2102,6 +2155,7 @@ var LetterDisplay={
 	"Nucleus":LetterDraftHTML,
 	"Anagram":LetterDraftHTML,
 	"Fuchsia":LetterDraftHTML,
+	"Deaf":LetterDraftHTML,
 	"Nigeria":LetterDraftHTML
 }
 
