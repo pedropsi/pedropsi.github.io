@@ -300,7 +300,7 @@ function LevelAction(key){
 	}
 	
 	else{
-		if(Letters.array.length===50)//Max Char Limit (arbitrary, to fit screen)
+		if(Letters.array.length>=50)//Max Char Limit (arbitrary, to fit screen)
 			Restart();
 		else{
 			LevelActions[CurLevelName()](key);
