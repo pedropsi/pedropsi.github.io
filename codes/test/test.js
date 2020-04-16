@@ -291,6 +291,7 @@ SaveTest(Unique,[["a","b","c"]],["a","b","c"],"array of unique values");
 SaveTest(Unique,[["1",1,true]],["1",1,true],"unique but similar values");
 SaveTest(Unique,[["b","b","c"]],["b","c"],"array of duplicate values");
 SaveTest(Unique,[[]],[],"empty array");
+SaveTest(Unique,[[[1,2],[1,2]]],[[1,2]],"deep array");
 
 SaveTest(Complement,[["a","b","c"],["b"]],["a","c"],"one element to exclude");
 SaveTest(Complement,[["a","b","c"],["d"]],["a","b","c"],"no matching element to exclude");
@@ -298,6 +299,7 @@ SaveTest(Complement,[["a","b","c"],[]],["a","b","c"],"empty exclusion list");
 SaveTest(Complement,[["b"],["a","b","c"]],[],"reverse argument order");
 SaveTest(Complement,[["b","b","a","c","c"],["a"]],["b","c"],"eliminate duplicates");
 SaveTest(Complement,[["d","c","b","a"],["b","d"]],["a","c"],"sort");
+SaveTest(Complement,[[["d","c"],[["b"]],"a"],["c","d",[["b"]]]],["a",["d","c"]],"deep array");
 
 SaveTest(Intersection,[["a","b","c"],["b"]],["b"],"one common element");
 SaveTest(Intersection,[["a","b","c"],["d"]],[],"no common element");
