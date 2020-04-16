@@ -351,6 +351,7 @@ function ForbidNumberActions(key){
 		"Topological",
 		"Nokia 1998",
 		"Fuchsia",
+		"Deaf",
 		"Odd",
 		"⠍⠕⠗⠎⠑"],CurLevelName())&&In(NumberCharacters,key));
 }
@@ -366,6 +367,7 @@ function ForbidSpaceActions(key){
 		"Shepherdess hence unladylike",
 		"Nigeria",
 		"Odd",
+		"Deaf",
 		"Dvorak"],CurLevelName())&&In([" "],key));
 }
 
@@ -716,26 +718,37 @@ function Fuchsia(L){
 }
 
 function Deaf(L){
-	if(!In("ABCDEFG",L))
-		L="#";
-	InputLetter(L+"*");
 
 	var savednotes=Letters.array.filter(function(n){return !InPosfix(n,"*")});
 	var tempnotes=Letters.array.filter(function(n){return InPosfix(n,"*")});
 
-	if(tempnotes.length-Count(tempnotes,"#*")===3){//3 notes
-		
-		var chord=tempnotes.map(PureLetter).join("");
-			chord=FixedPoint(IncrementNote,chord);
-
-		Letters.array=savednotes;
-		if(In(MajorChords,chord))
-			Letters.array.push(MajorChords[chord])
+	function AddSharp(){
+		if(Last(tempnotes)!=="#*")
+			InputLetter("#*");
+		else
+			ForbidCaret();
 	}
+	
+	if(tempnotes.length-Count(tempnotes,"#*")===3){//3 notes
+		if(!In("ABCDEFG",L)&&Last(tempnotes)!=="#*")
+			AddSharp();
+		else{
+			var chord=tempnotes.map(PureLetter).join("");
+				chord=FixedPoint(IncrementNote,chord);
 
+			Letters.array=savednotes;
+			if(In(MajorChords,chord))
+				Letters.array.push(MajorChords[chord])
+		}
+	}else{
+		if(!In("ABCDEFG",L))
+			AddSharp();
+		else
+			InputLetter(L+"*");
+	}
 	PlaceEndCaret();
 }
-///
+
 
 function DeleteLetters(n,beginning){
 	var i=1;
@@ -2076,19 +2089,47 @@ function IncrementNote(note){
 }
 
 var MajorChords={
-	"CEG":"G",
-	"C#FG#":"G#",
-	"DF#A":"A",
-	"D#GA#":"A",
-	"EG#B":"B",
-	"FAC":"C",
-	"F#A#C#":"C#",
-	"GBD":"D",
-	"G#CD#":"D#",
-	"AC#E":"E",
-	"A#DF":"F",
-	"BD#F#":"F#"
+	"CEG":"C",
+	"C#FG#":"C#",
+	"DF#A":"D",
+	"D#GA#":"D#",
+	"EG#B":"E",
+	"FAC":"F",
+	"F#A#C#":"F#",
+	"GBD":"G",
+	"G#CD#":"G#",
+	"AC#E":"A",
+	"A#DF":"A#",
+	"BD#F#":"B"
 };
+
+ChordForward={
+	"A#":"a",
+	"B#":"b",
+	"C#":"c",
+	"D#":"d",
+	"E#":"e",
+	"F#":"f",
+	"G#":"g"
+}
+
+ChordBackward=FlipKeysValues(ChordForward);
+
+function PermuteChord(chord){
+	var hiddenchord=StringReplaceRulesObject(chord,ChordForward);
+	var permutations=StringPermutations(hiddenchord);
+		permutations=permutations.map(function(ch){
+			return StringReplaceRulesObject(ch,ChordBackward);
+		});
+	return permutations;
+}
+
+Keys(MajorChords).map(function(chord){
+	var permutations=PermuteChord(chord);
+	return permutations.map(function(pchord){
+		MajorChords[pchord]=MajorChords[chord];
+	});
+})
 
 ///////////////////////////////////////////////////////////////////////////////
 //Manage letters and carets
