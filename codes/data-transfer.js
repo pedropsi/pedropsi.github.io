@@ -227,7 +227,15 @@ function FlipKeysValues(Obj){
 function InArrayOrObj(arrayOrObj,n){
 	if(!arrayOrObj)
 		return false;
-	function F(ao){return ao.indexOf(n)>=0;};
+	function F(array){
+		var i=0;
+		var found=false;
+		while(!found&&i<array.length){
+			found=Equal(array[i],n);
+			i++;
+		}
+		return found;	
+	};
 	return Apply(arrayOrObj,F)||false;
 };
 
@@ -296,21 +304,31 @@ function Count(array,itemOrF){
 //Set functions
 
 function Unique(array){
-	return array.filter(function(e,i){return array.indexOf(e)===i}).sort();
+	return Intersection(array,array);
 }
 
 //Complement (force uniqueness, sort)
 function Complement(arrayInclude,arrayExclude){
-	if(!arrayExclude)
-		return Unique(arrayInclude);
-	return arrayInclude.filter(function(e,i){return arrayInclude.indexOf(e)===i&&arrayExclude.indexOf(e)<0}).sort();
+	var unique=[];
+	var value;
+	for(var i=0;i<arrayInclude.length;i++){
+		value=arrayInclude[i];
+		if(!In(arrayExclude,value)&&!In(unique,value))
+			unique.push(value);
+	}
+	return unique.sort();
 }
 
 //Intersection (force uniqueness, sort)
 function Intersection(array1,array2){
-	if(!array2)
-		return Unique(array1);
-	return array1.filter(function(e,i){return array1.indexOf(e)===i&&array2.indexOf(e)>=0}).sort();
+	var unique=[];
+	var value;
+	for(var i=0;i<array1.length;i++){
+		value=array1[i];
+		if(In(array2,value)&&!In(unique,value))
+			unique.push(value);
+	}
+	return unique.sort();
 }
 
 //Union (force uniqueness, sort)
