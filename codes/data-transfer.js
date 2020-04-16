@@ -344,6 +344,33 @@ function Union(array1,array2){
 	return Unique(array1.concat(array2));
 }
 
+//Permutations of a set (does not enforce uniqueness or sort)
+function Permutations(array){
+	if(array.length<2)
+		return [array];
+	
+	var subpermutations=[];
+	var permutations=[];
+	for(var i=0;i<array.length;i++){
+		subpermutations=Permutations(Delete(array,i));
+		subpermutations=subpermutations.map(function(s){return s.concat([array[i]])});
+		permutations=permutations.concat(subpermutations);
+	}
+	return permutations;
+}
+
+function StringPermutations(string){
+	return Permutations(string.split("")).map(function(p){return p.join("");});
+}
+
+//delete from array
+function Delete(array,i){
+	if(!array||typeof i!=="number"||i<0||i>=array.length)
+		return array;
+	var a=[].concat(array);
+	return a.slice(0,i).concat(a.slice(i+1,a.length));
+}
+
 //Subset (TODO: ARRAYS SUBSET=>SMALLEST===INTERSECTION LARGE WITH SMALLEST)
 function Subset(Object,SubsetObject){
 	var keys=Keys(SubsetObject);
