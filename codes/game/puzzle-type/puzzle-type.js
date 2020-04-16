@@ -6,6 +6,7 @@
 
 /*
 // Level Ideas todo, maybe
+--GENETIC. - use codons to generate aminoacids, full stop is the stop codon
 --CALCULATOR SPEAK 1I 2Z 3E 5S 7T 8B 0O
 --GREEK OR PHONETIC ALPHABET
 --INFINITY (GO DOWN INSIDE AND INSIDE AND INSIDE....)
@@ -952,15 +953,6 @@ FilletHalves={
 
 var FilletWholes=FlipKeysValues(FilletHalves);
 
-/*//helpers for the word search
-function FilletAfter(T){
-	var I=FilletHalves[T][1];
-	return Values(FilletHalves).filter(wh=>(wh[1]===I)).map(i=>FilletWholes[i]);
-}
-
-var FilletPairs={};
-Values(FilletWholes).map(f=>FilletPairs[f]=FilletAfter(f).map(fa=>(f+fa).toLowerCase()));
-*/
 
 //Symmetric
 
