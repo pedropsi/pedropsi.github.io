@@ -52,6 +52,8 @@ function Equal(a,b){
 		return EqualRegex(a,b);
 	else if(a===b)
 		return true;
+	else if(IsNode(a)&&IsNode(b))
+		return a.isEqualNode(b);
 	else{
 		console.log("check this new case:",a,b);
 		return false;
@@ -193,6 +195,10 @@ function IsString(s){
 	if(!s)
 		return false;
 	return typeof s==="string";
+}
+
+function IsNode(node){
+	return typeof node==="object"&&node.isEqualNode;
 }
 
 //Apply function to Array or Object
