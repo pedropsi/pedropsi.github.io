@@ -344,16 +344,17 @@ function Union(array1,array2){
 	return Unique(array1.concat(array2));
 }
 
-//Permutations of a set (does not enforce uniqueness or sort)
+//Permutations of a set (enforces uniqueness or sort)
 function Permutations(array){
-	if(array.length<2)
+	var array=Unique(array);
+	if(array.length===1)
 		return [array];
 	
 	var subpermutations=[];
 	var permutations=[];
 	for(var i=0;i<array.length;i++){
 		subpermutations=Permutations(Delete(array,i));
-		subpermutations=subpermutations.map(function(s){return s.concat([array[i]])});
+		subpermutations=subpermutations.map(function(s){return [array[i]].concat(s)});
 		permutations=permutations.concat(subpermutations);
 	}
 	return permutations;

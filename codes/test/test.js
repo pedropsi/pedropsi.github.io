@@ -314,6 +314,15 @@ SaveTest(Union,[["a","b","c"],[]],["a","b","c"],"empty list");
 SaveTest(Union,[["b"],["a","b","c"]],["a","b","c"],"reverse argument order");
 SaveTest(Union,[["b","b","a","c","c"],["a"]],["a","b","c"],"eliminate duplicates and sort");
 
+SaveTest(Permutations,[[]],[],"empty array");
+SaveTest(Permutations,[[1]],[[1]],"one symbol array");
+SaveTest(Permutations,[[1,2,3]],[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]],"actual permutations, 3 elements");
+SaveTest(Permutations,[[1,2,2]],[[1,2],[2,1]],"force uniqueness");
+
+SaveTest(StringPermutations,["HI"],["HI","IH"],"actual permutations");
+SaveTest(StringPermutations,[""],[],"empty string");
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //Repetitive functions
 
