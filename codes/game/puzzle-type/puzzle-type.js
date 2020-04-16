@@ -361,6 +361,7 @@ function ForbidSpaceActions(key){
 		"Second",
 		"Follow",
 		"Rotate",
+		"Latent clones",
 		"Shepherdess hence unladylike",
 		"Nigeria",
 		"Odd",
@@ -409,7 +410,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Anagram",				//Word, Mapping, Language, Once
 	"Nucleus",				//Syllabe, Word, Science, Mapping
 
-	"Weightier",			//Keyword, Increment, Retroactive, Language
+	"Latent clones",			//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
 
 	"Fuchsia",				//Encoding, Mapping
@@ -525,7 +526,7 @@ var LevelActions={
 		Letters.array=StringReplaceOnceRuleArray(Letters.array.join(""),GenderReplacementRules).split("");
 		PlaceEndCaret();		
 	},
-	"Weightier":Weightier,
+	"Latent clones":Weightier,
 	"Nigeria":Nigeria,
 	"ひらがな":function(L){
 		InputLetter(L);
@@ -859,6 +860,7 @@ function Dividi(L){
 //Weightier
 
 function Weightier(L){
+	
 	InputLetter(L);
 	Letters.array=InflateNumbers(Letters.array.join("").toLowerCase()).toUpperCase().split("");
 	PlaceEndCaret();
@@ -1200,18 +1202,23 @@ var NumberPairs={
 	"10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000":"gogol"*/
 };
 
-NumberDigits=Object.keys(NumberPairs).map(Number);
-NumberNames=NumberDigits.map(function(m){return NumberPairs[m]});
+NumberDigits=Keys(NumberPairs);
 
 NumberPairsReversed={};
-NumberDigits.map(function(d){NumberPairsReversed[NumberPairs[d]]=Number(d)});
+Keys(NumberPairs).map(function(d){
+	NumberPairsReversed[NumberPairs[d]]=Number(d);
+	NumberPairsReversed["minus"+NumberPairs[d]]=-Number(d);
+});
+
+NumberNames=Keys(NumberPairsReversed).sort(function(a,b){return Number(NumberPairsReversed[a])>Number(NumberPairsReversed[b])});
 
 function NameNumber(n){return NumberPairsReversed[n];}
 
-function ReadNumber(n){
+function ReadPositiveNumber(n){
+
 	var m=Number(n);
 	
-	if(In(NumberDigits,m))
+	if(In(NumberDigits,String(m)))
 		return NumberPairs[n];
 	
 	var biggest=Number(NumberDigits[0]);
@@ -1224,11 +1231,20 @@ function ReadNumber(n){
 	var times=Quotient(m,biggest);
 	var remainder=Remainder(m,biggest);
 	
-	times=ReadNumber(times);
+	times=ReadPositiveNumber(times);
 	
-	return (times==="one"?"":times)+ReadNumber(biggest)+ReadNumber(remainder);
+	return (times==="one"?"":times)+ReadPositiveNumber(biggest)+ReadPositiveNumber(remainder);
 }
 
+function ReadNumber(n){
+	var m=Number(n);
+	if(m>0)
+		return ReadPositiveNumber(m);
+	else if(m<0)
+		return "minus"+ReadPositiveNumber(-m);
+	else
+		return "zero";
+}
 
 
 function Positions(string,pattern){
@@ -1262,7 +1278,13 @@ function NumberPositions(name){
 	
 	positions=positions.filter(function(p){return p!==null});
 	
-	return positions;
+	positionsduplicate=positions.map(function(p){
+		if(InPrefix(p[0],"minus"))return [UnPrefix(p[0],"minus"),p[1]+5]}
+	)//"minus" length is 5
+		
+	positions=Complement(positions,positionsduplicate);
+
+	return positions.sort(function(a,b){return Last(a)>Last(b)});
 }
 
 function NumberDivisions(text){
@@ -1283,7 +1305,7 @@ function NumberDivisions(text){
 	return divisions;
 }
 	
-function InterpretNumber(name){
+function InterpretPositiveNumber(name){
 	var digits=NumberPositions(name).map(function(p){return NameNumber(p[0])});
 	var r=0;
 	while(digits.length>1){
@@ -1296,10 +1318,44 @@ function InterpretNumber(name){
 		
 		digits=Rest(digits);
 	}
-	return r+Last(digits);
+	return (r+Last(digits));
 };
-	
+
+function InterpretNumber(name){
+	if(InPrefix(name,"minus")){
+		var name=UnPrefix(name,"minus");
+		return -1*InterpretNumber(name);
+	}
+	else
+		return InterpretPositiveNumber(name);
+}
+
+function FuseAdjacentNumberPositions(numberpositions,text){
+	if(numberpositions.length<2)
+		return numberpositions;
+
+	var groups=[numberpositions[0]];
+	var g=0;
+	var interspace;
+	var interstart;
+	var interend;
+	for(var i=1;i<numberpositions.length;i++){
+		interstart=numberpositions[i-1][1]+numberpositions[i-1][0].length;
+		interend=numberpositions[i][1];
+		if(text.slice(interstart,interend).replace(/\s*(and)?\s*/,"")==="")
+			groups[g][0]=groups[g][0]+numberpositions[i][0]
+		else{
+			g=g+1;
+			groups.push(numberpositions[i])
+		}
+	}
+	return groups;
+}
+
 function InflateNumber(text){
+	var numberpositions=NumberPositions(text);
+		numberpositions=FuseAdjacentNumberPositions(numberpositions,text);
+
 	var numberstring=NumberPositions(text).map(function(p){return p[0]}).join("");
 	
 	if(numberstring==="")
