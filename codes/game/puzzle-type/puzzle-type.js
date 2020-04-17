@@ -386,7 +386,7 @@ function InPart(arrayOrObj,n){
 ///////////////////////////////////////////////////////////////////////////////
 //Levels & Actions
 var LevelGoals=[			//Required types of thinking:
-	//Positional (position of letters in word), Spacial (position of letters in 2D system), Alphabetical (letters are ordered, and may correspond to numbers), Syllabe (syllabes as unit of input), Word (full words as units of input), Adjacent, Cyclic, Mapping (cyphers), Language, Knowledge, Cultural, Retroactive, Proactive,
+	//Positional (caret position), Spacial (position of letters in 2D system), Alphabetical (letters are ordered, and may correspond to numbers), Syllabe (syllabes as unit of input), Word (full words as units of input), Adjacent, Cyclic, Mapping (cyphers), Language, Knowledge, Cultural, Retroactive, Proactive,
 	"Direct",				
 
 	"Reverse",				//Positional,
@@ -399,12 +399,13 @@ var LevelGoals=[			//Required types of thinking:
 	"Rise",					//Alphabetical 
 	"Falls",				//Alphabetical, Arithmethic, Retroactive
 
-	"Superior",				//Alphabetical, Monoactive
+	//"Superior",				//Alphabetical, Monoactive
 	"Precedent",			//Alphabetical, Retroactive
 	"Tangles",				//Alphabetical, Cyclic, Arithmethic, Proactive
+	"Apart",				//Positional, Alphabetical, Arithmethic, Proactive
 
 	"Symmetric",			//Shape, Retroactive
-	"Fillet",					//Shape, Cyclic, Monoactive
+	"Fillet",				//Shape, Proactive 
 	"Topological",			//Shape, Growth, Monoactive
 
 	"Nokia 1998",			//Keyboard
@@ -460,11 +461,12 @@ var LevelActions={
 		Letters.array=Letters.array.map(LetterDown);
 		InputLetterAfter(L);
 	},
-	"Superior":function (L){
+/*	"Superior":function (L){
 		if(Letters.array.length>0&&LetterNumber(L)>=LetterNumber(Last(Letters.array)))
 			DeleteLetterAfter();
-		InputLetter(L);
-	},
+		InputLetterAfter(L);
+	},*/
+	"Apart":Apart,
 	"Nokia 1998":Nokia,
 	"Rotate":function (L){
 		InputLetterAfter(L);
@@ -543,6 +545,27 @@ var LevelActions={
 	"Deaf":Deaf,
 	"Anagram":Anagram,
 	"Nucleus":Nucleus
+}
+
+function Apart(L){
+
+	if(!Apart.n){
+		InputLetterAfter(L);
+		Apart.n=L;
+		return;
+	}
+
+	var m=First(Caret());
+	Letters.array[m]=L;
+	
+	console.log(m);
+
+	var n=LetterNumber(L)-LetterNumber(Apart.n);
+		n=Max(Min(n,Letters.array.length),-1);
+
+	console.log(n);
+	DrawLetters();
+	Caret(n);
 }
 
 function Nokia(N){
@@ -2757,6 +2780,7 @@ function LoadLevelState(levelstate){
 	Caret(levelstate['caret']);
 	Second.n=levelstate['Second'];
 	Consonant.before=levelstate['Consonant'];
+	Apart.n=levelstate['Apart'];
 	Fillet.position=levelstate['Fillet'];
 	Nucleus.partial=levelstate['Nucleus'];
 	Anagram.partial=First(levelstate['Anagram']);
@@ -2789,6 +2813,7 @@ function LevelZeroState(){
 		'caret':0,
 		'Second':0,
 		'Consonant':false,
+		'Apart':"",
 		'Fillet':0,
 		'Anagram':[""],
 		'Nucleus':[],
@@ -2806,6 +2831,7 @@ function LevelState(){
 		'caret':Caret(),
 		'Second':Second.n?Second.n:0,
 		'Consonant':Consonant.before?Consonant.before:false,
+		'Apart':Apart.n?Apart.n:"",
 		'Fillet':Fillet.position?Fillet.position:0,
 		'Nucleus':Nucleus.partial?Clone(Nucleus.partial):[],
 		'Anagram':[Anagram.partial?Anagram.partial:""].concat(Anagram.used?Anagram.used:[]),
