@@ -549,21 +549,20 @@ var LevelActions={
 
 function Apart(L){
 
-	if(!Apart.n){
+	if(!Apart.last){
 		InputLetterAfter(L);
-		Apart.n=L;
+		Apart.last=L;
 		return;
 	}
 
-	var m=First(Caret());
-	Letters.array[m]=L;
+	var m=Caret()[0];
+	Letter(m,L);
 	
-	console.log(m);
-
-	var n=LetterNumber(L)-LetterNumber(Apart.n);
+	var n=m+LetterNumber(L)-LetterNumber(Apart.last);
 		n=Max(Min(n,Letters.array.length),-1);
 
-	console.log(n);
+	Apart.last=L;
+	
 	DrawLetters();
 	Caret(n);
 }
@@ -2779,7 +2778,7 @@ function LoadLevelState(levelstate){
 	Caret(levelstate['caret']);
 	Second.n=levelstate['Second'];
 	Consonant.before=levelstate['Consonant'];
-	Apart.n=levelstate['Apart'];
+	Apart.last=levelstate['Apart'];
 	Fillet.position=levelstate['Fillet'];
 	Nucleus.partial=levelstate['Nucleus'];
 	Anagram.partial=First(levelstate['Anagram']);
@@ -2830,7 +2829,7 @@ function LevelState(){
 		'caret':Caret(),
 		'Second':Second.n?Second.n:0,
 		'Consonant':Consonant.before?Consonant.before:false,
-		'Apart':Apart.n?Apart.n:"",
+		'Apart':Apart.last?Apart.last:"",
 		'Fillet':Fillet.position?Fillet.position:0,
 		'Nucleus':Nucleus.partial?Clone(Nucleus.partial):[],
 		'Anagram':[Anagram.partial?Anagram.partial:""].concat(Anagram.used?Anagram.used:[]),
