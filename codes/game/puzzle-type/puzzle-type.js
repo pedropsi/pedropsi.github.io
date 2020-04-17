@@ -399,10 +399,10 @@ var LevelGoals=[			//Required types of thinking:
 	"Rise",					//Alphabetical 
 	"Falls",				//Alphabetical, Arithmethic, Retroactive
 
-	//"Superior",				//Alphabetical, Monoactive
+	"Superior",				//Alphabetical, Monoactive
 	"Precedent",			//Alphabetical, Retroactive
 	"Tangles",				//Alphabetical, Cyclic, Arithmethic, Proactive
-	"Apart",				//Positional, Alphabetical, Arithmethic, Proactive
+	//"Apart",				//Positional, Alphabetical, Arithmethic, Proactive
 
 	"Symmetric",			//Shape, Retroactive
 	"Fillet",				//Shape, Proactive 
@@ -461,11 +461,11 @@ var LevelActions={
 		Letters(Letters.array.map(LetterDown));
 		InputLetterAfter(L);
 	},
-/*	"Superior":function (L){
+	"Superior":function (L){
 		if(Letters.array.length>0&&LetterNumber(L)>=LetterNumber(Last(Letters.array)))
 			DeleteLetterAfter();
 		InputLetterAfter(L);
-	},*/
+	},
 	"Apart":Apart,
 	"Nokia 1998":Nokia,
 	"Rotate":function (L){
