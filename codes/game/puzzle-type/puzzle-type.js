@@ -434,11 +434,11 @@ var LevelActions={
 	},
 	"Oppose":function(A){
 		var Z=NumberLetter(25-LetterNumber(A)); 
-		InputLetter(Z);		
+		InputLetterAfter(Z);		
 	},
 	"Rise":function(L){
 		var M=NumberLetter(LetterNumber(L)+1); 
-		InputLetter(M);
+		InputLetterAfter(M);
 	},
 	"Second":Second,
 
@@ -446,11 +446,11 @@ var LevelActions={
 		if(Letters.array.length>=1){
 			var last=Last(Letters.array);
 			DeleteLetterAfter();
-			InputLetter(L);
-			InputLetter(last);
+			InputLetterAfter(L);
+			InputLetterAfter(last);
 		}
 		else
-			InputLetter(L);
+			InputLetterAfter(L);
 	},
 	"Consonant":Consonant,
 	"Falls":function (L){
@@ -458,7 +458,7 @@ var LevelActions={
 			return NumberLetter(LetterNumber(Z)-1);
 		}
 		Letters.array=Letters.array.map(LetterDown);
-		InputLetter(L);
+		InputLetterAfter(L);
 	},
 	"Superior":function (L){
 		if(Letters.array.length>0&&LetterNumber(L)>=LetterNumber(Last(Letters.array)))
@@ -467,7 +467,7 @@ var LevelActions={
 	},
 	"Nokia 1998":Nokia,
 	"Rotate":function (L){
-		InputLetter(L);
+		InputLetterAfter(L);
 		if(Letters.array.length%2===0)
 			Letters.array=FlipArray(Letters.array);
 	},
@@ -476,7 +476,7 @@ var LevelActions={
 		function ChangeF(K){return L;};
 		var m=ModifyLetters(ChangeF,ConditionF);
 		if(!m)
-			InputLetter(L);
+			InputLetterAfter(L);
 	},
 	"Symmetric":Symmetric,
 	"Fillet":Fillet,
@@ -488,7 +488,7 @@ var LevelActions={
 		for(var i=1;i<=n;i++)
 			if(In(DvorakMapping,P))
 				P=DvorakMapping[P];
-		InputLetter(P);
+		InputLetterAfter(P);
 	},
 	"Tangles":function (L){
 		if(Letters.array.length==="Tangles".length){
@@ -497,23 +497,23 @@ var LevelActions={
 		}
 		
 		if(Letters.array.length<1){
-			InputLetter(L);
+			InputLetterAfter(L);
 		}
 		else{
 			var A=PureLetter(Last(Letters.array));
 			DeleteLetterAfter();
-			InputLetter(NumberLetter(LetterNumber(L)+LetterNumber(A)+1));
+			InputLetterAfter(NumberLetter(LetterNumber(L)+LetterNumber(A)+1));
 		}
 		
 		if(Letters.array.length==="Tangles".length-1)
-			InputLetter(L);
+			InputLetterAfter(L);
 		else
-			InputLetter(L+"*");
+			InputLetterAfter(L+"*");
 		
 	},
 	"Dividi":Dividi,
 	"Odd":function(L){
-		InputLetter(L);
+		InputLetterAfter(L);
 		var odd=In(Letters.array.join(""),"ODD");
 		var even=In(Letters.array.join(""),"EVEN");
 		var offset=odd?1:0;
@@ -524,19 +524,19 @@ var LevelActions={
 			}
 			Letters.array=LA;
 		}
-		PlaceEndCaret();		
+		Caret(Infinity);		
 	},
 	"Shepherdess hence unladylike":function(L){
-		InputLetter(L);
+		InputLetterAfter(L);
 		Letters.array=StringReplaceOnceRuleArray(Letters.array.join(""),GenderReplacementRules).split("");
-		PlaceEndCaret();		
+		Caret(Infinity);		
 	},
 	"Latent clones":Weightier,
 	"Nigeria":Nigeria,
 	"ひらがな":function(L){
-		InputLetter(L);
+		InputLetterAfter(L);
 		Letters.array=StringReplaceRulesObject(Letters.array.join("").toLowerCase(),Hiragana).toUpperCase().split("");
-		PlaceEndCaret();
+		Caret(Infinity);
 	},
 	"⠍⠕⠗⠎⠑":Morse,
 	"Fuchsia":Fuchsia,
@@ -565,8 +565,8 @@ function Nokia(N){
 		};
 		
 		function NokiaInput(L){
-			InputLetter(L);
-			PlaceAtCaret();
+			InputLetterAfter(L);
+			Caret("Last");
 			Nokia.eventF();
 		}
 
@@ -590,8 +590,8 @@ function Nokia(N){
 					NokiaInput(M);
 				}
 				else{
-					InputLetter(M);
-					PlaceEndCaret();
+					InputLetterAfter(M);
+					Caret(Infinity);
 				}
 			}
 		}
@@ -605,7 +605,7 @@ function Nigeria(L){
 			return;
 		}
 		
-		InputLetter(L+"*");
+		InputLetterAfter(L+"*");
 		
 		function UnSpace(string){
 			return string.replace(/\s*/g,"").replace(/^THE/,"").replace(/^REPUBLICOF/,"").replace(/^KINGDOMOF/,"").replace(/^THE/,"");
@@ -629,7 +629,7 @@ function Nigeria(L){
 			Nigeria.freeze=true;
 		}
 		
-		PlaceEndCaret();
+		Caret(Infinity);
 	}
 
 function Anagram(L){
@@ -638,11 +638,11 @@ function Anagram(L){
 	if(!Anagram.used)
 		Anagram.used=[];
 	if(!In("ANAGRAM".split(""),L)){
-		PlaceEndCaret();
+		Caret(Infinity);
 		return;
 	}
 	else{
-		InputLetter(L+"*");
+		InputLetterAfter(L+"*");
 		Anagram.partial=Anagram.partial+L;
 		var anagr=Anagram.partial.toLowerCase();
 
@@ -651,7 +651,7 @@ function Anagram(L){
 			DeleteLetters(Anagram.partial.length);
 			Anagram.partial="";
 			Anagram.used.push(anagr);
-			InputLetter(S);
+			InputLetterAfter(S);
 		}
 		
 		if(anagr.length>4){
@@ -659,7 +659,7 @@ function Anagram(L){
 			Anagram.partial="";
 			
 		}
-		PlaceEndCaret();
+		Caret(Infinity);
 			return;
 	}
 }
@@ -671,7 +671,7 @@ function Nucleus(L){
 		var nulow=(Nucleus.partial.join("")+L).toLowerCase();
 				
 		if(InPart(Nuclei,nulow)){
-			InputLetter(L+"*");	//VISUAL Feedback for temporary letters in lighter blue
+			InputLetterAfter(L+"*");	//VISUAL Feedback for temporary letters in lighter blue
 			Nucleus.partial.push(L);
 			if(In(Nuclei,nulow)){
 				var elem=Nuclei[nulow].toUpperCase();
@@ -684,7 +684,7 @@ function Nucleus(L){
 			DeleteLetters(nulow.length-1);
 			Nucleus.partial=[];
 		}
-	PlaceEndCaret();
+	Caret(Infinity);
 }
 
 function Fuchsia(L){
@@ -704,7 +704,7 @@ function Fuchsia(L){
 	if(!In(Hexadecimal,L))
 		L="#";
 	
-	InputLetter(L+"*");
+	InputLetterAfter(L+"*");
 	
 	if(Letters.array.length===7){
 		var letters=PureLetter(Letters.array.join(""));
@@ -719,7 +719,7 @@ function Fuchsia(L){
 			var colour=NamedColour(hex);
 			Letters.array=colour.toUpperCase().split("");
 			
-			PlaceEndCaret();
+			Caret(Infinity);
 			AddSingleElement("<style class='overcolour'>.letter{color:"+hex+";border-bottom-color:"+hex+"} .letter.caret{background:"+hex+" !important}</style>",'BODY','.overcolour');
 			setTimeout(function(){RemoveElement(".overcolour");},1000);
 
@@ -728,7 +728,7 @@ function Fuchsia(L){
 			return;
 		}
 	}
-	PlaceEndCaret();
+	Caret(Infinity);
 }
 
 function Deaf(L){
@@ -738,7 +738,7 @@ function Deaf(L){
 
 	function AddSharp(){
 		if(Last(tempnotes)!=="#*")
-			InputLetter("#*");
+			InputLetterAfter("#*");
 		else
 			ForbidCaret();
 	}
@@ -758,9 +758,9 @@ function Deaf(L){
 		if(!In("ABCDEFG",L))
 			AddSharp();
 		else
-			InputLetter(L+"*");
+			InputLetterAfter(L+"*");
 	}
-	PlaceEndCaret();
+	Caret(Infinity);
 }
 
 
@@ -776,7 +776,7 @@ function DeleteLetters(n,beginning){
 }
 
 function Direct(L){
-		InputLetter(L);
+		InputLetterAfter(L);
 };
 
 function Second(L){
@@ -787,7 +787,7 @@ function Second(L){
 	if(Second.n%2===0)
 		DeleteLetterBefore();
 	
-	InputLetter(L);
+	InputLetterAfter(L);
 }
 
 function Consonant(L){
@@ -799,7 +799,7 @@ function Consonant(L){
 	if(!Consonant.before)
 		InputLetterBefore(L);
 	else
-		InputLetter(L)
+		InputLetterAfter(L)
 	
 	Consonant.before=!In(["A","E","I","O","U"],L);
 
@@ -880,18 +880,18 @@ function Dividi(L){
 	if(!In(uniNumerals,L))
 		ForbidCaret();
 	else
-		InputLetter(L);
+		InputLetterAfter(L);
 	
-	PlaceEndCaret();
+	Caret(Infinity);
 }
 	
 //Weightier
 
 function Weightier(L){
 	
-	InputLetter(L);
+	InputLetterAfter(L);
 	Letters.array=InflateNumbers(Letters.array.join("").toLowerCase()).toUpperCase().split("");
-	PlaceEndCaret();
+	Caret(Infinity);
 	return;}
 
 
@@ -995,7 +995,7 @@ function Symmetric(O){
 
 	
 	if(In("SYMMETRIC",O)){
-		InputLetter(O);
+		InputLetterAfter(O);
 	}
 }
 
@@ -1055,9 +1055,9 @@ function InversionSymmetric(O){
 function Topological(O){	
 	function InputBaseLetter(L){
 		if(In(["I"],HomeomorphicClass(L)))
-			InputLetter(L);
+			InputLetterAfter(L);
 		//else
-		//	InputLetter("I");
+		//	InputLetterAfter("I");
 	}
 
 	if(Letters.array.length===0){
@@ -1069,12 +1069,12 @@ function Topological(O){
 		var classL=HomeomorphicClass(L);
 		if(In(HomeomorphismRequirement[classO],classL)){
 			DeleteLetterAfter();
-			InputLetter(O);
+			InputLetterAfter(O);
 		}
 		else
 			InputBaseLetter(O);
 	}
-	PlaceEndCaret();
+	Caret(Infinity);
 }
 
 var Homeomorphism={
@@ -2450,50 +2450,49 @@ Keys(MajorChords).map(function(chord){
 ///////////////////////////////////////////////////////////////////////////////
 //Manage letters and carets
 
-function PlaceEndCaret(beginning){
-	if(!beginning)
-		Caret(Letters.array.length);
-	else
-		Caret(-1);
-}
-
-function PlaceAtCaret(beginning){
-	if(!beginning)
-		Caret(Letters.array.length-1);
-	else
-		Caret(0);
-}
-
-function Letters(letter,beginning,deleteletter){
+function Letters(array){
 	if(!Letters.array)
 		Letters.array=[];
-
-	if(!letter)
+	if(!array)
 		return Letters.array;
 	
-	if(!deleteletter){
-		if(!beginning){
-			Letters.array.push(letter);
-			Caret(Letters.array.length);
-		}
-		else{
-			Letters.array.unshift(letter);
-			Caret(-1);
-		}
-	}
-	else{
-		if(!beginning){
-			Letters.array.pop();
-			Caret(Letters.array.length);
-		}
-		else{
-			Letters.array.shift();
-			Caret(-1);
-		}
+	if(typeof array==="string")
+		return Letters.array=array.split("");
+	else
+		return Letters.array=array;
+}
+
+function Letter(position,letter){
+	Letters();
+	
+	if(typeof position==="string"||typeof position==="undefined")//default to end
+		var position=Letters.array.length+1;
+	
+	del=false;
+	if(!letter){//show or delete letter
+		position=Max(0,Min(Letters.array.length-1,position));
+		del=true;
 	}
 	
-	return Letters.array;
+	if(typeof letter==="undefined") //show
+		return Letters.array[position];
+
+	var letter=letter;
+
+	if(del)
+		return Letters.array=Delete(Letters.array,position);
+
+	position=Max(-1,Min(Letters.array.length,position));
+
+	if(position===-1)
+		Letters.array.unshift(letter);
+	else
+		Letters.array[position]=letter;
+
+	return letter;
 }
+
+
 
 function Caret(position){
 	if(!Caret.array)
@@ -2502,25 +2501,26 @@ function Caret(position){
 	if(typeof position==="undefined")
 		return Caret.array;
 
+	if(position==="Last")
+		var position=Letters().length-1;
+	if(position==="First")
+		var position=0;
+
 	if(IsArray(position))
 		Caret.array=position;
-	else
+	else{
+		var position=Max(-1,Min(position,Letters().length));
 		Caret.array=[position];	
+	}
 }
 
 function UnDrawCaret(){
-
 	Array.from(GetElement("#letters").children).filter(function(e){return e.innerHTML!==" "}).map(function(c){UnClass(c,"caret")});
-	
 	RemoveElement(".caret");
 }
 
 function DrawCaret(){
-	if(Caret().length<1)
-		var positions=[Letters().length];
-	else
-		var positions=Caret();
-	
+	var positions=Caret();
 	UnDrawCaret();
 	positions.map(DrawSingleCaret);	
 }
@@ -2536,7 +2536,7 @@ function DrawSingleCaret(p){
 
 function DrawLettersEndCaret(){
 	DrawLetters();
-	PlaceEndCaret();
+	Caret(Infinity);
 	DrawCaret();
 }
 
@@ -2639,20 +2639,24 @@ function UpdateLevelSecretly(){
 
 
 function InputLetterBefore(letter){
-	Letters(letter,true);
+	Letter(-1,letter);
+	Caret(-1);
 }
 
-function InputLetter(letter){
-	Letters(letter,false);
+function InputLetterAfter(letter){
+	Letter(Infinity,letter);
+	Caret(Infinity);
 }
 
 //Letters Delete
 function DeleteLetterBefore(){
-	Letters("any",true,true);
+	Letter(0,false);
+	Caret(-1);
 }
 
 function DeleteLetterAfter(){
-	Letters("any",false,true);
+	Letter(Infinity,false);
+	Caret(Infinity);
 }
 
 
@@ -2694,7 +2698,7 @@ function ObtainTitleScreenLoader(){
 	else
 		Letters.array="START".split("");
 	
-	PlaceEndCaret();
+	Caret(Infinity);
 	UpdateLevel();
 	
 };
