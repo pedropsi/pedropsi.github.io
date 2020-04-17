@@ -552,19 +552,18 @@ function Apart(L){
 	if(!Apart.last){
 		InputLetterAfter(L);
 		Apart.last=L;
+		Caret(0);
 		return;
 	}
 
-	var m=Caret()[0];
-	Letter(m,L);
+	var pre=Caret()[0];
+	Letter(pre,L);
 	
-	var n=m+LetterNumber(L)-LetterNumber(Apart.last);
-		n=Max(Min(n,Letters.array.length),-1);
-
+	var pos=Max(pre,0)+LetterNumber(L)-LetterNumber(Apart.last);
+	pos=Max(Min(pos,Letters.array.length),-1);
 	Apart.last=L;
-	
+	Caret(pos);
 	DrawLetters();
-	Caret(n);
 }
 
 function Nokia(N){
