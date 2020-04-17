@@ -765,23 +765,28 @@ function Deaf(L){
 		else
 			ForbidCaret();
 	}
-	
-	if(tempnotes.length-Count(tempnotes,"#*")===3){//3 notes
-		if(!In("ABCDEFG",L)&&Last(tempnotes)!=="#*")
-			AddSharp();
-		else{
-			var chord=tempnotes.map(PureLetter).join("");
-				chord=FixedPoint(IncrementNote,chord);
 
-			Letters.array=savednotes;
-			if(In(MajorChords,chord))
-				Letters.array.push(MajorChords[chord])
+	if(!In("ABCDEFG",L))
+		AddSharp();
+	else
+		InputLetterAfter(L+"*");
+		
+	var tempnotes=Letters.array.filter(function(n){return InPosfix(n,"*")});
+
+	if(tempnotes.length-Count(tempnotes,"#*")===3){//3 notes
+		var chord=tempnotes.map(PureLetter).join("");
+			chord=FixedPoint(IncrementNote,chord);
+
+		if(In(MajorChords,chord)){
+			Letters(savednotes);
+			InputLetterAfter(MajorChords[chord]);
 		}
-	}else{
-		if(!In("ABCDEFG",L))
-			AddSharp();
-		else
-			InputLetterAfter(L+"*");
+		else if(Last(tempnotes)==="#*"){
+			Letters(savednotes);
+		}
+	}
+	else if(tempnotes.length-Count(tempnotes,"#*")>3){//3 notes
+		Letters(savednotes);
 	}
 	Caret(Infinity);
 }
