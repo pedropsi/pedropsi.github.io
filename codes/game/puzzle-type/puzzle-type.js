@@ -458,7 +458,7 @@ var LevelActions={
 		function LetterDown(Z){
 			return NumberLetter(LetterNumber(Z)-1);
 		}
-		Letters.array=Letters.array.map(LetterDown);
+		Letters(Letters.array.map(LetterDown));
 		InputLetterAfter(L);
 	},
 /*	"Superior":function (L){
@@ -471,7 +471,7 @@ var LevelActions={
 	"Rotate":function (L){
 		InputLetterAfter(L);
 		if(Letters.array.length%2===0)
-			Letters.array=FlipArray(Letters.array);
+			Letters(FlipArray(Letters.array));
 	},
 	"Precedent":function (L){
 		function ConditionF(K){return K===NumberLetter(LetterNumber(L)-1);};
@@ -524,20 +524,20 @@ var LevelActions={
 			for(var i=offset;i<Letters.array.length;i=i+2){
 				LA.push(Letters.array[i]);
 			}
-			Letters.array=LA;
+			Letters(LA);
 		}
 		Caret(Infinity);		
 	},
 	"Shepherdess hence unladylike":function(L){
 		InputLetterAfter(L);
-		Letters.array=StringReplaceOnceRuleArray(Letters.array.join(""),GenderReplacementRules).split("");
+		Letters(StringReplaceOnceRuleArray(Letters.array.join(""),GenderReplacementRules));
 		Caret(Infinity);		
 	},
 	"Latent clones":Weightier,
 	"Nigeria":Nigeria,
 	"ひらがな":function(L){
 		InputLetterAfter(L);
-		Letters.array=StringReplaceRulesObject(Letters.array.join("").toLowerCase(),Hiragana).toUpperCase().split("");
+		Letters(StringReplaceRulesObject(Letters.array.join("").toLowerCase(),Hiragana));
 		Caret(Infinity);
 	},
 	"⠍⠕⠗⠎⠑":Morse,
@@ -648,7 +648,7 @@ function Nigeria(L){
 			else
 				var NEXTAREA=Countries[Min(Max(i+1,0),Countries.length-1)];
 				
-			Letters.array=NEXTAREA.split("");
+			Letters(NEXTAREA);
 			Nigeria.freeze=true;
 		}
 		
@@ -671,14 +671,14 @@ function Anagram(L){
 
 		if(In(Anagrams,anagr)&&!In(Anagram.used,anagr)){
 			var S=Anagrams[anagr].toUpperCase();
-			DeleteLetters(Anagram.partial.length);
+			DeleteLastLetters(Anagram.partial.length);
 			Anagram.partial="";
 			Anagram.used.push(anagr);
 			InputLetterAfter(S);
 		}
 		
 		if(anagr.length>4){
-			DeleteLetters(Anagram.partial.length);
+			DeleteLastLetters(Anagram.partial.length);
 			Anagram.partial="";
 			
 		}
@@ -698,13 +698,13 @@ function Nucleus(L){
 			Nucleus.partial.push(L);
 			if(In(Nuclei,nulow)){
 				var elem=Nuclei[nulow].toUpperCase();
-				DeleteLetters(nulow.length);
-				Letters.array=(Letters.array.join("")+elem).split("");
+				DeleteLastLetters(nulow.length);
+				Letters(Letters.array.join("")+elem);
 				Nucleus.partial=[];
 			}
 		}
 		else{
-			DeleteLetters(nulow.length-1);
+			DeleteLastLetters(nulow.length-1);
 			Nucleus.partial=[];
 		}
 	Caret(Infinity);
@@ -739,8 +739,7 @@ function Fuchsia(L){
 		}
 		else{
 			var hex=PureLetter(Letters.array.join(""));
-			var colour=NamedColour(hex);
-			Letters.array=colour.toUpperCase().split("");
+			Letters(NamedColour(hex));
 			
 			Caret(Infinity);
 			AddSingleElement("<style class='overcolour'>.letter{color:"+hex+";border-bottom-color:"+hex+"} .letter.caret{background:"+hex+" !important}</style>",'BODY','.overcolour');
@@ -791,17 +790,6 @@ function Deaf(L){
 	Caret(Infinity);
 }
 
-
-function DeleteLetters(n,beginning){
-	var i=1;
-	while(i<=n){
-		if(!beginning)
-			Letters.array.pop();
-		else
-			Letters.array=Letters.array.unshift();
-		i++;
-	}
-}
 
 function Direct(L){
 		InputLetterAfter(L);
@@ -902,7 +890,7 @@ function Dividi(L){
 		var last=Last(Letters.array);
 		var q=Quotient(UnRoman(last),2);
 		Letters.array.pop();
-		Letters.array=(Letters.array.join("")+Roman(q)).split("");
+		Letters(Letters.array.join("")+Roman(q));
 	}
 	
 	if(!In(uniNumerals,L))
@@ -918,7 +906,7 @@ function Dividi(L){
 function Weightier(L){
 	
 	InputLetterAfter(L);
-	Letters.array=InflateNumbers(Letters.array.join("").toLowerCase()).toUpperCase().split("");
+	Letters(InflateNumbers(Letters.array.join("").toLowerCase()));
 	Caret(Infinity);
 	return;}
 
@@ -2485,9 +2473,9 @@ function Letters(array){
 		return Letters.array;
 	
 	if(typeof array==="string")
-		return Letters.array=array.split("");
+		return Letters.array=array.toUpperCase().split("");
 	else
-		return Letters.array=array;
+		return Letters.array=array.map(function(l){return l.toUpperCase()});
 }
 
 function Letter(position,letter){
@@ -2520,7 +2508,13 @@ function Letter(position,letter){
 	return letter;
 }
 
-
+function DeleteLastLetters(n){
+	var i=1;
+	while(i<=n){
+		Letters.array.pop();
+		i++;
+	}
+}
 
 function Caret(position){
 	if(!Caret.array)
@@ -2645,7 +2639,7 @@ function CaretHTML(){
 
 
 function ClearLetters(){
-	Letters.array=[];
+	Letters([]);
 	Caret(0);
 	UpdateLevel();
 }
@@ -2722,9 +2716,9 @@ function ObtainTitleScreenLoader(){
 	ReplaceChildren("Puzzle Type",".title");
 	//ReplaceChildren("by Pedro PSI (2019)",".credits");
 	if(CurLevelNumber()>1||SolvedLevels().length>0)
-		Letters.array="CONTINUE".split("");
+		Letters("CONTINUE");
 	else
-		Letters.array="START".split("");
+		Letters("START");
 	
 	Caret(Infinity);
 	UpdateLevel();
@@ -2781,7 +2775,7 @@ function SaveLevelState(){
 }
 
 function LoadLevelState(levelstate){
-	Letters.array=Clone(levelstate['letters']);
+	Letters(Clone(levelstate['letters']));
 	Caret(levelstate['caret']);
 	Second.n=levelstate['Second'];
 	Consonant.before=levelstate['Consonant'];
