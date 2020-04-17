@@ -7,6 +7,8 @@
 /*
 // Level Ideas todo, maybe
 --GENETIC. - use codons to generate aminoacids, full stop is the stop codon
+--CARDS. 0123456789 KJQA
+--ARROWS/WASD
 --CALCULATOR SPEAK 1I 2Z 3E 5S 7T 8B 0O
 --GREEK OR PHONETIC ALPHABET
 --INFINITY (GO DOWN INSIDE AND INSIDE AND INSIDE....)
@@ -609,9 +611,21 @@ function Nigeria(L){
 			return string.replace(/\s*/g,"").replace(/^THE/,"").replace(/^REPUBLICOF/,"").replace(/^KINGDOMOF/,"").replace(/^THE/,"");
 		}
 
-		var i=Countries.map(UnSpace).indexOf(UnSpace(PureLetter(Letters.array.join(""))))+1;
-		if(i>0){
-			Letters.array=Countries[Min(Max(i,0),Countries.length-1)].split("");
+		var AREA=UnSpace(PureLetter(Letters.array.join("")));
+		
+		var c=Capitals.map(UnSpace).indexOf(AREA);
+		var i=Countries.map(UnSpace).indexOf(AREA);
+		console.log(c,i);
+
+		var city=(c>=0)&&!(i>=0);// Is it a city and not a country?
+	
+		if(i>=0||c>=0){
+			if(city)
+				var NEXTAREA=Capitals[Min(Max(c+1,0),Capitals.length-1)];
+			else
+				var NEXTAREA=Countries[Min(Max(i+1,0),Countries.length-1)];
+				
+			Letters.array=NEXTAREA.split("");
 			Nigeria.freeze=true;
 		}
 		
@@ -1632,7 +1646,7 @@ var Countries=[
 "Kiribati",
 "Singapore",
 "Gabon",
-"Sao Tome e Principe",
+"São Tomé e Príncipe",
 "Uganda",
 "Ecuador",
 "Nauru",
@@ -1675,8 +1689,310 @@ var Countries=[
 "Australia",
 "New Zealand"
 ];
+//SINGAPORE CASE, VATICAN
+CountrySimplifications={
+	"á":"a","é":"e","í":"i","ó":"o","ú":"u",
+	"-":" ",",":" ",".":" ","'":" ",
+	"ş":"s","ă":"a","ã":"a"
+}
 
-Countries=Countries.map(function(c){return c.replace(/[\s\-]+/g," ").toUpperCase()});
+CountryCitySynonyms={
+	"Eswatini":"Swaziland",
+	"Sahrawi Arab Democratic Republic":"Western Sahara",
+	"Nur-Sultan":"Astana",
+	"East Timor":"Timor-Leste",
+	"São Tomé and Príncipe":"São Tomé e Príncipe"
+}
+
+MapObject(CountrySimplifications,function(v,k,o){
+	delete o[k];
+	o[k.toUpperCase()]=v.toUpperCase();
+})
+
+function CountrySimpler(name){
+	return StringReplaceRulesObject(name.toUpperCase(),CountrySimplifications).replace(/\s+/g," ");
+};
+
+MapObject(CountryCitySynonyms,function(v,k,o){
+	delete o[k];
+	o[CountrySimpler(k)]=CountrySimpler(v);
+})
+
+function CountrySimple(name){
+	return StringReplaceRulesObject(CountrySimpler(name),CountryCitySynonyms).replace(/\s+/g," ");
+};
+
+Countries=Countries.map(CountrySimple);
+
+var CapitalCountry={
+//"King Edward Point":"South Georgia and the South Sandwich Islands",
+//"Stanley":"Falkland Islands",
+"Wellington":"New Zealand",
+//"Edinburgh of the Seven Seas":"Tristan da Cunha",
+"Canberra":"Australia",
+"Montevideo":"Uruguay",
+"Buenos Aires":"Argentina",
+"Cape Town":"South Africa",
+"Santiago":"Chile",
+//"Valparaíso":"Chile",
+"Maseru":"Lesotho",
+//"Bloemfontein":"South Africa",
+//"Kingston":"Norfolk Island",
+//"Hanga Roa":"Easter Island",
+"Lobamba":"Eswatini",
+//"Mbabane":"Eswatini",
+"Maputo":"Mozambique",
+//"Pretoria":"South Africa",
+"Asunción":"Paraguay",
+//"Adamstown":"Pitcairn Islands",
+"Gaborone":"Botswana",
+"Windhoek":"Namibia",
+//"Nouméa":"New Caledonia",
+//"Avarua":"Cook Islands",
+"Nuku'alofa":"Tonga",
+"Port Louis":"Mauritius",
+//"Alofi":"Niue",
+"Antananarivo":"Madagascar",
+"Suva":"Fiji",
+"Harare":"Zimbabwe",
+"Port Vila":"Vanuatu",
+//"Papeete":"French Polynesia",
+//"Sucre":"Bolivia",
+"La Paz":"Bolivia",
+//"Jamestown":"Saint Helena",
+"Brasília":"Brazil",
+"Lusaka":"Zambia",
+//"Pago Pago":"American Samoa",
+"Lilongwe":"Malawi",
+"Apia":"Samoa",
+//"Mata-Utu":"Wallis and Futuna",
+//"West Island":"Cocos (Keeling) Islands",
+"Lima":"Peru",
+"Moroni":"Comoros",
+//"Flying Fish Cove":"Christmas Island",
+"Port Moresby":"Papua New Guinea",
+"Honiara":"Solomon Islands",
+"Luanda":"Angola",
+"Dili":"Timor-Leste",
+"Funafuti":"Tuvalu",
+//"Georgetown":"Ascension Island",
+"Jakarta":"Indonesia",
+"Dodoma":"Tanzania",
+//"Dar es Salaam":"Tanzania",
+"Victoria":"Seychelles",
+"Kinshasa":"Democratic Republic of the Congo",
+"Brazzaville":"Republic of the Congo",
+"Gitega":"Burundi",
+"Kigali":"Rwanda",
+"Nairobi":"Kenya",
+"Yaren":"Nauru",
+"Quito":"Ecuador",
+"Kampala":"Uganda",
+"São Tomé":"São Tomé and Príncipe",
+"Libreville":"Gabon",
+"Singapore":"Singapore",
+"Tarawa":"Kiribati",
+"Mogadishu":"Somalia",
+"Kuala Lumpur":"Malaysia",
+"Putrajaya":"Malaysia",
+"Malabo":"Equatorial Guinea",
+"Yaoundé":"Cameroon",
+"Malé":"Maldives",
+"Bangui":"Central African Republic",
+"Bogotá":"Colombia",
+"Juba":"South Sudan",
+"Bandar Seri Begawan":"Brunei",
+//"Cayenne":"French Guiana",
+"Accra":"Ghana",
+"Paramaribo":"Suriname",
+"Lomé":"Togo",
+"Monrovia":"Liberia",
+"Porto-Novo":"Benin",
+//"Cotonou":"Benin",
+"Georgetown":"Guyana",
+"Yamoussoukro":"Ivory Coast",
+//"Abidjan":"Ivory Coast",
+"Sri Jayawardenepura Kotte":"Sri Lanka",
+//"Colombo":"Sri Lanka",
+"Palikir":"Federated States of Micronesia",
+"Majuro":"Marshall Islands",
+"Ngerulmud":"Palau",
+"Freetown":"Sierra Leone",
+"Panama City":"Panama",
+"Addis Ababa":"Ethiopia",
+"Abuja":"Nigeria",
+"Conakry":"Guinea",
+"San José":"Costa Rica",
+//"Hargeisa":"Somaliland",
+"Caracas":"Venezuela",
+"Port of Spain":"Trinidad and Tobago",
+"Phnom Penh":"Cambodia",
+"Djibouti":"Djibouti",
+"Bissau":"Guinea-Bissau",
+"St. George's":"Grenada",
+"N'Djamena":"Chad",
+//"Willemstad":"Curaçao",
+"Managua":"Nicaragua",
+"Ouagadougou":"Burkina Faso",
+//"Oranjestad":"Aruba",
+"Bamako":"Mali",
+"Bridgetown":"Barbados",
+"Kingstown":"Saint Vincent and the Grenadines",
+"Banjul":"Gambia",
+//"Hagåtña":"Guam",
+"Niamey":"Niger",
+"San Salvador":"El Salvador",
+"Bangkok":"Thailand",
+"Castries":"Saint Lucia",
+"Tegucigalpa":"Honduras",
+"Manila":"Philippines",
+"Guatemala City":"Guatemala",
+"Dakar":"Senegal",
+"Praia":"Cape Verde",
+//"Saipan":"Northern Mariana Islands",
+"Roseau":"Dominica",
+"Sana'a":"Yemen",
+"Asmara":"Eritrea",
+"Khartoum":"Sudan",
+//"Plymouth":"Montserrat",
+//"Brades Estate":"Montserrat",
+"St. John's":"Antigua and Barbuda",
+"Belmopan":"Belize",
+"Basseterre":"Saint Kitts and Nevis",
+//"Gustavia":"Saint Barthélemy",
+"Vientiane":"Laos",
+"Kingston":"Jamaica",
+//"Philipsburg":"Sint Maarten",
+//"Marigot":"Saint Martin",
+"Nouakchott":"Mauritania",
+"The Valley":"Anguilla",
+//"Charlotte Amalie":"United States Virgin Islands",
+//"Road Town":"British Virgin Islands",
+//"San Juan":"Puerto Rico",
+"Santo Domingo":"Dominican Republic",
+"Port-au-Prince":"Haiti",
+//"George Town":"Cayman Islands",
+"Mexico City":"Mexico",
+"Naypyidaw":"Myanmar",
+"Hanoi":"Vietnam",
+"Havana":"Cuba",
+"Muscat":"Oman",
+"Dhaka":"Bangladesh",
+"Abu Dhabi":"United Arab Emirates",
+"Riyadh":"Saudi Arabia",
+//"Taipei":"Taiwan",
+"Nassau":"Bahamas",
+"Doha":"Qatar",
+"Manama":"Bahrain",
+//"El Aaiún":"Sahrawi Arab Democratic Republic",
+"Thimphu":"Bhutan",
+"Kathmandu":"Nepal",
+"New Delhi":"India",
+"Kuwait City":"Kuwait",
+"Cairo":"Egypt",
+"Jerusalem":"Israel",
+"Amman":"Jordan",
+//"Hamilton":"Bermuda",
+"Tripoli":"Libya",
+"Baghdad":"Iraq",
+"Damascus":"Syria",
+"Islamabad":"Pakistan",
+"Beirut":"Lebanon",
+"Rabat":"Morocco",
+"Kabul":"Afghanistan",
+//"Episkopi Cantonment":"Akrotiri and Dhekelia",
+"Nicosia":"Cyprus",
+//"Nicosia":"Northern Cyprus",
+"Tehran":"Iran",
+"Tokyo":"Japan",
+"Valletta":"Malta",
+//"Gibraltar":"Gibraltar",
+"Algiers":"Algeria",
+"Tunis":"Tunisia",
+"Seoul":"South Korea",
+"Ashgabat":"Turkmenistan",
+"Athens":"Greece",
+"Dushanbe":"Tajikistan",
+"Lisbon":"Portugal",
+"Washington, D.C.":"United States",
+"Pyongyang":"North Korea",
+//"Stepanakert":"Nagorno-Karabakh Republic",
+"Ankara":"Turkey",
+"Beijing":"China",
+"Yerevan":"Armenia",
+"Madrid":"Spain",
+"Baku":"Azerbaijan",
+"Tashkent":"Uzbekistan",
+"Tirana":"Albania",
+"Tbilisi":"Georgia",
+"Vatican City":"Vatican City",
+"Rome":"Italy",
+"Skopje":"North Macedonia",
+//"Tskhinvali":"South Ossetia",
+//"Kutaisi":"Georgia",
+"Podgorica":"Montenegro",
+//"Cetinje":"Montenegro",
+"Andorra la Vella":"Andorra",
+"Pristina":"Kosovo",
+"Sofia":"Bulgaria",
+"Bishkek":"Kyrgyzstan",
+//"Sukhumi":"Abkhazia",
+"Monaco":"Monaco",
+"Sarajevo":"Bosnia and Herzegovina",
+"San Marino":"San Marino",
+"Bucharest":"Romania",
+"Belgrade":"Serbia",
+"Ottawa":"Canada",
+"Zagreb":"Croatia",
+"Ljubljana":"Slovenia",
+//"St. Pierre":"Saint Pierre and Miquelon",
+//"Tiraspol":"Transnistria",
+"Bern":"Switzerland",
+"Chişinău":"Moldova",
+"Vaduz":"Liechtenstein",
+"Budapest":"Hungary",
+"Ulan Bator":"Mongolia",
+"Bratislava":"Slovakia",
+"Vienna":"Austria",
+"Paris":"France",
+//"St. Helier":"Jersey",
+//"St. Peter Port":"Guernsey",
+"Luxembourg":"Luxembourg",
+"Prague":"Czech Republic",
+"Kiev":"Ukraine",
+"Brussels":"Belgium",
+"Nur-Sultan":"Kazakhstan",
+//"Cardiff":"Wales",
+"London":"United Kingdom",//England 
+"Warsaw":"Poland",
+"Amsterdam":"Netherlands",
+"Berlin":"Germany",
+"Dublin":"Ireland",
+"Minsk":"Belarus",
+//"Douglas":"Isle of Man",
+//"Belfast":"Northern Ireland",
+"Vilnius":"Lithuania",
+"Copenhagen":"Denmark",
+"Moscow":"Russia",
+//"Edinburgh":"Scotland",
+"Riga":"Latvia",
+"Stockholm":"Sweden",
+"Tallinn":"Estonia",
+"Oslo":"Norway",
+"Helsinki":"Finland",
+//"Tórshavn":"Faroe Islands",
+"Reykjavík":"Iceland"
+//"Nuuk":"Greenland",
+//"Longyearbyen":"Svalbard"
+}
+
+CapitalCountry=MapObject(CapitalCountry,function(v,k,o){
+	delete o[k];
+	o[CountrySimple(k)]=CountrySimple(v);
+})
+
+var CountryCapital=FlipKeysValues(CapitalCountry);
+var Capitals=Countries.map(function(c){return CountryCapital[c]});//Preserve ordering
 
 var Hiragana={
 'a':'あ',
