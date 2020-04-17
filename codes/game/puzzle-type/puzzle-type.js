@@ -349,7 +349,7 @@ function ForbidNumberActions(key){
 		"Follow",
 		"Rotate",
 		"Fillet",
-		"Symmetric",
+		"Symmetries",
 		"Topological",
 		"Nokia 1998",
 		"Fuchsia",
@@ -404,7 +404,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Tangles",				//Alphabetical, Cyclic, Arithmethic, Proactive
 	"Difference",				//Positional, Alphabetical, Arithmethic, Proactive
 
-	"Symmetric",			//Shape, Retroactive
+	"Symmetries",			//Shape, Retroactive
 	"Fillet",				//Shape, Proactive 
 	"Topological",			//Shape, Growth, Monoactive
 
@@ -480,7 +480,7 @@ var LevelActions={
 		if(!m)
 			InputLetterAfter(L);
 	},
-	"Symmetric":Symmetric,
+	"Symmetries":Symmetries,
 	"Fillet":Fillet,
 	"Topological":Topological,
 	"Dvorak":function (P){
@@ -997,21 +997,43 @@ var FilletWholes=FlipKeysValues(FilletHalves);
 
 //Symmetric
 
-function Symmetric(O){	
-	if(HorizontalSymmetric(O))
-		ModifyLetters(ToggleHorizontal);
-	
-	if(VerticalSymmetric(O))
-		ModifyLetters(ToggleVertical);
-	
-	if(InversionSymmetric(O))
-		ModifyLetters(ToggleInversion);
+function Symmetries(O){
+	if(typeof Symmetries.direction==="undefined")
+		Symmetries.direction=true;
 
-	
-	if(In("SYMMETRIC",O)){
-		InputLetterAfter(O);
+	if(In("SYMMETRIES",O)){
+		if(Symmetries.direction)
+			InputLetterAfter(O);
+		else
+			InputLetterBefore(O);
 	}
+
+	if(InversionSymmetric(O)){
+		ModifyLetters(ToggleInversion);
+		Letters.array=Letters.array.reverse();
+		Symmetries.direction=!Symmetries.direction;
+		if(Symmetries.direction)
+			Caret(Infinity);
+		else
+			Caret(-1);
+	}
+	else if(HorizontalSymmetric(O)){
+		ModifyLetters(ToggleHorizontal);
+		Letters.array=Letters.array.reverse();
+		
+		Symmetries.direction=!Symmetries.direction;
+		if(Symmetries.direction)
+			Caret(Infinity);
+		else
+			Caret(-1);
+	}
+	else if(VerticalSymmetric(O)){
+		ModifyLetters(ToggleVertical);
+	}
+	
 }
+
+
 
 function PureLetter(O){
 	return O.replace(/\-/g,"").replace(/\|/g,"").replace(/\*/g,"").replace(/\%/g,"");
@@ -2569,7 +2591,7 @@ function LetterPureHTML(L,cla){
 
 var LetterDisplay={
 	"Tangles":LetterDraftHTML,
-	"Symmetric":function(L){
+	"Symmetries":function(L){
 		
 		var simclass="";
 		if(VerticalSymmetric(L))
@@ -2778,6 +2800,7 @@ function LoadLevelState(levelstate){
 	Second.n=levelstate['Second'];
 	Consonant.before=levelstate['Consonant'];
 	Difference.last=levelstate['Difference'];
+	Symmetries.direction=levelstate['Symmetries'];
 	Fillet.position=levelstate['Fillet'];
 	Nucleus.partial=levelstate['Nucleus'];
 	Anagram.partial=First(levelstate['Anagram']);
@@ -2811,6 +2834,7 @@ function LevelZeroState(){
 		'Second':0,
 		'Consonant':false,
 		'Difference':"",
+		'Symmetries':true,
 		'Fillet':0,
 		'Anagram':[""],
 		'Nucleus':[],
@@ -2829,6 +2853,7 @@ function LevelState(){
 		'Second':Second.n?Second.n:0,
 		'Consonant':Consonant.before?Consonant.before:false,
 		'Difference':Difference.last?Difference.last:"",
+		'Symmetries':(typeof Symmetries.direction!=="undefined")?Symmetries.direction:true,
 		'Fillet':Fillet.position?Fillet.position:0,
 		'Nucleus':Nucleus.partial?Clone(Nucleus.partial):[],
 		'Anagram':[Anagram.partial?Anagram.partial:""].concat(Anagram.used?Anagram.used:[]),
