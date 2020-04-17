@@ -402,7 +402,7 @@ var LevelGoals=[			//Required types of thinking:
 	//"Superior",				//Alphabetical, Monoactive
 	"Precedent",			//Alphabetical, Retroactive
 	"Tangles",				//Alphabetical, Cyclic, Arithmethic, Proactive
-	"Apart",				//Positional, Alphabetical, Arithmethic, Proactive
+	"Difference",				//Positional, Alphabetical, Arithmethic, Proactive
 
 	"Symmetric",			//Shape, Retroactive
 	"Fillet",				//Shape, Proactive 
@@ -466,7 +466,7 @@ var LevelActions={
 			DeleteLetterAfter();
 		InputLetterAfter(L);
 	},*/
-	"Apart":Apart,
+	"Difference":Difference,
 	"Nokia 1998":Nokia,
 	"Rotate":function (L){
 		InputLetterAfter(L);
@@ -547,11 +547,11 @@ var LevelActions={
 	"Nucleus":Nucleus
 }
 
-function Apart(L){
+function Difference(L){
 
-	if(!Apart.last){
+	if(!Difference.last){
 		InputLetterAfter(L);
-		Apart.last=L;
+		Difference.last=L;
 		Caret(0);
 		return;
 	}
@@ -559,9 +559,9 @@ function Apart(L){
 	var pre=Caret()[0];
 	Letter(pre,L);
 	
-	var pos=Max(pre,0)+LetterNumber(L)-LetterNumber(Apart.last);
+	var pos=Max(pre,0)+LetterNumber(L)-LetterNumber(Difference.last);
 	pos=Max(Min(pos,Letters.array.length),-1);
-	Apart.last=L;
+	Difference.last=L;
 	Caret(pos);
 	DrawLetters();
 }
@@ -2777,7 +2777,7 @@ function LoadLevelState(levelstate){
 	Caret(levelstate['caret']);
 	Second.n=levelstate['Second'];
 	Consonant.before=levelstate['Consonant'];
-	Apart.last=levelstate['Apart'];
+	Difference.last=levelstate['Difference'];
 	Fillet.position=levelstate['Fillet'];
 	Nucleus.partial=levelstate['Nucleus'];
 	Anagram.partial=First(levelstate['Anagram']);
@@ -2810,7 +2810,7 @@ function LevelZeroState(){
 		'caret':0,
 		'Second':0,
 		'Consonant':false,
-		'Apart':"",
+		'Difference':"",
 		'Fillet':0,
 		'Anagram':[""],
 		'Nucleus':[],
@@ -2828,7 +2828,7 @@ function LevelState(){
 		'caret':Caret(),
 		'Second':Second.n?Second.n:0,
 		'Consonant':Consonant.before?Consonant.before:false,
-		'Apart':Apart.last?Apart.last:"",
+		'Difference':Difference.last?Difference.last:"",
 		'Fillet':Fillet.position?Fillet.position:0,
 		'Nucleus':Nucleus.partial?Clone(Nucleus.partial):[],
 		'Anagram':[Anagram.partial?Anagram.partial:""].concat(Anagram.used?Anagram.used:[]),
