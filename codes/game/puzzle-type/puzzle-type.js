@@ -8,7 +8,6 @@
 // Level Ideas todo, maybe
 --GENETIC. - use codons to generate aminoacids, full stop is the stop codon
 --CARDS. 0123456789 KJQA
---ARROWS/WASD
 --CALCULATOR SPEAK 1I 2Z 3E 5S 7T 8B 0O
 --GREEK OR PHONETIC ALPHABET
 --INFINITY (GO DOWN INSIDE AND INSIDE AND INSIDE....)
@@ -402,7 +401,7 @@ var LevelGoals=[			//Required types of thinking:
 	//"Superior",				//Alphabetical, Monoactive
 	"Precedent",			//Alphabetical, Retroactive
 	"Tangles",				//Alphabetical, Cyclic, Arithmethic, Proactive
-	"Difference",				//Positional, Alphabetical, Arithmethic, Proactive
+	"Difference",				//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
 
 	"Symmetries",			//Shape, Retroactive
 	"Fillet",				//Shape, Proactive 
@@ -424,7 +423,9 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Odd",					//Keyword, Positional, Retroactive, Subtractive
 	"Dividi",				// Mapping, Arithmethic, Retroactive
-	"⠍⠕⠗⠎⠑"				//Encoding, Mapping, Once
+	"⠍⠕⠗⠎⠑",				//Encoding, Mapping, Once
+
+	"DAWNS"					//Emulation
 ];
 
 
@@ -544,8 +545,59 @@ var LevelActions={
 	"Fuchsia":Fuchsia,
 	"Deaf":Deaf,
 	"Anagram":Anagram,
-	"Nucleus":Nucleus
+	"Nucleus":Nucleus,
+	"DAWNS":DAWNS
 }
+
+function DAWNS(W){
+	if(!In("WASD",W)){
+		ForbidCaret();
+		return;
+	}
+
+	if(!DAWNS.level)
+		DAWNS.level=LevelZeroState('DAWNS');
+
+	if(W==="W")
+		DAWNS.level=EmulateUp(DAWNS.level);
+	if(W==="A")
+		DAWNS.level=EmulateLeft(DAWNS.level);
+	if(W==="S")
+		DAWNS.level=EmulateDown(DAWNS.level);
+	if(W==="D")
+		DAWNS.level=EmulateRight(DAWNS.level);
+	
+	var line=EmulateLine(DAWNS.level);
+	Letters(line.replace(/\./g," ").replace(/#/g,""));
+	Caret(line.replace(/#/g,"").indexOf("N"));
+}
+function EmulatePushRight(levelline){
+	return levelline.replace(/(N[WASD]*)\.(\.*)/g,".$1$2");//All sokobaning happens here
+}
+function EmulateRight(levelstring){
+	return EmulatePushRight(levelstring);	
+}
+function EmulateLeft(levelstring){
+	return Invert(EmulatePushRight(Invert(levelstring)));	
+}
+function EmulateDown(levelstring){
+	return EmulateVertical(levelstring,true);
+}
+function EmulateUp(levelstring){
+	return EmulateVertical(levelstring,false);
+}
+function EmulateVertical(levelstring,down){
+	var down=!!down;
+	var levelstring=RotateString(levelstring,down);
+	levelstring=EmulatePushRight(levelstring);
+	levelstring=RotateString(levelstring,!down);
+	return levelstring;
+}
+function EmulateLine(levelstring){
+	var lines=levelstring.split("\n");
+	return lines.filter(function(line){return In(line,"N")})[0];//Returns the line where the player is
+}
+
 
 function Difference(L){
 
@@ -2810,6 +2862,7 @@ function LoadLevelState(levelstate){
 	Nokia.last=levelstate['Nokia 1998'][0];
 	Nokia.eventF=levelstate['Nokia 1998'][1];Nokia.eventF();//timed caret event
 	Morse.used=levelstate['⠍⠕⠗⠎⠑'];
+	DAWNS.level=levelstate['DAWNS'];
 
 	UpdateLevelSecretly();
 }
@@ -2842,8 +2895,17 @@ function LevelZeroState(level){
 		'Fuchsia':false,
 		'Nokia 1998':[false,Identity],
 		'⠍⠕⠗⠎⠑':[],
+		'DAWNS':`#####....S
+				##.A......
+				........D.
+				.....W..##
+				.....#####
+				N#########`.replace(/\t*/g,"")
 	};
-	return state;
+	if(!level)
+		return state;
+	else
+		return state[level];
 }
 
 function LevelState(){
@@ -2860,7 +2922,8 @@ function LevelState(){
 		'Nigeria':Nigeria.freeze?Nigeria.freeze:false,
 		'Fuchsia':Fuchsia.colour?Fuchsia.colour:false,
 		'Nokia 1998':[Nokia.last?Nokia.last:false,Nokia.eventF?Nokia.eventF:Identity],
-		'⠍⠕⠗⠎⠑':Morse.used?Morse.used:[]
+		'⠍⠕⠗⠎⠑':Morse.used?Morse.used:[],
+		'DAWNS':DAWNS.level?DAWNS.level:LevelZeroState('DAWNS')
 	};
 	return state;
 }
