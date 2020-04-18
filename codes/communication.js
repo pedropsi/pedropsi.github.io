@@ -268,28 +268,6 @@ function TableLength(idSel){
 		return "quite a good number of";
 }
 
-//Filter
-
-function FilterSearchURL(tableSelector){
-	var search=PageSearch("search");
-	if(search!==""&&GetElements("TABLE").length===1){
-		TextFilterChildren(search,tableSelector,"TR","TBODY");
-		GetElement("INPUT").value=search;
-	}
-}
-
-function InputFilter(parentSelector,filterselector,childrenSelector,subparentSelector){
-	var textfilter=GetElement(filterselector).value;
-	var parentSelector=GetElement(parentSelector);
-	TextFilterChildren(textfilter,parentSelector,childrenSelector,subparentSelector);
-}
-
-function FilterableTable(tableSelector){
-	if(GetElements("TR",tableSelector).length>10){//Only big tables need filtering
-		PrependFilterInput(InputFilter,tableSelector,"TR","TBODY");
-		FilterSearchURL(tableSelector);
-	}
-}
 
 // Dynamic Tables
 
@@ -302,6 +280,7 @@ function DynamicTables(){
 	var tables=GetElements("TABLE");
 	if(tables.length>0)
 		tables.map(DynamicTable);
+	setTimeout(FilterSearchURL,200);
 }
 
 ListenOnce('load',DynamicTables);

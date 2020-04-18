@@ -201,6 +201,10 @@ function IsNode(node){
 	return typeof node==="object"&&node.isEqualNode;
 }
 
+function IsNan(nan){
+	return (typeof nan==="number")&&!(nan<0)&&!(nan===0)&&!(nan>0);
+}
+
 //Apply function to Array or Object
 function Apply(arrayOrObj,F){
 	if(IsArray(arrayOrObj))
@@ -814,6 +818,14 @@ function PageUnTag(url){
 	else{
 		var tag="#"+PageTag(url);
 		return UnPosfix(url,tag);
+	}
+}
+
+function PageUnSearch(url){
+	if(typeof url==="undefined")
+		return PageUnSearch(PageURL());
+	else{
+		return PageUnTag(url).replace(/\?.*/g,"");
 	}
 }
 
@@ -1814,16 +1826,33 @@ function FirstParentElement(targetIDsel){
 }
 
 // Get Parent Element matching particular sleector
+
+function FirstMatchingElement(type,targetE,priorIDselString){
+	var e=GetElement(targetE);
+	if(!priorIDselString)
+		return e[type];
+	
+	var match=Match(e,priorIDselString);
+	while(e&&e[type]&&!match){
+		e=e[type];
+		match=Match(e,priorIDselString);
+	}	
+
+	return match?e:undefined;
+}
+
 function ParentElement(targetIDsel,parentIDselString){
 	if(!parentIDselString)
 		return FirstParentElement(targetIDsel);
-	var e=GetElement(targetIDsel);
-	var match=Match(e,parentIDselString);
-	while(e&&e.parentElement&&!match){
-		e=e.parentElement;
-		match=Match(e,parentIDselString);
-	}
-	return match?e:undefined;
+	FirstMatchingElement("parentElement",targetIDsel,parentIDselString);
+}
+
+function PriorElement(targetE,priorIDselString){
+	return FirstMatchingElement("previousSibling",targetE,priorIDselString);
+}
+
+function PosteriorElement(targetE,priorIDselString){
+	return FirstMatchingElement("nextSibling",targetE,priorIDselString)
 }
 
 // Add new element to page, under a parent element
@@ -1957,7 +1986,7 @@ function ApplyOriginalChildren(F,parentSelector,childselector,subparentSelector)
 }
 
 //////////////////////////////////////////////////
-// Filter
+// Filter table
 
 function FilterChildren(filterF,parentSelector,childSelector,subparentSelector){
 	function FilterCh(children){
@@ -1981,20 +2010,69 @@ function TextFilterChildren(patterntxt,parentSelector,childSelector,subparentSel
 }
 
 function PrependFilterInput(InputFilterF,parentSelector,childrenSelector,subparentSelector){
+	var input=PriorElement(parentSelector,"INPUT");
+	RemoveElement(input);
+
 	var uid=UniqueId(parentSelector);
-	RemoveElement("INPUT",ParentElement(parentSelector,"DIV"));//Removes any previous inputs
 	filterHTML="<input class='input filter filter-"+uid+"' placeholder='search Ϙ' onkeyup='"+FunctionName(InputFilterF)+"(\""+uid+"\",\".filter-"+uid+"\",\""+childrenSelector+"\",\""+subparentSelector+"\")'></input>";
 	PrependElement(filterHTML,parentSelector);
-	//Shout("FillInput");
 }
 
-function AddShareSearch(patterntxt,elementSelector){
-	var parentElement=ParentElement(GetElement(elementSelector),"DIV");
-	var id=1;
-	var shareLink=PageUnTag()+"?"+"search="+LowerSimpleString(patterntxt)+"&table="+id;
-	RemoveElement(".share-link",parentElement);
+function AddShareSearch(patterntxt,elementSelector){	
+	var tableid="";
+	var tables=GetElements("TABLE");
+	if(tables.length>1){
+		tableid=tables.indexOf(elementSelector);
+		tableid="&table="+tableid;
+	}
+
+	var shareLink=PageUnSearch()+"?search="+LowerSimpleString(patterntxt)+tableid;
+	RemoveElement(PosteriorElement(elementSelector,".share-link"));
 	AppendElement("<div class='share-link'><b>Share this search:</b>"+AHTML(shareLink,shareLink)+"</div>",elementSelector);
 }
+
+// Recognise filter table
+
+function FilterSearchURL(){
+	var search=PageSearch("search");
+	if(search==="")
+		return;
+	
+	var table;
+
+	var tableid=PageSearch("table");
+	if(tableid==="")									//Get the first table
+		table=GetElement("TABLE");
+	else if(!IsNan(Number(tableid))){ 					//Or the nth table
+		tableid=Number(tableid);
+		table=GetElements("TABLE")[tableid];
+		table=table||GetElement("TABLE");
+	}
+	else{												//Or the one specified by an id, if avaiable
+		table=GetElement(tableid);
+		table=table||GetElement("TABLE");
+	}
+
+	if(table){
+		TextFilterChildren(search,table,"TR","TBODY");
+		var input=PriorElement(table,"INPUT");
+		if(input)
+			input.value=search;
+	}
+}
+
+function InputFilter(parentSelector,filterSelector,childrenSelector,subparentSelector){
+	var textfilter=GetElement(filterSelector).value;
+	var parentSelector=GetElement(parentSelector);
+	TextFilterChildren(textfilter,parentSelector,childrenSelector,subparentSelector);
+}
+
+function FilterableTable(tableSelector){
+	if(GetElements("TR",tableSelector).length>10){//Only big tables need filtering
+		PrependFilterInput(InputFilter,tableSelector,"TR","TBODY");
+	}
+}
+
 
 //////////////////////////////////////////////////
 // Scroll into
