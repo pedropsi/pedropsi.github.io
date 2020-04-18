@@ -378,10 +378,10 @@ function ForbidSpaceActions(key){
 }
 
 function AllowExtraUndoKey(key){
-	return CurLevelName()==="DAWNS"&&key==="Z";
+	return CurLevelName()==="Wasd"&&key==="Z";
 }
 function AllowExtraRestartKey(key){
-	return CurLevelName()==="DAWNS"&&key==="R";
+	return CurLevelName()==="Wasd"&&key==="R";
 }
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -436,7 +436,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Dividi",				// Mapping, Arithmethic, Retroactive
 	"⠍⠕⠗⠎⠑",				//Encoding, Mapping, Once
 
-	"DAWNS"					//Emulation
+	"Wasd"					//Emulation
 ];
 
 
@@ -557,33 +557,33 @@ var LevelActions={
 	"Deaf":Deaf,
 	"Anagram":Anagram,
 	"Nucleus":Nucleus,
-	"DAWNS":DAWNS
+	"Wasd":Wasd
 }
 
-function DAWNS(W){
+function Wasd(W){
 	if(!In("WASD",W)){
 		ForbidCaret();
 		return;
 	}
 
-	if(!DAWNS.level)
-		DAWNS.level=LevelZeroState('DAWNS');
+	if(!Wasd.level)
+		Wasd.level=LevelZeroState('Wasd');
 
 	if(W==="W")
-		DAWNS.level=EmulateUp(DAWNS.level);
+		Wasd.level=EmulateUp(Wasd.level);
 	if(W==="A")
-		DAWNS.level=EmulateLeft(DAWNS.level);
+		Wasd.level=EmulateLeft(Wasd.level);
 	if(W==="S")
-		DAWNS.level=EmulateDown(DAWNS.level);
+		Wasd.level=EmulateDown(Wasd.level);
 	if(W==="D")
-		DAWNS.level=EmulateRight(DAWNS.level);
+		Wasd.level=EmulateRight(Wasd.level);
 	
-	var line=EmulateLine(DAWNS.level);
+	var line=EmulateLine(Wasd.level);
 	Letters(line.replace(/\./g," ").replace(/#/g,""));
-	Caret(line.replace(/#/g,"").indexOf("N"));
+	Caret(line.replace(/#/g,"").indexOf("W"));
 }
 function EmulatePushRight(levelline){
-	return levelline.replace(/(N[WASD]*)\.(\.*)/g,".$1$2");//All sokobaning happens here
+	return levelline.replace(/(W[ASD]*)\.(\.*)/g,".$1$2");//All sokobaning happens here
 }
 function EmulateRight(levelstring){
 	return EmulatePushRight(levelstring);	
@@ -606,7 +606,7 @@ function EmulateVertical(levelstring,down){
 }
 function EmulateLine(levelstring){
 	var lines=levelstring.split("\n");
-	return lines.filter(function(line){return In(line,"N")})[0];//Returns the line where the player is
+	return lines.filter(function(line){return In(line,"W")})[0];//Returns the line where the player is
 }
 
 
@@ -2873,7 +2873,7 @@ function LoadLevelState(levelstate){
 	Nokia.last=levelstate['Nokia 1998'][0];
 	Nokia.eventF=levelstate['Nokia 1998'][1];Nokia.eventF();//timed caret event
 	Morse.used=levelstate['⠍⠕⠗⠎⠑'];
-	DAWNS.level=levelstate['DAWNS'];
+	Wasd.level=levelstate['Wasd'];
 
 	UpdateLevelSecretly();
 }
@@ -2906,12 +2906,11 @@ function LevelZeroState(level){
 		'Fuchsia':false,
 		'Nokia 1998':[false,Identity],
 		'⠍⠕⠗⠎⠑':[],
-		'DAWNS':`#####....S
-				##.A......
-				........D.
-				.....W..##
-				.....#####
-				N#########`.replace(/\t*/g,"")
+		'Wasd':`#####...D
+				..S......
+				.....A.##
+				..#######
+				W########`.replace(/\t*/g,"")
 	};
 	if(!level)
 		return state;
@@ -2934,7 +2933,7 @@ function LevelState(){
 		'Fuchsia':Fuchsia.colour?Fuchsia.colour:false,
 		'Nokia 1998':[Nokia.last?Nokia.last:false,Nokia.eventF?Nokia.eventF:Identity],
 		'⠍⠕⠗⠎⠑':Morse.used?Morse.used:[],
-		'DAWNS':DAWNS.level?DAWNS.level:LevelZeroState('DAWNS')
+		'Wasd':Wasd.level?Wasd.level:LevelZeroState('Wasd')
 	};
 	return state;
 }
