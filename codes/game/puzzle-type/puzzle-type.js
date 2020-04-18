@@ -2827,7 +2827,7 @@ function UndoClear(){
 	Undo.backups=[LevelZeroState()];
 } 
 
-function LevelZeroState(){
+function LevelZeroState(level){
 	var state={
 		'letters':[],
 		'caret':0,
