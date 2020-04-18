@@ -1017,7 +1017,7 @@ function Symmetries(O){
 		else
 			Caret(-1);
 	}
-	else if(HorizontalSymmetric(O)){
+	if(HorizontalSymmetric(O)){
 		ModifyLetters(ToggleHorizontal);
 		Letters.array=Letters.array.reverse();
 		
@@ -1027,7 +1027,7 @@ function Symmetries(O){
 		else
 			Caret(-1);
 	}
-	else if(VerticalSymmetric(O)){
+	if(VerticalSymmetric(O)){
 		ModifyLetters(ToggleVertical);
 	}
 	
