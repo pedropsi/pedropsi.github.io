@@ -322,6 +322,16 @@ SaveTest(Permutations,[[1,2,2]],[[1,2],[2,1]],"force uniqueness");
 SaveTest(StringPermutations,["HI"],["HI","IH"],"actual permutations");
 SaveTest(StringPermutations,[""],[],"empty string");
 
+SaveTest(RotateMatrix,[[[1]]],[[1]],"mono square");
+SaveTest(RotateMatrix,[[[1,2],[3,4]]],[[3,1],[4,2]],"rotate right, square");
+SaveTest(RotateMatrix,[[[1,2],[3,4]],true],[[2,4],[1,3]],"rotate left, square");
+SaveTest(RotateMatrix,[[[1,2],[3,4],[5,6]]],[[5,3,1],[6,4,2]],"rotate right, vertical rectangle");
+SaveTest(RotateMatrix,[[[1,2,7],[3,4,8]]],[[3,1],[4,2],[8,7]],"rotate right, horizontal rectangle");
+
+SaveTest(RotateString,["Hi!"],"H\ni\n!","rotate right, monoline");
+SaveTest(RotateString,["NE\nWS"],"WN\nSE","rotate right, square");
+SaveTest(RotateString,[""],"","empty string");
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Repetitive functions
