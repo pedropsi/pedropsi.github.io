@@ -250,11 +250,20 @@ function MapObject(Obj,F){
 	var keys=Keys(Obj);
 	for (var i in keys){
 		if(Obj.hasOwnProperty(keys[i])){
+			//F(value, key, obj)
 			F(Obj[keys[i]],keys[i],Obj);
 		}
 	}
 	return Obj;
 };
+
+/*function MapKeysValues(Object,F){
+	MapObject(Object,function(v,k,o){
+		delete o[k];
+		o[F(k)]=F(v);
+	});
+	return Object;
+}*/
 
 function FilterObject(Obj,F){
 	var O={};
@@ -371,6 +380,41 @@ function Delete(array,i){
 	var a=[].concat(array);
 	return a.slice(0,i).concat(a.slice(i+1,a.length));
 }
+
+function Invert(as){
+	if(IsString(as))
+		return as.split("").reverse().join("");
+	else
+		return as.reverse();
+}
+
+function RotateMatrix(as,left){
+	var width=as.map(function(line){return line.length});
+		width=Min.apply(null,width);
+	var height=as.length;
+	var matrix=[];
+	var line;
+	for(var w=0;w<width;w++){
+		line=[];
+		for(var h=0;h<height;h++){
+			if(!!left)
+				line.push(as[h][width-w-1]);
+			else
+				line.push(as[height-h-1][w]);
+		}
+		matrix.push(line);
+	}
+	return matrix;
+}
+
+function RotateString(string,left){
+	var matrix=string.split("\n");
+	matrix=matrix.map(function(char){return char.split("")});
+	matrix=RotateMatrix(matrix,left);
+	var string=matrix.map(function(line){return line.join("")});
+	return string.join("\n");
+}
+
 
 //Subset (TODO: ARRAYS SUBSET=>SMALLEST===INTERSECTION LARGE WITH SMALLEST)
 function Subset(Object,SubsetObject){
