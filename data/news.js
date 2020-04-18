@@ -1,9 +1,15 @@
 var News={
+	N_41:{
+DATE:"2020-04-18",
+HEADER:()=>"Puzzle type beta changes II",
+PIECE:()=>`
+<p>Ongoing beta playtesting changes: a cleared deduction path was added to DVO***, the NOK*** space display was improved, SYM*** operates now at word level, minor additions to ANA***, NIG*** was expanded, MOR*** was fully redesigned, and the clue in WEI*** changed to LAT***. Number and space input was allowed where helpful. Replaced SUP*** with APA***. Added FIL***,  DEA*** and WAS*** so the total number of levels is now 29. Many thanks, ${v.COLLINEYE()}!</p>
+	`,ID:"puzzle-type"},
 	N_40:{
 DATE:"2020-04-10",
 HEADER:()=>"Puzzle type beta changes",
 PIECE:()=>`
-<p>Ongoing beta playtesting changes: clue HOMEOMORPHIC became TOPOLOGICAL (with new rules); CHERISHEDWOMAN became SHEP...LIKE (expanded ruleset, same logic); O** received a new keyword; NO*** **** lost the backspace glitch; small CSS tweaks and spacebar inputs support. Many thanks, ${v.PLURMORANT()}!</p>
+<p>Ongoing beta playtesting changes: clue HOMEOMORPHIC became TOP*** (with new rules); CHERISHEDWOMAN became SHE*** (expanded ruleset, same logic); O** received a new keyword; NOK*** lost the backspace glitch; small CSS tweaks and spacebar inputs support. Many thanks, ${v.PLURMORANT()}!</p>
 	`,ID:"puzzle-type"},
 	N_39:{
 DATE:"2020-04-07",

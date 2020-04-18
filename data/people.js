@@ -96,7 +96,8 @@ DABRILA:{TYPE:"Developer",NAME:"Justas Dabrila",ITCH:"ssstormy",TWITTER:"justas_
 PRAUSE:{TYPE:"Developer",NAME:"Denis Prause",ALIAS:"Zejety",GITHUB_COM:"zejety"},
 PARACHOR:{TYPE:"Developer",NAME:"Parachor",ITCH:"parachor"},
 CROUBBLE:{TYPE:"Developer",NAME:"Crouble",ALIAS:"NarrowAdder",TWITTER:"Croubble",ITCH:"dazed-pidgeon"},
-PLURMORANT:{TYPE:"Tester",NAME:"Plurmorant"}
+PLURMORANT:{TYPE:"Tester",NAME:"Plurmorant"},
+COLLINEYE:{TYPE:"Tester",NAME:"Patrick Collin Eye"}
 }
 
 function PersonalPage(linkObj){
