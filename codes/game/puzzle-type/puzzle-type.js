@@ -299,10 +299,15 @@ function LevelAction(key){
 	if(key==="Enter"||ForbidNumberActions(key)||ForbidSpaceActions(key)){
 		ForbidCaret();return;
 	}
+
+	if(AllowExtraUndoKey(key)){
+		Undo();return;
+	}
 	
 	else{
-		if(Letters.array.length>=50)//Max Char Limit (arbitrary, to fit screen)
-			Restart();
+		if(Letters.array.length>=50||AllowExtraRestartKey(key)){//Max Char Limit (arbitrary, to fit screen)
+			Restart();return;
+		}
 		else{
 			LevelActions[CurLevelName()](key);
 			RegisterMove(key);
@@ -372,6 +377,12 @@ function ForbidSpaceActions(key){
 		"Dvorak"],CurLevelName())&&In([" "],key));
 }
 
+function AllowExtraUndoKey(key){
+	return CurLevelName()==="DAWNS"&&key==="Z";
+}
+function AllowExtraRestartKey(key){
+	return CurLevelName()==="DAWNS"&&key==="R";
+}
 ///////////////////////////////////////////////////////////////////////////////
 
 function InPart(arrayOrObj,n){
