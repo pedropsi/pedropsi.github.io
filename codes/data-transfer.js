@@ -2330,7 +2330,7 @@ function DefaultDataField(){
 		defaultChoice:DefaultChoice,	//choice formatting, based on itself, receives (index,choicetxt)
 
 		qtype:PlainHTML,				//Format of question :receives a DataField
-		qplaceholder:"❤ Pedro PSI ❤",	//Placeholder answer
+		qplaceholder:"Dear Pedro PSI...",//Placeholder answer
 
 		shortcuts:Identity,				//Special shortcuts
 
