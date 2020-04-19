@@ -186,5 +186,5 @@
 .lower.half{
    padding-bottom: calc(var(--s)/2);
    transform: translateY(calc(var(--s)*0.3));
-   clip-path: polygon(0% 30%, 100% 30%, 100% 70%, 0% 70%);
+   clip-path: polygon(0% 33%, 100% 33%, 100% 70%, 0% 70%);
 }
