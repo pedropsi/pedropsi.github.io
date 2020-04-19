@@ -196,8 +196,10 @@ function ActionKeyText(action){
 	
 	if(K!=="")
 		K="<kbd>"+K+"</kbd>";
-	
-	return S+((S!==""&&K!=="")?" or ":"")+K;
+	if(S!=="")
+		S="<kbd>"+S+"</kbd>";
+
+	return K+((S!==""&&K!=="")?" or ":"")+S;
 }
 
 function ObtainActionTooltip(action){
