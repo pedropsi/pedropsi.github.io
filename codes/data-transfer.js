@@ -40,6 +40,8 @@ function Equal(a,b){
 		return true;
 	else if(typeof a!==typeof b)
 		return false;
+	else if(IsNan(a)&&IsNan(b))
+		return true;
 	else if((typeof a==="string"&&typeof b==="string")||(typeof a==="boolean"&&typeof b==="boolean")||(typeof a==="number"&&typeof b==="number"))
 		return a===b;
 	else if(IsArray(a)&&IsArray(b))
