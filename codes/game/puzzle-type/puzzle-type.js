@@ -409,15 +409,16 @@ var LevelGoals=[			//Required types of thinking:
 	"Rise",					//Alphabetical 
 	"Falls",				//Alphabetical, Arithmethic, Retroactive
 
-	//"Superior",				//Alphabetical, Monoactive
+	//"Superior",			//Alphabetical, Monoactive
 	"Precedent",			//Alphabetical, Retroactive
 	"Tangles",				//Alphabetical, Cyclic, Arithmethic, Proactive
-	"Difference",				//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
+	"Difference",			//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
 
 	"Symmetries",			//Shape, Retroactive
 	"Fillet",				//Shape, Proactive 
 	"Topological",			//Shape, Growth, Monoactive
 
+	"Wasd",					//Keyboard, Emulation
 	"Nokia 1998",			//Keyboard
 	"Dvorak",				//Keyboard, Cyclic
 	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
@@ -434,9 +435,7 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Odd",					//Keyword, Positional, Retroactive, Subtractive
 	"Dividi",				// Mapping, Arithmethic, Retroactive
-	"⠍⠕⠗⠎⠑",				//Encoding, Mapping, Once
-
-	"Wasd"					//Emulation
+	"⠍⠕⠗⠎⠑"				//Encoding, Mapping, Once
 ];
 
 
