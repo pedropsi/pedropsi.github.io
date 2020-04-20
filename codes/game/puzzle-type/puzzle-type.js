@@ -409,9 +409,9 @@ var LevelGoals=[			//Required types of thinking:
 	"Rise",					//Alphabetical 
 	"Falls",				//Alphabetical, Arithmethic, Retroactive
 
-	//"Superior",			//Alphabetical, Monoactive
 	"Precedent",			//Alphabetical, Retroactive
-	"Tangles",				//Alphabetical, Cyclic, Arithmethic, Proactive
+	"Superior",				//Positional, Alphabetical, Retroactive
+	//"Tangles",			//Alphabetical, Cyclic, Arithmethic, Proactive
 	"Difference",			//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
 
 	"Symmetries",			//Shape, Retroactive
@@ -427,15 +427,15 @@ var LevelGoals=[			//Required types of thinking:
 	"Anagram",				//Word, Mapping, Language, Once
 	"Nucleus",				//Syllabe, Word, Science, Mapping
 
-	"Latent clones",			//Keyword, Increment, Retroactive, Language
+	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
 
-	"Fuchsia",				//Encoding, Mapping
-	"Deaf",				//Encoding, Mapping
+	"Fuchsia",							//Encoding, Mapping
+	"Deaf",								//Encoding, Mapping
 
-	"Odd",					//Keyword, Positional, Retroactive, Subtractive
-	"Dividi",				// Mapping, Arithmethic, Retroactive
-	"⠍⠕⠗⠎⠑"				//Encoding, Mapping, Once
+	"Odd",								//Keyword, Positional, Retroactive, Subtractive
+	"Dividi",							// Mapping, Arithmethic, Retroactive
+	"⠍⠕⠗⠎⠑"							//Encoding, Mapping, Once
 ];
 
 
@@ -472,11 +472,19 @@ var LevelActions={
 		Letters(Letters.array.map(LetterDown));
 		InputLetterAfter(L);
 	},
-/*	"Superior":function (L){
-		if(Letters.array.length>0&&LetterNumber(L)>=LetterNumber(Last(Letters.array)))
-			DeleteLetterAfter();
-		InputLetterAfter(L);
-	},*/
+	"Superior":function (L){
+		var pre=Caret()[0];
+		Letter(pre,L);
+		var min=Infinity;
+		var pos=pre+1;
+		for(var i=0;i<Letters.array.length;i++){
+			if(LetterNumber(Letters.array[i])>LetterNumber(L)&&LetterNumber(Letters.array[i])<min){
+				min=LetterNumber(Letters.array[i]);
+				pos=i;
+			}
+		}
+		Caret(pos)
+	},
 	"Difference":Difference,
 	"Nokia 1998":Nokia,
 	"Rotate":function (L){
@@ -503,7 +511,7 @@ var LevelActions={
 				P=DvorakMapping[P];
 		InputLetterAfter(P);
 	},
-	"Tangles":function (L){
+	/*"Tangles":function (L){
 		if(Letters.array.length==="Tangles".length){
 			Restart();
 			return;
@@ -523,7 +531,7 @@ var LevelActions={
 		else
 			InputLetterAfter(L+"*");
 		
-	},
+	},*/
 	"Dividi":Dividi,
 	"Odd":function(L){
 		InputLetterAfter(L);
@@ -2652,7 +2660,7 @@ function LetterPureHTML(L,cla){
 }
 
 var LetterDisplay={
-	"Tangles":LetterDraftHTML,
+	//"Tangles":LetterDraftHTML,
 	"Symmetries":function(L){
 		
 		var simclass="";
