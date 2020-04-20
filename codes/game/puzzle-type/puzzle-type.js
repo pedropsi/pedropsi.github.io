@@ -405,7 +405,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Second",				//Retroactive, Subtractive
 	"Rotate",				//Positional, Spacial, Retroactive
 
-	"Oppose",				//Alphabetical
+	//"Oppose",				//Alphabetical
 	"Rise",					//Alphabetical 
 	"Falls",				//Alphabetical, Arithmethic, Retroactive
 
