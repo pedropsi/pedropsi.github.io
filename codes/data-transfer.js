@@ -318,7 +318,7 @@ function Count(array,itemOrF){
 	if(typeof itemOrF==="function")
 		return array.filter(F).length;
 	else
-		return array.filter(function(e){return e===itemOrF}).length;
+		return array.filter(function(e){return Equal(e,itemOrF)}).length;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
