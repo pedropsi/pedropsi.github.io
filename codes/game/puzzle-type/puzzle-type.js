@@ -413,6 +413,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Superior",				//Positional, Alphabetical, Retroactive
 	//"Tangles",			//Alphabetical, Cyclic, Arithmethic, Proactive
 	"Difference",			//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
+	//"Photocopier",			//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
 
 	"Symmetries",			//Shape, Retroactive
 	"Fillet",				//Shape, Proactive 
@@ -485,6 +486,20 @@ var LevelActions={
 		}
 		Caret(pos)
 	},
+/*	"Photocopier":function (L){
+		var pre=Caret();
+		var pos=[];
+		for(var i=Letters.array.length-1;i>=0;i--){
+				pos.push(i+1);
+			if(lengthLetters.array[i]===L)
+				pos.push(i+1);
+		}
+		pre.map(function(p){Letter(p,L)});
+
+		pos=Union(pos,[Infinity]);
+		Caret(pos);
+		
+	},*/
 	"Difference":Difference,
 	"Nokia 1998":Nokia,
 	"Rotate":function (L){
