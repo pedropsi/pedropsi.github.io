@@ -431,12 +431,12 @@ var LevelGoals=[			//Required types of thinking:
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
 
-	"Fuchsia",							//Encoding, Mapping
-	"Deaf",								//Encoding, Mapping
+	"Fuchsia",							//Encoding
+	"Deaf",								//Encoding
 
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
-	"Dividi",							// Mapping, Arithmethic, Retroactive
-	"⠍⠕⠗⠎⠑"							//Encoding, Mapping, Once
+	"Dividi",							// Encoding, Arithmethic, Retroactive
+	"⠍⠕⠗⠎⠑"							//Encoding, Once
 ];
 
 
