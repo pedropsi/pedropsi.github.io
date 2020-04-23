@@ -6,7 +6,6 @@
 
 /*
 // Level Ideas todo, maybe
---GENETIC. - use codons to generate aminoacids, full stop is the stop codon
 --CARDS. 0123456789 KJQA
 --CALCULATOR SPEAK 1I 2Z 3E 5S 7T 8B 0O
 --GREEK OR PHONETIC ALPHABET
@@ -426,7 +425,8 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Nigeria",				//Word, Mapping, Geography
 	"Anagram",				//Word, Mapping, Language, Once
-	"Tennessine",				//Syllabe, Word, Science, Mapping
+	"Tennessine",			//Encoding, Word, Science
+	"Genetic.",				//Encoding, Word, Science
 
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
@@ -579,6 +579,7 @@ var LevelActions={
 	"Deaf":Deaf,
 	"Anagram":Anagram,
 	"Tennessine":Tennessine,
+	"Genetic.":Genetic,
 	"Wasd":Wasd
 }
 
@@ -792,6 +793,31 @@ function Tennessine(L){
 		}
 	Caret(Infinity);
 }
+
+function Genetic(L){
+		
+	if(!In("ACGU",L)){
+		ForbidCaret();
+		return;
+	}
+
+	var saved=Letters.array.filter(function(n){return !InPosfix(n,"*")});
+	var temp=Letters.array.filter(function(n){return InPosfix(n,"*")});
+	var codon=temp.map(PureLetter).join("");
+		codon=codon+L;
+	
+	if(codon.length<3){
+		InputLetterAfter(L+"*")
+	}
+	else {
+		Letters(saved);
+		if(In(RNACodonsAminoacids,codon))
+			InputLetterAfter(RNACodonsAminoacids[codon]);
+	}
+
+	Caret(Infinity);
+}
+
 
 function Fuchsia(L){
 	function Restart(){
@@ -2426,6 +2452,73 @@ function DivideElementName(element){
 }
 */
 
+var RNACodonsAminoacids={
+"UUU":"F",
+"UUC":"F",
+"UUA":"L",
+"UUG":"L",
+"UCU":"S",
+"UCC":"S",
+"UCA":"S",
+"UCG":"S",
+"UAU":"Y",
+"UAC":"Y",
+"UAA":".",
+"UAG":".",
+"UGU":"C",
+"UGC":"C",
+"UGA":".",
+"UGG":"W",
+"CUU":"L",
+"CUC":"L",
+"CUA":"L",
+"CUG":"L",
+"CCU":"P",
+"CCC":"P",
+"CCA":"P",
+"CCG":"P",
+"CAU":"H",
+"CAC":"H",
+"CAA":"Q",
+"CAG":"Q",
+"CGU":"R",
+"CGC":"R",
+"CGA":"R",
+"CGG":"R",
+"AUU":"I",
+"AUC":"I",
+"AUA":"I",
+"AUG":"M",
+"ACU":"T",
+"ACC":"T",
+"ACA":"T",
+"ACG":"T",
+"AAU":"N",
+"AAC":"N",
+"AAA":"K",
+"AAG":"K",
+"AGU":"S",
+"AGC":"S",
+"AGA":"R",
+"AGG":"R",
+"GUU":"V",
+"GUC":"V",
+"GUA":"V",
+"GUG":"V",
+"GCU":"A",
+"GCC":"A",
+"GCA":"A",
+"GCG":"A",
+"GAU":"D",
+"GAC":"D",
+"GAA":"E",
+"GAG":"E",
+"GGU":"G",
+"GGC":"G",
+"GGA":"G",
+"GGG":"G"
+}
+
 var MorseCode={
 	"0":"-----",
 	"1":".----",
@@ -2769,6 +2862,7 @@ var LetterDisplay={
 	},
 	"Dividi":LetterDraftHTML,
 	"Tennessine":LetterDraftHTML,
+	"Genetic.":LetterDraftHTML,
 	"Anagram":LetterDraftHTML,
 	"Fuchsia":LetterDraftHTML,
 	"Deaf":LetterDraftHTML,
