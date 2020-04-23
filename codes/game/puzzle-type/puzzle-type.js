@@ -2987,7 +2987,7 @@ function LevelLoader(){
 function CurLevelName(){return LevelGoals[CurrentScreen()]};//placeholder
 
 function CheckWin(){
-	var win=CurLevelName().toUpperCase()===Letters().join("").toUpperCase();
+	var win=CurLevelName().toUpperCase()===Letters().join("").replace(/\_/g,"").toUpperCase();
 	
 	if(win){
 		PlaySound("media/puzzle-type/sound/win"+RandomChoice("123")+".mp3");
