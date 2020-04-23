@@ -795,7 +795,8 @@ function Tennessine(L){
 }
 
 function Genetic(L){
-		
+	var L=L.replace("T","U");
+	
 	if(!In("ACGU",L)){
 		ForbidCaret();
 		return;
