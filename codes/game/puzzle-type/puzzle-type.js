@@ -602,8 +602,8 @@ function Wasd(W){
 		Wasd.level=EmulateRight(Wasd.level);
 	
 	var line=EmulateLine(Wasd.level);
-	Letters(line.replace(/\./g," ").replace(/#/g,""));
-	Caret(line.replace(/#/g,"").indexOf("W"));
+	Letters(line.replace(/\./g," "));
+	Caret(line.indexOf("W"));
 }
 function EmulatePushRight(levelline){
 	return levelline.replace(/(W[ASD]*)\.(\.*)/g,".$1$2");//All sokobaning happens here
@@ -2816,8 +2816,12 @@ function LetterPureHTML(L,cla){
 	var cla=cla?(' '+cla):'';
 	if(L===" ")
 		cla=cla+' space';
+	if(L==="_"){
+		cla=cla+' invisible';
+		var L=" "}
 	return "<div class='letter"+cla+"'>"+L+"</div>"
 }
+
 
 var LetterDisplay={
 	//"Tangles":LetterDraftHTML,
@@ -3076,11 +3080,11 @@ function LevelZeroState(level){
 		'Fuchsia':false,
 		'Nokia 1998':[false,Identity],
 		'⠍⠕⠗⠎⠑':[],
-		'Wasd':`#####...D
+		'Wasd':`_____...D
 				..S......
-				.....A.##
-				..#######
-				W########`.replace(/\t*/g,"")
+				.....A.__
+				.._______
+				W________`.replace(/\t*/g,"")
 	};
 	if(!level)
 		return state;

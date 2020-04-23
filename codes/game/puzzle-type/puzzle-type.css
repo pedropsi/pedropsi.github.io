@@ -172,6 +172,10 @@
 .space.caret:before{
    content: "_";
 }
+.invisible {
+   width: var(--w2);
+   border: unset;
+}
 
 .half{
    --s:calc(var(--h4) + var(--w2));
