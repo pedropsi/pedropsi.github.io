@@ -3073,11 +3073,11 @@ function LevelZeroState(level){
 		'Fuchsia':false,
 		'Nokia 1998':[false,Identity],
 		'⠍⠕⠗⠎⠑':[],
-		'Wasd':`_____...D
-				..S......
-				.....A.__
-				.._______
-				W________`.replace(/\t*/g,"")
+		'Wasd':`_____...D_____
+				..S......_____
+				.....A._______
+				..____________
+				W_____________`.replace(/\t*/g,"")
 	};
 	if(!level)
 		return state;
