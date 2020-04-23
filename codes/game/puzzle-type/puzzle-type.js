@@ -426,7 +426,7 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Nigeria",				//Word, Mapping, Geography
 	"Anagram",				//Word, Mapping, Language, Once
-	"Nucleus",				//Syllabe, Word, Science, Mapping
+	"Tennessine",				//Syllabe, Word, Science, Mapping
 
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
@@ -578,7 +578,7 @@ var LevelActions={
 	"Fuchsia":Fuchsia,
 	"Deaf":Deaf,
 	"Anagram":Anagram,
-	"Nucleus":Nucleus,
+	"Tennessine":Tennessine,
 	"Wasd":Wasd
 }
 
@@ -770,25 +770,25 @@ function Anagram(L){
 	}
 }
 
-function Nucleus(L){
-		if(!Nucleus.partial)
-			Nucleus.partial=[];
+function Tennessine(L){
+		if(!Tennessine.partial)
+			Tennessine.partial=[];
 
-		var nulow=(Nucleus.partial.join("")+L).toLowerCase();
+		var nulow=(Tennessine.partial.join("")+L).toLowerCase();
 				
 		if(InPart(Nuclei,nulow)){
 			InputLetterAfter(L+"*");	//VISUAL Feedback for temporary letters in lighter blue
-			Nucleus.partial.push(L);
+			Tennessine.partial.push(L);
 			if(In(Nuclei,nulow)){
 				var elem=Nuclei[nulow].toUpperCase();
 				DeleteLastLetters(nulow.length);
 				Letters(Letters.array.join("")+elem);
-				Nucleus.partial=[];
+				Tennessine.partial=[];
 			}
 		}
 		else{
 			DeleteLastLetters(nulow.length-1);
-			Nucleus.partial=[];
+			Tennessine.partial=[];
 		}
 	Caret(Infinity);
 }
@@ -2320,7 +2320,7 @@ var Nuclei={
 'meitnerium':'mt',
 'nitrogen':'n',
 'sodium':'na',
-'natrium':'na',
+//'natrium':'na',
 'niobium':'nb',
 'neodymium':'nd',
 'neon':'ne',
@@ -2376,6 +2376,55 @@ var Nuclei={
 'zinc':'zn',
 'zirconium':'zr'
 }
+/*
+easyElements=`
+0: "silver"				EASY
+​4: "carbon"			DIRECT
+​5: "copper"			DIRECT	
+​9: "oganesson" 		MISLEADING (NICE)
+​10: "phosphorus"		BORING
+​11: "silicon"			DIRECT
+​12: "tin"				EASY
+​14: "xenon"			DIRECT
+​`;
+
+branchingElements=`
+​1: "arsenic" 			EASY
+​2: "astatine" 			DIRECT
+​3: "bismuth" 			EASY
+​6: "iron"				NOT BAD
+​7: "krypton" 			OK
+​8: "neon"				DIRECT
+​13: "tennessine" 		EASY
+​`
+
+var NucleiAbbs=Values(Nuclei);
+var NucleiNames=Keys(Nuclei);
+
+function DivideElementName(element){
+	var names=[element];var name;
+	var i,ab;
+	var found=false
+	while(!found&&names.length>0){
+			
+			name=First(names);
+			names=Rest(names);
+
+			var i=0;
+			while(i<NucleiAbbs.length){
+				ab=NucleiAbbs[i];
+				if(InPrefix(name,ab)){
+					console.log(name,"--->",ab);
+					names.push(UnPrefix(name,ab));
+					found=(UnPrefix(name,ab)==="");
+				}
+			i++;
+			}
+
+	}
+	return found;
+}
+*/
 
 var MorseCode={
 	"0":"-----",
@@ -2719,7 +2768,7 @@ var LetterDisplay={
 			return LetterPureHTML(combined);
 	},
 	"Dividi":LetterDraftHTML,
-	"Nucleus":LetterDraftHTML,
+	"Tennessine":LetterDraftHTML,
 	"Anagram":LetterDraftHTML,
 	"Fuchsia":LetterDraftHTML,
 	"Deaf":LetterDraftHTML,
@@ -2889,7 +2938,7 @@ function LoadLevelState(levelstate){
 	Difference.last=levelstate['Difference'];
 	Symmetries.direction=levelstate['Symmetries'];
 	Fillet.position=levelstate['Fillet'];
-	Nucleus.partial=levelstate['Nucleus'];
+	Tennessine.partial=levelstate['Tennessine'];
 	Anagram.partial=First(levelstate['Anagram']);
 	Anagram.used=Rest(levelstate['Anagram']);
 	Nigeria.freeze=levelstate['Nigeria'];
@@ -2925,7 +2974,7 @@ function LevelZeroState(level){
 		'Symmetries':true,
 		'Fillet':0,
 		'Anagram':[""],
-		'Nucleus':[],
+		'Tennessine':[],
 		'Nigeria':false,
 		'Fuchsia':false,
 		'Nokia 1998':[false,Identity],
@@ -2951,7 +3000,7 @@ function LevelState(){
 		'Difference':Difference.last?Difference.last:"",
 		'Symmetries':(typeof Symmetries.direction!=="undefined")?Symmetries.direction:true,
 		'Fillet':Fillet.position?Fillet.position:0,
-		'Nucleus':Nucleus.partial?Clone(Nucleus.partial):[],
+		'Tennessine':Tennessine.partial?Clone(Tennessine.partial):[],
 		'Anagram':[Anagram.partial?Anagram.partial:""].concat(Anagram.used?Anagram.used:[]),
 		'Nigeria':Nigeria.freeze?Nigeria.freeze:false,
 		'Fuchsia':Fuchsia.colour?Fuchsia.colour:false,
