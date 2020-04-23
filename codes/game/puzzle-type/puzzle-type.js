@@ -3021,7 +3021,9 @@ function Undo(){
 function SaveLevelState(){
 	if(!Undo.backups)
 		UndoClear();
-	Undo.backups.push(LevelState());
+	var state=LevelState();
+	if(!Undo.backups.length||!Equal(Last(Undo.backups),state))
+		Undo.backups.push(LevelState());
 }
 
 function LoadLevelState(levelstate){
