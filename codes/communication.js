@@ -328,7 +328,7 @@ var DESTINATION_FEEDBACK={
 	name:"Feedback",
 	Data:function(qid){
 		return{
-			identifier:document.body.id,
+			identifier:PageIdentifier(),
 			context:String(CurLevelNumber()),
 			question:GetElement(".question",qid).innerHTML,
 			answer:FindData("answer",qid),
