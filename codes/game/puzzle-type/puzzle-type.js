@@ -1493,6 +1493,8 @@ function FuseAdjacentNumberPositions(numberpositions,text){
 }
 
 function InflateNumber(text){
+	var text=text.replace(/negative/g,"minus");
+
 	var numberpositions=NumberPositions(text);
 		numberpositions=FuseAdjacentNumberPositions(numberpositions,text);
 
