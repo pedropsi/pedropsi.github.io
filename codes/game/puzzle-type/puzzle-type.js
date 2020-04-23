@@ -702,7 +702,6 @@ function Nokia(N){
 				}
 			}
 		}
-		//Caret(Letters.array.length-1);//Class(".caret","temporary")
 }
 
 function Nigeria(L){
@@ -718,7 +717,7 @@ function Nigeria(L){
 			return string.replace(/\s*/g,"").replace(/^THE/,"").replace(/^REPUBLICOF/,"").replace(/^KINGDOMOF/,"").replace(/^THE/,"");
 		}
 
-		var AREA=UnSpace(PureLetter(Letters.array.join("")));
+		var AREA=UnSpace(TemporaryWord());
 		
 		var c=Capitals.map(UnSpace).indexOf(AREA);
 		var i=Countries.map(UnSpace).indexOf(AREA);
@@ -740,8 +739,7 @@ function Nigeria(L){
 	}
 
 function Anagram(L){
-	if(!Anagram.partial)
-		Anagram.partial="";
+
 	if(!Anagram.used)
 		Anagram.used=[];
 	if(!In("ANAGRAM".split(""),L)){
@@ -750,47 +748,34 @@ function Anagram(L){
 	}
 	else{
 		InputLetterAfter(L+"*");
-		Anagram.partial=Anagram.partial+L;
-		var anagr=Anagram.partial.toLowerCase();
+		var saved=SavedLetters();
+		var anagr=TemporaryWord().toLowerCase();
 
 		if(In(Anagrams,anagr)&&!In(Anagram.used,anagr)){
 			var S=Anagrams[anagr].toUpperCase();
-			DeleteLastLetters(Anagram.partial.length);
-			Anagram.partial="";
 			Anagram.used.push(anagr);
+			Letters(saved);
 			InputLetterAfter(S);
 		}
-		
-		if(anagr.length>4){
-			DeleteLastLetters(Anagram.partial.length);
-			Anagram.partial="";
-			
+		else if(anagr.length>4){
+			Letters(saved);
 		}
+
 		Caret(Infinity);
-			return;
 	}
 }
 
 function Tennessine(L){
-		if(!Tennessine.partial)
-			Tennessine.partial=[];
+	InputLetterAfter(L+"*");
+	
+	var saved=SavedLetters();
+	var nulow=TemporaryWord().toLowerCase();
 
-		var nulow=(Tennessine.partial.join("")+L).toLowerCase();
-				
-		if(InPart(Nuclei,nulow)){
-			InputLetterAfter(L+"*");	//VISUAL Feedback for temporary letters in lighter blue
-			Tennessine.partial.push(L);
-			if(In(Nuclei,nulow)){
-				var elem=Nuclei[nulow].toUpperCase();
-				DeleteLastLetters(nulow.length);
-				Letters(Letters.array.join("")+elem);
-				Tennessine.partial=[];
-			}
-		}
-		else{
-			DeleteLastLetters(nulow.length-1);
-			Tennessine.partial=[];
-		}
+	if(In(Nuclei,nulow)){
+		var elem=Nuclei[nulow].toUpperCase();
+		Letters(saved.join("")+elem);
+	}
+
 	Caret(Infinity);
 }
 
@@ -802,9 +787,8 @@ function Genetic(L){
 		return;
 	}
 
-	var saved=Letters.array.filter(function(n){return !InPosfix(n,"*")});
-	var temp=Letters.array.filter(function(n){return InPosfix(n,"*")});
-	var codon=temp.map(PureLetter).join("");
+	var saved=SavedLetters();
+	var codon=TemporaryWord();
 		codon=codon+L;
 	
 	if(codon.length<3){
@@ -865,8 +849,8 @@ function Fuchsia(L){
 
 function Deaf(L){
 
-	var savednotes=Letters.array.filter(function(n){return !InPosfix(n,"*")});
-	var tempnotes=Letters.array.filter(function(n){return InPosfix(n,"*")});
+	var savednotes=SavedLetters();
+	var tempnotes=TemporaryLetters();
 
 	function AddSharp(){
 		if(Last(tempnotes)!=="#*")
@@ -880,7 +864,7 @@ function Deaf(L){
 	else
 		InputLetterAfter(L+"*");
 		
-	var tempnotes=Letters.array.filter(function(n){return InPosfix(n,"*")});
+	var tempnotes=TemporaryLetters();
 
 	if(tempnotes.length-Count(tempnotes,"#*")===3){//3 notes
 		var chord=tempnotes.map(PureLetter).join("");
@@ -2716,6 +2700,17 @@ Keys(MajorChords).map(function(chord){
 ///////////////////////////////////////////////////////////////////////////////
 //Manage letters and carets
 
+function SavedLetters(){
+	return Letters.array.filter(function(n){return !InPosfix(n,"*")});
+}
+function TemporaryLetters(){
+	return Letters.array.filter(function(n){return InPosfix(n,"*")});
+}
+function TemporaryWord(){
+	return TemporaryLetters().map(PureLetter).join("");
+}
+
+
 function Letters(array){
 	if(!Letters.array)
 		Letters.array=[];
@@ -3039,9 +3034,7 @@ function LoadLevelState(levelstate){
 	Difference.last=levelstate['Difference'];
 	Symmetries.direction=levelstate['Symmetries'];
 	Fillet.position=levelstate['Fillet'];
-	Tennessine.partial=levelstate['Tennessine'];
-	Anagram.partial=First(levelstate['Anagram']);
-	Anagram.used=Rest(levelstate['Anagram']);
+	Anagram.used=levelstate['Anagram'];
 	Nigeria.freeze=levelstate['Nigeria'];
 	Fuchsia.colour=levelstate['Fuchsia'];
 	Nokia.last=levelstate['Nokia 1998'][0];
@@ -3074,7 +3067,7 @@ function LevelZeroState(level){
 		'Difference':"",
 		'Symmetries':true,
 		'Fillet':0,
-		'Anagram':[""],
+		'Anagram':[],
 		'Tennessine':[],
 		'Nigeria':false,
 		'Fuchsia':false,
@@ -3101,8 +3094,7 @@ function LevelState(){
 		'Difference':Difference.last?Difference.last:"",
 		'Symmetries':(typeof Symmetries.direction!=="undefined")?Symmetries.direction:true,
 		'Fillet':Fillet.position?Fillet.position:0,
-		'Tennessine':Tennessine.partial?Clone(Tennessine.partial):[],
-		'Anagram':[Anagram.partial?Anagram.partial:""].concat(Anagram.used?Anagram.used:[]),
+		'Anagram':Anagram.used?Anagram.used:[],
 		'Nigeria':Nigeria.freeze?Nigeria.freeze:false,
 		'Fuchsia':Fuchsia.colour?Fuchsia.colour:false,
 		'Nokia 1998':[Nokia.last?Nokia.last:false,Nokia.eventF?Nokia.eventF:Identity],
