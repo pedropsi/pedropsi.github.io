@@ -1504,7 +1504,7 @@ function FuseAdjacentNumberPositions(numberpositions,text){
 }
 
 function InflateNumber(text){
-	var text=text.replace(/negative/g,"minus").replace(/positive/g,"").replace(/plus/g,"");//synonyms
+	var text=text.replace(/negative/g,"minus").replace(/minusminus/g,"").replace(/positive/g,"").replace(/plus/g,"");//synonyms
 
 	var numberpositions=NumberPositions(text);
 		numberpositions=FuseAdjacentNumberPositions(numberpositions,text);
