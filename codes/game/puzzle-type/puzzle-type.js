@@ -2392,7 +2392,7 @@ easyElements=`
 0: "silver"				EASY
 ​4: "carbon"			DIRECT
 ​5: "copper"			DIRECT	
-​9: "oganesson" 		MISLEADING (NICE)
+​9: "oganesson" 		MISLEADING (NICE), yet CUMBERSOME
 ​10: "phosphorus"		BORING
 ​11: "silicon"			DIRECT
 ​12: "tin"				EASY
@@ -3068,7 +3068,6 @@ function LevelZeroState(level){
 		'Symmetries':true,
 		'Fillet':0,
 		'Anagram':[],
-		'Tennessine':[],
 		'Nigeria':false,
 		'Fuchsia':false,
 		'Nokia 1998':[false,Identity],
