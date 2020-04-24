@@ -3,8 +3,9 @@
 */
 
 var SelectedGames=[
+{LINK:`https://bregehr.itch.io/cutters-and-concrete`,TITLE:`Cutters and Concrete`,AUTHOR_LINK:`https://bregehr.itch.io/`,AUTHOR:`Blake Regehr`,YEAR:2020,TAGS:["Sokoban","Subtraction"]},
 {LINK:`https://le-slo.itch.io/rainwater-honey-oil`,TITLE:`Metamor[ρ]hosis`,AUTHOR_LINK:`https://le-slo.itch.io/`,AUTHOR:`Lucas Le Slo`,YEAR:2020,TAGS:["Gravity"]},
-{LINK:`d6a415a64049d198331d2a033d9ebbc0`,TITLE:`Sasquatch Sokoban`,AUTHOR_LINK:`https://jcgyo.itch.io/`,AUTHOR:`jcGyo & David Skinner`,YEAR:2020,TAGS:["Isometric","Port"]},
+{LINK:`d6a415a64049d198331d2a033d9ebbc0`,TITLE:`Sasquatch Sokoban`,AUTHOR_LINK:`https://jcgyo.itch.io/`,AUTHOR:`jcGyo & David Skinner`,YEAR:2020,TAGS:["Sokoban","Isometric","Port"]},
 {LINK:`https://jcgyo.itch.io/selenes-labyrinth`,TITLE:`Selene's Labyrinth`,AUTHOR_LINK:`https://jcgyo.itch.io/`,AUTHOR:`jcGyo`,YEAR:2020,TAGS:["3D","Sokoban","Illusion"]},
 {LINK:`https://dario-zubovic.itch.io/one-level`,TITLE:`One level`,AUTHOR_LINK:`https://dario-zubovic.itch.io`,AUTHOR:`Dario Zubovic`,YEAR:2020,TAGS:["Reinterpretation","Sokoban"]},
 {LINK:`0bde9b6117e2c7aebb4f226b47cbdc47`,TITLE:`Un-lock`,AUTHOR_LINK:`https://twitter.com/noa_cubestudio`,AUTHOR:`Noa Hoffmann (Noa Cube Studio)`,YEAR:2020,TAGS:["Sokoban","Logic"]},
