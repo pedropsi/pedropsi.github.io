@@ -1,9 +1,15 @@
 var News={
+	N_42:{
+DATE:"2020-04-26",
+HEADER:()=>"Puzzle type beta changes III",
+PIECE:()=>`
+<p>Ongoing beta playtesting changes: NUC*** became TEN*** a less ambiguous clue, added new puzzle GEN*** but removed TAN***, a critical synonym was added to LAT***, WAS*** was recentered. Many thanks, ${v.COLLINEYE()}!</p>
+	`,ID:"puzzle-type"},
 	N_41:{
 DATE:"2020-04-18",
 HEADER:()=>"Puzzle type beta changes II",
 PIECE:()=>`
-<p>Ongoing beta playtesting changes: a cleared deduction path was added to DVO***, the NOK*** space display was improved, SYM*** operates now at word level, minor additions to ANA***, NIG*** was expanded, MOR*** was fully redesigned, and the clue in WEI*** changed to LAT***. Number and space input was allowed where helpful. Replaced SUP*** with APA***. Added FIL***,  DEA*** and WAS*** so the total number of levels is now 29. Many thanks, ${v.COLLINEYE()}!</p>
+<p>Ongoing beta playtesting changes: a clearer deduction path was added to DVO***, the NOK*** space display was improved, SYM*** operates now at word level, minor additions to ANA***, NIG*** was expanded, MOR*** was fully redesigned, and the clue in WEI*** changed to LAT***. Number and space input was allowed where helpful. Replaced SUP*** with APA***. Added FIL***,  DEA*** and WAS*** so the total number of levels is now 29. Many thanks, ${v.COLLINEYE()}!</p>
 	`,ID:"puzzle-type"},
 	N_40:{
 DATE:"2020-04-10",

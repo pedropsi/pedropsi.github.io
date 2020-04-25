@@ -2955,9 +2955,9 @@ function ModifyLetters(ChangeF,ConditionF){
 	return modified;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////
 //Game execution
-
 function ObtainTitleScreenLoader(){
 	if(!TitleScreen())
 		PlaySound("media/puzzle-type/sound/startgame.mp3");
