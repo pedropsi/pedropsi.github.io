@@ -168,3 +168,5 @@ function ScreenshotGalleryHTML(id){
 	<p>Download <a class="download" title="Download all!" href="images/${v.LINK()}/${v.LINK()}-screenshots.zip">all screenshots (zip archive)</a>.</p>
 	<div class="featured">${gallery}</div>`
 }
+
+ExportNodeFunctions();

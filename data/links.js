@@ -169,3 +169,4 @@ function LinkGroupHTML(GroupObject){
 
 if(DATA){DATA["Links"]=Links}else{var DATA={"Links":Links}}
 Shout("links");
+ExportNodeFunctions();

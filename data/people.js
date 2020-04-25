@@ -139,3 +139,4 @@ MapObject(People,function (v,k,o){
 
 if(DATA){DATA["People"]=People}else{var DATA={"People":People}}
 Shout("people");
+ExportNodeFunctions();

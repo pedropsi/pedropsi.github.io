@@ -13,6 +13,10 @@
 //  	2) avoid Safari Hoisting bugs
 //				(modules ask whether a function was defined before, thus not overwriting it)
 
+UnderNodeJS=function(){
+	return typeof window==="undefined";
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Do nothing
 Identity=function(i){return i;};
@@ -1453,9 +1457,17 @@ SourceIdentifier=function(path){
 }
 
 LoadSources=function(sourceArray,SuccessF){
+	if(UnderNodeJS())
+		return sourceArray.map(LoadNodeSource);										
+	
 	var shoutArray=sourceArray.filter(function(f){return InPosfix(f,".js")}).map(SourceIdentifier);		//discards non-js files plus the folder structure to preserve file name
 	sourceArray.map(LoadSource);											//loads asynchronously (each file MUST "Shout" its own identifier upon loading)
 	ListenAndOnce(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
+}
+
+LoadNodeSource=function(source){
+	var source=Prefix(Prefix(UnPosfix(source,".js"),"/"),".");
+	require(source);
 }
 
 //Load scripts
@@ -3249,6 +3261,9 @@ ListenIndeed=function(evObj){
 }
 
 Listen=function(eString,F,target){
+	if(UnderNodeJS())
+		return ListenNode(eString,F);
+
 	var target=GetElement(target)||window;
 	if(!target.addEventListener)
 		return;
@@ -3258,6 +3273,13 @@ Listen=function(eString,F,target){
 	else
 		target.addEventListener(eString,F)
 };
+
+ListenNode=function(name,F){
+	if(!Listen.node){
+		Listen.node=new EventEmitter();
+	}
+	Listen.node.on(name,F);
+}
 
 //Listen for all events in array before firing
 ListenAndOnce=function(shoutArray,SuccessF){
@@ -4605,14 +4627,21 @@ Accumulate=function(acc,val){return acc+val};
 // Custom events 
 
 Shout=function(name,targetSelector){
-	Shout[name]=targetSelector;//save memory
+	if(UnderNodeJS()){
+		if(Listen.node)
+			Listen.node.emit(name);
+		return;
+	}
+
+	Shout[name]=targetSelector;				//save memory
+
 	var ev=new CustomEvent(name);
 	var e=GetElement(targetSelector)||window;
 	e.dispatchEvent(ev);
 }
 
 //polyfill
-if(typeof window!=="undefined"&&typeof window.CustomEvent!=="function"&&window.CustomEvent){
+if(!UnderNodeJS()&&typeof window.CustomEvent!=="function"&&window.CustomEvent){
 	function CustomEvent(event,optObj){
 		optObj=optObj||{
 			bubbles:false,
@@ -4876,13 +4905,14 @@ Introspect=function(){
 	return Introspect.list;
 }
 
-//Exports - exports everything as a module!
+//Node mass exporter (one-liner)
 ExportFunction=function(name){
 	exports[name]=globalThis[name];
 }
 
-if(typeof exports!=="undefined")
-	Introspect().map(ExportFunction);
+ExportNodeFunctions=function(){
+	if(UnderNodeJS())
+		Introspect().map(ExportFunction);
+}
 
-//console.log(Keys(global))
-//console.log(this.ExportFunction.toString())
+ExportNodeFunctions();

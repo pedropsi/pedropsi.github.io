@@ -234,3 +234,5 @@ function InlineSVG(){
 	}
 	images.map(ReplaceSource);
 }
+
+ExportNodeFunctions();

@@ -351,18 +351,18 @@ if(DATA){DATA["News"]=News}else{var DATA={"News":News}}
 Shout("news");
 
 
-function SortNewsByDate(pageA,pageB){
+SortNewsByDate=function(pageA,pageB){
 	return Days(new Date(pageA.DATE),new Date(pageB.DATE));
 }
 
-function ChangelogEntryHTML(change){
+ChangelogEntryHTML=function(change){
 	return `
 	<h3>${DateNamer(new Date(change.DATE))}</h3>
 	${change.PIECE()}
 	`;
 }
 
-function ChangelogHTML(){
+ChangelogHTML=function(){
 	return SectionHTML({
 		Source:News,
 		header:"<h2 class>Changelog</h2>",
@@ -372,7 +372,7 @@ function ChangelogHTML(){
 	})
 }
 
-function NewsEntryHTML(change){
+NewsEntryHTML=function(change){
 	return `
 	<h2>${DateNamer(new Date(change.DATE))}</h2>
 	${change.HEADER?`<h3>${change.HEADER()}</h3>`:""}
@@ -380,7 +380,7 @@ function NewsEntryHTML(change){
 	`;
 }
 
-function NewsHTML(){
+NewsHTML=function(){
 	return SectionHTML({
 		Source:News,
 		ItemHTML:NewsEntryHTML,
@@ -388,7 +388,7 @@ function NewsHTML(){
 	})
 }
 
-function RecentNewsHTML(){
+RecentNewsHTML=function(){
 	return SectionHTML({
 		Source:News,
 		ItemHTML:NewsEntryHTML,
@@ -399,7 +399,7 @@ function RecentNewsHTML(){
 	})
 }
 
-function RSSXML(){
+RSSXML=function(){
 	return SectionHTML({
 		Source:News,
 		ItemHTML:RSSItemXML,
@@ -414,7 +414,7 @@ function RSSXML(){
 	})
 }
 
-function RSSHeadXML(){
+RSSHeadXML=function(){
 	return `
 		<atom:link href="${v.RSS_PATH()}" rel="self" type="application/rss+xml" />
 		<title>${v.SITE_NAME()}</title>
@@ -430,7 +430,7 @@ function RSSHeadXML(){
 		</image>`;
 }
 
-function RSSItemXML(change){
+RSSItemXML=function(change){
 	var page=PageObj(change.ID);
 	v={...v,...page};
 	return `
@@ -450,14 +450,14 @@ function RSSItemXML(change){
 	`;
 }
 
-function DownloadRSS(){
+DownloadRSS=function(){
 	var data=RSSXML();
 	var filename="rss.xml";
 	var type="text/xml";//application/rss+xml
 	Download(data,filename,type);
 }
 
-function SitemapXML(){
+SitemapXML=function(){
 	return SectionHTML({
 		Source:CMS,
 		ItemHTML:SitemapItemXML,
@@ -466,7 +466,7 @@ function SitemapXML(){
 	});
 }
 
-function FrequencyName(days){
+FrequencyName=function(days){
 	if(days<=7*2)
 		return "weekly";
 	else if(days<=31*2)
@@ -477,7 +477,7 @@ function FrequencyName(days){
 		return"never";
 }
 
-function SitemapItemXML(PageObj){
+SitemapItemXML=function(PageObj){
 	var PageObj={...v,...PageObj};
 
 	var lastdate=v.DATE_YMD(PageObj);
@@ -495,9 +495,11 @@ function SitemapItemXML(PageObj){
 	</url>`;
 }
 
-function DownloadSitemap(){
+DownloadSitemap=function(){
 	var data=SitemapXML();
 	var filename="sitemap.xml";
 	var type="text/xml";//application/rss+xml
 	Download(data,filename,type);
 }
+
+ExportNodeFunctions();
