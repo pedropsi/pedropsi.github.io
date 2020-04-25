@@ -3,7 +3,13 @@
 
 // functions are always defined as "function_name=function(args){body}" to:
 //		1) allow anonymous export as node modules, yet working normally in browser
-				var window=globalThis?globalThis:window;
+//			---regular expression to convert forth: 	
+//				 	\nfunction ([^\(]+)
+//					\n$1=function
+//			---regular expression to convert back: 	
+//				 	\n([^=\n]+)=function
+//					\nfunction $1
+//				 	 
 //  	2) avoid Safari Hoisting bugs
 //				(modules ask whether a function was defined before, thus not overwriting it)
 
@@ -4606,7 +4612,7 @@ Shout=function(name,targetSelector){
 }
 
 //polyfill
-if(typeof window.CustomEvent!=="function"&&window.CustomEvent){
+if(typeof window!=="undefined"&&typeof window.CustomEvent!=="function"&&window.CustomEvent){
 	function CustomEvent(event,optObj){
 		optObj=optObj||{
 			bubbles:false,
