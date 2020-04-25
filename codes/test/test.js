@@ -441,6 +441,8 @@ SaveTest(Exfix,["__","-"],"-__-","same prefix and suffix");
 SaveTest(UnExfix,["(ok)","(",")"],"ok","different prefix and suffix");
 SaveTest(UnExfix,["-__-","-"],"__","same prefix and suffix");
 
+SaveTest(UnBeforfix,["somethingantiantiantiall","anti"],"all","repeated prefix");
+SaveTest(UnAfterfix,["all is well well well something"," well"],"all is","repeated end, also spaces");
 
 SaveTest(Parenthise,"ok","(ok)","parrenthesis absent");
 SaveTest(Parenthise,"(ok)","(ok)","parrenthesis present");

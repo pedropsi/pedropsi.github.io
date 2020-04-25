@@ -1,15 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////
 // (C) Pedro PSI 2017-2020
- 
+
+// functions are always defined as "function_name=function(args){body}" to:
+//		1) allow anonymous export as node modules, yet working normally in browser
+				var window=globalThis?globalThis:window;
+//  	2) avoid Safari Hoisting bugs
+//				(modules ask whether a function was defined before, thus not overwriting it)
+
 ///////////////////////////////////////////////////////////////////////////////
 //Do nothing
-function Identity(i){return i;};
-function True(){return true};
-function False(){return false};
+Identity=function(i){return i;};
+True=function(){return true};
+False=function(){return false};
 
 ///////////////////////////////////////////////////////////////////////////////
 // Deep equality testing
-function EqualArray(a,b){
+EqualArray=function(a,b){
 	if (a.length!==b.length)
 		return false;
 	else{
@@ -23,19 +29,19 @@ function EqualArray(a,b){
 	}
 }
 
-function EqualObject(a,b){
+EqualObject=function(a,b){
 	return EqualArray(Keys(a),Keys(b))&&EqualArray(Values(a),Values(b));
 }
 
-function EqualFunction(a,b){
+EqualFunction=function(a,b){
 	return FunctionBody(a)===FunctionBody(b); //Cannot see whether two functions compute the same thing, only whether the source is equal.
 }
 
-function EqualRegex(a,b){
+EqualRegex=function(a,b){
 	return (a.source===b.source)&&(a.flags===b.flags);
 }
 
-function Equal(a,b){
+Equal=function(a,b){
 	if(typeof a==="undefined"&&typeof b==="undefined")
 		return true;
 	else if(typeof a!==typeof b)
@@ -64,38 +70,38 @@ function Equal(a,b){
 
 ///////////////////////////////////////////////////////////////////////////////
 // Math
-var Min=Math.min;
-var Max=Math.max;
-var Floor=Math.floor;
-var Ceiling=Math.ceil;
-var Sin=Math.sin;
-var Cos=Math.cos;
-var PI=Math.PI;
-var Abs=Math.abs;
-var Round=Math.round;
+Min=Math.min;
+Max=Math.max;
+Floor=Math.floor;
+Ceiling=Math.ceil;
+Sin=Math.sin;
+Cos=Math.cos;
+PI=Math.PI;
+Abs=Math.abs;
+Round=Math.round;
 
-function Quotient(n,d){
+Quotient=function(n,d){
 	return Floor(n/d);
 }
-function Remainder(n,d){
+Remainder=function(n,d){
 	return Max(n-d*Quotient(n,d),0);
 }
 
-function Power(n,exp){
+Power=function(n,exp){
 	if(typeof exp==="undefined")
 		return function(m){return Math.pow(m,n)}
 	else
 		return Math.pow(n,exp);
 }
 
-function PoweredSum(vector,power){
+PoweredSum=function(vector,power){
 	if(vector.length<1)
 		return 0;
 	else
 		return vector.map(Power(power)).reduce(Accumulate);
 }
 
-function VectorOperation(vector1,vector2,F){
+VectorOperation=function(vector1,vector2,F){
 	if(vector1.length<1||vector2.length<1)
 		return [];
 	else{
@@ -110,42 +116,42 @@ function VectorOperation(vector1,vector2,F){
 	}
 }
 
-function VectorPlus(vector1,vector2){
+VectorPlus=function(vector1,vector2){
 	return VectorOperation(vector1,vector2,function(a,b){return a+b});
 }
-function VectorMinus(vector1,vector2){
+VectorMinus=function(vector1,vector2){
 	return VectorOperation(vector1,vector2,function(a,b){return a-b});
 }
-function VectorTimes(vector1,vector2){
+VectorTimes=function(vector1,vector2){
 	return VectorOperation(vector1,vector2,function(a,b){return a*b});
 }
-function VectorDivide(vector1,vector2){
+VectorDivide=function(vector1,vector2){
 	return VectorOperation(vector1,vector2,function(a,b){return a/b});
 }
 
 
-function EuclideanDistance(vector1,vector2){
+EuclideanDistance=function(vector1,vector2){
 	return Power(PoweredSum(VectorMinus(vector2,vector1),2),1/2);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // Lists (AS = Array or String)
 
-function Last(AS){
+Last=function(AS){
 	if(AS&&AS.length)
 		return AS[AS.length-1];
 	else
 		return null;
 }
 
-function First(AS){
+First=function(AS){
 	if(AS&&AS.length)
 		return AS[0];
 	else
 		return null;
 }
 
-function Rest(AS){
+Rest=function(AS){
 	if(AS&&AS.length){
 		if(typeof AS==="string")
 			return Rest(AS.split("")).join("");
@@ -159,7 +165,7 @@ function Rest(AS){
 		return null;
 }
 
-function Most(AS){
+Most=function(AS){
 	if(AS&&AS.length){
 		if(typeof AS==="string")
 			return Most(AS.split("")).join("");
@@ -175,40 +181,40 @@ function Most(AS){
 
 
 //Distinguish Objects and Arrays
-function IsArray(array){
+IsArray=function(array){
 	if(!array)
 		return false;
 	return FunctionName(array.constructor)==="Array";
 }
 
-function IsObject(obj){
+IsObject=function(obj){
 	if(!obj)
 		return false;
 	return FunctionName(obj.constructor)==="Object";
 }
 
-function IsRegex(obj){
+IsRegex=function(obj){
 	if(!obj)
 		return false;
 	return FunctionName(obj.constructor)==="RegExp";
 }
 
-function IsString(s){
+IsString=function(s){
 	if(!s)
 		return false;
 	return typeof s==="string";
 }
 
-function IsNode(node){
+IsNode=function(node){
 	return typeof node==="object"&&node.isEqualNode;
 }
 
-function IsNan(nan){
+IsNan=function(nan){
 	return (typeof nan==="number")&&!(nan<0)&&!(nan===0)&&!(nan>0);
 }
 
 //Apply function to Array or Object
-function Apply(arrayOrObj,F){
+Apply=function(arrayOrObj,F){
 	if(IsArray(arrayOrObj))
 		return F(arrayOrObj);
 	else if(IsObject(arrayOrObj))
@@ -220,15 +226,15 @@ function Apply(arrayOrObj,F){
 };
 
 
-function Keys(Obj){
+Keys=function(Obj){
 	return Object.keys(Obj)||[];
 };
-function Values(Obj){
+Values=function(Obj){
 	return Keys(Obj).map(function(k){return Obj[k]})||[];
 };
 
 //Flips object keys and values
-function FlipKeysValues(Obj){
+FlipKeysValues=function(Obj){
 	var k=Keys(Obj);
 	var O={};
 	k.map(function(x){O[Obj[x]]=x});
@@ -236,7 +242,7 @@ function FlipKeysValues(Obj){
 };
 
 // Does element exist?
-function InArrayOrObj(arrayOrObj,n){
+InArrayOrObj=function(arrayOrObj,n){
 	if(!arrayOrObj)
 		return false;
 	function F(array){
@@ -252,7 +258,7 @@ function InArrayOrObj(arrayOrObj,n){
 };
 
 //Update Object Keys
-function MapObject(Obj,F){
+MapObject=function(Obj,F){
 	var keys=Keys(Obj);
 	for (var i in keys){
 		if(Obj.hasOwnProperty(keys[i])){
@@ -271,7 +277,7 @@ function MapObject(Obj,F){
 	return Object;
 }*/
 
-function FilterObject(Obj,F){
+FilterObject=function(Obj,F){
 	var O={};
 	MapObject(Obj,function (v,k,o){
 		if(F(v,k))
@@ -280,13 +286,13 @@ function FilterObject(Obj,F){
 	return O;
 }
 
-function MapKeys(Obj,F){
+MapKeys=function(Obj,F){
 	var K=[];
 	MapObject(Obj,function(value,key,object){K.push(F(value,key,object))});
 	return K;
 }
 
-function UpdateKeys(Obj,F){
+UpdateKeys=function(Obj,F){
 	var keys=Keys(Obj);
 	for (var i in keys){
 		if(Obj.hasOwnProperty(keys[i])){
@@ -298,23 +304,23 @@ function UpdateKeys(Obj,F){
 	return Obj;
 };
 
-function InString(string,n){
+InString=function(string,n){
 	var s=string;
 	return n===""||s.replace(n,"")!==string;
 }
 
-function In(SAO,n){
+In=function(SAO,n){
 	if(typeof SAO==="string")
 		return InString(SAO,n);
 	else
 		return InArrayOrObj(SAO,n);
 }
 
-function ContainsF(n){
+ContainsF=function(n){
 	return function(SAO){return In(SAO,n)};
 }
 
-function Count(array,itemOrF){
+Count=function(array,itemOrF){
 	if(typeof itemOrF==="function")
 		return array.filter(F).length;
 	else
@@ -324,12 +330,12 @@ function Count(array,itemOrF){
 ///////////////////////////////////////////////////////////////////////////////
 //Set functions
 
-function Unique(array){
+Unique=function(array){
 	return Intersection(array,array);
 }
 
 //Complement (force uniqueness, sort)
-function Complement(arrayInclude,arrayExclude){
+Complement=function(arrayInclude,arrayExclude){
 	var unique=[];
 	var value;
 	for(var i=0;i<arrayInclude.length;i++){
@@ -341,7 +347,7 @@ function Complement(arrayInclude,arrayExclude){
 }
 
 //Intersection (force uniqueness, sort)
-function Intersection(array1,array2){
+Intersection=function(array1,array2){
 	var unique=[];
 	var value;
 	for(var i=0;i<array1.length;i++){
@@ -353,14 +359,14 @@ function Intersection(array1,array2){
 }
 
 //Union (force uniqueness, sort)
-function Union(array1,array2){
+Union=function(array1,array2){
 	if(!array2)
 		return Unique(array1);
 	return Unique(array1.concat(array2));
 }
 
 //Permutations of a set (enforces uniqueness or sort)
-function Permutations(array){
+Permutations=function(array){
 	var array=Unique(array);
 	if(array.length===1)
 		return [array];
@@ -375,26 +381,26 @@ function Permutations(array){
 	return permutations;
 }
 
-function StringPermutations(string){
+StringPermutations=function(string){
 	return Permutations(string.split("")).map(function(p){return p.join("");});
 }
 
 //delete from array
-function Delete(array,i){
+Delete=function(array,i){
 	if(!array||typeof i!=="number"||i<0||i>=array.length)
 		return array;
 	var a=[].concat(array);
 	return a.slice(0,i).concat(a.slice(i+1,a.length));
 }
 
-function Invert(as){
+Invert=function(as){
 	if(IsString(as))
 		return as.split("").reverse().join("");
 	else
 		return as.reverse();
 }
 
-function RotateMatrix(as,left){
+RotateMatrix=function(as,left){
 	var width=as.map(function(line){return line.length});
 		width=Min.apply(null,width);
 	var height=as.length;
@@ -413,7 +419,7 @@ function RotateMatrix(as,left){
 	return matrix;
 }
 
-function RotateString(string,left){
+RotateString=function(string,left){
 	var matrix=string.split("\n");
 	matrix=matrix.map(function(char){return char.split("")});
 	matrix=RotateMatrix(matrix,left);
@@ -423,13 +429,13 @@ function RotateString(string,left){
 
 
 //Subset (TODO: ARRAYS SUBSET=>SMALLEST===INTERSECTION LARGE WITH SMALLEST)
-function Subset(Object,SubsetObject){
+Subset=function(Object,SubsetObject){
 	var keys=Keys(SubsetObject);
 	return keys.every(k=>Equal(Object[k],SubsetObject[k]));
 }
 
 //Object Arrays (BASE)
-function BaseFilter(Base,GroupObject){
+BaseFilter=function(Base,GroupObject){
 	return Values(FilterObject(Base,g=>Subset(g,GroupObject)));
 }
 
@@ -437,7 +443,7 @@ function BaseFilter(Base,GroupObject){
 //Repetitive functions
 
 // Fold
-function FoldM(F,x0,xArray){
+FoldM=function(F,x0,xArray){
 	if(xArray.length<1){
 		return x0;
 	}else if(xArray.length===1){
@@ -449,12 +455,12 @@ function FoldM(F,x0,xArray){
 	}
 }
 
-function Fold(F,x0,xArray){
+Fold=function(F,x0,xArray){
 	return FoldM(F,x0,xArray.slice());
 }
 
 // Fixed point
-function FixedPoint(F,x){
+FixedPoint=function(F,x){
 	var i=x;
 	while(i!==F(i)){
 		i=F(i);
@@ -468,20 +474,20 @@ function FixedPoint(F,x){
 // String Functions
 
 // String Replace
-function StringReplaceOnceRule(string,rule){
+StringReplaceOnceRule=function(string,rule){
 	return string.replace(rule[0],rule.length>0?rule[1]:"");
 }
-function StringReplaceRule(string,rule){
+StringReplaceRule=function(string,rule){
 	return FixedPoint(function(s){return StringReplaceOnceRule(s,rule);},string);
 }
-function StringReplaceRuleArray(string,ruleArray){
+StringReplaceRuleArray=function(string,ruleArray){
 	return Fold(StringReplaceRule,string,ruleArray);
 }
-function StringReplaceOnceRuleArray(string,ruleArray){
+StringReplaceOnceRuleArray=function(string,ruleArray){
 	return Fold(StringReplaceOnceRule,string,ruleArray);
 }
 
-function ObjectRules(Obj){
+ObjectRules=function(Obj){
 	var keys=Keys(Obj);
 	var a=[];
 	for(var i in keys){
@@ -492,11 +498,11 @@ function ObjectRules(Obj){
 	return a;
 }
 
-function StringReplaceRulesObject(string,rulesObj){
+StringReplaceRulesObject=function(string,rulesObj){
 	return FixedPoint(function(s){return StringReplaceRuleArray(s,ObjectRules(rulesObj))},string);
 }
 
-function StringReplace(string,rules){
+StringReplace=function(string,rules){
 	if(typeof rules==="string")
 		return string.replace(rules,"");
 	else if(IsObject(rules)){ //Inversion
@@ -516,42 +522,48 @@ function StringReplace(string,rules){
 
 // Unspace
 
-function UnWhitespace(string){
+UnWhitespace=function(string){
 	return StringReplace(string,[[/\s/m,""],[/\t/m,""],[/\n/m,""]]);
 }
-function LowerSimpleString(string){
+LowerSimpleString=function(string){
 	return SafeString(UnWhitespace(string).toLowerCase());
 }
 
 // Capitalise
-function Capitalise(word){
+Capitalise=function(word){
 	if(word.length)
 		return word[0].toUpperCase()+Rest(word).toLowerCase();
 	else
 		return word;
 }
 
-var Prepositions=["aboard","about","above","across","after","against","along","amid","among","anti","around","as","at","before","behind","below","beneath","beside","besides","between","beyond","but","by","concerning","considering","de","despite","down","during","except","excepting","excluding","following","for","from","in","inside","into","like","minus","near","of","off","on","onto","opposite","outside","over","past","per","plus","regarding","round","save","since","than","through","to","toward","towards","under","underneath","unlike","until","up","upon","versus","vs","via","with","within","without"];
-var CommonWords=["a","an","the"].concat(Prepositions);
 
-function CapitaliseNoble(word){
+CommonWordsList=function(){
+	var prepositions=["aboard","about","above","across","after","against","along","amid","among","anti","around","as","at","before","behind","below","beneath","beside","besides","between","beyond","but","by","concerning","considering","de","despite","down","during","except","excepting","excluding","following","for","from","in","inside","into","like","minus","near","of","off","on","onto","opposite","outside","over","past","per","plus","regarding","round","save","since","than","through","to","toward","towards","under","underneath","unlike","until","up","upon","versus","vs","via","with","within","without"];
+	if(!CommonWords.list)
+		return CommonWords.list=["a","an","the"].concat(prepositions);
+	else
+		return CommonWords.list;
+}
+
+CapitaliseNoble=function(word){
 	if(In(CommonWords,word))
 		return word;
 	else
 		return Capitalise(word);
 }
 
-function CapitaliseSentence(sentence){
+CapitaliseSentence=function(sentence){
 	sentence.split(" ").map(CapitaliseNoble).join(" ");
 }
 
 //Escape
 
-function Tokens(){
+Tokens=function(){
 	return ",;.:-_~^*+´`¨«»'?!'@£§#$%&/|(){}[]=";
 }
 
-function EscapeToken(token){
+EscapeToken=function(token){
 	if(token===" ")
 		return "\\s";
 	if(!In(Tokens(),token))
@@ -560,7 +572,7 @@ function EscapeToken(token){
 		return "\\"+token;
 }
 
-function EscapeTokens(tokenString){
+EscapeTokens=function(tokenString){
 	if(IsArray(tokenString))
 		return Alternate(tokenString.map(EscapeTokens));
 	return tokenString.split("").map(EscapeToken).join("");
@@ -568,54 +580,81 @@ function EscapeTokens(tokenString){
 
 
 // Prefix and Suffix
-function UnPrefix(word,prefix){
+UnPrefix=function(word,prefix){
 	if(!prefix)
 		return word;
 	var prefixFind=new RegExp("^"+EscapeTokens(prefix));
 	return StringReplace(word,[prefixFind,""]);
 }
-function UnPosfix(word,suffix){ //suffix
+UnPosfix=function(word,suffix){ //suffix
 	if(!suffix)
 		return word;
 	var suffixFind=new RegExp(EscapeTokens(suffix)+"$");
 	return StringReplace(word,[suffixFind,""]);
 }
-function Prefix(word,prefix){
+Prefix=function(word,prefix){
 	if(!prefix)
 		return word;
 	return prefix+UnPrefix(word,prefix);
 }
-function Posfix(word,suffix){ //suffix
+Posfix=function(word,suffix){ //suffix
 	if(!suffix)
 		return word;
 	return UnPosfix(word,suffix)+suffix;
 }
-function Exfix(word,prefix,suffix){
+Exfix=function(word,prefix,suffix){
 	var suffix=suffix||prefix;
 	return Prefix(Posfix(word,suffix),prefix);
 }
-function UnExfix(word,prefix,suffix){
+UnExfix=function(word,prefix,suffix){
 	var suffix=suffix||prefix;
 	return UnPrefix(UnPosfix(word,suffix),prefix);
 }
 
-function Parenthise(word){
+Parenthise=function(word){
 	return Exfix(word,"(",")");
 }
-function Alternate(wordArray){
+Alternate=function(wordArray){
 	return wordArray.map(Parenthise).join("|");
 }
 
-function InPrefix(word,prefix){
+InPrefix=function(word,prefix){
 	return UnPrefix(word,prefix)!==word;
 }
-function InPosfix(word,suffix){
+InPosfix=function(word,suffix){
 	return UnPosfix(word,suffix)!==word;
 }
 
 
+UnOnceBeforfix=function(word,prefix){
+	var prefixFind=new RegExp(".*"+EscapeTokens(prefix));
+	return word.replace(prefixFind,"");
+}
+UnBeforfix=function(word,prefix){
+	if(!prefix)
+		return word;
+	if(IsArray(prefix))
+		return Fold(UnOnceBeforfix,word,prefix);
+	else
+		return UnOnceBeforfix(word,prefix);
+}
+
+UnOnceAfterfix=function(word,posfix){
+	var posfixFind=new RegExp(EscapeTokens(posfix)+".*");
+	return word.replace(posfixFind,"");
+}
+UnAfterfix=function(word,posfix){
+	if(!posfix)
+		return word;
+	if(IsArray(posfix))
+		return Fold(UnOnceAfterfix,word,posfix);
+	else
+		return UnOnceAfterfix(word,posfix);
+}
+
+
 // Padding
-function PadLR(txt,symbol,n){
+PadLR=function(txt,symbol,n){
 	if(symbol==="")
 		return "";
 	
@@ -626,23 +665,23 @@ function PadLR(txt,symbol,n){
 	
 	return symbol.repeat(q)+symbol.slice(0,r);
 }
-function PadLeft(txt,symbol,n){
+PadLeft=function(txt,symbol,n){
 	return PadLR(txt,symbol,n)+txt;
 }
-function PadRight(txt,symbol,n){
+PadRight=function(txt,symbol,n){
 	return txt+PadLR(txt,symbol,n);
 }
 
-function AddLeft(txt,symbol,n){
+AddLeft=function(txt,symbol,n){
 	return PadLeft(txt,symbol,txt.length+n);
 }
-function AddRight(txt,symbol,n){
+AddRight=function(txt,symbol,n){
 	return PadRight(txt,symbol,txt.length+n);
 }
 
 
 //Stripping
-function StripHTML(string){
+StripHTML=function(string){
 	return FixedPoint(t=>t
 		.replace(/\<img[^\<\>]*\>/ig,"")
 		.replace(/\<(.*)[^\<\>]*\>([^\<\>]*)<\/\1\>/ig,"$2")
@@ -650,7 +689,7 @@ function StripHTML(string){
 }
 
 //Shortening
-function Shorten(string,maxchars){
+Shorten=function(string,maxchars){
 	if(!string)
 		return "";
 	else{
@@ -662,7 +701,7 @@ function Shorten(string,maxchars){
 }
 
 //Sentence making
-function Enumerate(StringArray){
+Enumerate=function(StringArray){
 	if(!StringArray.length)
 		return "";
 	if(StringArray.length===1)
@@ -686,7 +725,9 @@ function Enumerate(StringArray){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Get Function Name as a string, or make up a unique one based on the function's body
-function FunctionName(FunctionF){
+FunctionName=function(FunctionF){
+	if(FunctionF.name)
+		return FunctionF.name;
 	var name=FunctionF.toString().replace(/\(.*/,"").replace("function ","");
 	name=name.replace(/\s.*/gm,"");
 	if(name!=="function")
@@ -697,13 +738,13 @@ function FunctionName(FunctionF){
 	}
 }
 
-function FunctionBody(FunctionF){
+FunctionBody=function(FunctionF){
 	return FunctionF.toString().replace(/[^\)]*\)/,"");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 //Join Objects, overwriting conflicting properties
-function FuseObjects(obj,newObj){
+FuseObjects=function(obj,newObj){
 	var O={};
 	function SetValueKey(value,key){O[key]=value};
 	if(obj)
@@ -713,7 +754,7 @@ function FuseObjects(obj,newObj){
 	return O;
 }
 
-function FuseObjectArray(objArray){
+FuseObjectArray=function(objArray){
 	if(objArray.length<1)
 		return {};
 	else{
@@ -725,15 +766,15 @@ function FuseObjectArray(objArray){
 	}
 }
 
-function CloneObject(Obj){
+CloneObject=function(Obj){
 	return FuseObjects({},Obj);
 }
 
-function CloneArray(Arr){
+CloneArray=function(Arr){
 	return [].concat(Arr);
 }
 
-function Clone(AOS){
+Clone=function(AOS){
 	if(typeof AOS==="string")
 		return AOS;
 	else if(IsObject(AOS))
@@ -743,7 +784,7 @@ function Clone(AOS){
 }
 
 
-function Datafy(obj){
+Datafy=function(obj){
 	var O={};
 	function SetValueKey(value,key){
 		var datakey=Prefix(key,"data-");
@@ -755,7 +796,7 @@ function Datafy(obj){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Regex
-function CombineMultiRegex(exprarray,joiner){
+CombineMultiRegex=function(exprarray,joiner){
 	var j="";
 	if(joiner){
 		j=joiner;
@@ -766,14 +807,14 @@ function CombineMultiRegex(exprarray,joiner){
 	return comb;
 }
 
-function CombineRegex(a,b){
+CombineRegex=function(a,b){
 	return CombineMultiRegex([a,b]);
 }
-function AlternateRegex(exprarray){
+AlternateRegex=function(exprarray){
 	return CombineMultiRegex(exprarray,"|");
 }
 
-function ForwardRegex(string){
+ForwardRegex=function(string){
 	return CombineRegex(string,/[\d\D]*/);
 }
 
@@ -787,34 +828,37 @@ function ForwardRegex(string){
 //IDENTIFIER 	page
 //EXTENSION 	.html
 //TAG			#etc
-var domains=["pedropsi.github.io","combinatura.github.io"];
-var predomainssoft=AlternateRegex(domains.map(function(d){return CombineRegex(/^[\d\D]*/,d)}));
-var predomainshard=AlternateRegex(domains.map(function(d){return CombineRegex(/^(https?:\/\/)*/,d)}));
-var posdomains=AlternateRegex(domains.map(function(d){return CombineRegex(d,/[\d\D]*$/)}));
-var idomain=CombineRegex(/^/,AlternateRegex(domains));
+//SEARCH 		?param=value
 
-function Domains(){
-	return idomain;
+Domains=function(){
+	return ["pedropsi.github.io"]
+};
+Predomainssoft=function(){
+	return AlternateRegex(Domains().map(function(d){return CombineRegex(/^[\d\D]*/,d)}));
 }
+Predomainshard=function(){
+	return AlternateRegex(Domains().map(function(d){return CombineRegex(/^(https?:\/\/)*/,d)}));
+}
+
 
 //PRIMARY
 
-function PageTitle(){
+PageTitle=function(){
 	return document.title;
 }
 
-function PageURL(){
+PageURL=function(){
 	return ""+window.location;
 }
 
-function PageTag(url){
+PageTag=function(url){
 	if(typeof url==="undefined")
 		return PageTag(PageURL());
 	else
 		return url.replace(/([^#]*#)/,"").replace(url,"");
 }
 
-function PageUnTag(url){
+PageUnTag=function(url){
 	if(typeof url==="undefined")
 		return PageUnTag(PageURL());
 	else{
@@ -823,7 +867,7 @@ function PageUnTag(url){
 	}
 }
 
-function PageUnSearch(url){
+PageUnSearch=function(url){
 	if(typeof url==="undefined")
 		return PageUnSearch(PageURL());
 	else{
@@ -831,7 +875,7 @@ function PageUnSearch(url){
 	}
 }
 
-function PageIdentifierStrict(url){
+PageIdentifierStrict=function(url){
 	if(typeof url==="undefined")
 		return PageIdentifierStrict(PageURL());
 	else{
@@ -843,39 +887,39 @@ function PageIdentifierStrict(url){
 	}
 }
 
-function PageIdentifier(url){
+PageIdentifier=function(url){
 	return PageIdentifierStrict(url)||"index";
 }
 
 
-function PageUnHead(url){
+PageUnHead=function(url){
 	if(typeof url==="undefined")
 		return PageUnHead(PageURL());
 	else
 		return url.replace(/[\w\d]*\:(\/\/+)/g,"");
 }
 
-function PageHead(url){
+PageHead=function(url){
 	if(typeof url==="undefined")
 		return PageHead(PageURL());
 	else
 		return url.replace(PageUnHead(url),"");
 }
 
-function PageAfterOwnDomain(url){
+PageAfterOwnDomain=function(url){
 	if(typeof url==="undefined")
 		return PageAfterOwnDomain(PageURL());
 	else
-		return url.replace(predomainssoft,"").replace(/^\//,"");
+		return url.replace(Predomainssoft(),"").replace(/^\//,"");
 }
 
-function IsMaybeRoot(urlAfter){
+IsMaybeRoot=function(urlAfter){
 	return (urlAfter.replace(".htm","")===urlAfter)&&(urlAfter.replace(".","")!==urlAfter);
 }
-function IsSingleton(urlAfter){
+IsSingleton=function(urlAfter){
 	return (urlAfter.replace("/","")===urlAfter);
 }
-function PageRelativePath(url){
+PageRelativePath=function(url){
 	if(typeof url==="undefined")
 		return PageRelativePath(PageURL());
 	else{
@@ -891,7 +935,7 @@ function PageRelativePath(url){
 	}
 }
 
-function PageRoot(url){
+PageRoot=function(url){
 	if(typeof url==="undefined")
 		return PageRoot(PageURL());
 	else{
@@ -899,7 +943,7 @@ function PageRoot(url){
 	}
 }
 
-function PageIdentifierExtension(url){
+PageIdentifierExtension=function(url){
 	if(typeof url==="undefined")
 		return PageIdentifierExtension(PageURL());
 	else{
@@ -908,7 +952,7 @@ function PageIdentifierExtension(url){
 }
 
 
-function PageAbsolute(url){
+PageAbsolute=function(url){
 	if(typeof url==="undefined")
 		return PageAbsolute(PageURL());
 	else{
@@ -919,11 +963,11 @@ function PageAbsolute(url){
 
 
 // Safe string loading
-function SafeString(tex){
+SafeString=function(tex){
 	return String(tex).replace(/[\<\>\=\+\-\(\)\*\'\"]/g,"");
 }
 
-function SafeUrl(tex){
+SafeUrl=function(tex){
 	tex=String(tex||"").replace(/[\<\>\+\(\)\*\'\"\#\\\s]+.*/g,"");
 	if(!tex)
 		return "";
@@ -934,7 +978,7 @@ function SafeUrl(tex){
 }
 
 //Search queries
-function PageSearch(parameter,page){
+PageSearch=function(parameter,page){
 	var l=document.createElement("a");
 	l.href=page||document.URL;
 	l=l.search;
@@ -945,11 +989,12 @@ function PageSearch(parameter,page){
 	return FromUTF8(id.replace(/\&.*/,""));
 }
 
-function FromUTF8(string){
-	return StringReplace(string,UTF8);
+FromUTF8=function(string){
+	return StringReplace(string,UTF8());
 }
 
-var UTF8={
+UTF8=function(){
+	return {
 	"%00":" ",
 	"%01":" ",
 	"%02":" ",
@@ -1206,44 +1251,45 @@ var UTF8={
 	"%C3%BD":"ý",
 	"%C3%BE":"þ",
 	"%C3%BF":"ÿ"
+	}
 }
 
 //SECONDARY
 
-function IsRelativeLink(url){
+IsRelativeLink=function(url){
 	return PageRelativePath(url)===url;
 }
 
-function IsFileLink(url){
+IsFileLink=function(url){
 	return PageHead(url)==="file:///";
 }
 
-function isLocalLink(url){
+isLocalLink=function(url){
 	return IsRelativeLink(url)||IsFileLink(url);
 }
 
-function IsInOwnDomain(url){
-	return url.replace(predomainshard,"")!==url;
+IsInOwnDomain=function(url){
+	return url.replace(Predomainshard(),"")!==url;
 }
 
-function IsIntraPageLink(url){
+IsIntraPageLink=function(url){
 	var inpage=UnPrefix(url,"#");
 	return url!=inpage;
 }
 
-function IsExtraPageLink(url){
+IsExtraPageLink=function(url){
 	return !IsIntraPageLink(url);
 }
 
-function IsInnerLink(url){
+IsInnerLink=function(url){
 	return IsExtraPageLink(url)&&(isLocalLink(url)||IsInOwnDomain(url));
 }
 
-function IsOuterLink(url){
+IsOuterLink=function(url){
 	return IsExtraPageLink(url)&&!(isLocalLink(url)||IsInOwnDomain(url));
 }
 
-function IsAbsolutableLink(url){
+IsAbsolutableLink=function(url){
 	return IsExtraPageLink(url)&&(IsRelativeLink(url)||IsInOwnDomain(url));
 }
 
@@ -1253,10 +1299,10 @@ if(typeof Local==="undefined")
 		return /^file\:.*/.test(document.URL);
 	}
 	
-function JoinPath(path,subpath){
+JoinPath=function(path,subpath){
 	return path.replace(/\\*$/,"")+"/"+subpath.replace(/^\\*/,"");
 }
-function GlocalPath(urlpath,relativepath){
+GlocalPath=function(urlpath,relativepath){
 	if(Local())
 		var u="..";
 	else
@@ -1266,7 +1312,7 @@ function GlocalPath(urlpath,relativepath){
 
 //NavigateGoToPage
 
-function Navigate(url,samewindow){
+Navigate=function(url,samewindow){
 	if(samewindow)
 		window.location.href=url;
 	else{//NewTab
@@ -1280,21 +1326,21 @@ function Navigate(url,samewindow){
 ///////////////////////////////////////////////////////////////////////////////
 //Page traversal
 
-function MarkElements(selector,markfunction){
+MarkElements=function(selector,markfunction){
 	return QueryAll(selector).map(markfunction);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 //Page auto index
-function IDfy(s){
+IDfy=function(s){
 	return UnExfix(s.replace(/([^A-Za-z0-9\_])+/g,"-"),"-");
 }
 
-function IndexTitle(h){
+IndexTitle=function(h){
 	return function(t){return IndexSubTitle(t,h)};
 }
 
-function IndexSubTitle(t,h){
+IndexSubTitle=function(t,h){
 	t.setAttribute("data-index-depth",h);
 	Class(t,"index-item");
 	t.id=t.id?t.id:IDfy(t.innerText); 
@@ -1302,22 +1348,22 @@ function IndexSubTitle(t,h){
 	return t.id;
 }
 
-function IndexTag(h){
+IndexTag=function(h){
 	return MarkElements(".main .prose "+h,IndexTitle(h));
 }
 
-function IndexTitles(){
+IndexTitles=function(){
 	var indexed=["h1","h2","h3","h4","h5","h6"].map(IndexTag);
 	Shout("IndexTitles");
 	return indexed;
 }
 
-function PageIndexHTML(indexArray){
+PageIndexHTML=function(indexArray){
 	return "<div class='index'><a class='index-link h1' id='Table-of-Contents' href='#Table-of-Contents' onclick='ShowHideIndex()'>Table of contents</a>"+indexArray.map(IndexItemHTML).join("\
 	")+"</div>";
 }
 
-function IndexItemHTML(e){
+IndexItemHTML=function(e){
 	if(!e||!Classed(e,"index-item"))
 		return "";
 	else{
@@ -1329,7 +1375,7 @@ function IndexItemHTML(e){
 
 
 
-function AddTitleIndex(section){
+AddTitleIndex=function(section){
 	var indexArray=GetElements(".index-item",section);
 	if(indexArray.length<=1)
 		return;
@@ -1339,7 +1385,7 @@ function AddTitleIndex(section){
 	ShowHideIndex();
 }
 
-function ShowHideIndex(){
+ShowHideIndex=function(){
 	Toggle(".h1","uncollapse");
 	Toggle(".h1","collapse");
 	ShowHide(".h2");
@@ -1349,7 +1395,7 @@ function ShowHideIndex(){
 	ShowHide(".h6");
 }
 
-function AddScrollUpButton(t,h){
+AddScrollUpButton=function(t,h){
 	var title=t.innerText;
 	t.innerHTML=AHTML(title,PageUnTag()+"#"+IDfy(title));
 	if(h==="h2")
@@ -1358,18 +1404,18 @@ function AddScrollUpButton(t,h){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Unique random identifier
-var UID=""
-function UserId(){
-	if(UID==="")
-		UID=GenerateId();
-	return UID;
+
+UserId=function(){
+	if(!UserId.id)
+		UserId.id=GenerateId();
+	return UserId.id;
 }
 
-function RandomInteger(n){return Floor(Math.random()*n)};
-function RandomChoice(v){return v[RandomInteger(v.length)]};
+RandomInteger=function(n){return Floor(Math.random()*n)};
+RandomChoice=function(v){return v[RandomInteger(v.length)]};
 
 
-function GenerateId(){
+GenerateId=function(){
 	var preconsonants="bcdfghjklmnpqrstvwxz";
 	var preconsonants2="hjlnrs";
 	var vowels="aeiouyáéíóúàèìòùýäëïöüÿãõâêîôû";
@@ -1393,62 +1439,28 @@ function GenerateId(){
 
 
 
-///////////////////////////////////////////////////////////////////////////////
-// Self-awareness
-
-var FunctionDefinitionPattern=/\s*function\s+([^\(\)]*)\([^\(\)]*\)\s*\{.*/;
-
-function HavingFunctionDefinition(line){
-	return FunctionDefinitionPattern.test(line);
-};
-function FunctionDefinitionName(line){
-	var name=line.replace(FunctionDefinitionPattern,"$1");
-	if(name!==line){
-		Shout("function "+name);
-		return name;
-	}
-	else
-		return ""; 
-};
-
-function FunctionsDefined(filetxt){
-	var flist=filetxt.split("\n");
-	flist=flist.filter(HavingFunctionDefinition);
-	flist=flist.map(FunctionDefinitionName);
-
-	if(!FunctionsDefined.list)
-		FunctionsDefined.list=[];
-
-	FunctionsDefined.list=FunctionsDefined.list.concat(flist);
-	return flist;
-}
-
-function FunctionDefined(name){
-	return In(FunctionsDefined.list,name);
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 //Load resources
 
-function SourceIdentifier(path){
+SourceIdentifier=function(path){
 	return PageIdentifier(UnPosfix(UnPosfix(path,".js"),".css"));
 }
 
-function LoadSources(sourceArray,SuccessF){
+LoadSources=function(sourceArray,SuccessF){
 	var shoutArray=sourceArray.filter(function(f){return InPosfix(f,".js")}).map(SourceIdentifier);		//discards non-js files plus the folder structure to preserve file name
 	sourceArray.map(LoadSource);											//loads asynchronously (each file MUST "Shout" its own identifier upon loading)
 	ListenAndOnce(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
 }
 
 //Load scripts
-function LoadSource(source){
+LoadSource=function(source){
 	if(InPosfix(source,".js"))
 		LoadScript(source);
 	if(InPosfix(source,".css"))
 		LoadStyle(source);
 }
 
-function LoadScript(source){
+LoadScript=function(source){
 	var head=GetElement('head');
 	var script=document.createElement('script');
 	script.src=Posfix(source,".js");
@@ -1456,13 +1468,13 @@ function LoadScript(source){
 	head.appendChild(script);
 }
 
-function LoadCode(code){
+LoadCode=function(code){
 	var g = document.createElement('script');
 		g.text = code;
 	AddElement(g,"BODY");
 }
 
-function LoadAsync(sourcename,folder){
+LoadAsync=function(sourcename,folder){
 	var head=GetElement('head');
 	var script=document.createElement('script');
 
@@ -1476,13 +1488,13 @@ function LoadAsync(sourcename,folder){
 	//LoadData(script.src,FunctionsDefined);//self-awareness
 }
 
-function LoaderInFolder(folder){
+LoaderInFolder=function(folder){
 	return function(sourcename){return LoadAsync(sourcename,folder)};
 }
 
 //Load styles
 
-function LoadStyle(sourcename){
+LoadStyle=function(sourcename){
 	var head=document.getElementsByTagName('head')[0];
 
 	//Load
@@ -1497,14 +1509,14 @@ function LoadStyle(sourcename){
 //Data Reception
 
 //Network status
-function Online(){return navigator.onLine};
-function Offline(){return !Online()};
+Online=function(){return navigator.onLine};
+Offline=function(){return !Online()};
 
 //External resources
-function MacroURL(c){return "https://script.google.com/macros/s/"+c+"/exec";};
+MacroURL=function(c){return "https://script.google.com/macros/s/"+c+"/exec";};
 
 //Fetch data from url
-function LoadDataFromNetwork(url,SuccessF,header,FailureF){
+LoadDataFromNetwork=function(url,SuccessF,header,FailureF){
 	var FailureF=FailureF||Identity;
 	var rawFile=new XMLHttpRequest();
 	rawFile.open("GET",url,true);
@@ -1532,7 +1544,7 @@ function LoadDataFromNetwork(url,SuccessF,header,FailureF){
 	rawFile.send(null);
 };
 
-function LoadData(url,SuccessF,header,FailureF){
+LoadData=function(url,SuccessF,header,FailureF){
 	var saved=Memory(url);
 	if(saved&&!MemoryExpired(url))
 		return SuccessF(saved);
@@ -1543,7 +1555,7 @@ function LoadData(url,SuccessF,header,FailureF){
 ///////////////////////////////////////////////////////////////////////////////
 // Persistent Memory
 
-function MemorySlot(name){
+MemorySlot=function(name){
 	if(!name)
 		return MemorySlot['_list'];
 	
@@ -1552,7 +1564,7 @@ function MemorySlot(name){
 	return PageRoot()+"_"+name.toLowerCase();
 }
 
-function Memory(name,data,days){
+Memory=function(name,data,days){
 	if(typeof data==="undefined"){
 		var data=null;
 		try{data=JSON.parse(localStorage[MemorySlot(name)])}
@@ -1568,7 +1580,7 @@ function Memory(name,data,days){
 	catch(err){};
 }
 
-function MemoryExpired(name){
+MemoryExpired=function(name){
 	var expired=true;
 	try{
 		expired=localStorage[MemorySlot(name+"_exp")];
@@ -1578,7 +1590,7 @@ function MemoryExpired(name){
 	return expired;
 }
 
-function MemoryDuration(name,days){
+MemoryDuration=function(name,days){
 	if(days){//SET
 		try{localStorage[MemorySlot(name+"_days")]=Number(days)}
 		catch(err){}
@@ -1601,7 +1613,7 @@ function MemoryDuration(name,days){
 // Data Download
 //(https://stackoverflow.com/questions/13405129/javascript-create-and-save-file)
 
-function Download(data,filename,typ){
+Download=function(data,filename,typ){
 	var file = new Blob([data],{type:typ});
 	if (window.navigator.msSaveOrOpenBlob) // IE10+
 		window.navigator.msSaveOrOpenBlob(file, filename);
@@ -1624,7 +1636,7 @@ function Download(data,filename,typ){
 ///////////////////////////////////////////////////////////////////////////////
 // DOM Manipulation
 
-function MakeElement(html){
+MakeElement=function(html){
 	var e=document.createElement("div");
 	e.innerHTML=html;
 	return e.children[0];
@@ -1634,33 +1646,33 @@ HTMLTags=['!DOCTYPE','a','abbr','acronym','abbr','address','applet','embed','obj
 
 HTMLTags=HTMLTags.map(function(s){return s.toUpperCase()});
 
-function IsTag(selector){
+IsTag=function(selector){
 	if(!IsString(selector))
 		return false;
 	return In(HTMLTags,selector.toUpperCase());
 }
-function IsClass(selector){
+IsClass=function(selector){
 	if(!IsString(selector))
 		return false;
 	return InPrefix(selector,".");
 }
-function IsID(selector){
+IsID=function(selector){
 	if(!IsString(selector))
 		return false;
 	return InPrefix(selector,"#");
 }
 
-function IsQuerySelector(selector){
+IsQuerySelector=function(selector){
 	return IsID(selector)||IsClass(selector)||IsTag(selector);
 }
 
-function ParentSelector(targetIDsel){
+ParentSelector=function(targetIDsel){
 	var parentElement=ParentElement(targetIDsel);
 	if(parentElement)
 		return Prefix(UniqueId(parentElement),"#");
 }
 
-function MakeQuerySelector(selector){
+MakeQuerySelector=function(selector){
 	if(IsQuerySelector(selector))
 		return selector;
 	else
@@ -1668,7 +1680,7 @@ function MakeQuerySelector(selector){
 }
 
 // Get element based on selectors: .class, #id, idsring, or the element itself
-function GetElementFromTextSelector(selector,parentElement){
+GetElementFromTextSelector=function(selector,parentElement){
 	if(!selector)
 		return document.body;
 	if(parentElement===null)
@@ -1681,14 +1693,14 @@ function GetElementFromTextSelector(selector,parentElement){
 	return parentElement.querySelector(selector);
 };
 
-function GetElementIn(selector,parentElement){
+GetElementIn=function(selector,parentElement){
 	if(typeof selector==="string")
 		return GetElementFromTextSelector(selector,parentElement);
 	else
 		return selector; //in case the actual element is given in the beginning
 };
 
-function GetElement(selector,pSelector){
+GetElement=function(selector,pSelector){
 	if(!selector)
 		return;
 	var parentElement;
@@ -1704,20 +1716,20 @@ function GetElement(selector,pSelector){
 }
 
 //Match Element to selector
-function QueryAll(selector){
+QueryAll=function(selector){
 	return Array.from(document.querySelectorAll(MakeQuerySelector(selector)));
 }
 
-function Match(elem,selector){
+Match=function(elem,selector){
 	return In(QueryAll(selector),elem);
 }
 
-function MatchAnyElement(elemArray,selector){
+MatchAnyElement=function(elemArray,selector){
 	return elemArray.some(function(e){return Match(e,selector)});
 }
 
 //Find first Element matching selector
-function FindFirstMatch(selectorArray,elem){
+FindFirstMatch=function(selectorArray,elem){
 	var elem=GetElement(elem);
 
 	function F(a){
@@ -1733,7 +1745,7 @@ function FindFirstMatch(selectorArray,elem){
 
 
 //Siblings of any depth
-function Siblings(thi,depth,maxParent){
+Siblings=function(thi,depth,maxParent){
 	var depth=depth||1;
 	var maxParent=GetElement(maxParent)||document.body;
 	var d=0;
@@ -1759,26 +1771,26 @@ function Siblings(thi,depth,maxParent){
 
 //Inside
 
-function InsideAt(parentSelector,selector){
+InsideAt=function(parentSelector,selector){
 	if(GetElement(parentSelector)===null||GetElement(selector)===null)
 		return undefined;
 	return Inside(parentSelector,selector)||GetElement(parentSelector).isEqualNode(GetElement(selector));
 }
 
-function Inside(parentSelector,selector){
+Inside=function(parentSelector,selector){
 	if(GetElement(parentSelector)===null||GetElement(selector)===null)
 		return undefined;
 	return GetElement(parentSelector).contains(GetElement(selector));
 }
 
-function Outside(parentSelector,selector){
+Outside=function(parentSelector,selector){
 	if(GetElement(parentSelector)===null||GetElement(selector)===null)
 		return undefined;
 	return !InsideAt(parentSelector,selector);
 }
 
 // Get element based on selectors: .class, tag, or the element itself
-function GetElements(selectorString,parentIDsel){
+GetElements=function(selectorString,parentIDsel){
 	var HTMLCollect;
 	var parentElement=GetElement(parentIDsel)||document;
 	if(IsClass(selectorString))
@@ -1791,7 +1803,7 @@ function GetElements(selectorString,parentIDsel){
 };
 
 // Get Children Elements
-function FirstChildren(targetIDsel){
+FirstChildren=function(targetIDsel){
 	if(IsArray(targetIDsel))
 		return targetIDsel.map(FirstChildren).flat();
 	var e=GetElement(targetIDsel);
@@ -1800,7 +1812,7 @@ function FirstChildren(targetIDsel){
 }
 
 // Get Children Elements matching particular selector
-function Children(targetIDsel,childIDselString){
+Children=function(targetIDsel,childIDselString){
 	if(typeof childIDselString==="undefined")
 		return FirstChildren(targetIDsel);
 
@@ -1814,14 +1826,14 @@ function Children(targetIDsel,childIDselString){
 }
 
 
-function MapChildren(targetIDsel,childIDselString,F){
+MapChildren=function(targetIDsel,childIDselString,F){
 	var c=Children(targetIDsel,childIDselString);
 	if(c)
 		return c.map(F);
 }
 
 // Get Parent Element
-function FirstParentElement(targetIDsel){
+FirstParentElement=function(targetIDsel){
 	var e=GetElement(targetIDsel);
 	if(e)
 		return e.parentElement;
@@ -1829,7 +1841,7 @@ function FirstParentElement(targetIDsel){
 
 // Get Parent Element matching particular sleector
 
-function FirstMatchingElement(type,targetE,priorIDselString){
+FirstMatchingElement=function(type,targetE,priorIDselString){
 	var e=GetElement(targetE);
 	if(!priorIDselString)
 		return e[type];
@@ -1843,29 +1855,29 @@ function FirstMatchingElement(type,targetE,priorIDselString){
 	return match?e:undefined;
 }
 
-function ParentElement(targetIDsel,parentIDselString){
+ParentElement=function(targetIDsel,parentIDselString){
 	if(!parentIDselString)
 		return FirstParentElement(targetIDsel);
 	FirstMatchingElement("parentElement",targetIDsel,parentIDselString);
 }
 
-function PriorElement(targetE,priorIDselString){
+PriorElement=function(targetE,priorIDselString){
 	return FirstMatchingElement("previousSibling",targetE,priorIDselString);
 }
 
-function PosteriorElement(targetE,priorIDselString){
+PosteriorElement=function(targetE,priorIDselString){
 	return FirstMatchingElement("nextSibling",targetE,priorIDselString)
 }
 
 // Add new element to page, under a parent element
-function NewElement(htmlOrElement){
+NewElement=function(htmlOrElement){
 	var e=htmlOrElement;
 	if (typeof htmlOrElement==="string")
 		e=MakeElement(htmlOrElement);
 	return e;
 }
 
-function AddElement(htmlOrElement,parentIDsel){
+AddElement=function(htmlOrElement,parentIDsel){
 	var e=NewElement(htmlOrElement);
 	var p=GetElement(parentIDsel);
 	if(p)
@@ -1873,7 +1885,7 @@ function AddElement(htmlOrElement,parentIDsel){
 	return e;
 };
 
-function PreAddElement(htmlOrElement,parentIDsel){
+PreAddElement=function(htmlOrElement,parentIDsel){
 	var e=NewElement(htmlOrElement);
 	var p=GetElement(parentIDsel);
 	if(p)
@@ -1882,14 +1894,14 @@ function PreAddElement(htmlOrElement,parentIDsel){
 };
 
 // Add new element to page, after a sibling element
-function AppendElement(htmlOrElement,selector){
+AppendElement=function(htmlOrElement,selector){
 	var e=NewElement(htmlOrElement);
 	var s=GetElement(selector);
 	if(s)
 		return s.insertAdjacentElement('afterend',e);
 };
 
-function PrependElement(htmlOrElement,selector){
+PrependElement=function(htmlOrElement,selector){
 	var e=NewElement(htmlOrElement);
 	var s=GetElement(selector);
 	if(s)
@@ -1898,20 +1910,20 @@ function PrependElement(htmlOrElement,selector){
 
 
 // Replace parent element contents with new element
-function ReplaceChildren(html,parentIDsel){
+ReplaceChildren=function(html,parentIDsel){
 	var p=GetElement(parentIDsel);
 	if(p)
 		p.innerHTML=html;
 };
 
 // Replace element with new element
-function ReplaceElement(htmlOrElement,elemIDsel){
+ReplaceElement=function(htmlOrElement,elemIDsel){
 	var a=AppendElement(htmlOrElement,elemIDsel);
 	RemoveElement(elemIDsel);
 	return a;
 };
 
-function AddSingleElement(html,parentIDsel,selfSel){
+AddSingleElement=function(html,parentIDsel,selfSel){
 	if(GetElement(selfSel))
 		return ReplaceElement(html,selfSel);
 	else
@@ -1919,19 +1931,19 @@ function AddSingleElement(html,parentIDsel,selfSel){
 };
 
 //Wrap Element
-function WrapElement(html,elemIDsel,newparentIdsel){
+WrapElement=function(html,elemIDsel,newparentIdsel){
 	AppendElement(html,elemIDsel);
 	AddElement(GetElement(elemIDsel),newparentIdsel);
 }
 
 
 // Remove Children
-function RemoveChildren(parentID){
+RemoveChildren=function(parentID){
 	ReplaceChildren("",parentID)
 }
 
 // Remove Element
-function RemoveElement(elementIDsel,parentIDsel){
+RemoveElement=function(elementIDsel,parentIDsel){
 	var e=GetElement(elementIDsel,parentIDsel);
 	if(e&&e.parentNode){
 		e.parentNode.removeChild(e);
@@ -1939,7 +1951,7 @@ function RemoveElement(elementIDsel,parentIDsel){
 }
 
 // Remove Multiple Elements
-function RemoveElements(elementIDsel,parentIDsel){
+RemoveElements=function(elementIDsel,parentIDsel){
 	var eList=GetElements(elementIDsel,parentIDsel);
 	eList.map(RemoveElement);
 }
@@ -1947,7 +1959,7 @@ function RemoveElements(elementIDsel,parentIDsel){
 //////////////////////////////////////////////////
 // Element Unique ID
 
-function UniqueId(elementIDsel){
+UniqueId=function(elementIDsel){
 	var e=GetElement(elementIDsel);
 	if(!e)
 		return false;
@@ -1961,7 +1973,7 @@ function UniqueId(elementIDsel){
 //////////////////////////////////////////////////
 // Apply to Child Elements
 
-function ApplyChildren(F,elem,children){
+ApplyChildren=function(F,elem,children){
 	if(!children)
 		return;
 	var children=F(children);
@@ -1970,7 +1982,7 @@ function ApplyChildren(F,elem,children){
 	children.map(function(c){AddElement(c,elem)});
 }
 
-function ApplyOriginalChildren(F,parentSelector,childselector,subparentSelector){
+ApplyOriginalChildren=function(F,parentSelector,childselector,subparentSelector){
 	if(!subparentSelector)
 		var spElem=GetElement(parentSelector);
 	else
@@ -1990,18 +2002,18 @@ function ApplyOriginalChildren(F,parentSelector,childselector,subparentSelector)
 //////////////////////////////////////////////////
 // Filter table
 
-function FilterChildren(filterF,parentSelector,childSelector,subparentSelector){
+FilterChildren=function(filterF,parentSelector,childSelector,subparentSelector){
 	function FilterCh(children){
 		return children.filter(filterF);
 	}
 	ApplyOriginalChildren(FilterCh,parentSelector,childSelector,subparentSelector);
 }
 
-function InSimple(childtxt,patterntxt){
+InSimple=function(childtxt,patterntxt){
 	return In(LowerSimpleString(childtxt),LowerSimpleString(patterntxt));
 }
 
-function TextFilterChildren(patterntxt,parentSelector,childSelector,subparentSelector){
+TextFilterChildren=function(patterntxt,parentSelector,childSelector,subparentSelector){
 	function TextFilter(child){
 		
 		var childtxt=LowerSimpleString(child.textContent);
@@ -2011,7 +2023,7 @@ function TextFilterChildren(patterntxt,parentSelector,childSelector,subparentSel
 	AddShareSearch(patterntxt,parentSelector);
 }
 
-function PrependFilterInput(InputFilterF,parentSelector,childrenSelector,subparentSelector){
+PrependFilterInput=function(InputFilterF,parentSelector,childrenSelector,subparentSelector){
 	var input=PriorElement(parentSelector,"INPUT");
 	RemoveElement(input);
 
@@ -2020,7 +2032,7 @@ function PrependFilterInput(InputFilterF,parentSelector,childrenSelector,subpare
 	PrependElement(filterHTML,parentSelector);
 }
 
-function AddShareSearch(patterntxt,elementSelector){	
+AddShareSearch=function(patterntxt,elementSelector){	
 	var tableid="";
 	var tables=GetElements("TABLE");
 	if(tables.length>1){
@@ -2035,7 +2047,7 @@ function AddShareSearch(patterntxt,elementSelector){
 
 // Recognise filter table
 
-function FilterSearchURL(){
+FilterSearchURL=function(){
 	var search=PageSearch("search");
 	if(search==="")
 		return;
@@ -2063,13 +2075,13 @@ function FilterSearchURL(){
 	}
 }
 
-function InputFilter(parentSelector,filterSelector,childrenSelector,subparentSelector){
+InputFilter=function(parentSelector,filterSelector,childrenSelector,subparentSelector){
 	var textfilter=GetElement(filterSelector).value;
 	var parentSelector=GetElement(parentSelector);
 	TextFilterChildren(textfilter,parentSelector,childrenSelector,subparentSelector);
 }
 
-function FilterableTable(tableSelector){
+FilterableTable=function(tableSelector){
 	if(GetElements("TR",tableSelector).length>10){//Only big tables need filtering
 		PrependFilterInput(InputFilter,tableSelector,"TR","TBODY");
 	}
@@ -2079,7 +2091,7 @@ function FilterableTable(tableSelector){
 //////////////////////////////////////////////////
 // Scroll into
 
-function ScrollInto(elementIDsel){
+ScrollInto=function(elementIDsel){
 	var e=GetElement(elementIDsel);
 	e.scrollIntoView();
 }
@@ -2089,19 +2101,19 @@ function ScrollInto(elementIDsel){
 ////////////////////////////////////////////////////////////////////////////////
 // Element Generator
 
-function ReadAttributes(attributesObj){
+ReadAttributes=function(attributesObj){
 	function Attrib(k){return k+"='"+attributesObj[k]+"'";};
 	return Keys(attributesObj).map(Attrib).join(" ");
 }
 
-function ElementHTML(optionsObj){
+ElementHTML=function(optionsObj){
 	var tag=optionsObj.tag?optionsObj.tag:"div";
 	var attributes=(optionsObj.attributes)?' '+ReadAttributes(optionsObj.attributes):'';	//attributes is an Object
 	var txt=optionsObj.txt?optionsObj.txt:"???";
 	return "<"+tag+attributes+">"+txt+"</"+tag+">";		//txt and tag
 };
 
-function SingleElementHTML(optionsObj){
+SingleElementHTML=function(optionsObj){
 	var tag=optionsObj.tag?optionsObj.tag:"div";
 	var attributes=(optionsObj.attributes)?' '+ReadAttributes(optionsObj.attributes):'';	//attributes is an Object
 	return "<"+tag+attributes+"/>";
@@ -2110,7 +2122,7 @@ function SingleElementHTML(optionsObj){
 
 // Basic Elements
 
-function ImageHTML(optionsObj){
+ImageHTML=function(optionsObj){
 	var o=optionsObj?optionsObj:{};
 	o.tag="img";
 	if(!o.attributes)
@@ -2118,17 +2130,17 @@ function ImageHTML(optionsObj){
 	return SingleElementHTML(o);
 };
 
-function PlaceholderImageHTML(){
+PlaceholderImageHTML=function(){
 	return ImageHTML();
 };
 
-function IconHTML(path,vbmax,vbmin){
+IconHTML=function(path,vbmax,vbmin){
 	var vbmin=vbmin||"0 0";
 	var vbmax=vbmax||"400 400";
 	return SpanHTML("<svg class='iconpath' width='20px' height=''20px' viewBox='"+vbmin+" "+vbmax+"'><path d='"+path+"'/></svg>","icon");
 }
 
-function SpanHTML(html,clas){
+SpanHTML=function(html,clas){
 	if(clas)
 		var clas=Exfix(clas," class='","'");
 	else
@@ -2136,7 +2148,7 @@ function SpanHTML(html,clas){
 	return "<span"+clas+">"+html+"</span>";
 }
 
-function ButtonHTML(optionsObj){
+ButtonHTML=function(optionsObj){
 	var o=optionsObj?optionsObj:{};
 	o.tag=o.tag?o.tag:"div";			//defaults to div
 	if(!o.attributes)
@@ -2160,7 +2172,7 @@ function ButtonHTML(optionsObj){
 	return ElementHTML(o);
 };
 
-function AHTML(title,ref,attribs){
+AHTML=function(title,ref,attribs){
 	var external=InPrefix(ref,"http");
 	var attribs=attribs||{};
 	attribs["href"]=ref;
@@ -2169,17 +2181,17 @@ function AHTML(title,ref,attribs){
 	return ElementHTML({tag:"a",txt:title,attributes:attribs});
 }
 
-function LabelHTML(text,type){
+LabelHTML=function(text,type){
 	var type=type||text||"";
 	return "<sup class='label "+type+"'>"+text+"</sup>";
 }
 
-function ScrollUpHTML(){
+ScrollUpHTML=function(){
 	return ButtonHTML({txt:ObtainSymbol("scroll-up"),attributes:{class:"scrollTop",onclick:"window.scrollTo(0,0)"}});
 }
 
 //Hidden Elements
-function GhostHTML(id){
+GhostHTML=function(id){
 	"<span id='"+id+"' class='hidden'></span>";
 }
 
@@ -2191,13 +2203,13 @@ SuperimposedHTML(A,B){
 
 // Table Elements
 
-function TDHTML(d){
+TDHTML=function(d){
 	if(!d||d==="")
 		return "<td></td>";
 	return "\t\t<td>"+d+"</td>";
 }
 
-function TRHTML(dataArray){
+TRHTML=function(dataArray){
 	if(!dataArray||dataArray.length<1)
 		return "";
 	
@@ -2212,7 +2224,7 @@ function TRHTML(dataArray){
 	return "\t<tr>\n"+dataArray+"</tr>";
 };
 
-function TableHTML(caption,headers,rows){
+TableHTML=function(caption,headers,rows){
 	var headersHTML="";
 	if(IsString(headers))
 		headersHTML=headers;
@@ -2229,7 +2241,7 @@ function TableHTML(caption,headers,rows){
 }
 
 
-function SectionHTML(SettingsObj){
+SectionHTML=function(SettingsObj){
 	var Source=SettingsObj.Source;
 
 	var header=SettingsObj.header||"";
@@ -2265,11 +2277,11 @@ function SectionHTML(SettingsObj){
 
 // Basic Buttons
 
-function ButtonOnClickHTML(title,onclicktxt){
+ButtonOnClickHTML=function(title,onclicktxt){
 	return ButtonHTML({txt:title,attributes:{onclick:onclicktxt}});
 }
 
-function ButtonLinkHTML(title,symbol,attribs){
+ButtonLinkHTML=function(title,symbol,attribs){
 	var id='#'+IDfy(title);
 	var attribs=attribs||{};
 	if(!symbol)
@@ -2280,42 +2292,42 @@ function ButtonLinkHTML(title,symbol,attribs){
 		return GhostHTML(id);
 }
 
-function CloseButtonHTML(targetid){
+CloseButtonHTML=function(targetid){
 	return "<div class='closer'>"+ButtonHTML({tag:"span",txt:"&times;",attributes:{onclick:'CloseCurrentDatapack();CloseWindow(this);'}})+"</div>";
 }
 
-function OkButtonHTML(targetid){
+OkButtonHTML=function(targetid){
 	return ButtonOnClickHTML("OK",'Close(\"'+targetid+'\")');
 }
-function SubmitButtonHTML(DP){
+SubmitButtonHTML=function(DP){
 	return ButtonOnClickHTML(DP.actionText,FunctionName(DP.action)+"(\""+DP.qid+"\")");
 }
 
-function MessageHTML(message,clas){
+MessageHTML=function(message,clas){
 	var clas=clas||"question";
 	return "<div class='"+clas+"'>"+message+"</div>";
 }
 
-function ErrorHTML(message,id){
+ErrorHTML=function(message,id){
 	return "<div class='error' id='"+id+"'>"+PHTML(message)+"</div>";
 }
 
-function PHTML(message){
+PHTML=function(message){
 	return "<p>"+message+"</p>";
 }
 
 
-function PlainMessageHTML(message){
+PlainMessageHTML=function(message){
 	return message;
 }
 
 //Button Bar
-function ButtonBar(buttonshtml,id){return '<div id="'+id+'" class="buttonbar buttonrow">'+buttonshtml+'</div>';}
+ButtonBar=function(buttonshtml,id){return '<div id="'+id+'" class="buttonbar buttonrow">'+buttonshtml+'</div>';}
 
 ////////////////////////////////////////////////////////////////////////////////
 // DataField and DataPack system : default DataField (customisable), many of which constitute a DataPack 
 
-function DefaultDataField(){
+DefaultDataField=function(){
 	return {
 		questionname:"???",				//Display name of the field question
 		questioninfo:"",				//Display info below the field question
@@ -2341,9 +2353,9 @@ function DefaultDataField(){
 	}
 }
 
-function DefaultChoice(index,choicetxt){return String(index)===String(0);}//choicetxt gives this function flexibility
+DefaultChoice=function(index,choicetxt){return String(index)===String(0);}//choicetxt gives this function flexibility
 
-function DefaultDataPack(){
+DefaultDataPack=function(){
 	return {
 		fields:[],
 
@@ -2378,10 +2390,11 @@ function DefaultDataPack(){
 
 }
 
-function FindDestination(DP){return FindData("destination",DP.qid)};
+FindDestination=function(DP){return FindData("destination",DP.qid)};
 
 
-var dataFieldTypes={
+DataFieldTypes=function(){
+	return {
 	plain:{
 		qsubmittable:false},
 	message:{
@@ -2461,30 +2474,32 @@ var dataFieldTypes={
 	secret:{
 		questionname:"",
 		qsubmittable:false}
+	}
 }
 
-function CustomDataField(type,obj){
+CustomDataField=function(type,obj){
 	var DF=DefaultDataField();
+	var dataFieldTypes=DataFieldTypes();
 	if(In(dataFieldTypes,type))
 		DF=FuseObjects(DF,dataFieldTypes[type]);
 	return FuseObjects(DF,obj);
 }
 
-function UpdateDataPack(DP,obj){
+UpdateDataPack=function(DP,obj){
 	return FuseObjects(DP,obj);
 }
 
-function NewDataPack(obj){
+NewDataPack=function(obj){
 	return UpdateDataPack(DefaultDataPack(),obj);
 }
 
-function NewDataPackFields(NamedFieldArray){
+NewDataPackFields=function(NamedFieldArray){
 	function CusDaFiel(ndf){return CustomDataField(ndf[0],ndf[1])};
 	var f=NamedFieldArray.map(CusDaFiel);
 	return {fields:f};
 }
 
-function RequestDataPack(NamedFieldArray,Options){
+RequestDataPack=function(NamedFieldArray,Options){
 	if(NamedFieldArray.length<1)
 		return;
 	else{
@@ -2522,11 +2537,11 @@ function RequestDataPack(NamedFieldArray,Options){
 
 // DataField HTML Components
 
-function PlainHTML(dataField){
+PlainHTML=function(dataField){
 	return "<span class='field-"+dataField.qfield+"' data-"+dataField.qfield+"='"+dataField.qvalue+"'>"+PlainMessageHTML(dataField.questionname)+"</span>";
 }
 
-function ExclusiveChoiceButtonHTML(choice,dataField,i){
+ExclusiveChoiceButtonHTML=function(choice,dataField,i){
 	var args='(\"'+dataField.qfield+'\",\"'+choice+'\",\"'+dataField.pid+'\");';
 	var SetF='SetData'+args;
 	var ExecuteF='ExecuteChoice'+args;
@@ -2548,7 +2563,7 @@ function ExclusiveChoiceButtonHTML(choice,dataField,i){
 	return ButtonHTML({txt:dataField.qchoicesViewF(choice),attributes:buAttribs});
 };
 
-function MultiChoiceButtonHTML(choice,dataField,i){
+MultiChoiceButtonHTML=function(choice,dataField,i){
 		var args='(\''+dataField.qfield+'\',\''+choice+'\',\''+dataField.pid+'\')';
 		var SelectF='ToggleThis(event,this);ToggleData'+args;
 		var buAttribs={'onclick':SelectF,'onfocus':SelectF,id:"choice-"+choice};
@@ -2556,14 +2571,14 @@ function MultiChoiceButtonHTML(choice,dataField,i){
 		return ButtonHTML({txt:dataField.qchoicesViewF(choice),attributes:buAttribs});
 	};
 
-function ChoiceRowHTML(dataField,buttontype){
+ChoiceRowHTML=function(dataField,buttontype){
 	var choi="";
 	for(var i in dataField.qchoices)
 		choi=choi+buttontype(dataField.qchoices[i],dataField,i);
 	return choi;
 }
 
-function SectionRowsHTML(sectionArray){
+SectionRowsHTML=function(sectionArray){
 	if(!sectionArray||sectionArray.length<0)
 		return ChoiceRowHTML;
 
@@ -2583,7 +2598,7 @@ function SectionRowsHTML(sectionArray){
 	return ChoiceSectionRowHTML;
 }
 
-function LayoutHTML(dataField,buttontype,layoutclass,LayoutF){
+LayoutHTML=function(dataField,buttontype,layoutclass,LayoutF){
 	ClearData(dataField.qfield,dataField.pid);
 	var clear='onload="ClearData(\''+dataField.qfield+'\',\''+dataField.pid+'\')" ';
 	var questionclass=dataField.qclass||"";
@@ -2592,31 +2607,31 @@ function LayoutHTML(dataField,buttontype,layoutclass,LayoutF){
 }
 
 
-function ExclusiveChoiceButtonRowHTML(dataField){
+ExclusiveChoiceButtonRowHTML=function(dataField){
 	return LayoutHTML(dataField,ExclusiveChoiceButtonHTML,'buttonrow',ChoiceRowHTML);
 }
 
-function ExclusiveChoiceSectionsHTML(sections){
+ExclusiveChoiceSectionsHTML=function(sections){
 	function ExChS(dataField){
 		return LayoutHTML(dataField,ExclusiveChoiceButtonHTML,'buttonrow',SectionRowsHTML(sections));
 	};
 	return ExChS;
 }
 
-function ChoicesButtonRowHTML(dataField){
+ChoicesButtonRowHTML=function(dataField){
 	return LayoutHTML(dataField,MultiChoiceButtonHTML,'buttonrow',ChoiceRowHTML);
 }
 
 
-function ShortAnswerHTML(dataField){
+ShortAnswerHTML=function(dataField){
 	return "<input class='input field-"+dataField.qfield+"' data-"+dataField.qfield+"='' placeholder='"+dataField.qplaceholder+"' id='"+dataField.qid+"' tabindex='0' value='"+dataField.qvalue+"'></input>";
 }
 
-function LongAnswerHTML(dataField){
+LongAnswerHTML=function(dataField){
 	return "<textarea class='input field-"+dataField.qfield+"' data-"+dataField.qfield+"='' placeholder='"+dataField.qplaceholder+"' id='"+dataField.qid+"' tabindex='0' value='"+dataField.qvalue+"'></textarea>";
 }
 
-function SubQuestionHTML(dataField){
+SubQuestionHTML=function(dataField){
 	var qname=dataField.questionname;
 	var questiontitle="";
 	var questioninfo="";
@@ -2631,7 +2646,7 @@ function SubQuestionHTML(dataField){
 
 // DataPack HTML Components
 
-function QuestionHTML(DP){
+QuestionHTML=function(DP){
 	var Fields=DP.fields;
 	//!!! Outgrow for simple DP
 	var SubQuestions=Fields.map(SubQuestionHTML).join("");
@@ -2645,7 +2660,7 @@ function QuestionHTML(DP){
 ////////////////////////////////////////////////////////////////////////////////
 // Balloons
 
-function LaunchThanksBalloon(DP){
+LaunchThanksBalloon=function(DP){
 	RequestDataPack(
 		[['plain',{questionname:DP.thanksmessage,destination:""}]],
 		{qtargetid:DP.qtargetid,
@@ -2653,21 +2668,21 @@ function LaunchThanksBalloon(DP){
 		requireConnection:false});
 }
 
-function LaunchBalloon(DP){
+LaunchBalloon=function(DP){
 	OpenBalloon(QuestionHTML(DP),DP.qid,DP.qtargetid);
 }
 
-function LaunchAvatarBalloon(DP){
+LaunchAvatarBalloon=function(DP){
 	OpenBalloon(QuestionHTML(DP),DP.qid,DP.qtargetid,true);
 }
 
-function BalloonHTML(avatarHTML,content,id,classExtra){
+BalloonHTML=function(avatarHTML,content,id,classExtra){
 	var classExtra=classExtra||"";
 	var b='<div class="balloon window '+classExtra+'" id='+id+'>'+CloseButtonHTML(id)+'<div class="baloon-content">'+avatarHTML+'<div class="subtitle">'+content+'</div></div></div>';
 	return b;
 }
 
-function OpenBalloon(content,id,targetid,avatar){
+OpenBalloon=function(content,id,targetid,avatar){
 	if(!avatar||typeof LOGO==="undefined")
 		var avatar="";
 	else
@@ -2676,33 +2691,33 @@ function OpenBalloon(content,id,targetid,avatar){
 }
 
 //Banner (e.g for keyboard)
-function BannerHTML(content,id,classExtra){
+BannerHTML=function(content,id,classExtra){
 	var classExtra=classExtra||"";
 	var b='<div class="banner window '+classExtra+'" id='+id+'><div class="banner-content">'+content+'</div></div>';
 	return b;
 }
 
-function OpenKeyboardBanner(content,id,targetid){
+OpenKeyboardBanner=function(content,id,targetid){
 	return AddElement(BannerHTML(content,id,"keyboard"),targetid);
 }
 
-function LaunchKeyboardBanner(DP){
+LaunchKeyboardBanner=function(DP){
 	OpenKeyboardBanner(QuestionHTML(DP),DP.qid,DP.qtargetid);
 }
 
-function OpenKeyboardBalloon(content,id,targetid){
+OpenKeyboardBalloon=function(content,id,targetid){
 	return AddElement(BalloonHTML("",content,id,"keyboard"),targetid);
 }
 
-function LaunchKeyboardBalloon(DP){
+LaunchKeyboardBalloon=function(DP){
 	OpenKeyboardBalloon(QuestionHTML(DP),DP.qid,DP.qtargetid);
 }
 
 // On-screen Keyboard
-function DefaultKeyboardKeys(){
+DefaultKeyboardKeys=function(){
 	return [["1","2","3","4","5","6","7","8","9","0"],["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M"/*,"dot","dash"*/],["undo","space","restart"]]};
 
-function KeyboardRowsHTML(dataField,buttontype){
+KeyboardRowsHTML=function(dataField,buttontype){
 	var kblines="";
 	var i=0;
 	for(var keyboardline in dataField.qchoices){
@@ -2716,15 +2731,12 @@ function KeyboardRowsHTML(dataField,buttontype){
 	return kblines;
 }
 
-function KeyboardHTML(dataField){
+KeyboardHTML=function(dataField){
 	return LayoutHTML(dataField,KeyboardButtonHTML,'keyboard',KeyboardRowsHTML)
 }
 
-var KeyboardKeymap={
-	" ":"space"
-}
 
-function KeyboardButtonHTML(choice,dataFiel,i){
+KeyboardButtonHTML=function(choice,dataFiel,i){
 	var buID='kb'+i;
 	var ID="choice-"+choice;
 	KeyboardButtonHTML[buID]=function(){
@@ -2749,7 +2761,7 @@ function KeyboardButtonHTML(choice,dataFiel,i){
 	return ButtonHTML({txt:dataFiel.qchoicesViewF(choice),attributes:buAttribs});
 };
 
-function FadeSelect(targetIDsel){
+FadeSelect=function(targetIDsel){
 	var e=GetElement(targetIDsel);
 	if(e){
 		function DeF(){
@@ -2764,7 +2776,7 @@ function FadeSelect(targetIDsel){
 ////////////////////////////////////////////////////////////////////////////////
 // Opener & Closer Functions with focus option, 
 // -> to use within Datapack RequestFunctions
-function FocusAndResetFunction(RequestF,FocusF){
+FocusAndResetFunction=function(RequestF,FocusF){
 	return function(){
 		if(RequestF.id)
 			RequestF.id=undefined;
@@ -2776,12 +2788,12 @@ function FocusAndResetFunction(RequestF,FocusF){
 ////////////////////////////////////////////////////////////////////////////////
 // Toggling class & buttons
 
-function ToggleThis(ev,thi){
+ToggleThis=function(ev,thi){
 	if(ev.target.id===thi.id)
 		Toggle(thi);
 }
 
-function ToggleThisOnly(ev,thi,maxparent){
+ToggleThisOnly=function(ev,thi,maxparent){
 	var siblings=Siblings(thi,999,maxparent);
 	var i=0;
 	while (i<siblings.length){
@@ -2797,7 +2809,7 @@ function ToggleThisOnly(ev,thi,maxparent){
 
 // Select, Deselect and Toggle - given selector or element itself
 
-function Class(selectorE,clas){
+Class=function(selectorE,clas){
 	var clas=UnPrefix(clas,".")||'selected';
 	var e=GetElement(selectorE);
 	if(e){
@@ -2807,7 +2819,7 @@ function Class(selectorE,clas){
 	return e;
 }
 
-function UnClass(selectorE,clas){
+UnClass=function(selectorE,clas){
 	var clas=UnPrefix(clas,".")||'selected';
 	var e=GetElement(selectorE);
 	if(e)
@@ -2815,27 +2827,27 @@ function UnClass(selectorE,clas){
 	return e;
 }
 
-function Select(selectorE){ //With Pulse by default
+Select=function(selectorE){ //With Pulse by default
 	var e=Class(selectorE,'selected');
 	PulseSelect(selectorE);
 	return e;
 }
 
-function Deselect(selectorE){ 
+Deselect=function(selectorE){ 
 	UnClass(selectorE,'selected');
 }
 
-function Selected(selectorE){
+Selected=function(selectorE){
 	return Classed(selectorE,'selected');
 }
 
-function Classed(selectorE,clas){
+Classed=function(selectorE,clas){
 	var clas=clas||'selected';
 	var e=GetElement(selectorE);
 	return e&&e.classList&&e.classList.contains(clas);
 }
 
-function Toggle(selectorE,clas){
+Toggle=function(selectorE,clas){
 	var clas=clas||'selected';
 	var e=GetElement(selectorE);
 	if(e)
@@ -2845,7 +2857,7 @@ function Toggle(selectorE,clas){
 
 // Select Pulse
 
-function PulseSelect(selectorE,clas,delay){
+PulseSelect=function(selectorE,clas,delay){
 	var delay=delay||100;
 	var clas=clas||"pulsating";
 	UnClass(selectorE,clas);//cyclical pulse effect on long taps
@@ -2855,11 +2867,11 @@ function PulseSelect(selectorE,clas,delay){
 
 // Show/Hide
 
-function HiddenHTML(id){
+HiddenHTML=function(id){
 	return "<span id='"+UnPrefix(id,"#")+"' class='hidden'></span>"
 }
 
-function ShowElement(selectorE){
+ShowElement=function(selectorE){
 	var e=GetElement(selectorE);
 
 	//Restore tabindex
@@ -2870,7 +2882,7 @@ function ShowElement(selectorE){
 }
 
 
-function UnFadeElement(e){
+UnFadeElement=function(e){
 	if(!e)
 		return;
 	ShowElement(e);
@@ -2880,13 +2892,13 @@ function UnFadeElement(e){
 	setTimeout(function(){UnClass(e,"opening");e.style.opacity=o},1000);
 }
 
-function Show(selectorE){
+Show=function(selectorE){
 	var e=GetElements(selectorE);
 	if(e.length)
 		e.map(ShowElement);
 }
 
-function HideElement(selectorE){
+HideElement=function(selectorE){
 	var e=GetElement(selectorE);
 
 	//Hide tabindex
@@ -2899,13 +2911,13 @@ function HideElement(selectorE){
 	Class(selectorE,"hidden");
 }
 
-function Hide(selectorE){
+Hide=function(selectorE){
 	var e=GetElements(selectorE);
 	if(e.length)
 		e.map(HideElement);
 }
 
-function ShowHideElement(selectorE){
+ShowHideElement=function(selectorE){
 	var e=GetElement(selectorE);
 	if(!e)
 		return;
@@ -2916,7 +2928,7 @@ function ShowHideElement(selectorE){
 		HideElement(e);
 }
 
-function ShowHide(selectorE){
+ShowHide=function(selectorE){
 	var e=GetElements(selectorE);
 	if(e.length)
 		e.map(ShowHideElement);
@@ -2925,7 +2937,7 @@ function ShowHide(selectorE){
 ////////////////////////////////////////////////////////////////////////////////
 // Opening / Closing functions
 
-function OpenElement(e,parentIDsel){
+OpenElement=function(e,parentIDsel){
 	if(!e)
 		return;
 	e=NewElement(e);
@@ -2933,7 +2945,7 @@ function OpenElement(e,parentIDsel){
 	AddElement(e,parentIDsel);
 }
 
-function CloseElement(targetIDsel,parentIDsel){
+CloseElement=function(targetIDsel,parentIDsel){
 	var fading=GetElement(targetIDsel,parentIDsel);
 	if(fading){
 		Class(fading,"closing");
@@ -2941,11 +2953,11 @@ function CloseElement(targetIDsel,parentIDsel){
 	}
 }
 
-function CloseWindow(e){
+CloseWindow=function(e){
 	CloseElement(ParentElement(e,".window"));
 }
 
-function Close(targetid){
+Close=function(targetid){
 	var DP=GetDataPack(targetid);
 	if(DP)
 		CloseDatapack(DP);
@@ -2953,7 +2965,7 @@ function Close(targetid){
 		CloseElement(targetid);
 }
 
-function CloseAndContinue(DP){
+CloseAndContinue=function(DP){
 	Deselect(DP.buttonSelector);
 	if(DP.qonsubmit)
 		DP.qonsubmit(DP);
@@ -2961,7 +2973,7 @@ function CloseAndContinue(DP){
 }
 
 // Current Datapack
-function CurrentDatapack(ConditionF){
+CurrentDatapack=function(ConditionF){
 	var ConditionF=ConditionF||True;
 	var h=GetDataPack.history;
 	if(h)
@@ -2977,7 +2989,7 @@ function CurrentDatapack(ConditionF){
 		return undefined;
 }
 
-function CloseDatapack(DP){
+CloseDatapack=function(DP){
 	if(DP){
 		Deselect(DP.buttonSelector);
 		PulseSelect(DP.qid+" .closer .button");
@@ -2992,11 +3004,11 @@ function CloseDatapack(DP){
 	}
 }
 
-function CloseCurrentDatapack(){
+CloseCurrentDatapack=function(){
 	CloseDatapack(CurrentDatapack());
 }
 
-function ClosePreviousDatapacks(ConditionF){
+ClosePreviousDatapacks=function(ConditionF){
 	var h=GetDataPack.history;
 	if(!h)
 		return;
@@ -3011,7 +3023,7 @@ function ClosePreviousDatapacks(ConditionF){
 	CloseDatapack(l); //the last one should fire it
 }
 
-function SubmitCurrentDatapack(){
+SubmitCurrentDatapack=function(){
 	var DP=CurrentDatapack();
 	DP.action(DP.qid);
 }
@@ -3020,26 +3032,21 @@ function SubmitCurrentDatapack(){
 // Focus functions
 
 // Spotlight (context shifting)
-function Spotlight(){
+Spotlight=function(){
 	if(!Spotlight.s)
 		Spotlight.s=[document.body];
 	return Last(Spotlight.s);
 }
 
-function AddSpotlight(element){
+AddSpotlight=function(element){
 	if(Spotlight()!==element){
 		Spotlight.s.push(element);
 	}
 	return element;
 }
 
-
-//Focus clicked items (also to escape focus by clicking in unfocusable parents)
-Listen("mousedown",function(e){FocusElement(e.target)});
-Listen("click",function(e){FocusElement(e.target)});
-
 // Focus Element
-function FocusElement(targetIDsel){
+FocusElement=function(targetIDsel){
 	var focussing=GetElement(targetIDsel);
 	if(focussing){
 		focussing.focus();
@@ -3051,18 +3058,18 @@ function FocusElement(targetIDsel){
 
 
 // Which elements are focusable?
-function FocusableInput(e){
+FocusableInput=function(e){
 	return Classed(e,"input")||In(["INPUT","TEXTAREA"],e.tagName);
 }
-function Focusable(e){
+Focusable=function(e){
 	return FocusableInput(e)||Classed(e,"button")||Classed(e,"gif")||e.tagName==="A";//List of element and classes
 }
-function UnFocusable(e){
+UnFocusable=function(e){
 	return Classed(e,"closer")||Classed(e,"logo");
 }
 
 // Focus Inside Element, looking for focusables
-function FocusInside(targetIDsel,backward){
+FocusInside=function(targetIDsel,backward){
 	var e=GetElement(targetIDsel);
 	if(!e)
 		return false;
@@ -3098,7 +3105,7 @@ function FocusInside(targetIDsel,backward){
 };
 
 
-function FocusAdjacentElement(elem,backward,bounded){
+FocusAdjacentElement=function(elem,backward,bounded){
 
 	if(!backward)
 		var backward=false;
@@ -3129,35 +3136,35 @@ function FocusAdjacentElement(elem,backward,bounded){
 
 
 //Focus Next, Prev, Stay: bounded or not
-function FocusNext(F){
+FocusNext=function(F){
 	var e=FocusAdjacentElement(document.activeElement,false);
 	if(F&&typeof F==="function")
 		F(e);
 	return e;
 }
 
-function FocusPrev(F){
+FocusPrev=function(F){
 	var e=FocusAdjacentElement(document.activeElement,true);
 	if(F&&typeof F==="function")
 		F(e);
 	return e;
 }
 
-function FocusStay(F){
+FocusStay=function(F){
 	var e=document.activeElement;
 	if(F&&typeof F==="function")
 		F(e);
 	return e;
 }
 
-function FocusNextBounded(F){
+FocusNextBounded=function(F){
 	var e=FocusAdjacentElement(document.activeElement,false,true);
 	if(F&&typeof F==="function")
 		F(e);
 	return e;
 }
 
-function FocusPrevBounded(F){
+FocusPrevBounded=function(F){
 	var e=FocusAdjacentElement(document.activeElement,true,true);
 	if(F&&typeof F==="function")
 		F(e);
@@ -3165,14 +3172,14 @@ function FocusPrevBounded(F){
 }
 
 //Focus NextParent
-function FocusNextParent(F){
+FocusNextParent=function(F){
 	var e=FocusAdjacentElement(document.activeElement.parentElement,false);
 	if(F&&typeof F==="function")
 		F(e);
 	return e;
 }
 
-function FocusPrevParent(F){
+FocusPrevParent=function(F){
 	var e=FocusAdjacentElement(document.activeElement.parentElement,true);
 	if(F&&typeof F==="function")
 		F(e);
@@ -3181,35 +3188,35 @@ function FocusPrevParent(F){
 
 
 //Click
-function ClickElement(elem){
+ClickElement=function(elem){
 	var elem=GetElement(elem);
 	elem.click();
 }
 
-function ClickPrevBounded(){
+ClickPrevBounded=function(){
 	FocusPrevBounded(ClickElement);
 }
 
-function ClickNextBounded(){
+ClickNextBounded=function(){
 	FocusNextBounded(ClickElement);
 }
 
-function ClickStay(){
+ClickStay=function(){
 	FocusStay(ClickElement);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 //Event Listeners
 
-function ListenOnce(ev,fun,target){
+ListenOnce=function(ev,fun,target){
 	return ListenF(ev,fun,target?target:window,function(eve){return true;});
 }
 
-function ListenOutside(ev,fun,target){
+ListenOutside=function(ev,fun,target){
 	return ListenF(ev,fun,window,function(eve){return Outside(target,eve.target);});
 }
 
-function ListenF(ev,fun,target,ConditionF){
+ListenF=function(ev,fun,target,ConditionF){
 	var evObj={
 		"ev":IsArray(ev)?ev:[ev],
 		"F":F,
@@ -3227,16 +3234,19 @@ function ListenF(ev,fun,target,ConditionF){
 	return evObj;
 }
 
-function ListenNoMore(evObj){
+ListenNoMore=function(evObj){
 	evObj["ev"].map(function(e){evObj["target"].removeEventListener(e,evObj["F"])});
 }
 
-function ListenIndeed(evObj){
+ListenIndeed=function(evObj){
 	evObj["ev"].map(function(e){Listen(e,evObj["F"],evObj["target"])});
 }
 
-function Listen(eString,F,target){
+Listen=function(eString,F,target){
 	var target=GetElement(target)||window;
+	if(!target.addEventListener)
+		return;
+		
 	if(In(['click','mousedown'],eString))
 		target.addEventListener(eString,F,{"passive":true})
 	else
@@ -3244,7 +3254,7 @@ function Listen(eString,F,target){
 };
 
 //Listen for all events in array before firing
-function ListenAndOnce(shoutArray,SuccessF){
+ListenAndOnce=function(shoutArray,SuccessF){
 	function Heard(shoutcode){
 		if(!Heard.array)
 			Heard.array=[];
@@ -3263,14 +3273,14 @@ function ListenAndOnce(shoutArray,SuccessF){
 	shoutArray.map(Hear);
 }
 
-function ShoutAnd(shoutArray,SuccessShout){
+ShoutAnd=function(shoutArray,SuccessShout){
 	ListenAndOnce(shoutArray,function(){Shout(SuccessShout)});
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Data submission in forms
 
-function SubmitData(dataObject,destinationObj){
+SubmitData=function(dataObject,destinationObj){
 	var data=dataObject;
 	data.formDataNameOrder=destinationObj.headers;		//to delete
 	data.formGoogleSendEmail="";						//to delete
@@ -3285,14 +3295,14 @@ function SubmitData(dataObject,destinationObj){
 	EchoData(data,destinationObj.url);
 }
 
-function SubmitValidAnswer(DP){
+SubmitValidAnswer=function(DP){
 	var formDestination=DP.findDestination(DP);
 	var destinationObject=GetDestination(formDestination);
 	var dataObject=(destinationObject.Data)(DP.qid);
 	SubmitData(dataObject,destinationObject);
 }
 
-function InvalidateAnswer(DF){
+InvalidateAnswer=function(DF){
 	var filled=FindData(DF.qfield,DF.pid)!=="";
 	var validator=DF.qvalidator(DF);
 	var invalid=((DF.qrequired||filled)&&!validator.valid);
@@ -3309,7 +3319,7 @@ function InvalidateAnswer(DF){
 	return invalid;
 }
 
-function CheckSubmit(qid){
+CheckSubmit=function(qid){
 	var DP=GetDataPack(qid);
 	if(typeof DP!=="undefined"){
 		RemoveElements("error",qid);
@@ -3320,7 +3330,7 @@ function CheckSubmit(qid){
 	}
 };
 
-function SubmitAnswerSet(DP){
+SubmitAnswerSet=function(DP){
 	if(typeof DP!=="undefined"){
 		function SubAndContinue(){
 			DP.actionvalid(DP);
@@ -3336,7 +3346,7 @@ function SubmitAnswerSet(DP){
 }
 
 
-function PreviousSubmission(field){
+PreviousSubmission=function(field){
 	if(!PreviousSubmission.history)
 		PreviousSubmission.history=[];
 
@@ -3351,11 +3361,11 @@ function PreviousSubmission(field){
 
 // Data finding in forms
 
-function FindDataExternally(field,pid){
+FindDataExternally=function(field,pid){
 	return GetDefaultNodeData(field,pid)||PreviousSubmission(field);
 };
 
-function FindData(field,pid){
+FindData=function(field,pid){
 	var e=GetElement(".field-"+field,pid);
 	if(!e)
 		return FindDataExternally(field,pid);
@@ -3366,7 +3376,7 @@ function FindData(field,pid){
 	return data;
 };
 
-function GetNodeData(field,elem){
+GetNodeData=function(field,elem){
 	if(FocusableInput(elem)&&elem.dataset&&(typeof elem.dataset[field]!=="undefined"))
 		return elem.value;
 	else
@@ -3376,7 +3386,7 @@ function GetNodeData(field,elem){
 
 ///////////////////////
 
-function GetDataPack(id){
+GetDataPack=function(id){
 	if(!GetDataPack.history)
 		GetDataPack.history=[];
 
@@ -3385,7 +3395,7 @@ function GetDataPack(id){
 		);
 };
 
-function GetDefaultNodeData(field,id){
+GetDefaultNodeData=function(field,id){
 	if(id)
 		var DP=GetDataPack(id);
 	else
@@ -3402,7 +3412,7 @@ function GetDefaultNodeData(field,id){
 	}
 };
 
-function SetData(field,value,id){
+SetData=function(field,value,id){
 	//console.log(field,value,id);
 	var DP=GetDataPack(id);
 	if(DP!==undefined){
@@ -3411,11 +3421,11 @@ function SetData(field,value,id){
 	}
 };
 
-function ClearData(field,id){
+ClearData=function(field,id){
 	SetData(field,"",id);
 };
 
-function GetField(field,parentid){
+GetField=function(field,parentid){
 	var DP=GetDataPack(parentid);
 	if(DP!==undefined){
 		var fis=DP.fields.filter(function(f){return (f.qfield===field)});
@@ -3424,13 +3434,13 @@ function GetField(field,parentid){
 	}
 }
 
-function GetFieldValue(field,parentid){
+GetFieldValue=function(field,parentid){
 	var fi=GetField(field,parentid);
 	if(fi!==undefined)
 		return	fi.qvalue;
 }
 
-function ExecuteChoice(field,value,pid){
+ExecuteChoice=function(field,value,pid){
 	GetField(field,pid).executeChoice(value,pid); //Not dynamically updated. And why should it be?
 };
 
@@ -3439,14 +3449,14 @@ function ExecuteChoice(field,value,pid){
 // Global Data Transmission Variables
 
 
-function GetDestination(dname){
+GetDestination=function(dname){
 	return DESTINATIONS[dname];
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // Modals
 
-function ModalHTML(content,id,type){
+ModalHTML=function(content,id,type){
 	var t=type?(" "+type):"";
 	return'<div class="modal window'+t+'" id="'+id+'">\
 			<div class="modal-frame">\
@@ -3458,26 +3468,26 @@ function ModalHTML(content,id,type){
 		</div>';
 }
 
-function OpenModal(content,id,targetid){
+OpenModal=function(content,id,targetid){
 	AddElement(ModalHTML(content,id),targetid);
 	FocusInside(id);
 }
 
-function OpenMessageModal(message,id,targetid){
+OpenMessageModal=function(message,id,targetid){
 	var qid=id?id:GenerateId();
 	var targetid=targetid?targetid:document.body.id;
 	OpenModal(MessageHTML(message)+OkButtonHTML(qid),qid,targetid);
 }
 
 //Modal self-laucher for questions (datapacks)
-function LaunchModal(DP){
+LaunchModal=function(DP){
 	OpenModal(QuestionHTML(DP),DP.qid,DP.qtargetid);
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
 //Embedded info
-function LaunchEmbed(DP){
+LaunchEmbed=function(DP){
 	AddElement(QuestionHTML(DP),DP.qtargetid);
 }
 
@@ -3485,11 +3495,11 @@ function LaunchEmbed(DP){
 ///////////////////////////////////////////////////////////////////////////////
 //Video modal
 
-function VideoEmbedHTML(ytid,origin){
+VideoEmbedHTML=function(ytid,origin){
 	var ori=origin?"&origin="+origin:"";
 	return '<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/'+ytid+'?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0'+ori+'"></iframe>'};
 
-function OpenVideoModal(ytid){
+OpenVideoModal=function(ytid){
 	AddElement(ModalHTML(VideoEmbedHTML(ytid,PageTag()),GenerateId(),"gallery-video"),document.body.id);
 }
 
@@ -3497,7 +3507,7 @@ function OpenVideoModal(ytid){
 // Form Validators and Modifiers
 
 // Pattern Validator Generator
-function PatternValidatorGenerator(pattern,errormessage){
+PatternValidatorGenerator=function(pattern,errormessage){
 	function ValidatorFunction(DF){
 		var string=FindData(DF.qfield,DF.pid);
 		if((typeof string!=="undefined")&&(string.match(pattern)!==null))
@@ -3512,34 +3522,34 @@ function PatternValidatorGenerator(pattern,errormessage){
 
 // Form Validators
 
-function IdentityValidator(DF){return {valid:true,error:"no errors"};}
+IdentityValidator=function(DF){return {valid:true,error:"no errors"};}
 
-function EmailValidator(DF){
+EmailValidator=function(DF){
 	var pattern=/(?:[\u00A0-\uD7FF\uE000-\uFFFF-a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[\u00A0-\uD7FF\uE000-\uFFFF-a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[\u00A0-\uD7FF\uE000-\uFFFF-a-z0-9](?:[\u00A0-\uD7FF\uE000-\uFFFF-a-z0-9-]*[\u00A0-\uD7FF\uE000-\uFFFF-a-z0-9])?\.)+[\u00A0-\uD7FF\uE000-\uFFFF-a-z0-9](?:[\u00A0-\uD7FF\uE000-\uFFFF-a-z0-9-]*[\u00A0-\uD7FF\uE000-\uFFFF-a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/ig;
 	var errormessage="Please verify your e-mail address!";
 	return PatternValidatorGenerator(pattern,errormessage)(DF);
 }
 
-function SomeTextValidator(DF){
+SomeTextValidator=function(DF){
 	var pattern=/[\d\w]/;
 	var errormessage="Please write something!";
 	return PatternValidatorGenerator(pattern,errormessage)(DF);
 }
 
-function NameValidator(DF){
+NameValidator=function(DF){
 	var pattern=/[\d\w][\d\w]+/;
 	var errormessage="Please write at least 2 alphanumerics!";
 	return PatternValidatorGenerator(pattern,errormessage)(DF);
 }
 
-function URLValidator(DF){
+URLValidator=function(DF){
 	var pattern=/((https?:\/\/(www\.)?)|(www\.))(.*)\.(.*)/;
 	var errormessage="Please write a valid url, starting with e.g. https:// or www.";
 	return PatternValidatorGenerator(pattern,errormessage)(DF);
 }
 
 // Utility
-function SomeTextValidate(name){
+SomeTextValidate=function(name){
 	var pattern=/[\d\w]/;
 	return name.match(pattern)!==null;
 }
@@ -3548,31 +3558,37 @@ function SomeTextValidate(name){
 ///////////////////////////////////////////////////////////////////////////////
 //Message Console 
 
-var consolebuffer=[];
-var consolemax=3;
+Console=function(){
+	if(!Console.buffer)
+		return Console.buffer=[];
+	else
+		return Console.buffer;
+}
+Console();
 
-function ConsoleClear(){
+ConsoleClear=function(){
 	RemoveChildren("Console");
 }
 
-function ConsoleRemove(mID){
+ConsoleRemove=function(mID){
 	RemoveElement(mID);
-	var i=consolebuffer.indexOf(mID);
+	var i=Console.buffer.indexOf(mID);
 	if(i>=0)
-		consolebuffer.splice(i,1)
+		Console.buffer.splice(i,1);
 }
 
-function ConsoleMessageHTML(message,mID,mclass){
+ConsoleMessageHTML=function(message,mID,mclass){
 	var mclass=mclass||"";
 	return '<div class="message '+mclass+'" id='+mID+'>'+message+'</div>';
 }
 
-function TextReadDuration(textstring){ //by counting number of words, 250ms per word
+TextReadDuration=function(textstring){ //by counting number of words, 250ms per word
 	var textstring=textstring.replace(/\<(span|svg).*\<\/\1\>/ig,""); //remove svg and span contents (text icons)
 	return Min(Max(1000,(textstring.split(" ").length)*250),10000);
 }
 
-function ConsoleAdd(messageHTML,wait,duration,mID,consoleID,mClass){
+ConsoleAdd=function(messageHTML,wait,duration,mID,consoleID,mClass){
+	var consolemax=3;
 	var consoleID=consoleID||"Console";
 	if(GetElement(consoleID)===null)
 		ConsoleLoad(undefined,consoleID);
@@ -3582,20 +3598,20 @@ function ConsoleAdd(messageHTML,wait,duration,mID,consoleID,mClass){
 	var mID=mID?mID:"c-"+GenerateId();//random id
 	setTimeout(function(){AddElement(ConsoleMessageHTML(messageHTML,mID,mClass),consoleID)},wait)
 	setTimeout(function(){CloseElement(mID)},duration+wait);
-	consolebuffer.push(mID);
-	while(consolebuffer.length>consolemax){
-		ConsoleRemove(consolebuffer[0]);
+	Console.buffer.push(mID);
+	while(Console.buffer.length>consolemax){
+		ConsoleRemove(Console.buffer[0]);
 	}
 }
 
-function ConsoleLoad(selector,consoleID){
+ConsoleLoad=function(selector,consoleID){
 	var consoleID=consoleID||"Console";
 	var selector=selector||'.main';
 	RemoveElement(consoleID,selector);
 	AddElement('<div class="Console" id="'+consoleID+'"></div>',selector);
 }
 
-function ConsoleAddMany(messagesArray,consoleID,mClass){
+ConsoleAddMany=function(messagesArray,consoleID,mClass){
 	if(!messagesArray)
 		return;
 	var consoleID=consoleID||"Console";
@@ -3613,7 +3629,7 @@ function ConsoleAddMany(messagesArray,consoleID,mClass){
 	ConsoleAddMany[consoleID]=Date.now()+delay;
 }
 
-function ConsoleAddOnce(messageHTML,wait,duration){
+ConsoleAddOnce=function(messageHTML,wait,duration){
 	if(!ConsoleAddOnce.messages)
 		ConsoleAddOnce.messages=[];
 
@@ -3625,11 +3641,11 @@ function ConsoleAddOnce(messageHTML,wait,duration){
 
 
 //DataPack integration in console
-function LaunchConsoleMessage(DP){
+LaunchConsoleMessage=function(DP){
 	ConsoleAdd(QuestionHTML(DP),undefined,undefined,DP.qid);
 }
 
-function LaunchConsoleThanks(DP){
+LaunchConsoleThanks=function(DP){
 	ConsoleAdd(DP.thanksmessage);
 }
 
@@ -3637,7 +3653,7 @@ function LaunchConsoleThanks(DP){
 ///////////////////////////////////////////////////////////////////////////////
 //Sounds Control
 
-function MakeSound(sourcepath,data,id){
+MakeSound=function(sourcepath,data,id){
 	return ElementHTML({
 		tag:"audio",
 		txt:" ",
@@ -3645,23 +3661,23 @@ function MakeSound(sourcepath,data,id){
 	});
 }
 
-function LoadSound(soundpath,data,id,parentElement){
+LoadSound=function(soundpath,data,id,parentElement){
 	return AddElement(MakeSound(soundpath,data,id),parentElement);
 }
 
-function LS(soundobject,id,parentElement){
+LS=function(soundobject,id,parentElement){
 		var src=soundobject.src;
 		var opts=FuseObjects(soundobject,{});
 		delete opts.src;
 		LoadSound(src,opts,id,parentElement);
 };
 
-function LoadSounds(soundtrack,parentElement){
+LoadSounds=function(soundtrack,parentElement){
 	var names=Keys(soundtrack);
 	names.map(function(name){LS(soundtrack[name],name,parentElement)});
 }
 
-function PlaySound(src){
+PlaySound=function(src){
 	var s=new Audio(src);
 	s.play();
 	return;
@@ -3671,7 +3687,7 @@ function PlaySound(src){
 //Music Control
 
 //Playlist
-function Playlist(i){
+Playlist=function(i){
 	if(typeof Playlist.p==="undefined"){
 		Playlist.p=GetElements('.music');
 		Playlist.l=Playlist.p.length;
@@ -3685,37 +3701,37 @@ function Playlist(i){
 	}
 }
 
-function PlaylistStartPlay(){
+PlaylistStartPlay=function(){
 	PlaySong(Playlist(0));
 	//console.log("Music on");
 }
 
 
 //Song
-function Muted(){
+Muted=function(){
 	var mutebutton=GetElement("MusicButton");
 	if(mutebutton)
 		return !Selected(mutebutton);
 	else
 		return false;
 }
-function Mute(){
+Mute=function(){
 	Deselect("MusicButton");
 }
-function Unmute(){
+Unmute=function(){
 	Select("MusicButton");
 }
 
-function SongName(song){
+SongName=function(song){
 	return UnPosfix(FileSong(song),[".mp3",".wav",".ogg"]);
 }
 
-function ValidSong(song){
+ValidSong=function(song){
 	return (typeof song!=="undefined")&&(SongName(song)!==FileSong(song));
 }
 
 
-function PlaySong(song){
+PlaySong=function(song){
 	if(ValidSong(song)&&song.paused){
 		song.play();
 		ListenOnce('ended',PlayNextF(song),song);
@@ -3725,7 +3741,7 @@ function PlaySong(song){
 	}
 }
 
-function PauseSong(song){
+PauseSong=function(song){
 	if(ValidSong(song)&&!song.paused){
 		song.pause();
 		ConsoleAdd("Music paused...");
@@ -3734,7 +3750,7 @@ function PauseSong(song){
 	}
 }
 
-function ResumeSong(song){
+ResumeSong=function(song){
 	if(ValidSong(song)&&song.paused){
 		song.play();
 		ConsoleAdd("Resumed playing ♫♪♪ "+SongTitle(song));
@@ -3743,15 +3759,15 @@ function ResumeSong(song){
 	}
 }
 
-function SongTitle(song){
+SongTitle=function(song){
 	return SongName(song).replace(/\%20/g," ");
 }
 
-function FileSong(song){
+FileSong=function(song){
 	return PageRelativePath(song.src).replace(/.*\//,"");
 }
 
-function PlayNextF(song){
+PlayNextF=function(song){
 	return function(){
 		PlaySong(Playlist(Playlist.current+1));
 		song.removeEventListener('ended',PlayNextF);
@@ -3762,15 +3778,15 @@ function PlayNextF(song){
 
 //Player
 
-function CurrentSong(){
+CurrentSong=function(){
 	return Playlist.p[Playlist.current];
 }
 
-function HasSong(){
+HasSong=function(){
 	return (typeof Playlist.current)!=="undefined";
 }
 
-function ToggleCurrentSong(){
+ToggleCurrentSong=function(){
 	var song=CurrentSong();
 	if(typeof song==="undefined")
 		ConsoleAdd("Error: can't find the jukebox...");
@@ -3782,7 +3798,7 @@ function ToggleCurrentSong(){
 	}
 }
 
-function PlaylistSleep(){
+PlaylistSleep=function(){
 	if(!Playlist.sleep){
 		Playlist.sleep=true;
 		PauseSong(CurrentSong());
@@ -3790,7 +3806,7 @@ function PlaylistSleep(){
 	}
 }
 
-function PlaylistAwaken(){
+PlaylistAwaken=function(){
 	if(Playlist.sleep){
 		Playlist.sleep=false;
 		ResumeSong(CurrentSong());
@@ -3803,11 +3819,11 @@ function PlaylistAwaken(){
 ///////////////////////////////////////////////////////////////////////////////
 //Fullscreen
 
-function FullscreenAllowed(){
+FullscreenAllowed=function(){
 	return (document.exitFullscreen||document.mozCancelFullScreen||document.webkitExitFullscreen||document.msExitFullscreen||(document.webkitFullscreenElement&&document.webkitExitFullscreen)||false)!==false;
 }
 
-function FullscreenActivate(browserprefix){
+FullscreenActivate=function(browserprefix){
 	function Deactivate(){
 		if(!(document.fullscreenElement||document.webkitFullscreenElement)){
 			Deselect("FullscreenButton");
@@ -3821,7 +3837,7 @@ function FullscreenActivate(browserprefix){
 	return
 };
 
-function FullscreenOpen(targetIDsel){
+FullscreenOpen=function(targetIDsel){
 	var e=GetElement(targetIDsel);
 	var f;
 	if(f=e.requestFullscreen){
@@ -3846,7 +3862,7 @@ function FullscreenOpen(targetIDsel){
 	};
 }
 
-function FullscreenClose(){
+FullscreenClose=function(){
 	var f;
 	if(document.fullscreenElement){
 		if(f=document.exitFullscreen){
@@ -3870,7 +3886,7 @@ function FullscreenClose(){
 	};
 }
 
-function FullscreenToggle(targetIDsel){
+FullscreenToggle=function(targetIDsel){
 	FullscreenElement.selector=targetIDsel;
 	if(FullscreenAllowed()){
 		if(document.fullscreenElement||document.webkitFullscreenElement){
@@ -3884,25 +3900,25 @@ function FullscreenToggle(targetIDsel){
 		ConsoleAdd("Fullscreen: Please inform Pedro PSI that your browser is not yet supported!");
 };
 
-function FullscreenElement(){
+FullscreenElement=function(){
 	return GetElement(FullscreenElement.selector);
 }
 
 //Fullscreen cursor
-function HiddenFullscreenCursor(){
+HiddenFullscreenCursor=function(){
 	return Classed(FullscreenElement(),"hideCursor");
 }
-function HideFullscreenCursor(){
+HideFullscreenCursor=function(){
 	if(!HiddenFullscreenCursor()){
 		Class(FullscreenElement(),"hideCursor");
 		HideFullscreenCursor.last=ListenOnce('mousemove',ShowFullscreenCursor,FullscreenElement());
 	}
 }
-function ShowFullscreenCursor(){
+ShowFullscreenCursor=function(){
 	UnClass(FullscreenElement(),"hideCursor");
 	FreeFullscreenCursor.timeout=setTimeout(HideFullscreenCursor,3000);
 }
-function FreeFullscreenCursor(){
+FreeFullscreenCursor=function(){
 	UnClass(FullscreenElement(),"hideCursor");
 	clearTimeout(FreeFullscreenCursor.timeout);
 	if(HideFullscreenCursor.last)
@@ -3913,7 +3929,8 @@ function FreeFullscreenCursor(){
 ///////////////////////////////////////////////////////////////////////////////
 //Contextual Shortcuts
 
-var ContextualShortcuts={
+ContextualDefaultShortcuts=function(){
+	return{
 	"BODY":{
 		"tab":FocusNext,
 		"shift tab":FocusPrev,
@@ -3984,11 +4001,19 @@ var ContextualShortcuts={
 		"enter":PlayPauseGif,
 		"X":PlayPauseGif
 	}
+	}
+}
+
+Contextual=function(){
+	if(!Contextual.shortcuts)
+		return Contextual.shortcuts=ContextualDefaultShortcuts();
+	else
+		return Contextual.shortcuts;
 }
 
 
 //Context finding
-function Context(targetSelector){
+Context=function(targetSelector){
 	var context;
 	if(typeof targetSelector==="undefined")
 		context=ElementContext(Spotlight());
@@ -4003,7 +4028,7 @@ function Context(targetSelector){
 	return context;
 }
 
-function ElementContext(targetSelector){
+ElementContext=function(targetSelector){
 	var e=GetElement(targetSelector);
 	if(!e){
 		return console.log("no element for context",targetSelector); //Add last context
@@ -4022,12 +4047,13 @@ function ElementContext(targetSelector){
 	return context;
 }
 
-function ContextBlocker(e){
+ContextBlocker=function(e){
 	return FocusableInput(e)||Classed(e,"window");
 }
 
-function SubContext(elem){
-	var keyActions=FindFirstMatch(ContextualShortcuts,elem);
+SubContext=function(elem){
+	Contextual();
+	var keyActions=FindFirstMatch(Contextual.shortcuts,elem);
 	if(keyActions)
 		return UpdateKeys(keyActions,ComboKeystring);
 	else
@@ -4036,64 +4062,65 @@ function SubContext(elem){
 
 
 //Add Shortcuts
-function OverwriteShortcuts(selector,keyActions){
+OverwriteShortcuts=function(selector,keyActions){
 	var keyActions=UpdateKeys(Clone(keyActions),ComboKeystring);
-
-	if(!ContextualShortcuts[selector])
-		ContextualShortcuts[selector]=keyActions;
+	Contextual();
+	if(!Contextual.shortcuts[selector])
+		Contextual.shortcuts[selector]=keyActions;
 	else
-		ContextualShortcuts[selector]=FuseObjects(keyActions,UpdateKeys(ContextualShortcuts[selector],ComboKeystring));
+		Contextual.shortcuts[selector]=FuseObjects(keyActions,UpdateKeys(Contextual.shortcuts[selector],ComboKeystring));
 
-	return ContextualShortcuts[selector];
+	return Contextual.shortcuts[selector];
 }
 
-function DeleteShortcuts(selector){
-	if(ContextualShortcuts[selector])
-		delete ContextualShortcuts[selector];
-	return ContextualShortcuts;
+DeleteShortcuts=function(selector){
+	Contextual();
+	if(Contextual.shortcuts[selector])
+		delete Contextual.shortcuts[selector];
+	return Contextual.shortcuts;
 }
 
 
 
 ///////////////////////////////////////////////////////////////////////////////
 //Keyboard input
-function UnCtrlKeyString(keystring){
+UnCtrlKeyString=function(keystring){
 	return keystring.replace(/co?n?tro?l/i,"").replace(/co?mm?a?n?d/i,"");
 }
-function UnShiftKeyString(keystring){
+UnShiftKeyString=function(keystring){
 	return keystring.replace(/sh?i?ft?/i,"");
 }
-function UnAltKeyString(keystring){
+UnAltKeyString=function(keystring){
 	return keystring.replace(/alt/i,"");
 }
-function UnEnterKeyString(keystring){
+UnEnterKeyString=function(keystring){
 	return keystring.replace(/ente?r/i,"").replace(/re?tu?rn/i,"");
 }
 
 
-function UnSpaceKeyString(keystring){
+UnSpaceKeyString=function(keystring){
 	return keystring.replace(/spa?ce?b?a?r?/i,"");
 }
 
-function CtrlKey(keystring){
+CtrlKey=function(keystring){
 	return keystring!==UnCtrlKeyString(keystring);
 }
-function ShiftKey(keystring){
+ShiftKey=function(keystring){
 	return keystring!==UnShiftKeyString(keystring);
 }
-function AltKey(keystring){
+AltKey=function(keystring){
 	return keystring!==UnAltKeyString(keystring);
 }
-function EnterKey(keystring){
+EnterKey=function(keystring){
 	return keystring!==UnEnterKeyString(keystring);
 }
-function SpaceKey(keystring){
+SpaceKey=function(keystring){
 	return keystring!==UnSpaceKeyString(keystring);
 }
 
 
 //Canonical Keystring Combo
-function EventKeystring(event){
+EventKeystring=function(event){
 	var keystring=
 	(event.ctrlKey? "ctrl " :"")+
 	(event.altKey?  "alt "  :"")+
@@ -4102,7 +4129,7 @@ function EventKeystring(event){
 	return ComboKeystring(keystring);
 }
 
-function ComboKeystring(key){
+ComboKeystring=function(key){
 	if(typeof key==="number")
 		return ComboKeystring(KeyNumberLookup(key));
 	else {//reduce to one space, lowercase, order: ctrl alt shift
@@ -4133,16 +4160,18 @@ function ComboKeystring(key){
 	}
 }
 
-function KeyNumberLookup(keynumber){
-	for(var i in KeyCodes){
-		if(KeyCodes[i]===keynumber)
+KeyNumberLookup=function(keynumber){
+	var keyCodes=KeyCodes();
+	for(var i in keyCodes){
+		if(keyCodes[i]===keynumber)
 			return i;
 	}
 	//console.log("no key for number:",keynumber);
 	return "";
 }
 
-var KeyCodes={
+KeyCodes=function(){
+	return{
 	'none':0,
 	'break':3,
 	'backspace':8,
@@ -4212,11 +4241,12 @@ var KeyCodes={
 	'x':88,
 	'y':89,
 	'z':90
+	}
 }
 
 
 //Key Capturing
-function CaptureComboKey(event){
+CaptureComboKey=function(event){
 	event=event||window.event;
 	var keystring=EventKeystring(event);
 	var context=Context();
@@ -4227,20 +4257,16 @@ function CaptureComboKey(event){
 }
 
 //Key Capturing Setters
-function StopCapturingKeys(OnKeyDown){
+StopCapturingKeys=function(OnKeyDown){
 	document.removeEventListener('keydown',OnKeyDown); // TODO improve
 }
-function ResumeCapturingKeys(OnKeyDown){ // TODO improve
+ResumeCapturingKeys=function(OnKeyDown){ // TODO improve
 	StopCapturingKeys(OnKeyDown);
 	document.addEventListener('keydown',OnKeyDown);
 }
 
-//Start Keys
-ResumeCapturingKeys(CaptureComboKey);
-
-
 //Datapack Integration
-function SetDatapackShortcuts(DP){
+SetDatapackShortcuts=function(DP){
 	return OverwriteShortcuts("#"+DP.qid,DP.shortcutExtras);
 }
  
@@ -4249,7 +4275,7 @@ function SetDatapackShortcuts(DP){
 ///////////////////////////////////////////////////////////////////////////////
 // Time-based functions
 
-function AutoRepeat(RepeatF,delay,name){
+AutoRepeat=function(RepeatF,delay,name){
 	var name=name||FunctionName(RepeatF);
 	clearTimeout(AutoRepeat[name]);
 	AutoRepeat[name]=setTimeout(function(){
@@ -4258,7 +4284,7 @@ function AutoRepeat(RepeatF,delay,name){
 	},delay);
 }
 
-function AutoStop(RepeatF,delay,name){
+AutoStop=function(RepeatF,delay,name){
 	var name=name||FunctionName(RepeatF);
 	clearTimeout(AutoRepeat[name]);
 	setTimeout(function(){
@@ -4266,7 +4292,7 @@ function AutoStop(RepeatF,delay,name){
 	},delay);
 }
 
-function Monitor(MonitorF,delay,DisplayF){
+Monitor=function(MonitorF,delay,DisplayF){
 	var DisplayF=DisplayF?DisplayF:console.log;
 	function M(){
 		DisplayF(MonitorF());
@@ -4276,7 +4302,7 @@ function Monitor(MonitorF,delay,DisplayF){
 
 
 //Prevent execution unless time cooldown exceeded, in ms
-function Throttle(F,cooldown,id){
+Throttle=function(F,cooldown,id){
 	if(!Throttle[id]||Date.now()-Throttle[id]>=cooldown){
 		Throttle[id]=Date.now();
 		return F();
@@ -4285,7 +4311,7 @@ function Throttle(F,cooldown,id){
 }
 
 //Delay execution until certain condition is met
-function DelayUntil(Condition,F,i){
+DelayUntil=function(Condition,F,i){
 	var n=Condition.name+F.name+(i?i:0);
 
 	if(!DelayUntil[n])
@@ -4309,7 +4335,7 @@ function DelayUntil(Condition,F,i){
 }
 
 //ExecuteOnce
-function Once(F,id){
+Once=function(F,id){
 	if(!Once[id]){
 		Once[id]=true;
 		return F();
@@ -4319,25 +4345,25 @@ function Once(F,id){
 
 //Schedule and UnSchedule
 
-function Schedule(actionF,time,queueName){
+Schedule=function(actionF,time,queueName){
 	if(!Schedule[queueName])
 		Schedule[queueName]={};
 	var id=setTimeout(actionF,time);
 	Schedule[queueName][time]=id;
 }
 
-function UnSchedule(unactionF,time,queueName){
+UnSchedule=function(unactionF,time,queueName){
 	if(!Schedule[queueName]||!Schedule[queueName][time])
 		return;
 	unactionF();
 	UnScheduleF(queueName)(time);
 }
 
-function UnScheduleF(queueName){
+UnScheduleF=function(queueName){
 	return function(time){clearTimeout(time);delete Schedule[queueName][time];};
 }
 
-function UnScheduleAll(queueName){
+UnScheduleAll=function(queueName){
 	if(!Schedule[queueName])
 		return;
 	MapObject(Schedule[queueName],UnScheduleF(queueName))
@@ -4348,11 +4374,11 @@ function UnScheduleAll(queueName){
 ///////////////////////////////////////////////////////////////////////////////
 // Cycle
 
-function ArrayHash(array){
+ArrayHash=function(array){
 	return "hash"+JSON.stringify(array).replace(/[^\w]|\d/g,"");
 }
 
-function CyclePosition(array){
+CyclePosition=function(array){
 	var arrayhash=ArrayHash(array);
 	if(!Cycle.hashArray||!In(Cycle.hashArray,arrayhash))
 		return 0;
@@ -4360,7 +4386,7 @@ function CyclePosition(array){
 		return Cycle.hashArray[arrayhash];
 }
 
-function Cycle(array,n,bounded){
+Cycle=function(array,n,bounded){
 	var arrayhash=ArrayHash(array);
 	if(!Cycle.hashArray)
 		Cycle.hashArray={};
@@ -4380,32 +4406,34 @@ function Cycle(array,n,bounded){
 	return array[Cycle.hashArray[arrayhash]];
 }
 
-function CycleStay(array){
+CycleStay=function(array){
 	return Cycle(array,0);
 }
 
-function CycleNext(array){
+CycleNext=function(array){
 	return Cycle(array,1);
 }
 
-function CyclePrev(array){
+CyclePrev=function(array){
 	return Cycle(array,-1);
 }
 
-function CycleNextBounded(array){
+CycleNextBounded=function(array){
 	return Cycle(array,1,true);
 }
 
-function CyclePrevBounded(array){
+CyclePrevBounded=function(array){
 	return Cycle(array,-1,true);
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
 //Image
-var ImageExtensions=["apng","bmp","gif","ico","cur","jpg","jpeg","jfif","pjpeg","pjp","png","svg","tif","tiff","webp"];
+ImageExtensions=function(){
+	return ["apng","bmp","gif","ico","cur","jpg","jpeg","jfif","pjpeg","pjp","png","svg","tif","tiff","webp"];
+}
 
-function LoadImage(fullpath,parentIDsel){
+LoadImage=function(fullpath,parentIDsel){
 
 	function ImageReplace(data){
 		if(data==="")
@@ -4424,16 +4452,16 @@ function LoadImage(fullpath,parentIDsel){
 	LoadData(fullpath,ImageReplace);
 }
 
-function IsImageReference(ref){
-	return ImageExtensions.some(function(ext){return InPosfix(ref,"."+ext)});
+IsImageReference=function(ref){
+	return ImageExtensions().some(function(ext){return InPosfix(ref,"."+ext)});
 }
 
 //GIF Pause Support
-function IsGif(ref){
+IsGif=function(ref){
 	return InPosfix(ref,".gif");
 }
 
-function StartGIF(gid){
+StartGIF=function(gid){
 	var g=GetElement(gid);
 
 	RemoveElement(GetElementIn("CANVAS",g.parentElement));
@@ -4485,7 +4513,7 @@ function StartGIF(gid){
 
 }
 
-function PlayGif(c,gid){
+PlayGif=function(c,gid){
 	return function(){
 		var g=GetElement(gid);
 		function SG(){
@@ -4498,7 +4526,7 @@ function PlayGif(c,gid){
 	}
 }
 
-function PlayPauseGif(){
+PlayPauseGif=function(){
 	if(StartGIF.e)
 		StartGIF.e.click();
 }
@@ -4506,12 +4534,12 @@ function PlayPauseGif(){
 ///////////////////////////////////////////////////////////////////////////////
 // Canvas Drawing
 
-function GetContext(targetIDsel){
+GetContext=function(targetIDsel){
 	var targetIDsel=targetIDsel||"CANVAS";
 	return GetElement(targetIDsel).getContext("2d");
 }
 
-function DrawImage(txtObj){
+DrawImage=function(txtObj){
 	var ctx=GetContext(txtObj.ctx);
 	if(!txtObj.elem)
 		return console.log("no image element in",txtObj);
@@ -4525,7 +4553,7 @@ function DrawImage(txtObj){
 	ctx.drawImage(elem,x,y,width,height);
 }
 
-function DrawPolygon(txtObj){
+DrawPolygon=function(txtObj){
 	var ctx=GetContext(txtObj.ctx);
 	var strokeColor=txtObj.strokeColor?txtObj.strokeColor:getComputedStyle(document.body)["strokeColor"];
 	var fillColor=txtObj.fillColor?txtObj.fillColor:getComputedStyle(document.body)["background-strokeColor"];
@@ -4565,12 +4593,12 @@ function DrawPolygon(txtObj){
 ///////////////////////////////////////////////////////////////////////////////
 //Reduce
 
-function Accumulate(acc,val){return acc+val};
+Accumulate=function(acc,val){return acc+val};
 
 ///////////////////////////////////////////////////////////////////////////////
 // Custom events 
 
-function Shout(name,targetSelector){
+Shout=function(name,targetSelector){
 	Shout[name]=targetSelector;//save memory
 	var ev=new CustomEvent(name);
 	var e=GetElement(targetSelector)||window;
@@ -4578,7 +4606,7 @@ function Shout(name,targetSelector){
 }
 
 //polyfill
-if(typeof window.CustomEvent!=="function"){
+if(typeof window.CustomEvent!=="function"&&window.CustomEvent){
 	function CustomEvent(event,optObj){
 		optObj=optObj||{
 			bubbles:false,
@@ -4596,90 +4624,98 @@ if(typeof window.CustomEvent!=="function"){
 ///////////////////////////////////////////////////////////////////////////////
 // Dates
 
-function Today(){return new Date()};
+Today=function(){return new Date()};
 
-function Month(date){
+Month=function(date){
 	var date=date||Today();
 	return Number(date.toLocaleDateString().replace(/(\d)*\//,"").replace(/\/(\d)*/,""));
 };
 
-function Shorten3(name){
+Shorten3=function(name){
 	return name.slice(0,3);
 }
 
-var Months=["January","February","March","April","May","June","July","August","September","October","November","December"];
-var MonthsShort=Months.map(Shorten3);
-var DayNames=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-var DayNamesShort=DayNames.map(Shorten3);
+Months=function(){
+	return ["January","February","March","April","May","June","July","August","September","October","November","December"];
+}
+MonthsShort=function(){
+	return Months().map(Shorten3);
+}
+DayNames=function(){
+	return ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+}
+DayNamesShort=function(){
+	return DayNames().map(Shorten3);
+}
 
 
-function DayName(n,dayNamesArray){
-	var dayNamesArray=dayNamesArray||DayNames;
+DayName=function(n,dayNamesArray){
+	var dayNamesArray=dayNamesArray||DayNames();
 	return dayNamesArray[n];
 }
 
-function MonthName(n,monthArray){
+MonthName=function(n,monthArray){
 	return monthArray[n-1];
 }
 
-function Year(date){
+Year=function(date){
 	var date=date||Today();
 	return date.getFullYear();
 }
-function Month(date){
+Month=function(date){
 	var date=date||Today();
 	return date.getMonth()+1;
 }
-function Day(date){
+Day=function(date){
 	var date=date||Today();
 	return date.getDate();
 }
-function DayST(day){
+DayST=function(day){
 	st=(day===1||day===21||day===31)?"st":(day===2||day===22)?"nd":(day===3||day===23)?"rd":"th";
 	return st;
 }
-function WeekDay(date,dayNamesArray){
+WeekDay=function(date,dayNamesArray){
 	var date=date||Today();
-	var dayNamesArray=dayNamesArray||DayNames;
+	var dayNamesArray=dayNamesArray||DayNames();
 	return DayName(date.getDay(),dayNamesArray);
 }
 
-function Days(date1,date2){
+Days=function(date1,date2){
 	var date2=date2||Today();
 	return (date2-date1)/1000/60/60/24
 };
 
-function DaysSortF(date1,date2){
+DaysSortF=function(date1,date2){
 	var d=Days(date1,date2);
 	return d>0?1:d<0?-1:0;
 };
 
-function DateDate(day,month,year){
+DateDate=function(day,month,year){
 	if(typeof day==="undefined")
 		return Today();
 	return 	new Date(Number(year),Number(month)-1,Number(day));
 }
 
-function DateNamer(date){
+DateNamer=function(date){
 	if(!date)
 		return DateNamer(Today());
-	return `${WeekDay(date,DayNames)}, ${Day(date)}<sup>${DayST(Day(date))}</sup> of ${MonthName(Month(date),Months)} ${Year(date)}`;
+	return `${WeekDay(date,DayNames())}, ${Day(date)}<sup>${DayST(Day(date))}</sup> of ${MonthName(Month(date),Months())} ${Year(date)}`;
 }
 
-function DateRSS(date){
+DateRSS=function(date){
 	if(!date)
 		return DateRSS(Today());
-	return `${WeekDay(date,DayNamesShort)}, ${Day(date)} ${MonthName(Month(date),MonthsShort)} ${Year(date)}`;
+	return `${WeekDay(date,DayNamesShort())}, ${Day(date)} ${MonthName(Month(date),MonthsShort())} ${Year(date)}`;
 }
 
-function DateName(day,month,year){
+DateName=function(day,month,year){
 	date=DateDate(day,month,year);
 	return DateNamer(date);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // Range, in different order
-function Range(min,max){
+Range=function(min,max){
 	if(!max)
 		return Range(0,min);
 	else{
@@ -4699,11 +4735,11 @@ function Range(min,max){
 ///////////////////////////////////////////////////////////////////////////////
 // Object Props
 
-function PropertyF(propertyName){
+PropertyF=function(propertyName){
 	return function(obj){return obj[propertyName];}
 }
 
-function PropertyEqualsF(propertyName,propertyValue){
+PropertyEqualsF=function(propertyName,propertyValue){
 	return function(obj){return obj[propertyName]===propertyValue;};
 }
 
@@ -4712,13 +4748,13 @@ function PropertyEqualsF(propertyName,propertyValue){
 
 ///////////////////////////////////////////////////////////////////////////////
 // Banner Typewriter Effect
-function MaxCharacters(e){
+MaxCharacters=function(e){
 	var width=Number(UnPosfix(getComputedStyle(e).getPropertyValue("width"),"px"));
 	var fontwidth=Number(UnPosfix(getComputedStyle(e).getPropertyValue("font-size"),"px"));
 	return Quotient(width,fontwidth);
 }
 
-function BannerEffect(parentElement,txt,maxchars,duration){
+BannerEffect=function(parentElement,txt,maxchars,duration){
 	var queuename=txt;
 	TypewriterBanner["running"]=queuename;
 
@@ -4747,7 +4783,7 @@ function BannerEffect(parentElement,txt,maxchars,duration){
 	Schedule(CancelBannerEffectF(parentElement,originaltext,queuename),j*duration,queuename);
 }
 
-function CancelBannerEffectF(parentElement,originaltext,queuename){
+CancelBannerEffectF=function(parentElement,originaltext,queuename){
 	return function(){
 		ReplaceChildren(originaltext,parentElement);
 		TypewriterBanner["running"]=false;
@@ -4756,7 +4792,7 @@ function CancelBannerEffectF(parentElement,originaltext,queuename){
 }
 
 
-function TypewriterBanner(thi,txt,queuename){
+TypewriterBanner=function(thi,txt,queuename){
 	if(!TypewriterBanner["running"]&&!TypewriterBanner["blocked-"+queuename]){
 		TypewriterBanner["planned-"+queuename]=setTimeout(function(){Once(function(){
 			BannerEffect(thi,txt)},txt);
@@ -4766,7 +4802,7 @@ function TypewriterBanner(thi,txt,queuename){
 	}
 }
 
-function CancelTypewriterBanner(thi,originaltext,queuename){
+CancelTypewriterBanner=function(thi,originaltext,queuename){
 	clearTimeout(TypewriterBanner["planned-"+queuename]);
 
 	//console.log("unplan and block","planned-"+queuename,TypewriterBanner["planned-"+queuename],TypewriterBanner["blocked-"+queuename]);
@@ -4783,7 +4819,7 @@ function CancelTypewriterBanner(thi,originaltext,queuename){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Symbol designs
-function ObtainSymbol(name){
+ObtainSymbol=function(name){
 	var symbols={
 		"how-to-play":IconHTML("M182 32 C 131 42,96 91,105 142 C 106 149,110 166,110 166 C 110 166,154 156,154 156 C 154 156,153 151,151 144 C 143 106,163 77,199 76 C 255 76,270 151,218 173 C 209 177,204 180,204 181 C 204 181,202 184,199 186 C 181 199,168 218,163 239 C 161 246,158 262,158 263 C 158 263,201 271,201 271 C 201 271,202 266,203 261 C 209 235,217 224,238 214 C 322 175,311 57,222 33 C 213 31,192 30,182 32 M155 304 C 118 318,127 372,167 372 C 203 372,217 326,187 307 C 178 302,164 300,155 304"),
 		"credits":IconHTML("M178 0 C 34 15,-46 177,27 302 C 109 438,310 430,379 288 C 449 146,335 -15,178 0 M218 38 C 327 50,394 169,346 269 C 291 383,133 394,64 289 C -10 174,81 24,218 38 M185 78 C 104 88,56 172,87 248 C 117 320,209 344,273 297 C 284 289,310 260,309 257 C 308 256,273 229,271 229 C 271 229,267 233,263 238 C 232 280,183 286,148 252 C 89 195,156 98,230 132 C 244 139,253 146,267 167 L 271 171 274 169 C 275 168,284 162,293 155 L 310 143 308 141 C 282 104,259 87,224 80 C 217 78,192 77,185 78"),
@@ -4813,3 +4849,34 @@ function ObtainSymbol(name){
 	else
 		return name;
 }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Introspection - lists all defined functions!
+
+Introspect=function(){ 
+	if(!Introspect.list)
+		Introspect.list=[];
+	else
+		return Introspect.list;
+
+	for (var i in globalThis){
+		var f=globalThis[i];
+		if(typeof f==="function"&&f.toString().indexOf("native code")==-1){
+			Introspect.list.push(f.name);
+		}
+	}
+
+	return Introspect.list;
+}
+
+//Exports - exports everything as a module!
+ExportFunction=function(name){
+	exports[name]=globalThis[name];
+}
+
+if(typeof exports!=="undefined")
+	Introspect().map(ExportFunction);
+
+//console.log(Keys(global))
+//console.log(this.ExportFunction.toString())
