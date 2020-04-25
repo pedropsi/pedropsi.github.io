@@ -237,7 +237,9 @@ InlineSVG=function(){
 	images.map(ReplaceSource);
 }
 
+if(!UnderNodeJS()){
 Page=PageObj(PageIdentifier());
 if(DATA){DATA["CMS"]=CMS;DATA["Page"]=Page}else{var DATA={"CMS":CMS,"Page":Page}}
+}
 Shout("cms");
 ExportNodeFunctions();

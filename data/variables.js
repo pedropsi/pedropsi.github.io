@@ -1,4 +1,4 @@
-var Variables={
+Variables={
 YEAR_NOW					:	()=>	Year(),
 YEAR_START					:	()=>	2010,
 DATE_FOUNDED				:	()=>	`December, 2017`,
@@ -451,8 +451,6 @@ CSF							:	()=>	`<span>></span></code>`
 
 };
 
-if(DATA){DATA["Variables"]=Variables}else{var DATA={"Variables":Variables}}
-Shout("variables");
 
 //Variables
 Functionalise=function(data){
@@ -475,3 +473,7 @@ NormaliseVariables=function(Variables,TemplateFunction) {
 		o[k]=(()=>TemplateFunction(v));
 	})
 }
+
+if(DATA){DATA["Variables"]=Variables}else{var DATA={"Variables":Variables}}
+Shout("variables");
+ExportNodeFunctions();

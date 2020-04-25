@@ -1,11 +1,18 @@
 
 //Page Build Sequence
+CMSDependenciesList=["data/variables.js","data/cms.js","data/links.js","data/media.js","data/people.js","data/news.js"];;
+
 LoadCMS=function(){
-	var cms=["data/variables.js","data/cms.js","data/links.js","data/media.js","data/people.js","data/news.js"];
-	LoadSources(cms,LoadPrescript)
+	var cms=CMSDependenciesList;
+	LoadSources(CMSDependenciesList,LoadPrescript)
 }
 
-LoadPrescript=function(){
+LoadNodeCMS=function(){
+	var cms=CMSDependenciesList.map(s=>Prefix(s,"../"));
+	LoadSources(cms,ConsolidateVariables);
+}
+
+ConsolidateVariables=function(){
 	v={
 		...DATA["Variables"],
 		...DATA["CMS"],
@@ -18,6 +25,13 @@ LoadPrescript=function(){
 
 	DATA["Links"]=NormaliseVariables(DATA["Links"],LinkTemplate);
 	v={...v,...DATA["Links"]}
+}
+
+LoadPrescript=function(){
+	ConsolidateVariables()
+
+	if(UnderNodeJS())
+		return;
 
 	if(v.PRESCRIPT)
 		LoadSources(v.PRESCRIPT(),BuildCMSPage);
@@ -33,6 +47,7 @@ BuildCMSPage=function(){
 	
 	IndexTitles();
 	AddTitleIndex(".main .whiteboard");//First whiteboard where main content is
+	
 
 	var sources=["codes/communication.js","data/guestbook.js","codes/analytics.js"];
 	LoadSources(sources,PageFeatures);
@@ -57,7 +72,11 @@ PageFeaturesDOM=function(){
 	ResumeCapturingKeys(CaptureComboKey);
 }
 
-ListenOnce("load",LoadCMS);
+
+if(UnderNodeJS())
+	LoadNodeCMS();
+else
+	ListenOnce("load",LoadCMS);
 
 //Skeleton
 
@@ -70,5 +89,3 @@ PageSkeletonHTML=function(){
 try{v={...v,...Post}}catch{v=Post}</script>
 `;
 }
-
-

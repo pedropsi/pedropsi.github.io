@@ -3227,6 +3227,9 @@ ClickStay=function(){
 //Event Listeners
 
 ListenOnce=function(ev,fun,target){
+	if(UnderNodeJS())
+		return ListenNode(ev,fun);
+
 	return ListenF(ev,fun,target?target:window,function(eve){return true;});
 }
 
@@ -3275,10 +3278,13 @@ Listen=function(eString,F,target){
 };
 
 ListenNode=function(name,F){
+	if(!Listen.events)
+		Listen.events = require('events');
 	if(!Listen.node){
-		Listen.node=new EventEmitter();
+		Listen.node = new Listen.events();
 	}
 	Listen.node.on(name,F);
+	console.log("listening to ",name);
 }
 
 //Listen for all events in array before firing
@@ -4628,8 +4634,10 @@ Accumulate=function(acc,val){return acc+val};
 
 Shout=function(name,targetSelector){
 	if(UnderNodeJS()){
-		if(Listen.node)
+		if(Listen.node){
 			Listen.node.emit(name);
+			console.log("--> emitted ",name)
+		}
 		return;
 	}
 
