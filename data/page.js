@@ -51,6 +51,10 @@ function PageFeaturesDOM(){
 	DynamicTables();
 	StartAnalytics();
 	InlineSVG();
+	//Capture events
+	Listen("mousedown",function(e){FocusElement(e.target)});//Focus clicked items (also to escape focus by clicking in unfocusable parents)
+	Listen("click",function(e){FocusElement(e.target)});
+	ResumeCapturingKeys(CaptureComboKey);
 }
 
 ListenOnce("load",LoadCMS);
