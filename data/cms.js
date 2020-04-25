@@ -1,11 +1,11 @@
-var NoImage={IMAGE_NAME:()=>"splash",IMAGE_EXT:()=>"svg"};
-var WithImage={IMAGE_NAME:(v)=>v.LINK(v),IMAGE_EXT:()=>"svg",IMAGE_ALT:(v)=>v.TITLE(v)};
+NoImage={IMAGE_NAME:()=>"splash",IMAGE_EXT:()=>"svg"};
+WithImage={IMAGE_NAME:(v)=>v.LINK(v),IMAGE_EXT:()=>"svg",IMAGE_ALT:(v)=>v.TITLE(v)};
 
-var CMSMosaic={...WithImage,BODY:()=>v.PAGE_SIMPLE(),CONTENT:()=>v.FIGURE_MOSAIC(),POSTSCRIPT:()=>["data/communication-mosaic.js"],STYLE:()=>`visual`,TYPE:()=>`Mosaic`,TYPEGRAPH:()=>`image`,IMAGE_EXT:()=>`png`};
-var CMSGame={...WithImage,POSTSCRIPT:()=>v.PUZZLE_SCRIPT(),TYPE:()=>`Game`,CATEGORIES:()=>[`entertainment`,`kids`,`games`],TYPEGRAPH:()=>`game`,MANIFEST:()=>v.PWA_MANIFEST(),IMAGE_EXT:()=>`png`};
+CMSMosaic={...WithImage,BODY:()=>v.PAGE_SIMPLE(),CONTENT:()=>v.FIGURE_MOSAIC(),POSTSCRIPT:()=>["data/communication-mosaic.js"],STYLE:()=>`visual`,TYPE:()=>`Mosaic`,TYPEGRAPH:()=>`image`,IMAGE_EXT:()=>`png`};
+CMSGame={...WithImage,POSTSCRIPT:()=>v.PUZZLE_SCRIPT(),TYPE:()=>`Game`,CATEGORIES:()=>[`entertainment`,`kids`,`games`],TYPEGRAPH:()=>`game`,MANIFEST:()=>v.PWA_MANIFEST(),IMAGE_EXT:()=>`png`};
 
 
-var CMS={
+CMS={
 P_index:{...NoImage,BODY:()=>v.POST(),LINK:()=>`index`,TITLE:()=>v.SITE_NAME(),DAY:()=>`1`,MONTH:()=>`12`,YEAR:()=>`2017`,TYPE:()=>`Home`,TAGS:()=>[`Sitemap`],DESCRIPTION:()=>`${v.SITE_NAME()} home page.`,TYPEGRAPH:()=>`website`},
 P_purpose:{...NoImage,LINK:()=>`purpose`,TITLE:()=>`The purpose of the ${v.SITE_NAME()}`,SHORTNAME:()=>`Purpose`,DAY:()=>`1`,MONTH:()=>`12`,YEAR:()=>`2017`,TAGS:()=>[`Creative-Archive`,`Post`],ONE_LINER:()=>`${v.SITE_NAME()}'s first post!`},
 P_support:{...NoImage,LINK:()=>`support`,TITLE:()=>`Support the ${v.SITE_NAME()}`,SHORTNAME:()=>`Suport`,DAY:()=>`8`,MONTH:()=>`2`,YEAR:()=>`2018`,TAGS:()=>[`Creative-Archive`,`Finance`,`Post`],ONE_LINER:()=>`Support the ${v.SITE_NAME()}!`},
@@ -58,51 +58,49 @@ P_posts:{...NoImage,LINK:()=>`posts`,BODY:()=>v.PAGE_SIMPLE(),CONTENT:()=>PostPa
 P_generator:{...NoImage,LINK:()=>`generator`,POSTSCRIPT:()=>["data/news.js"],TITLE:()=>`${v.SITE_NAME()} Generator`,DAY:()=>`26`,MONTH:()=>`03`,YEAR:()=>`2020`,TAGS:()=>[`Creative-Archive`,`Sitemap`],ONE_LINER:()=>`Generate ${v.SITE_NAME()}'s pages such as sitemap, rss and more!`},
 }
 
-var Page=PageObj(PageIdentifier());
-
-if(DATA){DATA["CMS"]=CMS;DATA["Page"]=Page}else{var DATA={"CMS":CMS,"Page":Page}}
-Shout("cms");
-
 
 //Index pages
 
-function PageObj(id){
+PageObj=function(id){
 	return Values(FilterObject(CMS,p=>(p.LINK()===id)))[0];
 }
 
-function Access(page,field){
+Access=function(page,field){
 	return PageObj(page)[field]();
 }
 
 
-var CMSOptions={
+CMSOptionsObj=function(){
+	return{
 		Source:CMS,
 		Sorter:SortPageByDate,
 		ItemHTML:PageCardHTML
 	};
+}
 
-function SortPageByDate(pageA,pageB){
+SortPageByDate=function(pageA,pageB){
 	var pageA={...v,...pageA};
 	var pageB={...v,...pageB};
 	return Days(v.DATE_DATE(pageA),v.DATE_DATE(pageB));
 }
 
 
-function PageTagArray(){
+PageTagArray=function(){
 	var tags=PageSearch("search");
 		return Complement(tags.split("+"),["","Class"]);
 }
 
-function TagPageHTML(){
+TagPageHTML=function(){
 	var tags=PageTagArray();
 	function HasTag(PageObj){return PageObj.TAGS&&tags.every(tag=>In(PageObj.TAGS(),tag));};
+	var CMSOptions=CMSOptionsObj();
 	return SectionHTML({
 		...CMSOptions,
 		FilterF:HasTag,
 	})
 }
 
-function PageCardHTML(page){
+PageCardHTML=function(page){
 	var page={...v,...page};
 	var size=180;
 	var path=ImagePath(page.IMAGE_NAME(page),page.IMAGE_EXT(),size);
@@ -115,7 +113,7 @@ function PageCardHTML(page){
 	</a>`;
 }
 
-function MiniCardHTML(page){
+MiniCardHTML=function(page){
 	var page={...v,...page};
 	var size=180;
 	var path=ImagePath(page.IMAGE_NAME(page),page.IMAGE_EXT(),size);
@@ -133,7 +131,7 @@ function MiniCardHTML(page){
 	</div>`;
 }
 
-function ImagePath(name,ext,size){
+ImagePath=function(name,ext,size){
 	var folder="images/";
 	var size=size?size+"/":"";
 	if(ext!=="svg")
@@ -141,7 +139,8 @@ function ImagePath(name,ext,size){
 	return `${folder}${name}.${ext}`;
 }
 
-function LatestHTML(){
+LatestHTML=function(){
+	var CMSOptions=CMSOptionsObj();
 	return SectionHTML({
 		...CMSOptions,
 		header:`<h1 class="title">Latest posts</h1>`,
@@ -151,7 +150,8 @@ function LatestHTML(){
 	})
 }
 
-function HighlightsHTML(){
+HighlightsHTML=function(){
+	var CMSOptions=CMSOptionsObj();
 	return SectionHTML({
 		...CMSOptions,
 		include:{FEATURED:()=>true,TYPE:()=>`Game`},
@@ -161,7 +161,8 @@ function HighlightsHTML(){
 	})
 }
 
-function PopularHTML(){
+PopularHTML=function(){
+	var CMSOptions=CMSOptionsObj();
 	return SectionHTML({
 		...CMSOptions,
 		FilterF:function(PageObj){ var PageObj={...v,...PageObj}; return PageObj.TYPE()!=="Game"&&PageObj.FEATURED&&PageObj.FEATURED();},
@@ -170,24 +171,25 @@ function PopularHTML(){
 	})
 }
 
-function CMSTags(){
+CMSTags=function(){
 	tags=[];
 	Values(CMS).map(p=>(tags=Union(tags,p.TAGS?p.TAGS():[])));
 	return tags;
 }
 
-function GenerateTagPage(tag){
+GenerateTagPage=function(tag){
 	var page=PageSkeletonHTML();
 	var name=`tag-${tag}.html`;
 	Download(page,name,"html");
 }
 
-function GenerateTagPages(){
+GenerateTagPages=function(){
 	CMSTags().map(GenerateTagPage);
 }
 
-function ArchiveYearHTML(year){
+ArchiveYearHTML=function(year){
 	function InYear(PageObj){return PageObj.YEAR&&PageObj.YEAR()===year;};
+	var CMSOptions=CMSOptionsObj();
 	return SectionHTML({
 		...CMSOptions,
 		header:`<h2 class="archive-year">${year}</h2>`,
@@ -196,7 +198,7 @@ function ArchiveYearHTML(year){
 	})
 }
 
-function PostPageHTML(){
+PostPageHTML=function(){
 	var years=[];
 	function GetYear(PageObj){
 		if(PageObj.YEAR)
@@ -208,7 +210,7 @@ function PostPageHTML(){
 }
 
 
-function InlineSVG(){
+InlineSVG=function(){
 	var images=GetElements("img");
 	function ReplaceSource(img){
 		var src=img.src;
@@ -235,4 +237,7 @@ function InlineSVG(){
 	images.map(ReplaceSource);
 }
 
+Page=PageObj(PageIdentifier());
+if(DATA){DATA["CMS"]=CMS;DATA["Page"]=Page}else{var DATA={"CMS":CMS,"Page":Page}}
+Shout("cms");
 ExportNodeFunctions();

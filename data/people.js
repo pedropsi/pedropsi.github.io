@@ -1,4 +1,4 @@
-var People={
+People={
 FERNANDES:{TYPE:"Developer",NAME:"William Fernandes",ALIAS:"10c8",TWITTER:"10c8_",PERSONAL_PAGE:"https://10c8.github.io"},
 HESKHWIS:{TYPE:"Developer",NAME:"Rémi Töötätä",ALIAS:"HeskHwis",TWITTER:"HeskHwis",ITCH:"heskhwis"},
 LESLO:{TYPE:"Developer",NAME:"Lucas LeSlo",TWITTER:"leslodev"},
@@ -100,7 +100,7 @@ PLURMORANT:{TYPE:"Tester",NAME:"Plurmorant"},
 COLLINEYE:{TYPE:"Tester",NAME:"Patrick Collin Eye",TWITTER:"collin_eye"}
 }
 
-function PersonalPage(linkObj){
+PersonalPage=function(linkObj){
 	if(linkObj.ITCH)
 		return "https://"+Unfunctionalise(linkObj.ITCH)+v.ITCH_URL();
 	if(linkObj.TWITTER)
@@ -117,7 +117,7 @@ function PersonalPage(linkObj){
 		return "";
 }
 
-function PersonTemplate(linkObj){
+PersonTemplate=function(linkObj){
 	var name=Unfunctionalise(linkObj.NAME);
 	var alias=Unfunctionalise(linkObj.ALIAS||"");
 	if(alias)

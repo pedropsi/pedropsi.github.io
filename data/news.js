@@ -1,4 +1,4 @@
-var News={
+News={
 	N_42:{
 DATE:"2020-04-26",
 HEADER:()=>"Puzzle type beta changes III",
@@ -347,9 +347,6 @@ PIECE:()=>`
 }
 
 
-if(DATA){DATA["News"]=News}else{var DATA={"News":News}}
-Shout("news");
-
 
 SortNewsByDate=function(pageA,pageB){
 	return Days(new Date(pageA.DATE),new Date(pageB.DATE));
@@ -502,4 +499,7 @@ DownloadSitemap=function(){
 	Download(data,filename,type);
 }
 
+
+if(DATA){DATA["News"]=News}else{var DATA={"News":News}}
+Shout("news");
 ExportNodeFunctions();

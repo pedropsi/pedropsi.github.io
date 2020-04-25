@@ -455,7 +455,7 @@ if(DATA){DATA["Variables"]=Variables}else{var DATA={"Variables":Variables}}
 Shout("variables");
 
 //Variables
-function Functionalise(data){
+Functionalise=function(data){
 	if (typeof data==="function")
 		return data;
 	else
@@ -463,14 +463,14 @@ function Functionalise(data){
 }
 
 
-function Unfunctionalise(data){
+Unfunctionalise=function(data){
 	if (typeof data==="function")
 		return data();
 	else
 		return data;
 }
 
-function NormaliseVariables(Variables,TemplateFunction) {
+NormaliseVariables=function(Variables,TemplateFunction) {
 	return MapObject(Variables,function (v,k,o){
 		o[k]=(()=>TemplateFunction(v));
 	})

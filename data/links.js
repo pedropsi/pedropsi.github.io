@@ -1,4 +1,4 @@
-var Links={
+Links={
 A_GENERATOR:{PAGE:"generator",EXT:".html",TITLE:`generator`,AUTHOR:()=>v.SITE_NAME()},
 A_BUROKKU_KONEKUTA_FEAT_1:{PAGE:"https://www.bontegames.com/2019/07/burokku-konekuta-browser.html",TITLE:"blog",AUTHOR:()=>v.BONTE(),GROUP:"mentioned",ID:"burokku-konekuta"},
 A_BUROKKU_KONEKUTA_FEAT_2:{PAGE:"http://blog.livedoor.jp/lkrejg/archives/66112536.html#comments",TITLE:"フラシュ - 無料ゲーム blog",AUTHOR:()=>v.LKREJG(),GROUP:"mentioned",ID:"burokku-konekuta"},
@@ -132,7 +132,7 @@ A_CUTTERS_AND_CONCRETE:{PAGE:"https://bregehr.itch.io/cutters-and-concrete",EXT:
 LinksNormalised=Clone(Links);
 
 
-function LinkTemplate(linkObj){
+LinkTemplate=function(linkObj){
 	var title=Unfunctionalise(linkObj.TITLE);
 	var author=Unfunctionalise(linkObj.AUTHOR||"");
 
@@ -152,13 +152,13 @@ function LinkTemplate(linkObj){
 		return AHTML(title,page+ext);
 }
 
-function LinkGroup(GroupObject){
+LinkGroup=function(GroupObject){
 	if(typeof GroupObject==="string")
 		return LinkGroup({GROUP:GroupObject});
 	return BaseFilter(LinksNormalised,GroupObject);
 }
 
-function LinkGroupHTML(GroupObject){
+LinkGroupHTML=function(GroupObject){
 	var links=LinkGroup(GroupObject).map(g=>`<li>${LinkTemplate(g)},</li>`);
 	if(!links.length)
 		return "";

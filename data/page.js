@@ -1,11 +1,11 @@
 
 //Page Build Sequence
-function LoadCMS(){
+LoadCMS=function(){
 	var cms=["data/variables.js","data/cms.js","data/links.js","data/media.js","data/people.js","data/news.js"];
 	LoadSources(cms,LoadPrescript)
 }
 
-function LoadPrescript(){
+LoadPrescript=function(){
 	v={
 		...DATA["Variables"],
 		...DATA["CMS"],
@@ -25,7 +25,7 @@ function LoadPrescript(){
 		BuildCMSPage();
 }
 
-function BuildCMSPage(){
+BuildCMSPage=function(){
 	document.head.innerHTML=v.HEAD();
 	document.body.innerHTML=v.BODY();
 	//document.body.id=PageIdentifier();
@@ -42,12 +42,12 @@ function BuildCMSPage(){
 
 }
 
-function PageFeatures(){
+PageFeatures=function(){
 	DisplayGuestbook();
 	PageFeaturesDOM();
 }
 
-function PageFeaturesDOM(){
+PageFeaturesDOM=function(){
 	DynamicTables();
 	StartAnalytics();
 	InlineSVG();
@@ -61,7 +61,7 @@ ListenOnce("load",LoadCMS);
 
 //Skeleton
 
-function PageSkeletonHTML(){
+PageSkeletonHTML=function(){
 	return `
 <!DOCTYPE html>
 <link href="codes/index.css" rel="stylesheet" type="text/css"/>

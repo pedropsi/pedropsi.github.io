@@ -1,4 +1,4 @@
-var Media={
+Media={
 M_SPLASH:{TYPE:"music",AUTHOR:"Sei Mutsuki",TRACK:"Splash",YEAR:"2016",GENRE:"Chillout",LICENSE:"CC-BY 3.0",AUTHOR_LINK:"https://seimutsuki.bandcamp.com/",MUSIC_LINK:"https://soundcloud.com/sei_peridot/peritunematerial-splashroyalty-free-music",N:"1",CONTEXT_ID:"skilleblokker"},
 M_ICE_CAVE:{TYPE:"music",AUTHOR:"Sei Mutsuki",TRACK:"Ice Cave",YEAR:"2016",GENRE:"Ambient",LICENSE:"CC-BY 3.0",AUTHOR_LINK:"https://seimutsuki.bandcamp.com/",MUSIC_LINK:"https://soundcloud.com/sei_peridot/ice-cave",N:"2",CONTEXT_ID:"skilleblokker"},
 M_DEEP_VALLEY_2:{TYPE:"music",AUTHOR:"Sei Mutsuki",TRACK:"Deep Valley 2",YEAR:"2016",GENRE:"World",LICENSE:"CC-BY 3.0",AUTHOR_LINK:"https://seimutsuki.bandcamp.com/",MUSIC_LINK:"https://soundcloud.com/sei_peridot/deep-valley2",N:"3",CONTEXT_ID:"skilleblokker"},
@@ -54,14 +54,14 @@ S_puzzle_type_screenshot_4:{TYPE:"screenshot",TRACK:"puzzle-type-screenshot-4.pn
 if(DATA){DATA["Media"]=Media}else{var DATA={"Media":Media}}
 Shout("media");
 
-function TrackHTML(MediaObj){
+TrackHTML=function(MediaObj){
 	if(MediaObj.TRACK&&MediaObj.MUSIC_LINK)
 		return AHTML(MediaObj.TRACK,MediaObj.MUSIC_LINK);
 	else
 		return MediaObj.TRACK;
 }
 
-function TrackAuthorHTML(MediaObj){
+TrackAuthorHTML=function(MediaObj){
 	if(MediaObj.AUTHOR_LINK&&MediaObj.AUTHOR)
 		return AHTML(MediaObj.AUTHOR,MediaObj.AUTHOR_LINK);
 	else
@@ -69,11 +69,11 @@ function TrackAuthorHTML(MediaObj){
 }
 
 
-function AudioTrackHMTL(track){
+AudioTrackHMTL=function(track){
 	return `<audio class="music" src="media/${PageIdentifier()}/${track.AUTHOR} - ${track.TRACK}.mp3" preload="none"></audio>`;
 }
 
-function MusicTableRowF(headers){
+MusicTableRowF=function(headers){
 	return function(MediaObj){
 		var data=[];
 		if(In(headers,"Track"))
@@ -94,23 +94,23 @@ function MusicTableRowF(headers){
 	}
 }
 
-function UniqueHeader(tracks,header){
+UniqueHeader=function(tracks,header){
 	var values=tracks.map(t=>t[header.toUpperCase()]);
 	return Union(values).length>1;
 }
-function PresentHeader(tracks,header){
+PresentHeader=function(tracks,header){
 	return In(Keys(tracks[0]),header.toUpperCase());
 }
-function UniqueHeaders(tracks,headers){
+UniqueHeaders=function(tracks,headers){
 	return headers.filter(function(h){return UniqueHeader(tracks,h)&&PresentHeader(tracks,h)});
 }
-function CommonHeaders(tracks,headers){
+CommonHeaders=function(tracks,headers){
 	return headers.filter(function(h){return !UniqueHeader(tracks,h)&&PresentHeader(tracks,h)});
 }
 
 var MusicHeaders=["Track","Author","Genre","Year","License"];
 
-function MusicTableHTML(tracks,headers){
+MusicTableHTML=function(tracks,headers){
 	if(tracks.length<=1)
 		return "";
 	
@@ -120,7 +120,7 @@ function MusicTableHTML(tracks,headers){
 }
 
 
-function MusicCreditsHTML(id){
+MusicCreditsHTML=function(id){
 	var tracks=Values(FilterObject(Media,t=>(t.CONTEXT_ID===id&&t.TYPE==="music")));
 	tracks=tracks.sort((a,b)=>a.N>b.N);
 	audiotracks=tracks.map(AudioTrackHMTL).join("\n")
@@ -146,7 +146,7 @@ function MusicCreditsHTML(id){
 	return caption+table+audiotracks;
 }
 
-function ImageCardHTML(ImageObj){
+ImageCardHTML=function(ImageObj){
 	return `<a href="images/${ImageObj.FOLDER_BIG}/${ImageObj.TRACK}" ${v.BLANK()} class="card-supra">
 		<div class="card">
 			<img 	src="images/${ImageObj.FOLDER_SMALL}/${ImageObj.TRACK}"}" 
@@ -158,7 +158,7 @@ function ImageCardHTML(ImageObj){
 	</a>`;
 }
 
-function ScreenshotGalleryHTML(id){
+ScreenshotGalleryHTML=function(id){
 	var screenshots=Values(FilterObject(Media,t=>(t.CONTEXT_ID===id&&t.TYPE==="screenshot")));
 	if(screenshots.length<1)
 		return "";
