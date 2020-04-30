@@ -42,7 +42,7 @@ function ReportTest(functionname,testname,test,passed,result,expect,verifiername
 	if(!GetElement(testfunctionid))
 		AddElement("<h3 class='test-function' id='"+testfunctionid+"'>"+functionname+"</h3>",TestingAreaSelector());
 
-	var testid=IDfy("test-"+functionname+" "+testname);
+	var testid=TocId("test-"+functionname+" "+testname);
 
 	var verifunctionname=functionname;
 	
@@ -510,20 +510,20 @@ SaveTest(PageIdentifier,"https://pedropsi.github.io/puzzlescript-games-database#
 
 
 
-SaveTest(IsRelativeLink,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html",false,"local");
-SaveTest(IsRelativeLink,"http://pedropsi.github.io/folder/guestbook.html",false,"online");
-SaveTest(IsRelativeLink,"folder/guestbook.html",true,"relative domain");
+SaveTest(RelativeLinked,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html",false,"local");
+SaveTest(RelativeLinked,"http://pedropsi.github.io/folder/guestbook.html",false,"online");
+SaveTest(RelativeLinked,"folder/guestbook.html",true,"relative domain");
 
-SaveTest(isLocalLink,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html",true,"local");
-SaveTest(isLocalLink,"http://pedropsi.github.io/folder/guestbook.html",false,"online");
-SaveTest(isLocalLink,"folder/guestbook.html",true,"relative domain");
+SaveTest(LocalLinked,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html",true,"local");
+SaveTest(LocalLinked,"http://pedropsi.github.io/folder/guestbook.html",false,"online");
+SaveTest(LocalLinked,"folder/guestbook.html",true,"relative domain");
 
-SaveTest(IsInnerLink,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html",true,"local");
-SaveTest(IsInnerLink,"http://pedropsi.github.io/folder/guestbook.html",true,"absolute domain");
-SaveTest(IsInnerLink,"folder/guestbook.html",true,"relative domain");
-SaveTest(IsInnerLink,"www.xxx.yyy",false,"online external www");
-SaveTest(IsInnerLink,"http://www.xxx.yyyl",false,"online external full http");
-SaveTest(IsInnerLink,"https://www.google.com/url?q=https%3A%2F%2Fpedropsi.github.io%2Fguestbook.html%23randomsomething",false,"from google");
+SaveTest(InnerLinked,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html",true,"local");
+SaveTest(InnerLinked,"http://pedropsi.github.io/folder/guestbook.html",true,"absolute domain");
+SaveTest(InnerLinked,"folder/guestbook.html",true,"relative domain");
+SaveTest(InnerLinked,"www.xxx.yyy",false,"online external www");
+SaveTest(InnerLinked,"http://www.xxx.yyyl",false,"online external full http");
+SaveTest(InnerLinked,"https://www.google.com/url?q=https%3A%2F%2Fpedropsi.github.io%2Fguestbook.html%23randomsomething",false,"from google");
 
 SaveTest(PageSearch,["source","https://pedropsi.github.io/anypage.html?source=homepage"],"homepage","present query string");
 SaveTest(PageSearch,["source","https://pedropsi.github.io/anypage.html?source=homepage&source=elsewhere"],"elsewhere","duplicates, prefer last parameter)");
@@ -546,10 +546,10 @@ SaveTest(FromUTF8,"%20%21"," !","multiple characters");
 
 ///////////////////////////////////////////////////////////////////////////////
 //Page auto index
-SaveTest(IDfy,"How to play","How-to-play","simple text");
-SaveTest(IDfy,"#How to play","How-to-play","starting hashtag removed");
-SaveTest(IDfy,"     How      to    play      ","How-to-play","trailing spaces, multiple spaces");
-SaveTest(IDfy,"|!\/!How\"#$%&/()=@£§€{[]}'to+*¨¨´´``~~-playçãôÒÌ","How-to-play","symbol mash");
+SaveTest(TocId,"How to play","How-to-play","simple text");
+SaveTest(TocId,"#How to play","How-to-play","starting hashtag removed");
+SaveTest(TocId,"     How      to    play      ","How-to-play","trailing spaces, multiple spaces");
+SaveTest(TocId,"|!\/!How\"#$%&/()=@£§€{[]}'to+*¨¨´´``~~-playçãôÒÌ","How-to-play","symbol mash");
 
 
 SaveTest(Shorten,["1234567890",20],"1234567890","wide limit");

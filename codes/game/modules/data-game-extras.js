@@ -1605,7 +1605,7 @@ function Hints(lvl){
 function LoadHintsFile(){
 	if(!GameConsole()&&!Hints.cached){
 		
-		if(IsFileLink(PageURL()))
+		if(FileLinked(PageURL()))
 			Hints.path="https://pedropsi.github.io/hints/";
 		else
 			Hints.path="hints/";

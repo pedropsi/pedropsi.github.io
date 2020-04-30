@@ -1266,41 +1266,41 @@ UTF8=function(){
 
 //SECONDARY
 
-IsRelativeLink=function(url){
+RelativeLinked=function(url){
 	return PageRelativePath(url)===url;
 }
 
-IsFileLink=function(url){
+FileLinked=function(url){
 	return PageHead(url)==="file:///";
 }
 
-isLocalLink=function(url){
-	return IsRelativeLink(url)||IsFileLink(url);
+LocalLinked=function(url){
+	return RelativeLinked(url)||FileLinked(url);
 }
 
-IsInOwnDomain=function(url){
+OwnDomainLinked=function(url){
 	return url.replace(Predomainshard(),"")!==url;
 }
 
-IsIntraPageLink=function(url){
+IntraLinked=function(url){
 	var inpage=UnPrefix(url,"#");
 	return url!=inpage;
 }
 
-IsExtraPageLink=function(url){
-	return !IsIntraPageLink(url);
+ExtraLinked=function(url){
+	return !IntraLinked(url);
 }
 
-IsInnerLink=function(url){
-	return IsExtraPageLink(url)&&(isLocalLink(url)||IsInOwnDomain(url));
+InnerLinked=function(url){
+	return ExtraLinked(url)&&(LocalLinked(url)||OwnDomainLinked(url));
 }
 
-IsOuterLink=function(url){
-	return IsExtraPageLink(url)&&!(isLocalLink(url)||IsInOwnDomain(url));
+OuterLinked=function(url){
+	return ExtraLinked(url)&&!(LocalLinked(url)||OwnDomainLinked(url));
 }
 
-IsAbsolutableLink=function(url){
-	return IsExtraPageLink(url)&&(IsRelativeLink(url)||IsInOwnDomain(url));
+AbsolutableLinked=function(url){
+	return ExtraLinked(url)&&(RelativeLinked(url)||OwnDomainLinked(url));
 }
 
 //Glocal Files
@@ -1342,7 +1342,7 @@ MarkElements=function(selector,markfunction){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Page auto index
-IDfy=function(s){
+TocId=function(s){
 	return UnExfix(s.replace(/([^A-Za-z0-9\_])+/g,"-"),"-");
 }
 
@@ -1353,7 +1353,7 @@ IndexTitle=function(h){
 IndexSubTitle=function(t,h){
 	t.setAttribute("data-index-depth",h);
 	Class(t,"index-item");
-	t.id=t.id?t.id:IDfy(t.innerText); 
+	t.id=t.id?t.id:TocId(t.innerText); 
 	AddScrollUpButton(t,h);
 	return t.id;
 }
@@ -1407,7 +1407,7 @@ ShowHideIndex=function(){
 
 AddScrollUpButton=function(t,h){
 	var title=t.innerText;
-	t.innerHTML=AHTML(title,PageUnTag()+"#"+IDfy(title));
+	t.innerHTML=AHTML(title,PageUnTag()+"#"+TocId(title));
 	if(h==="h2")
 		AddElement(ScrollUpHTML(),t);
 }
@@ -2300,7 +2300,7 @@ ButtonOnClickHTML=function(title,onclicktxt){
 }
 
 ButtonLinkHTML=function(title,symbol,attribs){
-	var id='#'+IDfy(title);
+	var id='#'+TocId(title);
 	var attribs=attribs||{};
 	if(!symbol)
 		var symbol=title;
@@ -3691,7 +3691,7 @@ MakeSound=function(sourcepath,data,id){
 	return ElementHTML({
 		tag:"audio",
 		txt:" ",
-		attributes:FuseObjects({'class':'sound',type:'audio/mpeg',preload:'auto','src':sourcepath,'id':(id?id:IDfy(sourcepath))},data?Datafy(data):{})
+		attributes:FuseObjects({'class':'sound',type:'audio/mpeg',preload:'auto','src':sourcepath,'id':(id?id:TocId(sourcepath))},data?Datafy(data):{})
 	});
 }
 

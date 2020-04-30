@@ -47,7 +47,7 @@ function DataUnit(datatype){
 					window.screen.width,
 					window.screen.colorDepth].join("x"),
 		"agent":window.navigator.userAgent,
-		"from":IsInnerLink(referrer)?PageIdentifier(referrer):referrer,
+		"from":InnerLinked(referrer)?PageIdentifier(referrer):referrer,
 		"campaign":source?source:"none"
 		});		
 }
@@ -66,8 +66,8 @@ function FingerprintLink(ref){
 		p=p+"?game="+PageSearch("game",ref);
 	
 	return FingerprintAction(
-		IsInnerLink(ref)?"InLink":"OutLink",
-		IsInnerLink(ref)?p:ref
+		InnerLinked(ref)?"InLink":"OutLink",
+		InnerLinked(ref)?p:ref
 	)
 }
 
@@ -120,7 +120,7 @@ function ChangeLinks(f){
 function OutLinks(){
 	function PrepareLink(l){
 		var ref=l.href;
-		if(IsOuterLink(ref)){
+		if(OuterLinked(ref)){
 			l.setAttribute("target","_blank");};
 		l.addEventListener("mousedown", (function(){RegisterLink(ref)}),false);
 	};
@@ -133,7 +133,7 @@ function OutLinks(){
 function AnonimiseLinks(){
 	function PrepareLink(l){
 		var ref=l.href;
-		if(IsInnerLink(ref))
+		if(InnerLinked(ref))
 			l.href= PageUnTag(ref)+"#"+clearance;
 		};
 	ChangeLinks(PrepareLink);
@@ -143,7 +143,7 @@ function AbsolutiseLinks(){
 	function PrepareLink(l){
 		var ref=l.href;
 		console.log("ABS!",ref);
-		if(IsAbsolutableLink(ref))
+		if(AbsolutableLinked(ref))
 			l.href=PageAbsolute(PageUnTag(ref));
 		};
 	ChangeLinks(PrepareLink);
@@ -163,7 +163,7 @@ function NightModeToggled(b){Listen("click", function(){RegisterNightModeToggled
 // Analytics Behaviour
 
 function AnalyticsClearance(){
-	return (!In(clearance,PageTag())&&!IsFileLink(PageURL()))||(PageSearch("source")==="homescreen");
+	return (!In(clearance,PageTag())&&!FileLinked(PageURL()))||(PageSearch("source")==="homescreen");
 }
 
 function StartAnalytics(){
