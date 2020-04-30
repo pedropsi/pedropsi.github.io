@@ -361,7 +361,7 @@ L_DONE						:	()=>	LabelHTML("Done"),
 L_PART						:	()=>	LabelHTML("Partly"),
 L_PROBLEM					:	()=>	LabelHTML("Problem"),
 L_SLOW						:	()=>	LabelHTML("Slow"),
-L_OK						:	()=>	LabelHTML("OK","DOne"),
+L_OK						:	()=>	LabelHTML("OK","Done"),
 L_EXP						:	()=>	LabelHTML("Experimental","Problem"),
 
 
