@@ -1458,16 +1458,24 @@ SourceIdentifier=function(path){
 }
 
 LoadSources=function(sourceArray,SuccessF){
-	if(UnderNodeJS())
-		return sourceArray.map(LoadNodeSource);										
+	if(UnderNodeJS()){
+		var shoutArray=sourceArray;
+		ListenAndOnce(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
+		sourceArray.map(LoadNodeSource);
+	}									
+	else{
+		var shoutArray=sourceArray.filter(function(f){return InPosfix(f,".js")}).map(SourceIdentifier);		//discards non-js files plus the folder structure to preserve file name
+		ListenAndOnce(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
+		sourceArray.map(LoadSource);											//loads asynchronously (each file MUST "Shout" its own identifier upon loading)
+	}
 	
-	var shoutArray=sourceArray.filter(function(f){return InPosfix(f,".js")}).map(SourceIdentifier);		//discards non-js files plus the folder structure to preserve file name
-	sourceArray.map(LoadSource);											//loads asynchronously (each file MUST "Shout" its own identifier upon loading)
-	ListenAndOnce(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
 }
 
 LoadNodeSource=function(source){
-	var source=Prefix(Prefix(UnPosfix(source,".js"),"/"),".");
+	var source=UnPosfix(source,".js");
+	if(!InPrefix(source,"."))
+		source=Prefix(UnPrefix(source,"/"),"../");
+	//console.log("loading source ",source);
 	require(source);
 }
 
@@ -3227,65 +3235,101 @@ ClickStay=function(){
 ///////////////////////////////////////////////////////////////////////////////
 //Event Listeners
 
-ListenOnce=function(ev,fun,target){
-	if(UnderNodeJS())
-		return ListenNode(ev,fun);
-
-	return ListenF(ev,fun,target?target:window,function(eve){return true;});
-}
-
-ListenOutside=function(ev,fun,target){
-	return ListenF(ev,fun,window,function(eve){return Outside(target,eve.target);});
-}
-
-ListenF=function(ev,fun,target,ConditionF){
-	var evObj={
-		"ev":IsArray(ev)?ev:[ev],
-		"F":F,
-		"target":GetElement(target)
-	};
-
-	function F(eve){
-		if(ConditionF(eve)){
-			fun();
-			ListenNoMore(evObj);
-		}
-	};
-
-	ListenIndeed(evObj);
-	return evObj;
-}
-
-ListenNoMore=function(evObj){
-	evObj["ev"].map(function(e){evObj["target"].removeEventListener(e,evObj["F"])});
-}
-
-ListenIndeed=function(evObj){
-	evObj["ev"].map(function(e){Listen(e,evObj["F"],evObj["target"])});
-}
-
-Listen=function(eString,F,target){
-	if(UnderNodeJS())
-		return ListenNode(eString,F);
+Listen=function(eventName,F,target){
+	if(UnderNodeJS()){
+		var eventName=UnPosfix(eventName,".js").replace(/.*\//g,"");
+		return ListenNode(eventName,F);
+	}
 
 	var target=GetElement(target)||window;
 	if(!target.addEventListener)
 		return;
 		
-	if(In(['click','mousedown'],eString))
-		target.addEventListener(eString,F,{"passive":true})
+	if(In(['click','mousedown'],eventName))
+		target.addEventListener(eventName,F,{"passive":true})
 	else
-		target.addEventListener(eString,F)
+		target.addEventListener(eventName,F)
 };
 
-ListenNode=function(name,F){
+ListenOnce=function(eventName,F,target){
+	var EFTC={};
+	EFTC.name=eventName;
+	EFTC.F=F;
+	EFTC.target=target;
+	EFTC.ConditionF=True;
+	return ListenF(EFTC);
+}
+
+ListenOutside=function(eventName,F,target){
+	var EFTC={};
+	EFTC.name=eventName;
+	EFTC.F=F;
+	EFTC.ConditionF=function(ev){return Outside(target,ev.target);};
+	EFTC.target=window;
+	return ListenF(EFTC);
+}
+
+ListenF=function(EFTC){
+	var EFTC=EFTC;
+	if(!IsArray(EFTC.name))
+		EFTC.name=[EFTC.name];
+
+	if(!UnderNodeJS())
+		EFTC.target=GetElement(EFTC.target)||window;
+
+	var fun=EFTC.F;
+	function F(ev){
+		if(ConditionF(ev)){
+			fun();
+			ListenNoMore(EFTC);
+		}
+	};
+	EFTC.F=fun;
+
+	ListenIndeed(EFTC);
+	return EFTC;
+}
+
+ListenNoMore=function(EFTC){
+	if(UnderNodeJS())
+		return ListenNoMoreNode(EFTC);
+	
+	EFTC.name.map(function(name){EFTC.target.removeEventListener(name,EFTC.F)});
+}
+
+ListenIndeed=function(EFTC){
+	EFTC.name.map(function(name){Listen(name,EFTC.F,EFTC.target)});
+}
+
+
+
+//Node specific events
+RequireEventsNode=function(){
 	if(!Listen.events)
 		Listen.events = require('events');
 	if(!Listen.node){
 		Listen.node = new Listen.events();
 	}
-	Listen.node.on(name,F);
-	console.log("listening to ",name);
+	RequireEventsNode=True;
+	return true;
+}
+
+ListenNode=function(eventName,F){
+	if(RequireEventsNode()){
+		Listen.node.on(eventName,F);
+		//console.log("###}}} listening to ",eventName);
+	}
+}
+
+ShoutNode=function(eventName,F){
+	if(RequireEventsNode()){
+		Listen.node.emit(eventName);
+		//console.log("O)-)--)---) emitted ",eventName);
+	}
+}
+
+ListenNoMoreNode=function(lobj){
+	return RequireEventsNode();
 }
 
 //Listen for all events in array before firing
@@ -3296,6 +3340,8 @@ ListenAndOnce=function(shoutArray,SuccessF){
 
 		Heard.array.push(shoutcode);
 		Heard.array=Unique(Heard.array);
+
+		//console.log("heard so far:",Heard.array)
 
 		if(Equal(Heard.array,Unique(shoutArray)))
 			SuccessF();
@@ -3321,7 +3367,7 @@ SubmitData=function(dataObject,destinationObj){
 	data.formGoogleSendEmail="";						//to delete
 	data.formGoogleSheetName=destinationObj.sheet;
 
-	console.log(data);
+	//console.log(data);
 
 	if(!PreviousSubmission.history)
 		PreviousSubmission.history=[];
@@ -4635,10 +4681,7 @@ Accumulate=function(acc,val){return acc+val};
 
 Shout=function(name,targetSelector){
 	if(UnderNodeJS()){
-		if(Listen.node){
-			Listen.node.emit(name);
-			console.log("--> emitted ",name)
-		}
+		ShoutNode(name);
 		return;
 	}
 
