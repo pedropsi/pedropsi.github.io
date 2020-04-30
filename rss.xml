@@ -16,15 +16,33 @@
 		</image>
 		
 	<item>
-		<title><![CDATA[Puzzle type beta changes II]]></title>
+		<title><![CDATA[Puzzle type beta changes III]]></title>
 		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
-		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-04-17</guid>
-		<pubDate>Fri, 17 Apr 2020 07:06:05 GMT</pubDate>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-04-26</guid>
+		<pubDate>Sun, 26 Apr 2020 07:06:05 GMT</pubDate>
 		<description>
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
 			
-<p>Ongoing beta playtesting changes: the problematic DVO*** puzzle was made (slightly) less cryptic, the NOK*** space display was improved, minor tweaks to ANA***, MOR*** was fully redesigned and the clue in WEI*** changed to LAT***. Number input was allowed in a few levels where helpful. The total number of levels is now 28. Many thanks, <span class="name">Patrick Collin Eye</span>!</p>
+<p>Ongoing beta playtesting changes: NUC*** became TEN*** a less ambiguous clue, added new puzzle GEN*** but removed TAN***, a critical synonym was added to LAT***, WAS*** was recentered. Many thanks, <a href='https://twitter.com/collin_eye' rel='noreferrer noopener'><span class="name">Patrick Collin Eye</span></a>!</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Puzzle type beta changes II]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-04-18</guid>
+		<pubDate>Sat, 18 Apr 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+<p>Ongoing beta playtesting changes: a clearer deduction path was added to DVO***, the NOK*** space display was improved, SYM*** operates now at word level, minor additions to ANA***, NIG*** was expanded, MOR*** was fully redesigned, and the clue in WEI*** changed to LAT***. Number and space input was allowed where helpful. Replaced SUP*** with APA***. Added FIL***,  DEA*** and WAS*** so the total number of levels is now 29. Many thanks, <a href='https://twitter.com/collin_eye' rel='noreferrer noopener'><span class="name">Patrick Collin Eye</span></a>!</p>
 	
 		]]>
 		</description>
