@@ -865,7 +865,8 @@ PageTag=function(url){
 	if(typeof url==="undefined")
 		return PageTag(PageURL());
 	else
-		return url.replace(/([^#]*#)/,"").replace(url,"");
+		return url.replace(/([^#]*#)/,"").replace(url,"");	
+		//return new URL(url).hash;
 }
 
 PageUnTag=function(url){
