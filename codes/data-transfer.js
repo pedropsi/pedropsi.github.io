@@ -4909,6 +4909,9 @@ Introspect=function(){
 		if(typeof f==="function"&&f.toString().indexOf("native code")==-1){
 			Introspect.list.push(f.name);
 		}
+		if(typeof f==="object"){
+			Introspect.list.push(f.name);
+		}
 	}
 
 	return Introspect.list;
