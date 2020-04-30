@@ -473,6 +473,7 @@ NormaliseVariables=function(Variables,TemplateFunction) {
 	})
 }
 
-if(DATA){DATA["Variables"]=Variables}else{var DATA={"Variables":Variables}}
+
+DATA["variables"]=Variables;
 Shout("variables");
 ExportNodeFunctions();

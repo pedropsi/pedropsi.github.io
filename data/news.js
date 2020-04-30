@@ -500,6 +500,6 @@ DownloadSitemap=function(){
 }
 
 
-if(DATA){DATA["News"]=News}else{var DATA={"News":News}}
+DATA["news"]=News;
 Shout("news");
 ExportNodeFunctions();

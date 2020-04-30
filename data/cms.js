@@ -176,6 +176,7 @@ HighlightsHTML=function(){
 
 PopularHTML=function(){
 	var CMSOptions=CMSOptionsObj();
+	
 	return SectionHTML({
 		...CMSOptions,
 		FilterF:function(PageObj){ var PageObj={...v,...PageObj}; return PageObj.TYPE()!=="Game"&&PageObj.FEATURED&&PageObj.FEATURED();},
@@ -250,9 +251,12 @@ InlineSVG=function(){
 	images.map(ReplaceSource);
 }
 
+
 if(!UnderNodeJS()){
-Page=PageObj(PageIdentifier());
-if(DATA){DATA["CMS"]=CMS;DATA["Page"]=Page}else{var DATA={"CMS":CMS,"Page":Page}}
+	Page=PageObj(PageIdentifier());
+	DATA["page"]=Page;
 }
+
+DATA["cms"]=CMS;
 Shout("cms");
 ExportNodeFunctions();

@@ -137,6 +137,6 @@ MapObject(People,function (v,k,o){
 	 o[k]=(()=>PersonTemplate(v));
 })
 
-if(DATA){DATA["People"]=People}else{var DATA={"People":People}}
+DATA["people"]=People;
 Shout("people");
 ExportNodeFunctions();

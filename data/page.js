@@ -8,23 +8,31 @@ LoadCMS=function(){
 }
 
 LoadNodeCMS=function(){
-	var cms=CMSDependenciesList.map(s=>Prefix(s,"../"));
+	var cms=CMSDependenciesList;	//path specification, depending on node loader file location
 	LoadSources(cms,ConsolidateVariables);
 }
 
+DATA={};
+
 ConsolidateVariables=function(){
+	DATA["links"]=NormaliseVariables(DATA["links"],LinkTemplate);
+
+	if(typeof v==="undefined")
+		v={};
+
 	v={
-		...DATA["Variables"],
-		...DATA["CMS"],
-		...DATA["Media"],
-		...DATA["People"],
-		...DATA["News"],
-		...DATA["Page"],
+		...DATA["variables"],
+		...DATA["cms"],
+		...DATA["media"],
+		...DATA["people"],
+		...DATA["news"],
+		...DATA["page"],
+		...DATA["links"],
 		...v
 	};
-
-	DATA["Links"]=NormaliseVariables(DATA["Links"],LinkTemplate);
-	v={...v,...DATA["Links"]}
+	
+	Shout("ConsolidateVariables");
+	
 }
 
 LoadPrescript=function(){
@@ -72,12 +80,7 @@ PageFeaturesDOM=function(){
 	ResumeCapturingKeys(CaptureComboKey);
 }
 
-
-if(UnderNodeJS())
-	LoadNodeCMS();
-else
-	ListenOnce("load",LoadCMS);
-
+	
 //Skeleton
 
 PageSkeletonHTML=function(){
@@ -89,3 +92,11 @@ PageSkeletonHTML=function(){
 try{v={...v,...Post}}catch{v=Post}</script>
 `;
 }
+
+
+if(UnderNodeJS()){
+	ExportNodeFunctions();
+	LoadNodeCMS();
+}
+else
+	ListenOnce("load",LoadCMS);

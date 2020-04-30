@@ -51,9 +51,6 @@ S_puzzle_type_screenshot_3:{TYPE:"screenshot",TRACK:"puzzle-type-screenshot-3.pn
 S_puzzle_type_screenshot_4:{TYPE:"screenshot",TRACK:"puzzle-type-screenshot-4.png",DESCRIPTION:"puzzle-type screenshot 4",N:"4",FOLDER_SMALL:"puzzle-type",FOLDER_BIG:"puzzle-type",CONTEXT_ID:"puzzle-type"}
 }
 
-if(DATA){DATA["Media"]=Media}else{var DATA={"Media":Media}}
-Shout("media");
-
 TrackHTML=function(MediaObj){
 	if(MediaObj.TRACK&&MediaObj.MUSIC_LINK)
 		return AHTML(MediaObj.TRACK,MediaObj.MUSIC_LINK);
@@ -169,4 +166,7 @@ ScreenshotGalleryHTML=function(id){
 	<div class="featured">${gallery}</div>`
 }
 
+
+DATA["media"]=Media;
+Shout("media");
 ExportNodeFunctions();
