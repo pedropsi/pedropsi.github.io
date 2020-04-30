@@ -79,9 +79,22 @@ CMSOptionsObj=function(){
 }
 
 SortPageByDate=function(pageA,pageB){
+	
 	var pageA={...v,...pageA};
 	var pageB={...v,...pageB};
-	return Days(v.DATE_DATE(pageA),v.DATE_DATE(pageB));
+	return Days(PageDate(pageA),PageDate(pageB));
+}
+
+PageDate=function(page){
+	if(!page||!page.DAY||!page.MONTH||!page.YEAR)
+		return Today();
+	return DateDate(page.DAY(),page.MONTH(),page.YEAR());
+}
+
+PageDateYMD=function(page){
+	if(!page||!page.DAY||!page.MONTH||!page.YEAR)
+		return `${Year()}-${Month()}-${Day()}`;
+	return `${page.YEAR()}-${page.MONTH()}-${page.DAY()}`;
 }
 
 

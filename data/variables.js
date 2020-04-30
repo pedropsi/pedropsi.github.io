@@ -418,9 +418,8 @@ AUTO_CITATION				:	()=>	`<p class="reference">${v.TITLE_BY_AL()}, accessed ${v.T
 TODAY_DATE					:	()=>	`<span class="update-today">${DateNamer()}</span>`,
 
 DATE						:	(page)=>	`${page.DAY()}-${page.MONTH()}-${page.YEAR()}`,
-DATE_YMD					:	(page)=>	`${page.YEAR()}-${page.MONTH()}-${page.DAY()}`,
+
 DATE_TEXT					:	(page)=>	page&&page.DAY&&page.MONTH&&page.YEAR?DateName(page.DAY(),page.MONTH(),page.YEAR()):"",
-DATE_DATE					:	(page)=>	page&&page.DAY&&page.MONTH&&page.YEAR?DateDate(page.DAY(),page.MONTH(),page.YEAR()):Today(),
 
 SL							:	()=>	`<span class="legal-term">`,
 EULA_COMPANY				:	()=>	`${v.SL()}${v.NAME()}</span>`,
