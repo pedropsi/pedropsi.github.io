@@ -475,15 +475,16 @@ FrequencyName=function(days){
 }
 
 SitemapItemXML=function(PageObj){
+	
 	var PageObj={...v,...PageObj};
 
-	var lastdate=v.DATE_YMD(PageObj);
+	var lastdate=PageDateYMD(PageObj);
 	
 	var id=PageObj.LINK();
 	var changes=BaseFilter(News,{ID:id}).sort(SortNewsByDate).map(ch=>ch.DATE);
 		lastdate=changes[0]||lastdate;
 	var freq=FrequencyName(Days(new Date(lastdate)));//Days since last modification
-
+	
 	return `
 	<url>
 		<loc>${v.SITE()}/${PageObj.LINK()}</loc>
