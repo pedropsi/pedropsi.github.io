@@ -435,6 +435,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Deaf",								//Encoding
 
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
+	"Copypaste",						//Keyword, Proactive
 	"Dividi",							// Encoding, Arithmethic, Retroactive
 	"⠍⠕⠗⠎⠑"							//Encoding, Once
 ];
@@ -548,6 +549,7 @@ var LevelActions={
 		
 	},*/
 	"Dividi":Dividi,
+	"Copypaste":Copypaste,
 	"Odd":function(L){
 		InputLetterAfter(L);
 		var odd=In(Letters.array.join(""),"ODD");
@@ -995,6 +997,31 @@ function Dividi(L){
 	Caret(Infinity);
 }
 	
+//Copypaste
+
+function Copypaste(L){
+	InputLetterAfter(L);
+
+	var word=Letters().join("");
+	
+	if(InPosfix(word,"COPY")){
+		word=UnPosfix(word,"COPY");
+		console.log(word);
+		Copypaste.last=word;
+		Letters(word);
+	}else if(InPosfix(word,"PASTE")){
+		word=UnPosfix(word,"PASTE");
+		console.log(word);
+		word=word+Copypaste.last||"";
+		Letters(word);
+	}else if(InPosfix(word,"CUT")){
+		word=UnPosfix(word,"CUT");
+		Copypaste.last=word;
+		Letters([]);
+	}
+	Caret(Infinity);
+}
+
 //Weightier
 
 function Weightier(L){
@@ -2714,7 +2741,7 @@ function TemporaryWord(){
 function Letters(array){
 	if(!Letters.array)
 		Letters.array=[];
-	if(!array)
+	if(typeof array==="undefined")
 		return Letters.array;
 	
 	if(typeof array==="string")
@@ -3039,6 +3066,7 @@ function LoadLevelState(levelstate){
 	Fuchsia.colour=levelstate['Fuchsia'];
 	Nokia.last=levelstate['Nokia 1998'][0];
 	Nokia.eventF=levelstate['Nokia 1998'][1];Nokia.eventF();//timed caret event
+	Copypaste.last=levelstate['Copypaste'];
 	Morse.used=levelstate['⠍⠕⠗⠎⠑'];
 	Wasd.level=levelstate['Wasd'];
 
@@ -3071,6 +3099,7 @@ function LevelZeroState(level){
 		'Nigeria':false,
 		'Fuchsia':false,
 		'Nokia 1998':[false,Identity],
+		'Copypaste':"",
 		'⠍⠕⠗⠎⠑':[],
 		'Wasd':`_____...D_____
 				..S......_____
@@ -3097,6 +3126,7 @@ function LevelState(){
 		'Nigeria':Nigeria.freeze?Nigeria.freeze:false,
 		'Fuchsia':Fuchsia.colour?Fuchsia.colour:false,
 		'Nokia 1998':[Nokia.last?Nokia.last:false,Nokia.eventF?Nokia.eventF:Identity],
+		'Copypaste':Copypaste.last?Copypaste.last:"",
 		'⠍⠕⠗⠎⠑':Morse.used?Morse.used:[],
 		'Wasd':Wasd.level?Wasd.level:LevelZeroState('Wasd')
 	};
