@@ -424,13 +424,12 @@ var LevelGoals=[			//Required types of thinking:
 	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
 
 	"Nigeria",				//Word, Mapping, Geography
-	"Anagram",				//Word, Mapping, Language, Once
 	"Carbonate",			//Encoding, Word, Science
 	"Genetic.",				//Encoding, Word, Science
-
+	"Anagram",				//Word, Mapping, Language, Once
+	
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-
 	"Fuchsia",							//Encoding
 	"Deaf",								//Encoding
 
