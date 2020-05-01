@@ -3,7 +3,7 @@ News={
 DATE:"2020-04-26",
 HEADER:()=>"Puzzle type beta changes III",
 PIECE:()=>`
-<p>Ongoing beta playtesting changes: NUC*** became TEN*** a less ambiguous clue, added new puzzle GEN*** but removed TAN***, a critical synonym was added to LAT***, WAS*** was recentered. Many thanks, ${v.COLLINEYE()}!</p>
+<p>Ongoing beta playtesting changes: NUC*** became CAR*** a less ambiguous, more interesting, added new puzzle GEN*** but removed TAN***, a critical synonym was added to LAT***, WAS*** was recentered. Many thanks, ${v.COLLINEYE()}!</p>
 	`,ID:"puzzle-type"},
 	N_41:{
 DATE:"2020-04-18",

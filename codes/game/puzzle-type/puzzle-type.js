@@ -425,7 +425,7 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Nigeria",				//Word, Mapping, Geography
 	"Anagram",				//Word, Mapping, Language, Once
-	"Tennessine",			//Encoding, Word, Science
+	"Carbonate",			//Encoding, Word, Science
 	"Genetic.",				//Encoding, Word, Science
 
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
@@ -578,7 +578,7 @@ var LevelActions={
 	"Fuchsia":Fuchsia,
 	"Deaf":Deaf,
 	"Anagram":Anagram,
-	"Tennessine":Tennessine,
+	"Carbonate":Carbonate,
 	"Genetic.":Genetic,
 	"Wasd":Wasd
 }
@@ -765,7 +765,7 @@ function Anagram(L){
 	}
 }
 
-function Tennessine(L){
+function Carbonate(L){
 	InputLetterAfter(L+"*");
 	
 	var saved=SavedLetters();
@@ -2861,7 +2861,7 @@ var LetterDisplay={
 			return LetterPureHTML(combined);
 	},
 	"Dividi":LetterDraftHTML,
-	"Tennessine":LetterDraftHTML,
+	"Carbonate":LetterDraftHTML,
 	"Genetic.":LetterDraftHTML,
 	"Anagram":LetterDraftHTML,
 	"Fuchsia":LetterDraftHTML,
