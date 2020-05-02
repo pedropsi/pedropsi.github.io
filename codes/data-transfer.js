@@ -88,7 +88,15 @@ Sin=Math.sin;
 Cos=Math.cos;
 PI=Math.PI;
 Abs=Math.abs;
-Round=Math.round;
+Round=function(n,m){
+	var m=m||0;
+	return Floor(n*Power(10,m)+0.5)/Power(10,m)
+}
+
+PercentageText=function(n,m){
+	var m=m||0;
+	return ""+Round(n,m+2)*100+"%";
+}
 
 Quotient=function(n,d){
 	return Floor(n/d);

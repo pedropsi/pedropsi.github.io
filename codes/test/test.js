@@ -171,6 +171,17 @@ SaveTest(EuclideanDistance,[[1],[2]],1,"monodimensional");
 SaveTest(EuclideanDistance,[[0,3],[4,0]],5,"bidimensional");
 SaveTest(EuclideanDistance,[[0,0,3],[4,0,0]],5,"tridimensional");
 
+SaveTest(Round,[12.3456789,0],12,"no decimal places, down");
+SaveTest(Round,[98.7654321,0],99,"no decimal places, up");
+SaveTest(Round,[12.3456789,3],12.346,"3 decimal places, up");
+SaveTest(Round,[98.7654321,3],98.765,"3 decimal places, down");
+
+SaveTest(PercentageText,[0.123456789],"12%","no decimal places, down");
+SaveTest(PercentageText,[0.987654321],"99%","no decimal places, up");
+SaveTest(PercentageText,[0.123456789,3],"12.346%","3 decimal places, up");
+SaveTest(PercentageText,[0.987654321,3],"98.765%","3 decimal places, down");
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // Lists (AS = Array or String)
 
