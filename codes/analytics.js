@@ -99,7 +99,7 @@ function EchoAnalytics(data){
 }
  
 function RegisterOpen(){
-	//EchoAnalytics(FingerprintOpen());
+	EchoAnalytics(FingerprintOpen());
 	
 	EchoData({
 		formGoogleSheetName:"Visit",
