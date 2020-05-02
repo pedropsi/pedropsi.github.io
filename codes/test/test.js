@@ -1,3 +1,4 @@
+
 /*
 function EnableTestMode(){
 	LoadAsync("test-behaviour","codes");
@@ -897,4 +898,12 @@ SaveTest(SplitCD,["ana banana maria","lol","lol"],"","not present");
 
 
 ///////////////////////////////////////////////////////////////////////////////
+CodeCoverage=function(){
+	return PercentageText(Test.functions.length/Introspect().length,2);
+}
+
+DynamicText("code-coverage",CodeCoverage());
+DynamicText("code-coverage-included",Enumerate(Test.functions));
+DynamicText("code-coverage-excluded",Enumerate(Complement(Introspect(),Test.functions)));
+
 Test()

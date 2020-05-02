@@ -4975,15 +4975,24 @@ Introspect=function(){
 	else
 		return Introspect.list;
 
-	for (var i in globalThis){
-		var f=globalThis[i];
-		if(typeof f==="function"&&f.toString().indexOf("native code")==-1){
-			Introspect.list.push(f.name);
+
+	if(NodejsDetected())
+		for (var i in globalThis){
+			var f=globalThis[i];
+			if(typeof f==="function"&&f.toString().indexOf("native code")==-1){
+				Introspect.list.push(f.name);
+			}
+			if(typeof f==="object"){
+				Introspect.list.push(f.name);
+			}
 		}
-		if(typeof f==="object"){
-			Introspect.list.push(f.name);
+	else
+		for (var i in globalThis){
+			var f=globalThis[i];
+			if(typeof f==="function"&&f.toString().indexOf("native code")==-1){
+				Introspect.list.push(i);
+			}
 		}
-	}
 
 	return Introspect.list;
 }
