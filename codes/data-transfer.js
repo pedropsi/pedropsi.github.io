@@ -3705,6 +3705,7 @@ ConsoleAdd=function(messageHTML,wait,duration,mID,consoleID,mClass){
 	var mID=mID?mID:"c-"+GenerateId();//random id
 	setTimeout(function(){AddElement(ConsoleMessageHTML(messageHTML,mID,mClass),consoleID)},wait)
 	setTimeout(function(){CloseElement(mID)},duration+wait);
+	if(!Console.buffer)
 		Console.buffer=[];
 	Console.buffer.push(mID);
 	while(Console.buffer.length>consolemax){
