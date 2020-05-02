@@ -4937,6 +4937,29 @@ ObtainSymbol=function(name){
 		return name;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//Dynamic text
+
+DynamicTextHTML=function(text,label){
+	return `<span class="${label}">
+					${text||"[------updating...---]"}
+			</span>`;
+}
+
+DynamicText=function(name,text){
+	if(!name)
+		return;
+	var label="dynamic-"+name;
+	if(typeof text==="undefined"){
+		return DynamicTextHTML(DynamicText.name,label);
+	}
+	else{
+		DynamicText.name=text;
+		var e=DynamicTextHTML(text,label);
+		ReplaceElement(e,"."+label);
+		return e;
+	}
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Introspection - lists all defined functions!
