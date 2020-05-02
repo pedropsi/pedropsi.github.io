@@ -10,8 +10,28 @@
 //				 	\n([^=\n]+)=function
 //					\nfunction $1
 //				 	 
-//  	2) avoid Safari Hoisting bugs
+//  	2) avoid Safari Conditional Hoisting bugs
 //				(modules ask whether a function was defined before, thus not overwriting it)
+
+// Function naming conventions (goal: concise self-documenting code):
+//		- function names are Capitalised (this avoids conflicts with most JS libraries)
+//
+// 		- function names can be read as self describing sentences, usually VERB-->OBJECT
+//
+// 		- the first word may also refer to a particular set of related functions (to be improved). 
+//
+// 		- the last word reveals the function return type, while completing the sentence:
+//	 		- a verb: not specified (if obvious - to be improved) or without a return value, only side effects
+//	 		- an adjective or "-ed": Binary value (true/false)
+//	 		- "-er": Function
+//	 		- "Element": a HTML node element
+//	 		- "HTML": HTML code
+//	 		- "String": a string
+//	 		- "Object": an object
+//	 		- "Array": an array
+//			etc...
+
+
 
 NodejsDetected=function(){
 	return typeof window==="undefined";
