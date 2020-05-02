@@ -5013,10 +5013,49 @@ Introspect=function(){
 				Introspect.list.push(i);
 			}
 		}
-
+	
 	return Introspect.list;
 }
 
+CoreFunctionNames=[
+		"In","InString","InArrayOrObj",
+		"Capture",
+		"Union","Unique","Intersection",
+		"Equal","EqualFunction","EqualRegex",
+		"IsNan","IsArray",
+		"FunctionName","FunctionBody",
+		"IsObject","IsRegex","IsNode",
+		"Apply",
+		"Memory","MemorySlot","PageRoot",
+		"PageURL","PageRelativePath","PageUnHead","PageURL","PageAfterOwnDomain","Predomainssoft",
+		"AlternateRegex","CombineMultiRegex","Domains","CombineRegex","IsSingleton","IsMaybeRoot"
+		//"ExportFunction","ExportNodeFunctions","NodejsDetected"
+]
+
+Capture=function(functionName){
+	if(In(CoreFunctionNames,functionName))
+		return;
+
+	if(!Capture["list"])
+		Capture["list"]=[];
+
+	Capture[functionName]=globalThis[functionName];
+	globalThis[functionName]=function(){
+		Capture["list"].push(functionName);
+		Capture["list"]=Union(Capture["list"]);
+		return (globalThis[functionName]=Capture[functionName])(...arguments);
+	}
+}
+
+UnusedFunctions=function(){
+	if(!Capture["list"]){
+		Introspect().map(Capture);
+	}
+	else
+		return Complement(Introspect(),Capture["list"]);
+}
+
+UnusedFunctions();
 
 //Node mass exporter (one-liner)
 ExportFunction=function(name){
