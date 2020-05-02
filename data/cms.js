@@ -252,7 +252,7 @@ InlineSVG=function(){
 }
 
 
-if(!UnderNodeJS()){
+if(!NodejsDetected()){
 	Page=PageObj(PageIdentifier());
 	DATA["page"]=Page;
 }

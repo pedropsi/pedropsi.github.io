@@ -38,7 +38,7 @@ ConsolidateVariables=function(){
 LoadPrescript=function(){
 	ConsolidateVariables()
 
-	if(UnderNodeJS())
+	if(NodejsDetected())
 		return;
 
 	if(v.PRESCRIPT)
@@ -94,7 +94,7 @@ try{v={...v,...Post}}catch{v=Post}</script>
 }
 
 
-if(UnderNodeJS()){
+if(NodejsDetected()){
 	ExportNodeFunctions();
 	LoadNodeCMS();
 }

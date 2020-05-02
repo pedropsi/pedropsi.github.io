@@ -13,7 +13,7 @@
 //  	2) avoid Safari Hoisting bugs
 //				(modules ask whether a function was defined before, thus not overwriting it)
 
-UnderNodeJS=function(){
+NodejsDetected=function(){
 	return typeof window==="undefined";
 }
 
@@ -138,7 +138,6 @@ VectorTimes=function(vector1,vector2){
 VectorDivide=function(vector1,vector2){
 	return VectorOperation(vector1,vector2,function(a,b){return a/b});
 }
-
 
 EuclideanDistance=function(vector1,vector2){
 	return Power(PoweredSum(VectorMinus(vector2,vector1),2),1/2);
@@ -1458,7 +1457,7 @@ SourceIdentifier=function(path){
 }
 
 LoadSources=function(sourceArray,SuccessF){
-	if(UnderNodeJS()){
+	if(NodejsDetected()){
 		var shoutArray=sourceArray;
 		ListenAndOnce(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
 		sourceArray.map(LoadNodeSource);
@@ -1511,8 +1510,6 @@ LoadAsync=function(sourcename,folder){
 
 	script.async=false;
 	head.appendChild(script);
-
-	//LoadData(script.src,FunctionsDefined);//self-awareness
 }
 
 LoaderInFolder=function(folder){
@@ -3236,7 +3233,7 @@ ClickStay=function(){
 //Event Listeners
 
 Listen=function(eventName,F,target){
-	if(UnderNodeJS()){
+	if(NodejsDetected()){
 		var eventName=UnPosfix(eventName,".js").replace(/.*\//g,"");
 		return ListenNode(eventName,F);
 	}
@@ -3274,7 +3271,7 @@ ListenF=function(EFTC){
 	if(!IsArray(EFTC.name))
 		EFTC.name=[EFTC.name];
 
-	if(!UnderNodeJS())
+	if(!NodejsDetected())
 		EFTC.target=GetElement(EFTC.target)||window;
 
 	var fun=EFTC.F;
@@ -3291,7 +3288,7 @@ ListenF=function(EFTC){
 }
 
 ListenNoMore=function(EFTC){
-	if(UnderNodeJS())
+	if(NodejsDetected())
 		return ListenNoMoreNode(EFTC);
 	
 	EFTC.name.map(function(name){EFTC.target.removeEventListener(name,EFTC.F)});
@@ -4680,7 +4677,7 @@ Accumulate=function(acc,val){return acc+val};
 // Custom events 
 
 Shout=function(name,targetSelector){
-	if(UnderNodeJS()){
+	if(NodejsDetected()){
 		ShoutNode(name);
 		return;
 	}
@@ -4693,7 +4690,7 @@ Shout=function(name,targetSelector){
 }
 
 //polyfill
-if(!UnderNodeJS()&&typeof window.CustomEvent!=="function"&&window.CustomEvent){
+if(!NodejsDetected()&&typeof window.CustomEvent!=="function"&&window.CustomEvent){
 	function CustomEvent(event,optObj){
 		optObj=optObj||{
 			bubbles:false,
@@ -4983,13 +4980,14 @@ Introspect=function(){
 	return Introspect.list;
 }
 
+
 //Node mass exporter (one-liner)
 ExportFunction=function(name){
 	exports[name]=globalThis[name];
 }
 
 ExportNodeFunctions=function(){
-	if(UnderNodeJS())
+	if(NodejsDetected())
 		Introspect().map(ExportFunction);
 }
 
