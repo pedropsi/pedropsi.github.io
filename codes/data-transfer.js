@@ -5021,18 +5021,17 @@ Introspect=function(){
 }
 
 CoreFunctionNames=[
-		"In","InString","InArrayOrObj",
-		"Capture",
-		"Union","Unique","Intersection",
-		"Equal","EqualFunction","EqualRegex",
-		"IsNan","IsArray",
-		"FunctionName","FunctionBody",
-		"IsObject","IsRegex","IsNode",
-		"Apply",
-		"Memory","MemorySlot","PageRoot",
-		"PageURL","PageRelativePath","PageUnHead","PageURL","PageAfterOwnDomain","Predomainssoft",
-		"AlternateRegex","CombineMultiRegex","Domains","CombineRegex","IsSingleton","IsMaybeRoot"
-		//"ExportFunction","ExportNodeFunctions","NodejsDetected"
+	"In","InString","InArrayOrObj",
+	"Capture",
+	"Union","Unique","Intersection",
+	"Equal","EqualFunction","EqualRegex",
+	"IsNan","IsArray",
+	"FunctionName","FunctionBody",
+	"IsObject","IsRegex","IsNode",
+	"Apply",
+	"Memory","MemorySlot","PageRoot",
+	"PageURL","PageRelativePath","PageUnHead","PageURL","PageAfterOwnDomain","Predomainssoft",
+	"AlternateRegex","CombineMultiRegex","Domains","CombineRegex","IsSingleton","IsMaybeRoot"
 ]
 
 Capture=function(functionName){
@@ -5046,19 +5045,30 @@ Capture=function(functionName){
 	globalThis[functionName]=function(){
 		Capture["list"].push(functionName);
 		Capture["list"]=Union(Capture["list"]);
-		return (globalThis[functionName]=Capture[functionName])(...arguments);
+		globalThis[functionName]=Capture[functionName];
+		return (globalThis[functionName])(...arguments);
+	}
+}
+
+UsedFunctions=function(){
+	if(!Capture["list"]){
+		Introspect().map(Capture);
+		return [];
+	}
+	else{
+		used=Capture["list"];
+		if(!Memory("UsedFunctions"))
+			Memory("UsedFunctions",used)
+		else
+			Memory("UsedFunctions",Union(Memory("UsedFunctions"),used));
+
+		return Memory("UsedFunctions");
 	}
 }
 
 UnusedFunctions=function(){
-	if(!Capture["list"]){
-		Introspect().map(Capture);
-	}
-	else
-		return Complement(Introspect(),Capture["list"]);
+	return Complement(Complement(Introspect(),UsedFunctions()),CoreFunctionNames);
 }
-
-UnusedFunctions();
 
 //Node mass exporter (one-liner)
 ExportFunction=function(name){
