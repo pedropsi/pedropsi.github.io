@@ -110,7 +110,7 @@ PI=Math.PI;
 Abs=Math.abs;
 Round=function(n,m){
 	var m=m||0;
-	return Floor(n*Power(10,m)+0.5)/Power(10,m)
+	return Floor(n*Power(10,m)+0.5)/Power(10,m);
 }
 
 PercentageText=function(n,m){
