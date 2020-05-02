@@ -121,9 +121,11 @@ function GameIntro(){
 	LoadStyle(PageRoot()+"codes/game/puzzle-type/puzzle-type.css");
 	if(P())
 		setTimeout(function(){PlayIntro(".game",StartGame)},100);
-	else
+	else{
 		ComingHTMLArray().map(function(html){OpenElement(html,"gameCanvas")});
-
+		LevelAction=Identity;
+		LevelLoader=Identity;
+	}
 }
 
 function StartGame(){
