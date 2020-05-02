@@ -3670,7 +3670,6 @@ Console=function(){
 	else
 		return Console.buffer;
 }
-Console();
 
 ConsoleClear=function(){
 	RemoveChildren("Console");
@@ -3678,6 +3677,8 @@ ConsoleClear=function(){
 
 ConsoleRemove=function(mID){
 	RemoveElement(mID);
+	if(!Console.buffer)
+		Console.buffer=[];
 	var i=Console.buffer.indexOf(mID);
 	if(i>=0)
 		Console.buffer.splice(i,1);
@@ -3704,6 +3705,7 @@ ConsoleAdd=function(messageHTML,wait,duration,mID,consoleID,mClass){
 	var mID=mID?mID:"c-"+GenerateId();//random id
 	setTimeout(function(){AddElement(ConsoleMessageHTML(messageHTML,mID,mClass),consoleID)},wait)
 	setTimeout(function(){CloseElement(mID)},duration+wait);
+		Console.buffer=[];
 	Console.buffer.push(mID);
 	while(Console.buffer.length>consolemax){
 		ConsoleRemove(Console.buffer[0]);
