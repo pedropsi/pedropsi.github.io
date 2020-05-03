@@ -1564,26 +1564,22 @@ LoadStyle=function(sourcename){
 Online=function(){return navigator.onLine};
 Offline=function(){return !Online()};
 
-//External resources
+//Parameter requests
 ParameterPairString=function(name,value){
-	return name+'='+value;
+	return encodeURIComponent(key)+'='+encodeURIComponent(value);
 }
 
 ParameterString=function(parametersObject){
-	var parametersString=Keys(parametersObject).map(
-		function(k){return ParameterPairString(k,parametersObject[k])}
-	);
+	return MapKeys(FlipKeysValues(parametersObject),ParameterPairString).join("&");
+}
 
-	if(!parametersString.length)
-		return ""
-	else
-		return '?'+parametersString.join('&');
-	}
-
+//External resources
 MacroURL=function(c,parametersObject){
 	var p="";
 	if(parametersObject)
 		p=ParameterString(parametersObject);
+	if(p)
+		p=Prefix(p,"?");
 	return "https://script.google.com/macros/s/"+c+"/exec"+p;
 };
 

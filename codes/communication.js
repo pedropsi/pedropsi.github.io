@@ -109,18 +109,11 @@ function ServiceWorkerCache(sourceArray){
 ///////////////////////////////////////////////////////////////////////////////
 // Data transmission - JSON, to a script in url "url"
 
-function Encode(key,value){
-	return encodeURIComponent(key)+'='+encodeURIComponent(value);
-}
-function EncodeData(data){
-	return MapKeys(FlipKeysValues(data),Encode).join("&");
-}
-
 function EchoPureData(data,url){
 	if(!data||!url)
 		return;
 	
-	var encoded=EncodeData(data);
+	var encoded=ParameterString(data);
 	var xhr=new XMLHttpRequest();
 		xhr.open('POST',url);
 		xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
