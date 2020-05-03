@@ -7,7 +7,7 @@ if(typeof RequestGameFeedback==="undefined"||typeof RequestHallOfFame==="undefin
 	Portable=True;
 
 //Game Console
-var GameConsole=function(){return PageIdentifier()==="game-console"};
+var ConsoleExternal=function(){return PageIdentifier()==="game-console"};
 
 function GameHackURL(){
 	return "https://www.puzzlescript.net/editor.html?hack="+PageSearch("game");
@@ -170,7 +170,7 @@ if(typeof ObtainKeyboardTarget==="undefined")
 var ObtainInterlevelMessage=False;
 if(!Portable())
 	ObtainInterlevelMessage=True;
-if(GameConsole())
+if(ConsoleExternal())
 	ObtainInterlevelMessage=False;
 
 if(typeof ObtainMainKey==="undefined")
@@ -226,7 +226,7 @@ function ObtainActionTooltip(action){
 //Hooks to Pedro PSI main site
 
 var HasGameFeedback=True;
-if(typeof RequestGameFeedback==="undefined"||GameConsole()){
+if(typeof RequestGameFeedback==="undefined"||ConsoleExternal()){
 	var RequestGameFeedback=Identity;
 	HasGameFeedback=False;
 }
@@ -423,7 +423,7 @@ function KeyboardButton(){
 }
 
 function WrenchButton(){
-	if(GameConsole())
+	if(ConsoleExternal())
 		return GameBarButtonHTML("wrench",{onclick:'Navigate(GameHackURL());'})
 	else
 		return "";
@@ -1603,7 +1603,7 @@ function Hints(lvl){
 }
 
 function LoadHintsFile(){
-	if(!GameConsole()&&!Hints.cached){
+	if(!ConsoleExternal()&&!Hints.cached){
 		
 		if(FileLinked(PageURL()))
 			Hints.path="https://pedropsi.github.io/hints/";
@@ -1830,7 +1830,7 @@ function RequestHint(){
 
 
 //Hints Honours
-	
+
 function HintsHonour(){
 	if(!Hints())
 		return "";
