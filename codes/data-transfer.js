@@ -1565,7 +1565,31 @@ Online=function(){return navigator.onLine};
 Offline=function(){return !Online()};
 
 //External resources
-MacroURL=function(c){return "https://script.google.com/macros/s/"+c+"/exec";};
+ParameterPairString=function(name,value){
+	return name+'='+value;
+}
+
+ParameterString=function(parametersObject){
+	var parametersString=Keys(parametersObject).map(
+		function(k){return ParameterPairString(k,parametersObject[k])}
+	);
+
+	if(!parametersString.length)
+		return ""
+	else
+		return '?'+parametersString.join('&');
+	}
+
+MacroURL=function(c,parametersObject){
+	var p="";
+	if(parametersObject)
+		p=ParameterString(parametersObject);
+	return "https://script.google.com/macros/s/"+c+"/exec"+p;
+};
+
+DisplayMacroURL=function(parameters){
+	return MacroURL("AKfycbyvKrxqk9mHkpmVqsmHN0y2jO-8x40zurf4tdS7p2H-KExfnvM",parameters);
+}
 
 //Fetch data from url
 LoadDataFromNetwork=function(url,SuccessF,header,FailureF){

@@ -1,23 +1,20 @@
 //////////////////////////////////////////////////
 // HOF 
 
-var DisplayIDs={
-	"hall-of-fame":"AKfycbx3VJTScX-y6L3I4KMql10hVBx_MpjoDfocNHzhR9nuRAQkedFi"
-};
-
-var identifier=PageIdentifier();
-
 function DeployHOF(jsonstring){
 	var table=LoadTableHTML(jsonstring,Identity,["Date","Game","Winner","Score"]);
 	var targetID=identifier+"-area";
 	ReplaceChildren(table,targetID);
-	DynamicTables()
+	DynamicTables();
 };
 
 function DisplayHOF(){
-	var url=MacroURL(DisplayIDs[identifier]);
+	var url=DisplayMacroURL({
+		docId:"1tp42m_9MoMN4IHzO6H9aqTkU2wt_FtdWGK3Q7Uwb9hw",
+		sheetName:"Hall-of-Fame",
+		rowStart:8
+	});
 	LoadData(url,DeployHOF);
 }
 
-if(In(DisplayIDs,identifier))
-	DisplayHOF();
+DisplayHOF();

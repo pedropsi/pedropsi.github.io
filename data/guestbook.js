@@ -1,8 +1,15 @@
 //////////////////////////////////////////////////
 // Guestbook
+
 function DisplayGuestbook(){
-	LoadData(MacroURL("AKfycbzbI9ht52-sWmNcVi4SpQvjhyTtEdSJxTPpfqwuSDTPlQfJJfc"),DeployGuestbook);
+	var url=DisplayMacroURL({
+		docId:"1tp42m_9MoMN4IHzO6H9aqTkU2wt_FtdWGK3Q7Uwb9hw",
+		sheetName:"Guestbook",
+		rowStart:8
+	});
+	LoadData(url,DeployGuestbook);
 }
+
 
 function DeployGuestbook(jsonstring){
 	var gb=MakeGuestbook(jsonstring);
