@@ -194,6 +194,7 @@ function StartAnalytics(){
 	DisplayViewCounter();
 	if(AnalyticsClearance()){
 		RegisterOpen();
+		setTimeout(3000,DisplayViewCounter);//Update with own number
 		MarkElements(".button",ElementClicked);
 		MarkElements(".mosaic",MosaicToggled);
 		MarkElements("#NightMode",NightModeToggled);
