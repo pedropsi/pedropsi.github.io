@@ -1,11 +1,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Service workers
 
-function PageType(){
+PageType=function(){
 	return GetElements("meta").filter(function(m){return m.getAttribute("property")==="og:type";})[0].content;
 }
 
-function ListDependencies(){
+ListDependencies=function(){
 	
 	var dependencies=[];
 	var imgdependencies=GetElements("img").map(function(e){return PageRelativePath(e.src)});
@@ -66,7 +66,7 @@ function ListDependencies(){
 	return dependencies;
 }
 
-function ServiceWorker(){
+ServiceWorker=function(){
 	function SWReady(registration){
 		console.log('Service worker registration succeeded:',registration);
 		return navigator.serviceWorker.ready;
@@ -81,12 +81,12 @@ function ServiceWorker(){
 		console.log('Service workers are not supported.');
 };
 
-function SWReadyCacheAdd(registration,files){
+SWReadyCacheAdd=function(registration,files){
 	registration.active.postMessage({command:'SelectiveCache',parameters:files});
 	//console.log("Registered specific dependencies in SW cache:");
 	//files.map(console.log);
 };
-function ServiceWorkerCacheAddF(sourceArray){
+ServiceWorkerCacheAddF=function(sourceArray){
 	function SWDependencies(reg){
 		SWReadyCacheAdd(reg,sourceArray);
 	};
@@ -94,7 +94,7 @@ function ServiceWorkerCacheAddF(sourceArray){
 };
 
 
-function ServiceWorkerCache(sourceArray){
+ServiceWorkerCache=function(sourceArray){
 	if('serviceWorker' in navigator){
 		navigator.serviceWorker.ready.then(ServiceWorkerCacheAddF(sourceArray)).catch(function(error){
 			console.log('SW Cache Add failed:',error);
@@ -125,31 +125,31 @@ function EchoPureData(data,url){
 		xhr.send(encoded);
 }
 
-function EchoData(data,url){
+EchoData=function(data,url){
 	if(Online())
 		EchoPureData(data,url);
 	else
 		BufferData(data,url);
 }
 
-function EchoDataBuffer(){
+EchoDataBuffer=function(){
 	while(Connection.queue.length>0){
 		EchoPureData(Connection.queue[0][0],Connection.queue[0][1]);
 		Connection.queue.shift();
 	}
 };
 
-function BufferData(data,url){
+BufferData=function(data,url){
 	Connection.queue.push([data,url]);
 }
 
-function DataBufferEmpty(){
+DataBufferEmpty=function(){
 	return Connection.queue.length<1;
 }
 
 //Network status
 
-function MonitorConnection(){
+MonitorConnection=function(){
 	if(Online()){
 		var message="Network status:<b>Online</b>";
 		if(!DataBufferEmpty()){
@@ -164,7 +164,7 @@ function MonitorConnection(){
 	ConsoleAdd(message);
 }
 
-function Connection(){
+Connection=function(){
 	if(!Connection.queue)
 		Connection.queue=[];
 
@@ -178,7 +178,7 @@ Connection();
 //Tables
 
 //Sort
-function ColumnNumber(tableSelector,n){
+ColumnNumber=function(tableSelector,n){
 	var headers=GetElements("TH",tableSelector);
 	if(typeof n==="number"&&n>-1&&n<=headers.length-1)
 		return n;
@@ -191,7 +191,7 @@ function ColumnNumber(tableSelector,n){
 	}
 }
 
-function CompareRow(n,descending){
+CompareRow=function(n,descending){
 	function CompareAscending(rowA,rowB){
 		
 		var A=Array.from(rowA.children);
@@ -221,7 +221,7 @@ function CompareRow(n,descending){
 		return function(rowA,rowB){return 0-CompareAscending(rowA,rowB)};
 }
 
-function SortTable(tableSelector,n,descending){
+SortTable=function(tableSelector,n,descending){
 	var tbody=GetElement("TBODY",tableSelector);
 	var rows=GetElements("TR",tbody);
 	var descending=descending||false;
@@ -232,7 +232,7 @@ function SortTable(tableSelector,n,descending){
 	ApplyChildren(SortRows,tbody,rows);
 }
 
-function SortableTable(tableSelector){
+SortableTable=function(tableSelector){
 	var headers=GetElements("TH",tableSelector);
 	
 	function SortByHeader(header){
@@ -253,7 +253,7 @@ function SortableTable(tableSelector){
 	headers.map(SortByHeader)
 }
 
-function TableLength(idSel){
+TableLength=function(idSel){
 	var target=GetElementIn("TBODY",idSel);
 	if(target&&target.childNodes)
 		return Array.from(target.childNodes).filter(function(e){return e.childNodes.length>0}).length;
@@ -264,12 +264,12 @@ function TableLength(idSel){
 
 // Dynamic Tables
 
-function DynamicTable(tableSelector){
+DynamicTable=function(tableSelector){
 	SortableTable(tableSelector);
 	FilterableTable(tableSelector);
 }
 
-function DynamicTables(){
+DynamicTables=function(){
 	var tables=GetElements("TABLE");
 	if(tables.length>0)
 		tables.map(DynamicTable);
@@ -279,7 +279,7 @@ function DynamicTables(){
 ListenOnce('load',DynamicTables);
 
 //Fetch table
-function LoadTableHTML(jsondata,RowF,headers){
+LoadTableHTML=function(jsondata,RowF,headers){
 	if(!jsondata)
 		return;
 	if(!RowF)
@@ -330,7 +330,7 @@ var DESTINATION_FEEDBACK={
 			}}
 }
 
-function AnonimiseBlank(name){
+AnonimiseBlank=function(name){
 	if(name!==undefined&&SomeTextValidate(name))
 		return name;
 	else
@@ -480,11 +480,11 @@ function RegisterDestination(DESTINATION){
 //////////////////////////////////////////////////////////////////////
 //Hall of Fame
 
-function RequestHallOfFame(){
 	
 	if(GameConsole())
 		return;
 	
+RequestHallOfFame=function(){
 	RequestDataPack([
 	['alias',{
 		questionname:"Enter the Hall of Fame:",
@@ -499,7 +499,7 @@ function RequestHallOfFame(){
 	});
 }
 
-function RequestModalWinnerMessage(previousDP){
+RequestModalWinnerMessage=function(previousDP){
 	
 	function DestinationChoice(choice){
 		if(choice==="Public message in Guestbook")
@@ -534,7 +534,7 @@ function RequestModalWinnerMessage(previousDP){
 //////////////////////////////////////////////////////
 // Real time Feedback Requests
 
-function RequestGameFeedback(){
+RequestGameFeedback=function(){
 
 	if(!RequestGameFeedback.requests)
 		RequestGameFeedback.requests=[];
@@ -580,20 +580,20 @@ function RequestGameFeedback(){
 
 }
 
-function CloseFeedback(){
+CloseFeedback=function(){
 	if(CurrentDatapack().buttonSelector==="FeedbackButton")
 		CloseCurrentDatapack();
 	GameFocus();
 }
 
-function PrintGameState(){
+PrintGameState=function(){
 	return GetElement("gameCanvas").toDataURL();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // Guestbook & Comments
 
-function RequestGuestbook(){
+RequestGuestbook=function(){
 	RequestDataPack([
 		['answer',{
 			questionname:"Your message",
@@ -605,7 +605,7 @@ function RequestGuestbook(){
 	)
 }
 
-function RequestMessageReply(nid){
+RequestMessageReply=function(nid){
 	RequestMessageReply.currentid=nid;
 	RequestDataPack([
 		['answer',{
@@ -625,7 +625,7 @@ function RequestMessageReply(nid){
 //////////////////////////////////////////////////////////////////////
 //Subscribe
 
-function OpenModalSubscribe(){
+OpenModalSubscribe=function(){
 	RequestDataPack([
 		['email',{
 			destination:'Subscription',
@@ -641,10 +641,10 @@ function OpenModalSubscribe(){
 //////////////////////////////////////////////////////////////////////
 //Order
 
-function OpenModalPreOrder(campaigntext){
 	
 	RequestDataPack([['email',{questionname:campaigntext}]],{
 			destination:'Order',
+OpenModalPreOrder=function(campaigntext){
 			thanksmessage:"Your booking was placed. Thank you!"
 		});
 }
@@ -653,7 +653,7 @@ function OpenModalPreOrder(campaigntext){
 //////////////////////////////////////////////////////////////////////
 //PWA Install
 
-function RequestPWAInstall(){
+RequestPWAInstall=function(){
 	RequestDataPack([
 		['exclusivechoice',{
 			questionname:"Add "+PageTitle()+" to your homescreen (offline)?",
@@ -675,7 +675,7 @@ window.addEventListener('beforeinstallprompt',function(e){
 		RequestPWAInstall();
 });
 
-function InstallPWAMaybe(choice,id){
+InstallPWAMaybe=function(choice,id){
 	if(choice==="Yes, please!"){
 		if(!installPWAEvent.prompt){
 			ConsoleAdd("Sorry, your browser is unable to ask for PWA installation - reporting back to Pedro PSI...");
@@ -708,11 +708,11 @@ window.addEventListener('appinstalled',function(event){
 //////////////////////////////////////////////////////////////////////
 //Purchase
 
-function Purchased(){
-	return (PageSearch("source")==="stripe"&&PageSearch("result")==="success")
+Purchased=function(){
+	return (PageSearch("source")==="stripe"&&PageSearch("result")==="success");
 };
 
-function RequestPurchased(){
+PurchasedConfirm=function(){
 	ConsoleAddMany([
 		"Thank you for your purchase. Enjoy!",
 		"Pedro PSI stands available to answer any questions you may have...",
@@ -752,7 +752,7 @@ if(PageIdentifier()==="game-editor"){
 //////////////////////////////////////////////////////////////////////
 // Database sub
 
-function RequestPGDSubmission(editData,editmode){
+RequestPGDSubmission=function(editData,editmode){
 	if(editData){
 		if(IsString(editData))
 			editData=GameEntryData[editData];
@@ -840,7 +840,7 @@ function RequestPGDSubmission(editData,editmode){
 //////////////////////////////////////////////////////////////////////
 // Contact
 
-function RequestContact(){
+RequestContact=function(){
 	var DFOpts=[
 		['email',{
 			qfield:"email",
@@ -885,7 +885,7 @@ if(PageIdentifier()==="contact"){
 ////////////////////////////////////////////////////////////////////////////////
 // Night Mode
 
-function StartNightMode(){
+StartNightMode=function(){
 	if(Memory("nightmode")===null){
 		if(window.matchMedia('(prefers-color-scheme: dark)').matches)
 			ActivateNightMode();
@@ -898,7 +898,7 @@ function StartNightMode(){
 		UnActivateNightMode();
 }
 
-function ActivateNightMode(){
+ActivateNightMode=function(){
 	Memory("nightmode",true);
 	Class(document.body,"nightmode");
 	UnClass(document.body,"daymode");
@@ -912,7 +912,7 @@ function ActivateNightMode(){
 	GetElement("NightMode").innerHTML=ObtainSymbol("sun");
 }
 
-function UnActivateNightMode(){
+UnActivateNightMode=function(){
 	Memory("nightmode",false);
 	Class(document.body,"daymode");
 	UnClass(document.body,"nightmode");
@@ -926,7 +926,7 @@ function UnActivateNightMode(){
 	GetElement("NightMode").innerHTML=ObtainSymbol("moon");
 }
 
-function ToggleNightMode(){
+ToggleNightMode=function(){
 	if(Memory("nightmode"))
 		UnActivateNightMode();
 	else
@@ -938,7 +938,7 @@ StartNightMode();
 ///////////////////////////////////////////////////////////////////////////////
 // Debug tools
 
-function RequestDebugger(){
+RequestDebugger=function(){
 	RequestDataPack([
 		['answer',{
 			questionname:"Javascript code to be evaluated:",
@@ -958,7 +958,7 @@ function RequestDebugger(){
 	)
 }
 
-function DebuggerEvaluate(){
+DebuggerEvaluate=function(){
 	try{
 		var result=window.eval(FindData('code'));
 		ConsoleAdd(String(result));
