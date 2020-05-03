@@ -105,13 +105,13 @@ function RegisterOpen(){
 		formGoogleSheetName:"Visit",
 		identifier:PageIdentifier(),
 		uid:navigator.userAgent||UserId()
-	},"https://script.google.com/macros/s/AKfycbwkGNhovcFyIJ5V0uLCYs0y6uAuSOC5DcWS8H1vk9SJ6JXqWZTI/exec");
+	},"https://script.google.com/macros/s/AKfycbzemuWuvCTCPx8hkzushrs5tFGzlHtrsuoqufKAYo2U1rFZw7A/exec");
 
 	EchoData({
 		formGoogleSheetName:"Country",
 		identifier:UserCountry(),
 		uid:navigator.userAgent||UserId()
-	},"https://script.google.com/macros/s/AKfycbwkGNhovcFyIJ5V0uLCYs0y6uAuSOC5DcWS8H1vk9SJ6JXqWZTI/exec");
+	},"https://script.google.com/macros/s/AKfycbzemuWuvCTCPx8hkzushrs5tFGzlHtrsuoqufKAYo2U1rFZw7A/exec");
 }
 function RegisterLink(l){
 	EchoAnalytics(FingerprintLink(l));
