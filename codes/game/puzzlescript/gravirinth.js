@@ -20,7 +20,7 @@ var Orbindices=[so.gotorb1.id,so.gotorb2.id,so.gotorb3.id,so.gotorb4.id];//Four 
 }
 
 
-//Hook to HOF
+//Hook to hall-of-fame
 function ObtainHonour(){
 	return "★".repeat(G_CountObtained());
 }
