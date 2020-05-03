@@ -167,11 +167,9 @@ MonitorConnection=function(){
 Connection=function(){
 	if(!Connection.queue)
 		Connection.queue=[];
-
-ListenOnce('offline',MonitorConnection);
+	
+	ListenOnce('offline',MonitorConnection);
 }
-
-Connection();
 
 
 //////////////////////////////////////////////////
@@ -276,7 +274,6 @@ DynamicTables=function(){
 	setTimeout(FilterSearchURL,200);
 }
 
-ListenOnce('load',DynamicTables);
 
 //Fetch table
 LoadTableHTML=function(jsondata,RowF,headers){
@@ -480,10 +477,6 @@ function RegisterDestination(DESTINATION){
 //////////////////////////////////////////////////////////////////////
 //Hall of Fame
 
-	
-	if(GameConsole())
-		return;
-	
 RequestHallOfFame=function(){
 	RequestDataPack([
 	['alias',{
@@ -668,22 +661,15 @@ RequestPWAInstall=function(){
 	)
 }
 
-var installPWAEvent=false;
-window.addEventListener('beforeinstallprompt',function(e){
-	installPWAEvent=e;
-	if(!In(PageSearch("source"),"homescreen"))
-		RequestPWAInstall();
-});
-
 InstallPWAMaybe=function(choice,id){
 	if(choice==="Yes, please!"){
-		if(!installPWAEvent.prompt){
+		if(!PWAInstallAsk.event.prompt){
 			ConsoleAdd("Sorry, your browser is unable to ask for PWA installation - reporting back to Pedro PSI...");
 			RegisterPWA('BrowserCannot');
 		}
 		else{
-			installPWAEvent.prompt();
-			installPWAEvent.userChoice.then(function(choiceResult){
+			PWAInstallAsk.event.prompt();
+			PWAInstallAsk.event.userChoice.then(function(choiceResult){
 				if(choiceResult.outcome==='accepted'){
 					RegisterPWA('Install');
 				}else{
@@ -696,13 +682,19 @@ InstallPWAMaybe=function(choice,id){
 	CloseCurrentDatapack();
 }
 
-window.addEventListener('appinstalled',function(event){
+PWAInstallAsk=function(ev){
+	PWAInstallAsk.event=ev;
+	if(!In(PageSearch("source"),"homescreen"))
+		RequestPWAInstall();
+}
+
+PWAInstallConfirm=function(ev){
 	ConsoleAddMany([
 		PageTitle()+" added to the homescreen.",
 		"To enable offline access, please refresh the App once, so all files be cached.",
 		"Enjoy!"
 	]);
-});
+}
 
 
 //////////////////////////////////////////////////////////////////////
@@ -713,15 +705,14 @@ Purchased=function(){
 };
 
 PurchasedConfirm=function(){
+	if(!Purchased())
+		return;
 	ConsoleAddMany([
 		"Thank you for your purchase. Enjoy!",
 		"Pedro PSI stands available to answer any questions you may have...",
 		"...yet no hints will be provided!",
 		"<b>Important: please bookmark this URL</b> - you'll need it to return to the game!"]);
 };
-
-if(Purchased())
-	RequestPurchased();
 
 //////////////////////////////////////////////////////////////////////
 // Editor
@@ -746,7 +737,6 @@ if(PageIdentifier()==="game-editor"){
 		}
 	fileOpenClient.send();
 	}
-
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -878,9 +868,6 @@ RequestContact=function(){
 	});
 }
 
-if(PageIdentifier()==="contact"){
-	RequestContact()
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Night Mode
@@ -933,7 +920,6 @@ ToggleNightMode=function(){
 		ActivateNightMode();
 }
 
-StartNightMode();
 
 ///////////////////////////////////////////////////////////////////////////////
 // Debug tools
@@ -965,34 +951,6 @@ DebuggerEvaluate=function(){
 	}catch(err){
 		ConsoleAdd(String(err));
 	}
-}
-
-if(PageTag()==="debug")
-	RequestDebugger();
-//////////////////////////////////////////////////////////////////////
-//View Counter
-
-function DisplayViewCounter(){
-	var url=MacroURL({
-		docId:"1y5KANZWMYJglC8v3VdUm-V__aiMe2q3zvRWNS3BI9IM",
-		sheetName:"Visit",
-		rowStart:3,
-		colEnd:2
-	});
-	LoadData(url,DeployViewCounter);
-}
-
-function DeployViewCounter(viewdata){
-	var viewdata=JSON.parse(viewdata);
-		
-		viewdata=viewdata.filter(function(pair){return pair[0]===PageIdentifier()});
-		
-	if(!viewdata.length)
-		return;
-	
-	viewdata=viewdata[0][1];
-	
-	DynamicText("view-counter",ObtainSymbol("eye")+"\n"+viewdata);
 }
 
 //////////////////////////////////////////////////////////////////////

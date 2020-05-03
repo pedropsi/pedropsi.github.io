@@ -71,13 +71,25 @@ PageFeatures=function(){
 }
 
 PageFeaturesDOM=function(){
+	ListenOnce('beforeinstallprompt',PWAInstallAsk);
+	ListenOnce('appinstalled',PWAInstallConfirm);
 	DynamicTables();
-	StartAnalytics();
+	AnalyticsStart();
 	InlineSVG();
 	//Capture events
 	Listen("mousedown",function(e){FocusElement(e.target)});//Focus clicked items (also to escape focus by clicking in unfocusable parents)
 	Listen("click",function(e){FocusElement(e.target)});
 	ResumeCapturingKeys(CaptureComboKey);
+	PurchasedConfirm();
+	StartNightMode();
+	Connection();
+	
+	if(PageTag()==="debug")
+		RequestDebugger();
+
+	if(PageIdentifier()==="contact")
+		RequestContact();
+
 }
 
 	
