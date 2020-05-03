@@ -3323,13 +3323,14 @@ ListenF=function(EFTC){
 		EFTC.target=GetElement(EFTC.target)||window;
 
 	var fun=EFTC.F;
+	var ConditionF=EFTC.ConditionF;
 	function F(ev){
 		if(ConditionF(ev)){
 			fun();
 			ListenNoMore(EFTC);
 		}
 	};
-	EFTC.F=fun;
+	EFTC.F=F;
 
 	ListenIndeed(EFTC);
 	return EFTC;
