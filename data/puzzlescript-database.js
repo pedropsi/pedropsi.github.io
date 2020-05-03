@@ -3,7 +3,6 @@
 
 var targetID=Posfix(PageIdentifier(),"-area");
 var databaseTitle=PageTitle()||Capitalise(PageIdentifier());
-var PDGURL="https://script.google.com/macros/s/AKfycbyp6yZrpw7TIiOE8fg0wUkI0SMtTWUpYlki53OGLg5Pgc6ppLM/exec";
 
 if(PageIdentifier()==="puzzlescript-games-database"){
 	var headers=["Title","Author","Date"];
@@ -63,7 +62,12 @@ function LoadPGDTable(){
 }
 
 function LoadPGD(){
-	LoadData(PDGURL,RegisterPGDEntries);
+	var PGDURL=DisplayMacroURL({
+		docId:"158LEND9dCQF53UFvB5BEWjQmgm47PUv2jBXdr8W3xWc",
+		sheetName:"Games-List",
+		rowStart:8
+	});
+	LoadData(PGDURL,RegisterPGDEntries);
 }
 
 function RegisterPGDEntries(data){
