@@ -101,21 +101,21 @@ EchoAnalytics=function(data){
 RegisterOpen=function(){
 	//EchoAnalytics(FingerprintOpen());
 	
-	LoadData(MacroURL({
+	EchoData({
 		docId:"1y5KANZWMYJglC8v3VdUm-V__aiMe2q3zvRWNS3BI9IM",
 		sheetName:"Visit",
 		identifier:PageIdentifier(),
 		uid:navigator.userAgent||UserId(),
 		post:true
-	}),console.log);
+	});
 
-	LoadData(MacroURL({
+	EchoData({
 		docId:"1y5KANZWMYJglC8v3VdUm-V__aiMe2q3zvRWNS3BI9IM",
 		sheetName:"Country",
 		identifier:UserCountry(),
 		uid:navigator.userAgent||UserId(),
 		post:true
-	}),console.log);
+	});
 }
 RegisterLink=function(l){
 	EchoAnalytics(FingerprintLink(l));
