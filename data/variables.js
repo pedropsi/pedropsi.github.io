@@ -180,7 +180,7 @@ GAME_SCRIPT					:	()=>	[v.GAME_SCRIPT_GAME(),v.GAME_STYLE()],
 GUESTBOOK_ADD				:	()=>	`<div class="button centered" onclick="RequestGuestbook()" tabindex="0">Leave your message!</div>`,
 BUTTON_GET					:	()=>	`<div class="button centered buy" tabindex="0">Get it now!</div>`,
 //BUTTON_PREORDER				:	()=>	`<div class="button centered buy" tabindex="0">Preorder now!</div>`,
-BUTTON_COMMENT				:	()=>	`<div class="button button-comment" onclick="RequestComment('${v.TITLE()}',this)" tabindex="0">Comment!</div>`,
+
 BUTTON_SUBSCRIBE			:	()=>	`<div class="button centered" tabindex="0">${v.A_SUBSCRIBE()}</div>`,
 
 

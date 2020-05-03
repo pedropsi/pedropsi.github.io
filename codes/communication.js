@@ -620,31 +620,7 @@ function RequestMessageReply(nid){
 }
 
 
-function commentAddress(e){
-	var f=1;
-	var title=e;
-	while(f!=0&&f<=100){
-		f++;
-		title=title.nextSibling;
-		if(title.tagName==="H3"){f=0}
-	}
-	return title.innerText;
-}
 
-
-
-function RequestComment(title,elemsubtitle){
-	commentID=function(){return title+": "+commentAddress(elemsubtitle);}; 	//redefine this global function dynamically
-	
-	RequestDataPack([
-		['answer',{
-			questionname:"Your comment"
-		}],
-		['alias',{}]
-	],{
-		destination:'Comments'
-	});
-}
 
 //////////////////////////////////////////////////////////////////////
 //Subscribe
@@ -673,29 +649,6 @@ function OpenModalPreOrder(campaigntext){
 		});
 }
 
-
-
-//////////////////////////////////////////////////////////////////////
-//Media Pass
-
-function RequestMediaPass(){
-	RequestDataPack([
-		['name',{
-			qrequired:true,
-			questionname:"What's your name?",
-			qplaceholder:"(real or artistic name)"}],
-		['answer',{
-			questionname:"Through which channels do you intend to review this game?",
-			qplaceholder:"e.g. which blog, magazine, youtube channel, twitch account, etc..."}],
-		['email',{
-			questionname:"Your email(to receive the key)"
-		}]],
-		{
-			thanksmessage:"Your request is being processed - please allow 1-2 business days.",
-			destination:'Pass'
-			}
-		)
-}
 
 //////////////////////////////////////////////////////////////////////
 //PWA Install
