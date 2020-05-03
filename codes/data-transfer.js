@@ -1565,7 +1565,7 @@ Online=function(){return navigator.onLine};
 Offline=function(){return !Online()};
 
 //Parameter requests
-ParameterPairString=function(name,value){
+ParameterPairString=function(key,value){
 	return encodeURIComponent(key)+'='+encodeURIComponent(value);
 }
 
