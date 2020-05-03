@@ -8,7 +8,7 @@ function EchoLevelData(leveldata){
 }
 
 function GameAnalyticsClearance(){
-	return AnalyticsClearance()&&PageIdentifier()!=="game-console";
+	return AnalyticsAllowed()&&PageIdentifier()!=="game-console";
 }
 
 function GameIdentifier(){
