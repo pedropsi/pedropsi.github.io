@@ -1017,4 +1017,30 @@ function DebuggerEvaluate(){
 if(PageTag()==="debug")
 	RequestDebugger();
 //////////////////////////////////////////////////////////////////////
+//View Counter
+
+function DisplayViewCounter(){
+	var url=DisplayMacroURL({
+		docId:"1y5KANZWMYJglC8v3VdUm-V__aiMe2q3zvRWNS3BI9IM",
+		sheetName:"Visit",
+		rowStart:3,
+		colEnd:2
+	});
+	LoadData(url,DeployViewCounter);
+}
+
+function DeployViewCounter(viewdata){
+	var viewdata=JSON.parse(viewdata);
+		
+		viewdata=viewdata.filter(function(pair){return pair[0]===PageIdentifier()});
+		
+	if(!viewdata.length)
+		return;
+	
+	viewdata=viewdata[0][1];
+	
+	DynamicText("view-counter",ObtainSymbol("eye")+"\n"+viewdata);
+}
+
+//////////////////////////////////////////////////////////////////////
 Shout("communication")

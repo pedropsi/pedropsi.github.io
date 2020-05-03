@@ -191,6 +191,7 @@ function AnalyticsClearance(){
 }
 
 function StartAnalytics(){
+	DisplayViewCounter();
 	if(AnalyticsClearance()){
 		RegisterOpen();
 		MarkElements(".button",ElementClicked);

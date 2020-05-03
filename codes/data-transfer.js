@@ -2262,6 +2262,10 @@ ScrollUpHTML=function(){
 	return ButtonHTML({txt:ObtainSymbol("scroll-up"),attributes:{class:"scrollTop",onclick:"window.scrollTo(0,0)"}});
 }
 
+function ViewCounterHTML(){
+	return DynamicTextHTML("view-counter"," ");
+}
+
 //Hidden Elements
 GhostHTML=function(id){
 	"<span id='"+id+"' class='hidden'></span>";
@@ -4971,7 +4975,8 @@ ObtainSymbol=function(name){
 		"scroll-up":"▵",
 		"space":" ",	//keyboard useful
 		"dot":".",		//keyboard useful
-		"dash":"-"		//keyboard useful
+		"dash":"-",		//keyboard useful
+		"eye":"👁"
 		};
 	if(!name)
 		return symbols;
@@ -4984,22 +4989,23 @@ ObtainSymbol=function(name){
 ///////////////////////////////////////////////////////////////////////////////
 //Dynamic text
 
-DynamicTextHTML=function(text,label){
+DynamicTextHTML=function(label,text){
+	var label=Prefix(label,"dynamic-");
 	return `<span class="${label}">
 					${text||"[------updating...---]"}
 			</span>`;
 }
 
-DynamicText=function(name,text){
-	if(!name)
+DynamicText=function(label,text){
+	if(!label)
 		return;
-	var label="dynamic-"+name;
-	if(typeof text==="undefined"){
-		return DynamicTextHTML(DynamicText.name,label);
+	var label=Prefix(label,"dynamic-");
+	if(typeof text==="undefined"){//Getter
+		return GetElement("."+label).innerText;
 	}
-	else{
+	else{//Setter
 		DynamicText.name=text;
-		var e=DynamicTextHTML(text,label);
+		var e=DynamicTextHTML(label,text);
 		ReplaceElement(e,"."+label);
 		return e;
 	}
