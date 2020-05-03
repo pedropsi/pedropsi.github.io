@@ -1,24 +1,23 @@
 //////////////////////////////////////////////////
 // Guestbook
 
-function DisplayGuestbook(){
 	var url=MacroURL({
 		docId:"1tp42m_9MoMN4IHzO6H9aqTkU2wt_FtdWGK3Q7Uwb9hw",
 		sheetName:"Guestbook",
 		rowStart:8
 	});
+DisplayGuestbook=function(){
 	LoadData(url,DeployGuestbook);
 }
 
-
-function DeployGuestbook(jsonstring){
+DeployGuestbook=function(jsonstring){
 	var gb=MakeGuestbook(jsonstring);
 	var targetID="guestbook-area";
 	ReplaceChildren(gb,targetID);
 };
 
 
-function MakeGuestbook(jsonstring){
+MakeGuestbook=function(jsonstring){
 	var dataarray=JSON.parse(jsonstring);
 	function MakeComment(dataline){
 		if(dataline[0]===""||(dataline[1]!==PageTitle()&&PageTitle()!=="Guestbook")) 
@@ -40,7 +39,7 @@ function MakeGuestbook(jsonstring){
 }
 
 // Comment tree system
-function CompareId(a,b){
+CompareId=function(a,b){
 	if(a===b)
 		return 0;
 	else{
@@ -56,10 +55,10 @@ function CompareId(a,b){
 	}
 }
 
-function ThreadId(fullid,startid){return fullid.replace(CombineRegex(/^/,startid),"").replace(/^\»/,"")};
-function IdDepth(fullid){return String(fullid).split("»").length};
+ThreadId=function(fullid,startid){return fullid.replace(CombineRegex(/^/,startid),"").replace(/^\»/,"")};
+IdDepth=function(fullid){return String(fullid).split("»").length};
 	
-function NextReplyMessageId(id,dataarray){
+NextReplyMessageId=function(id,dataarray){
 	//all comment ids
 	var commentids=dataarray.map(function(dataline){return dataline[4]});
 	//children comment ids (exactly depth + 1)
