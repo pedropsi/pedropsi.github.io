@@ -3,7 +3,7 @@
 
 function DeployHOF(jsonstring){
 	var table=LoadTableHTML(jsonstring,Identity,["Date","Game","Winner","Score"]);
-	var targetID=identifier+"-area";
+	var targetID=PageIdentifier()+"-area";
 	ReplaceChildren(table,targetID);
 	DynamicTables();
 };
