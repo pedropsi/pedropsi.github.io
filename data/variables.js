@@ -169,7 +169,7 @@ FIGURE_MOSAIC				:	()=>	`<figure class="figure mosaic" onclick="(function(){Togg
 
 GIF							:	()=>	`<video autoplay loop muted playsinline><source src="${v.IMAGE_180()}" type="video/mp4"></source></video>`,
 
-PUZZLE_SCRIPT_GAME			:	()=>	`codes/game/${v.LINK()}.js`,
+PUZZLE_SCRIPT_GAME			:	()=>	`codes/game/puzzlescript/${v.LINK()}.js`,
 PUZZLE_SCRIPT_EMBED			:	()=>	`codes/game/puzzlescript-embed.js`,
 PUZZLE_SCRIPT				:	()=>	[v.PUZZLE_SCRIPT_EMBED(),v.PUZZLE_SCRIPT_GAME(),v.GAME_STYLE()],
 
@@ -233,7 +233,7 @@ FOOTER_LINES				:	()=>	`<p>${ViewCounterHTML()}</p><p>${v.COPYRIGHT_TEXT()}. ${v
 DEBUGGER					:	()=>	`<span onclick="RequestDebugger()">Debug</span>`,
 
 LOG_LINK					:	()=>	`<b><a href="${v.LINK()}-log.html">${v.TITLE_BOLD()}'s log</a></b>`,
-LOG_COMMENTS				:	()=>	`<script>AddAfterElement('${v.BUTTON_COMMENT()}',"h2")</script>`,
+
 
 SECTION_SUBSCRIBE			:	()=>	v.SECTION_OUT(`<div class="container">${v.SUBSCRIBE_ANNOUNCE()}</div>`),
 SUBSCRIBE_ANNOUNCE			:	()=>	`<div class="announce"><p>Learn first-hand about ${v.NAME()}'s next project!</p>${v.BUTTON_SUBSCRIBE()}</div>`,
