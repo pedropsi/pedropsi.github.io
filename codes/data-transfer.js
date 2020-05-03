@@ -2267,11 +2267,6 @@ GhostHTML=function(id){
 	"<span id='"+id+"' class='hidden'></span>";
 }
 
-/*
-SuperimposedHTML(A,B){
-	return "<span class='superimposed'>"+A+"</span>"+B;
-}
-*/
 
 // Table Elements
 
