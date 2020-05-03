@@ -8,7 +8,7 @@ var dataHeaders={
 	"status":		"[\"identifier\",\"agent\",\"errors\",\"name\"]"
 }
 
-function DataUnitHeaders(){
+DataUnitHeaders=function(){
 	return {
 		formGoogleSendEmail:"",
 		"identifier":PageIdentifier(PageURL()),
@@ -16,7 +16,7 @@ function DataUnitHeaders(){
 	};		
 }
 
-function DataUnit(datatype){
+DataUnit=function(datatype){
 	var type=datatype.toLowerCase();
 	var headers=dataHeaders[type];
 	if(headers)
@@ -46,17 +46,17 @@ function DataUnit(datatype){
 		});		
 }
 
-function LangUpperCase(s){
+LangUpperCase=function(s){
 	var pos=s.replace(/(.*-)/,"").replace(s,"");
 	var pre=s.replace(/(-.*)/,"").replace(s,"");
 	return pos.length?(pre+"-"+pos.toUpperCase()):s
 };
 
-function UserLanguageCountryCode(){
+UserLanguageCountryCode=function(){
 	return window.navigator.language.replace(/(.*-)/,"").toUpperCase();
 }
 
-function UserCountry(){
+UserCountry=function(){
 	var code=UserLanguageCountryCode();
 	if(In(CountryCodes(),code))
 		return CountryCodes()[code];
@@ -64,7 +64,7 @@ function UserCountry(){
 		return window.navigator.language;//fallback to analise
 }
 
-function FingerprintAction(type,target){
+FingerprintAction=function(type,target){
 	var data=DataUnit("Actions");
 	return FuseObjects(data,{
 		"target":target,
@@ -72,7 +72,7 @@ function FingerprintAction(type,target){
 	});
 }
 
-function FingerprintLink(ref){
+FingerprintLink=function(ref){
 	var p=PageIdentifier(ref);
 	if(p==="game-console")
 		p=p+"?game="+PageSearch("game",ref);
@@ -83,7 +83,7 @@ function FingerprintLink(ref){
 	)
 }
 
-function FingerprintStatus(error){
+FingerprintStatus=function(error){
 	var data=DataUnit("Status");
 	return FuseObjects(data,{
 		"errors":error,
@@ -93,12 +93,12 @@ function FingerprintStatus(error){
 
 // Echoes
  
-function EchoAnalytics(data){
-	if(AnalyticsClearance())
+EchoAnalytics=function(data){
+	if(AnalyticsAllowed())
 		EchoData(data,analyticsURL);
 }
  
-function RegisterOpen(){
+RegisterOpen=function(){
 	//EchoAnalytics(FingerprintOpen());
 	
 	LoadData(MacroURL({
@@ -117,35 +117,35 @@ function RegisterOpen(){
 		post:true
 	}),console.log);
 }
-function RegisterLink(l){
+RegisterLink=function(l){
 	EchoAnalytics(FingerprintLink(l));
 };
-function RegisterElementClicked(b){
+RegisterElementClicked=function(b){
 	EchoAnalytics(FingerprintAction("Click",b.innerText));
 }
-function RegisterMosaicToggled(b){ //Mosaic change
+RegisterMosaicToggled=function(b){ //Mosaic change
 	EchoAnalytics(FingerprintAction("BG toggle","---"));
 }
-function RegisterNightModeToggled(b){
+RegisterNightModeToggled=function(b){
 	EchoAnalytics(FingerprintAction("NM toggle",b.innerText));
 }
 
-function RegisterPWA(status){
+RegisterPWA=function(status){
 	EchoAnalytics(FingerprintAction("PWA Prompt",status));
 }
 
-function RegisterStatus(errordata){
+RegisterStatus=function(errordata){
 	EchoAnalytics(FingerprintStatus(JSON.stringify(errordata)));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Links Management
 
-function ChangeLinks(f){
+ChangeLinks=function(f){
 	MarkElements("a",f);
 }
 
-function OutLinks(){
+OutLinks=function(){
 	function PrepareLink(l){
 		var ref=l.href;
 		if(OuterLinked(ref)){
@@ -158,7 +158,7 @@ function OutLinks(){
 ////////////////////////////////////////////////////////////////////////////////
 // Link reformatting
 /*
-function AnonimiseLinks(){
+AnonimiseLinks=function(){
 	function PrepareLink(l){
 		var ref=l.href;
 		if(InnerLinked(ref))
@@ -167,7 +167,7 @@ function AnonimiseLinks(){
 	ChangeLinks(PrepareLink);
 }*/
  
-function AbsolutiseLinks(){
+AbsolutiseLinks=function(){
 	function PrepareLink(l){
 		var ref=l.href;
 		console.log("ABS!",ref);
@@ -182,21 +182,21 @@ function AbsolutiseLinks(){
 ////////////////////////////////////////////////////////////////////////////////
 // Analytics: custom actions
 
-function ElementClicked(b){Listen("click", function(){RegisterElementClicked(this)},b); return b};
-function MosaicToggled(b){Listen("click", function(){RegisterMosaicToggled(this)},b); return b};
-function NightModeToggled(b){Listen("click", function(){RegisterNightModeToggled(this)},b); return b};
+ElementClicked=function(b){Listen("click", function(){RegisterElementClicked(this)},b); return b};
+MosaicToggled=function(b){Listen("click", function(){RegisterMosaicToggled(this)},b); return b};
+NightModeToggled=function(b){Listen("click", function(){RegisterNightModeToggled(this)},b); return b};
 
 
 ///////////////////////////////////////////////////////////////////////////////
 // Analytics Behaviour
 
-function AnalyticsClearance(){
+AnalyticsAllowed=function(){
 	return (!In(clearance,PageTag())&&!FileLinked(PageURL()))||(PageSearch("source")==="homescreen");
 }
 
-function StartAnalytics(){
+AnalyticsStart=function(){
 	DisplayViewCounter();
-	if(AnalyticsClearance()){
+	if(AnalyticsAllowed()){
 		RegisterOpen();
 		//setTimeout(3000,DisplayViewCounter);//Update with own number
 		MarkElements(".button",ElementClicked);
