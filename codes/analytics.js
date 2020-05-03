@@ -210,6 +210,27 @@ AnalyticsStart=function(){
 }
 
 //////////////////////////////////////////////////////////////////////
+//View Counter
+
+DisplayViewCounter=function(){
+	var url=MacroURL(Inflows("visit"));
+	LoadData(url,DeployViewCounter);
+}
+
+DeployViewCounter=function(viewdata){
+	var viewdata=JSON.parse(viewdata);
+		
+		viewdata=viewdata.filter(function(pair){return pair[0]===PageIdentifier()});
+		
+	if(!viewdata.length)
+		return;
+	
+	viewdata=viewdata[0][1];
+	
+	DynamicText("view-counter",ObtainSymbol("eye")+"\n"+viewdata);
+}
+
+//////////////////////////////////////////////////////////////////////
 
 CountryCodes=function(){
 	return {
