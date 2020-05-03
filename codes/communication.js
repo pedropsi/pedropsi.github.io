@@ -1020,7 +1020,7 @@ if(PageTag()==="debug")
 //View Counter
 
 function DisplayViewCounter(){
-	var url=DisplayMacroURL({
+	var url=MacroURL({
 		docId:"1y5KANZWMYJglC8v3VdUm-V__aiMe2q3zvRWNS3BI9IM",
 		sheetName:"Visit",
 		rowStart:3,

@@ -1574,7 +1574,7 @@ ParameterString=function(parametersObject){
 }
 
 //External resources
-MacroURL=function(c,parametersObject){
+MacroBareURL=function(c,parametersObject){
 	var p="";
 	if(parametersObject)
 		p=ParameterString(parametersObject);
@@ -1583,8 +1583,8 @@ MacroURL=function(c,parametersObject){
 	return "https://script.google.com/macros/s/"+c+"/exec"+p;
 };
 
-DisplayMacroURL=function(parameters){
-	return MacroURL("AKfycbyvKrxqk9mHkpmVqsmHN0y2jO-8x40zurf4tdS7p2H-KExfnvM",parameters);
+MacroURL=function(parameters){
+	return MacroBareURL("AKfycbyvKrxqk9mHkpmVqsmHN0y2jO-8x40zurf4tdS7p2H-KExfnvM",parameters);
 }
 
 //Fetch data from url

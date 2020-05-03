@@ -99,19 +99,23 @@ function EchoAnalytics(data){
 }
  
 function RegisterOpen(){
-	EchoAnalytics(FingerprintOpen());
+	//EchoAnalytics(FingerprintOpen());
 	
-	EchoData({
-		formGoogleSheetName:"Visit",
+	LoadData(MacroURL({
+		docId:"1y5KANZWMYJglC8v3VdUm-V__aiMe2q3zvRWNS3BI9IM",
+		sheetName:"Visit",
 		identifier:PageIdentifier(),
-		uid:navigator.userAgent||UserId()
-	},"https://script.google.com/macros/s/AKfycbzemuWuvCTCPx8hkzushrs5tFGzlHtrsuoqufKAYo2U1rFZw7A/exec");
+		uid:navigator.userAgent||UserId(),
+		post:true
+	}),console.log);
 
-	EchoData({
-		formGoogleSheetName:"Country",
+	LoadData(MacroURL({
+		docId:"1y5KANZWMYJglC8v3VdUm-V__aiMe2q3zvRWNS3BI9IM",
+		sheetName:"Country",
 		identifier:UserCountry(),
-		uid:navigator.userAgent||UserId()
-	},"https://script.google.com/macros/s/AKfycbzemuWuvCTCPx8hkzushrs5tFGzlHtrsuoqufKAYo2U1rFZw7A/exec");
+		uid:navigator.userAgent||UserId(),
+		post:true
+	}),console.log);
 }
 function RegisterLink(l){
 	EchoAnalytics(FingerprintLink(l));

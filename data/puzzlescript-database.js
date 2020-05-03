@@ -62,7 +62,7 @@ function LoadPGDTable(){
 }
 
 function LoadPGD(){
-	var PGDURL=DisplayMacroURL({
+	var PGDURL=MacroURL({
 		docId:"158LEND9dCQF53UFvB5BEWjQmgm47PUv2jBXdr8W3xWc",
 		sheetName:"Games-List",
 		rowStart:8
