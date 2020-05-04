@@ -3451,7 +3451,6 @@ ShoutAnd=function(shoutArray,SuccessShout){
 
 SubmitData=function(outflowData){
 	var data=outflowData;
-	console.log(data);
 
 	if(!PreviousSubmission.history)
 		PreviousSubmission.history=[];

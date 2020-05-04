@@ -1,14 +1,16 @@
-function InString(string,n){
-	return string.replace(n,"")!==string;
+InString=function(string,n){
+	var s=string;
+	return n===""||s.replace(n,"")!==string;
 }
 
-function Today(){return new Date()};
-function Year(date){
+Today=function(){return new Date()};
+
+Year=function(date){
 	var date=date||Today();
-	return Number(date.toLocaleDateString().replace(/.*\//,""));
+	return date.getFullYear();
 }
 
-function ReadGameData(){
+ReadGameData=function(){
 	var data=false;
 	if(InString(document.URL,"itch.io")){
 		var T=document.getElementsByTagName("TITLE")[0].innerHTML;
@@ -82,41 +84,101 @@ function ReadGameData(){
 
 function SubmitGameData(){
 	var data=ReadGameData();
+
 	if(data){
-		data.formDataNameOrder=DESTINATION_TAGGER.headers;
-		data.formGoogleSendEmail="";
-		data.formGoogleSheetName=DESTINATION_TAGGER.sheet;
-		
-		EchoPureData(data,DESTINATION_TAGGER.url);
+		data.post=true;
+		data.docId="158LEND9dCQF53UFvB5BEWjQmgm47PUv2jBXdr8W3xWc";
+		data.sheetName="PGD";
+	
+		LoadDataFromNetwork(MacroURL(data),Identity);
 		alert("Game "+data.title+" by "+data.author+" submitted, if not already!");
 	}
 	else
 		alert("Sorry, no game could be found in this page. Please tell Pedro PSI whether this is an error.");
 }
 
-var DESTINATION_TAGGER={
-	url:"https://script.google.com/macros/s/AKfycbwl1oMrc36DizbST5TJAxCYMV-5hnGpHsVs_U8fsgZwBqBZnsWm/exec",
-	headers:"[\"title\",\"author\",\"link\",\"page\"]",
-	sheet:"Games List",
-	name:"GameDatabase"
+//
+
+MacroURL=function(parameters){
+	return MacroBareURL("AKfycbyvKrxqk9mHkpmVqsmHN0y2jO-8x40zurf4tdS7p2H-KExfnvM",parameters);
 }
 
-function EchoPureData(data,url){
-	var encoded = Object.keys(data).map(function(k){
-		return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
-	}).join('&');
+MacroBareURL=function(c,parametersObject){
+	var p="";
+	if(parametersObject)
+		p=ParameterString(parametersObject);
+	if(p)
+		p="?"+p;
+	return "https://script.google.com/macros/s/"+c+"/exec"+p;
+};
 
-	var xhr = new XMLHttpRequest();
-	xhr.open('POST',url);
-	xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-	xhr.onreadystatechange = function(){
-		console.log(xhr.status, xhr.statusText);
-		console.log(xhr.responseText);
-		return;
-	};
-
-	xhr.send(encoded);	
+ParameterPairString=function(key,value){
+	return encodeURIComponent(key)+'='+encodeURIComponent(value);
 }
 
+ParameterString=function(parametersObject){
+	return MapKeys(FlipKeysValues(parametersObject),ParameterPairString).join("&");
+}
+
+Keys=function(Obj){
+	return Object.keys(Obj)||[];
+};
+Values=function(Obj){
+	return Keys(Obj).map(function(k){return Obj[k]})||[];
+};
+
+FlipKeysValues=function(Obj){
+	var k=Keys(Obj);
+	var O={};
+	k.map(function(x){O[Obj[x]]=x});
+	return O;
+};
+
+MapObject=function(Obj,F){
+	var keys=Keys(Obj);
+	for (var i in keys){
+		if(Obj.hasOwnProperty(keys[i])){
+			//F(value, key, obj)
+			F(Obj[keys[i]],keys[i],Obj);
+		}
+	}
+	return Obj;
+};
+
+MapKeys=function(Obj,F){
+	var K=[];
+	MapObject(Obj,function(value,key,object){K.push(F(value,key,object))});
+	return K;
+}
+
+Identity=function(a){return a;}
+
+LoadDataFromNetwork=function(url,SuccessF,header,FailureF){
+	var FailureF=FailureF||Identity;
+	var rawFile=new XMLHttpRequest();
+	rawFile.open("GET",url,true);
+	rawFile.onreadystatechange=function(){
+		if(rawFile.readyState===4){
+			if(rawFile.status===404){
+				console.log("Nothing found at: ",url,", not necessarily an error!");
+				FailureF();
+			}
+			else if(rawFile.status===200||rawFile.status==0){
+				var data=rawFile.responseText;
+				if(data===""){
+					console.log("No data received from: ",url,". Connection problems?");
+					FailureF();
+				}
+				else{
+					Memory(url,rawFile.responseText,new Date());
+					SuccessF(data);
+				}
+			}
+		}
+	}
+	if(header)
+		rawFile.setRequestHeader("Content-type", header);
+	rawFile.send(null);
+};
 
 SubmitGameData();
