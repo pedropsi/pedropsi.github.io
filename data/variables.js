@@ -178,10 +178,10 @@ GAME_SCRIPT_GAME			:	()=>	`codes/game/${v.LINK()}/${v.LINK()}.js`,
 GAME_SCRIPT					:	()=>	[v.GAME_SCRIPT_GAME(),v.GAME_STYLE()],
 
 GUESTBOOK_ADD				:	()=>	`<div class="button centered" onclick="RequestGuestbook()" tabindex="0">Leave your message!</div>`,
-BUTTON_GET					:	()=>	`<div class="button centered buy" tabindex="0">Get it now!</div>`,
+//BUTTON_GET					:	()=>	`<div class="button centered buy" tabindex="0">Get it now!</div>`,
 //BUTTON_PREORDER				:	()=>	`<div class="button centered buy" tabindex="0">Preorder now!</div>`,
 
-BUTTON_SUBSCRIBE			:	()=>	`<div class="button centered" tabindex="0">${v.A_SUBSCRIBE()}</div>`,
+BUTTON_SUBSCRIBE			:	()=>	NavigationButtonHTML("subscribe"),
 
 
 COPYRIGHT					:	()=>	`Copyright ${v.NAME()} ${v.YEAR_SPAN()}, all rights reserved`,

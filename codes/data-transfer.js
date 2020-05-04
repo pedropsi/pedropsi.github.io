@@ -2373,6 +2373,10 @@ OkButtonHTML=function(targetid){
 SubmitButtonHTML=function(DP){
 	return ButtonOnClickHTML(DP.actionText,FunctionName(DP.action)+"(\""+DP.qid+"\")");
 }
+NavigationButtonHTML=function(pageName){
+	return `<div class="button centered" tabindex="0" onclick="Navigate('${pageName}')">${Capitalise(pageName)}</div>`
+}
+
 
 MessageHTML=function(message,clas){
 	var clas=clas||"question";
