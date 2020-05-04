@@ -1,12 +1,8 @@
 //////////////////////////////////////////////////
 // Guestbook
 
-	var url=MacroURL({
-		docId:"1tp42m_9MoMN4IHzO6H9aqTkU2wt_FtdWGK3Q7Uwb9hw",
-		sheetName:"Guestbook",
-		rowStart:8
-	});
 DisplayGuestbook=function(){
+	var url=MacroURL(Inflows("guestbook"));
 	LoadData(url,DeployGuestbook);
 }
 
