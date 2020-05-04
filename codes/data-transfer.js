@@ -2481,6 +2481,7 @@ DataFieldTypes=function(){
 		qtype:ShortAnswerHTML,
 		qfield:"address",
 		qplaceholder:"_______@___.___",
+		questionname:"Your email address",
 		qvalidator:EmailValidator},
 	url:{
 		qtype:ShortAnswerHTML,
