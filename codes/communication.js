@@ -620,14 +620,17 @@ RequestMessageReply=function(nid){
 
 OpenModalSubscribe=function(){
 	RequestDataPack([
-		['email',{
-			destination:'Subscription',
-			questionname:"Subscribe to be the first to know about Pedro PSI's next project!",
-			thanksmessage:"Thank you for subscribing!"
+		['exclusivechoice',{
+			qfield:"updates",
+			questionname:"Be the first to know about Pedro PSI's next project!",
+			qchoices:["New games only","All projects"]
 		}],
-		['name',{}]],
-		{
-			destination:'Subscription'}
+		['email',{}],
+		['name',{}]
+	],
+		{destination:'subscription',
+		thanksmessage:"Thank you for subscribing!"
+		}
 	)
 }
 
