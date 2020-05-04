@@ -1688,7 +1688,13 @@ Memory=function(name,data,days){
 	catch(err){};
 }
 
+LiveLoad=function(){
+	return Live.saved||(Live.saved=!!PageSearch("live"));
+}
+
 MemoryExpired=function(name){
+	if(LiveLoad())
+		return true;
 	var expired=true;
 	try{
 		expired=localStorage[MemorySlot(name+"_exp")];
