@@ -1705,13 +1705,13 @@ MemoryDuration=function(name,days){
 		return days;
 	}
 	else{//GET
-		var days=15;
+		var days=1;
 		try{
 			days=localStorage[MemorySlot(name+"_days")];
 			if(days)
 				days=Number(days);
 			else
-				days=15;
+				days=1;
 		}
 		catch(err){};
 		return days;
