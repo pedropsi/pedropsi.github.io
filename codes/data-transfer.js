@@ -1351,6 +1351,10 @@ GlocalPath=function(urlpath,relativepath){
 //NavigateGoToPage
 
 Navigate=function(url,samewindow){
+	if(PageRoot(url)===""){
+		var url=PageRoot()+Prefix(Posfix(url,".html"));
+		var samewindow=true;
+	}
 	if(samewindow)
 		window.location.href=url;
 	else{//NewTab
