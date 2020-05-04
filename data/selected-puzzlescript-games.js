@@ -3,6 +3,7 @@
 */
 
 var SelectedGames=[
+{LINK:`b47581d15bc95200036b30bed28393e7`,TITLE:`Polyomino Puzzle`,AUTHOR_LINK:`https://zithral.itch.io/`,AUTHOR:`Zithral`,YEAR:2020,TAGS:["Puzzle","Polyomino"]},
 {LINK:`https://bregehr.itch.io/cutters-and-concrete`,TITLE:`Cutters and Concrete`,AUTHOR_LINK:`https://bregehr.itch.io/`,AUTHOR:`Blake Regehr`,YEAR:2020,TAGS:["Sokoban","Subtraction"]},
 {LINK:`https://le-slo.itch.io/rainwater-honey-oil`,TITLE:`Metamor[ρ]hosis`,AUTHOR_LINK:`https://le-slo.itch.io/`,AUTHOR:`Lucas Le Slo`,YEAR:2020,TAGS:["Gravity"]},
 {LINK:`d6a415a64049d198331d2a033d9ebbc0`,TITLE:`Sasquatch Sokoban`,AUTHOR_LINK:`https://jcgyo.itch.io/`,AUTHOR:`jcGyo & David Skinner`,YEAR:2020,TAGS:["Sokoban","Isometric","Port"]},
