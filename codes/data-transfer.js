@@ -5008,10 +5008,13 @@ DynamicText=function(label,text){
 		return;
 	var label=Prefix(label,"dynamic-");
 	if(typeof text==="undefined"){//Getter
-		return GetElement("."+label).innerText;
+		var e=GetElement("."+label);
+		if(e)
+			return GetElement("."+label).innerText;
+		else
+			return DynamicTextHTML(label);
 	}
 	else{//Setter
-		DynamicText.name=text;
 		var e=DynamicTextHTML(label,text);
 		ReplaceElement(e,"."+label);
 		return e;

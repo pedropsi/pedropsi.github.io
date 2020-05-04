@@ -720,9 +720,10 @@ SaveTest(SafeUrl,"<script>tame(dangers)</script>","","script attempt")
 //////////////////////////////////////////////////////////////////////////////
 // Data transmission
 
-SaveTest(Encode,["a",1],"a=1","encode");
+SaveTest(ParameterPairString,["a",1],"a=1","parameter pair");
+SaveTest(ParameterPairString,["a","how fascinating"],"a=how%20fascinating","utf");
 
-SaveTest(EncodeData,[{"a":1,"b":2}],"a=1&b=2","encode object");
+SaveTest(ParameterString,[{"a":1,"b":2}],"a=1&b=2","full parameter string");
 
 ///////////////////////////////////////////////////////////////////////////////
 ////Store
