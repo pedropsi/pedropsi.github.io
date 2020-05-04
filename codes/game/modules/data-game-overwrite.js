@@ -5,6 +5,11 @@ if(typeof ObtainPlayEndLevelSound==="undefined")
 ////////////////////////////////////////////////////////////////////////////////
 //Puzzlescript overwrite
 
+function consoleError(str){
+	ConsoleAdd(str);
+}
+
+
 //doSetupTitleScreenLevelContinue - Level selector - start saving a stack of checkpoints
 function doSetupTitleScreenLevelContinue(){	LoadGame();};
 
