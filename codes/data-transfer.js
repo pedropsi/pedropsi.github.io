@@ -2110,7 +2110,7 @@ PrependFilterInput=function(InputFilterF,parentSelector,childrenSelector,subpare
 
 AddShareSearch=function(patterntxt,elementSelector){	
 	var tableid="";
-	var tables=GetElements("TABLE");
+	var tables=GetElements("TABLE",".main");
 	if(tables.length>1){
 		tableid=tables.indexOf(elementSelector);
 		tableid="&table="+tableid;
