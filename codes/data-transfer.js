@@ -3415,26 +3415,31 @@ ShoutAnd=function(shoutArray,SuccessShout){
 ////////////////////////////////////////////////////////////////////////////////
 // Data submission in forms
 
-SubmitData=function(dataObject,destinationObj){
-	var data=dataObject;
-	data.formDataNameOrder=destinationObj.headers;		//to delete
-	data.formGoogleSendEmail="";						//to delete
-	data.formGoogleSheetName=destinationObj.sheet;
-
-	//console.log(data);
+SubmitData=function(outflowData){
+	var data=outflowData;
+	console.log(data);
 
 	if(!PreviousSubmission.history)
 		PreviousSubmission.history=[];
 	PreviousSubmission.history.push(data);
 
-	EchoData(data,destinationObj.url);
+	if(data.post)
+		EchoData(data);
+	else // delete
+		EchoData(data,data.url);
 }
 
 SubmitValidAnswer=function(DP){
-	var formDestination=DP.findDestination(DP);
-	var destinationObject=GetDestination(formDestination);
+	var destinationName=DP.findDestination(DP).toLowerCase();
+	console.log(destinationName);
+	var outflowData=Outflows(destinationName);
+	if(outflowData)
+		SubmitData(outflowData);
+
+	/*Legacy method, todo delete
+	var destinationObject=GetDestination(destination);
 	var dataObject=(destinationObject.Data)(DP.qid);
-	SubmitData(dataObject,destinationObject);
+	SubmitData(dataObject,destinationObject);*/
 }
 
 InvalidateAnswer=function(DF){
