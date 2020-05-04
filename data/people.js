@@ -102,24 +102,24 @@ COLLINEYE:{TYPE:"Tester",NAME:"Patrick Collin Eye",TWITTER:"collin_eye"}
 
 PersonalPage=function(linkObj){
 	if(linkObj.ITCH)
-		return "https://"+Unfunctionalise(linkObj.ITCH)+v.ITCH_URL();
+		return "https://"+UnFunction(linkObj.ITCH)+v.ITCH_URL();
 	if(linkObj.TWITTER)
-		return v.TWITTER_URL()+Unfunctionalise(linkObj.TWITTER);
+		return v.TWITTER_URL()+UnFunction(linkObj.TWITTER);
 	if(linkObj.GITHUB_IO)
-		return "https://"+Unfunctionalise(linkObj.GITHUB_IO)+v.GITHUB_IO_URL();
+		return "https://"+UnFunction(linkObj.GITHUB_IO)+v.GITHUB_IO_URL();
 	if(linkObj.GITHUB_COM)
-		return "https://"+Unfunctionalise(linkObj.GITHUB_COM)+v.GITHUB_COM_URL();
+		return "https://"+UnFunction(linkObj.GITHUB_COM)+v.GITHUB_COM_URL();
 	if(linkObj.PERSONAL_PAGE)
-		return Unfunctionalise(linkObj.PERSONAL_PAGE);
+		return UnFunction(linkObj.PERSONAL_PAGE);
 	if(linkObj.GOOGLE_PLUS)
-		return v.GOOGLE_PLUS_URL()+Unfunctionalise(linkObj.GOOGLE_PLUS);
+		return v.GOOGLE_PLUS_URL()+UnFunction(linkObj.GOOGLE_PLUS);
 	else
 		return "";
 }
 
 PersonTemplate=function(linkObj){
-	var name=Unfunctionalise(linkObj.NAME);
-	var alias=Unfunctionalise(linkObj.ALIAS||"");
+	var name=UnFunction(linkObj.NAME);
+	var alias=UnFunction(linkObj.ALIAS||"");
 	if(alias)
 		name=`${name} (${alias})`;
 

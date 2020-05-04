@@ -452,20 +452,7 @@ CSF							:	()=>	`<span>></span></code>`
 
 
 //Variables
-Functionalise=function(data){
-	if (typeof data==="function")
-		return data;
-	else
-		return function(){return data;};
-}
 
-
-Unfunctionalise=function(data){
-	if (typeof data==="function")
-		return data();
-	else
-		return data;
-}
 
 NormaliseVariables=function(Variables,TemplateFunction) {
 	return MapObject(Variables,function (v,k,o){

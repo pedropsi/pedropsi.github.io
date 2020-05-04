@@ -424,7 +424,7 @@ function KeyboardButton(){
 
 function WrenchButton(){
 	if(ConsoleExternal())
-		return GameBarButtonHTML("wrench",{onclick:'Navigate(GameHackURL());'})
+		return GameBarButtonHTML("wrench",{onclick:'Navigate(GameHackURL(),false);'})
 	else
 		return "";
 }
@@ -1926,24 +1926,28 @@ function MoreButton(){
 	return GameBarButtonHTML("more",{onclick:'RequestMore();'});	
 }
 
-ListenOnce("LoadPGD",function(){ShowButton(MoreButton)});
+if(Memory("PGD")){
+	ListenOnce("GameBar",function(){ShowButton(MoreButton)});
+}else{
+	ListenOnce("LoadPGD",function(){ShowButton(MoreButton)});
+}
 
 function RequestMore(){
 	if(!GameEntryData)
 		return;
 	var id=PageSearch("game");
-	var data=GameEntryData["game-console.html?game="+id];
+	var data=Memory("game-console.html?game="+id);
 	if(!id||!data)
 		return;
 	
 	var author=data["author-consensus"];
 	function SameAuthor(au){
 		return function(d){
-			var d=GameEntryData[d];
+			var d=Memory(d);//game data hook
 			return In(d["author-consensus"],au)||In(au,d["author-consensus"]);
 		}
 	}
-	var games=GameEntryData.list.filter(SameAuthor(author)).map(function(id){return GameDropDownButtonHTML(id,false)});
+	var games=Memory("PGD").filter(SameAuthor(author)).map(function(id){return GameDropDownButtonHTML(id,false)});
 	var DPFields=[
 			['plain',{questionname:"More games by: <b>"+author+"</b>"}],
 			['plain',{questionname:games.join("\n")}],

@@ -31,17 +31,29 @@ else if(PageIdentifier()==="game-console"){
 			ListenOnce("LoadPGD",LoadPGDMenu);
 		}
 		else if(PageSearch("submit")!==""){	//auto-submission
-			function GameInfoRetrieved(){return typeof state!=="undefined"&&state.levels.length>0;};
+			
 			function AutoSub(){LoaderInFolder("codes/game")("puzzlescript-tagger");};
 			DelayUntil(GameInfoRetrieved,AutoSub);
 		}
-		else
-			ListenOnce("LoadPGD",function(){DelayUntil(GameInfoRetrieved,AutoCheckYear)});
+		else{
+			if(GameInfoRetrieved()){
+				AutoCheckYear();
+				console.log("checked");
+			}else{
+				console.log("waiting");
+				ListenOnce("LoadPGD",function(){DelayUntil(GameInfoRetrieved,AutoCheckYear)});
+			}
+		}
 	}
 
 	ListenOnce('puzzlescript-database-game',StartPGD);
 	
 }
+
+GameInfoRetrieved=function(){
+	return typeof state!=="undefined"&&state.levels.length>0;
+};
+
 /*else if(PageIdentifier()==="game-editor"){
 	LoadPGD();
 	ReplaceElement(PGDMenuHTML(),ParentElement("exampleDropdown")); //PS Editor Selector
@@ -62,11 +74,7 @@ function LoadPGDTable(){
 }
 
 function LoadPGD(){
-	var PGDURL=MacroURL({
-		docId:"158LEND9dCQF53UFvB5BEWjQmgm47PUv2jBXdr8W3xWc",
-		sheetName:"Games-List",
-		rowStart:8
-	});
+	var PGDURL=MacroURL(Inflows("PGD"));
 	LoadData(PGDURL,RegisterPGDEntries);
 }
 
@@ -87,7 +95,7 @@ function OverwritePGD(){
 
 function DeployPGD(headers,RowGenerator,targetID){
 	var caption="<span class='discard'>"+databaseTitle+" <b>up-to-date</b>.</span>";
-	var rowArray=GameEntryData.list.map(RowGenerator);
+	var rowArray=Memory("PGD").map(RowGenerator);
 	var table=TableHTML(caption,headers,rowArray);
 	ReplaceChildren(table,targetID);
 	function TableSorter(header){SortTable(targetID,header,true)};
@@ -260,15 +268,19 @@ function GameEntryData(dataline){
 	
 	data.yearHTML=DisplayDate(data.days,data["year-consensus"]);
 
-	
-	GameEntryData[data.playlink]=data; //data hook, to be accessed by id of each row
-	
-	if(!GameEntryData.list)
-		GameEntryData.list=[];
-	
-	if(data.playlink!=="")
-		GameEntryData.list.push(data.playlink);
-	
+	var gameList=Memory("PGD");
+
+	if(!gameList){
+		gameList=[];
+		Memory("PGD",gameList);
+	}
+
+	if(data.playlink!==""&&!In(gameList,data.playlink)){
+		gameList.push(data.playlink);
+		Memory("PGD",gameList);
+		Memory(data.playlink,data);
+	}
+
 	return data;
 };
 
@@ -281,14 +293,14 @@ function EditButtonTD(id){
 };
 
 function GameRowHTML(id){
-	var data=GameEntryData[id];
+	var data=Memory(id);
 	if(!data)
 		return "";
 	return "\t<tr id='"+data.playlink+"'>\n"+TDHTML(data.titleHTML+data.notesHTML)+"\n"+TDHTML(data.authorHTML+data.authorOriginalHTML)+"\n"+TDHTML(data.yearHTML)+"\n"+EditButtonTD(id)+"</tr>";
 }
 
 function PrototypeExampleRowHTML(id){
-	var data=GameEntryData[id];
+	var data=Memory(id);
 	if(!data)
 		return "";
 	return "\t<tr id='"+data.playlink+"'>\n"+TDHTML(data.titleHTML)+"\n"+TDHTML(data.authorHTML)+"\n"+TDHTML(data.classification)+"\n"+TDHTML(data["notes-consensus"])+"\n"+EditButtonTD(id)+"</tr>";
@@ -326,16 +338,24 @@ function LoadPGDMenu(){
 
 function AutoCheckYear(){
 	var year=Number(sourceYear);
-	var data=GameEntryData["game-console.html?game="+PageSearch("game")];
+	var data=Memory("game-console.html?game="+PageSearch("game"));
 	var yedit=data["year-edit"];
 	console.log("YEARS",year,yedit);
 	if(year>0&&year!==yedit){
-		SubmitData({"year-edit":year,"title":data.title,"author":data.author,"mode":"edit"},GetDestination("PGD"));
+		data=FuseObjects(data,{
+			"year-edit":year,
+			"title":data.title,
+			"author":data.author,
+			"mode":"edit"
+			});
+		data=FuseObjects(data,Outflows("PGD_default"));
+		SubmitData(data);
 	}
 }
 
+
 function GameDropDownButtonHTML(id,showauthor){
-	var data=GameEntryData[id];
+	var data=Memory(id);
 	var title=data["title-consensus"];
 	author=" by "+data["author-consensus"];
 	if(showauthor===false)
@@ -352,10 +372,10 @@ function InputFilterPGDMenu(parentSelector,filterselector,childSelector,subparen
 	
 	function FilterDisplay10(children){
 		function MatchData(id){
-			var data=GameEntryData[id];
+			var data=Memory(id);
 			return data&&data.consolable&&(InSimple(data["title-consensus"],patterntxt)||InSimple(data["author-consensus"],patterntxt));
 		}
-		var ch=GameEntryData.list.filter(MatchData);
+		var ch=Memory("PGD").filter(MatchData);
 		if(ch.length)
 			ch=ch.map(GameDropDownButtonHTML)
 		return ch;

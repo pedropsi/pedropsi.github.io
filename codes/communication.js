@@ -109,10 +109,20 @@ ServiceWorkerCache=function(sourceArray){
 ///////////////////////////////////////////////////////////////////////////////
 // Data transmission - JSON, to a script in url "url"
 
-	if(!data||!url)
 EchoPureData=function(data,url){
+	if(!data)
 		return;
-	
+
+	if(!url){//special case 
+		if(data.post)
+			return LoadData(MacroURL(data),console.log);
+		return;
+	}
+	//General case
+	UploadData(data,url);
+}
+
+UploadData=function(data,url){
 	var encoded=ParameterString(data);
 	var xhr=new XMLHttpRequest();
 		xhr.open('POST',url);
@@ -123,6 +133,7 @@ EchoPureData=function(data,url){
 			return;
 		};
 		xhr.send(encoded);
+
 }
 
 EchoData=function(data,url){
@@ -287,45 +298,6 @@ LoadTableHTML=function(jsondata,RowF,headers){
 
 
 //////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//Form Types
-
-var DESTINATIONS={}; 
-
-var DESTINATION_HOF={
-	url:"https://script.google.com/macros/s/AKfycbzgwZUKFmuNQin6Kq4-kTMBSZtz9TapE6kxpZyk7p2tRaanLD1w/exec",
-	headers:"[\"identifier\",\"name\",\"honour\"]",
-	sheet:"Hall of fame",
-	name:"HOF",
-	Data:function(qid){return{
-		identifier:PageTitle(),
-		name:FindData("name",qid),
-		honour:ObtainHonour()
-		}}
-	}
-
-// Honour
-if(!ObtainHonour){
-	function ObtainHonour(){return HintsHonour()}; 
-}
-
-var who=UserId();	
-var DESTINATION_FEEDBACK={
-	url:"https://script.google.com/macros/s/AKfycbwB-a8j-INbkzTiQFJ55qETLYkdZrRvSg2s8urj9bPbG0XkBg9z/exec",
-	headers:"[\"identifier\",\"context\",\"question\",\"answer\",\"name\",\"state\"]",
-	sheet:"Feedback",
-	name:"Feedback",
-	Data:function(qid){
-		return{
-			identifier:PageIdentifier(),
-			context:String(CurLevelNumber()),
-			question:GetElement(".question",qid).innerHTML,
-			answer:FindData("answer",qid),
-			name:who,
-			state:FindData("snapshot",qid)==="yes"?PrintGameState():"---"
-			}}
-}
 
 AnonimiseBlank=function(name){
 	if(name!==undefined&&SomeTextValidate(name))
@@ -334,150 +306,194 @@ AnonimiseBlank=function(name){
 		return "Anonymous fan "+RandomChoice("♩♬♪♬♫")+RandomChoice("♩♬♪♬♫")+RandomChoice("♩♬♪♬♫");
 }
 
-var DESTINATION_GUESTBOOK={
-	url:DESTINATION_HOF.url,
-	headers:"[\"name\",\"identifier\",\"comment\",\"id\"]",
-	sheet:"Guestbook",
-	name:"Guestbook",
-	Data:function(qid){return{
-		identifier:PageTitle(),
-		comment:FindData("answer",qid),
-		name:AnonimiseBlank(FindData("name",qid)),
-		id:RequestMessageReply.currentid
-		}}
-	}
 
-function commentID(){return "no comment yet!"};
-var DESTINATION_COMMENT={
-	url:DESTINATION_GUESTBOOK.url,
-	headers:DESTINATION_GUESTBOOK.headers,
-	sheet:DESTINATION_GUESTBOOK.sheet,
-	name:"Comments",
-	Data:function(qid){return{
-		identifier:commentID(),
-		comment:FindData("answer",qid),
-		name:FindData("name",qid),
-		}}
-	}
-	
+//////////////////////////////////////////////////////////////////////
+//Form Types
 
-var DESTINATION_CONTACT={
-	url:DESTINATION_HOF.url,
-	headers:"[\"email\",\"name\",\"identifier\",\"message\",\"subject\",\"id\"]",
-	sheet:"Contact",
-	name:"Contact",
-	Data:function(qid){return{
-		identifier:PageIdentifier(),
-		message:FindData("message",qid),
-		name:FindData("name",qid),
-		email:FindData("email",qid),
-		subject:FindData("subject",qid)
-		}}
+Inflows=function(name){
+	var flows={
+	"hall-of-fame":{
+		docId:"1tp42m_9MoMN4IHzO6H9aqTkU2wt_FtdWGK3Q7Uwb9hw",
+		sheetName:"Hall-of-Fame",
+		rowStart:8
+		},
+	"guestbook":{
+		docId:"1tp42m_9MoMN4IHzO6H9aqTkU2wt_FtdWGK3Q7Uwb9hw",
+		sheetName:"Guestbook",
+		rowStart:8
+		},
+	"visit":{
+		docId:"1y5KANZWMYJglC8v3VdUm-V__aiMe2q3zvRWNS3BI9IM",
+		sheetName:"Visit",
+		rowStart:3,
+		colEnd:2
+	},
+	"PGD":{
+		docId:"158LEND9dCQF53UFvB5BEWjQmgm47PUv2jBXdr8W3xWc",
+		sheetName:"PGD",
+		rowStart:8
 	}
+	};
+	if(name)
+		return UnFunction(flows[name]);
+	else
+		return flows;
+}
 
-var DESTINATION_SUBSCRIPTION={
-	url:DESTINATION_FEEDBACK.url,
-	headers:"[\"name\",\"address\"]",
-	sheet:"Subscription",
-	name:"Subscription",
-	Data:function(qid){return{
-		name:FindData("name",qid),
-		address:FindData("address",qid)
-		}}
-	}
-
-var DESTINATION_ORDER={
-	url:DESTINATION_FEEDBACK.url,
-	headers:"[\"identifier\",\"address\"]",
-	sheet:"Order",
-	name:"Order",
-	Data:function(qid){return{
-		identifier:PageTitle(),
-		address:FindData("address",qid)
-		}}
-	}
-
-var DESTINATION_KEYS={
-	url:DESTINATION_FEEDBACK.url,
-	headers:"[\"identifier\",\"key\"]",
-	sheet:"Keys",
-	name:"Keys",
-	Data:function(qid){return{
-		identifier:PageTitle(),
-		key:FindData("answer",qid)
-		}}
-	}
-	
-var DESTINATION_PASS={
-	url:DESTINATION_FEEDBACK.url,
-	headers:"[\"identifier\",\"name\",\"address\",\"account\"]",
-	sheet:"Pass",
-	name:"Pass",
-	Data:function(qid){return{
-		identifier:PageTitle(),
-		name:FindData("name",qid),
-		address:FindData("address",qid),
-		account:FindData("answer",qid),
-		type:FindData("type",qid)
-		}}
-	}
-
-var DESTINATION_PGD={
-	url:"https://script.google.com/macros/s/AKfycbwl1oMrc36DizbST5TJAxCYMV-5hnGpHsVs_U8fsgZwBqBZnsWm/exec",
-	headers:"[\"title\",\"author\",\"link\",\"page\",\"notes\",\"title-edit\",\"author-edit\",\"link-edit\",\"page-edit\",\"notes-edit\",\"year-edit\",\"mode\"]",
-	sheet:"Games List",
-	name:"PGD",
-	Data:function(qid){
-		var dc=Clone(RequestPGDSubmission['lastdata']);
-		var data={};
+Outflows=function(name){
+	var flows={
+		"hall-of-fame":function(){return{
+			post:true,
+			docId:"1tp42m_9MoMN4IHzO6H9aqTkU2wt_FtdWGK3Q7Uwb9hw",
+			sheetName:"Hall-of-Fame",
+			rowStart:8,
+			identifier:PageTitle(),
+			name:FindData("name"),
+			honour:HintsHonour?HintsHonour():""
+		}},
+		"guestbook":function(){return{
+			post:true,
+			docId:"1tp42m_9MoMN4IHzO6H9aqTkU2wt_FtdWGK3Q7Uwb9hw",
+			sheetName:"Guestbook",
+			rowStart:8,
+			identifier:PageTitle(),
+			comment:FindData("answer"),
+			name:AnonimiseBlank(FindData("name")),
+			id:RequestMessageReply.currentid
+		}},
+		"feedback":function(){return{
+			post:true,
+			docId:"170q-TzTN7uita_7Jn8CS05DdU2VRjb4HRZYAOlf4AVE",
+			sheetName:"Feedback",
+			identifier:PageIdentifier(),
+			context:String(CurLevelNumber()),
+			question:GetElement(".question").innerHTML,
+			answer:FindData("answer"),
+			name:UserId(),
+			state:FindData("snapshot")==="yes"?PrintGameState():"---"
+		}},
+		"contact":function(){return{
+			post:true,
+			docId:"170q-TzTN7uita_7Jn8CS05DdU2VRjb4HRZYAOlf4AVE",
+			sheetName:"Contact",
+			identifier:PageIdentifier(),
+			message:FindData("message"),
+			name:FindData("name"),
+			email:FindData("email"),
+			subject:FindData("subject")
+		}},
+		"subscription":function(){return{
+			post:true,
+			docId:"170q-TzTN7uita_7Jn8CS05DdU2VRjb4HRZYAOlf4AVE",
+			sheetName:"Subscription",
+			name:FindData("name"),
+			email:FindData("address"),
+			updates:FindData("updates"),
+			message:FindData("message")
+		}},
+		"preorder":function(){return{
+			post:true,
+			docId:"170q-TzTN7uita_7Jn8CS05DdU2VRjb4HRZYAOlf4AVE",
+			sheetName:"Order",
+			type:"preorder",
+			product:FindData("product"),
+			price:FindData("price"),
+			name:FindData("name"),
+			email:FindData("email"),
+			comment:FindData("answer"),
+			address:FindData("address"),
+			fiscalnumber:FindData("fiscalnumber"),
+			country:FindData("country"),
+			taxrate:FindData("taxrate")
+		}},
+		"purchase":function(){return{
+			post:true,
+			docId:"170q-TzTN7uita_7Jn8CS05DdU2VRjb4HRZYAOlf4AVE",
+			sheetName:"Order",
+			type:"purchase",
+			product:FindData("product"),
+			price:FindData("price"),
+			name:FindData("name"),
+			email:FindData("email"),
+			comment:FindData("answer"),
+			address:FindData("address"),
+			fiscalnumber:FindData("fiscalnumber"),
+			country:FindData("country"),
+			taxrate:FindData("taxrate")
+		}},
+		"PGD_default":{
+				post:true,
+				docId:"158LEND9dCQF53UFvB5BEWjQmgm47PUv2jBXdr8W3xWc",
+				sheetName:"PGD"
+		},
+		"PGD":function(){
+			var data={};
 		
-		data.mode=FindData("mode",qid);
-		if(!data.mode)
-			data.mode="";
+			data.mode=FindData("mode");
+			if(!data.mode)
+				data.mode="";
 		
-		data["year-edit"]=String(Year());
+			data["year-edit"]=String(Year());
 		
-		if(data.mode!=="edit"){
-			function SetDataF(type){
-				data[type]=FindData(type,qid);
+			if(data.mode!=="edit"){
+				function SetDataF(type){
+					data[type]=FindData(type);
+				}
 			}
-		}
-		else{
-			function SetDataF(type){
-				var d=FindData(type,qid);
-				if(d!==data[type+"-consensus"])
-					data[type+"-edit"]=d;
-				data[type]=dc[type];
+			else{
+				var dc=Clone(RequestPGDSubmission['lastdata']);
+				function SetDataF(type){
+					var d=FindData(type);
+					if(d!==data[type+"-consensus"])
+						data[type+"-edit"]=d;
+						data[type]=dc[type];
+				}
 			}
-		}
-		['title','author','link','page','notes','year'].map(SetDataF);
-		delete data['year'];
+			['title','author','link','page','notes','year'].map(SetDataF);
 		
-		console.log(data);
-		return data;
-	}
+			delete data['year'];
+		
+			return FuseObjects(data,Outflows("PGD_default"));
+			},
+	/*	"won":function(){return{
+			post:true,
+			docId:"1y5KANZWMYJglC8v3VdUm-V__aiMe2q3zvRWNS3BI9IM",
+			sheetName:"Won",
+			startCol:4,
+			col:CurLevelNumber()-1,
+			identifier:PageIdentifier(),
+			uid:navigator.userAgent||UserId(),
+		}},*/
+		"visit":function(){return{
+			post:true,
+			docId:"1y5KANZWMYJglC8v3VdUm-V__aiMe2q3zvRWNS3BI9IM",
+			sheetName:"Visit",
+			identifier:PageIdentifier(),
+			uid:navigator.userAgent||UserId()
+		}},
+		"country":function(){return{
+			post:true,
+			docId:"1y5KANZWMYJglC8v3VdUm-V__aiMe2q3zvRWNS3BI9IM",
+			sheetName:"Country",
+			identifier:UserCountry(),
+			uid:navigator.userAgent||UserId()
+		}}
+	};
+	if(name)
+		return UnFunction(flows[name]);
+	else
+		return flows;
 }
 
 
-function RegisterDestination(DESTINATION){
-	DESTINATIONS[DESTINATION.name]=DESTINATION;
-}
 
-[	DESTINATION_HOF,
-	DESTINATION_GUESTBOOK,
-	DESTINATION_COMMENT,
-	DESTINATION_CONTACT,
-	DESTINATION_FEEDBACK,
-	DESTINATION_SUBSCRIPTION,
-	DESTINATION_ORDER,
-	DESTINATION_KEYS,
-	DESTINATION_PASS,
-	DESTINATION_PGD].map(RegisterDestination);
 
 //////////////////////////////////////////////////////////////////////
 //Hall of Fame
 
 RequestHallOfFame=function(){
+	if(ConsoleExternal())
+		return;
 	RequestDataPack([
 	['alias',{
 		questionname:"Enter the Hall of Fame:",
@@ -486,7 +502,7 @@ RequestHallOfFame=function(){
 		qerrorcustom:"The Hall of Fame's guards ask for at least 2 alphanumerics!"}
 	]],
 	{
-		destination:"HOF",
+		destination:"hall-of-fame",
 		qonclose:RequestModalWinnerMessage,
 		qonsubmit:RequestModalWinnerMessage
 	});
@@ -593,7 +609,7 @@ RequestGuestbook=function(){
 			thanksmessage:"Thank you for your message in the Guestbook!"}],
 		['alias',{}]
 	],{
-		destination:'Guestbook'
+		destination:'guestbook'
 		}
 	)
 }
@@ -607,7 +623,7 @@ RequestMessageReply=function(nid){
 			thanksmessage:"Your reply has been posted! Thank you."}],
 		['alias',{}]
 	],{
-		destination:'Guestbook'
+		destination:'guestbook'
 		}
 	)
 }
@@ -637,10 +653,10 @@ OpenModalSubscribe=function(){
 //////////////////////////////////////////////////////////////////////
 //Order
 
-	
-	RequestDataPack([['email',{questionname:campaigntext}]],{
-			destination:'Order',
 OpenModalPreOrder=function(campaigntext){
+	RequestDataPack([
+		['email',{questionname:campaigntext}]],{
+			destination:'preorder',
 			thanksmessage:"Your booking was placed. Thank you!"
 		});
 }
@@ -748,7 +764,7 @@ if(PageIdentifier()==="game-editor"){
 RequestPGDSubmission=function(editData,editmode){
 	if(editData){
 		if(IsString(editData))
-			editData=GameEntryData[editData];
+			editData=Memory(editData);// game hook
 	
 		if(editmode===true)
 			editData.mode="edit";
@@ -863,7 +879,7 @@ RequestContact=function(){
 		}]
 	];
 	RequestDataPack(DFOpts,{
-		destination:"Contact",
+		destination:"contact",
 		qtargetid:"contact-request",
 		qdisplay:LaunchEmbed,
 		closeonblur:false,
@@ -938,7 +954,6 @@ RequestDebugger=function(){
 			qid:"debugger"
 		}]
 	],{
-		destination:'',
 		closeonblur:false,
 		actionText:'Evaluate',
 		action:DebuggerEvaluate,

@@ -43,6 +43,19 @@ Identity=function(i){return i;};
 True=function(){return true};
 False=function(){return false};
 
+Functionalise=function(data){
+	if (typeof data==="function")
+		return data;
+	else
+		return function(){return data;};
+}
+UnFunction=function(data){
+	if (typeof data==="function")
+		return data();
+	else
+		return data;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Deep equality testing
 EqualArray=function(a,b){
@@ -1016,6 +1029,8 @@ SafeUrl=function(tex){
 }
 
 //Search queries
+
+
 PageSearch=function(parameter,page){
 	var l=document.createElement("a");
 	l.href=page||document.URL;
@@ -1359,7 +1374,7 @@ Navigate=function(url,samewindow){
 		window.location.href=url;
 	else{//NewTab
 		var id=GenerateId();
-		PreAddElement(AHTML(" ",url,{"id":id}),"body");
+		PreAddElement(AHTML(" ",url,{"id":id,"target":"_blank"}),"body");
 		GetElement(id).click();
 		RemoveElement(id);
 	}
@@ -1577,6 +1592,19 @@ ParameterString=function(parametersObject){
 	return MapKeys(FlipKeysValues(parametersObject),ParameterPairString).join("&");
 }
 
+Parameters=function(url){
+	var l=document.createElement("a");
+	l.href=url;
+	l=l.search;
+	var parameters=UnPrefix(l,"?").split("&");
+	var data={};
+	StringParameterPair=function(string){
+		data[decodeURIComponent(UnAfterfix(p,"="))]=decodeURIComponent(UnBeforfix(p,"="))
+	};
+	parameters.map(StringParameterPair);
+	return data;
+}
+
 //External resources
 MacroBareURL=function(c,parametersObject){
 	var p="";
@@ -1632,10 +1660,14 @@ LoadData=function(url,SuccessF,header,FailureF){
 // Persistent Memory
 
 MemorySlot=function(name){
+	if(!MemorySlot['_list'])
+		MemorySlot['_list']=[];
+
 	if(!name)
 		return MemorySlot['_list'];
 	
-	MemorySlot['_list']=Union([name],MemorySlot['_list']||[]);
+	if(!In(MemorySlot['_list'],name))
+		MemorySlot['_list'].push(name);
 	
 	return PageRoot()+"_"+name.toLowerCase();
 }
@@ -2444,7 +2476,7 @@ DefaultDataPack=function(){
 		qid:GenerateId(),				//id
 		qclass:"",						//class
 
-		destination:'Feedback',			//Name of data repository (default)
+		destination:'',					//Name of data repository (empty means non-submittable)
 		findDestination:FindDestination,//Get Destination
 		requireConnection:true,			//Does it need a connection?
 
@@ -2481,7 +2513,6 @@ DataFieldTypes=function(){
 		qsubmittable:false},
 	message:{
 		action:Close,
-		destination:'',
 		qtype:LongAnswerHTML,
 		qdisplay:LaunchConsoleThanks},
 	email:{
@@ -2745,7 +2776,7 @@ QuestionHTML=function(DP){
 
 LaunchThanksBalloon=function(DP){
 	RequestDataPack(
-		[['plain',{questionname:DP.thanksmessage,destination:""}]],
+		[['plain',{questionname:DP.thanksmessage}]],
 		{qtargetid:DP.qtargetid,
 		qdisplay:LaunchAvatarBalloon,
 		requireConnection:false});
@@ -3425,7 +3456,7 @@ SubmitData=function(outflowData){
 	if(!PreviousSubmission.history)
 		PreviousSubmission.history=[];
 	PreviousSubmission.history.push(data);
-
+	
 	if(data.post)
 		EchoData(data);
 	else // delete
@@ -3433,8 +3464,7 @@ SubmitData=function(outflowData){
 }
 
 SubmitValidAnswer=function(DP){
-	var destinationName=DP.findDestination(DP).toLowerCase();
-	console.log(destinationName);
+	var destinationName=DP.findDestination(DP);
 	var outflowData=Outflows(destinationName);
 	if(outflowData)
 		SubmitData(outflowData);
