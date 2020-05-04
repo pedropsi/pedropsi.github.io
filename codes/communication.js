@@ -461,7 +461,7 @@ Outflows=function(name){
 			sheetName:"Won",
 			rowStart:3,
 			colStart:4,
-			col:HasCheckpointed()?CurCheckpointString():CurLevelNumber(),
+			col:Checkpointed()?CurCheckpointString():CurLevelNumber(),
 			identifier:PageIdentifier()
 		}},
 		"visit":function(){return{
