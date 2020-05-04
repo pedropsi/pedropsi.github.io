@@ -109,8 +109,8 @@ ServiceWorkerCache=function(sourceArray){
 ///////////////////////////////////////////////////////////////////////////////
 // Data transmission - JSON, to a script in url "url"
 
-function EchoPureData(data,url){
 	if(!data||!url)
+EchoPureData=function(data,url){
 		return;
 	
 	var encoded=ParameterString(data);
