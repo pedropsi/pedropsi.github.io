@@ -17,11 +17,15 @@ function GameIdentifier(){
 
 // Echo specifics
 function EchoLevelWin(curlevel){
+	EchoData(Outflows("won"));
+
 	var leveldata=UpdateLevelData(curlevel);
 	EchoLevelData(leveldata);
 }
 
 function EchoCheckpoint(){
+	EchoData(Outflows("won"));
+
 	var leveldata=UpdateLevelCheckpointData(curlevel);
 	EchoLevelData(leveldata);
 	ClearLevelRecord();
@@ -142,6 +146,9 @@ function ResetLevelTime(){
 //Checkpoint
 function CheckpointString(curlevel,curcheckpoint){
 	return String(curlevel)+"»"+String(curcheckpoint);
+}
+function CurCheckpointString(){
+	return CheckpointString(CurLevelNumber(),curcheckpoint)
 }
 
 function UpdateLevelCheckpointData(curlevel){

@@ -455,18 +455,19 @@ Outflows=function(name){
 		
 			return FuseObjects(data,Outflows("PGD_default"));
 			},
-	/*	"won":function(){return{
+		"won":function(){return{
 			post:true,
 			docId:"1y5KANZWMYJglC8v3VdUm-V__aiMe2q3zvRWNS3BI9IM",
 			sheetName:"Won",
-			startCol:4,
-			col:CurLevelNumber()-1,
-			identifier:PageIdentifier(),
-			uid:navigator.userAgent||UserId(),
-		}},*/
+			rowStart:3,
+			colStart:4,
+			col:HasCheckpointed()?CurCheckpointString():CurLevelNumber(),
+			identifier:PageIdentifier()
+		}},
 		"visit":function(){return{
 			post:true,
 			docId:"1y5KANZWMYJglC8v3VdUm-V__aiMe2q3zvRWNS3BI9IM",
+			rowStart:3,
 			sheetName:"Visit",
 			identifier:PageIdentifier(),
 			uid:navigator.userAgent||UserId()
@@ -474,6 +475,7 @@ Outflows=function(name){
 		"country":function(){return{
 			post:true,
 			docId:"1y5KANZWMYJglC8v3VdUm-V__aiMe2q3zvRWNS3BI9IM",
+			rowStart:3,
 			sheetName:"Country",
 			identifier:UserCountry(),
 			uid:navigator.userAgent||UserId()
