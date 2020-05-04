@@ -1,7 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Analytics and Actions
 var analyticsURL="https://script.google.com/macros/s/AKfycbwuyyGb7XP7H91GH_8tZrXh6y_fjbZg4vSxl6S8xvAAEdyoIHcS/exec";
-var clearance =["test","debug"];
 var dataHeaders={
 	"analytics":	"[\"identifier\",\"language\",\"timezone\",\"screen\",\"agent\",\"from\",\"campaign\",\"name\"]",
 	"actions":		"[\"identifier\",\"type\",\"target\",\"name\"]",
@@ -177,7 +176,14 @@ NightModeToggled=function(b){Listen("click", function(){RegisterNightModeToggled
 // Analytics Behaviour
 
 AnalyticsAllowed=function(){
-	return (!In(clearance,PageTag())&&!FileLinked(PageURL()))||(PageSearch("source")==="homescreen");
+	var disallowed=PageSearch("test")||PageSearch("debug")||FileLinked(PageURL());
+		disallowed=Memory("analyticsDisallowed")||disallowed;
+		Memory("analyticsDisallowed",disallowed);
+	return !disallowed;
+}
+
+IncognitoText=function(){
+	return AnalyticsAllowed()?" (analytics on)":" <em>incognito</em>";
 }
 
 AnalyticsStart=function(){
@@ -213,7 +219,7 @@ DeployViewCounter=function(viewdata){
 	
 	viewdata=viewdata[0][1];
 	
-	DynamicText("view-counter",ObtainSymbol("eye")+"\n"+viewdata);
+	DynamicText("view-counter",ObtainSymbol("eye")+"\n"+viewdata+IncognitoText());
 }
 
 //////////////////////////////////////////////////////////////////////

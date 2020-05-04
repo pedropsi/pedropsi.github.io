@@ -104,7 +104,7 @@ if(typeof ObtainLevelTitle==="undefined"){
 	var ObtainLevelTitle=function(lvl){
 		if(!lvl)
 			return "";
-		if(HasCheckpoint())
+		if(Checkpointed())
 			return "Select checkpoint "+lvl;
 		else
 			return LevelGatedTitle(lvl);
@@ -662,7 +662,7 @@ function CanSaveLocally(){
 		}
 	catch(e){return false;} //Log error
 }
-function HasCheckpoint(){
+function Checkpointed(){
 	return LocalStorage("checkpoint").length>0;
 }
 function HasLevel(){
@@ -788,7 +788,7 @@ function PushSaveCheckpoint(levelTarget){
 
 function LoadGame(){
 	if(HasLevel()){
-		if(HasCheckpoint()){
+		if(Checkpointed()){
 			LoadLastCheckpoint();
 		}
 		return LoadLevel();
@@ -1058,7 +1058,7 @@ function LevelSelectorMessage(){
 }
 
 function RequestLevelSelector(){
-	if(!HasCheckpoint()){
+	if(!Checkpointed()){
 		var DPOpts={
 			questionname:ChosenLevelDescription(),
 			qchoices:UnlockedLevels().map(StarLevelNumber),
@@ -1185,7 +1185,7 @@ function ChooseLevel(choice){
 };
 
 function SelectLevel(lvl){
-	if(HasCheckpoint())
+	if(Checkpointed())
 		GoToScreenCheckpoint(lvl);
 	else if(In(UnlockedLevels(),lvl))
 		SelectUnlockedLevel(lvl);
@@ -1266,7 +1266,7 @@ function ResetLevel(){
 
 
 function LoadLastCheckpoint(){
-	if(HasCheckpoint()){
+	if(Checkpointed()){
 		var stack=GetCheckpoints();
 		curcheckpoint=stack.length-1;
 		curlevelTarget=stack[curcheckpoint];

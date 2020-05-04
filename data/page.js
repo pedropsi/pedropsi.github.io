@@ -84,7 +84,7 @@ PageFeaturesDOM=function(){
 	StartNightMode();
 	Connection();
 	
-	if(PageTag()==="debug")
+	if(PageSearch("debug"))
 		RequestDebugger();
 
 	if(PageIdentifier()==="contact")

@@ -1689,7 +1689,7 @@ Memory=function(name,data,days){
 }
 
 LiveLoad=function(){
-	return Live.saved||(Live.saved=!!PageSearch("live"));
+	return !!LiveLoad.saved||(LiveLoad.saved=!!PageSearch("live"));
 }
 
 MemoryExpired=function(name){

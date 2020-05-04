@@ -2,12 +2,12 @@
 // Echo
 
 function EchoLevelData(leveldata){
-	if(GameAnalyticsClearance()){
+	if(GameAnalyticsAllowed()){
 		EchoData(leveldata,leveldataURL);
 	}
 }
 
-function GameAnalyticsClearance(){
+function GameAnalyticsAllowed(){
 	return AnalyticsAllowed()&&PageIdentifier()!=="game-console";
 }
 
