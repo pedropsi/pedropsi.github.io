@@ -2110,10 +2110,13 @@ PrependFilterInput=function(InputFilterF,parentSelector,childrenSelector,subpare
 
 AddShareSearch=function(patterntxt,elementSelector){	
 	var tableid="";
-	var tables=GetElements("TABLE",".main");
+	var tables=GetElements("TABLE");
 	if(tables.length>1){
 		tableid=tables.indexOf(elementSelector);
-		tableid="&table="+tableid;
+		if(tableid)
+			tableid="&table="+tableid;
+		else
+			tableid="";
 	}
 
 	var shareLink=PageUnSearch()+"?search="+LowerSimpleString(patterntxt)+tableid;
