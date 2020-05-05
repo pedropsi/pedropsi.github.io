@@ -57,8 +57,8 @@ UserLanguageCountryCode=function(){
 
 UserCountry=function(){
 	var code=UserLanguageCountryCode();
-	if(In(CountryCodes(),code))
-		return CountryCodes()[code];
+	if(In(CodeCountry(),code))
+		return CodeCountry()[code];
 	else 
 		return window.navigator.language;//fallback to analise
 }
@@ -223,8 +223,9 @@ DeployViewCounter=function(viewdata){
 }
 
 //////////////////////////////////////////////////////////////////////
+// Country Counter and World map
 
-CountryCodes=function(){
+CodeCountry=function(){
 	return {
 "AD":"Andorra",
 "AE":"United Arab Emirates",
@@ -264,7 +265,7 @@ CountryCodes=function(){
 "BY":"Belarus",
 "BZ":"Belize",
 "CA":"Canada",
-"CC":"Cocos",
+"CC":"Cocos Islands",
 "CD":"Democratic Republic of the Congo",
 "CF":"Central African Republic",
 "CG":"Republic of the Congo",
@@ -346,8 +347,8 @@ CountryCodes=function(){
 "KI":"Kiribati",
 "KM":"Comoros",
 "KN":"Saint Kitts and Nevis",
-"KP":"Korea",
-"KR":"Korea",
+"KP":"North Korea",
+"KR":"South Korea",
 "KW":"Kuwait",
 "KY":"Cayman Islands",
 "KZ":"Kazakhstan",
@@ -391,7 +392,7 @@ CountryCodes=function(){
 "NF":"Norfolk Island",
 "NG":"Nigeria",
 "NI":"Nicaragua",
-"NL":"Netherlands",
+"NL":"The Netherlands",
 "NO":"Norway",
 "NP":"Nepal",
 "NR":"Nauru",
@@ -430,7 +431,7 @@ CountryCodes=function(){
 "SK":"Slovakia",
 "SL":"Sierra Leone",
 "SM":"San Marino",
-"SN":"Senegal",
+"SN":"Sénégal",
 "SO":"Somalia",
 "SR":"Suriname",
 "SS":"South Sudan",
@@ -464,9 +465,9 @@ CountryCodes=function(){
 "VA":"Vatican",
 "VC":"Saint Vincent and the Grenadines",
 "VE":"Venezuela",
-"VG":"Virgin Islands (UK)",
-"VI":"Virgin Islands (USA)",
-"VN":"Viet Nam",
+"VG":"British Virgin Islands",
+"VI":"United States Virgin Islands",
+"VN":"Vietnam",
 "VU":"Vanuatu",
 "WF":"Wallis and Futuna",
 "WS":"Samoa",
@@ -475,6 +476,10 @@ CountryCodes=function(){
 "ZA":"South Africa",
 "ZM":"Zambia",
 "ZW":"Zimbabwe"};
+}
+
+CountryCode=function(){
+	return FlipKeysValues(CodeCountry());
 }
 
 //////////////////////////////////////////////////////////////////////
