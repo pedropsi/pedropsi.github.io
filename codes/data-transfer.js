@@ -1576,6 +1576,11 @@ LoadStyle=function(sourcename){
 	head.appendChild(styleelement);
 }
 
+ReplaceStyleElement=function(stylesource,id){
+	RemoveElement(id);
+	AddElement("<style id='"+id+"'>"+stylesource+"</style>",'head');
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Data Reception
 

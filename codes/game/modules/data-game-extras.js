@@ -1504,8 +1504,9 @@ function ReplaceColours(stylesheet,BackgroundColour,ForegroundColour){
 }
 
 function ColoriseGameBar(){
+	var stylesource=ReplaceColours(Stylesheet(),ObtainBGColor(),ObtainFGColor());
+	ReplaceStyleElement(stylesource,"game-bar-colours");
 	RemoveElement("game-bar-colours");
-	AddElement("<style id='game-bar-colours'>"+ReplaceColours(Stylesheet(),ObtainBGColor(),ObtainFGColor())+"</style>",'head');	
 }
 
 ////////////////////////////////////////////////////////////////////////////////
