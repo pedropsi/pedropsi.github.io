@@ -524,7 +524,8 @@ div .index-link:focus {
 .collapse::after{
 	content:" ▲"
 }
-img{
+img,svg{
+	max-width: 100%;
 	height:auto;
 }
 .image, img{
