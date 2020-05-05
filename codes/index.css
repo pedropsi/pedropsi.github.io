@@ -1704,3 +1704,44 @@ p .icon{
 	text-align: center;
 	align-self: center;
 }
+
+.chart{
+	display: block;
+	background-color: var(--darkblue);
+	width: 100%;
+	align-self: center;
+	justify-self: center;
+	height:var(--h64);
+	padding: var(--h2) var(--w4) var(--h4) var(--w2);
+	margin: var(--h4) 0 var(--h4) 0;
+}
+
+.chart .gridline-y{
+	stroke: var(--lightblue);
+	stroke-width:0.78125%;
+}
+
+.chart .gridline-x{
+	stroke: var(--lightblue);
+	stroke-width:0.390625%;
+}
+
+.chart .axis-y,.chart .tick-y{
+	stroke: var(--lightblue);
+	stroke-width:0.78125%;
+}
+
+.chart .axis-x,.chart .tick-x{
+	stroke: var(--lightblue);
+	stroke-width:0.390625%;
+}
+
+.chart .bar{
+	fill: var(--white);
+	stroke-width: 0.005;
+	opacity: 0.8;
+	
+}
+.chart .legend-x{
+	fill: var(--darkblue);
+}

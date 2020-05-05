@@ -322,7 +322,8 @@ MENTIONS_LINKS				:	()=>LinkGroupHTML({GROUP:"mentioned",ID:v.LINK()}),
 HALL_OF_FAME_TEXT_SHORT		:	()=>	`<h3>Hall of fame</h3><p>Once you beat ${v.TITLE_BOLD()}, you'll be invited to enter ${v.A_HOF()}! As soon as you pass the final credits screen after winning, you'll be able to type your name in a new window. Make sure you are connected to the internet, then <em>press Submit</em> to be <b>remembered forever</b> or <em>close the window</em> to <b>forsake your glory</b>.</p>`,
 HALL_OF_FAME_TEXT			:	()=>	`${v.HALL_OF_FAME_TEXT_SHORT()} <p>Record-keeping started March 26th 2018, so if you've beaten this game before this date you'll have to beat it again to enter ${v.A_HOF()}</p>.`,
 
-COMMUNITY					:	()=>	`<h2>Community</h2>${v.HALL_OF_FAME_TEXT_SHORT()}${v.GUESTBOOK_MESSAGE()}${v.MENTIONS()}`,
+COMMUNITY					:	()=>	`<h2>Community</h2>${v.GUESTBOOK_MESSAGE()}${v.STATS()}${v.HALL_OF_FAME_TEXT_SHORT()}${v.MENTIONS()}`,
+STATS						:	()=>	`<h3>Game stats</h3><p class="won-area">The number of winners per level is graphed below.</p>`,
 
 GUESTBOOK_POST_TEXT			:	()=>	`<p>Enjoyed ${v.TITLE_BOLD()}? Add <b>your message</b> below to the ${v.A_GUESTBOOK()}!</p>`,
 GUESTBOOK_MESSAGE			:	()=>	`<h3>Guestbook</h3>${v.GUESTBOOK_POST_TEXT()}${v.GUESTBOOK_ADD()}`,

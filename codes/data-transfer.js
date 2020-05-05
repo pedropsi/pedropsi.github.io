@@ -5065,6 +5065,132 @@ DynamicText=function(label,text){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+//SVG Drawing
+
+SVGHTML=function(opts){
+	var x0=opts.x0||0;
+	var x1=typeof opts.x1==="undefined"?1:opts.x1;
+	var y0=opts.y0||0;
+	var y1=typeof opts.y1==="undefined"?1:opts.y1;
+	var cla=opts.cla||"";
+	return `<svg ${cla?`class="${cla}"`:""} viewbox="${x0} ${y0} ${x1} ${y1}" ></svg>`;
+}
+
+SVGLineHTML=function(opts){
+	var x0=opts.x0||0;
+	var x1=typeof opts.x1==="undefined"?1:opts.x1;
+	var y0=opts.y0||0;
+	var y1=typeof opts.y1==="undefined"?1:opts.y1;
+	var cla=opts.cla||"";
+	return `<line ${cla?`class="${cla}"`:""} x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/>`;
+}
+
+SVGBarHTML=function(opts){
+	var x0=opts.x0||0;
+	var x1=typeof opts.x1==="undefined"?1:opts.x1;
+	var y0=opts.y0||0;
+	var y1=typeof opts.y1==="undefined"?1:opts.y1;
+	var width=x1-x0;
+	var height=y1-y0;
+	var cla=opts.cla||"";
+	return `<rect ${cla?`class="${cla}"`:""} x="${x0}" y="${y0}" width="${width}" height="${height}"/>`;
+}
+
+SVGTextHTML=function(opts){
+	var x0=opts.x0||0;
+	var y0=opts.y0||0;
+	var cla=opts.cla||"";
+	var txt=opts.txt||"";
+	var size=opts.size||"";
+	return `<text ${cla?`class="${cla}"`:""} x="${x0}" y="${y0}" ${size?`font-size="${size}"`:""}>${txt}</text>`;
+}
+
+RefreshSVG=function(svge){// trick to force rerendering
+	var svg=GetElement(svge);
+	var html=svg.innerHTML;
+	svg.innerHTML=" "+html;
+}
+
+//Chart Elements
+
+AddChartAxes=function(opts,chart){
+	var xview=GetElement(chart).viewBox.baseVal.width;
+	var yview=GetElement(chart).viewBox.baseVal.height;
+	var tickx0=typeof opts.tickx0==="undefined"?0.05:opts.tickx0;
+	var ticky0=typeof opts.ticky0==="undefined"?0.05:opts.ticky0;
+	var tickx1=typeof opts.tickx1==="undefined"?tickx0:opts.tickx1;
+	var ticky1=typeof opts.ticky1==="undefined"?ticky0:opts.ticky1;
+	var xdivisions=typeof opts.x==="undefined"?10:opts.x;
+	var ydivisions=typeof opts.y==="undefined"?10:opts.y;
+	var xlegend=opts.xlegend||"";
+	var ylegend=opts.ylegend||"";
+	AddElement(SVGLineHTML({x0:0,x1:xview,y0:yview,y1:yview,cla:"axis-x"}),chart);
+	var xi;
+	for(var i=0;i<xdivisions;i++){
+		xi=(i+0.5)/xdivisions*xview;
+		AddElement(SVGLineHTML({x0:xi,x1:xi,y0:yview-tickx0/2,y1:yview+tickx1/2,cla:"tick-x"}),chart)
+	}
+	var fontsize=xview/Min(2*xlegend.length,20);
+	AddElement(SVGTextHTML({x0:(0+xview)/2,y0:yview+fontsize,txt:xlegend,size:fontsize,cla:"legend-x"}),chart);
+
+	AddElement(SVGLineHTML({y0:0,y1:yview,x0:xview,x1:xview,cla:"axis-y"}),chart)
+	var yi;
+	for(var j=0;j<=ydivisions;j++){
+		yj=j/ydivisions*yview;
+		AddElement(SVGLineHTML({y0:yj,y1:yj,x0:xview-ticky0/2,x1:xview+ticky1/2,cla:"tick-y"}),chart)
+	}
+	fontsize=yview/Min(2*ylegend.length,20);
+	AddElement(SVGTextHTML({x0:xview,y0:(0+yview)/2,txt:ylegend,size:fontsize,cla:"legend-y"}),chart);
+	RefreshSVG(chart)
+}
+
+
+AddChartGridlines=function(opts,chart){
+	var xview=GetElement(chart).viewBox.baseVal.width;
+	var yview=GetElement(chart).viewBox.baseVal.height;
+	var xdivisions=opts.x||10;
+	var ydivisions=opts.y||10;
+	for(var i=0;i<=xdivisions;i++){
+		AddElement(SVGLineHTML({x0:i/xdivisions*xview,x1:i/xdivisions*xview,y0:0,y1:yview,cla:"gridline-x"}),chart)
+	}
+	for(var j=0;j<=ydivisions;j++){
+		AddElement(SVGLineHTML({y0:j/ydivisions*yview,y1:j/ydivisions*yview,x0:0,x1:xview,cla:"gridline-y"}),chart)
+	}
+	RefreshSVG(chart);
+}
+
+AddChartBars=function(values,opts,chart){
+	var xview=GetElement(chart).viewBox.baseVal.width;
+	var yview=GetElement(chart).viewBox.baseVal.height;
+	var xdivisions=values.length;
+	var widthmax=xview/xdivisions;
+	var xspacing=(opts.spacing||0)*widthmax/2;
+	var ymax=Max.apply(null,values);
+	var yvalues=values.map(function(v){return v/ymax*yview});
+	for(var i=0;i<yvalues.length;i++){
+		AddElement(SVGBarHTML({x0:i*widthmax+xspacing,x1:(i+1)*widthmax-xspacing,y0:yview-yvalues[i],y1:yview,cla:"bar"}),chart)
+	}
+	RefreshSVG(chart)
+}
+
+
+AddChart=function(values,opts,target){
+	var cla=opts.cla||"chart";
+	var chart=AddElement(SVGHTML({cla:cla}),target);
+		cla="."+cla;
+	var linedivs=Floor(values.length/2);
+	AddChartGridlines({x:linedivs,y:linedivs},cla);
+	AddChartBars(values,{spacing:0.1},cla);
+	AddChartAxes({x:values.length,tickx1:0,ticky1:0,y:5,xlegend:opts.xlegend,ylegend:opts.ylegend},cla);
+
+	chart.viewBox.baseVal.x+=-chart.viewBox.baseVal.width/20;
+	chart.viewBox.baseVal.y+=-chart.viewBox.baseVal.height/20;
+	chart.viewBox.baseVal.width*=1.05;
+	chart.viewBox.baseVal.height*=1.05;
+	return chart;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 //Introspection - lists all defined functions!
 
 Introspect=function(){ 

@@ -178,5 +178,26 @@ function UpdateSelectData(lvlch,type){
 }
 
 
+//////////////////////////////////////////////////
+// Stats
+
+DisplayWon=function(){
+	var url=MacroURL(Inflows("won"));
+	LoadData(url,DeployWon);
+}
+
+DeployWon=function(jsonstring){
+	var identifier=PageIdentifier();
+	var row=JSON.parse(jsonstring).filter(
+		function(row){return row[0]===identifier}
+	);
+	row=row[0].filter(function(s){return s!==""});
+	var wins=row.slice(3,Infinity).map(Number);
+
+	AddChart(wins,{cla:"chart",xlegend:"winners per level"},".won-area");
+};
+
+DisplayWon();
+
 ////////////////////////////////////////////////////////////////////////////////
 Shout("data-game-moves");
