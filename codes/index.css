@@ -1686,3 +1686,20 @@ p .icon{
 	color: currentColor;
 	--sh:0;
 }
+
+#worldMap path {
+	stroke: var(--lightblue);
+	stroke-width: calc(var(--h-8) + var(--w-8));
+	fill: transparent;
+	opacity: 0.5;
+}
+
+#worldMap path:hover {
+	stroke: var(--darkblue);
+	opacity: 1;
+}
+
+.dynamic-worldMapCounter{
+	text-align: center;
+	align-self: center;
+}
