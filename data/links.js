@@ -51,7 +51,6 @@ A_SELECTED_GAME:{PAGE:"selected-puzzlescript-games",EXT:".html",TITLE:"particula
 A_SELECTED_GAMES:{PAGE:"selected-puzzlescript-games",EXT:".html",TITLE:"selected games"},
 A_SUPPORT:{PAGE:"support",EXT:".html",TITLE:()=>`support the ${v.SITE_NAME()}`},
 A_TERMS:{PAGE:"terms-of-use",EXT:".html",TITLE:"Terms of Use"},
-A_HOF_FULL:{PAGE:"hall-of-fame",EXT:".html",TITLE:"Hall of Fame"},
 A_HOF:{PAGE:()=>`hall-of-fame.html?search=${v.LINK()}`,TITLE:"Hall of Fame",AUTHOR:()=>v.TITLE()},
 A_HOF_GRAVIRINTH:{PAGE:"hall-of-fame.html?search=gravirinth",TITLE:"Hall of Fame",AUTHOR:"Gravirinth"},
 A_HOF_HASTEFULLL:{PAGE:"hall-of-fame.html?search=hastefulll",TITLE:"Hall of Fame",AUTHOR:"Hastefulll"},

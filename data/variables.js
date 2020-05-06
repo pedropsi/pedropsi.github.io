@@ -228,7 +228,7 @@ LABEL_TAGS					:	(page)=>	page.TAGS?page.TAGS().map(v.LABEL_TAG).join("\n"):"",
 LABEL_TAG					:	(tag)=>		`<a class="tag button" href="tag.html?search=${tag}">${tag}</a>`,
 
 FOOTER_AREA					:	()=>	`<footer class="footer">${v.FOOTER_LINES()}</footer>`,
-FOOTER_LINES				:	()=>	`<p>${ViewCounterHTML()}</p><p>${v.COPYRIGHT_TEXT()}. ${v.A_TERMS()}. ${v.A_PRIVACY_POLICY()}. ${v.A_STATUS()}. ${v.DEBUGGER()}.</p><p> ${v.A_PRESS()}. ${v.A_SUBSCRIBE()} and ${v.A_SUPPORT()}!</p>`,
+FOOTER_LINES				:	()=>	`<p>${ViewCounterHTML()}</p><p>${v.COPYRIGHT_TEXT()}. ${v.A_TERMS()}. ${AHTML("privacy-policy")}. ${AHTML("status")}. ${v.DEBUGGER()}.</p><p> ${v.A_PRESS()}. ${AHTML("subscribe")} and ${v.A_SUPPORT()}!</p>`,
 
 DEBUGGER					:	()=>	`<span onclick="RequestDebugger()">Debug</span>`,
 
@@ -325,7 +325,7 @@ HALL_OF_FAME_TEXT			:	()=>	`${v.HALL_OF_FAME_TEXT_SHORT()} <p>Record-keeping sta
 COMMUNITY					:	()=>	`<h2>Community</h2>${v.GUESTBOOK_MESSAGE()}${v.HALL_OF_FAME_TEXT_SHORT()}${v.STATS()}${v.MENTIONS()}`,
 STATS						:	()=>	`<h3>Game stats</h3><p class="won-area">Do you wonder how you compare with other players? Find out in the game stats below.</p>`,
 
-GUESTBOOK_POST_TEXT			:	()=>	`<p>Enjoyed ${v.TITLE_BOLD()}? Add <b>your message</b> below to the ${v.A_GUESTBOOK()}!</p>`,
+GUESTBOOK_POST_TEXT			:	()=>	`<p>Enjoyed ${v.TITLE_BOLD()}? Add <b>your message</b> below to the ${AHTML("guestbook")}!</p>`,
 GUESTBOOK_MESSAGE			:	()=>	`<h3>Guestbook</h3>${v.GUESTBOOK_POST_TEXT()}${v.GUESTBOOK_ADD()}`,
 
 FEEDBACK					:	()=>	`<h2>Feedback</h2><h3>Problems? Suggestions?</h3><p>Please ${v.A_LET_ME_KNOW()} !</p><h3>Praise?</h3>${v.GUESTBOOK_POST_TEXT()}${v.GUESTBOOK_ADD()}`,
@@ -410,7 +410,7 @@ SECTION_CHANGELOG			:	()=>	v.CHANGELOG()?v.SECTION_OUT(v.WHITEBOARD_OUT(v.CHANGE
 
 BOOKMARKLET_BROWSER_TEXT	:	()=>	`<h3>In Chrome</h3><p><kbd>Drag</kbd> the above bookmarklet link to your bookmarks toolbar.</p><h3>In Firefox</h3><p><kbd>Right click</kbd> on the above bookmarklet link, then select "bookmark this link".</p><h3>If nothing else works</h3><p>Replace the content of an old bookmark with the above link content. Or you could run the bookmarklet js code directly in a game page (it'd still be quicker than manual alternatives).</p>`,
 
-LOZ_SYMBOL_TEXT				:	()=>	`<h3>What is the ◊ symbol?</h3><p>When available, links are opened in the ${v.A_GAME_CONSOLE()}, which loads the ${v.A_GAME_BAR()} by default. This is indicated by the ◊ symbol. Clicking this symbol directly will, however, direct you to the original ${v.A_PUZZLESCRIPT()} game page!</p><p><b>NB:</b> To add a <em>level selector</em> and <em>fullscreen</em> option  on the fly to other games, just use the ${v.A_BOOKMARKLET()}!</p>`,
+LOZ_SYMBOL_TEXT				:	()=>	`<h3>What is the ◊ symbol?</h3><p>When available, links are opened in the ${AHTML("game-console")}, which loads the ${v.A_GAME_BAR()} by default. This is indicated by the ◊ symbol. Clicking this symbol directly will, however, direct you to the original ${v.A_PUZZLESCRIPT()} game page!</p><p><b>NB:</b> To add a <em>level selector</em> and <em>fullscreen</em> option  on the fly to other games, just use the ${v.A_BOOKMARKLET()}!</p>`,
 LOZ_SYMBOL					:	()=>	`&loz`,
 
 A_SELF_LINK					:	()=>	`<a href="${v.SITE()}/${v.LINK()}">${v.LINK()}</a>`,
