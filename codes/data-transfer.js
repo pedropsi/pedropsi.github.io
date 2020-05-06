@@ -123,7 +123,7 @@ PI=Math.PI;
 Abs=Math.abs;
 Log10=Math.log10;
 Log=function(a,b){
-	Math.log(a)/Math.log(b);
+	return Math.log(a)/Math.log(b);
 }
 Round=function(n,m){
 	var m=m||0;
@@ -5259,6 +5259,7 @@ AddChartAxisLegend=function(opts,chart){
 	xview=xview/1.1;
 	yview=yview/1.1;
 	var down=typeof opts.down==="undefined"?(-20/100):-Abs(opts.down);
+	var right=typeof opts.right==="undefined"?0:opts.right;
 	var scale=typeof opts.scale==="undefined"?0.5:opts.scale;
 	var type=opts.type;
 
@@ -5269,8 +5270,8 @@ AddChartAxisLegend=function(opts,chart){
 	for(var i=0;i<=major;i++){
 		var I=invert?(major-i):i;
 		AddElement(SVGTextHTML({
-			x0:horizontal?Round(down*xview*scale,5):Round((I-2/3)/major*yview,5),
-			y0:horizontal?Round((I+1/24)/major*yview,5):Round(xview-down*xview*scale,5),
+			x0:horizontal?Round(down*xview*scale,5):Round((I-right)/major*yview,5),
+			y0:horizontal?Round((I-right)/major*yview,5):Round(xview-down*xview*scale,5),
 			cla:"legend major "+(horizontal?"y":"x"),
 			txt:Round((horizontal?(major-I):I)/major*(max-min)+min,1),//todo improve rounding
 			size:fontsize,
