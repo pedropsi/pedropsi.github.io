@@ -1708,12 +1708,12 @@ p .icon{
 .chart{
 	display: block;
 	background-color: var(--darkblue);
-	width: 100%;
-	align-self: center;
-	justify-self: center;
+	
 	height:var(--h64);
-	padding: var(--h2) var(--w4) var(--h4) var(--w2);
+	width: auto;
+	padding: 0% var(--w4) var(--h8) 0%;
 	margin: var(--h4) 0 var(--h4) 0;
+	
 }
 
 .chart .grid.minor{

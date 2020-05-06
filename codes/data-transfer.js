@@ -5156,6 +5156,8 @@ AddChartLine=function(opts,chart){
 	var invert=!!opts.invert;
 	var xview=horizontal?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
 	var yview=horizontal?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
+	xview=xview/1.1;
+	yview=yview/1.1;
 	var up=typeof opts.up==="undefined"?(1/100):opts.up;
 	var down=typeof opts.down==="undefined"?(-1/100):-Abs(opts.down);
 	var scale=typeof opts.scale==="undefined"?0.5:opts.scale;
@@ -5194,10 +5196,13 @@ AddChartLegend=function(opts,chart){
 	var horizontal=!!opts.horizontal;
 	var xview=horizontal?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
 	var yview=horizontal?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
-	var fontsize=xview/Min(2*opts.txt.length,20);
+	xview=xview/1.1;
+	yview=yview/1.1;
 
-	var x=typeof opts.x==="undefined"?(0+xview)/2:x;
-	var x=typeof opts.y==="undefined"?(0+yview)/2:y;
+	var fontsize=typeof opts.size==="undefined"?xview/Min(opts.txt.length*1.5,20):opts.size;
+
+	var x=typeof opts.x==="undefined"?(0+xview)/2:opts.x;
+	var y=typeof opts.y==="undefined"?(0+yview)/2:opts.y;
 	
 	AddElement(SVGTextHTML({
 		x0:x,
@@ -5214,6 +5219,8 @@ AddChartBars=function(opts,chart){
 	var invert=!!opts.invert;
 	var xview=horizontal?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
 	var yview=horizontal?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
+	xview=xview/1.1;
+	yview=yview/1.1;
 	
 	var values=opts.values;
 	var xdivisions=values.length;
@@ -5278,10 +5285,11 @@ AddChart=function(opts,target){
 		if(opts[c]){AddChartComponent(c,opts[c],Prefix(cla,"."))};
 	});
 	
-	chart.viewBox.baseVal.x+=-chart.viewBox.baseVal.width/20;
-	chart.viewBox.baseVal.y+=-chart.viewBox.baseVal.height/20;
-	chart.viewBox.baseVal.width*=1.05;
-	chart.viewBox.baseVal.height*=1.05;
+	chart.viewBox.baseVal.x+=-chart.viewBox.baseVal.width/4;
+	chart.viewBox.baseVal.y+=-chart.viewBox.baseVal.height/4;
+	chart.viewBox.baseVal.width*=1.25;
+	chart.viewBox.baseVal.height*=1.25;
+
 	return chart;
 }
 

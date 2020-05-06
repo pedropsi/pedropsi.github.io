@@ -201,8 +201,8 @@ DeployWon=function(jsonstring){
 		"XAxis":{horizontal:true},
 		"YAxis":{},
 		"YTick":{major:4,minor:5,horizontal:true},
-		"XLegend":{txt:"Level",x:5,y:0.8},
-		"YLegend":{txt:"Number of Winners"},
+		"XLegend":{txt:"Level",x:0.6,y:1.0,size:0.1},
+		"YLegend":{txt:"Wins total",y:0,x:0.05,size:0.1},
 		"Bar":{values:wins,spacing:0.2,horizontal:true}
 	},".won-area");
 };
