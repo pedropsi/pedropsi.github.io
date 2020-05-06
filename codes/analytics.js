@@ -211,15 +211,14 @@ DisplayViewCounter=function(){
 
 DeployViewCounter=function(viewdata){
 	var viewdata=JSON.parse(viewdata);
-		
 		viewdata=viewdata.filter(function(pair){return pair[0]===PageIdentifier()});
-		
+	
 	if(!viewdata.length)
-		return;
+		viewdata=0;
+	else
+		viewdata=viewdata[0][1];
 	
-	viewdata=viewdata[0][1];
-	
-	DynamicText("view-counter",ObtainSymbol("eye")+"\n"+viewdata+IncognitoText());
+	DynamicText("view-counter",ObtainSymbol("eye")+"\n"+viewdata+" (analytics are "+TogglerButtonHTML("AnalyticsAllowed")+")");
 }
 
 //////////////////////////////////////////////////////////////////////
