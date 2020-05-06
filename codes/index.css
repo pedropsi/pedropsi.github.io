@@ -1736,3 +1736,11 @@ p .icon{
 .chart .legend{
 	fill: var(--white);
 }
+
+.inline{
+	display: inline;
+	width: unset;
+	margin: unset;
+	padding-left: unset;
+	padding-right: unset;
+}
