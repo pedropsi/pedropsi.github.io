@@ -2042,6 +2042,12 @@ ReplaceElement=function(htmlOrElement,elemIDsel){
 	return a;
 };
 
+ReplaceElements=function(htmlOrElement,elemIDsel){
+	var els=GetElements(elemIDsel);
+	if(els.length)
+		GetElements(elemIDsel).map(function(e){ReplaceElement(htmlOrElement,e)});
+};
+
 AddSingleElement=function(html,parentIDsel,selfSel){
 	if(GetElement(selfSel))
 		return ReplaceElement(html,selfSel);
@@ -5059,9 +5065,30 @@ DynamicText=function(label,text){
 	}
 	else{//Setter
 		var e=DynamicTextHTML(label,text);
-		ReplaceElement(e,"."+label);
+		ReplaceElements(e,"."+label);
 		return e;
 	}
+}
+
+Toggler=function(StatusReporterName){
+	return function(){
+		if(globalThis[StatusReporterName]())
+			globalThis[StatusReporterName]=False;
+		else
+			globalThis[StatusReporterName]=True;
+		return DynamicText(StatusReporterName,TogglerButtonHTML(StatusReporterName));
+	}
+}
+
+TogglerButtonHTML=function(StatusReporterName){
+	if(!globalThis[StatusReporterName]||typeof globalThis[StatusReporterName]!=="function")
+		return DynamicText(StatusReporterName);
+	var status=ButtonHTML({
+		txt:globalThis[StatusReporterName]()?"active":"inactive",
+		attributes:{href:"",onclick:'Toggler("'+StatusReporterName+'")()',class:"inline"}
+	});
+	
+	return DynamicText(StatusReporterName,status);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
