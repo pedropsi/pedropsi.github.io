@@ -121,6 +121,10 @@ Sin=Math.sin;
 Cos=Math.cos;
 PI=Math.PI;
 Abs=Math.abs;
+Log10=Math.log10;
+Log=function(a,b){
+	Math.log(a)/Math.log(b);
+}
 Round=function(n,m){
 	var m=m||0;
 	return Floor(n*Power(10,m)+0.5)/Power(10,m);
@@ -5246,6 +5250,38 @@ AddChartLine=function(opts,chart){
 	RefreshSVG(chart);
 }
 
+AddChartAxisLegend=function(opts,chart){
+	var major=typeof opts.major==="undefined"?4:opts.major;
+	var horizontal=!!opts.horizontal;
+	var invert=!!opts.invert;
+	var xview=horizontal?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
+	var yview=horizontal?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
+	xview=xview/1.1;
+	yview=yview/1.1;
+	var down=typeof opts.down==="undefined"?(-20/100):-Abs(opts.down);
+	var scale=typeof opts.scale==="undefined"?0.5:opts.scale;
+	var type=opts.type;
+
+	var min=typeof opts.min==="undefined"?0:opts.min;
+	var max=typeof opts.max==="undefined"?1:opts.max;
+	var fontsize=typeof opts.size==="undefined"?xview/20:opts.size;
+
+	for(var i=0;i<=major;i++){
+		var I=invert?(major-i):i;
+		AddElement(SVGTextHTML({
+			x0:horizontal?Round(down*xview*scale,5):Round((I-2/3)/major*yview,5),
+			y0:horizontal?Round((I+1/24)/major*yview,5):Round(xview-down*xview*scale,5),
+			cla:"legend major "+(horizontal?"y":"x"),
+			txt:Round((horizontal?(major-I):I)/major*(max-min)+min,1),//todo improve rounding
+			size:fontsize,
+			horizontal:horizontal
+		}),chart);
+
+	}
+	RefreshSVG(chart);
+}
+
+
 
 AddChartLegend=function(opts,chart){
 	var horizontal=!!opts.horizontal;
@@ -5281,7 +5317,7 @@ AddChartBars=function(opts,chart){
 	var xdivisions=values.length;
 	var widthmax=xview/xdivisions;
 	var xspacing=(opts.spacing||0)*widthmax/2;
-	var ymax=Max.apply(null,values);
+	var ymax=typeof opts.max==="undefined"?Max.apply(null,values):opts.max;
 	var yvalues=values.map(function(v){return v/ymax*yview});
 	
 	for(var i=0;i<yvalues.length;i++){
@@ -5307,7 +5343,7 @@ AddChartBars=function(opts,chart){
 }
 
 ChartComponents=function(){
-		return ["XGridline","YGridline","XAxis","YAxis","XTick","YTick","XLegend","YLegend","Bar"];
+		return ["XGridline","YGridline","XAxis","YAxis","XTick","YTick","XLegend","YLegend","XAxisLegend","YAxisLegend","Bar"];
 }
 
 AddChartComponent=function(component,opts,chart){
@@ -5330,6 +5366,10 @@ AddChartComponent=function(component,opts,chart){
 		return AddChartLegend(opts,chart);
 	if(component==="YLegend")
 		return AddChartLegend(opts,chart);
+	if(component==="XAxisLegend")
+		return AddChartAxisLegend(opts,chart);
+	if(component==="YAxisLegend")
+		return AddChartAxisLegend(opts,chart);
 }
 
 AddChart=function(opts,target){
@@ -5346,6 +5386,15 @@ AddChart=function(opts,target){
 	chart.viewBox.baseVal.height*=1.25;
 
 	return chart;
+}
+
+//Selects the right display scale - todo improve, for decimal numbers...
+ScaleMax=function(max){
+	var a=Power(10,Ceiling(Log10(max)));
+	var b=a*3/4;
+	var c=a*1/2;
+	var d=a*1/4;
+	return(c>max?(d>max?d:c):(b>max?b:a));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
