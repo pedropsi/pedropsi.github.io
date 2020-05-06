@@ -314,6 +314,8 @@ function PrepareGame(){
 			ScrollInto(gameSelector);
 		
 		GameFocus();
+
+		SelectLevelFromPage();
 		
 		Shout("GameBar");
 	}
@@ -1183,6 +1185,28 @@ function ChooseLevelClose(choice,pid){
 function ChooseLevel(choice){
 	SelectLevel(UnstarLevel(choice));
 };
+
+function SelectLevelFromPage(){
+	var level=PageSearch("level");
+	if(!level)
+		return;
+	if(IsNan(Number(level)))
+		SelectLevelFromTitle(level);
+	else
+		SelectLevel(Round(Number(level),0));
+}
+
+function SelectLevelFromTitle(leveltitle){
+	var level=-Infinity;
+	Levels().map(
+		function(n){
+			if(LowerSimpleString(ObtainLevelTitle(n))===LowerSimpleString(leveltitle))
+				level=n;
+		}
+	);
+	if(level>0)
+		SelectLevel(level)
+}
 
 function SelectLevel(lvl){
 	if(Checkpointed())
