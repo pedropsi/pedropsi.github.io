@@ -1716,13 +1716,11 @@ p .icon{
 	margin: var(--h4) 0 var(--h4) 0;
 }
 
-.chart .gridline-y{
+.chart .line{
 	stroke: var(--lightblue);
 	stroke-width:0.78125%;
 }
-
-.chart .gridline-x{
-	stroke: var(--lightblue);
+.chart .minor{
 	stroke-width:0.390625%;
 }
 
