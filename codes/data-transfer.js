@@ -5077,10 +5077,17 @@ SVGHTML=function(opts){
 }
 
 SVGLineHTML=function(opts){
-	var x0=opts.x0||0;
-	var x1=typeof opts.x1==="undefined"?1:opts.x1;
-	var y0=opts.y0||0;
-	var y1=typeof opts.y1==="undefined"?1:opts.y1;
+	if(opts.vertical){
+		var y0=opts.x0||0;
+		var y1=typeof opts.x1==="undefined"?1:opts.x1;
+		var x0=opts.y0||0;
+		var x1=typeof opts.y1==="undefined"?1:opts.y1;
+	}else{//default
+		var x0=opts.x0||0;
+		var x1=typeof opts.x1==="undefined"?1:opts.x1;
+		var y0=opts.y0||0;
+		var y1=typeof opts.y1==="undefined"?1:opts.y1;
+	}
 	var cla=opts.cla||"";
 	return `<line ${cla?`class="${cla}"`:""} x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/>`;
 }
@@ -5113,6 +5120,68 @@ RefreshSVG=function(svge){// trick to force rerendering
 
 //Chart Elements
 
+AddChartGridline=function(opts,chart){
+	var opts=opts;
+	opts.scale=1;
+	opts.up=1;
+	opts.down=0;
+	opts.type="grid";
+	AddChartLine(opts,chart);
+}
+
+AddChartTick=function(opts,chart){
+	var opts=opts;
+	opts.scale=0.5;
+	opts.up=1/100;
+	opts.down=1/100;
+	opts.type="tick";
+	AddChartLine(opts,chart);
+}
+
+AddChartAxis=function(opts,chart){
+	var opts=opts;
+	opts.scale=1;
+	opts.up=1.1;
+	opts.down=0.1;
+	opts.type="axis";
+	opts.minor=0;
+	opts.major=0;
+	AddChartLine(opts,chart);
+}
+
+AddChartLine=function(opts,chart){
+	var major=typeof opts.major==="undefined"?4:opts.major;
+	var minor=typeof opts.minor==="undefined"?5:opts.minor;
+	var vertical=!!opts.vertical;
+	var xview=vertical?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
+	var yview=vertical?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
+	var up=typeof opts.up==="undefined"?(1/100):opts.up;
+	var down=typeof opts.down==="undefined"?(-1/100):-Abs(opts.down);
+	var scale=typeof opts.scale==="undefined"?0.5:opts.scale;
+	var type=opts.type;
+	for(var i=0;i<=major;i++){
+		AddElement(SVGLineHTML({
+			x0:i/major*xview,
+			x1:i/major*xview,
+			y0:down*yview,
+			y1:up*yview,
+			cla:type+" line major "+(vertical?"y":"x"),
+			vertical:vertical
+		}),chart);
+		for(var j=1;j<minor;j++){
+			AddElement(SVGLineHTML({
+				x0:(i+j/minor)/major*xview,
+				x1:(i+j/minor)/major*xview,
+				y0:down*yview*scale,
+				y1:up*yview*scale,
+				cla:type+" line minor "+(vertical?"y":"x"),
+				vertical:vertical
+			}),chart);
+		}
+	}
+	RefreshSVG(chart);
+}
+
 AddChartAxes=function(opts,chart){
 	var xview=GetElement(chart).viewBox.baseVal.width;
 	var yview=GetElement(chart).viewBox.baseVal.height;
@@ -5126,6 +5195,7 @@ AddChartAxes=function(opts,chart){
 	var ylegend=opts.ylegend||"";
 	AddElement(SVGLineHTML({x0:0,x1:xview,y0:yview,y1:yview,cla:"axis-x"}),chart);
 	var xi;
+	
 	for(var i=0;i<xdivisions;i++){
 		xi=(i+0.5)/xdivisions*xview;
 		AddElement(SVGLineHTML({x0:xi,x1:xi,y0:yview-tickx0/2,y1:yview+tickx1/2,cla:"tick-x"}),chart)
@@ -5145,18 +5215,10 @@ AddChartAxes=function(opts,chart){
 }
 
 
+
 AddChartGridlines=function(opts,chart){
-	var xview=GetElement(chart).viewBox.baseVal.width;
-	var yview=GetElement(chart).viewBox.baseVal.height;
-	var xdivisions=opts.x||10;
-	var ydivisions=opts.y||10;
-	for(var i=0;i<=xdivisions;i++){
-		AddElement(SVGLineHTML({x0:i/xdivisions*xview,x1:i/xdivisions*xview,y0:0,y1:yview,cla:"gridline-x"}),chart)
-	}
-	for(var j=0;j<=ydivisions;j++){
-		AddElement(SVGLineHTML({y0:j/ydivisions*yview,y1:j/ydivisions*yview,x0:0,x1:xview,cla:"gridline-y"}),chart)
-	}
-	RefreshSVG(chart);
+	AddChartGridline({major:opts.x,minor:5,vertical:true},chart);
+	AddChartGridline({major:opts.y,minor:3},chart);
 }
 
 AddChartBars=function(values,opts,chart){
