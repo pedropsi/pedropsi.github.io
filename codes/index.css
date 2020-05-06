@@ -1723,23 +1723,15 @@ p .icon{
 .chart .minor{
 	stroke-width:0.390625%;
 }
-
-.chart .axis-y,.chart .tick-y{
-	stroke: var(--lightblue);
-	stroke-width:0.78125%;
+.chart .axis{
+	stroke-width:1.5625%;
 }
-
-.chart .axis-x,.chart .tick-x{
-	stroke: var(--lightblue);
-	stroke-width:0.390625%;
+.chart .tick{
+	stroke:var(--white);
 }
-
 .chart .bar{
-	fill: var(--white);
-	stroke-width: 0.005;
-	opacity: 0.8;
-	
+	fill: var(--white);	
 }
-.chart .legend-x{
-	fill: var(--darkblue);
+.chart .legend{
+	fill: var(--white);
 }

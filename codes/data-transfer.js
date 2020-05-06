@@ -5141,11 +5141,11 @@ AddChartTick=function(opts,chart){
 AddChartAxis=function(opts,chart){
 	var opts=opts;
 	opts.scale=1;
-	opts.up=1.1;
-	opts.down=0.1;
+	opts.up=0;
+	opts.down=0;
 	opts.type="axis";
-	opts.minor=0;
-	opts.major=0;
+	opts.minor=1;
+	opts.major=1;
 	AddChartLine(opts,chart);
 }
 
@@ -5153,6 +5153,7 @@ AddChartLine=function(opts,chart){
 	var major=typeof opts.major==="undefined"?4:opts.major;
 	var minor=typeof opts.minor==="undefined"?5:opts.minor;
 	var vertical=!!opts.vertical;
+	var invert=!!opts.invert;
 	var xview=vertical?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
 	var yview=vertical?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
 	var up=typeof opts.up==="undefined"?(1/100):opts.up;
@@ -5160,20 +5161,26 @@ AddChartLine=function(opts,chart){
 	var scale=typeof opts.scale==="undefined"?0.5:opts.scale;
 	var type=opts.type;
 	for(var i=0;i<=major;i++){
+		var I=invert?(major-i):i;
 		AddElement(SVGLineHTML({
-			x0:i/major*xview,
-			x1:i/major*xview,
-			y0:down*yview,
-			y1:up*yview,
+			x0:Round(I/major*xview,5),
+			x1:Round(I/major*xview,5),
+			y0:Round(down*yview,5),
+			y1:Round(up*yview,5),
 			cla:type+" line major "+(vertical?"y":"x"),
 			vertical:vertical
 		}),chart);
+
+		if(i===major)
+			break;
+
 		for(var j=1;j<minor;j++){
+			var J=invert?(minor-j):j;
 			AddElement(SVGLineHTML({
-				x0:(i+j/minor)/major*xview,
-				x1:(i+j/minor)/major*xview,
-				y0:down*yview*scale,
-				y1:up*yview*scale,
+				x0:Round((I+J/minor)/major*xview,5),
+				x1:Round((I+J/minor)/major*xview,5),
+				y0:Round(down*yview*scale,5),
+				y1:Round(up*yview*scale,5),
 				cla:type+" line minor "+(vertical?"y":"x"),
 				vertical:vertical
 			}),chart);
@@ -5182,44 +5189,32 @@ AddChartLine=function(opts,chart){
 	RefreshSVG(chart);
 }
 
-AddChartAxes=function(opts,chart){
-	var xview=GetElement(chart).viewBox.baseVal.width;
-	var yview=GetElement(chart).viewBox.baseVal.height;
-	var tickx0=typeof opts.tickx0==="undefined"?0.05:opts.tickx0;
-	var ticky0=typeof opts.ticky0==="undefined"?0.05:opts.ticky0;
-	var tickx1=typeof opts.tickx1==="undefined"?tickx0:opts.tickx1;
-	var ticky1=typeof opts.ticky1==="undefined"?ticky0:opts.ticky1;
-	var xdivisions=typeof opts.x==="undefined"?10:opts.x;
-	var ydivisions=typeof opts.y==="undefined"?10:opts.y;
-	var xlegend=opts.xlegend||"";
-	var ylegend=opts.ylegend||"";
-	AddElement(SVGLineHTML({x0:0,x1:xview,y0:yview,y1:yview,cla:"axis-x"}),chart);
-	var xi;
-	
-	for(var i=0;i<xdivisions;i++){
-		xi=(i+0.5)/xdivisions*xview;
-		AddElement(SVGLineHTML({x0:xi,x1:xi,y0:yview-tickx0/2,y1:yview+tickx1/2,cla:"tick-x"}),chart)
-	}
-	var fontsize=xview/Min(2*xlegend.length,20);
-	AddElement(SVGTextHTML({x0:(0+xview)/2,y0:yview+fontsize,txt:xlegend,size:fontsize,cla:"legend-x"}),chart);
-
-	AddElement(SVGLineHTML({y0:0,y1:yview,x0:xview,x1:xview,cla:"axis-y"}),chart)
-	var yi;
-	for(var j=0;j<=ydivisions;j++){
-		yj=j/ydivisions*yview;
-		AddElement(SVGLineHTML({y0:yj,y1:yj,x0:xview-ticky0/2,x1:xview+ticky1/2,cla:"tick-y"}),chart)
-	}
-	fontsize=yview/Min(2*ylegend.length,20);
-	AddElement(SVGTextHTML({x0:xview,y0:(0+yview)/2,txt:ylegend,size:fontsize,cla:"legend-y"}),chart);
-	RefreshSVG(chart)
-}
-
-
-
 AddChartGridlines=function(opts,chart){
 	AddChartGridline({major:opts.x,minor:5,vertical:true},chart);
 	AddChartGridline({major:opts.y,minor:3},chart);
 }
+
+AddChartAxes=function(opts,chart){
+	AddChartAxis({major:opts.y,minor:3},chart);
+	AddChartTick({major:opts.y,minor:3},chart);
+	AddChartAxis({invert:true,vertical:true},chart);
+	AddChartTick({major:opts.x,minor:5,invert:true,vertical:true},chart);
+}
+
+AddChartLegend=function(opts,chart){
+	var vertical=!!opts.vertical;
+	var xview=vertical?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
+	var yview=vertical?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
+	var fontsize=xview/Min(2*opts.txt.length,20);
+	AddElement(SVGTextHTML({
+		x0:(0+xview)/2,
+		y0:yview+fontsize,
+		txt:opts.txt,
+		size:fontsize,
+		cla:"legend "+(vertical?"y":"x")
+	}),chart);
+}
+
 
 AddChartBars=function(values,opts,chart){
 	var xview=GetElement(chart).viewBox.baseVal.width;
@@ -5230,7 +5225,13 @@ AddChartBars=function(values,opts,chart){
 	var ymax=Max.apply(null,values);
 	var yvalues=values.map(function(v){return v/ymax*yview});
 	for(var i=0;i<yvalues.length;i++){
-		AddElement(SVGBarHTML({x0:i*widthmax+xspacing,x1:(i+1)*widthmax-xspacing,y0:yview-yvalues[i],y1:yview,cla:"bar"}),chart)
+		AddElement(SVGBarHTML({
+			x0:Round(i*widthmax+xspacing,5),
+			x1:Round((i+1)*widthmax-xspacing,5),
+			y0:Round(yview-yvalues[i],5),
+			y1:Round(yview,5),
+			cla:"bar"
+		}),chart)
 	}
 	RefreshSVG(chart)
 }
@@ -5240,10 +5241,18 @@ AddChart=function(values,opts,target){
 	var cla=opts.cla||"chart";
 	var chart=AddElement(SVGHTML({cla:cla}),target);
 		cla="."+cla;
+	
 	var linedivs=Floor(values.length/2);
+	
+	AddChartAxes({x:linedivs,y:linedivs},cla);
 	AddChartGridlines({x:linedivs,y:linedivs},cla);
+
 	AddChartBars(values,{spacing:0.1},cla);
-	AddChartAxes({x:values.length,tickx1:0,ticky1:0,y:5,xlegend:opts.xlegend,ylegend:opts.ylegend},cla);
+	
+	if(opts.xlegend)
+		AddChartLegend({txt:opts.xlegend},cla);
+	if(opts.ylegend)
+		AddChartLegend({txt:opts.ylegend,vertical:true},cla);
 
 	chart.viewBox.baseVal.x+=-chart.viewBox.baseVal.width/20;
 	chart.viewBox.baseVal.y+=-chart.viewBox.baseVal.height/20;
