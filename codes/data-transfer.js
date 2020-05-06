@@ -128,7 +128,7 @@ Round=function(n,m){
 
 PercentageText=function(n,m){
 	var m=m||0;
-	return ""+Round(n,m+2)*100+"%";
+	return ""+Round(n*100,m)+"%";
 }
 
 Quotient=function(n,d){
