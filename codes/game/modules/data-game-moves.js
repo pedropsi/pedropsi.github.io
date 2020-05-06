@@ -188,9 +188,15 @@ DisplayWon=function(){
 
 DeployWon=function(jsonstring){
 	var identifier=PageIdentifier();
+	if(identifier==="game-console")
+		return;
+	
 	var row=JSON.parse(jsonstring).filter(
 		function(row){return row[0]===identifier}
 	);
+	
+	if(row.length===0)
+		return;
 	row=row[0].filter(function(s){return s!==""});
 	var wins=row.slice(3,Infinity).map(Number);
 
