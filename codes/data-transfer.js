@@ -588,7 +588,7 @@ Capitalise=function(word){
 }
 
 
-CommonWordsList=function(){
+CommonWords=function(){
 	var prepositions=["aboard","about","above","across","after","against","along","amid","among","anti","around","as","at","before","behind","below","beneath","beside","besides","between","beyond","but","by","concerning","considering","de","despite","down","during","except","excepting","excluding","following","for","from","in","inside","into","like","minus","near","of","off","on","onto","opposite","outside","over","past","per","plus","regarding","round","save","since","than","through","to","toward","towards","under","underneath","unlike","until","up","upon","versus","vs","via","with","within","without"];
 	if(!CommonWords.list)
 		return CommonWords.list=["a","an","the"].concat(prepositions);
@@ -597,14 +597,18 @@ CommonWordsList=function(){
 }
 
 CapitaliseNoble=function(word){
-	if(In(CommonWords,word))
+	if(In(CommonWords(),word))
 		return word;
 	else
 		return Capitalise(word);
 }
 
 CapitaliseSentence=function(sentence){
-	sentence.split(" ").map(CapitaliseNoble).join(" ");
+	return sentence.split(" ").map(CapitaliseNoble).join(" ");
+}
+
+CapitaliseSlug=function(slug){
+	return CapitaliseSentence(slug.replace("-"," "));
 }
 
 //Escape
@@ -2301,6 +2305,10 @@ ButtonHTML=function(optionsObj){
 };
 
 AHTML=function(title,ref,attribs){
+	if(typeof ref==="undefined"){
+		var ref=Posfix(title,".html");
+		var title=CapitaliseSlug(title);
+	}
 	var external=InPrefix(ref,"http");
 	var attribs=attribs||{};
 	attribs["href"]=ref;
@@ -2308,6 +2316,10 @@ AHTML=function(title,ref,attribs){
 		attribs["rel"]="noreferrer noopener";
 	return ElementHTML({tag:"a",txt:title,attributes:attribs});
 }
+
+/*InnerAHTML=function(title){
+	return AHTML(title);
+}*/
 
 LabelHTML=function(text,type){
 	var type=type||text||"";
