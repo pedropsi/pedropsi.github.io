@@ -1,4 +1,11 @@
 News={
+	N_44:{
+DATE:"2020-05-07",
+HEADER:()=>"Game stats & other improvements",
+PIECE:()=>`
+<p>Most games now display a chart with the number of wins per level.</p>
+<p>Also, it is now possible to jump directly to any level by adding the URL parameter: e.g. ?level=levelTitle or e.g. ?level=2.</p>
+	`,ID:"index"},
 	N_43:{
 DATE:"2020-04-26",
 HEADER:()=>"Puzzle type beta changes IV",
@@ -27,13 +34,13 @@ PIECE:()=>`
 DATE:"2020-04-07",
 HEADER:()=>"Puzzle type fix (for the Safari browser)",
 PIECE:()=>`
-<p>"Hoisting of functions inside conditionals" was the Javascript inconsistency blocking ${v.A_PUZZLE_TYPE()} on Safari - not anymore!</p>
+<p>"Hoisting of functions inside conditionals" was the Javascript inconsistency blocking ${AHTML("puzzle-type")} on Safari - not anymore!</p>
 	`,ID:"puzzle-type"},
 	N_38:{
 DATE:"2020-04-06",
 HEADER:()=>"Game Console Fork support",
 PIECE:()=>`
-<p>The ${v.A_GAME_CONSOLE()} learned to request the appropriate PS fork for each game.</p>
+<p>The ${AHTML("game-console")} learned to request the appropriate PS fork for each game.</p>
 	`,ID:"game-console"},
 	N_37:{
 DATE:"2020-03-31",
@@ -123,7 +130,7 @@ PIECE:()=>`
 DATE:"2020-03-29",
 HEADER:()=>"Strata Hedges mechanics draft",
 PIECE:()=>`
-<p>A first draft of ${v.A_STRATA_HEDGES()} was shared privately, showcasing the novel tridimensional mechanics.</p>
+<p>A first draft of ${AHTML("strata-hedges")} was shared privately, showcasing the novel tridimensional mechanics.</p>
 	`,ID:"strata-hedges"},
 	N_TA_1:{
 DATE:"2018-09-29",
@@ -167,7 +174,7 @@ N_23:{
 DATE:`2020-01-25`,
 HEADER:()=>`Puzzlescript Components Database`,
 PIECE:()=>`
-<p>A database of Puzzlescript components, prototypes and mechanic demonstrations was added to ${v.A_GAME_TOOLS()} to complement the ${v.A_PS_DATABASE()}.</p>
+<p>A database of Puzzlescript components, prototypes and mechanic demonstrations was added to ${AHTML("game-tools")} to complement the ${AHTML("puzzlescript-games-database")}.</p>
 `},
 N_24:{
 DATE:`2020-01-24`,
@@ -179,7 +186,7 @@ N_22:{
 DATE:`2020-01-12`,
 HEADER:()=>`Database Search + submission options`,
 PIECE:()=>`
-<p>The ${v.A_PS_DATABASE()} underwent several improvements. Among them, there are now more submission options, and search was added across all data categories. Search can be triggered by user input and indicated in the URL.</p>
+<p>The ${AHTML("puzzlescript-games-database")} underwent several improvements. Among them, there are now more submission options, and search was added across all data categories. Search can be triggered by user input and indicated in the URL.</p>
 `,ID:"puzzlescript-games-database"},
 N_28:{
 	DATE:`2020-01-11`,
@@ -204,13 +211,13 @@ N_31:{
 	DATE:`2019-12-11`,
 	HEADER:()=>`Puzzlescript games database expansion`,
 	PIECE:()=>`
-<p>The ${v.A_PS_DATABASE()} now sports over 1300 titles.</p>
+<p>The ${AHTML("puzzlescript-games-database")} now sports over 1300 titles.</p>
 `,ID:"puzzlescript-games-database"},
 N_20:{
 	DATE:`2019-12-07`,
 	HEADER:()=>`Store opens`,
 	PIECE:()=>`
-<p>The ${v.SITE_NAME()} now has a dedicated ${v.A_STORE()}, featuring pearls such as ${v.A_PUZZLE_TYPE()}.${v.L_EXP()}</p>`,
+<p>The ${v.SITE_NAME()} now has a dedicated ${v.A_STORE()}, featuring pearls such as ${AHTML("puzzle-type")}.${v.L_EXP()}</p>`,
 ID:"store"},
 N_32:{
 	DATE:`2019-12-06`,
@@ -227,7 +234,7 @@ N_30:{
 	DATE:`2019-11-30`,
 HEADER:()=>`Status page`,
 PIECE:()=>`
-<p>Users may now perform self-checks by visiting the ${v.A_STATUS()} page, which performs automatic tests.</p>
+<p>Users may now perform self-checks by visiting the ${AHTML("status")} page, which performs automatic tests.</p>
 `,ID:"status"},
 N_18:{
 DATE:`2019-11-24`,
@@ -288,7 +295,7 @@ N_11:{
 DATE:`2019-09-21`,
 HEADER:()=>`Skilleblokker launches`,
 PIECE:()=>`
-<p>${v.A_SKILLEBLOKKER()} spillet utgitt!</p>
+<p>${AHTML("skilleblokker")} spillet utgitt!</p>
 `,ID:"skilleblokker"},
 N_10:{
 DATE:`2019-09-19`,
@@ -300,7 +307,7 @@ N_9:{
 DATE:`2019-09-11`,
 HEADER:()=>`Hints system`,
 PIECE:()=>`
-<p>The game bar now includes support for Hints, a suggestion by ${v.MINOTALEN()}. Hints were added to ${v.A_PLATFORMER_TEMPLATE()}.</p>
+<p>The game bar now includes support for Hints, a suggestion by ${v.MINOTALEN()}. Hints were added to ${AHTML("platformer-template")}.</p>
 `,ID:"game-bar"},
 N_8:{
 DATE:`2019-09-07`,
@@ -342,13 +349,13 @@ N_2:{
 DATE:`2019-07-12`,
 HEADER:()=>`Burokku Konekuta launches`,
 PIECE:()=>`
-<p>${v.A_BUROKKU_KONEKUTA()} がリリースされました!</p>
+<p>${AHTML("burokku-konekuta")} がリリースされました!</p>
 `,ID:"burokku-konekuta"},
 N_1:{
 DATE:`2019-05-19`,
 HEADER:()=>`Platformer-template launches`,
 PIECE:()=>`
-<p>${v.A_PLATFORMER_TEMPLATE()} matures into its final version.</p>
+<p>${AHTML("platformer-template")} matures into its final version.</p>
 `,ID:"platformer-template"}
 }
 

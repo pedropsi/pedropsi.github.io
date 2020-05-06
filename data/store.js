@@ -7,7 +7,7 @@ PROD_PUZZLE_TYPE:{
 	TAGLINE:()=>"a cryptic typing puzzle",
 	CALL:()=>"Find out whether you're the <b>Puzzle type</b>!",
 	ONE_LINER:()=>"<p>Are you the <b>Puzzle-type</p>? Find out in this cryptic keyboard typing puzzle!</p>",
-	DETAILS:()=>`<p>Desktop version.</p><p>All information in the official ${v.A_PUZZLE_TYPE()} page.</p>`,
+	DETAILS:()=>`<p>Desktop version.</p><p>All information in the official ${AHTML("puzzle-type")} page.</p>`,
 	LINK:()=>"puzzle-type",
 	IMAGE_EXT:()=>"gif",
 	IMAGE_ALT:()=>"Puzzle type",

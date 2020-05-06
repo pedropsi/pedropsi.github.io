@@ -6,13 +6,13 @@
 
 <h2>About the ${v.TITLE_BOLD()}</h2>
 
-<p>This is a convenient ${v.TITLE_BOLD()} to test any game in the ${v.A_PS_DATABASE()} with ${v.A_GAME_BAR()} <b>right now</b>!</p>
+<p>This is a convenient ${v.TITLE_BOLD()} to test any game in the ${AHTML("puzzlescript-games-database")} with ${v.A_GAME_BAR()} <b>right now</b>!</p>
 <p>It even loads the <b>appropriate Puzzlescript fork</b> if mentioned in the <code>readme.txt</code> gist file.</p>
 
 
 <h3>How to load a puzzlescript game to the console</h3>
-<p>the ${v.A_GAME_CONSOLE()}'s dropdown search menu lets you pick all currently playable entries in the ${v.A_PS_DATABASE()} (i.e. those containing a puzzlescript link).</p>
-<p>For games not currently listed, please add them now to the ${v.A_PS_DATABASE()}, which will make them immediately available to the console. Otherwise, you may also replace the game's PUZZLESCRIPT_ID with your game's puzzlescript ID at the end of the following URL: <code>${v.SITE()}/${v.LINK()}.html?game=PUZZLESCRIPT_ID</code>.</p>
+<p>the ${AHTML("game-console")}'s dropdown search menu lets you pick all currently playable entries in the ${AHTML("puzzlescript-games-database")} (i.e. those containing a puzzlescript link).</p>
+<p>For games not currently listed, please add them now to the ${AHTML("puzzlescript-games-database")}, which will make them immediately available to the console. Otherwise, you may also replace the game's PUZZLESCRIPT_ID with your game's puzzlescript ID at the end of the following URL: <code>${v.SITE()}/${v.LINK()}.html?game=PUZZLESCRIPT_ID</code>.</p>
 
 <h2>Known issues</h2>
 <h3>Sharing saved game progression</h3>
