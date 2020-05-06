@@ -194,8 +194,19 @@ DeployWon=function(jsonstring){
 	row=row[0].filter(function(s){return s!==""});
 	var wins=row.slice(3,Infinity).map(Number);
 
-	AddChart(wins,{cla:"chart",xlegend:"winners per level"},".won-area");
+	AddChart({
+		"cla":"chart",
+		//"XGridline":{major:wins.length,minor:1},
+		"YGridline":{major:4,minor:5,horizontal:true},
+		"XAxis":{horizontal:true},
+		"YAxis":{},
+		"YTick":{major:4,minor:5,horizontal:true},
+		"XLegend":{txt:"Level",x:5,y:0.8},
+		"YLegend":{txt:"Number of Winners"},
+		"Bar":{values:wins,spacing:0.2,horizontal:true}
+	},".won-area");
 };
+
 
 DisplayWon();
 

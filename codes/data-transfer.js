@@ -5077,7 +5077,7 @@ SVGHTML=function(opts){
 }
 
 SVGLineHTML=function(opts){
-	if(opts.vertical){
+	if(opts.horizontal){
 		var y0=opts.x0||0;
 		var y1=typeof opts.x1==="undefined"?1:opts.x1;
 		var x0=opts.y0||0;
@@ -5104,8 +5104,8 @@ SVGBarHTML=function(opts){
 }
 
 SVGTextHTML=function(opts){
-	var x0=opts.x0||0;
-	var y0=opts.y0||0;
+	var x0=typeof opts.x0==="undefined"?0:opts.x0;
+	var y0=typeof opts.y0==="undefined"?0:opts.y0;
 	var cla=opts.cla||"";
 	var txt=opts.txt||"";
 	var size=opts.size||"";
@@ -5152,10 +5152,10 @@ AddChartAxis=function(opts,chart){
 AddChartLine=function(opts,chart){
 	var major=typeof opts.major==="undefined"?4:opts.major;
 	var minor=typeof opts.minor==="undefined"?5:opts.minor;
-	var vertical=!!opts.vertical;
+	var horizontal=!!opts.horizontal;
 	var invert=!!opts.invert;
-	var xview=vertical?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
-	var yview=vertical?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
+	var xview=horizontal?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
+	var yview=horizontal?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
 	var up=typeof opts.up==="undefined"?(1/100):opts.up;
 	var down=typeof opts.down==="undefined"?(-1/100):-Abs(opts.down);
 	var scale=typeof opts.scale==="undefined"?0.5:opts.scale;
@@ -5167,8 +5167,8 @@ AddChartLine=function(opts,chart){
 			x1:Round(I/major*xview,5),
 			y0:Round(down*yview,5),
 			y1:Round(up*yview,5),
-			cla:type+" line major "+(vertical?"y":"x"),
-			vertical:vertical
+			cla:type+" line major "+(horizontal?"y":"x"),
+			horizontal:horizontal
 		}),chart);
 
 		if(i===major)
@@ -5181,79 +5181,103 @@ AddChartLine=function(opts,chart){
 				x1:Round((I+J/minor)/major*xview,5),
 				y0:Round(down*yview*scale,5),
 				y1:Round(up*yview*scale,5),
-				cla:type+" line minor "+(vertical?"y":"x"),
-				vertical:vertical
+				cla:type+" line minor "+(horizontal?"y":"x"),
+				horizontal:horizontal
 			}),chart);
 		}
 	}
 	RefreshSVG(chart);
 }
 
-AddChartGridlines=function(opts,chart){
-	AddChartGridline({major:opts.x,minor:5,vertical:true},chart);
-	AddChartGridline({major:opts.y,minor:3},chart);
-}
-
-AddChartAxes=function(opts,chart){
-	AddChartAxis({major:opts.y,minor:3},chart);
-	AddChartTick({major:opts.y,minor:3},chart);
-	AddChartAxis({invert:true,vertical:true},chart);
-	AddChartTick({major:opts.x,minor:5,invert:true,vertical:true},chart);
-}
 
 AddChartLegend=function(opts,chart){
-	var vertical=!!opts.vertical;
-	var xview=vertical?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
-	var yview=vertical?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
+	var horizontal=!!opts.horizontal;
+	var xview=horizontal?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
+	var yview=horizontal?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
 	var fontsize=xview/Min(2*opts.txt.length,20);
+
+	var x=typeof opts.x==="undefined"?(0+xview)/2:x;
+	var x=typeof opts.y==="undefined"?(0+yview)/2:y;
+	
 	AddElement(SVGTextHTML({
-		x0:(0+xview)/2,
-		y0:yview+fontsize,
+		x0:x,
+		y0:y,
 		txt:opts.txt,
 		size:fontsize,
-		cla:"legend "+(vertical?"y":"x")
+		cla:"legend "+(horizontal?"y":"x")
 	}),chart);
 }
 
 
-AddChartBars=function(values,opts,chart){
-	var xview=GetElement(chart).viewBox.baseVal.width;
-	var yview=GetElement(chart).viewBox.baseVal.height;
+AddChartBars=function(opts,chart){
+	var horizontal=!!opts.horizontal;
+	var invert=!!opts.invert;
+	var xview=horizontal?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
+	var yview=horizontal?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
+	
+	var values=opts.values;
 	var xdivisions=values.length;
 	var widthmax=xview/xdivisions;
 	var xspacing=(opts.spacing||0)*widthmax/2;
 	var ymax=Max.apply(null,values);
 	var yvalues=values.map(function(v){return v/ymax*yview});
+	
 	for(var i=0;i<yvalues.length;i++){
-		AddElement(SVGBarHTML({
-			x0:Round(i*widthmax+xspacing,5),
-			x1:Round((i+1)*widthmax-xspacing,5),
-			y0:Round(yview-yvalues[i],5),
-			y1:Round(yview,5),
-			cla:"bar"
-		}),chart)
+		var I=invert?(yvalues.length-i):i;
+		if(horizontal)
+			AddElement(SVGBarHTML({
+				x0:Round(I*widthmax+xspacing,5),
+				x1:Round((I+1)*widthmax-xspacing,5),
+				y0:Round(yview-yvalues[I],5),
+				y1:Round(yview,5),
+				cla:"bar"
+			}),chart)
+		else
+			AddElement(SVGBarHTML({
+				y0:Round(I*widthmax+xspacing,5),
+				y1:Round((I+1)*widthmax-xspacing,5),
+				x0:Round(yview-yvalues[I],5),
+				x1:Round(yview,5),
+				cla:"bar"
+			}),chart)
 	}
 	RefreshSVG(chart)
 }
 
+ChartComponents=function(){
+		return ["XGridline","YGridline","XAxis","YAxis","XTick","YTick","XLegend","YLegend","Bar"];
+}
 
-AddChart=function(values,opts,target){
+AddChartComponent=function(component,opts,chart){
+
+	if(component==="XGridline")
+		return AddChartGridline(opts,chart);
+	if(component==="YGridline")
+		return AddChartGridline(opts,chart);
+	if(component==="XAxis")
+		return AddChartAxis(opts,chart);
+	if(component==="YAxis")
+		return AddChartAxis(opts,chart);
+	if(component==="XTick")
+		return AddChartTick(opts,chart);
+	if(component==="YTick")
+		return AddChartTick(opts,chart);
+	if(component==="Bar")
+		return AddChartBars(opts,chart);
+	if(component==="XLegend")
+		return AddChartLegend(opts,chart);
+	if(component==="YLegend")
+		return AddChartLegend(opts,chart);
+}
+
+AddChart=function(opts,target){
 	var cla=opts.cla||"chart";
 	var chart=AddElement(SVGHTML({cla:cla}),target);
-		cla="."+cla;
 	
-	var linedivs=Floor(values.length/2);
+	ChartComponents().map(function(c){
+		if(opts[c]){AddChartComponent(c,opts[c],Prefix(cla,"."))};
+	});
 	
-	AddChartAxes({x:linedivs,y:linedivs},cla);
-	AddChartGridlines({x:linedivs,y:linedivs},cla);
-
-	AddChartBars(values,{spacing:0.1},cla);
-	
-	if(opts.xlegend)
-		AddChartLegend({txt:opts.xlegend},cla);
-	if(opts.ylegend)
-		AddChartLegend({txt:opts.ylegend,vertical:true},cla);
-
 	chart.viewBox.baseVal.x+=-chart.viewBox.baseVal.width/20;
 	chart.viewBox.baseVal.y+=-chart.viewBox.baseVal.height/20;
 	chart.viewBox.baseVal.width*=1.05;
