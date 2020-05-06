@@ -175,16 +175,11 @@ NightModeToggled=function(b){Listen("click", function(){RegisterNightModeToggled
 ///////////////////////////////////////////////////////////////////////////////
 // Analytics Behaviour
 
-AnalyticsAllowed=function(){
-	var disallowed=PageSearch("test")||PageSearch("debug")||FileLinked(PageURL());
-		disallowed=Memory("analyticsDisallowed")||disallowed;
-		Memory("analyticsDisallowed",disallowed);
-	return !disallowed;
-}
 
-IncognitoText=function(){
-	return AnalyticsAllowed()?" (analytics on)":" <em>incognito</em>";
-}
+AnalyticsAllowed=StatusReporter(
+	"AnalyticsAllowed",
+	function(){return !PageSearch("test")&&!PageSearch("debug")&&!FileLinked(PageURL())}
+)
 
 AnalyticsStart=function(){
 	DisplayViewCounter();

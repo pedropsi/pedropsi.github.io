@@ -5084,23 +5084,39 @@ DynamicText=function(label,text){
 
 Toggler=function(StatusReporterName){
 	return function(){
-		if(globalThis[StatusReporterName]())
+		var status=globalThis[StatusReporterName]();
+		if(status){
 			globalThis[StatusReporterName]=False;
-		else
+			Memory(StatusReporterName,False());
+		}else{
 			globalThis[StatusReporterName]=True;
+			Memory(StatusReporterName,True());
+		}
 		return DynamicText(StatusReporterName,TogglerButtonHTML(StatusReporterName));
 	}
 }
 
-TogglerButtonHTML=function(StatusReporterName){
+TogglerButtonHTML=function(StatusReporterName,opts){
 	if(!globalThis[StatusReporterName]||typeof globalThis[StatusReporterName]!=="function")
 		return DynamicText(StatusReporterName);
+
 	var status=ButtonHTML({
 		txt:globalThis[StatusReporterName]()?"active":"inactive",
 		attributes:{href:"",onclick:'Toggler("'+StatusReporterName+'")()',class:"inline"}
 	});
 	
 	return DynamicText(StatusReporterName,status);
+}
+
+
+StatusReporter=function(name,DefaultStatusReporter){
+	return function(){
+		var status=DefaultStatusReporter();
+		if(Memory(name)!==null)
+			return Memory(name);
+		else
+			return status;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
