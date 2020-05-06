@@ -323,7 +323,7 @@ HALL_OF_FAME_TEXT_SHORT		:	()=>	`<h3>Hall of fame</h3><p>Once you beat ${v.TITLE
 HALL_OF_FAME_TEXT			:	()=>	`${v.HALL_OF_FAME_TEXT_SHORT()} <p>Record-keeping started March 26th 2018, so if you've beaten this game before this date you'll have to beat it again to enter ${v.A_HOF()}</p>.`,
 
 COMMUNITY					:	()=>	`<h2>Community</h2>${v.GUESTBOOK_MESSAGE()}${v.HALL_OF_FAME_TEXT_SHORT()}${v.STATS()}${v.MENTIONS()}`,
-STATS						:	()=>	`<h3>Game stats</h3><p class="won-area">How you compare with other players? Find out in the game stats below.</p>`,
+STATS						:	()=>	`<h3>Game stats</h3><p class="won-area">Do you wonder how you compare with other players? Find out in the game stats below.</p>`,
 
 GUESTBOOK_POST_TEXT			:	()=>	`<p>Enjoyed ${v.TITLE_BOLD()}? Add <b>your message</b> below to the ${v.A_GUESTBOOK()}!</p>`,
 GUESTBOOK_MESSAGE			:	()=>	`<h3>Guestbook</h3>${v.GUESTBOOK_POST_TEXT()}${v.GUESTBOOK_ADD()}`,

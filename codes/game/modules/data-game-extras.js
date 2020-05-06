@@ -1205,7 +1205,7 @@ function SelectLevelFromTitle(leveltitle){
 		}
 	);
 	if(level>0)
-		SelectLevel(level)
+		SelectLevel(level);
 }
 
 function SelectLevel(lvl){
