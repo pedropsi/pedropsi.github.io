@@ -525,9 +525,9 @@ RequestModalWinnerMessage=function(previousDP){
 	
 	function DestinationChoice(choice){
 		if(choice==="Public message in Guestbook")
-			return "Guestbook";
+			return "guestbook";
 		else
-			return "Feedback";
+			return "feedback";
 	}
 	
 	RequestDataPack([
