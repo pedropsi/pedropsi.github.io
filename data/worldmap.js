@@ -274,10 +274,11 @@ DeployCountry=function(data){
 		var country=row[0];
 		var CC=countrycodes[row[0]];
 		if(CC){
+			CC="#"+CC;
 			var visits=Number(row[1]||0);
 			var CountryText=function(){DynamicText("worldMapCounter",country+":"+visits)};
 			var darkness=Math.log10(1+visits);
-			var style="#worldMap #"+CC+"{fill:"+HEX(Huen(Darken("#FEFEFF",darkness),Hue("#FEFEFF")-Hue("#070070"))).colour+"}";
+			var style="#worldMap "+CC+"{fill:"+HEX(Huen(Darken("#FEFEFF",darkness),Hue("#FEFEFF")-Hue("#070070"))).colour+"}";
 			styles=styles+"\n"+style;
 			Listen("mouseenter",CountryText,CC);
 			Listen("click",CountryText,CC);

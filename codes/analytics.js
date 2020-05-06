@@ -392,7 +392,7 @@ CodeCountry=function(){
 "NF":"Norfolk Island",
 "NG":"Nigeria",
 "NI":"Nicaragua",
-"NL":"The Netherlands",
+"NL":"Netherlands",
 "NO":"Norway",
 "NP":"Nepal",
 "NR":"Nauru",
