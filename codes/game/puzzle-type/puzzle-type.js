@@ -136,7 +136,6 @@ function StartGame(){
 	ObtainKeyActionsGameBar();
 	LoadGame();
 	ObtainTitleScreenLoader();
-	
 };
 
 
@@ -155,15 +154,15 @@ function P(){
 }
 */
 
+
 function P(){
 	var pagetag=PageTag();
 	var tokens=["Oliver","PatrickEye","Plurmorant","mago314","Deusovi","minotalen"];
 	var apptokens=tokens.map(function(t){return "homescreen-"+t});
 	var manifest=GetElement("manifest");
 	manifest.href=manifest.href.replace("homescreen","homescreen-"+pagetag);
-	return In(tokens,pagetag)||Purchased()||In(apptokens,PageSearch("source"));
+	return In(tokens,pagetag)||In(apptokens,PageSearch("source"));
 }
-
 
 
 ///////////////////////////////////////////////////////////////////////////////
