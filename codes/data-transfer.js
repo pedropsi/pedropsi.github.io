@@ -1503,7 +1503,6 @@ GenerateId=function(){
 };
 
 
-
 ////////////////////////////////////////////////////////////////////////////////
 //Load resources
 
@@ -3669,12 +3668,6 @@ ModalHTML=function(content,id,type){
 OpenModal=function(content,id,targetid){
 	AddElement(ModalHTML(content,id),targetid);
 	FocusInside(id);
-}
-
-OpenMessageModal=function(message,id,targetid){
-	var qid=id?id:GenerateId();
-	var targetid=targetid?targetid:document.body.id;
-	OpenModal(MessageHTML(message)+OkButtonHTML(qid),qid,targetid);
 }
 
 //Modal self-laucher for questions (datapacks)
