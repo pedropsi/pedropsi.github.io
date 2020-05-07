@@ -1381,11 +1381,17 @@ Navigate=function(url,samewindow){
 	if(samewindow)
 		window.location.href=url;
 	else{//NewTab
-		var id=GenerateId();
-		PreAddElement(AHTML(" ",url,{"id":id,"target":"_blank"}),"body");
-		GetElement(id).click();
-		RemoveElement(id);
+		AClick(url,{"target":"_blank"})
 	}
+}
+
+AClick=function(url,opts){
+	var id=GenerateId();
+	var opts=opts||{};
+	opts.id=id;
+	PreAddElement(AHTML(" ",url,opts),"body");
+	GetElement(id).click();
+	RemoveElement(id);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
