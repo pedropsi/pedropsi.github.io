@@ -180,6 +180,10 @@ GAME_SCRIPT					:	()=>	[v.GAME_SCRIPT_GAME(),v.GAME_STYLE()],
 GUESTBOOK_ADD				:	()=>	`<div class="button centered" onclick="RequestGuestbook()" tabindex="0">Leave your message!</div>`,
 //BUTTON_GET					:	()=>	`<div class="button centered buy" tabindex="0">Get it now!</div>`,
 //BUTTON_PREORDER				:	()=>	`<div class="button centered buy" tabindex="0">Preorder now!</div>`,
+STORE_SENDOWL				:	()=>'<script type="text/javascript" src="https://transactions.sendowl.com/assets/sendowl.js" ></script>',
+BUTTON_BUY					:	(v)=>`<a href="https://transactions.sendowl.com/products/${v.OWL()}/add_to_cart" rel="nofollow"><div class="button">${v.PRICE()}</div></a>`,
+BUTTON_BUY_FULL					:	(v)=>`<a href="https://transactions.sendowl.com/products/${v.OWL()}/add_to_cart" rel="nofollow"><div class="button">Buy now (${v.PRICE()})</div></a>`,
+
 
 BUTTON_SUBSCRIBE			:	()=>	NavigationButtonHTML("subscribe"),
 
