@@ -2607,9 +2607,9 @@ DataFieldTypes=function(){
 		qtype:KeyboardHTML,
 		defaultChoice:function(i,txt){return txt==="⮐";},//Defaults to enter
 		qsubmittable:false},
-	pass:{
+	password:{
 		questionname:"What is the password?",
-		qfield:'answer',
+		qfield:'password',
 		qtype:ShortAnswerHTML,
 		qvalidator:SomeTextValidator,
 		qplaceholder:"(top-secret)"},
