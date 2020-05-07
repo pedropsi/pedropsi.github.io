@@ -335,6 +335,7 @@ nav{
 	text-decoration:unset;
 }
 
+
 .button:hover ,
 .button:active,
 .button:focus ,
@@ -1353,6 +1354,10 @@ tr:active .editTD{
 	margin:var(--h2) 0 var(--h2) 0;
 }
 
+.announce a{
+	text-decoration: unset;
+}
+
 .error{
 	max-width:95%;
 	font-weight:bold;
@@ -1565,7 +1570,7 @@ table .label{
 }
 
 .product-container .product-image{
-	max-width: var(--w32);
+	max-width: var(--w16);
 	height: auto;
 }
 
