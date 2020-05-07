@@ -80,8 +80,7 @@ PageFeaturesDOM=function(){
 	Listen("mousedown",function(e){FocusElement(e.target)});//Focus clicked items (also to escape focus by clicking in unfocusable parents)
 	Listen("click",function(e){FocusElement(e.target)});
 	ResumeCapturingKeys(CaptureComboKey);
-	PurchasedConfirm();
-	StartNightMode();
+	//PurchasedConfirm();
 	Connection();
 	
 	if(PageSearch("debug"))
