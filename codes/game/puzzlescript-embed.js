@@ -105,7 +105,7 @@ function EvaluateScheduled(sourceArray){
 }
 
 function ExternalCompileASAP(fork){
-	ConsoleAdd("<p>Requesting Puzzlescript Fork from <b>"+sourceFork+"</b></p>");
+	ConsoleAdd("<p>Requesting Puzzlescript Fork from <b>"+fork+"</b></p>");
 
 	var modules=CoreModules.concat(["COMPILE"]).concat(ExtraModules).concat(["GAMEBAR"/*,"MOBILE"*/]);//This is the order of evaluation
 	ListenAndOnce(modules,function(){EvaluateScheduled(modules)});
@@ -158,7 +158,9 @@ function RetrieveSourceAndFork(data){
 	var fileNames=Keys(fileObjects);
 
 	var foundSource=false;
-	var foundFork=false;
+	var sourceFork=PageSearch("fork");
+	var foundFork=sourceFork!=="";
+	
 	for(var i=0;i<fileNames.length;i++){
 		fileContent=fileObjects[fileNames[i]]["content"];
 		if(!foundSource)

@@ -236,10 +236,14 @@ function GameEntryData(dataline){
 
 	//Generate the HTML entry
 	if(typeof LinkWhitelist!=="undefined"&&InLinkWhitelist(data.linkHTML)){
+		var fork=""
+		if(In(data.linkHTML,".github.io"))
+			fork="&fork="+new URL(data.linkHTML).host.replace(/\.github\.io.*/g,"");
+
 		if(PageSearch("p",data.linkHTML))
-			data.playlink="game-console.html?game="+PageSearch("p",data.linkHTML);
+			data.playlink="game-console.html?game="+PageSearch("p",data.linkHTML)+fork;
 		if(PageSearch("hack",data.linkHTML))
-			data.playlink="game-console.html?game="+PageSearch("hack",data.linkHTML);
+			data.playlink="game-console.html?game="+PageSearch("hack",data.linkHTML)+fork;
 		
 		if(data.playlink!=="")
 			data.consolable=true;
