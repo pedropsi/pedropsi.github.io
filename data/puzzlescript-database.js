@@ -236,9 +236,9 @@ function GameEntryData(dataline){
 
 	//Generate the HTML entry
 	if(typeof LinkWhitelist!=="undefined"&&InLinkWhitelist(data.linkHTML)){
-		if(/.*puzzlescript\.net\/play.*/.test(data.linkHTML)||/.*github\.io.*/.test(data.linkHTML))
+		if(PageSearch("p",data.linkHTML))
 			data.playlink="game-console.html?game="+PageSearch("p",data.linkHTML);
-		if(/.*puzzlescript\.net\/editor.*/.test(data.linkHTML))
+		if(PageSearch("hack",data.linkHTML))
 			data.playlink="game-console.html?game="+PageSearch("hack",data.linkHTML);
 		
 		if(data.playlink!=="")
