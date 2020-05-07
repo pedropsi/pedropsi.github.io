@@ -343,7 +343,12 @@ Inflows=function(name){
 		docId:"158LEND9dCQF53UFvB5BEWjQmgm47PUv2jBXdr8W3xWc",
 		sheetName:"PGD",
 		rowStart:8
-	}
+	},
+	"secret":{
+		docId:"1JnxJM0LcFyl7XvF-P2MlBi6q3lKRlqVMEY-V8i9zWng",
+		sheetName:"Source",
+		rowStart:1
+		}
 	};
 	if(name)
 		return UnFunction(flows[name]);
@@ -730,21 +735,33 @@ PWAInstallConfirm=function(ev){
 
 
 //////////////////////////////////////////////////////////////////////
-//Purchase
+//Password
 
-Purchased=function(){
-	return (PageSearch("source")==="stripe"&&PageSearch("result")==="success");
-};
+function RequestProductKey(SuccessF){
+	RequestDataPack([
+		['password',{
+			questionname:"Your purchased product key"
+		}],
+		],{
+			actionText:'Verify',
+			actionvalid:function(){SubmitPassword(SuccessF)},
+			thanksmessage:"Key submitted! Verifying..."
+		}
+	)
+}
 
-PurchasedConfirm=function(){
-	if(!Purchased())
-		return;
-	ConsoleAddMany([
-		"Thank you for your purchase. Enjoy!",
-		"Pedro PSI stands available to answer any questions you may have...",
-		"...yet no hints will be provided!",
-		"<b>Important: please bookmark this URL</b> - you'll need it to return to the game!"]);
-};
+function SubmitPassword(SuccessF){
+	function VerifyPassword(data){
+		var d=JSON.parse(data);
+		if(d.length<1)
+			return ConsoleAdd("Invalid key. Retry?");
+		else{
+			SuccessF(d);
+		}
+	}
+
+	LoadData(MacroURL(Inflows('secret'))+"&key="+FindData("password"),VerifyPassword);
+}
 
 //////////////////////////////////////////////////////////////////////
 // Editor
@@ -899,6 +916,7 @@ RequestContact=function(){
 		thanksmessage:"★ Thank you. Please await your reply! ★"
 	});
 }
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
