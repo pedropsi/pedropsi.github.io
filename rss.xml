@@ -16,6 +16,24 @@
 		</image>
 		
 	<item>
+		<title><![CDATA[Game stats & other improvements]]></title>
+		<link>https://pedropsi.github.io/index.html#RSS</link>
+		<guid>https://pedropsi.github.io/index.html?guid=2020-05-07</guid>
+		<pubDate>Thu, 7 May 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/splash.svg" width="180" height="180" alt="Creative Archive" title="Creative Archive"/>
+			
+<p>Most games now display a chart with the number of wins per level.</p>
+<p>Also, it is now possible to jump directly to any level by adding the URL parameter: e.g. ?level=levelTitle or e.g. ?level=2.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Sitemap]]></category>
+	</item>
+	
+
+	<item>
 		<title><![CDATA[Puzzle type beta changes IV]]></title>
 		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
 		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-04-26</guid>
@@ -247,7 +265,7 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/game-bar.svg" width="180" height="180" alt="Game Bar" title="Game Bar"/>
 			
-<p>A database of Puzzlescript components, prototypes and mechanic demonstrations was added to <a href='game-tools.html'>Game Tools</a> to complement the <a href='puzzlescript-games-database.html'>Puzzlescript games database</a>.</p>
+<p>A database of Puzzlescript components, prototypes and mechanic demonstrations was added to <a href='game-tools.html'>Game Tools</a> to complement the <a href='puzzlescript-games-database.html'>Puzzlescript Games-database</a>.</p>
 
 		]]>
 		</description>
@@ -286,7 +304,7 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/puzzlescript-games-database.svg" width="180" height="180" alt="Puzzlescript games database" title="Puzzlescript games database"/>
 			
-<p>The <a href='puzzlescript-games-database.html'>Puzzlescript games database</a> underwent several improvements. Among them, there are now more submission options, and search was added across all data categories. Search can be triggered by user input and indicated in the URL.</p>
+<p>The <a href='puzzlescript-games-database.html'>Puzzlescript Games-database</a> underwent several improvements. Among them, there are now more submission options, and search was added across all data categories. Search can be triggered by user input and indicated in the URL.</p>
 
 		]]>
 		</description>
@@ -380,7 +398,7 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/puzzlescript-games-database.svg" width="180" height="180" alt="Puzzlescript games database" title="Puzzlescript games database"/>
 			
-<p>The <a href='puzzlescript-games-database.html'>Puzzlescript games database</a> now sports over 1300 titles.</p>
+<p>The <a href='puzzlescript-games-database.html'>Puzzlescript Games-database</a> now sports over 1300 titles.</p>
 
 		]]>
 		</description>
