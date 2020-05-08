@@ -424,7 +424,9 @@ ObjectComplement=function(objInclude,objExclude){
 	return unique;
 }
 
-Complement=ObjectArrayF(ArrayComplement,ObjectComplement);
+Complement=function(){
+	return ObjectArrayF(ArrayComplement,ObjectComplement)(...arguments);
+}
 
 //Intersection (force uniqueness, sort)
 ArrayIntersection=function(array1,array2){
@@ -449,7 +451,9 @@ ObjectIntersection=function(array1,array2){
 	return unique;
 }
 
-Intersection=ObjectArrayF(ArrayIntersection,ObjectIntersection);
+Intersection=function(){
+	return ObjectArrayF(ArrayIntersection,ObjectIntersection)(...arguments);
+}
 
 //Union (force uniqueness, sort)
 Union=function(AO1,AO2){
