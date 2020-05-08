@@ -75,6 +75,7 @@ PageFeaturesDOM=function(){
 	ListenOnce('appinstalled',PWAInstallConfirm);
 	DynamicTables();
 	AnalyticsStart();
+	StartNightMode();
 	InlineSVG();
 	//Capture events
 	Listen("mousedown",function(e){FocusElement(e.target)});//Focus clicked items (also to escape focus by clicking in unfocusable parents)
@@ -82,6 +83,7 @@ PageFeaturesDOM=function(){
 	ResumeCapturingKeys(CaptureComboKey);
 	//PurchasedConfirm();
 	Connection();
+	
 	
 	if(PageSearch("debug"))
 		RequestDebugger();
