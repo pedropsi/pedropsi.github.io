@@ -1004,17 +1004,17 @@ function Copypaste(L){
 
 	var word=Letters().join("");
 	
-	if(InPosfix(word,"COPY")){
+	if(Posfixed(word,"COPY")){
 		word=UnPosfix(word,"COPY");
 		console.log(word);
 		Copypaste.last=word;
 		Letters(word);
-	}else if(InPosfix(word,"PASTE")){
+	}else if(Posfixed(word,"PASTE")){
 		word=UnPosfix(word,"PASTE");
 		console.log(word);
 		word=word+Copypaste.last||"";
 		Letters(word);
-	}else if(InPosfix(word,"CUT")){
+	}else if(Posfixed(word,"CUT")){
 		word=UnPosfix(word,"CUT");
 		Copypaste.last=word;
 		Letters([]);
@@ -1457,7 +1457,7 @@ function NumberPositions(name){
 	positions=positions.filter(function(p){return p!==null});
 	
 	positionsduplicate=positions.map(function(p){
-		if(InPrefix(p[0],"minus"))return [UnPrefix(p[0],"minus"),p[1]+5]}
+		if(Prefixed(p[0],"minus"))return [UnPrefix(p[0],"minus"),p[1]+5]}
 	)//"minus" length is 5
 		
 	positions=Complement(positions,positionsduplicate);
@@ -1500,7 +1500,7 @@ function InterpretPositiveNumber(name){
 };
 
 function InterpretNumber(name){
-	if(InPrefix(name,"minus")){
+	if(Prefixed(name,"minus")){
 		var name=UnPrefix(name,"minus");
 		return -1*InterpretNumber(name);
 	}
@@ -2451,7 +2451,7 @@ function DivideElementName(element){
 			var i=0;
 			while(i<NucleiAbbs.length){
 				ab=NucleiAbbs[i];
-				if(InPrefix(name,ab)){
+				if(Prefixed(name,ab)){
 					console.log(name,"--->",ab);
 					names.push(UnPrefix(name,ab));
 					found=(UnPrefix(name,ab)==="");
@@ -2728,10 +2728,10 @@ Keys(MajorChords).map(function(chord){
 //Manage letters and carets
 
 function SavedLetters(){
-	return Letters.array.filter(function(n){return !InPosfix(n,"*")});
+	return Letters.array.filter(function(n){return !Posfixed(n,"*")});
 }
 function TemporaryLetters(){
-	return Letters.array.filter(function(n){return InPosfix(n,"*")});
+	return Letters.array.filter(function(n){return Posfixed(n,"*")});
 }
 function TemporaryWord(){
 	return TemporaryLetters().map(PureLetter).join("");

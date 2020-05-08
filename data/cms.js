@@ -246,7 +246,7 @@ InlineSVG=function(){
 			svgHTML=svgHTML.replace(/svg width=..?(\d*)..? height=..?(\d*)..?/g,`svg class="image" viewbox="0 0 1080 1080" width="100" height="100"`);
 			ReplaceElement(svgHTML,img)
 		};
-		if(InPosfix(src,".svg")){
+		if(Posfixed(src,".svg")){
 			LoadData(src,ReplaceSVG)
 		}
 	}

@@ -676,10 +676,10 @@ Alternate=function(wordArray){
 	return wordArray.map(Parenthise).join("|");
 }
 
-InPrefix=function(word,prefix){
+Prefixed=function(word,prefix){
 	return UnPrefix(word,prefix)!==word;
 }
-InPosfix=function(word,suffix){
+Posfixed=function(word,suffix){
 	return UnPosfix(word,suffix)!==word;
 }
 
@@ -1262,7 +1262,7 @@ LoadSources=function(sourceArray,SuccessF){
 		sourceArray.map(LoadNodeSource);
 	}									
 	else{
-		var shoutArray=sourceArray.filter(function(f){return InPosfix(f,".js")}).map(SourceIdentifier);		//discards non-js files plus the folder structure to preserve file name
+		var shoutArray=sourceArray.filter(function(f){return Posfixed(f,".js")}).map(SourceIdentifier);		//discards non-js files plus the folder structure to preserve file name
 		ListenAndOnce(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
 		sourceArray.map(LoadSource);											//loads asynchronously (each file MUST "Shout" its own identifier upon loading)
 	}
@@ -1271,7 +1271,7 @@ LoadSources=function(sourceArray,SuccessF){
 
 LoadNodeSource=function(source){
 	var source=UnPosfix(source,".js");
-	if(!InPrefix(source,"."))
+	if(!Prefixed(source,"."))
 		source=Prefix(UnPrefix(source,"/"),"../");
 	//console.log("loading source ",source);
 	require(source);
@@ -1279,9 +1279,9 @@ LoadNodeSource=function(source){
 
 //Load scripts
 LoadSource=function(source){
-	if(InPosfix(source,".js"))
+	if(Posfixed(source,".js"))
 		LoadScript(source);
-	if(InPosfix(source,".css"))
+	if(Posfixed(source,".css"))
 		LoadStyle(source);
 }
 
@@ -1304,7 +1304,7 @@ LoadAsync=function(sourcename,folder){
 	var script=document.createElement('script');
 
 	var folder=((folder+"/").replace(/\/\//,"/"))||"codes/";
-	var ext=InPosfix(sourcename,".txt")?"":'.js';
+	var ext=Posfixed(sourcename,".txt")?"":'.js';
 	script.src=folder+Posfix(sourcename,ext);
 
 	script.async=false;
@@ -1525,12 +1525,12 @@ IsTag=function(selector){
 IsClass=function(selector){
 	if(!IsString(selector))
 		return false;
-	return InPrefix(selector,".");
+	return Prefixed(selector,".");
 }
 IsID=function(selector){
 	if(!IsString(selector))
 		return false;
-	return InPrefix(selector,"#");
+	return Prefixed(selector,"#");
 }
 
 IsQuerySelector=function(selector){
@@ -2057,7 +2057,7 @@ AHTML=function(title,ref,attribs){
 		var ref=Posfix(title,".html");
 		var title=CapitaliseSlug(title);
 	}
-	var external=InPrefix(ref,"http");
+	var external=Prefixed(ref,"http");
 	var attribs=attribs||{};
 	attribs["href"]=ref;
 	if(external)
@@ -4392,12 +4392,12 @@ LoadImage=function(fullpath,parentIDsel){
 }
 
 IsImageReference=function(ref){
-	return ImageExtensions().some(function(ext){return InPosfix(ref,"."+ext)});
+	return ImageExtensions().some(function(ext){return Posfixed(ref,"."+ext)});
 }
 
 //GIF Pause Support
 IsGif=function(ref){
-	return InPosfix(ref,".gif");
+	return Posfixed(ref,".gif");
 }
 
 StartGIF=function(gid){
