@@ -1044,7 +1044,7 @@ PageUnSearch=function(url){
 PageRelativePath=function(url){//folder + file
 	var url=DefaultURL(url);
 		url=PageUnFragment(url);
-		//url=PageUnSearch(url);
+		url=PageUnSearch(url);
 
 	if(PageRelative(url))
 		return url;
