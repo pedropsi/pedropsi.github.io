@@ -638,6 +638,16 @@ EscapeTokens=function(tokenString){
 
 
 // Prefix and Suffix
+// a#bc#d
+// UnPrefix	# 		a#bc#d
+// UnPosfix	# 		a#bc#d
+
+// UnOverfix	# 		a#bc
+// UnUnderfix	# 		  bc#d
+// UnAfterfix	# 		a     
+// UnBeforfix	# 		     d
+
+
 UnPrefix=function(word,prefix){
 	if(!prefix)
 		return word;
