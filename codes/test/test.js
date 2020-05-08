@@ -525,7 +525,7 @@ SaveTest(PageIdentifier,"http://www.xxx.yyy/greater.htm","greater","http file in
 SaveTest(PageIdentifier,"https://pedropsi.github.io/guestbook.html","guestbook","psi file in root folder");
 SaveTest(PageIdentifier,"https://pedropsi.github.io/gravirinth.html#$%F0%9F%93%B0%C2%BB","gravirinth","UTF");
 SaveTest(PageIdentifier,"https://pedropsi.github.io/puzzlescript-games-database#puzzlescript","puzzlescript-games-database","duplication of tag in title");
-
+SaveTest(PageIdentifier,"https://pedropsi.github.io/?test=true","index","nothing but search");
 
 SaveTest(PageDomain,"https://pedropsi.github.io/guestbook.html","pedropsi.github.io","simple html");
 SaveTest(PageDomain,"file://E:/Folder1/pedropsi.github.io/status.html","pedropsi.github.io","buried file folder");
