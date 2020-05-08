@@ -911,7 +911,8 @@ Predomainshard=function(){
 
 //PRIMARY
 
-PageTitle=function(){
+// Core
+PageTitle=function(){//ok
 	return document.title;
 }
 
