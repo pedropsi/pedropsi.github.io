@@ -81,8 +81,13 @@ function LoadExternalModule(source,fork){
 	LoadData(externalsource,ScheduleExternalEvaluation,undefined,LoadInternalFallback);
 }
 
+function TameCode(codetxt){//Removes problematic code fragments (add more as needed)
+	return codetxt.replace("canSetHTMLColors=true","canSetHTMLColors=false");
+}
+
 function ExternalSchedule(source,data){
 	var data=atob(JSON.parse(data)["content"]);
+		data=TameCode(data);
 	EvaluateScheduled[source]=function(){LoadCode(data)};
 	Shout(source);
 }
