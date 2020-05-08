@@ -1961,7 +1961,7 @@ function RequestMore(){
 	if(!GameEntryData)
 		return;
 	var id=PageSearch("game");
-	var data=Memory("game-console.html?game="+id);
+	var data=Memory(id);
 	if(!id||!data)
 		return;
 	

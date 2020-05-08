@@ -253,6 +253,8 @@ function GameEntryData(dataline){
 		else
 			data.titleHTML=AHTML(data.titleHTML,data.playlink=data.linkHTML);
 		
+		//data.playlink=data.playlink.replace(fork,"");
+		
 		if(data.pageHTML&&data.authorHTML!=="undefined"){
 			data.authorHTML=AHTML(data.authorHTML,data.pageHTML);
 		}
@@ -260,7 +262,7 @@ function GameEntryData(dataline){
 	
 	data.notesHTML=MultiLabel(data.notesHTML);
 	data.authorOriginalHTML=MultiLabel(data.authorOriginal);
-	data.id=data.playlink.replace("game-console.html?game=","");
+	data.id=data.playlink.replace("game-console.html?game=","").replace(fork,""); //Both external and forks
 	
 	//Display date
 
@@ -279,10 +281,10 @@ function GameEntryData(dataline){
 		Memory("PGD",gameList);
 	}
 
-	if(data.playlink!==""&&!In(gameList,data.playlink)){
-		gameList.push(data.playlink);
+	if(data.id!==""&&!In(gameList,data.id)){
+		gameList.push(data.id);
 		Memory("PGD",gameList);
-		Memory(data.playlink,data);
+		Memory(data.id,data);
 	}
 
 	return data;
@@ -300,14 +302,14 @@ function GameRowHTML(id){
 	var data=Memory(id);
 	if(!data)
 		return "";
-	return "\t<tr id='"+data.playlink+"'>\n"+TDHTML(data.titleHTML+data.notesHTML)+"\n"+TDHTML(data.authorHTML+data.authorOriginalHTML)+"\n"+TDHTML(data.yearHTML)+"\n"+EditButtonTD(id)+"</tr>";
+	return "\t<tr id='"+id+"'>\n"+TDHTML(data.titleHTML+data.notesHTML)+"\n"+TDHTML(data.authorHTML+data.authorOriginalHTML)+"\n"+TDHTML(data.yearHTML)+"\n"+EditButtonTD(id)+"</tr>";
 }
 
 function PrototypeExampleRowHTML(id){
 	var data=Memory(id);
 	if(!data)
 		return "";
-	return "\t<tr id='"+data.playlink+"'>\n"+TDHTML(data.titleHTML)+"\n"+TDHTML(data.authorHTML)+"\n"+TDHTML(data.classification)+"\n"+TDHTML(data["notes-consensus"])+"\n"+EditButtonTD(id)+"</tr>";
+	return "\t<tr id='"+id+"'>\n"+TDHTML(data.titleHTML)+"\n"+TDHTML(data.authorHTML)+"\n"+TDHTML(data.classification)+"\n"+TDHTML(data["notes-consensus"])+"\n"+EditButtonTD(id)+"</tr>";
 }
 
 
@@ -366,7 +368,7 @@ function GameDropDownButtonHTML(id,showauthor){
 		var author="";
 	return ButtonHTML({
 		txt:(title+author),
-		attributes:{class:"drop-option",onclick:'Navigate(\"'+data["playlink"]+'\",true)'}
+		attributes:{class:"drop-option",onclick:'Navigate(\"'+data["playlink"]+'\")'}
 	});
 }
 
