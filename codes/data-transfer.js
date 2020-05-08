@@ -732,6 +732,8 @@ Posfixed=function(word,suffix){
 }
 
 
+
+
 UnOnceBeforfix=function(word,prefix){
 	var prefixFind=new RegExp(".*"+EscapeTokens(prefix));
 	return word.replace(prefixFind,"");
@@ -745,10 +747,44 @@ UnBeforfix=function(word,prefix){
 		return UnOnceBeforfix(word,prefix);
 }
 
-UnOnceAfterfix=function(word,posfix){
+UnAfterfix=function(word,posfix){
+	if(!posfix)
+		return word;
 	var posfixFind=new RegExp(EscapeTokens(posfix)+".*");
 	return word.replace(posfixFind,"");
 }
+
+Afterfix=function(word,posfix){
+	if(!posfix)
+		return "";
+	return UnPrefix(word.replace(UnAfterfix(word,posfix),""),posfix);
+}
+
+UnOverfix=function(word,posfix){
+	if(!posfix)
+		return word;
+	return UnPosfix(word.replace(UnBeforfix(word,posfix),""),posfix);
+}
+
+Overfix=function(word,posfix){
+	if(!posfix)
+		return "";
+	return UnPrefix(word.replace(UnOverfix(word,posfix),""),posfix);
+}
+
+UnUnderfix=function(word,prefix){
+	if(!prefix)
+		return word;
+	return UnPrefix(word.replace(UnAfterfix(word,prefix),""),prefix);
+}
+
+Underfix=function(word,prefix){
+	if(!prefix)
+		return "";
+	return UnPosfix(word.replace(UnUnderfix(word,prefix),""),prefix);
+}
+
+/* redundant
 UnAfterfix=function(word,posfix){
 	if(!posfix)
 		return word;
