@@ -161,6 +161,7 @@ AbsolutiseLinks=function(){
 		};
 	MapLinks(PrepareLink);
 }
+*/
 
 
 
