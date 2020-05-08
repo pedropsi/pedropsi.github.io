@@ -16,8 +16,8 @@ var Store={
 	SUCCESS_LINK:()=>"https://pedropsi.github.io/puzzle-type",
 	ERROR_LINK:()=>"https://pedropsi.github.io/puzzle-type",
 	ACTION_BUTTON:v.BUTTON_SOON,//StripeButtonHTML,
-	INTEGRATION:StripeIntegrationHTML
 	OWL:()=>"78269703/8AB38B13",
+	INTEGRATION:()=>""
 	},
 "gift":{
 	AVAILABLE:()=>true,
