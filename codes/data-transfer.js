@@ -5266,9 +5266,7 @@ CoreFunctionNames=[
 	"FunctionName","FunctionBody",
 	"IsObject","IsRegex","IsNode",
 	"Apply",
-	"Memory","MemorySlot","PageRoot",
-	"PageURL","PageRelativePath","PageUnHead","PageURL","PageAfterOwnDomain","Predomainssoft",
-	"AlternateRegex","CombineMultiRegex","Domains","CombineRegex","IsSingleton","IsMaybeRoot"
+	"Memory","MemorySlot"
 ]
 
 Capture=function(functionName){
