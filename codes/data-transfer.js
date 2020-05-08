@@ -381,15 +381,27 @@ Count=function(array,itemOrF){
 		return array.filter(function(e){return Equal(e,itemOrF)}).length;
 }
 
+
+ObjectArrayF=function(ArrayF,ObjectF){
+	return function(AOInclude,AOExclude){
+		if(IsArray(AOInclude)&&IsArray(AOExclude))
+			return ArrayF(AOInclude,AOExclude);
+
+		if(IsObject(AOInclude)&&IsObject(AOExclude))
+			return ObjectF(AOInclude,AOExclude);
+
+		return console.log("error: mismatch obj and array in "+FunctionName(ArrayF)+"/"+FunctionName(ArrayF));
+	}
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Set functions
 
-Unique=function(array){
-	return Intersection(array,array);
+Unique=function(AO){
 }
 
 //Complement (force uniqueness, sort)
-Complement=function(arrayInclude,arrayExclude){
+ArrayComplement=function(arrayInclude,arrayExclude){
 	var unique=[];
 	var value;
 	for(var i=0;i<arrayInclude.length;i++){
@@ -400,8 +412,21 @@ Complement=function(arrayInclude,arrayExclude){
 	return unique.sort();
 }
 
+ObjectComplement=function(objInclude,objExclude){
+	var unique={};
+	var value;
+	for(var i in objInclude){
+		value=objInclude[i];
+		if(!(objExclude[i]===value))
+			unique[i]=value;
+	}
+	return unique;
+}
+
+Complement=ObjectArrayF(ArrayComplement,ObjectComplement);
+
 //Intersection (force uniqueness, sort)
-Intersection=function(array1,array2){
+ArrayIntersection=function(array1,array2){
 	var unique=[];
 	var value;
 	for(var i=0;i<array1.length;i++){
@@ -412,11 +437,24 @@ Intersection=function(array1,array2){
 	return unique.sort();
 }
 
+ObjectIntersection=function(array1,array2){
+	var unique={};
+	var value;
+	for(var i in array1){
+		value=array1[i];
+		if(array2[i]===value)
+			unique[i]=value;
+	}
+	return unique;
+}
+
+Intersection=ObjectArrayF(ArrayIntersection,ObjectIntersection);
+
 //Union (force uniqueness, sort)
-Union=function(array1,array2){
-	if(!array2)
-		return Unique(array1);
-	return Unique(array1.concat(array2));
+Union=function(AO1,AO2){
+	if(!AO2)
+		return Unique(AO1);
+	return Unique(AO1.concat(AO2));
 }
 
 //Permutations of a set (enforces uniqueness or sort)
