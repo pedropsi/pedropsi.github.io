@@ -398,6 +398,7 @@ ObjectArrayF=function(ArrayF,ObjectF){
 //Set functions
 
 Unique=function(AO){
+	return Intersection(AO,AO);
 }
 
 //Complement (force uniqueness, sort)
