@@ -3998,6 +3998,7 @@ ContextualDefaultShortcuts=function(){
 		//"alt enter":EnterLine, or dispatch event (enter?)
 		//"shift enter":EnterLine,		"escape":CloseCurrentDatapack,
 		"escape":CloseCurrentDatapack,
+		"ctrl w":CloseCurrentDatapack,
 		"enter":FocusNext,
 		"ctrl enter":SubmitCurrentDatapack,
 		"tab":FocusNext,
