@@ -156,7 +156,7 @@ function P(){
 
 
 function P(){
-	var pagetag=PageTag();
+	var pagetag=PageFragment();
 	var tokens=["Oliver","PatrickEye","Plurmorant","mago314","Deusovi","minotalen"];
 	var apptokens=tokens.map(function(t){return "homescreen-"+t});
 	var manifest=GetElement("manifest");
