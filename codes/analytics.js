@@ -159,7 +159,7 @@ AbsolutiseLinks=function(){
 		if(AbsolutableLinked(ref))
 			l.href=PageAbsolute(PageUnTag(ref));
 		};
-	ChangeLinks(PrepareLink);
+	MapLinks(PrepareLink);
 }
 
 
