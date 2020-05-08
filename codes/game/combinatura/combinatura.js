@@ -142,7 +142,7 @@ DelayUntil(function(){return (typeof PrepareGame!=="undefined")},StartGame);
 LoadAsync("cacher",".");
 ServiceWorker();
 LoadGameHTML(GameFrameHTML());
-LoadStyle(PageRoot()+"codes/game/combinatura/combinatura.css");
+LoadStyle("codes/game/combinatura/combinatura.css");
 
 
 //////////////////////////////////////////////////////////////////////////////

@@ -118,7 +118,6 @@ function GameIntro(){
 	RemoveElement("game-supra-Canvas");
 	PrependElement(GameFrameHTML(),".main");
 	GameFocus();
-	LoadStyle(PageRoot()+"codes/game/puzzle-type/puzzle-type.css");
 	if(P())
 		setTimeout(function(){PlayIntro(".game",StartGame)},100);
 	else{
@@ -126,6 +125,7 @@ function GameIntro(){
 		LevelAction=Identity;
 		LevelLoader=Identity;
 	}
+	LoadStyle("codes/game/puzzle-type/puzzle-type.css");
 }
 
 function StartGame(){
