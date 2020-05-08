@@ -10,7 +10,7 @@ var dataHeaders={
 DataUnitHeaders=function(){
 	return {
 		formGoogleSendEmail:"",
-		"identifier":PageIdentifier(PageURL()),
+		"identifier":PageIdentifier(),
 		"name":UserId()
 	};		
 }
@@ -126,8 +126,8 @@ RegisterStatus=function(errordata){
 ////////////////////////////////////////////////////////////////////////////////
 // Links Management
 
-ChangeLinks=function(f){
-	MarkElements("a",f);
+MapLinks=function(f){
+	GetElements("a").map(f);
 }
 
 OutLinks=function(){
@@ -137,7 +137,7 @@ OutLinks=function(){
 			l.setAttribute("target","_blank");};
 		l.addEventListener("mousedown", (function(){RegisterLink(ref)}),false);
 	};
-	ChangeLinks(PrepareLink);
+	MapLinks(PrepareLink);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -149,8 +149,8 @@ AnonimiseLinks=function(){
 		if(InnerLinked(ref))
 			l.href= PageUnTag(ref)+"#"+clearance;
 		};
-	ChangeLinks(PrepareLink);
-}*/
+	MapLinks(PrepareLink);
+}
  
 AbsolutiseLinks=function(){
 	function PrepareLink(l){
@@ -186,9 +186,9 @@ AnalyticsStart=function(){
 	if(AnalyticsAllowed()){
 		RegisterOpen();
 		//setTimeout(3000,DisplayViewCounter);//Update with own number
-		MarkElements(".button",ElementClicked);
-		MarkElements(".mosaic",MosaicToggled);
-		MarkElements("#NightMode",NightModeToggled);
+		GetElements(".button").map(ElementClicked);
+		GetElements(".mosaic").map(MosaicToggled);
+		GetElements("#NightMode").map(NightModeToggled);
 		OutLinks();
 	}
 	else{
