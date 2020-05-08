@@ -494,14 +494,7 @@ SaveTest(PadLeft,["hi","","8"],"hi","nosymbol");
 
 ///////////////////////////////////////////////////////////////////////////////
 //URL MANIPULATION
-//HEAD 			http://
-//DOMAIN 		aaaa.bbb.com
-//RELATIVEPATH	/folder1/folder2/
-//IDENTIFIER 	page
-//EXTENSION 	.html
-//TAG			#etc
 
-//PRIMARY
 
 
 
