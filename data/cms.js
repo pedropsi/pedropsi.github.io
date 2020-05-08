@@ -157,6 +157,7 @@ LatestHTML=function(){
 	var CMSOptions=CMSOptionsObj();
 	return SectionHTML({
 		...CMSOptions,
+		exclude:{FEATURED:()=>false},
 		header:`<h1 class="title">Latest posts</h1>`,
 		ItemHTML:MiniCardHTML,
 		max:v.LATEST_LIMIT(),

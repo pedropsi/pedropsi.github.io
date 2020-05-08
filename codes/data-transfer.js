@@ -2186,6 +2186,7 @@ SectionHTML=function(SettingsObj){
 	var Sorter=SettingsObj.Sorter;
 	var ItemHTML=SettingsObj.ItemHTML;
 	var include=SettingsObj.include||{};
+	var exclude=SettingsObj.exclude||false;
 	var FilterF=SettingsObj.FilterF;
 	var max=SettingsObj.max||false;
 
@@ -2194,7 +2195,12 @@ SectionHTML=function(SettingsObj){
 		changes=Values(FilterObject(changes,FilterF));
 	else if(include)
 		changes=BaseFilter(changes,include);
-
+	
+	if(exclude){
+		var unchanges=BaseFilter(changes,exclude);
+		changes=Complement(changes,unchanges);
+	}
+	
 	if(Sorter)
 		changes=changes.sort(Sorter);
 	if(max)
