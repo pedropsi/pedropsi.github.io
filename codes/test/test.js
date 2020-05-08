@@ -453,11 +453,29 @@ SaveTest(Exfix,["__","-"],"-__-","same prefix and suffix");
 SaveTest(UnExfix,["(ok)","(",")"],"ok","different prefix and suffix");
 SaveTest(UnExfix,["-__-","-"],"__","same prefix and suffix");
 
-SaveTest(UnBeforfix,["somethingantiantiantiall","anti"],"all","repeated prefix");
-SaveTest(UnAfterfix,["all is well well well something"," well"],"all is","repeated end, also spaces");
 
-SaveTest(Parenthise,"ok","(ok)","parrenthesis absent");
-SaveTest(Parenthise,"(ok)","(ok)","parrenthesis present");
+SaveTest(UnOverfix,["a#bc#d","#"],"a#bc","basic"),
+SaveTest(UnUnderfix,["a#bc#d","#"],"bc#d","basic"),
+SaveTest(UnAfterfix,["a#bc#d","#"],"a","basic"),
+SaveTest(UnBeforfix,["a#bc#d","#"],"d","basic"),
+
+SaveTest(UnOverfix,["a##bc##d","#"],"a##bc","repeated"),
+SaveTest(UnUnderfix,["a##bc##d","#"],"bc##d","repeated"),
+SaveTest(UnAfterfix,["a##bc##d","#"],"a","repeated"),
+SaveTest(UnBeforfix,["a##bc##d","#"],"d","repeated"),
+
+SaveTest(UnBeforfix,["somethingantiantiantiall","anti"],"all","long prefix");
+SaveTest(UnAfterfix,["all is well well well something"," well"],"all is","long prefix");
+
+
+/*SaveTest(UnExfix,["a##b##ef##c##d","#"],"b##ef##c","shallowest"),
+SaveTest(UnInfix,["a##b##ef##c##d","#"],"ad","shallowest"),
+SaveTest(UnExtrafix,["a##b##ef##c##d","#"],"ef","deepest"),
+SaveTest(UnIntrafix,["a##b##ef##c##d","#"],"a##bc##d","deepest"),*/
+
+
+SaveTest(Parenthise,"ok","(ok)","parenthesis absent");
+SaveTest(Parenthise,"(ok)","(ok)","parenthesis present");
 
 SaveTest(Alternate,[["singleoption"]],"(singleoption)","alternate single");
 SaveTest(Alternate,[["option","alternative","extra"]],"(option)|(alternative)|(extra)","alternate many");
