@@ -941,30 +941,6 @@ Datafy=function(obj){
 	return O;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//Regex
-CombineMultiRegex=function(exprarray,joiner){
-	var j="";
-	if(joiner){
-		j=joiner;
-	}
-	var regarray=exprarray.map(function(a){return new RegExp(a)});
-	regarray=regarray.map(function(a){return(a.source)});
-	var comb=new RegExp("("+regarray.join(j)+")","g");
-	return comb;
-}
-
-CombineRegex=function(a,b){
-	return CombineMultiRegex([a,b]);
-}
-AlternateRegex=function(exprarray){
-	return CombineMultiRegex(exprarray,"|");
-}
-
-ForwardRegex=function(string){
-	return CombineRegex(string,/[\d\D]*/);
-}
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // URL MANIPULATION

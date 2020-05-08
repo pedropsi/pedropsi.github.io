@@ -39,8 +39,8 @@ CompareId=function(a,b){
 	if(a===b)
 		return 0;
 	else{
-		var a1=a.replace(/\».*$/,"");
-		var b1=b.replace(/\».*$/,"");
+		var a1=UnAfterfix(a,"»");
+		var b1=UnAfterfix(b,"»");
 		
 		if(a1!==b1)
 			return Number(a1)<Number(b1)?1:-1;
@@ -51,7 +51,7 @@ CompareId=function(a,b){
 	}
 }
 
-ThreadId=function(fullid,startid){return fullid.replace(CombineRegex(/^/,startid),"").replace(/^\»/,"")};
+ThreadId=function(fullid,startid){return UnPrefix(UnPrefix(fullid,startid),"»")};
 IdDepth=function(fullid){return String(fullid).split("»").length};
 	
 NextReplyMessageId=function(id,dataarray){
