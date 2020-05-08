@@ -1,7 +1,7 @@
 var Store={
-PROD_PUZZLE_TYPE:{
+"puzzle-type":{
 	AVAILABLE:()=>true,
-	PRICE:()=>"5€",
+	PRICE:()=>"10€",
 	ACTION:()=>"Buy",
 	TITLE:()=>"Puzzle type",
 	TAGLINE:()=>"a cryptic typing puzzle",
@@ -17,20 +17,22 @@ PROD_PUZZLE_TYPE:{
 	ERROR_LINK:()=>"https://pedropsi.github.io/puzzle-type",
 	ACTION_BUTTON:v.BUTTON_SOON,//StripeButtonHTML,
 	INTEGRATION:StripeIntegrationHTML
+	OWL:()=>"78269703/8AB38B13",
 	},
-PROD_GIFT:{
+"gift":{
 	AVAILABLE:()=>true,
-	PRICE:()=>"10€",
+	PRICE:()=>"5€",
 	ACTION:()=>"Gift",
 	TITLE:()=>"Gift",
 	TAGLINE:()=>"a token of appreciation",
 	CALL:()=>"Spread the good karma.",
 	ONE_LINER:()=>`<p>Do you like the ${v.SITE_NAME()}</p>? This is an option to show your appreciation!</p>`,
-	DETAILS:()=>`<p>Presents?</p>`,
+	DETAILS:()=>`<p>What is in the box?</p>`,
 	LINK:()=>"store",
-	CALL:()=>"Ho ho ho!",
-	IMAGEALT:()=>"Coming soon.",
 	ACTION_BUTTON:v.BUTTON_SOON,
+	CALL:()=>`Send ${v.NAME()} a small gift!`,
+	IMAGEALT:()=>"Present",
+	OWL:()=>"78269976/1FDC655D",
 	INTEGRATION:()=>""
 	}
 }
