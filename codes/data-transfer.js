@@ -798,7 +798,7 @@ UnAfterfix=function(word,posfix){
 	else
 		return UnOnceAfterfix(word,posfix);
 }
-
+*/
 
 // Padding
 PadLR=function(txt,symbol,n){
@@ -967,147 +967,177 @@ ForwardRegex=function(string){
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//URL MANIPULATION
-
-//HEAD 			http://
-//DOMAIN 		aaaa.bbb.com
-//RELATIVEPATH	/folder1/folder2/
-//IDENTIFIER 	page
-//EXTENSION 	.html
-//TAG			#etc
-//SEARCH 		?param=value
-
-Domains=function(){
-	return ["pedropsi.github.io"]
-};
-Predomainssoft=function(){
-	return AlternateRegex(Domains().map(function(d){return CombineRegex(/^[\d\D]*/,d)}));
-}
-Predomainshard=function(){
-	return AlternateRegex(Domains().map(function(d){return CombineRegex(/^(https?:\/\/)*/,d)}));
-}
-
-
+// URL MANIPULATION
 // Core
-PageTitle=function(){//ok
+
+PageTitle=function(){
 	return document.title;
 }
 
-PageURL=function(){
-	return ""+window.location;
-}
-
-PageTag=function(url){
+DefaultURL=function(url){//Default to the current page url
 	if(typeof url==="undefined")
-		return PageTag(PageURL());
+		return window.location.href;
 	else
-		return url.replace(/([^#]*#)/,"").replace(url,"");	
-		//return new URL(url).hash;
+		return url;
 }
 
-PageUnTag=function(url){
-	if(typeof url==="undefined")
-		return PageUnTag(PageURL());
-	else{
-		var tag="#"+PageTag(url);
-		return UnPosfix(url,tag);
-	}
+PageProtocol=function(url){
+	var url=DefaultURL(url);
+	if(!In(url,"://"))
+		return "";
+	return new URL(url).protocol;
+}
+
+PageUnProtocol=function(url){
+	var url=DefaultURL(url);
+	url=UnPrefix(url,PageProtocol(url));
+	url=UnPrefix(url,"/");
+	return url;
+}
+
+//Relative pages don't have a domain and vice versa
+PageRelative=function(url){
+	var url=DefaultURL(url);
+	return PageProtocol(url)==="";
+}
+
+PageDomain=function(url){
+	var url=DefaultURL(url);
+	
+	if(!PageProtocol(url)||!In(url,"."))
+		return "";
+
+	url=PageUnProtocol(url);
+
+	var anchor=UnAfterfix(url,".");//Up to first .
+		anchor=UnOverfix(anchor,"/");//Up to closest / before .
+		url=UnPrefix(url,anchor);
+		url=UnPrefix(url,"/");
+		url=UnAfterfix(url,"/");
+	
+	return url;
+}
+
+
+PageFragment=function(url){
+	var url=DefaultURL(url);
+	return Afterfix(url,"#");
+}
+
+PageUnFragment=function(url){
+	var url=DefaultURL(url);
+	return UnAfterfix(url,"#");
 }
 
 PageUnSearch=function(url){
-	if(typeof url==="undefined")
-		return PageUnSearch(PageURL());
-	else{
-		return PageUnTag(url).replace(/\?.*/g,"");
-	}
+	var url=DefaultURL(url);
+
+	var fragment=PageFragment(url);
+		url=PageUnFragment(url);
+		url=UnAfterfix(url,"?");
+		if(fragment)
+			url=url+Prefix(fragment,"#");
+	return url;
 }
 
-PageIdentifierStrict=function(url){
-	if(typeof url==="undefined")
-		return PageIdentifierStrict(PageURL());
-	else{
-		var urlAfter=PageUnTag(url).replace(/(.*\/)/,"");
-		if(IsMaybeRoot(urlAfter))
-			return "";
-		else
-			return urlAfter.replace(".html","").replace(".htm","").replace(/\?.*/g,"");
-	}
+
+PageRelativePath=function(url){//folder + file
+	var url=DefaultURL(url);
+		url=PageUnFragment(url);
+		//url=PageUnSearch(url);
+
+	if(PageRelative(url))
+		return url;
+
+	var domain=PageDomain(url);
+		url=UnBeforfix(url,domain);
+	
+	return UnPrefix(url,"/");
+}
+
+PageFile=function(url){//file only
+	var url=DefaultURL(url);
+		url=PageRelativePath(url);
+	return UnBeforfix(url,"/");
+}
+
+PageRelativeFolder=function(url){//folder only
+	var url=DefaultURL(url);
+		url=PageRelativePath(url||"");
+		url=UnAfterfix(url,PageFile(url));
+	return UnPosfix(url,"/");
+}
+
+PageShallowPath=function(url){
+	var url=DefaultURL(url);
+		url=Posfix(PageDomain(url),"/")+PageFile(url);
+	return url
+}
+
+PageShallowURL=function(url){
+	return PageProtocol(url)+PageSomain(url)+PageShallowPath(url)+PageSearch(url)+PageFragment(url);
+}
+
+
+/*PageHost=function(url){
+	var url=DefaultURL(url);
+	return new URL(url).host;
+}
+
+PageUnHost=function(url){
+	var url=DefaultURL(url);
+		url=UnBeforfix(url,PageHost(url));
+	
+	return UnPrefix(url,"/");
+}
+
+PageForceURL=function(url){
+	var url=DefaultURL(url);
+	if(PageRelative(url))
+		return UnOverfix(window.location.href,"/")+Prefix(url,"/");
+	if(Prefixed(url,"file:")){
+		return PageFileForceURL(url);
+	}else
+		return DefaultURL(url);
+}
+*/
+
+PageSimpleIdentifier=function(url){
+	var url=DefaultURL(url);
+	var file=PageFile(url);
+	return UnAfterfix(file,".");
 }
 
 PageIdentifier=function(url){
-	return PageIdentifierStrict(url)||"index";
+	var url=DefaultURL(url);
+	var identifier=PageSimpleIdentifier(url);
+	return identifier||"index";
+}
+
+//Search
+
+PageSearch=function(parameter,page){
+	var l=new URL(page||document.URL);
+	l=l.search;
+	if(!parameter)
+		return l;
+	var token=new RegExp(".*\\?.*"+parameter+"\\=");
+	var id=l.replace(token,"");
+	if(id===l)
+		id="";
+	return FromUTF8(id.replace(/\&.*/,""));
 }
 
 
-PageUnHead=function(url){
-	if(typeof url==="undefined")
-		return PageUnHead(PageURL());
-	else
-		return url.replace(/[\w\d]*\:(\/\/+)/g,"");
+FromUTF8=function(string){
+	return StringReplace(string,UTF8());
 }
 
-PageHead=function(url){
-	if(typeof url==="undefined")
-		return PageHead(PageURL());
-	else
-		return url.replace(PageUnHead(url),"");
-}
-
-PageAfterOwnDomain=function(url){
-	if(typeof url==="undefined")
-		return PageAfterOwnDomain(PageURL());
-	else
-		return url.replace(Predomainssoft(),"").replace(/^\//,"");
-}
-
-IsMaybeRoot=function(urlAfter){
-	return (urlAfter.replace(".htm","")===urlAfter)&&(urlAfter.replace(".","")!==urlAfter);
-}
-IsSingleton=function(urlAfter){
-	return (urlAfter.replace("/","")===urlAfter);
-}
-PageRelativePath=function(url){
-	if(typeof url==="undefined")
-		return PageRelativePath(PageURL());
-	else{
-		var urlAfter=PageUnHead(PageAfterOwnDomain(url));
-		if(IsSingleton(urlAfter)){
-			if(IsMaybeRoot(urlAfter))
-				return "";
-			else
-				return urlAfter;
-		}
-		else
-			return urlAfter.replace(/\/*$/,"/").replace(/^([\d\w]+\.)+([\d\w]*)/,"").replace(/\/*$/,"").replace(/^\//,"");
+UTF8=function(){
+	return {
+		"%00":" ","%01":" ","%02":" ","%03":" ","%04":" ","%05":" ","%06":" ","%07":" ","%08":" ","%09":" ","%0A":" ","%0B":" ","%0C":" ","%0D":" ","%0E":" ","%0F":" ","%10":" ","%11":" ","%12":" ","%13":" ","%14":" ","%15":" ","%16":" ","%17":" ","%18":" ","%19":" ","%1A":" ","%1B":" ","%1C":" ","%1D":" ","%1E":" ","%1F":" ","%20":" ","%21":"!","%22":'"',"%23":"#","%24":"$","%25":"%","%26":"&","%27":"'","%28":"(","%29":")","%2A":"*","%2B":"+","%2C":",","%2D":"-","%2E":".","%2F":"/","%30":"0","%31":"1","%32":"2","%33":"3","%34":"4","%35":"5","%36":"6","%37":"7","%38":"8","%39":"9","%3A":":","%3B":";","%3C":"<","%3D":"=","%3E":">","%3F":"?","%40":"@","%41":"A","%42":"B","%43":"C","%44":"D","%45":"E","%46":"F","%47":"G","%48":"H","%49":"I","%4A":"J","%4B":"K","%4C":"L","%4D":"M","%4E":"N","%4F":"O","%50":"P","%51":"Q","%52":"R","%53":"S","%54":"T","%55":"U","%56":"V","%57":"W","%58":"X","%59":"Y","%5A":"Z","%5B":"[","%5C":"\\","%5D":"]","%5E":"^","%5F":"_","%60":"`","%61":"a","%62":"b","%63":"c","%64":"d","%65":"e","%66":"f","%67":"g","%68":"h","%69":"i","%6A":"j","%6B":"k","%6C":"l","%6D":"m","%6E":"n","%6F":"o","%70":"p","%71":"q","%72":"r","%73":"s","%74":"t","%75":"u","%76":"v","%77":"w","%78":"x","%79":"y","%7A":"z","%7B":"{","%7C":"|","%7D":"}","%7E":"~","%7F":" ","%C2%80":" ","%C2%81":" ","%C2%82":" ","%C2%83":" ","%C2%84":" ","%C2%85":" ","%C2%86":" ","%C2%87":" ","%C2%88":" ","%C2%89":" ","%C2%8A":" ","%C2%8B":" ","%C2%8C":" ","%C2%8D":" ","%C2%8E":" ","%C2%8F":" ","%C2%90":" ","%C2%91":" ","%C2%92":" ","%C2%93":" ","%C2%94":" ","%C2%95":" ","%C2%96":" ","%C2%97":" ","%C2%98":" ","%C2%99":" ","%C2%9A":" ","%C2%9B":" ","%C2%9C":" ","%C2%9D":" ","%C2%9E":" ","%C2%9F":" ","%C2%A0":" ","%C2%A1":"¡","%C2%A2":"¢","%C2%A3":"£","%C2%A4":"¤","%C2%A5":"¥","%C2%A6":"¦","%C2%A7":"§","%C2%A8":"¨","%C2%A9":"©","%C2%AA":"ª","%C2%AB":"«","%C2%AC":"¬","%C2%AD":"­","%C2%AE":"®","%C2%AF":"¯","%C2%B0":"°","%C2%B1":"±","%C2%B2":"²","%C2%B3":"³","%C2%B4":"´","%C2%B5":"µ","%C2%B6":"¶","%C2%B7":"·","%C2%B8":"¸","%C2%B9":"¹","%C2%BA":"º","%C2%BB":"»","%C2%BC":"¼","%C2%BD":"½","%C2%BE":"¾","%C2%BF":"¿","%C3%80":"À","%C3%81":"Á","%C3%82":"Â","%C3%83":"Ã","%C3%84":"Ä","%C3%85":"Å","%C3%86":"Æ","%C3%87":"Ç","%C3%88":"È","%C3%89":"É","%C3%8A":"Ê","%C3%8B":"Ë","%C3%8C":"Ì","%C3%8D":"Í","%C3%8E":"Î","%C3%8F":"Ï","%C3%90":"Ð","%C3%91":"Ñ","%C3%92":"Ò","%C3%93":"Ó","%C3%94":"Ô","%C3%95":"Õ","%C3%96":"Ö","%C3%97":"×","%C3%98":"Ø","%C3%99":"Ù","%C3%9A":"Ú","%C3%9B":"Û","%C3%9C":"Ü","%C3%9D":"Ý","%C3%9E":"Þ","%C3%9F":"ß","%C3%A0":"à","%C3%A1":"á","%C3%A2":"â","%C3%A3":"ã","%C3%A4":"ä","%C3%A5":"å","%C3%A6":"æ","%C3%A7":"ç","%C3%A8":"è","%C3%A9":"é","%C3%AA":"ê","%C3%AB":"ë","%C3%AC":"ì","%C3%AD":"í","%C3%AE":"î","%C3%AF":"ï","%C3%B0":"ð","%C3%B1":"ñ","%C3%B2":"ò","%C3%B3":"ó","%C3%B4":"ô","%C3%B5":"õ","%C3%B6":"ö","%C3%B7":"÷","%C3%B8":"ø","%C3%B9":"ù","%C3%BA":"ú","%C3%BB":"û","%C3%BC":"ü","%C3%BD":"ý","%C3%BE":"þ","%C3%BF":"ÿ"
 	}
 }
-
-PageRoot=function(url){
-	if(typeof url==="undefined")
-		return PageRoot(PageURL());
-	else{
-		return url.replace(PageRelativePath(url),"");
-	}
-}
-
-PageIdentifierExtension=function(url){
-	if(typeof url==="undefined")
-		return PageIdentifierExtension(PageURL());
-	else{
-		return url.replace(url.replace(ForwardRegex(PageIdentifierStrict(url)),""),"");
-	}
-}
-
-
-PageAbsolute=function(url){
-	if(typeof url==="undefined")
-		return PageAbsolute(PageURL());
-	else{
-		return PageRoot(url)+PageIdentifierExtension(url);
-	}
-}
-
-
 
 // Safe string loading
 SafeString=function(tex){
@@ -1124,67 +1154,34 @@ SafeUrl=function(tex){
 	return Prefix(tex,prefix);
 }
 
-//Search queries
-
-
-PageSearch=function(parameter,page){
-	var l=document.createElement("a");
-	l.href=page||document.URL;
-	l=l.search;
-	var token=new RegExp(".*\\?.*"+parameter+"\\=");
-	var id=l.replace(token,"");
-	if(id===l)
-		id="";
-	return FromUTF8(id.replace(/\&.*/,""));
-}
-
-FromUTF8=function(string){
-	return StringReplace(string,UTF8());
-}
-
-UTF8=function(){
-	return {
-		"%00":" ","%01":" ","%02":" ","%03":" ","%04":" ","%05":" ","%06":" ","%07":" ","%08":" ","%09":" ","%0A":" ","%0B":" ","%0C":" ","%0D":" ","%0E":" ","%0F":" ","%10":" ","%11":" ","%12":" ","%13":" ","%14":" ","%15":" ","%16":" ","%17":" ","%18":" ","%19":" ","%1A":" ","%1B":" ","%1C":" ","%1D":" ","%1E":" ","%1F":" ","%20":" ","%21":"!","%22":'"',"%23":"#","%24":"$","%25":"%","%26":"&","%27":"'","%28":"(","%29":")","%2A":"*","%2B":"+","%2C":",","%2D":"-","%2E":".","%2F":"/","%30":"0","%31":"1","%32":"2","%33":"3","%34":"4","%35":"5","%36":"6","%37":"7","%38":"8","%39":"9","%3A":":","%3B":";","%3C":"<","%3D":"=","%3E":">","%3F":"?","%40":"@","%41":"A","%42":"B","%43":"C","%44":"D","%45":"E","%46":"F","%47":"G","%48":"H","%49":"I","%4A":"J","%4B":"K","%4C":"L","%4D":"M","%4E":"N","%4F":"O","%50":"P","%51":"Q","%52":"R","%53":"S","%54":"T","%55":"U","%56":"V","%57":"W","%58":"X","%59":"Y","%5A":"Z","%5B":"[","%5C":"\\","%5D":"]","%5E":"^","%5F":"_","%60":"`","%61":"a","%62":"b","%63":"c","%64":"d","%65":"e","%66":"f","%67":"g","%68":"h","%69":"i","%6A":"j","%6B":"k","%6C":"l","%6D":"m","%6E":"n","%6F":"o","%70":"p","%71":"q","%72":"r","%73":"s","%74":"t","%75":"u","%76":"v","%77":"w","%78":"x","%79":"y","%7A":"z","%7B":"{","%7C":"|","%7D":"}","%7E":"~","%7F":" ","%C2%80":" ","%C2%81":" ","%C2%82":" ","%C2%83":" ","%C2%84":" ","%C2%85":" ","%C2%86":" ","%C2%87":" ","%C2%88":" ","%C2%89":" ","%C2%8A":" ","%C2%8B":" ","%C2%8C":" ","%C2%8D":" ","%C2%8E":" ","%C2%8F":" ","%C2%90":" ","%C2%91":" ","%C2%92":" ","%C2%93":" ","%C2%94":" ","%C2%95":" ","%C2%96":" ","%C2%97":" ","%C2%98":" ","%C2%99":" ","%C2%9A":" ","%C2%9B":" ","%C2%9C":" ","%C2%9D":" ","%C2%9E":" ","%C2%9F":" ","%C2%A0":" ","%C2%A1":"¡","%C2%A2":"¢","%C2%A3":"£","%C2%A4":"¤","%C2%A5":"¥","%C2%A6":"¦","%C2%A7":"§","%C2%A8":"¨","%C2%A9":"©","%C2%AA":"ª","%C2%AB":"«","%C2%AC":"¬","%C2%AD":"­","%C2%AE":"®","%C2%AF":"¯","%C2%B0":"°","%C2%B1":"±","%C2%B2":"²","%C2%B3":"³","%C2%B4":"´","%C2%B5":"µ","%C2%B6":"¶","%C2%B7":"·","%C2%B8":"¸","%C2%B9":"¹","%C2%BA":"º","%C2%BB":"»","%C2%BC":"¼","%C2%BD":"½","%C2%BE":"¾","%C2%BF":"¿","%C3%80":"À","%C3%81":"Á","%C3%82":"Â","%C3%83":"Ã","%C3%84":"Ä","%C3%85":"Å","%C3%86":"Æ","%C3%87":"Ç","%C3%88":"È","%C3%89":"É","%C3%8A":"Ê","%C3%8B":"Ë","%C3%8C":"Ì","%C3%8D":"Í","%C3%8E":"Î","%C3%8F":"Ï","%C3%90":"Ð","%C3%91":"Ñ","%C3%92":"Ò","%C3%93":"Ó","%C3%94":"Ô","%C3%95":"Õ","%C3%96":"Ö","%C3%97":"×","%C3%98":"Ø","%C3%99":"Ù","%C3%9A":"Ú","%C3%9B":"Û","%C3%9C":"Ü","%C3%9D":"Ý","%C3%9E":"Þ","%C3%9F":"ß","%C3%A0":"à","%C3%A1":"á","%C3%A2":"â","%C3%A3":"ã","%C3%A4":"ä","%C3%A5":"å","%C3%A6":"æ","%C3%A7":"ç","%C3%A8":"è","%C3%A9":"é","%C3%AA":"ê","%C3%AB":"ë","%C3%AC":"ì","%C3%AD":"í","%C3%AE":"î","%C3%AF":"ï","%C3%B0":"ð","%C3%B1":"ñ","%C3%B2":"ò","%C3%B3":"ó","%C3%B4":"ô","%C3%B5":"õ","%C3%B6":"ö","%C3%B7":"÷","%C3%B8":"ø","%C3%B9":"ù","%C3%BA":"ú","%C3%BB":"û","%C3%BC":"ü","%C3%BD":"ý","%C3%BE":"þ","%C3%BF":"ÿ"
-	}
-}
-
 //SECONDARY
 
 RelativeLinked=function(url){
 	return PageRelativePath(url)===url;
 }
-
 FileLinked=function(url){
-	return PageHead(url)==="file:///";
+	return PageProtocol(url)==="file:";
 }
-
 LocalLinked=function(url){
 	return RelativeLinked(url)||FileLinked(url);
 }
 
-OwnDomainLinked=function(url){
-	return url.replace(Predomainshard(),"")!==url;
+OwnLinked=function(url){
+	return PageDomain(url)===PageDomain();
 }
-
-IntraLinked=function(url){
-	var inpage=UnPrefix(url,"#");
-	return url!=inpage;
-}
-
-ExtraLinked=function(url){
-	return !IntraLinked(url);
+FragmentLinked=function(url){
+	return PageFragment(url)&&PageUnFragment(url)==="";
 }
 
 InnerLinked=function(url){
-	return ExtraLinked(url)&&(LocalLinked(url)||OwnDomainLinked(url));
+	return !FragmentLinked(url)&&(LocalLinked(url)||OwnLinked(url));
 }
-
 OuterLinked=function(url){
-	return ExtraLinked(url)&&!(LocalLinked(url)||OwnDomainLinked(url));
+	return !FragmentLinked(url)&&!(LocalLinked(url)||OwnLinked(url));
 }
 
-AbsolutableLinked=function(url){
-	return ExtraLinked(url)&&(RelativeLinked(url)||OwnDomainLinked(url));
+ShallowableLinked=function(url){
+	return !FragmentLinked(url)&&(RelativeLinked(url)||OwnLinked(url));
 }
 
 //Glocal Files
@@ -1207,8 +1204,9 @@ GlocalPath=function(urlpath,relativepath){
 //NavigateGoToPage
 
 Navigate=function(url,samewindow){
-	if(PageRoot(url)===""){
-		var url=PageRoot()+Prefix(Posfix(url,".html"));
+	if(PageRelative(url)){
+		var url=Posfix(url,".html");
+		var url=Posfix(PageDomain(),"/")+UnPrefix(url,"/");
 		var samewindow=true;
 	}
 	if(samewindow)
@@ -1295,7 +1293,7 @@ ShowHideIndex=function(){
 
 AddScrollUpButton=function(t,h){
 	var title=t.innerText;
-	t.innerHTML=AHTML(title,PageUnTag()+"#"+TocId(title));
+	t.innerHTML=AHTML(title,PageUnFragment()+"#"+TocId(title));
 	if(h==="h2")
 		AddElement(ScrollUpHTML(),t);
 }
@@ -1514,7 +1512,7 @@ MemorySlot=function(name){
 	if(!In(MemorySlot['_list'],name))
 		MemorySlot['_list'].push(name);
 	
-	return PageRoot()+"_"+name.toLowerCase();
+	return "__"+name.toLowerCase();
 }
 
 Memory=function(name,data,days){
@@ -2241,7 +2239,7 @@ SectionHTML=function(SettingsObj){
 		var unchanges=BaseFilter(changes,exclude);
 		changes=Complement(changes,unchanges);
 	}
-	
+
 	if(Sorter)
 		changes=changes.sort(Sorter);
 	if(max)
@@ -3530,7 +3528,7 @@ VideoEmbedHTML=function(ytid,origin){
 	return '<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/'+ytid+'?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0'+ori+'"></iframe>'};
 
 OpenVideoModal=function(ytid){
-	AddElement(ModalHTML(VideoEmbedHTML(ytid,PageTag()),GenerateId(),"gallery-video"),document.body.id);
+	AddElement(ModalHTML(VideoEmbedHTML(ytid,PageFragment()),GenerateId(),"gallery-video"),document.body.id);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -3797,7 +3795,7 @@ SongTitle=function(song){
 }
 
 FileSong=function(song){
-	return PageRelativePath(song.src).replace(/.*\//,"");
+	return PageRelativeFolder(song.src).replace(/.*\//,"");
 }
 
 PlayNextF=function(song){

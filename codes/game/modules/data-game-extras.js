@@ -556,10 +556,10 @@ function CurrentScreen(s){
 
 if(typeof ObtainStorageURL==="undefined")
 	function ObtainStorageURL(){
-		if (typeof PageUnTag==="undefined")
+		if (typeof PageUnFragment==="undefined")
 			return document.URL;
 		else
-			return PageUnTag(document.URL);
+			return PageUnFragment(document.URL);
 	}
 
 function LocalStorageName(name){
@@ -1629,12 +1629,10 @@ function Hints(lvl){
 
 function LoadHintsFile(){
 	if(!ConsoleExternal()&&!Hints.cached){
-		
-		if(FileLinked(PageURL()))
+		if(FileLinked())
 			Hints.path="https://pedropsi.github.io/hints/";
 		else
 			Hints.path="hints/";
-		
 		LoadData(Hints.path+PageIdentifier()+".txt",LoadHintData);
 	}
 }

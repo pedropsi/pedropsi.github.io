@@ -31,7 +31,7 @@ DataUnit=function(datatype){
 	var referrer=document.referrer;
 	
 	var source=PageSearch("source");
-		source=source?source:PageTag();
+		source=source?source:PageFragment();
 	
 	return FuseObjects(data,{
 		"language":LangUpperCase(window.navigator.language),
@@ -147,7 +147,7 @@ AnonimiseLinks=function(){
 	function PrepareLink(l){
 		var ref=l.href;
 		if(InnerLinked(ref))
-			l.href= PageUnTag(ref)+"#"+clearance;
+			l.href= PageUnFragment(ref)+"#"+clearance;
 		};
 	MapLinks(PrepareLink);
 }
@@ -178,7 +178,7 @@ NightModeToggled=function(b){Listen("click", function(){RegisterNightModeToggled
 
 AnalyticsAllowed=StatusReporter(
 	"AnalyticsAllowed",
-	function(){return !PageSearch("test")&&!PageSearch("debug")&&!FileLinked(PageURL())}
+	function(){return !PageSearch("test")&&!PageSearch("debug")&&!LocalLinked()}
 )
 
 AnalyticsStart=function(){

@@ -495,41 +495,57 @@ SaveTest(PadLeft,["hi","","8"],"hi","nosymbol");
 ///////////////////////////////////////////////////////////////////////////////
 //URL MANIPULATION
 
+SaveTest(PageProtocol,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html","file:","file:///");
+SaveTest(PageProtocol,"https://pedropsi.github.io/folder/guestbook.html","https:","https://");
+SaveTest(PageProtocol,"http://pedropsi.github.io/folder/guestbook.html","http:","file://");
+SaveTest(PageProtocol,"folder/guestbook.html","","relative");
+SaveTest(PageProtocol,"www.xxx.yyy","","www yet relative");
+
+SaveTest(PageUnProtocol,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html","D:/Robert/pedropsi.github.io/folder/guestbook.html","file:///");
+SaveTest(PageUnProtocol,"https://pedropsi.github.io/folder/guestbook.html","pedropsi.github.io/folder/guestbook.html","https://");
+SaveTest(PageUnProtocol,"http://pedropsi.github.io/folder/guestbook.html","pedropsi.github.io/folder/guestbook.html","http://");
+SaveTest(PageUnProtocol,"folder/guestbook.html","folder/guestbook.html","relative");
+SaveTest(PageUnProtocol,"www.xxx.yyy","www.xxx.yyy","www yet relative");
 
 
+SaveTest(PageFragment,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html#one","one","local tag");
+SaveTest(PageFragment,"http://pedropsi.github.io/folder/guestbook.html#one","one","online tag");
+SaveTest(PageFragment,"folder/guestbook.html#one#more","one#more","double chained tags");
+SaveTest(PageFragment,"https://pedropsi.github.io/folder/guestbook.html#","","empty tag");
 
-SaveTest(PageHead,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html","file:///","file:///");
-SaveTest(PageHead,"https://pedropsi.github.io/folder/guestbook.html","https://","https://");
-SaveTest(PageHead,"http://pedropsi.github.io/folder/guestbook.html","http://","file://");
-SaveTest(PageHead,"folder/guestbook.html","","relative");
-SaveTest(PageHead,"www.xxx.yyy","","www yet relative");
-
-SaveTest(PageUnHead,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html","D:/Robert/pedropsi.github.io/folder/guestbook.html","file:///");
-SaveTest(PageUnHead,"https://pedropsi.github.io/folder/guestbook.html","pedropsi.github.io/folder/guestbook.html","https://");
-SaveTest(PageUnHead,"http://pedropsi.github.io/folder/guestbook.html","pedropsi.github.io/folder/guestbook.html","http://");
-SaveTest(PageUnHead,"folder/guestbook.html","folder/guestbook.html","relative");
-SaveTest(PageUnHead,"www.xxx.yyy","www.xxx.yyy","www yet relative");
-
-
-SaveTest(PageTag,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html#one","one","local tag");
-SaveTest(PageTag,"http://pedropsi.github.io/folder/guestbook.html#one","one","online tag");
-SaveTest(PageTag,"folder/guestbook.html#one#more","one#more","double chained tags");
-SaveTest(PageTag,"https://pedropsi.github.io/folder/guestbook.html#","","empty tag");
-
-
-SaveTest(PageUnTag,"https://pedropsi.github.io/gravirinth.html#$%F0%9F%93%B0%C2%BB","https://pedropsi.github.io/gravirinth.html","strange tag");
+SaveTest(PageUnFragment,"https://pedropsi.github.io/gravirinth.html#$%F0%9F%93%B0%C2%BB","https://pedropsi.github.io/gravirinth.html","strange tag");
 
 SaveTest(PageIdentifier,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html","guestbook","file:///");
 SaveTest(PageIdentifier,"https://pedropsi.github.io/folder/guestbook.html","guestbook","https://");
 SaveTest(PageIdentifier,"http://pedropsi.github.io/folder/guestbook.html","guestbook","http://");
 SaveTest(PageIdentifier,"folder/guestbook.html","guestbook","relative");
-SaveTest(PageIdentifier,"www.xxx.yyy","","www no subfolder");
-SaveTest(PageIdentifier,"http://www.xxx.yyy","","http no subfolder");
+SaveTest(PageIdentifier,"http://www.xxx.yyy","index","http no subfolder");
 SaveTest(PageIdentifier,"http://www.xxx.yyy/great/greater.htm","greater","http subfolder");
 SaveTest(PageIdentifier,"http://www.xxx.yyy/greater.htm","greater","http file in root folder");
 SaveTest(PageIdentifier,"https://pedropsi.github.io/guestbook.html","guestbook","psi file in root folder");
-SaveTest(PageIdentifier,"https://pedropsi.github.io/gravirinth.html#$%F0%9F%93%B0%C2%BB","gravirinth","http no subfolder");
+SaveTest(PageIdentifier,"https://pedropsi.github.io/gravirinth.html#$%F0%9F%93%B0%C2%BB","gravirinth","UTF");
 SaveTest(PageIdentifier,"https://pedropsi.github.io/puzzlescript-games-database#puzzlescript","puzzlescript-games-database","duplication of tag in title");
+
+
+SaveTest(PageDomain,"https://pedropsi.github.io/guestbook.html","pedropsi.github.io","simple html");
+SaveTest(PageDomain,"file://E:/Folder1/pedropsi.github.io/status.html","pedropsi.github.io","buried file folder");
+SaveTest(PageDomain,"https://www.first.com/Folder1/pedropsi.github.io/status.html","www.first.com","earliest");
+SaveTest(PageDomain,"just/folders/and/folders","","nothing but folders");
+SaveTest(PageDomain,"just/folders/and/a.file","","a final file");
+
+
+SaveTest(PageRelativePath,"file://E:/Folder1/pedropsi.github.io/important/status.html","important/status.html","convoluted folder structure");
+SaveTest(PageRelativeFolder,"file://E:/Folder1/pedropsi.github.io/important/status.html","important","convoluted folder structure");
+SaveTest(PageFile,"file://E:/Folder1/pedropsi.github.io/important/status.html","status.html","convoluted folder structure");
+
+SaveTest(PageRelativePath,"data/one/two/three.js","data/one/two/three.js","already relative");
+SaveTest(PageFile,"data/one/two/three.js","three.js","relative file");
+
+SaveTest(PageRelativePath,"data/variables/a.ext#lol","data/variables/a.ext","relative with tag");
+SaveTest(PageFile,"data/variables/a.ext#lol","a.ext", "relative with tag");
+
+SaveTest(PageUnSearch,"pedropsi.github.io/console.html?game=2","pedropsi.github.io/console.html","simple");
+SaveTest(PageUnSearch,"pedropsi.github.io/console.html?game=2&level=3#tag","pedropsi.github.io/console.html#tag","with tag");
 
 
 

@@ -8,8 +8,8 @@ PageType=function(){
 ListDependencies=function(){
 	
 	var dependencies=[];
-	var imgdependencies=GetElements("img").map(function(e){return PageRelativePath(e.src)});
-	var audiodependencies=GetElements("audio").map(function(e){return PageRelativePath(e.src)});
+	var imgdependencies=GetElements("img").map(function(e){return PageRelativeFolder(e.src)});
+	var audiodependencies=GetElements("audio").map(function(e){return PageRelativeFolder(e.src)});
 	
 	dependencies=dependencies.concat(imgdependencies).concat(audiodependencies);
 	
