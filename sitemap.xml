@@ -3,25 +3,31 @@
 		
 	<url>
 		<loc>https://pedropsi.github.io/contact</loc>
-		<lastmod>2020-5-3</lastmod>
+		<lastmod>2020-5-9</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/rss</loc>
-		<lastmod>2020-5-3</lastmod>
+		<lastmod>2020-5-9</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/tag</loc>
-		<lastmod>2020-5-3</lastmod>
+		<lastmod>2020-5-9</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/posts</loc>
-		<lastmod>2020-5-3</lastmod>
+		<lastmod>2020-5-9</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+
+	<url>
+		<loc>https://pedropsi.github.io/analytics</loc>
+		<lastmod>2020-05-05</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 
@@ -249,8 +255,8 @@
 
 	<url>
 		<loc>https://pedropsi.github.io/index</loc>
-		<lastmod>2017-12-1</lastmod>
-		<changefreq>never</changefreq>
+		<lastmod>2020-05-07</lastmod>
+		<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
