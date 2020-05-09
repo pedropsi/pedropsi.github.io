@@ -922,12 +922,11 @@ CloneArray=function(Arr){
 }
 
 Clone=function(AOS){
-	if(typeof AOS==="string")
-		return AOS;
-	else if(IsObject(AOS))
+	if(IsObject(AOS))
 		return CloneObject(AOS);
-	else
+	if(IsArray(AOS))
 		return CloneArray(AOS);
+	return AOS;
 }
 
 
