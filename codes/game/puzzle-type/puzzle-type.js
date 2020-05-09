@@ -359,7 +359,7 @@ function ForbidNumberActions(key){
 		"Fuchsia",
 		"Deaf",
 		"Odd",
-		"Baba is you",
+		"A is not B",
 		"⠍⠕⠗⠎⠑"],CurLevelName())&&In(NumberCharacters,key));
 }
 
@@ -376,7 +376,7 @@ function ForbidSpaceActions(key){
 		"Odd",
 		"Deaf",
 		"Dvorak",
-		"Baba is you"
+		"A is not B"
 	],CurLevelName())&&In([" "],key));
 }
 
@@ -428,8 +428,8 @@ var LevelGoals=[			//Required types of thinking:
 	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
 
 	"Nigeria",				//Word, Mapping, Geography
-	"Carbonate",			//Encoding, Word, Science
 	"Genetic.",				//Encoding, Word, Science
+	"Carbonate",			//Encoding, Word, Science
 	"Anagram",				//Word, Mapping, Language, Once
 	
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
@@ -438,9 +438,10 @@ var LevelGoals=[			//Required types of thinking:
 	"Deaf",								//Encoding
 
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
+	"A is not B",						//Keyword, Proactive
 	"Copypaste",						//Keyword, Proactive
-	"Baba is you",						// Encoding, Arithmethic, Retroactive
-	"Dividi",							// Encoding, Arithmethic, Retroactive
+	
+	"Dividi",							//Encoding, Arithmethic, Retroactive
 	"⠍⠕⠗⠎⠑"							//Encoding, Once
 ];
 
@@ -553,7 +554,7 @@ var LevelActions={
 		
 	},*/
 	"Dividi":Dividi,
-	"Baba is you":Baba,
+	"A is not B":Baba,
 	"Copypaste":Copypaste,
 	"Odd":function(L){
 		InputLetterAfter(L);
@@ -1041,7 +1042,7 @@ function Baba(L){
 	InputLetterAfter(L);
 
 	var word=Letters().join("");
-	var pattern=/([^\s]+)\s+IS\s+([^\s]+)/;
+	var pattern=/\s*([^\s]+)\s+IS\s+([^\s]+)\s*/;
 	if(pattern.test(word)){
 		var subject=word.replace(pattern,"$1");
 		var object=word.replace(pattern,"$2");
@@ -3108,7 +3109,7 @@ function StartingMemo(level){
 				.....A._______
 				..____________
 				W_____________`.replace(/\t*/g,""),
-		'Baba is you':[]
+		'A is not B':[]
 	};
 	return zeromemo[level];
 }
