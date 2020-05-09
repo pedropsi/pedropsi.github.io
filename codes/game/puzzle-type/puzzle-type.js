@@ -591,22 +591,24 @@ function Wasd(W){
 		return;
 	}
 
-	if(!Wasd.level)
-		Wasd.level=LevelZeroState('Wasd');
-
-	if(W==="W")
-		Wasd.level=EmulateUp(Wasd.level);
-	if(W==="A")
-		Wasd.level=EmulateLeft(Wasd.level);
-	if(W==="S")
-		Wasd.level=EmulateDown(Wasd.level);
-	if(W==="D")
-		Wasd.level=EmulateRight(Wasd.level);
+	var level=Memo();
 	
-	var line=EmulateLine(Wasd.level);
+	if(W==="W")
+		level=EmulateUp(level);
+	if(W==="A")
+		level=EmulateLeft(level);
+	if(W==="S")
+		level=EmulateDown(level);
+	if(W==="D")
+		level=EmulateRight(level);
+
+	Memo(level);
+	
+	var line=EmulateLine(level);
 	Letters(line.replace(/\./g," "));
 	Caret(line.indexOf("W"));
 }
+
 function EmulatePushRight(levelline){
 	return levelline.replace(/(W[ASD]*)\.(\.*)/g,".$1$2");//All sokobaning happens here
 }
@@ -637,9 +639,11 @@ function EmulateLine(levelstring){
 
 function Difference(L){
 
-	if(!Difference.last){
+	var last=Memo();
+
+	if(!last){
 		InputLetterAfter(L);
-		Difference.last=L;
+		last=L;
 		Caret(0);
 		return;
 	}
@@ -647,9 +651,10 @@ function Difference(L){
 	var pre=Caret()[0];
 	Letter(pre,L);
 	
-	var pos=Max(pre,0)+LetterNumber(L)-LetterNumber(Difference.last);
+	var pos=Max(pre,0)+LetterNumber(L)-LetterNumber(last);
 	pos=Max(Min(pos,Letters.array.length),-1);
-	Difference.last=L;
+	last=L;
+	Memo(last);
 	Caret(pos);
 	DrawLetters();
 }
@@ -661,22 +666,21 @@ function Nokia(N){
 		}
 		
 		var now=Date.now();
-		if(!Nokia.time)
-			Nokia.time=now;
-
-		Nokia.eventF=function(){
+		var time=Memo()[0];
+		var eventF=function(){
 			if(Nokia.caretevent){
 				Nokia.caretevent.map(clearTimeout);
 			}
 			Nokia.caretevent=[];
 			Nokia.caretevent.push(setTimeout(DrawLettersEndCaret,2000));
-			Nokia.time=Date.now();
+
+			Memo([Date.now(),eventF]);
 		};
 		
 		function NokiaInput(L){
 			InputLetterAfter(L);
 			Caret("Last");
-			Nokia.eventF();
+			Memo()[1]();//eventF
 		}
 
 		if(!Letters.array.length){ //Start
@@ -688,7 +692,7 @@ function Nokia(N){
 			var lastN=NokiaGroupNumber(last);
 			var lastGroup=NokiaMapping[lastN];
 			var lastPos=lastGroup.indexOf(last);
-			if(N!==lastN||lastPos>=lastGroup.length-1||(now-Nokia.time)>2000){ //New Key or timing exceeded
+			if(N!==lastN||lastPos>=lastGroup.length-1||(now-time)>2000){ //New Key or timing exceeded
 				var L=NokiaMapping[N][0];
 				NokiaInput(L);
 			}
@@ -707,8 +711,10 @@ function Nokia(N){
 }
 
 function Nigeria(L){
-		if(Nigeria.freeze){
-			delete Nigeria.freeze;
+		var freeze=Memo();
+		
+		if(freeze){
+			Memo(false);
 			Restart();
 			return;
 		}
@@ -734,16 +740,15 @@ function Nigeria(L){
 				var NEXTAREA=Countries[Min(Max(i+1,0),Countries.length-1)];
 				
 			Letters(NEXTAREA);
-			Nigeria.freeze=true;
+			Memo(true);
 		}
 		
 		Caret(Infinity);
 	}
 
 function Anagram(L){
+	var used=Memo();
 
-	if(!Anagram.used)
-		Anagram.used=[];
 	if(!In("ANAGRAM".split(""),L)){
 		Caret(Infinity);
 		return;
@@ -753,9 +758,9 @@ function Anagram(L){
 		var saved=SavedLetters();
 		var anagr=TemporaryWord().toLowerCase();
 
-		if(In(Anagrams,anagr)&&!In(Anagram.used,anagr)){
+		if(In(Anagrams,anagr)&&!In(used,anagr)){
 			var S=Anagrams[anagr].toUpperCase();
-			Anagram.used.push(anagr);
+			used.push(anagr);
 			Letters(saved);
 			InputLetterAfter(S);
 		}
@@ -763,6 +768,7 @@ function Anagram(L){
 			Letters(saved);
 		}
 
+		Memo(used);
 		Caret(Infinity);
 	}
 }
@@ -807,15 +813,15 @@ function Genetic(L){
 
 
 function Fuchsia(L){
+	var colour=Memo();
+
 	function Restart(){
-		Fuchsia.colour=false;
+		colour=false;
 		ForbidCaret();
 		ClearLetters();
 	}
 	
-	if(!Fuchsia.colour)
-		Fuchsia.colour=false;
-	else{
+	if(colour){
 		Restart();
 		return;
 	}
@@ -841,8 +847,7 @@ function Fuchsia(L){
 			AddSingleElement("<style class='overcolour'>.letter{color:"+hex+";border-bottom-color:"+hex+"} .letter.caret{background:"+hex+" !important}</style>",'BODY','.overcolour');
 			setTimeout(function(){RemoveElement(".overcolour");},1000);
 
-			Fuchsia.colour=true;
-			
+			Memo(true);
 			return;
 		}
 	}
@@ -892,11 +897,10 @@ function Direct(L){
 };
 
 function Second(L){
-	if(!Second.n)
-		Second.n=0;
-	Second.n++;
+	var nd=Memo();
+	Memo(!nd);
 	
-	if(Second.n%2===0)
+	if(nd)
 		DeleteLetterBefore();
 	
 	InputLetterAfter(L);
@@ -908,14 +912,16 @@ function Consonant(L){
 		return;
 	}
 
-	if(!Consonant.before)
+	var before=Memo();
+	if(!before)
 		InputLetterBefore(L);
 	else
 		InputLetterAfter(L)
 	
-	Consonant.before=!In(["A","E","I","O","U"],L);
+	before=!In(["A","E","I","O","U"],L);
+	Memo(before);
 
-	if(!Consonant.before)
+	if(!before)
 		Caret(-1);
 	else
 		Caret(Letters().length);
@@ -938,17 +944,19 @@ function FlipArray(array){
 //Morse
 function Morse(L){
 	var s="⠍⠕⠗⠎⠑".length*2;
-	Morse.used=Morse.used||[];
-	var position=Morse.used.map(function(d){return MorseCode[d.toLowerCase()].length});
+	var used=Memo();
+	
+	var position=used.map(function(d){return MorseCode[d.toLowerCase()].length});
 	position=[0].concat(position).reduce(Accumulate);
 
 
-	if(In(Morse.used,L)){
+	if(In(used,L)){
 		ForbidCaret();
 		return;
 	}
 	
-	Morse.used.push(L);
+	used.push(L);
+	Memo(used);
 
 	var dotdash=MorseCode[L.toLowerCase()].split("");
 
@@ -1006,17 +1014,15 @@ function Copypaste(L){
 	
 	if(Posfixed(word,"COPY")){
 		word=UnPosfix(word,"COPY");
-		console.log(word);
-		Copypaste.last=word;
+		Memo(word);
 		Letters(word);
 	}else if(Posfixed(word,"PASTE")){
 		word=UnPosfix(word,"PASTE");
-		console.log(word);
-		word=word+Copypaste.last||"";
+		word=word+Memo();
 		Letters(word);
 	}else if(Posfixed(word,"CUT")){
 		word=UnPosfix(word,"CUT");
-		Copypaste.last=word;
+		Memo(word);
 		Letters([]);
 	}
 	Caret(Infinity);
@@ -1035,10 +1041,8 @@ function Weightier(L){
 //Fillet
 
 function Fillet(E){
-	if(!Fillet.position)
-		Fillet.position=0;
+	var p=Memo();
 
-	var p=Fillet.position;
 	var max="Fillet".length;
 	var pnext=(p+1)%max;
 
@@ -1047,7 +1051,7 @@ function Fillet(E){
 
 	Letters.array=Letters.array.map(CombineHalves);
 
-	Fillet.position=pnext;
+	Memo(pnext);
 	Caret(pnext);
 
 }
@@ -1121,11 +1125,10 @@ var FilletWholes=FlipKeysValues(FilletHalves);
 //Symmetric
 
 function Symmetries(O){
-	if(typeof Symmetries.direction==="undefined")
-		Symmetries.direction=true;
+	var direction=Memo();
 
 	if(In("SYMMETRIES",O)){
-		if(Symmetries.direction)
+		if(direction)
 			InputLetterAfter(O);
 		else
 			InputLetterBefore(O);
@@ -1134,8 +1137,10 @@ function Symmetries(O){
 	if(InversionSymmetric(O)){
 		ModifyLetters(ToggleInversion);
 		Letters.array=Letters.array.reverse();
-		Symmetries.direction=!Symmetries.direction;
-		if(Symmetries.direction)
+		direction=!direction;
+		Memo(direction);
+
+		if(direction)
 			Caret(Infinity);
 		else
 			Caret(-1);
@@ -1144,8 +1149,10 @@ function Symmetries(O){
 		ModifyLetters(ToggleHorizontal);
 		Letters.array=Letters.array.reverse();
 		
-		Symmetries.direction=!Symmetries.direction;
-		if(Symmetries.direction)
+		direction=!direction;
+		Memo(direction);
+
+		if(direction)
 			Caret(Infinity);
 		else
 			Caret(-1);
@@ -2780,14 +2787,6 @@ function Letter(position,letter){
 	return letter;
 }
 
-function DeleteLastLetters(n){
-	var i=1;
-	while(i<=n){
-		Letters.array.pop();
-		i++;
-	}
-}
-
 function Caret(position){
 	if(!Caret.array)
 		Caret.array=[Letters().length]; //after last one
@@ -2887,7 +2886,6 @@ var LetterDisplay={
 		else
 			return LetterPureHTML(combined);
 	},
-	"Dividi":LetterDraftHTML,
 	"Carbonate":LetterDraftHTML,
 	"Genetic.":LetterDraftHTML,
 	"Anagram":LetterDraftHTML,
@@ -2926,12 +2924,8 @@ function DrawLetters(){
 	ReplaceChildren(letters,"#letters");
 }
 
-function UpdateLevel(){
-	UpdateLevelSecretly();
-	SaveLevelState();
-}
-	
-function UpdateLevelSecretly(){
+
+function DrawLevel(){
 	DrawLetters();
 	DrawCaret();
 }
@@ -2953,9 +2947,14 @@ function DeleteLetterBefore(){
 	Caret(-1);
 }
 
-function DeleteLetterAfter(){
-	Letter(Infinity,false);
-	Caret(Infinity);
+function DeleteLetterAfter(n){
+	if(typeof n==="undefined")
+		DeleteLetterAfter(1);
+	else{
+		for(var i=0;i<n;i++)
+			Letter(Infinity,false);
+		Caret(Infinity);
+	}
 }
 
 
@@ -2985,20 +2984,22 @@ function ModifyLetters(ChangeF,ConditionF){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Game execution
+function CurLevelName(){return LevelGoals[CurrentScreen()]};//placeholder
+
 function ObtainTitleScreenLoader(){
 	if(!TitleScreen())
 		PlaySound("media/puzzle-type/sound/startgame.mp3");
 	TitleScreen(true);
 	ReplaceChildren("<div class='top'><div class='title'></div><div class='credits'></div></div>",".top");
 	ReplaceChildren("Puzzle Type",".title");
-	//ReplaceChildren("by Pedro PSI (2019)",".credits");
+
 	if(CurLevelNumber()>1||SolvedLevels().length>0)
 		Letters("CONTINUE");
 	else
 		Letters("START");
 	
 	Caret(Infinity);
-	UpdateLevel();
+	DrawLevel();
 	
 };
 
@@ -3007,11 +3008,26 @@ function LevelLoader(){
 	ReplaceChildren("<div class='top'><div class='goal'></div></div>",".top");
 	ClearLetters();
 	ReplaceChildren(CurLevelName(),".goal");
-	UndoClear();
+	ClearLevel();
 	ColoriseGameBar();//Change colour each level
+	
 }
 
-function CurLevelName(){return LevelGoals[CurrentScreen()]};//placeholder
+
+function UpdateLevel(state){
+	
+	if(typeof state==="undefined")
+		var state={
+			letters:Letters(),
+			caret:Caret(),
+			memo:Memo()
+		}
+
+	LevelState(state);
+	AddUndo(state);
+	DrawLevel();
+}
+
 
 function CheckWin(){
 	var win=CurLevelName().toUpperCase()===Letters().join("").replace(/\_/g,"").toUpperCase();
@@ -3021,7 +3037,7 @@ function CheckWin(){
 		MarkWonScreen();
 		BlockInput(1100);
 		setTimeout(NextLevel,1000);
-		UndoClear();
+		ClearLevel();
 	}
 }
 
@@ -3030,67 +3046,22 @@ function ObtainPlayEndGameSound(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//Undo
-function Undo(){
-	RevertLevelState();
+//Level states
 
-	if(!Undo.backups)
-		SaveLevelState();
-	
-	if(Undo.backups.length>=2){
-		var u=Undo.backups.pop(); //Pop the current state
-		LoadLevelState(Last(Undo.backups));
-	}
-	
-	PulseSelect("UndoButton");
+function Memo(m){
+
+	if(typeof Memo.memo==="undefined")
+		Memo.memo=StartingMemo(CurLevelName());
+
+	if(typeof m==="undefined")
+		return Clone(Memo.memo);
+	else
+		return Memo.memo=Clone(m);
 }
 
-function SaveLevelState(){
-	if(!Undo.backups)
-		UndoClear();
-	var state=LevelState();
-	if(!Undo.backups.length||!Equal(Last(Undo.backups),state))
-		Undo.backups.push(LevelState());
-}
-
-function LoadLevelState(levelstate){
-	Letters(Clone(levelstate['letters']));
-	Caret(levelstate['caret']);
-	Second.n=levelstate['Second'];
-	Consonant.before=levelstate['Consonant'];
-	Difference.last=levelstate['Difference'];
-	Symmetries.direction=levelstate['Symmetries'];
-	Fillet.position=levelstate['Fillet'];
-	Anagram.used=levelstate['Anagram'];
-	Nigeria.freeze=levelstate['Nigeria'];
-	Fuchsia.colour=levelstate['Fuchsia'];
-	Nokia.last=levelstate['Nokia 1998'][0];
-	Nokia.eventF=levelstate['Nokia 1998'][1];Nokia.eventF();//timed caret event
-	Copypaste.last=levelstate['Copypaste'];
-	Morse.used=levelstate['⠍⠕⠗⠎⠑'];
-	Wasd.level=levelstate['Wasd'];
-
-	UpdateLevelSecretly();
-}
-
-function RevertLevelState(){
-	var name=CurLevelName();
-	var reversions={
-		"⠍⠕⠗⠎⠑":function(){Morse.used.length?Morse.used.pop():Morse.used=[]},
-		"Anagram":function(){Anagram.used.length?Anagram.used.pop():Anagram.used=[]},
-	}
-	reversions[name]?reversions[name]():null;
-}
-
-function UndoClear(){
-	Undo.backups=[LevelZeroState()];
-} 
-
-function LevelZeroState(level){
-	var state={
-		'letters':[],
-		'caret':0,
-		'Second':0,
+function StartingMemo(level){
+	var zeromemo={
+		'Second':false,
 		'Consonant':false,
 		'Difference':"",
 		'Symmetries':true,
@@ -3098,7 +3069,7 @@ function LevelZeroState(level){
 		'Anagram':[],
 		'Nigeria':false,
 		'Fuchsia':false,
-		'Nokia 1998':[false,Identity],
+		'Nokia 1998':[Date.now(),Identity],
 		'Copypaste':"",
 		'⠍⠕⠗⠎⠑':[],
 		'Wasd':`_____...D_____
@@ -3107,33 +3078,92 @@ function LevelZeroState(level){
 				..____________
 				W_____________`.replace(/\t*/g,"")
 	};
-	if(!level)
-		return state;
-	else
-		return state[level];
+	return zeromemo[level];
 }
 
-function LevelState(){
+
+function StartingLevelState(){
 	var state={
-		'letters':Clone(Letters()),
-		'caret':Caret(),
-		'Second':Second.n?Second.n:0,
-		'Consonant':Consonant.before?Consonant.before:false,
-		'Difference':Difference.last?Difference.last:"",
-		'Symmetries':(typeof Symmetries.direction!=="undefined")?Symmetries.direction:true,
-		'Fillet':Fillet.position?Fillet.position:0,
-		'Anagram':Anagram.used?Anagram.used:[],
-		'Nigeria':Nigeria.freeze?Nigeria.freeze:false,
-		'Fuchsia':Fuchsia.colour?Fuchsia.colour:false,
-		'Nokia 1998':[Nokia.last?Nokia.last:false,Nokia.eventF?Nokia.eventF:Identity],
-		'Copypaste':Copypaste.last?Copypaste.last:"",
-		'⠍⠕⠗⠎⠑':Morse.used?Morse.used:[],
-		'Wasd':Wasd.level?Wasd.level:LevelZeroState('Wasd')
+		'letters':[],
+		'caret':0,
+		'memo':StartingMemo(CurLevelName())
 	};
 	return state;
 }
 
+function CurrentLevelState(){
+	var state={
+		'letters':Letters(),
+		'caret':Caret(),
+		'memo':Memo()
+	};
+	return state;
+}
+
+
+function LevelState(state){
+	if(!LevelState.level)
+		LevelState.level=StartingLevelState();
+
+	if(typeof state==="undefined")
+		state=LevelState.level;
+	else
+		LevelState.level=state;
+
+	Letters(state.letters);
+	Caret(state.caret);
+	Memo(state.memo);
+}
+
+
+/*
+	if(level==='Nokia 1998')
+		Memo('Nokia 1998')[1]();//eventF
+*/
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Undo & Restart
+
 function Restart(){
-	LoadLevelState(LevelZeroState());
+	UpdateLevel(StartingLevelState());
+
 	PulseSelect("RestartButton");
+}
+
+
+function EmptyUndo(){
+	Undo.backups=[StartingLevelState()];
+}
+
+function AddUndo(state){
+	if(!Undo.backups)
+		EmptyUndo();
+
+	if(!Equal(Last(Undo.backups),state))
+		Undo.backups.push(state);
+}
+
+function PopUndo(){
+	if(!Undo.backups||Undo.backups.length<=1)
+		EmptyUndo();
+	else
+		Undo.backups.pop(); 
+
+	return Last(Undo.backups);
+}
+
+function Undo(){
+	var laststate=PopUndo();
+	
+	LevelState(laststate);
+
+	DrawLevel();
+	
+	PulseSelect("UndoButton");
+}
+
+function ClearLevel(){
+	EmptyUndo();
+	LevelState(StartingLevelState());
 }
