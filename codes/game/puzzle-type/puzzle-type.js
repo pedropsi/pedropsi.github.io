@@ -982,19 +982,19 @@ function BrailleNumber(braille){
 //Dividi
 
 function Dividi(L){
-	if(Letters.array.length>0){
-		var last=Last(Letters.array);
+	if(!In(uniNumerals,L))
+		return ForbidCaret();
+
+	word=Letters.array.join("");
+	last=LastValidRoman(word);
+		
+	if(!ValidRoman(last+L)){
+		DeleteLetterAfter(last.length);
 		var q=Quotient(UnRoman(last),2);
-		Letters.array.pop();
 		Letters(Letters.array.join("")+Roman(q));
 	}
-	
-	if(!In(uniNumerals,L))
-		ForbidCaret();
-	else
-		InputLetterAfter(L);
-	
-	Caret(Infinity);
+		
+	InputLetterAfter(L);
 }
 	
 //Copypaste
