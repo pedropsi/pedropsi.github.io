@@ -156,8 +156,8 @@ AbsolutiseLinks=function(){
 	function PrepareLink(l){
 		var ref=l.href;
 		console.log("ABS!",ref);
-		if(AbsolutableLinked(ref))
-			l.href=PageAbsolute(PageUnTag(ref));
+		if(ShallowableLinked(ref))
+			l.href=PageAbsolute(PageUnFragment(ref));
 		};
 	MapLinks(PrepareLink);
 }
