@@ -68,6 +68,16 @@ function ValidRoman(s){
 	return UnRoman(s)<4000&&Roman(UnRoman(s))===s;
 }
 
+function LastValidRoman(s){
+	var i=s.length-1;
+	var r="";
+	while(i>=0&&ValidRoman(s[i]+r)){
+		r=s[i]+r;
+		i--
+	}
+	return r;
+}
+
 function SplitValidRoman(s,r){
 	var r=r||[];
 	if(s==="")
