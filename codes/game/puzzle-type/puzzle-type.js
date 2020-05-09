@@ -431,18 +431,18 @@ var LevelGoals=[			//Required types of thinking:
 	"Genetic.",				//Encoding, Word, Science
 	"Carbonate",			//Encoding, Word, Science
 	"Anagram",				//Word, Mapping, Language, Once
-	
-	"Latent clones",					//Keyword, Increment, Retroactive, Language
-	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-	"Fuchsia",							//Encoding
-	"Deaf",								//Encoding
 
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
-	"A is not B",						//Keyword, Proactive
-	"Copypaste",						//Keyword, Proactive
-	
+	"Latent clones",					//Keyword, Increment, Retroactive, Language
+	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
+
+	"Fuchsia",							//Encoding
+	"Deaf",								//Encoding
 	"Dividi",							//Encoding, Arithmethic, Retroactive
-	"⠍⠕⠗⠎⠑"							//Encoding, Once
+	"⠍⠕⠗⠎⠑",							//Encoding, Once
+
+	"To cut and paste",					//Keyword, Proactive, Redefinition
+	"This is it"						//Keyword, Proactive, Redefinition
 ];
 
 
@@ -554,8 +554,8 @@ var LevelActions={
 		
 	},*/
 	"Dividi":Dividi,
-	"A is not B":Baba,
-	"Copypaste":Copypaste,
+	"This is it":Baba,
+	"To cut and paste":Copypaste,
 	"Odd":function(L){
 		InputLetterAfter(L);
 		var odd=In(Letters.array.join(""),"ODD");
@@ -3102,14 +3102,14 @@ function StartingMemo(level){
 		'Nigeria':false,
 		'Fuchsia':false,
 		'Nokia 1998':[Date.now(),Identity],
-		'Copypaste':"",
+		'To cut and paste':"",
 		'⠍⠕⠗⠎⠑':[],
 		'Wasd':`_____...D_____
 				..S......_____
 				.....A._______
 				..____________
 				W_____________`.replace(/\t*/g,""),
-		'A is not B':[]
+		'This is it':[]
 	};
 	return zeromemo[level];
 }
