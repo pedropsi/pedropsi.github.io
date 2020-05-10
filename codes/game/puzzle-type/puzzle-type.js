@@ -671,25 +671,14 @@ function Nokia(N){
 			return;
 		}
 		
-		var now=Date.now();
-		var time=Memo()[0];
-		var eventF=function(){
-			if(Nokia.caretevent){
-				Nokia.caretevent.map(clearTimeout);
-			}
-			Nokia.caretevent=[];
-			Nokia.caretevent.push(setTimeout(DrawLettersEndCaret,2000));
-
-			Memo([Date.now(),eventF]);
-		};
-		
 		function NokiaInput(L){
 			InputLetterAfter(L);
-			Caret("Last");
-			Memo()[1]();//eventF
+			Caret("Last");	
 		}
 
-		if(!Letters.array.length){ //Start
+		var delta=2000;
+
+		if(!Letters.array.length||Caret()[0]===Letters.array.length){ //Start or advance
 			var L=NokiaMapping[N][0];
 			NokiaInput(L);
 		}
@@ -698,7 +687,7 @@ function Nokia(N){
 			var lastN=NokiaGroupNumber(last);
 			var lastGroup=NokiaMapping[lastN];
 			var lastPos=lastGroup.indexOf(last);
-			if(N!==lastN||lastPos>=lastGroup.length-1||(now-time)>2000){ //New Key or timing exceeded
+			if(N!==lastN||lastPos>=lastGroup.length-1){ //New Key or timing exceeded
 				var L=NokiaMapping[N][0];
 				NokiaInput(L);
 			}
@@ -707,6 +696,7 @@ function Nokia(N){
 				var M=lastGroup[lastPos+1];
 				if(lastPos+1<lastGroup.length-1){
 					NokiaInput(M);
+					delta=500+1500*(lastGroup.length-1-lastPos)/lastGroup.length
 				}
 				else{
 					InputLetterAfter(M);
@@ -714,6 +704,19 @@ function Nokia(N){
 				}
 			}
 		}
+	
+		NokiaTimer(delta);
+}
+
+function NokiaTimer(delta){
+	if(!NokiaTimer.timeouts)
+		NokiaTimer.timeouts=[];
+
+	NokiaTimer.timeouts.push(Memo());
+	NokiaTimer.timeouts.map(clearTimeout);
+
+	var newtimeout=setTimeout(DrawLettersEndCaret,delta);
+	Memo(newtimeout);
 }
 
 function Nigeria(L){
@@ -3055,6 +3058,7 @@ function UpdateLevel(state){
 			memo:Memo()
 		}
 
+	
 	LevelState(state);
 	AddUndo(state);
 	DrawLevel();
@@ -3101,7 +3105,7 @@ function StartingMemo(level){
 		'Anagram':[],
 		'Nigeria':false,
 		'Fuchsia':false,
-		'Nokia 1998':[Date.now(),Identity],
+		'Nokia 1998':0,
 		'To cut and paste':"",
 		'⠍⠕⠗⠎⠑':[],
 		'Wasd':`_____...D_____
@@ -3112,6 +3116,18 @@ function StartingMemo(level){
 		'This is it':[]
 	};
 	return zeromemo[level];
+}
+
+function Timer(level){
+	var timers={
+		'Nokia 1998':function(){NokiaTimer(2000)},
+	};
+	if(!level)
+		return Timer(CurLevelName());
+	if(In(timers,level))
+		return timers[level]();
+	else
+		return;
 }
 
 
@@ -3142,17 +3158,13 @@ function LevelState(state){
 		state=LevelState.level;
 	else
 		LevelState.level=state;
-
+		
 	Letters(state.letters);
 	Caret(state.caret);
 	Memo(state.memo);
+
 }
 
-
-/*
-	if(level==='Nokia 1998')
-		Memo('Nokia 1998')[1]();//eventF
-*/
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -3190,7 +3202,7 @@ function Undo(){
 	var laststate=PopUndo();
 	
 	LevelState(laststate);
-
+	Timer();
 	DrawLevel();
 	
 	PulseSelect("UndoButton");
