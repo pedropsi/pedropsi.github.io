@@ -3,25 +3,25 @@
 		
 	<url>
 		<loc>https://pedropsi.github.io/contact</loc>
-		<lastmod>2020-5-9</lastmod>
+		<lastmod>2020-5-10</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/rss</loc>
-		<lastmod>2020-5-9</lastmod>
+		<lastmod>2020-5-10</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/tag</loc>
-		<lastmod>2020-5-9</lastmod>
+		<lastmod>2020-5-10</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/posts</loc>
-		<lastmod>2020-5-9</lastmod>
+		<lastmod>2020-5-10</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 
@@ -70,7 +70,7 @@
 	<url>
 		<loc>https://pedropsi.github.io/puzzle-type</loc>
 		<lastmod>2020-04-26</lastmod>
-		<changefreq>weekly</changefreq>
+		<changefreq>monthly</changefreq>
 	</url>
 
 	<url>

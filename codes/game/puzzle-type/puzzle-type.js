@@ -436,7 +436,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
 
-	"⠍⠕⠗⠎⠑",						//Encoding, Once
+	"⠍⠕⠗⠎⠑",						  //Encoding, Once
 	"Deaf",								//Encoding
 	"Fuchsia",							//Encoding
 	"Dividi",							//Encoding, Arithmethic, Retroactive
@@ -706,6 +706,7 @@ function Nokia(N){
 			}
 		}
 	
+		NokiaTimer.blocked=false;
 		NokiaTimer(delta);
 }
 
@@ -716,7 +717,11 @@ function NokiaTimer(delta){
 	NokiaTimer.timeouts.push(Memo());
 	NokiaTimer.timeouts.map(clearTimeout);
 
-	var newtimeout=setTimeout(DrawLettersEndCaret,delta);
+	function Redraw(){
+		if(!NokiaTimer.blocked)
+			DrawLettersEndCaret()
+	}
+	var newtimeout=setTimeout(Redraw,delta);
 	Memo(newtimeout);
 }
 
@@ -3119,12 +3124,12 @@ function StartingMemo(level){
 	return zeromemo[level];
 }
 
-function Timer(level){
+function TimerBlocker(level){
 	var timers={
-		'Nokia 1998':function(){NokiaTimer(2000)},
+		'Nokia 1998':function(){NokiaTimer.blocked=true},
 	};
 	if(!level)
-		return Timer(CurLevelName());
+		return TimerBlocker(CurLevelName());
 	if(In(timers,level))
 		return timers[level]();
 	else
@@ -3203,7 +3208,8 @@ function Undo(){
 	var laststate=PopUndo();
 	
 	LevelState(laststate);
-	Timer();
+	
+	TimerBlocker();
 	DrawLevel();
 	
 	PulseSelect("UndoButton");
