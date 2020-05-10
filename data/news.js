@@ -1,17 +1,18 @@
 News={
+	N_43:{
+DATE:"2020-05-10",
+HEADER:()=>"Puzzle type beta changes IV",
+PIECE:()=>`
+<p>More updates: levels THI*** and COP*** added; TEN*** became CAR***, a more interesting clue. Reordering of later levels. Majot fix to the undo queue. Minor bugs.</p>
+	`,ID:"puzzle-type"},
 	N_44:{
 DATE:"2020-05-07",
 HEADER:()=>"Game stats & other improvements",
 PIECE:()=>`
 <p>Most games now display a chart with the number of wins per level.</p>
 <p>Also, it is now possible to jump directly to any level by adding the URL parameter: e.g. ?level=levelTitle or e.g. ?level=2.</p>
+<p>Major refactoring and minor scattered fixes.</p>
 	`,ID:"index"},
-	N_43:{
-DATE:"2020-04-26",
-HEADER:()=>"Puzzle type beta changes IV",
-PIECE:()=>`
-<p>Ongoing beta playtesting changes: level COP*** added; TEN*** became CAR***, a more interesting clue.</p>
-	`,ID:"puzzle-type"},
 	N_42:{
 DATE:"2020-04-26",
 HEADER:()=>"Puzzle type beta changes III",
