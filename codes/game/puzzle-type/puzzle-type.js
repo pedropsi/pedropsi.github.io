@@ -359,7 +359,7 @@ function ForbidNumberActions(key){
 		"Fuchsia",
 		"Deaf",
 		"Odd",
-		"A is not B",
+		"This is it",
 		"⠍⠕⠗⠎⠑"],CurLevelName())&&In(NumberCharacters,key));
 }
 
@@ -376,7 +376,8 @@ function ForbidSpaceActions(key){
 		"Odd",
 		"Deaf",
 		"Dvorak",
-		"A is not B"
+		"To cut and paste",
+		"This is it"
 	],CurLevelName())&&In([" "],key));
 }
 
@@ -429,19 +430,19 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Nigeria",				//Word, Mapping, Geography
 	"Genetic.",				//Encoding, Word, Science
+	"Anagram",				//Word, Mapping, Language, Once,
 	"Carbonate",			//Encoding, Word, Science
-	"Anagram",				//Word, Mapping, Language, Once
 
-	"Odd",								//Keyword, Positional, Retroactive, Subtractive
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
 
-	"Fuchsia",							//Encoding
+	"⠍⠕⠗⠎⠑",						//Encoding, Once
 	"Deaf",								//Encoding
+	"Fuchsia",							//Encoding
 	"Dividi",							//Encoding, Arithmethic, Retroactive
-	"⠍⠕⠗⠎⠑",							//Encoding, Once
-
-	"To cut and paste",					//Keyword, Proactive, Redefinition
+	
+	"Odd",								//Keyword, Positional, Retroactive, Subtractive
+	"To paste and cut",					//Keyword, Proactive, Redefinition
 	"This is it"						//Keyword, Proactive, Redefinition
 ];
 
