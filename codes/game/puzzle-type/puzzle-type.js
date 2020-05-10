@@ -3025,7 +3025,7 @@ function ModifyLetters(ChangeF,ConditionF){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Game execution
-function CurLevelName(){return LevelGoals[CurrentScreen()]};//placeholder
+function CurLevelName(){return LevelGoals[CurLevelNumber()-1]};//placeholder
 
 function ObtainTitleScreenLoader(){
 	if(!TitleScreen())
