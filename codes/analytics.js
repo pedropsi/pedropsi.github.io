@@ -98,7 +98,7 @@ EchoAnalytics=function(data){
 }
  
 RegisterOpen=function(){
-	//EchoAnalytics(FingerprintOpen());
+	EchoAnalytics(FingerprintOpen());
 	EchoData(Outflows("visit"));
 	EchoData(Outflows("country"));
 }
