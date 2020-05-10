@@ -74,7 +74,7 @@ function ObtainIsRestartMove(move){return false;}
 var ObtainReadMove=Identity;
 
 //Level navigation
-function ObtainNewGameCondition(){return SolvedLevels().length<1};
+function ObtainNewGameCondition(){return SolvedLevels().length<1&&CurLevelNumber()<=1};
 function ObtainStateScreens(){return LevelGoals;}
 function ObtainLevelTitle(l){return LevelGoals[l-1].toUpperCase();}
 var ObtainLevelLoader=LevelLoader;
