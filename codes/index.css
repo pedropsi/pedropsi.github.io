@@ -203,7 +203,7 @@ a{
 	margin-top:var(--h2);
 }
 
-.nav{
+.navbar{
 	margin:var(--h4) var(--w-2) var(--h1) var(--w-2);
 	font-size:120%;
 	font-weight:600;
@@ -570,7 +570,7 @@ li::before{
 	transition-duration:var(--durationOff);
 }
 
-.nav .logo:hover,.nav .logo:focus,.nav .logo:active{
+.navbar .logo:hover,.navbar .logo:focus,.navbar .logo:active{
 	background-color:var(--darkblue);
 	transition-duration:var(--durationOn);
 }
@@ -611,30 +611,30 @@ svg .beije{
 	fill:var(--beije);
 	stop-color:var(--beije);	
 }
-.nav .logo:hover svg rect{
+.navbar .logo:hover svg rect{
 	transition-duration:var(--durationOn);
 }
 
-.nav .logo:hover .darkblue{
+.navbar .logo:hover .darkblue{
 	fill:var(--turquoise);
 	
 }
-.nav .logo:hover .blue{
+.navbar .logo:hover .blue{
 	fill:var(--turquoise);
 }
-.nav .logo:hover .lightblue{
+.navbar .logo:hover .lightblue{
 	fill:var(--turquoise);
 }
-.nav .logo:hover .turquoise{
+.navbar .logo:hover .turquoise{
 	fill:var(--darkblue);
 }
-.nav .logo:hover .green{
+.navbar .logo:hover .green{
 	fill:var(--darkblue);
 }
-.nav .logo:hover .yellow{
+.navbar .logo:hover .yellow{
 	fill:var(--darkblue);
 }
-.nav .logo:hover .lightyellow{
+.navbar .logo:hover .lightyellow{
 	fill:var(--turquoise);
 }
 .rainbowline{
