@@ -1725,13 +1725,10 @@ Outside=function(parentSelector,selector){
 GetElements=function(selectorString,parentIDsel){
 	var HTMLCollect;
 	var parentElement=GetElement(parentIDsel)||document;
-	if(IsClass(selectorString))
-		HTMLCollect=parentElement.getElementsByClassName(UnPrefix(selectorString,"."));
-	else if (IsTag(selectorString))
-		HTMLCollect=parentElement.getElementsByTagName(selectorString);
-	else //ID
-		HTMLCollect=[GetElement(selectorString,parentElement)];
-	return Array.prototype.slice.call(HTMLCollect);
+	if(IsString(selectorString)){
+		HTMLCollect=parentElement.querySelectorAll(selectorString);
+		return Array.prototype.slice.call(HTMLCollect);
+	}
 };
 
 // Get Children Elements
