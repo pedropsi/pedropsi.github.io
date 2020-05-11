@@ -3,7 +3,7 @@ News={
 DATE:"2020-05-10",
 HEADER:()=>"Puzzle type beta changes IV",
 PIECE:()=>`
-<p>More updates: levels THI*** and COP*** added; TEN*** became CAR***, a more interesting clue. Reordering of later levels. Majot fix to the undo queue. Minor bugs.</p>
+<p>More updates: levels THI*** and COP*** added; TEN*** became CAR***, a more interesting clue. Reordering of later levels. Major fix to the undo queue. Minor bugs.</p>
 	`,ID:"puzzle-type"},
 	N_44:{
 DATE:"2020-05-07",

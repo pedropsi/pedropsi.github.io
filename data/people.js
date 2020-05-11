@@ -79,7 +79,8 @@ HITCHMAN:{TYPE:"Developer",NAME:"Ryan Hitchman",PERSONAL_PAGE:"https://the8bitpi
 WHITEHEAD:{TYPE:"Developer",NAME:"Nathan Whitehead",GITHUB_COM:"nwhitehead"},
 JD:{TYPE:"Developer",NAME:"Jonathan",ALIAS:"JD",ITCH:"jdersch"},
 DEUSOVI:{TYPE:"Developer",NAME:"Deusovi"},
-MAGO:{TYPE:"Developer",NAME:"Daniel Hurtado",ALIAS:"mago314"},
+MAGO:{TYPE:"Developer",NAME:"mago314",ALIAS:"mago314"},
+KNEXATOR:{TYPE:"Developer",NAME:"Daniel Hurtado",ALIAS:"knexator"},
 JOSHUASTONE:{TYPE:"Developer",NAME:"Joshua Stone",TWITTER:"IAmJoshuaStone"},
 ANTHROPY:{TYPE:"Developer",NAME:"Anna Anthropy",ITCH:"w"},
 SCHATZ:{TYPE:"Developer",NAME:"Phil Schatz",PERSONAL_PAGE:"https://philschatz.com/"},
@@ -97,7 +98,10 @@ PRAUSE:{TYPE:"Developer",NAME:"Denis Prause",ALIAS:"Zejety",GITHUB_COM:"zejety"}
 PARACHOR:{TYPE:"Developer",NAME:"Parachor",ITCH:"parachor"},
 CROUBBLE:{TYPE:"Developer",NAME:"Crouble",ALIAS:"NarrowAdder",TWITTER:"Croubble",ITCH:"dazed-pidgeon"},
 PLURMORANT:{TYPE:"Tester",NAME:"Plurmorant"},
-COLLINEYE:{TYPE:"Tester",NAME:"Patrick Collin Eye",TWITTER:"collin_eye"}
+COLLINEYE:{TYPE:"Tester",NAME:"Patrick Collin Eye",TWITTER:"collin_eye"},
+ZENOROGUE:{TYPE:"Developer",NAME:"ZenoRogue",TWITTER:"ZenoRogue"},
+ZARFEBLONG:{TYPE:"Developer",NAME:"Andrew Plotkin",ALIAS:"zarfeblong",TWITTER:"zarfeblong"},
+UBUNTOR:{TYPE:"Developer",NAME:"Samuel Kim",ALIAS:"ubuntor",GITHUB_COM:"ubuntor"}
 }
 
 PersonalPage=function(linkObj){
