@@ -444,7 +444,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Dividi",							//Encoding, Arithmethic, Retroactive
 	
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
-	"To paste and cut",					//Keyword, Proactive, Redefinition
+	"To cut and paste",					//Keyword, Proactive, Redefinition
 	"This is it"						//Keyword, Proactive, Redefinition
 ];
 
