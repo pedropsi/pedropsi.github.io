@@ -16,6 +16,24 @@
 		</image>
 		
 	<item>
+		<title><![CDATA[Puzzle type beta changes IV]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-05-10</guid>
+		<pubDate>Sun, 10 May 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+<p>More updates: levels THI*** and COP*** added; TEN*** became CAR***, a more interesting clue. Reordering of later levels. Major fix to the undo queue. Minor bugs.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
 		<title><![CDATA[Game stats & other improvements]]></title>
 		<link>https://pedropsi.github.io/index.html#RSS</link>
 		<guid>https://pedropsi.github.io/index.html?guid=2020-05-07</guid>
@@ -26,28 +44,11 @@
 			
 <p>Most games now display a chart with the number of wins per level.</p>
 <p>Also, it is now possible to jump directly to any level by adding the URL parameter: e.g. ?level=levelTitle or e.g. ?level=2.</p>
+<p>Major refactoring and minor scattered fixes.</p>
 	
 		]]>
 		</description>
 		<category><![CDATA[Sitemap]]></category>
-	</item>
-	
-
-	<item>
-		<title><![CDATA[Puzzle type beta changes IV]]></title>
-		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
-		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-04-26</guid>
-		<pubDate>Sun, 26 Apr 2020 07:06:05 GMT</pubDate>
-		<description>
-		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
-			
-<p>Ongoing beta playtesting changes: level COP*** added; TEN*** became CAR***, a more interesting clue.</p>
-	
-		]]>
-		</description>
-		<category><![CDATA[Game]]></category>
-<category><![CDATA[Puzzle]]></category>
 	</item>
 	
 
