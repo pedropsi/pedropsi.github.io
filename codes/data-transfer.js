@@ -4726,7 +4726,7 @@ DateName=function(day,month,year){
 ///////////////////////////////////////////////////////////////////////////////
 // Range, in different order
 Range=function(min,max){
-	if(!max)
+	if(typeof max==="undefined")
 		return Range(0,min);
 	else{
 		var r=[];
