@@ -344,7 +344,8 @@ function BlockInput(duration){
 }
 
 function ForbidCaret(){
-	PulseSelect(".caret","forbidden",500);
+	var c=GetElements(".caret");
+	c.map(function(caret){PulseSelect(caret,"forbidden",500)});
 }
 
 function ForbidNumberActions(key){
@@ -1083,15 +1084,65 @@ function Weightier(L){
 }
 
 function Translate(L){
-	
-	InputLetterAfter(L);
-	word=Word().toLowerCase();
-	
-	if(In(EnglishFrench(),word))
-		Letters(EnglishFrench(word));
+	var choosing=false;
+	if(Memo()){
+		choosing=Memo();
+		var interpretations=choosing.interpretations;
+		var prefix=choosing.prefix;
+		var p=choosing.p;
+		
+		if(L==="W"||L==="A")
+			p=(p+interpretations.length-1)%interpretations.length;
+		else if(L==="S"||L==="D")
+			p=(p+interpretations.length+1)%interpretations.length;
+		else	
+			choosing=false;
 
-	Caret(Infinity);
-	return;
+		if(interpretations.length===1)
+			choosing=false;
+		
+		choosing.p=p;
+		
+		Memo(choosing);
+		var word=prefix+interpretations[p];
+
+	}else{
+		InputLetterAfter(L);
+		var word=Word().toLowerCase();
+
+		var i=0;
+		var found=false;
+		var suffix=word;
+		var prefix="";
+
+		while(!found&&i<word.length){
+			suffix=word.slice(i,Infinity);
+			prefix=word.slice(0,i);
+			interpretations=ENFR(suffix,3);
+			found=(IsArray(interpretations))
+			if(found){
+				word=prefix+interpretations[0];
+				var p=0;
+				Memo({
+					interpretations:interpretations,
+					prefix:prefix,
+					p:p
+				});
+				choosing=true
+			}
+			else
+				i++;
+		}
+	}
+
+	Letters(word);
+
+	if(choosing){
+		var i=prefix.length;
+		Caret(Range(i,i+interpretations[p].length-1));
+	} else
+		Caret(Infinity);
+	
 }
 
 
@@ -1770,7 +1821,8 @@ function StartingMemo(level){
 				.....A._______
 				..____________
 				W_____________`.replace(/\t*/g,""),
-		'This is it':[]
+		'This is it':[],
+		'Translate':false
 	};
 	return zeromemo[level];
 }
