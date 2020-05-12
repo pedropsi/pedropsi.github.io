@@ -1118,8 +1118,8 @@ function Translate(L){
 		while(!found&&i<word.length){
 			suffix=word.slice(i,Infinity);
 			prefix=word.slice(0,i);
-			interpretations=ENFR(suffix,3);
-			found=(IsArray(interpretations))
+			interpretations=ENFR(suffix,5);
+			found=(IsArray(interpretations)&&interpretations.length>0&&!In(interpretations,suffix))
 			if(found){
 				word=prefix+interpretations[0];
 				var p=0;
@@ -1145,6 +1145,21 @@ function Translate(L){
 	
 }
 
+
+ENFR=function(en,tries){
+	if(!tries||!In(Keys(EnglishFrench),en))
+		return [en];
+
+	var fr=EnglishFrench[en];
+	if(!IsArray(fr))
+		fr=[fr];
+
+	fr=fr.map(x=>(Prefixed(x,"*")?ENFR(x,tries-1):[x]));
+	fr=fr.reduce((x,y)=>(x.concat(y)));
+	fr=fr.filter(x=>!Prefixed(x,"*"));
+	
+	return Unique(fr);
+}
 
 //Fillet
 
@@ -1561,7 +1576,7 @@ function DrawCaret(){
 	positions.map(DrawSingleCaret);	
 }
 
-function DrawSingleCaret(p){	
+function DrawSingleCaret(p){
 	if(p<0)
 		PreAddElement(CaretHTML(),"#letters");
 	if(p>=Letters().length)
