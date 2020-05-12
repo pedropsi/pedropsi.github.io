@@ -104,7 +104,7 @@ var gameModulesLater=[
 "codons",
 "colours-names",
 "countries",
-"lang-french",
+"lang-english-french",
 "lang-gender",
 "lang-kana",
 "morse-braille",
