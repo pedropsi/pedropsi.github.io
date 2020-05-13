@@ -26,6 +26,7 @@ var Nuclei={
 'chromium':'cr',
 'caesium':'cs',
 'copper':'cu',
+'deuterium':'d',
 'dubnium':'db',
 'darmstadtium':'ds',
 'dysprosium':'dy',
@@ -121,6 +122,8 @@ var Nuclei={
 'zirconium':'zr'
 }
 /*
+new ideas:carbonate, ironclad
+
 easyElements=`
 0: "silver"				EASY
 ​4: "carbon"			DIRECT

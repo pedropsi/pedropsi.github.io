@@ -434,7 +434,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Nigeria",				//Word, Mapping, Geography
 	"Genetic.",				//Encoding, Word, Science
 	"Anagram",				//Word, Mapping, Language, Once,
-	"Carbonate",			//Encoding, Word, Science
+	"Ironclad",			//Encoding, Word, Science
 
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
@@ -591,7 +591,7 @@ var LevelActions={
 	"Fuchsia":Fuchsia,
 	"Deaf":Deaf,
 	"Anagram":Anagram,
-	"Carbonate":Carbonate,
+	"Ironclad":Ironclad,
 	"Genetic.":Genetic,
 	"Wasd":Wasd
 }
@@ -792,7 +792,7 @@ function Anagram(L){
 	}
 }
 
-function Carbonate(L){
+function Ironclad(L){
 	InputLetterAfter(L+"*");
 	
 	var saved=SavedLetters();
@@ -1644,7 +1644,7 @@ var LetterDisplay={
 		else
 			return LetterPureHTML(combined);
 	},
-	"Carbonate":LetterDraftHTML,
+	"Ironclad":LetterDraftHTML,
 	"Genetic.":LetterDraftHTML,
 	"Anagram":LetterDraftHTML,
 	"Fuchsia":LetterDraftHTML,
