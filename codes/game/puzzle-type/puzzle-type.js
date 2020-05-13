@@ -1162,6 +1162,21 @@ ENFR=function(en,tries){
 	return Unique(fr);
 }
 
+TranslatePureWord=function(word){
+	var found=false;
+	var i=0;
+	while(!found&&i<word.length){
+		var j=0;
+		while(!found&&j<=i){
+			found=In(Keys(EnglishFrench),word.slice(j,i));
+			j++;
+		}
+		i++
+	};return !found;
+}
+
+
+
 //Fillet
 
 function Fillet(E){
