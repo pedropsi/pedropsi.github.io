@@ -440,8 +440,8 @@ var LevelGoals=[			//Required types of thinking:
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
 
 	"⠍⠕⠗⠎⠑",						  //Encoding, Once
-	"Deaf",								//Encoding
 	"Fuchsia",							//Encoding
+	"Deaf",								//Encoding
 	"Dividi",							//Encoding, Arithmethic, Retroactive
 	
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
@@ -655,6 +655,7 @@ function Difference(L){
 	if(!last){
 		InputLetterAfter(L);
 		last=L;
+		Memo(last);
 		Caret(0);
 		return;
 	}
