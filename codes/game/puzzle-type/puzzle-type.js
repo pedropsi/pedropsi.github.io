@@ -105,12 +105,14 @@ var gameModulesLater=[
 "colours-names",
 "countries",
 "lang-english-french",
+"lang-french-english",
 "lang-gender",
 "lang-kana",
 "morse-braille",
 "nuclei",
 "number-reader",
-"number-roman"
+"number-roman",
+"audiosynth"
 ]
 
 LoadSources(gameModulesEarly,GameIntro);
@@ -379,6 +381,7 @@ function ForbidSpaceActions(key){
 		"Odd",
 		"Deaf",
 		"Dvorak",
+		"Finest vernissages",
 		"To cut and paste",
 		"This is it"
 	],CurLevelName())&&In([" "],key));
@@ -446,7 +449,7 @@ var LevelGoals=[			//Required types of thinking:
 	
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
 	"To cut and paste",					//Keyword, Proactive, Redefinition
-	"This is it"						//Keyword, Proactive, Redefinition
+	"This is it"						//Keyword, Proactive, Increment, Redefinition
 ];
 
 
