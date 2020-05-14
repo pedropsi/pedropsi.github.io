@@ -28,6 +28,21 @@ var MajorChords={
 	"BD#F#":"B"
 };
 
+var MinorChords={
+	"CD#G":"C",
+	"C#EG#":"C#",
+	"DFA":"D",
+	"D#F#A#":"D#",
+	"EGB":"E",
+	"FG#C":"F",
+	"F#AC#":"F#",
+	"GA#D":"G",
+	"G#BD#":"G#",
+	"ACE":"A",
+	"A#C#F":"A#",
+	"BDF#":"B"
+};
+
 ChordForward={
 	"A#":"a",
 	"B#":"b",
@@ -55,3 +70,56 @@ Keys(MajorChords).map(function(chord){
 		MajorChords[pchord]=MajorChords[chord];
 	});
 })
+
+Keys(MinorChords).map(function(chord){
+	var permutationsMinor=PermuteChord(chord);
+	return permutationsMinor.map(function(pchord){
+		MinorChords[pchord]=MinorChords[chord];
+	});
+})
+
+var Notes=["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
+
+function NoteNumber(note){
+	return Notes.indexOf(note);
+}
+
+function NumberNote(number){
+	return Notes[number];
+}
+
+function NotePlayer(n,o){
+	return function(){
+		var note=IncrementNote(n);
+		var octave=o+(In("A A# B B#",note)?0:0);
+		Piano.play(note,octave,2);
+	}
+}
+
+function PlayChord(chord){
+	var i=0;
+
+	if(typeof Piano!=="undefined"){
+		var ch=chord.replace(/([ABCDEFG])/g,"-$1").split("-");
+			ch=ch.filter(x=>!In(["","#"],x));
+		var octave=3;
+		var last="";
+		for(var n=0;n<ch.length;n++){
+			note=ch[n];
+			if(last&&NoteNumber(last)>=NoteNumber(note))
+				octave++;
+			setTimeout(NotePlayer(note,octave),n*250)
+			last=note;
+		}
+	}
+	else{
+		console.log("no Piano!")
+	}
+
+}
+
+var Piano;
+function PianoStart(){
+	Piano=Synth.createInstrument('piano');
+}
+ListenOnce("audiosynth",PianoStart);
