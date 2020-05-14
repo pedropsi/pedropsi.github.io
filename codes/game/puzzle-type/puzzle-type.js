@@ -439,9 +439,9 @@ var LevelGoals=[			//Required types of thinking:
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
 
-	"⠍⠕⠗⠎⠑",						  //Encoding, Once
 	"Fuchsia",							//Encoding
 	"Deaf",								//Encoding
+	"⠍⠕⠗⠎⠑",						  //Encoding, Once
 	"Dividi",							//Encoding, Arithmethic, Retroactive
 	
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
@@ -580,7 +580,7 @@ var LevelActions={
 		Caret(Infinity);		
 	},
 	"Latent clones":Weightier,
-	"Translate":Translate,
+	"Finest vernissages":Translate,
 	"Nigeria":Nigeria,
 	"ひらがな":function(L){
 		InputLetterAfter(L);
@@ -875,6 +875,7 @@ function Fuchsia(L){
 }
 
 function Deaf(L){
+	var piano = Synth.createInstrument('piano');
 
 	var savednotes=SavedLetters();
 	var tempnotes=TemporaryLetters();
@@ -892,12 +893,12 @@ function Deaf(L){
 		InputLetterAfter(L+"*");
 		
 	var tempnotes=TemporaryLetters();
+	var chord=tempnotes.map(PureLetter).join("");
+		chord=FixedPoint(IncrementNote,chord);
 
 	if(tempnotes.length-Count(tempnotes,"#*")===3){//3 notes
-		var chord=tempnotes.map(PureLetter).join("");
-			chord=FixedPoint(IncrementNote,chord);
-
 		if(In(MajorChords,chord)){
+			PlayChord(chord);
 			Letters(savednotes);
 			InputLetterAfter(MajorChords[chord]);
 		}
@@ -906,6 +907,7 @@ function Deaf(L){
 		}
 	}
 	else if(tempnotes.length-Count(tempnotes,"#*")>3){//3 notes
+		PlayChord(chord);
 		Letters(savednotes);
 	}
 	Caret(Infinity);
@@ -1120,6 +1122,7 @@ function Translate(L){
 			suffix=word.slice(i,Infinity);
 			prefix=word.slice(0,i);
 			interpretations=ENFR(suffix,5);
+			interpretations=interpretations.filter(i=>!Prefixed(i,"-")).filter(i=>!In(i," "));
 			found=(IsArray(interpretations)&&interpretations.length>0&&!In(interpretations,suffix))
 			if(found){
 				word=prefix+interpretations[0];
@@ -1168,7 +1171,7 @@ TranslatePureWord=function(word){
 	while(!found&&i<word.length){
 		var j=0;
 		while(!found&&j<=i){
-			found=In(Keys(EnglishFrench),word.slice(j,i));
+			found=In(EnglishFrench,word.slice(j,i));
 			j++;
 		}
 		i++
