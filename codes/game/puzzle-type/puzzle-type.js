@@ -115,21 +115,15 @@ var gameModulesLater=[
 "audiosynth"
 ]
 
-LoadSources(gameModulesEarly,GameIntro);
+LoadSources(gameModulesEarly,P()?GameIntro:Identity);
 gameModulesLater.map(LoaderInFolder("codes/game/puzzle-type/modules"));
 
 function GameIntro(){
 	RemoveElement("game-supra-Canvas");
 	PrependElement(GameFrameHTML(),".main");
 	GameFocus();
-	if(P())
-		setTimeout(function(){PlayIntro(".game",StartGame)},100);
-	else{
-		ComingHTMLArray().map(function(html){OpenElement(html,"gameCanvas")});
-		LevelAction=Identity;
-		LevelLoader=Identity;
-	}
 	LoadStyle("codes/game/puzzle-type/puzzle-type.css");
+	setTimeout(function(){PlayIntro(".game",StartGame)},100);
 }
 
 function StartGame(){
@@ -441,6 +435,7 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
+	"Finest vernissages",				//Keyword, Swap, Retroactive, Language
 
 	"Fuchsia",							//Encoding
 	"Deaf",								//Encoding
@@ -904,6 +899,11 @@ function Deaf(L){
 			PlayChord(chord);
 			Letters(savednotes);
 			InputLetterAfter(MajorChords[chord]);
+		}
+		else if(In(MinorChords,chord)){
+			PlayChord(chord);
+			Letters(savednotes);
+			InputLetterAfter(MinorChords[chord].toLowerCase());
 		}
 		else if(Last(tempnotes)==="#*"){
 			Letters(savednotes);
