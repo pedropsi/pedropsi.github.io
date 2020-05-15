@@ -1880,12 +1880,12 @@ function StartingMemo(level){
 	return zeromemo[level];
 }
 
-function TimerBlocker(level){
+function EffectRenderer(level){
 	var timers={
 		'Nokia 1998':function(){NokiaTimer.blocked=true},
 	};
 	if(!level)
-		return TimerBlocker(CurLevelName());
+		return EffectRenderer(CurLevelName());
 	if(In(timers,level))
 		return timers[level]();
 	else
@@ -1965,7 +1965,7 @@ function Undo(){
 	
 	LevelState(laststate);
 	
-	TimerBlocker();
+	EffectRenderer();
 	DrawLevel();
 	
 	PulseSelect("UndoButton");
