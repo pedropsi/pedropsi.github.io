@@ -2008,8 +2008,10 @@ FilterSearchURL=function(){
 	if(table){
 		TextFilterChildren(search,table,"TR","TBODY");
 		var input=PriorElement(table,"INPUT");
-		if(input)
+		if(input){
 			input.value=search;
+			ScrollInto(input);
+		}		
 	}
 }
 
