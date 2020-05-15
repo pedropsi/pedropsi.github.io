@@ -69,7 +69,13 @@ var ObtainReadMove=Identity;
 //Level navigation
 function ObtainNewGameCondition(){return SolvedLevels().length<1&&CurLevelNumber()<=1};
 function ObtainStateScreens(){return LevelGoals;}
-function ObtainLevelTitle(l){return LevelGoals[l-1].toUpperCase();}
+function ObtainLevelTitle(l){
+	var title=LevelGoals[l-1];
+	if(title==="Deaf")
+		return title;
+	else
+		return title.toUpperCase();
+}
 var ObtainLevelLoader=LevelLoader;
 
 //Resize canvas
@@ -1787,7 +1793,12 @@ function LevelLoader(){
 	TitleScreen(false);
 	ReplaceChildren("<div class='top'><div class='goal'></div></div>",".top");
 	ClearLetters();
-	ReplaceChildren(CurLevelName(),".goal");
+	var title=CurLevelName();
+	ReplaceChildren(title,".goal");
+	if(title==="Deaf")
+		Class(".goal","uncase");
+	else
+		UnClass(".goal","uncase");
 	ClearLevel();
 	ColoriseGameBar();//Change colour each level
 	

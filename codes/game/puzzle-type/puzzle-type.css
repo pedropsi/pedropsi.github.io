@@ -44,6 +44,11 @@
    font-weight: bold;
 }
 
+.top .goal.uncase{
+   font-variant-caps:normal;
+   
+}
+
 .middle{
     min-height: 33.33%;
     max-height: 66.66%;
