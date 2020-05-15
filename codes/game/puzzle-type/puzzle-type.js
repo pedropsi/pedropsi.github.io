@@ -70,12 +70,9 @@ var ObtainReadMove=Identity;
 function ObtainNewGameCondition(){return SolvedLevels().length<1&&CurLevelNumber()<=1};
 function ObtainStateScreens(){return LevelGoals;}
 function ObtainLevelTitle(l){
-	var title=LevelGoals[l-1];
-	if(title==="Deaf")
-		return title;
-	else
-		return title.toUpperCase();
+	return FormattedTitle(LevelGoals[l-1]);
 }
+
 var ObtainLevelLoader=LevelLoader;
 
 //Resize canvas
@@ -405,6 +402,13 @@ function InPart(arrayOrObj,n){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Levels & Actions
+function FormattedTitle(title){
+	if(title==="Deaf")
+		return title;
+	else
+		return title.toUpperCase();
+}
+
 var LevelGoals=[			//Required types of thinking:
 	//Positional (caret position), Spacial (position of letters in 2D system), Alphabetical (letters are ordered, and may correspond to numbers), Syllabe (syllabes as unit of input), Word (full words as units of input), Adjacent, Cyclic, Mapping (cyphers), Language, Knowledge, Cultural, Retroactive, Proactive,
 	"Direct",				
@@ -588,7 +592,7 @@ var LevelActions={
 	"Nigeria":Nigeria,
 	"ひらがな":function(L){
 		InputLetterAfter(L);
-		Letters(StringReplaceRulesObject(Word().toLowerCase(),Hiragana));
+		Letters(StringReplaceRulesObject(Word().toLowerCase(),Hiragana).toUpperCase());
 		Caret(Infinity);
 	},
 	"⠍⠕⠗⠎⠑":Morse,
@@ -753,7 +757,6 @@ function Nigeria(L){
 		
 		var c=Capitals.map(UnSpace).indexOf(AREA);
 		var i=Countries.map(UnSpace).indexOf(AREA);
-		console.log(c,i);
 
 		var city=(c>=0)&&!(i>=0);// Is it a city and not a country?
 	
@@ -841,6 +844,7 @@ function Fuchsia(L){
 
 	function Restart(){
 		colour=false;
+		Memo(colour);
 		ForbidCaret();
 		ClearLetters();
 	}
@@ -865,7 +869,7 @@ function Fuchsia(L){
 		}
 		else{
 			var hex=PureLetter(Word());
-			Letters(NamedColour(hex));
+			Letters(NamedColour(hex).toUpperCase());
 			
 			Caret(Infinity);
 			AddSingleElement("<style class='overcolour'>.letter{color:"+hex+";border-bottom-color:"+hex+"} .letter.caret{background:"+hex+" !important}</style>",'BODY','.overcolour');
@@ -1090,7 +1094,7 @@ function Baba(L){
 function Weightier(L){
 	
 	InputLetterAfter(L);
-	Letters(InflateNumbers(Word().toLowerCase()));
+	Letters(InflateNumbers(Word().toLowerCase()).toUpperCase());
 	Caret(Infinity);
 	return;
 }
@@ -1130,7 +1134,7 @@ function Translate(L){
 		while(!found&&i<word.length){
 			suffix=word.slice(i,Infinity);
 			prefix=word.slice(0,i);
-			interpretations=ENFR(suffix,5);
+			var interpretations=ENFR(suffix,5);
 			interpretations=interpretations.filter(i=>!Prefixed(i,"-")).filter(i=>!In(i," "));
 			found=(IsArray(interpretations)&&interpretations.length>0&&!In(interpretations,suffix))
 			if(found){
@@ -1148,6 +1152,7 @@ function Translate(L){
 		}
 	}
 
+	word=word.toUpperCase();
 	Letters(word);
 
 	if(choosing){
@@ -1538,9 +1543,9 @@ function Letters(array){
 		return Letters.array;
 	
 	if(typeof array==="string")
-		return Letters.array=array.toUpperCase().split("");
+		return Letters.array=array.split("");
 	else
-		return Letters.array=array.map(function(l){return l.toUpperCase()});
+		return Letters.array=Clone(array);
 }
 
 function Letter(position,letter){
@@ -1822,7 +1827,7 @@ function UpdateLevel(state){
 
 
 function CheckWin(){
-	var win=CurLevelName().toUpperCase()===Letters().join("").replace(/\_/g,"").toUpperCase();
+	var win=FormattedTitle(CurLevelName())===Letters().join("").replace(/\_/g,"");
 	
 	if(win){
 		PlaySound("media/puzzle-type/sound/win"+RandomChoice("123")+".mp3");
@@ -1870,7 +1875,7 @@ function StartingMemo(level){
 				..____________
 				W_____________`.replace(/\t*/g,""),
 		'This is it':[],
-		'Translate':false
+		'Finest vernissages':false
 	};
 	return zeromemo[level];
 }
