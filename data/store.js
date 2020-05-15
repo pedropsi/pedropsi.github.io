@@ -15,7 +15,8 @@ var Store={
 	STRIPE_KEY:()=>"pk_test_w0G0ENTYZ67hs4uUfdO7HYcp00whShrwUN",
 	SUCCESS_LINK:()=>"https://pedropsi.github.io/puzzle-type",
 	ERROR_LINK:()=>"https://pedropsi.github.io/puzzle-type",
-	ACTION_BUTTON:v.BUTTON_SOON,//StripeButtonHTML,
+	ACTION_BUTTON:v.BUTTON_BUY,
+	ACTION_BUTTON:v.BUTTON_SOON,
 	OWL:()=>"78269703/8AB38B13",
 	INTEGRATION:()=>""
 	},
@@ -29,9 +30,10 @@ var Store={
 	ONE_LINER:()=>`<p>Do you like the ${v.SITE_NAME()}</p>? This is an option to show your appreciation!</p>`,
 	DETAILS:()=>`<p>What is in the box?</p>`,
 	LINK:()=>"store",
-	ACTION_BUTTON:v.BUTTON_SOON,
 	CALL:()=>`Send ${v.NAME()} a small gift!`,
 	IMAGEALT:()=>"Present",
+	ACTION_BUTTON:v.BUTTON_BUY,
+	ACTION_BUTTON:v.BUTTON_SOON,
 	OWL:()=>"78269976/1FDC655D",
 	INTEGRATION:()=>""
 	}
