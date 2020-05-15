@@ -25,11 +25,13 @@
 <h3> What is a puzzlescript id?</h3>
 <p>It's the long identifier after <code>puzzlescript.net/play.html?p=</code> or after <code>puzzlescript.net/editor.html?hack=</code>.</p>
 
-<h3> Does it work on all Puzzlescript forks?</h3>
-<p>As long as the fork is on Github, and keeps the original folder structure (no new or renamed js files), it shoudl work.</p>
+<h3>Changing the Puzzlescript fork</h3>
+<p> In case the fork name is mentioned in the gist readme.txt file, e.g. <code>... pasting the script in  ...<b>name</b>.github.io/...</code>, it will be loaded automatically.</p>
+<p> Alternatively, you may force a specific fork by adding the URL parameter <code>"&fork=<b>FORK_AUTHOR_NAME_IN_GITHUB</b>"</code> to the console's url. As long as the fork is on Github, and keeps the original folder structure (no new or renamed js files), it should work.</p>
 
-<h3> How is the correct Puzzlescript forks indicated?</h3>
-<p> The fork name must be mentioned in the gist, e.g. <code>... pasting the script in  ...<b>name</b>.github.io/...</code>.</p>
+<h3>Linking directly to a level</h3>
+<p> You may link directly to a specific level by adding the URL parameter <code>"&level=<b>LEVEL_NUMBER</b>"</code> to the console's url, e.g. ${AHTML("abxtract-tractx.html?level=7","abxtract-tractx.html?level=6")}. In special cases, using the level's name may also work: ${AHTML("skilleblokker.html?level=krok","skilleblokker.html?level=krok")}.</p>
+
 
 <h3> Why is this game bar slightly different from the published version?</h3>
 <p>Because this is the cutting-edge, sometimes experimental, version!</p>
