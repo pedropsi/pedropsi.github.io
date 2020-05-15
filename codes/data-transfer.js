@@ -1050,7 +1050,7 @@ PageShallowPath=function(url){
 }
 
 PageShallowURL=function(url){
-	return PageProtocol(url)+PageSomain(url)+PageShallowPath(url)+PageSearch(url)+PageFragment(url);
+	return PageProtocol(url)+PageDomain(url)+PageShallowPath(url)+PageSearch(url)+PageFragment(url);
 }
 
 
@@ -2112,6 +2112,9 @@ ButtonHTML=function(optionsObj){
 
 AHTML=function(title,ref,attribs){
 	if(typeof ref==="undefined"){
+		if(In(title,".html"))
+			return AHTML(title,title);
+		
 		var ref=Posfix(title,".html");
 		var title=CapitaliseSlug(title);
 	}
