@@ -1121,6 +1121,9 @@ function Weightier(L){
 function Translate(L){
 	var choosing=false;
 	if(Memo()){
+		
+		PopUndo();//convenience
+
 		choosing=Memo();
 		var interpretations=choosing.interpretations;
 		var prefix=choosing.prefix;
@@ -1145,6 +1148,9 @@ function Translate(L){
 		Memo(choosing);
 		var word=prefix+interpretations[p];
 
+		if(choosing&&interpretations.length>1)
+			word=prefix+"◀"+interpretations[p]+"▶";
+
 	}else{
 		if(In(NumberCharacters,L)||L==="Enter"||In(ArrowKeys,L))
 			return;
@@ -1163,7 +1169,7 @@ function Translate(L){
 			interpretations=interpretations.filter(i=>!Prefixed(i,"-")).filter(i=>!In(i," "));
 			found=(IsArray(interpretations)&&interpretations.length>0)//&&!In(interpretations,suffix))
 			if(found){
-				word=prefix+interpretations[0];
+				word=prefix+"◀"+interpretations[0]+"▶";
 				var p=0;
 				Memo({
 					interpretations:interpretations,
@@ -1182,7 +1188,8 @@ function Translate(L){
 
 	if(choosing){
 		var i=prefix.length;
-		Caret(Range(i,i+interpretations[p].length-1));
+		var arrowextend=(interpretations.length>1?2:0);
+		Caret(Range(i,i+interpretations[p].length-1+arrowextend));
 	} else
 		Caret(Infinity);
 }
