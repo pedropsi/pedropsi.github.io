@@ -1,11 +1,18 @@
 News={
-	N_43:{
+	N_45:{
+DATE:"2020-05-17",
+HEADER:()=>"Puzzle type beta changes V",
+PIECE:()=>`
+<p>More updates: level CAR*** became IRO***, adding a couple twists. DEA*** was expanded and synthesised sounds added. Many thanks, ${v.COLLINEYE()}!</p>
+<p>New level FIN*** added, still experimental!</p>
+	`,ID:"puzzle-type"},
+	N_44:{
 DATE:"2020-05-10",
 HEADER:()=>"Puzzle type beta changes IV",
 PIECE:()=>`
 <p>More updates: levels THI*** and COP*** added; TEN*** became CAR***, a more interesting clue. Reordering of later levels. Major fix to the undo queue. Minor bugs.</p>
 	`,ID:"puzzle-type"},
-	N_44:{
+	N_43:{
 DATE:"2020-05-07",
 HEADER:()=>"Game stats & other improvements",
 PIECE:()=>`
@@ -17,7 +24,7 @@ PIECE:()=>`
 DATE:"2020-04-26",
 HEADER:()=>"Puzzle type beta changes III",
 PIECE:()=>`
-<p>Ongoing beta playtesting changes: NUC*** became TEN*** a less ambiguous clue, added new puzzle GEN*** but removed TAN***, a critical synonym was added to LAT***, WAS*** was recentered. Many thanks, ${v.COLLINEYE()}!</p>
+<p>Ongoing beta playtesting changes: NUC*** became TEN*** a less ambiguous clue, added new puzzle GEN*** but removed TAN***, a critical synonym was added to LAT***, WAS*** was recentered.</p>
 	`,ID:"puzzle-type"},
 	N_41:{
 DATE:"2020-04-18",
