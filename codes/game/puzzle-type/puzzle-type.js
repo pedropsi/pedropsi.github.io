@@ -464,7 +464,7 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-	"Finest vernissages",				//Keyword, Swap, Retroactive, Language
+	//"Finest vernissages",				//Keyword, Swap, Retroactive, Language
 
 	"Fuchsia",							//Encoding
 	"Deaf",								//Encoding
@@ -1159,9 +1159,9 @@ function Translate(L){
 		while(!found&&i<word.length){
 			suffix=word.slice(i,Infinity);
 			prefix=word.slice(0,i);
-			var interpretations=ENFR(suffix,5);
+			var interpretations=Translator(suffix);
 			interpretations=interpretations.filter(i=>!Prefixed(i,"-")).filter(i=>!In(i," "));
-			found=(IsArray(interpretations)&&interpretations.length>0&&!In(interpretations,suffix))
+			found=(IsArray(interpretations)&&interpretations.length>0)//&&!In(interpretations,suffix))
 			if(found){
 				word=prefix+interpretations[0];
 				var p=0;
@@ -1185,38 +1185,55 @@ function Translate(L){
 		Caret(Range(i,i+interpretations[p].length-1));
 	} else
 		Caret(Infinity);
-	
 }
 
+function Translator(en){
+	if(!NamesEnFr||!AdjectivesEnFr||!AdverbsExtrasEnFr)
+		return ["LEVEL DATA STILL LOADING, PLEASE WAIT..."];
+	var en=en.toLowerCase();
+	var translations=[].concat(NamesEnFr[en]||[])
+						.concat(AdjectivesEnFr[en]||[])
+						.concat(VerbsEnFr[en]||[])
+						.concat(AdverbsExtrasEnFr[en]||[]);
+						
+	return Unique(translations);
+}
 
-ENFR=function(en,tries){
-	if(!tries||!In(Keys(EnglishFrench),en))
-		return [en];
+FollowDBLinks=function(en,tries,DB){
+	var en=UnPrefix(en,"*");
 
-	var fr=EnglishFrench[en];
-	if(!IsArray(fr))
-		fr=[fr];
+	if(!tries||!In(Keys(DB),en))
+		return [];
 
-	fr=fr.map(x=>(Prefixed(x,"*")?ENFR(x,tries-1):[x]));
+	var fr=DB[en];
+
+	fr=fr.map(function(x){
+		if(Prefixed(x,"*")){
+			return FollowDBLinks(x,tries-1,DB);
+		}
+		else
+			return [x];
+	});
 	fr=fr.reduce((x,y)=>(x.concat(y)));
 	fr=fr.filter(x=>!Prefixed(x,"*"));
 	
 	return Unique(fr);
 }
 
-TranslatePureWord=function(word){
-	var found=false;
-	var i=0;
-	while(!found&&i<word.length){
-		var j=0;
-		while(!found&&j<=i){
-			found=In(EnglishFrench,word.slice(j,i));
-			j++;
-		}
-		i++
-	};return !found;
+function CleanDB(NewDB,DB){
+	var enList=Keys(DB);
+	var l=enList.length;
+	var frList;
+	for(var i=0;i<l;i++){
+		frList=FollowDBLinks(enList[i],5,DB);
+		frList=frList.map(f=>f.toLowerCase()).flat();
+		frList=frList.map(x=>UnPrefix(x," "));
+		if(i%1000===0)
+			console.log(PercentageText(i/l,2),":",enList[i],frList);
+		if(frList.length)
+			NewDB[enList[i].toLowerCase()]=Unique(frList);
+	}
 }
-
 
 
 //Fillet
