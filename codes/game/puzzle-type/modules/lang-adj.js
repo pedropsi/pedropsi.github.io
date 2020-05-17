@@ -1,0 +1,33615 @@
+var AdjectivesEnFr={
+"abandoned":[
+	"abandonné",
+	"abandonnée",
+	"abandonnées",
+	"abandonnés",
+	"dévergondé",
+	"dévergondée",
+	"dévergondées",
+	"dévergondés"
+	],
+"abashed":[
+	"confus",
+	"confuse",
+	"confuses"
+	],
+"abbatial":[
+	"abbatial",
+	"abbatiale",
+	"abbatiales",
+	"abbatiaux"
+	],
+"abbreviative":[
+	"abréviatif",
+	"abréviatifs",
+	"abréviative",
+	"abréviatives"
+	],
+"abdominal":[
+	"abdominal",
+	"abdominale",
+	"abdominales",
+	"abdominaux"
+	],
+"abdominous":[
+	"ventru",
+	"ventrue",
+	"ventrues",
+	"ventrus"
+	],
+"abelian":[
+	"abélien",
+	"abélienne",
+	"abéliennes",
+	"abéliens",
+	"commutatif",
+	"commutatifs",
+	"commutative",
+	"commutatives"
+	],
+"aberrant":[
+	"aberrant",
+	"aberrante",
+	"aberrantes",
+	"aberrants"
+	],
+"abhorrent":[
+	"répugnant",
+	"répugnante",
+	"répugnantes",
+	"répugnants"
+	],
+"abiding":[
+	"continuel",
+	"continuelle",
+	"continuelles",
+	"continuels",
+	"sempiternel",
+	"sempiternelle",
+	"sempiternelles",
+	"sempiternels"
+	],
+"abiotic":[
+	"abiotique",
+	"abiotiques"
+	],
+"abject":[
+	"abject",
+	"abjecte",
+	"abjectes",
+	"abjects",
+	"misérable",
+	"misérables",
+	"méprisable",
+	"méprisables"
+	],
+"ablative":[
+	"ablatif",
+	"ablatifs",
+	"ablative",
+	"ablatives"
+	],
+"able":[
+	"capable",
+	"capables",
+	"expérimenté",
+	"expérimentée",
+	"expérimentées",
+	"expérimentés",
+	"habilité",
+	"habilitée",
+	"habilitées",
+	"habilités"
+	],
+"abnormal":[
+	"anormal",
+	"anormale",
+	"anormales",
+	"anormaux",
+	"exceptionnel",
+	"exceptionnelle",
+	"exceptionnelles",
+	"exceptionnels",
+	"inhabituel",
+	"inhabituelle",
+	"inhabituelles",
+	"inhabituels"
+	],
+"abominable":[
+	"abominable",
+	"abominables"
+	],
+"aboriginal":[
+	"aborigène",
+	"aborigènes",
+	"indigène",
+	"indigènes"
+	],
+"abortifacient":[
+	"abortif",
+	"abortifs",
+	"abortive",
+	"abortives"
+	],
+"abortive":[
+	"abortif",
+	"abortifs",
+	"abortive",
+	"abortives"
+	],
+"abovesaid":[
+	"susnommé",
+	"susnommée",
+	"susnommées",
+	"susnommés"
+	],
+"abrasive":[
+	"abrasif",
+	"abrasifs",
+	"abrasive",
+	"abrasives"
+	],
+"abrupt":[
+	"abrupt",
+	"abrupte",
+	"abruptes",
+	"abrupts",
+	"brusque",
+	"brusques"
+	],
+"absent":[
+	"absent",
+	"absente",
+	"absentes",
+	"absents"
+	],
+"absolute":[
+	"absolu",
+	"absolue",
+	"absolues",
+	"absolus"
+	],
+"absorbed":[
+	"absorbé",
+	"absorbée",
+	"absorbées",
+	"absorbés"
+	],
+"absorbent":[
+	"absorbant",
+	"absorbante",
+	"absorbantes",
+	"absorbants"
+	],
+"abstract":[
+	"abstrait",
+	"abstraite",
+	"abstraites",
+	"abstraits"
+	],
+"abstruse":[
+	"abstrus",
+	"abstruse",
+	"abstruses"
+	],
+"absurd":[
+	"absurde",
+	"absurdes"
+	],
+"abundant":[
+	"abondant",
+	"abondante",
+	"abondantes",
+	"abondants"
+	],
+"abysmal":[
+	"abyssal",
+	"abyssale",
+	"abyssales",
+	"abyssaux",
+	"exécrable",
+	"exécrables",
+	"terrible",
+	"terribles",
+	"épouvantable",
+	"épouvantables"
+	],
+"academic":[
+	"académique",
+	"académiques",
+	"universitaire",
+	"universitaires"
+	],
+"acadian":[
+	"acadien",
+	"acadienne",
+	"acadiennes",
+	"acadiens"
+	],
+"accelerated":[
+	"accéléré",
+	"accélérée",
+	"accélérées",
+	"accélérés"
+	],
+"acceptable":[
+	"acceptable",
+	"acceptables",
+	"admissible",
+	"admissibles"
+	],
+"accessible":[
+	"accessible",
+	"accessibles"
+	],
+"accessory":[
+	"accessoire",
+	"accessoires"
+	],
+"accidental":[
+	"accidentel",
+	"accidentelle",
+	"accidentelles",
+	"accidentels"
+	],
+"accomplished":[
+	"accompli",
+	"accomplie",
+	"accomplies",
+	"accomplis"
+	],
+"accountable":[
+	"responsable",
+	"responsables"
+	],
+"accurate":[
+	"exact",
+	"exacte",
+	"exactes",
+	"exacts",
+	"précis",
+	"précise",
+	"précises"
+	],
+"accursed":[
+	"détestable",
+	"détestables",
+	"fichu",
+	"fichue",
+	"fichues",
+	"fichus"
+	],
+"accusatory":[
+	"accusateur",
+	"accusateurs",
+	"accusatrice",
+	"accusatrices"
+	],
+"accustomed":[
+	"accoutumé",
+	"accoutumée",
+	"accoutumées",
+	"accoutumés"
+	],
+"acerb":[
+	"acerbe",
+	"acerbes"
+	],
+"acescent":[
+	"acescent",
+	"acescente",
+	"acescentes",
+	"acescents"
+	],
+"acetic":[
+	"acétique",
+	"acétiques"
+	],
+"achaean":[
+	"achéen",
+	"achéenne",
+	"achéennes",
+	"achéens"
+	],
+"achaemenid":[
+	"achéménide",
+	"achéménides"
+	],
+"acid":[
+	"acide",
+	"acides",
+	"aigre",
+	"aigres"
+	],
+"acidic":[
+	"acide",
+	"acides"
+	],
+"acidifiable":[
+	"acidifiable",
+	"acidifiables"
+	],
+"acidulous":[
+	"acidulé",
+	"acidulée",
+	"acidulées",
+	"acidulés"
+	],
+"acotyledonous":[
+	"acotylédone",
+	"acotylédones"
+	],
+"acoustic":[
+	"acoustique",
+	"acoustiques"
+	],
+"acoustical":[
+	"acoustique",
+	"acoustiques"
+	],
+"acquiescent":[
+	"bienveillant",
+	"bienveillante",
+	"bienveillantes",
+	"bienveillants",
+	"docile",
+	"dociles",
+	"indulgent",
+	"indulgente",
+	"indulgentes",
+	"indulgents"
+	],
+"acquisitional":[
+	"acquisitif",
+	"acquisitifs",
+	"acquisitive",
+	"acquisitives"
+	],
+"acrid":[
+	"âcre",
+	"âcres"
+	],
+"acrimonious":[
+	"acrimonieuse",
+	"acrimonieuses",
+	"acrimonieux"
+	],
+"acrobatic":[
+	"acrobatique",
+	"acrobatiques"
+	],
+"acting":[
+	"intérimaire",
+	"intérimaires"
+	],
+"actinometric":[
+	"actinométrique",
+	"actinométriques"
+	],
+"actinomorphic":[
+	"actinomorphe",
+	"actinomorphes"
+	],
+"active":[
+	"actif",
+	"actifs",
+	"active",
+	"actives"
+	],
+"actual":[
+	"actuel",
+	"actuelle",
+	"actuelles",
+	"actuels",
+	"effectif",
+	"effectifs",
+	"effective",
+	"effectives",
+	"présent",
+	"présente",
+	"présentes",
+	"présents",
+	"réel",
+	"réelle",
+	"réelles",
+	"réels"
+	],
+"actuarial":[
+	"actuariel",
+	"actuarielle",
+	"actuarielles",
+	"actuariels"
+	],
+"aculeiform":[
+	"aculéiforme",
+	"aculéiformes"
+	],
+"acute":[
+	"aigu",
+	"aigus",
+	"aiguë",
+	"aiguës"
+	],
+"acyclic":[
+	"acyclique",
+	"acycliques"
+	],
+"adamant":[
+	"catégorique",
+	"catégoriques",
+	"inflexible",
+	"inflexibles"
+	],
+"adapt":[
+	"adapté",
+	"adaptée",
+	"adaptées",
+	"adaptés"
+	],
+"adaptable":[
+	"adaptable",
+	"adaptables"
+	],
+"adaptive":[
+	"adaptable",
+	"adaptables",
+	"adaptatif",
+	"adaptatifs",
+	"adaptative",
+	"adaptatives"
+	],
+"additional":[
+	"additionnel",
+	"additionnelle",
+	"additionnelles",
+	"additionnels"
+	],
+"adept":[
+	"expert",
+	"experte",
+	"expertes",
+	"experts"
+	],
+"adequate":[
+	"adéquat",
+	"adéquate",
+	"adéquates",
+	"adéquats"
+	],
+"adherent":[
+	"adhérent",
+	"adhérente",
+	"adhérentes",
+	"adhérents"
+	],
+"adhesive":[
+	"adhésif",
+	"adhésifs",
+	"adhésive",
+	"adhésives",
+	"collant",
+	"collante",
+	"collantes",
+	"collants"
+	],
+"adiabatic":[
+	"adiabatique",
+	"adiabatiques"
+	],
+"adipose":[
+	"adipeuse",
+	"adipeuses",
+	"adipeux"
+	],
+"adipous":[
+	"adipeuse",
+	"adipeuses",
+	"adipeux"
+	],
+"adjacent":[
+	"adjacent",
+	"adjacente",
+	"adjacentes",
+	"adjacents"
+	],
+"adjectival":[
+	"adjectif",
+	"adjectifs",
+	"adjectival",
+	"adjectivale",
+	"adjectivales",
+	"adjectivaux",
+	"adjective",
+	"adjectives"
+	],
+"adjective":[
+	"adjectival",
+	"adjectivale",
+	"adjectivales",
+	"adjectivaux"
+	],
+"adjustable":[
+	"réglable",
+	"réglables"
+	],
+"adjusted":[
+	"ajusté",
+	"ajustée",
+	"ajustées",
+	"ajustés"
+	],
+"adjuvant":[
+	"adjuvant",
+	"adjuvante",
+	"adjuvantes",
+	"adjuvants"
+	],
+"administrative":[
+	"administratif",
+	"administratifs",
+	"administrative",
+	"administratives"
+	],
+"admirable":[
+	"admirable",
+	"admirables"
+	],
+"admiring":[
+	"admiratif",
+	"admiratifs",
+	"admirative",
+	"admiratives"
+	],
+"admissible":[
+	"admissible",
+	"admissibles"
+	],
+"adnate":[
+	"adné",
+	"adnée",
+	"adnées",
+	"adnés"
+	],
+"adolescent":[
+	"adolescent",
+	"adolescente",
+	"adolescentes",
+	"adolescents"
+	],
+"adoptable":[
+	"adoptable",
+	"adoptables"
+	],
+"adoptive":[
+	"adoptif",
+	"adoptifs",
+	"adoptive",
+	"adoptives"
+	],
+"adorable":[
+	"adorable",
+	"adorables"
+	],
+"adult":[
+	"adulte",
+	"adultes"
+	],
+"adulterous":[
+	"adultère",
+	"adultères"
+	],
+"advanced":[
+	"avancé",
+	"avancée",
+	"avancées",
+	"avancés"
+	],
+"adventitious":[
+	"acquis",
+	"acquise",
+	"acquises",
+	"adventice",
+	"adventices",
+	"aléatoire",
+	"aléatoires",
+	"auxiliaire",
+	"auxiliaires",
+	"ectopique",
+	"ectopiques",
+	"exogène",
+	"exogènes"
+	],
+"adventurous":[
+	"aventureuse",
+	"aventureuses",
+	"aventureux",
+	"hasardeuse",
+	"hasardeuses",
+	"hasardeux"
+	],
+"adverbial":[
+	"adverbial",
+	"adverbiale",
+	"adverbiales",
+	"adverbiaux"
+	],
+"adversative":[
+	"adversatif",
+	"adversatifs",
+	"adversative",
+	"adversatives"
+	],
+"adverse":[
+	"adverse",
+	"adverses",
+	"défavorable",
+	"défavorables"
+	],
+"advisory":[
+	"consultatif",
+	"consultatifs",
+	"consultative",
+	"consultatives"
+	],
+"aegean":[
+	"égéen",
+	"égéenne",
+	"égéennes",
+	"égéens"
+	],
+"aeolian":[
+	"éolien",
+	"éolienne",
+	"éoliennes",
+	"éoliens"
+	],
+"aerial":[
+	"aérien",
+	"aérienne",
+	"aériennes",
+	"aériens"
+	],
+"aeronaval":[
+	"aéronaval",
+	"aéronavale",
+	"aéronavales",
+	"aéronavals"
+	],
+"aerospace":[
+	"aérospatial",
+	"aérospatiale",
+	"aérospatiales",
+	"aérospatiaux"
+	],
+"aerospatial":[
+	"aérospatial",
+	"aérospatiale",
+	"aérospatiales",
+	"aérospatiaux"
+	],
+"aesthetic":[
+	"esthétique",
+	"esthétiques"
+	],
+"aestival":[
+	"estival",
+	"estivale",
+	"estivales",
+	"estivaux"
+	],
+"affable":[
+	"aimable",
+	"aimables",
+	"douce",
+	"douces",
+	"doux"
+	],
+"affected":[
+	"affecté",
+	"affectée",
+	"affectées",
+	"affectés"
+	],
+"affectionate":[
+	"affectueuse",
+	"affectueuses",
+	"affectueux"
+	],
+"affective":[
+	"affectif",
+	"affectifs",
+	"affective",
+	"affectives"
+	],
+"afferent":[
+	"afférent",
+	"afférente",
+	"afférentes",
+	"afférents"
+	],
+"affirmative":[
+	"affirmatif",
+	"affirmatifs",
+	"affirmative",
+	"affirmatives"
+	],
+"afflictive":[
+	"afflictif",
+	"afflictifs",
+	"afflictive",
+	"afflictives"
+	],
+"affluent":[
+	"abondant",
+	"abondante",
+	"abondantes",
+	"abondants",
+	"affluent",
+	"affluente",
+	"affluentes",
+	"affluents",
+	"riche",
+	"riches"
+	],
+"affordable":[
+	"abordable",
+	"abordables"
+	],
+"afghan":[
+	"afghan",
+	"afghane",
+	"afghanes",
+	"afghans"
+	],
+"afghani":[
+	"afghan",
+	"afghane",
+	"afghanes",
+	"afghans"
+	],
+"afire":[
+	"ardent",
+	"ardente",
+	"ardentes",
+	"ardents"
+	],
+"aforenamed":[
+	"susnommé",
+	"susnommée",
+	"susnommées",
+	"susnommés"
+	],
+"afraid":[
+	"effrayé",
+	"effrayée",
+	"effrayées",
+	"effrayés"
+	],
+"african":[
+	"africain",
+	"africaine",
+	"africaines",
+	"africains"
+	],
+"ageless":[
+	"éternel",
+	"éternelle",
+	"éternelles",
+	"éternels"
+	],
+"agglutinative":[
+	"agglutinant",
+	"agglutinante",
+	"agglutinantes",
+	"agglutinants"
+	],
+"aggressive":[
+	"agressif",
+	"agressifs",
+	"agressive",
+	"agressives"
+	],
+"aghast":[
+	"affolé",
+	"affolée",
+	"affolées",
+	"affolés",
+	"effaré",
+	"effarée",
+	"effarées",
+	"effarés",
+	"effrayé",
+	"effrayée",
+	"effrayées",
+	"effrayés",
+	"pantois",
+	"pantoise",
+	"pantoises",
+	"stupéfait",
+	"stupéfaite",
+	"stupéfaites",
+	"stupéfaits",
+	"épouvanté",
+	"épouvantée",
+	"épouvantées",
+	"épouvantés"
+	],
+"agile":[
+	"agile",
+	"agiles"
+	],
+"aging":[
+	"vieillissant",
+	"vieillissante",
+	"vieillissantes",
+	"vieillissants"
+	],
+"agnostic":[
+	"agnostique",
+	"agnostiques"
+	],
+"agonizing":[
+	"agonisant",
+	"agonisante",
+	"agonisantes",
+	"agonisants"
+	],
+"agrarian":[
+	"agraire",
+	"agraires"
+	],
+"agreeable":[
+	"agréable",
+	"agréables"
+	],
+"agricultural":[
+	"agricole",
+	"agricoles"
+	],
+"agrochemical":[
+	"agrochimique",
+	"agrochimiques"
+	],
+"ailing":[
+	"malade",
+	"malades",
+	"malsain",
+	"malsaine",
+	"malsaines",
+	"malsains"
+	],
+"airborne":[
+	"aéroporté",
+	"aéroportée",
+	"aéroportées",
+	"aéroportés"
+	],
+"airtight":[
+	"hermétique",
+	"hermétiques",
+	"étanche",
+	"étanches"
+	],
+"airy":[
+	"aéré",
+	"aérée",
+	"aérées",
+	"aérés"
+	],
+"ajar":[
+	"entrouvert",
+	"entrouverte",
+	"entrouvertes",
+	"entrouverts"
+	],
+"akin":[
+	"analogue",
+	"analogues",
+	"apparenté",
+	"apparentée",
+	"apparentées",
+	"apparentés"
+	],
+"akkadian":[
+	"akkadien",
+	"akkadienne",
+	"akkadiennes",
+	"akkadiens"
+	],
+"alar":[
+	"ailé",
+	"ailée",
+	"ailées",
+	"ailés"
+	],
+"alarming":[
+	"alarmant",
+	"alarmante",
+	"alarmantes",
+	"alarmants"
+	],
+"albanian":[
+	"albanais",
+	"albanaise",
+	"albanaises"
+	],
+"albino":[
+	"albinos"
+	],
+"alcaic":[
+	"alcaïque",
+	"alcaïques"
+	],
+"alchemical":[
+	"alchimique",
+	"alchimiques"
+	],
+"alcoholic":[
+	"alcoolique",
+	"alcooliques",
+	"alcoolisé",
+	"alcoolisée",
+	"alcoolisées",
+	"alcoolisés"
+	],
+"aleatory":[
+	"aléatoire",
+	"aléatoires"
+	],
+"alemannic":[
+	"alémanique",
+	"alémaniques"
+	],
+"alert":[
+	"alerte",
+	"alertes"
+	],
+"algebraic":[
+	"algébrique",
+	"algébriques"
+	],
+"algerian":[
+	"algérien",
+	"algérienne",
+	"algériennes",
+	"algériens"
+	],
+"algid":[
+	"algide",
+	"algides",
+	"froid",
+	"froide",
+	"froides",
+	"froids"
+	],
+"algorithmic":[
+	"algorithmique",
+	"algorithmiques"
+	],
+"alien":[
+	"étranger",
+	"étrangers",
+	"étrangère",
+	"étrangères"
+	],
+"alike":[
+	"analogue",
+	"analogues",
+	"pareil",
+	"pareille",
+	"pareilles",
+	"pareils",
+	"semblable",
+	"semblables"
+	],
+"aliphatic":[
+	"aliphatique",
+	"aliphatiques"
+	],
+"alive":[
+	"vivant",
+	"vivante",
+	"vivantes",
+	"vivants"
+	],
+"alkaline":[
+	"alcalin",
+	"alcaline",
+	"alcalines",
+	"alcalins",
+	"basique",
+	"basiques"
+	],
+"allegoric":[
+	"allégorique",
+	"allégoriques"
+	],
+"allegorical":[
+	"allégorique",
+	"allégoriques"
+	],
+"allergic":[
+	"allergique",
+	"allergiques"
+	],
+"alliaceous":[
+	"alliacé",
+	"alliacée",
+	"alliacées",
+	"alliacés"
+	],
+"allied":[
+	"allié",
+	"alliée",
+	"alliées",
+	"alliés",
+	"interallié",
+	"interalliée",
+	"interalliées",
+	"interalliés"
+	],
+"allocatable":[
+	"allouable",
+	"allouables"
+	],
+"allochthonous":[
+	"allogène",
+	"allogènes"
+	],
+"allotropic":[
+	"allotropique",
+	"allotropiques"
+	],
+"alluring":[
+	"attirant",
+	"attirante",
+	"attirantes",
+	"attirants",
+	"séduisant",
+	"séduisante",
+	"séduisantes",
+	"séduisants"
+	],
+"allusive":[
+	"allusif",
+	"allusifs",
+	"allusive",
+	"allusives"
+	],
+"alluvial":[
+	"alluvial",
+	"alluviale",
+	"alluviales",
+	"alluviaux"
+	],
+"almighty":[
+	"tout-puissant",
+	"tout-puissants",
+	"toute-puissante",
+	"toutes-puissantes"
+	],
+"alogical":[
+	"alogique",
+	"alogiques"
+	],
+"aloof":[
+	"distant",
+	"distante",
+	"distantes",
+	"distants",
+	"dédaigneuse",
+	"dédaigneuses",
+	"dédaigneux"
+	],
+"alphabetical":[
+	"abécédaire",
+	"abécédaires",
+	"alphabétique",
+	"alphabétiques"
+	],
+"alpine":[
+	"alpin",
+	"alpine",
+	"alpines",
+	"alpins"
+	],
+"alsatian":[
+	"alsacien",
+	"alsacienne",
+	"alsaciennes",
+	"alsaciens"
+	],
+"altaic":[
+	"altaïque",
+	"altaïques"
+	],
+"alternate":[
+	"alternatif",
+	"alternatifs",
+	"alternative",
+	"alternatives"
+	],
+"alternating":[
+	"alternant",
+	"alternante",
+	"alternantes",
+	"alternants",
+	"alternatif",
+	"alternatifs",
+	"alternative",
+	"alternatives"
+	],
+"alternative":[
+	"alternatif",
+	"alternatifs",
+	"alternative",
+	"alternatives",
+	"autre",
+	"autres"
+	],
+"altruistic":[
+	"altruiste",
+	"altruistes",
+	"désintéressé",
+	"désintéressée",
+	"désintéressées",
+	"désintéressés"
+	],
+"aluminiferous":[
+	"alunifère",
+	"alunifères"
+	],
+"aluminous":[
+	"alumineuse",
+	"alumineuses",
+	"alumineux"
+	],
+"alveolar":[
+	"alvéolaire",
+	"alvéolaires"
+	],
+"alvine":[
+	"alvin",
+	"alvine",
+	"alvines",
+	"alvins"
+	],
+"amateurish":[
+	"amateur",
+	"amateurs"
+	],
+"amaurotic":[
+	"amaurotique",
+	"amaurotiques"
+	],
+"amazed":[
+	"abasourdi",
+	"abasourdie",
+	"abasourdies",
+	"abasourdis"
+	],
+"amazing":[
+	"extraordinaire",
+	"extraordinaires",
+	"formidable",
+	"formidables",
+	"sensationnel",
+	"sensationnelle",
+	"sensationnelles",
+	"sensationnels",
+	"super",
+	"étonnant",
+	"étonnante",
+	"étonnantes",
+	"étonnants"
+	],
+"amazonian":[
+	"amazonien",
+	"amazonienne",
+	"amazoniennes",
+	"amazoniens"
+	],
+"amber":[
+	"ambré",
+	"ambrée",
+	"ambrées",
+	"ambrés"
+	],
+"ambidextrous":[
+	"ambidextre",
+	"ambidextres"
+	],
+"ambiguous":[
+	"ambigu",
+	"ambigus",
+	"ambiguë",
+	"ambiguës"
+	],
+"ambitious":[
+	"ambitieuse",
+	"ambitieuses",
+	"ambitieux"
+	],
+"ambivalent":[
+	"ambivalent",
+	"ambivalente",
+	"ambivalentes",
+	"ambivalents"
+	],
+"ambulatory":[
+	"ambulatoire",
+	"ambulatoires"
+	],
+"ameban":[
+	"amibien",
+	"amibienne",
+	"amibiennes",
+	"amibiens"
+	],
+"amenable":[
+	"conciliant",
+	"conciliante",
+	"conciliantes",
+	"conciliants"
+	],
+"amendable":[
+	"amendable",
+	"amendables"
+	],
+"american":[
+	"américain",
+	"américaine",
+	"américaines",
+	"américains"
+	],
+"amiable":[
+	"affable",
+	"affables",
+	"aimable",
+	"aimables",
+	"avenant",
+	"avenante",
+	"avenantes",
+	"avenants"
+	],
+"amicable":[
+	"amiable",
+	"amiables",
+	"amical",
+	"amicale",
+	"amicales",
+	"amicaux"
+	],
+"ammoniac":[
+	"ammoniacal",
+	"ammoniacale",
+	"ammoniacales",
+	"ammoniacaux"
+	],
+"ammonic":[
+	"ammoniac",
+	"ammoniacs"
+	],
+"ammonical":[
+	"ammoniac",
+	"ammoniacs"
+	],
+"amnesic":[
+	"amnésique",
+	"amnésiques"
+	],
+"amorous":[
+	"amoureuse",
+	"amoureuses",
+	"amoureux"
+	],
+"amorphous":[
+	"amorphe",
+	"amorphes"
+	],
+"amphibious":[
+	"amphibie",
+	"amphibies"
+	],
+"amphictyonic":[
+	"amphictyonique",
+	"amphictyoniques"
+	],
+"ample":[
+	"ample",
+	"amples"
+	],
+"amusing":[
+	"amusant",
+	"amusante",
+	"amusantes",
+	"amusants",
+	"divertissant",
+	"divertissante",
+	"divertissantes",
+	"divertissants",
+	"drôle",
+	"drôles"
+	],
+"anachronistic":[
+	"anachronique",
+	"anachroniques"
+	],
+"anal":[
+	"anal",
+	"anale",
+	"anales",
+	"anaux"
+	],
+"analeptic":[
+	"analeptique",
+	"analeptiques"
+	],
+"analog":[
+	"analogique",
+	"analogiques"
+	],
+"analogical":[
+	"analogique",
+	"analogiques"
+	],
+"analogous":[
+	"analogue",
+	"analogues"
+	],
+"analytic":[
+	"analytique",
+	"analytiques"
+	],
+"analyzable":[
+	"analysable",
+	"analysables"
+	],
+"anaphoric":[
+	"anaphorique",
+	"anaphoriques"
+	],
+"anaphylactic":[
+	"anaphylactique",
+	"anaphylactiques"
+	],
+"anarchic":[
+	"anarchique",
+	"anarchiques",
+	"anarchiste",
+	"anarchistes"
+	],
+"anatolian":[
+	"anatolien",
+	"anatolienne",
+	"anatoliennes",
+	"anatoliens"
+	],
+"anatomical":[
+	"anatomique",
+	"anatomiques"
+	],
+"ancestral":[
+	"ancestral",
+	"ancestrale",
+	"ancestrales",
+	"ancestraux"
+	],
+"ancient":[
+	"ancien",
+	"ancienne",
+	"anciennes",
+	"anciens",
+	"antique",
+	"antiques"
+	],
+"ancillary":[
+	"ancillaire",
+	"ancillaires",
+	"auxiliaire",
+	"auxiliaires",
+	"secondaire",
+	"secondaires"
+	],
+"andalusian":[
+	"andalou",
+	"andalous",
+	"andalouse",
+	"andalouses"
+	],
+"andean":[
+	"andin",
+	"andine",
+	"andines",
+	"andins"
+	],
+"andorran":[
+	"andorran",
+	"andorrane",
+	"andorranes",
+	"andorrans"
+	],
+"androcephalous":[
+	"androcéphale",
+	"androcéphales"
+	],
+"androgynous":[
+	"androgyne",
+	"androgynes",
+	"asexué",
+	"asexuée",
+	"asexuées",
+	"asexués",
+	"hermaphrodite",
+	"hermaphrodites"
+	],
+"android":[
+	"androïde",
+	"androïdes"
+	],
+"anecdotal":[
+	"anecdotique",
+	"anecdotiques"
+	],
+"anemic":[
+	"anémique",
+	"anémiques"
+	],
+"aneroid":[
+	"anéroïde",
+	"anéroïdes"
+	],
+"anesthetic":[
+	"anesthésique",
+	"anesthésiques"
+	],
+"angelic":[
+	"angélique",
+	"angéliques"
+	],
+"anglican":[
+	"anglican",
+	"anglicane",
+	"anglicanes",
+	"anglicans"
+	],
+"anglophile":[
+	"anglophile",
+	"anglophiles"
+	],
+"anglophone":[
+	"anglophone",
+	"anglophones"
+	],
+"angolan":[
+	"angolais",
+	"angolaise",
+	"angolaises"
+	],
+"angry":[
+	"fâché",
+	"fâchée",
+	"fâchées",
+	"fâchés"
+	],
+"angular":[
+	"angulaire",
+	"angulaires",
+	"anguleuse",
+	"anguleuses",
+	"anguleux"
+	],
+"anhydrous":[
+	"anhydre",
+	"anhydres"
+	],
+"animal":[
+	"animal",
+	"animale",
+	"animales",
+	"animaux"
+	],
+"animate":[
+	"animé",
+	"animée",
+	"animées",
+	"animés"
+	],
+"animated":[
+	"animé",
+	"animée",
+	"animées",
+	"animés"
+	],
+"anisotropic":[
+	"anisotrope",
+	"anisotropes"
+	],
+"anjouan":[
+	"angevin",
+	"angevine",
+	"angevines",
+	"angevins"
+	],
+"annamite":[
+	"annamite",
+	"annamites"
+	],
+"annoyed":[
+	"contrarié",
+	"contrariée",
+	"contrariées",
+	"contrariés",
+	"fâché",
+	"fâchée",
+	"fâchées",
+	"fâchés"
+	],
+"annual":[
+	"annuel",
+	"annuelle",
+	"annuelles",
+	"annuels"
+	],
+"annular":[
+	"annulaire",
+	"annulaires"
+	],
+"anodyne":[
+	"apaisant",
+	"apaisante",
+	"apaisantes",
+	"apaisants"
+	],
+"anomalous":[
+	"anomal",
+	"anomale",
+	"anomales",
+	"anomaux",
+	"anormal",
+	"anormale",
+	"anormales",
+	"anormaux"
+	],
+"anomic":[
+	"anomique",
+	"anomiques"
+	],
+"anonymous":[
+	"anonyme",
+	"anonymes"
+	],
+"antacid":[
+	"antiacide"
+	],
+"antagonistic":[
+	"antagonique",
+	"antagoniques"
+	],
+"antarctic":[
+	"antarctique",
+	"antarctiques"
+	],
+"antediluvian":[
+	"antédiluvien",
+	"antédiluvienne",
+	"antédiluviennes",
+	"antédiluviens"
+	],
+"antepenultimate":[
+	"antépénultième",
+	"antépénultièmes"
+	],
+"anterior":[
+	"antérieur",
+	"antérieure",
+	"antérieures",
+	"antérieurs",
+	"préc..",
+	"précédent",
+	"précédente",
+	"précédentes",
+	"précédents"
+	],
+"anterograde":[
+	"antérograde",
+	"antérogrades"
+	],
+"anthropic":[
+	"anthropique",
+	"anthropiques"
+	],
+"anthropocentric":[
+	"anthropocentrique",
+	"anthropocentriques"
+	],
+"anthropogenic":[
+	"anthropique",
+	"anthropiques"
+	],
+"anthropological":[
+	"anthropologique",
+	"anthropologiques"
+	],
+"anthropomorphic":[
+	"anthropomorphe",
+	"anthropomorphes"
+	],
+"antiamarillic":[
+	"antiamaril",
+	"antiamarile",
+	"antiamariles",
+	"antiamarils"
+	],
+"antibiotic":[
+	"antibiotique",
+	"antibiotiques"
+	],
+"anticonstitutional":[
+	"anticonstitutionnel",
+	"anticonstitutionnelle",
+	"anticonstitutionnelles",
+	"anticonstitutionnels"
+	],
+"anticyclonic":[
+	"anticyclonique",
+	"anticycloniques"
+	],
+"antidemocratic":[
+	"antidémocratique",
+	"antidémocratiques"
+	],
+"antidepressant":[
+	"antidépresseur",
+	"antidépresseurs"
+	],
+"antidoping":[
+	"antidopage"
+	],
+"antifascist":[
+	"antifasciste",
+	"antifascistes"
+	],
+"antimitotic":[
+	"antimitotique",
+	"antimitotiques"
+	],
+"antimonarchic":[
+	"antimonarchique",
+	"antimonarchiques"
+	],
+"antimonarchist":[
+	"antimonarchiste",
+	"antimonarchistes"
+	],
+"antinuclear":[
+	"antinucléaire",
+	"antinucléaires"
+	],
+"antioxidant":[
+	"antioxydant",
+	"antioxydante",
+	"antioxydantes",
+	"antioxydants"
+	],
+"antiparallel":[
+	"antiparallèle",
+	"antiparallèles"
+	],
+"antipathic":[
+	"antipathique",
+	"antipathiques"
+	],
+"antipyretic":[
+	"antipyrétique",
+	"antipyrétiques"
+	],
+"antiquarian":[
+	"antique",
+	"antiques"
+	],
+"antique":[
+	"ancien",
+	"ancienne",
+	"anciennes",
+	"anciens",
+	"antique",
+	"antiques"
+	],
+"antiretroviral":[
+	"antirétroviral",
+	"antirétrovirale",
+	"antirétrovirales",
+	"antirétroviraux"
+	],
+"antiseptic":[
+	"antiseptique",
+	"antiseptiques"
+	],
+"antislavery":[
+	"antiesclavagiste",
+	"antiesclavagistes"
+	],
+"antisocial":[
+	"antisocial",
+	"antisociale",
+	"antisociales",
+	"antisociaux"
+	],
+"antispasmodic":[
+	"antispasmodique",
+	"antispasmodiques"
+	],
+"antisymmetric":[
+	"antisymétrique",
+	"antisymétriques"
+	],
+"antitheft":[
+	"antivol"
+	],
+"antithetical":[
+	"antithétique",
+	"antithétiques"
+	],
+"antitrust":[
+	"antitrust"
+	],
+"antityphoid":[
+	"antityphique",
+	"antityphiques"
+	],
+"antonymous":[
+	"antinomique",
+	"antinomiques"
+	],
+"antsy":[
+	"agité",
+	"agitée",
+	"agitées",
+	"agités",
+	"inquiet",
+	"inquiets",
+	"inquiète",
+	"inquiètes"
+	],
+"antwerpian":[
+	"anversois",
+	"anversoise",
+	"anversoises"
+	],
+"anurous":[
+	"anoure",
+	"anoures"
+	],
+"anxious":[
+	"anxieuse",
+	"anxieuses",
+	"anxieux",
+	"désireuse",
+	"désireuses",
+	"désireux"
+	],
+"aortal":[
+	"aortique",
+	"aortiques"
+	],
+"aortic":[
+	"aortique",
+	"aortiques"
+	],
+"apathetic":[
+	"indifférent",
+	"indifférente",
+	"indifférentes",
+	"indifférents"
+	],
+"apetalous":[
+	"apétale",
+	"apétales"
+	],
+"aphrodisiac":[
+	"aphrodisiaque",
+	"aphrodisiaques"
+	],
+"aplanatic":[
+	"aplanétique",
+	"aplanétiques"
+	],
+"aplastic":[
+	"aplasique",
+	"aplasiques"
+	],
+"apocalyptic":[
+	"apocalyptique",
+	"apocalyptiques"
+	],
+"apocryphal":[
+	"apocryphe",
+	"apocryphes"
+	],
+"apodictic":[
+	"apodictique",
+	"apodictiques"
+	],
+"apolitical":[
+	"apolitique",
+	"apolitiques"
+	],
+"apostolic":[
+	"apostolique",
+	"apostoliques"
+	],
+"appalling":[
+	"effroyable",
+	"effroyables",
+	"épouvantable",
+	"épouvantables"
+	],
+"apparent":[
+	"apparent",
+	"apparente",
+	"apparentes",
+	"apparents",
+	"criant",
+	"criante",
+	"criantes",
+	"criants",
+	"manifeste",
+	"manifestes",
+	"visible",
+	"visibles",
+	"évident",
+	"évidente",
+	"évidentes",
+	"évidents"
+	],
+"appellative":[
+	"appellatif",
+	"appellatifs",
+	"appellative",
+	"appellatives"
+	],
+"appendiceal":[
+	"appendiculaire",
+	"appendiculaires"
+	],
+"appetizing":[
+	"appétissant",
+	"appétissante",
+	"appétissantes",
+	"appétissants"
+	],
+"appliable":[
+	"applicable",
+	"applicables"
+	],
+"applicable":[
+	"applicable",
+	"applicables"
+	],
+"applicative":[
+	"applicatif",
+	"applicatifs",
+	"applicative",
+	"applicatives"
+	],
+"applied":[
+	"appliqué",
+	"appliquée",
+	"appliquées",
+	"appliqués"
+	],
+"appreciable":[
+	"appréciable",
+	"appréciables"
+	],
+"apprehensive":[
+	"appréhensif",
+	"appréhensifs",
+	"appréhensive",
+	"appréhensives",
+	"inquiet",
+	"inquiets",
+	"inquiète",
+	"inquiètes",
+	"perspicace",
+	"perspicaces",
+	"soucieuse",
+	"soucieuses",
+	"soucieux",
+	"vif",
+	"vifs",
+	"vive",
+	"vives"
+	],
+"approachable":[
+	"abordable",
+	"abordables",
+	"approchable",
+	"approchables"
+	],
+"appropriate":[
+	"approprié",
+	"appropriée",
+	"appropriées",
+	"appropriés",
+	"idoine",
+	"idoines"
+	],
+"approving":[
+	"approbateur",
+	"approbateurs",
+	"approbatif",
+	"approbatifs",
+	"approbative",
+	"approbatives",
+	"approbatrice",
+	"approbatrices"
+	],
+"approximate":[
+	"approximatif",
+	"approximatifs",
+	"approximative",
+	"approximatives"
+	],
+"apraxic":[
+	"apraxique",
+	"apraxiques"
+	],
+"apricot":[
+	"abricot"
+	],
+"aquatic":[
+	"aquatique",
+	"aquatiques"
+	],
+"aqueous":[
+	"aqueuse",
+	"aqueuses",
+	"aqueux"
+	],
+"aquiline":[
+	"aquilin",
+	"aquiline",
+	"aquilines",
+	"aquilins"
+	],
+"aquitanian":[
+	"aquitain",
+	"aquitaine",
+	"aquitaines",
+	"aquitains"
+	],
+"arab":[
+	"arabe",
+	"arabes"
+	],
+"arabic":[
+	"arabe",
+	"arabes"
+	],
+"arable":[
+	"arable",
+	"arables",
+	"cultivable",
+	"cultivables"
+	],
+"aragonese":[
+	"aragonais",
+	"aragonaise",
+	"aragonaises"
+	],
+"aramaean":[
+	"araméen",
+	"araméenne",
+	"araméennes",
+	"araméens"
+	],
+"aramaic":[
+	"araméen",
+	"araméenne",
+	"araméennes",
+	"araméens"
+	],
+"arbitrary":[
+	"arbitraire",
+	"arbitraires",
+	"quelconque",
+	"quelconques"
+	],
+"arcadian":[
+	"arcadien",
+	"arcadienne",
+	"arcadiennes",
+	"arcadiens"
+	],
+"archaeological":[
+	"archéologique",
+	"archéologiques"
+	],
+"archaic":[
+	"archaïque",
+	"archaïques"
+	],
+"archdiocesan":[
+	"archidiocésain",
+	"archidiocésaine",
+	"archidiocésaines",
+	"archidiocésains"
+	],
+"archetypal":[
+	"archétypal",
+	"archétypale",
+	"archétypales",
+	"archétypaux",
+	"archétypique",
+	"archétypiques"
+	],
+"archiepiscopal":[
+	"archiépiscopal",
+	"archiépiscopale",
+	"archiépiscopales",
+	"archiépiscopaux"
+	],
+"architectonic":[
+	"architectural",
+	"architecturale",
+	"architecturales",
+	"architecturaux"
+	],
+"architectural":[
+	"architectural",
+	"architecturale",
+	"architecturales",
+	"architecturaux"
+	],
+"arctic":[
+	"arctique",
+	"arctiques"
+	],
+"ardent":[
+	"ardent",
+	"ardente",
+	"ardentes",
+	"ardents",
+	"farouche",
+	"farouches",
+	"fervent",
+	"fervente",
+	"ferventes",
+	"fervents"
+	],
+"arduous":[
+	"ardu",
+	"ardue",
+	"ardues",
+	"ardus"
+	],
+"areligious":[
+	"areligieuse",
+	"areligieuses",
+	"areligieux"
+	],
+"arenicolous":[
+	"arénicole",
+	"arénicoles"
+	],
+"argentic":[
+	"argentique",
+	"argentiques"
+	],
+"argentine":[
+	"argentin",
+	"argentine",
+	"argentines",
+	"argentins"
+	],
+"argillaceous":[
+	"argilacé",
+	"argilacée",
+	"argilacées",
+	"argilacés"
+	],
+"argillic":[
+	"argilique",
+	"argiliques"
+	],
+"arguable":[
+	"discutable",
+	"discutables"
+	],
+"argumentative":[
+	"argumentatif",
+	"argumentatifs",
+	"argumentative",
+	"argumentatives"
+	],
+"arian":[
+	"arien",
+	"arienne",
+	"ariennes",
+	"ariens"
+	],
+"arid":[
+	"aride",
+	"arides"
+	],
+"aristocratic":[
+	"aristocratique",
+	"aristocratiques"
+	],
+"arithmetic":[
+	"arithmétique",
+	"arithmétiques"
+	],
+"armed":[
+	"armé",
+	"armée",
+	"armées",
+	"armés"
+	],
+"armenian":[
+	"arménien",
+	"arménienne",
+	"arméniennes",
+	"arméniens"
+	],
+"armorican":[
+	"armoricain",
+	"armoricaine",
+	"armoricaines",
+	"armoricains"
+	],
+"aromatic":[
+	"aromatique",
+	"aromatiques",
+	"odorant",
+	"odorante",
+	"odorantes",
+	"odorants"
+	],
+"arrant":[
+	"errant",
+	"errante",
+	"errantes",
+	"errants"
+	],
+"arrogant":[
+	"arrogant",
+	"arrogante",
+	"arrogantes",
+	"arrogants",
+	"orgueilleuse",
+	"orgueilleuses",
+	"orgueilleux"
+	],
+"arsenious":[
+	"arsénieuse",
+	"arsénieuses",
+	"arsénieux"
+	],
+"arterial":[
+	"artériel",
+	"artérielle",
+	"artérielles",
+	"artériels"
+	],
+"arteritic":[
+	"artéritique",
+	"artéritiques"
+	],
+"artesian":[
+	"artésien",
+	"artésienne",
+	"artésiennes",
+	"artésiens"
+	],
+"artful":[
+	"artificiel",
+	"artificielle",
+	"artificielles",
+	"artificiels",
+	"artificieuse",
+	"artificieuses",
+	"artificieux",
+	"artistique",
+	"artistiques"
+	],
+"articular":[
+	"articulaire",
+	"articulaires"
+	],
+"articulate":[
+	"articulé",
+	"articulée",
+	"articulées",
+	"articulés",
+	"clair",
+	"claire",
+	"claires",
+	"clairs",
+	"éloquent",
+	"éloquente",
+	"éloquentes",
+	"éloquents"
+	],
+"articulated":[
+	"articulé",
+	"articulée",
+	"articulées",
+	"articulés"
+	],
+"articulatory":[
+	"articulatoire",
+	"articulatoires"
+	],
+"artificial":[
+	"artificiel",
+	"artificielle",
+	"artificielles",
+	"artificiels"
+	],
+"artisanal":[
+	"artisanal",
+	"artisanale",
+	"artisanales",
+	"artisanaux"
+	],
+"aryan":[
+	"arien",
+	"arienne",
+	"ariennes",
+	"ariens",
+	"aryen",
+	"aryenne",
+	"aryennes",
+	"aryens",
+	"indo-européen",
+	"indo-européenne",
+	"indo-européennes",
+	"indo-européens"
+	],
+"ascendant":[
+	"ascendant",
+	"ascendante",
+	"ascendantes",
+	"ascendants"
+	],
+"ascending":[
+	"ascendant",
+	"ascendante",
+	"ascendantes",
+	"ascendants",
+	"croissant",
+	"croissante",
+	"croissantes",
+	"croissants"
+	],
+"ascetic":[
+	"ascétique",
+	"ascétiques"
+	],
+"asexual":[
+	"asexuel",
+	"asexuelle",
+	"asexuelles",
+	"asexuels",
+	"asexué",
+	"asexuée",
+	"asexuées",
+	"asexués"
+	],
+"ashamed":[
+	"honteuse",
+	"honteuses",
+	"honteux"
+	],
+"ashen":[
+	"cendreuse",
+	"cendreuses",
+	"cendreux",
+	"cendré",
+	"cendrée",
+	"cendrées",
+	"cendrés"
+	],
+"ashkenazi":[
+	"ashkénaze",
+	"ashkénazes"
+	],
+"asian":[
+	"asiatique",
+	"asiatiques"
+	],
+"asinine":[
+	"stupide",
+	"stupides"
+	],
+"askew":[
+	"de guingois",
+	"incliné",
+	"inclinée",
+	"inclinées",
+	"inclinés",
+	"oblique",
+	"obliques"
+	],
+"asleep":[
+	"endormi",
+	"endormie",
+	"endormies",
+	"endormis"
+	],
+"asocial":[
+	"antisocial",
+	"antisociale",
+	"antisociales",
+	"antisociaux",
+	"asocial",
+	"asociale",
+	"asociales",
+	"asociaux"
+	],
+"aspermous":[
+	"asperme",
+	"aspermes"
+	],
+"aspirated":[
+	"aspiré",
+	"aspirée",
+	"aspirées",
+	"aspirés"
+	],
+"assiduous":[
+	"assidu",
+	"assidue",
+	"assidues",
+	"assidus"
+	],
+"associative":[
+	"associatif",
+	"associatifs",
+	"associative",
+	"associatives"
+	],
+"assorted":[
+	"assorti",
+	"assortie",
+	"assorties",
+	"assortis",
+	"connexe",
+	"connexes",
+	"différent",
+	"différente",
+	"différentes",
+	"différents",
+	"divers",
+	"diverse",
+	"diverses"
+	],
+"assumed":[
+	"censé",
+	"censée",
+	"censées",
+	"censés"
+	],
+"assured":[
+	"confident"
+	],
+"assyrian":[
+	"assyrien",
+	"assyrienne",
+	"assyriennes",
+	"assyriens"
+	],
+"asthmatic":[
+	"asthmatique",
+	"asthmatiques"
+	],
+"astigmatic":[
+	"astigmate",
+	"astigmates"
+	],
+"astonished":[
+	"abasourdi",
+	"abasourdie",
+	"abasourdies",
+	"abasourdis"
+	],
+"astonishing":[
+	"étonnant",
+	"étonnante",
+	"étonnantes",
+	"étonnants"
+	],
+"astounding":[
+	"impressionnant",
+	"impressionnante",
+	"impressionnantes",
+	"impressionnants"
+	],
+"astral":[
+	"astral",
+	"astrale",
+	"astrales",
+	"astraux"
+	],
+"astrological":[
+	"astrologique",
+	"astrologiques"
+	],
+"astronautic":[
+	"astronautique",
+	"astronautiques"
+	],
+"astronomical":[
+	"astronomique",
+	"astronomiques"
+	],
+"astrophysical":[
+	"astrophysique",
+	"astrophysiques"
+	],
+"asturian":[
+	"asturien",
+	"asturienne",
+	"asturiennes",
+	"asturiens"
+	],
+"astute":[
+	"astucieuse",
+	"astucieuses",
+	"astucieux",
+	"avisé",
+	"avisée",
+	"avisées",
+	"avisés",
+	"sagace",
+	"sagaces"
+	],
+"asymmetric":[
+	"asymétrique",
+	"asymétriques"
+	],
+"asymmetrical":[
+	"asymétrique",
+	"asymétriques"
+	],
+"asymptotic":[
+	"asymptotique",
+	"asymptotiques"
+	],
+"asynchronous":[
+	"asynchrone",
+	"asynchrones"
+	],
+"atavistic":[
+	"atavique",
+	"ataviques"
+	],
+"atemporal":[
+	"atemporel",
+	"atemporelle",
+	"atemporelles",
+	"atemporels"
+	],
+"atheistic":[
+	"athée",
+	"athées"
+	],
+"athletic":[
+	"athlétique",
+	"athlétiques",
+	"sportif",
+	"sportifs",
+	"sportive",
+	"sportives"
+	],
+"atlantic":[
+	"atlantique",
+	"atlantiques"
+	],
+"atmospheric":[
+	"atmosphérique",
+	"atmosphériques"
+	],
+"atomic":[
+	"atomique",
+	"atomiques",
+	"indivisible",
+	"indivisibles",
+	"infinitésimal",
+	"infinitésimale",
+	"infinitésimales",
+	"infinitésimaux",
+	"microscopique",
+	"microscopiques",
+	"nucléaire",
+	"nucléaires"
+	],
+"atonal":[
+	"atonal",
+	"atonale",
+	"atonales",
+	"atonaux"
+	],
+"atrial":[
+	"atrial",
+	"atriale",
+	"atriales",
+	"atriaux"
+	],
+"atrocious":[
+	"atroce",
+	"atroces"
+	],
+"attainable":[
+	"atteignable",
+	"atteignables",
+	"réalisable",
+	"réalisables"
+	],
+"attentive":[
+	"attentif",
+	"attentifs",
+	"attentive",
+	"attentives"
+	],
+"attractive":[
+	"attractif",
+	"attractifs",
+	"attractive",
+	"attractives",
+	"attrayant",
+	"attrayante",
+	"attrayantes",
+	"attrayants",
+	"sympathique",
+	"sympathiques"
+	],
+"attributable":[
+	"attribuable",
+	"attribuables"
+	],
+"attributive":[
+	"attributif",
+	"attributifs",
+	"attributive",
+	"attributives",
+	"épithète",
+	"épithètes"
+	],
+"atypical":[
+	"atypique",
+	"atypiques"
+	],
+"auburn":[
+	"auburn",
+	"rousse",
+	"rousses",
+	"roux"
+	],
+"audacious":[
+	"audacieuse",
+	"audacieuses",
+	"audacieux"
+	],
+"audible":[
+	"audible",
+	"audibles"
+	],
+"audio":[
+	"audio"
+	],
+"audiovisual":[
+	"audiovisuel",
+	"audiovisuelle",
+	"audiovisuelles",
+	"audiovisuels"
+	],
+"auditory":[
+	"auditif",
+	"auditifs",
+	"auditive",
+	"auditives"
+	],
+"augmentative":[
+	"augmentatif",
+	"augmentatifs",
+	"augmentative",
+	"augmentatives"
+	],
+"august":[
+	"auguste",
+	"augustes"
+	],
+"aural":[
+	"auditif",
+	"auditifs",
+	"auditive",
+	"auditives",
+	"auriculaire",
+	"auriculaires"
+	],
+"auriferous":[
+	"aurifère",
+	"aurifères"
+	],
+"auspicious":[
+	"faste",
+	"fastes",
+	"propice",
+	"propices"
+	],
+"austere":[
+	"austère",
+	"austères"
+	],
+"austral":[
+	"austral",
+	"australe",
+	"australes",
+	"australs"
+	],
+"australian":[
+	"australien",
+	"australienne",
+	"australiennes",
+	"australiens"
+	],
+"austrian":[
+	"autrichien",
+	"autrichienne",
+	"autrichiennes",
+	"autrichiens"
+	],
+"authentic":[
+	"authentique",
+	"authentiques"
+	],
+"authoritarian":[
+	"autoritaire",
+	"autoritaires"
+	],
+"authorized":[
+	"autorisé",
+	"autorisée",
+	"autorisées",
+	"autorisés"
+	],
+"autistic":[
+	"autiste",
+	"autistes"
+	],
+"autochthonous":[
+	"autochtone",
+	"autochtones"
+	],
+"autocratic":[
+	"autocratique",
+	"autocratiques"
+	],
+"autograph":[
+	"autographe",
+	"autographes"
+	],
+"automatic":[
+	"automatique",
+	"automatiques"
+	],
+"automotive":[
+	"automobile",
+	"automobiles"
+	],
+"autonomous":[
+	"autonome",
+	"autonomes"
+	],
+"autumnal":[
+	"automnal",
+	"automnale",
+	"automnales",
+	"automnaux"
+	],
+"auvergnese":[
+	"auvergnat",
+	"auvergnate",
+	"auvergnates",
+	"auvergnats"
+	],
+"auxiliary":[
+	"auxiliaire",
+	"auxiliaires"
+	],
+"available":[
+	"disponible",
+	"disponibles"
+	],
+"avaricious":[
+	"avare",
+	"avares"
+	],
+"average":[
+	"moyen",
+	"moyenne",
+	"moyennes",
+	"moyens"
+	],
+"avian":[
+	"aviaire",
+	"aviaires"
+	],
+"avicultural":[
+	"avicole",
+	"avicoles"
+	],
+"avid":[
+	"avide",
+	"avides"
+	],
+"avoidable":[
+	"évitable",
+	"évitables"
+	],
+"avuncular":[
+	"avunculaire",
+	"avunculaires",
+	"gentil",
+	"gentille",
+	"gentilles",
+	"gentils"
+	],
+"awake":[
+	"éveillé",
+	"éveillée",
+	"éveillées",
+	"éveillés"
+	],
+"aware":[
+	"conscient",
+	"consciente",
+	"conscientes",
+	"conscients"
+	],
+"awesome":[
+	"formidable",
+	"formidables",
+	"génial",
+	"géniale",
+	"géniales",
+	"géniaux",
+	"impressionnant",
+	"impressionnante",
+	"impressionnantes",
+	"impressionnants",
+	"magnifique",
+	"magnifiques",
+	"terrifiant",
+	"terrifiante",
+	"terrifiantes",
+	"terrifiants"
+	],
+"awful":[
+	"horrible",
+	"horribles",
+	"terrible",
+	"terribles",
+	"épouvantable",
+	"épouvantables"
+	],
+"awkward":[
+	"embarrassant",
+	"embarrassante",
+	"embarrassantes",
+	"embarrassants",
+	"inconvenant",
+	"inconvenante",
+	"inconvenantes",
+	"inconvenants",
+	"maladroit",
+	"maladroite",
+	"maladroites",
+	"maladroits"
+	],
+"axial":[
+	"axial",
+	"axiale",
+	"axiales",
+	"axiaux"
+	],
+"axillary":[
+	"axillaire",
+	"axillaires"
+	],
+"axiomatic":[
+	"axiomatique",
+	"axiomatiques"
+	],
+"axonometric":[
+	"axonométrique",
+	"axonométriques"
+	],
+"azeotropic":[
+	"azéotropique",
+	"azéotropiques"
+	],
+"azerbaijani":[
+	"azerbaïdjanais",
+	"azerbaïdjanaise",
+	"azerbaïdjanaises",
+	"azéri",
+	"azérie",
+	"azéries",
+	"azéris"
+	],
+"azimuthal":[
+	"azimutal",
+	"azimutale",
+	"azimutales",
+	"azimutaux"
+	],
+"azoic":[
+	"azoïque",
+	"azoïques"
+	],
+"aztec":[
+	"aztèque",
+	"aztèques"
+	],
+"baby":[
+	"ch'ti",
+	"p'tit",
+	"p'tit'",
+	"p'tite",
+	"p'tites",
+	"p'tits",
+	"petit",
+	"petite",
+	"petites",
+	"petits",
+	"ptit",
+	"ptite",
+	"ptites",
+	"ptits"
+	],
+"babyish":[
+	"bébête",
+	"bébêtes"
+	],
+"bacchic":[
+	"bachique",
+	"bachiques"
+	],
+"bacilliform":[
+	"bacilliforme",
+	"bacilliformes"
+	],
+"back":[
+	"postérieur",
+	"postérieure",
+	"postérieures",
+	"postérieurs",
+	"écarté",
+	"écartée",
+	"écartées",
+	"écartés"
+	],
+"backward":[
+	"arriéré",
+	"arriérée",
+	"arriérées",
+	"arriérés"
+	],
+"backwards":[
+	"arriéré",
+	"arriérée",
+	"arriérées",
+	"arriérés"
+	],
+"baconian":[
+	"baconien",
+	"baconienne",
+	"baconiennes",
+	"baconiens"
+	],
+"bacterial":[
+	"bactérien",
+	"bactérienne",
+	"bactériennes",
+	"bactériens"
+	],
+"bacteriostatic":[
+	"bactériostatique",
+	"bactériostatiques"
+	],
+"bad":[
+	"défectueuse",
+	"défectueuses",
+	"défectueux",
+	"fonceur",
+	"fonceurs",
+	"fonceuse",
+	"fonceuses",
+	"mauvais",
+	"mauvaise",
+	"mauvaises",
+	"méchant",
+	"méchante",
+	"méchantes",
+	"méchants",
+	"nul",
+	"nulle",
+	"nulles",
+	"nuls",
+	"urgent",
+	"urgente",
+	"urgentes",
+	"urgents"
+	],
+"baffled":[
+	"perplexe",
+	"perplexes"
+	],
+"baffling":[
+	"déconcertant",
+	"déconcertante",
+	"déconcertantes",
+	"déconcertants"
+	],
+"baked":[
+	"cuit",
+	"cuite",
+	"cuites",
+	"cuits"
+	],
+"balanced":[
+	"équilibré",
+	"équilibrée",
+	"équilibrées",
+	"équilibrés"
+	],
+"bald":[
+	"chauve",
+	"chauves",
+	"lisse",
+	"lisses"
+	],
+"baleful":[
+	"sinistre",
+	"sinistres"
+	],
+"balinese":[
+	"balinais",
+	"balinaise",
+	"balinaises"
+	],
+"balinesian":[
+	"balinais",
+	"balinaise",
+	"balinaises"
+	],
+"ballistic":[
+	"balistique",
+	"balistiques"
+	],
+"balmy":[
+	"agréable",
+	"agréables",
+	"bizarre",
+	"bizarres",
+	"cintré",
+	"cintrée",
+	"cintrées",
+	"cintrés",
+	"douce",
+	"douces",
+	"doux",
+	"fol",
+	"folle",
+	"folles",
+	"fou",
+	"fous",
+	"suave",
+	"suaves"
+	],
+"baltic":[
+	"baltique",
+	"baltiques"
+	],
+"balzacian":[
+	"balzacien",
+	"balzacienne",
+	"balzaciennes",
+	"balzaciens"
+	],
+"banal":[
+	"banal",
+	"banale",
+	"banales",
+	"banals",
+	"banaux"
+	],
+"banded":[
+	"fascié",
+	"fasciée",
+	"fasciées",
+	"fasciés"
+	],
+"baneful":[
+	"funeste",
+	"funestes"
+	],
+"bankable":[
+	"bancable",
+	"bancables"
+	],
+"bankrupt":[
+	"failli",
+	"faillie",
+	"faillies",
+	"faillis"
+	],
+"baptismal":[
+	"baptismal",
+	"baptismale",
+	"baptismales",
+	"baptismaux"
+	],
+"baptist":[
+	"baptiste",
+	"baptistes"
+	],
+"barbarian":[
+	"barbare",
+	"barbares"
+	],
+"barbaric":[
+	"barbare",
+	"barbares"
+	],
+"barbituric":[
+	"barbiturique",
+	"barbituriques"
+	],
+"barcelonian":[
+	"barcelonais",
+	"barcelonaise",
+	"barcelonaises"
+	],
+"bare":[
+	"minimal",
+	"minimale",
+	"minimales",
+	"minimaux",
+	"nu",
+	"nue",
+	"nues",
+	"nus"
+	],
+"barometric":[
+	"barométrique",
+	"barométriques"
+	],
+"barren":[
+	"stérile",
+	"stériles"
+	],
+"base":[
+	"abject",
+	"abjecte",
+	"abjectes",
+	"abjects",
+	"bas",
+	"basse",
+	"basses",
+	"ignoble",
+	"ignobles",
+	"indigne",
+	"indignes"
+	],
+"bashful":[
+	"timide",
+	"timides"
+	],
+"basic":[
+	"basique",
+	"basiques"
+	],
+"basque":[
+	"basque",
+	"basques"
+	],
+"bass":[
+	"bas",
+	"basse",
+	"basses",
+	"grave",
+	"graves"
+	],
+"bathymetric":[
+	"bathymétrique",
+	"bathymétriques"
+	],
+"baudelairean":[
+	"baudelairien",
+	"baudelairienne",
+	"baudelairiennes",
+	"baudelairiens"
+	],
+"bavarian":[
+	"bavarois",
+	"bavaroise",
+	"bavaroises"
+	],
+"bay":[
+	"bai",
+	"baie",
+	"baies",
+	"bais"
+	],
+"bayard":[
+	"bai",
+	"baie",
+	"baies",
+	"bais"
+	],
+"bayesian":[
+	"bayésien",
+	"bayésienne",
+	"bayésiennes",
+	"bayésiens"
+	],
+"bearable":[
+	"supportable",
+	"supportables",
+	"vivable",
+	"vivables"
+	],
+"bearded":[
+	"barbu",
+	"barbue",
+	"barbues",
+	"barbus"
+	],
+"beardless":[
+	"imberbe",
+	"imberbes"
+	],
+"bearing":[
+	"porteur",
+	"porteurs",
+	"porteuse",
+	"porteuses",
+	"portrice",
+	"portrices"
+	],
+"beautiful":[
+	"beau",
+	"beaux",
+	"bel",
+	"belle",
+	"belles",
+	"bô"
+	],
+"bedridden":[
+	"grabataire",
+	"grabataires"
+	],
+"beguiling":[
+	"séduisant",
+	"séduisante",
+	"séduisantes",
+	"séduisants"
+	],
+"behavioral":[
+	"comportemental",
+	"comportementale",
+	"comportementales",
+	"comportementaux"
+	],
+"behavioural":[
+	"comportemental",
+	"comportementale",
+	"comportementales",
+	"comportementaux"
+	],
+"beige":[
+	"beige",
+	"beiges"
+	],
+"belated":[
+	"tardif",
+	"tardifs",
+	"tardive",
+	"tardives"
+	],
+"beleaguered":[
+	"assiégé",
+	"assiégée",
+	"assiégées",
+	"assiégés",
+	"mal en point",
+	"éprouvé",
+	"éprouvée",
+	"éprouvées",
+	"éprouvés"
+	],
+"belgian":[
+	"belge",
+	"belges"
+	],
+"believable":[
+	"croyable",
+	"croyables"
+	],
+"bellicist":[
+	"belliciste",
+	"bellicistes"
+	],
+"bellicose":[
+	"belliqueuse",
+	"belliqueuses",
+	"belliqueux"
+	],
+"belligerent":[
+	"belligérant",
+	"belligérante",
+	"belligérantes",
+	"belligérants"
+	],
+"beloved":[
+	"bien-aimé",
+	"bien-aimée",
+	"bien-aimées",
+	"bien-aimés",
+	"chéri",
+	"chérie",
+	"chéries",
+	"chéris"
+	],
+"benedictine":[
+	"bénédictin",
+	"bénédictine",
+	"bénédictines",
+	"bénédictins"
+	],
+"beneficent":[
+	"bienfaisant",
+	"bienfaisante",
+	"bienfaisantes",
+	"bienfaisants",
+	"miséricordieuse",
+	"miséricordieuses",
+	"miséricordieux"
+	],
+"beneficial":[
+	"bénéficial",
+	"bénéficiale",
+	"bénéficiales",
+	"bénéficiaux",
+	"bénéfique",
+	"bénéfiques"
+	],
+"benevolent":[
+	"bienveillant",
+	"bienveillante",
+	"bienveillantes",
+	"bienveillants"
+	],
+"bengalese":[
+	"bengalais",
+	"bengalaise",
+	"bengalaises"
+	],
+"bengali":[
+	"bengali",
+	"bengalis"
+	],
+"benign":[
+	"bénigne",
+	"bénignes",
+	"bénin",
+	"bénins"
+	],
+"beninese":[
+	"béninois",
+	"béninoise",
+	"béninoises"
+	],
+"bent":[
+	"courbé",
+	"courbée",
+	"courbées",
+	"courbés"
+	],
+"benthic":[
+	"benthique",
+	"benthiques"
+	],
+"benzidinic":[
+	"benzidinique",
+	"benzidiniques"
+	],
+"benzoic":[
+	"benzoïque",
+	"benzoïques"
+	],
+"benzylic":[
+	"benzylique",
+	"benzyliques"
+	],
+"berber":[
+	"berbère",
+	"berbères"
+	],
+"bernese":[
+	"bernois",
+	"bernoise",
+	"bernoises"
+	],
+"best":[
+	"meilleur",
+	"meilleure",
+	"meilleures",
+	"meilleurs"
+	],
+"beta":[
+	"bêta",
+	"bêtas",
+	"bêtasse",
+	"bêtasses"
+	],
+"better":[
+	"meilleur",
+	"meilleure",
+	"meilleures",
+	"meilleurs"
+	],
+"bewhiskered":[
+	"barbu",
+	"barbue",
+	"barbues",
+	"barbus"
+	],
+"bewildered":[
+	"dérouté",
+	"déroutée",
+	"déroutées",
+	"déroutés"
+	],
+"biased":[
+	"partial",
+	"partiale",
+	"partiales",
+	"partiaux"
+	],
+"biblical":[
+	"biblique",
+	"bibliques"
+	],
+"bibliographic":[
+	"bibliographique",
+	"bibliographiques"
+	],
+"bicameral":[
+	"bicaméral",
+	"bicamérale",
+	"bicamérales",
+	"bicaméraux"
+	],
+"bicephalous":[
+	"bicéphale",
+	"bicéphales"
+	],
+"biennial":[
+	"bisannuel",
+	"bisannuelle",
+	"bisannuelles",
+	"bisannuels"
+	],
+"big":[
+	"grand",
+	"grand'",
+	"grande",
+	"grandes",
+	"grands",
+	"gros",
+	"grosse",
+	"grosses"
+	],
+"bigoted":[
+	"intolérant",
+	"intolérante",
+	"intolérantes",
+	"intolérants",
+	"sectaire",
+	"sectaires"
+	],
+"bigtime":[
+	"magistral",
+	"magistrale",
+	"magistrales",
+	"magistraux"
+	],
+"bijective":[
+	"bijectif",
+	"bijectifs",
+	"bijective",
+	"bijectives"
+	],
+"bilabial":[
+	"bilabial",
+	"bilabiale",
+	"bilabiales",
+	"bilabiaux"
+	],
+"bilateral":[
+	"bilatéral",
+	"bilatérale",
+	"bilatérales",
+	"bilatéraux"
+	],
+"bilinear":[
+	"bilinéaire",
+	"bilinéaires"
+	],
+"bilingual":[
+	"bilingue",
+	"bilingues"
+	],
+"bilious":[
+	"atrabilaire",
+	"atrabilaires",
+	"bileuse",
+	"bileuses",
+	"bileux",
+	"biliaire",
+	"biliaires",
+	"bilieuse",
+	"bilieuses",
+	"bilieux",
+	"coléreuse",
+	"coléreuses",
+	"coléreux",
+	"colérique",
+	"colériques"
+	],
+"bilocular":[
+	"biloculaire",
+	"biloculaires"
+	],
+"bimillenary":[
+	"bimillénaire",
+	"bimillénaires"
+	],
+"bimillennial":[
+	"bimillénaire",
+	"bimillénaires"
+	],
+"binary":[
+	"binaire",
+	"binaires"
+	],
+"binding":[
+	"contraignant",
+	"contraignante",
+	"contraignantes",
+	"contraignants"
+	],
+"biochemical":[
+	"biochimique",
+	"biochimiques"
+	],
+"biodegradable":[
+	"biodégradable",
+	"biodégradables"
+	],
+"biographical":[
+	"biographique",
+	"biographiques"
+	],
+"biomedical":[
+	"biomédical",
+	"biomédicale",
+	"biomédicales",
+	"biomédicaux"
+	],
+"biomolecular":[
+	"biomoléculaire",
+	"biomoléculaires"
+	],
+"bionic":[
+	"bionique",
+	"bioniques"
+	],
+"biotic":[
+	"biotique",
+	"biotiques"
+	],
+"bipartite":[
+	"biparti",
+	"bipartie",
+	"biparties",
+	"bipartis"
+	],
+"bipedal":[
+	"bipède",
+	"bipèdes"
+	],
+"bipolar":[
+	"bipolaire",
+	"bipolaires"
+	],
+"bisexual":[
+	"bisexuel",
+	"bisexuelle",
+	"bisexuelles",
+	"bisexuels",
+	"bisexué",
+	"bisexuée",
+	"bisexuées",
+	"bisexués",
+	"hermaphrodite",
+	"hermaphrodites"
+	],
+"bitter":[
+	"amer",
+	"amers",
+	"amère",
+	"amères",
+	"dur",
+	"dure",
+	"dures",
+	"durs",
+	"haineuse",
+	"haineuses",
+	"haineux",
+	"haïssable",
+	"haïssables",
+	"hostile",
+	"hostiles",
+	"odieuse",
+	"odieuses",
+	"odieux",
+	"sévère",
+	"sévères"
+	],
+"bittersweet":[
+	"aigre-douce",
+	"aigre-doux",
+	"aigres-douces",
+	"aigres-doux",
+	"douce-amère",
+	"douces-amères",
+	"doux-amer",
+	"doux-amers"
+	],
+"biweekly":[
+	"bihebdomadaire",
+	"bihebdomadaires",
+	"bimensuel",
+	"bimensuelle",
+	"bimensuelles",
+	"bimensuels"
+	],
+"bizarre":[
+	"bizarre",
+	"bizarres"
+	],
+"black":[
+	"noir",
+	"noire",
+	"noires",
+	"noirs"
+	],
+"blameworthy":[
+	"blâmable",
+	"blâmables"
+	],
+"bland":[
+	"douce",
+	"douces",
+	"doux",
+	"fade",
+	"fades"
+	],
+"blank":[
+	"blanc",
+	"blanche",
+	"blanches",
+	"blancs",
+	"vierge",
+	"vierges"
+	],
+"blanket":[
+	"général",
+	"générale",
+	"générales",
+	"généraux"
+	],
+"blasé":[
+	"blasé",
+	"blasée",
+	"blasées",
+	"blasés"
+	],
+"blasphemous":[
+	"blasphématoire",
+	"blasphématoires"
+	],
+"blasted":[
+	"fichu",
+	"fichue",
+	"fichues",
+	"fichus",
+	"mort",
+	"morte",
+	"mortes",
+	"morts",
+	"sec",
+	"secs",
+	"sèche",
+	"sèches"
+	],
+"blatant":[
+	"clair",
+	"claire",
+	"claires",
+	"clairs",
+	"flagrant",
+	"flagrante",
+	"flagrantes",
+	"flagrants"
+	],
+"bleak":[
+	"terne",
+	"ternes"
+	],
+"bleeding":[
+	"saignant",
+	"saignante",
+	"saignantes",
+	"saignants"
+	],
+"blessed":[
+	"bienheureuse",
+	"bienheureuses",
+	"bienheureux"
+	],
+"blind":[
+	"aveugle",
+	"aveugles"
+	],
+"blissful":[
+	"bienheureuse",
+	"bienheureuses",
+	"bienheureux"
+	],
+"blithe":[
+	"allègre",
+	"allègres",
+	"content",
+	"contente",
+	"contentes",
+	"contents",
+	"gai",
+	"gaie",
+	"gaies",
+	"gais",
+	"indifférent",
+	"indifférente",
+	"indifférentes",
+	"indifférents",
+	"joyeuse",
+	"joyeuses",
+	"joyeux",
+	"négligent",
+	"négligente",
+	"négligentes",
+	"négligents"
+	],
+"bloated":[
+	"fortuné",
+	"fortunée",
+	"fortunées",
+	"fortunés",
+	"gigantesque",
+	"gigantesques",
+	"gonflé",
+	"gonflée",
+	"gonflées",
+	"gonflés"
+	],
+"blond":[
+	"blond",
+	"blonde",
+	"blondes",
+	"blonds"
+	],
+"blonde":[
+	"blond",
+	"blonde",
+	"blondes",
+	"blonds"
+	],
+"bloodshot":[
+	"injecté",
+	"injectée",
+	"injectées",
+	"injectés"
+	],
+"bloodthirsty":[
+	"sanguinaire",
+	"sanguinaires"
+	],
+"bloody":[
+	"foutu",
+	"foutue",
+	"foutues",
+	"foutus",
+	"sanglant",
+	"sanglante",
+	"sanglantes",
+	"sanglants",
+	"sanguinaire",
+	"sanguinaires"
+	],
+"blooming":[
+	"florissant",
+	"florissante",
+	"florissantes",
+	"florissants"
+	],
+"blue":[
+	"bleu",
+	"bleue",
+	"bleues",
+	"bleus",
+	"démocrate",
+	"démocrates",
+	"déprimé",
+	"déprimée",
+	"déprimées",
+	"déprimés"
+	],
+"bluish":[
+	"bleuté",
+	"bleutée",
+	"bleutées",
+	"bleutés",
+	"bleuâtre",
+	"bleuâtres"
+	],
+"blunt":[
+	"abrupt",
+	"abrupte",
+	"abruptes",
+	"abrupts",
+	"idiot",
+	"idiote",
+	"idiotes",
+	"idiots",
+	"obtus",
+	"obtuse",
+	"obtuses",
+	"sot",
+	"sots",
+	"sotte",
+	"sottes"
+	],
+"blurred":[
+	"flou",
+	"floue",
+	"floues",
+	"flous"
+	],
+"blurry":[
+	"confus",
+	"confuse",
+	"confuses",
+	"flou",
+	"floue",
+	"floues",
+	"flous"
+	],
+"blustery":[
+	"bruyant",
+	"bruyante",
+	"bruyantes",
+	"bruyants",
+	"tumultueuse",
+	"tumultueuses",
+	"tumultueux"
+	],
+"boastful":[
+	"fanfaron",
+	"fanfaronne",
+	"fanfaronnes",
+	"fanfarons"
+	],
+"bodily":[
+	"corporel",
+	"corporelle",
+	"corporelles",
+	"corporels"
+	],
+"boeotian":[
+	"béotien",
+	"béotienne",
+	"béotiennes",
+	"béotiens"
+	],
+"boggy":[
+	"marécageuse",
+	"marécageuses",
+	"marécageux"
+	],
+"bogus":[
+	"fichu",
+	"fichue",
+	"fichues",
+	"fichus",
+	"foireuse",
+	"foireuses",
+	"foireux",
+	"gâté",
+	"gâtée",
+	"gâtées",
+	"gâtés"
+	],
+"boiled":[
+	"bouilli",
+	"bouillie",
+	"bouillies",
+	"bouillis"
+	],
+"boiling":[
+	"bouillant",
+	"bouillante",
+	"bouillantes",
+	"bouillants"
+	],
+"boisterous":[
+	"bruyant",
+	"bruyante",
+	"bruyantes",
+	"bruyants",
+	"tapageur",
+	"tapageurs",
+	"tapageuse",
+	"tapageuses",
+	"turbulent",
+	"turbulente",
+	"turbulentes",
+	"turbulents"
+	],
+"bold":[
+	"effronté",
+	"effrontée",
+	"effrontées",
+	"effrontés",
+	"gras",
+	"grasse",
+	"grasses",
+	"hardi",
+	"hardie",
+	"hardies",
+	"hardis"
+	],
+"bolivarian":[
+	"bolivarien",
+	"bolivarienne",
+	"bolivariennes",
+	"bolivariens"
+	],
+"bolivian":[
+	"bolivien",
+	"bolivienne",
+	"boliviennes",
+	"boliviens"
+	],
+"bombastic":[
+	"abscons",
+	"absconse",
+	"absconses",
+	"ampoulé",
+	"ampoulée",
+	"ampoulées",
+	"ampoulés",
+	"boursouflé",
+	"boursouflée",
+	"boursouflées",
+	"boursouflés",
+	"enflé",
+	"enflée",
+	"enflées",
+	"enflés",
+	"pompeuse",
+	"pompeuses",
+	"pompeux",
+	"verbeuse",
+	"verbeuses",
+	"verbeux"
+	],
+"bonapartist":[
+	"bonapartiste",
+	"bonapartistes"
+	],
+"bonkers":[
+	"délirant",
+	"délirante",
+	"délirantes",
+	"délirants",
+	"fol",
+	"folle",
+	"folles",
+	"fou",
+	"fous",
+	"irrationnel",
+	"irrationnelle",
+	"irrationnelles",
+	"irrationnels"
+	],
+"bony":[
+	"osseuse",
+	"osseuses",
+	"osseux"
+	],
+"bookish":[
+	"cuistre",
+	"cuistres",
+	"formaliste",
+	"formalistes",
+	"littéraire",
+	"littéraires",
+	"livresque",
+	"livresques",
+	"pédant",
+	"pédante",
+	"pédantes",
+	"pédants",
+	"scolaire",
+	"scolaires"
+	],
+"boolean":[
+	"boolien",
+	"boolienne",
+	"booliennes",
+	"booliens",
+	"booléen",
+	"booléenne",
+	"booléennes",
+	"booléens"
+	],
+"boorish":[
+	"grossier",
+	"grossiers",
+	"grossière",
+	"grossières"
+	],
+"boracic":[
+	"fauché",
+	"fauchée",
+	"fauchées",
+	"fauchés"
+	],
+"bordering":[
+	"limitrophe",
+	"limitrophes"
+	],
+"boreal":[
+	"boréal",
+	"boréale",
+	"boréales",
+	"boréals"
+	],
+"bored":[
+	"ennuyé",
+	"ennuyée",
+	"ennuyées",
+	"ennuyés"
+	],
+"boring":[
+	"barbant",
+	"barbante",
+	"barbantes",
+	"barbants",
+	"ennuyant",
+	"ennuyante",
+	"ennuyantes",
+	"ennuyants",
+	"ennuyeuse",
+	"ennuyeuses",
+	"ennuyeux"
+	],
+"bosom":[
+	"intime",
+	"intimes"
+	],
+"bossy":[
+	"autoritaire",
+	"autoritaires"
+	],
+"botanical":[
+	"botanique",
+	"botaniques"
+	],
+"bottomless":[
+	"insondable",
+	"insondables"
+	],
+"bounded":[
+	"borné",
+	"bornée",
+	"bornées",
+	"bornés"
+	],
+"boundless":[
+	"illimité",
+	"illimitée",
+	"illimitées",
+	"illimités"
+	],
+"bourgeois":[
+	"bourgeois",
+	"bourgeoise",
+	"bourgeoises"
+	],
+"bovine":[
+	"bovin",
+	"bovine",
+	"bovines",
+	"bovins"
+	],
+"brabantian":[
+	"brabançon",
+	"brabançonne",
+	"brabançonnes",
+	"brabançons"
+	],
+"brachial":[
+	"brachial",
+	"brachiale",
+	"brachiales",
+	"brachiaux"
+	],
+"brackish":[
+	"saumâtre",
+	"saumâtres"
+	],
+"branchial":[
+	"branchial",
+	"branchiale",
+	"branchiales",
+	"branchiaux"
+	],
+"branchy":[
+	"branchu",
+	"branchue",
+	"branchues",
+	"branchus"
+	],
+"brash":[
+	"agressif",
+	"agressifs",
+	"agressive",
+	"agressives",
+	"irréfléchi",
+	"irréfléchie",
+	"irréfléchies",
+	"irréfléchis"
+	],
+"brave":[
+	"courageuse",
+	"courageuses",
+	"courageux"
+	],
+"brawny":[
+	"balèze",
+	"balèzes"
+	],
+"brazen":[
+	"aigu",
+	"aigus",
+	"aiguë",
+	"aiguës",
+	"brutal",
+	"brutale",
+	"brutales",
+	"brutaux",
+	"cuivreuse",
+	"cuivreuses",
+	"cuivreux",
+	"grossier",
+	"grossiers",
+	"grossière",
+	"grossières",
+	"impénétrable",
+	"impénétrables",
+	"éhonté",
+	"éhontée",
+	"éhontées",
+	"éhontés"
+	],
+"brazilian":[
+	"brésilien",
+	"brésilienne",
+	"brésiliennes",
+	"brésiliens"
+	],
+"breakable":[
+	"fragile",
+	"fragiles"
+	],
+"breakaway":[
+	"séparatiste",
+	"séparatistes"
+	],
+"breakthrough":[
+	"capital",
+	"capitale",
+	"capitales",
+	"capitaux",
+	"décisif",
+	"décisifs",
+	"décisive",
+	"décisives",
+	"primordial",
+	"primordiale",
+	"primordiales",
+	"primordiaux"
+	],
+"breathable":[
+	"respirable",
+	"respirables"
+	],
+"breathtaking":[
+	"époustouflant",
+	"époustouflante",
+	"époustouflantes",
+	"époustouflants"
+	],
+"breezy":[
+	"aéré",
+	"aérée",
+	"aérées",
+	"aérés"
+	],
+"breton":[
+	"breton",
+	"bretonne",
+	"bretonnes",
+	"bretons"
+	],
+"bridgeable":[
+	"remédiable",
+	"remédiables",
+	"surmontable",
+	"surmontables"
+	],
+"brief":[
+	"bref",
+	"brefs",
+	"brève",
+	"brèves",
+	"court",
+	"courte",
+	"courtes",
+	"courts"
+	],
+"bright":[
+	"brillant",
+	"brillante",
+	"brillantes",
+	"brillants",
+	"clair",
+	"claire",
+	"claires",
+	"clairs",
+	"heureuse",
+	"heureuses",
+	"heureux",
+	"intelligent",
+	"intelligente",
+	"intelligentes",
+	"intelligents",
+	"luisant",
+	"luisante",
+	"luisantes",
+	"luisants"
+	],
+"brilliant":[
+	"brillant",
+	"brillante",
+	"brillantes",
+	"brillants"
+	],
+"briny":[
+	"saumâtre",
+	"saumâtres"
+	],
+"brisk":[
+	"animé",
+	"animée",
+	"animées",
+	"animés",
+	"stimulant",
+	"stimulante",
+	"stimulantes",
+	"stimulants",
+	"vif",
+	"vifs",
+	"vive",
+	"vives"
+	],
+"british":[
+	"britannique",
+	"britanniques"
+	],
+"brittle":[
+	"cassant",
+	"cassante",
+	"cassantes",
+	"cassants",
+	"fragile",
+	"fragiles"
+	],
+"broad":[
+	"fort",
+	"forte",
+	"fortes",
+	"forts",
+	"large",
+	"larges"
+	],
+"broadleaf":[
+	"feuillu",
+	"feuillue",
+	"feuillues",
+	"feuillus"
+	],
+"broke":[
+	"désargenté",
+	"désargentée",
+	"désargentées",
+	"désargentés",
+	"fauché",
+	"fauchée",
+	"fauchées",
+	"fauchés"
+	],
+"broken":[
+	"approximatif",
+	"approximatifs",
+	"approximative",
+	"approximatives",
+	"brisé",
+	"brisée",
+	"brisées",
+	"brisés",
+	"buggé",
+	"buggée",
+	"buggées",
+	"buggés",
+	"cassé",
+	"cassée",
+	"cassées",
+	"cassés",
+	"coupé",
+	"coupée",
+	"coupées",
+	"coupés",
+	"discontinu",
+	"discontinue",
+	"discontinues",
+	"discontinus",
+	"fauché",
+	"fauchée",
+	"fauchées",
+	"fauchés"
+	],
+"bronze":[
+	"bronzé",
+	"bronzée",
+	"bronzées",
+	"bronzés",
+	"hâlé",
+	"hâlée",
+	"hâlées",
+	"hâlés"
+	],
+"brown":[
+	"brun",
+	"brune",
+	"brunes",
+	"bruns",
+	"marron",
+	"marrons"
+	],
+"brownish":[
+	"brunâtre",
+	"brunâtres"
+	],
+"brunette":[
+	"brun",
+	"brune",
+	"brunes",
+	"bruns"
+	],
+"brusque":[
+	"brusque",
+	"brusques"
+	],
+"brusselian":[
+	"bruxellois",
+	"bruxelloise",
+	"bruxelloises"
+	],
+"brutal":[
+	"brutal",
+	"brutale",
+	"brutales",
+	"brutaux"
+	],
+"brythonic":[
+	"brittonique",
+	"brittoniques"
+	],
+"bubonic":[
+	"bubonique",
+	"buboniques"
+	],
+"bucolic":[
+	"bucolique",
+	"bucoliques",
+	"pastoral",
+	"pastorale",
+	"pastorales",
+	"pastoraux"
+	],
+"buddhist":[
+	"bouddhiste",
+	"bouddhistes"
+	],
+"buddhistic":[
+	"bouddhique",
+	"bouddhiques"
+	],
+"budget":[
+	"budgétaire",
+	"budgétaires"
+	],
+"budgetary":[
+	"budgétaire",
+	"budgétaires"
+	],
+"buff":[
+	"chamois"
+	],
+"buggy":[
+	"buggé",
+	"buggée",
+	"buggées",
+	"buggés",
+	"infesté",
+	"infestée",
+	"infestées",
+	"infestés"
+	],
+"bulbous":[
+	"bulbeuse",
+	"bulbeuses",
+	"bulbeux"
+	],
+"bulgarian":[
+	"bulgare",
+	"bulgares"
+	],
+"bulimic":[
+	"boulimique",
+	"boulimiques"
+	],
+"bulky":[
+	"corpulent",
+	"corpulente",
+	"corpulentes",
+	"corpulents",
+	"encombrant",
+	"encombrante",
+	"encombrantes",
+	"encombrants",
+	"gros",
+	"grosse",
+	"grosses",
+	"volumineuse",
+	"volumineuses",
+	"volumineux"
+	],
+"bull":[
+	"mâle",
+	"mâles"
+	],
+"bulletproof":[
+	"blindé",
+	"blindée",
+	"blindées",
+	"blindés",
+	"inattaquable",
+	"inattaquables",
+	"infaillible",
+	"infaillibles"
+	],
+"bully":[
+	"génial",
+	"géniale",
+	"géniales",
+	"géniaux"
+	],
+"bumpy":[
+	"accidenté",
+	"accidentée",
+	"accidentées",
+	"accidentés"
+	],
+"buoyant":[
+	"flottable",
+	"flottables",
+	"flottant",
+	"flottante",
+	"flottantes",
+	"flottants",
+	"gai",
+	"gaie",
+	"gaies",
+	"gais",
+	"joyeuse",
+	"joyeuses",
+	"joyeux",
+	"léger",
+	"légers",
+	"légère",
+	"légères"
+	],
+"burdensome":[
+	"ardu",
+	"ardue",
+	"ardues",
+	"ardus",
+	"casse-cul",
+	"chiant",
+	"chiante",
+	"chiantes",
+	"chiants",
+	"emmerdant",
+	"emmerdante",
+	"emmerdantes",
+	"emmerdants",
+	"fastidieuse",
+	"fastidieuses",
+	"fastidieux",
+	"pesant",
+	"pesante",
+	"pesantes",
+	"pesants",
+	"pénible",
+	"pénibles",
+	"écrasant",
+	"écrasante",
+	"écrasantes",
+	"écrasants"
+	],
+"burgundian":[
+	"bourguignon",
+	"bourguignonne",
+	"bourguignonnes",
+	"bourguignons"
+	],
+"burgundy":[
+	"bordeaux"
+	],
+"buried":[
+	"enterré",
+	"enterrée",
+	"enterrées",
+	"enterrés"
+	],
+"burlesque":[
+	"burlesque",
+	"burlesques"
+	],
+"burly":[
+	"fort",
+	"forte",
+	"fortes",
+	"forts",
+	"robuste",
+	"robustes",
+	"solide",
+	"solides"
+	],
+"burmese":[
+	"birman",
+	"birmane",
+	"birmanes",
+	"birmans"
+	],
+"burning":[
+	"ardent",
+	"ardente",
+	"ardentes",
+	"ardents",
+	"brûlant",
+	"brûlante",
+	"brûlantes",
+	"brûlants"
+	],
+"burnt":[
+	"brûlé",
+	"brûlée",
+	"brûlées",
+	"brûlés"
+	],
+"burundian":[
+	"burundais",
+	"burundaise",
+	"burundaises"
+	],
+"bushed":[
+	"crevé",
+	"crevée",
+	"crevées",
+	"crevés"
+	],
+"bustling":[
+	"animé",
+	"animée",
+	"animées",
+	"animés",
+	"trépidant",
+	"trépidante",
+	"trépidantes",
+	"trépidants"
+	],
+"busty":[
+	"pulpeuse",
+	"pulpeuses",
+	"pulpeux"
+	],
+"busy":[
+	"occupé",
+	"occupée",
+	"occupées",
+	"occupés"
+	],
+"butch":[
+	"hommasse",
+	"hommasses"
+	],
+"butyric":[
+	"butyreuse",
+	"butyreuses",
+	"butyreux"
+	],
+"buyable":[
+	"achetable",
+	"achetables"
+	],
+"byronian":[
+	"byronien",
+	"byronienne",
+	"byroniennes",
+	"byroniens"
+	],
+"byzantine":[
+	"byzantin",
+	"byzantine",
+	"byzantines",
+	"byzantins"
+	],
+"cabalistic":[
+	"cabalistique",
+	"cabalistiques"
+	],
+"cacatory":[
+	"diarrhéique",
+	"diarrhéiques"
+	],
+"cacophonous":[
+	"cacophonique",
+	"cacophoniques"
+	],
+"cadastral":[
+	"cadastral",
+	"cadastrale",
+	"cadastrales",
+	"cadastraux"
+	],
+"cadaveric":[
+	"cadavérique",
+	"cadavériques"
+	],
+"caecal":[
+	"caecal",
+	"caecale",
+	"caecales",
+	"caecaux"
+	],
+"cairene":[
+	"cairote",
+	"cairotes"
+	],
+"calamitous":[
+	"calamiteuse",
+	"calamiteuses",
+	"calamiteux"
+	],
+"calcareous":[
+	"calcaire",
+	"calcaires"
+	],
+"calcic":[
+	"calcique",
+	"calciques"
+	],
+"calculable":[
+	"calculable",
+	"calculables"
+	],
+"californian":[
+	"californien",
+	"californienne",
+	"californiennes",
+	"californiens"
+	],
+"calligraphic":[
+	"calligraphique",
+	"calligraphiques"
+	],
+"callipygian":[
+	"callipyge",
+	"callipyges"
+	],
+"callous":[
+	"endurci",
+	"endurcie",
+	"endurcies",
+	"endurcis",
+	"insensible",
+	"insensibles"
+	],
+"calm":[
+	"calme",
+	"calmes",
+	"tranquille",
+	"tranquilles"
+	],
+"calorimetric":[
+	"calorimétrique",
+	"calorimétriques"
+	],
+"calumnious":[
+	"calomnieuse",
+	"calomnieuses",
+	"calomnieux"
+	],
+"calvinist":[
+	"calviniste",
+	"calvinistes"
+	],
+"cambodian":[
+	"cambodgien",
+	"cambodgienne",
+	"cambodgiennes",
+	"cambodgiens"
+	],
+"canaanite":[
+	"cananéen",
+	"cananéenne",
+	"cananéennes",
+	"cananéens"
+	],
+"canadian":[
+	"canadien",
+	"canadienne",
+	"canadiennes",
+	"canadiens"
+	],
+"cancellable":[
+	"résiliable",
+	"résiliables"
+	],
+"cancerous":[
+	"cancéreuse",
+	"cancéreuses",
+	"cancéreux"
+	],
+"candid":[
+	"candide",
+	"candides",
+	"sincère",
+	"sincères",
+	"spontané",
+	"spontanée",
+	"spontanées",
+	"spontanés"
+	],
+"cannibalistic":[
+	"cannibale",
+	"cannibales"
+	],
+"canny":[
+	"astucieuse",
+	"astucieuses",
+	"astucieux",
+	"frugal",
+	"frugale",
+	"frugales",
+	"frugaux",
+	"prudent",
+	"prudente",
+	"prudentes",
+	"prudents"
+	],
+"canonical":[
+	"basique",
+	"basiques",
+	"canonique",
+	"canoniques",
+	"orthodoxe",
+	"orthodoxes"
+	],
+"cantankerous":[
+	"irritable",
+	"irritables"
+	],
+"cantonal":[
+	"cantonal",
+	"cantonale",
+	"cantonales",
+	"cantonaux"
+	],
+"cantonese":[
+	"cantonais",
+	"cantonaise",
+	"cantonaises"
+	],
+"capable":[
+	"capable",
+	"capables"
+	],
+"capacious":[
+	"spacieuse",
+	"spacieuses",
+	"spacieux"
+	],
+"capital":[
+	"capital",
+	"capitale",
+	"capitales",
+	"capitaux",
+	"excellent",
+	"excellente",
+	"excellentes",
+	"excellents",
+	"majuscule",
+	"majuscules"
+	],
+"capitalist":[
+	"capitaliste",
+	"capitalistes"
+	],
+"capitalistic":[
+	"capitaliste",
+	"capitalistes"
+	],
+"cappadocian":[
+	"cappadocien",
+	"cappadocienne",
+	"cappadociennes",
+	"cappadociens"
+	],
+"capric":[
+	"caprique",
+	"capriques"
+	],
+"capricious":[
+	"capricieuse",
+	"capricieuses",
+	"capricieux"
+	],
+"captivating":[
+	"captivant",
+	"captivante",
+	"captivantes",
+	"captivants",
+	"fascinant",
+	"fascinante",
+	"fascinantes",
+	"fascinants",
+	"passionnant",
+	"passionnante",
+	"passionnantes",
+	"passionnants",
+	"prenant",
+	"prenante",
+	"prenantes",
+	"prenants"
+	],
+"captive":[
+	"captif",
+	"captifs",
+	"captive",
+	"captives"
+	],
+"carbonated":[
+	"gazeuse",
+	"gazeuses",
+	"gazeux"
+	],
+"carbonic":[
+	"carbonique",
+	"carboniques"
+	],
+"carboniferous":[
+	"carbonifère",
+	"carbonifères"
+	],
+"carceral":[
+	"carcéral",
+	"carcérale",
+	"carcérales",
+	"carcéraux"
+	],
+"carcinogenic":[
+	"cancérigène",
+	"cancérigènes"
+	],
+"cardiac":[
+	"cardiaque",
+	"cardiaques"
+	],
+"cardinal":[
+	"cardinal",
+	"cardinale",
+	"cardinales",
+	"cardinaux"
+	],
+"carefree":[
+	"insouciant",
+	"insouciante",
+	"insouciantes",
+	"insouciants"
+	],
+"careful":[
+	"attentif",
+	"attentifs",
+	"attentive",
+	"attentives",
+	"prudent",
+	"prudente",
+	"prudentes",
+	"prudents",
+	"soigneuse",
+	"soigneuses",
+	"soigneux"
+	],
+"careless":[
+	"distrait",
+	"distraite",
+	"distraites",
+	"distraits",
+	"négligent",
+	"négligente",
+	"négligentes",
+	"négligents",
+	"étourdi",
+	"étourdie",
+	"étourdies",
+	"étourdis"
+	],
+"caretaker":[
+	"gardien",
+	"gardienne",
+	"gardiennes",
+	"gardiens"
+	],
+"caribbean":[
+	"caraïbe",
+	"caraïbes"
+	],
+"caricatural":[
+	"caricatural",
+	"caricaturale",
+	"caricaturales",
+	"caricaturaux"
+	],
+"carious":[
+	"carieuse",
+	"carieuses",
+	"carieux"
+	],
+"carmine":[
+	"carmin",
+	"carminé",
+	"carminée",
+	"carminées",
+	"carminés"
+	],
+"carnal":[
+	"charnel",
+	"charnelle",
+	"charnelles",
+	"charnels"
+	],
+"carnation":[
+	"incarnat",
+	"incarnate",
+	"incarnates",
+	"incarnats"
+	],
+"carnivorous":[
+	"carnassier",
+	"carnassiers",
+	"carnassière",
+	"carnassières",
+	"carnivore",
+	"carnivores"
+	],
+"carolingian":[
+	"carolingien",
+	"carolingienne",
+	"carolingiennes",
+	"carolingiens"
+	],
+"cartesian":[
+	"cartésien",
+	"cartésienne",
+	"cartésiennes",
+	"cartésiens"
+	],
+"carthaginian":[
+	"carthaginois",
+	"carthaginoise",
+	"carthaginoises"
+	],
+"cartilaginous":[
+	"cartilagineuse",
+	"cartilagineuses",
+	"cartilagineux"
+	],
+"cartographic":[
+	"cartographique",
+	"cartographiques"
+	],
+"casual":[
+	"accidentel",
+	"accidentelle",
+	"accidentelles",
+	"accidentels",
+	"décontracté",
+	"décontractée",
+	"décontractées",
+	"décontractés",
+	"désinvolte",
+	"désinvoltes",
+	"fortuit",
+	"fortuite",
+	"fortuites",
+	"fortuits",
+	"occasionnel",
+	"occasionnelle",
+	"occasionnelles",
+	"occasionnels"
+	],
+"catalan":[
+	"catalan",
+	"catalane",
+	"catalanes",
+	"catalans"
+	],
+"catalonian":[
+	"catalan",
+	"catalane",
+	"catalanes",
+	"catalans"
+	],
+"catalytic":[
+	"catalytique",
+	"catalytiques"
+	],
+"catastrophic":[
+	"catastrophique",
+	"catastrophiques",
+	"désastreuse",
+	"désastreuses",
+	"désastreux"
+	],
+"categorical":[
+	"catégoriel",
+	"catégorielle",
+	"catégorielles",
+	"catégoriels",
+	"catégorique",
+	"catégoriques"
+	],
+"catharist":[
+	"cathare",
+	"cathares"
+	],
+"catholic":[
+	"catholique",
+	"catholiques"
+	],
+"catlike":[
+	"félin",
+	"féline",
+	"félines",
+	"félins"
+	],
+"catty":[
+	"méchant",
+	"méchante",
+	"méchantes",
+	"méchants",
+	"rosse",
+	"rosses"
+	],
+"caucasian":[
+	"caucasien",
+	"caucasienne",
+	"caucasiennes",
+	"caucasiens"
+	],
+"caudal":[
+	"caudal",
+	"caudale",
+	"caudales",
+	"caudaux"
+	],
+"causal":[
+	"causal",
+	"causale",
+	"causales",
+	"causals",
+	"causaux"
+	],
+"causative":[
+	"causatif",
+	"causatifs",
+	"causative",
+	"causatives"
+	],
+"cautious":[
+	"prudent",
+	"prudente",
+	"prudentes",
+	"prudents"
+	],
+"cavalier":[
+	"cavalier",
+	"cavaliers",
+	"cavalière",
+	"cavalières"
+	],
+"cavernous":[
+	"caverneuse",
+	"caverneuses",
+	"caverneux"
+	],
+"ceaseless":[
+	"incessant",
+	"incessante",
+	"incessantes",
+	"incessants"
+	],
+"celebrated":[
+	"célèbre",
+	"célèbres"
+	],
+"celestial":[
+	"céleste",
+	"célestes"
+	],
+"celibate":[
+	"célibataire",
+	"célibataires"
+	],
+"cellular":[
+	"cellulaire",
+	"cellulaires"
+	],
+"celtic":[
+	"celte",
+	"celtes",
+	"celtique",
+	"celtiques"
+	],
+"censorial":[
+	"censorial",
+	"censoriale",
+	"censoriales",
+	"censoriaux"
+	],
+"centenary":[
+	"centenaire",
+	"centenaires"
+	],
+"center":[
+	"central",
+	"centrale",
+	"centrales",
+	"centraux"
+	],
+"central":[
+	"central",
+	"centrale",
+	"centrales",
+	"centraux"
+	],
+"centrifugal":[
+	"centrifuge",
+	"centrifuges"
+	],
+"centripetal":[
+	"centripète",
+	"centripètes"
+	],
+"centrist":[
+	"centriste",
+	"centristes"
+	],
+"cephalic":[
+	"céphalique",
+	"céphaliques"
+	],
+"ceramic":[
+	"céramique",
+	"céramiques"
+	],
+"cerebellar":[
+	"cérébelleuse",
+	"cérébelleuses",
+	"cérébelleux"
+	],
+"cerebral":[
+	"cérébral",
+	"cérébrale",
+	"cérébrales",
+	"cérébraux"
+	],
+"ceremonial":[
+	"cérémonial",
+	"cérémoniale",
+	"cérémoniales",
+	"cérémoniaux"
+	],
+"certain":[
+	"certain",
+	"certaine",
+	"certaines",
+	"certains",
+	"quelconque",
+	"quelconques"
+	],
+"cerulean":[
+	"céruléen",
+	"céruléenne",
+	"céruléennes",
+	"céruléens"
+	],
+"cervical":[
+	"cervical",
+	"cervicale",
+	"cervicales",
+	"cervicaux"
+	],
+"chadian":[
+	"tchadien",
+	"tchadienne",
+	"tchadiennes",
+	"tchadiens"
+	],
+"challenging":[
+	"difficile",
+	"difficiles",
+	"stimulant",
+	"stimulante",
+	"stimulantes",
+	"stimulants"
+	],
+"chancy":[
+	"chanceuse",
+	"chanceuses",
+	"chanceux"
+	],
+"changeable":[
+	"changeable",
+	"changeables",
+	"changeant",
+	"changeante",
+	"changeantes",
+	"changeants"
+	],
+"chaotic":[
+	"chaotique",
+	"chaotiques"
+	],
+"chaplinesque":[
+	"chaplinesque",
+	"chaplinesques"
+	],
+"characteristic":[
+	"caractéristique",
+	"caractéristiques"
+	],
+"charismatic":[
+	"charismatique",
+	"charismatiques"
+	],
+"charitable":[
+	"caritatif",
+	"caritatifs",
+	"caritative",
+	"caritatives"
+	],
+"charming":[
+	"charmant",
+	"charmante",
+	"charmantes",
+	"charmants"
+	],
+"chartist":[
+	"chartiste",
+	"chartistes"
+	],
+"chary":[
+	"frugal",
+	"frugale",
+	"frugales",
+	"frugaux"
+	],
+"chaste":[
+	"chaste",
+	"chastes",
+	"innocent",
+	"innocente",
+	"innocentes",
+	"innocents"
+	],
+"chatty":[
+	"bavard",
+	"bavarde",
+	"bavardes",
+	"bavards"
+	],
+"chauvinistic":[
+	"chauvin",
+	"chauvine",
+	"chauvines",
+	"chauviniste",
+	"chauvinistes",
+	"chauvins",
+	"cocardier",
+	"cocardiers",
+	"cocardière",
+	"cocardières"
+	],
+"cheap":[
+	"bon marché",
+	"modique",
+	"modiques",
+	"radin",
+	"radine",
+	"radines",
+	"radins",
+	"économique",
+	"économiques"
+	],
+"cheeky":[
+	"effronté",
+	"effrontée",
+	"effrontées",
+	"effrontés",
+	"impertinent",
+	"impertinente",
+	"impertinentes",
+	"impertinents",
+	"insolent",
+	"insolente",
+	"insolentes",
+	"insolents"
+	],
+"cheerful":[
+	"content",
+	"contente",
+	"contentes",
+	"contents",
+	"joyeuse",
+	"joyeuses",
+	"joyeux"
+	],
+"cheeseparing":[
+	"radin",
+	"radine",
+	"radines",
+	"radins"
+	],
+"chemical":[
+	"chimique",
+	"chimiques"
+	],
+"chequy":[
+	"échiqueté",
+	"échiquetée",
+	"échiquetées",
+	"échiquetés"
+	],
+"chestnut":[
+	"châtain",
+	"châtains",
+	"marron",
+	"marrons"
+	],
+"chic":[
+	"chic",
+	"chic",
+	"chics"
+	],
+"childish":[
+	"enfantin",
+	"enfantine",
+	"enfantines",
+	"enfantins",
+	"gamin",
+	"gamine",
+	"gamines",
+	"gamins",
+	"puéril",
+	"puérile",
+	"puériles",
+	"puérils"
+	],
+"chilean":[
+	"chilien",
+	"chilienne",
+	"chiliennes",
+	"chiliens"
+	],
+"chilling":[
+	"effrayant",
+	"effrayante",
+	"effrayantes",
+	"effrayants"
+	],
+"chilly":[
+	"froid",
+	"froide",
+	"froides",
+	"froids"
+	],
+"chimerical":[
+	"chimérique",
+	"chimériques"
+	],
+"chinese":[
+	"chinois",
+	"chinoise",
+	"chinoises"
+	],
+"chivalrous":[
+	"chevaleresque",
+	"chevaleresques",
+	"galant",
+	"galante",
+	"galantes",
+	"galants"
+	],
+"chlorophyllic":[
+	"chlorophyllien",
+	"chlorophyllienne",
+	"chlorophylliennes",
+	"chlorophylliens"
+	],
+"chlorotic":[
+	"chlorotique",
+	"chlorotiques"
+	],
+"chocolate":[
+	"chocolat",
+	"chocolaté",
+	"chocolatée",
+	"chocolatées",
+	"chocolatés"
+	],
+"choledochal":[
+	"cholédoque",
+	"cholédoques"
+	],
+"choleraic":[
+	"cholérique",
+	"cholériques"
+	],
+"cholinergic":[
+	"cholinergique",
+	"cholinergiques"
+	],
+"choosy":[
+	"difficile",
+	"difficiles",
+	"exigeant",
+	"exigeante",
+	"exigeantes",
+	"exigeants",
+	"sélectif",
+	"sélectifs",
+	"sélective",
+	"sélectives"
+	],
+"choppy":[
+	"haché",
+	"hachée",
+	"hachées",
+	"hachés"
+	],
+"christian":[
+	"chrétien",
+	"chrétienne",
+	"chrétiennes",
+	"chrétiens"
+	],
+"chromatic":[
+	"chromatique",
+	"chromatiques"
+	],
+"chromosomal":[
+	"chromosomique",
+	"chromosomiques"
+	],
+"chronic":[
+	"chronique",
+	"chroniques"
+	],
+"chronological":[
+	"chronologique",
+	"chronologiques"
+	],
+"chryselephantine":[
+	"chryséléphantin",
+	"chryséléphantine",
+	"chryséléphantines",
+	"chryséléphantins"
+	],
+"chthonian":[
+	"chthonien",
+	"chthonienne",
+	"chthoniennes",
+	"chthoniens"
+	],
+"chthonic":[
+	"chthonien",
+	"chthonienne",
+	"chthoniennes",
+	"chthoniens"
+	],
+"chubby":[
+	"dodu",
+	"dodue",
+	"dodues",
+	"dodus",
+	"potelé",
+	"potelée",
+	"potelées",
+	"potelés"
+	],
+"chunky":[
+	"corpulent",
+	"corpulente",
+	"corpulentes",
+	"corpulents",
+	"courtaud",
+	"courtaude",
+	"courtaudes",
+	"courtauds",
+	"rondelet",
+	"rondelets",
+	"rondelette",
+	"rondelettes"
+	],
+"churchillian":[
+	"churchillien",
+	"churchillienne",
+	"churchilliennes",
+	"churchilliens"
+	],
+"cinematic":[
+	"cinématographique",
+	"cinématographiques"
+	],
+"cinematographic":[
+	"cinématographique",
+	"cinématographiques"
+	],
+"cinnamon":[
+	"cannelle"
+	],
+"circadian":[
+	"circadien",
+	"circadienne",
+	"circadiennes",
+	"circadiens"
+	],
+"circuitous":[
+	"tortueuse",
+	"tortueuses",
+	"tortueux"
+	],
+"circular":[
+	"rond",
+	"ronde",
+	"rondes",
+	"ronds"
+	],
+"circulating":[
+	"circulant",
+	"circulante",
+	"circulantes",
+	"circulants"
+	],
+"circulatory":[
+	"circulatoire",
+	"circulatoires"
+	],
+"circumflex":[
+	"circonflexe",
+	"circonflexes"
+	],
+"circumspect":[
+	"circonspect",
+	"circonspecte",
+	"circonspectes",
+	"circonspects"
+	],
+"cisalpine":[
+	"cisalpin",
+	"cisalpine",
+	"cisalpines",
+	"cisalpins"
+	],
+"citerior":[
+	"citérieur",
+	"citérieure",
+	"citérieures",
+	"citérieurs"
+	],
+"citric":[
+	"citrique",
+	"citriques"
+	],
+"civic":[
+	"civique",
+	"civiques"
+	],
+"civil":[
+	"civil",
+	"civile",
+	"civiles",
+	"civils"
+	],
+"civilian":[
+	"civil",
+	"civile",
+	"civiles",
+	"civils"
+	],
+"civilized":[
+	"civilisé",
+	"civilisée",
+	"civilisées",
+	"civilisés"
+	],
+"clacky":[
+	"claquant",
+	"claquante",
+	"claquantes",
+	"claquants"
+	],
+"clammy":[
+	"moite",
+	"moites"
+	],
+"clandestine":[
+	"clandestin",
+	"clandestine",
+	"clandestines",
+	"clandestins"
+	],
+"classic":[
+	"classique",
+	"classiques"
+	],
+"classical":[
+	"classique",
+	"classiques"
+	],
+"classifiable":[
+	"classable",
+	"classables"
+	],
+"classy":[
+	"chic",
+	"chic",
+	"chics"
+	],
+"claustral":[
+	"claustral",
+	"claustrale",
+	"claustrales",
+	"claustraux"
+	],
+"claustrophobic":[
+	"claustrophobe",
+	"claustrophobes"
+	],
+"clavicular":[
+	"claviculaire",
+	"claviculaires"
+	],
+"clean":[
+	"abstinent",
+	"abstinente",
+	"abstinentes",
+	"abstinents",
+	"net",
+	"nets",
+	"nette",
+	"nettes",
+	"propre",
+	"propres",
+	"pur",
+	"pure",
+	"pures",
+	"purs"
+	],
+"cleansing":[
+	"détergent",
+	"détergente",
+	"détergentes",
+	"détergents",
+	"détersif",
+	"détersifs",
+	"détersive",
+	"détersives"
+	],
+"clear":[
+	"clair",
+	"claire",
+	"claires",
+	"clairs",
+	"distinct",
+	"distincte",
+	"distinctes",
+	"distincts",
+	"dégagé",
+	"dégagée",
+	"dégagées",
+	"dégagés",
+	"libre",
+	"libres",
+	"transparent",
+	"transparente",
+	"transparentes",
+	"transparents"
+	],
+"clerical":[
+	"administratif",
+	"administratifs",
+	"administrative",
+	"administratives",
+	"clérical",
+	"cléricale",
+	"cléricales",
+	"cléricaux"
+	],
+"clever":[
+	"adroit",
+	"adroite",
+	"adroites",
+	"adroits",
+	"agile",
+	"agiles",
+	"habile",
+	"habiles",
+	"ingénieuse",
+	"ingénieuses",
+	"ingénieux",
+	"intelligent",
+	"intelligente",
+	"intelligentes",
+	"intelligents",
+	"maligne",
+	"malignes",
+	"malin",
+	"malins",
+	"talentueuse",
+	"talentueuses",
+	"talentueux"
+	],
+"clientelist":[
+	"clientéliste",
+	"clientélistes"
+	],
+"climatic":[
+	"climatique",
+	"climatiques"
+	],
+"clingy":[
+	"collant",
+	"collante",
+	"collantes",
+	"collants"
+	],
+"clinical":[
+	"clinique",
+	"cliniques"
+	],
+"clitoral":[
+	"clitoridien",
+	"clitoridienne",
+	"clitoridiennes",
+	"clitoridiens"
+	],
+"cloistral":[
+	"claustral",
+	"claustrale",
+	"claustrales",
+	"claustraux",
+	"monacal",
+	"monacale",
+	"monacales",
+	"monacaux",
+	"monastique",
+	"monastiques"
+	],
+"close":[
+	"proche",
+	"proches",
+	"près"
+	],
+"closed":[
+	"fermé",
+	"fermée",
+	"fermées",
+	"fermés"
+	],
+"closemouthed":[
+	"taciturne",
+	"taciturnes"
+	],
+"cloudy":[
+	"brumeuse",
+	"brumeuses",
+	"brumeux",
+	"nuageuse",
+	"nuageuses",
+	"nuageux",
+	"nébuleuse",
+	"nébuleuses",
+	"nébuleux",
+	"opaque",
+	"opaques",
+	"trouble",
+	"troubles"
+	],
+"cloven":[
+	"fendu",
+	"fendue",
+	"fendues",
+	"fendus"
+	],
+"clownlike":[
+	"clownesque",
+	"clownesques"
+	],
+"clueless":[
+	"ignorant",
+	"ignorante",
+	"ignorantes",
+	"ignorants"
+	],
+"clumsy":[
+	"gauche",
+	"gauches",
+	"lourd",
+	"lourde",
+	"lourdes",
+	"lourds",
+	"maladroit",
+	"maladroite",
+	"maladroites",
+	"maladroits"
+	],
+"coarse":[
+	"brut",
+	"brute",
+	"brutes",
+	"bruts",
+	"grossier",
+	"grossiers",
+	"grossière",
+	"grossières",
+	"vulgaire",
+	"vulgaires"
+	],
+"coastal":[
+	"côtier",
+	"côtiers",
+	"côtière",
+	"côtières"
+	],
+"coaxial":[
+	"coaxial",
+	"coaxiale",
+	"coaxiales",
+	"coaxiaux"
+	],
+"coccygeal":[
+	"coccygien",
+	"coccygienne",
+	"coccygiennes",
+	"coccygiens"
+	],
+"cochlear":[
+	"cochléaire",
+	"cochléaires"
+	],
+"cocked":[
+	"bourré",
+	"bourrée",
+	"bourrées",
+	"bourrés"
+	],
+"cocky":[
+	"arrogant",
+	"arrogante",
+	"arrogantes",
+	"arrogants",
+	"suffisant",
+	"suffisante",
+	"suffisantes",
+	"suffisants"
+	],
+"coeliac":[
+	"coeliaque",
+	"coeliaques"
+	],
+"coeval":[
+	"contemporain",
+	"contemporaine",
+	"contemporaines",
+	"contemporains"
+	],
+"coffee":[
+	"café"
+	],
+"cogent":[
+	"cohérent",
+	"cohérente",
+	"cohérentes",
+	"cohérents",
+	"convaincant",
+	"convaincante",
+	"convaincantes",
+	"convaincants",
+	"intelligible",
+	"intelligibles",
+	"irréfutable",
+	"irréfutables",
+	"logique",
+	"logiques",
+	"persuasif",
+	"persuasifs",
+	"persuasive",
+	"persuasives"
+	],
+"cognate":[
+	"apparenté",
+	"apparentée",
+	"apparentées",
+	"apparentés"
+	],
+"cognitive":[
+	"cognitif",
+	"cognitifs",
+	"cognitive",
+	"cognitives"
+	],
+"cognizant":[
+	"conscient",
+	"consciente",
+	"conscientes",
+	"conscients"
+	],
+"coherent":[
+	"cohérent",
+	"cohérente",
+	"cohérentes",
+	"cohérents"
+	],
+"coincidental":[
+	"fortuit",
+	"fortuite",
+	"fortuites",
+	"fortuits"
+	],
+"cold":[
+	"froid",
+	"froide",
+	"froides",
+	"froids"
+	],
+"colic":[
+	"colique",
+	"coliques"
+	],
+"collapsible":[
+	"pliable",
+	"pliables"
+	],
+"collateral":[
+	"collatéral",
+	"collatérale",
+	"collatérales",
+	"collatéraux",
+	"indirect",
+	"indirecte",
+	"indirectes",
+	"indirects"
+	],
+"collinear":[
+	"colinéaire",
+	"colinéaires"
+	],
+"colloquial":[
+	"familier",
+	"familiers",
+	"familière",
+	"familières"
+	],
+"colombian":[
+	"colombien",
+	"colombienne",
+	"colombiennes",
+	"colombiens"
+	],
+"colonial":[
+	"colonial",
+	"coloniale",
+	"coloniales",
+	"coloniaux"
+	],
+"colonialist":[
+	"colonialiste",
+	"colonialistes"
+	],
+"colored":[
+	"coloré",
+	"colorée",
+	"colorées",
+	"colorés",
+	"marqué",
+	"marquée",
+	"marquées",
+	"marqués",
+	"métis"
+	],
+"colorful":[
+	"coloré",
+	"colorée",
+	"colorées",
+	"colorés"
+	],
+"colossal":[
+	"colossal",
+	"colossale",
+	"colossales",
+	"colossaux"
+	],
+"colourless":[
+	"incolore",
+	"incolores"
+	],
+"combinable":[
+	"combinable",
+	"combinables"
+	],
+"comely":[
+	"avenant",
+	"avenante",
+	"avenantes",
+	"avenants"
+	],
+"comestible":[
+	"comestible",
+	"comestibles"
+	],
+"comfortable":[
+	"confortable",
+	"confortables"
+	],
+"comforting":[
+	"rassurant",
+	"rassurante",
+	"rassurantes",
+	"rassurants",
+	"réconfortant",
+	"réconfortante",
+	"réconfortantes",
+	"réconfortants"
+	],
+"comfy":[
+	"confortable",
+	"confortables"
+	],
+"comic":[
+	"cocasse",
+	"cocasses",
+	"comique",
+	"comiques"
+	],
+"comical":[
+	"comique",
+	"comiques"
+	],
+"comital":[
+	"comtal",
+	"comtale",
+	"comtales",
+	"comtaux"
+	],
+"commemorative":[
+	"commémoratif",
+	"commémoratifs",
+	"commémorative",
+	"commémoratives"
+	],
+"commensurate":[
+	"commensurable",
+	"commensurables"
+	],
+"commercial":[
+	"commercial",
+	"commerciale",
+	"commerciales",
+	"commerciaux"
+	],
+"common":[
+	"commun",
+	"commune",
+	"communes",
+	"communs",
+	"ordinaire",
+	"ordinaires"
+	],
+"commonplace":[
+	"banal",
+	"banale",
+	"banales",
+	"banals",
+	"banaux",
+	"ordinaire",
+	"ordinaires"
+	],
+"communal":[
+	"commun",
+	"communautaire",
+	"communautaires",
+	"commune",
+	"communes",
+	"communs"
+	],
+"communicable":[
+	"communicable",
+	"communicables"
+	],
+"communist":[
+	"communiste",
+	"communistes"
+	],
+"commutative":[
+	"abélien",
+	"abélienne",
+	"abéliennes",
+	"abéliens",
+	"commutatif",
+	"commutatifs",
+	"commutative",
+	"commutatives"
+	],
+"comorian":[
+	"comorien",
+	"comorienne",
+	"comoriennes",
+	"comoriens"
+	],
+"compact":[
+	"compact",
+	"compacte",
+	"compactes",
+	"compacts"
+	],
+"comparable":[
+	"comparable",
+	"comparables"
+	],
+"comparative":[
+	"comparatif",
+	"comparatifs",
+	"comparative",
+	"comparatives"
+	],
+"compassionate":[
+	"compatissant",
+	"compatissante",
+	"compatissantes",
+	"compatissants"
+	],
+"compatible":[
+	"compatible",
+	"compatibles"
+	],
+"competent":[
+	"compétent",
+	"compétente",
+	"compétentes",
+	"compétents"
+	],
+"competitive":[
+	"compétitif",
+	"compétitifs",
+	"compétitive",
+	"compétitives"
+	],
+"complacent":[
+	"suffisant",
+	"suffisante",
+	"suffisantes",
+	"suffisants"
+	],
+"complementary":[
+	"complémentaire",
+	"complémentaires"
+	],
+"complete":[
+	"complet",
+	"complets",
+	"complète",
+	"complètes"
+	],
+"completed":[
+	"accompli",
+	"accomplie",
+	"accomplies",
+	"accomplis"
+	],
+"complex":[
+	"complexe",
+	"complexes"
+	],
+"compliant":[
+	"accommodant",
+	"accommodante",
+	"accommodantes",
+	"accommodants",
+	"conforme",
+	"conformes",
+	"docile",
+	"dociles",
+	"obéissant",
+	"obéissante",
+	"obéissantes",
+	"obéissants"
+	],
+"complicated":[
+	"alambiqué",
+	"alambiquée",
+	"alambiquées",
+	"alambiqués",
+	"compliqué",
+	"compliquée",
+	"compliquées",
+	"compliqués"
+	],
+"complicit":[
+	"complice",
+	"complices"
+	],
+"complimentary":[
+	"flatteur",
+	"flatteurs",
+	"flatteuse",
+	"flatteuses",
+	"gratuit",
+	"gratuite",
+	"gratuites",
+	"gratuits",
+	"laudatif",
+	"laudatifs",
+	"laudative",
+	"laudatives"
+	],
+"composed":[
+	"calme",
+	"calmes"
+	],
+"composite":[
+	"composé",
+	"composée",
+	"composées",
+	"composés"
+	],
+"compound":[
+	"composé",
+	"composée",
+	"composées",
+	"composés"
+	],
+"comprehensible":[
+	"compréhensible",
+	"compréhensibles"
+	],
+"comprehensive":[
+	"complet",
+	"complets",
+	"complète",
+	"complètes",
+	"exhaustif",
+	"exhaustifs",
+	"exhaustive",
+	"exhaustives"
+	],
+"compromissorial":[
+	"compromissoire",
+	"compromissoires"
+	],
+"compulsory":[
+	"obligatoire",
+	"obligatoires"
+	],
+"computational":[
+	"informatique",
+	"informatiques"
+	],
+"concave":[
+	"concave",
+	"concaves"
+	],
+"conceited":[
+	"narcissique",
+	"narcissiques",
+	"orgueilleuse",
+	"orgueilleuses",
+	"orgueilleux",
+	"prétentieuse",
+	"prétentieuses",
+	"prétentieux",
+	"suffisant",
+	"suffisante",
+	"suffisantes",
+	"suffisants",
+	"vain",
+	"vaine",
+	"vaines",
+	"vains",
+	"vaniteuse",
+	"vaniteuses",
+	"vaniteux"
+	],
+"conceivable":[
+	"concevable",
+	"concevables",
+	"imaginable",
+	"imaginables",
+	"pensable",
+	"pensables"
+	],
+"concentrated":[
+	"concentré",
+	"concentrée",
+	"concentrées",
+	"concentrés"
+	],
+"concentric":[
+	"concentrique",
+	"concentriques"
+	],
+"conceptual":[
+	"conceptuel",
+	"conceptuelle",
+	"conceptuelles",
+	"conceptuels"
+	],
+"concerned":[
+	"inquiet",
+	"inquiets",
+	"inquiète",
+	"inquiètes",
+	"préoccupé",
+	"préoccupée",
+	"préoccupées",
+	"préoccupés"
+	],
+"conciliatory":[
+	"accommodant",
+	"accommodante",
+	"accommodantes",
+	"accommodants"
+	],
+"concise":[
+	"concis",
+	"concise",
+	"concises"
+	],
+"conclusive":[
+	"concluant",
+	"concluante",
+	"concluantes",
+	"concluants"
+	],
+"concomitant":[
+	"concomitant",
+	"concomitante",
+	"concomitantes",
+	"concomitants"
+	],
+"concordant":[
+	"concordant",
+	"concordante",
+	"concordantes",
+	"concordants"
+	],
+"concrete":[
+	"concret",
+	"concrets",
+	"concrète",
+	"concrètes"
+	],
+"concurrent":[
+	"concomitant",
+	"concomitante",
+	"concomitantes",
+	"concomitants",
+	"contemporain",
+	"contemporaine",
+	"contemporaines",
+	"contemporains",
+	"parallèle",
+	"parallèles",
+	"simultané",
+	"simultanée",
+	"simultanées",
+	"simultanés"
+	],
+"condescending":[
+	"condescendant",
+	"condescendante",
+	"condescendantes",
+	"condescendants"
+	],
+"conditional":[
+	"conditionnel",
+	"conditionnelle",
+	"conditionnelles",
+	"conditionnels"
+	],
+"conducive":[
+	"favorable",
+	"favorables"
+	],
+"conductive":[
+	"conducteur",
+	"conducteurs",
+	"conductrice",
+	"conductrices"
+	],
+"confederal":[
+	"confédéral",
+	"confédérale",
+	"confédérales",
+	"confédéraux"
+	],
+"confident":[
+	"confiant",
+	"confiante",
+	"confiantes",
+	"confiants",
+	"sûr",
+	"sûre",
+	"sûres",
+	"sûrs"
+	],
+"confidential":[
+	"confidentiel",
+	"confidentielle",
+	"confidentielles",
+	"confidentiels"
+	],
+"conformable":[
+	"conforme",
+	"conformes"
+	],
+"conformal":[
+	"conforme",
+	"conformes"
+	],
+"conformant":[
+	"conforme",
+	"conformes"
+	],
+"confucian":[
+	"confucéen",
+	"confucéenne",
+	"confucéennes",
+	"confucéens"
+	],
+"confused":[
+	"confus",
+	"confuse",
+	"confuses",
+	"embrouillé",
+	"embrouillée",
+	"embrouillées",
+	"embrouillés",
+	"incohérent",
+	"incohérente",
+	"incohérentes",
+	"incohérents"
+	],
+"confusing":[
+	"complexe",
+	"complexes",
+	"déroutant",
+	"déroutante",
+	"déroutantes",
+	"déroutants"
+	],
+"congenial":[
+	"agréable",
+	"agréables",
+	"semblable",
+	"semblables",
+	"sympathique",
+	"sympathiques"
+	],
+"congenital":[
+	"congénital",
+	"congénitale",
+	"congénitales",
+	"congénitaux"
+	],
+"congolese":[
+	"congolais",
+	"congolaise",
+	"congolaises"
+	],
+"congruent":[
+	"conforme",
+	"conformes",
+	"congru",
+	"congrue",
+	"congrues",
+	"congrus",
+	"convenable",
+	"convenables"
+	],
+"congruous":[
+	"congru",
+	"congrue",
+	"congrues",
+	"congrus"
+	],
+"conical":[
+	"conique",
+	"coniques"
+	],
+"conjectural":[
+	"conjectural",
+	"conjecturale",
+	"conjecturales",
+	"conjecturaux"
+	],
+"conjugal":[
+	"conjugal",
+	"conjugale",
+	"conjugales",
+	"conjugaux"
+	],
+"conjunctive":[
+	"conjonctif",
+	"conjonctifs",
+	"conjonctive",
+	"conjonctives"
+	],
+"connected":[
+	"connexe",
+	"connexes"
+	],
+"connotative":[
+	"connotatif",
+	"connotatifs",
+	"connotative",
+	"connotatives"
+	],
+"consanguineous":[
+	"consanguin",
+	"consanguine",
+	"consanguines",
+	"consanguins"
+	],
+"conscientious":[
+	"consciencieuse",
+	"consciencieuses",
+	"consciencieux"
+	],
+"conscious":[
+	"conscient",
+	"consciente",
+	"conscientes",
+	"conscients"
+	],
+"consecutive":[
+	"consécutif",
+	"consécutifs",
+	"consécutive",
+	"consécutives"
+	],
+"conservative":[
+	"conservateur",
+	"conservateurs",
+	"conservatrice",
+	"conservatrices",
+	"prudent",
+	"prudente",
+	"prudentes",
+	"prudents"
+	],
+"considerable":[
+	"considérable",
+	"considérables"
+	],
+"considerate":[
+	"attentif",
+	"attentifs",
+	"attentionné",
+	"attentionnée",
+	"attentionnées",
+	"attentionnés",
+	"attentive",
+	"attentives",
+	"circonspect",
+	"circonspecte",
+	"circonspectes",
+	"circonspects",
+	"prévenant",
+	"prévenante",
+	"prévenantes",
+	"prévenants"
+	],
+"consistent":[
+	"cohérent",
+	"cohérente",
+	"cohérentes",
+	"cohérents",
+	"conforme",
+	"conformes",
+	"constant",
+	"constante",
+	"constantes",
+	"constants"
+	],
+"consolable":[
+	"consolable",
+	"consolables"
+	],
+"consonant":[
+	"consonant",
+	"consonante",
+	"consonantes",
+	"consonants"
+	],
+"consonantal":[
+	"consonantique",
+	"consonantiques"
+	],
+"conspicuous":[
+	"remarquable",
+	"remarquables",
+	"visible",
+	"visibles",
+	"voyant",
+	"voyante",
+	"voyantes",
+	"voyants"
+	],
+"constant":[
+	"constant",
+	"constante",
+	"constantes",
+	"constants"
+	],
+"constipated":[
+	"constipé",
+	"constipée",
+	"constipées",
+	"constipés"
+	],
+"constituent":[
+	"constituant",
+	"constituante",
+	"constituantes",
+	"constituants"
+	],
+"constitutional":[
+	"constitutionnel",
+	"constitutionnelle",
+	"constitutionnelles",
+	"constitutionnels"
+	],
+"constitutive":[
+	"constitutif",
+	"constitutifs",
+	"constitutive",
+	"constitutives"
+	],
+"constructible":[
+	"constructible",
+	"constructibles"
+	],
+"constructive":[
+	"constructif",
+	"constructifs",
+	"constructive",
+	"constructives",
+	"implicite",
+	"implicites"
+	],
+"consular":[
+	"consulaire",
+	"consulaires"
+	],
+"consummate":[
+	"consommé",
+	"consommée",
+	"consommées",
+	"consommés"
+	],
+"contagious":[
+	"contagieuse",
+	"contagieuses",
+	"contagieux"
+	],
+"contemporaneous":[
+	"contemporain",
+	"contemporaine",
+	"contemporaines",
+	"contemporains"
+	],
+"contemporary":[
+	"contemporain",
+	"contemporaine",
+	"contemporaines",
+	"contemporains"
+	],
+"contemptible":[
+	"méprisable",
+	"méprisables"
+	],
+"contemptuous":[
+	"dédaigneuse",
+	"dédaigneuses",
+	"dédaigneux",
+	"méprisant",
+	"méprisante",
+	"méprisantes",
+	"méprisants"
+	],
+"content":[
+	"content",
+	"contente",
+	"contentes",
+	"contents"
+	],
+"contentious":[
+	"agressif",
+	"agressifs",
+	"agressive",
+	"agressives",
+	"bagarreur",
+	"bagarreurs",
+	"bagarreuse",
+	"bagarreuses",
+	"batailleur",
+	"batailleurs",
+	"batailleuse",
+	"batailleuses",
+	"belliqueuse",
+	"belliqueuses",
+	"belliqueux",
+	"chamailleur",
+	"chamailleurs",
+	"chamailleuse",
+	"chamailleuses",
+	"combatif",
+	"combatifs",
+	"combative",
+	"combatives",
+	"controversé",
+	"controversée",
+	"controversées",
+	"controversés",
+	"provocateur",
+	"provocateurs",
+	"provocatrice",
+	"provocatrices",
+	"querelleur",
+	"querelleurs",
+	"querelleuse",
+	"querelleuses"
+	],
+"contestable":[
+	"contestable",
+	"contestables"
+	],
+"contextual":[
+	"contextuel",
+	"contextuelle",
+	"contextuelles",
+	"contextuels"
+	],
+"contiguous":[
+	"adjacent",
+	"adjacente",
+	"adjacentes",
+	"adjacents",
+	"attenant",
+	"attenante",
+	"attenantes",
+	"attenants",
+	"contigu",
+	"contigus",
+	"contiguë",
+	"contiguës",
+	"continu",
+	"continue",
+	"continues",
+	"continus",
+	"voisin",
+	"voisine",
+	"voisines",
+	"voisins"
+	],
+"continental":[
+	"continental",
+	"continentale",
+	"continentales",
+	"continentaux"
+	],
+"contingent":[
+	"contingent",
+	"contingente",
+	"contingentes",
+	"contingents",
+	"hypothétique",
+	"hypothétiques",
+	"éventuel",
+	"éventuelle",
+	"éventuelles",
+	"éventuels"
+	],
+"continued":[
+	"continu",
+	"continue",
+	"continues",
+	"continus"
+	],
+"continuous":[
+	"continu",
+	"continue",
+	"continuel",
+	"continuelle",
+	"continuelles",
+	"continuels",
+	"continues",
+	"continus"
+	],
+"contraceptive":[
+	"contraceptif",
+	"contraceptifs",
+	"contraceptive",
+	"contraceptives"
+	],
+"contractual":[
+	"contractuel",
+	"contractuelle",
+	"contractuelles",
+	"contractuels"
+	],
+"contradictory":[
+	"contradictoire",
+	"contradictoires"
+	],
+"contrarious":[
+	"contraire",
+	"contraires"
+	],
+"contrite":[
+	"contrit",
+	"contrite",
+	"contrites",
+	"contrits"
+	],
+"contrived":[
+	"affecté",
+	"affectée",
+	"affectées",
+	"affectés",
+	"artificiel",
+	"artificielle",
+	"artificielles",
+	"artificiels"
+	],
+"controllable":[
+	"contrôlable",
+	"contrôlables"
+	],
+"controversial":[
+	"controversé",
+	"controversée",
+	"controversées",
+	"controversés"
+	],
+"contumelious":[
+	"contempteur",
+	"contempteurs",
+	"contemptrice",
+	"contemptrices",
+	"dédaigneuse",
+	"dédaigneuses",
+	"dédaigneux",
+	"insolent",
+	"insolente",
+	"insolentes",
+	"insolents",
+	"irrespectueuse",
+	"irrespectueuses",
+	"irrespectueux",
+	"méprisant",
+	"méprisante",
+	"méprisantes",
+	"méprisants"
+	],
+"convenient":[
+	"commode",
+	"commodes"
+	],
+"conventional":[
+	"conventionnel",
+	"conventionnelle",
+	"conventionnelles",
+	"conventionnels"
+	],
+"convertible":[
+	"convertible",
+	"convertibles"
+	],
+"convex":[
+	"convexe",
+	"convexes"
+	],
+"convincing":[
+	"convaincant",
+	"convaincante",
+	"convaincantes",
+	"convaincants",
+	"probant",
+	"probante",
+	"probantes",
+	"probants"
+	],
+"convoluted":[
+	"alambiqué",
+	"alambiquée",
+	"alambiquées",
+	"alambiqués",
+	"compliqué",
+	"compliquée",
+	"compliquées",
+	"compliqués",
+	"tortueuse",
+	"tortueuses",
+	"tortueux"
+	],
+"convulsive":[
+	"convulsif",
+	"convulsifs",
+	"convulsive",
+	"convulsives"
+	],
+"cooked":[
+	"cuit",
+	"cuite",
+	"cuites",
+	"cuits"
+	],
+"cool":[
+	"chouette",
+	"chouettes",
+	"cool",
+	"frais",
+	"fraîche",
+	"fraîches",
+	"sympa",
+	"sympas"
+	],
+"cooperative":[
+	"coopératif",
+	"coopératifs",
+	"coopérative",
+	"coopératives"
+	],
+"copacetic":[
+	"extra",
+	"génial",
+	"géniale",
+	"géniales",
+	"géniaux",
+	"super"
+	],
+"coplanar":[
+	"coplanaire",
+	"coplanaires"
+	],
+"copper":[
+	"cuivré",
+	"cuivrée",
+	"cuivrées",
+	"cuivrés"
+	],
+"coptic":[
+	"copte",
+	"coptes"
+	],
+"cordoban":[
+	"cordouan",
+	"cordouane",
+	"cordouanes",
+	"cordouans"
+	],
+"corfiot":[
+	"corfiote",
+	"corfiotes"
+	],
+"corky":[
+	"bouchonné",
+	"bouchonnée",
+	"bouchonnées",
+	"bouchonnés"
+	],
+"cornelian":[
+	"cornélien",
+	"cornélienne",
+	"cornéliennes",
+	"cornéliens"
+	],
+"corny":[
+	"banal",
+	"banale",
+	"banales",
+	"banals",
+	"banaux",
+	"dégoulinant",
+	"dégoulinante",
+	"dégoulinantes",
+	"dégoulinants",
+	"sirupeuse",
+	"sirupeuses",
+	"sirupeux"
+	],
+"corporate":[
+	"corporatif",
+	"corporatifs",
+	"corporative",
+	"corporatives"
+	],
+"corpulent":[
+	"corpulent",
+	"corpulente",
+	"corpulentes",
+	"corpulents"
+	],
+"correct":[
+	"correct",
+	"correcte",
+	"correctes",
+	"corrects"
+	],
+"corresponding":[
+	"correspondant",
+	"correspondante",
+	"correspondantes",
+	"correspondants"
+	],
+"corrupt":[
+	"corrompu",
+	"corrompue",
+	"corrompues",
+	"corrompus",
+	"dévoyé",
+	"dévoyée",
+	"dévoyées",
+	"dévoyés"
+	],
+"corrupted":[
+	"corrompu",
+	"corrompue",
+	"corrompues",
+	"corrompus"
+	],
+"corruptible":[
+	"corruptible",
+	"corruptibles"
+	],
+"corsican":[
+	"corse",
+	"corses"
+	],
+"cosmic":[
+	"cosmique",
+	"cosmiques"
+	],
+"cosmopolitan":[
+	"cosmopolite",
+	"cosmopolites"
+	],
+"costal":[
+	"costal",
+	"costale",
+	"costales",
+	"costaux"
+	],
+"costly":[
+	"coûteuse",
+	"coûteuses",
+	"coûteux",
+	"lourd",
+	"lourde",
+	"lourdes",
+	"lourds"
+	],
+"cosy":[
+	"douillet",
+	"douillets",
+	"douillette",
+	"douillettes",
+	"peinard",
+	"peinarde",
+	"peinardes",
+	"peinards"
+	],
+"coterminous":[
+	"limitrophe",
+	"limitrophes"
+	],
+"countable":[
+	"dénombrable",
+	"dénombrables"
+	],
+"counterfeit":[
+	"contrefait",
+	"contrefaite",
+	"contrefaites",
+	"contrefaits"
+	],
+"counterrevolutionary":[
+	"contre-révolutionnaire",
+	"contre-révolutionnaires"
+	],
+"countless":[
+	"incalculable",
+	"incalculables",
+	"innombrable",
+	"innombrables"
+	],
+"courageous":[
+	"brave",
+	"braves"
+	],
+"courteous":[
+	"courtois",
+	"courtoise",
+	"courtoises",
+	"poli",
+	"polie",
+	"polies",
+	"polis"
+	],
+"couth":[
+	"raffiné",
+	"raffinée",
+	"raffinées",
+	"raffinés"
+	],
+"covered":[
+	"couvert",
+	"couverte",
+	"couvertes",
+	"couverts"
+	],
+"covetous":[
+	"avare",
+	"avares"
+	],
+"cowardly":[
+	"bas",
+	"basse",
+	"basses",
+	"lâche",
+	"lâches",
+	"veule",
+	"veules"
+	],
+"coy":[
+	"timide",
+	"timides"
+	],
+"crackpot":[
+	"louf",
+	"loufoque",
+	"loufoques",
+	"loufs",
+	"louftingue",
+	"louftingues"
+	],
+"cramped":[
+	"bondé",
+	"bondée",
+	"bondées",
+	"bondés",
+	"contracté",
+	"contractée",
+	"contractées",
+	"contractés"
+	],
+"cranial":[
+	"crânien",
+	"crânienne",
+	"crâniennes",
+	"crâniens"
+	],
+"cranked":[
+	"coudé",
+	"coudée",
+	"coudées",
+	"coudés"
+	],
+"cranky":[
+	"chafouin",
+	"chafouine",
+	"chafouines",
+	"chafouins",
+	"grincheuse",
+	"grincheuses",
+	"grincheux"
+	],
+"crass":[
+	"crasse",
+	"crasses",
+	"grossier",
+	"grossiers",
+	"grossière",
+	"grossières"
+	],
+"craven":[
+	"lâche",
+	"lâches"
+	],
+"crazed":[
+	"forcené",
+	"forcenée",
+	"forcenées",
+	"forcenés"
+	],
+"crazy":[
+	"dingo",
+	"dingos",
+	"dérangé",
+	"dérangée",
+	"dérangées",
+	"dérangés",
+	"fol",
+	"folle",
+	"folles",
+	"fou",
+	"fous"
+	],
+"creaky":[
+	"grinçant",
+	"grinçante",
+	"grinçantes",
+	"grinçants",
+	"gémissant",
+	"gémissante",
+	"gémissantes",
+	"gémissants"
+	],
+"cream":[
+	"crème"
+	],
+"creamy":[
+	"crème",
+	"crémeuse",
+	"crémeuses",
+	"crémeux"
+	],
+"creative":[
+	"créatif",
+	"créatifs",
+	"créative",
+	"créatives"
+	],
+"credible":[
+	"crédible",
+	"crédibles"
+	],
+"credulous":[
+	"crédule",
+	"crédules"
+	],
+"creepy":[
+	"angoissant",
+	"angoissante",
+	"angoissantes",
+	"angoissants"
+	],
+"crepuscular":[
+	"crépusculaire",
+	"crépusculaires"
+	],
+"crestfallen":[
+	"abattu",
+	"abattue",
+	"abattues",
+	"abattus",
+	"déçu",
+	"déçue",
+	"déçues",
+	"déçus"
+	],
+"cretaceous":[
+	"crayeuse",
+	"crayeuses",
+	"crayeux",
+	"crétacé",
+	"crétacée",
+	"crétacées",
+	"crétacés"
+	],
+"cretan":[
+	"crétois",
+	"crétoise",
+	"crétoises"
+	],
+"criminal":[
+	"criminel",
+	"criminelle",
+	"criminelles",
+	"criminels"
+	],
+"crimson":[
+	"cramoisi",
+	"cramoisie",
+	"cramoisies",
+	"cramoisis"
+	],
+"crippled":[
+	"estropié",
+	"estropiée",
+	"estropiées",
+	"estropiés"
+	],
+"crisp":[
+	"croquant",
+	"croquante",
+	"croquantes",
+	"croquants",
+	"croustillant",
+	"croustillante",
+	"croustillantes",
+	"croustillants",
+	"net",
+	"nets",
+	"nette",
+	"nettes"
+	],
+"critical":[
+	"critique",
+	"critiques"
+	],
+"croatian":[
+	"croate",
+	"croates"
+	],
+"crooked":[
+	"courbé",
+	"courbée",
+	"courbées",
+	"courbés",
+	"tortueuse",
+	"tortueuses",
+	"tortueux"
+	],
+"cross":[
+	"contraire",
+	"contraires",
+	"contrarié",
+	"contrariée",
+	"contrariées",
+	"contrariés",
+	"fâché",
+	"fâchée",
+	"fâchées",
+	"fâchés",
+	"transversal",
+	"transversale",
+	"transversales",
+	"transversaux"
+	],
+"crossbred":[
+	"croisé",
+	"croisée",
+	"croisées",
+	"croisés"
+	],
+"crowded":[
+	"bondé",
+	"bondée",
+	"bondées",
+	"bondés"
+	],
+"crucial":[
+	"crucial",
+	"cruciale",
+	"cruciales",
+	"cruciaux"
+	],
+"cruciform":[
+	"cruciforme",
+	"cruciformes"
+	],
+"crude":[
+	"brut",
+	"brute",
+	"brutes",
+	"bruts",
+	"cru",
+	"crue",
+	"crues",
+	"crus",
+	"vulgaire",
+	"vulgaires"
+	],
+"cruel":[
+	"cruel",
+	"cruelle",
+	"cruelles",
+	"cruels"
+	],
+"crunchy":[
+	"croquant",
+	"croquante",
+	"croquantes",
+	"croquants"
+	],
+"crushed":[
+	"déprimé",
+	"déprimée",
+	"déprimées",
+	"déprimés"
+	],
+"crushing":[
+	"écrasant",
+	"écrasante",
+	"écrasantes",
+	"écrasants"
+	],
+"cryptic":[
+	"mystérieuse",
+	"mystérieuses",
+	"mystérieux",
+	"énigmatique",
+	"énigmatiques"
+	],
+"crystalline":[
+	"cristallin",
+	"cristalline",
+	"cristallines",
+	"cristallins"
+	],
+"cuban":[
+	"cubain",
+	"cubaine",
+	"cubaines",
+	"cubains"
+	],
+"cubic":[
+	"cube",
+	"cubes",
+	"cubique",
+	"cubiques"
+	],
+"cuddly":[
+	"câlin",
+	"câline",
+	"câlines",
+	"câlins"
+	],
+"culinary":[
+	"culinaire",
+	"culinaires"
+	],
+"culpable":[
+	"coupable",
+	"coupables"
+	],
+"cult":[
+	"culte",
+	"cultes"
+	],
+"cultivable":[
+	"cultivable",
+	"cultivables"
+	],
+"cultivated":[
+	"cultivé",
+	"cultivée",
+	"cultivées",
+	"cultivés"
+	],
+"cultural":[
+	"culturel",
+	"culturelle",
+	"culturelles",
+	"culturels"
+	],
+"cultured":[
+	"cultivé",
+	"cultivée",
+	"cultivées",
+	"cultivés"
+	],
+"cumbersome":[
+	"encombrant",
+	"encombrante",
+	"encombrantes",
+	"encombrants",
+	"fastidieuse",
+	"fastidieuses",
+	"fastidieux",
+	"lent",
+	"lente",
+	"lentes",
+	"lents",
+	"lourd",
+	"lourde",
+	"lourdes",
+	"lourds",
+	"pénible",
+	"pénibles"
+	],
+"cuneiform":[
+	"cunéiforme",
+	"cunéiformes"
+	],
+"cunning":[
+	"astucieuse",
+	"astucieuses",
+	"astucieux",
+	"maligne",
+	"malignes",
+	"malin",
+	"malins",
+	"talentueuse",
+	"talentueuses",
+	"talentueux"
+	],
+"cupric":[
+	"cuprique",
+	"cupriques"
+	],
+"curious":[
+	"curieuse",
+	"curieuses",
+	"curieux"
+	],
+"curly":[
+	"bouclé",
+	"bouclée",
+	"bouclées",
+	"bouclés",
+	"courbe",
+	"courbes",
+	"courbé",
+	"courbée",
+	"courbées",
+	"courbés",
+	"frisé",
+	"frisée",
+	"frisées",
+	"frisés"
+	],
+"current":[
+	"actuel",
+	"actuelle",
+	"actuelles",
+	"actuels",
+	"courant",
+	"courante",
+	"courantes",
+	"courants",
+	"présent",
+	"présente",
+	"présentes",
+	"présents"
+	],
+"cursive":[
+	"cursif",
+	"cursifs",
+	"cursive",
+	"cursives"
+	],
+"cursory":[
+	"rapide",
+	"rapides",
+	"superficiel",
+	"superficielle",
+	"superficielles",
+	"superficiels"
+	],
+"curt":[
+	"abrupt",
+	"abrupte",
+	"abruptes",
+	"abrupts",
+	"sommaire",
+	"sommaires"
+	],
+"curvaceous":[
+	"plantureuse",
+	"plantureuses",
+	"plantureux",
+	"pulpeuse",
+	"pulpeuses",
+	"pulpeux"
+	],
+"curved":[
+	"courbé",
+	"courbée",
+	"courbées",
+	"courbés"
+	],
+"customary":[
+	"coutumier",
+	"coutumiers",
+	"coutumière",
+	"coutumières",
+	"habituel",
+	"habituelle",
+	"habituelles",
+	"habituels"
+	],
+"cut":[
+	"coupé",
+	"coupée",
+	"coupées",
+	"coupés"
+	],
+"cutaneous":[
+	"cutané",
+	"cutanée",
+	"cutanées",
+	"cutanés",
+	"dermatologique",
+	"dermatologiques",
+	"épidermique",
+	"épidermiques"
+	],
+"cute":[
+	"joli",
+	"jolie",
+	"jolies",
+	"jolis"
+	],
+"cybernetic":[
+	"cybernétique",
+	"cybernétiques"
+	],
+"cycloid":[
+	"cycloïdal",
+	"cycloïdale",
+	"cycloïdales",
+	"cycloïdaux",
+	"cycloïde",
+	"cycloïdes"
+	],
+"cylindrical":[
+	"cylindrique",
+	"cylindriques"
+	],
+"cynical":[
+	"cynique",
+	"cyniques"
+	],
+"cypriot":[
+	"chypriote",
+	"chypriotes"
+	],
+"cyrillic":[
+	"cyrillique",
+	"cyrilliques"
+	],
+"cystic":[
+	"kystique",
+	"kystiques"
+	],
+"cytogenetic":[
+	"cytogénétique",
+	"cytogénétiques"
+	],
+"cytological":[
+	"cytologique",
+	"cytologiques"
+	],
+"cytoplasmic":[
+	"cytoplasmique",
+	"cytoplasmiques"
+	],
+"czech":[
+	"tchèque",
+	"tchèques"
+	],
+"czechoslovak":[
+	"tchécoslovaque",
+	"tchécoslovaques"
+	],
+"czechoslovakian":[
+	"tchécoslovaque",
+	"tchécoslovaques"
+	],
+"dactylic":[
+	"dactylique",
+	"dactyliques"
+	],
+"daft":[
+	"branque",
+	"branques",
+	"cinglé",
+	"cinglée",
+	"cinglées",
+	"cinglés",
+	"dingue",
+	"dingues"
+	],
+"daily":[
+	"diurne",
+	"diurnes",
+	"journalier",
+	"journaliers",
+	"journalière",
+	"journalières",
+	"quotidien",
+	"quotidienne",
+	"quotidiennes",
+	"quotidiens"
+	],
+"dainty":[
+	"délicat",
+	"délicate",
+	"délicates",
+	"délicats"
+	],
+"dalmatian":[
+	"dalmate",
+	"dalmates"
+	],
+"damn":[
+	"foutu",
+	"foutue",
+	"foutues",
+	"foutus"
+	],
+"damned":[
+	"foutu",
+	"foutue",
+	"foutues",
+	"foutus"
+	],
+"damp":[
+	"humide",
+	"humides",
+	"moite",
+	"moites"
+	],
+"damped":[
+	"amorti",
+	"amortie",
+	"amorties",
+	"amortis"
+	],
+"dangerous":[
+	"dangereuse",
+	"dangereuses",
+	"dangereux",
+	"périlleuse",
+	"périlleuses",
+	"périlleux"
+	],
+"danish":[
+	"danois",
+	"danoise",
+	"danoises"
+	],
+"dank":[
+	"fort",
+	"forte",
+	"fortes",
+	"forts"
+	],
+"dantean":[
+	"dantesque",
+	"dantesques"
+	],
+"dantesque":[
+	"dantesque",
+	"dantesques"
+	],
+"dapper":[
+	"chic",
+	"chic",
+	"chics"
+	],
+"daring":[
+	"audacieuse",
+	"audacieuses",
+	"audacieux",
+	"courageuse",
+	"courageuses",
+	"courageux",
+	"hardi",
+	"hardie",
+	"hardies",
+	"hardis",
+	"téméraire",
+	"téméraires"
+	],
+"dark":[
+	"foncé",
+	"foncée",
+	"foncées",
+	"foncés",
+	"obscur",
+	"obscure",
+	"obscures",
+	"obscurs",
+	"sombre",
+	"sombres"
+	],
+"darling":[
+	"chéri",
+	"chérie",
+	"chéries",
+	"chéris"
+	],
+"dashing":[
+	"fringant",
+	"fringante",
+	"fringantes",
+	"fringants"
+	],
+"dated":[
+	"anachronique",
+	"anachroniques",
+	"démodé",
+	"démodée",
+	"démodées",
+	"démodés"
+	],
+"dative":[
+	"datif",
+	"datifs",
+	"dative",
+	"datives"
+	],
+"daunting":[
+	"colossal",
+	"colossale",
+	"colossales",
+	"colossaux",
+	"décourageant",
+	"décourageante",
+	"décourageantes",
+	"décourageants",
+	"intimidant",
+	"intimidante",
+	"intimidantes",
+	"intimidants",
+	"monumental",
+	"monumentale",
+	"monumentales",
+	"monumentaux",
+	"titanesque",
+	"titanesques"
+	],
+"dazed":[
+	"abasourdi",
+	"abasourdie",
+	"abasourdies",
+	"abasourdis"
+	],
+"dead":[
+	"mort",
+	"morte",
+	"mortes",
+	"morts"
+	],
+"deadly":[
+	"fatal",
+	"fatale",
+	"fatales",
+	"fatals",
+	"mortel",
+	"mortelle",
+	"mortelles",
+	"mortels"
+	],
+"deaf":[
+	"sourd",
+	"sourde",
+	"sourdes",
+	"sourds"
+	],
+"deafening":[
+	"assourdissant",
+	"assourdissante",
+	"assourdissantes",
+	"assourdissants"
+	],
+"dear":[
+	"cher",
+	"chers",
+	"chère",
+	"chères"
+	],
+"debatable":[
+	"discutable",
+	"discutables"
+	],
+"debauched":[
+	"débauché",
+	"débauchée",
+	"débauchées",
+	"débauchés"
+	],
+"debaucherous":[
+	"débauché",
+	"débauchée",
+	"débauchées",
+	"débauchés"
+	],
+"decadent":[
+	"décadent",
+	"décadente",
+	"décadentes",
+	"décadents"
+	],
+"decaffeinated":[
+	"décaféiné",
+	"décaféinée",
+	"décaféinées",
+	"décaféinés"
+	],
+"decapitated":[
+	"décolleté",
+	"décolletée",
+	"décolletées",
+	"décolletés"
+	],
+"deceitful":[
+	"trompeur",
+	"trompeurs",
+	"trompeuse",
+	"trompeuses"
+	],
+"decent":[
+	"décent",
+	"décente",
+	"décentes",
+	"décents",
+	"intègre",
+	"intègres",
+	"substantiel",
+	"substantielle",
+	"substantielles",
+	"substantiels"
+	],
+"deceptive":[
+	"illusoire",
+	"illusoires",
+	"mensonger",
+	"mensongers",
+	"mensongère",
+	"mensongères",
+	"trompeur",
+	"trompeurs",
+	"trompeuse",
+	"trompeuses"
+	],
+"decided":[
+	"décidé",
+	"décidée",
+	"décidées",
+	"décidés"
+	],
+"deciduous":[
+	"caduc",
+	"caducs",
+	"caduque",
+	"caduques",
+	"décidual",
+	"déciduale",
+	"déciduales",
+	"déciduaux"
+	],
+"decimal":[
+	"décimal",
+	"décimale",
+	"décimales",
+	"décimaux"
+	],
+"decipherable":[
+	"déchiffrable",
+	"déchiffrables"
+	],
+"decisional":[
+	"décisionnel",
+	"décisionnelle",
+	"décisionnelles",
+	"décisionnels"
+	],
+"decisive":[
+	"décidé",
+	"décidée",
+	"décidées",
+	"décidés",
+	"décisif",
+	"décisifs",
+	"décisive",
+	"décisives",
+	"ferme",
+	"fermes"
+	],
+"declarative":[
+	"déclaratif",
+	"déclaratifs",
+	"déclarative",
+	"déclaratives"
+	],
+"declaratory":[
+	"déclaratoire",
+	"déclaratoires"
+	],
+"declinable":[
+	"déclinable",
+	"déclinables"
+	],
+"decollete":[
+	"décolleté",
+	"décolletée",
+	"décolletées",
+	"décolletés"
+	],
+"decrepit":[
+	"décati",
+	"décatie",
+	"décaties",
+	"décatis",
+	"décrépit",
+	"décrépite",
+	"décrépites",
+	"décrépits"
+	],
+"dedicated":[
+	"dévoué",
+	"dévouée",
+	"dévouées",
+	"dévoués"
+	],
+"deduct":[
+	"décompté",
+	"décomptée",
+	"décomptées",
+	"décomptés",
+	"déduit",
+	"déduite",
+	"déduites",
+	"déduits"
+	],
+"deductible":[
+	"déductible",
+	"déductibles"
+	],
+"deductive":[
+	"déductif",
+	"déductifs",
+	"déductive",
+	"déductives"
+	],
+"deep":[
+	"foncé",
+	"foncée",
+	"foncées",
+	"foncés",
+	"grave",
+	"graves",
+	"profond",
+	"profonde",
+	"profondes",
+	"profonds",
+	"épais",
+	"épaisse",
+	"épaisses"
+	],
+"defamatory":[
+	"diffamant",
+	"diffamante",
+	"diffamantes",
+	"diffamants",
+	"diffamatoire",
+	"diffamatoires"
+	],
+"defeatist":[
+	"défaitiste",
+	"défaitistes"
+	],
+"defective":[
+	"défectif",
+	"défectifs",
+	"défective",
+	"défectives",
+	"défectueuse",
+	"défectueuses",
+	"défectueux"
+	],
+"defensive":[
+	"défensif",
+	"défensifs",
+	"défensive",
+	"défensives"
+	],
+"deferential":[
+	"déférent",
+	"déférente",
+	"déférentes",
+	"déférents"
+	],
+"definable":[
+	"définissable",
+	"définissables"
+	],
+"defined":[
+	"défini",
+	"définie",
+	"définies",
+	"définis"
+	],
+"definite":[
+	"défini",
+	"définie",
+	"définies",
+	"définis"
+	],
+"definitional":[
+	"définitionnel",
+	"définitionnelle",
+	"définitionnelles",
+	"définitionnels"
+	],
+"definitive":[
+	"définitif",
+	"définitifs",
+	"définitive",
+	"définitives"
+	],
+"deformed":[
+	"difforme",
+	"difformes"
+	],
+"deft":[
+	"habile",
+	"habiles"
+	],
+"defunct":[
+	"défunt",
+	"défunte",
+	"défuntes",
+	"défunts"
+	],
+"degenerate":[
+	"dégradé",
+	"dégradée",
+	"dégradées",
+	"dégradés",
+	"dégénéré",
+	"dégénérée",
+	"dégénérées",
+	"dégénérés"
+	],
+"degenerative":[
+	"dégénératif",
+	"dégénératifs",
+	"dégénérative",
+	"dégénératives"
+	],
+"dehiscent":[
+	"déhiscent",
+	"déhiscente",
+	"déhiscentes",
+	"déhiscents"
+	],
+"dehydrated":[
+	"déshydraté",
+	"déshydratée",
+	"déshydratées",
+	"déshydratés"
+	],
+"deicidal":[
+	"déicide",
+	"déicides"
+	],
+"deictic":[
+	"déictique",
+	"déictiques"
+	],
+"dejected":[
+	"abattu",
+	"abattue",
+	"abattues",
+	"abattus",
+	"déprimé",
+	"déprimée",
+	"déprimées",
+	"déprimés"
+	],
+"delectable":[
+	"délicieuse",
+	"délicieuses",
+	"délicieux",
+	"savoureuse",
+	"savoureuses",
+	"savoureux"
+	],
+"deleterious":[
+	"délétère",
+	"délétères"
+	],
+"deliberate":[
+	"concerté",
+	"concertée",
+	"concertées",
+	"concertés",
+	"délibéré",
+	"délibérée",
+	"délibérées",
+	"délibérés"
+	],
+"delicate":[
+	"délicat",
+	"délicate",
+	"délicates",
+	"délicats"
+	],
+"delicious":[
+	"délicieuse",
+	"délicieuses",
+	"délicieux",
+	"savoureuse",
+	"savoureuses",
+	"savoureux"
+	],
+"delightful":[
+	"délicieuse",
+	"délicieuses",
+	"délicieux"
+	],
+"deliverable":[
+	"livrable",
+	"livrables"
+	],
+"deltoid":[
+	"deltoïde",
+	"deltoïdes"
+	],
+"demagogic":[
+	"démagogique",
+	"démagogiques"
+	],
+"demanding":[
+	"exigeant",
+	"exigeante",
+	"exigeantes",
+	"exigeants",
+	"éprouvant",
+	"éprouvante",
+	"éprouvantes",
+	"éprouvants"
+	],
+"demented":[
+	"dément",
+	"démente",
+	"démentes",
+	"déments"
+	],
+"democrat":[
+	"démocrate",
+	"démocrates"
+	],
+"democratic":[
+	"démocratique",
+	"démocratiques"
+	],
+"demographic":[
+	"démographique",
+	"démographiques"
+	],
+"demonic":[
+	"démoniaque",
+	"démoniaques"
+	],
+"demonstrative":[
+	"démonstratif",
+	"démonstratifs",
+	"démonstrative",
+	"démonstratives"
+	],
+"demure":[
+	"discret",
+	"discrets",
+	"discrète",
+	"discrètes",
+	"sobre",
+	"sobres",
+	"sérieuse",
+	"sérieuses",
+	"sérieux"
+	],
+"denialist":[
+	"négationniste",
+	"négationnistes"
+	],
+"denominational":[
+	"confessionnel",
+	"confessionnelle",
+	"confessionnelles",
+	"confessionnels"
+	],
+"dense":[
+	"bouché",
+	"bouchée",
+	"bouchées",
+	"bouchés",
+	"dense",
+	"denses",
+	"obscur",
+	"obscure",
+	"obscures",
+	"obscurs"
+	],
+"dental":[
+	"dentaire",
+	"dentaires",
+	"dental",
+	"dentale",
+	"dentales",
+	"dentaux"
+	],
+"dentate":[
+	"dentelé",
+	"dentelée",
+	"dentelées",
+	"dentelés",
+	"denté",
+	"dentée",
+	"dentées",
+	"dentés"
+	],
+"deontological":[
+	"déontologique",
+	"déontologiques"
+	],
+"departmental":[
+	"départemental",
+	"départementale",
+	"départementales",
+	"départementaux"
+	],
+"dependable":[
+	"fiable",
+	"fiables"
+	],
+"dependent":[
+	"dépendant",
+	"dépendante",
+	"dépendantes",
+	"dépendants"
+	],
+"depleted":[
+	"épuisé",
+	"épuisée",
+	"épuisées",
+	"épuisés"
+	],
+"deplorable":[
+	"déplorable",
+	"déplorables",
+	"lamentable",
+	"lamentables",
+	"pitoyable",
+	"pitoyables"
+	],
+"deprecated":[
+	"obsolète",
+	"obsolètes"
+	],
+"depressed":[
+	"dépressif",
+	"dépressifs",
+	"dépressive",
+	"dépressives",
+	"déprimé",
+	"déprimée",
+	"déprimées",
+	"déprimés",
+	"mélancolique",
+	"mélancoliques"
+	],
+"depressing":[
+	"déprimant",
+	"déprimante",
+	"déprimantes",
+	"déprimants"
+	],
+"depressive":[
+	"dépressif",
+	"dépressifs",
+	"dépressive",
+	"dépressives",
+	"déprimant",
+	"déprimante",
+	"déprimantes",
+	"déprimants"
+	],
+"deprived":[
+	"dépouillé",
+	"dépouillée",
+	"dépouillées",
+	"dépouillés"
+	],
+"deranged":[
+	"dérangé",
+	"dérangée",
+	"dérangées",
+	"dérangés"
+	],
+"derelict":[
+	"abandonné",
+	"abandonnée",
+	"abandonnées",
+	"abandonnés",
+	"délaissé",
+	"délaissée",
+	"délaissées",
+	"délaissés",
+	"négligent",
+	"négligente",
+	"négligentes",
+	"négligents"
+	],
+"derisive":[
+	"dérisoire",
+	"dérisoires"
+	],
+"dermal":[
+	"dermique",
+	"dermiques"
+	],
+"dermatological":[
+	"dermatologique",
+	"dermatologiques"
+	],
+"dernier":[
+	"final",
+	"finale",
+	"finales",
+	"finals",
+	"finaux"
+	],
+"derogatory":[
+	"dépréciatif",
+	"dépréciatifs",
+	"dépréciative",
+	"dépréciatives",
+	"péjoratif",
+	"péjoratifs",
+	"péjorative",
+	"péjoratives"
+	],
+"desert":[
+	"désert",
+	"déserte",
+	"désertes",
+	"déserts"
+	],
+"desirable":[
+	"désirable",
+	"désirables",
+	"souhaitable",
+	"souhaitables"
+	],
+"desirous":[
+	"désirant",
+	"désirante",
+	"désirantes",
+	"désirants",
+	"désireuse",
+	"désireuses",
+	"désireux"
+	],
+"despicable":[
+	"abject",
+	"abjecte",
+	"abjectes",
+	"abjects",
+	"détestable",
+	"détestables",
+	"méprisable",
+	"méprisables"
+	],
+"despondent":[
+	"abattu",
+	"abattue",
+	"abattues",
+	"abattus",
+	"déprimé",
+	"déprimée",
+	"déprimées",
+	"déprimés",
+	"triste",
+	"tristes"
+	],
+"despotic":[
+	"despotique",
+	"despotiques"
+	],
+"destroyable":[
+	"destructible",
+	"destructibles"
+	],
+"destructive":[
+	"destructif",
+	"destructifs",
+	"destructive",
+	"destructives"
+	],
+"detachable":[
+	"amovible",
+	"amovibles",
+	"détachable",
+	"détachables"
+	],
+"detailed":[
+	"détaillé",
+	"détaillée",
+	"détaillées",
+	"détaillés"
+	],
+"detectable":[
+	"détectable",
+	"détectables"
+	],
+"determined":[
+	"déterminé",
+	"déterminée",
+	"déterminées",
+	"déterminés",
+	"résolu",
+	"résolue",
+	"résolues",
+	"résolus"
+	],
+"deterministic":[
+	"déterministe",
+	"déterministes"
+	],
+"deterrent":[
+	"dissuasif",
+	"dissuasifs",
+	"dissuasive",
+	"dissuasives"
+	],
+"detersive":[
+	"détersif",
+	"détersifs",
+	"détersive",
+	"détersives"
+	],
+"detrimental":[
+	"nuisible",
+	"nuisibles",
+	"néfaste",
+	"néfastes"
+	],
+"deuterocanonical":[
+	"deutérocanonique",
+	"deutérocanoniques"
+	],
+"devastated":[
+	"dévasté",
+	"dévastée",
+	"dévastées",
+	"dévastés"
+	],
+"developed":[
+	"développé",
+	"développée",
+	"développées",
+	"développés"
+	],
+"deviant":[
+	"déviant",
+	"déviante",
+	"déviantes",
+	"déviants"
+	],
+"devilish":[
+	"diabolique",
+	"diaboliques",
+	"infernal",
+	"infernale",
+	"infernales",
+	"infernaux"
+	],
+"devious":[
+	"roublard",
+	"roublarde",
+	"roublardes",
+	"roublards",
+	"sournois",
+	"sournoise",
+	"sournoises"
+	],
+"devoid":[
+	"dépourvu",
+	"dépourvue",
+	"dépourvues",
+	"dépourvus"
+	],
+"devoted":[
+	"dévoué",
+	"dévouée",
+	"dévouées",
+	"dévoués"
+	],
+"dexterous":[
+	"adroit",
+	"adroite",
+	"adroites",
+	"adroits",
+	"habile",
+	"habiles"
+	],
+"dextrorotatory":[
+	"dextrogyre",
+	"dextrogyres"
+	],
+"diabetic":[
+	"diabétique",
+	"diabétiques"
+	],
+"diabolic":[
+	"diabolique",
+	"diaboliques"
+	],
+"diachronic":[
+	"diachronique",
+	"diachroniques"
+	],
+"diagnostic":[
+	"diagnostique",
+	"diagnostiques"
+	],
+"dialectal":[
+	"dialectal",
+	"dialectale",
+	"dialectales",
+	"dialectaux"
+	],
+"dialectical":[
+	"dialectal",
+	"dialectale",
+	"dialectales",
+	"dialectaux",
+	"dialectique",
+	"dialectiques"
+	],
+"diametral":[
+	"diamétral",
+	"diamétrale",
+	"diamétrales",
+	"diamétraux"
+	],
+"diamondiferous":[
+	"diamantifère",
+	"diamantifères"
+	],
+"diaphanous":[
+	"diaphane",
+	"diaphanes"
+	],
+"diasporic":[
+	"diasporique",
+	"diasporiques"
+	],
+"diastolic":[
+	"diastolique",
+	"diastoliques"
+	],
+"diatomic":[
+	"diatomique",
+	"diatomiques"
+	],
+"diatonic":[
+	"diatonique",
+	"diatoniques"
+	],
+"dicey":[
+	"périlleuse",
+	"périlleuses",
+	"périlleux"
+	],
+"dichroic":[
+	"dichroïque",
+	"dichroïques"
+	],
+"dictatorial":[
+	"dictatorial",
+	"dictatoriale",
+	"dictatoriales",
+	"dictatoriaux"
+	],
+"didactic":[
+	"didactique",
+	"didactiques",
+	"livresque",
+	"livresques"
+	],
+"diehard":[
+	"conservateur",
+	"conservateurs",
+	"conservatrice",
+	"conservatrices",
+	"déterminé",
+	"déterminée",
+	"déterminées",
+	"déterminés",
+	"entier",
+	"entiers",
+	"entière",
+	"entières",
+	"fanatique",
+	"fanatiques",
+	"illuminé",
+	"illuminée",
+	"illuminées",
+	"illuminés",
+	"inflexible",
+	"inflexibles",
+	"intégriste",
+	"intégristes",
+	"inébranlable",
+	"inébranlables",
+	"irréductible",
+	"irréductibles",
+	"réactionnaire",
+	"réactionnaires"
+	],
+"dielectric":[
+	"diélectrique",
+	"diélectriques"
+	],
+"dietary":[
+	"diététique",
+	"diététiques"
+	],
+"dietetic":[
+	"diététique",
+	"diététiques"
+	],
+"different":[
+	"différent",
+	"différente",
+	"différentes",
+	"différents"
+	],
+"differentiable":[
+	"dérivable",
+	"dérivables"
+	],
+"differential":[
+	"différentiel",
+	"différentielle",
+	"différentielles",
+	"différentiels"
+	],
+"difficult":[
+	"difficile",
+	"difficiles"
+	],
+"diffident":[
+	"méfiant",
+	"méfiants",
+	"timide",
+	"timides"
+	],
+"diffuse":[
+	"diffus",
+	"diffuse",
+	"diffuses"
+	],
+"digestible":[
+	"digestible",
+	"digestibles"
+	],
+"digital":[
+	"digital",
+	"digitale",
+	"digitales",
+	"digitaux",
+	"numérique",
+	"numériques"
+	],
+"dignified":[
+	"digne",
+	"dignes"
+	],
+"dilapidated":[
+	"caduc",
+	"caducs",
+	"caduque",
+	"caduques",
+	"délabré",
+	"délabrée",
+	"délabrées",
+	"délabrés",
+	"infirme",
+	"infirmes",
+	"vieil",
+	"vieille",
+	"vieilles",
+	"vieux"
+	],
+"dilatable":[
+	"dilatable",
+	"dilatables"
+	],
+"dilatory":[
+	"dilatoire",
+	"dilatoires"
+	],
+"dilettante":[
+	"dilettante",
+	"dilettantes"
+	],
+"diligent":[
+	"diligent",
+	"diligente",
+	"diligentes",
+	"diligents",
+	"industrieuse",
+	"industrieuses",
+	"industrieux"
+	],
+"dilute":[
+	"faible",
+	"faibles"
+	],
+"diluvial":[
+	"diluvial",
+	"diluviale",
+	"diluviales",
+	"diluviaux"
+	],
+"dim":[
+	"bête",
+	"bêtes",
+	"faible",
+	"faibles",
+	"flou",
+	"floue",
+	"floues",
+	"flous",
+	"indistinct",
+	"indistincte",
+	"indistinctes",
+	"indistincts"
+	],
+"dimensional":[
+	"dimensionnel",
+	"dimensionnelle",
+	"dimensionnelles",
+	"dimensionnels"
+	],
+"diminutive":[
+	"diminutif",
+	"diminutifs",
+	"diminutive",
+	"diminutives",
+	"minuscule",
+	"minuscules"
+	],
+"diocesan":[
+	"diocésain",
+	"diocésaine",
+	"diocésaines",
+	"diocésains"
+	],
+"diploblastic":[
+	"diploblastique",
+	"diploblastiques"
+	],
+"diploid":[
+	"diploïde",
+	"diploïdes"
+	],
+"diplomatic":[
+	"diplomatique",
+	"diplomatiques"
+	],
+"dire":[
+	"extrême",
+	"extrêmes",
+	"funeste",
+	"funestes",
+	"pressant",
+	"pressante",
+	"pressantes",
+	"pressants",
+	"sinistre",
+	"sinistres",
+	"terrible",
+	"terribles"
+	],
+"direct":[
+	"direct",
+	"directe",
+	"directes",
+	"directs"
+	],
+"directable":[
+	"dirigeable",
+	"dirigeables"
+	],
+"directive":[
+	"directif",
+	"directifs",
+	"directive",
+	"directives"
+	],
+"dirigible":[
+	"dirigeable",
+	"dirigeables"
+	],
+"dirty":[
+	"cochon",
+	"cochonne",
+	"cochonnes",
+	"cochons",
+	"sal'",
+	"sale",
+	"sales",
+	"salissant",
+	"salissante",
+	"salissantes",
+	"salissants"
+	],
+"disabled":[
+	"handicapé",
+	"handicapée",
+	"handicapées",
+	"handicapés",
+	"infirme",
+	"infirmes",
+	"invalide",
+	"invalides"
+	],
+"disaffected":[
+	"rebelle",
+	"rebelles"
+	],
+"disappointed":[
+	"déçu",
+	"déçue",
+	"déçues",
+	"déçus"
+	],
+"disappointing":[
+	"décevant",
+	"décevante",
+	"décevantes",
+	"décevants"
+	],
+"disastrous":[
+	"désastreuse",
+	"désastreuses",
+	"désastreux"
+	],
+"discoid":[
+	"discoïde",
+	"discoïdes"
+	],
+"disconcerting":[
+	"troublant",
+	"troublante",
+	"troublantes",
+	"troublants"
+	],
+"disconsolate":[
+	"inconsolable",
+	"inconsolables"
+	],
+"discourteous":[
+	"discourtois",
+	"discourtoise",
+	"discourtoises"
+	],
+"discreet":[
+	"discret",
+	"discrets",
+	"discrète",
+	"discrètes"
+	],
+"discrete":[
+	"distinct",
+	"distincte",
+	"distinctes",
+	"distincts"
+	],
+"discretionary":[
+	"discrétionnaire",
+	"discrétionnaires"
+	],
+"disdainful":[
+	"dédaigneuse",
+	"dédaigneuses",
+	"dédaigneux"
+	],
+"diseased":[
+	"malade",
+	"malades"
+	],
+"disembodied":[
+	"désincarné",
+	"désincarnée",
+	"désincarnées",
+	"désincarnés"
+	],
+"disenfranchised":[
+	"défavorisé",
+	"défavorisée",
+	"défavorisées",
+	"défavorisés"
+	],
+"disgraceful":[
+	"déshonorant",
+	"déshonorante",
+	"déshonorantes",
+	"déshonorants",
+	"honteuse",
+	"honteuses",
+	"honteux",
+	"ignominieuse",
+	"ignominieuses",
+	"ignominieux",
+	"scandaleuse",
+	"scandaleuses",
+	"scandaleux"
+	],
+"disgruntled":[
+	"frustré",
+	"frustrée",
+	"frustrées",
+	"frustrés",
+	"insatisfait",
+	"insatisfaite",
+	"insatisfaites",
+	"insatisfaits",
+	"malheureuse",
+	"malheureuses",
+	"malheureux",
+	"mécontent",
+	"mécontente",
+	"mécontentes",
+	"mécontents"
+	],
+"disgusting":[
+	"dégoûtant",
+	"dégoûtante",
+	"dégoûtantes",
+	"dégoûtants",
+	"dégueulasse",
+	"dégueulasses"
+	],
+"disharmonious":[
+	"dysharmonique",
+	"dysharmoniques"
+	],
+"dishonest":[
+	"malhonnête",
+	"malhonnêtes"
+	],
+"disillusioned":[
+	"désabusé",
+	"désabusée",
+	"désabusées",
+	"désabusés"
+	],
+"disingenuous":[
+	"sournois",
+	"sournoise",
+	"sournoises"
+	],
+"disinterested":[
+	"désintéressé",
+	"désintéressée",
+	"désintéressées",
+	"désintéressés"
+	],
+"disjointed":[
+	"décousu",
+	"décousue",
+	"décousues",
+	"décousus"
+	],
+"disloyal":[
+	"déloyal",
+	"déloyale",
+	"déloyales",
+	"déloyaux"
+	],
+"dismal":[
+	"déprimant",
+	"déprimante",
+	"déprimantes",
+	"déprimants",
+	"lugubre",
+	"lugubres"
+	],
+"dismantlable":[
+	"démontable",
+	"démontables"
+	],
+"disobedient":[
+	"désobéissant",
+	"désobéissante",
+	"désobéissantes",
+	"désobéissants"
+	],
+"disordered":[
+	"désordonné",
+	"désordonnée",
+	"désordonnées",
+	"désordonnés"
+	],
+"disorderly":[
+	"désordonné",
+	"désordonnée",
+	"désordonnées",
+	"désordonnés"
+	],
+"disoriented":[
+	"déboussolé",
+	"déboussolée",
+	"déboussolées",
+	"déboussolés"
+	],
+"disparaging":[
+	"péjoratif",
+	"péjoratifs",
+	"péjorative",
+	"péjoratives"
+	],
+"disparate":[
+	"disparate",
+	"disparates"
+	],
+"dispensable":[
+	"facultatif",
+	"facultatifs",
+	"facultative",
+	"facultatives"
+	],
+"disposable":[
+	"disponible",
+	"disponibles",
+	"jetable",
+	"jetables"
+	],
+"disputable":[
+	"contestable",
+	"contestables"
+	],
+"disrespectful":[
+	"irrespectueuse",
+	"irrespectueuses",
+	"irrespectueux"
+	],
+"disruptive":[
+	"dérangeant",
+	"dérangeante",
+	"dérangeantes",
+	"dérangeants"
+	],
+"dissatisfied":[
+	"insatisfait",
+	"insatisfaite",
+	"insatisfaites",
+	"insatisfaits",
+	"mécontent",
+	"mécontente",
+	"mécontentes",
+	"mécontents"
+	],
+"dissolvent":[
+	"dissoluble",
+	"dissolubles"
+	],
+"distal":[
+	"distal",
+	"distale",
+	"distales",
+	"distaux"
+	],
+"distant":[
+	"distant",
+	"distante",
+	"distantes",
+	"distants",
+	"lointain",
+	"lointaine",
+	"lointaines",
+	"lointains",
+	"éloigné",
+	"éloignée",
+	"éloignées",
+	"éloignés"
+	],
+"distasteful":[
+	"déplaisant",
+	"déplaisante",
+	"déplaisantes",
+	"déplaisants",
+	"désagréable",
+	"désagréables"
+	],
+"distichous":[
+	"distique",
+	"distiques"
+	],
+"distinct":[
+	"distinct",
+	"distincte",
+	"distinctes",
+	"distincts",
+	"intelligible",
+	"intelligibles",
+	"reconnaissable",
+	"reconnaissables"
+	],
+"distinctive":[
+	"distinctif",
+	"distinctifs",
+	"distinctive",
+	"distinctives"
+	],
+"distingue":[
+	"distingué",
+	"distinguée",
+	"distinguées",
+	"distingués"
+	],
+"distinguishable":[
+	"distinguable",
+	"distinguables"
+	],
+"distinguished":[
+	"distingué",
+	"distinguée",
+	"distinguées",
+	"distingués"
+	],
+"distinguishing":[
+	"distinctif",
+	"distinctifs",
+	"distinctive",
+	"distinctives"
+	],
+"distraught":[
+	"affolé",
+	"affolée",
+	"affolées",
+	"affolés",
+	"désemparé",
+	"désemparée",
+	"désemparées",
+	"désemparés",
+	"égaré",
+	"égarée",
+	"égarées",
+	"égarés",
+	"éperdu",
+	"éperdue",
+	"éperdues",
+	"éperdus"
+	],
+"distributive":[
+	"distributif",
+	"distributifs",
+	"distributive",
+	"distributives"
+	],
+"distrustful":[
+	"méfiant",
+	"méfiants"
+	],
+"disturbing":[
+	"dérangeant",
+	"dérangeante",
+	"dérangeantes",
+	"dérangeants"
+	],
+"disused":[
+	"désuet",
+	"désuets",
+	"désuète",
+	"désuètes"
+	],
+"disyllabic":[
+	"dissyllabique",
+	"dissyllabiques"
+	],
+"ditzy":[
+	"sot",
+	"sots",
+	"sotte",
+	"sottes"
+	],
+"diuretic":[
+	"diurétique",
+	"diurétiques"
+	],
+"diurnal":[
+	"diurne",
+	"diurnes",
+	"journalier",
+	"journaliers",
+	"journalière",
+	"journalières",
+	"quotidien",
+	"quotidienne",
+	"quotidiennes",
+	"quotidiens"
+	],
+"diverse":[
+	"différent",
+	"différente",
+	"différentes",
+	"différents",
+	"divers",
+	"diverse",
+	"diverses"
+	],
+"divine":[
+	"divin",
+	"divine",
+	"divines",
+	"divins"
+	],
+"diving":[
+	"plongeant",
+	"plongeante",
+	"plongeantes",
+	"plongeants"
+	],
+"divisible":[
+	"divisible",
+	"divisibles"
+	],
+"divorced":[
+	"divorcé",
+	"divorcée",
+	"divorcées",
+	"divorcés"
+	],
+"dizygotic":[
+	"dizygote",
+	"dizygotes"
+	],
+"dizzy":[
+	"vaseuse",
+	"vaseuses",
+	"vaseux",
+	"vertigineuse",
+	"vertigineuses",
+	"vertigineux",
+	"écervelé",
+	"écervelée",
+	"écervelées",
+	"écervelés",
+	"étourdissant",
+	"étourdissante",
+	"étourdissantes",
+	"étourdissants"
+	],
+"djiboutian":[
+	"djiboutien",
+	"djiboutienne",
+	"djiboutiennes",
+	"djiboutiens"
+	],
+"docile":[
+	"docile",
+	"dociles"
+	],
+"doctrinal":[
+	"doctrinal",
+	"doctrinale",
+	"doctrinales",
+	"doctrinaux"
+	],
+"documentary":[
+	"documentaire",
+	"documentaires"
+	],
+"dodecaphonic":[
+	"dodécaphonique",
+	"dodécaphoniques"
+	],
+"dodgy":[
+	"malhonnête",
+	"malhonnêtes",
+	"périlleuse",
+	"périlleuses",
+	"périlleux",
+	"suspect",
+	"suspecte",
+	"suspectes",
+	"suspects"
+	],
+"dogged":[
+	"obstiné",
+	"obstinée",
+	"obstinées",
+	"obstinés",
+	"opiniâtre",
+	"opiniâtres",
+	"tenace",
+	"tenaces"
+	],
+"dogmatic":[
+	"dogmatique",
+	"dogmatiques"
+	],
+"domestic":[
+	"conjugal",
+	"conjugale",
+	"conjugales",
+	"conjugaux",
+	"domestique",
+	"domestiques",
+	"familial",
+	"familiale",
+	"familiales",
+	"familiaux",
+	"intestin",
+	"intestine",
+	"intestines",
+	"intestins",
+	"intérieur",
+	"intérieure",
+	"intérieures",
+	"intérieurs",
+	"national",
+	"nationale",
+	"nationales",
+	"nationaux"
+	],
+"dominant":[
+	"dominant",
+	"dominante",
+	"dominantes",
+	"dominants"
+	],
+"domineering":[
+	"dominateur",
+	"dominateurs",
+	"dominatrice",
+	"dominatrices"
+	],
+"dominican":[
+	"dominicain",
+	"dominicaine",
+	"dominicaines",
+	"dominicains"
+	],
+"done":[
+	"cuit",
+	"cuite",
+	"cuites",
+	"cuits",
+	"fait",
+	"faite",
+	"faites",
+	"faits",
+	"mort",
+	"morte",
+	"mortes",
+	"morts",
+	"prêt",
+	"prête",
+	"prêtes",
+	"prêts"
+	],
+"dopaminergic":[
+	"dopaminergique",
+	"dopaminergiques"
+	],
+"dormant":[
+	"dormant",
+	"dormante",
+	"dormantes",
+	"dormants",
+	"endormi",
+	"endormie",
+	"endormies",
+	"endormis",
+	"inactif",
+	"inactifs",
+	"inactive",
+	"inactives"
+	],
+"dorsal":[
+	"dorsal",
+	"dorsale",
+	"dorsales",
+	"dorsaux"
+	],
+"dostoyevskian":[
+	"dostoïevskien",
+	"dostoïevskienne",
+	"dostoïevskiennes",
+	"dostoïevskiens"
+	],
+"double":[
+	"double",
+	"doubles"
+	],
+"doubtful":[
+	"douteuse",
+	"douteuses",
+	"douteux"
+	],
+"dour":[
+	"austère",
+	"austères",
+	"dur",
+	"dure",
+	"dures",
+	"durs",
+	"entêté",
+	"entêtée",
+	"entêtées",
+	"entêtés",
+	"inflexible",
+	"inflexibles",
+	"lugubre",
+	"lugubres",
+	"morose",
+	"moroses",
+	"mélancolique",
+	"mélancoliques",
+	"obstiné",
+	"obstinée",
+	"obstinées",
+	"obstinés",
+	"rigide",
+	"rigides",
+	"rigoriste",
+	"rigoristes",
+	"rigoureuse",
+	"rigoureuses",
+	"rigoureux",
+	"sévère",
+	"sévères",
+	"taciturne",
+	"taciturnes"
+	],
+"down":[
+	"dépressif",
+	"dépressifs",
+	"dépressive",
+	"dépressives"
+	],
+"downbeat":[
+	"pessimiste",
+	"pessimistes",
+	"triste",
+	"tristes"
+	],
+"downloadable":[
+	"téléchargeable",
+	"téléchargeables"
+	],
+"downstream":[
+	"aval",
+	"avale",
+	"avales",
+	"avals",
+	"descendant",
+	"descendante",
+	"descendantes",
+	"descendants"
+	],
+"downtrodden":[
+	"écrasé",
+	"écrasée",
+	"écrasées",
+	"écrasés"
+	],
+"downy":[
+	"duveteuse",
+	"duveteuses",
+	"duveteux"
+	],
+"dozy":[
+	"somnolent",
+	"somnolente",
+	"somnolentes",
+	"somnolents"
+	],
+"draconian":[
+	"draconien",
+	"draconienne",
+	"draconiennes",
+	"draconiens"
+	],
+"dramatic":[
+	"dramatique",
+	"dramatiques",
+	"spectaculaire",
+	"spectaculaires"
+	],
+"drastic":[
+	"draconien",
+	"draconienne",
+	"draconiennes",
+	"draconiens",
+	"énergique",
+	"énergiques"
+	],
+"dreaded":[
+	"redoutable",
+	"redoutables"
+	],
+"dreamlike":[
+	"onirique",
+	"oniriques",
+	"rêveur",
+	"rêveurs",
+	"rêveuse",
+	"rêveuses"
+	],
+"dreary":[
+	"insipide",
+	"insipides",
+	"terne",
+	"ternes"
+	],
+"drinkable":[
+	"buvable",
+	"buvables",
+	"potable",
+	"potables"
+	],
+"droll":[
+	"fantaisiste",
+	"fantaisistes"
+	],
+"drowsy":[
+	"ensommeillé",
+	"ensommeillée",
+	"ensommeillées",
+	"ensommeillés",
+	"somnolent",
+	"somnolente",
+	"somnolentes",
+	"somnolents",
+	"stupide",
+	"stupides"
+	],
+"drunk":[
+	"ivre",
+	"ivres",
+	"soûl",
+	"soûle",
+	"soûles",
+	"soûls"
+	],
+"drunken":[
+	"ivre",
+	"ivres",
+	"saoul",
+	"saoule",
+	"saoules",
+	"saouls"
+	],
+"drupaceous":[
+	"drupacé",
+	"drupacée",
+	"drupacées",
+	"drupacés"
+	],
+"dry":[
+	"sec",
+	"secs",
+	"sèche",
+	"sèches"
+	],
+"dual":[
+	"double",
+	"doubles",
+	"dual",
+	"duale",
+	"duales",
+	"duals",
+	"duel",
+	"duelle",
+	"duelles",
+	"duels"
+	],
+"dubious":[
+	"douteuse",
+	"douteuses",
+	"douteux",
+	"dubitatif",
+	"dubitatifs",
+	"dubitative",
+	"dubitatives",
+	"sceptique",
+	"sceptiques"
+	],
+"ducal":[
+	"ducal",
+	"ducale",
+	"ducales",
+	"ducaux"
+	],
+"ductile":[
+	"ductile",
+	"ductiles"
+	],
+"duff":[
+	"nul",
+	"nulle",
+	"nulles",
+	"nuls"
+	],
+"dulcet":[
+	"douce",
+	"douces",
+	"doux",
+	"suave",
+	"suaves"
+	],
+"dull":[
+	"barbant",
+	"barbante",
+	"barbantes",
+	"barbants",
+	"ennuyeuse",
+	"ennuyeuses",
+	"ennuyeux",
+	"idiot",
+	"idiote",
+	"idiotes",
+	"idiots",
+	"mat",
+	"mate",
+	"mates",
+	"mats",
+	"obtus",
+	"obtuse",
+	"obtuses",
+	"sot",
+	"sots",
+	"sotte",
+	"sottes",
+	"sourd",
+	"sourde",
+	"sourdes",
+	"sourds",
+	"terne",
+	"ternes"
+	],
+"dumb":[
+	"bête",
+	"bêtes",
+	"débile",
+	"débiles",
+	"idiot",
+	"idiote",
+	"idiotes",
+	"idiots",
+	"niais",
+	"niaise",
+	"niaises",
+	"stupide",
+	"stupides"
+	],
+"dumbfounded":[
+	"abasourdi",
+	"abasourdie",
+	"abasourdies",
+	"abasourdis",
+	"ahuri",
+	"ahurie",
+	"ahuries",
+	"ahuris",
+	"stupéfait",
+	"stupéfaite",
+	"stupéfaites",
+	"stupéfaits",
+	"éberlué",
+	"éberluée",
+	"éberluées",
+	"éberlués"
+	],
+"durable":[
+	"durable",
+	"durables"
+	],
+"durative":[
+	"duratif",
+	"duratifs",
+	"durative",
+	"duratives"
+	],
+"dusty":[
+	"poussiéreuse",
+	"poussiéreuses",
+	"poussiéreux"
+	],
+"dutch":[
+	"hollandais",
+	"hollandaise",
+	"hollandaises",
+	"néerlandais",
+	"néerlandaise",
+	"néerlandaises"
+	],
+"dutiful":[
+	"dévoué",
+	"dévouée",
+	"dévouées",
+	"dévoués"
+	],
+"dwarf":[
+	"nain",
+	"naine",
+	"naines",
+	"nains"
+	],
+"dwindling":[
+	"diminuant",
+	"diminuante",
+	"diminuantes",
+	"diminuants",
+	"déclinant",
+	"déclinante",
+	"déclinantes",
+	"déclinants"
+	],
+"dyadic":[
+	"dyadique",
+	"dyadiques"
+	],
+"dynamic":[
+	"dynamique",
+	"dynamiques"
+	],
+"dyscrasic":[
+	"dyscrasique",
+	"dyscrasiques"
+	],
+"dyslexic":[
+	"dyslexique",
+	"dyslexiques"
+	],
+"dyspeptic":[
+	"irritable",
+	"irritables",
+	"morose",
+	"moroses",
+	"nauséabond",
+	"nauséabonde",
+	"nauséabondes",
+	"nauséabonds"
+	],
+"eager":[
+	"désireuse",
+	"désireuses",
+	"désireux",
+	"enthousiaste",
+	"enthousiastes",
+	"impatient",
+	"impatiente",
+	"impatientes",
+	"impatients"
+	],
+"early":[
+	"ancien",
+	"ancienne",
+	"anciennes",
+	"anciens",
+	"précoce",
+	"précoces"
+	],
+"earnest":[
+	"ardent",
+	"ardente",
+	"ardentes",
+	"ardents",
+	"grave",
+	"graves",
+	"sérieuse",
+	"sérieuses",
+	"sérieux"
+	],
+"earthly":[
+	"terrestre",
+	"terrestres"
+	],
+"east":[
+	"oriental",
+	"orientale",
+	"orientales",
+	"orientaux"
+	],
+"eastern":[
+	"oriental",
+	"orientale",
+	"orientales",
+	"orientaux"
+	],
+"easy":[
+	"facile",
+	"faciles",
+	"simple",
+	"simples"
+	],
+"easygoing":[
+	"sympathique",
+	"sympathiques"
+	],
+"eccentric":[
+	"excentrique",
+	"excentriques"
+	],
+"ecclesiastic":[
+	"ecclésiastique",
+	"ecclésiastiques"
+	],
+"ecclesiastical":[
+	"ecclésiastique",
+	"ecclésiastiques"
+	],
+"eclectic":[
+	"de bric et de broc",
+	"hétérogène",
+	"hétérogènes",
+	"éclectique",
+	"éclectiques"
+	],
+"ecological":[
+	"écologique",
+	"écologiques"
+	],
+"economic":[
+	"économique",
+	"économiques"
+	],
+"economical":[
+	"économe",
+	"économes",
+	"économique",
+	"économiques"
+	],
+"ecru":[
+	"beige",
+	"beiges"
+	],
+"ecstatic":[
+	"extatique",
+	"extatiques"
+	],
+"ecuadorian":[
+	"équatorien",
+	"équatorienne",
+	"équatoriennes",
+	"équatoriens"
+	],
+"ecumenical":[
+	"oecuménique",
+	"oecuméniques"
+	],
+"edgy":[
+	"anxieuse",
+	"anxieuses",
+	"anxieux",
+	"nerveuse",
+	"nerveuses",
+	"nerveux"
+	],
+"edible":[
+	"comestible",
+	"comestibles",
+	"mangeable",
+	"mangeables"
+	],
+"editable":[
+	"modifiable",
+	"modifiables"
+	],
+"editorial":[
+	"rédactionnel",
+	"rédactionnelle",
+	"rédactionnelles",
+	"rédactionnels",
+	"éditorial",
+	"éditoriale",
+	"éditoriales",
+	"éditoriaux"
+	],
+"educable":[
+	"éducable",
+	"éducables"
+	],
+"educated":[
+	"cultivé",
+	"cultivée",
+	"cultivées",
+	"cultivés"
+	],
+"educational":[
+	"éducatif",
+	"éducatifs",
+	"éducative",
+	"éducatives"
+	],
+"educative":[
+	"éducatif",
+	"éducatifs",
+	"éducative",
+	"éducatives"
+	],
+"eerie":[
+	"craintif",
+	"craintifs",
+	"craintive",
+	"craintives",
+	"sinistre",
+	"sinistres",
+	"timide",
+	"timides",
+	"étrange",
+	"étranges"
+	],
+"effective":[
+	"décisif",
+	"décisifs",
+	"décisive",
+	"décisives",
+	"efficace",
+	"efficaces"
+	],
+"effeminate":[
+	"efféminé",
+	"efféminée",
+	"efféminées",
+	"efféminés"
+	],
+"efferent":[
+	"efférent",
+	"efférente",
+	"efférentes",
+	"efférents"
+	],
+"effete":[
+	"affaibli",
+	"affaiblie",
+	"affaiblies",
+	"affaiblis",
+	"décadent",
+	"décadente",
+	"décadentes",
+	"décadents"
+	],
+"efficacious":[
+	"efficace",
+	"efficaces"
+	],
+"efficient":[
+	"efficace",
+	"efficaces"
+	],
+"effortless":[
+	"aisé",
+	"aisée",
+	"aisées",
+	"aisés"
+	],
+"effulgent":[
+	"rayonnant",
+	"rayonnante",
+	"rayonnantes",
+	"rayonnants"
+	],
+"effusive":[
+	"excessif",
+	"excessifs",
+	"excessive",
+	"excessives"
+	],
+"egalitarian":[
+	"égalitaire",
+	"égalitaires"
+	],
+"egocentric":[
+	"égocentrique",
+	"égocentriques"
+	],
+"egregious":[
+	"flagrant",
+	"flagrante",
+	"flagrantes",
+	"flagrants",
+	"inouï",
+	"inouïe",
+	"inouïes",
+	"inouïs"
+	],
+"egyptian":[
+	"égyptien",
+	"égyptienne",
+	"égyptiennes",
+	"égyptiens"
+	],
+"eighteenth":[
+	"dix-huit",
+	"dix-huitième",
+	"dix-huitièmes"
+	],
+"ejaculatory":[
+	"éjaculateur",
+	"éjaculateurs",
+	"éjaculatrice",
+	"éjaculatrices"
+	],
+"ejectable":[
+	"éjectable",
+	"éjectables"
+	],
+"elastic":[
+	"élastique",
+	"élastiques"
+	],
+"elder":[
+	"aîné",
+	"aînée",
+	"aînées",
+	"aînés"
+	],
+"elderly":[
+	"ancien",
+	"ancienne",
+	"anciennes",
+	"anciens",
+	"vieil",
+	"vieille",
+	"vieilles",
+	"vieux",
+	"âgé",
+	"âgée",
+	"âgées",
+	"âgés"
+	],
+"elect":[
+	"élu",
+	"élue",
+	"élues",
+	"élus"
+	],
+"elective":[
+	"facultatif",
+	"facultatifs",
+	"facultative",
+	"facultatives"
+	],
+"electoral":[
+	"électoral",
+	"électorale",
+	"électorales",
+	"électoraux"
+	],
+"electric":[
+	"électrique",
+	"électriques"
+	],
+"electrolytic":[
+	"électrolytique",
+	"électrolytiques"
+	],
+"electromagnetic":[
+	"électromagnétique",
+	"électromagnétiques"
+	],
+"electromechanical":[
+	"électromécanique",
+	"électromécaniques"
+	],
+"electronic":[
+	"électronique",
+	"électroniques"
+	],
+"electrostatic":[
+	"électrostatique",
+	"électrostatiques"
+	],
+"elegant":[
+	"élégant",
+	"élégante",
+	"élégantes",
+	"élégants"
+	],
+"elegiac":[
+	"élégiaque",
+	"élégiaques"
+	],
+"elementary":[
+	"élémentaire",
+	"élémentaires"
+	],
+"elephantine":[
+	"éléphantesque",
+	"éléphantesques",
+	"éléphantin",
+	"éléphantine",
+	"éléphantines",
+	"éléphantins"
+	],
+"elevated":[
+	"élevé",
+	"élevée",
+	"élevées",
+	"élevés"
+	],
+"eleventh":[
+	"onzième",
+	"onzièmes"
+	],
+"eligible":[
+	"approprié",
+	"appropriée",
+	"appropriées",
+	"appropriés",
+	"éligible",
+	"éligibles"
+	],
+"eliminatory":[
+	"éliminatoire",
+	"éliminatoires"
+	],
+"elite":[
+	"élitaire",
+	"élitaires"
+	],
+"elliptic":[
+	"elliptique",
+	"elliptiques"
+	],
+"elliptical":[
+	"elliptique",
+	"elliptiques"
+	],
+"elongate":[
+	"allongé",
+	"allongée",
+	"allongées",
+	"allongés"
+	],
+"eloquent":[
+	"éloquent",
+	"éloquente",
+	"éloquentes",
+	"éloquents"
+	],
+"elusive":[
+	"évasif",
+	"évasifs",
+	"évasive",
+	"évasives"
+	],
+"elysian":[
+	"élyséen",
+	"élyséenne",
+	"élyséennes",
+	"élyséens"
+	],
+"emaciated":[
+	"émacié",
+	"émaciée",
+	"émaciées",
+	"émaciés"
+	],
+"embarrassed":[
+	"gêné",
+	"gênée",
+	"gênées",
+	"gênés"
+	],
+"embarrassing":[
+	"embarrassant",
+	"embarrassante",
+	"embarrassantes",
+	"embarrassants",
+	"gênant",
+	"gênante",
+	"gênantes",
+	"gênants"
+	],
+"embattled":[
+	"armé",
+	"armée",
+	"armées",
+	"armés",
+	"crénelé",
+	"crénelée",
+	"crénelées",
+	"crénelés"
+	],
+"embedded":[
+	"imbriqué",
+	"imbriquée",
+	"imbriquées",
+	"imbriqués",
+	"inclus",
+	"incluse",
+	"incluses",
+	"incrusté",
+	"incrustée",
+	"incrustées",
+	"incrustés"
+	],
+"emblematic":[
+	"emblématique",
+	"emblématiques"
+	],
+"embryonic":[
+	"embryonnaire",
+	"embryonnaires"
+	],
+"emerald":[
+	"émeraude"
+	],
+"emerging":[
+	"émergent",
+	"émergente",
+	"émergentes",
+	"émergents"
+	],
+"emeritus":[
+	"émérite",
+	"émérites"
+	],
+"emetic":[
+	"vomitif",
+	"vomitifs",
+	"vomitive",
+	"vomitives",
+	"émétique",
+	"émétiques"
+	],
+"eminent":[
+	"remarquable",
+	"remarquables",
+	"éminent",
+	"éminente",
+	"éminentes",
+	"éminents"
+	],
+"emollient":[
+	"lénifiant",
+	"lénifiante",
+	"lénifiantes",
+	"lénifiants"
+	],
+"emotional":[
+	"émotif",
+	"émotifs",
+	"émotionnel",
+	"émotionnelle",
+	"émotionnelles",
+	"émotionnels",
+	"émotive",
+	"émotives"
+	],
+"emphatic":[
+	"emphatique",
+	"emphatiques"
+	],
+"emphyteutic":[
+	"emphytéotique",
+	"emphytéotiques"
+	],
+"empirical":[
+	"empirique",
+	"empiriques"
+	],
+"employable":[
+	"employable",
+	"employables"
+	],
+"empty":[
+	"vide",
+	"vides"
+	],
+"emptyhanded":[
+	"bredouille",
+	"bredouilles"
+	],
+"enantiotropic":[
+	"énantiotrope",
+	"énantiotropes"
+	],
+"enchanted":[
+	"enchanté",
+	"enchantée",
+	"enchantées",
+	"enchantés"
+	],
+"enchanting":[
+	"enchanteresse",
+	"enchanteresses",
+	"enchanteur",
+	"enchanteurs"
+	],
+"enclitic":[
+	"enclitique",
+	"enclitiques"
+	],
+"encyclopedic":[
+	"encyclopédique",
+	"encyclopédiques"
+	],
+"endearing":[
+	"attendrissant",
+	"attendrissante",
+	"attendrissantes",
+	"attendrissants"
+	],
+"endemic":[
+	"endémique",
+	"endémiques",
+	"indigène",
+	"indigènes"
+	],
+"endimanched":[
+	"endimanché",
+	"endimanchée",
+	"endimanchées",
+	"endimanchés"
+	],
+"endless":[
+	"infini",
+	"infinie",
+	"infinies",
+	"infinis",
+	"interminable",
+	"interminables",
+	"perpétuel",
+	"perpétuelle",
+	"perpétuelles",
+	"perpétuels"
+	],
+"endocrine":[
+	"endocrine",
+	"endocrines"
+	],
+"endogamous":[
+	"endogame",
+	"endogames"
+	],
+"endogenous":[
+	"endogène",
+	"endogènes"
+	],
+"endoscopic":[
+	"endoscopique",
+	"endoscopiques"
+	],
+"endothermic":[
+	"homéotherme",
+	"homéothermes"
+	],
+"endurable":[
+	"endurable",
+	"endurables",
+	"tolérable",
+	"tolérables"
+	],
+"enemy":[
+	"ennemi",
+	"ennemie",
+	"ennemies",
+	"ennemis"
+	],
+"energetic":[
+	"énergique",
+	"énergiques",
+	"énergétique",
+	"énergétiques"
+	],
+"engaged":[
+	"engagé",
+	"engagée",
+	"engagées",
+	"engagés",
+	"fiancé",
+	"fiancée",
+	"fiancées",
+	"fiancés"
+	],
+"english":[
+	"anglais",
+	"anglaise",
+	"anglaises"
+	],
+"engrossed":[
+	"absorbé",
+	"absorbée",
+	"absorbées",
+	"absorbés"
+	],
+"engrossing":[
+	"absorbant",
+	"absorbante",
+	"absorbantes",
+	"absorbants",
+	"captivant",
+	"captivante",
+	"captivantes",
+	"captivants"
+	],
+"enhanced":[
+	"amplifié",
+	"amplifiée",
+	"amplifiées",
+	"amplifiés",
+	"avancé",
+	"avancée",
+	"avancées",
+	"avancés"
+	],
+"enigmatic":[
+	"énigmatique",
+	"énigmatiques"
+	],
+"enjoyable":[
+	"agréable",
+	"agréables",
+	"amusant",
+	"amusante",
+	"amusantes",
+	"amusants"
+	],
+"enormous":[
+	"énorme",
+	"énormes"
+	],
+"enriching":[
+	"enrichissant",
+	"enrichissante",
+	"enrichissantes",
+	"enrichissants"
+	],
+"enteric":[
+	"entérique",
+	"entériques"
+	],
+"enterprising":[
+	"entreprenant",
+	"entreprenante",
+	"entreprenantes",
+	"entreprenants"
+	],
+"entertaining":[
+	"distrayant",
+	"distrayante",
+	"distrayantes",
+	"distrayants",
+	"divertissant",
+	"divertissante",
+	"divertissantes",
+	"divertissants"
+	],
+"enthusiastic":[
+	"enthousiaste",
+	"enthousiastes"
+	],
+"enticing":[
+	"aguicheur",
+	"aguicheurs",
+	"aguicheuse",
+	"aguicheuses"
+	],
+"entire":[
+	"entier",
+	"entiers",
+	"entière",
+	"entières"
+	],
+"entomological":[
+	"entomologique",
+	"entomologiques"
+	],
+"entrepreneurial":[
+	"entreprenant",
+	"entreprenante",
+	"entreprenantes",
+	"entreprenants",
+	"entrepreneurial",
+	"entrepreneuriale",
+	"entrepreneuriales",
+	"entrepreneuriaux"
+	],
+"envious":[
+	"envieuse",
+	"envieuses",
+	"envieux"
+	],
+"environmental":[
+	"environnemental",
+	"environnementale",
+	"environnementales",
+	"environnementaux"
+	],
+"enzymatic":[
+	"enzymatique",
+	"enzymatiques"
+	],
+"epenthetic":[
+	"épenthétique",
+	"épenthétiques"
+	],
+"ephemeral":[
+	"éphémère",
+	"éphémères"
+	],
+"epic":[
+	"épique",
+	"épiques"
+	],
+"epicene":[
+	"épicène",
+	"épicènes"
+	],
+"epidemic":[
+	"épidémique",
+	"épidémiques"
+	],
+"epidemiologic":[
+	"épidémiologique",
+	"épidémiologiques"
+	],
+"epigastric":[
+	"épigastrique",
+	"épigastriques"
+	],
+"epigrammatic":[
+	"épigrammatique",
+	"épigrammatiques"
+	],
+"epigraphic":[
+	"épigraphique",
+	"épigraphiques"
+	],
+"epileptic":[
+	"épileptique",
+	"épileptiques"
+	],
+"epirotic":[
+	"épirote",
+	"épirotes"
+	],
+"episcopal":[
+	"épiscopal",
+	"épiscopale",
+	"épiscopales",
+	"épiscopaux"
+	],
+"epistemic":[
+	"épistémologique",
+	"épistémologiques"
+	],
+"epistemological":[
+	"épistémologique",
+	"épistémologiques"
+	],
+"epistolary":[
+	"épistolaire",
+	"épistolaires"
+	],
+"epithelial":[
+	"épithélial",
+	"épithéliale",
+	"épithéliales",
+	"épithéliaux"
+	],
+"eponymous":[
+	"éponyme",
+	"éponymes"
+	],
+"equal":[
+	"égal",
+	"égale",
+	"égales",
+	"égaux"
+	],
+"equatorial":[
+	"équatorial",
+	"équatoriale",
+	"équatoriales",
+	"équatoriaux"
+	],
+"equestrian":[
+	"hippique",
+	"hippiques"
+	],
+"equiangular":[
+	"équiangle",
+	"équiangles"
+	],
+"equine":[
+	"chevalin",
+	"chevaline",
+	"chevalines",
+	"chevalins",
+	"hippique",
+	"hippiques",
+	"équin",
+	"équine",
+	"équines",
+	"équins"
+	],
+"equivalent":[
+	"équivalent",
+	"équivalente",
+	"équivalentes",
+	"équivalents"
+	],
+"equivocal":[
+	"ambigu",
+	"ambigus",
+	"ambiguë",
+	"ambiguës",
+	"douteuse",
+	"douteuses",
+	"douteux",
+	"incertain",
+	"incertaine",
+	"incertaines",
+	"incertains",
+	"indéterminé",
+	"indéterminée",
+	"indéterminées",
+	"indéterminés",
+	"équivoque",
+	"équivoques"
+	],
+"erasable":[
+	"effaçable",
+	"effaçables"
+	],
+"erectile":[
+	"érectile",
+	"érectiles"
+	],
+"eremitic":[
+	"érémitique",
+	"érémitiques"
+	],
+"ergonomic":[
+	"ergonomique",
+	"ergonomiques"
+	],
+"eritrean":[
+	"érythréen",
+	"érythréenne",
+	"érythréennes",
+	"érythréens"
+	],
+"erogenous":[
+	"érogène",
+	"érogènes"
+	],
+"erotic":[
+	"érotique",
+	"érotiques"
+	],
+"errant":[
+	"errant",
+	"errante",
+	"errantes",
+	"errants"
+	],
+"erroneous":[
+	"erroné",
+	"erronée",
+	"erronées",
+	"erronés"
+	],
+"erstwhile":[
+	"ancien",
+	"ancienne",
+	"anciennes",
+	"anciens"
+	],
+"erudite":[
+	"érudit",
+	"érudite",
+	"érudites",
+	"érudits"
+	],
+"erysipelatous":[
+	"érysipélateuse",
+	"érysipélateuses",
+	"érysipélateux"
+	],
+"eschatological":[
+	"eschatologique",
+	"eschatologiques"
+	],
+"eskimo":[
+	"esquimau",
+	"esquimaude",
+	"esquimaudes",
+	"esquimaux"
+	],
+"esophageal":[
+	"oesophagien",
+	"oesophagienne",
+	"oesophagiennes",
+	"oesophagiens"
+	],
+"esoteric":[
+	"cérébral",
+	"cérébrale",
+	"cérébrales",
+	"cérébraux",
+	"ésotérique",
+	"ésotériques"
+	],
+"essential":[
+	"essentiel",
+	"essentielle",
+	"essentielles",
+	"essentiels",
+	"fondamental",
+	"fondamentale",
+	"fondamentales",
+	"fondamentaux",
+	"indispensable",
+	"indispensables"
+	],
+"established":[
+	"établi",
+	"établie",
+	"établies",
+	"établis"
+	],
+"estival":[
+	"estival",
+	"estivale",
+	"estivales",
+	"estivaux"
+	],
+"estonian":[
+	"estonien",
+	"estonienne",
+	"estoniennes",
+	"estoniens"
+	],
+"estranged":[
+	"éloigné",
+	"éloignée",
+	"éloignées",
+	"éloignés"
+	],
+"eternal":[
+	"éternel",
+	"éternelle",
+	"éternelles",
+	"éternels"
+	],
+"etesian":[
+	"étésien",
+	"étésienne",
+	"étésiennes",
+	"étésiens"
+	],
+"ethereal":[
+	"éthéré",
+	"éthérée",
+	"éthérées",
+	"éthérés"
+	],
+"ethical":[
+	"éthique",
+	"éthiques"
+	],
+"ethiopian":[
+	"éthiopien",
+	"éthiopienne",
+	"éthiopiennes",
+	"éthiopiens"
+	],
+"ethnic":[
+	"ethnique",
+	"ethniques"
+	],
+"ethnocentric":[
+	"ethnocentrique",
+	"ethnocentriques"
+	],
+"ethnographic":[
+	"ethnographique",
+	"ethnographiques"
+	],
+"ethnological":[
+	"ethnologique",
+	"ethnologiques"
+	],
+"etiological":[
+	"étiologique",
+	"étiologiques"
+	],
+"etruscan":[
+	"étrusque",
+	"étrusques"
+	],
+"etymological":[
+	"étymologique",
+	"étymologiques"
+	],
+"eucharistic":[
+	"eucharistique",
+	"eucharistiques"
+	],
+"euclidean":[
+	"euclidien",
+	"euclidienne",
+	"euclidiennes",
+	"euclidiens"
+	],
+"eukaryotic":[
+	"eucaryote",
+	"eucaryotes"
+	],
+"eulogistic":[
+	"dithyrambique",
+	"dithyrambiques",
+	"élogieuse",
+	"élogieuses",
+	"élogieux"
+	],
+"euphemistic":[
+	"euphémique",
+	"euphémiques"
+	],
+"euphonic":[
+	"euphonique",
+	"euphoniques"
+	],
+"euphoric":[
+	"euphorique",
+	"euphoriques"
+	],
+"eurasian":[
+	"eurasiatique",
+	"eurasiatiques"
+	],
+"european":[
+	"européen",
+	"européenne",
+	"européennes",
+	"européens"
+	],
+"evanescent":[
+	"évanescent",
+	"évanescente",
+	"évanescentes",
+	"évanescents"
+	],
+"evangelical":[
+	"évangélique",
+	"évangéliques"
+	],
+"even":[
+	"plat",
+	"plate",
+	"plates",
+	"plats",
+	"rond",
+	"ronde",
+	"rondes",
+	"ronds",
+	"régulier",
+	"réguliers",
+	"régulière",
+	"régulières",
+	"uniforme",
+	"uniformes"
+	],
+"evergreen":[
+	"sempervirent",
+	"sempervirente",
+	"sempervirentes",
+	"sempervirents"
+	],
+"everlasting":[
+	"permanent",
+	"permanente",
+	"permanentes",
+	"permanents",
+	"éternel",
+	"éternelle",
+	"éternelles",
+	"éternels"
+	],
+"everyday":[
+	"usuel",
+	"usuelle",
+	"usuelles",
+	"usuels"
+	],
+"evident":[
+	"évident",
+	"évidente",
+	"évidentes",
+	"évidents"
+	],
+"evil":[
+	"maléfique",
+	"maléfiques",
+	"mauvais",
+	"mauvaise",
+	"mauvaises",
+	"méchant",
+	"méchante",
+	"méchantes",
+	"méchants"
+	],
+"evitable":[
+	"évitable",
+	"évitables"
+	],
+"evocative":[
+	"évocateur",
+	"évocateurs",
+	"évocatrice",
+	"évocatrices"
+	],
+"evolutionary":[
+	"évolutif",
+	"évolutifs",
+	"évolutive",
+	"évolutives"
+	],
+"evolutionistic":[
+	"évolutionniste",
+	"évolutionnistes"
+	],
+"exact":[
+	"exact",
+	"exacte",
+	"exactes",
+	"exacts",
+	"précis",
+	"précise",
+	"précises"
+	],
+"exanimate":[
+	"déprimé",
+	"déprimée",
+	"déprimées",
+	"déprimés",
+	"mort",
+	"morte",
+	"mortes",
+	"morts"
+	],
+"excellent":[
+	"excellent",
+	"excellente",
+	"excellentes",
+	"excellents"
+	],
+"exceptional":[
+	"exceptionnel",
+	"exceptionnelle",
+	"exceptionnelles",
+	"exceptionnels"
+	],
+"excessive":[
+	"excessif",
+	"excessifs",
+	"excessive",
+	"excessives"
+	],
+"excited":[
+	"excité",
+	"excitée",
+	"excitées",
+	"excités"
+	],
+"exclusive":[
+	"exclusif",
+	"exclusifs",
+	"exclusive",
+	"exclusives"
+	],
+"excretory":[
+	"excrétoire",
+	"excrétoires"
+	],
+"execrable":[
+	"exécrable",
+	"exécrables"
+	],
+"executable":[
+	"exécutable",
+	"exécutables"
+	],
+"executive":[
+	"exécutif",
+	"exécutifs",
+	"exécutive",
+	"exécutives"
+	],
+"exemplary":[
+	"exemplaire",
+	"exemplaires"
+	],
+"exhausted":[
+	"épuisé",
+	"épuisée",
+	"épuisées",
+	"épuisés"
+	],
+"exhausting":[
+	"épuisant",
+	"épuisante",
+	"épuisantes",
+	"épuisants"
+	],
+"exhaustive":[
+	"exhaustif",
+	"exhaustifs",
+	"exhaustive",
+	"exhaustives"
+	],
+"exhilarating":[
+	"grisant",
+	"grisante",
+	"grisantes",
+	"grisants",
+	"jubilatoire",
+	"jubilatoires"
+	],
+"exigent":[
+	"exigeant",
+	"exigeante",
+	"exigeantes",
+	"exigeants",
+	"pressant",
+	"pressante",
+	"pressantes",
+	"pressants",
+	"urgent",
+	"urgente",
+	"urgentes",
+	"urgents"
+	],
+"exinscribed":[
+	"exinscrit",
+	"exinscrite",
+	"exinscrites",
+	"exinscrits"
+	],
+"existent":[
+	"existant",
+	"existante",
+	"existantes",
+	"existants"
+	],
+"existential":[
+	"existentiel",
+	"existentielle",
+	"existentielles",
+	"existentiels"
+	],
+"existing":[
+	"existant",
+	"existante",
+	"existantes",
+	"existants"
+	],
+"exogamous":[
+	"exogame",
+	"exogames"
+	],
+"exorbitant":[
+	"exorbitant",
+	"exorbitante",
+	"exorbitantes",
+	"exorbitants"
+	],
+"exoteric":[
+	"exotérique",
+	"exotériques"
+	],
+"exotic":[
+	"exotique",
+	"exotiques"
+	],
+"expandable":[
+	"extensible",
+	"extensibles"
+	],
+"expedient":[
+	"expédient",
+	"expédiente",
+	"expédientes",
+	"expédients"
+	],
+"expendable":[
+	"consommable",
+	"consommables",
+	"facultatif",
+	"facultatifs",
+	"facultative",
+	"facultatives",
+	"jetable",
+	"jetables"
+	],
+"expensive":[
+	"cher",
+	"chers",
+	"chère",
+	"chères",
+	"coûteuse",
+	"coûteuses",
+	"coûteux"
+	],
+"experienced":[
+	"expérimenté",
+	"expérimentée",
+	"expérimentées",
+	"expérimentés"
+	],
+"expiatory":[
+	"expiatoire",
+	"expiatoires"
+	],
+"explainable":[
+	"explicable",
+	"explicables"
+	],
+"expletive":[
+	"explétif",
+	"explétifs",
+	"explétive",
+	"explétives"
+	],
+"explicable":[
+	"explicable",
+	"explicables"
+	],
+"explicatable":[
+	"explicable",
+	"explicables"
+	],
+"explosive":[
+	"explosif",
+	"explosifs",
+	"explosive",
+	"explosives"
+	],
+"exponential":[
+	"exponentiel",
+	"exponentielle",
+	"exponentielles",
+	"exponentiels"
+	],
+"expressible":[
+	"exprimable",
+	"exprimables"
+	],
+"expressionless":[
+	"inexpressif",
+	"inexpressifs",
+	"inexpressive",
+	"inexpressives"
+	],
+"expressive":[
+	"expressif",
+	"expressifs",
+	"expressive",
+	"expressives"
+	],
+"exquisite":[
+	"exquis",
+	"exquise",
+	"exquises"
+	],
+"exsanguine":[
+	"exsangue",
+	"exsangues"
+	],
+"extant":[
+	"existant",
+	"existante",
+	"existantes",
+	"existants"
+	],
+"extempore":[
+	"extemporané",
+	"extemporanée",
+	"extemporanées",
+	"extemporanés"
+	],
+"extendable":[
+	"extensible",
+	"extensibles"
+	],
+"extensive":[
+	"étendu",
+	"étendue",
+	"étendues",
+	"étendus"
+	],
+"external":[
+	"externe",
+	"externes"
+	],
+"extinct":[
+	"disparu",
+	"disparue",
+	"disparues",
+	"disparus",
+	"éteint",
+	"éteinte",
+	"éteintes",
+	"éteints"
+	],
+"extra":[
+	"supplémentaire",
+	"supplémentaires"
+	],
+"extragalactic":[
+	"extragalactique",
+	"extragalactiques"
+	],
+"extrajudicial":[
+	"extrajudiciaire",
+	"extrajudiciaires"
+	],
+"extramural":[
+	"externe",
+	"externes"
+	],
+"extraneous":[
+	"étranger",
+	"étrangers",
+	"étrangère",
+	"étrangères"
+	],
+"extraordinary":[
+	"extraordinaire",
+	"extraordinaires"
+	],
+"extraterrestrial":[
+	"extraterrestre",
+	"extraterrestres"
+	],
+"extravagant":[
+	"extravagant",
+	"extravagante",
+	"extravagantes",
+	"extravagants"
+	],
+"extreme":[
+	"excessif",
+	"excessifs",
+	"excessive",
+	"excessives",
+	"extrême",
+	"extrêmes"
+	],
+"extroverted":[
+	"extraverti",
+	"extravertie",
+	"extraverties",
+	"extravertis"
+	],
+"extrusive":[
+	"extrusif",
+	"extrusifs",
+	"extrusive",
+	"extrusives"
+	],
+"exuberant":[
+	"exubérant",
+	"exubérante",
+	"exubérantes",
+	"exubérants"
+	],
+"fabulous":[
+	"fabuleuse",
+	"fabuleuses",
+	"fabuleux"
+	],
+"facetious":[
+	"facétieuse",
+	"facétieuses",
+	"facétieux"
+	],
+"facial":[
+	"facial",
+	"faciale",
+	"faciales",
+	"facials",
+	"faciaux"
+	],
+"factitious":[
+	"factice",
+	"factices"
+	],
+"factual":[
+	"effectif",
+	"effectifs",
+	"effective",
+	"effectives",
+	"factuel",
+	"factuelle",
+	"factuelles",
+	"factuels"
+	],
+"facultative":[
+	"facultatif",
+	"facultatifs",
+	"facultative",
+	"facultatives"
+	],
+"fade":[
+	"fade",
+	"fades"
+	],
+"faint":[
+	"craintif",
+	"craintifs",
+	"craintive",
+	"craintives",
+	"faible",
+	"faibles"
+	],
+"fair":[
+	"beau",
+	"beaux",
+	"bel",
+	"belle",
+	"belles",
+	"blond",
+	"blonde",
+	"blondes",
+	"blonds",
+	"bô",
+	"clair",
+	"claire",
+	"claires",
+	"clairs",
+	"innocent",
+	"innocente",
+	"innocentes",
+	"innocents",
+	"joli",
+	"jolie",
+	"jolies",
+	"jolis",
+	"juste",
+	"justes",
+	"équitable",
+	"équitables"
+	],
+"fairheaded":[
+	"blond",
+	"blonde",
+	"blondes",
+	"blonds"
+	],
+"faithful":[
+	"fidèle",
+	"fidèles",
+	"loyal",
+	"loyale",
+	"loyales",
+	"loyaux"
+	],
+"fake":[
+	"artificiel",
+	"artificielle",
+	"artificielles",
+	"artificiels",
+	"contrefait",
+	"contrefaite",
+	"contrefaites",
+	"contrefaits",
+	"factice",
+	"factices",
+	"fausse",
+	"fausses",
+	"faux"
+	],
+"falciform":[
+	"falciforme",
+	"falciformes"
+	],
+"fallacious":[
+	"fallacieuse",
+	"fallacieuses",
+	"fallacieux"
+	],
+"fallible":[
+	"faillible",
+	"faillibles"
+	],
+"falling":[
+	"tombant",
+	"tombante",
+	"tombantes",
+	"tombants"
+	],
+"false":[
+	"artificiel",
+	"artificielle",
+	"artificielles",
+	"artificiels",
+	"fausse",
+	"fausses",
+	"faux",
+	"incorrect",
+	"incorrecte",
+	"incorrectes",
+	"incorrects"
+	],
+"falsifiable":[
+	"falsifiable",
+	"falsifiables"
+	],
+"familial":[
+	"familial",
+	"familiale",
+	"familiales",
+	"familiaux"
+	],
+"familiar":[
+	"familier",
+	"familiers",
+	"familière",
+	"familières"
+	],
+"famished":[
+	"affamé",
+	"affamée",
+	"affamées",
+	"affamés"
+	],
+"famous":[
+	"célèbre",
+	"célèbres",
+	"fameuse",
+	"fameuses",
+	"fameux"
+	],
+"fanatic":[
+	"fanatique",
+	"fanatiques"
+	],
+"fanatical":[
+	"fanatique",
+	"fanatiques"
+	],
+"fanciful":[
+	"imaginaire",
+	"imaginaires"
+	],
+"fancy":[
+	"fantaisie"
+	],
+"fantastic":[
+	"fantastique",
+	"fantastiques"
+	],
+"far":[
+	"extrême",
+	"extrêmes",
+	"lointain",
+	"lointaine",
+	"lointaines",
+	"lointains",
+	"reculé",
+	"reculée",
+	"reculées",
+	"reculés",
+	"éloigné",
+	"éloignée",
+	"éloignées",
+	"éloignés"
+	],
+"farcical":[
+	"burlesque",
+	"burlesques",
+	"farfelu",
+	"farfelue",
+	"farfelues",
+	"farfelus",
+	"grotesque",
+	"grotesques",
+	"ridicule",
+	"ridicules",
+	"risible",
+	"risibles"
+	],
+"farinaceous":[
+	"farinacé",
+	"farinacée",
+	"farinacées",
+	"farinacés"
+	],
+"farsighted":[
+	"hypermétrope",
+	"hypermétropes",
+	"prévoyant",
+	"prévoyante",
+	"prévoyantes",
+	"prévoyants"
+	],
+"fascinating":[
+	"fascinant",
+	"fascinante",
+	"fascinantes",
+	"fascinants",
+	"passionnant",
+	"passionnante",
+	"passionnantes",
+	"passionnants"
+	],
+"fascist":[
+	"fasciste",
+	"fascistes"
+	],
+"fast":[
+	"ferme",
+	"fermes",
+	"profond",
+	"profonde",
+	"profondes",
+	"profonds",
+	"rapide",
+	"rapides"
+	],
+"fastidious":[
+	"exigeant",
+	"exigeante",
+	"exigeantes",
+	"exigeants",
+	"minutieuse",
+	"minutieuses",
+	"minutieux",
+	"méticuleuse",
+	"méticuleuses",
+	"méticuleux"
+	],
+"fat":[
+	"gras",
+	"grasse",
+	"grasses",
+	"gros",
+	"grosse",
+	"grosses",
+	"épais",
+	"épaisse",
+	"épaisses"
+	],
+"fatal":[
+	"fatal",
+	"fatale",
+	"fatales",
+	"fatals"
+	],
+"fateful":[
+	"décisif",
+	"décisifs",
+	"décisive",
+	"décisives",
+	"fatidique",
+	"fatidiques"
+	],
+"fatherly":[
+	"paternel",
+	"paternelle",
+	"paternelles",
+	"paternels"
+	],
+"fathomable":[
+	"compréhensible",
+	"compréhensibles"
+	],
+"fatidic":[
+	"fatidique",
+	"fatidiques"
+	],
+"fatty":[
+	"gras",
+	"grasse",
+	"grasses"
+	],
+"fatuous":[
+	"imbécile",
+	"imbéciles",
+	"niais",
+	"niaise",
+	"niaises",
+	"stupide",
+	"stupides"
+	],
+"faultless":[
+	"impecc",
+	"impeccable",
+	"impeccables"
+	],
+"faulty":[
+	"défectueuse",
+	"défectueuses",
+	"défectueux"
+	],
+"faunistic":[
+	"faunique",
+	"fauniques"
+	],
+"faux":[
+	"fausse",
+	"fausses",
+	"faux"
+	],
+"favourable":[
+	"favorable",
+	"favorables"
+	],
+"favourite":[
+	"favori",
+	"favoris",
+	"favorite",
+	"favorites"
+	],
+"fearful":[
+	"affreuse",
+	"affreuses",
+	"affreux",
+	"craintif",
+	"craintifs",
+	"craintive",
+	"craintives",
+	"effrayant",
+	"effrayante",
+	"effrayantes",
+	"effrayants",
+	"redoutable",
+	"redoutables",
+	"terrible",
+	"terribles"
+	],
+"fearless":[
+	"brave",
+	"braves",
+	"courageuse",
+	"courageuses",
+	"courageux",
+	"intrépide",
+	"intrépides"
+	],
+"fearsome":[
+	"effrayant",
+	"effrayante",
+	"effrayantes",
+	"effrayants",
+	"effroyable",
+	"effroyables"
+	],
+"feasible":[
+	"faisable",
+	"faisables"
+	],
+"feathered":[
+	"emplumé",
+	"emplumée",
+	"emplumées",
+	"emplumés"
+	],
+"febrile":[
+	"fébrile",
+	"fébriles"
+	],
+"fecal":[
+	"fécal",
+	"fécale",
+	"fécales",
+	"fécaux"
+	],
+"feckless":[
+	"incapable",
+	"incapables",
+	"irresponsable",
+	"irresponsables",
+	"irréfléchi",
+	"irréfléchie",
+	"irréfléchies",
+	"irréfléchis"
+	],
+"fecund":[
+	"fécond",
+	"féconde",
+	"fécondes",
+	"féconds"
+	],
+"federal":[
+	"fédéral",
+	"fédérale",
+	"fédérales",
+	"fédéraux"
+	],
+"federate":[
+	"fédéré",
+	"fédérée",
+	"fédérées",
+	"fédérés"
+	],
+"feeble":[
+	"faible",
+	"faibles"
+	],
+"feeling":[
+	"sentimental",
+	"sentimentale",
+	"sentimentales",
+	"sentimentaux"
+	],
+"feisty":[
+	"agressif",
+	"agressifs",
+	"agressive",
+	"agressives",
+	"tenace",
+	"tenaces"
+	],
+"feline":[
+	"félin",
+	"féline",
+	"félines",
+	"félins"
+	],
+"female":[
+	"femelle",
+	"femelles",
+	"ç"
+	],
+"feminine":[
+	"féminin",
+	"féminine",
+	"féminines",
+	"féminins"
+	],
+"feminist":[
+	"féministe",
+	"féministes"
+	],
+"femoral":[
+	"fémoral",
+	"fémorale",
+	"fémorales",
+	"fémoraux"
+	],
+"feral":[
+	"haret",
+	"harets",
+	"harète",
+	"harètes",
+	"marron",
+	"marrons"
+	],
+"ferocious":[
+	"féroce",
+	"féroces"
+	],
+"ferrous":[
+	"ferreuse",
+	"ferreuses",
+	"ferreux"
+	],
+"fertile":[
+	"fertile",
+	"fertiles"
+	],
+"fervent":[
+	"fervent",
+	"fervente",
+	"ferventes",
+	"fervents"
+	],
+"fescennine":[
+	"licencieuse",
+	"licencieuses",
+	"licencieux",
+	"égrillard",
+	"égrillarde",
+	"égrillardes",
+	"égrillards"
+	],
+"festive":[
+	"festif",
+	"festifs",
+	"festive",
+	"festives"
+	],
+"fetal":[
+	"foetal",
+	"foetale",
+	"foetales",
+	"foetaux"
+	],
+"fetching":[
+	"attirant",
+	"attirante",
+	"attirantes",
+	"attirants"
+	],
+"fetid":[
+	"fétide",
+	"fétides"
+	],
+"fetishistic":[
+	"fétichiste",
+	"fétichistes"
+	],
+"feudal":[
+	"féodal",
+	"féodale",
+	"féodales",
+	"féodaux"
+	],
+"fevered":[
+	"enflammé",
+	"enflammée",
+	"enflammées",
+	"enflammés",
+	"fiévreuse",
+	"fiévreuses",
+	"fiévreux"
+	],
+"feverish":[
+	"fiévreuse",
+	"fiévreuses",
+	"fiévreux"
+	],
+"fey":[
+	"magique",
+	"magiques"
+	],
+"fibrillar":[
+	"fibrillaire",
+	"fibrillaires"
+	],
+"fibrous":[
+	"fibreuse",
+	"fibreuses",
+	"fibreux"
+	],
+"fickle":[
+	"capricieuse",
+	"capricieuses",
+	"capricieux",
+	"changeant",
+	"changeante",
+	"changeantes",
+	"changeants",
+	"inconstant",
+	"inconstante",
+	"inconstantes",
+	"inconstants",
+	"indécis",
+	"indécise",
+	"indécises",
+	"volage",
+	"volages"
+	],
+"fictional":[
+	"fictif",
+	"fictifs",
+	"fictive",
+	"fictives"
+	],
+"fictitious":[
+	"fictif",
+	"fictifs",
+	"fictive",
+	"fictives"
+	],
+"fiducial":[
+	"fiduciaire",
+	"fiduciaires"
+	],
+"fiduciary":[
+	"fiduciaire",
+	"fiduciaires"
+	],
+"fiendish":[
+	"diabolique",
+	"diaboliques"
+	],
+"fierce":[
+	"féroce",
+	"féroces"
+	],
+"fiery":[
+	"ardent",
+	"ardente",
+	"ardentes",
+	"ardents",
+	"enflammé",
+	"enflammée",
+	"enflammées",
+	"enflammés",
+	"flamboyant",
+	"flamboyante",
+	"flamboyantes",
+	"flamboyants"
+	],
+"fifteenth":[
+	"quinzième",
+	"quinzièmes"
+	],
+"fifth":[
+	"cinquième",
+	"cinquièmes"
+	],
+"fiftieth":[
+	"cinquantième",
+	"cinquantièmes"
+	],
+"figurative":[
+	"figuratif",
+	"figuratifs",
+	"figurative",
+	"figuratives",
+	"figuré",
+	"figurée",
+	"figurées",
+	"figurés"
+	],
+"filamented":[
+	"filamenteuse",
+	"filamenteuses",
+	"filamenteux"
+	],
+"filamentous":[
+	"filamenteuse",
+	"filamenteuses",
+	"filamenteux"
+	],
+"filial":[
+	"filial",
+	"filiale",
+	"filiales",
+	"filiaux"
+	],
+"filipino":[
+	"philippin",
+	"philippinne",
+	"philippinnes",
+	"philippins"
+	],
+"filling":[
+	"consistant",
+	"consistante",
+	"consistantes",
+	"consistants"
+	],
+"filthy":[
+	"crasseuse",
+	"crasseuses",
+	"crasseux"
+	],
+"final":[
+	"dernier",
+	"derniers",
+	"dernière",
+	"dernières",
+	"final",
+	"finale",
+	"finales",
+	"finals",
+	"finaux",
+	"ultime",
+	"ultimes"
+	],
+"financial":[
+	"financier",
+	"financiers",
+	"financière",
+	"financières"
+	],
+"fine":[
+	"beau",
+	"beaux",
+	"bel",
+	"belle",
+	"belles",
+	"bien",
+	"bô",
+	"fin",
+	"fine",
+	"fines",
+	"fins"
+	],
+"finished":[
+	"fini",
+	"finie",
+	"finies",
+	"finis"
+	],
+"finite":[
+	"fini",
+	"finie",
+	"finies",
+	"finis"
+	],
+"finnish":[
+	"finlandais",
+	"finlandaise",
+	"finlandaises",
+	"finnois",
+	"finnoise",
+	"finnoises"
+	],
+"fireproof":[
+	"ignifuge",
+	"ignifuges"
+	],
+"first":[
+	"premier",
+	"premiers",
+	"première",
+	"premières"
+	],
+"fiscal":[
+	"budgétaire",
+	"budgétaires"
+	],
+"fishy":[
+	"suspect",
+	"suspecte",
+	"suspectes",
+	"suspects"
+	],
+"fissile":[
+	"fissible",
+	"fissibles"
+	],
+"fissiparous":[
+	"artificiel",
+	"artificielle",
+	"artificielles",
+	"artificiels",
+	"incohérent",
+	"incohérente",
+	"incohérentes",
+	"incohérents"
+	],
+"fit":[
+	"adapté",
+	"adaptée",
+	"adaptées",
+	"adaptés",
+	"approprié",
+	"appropriée",
+	"appropriées",
+	"appropriés",
+	"apte",
+	"aptes",
+	"canon",
+	"canons",
+	"convenable",
+	"convenables",
+	"correct",
+	"correcte",
+	"correctes",
+	"corrects"
+	],
+"fitful":[
+	"irrégulier",
+	"irréguliers",
+	"irrégulière",
+	"irrégulières",
+	"sporadique",
+	"sporadiques"
+	],
+"fitting":[
+	"approprié",
+	"appropriée",
+	"appropriées",
+	"appropriés",
+	"conforme",
+	"conformes",
+	"convenable",
+	"convenables"
+	],
+"fixed":[
+	"fixé",
+	"fixée",
+	"fixées",
+	"fixés"
+	],
+"flabby":[
+	"flasque",
+	"flasques"
+	],
+"flaccid":[
+	"flasque",
+	"flasques"
+	],
+"flagrant":[
+	"flagrant",
+	"flagrante",
+	"flagrantes",
+	"flagrants"
+	],
+"flambé":[
+	"flambé",
+	"flambée",
+	"flambées",
+	"flambés"
+	],
+"flamboyant":[
+	"extravagant",
+	"extravagante",
+	"extravagantes",
+	"extravagants",
+	"flamboyant",
+	"flamboyante",
+	"flamboyantes",
+	"flamboyants"
+	],
+"flaming":[
+	"enflammé",
+	"enflammée",
+	"enflammées",
+	"enflammés",
+	"flambant",
+	"flambante",
+	"flambantes",
+	"flambants"
+	],
+"flammable":[
+	"inflammable",
+	"inflammables"
+	],
+"flat":[
+	"bas",
+	"basse",
+	"basses",
+	"bémol",
+	"crevé",
+	"crevée",
+	"crevées",
+	"crevés",
+	"dégonflé",
+	"dégonflée",
+	"dégonflées",
+	"dégonflés",
+	"ennuyeuse",
+	"ennuyeuses",
+	"ennuyeux",
+	"grave",
+	"graves",
+	"plat",
+	"plate",
+	"plates",
+	"plats"
+	],
+"flatulent":[
+	"flatulent",
+	"flatulente",
+	"flatulentes",
+	"flatulents"
+	],
+"flawed":[
+	"déficient",
+	"déficiente",
+	"déficientes",
+	"déficients",
+	"incorrect",
+	"incorrecte",
+	"incorrectes",
+	"incorrects"
+	],
+"flawless":[
+	"impecc",
+	"impeccable",
+	"impeccables",
+	"parfait",
+	"parfaite",
+	"parfaites",
+	"parfaits"
+	],
+"fledgling":[
+	"inexpérimenté",
+	"inexpérimentée",
+	"inexpérimentées",
+	"inexpérimentés"
+	],
+"fleeting":[
+	"fugace",
+	"fugaces",
+	"passagère",
+	"passagères",
+	"éphémère",
+	"éphémères"
+	],
+"flemish":[
+	"flamand",
+	"flamande",
+	"flamandes",
+	"flamands"
+	],
+"fleshy":[
+	"carné",
+	"carnée",
+	"carnées",
+	"carnés",
+	"charnu",
+	"charnue",
+	"charnues",
+	"charnus",
+	"pulpeuse",
+	"pulpeuses",
+	"pulpeux"
+	],
+"flexible":[
+	"flexible",
+	"flexibles",
+	"souple",
+	"souples"
+	],
+"flimsy":[
+	"fragile",
+	"fragiles",
+	"frêle",
+	"frêles"
+	],
+"flippant":[
+	"cavalier",
+	"cavaliers",
+	"cavalière",
+	"cavalières",
+	"désinvolte",
+	"désinvoltes"
+	],
+"floppy":[
+	"souple",
+	"souples"
+	],
+"floral":[
+	"floral",
+	"florale",
+	"florales",
+	"floraux"
+	],
+"florentine":[
+	"florentin",
+	"florentine",
+	"florentines",
+	"florentins"
+	],
+"flowery":[
+	"fleuri",
+	"fleurie",
+	"fleuries",
+	"fleuris"
+	],
+"fluffy":[
+	"pelucheuse",
+	"pelucheuses",
+	"pelucheux",
+	"touffu",
+	"touffue",
+	"touffues",
+	"touffus"
+	],
+"fluid":[
+	"fluide",
+	"fluides"
+	],
+"fluorescent":[
+	"fluorescent",
+	"fluorescente",
+	"fluorescentes",
+	"fluorescents"
+	],
+"flush":[
+	"riche",
+	"riches"
+	],
+"fluvial":[
+	"fluvial",
+	"fluviale",
+	"fluviales",
+	"fluviaux"
+	],
+"flyblown":[
+	"corrompu",
+	"corrompue",
+	"corrompues",
+	"corrompus",
+	"putride",
+	"putrides"
+	],
+"foamy":[
+	"mousseuse",
+	"mousseuses",
+	"mousseux"
+	],
+"focal":[
+	"focal",
+	"focale",
+	"focales",
+	"focaux"
+	],
+"foggy":[
+	"brumeuse",
+	"brumeuses",
+	"brumeux"
+	],
+"folding":[
+	"pliant",
+	"pliante",
+	"pliantes",
+	"pliants"
+	],
+"folkloric":[
+	"folklorique",
+	"folkloriques"
+	],
+"folksy":[
+	"campagnard",
+	"campagnarde",
+	"campagnardes",
+	"campagnards"
+	],
+"follicular":[
+	"folliculaire",
+	"folliculaires"
+	],
+"following":[
+	"favorable",
+	"favorables",
+	"suiv..",
+	"suivant",
+	"suivante",
+	"suivantes",
+	"suivants"
+	],
+"foolish":[
+	"bête",
+	"bêtes",
+	"idiot",
+	"idiote",
+	"idiotes",
+	"idiots",
+	"sot",
+	"sots",
+	"sotte",
+	"sottes",
+	"stupide",
+	"stupides"
+	],
+"forcible":[
+	"impressionnant",
+	"impressionnante",
+	"impressionnantes",
+	"impressionnants",
+	"puissant",
+	"puissante",
+	"puissantes",
+	"puissants",
+	"violent",
+	"violente",
+	"violentes",
+	"violents"
+	],
+"foregoing":[
+	"préc..",
+	"précédent",
+	"précédente",
+	"précédentes",
+	"précédents"
+	],
+"foregone":[
+	"inévitable",
+	"inévitables",
+	"préc..",
+	"précédent",
+	"précédente",
+	"précédentes",
+	"précédents",
+	"prévisible",
+	"prévisibles"
+	],
+"foreign":[
+	"étranger",
+	"étrangers",
+	"étrangère",
+	"étrangères"
+	],
+"foremost":[
+	"principal",
+	"principale",
+	"principales",
+	"principaux"
+	],
+"forensic":[
+	"juridique",
+	"juridiques",
+	"légal",
+	"légale",
+	"légales",
+	"légaux",
+	"rhétorique",
+	"rhétoriques"
+	],
+"foreseeable":[
+	"prévisible",
+	"prévisibles"
+	],
+"forested":[
+	"forestier",
+	"forestiers",
+	"forestière",
+	"forestières"
+	],
+"forgivable":[
+	"pardonnable",
+	"pardonnables"
+	],
+"forgiving":[
+	"indulgent",
+	"indulgente",
+	"indulgentes",
+	"indulgents"
+	],
+"forlorn":[
+	"abandonné",
+	"abandonnée",
+	"abandonnées",
+	"abandonnés",
+	"désespéré",
+	"désespérée",
+	"désespérées",
+	"désespérés"
+	],
+"formal":[
+	"formel",
+	"formelle",
+	"formelles",
+	"formels",
+	"officiel",
+	"officielle",
+	"officielles",
+	"officiels"
+	],
+"formalist":[
+	"formaliste",
+	"formalistes"
+	],
+"former":[
+	"ancien",
+	"ancienne",
+	"anciennes",
+	"anciens",
+	"premier",
+	"premiers",
+	"première",
+	"premières",
+	"préc..",
+	"précédent",
+	"précédente",
+	"précédentes",
+	"précédents"
+	],
+"formidable":[
+	"formidable",
+	"formidables"
+	],
+"formosan":[
+	"formosan",
+	"formosane",
+	"formosanes",
+	"formosans"
+	],
+"forsaken":[
+	"abandonné",
+	"abandonnée",
+	"abandonnées",
+	"abandonnés",
+	"esseulé",
+	"esseulée",
+	"esseulées",
+	"esseulés"
+	],
+"forthcoming":[
+	"prochain",
+	"prochaine",
+	"prochaines",
+	"prochains"
+	],
+"fortnightly":[
+	"bimensuel",
+	"bimensuelle",
+	"bimensuelles",
+	"bimensuels"
+	],
+"fortuitous":[
+	"fortuit",
+	"fortuite",
+	"fortuites",
+	"fortuits"
+	],
+"forward":[
+	"avant",
+	"cavalier",
+	"cavaliers",
+	"cavalière",
+	"cavalières"
+	],
+"fossiliferous":[
+	"fossilifère",
+	"fossilifères"
+	],
+"fossorial":[
+	"fouisseur",
+	"fouisseurs",
+	"fouisseuse",
+	"fouisseuses"
+	],
+"foster":[
+	"adoptant",
+	"adoptante",
+	"adoptantes",
+	"adoptants",
+	"adoptif",
+	"adoptifs",
+	"adoptive",
+	"adoptives"
+	],
+"foul":[
+	"indécent",
+	"indécente",
+	"indécentes",
+	"indécents",
+	"répugnant",
+	"répugnante",
+	"répugnantes",
+	"répugnants"
+	],
+"founded":[
+	"fondé",
+	"fondée",
+	"fondées",
+	"fondés"
+	],
+"founding":[
+	"fondateur",
+	"fondateurs",
+	"fondatrice",
+	"fondatrices"
+	],
+"fourierist":[
+	"fouriériste",
+	"fouriéristes"
+	],
+"fourteenth":[
+	"quatorzième",
+	"quatorzièmes"
+	],
+"foxy":[
+	"foxé",
+	"foxée",
+	"foxées",
+	"foxés",
+	"rousse",
+	"rousses",
+	"roux"
+	],
+"fractal":[
+	"fractal",
+	"fractale",
+	"fractales",
+	"fractals"
+	],
+"fractional":[
+	"fractionnaire",
+	"fractionnaires",
+	"fractionnel",
+	"fractionnelle",
+	"fractionnelles",
+	"fractionnels"
+	],
+"fractious":[
+	"hargneuse",
+	"hargneuses",
+	"hargneux"
+	],
+"fragile":[
+	"fragile",
+	"fragiles"
+	],
+"fragrant":[
+	"aromatique",
+	"aromatiques",
+	"odorant",
+	"odorante",
+	"odorantes",
+	"odorants"
+	],
+"frail":[
+	"fragile",
+	"fragiles",
+	"frêle",
+	"frêles"
+	],
+"franciscan":[
+	"franciscain",
+	"franciscaine",
+	"franciscaines",
+	"franciscains"
+	],
+"franconian":[
+	"franc",
+	"franche",
+	"franches",
+	"francique",
+	"franciques",
+	"francs",
+	"franque",
+	"franques"
+	],
+"francophile":[
+	"francophile",
+	"francophiles"
+	],
+"francophone":[
+	"francophone",
+	"francophones"
+	],
+"frank":[
+	"franc",
+	"franche",
+	"franches",
+	"francs",
+	"franque",
+	"franques"
+	],
+"frankish":[
+	"francique",
+	"franciques"
+	],
+"franquist":[
+	"franquiste",
+	"franquistes"
+	],
+"frantic":[
+	"frénétique",
+	"frénétiques",
+	"éperdu",
+	"éperdue",
+	"éperdues",
+	"éperdus"
+	],
+"fraternal":[
+	"fraternel",
+	"fraternelle",
+	"fraternelles",
+	"fraternels"
+	],
+"fratricidal":[
+	"fratricide",
+	"fratricides"
+	],
+"fraudulent":[
+	"frauduleuse",
+	"frauduleuses",
+	"frauduleux"
+	],
+"fraught":[
+	"plein",
+	"pleine",
+	"pleines",
+	"pleins",
+	"stressant",
+	"stressante",
+	"stressantes",
+	"stressants"
+	],
+"free":[
+	"disponible",
+	"disponibles",
+	"libre",
+	"libres"
+	],
+"freelance":[
+	"indépendant",
+	"indépendante",
+	"indépendantes",
+	"indépendants"
+	],
+"freezing":[
+	"polaire",
+	"polaires"
+	],
+"french":[
+	"français",
+	"française",
+	"françaises"
+	],
+"frenetic":[
+	"frénétique",
+	"frénétiques"
+	],
+"frequent":[
+	"fréquent",
+	"fréquente",
+	"fréquentes",
+	"fréquents"
+	],
+"fresh":[
+	"douce",
+	"douces",
+	"doux",
+	"frais",
+	"fraîche",
+	"fraîches",
+	"nouveau",
+	"nouveaux",
+	"nouvel",
+	"nouvelle",
+	"nouvelles"
+	],
+"fretful":[
+	"agité",
+	"agitée",
+	"agitées",
+	"agités",
+	"fébrile",
+	"fébriles",
+	"irritable",
+	"irritables"
+	],
+"fretty":[
+	"fretté",
+	"frettée",
+	"frettées",
+	"frettés"
+	],
+"freudian":[
+	"freudien",
+	"freudienne",
+	"freudiennes",
+	"freudiens"
+	],
+"friable":[
+	"cassant",
+	"cassante",
+	"cassantes",
+	"cassants",
+	"friable",
+	"friables",
+	"lâche",
+	"lâches"
+	],
+"fricative":[
+	"fricatif",
+	"fricatifs",
+	"fricative",
+	"fricatives"
+	],
+"fricking":[
+	"foutu",
+	"foutue",
+	"foutues",
+	"foutus"
+	],
+"fried":[
+	"frit",
+	"frite",
+	"frites",
+	"frits",
+	"grillé",
+	"grillée",
+	"grillées",
+	"grillés"
+	],
+"friendly":[
+	"aimable",
+	"aimables",
+	"allié",
+	"alliée",
+	"alliées",
+	"alliés",
+	"amical",
+	"amicale",
+	"amicales",
+	"amicaux",
+	"gentil",
+	"gentille",
+	"gentilles",
+	"gentils"
+	],
+"frightened":[
+	"apeuré",
+	"apeurée",
+	"apeurées",
+	"apeurés",
+	"effrayé",
+	"effrayée",
+	"effrayées",
+	"effrayés"
+	],
+"frightening":[
+	"effrayant",
+	"effrayante",
+	"effrayantes",
+	"effrayants"
+	],
+"frightful":[
+	"effrayant",
+	"effrayante",
+	"effrayantes",
+	"effrayants"
+	],
+"frigid":[
+	"frigide",
+	"frigides"
+	],
+"frilly":[
+	"frisé",
+	"frisée",
+	"frisées",
+	"frisés"
+	],
+"fringe":[
+	"marginal",
+	"marginale",
+	"marginales",
+	"marginaux"
+	],
+"frisian":[
+	"frison",
+	"frisonne",
+	"frisonnes",
+	"frisons"
+	],
+"frisky":[
+	"taquin",
+	"taquine",
+	"taquines",
+	"taquins"
+	],
+"frivolous":[
+	"frivole",
+	"frivoles"
+	],
+"frizzy":[
+	"crépu",
+	"crépue",
+	"crépues",
+	"crépus"
+	],
+"frolicsome":[
+	"badin",
+	"badine",
+	"badines",
+	"badins",
+	"espiègle",
+	"espiègles",
+	"folâtre",
+	"folâtres"
+	],
+"frontal":[
+	"frontal",
+	"frontale",
+	"frontales",
+	"frontaux"
+	],
+"frosty":[
+	"froid",
+	"froide",
+	"froides",
+	"froids",
+	"gelé",
+	"gelée",
+	"gelées",
+	"gelés",
+	"givré",
+	"givrée",
+	"givrées",
+	"givrés",
+	"glacial",
+	"glaciale",
+	"glaciales",
+	"glacials",
+	"glaciaux"
+	],
+"frothy":[
+	"mousseuse",
+	"mousseuses",
+	"mousseux"
+	],
+"frozen":[
+	"gelé",
+	"gelée",
+	"gelées",
+	"gelés"
+	],
+"frugal":[
+	"frugal",
+	"frugale",
+	"frugales",
+	"frugaux"
+	],
+"fruitful":[
+	"fructueuse",
+	"fructueuses",
+	"fructueux"
+	],
+"fruitless":[
+	"abortif",
+	"abortifs",
+	"abortive",
+	"abortives",
+	"vain",
+	"vaine",
+	"vaines",
+	"vains"
+	],
+"frumpy":[
+	"démodé",
+	"démodée",
+	"démodées",
+	"démodés"
+	],
+"frustrating":[
+	"frustrant",
+	"frustrante",
+	"frustrantes",
+	"frustrants"
+	],
+"fuegian":[
+	"fuégien",
+	"fuégienne",
+	"fuégiennes",
+	"fuégiens"
+	],
+"fugitive":[
+	"fuyant",
+	"fuyante",
+	"fuyantes",
+	"fuyants",
+	"éphémère",
+	"éphémères"
+	],
+"fuliginous":[
+	"fuligineuse",
+	"fuligineuses",
+	"fuligineux"
+	],
+"full":[
+	"complet",
+	"complets",
+	"complète",
+	"complètes",
+	"entier",
+	"entiers",
+	"entière",
+	"entières",
+	"plein",
+	"pleine",
+	"pleines",
+	"pleins",
+	"repu",
+	"repue",
+	"repues",
+	"repus",
+	"total",
+	"totale",
+	"totales",
+	"totaux"
+	],
+"fulminant":[
+	"foudroyant",
+	"foudroyante",
+	"foudroyantes",
+	"foudroyants"
+	],
+"fun":[
+	"amusant",
+	"amusante",
+	"amusantes",
+	"amusants"
+	],
+"functional":[
+	"fonctionnel",
+	"fonctionnelle",
+	"fonctionnelles",
+	"fonctionnels"
+	],
+"fundamental":[
+	"fondamental",
+	"fondamentale",
+	"fondamentales",
+	"fondamentaux"
+	],
+"funerary":[
+	"funéraire",
+	"funéraires"
+	],
+"funereal":[
+	"funèbre",
+	"funèbres",
+	"funéraire",
+	"funéraires"
+	],
+"fungible":[
+	"fongible",
+	"fongibles"
+	],
+"funny":[
+	"amusant",
+	"amusante",
+	"amusantes",
+	"amusants",
+	"bizarre",
+	"bizarres",
+	"drôle",
+	"drôles",
+	"marrant",
+	"marrante",
+	"marrantes",
+	"marrants",
+	"rigolo",
+	"rigolos",
+	"rigolote",
+	"rigolotes",
+	"étrange",
+	"étranges"
+	],
+"furcate":[
+	"bifurqué",
+	"bifurquée",
+	"bifurquées",
+	"bifurqués"
+	],
+"furious":[
+	"furieuse",
+	"furieuses",
+	"furieux"
+	],
+"furry":[
+	"poilu",
+	"poilue",
+	"poilues",
+	"poilus",
+	"velu",
+	"velue",
+	"velues",
+	"velus"
+	],
+"furtive":[
+	"furtif",
+	"furtifs",
+	"furtive",
+	"furtives"
+	],
+"fusiform":[
+	"fusiforme",
+	"fusiformes"
+	],
+"futile":[
+	"futile",
+	"futiles"
+	],
+"future":[
+	"futur",
+	"future",
+	"futures",
+	"futurs"
+	],
+"futurist":[
+	"futuriste",
+	"futuristes"
+	],
+"fuzzy":[
+	"confus",
+	"confuse",
+	"confuses",
+	"flou",
+	"floue",
+	"floues",
+	"flous"
+	],
+"gaga":[
+	"gaga",
+	"gâteuse",
+	"gâteuses",
+	"gâteux"
+	],
+"galactagogic":[
+	"galactagogue",
+	"galactagogues"
+	],
+"galactic":[
+	"astronomique",
+	"astronomiques",
+	"colossal",
+	"colossale",
+	"colossales",
+	"colossaux",
+	"galactique",
+	"galactiques",
+	"lactique",
+	"lactiques",
+	"monumental",
+	"monumentale",
+	"monumentales",
+	"monumentaux",
+	"phénoménal",
+	"phénoménale",
+	"phénoménales",
+	"phénoménaux",
+	"titanesque",
+	"titanesques"
+	],
+"galatian":[
+	"galate",
+	"galates"
+	],
+"galician":[
+	"galicien",
+	"galicienne",
+	"galiciennes",
+	"galiciens"
+	],
+"gallant":[
+	"brave",
+	"braves"
+	],
+"gallic":[
+	"gaulois",
+	"gauloise",
+	"gauloises"
+	],
+"galvanic":[
+	"galvanique",
+	"galvaniques"
+	],
+"galvanoplastic":[
+	"galvanoplastique",
+	"galvanoplastiques"
+	],
+"gangetic":[
+	"gangétique",
+	"gangétiques"
+	],
+"ganglial":[
+	"ganglionnaire",
+	"ganglionnaires"
+	],
+"gangling":[
+	"dégingandé",
+	"dégingandée",
+	"dégingandées",
+	"dégingandés"
+	],
+"gangly":[
+	"dégingandé",
+	"dégingandée",
+	"dégingandées",
+	"dégingandés"
+	],
+"gaping":[
+	"béant",
+	"béante",
+	"béantes",
+	"béants"
+	],
+"gargantuan":[
+	"gargantuesque",
+	"gargantuesques"
+	],
+"garibaldian":[
+	"garibaldien",
+	"garibaldienne",
+	"garibaldiennes",
+	"garibaldiens"
+	],
+"garish":[
+	"criard",
+	"criarde",
+	"criardes",
+	"criards",
+	"tape-à-l'oeil",
+	"voyant",
+	"voyante",
+	"voyantes",
+	"voyants"
+	],
+"garlicky":[
+	"alliacé",
+	"alliacée",
+	"alliacées",
+	"alliacés"
+	],
+"gaseous":[
+	"gazeuse",
+	"gazeuses",
+	"gazeux"
+	],
+"gassy":[
+	"flatulent",
+	"flatulente",
+	"flatulentes",
+	"flatulents",
+	"gazeuse",
+	"gazeuses",
+	"gazeux"
+	],
+"gastric":[
+	"gastrique",
+	"gastriques"
+	],
+"gastronomic":[
+	"gastronomique",
+	"gastronomiques"
+	],
+"gauche":[
+	"gauche",
+	"gauches"
+	],
+"gaudy":[
+	"criard",
+	"criarde",
+	"criardes",
+	"criards",
+	"voyant",
+	"voyante",
+	"voyantes",
+	"voyants",
+	"vulgaire",
+	"vulgaires"
+	],
+"gaulish":[
+	"gaulois",
+	"gauloise",
+	"gauloises"
+	],
+"gaunt":[
+	"anguleuse",
+	"anguleuses",
+	"anguleux",
+	"maigre",
+	"maigres",
+	"osseuse",
+	"osseuses",
+	"osseux",
+	"émacié",
+	"émaciée",
+	"émaciées",
+	"émaciés"
+	],
+"gawky":[
+	"godiche",
+	"godiches",
+	"maladroit",
+	"maladroite",
+	"maladroites",
+	"maladroits"
+	],
+"gay":[
+	"gai",
+	"gaie",
+	"gaies",
+	"gais",
+	"gay",
+	"gays",
+	"homo",
+	"homos",
+	"ringard",
+	"ringarde",
+	"ringardes",
+	"ringards"
+	],
+"gelatinous":[
+	"gélatineuse",
+	"gélatineuses",
+	"gélatineux"
+	],
+"gelid":[
+	"froid",
+	"froide",
+	"froides",
+	"froids",
+	"glacial",
+	"glaciale",
+	"glaciales",
+	"glacials",
+	"glaciaux",
+	"glacé",
+	"glacée",
+	"glacées",
+	"glacés"
+	],
+"genealogical":[
+	"généalogique",
+	"généalogiques"
+	],
+"general":[
+	"communal",
+	"communale",
+	"communales",
+	"communaux",
+	"d'ensemble",
+	"général",
+	"générale",
+	"générales",
+	"généraux"
+	],
+"generational":[
+	"générationnel",
+	"générationnelle",
+	"générationnelles",
+	"générationnels"
+	],
+"generic":[
+	"générique",
+	"génériques"
+	],
+"generous":[
+	"généreuse",
+	"généreuses",
+	"généreux"
+	],
+"genetic":[
+	"génétique",
+	"génétiques"
+	],
+"genevan":[
+	"genevois",
+	"genevoise",
+	"genevoises"
+	],
+"genial":[
+	"génial",
+	"géniale",
+	"géniales",
+	"géniaux"
+	],
+"genital":[
+	"génital",
+	"génitale",
+	"génitales",
+	"génitaux"
+	],
+"genitourinary":[
+	"génito-urinaire",
+	"génito-urinaires"
+	],
+"genoan":[
+	"génois",
+	"génoise",
+	"génoises"
+	],
+"genocidal":[
+	"génocidaire",
+	"génocidaires"
+	],
+"genoese":[
+	"génois",
+	"génoise",
+	"génoises"
+	],
+"gentle":[
+	"douce",
+	"douces",
+	"doux",
+	"gentil",
+	"gentille",
+	"gentilles",
+	"gentils"
+	],
+"genuine":[
+	"authentique",
+	"authentiques"
+	],
+"geocentric":[
+	"géocentrique",
+	"géocentriques"
+	],
+"geographic":[
+	"géographique",
+	"géographiques"
+	],
+"geologic":[
+	"géologique",
+	"géologiques"
+	],
+"geometric":[
+	"géométrique",
+	"géométriques"
+	],
+"geophysical":[
+	"géophysique",
+	"géophysiques"
+	],
+"georgian":[
+	"géorgien",
+	"géorgienne",
+	"géorgiennes",
+	"géorgiens"
+	],
+"geothermal":[
+	"géothermique",
+	"géothermiques"
+	],
+"geriatric":[
+	"gériatrique",
+	"gériatriques"
+	],
+"german":[
+	"allemand",
+	"allemande",
+	"allemandes",
+	"allemands",
+	"germain",
+	"germaine",
+	"germaines",
+	"germains"
+	],
+"germane":[
+	"pertinent",
+	"pertinente",
+	"pertinentes",
+	"pertinents"
+	],
+"germanic":[
+	"germanique",
+	"germaniques"
+	],
+"germanophone":[
+	"germanophone",
+	"germanophones"
+	],
+"ghanaian":[
+	"ghanéen",
+	"ghanéenne",
+	"ghanéennes",
+	"ghanéens"
+	],
+"ghastly":[
+	"affreuse",
+	"affreuses",
+	"affreux",
+	"effrayant",
+	"effrayante",
+	"effrayantes",
+	"effrayants",
+	"horrible",
+	"horribles",
+	"épouvantable",
+	"épouvantables"
+	],
+"ghostly":[
+	"fantomatique",
+	"fantomatiques"
+	],
+"gibbous":[
+	"gibbeuse",
+	"gibbeuses",
+	"gibbeux"
+	],
+"giddy":[
+	"étourdi",
+	"étourdie",
+	"étourdies",
+	"étourdis",
+	"étourdissant",
+	"étourdissante",
+	"étourdissantes",
+	"étourdissants"
+	],
+"gifted":[
+	"doué",
+	"douée",
+	"douées",
+	"doués"
+	],
+"gigantic":[
+	"gigantesque",
+	"gigantesques"
+	],
+"gilded":[
+	"doré",
+	"dorée",
+	"dorées",
+	"dorés"
+	],
+"gilt":[
+	"doré",
+	"dorée",
+	"dorées",
+	"dorés"
+	],
+"ginger":[
+	"rousse",
+	"rousses",
+	"roux"
+	],
+"ginormous":[
+	"gigantesque",
+	"gigantesques"
+	],
+"girly":[
+	"féminin",
+	"féminine",
+	"féminines",
+	"féminins"
+	],
+"giscardian":[
+	"giscardien",
+	"giscardienne",
+	"giscardiennes",
+	"giscardiens"
+	],
+"giving":[
+	"généreuse",
+	"généreuses",
+	"généreux"
+	],
+"glad":[
+	"content",
+	"contente",
+	"contentes",
+	"contents",
+	"heureuse",
+	"heureuses",
+	"heureux"
+	],
+"glagolitic":[
+	"glagolitique",
+	"glagolitiques"
+	],
+"glamorous":[
+	"charmant",
+	"charmante",
+	"charmantes",
+	"charmants"
+	],
+"glandular":[
+	"glandulaire",
+	"glandulaires"
+	],
+"glaring":[
+	"évident",
+	"évidente",
+	"évidentes",
+	"évidents"
+	],
+"glaucous":[
+	"glauque",
+	"glauques"
+	],
+"gleaming":[
+	"brillant",
+	"brillante",
+	"brillantes",
+	"brillants"
+	],
+"glib":[
+	"désinvolte",
+	"désinvoltes"
+	],
+"glittering":[
+	"étincelant",
+	"étincelante",
+	"étincelantes",
+	"étincelants"
+	],
+"global":[
+	"global",
+	"globale",
+	"globales",
+	"globaux",
+	"globulaire",
+	"globulaires",
+	"mondial",
+	"mondiale",
+	"mondiales",
+	"mondiaux"
+	],
+"globalist":[
+	"globaliste",
+	"globalistes"
+	],
+"globular":[
+	"globulaire",
+	"globulaires"
+	],
+"gloomy":[
+	"lugubre",
+	"lugubres",
+	"maussade",
+	"maussades",
+	"mélancolique",
+	"mélancoliques",
+	"sombre",
+	"sombres",
+	"terne",
+	"ternes"
+	],
+"glorious":[
+	"glorieuse",
+	"glorieuses",
+	"glorieux",
+	"splendide",
+	"splendides"
+	],
+"glossy":[
+	"brillant",
+	"brillante",
+	"brillantes",
+	"brillants",
+	"luisant",
+	"luisante",
+	"luisantes",
+	"luisants"
+	],
+"glottal":[
+	"glottal",
+	"glottale",
+	"glottales",
+	"glottaux",
+	"glottique",
+	"glottiques"
+	],
+"glowing":[
+	"brillant",
+	"brillante",
+	"brillantes",
+	"brillants",
+	"luisant",
+	"luisante",
+	"luisantes",
+	"luisants"
+	],
+"gluconic":[
+	"gluconique",
+	"gluconiques"
+	],
+"glum":[
+	"morose",
+	"moroses"
+	],
+"glutinous":[
+	"glutineuse",
+	"glutineuses",
+	"glutineux"
+	],
+"gluttonous":[
+	"avide",
+	"avides",
+	"glouton",
+	"gloutonne",
+	"gloutonnes",
+	"gloutons",
+	"goulu",
+	"goulue",
+	"goulues",
+	"goulus",
+	"gourmand",
+	"gourmande",
+	"gourmandes",
+	"gourmands",
+	"vorace",
+	"voraces"
+	],
+"glycemic":[
+	"glycémique",
+	"glycémiques"
+	],
+"gnarled":[
+	"noueuse",
+	"noueuses",
+	"noueux"
+	],
+"gnomonic":[
+	"gnomonique",
+	"gnomoniques"
+	],
+"godlike":[
+	"divin",
+	"divine",
+	"divines",
+	"divins"
+	],
+"godly":[
+	"divin",
+	"divine",
+	"divines",
+	"divins",
+	"pieuse",
+	"pieuses",
+	"pieux"
+	],
+"goidelic":[
+	"gaélique",
+	"gaéliques"
+	],
+"goitrous":[
+	"goitreuse",
+	"goitreuses",
+	"goitreux"
+	],
+"gold":[
+	"doré",
+	"dorée",
+	"dorées",
+	"dorés"
+	],
+"golden":[
+	"doré",
+	"dorée",
+	"dorées",
+	"dorés"
+	],
+"good":[
+	"bon",
+	"bonne",
+	"bonnes",
+	"bons"
+	],
+"gooey":[
+	"gluant",
+	"gluante",
+	"gluantes",
+	"gluants"
+	],
+"goofy":[
+	"bête",
+	"bêtes",
+	"dingue",
+	"dingues",
+	"débile",
+	"débiles"
+	],
+"gorgeous":[
+	"magnifique",
+	"magnifiques"
+	],
+"gormless":[
+	"absurde",
+	"absurdes",
+	"puéril",
+	"puérile",
+	"puériles",
+	"puérils"
+	],
+"gory":[
+	"sanglant",
+	"sanglante",
+	"sanglantes",
+	"sanglants"
+	],
+"gothic":[
+	"gothique",
+	"gothiques"
+	],
+"gourmet":[
+	"gastronomique",
+	"gastronomiques"
+	],
+"governable":[
+	"gouvernable",
+	"gouvernables"
+	],
+"governmental":[
+	"gouvernemental",
+	"gouvernementale",
+	"gouvernementales",
+	"gouvernementaux"
+	],
+"graceful":[
+	"gracieuse",
+	"gracieuses",
+	"gracieux"
+	],
+"grammatical":[
+	"grammatical",
+	"grammaticale",
+	"grammaticales",
+	"grammaticaux"
+	],
+"gramscian":[
+	"gramscien",
+	"gramscienne",
+	"gramsciennes",
+	"gramsciens"
+	],
+"grandiloquent":[
+	"grandiloquent",
+	"grandiloquente",
+	"grandiloquentes",
+	"grandiloquents"
+	],
+"grandiose":[
+	"grandiose",
+	"grandioses",
+	"pompeuse",
+	"pompeuses",
+	"pompeux",
+	"prétentieuse",
+	"prétentieuses",
+	"prétentieux"
+	],
+"granitic":[
+	"granitique",
+	"granitiques"
+	],
+"granular":[
+	"granuleuse",
+	"granuleuses",
+	"granuleux"
+	],
+"graphic":[
+	"cru",
+	"crue",
+	"crues",
+	"crus",
+	"explicite",
+	"explicites",
+	"graphique",
+	"graphiques",
+	"imagé",
+	"imagée",
+	"imagées",
+	"imagés"
+	],
+"grassroots":[
+	"local",
+	"locale",
+	"locales",
+	"locaux"
+	],
+"grassy":[
+	"herbeuse",
+	"herbeuses",
+	"herbeux"
+	],
+"grateful":[
+	"reconnaissant",
+	"reconnaissante",
+	"reconnaissantes",
+	"reconnaissants"
+	],
+"gratuitous":[
+	"gratuit",
+	"gratuite",
+	"gratuites",
+	"gratuits"
+	],
+"grave":[
+	"grave",
+	"graves"
+	],
+"gravid":[
+	"gravide",
+	"gravides"
+	],
+"gravitational":[
+	"gravitationnel",
+	"gravitationnelle",
+	"gravitationnelles",
+	"gravitationnels"
+	],
+"gray":[
+	"gris",
+	"grise",
+	"grises"
+	],
+"grayish":[
+	"grisâtre",
+	"grisâtres"
+	],
+"great":[
+	"excellent",
+	"excellente",
+	"excellentes",
+	"excellents",
+	"formidable",
+	"formidables",
+	"grand",
+	"grand'",
+	"grande",
+	"grandes",
+	"grands",
+	"important",
+	"importante",
+	"importantes",
+	"importants",
+	"super"
+	],
+"greedy":[
+	"avaricieuse",
+	"avaricieuses",
+	"avaricieux",
+	"avide",
+	"avides",
+	"cupide",
+	"cupides",
+	"gourmand",
+	"gourmande",
+	"gourmandes",
+	"gourmands"
+	],
+"greek":[
+	"chinois",
+	"chinoise",
+	"chinoises",
+	"grec",
+	"grecque",
+	"grecques",
+	"grecs"
+	],
+"green":[
+	"bleu",
+	"bleue",
+	"bleues",
+	"bleus",
+	"vert",
+	"verte",
+	"vertes",
+	"verts"
+	],
+"greenish":[
+	"verdâtre",
+	"verdâtres"
+	],
+"greenlandish":[
+	"groenlandais",
+	"groenlandaise",
+	"groenlandaises"
+	],
+"gregarious":[
+	"grégaire",
+	"grégaires",
+	"sociable",
+	"sociables"
+	],
+"grey":[
+	"gris",
+	"grise",
+	"grises"
+	],
+"grim":[
+	"déprimant",
+	"déprimante",
+	"déprimantes",
+	"déprimants",
+	"indéfectible",
+	"indéfectibles",
+	"inébranlable",
+	"inébranlables",
+	"rigide",
+	"rigides",
+	"sinistre",
+	"sinistres",
+	"sombre",
+	"sombres",
+	"triste",
+	"tristes"
+	],
+"grisly":[
+	"épouvantable",
+	"épouvantables"
+	],
+"gritty":[
+	"déterminé",
+	"déterminée",
+	"déterminées",
+	"déterminés",
+	"graveleuse",
+	"graveleuses",
+	"graveleux",
+	"résolu",
+	"résolue",
+	"résolues",
+	"résolus"
+	],
+"groggy":[
+	"étourdi",
+	"étourdie",
+	"étourdies",
+	"étourdis"
+	],
+"gross":[
+	"brut",
+	"brute",
+	"brutes",
+	"bruts",
+	"dégoûtant",
+	"dégoûtante",
+	"dégoûtantes",
+	"dégoûtants",
+	"dégueulasse",
+	"dégueulasses",
+	"gras",
+	"grasse",
+	"grasses",
+	"gros",
+	"grosse",
+	"grosses",
+	"grossier",
+	"grossiers",
+	"grossière",
+	"grossières"
+	],
+"grotesque":[
+	"grotesque",
+	"grotesques"
+	],
+"grouchy":[
+	"grincheuse",
+	"grincheuses",
+	"grincheux"
+	],
+"ground":[
+	"haché",
+	"hachée",
+	"hachées",
+	"hachés"
+	],
+"groundless":[
+	"infondé",
+	"infondée",
+	"infondées",
+	"infondés"
+	],
+"growing":[
+	"croissant",
+	"croissante",
+	"croissantes",
+	"croissants"
+	],
+"grubby":[
+	"crasseuse",
+	"crasseuses",
+	"crasseux",
+	"véreuse",
+	"véreuses",
+	"véreux"
+	],
+"gruelling":[
+	"éreintant",
+	"éreintante",
+	"éreintantes",
+	"éreintants"
+	],
+"gruesome":[
+	"horrible",
+	"horribles"
+	],
+"gruff":[
+	"bourru",
+	"bourrue",
+	"bourrues",
+	"bourrus",
+	"rauque",
+	"rauques"
+	],
+"grumpy":[
+	"grognon",
+	"grognonne",
+	"grognonnes",
+	"grognons"
+	],
+"guadeloupean":[
+	"guadeloupéen",
+	"guadeloupéenne",
+	"guadeloupéennes",
+	"guadeloupéens"
+	],
+"guarded":[
+	"circonspect",
+	"circonspecte",
+	"circonspectes",
+	"circonspects"
+	],
+"guatemalan":[
+	"guatémaltèque",
+	"guatémaltèques"
+	],
+"guelphic":[
+	"guelfe",
+	"guelfes"
+	],
+"guesdist":[
+	"guesdiste",
+	"guesdistes"
+	],
+"guileless":[
+	"candide",
+	"candides"
+	],
+"guilty":[
+	"coupable",
+	"coupables"
+	],
+"gullible":[
+	"crédule",
+	"crédules",
+	"naïf",
+	"naïfs",
+	"naïve",
+	"naïves"
+	],
+"gut":[
+	"viscéral",
+	"viscérale",
+	"viscérales",
+	"viscéraux"
+	],
+"guttural":[
+	"guttural",
+	"gutturale",
+	"gutturales",
+	"gutturaux"
+	],
+"gynecological":[
+	"gynécologique",
+	"gynécologiques"
+	],
+"gypseous":[
+	"gypseuse",
+	"gypseuses",
+	"gypseux"
+	],
+"gyromagnetic":[
+	"gyromagnétique",
+	"gyromagnétiques"
+	],
+"gyronny":[
+	"gironné",
+	"gironnée",
+	"gironnées",
+	"gironnés"
+	],
+"gyroscopic":[
+	"gyroscopique",
+	"gyroscopiques"
+	],
+"habitual":[
+	"habituel",
+	"habituelle",
+	"habituelles",
+	"habituels"
+	],
+"habsburg":[
+	"habsbourgeois",
+	"habsbourgeoise",
+	"habsbourgeoises"
+	],
+"hackneyed":[
+	"éculé",
+	"éculée",
+	"éculées",
+	"éculés"
+	],
+"hadal":[
+	"hadal",
+	"hadale",
+	"hadales",
+	"hadaux"
+	],
+"haggard":[
+	"hagard",
+	"hagarde",
+	"hagardes",
+	"hagards"
+	],
+"hagiographic":[
+	"hagiographique",
+	"hagiographiques"
+	],
+"hairless":[
+	"glabre",
+	"glabres"
+	],
+"hairy":[
+	"poilu",
+	"poilue",
+	"poilues",
+	"poilus"
+	],
+"haitian":[
+	"haïtien",
+	"haïtienne",
+	"haïtiennes",
+	"haïtiens"
+	],
+"hale":[
+	"sain",
+	"saine",
+	"saines",
+	"sains"
+	],
+"half":[
+	"demi",
+	"demis"
+	],
+"hallucinogenic":[
+	"hallucinogène",
+	"hallucinogènes"
+	],
+"hamitic":[
+	"chamitique",
+	"chamitiques"
+	],
+"hammy":[
+	"cabotin",
+	"cabotine",
+	"cabotines",
+	"cabotins"
+	],
+"handcrafted":[
+	"artisanal",
+	"artisanale",
+	"artisanales",
+	"artisanaux"
+	],
+"handicapped":[
+	"handicapé",
+	"handicapée",
+	"handicapées",
+	"handicapés"
+	],
+"handmade":[
+	"manuel",
+	"manuelle",
+	"manuelles",
+	"manuels"
+	],
+"handsome":[
+	"beau",
+	"beaux",
+	"bel",
+	"belle",
+	"belles",
+	"bô"
+	],
+"handy":[
+	"commode",
+	"commodes",
+	"maniable",
+	"maniables",
+	"pratique",
+	"pratiques"
+	],
+"haphazard":[
+	"aléatoire",
+	"aléatoires",
+	"désordonné",
+	"désordonnée",
+	"désordonnées",
+	"désordonnés",
+	"hasardeuse",
+	"hasardeuses",
+	"hasardeux"
+	],
+"hapless":[
+	"infortuné",
+	"infortunée",
+	"infortunées",
+	"infortunés",
+	"malheureuse",
+	"malheureuses",
+	"malheureux"
+	],
+"haploid":[
+	"haploïde",
+	"haploïdes"
+	],
+"happy":[
+	"bienheureuse",
+	"bienheureuses",
+	"bienheureux",
+	"chanceuse",
+	"chanceuses",
+	"chanceux",
+	"content",
+	"contente",
+	"contentes",
+	"contents",
+	"heureuse",
+	"heureuses",
+	"heureux",
+	"prêt",
+	"prête",
+	"prêtes",
+	"prêts",
+	"satisfait",
+	"satisfaite",
+	"satisfaites",
+	"satisfaits"
+	],
+"haptic":[
+	"tactile",
+	"tactiles"
+	],
+"hard":[
+	"difficile",
+	"difficiles",
+	"dur",
+	"dure",
+	"dures",
+	"durs",
+	"fort",
+	"forte",
+	"fortes",
+	"forts",
+	"irréfutable",
+	"irréfutables"
+	],
+"hardworking":[
+	"diligent",
+	"diligente",
+	"diligentes",
+	"diligents",
+	"industrieuse",
+	"industrieuses",
+	"industrieux",
+	"travailleur",
+	"travailleurs",
+	"travailleuse",
+	"travailleuses"
+	],
+"hardy":[
+	"robuste",
+	"robustes"
+	],
+"harmful":[
+	"dangereuse",
+	"dangereuses",
+	"dangereux",
+	"nocif",
+	"nocifs",
+	"nocive",
+	"nocives",
+	"nuisible",
+	"nuisibles",
+	"préjudiciable",
+	"préjudiciables"
+	],
+"harmless":[
+	"inoffensif",
+	"inoffensifs",
+	"inoffensive",
+	"inoffensives"
+	],
+"harmonic":[
+	"harmonieuse",
+	"harmonieuses",
+	"harmonieux",
+	"harmonique",
+	"harmoniques",
+	"mélodieuse",
+	"mélodieuses",
+	"mélodieux",
+	"mélodique",
+	"mélodiques"
+	],
+"harmonious":[
+	"harmonieuse",
+	"harmonieuses",
+	"harmonieux"
+	],
+"harrowing":[
+	"navrant",
+	"navrante",
+	"navrantes",
+	"navrants",
+	"éprouvant",
+	"éprouvante",
+	"éprouvantes",
+	"éprouvants"
+	],
+"harsh":[
+	"cruel",
+	"cruelle",
+	"cruelles",
+	"cruels",
+	"dur",
+	"dure",
+	"dures",
+	"durs",
+	"rude",
+	"rudes",
+	"sévère",
+	"sévères"
+	],
+"hastate":[
+	"hasté",
+	"hastée",
+	"hastées",
+	"hastés"
+	],
+"hasty":[
+	"hâtif",
+	"hâtifs",
+	"hâtive",
+	"hâtives"
+	],
+"hateful":[
+	"haineuse",
+	"haineuses",
+	"haineux",
+	"odieuse",
+	"odieuses",
+	"odieux"
+	],
+"haughty":[
+	"hautain",
+	"hautaine",
+	"hautaines",
+	"hautains",
+	"suffisant",
+	"suffisante",
+	"suffisantes",
+	"suffisants"
+	],
+"haunted":[
+	"hanté",
+	"hantée",
+	"hantées",
+	"hantés"
+	],
+"hawaiian":[
+	"hawaiien",
+	"hawaiienne",
+	"hawaiiennes",
+	"hawaiiens",
+	"hawaïen",
+	"hawaïens",
+	"hawaïène",
+	"hawaïènes"
+	],
+"hawkish":[
+	"bagarreur",
+	"bagarreurs",
+	"bagarreuse",
+	"bagarreuses",
+	"batailleur",
+	"batailleurs",
+	"batailleuse",
+	"batailleuses"
+	],
+"hazardous":[
+	"hasardeuse",
+	"hasardeuses",
+	"hasardeux"
+	],
+"hazy":[
+	"brumeuse",
+	"brumeuses",
+	"brumeux",
+	"flou",
+	"floue",
+	"floues",
+	"flous",
+	"obscur",
+	"obscure",
+	"obscures",
+	"obscurs",
+	"trouble",
+	"troubles",
+	"vague",
+	"vagues"
+	],
+"headless":[
+	"acéphale",
+	"acéphales"
+	],
+"healthful":[
+	"sain",
+	"saine",
+	"saines",
+	"sains"
+	],
+"healthy":[
+	"sain",
+	"saine",
+	"saines",
+	"sains"
+	],
+"heartening":[
+	"encourageant",
+	"encourageante",
+	"encourageantes",
+	"encourageants"
+	],
+"heartfelt":[
+	"sincère",
+	"sincères"
+	],
+"hearty":[
+	"copieuse",
+	"copieuses",
+	"copieux",
+	"cordial",
+	"cordiale",
+	"cordiales",
+	"cordiaux"
+	],
+"heating":[
+	"chauffant",
+	"chauffante",
+	"chauffantes",
+	"chauffants"
+	],
+"heavenly":[
+	"céleste",
+	"célestes"
+	],
+"heavy":[
+	"grave",
+	"graves",
+	"gros",
+	"grosse",
+	"grosses",
+	"lourd",
+	"lourde",
+	"lourdes",
+	"lourds",
+	"pesant",
+	"pesante",
+	"pesantes",
+	"pesants"
+	],
+"hebraic":[
+	"hébraïque",
+	"hébraïques"
+	],
+"hebrew":[
+	"hébraïque",
+	"hébraïques",
+	"hébreu",
+	"hébreux"
+	],
+"hectic":[
+	"agité",
+	"agitée",
+	"agitées",
+	"agités",
+	"hectique",
+	"hectiques"
+	],
+"heedless":[
+	"inattentif",
+	"inattentifs",
+	"inattentive",
+	"inattentives",
+	"insouciant",
+	"insouciante",
+	"insouciantes",
+	"insouciants",
+	"négligent",
+	"négligente",
+	"négligentes",
+	"négligents"
+	],
+"hefty":[
+	"baraqué",
+	"baraquée",
+	"baraquées",
+	"baraqués",
+	"lourd",
+	"lourde",
+	"lourdes",
+	"lourds"
+	],
+"hegelian":[
+	"hégélien",
+	"hégélienne",
+	"hégéliennes",
+	"hégéliens"
+	],
+"heinous":[
+	"atroce",
+	"atroces"
+	],
+"helical":[
+	"hélicoïdal",
+	"hélicoïdale",
+	"hélicoïdales",
+	"hélicoïdaux"
+	],
+"helicoid":[
+	"hélicoïdal",
+	"hélicoïdale",
+	"hélicoïdales",
+	"hélicoïdaux"
+	],
+"heliocentric":[
+	"héliocentrique",
+	"héliocentriques"
+	],
+"heliosynchronous":[
+	"héliosynchrone",
+	"héliosynchrones"
+	],
+"hellenic":[
+	"hellène",
+	"hellènes",
+	"hellénique",
+	"helléniques"
+	],
+"hellenistic":[
+	"hellénistique",
+	"hellénistiques"
+	],
+"hellish":[
+	"infernal",
+	"infernale",
+	"infernales",
+	"infernaux"
+	],
+"helpful":[
+	"serviable",
+	"serviables",
+	"utile",
+	"utiles"
+	],
+"helpless":[
+	"désemparé",
+	"désemparée",
+	"désemparées",
+	"désemparés"
+	],
+"helvetian":[
+	"helvète",
+	"helvètes"
+	],
+"hematologic":[
+	"hématologique",
+	"hématologiques"
+	],
+"hemicylindrical":[
+	"hémicylindrique",
+	"hémicylindriques"
+	],
+"hemiplegic":[
+	"hémiplégique",
+	"hémiplégiques"
+	],
+"hemodynamic":[
+	"hémodynamique",
+	"hémodynamiques"
+	],
+"henpecked":[
+	"jobard",
+	"jobarde",
+	"jobardes",
+	"jobards"
+	],
+"hepatic":[
+	"hépatique",
+	"hépatiques"
+	],
+"heptagonal":[
+	"heptagonal",
+	"heptagonale",
+	"heptagonales",
+	"heptagonaux"
+	],
+"heraldic":[
+	"héraldique",
+	"héraldiques"
+	],
+"herbaceous":[
+	"herbacé",
+	"herbacée",
+	"herbacées",
+	"herbacés"
+	],
+"herbivorous":[
+	"herbivore",
+	"herbivores"
+	],
+"herculean":[
+	"herculéen",
+	"herculéenne",
+	"herculéennes",
+	"herculéens"
+	],
+"hereditary":[
+	"héréditaire",
+	"héréditaires"
+	],
+"heretical":[
+	"hérétique",
+	"hérétiques"
+	],
+"hermaphrodite":[
+	"bisexué",
+	"bisexuée",
+	"bisexuées",
+	"bisexués",
+	"hermaphrodite",
+	"hermaphrodites"
+	],
+"hermaphroditic":[
+	"hermaphrodite",
+	"hermaphrodites"
+	],
+"hermeneutical":[
+	"herméneutique",
+	"herméneutiques"
+	],
+"hermetic":[
+	"hermétique",
+	"hermétiques"
+	],
+"heroic":[
+	"héroïque",
+	"héroïques"
+	],
+"hertzian":[
+	"hertzien",
+	"hertzienne",
+	"hertziennes",
+	"hertziens"
+	],
+"hesitant":[
+	"hésitant",
+	"hésitante",
+	"hésitantes",
+	"hésitants"
+	],
+"heterochromatic":[
+	"vairon",
+	"vairone",
+	"vairones",
+	"vairons"
+	],
+"heteroclitic":[
+	"hétéroclite",
+	"hétéroclites"
+	],
+"heterodox":[
+	"hétérodoxe",
+	"hétérodoxes"
+	],
+"heterogeneous":[
+	"hétérogène",
+	"hétérogènes"
+	],
+"heterological":[
+	"hétérologique",
+	"hétérologiques"
+	],
+"heterologous":[
+	"hétérologue",
+	"hétérologues"
+	],
+"heterosexual":[
+	"hétérosexuel",
+	"hétérosexuelle",
+	"hétérosexuelles",
+	"hétérosexuels"
+	],
+"heterozygous":[
+	"hétérozygote",
+	"hétérozygotes"
+	],
+"heuristic":[
+	"heuristique",
+	"heuristiques"
+	],
+"hexadecimal":[
+	"hexadécimal",
+	"hexadécimale",
+	"hexadécimales",
+	"hexadécimaux"
+	],
+"hexagonal":[
+	"hexagonal",
+	"hexagonale",
+	"hexagonales",
+	"hexagonaux"
+	],
+"hideous":[
+	"atroce",
+	"atroces",
+	"hideuse",
+	"hideuses",
+	"hideux",
+	"répugnant",
+	"répugnante",
+	"répugnantes",
+	"répugnants",
+	"strident",
+	"stridente",
+	"stridentes",
+	"stridents"
+	],
+"hierarchical":[
+	"hiérarchique",
+	"hiérarchiques"
+	],
+"hieratic":[
+	"hiératique",
+	"hiératiques"
+	],
+"hieroglyphic":[
+	"hiéroglyphique",
+	"hiéroglyphiques"
+	],
+"high":[
+	"haut",
+	"haute",
+	"hautes",
+	"hauts",
+	"élevé",
+	"élevée",
+	"élevées",
+	"élevés"
+	],
+"hilarious":[
+	"hilarant",
+	"hilarante",
+	"hilarantes",
+	"hilarants"
+	],
+"himalayan":[
+	"himalayen",
+	"himalayenne",
+	"himalayennes",
+	"himalayens"
+	],
+"hind":[
+	"arrière"
+	],
+"hip":[
+	"branché",
+	"branchée",
+	"branchées",
+	"branchés"
+	],
+"hippocratic":[
+	"hippocratique",
+	"hippocratiques"
+	],
+"hirsute":[
+	"hirsute",
+	"hirsutes"
+	],
+"hispanic":[
+	"hispanique",
+	"hispaniques"
+	],
+"historic":[
+	"historique",
+	"historiques"
+	],
+"historical":[
+	"historique",
+	"historiques"
+	],
+"histrionic":[
+	"histrionique",
+	"histrioniques",
+	"théâtral",
+	"théâtrale",
+	"théâtrales",
+	"théâtraux"
+	],
+"hitlerian":[
+	"hitlérien",
+	"hitlérienne",
+	"hitlériennes",
+	"hitlériens"
+	],
+"hoary":[
+	"chenu",
+	"chenue",
+	"chenues",
+	"chenus"
+	],
+"hobbesian":[
+	"hobbesien",
+	"hobbesienne",
+	"hobbesiennes",
+	"hobbesiens"
+	],
+"hokey":[
+	"bidon"
+	],
+"hollow":[
+	"creuse",
+	"creuses",
+	"creux",
+	"insignifiant",
+	"insignifiante",
+	"insignifiantes",
+	"insignifiants",
+	"vide",
+	"vides"
+	],
+"holocene":[
+	"holocène",
+	"holocènes"
+	],
+"holographic":[
+	"holographe",
+	"holographes",
+	"holographique",
+	"holographiques"
+	],
+"holy":[
+	"saint",
+	"sainte",
+	"saintes",
+	"saints"
+	],
+"homeless":[
+	"itinérant",
+	"itinérante",
+	"itinérantes",
+	"itinérants"
+	],
+"homeopathic":[
+	"homéopathique",
+	"homéopathiques"
+	],
+"homeostatic":[
+	"homéostatique",
+	"homéostatiques"
+	],
+"homeothermic":[
+	"homéotherme",
+	"homéothermes"
+	],
+"homerian":[
+	"homérique",
+	"homériques"
+	],
+"homeric":[
+	"homérique",
+	"homériques"
+	],
+"homocentric":[
+	"homocentrique",
+	"homocentriques"
+	],
+"homogeneous":[
+	"homogène",
+	"homogènes"
+	],
+"homologous":[
+	"homologue",
+	"homologues"
+	],
+"homonymous":[
+	"homonyme",
+	"homonymes"
+	],
+"homorganic":[
+	"homorganique",
+	"homorganiques"
+	],
+"homosexual":[
+	"homosexuel",
+	"homosexuelle",
+	"homosexuelles",
+	"homosexuels"
+	],
+"honduran":[
+	"hondurien",
+	"hondurienne",
+	"honduriennes",
+	"honduriens"
+	],
+"honest":[
+	"honnête",
+	"honnêtes"
+	],
+"honeycombed":[
+	"alvéolé",
+	"alvéolée",
+	"alvéolées",
+	"alvéolés"
+	],
+"hongkongese":[
+	"hongkongais",
+	"hongkongaise",
+	"hongkongaises"
+	],
+"honorable":[
+	"honorable",
+	"honorables"
+	],
+"honoured":[
+	"honoré",
+	"honorée",
+	"honorées",
+	"honorés"
+	],
+"hooked":[
+	"accro",
+	"accros"
+	],
+"hopeful":[
+	"encourageant",
+	"encourageante",
+	"encourageantes",
+	"encourageants"
+	],
+"hopeless":[
+	"désespéré",
+	"désespérée",
+	"désespérées",
+	"désespérés",
+	"incurable",
+	"incurables"
+	],
+"horizontal":[
+	"horizontal",
+	"horizontale",
+	"horizontales",
+	"horizontaux"
+	],
+"hormonal":[
+	"hormonal",
+	"hormonale",
+	"hormonales",
+	"hormonaux"
+	],
+"horned":[
+	"cornu",
+	"cornue",
+	"cornues",
+	"cornus"
+	],
+"horny":[
+	"cornu",
+	"cornue",
+	"cornues",
+	"cornus",
+	"corné",
+	"cornée",
+	"cornées",
+	"cornés",
+	"excité",
+	"excitée",
+	"excitées",
+	"excités"
+	],
+"horrendous":[
+	"épouvantable",
+	"épouvantables"
+	],
+"horrible":[
+	"affreuse",
+	"affreuses",
+	"affreux",
+	"horrible",
+	"horribles",
+	"épouvantable",
+	"épouvantables"
+	],
+"horrid":[
+	"abominable",
+	"abominables",
+	"affreuse",
+	"affreuses",
+	"affreux",
+	"désagréable",
+	"désagréables",
+	"exécrable",
+	"exécrables",
+	"horrible",
+	"horribles",
+	"ignominieuse",
+	"ignominieuses",
+	"ignominieux"
+	],
+"horrific":[
+	"horrifique",
+	"horrifiques"
+	],
+"horsy":[
+	"chevalin",
+	"chevaline",
+	"chevalines",
+	"chevalins"
+	],
+"hospitable":[
+	"hospitalier",
+	"hospitaliers",
+	"hospitalière",
+	"hospitalières"
+	],
+"hostile":[
+	"hostile",
+	"hostiles"
+	],
+"hot":[
+	"brûlant",
+	"brûlante",
+	"brûlantes",
+	"brûlants",
+	"fiévreuse",
+	"fiévreuses",
+	"fiévreux",
+	"piquant",
+	"piquante",
+	"piquantes",
+	"piquants",
+	"radioactif",
+	"radioactifs",
+	"radioactive",
+	"radioactives",
+	"sexy",
+	"sexys",
+	"vif",
+	"vifs",
+	"vive",
+	"vives",
+	"épicé",
+	"épicée",
+	"épicées",
+	"épicés"
+	],
+"household":[
+	"domestique",
+	"domestiques"
+	],
+"huffy":[
+	"susceptible",
+	"susceptibles"
+	],
+"huge":[
+	"énorme",
+	"énormes"
+	],
+"huggable":[
+	"confortable",
+	"confortables",
+	"douillet",
+	"douillets",
+	"douillette",
+	"douillettes"
+	],
+"human":[
+	"humain",
+	"humaine",
+	"humaines",
+	"humains"
+	],
+"humanitarian":[
+	"humanitaire",
+	"humanitaires",
+	"humanitariste",
+	"humanitaristes"
+	],
+"humanoid":[
+	"humanoïde",
+	"humanoïdes"
+	],
+"humble":[
+	"humble",
+	"humbles"
+	],
+"humdrum":[
+	"ennuyeuse",
+	"ennuyeuses",
+	"ennuyeux",
+	"monotone",
+	"monotones"
+	],
+"humeral":[
+	"huméral",
+	"humérale",
+	"humérales",
+	"huméraux"
+	],
+"humid":[
+	"humide",
+	"humides"
+	],
+"humiliating":[
+	"humiliant",
+	"humiliante",
+	"humiliantes",
+	"humiliants"
+	],
+"humongous":[
+	"gigantesque",
+	"gigantesques",
+	"énorme",
+	"énormes"
+	],
+"humorous":[
+	"amusant",
+	"amusante",
+	"amusantes",
+	"amusants",
+	"humoristique",
+	"humoristiques"
+	],
+"humpbacked":[
+	"bossu",
+	"bossue",
+	"bossues",
+	"bossus"
+	],
+"hundredth":[
+	"centième",
+	"centièmes"
+	],
+"hung":[
+	"lent",
+	"lente",
+	"lentes",
+	"lents",
+	"mol",
+	"molle",
+	"molles",
+	"mou",
+	"mous"
+	],
+"hungarian":[
+	"hongrois",
+	"hongroise",
+	"hongroises"
+	],
+"hungry":[
+	"affamé",
+	"affamée",
+	"affamées",
+	"affamés"
+	],
+"huronian":[
+	"huronien"
+	],
+"hurt":[
+	"blessé",
+	"blessée",
+	"blessées",
+	"blessés"
+	],
+"hurtful":[
+	"blessant",
+	"blessante",
+	"blessantes",
+	"blessants"
+	],
+"husky":[
+	"rauque",
+	"rauques"
+	],
+"hybrid":[
+	"hybride",
+	"hybrides"
+	],
+"hydraulic":[
+	"hydraulique",
+	"hydrauliques"
+	],
+"hydrochloric":[
+	"chlorhydrique",
+	"chlorhydriques"
+	],
+"hydroelectric":[
+	"hydro-électrique",
+	"hydro-électriques"
+	],
+"hydrofluoric":[
+	"fluorhydrique",
+	"fluorhydriques"
+	],
+"hydrogenated":[
+	"hydrogéné",
+	"hydrogénée",
+	"hydrogénées",
+	"hydrogénés"
+	],
+"hydrographic":[
+	"hydrographique",
+	"hydrographiques"
+	],
+"hydrophilic":[
+	"hydrophile",
+	"hydrophiles"
+	],
+"hydrophobic":[
+	"hydrophobe",
+	"hydrophobes"
+	],
+"hygienic":[
+	"hygiénique",
+	"hygiéniques"
+	],
+"hygrometric":[
+	"hygrométrique",
+	"hygrométriques"
+	],
+"hygroscopic":[
+	"hygroscopique",
+	"hygroscopiques"
+	],
+"hymeneal":[
+	"hyménéal",
+	"hyménéale",
+	"hyménéales",
+	"hyménéals"
+	],
+"hyperbaric":[
+	"hyperbare",
+	"hyperbares"
+	],
+"hyperbolic":[
+	"hyperbolique",
+	"hyperboliques"
+	],
+"hyperglycemic":[
+	"hyperglycémiant",
+	"hyperglycémiante",
+	"hyperglycémiantes",
+	"hyperglycémiants"
+	],
+"hypermetric":[
+	"hypermètre",
+	"hypermètres"
+	],
+"hypersonic":[
+	"hypersonique",
+	"hypersoniques"
+	],
+"hyperstatic":[
+	"hyperstatique",
+	"hyperstatiques"
+	],
+"hypertrophic":[
+	"hypertrophique",
+	"hypertrophiques"
+	],
+"hypnotic":[
+	"hypnotique",
+	"hypnotiques"
+	],
+"hypochondriac":[
+	"hypocondre",
+	"hypocondres",
+	"hypocondriaque",
+	"hypocondriaques"
+	],
+"hypocoristic":[
+	"hypocoristique",
+	"hypocoristiques"
+	],
+"hypocritical":[
+	"hypocrite",
+	"hypocrites"
+	],
+"hypodermic":[
+	"hypodermique",
+	"hypodermiques"
+	],
+"hypogastric":[
+	"hypogastrique",
+	"hypogastriques"
+	],
+"hypophysial":[
+	"hypophysaire",
+	"hypophysaires"
+	],
+"hypostyle":[
+	"hypostyle",
+	"hypostyles"
+	],
+"hypotensive":[
+	"hypotendu",
+	"hypotendue",
+	"hypotendues",
+	"hypotendus"
+	],
+"hypothalamic":[
+	"hypothalamique",
+	"hypothalamiques"
+	],
+"hypothetical":[
+	"hypothétique",
+	"hypothétiques"
+	],
+"hysterical":[
+	"hystérique",
+	"hystériques"
+	],
+"iatrogenic":[
+	"iatrogène",
+	"iatrogènes"
+	],
+"iberian":[
+	"ibère",
+	"ibères",
+	"ibérique",
+	"ibériques"
+	],
+"icelandic":[
+	"islandais",
+	"islandaise",
+	"islandaises"
+	],
+"icky":[
+	"dégueulasse",
+	"dégueulasses",
+	"sirupeuse",
+	"sirupeuses",
+	"sirupeux"
+	],
+"iconoclastic":[
+	"iconoclaste",
+	"iconoclastes"
+	],
+"icy":[
+	"glacé",
+	"glacée",
+	"glacées",
+	"glacés"
+	],
+"ideal":[
+	"idéal",
+	"idéale",
+	"idéales",
+	"idéals",
+	"idéaux",
+	"parfait",
+	"parfaite",
+	"parfaites",
+	"parfaits"
+	],
+"idealistic":[
+	"idéaliste",
+	"idéalistes"
+	],
+"identical":[
+	"identique",
+	"identiques"
+	],
+"identifiable":[
+	"identifiable",
+	"identifiables"
+	],
+"ideographic":[
+	"idéographique",
+	"idéographiques"
+	],
+"ideological":[
+	"idéologique",
+	"idéologiques"
+	],
+"idiomatic":[
+	"idiomatique",
+	"idiomatiques"
+	],
+"idiosyncratic":[
+	"particulier",
+	"particuliers",
+	"particulière",
+	"particulières",
+	"singulier",
+	"singuliers",
+	"singulière",
+	"singulières"
+	],
+"idiotic":[
+	"idiot",
+	"idiote",
+	"idiotes",
+	"idiots",
+	"stupide",
+	"stupides"
+	],
+"idle":[
+	"fainéant",
+	"fainéante",
+	"fainéantes",
+	"fainéants",
+	"inactif",
+	"inactifs",
+	"inactive",
+	"inactives",
+	"oiseuse",
+	"oiseuses",
+	"oiseux"
+	],
+"idyllic":[
+	"idyllique",
+	"idylliques"
+	],
+"igneous":[
+	"igné",
+	"ignée",
+	"ignées",
+	"ignés"
+	],
+"ignoble":[
+	"ignoble",
+	"ignobles",
+	"indigne",
+	"indignes"
+	],
+"ignominious":[
+	"ignominieuse",
+	"ignominieuses",
+	"ignominieux"
+	],
+"ignorant":[
+	"ignorant",
+	"ignorante",
+	"ignorantes",
+	"ignorants"
+	],
+"ignorantine":[
+	"ignorantin"
+	],
+"ill":[
+	"malade",
+	"malades"
+	],
+"illegal":[
+	"illégal",
+	"illégale",
+	"illégales",
+	"illégaux"
+	],
+"illegible":[
+	"illisible",
+	"illisibles",
+	"indéchiffrable",
+	"indéchiffrables"
+	],
+"illegitimate":[
+	"illégitime",
+	"illégitimes"
+	],
+"illiberal":[
+	"intolérant",
+	"intolérante",
+	"intolérantes",
+	"intolérants"
+	],
+"illicit":[
+	"illicite",
+	"illicites"
+	],
+"illiterate":[
+	"analphabète",
+	"analphabètes",
+	"illettré",
+	"illettrée",
+	"illettrées",
+	"illettrés"
+	],
+"illocutionary":[
+	"illocutoire",
+	"illocutoires"
+	],
+"illogical":[
+	"illogique",
+	"illogiques"
+	],
+"illusory":[
+	"illusoire",
+	"illusoires"
+	],
+"illustrious":[
+	"illustre",
+	"illustres"
+	],
+"illyrian":[
+	"illyrien",
+	"illyrienne",
+	"illyriennes",
+	"illyriens"
+	],
+"imaginable":[
+	"imaginable",
+	"imaginables"
+	],
+"imaginary":[
+	"imaginaire",
+	"imaginaires"
+	],
+"imaginative":[
+	"imaginaire",
+	"imaginaires",
+	"imaginatif",
+	"imaginatifs",
+	"imaginative",
+	"imaginatives"
+	],
+"imitable":[
+	"imitable",
+	"imitables"
+	],
+"immaculate":[
+	"immaculé",
+	"immaculée",
+	"immaculées",
+	"immaculés"
+	],
+"immaterial":[
+	"immatériel",
+	"immatérielle",
+	"immatérielles",
+	"immatériels"
+	],
+"immature":[
+	"immature",
+	"immatures",
+	"vert",
+	"verte",
+	"vertes",
+	"verts"
+	],
+"immeasurable":[
+	"incommensurable",
+	"incommensurables"
+	],
+"immediate":[
+	"immédiat",
+	"immédiate",
+	"immédiates",
+	"immédiats",
+	"proche",
+	"proches"
+	],
+"immense":[
+	"immense",
+	"immenses"
+	],
+"immersed":[
+	"immergé",
+	"immergée",
+	"immergées",
+	"immergés"
+	],
+"imminent":[
+	"imminent",
+	"imminente",
+	"imminentes",
+	"imminents"
+	],
+"immobile":[
+	"immobile",
+	"immobiles"
+	],
+"immodest":[
+	"immodeste",
+	"immodestes"
+	],
+"immoral":[
+	"immoral",
+	"immorale",
+	"immorales",
+	"immoraux"
+	],
+"immortal":[
+	"immortel",
+	"immortelle",
+	"immortelles",
+	"immortels",
+	"inoubliable",
+	"inoubliables"
+	],
+"immune":[
+	"immun",
+	"immune",
+	"immunes",
+	"immunitaire",
+	"immunitaires",
+	"immunologique",
+	"immunologiques",
+	"immuns"
+	],
+"impaired":[
+	"affaibli",
+	"affaiblie",
+	"affaiblies",
+	"affaiblis",
+	"diminué",
+	"diminuée",
+	"diminuées",
+	"diminués",
+	"détérioré",
+	"détériorée",
+	"détériorées",
+	"détériorés"
+	],
+"impalpable":[
+	"impalpable",
+	"impalpables"
+	],
+"impartial":[
+	"impartial",
+	"impartiale",
+	"impartiales",
+	"impartiaux"
+	],
+"impassive":[
+	"impassible",
+	"impassibles"
+	],
+"impatient":[
+	"impatient",
+	"impatiente",
+	"impatientes",
+	"impatients"
+	],
+"impeccable":[
+	"impecc",
+	"impeccable",
+	"impeccables"
+	],
+"impecunious":[
+	"impécunieuse",
+	"impécunieuses",
+	"impécunieux"
+	],
+"impending":[
+	"imminent",
+	"imminente",
+	"imminentes",
+	"imminents"
+	],
+"impenetrable":[
+	"impénétrable",
+	"impénétrables"
+	],
+"imperative":[
+	"essentiel",
+	"essentielle",
+	"essentielles",
+	"essentiels",
+	"impératif",
+	"impératifs",
+	"impérative",
+	"impératives",
+	"indispensable",
+	"indispensables"
+	],
+"imperceptible":[
+	"imperceptible",
+	"imperceptibles"
+	],
+"imperfective":[
+	"imperfectif",
+	"imperfectifs",
+	"imperfective",
+	"imperfectives"
+	],
+"imperial":[
+	"impérial",
+	"impériale",
+	"impériales",
+	"impériaux",
+	"royal",
+	"royale",
+	"royales",
+	"royaux"
+	],
+"imperialistic":[
+	"impérialiste",
+	"impérialistes"
+	],
+"imperious":[
+	"impérieuse",
+	"impérieuses",
+	"impérieux"
+	],
+"impermeable":[
+	"imperméable",
+	"imperméables"
+	],
+"impersonal":[
+	"impersonnel",
+	"impersonnelle",
+	"impersonnelles",
+	"impersonnels"
+	],
+"impervious":[
+	"imperméable",
+	"imperméables",
+	"impénétrable",
+	"impénétrables",
+	"insensible",
+	"insensibles",
+	"intouchable",
+	"intouchables"
+	],
+"impetuous":[
+	"brusque",
+	"brusques",
+	"brutal",
+	"brutale",
+	"brutales",
+	"brutaux",
+	"impulsif",
+	"impulsifs",
+	"impulsive",
+	"impulsives",
+	"impétueuse",
+	"impétueuses",
+	"impétueux",
+	"irréfléchi",
+	"irréfléchie",
+	"irréfléchies",
+	"irréfléchis",
+	"violent",
+	"violente",
+	"violentes",
+	"violents"
+	],
+"impious":[
+	"impie",
+	"impies"
+	],
+"impish":[
+	"espiègle",
+	"espiègles",
+	"malicieuse",
+	"malicieuses",
+	"malicieux"
+	],
+"implacable":[
+	"implacable",
+	"implacables",
+	"irréductible",
+	"irréductibles"
+	],
+"implantable":[
+	"implantable",
+	"implantables"
+	],
+"implicit":[
+	"absolu",
+	"absolue",
+	"absolues",
+	"absolus",
+	"aveugle",
+	"aveugles",
+	"implicite",
+	"implicites",
+	"inhérent",
+	"inhérente",
+	"inhérentes",
+	"inhérents",
+	"tacite",
+	"tacites"
+	],
+"implied":[
+	"implicite",
+	"implicites"
+	],
+"impolite":[
+	"impoli",
+	"impolie",
+	"impolies",
+	"impolis",
+	"malpoli",
+	"malpolie",
+	"malpolies",
+	"malpolis"
+	],
+"important":[
+	"important",
+	"importante",
+	"importantes",
+	"importants"
+	],
+"imposing":[
+	"imposant",
+	"imposante",
+	"imposantes",
+	"imposants",
+	"impressionnant",
+	"impressionnante",
+	"impressionnantes",
+	"impressionnants"
+	],
+"impossible":[
+	"impossible",
+	"impossibles",
+	"insupportable",
+	"insupportables"
+	],
+"impotent":[
+	"impuissant",
+	"impuissante",
+	"impuissantes",
+	"impuissants"
+	],
+"impracticable":[
+	"impraticable",
+	"impraticables"
+	],
+"impractical":[
+	"infaisable",
+	"infaisables"
+	],
+"impregnable":[
+	"impénétrable",
+	"impénétrables"
+	],
+"impressionable":[
+	"impressionnable",
+	"impressionnables"
+	],
+"impressive":[
+	"impressionnant",
+	"impressionnante",
+	"impressionnantes",
+	"impressionnants",
+	"épatant",
+	"épatante",
+	"épatantes",
+	"épatants"
+	],
+"improbable":[
+	"improbable",
+	"improbables",
+	"invraisemblable",
+	"invraisemblables"
+	],
+"impromptu":[
+	"impromptu",
+	"impromptue",
+	"impromptues",
+	"impromptus"
+	],
+"improper":[
+	"grossier",
+	"grossiers",
+	"grossière",
+	"grossières",
+	"impropre",
+	"impropres",
+	"inadapté",
+	"inadaptée",
+	"inadaptées",
+	"inadaptés",
+	"inconvenant",
+	"inconvenante",
+	"inconvenantes",
+	"inconvenants"
+	],
+"improvable":[
+	"améliorable",
+	"améliorables",
+	"perfectible",
+	"perfectibles"
+	],
+"impudent":[
+	"impertinent",
+	"impertinente",
+	"impertinentes",
+	"impertinents",
+	"impudent",
+	"impudente",
+	"impudentes",
+	"impudents"
+	],
+"impulsive":[
+	"impulsif",
+	"impulsifs",
+	"impulsive",
+	"impulsives"
+	],
+"impure":[
+	"impur",
+	"impure",
+	"impures",
+	"impurs"
+	],
+"inaccessible":[
+	"inaccessible",
+	"inaccessibles"
+	],
+"inaccurate":[
+	"imprécis",
+	"imprécise",
+	"imprécises"
+	],
+"inactive":[
+	"inactif",
+	"inactifs",
+	"inactive",
+	"inactives"
+	],
+"inadequate":[
+	"inadéquat",
+	"inadéquate",
+	"inadéquates",
+	"inadéquats"
+	],
+"inadmissible":[
+	"inadmissible",
+	"inadmissibles"
+	],
+"inadvertent":[
+	"involontaire",
+	"involontaires"
+	],
+"inalienable":[
+	"inaliénable",
+	"inaliénables"
+	],
+"inane":[
+	"inepte",
+	"ineptes",
+	"insensé",
+	"insensée",
+	"insensées",
+	"insensés",
+	"inutile",
+	"inutiles",
+	"niais",
+	"niaise",
+	"niaises",
+	"vain",
+	"vaine",
+	"vaines",
+	"vains"
+	],
+"inappropriate":[
+	"déplacé",
+	"déplacée",
+	"déplacées",
+	"déplacés"
+	],
+"inattentive":[
+	"inattentif",
+	"inattentifs",
+	"inattentive",
+	"inattentives"
+	],
+"inaudible":[
+	"inaudible",
+	"inaudibles"
+	],
+"inaugural":[
+	"inaugural",
+	"inaugurale",
+	"inaugurales",
+	"inauguraux"
+	],
+"inborn":[
+	"inné",
+	"innée",
+	"innées",
+	"innés"
+	],
+"inbred":[
+	"consanguin",
+	"consanguine",
+	"consanguines",
+	"consanguins"
+	],
+"incalculable":[
+	"incalculable",
+	"incalculables"
+	],
+"incandescent":[
+	"incandescent",
+	"incandescente",
+	"incandescentes",
+	"incandescents",
+	"irradiant",
+	"irradiante",
+	"irradiantes",
+	"irradiants",
+	"rayonnant",
+	"rayonnante",
+	"rayonnantes",
+	"rayonnants",
+	"resplendissant",
+	"resplendissante",
+	"resplendissantes",
+	"resplendissants",
+	"éblouissant",
+	"éblouissante",
+	"éblouissantes",
+	"éblouissants",
+	"éclatant",
+	"éclatante",
+	"éclatantes",
+	"éclatants"
+	],
+"incapable":[
+	"incapable",
+	"incapables"
+	],
+"incendiary":[
+	"incendiaire",
+	"incendiaires"
+	],
+"incestuous":[
+	"incestueuse",
+	"incestueuses",
+	"incestueux"
+	],
+"inchoate":[
+	"embryonnaire",
+	"embryonnaires"
+	],
+"incipient":[
+	"commençant",
+	"commençante",
+	"commençantes",
+	"commençants"
+	],
+"incisive":[
+	"incisif",
+	"incisifs",
+	"incisive",
+	"incisives"
+	],
+"inclined":[
+	"enclin",
+	"encline",
+	"enclines",
+	"enclins",
+	"incliné",
+	"inclinée",
+	"inclinées",
+	"inclinés"
+	],
+"inclusive":[
+	"inclusif",
+	"inclusifs",
+	"inclusive",
+	"inclusives"
+	],
+"incoherent":[
+	"décousu",
+	"décousue",
+	"décousues",
+	"décousus",
+	"incohérent",
+	"incohérente",
+	"incohérentes",
+	"incohérents"
+	],
+"incoming":[
+	"entrant",
+	"entrante",
+	"entrantes",
+	"entrants"
+	],
+"incommensurable":[
+	"incommensurable",
+	"incommensurables"
+	],
+"incomparable":[
+	"incomparable",
+	"incomparables"
+	],
+"incompatible":[
+	"incompatible",
+	"incompatibles"
+	],
+"incompetent":[
+	"incompétent",
+	"incompétente",
+	"incompétentes",
+	"incompétents"
+	],
+"incomplete":[
+	"incomplet",
+	"incomplets",
+	"incomplète",
+	"incomplètes"
+	],
+"incomprehensible":[
+	"incompréhensible",
+	"incompréhensibles"
+	],
+"incompressible":[
+	"incompressible",
+	"incompressibles"
+	],
+"inconceivable":[
+	"inconcevable",
+	"inconcevables"
+	],
+"incongruous":[
+	"incongru",
+	"incongrue",
+	"incongrues",
+	"incongrus"
+	],
+"inconsiderate":[
+	"inconsidéré",
+	"inconsidérée",
+	"inconsidérées",
+	"inconsidérés"
+	],
+"inconsistent":[
+	"incohérent",
+	"incohérente",
+	"incohérentes",
+	"incohérents",
+	"incompatible",
+	"incompatibles"
+	],
+"inconsolable":[
+	"inconsolable",
+	"inconsolables"
+	],
+"inconspicuous":[
+	"discret",
+	"discrets",
+	"discrète",
+	"discrètes"
+	],
+"inconstant":[
+	"inconstant",
+	"inconstante",
+	"inconstantes",
+	"inconstants",
+	"volubile",
+	"volubiles"
+	],
+"incontestable":[
+	"incontestable",
+	"incontestables"
+	],
+"incontrovertible":[
+	"incontestable",
+	"incontestables",
+	"irréfutable",
+	"irréfutables"
+	],
+"inconvenient":[
+	"incommode",
+	"incommodes",
+	"inconvenant",
+	"inconvenante",
+	"inconvenantes",
+	"inconvenants"
+	],
+"incorporeal":[
+	"incorporel",
+	"incorporelle",
+	"incorporelles",
+	"incorporels"
+	],
+"incorrigible":[
+	"incorrigible",
+	"incorrigibles"
+	],
+"incorruptible":[
+	"incorruptible",
+	"incorruptibles"
+	],
+"incredible":[
+	"incroyable",
+	"incroyables"
+	],
+"incredulous":[
+	"incrédule",
+	"incrédules"
+	],
+"incriminating":[
+	"compromettant",
+	"compromettante",
+	"compromettantes",
+	"compromettants"
+	],
+"incumbent":[
+	"en titre",
+	"titulaire",
+	"titulaires"
+	],
+"incurable":[
+	"incurable",
+	"incurables"
+	],
+"incurious":[
+	"incurieuse",
+	"incurieuses",
+	"incurieux"
+	],
+"indecent":[
+	"indécent",
+	"indécente",
+	"indécentes",
+	"indécents"
+	],
+"indecipherable":[
+	"indéchiffrable",
+	"indéchiffrables"
+	],
+"indecisive":[
+	"incertain",
+	"incertaine",
+	"incertaines",
+	"incertains",
+	"indécis",
+	"indécise",
+	"indécises"
+	],
+"indeclinable":[
+	"indéclinable",
+	"indéclinables"
+	],
+"indefatigable":[
+	"infatigable",
+	"infatigables"
+	],
+"indefinable":[
+	"indéfinissable",
+	"indéfinissables"
+	],
+"indehiscent":[
+	"indéhiscent",
+	"indéhiscente",
+	"indéhiscentes",
+	"indéhiscents"
+	],
+"indelible":[
+	"indélébile",
+	"indélébiles"
+	],
+"independent":[
+	"indépendant",
+	"indépendante",
+	"indépendantes",
+	"indépendants"
+	],
+"indescribable":[
+	"indescriptible",
+	"indescriptibles"
+	],
+"indestructible":[
+	"indestructible",
+	"indestructibles"
+	],
+"indeterminable":[
+	"indéterminable",
+	"indéterminables"
+	],
+"indeterminate":[
+	"indéterminé",
+	"indéterminée",
+	"indéterminées",
+	"indéterminés"
+	],
+"indian":[
+	"amérindien",
+	"amérindienne",
+	"amérindiennes",
+	"amérindiens",
+	"indien",
+	"indienne",
+	"indiennes",
+	"indiens"
+	],
+"indicative":[
+	"indicatif",
+	"indicatifs",
+	"indicative",
+	"indicatives"
+	],
+"indifferent":[
+	"indifférent",
+	"indifférente",
+	"indifférentes",
+	"indifférents"
+	],
+"indigenous":[
+	"aborigène",
+	"aborigènes",
+	"autochtone",
+	"autochtones",
+	"congénital",
+	"congénitale",
+	"congénitales",
+	"congénitaux",
+	"indigène",
+	"indigènes",
+	"inné",
+	"innée",
+	"innées",
+	"innés"
+	],
+"indigent":[
+	"indigent",
+	"indigente",
+	"indigentes",
+	"indigents"
+	],
+"indigestible":[
+	"indigeste",
+	"indigestes"
+	],
+"indignant":[
+	"indigné",
+	"indignée",
+	"indignées",
+	"indignés"
+	],
+"indigo":[
+	"indigo"
+	],
+"indirect":[
+	"indirect",
+	"indirecte",
+	"indirectes",
+	"indirects"
+	],
+"indiscreet":[
+	"indiscret",
+	"indiscrets",
+	"indiscrète",
+	"indiscrètes"
+	],
+"indiscriminate":[
+	"indiscriminé",
+	"indiscriminée",
+	"indiscriminées",
+	"indiscriminés"
+	],
+"indispensable":[
+	"indispensable",
+	"indispensables"
+	],
+"indisputable":[
+	"incontestable",
+	"incontestables",
+	"indiscutable",
+	"indiscutables",
+	"irréfutable",
+	"irréfutables"
+	],
+"individual":[
+	"individuel",
+	"individuelle",
+	"individuelles",
+	"individuels"
+	],
+"indolent":[
+	"indolent",
+	"indolente",
+	"indolentes",
+	"indolents"
+	],
+"indomitable":[
+	"indomptable",
+	"indomptables",
+	"irréductible",
+	"irréductibles"
+	],
+"indonesian":[
+	"indonésien",
+	"indonésienne",
+	"indonésiennes",
+	"indonésiens"
+	],
+"indoor":[
+	"intérieur",
+	"intérieure",
+	"intérieures",
+	"intérieurs"
+	],
+"indubitable":[
+	"indubitable",
+	"indubitables"
+	],
+"inductive":[
+	"inductif",
+	"inductifs",
+	"inductive",
+	"inductives"
+	],
+"indulgent":[
+	"indulgent",
+	"indulgente",
+	"indulgentes",
+	"indulgents"
+	],
+"industrial":[
+	"industriel",
+	"industrielle",
+	"industrielles",
+	"industriels"
+	],
+"industrious":[
+	"diligent",
+	"diligente",
+	"diligentes",
+	"diligents",
+	"industrieuse",
+	"industrieuses",
+	"industrieux"
+	],
+"inedible":[
+	"immangeable",
+	"immangeables"
+	],
+"ineffable":[
+	"ineffable",
+	"ineffables",
+	"inexprimable",
+	"inexprimables",
+	"innommable",
+	"innommables",
+	"tabou",
+	"taboue",
+	"taboues",
+	"tabous"
+	],
+"inefficient":[
+	"inefficace",
+	"inefficaces"
+	],
+"inelegant":[
+	"inélégant",
+	"inélégante",
+	"inélégantes",
+	"inélégants"
+	],
+"ineligible":[
+	"inéligible",
+	"inéligibles"
+	],
+"ineluctable":[
+	"inéluctable",
+	"inéluctables"
+	],
+"inept":[
+	"inepte",
+	"ineptes"
+	],
+"inequitable":[
+	"inéquitable",
+	"inéquitables"
+	],
+"inertial":[
+	"inertiel",
+	"inertielle",
+	"inertielles",
+	"inertiels"
+	],
+"inescapable":[
+	"inéluctable",
+	"inéluctables",
+	"inévitable",
+	"inévitables"
+	],
+"inevitable":[
+	"inévitable",
+	"inévitables"
+	],
+"inexcusable":[
+	"inexcusable",
+	"inexcusables"
+	],
+"inexhaustible":[
+	"inépuisable",
+	"inépuisables"
+	],
+"inexorable":[
+	"inexorable",
+	"inexorables"
+	],
+"inexpensive":[
+	"bon marché"
+	],
+"inexperienced":[
+	"inexpérimenté",
+	"inexpérimentée",
+	"inexpérimentées",
+	"inexpérimentés"
+	],
+"inexplicable":[
+	"inexplicable",
+	"inexplicables"
+	],
+"inexpugnable":[
+	"inexpugnable",
+	"inexpugnables"
+	],
+"inextinguishable":[
+	"inextinguible",
+	"inextinguibles"
+	],
+"inextricable":[
+	"inextricable",
+	"inextricables"
+	],
+"infallible":[
+	"infaillible",
+	"infaillibles"
+	],
+"infamous":[
+	"infâme",
+	"infâmes"
+	],
+"infeasible":[
+	"infaisable",
+	"infaisables"
+	],
+"infected":[
+	"infecté",
+	"infectée",
+	"infectées",
+	"infectés"
+	],
+"infectious":[
+	"communicatif",
+	"communicatifs",
+	"communicative",
+	"communicatives",
+	"contagieuse",
+	"contagieuses",
+	"contagieux",
+	"infectieuse",
+	"infectieuses",
+	"infectieux"
+	],
+"infelicitous":[
+	"gauche",
+	"gauches",
+	"inadéquat",
+	"inadéquate",
+	"inadéquates",
+	"inadéquats",
+	"infortuné",
+	"infortunée",
+	"infortunées",
+	"infortunés",
+	"maladroit",
+	"maladroite",
+	"maladroites",
+	"maladroits",
+	"malheureuse",
+	"malheureuses",
+	"malheureux"
+	],
+"inferior":[
+	"inf..",
+	"inférieur",
+	"inférieure",
+	"inférieures",
+	"inférieurs"
+	],
+"infernal":[
+	"infernal",
+	"infernale",
+	"infernales",
+	"infernaux"
+	],
+"infertile":[
+	"stérile",
+	"stériles"
+	],
+"infinite":[
+	"infini",
+	"infinie",
+	"infinies",
+	"infinis"
+	],
+"infinitesimal":[
+	"infinitésimal",
+	"infinitésimale",
+	"infinitésimales",
+	"infinitésimaux"
+	],
+"infirm":[
+	"infirme",
+	"infirmes"
+	],
+"inflamed":[
+	"enflammé",
+	"enflammée",
+	"enflammées",
+	"enflammés"
+	],
+"inflammable":[
+	"inflammable",
+	"inflammables"
+	],
+"inflammatory":[
+	"inflammatoire",
+	"inflammatoires"
+	],
+"inflatable":[
+	"gonflable",
+	"gonflables",
+	"pneumatique",
+	"pneumatiques"
+	],
+"inflated":[
+	"gonflé",
+	"gonflée",
+	"gonflées",
+	"gonflés"
+	],
+"inflected":[
+	"flexionnel",
+	"flexionnelle",
+	"flexionnelles",
+	"flexionnels"
+	],
+"inflectional":[
+	"flexionnel",
+	"flexionnelle",
+	"flexionnelles",
+	"flexionnels"
+	],
+"inflexible":[
+	"inflexible",
+	"inflexibles"
+	],
+"influenceable":[
+	"influençable",
+	"influençables"
+	],
+"influential":[
+	"influent",
+	"influente",
+	"influentes",
+	"influents"
+	],
+"influenzal":[
+	"grippal",
+	"grippale",
+	"grippales",
+	"grippaux"
+	],
+"informal":[
+	"familier",
+	"familiers",
+	"familière",
+	"familières",
+	"informel",
+	"informelle",
+	"informelles",
+	"informels"
+	],
+"informational":[
+	"informationnel",
+	"informationnelle",
+	"informationnelles",
+	"informationnels"
+	],
+"informative":[
+	"informatif",
+	"informatifs",
+	"informative",
+	"informatives",
+	"instructif",
+	"instructifs",
+	"instructive",
+	"instructives"
+	],
+"infrared":[
+	"infrarouge",
+	"infrarouges"
+	],
+"infrastructural":[
+	"infrastructurel",
+	"infrastructurelle",
+	"infrastructurelles",
+	"infrastructurels"
+	],
+"infuriating":[
+	"exaspérant",
+	"exaspérante",
+	"exaspérantes",
+	"exaspérants"
+	],
+"ingenious":[
+	"ingénieuse",
+	"ingénieuses",
+	"ingénieux"
+	],
+"ingenuous":[
+	"ingénu",
+	"ingénue",
+	"ingénues",
+	"ingénus"
+	],
+"inguinal":[
+	"inguinal",
+	"inguinale",
+	"inguinales",
+	"inguinaux"
+	],
+"ingush":[
+	"ingouche",
+	"ingouches"
+	],
+"inhabitable":[
+	"habitable",
+	"habitables"
+	],
+"inhabited":[
+	"habité",
+	"habitée",
+	"habitées",
+	"habités"
+	],
+"inherent":[
+	"inhérent",
+	"inhérente",
+	"inhérentes",
+	"inhérents",
+	"intrinsèque",
+	"intrinsèques"
+	],
+"inhibitive":[
+	"inhibiteur",
+	"inhibiteurs",
+	"inhibitrice",
+	"inhibitrices"
+	],
+"inhibitory":[
+	"inhibiteur",
+	"inhibiteurs",
+	"inhibitrice",
+	"inhibitrices"
+	],
+"inhospitable":[
+	"inhospitalier",
+	"inhospitaliers",
+	"inhospitalière",
+	"inhospitalières"
+	],
+"inhuman":[
+	"inhumain",
+	"inhumaine",
+	"inhumaines",
+	"inhumains"
+	],
+"inhumane":[
+	"inhumain",
+	"inhumaine",
+	"inhumaines",
+	"inhumains"
+	],
+"initial":[
+	"initial",
+	"initiale",
+	"initiales",
+	"initiaux"
+	],
+"initiatory":[
+	"initiatique",
+	"initiatiques"
+	],
+"injectable":[
+	"injectable",
+	"injectables"
+	],
+"injective":[
+	"injectif",
+	"injectifs",
+	"injective",
+	"injectives"
+	],
+"innate":[
+	"inné",
+	"innée",
+	"innées",
+	"innés"
+	],
+"inner":[
+	"interne",
+	"internes",
+	"intérieur",
+	"intérieure",
+	"intérieures",
+	"intérieurs"
+	],
+"innocent":[
+	"innocent",
+	"innocente",
+	"innocentes",
+	"innocents"
+	],
+"innocuous":[
+	"inoffensif",
+	"inoffensifs",
+	"inoffensive",
+	"inoffensives"
+	],
+"innovative":[
+	"innovant",
+	"innovante",
+	"innovantes",
+	"innovants",
+	"novateur",
+	"novateurs",
+	"novatrice",
+	"novatrices"
+	],
+"inoffensive":[
+	"inoffensif",
+	"inoffensifs",
+	"inoffensive",
+	"inoffensives"
+	],
+"inoperative":[
+	"inopérant",
+	"inopérante",
+	"inopérantes",
+	"inopérants"
+	],
+"inorganic":[
+	"inorganique",
+	"inorganiques"
+	],
+"inoxidizable":[
+	"inoxydable",
+	"inoxydables"
+	],
+"inquisitive":[
+	"curieuse",
+	"curieuses",
+	"curieux"
+	],
+"insalubrious":[
+	"insalubre",
+	"insalubres"
+	],
+"insane":[
+	"aberrant",
+	"aberrante",
+	"aberrantes",
+	"aberrants",
+	"chimérique",
+	"chimériques",
+	"délirant",
+	"délirante",
+	"délirantes",
+	"délirants",
+	"dément",
+	"démente",
+	"démentes",
+	"démentiel",
+	"démentielle",
+	"démentielles",
+	"démentiels",
+	"déments",
+	"dérangeant",
+	"dérangeante",
+	"dérangeantes",
+	"dérangeants",
+	"dérangé",
+	"dérangée",
+	"dérangées",
+	"dérangés",
+	"fol",
+	"folle",
+	"folles",
+	"fou",
+	"fous",
+	"malsain",
+	"malsaine",
+	"malsaines",
+	"malsains"
+	],
+"inscrutable":[
+	"impénétrable",
+	"impénétrables",
+	"incompréhensible",
+	"incompréhensibles",
+	"insondable",
+	"insondables"
+	],
+"insectivorous":[
+	"insectivore",
+	"insectivores"
+	],
+"insecure":[
+	"inconfortable",
+	"inconfortables",
+	"inquiet",
+	"inquiets",
+	"inquiète",
+	"inquiètes"
+	],
+"insensate":[
+	"insensé",
+	"insensée",
+	"insensées",
+	"insensés"
+	],
+"insensible":[
+	"insensible",
+	"insensibles"
+	],
+"insensitive":[
+	"insensible",
+	"insensibles"
+	],
+"inseparable":[
+	"inséparable",
+	"inséparables"
+	],
+"insidious":[
+	"insidieuse",
+	"insidieuses",
+	"insidieux"
+	],
+"insightful":[
+	"perspicace",
+	"perspicaces"
+	],
+"insignificant":[
+	"insignifiant",
+	"insignifiante",
+	"insignifiantes",
+	"insignifiants"
+	],
+"insolent":[
+	"insolent",
+	"insolente",
+	"insolentes",
+	"insolents"
+	],
+"insolvable":[
+	"insoluble",
+	"insolubles"
+	],
+"insolvent":[
+	"insolvable",
+	"insolvables"
+	],
+"insomniac":[
+	"insomniaque",
+	"insomniaques"
+	],
+"insouciant":[
+	"insouciant",
+	"insouciante",
+	"insouciantes",
+	"insouciants"
+	],
+"inspiring":[
+	"inspirant",
+	"inspirante",
+	"inspirantes",
+	"inspirants"
+	],
+"instant":[
+	"instantané",
+	"instantanée",
+	"instantanées",
+	"instantanés"
+	],
+"instantaneous":[
+	"instantané",
+	"instantanée",
+	"instantanées",
+	"instantanés"
+	],
+"instinctive":[
+	"instinctif",
+	"instinctifs",
+	"instinctive",
+	"instinctives"
+	],
+"institutional":[
+	"institutionnel",
+	"institutionnelle",
+	"institutionnelles",
+	"institutionnels"
+	],
+"instructive":[
+	"instructif",
+	"instructifs",
+	"instructive",
+	"instructives"
+	],
+"instrumental":[
+	"instrumental",
+	"instrumentale",
+	"instrumentales",
+	"instrumentaux"
+	],
+"insufferable":[
+	"insupportable",
+	"insupportables",
+	"intolérable",
+	"intolérables"
+	],
+"insufficient":[
+	"insuffisant",
+	"insuffisante",
+	"insuffisantes",
+	"insuffisants"
+	],
+"insulating":[
+	"isolant",
+	"isolante",
+	"isolantes",
+	"isolants"
+	],
+"insulting":[
+	"outrageant",
+	"outrageante",
+	"outrageantes",
+	"outrageants"
+	],
+"insuperable":[
+	"insurmontable",
+	"insurmontables"
+	],
+"insurgent":[
+	"insurgé",
+	"insurgée",
+	"insurgées",
+	"insurgés"
+	],
+"insurmountable":[
+	"infranchissable",
+	"infranchissables",
+	"insurmontable",
+	"insurmontables"
+	],
+"intact":[
+	"intact",
+	"intacte",
+	"intactes",
+	"intacts"
+	],
+"integrable":[
+	"intégrable",
+	"intégrables"
+	],
+"integral":[
+	"intégral",
+	"intégrale",
+	"intégrales",
+	"intégraux"
+	],
+"integrated":[
+	"intégré",
+	"intégrée",
+	"intégrées",
+	"intégrés"
+	],
+"intellectual":[
+	"intellectuel",
+	"intellectuelle",
+	"intellectuelles",
+	"intellectuels"
+	],
+"intelligent":[
+	"intelligent",
+	"intelligente",
+	"intelligentes",
+	"intelligents"
+	],
+"intelligible":[
+	"intelligible",
+	"intelligibles"
+	],
+"intense":[
+	"intense",
+	"intenses"
+	],
+"intensive":[
+	"intensif",
+	"intensifs",
+	"intensive",
+	"intensives"
+	],
+"intent":[
+	"buté",
+	"butée",
+	"butées",
+	"butés",
+	"déterminé",
+	"déterminée",
+	"déterminées",
+	"déterminés",
+	"résolu",
+	"résolue",
+	"résolues",
+	"résolus"
+	],
+"intentional":[
+	"intentionnel",
+	"intentionnelle",
+	"intentionnelles",
+	"intentionnels",
+	"volontaire",
+	"volontaires"
+	],
+"interactive":[
+	"interactif",
+	"interactifs",
+	"interactive",
+	"interactives"
+	],
+"interbank":[
+	"interbancaire",
+	"interbancaires"
+	],
+"interchangeable":[
+	"interchangeable",
+	"interchangeables"
+	],
+"intercity":[
+	"interurbain",
+	"interurbaine",
+	"interurbaines",
+	"interurbains"
+	],
+"intercontinental":[
+	"intercontinental",
+	"intercontinentale",
+	"intercontinentales",
+	"intercontinentaux"
+	],
+"intercultural":[
+	"interculturel",
+	"interculturelle",
+	"interculturelles",
+	"interculturels"
+	],
+"interdependent":[
+	"interdépendant",
+	"interdépendante",
+	"interdépendantes",
+	"interdépendants"
+	],
+"interdisciplinary":[
+	"interdisciplinaire",
+	"interdisciplinaires"
+	],
+"interesting":[
+	"intéressant",
+	"intéressante",
+	"intéressantes",
+	"intéressants"
+	],
+"interglacial":[
+	"interglaciaire",
+	"interglaciaires"
+	],
+"intergovernmental":[
+	"intergouvernemental",
+	"intergouvernementale",
+	"intergouvernementales",
+	"intergouvernementaux"
+	],
+"interior":[
+	"intérieur",
+	"intérieure",
+	"intérieures",
+	"intérieurs"
+	],
+"intermediate":[
+	"intermédiaire",
+	"intermédiaires"
+	],
+"interministerial":[
+	"interministériel",
+	"interministérielle",
+	"interministérielles",
+	"interministériels"
+	],
+"intermittent":[
+	"intermittent",
+	"intermittente",
+	"intermittentes",
+	"intermittents"
+	],
+"internal":[
+	"interne",
+	"internes"
+	],
+"international":[
+	"international",
+	"internationale",
+	"internationales",
+	"internationaux"
+	],
+"internationalist":[
+	"internationaliste",
+	"internationalistes"
+	],
+"interpersonal":[
+	"interpersonnel",
+	"interpersonnelle",
+	"interpersonnelles",
+	"interpersonnels"
+	],
+"interplanetary":[
+	"interplanétaire",
+	"interplanétaires"
+	],
+"interrogative":[
+	"interrogatif",
+	"interrogatifs",
+	"interrogative",
+	"interrogatives"
+	],
+"intersex":[
+	"intersexué",
+	"intersexuée",
+	"intersexuées",
+	"intersexués"
+	],
+"interstellar":[
+	"interstellaire",
+	"interstellaires"
+	],
+"intertropical":[
+	"intertropical",
+	"intertropicale",
+	"intertropicales",
+	"intertropicaux"
+	],
+"interventionist":[
+	"interventionniste",
+	"interventionnistes"
+	],
+"intervocalic":[
+	"intervocalique",
+	"intervocaliques"
+	],
+"intestate":[
+	"intestat"
+	],
+"intestinal":[
+	"intestinal",
+	"intestinale",
+	"intestinales",
+	"intestinaux"
+	],
+"intimate":[
+	"intime",
+	"intimes"
+	],
+"intolerable":[
+	"intolérable",
+	"intolérables"
+	],
+"intolerant":[
+	"intolérant",
+	"intolérante",
+	"intolérantes",
+	"intolérants"
+	],
+"intoxicated":[
+	"ivre",
+	"ivres"
+	],
+"intracellular":[
+	"intracellulaire",
+	"intracellulaires"
+	],
+"intractable":[
+	"buté",
+	"butée",
+	"butées",
+	"butés",
+	"ingouvernable",
+	"ingouvernables",
+	"intraitable",
+	"intraitables"
+	],
+"intradermal":[
+	"intradermique",
+	"intradermiques"
+	],
+"intramural":[
+	"interne",
+	"internes"
+	],
+"intramuscular":[
+	"intramusculaire",
+	"intramusculaires"
+	],
+"intransigent":[
+	"impitoyable",
+	"impitoyables",
+	"intransigeant",
+	"intransigeante",
+	"intransigeantes",
+	"intransigeants"
+	],
+"intransitive":[
+	"intransitif",
+	"intransitifs",
+	"intransitive",
+	"intransitives"
+	],
+"intravenous":[
+	"intraveineuse",
+	"intraveineuses",
+	"intraveineux"
+	],
+"intrepid":[
+	"intrépide",
+	"intrépides"
+	],
+"intricate":[
+	"compliqué",
+	"compliquée",
+	"compliquées",
+	"compliqués",
+	"tortueuse",
+	"tortueuses",
+	"tortueux"
+	],
+"intriguing":[
+	"fascinant",
+	"fascinante",
+	"fascinantes",
+	"fascinants"
+	],
+"intrinsic":[
+	"intrinsèque",
+	"intrinsèques"
+	],
+"introductory":[
+	"introductif",
+	"introductifs",
+	"introductive",
+	"introductives"
+	],
+"introverted":[
+	"introverti",
+	"introvertie",
+	"introverties",
+	"introvertis"
+	],
+"intrusive":[
+	"intrusif",
+	"intrusifs",
+	"intrusive",
+	"intrusives"
+	],
+"intuitive":[
+	"intuitif",
+	"intuitifs",
+	"intuitive",
+	"intuitives"
+	],
+"inuit":[
+	"inuit",
+	"inuits"
+	],
+"invalid":[
+	"invalide",
+	"invalides"
+	],
+"invaluable":[
+	"inestimable",
+	"inestimables"
+	],
+"invariable":[
+	"invariable",
+	"invariables"
+	],
+"invariant":[
+	"invariant",
+	"invariante",
+	"invariantes",
+	"invariants"
+	],
+"invasive":[
+	"envahissant",
+	"envahissante",
+	"envahissantes",
+	"envahissants",
+	"invasif",
+	"invasifs",
+	"invasive",
+	"invasives"
+	],
+"inventive":[
+	"inventif",
+	"inventifs",
+	"inventive",
+	"inventives"
+	],
+"inverse":[
+	"inverse",
+	"inverses"
+	],
+"invertebrate":[
+	"invertébré",
+	"invertébrée",
+	"invertébrées",
+	"invertébrés"
+	],
+"invertible":[
+	"inversible",
+	"inversibles"
+	],
+"inveterate":[
+	"invétéré",
+	"invétérée",
+	"invétérées",
+	"invétérés"
+	],
+"invincible":[
+	"invincible",
+	"invincibles"
+	],
+"inviolable":[
+	"inviolable",
+	"inviolables"
+	],
+"invisible":[
+	"invisible",
+	"invisibles"
+	],
+"involuntary":[
+	"involontaire",
+	"involontaires"
+	],
+"invulnerable":[
+	"invulnérable",
+	"invulnérables"
+	],
+"inward":[
+	"intérieur",
+	"intérieure",
+	"intérieures",
+	"intérieurs"
+	],
+"ionic":[
+	"ionique",
+	"ioniques"
+	],
+"iranian":[
+	"iranien",
+	"iranienne",
+	"iraniennes",
+	"iraniens"
+	],
+"iraqi":[
+	"iraquien",
+	"iraquienne",
+	"iraquiennes",
+	"iraquiens"
+	],
+"irascible":[
+	"irascible",
+	"irascibles"
+	],
+"irate":[
+	"furieuse",
+	"furieuses",
+	"furieux"
+	],
+"irenic":[
+	"irénique",
+	"iréniques"
+	],
+"irenical":[
+	"irénique",
+	"iréniques"
+	],
+"iridescent":[
+	"iridescent",
+	"iridescente",
+	"iridescentes",
+	"iridescents"
+	],
+"irish":[
+	"gaélique",
+	"gaéliques",
+	"irlandais",
+	"irlandaise",
+	"irlandaises"
+	],
+"ironic":[
+	"ironique",
+	"ironiques"
+	],
+"irony":[
+	"ferreuse",
+	"ferreuses",
+	"ferreux"
+	],
+"irrational":[
+	"irrationnel",
+	"irrationnelle",
+	"irrationnelles",
+	"irrationnels"
+	],
+"irreconcilable":[
+	"irréconciliable",
+	"irréconciliables"
+	],
+"irredeemable":[
+	"irrémédiable",
+	"irrémédiables"
+	],
+"irrefragable":[
+	"irréfragable",
+	"irréfragables"
+	],
+"irrefutable":[
+	"irréfutable",
+	"irréfutables"
+	],
+"irregular":[
+	"irrégulier",
+	"irréguliers",
+	"irrégulière",
+	"irrégulières"
+	],
+"irreligious":[
+	"irréligieuse",
+	"irréligieuses",
+	"irréligieux"
+	],
+"irremediable":[
+	"irrémédiable",
+	"irrémédiables"
+	],
+"irreparable":[
+	"irréparable",
+	"irréparables"
+	],
+"irreplaceable":[
+	"irremplaçable",
+	"irremplaçables"
+	],
+"irrepressible":[
+	"irrépressible",
+	"irrépressibles"
+	],
+"irreproachable":[
+	"irréprochable",
+	"irréprochables"
+	],
+"irresistible":[
+	"irrésistible",
+	"irrésistibles"
+	],
+"irresolute":[
+	"hésitant",
+	"hésitante",
+	"hésitantes",
+	"hésitants",
+	"indécis",
+	"indécise",
+	"indécises"
+	],
+"irresponsible":[
+	"irresponsable",
+	"irresponsables"
+	],
+"irreverent":[
+	"irrespectueuse",
+	"irrespectueuses",
+	"irrespectueux",
+	"irrévérencieuse",
+	"irrévérencieuses",
+	"irrévérencieux"
+	],
+"irreversible":[
+	"irréversible",
+	"irréversibles"
+	],
+"irritable":[
+	"irritable",
+	"irritables"
+	],
+"irritated":[
+	"irrité",
+	"irritée",
+	"irritées",
+	"irrités",
+	"énervé",
+	"énervée",
+	"énervées",
+	"énervés"
+	],
+"ischemic":[
+	"ischémique",
+	"ischémiques"
+	],
+"isiac":[
+	"isiaque",
+	"isiaques"
+	],
+"islamic":[
+	"islamique",
+	"islamiques"
+	],
+"islamist":[
+	"islamiste",
+	"islamistes"
+	],
+"isobaric":[
+	"isobare",
+	"isobares"
+	],
+"isolated":[
+	"isolé",
+	"isolée",
+	"isolées",
+	"isolés"
+	],
+"isolationist":[
+	"isolationniste",
+	"isolationnistes"
+	],
+"isomorphic":[
+	"isomorphe",
+	"isomorphes"
+	],
+"isosceles":[
+	"isocèle",
+	"isocèles"
+	],
+"isothermal":[
+	"isotherme",
+	"isothermes",
+	"isothermique",
+	"isothermiques"
+	],
+"isothermic":[
+	"isothermique",
+	"isothermiques"
+	],
+"isotonic":[
+	"isotonique",
+	"isotoniques"
+	],
+"isotopic":[
+	"isotope",
+	"isotopes"
+	],
+"isotropic":[
+	"isotrope",
+	"isotropes"
+	],
+"israeli":[
+	"israélien",
+	"israélienne",
+	"israéliennes",
+	"israéliens"
+	],
+"israelite":[
+	"israélite",
+	"israélites"
+	],
+"italian":[
+	"italien",
+	"italienne",
+	"italiennes",
+	"italiens"
+	],
+"italic":[
+	"italique",
+	"italiques"
+	],
+"iterative":[
+	"itératif",
+	"itératifs",
+	"itérative",
+	"itératives"
+	],
+"ithyphallic":[
+	"ithyphallique",
+	"ithyphalliques"
+	],
+"ivorian":[
+	"ivoirien",
+	"ivoirienne",
+	"ivoiriennes",
+	"ivoiriens"
+	],
+"jaded":[
+	"blasé",
+	"blasée",
+	"blasées",
+	"blasés",
+	"désabusé",
+	"désabusée",
+	"désabusées",
+	"désabusés",
+	"harassé",
+	"harassée",
+	"harassées",
+	"harassés",
+	"épuisé",
+	"épuisée",
+	"épuisées",
+	"épuisés"
+	],
+"jagged":[
+	"anguleuse",
+	"anguleuses",
+	"anguleux",
+	"dentelé",
+	"dentelée",
+	"dentelées",
+	"dentelés"
+	],
+"jamaican":[
+	"jamaïquain",
+	"jamaïquaine",
+	"jamaïquaines",
+	"jamaïquains"
+	],
+"jansenist":[
+	"janséniste",
+	"jansénistes"
+	],
+"japanese":[
+	"japonais",
+	"japonaise",
+	"japonaises"
+	],
+"jarring":[
+	"discordant",
+	"discordante",
+	"discordantes",
+	"discordants"
+	],
+"jaspé":[
+	"jaspé",
+	"jaspée",
+	"jaspées",
+	"jaspés"
+	],
+"javan":[
+	"javanais",
+	"javanaise",
+	"javanaises"
+	],
+"jawbreaking":[
+	"imprononçable",
+	"imprononçables"
+	],
+"jealous":[
+	"envieuse",
+	"envieuses",
+	"envieux",
+	"jalouse",
+	"jalouses",
+	"jaloux"
+	],
+"jerusalemite":[
+	"hiérosolymitain",
+	"hiérosolymitaine",
+	"hiérosolymitaines",
+	"hiérosolymitains",
+	"hiérosolymite",
+	"hiérosolymites"
+	],
+"jewish":[
+	"juif",
+	"juifs",
+	"juive",
+	"juives"
+	],
+"jingoistic":[
+	"chauvin",
+	"chauvine",
+	"chauvines",
+	"chauvins",
+	"cocardier",
+	"cocardiers",
+	"cocardière",
+	"cocardières"
+	],
+"jocular":[
+	"amusant",
+	"amusante",
+	"amusantes",
+	"amusants",
+	"facétieuse",
+	"facétieuses",
+	"facétieux",
+	"humoristique",
+	"humoristiques"
+	],
+"jocund":[
+	"enjoué",
+	"enjouée",
+	"enjouées",
+	"enjoués",
+	"gai",
+	"gaie",
+	"gaies",
+	"gais",
+	"jovial",
+	"joviale",
+	"joviales",
+	"joviaux"
+	],
+"jolly":[
+	"jovial",
+	"joviale",
+	"joviales",
+	"joviaux"
+	],
+"jordanian":[
+	"jordanien",
+	"jordanienne",
+	"jordaniennes",
+	"jordaniens"
+	],
+"journalistic":[
+	"journalistique",
+	"journalistiques"
+	],
+"jovial":[
+	"jovial",
+	"joviale",
+	"joviales",
+	"joviaux"
+	],
+"jovian":[
+	"jupitérien",
+	"jupitérienne",
+	"jupitériennes",
+	"jupitériens"
+	],
+"joyful":[
+	"allègre",
+	"allègres",
+	"joyeuse",
+	"joyeuses",
+	"joyeux"
+	],
+"joyous":[
+	"joyeuse",
+	"joyeuses",
+	"joyeux"
+	],
+"judgmental":[
+	"critique",
+	"critiques",
+	"moralisateur",
+	"moralisateurs",
+	"moralisatrice",
+	"moralisatrices"
+	],
+"judicial":[
+	"judiciaire",
+	"judiciaires"
+	],
+"judicious":[
+	"judicieuse",
+	"judicieuses",
+	"judicieux"
+	],
+"juicy":[
+	"croustillant",
+	"croustillante",
+	"croustillantes",
+	"croustillants",
+	"juteuse",
+	"juteuses",
+	"juteux"
+	],
+"julian":[
+	"julien",
+	"julienne",
+	"juliennes",
+	"juliens"
+	],
+"jumpy":[
+	"nerveuse",
+	"nerveuses",
+	"nerveux"
+	],
+"junior":[
+	"jeune",
+	"jeunes"
+	],
+"juridical":[
+	"juridique",
+	"juridiques"
+	],
+"jury":[
+	"de fortune"
+	],
+"just":[
+	"juste",
+	"justes"
+	],
+"justifiable":[
+	"justifiable",
+	"justifiables"
+	],
+"justificatory":[
+	"justificateur",
+	"justificateurs",
+	"justificatrice",
+	"justificatrices"
+	],
+"juvenile":[
+	"juvénile",
+	"juvéniles"
+	],
+"kafkaesque":[
+	"kafkaïen",
+	"kafkaïenne",
+	"kafkaïennes",
+	"kafkaïens"
+	],
+"kaput":[
+	"fini",
+	"finie",
+	"finies",
+	"finis"
+	],
+"karelian":[
+	"carélien",
+	"carélienne",
+	"caréliennes",
+	"caréliens"
+	],
+"kazakh":[
+	"kazakh",
+	"kazakhe",
+	"kazakhes",
+	"kazakhs"
+	],
+"kazakhstani":[
+	"kazakh",
+	"kazakhe",
+	"kazakhes",
+	"kazakhs"
+	],
+"kenyan":[
+	"kényan",
+	"kényane",
+	"kényanes",
+	"kényans"
+	],
+"key":[
+	"clé"
+	],
+"keynesian":[
+	"keynésien",
+	"keynésienne",
+	"keynésiennes",
+	"keynésiens"
+	],
+"khmer":[
+	"khmer",
+	"khmers",
+	"khmère",
+	"khmères"
+	],
+"kilometric":[
+	"kilométrique",
+	"kilométriques"
+	],
+"kin":[
+	"apparenté",
+	"apparentée",
+	"apparentées",
+	"apparentés"
+	],
+"kind":[
+	"favorable",
+	"favorables",
+	"gentil",
+	"gentille",
+	"gentilles",
+	"gentils"
+	],
+"kinematic":[
+	"cinématique",
+	"cinématiques"
+	],
+"kinetic":[
+	"cinétique",
+	"cinétiques"
+	],
+"kinky":[
+	"bouclé",
+	"bouclée",
+	"bouclées",
+	"bouclés",
+	"crépu",
+	"crépue",
+	"crépues",
+	"crépus",
+	"pervers",
+	"perverse",
+	"perverses"
+	],
+"knackered":[
+	"détraqué",
+	"détraquée",
+	"détraquées",
+	"détraqués",
+	"fichu",
+	"fichue",
+	"fichues",
+	"fichus",
+	"foutu",
+	"foutue",
+	"foutues",
+	"foutus",
+	"éreinté",
+	"éreintée",
+	"éreintées",
+	"éreintés"
+	],
+"knobbly":[
+	"noueuse",
+	"noueuses",
+	"noueux"
+	],
+"knowable":[
+	"connaissable",
+	"connaissables"
+	],
+"knowledgeable":[
+	"instruit",
+	"instruite",
+	"instruites",
+	"instruits",
+	"savant",
+	"savante",
+	"savantes",
+	"savants"
+	],
+"known":[
+	"connu",
+	"connue",
+	"connues",
+	"connus"
+	],
+"kooky":[
+	"dingue",
+	"dingues"
+	],
+"korean":[
+	"coréen",
+	"coréenne",
+	"coréennes",
+	"coréens"
+	],
+"kosher":[
+	"casher"
+	],
+"kosovan":[
+	"kosovar",
+	"kosovare",
+	"kosovares",
+	"kosovars"
+	],
+"kufic":[
+	"coufique",
+	"coufiques"
+	],
+"kurdish":[
+	"kurde",
+	"kurdes"
+	],
+"kuwaiti":[
+	"koweïtien",
+	"koweïtienne",
+	"koweïtiennes",
+	"koweïtiens"
+	],
+"kyrgyz":[
+	"kirghiz",
+	"kirghize",
+	"kirghizes"
+	],
+"labial":[
+	"labial",
+	"labiale",
+	"labiales",
+	"labiaux"
+	],
+"labile":[
+	"labile",
+	"labiles"
+	],
+"laborious":[
+	"laborieuse",
+	"laborieuses",
+	"laborieux"
+	],
+"lachrymable":[
+	"lamentable",
+	"lamentables"
+	],
+"lachrymatory":[
+	"lacrymogène",
+	"lacrymogènes"
+	],
+"lachrymose":[
+	"lacrymal",
+	"lacrymale",
+	"lacrymales",
+	"lacrymaux"
+	],
+"lackadaisical":[
+	"languide",
+	"languides"
+	],
+"lacking":[
+	"dépourvu",
+	"dépourvue",
+	"dépourvues",
+	"dépourvus"
+	],
+"lackluster":[
+	"quelconque",
+	"quelconques",
+	"terne",
+	"ternes"
+	],
+"laconic":[
+	"laconique",
+	"laconiques"
+	],
+"lacrimal":[
+	"lacrymal",
+	"lacrymale",
+	"lacrymales",
+	"lacrymaux"
+	],
+"lacustrine":[
+	"lacustre",
+	"lacustres"
+	],
+"lakeside":[
+	"riverain",
+	"riveraine",
+	"riveraines",
+	"riverains"
+	],
+"lame":[
+	"bancal",
+	"bancale",
+	"bancales",
+	"bancals",
+	"bateau",
+	"boiteuse",
+	"boiteuses",
+	"boiteux",
+	"minable",
+	"minables",
+	"nul",
+	"nulle",
+	"nulles",
+	"nuls",
+	"pitoyable",
+	"pitoyables"
+	],
+"lamentable":[
+	"déplorable",
+	"déplorables",
+	"lamentable",
+	"lamentables"
+	],
+"languid":[
+	"apathique",
+	"apathiques",
+	"faiblard",
+	"faiblarde",
+	"faiblardes",
+	"faiblards",
+	"faible",
+	"faibles",
+	"languide",
+	"languides"
+	],
+"languorous":[
+	"langoureuse",
+	"langoureuses",
+	"langoureux"
+	],
+"lanky":[
+	"dégingandé",
+	"dégingandée",
+	"dégingandées",
+	"dégingandés"
+	],
+"large":[
+	"grand",
+	"grand'",
+	"grande",
+	"grandes",
+	"grands"
+	],
+"laryngeal":[
+	"laryngien",
+	"laryngienne",
+	"laryngiennes",
+	"laryngiens",
+	"laryngé",
+	"laryngée",
+	"laryngées",
+	"laryngés"
+	],
+"lascivious":[
+	"lascif",
+	"lascifs",
+	"lascive",
+	"lascives",
+	"lubrique",
+	"lubriques"
+	],
+"last":[
+	"dernier",
+	"derniers",
+	"dernière",
+	"dernières"
+	],
+"lasting":[
+	"permanent",
+	"permanente",
+	"permanentes",
+	"permanents"
+	],
+"late":[
+	"défunt",
+	"défunte",
+	"défuntes",
+	"défunts",
+	"feu"
+	],
+"latent":[
+	"latent",
+	"latente",
+	"latentes",
+	"latents"
+	],
+"later":[
+	"postérieur",
+	"postérieure",
+	"postérieures",
+	"postérieurs"
+	],
+"lateral":[
+	"latéral",
+	"latérale",
+	"latérales",
+	"latéraux"
+	],
+"latin":[
+	"latin",
+	"latine",
+	"latines",
+	"latins"
+	],
+"latter":[
+	"dernier",
+	"derniers",
+	"dernière",
+	"dernières"
+	],
+"latvian":[
+	"letton",
+	"lettonne",
+	"lettonnes",
+	"lettons"
+	],
+"laudable":[
+	"louable",
+	"louables"
+	],
+"laudatory":[
+	"élogieuse",
+	"élogieuses",
+	"élogieux"
+	],
+"laughable":[
+	"ridicule",
+	"ridicules",
+	"risible",
+	"risibles"
+	],
+"lawful":[
+	"légal",
+	"légale",
+	"légales",
+	"légaux"
+	],
+"lawless":[
+	"anarchique",
+	"anarchiques"
+	],
+"lax":[
+	"laxiste",
+	"laxistes"
+	],
+"laxative":[
+	"laxatif",
+	"laxatifs",
+	"laxative",
+	"laxatives"
+	],
+"lazy":[
+	"fainéant",
+	"fainéante",
+	"fainéantes",
+	"fainéants",
+	"paresseuse",
+	"paresseuses",
+	"paresseux"
+	],
+"leafy":[
+	"feuilleté",
+	"feuilletée",
+	"feuilletées",
+	"feuilletés",
+	"feuillu",
+	"feuillue",
+	"feuillues",
+	"feuillus"
+	],
+"lean":[
+	"maigre",
+	"maigres",
+	"mince",
+	"minces",
+	"pauv'",
+	"pauvre",
+	"pauvres",
+	"pôvre",
+	"pôvres"
+	],
+"learned":[
+	"enseigné",
+	"enseignée",
+	"enseignées",
+	"enseignés",
+	"instruit",
+	"instruite",
+	"instruites",
+	"instruits",
+	"savant",
+	"savante",
+	"savantes",
+	"savants",
+	"érudit",
+	"érudite",
+	"érudites",
+	"érudits"
+	],
+"lebanese":[
+	"libanais",
+	"libanaise",
+	"libanaises"
+	],
+"lecherous":[
+	"lubrique",
+	"lubriques"
+	],
+"left":[
+	"gauche",
+	"gauches"
+	],
+"leftover":[
+	"restant",
+	"restante",
+	"restantes",
+	"restants"
+	],
+"legal":[
+	"juridique",
+	"juridiques",
+	"légal",
+	"légale",
+	"légales",
+	"légaux"
+	],
+"legendary":[
+	"légendaire",
+	"légendaires"
+	],
+"legible":[
+	"lisible",
+	"lisibles"
+	],
+"legislative":[
+	"législatif",
+	"législatifs",
+	"législative",
+	"législatives"
+	],
+"lengthy":[
+	"long",
+	"longs",
+	"longue",
+	"longues"
+	],
+"lenient":[
+	"indulgent",
+	"indulgente",
+	"indulgentes",
+	"indulgents",
+	"laxiste",
+	"laxistes",
+	"permissif",
+	"permissifs",
+	"permissive",
+	"permissives"
+	],
+"leninist":[
+	"léniniste",
+	"léninistes"
+	],
+"lenticular":[
+	"lenticulaire",
+	"lenticulaires"
+	],
+"leonine":[
+	"léonin",
+	"léonine",
+	"léonines",
+	"léonins"
+	],
+"lesbian":[
+	"lesbien",
+	"lesbienne",
+	"lesbiennes",
+	"lesbiens"
+	],
+"lesser":[
+	"moindre",
+	"moindres"
+	],
+"lethal":[
+	"fatal",
+	"fatale",
+	"fatales",
+	"fatals",
+	"mortel",
+	"mortelle",
+	"mortelles",
+	"mortels"
+	],
+"lethargic":[
+	"léthargique",
+	"léthargiques"
+	],
+"level":[
+	"constant",
+	"constante",
+	"constantes",
+	"constants",
+	"plat",
+	"plate",
+	"plates",
+	"plats"
+	],
+"lewd":[
+	"grivois",
+	"grivoise",
+	"grivoises",
+	"lascif",
+	"lascifs",
+	"lascive",
+	"lascives",
+	"lubrique",
+	"lubriques",
+	"paillard",
+	"paillarde",
+	"paillardes",
+	"paillards"
+	],
+"lexicographic":[
+	"lexicographique",
+	"lexicographiques"
+	],
+"liable":[
+	"responsable",
+	"responsables"
+	],
+"libelous":[
+	"calomnieuse",
+	"calomnieuses",
+	"calomnieux",
+	"diffamatoire",
+	"diffamatoires"
+	],
+"liberal":[
+	"généreuse",
+	"généreuses",
+	"généreux",
+	"large",
+	"larges",
+	"libéral",
+	"libérale",
+	"libérales",
+	"libéraux"
+	],
+"libertarian":[
+	"libertaire",
+	"libertaires"
+	],
+"libyan":[
+	"libyen",
+	"libyenne",
+	"libyennes",
+	"libyens"
+	],
+"licentious":[
+	"licencieuse",
+	"licencieuses",
+	"licencieux"
+	],
+"licit":[
+	"licite",
+	"licites"
+	],
+"light":[
+	"clair",
+	"claire",
+	"claires",
+	"clairs",
+	"lumineuse",
+	"lumineuses",
+	"lumineux",
+	"léger",
+	"légers",
+	"légère",
+	"légères",
+	"pâle",
+	"pâles"
+	],
+"lightweight":[
+	"léger",
+	"légers",
+	"légère",
+	"légères"
+	],
+"ligneous":[
+	"ligneuse",
+	"ligneuses",
+	"ligneux"
+	],
+"likable":[
+	"aimable",
+	"aimables",
+	"sympa",
+	"sympas",
+	"sympathique",
+	"sympathiques"
+	],
+"like":[
+	"pareil",
+	"pareille",
+	"pareilles",
+	"pareils"
+	],
+"likely":[
+	"probable",
+	"probables"
+	],
+"lilliputian":[
+	"lilliputien",
+	"lilliputienne",
+	"lilliputiennes",
+	"lilliputiens"
+	],
+"limbate":[
+	"entouré",
+	"entourée",
+	"entourées",
+	"entourés",
+	"ourlé",
+	"ourlée",
+	"ourlées",
+	"ourlés"
+	],
+"limber":[
+	"flexible",
+	"flexibles"
+	],
+"limited":[
+	"limité",
+	"limitée",
+	"limitées",
+	"limités"
+	],
+"limitless":[
+	"illimité",
+	"illimitée",
+	"illimitées",
+	"illimités"
+	],
+"limp":[
+	"mol",
+	"molle",
+	"molles",
+	"mou",
+	"mous"
+	],
+"limpid":[
+	"limpide",
+	"limpides"
+	],
+"linear":[
+	"linéaire",
+	"linéaires"
+	],
+"linguistic":[
+	"linguistique",
+	"linguistiques"
+	],
+"lipidic":[
+	"lipidique",
+	"lipidiques"
+	],
+"lippy":[
+	"lippu",
+	"lippue",
+	"lippues",
+	"lippus",
+	"répondeur",
+	"répondeurs",
+	"répondeuse",
+	"répondeuses"
+	],
+"liquid":[
+	"liquide",
+	"liquides"
+	],
+"listless":[
+	"apathique",
+	"apathiques",
+	"indolent",
+	"indolente",
+	"indolentes",
+	"indolents"
+	],
+"lit":[
+	"allumé",
+	"allumée",
+	"allumées",
+	"allumés"
+	],
+"lite":[
+	"allégé",
+	"allégée",
+	"allégées",
+	"allégés",
+	"léger",
+	"légers",
+	"légère",
+	"légères"
+	],
+"literal":[
+	"littéral",
+	"littérale",
+	"littérales",
+	"littéraux",
+	"épistolaire",
+	"épistolaires"
+	],
+"literary":[
+	"littéraire",
+	"littéraires"
+	],
+"literate":[
+	"alphabète",
+	"alphabètes"
+	],
+"lithe":[
+	"souple",
+	"souples",
+	"svelte",
+	"sveltes",
+	"élancé",
+	"élancée",
+	"élancées",
+	"élancés"
+	],
+"lithic":[
+	"lithique",
+	"lithiques"
+	],
+"lithuanian":[
+	"lituanien",
+	"lituanienne",
+	"lituaniennes",
+	"lituaniens"
+	],
+"little":[
+	"cadet",
+	"cadets",
+	"cadette",
+	"cadettes",
+	"ch'ti",
+	"p'tit",
+	"p'tit'",
+	"p'tite",
+	"p'tites",
+	"p'tits",
+	"petit",
+	"petite",
+	"petites",
+	"petits",
+	"ptit",
+	"ptite",
+	"ptites",
+	"ptits"
+	],
+"liturgical":[
+	"liturgique",
+	"liturgiques"
+	],
+"live":[
+	"vivant",
+	"vivante",
+	"vivantes",
+	"vivants"
+	],
+"lively":[
+	"animé",
+	"animée",
+	"animées",
+	"animés"
+	],
+"livid":[
+	"furieuse",
+	"furieuses",
+	"furieux",
+	"livide",
+	"livides"
+	],
+"living":[
+	"vivant",
+	"vivante",
+	"vivantes",
+	"vivants"
+	],
+"loamy":[
+	"glaise",
+	"glaises"
+	],
+"loath":[
+	"hésitant",
+	"hésitante",
+	"hésitantes",
+	"hésitants",
+	"réticent",
+	"réticente",
+	"réticentes",
+	"réticents"
+	],
+"loathsome":[
+	"dégoûtant",
+	"dégoûtante",
+	"dégoûtantes",
+	"dégoûtants",
+	"odieuse",
+	"odieuses",
+	"odieux"
+	],
+"local":[
+	"local",
+	"locale",
+	"locales",
+	"locaux"
+	],
+"lofty":[
+	"haut",
+	"haute",
+	"hautes",
+	"hauts"
+	],
+"logical":[
+	"logique",
+	"logiques"
+	],
+"logistic":[
+	"logistique",
+	"logistiques"
+	],
+"logistical":[
+	"logistique",
+	"logistiques"
+	],
+"londonian":[
+	"londonien",
+	"londonienne",
+	"londoniennes",
+	"londoniens"
+	],
+"lone":[
+	"isolé",
+	"isolée",
+	"isolées",
+	"isolés",
+	"seul",
+	"seule",
+	"seules",
+	"seuls",
+	"unique",
+	"uniques"
+	],
+"lonely":[
+	"abandonné",
+	"abandonnée",
+	"abandonnées",
+	"abandonnés",
+	"désert",
+	"déserte",
+	"désertes",
+	"déserts",
+	"seul",
+	"seule",
+	"seules",
+	"seuls"
+	],
+"lonesome":[
+	"solitaire",
+	"solitaires"
+	],
+"long":[
+	"long",
+	"longs",
+	"longue",
+	"longues"
+	],
+"loopy":[
+	"bourré",
+	"bourrée",
+	"bourrées",
+	"bourrés",
+	"fada"
+	],
+"loose":[
+	"ample",
+	"amples",
+	"débauché",
+	"débauchée",
+	"débauchées",
+	"débauchés",
+	"facile",
+	"faciles",
+	"lâche",
+	"lâches"
+	],
+"lopsided":[
+	"bancal",
+	"bancale",
+	"bancales",
+	"bancals"
+	],
+"loquacious":[
+	"loquace",
+	"loquaces"
+	],
+"loud":[
+	"bruyant",
+	"bruyante",
+	"bruyantes",
+	"bruyants",
+	"fort",
+	"forte",
+	"fortes",
+	"forts",
+	"voyant",
+	"voyante",
+	"voyantes",
+	"voyants"
+	],
+"lousy":[
+	"bourré",
+	"bourrée",
+	"bourrées",
+	"bourrés",
+	"minable",
+	"minables"
+	],
+"lovable":[
+	"adorable",
+	"adorables",
+	"aimable",
+	"aimables"
+	],
+"loved":[
+	"aimé",
+	"aimée",
+	"aimées",
+	"aimés"
+	],
+"lovely":[
+	"adorable",
+	"adorables"
+	],
+"lovesick":[
+	"languissant",
+	"languissante",
+	"languissantes",
+	"languissants"
+	],
+"loving":[
+	"aimant",
+	"aimante",
+	"aimantes",
+	"aimants"
+	],
+"low":[
+	"abject",
+	"abjecte",
+	"abjectes",
+	"abjects",
+	"bas",
+	"basse",
+	"basses",
+	"calme",
+	"calmes",
+	"ch'ti",
+	"déprimé",
+	"déprimée",
+	"déprimées",
+	"déprimés",
+	"faible",
+	"faibles",
+	"grave",
+	"graves",
+	"p'tit",
+	"p'tit'",
+	"p'tite",
+	"p'tites",
+	"p'tits",
+	"petit",
+	"petite",
+	"petites",
+	"petits",
+	"ptit",
+	"ptite",
+	"ptites",
+	"ptits"
+	],
+"lower":[
+	"inf..",
+	"inférieur",
+	"inférieure",
+	"inférieures",
+	"inférieurs"
+	],
+"lowercase":[
+	"minuscule",
+	"minuscules"
+	],
+"lowly":[
+	"humble",
+	"humbles"
+	],
+"loyal":[
+	"loyal",
+	"loyale",
+	"loyales",
+	"loyaux"
+	],
+"lucid":[
+	"clair",
+	"claire",
+	"claires",
+	"clairs",
+	"lucide",
+	"lucides"
+	],
+"lucky":[
+	"chanceuse",
+	"chanceuses",
+	"chanceux",
+	"fortuné",
+	"fortunée",
+	"fortunées",
+	"fortunés",
+	"heureuse",
+	"heureuses",
+	"heureux"
+	],
+"lucrative":[
+	"lucratif",
+	"lucratifs",
+	"lucrative",
+	"lucratives"
+	],
+"ludic":[
+	"ludique",
+	"ludiques"
+	],
+"ludicrous":[
+	"absurde",
+	"absurdes"
+	],
+"lugubrious":[
+	"lugubre",
+	"lugubres"
+	],
+"lukewarm":[
+	"tiède",
+	"tièdes"
+	],
+"lumbar":[
+	"lombaire",
+	"lombaires"
+	],
+"luminescent":[
+	"luminescent",
+	"luminescente",
+	"luminescentes",
+	"luminescents"
+	],
+"luminous":[
+	"lumineuse",
+	"lumineuses",
+	"lumineux"
+	],
+"lumpy":[
+	"grumeleuse",
+	"grumeleuses",
+	"grumeleux"
+	],
+"lupine":[
+	"vorace",
+	"voraces"
+	],
+"lurid":[
+	"blafard",
+	"blafarde",
+	"blafardes",
+	"blafards",
+	"blême",
+	"blêmes",
+	"choquant",
+	"choquante",
+	"choquantes",
+	"choquants",
+	"jaunâtre",
+	"jaunâtres",
+	"livide",
+	"livides"
+	],
+"lustful":[
+	"lubrique",
+	"lubriques"
+	],
+"lustrous":[
+	"brillant",
+	"brillante",
+	"brillantes",
+	"brillants"
+	],
+"luxembourgish":[
+	"luxembourgeois",
+	"luxembourgeoise",
+	"luxembourgeoises"
+	],
+"luxuriant":[
+	"luxuriant",
+	"luxuriante",
+	"luxuriantes",
+	"luxuriants"
+	],
+"luxurious":[
+	"luxueuse",
+	"luxueuses",
+	"luxueux"
+	],
+"lymphatic":[
+	"lymphatique",
+	"lymphatiques"
+	],
+"lyonnaise":[
+	"lyonnais",
+	"lyonnaise",
+	"lyonnaises"
+	],
+"macabre":[
+	"effrayant",
+	"effrayante",
+	"effrayantes",
+	"effrayants",
+	"funeste",
+	"funestes",
+	"funèbre",
+	"funèbres",
+	"gothique",
+	"gothiques",
+	"horrible",
+	"horribles",
+	"macabre",
+	"macabres",
+	"morbide",
+	"morbides"
+	],
+"macaronic":[
+	"bâtard",
+	"bâtarde",
+	"bâtardes",
+	"bâtards"
+	],
+"macedonian":[
+	"macédonien",
+	"macédonienne",
+	"macédoniennes",
+	"macédoniens"
+	],
+"machiavellian":[
+	"machiavélique",
+	"machiavéliques"
+	],
+"macho":[
+	"macho",
+	"machos"
+	],
+"macroscopic":[
+	"macroscopique",
+	"macroscopiques"
+	],
+"maculate":[
+	"impur",
+	"impure",
+	"impures",
+	"impurs"
+	],
+"mad":[
+	"fol",
+	"folle",
+	"folles",
+	"fou",
+	"fous",
+	"fâché",
+	"fâchée",
+	"fâchées",
+	"fâchés"
+	],
+"madder":[
+	"garance"
+	],
+"madrilenian":[
+	"madrilène",
+	"madrilènes"
+	],
+"maghrebi":[
+	"maghrébin",
+	"maghrébine",
+	"maghrébines",
+	"maghrébins"
+	],
+"magic":[
+	"magique",
+	"magiques"
+	],
+"magical":[
+	"magique",
+	"magiques"
+	],
+"magnanimous":[
+	"magnanime",
+	"magnanimes"
+	],
+"magnetic":[
+	"magnétique",
+	"magnétiques"
+	],
+"magnificent":[
+	"magnifique",
+	"magnifiques"
+	],
+"maharashtrian":[
+	"maharashtrien",
+	"maharashtrienne",
+	"maharashtriennes",
+	"maharashtriens"
+	],
+"maiden":[
+	"inaugural",
+	"inaugurale",
+	"inaugurales",
+	"inauguraux"
+	],
+"main":[
+	"principal",
+	"principale",
+	"principales",
+	"principaux"
+	],
+"mainstream":[
+	"commercial",
+	"commerciale",
+	"commerciales",
+	"commerciaux"
+	],
+"majestic":[
+	"majestueuse",
+	"majestueuses",
+	"majestueux"
+	],
+"major":[
+	"majeur",
+	"majeure",
+	"majeures",
+	"majeurs"
+	],
+"makeshift":[
+	"de fortune"
+	],
+"maladroit":[
+	"maladroit",
+	"maladroite",
+	"maladroites",
+	"maladroits"
+	],
+"malaysian":[
+	"malaisien",
+	"malaisienne",
+	"malaisiennes",
+	"malaisiens"
+	],
+"male":[
+	"masculin",
+	"masculine",
+	"masculines",
+	"masculins",
+	"mâle",
+	"mâles"
+	],
+"maleficent":[
+	"maléfique",
+	"maléfiques"
+	],
+"malevolent":[
+	"malveillant",
+	"malveillante",
+	"malveillantes",
+	"malveillants"
+	],
+"malian":[
+	"malien",
+	"malienne",
+	"maliennes",
+	"maliens"
+	],
+"malicious":[
+	"malveillant",
+	"malveillante",
+	"malveillantes",
+	"malveillants",
+	"mauvais",
+	"mauvaise",
+	"mauvaises"
+	],
+"malignant":[
+	"maligne",
+	"malignes",
+	"malin",
+	"malins",
+	"malveillant",
+	"malveillante",
+	"malveillantes",
+	"malveillants"
+	],
+"malleable":[
+	"malléable",
+	"malléables"
+	],
+"mammary":[
+	"mammaire",
+	"mammaires"
+	],
+"mammoth":[
+	"éléphantesque",
+	"éléphantesques"
+	],
+"manageable":[
+	"gérable",
+	"gérables",
+	"maniable",
+	"maniables"
+	],
+"managerial":[
+	"managérial",
+	"managériale",
+	"managériales",
+	"managériaux"
+	],
+"mandatory":[
+	"obligatoire",
+	"obligatoires"
+	],
+"mangy":[
+	"galeuse",
+	"galeuses",
+	"galeux"
+	],
+"manic":[
+	"allumé",
+	"allumée",
+	"allumées",
+	"allumés",
+	"maniaque",
+	"maniaques"
+	],
+"manichaean":[
+	"manichéen",
+	"manichéenne",
+	"manichéennes",
+	"manichéens"
+	],
+"manifest":[
+	"manifeste",
+	"manifestes"
+	],
+"manly":[
+	"viril",
+	"virile",
+	"viriles",
+	"virils"
+	],
+"manual":[
+	"manuel",
+	"manuelle",
+	"manuelles",
+	"manuels"
+	],
+"manuscript":[
+	"manuscrit",
+	"manuscrite",
+	"manuscrites",
+	"manuscrits"
+	],
+"maoist":[
+	"maoïste",
+	"maoïstes"
+	],
+"marginal":[
+	"adjacent",
+	"adjacente",
+	"adjacentes",
+	"adjacents",
+	"limitrophe",
+	"limitrophes",
+	"marginal",
+	"marginale",
+	"marginales",
+	"marginaux",
+	"médiocre",
+	"médiocres",
+	"pauv'",
+	"pauvre",
+	"pauvres",
+	"périphérique",
+	"périphériques",
+	"pôvre",
+	"pôvres",
+	"voisin",
+	"voisine",
+	"voisines",
+	"voisins"
+	],
+"marine":[
+	"marin",
+	"marine",
+	"marines",
+	"marins",
+	"maritime",
+	"maritimes"
+	],
+"marital":[
+	"matrimonial",
+	"matrimoniale",
+	"matrimoniales",
+	"matrimoniaux"
+	],
+"maritime":[
+	"maritime",
+	"maritimes"
+	],
+"marmoreal":[
+	"marmoréen",
+	"marmoréenne",
+	"marmoréennes",
+	"marmoréens"
+	],
+"maroon":[
+	"bordeaux",
+	"marron",
+	"marrons"
+	],
+"marriageable":[
+	"mariable",
+	"mariables",
+	"nubile",
+	"nubiles"
+	],
+"marshy":[
+	"marécageuse",
+	"marécageuses",
+	"marécageux"
+	],
+"martial":[
+	"martial",
+	"martiale",
+	"martiales",
+	"martiaux"
+	],
+"marvelous":[
+	"merveilleuse",
+	"merveilleuses",
+	"merveilleux"
+	],
+"marxian":[
+	"marxien",
+	"marxienne",
+	"marxiennes",
+	"marxiens",
+	"marxiste",
+	"marxistes"
+	],
+"marxist":[
+	"marxiste",
+	"marxistes"
+	],
+"masculine":[
+	"masculin",
+	"masculine",
+	"masculines",
+	"masculins"
+	],
+"mashed":[
+	"bleu",
+	"bleue",
+	"bleues",
+	"bleus",
+	"plein",
+	"pleine",
+	"pleines",
+	"pleins",
+	"rond",
+	"ronde",
+	"rondes",
+	"ronds",
+	"écrasé",
+	"écrasée",
+	"écrasées",
+	"écrasés"
+	],
+"massive":[
+	"massif",
+	"massifs",
+	"massive",
+	"massives"
+	],
+"matching":[
+	"correspondant",
+	"correspondante",
+	"correspondantes",
+	"correspondants"
+	],
+"material":[
+	"matériel",
+	"matérielle",
+	"matérielles",
+	"matériels"
+	],
+"materialistic":[
+	"matérialiste",
+	"matérialistes"
+	],
+"maternal":[
+	"maternel",
+	"maternelle",
+	"maternelles",
+	"maternels"
+	],
+"mathematical":[
+	"mathématique",
+	"mathématiques"
+	],
+"matriarchal":[
+	"matriarcal",
+	"matriarcale",
+	"matriarcales",
+	"matriarcaux"
+	],
+"matte":[
+	"mat",
+	"mate",
+	"mates",
+	"mats"
+	],
+"mature":[
+	"mature",
+	"matures",
+	"mûr",
+	"mûre",
+	"mûres",
+	"mûrs"
+	],
+"maudlin":[
+	"affecté",
+	"affectée",
+	"affectées",
+	"affectés",
+	"démonstratif",
+	"démonstratifs",
+	"démonstrative",
+	"démonstratives",
+	"histrionique",
+	"histrioniques",
+	"hystérique",
+	"hystériques",
+	"larmoyant",
+	"larmoyante",
+	"larmoyantes",
+	"larmoyants",
+	"mièvre",
+	"mièvres",
+	"sentimental",
+	"sentimentale",
+	"sentimentales",
+	"sentimentaux"
+	],
+"mauritanian":[
+	"mauritanien",
+	"mauritanienne",
+	"mauritaniennes",
+	"mauritaniens"
+	],
+"mauritian":[
+	"mauricien",
+	"mauricienne",
+	"mauriciennes",
+	"mauriciens"
+	],
+"mauve":[
+	"mauve",
+	"mauves"
+	],
+"maverick":[
+	"individualiste",
+	"individualistes"
+	],
+"maximal":[
+	"maximal",
+	"maximale",
+	"maximales",
+	"maximaux",
+	"maximum"
+	],
+"maximum":[
+	"maximal",
+	"maximale",
+	"maximales",
+	"maximaux",
+	"maximum"
+	],
+"meager":[
+	"maigre",
+	"maigres",
+	"pauv'",
+	"pauvre",
+	"pauvres",
+	"pôvre",
+	"pôvres"
+	],
+"meagre":[
+	"maigre",
+	"maigres"
+	],
+"mealy":[
+	"farineuse",
+	"farineuses",
+	"farineux"
+	],
+"mean":[
+	"cruel",
+	"cruelle",
+	"cruelles",
+	"cruels",
+	"inf..",
+	"inférieur",
+	"inférieure",
+	"inférieures",
+	"inférieurs",
+	"moyen",
+	"moyenne",
+	"moyennes",
+	"moyens",
+	"méchant",
+	"méchante",
+	"méchantes",
+	"méchants"
+	],
+"mechanical":[
+	"machinal",
+	"machinale",
+	"machinales",
+	"machinaux",
+	"mécanique",
+	"mécaniques"
+	],
+"meddlesome":[
+	"importun",
+	"importune",
+	"importunes",
+	"importuns"
+	],
+"median":[
+	"médian",
+	"médiane",
+	"médianes",
+	"médians"
+	],
+"medical":[
+	"médical",
+	"médicale",
+	"médicales",
+	"médicaux"
+	],
+"medicinal":[
+	"médicamenteuse",
+	"médicamenteuses",
+	"médicamenteux",
+	"médicinal",
+	"médicinale",
+	"médicinales",
+	"médicinaux"
+	],
+"medieval":[
+	"brutal",
+	"brutale",
+	"brutales",
+	"brutaux",
+	"moyenâgeuse",
+	"moyenâgeuses",
+	"moyenâgeux",
+	"médiéval",
+	"médiévale",
+	"médiévales",
+	"médiévaux"
+	],
+"mediocre":[
+	"médiocre",
+	"médiocres"
+	],
+"mediterranean":[
+	"méditerranéen",
+	"méditerranéenne",
+	"méditerranéennes",
+	"méditerranéens"
+	],
+"medium":[
+	"moyen",
+	"moyenne",
+	"moyennes",
+	"moyens"
+	],
+"meek":[
+	"humble",
+	"humbles",
+	"modeste",
+	"modestes"
+	],
+"megalithic":[
+	"mégalithique",
+	"mégalithiques"
+	],
+"melancholic":[
+	"mélancolique",
+	"mélancoliques"
+	],
+"melanesian":[
+	"mélanésien",
+	"mélanésienne",
+	"mélanésiennes",
+	"mélanésiens"
+	],
+"mellifluous":[
+	"mielleuse",
+	"mielleuses",
+	"mielleux",
+	"mélodieuse",
+	"mélodieuses",
+	"mélodieux"
+	],
+"mellow":[
+	"moelleuse",
+	"moelleuses",
+	"moelleux"
+	],
+"melodious":[
+	"mélodieuse",
+	"mélodieuses",
+	"mélodieux"
+	],
+"melodramatic":[
+	"mélodramatique",
+	"mélodramatiques"
+	],
+"membranous":[
+	"membraneuse",
+	"membraneuses",
+	"membraneux"
+	],
+"memorable":[
+	"mémorable",
+	"mémorables"
+	],
+"memorial":[
+	"mémoriel",
+	"mémorielle",
+	"mémorielles",
+	"mémoriels"
+	],
+"mendacious":[
+	"fallacieuse",
+	"fallacieuses",
+	"fallacieux",
+	"mensonger",
+	"mensongers",
+	"mensongère",
+	"mensongères",
+	"trompeur",
+	"trompeurs",
+	"trompeuse",
+	"trompeuses"
+	],
+"menial":[
+	"ancillaire",
+	"ancillaires",
+	"subalterne",
+	"subalternes"
+	],
+"menstrual":[
+	"menstruel",
+	"menstruelle",
+	"menstruelles",
+	"menstruels",
+	"mensuel",
+	"mensuelle",
+	"mensuelles",
+	"mensuels"
+	],
+"mental":[
+	"mental",
+	"mentale",
+	"mentales",
+	"mentaux"
+	],
+"mercantile":[
+	"mercantile",
+	"mercantiles"
+	],
+"mercenary":[
+	"mercenaire",
+	"mercenaires"
+	],
+"merciful":[
+	"indulgent",
+	"indulgente",
+	"indulgentes",
+	"indulgents",
+	"miséricordieuse",
+	"miséricordieuses",
+	"miséricordieux",
+	"sensible",
+	"sensibles"
+	],
+"merciless":[
+	"impitoyable",
+	"impitoyables"
+	],
+"mere":[
+	"simple",
+	"simples"
+	],
+"meretricious":[
+	"spécieuse",
+	"spécieuses",
+	"spécieux"
+	],
+"meritorious":[
+	"louable",
+	"louables",
+	"méritoire",
+	"méritoires"
+	],
+"merry":[
+	"joyeuse",
+	"joyeuses",
+	"joyeux"
+	],
+"messianic":[
+	"messianique",
+	"messianiques"
+	],
+"messy":[
+	"désordonné",
+	"désordonnée",
+	"désordonnées",
+	"désordonnés"
+	],
+"metabolic":[
+	"métabolique",
+	"métaboliques"
+	],
+"metallic":[
+	"métallique",
+	"métalliques"
+	],
+"metalliferous":[
+	"métallifère",
+	"métallifères"
+	],
+"metallurgical":[
+	"métallurgique",
+	"métallurgiques"
+	],
+"metaphysical":[
+	"métaphysique",
+	"métaphysiques"
+	],
+"meteorological":[
+	"météorologique",
+	"météorologiques"
+	],
+"methodical":[
+	"méthodique",
+	"méthodiques"
+	],
+"methodological":[
+	"méthodologique",
+	"méthodologiques"
+	],
+"meticulous":[
+	"méticuleuse",
+	"méticuleuses",
+	"méticuleux",
+	"soigneuse",
+	"soigneuses",
+	"soigneux"
+	],
+"metis":[
+	"métis"
+	],
+"metonymic":[
+	"métonymique",
+	"métonymiques"
+	],
+"metrological":[
+	"métrologique",
+	"métrologiques"
+	],
+"metropolitan":[
+	"métropolitain",
+	"métropolitaine",
+	"métropolitaines",
+	"métropolitains",
+	"urbain",
+	"urbaine",
+	"urbaines",
+	"urbains"
+	],
+"mexican":[
+	"mexicain",
+	"mexicaine",
+	"mexicaines",
+	"mexicains"
+	],
+"microbial":[
+	"microbien",
+	"microbienne",
+	"microbiennes",
+	"microbiens"
+	],
+"microscopic":[
+	"microscopique",
+	"microscopiques"
+	],
+"middle":[
+	"central",
+	"centrale",
+	"centrales",
+	"centraux",
+	"moyen",
+	"moyenne",
+	"moyennes",
+	"moyens"
+	],
+"miffed":[
+	"irrité",
+	"irritée",
+	"irritées",
+	"irrités"
+	],
+"mighty":[
+	"puissant",
+	"puissante",
+	"puissantes",
+	"puissants"
+	],
+"migratory":[
+	"migrateur",
+	"migrateurs",
+	"migratrice",
+	"migratrices"
+	],
+"mild":[
+	"douce",
+	"douces",
+	"doux",
+	"léger",
+	"légers",
+	"légère",
+	"légères"
+	],
+"military":[
+	"militaire",
+	"militaires"
+	],
+"milky":[
+	"laiteuse",
+	"laiteuses",
+	"laiteux"
+	],
+"millimetric":[
+	"millimétrique",
+	"millimétriques"
+	],
+"millionth":[
+	"millionième",
+	"millionièmes"
+	],
+"minced":[
+	"haché",
+	"hachée",
+	"hachées",
+	"hachés"
+	],
+"mindful":[
+	"conscient",
+	"consciente",
+	"conscientes",
+	"conscients"
+	],
+"mindless":[
+	"irraisonné",
+	"irraisonnée",
+	"irraisonnées",
+	"irraisonnés",
+	"écervelé",
+	"écervelée",
+	"écervelées",
+	"écervelés"
+	],
+"mineral":[
+	"minéral",
+	"minérale",
+	"minérales",
+	"minéraux"
+	],
+"mineralogical":[
+	"minéralogique",
+	"minéralogiques"
+	],
+"minimal":[
+	"minimum",
+	"minimum",
+	"minimums"
+	],
+"minimalist":[
+	"minimaliste",
+	"minimalistes"
+	],
+"minimum":[
+	"minimum",
+	"minimum",
+	"minimums"
+	],
+"ministerial":[
+	"ministériel",
+	"ministérielle",
+	"ministérielles",
+	"ministériels"
+	],
+"minor":[
+	"mineur",
+	"mineure",
+	"mineures",
+	"mineurs"
+	],
+"minoritary":[
+	"minoritaire",
+	"minoritaires"
+	],
+"mint":[
+	"impecc",
+	"impeccable",
+	"impeccables"
+	],
+"minuscule":[
+	"minuscule",
+	"minuscules"
+	],
+"minute":[
+	"minuscule",
+	"minuscules",
+	"minutieuse",
+	"minutieuses",
+	"minutieux"
+	],
+"miraculous":[
+	"miraculeuse",
+	"miraculeuses",
+	"miraculeux"
+	],
+"misanthropic":[
+	"misanthropique",
+	"misanthropiques"
+	],
+"miscellaneous":[
+	"divers",
+	"diverse",
+	"diverses"
+	],
+"mischievous":[
+	"coquin",
+	"coquine",
+	"coquines",
+	"coquins",
+	"espiègle",
+	"espiègles",
+	"malicieuse",
+	"malicieuses",
+	"malicieux",
+	"maligne",
+	"malignes",
+	"malin",
+	"malins",
+	"méchant",
+	"méchante",
+	"méchantes",
+	"méchants"
+	],
+"miserable":[
+	"misérable",
+	"misérables"
+	],
+"miserly":[
+	"avare",
+	"avares",
+	"chiche",
+	"chiches",
+	"pingre",
+	"pingres",
+	"radin",
+	"radine",
+	"radines",
+	"radins"
+	],
+"misguided":[
+	"errant",
+	"errante",
+	"errantes",
+	"errants"
+	],
+"misleading":[
+	"trompeur",
+	"trompeurs",
+	"trompeuse",
+	"trompeuses"
+	],
+"misogynistic":[
+	"misogyne",
+	"misogynes"
+	],
+"missing":[
+	"disparu",
+	"disparue",
+	"disparues",
+	"disparus"
+	],
+"misty":[
+	"brumeuse",
+	"brumeuses",
+	"brumeux"
+	],
+"mitochondrial":[
+	"mitochondrial",
+	"mitochondriale",
+	"mitochondriales",
+	"mitochondriaux"
+	],
+"mixed":[
+	"mixte",
+	"mixtes"
+	],
+"mobile":[
+	"mobile",
+	"mobiles"
+	],
+"modal":[
+	"modal",
+	"modale",
+	"modales",
+	"modaux"
+	],
+"model":[
+	"exemplaire",
+	"exemplaires",
+	"modèle",
+	"modèles"
+	],
+"modern":[
+	"moderne",
+	"modernes"
+	],
+"modernist":[
+	"moderniste",
+	"modernistes"
+	],
+"modest":[
+	"modeste",
+	"modestes"
+	],
+"modular":[
+	"modulaire",
+	"modulaires"
+	],
+"moguled":[
+	"bosselé",
+	"bosselée",
+	"bosselées",
+	"bosselés"
+	],
+"moist":[
+	"humide",
+	"humides"
+	],
+"moldavian":[
+	"moldave",
+	"moldaves"
+	],
+"molecular":[
+	"moléculaire",
+	"moléculaires"
+	],
+"molten":[
+	"fondu",
+	"fondue",
+	"fondues",
+	"fondus",
+	"incandescent",
+	"incandescente",
+	"incandescentes",
+	"incandescents"
+	],
+"momentary":[
+	"momentané",
+	"momentanée",
+	"momentanées",
+	"momentanés"
+	],
+"momentous":[
+	"capital",
+	"capitale",
+	"capitales",
+	"capitaux",
+	"considérable",
+	"considérables"
+	],
+"monastic":[
+	"monastique",
+	"monastiques"
+	],
+"monetary":[
+	"monétaire",
+	"monétaires"
+	],
+"mongolian":[
+	"mongol",
+	"mongole",
+	"mongoles",
+	"mongols"
+	],
+"monochrome":[
+	"monochrome",
+	"monochromes"
+	],
+"monogamous":[
+	"monogame",
+	"monogames"
+	],
+"monolingual":[
+	"unilingue",
+	"unilingues"
+	],
+"monolithic":[
+	"monolithique",
+	"monolithiques"
+	],
+"monopolistic":[
+	"monopolistique",
+	"monopolistiques"
+	],
+"monosyllabic":[
+	"monosyllabique",
+	"monosyllabiques"
+	],
+"monotheistic":[
+	"monothéiste",
+	"monothéistes"
+	],
+"monotonic":[
+	"monotone",
+	"monotones"
+	],
+"monotonous":[
+	"ennuyeuse",
+	"ennuyeuses",
+	"ennuyeux",
+	"monotone",
+	"monotones"
+	],
+"monster":[
+	"monstrueuse",
+	"monstrueuses",
+	"monstrueux"
+	],
+"monstrous":[
+	"monstrueuse",
+	"monstrueuses",
+	"monstrueux"
+	],
+"monthly":[
+	"mensuel",
+	"mensuelle",
+	"mensuelles",
+	"mensuels"
+	],
+"moody":[
+	"lugubre",
+	"lugubres",
+	"mélancolique",
+	"mélancoliques",
+	"taciturne",
+	"taciturnes"
+	],
+"moot":[
+	"discutable",
+	"discutables",
+	"stérile",
+	"stériles",
+	"vain",
+	"vaine",
+	"vaines",
+	"vains"
+	],
+"moral":[
+	"moral",
+	"morale",
+	"morales",
+	"moraux"
+	],
+"morbid":[
+	"macabre",
+	"macabres",
+	"malsain",
+	"malsaine",
+	"malsaines",
+	"malsains",
+	"morbide",
+	"morbides",
+	"pathologique",
+	"pathologiques"
+	],
+"mordacious":[
+	"caustique",
+	"caustiques",
+	"corrosif",
+	"corrosifs",
+	"corrosive",
+	"corrosives",
+	"mordant",
+	"mordante",
+	"mordantes",
+	"mordants"
+	],
+"morganatic":[
+	"morganatique",
+	"morganatiques"
+	],
+"moroccan":[
+	"marocain",
+	"marocaine",
+	"marocaines",
+	"marocains"
+	],
+"morose":[
+	"sombre",
+	"sombres"
+	],
+"morphological":[
+	"morphologique",
+	"morphologiques"
+	],
+"mortal":[
+	"mortel",
+	"mortelle",
+	"mortelles",
+	"mortels"
+	],
+"motionless":[
+	"immobile",
+	"immobiles"
+	],
+"motive":[
+	"mobile",
+	"mobiles",
+	"moteur",
+	"moteurs",
+	"motrice",
+	"motrices",
+	"mouvant",
+	"mouvante",
+	"mouvantes",
+	"mouvants"
+	],
+"mottled":[
+	"marbré",
+	"marbrée",
+	"marbrées",
+	"marbrés",
+	"tacheté",
+	"tachetée",
+	"tachetées",
+	"tachetés"
+	],
+"mountainous":[
+	"montagneuse",
+	"montagneuses",
+	"montagneux"
+	],
+"mournful":[
+	"chagrin",
+	"chagrine",
+	"chagrines",
+	"chagrins",
+	"funèbre",
+	"funèbres",
+	"lugubre",
+	"lugubres",
+	"mélancolique",
+	"mélancoliques",
+	"éploré",
+	"éplorée",
+	"éplorées",
+	"éplorés"
+	],
+"mouthly":[
+	"oral",
+	"orale",
+	"orales",
+	"oraux"
+	],
+"mouthwatering":[
+	"alléchant",
+	"alléchante",
+	"alléchantes",
+	"alléchants",
+	"appétissant",
+	"appétissante",
+	"appétissantes",
+	"appétissants"
+	],
+"moving":[
+	"touchant",
+	"touchante",
+	"touchantes",
+	"touchants",
+	"émouvant",
+	"émouvante",
+	"émouvantes",
+	"émouvants"
+	],
+"mudded":[
+	"boueuse",
+	"boueuses",
+	"boueux"
+	],
+"muddy":[
+	"boueuse",
+	"boueuses",
+	"boueux",
+	"vaseuse",
+	"vaseuses",
+	"vaseux"
+	],
+"muggy":[
+	"humide",
+	"humides",
+	"étouffant",
+	"étouffante",
+	"étouffantes",
+	"étouffants"
+	],
+"multicellular":[
+	"multicellulaire",
+	"multicellulaires"
+	],
+"multicolored":[
+	"multicolore",
+	"multicolores"
+	],
+"multicultural":[
+	"multiculturel",
+	"multiculturelle",
+	"multiculturelles",
+	"multiculturels"
+	],
+"multidimensional":[
+	"multidimensionnel",
+	"multidimensionnelle",
+	"multidimensionnelles",
+	"multidimensionnels"
+	],
+"multiethnic":[
+	"multiethnique",
+	"multiethniques"
+	],
+"multilateral":[
+	"multilatéral",
+	"multilatérale",
+	"multilatérales",
+	"multilatéraux"
+	],
+"multilingual":[
+	"multilingue",
+	"multilingues",
+	"polyglotte",
+	"polyglottes"
+	],
+"multinational":[
+	"multinational",
+	"multinationale",
+	"multinationales",
+	"multinationaux"
+	],
+"multiple":[
+	"multiple",
+	"multiples"
+	],
+"mundane":[
+	"ennuyeuse",
+	"ennuyeuses",
+	"ennuyeux",
+	"ordinaire",
+	"ordinaires",
+	"prosaïque",
+	"prosaïques"
+	],
+"municipal":[
+	"municipal",
+	"municipale",
+	"municipales",
+	"municipaux"
+	],
+"murderous":[
+	"meurtrier",
+	"meurtriers",
+	"meurtrière",
+	"meurtrières"
+	],
+"murky":[
+	"sombre",
+	"sombres",
+	"trouble",
+	"troubles"
+	],
+"musclebound":[
+	"raide",
+	"raides"
+	],
+"muscovite":[
+	"moscovite",
+	"moscovites"
+	],
+"muscular":[
+	"musculaire",
+	"musculaires"
+	],
+"mushy":[
+	"mol",
+	"molle",
+	"molles",
+	"mou",
+	"mous",
+	"pâteuse",
+	"pâteuses",
+	"pâteux"
+	],
+"musical":[
+	"musical",
+	"musicale",
+	"musicales",
+	"musicaux"
+	],
+"musing":[
+	"pensif",
+	"pensifs",
+	"pensive",
+	"pensives",
+	"songeur",
+	"songeurs",
+	"songeuse",
+	"songeuses"
+	],
+"muslim":[
+	"musulman",
+	"musulmane",
+	"musulmanes",
+	"musulmans"
+	],
+"mutable":[
+	"mutable",
+	"mutables"
+	],
+"mute":[
+	"muet",
+	"muets",
+	"muette",
+	"muettes",
+	"silencieuse",
+	"silencieuses",
+	"silencieux"
+	],
+"mutual":[
+	"mutuel",
+	"mutuelle",
+	"mutuelles",
+	"mutuels"
+	],
+"myocardial":[
+	"myocardique",
+	"myocardiques"
+	],
+"myriad":[
+	"nombreuse",
+	"nombreuses",
+	"nombreux"
+	],
+"mysterious":[
+	"mystérieuse",
+	"mystérieuses",
+	"mystérieux"
+	],
+"mystic":[
+	"mystique",
+	"mystiques"
+	],
+"mystical":[
+	"mystique",
+	"mystiques"
+	],
+"mythical":[
+	"mythique",
+	"mythiques"
+	],
+"mythological":[
+	"mythologique",
+	"mythologiques"
+	],
+"nagging":[
+	"persistant",
+	"persistante",
+	"persistantes",
+	"persistants"
+	],
+"naive":[
+	"ingénu",
+	"ingénue",
+	"ingénues",
+	"ingénus",
+	"naïf",
+	"naïfs",
+	"naïve",
+	"naïves"
+	],
+"naked":[
+	"nu",
+	"nue",
+	"nues",
+	"nus"
+	],
+"nameless":[
+	"innomé",
+	"innomée",
+	"innomées",
+	"innomés"
+	],
+"napoleonic":[
+	"napoléonien",
+	"napoléonienne",
+	"napoléoniennes",
+	"napoléoniens"
+	],
+"narcissistic":[
+	"narcissique",
+	"narcissiques"
+	],
+"narrative":[
+	"narratif",
+	"narratifs",
+	"narrative",
+	"narratives"
+	],
+"narrow":[
+	"étroit",
+	"étroite",
+	"étroites",
+	"étroits"
+	],
+"nascent":[
+	"naissant",
+	"naissante",
+	"naissantes",
+	"naissants",
+	"émergent",
+	"émergente",
+	"émergentes",
+	"émergents"
+	],
+"national":[
+	"national",
+	"nationale",
+	"nationales",
+	"nationaux"
+	],
+"nationalist":[
+	"nationaliste",
+	"nationalistes"
+	],
+"native":[
+	"autochtone",
+	"autochtones",
+	"endémique",
+	"endémiques",
+	"indigène",
+	"indigènes",
+	"maternel",
+	"maternelle",
+	"maternelles",
+	"maternels"
+	],
+"natty":[
+	"chic",
+	"chics",
+	"élégant",
+	"élégante",
+	"élégantes",
+	"élégants"
+	],
+"natural":[
+	"naturel",
+	"naturelle",
+	"naturelles",
+	"naturels",
+	"normal",
+	"normale",
+	"normales",
+	"normaux"
+	],
+"naturalistic":[
+	"naturaliste",
+	"naturalistes"
+	],
+"naturist":[
+	"naturiste",
+	"naturistes"
+	],
+"naughty":[
+	"malicieuse",
+	"malicieuses",
+	"malicieux",
+	"maligne",
+	"malignes",
+	"malin",
+	"malins",
+	"méchant",
+	"méchante",
+	"méchantes",
+	"méchants",
+	"vilain",
+	"vilaine",
+	"vilaines",
+	"vilains"
+	],
+"nauseous":[
+	"nauséabond",
+	"nauséabonde",
+	"nauséabondes",
+	"nauséabonds",
+	"nauséeuse",
+	"nauséeuses",
+	"nauséeux"
+	],
+"nautical":[
+	"nautique",
+	"nautiques"
+	],
+"naval":[
+	"naval",
+	"navale",
+	"navales",
+	"navals",
+	"navaux"
+	],
+"navigable":[
+	"navigable",
+	"navigables"
+	],
+"navigatable":[
+	"navigable",
+	"navigables"
+	],
+"navy":[
+	"marin",
+	"marine",
+	"marines",
+	"marins",
+	"naval",
+	"navale",
+	"navales",
+	"navals",
+	"navaux"
+	],
+"nazi":[
+	"nazi",
+	"nazie",
+	"nazies",
+	"nazis"
+	],
+"neanderthal":[
+	"néandertalien",
+	"néandertalienne",
+	"néandertaliennes",
+	"néandertaliens"
+	],
+"near":[
+	"proche",
+	"proches",
+	"près"
+	],
+"nearby":[
+	"proche",
+	"proches"
+	],
+"neat":[
+	"net",
+	"nets",
+	"nette",
+	"nettes",
+	"pur",
+	"pure",
+	"pures",
+	"purs"
+	],
+"nebulous":[
+	"nébuleuse",
+	"nébuleuses",
+	"nébuleux"
+	],
+"necessary":[
+	"nécessaire",
+	"nécessaires"
+	],
+"needless":[
+	"inutile",
+	"inutiles",
+	"superflu",
+	"superflue",
+	"superflues",
+	"superflus"
+	],
+"nefarious":[
+	"criminel",
+	"criminelle",
+	"criminelles",
+	"criminels",
+	"infâme",
+	"infâmes",
+	"scandaleuse",
+	"scandaleuses",
+	"scandaleux"
+	],
+"negative":[
+	"négatif",
+	"négatifs",
+	"négative",
+	"négatives"
+	],
+"neglectful":[
+	"négligent",
+	"négligente",
+	"négligentes",
+	"négligents"
+	],
+"negligent":[
+	"négligent",
+	"négligente",
+	"négligentes",
+	"négligents"
+	],
+"negligible":[
+	"négligeable",
+	"négligeables"
+	],
+"negotiable":[
+	"négociable",
+	"négociables"
+	],
+"negro":[
+	"nègre",
+	"nègres"
+	],
+"neighboring":[
+	"adjacent",
+	"adjacente",
+	"adjacentes",
+	"adjacents",
+	"voisin",
+	"voisine",
+	"voisines",
+	"voisins"
+	],
+"nemorous":[
+	"boisé",
+	"boisée",
+	"boisées",
+	"boisés"
+	],
+"neofascist":[
+	"néofasciste",
+	"néofascistes"
+	],
+"neolithic":[
+	"néolithique",
+	"néolithiques"
+	],
+"neonatal":[
+	"néonatal",
+	"néonatale",
+	"néonatales",
+	"néonatals"
+	],
+"nervous":[
+	"nerveuse",
+	"nerveuses",
+	"nerveux"
+	],
+"nesh":[
+	"frileuse",
+	"frileuses",
+	"frileux"
+	],
+"nested":[
+	"imbriqué",
+	"imbriquée",
+	"imbriquées",
+	"imbriqués"
+	],
+"net":[
+	"net",
+	"nets",
+	"nette",
+	"nettes"
+	],
+"nether":[
+	"inf..",
+	"inférieur",
+	"inférieure",
+	"inférieures",
+	"inférieurs",
+	"souterrain",
+	"souterraine",
+	"souterraines",
+	"souterrains"
+	],
+"netherlands":[
+	"hollandais",
+	"hollandaise",
+	"hollandaises",
+	"néerlandais",
+	"néerlandaise",
+	"néerlandaises"
+	],
+"neuralgic":[
+	"névralgique",
+	"névralgiques"
+	],
+"neurological":[
+	"neurologique",
+	"neurologiques"
+	],
+"neuronal":[
+	"neuronal",
+	"neuronale",
+	"neuronales",
+	"neuronaux"
+	],
+"neurotic":[
+	"névrotique",
+	"névrotiques",
+	"psychotique",
+	"psychotiques"
+	],
+"neuter":[
+	"asexuel",
+	"asexuelle",
+	"asexuelles",
+	"asexuels",
+	"impartial",
+	"impartiale",
+	"impartiales",
+	"impartiaux",
+	"neutre",
+	"neutres"
+	],
+"neutral":[
+	"neutre",
+	"neutres"
+	],
+"new":[
+	"autre",
+	"autres",
+	"neuf",
+	"neufs",
+	"neuve",
+	"neuves",
+	"nouveau",
+	"nouveaux",
+	"nouvel",
+	"nouvelle",
+	"nouvelles"
+	],
+"newtonian":[
+	"newtonien",
+	"newtonienne",
+	"newtoniennes",
+	"newtoniens"
+	],
+"next":[
+	"prochain",
+	"prochaine",
+	"prochaines",
+	"prochains",
+	"proche",
+	"proches",
+	"suiv..",
+	"suivant",
+	"suivante",
+	"suivantes",
+	"suivants"
+	],
+"nicaraguan":[
+	"nicaraguayen",
+	"nicaraguayenne",
+	"nicaraguayennes",
+	"nicaraguayens"
+	],
+"nice":[
+	"agréable",
+	"agréables",
+	"beau",
+	"beaux",
+	"bel",
+	"belle",
+	"belles",
+	"bon",
+	"bonne",
+	"bonnes",
+	"bons",
+	"bô",
+	"gentil",
+	"gentille",
+	"gentilles",
+	"gentils",
+	"joli",
+	"jolie",
+	"jolies",
+	"jolis",
+	"sympa",
+	"sympas",
+	"sympathique",
+	"sympathiques"
+	],
+"nictitating":[
+	"clignotant",
+	"clignotante",
+	"clignotantes",
+	"clignotants"
+	],
+"nifty":[
+	"chouette",
+	"chouettes"
+	],
+"nigerian":[
+	"nigérian",
+	"nigériane",
+	"nigérianes",
+	"nigérians"
+	],
+"niggardly":[
+	"avare",
+	"avares",
+	"mesquin",
+	"mesquine",
+	"mesquines",
+	"mesquins",
+	"pingre",
+	"pingres"
+	],
+"nigh":[
+	"proche",
+	"proches",
+	"près"
+	],
+"nightmarish":[
+	"cauchemardesque",
+	"cauchemardesques"
+	],
+"nimble":[
+	"agile",
+	"agiles",
+	"fulgurant",
+	"fulgurante",
+	"fulgurantes",
+	"fulgurants",
+	"preste",
+	"prestes",
+	"vif",
+	"vifs",
+	"vive",
+	"vives"
+	],
+"nineteenth":[
+	"dix-neuf",
+	"dix-neuvième",
+	"dix-neuvièmes"
+	],
+"ninth":[
+	"neuf",
+	"neufs",
+	"neuve",
+	"neuves",
+	"neuvième",
+	"neuvièmes"
+	],
+"nippy":[
+	"frisquet",
+	"frisquets",
+	"frisquette",
+	"frisquettes"
+	],
+"nitrogenous":[
+	"azoté",
+	"azotée",
+	"azotées",
+	"azotés"
+	],
+"noble":[
+	"aristocratique",
+	"aristocratiques",
+	"noble",
+	"nobles"
+	],
+"nocturnal":[
+	"nocturne",
+	"nocturnes"
+	],
+"noiseless":[
+	"silencieuse",
+	"silencieuses",
+	"silencieux"
+	],
+"noisome":[
+	"désagréable",
+	"désagréables",
+	"insalubre",
+	"insalubres",
+	"malsain",
+	"malsaine",
+	"malsaines",
+	"malsains",
+	"nocif",
+	"nocifs",
+	"nocive",
+	"nocives",
+	"nuisible",
+	"nuisibles",
+	"répugnant",
+	"répugnante",
+	"répugnantes",
+	"répugnants",
+	"toxique",
+	"toxiques"
+	],
+"noisy":[
+	"bruyant",
+	"bruyante",
+	"bruyantes",
+	"bruyants",
+	"tonitruant",
+	"tonitruante",
+	"tonitruantes",
+	"tonitruants"
+	],
+"nomadic":[
+	"nomade",
+	"nomades"
+	],
+"nominal":[
+	"nominal",
+	"nominale",
+	"nominales",
+	"nominaux"
+	],
+"nominative":[
+	"nominatif",
+	"nominatifs",
+	"nominative",
+	"nominatives"
+	],
+"nonchalant":[
+	"décontracté",
+	"décontractée",
+	"décontractées",
+	"décontractés",
+	"désinvolte",
+	"désinvoltes"
+	],
+"noncommittal":[
+	"évasif",
+	"évasifs",
+	"évasive",
+	"évasives"
+	],
+"nonconformist":[
+	"anticonformiste",
+	"anticonformistes"
+	],
+"nondescript":[
+	"banal",
+	"banale",
+	"banales",
+	"banals",
+	"banaux",
+	"quelconque",
+	"quelconques"
+	],
+"nondeterministic":[
+	"indéterministe",
+	"indéterministes"
+	],
+"nonexistent":[
+	"inexistant",
+	"inexistante",
+	"inexistantes",
+	"inexistants"
+	],
+"nonflammable":[
+	"ininflammable",
+	"ininflammables"
+	],
+"nonfree":[
+	"payant",
+	"payante",
+	"payantes",
+	"payants"
+	],
+"nonnegative":[
+	"positif",
+	"positifs",
+	"positive",
+	"positives"
+	],
+"nonplussed":[
+	"détaché",
+	"détachée",
+	"détachées",
+	"détachés",
+	"imperturbable",
+	"imperturbables",
+	"interloqué",
+	"interloquée",
+	"interloquées",
+	"interloqués",
+	"perplexe",
+	"perplexes"
+	],
+"nonpositive":[
+	"négatif",
+	"négatifs",
+	"négative",
+	"négatives"
+	],
+"nonprofessional":[
+	"amateur",
+	"amateurs"
+	],
+"nonsensical":[
+	"absurde",
+	"absurdes"
+	],
+"nordic":[
+	"nordique",
+	"nordiques"
+	],
+"normal":[
+	"normal",
+	"normale",
+	"normales",
+	"normaux"
+	],
+"normative":[
+	"normatif",
+	"normatifs",
+	"normative",
+	"normatives"
+	],
+"norse":[
+	"nordique",
+	"nordiques"
+	],
+"north":[
+	"boréal",
+	"boréale",
+	"boréales",
+	"boréals",
+	"nord",
+	"septentrional",
+	"septentrionale",
+	"septentrionales",
+	"septentrionaux"
+	],
+"northern":[
+	"boréal",
+	"boréale",
+	"boréales",
+	"boréals",
+	"septentrional",
+	"septentrionale",
+	"septentrionales",
+	"septentrionaux"
+	],
+"norwegian":[
+	"norvégien",
+	"norvégienne",
+	"norvégiennes",
+	"norvégiens"
+	],
+"nostalgic":[
+	"nostalgique",
+	"nostalgiques"
+	],
+"nosy":[
+	"curieuse",
+	"curieuses",
+	"curieux",
+	"fouineur",
+	"fouineurs",
+	"fouineuse",
+	"fouineuses",
+	"fureteur",
+	"fureteurs",
+	"fureteuse",
+	"fureteuses"
+	],
+"notable":[
+	"notable",
+	"notables",
+	"remarquable",
+	"remarquables"
+	],
+"noticeable":[
+	"détectable",
+	"détectables",
+	"remarquable",
+	"remarquables",
+	"repérable",
+	"repérables"
+	],
+"notional":[
+	"notionnel",
+	"notionnelle",
+	"notionnelles",
+	"notionnels"
+	],
+"notorious":[
+	"notoire",
+	"notoires"
+	],
+"novel":[
+	"nouveau",
+	"nouveaux",
+	"nouvel",
+	"nouvelle",
+	"nouvelles",
+	"original",
+	"originale",
+	"originales",
+	"originaux"
+	],
+"noxious":[
+	"nocif",
+	"nocifs",
+	"nocive",
+	"nocives"
+	],
+"nth":[
+	"n-ième",
+	"n-ièmes",
+	"énième",
+	"énièmes"
+	],
+"nubile":[
+	"nubile",
+	"nubiles"
+	],
+"nuclear":[
+	"nucléaire",
+	"nucléaires"
+	],
+"nude":[
+	"nu",
+	"nue",
+	"nues",
+	"nus"
+	],
+"nugatory":[
+	"inefficace",
+	"inefficaces",
+	"insignifiant",
+	"insignifiante",
+	"insignifiantes",
+	"insignifiants"
+	],
+"numb":[
+	"engourdi",
+	"engourdie",
+	"engourdies",
+	"engourdis",
+	"gourd",
+	"gourde",
+	"gourdes",
+	"gourds"
+	],
+"numerical":[
+	"numérique",
+	"numériques"
+	],
+"numerous":[
+	"nombreuse",
+	"nombreuses",
+	"nombreux"
+	],
+"nuptial":[
+	"nuptial",
+	"nuptiale",
+	"nuptiales",
+	"nuptiaux"
+	],
+"nutrient":[
+	"nutritif",
+	"nutritifs",
+	"nutritive",
+	"nutritives"
+	],
+"nutritional":[
+	"alimentaire",
+	"alimentaires"
+	],
+"nutritious":[
+	"nutritif",
+	"nutritifs",
+	"nutritive",
+	"nutritives"
+	],
+"nuts":[
+	"cinglé",
+	"cinglée",
+	"cinglées",
+	"cinglés",
+	"dingue",
+	"dingues"
+	],
+"nutty":[
+	"cinglé",
+	"cinglée",
+	"cinglées",
+	"cinglés",
+	"dingue",
+	"dingues",
+	"fol",
+	"folle",
+	"folles",
+	"fou",
+	"fous"
+	],
+"obcordate":[
+	"obcordé",
+	"obcordée",
+	"obcordées",
+	"obcordés"
+	],
+"obdurate":[
+	"opiniâtre",
+	"opiniâtres"
+	],
+"obedient":[
+	"obéissant",
+	"obéissante",
+	"obéissantes",
+	"obéissants"
+	],
+"objective":[
+	"objectif",
+	"objectifs",
+	"objective",
+	"objectives"
+	],
+"obligatory":[
+	"obligatoire",
+	"obligatoires"
+	],
+"obliging":[
+	"serviable",
+	"serviables"
+	],
+"oblivious":[
+	"distrait",
+	"distraite",
+	"distraites",
+	"distraits",
+	"ignorant",
+	"ignorante",
+	"ignorantes",
+	"ignorants",
+	"inconscient",
+	"inconsciente",
+	"inconscientes",
+	"inconscients"
+	],
+"oblong":[
+	"oblong",
+	"oblongs",
+	"oblongue",
+	"oblongues"
+	],
+"obnoxious":[
+	"désagréable",
+	"désagréables",
+	"exécrable",
+	"exécrables",
+	"odieuse",
+	"odieuses",
+	"odieux"
+	],
+"obscene":[
+	"obscène",
+	"obscènes"
+	],
+"obscure":[
+	"obscur",
+	"obscure",
+	"obscures",
+	"obscurs",
+	"sibyllin",
+	"sibylline",
+	"sibyllines",
+	"sibyllins"
+	],
+"obsequious":[
+	"obséquieuse",
+	"obséquieuses",
+	"obséquieux",
+	"obéissant",
+	"obéissante",
+	"obéissantes",
+	"obéissants"
+	],
+"observable":[
+	"observable",
+	"observables"
+	],
+"obsolescent":[
+	"obsolescent",
+	"obsolescente",
+	"obsolescentes",
+	"obsolescents"
+	],
+"obsolete":[
+	"obsolète",
+	"obsolètes"
+	],
+"obstinate":[
+	"obstiné",
+	"obstinée",
+	"obstinées",
+	"obstinés"
+	],
+"obtuse":[
+	"obtus",
+	"obtuse",
+	"obtuses",
+	"sourd",
+	"sourde",
+	"sourdes",
+	"sourds"
+	],
+"obvious":[
+	"évident",
+	"évidente",
+	"évidentes",
+	"évidents"
+	],
+"occasional":[
+	"occasionnel",
+	"occasionnelle",
+	"occasionnelles",
+	"occasionnels"
+	],
+"occidental":[
+	"occidental",
+	"occidentale",
+	"occidentales",
+	"occidentaux"
+	],
+"occitan":[
+	"occitan",
+	"occitane",
+	"occitanes",
+	"occitans"
+	],
+"occult":[
+	"occulte",
+	"occultes"
+	],
+"occupied":[
+	"occupé",
+	"occupée",
+	"occupées",
+	"occupés"
+	],
+"oceanic":[
+	"océanique",
+	"océaniques"
+	],
+"octagonal":[
+	"octogonal",
+	"octogonale",
+	"octogonales",
+	"octogonaux"
+	],
+"ocular":[
+	"oculaire",
+	"oculaires"
+	],
+"odd":[
+	"bizarre",
+	"bizarres",
+	"impair",
+	"impaire",
+	"impaires",
+	"impairs",
+	"étrange",
+	"étranges"
+	],
+"odious":[
+	"odieuse",
+	"odieuses",
+	"odieux"
+	],
+"odorless":[
+	"inodore",
+	"inodores"
+	],
+"odorous":[
+	"odorant",
+	"odorante",
+	"odorantes",
+	"odorants"
+	],
+"oedipal":[
+	"oedipien",
+	"oedipienne",
+	"oedipiennes",
+	"oedipiens"
+	],
+"off":[
+	"fermé",
+	"fermée",
+	"fermées",
+	"fermés",
+	"éteint",
+	"éteinte",
+	"éteintes",
+	"éteints"
+	],
+"offensive":[
+	"offensant",
+	"offensante",
+	"offensantes",
+	"offensants",
+	"offensif",
+	"offensifs",
+	"offensive",
+	"offensives"
+	],
+"offhand":[
+	"négligent",
+	"négligente",
+	"négligentes",
+	"négligents"
+	],
+"official":[
+	"officiel",
+	"officielle",
+	"officielles",
+	"officiels"
+	],
+"offshore":[
+	"offshore",
+	"offshores"
+	],
+"oily":[
+	"huileuse",
+	"huileuses",
+	"huileux",
+	"onctueuse",
+	"onctueuses",
+	"onctueux"
+	],
+"ok":[
+	"acceptable",
+	"acceptables",
+	"bien",
+	"correct",
+	"correcte",
+	"correctes",
+	"corrects",
+	"passable",
+	"passables",
+	"pu"
+	],
+"old":[
+	"ancien",
+	"ancienne",
+	"anciennes",
+	"anciens",
+	"vieil",
+	"vieille",
+	"vieilles",
+	"vieux"
+	],
+"oldest":[
+	"aîné",
+	"aînée",
+	"aînées",
+	"aînés"
+	],
+"oleaginous":[
+	"oléagineuse",
+	"oléagineuses",
+	"oléagineux"
+	],
+"olfactory":[
+	"olfactif",
+	"olfactifs",
+	"olfactive",
+	"olfactives"
+	],
+"oligarchic":[
+	"oligarchique",
+	"oligarchiques"
+	],
+"olympic":[
+	"olympique",
+	"olympiques"
+	],
+"ominous":[
+	"menaçant",
+	"menaçante",
+	"menaçantes",
+	"menaçants",
+	"sinistre",
+	"sinistres"
+	],
+"omnipotent":[
+	"omnipotent",
+	"omnipotente",
+	"omnipotentes",
+	"omnipotents"
+	],
+"omnipresent":[
+	"omniprésent",
+	"omniprésente",
+	"omniprésentes",
+	"omniprésents"
+	],
+"omniscient":[
+	"omniscient",
+	"omnisciente",
+	"omniscientes",
+	"omniscients"
+	],
+"omnivorous":[
+	"omnivore",
+	"omnivores"
+	],
+"on":[
+	"allumé",
+	"allumée",
+	"allumées",
+	"allumés"
+	],
+"oneiric":[
+	"onirique",
+	"oniriques"
+	],
+"onerous":[
+	"lourd",
+	"lourde",
+	"lourdes",
+	"lourds",
+	"onéreuse",
+	"onéreuses",
+	"onéreux",
+	"pénible",
+	"pénibles"
+	],
+"ongoing":[
+	"actuel",
+	"actuelle",
+	"actuelles",
+	"actuels",
+	"continu",
+	"continue",
+	"continuel",
+	"continuelle",
+	"continuelles",
+	"continuels",
+	"continues",
+	"continus",
+	"en cours",
+	"permanent",
+	"permanente",
+	"permanentes",
+	"permanents"
+	],
+"only":[
+	"seul",
+	"seule",
+	"seules",
+	"seuls",
+	"unique",
+	"uniques"
+	],
+"ontological":[
+	"ontologique",
+	"ontologiques"
+	],
+"opaque":[
+	"opaque",
+	"opaques"
+	],
+"open":[
+	"ouvert",
+	"ouverte",
+	"ouvertes",
+	"ouverts"
+	],
+"openable":[
+	"ouvrable",
+	"ouvrables"
+	],
+"operational":[
+	"opérationnel",
+	"opérationnelle",
+	"opérationnelles",
+	"opérationnels"
+	],
+"operative":[
+	"opératoire",
+	"opératoires"
+	],
+"opinionated":[
+	"opiniâtre",
+	"opiniâtres"
+	],
+"opportune":[
+	"opportun",
+	"opportune",
+	"opportunes",
+	"opportuns"
+	],
+"opportunistic":[
+	"opportun",
+	"opportune",
+	"opportunes",
+	"opportuniste",
+	"opportunistes",
+	"opportuns"
+	],
+"optical":[
+	"optique",
+	"optiques"
+	],
+"optimal":[
+	"optimal",
+	"optimale",
+	"optimales",
+	"optimaux"
+	],
+"optimistic":[
+	"optimiste",
+	"optimistes"
+	],
+"optimum":[
+	"optimal",
+	"optimale",
+	"optimales",
+	"optimaux"
+	],
+"optional":[
+	"facultatif",
+	"facultatifs",
+	"facultative",
+	"facultatives",
+	"optionnel",
+	"optionnelle",
+	"optionnelles",
+	"optionnels"
+	],
+"oral":[
+	"oral",
+	"orale",
+	"orales",
+	"oraux"
+	],
+"orange":[
+	"orange",
+	"oranges"
+	],
+"orbicular":[
+	"orbiculaire",
+	"orbiculaires",
+	"sphérique",
+	"sphériques"
+	],
+"orbital":[
+	"orbital",
+	"orbitale",
+	"orbitales",
+	"orbitaux"
+	],
+"orbitational":[
+	"orbital",
+	"orbitale",
+	"orbitales",
+	"orbitaux"
+	],
+"orchestral":[
+	"orchestral",
+	"orchestrale",
+	"orchestrales",
+	"orchestraux"
+	],
+"ordinal":[
+	"ordinal",
+	"ordinale",
+	"ordinales",
+	"ordinaux"
+	],
+"ordinary":[
+	"ordinaire",
+	"ordinaires"
+	],
+"organic":[
+	"bio",
+	"biologique",
+	"biologiques",
+	"organique",
+	"organiques"
+	],
+"organoleptic":[
+	"organoleptique",
+	"organoleptiques"
+	],
+"orgulous":[
+	"ampoulé",
+	"ampoulée",
+	"ampoulées",
+	"ampoulés",
+	"dangereuse",
+	"dangereuses",
+	"dangereux",
+	"dédaigneuse",
+	"dédaigneuses",
+	"dédaigneux",
+	"excessif",
+	"excessifs",
+	"excessive",
+	"excessives",
+	"fier",
+	"fiers",
+	"fière",
+	"fières",
+	"hautain",
+	"hautaine",
+	"hautaines",
+	"hautains",
+	"menaçant",
+	"menaçante",
+	"menaçantes",
+	"menaçants",
+	"méprisant",
+	"méprisante",
+	"méprisantes",
+	"méprisants",
+	"orgueilleuse",
+	"orgueilleuses",
+	"orgueilleux",
+	"ostentatoire",
+	"ostentatoires",
+	"vaniteuse",
+	"vaniteuses",
+	"vaniteux"
+	],
+"oriental":[
+	"oriental",
+	"orientale",
+	"orientales",
+	"orientaux"
+	],
+"original":[
+	"original",
+	"originale",
+	"originales",
+	"originaux",
+	"originel",
+	"originelle",
+	"originelles",
+	"originels"
+	],
+"orthodox":[
+	"orthodoxe",
+	"orthodoxes"
+	],
+"orthogonal":[
+	"indépendant",
+	"indépendante",
+	"indépendantes",
+	"indépendants",
+	"orthogonal",
+	"orthogonale",
+	"orthogonales",
+	"orthogonaux"
+	],
+"orthographic":[
+	"orthographique",
+	"orthographiques"
+	],
+"orthopedic":[
+	"orthopédique",
+	"orthopédiques"
+	],
+"osseous":[
+	"osseuse",
+	"osseuses",
+	"osseux"
+	],
+"ostensible":[
+	"apparent",
+	"apparente",
+	"apparentes",
+	"apparents"
+	],
+"ostentatious":[
+	"ostentatoire",
+	"ostentatoires"
+	],
+"other":[
+	"autre",
+	"autres"
+	],
+"otiose":[
+	"inutile",
+	"inutiles"
+	],
+"ottoman":[
+	"ottoman",
+	"ottomane",
+	"ottomanes",
+	"ottomans"
+	],
+"outdated":[
+	"dépassé",
+	"dépassée",
+	"dépassées",
+	"dépassés",
+	"périmé",
+	"périmée",
+	"périmées",
+	"périmés"
+	],
+"outer":[
+	"externe",
+	"externes",
+	"extérieur",
+	"extérieure",
+	"extérieures",
+	"extérieurs"
+	],
+"outlandish":[
+	"bizarre",
+	"bizarres",
+	"insolite",
+	"insolites",
+	"étrange",
+	"étranges"
+	],
+"outmoded":[
+	"démodé",
+	"démodée",
+	"démodées",
+	"démodés",
+	"dépassé",
+	"dépassée",
+	"dépassées",
+	"dépassés"
+	],
+"outpatient":[
+	"ambulatoire",
+	"ambulatoires"
+	],
+"outrageous":[
+	"outrageant",
+	"outrageante",
+	"outrageantes",
+	"outrageants",
+	"scandaleuse",
+	"scandaleuses",
+	"scandaleux"
+	],
+"outside":[
+	"externe",
+	"externes",
+	"extérieur",
+	"extérieure",
+	"extérieures",
+	"extérieurs"
+	],
+"outspoken":[
+	"franc",
+	"franche",
+	"franches",
+	"francs",
+	"franque",
+	"franques"
+	],
+"outstanding":[
+	"débiteur",
+	"débiteurs",
+	"débitrice",
+	"débitrices",
+	"exceptionnel",
+	"exceptionnelle",
+	"exceptionnelles",
+	"exceptionnels",
+	"remarquable",
+	"remarquables",
+	"saillant",
+	"saillante",
+	"saillantes",
+	"saillants"
+	],
+"oval":[
+	"ovale",
+	"ovales"
+	],
+"ovarian":[
+	"ovarien",
+	"ovarienne",
+	"ovariennes",
+	"ovariens"
+	],
+"over":[
+	"fini",
+	"finie",
+	"finies",
+	"finis"
+	],
+"overall":[
+	"global",
+	"globale",
+	"globales",
+	"globaux",
+	"total",
+	"totale",
+	"totales",
+	"totaux"
+	],
+"overbearing":[
+	"despotique",
+	"despotiques",
+	"dominateur",
+	"dominateurs",
+	"dominatrice",
+	"dominatrices"
+	],
+"overcast":[
+	"couvert",
+	"couverte",
+	"couvertes",
+	"couverts",
+	"nuageuse",
+	"nuageuses",
+	"nuageux"
+	],
+"overconfident":[
+	"arrogant",
+	"arrogante",
+	"arrogantes",
+	"arrogants",
+	"condescendant",
+	"condescendante",
+	"condescendantes",
+	"condescendants",
+	"outrecuidant",
+	"outrecuidante",
+	"outrecuidantes",
+	"outrecuidants",
+	"présomptueuse",
+	"présomptueuses",
+	"présomptueux",
+	"sec",
+	"secs",
+	"sèche",
+	"sèches"
+	],
+"overcrowded":[
+	"bondé",
+	"bondée",
+	"bondées",
+	"bondés"
+	],
+"overjoyed":[
+	"enchanté",
+	"enchantée",
+	"enchantées",
+	"enchantés"
+	],
+"overlapping":[
+	"chevauchant",
+	"chevauchante",
+	"chevauchantes",
+	"chevauchants"
+	],
+"overnight":[
+	"nocturne",
+	"nocturnes"
+	],
+"overseas":[
+	"outre-mer"
+	],
+"overweening":[
+	"arrogant",
+	"arrogante",
+	"arrogantes",
+	"arrogants",
+	"confiant",
+	"confiante",
+	"confiantes",
+	"confiants"
+	],
+"overwhelming":[
+	"accablant",
+	"accablante",
+	"accablantes",
+	"accablants"
+	],
+"overworked":[
+	"débordé",
+	"débordée",
+	"débordées",
+	"débordés"
+	],
+"ovine":[
+	"ovin",
+	"ovine",
+	"ovines",
+	"ovins"
+	],
+"ovoid":[
+	"ovoïde",
+	"ovoïdes"
+	],
+"own":[
+	"propre",
+	"propres"
+	],
+"pacific":[
+	"pacifique",
+	"pacifiques"
+	],
+"pacifist":[
+	"pacifiste",
+	"pacifistes"
+	],
+"pacifistic":[
+	"pacifiste",
+	"pacifistes"
+	],
+"packed":[
+	"archiplein",
+	"archipleine",
+	"archipleines",
+	"archipleins",
+	"bondé",
+	"bondée",
+	"bondées",
+	"bondés",
+	"empaqueté",
+	"empaquetée",
+	"empaquetées",
+	"empaquetés"
+	],
+"pagan":[
+	"immoral",
+	"immorale",
+	"immorales",
+	"immoraux"
+	],
+"painful":[
+	"douloureuse",
+	"douloureuses",
+	"douloureux",
+	"laborieuse",
+	"laborieuses",
+	"laborieux"
+	],
+"painless":[
+	"indolore",
+	"indolores"
+	],
+"painstaking":[
+	"minutieuse",
+	"minutieuses",
+	"minutieux",
+	"méticuleuse",
+	"méticuleuses",
+	"méticuleux"
+	],
+"pakistani":[
+	"pakistanais",
+	"pakistanaise",
+	"pakistanaises"
+	],
+"palatable":[
+	"acceptable",
+	"acceptables",
+	"bon",
+	"bonne",
+	"bonnes",
+	"bons",
+	"passable",
+	"passables",
+	"tolérable",
+	"tolérables"
+	],
+"pale":[
+	"hâve",
+	"hâves",
+	"pâle",
+	"pâles"
+	],
+"paleontological":[
+	"paléontologique",
+	"paléontologiques"
+	],
+"palestinian":[
+	"palestinien",
+	"palestinienne",
+	"palestiniennes",
+	"palestiniens"
+	],
+"palingenesic":[
+	"palingénésique",
+	"palingénésiques"
+	],
+"palliative":[
+	"palliatif",
+	"palliatifs",
+	"palliative",
+	"palliatives"
+	],
+"pallid":[
+	"blafard",
+	"blafarde",
+	"blafardes",
+	"blafards",
+	"pâle",
+	"pâles"
+	],
+"palpable":[
+	"palpable",
+	"palpables"
+	],
+"paltry":[
+	"dérisoire",
+	"dérisoires",
+	"misérable",
+	"misérables"
+	],
+"pancreatic":[
+	"pancréatique",
+	"pancréatiques"
+	],
+"pantagruelian":[
+	"pantagruélique",
+	"pantagruéliques"
+	],
+"papal":[
+	"papal",
+	"papale",
+	"papales",
+	"papaux"
+	],
+"paperback":[
+	"broché",
+	"brochée",
+	"brochées",
+	"brochés"
+	],
+"paradisaic":[
+	"paradisiaque",
+	"paradisiaques"
+	],
+"paradisiac":[
+	"paradisiaque",
+	"paradisiaques"
+	],
+"paradisiacal":[
+	"paradisiaque",
+	"paradisiaques"
+	],
+"paradoxical":[
+	"paradoxal",
+	"paradoxale",
+	"paradoxales",
+	"paradoxaux"
+	],
+"parallel":[
+	"parallèle",
+	"parallèles"
+	],
+"paralyzing":[
+	"paralysant",
+	"paralysante",
+	"paralysantes",
+	"paralysants"
+	],
+"parametric":[
+	"paramétrique",
+	"paramétriques"
+	],
+"paramilitary":[
+	"paramilitaire",
+	"paramilitaires"
+	],
+"paramount":[
+	"capital",
+	"capitale",
+	"capitales",
+	"capitaux",
+	"primordial",
+	"primordiale",
+	"primordiales",
+	"primordiaux"
+	],
+"parched":[
+	"assoiffé",
+	"assoiffée",
+	"assoiffées",
+	"assoiffés",
+	"sec",
+	"secs",
+	"sèche",
+	"sèches"
+	],
+"pardonable":[
+	"pardonnable",
+	"pardonnables"
+	],
+"parental":[
+	"parental",
+	"parentale",
+	"parentales",
+	"parentaux"
+	],
+"parenteral":[
+	"parentéral",
+	"parentérale",
+	"parentérales",
+	"parentéraux"
+	],
+"parisian":[
+	"parisien",
+	"parisienne",
+	"parisiennes",
+	"parisiens"
+	],
+"parliamentary":[
+	"parlementaire",
+	"parlementaires"
+	],
+"parochial":[
+	"paroissial",
+	"paroissiale",
+	"paroissiales",
+	"paroissiaux",
+	"provincial",
+	"provinciale",
+	"provinciales",
+	"provinciaux",
+	"égocentrique",
+	"égocentriques",
+	"étriqué",
+	"étriquée",
+	"étriquées",
+	"étriqués"
+	],
+"parsimonious":[
+	"avare",
+	"avares",
+	"parcimonieuse",
+	"parcimonieuses",
+	"parcimonieux"
+	],
+"part":[
+	"partial",
+	"partiale",
+	"partiales",
+	"partiaux"
+	],
+"parthian":[
+	"parthe",
+	"parthes"
+	],
+"partial":[
+	"partial",
+	"partiale",
+	"partiales",
+	"partiaux",
+	"partiel",
+	"partielle",
+	"partielles",
+	"partiels"
+	],
+"particular":[
+	"partial",
+	"partiale",
+	"partiales",
+	"partiaux"
+	],
+"partisan":[
+	"partisan",
+	"partisane",
+	"partisanes",
+	"partisans"
+	],
+"partitive":[
+	"partitif",
+	"partitifs",
+	"partitive",
+	"partitives"
+	],
+"passing":[
+	"rapide",
+	"rapides",
+	"éminent",
+	"éminente",
+	"éminentes",
+	"éminents"
+	],
+"passive":[
+	"passif",
+	"passifs",
+	"passive",
+	"passives"
+	],
+"past":[
+	"dernier",
+	"derniers",
+	"dernière",
+	"dernières"
+	],
+"pastoral":[
+	"pastoral",
+	"pastorale",
+	"pastorales",
+	"pastoraux"
+	],
+"patentable":[
+	"brevetable",
+	"brevetables"
+	],
+"paternal":[
+	"paternel",
+	"paternelle",
+	"paternelles",
+	"paternels"
+	],
+"pathetic":[
+	"lamentable",
+	"lamentables",
+	"minable",
+	"minables",
+	"pathétique",
+	"pathétiques"
+	],
+"pathological":[
+	"maladif",
+	"maladifs",
+	"maladive",
+	"maladives",
+	"malsain",
+	"malsaine",
+	"malsaines",
+	"malsains",
+	"pathologique",
+	"pathologiques"
+	],
+"patient":[
+	"patient",
+	"patiente",
+	"patientes",
+	"patients"
+	],
+"patriarchal":[
+	"patriarcal",
+	"patriarcale",
+	"patriarcales",
+	"patriarcaux"
+	],
+"patriotic":[
+	"patriotique",
+	"patriotiques"
+	],
+"pay":[
+	"payant",
+	"payante",
+	"payantes",
+	"payants"
+	],
+"peaceful":[
+	"calme",
+	"calmes",
+	"paisible",
+	"paisibles",
+	"placide",
+	"placides"
+	],
+"peckish":[
+	"affamé",
+	"affamée",
+	"affamées",
+	"affamés"
+	],
+"pectoral":[
+	"pectoral",
+	"pectorale",
+	"pectorales",
+	"pectoraux"
+	],
+"peculiar":[
+	"bizarre",
+	"bizarres",
+	"curieuse",
+	"curieuses",
+	"curieux",
+	"extraordinaire",
+	"extraordinaires",
+	"particulier",
+	"particuliers",
+	"particulière",
+	"particulières"
+	],
+"pecuniary":[
+	"monétaire",
+	"monétaires"
+	],
+"pedagogical":[
+	"pédagogique",
+	"pédagogiques"
+	],
+"pedantic":[
+	"méticuleuse",
+	"méticuleuses",
+	"méticuleux",
+	"pédant",
+	"pédante",
+	"pédantes",
+	"pédants"
+	],
+"pedestrian":[
+	"banal",
+	"banale",
+	"banales",
+	"banals",
+	"banaux",
+	"bateau",
+	"ordinaire",
+	"ordinaires",
+	"piétonnier",
+	"piétonniers",
+	"piétonnière",
+	"piétonnières",
+	"pédestre",
+	"pédestres"
+	],
+"pediatric":[
+	"pédiatrique",
+	"pédiatriques"
+	],
+"peevish":[
+	"geignard",
+	"geignarde",
+	"geignardes",
+	"geignards",
+	"maussade",
+	"maussades"
+	],
+"pejorative":[
+	"péjoratif",
+	"péjoratifs",
+	"péjorative",
+	"péjoratives"
+	],
+"pekingese":[
+	"pékinois",
+	"pékinoise",
+	"pékinoises"
+	],
+"penetrating":[
+	"pénétrant",
+	"pénétrante",
+	"pénétrantes",
+	"pénétrants"
+	],
+"pensive":[
+	"chagrin",
+	"chagrine",
+	"chagrines",
+	"chagrins",
+	"mélancolique",
+	"mélancoliques",
+	"pensif",
+	"pensifs",
+	"pensive",
+	"pensives"
+	],
+"penultimate":[
+	"avant-dernier",
+	"avant-derniers",
+	"avant-dernière",
+	"avant-dernières"
+	],
+"perceptible":[
+	"perceptible",
+	"perceptibles"
+	],
+"perceptive":[
+	"perspicace",
+	"perspicaces",
+	"pertinent",
+	"pertinente",
+	"pertinentes",
+	"pertinents"
+	],
+"peremptory":[
+	"autoritaire",
+	"autoritaires",
+	"dictatorial",
+	"dictatoriale",
+	"dictatoriales",
+	"dictatoriaux",
+	"impérieuse",
+	"impérieuses",
+	"impérieux",
+	"irréfutable",
+	"irréfutables",
+	"péremptoire",
+	"péremptoires"
+	],
+"perennial":[
+	"pérenne",
+	"pérennes"
+	],
+"perfect":[
+	"parfait",
+	"parfaite",
+	"parfaites",
+	"parfaits"
+	],
+"perfidious":[
+	"perfide",
+	"perfides"
+	],
+"perfunctory":[
+	"détaché",
+	"détachée",
+	"détachées",
+	"détachés",
+	"sommaire",
+	"sommaires",
+	"superficiel",
+	"superficielle",
+	"superficielles",
+	"superficiels"
+	],
+"perilous":[
+	"périlleuse",
+	"périlleuses",
+	"périlleux"
+	],
+"periodic":[
+	"périodique",
+	"périodiques"
+	],
+"peripatetic":[
+	"itinérant",
+	"itinérante",
+	"itinérantes",
+	"itinérants",
+	"nomade",
+	"nomades"
+	],
+"peripheral":[
+	"périphérique",
+	"périphériques"
+	],
+"perishable":[
+	"périssable",
+	"périssables"
+	],
+"peritoneal":[
+	"péritonéal",
+	"péritonéale",
+	"péritonéales",
+	"péritonéaux"
+	],
+"perky":[
+	"enthousiaste",
+	"enthousiastes",
+	"ferme",
+	"fermes",
+	"gai",
+	"gaie",
+	"gaies",
+	"gais",
+	"vif",
+	"vifs",
+	"vive",
+	"vives"
+	],
+"permanent":[
+	"permanent",
+	"permanente",
+	"permanentes",
+	"permanents"
+	],
+"permeable":[
+	"perméable",
+	"perméables"
+	],
+"permissive":[
+	"permissif",
+	"permissifs",
+	"permissive",
+	"permissives"
+	],
+"pernicious":[
+	"dangereuse",
+	"dangereuses",
+	"dangereux",
+	"délétère",
+	"délétères",
+	"malsain",
+	"malsaine",
+	"malsaines",
+	"malsains",
+	"nocif",
+	"nocifs",
+	"nocive",
+	"nocives",
+	"nuisible",
+	"nuisibles",
+	"pernicieuse",
+	"pernicieuses",
+	"pernicieux"
+	],
+"perpendicular":[
+	"perpendiculaire",
+	"perpendiculaires"
+	],
+"perpetual":[
+	"perpétuel",
+	"perpétuelle",
+	"perpétuelles",
+	"perpétuels"
+	],
+"perplexed":[
+	"perplexe",
+	"perplexes"
+	],
+"persian":[
+	"persan",
+	"persane",
+	"persanes",
+	"persans"
+	],
+"persistent":[
+	"persistant",
+	"persistante",
+	"persistantes",
+	"persistants",
+	"tenace",
+	"tenaces"
+	],
+"personal":[
+	"personnel",
+	"personnelle",
+	"personnelles",
+	"personnels"
+	],
+"perspicacious":[
+	"clairvoyant",
+	"clairvoyante",
+	"clairvoyantes",
+	"clairvoyants",
+	"perspicace",
+	"perspicaces"
+	],
+"persuasive":[
+	"convaincant",
+	"convaincante",
+	"convaincantes",
+	"convaincants",
+	"persuasif",
+	"persuasifs",
+	"persuasive",
+	"persuasives"
+	],
+"pert":[
+	"animé",
+	"animée",
+	"animées",
+	"animés",
+	"impertinent",
+	"impertinente",
+	"impertinentes",
+	"impertinents",
+	"ouvert",
+	"ouverte",
+	"ouvertes",
+	"ouverts",
+	"évident",
+	"évidente",
+	"évidentes",
+	"évidents"
+	],
+"pertinacious":[
+	"obstiné",
+	"obstinée",
+	"obstinées",
+	"obstinés",
+	"tenace",
+	"tenaces"
+	],
+"pertinent":[
+	"pertinent",
+	"pertinente",
+	"pertinentes",
+	"pertinents"
+	],
+"peruvian":[
+	"péruvien",
+	"péruvienne",
+	"péruviennes",
+	"péruviens"
+	],
+"pervasive":[
+	"envahissant",
+	"envahissante",
+	"envahissantes",
+	"envahissants",
+	"pénétrant",
+	"pénétrante",
+	"pénétrantes",
+	"pénétrants"
+	],
+"perverse":[
+	"pervers",
+	"perverse",
+	"perverses"
+	],
+"pesky":[
+	"agaçant",
+	"agaçante",
+	"agaçantes",
+	"agaçants"
+	],
+"pessimistic":[
+	"pessimiste",
+	"pessimistes"
+	],
+"pestiferous":[
+	"pestilentiel",
+	"pestilentielle",
+	"pestilentielles",
+	"pestilentiels"
+	],
+"petaloid":[
+	"pétaloïde",
+	"pétaloïdes"
+	],
+"petty":[
+	"ch'ti",
+	"insignifiant",
+	"insignifiante",
+	"insignifiantes",
+	"insignifiants",
+	"mesquin",
+	"mesquine",
+	"mesquines",
+	"mesquins",
+	"p'tit",
+	"p'tit'",
+	"p'tite",
+	"p'tites",
+	"p'tits",
+	"petit",
+	"petite",
+	"petites",
+	"petits",
+	"ptit",
+	"ptite",
+	"ptites",
+	"ptits"
+	],
+"petulant":[
+	"irascible",
+	"irascibles",
+	"pétulant",
+	"pétulante",
+	"pétulantes",
+	"pétulants"
+	],
+"pharmaceutical":[
+	"pharmaceutique",
+	"pharmaceutiques"
+	],
+"pharmacological":[
+	"pharmacologique",
+	"pharmacologiques"
+	],
+"phat":[
+	"génial",
+	"géniale",
+	"géniales",
+	"géniaux",
+	"sexy",
+	"sexys",
+	"super"
+	],
+"phenomenal":[
+	"phénoménal",
+	"phénoménale",
+	"phénoménales",
+	"phénoménaux"
+	],
+"philanthropic":[
+	"philanthropique",
+	"philanthropiques"
+	],
+"philatelic":[
+	"philatélique",
+	"philatéliques"
+	],
+"phlegmatic":[
+	"flegmatique",
+	"flegmatiques"
+	],
+"phonetic":[
+	"phonétique",
+	"phonétiques"
+	],
+"phonological":[
+	"phonologique",
+	"phonologiques"
+	],
+"phony":[
+	"contrefait",
+	"contrefaite",
+	"contrefaites",
+	"contrefaits",
+	"fausse",
+	"fausses",
+	"faux",
+	"frauduleuse",
+	"frauduleuses",
+	"frauduleux"
+	],
+"phosphorescent":[
+	"phosphorescent",
+	"phosphorescente",
+	"phosphorescentes",
+	"phosphorescents"
+	],
+"photovoltaic":[
+	"photovoltaïque",
+	"photovoltaïques"
+	],
+"phreatic":[
+	"phréatique",
+	"phréatiques"
+	],
+"physical":[
+	"physiologique",
+	"physiologiques",
+	"physique",
+	"physiques"
+	],
+"physiological":[
+	"physiologique",
+	"physiologiques"
+	],
+"piagetian":[
+	"piagétien",
+	"piagétienne",
+	"piagétiennes",
+	"piagétiens"
+	],
+"picard":[
+	"picard",
+	"picarde",
+	"picardes",
+	"picards"
+	],
+"picaresque":[
+	"picaresque",
+	"picaresques"
+	],
+"picturesque":[
+	"pittoresque",
+	"pittoresques"
+	],
+"piddling":[
+	"insignifiant",
+	"insignifiante",
+	"insignifiantes",
+	"insignifiants",
+	"inutile",
+	"inutiles",
+	"négligeable",
+	"négligeables",
+	"trivial",
+	"triviale",
+	"triviales",
+	"triviaux"
+	],
+"piercing":[
+	"perçant",
+	"perçante",
+	"perçantes",
+	"perçants"
+	],
+"pink":[
+	"rose",
+	"roses"
+	],
+"pinkish":[
+	"rosâtre",
+	"rosâtres"
+	],
+"pious":[
+	"pieuse",
+	"pieuses",
+	"pieux"
+	],
+"piquant":[
+	"piquant",
+	"piquante",
+	"piquantes",
+	"piquants"
+	],
+"pissed":[
+	"furax"
+	],
+"piteous":[
+	"pitoyable",
+	"pitoyables"
+	],
+"pithy":[
+	"bref",
+	"brefs",
+	"brève",
+	"brèves",
+	"moelleuse",
+	"moelleuses",
+	"moelleux",
+	"sommaire",
+	"sommaires",
+	"succinct",
+	"succincte",
+	"succinctes",
+	"succincts"
+	],
+"pitiable":[
+	"pitoyable",
+	"pitoyables"
+	],
+"pitiless":[
+	"impitoyable",
+	"impitoyables"
+	],
+"pituitary":[
+	"hypophysaire",
+	"hypophysaires"
+	],
+"pivotal":[
+	"central",
+	"centrale",
+	"centrales",
+	"centraux",
+	"crucial",
+	"cruciale",
+	"cruciales",
+	"cruciaux",
+	"déterminant",
+	"déterminante",
+	"déterminantes",
+	"déterminants",
+	"essentiel",
+	"essentielle",
+	"essentielles",
+	"essentiels"
+	],
+"placid":[
+	"placide",
+	"placides"
+	],
+"plain":[
+	"simple",
+	"simples",
+	"uni",
+	"unie",
+	"unies",
+	"unis"
+	],
+"plane":[
+	"plan",
+	"plane",
+	"planes",
+	"plans",
+	"plat",
+	"plate",
+	"plates",
+	"plats"
+	],
+"planetary":[
+	"planétaire",
+	"planétaires"
+	],
+"plangent":[
+	"retentissant",
+	"retentissante",
+	"retentissantes",
+	"retentissants"
+	],
+"plasmatic":[
+	"plasmatique",
+	"plasmatiques"
+	],
+"plastic":[
+	"plastique",
+	"plastiques"
+	],
+"platonic":[
+	"platonique",
+	"platoniques"
+	],
+"plausible":[
+	"plausible",
+	"plausibles"
+	],
+"playable":[
+	"jouable",
+	"jouables"
+	],
+"playful":[
+	"enjoué",
+	"enjouée",
+	"enjouées",
+	"enjoués",
+	"folâtre",
+	"folâtres"
+	],
+"pleasant":[
+	"agréable",
+	"agréables",
+	"plaisant",
+	"plaisante",
+	"plaisantes",
+	"plaisants"
+	],
+"pleased":[
+	"content",
+	"contente",
+	"contentes",
+	"contents",
+	"satisfait",
+	"satisfaite",
+	"satisfaites",
+	"satisfaits"
+	],
+"pleasing":[
+	"plaisant",
+	"plaisante",
+	"plaisantes",
+	"plaisants"
+	],
+"pleasurable":[
+	"agréable",
+	"agréables",
+	"plaisant",
+	"plaisante",
+	"plaisantes",
+	"plaisants"
+	],
+"plebeian":[
+	"plébéien",
+	"plébéienne",
+	"plébéiennes",
+	"plébéiens"
+	],
+"plenary":[
+	"plénier",
+	"pléniers",
+	"plénière",
+	"plénières"
+	],
+"plentiful":[
+	"abondant",
+	"abondante",
+	"abondantes",
+	"abondants",
+	"ample",
+	"amples",
+	"copieuse",
+	"copieuses",
+	"copieux"
+	],
+"pleonastic":[
+	"pléonastique",
+	"pléonastiques"
+	],
+"pliable":[
+	"pliable",
+	"pliables",
+	"pliant",
+	"pliante",
+	"pliantes",
+	"pliants"
+	],
+"plucky":[
+	"courageuse",
+	"courageuses",
+	"courageux"
+	],
+"plump":[
+	"dodu",
+	"dodue",
+	"dodues",
+	"dodus",
+	"potelé",
+	"potelée",
+	"potelées",
+	"potelés"
+	],
+"plural":[
+	"pluriel",
+	"plurielle",
+	"plurielles",
+	"pluriels"
+	],
+"pluralistic":[
+	"pluraliste",
+	"pluralistes"
+	],
+"plus":[
+	"positif",
+	"positifs",
+	"positive",
+	"positives"
+	],
+"pneumatic":[
+	"pneumatique",
+	"pneumatiques"
+	],
+"podgy":[
+	"replet",
+	"replets",
+	"replète",
+	"replètes"
+	],
+"poetic":[
+	"poétique",
+	"poétiques"
+	],
+"pointed":[
+	"pointu",
+	"pointue",
+	"pointues",
+	"pointus"
+	],
+"pointless":[
+	"inutile",
+	"inutiles",
+	"obtus",
+	"obtuse",
+	"obtuses",
+	"vain",
+	"vaine",
+	"vaines",
+	"vains"
+	],
+"pointwise":[
+	"ponctuel",
+	"ponctuelle",
+	"ponctuelles",
+	"ponctuels"
+	],
+"poised":[
+	"prêt",
+	"prête",
+	"prêtes",
+	"prêts"
+	],
+"poisonous":[
+	"toxique",
+	"toxiques",
+	"vénéneuse",
+	"vénéneuses",
+	"vénéneux"
+	],
+"polar":[
+	"polaire",
+	"polaires"
+	],
+"polish":[
+	"polonais",
+	"polonaise",
+	"polonaises"
+	],
+"polished":[
+	"poli",
+	"polie",
+	"polies",
+	"polis"
+	],
+"polite":[
+	"poli",
+	"polie",
+	"polies",
+	"polis"
+	],
+"political":[
+	"politique",
+	"politiques"
+	],
+"polluted":[
+	"impur",
+	"impure",
+	"impures",
+	"impurs"
+	],
+"polychrome":[
+	"polychrome",
+	"polychromes"
+	],
+"polyglot":[
+	"polyglotte",
+	"polyglottes"
+	],
+"polygonal":[
+	"polygonal",
+	"polygonale",
+	"polygonales",
+	"polygonaux"
+	],
+"polymorphous":[
+	"polymorphe",
+	"polymorphes"
+	],
+"polynomial":[
+	"polynomial",
+	"polynomiale",
+	"polynomiales",
+	"polynomiaux"
+	],
+"polyphonic":[
+	"polyphonique",
+	"polyphoniques"
+	],
+"polysemic":[
+	"polysémique",
+	"polysémiques"
+	],
+"polysemous":[
+	"polysémique",
+	"polysémiques"
+	],
+"pompous":[
+	"emphatique",
+	"emphatiques",
+	"pompeuse",
+	"pompeuses",
+	"pompeux"
+	],
+"poncy":[
+	"gay",
+	"gay",
+	"gays"
+	],
+"ponderous":[
+	"abrutissant",
+	"abrutissante",
+	"abrutissantes",
+	"abrutissants",
+	"béotien",
+	"béotienne",
+	"béotiennes",
+	"béotiens",
+	"conformiste",
+	"conformistes",
+	"dense",
+	"denses",
+	"dogmatique",
+	"dogmatiques",
+	"grossier",
+	"grossiers",
+	"grossière",
+	"grossières",
+	"lourd",
+	"lourde",
+	"lourdes",
+	"lourds",
+	"maladroit",
+	"maladroite",
+	"maladroites",
+	"maladroits",
+	"pesant",
+	"pesante",
+	"pesantes",
+	"pesants",
+	"écrasant",
+	"écrasante",
+	"écrasantes",
+	"écrasants"
+	],
+"pontifical":[
+	"pontifical",
+	"pontificale",
+	"pontificales",
+	"pontificaux"
+	],
+"poor":[
+	"pauv'",
+	"pauvre",
+	"pauvres",
+	"pitoyable",
+	"pitoyables",
+	"piètre",
+	"piètres",
+	"pôvre",
+	"pôvres"
+	],
+"popular":[
+	"populaire",
+	"populaires"
+	],
+"populist":[
+	"populiste",
+	"populistes"
+	],
+"populous":[
+	"populeuse",
+	"populeuses",
+	"populeux"
+	],
+"porcine":[
+	"bouffi",
+	"bouffie",
+	"bouffies",
+	"bouffis",
+	"porcin",
+	"porcine",
+	"porcines",
+	"porcins"
+	],
+"pornographic":[
+	"pornographique",
+	"pornographiques"
+	],
+"porous":[
+	"poreuse",
+	"poreuses",
+	"poreux"
+	],
+"portable":[
+	"portable",
+	"portables",
+	"portatif",
+	"portatifs",
+	"portative",
+	"portatives"
+	],
+"portly":[
+	"corpulent",
+	"corpulente",
+	"corpulentes",
+	"corpulents",
+	"fort",
+	"forte",
+	"fortes",
+	"forts"
+	],
+"portuguese":[
+	"portugais",
+	"portugaise",
+	"portugaises"
+	],
+"posh":[
+	"chic",
+	"chics",
+	"huppé",
+	"huppée",
+	"huppées",
+	"huppés"
+	],
+"positive":[
+	"positif",
+	"positifs",
+	"positive",
+	"positives"
+	],
+"possessive":[
+	"possessif",
+	"possessifs",
+	"possessive",
+	"possessives"
+	],
+"possible":[
+	"faisable",
+	"faisables",
+	"possible",
+	"possibles"
+	],
+"postal":[
+	"postal",
+	"postale",
+	"postales",
+	"postaux"
+	],
+"posterior":[
+	"postérieur",
+	"postérieure",
+	"postérieures",
+	"postérieurs"
+	],
+"posthumous":[
+	"posthume",
+	"posthumes"
+	],
+"postmodern":[
+	"postmoderne",
+	"postmodernes"
+	],
+"postmodernist":[
+	"postmoderne",
+	"postmodernes"
+	],
+"postnatal":[
+	"postnatal",
+	"postnatale",
+	"postnatales",
+	"postnatals"
+	],
+"postoperative":[
+	"postopératoire",
+	"postopératoires"
+	],
+"postural":[
+	"postural",
+	"posturale",
+	"posturales",
+	"posturaux"
+	],
+"potable":[
+	"potable",
+	"potables"
+	],
+"potbellied":[
+	"bedonnant",
+	"bedonnante",
+	"bedonnantes",
+	"bedonnants",
+	"ventru",
+	"ventrue",
+	"ventrues",
+	"ventrus"
+	],
+"potent":[
+	"puissant",
+	"puissante",
+	"puissantes",
+	"puissants"
+	],
+"potential":[
+	"potentiel",
+	"potentielle",
+	"potentielles",
+	"potentiels"
+	],
+"potty":[
+	"insane",
+	"insanes"
+	],
+"powdery":[
+	"poudreuse",
+	"poudreuses",
+	"poudreux"
+	],
+"powerful":[
+	"puissant",
+	"puissante",
+	"puissantes",
+	"puissants"
+	],
+"powerless":[
+	"impuissant",
+	"impuissante",
+	"impuissantes",
+	"impuissants"
+	],
+"practicable":[
+	"praticable",
+	"praticables"
+	],
+"practical":[
+	"pratique",
+	"pratiques"
+	],
+"pragmatic":[
+	"pragmatique",
+	"pragmatiques"
+	],
+"praiseworthy":[
+	"louable",
+	"louables"
+	],
+"precambrian":[
+	"précambrien",
+	"précambrienne",
+	"précambriennes",
+	"précambriens"
+	],
+"precarious":[
+	"précaire",
+	"précaires"
+	],
+"precedent":[
+	"préc..",
+	"précédent",
+	"précédente",
+	"précédentes",
+	"précédents"
+	],
+"precious":[
+	"précieuse",
+	"précieuses",
+	"précieux"
+	],
+"precipitous":[
+	"abrupt",
+	"abrupte",
+	"abruptes",
+	"abrupts",
+	"escarpé",
+	"escarpée",
+	"escarpées",
+	"escarpés",
+	"raide",
+	"raides"
+	],
+"precise":[
+	"précis",
+	"précise",
+	"précises"
+	],
+"precocious":[
+	"précoce",
+	"précoces"
+	],
+"predicative":[
+	"attributif",
+	"attributifs",
+	"attributive",
+	"attributives"
+	],
+"predictable":[
+	"prévisible",
+	"prévisibles"
+	],
+"predictive":[
+	"prédictif",
+	"prédictifs",
+	"prédictive",
+	"prédictives"
+	],
+"predominant":[
+	"prédominant",
+	"prédominante",
+	"prédominantes",
+	"prédominants"
+	],
+"preeminent":[
+	"prééminent",
+	"prééminente",
+	"prééminentes",
+	"prééminents"
+	],
+"preferable":[
+	"préférable",
+	"préférables"
+	],
+"preferential":[
+	"préférentiel",
+	"préférentielle",
+	"préférentielles",
+	"préférentiels"
+	],
+"pregnant":[
+	"enceint",
+	"enceinte",
+	"enceintes",
+	"enceints",
+	"fertile",
+	"fertiles"
+	],
+"prehensile":[
+	"préhensile",
+	"préhensiles"
+	],
+"prehistoric":[
+	"préhistorique",
+	"préhistoriques"
+	],
+"prejudicial":[
+	"nuisible",
+	"nuisibles",
+	"préjudiciable",
+	"préjudiciables"
+	],
+"preliminary":[
+	"préliminaire",
+	"préliminaires"
+	],
+"premature":[
+	"prématuré",
+	"prématurée",
+	"prématurées",
+	"prématurés"
+	],
+"premier":[
+	"premier",
+	"premiers",
+	"première",
+	"premières"
+	],
+"premonitory":[
+	"prémonitoire",
+	"prémonitoires"
+	],
+"prenuptial":[
+	"prénuptial",
+	"prénuptiale",
+	"prénuptiales",
+	"prénuptiaux"
+	],
+"preoccupied":[
+	"préoccupé",
+	"préoccupée",
+	"préoccupées",
+	"préoccupés"
+	],
+"preoperative":[
+	"préopératoire",
+	"préopératoires"
+	],
+"preparatory":[
+	"préparatoire",
+	"préparatoires"
+	],
+"preposterous":[
+	"aberrant",
+	"aberrante",
+	"aberrantes",
+	"aberrants",
+	"insensé",
+	"insensée",
+	"insensées",
+	"insensés",
+	"ridicule",
+	"ridicules"
+	],
+"presbyterian":[
+	"presbytérien",
+	"presbytérienne",
+	"presbytériennes",
+	"presbytériens"
+	],
+"preschool":[
+	"préscolaire",
+	"préscolaires"
+	],
+"present":[
+	"actuel",
+	"actuelle",
+	"actuelles",
+	"actuels",
+	"présent",
+	"présente",
+	"présentes",
+	"présents"
+	],
+"presentable":[
+	"présentable",
+	"présentables"
+	],
+"presidential":[
+	"présidentiel",
+	"présidentielle",
+	"présidentielles",
+	"présidentiels"
+	],
+"prestigious":[
+	"prestigieuse",
+	"prestigieuses",
+	"prestigieux"
+	],
+"presumptive":[
+	"présomptueuse",
+	"présomptueuses",
+	"présomptueux"
+	],
+"presumptuous":[
+	"outrecuidant",
+	"outrecuidante",
+	"outrecuidantes",
+	"outrecuidants",
+	"présomptueuse",
+	"présomptueuses",
+	"présomptueux"
+	],
+"pretentious":[
+	"prétentieuse",
+	"prétentieuses",
+	"prétentieux"
+	],
+"preternatural":[
+	"extraordinaire",
+	"extraordinaires",
+	"surnaturel",
+	"surnaturelle",
+	"surnaturelles",
+	"surnaturels"
+	],
+"pretty":[
+	"joli",
+	"jolie",
+	"jolies",
+	"jolis"
+	],
+"preventable":[
+	"évitable",
+	"évitables"
+	],
+"preventive":[
+	"préventif",
+	"préventifs",
+	"préventive",
+	"préventives"
+	],
+"previous":[
+	"préalable",
+	"préalables"
+	],
+"priceless":[
+	"inestimable",
+	"inestimables"
+	],
+"prickly":[
+	"irascible",
+	"irascibles",
+	"irritable",
+	"irritables",
+	"épineuse",
+	"épineuses",
+	"épineux"
+	],
+"priggish":[
+	"suffisant",
+	"suffisante",
+	"suffisantes",
+	"suffisants"
+	],
+"prim":[
+	"guindé",
+	"guindée",
+	"guindées",
+	"guindés"
+	],
+"primary":[
+	"primaire",
+	"primaires",
+	"prioritaire",
+	"prioritaires"
+	],
+"prime":[
+	"excellent",
+	"excellente",
+	"excellentes",
+	"excellents",
+	"premier",
+	"premiers",
+	"première",
+	"premières",
+	"principal",
+	"principale",
+	"principales",
+	"principaux"
+	],
+"primeval":[
+	"originel",
+	"originelle",
+	"originelles",
+	"originels",
+	"primitif",
+	"primitifs",
+	"primitive",
+	"primitives"
+	],
+"primitive":[
+	"primitif",
+	"primitifs",
+	"primitive",
+	"primitives"
+	],
+"primordial":[
+	"primordial",
+	"primordiale",
+	"primordiales",
+	"primordiaux"
+	],
+"princely":[
+	"princier",
+	"princiers",
+	"princière",
+	"princières"
+	],
+"principal":[
+	"principal",
+	"principale",
+	"principales",
+	"principaux"
+	],
+"printable":[
+	"imprimable",
+	"imprimables"
+	],
+"printed":[
+	"imprimé",
+	"imprimée",
+	"imprimées",
+	"imprimés"
+	],
+"prior":[
+	"formé",
+	"formée",
+	"formées",
+	"formés",
+	"préalable",
+	"préalables"
+	],
+"prioritized":[
+	"antérieur",
+	"antérieure",
+	"antérieures",
+	"antérieurs",
+	"prioritaire",
+	"prioritaires"
+	],
+"prismatic":[
+	"prismatique",
+	"prismatiques"
+	],
+"pristine":[
+	"antique",
+	"antiques",
+	"immaculé",
+	"immaculée",
+	"immaculées",
+	"immaculés",
+	"parfait",
+	"parfaite",
+	"parfaites",
+	"parfaits",
+	"primitif",
+	"primitifs",
+	"primitive",
+	"primitives",
+	"virginal",
+	"virginale",
+	"virginales",
+	"virginaux"
+	],
+"private":[
+	"personnel",
+	"personnelle",
+	"personnelles",
+	"personnels"
+	],
+"privative":[
+	"privatif",
+	"privatifs",
+	"privative",
+	"privatives"
+	],
+"privy":[
+	"complice",
+	"complices",
+	"exclusif",
+	"exclusifs",
+	"exclusive",
+	"exclusives",
+	"instruit",
+	"instruite",
+	"instruites",
+	"instruits",
+	"unique",
+	"uniques"
+	],
+"proactive":[
+	"proactif",
+	"proactifs",
+	"proactive",
+	"proactives"
+	],
+"probable":[
+	"probable",
+	"probables"
+	],
+"problematic":[
+	"problématique",
+	"problématiques"
+	],
+"prodigious":[
+	"prodigieuse",
+	"prodigieuses",
+	"prodigieux"
+	],
+"productive":[
+	"productif",
+	"productifs",
+	"productive",
+	"productives"
+	],
+"profane":[
+	"impur",
+	"impure",
+	"impures",
+	"impurs",
+	"sal'",
+	"sale",
+	"sales"
+	],
+"professional":[
+	"professionnel",
+	"professionnelle",
+	"professionnelles",
+	"professionnels"
+	],
+"professorial":[
+	"professoral",
+	"professorale",
+	"professorales",
+	"professoraux"
+	],
+"proficient":[
+	"compétent",
+	"compétente",
+	"compétentes",
+	"compétents"
+	],
+"profitable":[
+	"fructueuse",
+	"fructueuses",
+	"fructueux",
+	"lucratif",
+	"lucratifs",
+	"lucrative",
+	"lucratives",
+	"profitable",
+	"profitables"
+	],
+"profound":[
+	"profond",
+	"profonde",
+	"profondes",
+	"profonds"
+	],
+"programmable":[
+	"programmable",
+	"programmables"
+	],
+"progressive":[
+	"progressif",
+	"progressifs",
+	"progressive",
+	"progressives"
+	],
+"projecting":[
+	"saillant",
+	"saillante",
+	"saillantes",
+	"saillants"
+	],
+"proletarian":[
+	"prolétarien",
+	"prolétarienne",
+	"prolétariennes",
+	"prolétariens"
+	],
+"prolific":[
+	"fécond",
+	"féconde",
+	"fécondes",
+	"féconds",
+	"prolifique",
+	"prolifiques"
+	],
+"prolix":[
+	"abscons",
+	"absconse",
+	"absconses",
+	"abstrus",
+	"abstruse",
+	"abstruses",
+	"cuistre",
+	"cuistres",
+	"fastidieuse",
+	"fastidieuses",
+	"fastidieux",
+	"prolixe",
+	"prolixes",
+	"pédant",
+	"pédante",
+	"pédantes",
+	"pédants",
+	"verbeuse",
+	"verbeuses",
+	"verbeux"
+	],
+"prominent":[
+	"protubérant",
+	"protubérante",
+	"protubérantes",
+	"protubérants",
+	"proéminent",
+	"proéminente",
+	"proéminentes",
+	"proéminents",
+	"saillant",
+	"saillante",
+	"saillantes",
+	"saillants"
+	],
+"promising":[
+	"prometteur",
+	"prometteurs",
+	"prometteuse",
+	"prometteuses"
+	],
+"promotional":[
+	"promotionnel",
+	"promotionnelle",
+	"promotionnelles",
+	"promotionnels",
+	"publicitaire",
+	"publicitaires"
+	],
+"prompt":[
+	"ponctuel",
+	"ponctuelle",
+	"ponctuelles",
+	"ponctuels"
+	],
+"prone":[
+	"enclin",
+	"encline",
+	"enclines",
+	"enclins"
+	],
+"pronominal":[
+	"pronominal",
+	"pronominale",
+	"pronominales",
+	"pronominaux"
+	],
+"pronounceable":[
+	"prononçable",
+	"prononçables"
+	],
+"propaedeutic":[
+	"préparatoire",
+	"préparatoires"
+	],
+"proper":[
+	"approprié",
+	"appropriée",
+	"appropriées",
+	"appropriés",
+	"convenable",
+	"convenables",
+	"exact",
+	"exacte",
+	"exactes",
+	"exacts",
+	"juste",
+	"justes",
+	"propre",
+	"propres"
+	],
+"prophetic":[
+	"prophétique",
+	"prophétiques"
+	],
+"prophylactic":[
+	"prophylactique",
+	"prophylactiques"
+	],
+"propitious":[
+	"avantageuse",
+	"avantageuses",
+	"avantageux",
+	"favorable",
+	"favorables",
+	"propice",
+	"propices"
+	],
+"proportional":[
+	"proportionnel",
+	"proportionnelle",
+	"proportionnelles",
+	"proportionnels"
+	],
+"propositional":[
+	"propositionnel",
+	"propositionnelle",
+	"propositionnelles",
+	"propositionnels"
+	],
+"prosodic":[
+	"prosodique",
+	"prosodiques"
+	],
+"prospective":[
+	"prospectif",
+	"prospectifs",
+	"prospective",
+	"prospectives"
+	],
+"prosperous":[
+	"favorable",
+	"favorables",
+	"florissant",
+	"florissante",
+	"florissantes",
+	"florissants",
+	"prospère",
+	"prospères",
+	"riche",
+	"riches"
+	],
+"prostatic":[
+	"prostatique",
+	"prostatiques"
+	],
+"prosthetic":[
+	"artificiel",
+	"artificielle",
+	"artificielles",
+	"artificiels"
+	],
+"protean":[
+	"changeant",
+	"changeante",
+	"changeantes",
+	"changeants",
+	"instable",
+	"instables",
+	"protéique",
+	"protéiques",
+	"variable",
+	"variables"
+	],
+"protectionist":[
+	"protectionniste",
+	"protectionnistes"
+	],
+"protective":[
+	"protecteur",
+	"protecteurs",
+	"protectrice",
+	"protectrices"
+	],
+"protestant":[
+	"protestant",
+	"protestante",
+	"protestantes",
+	"protestants"
+	],
+"proud":[
+	"fier",
+	"fiers",
+	"fière",
+	"fières",
+	"orgueilleuse",
+	"orgueilleuses",
+	"orgueilleux"
+	],
+"proustian":[
+	"proustien",
+	"proustienne",
+	"proustiennes",
+	"proustiens"
+	],
+"proverbial":[
+	"proverbial",
+	"proverbiale",
+	"proverbiales",
+	"proverbiaux"
+	],
+"providential":[
+	"providentiel",
+	"providentielle",
+	"providentielles",
+	"providentiels"
+	],
+"provincial":[
+	"provincial",
+	"provinciale",
+	"provinciales",
+	"provinciaux"
+	],
+"provisional":[
+	"provisoire",
+	"provisoires",
+	"temporaire",
+	"temporaires"
+	],
+"provocative":[
+	"provocateur",
+	"provocateurs",
+	"provocatrice",
+	"provocatrices"
+	],
+"prudent":[
+	"prudent",
+	"prudente",
+	"prudentes",
+	"prudents"
+	],
+"prudish":[
+	"prude",
+	"prudes",
+	"pudibond",
+	"pudibonde",
+	"pudibondes",
+	"pudibonds"
+	],
+"prurient":[
+	"lubrique",
+	"lubriques"
+	],
+"prussian":[
+	"prussien",
+	"prussienne",
+	"prussiennes",
+	"prussiens"
+	],
+"psychedelic":[
+	"psychédélique",
+	"psychédéliques"
+	],
+"psychiatric":[
+	"psychiatrique",
+	"psychiatriques"
+	],
+"psychoanalytic":[
+	"psychanalytique",
+	"psychanalytiques"
+	],
+"psychological":[
+	"psychologique",
+	"psychologiques"
+	],
+"psychopathological":[
+	"psychopathologique",
+	"psychopathologiques"
+	],
+"psychosocial":[
+	"psychosocial",
+	"psychosociale",
+	"psychosociales",
+	"psychosociaux"
+	],
+"psychosomatic":[
+	"psychosomatique",
+	"psychosomatiques"
+	],
+"psychotic":[
+	"psychotique",
+	"psychotiques"
+	],
+"psychrosensitive":[
+	"frileuse",
+	"frileuses",
+	"frileux"
+	],
+"public":[
+	"public",
+	"publics",
+	"publique",
+	"publiques"
+	],
+"pudgy":[
+	"grassouillet",
+	"grassouillets",
+	"grassouillette",
+	"grassouillettes",
+	"replet",
+	"replets",
+	"replète",
+	"replètes"
+	],
+"puerile":[
+	"puéril",
+	"puérile",
+	"puériles",
+	"puérils"
+	],
+"puffy":[
+	"bouffi",
+	"bouffie",
+	"bouffies",
+	"bouffis",
+	"boursouflé",
+	"boursouflée",
+	"boursouflées",
+	"boursouflés",
+	"enflé",
+	"enflée",
+	"enflées",
+	"enflés"
+	],
+"pugnacious":[
+	"pugnace",
+	"pugnaces"
+	],
+"puissant":[
+	"puissant",
+	"puissante",
+	"puissantes",
+	"puissants"
+	],
+"pulchritudinous":[
+	"somptueuse",
+	"somptueuses",
+	"somptueux"
+	],
+"pulmonary":[
+	"pulmonaire",
+	"pulmonaires"
+	],
+"pulpy":[
+	"feuilletonesque",
+	"feuilletonesques",
+	"pulpeuse",
+	"pulpeuses",
+	"pulpeux"
+	],
+"pulverulent":[
+	"pulvérulent",
+	"pulvérulente",
+	"pulvérulentes",
+	"pulvérulents"
+	],
+"punctual":[
+	"ponctuel",
+	"ponctuelle",
+	"ponctuelles",
+	"ponctuels"
+	],
+"pungent":[
+	"âcre",
+	"âcres"
+	],
+"punishable":[
+	"passible",
+	"passibles",
+	"punissable",
+	"punissables"
+	],
+"punitive":[
+	"punitif",
+	"punitifs",
+	"punitive",
+	"punitives"
+	],
+"puny":[
+	"chétif",
+	"chétifs",
+	"chétive",
+	"chétives",
+	"frêle",
+	"frêles"
+	],
+"pure":[
+	"pur",
+	"pure",
+	"pures",
+	"purs"
+	],
+"purist":[
+	"puriste",
+	"puristes"
+	],
+"puritan":[
+	"puritain",
+	"puritaine",
+	"puritaines",
+	"puritains"
+	],
+"purple":[
+	"pourpre",
+	"pourpres",
+	"violet",
+	"violets",
+	"violette",
+	"violettes"
+	],
+"purplish":[
+	"violacé",
+	"violacée",
+	"violacées",
+	"violacés"
+	],
+"purported":[
+	"putatif",
+	"putatifs",
+	"putative",
+	"putatives"
+	],
+"purpure":[
+	"pourpre",
+	"pourpres"
+	],
+"purulent":[
+	"purulent",
+	"purulente",
+	"purulentes",
+	"purulents"
+	],
+"pusillanimous":[
+	"pusillanime",
+	"pusillanimes"
+	],
+"pussy":[
+	"purulent",
+	"purulente",
+	"purulentes",
+	"purulents"
+	],
+"putative":[
+	"putatif",
+	"putatifs",
+	"putative",
+	"putatives"
+	],
+"putrescible":[
+	"putrescible",
+	"putrescibles"
+	],
+"putrid":[
+	"putride",
+	"putrides"
+	],
+"puzzled":[
+	"perplexe",
+	"perplexes"
+	],
+"pyramidic":[
+	"pyramidal",
+	"pyramidale",
+	"pyramidales",
+	"pyramidaux"
+	],
+"qatari":[
+	"qatari",
+	"qatarie",
+	"qataries",
+	"qataris"
+	],
+"quadrangular":[
+	"quadrangulaire",
+	"quadrangulaires"
+	],
+"quadrilateral":[
+	"quadrilatéral",
+	"quadrilatérale",
+	"quadrilatérales",
+	"quadrilatéraux"
+	],
+"quaint":[
+	"délicat",
+	"délicate",
+	"délicates",
+	"délicats",
+	"exigeant",
+	"exigeante",
+	"exigeantes",
+	"exigeants",
+	"illogique",
+	"illogiques",
+	"pittoresque",
+	"pittoresques",
+	"remarquable",
+	"remarquables",
+	"vieillot",
+	"vieillots",
+	"vieillotte",
+	"vieillottes"
+	],
+"qualified":[
+	"qualifié",
+	"qualifiée",
+	"qualifiées",
+	"qualifiés"
+	],
+"qualitative":[
+	"qualitatif",
+	"qualitatifs",
+	"qualitative",
+	"qualitatives"
+	],
+"quantifiable":[
+	"quantifiable",
+	"quantifiables"
+	],
+"quantitative":[
+	"quantitatif",
+	"quantitatifs",
+	"quantitative",
+	"quantitatives"
+	],
+"quantum":[
+	"quantique",
+	"quantiques"
+	],
+"quarrelsome":[
+	"querelleur",
+	"querelleurs",
+	"querelleuse",
+	"querelleuses"
+	],
+"quarterly":[
+	"trimestriel",
+	"trimestrielle",
+	"trimestrielles",
+	"trimestriels",
+	"écartelé",
+	"écartelée",
+	"écartelées",
+	"écartelés"
+	],
+"quaternary":[
+	"quaternaire",
+	"quaternaires"
+	],
+"queasy":[
+	"nauséeuse",
+	"nauséeuses",
+	"nauséeux"
+	],
+"queer":[
+	"bizarre",
+	"bizarres",
+	"étrange",
+	"étranges"
+	],
+"questionable":[
+	"discutable",
+	"discutables",
+	"douteuse",
+	"douteuses",
+	"douteux"
+	],
+"quick":[
+	"animé",
+	"animée",
+	"animées",
+	"animés",
+	"rapide",
+	"rapides",
+	"vivant",
+	"vivante",
+	"vivantes",
+	"vivants"
+	],
+"quiescent":[
+	"calme",
+	"calmes",
+	"tranquille",
+	"tranquilles"
+	],
+"quiet":[
+	"calme",
+	"calmes",
+	"discret",
+	"discrets",
+	"discrète",
+	"discrètes",
+	"paisible",
+	"paisibles",
+	"silencieuse",
+	"silencieuses",
+	"silencieux",
+	"tranquille",
+	"tranquilles"
+	],
+"quilted":[
+	"matelassé",
+	"matelassée",
+	"matelassées",
+	"matelassés"
+	],
+"quinquennial":[
+	"quinquennal",
+	"quinquennale",
+	"quinquennales",
+	"quinquennaux"
+	],
+"quirky":[
+	"cocasse",
+	"cocasses",
+	"excentrique",
+	"excentriques",
+	"original",
+	"originale",
+	"originales",
+	"originaux"
+	],
+"quit":[
+	"abandonné",
+	"abandonnée",
+	"abandonnées",
+	"abandonnés",
+	"arrêté",
+	"arrêtée",
+	"arrêtées",
+	"arrêtés",
+	"quitté",
+	"quittée",
+	"quittées",
+	"quittés"
+	],
+"quotidian":[
+	"commun",
+	"commune",
+	"communes",
+	"communs",
+	"ordinaire",
+	"ordinaires",
+	"passe-partout",
+	"quotidien",
+	"quotidienne",
+	"quotidiennes",
+	"quotidiens"
+	],
+"rabbinic":[
+	"rabbinique",
+	"rabbiniques"
+	],
+"rabbinical":[
+	"rabbinique",
+	"rabbiniques"
+	],
+"rabelaisian":[
+	"rabelaisien",
+	"rabelaisienne",
+	"rabelaisiennes",
+	"rabelaisiens"
+	],
+"rabid":[
+	"enragé",
+	"enragée",
+	"enragées",
+	"enragés"
+	],
+"racial":[
+	"racial",
+	"raciale",
+	"raciales",
+	"raciaux"
+	],
+"racist":[
+	"raciste",
+	"racistes"
+	],
+"radical":[
+	"génial",
+	"géniale",
+	"géniales",
+	"géniaux",
+	"radical",
+	"radicale",
+	"radicales",
+	"radicaux",
+	"super"
+	],
+"radioactive":[
+	"radioactif",
+	"radioactifs",
+	"radioactive",
+	"radioactives"
+	],
+"radiological":[
+	"radiologique",
+	"radiologiques"
+	],
+"ragged":[
+	"déguenillé",
+	"déguenillée",
+	"déguenillées",
+	"déguenillés"
+	],
+"rainbow":[
+	"iridescent",
+	"iridescente",
+	"iridescentes",
+	"iridescents",
+	"multicolore",
+	"multicolores"
+	],
+"rainy":[
+	"pluvieuse",
+	"pluvieuses",
+	"pluvieux"
+	],
+"rakish":[
+	"débauché",
+	"débauchée",
+	"débauchées",
+	"débauchés"
+	],
+"rambunctious":[
+	"turbulent",
+	"turbulente",
+	"turbulentes",
+	"turbulents"
+	],
+"rampant":[
+	"effréné",
+	"effrénée",
+	"effrénées",
+	"effrénés",
+	"rampant",
+	"rampante",
+	"rampantes",
+	"rampants"
+	],
+"ramshackle":[
+	"délabré",
+	"délabrée",
+	"délabrées",
+	"délabrés"
+	],
+"rancorous":[
+	"acrimonieuse",
+	"acrimonieuses",
+	"acrimonieux",
+	"rancunier",
+	"rancuniers",
+	"rancunière",
+	"rancunières"
+	],
+"random":[
+	"accidentel",
+	"accidentelle",
+	"accidentelles",
+	"accidentels",
+	"aléatoire",
+	"aléatoires",
+	"arbitraire",
+	"arbitraires",
+	"imprévisible",
+	"imprévisibles",
+	"incohérent",
+	"incohérente",
+	"incohérentes",
+	"incohérents",
+	"moyen",
+	"moyenne",
+	"moyennes",
+	"moyens"
+	],
+"randy":[
+	"excité",
+	"excitée",
+	"excitées",
+	"excités"
+	],
+"rank":[
+	"malodorant",
+	"malodorante",
+	"malodorantes",
+	"malodorants"
+	],
+"ranking":[
+	"sup..",
+	"supérieur",
+	"supérieure",
+	"supérieures",
+	"supérieurs"
+	],
+"rapacious":[
+	"rapace",
+	"rapaces"
+	],
+"rapid":[
+	"rapide",
+	"rapides"
+	],
+"rapt":[
+	"absorbé",
+	"absorbée",
+	"absorbées",
+	"absorbés"
+	],
+"raptorial":[
+	"rapace",
+	"rapaces"
+	],
+"rare":[
+	"rare",
+	"rares",
+	"saignant",
+	"saignante",
+	"saignantes",
+	"saignants"
+	],
+"rascal":[
+	"ordinaire",
+	"ordinaires"
+	],
+"rash":[
+	"hâtif",
+	"hâtifs",
+	"hâtive",
+	"hâtives",
+	"impulsif",
+	"impulsifs",
+	"impulsive",
+	"impulsives"
+	],
+"raspberry":[
+	"framboise"
+	],
+"raspy":[
+	"irritable",
+	"irritables",
+	"râpeuse",
+	"râpeuses",
+	"râpeux"
+	],
+"rational":[
+	"raisonnable",
+	"raisonnables",
+	"rationnel",
+	"rationnelle",
+	"rationnelles",
+	"rationnels"
+	],
+"raucous":[
+	"chahuteur",
+	"chahuteurs",
+	"chahuteuse",
+	"chahuteuses",
+	"rauque",
+	"rauques",
+	"tapageur",
+	"tapageurs",
+	"tapageuse",
+	"tapageuses"
+	],
+"ravenous":[
+	"affamé",
+	"affamée",
+	"affamées",
+	"affamés",
+	"vorace",
+	"voraces"
+	],
+"ravishing":[
+	"ravissant",
+	"ravissante",
+	"ravissantes",
+	"ravissants"
+	],
+"raw":[
+	"brut",
+	"brute",
+	"brutes",
+	"bruts",
+	"cru",
+	"crue",
+	"crues",
+	"crus",
+	"nu",
+	"nue",
+	"nues",
+	"nus"
+	],
+"reachable":[
+	"accessible",
+	"accessibles",
+	"joignable",
+	"joignables"
+	],
+"reactionary":[
+	"réactionnaire",
+	"réactionnaires"
+	],
+"ready":[
+	"prêt",
+	"prête",
+	"prêtes",
+	"prêts"
+	],
+"real":[
+	"réel",
+	"réelle",
+	"réelles",
+	"réels",
+	"vrai",
+	"vraie",
+	"vraies",
+	"vrais"
+	],
+"realistic":[
+	"réaliste",
+	"réalistes"
+	],
+"realizable":[
+	"réalisable",
+	"réalisables"
+	],
+"rear":[
+	"arrière"
+	],
+"reasonable":[
+	"correct",
+	"correcte",
+	"correctes",
+	"corrects",
+	"juste",
+	"justes",
+	"raisonnable",
+	"raisonnables",
+	"satisfaisant",
+	"satisfaisante",
+	"satisfaisantes",
+	"satisfaisants"
+	],
+"reassuring":[
+	"rassurant",
+	"rassurante",
+	"rassurantes",
+	"rassurants"
+	],
+"rebellious":[
+	"rebelle",
+	"rebelles",
+	"rétif",
+	"rétifs",
+	"rétive",
+	"rétives"
+	],
+"recalcitrant":[
+	"récalcitrant",
+	"récalcitrante",
+	"récalcitrantes",
+	"récalcitrants"
+	],
+"recallable":[
+	"rappelable",
+	"rappelables"
+	],
+"recapitulative":[
+	"récapitulatif",
+	"récapitulatifs",
+	"récapitulative",
+	"récapitulatives"
+	],
+"recent":[
+	"récent",
+	"récente",
+	"récentes",
+	"récents"
+	],
+"receptive":[
+	"réceptif",
+	"réceptifs",
+	"réceptive",
+	"réceptives"
+	],
+"recessive":[
+	"récessif",
+	"récessifs",
+	"récessive",
+	"récessives"
+	],
+"reciprocal":[
+	"réciproque",
+	"réciproques"
+	],
+"reckless":[
+	"branque",
+	"branques",
+	"insouciant",
+	"insouciante",
+	"insouciantes",
+	"insouciants",
+	"irresponsable",
+	"irresponsables",
+	"téméraire",
+	"téméraires"
+	],
+"recognizable":[
+	"reconnaissable",
+	"reconnaissables"
+	],
+"recordable":[
+	"enregistrable",
+	"enregistrables"
+	],
+"rectal":[
+	"rectal",
+	"rectale",
+	"rectales",
+	"rectaux"
+	],
+"rectangular":[
+	"rectangulaire",
+	"rectangulaires"
+	],
+"recumbent":[
+	"allongé",
+	"allongée",
+	"allongées",
+	"allongés",
+	"couché",
+	"couchée",
+	"couchées",
+	"couchés",
+	"gisant",
+	"gisante",
+	"gisantes",
+	"gisants"
+	],
+"recurrent":[
+	"périodique",
+	"périodiques",
+	"récurrent",
+	"récurrente",
+	"récurrentes",
+	"récurrents"
+	],
+"recurring":[
+	"récurrent",
+	"récurrente",
+	"récurrentes",
+	"récurrents",
+	"répétitif",
+	"répétitifs",
+	"répétitive",
+	"répétitives"
+	],
+"recursive":[
+	"récursif",
+	"récursifs",
+	"récursive",
+	"récursives"
+	],
+"red":[
+	"rouge",
+	"rouges",
+	"rousse",
+	"rousses",
+	"roux"
+	],
+"reddish":[
+	"rougeâtre",
+	"rougeâtres"
+	],
+"redeemable":[
+	"corrigible",
+	"corrigibles",
+	"remboursable",
+	"remboursables"
+	],
+"redoubtable":[
+	"redoutable",
+	"redoutables"
+	],
+"reduced":[
+	"réduit",
+	"réduite",
+	"réduites",
+	"réduits"
+	],
+"redundant":[
+	"redondant",
+	"redondante",
+	"redondantes",
+	"redondants"
+	],
+"refined":[
+	"affiné",
+	"affinée",
+	"affinées",
+	"affinés",
+	"raffiné",
+	"raffinée",
+	"raffinées",
+	"raffinés"
+	],
+"reformist":[
+	"réformiste",
+	"réformistes"
+	],
+"refractory":[
+	"réfractaire",
+	"réfractaires"
+	],
+"refreshing":[
+	"rafraîchissant",
+	"rafraîchissante",
+	"rafraîchissantes",
+	"rafraîchissants"
+	],
+"regional":[
+	"régional",
+	"régionale",
+	"régionales",
+	"régionaux"
+	],
+"regressive":[
+	"régressif",
+	"régressifs",
+	"régressive",
+	"régressives"
+	],
+"regrettable":[
+	"regrettable",
+	"regrettables"
+	],
+"regular":[
+	"régulier",
+	"réguliers",
+	"régulière",
+	"régulières"
+	],
+"regulatory":[
+	"réglementaire",
+	"réglementaires",
+	"régulateur",
+	"régulateurs",
+	"régulatrice",
+	"régulatrices"
+	],
+"reimbursable":[
+	"remboursable",
+	"remboursables"
+	],
+"related":[
+	"apparenté",
+	"apparentée",
+	"apparentées",
+	"apparentés"
+	],
+"relational":[
+	"relationnel",
+	"relationnelle",
+	"relationnelles",
+	"relationnels",
+	"relative",
+	"relatives"
+	],
+"relative":[
+	"relatif",
+	"relatifs",
+	"relative",
+	"relatives"
+	],
+"relaxed":[
+	"détendu",
+	"détendue",
+	"détendues",
+	"détendus"
+	],
+"relentless":[
+	"impitoyable",
+	"impitoyables",
+	"implacable",
+	"implacables",
+	"tenace",
+	"tenaces"
+	],
+"relevant":[
+	"pertinent",
+	"pertinente",
+	"pertinentes",
+	"pertinents"
+	],
+"reliable":[
+	"fiable",
+	"fiables",
+	"sûr",
+	"sûre",
+	"sûres",
+	"sûrs"
+	],
+"reliant":[
+	"dépendant",
+	"dépendante",
+	"dépendantes",
+	"dépendants"
+	],
+"religious":[
+	"religieuse",
+	"religieuses",
+	"religieux"
+	],
+"reluctant":[
+	"récalcitrant",
+	"récalcitrante",
+	"récalcitrantes",
+	"récalcitrants",
+	"réfractaire",
+	"réfractaires",
+	"réticent",
+	"réticente",
+	"réticentes",
+	"réticents",
+	"rétif",
+	"rétifs",
+	"rétive",
+	"rétives"
+	],
+"remaining":[
+	"restant",
+	"restante",
+	"restantes",
+	"restants"
+	],
+"remarkable":[
+	"remarquable",
+	"remarquables"
+	],
+"remote":[
+	"distant",
+	"distante",
+	"distantes",
+	"distants",
+	"éloigné",
+	"éloignée",
+	"éloignées",
+	"éloignés"
+	],
+"removable":[
+	"amovible",
+	"amovibles"
+	],
+"renal":[
+	"rénal",
+	"rénale",
+	"rénales",
+	"rénaux"
+	],
+"renewable":[
+	"renouvelable",
+	"renouvelables"
+	],
+"reparable":[
+	"réparable",
+	"réparables"
+	],
+"repetitive":[
+	"répétitif",
+	"répétitifs",
+	"répétitive",
+	"répétitives"
+	],
+"replaceable":[
+	"remplaçable",
+	"remplaçables"
+	],
+"reprehensible":[
+	"blâmable",
+	"blâmables",
+	"condamnable",
+	"condamnables",
+	"coupable",
+	"coupables",
+	"répréhensible",
+	"répréhensibles"
+	],
+"representative":[
+	"représentatif",
+	"représentatifs",
+	"représentative",
+	"représentatives",
+	"typique",
+	"typiques"
+	],
+"repressive":[
+	"répressif",
+	"répressifs",
+	"répressive",
+	"répressives"
+	],
+"reproachful":[
+	"réprobateur",
+	"réprobateurs",
+	"réprobatrice",
+	"réprobatrices"
+	],
+"reprobate":[
+	"banni",
+	"bannie",
+	"bannies",
+	"bannis",
+	"cynique",
+	"cyniques",
+	"excommunié",
+	"excommuniée",
+	"excommuniées",
+	"excommuniés",
+	"flétri",
+	"flétrie",
+	"flétries",
+	"flétris",
+	"immoral",
+	"immorale",
+	"immorales",
+	"immoraux",
+	"infâme",
+	"infâmes"
+	],
+"reproducible":[
+	"reproductible",
+	"reproductibles"
+	],
+"reproductive":[
+	"reproducteur",
+	"reproducteurs",
+	"reproductrice",
+	"reproductrices"
+	],
+"republican":[
+	"républicain",
+	"républicaine",
+	"républicaines",
+	"républicains"
+	],
+"repugnant":[
+	"repoussant",
+	"repoussante",
+	"repoussantes",
+	"repoussants",
+	"répugnant",
+	"répugnante",
+	"répugnantes",
+	"répugnants"
+	],
+"repulsive":[
+	"repoussant",
+	"repoussante",
+	"repoussantes",
+	"repoussants",
+	"répugnant",
+	"répugnante",
+	"répugnantes",
+	"répugnants"
+	],
+"reputable":[
+	"décent",
+	"décente",
+	"décentes",
+	"décents",
+	"respectable",
+	"respectables"
+	],
+"resentful":[
+	"indigné",
+	"indignée",
+	"indignées",
+	"indignés",
+	"rancunier",
+	"rancuniers",
+	"rancunière",
+	"rancunières"
+	],
+"residential":[
+	"résidentiel",
+	"résidentielle",
+	"résidentielles",
+	"résidentiels"
+	],
+"resilient":[
+	"flexible",
+	"flexibles",
+	"résistant",
+	"résistante",
+	"résistantes",
+	"résistants"
+	],
+"resistant":[
+	"résistant",
+	"résistante",
+	"résistantes",
+	"résistants"
+	],
+"resolute":[
+	"déterminé",
+	"déterminée",
+	"déterminées",
+	"déterminés",
+	"ferme",
+	"fermes",
+	"résolu",
+	"résolue",
+	"résolues",
+	"résolus"
+	],
+"resolvable":[
+	"résoluble",
+	"résolubles"
+	],
+"resounding":[
+	"résonnant",
+	"résonnante",
+	"résonnantes",
+	"résonnants"
+	],
+"resourceful":[
+	"débrouillard",
+	"débrouillarde",
+	"débrouillardes",
+	"débrouillards",
+	"futé",
+	"futée",
+	"futées",
+	"futés"
+	],
+"respectable":[
+	"convenable",
+	"convenables",
+	"respectable",
+	"respectables"
+	],
+"respectful":[
+	"respectueuse",
+	"respectueuses",
+	"respectueux"
+	],
+"respective":[
+	"respectif",
+	"respectifs",
+	"respective",
+	"respectives"
+	],
+"respiratory":[
+	"respiratoire",
+	"respiratoires"
+	],
+"resplendent":[
+	"resplendissant",
+	"resplendissante",
+	"resplendissantes",
+	"resplendissants"
+	],
+"responsible":[
+	"responsable",
+	"responsables"
+	],
+"responsive":[
+	"sensible",
+	"sensibles"
+	],
+"restive":[
+	"rétif",
+	"rétifs",
+	"rétive",
+	"rétives"
+	],
+"restless":[
+	"agité",
+	"agitée",
+	"agitées",
+	"agités",
+	"impatient",
+	"impatiente",
+	"impatientes",
+	"impatients",
+	"inquiet",
+	"inquiets",
+	"inquiète",
+	"inquiètes"
+	],
+"restricting":[
+	"contraignant",
+	"contraignante",
+	"contraignantes",
+	"contraignants"
+	],
+"restrictive":[
+	"restrictif",
+	"restrictifs",
+	"restrictive",
+	"restrictives"
+	],
+"retarded":[
+	"attardé",
+	"attardée",
+	"attardées",
+	"attardés"
+	],
+"reticent":[
+	"hésitant",
+	"hésitante",
+	"hésitantes",
+	"hésitants",
+	"réticent",
+	"réticente",
+	"réticentes",
+	"réticents"
+	],
+"retractable":[
+	"rétractile",
+	"rétractiles"
+	],
+"retractile":[
+	"rétractile",
+	"rétractiles"
+	],
+"retroactive":[
+	"rétroactif",
+	"rétroactifs",
+	"rétroactive",
+	"rétroactives"
+	],
+"retroflex":[
+	"rétroflexe",
+	"rétroflexes"
+	],
+"retrograde":[
+	"rétrograde",
+	"rétrogrades"
+	],
+"retrospective":[
+	"rétrospectif",
+	"rétrospectifs",
+	"rétrospective",
+	"rétrospectives"
+	],
+"reunionese":[
+	"réunionnais",
+	"réunionnaise",
+	"réunionnaises"
+	],
+"reverent":[
+	"pieuse",
+	"pieuses",
+	"pieux"
+	],
+"reverse":[
+	"inverse",
+	"inverses"
+	],
+"reversible":[
+	"réversible",
+	"réversibles"
+	],
+"revisionist":[
+	"révisionniste",
+	"révisionnistes"
+	],
+"revolting":[
+	"repoussant",
+	"repoussante",
+	"repoussantes",
+	"repoussants",
+	"répugnant",
+	"répugnante",
+	"répugnantes",
+	"répugnants"
+	],
+"revolutionary":[
+	"révolutionnaire",
+	"révolutionnaires"
+	],
+"rewarding":[
+	"gratifiant",
+	"gratifiante",
+	"gratifiantes",
+	"gratifiants"
+	],
+"rhenish":[
+	"rhénan",
+	"rhénane",
+	"rhénanes",
+	"rhénans"
+	],
+"rhetorical":[
+	"rhétorique",
+	"rhétoriques"
+	],
+"rheumatic":[
+	"rhumatismal",
+	"rhumatismale",
+	"rhumatismales",
+	"rhumatismaux"
+	],
+"rheumatoid":[
+	"rhumatoïde",
+	"rhumatoïdes"
+	],
+"ribald":[
+	"grivois",
+	"grivoise",
+	"grivoises",
+	"grossier",
+	"grossiers",
+	"grossière",
+	"grossières",
+	"paillard",
+	"paillarde",
+	"paillardes",
+	"paillards",
+	"vulgaire",
+	"vulgaires"
+	],
+"ribonucleic":[
+	"ribonucléique",
+	"ribonucléiques"
+	],
+"rich":[
+	"riche",
+	"riches"
+	],
+"rickety":[
+	"boiteuse",
+	"boiteuses",
+	"boiteux",
+	"branlant",
+	"branlante",
+	"branlantes",
+	"branlants",
+	"délabré",
+	"délabrée",
+	"délabrées",
+	"délabrés"
+	],
+"rid":[
+	"débarrassé",
+	"débarrassée",
+	"débarrassées",
+	"débarrassés"
+	],
+"ridiculous":[
+	"ridicule",
+	"ridicules"
+	],
+"rife":[
+	"abondant",
+	"abondante",
+	"abondantes",
+	"abondants"
+	],
+"right":[
+	"bon",
+	"bonne",
+	"bonnes",
+	"bons",
+	"correct",
+	"correcte",
+	"correctes",
+	"corrects",
+	"droit",
+	"droite",
+	"droites",
+	"droits",
+	"juste",
+	"justes"
+	],
+"righteous":[
+	"juste",
+	"justes",
+	"moral",
+	"morale",
+	"morales",
+	"moraux"
+	],
+"rightful":[
+	"légitime",
+	"légitimes"
+	],
+"rigid":[
+	"rigide",
+	"rigides"
+	],
+"rigorous":[
+	"rigoureuse",
+	"rigoureuses",
+	"rigoureux"
+	],
+"rimbaldian":[
+	"rimbaldien",
+	"rimbaldienne",
+	"rimbaldiennes",
+	"rimbaldiens"
+	],
+"ringed":[
+	"annelé",
+	"annelée",
+	"annelées",
+	"annelés"
+	],
+"riparian":[
+	"rivulaire",
+	"rivulaires"
+	],
+"ripe":[
+	"accompli",
+	"accomplie",
+	"accomplies",
+	"accomplis",
+	"fait",
+	"faite",
+	"faites",
+	"faits",
+	"mûr",
+	"mûre",
+	"mûres",
+	"mûrs"
+	],
+"ripped":[
+	"déchiré",
+	"déchirée",
+	"déchirées",
+	"déchirés",
+	"sec",
+	"secs",
+	"sèche",
+	"sèches"
+	],
+"ritual":[
+	"rituel",
+	"rituelle",
+	"rituelles",
+	"rituels"
+	],
+"riveting":[
+	"fascinant",
+	"fascinante",
+	"fascinantes",
+	"fascinants"
+	],
+"roasted":[
+	"grillé",
+	"grillée",
+	"grillées",
+	"grillés"
+	],
+"robotic":[
+	"robotique",
+	"robotiques"
+	],
+"robust":[
+	"robuste",
+	"robustes"
+	],
+"rocambolesque":[
+	"rocambolesque",
+	"rocambolesques"
+	],
+"rocking":[
+	"génial",
+	"géniale",
+	"géniales",
+	"géniaux",
+	"super"
+	],
+"rocky":[
+	"rocheuse",
+	"rocheuses",
+	"rocheux"
+	],
+"rogue":[
+	"incontrôlable",
+	"incontrôlables"
+	],
+"roman":[
+	"romain",
+	"romaine",
+	"romaines",
+	"romains"
+	],
+"romance":[
+	"roman",
+	"romane",
+	"romanes",
+	"romans"
+	],
+"romanesque":[
+	"roman",
+	"romane",
+	"romanes",
+	"romans"
+	],
+"romanian":[
+	"roumain",
+	"roumaine",
+	"roumaines",
+	"roumains"
+	],
+"romantic":[
+	"romantique",
+	"romantiques"
+	],
+"rookie":[
+	"amateur",
+	"amateurs"
+	],
+"roomy":[
+	"ample",
+	"amples",
+	"grand",
+	"grand'",
+	"grande",
+	"grandes",
+	"grands",
+	"logeable",
+	"logeables",
+	"spacieuse",
+	"spacieuses",
+	"spacieux"
+	],
+"rose":[
+	"rose",
+	"roses"
+	],
+"roseate":[
+	"rosâtre",
+	"rosâtres"
+	],
+"rosy":[
+	"rosé",
+	"rosée",
+	"rosées",
+	"rosés"
+	],
+"rotary":[
+	"rotatif",
+	"rotatifs",
+	"rotative",
+	"rotatives"
+	],
+"rotten":[
+	"mauvais",
+	"mauvaise",
+	"mauvaises"
+	],
+"rotund":[
+	"rond",
+	"ronde",
+	"rondes",
+	"ronds"
+	],
+"rough":[
+	"approximatif",
+	"approximatifs",
+	"approximative",
+	"approximatives",
+	"brut",
+	"brutal",
+	"brutale",
+	"brutales",
+	"brutaux",
+	"brute",
+	"brutes",
+	"bruts",
+	"difficile",
+	"difficiles",
+	"rude",
+	"rudes",
+	"rugueuse",
+	"rugueuses",
+	"rugueux"
+	],
+"round":[
+	"arrondi",
+	"arrondie",
+	"arrondies",
+	"arrondis",
+	"complet",
+	"complets",
+	"complète",
+	"complètes",
+	"rond",
+	"ronde",
+	"rondes",
+	"ronds"
+	],
+"rounded":[
+	"arrondi",
+	"arrondie",
+	"arrondies",
+	"arrondis"
+	],
+"routine":[
+	"quelconque",
+	"quelconques",
+	"routinier",
+	"routiniers",
+	"routinière",
+	"routinières"
+	],
+"rowdy":[
+	"chahuteur",
+	"chahuteurs",
+	"chahuteuse",
+	"chahuteuses"
+	],
+"royal":[
+	"royal",
+	"royale",
+	"royales",
+	"royaux"
+	],
+"rubbery":[
+	"caoutchouteuse",
+	"caoutchouteuses",
+	"caoutchouteux"
+	],
+"ruddy":[
+	"rougeâtre",
+	"rougeâtres"
+	],
+"rude":[
+	"impoli",
+	"impolie",
+	"impolies",
+	"impolis",
+	"malpoli",
+	"malpolie",
+	"malpolies",
+	"malpolis"
+	],
+"rudimentary":[
+	"rudimentaire",
+	"rudimentaires"
+	],
+"rugged":[
+	"hargneuse",
+	"hargneuses",
+	"hargneux",
+	"irrégulier",
+	"irréguliers",
+	"irrégulière",
+	"irrégulières",
+	"robuste",
+	"robustes",
+	"rude",
+	"rudes",
+	"rugueuse",
+	"rugueuses",
+	"rugueux",
+	"solide",
+	"solides",
+	"sévère",
+	"sévères",
+	"tempétueuse",
+	"tempétueuses",
+	"tempétueux",
+	"turbulent",
+	"turbulente",
+	"turbulentes",
+	"turbulents",
+	"violent",
+	"violente",
+	"violentes",
+	"violents"
+	],
+"ruinous":[
+	"ruineuse",
+	"ruineuses",
+	"ruineux"
+	],
+"ruling":[
+	"régnant",
+	"régnante",
+	"régnantes",
+	"régnants"
+	],
+"rumbling":[
+	"grondant",
+	"grondante",
+	"grondantes",
+	"grondants"
+	],
+"runic":[
+	"runique",
+	"runiques"
+	],
+"rural":[
+	"rural",
+	"rurale",
+	"rurales",
+	"ruraux"
+	],
+"ruritanian":[
+	"chimérique",
+	"chimériques"
+	],
+"russet":[
+	"rousse",
+	"rousses",
+	"roux"
+	],
+"russian":[
+	"russe",
+	"russes"
+	],
+"ruthless":[
+	"impitoyable",
+	"impitoyables"
+	],
+"rwandan":[
+	"rwandais",
+	"rwandaise",
+	"rwandaises"
+	],
+"sabbatical":[
+	"sabbatique",
+	"sabbatiques"
+	],
+"sacral":[
+	"sacral",
+	"sacrale",
+	"sacrales",
+	"sacraux"
+	],
+"sacred":[
+	"saint",
+	"sainte",
+	"saintes",
+	"saints"
+	],
+"sacrosanct":[
+	"sacrosaint",
+	"sacrosainte",
+	"sacrosaintes",
+	"sacrosaints"
+	],
+"sad":[
+	"triste",
+	"tristes"
+	],
+"sadistic":[
+	"sadique",
+	"sadiques"
+	],
+"safe":[
+	"sauf",
+	"saufs",
+	"sauve",
+	"sauves",
+	"sûr",
+	"sûre",
+	"sûres",
+	"sûrs"
+	],
+"sage":[
+	"sage",
+	"sages"
+	],
+"saharan":[
+	"saharien",
+	"saharienne",
+	"sahariennes",
+	"sahariens"
+	],
+"sahrawi":[
+	"sahraoui",
+	"sahraouie",
+	"sahraouies",
+	"sahraouis"
+	],
+"salacious":[
+	"salace",
+	"salaces"
+	],
+"saleable":[
+	"vendable",
+	"vendables"
+	],
+"salient":[
+	"pertinent",
+	"pertinente",
+	"pertinentes",
+	"pertinents",
+	"saillant",
+	"saillante",
+	"saillantes",
+	"saillants"
+	],
+"salivary":[
+	"salivaire",
+	"salivaires"
+	],
+"sallow":[
+	"cireuse",
+	"cireuses",
+	"cireux",
+	"jaunâtre",
+	"jaunâtres"
+	],
+"salubrious":[
+	"salubre",
+	"salubres"
+	],
+"salutary":[
+	"bienfaisant",
+	"bienfaisante",
+	"bienfaisantes",
+	"bienfaisants",
+	"salutaire",
+	"salutaires"
+	],
+"salvadoran":[
+	"salvadorien",
+	"salvadorienne",
+	"salvadoriennes",
+	"salvadoriens"
+	],
+"salvageable":[
+	"récupérable",
+	"récupérables"
+	],
+"same":[
+	"même",
+	"mêmes"
+	],
+"sanctimonious":[
+	"bigot",
+	"bigote",
+	"bigotes",
+	"bigots",
+	"hypocrite",
+	"hypocrites"
+	],
+"sane":[
+	"sain",
+	"saine",
+	"saines",
+	"sains"
+	],
+"sanguinary":[
+	"sanguin",
+	"sanguine",
+	"sanguines",
+	"sanguins"
+	],
+"sapphic":[
+	"lesbien",
+	"lesbienne",
+	"lesbiennes",
+	"lesbiens"
+	],
+"sappy":[
+	"cucul",
+	"mielleuse",
+	"mielleuses",
+	"mielleux"
+	],
+"sardonic":[
+	"sardonique",
+	"sardoniques"
+	],
+"sartorial":[
+	"vestimentaire",
+	"vestimentaires"
+	],
+"sassy":[
+	"insolent",
+	"insolente",
+	"insolentes",
+	"insolents"
+	],
+"satanic":[
+	"satanique",
+	"sataniques"
+	],
+"sated":[
+	"repu",
+	"repue",
+	"repues",
+	"repus"
+	],
+"satirical":[
+	"satirique",
+	"satiriques"
+	],
+"satisfactory":[
+	"satisfaisant",
+	"satisfaisante",
+	"satisfaisantes",
+	"satisfaisants"
+	],
+"satisfied":[
+	"satisfait",
+	"satisfaite",
+	"satisfaites",
+	"satisfaits"
+	],
+"saucy":[
+	"effronté",
+	"effrontée",
+	"effrontées",
+	"effrontés",
+	"impertinent",
+	"impertinente",
+	"impertinentes",
+	"impertinents"
+	],
+"saudi":[
+	"saoudien",
+	"saoudienne",
+	"saoudiennes",
+	"saoudiens",
+	"saoudite",
+	"saoudites"
+	],
+"savage":[
+	"barbare",
+	"barbares",
+	"féroce",
+	"féroces"
+	],
+"savory":[
+	"délicieuse",
+	"délicieuses",
+	"délicieux",
+	"savoureuse",
+	"savoureuses",
+	"savoureux"
+	],
+"savvy":[
+	"maligne",
+	"malignes",
+	"malin",
+	"malins"
+	],
+"scabrous":[
+	"scabreuse",
+	"scabreuses",
+	"scabreux"
+	],
+"scalable":[
+	"extensible",
+	"extensibles",
+	"évolutif",
+	"évolutifs",
+	"évolutive",
+	"évolutives"
+	],
+"scalloped":[
+	"découpé",
+	"découpée",
+	"découpées",
+	"découpés",
+	"échancré",
+	"échancrée",
+	"échancrées",
+	"échancrés"
+	],
+"scaly":[
+	"écailleuse",
+	"écailleuses",
+	"écailleux"
+	],
+"scandalous":[
+	"scandaleuse",
+	"scandaleuses",
+	"scandaleux"
+	],
+"scandinavian":[
+	"scandinave",
+	"scandinaves"
+	],
+"scansorial":[
+	"grimpeur",
+	"grimpeurs",
+	"grimpeuse",
+	"grimpeuses"
+	],
+"scant":[
+	"insuffisant",
+	"insuffisante",
+	"insuffisantes",
+	"insuffisants",
+	"maigre",
+	"maigres",
+	"rare",
+	"rares"
+	],
+"scanty":[
+	"insuffisant",
+	"insuffisante",
+	"insuffisantes",
+	"insuffisants",
+	"maigre",
+	"maigres"
+	],
+"scarce":[
+	"rare",
+	"rares"
+	],
+"scared":[
+	"effrayé",
+	"effrayée",
+	"effrayées",
+	"effrayés"
+	],
+"scarlet":[
+	"écarlate",
+	"écarlates"
+	],
+"scary":[
+	"affreuse",
+	"affreuses",
+	"affreux",
+	"sinistre",
+	"sinistres",
+	"terrifiant",
+	"terrifiante",
+	"terrifiantes",
+	"terrifiants"
+	],
+"scathing":[
+	"acerbe",
+	"acerbes",
+	"cinglant",
+	"cinglante",
+	"cinglantes",
+	"cinglants"
+	],
+"scatological":[
+	"scatologique",
+	"scatologiques"
+	],
+"scatterbrained":[
+	"écervelé",
+	"écervelée",
+	"écervelées",
+	"écervelés"
+	],
+"scattered":[
+	"épars",
+	"éparse",
+	"éparses"
+	],
+"schematic":[
+	"schématique",
+	"schématiques"
+	],
+"scheming":[
+	"intrigant",
+	"intrigante",
+	"intrigantes",
+	"intrigants"
+	],
+"schismatic":[
+	"schismatique",
+	"schismatiques"
+	],
+"schizophrenic":[
+	"schizophrène",
+	"schizophrènes"
+	],
+"schmaltzy":[
+	"malade",
+	"malades"
+	],
+"scholarly":[
+	"universitaire",
+	"universitaires",
+	"érudit",
+	"érudite",
+	"érudites",
+	"érudits"
+	],
+"scholastic":[
+	"scolaire",
+	"scolaires"
+	],
+"scientific":[
+	"scientifique",
+	"scientifiques"
+	],
+"scintillant":[
+	"scintillant",
+	"scintillante",
+	"scintillantes",
+	"scintillants"
+	],
+"scornful":[
+	"méprisant",
+	"méprisante",
+	"méprisantes",
+	"méprisants"
+	],
+"scots":[
+	"écossais",
+	"écossaise",
+	"écossaises"
+	],
+"scottish":[
+	"écossais",
+	"écossaise",
+	"écossaises"
+	],
+"scrawny":[
+	"famélique",
+	"faméliques"
+	],
+"screwed":[
+	"foutu",
+	"foutue",
+	"foutues",
+	"foutus"
+	],
+"scruffy":[
+	"débraillé",
+	"débraillée",
+	"débraillées",
+	"débraillés"
+	],
+"scrumptious":[
+	"délicieuse",
+	"délicieuses",
+	"délicieux",
+	"succulent",
+	"succulente",
+	"succulentes",
+	"succulents"
+	],
+"seamless":[
+	"homogène",
+	"homogènes",
+	"intégré",
+	"intégrée",
+	"intégrées",
+	"intégrés"
+	],
+"seaside":[
+	"littoral",
+	"littorale",
+	"littorales",
+	"littoraux"
+	],
+"seasonal":[
+	"saisonnier",
+	"saisonniers",
+	"saisonnière",
+	"saisonnières"
+	],
+"secluded":[
+	"isolé",
+	"isolée",
+	"isolées",
+	"isolés"
+	],
+"second":[
+	"deuxième",
+	"deuxièmes",
+	"second",
+	"seconde",
+	"secondes",
+	"seconds"
+	],
+"secondary":[
+	"secondaire",
+	"secondaires"
+	],
+"secret":[
+	"secret",
+	"secrets",
+	"secrète",
+	"secrètes"
+	],
+"sectoral":[
+	"sectoriel",
+	"sectorielle",
+	"sectorielles",
+	"sectoriels"
+	],
+"secular":[
+	"séculaire",
+	"séculaires"
+	],
+"secure":[
+	"sûr",
+	"sûre",
+	"sûres",
+	"sûrs"
+	],
+"sedative":[
+	"sédatif",
+	"sédatifs",
+	"sédative",
+	"sédatives"
+	],
+"sedentary":[
+	"sédentaire",
+	"sédentaires"
+	],
+"seductive":[
+	"séduisant",
+	"séduisante",
+	"séduisantes",
+	"séduisants"
+	],
+"seedy":[
+	"glauque",
+	"glauques"
+	],
+"seeing":[
+	"voyant",
+	"voyante",
+	"voyantes",
+	"voyants"
+	],
+"sejant":[
+	"séant",
+	"séante",
+	"séantes",
+	"séants"
+	],
+"selcouth":[
+	"merveilleuse",
+	"merveilleuses",
+	"merveilleux",
+	"miraculeuse",
+	"miraculeuses",
+	"miraculeux",
+	"étrange",
+	"étranges"
+	],
+"select":[
+	"sélect",
+	"sélects"
+	],
+"selective":[
+	"sélectif",
+	"sélectifs",
+	"sélective",
+	"sélectives"
+	],
+"seleucid":[
+	"séleucide",
+	"séleucides"
+	],
+"selfish":[
+	"égoïste",
+	"égoïstes"
+	],
+"selfless":[
+	"altruiste",
+	"altruistes",
+	"dévoué",
+	"dévouée",
+	"dévouées",
+	"dévoués"
+	],
+"selfsame":[
+	"identique",
+	"identiques"
+	],
+"seljuk":[
+	"seldjoukide",
+	"seldjoukides"
+	],
+"semantic":[
+	"sémantique",
+	"sémantiques"
+	],
+"semicircular":[
+	"demi-circulaire",
+	"demi-circulaires"
+	],
+"seminal":[
+	"créatif",
+	"créatifs",
+	"créative",
+	"créatives",
+	"essentiel",
+	"essentielle",
+	"essentielles",
+	"essentiels",
+	"fondateur",
+	"fondateurs",
+	"fondatrice",
+	"fondatrices",
+	"fécond",
+	"féconde",
+	"fécondes",
+	"féconds",
+	"important",
+	"importante",
+	"importantes",
+	"importants",
+	"influent",
+	"influente",
+	"influentes",
+	"influents",
+	"séminal",
+	"séminale",
+	"séminales",
+	"séminaux"
+	],
+"semitic":[
+	"sémitique",
+	"sémitiques"
+	],
+"sempiternal":[
+	"sempiternel",
+	"sempiternelle",
+	"sempiternelles",
+	"sempiternels"
+	],
+"senile":[
+	"sénile",
+	"séniles"
+	],
+"senior":[
+	"aîné",
+	"aînée",
+	"aînées",
+	"aînés"
+	],
+"sensational":[
+	"sensationnel",
+	"sensationnelle",
+	"sensationnelles",
+	"sensationnels"
+	],
+"sensible":[
+	"raisonnable",
+	"raisonnables",
+	"sensible",
+	"sensibles",
+	"sensé",
+	"sensée",
+	"sensées",
+	"sensés"
+	],
+"sensitive":[
+	"sensible",
+	"sensibles"
+	],
+"sensory":[
+	"sensoriel",
+	"sensorielle",
+	"sensorielles",
+	"sensoriels"
+	],
+"sensual":[
+	"sensuel",
+	"sensuelle",
+	"sensuelles",
+	"sensuels"
+	],
+"sententious":[
+	"concis",
+	"concise",
+	"concises",
+	"laconique",
+	"laconiques",
+	"pédant",
+	"pédante",
+	"pédantes",
+	"pédants",
+	"sentencieuse",
+	"sentencieuses",
+	"sentencieux",
+	"succint",
+	"succinte",
+	"succintes",
+	"succints"
+	],
+"sentimental":[
+	"sentimental",
+	"sentimentale",
+	"sentimentales",
+	"sentimentaux"
+	],
+"separatist":[
+	"séparatiste",
+	"séparatistes"
+	],
+"septic":[
+	"septique",
+	"septiques"
+	],
+"sepulchral":[
+	"sépulcral",
+	"sépulcrale",
+	"sépulcrales",
+	"sépulcraux"
+	],
+"seraphic":[
+	"séraphique",
+	"séraphiques"
+	],
+"serb":[
+	"serbe",
+	"serbes"
+	],
+"serbian":[
+	"serbe",
+	"serbes"
+	],
+"serendipitous":[
+	"fortuit",
+	"fortuite",
+	"fortuites",
+	"fortuits"
+	],
+"serene":[
+	"serein",
+	"sereine",
+	"sereines",
+	"sereins"
+	],
+"serious":[
+	"sérieuse",
+	"sérieuses",
+	"sérieux"
+	],
+"seropositive":[
+	"séropositif",
+	"séropositifs",
+	"séropositive",
+	"séropositives"
+	],
+"serous":[
+	"séreuse",
+	"séreuses",
+	"séreux"
+	],
+"serrate":[
+	"dentelé",
+	"dentelée",
+	"dentelées",
+	"dentelés",
+	"denté",
+	"dentée",
+	"dentées",
+	"dentés"
+	],
+"serrated":[
+	"dentelé",
+	"dentelée",
+	"dentelées",
+	"dentelés",
+	"denté",
+	"dentée",
+	"dentées",
+	"dentés"
+	],
+"serviceable":[
+	"réparable",
+	"réparables"
+	],
+"servile":[
+	"servile",
+	"serviles"
+	],
+"set":[
+	"déterminé",
+	"déterminée",
+	"déterminées",
+	"déterminés",
+	"fixe",
+	"fixes",
+	"prêt",
+	"prête",
+	"prêtes",
+	"prêts",
+	"statique",
+	"statiques",
+	"établi",
+	"établie",
+	"établies",
+	"établis"
+	],
+"setting":[
+	"couchant",
+	"couchante",
+	"couchantes",
+	"couchants"
+	],
+"seventeenth":[
+	"dix-sept",
+	"dix-septième",
+	"dix-septièmes"
+	],
+"seventh":[
+	"septième",
+	"septièmes"
+	],
+"severe":[
+	"grave",
+	"graves",
+	"sévère",
+	"sévères"
+	],
+"sexist":[
+	"sexiste",
+	"sexistes"
+	],
+"sexual":[
+	"sexuel",
+	"sexuelle",
+	"sexuelles",
+	"sexuels"
+	],
+"sexy":[
+	"sexy",
+	"sexys"
+	],
+"shabby":[
+	"minable",
+	"minables"
+	],
+"shadowy":[
+	"sombre",
+	"sombres"
+	],
+"shaggy":[
+	"hirsute",
+	"hirsutes"
+	],
+"shakespearean":[
+	"shakespearien",
+	"shakespearienne",
+	"shakespeariennes",
+	"shakespeariens"
+	],
+"shaky":[
+	"instable",
+	"instables"
+	],
+"shallow":[
+	"superficiel",
+	"superficielle",
+	"superficielles",
+	"superficiels"
+	],
+"shamefaced":[
+	"honteuse",
+	"honteuses",
+	"honteux",
+	"penaud",
+	"penaude",
+	"penaudes",
+	"penauds"
+	],
+"shameful":[
+	"honteuse",
+	"honteuses",
+	"honteux",
+	"scandaleuse",
+	"scandaleuses",
+	"scandaleux"
+	],
+"shameless":[
+	"effronté",
+	"effrontée",
+	"effrontées",
+	"effrontés",
+	"éhonté",
+	"éhontée",
+	"éhontées",
+	"éhontés"
+	],
+"sharp":[
+	"acerbe",
+	"acerbes",
+	"acéré",
+	"acérée",
+	"acérées",
+	"acérés",
+	"affilé",
+	"affilée",
+	"affilées",
+	"affilés",
+	"aigu",
+	"aigus",
+	"aiguë",
+	"aiguës",
+	"chic",
+	"chics",
+	"classe",
+	"coupant",
+	"coupante",
+	"coupantes",
+	"coupants",
+	"dièse",
+	"effilé",
+	"effilée",
+	"effilées",
+	"effilés",
+	"intense",
+	"intenses",
+	"mordant",
+	"mordante",
+	"mordantes",
+	"mordants",
+	"net",
+	"nets",
+	"nette",
+	"nettes",
+	"pointu",
+	"pointue",
+	"pointues",
+	"pointus",
+	"précis",
+	"précise",
+	"précises",
+	"tranchant",
+	"tranchante",
+	"tranchantes",
+	"tranchants",
+	"vif",
+	"vifs",
+	"vive",
+	"vives",
+	"âcre",
+	"âcres",
+	"âpre",
+	"âpres"
+	],
+"sheepish":[
+	"penaud",
+	"penaude",
+	"penaudes",
+	"penauds"
+	],
+"sheer":[
+	"pur",
+	"pure",
+	"pures",
+	"purs",
+	"transparent",
+	"transparente",
+	"transparentes",
+	"transparents",
+	"vertical",
+	"verticale",
+	"verticales",
+	"verticaux"
+	],
+"sherifian":[
+	"chérifien",
+	"chérifienne",
+	"chérifiennes",
+	"chérifiens"
+	],
+"shifty":[
+	"fuyant",
+	"fuyante",
+	"fuyantes",
+	"fuyants"
+	],
+"shiite":[
+	"chiite",
+	"chiites"
+	],
+"shining":[
+	"brillant",
+	"brillante",
+	"brillantes",
+	"brillants",
+	"célèbre",
+	"célèbres",
+	"fameuse",
+	"fameuses",
+	"fameux",
+	"illustre",
+	"illustres",
+	"réputé",
+	"réputée",
+	"réputées",
+	"réputés",
+	"splendide",
+	"splendides"
+	],
+"shiny":[
+	"brillant",
+	"brillante",
+	"brillantes",
+	"brillants"
+	],
+"shit":[
+	"dégueulasse",
+	"dégueulasses",
+	"nul",
+	"nulle",
+	"nulles",
+	"nuls"
+	],
+"shitty":[
+	"dégueulasse",
+	"dégueulasses"
+	],
+"shocking":[
+	"choquant",
+	"choquante",
+	"choquantes",
+	"choquants",
+	"offensant",
+	"offensante",
+	"offensantes",
+	"offensants"
+	],
+"shoddy":[
+	"effiloché",
+	"effilochée",
+	"effilochées",
+	"effilochés"
+	],
+"short":[
+	"bref",
+	"brefs",
+	"brève",
+	"brèves",
+	"ch'ti",
+	"court",
+	"courte",
+	"courtes",
+	"courts",
+	"p'tit",
+	"p'tit'",
+	"p'tite",
+	"p'tites",
+	"p'tits",
+	"petit",
+	"petite",
+	"petites",
+	"petits",
+	"ptit",
+	"ptite",
+	"ptites",
+	"ptits"
+	],
+"shot":[
+	"crevé",
+	"crevée",
+	"crevées",
+	"crevés",
+	"fichu",
+	"fichue",
+	"fichues",
+	"fichus"
+	],
+"shrewd":[
+	"avisé",
+	"avisée",
+	"avisées",
+	"avisés",
+	"futé",
+	"futée",
+	"futées",
+	"futés",
+	"habile",
+	"habiles",
+	"maligne",
+	"malignes",
+	"malin",
+	"malins",
+	"perspicace",
+	"perspicaces",
+	"roublard",
+	"roublarde",
+	"roublardes",
+	"roublards",
+	"sagace",
+	"sagaces"
+	],
+"shrill":[
+	"criard",
+	"criarde",
+	"criardes",
+	"criards",
+	"strident",
+	"stridente",
+	"stridentes",
+	"stridents"
+	],
+"shy":[
+	"prudent",
+	"prudente",
+	"prudentes",
+	"prudents",
+	"timide",
+	"timides"
+	],
+"siberian":[
+	"sibérien",
+	"sibérienne",
+	"sibériennes",
+	"sibériens"
+	],
+"sibilant":[
+	"sifflant",
+	"sifflante",
+	"sifflantes",
+	"sifflants"
+	],
+"sibylline":[
+	"sibyllin",
+	"sibylline",
+	"sibyllines",
+	"sibyllins"
+	],
+"sicilian":[
+	"sicilien",
+	"sicilienne",
+	"siciliennes",
+	"siciliens"
+	],
+"sick":[
+	"malade",
+	"malades",
+	"nauséeuse",
+	"nauséeuses",
+	"nauséeux"
+	],
+"sickening":[
+	"dégoûtant",
+	"dégoûtante",
+	"dégoûtantes",
+	"dégoûtants"
+	],
+"sickle":[
+	"falciforme",
+	"falciformes"
+	],
+"sickly":[
+	"chétif",
+	"chétifs",
+	"chétive",
+	"chétives",
+	"douceâtre",
+	"douceâtres",
+	"maladif",
+	"maladifs",
+	"maladive",
+	"maladives"
+	],
+"sidereal":[
+	"sidéral",
+	"sidérale",
+	"sidérales",
+	"sidéraux"
+	],
+"significant":[
+	"significatif",
+	"significatifs",
+	"significative",
+	"significatives"
+	],
+"sikh":[
+	"sikh",
+	"sikhe",
+	"sikhes",
+	"sikhs"
+	],
+"silent":[
+	"muet",
+	"muets",
+	"muette",
+	"muettes",
+	"silencieuse",
+	"silencieuses",
+	"silencieux",
+	"tu",
+	"tue",
+	"tues",
+	"tus"
+	],
+"silesian":[
+	"silésien",
+	"silésienne",
+	"silésiennes",
+	"silésiens"
+	],
+"silken":[
+	"soyeuse",
+	"soyeuses",
+	"soyeux"
+	],
+"silky":[
+	"soyeuse",
+	"soyeuses",
+	"soyeux"
+	],
+"silly":[
+	"abruti",
+	"abrutie",
+	"abruties",
+	"abrutis",
+	"bébête",
+	"bébêtes",
+	"bête",
+	"bêtes",
+	"fol",
+	"folle",
+	"folles",
+	"fou",
+	"fous",
+	"idiot",
+	"idiote",
+	"idiotes",
+	"idiots",
+	"insensé",
+	"insensée",
+	"insensées",
+	"insensés",
+	"sot",
+	"sots",
+	"sotte",
+	"sottes",
+	"stupide",
+	"stupides"
+	],
+"silty":[
+	"limoneuse",
+	"limoneuses",
+	"limoneux"
+	],
+"silver":[
+	"argenté",
+	"argentée",
+	"argentées",
+	"argentés"
+	],
+"silvery":[
+	"argentin",
+	"argentine",
+	"argentines",
+	"argentins",
+	"argenté",
+	"argentée",
+	"argentées",
+	"argentés"
+	],
+"similar":[
+	"semblable",
+	"semblables",
+	"similaire",
+	"similaires"
+	],
+"simple":[
+	"simple",
+	"simples"
+	],
+"simplistic":[
+	"simpliste",
+	"simplistes"
+	],
+"simultaneous":[
+	"simultané",
+	"simultanée",
+	"simultanées",
+	"simultanés"
+	],
+"sincere":[
+	"sincère",
+	"sincères"
+	],
+"sinful":[
+	"coupable",
+	"coupables"
+	],
+"singaporean":[
+	"singapourien",
+	"singapourienne",
+	"singapouriennes",
+	"singapouriens"
+	],
+"single":[
+	"célibataire",
+	"célibataires",
+	"seul",
+	"seule",
+	"seules",
+	"seuls"
+	],
+"singular":[
+	"singulier",
+	"singuliers",
+	"singulière",
+	"singulières"
+	],
+"sinister":[
+	"sinistre",
+	"sinistres",
+	"sénestre",
+	"sénestres"
+	],
+"sinitic":[
+	"chinois",
+	"chinoise",
+	"chinoises"
+	],
+"sinuous":[
+	"sinueuse",
+	"sinueuses",
+	"sinueux"
+	],
+"sinusoidal":[
+	"sinusoïdal",
+	"sinusoïdale",
+	"sinusoïdales",
+	"sinusoïdaux"
+	],
+"situated":[
+	"situé",
+	"située",
+	"situées",
+	"situés"
+	],
+"situational":[
+	"situationnel",
+	"situationnelle",
+	"situationnelles",
+	"situationnels"
+	],
+"sixteenth":[
+	"seizième",
+	"seizièmes"
+	],
+"sixth":[
+	"sixième",
+	"sixièmes"
+	],
+"skeletal":[
+	"squelettique",
+	"squelettiques"
+	],
+"skeptical":[
+	"dubitatif",
+	"dubitatifs",
+	"dubitative",
+	"dubitatives",
+	"sceptique",
+	"sceptiques"
+	],
+"sketchy":[
+	"glauque",
+	"glauques",
+	"incomplet",
+	"incomplets",
+	"incomplète",
+	"incomplètes",
+	"partiel",
+	"partielle",
+	"partielles",
+	"partiels",
+	"sommaire",
+	"sommaires",
+	"superficiel",
+	"superficielle",
+	"superficielles",
+	"superficiels"
+	],
+"skew":[
+	"gauche",
+	"gauches",
+	"oblique",
+	"obliques"
+	],
+"skilled":[
+	"habile",
+	"habiles"
+	],
+"skillful":[
+	"adroit",
+	"adroite",
+	"adroites",
+	"adroits",
+	"habile",
+	"habiles"
+	],
+"skinny":[
+	"maigre",
+	"maigres"
+	],
+"skintight":[
+	"moulant",
+	"moulante",
+	"moulantes",
+	"moulants"
+	],
+"skittish":[
+	"timide",
+	"timides"
+	],
+"slanderous":[
+	"diffamatoire",
+	"diffamatoires"
+	],
+"slanted":[
+	"incliné",
+	"inclinée",
+	"inclinées",
+	"inclinés",
+	"oblique",
+	"obliques"
+	],
+"slanting":[
+	"oblique",
+	"obliques"
+	],
+"slavic":[
+	"slave",
+	"slaves"
+	],
+"sleek":[
+	"brillant",
+	"brillante",
+	"brillantes",
+	"brillants",
+	"lisse",
+	"lisses",
+	"luisant",
+	"luisante",
+	"luisantes",
+	"luisants"
+	],
+"sleepy":[
+	"endormi",
+	"endormie",
+	"endormies",
+	"endormis",
+	"ensommeillé",
+	"ensommeillée",
+	"ensommeillées",
+	"ensommeillés",
+	"somnolent",
+	"somnolente",
+	"somnolentes",
+	"somnolents"
+	],
+"slender":[
+	"svelte",
+	"sveltes"
+	],
+"slick":[
+	"glissant",
+	"glissante",
+	"glissantes",
+	"glissants"
+	],
+"slight":[
+	"insignifiant",
+	"insignifiante",
+	"insignifiantes",
+	"insignifiants",
+	"léger",
+	"légers",
+	"légère",
+	"légères"
+	],
+"slim":[
+	"mince",
+	"minces"
+	],
+"slimy":[
+	"gluant",
+	"gluante",
+	"gluantes",
+	"gluants",
+	"visqueuse",
+	"visqueuses",
+	"visqueux"
+	],
+"slippery":[
+	"glissant",
+	"glissante",
+	"glissantes",
+	"glissants"
+	],
+"sloppy":[
+	"ample",
+	"amples",
+	"large",
+	"larges",
+	"lâche",
+	"lâches"
+	],
+"slothful":[
+	"paresseuse",
+	"paresseuses",
+	"paresseux"
+	],
+"slovak":[
+	"slovaque",
+	"slovaques"
+	],
+"slovene":[
+	"slovène",
+	"slovènes"
+	],
+"slovenly":[
+	"dépeigné",
+	"dépeignée",
+	"dépeignées",
+	"dépeignés",
+	"sal'",
+	"sale",
+	"sales"
+	],
+"slow":[
+	"lent",
+	"lente",
+	"lentes",
+	"lents",
+	"tardif",
+	"tardifs",
+	"tardive",
+	"tardives"
+	],
+"sluggish":[
+	"poussif",
+	"poussifs",
+	"poussive",
+	"poussives"
+	],
+"sly":[
+	"espiègle",
+	"espiègles",
+	"maligne",
+	"malignes",
+	"malin",
+	"malins",
+	"sournois",
+	"sournoise",
+	"sournoises"
+	],
+"small":[
+	"ch'ti",
+	"jeune",
+	"jeunes",
+	"minuscule",
+	"minuscules",
+	"p'tit",
+	"p'tit'",
+	"p'tite",
+	"p'tites",
+	"p'tits",
+	"petit",
+	"petite",
+	"petites",
+	"petits",
+	"ptit",
+	"ptite",
+	"ptites",
+	"ptits"
+	],
+"smarmy":[
+	"obséquieuse",
+	"obséquieuses",
+	"obséquieux"
+	],
+"smart":[
+	"habile",
+	"habiles",
+	"intelligent",
+	"intelligente",
+	"intelligentes",
+	"intelligents",
+	"élégant",
+	"élégante",
+	"élégantes",
+	"élégants"
+	],
+"smashing":[
+	"génial",
+	"géniale",
+	"géniales",
+	"géniaux",
+	"super"
+	],
+"smelly":[
+	"malodorant",
+	"malodorante",
+	"malodorantes",
+	"malodorants",
+	"puant",
+	"puante",
+	"puantes",
+	"puants"
+	],
+"smoked":[
+	"fumé",
+	"fumée",
+	"fumées",
+	"fumés"
+	],
+"smoky":[
+	"enfumé",
+	"enfumée",
+	"enfumées",
+	"enfumés"
+	],
+"smooth":[
+	"douce",
+	"douces",
+	"doux",
+	"facile",
+	"faciles",
+	"lisse",
+	"lisses",
+	"naturel",
+	"naturelle",
+	"naturelles",
+	"naturels",
+	"régulier",
+	"réguliers",
+	"régulière",
+	"régulières",
+	"souple",
+	"souples"
+	],
+"smug":[
+	"suffisant",
+	"suffisante",
+	"suffisantes",
+	"suffisants"
+	],
+"snappish":[
+	"hargneuse",
+	"hargneuses",
+	"hargneux"
+	],
+"sneaky":[
+	"fourbe",
+	"fourbes",
+	"furtif",
+	"furtifs",
+	"furtive",
+	"furtives",
+	"insaisissable",
+	"insaisissables",
+	"sournois",
+	"sournoise",
+	"sournoises"
+	],
+"snide":[
+	"sarcastique",
+	"sarcastiques",
+	"trompeur",
+	"trompeurs",
+	"trompeuse",
+	"trompeuses"
+	],
+"snobbish":[
+	"snob",
+	"snobs"
+	],
+"snobby":[
+	"snob",
+	"snobs"
+	],
+"snotty":[
+	"impertinent",
+	"impertinente",
+	"impertinentes",
+	"impertinents"
+	],
+"snug":[
+	"confortable",
+	"confortables",
+	"douillet",
+	"douillets",
+	"douillette",
+	"douillettes"
+	],
+"sobbing":[
+	"sanglotant",
+	"sanglotante",
+	"sanglotantes",
+	"sanglotants"
+	],
+"sober":[
+	"sobre",
+	"sobres"
+	],
+"sociable":[
+	"sociable",
+	"sociables"
+	],
+"social":[
+	"social",
+	"sociale",
+	"sociales",
+	"socials",
+	"sociaux"
+	],
+"socialist":[
+	"socialiste",
+	"socialistes"
+	],
+"societal":[
+	"sociétal",
+	"sociétale",
+	"sociétales",
+	"sociétaux"
+	],
+"sociocultural":[
+	"socioculturel",
+	"socioculturelle",
+	"socioculturelles",
+	"socioculturels"
+	],
+"sociological":[
+	"sociologique",
+	"sociologiques"
+	],
+"socratic":[
+	"socratique",
+	"socratiques"
+	],
+"soft":[
+	"douce",
+	"douces",
+	"doux",
+	"mol",
+	"molle",
+	"molles",
+	"mou",
+	"mous"
+	],
+"soiled":[
+	"sal'",
+	"sale",
+	"sales"
+	],
+"solar":[
+	"solaire",
+	"solaires"
+	],
+"sole":[
+	"célibataire",
+	"célibataires",
+	"seul",
+	"seule",
+	"seules",
+	"seuls",
+	"unique",
+	"uniques"
+	],
+"solemn":[
+	"solennel",
+	"solennelle",
+	"solennelles",
+	"solennels"
+	],
+"solid":[
+	"continu",
+	"continue",
+	"continues",
+	"continus",
+	"massif",
+	"massifs",
+	"massive",
+	"massives",
+	"plein",
+	"pleine",
+	"pleines",
+	"pleins",
+	"solide",
+	"solides"
+	],
+"solitary":[
+	"seul",
+	"seule",
+	"seules",
+	"seuls",
+	"solitaire",
+	"solitaires"
+	],
+"solo":[
+	"solitaire",
+	"solitaires"
+	],
+"soluble":[
+	"soluble",
+	"solubles"
+	],
+"solutrean":[
+	"solutréen",
+	"solutréenne",
+	"solutréennes",
+	"solutréens"
+	],
+"solvable":[
+	"résoluble",
+	"résolubles",
+	"soluble",
+	"solubles"
+	],
+"solvent":[
+	"solvable",
+	"solvables"
+	],
+"somali":[
+	"somalien",
+	"somalienne",
+	"somaliennes",
+	"somaliens"
+	],
+"somatic":[
+	"somatique",
+	"somatiques"
+	],
+"sombre":[
+	"sombre",
+	"sombres"
+	],
+"sonic":[
+	"sonore",
+	"sonores"
+	],
+"soothing":[
+	"apaisant",
+	"apaisante",
+	"apaisantes",
+	"apaisants",
+	"rassurant",
+	"rassurante",
+	"rassurantes",
+	"rassurants"
+	],
+"sooty":[
+	"fuligineuse",
+	"fuligineuses",
+	"fuligineux"
+	],
+"sophisticated":[
+	"chic",
+	"chics",
+	"cosmopolite",
+	"cosmopolites",
+	"raffiné",
+	"raffinée",
+	"raffinées",
+	"raffinés"
+	],
+"soppy":[
+	"mièvre",
+	"mièvres"
+	],
+"sordid":[
+	"avide",
+	"avides",
+	"crapuleuse",
+	"crapuleuses",
+	"crapuleux",
+	"sordide",
+	"sordides"
+	],
+"sore":[
+	"douloureuse",
+	"douloureuses",
+	"douloureux",
+	"désespérant",
+	"désespérante",
+	"désespérantes",
+	"désespérants",
+	"pénible",
+	"pénibles"
+	],
+"sorrowful":[
+	"attristant",
+	"attristante",
+	"attristantes",
+	"attristants",
+	"douloureuse",
+	"douloureuses",
+	"douloureux",
+	"triste",
+	"tristes"
+	],
+"sorry":[
+	"désolé",
+	"désolée",
+	"désolées",
+	"désolés"
+	],
+"sound":[
+	"complet",
+	"complets",
+	"complète",
+	"complètes",
+	"sain",
+	"saine",
+	"saines",
+	"sains",
+	"solide",
+	"solides",
+	"sûr",
+	"sûre",
+	"sûres",
+	"sûrs"
+	],
+"sour":[
+	"acariâtre",
+	"acariâtres",
+	"acerbe",
+	"acerbes",
+	"aigre",
+	"aigres",
+	"revêche",
+	"revêches",
+	"sur",
+	"surs"
+	],
+"south":[
+	"austral",
+	"australe",
+	"australes",
+	"australs",
+	"méridional",
+	"méridionale",
+	"méridionales",
+	"méridionals",
+	"sud"
+	],
+"southeast":[
+	"sud-est"
+	],
+"southern":[
+	"austral",
+	"australe",
+	"australes",
+	"australs",
+	"méridional",
+	"méridionale",
+	"méridionales",
+	"méridionals",
+	"sud"
+	],
+"sovereign":[
+	"souverain",
+	"souverain",
+	"souveraine",
+	"souveraines",
+	"souverains",
+	"souverains"
+	],
+"soviet":[
+	"soviétique",
+	"soviétiques"
+	],
+"spacious":[
+	"ample",
+	"amples",
+	"grand",
+	"grand'",
+	"grande",
+	"grandes",
+	"grands",
+	"logeable",
+	"logeables",
+	"spacieuse",
+	"spacieuses",
+	"spacieux"
+	],
+"spanish":[
+	"espagnol",
+	"espagnole",
+	"espagnoles",
+	"espagnols"
+	],
+"sparkling":[
+	"effervescent",
+	"effervescente",
+	"effervescentes",
+	"effervescents",
+	"pétillant",
+	"pétillante",
+	"pétillantes",
+	"pétillants"
+	],
+"sparse":[
+	"clairsemé",
+	"clairsemée",
+	"clairsemées",
+	"clairsemés",
+	"épars",
+	"éparse",
+	"éparses"
+	],
+"spartan":[
+	"spartiate",
+	"spartiates"
+	],
+"spasmodic":[
+	"spasmodique",
+	"spasmodiques"
+	],
+"spatial":[
+	"spatial",
+	"spatiale",
+	"spatiales",
+	"spatials",
+	"spatiaux"
+	],
+"special":[
+	"particulier",
+	"particuliers",
+	"particulière",
+	"particulières",
+	"proche",
+	"proches",
+	"spécial",
+	"spéciale",
+	"spéciales",
+	"spéciaux"
+	],
+"specific":[
+	"spécifique",
+	"spécifiques"
+	],
+"specious":[
+	"spécieuse",
+	"spécieuses",
+	"spécieux"
+	],
+"spectacular":[
+	"spectaculaire",
+	"spectaculaires"
+	],
+"spectral":[
+	"spectral",
+	"spectrale",
+	"spectrales",
+	"spectraux"
+	],
+"speculative":[
+	"spéculatif",
+	"spéculatifs",
+	"spéculative",
+	"spéculatives"
+	],
+"speedy":[
+	"prompt",
+	"prompte",
+	"promptes",
+	"prompts",
+	"rapide",
+	"rapides"
+	],
+"speleological":[
+	"spéléologique",
+	"spéléologiques"
+	],
+"spent":[
+	"fatigué",
+	"fatiguée",
+	"fatiguées",
+	"fatigués",
+	"épuisé",
+	"épuisée",
+	"épuisées",
+	"épuisés",
+	"éreinté",
+	"éreintée",
+	"éreintées",
+	"éreintés"
+	],
+"spherical":[
+	"sphérique",
+	"sphériques"
+	],
+"spicy":[
+	"piquant",
+	"piquante",
+	"piquantes",
+	"piquants",
+	"épicé",
+	"épicée",
+	"épicées",
+	"épicés"
+	],
+"spiked":[
+	"clouté",
+	"cloutée",
+	"cloutées",
+	"cloutés"
+	],
+"spinal":[
+	"spinal",
+	"spinale",
+	"spinales",
+	"spinaux"
+	],
+"spindly":[
+	"frêle",
+	"frêles",
+	"grêle",
+	"grêles"
+	],
+"spineless":[
+	"lâche",
+	"lâches"
+	],
+"spirited":[
+	"courageuse",
+	"courageuses",
+	"courageux"
+	],
+"spiritual":[
+	"spirituel",
+	"spirituelle",
+	"spirituelles",
+	"spirituels"
+	],
+"spiritualist":[
+	"spiritualiste",
+	"spiritualistes"
+	],
+"spiteful":[
+	"rancunier",
+	"rancuniers",
+	"rancunière",
+	"rancunières"
+	],
+"splendid":[
+	"fameuse",
+	"fameuses",
+	"fameux",
+	"splendide",
+	"splendides"
+	],
+"spoiled":[
+	"gâté",
+	"gâtée",
+	"gâtées",
+	"gâtés"
+	],
+"spoilt":[
+	"gâté",
+	"gâtée",
+	"gâtées",
+	"gâtés"
+	],
+"spontaneous":[
+	"endémique",
+	"endémiques",
+	"impulsif",
+	"impulsifs",
+	"impulsive",
+	"impulsives",
+	"indigène",
+	"indigènes",
+	"naturel",
+	"naturelle",
+	"naturelles",
+	"naturels",
+	"soudain",
+	"soudaine",
+	"soudaines",
+	"soudains",
+	"spontané",
+	"spontanée",
+	"spontanées",
+	"spontanés",
+	"volontaire",
+	"volontaires"
+	],
+"sporadic":[
+	"sporadique",
+	"sporadiques"
+	],
+"sporting":[
+	"sportif",
+	"sportifs",
+	"sportive",
+	"sportives"
+	],
+"sporty":[
+	"sportif",
+	"sportifs",
+	"sportive",
+	"sportives"
+	],
+"sprightly":[
+	"animé",
+	"animée",
+	"animées",
+	"animés",
+	"vif",
+	"vifs",
+	"vive",
+	"vives"
+	],
+"springy":[
+	"élastique",
+	"élastiques"
+	],
+"spry":[
+	"actif",
+	"actifs",
+	"active",
+	"actives",
+	"alerte",
+	"alertes",
+	"vif",
+	"vifs",
+	"vigilant",
+	"vigilante",
+	"vigilantes",
+	"vigilants",
+	"vive",
+	"vives"
+	],
+"spurious":[
+	"fausse",
+	"fausses",
+	"faux",
+	"trompeur",
+	"trompeurs",
+	"trompeuse",
+	"trompeuses"
+	],
+"squalid":[
+	"dégueulasse",
+	"dégueulasses",
+	"sordide",
+	"sordides"
+	],
+"squamous":[
+	"écailleuse",
+	"écailleuses",
+	"écailleux"
+	],
+"square":[
+	"carré",
+	"carrée",
+	"carrées",
+	"carrés",
+	"²"
+	],
+"squared":[
+	"carré",
+	"carrée",
+	"carrées",
+	"carrés",
+	"²"
+	],
+"squat":[
+	"trapu",
+	"trapue",
+	"trapues",
+	"trapus"
+	],
+"squishy":[
+	"mol",
+	"molle",
+	"molles",
+	"mou",
+	"mous",
+	"visqueuse",
+	"visqueuses",
+	"visqueux"
+	],
+"stable":[
+	"stable",
+	"stables"
+	],
+"staid":[
+	"guindé",
+	"guindée",
+	"guindées",
+	"guindés"
+	],
+"stainless":[
+	"inoxydable",
+	"inoxydables"
+	],
+"stale":[
+	"caduc",
+	"caducs",
+	"caduque",
+	"caduques",
+	"croupi",
+	"croupie",
+	"croupies",
+	"croupis",
+	"défraîchi",
+	"défraîchie",
+	"défraîchies",
+	"défraîchis",
+	"démodé",
+	"démodée",
+	"démodées",
+	"démodés",
+	"périmé",
+	"périmée",
+	"périmées",
+	"périmés",
+	"suranné",
+	"surannée",
+	"surannées",
+	"surannés"
+	],
+"stalinist":[
+	"stalinien",
+	"stalinienne",
+	"staliniennes",
+	"staliniens"
+	],
+"stalwart":[
+	"courageuse",
+	"courageuses",
+	"courageux",
+	"robuste",
+	"robustes",
+	"vaillant",
+	"vaillante",
+	"vaillantes",
+	"vaillants"
+	],
+"starry":[
+	"étoilé",
+	"étoilée",
+	"étoilées",
+	"étoilés"
+	],
+"startled":[
+	"effarouché",
+	"effarouchée",
+	"effarouchées",
+	"effarouchés"
+	],
+"stateless":[
+	"apatride",
+	"apatrides"
+	],
+"static":[
+	"statique",
+	"statiques"
+	],
+"statist":[
+	"étatiste",
+	"étatistes"
+	],
+"statistical":[
+	"statistique",
+	"statistiques"
+	],
+"statutory":[
+	"statutaire",
+	"statutaires"
+	],
+"staunch":[
+	"fervent",
+	"fervente",
+	"ferventes",
+	"fervents"
+	],
+"steadfast":[
+	"déterminé",
+	"déterminée",
+	"déterminées",
+	"déterminés"
+	],
+"steady":[
+	"lisse",
+	"lisses",
+	"régulier",
+	"réguliers",
+	"régulière",
+	"régulières"
+	],
+"steep":[
+	"abrupt",
+	"abrupte",
+	"abruptes",
+	"abrupts",
+	"escarpé",
+	"escarpée",
+	"escarpées",
+	"escarpés"
+	],
+"stellar":[
+	"brillant",
+	"brillante",
+	"brillantes",
+	"brillants",
+	"excellent",
+	"excellente",
+	"excellentes",
+	"excellents",
+	"exceptionnel",
+	"exceptionnelle",
+	"exceptionnelles",
+	"exceptionnels",
+	"exemplaire",
+	"exemplaires",
+	"extraordinaire",
+	"extraordinaires",
+	"stellaire",
+	"stellaires"
+	],
+"sterile":[
+	"stérile",
+	"stériles"
+	],
+"stern":[
+	"austère",
+	"austères",
+	"sévère",
+	"sévères"
+	],
+"sticky":[
+	"collant",
+	"collante",
+	"collantes",
+	"collants",
+	"gluant",
+	"gluante",
+	"gluantes",
+	"gluants"
+	],
+"stiff":[
+	"raide",
+	"raides",
+	"rigide",
+	"rigides"
+	],
+"stifling":[
+	"étouffant",
+	"étouffante",
+	"étouffantes",
+	"étouffants"
+	],
+"still":[
+	"calme",
+	"calmes",
+	"immobile",
+	"immobiles"
+	],
+"stillborn":[
+	"mort-né",
+	"mort-née",
+	"mort-nées",
+	"mort-nés"
+	],
+"stimulating":[
+	"stimulant",
+	"stimulante",
+	"stimulantes",
+	"stimulants"
+	],
+"stingy":[
+	"chiche",
+	"chiches",
+	"pingre",
+	"pingres",
+	"piquant",
+	"piquante",
+	"piquantes",
+	"piquants",
+	"radin",
+	"radine",
+	"radines",
+	"radins",
+	"rapiat",
+	"rapiats"
+	],
+"stinky":[
+	"fétide",
+	"fétides",
+	"malodorant",
+	"malodorante",
+	"malodorantes",
+	"malodorants",
+	"puant",
+	"puante",
+	"puantes",
+	"puants"
+	],
+"stirring":[
+	"enthousiasmant",
+	"enthousiasmante",
+	"enthousiasmantes",
+	"enthousiasmants",
+	"passionnant",
+	"passionnante",
+	"passionnantes",
+	"passionnants"
+	],
+"stocky":[
+	"trapu",
+	"trapue",
+	"trapues",
+	"trapus"
+	],
+"stoic":[
+	"stoïque",
+	"stoïques"
+	],
+"stolid":[
+	"impassible",
+	"impassibles"
+	],
+"stony":[
+	"froid",
+	"froide",
+	"froides",
+	"froids",
+	"sec",
+	"secs",
+	"sèche",
+	"sèches"
+	],
+"stormy":[
+	"orageuse",
+	"orageuses",
+	"orageux"
+	],
+"straight":[
+	"droit",
+	"droite",
+	"droites",
+	"droits",
+	"pur",
+	"pure",
+	"pures",
+	"purs",
+	"rectiligne",
+	"rectilignes"
+	],
+"straightforward":[
+	"aisé",
+	"aisée",
+	"aisées",
+	"aisés",
+	"direct",
+	"directe",
+	"directes",
+	"directs",
+	"facile",
+	"faciles",
+	"simple",
+	"simples"
+	],
+"stranded":[
+	"abandonné",
+	"abandonnée",
+	"abandonnées",
+	"abandonnés"
+	],
+"strange":[
+	"inconnu",
+	"inconnue",
+	"inconnues",
+	"inconnus",
+	"étrange",
+	"étranger",
+	"étrangers",
+	"étranges",
+	"étrangère",
+	"étrangères"
+	],
+"strategic":[
+	"stratégique",
+	"stratégiques"
+	],
+"stray":[
+	"errant",
+	"errante",
+	"errantes",
+	"errants",
+	"égaré",
+	"égarée",
+	"égarées",
+	"égarés"
+	],
+"strenuous":[
+	"acharné",
+	"acharnée",
+	"acharnées",
+	"acharnés",
+	"ardu",
+	"ardue",
+	"ardues",
+	"ardus",
+	"vigoureuse",
+	"vigoureuses",
+	"vigoureux"
+	],
+"stressed":[
+	"accentué",
+	"accentuée",
+	"accentuées",
+	"accentués"
+	],
+"stressful":[
+	"stressant",
+	"stressante",
+	"stressantes",
+	"stressants"
+	],
+"stretchable":[
+	"étirable",
+	"étirables"
+	],
+"strict":[
+	"strict",
+	"stricte",
+	"strictes",
+	"stricts"
+	],
+"strident":[
+	"criard",
+	"criarde",
+	"criardes",
+	"criards",
+	"strident",
+	"stridente",
+	"stridentes",
+	"stridents"
+	],
+"striking":[
+	"éclatant",
+	"éclatante",
+	"éclatantes",
+	"éclatants"
+	],
+"stringent":[
+	"strict",
+	"stricte",
+	"strictes",
+	"stricts"
+	],
+"stringy":[
+	"filandreuse",
+	"filandreuses",
+	"filandreux"
+	],
+"strong":[
+	"fort",
+	"forte",
+	"fortes",
+	"forts",
+	"irrégulier",
+	"irréguliers",
+	"irrégulière",
+	"irrégulières",
+	"solide",
+	"solides"
+	],
+"structural":[
+	"structural",
+	"structurale",
+	"structurales",
+	"structuraux",
+	"structurel",
+	"structurelle",
+	"structurelles",
+	"structurels"
+	],
+"stubborn":[
+	"borné",
+	"bornée",
+	"bornées",
+	"bornés",
+	"entêté",
+	"entêtée",
+	"entêtées",
+	"entêtés"
+	],
+"studious":[
+	"studieuse",
+	"studieuses",
+	"studieux"
+	],
+"stuffed":[
+	"bourré",
+	"bourrée",
+	"bourrées",
+	"bourrés",
+	"farci",
+	"farcie",
+	"farcies",
+	"farcis"
+	],
+"stuffy":[
+	"fâché",
+	"fâchée",
+	"fâchées",
+	"fâchés",
+	"étouffant",
+	"étouffante",
+	"étouffantes",
+	"étouffants"
+	],
+"stumped":[
+	"perplexe",
+	"perplexes"
+	],
+"stunned":[
+	"abasourdi",
+	"abasourdie",
+	"abasourdies",
+	"abasourdis",
+	"stupéfait",
+	"stupéfaite",
+	"stupéfaites",
+	"stupéfaits"
+	],
+"stupendous":[
+	"merveilleuse",
+	"merveilleuses",
+	"merveilleux"
+	],
+"stupid":[
+	"bête",
+	"bêtes",
+	"stupide",
+	"stupides"
+	],
+"sturdy":[
+	"costaud",
+	"costaude",
+	"costaudes",
+	"costauds",
+	"robuste",
+	"robustes",
+	"solide",
+	"solides"
+	],
+"stylish":[
+	"élégant",
+	"élégante",
+	"élégantes",
+	"élégants"
+	],
+"subaltern":[
+	"subalterne",
+	"subalternes"
+	],
+"subjacent":[
+	"sous-jacent",
+	"sous-jacente",
+	"sous-jacentes",
+	"sous-jacents"
+	],
+"subjective":[
+	"subjectif",
+	"subjectifs",
+	"subjective",
+	"subjectives"
+	],
+"sublime":[
+	"sublime",
+	"sublimes"
+	],
+"sublingual":[
+	"sublingual",
+	"sublinguale",
+	"sublinguales",
+	"sublinguaux"
+	],
+"subrenal":[
+	"surrénal",
+	"surrénale",
+	"surrénales",
+	"surrénaux"
+	],
+"subsequent":[
+	"prochain",
+	"prochaine",
+	"prochaines",
+	"prochains",
+	"subséquent",
+	"subséquente",
+	"subséquentes",
+	"subséquents",
+	"suiv..",
+	"suivant",
+	"suivante",
+	"suivantes",
+	"suivants"
+	],
+"subservient":[
+	"servile",
+	"serviles"
+	],
+"subsidiary":[
+	"subsidiaire",
+	"subsidiaires"
+	],
+"substantial":[
+	"substantiel",
+	"substantielle",
+	"substantielles",
+	"substantiels"
+	],
+"substantive":[
+	"direct",
+	"directe",
+	"directes",
+	"directs"
+	],
+"subterranean":[
+	"souterrain",
+	"souterraine",
+	"souterraines",
+	"souterrains"
+	],
+"subtle":[
+	"astucieuse",
+	"astucieuses",
+	"astucieux",
+	"délicat",
+	"délicate",
+	"délicates",
+	"délicats",
+	"subtil",
+	"subtile",
+	"subtiles",
+	"subtils"
+	],
+"subtropical":[
+	"subtropical",
+	"subtropicale",
+	"subtropicales",
+	"subtropicaux"
+	],
+"suburban":[
+	"banlieusard",
+	"banlieusarde",
+	"banlieusardes",
+	"banlieusards",
+	"suburbain",
+	"suburbaine",
+	"suburbaines",
+	"suburbains"
+	],
+"subversive":[
+	"subversif",
+	"subversifs",
+	"subversive",
+	"subversives"
+	],
+"successive":[
+	"successif",
+	"successifs",
+	"successive",
+	"successives"
+	],
+"succinct":[
+	"succinct",
+	"succincte",
+	"succinctes",
+	"succincts"
+	],
+"succulent":[
+	"gras",
+	"grasse",
+	"grasses",
+	"succulent",
+	"succulente",
+	"succulentes",
+	"succulents"
+	],
+"sudanese":[
+	"soudanais",
+	"soudanaise",
+	"soudanaises"
+	],
+"sudden":[
+	"soudain",
+	"soudaine",
+	"soudaines",
+	"soudains",
+	"subit",
+	"subite",
+	"subites",
+	"subits"
+	],
+"sufficient":[
+	"autosuffisant",
+	"autosuffisante",
+	"autosuffisantes",
+	"autosuffisants",
+	"suffisant",
+	"suffisante",
+	"suffisantes",
+	"suffisants"
+	],
+"sugary":[
+	"mielleuse",
+	"mielleuses",
+	"mielleux"
+	],
+"suicidal":[
+	"suicidaire",
+	"suicidaires"
+	],
+"suitable":[
+	"approprié",
+	"appropriée",
+	"appropriées",
+	"appropriés",
+	"convenable",
+	"convenables",
+	"idoine",
+	"idoines",
+	"opportun",
+	"opportune",
+	"opportunes",
+	"opportuns"
+	],
+"sulfurous":[
+	"sulfureuse",
+	"sulfureuses",
+	"sulfureux"
+	],
+"sulky":[
+	"boudeur",
+	"boudeurs",
+	"boudeuse",
+	"boudeuses"
+	],
+"sullen":[
+	"lent",
+	"lente",
+	"lentes",
+	"lents",
+	"maussade",
+	"maussades",
+	"morose",
+	"moroses"
+	],
+"sultry":[
+	"torride",
+	"torrides",
+	"étouffant",
+	"étouffante",
+	"étouffantes",
+	"étouffants"
+	],
+"summary":[
+	"sommaire",
+	"sommaires"
+	],
+"summery":[
+	"estival",
+	"estivale",
+	"estivales",
+	"estivaux"
+	],
+"sumptuary":[
+	"somptuaire",
+	"somptuaires"
+	],
+"sumptuous":[
+	"somptueuse",
+	"somptueuses",
+	"somptueux"
+	],
+"sunny":[
+	"ensoleillé",
+	"ensoleillée",
+	"ensoleillées",
+	"ensoleillés"
+	],
+"super":[
+	"super"
+	],
+"superannuated":[
+	"dépassé",
+	"dépassée",
+	"dépassées",
+	"dépassés",
+	"obsolète",
+	"obsolètes"
+	],
+"supercilious":[
+	"hautain",
+	"hautaine",
+	"hautaines",
+	"hautains"
+	],
+"superexcellent":[
+	"excellentissime",
+	"excellentissimes"
+	],
+"superficial":[
+	"superficiel",
+	"superficielle",
+	"superficielles",
+	"superficiels"
+	],
+"superfluous":[
+	"superflu",
+	"superflue",
+	"superflues",
+	"superflus"
+	],
+"superior":[
+	"sup..",
+	"supérieur",
+	"supérieure",
+	"supérieures",
+	"supérieurs"
+	],
+"superlative":[
+	"suprême",
+	"suprêmes"
+	],
+"supernal":[
+	"céleste",
+	"célestes",
+	"exquis",
+	"exquise",
+	"exquises",
+	"ineffable",
+	"ineffables",
+	"paradisiaque",
+	"paradisiaques",
+	"ravissant",
+	"ravissante",
+	"ravissantes",
+	"ravissants",
+	"sublime",
+	"sublimes"
+	],
+"supernatural":[
+	"surnaturel",
+	"surnaturelle",
+	"surnaturelles",
+	"surnaturels"
+	],
+"supersonic":[
+	"supersonique",
+	"supersoniques"
+	],
+"superstitious":[
+	"superstitieuse",
+	"superstitieuses",
+	"superstitieux"
+	],
+"supple":[
+	"souple",
+	"souples"
+	],
+"supplementary":[
+	"supplémentaire",
+	"supplémentaires"
+	],
+"suppliant":[
+	"suppliant",
+	"suppliante",
+	"suppliantes",
+	"suppliants"
+	],
+"supranational":[
+	"supranational",
+	"supranationale",
+	"supranationales",
+	"supranationaux"
+	],
+"suprarenal":[
+	"surrénal",
+	"surrénale",
+	"surrénales",
+	"surrénaux"
+	],
+"supreme":[
+	"suprême",
+	"suprêmes"
+	],
+"sure":[
+	"certain",
+	"certaine",
+	"certaines",
+	"certains",
+	"sûr",
+	"sûre",
+	"sûres",
+	"sûrs"
+	],
+"surgical":[
+	"chirurgical",
+	"chirurgicale",
+	"chirurgicales",
+	"chirurgicaux"
+	],
+"surinamese":[
+	"surinamien",
+	"surinamienne",
+	"surinamiennes",
+	"surinamiens"
+	],
+"surly":[
+	"arrogant",
+	"arrogante",
+	"arrogantes",
+	"arrogants",
+	"autoritaire",
+	"autoritaires",
+	"grincheuse",
+	"grincheuses",
+	"grincheux",
+	"grognon",
+	"grognonne",
+	"grognonnes",
+	"grognons",
+	"impoli",
+	"impolie",
+	"impolies",
+	"impolis",
+	"menaçant",
+	"menaçante",
+	"menaçantes",
+	"menaçants",
+	"rude",
+	"rudes"
+	],
+"surprising":[
+	"surprenant",
+	"surprenante",
+	"surprenantes",
+	"surprenants",
+	"étonnant",
+	"étonnante",
+	"étonnantes",
+	"étonnants"
+	],
+"surrealist":[
+	"surréaliste",
+	"surréalistes"
+	],
+"surreptitious":[
+	"furtif",
+	"furtifs",
+	"furtive",
+	"furtives"
+	],
+"susceptible":[
+	"susceptible",
+	"susceptibles"
+	],
+"suspicious":[
+	"méfiant",
+	"méfiants",
+	"soupçonneuse",
+	"soupçonneuses",
+	"soupçonneux",
+	"suspect",
+	"suspecte",
+	"suspectes",
+	"suspects"
+	],
+"sustainable":[
+	"durable",
+	"durables",
+	"viable",
+	"viables"
+	],
+"swanky":[
+	"classe",
+	"élégant",
+	"élégante",
+	"élégantes",
+	"élégants"
+	],
+"swappable":[
+	"échangeable",
+	"échangeables"
+	],
+"swashbuckling":[
+	"aventurier",
+	"aventuriers",
+	"aventurière",
+	"aventurières",
+	"truculent",
+	"truculente",
+	"truculentes",
+	"truculents"
+	],
+"sweaty":[
+	"moite",
+	"moites"
+	],
+"swedish":[
+	"suédois",
+	"suédoise",
+	"suédoises"
+	],
+"sweeping":[
+	"complet",
+	"complets",
+	"complète",
+	"complètes",
+	"large",
+	"larges",
+	"radical",
+	"radicale",
+	"radicales",
+	"radicaux",
+	"vaste",
+	"vastes"
+	],
+"sweet":[
+	"charmant",
+	"charmante",
+	"charmantes",
+	"charmants",
+	"douce",
+	"douces",
+	"doux",
+	"frais",
+	"fraîche",
+	"fraîches",
+	"gentil",
+	"gentille",
+	"gentilles",
+	"gentils",
+	"génial",
+	"géniale",
+	"géniales",
+	"géniaux",
+	"mélodieuse",
+	"mélodieuses",
+	"mélodieux",
+	"suave",
+	"suaves",
+	"sympa",
+	"sympas",
+	"sympathique",
+	"sympathiques"
+	],
+"sweetish":[
+	"douceâtre",
+	"douceâtres"
+	],
+"swell":[
+	"chouette",
+	"chouettes"
+	],
+"swift":[
+	"rapide",
+	"rapides"
+	],
+"swiss":[
+	"suisse",
+	"suisses"
+	],
+"swollen":[
+	"enflé",
+	"enflée",
+	"enflées",
+	"enflés",
+	"gonflé",
+	"gonflée",
+	"gonflées",
+	"gonflés"
+	],
+"syllabic":[
+	"syllabique",
+	"syllabiques"
+	],
+"sylvan":[
+	"sylvestre",
+	"sylvestres"
+	],
+"symbolic":[
+	"symbolique",
+	"symboliques"
+	],
+"symmetrical":[
+	"symétrique",
+	"symétriques"
+	],
+"sympathetic":[
+	"sympathique",
+	"sympathiques"
+	],
+"symphonic":[
+	"symphonique",
+	"symphoniques"
+	],
+"symptomatic":[
+	"symptomatique",
+	"symptomatiques"
+	],
+"synallagmatic":[
+	"synallagmatique",
+	"synallagmatiques"
+	],
+"synaptic":[
+	"synaptique",
+	"synaptiques"
+	],
+"synchronic":[
+	"synchronique",
+	"synchroniques"
+	],
+"synchronous":[
+	"synchrone",
+	"synchrones"
+	],
+"synclinal":[
+	"synclinal",
+	"synclinale",
+	"synclinales",
+	"synclinaux"
+	],
+"syncretic":[
+	"syncrétique",
+	"syncrétiques"
+	],
+"syndical":[
+	"syndical",
+	"syndicale",
+	"syndicales",
+	"syndicaux"
+	],
+"synonymous":[
+	"synonyme",
+	"synonymes"
+	],
+"synoptic":[
+	"synoptique",
+	"synoptiques"
+	],
+"syntactic":[
+	"syntaxique",
+	"syntaxiques"
+	],
+"synthetic":[
+	"synthétique",
+	"synthétiques"
+	],
+"syrian":[
+	"syrien",
+	"syrienne",
+	"syriennes",
+	"syriens"
+	],
+"systematic":[
+	"systématique",
+	"systématiques"
+	],
+"tabby":[
+	"tigré",
+	"tigrée",
+	"tigrées",
+	"tigrés"
+	],
+"taboo":[
+	"tabou",
+	"taboue",
+	"taboues",
+	"tabous"
+	],
+"tacit":[
+	"tacite",
+	"tacites"
+	],
+"taciturn":[
+	"taciturne",
+	"taciturnes"
+	],
+"tactful":[
+	"diplomatique",
+	"diplomatiques"
+	],
+"tactical":[
+	"tactique",
+	"tactiques"
+	],
+"tactile":[
+	"tactile",
+	"tactiles"
+	],
+"taiwanese":[
+	"taïwanais",
+	"taïwanaise",
+	"taïwanaises"
+	],
+"tajik":[
+	"tadjik",
+	"tadjike",
+	"tadjikes",
+	"tadjiks"
+	],
+"talented":[
+	"doué",
+	"douée",
+	"douées",
+	"doués",
+	"talentueuse",
+	"talentueuses",
+	"talentueux"
+	],
+"talkative":[
+	"bavard",
+	"bavarde",
+	"bavardes",
+	"bavards",
+	"loquace",
+	"loquaces"
+	],
+"tall":[
+	"grand",
+	"grand'",
+	"grande",
+	"grandes",
+	"grands",
+	"haut",
+	"haute",
+	"hautes",
+	"hauts"
+	],
+"talmudic":[
+	"talmudique",
+	"talmudiques"
+	],
+"tame":[
+	"apprivoisé",
+	"apprivoisée",
+	"apprivoisées",
+	"apprivoisés"
+	],
+"tamil":[
+	"tamoul",
+	"tamoule",
+	"tamoules",
+	"tamouls"
+	],
+"tan":[
+	"bronzé",
+	"bronzée",
+	"bronzées",
+	"bronzés",
+	"hâlé",
+	"hâlée",
+	"hâlées",
+	"hâlés"
+	],
+"tangible":[
+	"tangible",
+	"tangibles"
+	],
+"tangy":[
+	"piquant",
+	"piquante",
+	"piquantes",
+	"piquants"
+	],
+"tanned":[
+	"bronzé",
+	"bronzée",
+	"bronzées",
+	"bronzés"
+	],
+"tantalizing":[
+	"alléchant",
+	"alléchante",
+	"alléchantes",
+	"alléchants"
+	],
+"tantamount":[
+	"équivalent",
+	"équivalente",
+	"équivalentes",
+	"équivalents"
+	],
+"tantric":[
+	"tantrique",
+	"tantriques"
+	],
+"tanzanian":[
+	"tanzanien",
+	"tanzanienne",
+	"tanzaniennes",
+	"tanzaniens"
+	],
+"tardy":[
+	"tardif",
+	"tardifs",
+	"tardive",
+	"tardives"
+	],
+"tart":[
+	"amer",
+	"amers",
+	"amère",
+	"amères",
+	"mordant",
+	"mordante",
+	"mordantes",
+	"mordants"
+	],
+"tasteless":[
+	"fade",
+	"fades"
+	],
+"tasty":[
+	"élégant",
+	"élégante",
+	"élégantes",
+	"élégants"
+	],
+"tatar":[
+	"tatare",
+	"tatares"
+	],
+"tattered":[
+	"abîmé",
+	"abîmée",
+	"abîmées",
+	"abîmés",
+	"loqueteuse",
+	"loqueteuses",
+	"loqueteux"
+	],
+"taut":[
+	"anxieuse",
+	"anxieuses",
+	"anxieux",
+	"concis",
+	"concise",
+	"concises",
+	"contracté",
+	"contractée",
+	"contractées",
+	"contractés"
+	],
+"tawny":[
+	"fauve",
+	"fauves"
+	],
+"taxable":[
+	"imposable",
+	"imposables",
+	"taxable",
+	"taxables"
+	],
+"taxonomic":[
+	"taxonomique",
+	"taxonomiques"
+	],
+"tearful":[
+	"larmoyant",
+	"larmoyante",
+	"larmoyantes",
+	"larmoyants"
+	],
+"technical":[
+	"technique",
+	"techniques"
+	],
+"technological":[
+	"technologique",
+	"technologiques"
+	],
+"tectonic":[
+	"tectonique",
+	"tectoniques"
+	],
+"tedious":[
+	"fastidieuse",
+	"fastidieuses",
+	"fastidieux",
+	"laborieuse",
+	"laborieuses",
+	"laborieux"
+	],
+"teetotal":[
+	"abstinent",
+	"abstinente",
+	"abstinentes",
+	"abstinents"
+	],
+"telegraphic":[
+	"télégraphique",
+	"télégraphiques"
+	],
+"telematic":[
+	"télématique",
+	"télématiques"
+	],
+"telepathic":[
+	"télépathique",
+	"télépathiques"
+	],
+"telescopic":[
+	"télescopique",
+	"télescopiques"
+	],
+"telltale":[
+	"révélateur",
+	"révélateurs",
+	"révélatrice",
+	"révélatrices"
+	],
+"telluric":[
+	"tellurique",
+	"telluriques"
+	],
+"temperamental":[
+	"caractériel",
+	"caractérielle",
+	"caractérielles",
+	"caractériels"
+	],
+"tempestuous":[
+	"tempétueuse",
+	"tempétueuses",
+	"tempétueux"
+	],
+"temporal":[
+	"temporaire",
+	"temporaires",
+	"temporel",
+	"temporelle",
+	"temporelles",
+	"temporels"
+	],
+"temporary":[
+	"provisoire",
+	"provisoires",
+	"temporaire",
+	"temporaires"
+	],
+"tempting":[
+	"tentant",
+	"tentante",
+	"tentantes",
+	"tentants"
+	],
+"tenacious":[
+	"tenace",
+	"tenaces"
+	],
+"tendentious":[
+	"tendancieuse",
+	"tendancieuses",
+	"tendancieux"
+	],
+"tender":[
+	"tendre",
+	"tendres",
+	"tendu",
+	"tendue",
+	"tendues",
+	"tendus"
+	],
+"tenfold":[
+	"décuple",
+	"décuples"
+	],
+"tentative":[
+	"provisoire",
+	"provisoires"
+	],
+"tenth":[
+	"dix",
+	"dixième",
+	"dixièmes"
+	],
+"tenuous":[
+	"ténu",
+	"ténue",
+	"ténues",
+	"ténus"
+	],
+"tepid":[
+	"atone",
+	"atones",
+	"avachi",
+	"avachie",
+	"avachies",
+	"avachis",
+	"indifférent",
+	"indifférente",
+	"indifférentes",
+	"indifférents",
+	"mol",
+	"molle",
+	"molles",
+	"mou",
+	"mous",
+	"tiède",
+	"tièdes"
+	],
+"ternary":[
+	"ternaire",
+	"ternaires"
+	],
+"terrestrial":[
+	"terrestre",
+	"terrestres"
+	],
+"terrific":[
+	"fantastique",
+	"fantastiques",
+	"formidable",
+	"formidables"
+	],
+"territorial":[
+	"territorial",
+	"territoriale",
+	"territoriales",
+	"territorials",
+	"territoriaux"
+	],
+"terse":[
+	"laconique",
+	"laconiques",
+	"lapidaire",
+	"lapidaires"
+	],
+"testamentary":[
+	"testamentaire",
+	"testamentaires"
+	],
+"tetchy":[
+	"irascible",
+	"irascibles"
+	],
+"tetrahedral":[
+	"tétraédrique",
+	"tétraédriques"
+	],
+"textual":[
+	"textuel",
+	"textuelle",
+	"textuelles",
+	"textuels"
+	],
+"thai":[
+	"thaïlandais",
+	"thaïlandaise",
+	"thaïlandaises"
+	],
+"thalamic":[
+	"thalamique",
+	"thalamiques"
+	],
+"thankful":[
+	"reconnaissant",
+	"reconnaissante",
+	"reconnaissantes",
+	"reconnaissants"
+	],
+"theatrical":[
+	"théâtral",
+	"théâtrale",
+	"théâtrales",
+	"théâtraux"
+	],
+"thematic":[
+	"thématique",
+	"thématiques"
+	],
+"theocratic":[
+	"théocratique",
+	"théocratiques"
+	],
+"theological":[
+	"théologique",
+	"théologiques"
+	],
+"theoretic":[
+	"théorique",
+	"théoriques"
+	],
+"theoretical":[
+	"théorique",
+	"théoriques"
+	],
+"therapeutic":[
+	"thérapeutique",
+	"thérapeutiques"
+	],
+"thermal":[
+	"thermique",
+	"thermiques"
+	],
+"thermoelectric":[
+	"thermoélectrique",
+	"thermoélectriques"
+	],
+"thermonuclear":[
+	"thermonucléaire",
+	"thermonucléaires"
+	],
+"thick":[
+	"dense",
+	"denses",
+	"gros",
+	"grosse",
+	"grosses",
+	"lourd",
+	"lourde",
+	"lourdes",
+	"lourds",
+	"opaque",
+	"opaques",
+	"épais",
+	"épaisse",
+	"épaisses"
+	],
+"thin":[
+	"liquide",
+	"liquides",
+	"maigre",
+	"maigres",
+	"mince",
+	"minces"
+	],
+"thinkable":[
+	"pensable",
+	"pensables"
+	],
+"third":[
+	"troisième",
+	"troisièmes"
+	],
+"thirteenth":[
+	"treizième",
+	"treizièmes"
+	],
+"thirtieth":[
+	"trentième",
+	"trentièmes"
+	],
+"thoracic":[
+	"thoracique",
+	"thoraciques"
+	],
+"thorny":[
+	"épineuse",
+	"épineuses",
+	"épineux"
+	],
+"thorough":[
+	"exhaustif",
+	"exhaustifs",
+	"exhaustive",
+	"exhaustives",
+	"minutieuse",
+	"minutieuses",
+	"minutieux"
+	],
+"thoughtful":[
+	"attentionné",
+	"attentionnée",
+	"attentionnées",
+	"attentionnés"
+	],
+"thoughtless":[
+	"irréfléchi",
+	"irréfléchie",
+	"irréfléchies",
+	"irréfléchis"
+	],
+"threatening":[
+	"menaçant",
+	"menaçante",
+	"menaçantes",
+	"menaçants"
+	],
+"threefold":[
+	"triple",
+	"triples"
+	],
+"thrifty":[
+	"économe",
+	"économes"
+	],
+"thriving":[
+	"florissant",
+	"florissante",
+	"florissantes",
+	"florissants",
+	"prospère",
+	"prospères"
+	],
+"thunderous":[
+	"tonitruant",
+	"tonitruante",
+	"tonitruantes",
+	"tonitruants"
+	],
+"thunderstriking":[
+	"foudroyant",
+	"foudroyante",
+	"foudroyantes",
+	"foudroyants"
+	],
+"thunderstruck":[
+	"abasourdi",
+	"abasourdie",
+	"abasourdies",
+	"abasourdis"
+	],
+"tibetan":[
+	"tibétain",
+	"tibétaine",
+	"tibétaines",
+	"tibétains"
+	],
+"ticklish":[
+	"chatouilleuse",
+	"chatouilleuses",
+	"chatouilleux"
+	],
+"tight":[
+	"ivre",
+	"ivres"
+	],
+"tigrine":[
+	"tigré",
+	"tigrée",
+	"tigrées",
+	"tigrés"
+	],
+"timeless":[
+	"intemporel",
+	"intemporelle",
+	"intemporelles",
+	"intemporels"
+	],
+"timely":[
+	"opportun",
+	"opportune",
+	"opportunes",
+	"opportuns"
+	],
+"timid":[
+	"craintif",
+	"craintifs",
+	"craintive",
+	"craintives",
+	"timide",
+	"timides"
+	],
+"timorous":[
+	"craintif",
+	"craintifs",
+	"craintive",
+	"craintives"
+	],
+"tiny":[
+	"minuscule",
+	"minuscules"
+	],
+"tipsy":[
+	"gris",
+	"grise",
+	"grises",
+	"éméché",
+	"éméchée",
+	"éméchées",
+	"éméchés"
+	],
+"tired":[
+	"fatigué",
+	"fatiguée",
+	"fatiguées",
+	"fatigués"
+	],
+"tireless":[
+	"inlassable",
+	"inlassables"
+	],
+"tiresome":[
+	"barbant",
+	"barbante",
+	"barbantes",
+	"barbants",
+	"ennuyeuse",
+	"ennuyeuses",
+	"ennuyeux"
+	],
+"tiring":[
+	"fatigant",
+	"fatigante",
+	"fatigantes",
+	"fatigants"
+	],
+"tissular":[
+	"tissulaire",
+	"tissulaires"
+	],
+"titanic":[
+	"titanesque",
+	"titanesques",
+	"titanique",
+	"titaniques"
+	],
+"token":[
+	"symbolique",
+	"symboliques"
+	],
+"tolerable":[
+	"tolérable",
+	"tolérables"
+	],
+"tolerant":[
+	"tolérant",
+	"tolérante",
+	"tolérantes",
+	"tolérants"
+	],
+"toothless":[
+	"édenté",
+	"édentée",
+	"édentées",
+	"édentés"
+	],
+"top":[
+	"sup..",
+	"supérieur",
+	"supérieure",
+	"supérieures",
+	"supérieurs"
+	],
+"topical":[
+	"local",
+	"locale",
+	"locales",
+	"locaux",
+	"topique",
+	"topiques"
+	],
+"topographic":[
+	"topographique",
+	"topographiques"
+	],
+"topological":[
+	"topologique",
+	"topologiques"
+	],
+"torrential":[
+	"diluvien",
+	"diluvienne",
+	"diluviennes",
+	"diluviens",
+	"torrentiel",
+	"torrentielle",
+	"torrentielles",
+	"torrentiels"
+	],
+"torrid":[
+	"torride",
+	"torrides"
+	],
+"total":[
+	"entier",
+	"entiers",
+	"entière",
+	"entières",
+	"total",
+	"totale",
+	"totales",
+	"totaux",
+	"tous",
+	"tout",
+	"toute",
+	"toutes",
+	"ts",
+	"tt",
+	"tte",
+	"ttes"
+	],
+"totalitarian":[
+	"totalitaire",
+	"totalitaires"
+	],
+"touched":[
+	"ému",
+	"émue",
+	"émues",
+	"émus"
+	],
+"touching":[
+	"touchant",
+	"touchante",
+	"touchantes",
+	"touchants"
+	],
+"touchy":[
+	"susceptible",
+	"susceptibles"
+	],
+"tough":[
+	"dur",
+	"dure",
+	"dures",
+	"durs"
+	],
+"touristic":[
+	"touristique",
+	"touristiques"
+	],
+"touristy":[
+	"touristique",
+	"touristiques"
+	],
+"toxic":[
+	"toxique",
+	"toxiques"
+	],
+"tractable":[
+	"conciliant",
+	"conciliante",
+	"conciliantes",
+	"conciliants",
+	"docile",
+	"dociles",
+	"malléable",
+	"malléables"
+	],
+"traditional":[
+	"traditionnel",
+	"traditionnelle",
+	"traditionnelles",
+	"traditionnels"
+	],
+"traditionalistic":[
+	"traditionaliste",
+	"traditionalistes"
+	],
+"tragic":[
+	"tragique",
+	"tragiques"
+	],
+"tranquil":[
+	"tranquille",
+	"tranquilles"
+	],
+"transalpine":[
+	"transalpin",
+	"transalpine",
+	"transalpines",
+	"transalpins"
+	],
+"transatlantic":[
+	"transatlantique",
+	"transatlantiques"
+	],
+"transferable":[
+	"transférable",
+	"transférables"
+	],
+"transfinite":[
+	"transfini",
+	"transfinie",
+	"transfinies",
+	"transfinis"
+	],
+"transfusional":[
+	"transfusionnel",
+	"transfusionnelle",
+	"transfusionnelles",
+	"transfusionnels"
+	],
+"transgenic":[
+	"transgénique",
+	"transgéniques"
+	],
+"transient":[
+	"bref",
+	"brefs",
+	"brève",
+	"brèves",
+	"fugace",
+	"fugaces",
+	"provisoire",
+	"provisoires",
+	"temporaire",
+	"temporaires",
+	"transitoire",
+	"transitoires",
+	"éphémère",
+	"éphémères"
+	],
+"transitional":[
+	"provisoire",
+	"provisoires",
+	"temporaire",
+	"temporaires",
+	"transitoire",
+	"transitoires"
+	],
+"transitive":[
+	"transitif",
+	"transitifs",
+	"transitive",
+	"transitives"
+	],
+"transitory":[
+	"provisoire",
+	"provisoires",
+	"transitoire",
+	"transitoires"
+	],
+"translatable":[
+	"traduisible",
+	"traduisibles"
+	],
+"translucent":[
+	"translucide",
+	"translucides"
+	],
+"transmembrane":[
+	"transmembranaire",
+	"transmembranaires"
+	],
+"transparent":[
+	"transparent",
+	"transparente",
+	"transparentes",
+	"transparents"
+	],
+"transportable":[
+	"transportable",
+	"transportables"
+	],
+"transposable":[
+	"transposable",
+	"transposables"
+	],
+"traumatic":[
+	"traumatique",
+	"traumatiques"
+	],
+"traversable":[
+	"traversable",
+	"traversables"
+	],
+"treacherous":[
+	"traître",
+	"traîtres"
+	],
+"tremendous":[
+	"formidable",
+	"formidables",
+	"énorme",
+	"énormes"
+	],
+"trenchant":[
+	"tranchant",
+	"tranchante",
+	"tranchantes",
+	"tranchants"
+	],
+"trendy":[
+	"branché",
+	"branchée",
+	"branchées",
+	"branchés"
+	],
+"triangular":[
+	"triangulaire",
+	"triangulaires"
+	],
+"tricky":[
+	"complexe",
+	"complexes",
+	"compliqué",
+	"compliquée",
+	"compliquées",
+	"compliqués",
+	"délicat",
+	"délicate",
+	"délicates",
+	"délicats",
+	"maligne",
+	"malignes",
+	"malin",
+	"malins",
+	"retors",
+	"retorse",
+	"retorses",
+	"épineuse",
+	"épineuses",
+	"épineux"
+	],
+"tricolor":[
+	"tricolore",
+	"tricolores"
+	],
+"triennial":[
+	"triennal",
+	"triennale",
+	"triennales",
+	"triennaux"
+	],
+"trifling":[
+	"futile",
+	"futiles"
+	],
+"trigonometric":[
+	"trigonométrique",
+	"trigonométriques"
+	],
+"trilingual":[
+	"trilingue",
+	"trilingues"
+	],
+"trinal":[
+	"tripartite",
+	"tripartites"
+	],
+"triple":[
+	"triple",
+	"triples"
+	],
+"trite":[
+	"banal",
+	"banale",
+	"banales",
+	"banals",
+	"banaux",
+	"trivial",
+	"triviale",
+	"triviales",
+	"triviaux",
+	"éculé",
+	"éculée",
+	"éculées",
+	"éculés"
+	],
+"triumphal":[
+	"triomphal",
+	"triomphale",
+	"triomphales",
+	"triomphaux"
+	],
+"triumphalist":[
+	"triomphaliste",
+	"triomphalistes"
+	],
+"triumphant":[
+	"triomphal",
+	"triomphale",
+	"triomphales",
+	"triomphaux"
+	],
+"trivial":[
+	"anodin",
+	"anodine",
+	"anodines",
+	"anodins",
+	"banal",
+	"banale",
+	"banales",
+	"banals",
+	"banaux",
+	"trivial",
+	"triviale",
+	"triviales",
+	"triviaux"
+	],
+"tropic":[
+	"tropical",
+	"tropicale",
+	"tropicales",
+	"tropicaux"
+	],
+"tropical":[
+	"tropical",
+	"tropicale",
+	"tropicales",
+	"tropicaux"
+	],
+"troublesome":[
+	"gênant",
+	"gênante",
+	"gênantes",
+	"gênants",
+	"troublant",
+	"troublante",
+	"troublantes",
+	"troublants"
+	],
+"truculent":[
+	"agressif",
+	"agressifs",
+	"agressive",
+	"agressives"
+	],
+"true":[
+	"vrai",
+	"vraie",
+	"vraies",
+	"vrais",
+	"véritable",
+	"véritables"
+	],
+"trustworthy":[
+	"fiable",
+	"fiables"
+	],
+"truthful":[
+	"sincère",
+	"sincères"
+	],
+"trying":[
+	"éprouvant",
+	"éprouvante",
+	"éprouvantes",
+	"éprouvants"
+	],
+"tsarist":[
+	"tsariste",
+	"tsaristes"
+	],
+"tubby":[
+	"dodu",
+	"dodue",
+	"dodues",
+	"dodus",
+	"rondelet",
+	"rondelets",
+	"rondelette",
+	"rondelettes"
+	],
+"tumultuous":[
+	"orageuse",
+	"orageuses",
+	"orageux",
+	"tumultueuse",
+	"tumultueuses",
+	"tumultueux"
+	],
+"tunisian":[
+	"tunisien",
+	"tunisienne",
+	"tunisiennes",
+	"tunisiens"
+	],
+"turbid":[
+	"trouble",
+	"troubles"
+	],
+"turkic":[
+	"turc",
+	"turcs",
+	"turque",
+	"turques"
+	],
+"turkish":[
+	"turc",
+	"turcs",
+	"turque",
+	"turques"
+	],
+"turquoise":[
+	"turquoise",
+	"turquoises"
+	],
+"tutelary":[
+	"tutélaire",
+	"tutélaires"
+	],
+"twelfth":[
+	"douzième",
+	"douzièmes"
+	],
+"twofold":[
+	"double",
+	"doubles"
+	],
+"typical":[
+	"représentatif",
+	"représentatifs",
+	"représentative",
+	"représentatives",
+	"typique",
+	"typiques"
+	],
+"typographical":[
+	"typographique",
+	"typographiques"
+	],
+"typological":[
+	"typologique",
+	"typologiques"
+	],
+"tyrannical":[
+	"tyrannique",
+	"tyranniques"
+	],
+"ubiquitous":[
+	"omniprésent",
+	"omniprésente",
+	"omniprésentes",
+	"omniprésents",
+	"ubiquitaire",
+	"ubiquitaires"
+	],
+"ugandan":[
+	"ougandais",
+	"ougandaise",
+	"ougandaises"
+	],
+"ugly":[
+	"laid",
+	"laide",
+	"laides",
+	"laids",
+	"moche",
+	"moches",
+	"vilain",
+	"vilaine",
+	"vilaines",
+	"vilains"
+	],
+"ukrainian":[
+	"ukrainien",
+	"ukrainienne",
+	"ukrainiennes",
+	"ukrainiens"
+	],
+"ultimate":[
+	"dernier",
+	"derniers",
+	"dernière",
+	"dernières",
+	"ultime",
+	"ultimes"
+	],
+"ultraviolet":[
+	"ultraviolet",
+	"ultraviolets",
+	"ultraviolette",
+	"ultraviolettes"
+	],
+"umbilical":[
+	"ombilical",
+	"ombilicale",
+	"ombilicales",
+	"ombilicaux"
+	],
+"umpteenth":[
+	"énième",
+	"énièmes"
+	],
+"umptieth":[
+	"n-ième",
+	"n-ièmes",
+	"énième",
+	"énièmes"
+	],
+"unabashed":[
+	"ouvert",
+	"ouverte",
+	"ouvertes",
+	"ouverts",
+	"éhonté",
+	"éhontée",
+	"éhontées",
+	"éhontés",
+	"évident",
+	"évidente",
+	"évidentes",
+	"évidents"
+	],
+"unable":[
+	"incapable",
+	"incapables"
+	],
+"unacceptable":[
+	"inacceptable",
+	"inacceptables"
+	],
+"unadorned":[
+	"dépouillé",
+	"dépouillée",
+	"dépouillées",
+	"dépouillés",
+	"simple",
+	"simples",
+	"sobre",
+	"sobres"
+	],
+"unaffordable":[
+	"inabordable",
+	"inabordables"
+	],
+"unaltered":[
+	"inaltéré",
+	"inaltérée",
+	"inaltérées",
+	"inaltérés"
+	],
+"unamusing":[
+	"barbant",
+	"barbante",
+	"barbantes",
+	"barbants",
+	"déplaisant",
+	"déplaisante",
+	"déplaisantes",
+	"déplaisants"
+	],
+"unanimous":[
+	"unanime",
+	"unanimes"
+	],
+"unannounced":[
+	"inopiné",
+	"inopinée",
+	"inopinées",
+	"inopinés"
+	],
+"unapologetic":[
+	"impénitent",
+	"impénitente",
+	"impénitentes",
+	"impénitents"
+	],
+"unashamed":[
+	"éhonté",
+	"éhontée",
+	"éhontées",
+	"éhontés"
+	],
+"unassailable":[
+	"inattaquable",
+	"inattaquables",
+	"incontestable",
+	"incontestables",
+	"indéniable",
+	"indéniables",
+	"inexpugnable",
+	"inexpugnables"
+	],
+"unattainable":[
+	"inatteignable",
+	"inatteignables"
+	],
+"unavailable":[
+	"indisponible",
+	"indisponibles"
+	],
+"unavailing":[
+	"futile",
+	"futiles",
+	"infructueuse",
+	"infructueuses",
+	"infructueux",
+	"inutile",
+	"inutiles",
+	"vain",
+	"vaine",
+	"vaines",
+	"vains"
+	],
+"unavoidable":[
+	"inévitable",
+	"inévitables"
+	],
+"unbearable":[
+	"insupportable",
+	"insupportables",
+	"invivable",
+	"invivables"
+	],
+"unbeatable":[
+	"imbattable",
+	"imbattables"
+	],
+"unbelievable":[
+	"incroyable",
+	"incroyables"
+	],
+"unbelieving":[
+	"incrédule",
+	"incrédules"
+	],
+"unbribable":[
+	"incorruptible",
+	"incorruptibles"
+	],
+"unbridled":[
+	"débridé",
+	"débridée",
+	"débridées",
+	"débridés"
+	],
+"unbroken":[
+	"continu",
+	"continue",
+	"continues",
+	"continus",
+	"entier",
+	"entiers",
+	"entière",
+	"entières",
+	"ininterrompu",
+	"ininterrompue",
+	"ininterrompues",
+	"ininterrompus"
+	],
+"unburstable":[
+	"increvable",
+	"increvables"
+	],
+"uncapable":[
+	"incapable",
+	"incapables"
+	],
+"uncertain":[
+	"incertain",
+	"incertaine",
+	"incertaines",
+	"incertains"
+	],
+"unclassifiable":[
+	"inclassable",
+	"inclassables"
+	],
+"unclean":[
+	"impur",
+	"impure",
+	"impures",
+	"impurs"
+	],
+"unclear":[
+	"flou",
+	"floue",
+	"floues",
+	"flous"
+	],
+"uncomfortable":[
+	"inconfortable",
+	"inconfortables"
+	],
+"uncompromising":[
+	"carré",
+	"carrée",
+	"carrées",
+	"carrés",
+	"²"
+	],
+"unconditional":[
+	"inconditionnel",
+	"inconditionnelle",
+	"inconditionnelles",
+	"inconditionnels"
+	],
+"unconscious":[
+	"inconscient",
+	"inconsciente",
+	"inconscientes",
+	"inconscients"
+	],
+"unconstitutional":[
+	"inconstitutionnel",
+	"inconstitutionnelle",
+	"inconstitutionnelles",
+	"inconstitutionnels"
+	],
+"uncontrollable":[
+	"incontrôlable",
+	"incontrôlables"
+	],
+"uncontrolled":[
+	"incontrôlé",
+	"incontrôlée",
+	"incontrôlées",
+	"incontrôlés"
+	],
+"uncountable":[
+	"indénombrable",
+	"indénombrables"
+	],
+"uncreated":[
+	"incréé",
+	"incréée",
+	"incréées",
+	"incréés"
+	],
+"unctuous":[
+	"onctueuse",
+	"onctueuses",
+	"onctueux"
+	],
+"uncurable":[
+	"incurable",
+	"incurables"
+	],
+"undefeated":[
+	"invaincu",
+	"invaincue",
+	"invaincues",
+	"invaincus"
+	],
+"undefined":[
+	"indéfini",
+	"indéfinie",
+	"indéfinies",
+	"indéfinis"
+	],
+"undeniable":[
+	"indéniable",
+	"indéniables"
+	],
+"underage":[
+	"mineur",
+	"mineure",
+	"mineures",
+	"mineurs"
+	],
+"undercover":[
+	"clandestin",
+	"clandestine",
+	"clandestines",
+	"clandestins",
+	"secret",
+	"secrets",
+	"secrète",
+	"secrètes"
+	],
+"underground":[
+	"clandestin",
+	"clandestine",
+	"clandestines",
+	"clandestins",
+	"souterrain",
+	"souterraine",
+	"souterraines",
+	"souterrains"
+	],
+"underhand":[
+	"sournois",
+	"sournoise",
+	"sournoises"
+	],
+"underlying":[
+	"sous-jacent",
+	"sous-jacente",
+	"sous-jacentes",
+	"sous-jacents"
+	],
+"underprivileged":[
+	"défavorisé",
+	"défavorisée",
+	"défavorisées",
+	"défavorisés"
+	],
+"understandable":[
+	"compréhensible",
+	"compréhensibles"
+	],
+"understood":[
+	"compris",
+	"comprise",
+	"comprises"
+	],
+"underwhelming":[
+	"décevant",
+	"décevante",
+	"décevantes",
+	"décevants"
+	],
+"undeserved":[
+	"immérité",
+	"imméritée",
+	"imméritées",
+	"immérités",
+	"injustifié",
+	"injustifiée",
+	"injustifiées",
+	"injustifiés"
+	],
+"undesirable":[
+	"indésirable",
+	"indésirables"
+	],
+"undestroyable":[
+	"indestructible",
+	"indestructibles"
+	],
+"undiluted":[
+	"pur",
+	"pure",
+	"pures",
+	"purs"
+	],
+"undoable":[
+	"infaisable",
+	"infaisables"
+	],
+"undownable":[
+	"inamovible",
+	"inamovibles",
+	"incontournable",
+	"incontournables",
+	"inflexible",
+	"inflexibles",
+	"irrépressible",
+	"irrépressibles",
+	"primordial",
+	"primordiale",
+	"primordiales",
+	"primordiaux"
+	],
+"undrinkable":[
+	"imbuvable",
+	"imbuvables"
+	],
+"uneasy":[
+	"difficile",
+	"difficiles"
+	],
+"uneducated":[
+	"inculte",
+	"incultes"
+	],
+"unemployed":[
+	"inoccupé",
+	"inoccupée",
+	"inoccupées",
+	"inoccupés"
+	],
+"unending":[
+	"infini",
+	"infinie",
+	"infinies",
+	"infinis",
+	"éternel",
+	"éternelle",
+	"éternelles",
+	"éternels"
+	],
+"unerasable":[
+	"ineffaçable",
+	"ineffaçables"
+	],
+"uneven":[
+	"inégal",
+	"inégale",
+	"inégales",
+	"inégaux"
+	],
+"unexpected":[
+	"imprévu",
+	"imprévue",
+	"imprévues",
+	"imprévus",
+	"inattendu",
+	"inattendue",
+	"inattendues",
+	"inattendus",
+	"inopiné",
+	"inopinée",
+	"inopinées",
+	"inopinés"
+	],
+"unexplainable":[
+	"inexplicable",
+	"inexplicables"
+	],
+"unfair":[
+	"déloyal",
+	"déloyale",
+	"déloyales",
+	"déloyaux",
+	"injuste",
+	"injustes"
+	],
+"unfaithful":[
+	"infidèle",
+	"infidèles"
+	],
+"unfamiliar":[
+	"inconnu",
+	"inconnue",
+	"inconnues",
+	"inconnus"
+	],
+"unfathomable":[
+	"incompréhensible",
+	"incompréhensibles",
+	"insondable",
+	"insondables"
+	],
+"unfavourable":[
+	"défavorable",
+	"défavorables"
+	],
+"unfindable":[
+	"introuvable",
+	"introuvables"
+	],
+"unfinished":[
+	"inachevé",
+	"inachevée",
+	"inachevées",
+	"inachevés"
+	],
+"unfit":[
+	"impropre",
+	"impropres",
+	"inapte",
+	"inaptes",
+	"incapable",
+	"incapables"
+	],
+"unflappable":[
+	"imperturbable",
+	"imperturbables"
+	],
+"unforeseeable":[
+	"imprévisible",
+	"imprévisibles"
+	],
+"unforeseen":[
+	"imprévu",
+	"imprévue",
+	"imprévues",
+	"imprévus",
+	"inattendu",
+	"inattendue",
+	"inattendues",
+	"inattendus"
+	],
+"unforgettable":[
+	"inoubliable",
+	"inoubliables"
+	],
+"unforgivable":[
+	"impardonnable",
+	"impardonnables"
+	],
+"unfortunate":[
+	"infortuné",
+	"infortunée",
+	"infortunées",
+	"infortunés",
+	"malencontreuse",
+	"malencontreuses",
+	"malencontreux"
+	],
+"unfounded":[
+	"infondé",
+	"infondée",
+	"infondées",
+	"infondés"
+	],
+"unfriendly":[
+	"inamical",
+	"inamicale",
+	"inamicales",
+	"inamicaux"
+	],
+"unfruitful":[
+	"infructueuse",
+	"infructueuses",
+	"infructueux"
+	],
+"ungainly":[
+	"maladroit",
+	"maladroite",
+	"maladroites",
+	"maladroits"
+	],
+"ungrammatical":[
+	"agrammatical",
+	"agrammaticale",
+	"agrammaticales",
+	"agrammaticaux"
+	],
+"ungrateful":[
+	"ingrat",
+	"ingrate",
+	"ingrates",
+	"ingrats"
+	],
+"unhappy":[
+	"malheureuse",
+	"malheureuses",
+	"malheureux",
+	"mécontent",
+	"mécontente",
+	"mécontentes",
+	"mécontents",
+	"triste",
+	"tristes"
+	],
+"unhealthy":[
+	"malsain",
+	"malsaine",
+	"malsaines",
+	"malsains"
+	],
+"unholy":[
+	"atroce",
+	"atroces",
+	"foutu",
+	"foutue",
+	"foutues",
+	"foutus",
+	"impie",
+	"impies",
+	"maléfique",
+	"maléfiques"
+	],
+"unhurt":[
+	"indemne",
+	"indemnes"
+	],
+"unicameral":[
+	"unicaméral",
+	"unicamérale",
+	"unicamérales",
+	"unicaméraux"
+	],
+"unicolor":[
+	"unicolore",
+	"unicolores"
+	],
+"unidirectional":[
+	"unidirectionnel",
+	"unidirectionnelle",
+	"unidirectionnelles",
+	"unidirectionnels"
+	],
+"uniform":[
+	"uniforme",
+	"uniformes"
+	],
+"unilateral":[
+	"unilatéral",
+	"unilatérale",
+	"unilatérales",
+	"unilatéraux"
+	],
+"unimaginable":[
+	"inimaginable",
+	"inimaginables"
+	],
+"uninhabitable":[
+	"inhabitable",
+	"inhabitables"
+	],
+"uninhabited":[
+	"inhabité",
+	"inhabitée",
+	"inhabitées",
+	"inhabités"
+	],
+"uninjured":[
+	"indemne",
+	"indemnes"
+	],
+"unintelligent":[
+	"inintelligent",
+	"inintelligente",
+	"inintelligentes",
+	"inintelligents"
+	],
+"unintelligible":[
+	"inintelligible",
+	"inintelligibles"
+	],
+"unintended":[
+	"involontaire",
+	"involontaires"
+	],
+"uninteresting":[
+	"inintéressant",
+	"inintéressante",
+	"inintéressantes",
+	"inintéressants"
+	],
+"unipolar":[
+	"unipolaire",
+	"unipolaires"
+	],
+"unique":[
+	"unique",
+	"uniques"
+	],
+"unisex":[
+	"unisexe",
+	"unisexes",
+	"épicène",
+	"épicènes"
+	],
+"unisexual":[
+	"unisexe",
+	"unisexes"
+	],
+"unitary":[
+	"unitaire",
+	"unitaires"
+	],
+"united":[
+	"uni",
+	"unie",
+	"unies",
+	"unis"
+	],
+"universal":[
+	"universel",
+	"universelle",
+	"universelles",
+	"universels"
+	],
+"univocal":[
+	"univoque",
+	"univoques"
+	],
+"unjust":[
+	"injuste",
+	"injustes"
+	],
+"unjustifiable":[
+	"injustifiable",
+	"injustifiables"
+	],
+"unjustified":[
+	"injustifié",
+	"injustifiée",
+	"injustifiées",
+	"injustifiés"
+	],
+"unkempt":[
+	"ébouriffé",
+	"ébouriffée",
+	"ébouriffées",
+	"ébouriffés"
+	],
+"unknown":[
+	"inconnu",
+	"inconnue",
+	"inconnues",
+	"inconnus"
+	],
+"unlawful":[
+	"illégal",
+	"illégale",
+	"illégales",
+	"illégaux"
+	],
+"unleashed":[
+	"déchaîné",
+	"déchaînée",
+	"déchaînées",
+	"déchaînés"
+	],
+"unlikely":[
+	"improbable",
+	"improbables"
+	],
+"unlimited":[
+	"illimité",
+	"illimitée",
+	"illimitées",
+	"illimités"
+	],
+"unlistenable":[
+	"inécoutable",
+	"inécoutables"
+	],
+"unmanageable":[
+	"ingérable",
+	"ingérables"
+	],
+"unmanly":[
+	"efféminé",
+	"efféminée",
+	"efféminées",
+	"efféminés",
+	"lâche",
+	"lâches"
+	],
+"unmarried":[
+	"célibataire",
+	"célibataires"
+	],
+"unmissable":[
+	"imperdable",
+	"imperdables"
+	],
+"unnamed":[
+	"innomé",
+	"innomée",
+	"innomées",
+	"innomés"
+	],
+"unnatural":[
+	"artificiel",
+	"artificielle",
+	"artificielles",
+	"artificiels"
+	],
+"unnecessary":[
+	"inutile",
+	"inutiles"
+	],
+"unnoticed":[
+	"inaperçu",
+	"inaperçue",
+	"inaperçues",
+	"inaperçus"
+	],
+"unobserved":[
+	"inobservé",
+	"inobservée",
+	"inobservées",
+	"inobservés"
+	],
+"unobtainable":[
+	"introuvable",
+	"introuvables"
+	],
+"unoccupied":[
+	"inhabité",
+	"inhabitée",
+	"inhabitées",
+	"inhabités",
+	"inoccupé",
+	"inoccupée",
+	"inoccupées",
+	"inoccupés",
+	"libre",
+	"libres",
+	"vide",
+	"vides"
+	],
+"unofficial":[
+	"officieuse",
+	"officieuses",
+	"officieux"
+	],
+"unpaid":[
+	"impayé",
+	"impayée",
+	"impayées",
+	"impayés"
+	],
+"unpalatable":[
+	"désagréable",
+	"désagréables"
+	],
+"unpardonable":[
+	"impardonnable",
+	"impardonnables"
+	],
+"unpleasant":[
+	"déplaisant",
+	"déplaisante",
+	"déplaisantes",
+	"déplaisants",
+	"pénible",
+	"pénibles"
+	],
+"unpoppable":[
+	"increvable",
+	"increvables"
+	],
+"unpopular":[
+	"impopulaire",
+	"impopulaires"
+	],
+"unpredictable":[
+	"imprévisible",
+	"imprévisibles"
+	],
+"unprepossessing":[
+	"banal",
+	"banale",
+	"banales",
+	"banals",
+	"banaux",
+	"monotone",
+	"monotones",
+	"médiocre",
+	"médiocres",
+	"ordinaire",
+	"ordinaires"
+	],
+"unproductive":[
+	"improductif",
+	"improductifs",
+	"improductive",
+	"improductives"
+	],
+"unpronounceable":[
+	"imprononçable",
+	"imprononçables"
+	],
+"unpublished":[
+	"inédit",
+	"inédite",
+	"inédites",
+	"inédits"
+	],
+"unqualified":[
+	"formidable",
+	"formidables",
+	"inconditionnel",
+	"inconditionnelle",
+	"inconditionnelles",
+	"inconditionnels"
+	],
+"unquestionable":[
+	"indiscutable",
+	"indiscutables"
+	],
+"unreadable":[
+	"illisible",
+	"illisibles"
+	],
+"unreal":[
+	"irréel",
+	"irréelle",
+	"irréelles",
+	"irréels"
+	],
+"unrealistic":[
+	"irréaliste",
+	"irréalistes"
+	],
+"unrealizable":[
+	"irréalisable",
+	"irréalisables"
+	],
+"unreasonable":[
+	"déraisonnable",
+	"déraisonnables"
+	],
+"unrecognizable":[
+	"méconnaissable",
+	"méconnaissables"
+	],
+"unrelenting":[
+	"impitoyable",
+	"impitoyables",
+	"implacable",
+	"implacables"
+	],
+"unremarkable":[
+	"banal",
+	"banale",
+	"banales",
+	"banals",
+	"banaux",
+	"commun",
+	"commune",
+	"communes",
+	"communs",
+	"ordinaire",
+	"ordinaires"
+	],
+"unremitting":[
+	"inlassable",
+	"inlassables"
+	],
+"unruly":[
+	"désobéissant",
+	"désobéissante",
+	"désobéissantes",
+	"désobéissants",
+	"incontrôlable",
+	"incontrôlables",
+	"indiscipliné",
+	"indisciplinée",
+	"indisciplinées",
+	"indisciplinés"
+	],
+"unsatisfactory":[
+	"insatisfaisant",
+	"insatisfaisante",
+	"insatisfaisantes",
+	"insatisfaisants"
+	],
+"unsatisfying":[
+	"insatisfaisant",
+	"insatisfaisante",
+	"insatisfaisantes",
+	"insatisfaisants"
+	],
+"unscathed":[
+	"indemne",
+	"indemnes"
+	],
+"unseemly":[
+	"malséant",
+	"malséante",
+	"malséantes",
+	"malséants"
+	],
+"unselfish":[
+	"généreuse",
+	"généreuses",
+	"généreux"
+	],
+"unsettling":[
+	"dérangeant",
+	"dérangeante",
+	"dérangeantes",
+	"dérangeants",
+	"inquiétant",
+	"inquiétante",
+	"inquiétantes",
+	"inquiétants"
+	],
+"unshakable":[
+	"inébranlable",
+	"inébranlables"
+	],
+"unsheltered":[
+	"inabrité",
+	"inabritée",
+	"inabritées",
+	"inabrités"
+	],
+"unsightly":[
+	"disgracieuse",
+	"disgracieuses",
+	"disgracieux",
+	"inesthétique",
+	"inesthétiques"
+	],
+"unsingable":[
+	"inchantable",
+	"inchantables"
+	],
+"unsinkable":[
+	"insubmersible",
+	"insubmersibles"
+	],
+"unsolicited":[
+	"spontané",
+	"spontanée",
+	"spontanées",
+	"spontanés",
+	"volontaire",
+	"volontaires"
+	],
+"unspeakable":[
+	"indicible",
+	"indicibles",
+	"innommable",
+	"innommables"
+	],
+"unstable":[
+	"instable",
+	"instables"
+	],
+"unsteady":[
+	"branlant",
+	"branlante",
+	"branlantes",
+	"branlants",
+	"fébrile",
+	"fébriles",
+	"instable",
+	"instables"
+	],
+"unstoppable":[
+	"imparable",
+	"imparables",
+	"incoercible",
+	"incoercibles"
+	],
+"unstressed":[
+	"atone",
+	"atones",
+	"inaccentué",
+	"inaccentuée",
+	"inaccentuées",
+	"inaccentués"
+	],
+"unsuccessful":[
+	"infructueuse",
+	"infructueuses",
+	"infructueux"
+	],
+"unsure":[
+	"incertain",
+	"incertaine",
+	"incertaines",
+	"incertains"
+	],
+"unsustainable":[
+	"insoutenable",
+	"insoutenables"
+	],
+"unswerving":[
+	"indéfectible",
+	"indéfectibles",
+	"inébranlable",
+	"inébranlables"
+	],
+"unsympathetic":[
+	"antipathique",
+	"antipathiques"
+	],
+"untameable":[
+	"indomptable",
+	"indomptables"
+	],
+"untapped":[
+	"inexploité",
+	"inexploitée",
+	"inexploitées",
+	"inexploités"
+	],
+"untenable":[
+	"insoutenable",
+	"insoutenables",
+	"intenable",
+	"intenables"
+	],
+"unthinkable":[
+	"impensable",
+	"impensables",
+	"inconcevable",
+	"inconcevables",
+	"incroyable",
+	"incroyables",
+	"inimaginable",
+	"inimaginables"
+	],
+"untidy":[
+	"bordélique",
+	"bordéliques",
+	"débraillé",
+	"débraillée",
+	"débraillées",
+	"débraillés",
+	"désordonné",
+	"désordonnée",
+	"désordonnées",
+	"désordonnés"
+	],
+"untimely":[
+	"intempestif",
+	"intempestifs",
+	"intempestive",
+	"intempestives",
+	"vert",
+	"verte",
+	"vertes",
+	"verts"
+	],
+"untouchable":[
+	"intouchable",
+	"intouchables"
+	],
+"untoward":[
+	"défavorable",
+	"défavorables",
+	"désavantageuse",
+	"désavantageuses",
+	"désavantageux",
+	"nocif",
+	"nocifs",
+	"nocive",
+	"nocives"
+	],
+"untranslatable":[
+	"intraduisible",
+	"intraduisibles"
+	],
+"untruthful":[
+	"malhonnête",
+	"malhonnêtes"
+	],
+"unused":[
+	"inaccoutumé",
+	"inaccoutumée",
+	"inaccoutumées",
+	"inaccoutumés",
+	"inutilisé",
+	"inutilisée",
+	"inutilisées",
+	"inutilisés"
+	],
+"unuseful":[
+	"inutile",
+	"inutiles"
+	],
+"unusual":[
+	"inhabituel",
+	"inhabituelle",
+	"inhabituelles",
+	"inhabituels",
+	"insolite",
+	"insolites",
+	"inusuel",
+	"inusuelle",
+	"inusuelles",
+	"inusuels"
+	],
+"unvariable":[
+	"invariable",
+	"invariables"
+	],
+"unverifiable":[
+	"invérifiable",
+	"invérifiables"
+	],
+"unvisible":[
+	"invisible",
+	"invisibles"
+	],
+"unwavering":[
+	"constant",
+	"constante",
+	"constantes",
+	"constants",
+	"inébranlable",
+	"inébranlables"
+	],
+"unwearied":[
+	"persistent",
+	"persistente",
+	"persistentes",
+	"persistents"
+	],
+"unwelcome":[
+	"malvenu",
+	"malvenue",
+	"malvenues",
+	"malvenus"
+	],
+"unwieldy":[
+	"encombrant",
+	"encombrante",
+	"encombrantes",
+	"encombrants",
+	"lourd",
+	"lourde",
+	"lourdes",
+	"lourds"
+	],
+"unwilling":[
+	"réticent",
+	"réticente",
+	"réticentes",
+	"réticents"
+	],
+"unwitting":[
+	"inconscient",
+	"inconsciente",
+	"inconscientes",
+	"inconscients",
+	"involontaire",
+	"involontaires"
+	],
+"unworthy":[
+	"indigne",
+	"indignes"
+	],
+"unyielding":[
+	"inflexible",
+	"inflexibles"
+	],
+"up":[
+	"debout",
+	"partant",
+	"partante",
+	"partantes",
+	"partants"
+	],
+"upbeat":[
+	"entraînant",
+	"entraînante",
+	"entraînantes",
+	"entraînants",
+	"optimiste",
+	"optimistes"
+	],
+"upcoming":[
+	"prochain",
+	"prochaine",
+	"prochaines",
+	"prochains"
+	],
+"upper":[
+	"sup..",
+	"supérieur",
+	"supérieure",
+	"supérieures",
+	"supérieurs"
+	],
+"uppercase":[
+	"majuscule",
+	"majuscules"
+	],
+"uppity":[
+	"arrogant",
+	"arrogante",
+	"arrogantes",
+	"arrogants",
+	"impertinent",
+	"impertinente",
+	"impertinentes",
+	"impertinents"
+	],
+"upright":[
+	"intègre",
+	"intègres"
+	],
+"uproarious":[
+	"tumultueuse",
+	"tumultueuses",
+	"tumultueux"
+	],
+"upset":[
+	"dérangé",
+	"dérangée",
+	"dérangées",
+	"dérangés"
+	],
+"upstream":[
+	"montant",
+	"montante",
+	"montantes",
+	"montants"
+	],
+"urban":[
+	"urbain",
+	"urbaine",
+	"urbaines",
+	"urbains"
+	],
+"urbane":[
+	"urbain",
+	"urbaine",
+	"urbaines",
+	"urbains"
+	],
+"ureic":[
+	"urique",
+	"uriques"
+	],
+"urgent":[
+	"urgent",
+	"urgente",
+	"urgentes",
+	"urgents"
+	],
+"uric":[
+	"urique",
+	"uriques"
+	],
+"urinary":[
+	"urinaire",
+	"urinaires"
+	],
+"usable":[
+	"utilisable",
+	"utilisables"
+	],
+"useful":[
+	"utile",
+	"utiles"
+	],
+"useless":[
+	"inutile",
+	"inutiles",
+	"inutilisable",
+	"inutilisables"
+	],
+"usonian":[
+	"étasunien",
+	"étasunienne",
+	"étasuniennes",
+	"étasuniens"
+	],
+"usurious":[
+	"usuraire",
+	"usuraires"
+	],
+"uterine":[
+	"utérin",
+	"utérine",
+	"utérines",
+	"utérins"
+	],
+"utilitarian":[
+	"fonctionnel",
+	"fonctionnelle",
+	"fonctionnelles",
+	"fonctionnels",
+	"utilitaire",
+	"utilitaires"
+	],
+"utility":[
+	"utilitaire",
+	"utilitaires"
+	],
+"utilizable":[
+	"utilisable",
+	"utilisables"
+	],
+"utmost":[
+	"extrême",
+	"extrêmes",
+	"suprême",
+	"suprêmes"
+	],
+"utter":[
+	"absolu",
+	"absolue",
+	"absolues",
+	"absolus",
+	"total",
+	"totale",
+	"totales",
+	"totaux"
+	],
+"uzbek":[
+	"ouzbek",
+	"ouzbeks",
+	"ouzbèke",
+	"ouzbèkes"
+	],
+"vacant":[
+	"niais",
+	"niaise",
+	"niaises",
+	"vide",
+	"vides"
+	],
+"vacuous":[
+	"niais",
+	"niaise",
+	"niaises"
+	],
+"vaginal":[
+	"vaginal",
+	"vaginale",
+	"vaginales",
+	"vaginaux"
+	],
+"vague":[
+	"vague",
+	"vagues"
+	],
+"vain":[
+	"frivole",
+	"frivoles",
+	"futile",
+	"futiles",
+	"vain",
+	"vaine",
+	"vaines",
+	"vains",
+	"vaniteuse",
+	"vaniteuses",
+	"vaniteux"
+	],
+"vainglorious":[
+	"fanfaron",
+	"fanfaronne",
+	"fanfaronnes",
+	"fanfarons",
+	"orgueilleuse",
+	"orgueilleuses",
+	"orgueilleux",
+	"vaniteuse",
+	"vaniteuses",
+	"vaniteux"
+	],
+"valiant":[
+	"vaillant",
+	"vaillante",
+	"vaillantes",
+	"vaillants"
+	],
+"valid":[
+	"valide",
+	"valides"
+	],
+"valuable":[
+	"précieuse",
+	"précieuses",
+	"précieux"
+	],
+"vapid":[
+	"amorphe",
+	"amorphes",
+	"bête",
+	"bêtes",
+	"cucul",
+	"fadasse",
+	"fadasses",
+	"fade",
+	"fades",
+	"gourde",
+	"gourdes",
+	"inintéressant",
+	"inintéressante",
+	"inintéressantes",
+	"inintéressants",
+	"insignifiant",
+	"insignifiante",
+	"insignifiantes",
+	"insignifiants",
+	"insipide",
+	"insipides",
+	"mièvre",
+	"mièvres",
+	"niais",
+	"niaise",
+	"niaises",
+	"plat",
+	"plate",
+	"plates",
+	"plats",
+	"terne",
+	"ternes"
+	],
+"variable":[
+	"variable",
+	"variables"
+	],
+"variant":[
+	"variable",
+	"variables"
+	],
+"varicose":[
+	"variqueuse",
+	"variqueuses",
+	"variqueux"
+	],
+"variegated":[
+	"bigarré",
+	"bigarrée",
+	"bigarrées",
+	"bigarrés",
+	"multicolore",
+	"multicolores"
+	],
+"various":[
+	"divers",
+	"diverse",
+	"diverses"
+	],
+"vascular":[
+	"vasculaire",
+	"vasculaires"
+	],
+"vast":[
+	"immense",
+	"immenses",
+	"vaste",
+	"vastes"
+	],
+"vectorial":[
+	"vectoriel",
+	"vectorielle",
+	"vectorielles",
+	"vectoriels"
+	],
+"vegetable":[
+	"végétal",
+	"végétale",
+	"végétales",
+	"végétaux"
+	],
+"vegetal":[
+	"végétal",
+	"végétale",
+	"végétales",
+	"végétaux"
+	],
+"vehement":[
+	"véhément",
+	"véhémente",
+	"véhémentes",
+	"véhéments"
+	],
+"vehicular":[
+	"véhiculaire",
+	"véhiculaires"
+	],
+"venal":[
+	"vénal",
+	"vénale",
+	"vénales",
+	"vénaux"
+	],
+"vendean":[
+	"vendéen",
+	"vendéenne",
+	"vendéennes",
+	"vendéens"
+	],
+"venetian":[
+	"vénitien",
+	"vénitienne",
+	"vénitiennes",
+	"vénitiens"
+	],
+"venezuelan":[
+	"vénézuélien",
+	"vénézuélienne",
+	"vénézuéliennes",
+	"vénézuéliens"
+	],
+"vengeful":[
+	"vindicatif",
+	"vindicatifs",
+	"vindicative",
+	"vindicatives"
+	],
+"venial":[
+	"véniel",
+	"vénielle",
+	"vénielles",
+	"véniels"
+	],
+"venomous":[
+	"malveillant",
+	"malveillante",
+	"malveillantes",
+	"malveillants",
+	"venimeuse",
+	"venimeuses",
+	"venimeux",
+	"vénéneuse",
+	"vénéneuses",
+	"vénéneux"
+	],
+"venous":[
+	"veineuse",
+	"veineuses",
+	"veineux"
+	],
+"ventral":[
+	"ventral",
+	"ventrale",
+	"ventrales",
+	"ventraux"
+	],
+"ventricular":[
+	"ventriculaire",
+	"ventriculaires"
+	],
+"venusian":[
+	"vénusien",
+	"vénusienne",
+	"vénusiennes",
+	"vénusiens"
+	],
+"verbal":[
+	"oral",
+	"orale",
+	"orales",
+	"oraux",
+	"verbal",
+	"verbale",
+	"verbales",
+	"verbaux"
+	],
+"verbose":[
+	"verbeuse",
+	"verbeuses",
+	"verbeux"
+	],
+"verdant":[
+	"verdoyant",
+	"verdoyante",
+	"verdoyantes",
+	"verdoyants",
+	"vert",
+	"verte",
+	"vertes",
+	"verts"
+	],
+"verifiable":[
+	"vérifiable",
+	"vérifiables"
+	],
+"vermicular":[
+	"vermiculé",
+	"vermiculée",
+	"vermiculées",
+	"vermiculés"
+	],
+"vermiculate":[
+	"vermiculé",
+	"vermiculée",
+	"vermiculées",
+	"vermiculés"
+	],
+"vermiculated":[
+	"vermiculé",
+	"vermiculée",
+	"vermiculées",
+	"vermiculés"
+	],
+"vermilion":[
+	"vermeil",
+	"vermeille",
+	"vermeilles",
+	"vermeils"
+	],
+"versatile":[
+	"polyvalent",
+	"polyvalente",
+	"polyvalentes",
+	"polyvalents",
+	"versatile",
+	"versatiles"
+	],
+"vertebral":[
+	"vertébral",
+	"vertébrale",
+	"vertébrales",
+	"vertébraux"
+	],
+"vertical":[
+	"vertical",
+	"verticale",
+	"verticales",
+	"verticaux"
+	],
+"vertiginous":[
+	"vertigineuse",
+	"vertigineuses",
+	"vertigineux"
+	],
+"very":[
+	"même",
+	"mêmes"
+	],
+"vesicular":[
+	"vésiculaire",
+	"vésiculaires"
+	],
+"vestibular":[
+	"vestibulaire",
+	"vestibulaires"
+	],
+"viable":[
+	"viable",
+	"viables"
+	],
+"vibratory":[
+	"vibratoire",
+	"vibratoires"
+	],
+"vicarious":[
+	"indirect",
+	"indirecte",
+	"indirectes",
+	"indirects"
+	],
+"vicinal":[
+	"vicinal",
+	"vicinale",
+	"vicinales",
+	"vicinaux"
+	],
+"vicious":[
+	"vicieuse",
+	"vicieuses",
+	"vicieux"
+	],
+"victorian":[
+	"victorien",
+	"victorienne",
+	"victoriennes",
+	"victoriens"
+	],
+"victorious":[
+	"victorieuse",
+	"victorieuses",
+	"victorieux"
+	],
+"vietnamese":[
+	"vietnamien",
+	"vietnamienne",
+	"vietnamiennes",
+	"vietnamiens"
+	],
+"vigilant":[
+	"vigilant",
+	"vigilante",
+	"vigilantes",
+	"vigilants"
+	],
+"vile":[
+	"vil",
+	"vile",
+	"viles",
+	"vils"
+	],
+"vindictive":[
+	"vindicatif",
+	"vindicatifs",
+	"vindicative",
+	"vindicatives"
+	],
+"vinous":[
+	"vineuse",
+	"vineuses",
+	"vineux"
+	],
+"violent":[
+	"vif",
+	"vifs",
+	"violent",
+	"violente",
+	"violentes",
+	"violents",
+	"vive",
+	"vives"
+	],
+"violet":[
+	"violet",
+	"violets",
+	"violette",
+	"violettes"
+	],
+"virgin":[
+	"vierge",
+	"vierges"
+	],
+"virginal":[
+	"virginal",
+	"virginale",
+	"virginales",
+	"virginaux"
+	],
+"virile":[
+	"viril",
+	"virile",
+	"viriles",
+	"virils"
+	],
+"virtual":[
+	"virtuel",
+	"virtuelle",
+	"virtuelles",
+	"virtuels"
+	],
+"virtuous":[
+	"vertueuse",
+	"vertueuses",
+	"vertueux"
+	],
+"virulent":[
+	"virulent",
+	"virulente",
+	"virulentes",
+	"virulents"
+	],
+"viscous":[
+	"visqueuse",
+	"visqueuses",
+	"visqueux"
+	],
+"visible":[
+	"visible",
+	"visibles"
+	],
+"visigothic":[
+	"wisigoth",
+	"wisigothe",
+	"wisigothes",
+	"wisigothique",
+	"wisigothiques",
+	"wisigoths"
+	],
+"visionary":[
+	"idéaliste",
+	"idéalistes",
+	"illusoire",
+	"illusoires",
+	"imaginaire",
+	"imaginaires",
+	"prophétique",
+	"prophétiques",
+	"utopique",
+	"utopiques"
+	],
+"visual":[
+	"visuel",
+	"visuelle",
+	"visuelles",
+	"visuels"
+	],
+"vital":[
+	"vital",
+	"vitale",
+	"vitales",
+	"vitaux"
+	],
+"viticultural":[
+	"vinicole",
+	"vinicoles",
+	"viticole",
+	"viticoles"
+	],
+"vitreous":[
+	"vitreuse",
+	"vitreuses",
+	"vitreux"
+	],
+"vivacious":[
+	"vivace",
+	"vivaces"
+	],
+"vocal":[
+	"vocal",
+	"vocale",
+	"vocales",
+	"vocaux"
+	],
+"voiced":[
+	"sonore",
+	"sonores"
+	],
+"voiceless":[
+	"aphone",
+	"aphones",
+	"sourd",
+	"sourde",
+	"sourdes",
+	"sourds"
+	],
+"void":[
+	"dépourvu",
+	"dépourvue",
+	"dépourvues",
+	"dépourvus",
+	"invalide",
+	"invalides",
+	"libre",
+	"libres",
+	"nul",
+	"nulle",
+	"nulles",
+	"nuls",
+	"vacant",
+	"vacante",
+	"vacantes",
+	"vacants",
+	"vain",
+	"vaine",
+	"vaines",
+	"vains",
+	"vide",
+	"vides"
+	],
+"volatile":[
+	"volatil",
+	"volatile",
+	"volatiles",
+	"volatils"
+	],
+"volcanic":[
+	"volcanique",
+	"volcaniques"
+	],
+"voluble":[
+	"volubile",
+	"volubiles"
+	],
+"voluntary":[
+	"bénévole",
+	"bénévoles",
+	"volontaire",
+	"volontaires"
+	],
+"voluptuous":[
+	"sensuel",
+	"sensuelle",
+	"sensuelles",
+	"sensuels"
+	],
+"vomitrocious":[
+	"dégueulasse",
+	"dégueulasses"
+	],
+"voracious":[
+	"vorace",
+	"voraces"
+	],
+"vortical":[
+	"tourbillonnant",
+	"tourbillonnante",
+	"tourbillonnantes",
+	"tourbillonnants"
+	],
+"vulgar":[
+	"obscène",
+	"obscènes",
+	"vulgaire",
+	"vulgaires"
+	],
+"vulnerable":[
+	"vulnérable",
+	"vulnérables"
+	],
+"wakeful":[
+	"éveillé",
+	"éveillée",
+	"éveillées",
+	"éveillés"
+	],
+"walleyed":[
+	"vairon",
+	"vairone",
+	"vairones",
+	"vairons"
+	],
+"walloon":[
+	"wallon",
+	"wallonne",
+	"wallonnes",
+	"wallons"
+	],
+"wan":[
+	"blafard",
+	"blafarde",
+	"blafardes",
+	"blafards",
+	"blême",
+	"blêmes",
+	"indifférent",
+	"indifférente",
+	"indifférentes",
+	"indifférents",
+	"pâlot",
+	"pâlote",
+	"pâlotes",
+	"pâlots"
+	],
+"waning":[
+	"décroissant",
+	"décroissante",
+	"décroissantes",
+	"décroissants"
+	],
+"wanton":[
+	"dévergondé",
+	"dévergondée",
+	"dévergondées",
+	"dévergondés",
+	"gratuit",
+	"gratuite",
+	"gratuites",
+	"gratuits",
+	"indiscipliné",
+	"indisciplinée",
+	"indisciplinées",
+	"indisciplinés",
+	"lascif",
+	"lascifs",
+	"lascive",
+	"lascives",
+	"licencieuse",
+	"licencieuses",
+	"licencieux",
+	"lubrique",
+	"lubriques"
+	],
+"warlike":[
+	"belliqueuse",
+	"belliqueuses",
+	"belliqueux"
+	],
+"warm":[
+	"chaleureuse",
+	"chaleureuses",
+	"chaleureux",
+	"chaud",
+	"chaude",
+	"chaudes",
+	"chauds",
+	"cordial",
+	"cordiale",
+	"cordiales",
+	"cordiaux",
+	"enflammé",
+	"enflammée",
+	"enflammées",
+	"enflammés"
+	],
+"wary":[
+	"circonspect",
+	"circonspecte",
+	"circonspectes",
+	"circonspects",
+	"méfiant",
+	"méfiants"
+	],
+"washable":[
+	"lavable",
+	"lavables"
+	],
+"waspish":[
+	"grincheuse",
+	"grincheuses",
+	"grincheux"
+	],
+"wasteful":[
+	"dilapidateur",
+	"dilapidateurs",
+	"dilapidatrice",
+	"dilapidatrices",
+	"dépensier",
+	"dépensiers",
+	"dépensière",
+	"dépensières",
+	"gaspilleur",
+	"gaspilleurs",
+	"gaspilleuse",
+	"gaspilleuses"
+	],
+"watchful":[
+	"attentif",
+	"attentifs",
+	"attentive",
+	"attentives",
+	"vigilant",
+	"vigilante",
+	"vigilantes",
+	"vigilants"
+	],
+"waterproof":[
+	"imperméable",
+	"imperméables",
+	"étanche",
+	"étanches"
+	],
+"watertight":[
+	"étanche",
+	"étanches"
+	],
+"watery":[
+	"aqueuse",
+	"aqueuses",
+	"aqueux"
+	],
+"wavelike":[
+	"ondulatoire",
+	"ondulatoires"
+	],
+"wavy":[
+	"ondulant",
+	"ondulante",
+	"ondulantes",
+	"ondulants"
+	],
+"waxy":[
+	"cireuse",
+	"cireuses",
+	"cireux"
+	],
+"weak":[
+	"faible",
+	"faibles"
+	],
+"wealthy":[
+	"nanti",
+	"nantie",
+	"nanties",
+	"nantis",
+	"riche",
+	"riches"
+	],
+"wearable":[
+	"mettable",
+	"mettables"
+	],
+"weary":[
+	"las",
+	"lasse",
+	"lasses"
+	],
+"wee":[
+	"ch'ti",
+	"p'tit",
+	"p'tit'",
+	"p'tite",
+	"p'tites",
+	"p'tits",
+	"petit",
+	"petite",
+	"petites",
+	"petits",
+	"ptit",
+	"ptite",
+	"ptites",
+	"ptits"
+	],
+"weedy":[
+	"chétif",
+	"chétifs",
+	"chétive",
+	"chétives"
+	],
+"weekly":[
+	"hebdomadaire",
+	"hebdomadaires"
+	],
+"weighty":[
+	"important",
+	"importante",
+	"importantes",
+	"importants"
+	],
+"weird":[
+	"bizarre",
+	"bizarres",
+	"étrange",
+	"étranges"
+	],
+"welcome":[
+	"bienvenu",
+	"bienvenue",
+	"bienvenues",
+	"bienvenus"
+	],
+"welcoming":[
+	"accueillant",
+	"accueillante",
+	"accueillantes",
+	"accueillants"
+	],
+"well":[
+	"bien"
+	],
+"welsh":[
+	"gallois",
+	"galloise",
+	"galloises"
+	],
+"west":[
+	"occidental",
+	"occidentale",
+	"occidentales",
+	"occidentaux"
+	],
+"western":[
+	"occidental",
+	"occidentale",
+	"occidentales",
+	"occidentaux"
+	],
+"wheezy":[
+	"asthmatique",
+	"asthmatiques"
+	],
+"whimsical":[
+	"amusant",
+	"amusante",
+	"amusantes",
+	"amusants",
+	"capricieuse",
+	"capricieuses",
+	"capricieux",
+	"drôle",
+	"drôles",
+	"étrange",
+	"étranges"
+	],
+"white":[
+	"blanc",
+	"blanche",
+	"blanches",
+	"blancs"
+	],
+"whole":[
+	"entier",
+	"entiers",
+	"entière",
+	"entières",
+	"tous",
+	"tout",
+	"toute",
+	"toutes",
+	"ts",
+	"tt",
+	"tte",
+	"ttes"
+	],
+"wholehearted":[
+	"épanoui",
+	"épanouie",
+	"épanouies",
+	"épanouis"
+	],
+"wholesome":[
+	"sain",
+	"saine",
+	"saines",
+	"sains"
+	],
+"whopping":[
+	"considérable",
+	"considérables",
+	"gigantesque",
+	"gigantesques",
+	"immense",
+	"immenses",
+	"incommensurable",
+	"incommensurables",
+	"énorme",
+	"énormes"
+	],
+"wicked":[
+	"génial",
+	"géniale",
+	"géniales",
+	"géniaux",
+	"mortel",
+	"mortelle",
+	"mortelles",
+	"mortels",
+	"méchant",
+	"méchante",
+	"méchantes",
+	"méchants",
+	"super"
+	],
+"wide":[
+	"large",
+	"larges"
+	],
+"wild":[
+	"déchaîné",
+	"déchaînée",
+	"déchaînées",
+	"déchaînés",
+	"sauvage",
+	"sauvages"
+	],
+"willing":[
+	"volontaire",
+	"volontaires"
+	],
+"willowy":[
+	"fin",
+	"fine",
+	"fines",
+	"fins",
+	"gracile",
+	"graciles",
+	"mince",
+	"minces",
+	"svelte",
+	"sveltes"
+	],
+"wily":[
+	"fourbe",
+	"fourbes",
+	"perfide",
+	"perfides"
+	],
+"winding":[
+	"sinueuse",
+	"sinueuses",
+	"sinueux",
+	"tortueuse",
+	"tortueuses",
+	"tortueux"
+	],
+"windowed":[
+	"fenêtré",
+	"fenêtrée",
+	"fenêtrées",
+	"fenêtrés"
+	],
+"windy":[
+	"vain",
+	"vaine",
+	"vaines",
+	"vains",
+	"venteuse",
+	"venteuses",
+	"venteux"
+	],
+"winged":[
+	"ailé",
+	"ailée",
+	"ailées",
+	"ailés"
+	],
+"wintry":[
+	"hibernal",
+	"hibernale",
+	"hibernales",
+	"hibernaux",
+	"hivernal",
+	"hivernale",
+	"hivernales",
+	"hivernaux"
+	],
+"wired":[
+	"branché",
+	"branchée",
+	"branchées",
+	"branchés"
+	],
+"wise":[
+	"sage",
+	"sages"
+	],
+"wistful":[
+	"nostalgique",
+	"nostalgiques"
+	],
+"withered":[
+	"flétri",
+	"flétrie",
+	"flétries",
+	"flétris"
+	],
+"witless":[
+	"stupide",
+	"stupides"
+	],
+"witty":[
+	"fin",
+	"fine",
+	"fines",
+	"fins"
+	],
+"wobbly":[
+	"chancelant",
+	"chancelante",
+	"chancelantes",
+	"chancelants",
+	"vacillant",
+	"vacillante",
+	"vacillantes",
+	"vacillants"
+	],
+"womanly":[
+	"féminin",
+	"féminine",
+	"féminines",
+	"féminins"
+	],
+"wombly":[
+	"utérin",
+	"utérine",
+	"utérines",
+	"utérins"
+	],
+"wonderful":[
+	"merveilleuse",
+	"merveilleuses",
+	"merveilleux"
+	],
+"wondrous":[
+	"merveilleuse",
+	"merveilleuses",
+	"merveilleux"
+	],
+"wont":[
+	"habitué",
+	"habituée",
+	"habituées",
+	"habitués"
+	],
+"wonted":[
+	"habitué",
+	"habituée",
+	"habituées",
+	"habitués"
+	],
+"wooden":[
+	"boisé",
+	"boisée",
+	"boisées",
+	"boisés",
+	"raide",
+	"raides"
+	],
+"woodland":[
+	"sylvestre",
+	"sylvestres"
+	],
+"woolly":[
+	"laineuse",
+	"laineuses",
+	"laineux"
+	],
+"wordy":[
+	"verbeuse",
+	"verbeuses",
+	"verbeux"
+	],
+"worldwide":[
+	"mondial",
+	"mondiale",
+	"mondiales",
+	"mondiaux"
+	],
+"worried":[
+	"inquiet",
+	"inquiets",
+	"inquiète",
+	"inquiètes"
+	],
+"worrisome":[
+	"inquiétant",
+	"inquiétante",
+	"inquiétantes",
+	"inquiétants"
+	],
+"worrying":[
+	"inquiétant",
+	"inquiétante",
+	"inquiétantes",
+	"inquiétants"
+	],
+"worse":[
+	"pire",
+	"pires"
+	],
+"worst":[
+	"mauvais",
+	"mauvaise",
+	"mauvaises"
+	],
+"worsted":[
+	"battu",
+	"battue",
+	"battues",
+	"battus",
+	"déconfit",
+	"déconfite",
+	"déconfites",
+	"déconfits",
+	"défait",
+	"défaite",
+	"défaites",
+	"défaits",
+	"écrasé",
+	"écrasée",
+	"écrasées",
+	"écrasés"
+	],
+"worth":[
+	"méritant",
+	"méritante",
+	"méritantes",
+	"méritants",
+	"équivalent",
+	"équivalente",
+	"équivalentes",
+	"équivalents"
+	],
+"worthless":[
+	"misérable",
+	"misérables",
+	"nul",
+	"nulle",
+	"nulles",
+	"nuls"
+	],
+"worthy":[
+	"admirable",
+	"admirables",
+	"digne",
+	"dignes",
+	"honorable",
+	"honorables"
+	],
+"wounded":[
+	"blessé",
+	"blessée",
+	"blessées",
+	"blessés"
+	],
+"wrapped":[
+	"enveloppé",
+	"enveloppée",
+	"enveloppées",
+	"enveloppés"
+	],
+"wretched":[
+	"misérable",
+	"misérables"
+	],
+"wrong":[
+	"erroné",
+	"erronée",
+	"erronées",
+	"erronés",
+	"fautif",
+	"fautifs",
+	"fautive",
+	"fautives",
+	"immoral",
+	"immorale",
+	"immorales",
+	"immoraux",
+	"impropre",
+	"impropres",
+	"incorrect",
+	"incorrecte",
+	"incorrectes",
+	"incorrects",
+	"mal",
+	"mauvais",
+	"mauvaise",
+	"mauvaises"
+	],
+"wrought":[
+	"forgé",
+	"forgée",
+	"forgées",
+	"forgés"
+	],
+"xenophobic":[
+	"xénophobe",
+	"xénophobes"
+	],
+"yearly":[
+	"annuel",
+	"annuelle",
+	"annuelles",
+	"annuels"
+	],
+"yellow":[
+	"froussard",
+	"froussarde",
+	"froussardes",
+	"froussards",
+	"jaune",
+	"jaunes",
+	"lâche",
+	"lâches"
+	],
+"yielding":[
+	"docile",
+	"dociles"
+	],
+"young":[
+	"jeune",
+	"jeunes"
+	],
+"youthful":[
+	"jeune",
+	"jeunes",
+	"juvénile",
+	"juvéniles"
+	],
+"yugoslavian":[
+	"yougoslave",
+	"yougoslaves"
+	],
+"yummy":[
+	"délicieuse",
+	"délicieuses",
+	"délicieux"
+	],
+"zany":[
+	"louf",
+	"loufoque",
+	"loufoques",
+	"loufs",
+	"louftingue",
+	"louftingues"
+	],
+"zealous":[
+	"zélé",
+	"zélée",
+	"zélées",
+	"zélés"
+	],
+"zionist":[
+	"sioniste",
+	"sionistes"
+	],
+"zionistic":[
+	"sioniste",
+	"sionistes"
+	],
+"zonked":[
+	"crevé",
+	"crevée",
+	"crevées",
+	"crevés"
+	],
+"zoological":[
+	"zoologique",
+	"zoologiques"
+	],
+"zulu":[
+	"zoulou",
+	"zouloue",
+	"zouloues",
+	"zoulous"
+	]
+};
