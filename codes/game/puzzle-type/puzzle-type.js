@@ -105,17 +105,20 @@ var gameModulesEarly=[
 var gameModulesLater=[
 "chords",
 "codons",
-"colours-names",
 "countries",
-"lang-english-french",
-"lang-french-english",
 "lang-gender",
 "lang-kana",
 "morse-braille",
 "nuclei",
 "number-reader",
 "number-roman",
-"audiosynth"
+"colours-names",
+"audiosynth",
+
+"lang-adj",
+"lang-adv-extra",
+"lang-names",
+"lang-verbes"
 ]
 
 LoadSources(gameModulesEarly,P()?GameIntro:Identity);
