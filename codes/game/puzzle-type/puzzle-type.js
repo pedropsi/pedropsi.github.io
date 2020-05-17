@@ -250,10 +250,10 @@ function ObtainKeyActionsGame(){
 		
 		"Spacebar":InstructGameKeyF("space"),
 		"Enter":InstructGameKeyF("Enter"),
-		"Left":InstructNothing,
-		"Up":InstructNothing,
-		"Right":InstructNothing,
-		"Down":InstructNothing
+		"Left":InstructGameKeyF("Left"),
+		"Up":InstructGameKeyF("Up"),
+		"Right":InstructGameKeyF("Right"),
+		"Down":InstructGameKeyF("Down"),
 	};
 
 	keyactions["undo"]=ObtainUndo;			//Onscreen keyboard
@@ -299,8 +299,8 @@ function LevelAction(key){
 		ObtainTitleScreenLoader();
 		return;
 	 }
-	
-	if(key==="Enter"||ForbidNumberActions(key)||ForbidSpaceActions(key)){
+
+	if(ForbidEnterActions(key)||ForbidNumberActions(key)||ForbidSpaceActions(key)||ForbidArrowActions(key)){
 		ForbidCaret();return;
 	}
 
@@ -364,6 +364,7 @@ function ForbidNumberActions(key){
 		"Fuchsia",
 		"Deaf",
 		"Odd",
+		"Finest vernissages",
 		"This is it",
 		"⠍⠕⠗⠎⠑"],CurLevelName())&&In(NumberCharacters,key));
 }
@@ -384,8 +385,23 @@ function ForbidSpaceActions(key){
 		"Finest vernissages",
 		"To cut and paste",
 		"This is it"
-	],CurLevelName())&&In([" "],key));
+	],CurLevelName())&&In([" ","Space","space"],key));
 }
+
+function ForbidEnterActions(key){
+	return (!In([
+		"Finest vernissages",
+	],CurLevelName())&&In(["Enter"],key));
+}
+
+function ForbidArrowActions(key){
+	return (!In([
+		"Wasd",
+		"Finest vernissages",
+	],CurLevelName())&&In(ArrowKeys,key));
+}
+
+var ArrowKeys=["Left","Up","Right","Down"];
 
 function AllowExtraUndoKey(key){
 	return CurLevelName()==="Wasd"&&key==="Z";
@@ -608,20 +624,20 @@ var LevelActions={
 }
 
 function Wasd(W){
-	if(!In("WASD",W)){
+	if(!In("WASD",W)&&!In(ArrowKeys,W)){
 		ForbidCaret();
 		return;
 	}
 
 	var level=Memo();
 	
-	if(W==="W")
+	if(W==="W"||W==="Up")
 		level=EmulateUp(level);
-	if(W==="A")
+	if(W==="A"||W==="Left")
 		level=EmulateLeft(level);
-	if(W==="S")
+	if(W==="S"||W==="Down")
 		level=EmulateDown(level);
-	if(W==="D")
+	if(W==="D"||W==="Right")
 		level=EmulateRight(level);
 
 	Memo(level);
@@ -1110,9 +1126,13 @@ function Translate(L){
 		var prefix=choosing.prefix;
 		var p=choosing.p;
 		
-		if(L==="W"||L==="A")
+		if(In([" ","Enter","X","C"],L))
+			choosing=false;
+		else if(In(NumberCharacters,L))
+			p=(Number(L)-1)%interpretations.length;
+		else if(In("WAQZERTYUIOP",L)||In(["Left","Up"],L))
 			p=(p+interpretations.length-1)%interpretations.length;
-		else if(L==="S"||L==="D")
+		else if(In("SDFGHJKLVBNM",L)||In(["Right","Down"],L))
 			p=(p+interpretations.length+1)%interpretations.length;
 		else	
 			choosing=false;
@@ -1126,6 +1146,8 @@ function Translate(L){
 		var word=prefix+interpretations[p];
 
 	}else{
+		if(In(NumberCharacters,L)||L==="Enter"||In(ArrowKeys,L))
+			return;
 		InputLetterAfter(L);
 		var word=Word().toLowerCase();
 
