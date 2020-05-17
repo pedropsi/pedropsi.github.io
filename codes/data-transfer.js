@@ -691,6 +691,19 @@ EscapeTokens=function(tokenString){
 // UnBeforfix	# 		     d
 
 
+UnOncePrefix=function(word,prefix){
+	if(!prefix)
+		return word;
+	var prefixFind=new RegExp("^"+EscapeTokens(prefix));
+	return word.replace(prefixFind,"");
+}
+UnOncePosfix=function(word,suffix){ //suffix
+	if(!suffix)
+		return word;
+	var suffixFind=new RegExp(EscapeTokens(suffix)+"$");
+	return word.replace(suffixFind,"");
+}
+
 UnPrefix=function(word,prefix){
 	if(!prefix)
 		return word;
