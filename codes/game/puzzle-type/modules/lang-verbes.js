@@ -7653,88 +7653,97 @@ VerbsEnFr={
 	"baying":[
 		"aboyant"
 	],
-	"be":[
+	"am":[
+		"suis"
+	],
+	"are":[
 		"es",
 		"sommes",
-		"sont",
-		"suis",
 		"êtes",
+		"sont"
+	],
+	"be":[
+		// "es",
+		// "sommes",
+		// "sont",
 		"être",
-		"ai",
-		"as",
-		"avez",
-		"avoir",
-		"avons",
-		"ont",
-		"aller",
-		"allez",
-		"allons",
-		"vais",
-		"vas",
-		"vont",
-		"venez",
-		"venir",
-		"venons",
-		"vienent",
-		"viens",
-		"faire",
-		"fais",
-		"faisons",
-		"faites",
-		"font"
+		// "ai",
+		// "as",
+		// "avez",
+		// "avoir",
+		// "avons",
+		// "ont",
+		// "aller",
+		// "allez",
+		// "allons",
+		// "vais",
+		// "vas",
+		// "vont",
+		// "venez",
+		// "venir",
+		// "venons",
+		// "vienent",
+		// "viens",
+		// "faire",
+		// "fais",
+		// "faisons",
+		// "faites",
+		// "font"
 	],
 	"is":[
 		"est",
-		"a",
-		"va",
-		"vient",
-		"fait"
+		// "a",
+		// "va",
+		// "vient",
+		// "fait"
 	],
 	"was":[
 		"ai êtu",
+		"a êtu"
+	],
+	"were":[
 		"as êtu",
-		"a êtu",
 		"avons êtu",
 		"avez êtu",
 		"ont êtu",
-		"ai eu",
-		"as eu",
-		"a eu",
-		"avons eu",
-		"avez eu",
-		"ont eu",
-		"suis allé",
-		"es allé",
-		"est allé",
-		"sommes allé",
-		"êtes allé",
-		"sont allé",
-		"suis venu",
-		"es venu",
-		"est venu",
-		"sommes venu",
-		"êtes venu",
-		"sont venu",
-		"ai fait",
-		"as fait",
-		"a fait",
-		"avons fait",
-		"avez fait",
-		"ont fait"
+		// "ai eu",
+		// "as eu",
+		// "a eu",
+		// "avons eu",
+		// "avez eu",
+		// "ont eu",
+		// "suis allé",
+		// "es allé",
+		// "est allé",
+		// "sommes allé",
+		// "êtes allé",
+		// "sont allé",
+		// "suis venu",
+		// "es venu",
+		// "est venu",
+		// "sommes venu",
+		// "êtes venu",
+		// "sont venu",
+		// "ai fait",
+		// "as fait",
+		// "a fait",
+		// "avons fait",
+		// "avez fait",
+		// "ont fait"
 	],
 	"been":[
 		"êtu",
-		"eu",
-		"allé",
-		"venu",
-		"fait"
+		// "eu",
+		// "allé",
+		// "venu",
+		// "fait"
 	],
 	"being":[
 		"étant",
-		"ayant",
-		"allant",
-		"venant",
-		"faisant"
+		// "ayant",
+		// "allant",
+		// "venant",
+		// "faisant"
 	],
 	"bear":[
 		"supporte",
@@ -15272,6 +15281,14 @@ VerbsEnFr={
 		"campant",
 		"bivouaquant"
 	],
+	"cannot":[
+		"ne peuvent",
+		"ne peux",
+		"ne peut",
+		"ne pouvez",
+		"ne pouvoir",
+		"ne pouvons"
+	],
 	"can":[
 		"peuvent",
 		"peux",
@@ -15283,58 +15300,96 @@ VerbsEnFr={
 		"conserver",
 		"conservez",
 		"conservons",
-		"jete",
-		"jetent",
-		"jeter",
-		"jetez",
-		"jetons",
-		"taient",
-		"taire",
-		"tais",
-		"taisez",
-		"taisons"
+		// "jete",
+		// "jetent",
+		// "jeter",
+		// "jetez",
+		// "jetons",
+		// "taient",
+		// "taire",
+		// "tais",
+		// "taisez",
+		// "taisons"
+		"peut"
 	],
 	"cans":[
-		"peut",
 		"conserve",
-		"jete",
-		"taît"
+		// "jete",
+		// "taît"
 	],
-	"canned":[
+	"could":[
 		"ai pouvu",
 		"as pouvu",
 		"a pouvu",
 		"avons pouvu",
 		"avez pouvu",
 		"ont pouvu",
+		"pourrais",
+		"pourrais",
+		"pourrait",
+		"pourrions",
+		"pourriez",
+		"pourraient"
+	],
+	"canned":[
 		"ai conservé",
 		"as conservé",
 		"a conservé",
 		"avons conservé",
 		"avez conservé",
 		"ont conservé",
-		"ai jeté",
-		"as jeté",
-		"a jeté",
-		"avons jeté",
-		"avez jeté",
-		"ont jeté",
-		"ai tu",
-		"as tu",
-		"a tu",
-		"avons tu",
-		"avez tu",
-		"ont tu",
-		"pouvu",
-		"conservé",
-		"jeté",
-		"tu"
+		// "ai jeté",
+		// "as jeté",
+		// "a jeté",
+		// "avons jeté",
+		// "avez jeté",
+		// "ont jeté",
+		// "ai tu",
+		// "as tu",
+		// "a tu",
+		// "avons tu",
+		// "avez tu",
+		// "ont tu",
+		// "pouvu",
+		// "conservé",
+		// "jeté",
+		// "tu"
 	],
 	"canning":[
 		"pouvant",
 		"conservant",
 		"jetant",
 		"taisant"
+	],
+	"would":[
+		"pourrais",
+		"pourrais",
+		"pourrait",
+		"pourrions",
+		"pourriez",
+		"pourraient"
+	],
+	"may":[
+		"peuvent",
+		"peux",
+		"pouvez",
+		"pouvoir",
+		"pouvons",
+		"peut",
+		"pourrais",
+		"pourrais",
+		"pourrait",
+		"pourrions",
+		"pourriez",
+		"pourraient"
+	],
+	"might":[
+		"pourrais",
+		"pourrais",
+		"pourrait",
+		"pourrions",
+		"pourriez",
+		"pourraient"
 	],
 	"cancel":[
 		"annule",
@@ -34529,16 +34584,16 @@ VerbsEnFr={
 		"faisons",
 		"faites",
 		"font",
-		"aller",
-		"allez",
-		"allons",
-		"vais",
-		"vas",
-		"vont"
+		// "aller",
+		// "allez",
+		// "allons",
+		// "vais",
+		// "vas",
+		// "vont"
 	],
 	"does":[
 		"fait",
-		"va"
+		// "va"
 	],
 	"did":[
 		"ai fait",
@@ -34547,18 +34602,18 @@ VerbsEnFr={
 		"avons fait",
 		"avez fait",
 		"ont fait",
-		"suis allé",
-		"es allé",
-		"est allé",
-		"sommes allé",
-		"êtes allé",
-		"sont allé",
-		"fait",
-		"allé"
+		// "suis allé",
+		// "es allé",
+		// "est allé",
+		// "sommes allé",
+		// "êtes allé",
+		// "sont allé",
+		// "fait",
+		// "allé"
 	],
 	"doing":[
 		"faisant",
-		"allant"
+		// "allant"
 	],
 	"doctor":[
 		"falsifie",
@@ -72852,6 +72907,30 @@ VerbsEnFr={
 	],
 	"owing":[
 		"devant"
+	],
+	"should":[
+		"devez",
+		"devoient",
+		"devoir",
+		"devons",
+		"dois",
+		"doit"
+	],
+	"ought to":[
+		"devez",
+		"devoient",
+		"devoir",
+		"devons",
+		"dois",
+		"doit"
+	],
+	"shall":[
+		"devez",
+		"devoient",
+		"devoir",
+		"devons",
+		"dois",
+		"doit"
 	],
 	"own":[
 		"posséde",
@@ -119208,11 +119287,17 @@ VerbsEnFr={
 		"veux",
 		"voulez",
 		"vouloir",
-		"voulons"
+		"voulons",
+		"va",//Future auxiliar sense
+		"vas",
+		"va",
+		"allons",
+		"allez",
+		"vont"
 	],
 	"wills":[
 		"légue",
-		"veut"
+		//"veut"
 	],
 	"willed":[
 		"ai légué",
