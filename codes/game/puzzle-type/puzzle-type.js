@@ -464,7 +464,7 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-	//"Finest vernissages",				//Keyword, Swap, Retroactive, Language
+	"Finest vernissages",				//Keyword, Swap, Retroactive, Language
 
 	"Fuchsia",							//Encoding
 	"Deaf",								//Encoding
