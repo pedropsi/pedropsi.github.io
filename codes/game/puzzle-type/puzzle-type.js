@@ -902,8 +902,8 @@ function Fuchsia(L){
 	if(!In(Hexadecimal,L))
 		L="#";
 	// else if(In(Hexadecimal,L)&&In(used,L)){
-	// 	ForbidCaret();
-	// 	return;
+	//  	ForbidCaret();
+	//  	return;
 	// }
 	// else {
 	// 	used=used+L;
@@ -929,9 +929,9 @@ function Fuchsia(L){
 			PopUndo();
 			var hex=PureLetter(Word());
 			console.log(hex,colour,MultiplyHEX(hex,colour));
-				hex=SubtractHEX(hex,colour);
+				hex=PlusHEX(hex,RotateHEX(colour));
 			var colourname=NamedColour(hex);
-				colourname=ColourApproximationString(hex,colourname)+colourname;
+				colourname=ColourApproximationString(hex,colourname);
 			Letters(colourname.toUpperCase());
 			Caret(Infinity);
 			CaretColour(hex);
@@ -950,9 +950,9 @@ function ColourApproximationString(colorstring,name){
 	var chosen=ColourNames.filter(function(c){return c[3]===name})[0];
 	var rgb=RGB(Colour(colorstring)).colour;
 	if(!Equal(rgb,Most(chosen)))
-		return "almost ";
+		return "almost "+name+" ("+colorstring+")";
 	else
-		return "";
+		return name;
 }
 
 
@@ -1217,7 +1217,7 @@ function Translate(L){
 			suffix=word.slice(i,Infinity);
 			prefix=word.slice(0,i);
 			var interpretations=Translator(suffix);
-			interpretations=interpretations.filter(i=>!Prefixed(i,"-")).filter(i=>!In(i," "));
+			var interpretations=interpretations.filter(i=>!Prefixed(i,"-")).filter(i=>!In(i," "));
 			found=(IsArray(interpretations)&&interpretations.length>0)//&&!In(interpretations,suffix))
 			if(found){
 				if(interpretations.length>1)
@@ -2021,7 +2021,7 @@ function StartingMemo(level){
 				..____________
 				W_____________`.replace(/\t*/g,""),
 		'This is it':[],
-		'Finest vernissages':false
+		'Mon petit ami':false
 	};
 	return zeromemo[level];
 }

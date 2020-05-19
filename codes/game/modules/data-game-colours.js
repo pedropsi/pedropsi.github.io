@@ -403,5 +403,11 @@ function SubtractHEX(colourA,colourB){
 	return HEX(c).colour;
 }
 
+function RotateHEX(colourA){
+	var a=RGB(colourA).colour;
+		a=Rest(a).concat([First(a)]);
+	return HEX(a).colour;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 Shout("data-game-colours");
