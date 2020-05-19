@@ -79,10 +79,13 @@
 }
 
 .letter{
+   --letterOn:var(--darkblue);
+   --letterMid:var(--blue);
+   --letterTransparent:var(--lightyellow);
    font-feature-settings:normal;
    font-weight: bold;
-   color:var(--darkblue);
-   border-bottom: var(--w2) solid var(--darkblue);
+   color:var(--letterOn);
+   border-bottom: var(--w2) solid var(--letterOn);
    padding: var(--h-2) var(--w-2) var(--h-2) var(--w-2);
    transition-duration: var(--durationOff);
    display: flex;
@@ -96,9 +99,9 @@
 }
 
 .letter.caret, .caret .half{
-    background-color: var(--darkblue);
-    border-bottom-color: var(--lightyellow);
-    color:var(--lightyellow);
+    background-color: var(--letterOn);
+    border-bottom-color: var(--letterTransparent);
+    color:var(--letterTransparent);
     width: calc(var(--h4) + var(--w2));
 }
 
@@ -108,12 +111,12 @@
 
 @keyframes Flicker{
   0%,100%   { 
-     background:var(--lightyellow);
-     color:var(--darkblue);
+     background:var(--letterTransparent);
+     color:var(--letterOn);
    }
   15%,85%   { 
-     background:var(--darkblue);
-     color:var(--lightyellow);
+     background:var(--letterOn);
+     color:var(--letterTransparent);
    }
 }
 
@@ -127,8 +130,8 @@
 }
 
 .caret.forbidden{
-   background-color: var(--lightyellow);
-   color: var(--darkblue);
+   background-color: var(--letterTransparent);
+   color: var(--letterOn);
    -webkit-animation:unset; /* Safari 4+ */
   -moz-animation:    unset; /* Fx 5+ */
   -o-animation:      unset; /* Opera 12+ */
@@ -167,8 +170,8 @@
 }
 
 .letter.draft{
-  color: var(--blue);
-  border-bottom-color: var(--blue);
+  color: var(--letterMid);
+  border-bottom-color: var(--letterMid);
 }
 
 .space {

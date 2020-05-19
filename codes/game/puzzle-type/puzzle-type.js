@@ -878,22 +878,41 @@ function Genetic(L){
 
 
 function Fuchsia(L){
-	var colour=Memo();
+	var colour=Memo().colour;
+	var used=Memo().used;
+	var freeze=Memo().freeze;
 
-	function Restart(){
-		colour=false;
-		Memo(colour);
-		ForbidCaret();
+
+	function NewColour(){
 		ClearLetters();
+		ForbidCaret();
+		Memo({
+			colour:colour,
+			used:used,
+			freeze:false
+		});
 	}
 	
-	if(colour){
-		Restart();
+	
+	if(freeze){
+		NewColour();
 		return;
 	}
 	
 	if(!In(Hexadecimal,L))
 		L="#";
+	else if(In(Hexadecimal,L)&&In(used,L)){
+		ForbidCaret();
+		return;
+	}
+	else {
+		used=used+L;
+		Memo({
+			colour:colour,
+			used:used,
+			freeze:freeze
+		});
+	}
 	
 	InputLetterAfter(L+"*");
 	
@@ -902,23 +921,30 @@ function Fuchsia(L){
 		var f=First(letters);
 		var r=Rest(letters);
 		if(f!=="#"||r.replace("#","").length!==r.length){
-			Restart();
+			ClearLetters();
+			ForbidCaret();
 			return;
 		}
 		else{
+			PopUndo();
 			var hex=PureLetter(Word());
+			console.log(hex,colour,MultiplyHEX(hex,colour));
+				hex=MultiplyHEX(hex,colour);
 			Letters(NamedColour(hex).toUpperCase());
-			
 			Caret(Infinity);
-			AddSingleElement("<style class='overcolour'>.letter{color:"+hex+";border-bottom-color:"+hex+"} .letter.caret{background:"+hex+" !important}</style>",'BODY','.overcolour');
-			setTimeout(function(){RemoveElement(".overcolour");},1000);
-
-			Memo(true);
+			CaretColour(hex);
+			Memo({
+				colour:hex,
+				used:used,
+				freeze:true
+			});
 			return;
 		}
 	}
 	Caret(Infinity);
 }
+
+
 
 function Deaf(L){
 	var piano = Synth.createInstrument('piano');
@@ -1883,7 +1909,6 @@ function LevelLoader(){
 		UnClass(".goal","uncase");
 	ClearLevel();
 	ColoriseGameBar();//Change colour each level
-	
 }
 
 
@@ -1893,7 +1918,8 @@ function UpdateLevel(state){
 		var state={
 			letters:Letters(),
 			caret:Caret(),
-			memo:Memo()
+			memo:Memo(),
+			colour:CaretColour()
 		}
 
 	
@@ -1922,6 +1948,32 @@ function ObtainPlayEndGameSound(){
 	PlaySound("media/puzzle-type/sound/wingame.mp3");
 }
 
+function CaretColour(hex){
+	if(!CaretColour.colour)
+		CaretColour.colour=false;
+
+	if(typeof hex==="undefined")
+		return CaretColour.colour;
+
+	CaretColour.colour=hex;
+
+	RemoveElement(".overcolour");
+	if(CaretColour.colour)
+		AddSingleElement("<style class='overcolour'>.letter{--letterOn:"+CaretColour.colour+";--letterMid:"+CaretColour.colour+"}</style>",'BODY','.overcolour');
+
+	return CaretColour.colour;
+}
+
+function StartingColour(title){
+	var colours={
+		"Fuchsia":"#FFFFFF"
+	}
+	if(In(colours,title))
+		return colours[title]
+	else
+		return false;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Level states
 
@@ -1945,7 +1997,11 @@ function StartingMemo(level){
 		'Fillet':0,
 		'Anagram':[],
 		'Nigeria':false,
-		'Fuchsia':false,
+		'Fuchsia':{
+				colour:"#FFFFFF",
+				used:"",
+				freeze:false
+			},
 		'Nokia 1998':0,
 		'To cut and paste':"",
 		'⠍⠕⠗⠎⠑':[],
@@ -1977,7 +2033,8 @@ function StartingLevelState(){
 	var state={
 		'letters':[],
 		'caret':0,
-		'memo':StartingMemo(CurLevelName())
+		'memo':StartingMemo(CurLevelName()),
+		'colour':StartingColour(CurLevelName())
 	};
 	return state;
 }
@@ -1986,7 +2043,8 @@ function CurrentLevelState(){
 	var state={
 		'letters':Letters(),
 		'caret':Caret(),
-		'memo':Memo()
+		'memo':Memo(),
+		'colour':CaretColour()
 	};
 	return state;
 }
@@ -2004,6 +2062,7 @@ function LevelState(state){
 	Letters(state.letters);
 	Caret(state.caret);
 	Memo(state.memo);
+	CaretColour(state.colour);
 
 }
 
