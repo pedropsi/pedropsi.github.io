@@ -4,7 +4,7 @@ DATE:"2020-05-17",
 HEADER:()=>"Puzzle type beta changes V",
 PIECE:()=>`
 <p>More updates: level CAR*** became IRO***, adding a couple twists. DEA*** was expanded and synthesised sounds added. Many thanks, ${v.COLLINEYE()}!</p>
-<p>New level FIN*** added, still experimental!</p>
+<p>New level MON*** added, still experimental!</p>
 	`,ID:"puzzle-type"},
 	N_44:{
 DATE:"2020-05-10",
