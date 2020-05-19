@@ -1144,13 +1144,13 @@ function Translate(L){
 		var prefix=choosing.prefix;
 		var p=choosing.p;
 		
-		if(In([" ","Enter","X","C"],L))
+		if(In([" ","Enter"],L))//,"X","C"
 			choosing=false;
 		else if(In(NumberCharacters,L))
 			p=(Number(L)-1)%interpretations.length;
-		else if(In("WAQZERTYUIOP",L)||In(["Left","Up"],L))
+		else if(In(["Left","Up"],L))//In("WAQZERTYUIOP",L)||
 			p=(p+interpretations.length-1)%interpretations.length;
-		else if(In("SDFGHJKLVBNM",L)||In(["Right","Down"],L))
+		else if(In(["Right","Down"],L))//In("SDFGHJKLVBNM",L)||
 			p=(p+interpretations.length+1)%interpretations.length;
 		else	
 			choosing=false;
