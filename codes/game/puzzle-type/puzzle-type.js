@@ -901,18 +901,18 @@ function Fuchsia(L){
 	
 	if(!In(Hexadecimal,L))
 		L="#";
-	else if(In(Hexadecimal,L)&&In(used,L)){
-		ForbidCaret();
-		return;
-	}
-	else {
-		used=used+L;
-		Memo({
-			colour:colour,
-			used:used,
-			freeze:freeze
-		});
-	}
+	// else if(In(Hexadecimal,L)&&In(used,L)){
+	// 	ForbidCaret();
+	// 	return;
+	// }
+	// else {
+	// 	used=used+L;
+	// 	Memo({
+	// 		colour:colour,
+	// 		used:used,
+	// 		freeze:freeze
+	// 	});
+	// }
 	
 	InputLetterAfter(L+"*");
 	
@@ -929,8 +929,10 @@ function Fuchsia(L){
 			PopUndo();
 			var hex=PureLetter(Word());
 			console.log(hex,colour,MultiplyHEX(hex,colour));
-				hex=MultiplyHEX(hex,colour);
-			Letters(NamedColour(hex).toUpperCase());
+				hex=SubtractHEX(hex,colour);
+			var colourname=NamedColour(hex);
+				colourname=ColourApproximationString(hex,colourname)+colourname;
+			Letters(colourname.toUpperCase());
 			Caret(Infinity);
 			CaretColour(hex);
 			Memo({
@@ -944,6 +946,14 @@ function Fuchsia(L){
 	Caret(Infinity);
 }
 
+function ColourApproximationString(colorstring,name){
+	var chosen=ColourNames.filter(function(c){return c[3]===name})[0];
+	var rgb=RGB(Colour(colorstring)).colour;
+	if(!Equal(rgb,Most(chosen)))
+		return "almost ";
+	else
+		return "";
+}
 
 
 function Deaf(L){
@@ -1966,7 +1976,7 @@ function CaretColour(hex){
 
 function StartingColour(title){
 	var colours={
-		"Fuchsia":"#FFFFFF"
+		"Fuchsia":ObtainFGColor()
 	}
 	if(In(colours,title))
 		return colours[title]
@@ -1998,7 +2008,7 @@ function StartingMemo(level){
 		'Anagram':[],
 		'Nigeria':false,
 		'Fuchsia':{
-				colour:"#FFFFFF",
+				colour:ObtainFGColor(),
 				used:"",
 				freeze:false
 			},

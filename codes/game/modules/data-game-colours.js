@@ -383,9 +383,23 @@ function LightnessNumber(n){
 // Blend
 
 function MultiplyHEX(colourA,colourB){
-	var a=VectorTimes(RGB(colourA).colour,[1/255,1/255,1/255]);
-	var b=VectorTimes(RGB(colourB).colour,[1/255,1/255,1/255]);
-	var c=VectorTimes(VectorTimes(a,b),[255,255,255]);
+	var a=RGB(colourA).colour;
+	var b=RGB(colourB).colour;
+	var c=VectorDivide(VectorTimes(a,b),[255,255,255]);
+	return HEX(c).colour;
+}
+
+function PlusHEX(colourA,colourB){
+	var a=RGB(colourA).colour;
+	var b=RGB(colourB).colour;
+	var c=VectorPlus(a,b).map(function(v){return Max(Min(v,255),0)});
+	return HEX(c).colour;
+}
+
+function SubtractHEX(colourA,colourB){
+	var a=RGB(colourA).colour;
+	var b=RGB(colourB).colour;
+	var c=VectorMinus(a,b).map(function(v){return Max(Min(v,255),0)});
 	return HEX(c).colour;
 }
 

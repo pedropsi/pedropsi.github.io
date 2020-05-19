@@ -1,4 +1,10 @@
 News={
+	N_46:{
+DATE:"2020-05-24",
+HEADER:()=>"Puzzle type beta changes VI",
+PIECE:()=>`
+<p>More updates: level FUCHSIA is harder and more dynamic.</p>
+	`,ID:"puzzle-type"},
 	N_45:{
 DATE:"2020-05-17",
 HEADER:()=>"Puzzle type beta changes V",
