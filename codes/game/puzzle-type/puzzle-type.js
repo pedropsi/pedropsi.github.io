@@ -365,7 +365,7 @@ function ForbidNumberActions(key){
 		"Fuchsia",
 		"Deaf",
 		"Odd",
-		"Finest vernissages",
+		"Mon petit ami",
 		"This is it",
 		"⠍⠕⠗⠎⠑"],CurLevelName())&&In(NumberCharacters,key));
 }
@@ -383,7 +383,7 @@ function ForbidSpaceActions(key){
 		"Odd",
 		"Deaf",
 		"Dvorak",
-		"Finest vernissages",
+		"Mon petit ami",
 		"To cut and paste",
 		"This is it"
 	],CurLevelName())&&In([" ","Space","space"],key));
@@ -391,14 +391,14 @@ function ForbidSpaceActions(key){
 
 function ForbidEnterActions(key){
 	return (!In([
-		"Finest vernissages",
+		"Mon petit ami",
 	],CurLevelName())&&In(["Enter"],key));
 }
 
 function ForbidArrowActions(key){
 	return (!In([
 		"Wasd",
-		"Finest vernissages",
+		"Mon petit ami",
 	],CurLevelName())&&In(ArrowKeys,key));
 }
 
@@ -483,7 +483,7 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-	"Finest vernissages",				//Keyword, Swap, Retroactive, Language
+	"Mon petit ami",				//Keyword, Swap, Retroactive, Language
 
 	"Fuchsia",							//Encoding
 	"Deaf",								//Encoding
@@ -626,7 +626,7 @@ var LevelActions={
 		Caret(Infinity);		
 	},
 	"Latent clones":Weightier,
-	"Finest vernissages":Translate,
+	"Mon petit ami":Translate,
 	"Nigeria":Nigeria,
 	"ひらがな":function(L){
 		InputLetterAfter(L);
@@ -1259,6 +1259,15 @@ function CleanDB(NewDB,DB){
 		if(frList.length)
 			NewDB[enList[i].toLowerCase()]=Unique(frList);
 	}
+}
+
+function MiniWordSearch(){
+	var words=Keys(NamesEnFr).filter(n=>
+		!In(n,"a")&&
+		!In(n,"i")&&
+		!In(n,"be")&&
+		NamesEnFr[n].filter(m=>In([3,4,5],m.length)).length);
+	return Unique(words.map(w=>NamesEnFr[w].filter(m=>In([3,4,5],m.length))).flat());
 }
 
 

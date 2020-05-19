@@ -2858,12 +2858,6 @@ var AdjectivesEnFr={
 	"aztèques"
 	],
 "baby":[
-	"ch'ti",
-	"p'tit",
-	"p'tit'",
-	"p'tite",
-	"p'tites",
-	"p'tits",
 	"petit",
 	"petite",
 	"petites",
@@ -3410,7 +3404,6 @@ var AdjectivesEnFr={
 	],
 "big":[
 	"grand",
-	"grand'",
 	"grande",
 	"grandes",
 	"grands",
@@ -8922,7 +8915,6 @@ var AdjectivesEnFr={
 	"cochonne",
 	"cochonnes",
 	"cochons",
-	"sal'",
 	"sale",
 	"sales",
 	"salissant",
@@ -14001,7 +13993,6 @@ var AdjectivesEnFr={
 	"formidable",
 	"formidables",
 	"grand",
-	"grand'",
 	"grande",
 	"grandes",
 	"grands",
@@ -18409,7 +18400,6 @@ var AdjectivesEnFr={
 	],
 "large":[
 	"grand",
-	"grand'",
 	"grande",
 	"grandes",
 	"grands"
@@ -18546,7 +18536,6 @@ var AdjectivesEnFr={
 	"maigres",
 	"mince",
 	"minces",
-	"pauv'",
 	"pauvre",
 	"pauvres",
 	"pôvre",
@@ -18915,20 +18904,10 @@ var AdjectivesEnFr={
 	"cadets",
 	"cadette",
 	"cadettes",
-	"ch'ti",
-	"p'tit",
-	"p'tit'",
-	"p'tite",
-	"p'tites",
-	"p'tits",
 	"petit",
 	"petite",
 	"petites",
 	"petits",
-	"ptit",
-	"ptite",
-	"ptites",
-	"ptits"
 	],
 "liturgical":[
 	"liturgique",
@@ -19137,7 +19116,6 @@ var AdjectivesEnFr={
 	"basses",
 	"calme",
 	"calmes",
-	"ch'ti",
 	"déprimé",
 	"déprimée",
 	"déprimées",
@@ -19146,19 +19124,10 @@ var AdjectivesEnFr={
 	"faibles",
 	"grave",
 	"graves",
-	"p'tit",
-	"p'tit'",
-	"p'tite",
-	"p'tites",
-	"p'tits",
 	"petit",
 	"petite",
 	"petites",
-	"petits",
-	"ptit",
-	"ptite",
-	"ptites",
-	"ptits"
+	"petits"
 	],
 "lower":[
 	"inf..",
@@ -19569,7 +19538,6 @@ var AdjectivesEnFr={
 	"marginaux",
 	"médiocre",
 	"médiocres",
-	"pauv'",
 	"pauvre",
 	"pauvres",
 	"périphérique",
@@ -19781,7 +19749,6 @@ var AdjectivesEnFr={
 "meager":[
 	"maigre",
 	"maigres",
-	"pauv'",
 	"pauvre",
 	"pauvres",
 	"pôvre",
@@ -23161,7 +23128,6 @@ var AdjectivesEnFr={
 	"pétaloïdes"
 	],
 "petty":[
-	"ch'ti",
 	"insignifiant",
 	"insignifiante",
 	"insignifiantes",
@@ -23170,19 +23136,10 @@ var AdjectivesEnFr={
 	"mesquine",
 	"mesquines",
 	"mesquins",
-	"p'tit",
-	"p'tit'",
-	"p'tite",
-	"p'tites",
-	"p'tits",
 	"petit",
 	"petite",
 	"petites",
-	"petits",
-	"ptit",
-	"ptite",
-	"ptites",
-	"ptits"
+	"petits"
 	],
 "petulant":[
 	"irascible",
@@ -23712,7 +23669,6 @@ var AdjectivesEnFr={
 	"pontificaux"
 	],
 "poor":[
-	"pauv'",
 	"pauvre",
 	"pauvres",
 	"pitoyable",
@@ -24328,7 +24284,6 @@ var AdjectivesEnFr={
 	"impure",
 	"impures",
 	"impurs",
-	"sal'",
 	"sale",
 	"sales"
 	],
@@ -26217,7 +26172,6 @@ var AdjectivesEnFr={
 	"ample",
 	"amples",
 	"grand",
-	"grand'",
 	"grande",
 	"grandes",
 	"grands",
@@ -27428,24 +27382,14 @@ var AdjectivesEnFr={
 	"brefs",
 	"brève",
 	"brèves",
-	"ch'ti",
 	"court",
 	"courte",
 	"courtes",
 	"courts",
-	"p'tit",
-	"p'tit'",
-	"p'tite",
-	"p'tites",
-	"p'tits",
 	"petit",
 	"petite",
 	"petites",
-	"petits",
-	"ptit",
-	"ptite",
-	"ptites",
-	"ptits"
+	"petits"
 	],
 "shot":[
 	"crevé",
@@ -27912,7 +27856,6 @@ var AdjectivesEnFr={
 	"dépeignée",
 	"dépeignées",
 	"dépeignés",
-	"sal'",
 	"sale",
 	"sales"
 	],
@@ -27944,24 +27887,14 @@ var AdjectivesEnFr={
 	"sournoises"
 	],
 "small":[
-	"ch'ti",
 	"jeune",
 	"jeunes",
 	"minuscule",
 	"minuscules",
-	"p'tit",
-	"p'tit'",
-	"p'tite",
-	"p'tites",
-	"p'tits",
 	"petit",
 	"petite",
 	"petites",
-	"petits",
-	"ptit",
-	"ptite",
-	"ptites",
-	"ptits"
+	"petits"
 	],
 "smarmy":[
 	"obséquieuse",
@@ -28138,7 +28071,6 @@ var AdjectivesEnFr={
 	"mous"
 	],
 "soiled":[
-	"sal'",
 	"sale",
 	"sales"
 	],
@@ -28363,7 +28295,6 @@ var AdjectivesEnFr={
 	"ample",
 	"amples",
 	"grand",
-	"grand'",
 	"grande",
 	"grandes",
 	"grands",
@@ -29818,7 +29749,6 @@ var AdjectivesEnFr={
 	],
 "tall":[
 	"grand",
-	"grand'",
 	"grande",
 	"grandes",
 	"grands",
@@ -33094,20 +33024,10 @@ var AdjectivesEnFr={
 	"lasses"
 	],
 "wee":[
-	"ch'ti",
-	"p'tit",
-	"p'tit'",
-	"p'tite",
-	"p'tites",
-	"p'tits",
 	"petit",
 	"petite",
 	"petites",
-	"petits",
-	"ptit",
-	"ptite",
-	"ptites",
-	"ptits"
+	"petits"
 	],
 "weedy":[
 	"chétif",

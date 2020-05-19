@@ -8167,7 +8167,6 @@ var NamesEnFr={
 	],
 "back cover":[
 	"dos",
-	"quatrième de couv'",
 	"quatrième de couverture"
 	],
 "backdrop":[
@@ -8258,7 +8257,6 @@ var NamesEnFr={
 	],
 "back page":[
 	"dos",
-	"quatrième de couv'",
 	"quatrième de couverture"
 	],
 "backrest":[
@@ -14460,7 +14458,6 @@ var NamesEnFr={
 	"corde"
 	],
 "bowtie":[
-	"noeud pap'",
 	"noeud papillon"
 	],
 "bow wow":[
@@ -28386,7 +28383,6 @@ var NamesEnFr={
 	"croissant"
 	],
 "cromlech":[
-	"cromlec'h",
 	"cromlech"
 	],
 "crone":[
@@ -42310,7 +42306,6 @@ var NamesEnFr={
 	"pêche"
 	],
 "fish and chips":[
-	"fish 'n' chips",
 	"fish and chips",
 	"poisson frit avec des frites",
 	"poisson-frites"
@@ -43818,7 +43813,7 @@ var NamesEnFr={
 "foppery":[
 	"bêtise",
 	"idiotie",
-	"m'as-tu-vu",
+	// "m'as-tu-vu",
 	"sottise",
 	"stupidité",
 	"ânerie"
@@ -45147,7 +45142,6 @@ var NamesEnFr={
 	"prête-nom"
 	],
 "front page":[
-	"première de couv'",
 	"première de couverture",
 	"première page",
 	"une"
@@ -76455,7 +76449,7 @@ var NamesEnFr={
 	"ondol"
 	],
 "one":[
-	"billet d’un dollar",
+	// "billet d’un dollar",
 	"un"
 	],
 "one-armed bandit":[
@@ -93470,7 +93464,6 @@ var NamesEnFr={
 	"sucre d'orge"
 	],
 "rock and roll":[
-	"rock 'n' roll",
 	"rock and roll"
 	],
 "rock band":[
@@ -97027,7 +97020,7 @@ var NamesEnFr={
 	"demandeur"
 	],
 "seep":[
-	"s'infiltrer suinter"
+	"s'infiltrer","suinter"
 	],
 "seer":[
 	"témoin",
@@ -115192,7 +115185,6 @@ var NamesEnFr={
 	"cocheur"
 	],
 "two":[
-	"billet de deux dollars",
 	"deux"
 	],
 "two-barred warbler":[
@@ -122392,24 +122384,24 @@ var NamesEnFr={
 "ylide":[
 	"ylure"
 	],
-"yob":[
-	"blouson noir",
-	"casseur",
-	"houligan",
-	"loubard",
-	"paumé",
-	"pauv'type",
-	"voyou asocial"
-	],
-"yobbo":[
-	"blouson noir",
-	"casseur",
-	"houligan",
-	"loubard",
-	"paumé",
-	"pauv'type",
-	"voyou asocial"
-	],
+// "yob":[
+// 	"blouson noir",
+// 	"casseur",
+// 	"houligan",
+// 	"loubard",
+// 	"paumé",
+// 	"pauv'type",
+// 	"voyou asocial"
+// 	],
+// "yobbo":[
+// 	"blouson noir",
+// 	"casseur",
+// 	"houligan",
+// 	"loubard",
+// 	"paumé",
+// 	"pauv'type",
+// 	"voyou asocial"
+// 	],
 "yoctoampere":[
 	"yoctoampère"
 	],

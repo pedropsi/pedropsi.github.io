@@ -5227,13 +5227,6 @@ var AdverbsExtrasEnFr={
 	"me",
 	"moi-même"
 	],
-"nada":[
-	"ne + verb + rien",
-	"rien"
-	],
-"naff all":[
-	"que dalle"
-	],
 "namely":[
 	"c'est-à-dire",
 	"nommément",
@@ -5399,7 +5392,7 @@ var AdverbsExtrasEnFr={
 	"aucun",
 	"aucune",
 	"aucunement",
-	"en rien",
+	"rien",
 	"personne"
 	],
 "nonetheless":[
@@ -5446,7 +5439,6 @@ var AdverbsExtrasEnFr={
 	"sans oublier"
 	],
 "nothing":[
-	"ne + verb + rien",
 	"rien"
 	],
 "nothing but":[
@@ -6910,9 +6902,6 @@ var AdverbsExtrasEnFr={
 	"hormis",
 	"sauf"
 	],
-"sb":[
-	"qqn"
-	],
 "scarcely":[
 	"à peine"
 	],
@@ -7284,14 +7273,6 @@ var AdverbsExtrasEnFr={
 	],
 "step by step":[
 	"pas à pas"
-	],
-"sth":[
-	"qlqch",
-	"qqch"
-	],
-"sthg":[
-	"qlqch",
-	"qqch"
 	],
 "stiffly":[
 	"rigidement"
