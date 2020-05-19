@@ -983,8 +983,11 @@ function Deaf(L){
 		chord=FixedPoint(IncrementNote,chord);
 
 	if(NotesLength()===3){
-		PlayChord(chord);
 		Letters(savednotes);
+		if(Prefixed(chord,"#"))
+			return;
+
+		PlayChord(chord);
 		if(In(MajorChords,chord)){
 			InputLetterAfter(MajorChords[chord]);
 		}
