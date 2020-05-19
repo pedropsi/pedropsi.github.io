@@ -48359,42 +48359,6 @@ VerbsEnFr={
 		"frisant",
 		"grillant"
 	],
-	"fuck":[
-		"encule",
-		"enculent",
-		"enculer",
-		"enculez",
-		"enculons",
-		"fous",
-		"foutent",
-		"foutez",
-		"foutons",
-		"foutre"
-	],
-	"fucks":[
-		"encule",
-		"foutre"
-	],
-	"fucked":[
-		"ai enculé",
-		"as enculé",
-		"a enculé",
-		"avons enculé",
-		"avez enculé",
-		"ont enculé",
-		"ai foutu",
-		"as foutu",
-		"a foutu",
-		"avons foutu",
-		"avez foutu",
-		"ont foutu",
-		"enculé",
-		"foutu"
-	],
-	"fucking":[
-		"enculant",
-		"foutant"
-	],
 	"fudge":[
 		"évite",
 		"évitent",
@@ -51378,70 +51342,6 @@ VerbsEnFr={
 		"préparant",
 		"bichonnant",
 		"damant"
-	],
-	"grope":[
-		"tâte",
-		"tâtent",
-		"tâter",
-		"tâtez",
-		"tâtons",
-		"tâtonne",
-		"tâtonnent",
-		"tâtonner",
-		"tâtonnez",
-		"tâtonnons",
-		"tripote",
-		"tripotent",
-		"tripoter",
-		"tripotez",
-		"tripotons",
-		"pelote",
-		"pelotent",
-		"peloter",
-		"pelotez",
-		"pelotons"
-	],
-	"gropes":[
-		"tâte",
-		"tâtonne",
-		"tripote",
-		"pelote"
-	],
-	"groped":[
-		"ai tâté",
-		"as tâté",
-		"a tâté",
-		"avons tâté",
-		"avez tâté",
-		"ont tâté",
-		"ai tâtonné",
-		"as tâtonné",
-		"a tâtonné",
-		"avons tâtonné",
-		"avez tâtonné",
-		"ont tâtonné",
-		"ai tripoté",
-		"as tripoté",
-		"a tripoté",
-		"avons tripoté",
-		"avez tripoté",
-		"ont tripoté",
-		"ai peloté",
-		"as peloté",
-		"a peloté",
-		"avons peloté",
-		"avez peloté",
-		"ont peloté",
-		"tâté",
-		"tâtonné",
-		"tripoté",
-		"peloté"
-	],
-	"groping":[
-		"tâtant",
-		"tâtonnant",
-		"tripotant",
-		"pelotant"
 	],
 	"grounds":[
 		"gronde",
@@ -69813,11 +69713,6 @@ VerbsEnFr={
 		"emboîtant"
 	],
 	"nestle":[
-		"pelotonne",
-		"pelotonnent",
-		"pelotonner",
-		"pelotonnez",
-		"pelotonnons",
 		"niche",
 		"nichent",
 		"nicher",
@@ -69825,27 +69720,18 @@ VerbsEnFr={
 		"nichons"
 	],
 	"nestles":[
-		"pelotonne",
 		"niche"
 	],
 	"nestled":[
-		"ai pelotonné",
-		"as pelotonné",
-		"a pelotonné",
-		"avons pelotonné",
-		"avez pelotonné",
-		"ont pelotonné",
 		"ai niché",
 		"as niché",
 		"a niché",
 		"avons niché",
 		"avez niché",
 		"ont niché",
-		"pelotonné",
 		"niché"
 	],
 	"nestling":[
-		"pelotonnant",
 		"nichant"
 	],
 	"nettle":[
@@ -74272,16 +74158,10 @@ VerbsEnFr={
 		"tripotent",
 		"tripoter",
 		"tripotez",
-		"tripotons",
-		"pelote",
-		"pelotent",
-		"peloter",
-		"pelotez",
-		"pelotons"
+		"tripotons"
 	],
 	"paws":[
-		"tripote",
-		"pelote"
+		"tripote"
 	],
 	"pawed":[
 		"ai tripoté",
@@ -74289,19 +74169,10 @@ VerbsEnFr={
 		"a tripoté",
 		"avons tripoté",
 		"avez tripoté",
-		"ont tripoté",
-		"ai peloté",
-		"as peloté",
-		"a peloté",
-		"avons peloté",
-		"avez peloté",
-		"ont peloté",
-		"tripoté",
-		"peloté"
+		"ont tripoté"
 	],
 	"pawing":[
-		"tripotant",
-		"pelotant"
+		"tripotant"
 	],
 	"pay":[
 		"paye",
@@ -75330,42 +75201,6 @@ VerbsEnFr={
 		"saturant",
 		"pénétrant",
 		"envahissant"
-	],
-	"pet":[
-		"caresse",
-		"caressent",
-		"caresser",
-		"caressez",
-		"caressons",
-		"pelote",
-		"pelotent",
-		"peloter",
-		"pelotez",
-		"pelotons"
-	],
-	"pets":[
-		"caresse",
-		"pelote"
-	],
-	"petted":[
-		"ai caressé",
-		"as caressé",
-		"a caressé",
-		"avons caressé",
-		"avez caressé",
-		"ont caressé",
-		"ai peloté",
-		"as peloté",
-		"a peloté",
-		"avons peloté",
-		"avez peloté",
-		"ont peloté",
-		"caressé",
-		"peloté"
-	],
-	"petting":[
-		"caressant",
-		"pelotant"
 	],
 	"petition":[
 		"pétitionne",
@@ -82188,42 +82023,6 @@ VerbsEnFr={
 	],
 	"ranting":[
 		"râlant"
-	],
-	"rape":[
-		"viole",
-		"violent",
-		"violer",
-		"violez",
-		"violons",
-		"pirate",
-		"piratent",
-		"pirater",
-		"piratez",
-		"piratons"
-	],
-	"rapes":[
-		"viole",
-		"pirate"
-	],
-	"raped":[
-		"ai violé",
-		"as violé",
-		"a violé",
-		"avons violé",
-		"avez violé",
-		"ont violé",
-		"ai piraté",
-		"as piraté",
-		"a piraté",
-		"avons piraté",
-		"avez piraté",
-		"ont piraté",
-		"violé",
-		"piraté"
-	],
-	"raping":[
-		"violant",
-		"piratant"
 	],
 	"rasp":[
 		"râpe",
@@ -99042,28 +98841,6 @@ VerbsEnFr={
 	"snivelling":[
 		"pleurnichant"
 	],
-	"snog":[
-		"pelote",
-		"pelotent",
-		"peloter",
-		"pelotez",
-		"pelotons"
-	],
-	"snogs":[
-		"pelote"
-	],
-	"snogged":[
-		"ai peloté",
-		"as peloté",
-		"a peloté",
-		"avons peloté",
-		"avez peloté",
-		"ont peloté",
-		"peloté"
-	],
-	"snogging":[
-		"pelotant"
-	],
 	"snoop":[
 		"espionne",
 		"espionnent",
@@ -99237,22 +99014,10 @@ VerbsEnFr={
 		"blottis",
 		"blottissent",
 		"blottissez",
-		"blottissons",
-		"pelotonne",
-		"pelotonnent",
-		"pelotonner",
-		"pelotonnez",
-		"pelotonnons",
-		"love",
-		"lovent",
-		"lover",
-		"lovez",
-		"lovons"
+		"blottissons"
 	],
 	"snuggles":[
-		"blottit",
-		"pelotonne",
-		"love"
+		"blottit"
 	],
 	"snuggled":[
 		"ai blotti",
@@ -99261,26 +99026,10 @@ VerbsEnFr={
 		"avons blotti",
 		"avez blotti",
 		"ont blotti",
-		"ai pelotonné",
-		"as pelotonné",
-		"a pelotonné",
-		"avons pelotonné",
-		"avez pelotonné",
-		"ont pelotonné",
-		"ai lové",
-		"as lové",
-		"a lové",
-		"avons lové",
-		"avez lové",
-		"ont lové",
-		"blotti",
-		"pelotonné",
-		"lové"
+		"blotti"
 	],
 	"snuggling":[
-		"blottissant",
-		"pelotonnant",
-		"lovant"
+		"blottissant"
 	],
 	"soak":[
 		"trempe",
@@ -108702,11 +108451,6 @@ VerbsEnFr={
 		"forcer",
 		"forcez",
 		"forçons",
-		"viole",
-		"violent",
-		"violer",
-		"violez",
-		"violons",
 		"endure",
 		"endurent",
 		"endurer",
@@ -108721,7 +108465,6 @@ VerbsEnFr={
 	"takes":[
 		"prent",
 		"force",
-		"viole",
 		"endure",
 		"supporte"
 	],
@@ -108738,12 +108481,6 @@ VerbsEnFr={
 		"avons forcé",
 		"avez forcé",
 		"ont forcé",
-		"ai violé",
-		"as violé",
-		"a violé",
-		"avons violé",
-		"avez violé",
-		"ont violé",
 		"ai enduré",
 		"as enduré",
 		"a enduré",
@@ -108760,14 +108497,12 @@ VerbsEnFr={
 	"taken":[
 		"prent",
 		"forcé",
-		"violé",
 		"enduré",
 		"supporté"
 	],
 	"taking":[
 		"prenant",
 		"forçant",
-		"violant",
 		"endurant",
 		"supportant"
 	],
@@ -111713,22 +111448,10 @@ VerbsEnFr={
 		"jouent",
 		"jouer",
 		"jouez",
-		"jouons",
-		"caresse",
-		"caressent",
-		"caresser",
-		"caressez",
-		"caressons",
-		"triture",
-		"triturent",
-		"triturer",
-		"triturez",
-		"triturons"
+		"jouons"
 	],
 	"toys":[
-		"joue",
-		"caresse",
-		"triture"
+		"joue"
 	],
 	"toyed":[
 		"ai joué",
@@ -111737,26 +111460,10 @@ VerbsEnFr={
 		"avons joué",
 		"avez joué",
 		"ont joué",
-		"ai caressé",
-		"as caressé",
-		"a caressé",
-		"avons caressé",
-		"avez caressé",
-		"ont caressé",
-		"ai trituré",
-		"as trituré",
-		"a trituré",
-		"avons trituré",
-		"avez trituré",
-		"ont trituré",
-		"joué",
-		"caressé",
-		"trituré"
+		"joué"
 	],
 	"toying":[
-		"jouant",
-		"caressant",
-		"triturant"
+		"jouant"
 	],
 	"trace":[
 		"trace",
