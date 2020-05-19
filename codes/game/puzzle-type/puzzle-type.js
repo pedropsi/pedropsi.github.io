@@ -1183,7 +1183,10 @@ function Translate(L){
 			interpretations=interpretations.filter(i=>!Prefixed(i,"-")).filter(i=>!In(i," "));
 			found=(IsArray(interpretations)&&interpretations.length>0)//&&!In(interpretations,suffix))
 			if(found){
-				word=prefix+"◀"+interpretations[0]+"▶";
+				if(interpretations.length>1)
+					word=prefix+"◀"+interpretations[0]+"▶";
+				else
+					word=prefix+interpretations[0];
 				var p=0;
 				Memo({
 					interpretations:interpretations,

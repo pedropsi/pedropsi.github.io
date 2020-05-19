@@ -4888,7 +4888,6 @@ var AdverbsExtrasEnFr={
 	"ça s'oublie pas"
 	],
 "like shooting fish in a barrel":[
-	"bête comme chou pejorative]",
 	"simple comme bonjour"
 	],
 "like so":[
