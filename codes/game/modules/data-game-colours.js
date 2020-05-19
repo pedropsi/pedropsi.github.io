@@ -382,6 +382,13 @@ function LightnessNumber(n){
 ////////////////////////////////////////////////////////////////////////////////
 // Blend
 
+function DivideHEX(colourA,colourB){
+	var a=RGB(colourA).colour;
+	var b=RGB(colourB).colour;
+	var c=VectorTimes(VectorDivide(a,b),[255,255,255]);
+	return HEX(c).colour;
+}
+
 function MultiplyHEX(colourA,colourB){
 	var a=RGB(colourA).colour;
 	var b=RGB(colourB).colour;
@@ -400,6 +407,14 @@ function SubtractHEX(colourA,colourB){
 	var a=RGB(colourA).colour;
 	var b=RGB(colourB).colour;
 	var c=VectorMinus(a,b).map(function(v){return Max(Min(v,255),0)});
+	return HEX(c).colour;
+}
+
+
+function MinHEX(light,filter){
+	var a=RGB(light).colour;
+	var b=RGB(filter).colour;
+	var c=VectorMin(a,b);
 	return HEX(c).colour;
 }
 

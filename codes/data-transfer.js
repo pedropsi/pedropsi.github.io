@@ -184,6 +184,14 @@ VectorDivide=function(vector1,vector2){
 	return VectorOperation(vector1,vector2,function(a,b){return a/b});
 }
 
+VectorMax=function(vector1,vector2){
+	return VectorOperation(vector1,vector2,function(a,b){return Max(a,b)});
+}
+VectorMin=function(vector1,vector2){
+	return VectorOperation(vector1,vector2,function(a,b){return Min(a,b)});
+}
+
+
 EuclideanDistance=function(vector1,vector2){
 	return Power(PoweredSum(VectorMinus(vector2,vector1),2),1/2);
 }
