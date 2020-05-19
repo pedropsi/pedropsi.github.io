@@ -115,10 +115,11 @@ var gameModulesLater=[
 "colours-names",
 "audiosynth",
 
-"lang-adj",
-"lang-adv-extra",
-"lang-names",
-"lang-verbes"
+"lang-fr-adj",
+"lang-fr-adv-extra",
+"lang-fr-interj",
+"lang-fr-names",
+"lang-fr-verbes",
 ]
 
 LoadSources(gameModulesEarly,P()?GameIntro:Identity);
@@ -1218,6 +1219,7 @@ function Translator(en){
 	var translations=[].concat(NamesEnFr[en]||[])
 						.concat(AdjectivesEnFr[en]||[])
 						.concat(VerbsEnFr[en]||[])
+						.concat(InterjEnFr[en]||[])
 						.concat(AdverbsExtrasEnFr[en]||[]);
 						
 	return Unique(translations);

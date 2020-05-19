@@ -3720,6 +3720,9 @@ var AdverbsExtrasEnFr={
 "hypothetically":[
 	"hypothétiquement"
 	],
+"i":[
+	"je"
+	],
 "ideally":[
 	"idéalement"
 	],
