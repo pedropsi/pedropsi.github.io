@@ -5392,7 +5392,7 @@ var AdverbsExtrasEnFr={
 	"aucun",
 	"aucune",
 	"aucunement",
-	"rien",
+	"en rien",
 	"personne"
 	],
 "nonetheless":[
