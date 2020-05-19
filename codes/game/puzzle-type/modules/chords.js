@@ -96,8 +96,10 @@ function NotePlayer(n,o){
 	}
 }
 
-function PlayChord(chord){
+function PlayChord(chord,delay,speed){
 	var i=0;
+	var delay=delay||0;
+	var speed=(typeof speed==="undefined"?1:speed);
 
 	if(typeof Piano!=="undefined"){
 		var ch=chord.replace(/([ABCDEFG])/g,"-$1").split("-");
@@ -108,7 +110,7 @@ function PlayChord(chord){
 			note=ch[n];
 			if(last&&NoteNumber(last)>=NoteNumber(note))
 				octave++;
-			setTimeout(NotePlayer(note,octave),n*250)
+			setTimeout(NotePlayer(note,octave),n*250*speed+delay)
 			last=note;
 		}
 	}

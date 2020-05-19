@@ -409,6 +409,24 @@ function AllowExtraUndoKey(key){
 function AllowExtraRestartKey(key){
 	return CurLevelName()==="Wasd"&&key==="R";
 }
+
+function LevelWinSound(){
+	var leveltitle=CurLevelName();
+	var customsounds={
+		"Deaf":function(){PlayChord("FACFACEGAC",750,0.5)}
+	}
+	if(In(customsounds,leveltitle))
+		return customsounds[leveltitle];
+	else
+		return false;
+}
+
+function PlayWinSound(){
+	var Sound=LevelWinSound();
+	if(Sound)
+		Sound();
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 function InPart(arrayOrObj,n){
@@ -914,34 +932,30 @@ function Deaf(L){
 			ForbidCaret();
 	}
 
+	function NotesLength(){
+		return tempnotes.length-Count(tempnotes,"#*");
+	}
+
 	if(!In("ABCDEFG",L))
 		AddSharp();
-	else
+	else if(NotesLength()<3)
 		InputLetterAfter(L+"*");
 		
 	var tempnotes=TemporaryLetters();
 	var chord=tempnotes.map(PureLetter).join("");
 		chord=FixedPoint(IncrementNote,chord);
 
-	if(tempnotes.length-Count(tempnotes,"#*")===3){//3 notes
+	if(NotesLength()===3){
+		PlayChord(chord);
+		Letters(savednotes);
 		if(In(MajorChords,chord)){
-			PlayChord(chord);
-			Letters(savednotes);
 			InputLetterAfter(MajorChords[chord]);
 		}
 		else if(In(MinorChords,chord)){
-			PlayChord(chord);
-			Letters(savednotes);
 			InputLetterAfter(MinorChords[chord].toLowerCase());
 		}
-		else if(Last(tempnotes)==="#*"){
-			Letters(savednotes);
-		}
 	}
-	else if(tempnotes.length-Count(tempnotes,"#*")>3){//3 notes
-		PlayChord(chord);
-		Letters(savednotes);
-	}
+
 	Caret(Infinity);
 }
 
@@ -1879,7 +1893,10 @@ function CheckWin(){
 	var win=FormattedTitle(CurLevelName())===Letters().join("").replace(/\_/g,"");
 	
 	if(win){
-		PlaySound("media/puzzle-type/sound/win"+RandomChoice("123")+".mp3");
+		if(!LevelWinSound())
+			PlaySound("media/puzzle-type/sound/win"+RandomChoice("123")+".mp3");
+		else
+			PlayWinSound();
 		MarkWonScreen();
 		BlockInput(1100);
 		setTimeout(NextLevel,1000);
