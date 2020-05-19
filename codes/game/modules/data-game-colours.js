@@ -378,5 +378,16 @@ function LightnessNumber(n){
 		return n;
 }
 
+
+////////////////////////////////////////////////////////////////////////////////
+// Blend
+
+function MultiplyHEX(colourA,colourB){
+	var a=VectorTimes(RGB(colourA).colour,[1/255,1/255,1/255]);
+	var b=VectorTimes(RGB(colourB).colour,[1/255,1/255,1/255]);
+	var c=VectorTimes(VectorTimes(a,b),[255,255,255]);
+	return HEX(c).colour;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 Shout("data-game-colours");
