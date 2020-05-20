@@ -193,7 +193,7 @@ AnalyticsStart=function(){
 		OutLinks();
 	}
 	else{
-	////AnonimiseLinks();
+		Memory("AnalyticsAllowed",false);
 	};
 }
 
