@@ -452,8 +452,8 @@ var LevelGoals=[			//Required types of thinking:
 	"Direct",				
 
 	"Reverse",				//Positional,
-	"Consonant",			//Positional, Language
 	"Follow",				//Positional, Monoactive
+	"Consonant",			//Positional, Language
 	"Second",				//Retroactive, Subtractive
 	"Rotate",				//Positional, Spacial, Retroactive
 
