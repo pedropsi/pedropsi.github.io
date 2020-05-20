@@ -50,6 +50,9 @@
 }
 
 .middle{
+   --letterOn:var(--darkblue);
+   --letterMid:var(--blue);
+   --letterTransparent:var(--lightyellow);
     min-height: 33.33%;
     max-height: 66.66%;
     flex-grow:2;
@@ -58,7 +61,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: var(--lightyellow);
+    background-color: var(--letterTransparent);
     filter: brightness(1.2);
     flex-wrap:wrap;
     position: relative;
@@ -79,9 +82,6 @@
 }
 
 .letter{
-   --letterOn:var(--darkblue);
-   --letterMid:var(--blue);
-   --letterTransparent:var(--lightyellow);
    font-feature-settings:normal;
    font-weight: bold;
    color:var(--letterOn);

@@ -362,7 +362,7 @@ function ForbidNumberActions(key){
 		"Symmetries",
 		"Topological",
 		"Nokia 1998",
-		"Fuchsia",
+		// "Fuchsia",
 		"Deaf",
 		"Odd",
 		"Mon petit ami",
@@ -384,7 +384,7 @@ function ForbidSpaceActions(key){
 		"Deaf",
 		"Dvorak",
 		"Mon petit ami",
-		"To cut and paste",
+		"Just cut and paste",
 		"This is it"
 	],CurLevelName())&&In([" ","Space","space"],key));
 }
@@ -465,7 +465,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Superior",				//Positional, Alphabetical, Retroactive
 	//"Tangles",			//Alphabetical, Cyclic, Arithmethic, Proactive
 	"Difference",			//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
-	//"Photocopier",			//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
+	//"Photocopier",		//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
 
 	"Symmetries",			//Shape, Retroactive
 	"Fillet",				//Shape, Proactive 
@@ -474,24 +474,23 @@ var LevelGoals=[			//Required types of thinking:
 	"Wasd",					//Keyboard, Emulation
 	"Nokia 1998",			//Keyboard
 	"Dvorak",				//Keyboard, Cyclic
-	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
 
+	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
 	"Nigeria",				//Word, Mapping, Geography
 	"Genetic.",				//Encoding, Word, Science
 	"Anagram",				//Word, Mapping, Language, Once,
-	"Ironclad",			//Encoding, Word, Science
+	"Ironclad",				//Encoding, Word, Science
+	"Deaf",					//Encoding, Music
+	"⠍⠕⠗⠎⠑",			 //Encoding, Once
+	"Dividi",				//Encoding, Arithmethic, Retroactive
 
+	//"Fuchsia",						//Encoding
+
+	"Odd",								//Keyword, Positional, Retroactive, Subtractive
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-	"Mon petit ami",				//Keyword, Swap, Retroactive, Language
-
-	"Fuchsia",							//Encoding
-	"Deaf",								//Encoding
-	"⠍⠕⠗⠎⠑",						  //Encoding, Once
-	"Dividi",							//Encoding, Arithmethic, Retroactive
-	
-	"Odd",								//Keyword, Positional, Retroactive, Subtractive
-	"To cut and paste",					//Keyword, Proactive, Redefinition
+	"Mon petit ami",					//Keyword, Swap, Retroactive, Language
+	"Just cut and paste",				//Keyword, Proactive, Redefinition
 	"This is it"						//Keyword, Proactive, Increment, Redefinition
 ];
 
@@ -605,7 +604,7 @@ var LevelActions={
 	},*/
 	"Dividi":Dividi,
 	"This is it":Baba,
-	"To cut and paste":Copypaste,
+	"Just cut and paste":Copypaste,
 	"Odd":function(L){
 		InputLetterAfter(L);
 		var odd=In(Word(),"ODD");
@@ -634,7 +633,7 @@ var LevelActions={
 		Caret(Infinity);
 	},
 	"⠍⠕⠗⠎⠑":Morse,
-	"Fuchsia":Fuchsia,
+	//"Fuchsia":Fuchsia,
 	"Deaf":Deaf,
 	"Anagram":Anagram,
 	"Ironclad":Ironclad,
@@ -1796,7 +1795,7 @@ var LetterDisplay={
 	"Ironclad":LetterDraftHTML,
 	"Genetic.":LetterDraftHTML,
 	"Anagram":LetterDraftHTML,
-	"Fuchsia":LetterDraftHTML,
+	// "Fuchsia":LetterDraftHTML,
 	"Deaf":LetterDraftHTML,
 	"Nigeria":LetterDraftHTML
 }
@@ -1931,8 +1930,8 @@ function UpdateLevel(state){
 		var state={
 			letters:Letters(),
 			caret:Caret(),
-			memo:Memo(),
-			colour:CaretColour()
+			memo:Memo()
+			// colour:CaretColour()
 		}
 
 	
@@ -1961,31 +1960,31 @@ function ObtainPlayEndGameSound(){
 	PlaySound("media/puzzle-type/sound/wingame.mp3");
 }
 
-function CaretColour(hex){
-	if(!CaretColour.colour)
-		CaretColour.colour=false;
+// function CaretColour(hex){
+// 	if(!CaretColour.colour)
+// 		CaretColour.colour=false;
 
-	if(typeof hex==="undefined")
-		return CaretColour.colour;
+// 	if(typeof hex==="undefined")
+// 		return CaretColour.colour;
 
-	CaretColour.colour=hex;
+// 	CaretColour.colour=hex;
 
-	RemoveElement(".overcolour");
-	if(CaretColour.colour)
-		AddSingleElement("<style class='overcolour'>.letter{--letterOn:"+CaretColour.colour+";--letterMid:"+CaretColour.colour+"}</style>",'BODY','.overcolour');
+// 	RemoveElement(".overcolour");
+// 	if(CaretColour.colour)
+// 		AddSingleElement("<style class='overcolour'>.letter{--letterOn:"+CaretColour.colour+";--letterMid:"+CaretColour.colour+"}</style>",'BODY','.overcolour');
 
-	return CaretColour.colour;
-}
+// 	return CaretColour.colour;
+// }
 
-function StartingColour(title){
-	var colours={
-		"Fuchsia":ObtainFGColor()
-	}
-	if(In(colours,title))
-		return colours[title]
-	else
-		return false;
-}
+// function StartingColour(title){
+// 	var colours={
+// 		"Fuchsia":ObtainFGColor()
+// 	}
+// 	if(In(colours,title))
+// 		return colours[title]
+// 	else
+// 		return false;
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
 //Level states
@@ -2010,13 +2009,13 @@ function StartingMemo(level){
 		'Fillet':0,
 		'Anagram':[],
 		'Nigeria':false,
-		'Fuchsia':{
-				colour:ObtainFGColor(),
-				used:"",
-				freeze:false
-			},
+		// 'Fuchsia':{
+		// 		colour:ObtainFGColor(),
+		// 		used:"",
+		// 		freeze:false
+		// 	},
 		'Nokia 1998':0,
-		'To cut and paste':"",
+		'Just cut and paste':"",
 		'⠍⠕⠗⠎⠑':[],
 		'Wasd':`_____...D_____
 				..S......_____
@@ -2046,8 +2045,8 @@ function StartingLevelState(){
 	var state={
 		'letters':[],
 		'caret':0,
-		'memo':StartingMemo(CurLevelName()),
-		'colour':StartingColour(CurLevelName())
+		'memo':StartingMemo(CurLevelName())
+		// 'colour':StartingColour(CurLevelName())
 	};
 	return state;
 }
@@ -2056,8 +2055,8 @@ function CurrentLevelState(){
 	var state={
 		'letters':Letters(),
 		'caret':Caret(),
-		'memo':Memo(),
-		'colour':CaretColour()
+		'memo':Memo()
+		// 'colour':CaretColour()
 	};
 	return state;
 }
@@ -2075,7 +2074,7 @@ function LevelState(state){
 	Letters(state.letters);
 	Caret(state.caret);
 	Memo(state.memo);
-	CaretColour(state.colour);
+	// CaretColour(state.colour);
 
 }
 
