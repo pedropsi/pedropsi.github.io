@@ -1221,7 +1221,7 @@ function Translate(L){
 			suffix=word.slice(i,Infinity);
 			prefix=word.slice(0,i);
 			var interpretations=Translator(suffix);
-			var interpretations=interpretations.filter(i=>!Prefixed(i,"-")).filter(i=>!In(i," "));
+			//var interpretations=interpretations.filter(i=>!Prefixed(i,"-"))//.filter(i=>!In(i," "));
 			found=(IsArray(interpretations)&&interpretations.length>0)//&&!In(interpretations,suffix))
 			if(found){
 				if(interpretations.length>1)

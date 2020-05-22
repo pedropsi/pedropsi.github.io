@@ -1315,7 +1315,7 @@ var NamesEnFr={
 	"farewell"
 	],
 "adipose":[
-	"-euse",
+	//"-euse",
 	"adipeux"
 	],
 "adipose tissue":[
@@ -59614,7 +59614,7 @@ var NamesEnFr={
 	"jute"
 	],
 "job":[
-	"-plastie",
+	//"-plastie",
 	"emploi poste",
 	"plastie",
 	"travail",
