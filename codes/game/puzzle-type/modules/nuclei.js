@@ -144,7 +144,7 @@ branchingElements=`
 ​8: "neon"				DIRECT
 ​13: "tennessine" 		EASY
 ​`
-
+*/
 var NucleiAbbs=Values(Nuclei);
 var NucleiNames=Keys(Nuclei);
 
@@ -171,4 +171,4 @@ function DivideElementName(element){
 	}
 	return found;
 }
-*/
+

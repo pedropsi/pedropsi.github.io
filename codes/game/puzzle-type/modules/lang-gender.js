@@ -26,6 +26,7 @@ var Gendered={//cherished woman//
 	"lion":"lioness",
 	//religion
 	"adam":"eve",
+	"god":"goddess",
 	//sociology
 	"mascularity":"feminacy",
 	"masculinity":"femininity",

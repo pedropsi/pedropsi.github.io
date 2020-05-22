@@ -115,6 +115,8 @@ var gameModulesLater=[
 "colours-names",
 "audiosynth",
 
+//"meta",
+
 "lang-fr-adj",
 "lang-fr-adv-extra",
 "lang-fr-interj",
@@ -505,7 +507,7 @@ var LevelActions={
 		InputLetterAfter(Z);		
 	},
 	"Rise":function(L){
-		var M=NumberLetter(LetterNumber(L)+1); 
+		var M=NumberLetter(Min(LetterNumber(L)+1,25)); 
 		InputLetterAfter(M);
 	},
 	"Second":Second,
@@ -523,7 +525,7 @@ var LevelActions={
 	"Consonant":Consonant,
 	"Falls":function (L){
 		function LetterDown(Z){
-			return NumberLetter(LetterNumber(Z)-1);
+			return NumberLetter(Max(LetterNumber(Z)-1,0));
 		}
 		Letters(Letters.array.map(LetterDown));
 		InputLetterAfter(L);
