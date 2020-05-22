@@ -11,7 +11,8 @@
     align-items: center;
     justify-content:center;
     z-index: 2;
-    overflow: hidden
+    overflow: hidden;
+    background-color: var(--lightyellow);
 }
 
 .top .title {
@@ -25,20 +26,11 @@
    justify-content: center;
 }
 
-.rotate90 .title{
-   font-size:var(--h8);
-}
-.rotate90 .credits{
-   font-size:var(--h4);
-   margin-top: var(--w8);
-}
-
 .top .goal{
    padding: calc(var(--w-8) + var(--h-8));
    line-height: calc(var(--h4) + var(--w2) + var(--h1));
    flex-grow: 1;
    justify-content: center;
-   background-color: var(--lightyellow);
    font-size: calc(var(--w4) + var(--h4));
    font-variant-caps:small-caps;
    font-weight: bold;

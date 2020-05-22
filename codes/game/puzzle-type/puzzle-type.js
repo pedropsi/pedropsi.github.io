@@ -479,8 +479,8 @@ var LevelGoals=[			//Required types of thinking:
 
 	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
 	"Nigeria",				//Word, Mapping, Geography
-	"Genetic.",				//Encoding, Word, Science
 	"Anagram",				//Word, Mapping, Language, Once,
+	"Genetic.",				//Encoding, Word, Science
 	"Ironclad",				//Encoding, Word, Science
 	"Deaf",					//Encoding, Music
 	"⠍⠕⠗⠎⠑",			 //Encoding, Once
