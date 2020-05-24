@@ -1,9 +1,16 @@
 News={
-	N_46:{
+	N_47:{
 DATE:"2020-05-24",
-HEADER:()=>"Puzzle type beta changes VI",
+HEADER:()=>"Global hall of fame",
 PIECE:()=>`
-<p>More updates: level FUCHSIA is harder and more dynamic.</p>
+	<p>There is now a ${AHTML("global Hall of Fame","hall-of-fame-global")} for winners of any puzzlescript game played in the game-console. Have a try!</p>
+	`,ID:"hall-of-fame-global"},
+	N_46:{
+DATE:"2020-05-23",
+	HEADER:()=>"Puzzle type Gamma",
+	PIECE:()=>`
+	<p>The Gamma Phase has started, with a fresh round of videoplaytests. Contact ${v.NAME()} to join!</p>
+	<p>More updates: level FUCHSIA (formerly WHITE) removed.</p>
 	`,ID:"puzzle-type"},
 	N_45:{
 DATE:"2020-05-17",

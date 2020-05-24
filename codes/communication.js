@@ -348,6 +348,11 @@ Inflows=function(name){
 		docId:"1JnxJM0LcFyl7XvF-P2MlBi6q3lKRlqVMEY-V8i9zWng",
 		sheetName:"Source",
 		rowStart:1
+		},
+	"hall-of-fame-global":{
+		docId:"1UiBHdCU_JBJNyDZCVdbxYBHn5jbORfKwSexNixeyu0w",
+		sheetName:"Hall-of-Fame-Global",
+		rowStart:3
 		}
 	};
 	if(name)
@@ -495,7 +500,15 @@ Outflows=function(name){
 			sheetName:"Country",
 			identifier:UserCountry(),
 			uid:navigator.userAgent||UserId()
-		}}
+		}},
+		"hall-of-fame-global":function(){return{
+			post:true,
+			docId:"1UiBHdCU_JBJNyDZCVdbxYBHn5jbORfKwSexNixeyu0w",
+			sheetName:"Hall-of-Fame-Global",
+			rowStart:3,
+			identifier:GameTitle(),
+			name:FindData("name")
+		}},
 	};
 	if(name)
 		return UnFunction(flows[name]);
@@ -511,8 +524,18 @@ Outflows=function(name){
 
 RequestHallOfFame=function(){
 	if(ConsoleExternal())
-		return;
-	RequestDataPack([
+		RequestDataPack([
+		['alias',{
+			questionname:"Enter the Global Hall of Fame:",
+			qplaceholder:"Your name or alias",
+			qrequired:true,
+			qerrorcustom:"The Hall of Fame's guards ask for at least 2 alphanumerics!"}
+		]],
+		{
+			destination:"hall-of-fame-global"
+		});
+	else
+		RequestDataPack([
 	['alias',{
 		questionname:"Enter the Hall of Fame:",
 		qplaceholder:"Your name or alias",

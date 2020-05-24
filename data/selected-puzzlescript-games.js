@@ -88,7 +88,7 @@ function SelectedGamesRow(GameObj){
 	
 	var titleHTML=AHTML(GameObj.TITLE,fulllink);
 	if(In(fulllink,"game-console"))
-		titleHTML=titleHTML+" "+AHTML("◊","https://puzzlescript.net/play.html?p="+GameObj.LINK);
+		titleHTML=titleHTML+" "+AHTML(ObtainSymbol("loz"),"https://puzzlescript.net/play.html?p="+GameObj.LINK);
 
 	var authorHTML=GameObj.AUTHOR;
 	if(GameObj.AUTHOR_LINK)

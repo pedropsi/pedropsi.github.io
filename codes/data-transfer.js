@@ -4877,7 +4877,8 @@ ObtainSymbol=function(name){
 		"space":" ",	//keyboard useful
 		"dot":".",		//keyboard useful
 		"dash":"-",		//keyboard useful
-		"eye":"👁"
+		"eye":"👁",
+		"loz":"◊"
 		};
 	if(!name)
 		return symbols;

@@ -249,7 +249,7 @@ function GameEntryData(dataline){
 			data.consolable=true;
 		
 		if(data.consolable)
-			data.titleHTML=AHTML(data.titleHTML,data.playlink)+" "+AHTML("◊",data.linkHTML);
+			data.titleHTML=AHTML(data.titleHTML,data.playlink)+" "+AHTML(ObtainSymbol("loz"),data.linkHTML);
 		else
 			data.titleHTML=AHTML(data.titleHTML,data.playlink=data.linkHTML);
 		
@@ -392,6 +392,10 @@ function InputFilterPGDMenu(parentSelector,filterselector,childSelector,subparen
 
 function GameDropdownRowHTML(data){
 	return "<div id='"+data.playlink+"'>"+data.titleHTML+data.notesHTML+" by "+data.authorHTML+data.authorOriginalHTML+"</div>";
+}
+
+function GameTitle(){
+	return Memory(PageSearch("game"))["title-consensus"];
 }
 
 //////////////////////////////////////////////////////////////////////

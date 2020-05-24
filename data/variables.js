@@ -111,9 +111,7 @@ SHEET_URL_RECORD			:	()=>	`${v.SHEET_URL()}e/2PACX-1vQwd7CTU3k1HsrT4fPLljY9HSW5e
 SHEET_URL_GAMES_LIST		:	()=>	`${v.SHEET_URL()}e/2PACX-1vQIyh0-r33j0GqPOAtttQEP-MiOZ2Zk_hggfcFMH5_hiclaUCZu30MRaO58h1Hty9UGWefP25gBB56a/pubhtml?gid=`,
 
 DISPLAY_LEGACY				:(idcode)=>`${v.SHEET_URL_RECORD()}${idcode}${v.SHEET_OPT()}`,
-DISPLAY_EXTERNAL_OLD			:	()=>	`<div id="${v.LINK()}-area" class="external-area">${v.DISPLAY_IFRAME()}</div>`,
 DISPLAY_EXTERNAL			:	()=>	`<div id="${v.LINK()}-area" class="external-area">Loading...</div>`,
-DISPLAY_IFRAME				:	()=>	`<div class="section"><iframe src="${v.DISPLAY_LEGACY(v.DISPLAY_LEGACY_CODE())}" ${v.IFRAME_OPTS()}></iframe></div>`,
 
 DISPLAY_SCRIPT				:	()=>	`<script>DisplayTable()</script>`,
 
@@ -414,7 +412,7 @@ SECTION_CHANGELOG			:	()=>	v.CHANGELOG()?v.SECTION_OUT(v.WHITEBOARD_OUT(v.CHANGE
 
 BOOKMARKLET_BROWSER_TEXT	:	()=>	`<h3>In Chrome</h3><p><kbd>Drag</kbd> the above bookmarklet link to your bookmarks toolbar.</p><h3>In Firefox</h3><p><kbd>Right click</kbd> on the above bookmarklet link, then select "bookmark this link".</p><h3>If nothing else works</h3><p>Replace the content of an old bookmark with the above link content. Or you could run the bookmarklet js code directly in a game page (it'd still be quicker than manual alternatives).</p>`,
 
-LOZ_SYMBOL_TEXT				:	()=>	`<h3>What is the ◊ symbol?</h3><p>When available, links are opened in the ${AHTML("game-console")}, which loads the ${v.A_GAME_BAR()} by default. This is indicated by the ◊ symbol. Clicking this symbol directly will, however, direct you to the original ${v.A_PUZZLESCRIPT()} game page!</p><p><b>NB:</b> To add a <em>level selector</em> and <em>fullscreen</em> option  on the fly to other games, just use the ${v.A_BOOKMARKLET()}!</p>`,
+LOZ_SYMBOL_TEXT				:	()=>	`<h3>What is the ${ObtainSymbol("loz")} symbol?</h3><p>When available, links are opened in the ${AHTML("game-console")}, which loads the ${v.A_GAME_BAR()} by default. This is indicated by the ${ObtainSymbol("loz")} symbol. Clicking this symbol directly will, however, direct you to the original ${v.A_PUZZLESCRIPT()} game page!</p><p><b>NB:</b> To add a <em>level selector</em> and <em>fullscreen</em> option  on the fly to other games, just use the ${v.A_BOOKMARKLET()}!</p>`,
 LOZ_SYMBOL					:	()=>	`&loz`,
 
 A_SELF_LINK					:	()=>	`<a href="${v.SITE()}/${v.LINK()}">${v.LINK()}</a>`,
