@@ -1225,7 +1225,7 @@ function Translate(L){
 			found=(IsArray(interpretations)&&interpretations.length>0)//&&!In(interpretations,suffix))
 			if(found){
 				if(interpretations.length>1)
-					word=prefix+"◀"+interpretations[0]+"▶";
+					word=prefix+ObtainSymbol("left")+interpretations[0]+ObtainSymbol("right");
 				else
 					word=prefix+interpretations[0];
 				var p=0;
