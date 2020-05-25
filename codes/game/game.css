@@ -391,6 +391,7 @@
 }
 
 .controls-arrow{
+    vertical-align: middle;
     display: inline-grid;
     text-indent:0;
     text-align: center;
