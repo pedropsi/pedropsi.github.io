@@ -1749,3 +1749,7 @@ p .icon{
 	padding-left: unset;
 	padding-right: unset;
 }
+
+.grid{
+	 display: grid;
+}

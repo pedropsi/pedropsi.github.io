@@ -370,3 +370,31 @@
       
     animation-delay: calc( 1 * var(--durat) - 200ms); /*separate colours*/
 }
+
+
+.key-left{
+  grid-area: left;
+}
+.key-up {
+  grid-area: up;
+}
+.key-right {
+  grid-area: right;
+}
+.key-down {
+  grid-area: down;
+}
+
+.controls-arrow kbd{
+  margin: unset;
+  padding: unset;
+}
+
+.controls-arrow{
+    text-align: center;
+    grid-template-areas: 
+    ".    up   ."
+    "left .    right"
+    ".    down .";
+}
+
