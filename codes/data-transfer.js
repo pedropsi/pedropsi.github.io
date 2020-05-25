@@ -1113,6 +1113,12 @@ PageIdentifier=function(url){
 //Search
 
 PageSearch=function(parameter,page){
+	if(In(parameter,"?")){//inverted
+		var page=parameter;
+		var parameter=undefined;
+	}
+	if(PageRelative(page))
+		page=Prefix(page,"https://")//fake url
 	var l=new URL(page||document.URL);
 	l=l.search;
 	if(!parameter)
