@@ -2170,9 +2170,6 @@ AHTML=function(title,ref,attribs){
 	return ElementHTML({tag:"a",txt:title,attributes:attribs});
 }
 
-/*InnerAHTML=function(title){
-	return AHTML(title);
-}*/
 
 LabelHTML=function(text,type){
 	var type=type||text||"";
