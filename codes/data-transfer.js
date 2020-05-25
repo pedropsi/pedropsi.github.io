@@ -1205,12 +1205,26 @@ GlocalPath=function(urlpath,relativepath){
 
 //NavigateGoToPage
 
+function RightPath(url){
+	if(!PageRelative(url))
+		return url;
+	else{
+		var search=PageSearch(url);
+		var frag=PageFragment(url);
+			frag=frag?Prefix(frag,"#"):"";
+		var url=PageUnSearch(url);
+			url=Posfix(Posfix(url,".html"),search)+frag;
+		return url
+	}
+}
+
 Navigate=function(url,samewindow){
 	if(PageRelative(url)){
-		var url=Posfix(url,".html");
-		var url=Posfix(PageDomain(),"/")+UnPrefix(url,"/");
 		var samewindow=true;
 	}
+
+	var url=RightPath(url);
+
 	if(samewindow)
 		window.location.href=url;
 	else{//NewTab
@@ -2144,8 +2158,9 @@ AHTML=function(title,ref,attribs){
 		if(In(title,".html"))
 			return AHTML(title,title);
 		
-		var ref=Posfix(title,".html");
-		var title=CapitaliseSlug(title);
+		var ref=title;
+		var title=CapitaliseSlug(title.replace("-"," "));
+			ref=RightPath(ref);
 	}
 	var external=Prefixed(ref,"http");
 	var attribs=attribs||{};
