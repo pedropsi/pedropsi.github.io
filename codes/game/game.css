@@ -387,10 +387,12 @@
 
 .controls-arrow kbd{
   margin: unset;
-  padding: unset;
+  text-indent: unset;!im
 }
 
 .controls-arrow{
+    display: inline-grid;
+    text-indent:0;
     text-align: center;
     grid-template-areas: 
     ".    up   ."
