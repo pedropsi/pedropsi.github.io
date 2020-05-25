@@ -1806,20 +1806,22 @@ function RequestHint(){
 		var p=CyclePosition(curlevelHints);
 		SeeHint(CurLevelNumber(),p+1);
 		
-		var navichoices=["◀","OK","▶"];
+		var left=ObtainSymbol("left");
+		var right=ObtainSymbol("right");
+		var navichoices=[left,"OK",right];
 		var naviactions={
-			"◀":RequestPrevHint,
-			"▶":RequestNextHint,
 			"OK":CloseHint
 		};
+		naviactions[left]=RequestPrevHint;
+		naviactions[right]=RequestNextHint;
 
 		if(p===0){
 			navichoices.shift();
-			delete naviactions["◀"];
+			delete naviactions[left];
 		}
 		if(p===curlevelHints.length-1){
 			navichoices.pop();
-			delete naviactions["▶"];
+			delete naviactions[right];
 		}
 		
 		var DFOpts={questionname:tip};

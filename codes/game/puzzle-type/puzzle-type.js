@@ -1204,7 +1204,7 @@ function Translate(L){
 		var word=prefix+interpretations[p];
 
 		if(choosing&&interpretations.length>1)
-			word=prefix+"◀"+interpretations[p]+"▶";
+			word=prefix+ObtainSymbol("left")+interpretations[p]+ObtainSymbol("right");
 
 	}else{
 		if(In(NumberCharacters,L)||L==="Enter"||In(ArrowKeys,L))
