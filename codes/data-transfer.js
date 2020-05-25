@@ -2435,7 +2435,7 @@ DataFieldTypes=function(){
 		qfield:"navi",
 		qclass:"nowrap",
 		questionname:"",
-		qchoices:["◀","OK","▶"],
+		qchoices:[ObtainSymbol("left"),"OK",ObtainSymbol("right")],
 		qtype:ExclusiveChoiceButtonRowHTML,
 		defaultChoice:function(i,txt){return txt==="OK";},
 		qsubmittable:false},
@@ -4884,7 +4884,11 @@ ObtainSymbol=function(name){
 		"dot":".",		//keyboard useful
 		"dash":"-",		//keyboard useful
 		"eye":"👁",
-		"loz":"◊"
+		"loz":"◊",
+		"left":"◀",
+		"up":"▲",
+		"right":"▶",
+		"down":"▼"
 		};
 	if(!name)
 		return symbols;
