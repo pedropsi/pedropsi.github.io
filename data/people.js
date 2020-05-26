@@ -97,11 +97,12 @@ DABRILA:{TYPE:"Developer",NAME:"Justas Dabrila",ITCH:"ssstormy",TWITTER:"justas_
 PRAUSE:{TYPE:"Developer",NAME:"Denis Prause",ALIAS:"Zejety",GITHUB_COM:"zejety"},
 PARACHOR:{TYPE:"Developer",NAME:"Parachor",ITCH:"parachor"},
 CROUBBLE:{TYPE:"Developer",NAME:"Crouble",ALIAS:"NarrowAdder",TWITTER:"Croubble",ITCH:"dazed-pidgeon"},
-PLURMORANT:{TYPE:"Tester",NAME:"Plurmorant"},
-COLLINEYE:{TYPE:"Tester",NAME:"Patrick Collin Eye",TWITTER:"collin_eye"},
+PLURMORANT:{NAME:"Plurmorant"},
+COLLINEYE:{TYPE:"Developer",NAME:"Patrick Collin Eye",TWITTER:"collin_eye"},
 ZENOROGUE:{TYPE:"Developer",NAME:"ZenoRogue",TWITTER:"ZenoRogue"},
 ZARFEBLONG:{TYPE:"Developer",NAME:"Andrew Plotkin",ALIAS:"zarfeblong",TWITTER:"zarfeblong"},
-UBUNTOR:{TYPE:"Developer",NAME:"Samuel Kim",ALIAS:"ubuntor",GITHUB_COM:"ubuntor"}
+UBUNTOR:{TYPE:"Developer",NAME:"Samuel Kim",ALIAS:"ubuntor",GITHUB_COM:"ubuntor"},
+HEDEHOLM:{TYPE:"Developer",NAME:"Kristian Hedeholm",TWITTER:"kristianhede"},
 }
 
 PersonalPage=function(linkObj){

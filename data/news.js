@@ -1,4 +1,10 @@
 News={
+	N_48:{
+DATE:"2020-05-24",
+HEADER:()=>"Redo support",
+PIECE:()=>`
+	<p>As this feature was needed for ${AHTML("puzzle-type")}, the ${AHTML("game-bar")} now has a nice <kbd>${ObtainSymbol("redo")}</kbd> redo button - a suggestion by ${v.COLLINEYE()} and ${v.HEDEHOLM()}!</p>
+	`,ID:"game-bar"},
 	N_47:{
 DATE:"2020-05-24",
 HEADER:()=>"Global hall of fame",
@@ -7,8 +13,8 @@ PIECE:()=>`
 	`,ID:"hall-of-fame-global"},
 	N_46:{
 DATE:"2020-05-23",
-	HEADER:()=>"Puzzle type Gamma",
-	PIECE:()=>`
+HEADER:()=>"Puzzle type Gamma",
+PIECE:()=>`
 	<p>The Gamma Phase has started, with a fresh round of videoplaytests. Contact ${v.NAME()} to join!</p>
 	<p>More updates: level FUCHSIA (formerly WHITE) removed.</p>
 	`,ID:"puzzle-type"},
