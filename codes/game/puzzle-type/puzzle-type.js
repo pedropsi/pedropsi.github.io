@@ -42,13 +42,16 @@ function ShiftBaseColour(basecolour){
 //Restart and Undo
 function ObtainRestartAllowed(){return true;}
 function ObtainUndoAllowed(){return true;}
+function ObtainRedoAllowed(){return true;}
 var ObtainUndo=function(){Undo();PulseSelect("#choice-"+"undo")};					//With Onscreen keyboard
+var ObtainRedo=function(){Redo();PulseSelect("#choice-"+"redo")};					//With Onscreen keyboard
 var ObtainRestart=function(){Restart();PulseSelect("#choice-"+"restart")};			//With Onscreen keyboard
 
 function ObtainMainKey(action){
 	if(!action)
 		return {
 			"undo":"Alt Z",
+			"redo":"Alt Y",
 			"restart":"Alt R",
 			"feedback":"Alt E",
 			"fullscreen":"Alt F",
@@ -248,9 +251,14 @@ function ObtainKeyActionsGame(){
 		"Alt Z":ObtainUndo,
 		"Ctrl Z":ObtainUndo,
 		
-		"Shift Backspace":ObtainRestart,
-		"Shift Delete":ObtainRestart,
+		"Shift Backspace":ObtainRedo,
+		"Shift Delete":ObtainRedo,
+		"Alt Y":ObtainUndo,
+		"Ctrl Y":ObtainUndo,
 		
+		"Ctrl Backspace":ObtainRestart,
+		"Ctrl Delete":ObtainRestart,
+
 		"Spacebar":InstructGameKeyF("space"),
 		"Enter":InstructGameKeyF("Enter"),
 		"Left":InstructGameKeyF("Left"),
@@ -260,9 +268,11 @@ function ObtainKeyActionsGame(){
 	};
 
 	keyactions["undo"]=ObtainUndo;			//Onscreen keyboard
+	keyactions["redo"]=ObtainRedo;			//Onscreen keyboard
 	keyactions["restart"]=ObtainRestart;	//Onscreen keyboard
 
 	keyactions[ObtainMainKey("undo")]=ObtainUndo;
+	keyactions[ObtainMainKey("redo")]=ObtainRedo;
 	keyactions[ObtainMainKey("restart")]=ObtainRestart;
 
 	return keyactions;
@@ -2087,41 +2097,51 @@ function LevelState(state){
 
 function Restart(){
 	UpdateLevel(StartingLevelState());
-
 	PulseSelect("RestartButton");
 }
 
 
 function EmptyUndo(){
 	Undo.backups=[StartingLevelState()];
+	Undo.pointer=1;
 }
 
 function AddUndo(state){
 	if(!Undo.backups)
 		EmptyUndo();
 
-	if(!Equal(Last(Undo.backups),state))
-		Undo.backups.push(state);
+	if(!Equal(Last(Undo.backups),state)){
+		InsertCut(Undo.backups,state,Undo.pointer);
+		Undo.pointer=Undo.pointer+1;
+	}
 }
 
-function PopUndo(){
-	if(!Undo.backups||Undo.backups.length<=1)
-		EmptyUndo();
-	else
-		Undo.backups.pop(); 
-
-	return Last(Undo.backups);
-}
 
 function Undo(){
-	var laststate=PopUndo();
+	Undo.pointer=Max(1,Undo.pointer-1);
+
+	var state=Undo.backups[Undo.pointer-1];
 	
-	LevelState(laststate);
-	
-	EffectRenderer();
-	DrawLevel();
+	SetLevelState(state);
 	
 	PulseSelect("UndoButton");
+}
+
+
+function Redo(){
+	Undo.pointer=Min(Undo.backups.length,Undo.pointer+1);
+
+	var state=Undo.backups[Undo.pointer-1];
+	
+	SetLevelState(state);
+	
+	PulseSelect("RedoButton");
+}
+
+function SetLevelState(state){
+	LevelState(state);
+	EffectRenderer();
+	DrawLevel();
 }
 
 function ClearLevel(){

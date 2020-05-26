@@ -34,10 +34,19 @@ if(typeof ObtainRestartAllowed==="undefined")
 if(typeof ObtainUndoAllowed==="undefined")
 	var ObtainUndoAllowed=function(){return !state.metadata.noundo;}
 
+if(typeof ObtainRedoAllowed==="undefined")
+	var ObtainRedoAllowed=False//ObtainUndoAllowed;
+
 if(typeof ObtainUndo==="undefined")
 	var ObtainUndo=function(){
 		PulseSelect("UndoButton");
 		CheckRegisterKey({keyCode:85});}
+
+if(typeof ObtainRedo==="undefined")
+	var ObtainRedo=function(){
+		PulseSelect("RedoButton");
+		CheckRegisterKey({keyCode:89}); //TODO REDO
+}
 
 if(typeof ObtainRestart==="undefined")
 	var ObtainRestart=function(){
@@ -121,6 +130,9 @@ else if(ObtainLevelTitle==="Previous"){ //Case for title specified in message be
 if(typeof ObtainIsUndoMove==="undefined")
 	var ObtainIsUndoMove=function(move){return move==="Z"}
 
+if(typeof ObtainIsRedoMove==="undefined")
+	var ObtainIsRedoMove=function(move){return move==="Y"}
+
 if(typeof ObtainIsRestartMove==="undefined")
 	var ObtainIsRestartMove=function(move){return move==="R"}
 
@@ -135,6 +147,7 @@ if(typeof ObtainReadMove==="undefined")
 			case 82:return "R";break;
 			case 88:return "X";break;
 			case 85:return "Z";break;
+			case 89:return "Y";break;
 			default: return move;break;
 		}
 	};
@@ -178,6 +191,7 @@ if(typeof ObtainMainKey==="undefined")
 		if(!action)
 			return {
 				"undo":"Z",
+				"redo":"Y",
 				"restart":"R",
 				"feedback":"E",
 				"fullscreen":"F",
@@ -209,6 +223,7 @@ function ObtainActionTooltip(action){
 			"how-to-play":"How to play?",
 			"save":"Save permissions",
 			"undo":"Undo",
+			"redo":"Redo",
 			"restart":"Restart",
 			"feedback":"E-mail feedback",
 			"fullscreen":"Fullscreen",
@@ -394,6 +409,20 @@ function UndoButton(){
 		return "";
 }
 
+function RedoButton(){
+	if(ObtainRedoAllowed())
+		return GameBarButtonHTML('redo',{
+			onclick:'RedoAndFocus();',
+			onmousedown:'AutoRepeat(RedoAndFocus,250);',
+			ontouchstart:'AutoRepeat(RedoAndFocus,250);',
+			onmouseup:'AutoStop(RedoAndFocus);',
+			ontouchend:'AutoStop(RedoAndFocus);',
+			ontouchcancel:'AutoStop(RedoAndFocus);'
+		})
+	else
+		return "";
+}
+
 function RestartButton(){
 	if(ObtainRestartAllowed())
 		return GameBarButtonHTML('restart',{onclick:'ObtainRestart();GameFocus();'});
@@ -454,6 +483,7 @@ function GameBar(){
 		GameBarButtonLinkHTML("How to play?","how-to-play"),
 		HiddenHTML('HintButton'),
 		UndoButton(),
+		RedoButton(),
 		RestartButton(),
 		KeyboardButton(),
 		LevelselectorButton(),
@@ -488,6 +518,11 @@ function GameFocus(DP){
 
 function UndoAndFocus(){
 	ObtainUndo();
+	GameFocus();
+}
+
+function RedoAndFocus(){
+	ObtainRedo();
 	GameFocus();
 }
 
@@ -1403,6 +1438,7 @@ if(typeof ObtainKeyActionsGame==="undefined")
 			// Undo	 
 			"Z"			:ObtainUndo,	//InstructGameKeyF(85),
 			"U"			:ObtainUndo,	//InstructGameKeyF(85),
+			"Y"			:ObtainRedo,	//InstructGameKeyF(85),
 			/*"backspace"	:InstructGameKeyF(85),*/
 			// Restart
 			"R"			:ObtainRestart,	//InstructGameKeyF(82),
@@ -1907,6 +1943,7 @@ function RequestKeyboard(){
 	function HideButtons(){
 		ReplaceElement(HiddenHTML("RestartButton"),"RestartButton");
 		ReplaceElement(HiddenHTML("UndoButton"),"UndoButton");
+		ReplaceElement(HiddenHTML("RedoButton"),"RedoButton");
 	}
 	
 	HideButtons();
@@ -1918,13 +1955,14 @@ function GameFocusAndRestartUndoButtons(){
 	function RestoreButtons(){
 		ReplaceElement(RestartButton(),"RestartButton");
 		ReplaceElement(UndoButton(),"UndoButton");
+		ReplaceElement(RedoButton(),"RedoButton");
 	}
 	
 	setTimeout(RestoreButtons,100); //Needed
 }
 
 function GameKeyboardKeys(){
-	return [["undo","restart"]]; // Undo and Restart
+	return [["undo","redo","restart"]]; // Undo and Restart
 }
 
 
