@@ -102,7 +102,8 @@ var gameModulesEarly=[
 "codes/game/modules/data-game-extras.js",
 "codes/game/modules/data-game-moves.js",
 "codes/game/modules/data-game-colours.js",
-"data/game-intro.js"
+"codes/game/modules/data-game-undo.js",
+"data/game-intro.js",
 ]
 
 var gameModulesLater=[
@@ -330,7 +331,7 @@ function LevelAction(key){
 			RegisterMove(key);
 		}
 	}
-	UpdateLevel();
+	ObtainUpdateLevel();
 	CheckWin();	
 }
 
@@ -1834,7 +1835,7 @@ function CaretHTML(){
 function ClearLetters(){
 	Letters([]);
 	Caret(0);
-	UpdateLevel();
+	ObtainUpdateLevel();
 }
 
 function DrawLetters(){
@@ -1936,7 +1937,7 @@ function LevelLoader(){
 }
 
 
-function UpdateLevel(state){
+function ObtainUpdateLevel(state){
 	
 	if(typeof state==="undefined")
 		var state={
@@ -1951,7 +1952,6 @@ function UpdateLevel(state){
 	AddUndo(state);
 	DrawLevel();
 }
-
 
 function CheckWin(){
 	var win=FormattedTitle(CurLevelName())===Letters().join("").replace(/\_/g,"");
@@ -1997,6 +1997,18 @@ function ObtainPlayEndGameSound(){
 // 	else
 // 		return false;
 // }
+
+//Undo / Restart related
+function ObtainSetLevelState(state){
+	LevelState(state);
+	EffectRenderer();
+	DrawLevel();
+}
+
+function ClearLevel(){
+	EmptyUndo();
+	LevelState(ObtainStartingLevelState());
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Level states
@@ -2053,7 +2065,7 @@ function EffectRenderer(level){
 }
 
 
-function StartingLevelState(){
+function ObtainStartingLevelState(){
 	var state={
 		'letters':[],
 		'caret':0,
@@ -2076,7 +2088,7 @@ function CurrentLevelState(){
 
 function LevelState(state){
 	if(!LevelState.level)
-		LevelState.level=StartingLevelState();
+		LevelState.level=ObtainStartingLevelState();
 
 	if(typeof state==="undefined")
 		state=LevelState.level;
@@ -2088,63 +2100,4 @@ function LevelState(state){
 	Memo(state.memo);
 	// CaretColour(state.colour);
 
-}
-
-
-
-///////////////////////////////////////////////////////////////////////////////
-//Undo & Restart
-
-function Restart(){
-	UpdateLevel(StartingLevelState());
-	PulseSelect("RestartButton");
-}
-
-
-function EmptyUndo(){
-	Undo.backups=[StartingLevelState()];
-	Undo.pointer=1;
-}
-
-function AddUndo(state){
-	if(!Undo.backups)
-		EmptyUndo();
-
-	if(!Equal(Last(Undo.backups),state)){
-		InsertCut(Undo.backups,state,Undo.pointer);
-		Undo.pointer=Undo.pointer+1;
-	}
-}
-
-
-function Undo(){
-	Undo.pointer=Max(1,Undo.pointer-1);
-
-	var state=Undo.backups[Undo.pointer-1];
-	
-	SetLevelState(state);
-	
-	PulseSelect("UndoButton");
-}
-
-
-function Redo(){
-	Undo.pointer=Min(Undo.backups.length,Undo.pointer+1);
-
-	var state=Undo.backups[Undo.pointer-1];
-	
-	SetLevelState(state);
-	
-	PulseSelect("RedoButton");
-}
-
-function SetLevelState(state){
-	LevelState(state);
-	EffectRenderer();
-	DrawLevel();
-}
-
-function ClearLevel(){
-	EmptyUndo();
-	LevelState(StartingLevelState());
 }
