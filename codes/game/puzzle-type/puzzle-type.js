@@ -513,10 +513,10 @@ var LevelActions={
 	"Reverse":function(L){
 		InputLetterBefore(L);
 	},
-	"Oppose":function(A){
-		var Z=NumberLetter(25-LetterNumber(A)); 
-		InputLetterAfter(Z);		
-	},
+	// "Oppose":function(A){
+	// 	var Z=NumberLetter(25-LetterNumber(A)); 
+	// 	InputLetterAfter(Z);		
+	// },
 	"Rise":function(L){
 		var M=NumberLetter(Min(LetterNumber(L)+1,25)); 
 		InputLetterAfter(M);
