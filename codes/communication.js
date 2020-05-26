@@ -422,10 +422,10 @@ Outflows=function(name){
 			name:FindData("name"),
 			email:FindData("email"),
 			comment:FindData("answer"),
-			address:FindData("address"),
-			fiscalnumber:FindData("fiscalnumber"),
-			country:FindData("country"),
-			taxrate:FindData("taxrate")
+			// address:FindData("address"),
+			// fiscalnumber:FindData("fiscalnumber"),
+			// country:FindData("country"),
+			// taxrate:FindData("taxrate")
 		}},
 		"purchase":function(){return{
 			post:true,
