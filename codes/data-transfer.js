@@ -394,8 +394,17 @@ ContainsF=function(n){
 }
 
 Count=function(array,itemOrF){
+	if(typeof array==="string"&&typeof itemOrF==="string"){
+		var r=array.replace(itemOrF,"");
+		if(r!==array)
+			return Count(r,itemOrF)+1;
+		else
+			return 0;
+	}
+	if(typeof array==="string")
+		return Count(array.split(""),itemOrF);
 	if(typeof itemOrF==="function")
-		return array.filter(F).length;
+		return array.filter(itemOrF).length;
 	else
 		return array.filter(function(e){return Equal(e,itemOrF)}).length;
 }
