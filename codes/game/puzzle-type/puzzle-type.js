@@ -379,7 +379,7 @@ function ForbidNumberActions(key){
 		"Deaf",
 		"Odd",
 		"Mon petit ami",
-		"Plan is wise",
+		"Order is good",
 		"⠍⠕⠗⠎⠑"],CurLevelName())&&In(NumberCharacters,key));
 }
 
@@ -398,7 +398,7 @@ function ForbidSpaceActions(key){
 		"Dvorak",
 		"Mon petit ami",
 		"Just cut and paste",
-		"Plan is wise"
+		"Order is good"
 	],CurLevelName())&&In([" ","Space","space"],key));
 }
 
@@ -504,7 +504,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
 	"Mon petit ami",					//Keyword, Swap, Retroactive, Language
 	"Just cut and paste",				//Keyword, Proactive, Redefinition
-	"Plan is wise"						//Keyword, Proactive, Increment, Redefinition
+	"Order is good"						//Keyword, Proactive, Increment, Redefinition
 ];
 
 
@@ -616,7 +616,7 @@ var LevelActions={
 		
 	},*/
 	"Dividi":Dividi,
-	"Plan is wise":Baba,
+	"Order is good":Baba,
 	"Just cut and paste":Copypaste,
 	"Odd":function(L){
 		InputLetterAfter(L);
@@ -1166,7 +1166,8 @@ function Baba(L){
 	}
 	
 	for (var i=0;i<rules.length;i++){
-		word=StringReplace(word,rules[i]);
+		word=StringReplace(word,[rules[i][0],"#"]);
+		word=StringReplace(word,["#",rules[i][1]]);
 	}
 
 	Memo(rules);
@@ -2046,7 +2047,7 @@ function StartingMemo(level){
 				.....A._______
 				..____________
 				W_____________`.replace(/\t*/g,""),
-		'This is it':[],
+		'Order is good':[],
 		'Mon petit ami':false
 	};
 	return zeromemo[level];
