@@ -1156,6 +1156,7 @@ function Baba(L){
 	InputLetterAfter(L);
 
 	var word=Letters().join("");
+//	var pattern=/(.+)IS(.+)/;
 	var pattern=/\s*([^\s]+)\s+IS\s+([^\s]+)\s*/;
 	if(pattern.test(word)){
 		var subject=word.replace(pattern,"$1");
