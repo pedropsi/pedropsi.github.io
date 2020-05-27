@@ -255,7 +255,7 @@ function ObtainKeyActionsGame(){
 		"Shift Backspace":ObtainRedo,
 		"Shift Delete":ObtainRedo,
 		"Alt Y":ObtainUndo,
-		"Ctrl Y":ObtainUndo,
+		"Ctrl Y":ObtainRedo,
 		
 		"Ctrl Backspace":ObtainRestart,
 		"Ctrl Delete":ObtainRestart,
