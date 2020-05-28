@@ -332,11 +332,10 @@ GUESTBOOK_MESSAGE			:	()=>	`<h3>Guestbook</h3>${v.GUESTBOOK_POST_TEXT()}${v.GUES
 
 FEEDBACK					:	()=>	`<h2>Feedback</h2><h3>Problems? Suggestions?</h3><p>Please ${v.A_LET_ME_KNOW()} !</p><h3>Praise?</h3>${v.GUESTBOOK_POST_TEXT()}${v.GUESTBOOK_ADD()}`,
 
-PRESS_TEXT					:	()=>	`${v.PRESS_INTRO()}${v.PRESS_USAGE()}${ScreenshotGalleryHTML(v.LINK())}${v.OTHER_INQUIRIES()}`,
-PRESS_INTRO					:	()=>	`<h2>Press</h2><p class="centre">Would you like....<ul><li>to write an article about ${v.TITLE_BOLD()}?</li><li>to feature ${v.TITLE_BOLD()} in a curated collection?</li><li>to record a playthrough video or livestream?</li></ul></p>`,
-PRESS_USAGE					:	()=>	`<p>Feel free to use and edit, for those purposes, all material on this page, including:<ul> <li>text;</li><li>screenshots and logo below;</li><li>recorded gameplay footage;</li></ul>...as long as you provide appropriate credit and a direct link to this page.</p>`,
+PRESS_TEXT					:	()=>	`<h2>Editorial uses</h2>${v.PRESS_USAGE()}${ScreenshotGalleryHTML(v.LINK())}${v.OTHER_INQUIRIES()}`,
+PRESS_USAGE					:	()=>	`<p>All the material on this page is ${v.COPYRIGHT_TEXT()}, but you are granted permission to use it for editorial purposes, as long as you provide appropriate credit (including a direct link to this page) and do not spoil other people's enjoyment.</p>`,
 
-OTHER_INQUIRIES				:	()=>	`<h3>Other inquiries</h3><p class="centre">Check also the ${v.A_PRESS()} or ${v.A_CONTACT_ME()} for all unusual requests!</p>`,
+OTHER_INQUIRIES				:	()=>	`<h3>Other inquiries</h3><p>Check also the ${v.A_PRESS()} or ${v.A_CONTACT_ME()} for all unusual requests!</p>`,
 
 VIDEO_SRC					:	()=>	`media/${v.LINK()}/${v.LINK()}.mp4`,
 TRAILER_LAUNCHER			:	()=>	`<img class="card" onclick='OpenVideoModal("${v.TRAILER()}")' src="images/${v.TRAILER_IMAGE()}" alt="${v.TITLE()}'s trailer" title="${v.TITLELONG()} (trailer)" loading="lazy"/>`,

@@ -161,7 +161,7 @@ ScreenshotGalleryHTML=function(id){
 		return "";
 	var gallery=screenshots.map(ImageCardHTML).join("\n");
 	return `
-	<h3 class="images">Screenshots & Logo</h3>
+	<h3 class="images">Screenshots</h3>
 	<p>Download <a class="download" title="Download all!" href="images/${v.LINK()}/${v.LINK()}-screenshots.zip">all screenshots (zip archive)</a>.</p>
 	<div class="featured">${gallery}</div>`
 }
