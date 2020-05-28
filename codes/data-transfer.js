@@ -2268,7 +2268,7 @@ SectionHTML=function(SettingsObj){
 	var changes=Source;
 	if(FilterF)
 		changes=Values(FilterObject(changes,FilterF));
-	else if(include)
+	if(include)
 		changes=BaseFilter(changes,include);
 	
 	if(exclude){
