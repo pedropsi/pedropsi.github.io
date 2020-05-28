@@ -404,13 +404,13 @@ ChangelogHTML=function(){
 		Source:News,
 		header:"<h2 class>Changelog</h2>",
 		include:{ID:PageIdentifier()},
-		FilterF:RecentItem,
+		FilterF:NonFutureItem,
 		ItemHTML:ChangelogEntryHTML,
 		Sorter:SortNewsByDate
 	})
 }
 
-RecentItem=function(npObj){//news or page Object
+NonFutureItem=function(npObj){//news or page Object
 	if(npObj.DATE)
 		return Days(new Date(npObj.DATE))>=0
 	if(npObj.DAY){
@@ -442,7 +442,7 @@ RecentNewsHTML=function(){
 		ItemHTML:NewsEntryHTML,
 		max:v.NEWS_LIMIT_RECENT(),
 		header:`<h1 class="title">Recent changes</h1>`,
-		FilterF:RecentItem,
+		FilterF:NonFutureItem,
 		InnerWrapper:v.WHITEBOARD_OUT,
 		Sorter:SortNewsByDate
 	})
@@ -454,7 +454,7 @@ RSSXML=function(){
 		ItemHTML:RSSItemXML,
 		max:v.RSS_LIMIT(),
 		Sorter:SortNewsByDate,
-		FilterF:RecentItem,
+		FilterF:NonFutureItem,
 		header:RSSHeadXML(),
 		OuterWrapper:function(body){return `${v.XML()}<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" >
 			<channel>
@@ -512,7 +512,7 @@ SitemapXML=function(){
 		Source:CMS,
 		ItemHTML:SitemapItemXML,
 		Sorter:SortPageByDate,
-		FilterF:RecentItem,
+		FilterF:NonFutureItem,
 		OuterWrapper:function(body){return`${v.XML()}<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${body}</urlset>`;}
 	});
 }
@@ -534,7 +534,7 @@ SitemapItemXML=function(PageObj){
 
 	var lastdate=PageDateYMD(PageObj);
 	
-	var id=PageObj.LINK();
+	var id=PageObj.LINK();console.log(id,lastdate)
 	var changes=BaseFilter(News,{ID:id}).sort(SortNewsByDate).map(ch=>ch.DATE);
 		lastdate=changes[0]||lastdate;
 	var freq=FrequencyName(Days(new Date(lastdate)));//Days since last modification
