@@ -262,10 +262,10 @@ function ObtainKeyActionsGame(){
 
 		"Spacebar":InstructGameKeyF("space"),
 		"Enter":InstructGameKeyF("Enter"),
-		"Left":InstructGameKeyF("Left"),
-		"Up":InstructGameKeyF("Up"),
-		"Right":InstructGameKeyF("Right"),
-		"Down":InstructGameKeyF("Down"),
+		"Left":InstructGameKeyF("left"),
+		"Up":InstructGameKeyF("up"),
+		"Right":InstructGameKeyF("right"),
+		"Down":InstructGameKeyF("down"),
 	};
 
 	keyactions["undo"]=ObtainUndo;			//Onscreen keyboard
@@ -415,7 +415,7 @@ function ForbidArrowActions(key){
 	],CurLevelName())&&In(ArrowKeys,key));
 }
 
-var ArrowKeys=["Left","Up","Right","Down"];
+var ArrowKeys=["left","up","right","down"].map(ObtainSymbol);
 
 function AllowExtraUndoKey(key){
 	return CurLevelName()==="Wasd"&&key==="Z";
@@ -662,13 +662,13 @@ function Wasd(W){
 
 	var level=Memo();
 	
-	if(W==="W"||W==="Up")
+	if(W==="W"||W===ObtainSymbol("up"))
 		level=EmulateUp(level);
-	if(W==="A"||W==="Left")
+	if(W==="A"||W===ObtainSymbol("left"))
 		level=EmulateLeft(level);
-	if(W==="S"||W==="Down")
+	if(W==="S"||W===ObtainSymbol("down"))
 		level=EmulateDown(level);
-	if(W==="D"||W==="Right")
+	if(W==="D"||W===ObtainSymbol("right"))
 		level=EmulateRight(level);
 
 	Memo(level);
@@ -938,7 +938,7 @@ function Fuchsia(L){
 			return;
 		}
 		else{
-			PopUndo();
+			SkipUndo();
 			var hex=PureLetter(Word());
 			console.log(hex,colour,MultiplyHEX(hex,colour));
 				hex=PlusHEX(hex,RotateHEX(colour));
@@ -1190,7 +1190,7 @@ function Translate(L){
 	var choosing=false;
 	if(Memo()){
 		
-		PopUndo();//convenience
+		SkipUndo();//convenience
 
 		choosing=Memo();
 		var interpretations=choosing.interpretations;
@@ -1201,9 +1201,9 @@ function Translate(L){
 			choosing=false;
 		else if(In(NumberCharacters,L))
 			p=(Number(L)-1)%interpretations.length;
-		else if(In(["Left","Up"],L))//In("WAQZERTYUIOP",L)||
+		else if(In(["left","up"].map(ObtainSymbol),L))//In("WAQZERTYUIOP",L)||
 			p=(p+interpretations.length-1)%interpretations.length;
-		else if(In(["Right","Down"],L))//In("SDFGHJKLVBNM",L)||
+		else if(In(["right","down"].map(ObtainSymbol),L))//In("SDFGHJKLVBNM",L)||
 			p=(p+interpretations.length+1)%interpretations.length;
 		else	
 			choosing=false;

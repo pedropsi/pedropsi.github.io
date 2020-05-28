@@ -12,6 +12,15 @@ function EmptyUndo(){
 	Undo.pointer=1;
 }
 
+function SkipUndo(){//not working
+	if(!Undo.backups||Undo.pointer===1)
+		EmptyUndo();
+	else{
+		Undo.pointer=Undo.pointer-1;
+		Undo.backups=Delete(Undo.backups,Undo.pointer);
+	}
+}
+
 function AddUndo(state){
 	if(!Undo.backups)
 		EmptyUndo();
