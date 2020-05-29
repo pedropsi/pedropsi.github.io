@@ -125,7 +125,7 @@ BUTTON_SOON					:	()=>	`<div>Coming soon...</div>`,
 RAINBOWLINE					:	()=>	`<div class="rainbowline"></div>`,
 
 NAVOPTION					:	()=>	"",
-NAVBAR_SELECTION			:	()=>	["about","news",{NAME:"Puzzles",LINK:"tag.html?search=Puzzle"},"posts","contact","guestbook","hall-of-fame","store"],
+NAVBAR_SELECTION			:	()=>	["about","news",{NAME:"Puzzles",LINK:"tag.html?search=Puzzle"},"posts","contact","guestbook","hall-of-fame"+(In(["game-console","hall-of-fame"],PageIdentifier())?"-global":""),"store"],
 NAV_LINK					:	(link)=>(`<a href="${IsString(link)?link+".html":link.LINK}" class="nav-link" style="max-width: 728px;">${IsString(link)?Access(link,"TITLE"):link.NAME}</a>`),
 NAVBAR						:	()=>	`<div class="navbar">${v.NAV_LOGO()}<nav>${v.NAVBAR_SELECTION().map(v.NAV_LINK).join("\n")}${v.NIGHTMODE()}</nav>${v.RAINBOWLINE()}</div>`,
 NAV_LOGO					:	()=>	`<a href="index.html"><div class="logo">${v.LOGO_SVG()}</div></a>`,
@@ -322,7 +322,6 @@ MENTIONS					:	()=>v.MENTIONS_LINKS()?`<h3>Mentions</h3><ul>${v.MENTIONS_LINKS()
 MENTIONS_LINKS				:	()=>LinkGroupHTML({GROUP:"mentioned",ID:v.LINK()}),
 
 HALL_OF_FAME_TEXT_SHORT		:	()=>	`<h3>Hall of fame</h3><p>Once you beat ${v.TITLE_BOLD()}, you'll be invited to enter ${v.A_HOF()}! As soon as you pass the final credits screen after winning, you'll be able to type your name in a new window. Make sure you are connected to the internet, then <em>press Submit</em> to be <b>remembered forever</b> or <em>close the window</em> to <b>forsake your glory</b>.</p>`,
-HALL_OF_FAME_TEXT			:	()=>	`${v.HALL_OF_FAME_TEXT_SHORT()} <p>Record-keeping started March 26th 2018, so if you've beaten this game before this date you'll have to beat it again to enter ${v.A_HOF()}</p>.`,
 
 COMMUNITY					:	()=>	`<h2>Community</h2>${v.GUESTBOOK_MESSAGE()}${v.HALL_OF_FAME_TEXT_SHORT()}${v.STATS()}${v.MENTIONS()}`,
 STATS						:	()=>	`<h3>Game stats</h3><p class="won-area">Do you wonder how you compare with other players? Find out in the game stats below.</p>`,
