@@ -207,6 +207,7 @@
 }
 
 .question .bezier{
-   width: var(--fontheight);
+   max-width: var(--fontheight);
+   max-height: var(--fontheight);
    stroke: var(--blue);
 }
