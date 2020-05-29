@@ -85,7 +85,7 @@ PIECE:()=>`
 DATE:"2020-01-05",
 HEADER:()=>"Related games in game console",
 PIECE:()=>`
-<p>Two new buttons: ${ObtainSymbol("more")} (more games by the same author) and ${ObtainSymbol("wrench")} (edit source).</p>
+<p>Two new buttons: <kbd>${ObtainSymbol("more")}</kbd> (more games by the same author) and <kbd>${ObtainSymbol("wrench")}</kbd> (edit source).</p>
 	`,ID:"game-console"},
 	N_34:{
 DATE:"2020-01-02",
