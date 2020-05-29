@@ -337,6 +337,6 @@ function BezierLetter(Z){
 	else{
 		// var xs=Values(LetterCoordinates(Z)).map(First);
 		// bezierWidth=Max.apply(null,xs)-Min.apply(null,xs)+2*bezierPadding;
-		return BezierLetter[Z]=`<svg viewbox="0 0 ${bezierSize} ${bezierSize}"	class="bezier"> ${LetterPaths(Z).join("")}</svg>`
+		return BezierLetter[Z]=`<svg viewbox="0 0 ${bezierSize} ${bezierSize}"	class="bezier letter"> ${LetterPaths(Z).join("")}</svg>`
 	}
 }
