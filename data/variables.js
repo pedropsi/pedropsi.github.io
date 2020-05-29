@@ -287,7 +287,7 @@ RESTART_TEXT				:	()=>	`Press ${v.RESTART_KEY()} or <kbd>${ObtainSymbol("restart
 UNDO_TEXT					:	()=>	`Press ${v.UNDO_KEY()} or <kbd>${ObtainSymbol("undo")}</kbd> to undo a move.`,
 FEEDBACK_TEXT				:	()=>	`<h3>E-mail ${v.NAME()} real-time feedback</h3><p>Press ${v.FEEDBACK_KEY()} or <kbd>${ObtainSymbol("feedback")}</kbd> anytime to e-mail real-time feedback to ${v.NAME()}! Much appreciated!</p>`,
 FULLSCREEN_TEXT				:	()=>	`<h3>Fullscreen</h3><p>Toggle Fullscreen by pressing ${v.FULLSCREEN_KEY()} or <kbd>${ObtainSymbol("fullscreen")}</kbd>.</p>`,
-HINTS_TEXT					:	()=>	`<h3>Hints</h3><p>Request a <em>hint</em> by pressing ${v.HINT_KEY()} or <kbd>${ObtainSymbol("hint")}</kbd>, but use them sparingly to preserve your standing, shall you enter ${v.A_HOF()}!</p>`,
+HINTS_TEXT					:	()=>	`<h3>Hints</h3><p>Request a <em>hint</em> by pressing ${v.HINT_KEY()} or <kbd>${ObtainSymbol("hint")}</kbd>, but use them sparingly to preserve your standing, shall you enter ${v.HOF_SEARCH()}!</p>`,
 AVATAR_TEXT					:	()=>	`<p>Control your <em>avatar</em> with the ${v.ARROWKEYS()}.</p>`,
 
 ARROWKEYS					:	()=>	`<span class="grid controls-arrow"><kbd class="key-left">${ObtainSymbol("left")}</kbd> <kbd class="key-up">${ObtainSymbol("up")}</kbd> <kbd class="key-right">${ObtainSymbol("right")}</kbd> <kbd class="key-down">${ObtainSymbol("down")}</kbd></span> or <span class="grid controls-arrow"><kbd class="key-up">W</kbd> <kbd class="key-left">A</kbd> <kbd class="key-down">S</kbd> <kbd class="key-right">D</kbd></span>`,
@@ -321,7 +321,8 @@ A_SOURCE					:	()=>	`<a ${v.BLANK()} href='http://puzzlescript.net/editor.html?h
 MENTIONS					:	()=>v.MENTIONS_LINKS()?`<h3>Mentions</h3><ul>${v.MENTIONS_LINKS()}</ul>`:"",
 MENTIONS_LINKS				:	()=>LinkGroupHTML({GROUP:"mentioned",ID:v.LINK()}),
 
-HALL_OF_FAME_TEXT_SHORT		:	()=>	`<h3>Hall of fame</h3><p>Once you beat ${v.TITLE_BOLD()}, you'll be invited to enter ${v.A_HOF()}! As soon as you pass the final credits screen after winning, you'll be able to type your name in a new window. Make sure you are connected to the internet, then <em>press Submit</em> to be <b>remembered forever</b> or <em>close the window</em> to <b>forsake your glory</b>.</p>`,
+HALL_OF_FAME_TEXT_SHORT		:	()=>	`<h3>Hall of fame</h3><p>Once you beat ${v.TITLE_BOLD()}, you'll be invited to enter ${v.HOF_SEARCH()}! As soon as you pass the final credits screen after winning, you'll be able to type your name in a new window. Make sure you are connected to the internet, then <em>press Submit</em> to be <b>remembered forever</b> or <em>close the window</em> to <b>forsake your glory</b>.</p>`,
+HOF_SEARCH					:	()=> AHTML("Hall of fame","hall-of-fame.html?search="+PageIdentifier()),
 
 COMMUNITY					:	()=>	`<h2>Community</h2>${v.GUESTBOOK_MESSAGE()}${v.HALL_OF_FAME_TEXT_SHORT()}${v.STATS()}${v.MENTIONS()}`,
 STATS						:	()=>	`<h3>Game stats</h3><p class="won-area">Do you wonder how you compare with other players? Find out in the game stats below.</p>`,
