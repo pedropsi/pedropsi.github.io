@@ -300,8 +300,14 @@ function BezierTrack(coordinates,c){
 		mid=coordinates[sta+end];
 	else if(coordinates[end+sta])
 		mid=coordinates[end+sta];
-		console.log(c,mid);
-	return BezierPathHTML(coordinates[c],coordinates[end],mid);
+	
+	// var xs=Values(coordinates).map(First);
+	// var min=Min.apply(null,xs);
+	
+	sta=coordinates[c];
+	end=coordinates[end];
+
+	return BezierPathHTML(sta,end,mid);
 }
 
 function LetterPaths(Z){
@@ -311,14 +317,14 @@ function LetterPaths(Z){
 	return paths;
 }	
 
-var beziersize=12;
-var bezieroffset=1;
+var bezierSize=10;
+var bezierPadding=1;
 
 function BezierPathHTML(sta,end,mid){
-	var sta=[sta[0],beziersize-sta[1]];
-	var end=[end[0],beziersize-end[1]];
+	var sta=[sta[0]+bezierPadding,bezierSize-bezierPadding-sta[1]];
+	var end=[end[0]+bezierPadding,bezierSize-bezierPadding-end[1]];
 	if(mid){
-		var mid=[mid[0],beziersize-mid[1]];
+		var mid=[mid[0]+bezierPadding,bezierSize-bezierPadding-mid[1]];
 		return `<path  d="M${sta} Q${mid} ${end}"/>`;
 	}
 	else
@@ -326,6 +332,11 @@ function BezierPathHTML(sta,end,mid){
 }
 
 function BezierLetter(Z){
-	console.log(LetterPaths(Z).join(""));
-	return `<svg viewbox="0 0 ${beziersize} ${beziersize}"	class="bezier"> ${LetterPaths(Z)}</svg>";`
+	if(BezierLetter[Z])
+		return BezierLetter[Z];
+	else{
+		// var xs=Values(LetterCoordinates(Z)).map(First);
+		// bezierWidth=Max.apply(null,xs)-Min.apply(null,xs)+2*bezierPadding;
+		return BezierLetter[Z]=`<svg viewbox="0 0 ${bezierSize} ${bezierSize}"	class="bezier"> ${LetterPaths(Z).join("")}</svg>`
+	}
 }

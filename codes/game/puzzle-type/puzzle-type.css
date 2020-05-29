@@ -193,9 +193,20 @@
 }
 
 .bezier{
-   width: var(--w16);
-   stroke-width: var(--h-8);
-   stroke: currentColor;
+   width:calc(var(--h4) + var(--w2));
+   stroke-width: calc(var(--fontheight)/12);
+   stroke: var(--darkblue);
    fill: none;
-    stroke-linecap:round
+   stroke-linecap:round
+}
+
+.question, .goal{
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+}
+
+.question .bezier{
+   width: var(--fontheight);
+   stroke: var(--blue);
 }
