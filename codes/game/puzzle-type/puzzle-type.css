@@ -197,4 +197,5 @@
    stroke-width: var(--h-8);
    stroke: currentColor;
    fill: none;
+    stroke-linecap:round
 }

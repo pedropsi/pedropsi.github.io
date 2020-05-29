@@ -50,9 +50,10 @@ var ShapePoints=Union(Keys(ShapePointConnections),Values(ShapePointConnections))
 var LetterShape={
 	"A":{
 		"Y":[0,0],
-		"R":[1,1],
-		"G":[8,4],
-		"L":[7,1],
+		"R":[2,4],
+		"G":[4,8],
+		"D":[4,8],
+		"L":[6,4],
 		"P":[8,0],
 	},
 	"B":{
@@ -133,10 +134,10 @@ var LetterShape={
 	"J":{
 		"G":[4,8],
 		"h":[4,2],
-		"hi":[4,0],
-		"i":[2,0],
-		"iR":[0,0],
-		"R":[0,2],
+		"hR":[4,0],
+		"R":[2,0],
+		"mL":[0,0],
+		"L":[0,2],
 	},
 	"K":{
 		"Y":[2,0],
@@ -217,12 +218,8 @@ var LetterShape={
 		"G":[6,6],
 		"h":[4,8],
 		"Gh":[6,8],
-		"i":[2,6],
-		"hi":[2,8],
-
-		"iR":[2,5],
-		"R":[4,4],
-		"Rm":[6,3],
+		"R":[2,6],
+		"hR":[2,8],
 		
 		"L":[2,2],
 		"m":[4,0],
@@ -243,7 +240,7 @@ var LetterShape={
 		"R":[4,0],
 		"L":[8,8],
 		"m":[8,4],
-		"mR":[8,0],
+		"mn":[8,0],
 	},
 	"V":{
 		"G":[0,8],
@@ -271,11 +268,11 @@ var LetterShape={
 		"D":[8,8],
 	},
 	"Z":{
-		"G":[0,0],
-		"h":[8,0],
+		"G":[8,0],
+		"h":[0,0],
 		"R":[4,4],
-		"m":[0,8],
-		"L":[8,8],
+		"m":[8,8],
+		"L":[0,8],
 	},
 }
 
@@ -314,11 +311,14 @@ function LetterPaths(Z){
 	return paths;
 }	
 
+var beziersize=12;
+var bezieroffset=1;
+
 function BezierPathHTML(sta,end,mid){
-	var sta=[sta[0],8-sta[1]];
-	var end=[end[0],8-end[1]];
+	var sta=[sta[0],beziersize-sta[1]];
+	var end=[end[0],beziersize-end[1]];
 	if(mid){
-		var mid=[mid[0],8-mid[1]];
+		var mid=[mid[0],beziersize-mid[1]];
 		return `<path  d="M${sta} Q${mid} ${end}"/>`;
 	}
 	else
@@ -327,5 +327,5 @@ function BezierPathHTML(sta,end,mid){
 
 function BezierLetter(Z){
 	console.log(LetterPaths(Z).join(""));
-	return `<svg viewbox="0 0 8 8"	class="bezier"> ${LetterPaths(Z)}</svg>";`
+	return `<svg viewbox="0 0 ${beziersize} ${beziersize}"	class="bezier"> ${LetterPaths(Z)}</svg>";`
 }
