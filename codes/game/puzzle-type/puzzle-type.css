@@ -191,3 +191,10 @@
    transform: translateY(calc(var(--s)*0.3));
    clip-path: polygon(0% 33%, 100% 33%, 100% 70%, 0% 70%);
 }
+
+.bezier{
+   width: var(--w16);
+   stroke-width: var(--h-8);
+   stroke: currentColor;
+   fill: none;
+}

@@ -112,6 +112,7 @@ var gameModulesLater=[
 "countries",
 "lang-gender",
 "lang-kana",
+"letter-topology",
 "morse-braille",
 "nuclei",
 "number-reader",
@@ -1529,42 +1530,6 @@ function Topological(O){
 	Caret(Infinity);
 }
 
-var Homeomorphism={
-	"A":["A","R"],
-	"B":["B","8"],
-	"H":["H","K"],
-	"I":["C","G","I","J","L","M","N","S","U","V","W","Z","1","2","5","7"],
-	"O":["D","O","0"],
-	"P":["P","6","9"],
-	"Q":["Q","4"],
-	"X":["X"],
-	"Y":["E","F","T","Y","3"],
-}
-
-var HomeomorphismRequirement={
-	"A":["P","H"],
-	"B":["A"],
-	"H":["Y"],
-	"I":[],
-	"O":["I"],
-	"P":["O","Y"],
-	"Q":["P","X"],
-	"X":["Y"],
-	"Y":["I"]
-}
-
-function HomeomorphicClass(O){
-	var classes=Object.keys(Homeomorphism);
-	if(In(classes,O))
-		return O;
-	else{
-		for(var i in classes){
-			if(In(Homeomorphism[classes[i]],O))
-				return classes[i];
-		}
-		return null;
-	}
-}
 
 
 //Nokia 1998

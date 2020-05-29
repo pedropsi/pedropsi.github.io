@@ -183,6 +183,9 @@ VectorTimes=function(vector1,vector2){
 VectorDivide=function(vector1,vector2){
 	return VectorOperation(vector1,vector2,function(a,b){return a/b});
 }
+VectorMean=function(vector1,vector2){
+	return VectorOperation(vector1,vector2,function(a,b){return (a+b)/2});
+}
 
 VectorMax=function(vector1,vector2){
 	return VectorOperation(vector1,vector2,function(a,b){return Max(a,b)});
