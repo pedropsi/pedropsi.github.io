@@ -4,7 +4,7 @@ DATE:"2020-05-24",
 HEADER:()=>"Redo support",
 PIECE:()=>`
 	<p>As this feature was needed for ${AHTML("puzzle-type")}, the ${AHTML("game-bar")} now has a nice <kbd>${ObtainSymbol("redo")}</kbd> redo button - a suggestion by ${v.COLLINEYE()} and ${v.HEDEHOLM()}!</p>
-	`,ID:"game-bar"},
+	`,ID:"puzzle-type"},
 	N_47:{
 DATE:"2020-05-24",
 HEADER:()=>"Global hall of fame",
