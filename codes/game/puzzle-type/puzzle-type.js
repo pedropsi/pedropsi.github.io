@@ -906,83 +906,83 @@ function Genetic(L){
 }
 
 
-function Fuchsia(L){
-	var colour=Memo().colour;
-	var used=Memo().used;
-	var freeze=Memo().freeze;
+// function Fuchsia(L){
+// 	var colour=Memo().colour;
+// 	var used=Memo().used;
+// 	var freeze=Memo().freeze;
 
 
-	function NewColour(){
-		ClearLetters();
-		ForbidCaret();
-		Memo({
-			colour:colour,
-			used:used,
-			freeze:false
-		});
-	}
+// 	function NewColour(){
+// 		ClearLetters();
+// 		ForbidCaret();
+// 		Memo({
+// 			colour:colour,
+// 			used:used,
+// 			freeze:false
+// 		});
+// 	}
 	
 	
-	if(freeze){
-		NewColour();
-		return;
-	}
+// 	if(freeze){
+// 		NewColour();
+// 		return;
+// 	}
 	
-	if(!In(Hexadecimal,L))
-		L="#";
-	// else if(In(Hexadecimal,L)&&In(used,L)){
-	//  	ForbidCaret();
-	//  	return;
-	// }
-	// else {
-	// 	used=used+L;
-	// 	Memo({
-	// 		colour:colour,
-	// 		used:used,
-	// 		freeze:freeze
-	// 	});
-	// }
+// 	if(!In(Hexadecimal,L))
+// 		L="#";
+// 	// else if(In(Hexadecimal,L)&&In(used,L)){
+// 	//  	ForbidCaret();
+// 	//  	return;
+// 	// }
+// 	// else {
+// 	// 	used=used+L;
+// 	// 	Memo({
+// 	// 		colour:colour,
+// 	// 		used:used,
+// 	// 		freeze:freeze
+// 	// 	});
+// 	// }
 	
-	InputLetterAfter(L+"*");
+// 	InputLetterAfter(L+"*");
 	
-	if(Letters.array.length===7){
-		var letters=PureLetter(Word());
-		var f=First(letters);
-		var r=Rest(letters);
-		if(f!=="#"||r.replace("#","").length!==r.length){
-			ClearLetters();
-			ForbidCaret();
-			return;
-		}
-		else{
-			SkipUndo();
-			var hex=PureLetter(Word());
-			console.log(hex,colour,MultiplyHEX(hex,colour));
-				hex=PlusHEX(hex,RotateHEX(colour));
-			var colourname=NamedColour(hex);
-				colourname=ColourApproximationString(hex,colourname);
-			Letters(colourname.toUpperCase());
-			Caret(Infinity);
-			CaretColour(hex);
-			Memo({
-				colour:hex,
-				used:used,
-				freeze:true
-			});
-			return;
-		}
-	}
-	Caret(Infinity);
-}
+// 	if(Letters.array.length===7){
+// 		var letters=PureLetter(Word());
+// 		var f=First(letters);
+// 		var r=Rest(letters);
+// 		if(f!=="#"||r.replace("#","").length!==r.length){
+// 			ClearLetters();
+// 			ForbidCaret();
+// 			return;
+// 		}
+// 		else{
+// 			SkipUndo();
+// 			var hex=PureLetter(Word());
+// 			console.log(hex,colour,MultiplyHEX(hex,colour));
+// 				hex=PlusHEX(hex,RotateHEX(colour));
+// 			var colourname=NamedColour(hex);
+// 				colourname=ColourApproximationString(hex,colourname);
+// 			Letters(colourname.toUpperCase());
+// 			Caret(Infinity);
+// 			CaretColour(hex);
+// 			Memo({
+// 				colour:hex,
+// 				used:used,
+// 				freeze:true
+// 			});
+// 			return;
+// 		}
+// 	}
+// 	Caret(Infinity);
+// }
 
-function ColourApproximationString(colorstring,name){
-	var chosen=ColourNames.filter(function(c){return c[3]===name})[0];
-	var rgb=RGB(Colour(colorstring)).colour;
-	if(!Equal(rgb,Most(chosen)))
-		return "almost "+name+" ("+colorstring+")";
-	else
-		return name;
-}
+// function ColourApproximationString(colorstring,name){
+// 	var chosen=ColourNames.filter(function(c){return c[3]===name})[0];
+// 	var rgb=RGB(Colour(colorstring)).colour;
+// 	if(!Equal(rgb,Most(chosen)))
+// 		return "almost "+name+" ("+colorstring+")";
+// 	else
+// 		return name;
+// }
 
 
 function Deaf(L){
