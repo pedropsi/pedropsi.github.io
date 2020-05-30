@@ -2849,6 +2849,14 @@ UnClass=function(selectorE,clas){
 	return e;
 }
 
+Classes=function(selectorE){
+	var e=GetElement(selectorE);
+	if(e)
+		return Array.from(e.classList);
+	else
+		return [];
+}
+
 Select=function(selectorE){ //With Pulse by default
 	var e=Class(selectorE,'selected');
 	PulseSelect(selectorE);
