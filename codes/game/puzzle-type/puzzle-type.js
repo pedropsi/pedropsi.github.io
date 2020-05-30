@@ -374,7 +374,7 @@ function ForbidNumberActions(key){
 		"Rotate",
 		"Fillet",
 		"Symmetries",
-		"Topological",
+		// "Topological",
 		"Nokia 1998",
 		// "Fuchsia",
 		"Deaf",
