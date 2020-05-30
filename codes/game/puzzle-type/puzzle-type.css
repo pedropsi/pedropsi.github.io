@@ -85,10 +85,9 @@
    justify-content: center;
    font-size: calc(var(--h4) + var(--w2));
    height: calc(var(--h8) + var(--w4));
-   border-bottom-width: calc(var(--h1) + var(--w-2));
-   
+   border-bottom-width: calc(var(--h1) + var(--w-2)); 
 }
-
+  
 .letter.caret, .caret .half{
     background-color: var(--letterOn);
     border-bottom-color: var(--letterTransparent);
@@ -193,13 +192,18 @@
 }
 
 .bezier{
-   width:calc(var(--h4) + var(--w2));
-   stroke-width: calc(var(--fontheight)/12);
+   height:calc(var(--h4) + var(--w2));
+   stroke-width: var(--h-4);
    stroke: var(--darkblue);
    fill: none;
    stroke-linecap:round;
-   --marg:-0.25;
-   margin-right: calc( var(--marg) * var(--fontheight))
+   padding-left: var(--w-4);
+   padding-right: var(--w-4);
+}
+
+.middle .bezier.letter{
+   padding-top: calc(var(--h2) + var(--w1));
+   padding-bottom: calc(var(--h2) + var(--h1) + var(--w1));
 }
 
 .question, .goal{
@@ -211,33 +215,7 @@
 .question .bezier{
    max-width: var(--fontheight);
    max-height: var(--fontheight);
+   padding-bottom:0;
+   padding-top:0;
    stroke: var(--blue);
-}
-
-.bezier.max-0{
-   --marg: -2.25;
-}
-.bezier.max-1{
-   --marg: -2;
-}
-.bezier.max-2{
-   --marg: -1.75;
-}
-.bezier.max-3{
-  --marg:-1.5;
-}
-.bezier.max-4{
-  --marg:-1.25;
-}
-.bezier.max-5{
-  --marg:-1;
-}
-.bezier.max-6{
-  --marg:-0.75;
-}
-.bezier.max-7{
-  --marg:-0.5;
-}
-.bezier.max-8{
-  --marg:-0.25;
 }

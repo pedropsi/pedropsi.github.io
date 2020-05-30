@@ -306,14 +306,6 @@ function BezierTrack(coordinates,c){
 	sta=coordinates[c];
 	end=coordinates[end];
 
-	//center horizontally
-	// var xs=Values(coordinates).map(First);
-	// var min=Min.apply(null,xs);
-	// sta[0]=sta[0]-min;
-	// end[0]=end[0]-min;
-	// if(mid!==false)
-	// 	mid[0]=mid[0]-min;
-
 	return BezierPathHTML(sta,end,mid);
 }
 
@@ -344,6 +336,6 @@ function BezierLetter(Z){
 	else{
 		var xs=Values(LetterCoordinates(Z)).map(First);
 		var BezierWidth=Max.apply(null,xs);
-		return BezierLetter[Z]=`<svg viewbox="0 0 ${BezierHeight} ${BezierHeight}"	class="bezier letter max-${BezierWidth}"> ${LetterPaths(Z).join("")}</svg>`
+		return BezierLetter[Z]=`<svg viewbox="0 0 ${BezierWidth+2} ${BezierHeight}"	class="bezier letter"> ${LetterPaths(Z).join("")}</svg>`
 	}
 }
