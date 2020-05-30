@@ -50,11 +50,12 @@ var ShapePoints=Union(Keys(ShapePointConnections),Values(ShapePointConnections))
 var LetterShape={
 	"A":{
 		"Y":[0,0],
-		"R":[2,4],
-		"G":[4,8],
-		"D":[4,8],
-		"L":[6,4],
-		"P":[8,0],
+		"R":[1,4],
+		"G":[2,8],
+		"D":[2,8],
+		"De":[4,8],
+		"L":[5,4],
+		"P":[6,0],
 	},
 	"B":{
 		"Y":[0,0],
