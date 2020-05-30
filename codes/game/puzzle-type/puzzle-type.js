@@ -454,11 +454,27 @@ function InPart(arrayOrObj,n){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Levels & Actions
-function FormattedTitle(title){
+function WinnerTitle(title){
 	if(title==="Deaf")
 		return title;
 	else
 		return title.toUpperCase();
+}
+
+function FormattedTitle(title){
+	if(title==="Deaf")
+		return title;
+	else if(title==="Topological")
+		return title.toUpperCase().split("").map(LetterHTML(title)).join("");
+	else
+		return title.toUpperCase();
+}
+
+function FormattedGoal(title){
+	if(title==="Topological")
+		return title.toUpperCase().split("").map(LetterHTML(title)).join("");
+	else
+		return title;
 }
 
 var LevelGoals=[			//Required types of thinking:
@@ -1777,7 +1793,12 @@ var LetterDisplay={
 	"Anagram":LetterDraftHTML,
 	// "Fuchsia":LetterDraftHTML,
 	"Deaf":LetterDraftHTML,
-	"Nigeria":LetterDraftHTML
+	"Nigeria":LetterDraftHTML,
+	"Topological":BezierLetterSVG
+}
+
+function BezierLetterSVG(L){
+	return BezierLetter(L);
 }
 
 function LetterDraftHTML(L){
@@ -1893,9 +1914,10 @@ function LevelLoader(){
 	TitleScreen(false);
 	ReplaceChildren("<div class='top'><div class='goal'></div></div>",".top");
 	ClearLetters();
-	var title=CurLevelName();
-	ReplaceChildren(title,".goal");
-	if(title==="Deaf")
+	var goal=FormattedGoal(CurLevelName());
+	
+	ReplaceChildren(goal,".goal");
+	if(goal==="Deaf")
 		Class(".goal","uncase");
 	else
 		UnClass(".goal","uncase");
@@ -1921,8 +1943,11 @@ function ObtainUpdateLevel(state){
 }
 
 function CheckWin(){
-	var win=FormattedTitle(CurLevelName())===Letters().join("").replace(/\_/g,"");
+	var win=WinnerTitle(CurLevelName())===Letters().join("").replace(/\_/g,"");
 	
+	if(CurLevelName()==="Topological")
+		
+
 	if(win){
 		if(!LevelWinSound())
 			PlaySound("media/puzzle-type/sound/win"+RandomChoice("123")+".mp3");

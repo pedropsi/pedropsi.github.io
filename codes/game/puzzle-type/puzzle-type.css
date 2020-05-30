@@ -197,7 +197,9 @@
    stroke-width: calc(var(--fontheight)/12);
    stroke: var(--darkblue);
    fill: none;
-   stroke-linecap:round
+   stroke-linecap:round;
+   --marg:-0.25;
+   margin-right: calc( var(--marg) * var(--fontheight))
 }
 
 .question, .goal{
@@ -210,4 +212,32 @@
    max-width: var(--fontheight);
    max-height: var(--fontheight);
    stroke: var(--blue);
+}
+
+.bezier.max-0{
+   --marg: -2.25;
+}
+.bezier.max-1{
+   --marg: -2;
+}
+.bezier.max-2{
+   --marg: -1.75;
+}
+.bezier.max-3{
+  --marg:-1.5;
+}
+.bezier.max-4{
+  --marg:-1.25;
+}
+.bezier.max-5{
+  --marg:-1;
+}
+.bezier.max-6{
+  --marg:-0.75;
+}
+.bezier.max-7{
+  --marg:-0.5;
+}
+.bezier.max-8{
+  --marg:-0.25;
 }
