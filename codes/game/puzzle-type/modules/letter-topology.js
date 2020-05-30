@@ -360,11 +360,14 @@ function BezierPathHTML(sta,end,mid){
 function BezierLetter(Z){
 	if(BezierLetter[Z])
 		return BezierLetter[Z];
-	else{
-		var xs=Values(LetterCoordinates(Z)).map(First);
-		var BezierWidth=Max.apply(null,xs);
-		return BezierLetter[Z]=`<svg viewbox="0 0 ${BezierWidth+2} ${BezierHeight}"	class="bezier letter"> ${LetterPaths(Z).join("")}</svg>`
-	}
+	else
+		return BezierLetter[Z]=CoordinatesBezierSVG(LetterCoordinates(Z));
+}
+
+function CoordinatesBezierSVG(coordinates){
+	var xs=Values(coordinates).map(First);
+	var BezierWidth=Max.apply(null,xs);
+	return `<svg viewbox="0 0 ${BezierWidth+2} ${BezierHeight}"	class="bezier letter"> ${CoordinatePaths(coordinates).join("")}</svg>`
 }
 
 function LetterInterpolatedCoordinates(A,B,t){
