@@ -1,4 +1,11 @@
 News={
+	N_49:{
+		DATE:"2020-05-30",
+		HEADER:()=>"Typographic excursion + fixes",
+		PIECE:()=>`
+		<p>Level TOP*** was overhauled with morphing letters.</p>
+		<p>Diverse minor fixes, related to the undo queue and the arrow keys.</p>
+	`,ID:"puzzle-type"},
 	N_48:{
 DATE:"2020-05-24",
 HEADER:()=>"Redo support",
@@ -79,7 +86,7 @@ PIECE:()=>`
 DATE:"2019-11-20",
 HEADER:()=>"On-screen keyboard",
 PIECE:()=>`
-<p>There is now an on-screen keyboard ${ObtainSymbol("keyboard")} for easier input on mobile devices. ${ObtainSymbol("undo")}/${ObtainSymbol("restart")} buttons included.</p>
+<p>There is now an on-screen keyboard <kbd>${ObtainSymbol("keyboard")}</kbd> for easier input on mobile devices. <kbd>${ObtainSymbol("undo")}</kbd>/<kbd>${ObtainSymbol("restart")}</kbd> buttons included.</p>
 	`,ID:"puzzle-type"},
 	N_35:{
 DATE:"2020-01-05",
