@@ -46,6 +46,7 @@ var ShapePointConnections={
 }
 
 var ShapePoints=Union(Keys(ShapePointConnections),Values(ShapePointConnections));
+var ShapeInvisiblePoints=Keys(ShapePointConnections).map(k=>k+ShapePointConnections[k]);
 
 var LetterShape={
 	"A":{
@@ -284,6 +285,8 @@ function NextExplicitCoordinate(){
 }
 
 function LetterCoordinates(Z){
+	if(LetterCoordinates[Z])
+		return LetterCoordinates[Z];
 	var explicitCoordinates=Clone(LetterShape[Z]);
 	var implicitPoints=ShapePoints.filter(c=>!In(explicitCoordinates,c));
 	
@@ -292,7 +295,24 @@ function LetterCoordinates(Z){
 		while(!explicitCoordinates[c]&&ShapePointConnections[c]){c=ShapePointConnections[c]}
 		explicitCoordinates[implicitPoints[i]]=explicitCoordinates[c];
 	}
-	return explicitCoordinates;
+
+	ShapeInvisiblePoints.map(InvisibleCoordinatesSandartiser(explicitCoordinates));
+
+	return LetterCoordinates[Z]=explicitCoordinates;
+}
+
+function InvisibleCoordinatesSandartiser(explicitCoordinates){
+	return function(Ij){
+		var Ij=Ij.split("").sort().join("");
+		var jI=Ij[1]+Ij[0];
+		if(!explicitCoordinates[Ij]&&!explicitCoordinates[jI]){
+			explicitCoordinates[Ij]=VectorMean(explicitCoordinates[Ij[0]],explicitCoordinates[Ij[1]]);
+		}
+		if(explicitCoordinates[jI]){
+			explicitCoordinates[Ij]=Clone(explicitCoordinates[jI]);
+			delete explicitCoordinates[jI];
+		}
+	}
 }
 
 function BezierTrack(coordinates,c){
@@ -312,11 +332,15 @@ function BezierTrack(coordinates,c){
 	return BezierPathHTML(sta,end,mid);
 }
 
-function LetterPaths(Z){
-	var coordinates=LetterCoordinates(Z);
+function CoordinatePaths(coordinates){
 	var visiblepoints=Keys(coordinates).filter(k=>k.length===1&&k!=="R");//Origin
 	var paths=visiblepoints.map(c=>BezierTrack(coordinates,c));
 	return paths;
+}	
+
+function LetterPaths(Z){
+	var coordinates=LetterCoordinates(Z);
+	return CoordinatePaths(coordinates);
 }	
 
 var BezierHeight=10;
@@ -342,3 +366,17 @@ function BezierLetter(Z){
 		return BezierLetter[Z]=`<svg viewbox="0 0 ${BezierWidth+2} ${BezierHeight}"	class="bezier letter"> ${LetterPaths(Z).join("")}</svg>`
 	}
 }
+
+function LetterInterpolatedCoordinates(A,B,t){
+	var a=LetterCoordinates(A);
+	var b=LetterCoordinates(B);
+	var interpolated={};
+	var ks=Keys(a);
+	for(var i=0;i<ks.length;i++)
+		interpolated[ks[i]]=VectorOperation(a[ks[i]],b[ks[i]],function(x,y){return (1-t)*x+t*y});
+	return interpolated;
+}
+
+//Test cases
+// Equal(LetterInterpolatedCoordinates("A","B",0),LetterCoordinates("A"))
+// Equal(LetterInterpolatedCoordinates("A","B",1),LetterCoordinates("B"))
