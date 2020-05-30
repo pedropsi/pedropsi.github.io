@@ -380,6 +380,39 @@ function LetterInterpolatedCoordinates(A,B,t){
 	return interpolated;
 }
 
+function BezierDynamicLetter(Z,id){
+	if(!GetElement(id))
+		PrependElement(`<div id="${id}">...</div>`,".main");
+	if(typeof Z==="string")
+		var z=BezierLetter(Z);
+	else
+		var z=CoordinatesBezierSVG(Z);
+	ReplaceChildren(z,id);
+
+	if(typeof Z==="string")
+		Class(id,"bezier-"+Z);
+
+	return z;
+}
+
+function MorphLetter(A,B){
+	var steps=10;
+	var delay=3000/steps;
+	var target=".bezier-"+A;
+	function ScheduleAnim(i){
+		setTimeout(
+			function(){BezierDynamicLetter(LetterInterpolatedCoordinates(A,B,i),target)},
+			delay*i)
+	}
+	for(var i=0;i<=1;i=i+1/steps){
+		ScheduleAnim(i)
+	}
+	setTimeout(function(){Class(target,"bezier-"+B)},(steps+1)*delay)
+}
+
+
+
+
 //Test cases
 // Equal(LetterInterpolatedCoordinates("A","B",0),LetterCoordinates("A"))
 // Equal(LetterInterpolatedCoordinates("A","B",1),LetterCoordinates("B"))
