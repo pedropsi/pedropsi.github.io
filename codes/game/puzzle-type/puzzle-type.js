@@ -1945,9 +1945,6 @@ function ObtainUpdateLevel(state){
 function CheckWin(){
 	var win=WinnerTitle(CurLevelName())===Letters().join("").replace(/\_/g,"");
 	
-	if(CurLevelName()==="Topological")
-		
-
 	if(win){
 		if(!LevelWinSound())
 			PlaySound("media/puzzle-type/sound/win"+RandomChoice("123")+".mp3");
