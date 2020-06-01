@@ -760,7 +760,7 @@ function Wasd(W){
 		line=line.replace(/\./g," ");
 
 	if(Word()===line)
-		Throttle(BumpSound,500);
+		Throttle(BumpSound,250);
 
 	Letters(line);
 	Caret(line.indexOf("W"));
@@ -1612,8 +1612,17 @@ function Topological(O){
 		var classO=HomeomorphicClass(O);
 		var classL=HomeomorphicClass(L);
 		if(In(HomeomorphismRequirement[classO],classL)){
-			DeleteLetterAfter();
-			InputLetterAfter(O);
+			MorphLetter(L,O,"letters",Starter,Ender);
+			function Starter(){
+				BlockInput();
+				BlockUndo();
+			}
+			function Ender(){
+				DeleteLetterAfter();
+				InputLetterAfter(O);
+				UnBlockInput();
+				UnBlockUndo();
+			}
 		}
 		else
 			InputBaseLetter(O);

@@ -357,17 +357,20 @@ function BezierPathHTML(sta,end,mid){
 		return `<path  d="M${sta} L${VectorMean(sta,end)} L${end}"/>`;
 }
 
-function BezierLetter(Z){
+function BezierLetter(Z,id,cla){
+	var cla=cla||("bezier-"+Z);
+	var id=id||"";
 	if(BezierLetter[Z])
 		return BezierLetter[Z];
 	else
-		return BezierLetter[Z]=CoordinatesBezierSVG(LetterCoordinates(Z));
+		return BezierLetter[Z]=CoordinatesBezierSVG(LetterCoordinates(Z),id,cla);
 }
 
-function CoordinatesBezierSVG(coordinates){
+function CoordinatesBezierSVG(coordinates,id,cla){
 	var xs=Values(coordinates).map(First);
 	var BezierWidth=Max.apply(null,xs);
-	return `<svg viewbox="0 0 ${BezierWidth+2} ${BezierHeight}"	class="bezier letter"> ${CoordinatePaths(coordinates).join("")}</svg>`
+	var id=id?('id="'+id+'"'):"";
+	return `<svg viewbox="0 0 ${BezierWidth+2} ${BezierHeight}"	${id} class="bezier letter ${cla}"> ${CoordinatePaths(coordinates).join("")}</svg>`
 }
 
 function LetterInterpolatedCoordinates(A,B,t){
@@ -380,59 +383,42 @@ function LetterInterpolatedCoordinates(A,B,t){
 	return interpolated;
 }
 
-function BezierNewDynamicLetter(Z,target){
-	var bz=`bezier-${Z}`;
-	if(!GetElement(target))
-		PrependElement(`<div class="${bz}">...</div>`,".main");
-
-	var e=BezierLetter(Z);
-	ReplaceChildren(e,Prefix(bz,"."));
-
-	return e;
-}
-
-function BezierDynamicLetter(Z,oldY,complete){
+function BezierDynamicLetter(Z,oldY,id,parentE){
 	if(typeof Z==="string")
 		var e=BezierLetter(Z);
 	else
-		var e=CoordinatesBezierSVG(Z);
-	var Y=Prefix(oldY,".bezier-");
-	ReplaceChildren(e,Y);
-
-	if(complete){
-		Class(Y,Prefix(Z,".bezier-"));
-		UnClass(Y,Y);
+		var e=CoordinatesBezierSVG(Z,id,"bezier-"+oldY);
+	
+	try{//get the element with current id or a new oe without id assigned	
+		var oldY=GetElement(id)||Last(GetElements(".bezier-"+oldY,parentE).filter(e=>!e.id));
+		ReplaceElement(e,oldY)
 	}
-	return e;
+	catch(err){console.log("bezier letter not found")}
 }
 
-function MorphLetter(A,B){
+function MorphLetter(A,B,parentE,Starter,Ender){
+	var Starter=Starter||Identity;
+	var Ender=Ender||Identity;
 	var steps=10;
-	var delay=5000/steps;
+	var delay=500/steps;
+	var id=GenerateId();
 	function ScheduleAnim(i){
 		setTimeout(
-			function(){BezierDynamicLetter(LetterInterpolatedCoordinates(A,B,i),A)},
-			delay*i)
+			function(){BezierDynamicLetter(LetterInterpolatedCoordinates(A,B,i),A,id,parentE)},
+			delay*i*steps)
 	}
+	Starter();
 	for(var i=0;i<1;i=i+1/steps){
 		ScheduleAnim(i)
 	}
 	setTimeout(
-		function(){BezierDynamicLetter(B,A,true)},
+		function(){
+			BezierDynamicLetter(B,A,id,parentE);
+			Ender()
+		},
 		steps*delay
 	)
 }
-
-// function MorphText(string){
-// 	var text=string.toUpperCase().split("").filter(x=>In("ABCDEFGHIJKLMNOPQRSTUVWXYZ",x)).join("");
-// 	if(!text.length)
-// 		return;
-	
-// 	BezierNewDynamicLetter(text[0]);
-	
-		
-// }
-
 
 
 //Test cases
