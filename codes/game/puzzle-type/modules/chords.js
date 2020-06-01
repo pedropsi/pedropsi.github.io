@@ -121,7 +121,9 @@ function PlayChord(chord,delay,speed){
 }
 
 var Piano;
-function PianoStart(){
+var Bump;
+function SynthStart(){
 	Piano=Synth.createInstrument('piano');
+	Bump=Synth.createInstrument('bump');
 }
-ListenOnce("audiosynth",PianoStart);
+ListenOnce("audiosynth",SynthStart);

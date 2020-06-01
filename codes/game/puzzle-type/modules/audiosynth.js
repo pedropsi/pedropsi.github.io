@@ -347,7 +347,34 @@ Synth.loadSoundProfile({
 				)
 		);
 	}
-});
+},
+{
+	name: 'bump',
+	attack:	function() { return 0.002; },
+	dampen: function() { return 20; },
+	wave: function(i, sampleRate, frequency) {
+		var base = this.modulate[0];
+		var mod = this.modulate.slice(1);
+		return mod[0](
+			i,
+			sampleRate,
+			frequency,
+			mod[9](
+				i,
+				sampleRate,
+				frequency,
+				mod[2](
+					i,
+					sampleRate,
+					frequency,
+					Math.pow(base(i, sampleRate, frequency, 0), 3)
+				)
+			) 				
+		);
+	}
+}
+
+);
 
 
 Shout("audiosynth")

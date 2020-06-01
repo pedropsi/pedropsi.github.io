@@ -691,8 +691,17 @@ function Wasd(W){
 	Memo(level);
 	
 	var line=EmulateLine(level);
-	Letters(line.replace(/\./g," "));
+		line=line.replace(/\./g," ");
+
+	if(Word()===line)
+		Throttle(BumpSound,500);
+
+	Letters(line);
 	Caret(line.indexOf("W"));
+}
+
+function BumpSound(){
+	Bump.play("C",2,0.2);
 }
 
 function EmulatePushRight(levelline){
