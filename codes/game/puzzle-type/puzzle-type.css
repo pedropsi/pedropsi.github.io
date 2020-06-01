@@ -206,7 +206,7 @@
    padding-bottom: calc(var(--h2) + var(--h1) + var(--w1));
 }
 
-.question, .goal{
+.goal{
    flex-direction: row;
    justify-content: center;
    align-items: center;
