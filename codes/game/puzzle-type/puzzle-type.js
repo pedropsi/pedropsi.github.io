@@ -341,8 +341,7 @@ function TitleScreenAction(key){
 }
 
 function InstructGameAction(key){
-	
-	if(BlockInput.blocked)
+	if(InputBlocked())
 		return;
 	
 	if(TitleScreen())
@@ -353,11 +352,17 @@ function InstructGameAction(key){
 	GameFocus();
 };
 
+function InputBlocked(){
+	return BlockInput.blocked||false;
+}
+
 function BlockInput(duration){
-	var duration=duration||1000;
 	BlockInput.blocked=true;
-	function UnblockInput(){BlockInput.blocked=false;}
-	setTimeout(UnblockInput,duration);
+	if(typeof duration!=="undefined")
+		setTimeout(UnBlockInput,duration);
+}
+function UnBlockInput(){
+	BlockInput.blocked=false;
 }
 
 function ForbidCaret(){

@@ -33,6 +33,9 @@ function AddUndo(state){
 
 
 function Undo(){
+	if(Undo.blocked)
+		return;
+
 	Undo.pointer=Max(1,Undo.pointer-1);
 
 	var state=Undo.backups[Undo.pointer-1];
@@ -44,6 +47,9 @@ function Undo(){
 
 
 function Redo(){
+	if(Redo.blocked)
+		return;
+
 	Undo.pointer=Min(Undo.backups.length,Undo.pointer+1);
 
 	var state=Undo.backups[Undo.pointer-1];
@@ -53,5 +59,15 @@ function Redo(){
 	PulseSelect("RedoButton");
 }
 
+
+function BlockUndo(){
+	Undo.blocked=true;
+	Redo.blocked=true;
+}
+
+function UnBlockUndo(){
+	Undo.blocked=false;
+	Redo.blocked=false;
+}
 
 Shout("data-game-undo")
