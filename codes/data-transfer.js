@@ -2027,7 +2027,7 @@ PrependFilterInput=function(InputFilterF,parentSelector,childrenSelector,subpare
 	RemoveElement(input);
 
 	var uid=UniqueId(parentSelector);
-	filterHTML="<input class='input filter filter-"+uid+"' placeholder='search Ϙ' onkeyup='"+FunctionName(InputFilterF)+"(\""+uid+"\",\".filter-"+uid+"\",\""+childrenSelector+"\",\""+subparentSelector+"\")'></input>";
+	filterHTML="<input class='input filter filter-"+uid+"' placeholder='search "+ObtainSymbol("search")+"' onkeyup='"+FunctionName(InputFilterF)+"(\""+uid+"\",\".filter-"+uid+"\",\""+childrenSelector+"\",\""+subparentSelector+"\")'></input>";
 	PrependElement(filterHTML,parentSelector);
 }
 
@@ -4931,7 +4931,10 @@ var Symbols={
 	"left":"◀",
 	"up":"▲",
 	"right":"▶",
-	"down":"▼"
+	"down":"▼",
+	"star":"★",
+	"star-empty":"☆",
+	"search":"⌕"//"Ϙ"//"⚲",
 };
 
 ObtainSymbol=function(name){

@@ -462,12 +462,10 @@ function WinnerTitle(title){
 }
 
 function FormattedTitle(title){
-	if(title==="Deaf")
-		return title;
-	else if(title==="Topological")
-		return title.toUpperCase().split("").map(LetterHTML(title)).join("");
-	else
-		return title.toUpperCase();
+	var level=title;
+	if(title!=="Deaf")
+		var title=title.toUpperCase();
+	return "<p>"+title+"</p><p>"+LevelNotes(level)+"</p>";
 }
 
 function FormattedGoal(title){
@@ -475,6 +473,69 @@ function FormattedGoal(title){
 		return title.toUpperCase().split("").map(LetterHTML(title)).join("");
 	else
 		return title;
+}
+
+var LevelDifficulty={
+	"Direct":0,				
+	"Reverse":1,
+	"Follow":1,
+	"Consonant":2,
+	"Second":2,
+	"Rotate":3,
+	//"Oppose":2,
+	"Rise":1,
+	"Falls":2,
+	"Precedent":3,
+	"Superior":4,
+	//"Tangles":3,
+	"Difference":5,
+	//"Photocopier":???,
+	"Symmetries":2,
+	"Fillet":2,
+	"Topological":3,
+	"Wasd":3,
+	"Nokia 1998":1,
+	"Dvorak":4,
+	"ひらがな":2,
+	"Nigeria":3,
+	"Anagram":2,
+	"Genetic.":2,
+	"Ironclad":2,
+	"Deaf":3,
+	"⠍⠕⠗⠎⠑":3,
+	"Dividi":5,
+	//"Fuchsia":1,
+	"Odd":3,
+	"Latent clones":3,
+	"Shepherdess hence unladylike":3,
+	"Mon petit ami":5,
+	"Just cut and paste":3,
+	"Order is all":4
+};
+
+function LevelDifficultyStars(title){
+	return ObtainSymbol("star").repeat(LevelDifficulty[title]||0);
+}
+
+var ExternalLevels=[
+	"Nokia 1998",
+	"Dvorak",
+	"ひらがな",
+	"Nigeria",
+	"Anagram",
+	"Genetic.",
+	"Ironclad",
+	"⠍⠕⠗⠎⠑",
+	"Dividi",
+	//"Fuchsia",
+	"Mon petit ami",
+]
+
+function LevelNotes(title){
+	var external="";
+	if(In(ExternalLevels,title))
+		external=" "+ObtainSymbol("search");
+	return LevelDifficultyStars(title)+external;
 }
 
 var LevelGoals=[			//Required types of thinking:

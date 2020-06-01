@@ -218,3 +218,8 @@
    stroke: var(--blue);
 }
 
+.question{
+   line-height: 0;
+}
+
+
