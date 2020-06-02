@@ -4933,6 +4933,7 @@ var Symbols={
 	"right":"▶",
 	"down":"▼",
 	"star":"★",
+	"asterisk-heavy":"✲",
 	"star-empty":"☆",
 	"search":"⌕"//"Ϙ"//"⚲",
 };

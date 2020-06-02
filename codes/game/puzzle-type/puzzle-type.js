@@ -519,7 +519,7 @@ var LevelDifficulty={
 };
 
 function LevelDifficultyStars(title){
-	return ObtainSymbol("star").repeat(LevelDifficulty[title]||0);
+	return ObtainSymbol("asterisk-heavy").repeat(LevelDifficulty[title]||0);
 }
 
 var ExternalLevels=[
