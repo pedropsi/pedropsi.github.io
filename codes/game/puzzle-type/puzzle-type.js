@@ -481,7 +481,7 @@ function FormattedGoal(title){
 }
 
 var LevelDifficulty={
-	"Direct":0,				
+	"Direct":1,				
 	"Reverse":1,
 	"Follow":1,
 	"Consonant":2,
@@ -527,7 +527,6 @@ var ExternalLevels=[
 	"Nokia 1998",
 	"Dvorak",
 	"Nigeria",
-	"Anagram",
 	"Genetic.",
 	"Ironclad",
 	"Deaf",
@@ -551,6 +550,8 @@ var VisualLevels=[
 
 var LanguageLevels=[
 	"ひらがな",
+	"Anagram",
+	"Latent clones",
 	"Shepherdess hence unladylike",
 	"Mon petit ami",
 ]
