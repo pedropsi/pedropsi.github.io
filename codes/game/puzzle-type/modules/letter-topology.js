@@ -1,4 +1,4 @@
-var Homeomorphism={
+var Topology={
 	"A":["A","R"],
 	"B":["B","8"],
 	"H":["H","K"],
@@ -10,7 +10,7 @@ var Homeomorphism={
 	"Y":["E","F","T","Y","3"],
 }
 
-var HomeomorphismRequirement={
+var TopologyRequirement={
 	"A":["P","H"],
 	"B":["A"],
 	"H":["Y"],
@@ -23,12 +23,12 @@ var HomeomorphismRequirement={
 }
 
 function HomeomorphicClass(O){
-	var classes=Object.keys(Homeomorphism);
+	var classes=Object.keys(Topology);
 	if(In(classes,O))
 		return O;
 	else{
 		for(var i in classes){
-			if(In(Homeomorphism[classes[i]],O))
+			if(In(Topology[classes[i]],O))
 				return classes[i];
 		}
 		return null;
@@ -202,8 +202,6 @@ var LetterShape={
 		"P":[8,0],
 		"Z":[4,4],
 		"m":[4,0],
-		"Lm":[5,0],
-		"LD":[3,8],
 		"mn":[0,0],
 	},
 	"R":{

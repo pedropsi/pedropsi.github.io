@@ -496,9 +496,9 @@ var LevelDifficulty={
 	"Difference":5,
 	//"Photocopier":???,
 	"Symmetries":2,
-	"Fillet":2,
-	"Topological":3,
-	"Wasd":3,
+	"Fillet":3,
+	"Topological":4,
+	"Wasd":2,
 	"Nokia 1998":1,
 	"Dvorak":4,
 	"ひらがな":2,
@@ -1597,35 +1597,39 @@ function InversionSymmetric(O){
 //Topological
 
 function Topological(O){	
-	function InputBaseLetter(L){
-		if(In(["I"],HomeomorphicClass(L)))
-			InputLetterAfter(L);
-		//else
-		//	InputLetterAfter("I");
-	}
-
 	if(Letters.array.length===0){
-		InputBaseLetter(O);
+		InputLetterAfter(O);
 	}
 	else{
-		var L=Last(Letters.array);
 		var classO=HomeomorphicClass(O);
-		var classL=HomeomorphicClass(L);
-		if(In(HomeomorphismRequirement[classO],classL)){
-			MorphLetter(L,O,"letters",Starter,Ender);
-			function Starter(){
-				BlockInput();
-				BlockUndo();
+		var letters=Clone(Letters());
+
+		function MorphInferior(i){
+			var L=Letter(i);
+			var classL=HomeomorphicClass(L);
+			if(In(TopologyRequirement[classL],classO)){
+				MorphLetter(L,O,"letters",Starter,Ender);
+				function Starter(){
+					BlockInput();
+					BlockUndo();
+				}
+				function Ender(){
+					Letter(i,O);
+					UnBlockInput();
+					UnBlockUndo();
+					CheckWin();
+				}
+			return true;
 			}
-			function Ender(){
-				DeleteLetterAfter();
-				InputLetterAfter(O);
-				UnBlockInput();
-				UnBlockUndo();
-			}
+			else return false;
 		}
-		else
-			InputBaseLetter(O);
+
+		var morphed=false;
+		for(var i=0;i<letters.length;i++){
+			morphed=MorphInferior(i)||morphed;
+		}
+		if(!morphed)
+			InputLetterAfter(O);
 	}
 	Caret(Infinity);
 }
