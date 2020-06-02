@@ -526,7 +526,6 @@ var ExternalLevels=[
 	"Topological",
 	"Nokia 1998",
 	"Dvorak",
-	"ひらがな",
 	"Nigeria",
 	"Anagram",
 	"Genetic.",
@@ -535,7 +534,6 @@ var ExternalLevels=[
 	"⠍⠕⠗⠎⠑",
 	"Dividi",
 	//"Fuchsia",
-	"Mon petit ami",
 ]
 
 var MusicalLevels=[
