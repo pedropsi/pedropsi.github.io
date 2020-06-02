@@ -523,6 +523,7 @@ function LevelDifficultyStars(title){
 }
 
 var ExternalLevels=[
+	"Topological",
 	"Nokia 1998",
 	"Dvorak",
 	"ひらがな",
@@ -530,17 +531,43 @@ var ExternalLevels=[
 	"Anagram",
 	"Genetic.",
 	"Ironclad",
+	"Deaf",
 	"⠍⠕⠗⠎⠑",
 	"Dividi",
 	//"Fuchsia",
 	"Mon petit ami",
 ]
 
+var MusicalLevels=[
+	"Deaf",
+]
+
+var VisualLevels=[
+	"Rotate",
+	"Symmetries",
+	"Fillet",
+	"Topological",
+	"Wasd",
+	"Dvorak",
+]
+
+var LanguageLevels=[
+	"ひらがな",
+	"Shepherdess hence unladylike",
+	"Mon petit ami",
+]
+
 function LevelNotes(title){
-	var external="";
+	var extras="";
+	if(In(MusicalLevels,title))
+		extras+=" "+ObtainSymbol("music");
+	if(In(VisualLevels,title))
+		extras+=" "+ObtainSymbol("eye");
+	if(In(LanguageLevels,title))
+		extras+=" "+ObtainSymbol("flag");
 	if(In(ExternalLevels,title))
-		external=" "+ObtainSymbol("search");
-	return LevelDifficultyStars(title)+external;
+		extras+=" "+ObtainSymbol("search");
+	return LevelDifficultyStars(title)+extras;
 }
 
 var LevelGoals=[			//Required types of thinking:
@@ -556,7 +583,6 @@ var LevelGoals=[			//Required types of thinking:
 	//"Oppose",				//Alphabetical
 	"Rise",					//Alphabetical 
 	"Falls",				//Alphabetical, Arithmethic, Retroactive
-
 	"Precedent",			//Alphabetical, Retroactive
 	"Superior",				//Positional, Alphabetical, Retroactive
 	//"Tangles",			//Alphabetical, Cyclic, Arithmethic, Proactive
@@ -567,20 +593,20 @@ var LevelGoals=[			//Required types of thinking:
 	"Fillet",				//Shape, Proactive 
 	"Topological",			//Shape, Growth, Monoactive
 
-	"Wasd",					//Keyboard, Emulation
 	"Nokia 1998",			//Keyboard
+	"Wasd",					//Keyboard, Emulation
 	"Dvorak",				//Keyboard, Cyclic
-
 	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
+
 	"Nigeria",				//Word, Mapping, Geography
-	"Anagram",				//Word, Mapping, Language, Once,
 	"Genetic.",				//Encoding, Word, Science
+	"Anagram",				//Word, Mapping, Language, Once,
 	"Ironclad",				//Encoding, Word, Science
+	//"Fuchsia",			//Encoding
 	"Deaf",					//Encoding, Music
 	"⠍⠕⠗⠎⠑",			 //Encoding, Once
 	"Dividi",				//Encoding, Arithmethic, Retroactive
 
-	//"Fuchsia",						//Encoding
 
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
 	"Latent clones",					//Keyword, Increment, Retroactive, Language

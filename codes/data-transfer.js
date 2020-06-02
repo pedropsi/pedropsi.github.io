@@ -4935,7 +4935,8 @@ var Symbols={
 	"star":"★",
 	"asterisk-heavy":"✲",
 	"star-empty":"☆",
-	"search":"⌕"//"Ϙ"//"⚲",
+	"search":"⌕",//"Ϙ"//"⚲",
+	"flag":"⚑",
 };
 
 ObtainSymbol=function(name){

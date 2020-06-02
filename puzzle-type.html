@@ -10,28 +10,40 @@ ${v.FIGURE_SIMPLE()}
 
 
 <h2>How to play</h2>
-
 <p>The screen displays only one clue. Your goal is to type this clue <em>exactly</em> as shown. However, your keyboard is behaving cryptically...</p>
-<p>All puzzles can be solved with logic, experimentation and creative thinking, perhaps even a search engine or pencil and paper. Solving a puzzle usually requires two steps: discovering which rules are in place, then using these rules to write the clue. Rules don't change nor ever rely on timing, so relax and take your time!</p>
-<p>Temporary characters, sometimes coloured in a lighter tone, may be transformed when certain conditions be (or fail to be) met.</p>
+<p>All puzzles can be solved with logic, experimentation and creative thinking. Solving a puzzle usually requires two steps: discovering which rules are in place, then using these rules to write the clue. Rules don't change nor ever rely on timing, so relax and take your time!</p>
+<p>Some levels may require knowledge of a particular field, which can be easily obtained with a search engine. This is indicated by the magnifying glass ${ObtainSymbol("search")}. Having a pencil and paper may also be useful.</p>
 <p>After beating certain puzzles, some people will enjoy replaying them, trying to push the rules to their limits or using the interface as a learning device. All levels were designed with this possibility in mind.</p>
 
 
-<h3>Controls - keyboard</h3>
+<h3>Controls</h3>
+<h4>Typing</h4>
 <p>Type any of the 26 uppercase letters of the latin alphabet.</p>
-<p>Some levels may forbid certain characters, or allow spaces or digits.</p>
+<p>Some levels may forbid certain characters, or allow spaces and/or digits.</p>
+<p>You may type on your own keyboard or by tapping on the <b>on-screen keyboard</b>. To toggle the <b>on-screen keyboard</b>, press <kbd>Alt</kbd>+<kbd>K</kbd> or <kbd>${ObtainSymbol("keyboard")}</kbd>.</p>
 
-<h4>Undo</h4>
-<p>To undo an action, press <kbd>backspace</kbd>, <kbd>delete</kbd> or <kbd>Alt</kbd>+<kbd>Z</kbd>.</p>
+<h4>Undo & redo</h4>
+<p>To undo an action, press <kbd>backspace</kbd>, <kbd>delete</kbd>, <kbd>Alt</kbd>+<kbd>Z</kbd> or <kbd>${ObtainSymbol("undo")}</kbd>.</p>
+<p>To redo, press <kbd>shift</kbd>+<kbd>backspace</kbd>, <kbd>shift</kbd>+<kbd>delete</kbd> or <kbd>Alt</kbd>+<kbd>Y</kbd> or <kbd>${ObtainSymbol("redo")}</kbd>.</p>
 
-<h4>Redo</h4>
-<p>To redo, press <kbd>shift</kbd>+<kbd>backspace</kbd>, <kbd>shift</kbd>+<kbd>delete</kbd> or <kbd>Alt</kbd>+<kbd>Y</kbd>.</p>
+<h3>Graphical conventions</h3>
+<h4>Lighter tone characters</h4>
+<p>Temporary characters, sometimes coloured in a lighter tone, may be transformed when certain conditions be (or fail to be) met.</p>
 
-<h4>On-screen Keyboard</h4>
-<p>Press <kbd>Alt</kbd>+<kbd>K</kbd> or <kbd>${ObtainSymbol("keyboard")}</kbd> to open the <b>on-screen keyboard</b>.</p>
+<h4>Arrows: ${ObtainSymbol("left")} and ${ObtainSymbol("right")}</h4>
+<p>The symbols ${ObtainSymbol("left")} and ${ObtainSymbol("right")} indicate you may press the arrows <kbd>${ObtainSymbol("left")}</kbd> and <kbd>${ObtainSymbol("right")}</kbd>.</p>
 
-<h4>Rarely</h4>
-<p>Whenever you see symbols ${ObtainSymbol("left")} and ${ObtainSymbol("right")}, you may press the arrows <kbd>${ObtainSymbol("left")}</kbd> and <kbd>${ObtainSymbol("right")}</kbd>.</p>
+<h4>Level difficulty: ${ObtainSymbol("asterisk-heavy")}</h4>
+<p>Level difficulty is indicated by the number of ${ObtainSymbol("asterisk")}, in a scale of 1 (very easy) to 5 (very hard).</p>
+
+<h4>Sound: ${ObtainSymbol("music")}</h4>
+<p>Any level where turning on sound will be helpful will be marked with ${ObtainSymbol("music")}. Sound is never mandatory.</p>
+
+<h4>Hints: ${ObtainSymbol("eye")} & ${ObtainSymbol("flag")}</h4>
+<p>The symbol ${ObtainSymbol("eye")} means the level requires visual/spacial thinking.</p>
+<p>The symbol ${ObtainSymbol("flag")} means the level requires knowledge of a particular language (English included).</p>
+
+
 
 
 ${v.FEEDBACK_TEXT()}

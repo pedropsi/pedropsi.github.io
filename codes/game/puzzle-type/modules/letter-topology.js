@@ -278,9 +278,6 @@ var LetterShape={
 	},
 }
 
-function NextExplicitCoordinate(){
-
-}
 
 function LetterCoordinates(Z){
 	if(LetterCoordinates[Z])
