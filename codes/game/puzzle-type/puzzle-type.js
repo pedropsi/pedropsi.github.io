@@ -683,7 +683,7 @@ var LevelActions={
 			Letters(FlipArray(Letters.array));
 	},
 	"Precedent":function (L){
-		function ConditionF(K){return K===NumberLetter(LetterNumber(L)-1);};
+		function ConditionF(K){return K===NumberLetter(Max(LetterNumber(L)-1,0));};
 		function ChangeF(K){return L;};
 		var m=ModifyLetters(ChangeF,ConditionF);
 		if(!m)
