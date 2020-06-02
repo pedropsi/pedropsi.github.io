@@ -535,7 +535,8 @@ var ExternalLevels=[
 	//"Fuchsia",
 ]
 
-var MusicalLevels=[
+var SoundLevels=[
+	"Wasd",
 	"Deaf",
 ]
 
@@ -558,7 +559,7 @@ var LanguageLevels=[
 
 function LevelNotes(title){
 	var extras="";
-	if(In(MusicalLevels,title))
+	if(In(SoundLevels,title))
 		extras+=" "+ObtainSymbol("music");
 	if(In(VisualLevels,title))
 		extras+=" "+ObtainSymbol("eye");
