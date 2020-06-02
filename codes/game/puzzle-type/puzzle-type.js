@@ -568,6 +568,10 @@ function LevelNotes(title){
 	return LevelDifficultyStars(title)+extras;
 }
 
+function DisplayLevelNotes(){
+	ConsoleAdd(LevelNotes(CurLevelName()));
+}
+
 var LevelGoals=[			//Required types of thinking:
 	//Positional (caret position), Spacial (position of letters in 2D system), Alphabetical (letters are ordered, and may correspond to numbers), Syllabe (syllabes as unit of input), Word (full words as units of input), Adjacent, Cyclic, Mapping (cyphers), Language, Knowledge, Cultural, Retroactive, Proactive,
 	"Direct",				
@@ -2035,6 +2039,7 @@ function LevelLoader(){
 		UnClass(".goal","uncase");
 	ClearLevel();
 	ColoriseGameBar();//Change colour each level
+	//DisplayLevelNotes();
 }
 
 
