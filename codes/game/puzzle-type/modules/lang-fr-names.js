@@ -19912,7 +19912,6 @@ var NamesEnFr={
 	"cou",
 	"goulot",
 	"manche",
-	"ne...rien or rien",
 	"nuque",
 	"que dalle"
 	],
@@ -71964,9 +71963,9 @@ var NamesEnFr={
 	"big boss huile",
 	"bonze"
 	],
-"muckraker":[
-	"fouille-merde"
-	],
+// "muckraker":[
+// 	"fouille-merde"
+// 	],
 "mucoproteinuria":[
 	"mucoprotéinurie"
 	],
