@@ -193,7 +193,6 @@
 
 .bezier{
    height:calc(var(--h4) + var(--w2));
-   stroke-width: var(--h-4);
    stroke: var(--darkblue);
    fill: none;
    stroke-linecap:round;
@@ -219,7 +218,7 @@
 }
 
 .question{
-   line-height: 0;
+   line-height: 0.5;
 }
 
 
