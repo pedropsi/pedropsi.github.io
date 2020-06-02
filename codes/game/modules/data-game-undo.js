@@ -22,10 +22,11 @@ function SkipUndo(){//not working
 }
 
 function AddUndo(state){
+	var state=Clone(state);
 	if(!Undo.backups)
 		EmptyUndo();
 
-	if(!Equal(Last(Undo.backups),state)){
+	if(!Equal(Undo.backups[Undo.pointer-1],state)){
 		InsertCut(Undo.backups,state,Undo.pointer);
 		Undo.pointer=Undo.pointer+1;
 	}
