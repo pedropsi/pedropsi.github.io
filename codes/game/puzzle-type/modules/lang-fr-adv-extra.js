@@ -5343,6 +5343,10 @@ var AdverbsExtrasEnFr={
 	"jour et nuit",
 	"le jour et la nuit"
 	],
+"nil":[
+	"rien",
+	"zéro"
+	],
 "no":[
 	"aucun",
 	"défense de",
