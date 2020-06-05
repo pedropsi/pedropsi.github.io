@@ -67312,7 +67312,7 @@ VerbsEnFr={
 		"ont trompé"
 	],
 	"mistaken":[
-		"méprent",
+		"mépris",
 		"confont",
 		"trompé"
 	],
@@ -72545,7 +72545,7 @@ VerbsEnFr={
 	"overtaken":[
 		"dépassé",
 		"doublé",
-		"surprent"
+		"surpris"
 	],
 	"overtaking":[
 		"dépassant",
@@ -88072,7 +88072,7 @@ VerbsEnFr={
 		"ont reprent"
 	],
 	"retaken":[
-		"reprent"
+		"repris"
 	],
 	"retaking":[
 		"reprenant"
@@ -108495,7 +108495,7 @@ VerbsEnFr={
 		"ont supporté"
 	],
 	"taken":[
-		"prent",
+		"pris",
 		"forcé",
 		"enduré",
 		"supporté"
@@ -113872,7 +113872,7 @@ VerbsEnFr={
 		"ont entreprent"
 	],
 	"undertaken":[
-		"entreprent"
+		"entrepris"
 	],
 	"undertaking":[
 		"entreprenant"
