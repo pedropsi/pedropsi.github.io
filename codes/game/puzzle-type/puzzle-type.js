@@ -517,7 +517,7 @@ var LevelDifficulty={
 	"Odd":3,
 	"Latent clones":3,
 	"Shepherdess hence unladylike":3,
-	"Starting buds":3,
+	"Starting buds":4,
 	"La rapide surprise":5,
 	"Just cut and paste":3,
 	"Order is all":4
