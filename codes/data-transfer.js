@@ -245,6 +245,9 @@ Most=function(AS){
 }
 
 Insert=function(array,n,p){
+	if(typeof array==="string")
+		return Insert(array.split(""),n,p).join("");
+
 	var p=Max(Min(p,array.length),0);
 	array.splice(p,0,n);
 	return array;
@@ -386,6 +389,8 @@ InString=function(string,n){
 }
 
 In=function(SAO,n){
+	if(IsArray(n))
+		return n.map(m=>In(SAO,m)).some(Identity);
 	if(typeof SAO==="string")
 		return InString(SAO,n);
 	else
