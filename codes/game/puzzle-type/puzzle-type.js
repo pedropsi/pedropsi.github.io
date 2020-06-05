@@ -382,9 +382,7 @@ function ForbidNumberActions(key){
 		// "Topological",
 		"Nokia 1998",
 		// "Fuchsia",
-		"Deaf",
 		"Odd",
-		"La rapide surprise",
 		"Order is all",
 		"⠍⠕⠗⠎⠑"],CurLevelName())&&In(NumberCharacters,key));
 }
@@ -400,7 +398,6 @@ function ForbidSpaceActions(key){
 		"Shepherdess hence unladylike",
 		"Nigeria",
 		"Odd",
-		"Deaf",
 		"Dvorak",
 		"La rapide surprise",
 		"Just cut and paste",
