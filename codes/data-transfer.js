@@ -513,6 +513,14 @@ StringPermutations=function(string){
 	return Permutations(string.split("")).map(function(p){return p.join("");});
 }
 
+Substrings=function(string){
+	var subs=[];
+	for(var i=0;i<string.length;i++)
+		for(var j=string.length;j>i;j--)
+			subs.push(string.slice(i,j));
+	return subs;
+}
+
 //delete from array
 Delete=function(array,i){
 	if(!array||typeof i!=="number"||i<0||i>=array.length)
