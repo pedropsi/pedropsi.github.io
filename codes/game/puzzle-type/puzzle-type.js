@@ -127,6 +127,8 @@ var gameModulesLater=[
 "lang-fr-interj",
 "lang-fr-names",
 "lang-fr-verbes",
+
+"lang-plurals-superlatives",
 ]
 
 LoadSources(gameModulesEarly,P()?GameIntro:Identity);
@@ -383,6 +385,8 @@ function ForbidNumberActions(key){
 		"Nokia 1998",
 		// "Fuchsia",
 		"Odd",
+		"La rapide surprise",
+		"Starting buds",//"Starting anew"
 		"Order is all",
 		"⠍⠕⠗⠎⠑"],CurLevelName())&&In(NumberCharacters,key));
 }
@@ -400,6 +404,7 @@ function ForbidSpaceActions(key){
 		"Odd",
 		"Dvorak",
 		"La rapide surprise",
+		"Starting buds",
 		"Just cut and paste",
 		"Order is all"
 	],CurLevelName())&&In([" ","Space","space"],key));
@@ -408,6 +413,7 @@ function ForbidSpaceActions(key){
 function ForbidEnterActions(key){
 	return (!In([
 		"La rapide surprise",
+		"Starting buds"
 	],CurLevelName())&&In(["Enter"],key));
 }
 
@@ -415,6 +421,7 @@ function ForbidArrowActions(key){
 	return (!In([
 		"Wasd",
 		"La rapide surprise",
+		"Starting buds",
 	],CurLevelName())&&In(ArrowKeys,key));
 }
 
@@ -510,6 +517,7 @@ var LevelDifficulty={
 	"Odd":3,
 	"Latent clones":3,
 	"Shepherdess hence unladylike":3,
+	"Starting buds":3,
 	"La rapide surprise":5,
 	"Just cut and paste":3,
 	"Order is all":4
@@ -551,6 +559,7 @@ var LanguageLevels=[
 	"Anagram",
 	"Latent clones",
 	"Shepherdess hence unladylike",
+	"Starting buds",
 	"La rapide surprise",
 ]
 
@@ -612,6 +621,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
+	"Starting buds",				//Language
 	"La rapide surprise",					//Keyword, Swap, Retroactive, Language
 	"Just cut and paste",				//Keyword, Proactive, Redefinition
 	"Order is all"						//Keyword, Proactive, Increment, Redefinition
@@ -748,6 +758,7 @@ var LevelActions={
 		Caret(Infinity);		
 	},
 	"Latent clones":Weightier,
+	"Starting buds":StartingString,
 	"La rapide surprise":Translate,
 	"Nigeria":Nigeria,
 	"ひらがな":function(L){
@@ -1445,6 +1456,93 @@ function CleanDB(NewDB,DB){
 		if(frList.length)
 			NewDB[enList[i].toLowerCase()]=Unique(frList);
 	}
+}
+
+//String Completing
+
+function StartingString(L){
+	var choosing=false;
+	if(Memo()){		
+		
+		SkipUndo();//convenience
+
+		choosing=Memo();
+		var possibilities=choosing.possibilities;
+		var p=choosing.p;
+		
+		if(In([" ","Enter"],L))
+			choosing=false;
+		else if(In(NumberCharacters,L))
+			p=(Number(L)-1)%possibilities.length;
+		else if(In(["left","up"].map(ObtainSymbol),L))
+			p=(p+possibilities.length+1)%possibilities.length;
+		else if(In(["right","down"].map(ObtainSymbol),L))
+			p=(p+possibilities.length-1)%possibilities.length;
+		else	
+			choosing=false;
+
+		if(possibilities.length===1)
+			choosing=false;
+		
+		choosing.p=p;
+		
+		Memo(choosing);
+		var word=possibilities[p];
+
+		if(choosing&&possibilities.length>1)
+			word=ArrowDisplay(possibilities[p]);
+
+	}
+	else{			
+		if(In(NumberCharacters,L)||L==="Enter"||In(ArrowKeys,L))
+			return;
+
+		var L=L.toLowerCase();
+		var sentence=Word().toLowerCase();
+		function ValidWord(word){return In(EnDictionary(),word)};
+		var possibilities=[];
+		var inserted;
+		for(var i=0;i<=sentence.length;i++){
+			inserted=Insert(sentence,L,i);
+			if(inserted.split(" ").map(ValidWord).every(Identity))
+				possibilities.push(inserted);
+		}
+		possibilities=Unique(possibilities);
+		if(possibilities.length===0){
+			ForbidCaret();
+			return;
+		}
+
+		word=possibilities[0];
+		if(possibilities.length>1){
+			word=ArrowDisplay(word);
+			Memo({
+				possibilities:possibilities,
+				p:0
+			});
+		}
+		else
+			Memo(false)
+			
+	}
+
+	Letters(word.toUpperCase());
+	Caret(Range(0,word.length-1));
+}
+
+function EnDictionary(){
+	if(!EnDictionary.list){
+		EnDictionary.list=Plurals.concat(Superlatives).concat(Keys(NamesEnFr)).concat(Keys(AdjectivesEnFr)).concat(Keys(VerbsEnFr)).concat(Keys(InterjEnFr)).concat(Keys(AdverbsExtrasEnFr));
+		EnDictionary.list=EnDictionary.list.concat([
+			"starring",
+			"si",
+			//"tinging",//ingling	"tining",
+			// "ar",
+			// "irs",
+			// "ing","ings","si","ting","tings","rin","rins","ping","pings","oping","pring","pling","plings","piling","pilings","til","tint","tints","comping","compting"
+		]);
+	}
+	return EnDictionary.list;
 }
 
 
