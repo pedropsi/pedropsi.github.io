@@ -1308,6 +1308,10 @@ function Weightier(L){
 	return;
 }
 
+function ArrowDisplay(word){
+	return ObtainSymbol("left")+word+ObtainSymbol("right");
+}
+
 function Translate(L){
 	var choosing=false;
 	if(Memo()){
@@ -1339,7 +1343,7 @@ function Translate(L){
 		var word=prefix+interpretations[p];
 
 		if(choosing&&interpretations.length>1)
-			word=prefix+ObtainSymbol("left")+interpretations[p]+ObtainSymbol("right");
+			word=prefix+ArrowDisplay(interpretations[p]);
 
 	}else{
 		if(In(NumberCharacters,L)||L==="Enter"||In(ArrowKeys,L))
@@ -1370,7 +1374,7 @@ function Translate(L){
 			found=(IsArray(interpretations)&&interpretations.length>0);
 			if(found){
 				if(interpretations.length>1)
-					word=prefix+ObtainSymbol("left")+interpretations[0]+ObtainSymbol("right");
+					word=prefix+ArrowDisplay(interpretations[0]);
 				else
 					word=prefix+interpretations[0];
 				var p=0;
