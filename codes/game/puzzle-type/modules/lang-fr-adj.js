@@ -12098,7 +12098,11 @@ var AdjectivesEnFr={
 	"fin",
 	"fine",
 	"fines",
-	"fins"
+	"fins",
+	"bon",
+	"bonne",
+	"bonnes",
+	"bons",
 	],
 "finished":[
 	"fini",

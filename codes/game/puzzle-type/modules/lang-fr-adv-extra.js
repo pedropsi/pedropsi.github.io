@@ -317,16 +317,12 @@ var AdverbsExtrasEnFr={
 	"un peu"
 	],
 "all":[
-	"*everyone",
-	"*everything",
+	"chacun",
 	"tous",
-	"tous les",
 	"tout",
-	"tout le",
+	"tout le monde",
 	"toute",
-	"toute la",
 	"toutes",
-	"toutes les"
 	],
 "all along":[
 	"depuis le début",
@@ -628,11 +624,14 @@ var AdverbsExtrasEnFr={
 	"quelconque"
 	],
 "anybody":[
-	"*anyone",
+	"personne",
+	"quelqu'un",
+	"quelqu'une",
 	"n’importe qui"
 	],
 "anyhow":[
-	"*in any case",
+	"en tout cas",
+	"en tout état de cause",
 	"de toute manière"
 	],
 "any longer":[
@@ -696,7 +695,8 @@ var AdverbsExtrasEnFr={
 	"rapidement"
 	],
 "apart":[
-	"*apart from",
+	"sinon",
+	"à part",
 	"en morceaux",
 	"en pièces",
 	"séparé",
@@ -772,7 +772,8 @@ var AdverbsExtrasEnFr={
 	"bras dessus bras dessous"
 	],
 "around":[
-	"*generally",
+	"en général",
+	"généralement",
 	"autour de",
 	"vers"
 	],
@@ -810,11 +811,8 @@ var AdverbsExtrasEnFr={
 	"artistiquement"
 	],
 "as":[
-	"*as if",
-	"*for example",
-	"*than",
-	"*that",
-	"*though",
+	"comme",
+	"par example",
 	"en tant que"
 	],
 "as against":[
@@ -1269,7 +1267,7 @@ var AdverbsExtrasEnFr={
 	"au plus tôt"
 	],
 "at the end of one's rope":[
-	"*at the end of one's tether",
+	"exaspéré",
 	"au bout du rouleau",
 	"en dernier ressort",
 	"en désespoir de cause"
@@ -1395,7 +1393,8 @@ var AdverbsExtrasEnFr={
 	"loin"
 	],
 "awfully":[
-	"*badly",
+	"mal",
+	"mauvaisement",
 	"même",
 	"très"
 	],
@@ -1447,7 +1446,9 @@ var AdverbsExtrasEnFr={
 	"à l'exception de"
 	],
 "bare":[
-	"*merely",
+	"seulement",
+	"simplement",
+	"uniquement",
 	"à peine"
 	],
 "bareback":[
@@ -1463,7 +1464,9 @@ var AdverbsExtrasEnFr={
 	"nu-tête"
 	],
 "barely":[
-	"*merely",
+	"seulement",
+	"simplement",
+	"uniquement",
 	"à peine"
 	],
 "bar none":[
@@ -1763,7 +1766,6 @@ var AdverbsExtrasEnFr={
 	"de toute manière"
 	],
 "by chance":[
-	"*by any chance",
 	"d'aventure",
 	"par hasard",
 	"par rencontre"
@@ -1779,7 +1781,7 @@ var AdverbsExtrasEnFr={
 	"par définition"
 	],
 "by dint of":[
-	"*by means of",
+	"au moyen de",
 	"en raison de",
 	"grâce à",
 	"à cause de"
@@ -2144,7 +2146,7 @@ var AdverbsExtrasEnFr={
 	"au contraire"
 	],
 "contrariwise":[
-	"*on the contrary",
+	"au contraire",
 	"cela dit",
 	"d'un autre côté",
 	"en revanche",
@@ -2159,7 +2161,10 @@ var AdverbsExtrasEnFr={
 	"conventionnellement"
 	],
 "conversely":[
-	"*on the other hand",
+	"cela dit",
+	"d'un autre côté",
+	"en revanche",
+	"par contre",
 	"inversement",
 	"à l'inverse"
 	],
@@ -2368,7 +2373,7 @@ var AdverbsExtrasEnFr={
 	"vaguement"
 	],
 "directly":[
-	"*immediately",
+	"immédiatement",
 	"directement",
 	"tout droit"
 	],
@@ -2612,7 +2617,7 @@ var AdverbsExtrasEnFr={
 	"érotiquement"
 	],
 "erroneously":[
-	"*incorrectly",
+	"incorrectement",
 	"erronément",
 	"faitivement",
 	"par erreur",
@@ -2841,7 +2846,7 @@ var AdverbsExtrasEnFr={
 	"fantastiquement"
 	],
 "far":[
-	"*very much",
+	"beaucoup",
 	"loin"
 	],
 "far and wide":[
@@ -3568,7 +3573,8 @@ var AdverbsExtrasEnFr={
 	"extrêmement"
 	],
 "him":[
-	"*himself",
+	"lui-même",
+	"se",
 	"il",
 	"le",
 	"lui"
@@ -3576,7 +3582,6 @@ var AdverbsExtrasEnFr={
 "himself":[
 	"lui-même",
 	"se",
-	"à lui-même"
 	],
 "his":[
 	"la sienne",
@@ -4434,7 +4439,6 @@ var AdverbsExtrasEnFr={
 	"en personne"
 	],
 "in the future":[
-	"*from now on",
 	"dans le futur"
 	],
 "in the heat of the moment":[
@@ -4878,7 +4882,7 @@ var AdverbsExtrasEnFr={
 	"que tu le veuilles ou non"
 	],
 "likely":[
-	"*probably",
+	"probablement",
 	"pareil",
 	"semblablement",
 	"similairement"
@@ -5100,9 +5104,9 @@ var AdverbsExtrasEnFr={
 "metropolitanly":[
 	"métropolitainement"
 	],
-"mid":[
-	"mi-"
-	],
+// "mid":[
+// 	"mi-"
+// 	],
 "mid-april":[
 	"mi-avril"
 	],
@@ -5184,7 +5188,8 @@ var AdverbsExtrasEnFr={
 	"mortellement"
 	],
 "most":[
-	"*almost",
+	"presque",
+	"quasiment",
 	"extrêmement",
 	"la plupart de",
 	"la plus",
@@ -5200,9 +5205,9 @@ var AdverbsExtrasEnFr={
 	"par-dessus tout",
 	"plus que tout"
 	],
-"mph":[
-	"mille par heure"
-	],
+// "mph":[
+// 	"mille par heure"
+// 	],
 "much":[
 	"beaucoup"
 	],
@@ -5249,7 +5254,7 @@ var AdverbsExtrasEnFr={
 	"voire"
 	],
 "near":[
-	"*nearly",
+	"presque",
 	"près",
 	"près de"
 	],
@@ -5315,13 +5320,11 @@ var AdverbsExtrasEnFr={
 	"récemment"
 	],
 "next":[
-	"*next to",
 	"après",
 	"puis",
 	"à côté"
 	],
 "nextly":[
-	"*next to",
 	"après",
 	"puis",
 	"à côté"
@@ -5676,7 +5679,8 @@ var AdverbsExtrasEnFr={
 	"de garde we"
 	],
 "once":[
-	"*as soon as",
+	"dès que",
+	"sitôt que",
 	"aussitôt que",
 	"autrefois",
 	"dès que",
@@ -6027,7 +6031,6 @@ var AdverbsExtrasEnFr={
 	"autre que"
 	],
 "otherwise":[
-	"*or else",
 	"autrement",
 	"différemment",
 	"pour le reste",
@@ -6083,9 +6086,6 @@ var AdverbsExtrasEnFr={
 	],
 "out of fashion":[
 	"passé de mode"
-	],
-"out of it":[
-	"*disoriented"
 	],
 "out of one's league":[
 	"au-dessus de ses moyens"
@@ -6170,7 +6170,7 @@ var AdverbsExtrasEnFr={
 	"au dessus de",
 	"au-delà",
 	"encore",
-	"re-",
+	// "re-",
 	"sur"
 	],
 "overall":[
@@ -6442,7 +6442,6 @@ var AdverbsExtrasEnFr={
 	"positivement"
 	],
 "possibly":[
-	"*perhaps",
 	"peut-être",
 	"possiblement"
 	],
@@ -6544,9 +6543,7 @@ var AdverbsExtrasEnFr={
 	"proactivement"
 	],
 "probably":[
-	"probablement",
-	"sans doute",
-	"sûrement"
+	"probablement"
 	],
 "prob'ly":[
 	"probab'ment"
@@ -6759,7 +6756,7 @@ var AdverbsExtrasEnFr={
 	"régulièrement"
 	],
 "relatively":[
-	"*somewhat",
+	"assez",
 	"relativement"
 	],
 "reliably":[
@@ -6831,13 +6828,16 @@ var AdverbsExtrasEnFr={
 	"robustement"
 	],
 "roughly":[
-	"*approximately",
+	"plus ou moins",
+	"presque",
+	"quasiment",
+	"à peu près",
 	"approximativement",
 	"rudement"
 	],
 "round":[
-	"*around",
-	"*generally",
+	"en général",
+	"généralement",
 	"autour de",
 	"vers"
 	],
@@ -6910,7 +6910,7 @@ var AdverbsExtrasEnFr={
 	"à peine"
 	],
 "scientifically":[
-	"*methodically",
+	"méthodiquement",
 	"scientifiquement"
 	],
 "scores":[
@@ -7239,7 +7239,7 @@ var AdverbsExtrasEnFr={
 	"en parlant de"
 	],
 "specially":[
-	"*in particular",
+	"en particulier",
 	"extrêmement",
 	"particulièrement",
 	"spécialement"
@@ -8074,7 +8074,8 @@ var AdverbsExtrasEnFr={
 	"sous contrôle"
 	],
 "underfoot":[
-	"*in the way",
+	// "gêner",
+	// "sur le passage",
 	"sous les pieds"
 	],
 "underground":[
@@ -8249,7 +8250,6 @@ var AdverbsExtrasEnFr={
 	"en pointe"
 	],
 "upfront":[
-	"*attacker",
 	"au préalable",
 	"auparavant",
 	"préalablement",
@@ -8315,7 +8315,7 @@ var AdverbsExtrasEnFr={
 	"inutilement"
 	],
 "usually":[
-	"*normally",
+	"normalement",
 	"d'habitude",
 	"généralement",
 	"habituellement",
@@ -8423,8 +8423,8 @@ var AdverbsExtrasEnFr={
 	"chaudement"
 	],
 "way":[
-	"*far",
-	"*much",
+	"beaucoup",
+	"loin",
 	"même",
 	"très"
 	],
@@ -8627,7 +8627,9 @@ var AdverbsExtrasEnFr={
 	"quelle que soit celle qui"
 	],
 "while":[
-	"*until",
+	"avant",
+	"avant que",
+	"jusque",
 	"alors que",
 	"bien que",
 	"pendant que",
@@ -8781,22 +8783,20 @@ var AdverbsExtrasEnFr={
 	"à l'exclusion de"
 	],
 "without a doubt":[
-	"*probably",
+	"probablement",
 	"bien sûr",
 	"certainement",
 	"pour sûr",
-	"sans aucun doute",
 	"sans doute",
 	"sans nul doute",
 	"sûrement",
 	"évidemment"
 	],
 "without doubt":[
-	"*probably",
+	"probablement",
 	"bien sûr",
 	"certainement",
 	"pour sûr",
-	"sans aucun doute",
 	"sans doute",
 	"sans nul doute",
 	"sûrement",
@@ -8875,7 +8875,8 @@ var AdverbsExtrasEnFr={
 	"hier"
 	],
 "yet":[
-	"*even",
+	"même",
+	"voire",
 	"encore",
 	"jusqu'à présent",
 	"mais",

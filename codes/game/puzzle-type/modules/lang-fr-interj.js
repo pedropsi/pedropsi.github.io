@@ -305,15 +305,15 @@ var InterjEnFr={
 	"assez",
 	"ça suffit"
 	],
-"erm":[
-	"euh"
-	],
+// "erm":[
+// 	"euh"
+// 	],
 "eureka":[
 	"eurêka"
 	],
-"ew":[
-	"beurk"
-	],
+// "ew":[
+// 	"beurk"
+// 	],
 "fair enough":[
 	"certes",
 	"d'accord",
@@ -596,18 +596,18 @@ var InterjEnFr={
 	"de rien",
 	"tout le plaisir est pour moi"
 	],
-"nah":[
-	"nan"
-	],
-"neener":[
-	"lalalalère",
-	"na"
-	],
-"ner":[
-	"na",
-	"nananananère",
-	"nananère"
-	],
+// "nah":[
+// 	"nan"
+// 	],
+// "neener":[
+// 	"lalalalère",
+// 	"na"
+// 	],
+// "ner":[
+// 	"na",
+// 	"nananananère",
+// 	"nananère"
+// 	],
 "never say die":[
 	"accrochez-vous",
 	"il ne faut jamais baisser les bras",

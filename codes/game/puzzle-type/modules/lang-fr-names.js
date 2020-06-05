@@ -2087,7 +2087,7 @@ var NamesEnFr={
 "aggregation":[
 	"aggrégation",
 	"agrégation",
-	"ar"
+	// "ar"
 	],
 "aggregator":[
 	"agrégateur"
@@ -5598,9 +5598,9 @@ var NamesEnFr={
 	"nez busqué",
 	"nez en bec d'aigle"
 	],
-"ar":[
-	"erre"
-	],
+// "ar":[
+// 	"erre"
+// 	],
 "araba":[
 	"araba",
 	"arraba"
@@ -49581,7 +49581,6 @@ var NamesEnFr={
 	"meuleuse",
 	"molaire",
 	"moulin",
-	"sandwich sous-marin"
 	],
 "grindstone":[
 	"meule"
@@ -61421,6 +61420,7 @@ var NamesEnFr={
 	"laburnum"
 	],
 "labyrinth":[
+	"dédale",
 	"labyrinthe"
 	],
 "labyrinthitis":[
@@ -65567,10 +65567,10 @@ var NamesEnFr={
 "luxury good":[
 	"produit de luxe"
 	],
-"ly":[
-	"a.l.",
-	"al"
-	],
+// "ly":[
+// 	"a.l.",
+// 	"al"
+// 	],
 "lycaenid":[
 	"lycénidé"
 	],
@@ -67885,7 +67885,8 @@ var NamesEnFr={
 	"arbre de mai"
 	],
 "maze":[
-	"dédale"
+	"dédale",
+	"labyrinthe"
 	],
 "mazurka":[
 	"mazurka",
@@ -69591,10 +69592,7 @@ var NamesEnFr={
 	"milicien"
 	],
 "milk":[
-	"lait",
-	"semence",
-	"spermatozoïde",
-	"sperme"
+	"lait"
 	],
 "milk brother":[
 	"frère de lait"
@@ -71942,9 +71940,9 @@ var NamesEnFr={
 	"mozzarella",
 	"mozzarelle"
 	],
-"mph":[
-	"mille par heure"
-	],
+// "mph":[
+// 	"mille par heure"
+// 	],
 "mrna":[
 	"arnm"
 	],
@@ -77071,8 +77069,8 @@ var NamesEnFr={
 	"éloquence"
 	],
 "orb":[
-	"an",
-	"année",
+	// "an",
+	// "année",
 	"cavité oculaire",
 	"cercle",
 	"cerne",
@@ -96775,7 +96773,7 @@ var NamesEnFr={
 	"séclusion"
 	],
 "second":[
-	"article de second choix",
+	// "article de second choix",
 	"instant",
 	"rab",
 	"seconde",
@@ -106582,9 +106580,6 @@ var NamesEnFr={
 	"polystyrène expansé",
 	"styromousse"
 	],
-"sub":[
-	"sandwich sous-marin"
-	],
 "subaltern":[
 	"subalterne"
 	],
@@ -106714,9 +106709,6 @@ var NamesEnFr={
 	],
 "submarine":[
 	"sous-marin"
-	],
-"submarine sandwich":[
-	"sandwich sous-marin"
 	],
 "submersible":[
 	"submersible"
@@ -116463,9 +116455,9 @@ var NamesEnFr={
 "usury":[
 	"usure"
 	],
-"ut":[
-	"ut"
-	],
+// "ut":[
+// 	"ut"
+// 	],
 "utensil":[
 	"ustensile",
 	"ustensile de cuisine"
@@ -119624,7 +119616,6 @@ var NamesEnFr={
 	"morceau",
 	"part",
 	"quartier",
-	"sandwich sous-marin"
 	],
 "wedge politics":[
 	"politique de la division"
@@ -120507,9 +120498,9 @@ var NamesEnFr={
 "whitlow":[
 	"panaris"
 	],
-"wh-movement":[
-	"mouvement qu-"
-	],
+// "wh-movement":[
+// 	"mouvement qu-"
+// 	],
 "whodunit":[
 	"roman de détection",
 	"roman à énigme"
