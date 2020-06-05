@@ -384,7 +384,7 @@ function ForbidNumberActions(key){
 		// "Fuchsia",
 		"Deaf",
 		"Odd",
-		"Mon petit ami",
+		"La rapide surprise",
 		"Order is all",
 		"⠍⠕⠗⠎⠑"],CurLevelName())&&In(NumberCharacters,key));
 }
@@ -402,7 +402,7 @@ function ForbidSpaceActions(key){
 		"Odd",
 		"Deaf",
 		"Dvorak",
-		"Mon petit ami",
+		"La rapide surprise",
 		"Just cut and paste",
 		"Order is all"
 	],CurLevelName())&&In([" ","Space","space"],key));
@@ -410,14 +410,14 @@ function ForbidSpaceActions(key){
 
 function ForbidEnterActions(key){
 	return (!In([
-		"Mon petit ami",
+		"La rapide surprise",
 	],CurLevelName())&&In(["Enter"],key));
 }
 
 function ForbidArrowActions(key){
 	return (!In([
 		"Wasd",
-		"Mon petit ami",
+		"La rapide surprise",
 	],CurLevelName())&&In(ArrowKeys,key));
 }
 
@@ -513,7 +513,7 @@ var LevelDifficulty={
 	"Odd":3,
 	"Latent clones":3,
 	"Shepherdess hence unladylike":3,
-	"Mon petit ami":5,
+	"La rapide surprise":5,
 	"Just cut and paste":3,
 	"Order is all":4
 };
@@ -554,7 +554,7 @@ var LanguageLevels=[
 	"Anagram",
 	"Latent clones",
 	"Shepherdess hence unladylike",
-	"Mon petit ami",
+	"La rapide surprise",
 ]
 
 function LevelNotes(title){
@@ -615,7 +615,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-	"Mon petit ami",					//Keyword, Swap, Retroactive, Language
+	"La rapide surprise",					//Keyword, Swap, Retroactive, Language
 	"Just cut and paste",				//Keyword, Proactive, Redefinition
 	"Order is all"						//Keyword, Proactive, Increment, Redefinition
 ];
@@ -751,7 +751,7 @@ var LevelActions={
 		Caret(Infinity);		
 	},
 	"Latent clones":Weightier,
-	"Mon petit ami":Translate,
+	"La rapide surprise":Translate,
 	"Nigeria":Nigeria,
 	"ひらがな":function(L){
 		InputLetterAfter(L);
@@ -1356,6 +1356,17 @@ function Translate(L){
 			suffix=word.slice(i,Infinity);
 			prefix=word.slice(0,i);
 			var interpretations=Translator(suffix);
+			
+			//Convenient ordering
+			if(In(interpretations,suffix)){//put suffix first
+				interpretations=interpretations.filter(x=>x!==suffix);
+				interpretations=[suffix].concat(interpretations);
+			}
+			//At goal first
+			var goal="La rapide surprise".toLowerCase();
+			interpretations=interpretations.filter(i=>Prefixed(goal,prefix+i)).concat(interpretations.filter(i=>!Prefixed(goal,prefix+i)))
+			
+
 			//var interpretations=interpretations.filter(i=>!Prefixed(i,"-"))//.filter(i=>!In(i," "));
 			found=(IsArray(interpretations)&&interpretations.length>0)//&&!In(interpretations,suffix))
 			if(found){
@@ -1436,14 +1447,6 @@ function CleanDB(NewDB,DB){
 	}
 }
 
-function MiniWordSearch(){
-	var words=Keys(NamesEnFr).filter(n=>
-		!In(n,"a")&&
-		!In(n,"i")&&
-		!In(n,"be")&&
-		NamesEnFr[n].filter(m=>In([3,4,5],m.length)).length);
-	return Unique(words.map(w=>NamesEnFr[w].filter(m=>In([3,4,5],m.length))).flat());
-}
 
 
 //Fillet
