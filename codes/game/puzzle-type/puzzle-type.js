@@ -1357,18 +1357,17 @@ function Translate(L){
 			prefix=word.slice(0,i);
 			var interpretations=Translator(suffix);
 			
-			//Convenient ordering
-			if(In(interpretations,suffix)){//put suffix first
+			//Multiple translation convenient ordering:
+			//Suffix first
+			if(In(interpretations,suffix)){
 				interpretations=interpretations.filter(x=>x!==suffix);
 				interpretations=[suffix].concat(interpretations);
 			}
-			//At goal first
+			//Near goal first
 			var goal="La rapide surprise".toLowerCase();
 			interpretations=interpretations.filter(i=>Prefixed(goal,prefix+i)).concat(interpretations.filter(i=>!Prefixed(goal,prefix+i)))
 			
-
-			//var interpretations=interpretations.filter(i=>!Prefixed(i,"-"))//.filter(i=>!In(i," "));
-			found=(IsArray(interpretations)&&interpretations.length>0)//&&!In(interpretations,suffix))
+			found=(IsArray(interpretations)&&interpretations.length>0);
 			if(found){
 				if(interpretations.length>1)
 					word=prefix+ObtainSymbol("left")+interpretations[0]+ObtainSymbol("right");
