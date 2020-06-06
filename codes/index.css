@@ -19,6 +19,21 @@
 	--yellow:rgba(240,248,175,var(--t))			/*#f0f8af*/;
 	--lightyellow:rgba(255,249,201,var(--t))	/*#fff9c9*/;
 	--beije:rgba(255,240,229,var(--t))      /*FFF0e5*/;             ;
+
+	/*BLACK AND WHITE*/
+	--transparent:rgba(255,255,255,0);
+	--white:rgba(255,255,255,var(--t));			/*#FFF*/
+	--smokewhite:rgba(241,241,241,var(--t))		/*#f1f1f1*/;
+	
+	--darkblue:rgba(0,0,0,var(--t))			/*#070070*/;
+	--blue:rgba(0,0,0,var(--t))				/*#000FFF*/;
+	--lightblue:rgba(0,0,0,var(--t))		/*#1982ed*/;
+	--turquoise:rgba(155,155,155,var(--t))		/*#3bf8de*/;
+	--green:rgba(111,111,111,var(--t))			/*#46f46f*/;
+	--lightgreen:rgba(252,252,252,var(--t))           ;
+	--yellow:rgba(240,240,240,var(--t))			/*#f0f8af*/;
+	--lightyellow:rgba(249,249,249,var(--t))	/*#fff9c9*/;
+	--beije:rgba(240,240,240,var(--t))      /*FFF0e5*/;
 	
 	--rainbow:linear-gradient(115deg, 
 		var(--darkblue),
@@ -37,7 +52,9 @@
 	
 	--lightfilter:sepia(1) hue-rotate(180deg) saturate(3);
 	--normalfilter:unset;
-	
+
+	--lightfilter:sepia(1) hue-rotate(180deg) saturate(0); /*BLACK AND WHITE*/
+	--normalfilter:saturate(0);
 		
 	--durationOff:1s;
 	--durationOn:0.33s;
