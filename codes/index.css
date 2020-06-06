@@ -1012,6 +1012,7 @@ tr:active .editTD{
 video{
 	width: 100%;
 	height: auto;
+	filter: var(--normalfilter);
 }
 
 .modal .closer .button{
