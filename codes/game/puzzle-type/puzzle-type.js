@@ -2259,7 +2259,8 @@ function StartingMemo(level){
 				..____________
 				W_____________`.replace(/\t*/g,""),
 		'Order is all':[],
-		'Mon petit ami':false
+		'La rapide surprise':false,
+		'Starting buds':false
 	};
 	return zeromemo[level];
 }
