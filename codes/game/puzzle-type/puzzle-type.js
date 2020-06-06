@@ -131,7 +131,7 @@ var gameModulesLater=[
 "lang-plurals-superlatives",
 ]
 
-LoadSources(gameModulesEarly,P()?GameIntro:Identity);
+LoadSources(gameModulesEarly,P()?GameIntro:GameTrailer);
 gameModulesLater.map(LoaderInFolder("codes/game/puzzle-type/modules"));
 
 function GameIntro(){
@@ -153,6 +153,14 @@ function StartGame(){
 };
 
 
+
+function GameTrailer(){
+	var trailerHTML=`<video width="1280" height="1024" autoplay>
+		<source src="media/puzzle-type/trailorial.mp4" type="video/mp4">
+  		Sorry! Your browser does not support the video tag.
+	</video>`;
+	PreAddElement(trailerHTML,".main");
+}
 //LoadAsync("cacher",".");
 //ServiceWorker();
 
