@@ -2122,7 +2122,7 @@ function ObtainTitleScreenLoader(){
 	ReplaceChildren("<div class='top'><div class='title'></div><div class='credits'></div></div>",".top");
 	ReplaceChildren("Puzzle Type",".title");
 
-	if(CurLevelNumber()>1||SolvedLevels().length>0)
+	if(SolvedLevels().length>0)
 		Letters("CONTINUE");
 	else
 		Letters("START");
