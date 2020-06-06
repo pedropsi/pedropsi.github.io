@@ -42,6 +42,7 @@ var Gendered={//cherished woman//
 	"bro":"sis",
 	"father":"mother",
 	"papa":"mama",
+	"dad":"mom",
 	"grandpa":"grandma",
 	"husband":"wife",
 	"uncle":"aunt",
