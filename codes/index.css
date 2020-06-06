@@ -991,6 +991,11 @@ tr:active .editTD{
 	min-width:var(--w64);
 }
 
+video{
+	width: 100%;
+	height: auto;
+}
+
 .modal .closer .button{
 	background-color:var(--lightyellow);
 }
