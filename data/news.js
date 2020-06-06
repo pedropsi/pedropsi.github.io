@@ -5,7 +5,7 @@ N_50:{
 		PIECE:()=>`
 		<p>In ${AHTML("puzzle-type")}, ${ObtainSymbol("asterisk-heavy")} indicates level difficulty, other symbols have different meanings: ${ObtainSymbol("eye")} ${ObtainSymbol("search")} ${ObtainSymbol("flag")}. Thanks ${v.HEDEHOLM()} and ${v.THINKY()}!</p>
 		<p>A small trailer was added.</p>
-		<p>New level! STA***.</p>
+		<p>New level! STA***. Level MON*** became LA****, provisionally.</p>
 	`,ID:"puzzle-type"},
 N_49:{
 		DATE:"2020-05-30",
