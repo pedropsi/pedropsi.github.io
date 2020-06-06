@@ -545,7 +545,6 @@ div .index-link:focus {
 img,svg{
 	max-width: 100%;
 	height:auto;
-	filter: var(--normalfilter);
 }
 .image, img{
 	padding:var(--h-2) var(--w-2) var(--h-2) var(--w-2);

@@ -24,7 +24,7 @@
     height: var(--gameH);
     overflow: hidden;
     margin-bottom: var(--h1);
-    filter: var(--normalfilter);    
+    
 }
 
 .game-rotation-container{
