@@ -1112,30 +1112,6 @@ PageShallowURL=function(url){
 	return PageProtocol(url)+PageDomain(url)+PageShallowPath(url)+PageSearch(url)+PageFragment(url);
 }
 
-
-/*PageHost=function(url){
-	var url=DefaultURL(url);
-	return new URL(url).host;
-}
-
-PageUnHost=function(url){
-	var url=DefaultURL(url);
-		url=UnBeforfix(url,PageHost(url));
-	
-	return UnPrefix(url,"/");
-}
-
-PageForceURL=function(url){
-	var url=DefaultURL(url);
-	if(PageRelative(url))
-		return UnOverfix(window.location.href,"/")+Prefix(url,"/");
-	if(Prefixed(url,"file:")){
-		return PageFileForceURL(url);
-	}else
-		return DefaultURL(url);
-}
-*/
-
 PageSimpleIdentifier=function(url){
 	var url=DefaultURL(url);
 	var file=PageFile(url);
