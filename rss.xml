@@ -16,6 +16,118 @@
 		</image>
 		
 	<item>
+		<title><![CDATA[Difficulty stars & symbols, trailer, new level]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-06-06</guid>
+		<pubDate>Sat, 6 Jun 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+		<p>In <a href='puzzle-type.html'>Puzzle Type</a>, ✲ indicates level difficulty, other symbols have different meanings: 👁 ⌕ ⚑. Thanks <a href='https://twitter.com/kristianhede' rel='noreferrer noopener'><span class="name">Kristian Hedeholm</span></a> and <a href='https://discord.gg/ZkV2zdb' rel='noreferrer noopener'><span class="name">Thinky Puzzle Games discord server</span></a>!</p>
+		<p>A small trailer was added.</p>
+		<p>New level! STA***. Level MON*** became LA****, provisionally.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Typographic excursion + fixes]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-05-30</guid>
+		<pubDate>Sat, 30 May 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+		<p>Level TOP*** was overhauled with morphing letters.</p>
+		<p>Diverse minor fixes, related to the undo queue and the arrow keys.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Redo support]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-05-24</guid>
+		<pubDate>Sun, 24 May 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+	<p>As this feature was needed for <a href='puzzle-type.html'>Puzzle Type</a>, the <a href='game-bar.html'>Game Bar</a> now has a nice <kbd><span class='icon'><svg class='iconpath' width='20px' height=''20px' viewBox='0 -050 400 400'><path d='M216 78 C 226 84,263 106,288 139 L 294 148 300 145 C 303 144,313 139,323 134 C 342 125,342 125,342 127 C 342 127,336 153,329 184 C 322 215,316 241,315 242 C 315 244,206 194,206 192 C 206 191,215 186,227 181 C 239 175,248 170,248 170 C 249 168,236 155,230 150 C 179 110,107 122,72 177 C 61 194,57 211,56 237 L 55 248 45 247 C 40 247,29 246,21 246 L 6 246 6 240 C 6 192,21 153,52 122 C 97 88,138 71,184 78'/></svg></span></kbd> redo button - a suggestion by <a href='https://twitter.com/collin_eye' rel='noreferrer noopener'><span class="name">Patrick Collin Eye</span></a> and <a href='https://twitter.com/kristianhede' rel='noreferrer noopener'><span class="name">Kristian Hedeholm</span></a>!</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Global hall of fame]]></title>
+		<link>https://pedropsi.github.io/hall-of-fame-global.html#RSS</link>
+		<guid>https://pedropsi.github.io/hall-of-fame-global.html?guid=2020-05-24</guid>
+		<pubDate>Sun, 24 May 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/hall-of-fame-global.svg" width="180" height="180" alt="Hall of fame (global). Laurel and stars." title="Hall of fame (global). Laurel and stars."/>
+			
+	<p>There is now a <a href='hall-of-fame-global'>global Hall of Fame</a> for winners of any puzzlescript game played in the game-console. Have a try!</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Community]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Puzzle type Gamma]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-05-23</guid>
+		<pubDate>Sat, 23 May 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+	<p>The Gamma Phase has started, with a fresh round of videoplaytests. Contact Pedro PSI to join!</p>
+	<p>More updates: level FUCHSIA (formerly WHITE) removed.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Puzzle type beta changes V]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-05-17</guid>
+		<pubDate>Sun, 17 May 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+<p>More updates: level CAR*** became IRO***, adding a couple twists. DEA*** was expanded and synthesised sounds added. Many thanks, <a href='https://twitter.com/collin_eye' rel='noreferrer noopener'><span class="name">Patrick Collin Eye</span></a>!</p>
+<p>New level MON*** added, still experimental!</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
 		<title><![CDATA[Puzzle type beta changes IV]]></title>
 		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
 		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-05-10</guid>
@@ -61,7 +173,7 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
 			
-<p>Ongoing beta playtesting changes: NUC*** became TEN*** a less ambiguous clue, added new puzzle GEN*** but removed TAN***, a critical synonym was added to LAT***, WAS*** was recentered. Many thanks, <a href='https://twitter.com/collin_eye' rel='noreferrer noopener'><span class="name">Patrick Collin Eye</span></a>!</p>
+<p>Ongoing beta playtesting changes: NUC*** became TEN*** a less ambiguous clue, added new puzzle GEN*** but removed TAN***, a critical synonym was added to LAT***, WAS*** was recentered.</p>
 	
 		]]>
 		</description>
@@ -176,6 +288,7 @@
 		</description>
 		<category><![CDATA[3D]]></category>
 <category><![CDATA[Game]]></category>
+<category><![CDATA[Prototype]]></category>
 <category><![CDATA[Puzzle]]></category>
 <category><![CDATA[Puzzlescript]]></category>
 	</item>
@@ -266,7 +379,7 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/game-bar.svg" width="180" height="180" alt="Game Bar" title="Game Bar"/>
 			
-<p>A database of Puzzlescript components, prototypes and mechanic demonstrations was added to <a href='game-tools.html'>Game Tools</a> to complement the <a href='puzzlescript-games-database.html'>Puzzlescript Games-database</a>.</p>
+<p>A database of Puzzlescript components, prototypes and mechanic demonstrations was added to <a href='game-tools.html'>Game Tools</a> to complement the <a href='puzzlescript-games-database.html'>Puzzlescript Games Database</a>.</p>
 
 		]]>
 		</description>
@@ -305,7 +418,7 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/puzzlescript-games-database.svg" width="180" height="180" alt="Puzzlescript games database" title="Puzzlescript games database"/>
 			
-<p>The <a href='puzzlescript-games-database.html'>Puzzlescript Games-database</a> underwent several improvements. Among them, there are now more submission options, and search was added across all data categories. Search can be triggered by user input and indicated in the URL.</p>
+<p>The <a href='puzzlescript-games-database.html'>Puzzlescript Games Database</a> underwent several improvements. Among them, there are now more submission options, and search was added across all data categories. Search can be triggered by user input and indicated in the URL.</p>
 
 		]]>
 		</description>
@@ -343,7 +456,7 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/game-console.svg" width="180" height="180" alt="Game Console" title="Game Console"/>
 			
-<p>Two new buttons: + (more games by the same author) and <span class='icon'><svg class='iconpath' width='20px' height=''20px' viewBox='0 0 400 400'><path d='M152 112 L 121 147 124 188 L 127 228 75 280 L 23 332 32 341 C 37 346,40 349,40 350 C 39 351,44 356,53 365 L 66 378 122 323 L 177 267 213 266 C 242 265,250 265,250 264 C 251 263,251 263,252 264 C 253 265,253 265,254 263 C 255 263,269 247,285 228 C 301 210,315 195,315 194 C 315 194,287 169,286 169 C 286 169,279 177,271 186 L 256 203 246 203 C 240 204,231 204,225 204 L 214 204 198 190 C 190 183,183 176,183 175 C 183 174,182 166,182 156 L 180 138 196 121 C 205 111,212 102,212 102 C 212 102,185 77,184 77 C 184 77,169 93,152 112'/></svg></span> (edit source).</p>
+<p>Two new buttons: <kbd>+</kbd> (more games by the same author) and <kbd><span class='icon'><svg class='iconpath' width='20px' height=''20px' viewBox='0 0 400 400'><path d='M152 112 L 121 147 124 188 L 127 228 75 280 L 23 332 32 341 C 37 346,40 349,40 350 C 39 351,44 356,53 365 L 66 378 122 323 L 177 267 213 266 C 242 265,250 265,250 264 C 251 263,251 263,252 264 C 253 265,253 265,254 263 C 255 263,269 247,285 228 C 301 210,315 195,315 194 C 315 194,287 169,286 169 C 286 169,279 177,271 186 L 256 203 246 203 C 240 204,231 204,225 204 L 214 204 198 190 C 190 183,183 176,183 175 C 183 174,182 166,182 156 L 180 138 196 121 C 205 111,212 102,212 102 C 212 102,185 77,184 77 C 184 77,169 93,152 112'/></svg></span></kbd> (edit source).</p>
 	
 		]]>
 		</description>
@@ -399,7 +512,7 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/puzzlescript-games-database.svg" width="180" height="180" alt="Puzzlescript games database" title="Puzzlescript games database"/>
 			
-<p>The <a href='puzzlescript-games-database.html'>Puzzlescript Games-database</a> now sports over 1300 titles.</p>
+<p>The <a href='puzzlescript-games-database.html'>Puzzlescript Games Database</a> now sports over 1300 titles.</p>
 
 		]]>
 		</description>
@@ -458,7 +571,8 @@
 <p>The <a href='lul.html'>Level Unlocking Language</a> draft is released for discussion.</p>
 		]]>
 		</description>
-		<category><![CDATA[Resource]]></category>
+		<category><![CDATA[Prototype]]></category>
+<category><![CDATA[Resource]]></category>
 <category><![CDATA[Tutorial]]></category>
 	</item>
 	
@@ -510,7 +624,7 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
 			
-<p>There is now an on-screen keyboard <span class='icon'><svg class='iconpath' width='20px' height=''20px' viewBox='0 0 400 180'><path d='M0 88 L 0 177 200 177 L 400 177 400 88 L 400 0 200 0 L 0 0 0 88 M384 88 L 384 161 200 161 L 15 161 15 88 L 15 15 200 15 L 384 15 384 88 M30 41 L 30 53 42 53 L 55 53 55 41 L 55 29 42 29 L 30 29 30 41 M69 41 L 69 53 81 53 L 94 53 94 41 L 94 29 81 29 L 69 29 69 41 M108 41 L 108 53 121 53 L 133 53 133 41 L 133 29 121 29 L 108 29 108 41 M148 41 L 148 53 160 53 L 173 53 173 41 L 173 29 160 29 L 148 29 148 41 M187 41 L 187 53 199 53 L 212 53 212 41 L 212 29 199 29 L 187 29 187 41 M226 41 L 226 53 239 53 L 251 53 251 41 L 251 29 239 29 L 226 29 226 41 M266 41 L 266 53 278 53 L 291 53 291 41 L 291 29 278 29 L 266 29 266 41 M305 41 L 305 53 317 53 L 330 53 330 41 L 330 29 317 29 L 305 29 305 41 M344 41 L 344 53 357 53 L 369 53 369 41 L 369 29 357 29 L 344 29 344 41 M30 87 L 30 98 42 98 L 55 98 55 87 L 55 75 42 75 L 30 75 30 87 M69 87 L 69 98 81 98 L 94 98 94 87 L 94 75 81 75 L 69 75 69 87 M108 87 L 108 98 121 98 L 133 98 133 87 L 133 75 121 75 L 108 75 108 87 M148 87 L 148 98 160 98 L 173 98 173 87 L 173 75 160 75 L 148 75 148 87 M187 87 L 187 98 199 98 L 212 98 212 87 L 212 75 199 75 L 187 75 187 87 M226 87 L 226 98 239 98 L 251 98 251 87 L 251 75 239 75 L 226 75 226 87 M266 87 L 266 98 278 98 L 291 98 291 87 L 291 75 278 75 L 266 75 266 87 M305 87 L 305 98 317 98 L 330 98 330 87 L 330 75 317 75 L 305 75 305 87 M344 87 L 344 98 357 98 L 369 98 369 87 L 369 75 357 75 L 344 75 344 87 M30 134 L 30 147 53 147 L 77 147 77 134 L 77 121 53 121 L 30 121 30 134 M93 134 L 93 147 200 147 L 307 147 307 134 L 307 121 200 121 L 93 121 93 134 M322 134 L 322 147 346 147 L 369 147 369 134 L 369 121 346 121 L 322 121 322 134'/></svg></span> for easier input on mobile devices. <span class='icon'><svg class='iconpath' width='20px' height=''20px' viewBox='0 -050 400 400'><path d='M216 78 C 174 84,137 106,112 139 L 106 148 100 145 C 97 144,87 139,77 134 C 58 125,58 125,58 127 C 58 127,64 153,71 184 C 78 215,84 241,85 242 C 85 244,194 194,194 192 C 194 191,185 186,173 181 C 161 175,152 170,152 170 C 151 168,164 155,170 150 C 221 110,293 122,328 177 C 339 194,343 211,344 237 L 345 248 355 247 C 360 247,371 246,379 246 L 394 246 394 240 C 394 192,379 153,348 122 C 313 88,262 71,216 78'/></svg></span>/<span class='icon'><svg class='iconpath' width='20px' height=''20px' viewBox='0 0 400 400'><path d='M235 65 C 205 79,180 90,180 90 C 180 90,196 112,216 139 C 235 166,252 188,252 188 C 252 187,255 178,258 167 C 261 156,263 146,264 145 C 264 143,269 147,278 157 C 337 218,307 320,225 340 C 144 360,71 285,93 204 C 97 187,105 174,121 155 L 127 148 125 146 C 122 143,92 118,92 118 C 89 118,65 151,59 164 C 1 284,110 418,238 384 C 370 350,398 174,283 101 C 278 98,277 96,277 95 C 277 95,280 83,284 69 C 288 55,291 43,291 42 C 292 40,295 39,235 65'/></svg></span> buttons included.</p>
+<p>There is now an on-screen keyboard <kbd><span class='icon'><svg class='iconpath' width='20px' height=''20px' viewBox='0 0 400 180'><path d='M0 88 L 0 177 200 177 L 400 177 400 88 L 400 0 200 0 L 0 0 0 88 M384 88 L 384 161 200 161 L 15 161 15 88 L 15 15 200 15 L 384 15 384 88 M30 41 L 30 53 42 53 L 55 53 55 41 L 55 29 42 29 L 30 29 30 41 M69 41 L 69 53 81 53 L 94 53 94 41 L 94 29 81 29 L 69 29 69 41 M108 41 L 108 53 121 53 L 133 53 133 41 L 133 29 121 29 L 108 29 108 41 M148 41 L 148 53 160 53 L 173 53 173 41 L 173 29 160 29 L 148 29 148 41 M187 41 L 187 53 199 53 L 212 53 212 41 L 212 29 199 29 L 187 29 187 41 M226 41 L 226 53 239 53 L 251 53 251 41 L 251 29 239 29 L 226 29 226 41 M266 41 L 266 53 278 53 L 291 53 291 41 L 291 29 278 29 L 266 29 266 41 M305 41 L 305 53 317 53 L 330 53 330 41 L 330 29 317 29 L 305 29 305 41 M344 41 L 344 53 357 53 L 369 53 369 41 L 369 29 357 29 L 344 29 344 41 M30 87 L 30 98 42 98 L 55 98 55 87 L 55 75 42 75 L 30 75 30 87 M69 87 L 69 98 81 98 L 94 98 94 87 L 94 75 81 75 L 69 75 69 87 M108 87 L 108 98 121 98 L 133 98 133 87 L 133 75 121 75 L 108 75 108 87 M148 87 L 148 98 160 98 L 173 98 173 87 L 173 75 160 75 L 148 75 148 87 M187 87 L 187 98 199 98 L 212 98 212 87 L 212 75 199 75 L 187 75 187 87 M226 87 L 226 98 239 98 L 251 98 251 87 L 251 75 239 75 L 226 75 226 87 M266 87 L 266 98 278 98 L 291 98 291 87 L 291 75 278 75 L 266 75 266 87 M305 87 L 305 98 317 98 L 330 98 330 87 L 330 75 317 75 L 305 75 305 87 M344 87 L 344 98 357 98 L 369 98 369 87 L 369 75 357 75 L 344 75 344 87 M30 134 L 30 147 53 147 L 77 147 77 134 L 77 121 53 121 L 30 121 30 134 M93 134 L 93 147 200 147 L 307 147 307 134 L 307 121 200 121 L 93 121 93 134 M322 134 L 322 147 346 147 L 369 147 369 134 L 369 121 346 121 L 322 121 322 134'/></svg></span></kbd> for easier input on mobile devices. <kbd><span class='icon'><svg class='iconpath' width='20px' height=''20px' viewBox='0 -050 400 400'><path d='M216 78 C 174 84,137 106,112 139 L 106 148 100 145 C 97 144,87 139,77 134 C 58 125,58 125,58 127 C 58 127,64 153,71 184 C 78 215,84 241,85 242 C 85 244,194 194,194 192 C 194 191,185 186,173 181 C 161 175,152 170,152 170 C 151 168,164 155,170 150 C 221 110,293 122,328 177 C 339 194,343 211,344 237 L 345 248 355 247 C 360 247,371 246,379 246 L 394 246 394 240 C 394 192,379 153,348 122 C 313 88,262 71,216 78'/></svg></span></kbd>/<kbd><span class='icon'><svg class='iconpath' width='20px' height=''20px' viewBox='0 0 400 400'><path d='M235 65 C 205 79,180 90,180 90 C 180 90,196 112,216 139 C 235 166,252 188,252 188 C 252 187,255 178,258 167 C 261 156,263 146,264 145 C 264 143,269 147,278 157 C 337 218,307 320,225 340 C 144 360,71 285,93 204 C 97 187,105 174,121 155 L 127 148 125 146 C 122 143,92 118,92 118 C 89 118,65 151,59 164 C 1 284,110 418,238 384 C 370 350,398 174,283 101 C 278 98,277 96,277 95 C 277 95,280 83,284 69 C 288 55,291 43,291 42 C 292 40,295 39,235 65'/></svg></span></kbd> buttons included.</p>
 	
 		]]>
 		</description>

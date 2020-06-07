@@ -2,45 +2,27 @@
 		
 		
 	<url>
-		<loc>https://pedropsi.github.io/contact</loc>
-		<lastmod>2020-5-10</lastmod>
-		<changefreq>weekly</changefreq>
-	</url>
-
-	<url>
-		<loc>https://pedropsi.github.io/rss</loc>
-		<lastmod>2020-5-10</lastmod>
-		<changefreq>weekly</changefreq>
-	</url>
-
-	<url>
-		<loc>https://pedropsi.github.io/tag</loc>
-		<lastmod>2020-5-10</lastmod>
-		<changefreq>weekly</changefreq>
-	</url>
-
-	<url>
-		<loc>https://pedropsi.github.io/posts</loc>
-		<lastmod>2020-5-10</lastmod>
-		<changefreq>weekly</changefreq>
+		<loc>https://pedropsi.github.io/hall-of-fame-global</loc>
+		<lastmod>2020-05-24</lastmod>
+		<changefreq>monthly</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/analytics</loc>
 		<lastmod>2020-05-05</lastmod>
-		<changefreq>weekly</changefreq>
+		<changefreq>monthly</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/strata-hedges</loc>
 		<lastmod>2020-03-29</lastmod>
-		<changefreq>monthly</changefreq>
+		<changefreq>yearly</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/generator</loc>
 		<lastmod>2020-03-28</lastmod>
-		<changefreq>monthly</changefreq>
+		<changefreq>yearly</changefreq>
 	</url>
 
 	<url>
@@ -69,14 +51,14 @@
 
 	<url>
 		<loc>https://pedropsi.github.io/puzzle-type</loc>
-		<lastmod>2020-04-26</lastmod>
-		<changefreq>monthly</changefreq>
+		<lastmod>2020-06-06</lastmod>
+		<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/game-console</loc>
 		<lastmod>2020-04-06</lastmod>
-		<changefreq>monthly</changefreq>
+		<changefreq>yearly</changefreq>
 	</url>
 
 	<url>
@@ -202,7 +184,7 @@
 	<url>
 		<loc>https://pedropsi.github.io/pmgrp</loc>
 		<lastmod>2018-05-30</lastmod>
-		<changefreq>yearly</changefreq>
+		<changefreq>never</changefreq>
 	</url>
 
 	<url>
@@ -256,7 +238,7 @@
 	<url>
 		<loc>https://pedropsi.github.io/index</loc>
 		<lastmod>2020-05-07</lastmod>
-		<changefreq>weekly</changefreq>
+		<changefreq>monthly</changefreq>
 	</url>
 
 	<url>
