@@ -143,7 +143,7 @@ function MusicLoop(Next,music){
 		Iterator,
 		Next,
 		Identity,
-		phase
+		phase*(bpm/60)
 	)
 }
 
