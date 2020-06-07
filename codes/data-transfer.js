@@ -4468,11 +4468,23 @@ function SequenceSchedule(steps,interval,Iterator,Starter,Ender){
 	var Starter=Starter||Identity;
 	var Ender=Ender||Identity;
 
-	function ScheduleAnim(i){setTimeout(Iterator(i),interval*i)}
+	function ScheduleAnim(i,startTime){
+		var expectedTime=startTime+interval*i;
+		ScheduleAnim.delay=0;
+
+		function TimedIterator(){
+			var actualTime=Date.now();
+			ScheduleAnim.delay+=Max(actualTime-expectedTime,0);
+		
+			setTimeout(i!==steps?Iterator(i):Ender,ScheduleAnim.delay);
+		}
+		
+		setTimeout(TimedIterator,interval*i)
+	}
 
 	Starter();
-	for(var i=0;i<steps;i=i+1){ScheduleAnim(i)}
-	setTimeout(Ender,steps*interval);
+	var startTime=Date.now();
+	for(var i=0;i<=steps;i=i+1){ScheduleAnim(i,startTime)}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
