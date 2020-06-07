@@ -392,29 +392,20 @@ function BezierDynamicLetter(Z,oldY,id,parentE){
 }
 
 function MorphLetter(A,B,parentE,Starter,Ender){
-	var Starter=Starter||Identity;
-	var Ender=Ender||Identity;
 	var steps=10;
 	var delay=500/steps;
+	function FullEnder(){
+		BezierDynamicLetter(B,A,id,parentE);
+		Ender();
+	}
 	var id=GenerateId();
-	function ScheduleAnim(i){
-		setTimeout(
-			function(){BezierDynamicLetter(LetterInterpolatedCoordinates(A,B,i),A,id,parentE)},
-			delay*i*steps)
+	function Iterator(i){
+		return function(){
+			BezierDynamicLetter(LetterInterpolatedCoordinates(A,B,i/steps),A,id,parentE);
+		}
 	}
-	Starter();
-	for(var i=0;i<1;i=i+1/steps){
-		ScheduleAnim(i)
-	}
-	setTimeout(
-		function(){
-			BezierDynamicLetter(B,A,id,parentE);
-			Ender()
-		},
-		steps*delay
-	)
+	SequenceSchedule(steps,delay,Iterator,Starter,FullEnder);
 }
-
 
 //Test cases
 // Equal(LetterInterpolatedCoordinates("A","B",0),LetterCoordinates("A"))

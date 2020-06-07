@@ -4463,6 +4463,18 @@ UnScheduleAll=function(queueName){
 }
 
 
+//
+function SequenceSchedule(steps,interval,Iterator,Starter,Ender){
+	var Starter=Starter||Identity;
+	var Ender=Ender||Identity;
+
+	function ScheduleAnim(i){setTimeout(Iterator(i),interval*i)}
+
+	Starter();
+	for(var i=0;i<steps;i=i+1){ScheduleAnim(i)}
+	setTimeout(Ender,steps*interval);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Cycle
 

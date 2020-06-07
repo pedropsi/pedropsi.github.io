@@ -106,13 +106,18 @@ function PlayChord(chord,delay,speed){
 			ch=ch.filter(x=>!In(["","#"],x));
 		var octave=3;
 		var last="";
-		for(var n=0;n<ch.length;n++){
-			note=ch[n];
-			if(last&&NoteNumber(last)>=NoteNumber(note))
-				octave++;
-			setTimeout(NotePlayer(note,octave),n*250*speed+delay)
-			last=note;
+
+		function Iterator(n){
+			return function(){
+				note=ch[n];
+				if(last&&NoteNumber(last)>=NoteNumber(note))
+					octave++;
+				Piano.play(note,octave);
+				last=note;
+			}
 		}
+
+		SequenceSchedule(ch.length,250,Iterator)
 	}
 	else{
 		console.log("no Piano!")
