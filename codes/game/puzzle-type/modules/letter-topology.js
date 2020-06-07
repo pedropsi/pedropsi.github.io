@@ -393,7 +393,7 @@ function BezierDynamicLetter(Z,oldY,id,parentE){
 
 function MorphLetter(A,B,parentE,Starter,Ender){
 	var steps=10;
-	var delay=500/steps;
+	var delay=350/steps;
 	function FullEnder(){
 		BezierDynamicLetter(B,A,id,parentE);
 		Ender();
