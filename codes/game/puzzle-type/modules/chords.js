@@ -125,6 +125,51 @@ function PlayChord(chord,delay,speed){
 
 }
 
+
+function MusicLoop(Next,music){
+	var notes=music.notes;
+	var bpm=music.bpm||120;
+	var phase=music.phase||0;
+	function Iterator(n){
+		return function(){
+			var note=notes[n][0];
+			var octave=notes[n][1];
+			Piano.play(note,octave);
+		}
+	}
+	SequenceSchedule(
+		notes.length,
+		1000/(bpm/60),
+		Iterator,
+		Next,
+		Identity,
+		phase
+	)
+}
+
+function MusicLoopPlay(name,music){
+	if(!MusicLoopPlay[name]){
+		MusicLoopPlay[name]=music;
+		Listen("music-loop-"+name,Loop);
+		Shout("music-loop-"+name);
+	}
+	else
+		MusicLoopPlay[name]=music;
+
+	function Next(){
+		if(MusicLoopPlay[name]!==false)
+			Shout("music-loop-"+name)
+	}
+	function Loop(){
+		MusicLoop(Next,MusicLoopPlay[name]);
+	}
+	
+}
+
+function MusicLoopStop(name){
+	MusicLoopPlay[name]=false;
+}
+
 var Piano;
 var Bump;
 function SynthStart(){
