@@ -1007,6 +1007,8 @@ PageTitle=function(){
 }
 
 DefaultURL=function(url){//Default to the current page url
+	if(NodejsDetected()&&typeof url==="undefined")
+		return "https://pedropsi.github.io";
 	if(typeof url==="undefined")
 		return window.location.href;
 	else
@@ -1155,7 +1157,10 @@ PageSearch=function(parameter,page){
 	}
 	if(PageRelative(page))
 		page=Prefix(page,"https://")//fake url
-	var l=new URL(page||document.URL);
+	if(NodejsDetected())
+		var l=new URL("https://pedropsi.github.io");
+	else
+		var l=new URL(page||document.URL);
 	l=l.search;
 	if(!parameter)
 		return l;
