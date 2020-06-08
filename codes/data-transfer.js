@@ -2090,7 +2090,7 @@ FilterChildren=function(filterF,parentSelector,childSelector,subparentSelector){
 InSubPart=function(celltxt,subparts){
 	var celltxt=UnWhitespace(celltxt);
 	var subparts=AccPermutations(subparts,3).map(p=>p.join(""));
-	return subparts.some(txt=>In(celltxt,txt));
+	return subparts.some(txt=>InString(celltxt,txt));
 }
 
 RowFilterer=function(patterntxt){
@@ -2101,7 +2101,7 @@ RowFilterer=function(patterntxt){
 		var cells=GetElements("td",row).map(function(r){return LowerSpacedString(r.innerText)});
 		var subparts=patterntxt.split(" ").filter(Identity);
 		var cellstring=UnWhitespace(cells.join(""));
-		return cells.some(celltxt=>InSubPart(celltxt,subparts))&&subparts.every(part=>In(cellstring,part));
+		return cells.some(celltxt=>InSubPart(celltxt,subparts))&&subparts.every(part=>InString(cellstring,part));
 	}
 }
 
