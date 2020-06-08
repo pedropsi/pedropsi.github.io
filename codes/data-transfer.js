@@ -499,23 +499,77 @@ Union=function(AO1,AO2){
 }
 
 //Permutations of a set (enforces uniqueness or sort)
-Permutations=function(array){
-	var array=Unique(array);
-	if(array.length===1)
-		return [array];
+// Permutations=function(array){
+// 	var array=Unique(array);
+// 	if(array.length===1)
+// 		return [array];
 	
-	var subpermutations=[];
+// 	var subpermutations=[];
+// 	var permutations=[];
+// 	for(var i=0;i<array.length;i++){
+// 		subpermutations=Permutations(Delete(array,i));
+// 		subpermutations=subpermutations.map(function(s){return [array[i]].concat(s)});
+// 		permutations=permutations.concat(subpermutations);
+// 	}
+// 	return permutations;
+// }
+
+StringPermutations=function(string){
+	return Permutations(string.split("")).map(function(p){return p.join("");});
+}
+
+
+//Factorial numbers and arrays
+Factorial=function(n){
+	if(n<=1)
+		return 1;
+	if(Factorial[n])
+		return Factorial[n];
+	else
+		return Factorial[n]=n*Factorial(n-1);
+}
+
+
+//Permutations of a set (enforces uniqueness or sort)
+Permutations=function(array,n,unique){
+	if(n===0)
+		return [];
+
+	var l=array.length;
+	if(typeof n==="undefined"||n>array.length)
+		var n=l;
+	
+	if(!unique)
+		var array=Unique(array);
+
+	if(n===1)
+		return array.map(a=>[a]);
+
 	var permutations=[];
-	for(var i=0;i<array.length;i++){
-		subpermutations=Permutations(Delete(array,i));
-		subpermutations=subpermutations.map(function(s){return [array[i]].concat(s)});
-		permutations=permutations.concat(subpermutations);
+	var pretuples=Permutations(array,n-1,true);
+	function AddTuple(pretuple,j){
+		if(!In(pretuple,j))
+		permutations.push(pretuple.concat([j]));
+	}
+	Outer(pretuples,array,AddTuple);
+	return permutations;
+}
+
+AccPermutations=function(array,n){
+	var permutations=[];
+	var array=Unique(array);
+	if(typeof n==="undefined"||n>array.length)
+		var n=array.length;
+	for(var i=1;i<=n;i++){
+		permutations=permutations.concat(Permutations(array,i,true));
 	}
 	return permutations;
 }
 
-StringPermutations=function(string){
-	return Permutations(string.split("")).map(function(p){return p.join("");});
+Outer=function(array1,array2,F){
+	for(var i=0;i<array1.length;i++)
+		for(var j=0;j<array2.length;j++)
+			F(array1[i],array2[j])
 }
 
 Substrings=function(string){
@@ -668,6 +722,9 @@ UnWhitespace=function(string){
 }
 LowerSimpleString=function(string){
 	return SafeString(UnWhitespace(string).toLowerCase());
+}
+LowerSpacedString=function(string){
+	return string.toLowerCase().replace(new RegExp("["+EscapeTokens(Tokens())+"]+","g")," ").replace(/[\n\s\t]+/g," ");
 }
 
 // Capitalise
@@ -2002,27 +2059,43 @@ FilterChildren=function(filterF,parentSelector,childSelector,subparentSelector){
 	ApplyOriginalChildren(FilterCh,parentSelector,childSelector,subparentSelector);
 }
 
-InSimple=function(childtxt,patterntxt){
-	return In(LowerSimpleString(childtxt),LowerSimpleString(patterntxt));
+InSubPart=function(celltxt,subparts){
+	var celltxt=UnWhitespace(celltxt);
+	var subparts=AccPermutations(subparts).map(p=>p.join(""));
+	return subparts.some(txt=>In(celltxt,txt));
 }
 
-TextFilterChildren=function(patterntxt,parentSelector,childSelector,subparentSelector){
-	function TextFilter(child){
-		
-		var childtxt=LowerSimpleString(child.textContent);
-		return InSimple(childtxt,patterntxt)
+RowFilterer=function(patterntxt){
+	var patterntxt=LowerSpacedString(patterntxt);
+	return function(row){
+		var cells=GetElements("td",row).map(function(r){return LowerSpacedString(r.innerText)});
+		var subparts=patterntxt.split(" ").filter(Identity);
+		var cellstring=UnWhitespace(cells.join(""));
+		return cells.some(celltxt=>InSubPart(celltxt,subparts))&&subparts.every(part=>In(cellstring,part));
 	}
-	FilterChildren(TextFilter,parentSelector,childSelector,subparentSelector);
+}
+
+
+
+TextFilterChildren=function(patterntxt,parentSelector,childSelector,subparentSelector){
+	FilterChildren(RowFilterer(patterntxt),parentSelector,childSelector,subparentSelector);
 	AddShareSearch(patterntxt,parentSelector);
 }
 
 PrependFilterInput=function(InputFilterF,parentSelector,childrenSelector,subparentSelector){
 	var input=PriorElement(parentSelector,"INPUT");
-	RemoveElement(input);
+	var value="";
+	if(input){
+		value=input.value;
+		RemoveElement(input);
+	}
 
 	var uid=UniqueId(parentSelector);
 	filterHTML="<input class='input filter filter-"+uid+"' placeholder='search "+ObtainSymbol("search")+"' onkeyup='"+FunctionName(InputFilterF)+"(\""+uid+"\",\".filter-"+uid+"\",\""+childrenSelector+"\",\""+subparentSelector+"\")'></input>";
-	PrependElement(filterHTML,parentSelector);
+	input=PrependElement(filterHTML,parentSelector);
+	if(value!==""&&input.value===""){
+		input.value=value;
+	}
 }
 
 AddShareSearch=function(patterntxt,elementSelector){	
