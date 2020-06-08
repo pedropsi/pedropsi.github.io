@@ -2093,26 +2093,24 @@ InSubPart=function(celltxt,subparts){
 	return subparts.some(txt=>InString(celltxt,txt));
 }
 
-RowFilterer=function(patterntxt){
+RowFilterer=function(row,patterntxt){
 	var patterntxt=LowerSpacedString(patterntxt);
-	return function(row){
-		if(patterntxt.replace(/\s*/g,"")==="")
-			return true;
-		var cells=GetElements("td",row).map(function(r){return LowerSpacedString(r.innerText)});
-		var subparts=patterntxt.split(" ").filter(Identity);
-		var cellstring=UnWhitespace(cells.join(""));
-		return cells.some(celltxt=>InSubPart(celltxt,subparts))&&subparts.every(part=>InString(cellstring,part));
-	}
+	if(patterntxt.replace(/\s*/g,"")==="")
+		return true;
+	var cells=GetElements("td",row).map(function(r){return LowerSpacedString(r.innerText)});
+	var subparts=patterntxt.split(" ").filter(Identity);
+	var cellstring=UnWhitespace(cells.join(""));
+	return cells.some(celltxt=>InSubPart(celltxt,subparts))&&subparts.every(part=>InString(cellstring,part));
 }
 
 
-
-TextFilterChildren=function(patterntxt,parentSelector,childSelector,subparentSelector){
-	FilterChildren(RowFilterer(patterntxt),parentSelector,childSelector,subparentSelector);
-	AddShareSearch(patterntxt,parentSelector);
+TableFilter=function(patterntxt,table){
+	var rows=GetElements("TR",GetElement("TBODY",table));
+	rows.map(row=>RowFilterer(row,patterntxt)?ShowElement(row):HideElement(row));
+	AddShareSearch(patterntxt,table);
 }
 
-PrependFilterInput=function(InputFilterF,parentSelector,childrenSelector,subparentSelector){
+PrependFilterInput=function(InputFilterF,parentSelector){
 	var input=PriorElement(parentSelector,"INPUT");
 	var value="";
 	if(input){
@@ -2121,7 +2119,7 @@ PrependFilterInput=function(InputFilterF,parentSelector,childrenSelector,subpare
 	}
 
 	var uid=UniqueId(parentSelector);
-	filterHTML="<input class='input filter filter-"+uid+"' placeholder='search "+ObtainSymbol("search")+"' onkeyup='"+FunctionName(InputFilterF)+"(\""+uid+"\",\".filter-"+uid+"\",\""+childrenSelector+"\",\""+subparentSelector+"\")'></input>";
+	filterHTML="<input class='input filter filter-"+uid+"' placeholder='search "+ObtainSymbol("search")+"' onkeyup='"+FunctionName(InputFilterF)+"(\""+uid+"\",\".filter-"+uid+"\")'></input>";
 	input=PrependElement(filterHTML,parentSelector);
 	if(value!==""&&input.value===""){
 		input.value=value;
@@ -2167,7 +2165,7 @@ FilterSearchURL=function(){
 	}
 
 	if(table){
-		TextFilterChildren(search,table,"TR","TBODY");
+		TableFilter(search,table);
 		var input=PriorElement(table,"INPUT");
 		if(input){
 			input.value=search;
@@ -2176,15 +2174,15 @@ FilterSearchURL=function(){
 	}
 }
 
-InputFilter=function(parentSelector,filterSelector,childrenSelector,subparentSelector){
+InputFilter=function(parentSelector,filterSelector){
 	var textfilter=GetElement(filterSelector).value;
 	var parentSelector=GetElement(parentSelector);
-	TextFilterChildren(textfilter,parentSelector,childrenSelector,subparentSelector);
+	TableFilter(textfilter,parentSelector);
 }
 
 FilterableTable=function(tableSelector){
 	if(GetElements("TR",tableSelector).length>10){//Only big tables need filtering
-		PrependFilterInput(InputFilter,tableSelector,"TR","TBODY");
+		PrependFilterInput(InputFilter,tableSelector);
 	}
 }
 
