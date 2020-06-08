@@ -2061,13 +2061,15 @@ FilterChildren=function(filterF,parentSelector,childSelector,subparentSelector){
 
 InSubPart=function(celltxt,subparts){
 	var celltxt=UnWhitespace(celltxt);
-	var subparts=AccPermutations(subparts).map(p=>p.join(""));
+	var subparts=AccPermutations(subparts,3).map(p=>p.join(""));
 	return subparts.some(txt=>In(celltxt,txt));
 }
 
 RowFilterer=function(patterntxt){
 	var patterntxt=LowerSpacedString(patterntxt);
 	return function(row){
+		if(patterntxt.replace(/\s*/g,"")==="")
+			return true;
 		var cells=GetElements("td",row).map(function(r){return LowerSpacedString(r.innerText)});
 		var subparts=patterntxt.split(" ").filter(Identity);
 		var cellstring=UnWhitespace(cells.join(""));
