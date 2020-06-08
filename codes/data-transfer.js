@@ -388,6 +388,34 @@ InString=function(string,n){
 	return n===""||s.replace(n,"")!==string;
 }
 
+InLazyString=function(string,n){ //Lazy matching, 1 error 
+	var matchers=[];
+	if(n.length>string.length+1)
+		return false;
+
+	if(n==="")
+		return true;
+
+	var l=n.length;
+	if(l===1)
+		return string.replace(n,"")!==string;
+
+	for(var i=0;i<l;i++){ //(wrong letter or deleted)
+		matchers[i]=n.split("");
+		matchers[i][i]=".?";
+		matchers[i]=new RegExp(matchers[i].join(""));
+	}
+
+	for(var i=1;i<l;i++){ //(flip)
+		matchers[l+i]=n.split("");
+		matchers[l+i][i]=n[i-1];
+		matchers[l+i][i-1]=n[i];
+		matchers[l+i]=matchers[l+i].join("");
+	}
+
+	return matchers.some(m=>string.replace(m,"")!==string);
+}
+
 In=function(SAO,n){
 	if(IsArray(n))
 		return n.map(m=>In(SAO,m)).some(Identity);
