@@ -260,7 +260,7 @@ CMSAHTML=function(title){
 		return title;
 	else{
 		o=First(o);
-		return AHTML(UnFunction(o.TITLE),UnFunction(o.LINK));
+		return AHTML(UnFunction(o.TITLE),UnFunction(o.LINK)+".html");
 	}
 }
 
