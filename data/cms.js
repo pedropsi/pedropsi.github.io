@@ -255,13 +255,14 @@ InlineSVG=function(){
 }
 
 CMSAHTML=function(title){
+	var o=CMSObject(title);
+	return AHTML(UnFunction(o.TITLE),UnFunction(o.LINK)+".html");
+}
+
+CMSObject=function(title){
 	var o=BaseFilter(CMS,o=>UnFunction(o.TITLE)&&LowerSimpleString(UnFunction(o.TITLE))===LowerSimpleString(title));
-	if(!o.length)
-		return title;
-	else{
-		o=First(o);
-		return AHTML(UnFunction(o.TITLE),UnFunction(o.LINK)+".html");
-	}
+	if(o.length)
+		return First(o);
 }
 
 

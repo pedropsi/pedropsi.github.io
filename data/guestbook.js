@@ -22,7 +22,9 @@ MakeGuestbook=function(jsonstring){
 		var id=SafeString(dataline[4]);
 		var rid=NextReplyMessageId(id,dataarray); //may duplicate in high traffic times
 		
-		var b=ButtonOnClickHTML("Reply to "+au,'RequestMessageReply("'+rid+'")');
+		var o=CMSObject(SafeString(dataline[1]));
+
+		var b=ButtonOnClickHTML("Reply to "+au,'RequestMessageReply("'+rid+'","'+UnFunction(o.TITLE)+'")');
 		var datereply="<div class='date'>"+SafeString(dataline[0])+b+"</div>";
 		var c="<p class='quote'>"+SafeString(dataline[3])+"</p>";
 		var a="<span class='author'>"+au+"</span>";

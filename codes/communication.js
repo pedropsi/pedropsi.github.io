@@ -377,7 +377,7 @@ Outflows=function(name){
 			docId:"1tp42m_9MoMN4IHzO6H9aqTkU2wt_FtdWGK3Q7Uwb9hw",
 			sheetName:"Guestbook",
 			rowStart:8,
-			identifier:PageTitle(),
+			identifier:PageTitle()==="Guestbook"?RequestMessageReply.title:PageTitle(),
 			comment:FindData("answer"),
 			name:AnonimiseBlank(FindData("name")),
 			id:RequestMessageReply.currentid
@@ -655,8 +655,9 @@ RequestGuestbook=function(){
 	)
 }
 
-RequestMessageReply=function(nid){
+RequestMessageReply=function(nid,title){
 	RequestMessageReply.currentid=nid;
+	RequestMessageReply.title=title;
 	RequestDataPack([
 		['answer',{
 			questionname:"Your polite reply",
