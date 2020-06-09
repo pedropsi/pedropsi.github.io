@@ -1295,7 +1295,7 @@ video{
 	color:var(--blue);
 	font-weight:bold;
 }
-.comment .subject{
+.comment .subject, .comment .subject a{
 	color:var(--blue);
 	font-style:italic;
 }

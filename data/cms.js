@@ -71,7 +71,6 @@ Access=function(page,field){
 	return PageObj(page)[field]();
 }
 
-
 CMSOptionsObj=function(){
 	return{
 		Source:CMS,
@@ -254,6 +253,18 @@ InlineSVG=function(){
 	}
 	images.map(ReplaceSource);
 }
+
+CMSAHTML=function(title){
+	console.log(title);
+	var o=BaseFilter(CMS,o=>UnFunction(o.TITLE)&&LowerSimpleString(UnFunction(o.TITLE))===LowerSimpleString(title));
+	if(!o.length)
+		return title;
+	else{
+		o=First(o);
+		return AHTML(UnFunction(o.TITLE),UnFunction(o.LINK));
+	}
+}
+
 
 if(!NodejsDetected()){
 	Page=PageObj(PageIdentifier());

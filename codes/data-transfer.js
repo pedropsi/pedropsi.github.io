@@ -659,7 +659,10 @@ Subset=function(Object,SubsetObject){
 
 //Object Arrays (BASE)
 BaseFilter=function(Base,GroupObject){
-	return Values(FilterObject(Base,g=>Subset(g,GroupObject)));
+	if(IsObject(GroupObject))
+		return Values(FilterObject(Base,g=>Subset(g,GroupObject)));
+	else
+		return Values(FilterObject(Base,GroupObject));
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -26,7 +26,7 @@ MakeGuestbook=function(jsonstring){
 		var datereply="<div class='date'>"+SafeString(dataline[0])+b+"</div>";
 		var c="<p class='quote'>"+SafeString(dataline[3])+"</p>";
 		var a="<span class='author'>"+au+"</span>";
-		var o="<span class='subject'>, on "+SafeString(dataline[1])+"</span>";
+		var o="<span class='subject'>, on "+CMSAHTML(SafeString(dataline[1]))+"</span>";
 		
 		var html="<div class='comment' data-id='"+id+"' data-depth='"+IdDepth(id)+"'><div>"+c+"<p>"+a+o+"</p></div>"+datereply+"</div>";
 		return 	html;
