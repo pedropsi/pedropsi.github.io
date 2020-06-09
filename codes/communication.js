@@ -905,32 +905,31 @@ RequestPGDSubmission=function(editData,editmode){
 
 RequestContact=function(){
 	var DFOpts=[
+		['answer',{
+			qfield:"message",
+			questionname:"Your message"
+		}],
 		['email',{
 			qfield:"email",
 			questionname:"Your email address",
-			questioninfo:"Optional, so you can receive a reply.",
 			qrequired:false,
-			qplaceholder:'lunussolariel@universe'
+			qplaceholder:'opti@n.al'
 		}],
 		['shortanswer',{
 			qfield:"name",
 			questionname:"Your name",
-			questioninfo:"Optional as well.",
+			// questioninfo:"Optional as well.",
 			qrequired:false,
-			qplaceholder:'Lunus Solariel'
-		}],
-		['exclusivechoice',{
-			questionname:"Message Subject",
-			qfield:"subject",
-			qchoices:["Common goals","Help request","Problem or bug","Praise & criticism","Advertising","Other"],
-			executeChoice:function(choice,id){
-				SetData("subject",choice,id);
-			}
-		}],
-		['answer',{
-			qfield:"message",
-			questionname:"Your message"
+			qplaceholder:'Op. Tiona Laswell'
 		}]
+		// ['exclusivechoice',{
+		// 	questionname:"Message Subject",
+		// 	qfield:"subject",
+		// 	qchoices:["Common goals","Help request","Problem or bug","Praise & criticism","Advertising","Other"],
+		// 	executeChoice:function(choice,id){
+		// 		SetData("subject",choice,id);
+		// 	}
+		// }]
 	];
 	RequestDataPack(DFOpts,{
 		destination:"contact",
