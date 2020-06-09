@@ -255,7 +255,6 @@ InlineSVG=function(){
 }
 
 CMSAHTML=function(title){
-	console.log(title);
 	var o=BaseFilter(CMS,o=>UnFunction(o.TITLE)&&LowerSimpleString(UnFunction(o.TITLE))===LowerSimpleString(title));
 	if(!o.length)
 		return title;
