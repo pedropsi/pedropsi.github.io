@@ -3842,10 +3842,10 @@ LoadSound=function(soundpath,data,id,parentElement){
 }
 
 LS=function(soundobject,id,parentElement){
-		var src=soundobject.src;
-		var opts=FuseObjects(soundobject,{});
-		delete opts.src;
-		LoadSound(src,opts,id,parentElement);
+	var src=soundobject.src;
+	var opts=FuseObjects(soundobject,{});
+	delete opts.src;
+	LoadSound(src,opts,id,parentElement);
 };
 
 LoadSounds=function(soundtrack,parentElement){

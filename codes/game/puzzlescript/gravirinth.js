@@ -101,7 +101,7 @@ function DetectStory(){
 }
 
 function ShoutStory(){
-	if(!level.getCell)
+	if(typeof level==="undefined"||!level.getCell)
 		return;
 	
 	var dArray=DetectStory();
@@ -132,15 +132,16 @@ function ShoutStory(){
 	else
 		return;
 	
-	LocalStorage("story",ShoutStory["list"]);
+	Memory("story",ShoutStory["list"]);
 
 }
 
 
 
 ListenOnce("GameBar",function(){
-	ShoutStory["list"]=LocalStorage("story");
-	AddElement('<div class="Console" id="Intercom"></div>',"puzzlescript-game")});
+	ShoutStory["list"]=Memory("story");
+	AddElement('<div class="Console" id="Intercom"></div>',"puzzlescript-game")}
+);
 
 var Stories={
 "story00":['Where are you, Xeno?','Are you inside?','We told you this was a bad idea!','Your radio transmitter hasn\'t recovered yet...','...from the interference of those odd...','...gravitic signatures.','Now we just hope you can...','...beam us a sonar map...','...of your surroundings?'],
@@ -220,8 +221,6 @@ var Stories={
 'story67':['The last light!','Wait, Xeno...','..the Gravirinth is emitting ominously...','...and part of the structure is collapsing!','It may no longer safe to keep exploring.','Just remember:','we promised to take you back to Earth in one piece.','Press the big <span><kbd>X</kbd></span> button to finish the expedition.','Don\'t explore any further until...','... we come to pick you. This is not the time for another adventure!']
 }
 
-ListenOnce('load',function(){AutoRepeat(ShoutStory)});
-
 
 //Playlist
 /*var p="media/gravirinth/music/";*/
@@ -245,8 +244,8 @@ var soundtracks={
 	/* 20449708 endplay */
 }
 
-ListenOnce('load',function(){LoadSounds(soundtracks,"puzzlescript-game")});
-
+LoadSounds(soundtracks,"puzzlescript-game");
+AutoRepeat(ShoutStory);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Source (global)
