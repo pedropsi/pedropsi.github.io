@@ -5062,7 +5062,14 @@ var Symbols={
 	"star-empty":"☆",
 	"search":"⌕",//"Ϙ"//"⚲",
 	"flag":"⚑",
+	"cmd":"⌘",
+	"opt":"⌥"
 };
+
+var MacKeys={
+	"ctrl":"cmd",
+	"alt":"opt"
+}
 
 ObtainSymbol=function(name){
 	if(!name)
@@ -5072,6 +5079,20 @@ ObtainSymbol=function(name){
 	else
 		return name;
 }
+
+KBDSingleHTML=function(key){
+	return "<kbd>"+Capitalise(key)+"</kbd>";
+}
+
+KBDHTML=function(keystring,mac){
+	var keys=ComboKeystring(keystring).split(" ");
+	if(mac==="mac")
+		keys=keys.map(k=>!In(MacKeys,k)?k:ObtainSymbol(MacKeys[k]));
+	var combo=keys.map(KBDSingleHTML).join(" + ");
+	
+	return combo;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Dynamic text
