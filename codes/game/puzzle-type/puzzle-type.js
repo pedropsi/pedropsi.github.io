@@ -666,7 +666,7 @@ function ObtainLevelReader(level){
 		return level;
 }
 
-function ObtainLevelWriter(solvedlevels){
+function ObtainLevelsWriter(solvedlevels){
 	return solvedlevels.map(l=>LevelGoals[l]);
 }
 

@@ -709,12 +709,12 @@ function HasLevel(){
 
 
 // Localsave = save in local storage
-if(typeof ObtainLevelWriter==="undefined")
-	var ObtainLevelWriter=Identity;
+if(typeof ObtainLevelsWriter==="undefined")
+	var ObtainLevelsWriter=Identity;
 
 function LocalsaveLevel(curscreen){
 	if(savePermission){
-		LocalStorage("solvedlevels",ObtainLevelWriter(SolvedLevels()));
+		LocalStorage("solvedlevels",ObtainLevelsWriter(SolvedLevels()));
 		return LocalStorage("",curscreen);
 	}
 	else
