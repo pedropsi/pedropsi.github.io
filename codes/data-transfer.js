@@ -2140,7 +2140,7 @@ AddShareSearch=function(patterntxt,elementSelector){
 			tableid="";
 	}
 
-	var shareLink=PageUnSearch()+"?search="+LowerSimpleString(patterntxt)+tableid;
+	var shareLink=PageUnSearch()+"?search="+patterntxt+tableid;
 	RemoveElement(PosteriorElement(elementSelector,".share-link"));
 	AppendElement("<div class='share-link'><b>Share this search:</b>"+AHTML(shareLink,shareLink)+"</div>",elementSelector);
 }
