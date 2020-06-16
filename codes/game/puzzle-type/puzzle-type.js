@@ -635,6 +635,40 @@ var LevelGoals=[			//Required types of thinking:
 	"Order is all"						//Keyword, Proactive, Increment, Redefinition
 ];
 
+var LevelGoalAliases={
+	"Vowel":"Consonant",
+	"Homeomorphic":"Topological",
+	"White":"Fuchsia",
+	"Nucleus":"Ironclad",
+	"Tennessine":"Ironclad",
+	"Carbonate":"Ironclad",
+	"Weightier":"Latent Clones",
+	"German Shepherd":"Shepherdess hence unladylike",
+	"Cherished Woman":"Shepherdess hence unladylike",
+	"Baba is you":"Order is all",
+	"Copypaste":"Just cut and paste",
+	"Finest vernissage":"La rapide surprise",
+	"Mon petit ami":"La rapide surprise"
+}
+
+function GoalCanonicalName(title){
+	if(In(LevelGoalAliases,title)&&!In(LevelGoals,title))
+		return LevelGoalAliases[title];
+	else
+		return title;
+}
+
+function ObtainLevelReader(level){
+	if(typeof level==="string"){
+		var levelname=GoalCanonicalName(level);
+		return LevelGoals.indexOf(levelname);
+	}else
+		return level;
+}
+
+function ObtainLevelWriter(solvedlevels){
+	return solvedlevels.map(l=>LevelGoals[l]);
+}
 
 var LevelActions={
 	"Direct":Direct,

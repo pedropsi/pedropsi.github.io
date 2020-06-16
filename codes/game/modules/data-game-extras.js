@@ -709,9 +709,12 @@ function HasLevel(){
 
 
 // Localsave = save in local storage
+if(typeof ObtainLevelWriter==="undefined")
+	var ObtainLevelWriter=Identity;
+
 function LocalsaveLevel(curscreen){
 	if(savePermission){
-		LocalStorage("solvedlevels",SolvedLevels());
+		LocalStorage("solvedlevels",ObtainLevelWriter(SolvedLevels()));
 		return LocalStorage("",curscreen);
 	}
 	else
@@ -767,8 +770,11 @@ function EraseLocalsave(){
 
 
 // Load from memory
+if(typeof ObtainLevelReader==="undefined")
+	var ObtainLevelReader=Number;
+
 function LoadLevel(){
-	SolvedLevels.levels=LocalStorage("solvedlevels",undefined,Number);
+	SolvedLevels.levels=LocalStorage("solvedlevels",undefined,ObtainLevelReader);
 	return CurrentScreen(LocalStorage(""));
 }
 
