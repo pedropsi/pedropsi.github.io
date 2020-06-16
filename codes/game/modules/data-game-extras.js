@@ -1,4 +1,5 @@
-DATAVERSION=5;
+if(typeof DATAVERSION==="undefined")
+	var DATAVERSION=5;
 
 //Portable game bar
 var Portable=False;
