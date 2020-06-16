@@ -128,7 +128,7 @@ var gameModulesLater=[
 "lang-fr-names",
 "lang-fr-verbes",
 
-"lang-plurals-superlatives",
+"lang-plurals-superlatives"
 ]
 
 LoadSources(gameModulesEarly,P()?GameIntro:GameTrailer);
