@@ -180,11 +180,12 @@ function P(){
 
 function P(){
 	var pagetag=PageFragment();
-	var tokens=["PatrickEye","Plurmorant","mago314","Deusovi","minotalen","KristianHedeholm","MathWizard"];
-	var apptokens=tokens.map(function(t){return "homescreen-"+t});
+	var fulltokens=["PatrickEye","Plurmorant","mago314","Deusovi","minotalen","KristianHedeholm","MathWizard"];
+	var semitokens=[];
+	var apptokens=fulltokens.map(function(t){return "homescreen-"+t});
 	var manifest=GetElement("manifest");
 	manifest.href=manifest.href.replace("homescreen","homescreen-"+pagetag);
-	return In(tokens,pagetag)||In(apptokens,PageSearch("source"));
+	return In(fulltokens,pagetag)||In(apptokens,PageSearch("source"))||(In(semitokens,pagetag)&&PageSearch("levels"));
 }
 
 
