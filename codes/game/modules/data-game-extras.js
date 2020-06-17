@@ -463,7 +463,7 @@ function WrenchButton(){
 
 if(typeof ObtainLevelSelectorAllowed==="undefined")
 	function ObtainLevelSelectorAllowed(){
-		return MaxLevel()>1||In(sourceCode,"checkpoint");
+		return MaxLevel()>1||(typeof sourceCode!=="undefined"&&In(sourceCode,"checkpoint"));
 	}
 
 function LevelselectorButton(){
