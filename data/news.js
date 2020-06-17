@@ -1,4 +1,10 @@
 News={
+N_51:{
+		DATE:"2020-06-14",
+		HEADER:()=>"Progress saving small fix",
+		PIECE:()=>`
+		<p>The progress saving system In ${AHTML("puzzle-type")} now withstands changes in level ordering. Thanks ${v.HEDEHOLM()} and ${v.COLLINEYE()}!</p>
+	`,ID:"puzzle-type"},
 N_50:{
 		DATE:"2020-06-06",
 		HEADER:()=>"Difficulty stars & symbols, trailer, new level",
