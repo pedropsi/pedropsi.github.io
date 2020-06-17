@@ -4,6 +4,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
+var gameTitle="Puzzle Type";
 
 function GameFrameHTML(){
 	return "<div class='game-supra-Canvas'>\
@@ -14,7 +15,7 @@ function GameFrameHTML(){
 
 function GameTitleHTMLArray(){
 return ["<div class='top'>\
-			<h1 class='goal'>Puzzle Type</h1>\
+			<h1 class='goal'>"+gameTitle+"</h1>\
 		</div>",
 		"<div class='middle' id='letters'>\
 		</div>"];
@@ -22,7 +23,7 @@ return ["<div class='top'>\
 
 function ComingHTMLArray(){
 return ["<div class='top'>\
-			<h1 class='goal'>Puzzle Type</h1>\
+			<h1 class='goal'>"+gameTitle+"</h1>\
 		</div>",
 		"<div class='middle' id='letters'>Coming soon! (beta playtesting ongoing)\
 		</div>"];
@@ -634,6 +635,19 @@ var LevelGoals=[			//Required types of thinking:
 	"Just cut and paste",				//Keyword, Proactive, Redefinition
 	"Order is all"						//Keyword, Proactive, Increment, Redefinition
 ];
+
+function RestrictPlayableLevels(){
+	var restricted=PageSearch("levels");
+	if(restricted){
+		LevelGoals=LevelGoals.filter(g=>In(restricted,g));
+		gameTitle="Puzzle Type Demo";
+		return true;
+	}
+	else
+		return false;
+}
+
+RestrictPlayableLevels();
 
 var LevelGoalAliases={
 	"Vowel":"Consonant",
@@ -2162,7 +2176,7 @@ function ObtainTitleScreenLoader(){
 		PlaySound("media/puzzle-type/sound/startgame.mp3");
 	TitleScreen(true);
 	ReplaceChildren("<div class='top'><div class='title'></div><div class='credits'></div></div>",".top");
-	ReplaceChildren("Puzzle Type",".title");
+	ReplaceChildren(gameTitle,".title");
 
 	if(SolvedLevels().length>0)
 		Letters("CONTINUE");
@@ -2175,6 +2189,8 @@ function ObtainTitleScreenLoader(){
 };
 
 function LevelLoader(){
+	if(!CurLevelName())
+		return ConsoleAdd("Error: no levels were loaded!");
 	TitleScreen(false);
 	ReplaceChildren("<div class='top'><div class='goal'></div></div>",".top");
 	ClearLetters();
