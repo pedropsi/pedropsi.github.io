@@ -37,7 +37,7 @@ function ObtainBGColor(){return ShiftBaseColour(window.getComputedStyle(document
 function ObtainFGColor(){return ShiftBaseColour(window.getComputedStyle(document.body)["color"]);}
 
 function ShiftBaseColour(basecolour){
-	return HEX(Huen(basecolour,(MaxLevel()-CurLevelNumber()+1)/(MaxLevel()-1)*360)).colour;
+	return HEX(Huen(basecolour,(MaxLevel()-CurLevelNumber()+1)/(MaxLevel())*360)).colour;
 }
 
 //Restart and Undo
