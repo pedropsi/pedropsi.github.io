@@ -2,7 +2,7 @@ Variables={
 YEAR_NOW					:	()=>	Year(),
 YEAR_START					:	()=>	2010,
 DATE_FOUNDED				:	()=>	`December, 2017`,
-YEAR_SPAN					:	()=>	`${v.YEAR_START()}-${v.YEAR_NOW()}`,
+YEAR_SPAN					:	()=>	`${YearsString(v.YEAR_START(),v.YEAR_NOW())}`,
 	
 LOCATION					:	()=>	`a private location`,
 	
@@ -187,7 +187,7 @@ BUTTON_SUBSCRIBE			:	()=>	NavigationButtonHTML("subscribe"),
 
 
 COPYRIGHT					:	()=>	`Copyright ${v.NAME()} ${v.YEAR_SPAN()}, all rights reserved`,
-COPYRIGHT_TEXT				:	()=>	`© ${v.NAME()} ${v.YEAR_START()}-${v.YEAR_NOW()}`,
+COPYRIGHT_TEXT				:	()=>	`© ${v.NAME()} ${YearsString(v.YEAR_START(),v.YEAR_NOW())}`,
 LICENSE						:	()=>	`${v.LICENSE_CC_BY_4()}`,
 
 LICENSE_MIT					:	()=>	`<a href="https://opensource.org/licenses/MIT" ${v.BLANK()}>MIT</a>`,

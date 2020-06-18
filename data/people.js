@@ -103,6 +103,10 @@ ZENOROGUE:{TYPE:"Developer",NAME:"ZenoRogue",TWITTER:"ZenoRogue"},
 ZARFEBLONG:{TYPE:"Developer",NAME:"Andrew Plotkin",ALIAS:"zarfeblong",TWITTER:"zarfeblong"},
 UBUNTOR:{TYPE:"Developer",NAME:"Samuel Kim",ALIAS:"ubuntor",GITHUB_COM:"ubuntor"},
 HEDEHOLM:{TYPE:"Developer",NAME:"Kristian Hedeholm",TWITTER:"kristianhede"},
+PORTPONKY:{TYPE:"Developer",NAME:"Portponky",TWITTER:"portponky"},
+DELTA:{NAME:"Katelyn Delta"},
+SKYMOO:{NAME:"Skymoo"},
+VELLEIC:{NAME:"Velleic"},
 }
 
 PersonalPage=function(linkObj){

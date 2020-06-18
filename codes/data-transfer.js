@@ -2236,6 +2236,19 @@ PlaceholderImageHTML=function(){
 	return ImageHTML();
 };
 
+FigureHTML=function(source,caption){
+	if(caption)
+		caption=`<figcaption class="legend">${caption}</figcaption>`;
+	else
+		caption="";
+	
+	var source=Prefix(source,"images/");
+	return `<figure class="figure">
+				${ImageHTML({attributes:{src:source}})}
+				${caption}
+			</figure>`;
+}
+
 IconHTML=function(path,vbmax,vbmin){
 	var vbmin=vbmin||"0 0";
 	var vbmax=vbmax||"400 400";
@@ -4904,6 +4917,16 @@ DateDate=function(day,month,year){
 	if(typeof day==="undefined")
 		return Today();
 	return 	new Date(Number(year),Number(month)-1,Number(day));
+}
+
+YearsString=function(start,end){
+	console.log(start,end);
+	if(start<end)
+		return start+"-"+end;
+	else if(end<start)
+		return end+"-"+start;
+	else
+		return start;
 }
 
 DateNamer=function(date){
