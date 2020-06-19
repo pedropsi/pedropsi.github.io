@@ -1805,10 +1805,9 @@ function Topological(O){
 					Letter(i,O);
 					UnBlockInput();
 					UnBlockUndo();
-					if(i===letters.length-1){
+					if(i===letters.length-1)
 						ObtainUpdateLevel();
-						CheckWin();
-					}
+					CheckWin();
 				}
 			return true;
 			}
