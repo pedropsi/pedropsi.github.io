@@ -5084,7 +5084,7 @@ var Symbols={
 	"asterisk-heavy":"✲",
 	"star-empty":"☆",
 	"search":"⌕",//"Ϙ"//"⚲",
-	"flag":"⚑",
+    "book":"🕮",//IconHTML("M 200 400 L 200 400 L 200 100 L 400 0 L 400 300 L 200 400 L 0 300 L 0 0 L 200 100"),
 	"cmd":"⌘",
 	"opt":"⌥"
 };

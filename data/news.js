@@ -9,7 +9,7 @@ N_50:{
 		DATE:"2020-06-06",
 		HEADER:()=>"Difficulty stars & symbols, trailer, new level",
 		PIECE:()=>`
-		<p>In ${AHTML("puzzle-type")}, ${ObtainSymbol("asterisk-heavy")} indicates level difficulty, other symbols have different meanings: ${ObtainSymbol("eye")} ${ObtainSymbol("search")} ${ObtainSymbol("flag")}. Thanks ${v.HEDEHOLM()} and ${v.THINKY()}!</p>
+		<p>In ${AHTML("puzzle-type")}, ${ObtainSymbol("asterisk-heavy")} indicates level difficulty, other symbols have different meanings: ${ObtainSymbol("eye")} ${ObtainSymbol("search")} ${ObtainSymbol("book")}. Thanks ${v.HEDEHOLM()} and ${v.THINKY()}!</p>
 		<p>A small trailer was added.</p>
 		<p>New level! STA***. Level MON*** became LA****, provisionally.</p>
 	`,ID:"puzzle-type"},

@@ -580,7 +580,7 @@ function LevelNotes(title){
 	if(In(VisualLevels,title))
 		extras+=" "+ObtainSymbol("eye");
 	if(In(LanguageLevels,title))
-		extras+=" "+ObtainSymbol("flag");
+		extras+=" "+ObtainSymbol("book");
 	if(In(ExternalLevels,title))
 		extras+=" "+ObtainSymbol("search");
 	return LevelDifficultyStars(title)+extras;
