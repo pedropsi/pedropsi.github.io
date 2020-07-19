@@ -1598,6 +1598,7 @@ function EnDictionary(){
 		EnDictionary.list=EnDictionary.list.concat([
 			"starring",
 			"si",
+			"anti"
 			//"tinging",//ingling	"tining",
 			// "ar",
 			// "irs",

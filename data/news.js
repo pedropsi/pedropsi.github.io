@@ -1,4 +1,11 @@
 News={
+N_52:{
+		DATE:"2020-07-19",
+		HEADER:()=>"Hint module & extras",
+		PIECE:()=>`
+		<p>The hint module was expanded to add hints to some levels in ${AHTML("puzzle-type")}.</p>
+		<p>Thanks ${v.HEDEHOLM()} for the suggestions !</p>
+	`,ID:"puzzle-type"},
 N_51:{
 		DATE:"2020-06-14",
 		HEADER:()=>"Progress saving small fix",
