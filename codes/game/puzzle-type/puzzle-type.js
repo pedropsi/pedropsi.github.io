@@ -96,6 +96,10 @@ function ObtainKeyboardTarget(){
 
 var ObtainKeyboardAllowed=true;
 
+function ObtainHintsPath(){
+	return "codes/game/puzzle-type/hints.js"
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Load the game bar & prepare game
 
@@ -105,6 +109,7 @@ var gameModulesEarly=[
 "codes/game/modules/data-game-colours.js",
 "codes/game/modules/data-game-undo.js",
 "data/game-intro.js",
+"codes/game/modules/data-game-hints.js"
 ]
 
 var gameModulesLater=[
