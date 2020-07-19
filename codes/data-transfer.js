@@ -3366,6 +3366,9 @@ Listen=function(eventName,F,target){
 };
 
 ListenOnce=function(eventName,F,target){
+	if(Shout[eventName]&&!target)//already shouted before, globally
+		F();
+
 	var EFTC={};
 	EFTC.name=eventName;
 	EFTC.F=F;
@@ -4816,12 +4819,12 @@ Accumulate=function(acc,val){return acc+val};
 // Custom events 
 
 Shout=function(name,targetSelector){
+	Shout[name]=targetSelector;				//save memory
+	
 	if(NodejsDetected()){
 		ShoutNode(name);
 		return;
 	}
-
-	Shout[name]=targetSelector;				//save memory
 
 	var ev=new CustomEvent(name);
 	var e=GetElement(targetSelector)||window;
