@@ -3956,7 +3956,7 @@ SongTitle=function(song){
 }
 
 FileSong=function(song){
-	return PageRelativeFolder(song.src).replace(/.*\//,"");
+	return FromUTF8(PageFile(song.src)).replace(/.*\//,"");
 }
 
 PlayNextF=function(song){
