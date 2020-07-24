@@ -29,8 +29,8 @@ HUDHtml=function(id){
 	return `
 		<div class="hud" id="${id}">
 		${DialHTML(["0","1","2","3","4","5","6","7","8","9","_","_","_"],"hud-inn")}
-		${DialHTML("ABCDEFGHIJKLM","hud-inn")}
-		${DialHTML("NOPQRSTUVWXYZ","hud-mid")}
+		${DialHTML("ABCDEFGHIJKLM","hud-mid")}
+		${DialHTML("NOPQRSTUVWXYZ","hud-out")}
 		</div>
 	`
 }
