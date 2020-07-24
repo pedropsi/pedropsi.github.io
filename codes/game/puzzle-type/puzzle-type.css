@@ -13,6 +13,7 @@
     justify-content:center;
     z-index: 2;
     overflow: hidden;
+   position:relative;
 }
 
 .top .title {
@@ -34,6 +35,13 @@
    font-size: calc(var(--w4) + var(--h4));
    font-variant-caps:small-caps;
    font-weight: bold;
+}
+
+.top .notes{
+   position: absolute;
+   right: var(--w2);
+   top: var(--h2);
+   font-size: calc(var(--w2) + var(--h2));
 }
 
 .top .goal.uncase{

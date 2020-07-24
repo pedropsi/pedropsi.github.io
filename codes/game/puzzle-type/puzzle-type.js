@@ -2198,7 +2198,7 @@ function ObtainTitleScreenLoader(){
 	if(!TitleScreen())
 		PlaySound("media/puzzle-type/sound/startgame.mp3");
 	TitleScreen(true);
-	ReplaceChildren("<div class='top'><div class='title'></div><div class='credits'></div></div>",".top");
+	ReplaceChildren("<div class='title'></div><div class='credits'></div>",".top");
 	ReplaceChildren(gameTitle,".title");
 
 	if(SolvedLevels().length>0)
@@ -2215,11 +2215,10 @@ function LevelLoader(){
 	if(!CurLevelName())
 		return ConsoleAdd("Error: no levels were loaded!");
 	TitleScreen(false);
-	ReplaceChildren("<div class='top'><div class='goal'></div></div>",".top");
-	ClearLetters();
 	var goal=FormattedGoal(CurLevelName());
+	ReplaceChildren(`<div class='goal'>${goal}</div><div class='notes'>${LevelNotes(CurLevelName())}</div>`,".top");
+	ClearLetters();
 	
-	ReplaceChildren(goal,".goal");
 	if(goal==="Deaf")
 		Class(".goal","uncase");
 	else
