@@ -400,6 +400,7 @@ function UnBlockInput(){
 }
 
 function ForbidCaret(){
+	Throttle(BumpSound,250);
 	var c=GetElements(".caret");
 	c.map(function(caret){PulseSelect(caret,"forbidden",500)});
 }
