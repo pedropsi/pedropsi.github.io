@@ -100,6 +100,20 @@ function ObtainHintsPath(){
 	return "codes/game/puzzle-type/hints.js"
 }
 
+function ObtainHUDPicker(radius,angle){
+	var dialring=CurrentDialRing(radius,angle);
+	var ringSelector="."+dialring[0]+" .ring"+dialring[1];
+	
+	var e=GetElement(ringSelector);
+	if(!e){
+		ForbidCaret();
+		return;
+	}
+
+	var letter=e.innerHTML.toUpperCase().replace("_","space");
+	InstructGameKeyF(letter)();
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Load the game bar & prepare game
 
@@ -109,7 +123,9 @@ var gameModulesEarly=[
 "codes/game/modules/data-game-colours.js",
 "codes/game/modules/data-game-undo.js",
 "data/game-intro.js",
-"codes/game/modules/data-game-hints.js"
+"codes/game/modules/data-game-hints.js",
+"codes/game/modules/data-game-swipe.js",
+"codes/game/modules/data-game-hud.js"
 ]
 
 var gameModulesLater=[
@@ -156,6 +172,7 @@ function StartGame(){
 	ObtainKeyActionsGameBar();
 	LoadGame();
 	ObtainTitleScreenLoader();
+	LaunchHUD("gameCanvas",".game-supra-Canvas")
 };
 
 

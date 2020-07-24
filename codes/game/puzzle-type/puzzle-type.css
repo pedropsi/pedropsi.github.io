@@ -1,6 +1,7 @@
 
 .game-supra-Canvas{
    width: 100%;
+   position: relative;
 }
 
 .top{

@@ -46,6 +46,7 @@
     max-width: var(--gameW);
     align-items: center;
     overflow: hidden;
+    position: absolute;
 }
 
 .game-supra-Canvas{

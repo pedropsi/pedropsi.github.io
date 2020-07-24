@@ -1,0 +1,37 @@
+.hud{
+	--t:0.5;
+	width: 100%;
+	height: 100%;
+	background-image: radial-gradient(100vh at 50% 50% , transparent 0%, var(--white) 25%, var(--white) 50%, transparent 75%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 100;
+	position: absolute;
+}
+
+.dial{
+	width:0%;
+	height:0%;
+	overflow:visible;
+}
+
+.dial .ring{
+	position:absolute;
+	padding: var(--h1) var(--w1) var(--h1) var(--w1);
+	font-weight: bold;
+	min-width: var(--h2);
+	min-height: var(--h2);
+	font-size: calc(var(--fontheight));
+	color: var(--lightblue);
+}
+
+.dial.selected .ring{
+	font-size: calc(var(--fontheight)*3);
+}
+
+.dial .ring.selected{
+	font-size: calc(var(--fontheight)*4);
+	color: var(--darkblue);
+	background-color: unset;
+}
