@@ -169,7 +169,7 @@ function StartGame(){
 	ObtainKeyActionsGameBar();
 	LoadGame();
 	ObtainTitleScreenLoader();
-	LaunchHUD("gameCanvas",".game-supra-Canvas")
+	LaunchHUD(".middle",".game-supra-Canvas")
 };
 
 
