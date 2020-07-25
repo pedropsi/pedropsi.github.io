@@ -43,13 +43,21 @@ function InForkF(file){//Matches a particular readme file, in case the right for
 ///////////////////////////////////////////////////////////////////////////////
 //Internal Load
 
-function LoadInternalModule(source){
-	LoadSource("codes/game/modules/"+source+".js");
+function LoadInternalModule(source,folder){
+	LoadSource("codes/game/"+Posfix(UnPrefix(folder,"/"),"/")+source+".js");
+}
+
+function LoadPSModule(source){
+	LoadInternalModule(source,"puzzlescript/modules");
+}
+
+function LoadModule(source){
+	LoadInternalModule(source,"modules");
 }
 
 function InternalCompileASAP(){
-	CoreModules.map(LoadInternalModule);
-	ExtraModules.map(LoadInternalModule);
+	CoreModules.map(LoadPSModule);
+	ExtraModules.map(LoadModule);
 	CompileGameASAP();
 }
 
