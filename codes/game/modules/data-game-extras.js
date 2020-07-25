@@ -330,7 +330,7 @@ function PrepareGame(){
 		AddGameBar();
 		
 		ListenOnce('click',PlaylistStartPlay,gameSelector);
-		ListenOnce('touchstart',RequestKeyboard,gameSelector);
+//		ListenOnce('touchstart',RequestKeyboard,gameSelector);
 		
 		if(ObtainInitialScroll)
 			ScrollInto(gameSelector);
