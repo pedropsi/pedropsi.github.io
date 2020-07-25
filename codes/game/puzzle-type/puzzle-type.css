@@ -42,8 +42,18 @@
    right: var(--w2);
    top: var(--h2);
    font-size: calc(var(--w2) + var(--h2));
+ }
+
+.notes{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
 }
 
+.notes .icon svg{
+   height: auto
+}
 .top .keystrokes{
    position: absolute;
    right: var(--w1);

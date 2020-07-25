@@ -512,7 +512,7 @@ function FormattedTitle(title){
 	var level=title;
 	if(title!=="Deaf")
 		var title=title.toUpperCase();
-	return "<p>"+title+"</p><p>"+LevelNotes(level)+"</p>";
+	return "<p>"+title+"</p><p class='notes'>"+LevelNotes(level)+"</p>";
 }
 
 function FormattedGoal(title){
