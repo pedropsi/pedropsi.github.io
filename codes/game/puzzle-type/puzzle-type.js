@@ -107,6 +107,10 @@ function ObtainHUDPicker(radius,angle){
 	InstructGameKeyF(letter)();
 }
 
+ObtainHUDElement=function(){
+	return GetElement("gameCanvas");
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Load the game bar & prepare game
 

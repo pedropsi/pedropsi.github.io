@@ -2,9 +2,11 @@
 if(typeof ObtainHUDPicker==="undefined")
 	ObtainHUDPicker=Identity;
 
+if(typeof ObtainHUDElement==="undefined")
+	ObtainHUDElement=function(){return document.body};
 
 HUDRadius=function(){
-	return Min(window.innerWidth,window.innerHeight)*0.4;
+	return Min(window.innerWidth,window.innerHeight,ObtainHUDElement().clientWidth,ObtainHUDElement().clientHeight)*0.4;
 }
 
 HUDScale=function(dial){
