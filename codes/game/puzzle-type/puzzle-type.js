@@ -1584,9 +1584,9 @@ function CyclePossibilities(L,word,insertions){
 		if(In(NumberCharacters,L))
 			p=(Number(L)-1)%possibilities.length;
 		else if(In(["left","up"].map(ObtainSymbol),L))
-			p=(p+possibilities.length+1)%possibilities.length;
-		else if(In(["right","down"].map(ObtainSymbol),L))
 			p=(p+possibilities.length-1)%possibilities.length;
+		else if(In(["right","down"].map(ObtainSymbol),L))
+			p=(p+possibilities.length+1)%possibilities.length;
 		else if(In([" ","Enter"],L))
 			choosing=false;
 	
