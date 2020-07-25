@@ -44,6 +44,17 @@
    font-size: calc(var(--w2) + var(--h2));
 }
 
+.top .keystrokes{
+   position: absolute;
+   right: var(--w1);
+   bottom: var(--h1);
+   font-size: calc(var(--w1) + var(--h1));
+   font-weight: bold;
+   max-width: 10%;
+   max-height: 20%;
+   overflow: hidden;
+   text-align: right;
+}
 .top .goal.uncase{
    font-variant-caps:normal;
    

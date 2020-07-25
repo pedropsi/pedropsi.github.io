@@ -299,7 +299,8 @@ function ObtainKeyActionsGame(){
 		"Left":InstructGameKeyF("left"),
 		"Up":InstructGameKeyF("up"),
 		"Right":InstructGameKeyF("right"),
-		"Down":InstructGameKeyF("down")
+		"Down":InstructGameKeyF("down"),
+
 	};
 
 	keyactions["undo"]=ObtainUndo;			//Onscreen keyboard
@@ -339,7 +340,10 @@ function InstructGameKeyF(key){
 
 function GameKey(key){
 	var key=ObtainSymbol(key); //accept keywords space, dot, dash
-	function Action(){return InstructGameAction(key);}
+	function Action(){
+		Keystroke(key);
+		return InstructGameAction(key);
+	}
 	Throttle(Action,50,"Action");
 }
 
@@ -610,9 +614,6 @@ function LevelNotes(title){
 	return LevelDifficultyStars(title)+extras;
 }
 
-function DisplayLevelNotes(){
-	ConsoleAdd(LevelNotes(CurLevelName()));
-}
 
 var LevelGoals=[			//Required types of thinking:
 	//Positional (caret position), Spacial (position of letters in 2D system), Alphabetical (letters are ordered, and may correspond to numbers), Syllabe (syllabes as unit of input), Word (full words as units of input), Adjacent, Cyclic, Mapping (cyphers), Language, Knowledge, Cultural, Retroactive, Proactive,
@@ -2182,9 +2183,14 @@ function DrawAnimatedLetterInsertion(){
 		Class(letterE,"expanding");
 }
 
+function DrawKeystrokes(){
+	ReplaceChildren(Keystrokes().join(""),".keystrokes");
+}
+
 function DrawLevel(){
 	DrawLetters();
 	DrawCaret();
+	DrawKeystrokes()
 }
 
 
@@ -2265,7 +2271,12 @@ function LevelLoader(){
 		return ConsoleAdd("Error: no levels were loaded!");
 	TitleScreen(false);
 	var goal=FormattedGoal(CurLevelName());
-	ReplaceChildren(`<div class='goal'>${goal}</div><div class='notes'>${LevelNotes(CurLevelName())}</div>`,".top");
+	var top=`
+		<div class='keystrokes'></div>
+		<div class='goal'>${goal}</div>
+		<div class='notes'>${LevelNotes(CurLevelName())}</div>
+		`
+	ReplaceChildren(top,".top");
 	ClearLetters();
 	
 	if(goal==="Deaf")
@@ -2274,7 +2285,6 @@ function LevelLoader(){
 		UnClass(".goal","uncase");
 	ClearLevel();
 	ColoriseGameBar();//Change colour each level
-	//DisplayLevelNotes();
 }
 
 
@@ -2284,6 +2294,7 @@ function ObtainUpdateLevel(state){
 		var state={
 			letters:Letters(),
 			caret:Caret(),
+			keystrokes:Keystrokes(),
 			memo:Memo()
 			// colour:CaretColour()
 		}
@@ -2412,11 +2423,28 @@ function EffectRenderer(level){
 		return;
 }
 
+function Keystrokes(array){
+	if(!Keystrokes.array)
+	Keystrokes.array=[];
+	if(typeof array==="undefined")
+		return Keystrokes.array;
+	
+	if(typeof array==="string")
+		return Keystrokes.array=array.split("");
+	else
+		return Keystrokes.array=Clone(array);
+}
+
+function Keystroke(L){
+	Keystrokes();
+	Keystrokes.array.push(L);
+}
 
 function ObtainStartingLevelState(){
 	var state={
 		'letters':[],
 		'caret':0,
+		'keystrokes':[],
 		'memo':StartingMemo(CurLevelName())
 		// 'colour':StartingColour(CurLevelName())
 	};
@@ -2427,6 +2455,7 @@ function CurrentLevelState(){
 	var state={
 		'letters':Letters(),
 		'caret':Caret(),
+		'keystrokes':Keystrokes(),
 		'memo':Memo()
 		// 'colour':CaretColour()
 	};
@@ -2445,6 +2474,7 @@ function LevelState(state){
 		
 	Letters(state.letters);
 	Caret(state.caret);
+	Keystrokes(state.keystrokes);
 	Memo(state.memo);
 	// CaretColour(state.colour);
 
