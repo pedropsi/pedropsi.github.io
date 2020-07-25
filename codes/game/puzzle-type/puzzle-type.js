@@ -341,7 +341,6 @@ function InstructGameKeyF(key){
 function GameKey(key){
 	var key=ObtainSymbol(key); //accept keywords space, dot, dash
 	function Action(){
-		Keystroke(key);
 		return InstructGameAction(key);
 	}
 	Throttle(Action,50,"Action");
@@ -368,6 +367,7 @@ function LevelAction(key){
 		}
 		else{
 			LevelActions[CurLevelName()](key);
+			Keystroke(key);
 			RegisterMove(key);
 		}
 	}
