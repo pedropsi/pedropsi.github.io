@@ -373,6 +373,8 @@
 }
 
 
+/*Keyboard keys presentation*/
+
 .key-left{
   grid-area: left;
 }

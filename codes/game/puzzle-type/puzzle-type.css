@@ -230,4 +230,18 @@
    line-height: 0.5;
 }
 
+.letter.expanding{
+  animation-name: expansion;
+  animation-timing-function: linear;
+  animation-fill-mode:forwards;
+  animation-duration:500ms;
+  animation-delay:0;
+  animation-iteration-count: 1;
+}
 
+@keyframes expansion{
+    0% {
+       width: 0;
+       max-width: 0;
+    }
+}
