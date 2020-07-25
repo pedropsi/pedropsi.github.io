@@ -1558,6 +1558,7 @@ function StartingString(L){
 
 	if(possibilities.length===0){
 		ForbidCaret();
+		insertions=Memo();
 		insertions.animate=false;
 		Memo(insertions);
 		return;
@@ -1594,8 +1595,10 @@ function CyclePossibilities(L,word,insertions){
 		else if(In(["Enter"],L))
 			choosing=false;
 	
-		if(choosing)
+		if(choosing){
+			insertions.animate=true;
 			SkipUndo();
+		}
 
 		insertions.p=p;
 		insertions.choosing=choosing;
