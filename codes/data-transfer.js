@@ -113,8 +113,45 @@ Equal=function(a,b){
 
 ///////////////////////////////////////////////////////////////////////////////
 // Math
-Min=Math.min;
-Max=Math.max;
+
+//Min=Math.min;
+//Max=Math.max;
+
+Max=function(a,b,c){
+	if(typeof c==="undefined")
+		c=-Infinity;
+	if(typeof b==="undefined")
+		b=-Infinity;
+	if(typeof a==="undefined")
+		a=-Infinity;
+	if(IsArray(a))
+		return Max(Math.max.apply(null,a),b,c);
+	if(IsArray(b))
+		return Max(a,Math.max.apply(null,b),c)
+	if(IsArray(c))
+		return Max(a,b,Math.max.apply(null,c))
+
+	return Math.max(a,b,c);
+}
+
+Min=function(a,b,c){
+	if(typeof c==="undefined")
+		c=Infinity;
+	if(typeof b==="undefined")
+		b=Infinity;
+	if(typeof a==="undefined")
+		a=Infinity;
+	if(IsArray(a))
+		return Min(Math.min.apply(null,a),b,c);
+	if(IsArray(b))
+		return Min(a,Math.min.apply(null,b),c)
+	if(IsArray(c))
+		return Min(a,b,Math.min.apply(null,c))
+
+	return Math.min(a,b,c);
+}
+
+
 Floor=Math.floor;
 Ceiling=Math.ceil;
 Sin=Math.sin;
@@ -188,10 +225,10 @@ VectorMean=function(vector1,vector2){
 }
 
 VectorMax=function(vector1,vector2){
-	return VectorOperation(vector1,vector2,function(a,b){return Max(a,b)});
+	return VectorOperation(vector1,vector2,Max);
 }
 VectorMin=function(vector1,vector2){
-	return VectorOperation(vector1,vector2,function(a,b){return Min(a,b)});
+	return VectorOperation(vector1,vector2,Min);
 }
 
 
