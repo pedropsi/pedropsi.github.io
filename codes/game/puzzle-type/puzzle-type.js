@@ -2184,7 +2184,7 @@ function DrawAnimatedLetterInsertion(){
 }
 
 function DrawKeystrokes(){
-	ReplaceChildren(Keystrokes().join(""),".keystrokes");
+	ReplaceChildren("<p>"+Keystrokes().join("")+"</p>",".keystrokes");
 }
 
 function DrawLevel(){

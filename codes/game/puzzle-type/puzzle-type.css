@@ -48,13 +48,24 @@
    position: absolute;
    right: var(--w1);
    bottom: var(--h1);
-   font-size: calc(var(--w1) + var(--h1));
    font-weight: bold;
-   max-width: 10%;
-   max-height: 20%;
+   max-width: 20%;
+   max-height: calc(var(--h4) + var(--w4));
+   display: flex;
+   flex-direction: column;
+   justify-content: end;
    overflow: hidden;
+   }
+
+.keystrokes p{
+    word-break: break-all;
+   padding: 0;
+   margin: 0;
+   font-size: calc(var(--h2) + var(--w2));
+   line-height: calc(var(--h2) + var(--w2));
    text-align: right;
 }
+
 .top .goal.uncase{
    font-variant-caps:normal;
    
