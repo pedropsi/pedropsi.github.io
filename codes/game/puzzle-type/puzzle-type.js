@@ -93,6 +93,8 @@ function ObtainHintsPath(){
 	return "codes/game/puzzle-type/hints.js"
 }
 
+var ObtainRequestHint=ObtainRequestHint?ObtainRequestHint:Identity;
+
 function ObtainHUDPicker(radius,angle){
 	var dialring=CurrentDialRing(radius,angle);
 	var ringSelector="."+dialring[0]+" .ring"+dialring[1];
@@ -307,6 +309,8 @@ function ObtainKeyActionsGame(){
 	keyactions[ObtainMainKey("undo")]=ObtainUndo;
 	keyactions[ObtainMainKey("redo")]=ObtainRedo;
 	keyactions[ObtainMainKey("restart")]=ObtainRestart;
+	
+	keyactions[ObtainMainKey("hint")]=ObtainRequestHint;
 
 	return keyactions;
 };
