@@ -363,7 +363,7 @@ function BezierLetter(Z,id,cla){
 
 function CoordinatesBezierSVG(coordinates,id,cla){
 	var xs=Values(coordinates).map(First);
-	var BezierWidth=Max.apply(null,xs);
+	var BezierWidth=Max(xs);
 	var id=id?('id="'+id+'"'):"";
 	return `<svg viewbox="0 0 ${BezierWidth+2} ${BezierHeight}"	${id} class="bezier letter ${cla}"> ${CoordinatePaths(coordinates).join("")}</svg>`
 }

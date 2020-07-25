@@ -114,41 +114,16 @@ Equal=function(a,b){
 ///////////////////////////////////////////////////////////////////////////////
 // Math
 
-//Min=Math.min;
-//Max=Math.max;
-
-Max=function(a,b,c){
-	if(typeof c==="undefined")
-		c=-Infinity;
-	if(typeof b==="undefined")
-		b=-Infinity;
-	if(typeof a==="undefined")
-		a=-Infinity;
-	if(IsArray(a))
-		return Max(Math.max.apply(null,a),b,c);
-	if(IsArray(b))
-		return Max(a,Math.max.apply(null,b),c)
-	if(IsArray(c))
-		return Max(a,b,Math.max.apply(null,c))
-
-	return Math.max(a,b,c);
+Max=function(){
+	var args=[...arguments];
+	args=args.map(arr=>IsArray(arr)?Max(...arr):arr)
+	return Math.max(...args);
 }
 
-Min=function(a,b,c){
-	if(typeof c==="undefined")
-		c=Infinity;
-	if(typeof b==="undefined")
-		b=Infinity;
-	if(typeof a==="undefined")
-		a=Infinity;
-	if(IsArray(a))
-		return Min(Math.min.apply(null,a),b,c);
-	if(IsArray(b))
-		return Min(a,Math.min.apply(null,b),c)
-	if(IsArray(c))
-		return Min(a,b,Math.min.apply(null,c))
-
-	return Math.min(a,b,c);
+Min=function(){
+	var args=[...arguments];
+	args=args.map(arr=>IsArray(arr)?Min(...arr):arr)
+	return Math.min(...args);
 }
 
 
@@ -662,7 +637,7 @@ Invert=function(as){
 
 RotateMatrix=function(as,left){
 	var width=as.map(function(line){return line.length});
-		width=Min.apply(null,width);
+		width=Min(width);
 	var height=as.length;
 	var matrix=[];
 	var line;
@@ -5417,7 +5392,7 @@ AddChartBars=function(opts,chart){
 	var xdivisions=values.length;
 	var widthmax=xview/xdivisions;
 	var xspacing=(opts.spacing||0)*widthmax/2;
-	var ymax=typeof opts.max==="undefined"?Max.apply(null,values):opts.max;
+	var ymax=typeof opts.max==="undefined"?Max(values):opts.max;
 	var yvalues=values.map(function(v){return v/ymax*yview});
 	
 	for(var i=0;i<yvalues.length;i++){

@@ -199,7 +199,7 @@ DeployWon=function(jsonstring){
 		return;
 	row=row[0].filter(function(s){return s!==""});
 	var wins=row.slice(3,Infinity).map(Number);
-	var max=Max.apply(null,wins);
+	var max=Max(wins);
 
 	AddChart({
 		"cla":"chart",
