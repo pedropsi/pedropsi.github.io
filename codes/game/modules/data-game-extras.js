@@ -214,7 +214,7 @@ function ActionKeyText(action){
 	if(S!=="")
 		S="<kbd>"+S+"</kbd>";
 
-	return K+((S!==""&&K!=="")?" or ":"")+S;
+	return S+((S!==""&&K!=="")?" or ":"")+K;
 }
 
 function ObtainActionTooltip(action){
