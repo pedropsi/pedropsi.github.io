@@ -309,7 +309,7 @@ function ObtainKeyActionsGame(){
 	keyactions[ObtainMainKey("undo")]=ObtainUndo;
 	keyactions[ObtainMainKey("redo")]=ObtainRedo;
 	keyactions[ObtainMainKey("restart")]=ObtainRestart;
-	
+
 	keyactions[ObtainMainKey("hint")]=ObtainRequestHint;
 
 	return keyactions;
@@ -1543,77 +1543,91 @@ function CleanDB(NewDB,DB){
 //String Completing
 
 function StartingString(L){
-	var choosing=false;
-	if(Memo()){		
-		
-		SkipUndo();//convenience
+	var memo=Memo();
+	var word=Word();
 
-		choosing=Memo();
-		var possibilities=choosing.possibilities;
-		var p=choosing.p;
-		
-		if(In([" ","Enter"],L))
-			choosing=false;
-		else if(In(NumberCharacters,L))
+	if(!memo.choosing)
+		var insertions=LetterInsertions(L,word);
+	else
+		var insertions=CyclePossibilities(L,word,Memo())
+
+	var possibilities=insertions.possibilities;
+	var p=insertions.p;
+	var choosing=insertions.choosing;
+	word=possibilities[p];
+
+	if(possibilities.length===0){
+		ForbidCaret();
+		return;
+	}
+
+	Memo(insertions);
+	
+	if(possibilities.length>1&&choosing===true)
+		word=ArrowDisplay(word);
+
+	Letters(word.toUpperCase());
+	Caret(Range(0,word.length-1));
+}
+
+function CyclePossibilities(L,word,insertions){
+
+	if(In(LetterCharacters,L)){
+		insertions=LetterInsertions(L,word);
+	}
+
+	var possibilities=insertions.possibilities;
+	var	p=insertions.p;
+	var	choosing=insertions.choosing;
+
+	if(!In(LetterCharacters,L)){
+		if(In(NumberCharacters,L))
 			p=(Number(L)-1)%possibilities.length;
 		else if(In(["left","up"].map(ObtainSymbol),L))
 			p=(p+possibilities.length+1)%possibilities.length;
 		else if(In(["right","down"].map(ObtainSymbol),L))
 			p=(p+possibilities.length-1)%possibilities.length;
-		else	
+		else if(In([" ","Enter"],L))
 			choosing=false;
+	
+		if(choosing)
+			SkipUndo();
 
-		if(possibilities.length===1)
-			choosing=false;
-		
-		choosing.p=p;
-		
-		Memo(choosing);
-		var word=possibilities[p];
-
-		if(choosing&&possibilities.length>1)
-			word=ArrowDisplay(possibilities[p]);
-
-	}
-	else{			
-		if(In(NumberCharacters,L)||L==="Enter"||In(ArrowKeys,L))
-			return;
-
-		var L=L.toLowerCase();
-		var sentence=Word().toLowerCase();
-		function ValidWord(word){return In(EnDictionary(),word)};
-		var possibilities=[];
-		var positions=[];
-		var inserted;
-		for(var i=0;i<=sentence.length;i++){
-			inserted=Insert(sentence,L,i);
-			if(inserted.split(" ").map(ValidWord).every(Identity)&&!In(possibilities,inserted)){
-				possibilities.push(inserted);
-				positions.push(i);
-			}
-		}
-		//possibilities=Unique(possibilities);
-		if(possibilities.length===0){
-			ForbidCaret();
-			return;
-		}
-
-		word=possibilities[0];
-		if(possibilities.length>1){
-			word=ArrowDisplay(word);
-			Memo({
-				possibilities:possibilities,
-				positions:positions,
-				p:0
-			});
-		}
-		else
-			Memo(false)
-			
+		insertions.p=p;
+		insertions.choosing=choosing;
 	}
 
-	Letters(word.toUpperCase());
-	Caret(Range(0,word.length-1));
+	return insertions;
+}
+
+function LetterInsertions(L,word){		
+	if(In(NumberCharacters,L)||L==="Enter"||In(ArrowKeys,L))
+		return;
+
+	var L=L.toLowerCase();
+	var sentence=word.toLowerCase();
+
+	function ValidWord(word){
+		return In(EnDictionary(),word)
+	};
+
+	var possibilities=[];
+	var positions=[];
+	var inserted;
+	for(var i=0;i<=sentence.length;i++){
+		inserted=Insert(sentence,L,i);
+		if(inserted.split(" ").map(ValidWord).every(Identity)&&!In(possibilities,inserted)){
+			possibilities.push(inserted);
+			positions.push(i);
+		}
+	}
+	
+	return {
+		possibilities:possibilities,
+		positions:positions,
+		p:0,
+		choosing:possibilities.length>1
+	}
 }
 
 function EnDictionary(){
@@ -1880,6 +1894,7 @@ function NokiaGroupNumber(L){
 }
 
 
+var LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 var NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
 var Hexadecimal=["A","B","C","D","E","F"].concat(NumberCharacters);
 
@@ -1954,7 +1969,8 @@ function TemporaryWord(){
 }
 
 function Word(){
-	return Letters.array.join("");
+	var word=Letters.array.join("");
+	return word.replace(ObtainSymbol("left"),"").replace(ObtainSymbol("right"),"");
 }
 
 function Letters(array){
@@ -2149,11 +2165,12 @@ function DrawLetters(){
 	DrawAnimatedLetterInsertion();
 }
 
+
 function DrawAnimatedLetterInsertion(){
 	var memo=Memo();
 	if(!memo||!memo.positions||memo.p===undefined)
 		return;
-	var p=memo.positions[memo.p]+1;
+	var p=memo.positions[memo.p]+(memo.positions.length>1?1:0);
 	var letterE=GetElement(".letter-"+p);
 		Class(letterE,"expanding");
 }
@@ -2365,7 +2382,12 @@ function StartingMemo(level){
 				W_____________`.replace(/\t*/g,""),
 		'Order is all':[],
 		'La rapide surprise':false,
-		'Starting buds':false
+		'Starting buds':{
+			choosing:false,
+			possibilities:[""],
+			p:0,
+			positions:[0]
+		}
 	};
 	return zeromemo[level];
 }
