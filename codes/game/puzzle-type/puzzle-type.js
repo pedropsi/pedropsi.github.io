@@ -297,7 +297,7 @@ function ObtainKeyActionsGame(){
 		"Left":InstructGameKeyF("left"),
 		"Up":InstructGameKeyF("up"),
 		"Right":InstructGameKeyF("right"),
-		"Down":InstructGameKeyF("down"),
+		"Down":InstructGameKeyF("down")
 	};
 
 	keyactions["undo"]=ObtainUndo;			//Onscreen keyboard
