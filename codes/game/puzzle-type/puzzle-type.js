@@ -7,10 +7,10 @@
 var gameTitle="Puzzle Type";
 
 function GameFrameHTML(){
-	return "<div class='game-supra-Canvas'>\
-				<div class='game' id='gameCanvas'>\
-				</div>\
-			</div>";
+	return `<div class='game-supra-Canvas'>
+				<div class='game' id='gameCanvas'>
+				</div>
+			</div>`;
 }
 
 function GameTitleHTMLArray(){
@@ -21,13 +21,6 @@ return ["<div class='top'>\
 		</div>"];
 }
 
-function ComingHTMLArray(){
-return ["<div class='top'>\
-			<h1 class='goal'>"+gameTitle+"</h1>\
-		</div>",
-		"<div class='middle' id='letters'>Coming soon! (beta playtesting ongoing)\
-		</div>"];
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Game module hooks
