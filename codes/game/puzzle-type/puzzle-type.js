@@ -1558,6 +1558,8 @@ function StartingString(L){
 
 	if(possibilities.length===0){
 		ForbidCaret();
+		insertions.animate=false;
+		Memo(insertions);
 		return;
 	}
 
@@ -1569,6 +1571,8 @@ function StartingString(L){
 	Letters(word.toUpperCase());
 	Caret(Range(0,word.length-1));
 }
+
+var LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").concat(" ");
 
 function CyclePossibilities(L,word,insertions){
 
@@ -1587,7 +1591,7 @@ function CyclePossibilities(L,word,insertions){
 			p=(p+possibilities.length-1)%possibilities.length;
 		else if(In(["right","down"].map(ObtainSymbol),L))
 			p=(p+possibilities.length+1)%possibilities.length;
-		else if(In([" ","Enter"],L))
+		else if(In(["Enter"],L))
 			choosing=false;
 	
 		if(choosing)
@@ -1626,7 +1630,8 @@ function LetterInsertions(L,word){
 		possibilities:possibilities,
 		positions:positions,
 		p:0,
-		choosing:possibilities.length>1
+		choosing:possibilities.length>1,
+		animate:true
 	}
 }
 
@@ -1894,7 +1899,6 @@ function NokiaGroupNumber(L){
 }
 
 
-var LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 var NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
 var Hexadecimal=["A","B","C","D","E","F"].concat(NumberCharacters);
 
@@ -2168,7 +2172,7 @@ function DrawLetters(){
 
 function DrawAnimatedLetterInsertion(){
 	var memo=Memo();
-	if(!memo||!memo.positions||memo.p===undefined)
+	if(!memo||!memo.positions||memo.p===undefined||!memo.animate)
 		return;
 	var p=memo.positions[memo.p]+(memo.positions.length>1?1:0);
 	var letterE=GetElement(".letter-"+p);
@@ -2386,7 +2390,8 @@ function StartingMemo(level){
 			choosing:false,
 			possibilities:[""],
 			p:0,
-			positions:[0]
+			positions:[0],
+			animate:true
 		}
 	};
 	return zeromemo[level];
