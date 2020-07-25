@@ -1579,13 +1579,16 @@ function StartingString(L){
 		var sentence=Word().toLowerCase();
 		function ValidWord(word){return In(EnDictionary(),word)};
 		var possibilities=[];
+		var positions=[];
 		var inserted;
 		for(var i=0;i<=sentence.length;i++){
 			inserted=Insert(sentence,L,i);
-			if(inserted.split(" ").map(ValidWord).every(Identity))
+			if(inserted.split(" ").map(ValidWord).every(Identity)&&!In(possibilities,inserted)){
 				possibilities.push(inserted);
+				positions.push(i);
+			}
 		}
-		possibilities=Unique(possibilities);
+		//possibilities=Unique(possibilities);
 		if(possibilities.length===0){
 			ForbidCaret();
 			return;
@@ -1596,6 +1599,7 @@ function StartingString(L){
 			word=ArrowDisplay(word);
 			Memo({
 				possibilities:possibilities,
+				positions:positions,
 				p:0
 			});
 		}
@@ -1614,7 +1618,9 @@ function EnDictionary(){
 		EnDictionary.list=EnDictionary.list.concat([
 			"starring",
 			"si",
-			"anti"
+			"anti",
+			"sate","sated","sating",
+			"wares"
 			//"tinging",//ingling	"tining",
 			// "ar",
 			// "irs",
@@ -2036,10 +2042,17 @@ function DrawLettersEndCaret(){
 }
 
 function LetterPureHTML(L,cla){
-	var cla=cla?(' '+cla):'';
+	if(cla===undefined)
+		var cla="";
+	
+	if(isFinite(cla))			//number each letter
+		cla=" letter-"+cla;
+	else
+		cla=' '+cla;
+	
 	if(L===" ")
 		cla=cla+' space';
-	if(L==="_"){
+	else if(L==="_"){
 		cla=cla+' invisible';
 		var L=" "}
 	return "<div class='letter"+cla+"'>"+L+"</div>"
@@ -2129,8 +2142,17 @@ function ClearLetters(){
 function DrawLetters(){
 	var letters=Letters().map(LetterHTML(CurLevelName())).join("\n");
 	ReplaceChildren(letters,"#letters");
+	DrawAnimatedLetterInsertion();
 }
 
+function DrawAnimatedLetterInsertion(){
+	var memo=Memo();
+	if(!memo||!memo.positions||memo.p===undefined)
+		return;
+	var p=memo.positions[memo.p]+1;
+	var letterE=GetElement(".letter-"+p);
+		Class(letterE,"expanding");
+}
 
 function DrawLevel(){
 	DrawLetters();
