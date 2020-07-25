@@ -497,7 +497,7 @@ function GameBar(){
 		FeedbackButton(),
 		GameBarButtonLinkHTML("Credits","credits"),
 		WrenchButton(),
-		HiddenHTML('MoreButton'),
+		ConsoleExternal()?HiddenHTML('MoreButton'):"",
 		MusicButton(),
 		FullscreenButton()
 	].join("");
