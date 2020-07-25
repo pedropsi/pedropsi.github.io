@@ -412,7 +412,7 @@ function ForbidNumberActions(key){
 		// "Fuchsia",
 		"Odd",
 		"La rapide surprise",
-		"Starting buds",//"Starting anew"
+		"Starting buds",
 		"Order is all",
 		"⠍⠕⠗⠎⠑"],CurLevelName())&&In(NumberCharacters,key));
 }
@@ -640,15 +640,15 @@ var LevelGoals=[			//Required types of thinking:
 	"Ironclad",				//Encoding, Word, Science
 	//"Fuchsia",			//Encoding
 	"Deaf",					//Encoding, Music
-	"⠍⠕⠗⠎⠑",			 //Encoding, Once
+	"⠍⠕⠗⠎⠑",			  //Encoding, Once
 	"Dividi",				//Encoding, Arithmethic, Retroactive
 
 
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-	"Starting buds",				//Language
-	"La rapide surprise",					//Keyword, Swap, Retroactive, Language
+	"Starting buds",					//Language
+	"La rapide surprise",				//Keyword, Swap, Retroactive, Language
 	"Just cut and paste",				//Keyword, Proactive, Redefinition
 	"Order is all"						//Keyword, Proactive, Increment, Redefinition
 ];
@@ -679,7 +679,8 @@ var LevelGoalAliases={
 	"Baba is you":"Order is all",
 	"Copypaste":"Just cut and paste",
 	"Finest vernissage":"La rapide surprise",
-	"Mon petit ami":"La rapide surprise"
+	"Mon petit ami":"La rapide surprise",
+	"Starting anew":"Starting buds"
 }
 
 function GoalCanonicalName(title){
