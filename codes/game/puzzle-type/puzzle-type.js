@@ -1890,6 +1890,7 @@ function InversionSymmetric(O){
 //Topological
 
 function Topological(L){	
+	ValidKeystroke(L);
 	if(Letters.array.length===0){
 		InputLetterAfter(L);
 	}
