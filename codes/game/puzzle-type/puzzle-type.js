@@ -367,7 +367,6 @@ function LevelAction(key){
 		}
 		else{
 			LevelActions[CurLevelName()](key);
-			Keystroke(key);
 			RegisterMove(key);
 		}
 	}
@@ -715,6 +714,7 @@ var LevelActions={
 	"Direct":Direct,
 	"Reverse":function(L){
 		InputLetterBefore(L);
+		ValidKeystroke(L);
 	},
 	// "Oppose":function(A){
 	// 	var Z=NumberLetter(25-LetterNumber(A)); 
@@ -723,6 +723,7 @@ var LevelActions={
 	"Rise":function(L){
 		var M=NumberLetter(Min(LetterNumber(L)+1,25)); 
 		InputLetterAfter(M);
+		ValidKeystroke(L);
 	},
 	"Second":Second,
 
@@ -735,6 +736,8 @@ var LevelActions={
 		}
 		else
 			InputLetterAfter(L);
+		
+		ValidKeystroke(L);
 	},
 	"Consonant":Consonant,
 	"Falls":function (L){
@@ -743,6 +746,7 @@ var LevelActions={
 		}
 		Letters(Letters.array.map(LetterDown));
 		InputLetterAfter(L);
+		ValidKeystroke(L);
 	},
 	"Superior":function (L){
 		var pre=Caret()[0];
@@ -755,7 +759,8 @@ var LevelActions={
 				pos=i;
 			}
 		}
-		Caret(pos)
+		Caret(pos);
+		ValidKeystroke(L);
 	},
 /*	"Photocopier":function (L){
 		var pre=Caret();
@@ -777,6 +782,7 @@ var LevelActions={
 		InputLetterAfter(L);
 		if(Letters.array.length%2===0)
 			Letters(FlipArray(Letters.array));
+		ValidKeystroke(L);
 	},
 	"Precedent":function (L){
 		function ConditionF(K){return K===NumberLetter(Max(LetterNumber(L)-1,0));};
@@ -784,6 +790,7 @@ var LevelActions={
 		var m=ModifyLetters(ChangeF,ConditionF);
 		if(!m)
 			InputLetterAfter(L);
+		ValidKeystroke(L);
 	},
 	"Symmetries":Symmetries,
 	"Fillet":Fillet,
@@ -796,6 +803,7 @@ var LevelActions={
 			if(In(DvorakMapping,P))
 				P=DvorakMapping[P];
 		InputLetterAfter(P);
+		ValidKeystroke(P);
 	},
 	/*"Tangles":function (L){
 		if(Letters.array.length==="Tangles".length){
@@ -833,10 +841,12 @@ var LevelActions={
 			}
 			Letters(LA);
 		}
-		Caret(Infinity);		
+		Caret(Infinity);
+		ValidKeystroke(L);	
 	},
 	"Shepherdess hence unladylike":function(L){
 		InputLetterAfter(L);
+		ValidKeystroke(L);
 		Letters(StringReplaceOnceRuleArray(Word(),GenderReplacementRules));
 		Caret(Infinity);		
 	},
@@ -846,6 +856,7 @@ var LevelActions={
 	"Nigeria":Nigeria,
 	"ひらがな":function(L){
 		InputLetterAfter(L);
+		ValidKeystroke(L);
 		Letters(StringReplaceRulesObject(Word().toLowerCase(),Hiragana).toUpperCase());
 		Caret(Infinity);
 	},
@@ -861,6 +872,7 @@ var LevelActions={
 function Wasd(W){
 	if(!In("WASD",W)&&!In(ArrowKeys,W)){
 		ForbidCaret();
+		InvalidKeystroke(W);
 		return;
 	}
 
@@ -880,8 +892,10 @@ function Wasd(W){
 	var line=EmulateLine(level);
 		line=line.replace(/\./g," ");
 
-	if(Word()===line)
+	if(Word()===line){
 		Throttle(BumpSound,250);
+		InvalidKeystroke(W);
+	}
 
 	Letters(line);
 	Caret(line.indexOf("W"));
@@ -925,6 +939,7 @@ function Difference(L){
 
 	if(!last){
 		InputLetterAfter(L);
+		ValidKeystroke(L);
 		last=L;
 		Memo(last);
 		Caret(0);
@@ -933,6 +948,7 @@ function Difference(L){
 
 	var pre=Caret()[0];
 	Letter(pre,L);
+	ValidKeystroke(L);
 	
 	var pos=Max(pre,0)+LetterNumber(L)-LetterNumber(last);
 	pos=Max(Min(pos,Letters.array.length),-1);
@@ -944,12 +960,14 @@ function Difference(L){
 
 function Nokia(N){
 		if(!NokiaMapping[N]){
+			InvalidKeystroke(N);
 			ForbidCaret();
 			return;
 		}
 		
 		function NokiaInput(L){
 			InputLetterAfter(L);
+			ValidKeystroke(L);
 			Caret("Last");	
 		}
 
@@ -977,6 +995,7 @@ function Nokia(N){
 				}
 				else{
 					InputLetterAfter(M);
+					ValidKeystroke(M);
 					Caret(Infinity);
 				}
 			}
@@ -1007,10 +1026,12 @@ function Nigeria(L){
 		if(freeze){
 			Memo(false);
 			Restart();
+			ValidKeystroke(" ");
 			return;
 		}
 		
 		InputLetterAfter(L+"*");
+		ValidKeystroke(L);
 		
 		function UnSpace(string){
 			return string.replace(/\s*/g,"").replace(/^THE/,"").replace(/^REPUBLICOF/,"").replace(/^KINGDOMOF/,"").replace(/^THE/,"");
@@ -1040,11 +1061,14 @@ function Anagram(L){
 	var used=Memo();
 
 	if(!In("ANAGRAM".split(""),L)){
+		ForbidCaret();
+		InvalidKeystroke(L);
 		Caret(Infinity);
 		return;
 	}
 	else{
 		InputLetterAfter(L+"*");
+		ValidKeystroke(L);
 		var saved=SavedLetters();
 		var anagr=TemporaryWord().toLowerCase();
 
@@ -1065,6 +1089,7 @@ function Anagram(L){
 
 function Ironclad(L){
 	InputLetterAfter(L+"*");
+	ValidKeystroke(L);
 	
 	var saved=SavedLetters();
 	var nulow=TemporaryWord().toLowerCase();
@@ -1082,6 +1107,7 @@ function Genetic(L){
 	
 	if(!In("ACGU",L)){
 		ForbidCaret();
+		InvalidKeystroke(L);
 		return;
 	}
 
@@ -1090,14 +1116,15 @@ function Genetic(L){
 		codon=codon+L;
 	
 	if(codon.length<3){
-		InputLetterAfter(L+"*")
+		InputLetterAfter(L+"*");
 	}
 	else {
 		Letters(saved);
 		if(In(RNACodonsAminoacids,codon))
 			InputLetterAfter(RNACodonsAminoacids[codon]);
 	}
-
+	
+	ValidKeystroke(L);
 	Caret(Infinity);
 }
 
@@ -1188,10 +1215,13 @@ function Deaf(L){
 	var tempnotes=TemporaryLetters();
 
 	function AddSharp(){
-		if(Last(tempnotes)!=="#*")
+		if(Last(tempnotes)!=="#*"){
 			InputLetterAfter("#*");
-		else
+			ValidKeystroke(L);	
+		}else{
 			ForbidCaret();
+			InvalidKeystroke(L);
+		}
 	}
 
 	function NotesLength(){
@@ -1200,8 +1230,10 @@ function Deaf(L){
 
 	if(!In("ABCDEFG",L))
 		AddSharp();
-	else if(NotesLength()<3)
+	else if(NotesLength()<3){
 		InputLetterAfter(L+"*");
+		ValidKeystroke(L);
+	}
 		
 	var tempnotes=TemporaryLetters();
 	var chord=tempnotes.map(PureLetter).join("");
@@ -1226,7 +1258,8 @@ function Deaf(L){
 
 
 function Direct(L){
-		InputLetterAfter(L);
+	InputLetterAfter(L);
+	ValidKeystroke(L);
 };
 
 function Second(L){
@@ -1237,11 +1270,13 @@ function Second(L){
 		DeleteLetterBefore();
 	
 	InputLetterAfter(L);
+	ValidKeystroke(L);
 }
 
 function Consonant(L){
 	if(L==="Y"){//semi-vowel
 		ForbidCaret();
+		InvalidKeystroke(L);
 		return;
 	}
 
@@ -1251,6 +1286,7 @@ function Consonant(L){
 	else
 		InputLetterAfter(L)
 	
+	ValidKeystroke(L);
 	before=!In(["A","E","I","O","U"],L);
 	Memo(before);
 
@@ -1285,8 +1321,11 @@ function Morse(L){
 
 	if(In(used,L)){
 		ForbidCaret();
+		InvalidKeystroke(L);
 		return;
 	}
+
+	ValidKeystroke(L);
 	
 	used.push(L);
 	Memo(used);
@@ -1323,8 +1362,11 @@ function BrailleNumber(braille){
 //Dividi
 
 function Dividi(L){
-	if(!In(uniNumerals,L))
-		return ForbidCaret();
+	if(!In(uniNumerals,L)){
+		ForbidCaret();
+		InvalidKeystroke(L);
+		return;
+	}
 
 	word=Word();
 	last=LastValidRoman(word);
@@ -1336,12 +1378,14 @@ function Dividi(L){
 	}
 		
 	InputLetterAfter(L);
+	ValidKeystroke(L);
 }
 	
 //Copypaste
 
 function Copypaste(L){
 	InputLetterAfter(L);
+	ValidKeystroke(L);
 
 	var word=Letters().join("");
 	
@@ -1367,6 +1411,7 @@ function Baba(L){
 	var rules=Memo();
 
 	InputLetterAfter(L);
+	ValidKeystroke(L);
 
 	var word=Letters().join("");
 //	var pattern=/(.+)IS(.+)/;
@@ -1394,6 +1439,7 @@ function Baba(L){
 function Weightier(L){
 	
 	InputLetterAfter(L);
+	ValidKeystroke(L);
 	Letters(InflateNumbers(Word().toLowerCase()).toUpperCase());
 	Caret(Infinity);
 	return;
@@ -1559,11 +1605,14 @@ function StartingString(L){
 
 	if(possibilities.length===0){
 		ForbidCaret();
+		InvalidKeystroke(L);
 		insertions=Memo();
 		insertions.animate=false;
 		Memo(insertions);
 		return;
 	}
+
+	ValidKeystroke(L);
 
 	Memo(insertions);
 	
@@ -1661,20 +1710,20 @@ function EnDictionary(){
 
 //Fillet
 
-function Fillet(E){
+function Fillet(L){
+	ValidKeystroke(L);
 	var p=Memo();
 
 	var max="Fillet".length;
 	var pnext=(p+1)%max;
 
-	Letters.array[p]=FilletHalves[E][0]+(Letters.array[p]?SplitHalves(Letters.array[p])[1]:"_");
-	Letters.array[pnext]=(Letters.array[pnext]?SplitHalves(Letters.array[pnext])[0]:"_")+FilletHalves[E][1];
+	Letters.array[p]=FilletHalves[L][0]+(Letters.array[p]?SplitHalves(Letters.array[p])[1]:"_");
+	Letters.array[pnext]=(Letters.array[pnext]?SplitHalves(Letters.array[pnext])[0]:"_")+FilletHalves[L][1];
 
 	Letters.array=Letters.array.map(CombineHalves);
 
 	Memo(pnext);
 	Caret(pnext);
-
 }
 
 function CombineHalves(AB){
@@ -1745,17 +1794,18 @@ var FilletWholes=FlipKeysValues(FilletHalves);
 
 //Symmetric
 
-function Symmetries(O){
+function Symmetries(L){
+	ValidKeystroke(L);
 	var direction=Memo();
 
-	if(In("SYMMETRIES",O)){
+	if(In("SYMMETRIES",L)){
 		if(direction)
-			InputLetterAfter(O);
+			InputLetterAfter(L);
 		else
-			InputLetterBefore(O);
+			InputLetterBefore(L);
 	}
 
-	if(InversionSymmetric(O)){
+	if(InversionSymmetric(L)){
 		ModifyLetters(ToggleInversion);
 		Letters.array=Letters.array.reverse();
 		direction=!direction;
@@ -1766,7 +1816,7 @@ function Symmetries(O){
 		else
 			Caret(-1);
 	}
-	if(HorizontalSymmetric(O)){
+	if(HorizontalSymmetric(L)){
 		ModifyLetters(ToggleHorizontal);
 		Letters.array=Letters.array.reverse();
 		
@@ -1778,7 +1828,7 @@ function Symmetries(O){
 		else
 			Caret(-1);
 	}
-	if(VerticalSymmetric(O)){
+	if(VerticalSymmetric(L)){
 		ModifyLetters(ToggleVertical);
 	}
 	
@@ -1839,25 +1889,26 @@ function InversionSymmetric(O){
 
 //Topological
 
-function Topological(O){	
+function Topological(L){	
+	ValidKeystroke(L);
 	if(Letters.array.length===0){
-		InputLetterAfter(O);
+		InputLetterAfter(L);
 	}
 	else{
-		var classO=HomeomorphicClass(O);
+		var classO=HomeomorphicClass(L);
 		var letters=Clone(Letters());
 
 		function MorphInferior(i){
 			var L=Letter(i);
 			var classL=HomeomorphicClass(L);
 			if(In(TopologyRequirement[classL],classO)){
-				MorphLetter(L,O,"letters",Starter,Ender);
+				MorphLetter(L,L,"letters",Starter,Ender);
 				function Starter(){
 					BlockInput();
 					BlockUndo();
 				}
 				function Ender(){
-					Letter(i,O);
+					Letter(i,L);
 					UnBlockInput();
 					UnBlockUndo();
 					if(i===letters.length-1)
@@ -1874,7 +1925,7 @@ function Topological(O){
 			morphed=MorphInferior(i)||morphed;
 		}
 		if(!morphed)
-			InputLetterAfter(O);
+			InputLetterAfter(L);
 	}
 	Caret(Infinity);
 }
@@ -2195,7 +2246,15 @@ function TransitionExpansion(){
 }
 
 function DrawKeystrokes(){
-	ReplaceChildren("<p>"+Keystrokes().join("")+"</p>",".keystrokes");
+	var keystrokes="<p>"+(Keystrokes().map(KeystrokeHTML).join(""))+"</p>";
+	ReplaceChildren(keystrokes,".keystrokes");
+}
+
+function KeystrokeHTML(K){
+	if(Posfixed(K,"*"))
+		return `<span class="keystroke-invalid">${UnPosfix(K,"*")}</span>`;
+	else
+		return `<span class="keystroke-valid">${K}</span>`;
 }
 
 function DrawLevel(){
@@ -2446,9 +2505,14 @@ function Keystrokes(array){
 		return Keystrokes.array=Clone(array);
 }
 
-function Keystroke(L){
+function ValidKeystroke(L){
 	Keystrokes();
 	Keystrokes.array.push(L);
+}
+
+function InvalidKeystroke(L){
+	Keystrokes();
+	Keystrokes.array.push(L+"*");
 }
 
 function ObtainStartingLevelState(){

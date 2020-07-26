@@ -281,3 +281,10 @@
        width: 0;
     }
 }
+
+.keystroke-invalid{
+   text-decoration: line-through;
+   text-decoration-thickness: var(--h1);
+   color: var(--lightblue)
+}
+}
