@@ -2215,6 +2215,7 @@ function CaretHTML(){
 function ClearLetters(){
 	Letters([]);
 	Caret(0);
+	Keystrokes([]);
 	ObtainUpdateLevel();
 }
 
