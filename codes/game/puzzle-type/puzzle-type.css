@@ -292,4 +292,6 @@
 
 .keystroke-combo{
    font-weight: bold;
+   text-decoration: underline;
+   /*color: var(--blue);*/
 }
