@@ -152,7 +152,7 @@ var gameModulesLater=[
 "lang-plurals-superlatives"
 ]
 
-LoadSources(gameModulesEarly,P()?GameIntro:GameTrailer);
+LoadSources(gameModulesEarly,P()?GameIntro:Identity);
 gameModulesLater.map(LoaderInFolder("codes/game/puzzle-type/modules"));
 
 function GameIntro(){
