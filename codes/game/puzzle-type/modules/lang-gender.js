@@ -102,4 +102,5 @@ MapObject(Gendered,function(f,m){
 	GenderReplacementRules.push([new RegExp(m.toUpperCase()+"$"),f.toUpperCase()]);
 });
 
-var GenderedMale=Values(Gendered);
+var GenderedFemale=Values(Gendered);
+var GenderedMale=Keys(Gendered);
