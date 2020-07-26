@@ -43,6 +43,8 @@ var MinorChords={
 	"BDF#":"B"
 };
 
+var ChordsAll=Keys(MinorChords).concat(Keys(MajorChords));
+
 ChordForward={
 	"A#":"a",
 	"B#":"b",

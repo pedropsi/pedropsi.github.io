@@ -64,3 +64,5 @@ var RNACodonsAminoacids={
 "GGA":"G",
 "GGG":"G"
 }
+
+var RNACodons=Keys(RNACodonsAminoacids);
