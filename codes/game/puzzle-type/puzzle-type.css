@@ -74,6 +74,7 @@
    font-size: calc(var(--h2) + var(--w2));
    line-height: calc(var(--h2) + var(--w2));
    text-align: right;
+   font-weight: normal;
 }
 
 .top .goal.uncase{
@@ -282,9 +283,13 @@
     }
 }
 
+
 .keystroke-invalid{
    text-decoration: line-through;
    text-decoration-thickness: var(--h1);
    color: var(--lightblue)
 }
+
+.keystroke-combo{
+   font-weight: bold;
 }
