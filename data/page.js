@@ -67,7 +67,8 @@ BuildCMSPage=function(){
 PageFeatures=function(){
 	DisplayGuestbook();
 	PageFeaturesDOM();
-	Navigate(document.URL,true);
+	if(PageFragment()!=="")
+		Navigate(document.URL,true);
 }
 
 PageFeaturesDOM=function(){
