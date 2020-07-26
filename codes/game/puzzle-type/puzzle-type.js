@@ -964,10 +964,10 @@ function Nokia(N){
 			ForbidCaret();
 			return;
 		}
-		
+		ValidKeystroke(N);
+
 		function NokiaInput(L){
 			InputLetterAfter(L);
-			ValidKeystroke(L);
 			Caret("Last");	
 		}
 
@@ -1890,19 +1890,18 @@ function InversionSymmetric(O){
 //Topological
 
 function Topological(L){	
-	ValidKeystroke(L);
 	if(Letters.array.length===0){
 		InputLetterAfter(L);
 	}
 	else{
-		var classO=HomeomorphicClass(L);
+		var classL=HomeomorphicClass(L);
 		var letters=Clone(Letters());
 
 		function MorphInferior(i){
-			var L=Letter(i);
-			var classL=HomeomorphicClass(L);
-			if(In(TopologyRequirement[classL],classO)){
-				MorphLetter(L,L,"letters",Starter,Ender);
+			var M=Letter(i);
+			var classM=HomeomorphicClass(M);
+			if(In(TopologyRequirement[classM],classL)){
+				MorphLetter(M,L,"letters",Starter,Ender);
 				function Starter(){
 					BlockInput();
 					BlockUndo();
