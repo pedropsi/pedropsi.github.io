@@ -795,15 +795,15 @@ var LevelActions={
 	"Symmetries":Symmetries,
 	"Fillet":Fillet,
 	"Topological":Topological,
-	"Dvorak":function (P){
-		var n=Letters.array.map(function(L){return DvorakMapping["row_"+L]});
-			n=Count(n,DvorakMapping["row_"+P]);
-		var P=P;
+	"Dvorak":function (L){
+		ValidKeystroke(L);
+		var n=Letters.array.map(function(M){return DvorakMapping["row_"+M]});
+			n=Count(n,DvorakMapping["row_"+L]);
+		var L=L;
 		for(var i=1;i<=n;i++)
-			if(In(DvorakMapping,P))
-				P=DvorakMapping[P];
-		InputLetterAfter(P);
-		ValidKeystroke(P);
+			if(In(DvorakMapping,L))
+				L=DvorakMapping[L];
+		InputLetterAfter(L);
 	},
 	/*"Tangles":function (L){
 		if(Letters.array.length==="Tangles".length){
@@ -869,22 +869,22 @@ var LevelActions={
 	"Wasd":Wasd
 }
 
-function Wasd(W){
-	if(!In("WASD",W)&&!In(ArrowKeys,W)){
+function Wasd(L){
+	if(!In("WASD",L)&&!In(ArrowKeys,L)){
 		ForbidCaret();
-		InvalidKeystroke(W);
+		InvalidKeystroke(L);
 		return;
 	}
 
 	var level=Memo();
 	
-	if(W==="W"||W===ObtainSymbol("up"))
+	if(L==="W"||L===ObtainSymbol("up"))
 		level=EmulateUp(level);
-	if(W==="A"||W===ObtainSymbol("left"))
+	if(L==="A"||L===ObtainSymbol("left"))
 		level=EmulateLeft(level);
-	if(W==="S"||W===ObtainSymbol("down"))
+	if(L==="S"||L===ObtainSymbol("down"))
 		level=EmulateDown(level);
-	if(W==="D"||W===ObtainSymbol("right"))
+	if(L==="D"||L===ObtainSymbol("right"))
 		level=EmulateRight(level);
 
 	Memo(level);
@@ -894,8 +894,11 @@ function Wasd(W){
 
 	if(Word()===line){
 		Throttle(BumpSound,250);
-		InvalidKeystroke(W);
+		InvalidKeystroke(L);
+		ForbidCaret();
 	}
+	else
+		ValidKeystroke(L);
 
 	Letters(line);
 	Caret(line.indexOf("W"));
