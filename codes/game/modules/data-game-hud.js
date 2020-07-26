@@ -78,15 +78,18 @@ LaunchHUD=function(touchSel,renderSel){
 	var hudid=GenerateId();
 
 	Listen('touchmove',function(e){  
+		e.preventDefault();
 		HandleTouchMover(HighlightRing)(e);
 	},touchSel);
 
 	Listen('touchend' ,function(e){
+		e.preventDefault();
 		HandleTouchEnder(ObtainHUDPicker)(e);
 		UnRenderHUD(hudid);
 	},touchSel);
 
 	Listen('touchstart',function(e){
+		e.preventDefault();
 		HandleTouchStart(e);
 		RenderHUD(hudid,renderSel);
 	},touchSel);
