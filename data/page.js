@@ -55,7 +55,6 @@ BuildCMSPage=function(){
 	
 	IndexTitles();
 	AddTitleIndex(".main .whiteboard");//First whiteboard where main content is
-	
 
 	var sources=["codes/communication.js","data/guestbook.js","codes/analytics.js"];
 	LoadSources(sources,PageFeatures);
@@ -68,6 +67,7 @@ BuildCMSPage=function(){
 PageFeatures=function(){
 	DisplayGuestbook();
 	PageFeaturesDOM();
+	Navigate(document.URL,true);
 }
 
 PageFeaturesDOM=function(){
