@@ -201,7 +201,7 @@ function P(){
 
 function P(){
 	var pagetag=PageFragment();
-	var fulltokens=["PatrickEye","Plurmorant","mago314","Deusovi","minotalen","KristianHedeholm","MathWizard"];
+	var fulltokens=["PatrickEye","Plurmorant","mago314","Deusovi","minotalen","KristianHedeholm","MathWizard","builder17"];
 	var semitokens=[];
 	var apptokens=fulltokens.map(function(t){return "homescreen-"+t});
 	var manifest=GetElement("manifest");
