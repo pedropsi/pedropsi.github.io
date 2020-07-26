@@ -262,18 +262,22 @@
    line-height: 0.5;
 }
 
-.letter.expanding{
+.expanding{
+  width: calc(var(--h4) + var(--w2));
   animation-name: expansion;
   animation-timing-function: linear;
   animation-fill-mode:forwards;
   animation-duration:500ms;
   animation-delay:0;
   animation-iteration-count: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @keyframes expansion{
     0% {
        width: 0;
-       max-width: 0;
     }
 }

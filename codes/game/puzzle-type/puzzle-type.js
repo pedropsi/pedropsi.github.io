@@ -2060,7 +2060,7 @@ function DrawSingleCaret(p){
 	if(p>=Letters().length)
 		AddElement(CaretHTML(),"#letters");
 	else
-		Class(GetElement("#letters").children[p],"caret")
+		Class(GetElement(".letter-"+p),"caret")
 }
 
 function DrawLettersEndCaret(){
@@ -2073,10 +2073,7 @@ function LetterPureHTML(L,cla){
 	if(cla===undefined)
 		var cla="";
 	
-	if(isFinite(cla))			//number each letter
-		cla=" letter-"+cla;
-	else
-		cla=' '+cla;
+	cla=' '+cla;
 	
 	if(L===" ")
 		cla=cla+' space';
@@ -2170,17 +2167,31 @@ function ClearLetters(){
 function DrawLetters(){
 	var letters=Letters().map(LetterHTML(CurLevelName())).join("\n");
 	ReplaceChildren(letters,"#letters");
-	DrawAnimatedLetterInsertion();
+	GetElements(".letter").map((e,n)=>Class(e,"letter-"+n)); //number each letter
+	
+	TransitionLetters(CurLevelName());
 }
 
+function TransitionLetters(title){
+	if(LevelLetterTransitions[title])
+		LevelLetterTransitions[title]();
+}
 
-function DrawAnimatedLetterInsertion(){
+LevelLetterTransitions={
+	"Starting buds":TransitionExpansion
+}
+
+function TransitionExpansion(){
 	var memo=Memo();
 	if(!memo||!memo.positions||memo.p===undefined||!memo.animate)
 		return;
+	
 	var p=memo.positions[memo.p]+(memo.positions.length>1?1:0);
 	var letterE=GetElement(".letter-"+p);
+	if(letterE){
+		letterE.outerHTML=`<div class="expanding">${letterE.outerHTML}</div>`
 		Class(letterE,"expanding");
+	}
 }
 
 function DrawKeystrokes(){
