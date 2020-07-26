@@ -1106,13 +1106,15 @@ function Ironclad(L){
 }
 
 function Genetic(L){
-	var L=L.replace("T","U");
 	
-	if(!In("ACGU",L)){
+	if(!In("ACGUT",L)){
 		ForbidCaret();
 		InvalidKeystroke(L);
 		return;
 	}
+
+	ValidKeystroke(L);
+	var L=L.replace("T","U");
 
 	var saved=SavedLetters();
 	var codon=TemporaryWord();
@@ -1127,7 +1129,6 @@ function Genetic(L){
 			InputLetterAfter(RNACodonsAminoacids[codon]);
 	}
 	
-	ValidKeystroke(L);
 	Caret(Infinity);
 }
 
