@@ -1028,7 +1028,9 @@ function Nigeria(L){
 		
 		if(freeze){
 			Memo(false);
-			Restart();
+			Letters([]);
+			Caret(0);
+			SeparateKeystroke();
 			return;
 		}
 		
