@@ -714,7 +714,7 @@ var LevelActions={
 	"Direct":Direct,
 	"Reverse":function(L){
 		InputLetterBefore(L);
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 	},
 	// "Oppose":function(A){
 	// 	var Z=NumberLetter(25-LetterNumber(A)); 
@@ -723,7 +723,7 @@ var LevelActions={
 	"Rise":function(L){
 		var M=NumberLetter(Min(LetterNumber(L)+1,25)); 
 		InputLetterAfter(M);
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 	},
 	"Second":Second,
 
@@ -733,11 +733,14 @@ var LevelActions={
 			DeleteLetterAfter();
 			InputLetterAfter(L);
 			InputLetterAfter(last);
+			AddStrokeValid(L);
 		}
-		else
+		else{
 			InputLetterAfter(L);
+			AddStrokeUnderline(L);
+		}
 		
-		ValidKeystroke(L);
+		
 	},
 	"Consonant":Consonant,
 	"Falls":function (L){
@@ -746,7 +749,7 @@ var LevelActions={
 		}
 		Letters(Letters.array.map(LetterDown));
 		InputLetterAfter(L);
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 	},
 	"Superior":function (L){
 		var pre=Caret()[0];
@@ -760,7 +763,7 @@ var LevelActions={
 			}
 		}
 		Caret(pos);
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 	},
 /*	"Photocopier":function (L){
 		var pre=Caret();
@@ -782,21 +785,24 @@ var LevelActions={
 		InputLetterAfter(L);
 		if(Letters.array.length%2===0)
 			Letters(FlipArray(Letters.array));
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 	},
 	"Precedent":function (L){
 		function ConditionF(K){return K===NumberLetter(Max(LetterNumber(L)-1,0));};
 		function ChangeF(K){return L;};
 		var m=ModifyLetters(ChangeF,ConditionF);
-		if(!m)
+		if(!m){
 			InputLetterAfter(L);
-		ValidKeystroke(L);
+			AddStrokeValid(L);
+		}
+		else
+			AddStrokeUnderline(L);
 	},
 	"Symmetries":Symmetries,
 	"Fillet":Fillet,
 	"Topological":Topological,
 	"Dvorak":function (L){
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 		var n=Letters.array.map(function(M){return DvorakMapping["row_"+M]});
 			n=Count(n,DvorakMapping["row_"+L]);
 		var L=L;
@@ -842,11 +848,11 @@ var LevelActions={
 			Letters(LA);
 		}
 		Caret(Infinity);
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 	},
 	"Shepherdess hence unladylike":function(L){
 		InputLetterAfter(L);
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 		Letters(StringReplaceOnceRuleArray(Word(),GenderReplacementRules));
 		Caret(Infinity);		
 	},
@@ -856,7 +862,7 @@ var LevelActions={
 	"Nigeria":Nigeria,
 	"ひらがな":function(L){
 		InputLetterAfter(L);
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 		Letters(StringReplaceRulesObject(Word().toLowerCase(),Hiragana).toUpperCase());
 		Caret(Infinity);
 	},
@@ -872,7 +878,7 @@ var LevelActions={
 function Wasd(L){
 	if(!In("WASD",L)&&!In(ArrowKeys,L)){
 		ForbidCaret();
-		InvalidKeystroke(L);
+		AddStrokeInvalid(L);
 		return;
 	}
 
@@ -894,11 +900,11 @@ function Wasd(L){
 
 	if(Word()===line){
 		Throttle(BumpSound,250);
-		InvalidKeystroke(L);
+		AddStrokeValid(L);
 		ForbidCaret();
 	}
 	else
-		ValidKeystroke(L);
+		AddStrokeUnderline(L);
 
 	Letters(line);
 	Caret(line.indexOf("W"));
@@ -942,7 +948,7 @@ function Difference(L){
 
 	if(!last){
 		InputLetterAfter(L);
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 		last=L;
 		Memo(last);
 		Caret(0);
@@ -951,7 +957,7 @@ function Difference(L){
 
 	var pre=Caret()[0];
 	Letter(pre,L);
-	ValidKeystroke(L);
+	AddStrokeValid(L);
 	
 	var pos=Max(pre,0)+LetterNumber(L)-LetterNumber(last);
 	pos=Max(Min(pos,Letters.array.length),-1);
@@ -963,11 +969,11 @@ function Difference(L){
 
 function Nokia(N){
 		if(!NokiaMapping[N]){
-			InvalidKeystroke(N);
+			AddStrokeInvalid(N);
 			ForbidCaret();
 			return;
 		}
-		ValidKeystroke(N);
+		AddStrokeValid(N);
 
 		function NokiaInput(L){
 			InputLetterAfter(L);
@@ -998,7 +1004,7 @@ function Nokia(N){
 				}
 				else{
 					InputLetterAfter(M);
-					ValidKeystroke(M);
+					AddStrokeValid(M);
 					Caret(Infinity);
 				}
 			}
@@ -1030,12 +1036,12 @@ function Nigeria(L){
 			Memo(false);
 			Letters([]);
 			Caret(0);
-			SeparateKeystroke();
+			AddStrokeSeparator();
 			return;
 		}
 		
 		InputLetterAfter(L+"*");
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 		
 		function UnSpace(string){
 			return string.replace(/\s*/g,"").replace(/^THE/,"").replace(/^REPUBLICOF/,"").replace(/^KINGDOMOF/,"").replace(/^THE/,"");
@@ -1066,13 +1072,13 @@ function Anagram(L){
 
 	if(!In("ANAGRAM".split(""),L)){
 		ForbidCaret();
-		InvalidKeystroke(L);
+		AddStrokeInvalid(L);
 		Caret(Infinity);
 		return;
 	}
 	else{
 		InputLetterAfter(L+"*");
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 		var saved=SavedLetters();
 		var anagr=TemporaryWord().toLowerCase();
 
@@ -1081,7 +1087,7 @@ function Anagram(L){
 			used.push(anagr);
 			Letters(saved);
 			InputLetterAfter(S);
-			ComboWordstroke(anagr);
+			UnderlineWordstroke(anagr);
 		}
 		else if(anagr.length>4){
 			Letters(saved);
@@ -1094,7 +1100,7 @@ function Anagram(L){
 
 function Ironclad(L){
 	InputLetterAfter(L+"*");
-	ValidKeystroke(L);
+	AddStrokeValid(L);
 	
 	var saved=SavedLetters();
 	var nulow=TemporaryWord().toLowerCase();
@@ -1102,6 +1108,7 @@ function Ironclad(L){
 	if(In(Nuclei,nulow)){
 		var elem=Nuclei[nulow].toUpperCase();
 		Letters(saved.join("")+elem);
+		AddStrokeSeparator();
 	}
 
 	Caret(Infinity);
@@ -1111,11 +1118,11 @@ function Genetic(L){
 	
 	if(!In("ACGUT",L)){
 		ForbidCaret();
-		InvalidKeystroke(L);
+		AddStrokeInvalid(L);
 		return;
 	}
 
-	ValidKeystroke(L);
+	AddStrokeValid(L);
 	var L=L.replace("T","U");
 
 	var saved=SavedLetters();
@@ -1129,8 +1136,8 @@ function Genetic(L){
 		Letters(saved);
 		if(In(RNACodonsAminoacids,codon)){
 			InputLetterAfter(RNACodonsAminoacids[codon]);
-			ComboWordstroke(codon);
-			SeparateKeystroke();
+			// UnderlineWordstroke(codon);
+			AddStrokeSeparator();
 		}
 	}
 	
@@ -1226,10 +1233,10 @@ function Deaf(L){
 	function AddSharp(){
 		if(Last(tempnotes)!=="#*"&&tempnotes.length>0){
 			InputLetterAfter("#*");
-			ComboKeystroke(L);	
+			AddStrokeValid(L);	
 		}else{
 			ForbidCaret();
-			InvalidKeystroke(L);
+			AddStrokeInvalid(L);
 		}
 	}
 
@@ -1241,7 +1248,7 @@ function Deaf(L){
 		AddSharp();
 	else if(NotesLength()<3){
 		InputLetterAfter(L+"*");
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 	}
 		
 	var tempnotes=TemporaryLetters();
@@ -1251,7 +1258,7 @@ function Deaf(L){
 	if(NotesLength()===3){
 		Letters(savednotes);
 		// if(Prefixed(chord,"#")){
-		// 	SeparateKeystroke();
+		// 	AddStrokeSeparator();
 		// 	return;
 		// }
 
@@ -1262,8 +1269,10 @@ function Deaf(L){
 		else if(In(MinorChords,chord)){
 			InputLetterAfter(MinorChords[chord].toLowerCase());
 		}
+		else
+			ModifyLastStroke(InvalidateStroke);
 		
-		SeparateKeystroke();
+		AddStrokeSeparator();
 	}
 
 	Caret(Infinity);
@@ -1272,7 +1281,7 @@ function Deaf(L){
 
 function Direct(L){
 	InputLetterAfter(L);
-	ValidKeystroke(L);
+	AddStrokeValid(L);
 };
 
 function Second(L){
@@ -1283,13 +1292,16 @@ function Second(L){
 		DeleteLetterBefore();
 	
 	InputLetterAfter(L);
-	ValidKeystroke(L);
+	AddStrokeValid(L);
+	
+	var l=Keystrokes.array.length;
+	Keystrokes.array=Keystrokes.array.map((k,i)=>((i+1)<=(l/2))?k+"-":k)
 }
 
 function Consonant(L){
 	if(L==="Y"){//semi-vowel
 		ForbidCaret();
-		InvalidKeystroke(L);
+		AddStrokeInvalid(L);
 		return;
 	}
 
@@ -1299,14 +1311,17 @@ function Consonant(L){
 	else
 		InputLetterAfter(L)
 	
-	ValidKeystroke(L);
 	before=!In(["A","E","I","O","U"],L);
 	Memo(before);
 
-	if(!before)
+	if(!before){
 		Caret(-1);
-	else
+		AddStrokeValid(L);
+	}
+	else{
 		Caret(Letters().length);
+		AddStrokeUnderline(L);
+	}
 }
 
 function FlipArray(array){
@@ -1334,11 +1349,11 @@ function Morse(L){
 
 	if(In(used,L)){
 		ForbidCaret();
-		InvalidKeystroke(L);
+		AddStrokeInvalid(L);
 		return;
 	}
 
-	ValidKeystroke(L);
+	AddStrokeValid(L);
 	
 	used.push(L);
 	Memo(used);
@@ -1377,7 +1392,7 @@ function BrailleNumber(braille){
 function Dividi(L){
 	if(!In(uniNumerals,L)){
 		ForbidCaret();
-		InvalidKeystroke(L);
+		AddStrokeInvalid(L);
 		return;
 	}
 
@@ -1388,10 +1403,10 @@ function Dividi(L){
 		DeleteLetterAfter(last.length);
 		var q=Quotient(UnRoman(last),2);
 		Letters(Word()+Roman(q));
-		ComboKeystroke(L);
+		AddStrokeUnderline(L);
 	}
 	else
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 
 		
 	InputLetterAfter(L);
@@ -1401,7 +1416,7 @@ function Dividi(L){
 
 function Copypaste(L){
 	InputLetterAfter(L);
-	ValidKeystroke(L);
+	AddStrokeValid(L);
 
 	var word=Letters().join("");
 	
@@ -1427,7 +1442,7 @@ function Baba(L){
 	var rules=Memo();
 
 	InputLetterAfter(L);
-	ValidKeystroke(L);
+	AddStrokeValid(L);
 
 	var word=Letters().join("");
 	var pattern=/\s*([^\s]+)\s+IS\s+([^\s]+)\s*/;
@@ -1454,7 +1469,7 @@ function Baba(L){
 function Weightier(L){
 	
 	InputLetterAfter(L);
-	ValidKeystroke(L);
+	AddStrokeValid(L);
 	Letters(InflateNumbers(Word().toLowerCase()).toUpperCase());
 	Caret(Infinity);
 	return;
@@ -1620,14 +1635,14 @@ function StartingString(L){
 
 	if(possibilities.length===0){
 		ForbidCaret();
-		InvalidKeystroke(L);
+		AddStrokeInvalid(L);
 		insertions=Memo();
 		insertions.animate=false;
 		Memo(insertions);
 		return;
 	}
 
-	ValidKeystroke(L);
+	AddStrokeValid(L);
 
 	Memo(insertions);
 	
@@ -1726,7 +1741,7 @@ function EnDictionary(){
 //Fillet
 
 function Fillet(L){
-	ValidKeystroke(L);
+	AddStrokeValid(L);
 	var p=Memo();
 
 	var max="Fillet".length;
@@ -1814,13 +1829,13 @@ function Symmetries(L){
 	var direction=Memo();
 
 	if(In("SYMMETRIES",L)){
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 		if(direction)
 			InputLetterAfter(L);
 		else
 			InputLetterBefore(L);
 	}else{
-		ComboKeystroke(L)
+		AddStrokeUnderline(L)
 	}
 
 	if(InversionSymmetric(L)){
@@ -1911,7 +1926,7 @@ function Topological(L){
 	
 	if(Letters.array.length===0){
 		InputLetterAfter(L);
-		ValidKeystroke(L);
+		AddStrokeValid(L);
 	}
 	else{
 		var classL=HomeomorphicClass(L);
@@ -1945,10 +1960,10 @@ function Topological(L){
 		}
 		if(!morphed){
 			InputLetterAfter(L);
-			ValidKeystroke(L);
+			AddStrokeValid(L);
 		}
 		else{
-			ComboKeystroke(L);
+			AddStrokeUnderline(L);
 		}
 	}
 	Caret(Infinity);
@@ -2271,7 +2286,7 @@ function TransitionExpansion(){
 }
 
 function DrawKeystrokes(){
-	KeystrokeCombos(CurLevelName());
+	HighlightableWords(CurLevelName());
 	var keystrokes="<p>"+(Keystrokes().map(KeystrokeHTML).join(""))+"</p>";
 	ReplaceChildren(keystrokes,".keystrokes");
 }
@@ -2521,77 +2536,6 @@ function EffectRenderer(level){
 		return;
 }
 
-function Keystrokes(array){
-	if(!Keystrokes.array)
-	Keystrokes.array=[];
-	if(typeof array==="undefined")
-		return Keystrokes.array;
-	
-	if(typeof array==="string")
-		return Keystrokes.array=array.split("");
-	else
-		return Keystrokes.array=Clone(array);
-}
-
-function ValidKeystroke(L){
-	Keystrokes();
-	Keystrokes.array.push(L);
-}
-
-function SeparateKeystroke(){
-	ValidKeystroke("·");
-}
-
-function InvalidKeystroke(L){
-	Keystrokes();
-	Keystrokes.array.push(L+"-");
-}
-
-function ComboKeystroke(L){
-	Keystrokes();
-	Keystrokes.array.push(L+"*");
-}
-
-function ComboWordstroke(word){
-	ComboStroke(word,"*");
-}
-
-function ComboStroke(word,symbol){
-	Keystrokes();
-	var word=word.toUpperCase().split("").reverse().join("~");
-	var strokes=Keystrokes.array.reverse().join("~");
-	//console.log(word,strokes);
-	strokes=strokes.replace(word,word.replace(/\~/g,symbol+"~"+symbol)).split("~");
-	//console.log(strokes);
-	strokes=strokes.map(k=>In(k,symbol)?Posfix(UnPrefix(k,symbol),symbol):k).reverse();
-	//console.log(strokes);
-	Keystrokes(strokes)
-}
-
-
-function LevelKeystrokeCombos(title){
-	var LKC={
-		"Nigeria":Countries.concat(Capitals),
-		"Ironclad":NucleiNames,
-		//"Genetic.":RNACodons,
-		//"Deaf":ChordsAll,
-		"Odd":["Odd","Even"],
-		"Latent clones":NumberNames,
-		"Shepherdess hence unladylike":GenderedMale,
-		"Just cut and paste":["cut","copy","paste"],
-		"Order is all":["is"]
-	}
-	if(LKC[title])
-		return LKC[title]
-	else
-		return [];
-}
-
-function KeystrokeCombos(title){
-	var combos=LevelKeystrokeCombos(title);
-	combos.map(ComboWordstroke);
-}
-
 function ObtainStartingLevelState(){
 	var state={
 		'letters':[],
@@ -2630,4 +2574,152 @@ function LevelState(state){
 	Memo(state.memo);
 	// CaretColour(state.colour);
 
+}
+
+//Keystroke list
+
+function Keystrokes(array){
+	if(!Keystrokes.array)
+	Keystrokes.array=[];
+	if(typeof array==="undefined")
+		return Keystrokes.array;
+	
+	if(typeof array==="string")
+		return Keystrokes.array=array.split("");
+	else
+		return Keystrokes.array=Clone(array);
+}
+
+function AddLetterStroke(L,symbol){
+	Keystrokes();
+	var L=Posfix(CleanStroke(L),symbol);
+	Keystrokes.array.push(L);
+}
+
+function AddWordStroke(word,symbol){
+	Keystrokes();
+	word=CleanStroke(word);
+	if(!IsArray(word))
+		word=word.split("");
+		word.map(L=>AddLetterStroke(L,symbol));
+}
+
+function AddStroke(L,symbol){
+	AddWordStroke(L,symbol);
+}
+
+var separator=ObtainSymbol("interpunkt");
+
+function CleanStroke(L){
+	return L.replace(/\*|\-|\~/g,"");
+}
+function ValidateStroke(L){
+	return CleanStroke(L);
+}
+function InvalidateStroke(L){
+	if(L===separator)
+		return separator;
+	return Posfix(CleanStroke(L),"-");
+}
+function UnderlineStroke(L){
+	if(L===separator)
+		return separator;
+	return Posfix(CleanStroke(L),"*");
+}
+
+function AddStrokeSeparator(){
+	AddStroke(separator);
+}
+function AddStrokeValid(L){
+	AddStroke(L);
+}
+function AddStrokeInvalid(L){
+	AddStroke(L,"-");
+}
+function AddStrokeUnderline(L){
+	AddStroke(L,"*");
+}
+
+function InvalidWordstroke(word){
+	ModifyStroke(word,"");
+}
+function InvalidWordstroke(word){
+	ModifyStroke(word,"-");
+}
+function UnderlineWordstroke(word){
+	ModifyStroke(word,"*");
+}
+
+function LastSeparatorIndex(array){
+	var i=[...array].reverse().indexOf(separator);
+	if(i===-1)
+		return -1;
+	else
+		return array.length-i;
+}
+
+function LastWordstroke(){
+	var keystrokes=Keystrokes();
+	var i=LastSeparatorIndex(keystrokes);
+	if(i===-1)
+		return keystrokes;
+	return keystrokes.slice(i,Infinity);
+}
+
+function MostWordstroke(){
+	var keystrokes=Keystrokes();
+	var i=LastSeparatorIndex(keystrokes);
+	if(i==-1)
+		return [];
+	return keystrokes.slice(0,i-1);
+}
+
+function ModifyStroke(word,symbol){
+	Keystrokes();
+	var word=word.toUpperCase().split("").reverse().join("~");
+	var strokes=Keystrokes.array.reverse().join("~");
+	//console.log(word,strokes);
+	strokes=strokes.replace(word,word.replace(/\~/g,symbol+"~"+symbol)).split("~");
+	//console.log(strokes);
+	strokes=strokes.map(k=>In(k,symbol)?Posfix(UnPrefix(k,symbol),symbol):k).reverse();
+	//console.log(strokes);
+	Keystrokes(strokes)
+}
+
+
+function ModifiedLastStroke(Modifier){
+	var most=MostWordstroke();
+	var last=LastWordstroke().map(Modifier);
+	if(most.length)
+		most.push(separator);
+	return most.concat(last);
+}
+
+function ModifyLastStroke(Modifier){
+	Keystrokes(ModifiedLastStroke(Modifier));
+}
+
+
+
+function LevelHighlightableWords(title){
+	var LKC={
+		"Nigeria":Countries.concat(Capitals),
+		"Ironclad":NucleiNames,
+		//"Genetic.":RNACodons,
+		//"Deaf":ChordsAll,
+		"Odd":["Odd","Even"],
+		"Latent clones":NumberNames,
+		"Shepherdess hence unladylike":GenderedMale,
+		"Just cut and paste":["cut","copy","paste"],
+		"Order is all":["is"]
+	}
+	if(LKC[title])
+		return LKC[title]
+	else
+		return [];
+}
+
+function HighlightableWords(title){
+	var combos=LevelHighlightableWords(title);
+	combos.map(UnderlineWordstroke);
 }
