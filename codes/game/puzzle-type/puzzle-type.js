@@ -2391,9 +2391,9 @@ function LevelLoader(){
 	TitleScreen(false);
 	var goal=FormattedGoal(CurLevelName());
 	var top=`
-		<div class='keystrokes'></div>
-		<div class='goal'>${goal}</div>
 		<div class='notes'>${LevelNotes(CurLevelName())}</div>
+		<div class='goal'>${goal}</div>
+		<div class='keystrokes'></div>
 		`
 	ReplaceChildren(top,".top");
 	ClearLetters();
