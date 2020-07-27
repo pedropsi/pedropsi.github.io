@@ -1141,7 +1141,7 @@ function Genetic(L){
 		Letters(saved);
 		if(In(RNACodonsAminoacids,codon)){
 			InputLetterAfter(RNACodonsAminoacids[codon]);
-			// UnderlineWordstroke(codon);
+			ModifyLastStroke(UnderlineValidStroke);
 			AddStrokeSeparator();
 		}
 	}
