@@ -55,9 +55,9 @@
 .top .keystrokes{
   width: 100%;
   height: calc(var(--h2) + var(--w2) - 1px);
-  background-color: var(--darkblue);
+  background-color: var(--white);
   overflow: hidden;
-  color: var(--white); 
+  color: var(--darkblue); 
 }
 
 .top .keystrokes p{
@@ -296,18 +296,17 @@ p{
 }
 
 .keystroke-valid{
-   font-weight: bold;
+   
 }
 
 .keystroke-invalid{
    text-decoration: line-through;
    text-decoration-thickness: var(--h-2);
-   /*color: var(--lightblue);*/
+   color: var(--lightblue);
 }
 
 .keystroke-combo{
    font-weight: bold;
-   text-shadow: 3px 0px var(--lightblue);
-   /*text-decoration: underline;*/
+   text-decoration: underline;
    /*color: var(--blue);*/
 }
