@@ -10,10 +10,9 @@
     display: flex;
     flex-direction:column;
     align-items: center;
-    justify-content:center;
+    justify-content:space-between;
     z-index: 2;
     overflow: hidden;
-   position:relative;
 }
 
 .top .title {
@@ -28,21 +27,16 @@
 }
 
 .top .goal{
-   padding: calc(var(--w-8) + var(--h-8));
+   width: 100%;
+   padding: 0;
+   margin-top: calc(-1*var(--h8));
+   margin-bottom: calc(-1*var(--h2));
    line-height: calc(var(--h4) + var(--w2) + var(--h1));
-   flex-grow: 1;
    justify-content: center;
    font-size: calc(var(--w4) + var(--h4));
    font-variant-caps:small-caps;
    font-weight: bold;
 }
-
-.top .notes{
-   position: absolute;
-   right: var(--w2);
-   top: var(--h2);
-   font-size: calc(var(--w2) + var(--h2));
- }
 
 .notes{
    display: flex;
@@ -51,23 +45,41 @@
    justify-content: center;
 }
 
+.top .notes{
+   width: 100%;
+   justify-content: flex-end;
+   padding:var(--h2);
+   font-size: calc(var(--w2) + var(--h2));
+ }
+
+.top .keystrokes{
+  width: 100%;
+  height: calc(var(--h2) + var(--w2) - 1px);
+  background-color: var(--darkblue);
+  overflow: hidden;
+  color: var(--white); 
+}
+
+.top .keystrokes p{
+   margin:unset;
+   margin-top:-1px;
+   padding: unset;
+   font-size: calc(var(--w2) + var(--h2) + var(--h-4) + var(--w-4)); 
+   line-height:calc(var(--w2) + var(--h2) + var(--h-8) + var(--w-8));
+   display: flex;
+   flex-direction: row;
+   align-items: baseline;
+   justify-content: flex-end;   
+}
+
+
 .notes .icon svg{
    height: auto
 }
-.top .keystrokes{
-   position: absolute;
-   right: var(--w1);
-   bottom: var(--h1);
-   font-weight: bold;
-   max-width: 20%;
-   max-height: calc(var(--h4) + var(--w4));
-   display: flex;
-   flex-direction: column;
-   justify-content: end;
-   overflow: hidden;
-   }
 
-.keystrokes p{
+
+.
+p{
     word-break: break-all;
    padding: 0;
    margin: 0;
@@ -283,15 +295,19 @@
     }
 }
 
+.keystroke-valid{
+   font-weight: bold;
+}
 
 .keystroke-invalid{
    text-decoration: line-through;
-   text-decoration-thickness: var(--h1);
-   color: var(--lightblue)
+   text-decoration-thickness: var(--h-2);
+   /*color: var(--lightblue);*/
 }
 
 .keystroke-combo{
    font-weight: bold;
-   text-decoration: underline;
+   text-shadow: 3px 0px var(--lightblue);
+   /*text-decoration: underline;*/
    /*color: var(--blue);*/
 }

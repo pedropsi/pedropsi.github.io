@@ -2646,12 +2646,15 @@ function AddStrokeSeparator(){
 	AddStroke(separator);
 }
 function AddStrokeValid(L){
+	var L=L.replace(" ","_");
 	AddStroke(L);
 }
 function AddStrokeInvalid(L){
+	var L=L.replace(" ","_");
 	AddStroke(L,"-");
 }
 function AddStrokeUnderline(L){
+	var L=L.replace(" ","_");
 	AddStroke(L,"*");
 }
 
