@@ -842,7 +842,7 @@ var LevelActions={
 			Letters(LA);
 		}
 		Caret(Infinity);
-		ValidKeystroke(L);	
+		ValidKeystroke(L);
 	},
 	"Shepherdess hence unladylike":function(L){
 		InputLetterAfter(L);
@@ -1029,7 +1029,6 @@ function Nigeria(L){
 		if(freeze){
 			Memo(false);
 			Restart();
-			ValidKeystroke(" ");
 			return;
 		}
 		
@@ -1080,6 +1079,7 @@ function Anagram(L){
 			used.push(anagr);
 			Letters(saved);
 			InputLetterAfter(S);
+			ComboWordstroke(anagr);
 		}
 		else if(anagr.length>4){
 			Letters(saved);
@@ -1125,8 +1125,11 @@ function Genetic(L){
 	}
 	else {
 		Letters(saved);
-		if(In(RNACodonsAminoacids,codon))
+		if(In(RNACodonsAminoacids,codon)){
 			InputLetterAfter(RNACodonsAminoacids[codon]);
+			ComboWordstroke(codon);
+			SeparateKeystroke();
+		}
 	}
 	
 	Caret(Infinity);
@@ -1219,9 +1222,9 @@ function Deaf(L){
 	var tempnotes=TemporaryLetters();
 
 	function AddSharp(){
-		if(Last(tempnotes)!=="#*"){
+		if(Last(tempnotes)!=="#*"&&tempnotes.length>0){
 			InputLetterAfter("#*");
-			ValidKeystroke(L);	
+			ComboKeystroke(L);	
 		}else{
 			ForbidCaret();
 			InvalidKeystroke(L);
@@ -1245,8 +1248,10 @@ function Deaf(L){
 
 	if(NotesLength()===3){
 		Letters(savednotes);
-		if(Prefixed(chord,"#"))
-			return;
+		// if(Prefixed(chord,"#")){
+		// 	SeparateKeystroke();
+		// 	return;
+		// }
 
 		PlayChord(chord);
 		if(In(MajorChords,chord)){
@@ -1255,6 +1260,8 @@ function Deaf(L){
 		else if(In(MinorChords,chord)){
 			InputLetterAfter(MinorChords[chord].toLowerCase());
 		}
+		
+		SeparateKeystroke();
 	}
 
 	Caret(Infinity);
@@ -1379,10 +1386,13 @@ function Dividi(L){
 		DeleteLetterAfter(last.length);
 		var q=Quotient(UnRoman(last),2);
 		Letters(Word()+Roman(q));
+		ComboKeystroke(L);
 	}
+	else
+		ValidKeystroke(L);
+
 		
 	InputLetterAfter(L);
-	ValidKeystroke(L);
 }
 	
 //Copypaste
@@ -1418,7 +1428,6 @@ function Baba(L){
 	ValidKeystroke(L);
 
 	var word=Letters().join("");
-//	var pattern=/(.+)IS(.+)/;
 	var pattern=/\s*([^\s]+)\s+IS\s+([^\s]+)\s*/;
 	if(pattern.test(word)){
 		var subject=word.replace(pattern,"$1");
@@ -1799,14 +1808,17 @@ var FilletWholes=FlipKeysValues(FilletHalves);
 //Symmetric
 
 function Symmetries(L){
-	ValidKeystroke(L);
+	
 	var direction=Memo();
 
 	if(In("SYMMETRIES",L)){
+		ValidKeystroke(L);
 		if(direction)
 			InputLetterAfter(L);
 		else
 			InputLetterBefore(L);
+	}else{
+		ComboKeystroke(L)
 	}
 
 	if(InversionSymmetric(L)){
@@ -1894,9 +1906,10 @@ function InversionSymmetric(O){
 //Topological
 
 function Topological(L){	
-	ValidKeystroke(L);
+	
 	if(Letters.array.length===0){
 		InputLetterAfter(L);
+		ValidKeystroke(L);
 	}
 	else{
 		var classL=HomeomorphicClass(L);
@@ -1928,8 +1941,13 @@ function Topological(L){
 		for(var i=0;i<letters.length;i++){
 			morphed=MorphInferior(i)||morphed;
 		}
-		if(!morphed)
+		if(!morphed){
 			InputLetterAfter(L);
+			ValidKeystroke(L);
+		}
+		else{
+			ComboKeystroke(L);
+		}
 	}
 	Caret(Infinity);
 }
@@ -2251,13 +2269,16 @@ function TransitionExpansion(){
 }
 
 function DrawKeystrokes(){
+	KeystrokeCombos(CurLevelName());
 	var keystrokes="<p>"+(Keystrokes().map(KeystrokeHTML).join(""))+"</p>";
 	ReplaceChildren(keystrokes,".keystrokes");
 }
 
 function KeystrokeHTML(K){
-	if(Posfixed(K,"*"))
-		return `<span class="keystroke-invalid">${UnPosfix(K,"*")}</span>`;
+	if(Posfixed(K,"-"))
+		return `<span class="keystroke-invalid">${UnPosfix(K,"-")}</span>`;
+	else if(Posfixed(K,"*"))
+		return `<span class="keystroke-combo">${UnPosfix(K,"*")}</span>`;
 	else
 		return `<span class="keystroke-valid">${K}</span>`;
 }
@@ -2515,9 +2536,58 @@ function ValidKeystroke(L){
 	Keystrokes.array.push(L);
 }
 
+function SeparateKeystroke(){
+	ValidKeystroke("·");
+}
+
 function InvalidKeystroke(L){
 	Keystrokes();
+	Keystrokes.array.push(L+"-");
+}
+
+function ComboKeystroke(L){
+	Keystrokes();
 	Keystrokes.array.push(L+"*");
+}
+
+function ComboWordstroke(word){
+	ComboStroke(word,"*");
+}
+
+function ComboStroke(word,symbol){
+	Keystrokes();
+	var word=word.toUpperCase().split("").reverse().join("~");
+	var strokes=Keystrokes.array.reverse().join("~");
+	//console.log(word,strokes);
+	strokes=strokes.replace(word,word.replace(/\~/g,symbol+"~"+symbol)).split("~");
+	//console.log(strokes);
+	strokes=strokes.map(k=>In(k,symbol)?Posfix(UnPrefix(k,symbol),symbol):k).reverse();
+	//console.log(strokes);
+	Keystrokes(strokes)
+}
+
+
+function LevelKeystrokeCombos(title){
+	var LKC={
+		"Nigeria":Countries.concat(Capitals),
+		"Ironclad":NucleiNames,
+		//"Genetic.":RNACodons,
+		//"Deaf":ChordsAll,
+		"Odd":["Odd","Even"],
+		"Latent clones":NumberNames,
+		"Shepherdess hence unladylike":GenderedMale,
+		"Just cut and paste":["cut","copy","paste"],
+		"Order is all":["is"]
+	}
+	if(LKC[title])
+		return LKC[title]
+	else
+		return [];
+}
+
+function KeystrokeCombos(title){
+	var combos=LevelKeystrokeCombos(title);
+	combos.map(ComboWordstroke);
 }
 
 function ObtainStartingLevelState(){
