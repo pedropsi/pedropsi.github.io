@@ -1270,6 +1270,7 @@ function Deaf(L){
 		PlayChord(chord);
 		if(In(MajorChords,chord)){
 			InputLetterAfter(MajorChords[chord]);
+			ModifyLastStroke(UnderlineValidStroke);
 		}
 		else if(In(MinorChords,chord)){
 			InputLetterAfter(MinorChords[chord].toLowerCase());
@@ -2713,8 +2714,6 @@ function LevelHighlightableWords(title){
 	var LKC={
 		"Nigeria":Countries.concat(Capitals),
 		"Ironclad":NucleiNames,
-		//"Genetic.":RNACodons,
-		//"Deaf":ChordsAll,
 		"Odd":["Odd","Even"],
 		"Latent clones":NumberNames,
 		"Shepherdess hence unladylike":GenderedMale,
