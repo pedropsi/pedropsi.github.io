@@ -1069,33 +1069,38 @@ function Nigeria(L){
 
 function Anagram(L){
 	var used=Memo();
+	var saved=SavedLetters();
+	var anagr=TemporaryWord().toLowerCase();
 
 	if(!In("ANAGRAM".split(""),L)){
 		ForbidCaret();
 		AddStrokeInvalid(L);
-		Caret(Infinity);
-		return;
 	}
-	else{
-		InputLetterAfter(L+"*");
-		AddStrokeValid(L);
-		var saved=SavedLetters();
-		var anagr=TemporaryWord().toLowerCase();
-
+	else if(anagr.length===3){
+		anagr=anagr+L.toLowerCase();
 		if(In(Anagrams,anagr)&&!In(used,anagr)){
 			var S=Anagrams[anagr].toUpperCase();
 			used.push(anagr);
+			Memo(used);
+
 			Letters(saved);
 			InputLetterAfter(S);
-			UnderlineWordstroke(anagr);
+			
+			AddStrokeValid(L);
+			ModifyLastStroke(UnderlineValidStroke);
 		}
-		else if(anagr.length>4){
+		else{
 			Letters(saved);
+			AddStrokeValid(L);
+			ModifyLastStroke(InvalidateStroke);
 		}
-
-		Memo(used);
-		Caret(Infinity);
+		AddStrokeSeparator();
+	}	
+	else{
+		InputLetterAfter(L+"*");
+		AddStrokeValid(L);
 	}
+	Caret(Infinity);
 }
 
 function Ironclad(L){
@@ -2626,6 +2631,15 @@ function UnderlineStroke(L){
 		return separator;
 	return Posfix(CleanStroke(L),"*");
 }
+function UnderlineValidStroke(L){
+	if(InvalidStroke(L))
+		return L;
+	return UnderlineStroke(L);
+}
+
+function InvalidStroke(L){
+	return Posfixed(L,"-");
+}
 
 function AddStrokeSeparator(){
 	AddStroke(separator);
@@ -2640,12 +2654,6 @@ function AddStrokeUnderline(L){
 	AddStroke(L,"*");
 }
 
-function InvalidWordstroke(word){
-	ModifyStroke(word,"");
-}
-function InvalidWordstroke(word){
-	ModifyStroke(word,"-");
-}
 function UnderlineWordstroke(word){
 	ModifyStroke(word,"*");
 }
