@@ -449,8 +449,8 @@ function ForbidSpaceActions(key){
 
 function ForbidEnterActions(key){
 	return (!In([
-		"La rapide surprise",
-		"Starting buds"
+		"La rapide surprise"
+		//"Starting buds"
 	],CurLevelName())&&In(["Enter"],key));
 }
 
@@ -1611,7 +1611,7 @@ function StartingString(L){
 	if(!memo.choosing)
 		var insertions=LetterInsertions(L,word);
 	else
-		var insertions=CyclePossibilities(L,word,Memo())
+		var insertions=CyclePossibilities(L,word,Memo());
 
 	var possibilities=insertions.possibilities;
 	var p=insertions.p;
@@ -1643,7 +1643,7 @@ var LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").concat(" ");
 function CyclePossibilities(L,word,insertions){
 
 	if(In(LetterCharacters,L)){
-		insertions=LetterInsertions(L,word);
+		var insertions=LetterInsertions(L,word);
 	}
 
 	var possibilities=insertions.possibilities;
@@ -1657,8 +1657,8 @@ function CyclePossibilities(L,word,insertions){
 			p=(p+possibilities.length-1)%possibilities.length;
 		else if(In(["right","down"].map(ObtainSymbol),L))
 			p=(p+possibilities.length+1)%possibilities.length;
-		else if(In(["Enter"],L))
-			choosing=false;
+		// else if(In(["Enter"],L))
+		// 	choosing=false;
 	
 		if(choosing){
 			insertions.animate=true;
@@ -1673,7 +1673,7 @@ function CyclePossibilities(L,word,insertions){
 }
 
 function LetterInsertions(L,word){		
-	if(In(NumberCharacters,L)||L==="Enter"||In(ArrowKeys,L))
+	if(In(NumberCharacters,L)||In(ArrowKeys,L))//||L==="Enter"
 		return;
 
 	var L=L.toLowerCase();
@@ -1711,7 +1711,7 @@ function EnDictionary(){
 			"si",
 			"anti",
 			"sate","sated","sating",
-			"wares"
+			"wares","thane","thana"
 			//"tinging",//ingling	"tining",
 			// "ar",
 			// "irs",
