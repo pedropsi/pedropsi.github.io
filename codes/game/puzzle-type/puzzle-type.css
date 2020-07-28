@@ -55,7 +55,6 @@
 .top .keystrokes{
   width: 100%;
   height: calc(var(--h2) + var(--w2) - 1px);
-  background-color: var(--white);
   overflow: hidden;
   color: var(--darkblue); 
 }
