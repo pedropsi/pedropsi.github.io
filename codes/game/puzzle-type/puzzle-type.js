@@ -609,7 +609,7 @@ function LevelNotes(title){
 	if(In(LanguageLevels,title))
 		extras+=" "+ObtainSymbol("book");
 	if(In(ExternalLevels,title))
-		extras+=" "+ObtainSymbol("search");
+		extras+=" "+ObtainSymbol("magnifying-glass");
 	return LevelDifficultyStars(title)+extras;
 }
 
