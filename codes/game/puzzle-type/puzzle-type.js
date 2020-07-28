@@ -449,7 +449,7 @@ function ForbidSpaceActions(key){
 
 function ForbidEnterActions(key){
 	return (!In([
-		"La rapide surprise"
+		//"La rapide surprise"
 		//"Starting buds"
 	],CurLevelName())&&In(["Enter"],key));
 }
@@ -688,7 +688,9 @@ var LevelGoalAliases={
 	"Copypaste":"Just cut and paste",
 	"Finest vernissage":"La rapide surprise",
 	"Mon petit ami":"La rapide surprise",
-	"Starting anew":"Starting buds"
+	"Starting anew":"Starting buds",
+	"String completing":"Starting buds",
+	"Starting strings":"Starting buds"
 }
 
 function GoalCanonicalName(title){
@@ -857,7 +859,7 @@ var LevelActions={
 		Caret(Infinity);		
 	},
 	"Latent clones":Weightier,
-	"Starting buds":StartingString,
+	"Starting buds":StartingBuds,
 	"La rapide surprise":Translate,
 	"Nigeria":Nigeria,
 	"ひらがな":function(L){
@@ -1486,93 +1488,88 @@ function ArrowDisplay(word){
 }
 
 function Translate(L){
-	var choosing=false;
-	if(Memo()){
-		
-		SkipUndo();//convenience
+	var insertions=Memo();
+	var choosing=insertions.choosing;
+	var word=Word();
 
-		choosing=Memo();
-		var interpretations=choosing.interpretations;
-		var prefix=choosing.prefix;
-		var p=choosing.p;
-		
-		if(In([" ","Enter"],L))//,"X","C"
-			choosing=false;
-		else if(In(NumberCharacters,L))
-			p=(Number(L)-1)%interpretations.length;
-		else if(In(["left","up"].map(ObtainSymbol),L))//In("WAQZERTYUIOP",L)||
-			p=(p+interpretations.length-1)%interpretations.length;
-		else if(In(["right","down"].map(ObtainSymbol),L))//In("SDFGHJKLVBNM",L)||
-			p=(p+interpretations.length+1)%interpretations.length;
-		else	
-			choosing=false;
-
-		if(interpretations.length===1)
-			choosing=false;
-		
-		choosing.p=p;
-		
-		Memo(choosing);
-		var word=prefix+interpretations[p];
-
-		if(choosing&&interpretations.length>1)
-			word=prefix+ArrowDisplay(interpretations[p]);
-
-	}else{
-		if(In(NumberCharacters,L)||L==="Enter"||In(ArrowKeys,L))
-			return;
-		InputLetterAfter(L);
-		var word=Word().toLowerCase();
-
-		var i=0;
-		var found=false;
-		var suffix=word;
-		var prefix="";
-
-		while(!found&&i<word.length){
-			suffix=word.slice(i,Infinity);
-			prefix=word.slice(0,i);
-			var interpretations=Translator(suffix);
-			
-			//Multiple translation convenient ordering:
-			//Suffix first
-			if(In(interpretations,suffix)){
-				interpretations=interpretations.filter(x=>x!==suffix);
-				interpretations=[suffix].concat(interpretations);
-			}
-			//Near goal first
-			var goal="La rapide surprise".toLowerCase();
-			interpretations=interpretations.filter(i=>Prefixed(goal,prefix+i)).concat(interpretations.filter(i=>!Prefixed(goal,prefix+i)))
-			
-			found=(IsArray(interpretations)&&interpretations.length>0);
-			if(found){
-				if(interpretations.length>1)
-					word=prefix+ArrowDisplay(interpretations[0]);
-				else
-					word=prefix+interpretations[0];
-				var p=0;
-				Memo({
-					interpretations:interpretations,
-					prefix:prefix,
-					p:p
-				});
-				choosing=true
-			}
-			else
-				i++;
-		}
+	if(!choosing)
+		insertions=WordTranslations(L,Word());
+	else{
+		if(In(LetterCharacters,L))
+			insertions=WordTranslations(L,Word());
+		insertions=CyclePossibilities(L,insertions);
 	}
+		
+	var possibilities=insertions.possibilities;
+		choosing=possibilities.length>1;
+	var p=insertions.p;
+	var prefix=insertions.prefix;
+	var suffix=insertions.suffix;
 
-	word=word.toUpperCase();
-	Letters(word);
+	
 
-	if(choosing){
-		var i=prefix.length;
-		var arrowextend=(interpretations.length>1?2:0);
-		Caret(Range(i,i+interpretations[p].length-1+arrowextend));
-	} else
-		Caret(Infinity);
+	if(possibilities.length){
+		suffix=possibilities[p];
+		UnderlineStroke(suffix,"*");
+	}	
+	
+	insertions.choosing=choosing;
+	Memo(insertions);
+
+	if(possibilities.length>1)
+		suffix=ArrowDisplay(suffix);
+	
+	word=prefix+suffix;
+	Letters(word.toUpperCase());
+	
+	if(choosing)
+		Caret(Range(prefix.length,word.length-1));
+	else
+		Caret(Infinity)
 }
+
+
+
+function WordTranslations(L,sentence){
+	if(In(NumberCharacters,L)||In(ArrowKeys,L))//||L==="Enter"
+		return;
+
+	var L=L.toLowerCase();
+	var sentence=sentence.toLowerCase()+L;
+
+	var i=0;
+	var found=false;
+	var suffix=sentence;
+	var prefix="";
+
+	while(!found&&i<sentence.length){
+		suffix=sentence.slice(i,Infinity);
+		prefix=sentence.slice(0,i);
+		var possibilities=Translator(suffix);
+		
+		//Place the identical word forward
+		if(In(possibilities,suffix)){
+			possibilities=possibilities.filter(x=>x!==suffix);
+			possibilities=[suffix].concat(possibilities);
+		}
+		// closest to the goal
+		var goal=CurLevelName().toLowerCase();
+		possibilities=possibilities.filter(i=>Prefixed(goal,prefix+i)).concat(possibilities.filter(i=>!Prefixed(goal,prefix+i)))
+		
+		found=(IsArray(possibilities)&&possibilities.length>0);
+		i++;
+	}
+		
+	return {
+			possibilities:possibilities,
+			prefix:prefix,
+			suffix:suffix,
+			p:0,
+			choosing:possibilities.length>1,
+			animate:true
+	}
+}
+
 
 function Translator(en){
 	if(!NamesEnFr||!AdjectivesEnFr||!AdverbsExtrasEnFr)
@@ -1623,16 +1620,22 @@ function CleanDB(NewDB,DB){
 	}
 }
 
-//String Completing
 
-function StartingString(L){
+//
+function StartingBuds(L){
 	var memo=Memo();
 	var word=Word();
 
 	if(!memo.choosing)
 		var insertions=LetterInsertions(L,word);
-	else
-		var insertions=CyclePossibilities(L,word,Memo());
+	else{
+		if(In(LetterCharacters,L))
+			var insertions=LetterInsertions(L,word);
+		else
+			var insertions=Memo()
+
+		var insertions=CyclePossibilities(L,insertions);
+	}
 
 	var possibilities=insertions.possibilities;
 	var p=insertions.p;
@@ -1661,15 +1664,10 @@ function StartingString(L){
 
 var LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").concat(" ");
 
-function CyclePossibilities(L,word,insertions){
-
-	if(In(LetterCharacters,L)){
-		var insertions=LetterInsertions(L,word);
-	}
+function CyclePossibilities(L,insertions){
 
 	var possibilities=insertions.possibilities;
 	var	p=insertions.p;
-	var	choosing=insertions.choosing;
 
 	if(!In(LetterCharacters,L)){
 		if(In(NumberCharacters,L))
@@ -1678,16 +1676,13 @@ function CyclePossibilities(L,word,insertions){
 			p=(p+possibilities.length-1)%possibilities.length;
 		else if(In(["right","down"].map(ObtainSymbol),L))
 			p=(p+possibilities.length+1)%possibilities.length;
-		// else if(In(["Enter"],L))
-		// 	choosing=false;
 	
-		if(choosing){
+		if(insertions.choosing){
 			insertions.animate=true;
 			SkipUndo();
 		}
 
 		insertions.p=p;
-		insertions.choosing=choosing;
 	}
 
 	return insertions;
@@ -2520,7 +2515,13 @@ function StartingMemo(level){
 				..____________
 				W_____________`.replace(/\t*/g,""),
 		'Order is all':[],
-		'La rapide surprise':false,
+		'La rapide surprise':{
+			choosing:false,
+			possibilities:[""],
+			p:0,
+			prefix:"",
+			animate:true
+		},
 		'Starting buds':{
 			choosing:false,
 			possibilities:[""],
