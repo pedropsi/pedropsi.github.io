@@ -1738,6 +1738,8 @@ function EnDictionary(){
 			// "irs",
 			// "ing","ings","si","ting","tings","rin","rins","ping","pings","oping","pring","pling","plings","piling","pilings","til","tint","tints","comping","compting"
 		]);
+		var exclusions=["ins"]
+		EnDictionary.list=EnDictionary.list.filter(w=>!In(exclusions,w))
 	}
 	return EnDictionary.list;
 }
