@@ -103,9 +103,8 @@ var HintsObject={
 	],
 	"Deaf":[
 		"Have you turned on the sound?",
-		"Is it possible to play three identical notes?",
 		"Does the order of the notes matter?",
-		"How would you name a group of three notes?",
+		"How do we name a group of three notes played together?",
 		"Why are some letters small and others large?"
 	],
 	"⠍⠕⠗⠎⠑":[
