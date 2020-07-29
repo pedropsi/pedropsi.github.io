@@ -42,10 +42,14 @@ RenderHUD=function(id,target){
 	ListenOnce("resize",function(){if(GetElement(id))RenderHUD(id,target)});
 	UnRenderHUD(id);
 	PreAddElement(HUDHtml(id),target);
+	ListenOnce("touchstart",UnRenderHUD,id);
 }
 
 UnRenderHUD=function(id){
-	RemoveElement(id);
+	if(id)
+		RemoveElement(id);
+	else
+		RemoveElement(".hud")
 }
 
 DialHTML=function(letters,clas){
