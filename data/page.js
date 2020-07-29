@@ -52,9 +52,6 @@ BuildCMSPage=function(){
 	document.body.innerHTML=v.BODY();
 	//document.body.id=PageIdentifier();
 	var LOGO=v.LOGO_SVG();
-	
-	IndexTitles();
-	AddTitleIndex(".main .whiteboard");//First whiteboard where main content is
 
 	var sources=["codes/communication.js","data/guestbook.js","codes/analytics.js"];
 	LoadSources(sources,PageFeatures);
@@ -80,11 +77,16 @@ PageFeaturesDOM=function(){
 	InlineSVG();
 	//Capture events
 	Listen("mousedown",function(e){FocusElement(e.target)});//Focus clicked items (also to escape focus by clicking in unfocusable parents)
-	Listen("click",function(e){FocusElement(e.target)});
+	//Listen("click",function(e){FocusElement(e.target)});
 	ResumeCapturingKeys(CaptureComboKey);
 	//PurchasedConfirm();
 	Connection();
 	
+	
+	IndexTitles();
+	ListenOnce("IndexTitles",
+		()=>AddTitleIndex(".main .whiteboard")//First whiteboard where main content is
+	)
 	
 	if(PageSearch("debug"))
 		RequestDebugger();
