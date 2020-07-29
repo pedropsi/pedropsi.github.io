@@ -986,10 +986,11 @@ AddRight=function(txt,symbol,n){
 
 //Stripping
 StripHTML=function(string){
-	return FixedPoint(t=>t
-		.replace(/\<img[^\<\>]*\>/ig,"")
-		.replace(/\<(.*)[^\<\>]*\>([^\<\>]*)<\/\1\>/ig,"$2")
-	,string)
+	//.replace(/\<(.*)[^\<\>]*\>([^\<\>]*)<\/\1\>/ig,"$2")
+	var string=string.replace(/\<(img|svg|script|style|meta|link)[^\<\>]*\>/ig,"");
+		string=string.replace(/\<[^\<\>]*\>/ig," ");
+		string=string.replace(/(\n)+/ig,"$1").replace(/( +)/ig,"$1");
+	return string;
 }
 
 //Shortening
@@ -4934,7 +4935,6 @@ DateDate=function(day,month,year){
 }
 
 YearsString=function(start,end){
-	console.log(start,end);
 	if(start<end)
 		return start+"-"+end;
 	else if(end<start)
