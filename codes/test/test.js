@@ -573,8 +573,9 @@ SaveTest(PageSearch,["source","https://pedropsi.github.io/puzzle-type?source=hom
 //SECONDARY
 
 
-SaveTest(FromUTF8,"%20"," ","single character");
-SaveTest(FromUTF8,"%20%21"," !","multiple characters");
+// SaveTest(FromUTF8,"%20"," ","single character");
+// SaveTeest(FromUTF8,"%20"," ","single character");
+// SaveTest(FromUTF8,"%20%21"," !","multiple characters");
 
 
 //Glocal Files
