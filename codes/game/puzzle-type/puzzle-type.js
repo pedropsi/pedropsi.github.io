@@ -177,7 +177,7 @@ function StartGame(){
 
 TouchActionsMiddle=function(){
 	return{
-	"swipe-tap":TitleScreen()?AdvanceUnsolvedScreen:RequestKeyboard,
+	"swipe-tap":(()=>TitleScreen()?AdvanceUnsolvedScreen():RequestKeyboard()),
 	"swipe-left":ObtainUndo,
 	"swipe-right":ObtainRedo
 	}
@@ -344,6 +344,7 @@ function ObtainKeyActionsGame(){
 	keyactions["undo"]=ObtainUndo;			//Onscreen keyboard
 	keyactions["redo"]=ObtainRedo;			//Onscreen keyboard
 	keyactions["restart"]=ObtainRestart;	//Onscreen keyboard
+	keyactions["close"]=RequestKeyboard;	//Onscreen keyboard
 
 	keyactions[ObtainMainKey("undo")]=ObtainUndo;
 	keyactions[ObtainMainKey("redo")]=ObtainRedo;
