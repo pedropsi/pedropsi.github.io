@@ -835,30 +835,38 @@ EscapeTokens=function(tokenString){
 // UnBeforfix	# 		     d
 
 
-UnOncePrefix=function(word,prefix){
-	if(!prefix)
-		return word;
-	var prefixFind=new RegExp("^"+EscapeTokens(prefix));
-	return word.replace(prefixFind,"");
-}
-UnOncePosfix=function(word,suffix){ //suffix
-	if(!suffix)
-		return word;
-	var suffixFind=new RegExp(EscapeTokens(suffix)+"$");
-	return word.replace(suffixFind,"");
-}
+// UnOncePrefix=function(word,prefix){
+// 	if(!prefix)
+// 		return word;
+// 	var prefixFind=new RegExp("^"+EscapeTokens(prefix));
+// 	return word.replace(prefixFind,"");
+// }
+// UnOncePosfix=function(word,suffix){ //suffix
+// 	if(!suffix)
+// 		return word;
+// 	var suffixFind=new RegExp(EscapeTokens(suffix)+"$");
+// 	return word.replace(suffixFind,"");
+// }
 
 UnPrefix=function(word,prefix){
 	if(!prefix)
 		return word;
 	var prefixFind=new RegExp("^"+EscapeTokens(prefix));
-	return StringReplace(word,[prefixFind,""]);
+	return FixedPoint(
+		word=>word.replace(prefixFind,""),
+		word
+	)
+		//StringReplace(word,[prefixFind,""]);
 }
 UnPosfix=function(word,suffix){ //suffix
 	if(!suffix)
 		return word;
 	var suffixFind=new RegExp(EscapeTokens(suffix)+"$");
-	return StringReplace(word,[suffixFind,""]);
+	return FixedPoint(
+		word=>word.replace(suffixFind,""),
+		word
+	)
+		//StringReplace(word,[suffixFind,""]);
 }
 Prefix=function(word,prefix){
 	if(!prefix)
@@ -3968,7 +3976,7 @@ SongTitle=function(song){
 }
 
 FileSong=function(song){
-	return FromUTF8(PageFile(song.src)).replace(/.*\//,"");
+	return decodeURI(PageFile(song.src)).replace(/.*\//,"");
 }
 
 PlayNextF=function(song){
