@@ -95,23 +95,23 @@ function ObtainHintsPath(){
 
 var ObtainRequestHint=ObtainRequestHint?ObtainRequestHint:Identity;
 
-function ObtainHUDPicker(radius,angle){
-	var dialring=CurrentDialRing(radius,angle);
-	var ringSelector="."+dialring[0]+" .ring"+dialring[1];
+// function ObtainHUDPicker(radius,angle){
+// 	var dialring=CurrentDialRing(radius,angle);
+// 	var ringSelector="."+dialring[0]+" .ring"+dialring[1];
 	
-	var e=GetElement(ringSelector);
-	if(!e){
-		ForbidCaret();
-		return;
-	}
+// 	var e=GetElement(ringSelector);
+// 	if(!e){
+// 		ForbidCaret();
+// 		return;
+// 	}
 
-	var letter=e.innerHTML.toUpperCase().replace("_","space");
-	InstructGameKeyF(letter)();
-}
+// 	var letter=e.innerHTML.toUpperCase().replace("_","space");
+// 	InstructGameKeyF(letter)();
+// }
 
-ObtainHUDElement=function(){
-	return GetElement("gameCanvas");
-}
+// ObtainHUDElement=function(){
+// 	return GetElement("gameCanvas");
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
 // Load the game bar & prepare game
@@ -124,7 +124,7 @@ var gameModulesEarly=[
 "data/game-intro.js",
 "codes/game/modules/data-game-hints.js",
 "codes/game/modules/data-game-swipe.js",
-"codes/game/modules/data-game-hud.js"
+// "codes/game/modules/data-game-hud.js"
 ]
 
 var gameModulesLater=[
@@ -171,9 +171,47 @@ function StartGame(){
 	ObtainKeyActionsGameBar();
 	LoadGame();
 	ObtainTitleScreenLoader();
-	LaunchHUD(".middle",".game-supra-Canvas")
+	LaunchTouchActions(".middle",TouchActionsMiddle());
+	LaunchTouchActions(".top",TouchActionsTop());
 };
 
+TouchActionsMiddle=function(){
+	return{
+	"swipe-tap":TitleScreen()?AdvanceUnsolvedScreen:RequestKeyboard,
+	"swipe-left":ObtainUndo,
+	"swipe-right":ObtainRedo
+	}
+}
+
+TouchActionsTop=function(){
+	return{
+	"swipe-tap":RequestLevelSelector,
+	"swipe-left":SelectPreviousLevel,
+	"swipe-right":SelectNextLevel
+	}
+}
+
+LaunchTouchActions=function(touchSel,actions){
+
+	Listen('touchmove',function(e){  
+		e.preventDefault();
+		HandleTouchMover()(e);
+	},touchSel);
+
+	Listen('touchend' ,function(e){
+		e.preventDefault();
+		HandleTouchEnder()(e);
+	},touchSel);
+
+	Listen('touchstart',function(e){
+		e.preventDefault();
+		HandleTouchStart(e);
+	},touchSel);
+
+	Keys(actions).map(
+		key=>Listen(key,actions[key],touchSel)
+	)
+}
 
 
 function GameTrailer(){
@@ -914,7 +952,7 @@ function Wasd(L){
 
 function BumpSound(){
 	if(PlayBump);
-		PlayBump()
+		PlayBump();
 }
 
 function EmulatePushRight(levelline){
