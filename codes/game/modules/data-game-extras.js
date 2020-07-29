@@ -1405,12 +1405,6 @@ function AdvanceEndScreen(){
 	AdvanceLevel();		
 }
 
-
-function AdvanceToLevel(n){
-	CurrentScreen(LevelScreen(n));
-	AdvanceLevel();
-}
-
 function LoadLevelOrCheckpoint(){
 	if ((typeof curlevelTarget!=="undefined")&&(curlevelTarget!==null)){
 		loadLevelFromStateTarget(state,CurrentScreen(),curlevelTarget);
