@@ -1257,6 +1257,14 @@ function SelectLevel(lvl){
 		console.log("Level "+lvl+" locked!");
 }
 
+function SelectPreviousLevel(){
+	SelectLevel(LevelNumber(CurrentScreen()-1));
+}
+
+function SelectNextLevel(){
+	SelectLevel(LevelNumber(CurrentScreen()+1));
+}
+
 function SelectUnlockedLevel(lvl){
 	//Don't return to same level
 	if(lvl===CurLevelNumber()&&!TitleScreen())
@@ -1395,6 +1403,12 @@ function AdvanceEndScreen(){
 		CurrentScreen(FinalLevelScreen()+1);
 	
 	AdvanceLevel();		
+}
+
+
+function AdvanceToLevel(n){
+	CurrentScreen(LevelScreen(n));
+	AdvanceLevel();
 }
 
 function LoadLevelOrCheckpoint(){
