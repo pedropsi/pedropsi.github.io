@@ -2601,7 +2601,6 @@ DataFieldTypes=function(){
 		qfield:"keyboard",
 		questionname:"",
 		qchoices:DefaultKeyboardKeys(),
-		//["Ctrl","Alt","\t\t\t\t\t\t\t\t\t","Shift"]["🠴","␡","⮐"]
 		qtype:KeyboardHTML,
 		defaultChoice:function(i,txt){return txt==="⮐";},//Defaults to enter
 		qsubmittable:false},
