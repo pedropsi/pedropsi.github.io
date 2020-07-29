@@ -324,4 +324,6 @@ p{
 .window.keyboard .keyline .button{
    height: calc(100% - var(--h4));
    border: var(--h-4) solid var(--darkblue);
+   font-size: calc(var(--w4) + var(--h4));
+   color: var(--blue)
 }
