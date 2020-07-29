@@ -90,92 +90,30 @@ function NumberNote(number){
 	return Notes[number];
 }
 
-function NotePlayer(n,o){
-	return function(){
-		var note=IncrementNote(n);
-		var octave=o+(In("A A# B B#",note)?0:0);
-		Piano.play(note,octave,2);
-	}
+function ParseChordList(chordtxt){
+	var ch=chordtxt.replace(/([ABCDEFG])/g,"-$1").split("-");
+	ch=ch.filter(x=>!In(["","#"],x));
+	return ch
 }
 
-function PlayChord(chord,delay,speed){
+function NoteOctave(n,o){
+	return In("AA#BB#",n)?(o-1):o;
+}
+
+function PlayChord(chord){
 	var i=0;
-	var delay=delay||0;
-	var speed=(typeof speed==="undefined"?1:speed);
-
-	if(typeof Piano!=="undefined"){
-		var ch=chord.replace(/([ABCDEFG])/g,"-$1").split("-");
-			ch=ch.filter(x=>!In(["","#"],x));
-		var octave=3;
-		var last="";
-
-		function Iterator(n){
-			return function(){
-				note=ch[n];
-				if(last&&NoteNumber(last)>=NoteNumber(note))
-					octave++;
-				Piano.play(note,octave);
-				last=note;
-			}
-		}
-
-		SequenceSchedule(ch.length,250,Iterator)
-	}
-	else{
-		console.log("no Piano!")
-	}
-
-}
-
-
-function MusicLoop(Next,music){
-	var notes=music.notes;
-	var bpm=music.bpm||120;
-	var phase=music.phase||0;
-	function Iterator(n){
-		return function(){
-			var note=notes[n][0];
-			var octave=notes[n][1];
-			Piano.play(note,octave);
-		}
-	}
-	SequenceSchedule(
-		notes.length,
-		1000/(bpm/60),
-		Iterator,
-		Next,
-		Identity,
-		phase*(bpm/60)
-	)
-}
-
-function MusicLoopPlay(name,music){
-	if(!MusicLoopPlay[name]){
-		MusicLoopPlay[name]=music;
-		Listen("music-loop-"+name,Loop);
-		Shout("music-loop-"+name);
-	}
-	else
-		MusicLoopPlay[name]=music;
-
-	function Next(){
-		if(MusicLoopPlay[name]!==false)
-			Shout("music-loop-"+name)
-	}
-	function Loop(){
-		MusicLoop(Next,MusicLoopPlay[name]);
-	}
 	
+	var notes=ParseChordList(chord).map(n=>n+NoteOctave(n,5));
+	var synth = new Tone.PolySynth(Tone.Synth).toDestination();
+	var now = Tone.now();
+
+	console.log(notes);
+	notes.map((n,i)=>{
+		synth.triggerAttack(n,now+i/2);
+		synth.triggerRelease([n],(now+i/2)+0.2);
+		synth.triggerAttack(n,now+notes.length/2);
+		synth.triggerRelease([n],(now+notes.length/2)+0.4);
+	});
 }
 
-function MusicLoopStop(name){
-	MusicLoopPlay[name]=false;
-}
 
-var Piano;
-var Bump;
-function SynthStart(){
-	Piano=Synth.createInstrument('piano');
-	Bump=Synth.createInstrument('bump');
-}
-ListenOnce("audiosynth",SynthStart);

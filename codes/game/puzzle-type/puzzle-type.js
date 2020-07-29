@@ -139,7 +139,6 @@ var gameModulesLater=[
 "number-reader",
 "number-roman",
 "colours-names",
-"audiosynth",
 
 //"meta",
 
@@ -154,6 +153,7 @@ var gameModulesLater=[
 
 LoadSources(gameModulesEarly,P()?GameIntro:GameTrailer);
 gameModulesLater.map(LoaderInFolder("codes/game/puzzle-type/modules"));
+LoaderInFolder("codes/libraries")("tone.js");
 
 function GameIntro(){
 	RemoveElement("game-supra-Canvas");
@@ -1232,7 +1232,6 @@ function Genetic(L){
 
 
 function Deaf(L){
-	var piano = Synth.createInstrument('piano');
 
 	var savednotes=SavedLetters();
 	var tempnotes=TemporaryLetters();
