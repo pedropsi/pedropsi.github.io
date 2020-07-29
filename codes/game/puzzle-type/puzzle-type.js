@@ -913,7 +913,8 @@ function Wasd(L){
 }
 
 function BumpSound(){
-	Bump.play("C",2,0.2);
+	if(PlayBump);
+		PlayBump()
 }
 
 function EmulatePushRight(levelline){

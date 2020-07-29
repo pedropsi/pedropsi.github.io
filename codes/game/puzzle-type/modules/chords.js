@@ -118,4 +118,9 @@ function PlayChord(chord,alone,delay){
 	});
 }
 
+function PlayBump(){
+	const synth = new Tone.MembraneSynth().toDestination();
+	var note=RandomChoice(["A","B","C","D","E","F","G"])+"1";
+	synth.triggerAttackRelease(note,"8n");
+}
 
