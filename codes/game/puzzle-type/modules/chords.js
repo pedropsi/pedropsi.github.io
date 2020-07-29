@@ -100,19 +100,21 @@ function NoteOctave(n,o){
 	return In("AA#BB#",n)?(o-1):o;
 }
 
-function PlayChord(chord){
+function PlayChord(chord,alone,delay){
 	var i=0;
+	var delay=delay||0;
 	
 	var notes=ParseChordList(chord).map(n=>n+NoteOctave(n,5));
 	var synth = new Tone.PolySynth(Tone.Synth).toDestination();
-	var now = Tone.now();
+	var now = Tone.now()+delay;
 
-	console.log(notes);
 	notes.map((n,i)=>{
 		synth.triggerAttack(n,now+i/2);
 		synth.triggerRelease([n],(now+i/2)+0.2);
-		synth.triggerAttack(n,now+notes.length/2);
-		synth.triggerRelease([n],(now+notes.length/2)+0.4);
+		if(!alone){
+			synth.triggerAttack(n,now+notes.length/2);
+			synth.triggerRelease([n],(now+notes.length/2)+0.4);
+		}
 	});
 }
 
