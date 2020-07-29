@@ -761,7 +761,8 @@ StringReplace=function(string,rules){
 // Unspace
 
 UnWhitespace=function(string){
-	return StringReplace(string,[[/\s/m,""],[/\t/m,""],[/\n/m,""]]);
+	return string.replace(/\s*/gi,"");
+	//StringReplace(string,[[/\s/m,""],[/\t/m,""],[/\n/m,""]]);
 }
 LowerSimpleString=function(string){
 	return SafeString(UnWhitespace(string).toLowerCase());
