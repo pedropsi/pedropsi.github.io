@@ -472,13 +472,13 @@ function AllowExtraRestartKey(key){
 }
 
 function LevelWinSound(){
-	// var leveltitle=CurLevelName();
-	// var customsounds={
-	// 	"Deaf":function(){PlayChord("FACFACEGAC",true,3)}
-	// }
-	// if(In(customsounds,leveltitle))
-	// 	return customsounds[leveltitle];
-	// else
+	var leveltitle=CurLevelName();
+	var customsounds={
+		"Deaf":function(){/*PlayChord("FACFACEGAC",true,3)*/}
+	}
+	if(In(customsounds,leveltitle))
+		return customsounds[leveltitle];
+	else
 		return false;
 }
 
