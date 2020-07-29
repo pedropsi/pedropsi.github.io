@@ -2264,7 +2264,7 @@ FigureHTML=function(source,caption){
 IconHTML=function(path,vbmax,vbmin){
 	var vbmin=vbmin||"0 0";
 	var vbmax=vbmax||"400 400";
-	return SpanHTML("<svg class='iconpath' width='20px' height=''20px' viewBox='"+vbmin+" "+vbmax+"'><path d='"+path+"'/></svg>","icon");
+	return SpanHTML("<svg class='iconpath' width='20px' height='20px' viewBox='"+vbmin+" "+vbmax+"'><path d='"+path+"'/></svg>","icon");
 }
 
 SpanHTML=function(html,clas){
