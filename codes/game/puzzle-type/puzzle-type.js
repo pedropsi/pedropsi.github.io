@@ -1534,14 +1534,19 @@ function Translate(L){
 	var choosing=insertions.choosing;
 	var word=Word();
 
-	if(!choosing)
+	if(!choosing){
 		insertions=WordTranslations(L,Word());
+		if(In(LetterCharacters,L))
+			AddStrokeValid(L)
+	}
 	else{
+		AddStrokeValid(L)
 		if(In(LetterCharacters,L))
 			insertions=WordTranslations(L,Word());
 		insertions=CyclePossibilities(L,insertions);
 	}
-		
+	
+
 	var possibilities=insertions.possibilities;
 		choosing=possibilities.length>1;
 	var p=insertions.p;
@@ -1551,8 +1556,8 @@ function Translate(L){
 	
 
 	if(possibilities.length){
+		UnderlineLastWordstroke(suffix);
 		suffix=possibilities[p];
-		UnderlineStroke(suffix,"*");
 	}	
 	
 	insertions.choosing=choosing;
@@ -2741,6 +2746,14 @@ function ModifyStroke(word,symbol){
 	strokes=strokes.map(k=>In(k,symbol)?Posfix(UnPrefix(k,symbol),symbol):k).reverse();
 	//console.log(strokes);
 	Keystrokes(strokes)
+}
+
+function UnderlineLastWordstroke(word){
+	var strokes=CleanStroke(Keystrokes().join(""));
+	var last=word.toUpperCase();
+	var most=UnOverfix(strokes,last);
+		strokes=[].concat(most.split("")).concat(last.split("").map(UnderlineStroke));
+	Keystrokes(strokes);
 }
 
 
