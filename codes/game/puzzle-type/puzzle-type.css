@@ -323,7 +323,7 @@ p{
    border: var(--h-4) solid var(--darkblue);
    font-size: calc(var(--w4) + var(--h4));
    color: var(--blue);
-   opacity: 0.2;
+   opacity: 0.1;
 }
 
 .window.keyboard .keyline:last-of-type .button{
