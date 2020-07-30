@@ -1,5 +1,5 @@
 var swipeThreshold = 10; //10px
-var swipeTimeout = 1000; //1000ms
+var swipeTimeout = 250; //1000ms
 
 var xStart = null;
 var yStart = null;
@@ -35,22 +35,18 @@ CartesianSwipe=function(target){
 		else
 			swipetype="down";
 	}
-	var target=target||window;
+	
 	Shout("swipe-"+swipetype,target);
+	
 	return swipetype;
 }
 
 
-HandleTouchEnder=function(F){return function(e){
-	if (e.target!==targStart)
-		return;
+HandleTouchEnder=function(target){return function(e){
 
 	var deltaTime=Date.now()-timeStart;
 	if(deltaTime<swipeTimeout)
-		CartesianSwipe(e.target)
-	
-	if(F) 	//need throttling
-		PolarSwipe(F)
+		CartesianSwipe(target)
 
 	// reset values
 	xStart = null;
@@ -67,13 +63,13 @@ HandleTouchStart=function(e){
 	yDiff = 0;
 }
 
-HandleTouchMover=function(F){return function(e){
+HandleTouchMover=function(target){return function(e){
 	if (!xStart||!yStart) 
 		return;
 	
 	var deltaTime=Date.now()-timeStart;
 	if(deltaTime>=swipeTimeout){
-		CartesianSwipe(e.target);
+		CartesianSwipe(target);
 		timeStart=Date.now();
 	}
 	
@@ -82,8 +78,6 @@ HandleTouchMover=function(F){return function(e){
 	xDiff=xEnd-xStart;
 	yDiff=yEnd-yStart;
 
-	if(F) 	//need throttling
-		PolarSwipe(F)
 }}
 
 PolarSwipe=function(F){

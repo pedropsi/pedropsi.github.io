@@ -195,12 +195,12 @@ LaunchTouchActions=function(touchSel,actions){
 
 	Listen('touchmove',function(e){  
 		e.preventDefault();
-		HandleTouchMover()(e);
+		HandleTouchMover(touchSel)(e);
 	},touchSel);
 
 	Listen('touchend' ,function(e){
 		e.preventDefault();
-		HandleTouchEnder()(e);
+		HandleTouchEnder(touchSel)(e);
 	},touchSel);
 
 	Listen('touchstart',function(e){
@@ -344,7 +344,7 @@ function ObtainKeyActionsGame(){
 	keyactions["undo"]=ObtainUndo;			//Onscreen keyboard
 	keyactions["redo"]=ObtainRedo;			//Onscreen keyboard
 	keyactions["restart"]=ObtainRestart;	//Onscreen keyboard
-	keyactions["close"]=RequestKeyboard;	//Onscreen keyboard
+	keyactions["close"]=CloseKeyboard;		//Onscreen keyboard
 
 	keyactions[ObtainMainKey("undo")]=ObtainUndo;
 	keyactions[ObtainMainKey("redo")]=ObtainRedo;

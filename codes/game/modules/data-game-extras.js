@@ -1676,7 +1676,11 @@ function GameKeyboardKeys(){
 	return [["undo","redo","restart"]]; // Undo and Restart
 }
 
-
+function CloseKeyboard(){
+	if(CurrentDatapack().buttonSelector==="KeyboardButton")
+		CloseCurrentDatapack();
+	GameFocus();
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 //Better inter-level messages
