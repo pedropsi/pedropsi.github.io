@@ -67,6 +67,8 @@ PageFeatures=function(){
 		Navigate(document.URL,true);
 
 	Shout("LazyLoader");
+	LazyGuestbookLoad();
+
 }
 
 PageFeaturesDOM=function(){
@@ -95,7 +97,6 @@ PageFeaturesDOM=function(){
 	if(PageIdentifier()==="contact")
 		RequestContact();
 
-	LazyGuestbookLoad();
 }
 
 	
