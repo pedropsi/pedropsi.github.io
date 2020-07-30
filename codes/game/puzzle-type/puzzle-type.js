@@ -1278,8 +1278,10 @@ function Deaf(L){
 
 	function AddSharp(){
 		if(Last(tempnotes)!=="#*"&&tempnotes.length>0){
+			PlayNote(Last(tempnotes).replace("*","#"));
 			InputLetterAfter("#*");
-			AddStrokeValid(L);	
+			AddStrokeValid(L);
+			
 		}else{
 			ForbidCaret();
 			AddStrokeInvalid(L);
@@ -1295,6 +1297,7 @@ function Deaf(L){
 	else if(NotesLength()<3){
 		InputLetterAfter(L+"*");
 		AddStrokeValid(L);
+		PlayNote(L);
 	}
 		
 	var tempnotes=TemporaryLetters();
@@ -1308,7 +1311,7 @@ function Deaf(L){
 		// 	return;
 		// }
 
-		PlayChord(chord);
+		PlayChord(chord,false,0.5);
 		if(In(MajorChords,chord)){
 			InputLetterAfter(MajorChords[chord]);
 			ModifyLastStroke(UnderlineValidStroke);

@@ -105,17 +105,25 @@ function PlayChord(chord,alone,delay){
 	var delay=delay||0;
 	
 	var notes=ParseChordList(chord).map(n=>n+NoteOctave(n,5));
-	var synth = new Tone.PolySynth(Tone.Synth).toDestination();
+	if(!PlayChord.synth)
+		PlayChord.synth = new Tone.PolySynth(Tone.Synth).toDestination();
+	
 	var now = Tone.now()+delay;
 
 	notes.map((n,i)=>{
-		synth.triggerAttack(n,now+i/2);
-		synth.triggerRelease([n],(now+i/2)+0.2);
 		if(!alone){
-			synth.triggerAttack(n,now+notes.length/2);
-			synth.triggerRelease([n],(now+notes.length/2)+0.4);
+			PlayChord.synth.triggerAttack(n,now);
+			PlayChord.synth.triggerRelease([n],now+0.4);
+		}
+		else{
+			PlayChord.synth.triggerAttack(n,now+i/2);
+			PlayChord.synth.triggerRelease([n],(now+i/2)+0.2);
 		}
 	});
+}
+
+function PlayNote(A){
+	PlayChord(A,true)
 }
 
 function PlayBump(){
