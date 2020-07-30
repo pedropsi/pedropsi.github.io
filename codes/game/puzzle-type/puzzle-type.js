@@ -2469,7 +2469,7 @@ function ObtainUpdateLevel(state){
 }
 
 function CheckWin(){
-	var win=WinnerTitle(CurLevelName())===Letters().join("").replace(/\_/g,"");
+	var win=WinnerTitle(CurLevelName())===Word().replace(/\_/g,"");
 	
 	if(win){
 		if(!LevelWinSound())
