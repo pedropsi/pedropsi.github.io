@@ -3387,7 +3387,7 @@ Listen=function(eventName,F,target){
 };
 
 ListenOnce=function(eventName,F,target){
-	if(Shout[eventName]&&!target)//already shouted before, globally
+	if(In(Keys(Shout),eventName)&&!target)//already shouted before, globally
 		F();
 
 	var EFTC={};
