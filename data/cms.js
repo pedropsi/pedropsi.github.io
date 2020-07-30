@@ -119,11 +119,15 @@ PageCardHTML=function(page){
 	var page={...v,...page};
 	var size=180;
 	var path=ImagePath(page.IMAGE_NAME(page),page.IMAGE_EXT(),size);
+	
+	var id=GenerateId();
+	LazyImageLoader(id,path);
+	
 	return`
 	<a href="${page.LINK()}.html" class="card-supra">
 		<div class="card">
 			<h3>${page.TITLE()}</h3>
-				<img class="image" src="${path}" width="${size}" height="${size}" alt="${page.IMAGE_ALT(page)}" title="${page.IMAGE_ALT(page)}" loading="lazy"/>
+				<img id="${id}" class="image" width="${size}" height="${size}" alt="${page.IMAGE_ALT(page)}" title="${page.IMAGE_ALT(page)}" loading="lazy"/>
 		</div>
 	</a>`;
 }
@@ -132,6 +136,9 @@ MiniCardHTML=function(page){
 	var page={...v,...page};
 	var size=180;
 	var path=ImagePath(page.IMAGE_NAME(page),page.IMAGE_EXT(),size);
+	var id=GenerateId();
+	LazyImageLoader(id,path);
+
 	return`
 	<div class="mini">
 		<div>
@@ -141,7 +148,7 @@ MiniCardHTML=function(page){
 			${v.LABELS(page)}
 		</div>
 		<a href="${page.LINK()}.html">
-			<img class="image" src="${path}" width="${size}" height="${size}" alt="${page.IMAGE_ALT(page)}" title="${page.IMAGE_ALT(page)}" loading="lazy"/>
+			<img id=${id} class="image" width="${size}" height="${size}" alt="${page.IMAGE_ALT(page)}" title="${page.IMAGE_ALT(page)}" loading="lazy"/>
 		</a>
 	</div>`;
 }

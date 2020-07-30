@@ -143,14 +143,19 @@ MusicCreditsHTML=function(id){
 	return caption+table+audiotracks;
 }
 
+
 ImageCardHTML=function(ImageObj){
-	return `<a href="images/${ImageObj.FOLDER_BIG}/${ImageObj.TRACK}" ${v.BLANK()} class="card-supra">
+	var id=GenerateId();
+	var src=`images/${ImageObj.FOLDER_SMALL}/${ImageObj.TRACK}`;
+	LazyImageLoader(id,src);
+
+	return `<a href="${src}" ${v.BLANK()} class="card-supra">
 		<div class="card">
-			<img 	src="images/${ImageObj.FOLDER_SMALL}/${ImageObj.TRACK}"}" 
-					alt="${ImageObj.DESCRIPTION}" 
+			<img	alt="${ImageObj.DESCRIPTION}" 
 					title="${ImageObj.DESCRIPTION}"
 					class="image"
-					loading="lazy"/>
+					loading="lazy"
+					id="${id}"	/>
 		</div>
 	</a>`;
 }

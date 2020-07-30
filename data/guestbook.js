@@ -1,6 +1,10 @@
 //////////////////////////////////////////////////
 // Guestbook
 
+LazyGuestbookLoad=function(){
+	LazyLoader("guestbook-area",DisplayGuestbook);
+}
+
 DisplayGuestbook=function(){
 	var url=MacroURL(Inflows("guestbook"));
 	LoadData(url,DeployGuestbook);

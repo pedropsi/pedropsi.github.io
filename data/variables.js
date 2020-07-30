@@ -157,7 +157,11 @@ TYPEGRAPH					:()=>`article`,
 TYPE						:()=>`Post`,
 
 IMAGE_ALT					:()=>v.TITLE(),
-PICTURE						:(v,size)=>`<img class="image" src="${ImagePath(v.LINK(),v.IMAGE_EXT(),size)}" width="${size}" height="${size}" alt="${v.IMAGE_ALT(v)}" title="${v.IMAGE_ALT(v)}" loading="lazy"/>`,
+PICTURE						:function(v,size){
+								var id=GenerateId();
+								var src=ImagePath(v.LINK(),v.IMAGE_EXT(),size);
+								LazyImageLoader(id,src);							
+								return `<img id="${id}" class="image" width="${size}" height="${size}" alt="${v.IMAGE_ALT(v)}" title="${v.IMAGE_ALT(v)}" loading="lazy"/>`},
 PICTURE_RSS					:(v,size)=>`<img src="${v.SITE()}/images/${size}/${v.IMAGE_NAME(v)}.${v.IMAGE_EXT()}" width="${size}" height="${size}" alt="${v.IMAGE_ALT(v)}" title="${v.IMAGE_ALT(v)}"/>`,
 PICTURE_DYNAMIC				:function(){if(window.innerWidth<512||window.innerHeight<512){return v.PICTURE(v,180)}else{return v.PICTURE(v,512)}},
 

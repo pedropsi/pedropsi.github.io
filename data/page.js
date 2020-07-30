@@ -62,10 +62,11 @@ BuildCMSPage=function(){
 }
 
 PageFeatures=function(){
-	DisplayGuestbook();
 	PageFeaturesDOM();
 	if(PageFragment()!=="")
 		Navigate(document.URL,true);
+
+	Shout("LazyLoader");
 }
 
 PageFeaturesDOM=function(){
@@ -94,6 +95,7 @@ PageFeaturesDOM=function(){
 	if(PageIdentifier()==="contact")
 		RequestContact();
 
+	LazyGuestbookLoad();
 }
 
 	

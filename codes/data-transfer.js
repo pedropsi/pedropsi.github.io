@@ -5484,6 +5484,45 @@ ScaleMax=function(max){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+//LazyLoader with Intersection Observer
+
+function LazyLoader(target,Loader){
+	ListenOnce("LazyLoader",function(){LazyLoad(target,Loader)});
+}
+
+function LazyLoad(target,Loader){
+	var target=GetElement(target);
+
+	var opts={
+		root: null,
+		rootMargin: "0px",
+		threshold: [0]
+	};
+
+	Observer=new IntersectionObserver(HandleInview,opts);
+	Observer.observe(target);
+
+	function HandleInview(obj){
+		if(obj[0].isIntersecting===true){
+			Loader();
+			Observer.disconnect();
+		}
+	}
+}
+
+LazyImageLoader=function(id,src){
+	LazyLoader(id,function(){TriggerImageLoad(id,src)});
+}
+
+TriggerImageLoad=function(id,src){
+	var img=GetElement(id);
+	img.setAttribute("src",src);
+}
+
+
+  
+
+///////////////////////////////////////////////////////////////////////////////
 //Introspection - lists all defined functions!
 
 Introspect=function(){ 
