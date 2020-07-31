@@ -117,11 +117,12 @@ var ObtainRequestHint=ObtainRequestHint?ObtainRequestHint:Identity;
 // Load the game bar & prepare game
 
 var gameModulesEarly=[
+"codes/game/game.css",
 "codes/game/modules/data-game-extras.js",
 "codes/game/modules/data-game-moves.js",
 "codes/game/modules/data-game-colours.js",
 "codes/game/modules/data-game-undo.js",
-"data/game-intro.js",
+"codes/game/game-intro.js",
 "codes/game/modules/data-game-hints.js",
 "codes/game/modules/data-game-swipe.js",
 // "codes/game/modules/data-game-hud.js"
@@ -157,7 +158,7 @@ LoaderInFolder("codes/libraries")("tone.js");
 
 function GameIntro(){
 	RemoveElement("game-supra-Canvas");
-	PrependElement(GameFrameHTML(),".main");
+	PreAddElement(GameFrameHTML(),"BODY");
 	GameFocus();
 	LoadStyle("codes/game/puzzle-type/puzzle-type.css");
 	setTimeout(function(){PlayIntro(".game",StartGame)},100);
@@ -219,7 +220,7 @@ function GameTrailer(){
 		<source src="media/puzzle-type/trailorial.mp4" type="video/mp4">
   		Sorry! Your browser does not support the video tag.
 	</video>`;
-	PreAddElement(trailerHTML,".main");
+	PreAddElement(trailerHTML,"BODY");
 }
 //LoadAsync("cacher",".");
 //ServiceWorker();
@@ -243,7 +244,8 @@ function P(){
 	var semitokens=[];
 	var apptokens=fulltokens.map(function(t){return "homescreen-"+t});
 	var manifest=GetElement("manifest");
-	manifest.href=manifest.href.replace("homescreen","homescreen-"+pagetag);
+	if(manifest)
+		manifest.href=manifest.href.replace("homescreen","homescreen-"+pagetag);
 	return In(fulltokens,pagetag)||In(apptokens,PageSearch("source"))||(In(semitokens,pagetag)&&PageSearch("levels"));
 }
 

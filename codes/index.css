@@ -993,7 +993,8 @@ tr:active .editTD{
 
 video{
 	width: 100%;
-	height: auto;
+	height: 100vh;
+	object-fit:cover;
 }
 
 .modal .closer .button{
