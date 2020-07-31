@@ -7,8 +7,8 @@
 
 
 :root{
-    --gameW:calc(100vw - 2*var(--w1) - 17px);
-    --gameH:calc(100vh - 2*var(--h1) - 17px);
+    --gameW:calc(100vw);
+    --gameH:calc(100vh);
 }
 
 .game-supra-container:fullscreen{

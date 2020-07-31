@@ -86,7 +86,7 @@ body{
 	color:var(--darkblue); 
 	caret-color:currentColor;
 	border-color:currentColor;
-	padding:var(--h1) var(--w1) var(--h1) var(--w1);
+	padding:0;
 	margin:0;
 	font-family:Arial, sans-serif;
 	font-size:var(--fontheight);	
