@@ -74,7 +74,7 @@ var ObtainLevelLoader=LevelLoader;
 
 //Resize canvas
 function ResizeCanvas(){return ;}
-function ObtainXYRotateCondition(x,y){return false;}
+function ObtainXYRotateCondition(x,y){return y>x;}
 
 //Onscreen Keyboard
 function ObtainKeyboardKeys(){
