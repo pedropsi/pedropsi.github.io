@@ -2418,8 +2418,7 @@ function ObtainTitleScreenLoader(){
 	if(!TitleScreen())
 		PlaySound("media/puzzle-type/sound/startgame.mp3");
 	TitleScreen(true);
-	ReplaceChildren("<div class='title'></div><div class='credits'></div>",".top");
-	ReplaceChildren(gameTitle,".title");
+	ReplaceChildren(`<div class='title'>${gameTitle}</div><div class='credits'></div>`,".top");
 
 	if(SolvedLevels().length>0)
 		Letters("CONTINUE");
