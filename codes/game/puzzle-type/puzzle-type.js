@@ -1776,7 +1776,8 @@ function EnDictionary(){
 			"si",
 			"anti",
 			"sate","sated","sating",
-			"wares","thane","thana"
+			"wares","thane","thana",
+			"bing","gratin"
 			//"tinging",//ingling	"tining",
 			// "ar",
 			// "irs",
