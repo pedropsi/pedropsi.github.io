@@ -1,4 +1,14 @@
 News={
+N_53:{
+		DATE:"2020-08-01",
+		HEADER:()=>"Keystroke list, letter animation, better sound notes",
+		PIECE:()=>`
+		<p>${AHTML("puzzle-type")} now sports a hangman-style keystroke list with three different types of strokes: normal, invalid and special.</p>
+		<p>Also, the sound feedback for invalid strokes as well as the notes in level DEA*** were improved.</p>
+		<p>Level STA*** was worked on intensively, and letter insertion animated. Hints improved.</p>
+		<p>All hints were completed.</p>
+		<p>Thanks ${v.HEDEHOLM()}, ${v.BLUBBERQUARK()}, ${v.BUILDER17()} for your help!</p>
+	`,ID:"puzzle-type"},
 N_52:{
 		DATE:"2020-07-19",
 		HEADER:()=>"Hint module & extras",
