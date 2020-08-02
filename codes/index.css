@@ -1759,3 +1759,8 @@ p .icon{
 .grid{
 	 display: grid;
 }
+
+.name {
+	font-weight: bold;
+	font-variant: small-caps;
+}
