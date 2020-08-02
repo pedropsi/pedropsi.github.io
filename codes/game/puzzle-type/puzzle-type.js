@@ -1777,13 +1777,16 @@ function EnDictionary(){
 			"anti",
 			"sate","sated","sating",
 			"wares","thane","thana",
-			"bing","gratin"
+			"bing",
+			"gratin","gratins",
+			"git","gits",
+			"rin","rins"
 			//"tinging",//ingling	"tining",
 			// "ar",
 			// "irs",
 			// "ing","ings","si","ting","tings","rin","rins","ping","pings","oping","pring","pling","plings","piling","pilings","til","tint","tints","comping","compting"
 		]);
-		var exclusions=["ins"]
+		var exclusions=["ins","ger"]
 		EnDictionary.list=EnDictionary.list.filter(w=>!In(exclusions,w))
 	}
 	return EnDictionary.list;
