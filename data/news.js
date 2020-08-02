@@ -7,7 +7,7 @@ N_53:{
 		<p>Also, the sound feedback for invalid strokes as well as the notes in level DEA*** were improved.</p>
 		<p>Level STA*** was worked on intensively, and letter insertion animated. Hints improved.</p>
 		<p>All hints were completed.</p>
-		<p>Thanks ${v.HEDEHOLM()}, ${v.BLUBBERQUARK()}, ${v.BUILDER17()} for your help!</p>
+		<p>Thanks ${v.HEDEHOLM()}, ${v.COLLINEYE()}, ${v.BLUBBERQUARK()}, ${v.BUILDER17()} for your help!</p>
 	`,ID:"puzzle-type"},
 N_52:{
 		DATE:"2020-07-19",
