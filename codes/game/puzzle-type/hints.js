@@ -130,10 +130,10 @@ var HintsObject={
 		"Which <em>other</em> words produce the same effect?"
 	],
 	"Starting buds":[
-		"When can you add a new letter?",
-		"Why can you start with some letters but not others?",
-		"After adding a new letter, how do the other letters rearrange themselves?",
-		"Imagine you could add a space in the middle of the word. Could the left and right sides remain valid?"
+		"Which letters can you start with, and why?",
+		"When adding a letter, do all other letters scramble? Look closely.",
+		"Invalid words: slang, dialect, abbreviations, names of people, places, companies, and other entitites. Please do report any mising words though!",
+		"A space must divide one valid word in two valid words.",
 	],
 	"La rapide surprise":[
 		"Which languages are we using?",
