@@ -3,7 +3,7 @@
 */
 
 var SelectedGames=[
-{LINK:`https://jacklance.github.io/MacAndCHI/`,TITLE:`Mac and CHI`,AUTHOR_LINK:`https://twitter.com/Jack_L_Lance`,AUTHOR:`Jack Lance & PHI`,YEAR:2020,TAGS:["Sokoban"]},
+{LINK:`https://jacklance.github.io/MacAndCHI/`,TITLE:`Mac and CHI`,AUTHOR_LINK:`https://twitter.com/Jack_L_Lance`,AUTHOR:`Jack Lance & PHI`,YEAR:2020,TAGS:["Sokoban","Team"]},
 {LINK:`b47581d15bc95200036b30bed28393e7`,TITLE:`Polyomino Puzzle`,AUTHOR_LINK:`https://zithral.itch.io/`,AUTHOR:`Zithral`,YEAR:2020,TAGS:["Puzzle","Polyomino"]},
 {LINK:`https://bregehr.itch.io/cutters-and-concrete`,TITLE:`Cutters and Concrete`,AUTHOR_LINK:`https://bregehr.itch.io/`,AUTHOR:`Blake Regehr`,YEAR:2020,TAGS:["Sokoban","Subtraction"]},
 {LINK:`https://le-slo.itch.io/rainwater-honey-oil`,TITLE:`Metamor[ρ]hosis`,AUTHOR_LINK:`https://le-slo.itch.io/`,AUTHOR:`Lucas Le Slo`,YEAR:2020,TAGS:["Gravity"]},
