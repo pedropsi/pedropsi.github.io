@@ -74,6 +74,7 @@ A_EDGECASE:{PAGE:"https://parachor.itch.io/edgecase",TITLE:"EDGE CASE",AUTHOR:()
 A_BOOGIEWOOGIE:{PAGE:"https://jackkutilek.itch.io/boogie-woogie",TITLE:"Boogie Woogie",AUTHOR:()=>v.KUTILEK(),GROUP:"with-game-bar"},
 A_STRANGEWAREHOUSE:{PAGE:"https://ssstormy.itch.io/strange-warehouse",TITLE:"Strange Warehouse",AUTHOR:()=>v.DABRILA(),GROUP:"with-game-bar"},
 A_FIKITBAN:{PAGE:"https://ssstormy.itch.io/fitkitban",TITLE:"Fitkitban",AUTHOR:()=>v.DABRILA(),GROUP:"with-game-bar"},
+A_FIKITBAN:{PAGE:"https://jacklance.github.io/MacAndCHI/",TITLE:"Mac and CHI",AUTHOR:()=>v.LANCE(),GROUP:"with-game-bar"},
 A_WELCOME:{PAGE:"contact",EXT:".html",TITLE:"welcome"},
 A_LET_ME_KNOW:{PAGE:"contact",EXT:".html",TITLE:()=>`let ${v.NAME()} know`},
 A_CONTACT_ME:{PAGE:"contact",EXT:".html",TITLE:()=>`contact ${v.NAME()}`},
