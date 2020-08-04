@@ -1070,7 +1070,7 @@ video{
 	flex-wrap:wrap;
 	margin-left:var(--w4);
 	margin-right:var(--w4);
-	justify-content:center;
+	justify-content:left;
 	align-items:flex-end;
 }
 

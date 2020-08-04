@@ -334,4 +334,5 @@
 
 .window.keyboard .keyline .button:hover{
   opacity: 1;
+   color: var(--white)
 }
