@@ -132,3 +132,33 @@ function PlayBump(){
 	synth.triggerAttackRelease(note,"8n");
 }
 
+function PlayMorse(morsearray){
+	if(!PlayMorse.synth)
+		PlayMorse.synth = new Tone.PolySynth(Tone.Synth).toDestination();
+	else
+		PlayInterruptMorse();
+	
+	var notes=morsearray;
+	var now = Tone.now();
+
+	var n;
+	PlayMorse.pitch="A4";
+	var pitch=PlayMorse.pitch;
+	for(var i=0;i<notes.length;i++){
+		n=notes[i];
+		PlayMorse.synth.triggerAttack(pitch,now);
+			if(n===".")
+				now+=0.1
+			else
+				now+=0.3
+		PlayMorse.synth.triggerRelease(pitch,now);
+		now+=0.1
+	}
+};
+
+function PlayInterruptMorse(){
+	var now = Tone.now();
+	var pitch = PlayMorse.pitch;
+	if(PlayMorse.synth)
+		PlayMorse.synth.triggerRelease(pitch,now)
+}

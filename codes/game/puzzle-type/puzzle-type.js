@@ -1412,6 +1412,9 @@ function Morse(L){
 
 	var dotdash=MorseCode[L.toLowerCase()].split("");
 
+	// if(PlayMorse)
+	// 	PlayMorse(dotdash);
+	
 	var p,n,l,even, pa;
 	for(var i=0;i<dotdash.length;i++){		
 		p=position+i;							//start horizontal position with caret
