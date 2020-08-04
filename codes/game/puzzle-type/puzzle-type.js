@@ -57,15 +57,15 @@ var ObtainRestart=function(){Restart();PulseSelect("#choice-"+"restart")};			//W
 function ObtainMainKey(action){
 	if(!action)
 		return {
-			"undo":"Alt Z",
-			"redo":"Alt Y",
-			"restart":"Alt R",
-			"feedback":"Alt E",
-			"fullscreen":"Alt F",
-			"hint":"Alt H",
-			"keyboard":"Alt K",
-			"levelselector":"Alt L",
-			"music":"Alt M"
+			"undo":"Ctrl Z",
+			"redo":"Ctrl Y",
+			"restart":"Ctrl R",
+			"feedback":"Ctrl E",
+			"fullscreen":"Ctrl F",
+			"hint":"Ctrl H",
+			"keyboard":"Ctrl K",
+			"levelselector":"Ctrl L",
+			"music":"Ctrl M"
 		}
 	else
 		return ObtainMainKey()[action];
@@ -333,12 +333,12 @@ function ObtainKeyActionsGame(){
 		"Backspace":ObtainUndo,
 		"Delete":ObtainUndo,
 		"Ctrl U":ObtainUndo,
-		"Alt Z":ObtainUndo,
+		"Ctrl Z":ObtainUndo,
 		"Ctrl Z":ObtainUndo,
 		
 		"Shift Backspace":ObtainRedo,
 		"Shift Delete":ObtainRedo,
-		"Alt Y":ObtainUndo,
+		"Ctrl Y":ObtainUndo,
 		"Ctrl Y":ObtainRedo,
 		
 		"Ctrl Backspace":ObtainRestart,
