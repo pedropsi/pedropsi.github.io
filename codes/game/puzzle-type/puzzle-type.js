@@ -13,12 +13,22 @@ function GameFrameHTML(){
 			</div>`;
 }
 
-function GameTitleHTMLArray(){
-return ["<div class='top'>\
-			<h1 class='goal'>"+gameTitle+"</h1>\
-		</div>",
-		"<div class='middle' id='letters'>\
-		</div>"];
+function GameTopHTML(){
+	// var credits=`
+	// 	<h2 class='credit-main'>a cryptic puzzle by Pedro PSI</h2>
+	// 	<h3 class='credit-extras'>with special thanks to Patrick Collin Eye & Kristian Hedeholm</h3>
+	// 	`;
+	var credits="";
+
+return `
+	<div class='top'>
+		<h1 class='goal'>${gameTitle}</h1>
+		${credits}
+	</div>`
+}
+
+function GameMiddleHTML(){
+	return `<div class='middle' id='letters'></div>`;
 }
 
 
@@ -166,14 +176,11 @@ function GameIntro(){
 
 function StartGame(){
 	GameFocus();
-	GameTitleHTMLArray().map(function(html){OpenElement(html,"gameCanvas")});
+	ObtainTitleScreenLoader();
 	PrepareGame();
 	ResumeCapturingKeys(CaptureComboKey);
 	ObtainKeyActionsGameBar();
 	LoadGame();
-	ObtainTitleScreenLoader();
-	LaunchTouchActions(".middle",TouchActionsMiddle());
-	LaunchTouchActions(".top",TouchActionsTop());
 };
 
 TouchActionsMiddle=function(){
@@ -2425,7 +2432,18 @@ function ObtainTitleScreenLoader(){
 	if(!TitleScreen())
 		PlaySound("media/puzzle-type/sound/startgame.mp3");
 	TitleScreen(true);
-	ReplaceChildren(`<div class='title'>${gameTitle}</div><div class='credits'></div>`,".top");
+
+	RemoveChildren("gameCanvas");
+	OpenElement(GameTopHTML(),"gameCanvas");
+	LaunchTouchActions(".top",TouchActionsTop());
+
+	OpenElement(GameMiddleHTML(),"gameCanvas");
+	LaunchTouchActions(".middle",TouchActionsMiddle());
+
+	UnClass(".top","levelscreen");
+	Class(".top","titlescreen");
+	
+	
 
 	if(SolvedLevels().length>0)
 		Letters("CONTINUE");
@@ -2448,6 +2466,9 @@ function LevelLoader(){
 		<div class='keystrokes'></div>
 		`
 	ReplaceChildren(top,".top");
+	Class(".top","levelscreen");
+	UnClass(".top","titlescreen");
+
 	ClearLetters();
 	
 	if(goal==="Deaf")
