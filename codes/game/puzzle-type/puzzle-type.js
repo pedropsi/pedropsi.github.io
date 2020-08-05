@@ -2525,6 +2525,8 @@ function LevelLoader(){
 	Class(".top","levelscreen");
 	UnClass(".top","titlescreen");
 
+	Listen("click",CopyHandler(ExtractKeystrokes),".keystrokes");
+
 	ClearLetters();
 	
 	if(goal==="Deaf")
@@ -2875,4 +2877,28 @@ function LevelHighlightableWords(title){
 function HighlightableWords(title){
 	var combos=LevelHighlightableWords(title);
 	combos.map(UnderlineWordstroke);
+}
+
+function ExtractKeystrokes(el){
+	var parent=FirstMatchingElement("parentElement",el,".keystrokes");
+	var strokes=GetElements("SPAN",parent);
+		strokes=strokes.filter(s=>!Classed(s,"keystroke-invalid"));
+	var text=strokes.map(s=>s.innerText).join("");	
+		text=LevelKeystrokesSimpler(CurLevelName())(text);
+	return text;
+}
+
+
+function LevelKeystrokesSimpler(title){
+	var lr=ObtainSymbol("left")+ObtainSymbol("right");
+	var rl=ObtainSymbol("right")+ObtainSymbol("left");
+
+	var Simplifiers={
+		"Starting buds":text=>FixedPoint(t=>t.replace(lr,"").replace(rl,""),text)
+	}
+
+	if(In(Simplifiers,title))
+		return Simplifiers[title];
+	else
+		return Identity;
 }
