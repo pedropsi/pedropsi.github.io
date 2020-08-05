@@ -83,11 +83,11 @@ function ObtainLevelTitle(l){
 	return FormattedTitle(LevelGoals[l-1]);
 }
 
-function ObtainLevelNumberDisplay(n){
-	var n=UnstarLevel(n);
+function ObtainLevelNumberDisplay(m){
+	var n=UnstarLevel(m);
 	var title=LevelGoals[n-1];
 	if(!title||title.length<3)
-		return n;
+		return m;
 	title=title.toUpperCase();
 	var star=LevelHintStar(n);
 	return title[0]+title[1]+title[2]+star;
