@@ -127,13 +127,15 @@ var HintsObject={
 	],
 	"Shepherdess hence unladylike":[
 		"Which words produce effect?",
-		"Which <em>other</em> words produce the same effect?"
+		"Which <b>other</b> words could produce the same effect?"
 	],
 	"Starting buds":[
-		"Which letters can you start with, and why?",
-		"When adding a letter, do all other letters scramble? Look closely.",
-		"Invalid words: slang, dialect, abbreviations, names of people, places, companies, and other entitites. Please do report any mising words though!",
-		"A space must divide one valid word in two valid words.",
+		"With which letters can you start, and why?",
+		"Add a new letter. What happens to the relative position of the other letters? Look closely. Try longer words too.",
+		"If you are still tempted to search for anagrams, see hint #2.",
+		"The dictionary ignores many words: slang, dialect, abbreviations, names of people, places, companies, etc...",
+		"A space is no different from a new letter: Before it all was valid, after it all must be valid too.",
+		"The last hint was revealing too much. So it was eliminated, letter by letter."
 	],
 	"La rapide surprise":[
 		"Which languages are we using?",
