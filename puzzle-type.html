@@ -15,13 +15,15 @@ ${v.FIGURE_SIMPLE()}
 
 <h3>Controls</h3>
 <h4>Typing</h4>
-<p>Type any of the 26 uppercase letters of the latin alphabet.</p>
-<p>Some levels may forbid certain characters, or allow spaces and/or digits.</p>
-<p>You may type on your own keyboard or by tapping on the <b>on-screen keyboard</b>. To toggle the <b>on-screen keyboard</b>, press <kbd>Alt</kbd>+<kbd>K</kbd> or <kbd>${ObtainSymbol("keyboard")}</kbd>.</p>
+<p>Type any of the 26 letters of the latin alphabet. Some levels may forbid certain characters, or allow spaces, digits and/or arrows.</p>
+
+<h4>On-screen keyboard</h4>
+<p>You may also use the translucent <b>on-screen keyboard</b> to type. To open it, simply tap the middle screen or <kbd>${ObtainSymbol("keyboard")}</kbd>. To close it, tap <kbd>${ObtainSymbol("keyboard")}</kbd> a second time or hit <kbd>${ObtainSymbol("close")}</kbd>.</p>
 
 <h4>Undo & redo</h4>
 <p>To undo an action, press <kbd>backspace</kbd>, <kbd>delete</kbd>, <kbd>Alt</kbd>+<kbd>Z</kbd> or <kbd>${ObtainSymbol("undo")}</kbd>.</p>
 <p>To redo, press <kbd>shift</kbd>+<kbd>backspace</kbd>, <kbd>shift</kbd>+<kbd>delete</kbd> or <kbd>Alt</kbd>+<kbd>Y</kbd> or <kbd>${ObtainSymbol("redo")}</kbd>.</p>
+
 
 <h3>Graphical conventions</h3>
 <h4>Lighter tone characters</h4>
@@ -36,11 +38,18 @@ ${v.FIGURE_SIMPLE()}
 <h4>Pictograms</h4>
 <p>${ObtainSymbol("music")} The musical note symbol will appear in any level where turning on sound will be <em>hintful</em>.</p>
 <p>${ObtainSymbol("magnifying-glass")} The magnifying glass symbol means it is probably a good idea to use a search engine, unless you happen to be an expert on the level topic!</p>
-<p>${ObtainSymbol("eye")} The eye symbol means the level requires visual/spatial thinking.</p>
+<p>${ObtainSymbol("eye")} The eye symbol means the level requires visual/spatial thinking. Sometimes it may be a good idea to draw a diagram or a map.</p>
 <p>${ObtainSymbol("book")} The dictionary symbol means the level requires some knowledge of a particular language (English included). Online dictionaries, translation and word-search tools may be useful.</p>
 
 
-${v.NAVIGATION_TEXT()}
+<h3>Level navigation</h3>
+<p>To skip to the next level, <kbd>swipe right</kbd> on the level clue area. <kbd>swipe left</kbd> to return to the previous level.</p>
+<p>To open the level selector menu, simply <kbd>tap</kbd> on the level clue area. Alternatively, press  ${v.LEVEL_KEY()} or <kbd>Level X/Y</kbd> or <kbd>Level selector</kbd> in the game bar to navigate freely ${v.NAVOPTION()}.</p>
+
+<h4>Picking levels in the selector menu</h4>
+<p>Type the level number directly with ${v.NUM_KEYS()}, press <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> or <kbd>${ObtainSymbol("left")}</kbd>/<kbd>${ObtainSymbol("right")}</kbd> to <em>cycle through levels</em>, <kbd>Enter</kbd> or <kbd>Click</kbd> to <em>confirm</em>, <kbd>Esc</kbd> or ${v.LEVEL_KEY()} to <em>cancel</em>.</p>
+
+${v.HINTS_TEXT()}
 ${v.FULLSCREEN_TEXT()}
 ${v.FEEDBACK_TEXT()}
 
@@ -90,7 +99,7 @@ ${v.CREDITS_ENGINE_VANILLA()}
 
 <h4>Special thanks - extensive videoplaytest series</h4>
 <p>${v.COLLINEYE()}, for a fantastic ongoing sequence of insightful and detailed video playtests which generated many new ideas and enhancements!</p>
-<p>${v.HEDEHOLM()}, for a tremendous ongoing series of video playtests which produced many important changes already! Also for very detailed feedback on the game trailer!</p>
+<p>${v.HEDEHOLM()}, for a tremendous ongoing series of video playtests which produced many important changes! Also for very detailed feedback on the game trailer!</p>
 
 <h4>Many thanks - Alpha, Beta & Gamma</h4>
 <p>${v.MINOTALEN()}, for frequent feedback and ideas plus the first video playtest!</p>

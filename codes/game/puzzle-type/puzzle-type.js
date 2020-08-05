@@ -643,6 +643,7 @@ var VisualLevels=[
 	"Fillet",
 	"Topological",
 	"Wasd",
+	"Nigeria",
 	"Dvorak",
 ]
 
