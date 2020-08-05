@@ -605,6 +605,7 @@ var LevelDifficulty={
 	"Deaf":3,
 	"⠍⠕⠗⠎⠑":3,
 	"Dividi":5,
+	"Magnetism":2,
 	//"Fuchsia":1,
 	"Odd":3,
 	"Latent clones":3,
@@ -707,6 +708,7 @@ var LevelGoals=[			//Required types of thinking:
 	"⠍⠕⠗⠎⠑",			  //Encoding, Once
 	"Dividi",				//Encoding, Arithmethic, Retroactive
 
+	"Magnetism",			//Positional, Retroactive, Science
 
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
@@ -891,6 +893,7 @@ var LevelActions={
 		
 	},*/
 	"Dividi":Dividi,
+	"Magnetism":Magnetism,
 	"Order is all":Baba,
 	"Just cut and paste":Copypaste,
 	"Odd":function(L){
@@ -1455,6 +1458,51 @@ function Braille(n){
 }
 function BrailleNumber(braille){
 	return BrailleSorted.indexOf(braille.toLowerCase());
+}
+
+//Magnetism
+
+function Magnetism(L){
+	if(In("NS",L)){
+		if(In(Word(),L)){
+			AddStrokeInvalid(L);
+			ForbidCaret();
+			return;
+		}
+		InputLetterAfter(L);
+		AddStrokeUnderline(L);
+	}
+	else{
+		InputLetterAfter(L);
+		AddStrokeValid(L);
+	}
+
+	letters=Letters();
+
+	var north=letters.indexOf("N");
+	var south=letters.indexOf("S");
+
+	if(north<0||south<0)
+		return;
+
+	var midpoint=(north+south)/2;
+	if(Abs(south-midpoint)>1){
+		if(north>south){
+			letters[north]=letters[north-1];
+			letters[north-1]="N";
+			letters[south]=letters[south+1];
+			letters[south+1]="S";
+		}
+		else{
+			letters[north]=letters[north+1];
+			letters[north+1]="N";
+			letters[south]=letters[south-1];
+			letters[south-1]="S";
+		}
+	}
+
+		
+	
 }
 
 //Dividi
