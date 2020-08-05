@@ -2885,6 +2885,7 @@ function ExtractKeystrokes(el){
 		strokes=strokes.filter(s=>!Classed(s,"keystroke-invalid")&&SelectedNode(s));
 	var text=strokes.map(s=>s.innerText).join("");	
 		text=LevelKeystrokesSimpler(CurLevelName())(text);
+		text=text.replace(/\n+/gmi,"");
 	return text;
 }
 
