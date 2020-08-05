@@ -105,7 +105,7 @@ var HintsObject={
 		"Have you turned on the sound?",
 		"Does the order of the notes matter?",
 		"How do we name a group of three notes played together?",
-		"Why are some letters small and others large?"
+		"Why are some letters small and others large? Don't forget the black keys."
 	],
 	"⠍⠕⠗⠎⠑":[
 		"Which languages are written here?",
