@@ -367,3 +367,11 @@
   opacity: 1;
    color: var(--white)
 }
+
+/*.window .buttonrow .button{
+   min-width: calc(var(--w2) + var(--h2));
+   max-width: calc(var(--w4) + var(--h4));
+   max-height: calc(var(--w2) + var(--h2));
+   flex-grow: 1;
+   overflow:hidden;
+}*/

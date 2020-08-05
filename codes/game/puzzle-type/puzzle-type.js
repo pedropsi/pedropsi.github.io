@@ -83,6 +83,13 @@ function ObtainLevelTitle(l){
 	return FormattedTitle(LevelGoals[l-1]);
 }
 
+function ObtainLevelNumberDisplay(n){
+	var title=LevelGoals[Number(n)-1].toUpperCase();
+	if(title.length<3)
+		return n;
+	return title[0]+title[1]+title[2];
+}
+
 var ObtainLevelLoader=LevelLoader;
 
 //Resize canvas
