@@ -579,7 +579,7 @@ function FormattedGoal(title){
 var LevelDifficulty={
 	"Direct":1,				
 	"Reverse":1,
-	"Follow":1,
+	"Follow":2,
 	"Consonant":2,
 	"Second":2,
 	"Rotate":3,
@@ -609,7 +609,7 @@ var LevelDifficulty={
 	"Odd":3,
 	"Latent clones":3,
 	"Shepherdess hence unladylike":3,
-	"Starting buds":4,
+	"Starting buds":5,
 	"La rapide surprise":5,
 	"Just cut and paste":3,
 	"Order is all":4
