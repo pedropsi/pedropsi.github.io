@@ -103,7 +103,7 @@ function ObtainKeyboardTarget(){
 var ObtainKeyboardAllowed=true;
 
 function ObtainHintsPath(){
-	return "codes/game/puzzle-type/hints.js"
+	return ModulesPath()+"/hints.js"
 }
 
 var ObtainRequestHint=ObtainRequestHint?ObtainRequestHint:Identity;
@@ -165,15 +165,19 @@ var gameModulesLater=[
 "lang-plurals-superlatives"
 ]
 
+function ModulesPath(){return "codes/game/puzzle-type"};
+function MediaPath(){return "media/puzzle-type"};
+
+
 LoadSources(gameModulesEarly,P()?GameIntro:GameTrailer);
-gameModulesLater.map(LoaderInFolder("codes/game/puzzle-type/modules"));
+gameModulesLater.map(LoaderInFolder(ModulesPath()+"/modules"));
 LoaderInFolder("codes/libraries")("tone.js");
 
 function GameIntro(){
 	RemoveElement("game-supra-Canvas");
 	PreAddElement(GameFrameHTML(),"BODY");
 	GameFocus();
-	LoadStyle("codes/game/puzzle-type/puzzle-type.css");
+	LoadStyle(ModulesPath()+"/inductype.css");
 	setTimeout(function(){PlayIntro(".game",StartGame)},100);
 }
 
@@ -227,7 +231,7 @@ LaunchTouchActions=function(touchSel,actions){
 
 function GameTrailer(){
 	var trailerHTML=`<video width="1280" height="1024" autoplay>
-		<source src="media/puzzle-type/trailorial.mp4" type="video/mp4">
+		<source src="${MediaPath()}/trailorial.mp4" type="video/mp4">
   		Sorry! Your browser does not support the video tag.
 	</video>`;
 	PreAddElement(trailerHTML,"BODY");
@@ -2433,7 +2437,7 @@ function CurLevelName(){return LevelGoals[CurLevelNumber()-1]};//placeholder
 
 function ObtainTitleScreenLoader(){
 	if(!TitleScreen())
-		PlaySound("media/puzzle-type/sound/startgame.mp3");
+		PlaySound(MediaPath()+"/sound/startgame.mp3");
 	TitleScreen(true);
 
 	RemoveChildren("gameCanvas");
@@ -2505,7 +2509,7 @@ function CheckWin(){
 	
 	if(win){
 		if(!LevelWinSound())
-			PlaySound("media/puzzle-type/sound/win"+RandomChoice("123")+".mp3");
+			PlaySound(MediaPath()+"/sound/win"+RandomChoice("123")+".mp3");
 		else
 			PlayWinSound();
 		MarkWonScreen();
@@ -2516,7 +2520,7 @@ function CheckWin(){
 }
 
 function ObtainPlayEndGameSound(){
-	PlaySound("media/puzzle-type/sound/wingame.mp3");
+	PlaySound(MediaPath()+"/sound/wingame.mp3");
 }
 
 // function CaretColour(hex){
