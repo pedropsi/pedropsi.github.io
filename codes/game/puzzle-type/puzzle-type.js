@@ -2882,7 +2882,7 @@ function HighlightableWords(title){
 function ExtractKeystrokes(el){
 	var parent=FirstMatchingElement("parentElement",el,".keystrokes");
 	var strokes=GetElements("SPAN",parent);
-		strokes=strokes.filter(s=>!Classed(s,"keystroke-invalid"));
+		strokes=strokes.filter(s=>!Classed(s,"keystroke-invalid")&&SelectedNode(s));
 	var text=strokes.map(s=>s.innerText).join("");	
 		text=LevelKeystrokesSimpler(CurLevelName())(text);
 	return text;
