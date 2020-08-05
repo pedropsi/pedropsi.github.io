@@ -244,6 +244,9 @@ if(typeof ObtainHints==="undefined")
 if(typeof ObtainRequestHint==="undefined")
 	var ObtainRequestHint=Identity;
 
+if(typeof ObtainLevelNumberDisplay==="undefined")
+	ObtainLevelNumberDisplay=Identity;
+
 ////////////////////////////////////////////////////////////////////////////////
 //Hooks to Pedro PSI main site
 
@@ -1104,6 +1107,7 @@ function RequestLevelSelector(){
 		var DPOpts={
 			questionname:ChosenLevelDescription(),
 			qchoices:UnlockedLevels().map(StarLevelNumber),
+			qchoicesViewF:ObtainLevelNumberDisplay,
 			defaultChoice:function(i,c){return UnstarLevel(c)===CurLevelNumber()}
 		}
 	}
