@@ -5527,16 +5527,20 @@ CopyHandler = function(Extractor){
 		if (!navigator.clipboard)
 			return;
 		var text=Extractor(event.target);
+		if(!text)
+			return;
 		try{
 			await navigator.clipboard.writeText(text);
 			ConsoleAdd(`"${text}" copied to clipboard!`);
 		}
-		catch(err){
-			console.error('Failed to copy!', err)
-		}
+		catch(err){	}
 	};
 }
 
+function SelectedNode(e){
+	var selection=window.getSelection();
+	return selection.containsNode(e,true);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Introspection - lists all defined functions!
