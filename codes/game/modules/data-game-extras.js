@@ -325,9 +325,10 @@ function PrepareGame(){
 	
 	if(!bar){
 		
-		if(typeof onKeyDown!=="undefined")
-			StopCapturingKeys(onKeyDown);
+		// if(typeof onKeyDown!=="undefined")
+		// 	StopCapturingKeys(onKeyDown);
 		ResumeCapturingKeys(CaptureComboKey);
+		KeybindShortcuts();
 		
 		ColoriseGameBar();
 		AddGameBar();
@@ -1498,8 +1499,10 @@ if(typeof CheckRegisterKey==="undefined")
 
 
 //Keybind to game element
-var FullShortcuts=FuseObjects(ObtainKeyActionsGameBar(),ObtainKeyActionsGame());
-OverwriteShortcuts(ParentSelector(gameSelector),FullShortcuts);
+function KeybindShortcuts(){
+	var FullShortcuts=FuseObjects(ObtainKeyActionsGameBar(),ObtainKeyActionsGame());
+	OverwriteShortcuts(ParentSelector(gameSelector),FullShortcuts);
+}
 
 
 function RequestGameFullscreen(){

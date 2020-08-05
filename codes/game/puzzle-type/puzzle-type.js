@@ -195,8 +195,6 @@ function StartGame(){
 	GameFocus();
 	ObtainTitleScreenLoader();
 	PrepareGame();
-	ResumeCapturingKeys(CaptureComboKey);
-	ObtainKeyActionsGameBar();
 	LoadGame();
 };
 
@@ -348,7 +346,8 @@ function ObtainKeyActionsGame(){
 		"Delete":ObtainUndo,
 		"Ctrl U":ObtainUndo,
 		"Ctrl Z":ObtainUndo,
-		"Ctrl Z":ObtainUndo,
+
+		"Ctrl Z":ObtainRedo,
 		
 		"Shift Backspace":ObtainRedo,
 		"Shift Delete":ObtainRedo,
@@ -376,14 +375,13 @@ function ObtainKeyActionsGame(){
 	keyactions[ObtainMainKey("redo")]=ObtainRedo;
 	keyactions[ObtainMainKey("restart")]=ObtainRestart;
 
-	keyactions[ObtainMainKey("hint")]=ObtainRequestHint;
-
 	return keyactions;
 };
 
 function ObtainKeyActionsGameBar(){
 	var KAGB=KeyActionsGameBar();
 	KAGB[ObtainMainKey("keyboard")]=RequestKeyboard;
+	KAGB[ObtainMainKey("hint")]=ObtainRequestHint;
 	return KAGB;
 }
 
