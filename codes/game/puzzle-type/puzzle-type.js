@@ -84,10 +84,13 @@ function ObtainLevelTitle(l){
 }
 
 function ObtainLevelNumberDisplay(n){
-	var title=LevelGoals[Number(n)-1].toUpperCase();
-	if(title.length<3)
+	var n=UnstarLevel(n);
+	var title=LevelGoals[n-1];
+	if(!title||title.length<3)
 		return n;
-	return title[0]+title[1]+title[2];
+	title=title.toUpperCase();
+	var star=LevelHintStar(n);
+	return title[0]+title[1]+title[2]+star;
 }
 
 var ObtainLevelLoader=LevelLoader;
