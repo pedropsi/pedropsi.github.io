@@ -4,7 +4,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-if(PageIdentifier!=="puzzle-type")
+if(PageIdentifier()!=="puzzle-type")
 AddElement("<style>html{overflow-y:hidden};</style>","HEAD")
 
 var gameTitle="Puzzle Type";
@@ -177,7 +177,7 @@ function GameIntro(){
 	RemoveElement("game-supra-Canvas");
 	PreAddElement(GameFrameHTML(),"BODY");
 	GameFocus();
-	LoadStyle(ModulesPath()+"/inductype.css");
+	LoadStyle(ModulesPath()+"/puzzle-type.css");
 	setTimeout(function(){PlayIntro(".game",StartGame)},100);
 }
 
