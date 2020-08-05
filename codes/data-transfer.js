@@ -5519,8 +5519,24 @@ TriggerImageLoad=function(id,src){
 	img.setAttribute("src",src);
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//Clipboard
 
-  
+CopyHandler = function(Extractor){
+	return async function(event){
+		if (!navigator.clipboard)
+			return;
+		var text=Extractor(event.target);
+		try{
+			await navigator.clipboard.writeText(text);
+			ConsoleAdd(`"${text}" copied to clipboard!`);
+		}
+		catch(err){
+			console.error('Failed to copy!', err)
+		}
+	};
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Introspection - lists all defined functions!
