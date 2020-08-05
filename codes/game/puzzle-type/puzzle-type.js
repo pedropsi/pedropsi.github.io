@@ -633,7 +633,7 @@ var ExternalLevels=[
 ]
 
 var SoundLevels=[
-	"Wasd",
+	// "Wasd",
 	"Deaf",
 ]
 
