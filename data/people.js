@@ -104,7 +104,7 @@ ZARFEBLONG:{TYPE:"Developer",NAME:"Andrew Plotkin",ALIAS:"zarfeblong",TWITTER:"z
 UBUNTOR:{TYPE:"Developer",NAME:"Samuel Kim",ALIAS:"ubuntor",GITHUB_COM:"ubuntor"},
 HEDEHOLM:{TYPE:"Developer",NAME:"Kristian Hedeholm",TWITTER:"kristianhede"},
 PORTPONKY:{TYPE:"Developer",NAME:"Portponky",TWITTER:"portponky"},
-BLUBBERQUARK:{TYPE:"Developer",NAME:"Blubberquark"},
+BLUBBERQUARK:{TYPE:"Developer",NAME:"Blubberquark",TWITTER:"blubberquark"},
 DELTA:{NAME:"Katelyn Delta"},
 SKYMOO:{NAME:"Skymoo"},
 VELLEIC:{NAME:"Velleic"},

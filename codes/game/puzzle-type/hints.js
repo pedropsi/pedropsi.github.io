@@ -97,9 +97,9 @@ var HintsObject={
 		"Which of the written letters becomes permanent?"
 	],
 	"Ironclad":[
-		"What is iron, scientifically speaking?",
-		"Which other elements do we need?",
-		"Is there any D-element?"
+		"What is iron, chemically?",
+		"Where do you find all other elements?",
+		"Can you find a D?"
 	],
 	"Deaf":[
 		"Have you turned on the sound?",
@@ -111,6 +111,10 @@ var HintsObject={
 		"Which languages are written here?",
 		"Do dots mean anything in those languages?"
 	], 
+	"Magnetism":[
+		"Which letters behave oddly together?",
+		"What do they represent?"
+	],
 	"Dividi":[
 		"Which letters can you type?",
 		"When do typed letters behave abnormally?",
@@ -118,12 +122,12 @@ var HintsObject={
 	],
 	"Odd":[
 		"What is odd about this level?",
-		"Try typing even!"
+		"Have you <em>even</em> tried?"
 	],
 	"Latent clones":[
 		"Which words produce effect?",
 		"Can you time such effects perfectly?",
-		"How much can you back, before going forward?"
+		"How much can you recede, before advancing?"
 	],
 	"Shepherdess hence unladylike":[
 		"Which words produce effect?",
