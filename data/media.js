@@ -160,6 +160,8 @@ ImageCardHTML=function(ImageObj){
 	</a>`;
 }
 
+
+
 ScreenshotGalleryHTML=function(id){
 	var screenshots=Values(FilterObject(Media,t=>(t.CONTEXT_ID===id&&t.TYPE==="screenshot")));
 	if(screenshots.length<1)
@@ -171,6 +173,22 @@ ScreenshotGalleryHTML=function(id){
 	<div class="featured">${gallery}</div>`
 }
 
+
+
+FolderGalleryHTML=function(folder,names){
+	if(names.length<1)
+		return "";
+
+	var objects=names.map(function(n){
+		return {
+			FOLDER_SMALL:folder,
+			DESCRIPTION:n,
+			TRACK:n}
+			})
+	
+	var gallery=objects.map(ImageCardHTML).join("\n");
+	return `<div class="featured">${gallery}</div>`
+}
 
 DATA["media"]=Media;
 Shout("media");

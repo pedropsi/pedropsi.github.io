@@ -58,7 +58,7 @@ P_tag:{...NoImage,LINK:()=>`tag`,BODY:()=>v.PAGE_SIMPLE(),CONTENT:()=>TagPageHTM
 P_posts:{...NoImage,LINK:()=>`posts`,BODY:()=>v.PAGE_SIMPLE(),CONTENT:()=>PostPageHTML(),STYLE:()=>`archive`,TITLE:()=>`All posts`,FREQ:()=>`monthly`,TYPE:()=>`Archive`,TAGS:()=>[`Sitemap`],DESCRIPTION:()=>`Archive of All posts`,TYPEGRAPH:()=>`website`},
 P_generator:{...NoImage,LINK:()=>`generator`,POSTSCRIPT:()=>["data/news.js"],TITLE:()=>`${v.SITE_NAME()} Generator`,DAY:()=>`26`,MONTH:()=>`03`,YEAR:()=>`2020`,TAGS:()=>[`Creative-Archive`,`Sitemap`],ONE_LINER:()=>`Generate ${v.SITE_NAME()}'s pages such as sitemap, rss and more!`},
 P_analytics:{...NoImage,FEATURED:()=>false,LINK:()=>`analytics`,POSTSCRIPT:()=>["codes/game/modules/data-game-colours.js","data/worldmap.js"],TITLE:()=>`Analytics dashboard`,DAY:()=>`05`,MONTH:()=>`05`,YEAR:()=>`2020`,TYPE:()=>`Backend`,TAGS:()=>[`Creative-Archive`,`Sitemap`],ONE_LINER:()=>`Analytics dashboard of the ${v.SITE_NAME()}`},
-P_star_battle:{...WithImage,LINK:()=>`star-battle`,TITLE:()=>`Star Battle geometric puzzles`,DAY:()=>`18`,MONTH:()=>`06`,YEAR:()=>`2020`,TYPE:()=>`Post`,TAGS:()=>[`Paper`,`Puzzle`],ONE_LINER:()=>`What if you could play the Star Battle on different geometries?`,IMAGE_EXT:()=>`png`}
+P_star_battle:{...WithImage,LINK:()=>`star-battle`,TITLE:()=>`Star Battle geometric puzzles`,DAY:()=>`18`,MONTH:()=>`06`,YEAR:()=>`2020`,TYPE:()=>`Post`,TAGS:()=>[`Paper`,`Puzzle`],ONE_LINER:()=>`What if you could play <b>Star Battle</b> on <em>different geometries</em>? Now you can!`,IMAGE_EXT:()=>`png`}
 }
 
 

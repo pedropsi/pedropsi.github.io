@@ -7,40 +7,34 @@
 ${v.HEADER()}
 ${v.FIGURE_SIMPLE()}
 
+<h2>Star battle geometric gallery</h2>
+<p>Here you'll find star battles in different geometries: triangular lattices, hyperbolic lattices, cube, icosahedron, and polar coordinates.</p>
+<p>The puzzles have different difficulties. Some are easier (one star) and others slightly harder (two star).</p>
+${FolderGalleryHTML("star-battle",[
+	"triangular-star-battle-1-easy.png",
+	"triangular-star-battle-2-medium.png",
+	"cube-star-battle-4-easy.png",
+	"hyperbolic-star-battle-5-easy.png",
+	"hyperbolic-star-battle-6-medium.png",
+	"polar-star-battle-7-easy.png",
+	"icosahedron-star-battle-8-easy.png"
+])}
 
-<h2>Triangular star battle</h2>
-<h3>Easy</h3>
-${FigureHTML("star-battle/triangular-star-battle-1-easy.png")}
-
-<h3>Medium</h3>
-${FigureHTML("star-battle/triangular-star-battle-2-medium.png")}
-
-
-<h2>Star battle cube</h2>
-${FigureHTML("star-battle/cube-star-battle-4-easy.png")}
-
-<h2>Hyperbolic star battle</h2>
-${FigureHTML("star-battle/hyperbolic-star-battle-5-easy.png")}
-${FigureHTML("star-battle/hyperbolic-star-battle-6-medium.png")}
-
-<h2>Polar star battle</h2>
-${FigureHTML("star-battle/polar-star-battle-7-easy.png")}
-
-
-<h2>Credits</h2>
+<h3>Credits</h3>
 <p><a href="${v.LINK_URL()}.html">${v.TITLE_BOLD()}</a> by ${v.NAME_YEAR()}.</p>
 
 <h3>Triangular</h3>
 <p>Thanks to the ${v.THINKY()}, especially ${v.SKYMOO()}, ${v.PORTPONKY()}, ${v.DEUSOVI()}, ${v.LANCE()}, ${v.VELLEIC()}  and ${v.DELTA()}, for important ideas, useful comments, mistake detection and trying out the triangular puzzles.</p>
-
-<h3>Cube</h3>
-<p>Thanks to Icewing for helping perfecting the puzzle.</p>
 
 <h3>Hyperbolic</h3>
 <p>Thanks to ${v.ZENOROGUE()} for making great tools to explore the hyperbolic plane and to ${v.GRANT()} for inpiring discussions.</p>
 
 <h3>Polar</h3>
 <p>Thanks to ${v.PORTPONKY()} and ${v.ZENOROGUE()} for help in clarifying the puzzle rules.</p>
+
+<h3>In space</h3>
+<p>Thanks to Icewing for helping perfecting the cube.</p>
+<p>Thanks to ${v.DELTA()} and ZachMan to help with the lines and fold lines.</p>
 
 
 `};</script><script src="data/page.js"></script>
