@@ -1003,7 +1003,7 @@ StripHTML=function(string){
 }
 
 //Shortening
-Shorten=function(string,maxchars){
+ShortenString=function(string,maxchars){
 	if(!string)
 		return "";
 	else{
@@ -1407,7 +1407,7 @@ IndexItemHTML=function(e){
 		return "";
 	else{
 		var depth=e.getAttribute("data-index-depth")||"";
-		var title=Shorten(e.textContent.replace(ObtainSymbol("scroll-up"),""),50);
+		var title=ShortenString(e.textContent.replace(ObtainSymbol("scroll-up"),""),50);
 		return "<a class='index-link "+depth+"' href='#"+e.id+"'>"+title+"</a>";
 	}
 }

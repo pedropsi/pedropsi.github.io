@@ -592,12 +592,12 @@ SaveTest(TocId,"     How      to    play      ","How-to-play","trailing spaces, 
 SaveTest(TocId,"|!\/!How\"#$%&/()=@£§€{[]}'to+*¨¨´´``~~-playçãôÒÌ","How-to-play","symbol mash");
 
 
-SaveTest(Shorten,["1234567890",20],"1234567890","wide limit");
-SaveTest(Shorten,["1234567890",10],"1234567890","exact width");
-SaveTest(Shorten,["1234567890",8],"12345...","within 3 characters...");
-SaveTest(Shorten,["1234567890",5],"12...","shorten normally");
-SaveTest(Shorten,["1234567890",2],"...","below 3");
-SaveTest(Shorten,["1234567890",0],"...","zero");
+SaveTest(ShortenString,["1234567890",20],"1234567890","wide limit");
+SaveTest(ShortenString,["1234567890",10],"1234567890","exact width");
+SaveTest(ShortenString,["1234567890",8],"12345...","within 3 characters...");
+SaveTest(ShortenString,["1234567890",5],"12...","shorten normally");
+SaveTest(ShortenString,["1234567890",2],"...","below 3");
+SaveTest(ShortenString,["1234567890",0],"...","zero");
 
 ///////////////////////////////////////////////////////////////////////////////
 //Unique random identifier
