@@ -38,9 +38,53 @@ function WinPaneHTML(){
 	return `<div class='winpane'></div>`;
 }
 
-function UpdateWinPane(text){
+var WinTexts={
+	"Direct":"Easy, right?",				
+	"Reverse":".eciN",
+	"Follow":"Not bad!",
+	"Consonant":"C-ngr-t-l-t--ns!",
+	"Second":"Well done, well done!",
+	"Rotate":"GRAET WOKR!",
+	//"Oppose":2,
+	"Rise":"Go on!",
+	"Falls":"Good job!",
+	"Precedent":"Fantastic!",
+	"Superior":"Supreme!",
+	//"Tangles":3,
+	"Difference":"Very impressive!",
+	//"Photocopier":???,
+	"Symmetries":"Spec(tac)ular!",
+	"Fillet":"Amazing!",
+	"Topological":"Excellent!",
+	"Wasd":"Wow!",
+	"Nokia 1998":"Classic!",
+	"Dvorak":"Unbelievable!",
+	"ひらがな":"驚くばかり",
+	"Nigeria":"Extraordinary!",
+	"Anagram":"Awesome!",
+	"Genetic.":"Formidable",
+	"Ironclad":"Wondrous!",
+	"Deaf":"ACE!",
+	"⠍⠕⠗⠎⠑":"⠁⠺⠑⠐⠎",
+	"Dividi":"Ipsum bonum!",
+	"Magnetism":"Astounding!",
+	//"Fuchsia":"Stunning!",
+	"Odd":"Phenomenal!",
+	"Latent clones":"Superb!",
+	"Shepherdess hence unladylike":"Stupendous!",
+	"Starting buds":"Incredible!",
+	"La rapide surprise":"Unbelievable!",
+	"Just cut and paste":"Well well well done.",
+	"Order is all":"Breathtaking!"
+};
+//Beautiful, fabulous
+
+function UpdateWinPane(title){
 	RemoveChildren(".winpane");
-	var text=text.repeat(Round(60/text.length));
+	if(In(WinTexts,title))
+		var text=WinTexts[title];
+	else
+		var text="Well done!";
 	var winElements="12345678901234".split("").map(n=>`<div class="winlegend">${text}</div>`).join("\n")
 	ReplaceChildren(winElements,".winpane");
 	setTimeout(
