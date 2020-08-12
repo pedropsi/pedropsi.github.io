@@ -34,6 +34,20 @@ function GameMiddleHTML(){
 	return `<div class='middle' id='letters'></div>`;
 }
 
+function WinPaneHTML(){
+	return `<div class='winpane'></div>`;
+}
+
+function UpdateWinPane(text){
+	RemoveChildren(".winpane");
+	var text=text.repeat(Round(60/text.length));
+	var winElements="12345678901234".split("").map(n=>`<div class="winlegend">${text}</div>`).join("\n")
+	ReplaceChildren(winElements,".winpane");
+	setTimeout(
+		()=>Classed(".winpane","animated")?UnClass(".winpane","animated"):Class(".winpane","animated"),
+		100
+	);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Game module hooks
@@ -2455,6 +2469,8 @@ function ObtainTitleScreenLoader(){
 	OpenElement(GameMiddleHTML(),"gameCanvas");
 	LaunchTouchActions(".middle",TouchActionsMiddle());
 
+	AddElement(WinPaneHTML(),"gameCanvas")
+
 	UnClass(".top","levelscreen");
 	Class(".top","titlescreen");
 	
@@ -2524,6 +2540,7 @@ function CheckWin(){
 			PlayWinSound();
 		MarkWonScreen();
 		BlockInput(1100);
+		UpdateWinPane(CurLevelName());
 		setTimeout(NextLevel,1000);
 		ClearLevel();
 	}
