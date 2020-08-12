@@ -562,6 +562,14 @@ var LevelDifficulty={
 	"Order is all":4
 };
 
+function LevelTitleNumber(title){
+	return LevelGoals.indexOf(title)+1;
+}
+
+function LevelWon(title){
+	return LevelSolved(LevelTitleNumber(title));
+}
+
 function LevelDifficultyStars(title){
 	return ObtainSymbol("asterisk-heavy").repeat(LevelDifficulty[title]||0);
 }
@@ -613,9 +621,13 @@ function LevelNotes(title){
 		extras+=" "+ObtainSymbol("book");
 	if(In(ExternalLevels,title))
 		extras+=" "+ObtainSymbol("magnifying-glass");
-	return LevelDifficultyStars(title)+extras;
+
+	return 	LevelDifficultyStars(title)+extras;
 }
 
+function LevelNumberNotes(n){
+	return String(n)+" "+(LevelSolved(n)?LevelHintStar(n):"");
+}
 
 var LevelGoals=[			//Required types of thinking:
 	//Positional (caret position), Spacial (position of letters in 2D system), Alphabetical (letters are ordered, and may correspond to numbers), Syllabe (syllabes as unit of input), Word (full words as units of input), Adjacent, Cyclic, Mapping (cyphers), Language, Knowledge, Cultural, Retroactive, Proactive,
@@ -2464,7 +2476,7 @@ function LevelLoader(){
 	TitleScreen(false);
 	var goal=FormattedGoal(CurLevelName());
 	var top=`
-		<div class='notes'>${LevelNotes(CurLevelName())}</div>
+		<div class='notes'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="level-notes">${LevelNotes(CurLevelName())}</p></div>
 		<div class='goal'>${goal}</div>
 		<div class='keystrokes'></div>
 		`

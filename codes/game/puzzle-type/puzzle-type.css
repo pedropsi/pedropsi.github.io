@@ -70,8 +70,8 @@
 }
 
 .top.levelscreen .notes{
-   width: 100%;
-   justify-content: flex-end;
+   width: calc(100% - var(--w2));
+   justify-content: space-between;
    padding:var(--h2);
    font-size: calc(var(--w2) + var(--h2));
  }
