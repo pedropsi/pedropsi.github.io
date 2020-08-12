@@ -76,11 +76,17 @@
    font-size: calc(var(--w2) + var(--h2));
  }
 
+.top.levelscreen .notes p{
+   margin: 0;
+}
+
+
 .top.levelscreen .keystrokes{
   width: 100%;
   height: calc(var(--h2) + var(--w2) - 1px);
   overflow: hidden;
   color: var(--darkblue); 
+   background-color: var(--white);
 }
 
 .top.levelscreen .keystrokes p{
