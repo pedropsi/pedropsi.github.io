@@ -85,7 +85,7 @@ function UpdateWinPane(title){
 		var text=WinTexts[title];
 	else
 		var text="Well done!";
-	var winElements="12345678901234".split("").map(n=>`<div class="winlegend">${text}</div>`).join("\n")
+	var winElements="12345678".split("").map(n=>`<div class="winlegend">${text}</div>`).join("\n")
 	ReplaceChildren(winElements,".winpane");
 	setTimeout(
 		()=>Classed(".winpane","animated")?UnClass(".winpane","animated"):Class(".winpane","animated"),

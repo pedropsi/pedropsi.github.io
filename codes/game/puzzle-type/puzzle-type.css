@@ -12,9 +12,8 @@
 
 .winpane .winlegend{
    width: 100%;
-   line-height:var(--h16);
-   line-height:var(--h16);
-   min-height: var(--h16);
+   line-height:var(--h32);
+   min-height: var(--h32);
    margin-top: calc( -1 * var(--h4));
    overflow: hidden;   
    
