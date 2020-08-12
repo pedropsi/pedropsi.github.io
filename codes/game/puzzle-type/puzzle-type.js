@@ -39,7 +39,7 @@ function WinPaneHTML(){
 }
 
 var WinTexts={
-	"Direct":"Easy, right?",				
+	"Direct":"Nice!",				
 	"Reverse":".eciN",
 	"Follow":"Not bad!",
 	"Consonant":"C-ngr-t-l-t--ns!",
