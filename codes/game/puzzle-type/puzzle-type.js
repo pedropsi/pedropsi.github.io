@@ -49,7 +49,7 @@ var WinTexts={
 	"Rise":"Not bad!",				//improve
 	"Falls":"Good job!",			//improve
 	"Precedent":"Fantastic!",		//improve
-	"Superior":"Supreme!",			//improve
+	"Superior":"Supreme!",			
 	//"Tangles":3,
 	"Difference":"Very impressive!", //improve
 	//"Photocopier":???,
