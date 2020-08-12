@@ -39,45 +39,45 @@ function WinPaneHTML(){
 }
 
 var WinTexts={
-	"Direct":"Nice!",				
+	"Direct":"Easy!",				
 	"Reverse":".eciN",
-	"Follow":"Not bad!",
+	"Follow":"Go on!",
 	"Consonant":"C-ngr-t-l-t--ns!",
 	"Second":"Well done, well done!",
 	"Rotate":"GRAET WOKR!",
 	//"Oppose":2,
-	"Rise":"Go on!",
-	"Falls":"Good job!",
-	"Precedent":"Fantastic!",
-	"Superior":"Supreme!",
+	"Rise":"Not bad!",				//improve
+	"Falls":"Good job!",			//improve
+	"Precedent":"Fantastic!",		//improve
+	"Superior":"Supreme!",			//improve
 	//"Tangles":3,
-	"Difference":"Very impressive!",
+	"Difference":"Very impressive!", //improve
 	//"Photocopier":???,
 	"Symmetries":"Spec(tac)ular!",
-	"Fillet":"Amazing!",
-	"Topological":"Excellent!",
-	"Wasd":"Wow!",
+	"Fillet":"Amazing!",				//improve
+	"Topological":"Excellent!",			//improve
+	"Wasd":"Wow!",						//improve
 	"Nokia 1998":"Classic!",
-	"Dvorak":"Unbelievable!",
+	"Dvorak":"Unbelievable!",			//improve
 	"ひらがな":"驚くばかり",
-	"Nigeria":"Extraordinary!",
-	"Anagram":"Awesome!",
-	"Genetic.":"Formidable",
-	"Ironclad":"Wondrous!",
-	"Deaf":"ACE!",
+	"Nigeria":"World class!",
+	"Anagram":"Awesome!",				//improve
+	"Genetic.":"Phenomenal",			//improve
+	"Ironclad":"S-U-P-Er-B",
+	"Deaf":"Aced!",
 	"⠍⠕⠗⠎⠑":"⠁⠺⠑⠐⠎",
 	"Dividi":"Ipsum bonum!",
-	"Magnetism":"Astounding!",
+	"Magnetism":"Attractive!",
 	//"Fuchsia":"Stunning!",
-	"Odd":"Phenomenal!",
-	"Latent clones":"Superb!",
-	"Shepherdess hence unladylike":"Stupendous!",
-	"Starting buds":"Incredible!",
-	"La rapide surprise":"Unbelievable!",
+	"Odd":"Even better!",
+	"Latent clones":"Four-midable!",
+	"Shepherdess hence unladylike":"Beautiful!",
+	"Starting buds":"Incredible!",					//improve
+	"La rapide surprise":"Très bien!",
 	"Just cut and paste":"Well well well done.",
-	"Order is all":"Breathtaking!"
+	"Order is all":"One step closer!"				//improve
 };
-//Beautiful, fabulous
+//Extraordinary, Stupendous, fabulous, Astounding, captivating,Wondrous, Unbelievable, breathtaking
 
 function UpdateWinPane(title){
 	RemoveChildren(".winpane");
