@@ -274,108 +274,46 @@ function P(){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Keybinding
-function ObtainKeyActionsGame(){
-	var keyactions={
-		//"dot":InstructGameKeyF("dot"),
-		//"dash":InstructGameKeyF("dash"),
-		"0":InstructGameKeyF("0"),
-		"1":InstructGameKeyF("1"),
-		"2":InstructGameKeyF("2"),
-		"3":InstructGameKeyF("3"),
-		"4":InstructGameKeyF("4"),
-		"5":InstructGameKeyF("5"),
-		"6":InstructGameKeyF("6"),
-		"7":InstructGameKeyF("7"),
-		"8":InstructGameKeyF("8"),
-		"9":InstructGameKeyF("9"),
-		"A":InstructGameKeyF("A"),
-		"B":InstructGameKeyF("B"),
-		"C":InstructGameKeyF("C"),
-		"D":InstructGameKeyF("D"),
-		"E":InstructGameKeyF("E"),
-		"F":InstructGameKeyF("F"),
-		"G":InstructGameKeyF("G"),
-		"H":InstructGameKeyF("H"),
-		"I":InstructGameKeyF("I"),
-		"J":InstructGameKeyF("J"),
-		"K":InstructGameKeyF("K"),
-		"L":InstructGameKeyF("L"),
-		"M":InstructGameKeyF("M"),
-		"N":InstructGameKeyF("N"),
-		"O":InstructGameKeyF("O"),
-		"P":InstructGameKeyF("P"),
-		"Q":InstructGameKeyF("Q"),
-		"R":InstructGameKeyF("R"),
-		"S":InstructGameKeyF("S"),
-		"T":InstructGameKeyF("T"),
-		"U":InstructGameKeyF("U"),
-		"V":InstructGameKeyF("V"),
-		"W":InstructGameKeyF("W"),
-		"X":InstructGameKeyF("X"),
-		"Y":InstructGameKeyF("Y"),
-		"Z":InstructGameKeyF("Z"),
-		"Shift A":InstructGameKeyF("A"),
-		"Shift B":InstructGameKeyF("B"),
-		"Shift C":InstructGameKeyF("C"),
-		"Shift D":InstructGameKeyF("D"),
-		"Shift E":InstructGameKeyF("E"),
-		"Shift F":InstructGameKeyF("F"),
-		"Shift G":InstructGameKeyF("G"),
-		"Shift H":InstructGameKeyF("H"),
-		"Shift I":InstructGameKeyF("I"),
-		"Shift J":InstructGameKeyF("J"),
-		"Shift K":InstructGameKeyF("K"),
-		"Shift L":InstructGameKeyF("L"),
-		"Shift M":InstructGameKeyF("M"),
-		"Shift N":InstructGameKeyF("N"),
-		"Shift O":InstructGameKeyF("O"),
-		"Shift P":InstructGameKeyF("P"),
-		"Shift Q":InstructGameKeyF("Q"),
-		"Shift R":InstructGameKeyF("R"),
-		"Shift S":InstructGameKeyF("S"),
-		"Shift T":InstructGameKeyF("T"),
-		"Shift U":InstructGameKeyF("U"),
-		"Shift V":InstructGameKeyF("V"),
-		"Shift W":InstructGameKeyF("W"),
-		"Shift X":InstructGameKeyF("X"),
-		"Shift Y":InstructGameKeyF("Y"),
-		"Shift Z":InstructGameKeyF("Z"),
-		"Escape":InstructGameKeyF("Escape"),
-		
-		"Backspace":ObtainUndo,
-		"Delete":ObtainUndo,
-		"Ctrl U":ObtainUndo,
-		"Ctrl Z":ObtainUndo,
 
-		"Ctrl Z":ObtainRedo,
-		
-		"Shift Backspace":ObtainRedo,
-		"Shift Delete":ObtainRedo,
-		"Ctrl Y":ObtainUndo,
-		"Ctrl Y":ObtainRedo,
-		
-		"Ctrl Backspace":ObtainRestart,
-		"Ctrl Delete":ObtainRestart,
+var NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
+var LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+var AlphanumericCharacters=LetterCharacters.concat(NumberCharacters);
+var LetterSpaceCharacters=LetterCharacters.concat(" ");
+var Directions=["left","up","right","down"];
 
-		"Spacebar":InstructGameKeyF("space"),
-		"Enter":InstructGameKeyF("Enter"),
-		"Left":InstructGameKeyF("left"),
-		"Up":InstructGameKeyF("up"),
-		"Right":InstructGameKeyF("right"),
-		"Down":InstructGameKeyF("down"),
+function KeyActions(){
+	var keyactions={};
+	
+	Keybinder=function(F){
+		return function(c){
+			keyactions[c]=F;
+		}
+	}
 
-	};
+	DirectKeybinder=function(c){
+		keyactions[c]=InstructGameKeyF(c);
+	}
 
-	keyactions["undo"]=ObtainUndo;			//Onscreen keyboard
-	keyactions["redo"]=ObtainRedo;			//Onscreen keyboard
-	keyactions["restart"]=ObtainRestart;	//Onscreen keyboard
-	keyactions["close"]=CloseKeyboard;		//Onscreen keyboard
-
-	keyactions[ObtainMainKey("undo")]=ObtainUndo;
-	keyactions[ObtainMainKey("redo")]=ObtainRedo;
-	keyactions[ObtainMainKey("restart")]=ObtainRestart;
-
+	AlphanumericCharacters.map(DirectKeybinder);
+	LetterCharacters.map(c=>(keyactions["Shift "+c]=InstructGameKeyF(c)));
+	
+	Directions.map(DirectKeybinder);
+	["Escape","Enter"].map(DirectKeybinder);
+	["undo",ObtainMainKey("undo"),"Backspace","Delete","Ctrl U","Ctrl Z"].map(Keybinder(ObtainUndo));
+	["redo",ObtainMainKey("redo"),"Shift Backspace","Shift Delete","Ctrl Y"].map(Keybinder(ObtainRedo));
+	["restart",ObtainMainKey("restart"),"Ctrl Backspace","Ctrl Delete"].map(Keybinder(ObtainRestart));
+	["Spacebar","Space"].map(Keybinder(InstructGameKeyF("space")));
+	
+	keyactions["close"]=CloseKeyboard;
+	
 	return keyactions;
+}
+
+
+function ObtainKeyActionsGame(){
+	if(ObtainKeyActionsGame.keyactions)
+		return ObtainKeyActionsGame.keyactions;
+	return ObtainKeyActionsGame.keyactions=KeyActions();
 };
 
 function ObtainKeyActionsGameBar(){
@@ -525,7 +463,7 @@ function ForbidArrowActions(key){
 	],CurLevelName())&&In(ArrowKeys,key));
 }
 
-var ArrowKeys=["left","up","right","down"].map(ObtainSymbol);
+var ArrowKeys=Directions.map(ObtainSymbol);
 
 function AllowExtraUndoKey(key){
 	return CurLevelName()==="Wasd"&&key==="Z";
@@ -1220,6 +1158,8 @@ function Genetic(L){
 }
 
 
+//var Hexadecimal=["A","B","C","D","E","F"].concat(NumberCharacters);
+
 // function Fuchsia(L){
 // 	var colour=Memo().colour;
 // 	var used=Memo().used;
@@ -1612,12 +1552,12 @@ function Translate(L){
 
 	if(!choosing){
 		insertions=WordTranslations(L,Word());
-		if(In(LetterCharacters,L))
+		if(In(LetterSpaceCharacters,L))
 			AddStrokeValid(L)
 	}
 	else{
 		AddStrokeValid(L)
-		if(In(LetterCharacters,L))
+		if(In(LetterSpaceCharacters,L))
 			insertions=WordTranslations(L,Word());
 		insertions=CyclePossibilities(L,insertions);
 	}
@@ -1752,7 +1692,7 @@ function StartingBuds(L){
 	if(!memo.choosing)
 		var insertions=LetterInsertions(L,word);
 	else{
-		if(In(LetterCharacters,L))
+		if(In(LetterSpaceCharacters,L))
 			var insertions=LetterInsertions(L,word);
 		else
 			var insertions=Memo()
@@ -1785,14 +1725,14 @@ function StartingBuds(L){
 	Caret(Range(0,word.length-1));
 }
 
-var LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").concat(" ");
+
 
 function CyclePossibilities(L,insertions){
 
 	var possibilities=insertions.possibilities;
 	var	p=insertions.p;
 
-	if(!In(LetterCharacters,L)){
+	if(!In(LetterSpaceCharacters,L)){
 		if(In(NumberCharacters,L))
 			p=(Number(L)-1)%possibilities.length;
 		else if(In(["left","up"].map(ObtainSymbol),L))
@@ -2123,8 +2063,7 @@ function NokiaGroupNumber(L){
 }
 
 
-var NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
-var Hexadecimal=["A","B","C","D","E","F"].concat(NumberCharacters);
+
 
 //Dvorak
 
