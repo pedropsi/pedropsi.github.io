@@ -2,7 +2,10 @@
 // Guestbook
 
 LazyGuestbookLoad=function(){
-	LazyLoader("guestbook-area",DisplayGuestbook);
+	if(PageIdentifier()!=="guestbook")
+		LazyLoader("guestbook-area",DisplayGuestbook);
+	else
+		DisplayGuestbook();
 }
 
 DisplayGuestbook=function(){
@@ -11,33 +14,72 @@ DisplayGuestbook=function(){
 }
 
 DeployGuestbook=function(jsonstring){
-	var gb=MakeGuestbook(jsonstring);
+	var gb=GuestbookHTML(jsonstring);
 	var targetID="guestbook-area";
 	ReplaceChildren(gb,targetID);
 };
 
 
-MakeGuestbook=function(jsonstring){
-	var dataarray=JSON.parse(jsonstring);
-	function MakeComment(dataline){
-		if(dataline[0]===""||(dataline[1]!==PageTitle()&&PageTitle()!=="Guestbook")) 
-			return "";
-		var au=SafeString(dataline[2]);
-		var id=SafeString(dataline[4]);
-		var rid=NextReplyMessageId(id,dataarray); //may duplicate in high traffic times
-		
-		var o=CMSObject(SafeString(dataline[1]));
+CommentObject=function(dataline,dataarray){
+	var Obj={};
 
-		var b=ButtonOnClickHTML("Reply to "+au,'RequestMessageReply("'+rid+'","'+UnFunction(o.TITLE)+'")');
-		var datereply="<div class='date'>"+SafeString(dataline[0])+b+"</div>";
-		var c="<p class='quote'>"+SafeString(dataline[3])+"</p>";
-		var a="<span class='author'>"+au+"</span>";
-		var o="<span class='subject'>, on "+CMSAHTML(SafeString(dataline[1]))+"</span>";
-		
-		var html="<div class='comment' data-id='"+id+"' data-depth='"+IdDepth(id)+"'><div>"+c+"<p>"+a+o+"</p></div>"+datereply+"</div>";
-		return 	html;
-	};
-	return "<table><tbody>\n"+dataarray.sort(function(dl1,dl2){return CompareId(SafeString(dl1[4]),SafeString(dl2[4]))}).map(MakeComment).join("\n")+"</tbody></table>";
+	Obj.date=SafeString(dataline[0]);
+	Obj.link=CMSAHTML(SafeString(dataline[1]||"guestbook"));
+	Obj.author=SafeString(dataline[2]);
+	Obj.quote=SafeString(dataline[3]);
+	Obj.id=SafeString(dataline[4]);
+	Obj.replyId=NextReplyMessageId(Obj.id,dataarray);
+	Obj.title=CMSObject(SafeString(dataline[1]))
+	if(Obj.title)
+		Obj.title=UnFunction(Obj.title.TITLE);
+	else
+		Obj.title="Guestbook";
+
+	console.log(Obj);
+	return Obj;
+};
+
+
+CommentHTML=function(Obj){
+
+	var b=ButtonOnClickHTML("Reply to "+Obj.author,'RequestMessageReply("'+Obj.replyId+'","'+Obj.title+'")');
+	
+	if(!Obj.quote)
+		Obj.quote="...";
+
+	return `<div class='comment' data-id='${Obj.id}' data-depth='${IdDepth(Obj.id)}'>
+				<div>
+					<p class='quote'>${Obj.quote}</p>
+					<p>
+						<span class='author'>${Obj.author}</span>, <span class='subject'>on ${Obj.link}</span>
+					</p>
+				</div>
+				<div class='date'>
+					${Obj.date}
+					${b}
+				</div>
+			</div>`;
+}
+
+GuestbookHTML=function(jsonstring){
+	var dataarray=JSON.parse(jsonstring);
+		dataarray=dataarray.sort(CompareDatalineId);
+	
+	var CommHTML=function(dataline){
+		if(!dataline||dataline[0]===""||(dataline[1]!==PageTitle()&&PageTitle()!=="Guestbook"))
+			return "";
+		return CommentHTML(CommentObject(dataline,dataarray))
+	}
+
+	return `<table>
+				<tbody>
+					${dataarray.map(CommHTML).join("\n")}
+				</tbody>
+			</table>`;
+}
+
+CompareDatalineId=function(dl1,dl2){
+	return CompareId(SafeString(dl1[4]),SafeString(dl2[4]))
 }
 
 // Comment tree system
