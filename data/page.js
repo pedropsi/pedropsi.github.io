@@ -1,6 +1,6 @@
 
 //Page Build Sequence
-CMSDependenciesList=["data/variables.js","data/cms.js","data/links.js","data/media.js","data/people.js","data/news.js"];;
+CMSDependenciesList=["data/variables.js","data/cms.js","data/links.js","data/media.js","data/people.js","data/news.js"];
 
 LoadCMS=function(){
 	var cms=CMSDependenciesList;
