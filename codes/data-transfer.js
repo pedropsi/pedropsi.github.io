@@ -1107,6 +1107,19 @@ Datafy=function(obj){
 	return O;
 }
 
+//////////////////////////////////////////////////
+//Promises
+
+AsyncResolver=function(F){
+	return async function(a){
+		F(a);
+		return Promise.resolve('ok');
+	}
+}
+
+MapThen=function(array,F,G){
+	Promise.all(array.map(AsyncResolver(F))).then(G);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // URL MANIPULATION

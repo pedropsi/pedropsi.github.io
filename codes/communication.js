@@ -281,8 +281,7 @@ DynamicTable=function(tableSelector){
 DynamicTables=function(){
 	var tables=GetElements("TABLE");
 	if(tables.length>0){
-		tables.map(DynamicTable);
-		setTimeout(FilterSearchURL,200);
+		MapThen(tables,DynamicTable,FilterSearchURL)
 	}
 }
 
