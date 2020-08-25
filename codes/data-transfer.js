@@ -2342,7 +2342,7 @@ ScrollUpHTML=function(){
 	return ButtonHTML({txt:ObtainSymbol("scroll-up"),attributes:{class:"scrollTop",onclick:"window.scrollTo(0,0)"}});
 }
 
-function ViewCounterHTML(){
+ViewCounterHTML=function(){
 	return DynamicTextHTML("view-counter"," ");
 }
 
