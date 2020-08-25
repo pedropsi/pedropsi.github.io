@@ -83,7 +83,7 @@ var SelectedGames=[
 {LINK:`4e63f6b8876c8bea3448`,TITLE:`Color lift`,AUTHOR_LINK:`https://plus.google.com/u/0/+Connorses`,AUTHOR:`Connor McHarney`,YEAR:2014,TAGS:["Connect","Fishing"]},
 ]
 
-function SelectedGamesRow(GameObj){
+SelectedGamesRow=function(GameObj){
 	var fulllink=GameObj.LINK;
 		fulllink=In(fulllink,"http")?fulllink:"https://pedropsi.github.io/game-console.html?game="+fulllink;
 	
@@ -100,7 +100,7 @@ function SelectedGamesRow(GameObj){
 	return [titleHTML,authorHTML,GameObj.YEAR,tags];
 }
 
-function SelectedGamesHTML(){
+SelectedGamesHTML=function(){
 	return TableHTML(
 		`${v.NAME()}'s selected puzzlescript games`,
 		["Title","Author","Year","Tags"],
@@ -108,4 +108,5 @@ function SelectedGamesHTML(){
 		);
 }
 
-Shout("selected-puzzlescript-games")
+Shout("selected-puzzlescript-games");
+ExportNodeFunctions();
