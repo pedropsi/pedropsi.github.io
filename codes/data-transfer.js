@@ -5486,37 +5486,41 @@ ScaleMax=function(max){
 ///////////////////////////////////////////////////////////////////////////////
 //LazyLoader with Intersection Observer
 
-function LazyLoader(target,Loader){
-	ListenOnce("LazyLoader",function(){LazyLoad(target,Loader)});
-}
 
-function LazyLoad(target,Loader){
-	var target=GetElement(target);
+LazyLoad=function(targe,Loader){
+	var target=GetElement(targe);
+	if(!target)
+		return console.log("Observer error:",targe);
 
 	var opts={
 		root: null,
 		rootMargin: "0px",
 		threshold: [0]
 	};
-
-	Observer=new IntersectionObserver(HandleInview,opts);
-	Observer.observe(target);
-
+	
 	function HandleInview(obj){
 		if(obj[0].isIntersecting===true){
 			Loader();
 			Observer.disconnect();
 		}
 	}
+
+	Observer=new IntersectionObserver(HandleInview,opts);
+	Observer.observe(target);
+
 }
 
-LazyImageLoader=function(id,src){
-	LazyLoader(id,function(){TriggerImageLoad(id,src)});
+LazyLoader=function(target,Loader){
+	ListenOnce("LazyLoader",function(){LazyLoad(target,Loader)});
 }
 
 TriggerImageLoad=function(id,src){
 	var img=GetElement(id);
 	img.setAttribute("src",src);
+}
+
+LazyImageLoader=function(id,src){
+	LazyLoader(id,function(){TriggerImageLoad(id,src)});
 }
 
 ///////////////////////////////////////////////////////////////////////////////
