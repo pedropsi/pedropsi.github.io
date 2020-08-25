@@ -66,8 +66,8 @@ PageFeatures=function(){
 	if(PageFragment()!=="")
 		Navigate(document.URL,true);
 
-	LazyGuestbookLoad();
 	Shout("LazyLoader");
+	LazyGuestbookLoad();
 
 }
 
