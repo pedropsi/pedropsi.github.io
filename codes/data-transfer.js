@@ -43,12 +43,6 @@ Identity=function(i){return i;};
 True=function(){return true};
 False=function(){return false};
 
-Functionalise=function(data){
-	if (typeof data==="function")
-		return data;
-	else
-		return function(){return data;};
-}
 UnFunction=function(data){
 	if (typeof data==="function")
 		return data();
