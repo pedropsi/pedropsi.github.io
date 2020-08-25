@@ -1784,7 +1784,7 @@ ParentSelector=function(targetIDsel){
 		return Prefix(UniqueId(parentElement),"#");
 }
 
-MakeQuerySelector=function(selector){
+QuerySelector=function(selector){
 	if(IsQuerySelector(selector))
 		return selector;
 	else
@@ -1797,7 +1797,7 @@ GetElementFromTextSelector=function(selector,parentElement){
 		return document.body;
 	if(parentElement===null)
 		return null;
-	selector=MakeQuerySelector(selector);
+	selector=QuerySelector(selector);
 
 	if(!parentElement||!parentElement.querySelector)
 		var parentElement=document.body;
@@ -1829,7 +1829,7 @@ GetElement=function(selector,pSelector){
 
 //Match Element to selector
 QueryAll=function(selector){
-	return Array.from(document.querySelectorAll(MakeQuerySelector(selector)));
+	return Array.from(document.querySelectorAll(QuerySelector(selector)));
 }
 
 Match=function(elem,selector){
@@ -3029,6 +3029,8 @@ Toggle=function(selectorE,clas){
 	return e;
 }
 
+var ToggleClass=Toggle;
+
 // Select Pulse
 
 PulseSelect=function(selectorE,clas,delay){
@@ -3878,7 +3880,7 @@ LaunchConsoleThanks=function(DP){
 ///////////////////////////////////////////////////////////////////////////////
 //Sounds Control
 
-MakeSound=function(sourcepath,data,id){
+SoundHTML=function(sourcepath,data,id){
 	return ElementHTML({
 		tag:"audio",
 		txt:" ",
@@ -3887,7 +3889,7 @@ MakeSound=function(sourcepath,data,id){
 }
 
 LoadSound=function(soundpath,data,id,parentElement){
-	return AddElement(MakeSound(soundpath,data,id),parentElement);
+	return AddElement(SoundHTML(soundpath,data,id),parentElement);
 }
 
 LS=function(soundobject,id,parentElement){
