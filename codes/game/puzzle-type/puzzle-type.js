@@ -87,10 +87,8 @@ function UpdateWinPane(title){
 		var text="Well done!";
 	var winElements="12345678".split("").map(n=>`<div class="winlegend">${text}</div>`).join("\n")
 	ReplaceChildren(winElements,".winpane");
-	setTimeout(
-		()=>Classed(".winpane","animated")?UnClass(".winpane","animated"):Class(".winpane","animated"),
-		100
-	);
+
+	setTimeout(()=>ToggleClass(".winpane","animated"),500);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
