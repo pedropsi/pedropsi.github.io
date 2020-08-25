@@ -1,5 +1,6 @@
 ﻿User-agent: *
 Allow: /data
+Allow: /images
 Allow: /codes/index.css
 Allow: /codes/data-transfer.js
 Disallow: /codes
