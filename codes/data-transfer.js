@@ -5486,8 +5486,11 @@ ScaleMax=function(max){
 ///////////////////////////////////////////////////////////////////////////////
 //LazyLoader with Intersection Observer
 
+function LazyLoader(target,Loader){
+	ListenOnce("LazyLoader",function(){LazyLoad(target,Loader)});
+}
 
-LazyLoad=function(targe,Loader){
+function LazyLoad(targe,Loader){
 	var target=GetElement(targe);
 	if(!target)
 		return console.log("Observer error:",targe);
@@ -5505,22 +5508,18 @@ LazyLoad=function(targe,Loader){
 		}
 	}
 
-	Observer=new IntersectionObserver(HandleInview,opts);
+	var Observer=new IntersectionObserver(HandleInview,opts);
 	Observer.observe(target);
 
 }
 
-LazyLoader=function(target,Loader){
-	ListenOnce("LazyLoader",function(){LazyLoad(target,Loader)});
+LazyImageLoader=function(id,src){
+	LazyLoader(id,function(){TriggerImageLoad(id,src)});
 }
 
 TriggerImageLoad=function(id,src){
 	var img=GetElement(id);
 	img.setAttribute("src",src);
-}
-
-LazyImageLoader=function(id,src){
-	LazyLoader(id,function(){TriggerImageLoad(id,src)});
 }
 
 ///////////////////////////////////////////////////////////////////////////////
