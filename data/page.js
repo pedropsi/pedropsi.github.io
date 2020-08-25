@@ -1,18 +1,18 @@
-
 //Page Build Sequence
 CMSDependenciesList=["data/variables.js","data/cms.js","data/links.js","data/media.js","data/people.js","data/news.js"];
 
 LoadCMS=function(){
 	var cms=CMSDependenciesList;
-	LoadSources(CMSDependenciesList,LoadPrescript)
+	LoadSources(cms,LoadPrescript)
 }
 
 LoadNodeCMS=function(){
-	var cms=CMSDependenciesList;	//path specification, depending on node loader file location
+	var cms=CMSDependenciesList;
 	LoadSources(cms,ConsolidateVariables);
 }
 
-DATA={};
+if(typeof DATA==="undefined")
+	DATA={};
 
 ConsolidateVariables=function(){
 	DATA["links"]=NormaliseVariables(DATA["links"],LinkTemplate);
@@ -30,7 +30,6 @@ ConsolidateVariables=function(){
 		...DATA["links"],
 		...v
 	};
-	
 	Shout("ConsolidateVariables");
 	
 }
@@ -50,7 +49,7 @@ LoadPrescript=function(){
 BuildCMSPage=function(){
 	document.head.innerHTML=v.HEAD();
 	document.body.innerHTML=v.BODY();
-	//document.body.id=PageIdentifier();
+
 	var LOGO=v.LOGO_SVG();
 
 	var sources=["codes/communication.js","data/guestbook.js","codes/analytics.js"];

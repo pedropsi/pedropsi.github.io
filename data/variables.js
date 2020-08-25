@@ -163,7 +163,13 @@ PICTURE						:function(v,size){
 								LazyImageLoader(id,src);							
 								return `<img id="${id}" class="image" width="${size}" height="${size}" alt="${v.IMAGE_ALT(v)}" title="${v.IMAGE_ALT(v)}" loading="lazy"/>`},
 PICTURE_RSS					:(v,size)=>`<img src="${v.SITE()}/images/${size}/${v.IMAGE_NAME(v)}.${v.IMAGE_EXT()}" width="${size}" height="${size}" alt="${v.IMAGE_ALT(v)}" title="${v.IMAGE_ALT(v)}"/>`,
-PICTURE_DYNAMIC				:function(){if(window.innerWidth<512||window.innerHeight<512){return v.PICTURE(v,180)}else{return v.PICTURE(v,512)}},
+PICTURE_DYNAMIC				:function(){return v.PICTURE(v,v.PICTURE_DYNAMIC_SIZE())},
+PICTURE_DYNAMIC_SIZE		:function(){
+								if(NodejsDetected()||window.innerWidth<512)
+									return 180;
+								else
+									return 512;
+							},
 
 FIGURE						:	()=>	`<figure class="figure">${v.PICTURE_DYNAMIC()}<figcaption class="legend">${v.CONTENT()}</figcaption></figure>`,
 FIGURE_SIMPLE				:	()=>	`<figure class="figure">${v.PICTURE_DYNAMIC()}</figure>`,
