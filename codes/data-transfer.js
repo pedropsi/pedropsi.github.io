@@ -5162,7 +5162,7 @@ DynamicTextHTML=function(label,text){
 }
 
 DynamicText=function(label,text){
-	if(!label)
+	if(!label||NodejsDetected())
 		return;
 	var label=Prefix(label,"dynamic-");
 	if(typeof text==="undefined"){//Getter
