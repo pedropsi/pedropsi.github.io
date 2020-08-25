@@ -1235,11 +1235,24 @@ PageSimpleIdentifier=function(url){
 	return UnAfterfix(file,".");
 }
 
+//Node current identifier
+CurrentIdentifier=function(identifier){
+	if(!identifier)
+		return CurrentIdentifier.identifier||"index";
+	else
+		return CurrentIdentifier.identifier=identifier;
+}
+
 PageIdentifier=function(url){
+	if(NodejsDetected())
+		return CurrentIdentifier();
+
 	var url=DefaultURL(url);
 	var identifier=PageSimpleIdentifier(url);
 	return identifier||"index";
 }
+
+
 
 //Search
 

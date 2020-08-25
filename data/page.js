@@ -1,5 +1,11 @@
 //Page Build Sequence
-CMSDependenciesList=["data/variables.js","data/cms.js","data/links.js","data/media.js","data/people.js","data/news.js"];
+CMSDependenciesList=[
+	"data/variables.js",
+	"data/cms.js",
+	"data/links.js",
+	"data/media.js",
+	"data/people.js",
+	"data/news.js"];
 
 LoadCMS=function(){
 	var cms=CMSDependenciesList;
@@ -14,6 +20,18 @@ LoadNodeCMS=function(){
 if(typeof DATA==="undefined")
 	DATA={};
 
+ConsolidatedVariables=function(){
+	return {
+		...DATA["variables"],
+		...DATA["cms"],
+		...DATA["media"],
+		...DATA["people"],
+		...DATA["news"],
+		...DATA["page"],
+		...DATA["links"]
+	}
+}
+
 ConsolidateVariables=function(){
 	DATA["links"]=NormaliseVariables(DATA["links"],LinkTemplate);
 
@@ -21,17 +39,11 @@ ConsolidateVariables=function(){
 		v={};
 
 	v={
-		...DATA["variables"],
-		...DATA["cms"],
-		...DATA["media"],
-		...DATA["people"],
-		...DATA["news"],
-		...DATA["page"],
-		...DATA["links"],
+		...ConsolidatedVariables(),
 		...v
 	};
-	Shout("ConsolidateVariables");
-	
+
+	Shout("ConsolidateVariables");	
 }
 
 LoadPrescript=function(){
@@ -44,6 +56,31 @@ LoadPrescript=function(){
 		LoadSources(v.PRESCRIPT(),BuildCMSPage);
 	else
 		BuildCMSPage();
+}
+
+PageMetaCode=function(code){
+	var start='<script id="post">var v={POST:()=>`';
+	var end='`};</script><script src="data/page.js"></script>';
+
+	var css='<link href="codes/index.css" rel="stylesheet" type="text/css"/>';
+	
+	code=code.replace(/\n/g,"§§SPACE§§").replace(/\<head\>.*\<\/head\>/ig,"").replace(/\§\§SPACE\§\§/g,"\n");
+		
+	var post=code.replace(/.*POST\:\(\)\=\>\`/mig,"");
+		post=UnAfterfix(post,end);
+		post=post.replace(/^\s+/m,"");
+		post=eval("`"+post+"`")
+		
+	v.POST=(()=>post);
+	var head=v.HEAD().replace(css,"").replace(/\n/ig," ").replace(/(\s)+/ig,"$1");
+	
+	code=code.replace(start,`<head>${head}</head>
+	
+	${start}`);
+
+	code=code.replace(/\s+<head>/,"\n<head>");
+
+	return code;
 }
 
 BuildCMSPage=function(){

@@ -273,12 +273,12 @@ CMSObject=function(title){
 		return First(o);
 }
 
-
-if(!NodejsDetected()){
+ExportCMSProperties=function(){
 	Page=PageObj(PageIdentifier());
 	DATA["page"]=Page;
+	DATA["cms"]=CMS;
 }
 
-DATA["cms"]=CMS;
+ExportCMSProperties();
 Shout("cms");
 ExportNodeFunctions();
