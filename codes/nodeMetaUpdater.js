@@ -23,18 +23,16 @@ function UpdateMeta(file){
 		var oldcode=fs.readFileSync(path,"utf8");
 		var newcode=PageMetaReplace(oldcode);
 
-		if(oldcode!==newcode)
-			fs.writeFileSync(path,newcode,function(err){
-				if(err)
-					console.log("Error: can't save "+file,err)
-				else
-					console.log('>>> Saved '+file+"!");
-			});
-		else
+		if(oldcode!==newcode){
+			var saved=true;
+			fs.writeFileSync(path,newcode,function(err){if(err)saved=false});
+			console.log(saved?'>>> Saved ':"Error: can't save ",file,"!");
+		}else
 			console.log('Skipped '+file+"...");
 	}
 
-	UpdateMetaCode();
+	if(CMSObject(CurrentIdentifier()))
+		UpdateMetaCode();
 }
 
 
