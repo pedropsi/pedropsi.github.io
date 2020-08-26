@@ -4682,6 +4682,26 @@ function SequenceSchedule(Obj){
 	for(var i=0;i<=steps;i=i+1){ScheduleAnim(i,startTime)};
 }
 
+function SequenceScheduler(Obj){
+	return function(){
+		SequenceSchedule(Obj)
+	}
+}
+
+function ChainSchedule(Objs){
+	var actions=[...Objs];
+	for(var j=actions.length-1;j>0;j--){
+		var nextAction=actions[j];
+		var Ender=actions[j-1].Ender||Identity;
+		actions[j-1].Ender=function(){
+			Ender();
+			SequenceScheduler(nextAction)();
+		}
+	}
+	console.log(actions);
+	SequenceSchedule(actions[0]);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Cycle
 
