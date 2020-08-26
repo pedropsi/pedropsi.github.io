@@ -434,11 +434,8 @@ h1,h2,h3,h4,h5,h6{
 	margin-top:calc(var(--h4) * var(--scaling));
   transition-duration:var(--durationOff);
 	padding-left: var(--w2);
-	/*background-image: linear-gradient(345deg, 
-		var(--white),
-		var(--smokewhite)); */
 	--w:calc( var(--scaling) * var(--w4) );
-	margin-left:calc(var(--w2) - var(--w));
+	margin-left:calc(-1 * var(--w8));
 	border-left: var(--w) solid var(--c);
 	text-shadow: var(--sh) var(--sh) 0 var(--c);
 	width:100%;
@@ -676,7 +673,7 @@ svg .beije{
 .prose p{
 	text-align:justify;
 	text-indent:var(--w4);
-	margin-left:var(--w4);
+
 }
 
 .poetry{
@@ -816,7 +813,7 @@ table{
 }
 
 thead th{
-	background-color:var(--darkblue);
+	background-color:var(--blue);
 	color:var(--white);
 	text-align:center;
 	text-emphasis:bold;
@@ -828,7 +825,7 @@ thead th{
 
 thead th:hover{
 	color:var(--white);
-	background-color:var(--blue);
+	background-color:var(--darkblue);
 	transition-duration:var(--durationOn);
 }
 
