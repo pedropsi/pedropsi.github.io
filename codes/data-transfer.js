@@ -4625,12 +4625,15 @@ UnScheduleAll=function(queueName){
 
 
 //
-function SequenceSchedule(steps,interval,Iterator,Ender,Starter,phase){
+function SequenceSchedule(steps,interval,Iterator,Ender,Starter,phase,endwait,stawait){
 	var Starter=Starter||Identity;
 	var Ender=Ender||Identity;
+	var endwait=endwait||0;
+	var stawait=stawait||0;
 
 	function ScheduleAnim(i,startTime){
-		var expectedTime=startTime+interval*i;
+		var expectedTime=startTime+stawait+interval*i+(i===steps?endwait:0);
+		console.log(expectedTime);
 		ScheduleAnim.delay=0;
 
 		function TimedIterator(){
@@ -4638,17 +4641,18 @@ function SequenceSchedule(steps,interval,Iterator,Ender,Starter,phase){
 			ScheduleAnim.delay=Max(actualTime-expectedTime,0);
 			setTimeout(i!==steps?Iterator(i):Ender,ScheduleAnim.delay);
 		}
-		
-		setTimeout(TimedIterator,interval*i)
+
+		setTimeout(TimedIterator,+stawait+interval*i+(i===steps?endwait:0))		
 	}
 
 	Starter();
 	var startTime=Date.now();
+
 	var buffer=interval-startTime%interval;
 	var phase=phase||0;
 		startTime=startTime+buffer+Round(phase*interval);
 	
-	for(var i=0;i<=steps;i=i+1){ScheduleAnim(i,startTime)}
+	for(var i=0;i<=steps;i=i+1){ScheduleAnim(i,startTime)};
 }
 
 ///////////////////////////////////////////////////////////////////////////////
