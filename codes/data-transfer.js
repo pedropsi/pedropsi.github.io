@@ -4657,7 +4657,7 @@ function SequenceSchedule(Obj){
 	var Ender=Obj.Ender||Identity;
 
 	var endwait=Obj.endDelay||0;
-	var stawait=Obj.staDelay||0;
+	var stawait=Obj.startDelay||0;
 
 	function ScheduleAnim(i,startTime){
 		var expectedTime=startTime+stawait+interval*i+(i===steps?endwait:0);
