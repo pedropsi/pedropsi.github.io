@@ -1,199 +1,60 @@
-﻿<link rel="stylesheet" href="PuzzleScript/css/docs.css">
-<link rel="stylesheet" href="PuzzleScript/css/codemirror.css">
-<link rel="stylesheet" href="PuzzleScript/css/midnight.css">
-<link rel="stylesheet" href="PuzzleScript/css/dialog.css">
-<link rel="stylesheet" href="PuzzleScript/css/console.css">
-<link rel="stylesheet" href="PuzzleScript/css/gamecanvas.css">
-<link rel="stylesheet" href="PuzzleScript/css/soundbar.css">
-<link rel="stylesheet" href="PuzzleScript/css/layout.css">
-<link rel="stylesheet" href="PuzzleScript/css/toolbar.css">
-<link rel="stylesheet" href="PuzzleScript/css/show-hint.css">
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+	<head>
+		<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="theme-color" content="rgb(7,0,112)"><link href="images/favicon-32x32.png" rel="icon" type="image/png"/><link href="images/favicon-32x32.png" rel="shortcut icon" type="image/x-icon"/><link href="images/splash.svg" rel="apple-touch-icon"/><title>Game editor</title><meta property="og:title" content="Game editor"/><meta name="description" content=" About the  Game editor  	 This is a convenient  Game editor  to test any game in the  Puzzlescript Games Database  with Pedro PSI's  game bar   right now ! 	 It even loads the  appropriate Puzzlescript fork  if mentioned in the  readme.txt  gist file. 	 How to load a puzzlescript game to the consol"/><meta property="og:description" content=" About the  Game editor  	 This is a convenient  Game editor  to test any game in the  Puzzlescript Games Database  with Pedro PSI's  game bar   right now ! 	 It even loads the  appropriate Puzzlescript fork  if mentioned in the  readme.txt  gist file. 	 How to load a puzzlescript game to the consol"/><meta property="og:image" content="https://pedropsi.github.io/images/splash.svg"/><meta name="twitter:image" content="https://pedropsi.github.io/images/splash.svg"><meta property="og:url" content="https://pedropsi.github.io/game-editor.html"/><meta property="og:type" content="article"/><meta property="og:image:alt" content="Game editor"/><link href="codes/index.css" rel="stylesheet" type="text/css"/>
+		<script src="codes/data-transfer.js"></script>
+		<script id="post">var v={POST:()=>`
 
-<div id="leftpanel">
-<form id="form1" name="form1"  action="javascript:void(0);"><textarea id="code" class="codeform" name="code" rows="20" cols="20" style="display:none;">
-title My Game
-author My Name Here
-homepage www.example.org
+<h2>About the ${v.TITLE_BOLD()}</h2>
 
-========
-OBJECTS
-========
+<p>This is a convenient ${v.TITLE_BOLD()} to test any game in the ${AHTML("puzzlescript-games-database")} with ${v.A_GAME_BAR()} <b>right now</b>!</p>
+<p>It even loads the <b>appropriate Puzzlescript fork</b> if mentioned in the <code>readme.txt</code> gist file.</p>
 
-Background
-Green
+<h3>How to load a puzzlescript game to the console</h3>
+<p>the ${v.TITLE_BOLD()}'s dropdown search menu lets you pick all currently playable entries in the ${AHTML("puzzlescript-games-database")} (i.e. those containing a puzzlescript link).</p>
+<p>For games not currently listed, please add them now to the ${AHTML("puzzlescript-games-database")}, which will make them immediately available to the console. Otherwise, you may also replace the game's PUZZLESCRIPT_ID with your game's puzzlescript ID at the end of the following URL: <code>${v.SITE()}/${v.LINK()}.html?game=PUZZLESCRIPT_ID</code>.</p>
 
-Target
-DarkBlue
+<h3>Hall of fame</h3>
+<p>Once you beat any current game in the ${v.TITLE_BOLD()}, you'll be invited to enter the ${AHTML("Global hall of Fame","hall-of-fame-global.html")}! As soon as you pass the final credits screen after winning, you'll be able to type your name in a new window. Make sure you are connected to the internet, then <em>press Submit</em> to be <b>remembered forever</b> or <em>close the window</em> to <b>forsake your glory</b>.</p>
 
-Wall
-Brown
+<h2>Known issues</h2>
+<h3>Sharing saved game progression</h3>
+<p>Game progression within the ${v.TITLE_BOLD()} is not (currently) shared with the original game page. For the time being, please imagine two different game cartridges. Thanks ${v.JCMILLER()} for reporting.</p>
 
-Player
-Blue
+<h3>Game update delays</h3>
+<p>Games playable with the ${v.TITLE_BOLD()} sync with the most up-to-date gist, but if you have played a previous version of the game, this version may occasionally be cached. If the problem persists, clearing the site cache may be required.  Thanks ${v.NCRECC()} for reporting.</p>
 
-Crate
-Orange
+<h2>FAQ</h2>
+<h3> What is a puzzlescript id?</h3>
+<p>It's the long identifier after <code>puzzlescript.net/play.html?p=</code> or after <code>puzzlescript.net/editor.html?hack=</code>.</p>
 
-=======
-LEGEND
-=======
+<h3>Changing the Puzzlescript fork</h3>
+<p> In case the fork name is mentioned in the gist readme.txt file, e.g. <code>... pasting the script in  ...<b>name</b>.github.io/...</code>, it will be loaded automatically.</p>
+<p> Alternatively, you may force a specific fork by adding the URL parameter <code>"&fork=<b>FORK_AUTHOR_NAME_IN_GITHUB</b>"</code> to the console's url. As long as the fork is on Github, and keeps the original folder structure (no new or renamed js files), it should work.</p>
 
-. = Background
-# = Wall
-P = Player
-* = Crate
-@ = Crate and Target
-O = Target
-
-=======
-SOUNDS
-=======
-
-================
-COLLISIONLAYERS
-================
-
-Background
-Target
-Player, Wall, Crate
-
-======
-RULES
-======
-
-[ >  Player | Crate ] -> [  >  Player | > Crate  ]
-
-==============
-WINCONDITIONS
-==============
-
-All Target on Crate
-
-=======
-LEVELS
-=======
-
-#########
-#.......#
-#.....@.#
-#.P.*.O.#
-#.......#
-#.......#
-#########
-</textarea></form>
-</div>
-<div id="verticaldragbar"></div>
-
-<div id="uppertoolbar">
-	&nbsp;&nbsp;&nbsp;<a href="game-bar.html#editor"><h2>PuzzleScript + Game Bar</h2></a> - <a id="saveClickLink" href="javascript:void(0);">SAVE</a> - 
-
-	<form action="" style="display:inline;"><select id="loadDropDown" name="default" style="display:inline; width:100px"> -
-</select></form> - <form action="" style="display:inline;"> <select  id="exampleDropdown"  name="default" style="display:inline; width:150px">
-<option value="sokoban_basic">Load Example</option>
-<optgroup label="Tutorial">
-<option value="sokoban_basic">Basic</option>
-<option value="sokoban_eyeball">Eyeball</option>
-<option value="sokoban_match3">Match 3</option>
-<option value="randomrobots">Random Robots</option>
-<option value="randomspawner">Random Robot Spawner</option>
-</optgroup>
-<optgroup label="Elementary">
-<option value="blockfaker">Block Faker (Droqen)</option>
-<option value="byyourside">By Your Side (Draknek)</option>
-<option value="kettle">Kettle (increpare)</option>
-<option value="microban">Microban (D. Skinner)</option>
-<option value="nekopuzzle">Neko Puzzle (Lexaloffle)</option>
-<option value="notsnake">Notsnake (Terry Cavanagh)</option>
-<option value="zenpuzzlegarden">Zen Puzzle Garden (Lexaloffle)</option>
-</optgroup>
-<optgroup label="Intermediate">
-<option value="limerick">Lime Rick (kissmaj7)</option>
-<option value="octat">Octat (increpare)</option>
-<option value="constellationz">Constellation Z (increpare)</option>
-</optgroup>
-<optgroup label="Advanced">
-<option value="midas">Midas (Wanderlands)</option>
-<option value="whaleworld">2D Whale World (increpare)</option>
-<option value="blank">Blank Project</option>
-</optgroup>
-</select>
-</form>- <a id="runClickLink" href="javascript:void('Run the Game');">RUN</a> - <a id="rebuildClickLink" href="javascript:void('Rebuild without restarting');">REBUILD</a> - <a id="levelEditorClickLink" href="javascript:void('Open Level Editor');">LEVEL EDITOR</a> - <a id="exportClickLink" href="javascript:void('Export Standalone HTML Build');">EXPORT + GAME BAR</a> - <a id="shareClickLink" href="javascript:void('Generate Link To Game');">SHARE</a> - <a href="https://puzzlescript.net/Documentation/documentation.html"  target="Puzzle_Script_Documentation">DOCS</a>  - <a href="https://groups.google.com/forum/#!forum/puzzlescript">FORUM</a>
-</div>
-
-<div id="righttophalf">	
-	<div class="upperarea">
-		<canvas id="gameCanvas" ></canvas>
-	</div>
-</div>
-<div id="horizontaldragbar"></div>
-<div id="rightbottomhalf">
-	<div class="lowertoolbar">
-<div id="soundbar">
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="soundbutton"><a id="clearConsoleClick" title="clears the console" href="javascript:void('Clear Console');"><img src="PuzzleScript/images/clearConsole.gif" alt="clear console contents"></a></span>
-	&nbsp;&nbsp;&nbsp;
-	<span class="soundbutton"><a id="newsound0" title="collect item sound" href="javascript:void('Generate Collect Item Sound');"><img src="PuzzleScript/images/audio1.gif"  alt="collect item sound"></a></span>
-	<span class="soundbutton"><a  id="newsound7" title="push sounds" href="javascript:void('Generate Push Sound');" ><img src="PuzzleScript/images/audio2.gif" alt="push sounds"></a></span>
-	<span class="soundbutton"><a id="newsound2" title="explosion sound" href="javascript:void('Generate Explosion Sound');" ><img src="PuzzleScript/images/audio3.gif" alt="explosion sound"></a></span>
-	<span class="soundbutton"><a id="newsound3" title="powerup sound" href="javascript:void('Generate Power-Up Sound');" ><img src="PuzzleScript/images/audio4.gif" alt="powerup sound"></a></span>
-	<span class="soundbutton"><a id="newsound9" title="bird tweet sound" href="javascript:void('Generate Bird Tweet Sound');"><img src="PuzzleScript/images/audio5.gif"  alt="bird tweet sound"></a></span>
-	<span class="soundbutton"><a id="newsound4" title="hurt sound" href="javascript:void('Generate Hurt Sound');" ><img src="PuzzleScript/images/audio6.gif" alt="hurt sound"></a></span>
-	<span class="soundbutton"><a id="newsound5" title="jump sound" href="javascript:void('Generate Jump Sound');"><img src="PuzzleScript/images/audio7.gif"  alt="jump sound"></a></span>
-	<span class="soundbutton"><a id="newsound1" title="pew pew sound" href="javascript:void('Generate Pew Pew Sound');"><img src="PuzzleScript/images/audio8.gif"  alt="pew pew pew"></a></span>
-	<span class="soundbutton"><a id="newsound6" title="selection sound" href="javascript:void('Generate Selection Sound');"><img src="PuzzleScript/images/audio9.gif"  alt="selection sound"></a></span>
-	<span class="soundbutton"><a id="newsound8" title="random sound" href="javascript:void('Generate Random Sound');"><img src="PuzzleScript/images/audio10.gif"  alt="random sound"></a></span>
-	</div></div>
-	<div class="lowerarea" id="lowerarea">
-<div id = "consoletextarea" >
-=================================<br>
-&nbsp;&nbsp;&nbsp;PuzzleScript Log V1.6.0 + Pedro PSI's Game Bar<br>
-=================================<br>
-</div>
-	</div>
-</div>
-
-<!--TOREPLACE-->
-<script src="PuzzleScript/js/Blob.js"></script>
-<script src="PuzzleScript/js/FileSaver.js"></script>
-
-<script src="PuzzleScript/js/jsgif/b64.js"></script>
-<script src="PuzzleScript/js/jsgif/LZWEncoder.js"></script>
-<script src="PuzzleScript/js/jsgif/NeuQuant.js"></script>
-<script src="PuzzleScript/js/jsgif/GIFEncoder.js"></script>
-
-<script src="PuzzleScript/js/debug.js"></script>
-<script src="PuzzleScript/js/globalVariables.js"></script>
-<script src="PuzzleScript/js/font.js"></script>
-<script src="PuzzleScript/js/rng.js"></script>
-<script src="PuzzleScript/js/riffwave.js"></script>
-<script src="PuzzleScript/js/sfxr.js"></script>
-<script src="PuzzleScript/js/codemirror/codemirror.js"></script>
-<script src="PuzzleScript/js/codemirror/active-line.js"></script>
-<script src="PuzzleScript/js/codemirror/dialog.js"></script>
-<script src="PuzzleScript/js/codemirror/search.js"></script>
-<script src="PuzzleScript/js/codemirror/searchcursor.js"></script>
-<script src="PuzzleScript/js/codemirror/match-highlighter.js"></script>
-<script src="PuzzleScript/js/codemirror/show-hint.js"></script>
-<script src="PuzzleScript/js/codemirror/anyword-hint.js"></script>
-<script src="PuzzleScript/js/colors.js"></script>
-<script src="PuzzleScript/js/graphics.js"></script>
-<script src="PuzzleScript/js/inputoutput.js"></script>
-<script src="PuzzleScript/js/mobile.js"></script>
-
-<script src="PuzzleScript/js/console.js"></script>
-<script src="PuzzleScript/js/buildStandalone.js"></script>
-<script src="PuzzleScript/js/engine.js"></script>
-<script src="PuzzleScript/js/parser.js"></script>
-<script src="PuzzleScript/js/editor.js"></script>
-<script src="PuzzleScript/js/compiler.js"></script>
-<script src="PuzzleScript/js/soundbar.js"></script>
-<script src="PuzzleScript/js/toolbar.js"></script>
-<script src="PuzzleScript/js/layout.js"></script>
-<script src="PuzzleScript/js/addlisteners.js"></script>
-<script src="PuzzleScript/js/addlisteners_editor.js"></script>
-<script src="PuzzleScript/js/makegif.js"></script>
-
-<!--ENDREPLACE-->
-
-<!--<script src="PuzzleScript/js/scripts.js"></script>-->
+<h3>Linking directly to a level</h3>
+<p> You may link directly to a specific level by adding the URL parameter <code>"&level=<b>LEVEL_NUMBER</b>"</code> to the console's url, e.g. ${AHTML("abxtract-tractx.html?level=7","abxtract-tractx.html?level=6")}. In special cases, using the level's name may also work: ${AHTML("skilleblokker.html?level=krok","skilleblokker.html?level=krok")}.</p>
 
 
+<h3> Why is this game bar slightly different from the published version?</h3>
+<p>Because this is the cutting-edge, sometimes experimental, version!</p>
+
+<h3>Who may link to a game played in this page?</h3>
+<p> If you are the game author or obtained permission from the author, you may. Otherwise, please be kind and use instead the original links the authors provided, which help them monitor game traction and possibly boost their revenue.</p>
+<p>If you really think a game should be played with the game bar, try to persuade the authors to add ${v.A_GAME_BAR()} to their own game page.</p>
+
+<h2>Legal info</h2>
+<h3>Particular games</h3>
+<p>All games playable in the ${v.TITLE()} are loaded in real time from a public github gist shared by the author, and not directly hosted nor verified by ${v.SITE_NAME()}. Also, if you are an author and want your game manually excluded from the ${v.TITLE()}, please ${v.A_REQUEST_IT()}. </p>
+
+<h3>Puzzlescript</h3>
+<p>${v.A_PUZZLESCRIPT()} is under this ${v.A_LICENSE_PUZZLESCRIPT()}.</p>
+
+<h3>The ${v.TITLE()}</h3>
+${v.DISCLAIMER()}
+
+${v.FEEDBACK()}
+
+`};</script><script src="data/page.js"></script>
+	</head></html>
+	
