@@ -113,47 +113,49 @@ PageFeaturesDOM=function(){
 }
 
 	
-//Minimal pages
+//Minimal page HTML
 
-PageMinimalCodeStyleHTML=function(){
-	return `
-	<link href="codes/index.css" rel="stylesheet" type="text/css"/>
-	<script src="codes/data-transfer.js"></script>`
-}
-
-PageMinimalPreHTML=function(){
+DoctypeHTML=function(lang){
+	var lang=lang||"en-US";
 	return `<!DOCTYPE html>
-	<html prefix="og: http://ogp.me/ns#">
-	${PageMinimalCodeStyleHTML()}`
+<html lang="${lang}" prefix="og: http://ogp.me/ns#">`
 }
 
-PageMinimalPosHTML=function(){
-	return `</html>`
+PageWithMetaHTML=function(v,post){
+	return `${v.HTML_DOCTYPE()}
+	<head>
+		${v.HEAD()}
+		<script src="codes/data-transfer.js"></script>
+		${post}
+	</head></html>
+	`
 }
 
 PageMetaReplace=function(code){
 	var start='<script id="post">var v={POST:()=>`';
 	var end='`};</script><script src="data/page.js"></script>';
 
-	var css='<link href="codes/index.css" rel="stylesheet" type="text/css"/>';
-	
-	code=code.replace(/\n/g,"§§SPACE§§").replace(/\<head\>.*\<\/head\>/ig,"").replace(/\§\§SPACE\§\§/g,"\n");
+	if(!In(code,start)||!In(code,end))
+		v.POST=(()=>`
 		
-	var post=code.replace(/.*POST\:\(\)\=\>\`/mig,"");
-		post=UnAfterfix(post,end);
-		post=post.replace(/^\s+/m,"");
-		post=eval("`"+post+"`")
-		
-	v.POST=(()=>post);
-	var head=v.HEAD().replace(css,"").replace(/\n/ig," ").replace(/(\s)+/ig,"$1");
-	
-	code=code.replace(start,`<head>${head}</head>
-	
-	${start}`);
+		`);
+	else{
+		var token="@-@BREAK@-@";
+		var postitems=code.replace(/.*POST\:\(\)\=\>\`/mig,token);
+			postitems=postitems.replace(/\`\}\;\<\/script\>\<script src\=\"data\/page\.js\"\>\<\/script\>(?:.|\n)*/ig,token);
 
-	code=code.replace(/\s+<head>/,"\n<head>");
+			//Get Middle and trim spaces
+			post=postitems.split(token)[1];
+			post=post.replace(/^\s+/ig,"").replace(/\s+$/ig,"");
+			
+		var evalpost=eval("`"+post+"`");
 
-	return code;
+			post=start+"\n\n"+post+"\n\n"+end;
+			
+		v.POST=(()=>evalpost);
+	}
+
+	return PageWithMetaHTML(v,post);
 }
 
 

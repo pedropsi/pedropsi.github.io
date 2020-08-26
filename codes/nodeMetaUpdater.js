@@ -24,7 +24,7 @@ function UpdateMeta(file){
 		var newcode=PageMetaReplace(oldcode);
 
 		if(oldcode!==newcode)
-			fs.writeFileSync(path,code,function(err){
+			fs.writeFileSync(path,newcode,function(err){
 				if(err)
 					console.log("Error: can't save "+file,err)
 				else

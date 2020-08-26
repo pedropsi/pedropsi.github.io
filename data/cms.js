@@ -201,8 +201,19 @@ CMSTags=function(){
 	return tags;
 }
 
+// PageMinimalCodeStyleHTML=function(){
+// 	return `
+// 	<link href="codes/index.css" rel="stylesheet" type="text/css"/>
+// 	<script src="codes/data-transfer.js"></script>`
+// }
+
+// PageMinimalPosHTML=function(){
+// 	return `</html>`
+// }
+
 // TagPageHTML=function(){
-// 	return `${PageMinimalPreHTML()}
+// 	return `${DoctypeHTML()}
+// ${PageMinimalCodeStyleHTML()}
 // <script id="post">var Post={POST:()=>""};
 // try{v={...v,...Post}}catch{v=Post}</script>
 // ${PageMinimalPosHTML()}`;

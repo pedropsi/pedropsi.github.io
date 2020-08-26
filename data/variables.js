@@ -87,7 +87,7 @@ HEAD						:	()=>	v.HEAD_SIMPLE(),
 HEAD_SIMPLE					:	()=>	`${v.HEAD_ITEMS()}${v.CSS_REL()}`,
 HEAD_BARE					:	()=>	v.HEAD_ITEMS(),
 
-HEAD_ITEMS					:	()=>	`${v.HEAD_VIEWPORT()}${v.HEAD_THEME()}${v.HEAD_ICONS()}${v.HEAD_DATA_GRAPH()}${v.MANIFEST()}`,
+HEAD_ITEMS					:	()=>	`<meta charset="utf-8">${v.HEAD_VIEWPORT()}${v.HEAD_THEME()}${v.HEAD_ICONS()}${v.HEAD_DATA_GRAPH()}${v.MANIFEST()}`,
 HEAD_VIEWPORT				:	()=>	`<meta name="viewport" content="width=device-width, initial-scale=1.0"/>`,
 HEAD_ICONS					:	()=>	`<link href="${v.FAVICON32()}" rel="icon" type="image/png"/><link href="${v.FAVICON32()}" rel="shortcut icon" type="image/x-icon"/><link href="${v.APPLEICON()}" rel="apple-touch-icon"/>`,
 HEAD_THEME					:	()=>	`<meta name="theme-color" content="${v.THEMECOLOUR()}">`,
@@ -99,8 +99,7 @@ HEAD_TITLE					:	()=>	`<title>${v.TITLE()}</title><meta property="og:title" cont
 HEAD_DESCRIPTION			:	()=>	`<meta name="description" content="${v.DESCRIPTION()}"/><meta property="og:description" content="${v.DESCRIPTION()}"/>`,
 HEAD_TYPE					:	()=>	`<meta property="og:type" content="${v.TYPEGRAPH()}"/><meta property="og:image:alt" content="${v.IMAGE_ALT(v)}"/>`,
 HEAD_LINK					:	()=>	`<meta property="og:url" content="${v.SITE()}/${v.LINK()}.html"/>`,
-HEAD_IMAGE					:	()=>	`<meta property="og:image" content="${v.SITE()}/${v.IMAGE_512()}"/>
-<meta name="twitter:image" content="${v.SITE()}/${v.IMAGE_512()}">`,
+HEAD_IMAGE					:	()=>	`<meta property="og:image" content="${v.SITE()}/${v.IMAGE_512()}"/><meta name="twitter:image" content="${v.SITE()}/${v.IMAGE_512()}">`,
 	
 SITEMAP_PATH				:	()=>	`sitemap.xml`,
 	
@@ -212,8 +211,7 @@ DISCLAIMER					:	()=>	`<p class="disclaimer">THE SOFTWARE IS PROVIDED "AS IS", W
 BLANK						:	()=>	`target='_blank' rel="noopener noreferrer"`,
 
 
-HTML_DOCTYPE				:	()=>	`<!DOCTYPE html>${v.HTML_PREFIX()}`,
-HTML_PREFIX					:	()=>	`<html lang="${v.LANG()}" xml:lang="${v.LANG()}" prefix="og: http://ogp.me/ns#">`,
+HTML_DOCTYPE				:	()=>	DoctypeHTML(v.LANG()),
 
 HTML_OUT					:(content)=>	`${v.HTML_DOCTYPE()}${v.HEAD()}<body class="body" id="${v.LINK()}">${content}${v.FOOTER_AREA()}</body></html>`,
 
@@ -382,7 +380,7 @@ MANIFEST					:	()=>"",
 PWA_MANIFEST				:	()=>	`<link rel="manifest" id="manifest" href='data:application/manifest+json,${v.PWA_MANIFEST_CONTENT()}'/>`,
 PWA_MANIFEST_CONTENT		:	()=>	`{${v.PWA_NAME()},${v.PWA_DISPLAY()},${v.PWA_ICONS()},${v.PWA_DESC()},${v.PWA_LANG()},${v.PWA_SCOPE()},${v.PWA_WORKER()}}`,
 
-DESCRIPTION					:	()=>	v.PARSER_MARKSHORT(v.POST()),
+DESCRIPTION					:	()=>	v.PARSER_MARKSHORT(v.POST().replace(/\n+/g,"\t")),
 WORD_LIMIT_SHORT			:	()=>300,
 
 PARSER_MARKSHORT			:(txt)=> StripHTML(txt).slice(0,v.WORD_LIMIT_SHORT()),
