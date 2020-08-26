@@ -796,9 +796,12 @@ figure .image{
 	width: 100%;
 }
 
-.table caption{
-	color:var(--darkblue);
+.table caption,
+.table .caption{
+	color:var(--blue);
 	font-style:italic;
+	align-self: center;
+	padding-top: var(--h2);
 }
 
 table{

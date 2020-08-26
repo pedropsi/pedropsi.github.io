@@ -2389,6 +2389,7 @@ TRHTML=function(dataArray){
 };
 
 TableHTML=function(caption,headers,rows){
+	console.log(caption);
 	var headersHTML="";
 	if(IsString(headers))
 		headersHTML=headers;
@@ -2403,7 +2404,7 @@ TableHTML=function(caption,headers,rows){
 		
 	return `
 	<div class="table">
-		<caption>${caption}</caption>
+		<caption><span class="caption">${caption}</span></caption>
 		<table>
 			<thead>${headersHTML}</thead>
 			<tbody>
