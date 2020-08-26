@@ -803,7 +803,7 @@ figure .image{
 
 table{
 	border-collapse:collapse;
-	border-bottom:var(--h-2) solid var(--darkblue);
+	border-bottom:var(--h-2) solid var(--blue);
 	color:var(--blue);
 	width:100%;
 	vertical-align:middle;
