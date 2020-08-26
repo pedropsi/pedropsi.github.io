@@ -140,12 +140,12 @@ PageFeaturesDOM=function(){
 
 PageSkeletonHTML=function(){
 	return `
-<!DOCTYPE html>
+<!DOCTYPE html><html prefix="og: http://ogp.me/ns#">
 <link href="codes/index.css" rel="stylesheet" type="text/css"/>
 <script src="codes/data-transfer.js"></script>
 <script id="post">var Post={POST:()=>""};
 try{v={...v,...Post}}catch{v=Post}</script>
-`;
+</html>`;
 }
 
 
