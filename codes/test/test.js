@@ -50,7 +50,7 @@ function ReportTest(functionname,testname,test,passed,result,expect,verifiername
 	if(verifiername)
 		verifunctionname=verifiername+"("+verifunctionname+")";
 
-	var testtitle="<h4>"+testname+"</h4>"+"<p><code>"+verifunctionname+"("+UnExfix(JSON.stringify(test["arguments"]),"[","]")+")="+JSON.stringify(result)+"</code>";
+	var testtitle="<h4>"+testname+"</h4>"+"<p><code>"+verifunctionname+"("+JSON.stringify(test["arguments"]).replace(/^\[/,"").replace(/\]$/,"")+")="+JSON.stringify(result)+"</code>";
 	
 	var testreport=(passed?LabelHTML("Passed","test"):(LabelHTML("Failed","test Problem")+"</p><p>Expected:<code>"+JSON.stringify(expect))+"</code></p>");
 
