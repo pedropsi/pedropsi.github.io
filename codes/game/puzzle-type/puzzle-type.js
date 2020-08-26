@@ -2963,13 +2963,23 @@ function TutorialWrite(string,time,waitstart,waitmiddle,waitend){
 			DrawLettersEndCaret();
 		}
 	}
-	function Writer(){
-		SequenceSchedule(steps,delay*0.9,IteratorWrite,Eraser,OpenTutorial,0,waitmiddle/2,waitstart)
-	};
-	function Eraser(){
-		SequenceSchedule(steps,delay*0.1,IteratorErase,CloseTutorialLetters,CloseTutorialGoal,0,waitend,waitmiddle/2)
-	};
 
-	Writer();
+	ChainSchedule([{
+			steps:steps,
+			interval:delay*0.9,
+			Iterator:WriterIterator,
+			startDelay:waitstart,
+			Starter:OpenTutorial,
+			endDelay:waitmiddle/2
+		},{
+			steps:steps,
+			interval:delay*0.1,
+			Iterator:EraserIterator,
+			startDelay:waitmiddle/2,
+			Starter:CloseTutorialGoal,
+			endDelay:waitend,
+			Ender:CloseTutorialLetters
+		}
+	])
 }
 
