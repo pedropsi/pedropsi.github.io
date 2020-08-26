@@ -201,15 +201,22 @@ CMSTags=function(){
 	return tags;
 }
 
-GenerateTagPage=function(tag){
-	var page=PageSkeletonHTML();
-	var name=`tag-${tag}.html`;
-	Download(page,name,"html");
-}
+// TagPageHTML=function(){
+// 	return `${PageMinimalPreHTML()}
+// <script id="post">var Post={POST:()=>""};
+// try{v={...v,...Post}}catch{v=Post}</script>
+// ${PageMinimalPosHTML()}`;
+// }
 
-GenerateTagPages=function(){
-	CMSTags().map(GenerateTagPage);
-}
+// GenerateTagPage=function(tag){
+// 	var page=TagPageHTML();
+// 	var name=`tag-${tag}.html`;
+// 	Download(page,name,"html");
+// }
+
+// GenerateTagPages=function(){
+// 	CMSTags().map(GenerateTagPage);
+// }
 
 ArchiveYearHTML=function(year){
 	function InYear(PageObj){return PageObj.YEAR&&PageObj.YEAR()===year;};

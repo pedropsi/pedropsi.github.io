@@ -58,30 +58,7 @@ LoadPrescript=function(){
 		BuildCMSPage();
 }
 
-PageMetaCode=function(code){
-	var start='<script id="post">var v={POST:()=>`';
-	var end='`};</script><script src="data/page.js"></script>';
 
-	var css='<link href="codes/index.css" rel="stylesheet" type="text/css"/>';
-	
-	code=code.replace(/\n/g,"§§SPACE§§").replace(/\<head\>.*\<\/head\>/ig,"").replace(/\§\§SPACE\§\§/g,"\n");
-		
-	var post=code.replace(/.*POST\:\(\)\=\>\`/mig,"");
-		post=UnAfterfix(post,end);
-		post=post.replace(/^\s+/m,"");
-		post=eval("`"+post+"`")
-		
-	v.POST=(()=>post);
-	var head=v.HEAD().replace(css,"").replace(/\n/ig," ").replace(/(\s)+/ig,"$1");
-	
-	code=code.replace(start,`<head>${head}</head>
-	
-	${start}`);
-
-	code=code.replace(/\s+<head>/,"\n<head>");
-
-	return code;
-}
 
 BuildCMSPage=function(){
 	document.head.innerHTML=v.HEAD();
@@ -136,16 +113,47 @@ PageFeaturesDOM=function(){
 }
 
 	
-//Skeleton
+//Minimal pages
 
-PageSkeletonHTML=function(){
+PageMinimalCodeStyleHTML=function(){
 	return `
-<!DOCTYPE html><html prefix="og: http://ogp.me/ns#">
-<link href="codes/index.css" rel="stylesheet" type="text/css"/>
-<script src="codes/data-transfer.js"></script>
-<script id="post">var Post={POST:()=>""};
-try{v={...v,...Post}}catch{v=Post}</script>
-</html>`;
+	<link href="codes/index.css" rel="stylesheet" type="text/css"/>
+	<script src="codes/data-transfer.js"></script>`
+}
+
+PageMinimalPreHTML=function(){
+	return `<!DOCTYPE html>
+	<html prefix="og: http://ogp.me/ns#">
+	${PageMinimalCodeStyleHTML()}`
+}
+
+PageMinimalPosHTML=function(){
+	return `</html>`
+}
+
+PageMetaReplace=function(code){
+	var start='<script id="post">var v={POST:()=>`';
+	var end='`};</script><script src="data/page.js"></script>';
+
+	var css='<link href="codes/index.css" rel="stylesheet" type="text/css"/>';
+	
+	code=code.replace(/\n/g,"§§SPACE§§").replace(/\<head\>.*\<\/head\>/ig,"").replace(/\§\§SPACE\§\§/g,"\n");
+		
+	var post=code.replace(/.*POST\:\(\)\=\>\`/mig,"");
+		post=UnAfterfix(post,end);
+		post=post.replace(/^\s+/m,"");
+		post=eval("`"+post+"`")
+		
+	v.POST=(()=>post);
+	var head=v.HEAD().replace(css,"").replace(/\n/ig," ").replace(/(\s)+/ig,"$1");
+	
+	code=code.replace(start,`<head>${head}</head>
+	
+	${start}`);
+
+	code=code.replace(/\s+<head>/,"\n<head>");
+
+	return code;
 }
 
 
