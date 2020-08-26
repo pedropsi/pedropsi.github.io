@@ -290,6 +290,8 @@ SaveTest(In,["abcd","a"],true,"matching");
 SaveTest(In,["abcd","e"],false,"non-matching");
 SaveTest(In,["abcd","A"],false,"case-sensitive");
 
+SaveTest(In,[[["b"]],["b"]],true,"deep array, present");
+
 SaveTest(Subset,[{A:1},{B:2}],false,"non-overlapping")
 SaveTest(Subset,[{A:1},{A:2}],false,"right key but wrong value")
 SaveTest(Subset,[{A:1},{A:1}],true,"identical")
