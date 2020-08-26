@@ -20,14 +20,18 @@ function UpdateMeta(file){
 	v=ConsolidatedVariables();
 
 	UpdateMetaCode=function(){
-		var code=PageMetaCode(fs.readFileSync(path,"utf8"))
+		var oldcode=fs.readFileSync(path,"utf8");
+		var newcode=PageMetaReplace(oldcode);
 
-		fs.writeFileSync(path,code,function(err){
-			if(err)
-				console.log("Error: can't save "+file,err)
-			else
-				console.log('Saved '+file+"!");
-		});
+		if(oldcode!==newcode)
+			fs.writeFileSync(path,code,function(err){
+				if(err)
+					console.log("Error: can't save "+file,err)
+				else
+					console.log('>>> Saved '+file+"!");
+			});
+		else
+			console.log('Skipped '+file+"...");
 	}
 
 	UpdateMetaCode();
