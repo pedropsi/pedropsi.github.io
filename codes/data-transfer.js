@@ -22,15 +22,14 @@
 //
 // 		- the last word reveals the function return type, while completing the sentence:
 //	 		- a verb: not specified (if obvious - to be improved) or without a return value, only side effects
-//	 		- an adjective, "-ed": Binary value (true/false)
-//	 		- "-er": Function
-//	 		- "-s", a plural noun, "Array": an array
-//	 		- "Element": a HTML node element
-//	 		- "HTML": HTML code
-//	 		- "String": a string
-//	 		- "Object": an object
+//	 		- "-ed", an adjective			: Binary value (true/false)
+//	 		- "-er"							: Function
+//	 		- "-s", a plural noun, "Array"	: an array
+//	 		- "Element"						: a HTML node element
+//	 		- "HTML"						: HTML code
+//	 		- "String"						: a string
+//	 		- "Object"						: an object
 //			etc...
-
 
 
 NodejsDetected=function(){
