@@ -2924,13 +2924,28 @@ function LevelKeystrokesSimpler(title){
 
 //Tutorial Mode
 
-function OpenTutorialMode(){
-	Class(".game","tutor");
+function OpenTutorial(){
+	OpenTutorialLetters();
+	OpenTutorialGoal();
 }
 
-function CloseTutorialMode(){
-	UnClass(".game","tutor");
+function OpenTutorialLetters(){
+	Class(".middle","tutor");
 }
+function CloseTutorialLetters(){
+	UnClass(".middle","tutor");
+}
+function OpenTutorialGoal(){
+	Class(".top","tutor");
+	FadeElement(".top .keystrokes");
+	FadeElement(".top .notes");
+}
+function CloseTutorialGoal(){
+	UnClass(".top","tutor");
+	UnFadeElement(".top .keystrokes");
+	UnFadeElement(".top .notes");
+}
+
 
 function TutorialWrite(string,time,waitstart,waitmiddle,waitend){
 	var steps=string.length;
@@ -2949,10 +2964,10 @@ function TutorialWrite(string,time,waitstart,waitmiddle,waitend){
 		}
 	}
 	function Writer(){
-		SequenceSchedule(steps,delay*0.9,IteratorWrite,Eraser,OpenTutorialMode,0,waitmiddle/2,waitstart)
+		SequenceSchedule(steps,delay*0.9,IteratorWrite,Eraser,OpenTutorial,0,waitmiddle/2,waitstart)
 	};
 	function Eraser(){
-		SequenceSchedule(steps,delay*0.1,IteratorErase,CloseTutorialMode,Identity,0,waitend,waitmiddle/2)
+		SequenceSchedule(steps,delay*0.1,IteratorErase,CloseTutorialLetters,CloseTutorialGoal,0,waitend,waitmiddle/2)
 	};
 
 	Writer();
