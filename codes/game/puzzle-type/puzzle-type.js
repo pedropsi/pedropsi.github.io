@@ -2932,20 +2932,29 @@ function CloseTutorialMode(){
 	UnClass(".game","tutor");
 }
 
-function TutorialWrite(string,time,waitstart,waitend){
+function TutorialWrite(string,time,waitstart,waitmiddle,waitend){
 	var steps=string.length;
 	var delay=(time-waitstart-waitend)/steps;
-	var Starter=function(){
-		OpenTutorialMode();
-	}
-	var Ender=function(){
-		CloseTutorialMode();
-	}
-	function Iterator(i){
+
+	function IteratorWrite(i){
 		return function(){
 			InputLetterAfter(string[i]);
 			DrawLettersEndCaret();
 		}
 	}
-	SequenceSchedule(steps,delay,Iterator,Ender,Starter,0,waitend,waitstart);
+	function IteratorErase(i){
+		return function(){
+			DeleteLetterAfter();
+			DrawLettersEndCaret();
+		}
+	}
+	function Writer(){
+		SequenceSchedule(steps,delay*0.9,IteratorWrite,Eraser,OpenTutorialMode,0,waitmiddle/2,waitstart)
+	};
+	function Eraser(){
+		SequenceSchedule(steps,delay*0.1,IteratorErase,CloseTutorialMode,Identity,0,waitend,waitmiddle/2)
+	};
+
+	Writer();
 }
+
