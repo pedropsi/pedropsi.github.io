@@ -422,3 +422,24 @@
    overflow:hidden;
 }*/
 
+/*Tutorial mode*/
+.tutor{
+  --ph:var(--h-8);
+  --pw:var(--w-8);
+  --sh:calc(-1 * var(--ph));
+  --sw:calc(-1 * var(--pw));
+}
+
+.tutor .middle{
+   --letterOn:var(--lightyellow);
+   --letterMid:var(--blue);
+   --letterTransparent:var(--darkblue);
+}
+.tutor .letter{
+  filter: blur(var(--h-8));
+  margin:0 calc(-1 * var(--w-2)) 0 calc(-1 * var(--w-2));
+}
+
+.tutor .letter.caret{
+  margin-left:var(--w-2);
+}

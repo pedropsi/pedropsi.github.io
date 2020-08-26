@@ -2921,3 +2921,31 @@ function LevelKeystrokesSimpler(title){
 	else
 		return Identity;
 }
+
+//Tutorial Mode
+
+function OpenTutorialMode(){
+	Class(".game","tutor");
+}
+
+function CloseTutorialMode(){
+	UnClass(".game","tutor");
+}
+
+function TutorialWrite(string,time,waitstart,waitend){
+	var steps=string.length;
+	var delay=(time-waitstart-waitend)/steps;
+	var Starter=function(){
+		OpenTutorialMode();
+	}
+	var Ender=function(){
+		CloseTutorialMode();
+	}
+	function Iterator(i){
+		return function(){
+			InputLetterAfter(string[i]);
+			DrawLettersEndCaret();
+		}
+	}
+	SequenceSchedule(steps,delay,Iterator,Ender,Starter,0,waitend,waitstart);
+}
