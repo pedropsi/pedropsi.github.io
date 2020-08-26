@@ -1403,7 +1403,7 @@ IndexSubTitle=function(t,h){
 	t.setAttribute("data-index-depth",h);
 	Class(t,"index-item");
 	t.id=t.id?t.id:TocId(t.innerText); 
-	AddScrollUpButton(t,h);
+	TitleSelfLink(t,h);
 	return t.id;
 }
 
@@ -1454,11 +1454,9 @@ ShowHideIndex=function(){
 	ShowHide(".h6");
 }
 
-AddScrollUpButton=function(t,h){
+TitleSelfLink=function(t,h){
 	var title=t.innerText;
 	t.innerHTML=AHTML(title,PageUnFragment()+"#"+TocId(title));
-	if(h==="h2")
-		AddElement(ScrollUpHTML(),t);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

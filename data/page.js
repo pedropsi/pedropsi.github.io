@@ -98,7 +98,7 @@ PageFeaturesDOM=function(){
 	//PurchasedConfirm();
 	Connection();
 	
-	
+	AddElement(ScrollUpHTML(),".whiteboard");
 	IndexTitles();
 	ListenOnce("IndexTitles",
 		()=>AddTitleIndex(".main .whiteboard")//First whiteboard where main content is

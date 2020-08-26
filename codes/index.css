@@ -1703,12 +1703,13 @@ p .icon{
 }
 
 .scrollTop{
-	display: inline;
-	padding: unset;
-	margin: 0 0 0 var(--w4);
-	background-color: unset;
-	color: currentColor;
-	--sh:0;
+	position:fixed;
+	left: 0;
+	bottom:0;
+	width: var(--w1);
+	background-color: var(--white);
+	overflow: hidden;
+	font-size: 300%;
 }
 
 #worldMap path {
