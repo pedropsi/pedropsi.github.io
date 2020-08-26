@@ -1706,7 +1706,7 @@ p .icon{
 	position:fixed;
 	left: 0;
 	bottom:0;
-	width: var(--w1);
+	width: var(--w-2);
 	background-color: var(--white);
 	overflow: hidden;
 	font-size: 300%;
