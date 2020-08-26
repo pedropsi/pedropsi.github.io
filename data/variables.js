@@ -388,6 +388,7 @@ WORD_LIMIT_SHORT			:	()=>300,
 PARSER_MARKSHORT			:(txt)=> StripHTML(txt).slice(0,v.WORD_LIMIT_SHORT()),
 PARSER_UNDERSCORE			:(txt)=> StripHTML(txt).replace(/\s+/ig,"_"),
 
+ONE_LINER					:	()=>"",
 ONE_LINER_U					:	()=>	v.PARSER_UNDERSCORE(v.ONE_LINER()),
 TITLE_BY_U					:	()=>	v.PARSER_UNDERSCORE(v.TITLE_BY()),
 SHORTNAME_U					:	()=>	v.PARSER_UNDERSCORE(v.SHORTNAME()),
