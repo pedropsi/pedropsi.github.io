@@ -2951,15 +2951,15 @@ function TutorialWrite(string,time,waitstart,waitmiddle,waitend){
 	var steps=string.length;
 	var delay=(time-waitstart-waitend)/steps;
 
-	function IteratorWrite(i){
+	function EraserIterator(i){
 		return function(){
-			InputLetterAfter(string[i]);
+			DeleteLetterAfter();
 			DrawLettersEndCaret();
 		}
 	}
-	function IteratorErase(i){
+	function WriterIterator(i){
 		return function(){
-			DeleteLetterAfter();
+			InputLetterAfter(string[i]);
 			DrawLettersEndCaret();
 		}
 	}

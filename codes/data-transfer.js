@@ -4647,16 +4647,20 @@ UnScheduleAll=function(queueName){
 }
 
 
-//
-function SequenceSchedule(steps,interval,Iterator,Ender,Starter,phase,endwait,stawait){
-	var Starter=Starter||Identity;
-	var Ender=Ender||Identity;
-	var endwait=endwait||0;
-	var stawait=stawait||0;
+//Schedule Sequences of Actions
+function SequenceSchedule(Obj){
+	var steps=Obj.steps||0;
+	var interval=Obj.interval||500;
+
+	var Iterator=Obj.Iterator||Identity;
+	var Starter=Obj.Starter||Identity;
+	var Ender=Obj.Ender||Identity;
+
+	var endwait=Obj.endDelay||0;
+	var stawait=Obj.staDelay||0;
 
 	function ScheduleAnim(i,startTime){
 		var expectedTime=startTime+stawait+interval*i+(i===steps?endwait:0);
-		console.log(expectedTime);
 		ScheduleAnim.delay=0;
 
 		function TimedIterator(){
@@ -4672,7 +4676,7 @@ function SequenceSchedule(steps,interval,Iterator,Ender,Starter,phase,endwait,st
 	var startTime=Date.now();
 
 	var buffer=interval-startTime%interval;
-	var phase=phase||0;
+	var phase=Obj.phase||0;
 		startTime=startTime+buffer+Round(phase*interval);
 	
 	for(var i=0;i<=steps;i=i+1){ScheduleAnim(i,startTime)};

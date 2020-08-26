@@ -404,7 +404,13 @@ function MorphLetter(A,B,parentE,Starter,Ender){
 			BezierDynamicLetter(LetterInterpolatedCoordinates(A,B,i/steps),A,id,parentE);
 		}
 	}
-	SequenceSchedule(steps,delay,Iterator,FullEnder,Starter);
+	SequenceSchedule({
+		steps:steps,
+		interval:350/steps,
+		Iterator:Iterator,
+		Ender:FullEnder,
+		Starter:Starter
+	});
 }
 
 //Test cases
