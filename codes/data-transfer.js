@@ -2155,7 +2155,7 @@ TableFilter=function(patterntxt,table){
 }
 
 PrependFilterInput=function(InputFilterF,parentSelector){
-	var input=PriorElement(parentSelector,"INPUT");
+	var input=PriorElement(parentSelector,".search");
 	var value="";
 	if(input){
 		value=input.value;
@@ -2163,7 +2163,7 @@ PrependFilterInput=function(InputFilterF,parentSelector){
 	}
 
 	var uid=UniqueId(parentSelector);
-	filterHTML="<input class='input filter filter-"+uid+"' placeholder='search "+ObtainSymbol("search")+"' onkeyup='"+FunctionName(InputFilterF)+"(\""+uid+"\",\".filter-"+uid+"\")'></input>";
+	filterHTML="<input class='input search filter-"+uid+"' placeholder='search "+ObtainSymbol("search")+"' onkeyup='"+FunctionName(InputFilterF)+"(\""+uid+"\",\".filter-"+uid+"\")'></input>";
 	input=PrependElement(filterHTML,parentSelector);
 	if(value!==""&&input.value===""){
 		input.value=value;
@@ -2210,7 +2210,7 @@ FilterSearchURL=function(){
 
 	if(table){
 		TableFilter(search,table);
-		var input=PriorElement(table,"INPUT");
+		var input=PriorElement(table,".search");
 		if(input){
 			input.value=search;
 			ScrollInto(input);
@@ -2401,7 +2401,17 @@ TableHTML=function(caption,headers,rows){
 	if(IsArray(rows))
 		rowsHTML=rows.map(TRHTML).join("\n")
 		
-	return "<caption>"+caption+"</caption><table><thead>"+headersHTML+"</thead><tbody>\n"+rowsHTML+"</tbody></table>";
+	return `
+	<div class="table">
+		<caption>${caption}</caption>
+		<table>
+			<thead>${headersHTML}</thead>
+			<tbody>
+				${rowsHTML}
+			</tbody>
+		</table>
+	</div>
+	`;
 }
 
 

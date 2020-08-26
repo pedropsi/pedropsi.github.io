@@ -717,17 +717,23 @@ figure .image{
 	border:0;
 	color:var(--lightblue);
 	background-color:var(--white);
+	
 	border:var(--w-8) solid;
 	border-bottom:var(--h-2) solid;
-	margin:var(--h1) 0 var(--h1) 0;
+	margin:var(--h1) var(--w-8) var(--h1) var(--w-8);
+	
+	padding-top:var(--h1);
+	padding-bottom:var(--h1);
+	
 	font-family:inherit;
 	font-size:inherit;
+	
 	align-self:center;
+	
 	transition-duration:var(--durationOff);
 	overflow:auto;
 	text-align:center;
-	padding-top:var(--h1);
-	padding-bottom:var(--h1);
+	
 	max-width:100%;
 	min-width: calc(100% - var(--w8));
 	min-height: var(--fontheight);
@@ -736,6 +742,7 @@ figure .image{
 .input:hover,
 .input:active{
 	border-bottom-width:var(--h1);
+	margin-bottom: calc(var(--h1) - var(--h1) );
 	padding:var(--h1) var(--w1) var(--h1) var(--w1);
 	transition-duration:var(--durationOn);
 }
@@ -777,13 +784,24 @@ figure .image{
 }
 
 
-
-.filter{
-	min-width: 95%;
-	
+.table{
+	background-color: var(--smokewhite);
+	margin:var(--h4) 0 var(--h4) 0;
+	overflow: hidden;
 }
-.filter + table{
-	margin-top: unset;
+
+.table .share-link{
+	margin: unset;
+	background-color: unset;
+}
+
+.table .search{
+	width: 100%;
+}
+
+.table caption{
+	color:var(--darkblue);
+	font-style:italic;
 }
 
 table{
@@ -792,8 +810,7 @@ table{
 	color:var(--blue);
 	width:100%;
 	vertical-align:middle;
-	margin-bottom:var(--h4);
-	margin-top:var(--h2);
+
 	font-size:80%;
 	align-self:center;
 }
@@ -846,11 +863,6 @@ td{
 	max-width:var(--w16);
 	padding-top:var(--tagheight);
 	padding-bottom:var(--tagheight);
-}
-
-table caption{
-	color:var(--darkblue);
-	font-style:italic;
 }
 
 table .new{
