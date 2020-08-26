@@ -72,7 +72,7 @@ CODES_FOLDER_URL			:	()=>	`${v.SITE()}/${v.CODES_FOLDER()}/`,
 
 IMAGE_180					:	()=>	ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),180),
 IMAGE_192					:	()=>	ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),192),
-IMAGE_512					:	()=>	ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),520),
+IMAGE_512					:	()=>	ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),512),
 
 IMAGE_NAME					:	()=>	`splash`,
 IMAGE_EXT					:	()=>	`svg`,
