@@ -3040,13 +3040,15 @@ Classed=function(selectorE,clas){
 
 Toggle=function(selectorE,clas){
 	var clas=clas||'selected';
+	if(IsString(clas))
+		clas=[clas];
 	var e=GetElement(selectorE);
 	if(e)
-		e.classList.toggle(clas);
+		clas.map(c=>e.classList.toggle(c));
 	return e;
 }
 
-var ToggleClass=Toggle;
+ToggleClass=Toggle;
 
 // Select Pulse
 

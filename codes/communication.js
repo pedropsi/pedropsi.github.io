@@ -249,14 +249,18 @@ SortableTable=function(tableSelector){
 		var column=header.textContent;
 		function SortByThis(){
 			Toggle(header,"Ascending");
-			var descending=!Classed(header,"Ascending")
+			var descending=!Classed(header,"Ascending");
 			if(descending)
 				Class(header,"Descending");
 			else
 				UnClass(header,"Descending");
 			SortTable(tableSelector,column,descending);
 		}
-		Listen('click',SortByThis,header);
+		function ClickSort(){
+			Throttle(SortByThis,500,"SortByThis")
+		}
+
+		Listen('click',ClickSort,header);
 	}
 	
 	headers.map(SortByHeader)
