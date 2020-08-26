@@ -87,7 +87,9 @@ HEAD						:	()=>	v.HEAD_SIMPLE(),
 HEAD_SIMPLE					:	()=>	`${v.HEAD_ITEMS()}${v.CSS_REL()}`,
 HEAD_BARE					:	()=>	v.HEAD_ITEMS(),
 
-HEAD_ITEMS					:	()=>	`<meta charset="utf-8">${v.HEAD_VIEWPORT()}${v.HEAD_THEME()}${v.HEAD_ICONS()}${v.HEAD_DATA_GRAPH()}${v.MANIFEST()}`,
+
+HEAD_ITEMS					:	()=>	`${v.HEAD_CHARSET()}${v.HEAD_VIEWPORT()}${v.HEAD_THEME()}${v.HEAD_ICONS()}${v.HEAD_DATA_GRAPH()}${v.MANIFEST()}`,
+HEAD_CHARSET				:	()=>	`<meta http-equiv="content-type" content="text/html; charset=UTF-8">`,
 HEAD_VIEWPORT				:	()=>	`<meta name="viewport" content="width=device-width, initial-scale=1.0"/>`,
 HEAD_ICONS					:	()=>	`<link href="${v.FAVICON32()}" rel="icon" type="image/png"/><link href="${v.FAVICON32()}" rel="shortcut icon" type="image/x-icon"/><link href="${v.APPLEICON()}" rel="apple-touch-icon"/>`,
 HEAD_THEME					:	()=>	`<meta name="theme-color" content="${v.THEMECOLOUR()}">`,
