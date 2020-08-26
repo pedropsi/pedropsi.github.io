@@ -3066,7 +3066,36 @@ PulseSelect=function(selectorE,clas,delay){
 	setTimeout(function(){UnClass(selectorE,clas);},delay);
 }
 
+// Fade/Unfade (opacity only)
+
+FadeElement=function(e){
+	var e=GetElement(e);
+	if(!e||Classed(e,"faded"))
+		return;
+
+	setTimeout(function(){
+		UnClass(e,"closing");
+		Class(e,"faded");
+	},1000)
+	
+	Class(e,"closing");
+}
+
+UnFadeElement=function(e){
+	var e=GetElement(e);
+	if(!e)
+		return;
+
+	setTimeout(function(){
+		UnClass(e,"opening");
+		UnClass(e,"faded");
+	},1000)
+
+	Class(e,"opening");
+}
+
 // Show/Hide
+
 
 HiddenHTML=function(id){
 	return "<span id='"+UnPrefix(id,"#")+"' class='hidden'></span>"
@@ -3082,15 +3111,9 @@ ShowElement=function(selectorE){
 	UnClass(selectorE,"hidden");
 }
 
-
-UnFadeElement=function(e){
-	if(!e)
-		return;
+ShowUnFadeElement=function(e){
 	ShowElement(e);
-	var o=e.style.opacity;
-	e.style.opacity=0;
-	Class(e,"opening");
-	setTimeout(function(){UnClass(e,"opening");e.style.opacity=o},1000);
+	UnFadeElement(e);
 }
 
 Show=function(selectorE){
@@ -3142,14 +3165,14 @@ OpenElement=function(e,parentIDsel){
 	if(!e)
 		return;
 	e=NewElement(e);
-	UnFadeElement(e);
+	ShowUnFadeElement(e);
 	AddElement(e,parentIDsel);
 }
 
 CloseElement=function(targetIDsel,parentIDsel){
-	var fading=GetElement(targetIDsel,parentIDsel);
-	if(fading){
-		Class(fading,"closing");
+	var e=GetElement(targetIDsel,parentIDsel);
+	if(e){
+		FadeElement(e);
 		setTimeout(function(){RemoveElement(targetIDsel,parentIDsel)},1000);
 	}
 }
