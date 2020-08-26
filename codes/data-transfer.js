@@ -421,13 +421,17 @@ InLazyString=function(string,n){ //Lazy matching, 1 error
 	return matchers.some(m=>string.replace(m,"")!==string);
 }
 
-In=function(SAO,n){
-	if(IsArray(n))
-		return n.map(m=>In(SAO,m)).some(Identity);
+InSingle=function(SAO,n){
 	if(typeof SAO==="string")
 		return InString(SAO,n);
 	else
 		return InArrayOrObj(SAO,n);
+}
+
+In=function(SAO,n){
+	if(IsArray(n))
+		return n.map(m=>In(SAO,m)).some(Identity);
+	return InSingle(SAO,n);
 }
 
 ContainsF=function(n){
@@ -476,7 +480,7 @@ ArrayComplement=function(arrayInclude,arrayExclude){
 	var value;
 	for(var i=0;i<arrayInclude.length;i++){
 		value=arrayInclude[i];
-		if(!In(arrayExclude,value)&&!In(unique,value))
+		if(!InSingle(arrayExclude,value)&&!InSingle(unique,value))
 			unique.push(value);
 	}
 	return unique.sort();
@@ -487,7 +491,7 @@ ObjectComplement=function(objInclude,objExclude){
 	var value;
 	for(var i in objInclude){
 		value=objInclude[i];
-		if(!(objExclude[i]===value))
+		if(!Equal(objExclude[i],value))
 			unique[i]=value;
 	}
 	return unique;
@@ -503,7 +507,7 @@ ArrayIntersection=function(array1,array2){
 	var value;
 	for(var i=0;i<array1.length;i++){
 		value=array1[i];
-		if(In(array2,value)&&!In(unique,value))
+		if(InSingle(array2,value)&&!InSingle(unique,value))
 			unique.push(value);
 	}
 	return unique.sort();
@@ -514,7 +518,7 @@ ObjectIntersection=function(array1,array2){
 	var value;
 	for(var i in array1){
 		value=array1[i];
-		if(array2[i]===value)
+		if(Equal(array2[i],value))
 			unique[i]=value;
 	}
 	return unique;
@@ -565,16 +569,20 @@ Factorial=function(n){
 
 //Permutations of a set (enforces uniqueness or sort)
 Permutations=function(array,n,unique){
-	if(n===0)
+	if(!array||n===0)
+		return [];
+
+	if(!unique)
+		var array=Unique(array);
+
+	if(array.length<1)
 		return [];
 
 	var l=array.length;
 	if(typeof n==="undefined"||n>array.length)
 		var n=l;
 	
-	if(!unique)
-		var array=Unique(array);
-
+	
 	if(n===1)
 		return array.map(a=>[a]);
 
