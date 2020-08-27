@@ -4570,9 +4570,10 @@ Monitor=function(MonitorF,delay,DisplayF){
 
 
 //Prevent execution unless time cooldown exceeded, in ms
-Throttle=function(F,cooldown,id){
-	if(!Throttle[id]||Date.now()-Throttle[id]>=cooldown){
-		Throttle[id]=Date.now();
+Throttle=function(F,cooldown,name){
+	var name=name||FunctionName(F);
+	if(!Throttle[name]||Date.now()-Throttle[name]>=cooldown){
+		Throttle[name]=Date.now();
 		return F();
 	}
 	return false;
