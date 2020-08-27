@@ -1685,7 +1685,6 @@ function Translate(L){
 	
 
 	if(possibilities.length){
-		UnderlineLastWordstroke(suffix);
 		suffix=possibilities[p];
 	}	
 	
@@ -2892,13 +2891,14 @@ function ModifyStroke(word,symbol){
 	Keystrokes(strokes)
 }
 
-function UnderlineLastWordstroke(word){
-	var strokes=CleanStroke(Keystrokes().join(""));
-	var last=word.toUpperCase();
-	var most=UnOverfix(strokes,last);
-		strokes=[].concat(most.split("")).concat(last.split("").map(UnderlineStroke));
-	Keystrokes(strokes);
-}
+// function UnderlineLastWordstroke(word){
+// 	var strokes=CleanStroke(Keystrokes().join(""));
+// 	var last=word.toUpperCase();
+// 	var most=UnOverfix(strokes,last);
+// 		strokes=[].concat(most.split("")).concat(last.split("").map(UnderlineStroke));
+// 	Keystrokes(strokes);
+	
+// }
 
 
 function ModifiedLastStroke(Modifier){
