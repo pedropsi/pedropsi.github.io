@@ -2906,7 +2906,8 @@ function ExtractKeystrokes(el){
 		strokes=strokes.filter(s=>!Classed(s,"keystroke-invalid")&&SelectedNode(s));
 	var text=strokes.map(s=>s.innerText).join("");	
 		text=LevelKeystrokesSimpler(CurLevelName())(text);
-		text=text.replace(/\n+/gmi,"");
+		text=text.replace(/\n+/gmi,"");//ensure single line
+		text=text.replace(/\_/gmi," ");//revert underscore -> space
 	return text;
 }
 
