@@ -88,7 +88,10 @@ function UpdateWinPane(title){
 	var winElements="12345678".split("").map(n=>`<div class="winlegend">${text}</div>`).join("\n")
 	ReplaceChildren(winElements,".winpane");
 
+	setTimeout(()=>UnHideElement(".winpane"),250);
 	setTimeout(()=>ToggleClass(".winpane","animated"),500);
+	setTimeout(()=>HideElement(".winpane"),3000);
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
