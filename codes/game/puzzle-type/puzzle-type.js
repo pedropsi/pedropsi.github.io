@@ -241,6 +241,7 @@ function MediaPath(){return "media/puzzle-type"};
 LoadSources(gameModulesEarly,P()?GameIntro:GameTrailer);
 gameModulesLater.map(LoaderInFolder(ModulesPath()+"/modules"));
 LoaderInFolder("codes/libraries")("tone.js");
+LoaderInFolder("codes/game/puzzle-type")(".solutions.js");
 
 function GameIntro(){
 	RemoveElement("game-supra-Canvas");
