@@ -626,6 +626,12 @@ function LevelTitleNumber(title){
 	return LevelGoals.indexOf(title)+1;
 }
 
+
+function GoToLevel(title){
+	var n=LevelTitleNumber(title)-1;
+	GoToScreen(n);
+}
+
 function LevelWon(title){
 	return LevelSolved(LevelTitleNumber(title));
 }
