@@ -4662,7 +4662,7 @@ function SequenceSchedule(Obj){
 	function ScheduleAnim(i,startTime){
 		var expectedTime=startTime+stawait+interval*i+(i===steps?endwait:0);
 		ScheduleAnim.delay=0;
-
+		
 		function TimedIterator(){
 			var actualTime=Date.now();
 			ScheduleAnim.delay=Max(actualTime-expectedTime,0);
@@ -4682,23 +4682,21 @@ function SequenceSchedule(Obj){
 	for(var i=0;i<=steps;i=i+1){ScheduleAnim(i,startTime)};
 }
 
-function SequenceScheduler(Obj){
-	return function(){
-		SequenceSchedule(Obj)
-	}
-}
-
 function ChainSchedule(Objs){
 	var actions=[...Objs];
-	for(var j=actions.length-1;j>0;j--){
-		var nextAction=actions[j];
-		var Ender=actions[j-1].Ender||Identity;
-		actions[j-1].Ender=function(){
-			Ender();
-			SequenceScheduler(nextAction)();
+
+	function Chain(PrevEnder,ThisAction){
+		return function(){
+			PrevEnder();
+			SequenceSchedule(ThisAction);
 		}
 	}
-	console.log(actions);
+
+	for(var j=actions.length-1;j>0;j--){
+		actions[j-1].Ender=Chain(Objs[j-1].Ender||Identity,actions[j]);
+		console.log(j,actions[j-1].Ender.toString());
+	}
+	
 	SequenceSchedule(actions[0]);
 }
 
