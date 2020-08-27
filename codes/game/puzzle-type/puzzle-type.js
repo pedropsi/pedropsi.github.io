@@ -248,7 +248,7 @@ function GameIntro(){
 	PreAddElement(GameFrameHTML(),"BODY");
 	GameFocus();
 	LoadStyle(ModulesPath()+"/puzzle-type.css");
-	setTimeout(function(){PlayIntro(".game",StartGame)},100);
+	setTimeout(function(){PlayIntro(".game",StartGame)},300);
 }
 
 function StartGame(){
