@@ -404,14 +404,14 @@ function InstructGameKeyF(key){
 
 function GameKey(key){
 	var key=ObtainSymbol(key); //accept keywords space, dot, dash
-	function Action(){
-		return InstructGameAction(key);
+	function KeyInput(){
+		return InstructGameInput(key);
 	}
-	Throttle(Action,50,"Action");
+	Throttle(KeyInput,50,"Action");
 }
 
 
-function LevelAction(key){
+function GameInput(key){
 	if(key==="Escape"){
 		ObtainTitleScreenLoader();
 		return;
@@ -435,7 +435,7 @@ function LevelAction(key){
 			Restart();return;
 		}
 		else{
-			LevelActions[CurLevelName()](key);
+			LevelInstructions[CurLevelName()](key);
 			RegisterMove(key);
 		}
 	}
@@ -443,18 +443,18 @@ function LevelAction(key){
 	CheckWin();	
 }
 
-function TitleScreenAction(key){
+function TitleScreenInput(key){
 	if(key!=="Escape")StartLevelFromTitle();
 }
 
-function InstructGameAction(key){
+function InstructGameInput(key){
 	if(InputBlocked())
 		return;
 	
 	if(TitleScreen())
-		TitleScreenAction(key)
+		TitleScreenInput(key);
 	else
-		LevelAction(key)
+		GameInput(key);
 	
 	GameFocus();
 };
@@ -804,7 +804,7 @@ function ObtainLevelsWriter(solvedlevels){
 	return solvedlevels.map(l=>LevelGoals[l]);
 }
 
-var LevelActions={
+var LevelInstructions={
 	"Direct":Direct,
 	"Reverse":function(L){
 		InputLetterBefore(L);
