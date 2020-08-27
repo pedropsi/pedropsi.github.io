@@ -35,7 +35,7 @@ var LOGO=`<?xml version="1.0"?>
 	
 function PlayIntro(targetIDsel,SuccessF){
 	PlayIntro.save=Children(targetIDsel);
-	PlayIntro.save.map(Hide);
+	PlayIntro.save.map(HideElement);
 	Class(targetIDsel,"intro");
 	OpenElement(LOGO,".intro");
 	OpenElement(LOGONAME,".intro");

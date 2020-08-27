@@ -393,7 +393,7 @@ function GameBarButtonLinkHTML(title,action){
 function ShowButton(ButtonNameF){
 	var nameButton=FunctionName(ButtonNameF);
 	ReplaceElement(ButtonNameF(),nameButton);
-	Show(nameButton);
+	UnHideElement(nameButton);
 	Deselect(nameButton);
 }
 
