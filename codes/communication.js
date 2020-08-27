@@ -555,6 +555,11 @@ RequestHallOfFame=function(){
 
 RequestModalWinnerMessage=function(previousDP){
 	
+	if(!RequestModalWinnerMessage[previousDP.qid])
+		RequestModalWinnerMessage[previousDP.qid]=true;
+	else
+		return;
+	
 	function DestinationChoice(choice){
 		if(choice==="Public message in Guestbook")
 			return "guestbook";
