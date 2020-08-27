@@ -2995,5 +2995,38 @@ var ActionChains={
 			Iterator:LetterIterator("DIRECT"),
 			startDelay:1000
 		}],
+	"tutorial-rule":[{
+			steps:"ELUR NEDDIH EHT DNIF".length,
+			interval:400,
+			Iterator:LetterIterator("ELUR NEDDIH EHT DNIF"),
+			startDelay:3000,
+			Starter:OpenTutorial,
+			endDelay:3000
+		},{
+			steps:"ELUR NEDDIH EHT DNIF".length,
+			interval:200,
+			Iterator:UndoIterator,
+			startDelay:1000,
+			Starter:CloseTutorialGoal,
+			endDelay:1000,
+			Ender:CloseTutorialLetters
+		},{
+			steps:"REVERS".length,
+			interval:300,
+			Iterator:LetterIterator("REVERS"),
+			startDelay:2000,
+			endDelay:2000
+		},{
+			steps:"REVERS".length,
+			interval:200,
+			Iterator:UndoIterator,
+			startDelay:1000,
+			endDelay:1000,
+		},{
+			steps:"ESREVER".length,
+			interval:400,
+			Iterator:LetterIterator("ESREVER"),
+			startDelay:2000
+		}],
 }
 
