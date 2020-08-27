@@ -49,6 +49,7 @@ var WinTexts={
 	"Rise":"Not bad!",				//improve
 	"Falls":"Good job!",			//improve
 	"Precedent":"Fantastic!",		//improve
+	"Teleporter":"From another world!",		
 	"Superior":"Supreme!",			
 	//"Tangles":3,
 	"Difference":"Very impressive!", //improve
@@ -593,6 +594,7 @@ var LevelDifficulty={
 	"Rise":1,
 	"Falls":2,
 	"Precedent":3,
+	"Teleporter":3,
 	"Superior":4,
 	//"Tangles":3,
 	"Difference":5,
@@ -709,6 +711,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Rise",					//Alphabetical 
 	"Falls",				//Alphabetical, Arithmethic, Retroactive
 	"Precedent",			//Alphabetical, Retroactive
+	"Teleporter",				//Positional, Retroactive
 	"Superior",				//Positional, Alphabetical, Retroactive
 	//"Tangles",			//Alphabetical, Cyclic, Arithmethic, Proactive
 	"Difference",			//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
@@ -834,6 +837,29 @@ var LevelActions={
 		Letters(Letters.array.map(LetterDown));
 		InputLetterAfter(L);
 		AddStrokeValid(L);
+	},
+	"Teleporter":function (L){
+		var pre=Caret()[0];
+		
+		var word=Clone(Letters.array);
+		var l=word.length;
+
+		Letter(pre,L);
+		
+		var i=1;
+		var moved=false;
+		while(!moved&&i<=l){
+			if(word[(i+pre)%l]===L&&(i+pre)%l!==pre){
+				Caret((i+pre+1)%l);
+				moved=true;
+				AddStrokeUnderline(L);
+			}
+			i++;
+		}
+		if(!moved){
+			Caret(pre+1);
+			AddStrokeValid(L);
+		}
 	},
 	"Superior":function (L){
 		var pre=Caret()[0];
