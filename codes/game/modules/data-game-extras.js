@@ -1713,9 +1713,9 @@ function MoreButton(){
 }
 
 if(Memory("PGD")){
-	ListenOnce("GameBar",function(){ShowButton(MoreButton)});
+	HearOnce("GameBar",function(){ShowButton(MoreButton)});
 }else{
-	ListenOnce("LoadPGD",function(){ShowButton(MoreButton)});
+	HearOnce("LoadPGD",function(){ShowButton(MoreButton)});
 }
 
 function RequestMore(){

@@ -1512,12 +1512,12 @@ SourceIdentifier=function(path){
 LoadSources=function(sourceArray,SuccessF){
 	if(NodejsDetected()){
 		var shoutArray=sourceArray;
-		ListenAndOnce(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
+		HearAll(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
 		sourceArray.map(LoadNodeSource);
 	}									
 	else{
 		var shoutArray=sourceArray.filter(function(f){return Posfixed(f,".js")}).map(SourceIdentifier);		//discards non-js files plus the folder structure to preserve file name
-		ListenAndOnce(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
+		HearAll(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
 		sourceArray.map(LoadSource);											//loads asynchronously (each file MUST "Shout" its own identifier upon loading)
 	}
 	
@@ -3422,6 +3422,42 @@ ClickStay=function(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+// Custom events 
+
+Shout=function(name,targetSelector){
+	Shout[name]=targetSelector;	//register Shouts
+	
+	if(NodejsDetected()){
+		ShoutNode(name);
+		return;
+	}
+
+	var ev=new CustomEvent(name);
+	var e=GetElement(targetSelector)||window;
+	e.dispatchEvent(ev);
+}
+
+Shouted=function(eventName){
+	In(Keys(Shout),eventName)
+}
+
+//polyfill
+if(!NodejsDetected()&&typeof window.CustomEvent!=="function"&&window.CustomEvent){
+	function CustomEvent(event,optObj){
+		optObj=optObj||{
+			bubbles:false,
+			detail:undefined,
+			cancelable:false
+			};
+		var ev=document.createEvent('CustomEvent');
+		ev.initCustomEvent(event,optObj.bubbles,optObj.cancelable,optObj.detail);
+		return ev;
+	}
+	CustomEvent.prototype=window.Event.prototype;
+	window.CustomEvent=CustomEvent;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 //Event Listeners
 
 Listen=function(eventName,F,target){
@@ -3441,23 +3477,31 @@ Listen=function(eventName,F,target){
 };
 
 ListenOnce=function(eventName,F,target){
-	if(In(Keys(Shout),eventName)&&!target)//already shouted before, globally
-		F();
+	var EFTC={
+		name:eventName,
+		F:F,
+		target:target,
+		ConditionF:True
+	}
 
-	var EFTC={};
-	EFTC.name=eventName;
-	EFTC.F=F;
-	EFTC.target=target;
-	EFTC.ConditionF=True;
 	return ListenF(EFTC);
 }
 
+
+HearOnce=function(eventName,F,target){ //execute if heard or keep listening
+	if(Shouted(eventName)&&!target)
+		F();
+	else
+		ListenOnce(eventName,F,target);
+}
+
 ListenOutside=function(eventName,F,target){
-	var EFTC={};
-	EFTC.name=eventName;
-	EFTC.F=F;
-	EFTC.ConditionF=function(ev){return Outside(target,ev.target);};
-	EFTC.target=window;
+	var EFTC={
+		name:eventName,
+		F:F,
+		ConditionF:function(ev){return Outside(target,ev.target);},
+		target:window};
+
 	return ListenF(EFTC);
 }
 
@@ -3474,7 +3518,7 @@ ListenF=function(EFTC){
 	function F(ev){
 		if(ConditionF(ev)){
 			fun();
-			ListenNoMore(EFTC);
+			UnListen(EFTC);
 		}
 	};
 	EFTC.F=F;
@@ -3483,7 +3527,7 @@ ListenF=function(EFTC){
 	return EFTC;
 }
 
-ListenNoMore=function(EFTC){
+UnListen=function(EFTC){
 	if(NodejsDetected())
 		return ListenNoMoreNode(EFTC);
 	
@@ -3494,6 +3538,31 @@ ListenIndeed=function(EFTC){
 	EFTC.name.map(function(name){Listen(name,EFTC.F,EFTC.target)});
 }
 
+//Listen for all events in array before firing
+HearAll=function(shoutArray,SuccessF){
+	function Heard(shoutcode){
+		if(!Heard.array)
+			Heard.array=[];
+
+		Heard.array.push(shoutcode);
+		Heard.array=Unique(Heard.array);
+
+		//console.log("heard so far:",Heard.array)
+
+		if(Equal(Heard.array,Unique(shoutArray)))
+			SuccessF();
+	}
+
+	function Hear(shoutcode){
+		HearOnce(shoutcode,function(){Heard(shoutcode)});
+	}
+
+	shoutArray.map(Hear);
+}
+
+ShoutAnd=function(shoutArray,SuccessShout){
+	HearAll(shoutArray,function(){Shout(SuccessShout)});
+}
 
 
 //Node specific events
@@ -3525,31 +3594,6 @@ ListenNoMoreNode=function(lobj){
 	return RequireEventsNode();
 }
 
-//Listen for all events in array before firing
-ListenAndOnce=function(shoutArray,SuccessF){
-	function Heard(shoutcode){
-		if(!Heard.array)
-			Heard.array=[];
-
-		Heard.array.push(shoutcode);
-		Heard.array=Unique(Heard.array);
-
-		//console.log("heard so far:",Heard.array)
-
-		if(Equal(Heard.array,Unique(shoutArray)))
-			SuccessF();
-	}
-
-	function Hear(shoutcode){
-		ListenOnce(shoutcode,function(){Heard(shoutcode)});
-	}
-
-	shoutArray.map(Hear);
-}
-
-ShoutAnd=function(shoutArray,SuccessShout){
-	ListenAndOnce(shoutArray,function(){Shout(SuccessShout)});
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Data submission in forms
@@ -4189,7 +4233,7 @@ FreeFullscreenCursor=function(){
 	UnClass(FullscreenElement(),"hideCursor");
 	clearTimeout(FreeFullscreenCursor.timeout);
 	if(HideFullscreenCursor.last)
-		ListenNoMore(HideFullscreenCursor.last);
+		UnListen(HideFullscreenCursor.last);
 }
 
 
@@ -4916,37 +4960,7 @@ DrawPolygon=function(txtObj){
 
 Accumulate=function(acc,val){return acc+val};
 
-///////////////////////////////////////////////////////////////////////////////
-// Custom events 
 
-Shout=function(name,targetSelector){
-	Shout[name]=targetSelector;				//save memory
-	
-	if(NodejsDetected()){
-		ShoutNode(name);
-		return;
-	}
-
-	var ev=new CustomEvent(name);
-	var e=GetElement(targetSelector)||window;
-	e.dispatchEvent(ev);
-}
-
-//polyfill
-if(!NodejsDetected()&&typeof window.CustomEvent!=="function"&&window.CustomEvent){
-	function CustomEvent(event,optObj){
-		optObj=optObj||{
-			bubbles:false,
-			detail:undefined,
-			cancelable:false
-			};
-		var ev=document.createEvent('CustomEvent');
-		ev.initCustomEvent(event,optObj.bubbles,optObj.cancelable,optObj.detail);
-		return ev;
-	}
-	CustomEvent.prototype=window.Event.prototype;
-	window.CustomEvent=CustomEvent;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Dates
@@ -5567,7 +5581,7 @@ ScaleMax=function(max){
 //LazyLoader with Intersection Observer
 
 function LazyLoader(target,Loader){
-	ListenOnce("LazyLoader",function(){LazyLoad(target,Loader)});
+	HearOnce("LazyLoader",function(){LazyLoad(target,Loader)});
 }
 
 function LazyLoad(targe,Loader){

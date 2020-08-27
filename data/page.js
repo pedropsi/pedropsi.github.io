@@ -85,8 +85,8 @@ PageFeatures=function(){
 }
 
 PageFeaturesDOM=function(){
-	ListenOnce('beforeinstallprompt',PWAInstallAsk);
-	ListenOnce('appinstalled',PWAInstallConfirm);
+	HearOnce('beforeinstallprompt',PWAInstallAsk);
+	HearOnce('appinstalled',PWAInstallConfirm);
 	DynamicTables();
 	AnalyticsStart();
 	StartNightMode();
@@ -100,7 +100,7 @@ PageFeaturesDOM=function(){
 	
 	AddElement(ScrollUpHTML(),".whiteboard");
 	IndexTitles();
-	ListenOnce("IndexTitles",
+	HearOnce("IndexTitles",
 		()=>AddTitleIndex(".main .whiteboard")//First whiteboard where main content is
 	)
 	
@@ -164,4 +164,4 @@ if(NodejsDetected()){
 	LoadNodeCMS();
 }
 else
-	ListenOnce("load",LoadCMS);
+	HearOnce("load",LoadCMS);

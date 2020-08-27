@@ -1,5 +1,5 @@
 LoadAsync("cacher",".");
-ListenOnce('load',ServiceWorker);
+HearOnce('load',ServiceWorker);
 
 ///////////////////////////////////////////////////////////////////////////////
 //Find the Modules
@@ -124,7 +124,7 @@ function ExternalCompileASAP(fork){
 	ConsoleAdd("<p>Requesting Puzzlescript Fork from <b>"+fork+"</b></p>");
 
 	var modules=CoreModules.concat(["COMPILE"]).concat(ExtraModules).concat(["GAMEBAR"/*,"MOBILE"*/]);//This is the order of evaluation
-	ListenAndOnce(modules,function(){EvaluateScheduled(modules)});
+	HearAll(modules,function(){EvaluateScheduled(modules)});
 
 	function LoadExternalModuleF(source){LoadExternalModule(source,fork)};
 	CoreModules.map(LoadExternalModuleF);

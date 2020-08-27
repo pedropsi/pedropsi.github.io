@@ -358,6 +358,6 @@ RequestHint["tips-interlevel"].splice(1,0,"Email Pedro PSI feedback by pressing 
 var ObtainRequestHint=RequestHint;
 
 
-ListenOnce("GameBar",LoadHints);
+HearOnce("GameBar",LoadHints);
 
 Shout("data-game-hints")

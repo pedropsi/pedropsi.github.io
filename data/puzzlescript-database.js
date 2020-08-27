@@ -11,7 +11,7 @@ if(PageIdentifier()==="puzzlescript-games-database"){
 		GetElement(".main .section .container").innerHTML=v.PGD();
 		LoadPGDTable();
 	}
-	ListenOnce('puzzlescript-database-game',StartPGD);
+	HearOnce('puzzlescript-database-game',StartPGD);
 }
 else if(PageIdentifier()==="game-tools"){
 	var headers=["Title","Author","Type","Tags"];
@@ -20,7 +20,7 @@ else if(PageIdentifier()==="game-tools"){
 		GetElement("puzzlescript-database-component").innerHTML=v.PCD();
 		LoadPGDTable();
 	}
-	ListenOnce('puzzlescript-database-component',StartPGD);
+	HearOnce('puzzlescript-database-component',StartPGD);
 }
 else if(PageIdentifier()==="game-console"){
 	function StartPGD(){
@@ -28,7 +28,7 @@ else if(PageIdentifier()==="game-console"){
 		if(PageSearch("game")===""){
 			LoadGameHTML(GameFrameHTML());
 			LoadPGDMenu();
-			ListenOnce("LoadPGD",LoadPGDMenu);
+			HearOnce("LoadPGD",LoadPGDMenu);
 		}
 		else if(PageSearch("submit")!==""){	//auto-submission
 			
@@ -41,12 +41,12 @@ else if(PageIdentifier()==="game-console"){
 				console.log("checked");
 			}else{
 				console.log("waiting");
-				ListenOnce("LoadPGD",function(){DelayUntil(GameInfoRetrieved,AutoCheckYear)});
+				HearOnce("LoadPGD",function(){DelayUntil(GameInfoRetrieved,AutoCheckYear)});
 			}
 		}
 	}
 
-	ListenOnce('puzzlescript-database-game',StartPGD);
+	HearOnce('puzzlescript-database-game',StartPGD);
 	
 }
 
@@ -57,7 +57,7 @@ GameInfoRetrieved=function(){
 /*else if(PageIdentifier()==="game-editor"){
 	LoadPGD();
 	ReplaceElement(PGDMenuHTML(),ParentElement("exampleDropdown")); //PS Editor Selector
-	ListenOnce("LoadPGD",LoadPGDMenu);
+	HearOnce("LoadPGD",LoadPGDMenu);
 }*/
 
 
@@ -69,7 +69,7 @@ GameInfoRetrieved=function(){
 
 function LoadPGDTable(){
 	ReplaceChildren("<b>Please wait while recent submissions are fetched...</b>",".discard");	
-	Listen("LoadPGD",OverwritePGD);
+	HearOnce("LoadPGD",OverwritePGD);
 	LoadPGD();
 }
 
