@@ -1049,7 +1049,6 @@ function Nokia(N){
 			ForbidCaret();
 			return;
 		}
-		AddStrokeValid(N);
 
 		function NokiaInput(L){
 			InputLetterAfter(L);
@@ -1061,6 +1060,7 @@ function Nokia(N){
 		if(!Letters.array.length||Caret()[0]===Letters.array.length){ //Start or advance
 			var L=NokiaMapping[N][0];
 			NokiaInput(L);
+			AddStrokeValid(N);
 		}
 		else{
 			var last=Last(Letters.array);
@@ -1070,17 +1070,21 @@ function Nokia(N){
 			if(N!==lastN||lastPos>=lastGroup.length-1){ //New Key or timing exceeded
 				var L=NokiaMapping[N][0];
 				NokiaInput(L);
+				AddStrokeSeparator();
+				AddStrokeValid(N);				
 			}
 			else {//Modify
 				DeleteLetterAfter();
 				var M=lastGroup[lastPos+1];
 				if(lastPos+1<lastGroup.length-1){
 					NokiaInput(M);
+					AddStrokeValid(N);
 					delta=500+1500*(lastGroup.length-1-lastPos)/lastGroup.length
 				}
 				else{
 					InputLetterAfter(M);
-					AddStrokeValid(M);
+					AddStrokeValid(N);
+					AddStrokeSeparator();
 					Caret(Infinity);
 				}
 			}
@@ -1098,8 +1102,11 @@ function NokiaTimer(delta){
 	NokiaTimer.timeouts.map(clearTimeout);
 
 	function Redraw(){
-		if(!NokiaTimer.blocked)
-			DrawLettersEndCaret()
+		if(!NokiaTimer.blocked){
+			AddStrokeSeparator();
+			Caret(Infinity);
+			DrawLevel();
+		}
 	}
 	var newtimeout=setTimeout(Redraw,delta);
 	Memo(newtimeout);
@@ -1537,6 +1544,7 @@ function Dividi(L){
 		DeleteLetterAfter(last.length);
 		var q=Quotient(UnRoman(last),2);
 		Letters(Word()+Roman(q));
+		AddStrokeSeparator();
 		AddStrokeUnderline(L);
 	}
 	else
@@ -1585,6 +1593,7 @@ function Baba(L){
 		var object=word.replace(pattern,"$2");
 		rules.push([subject,object]);
 		word=word.replace(pattern,"");
+		AddStrokeSeparator();
 		Letters(word);
 	}
 	
@@ -2290,12 +2299,6 @@ function DrawSingleCaret(p){
 		Class(GetElement(".letter-"+p),"caret")
 }
 
-function DrawLettersEndCaret(){
-	DrawLetters();
-	Caret(Infinity);
-	DrawCaret();
-}
-
 function LetterPureHTML(L,cla){
 	if(cla===undefined)
 		var cla="";
@@ -2440,7 +2443,7 @@ function KeystrokeHTML(K){
 function DrawLevel(){
 	DrawLetters();
 	DrawCaret();
-	DrawKeystrokes()
+	DrawKeystrokes();
 }
 
 
