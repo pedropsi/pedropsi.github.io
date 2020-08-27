@@ -425,6 +425,7 @@
 /*Tutorial mode*/
 .tutor.top{
    background-color: var(--darkblue);
+   filter: brightness(1.2);
 }
 
 .tutor.middle{
