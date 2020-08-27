@@ -359,11 +359,13 @@ function KeyActions(){
 	LetterCharacters.map(c=>(keyactions["Shift "+c]=InstructGameKeyF(c)));
 	
 	Directions.map(DirectKeybinder);
+	["·","interpunkt"].map(Keybinder(Identity));//Do nothing
+
 	["Escape","Enter"].map(DirectKeybinder);
 	["undo",ObtainMainKey("undo"),"Backspace","Delete","Ctrl U","Ctrl Z"].map(Keybinder(ObtainUndo));
 	["redo",ObtainMainKey("redo"),"Shift Backspace","Shift Delete","Ctrl Y"].map(Keybinder(ObtainRedo));
 	["restart",ObtainMainKey("restart"),"Ctrl Backspace","Ctrl Delete"].map(Keybinder(ObtainRestart));
-	["Spacebar","Space"].map(Keybinder(InstructGameKeyF("space")));
+	["Spacebar","Space","_"].map(Keybinder(InstructGameKeyF("space")));
 	
 	keyactions["close"]=CloseKeyboard;
 	
@@ -414,6 +416,11 @@ function LevelAction(key){
 		ObtainTitleScreenLoader();
 		return;
 	 }
+
+	if(key===ObtainSymbol("interpunkt")){//neuter separator
+		ForbidCaret();
+		return;
+	}
 
 	if(ForbidEnterActions(key)||ForbidNumberActions(key)||ForbidSpaceActions(key)||ForbidArrowActions(key)){
 		ForbidCaret();return;
