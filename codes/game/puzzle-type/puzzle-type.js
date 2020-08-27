@@ -3019,7 +3019,7 @@ function TypingAction(string){
 	}
 }
 
-var ActionChains={
+var Macros={
 	"tutorial-clue":[{
 			steps:"TYPE THE CLUE".length,
 			interval:300,

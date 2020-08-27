@@ -445,4 +445,5 @@
 
 .tutor .letter.caret{
   margin-left:var(--w-2);
+  margin-right:var(--w-2);
 }
