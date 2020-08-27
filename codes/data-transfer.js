@@ -4686,7 +4686,6 @@ function ChainSchedule(Objs){
 
 	for(var j=actions.length-1;j>0;j--){
 		actions[j-1].Ender=Chain(Objs[j-1].Ender||Identity,actions[j]);
-		console.log(j,actions[j-1].Ender.toString());
 	}
 	
 	SequenceSchedule(actions[0]);
