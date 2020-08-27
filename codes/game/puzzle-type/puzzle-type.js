@@ -86,7 +86,8 @@ function UpdateWinPane(title){
 		var text=WinTexts[title];
 	else
 		var text="Well done!";
-	var winElements="12345678".split("").map(n=>`<div class="winlegend">${text}</div>`).join("\n")
+
+	var winElements="12345678".split("").map(n=>`<div class="winlegend">${n==2?text:""}</div>`).join("\n")
 	ReplaceChildren(winElements,".winpane");
 
 	setTimeout(()=>UnHideElement(".winpane"),250);

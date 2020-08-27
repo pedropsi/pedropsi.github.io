@@ -28,7 +28,7 @@
    color: var(--white);
    
    transition-duration: 2s;
-   transition-timing-function:linear;
+   transition-timing-function:cubic-bezier(0.5,1,0.5,0);
 }
 
 .winpane .winlegend:nth-of-type(odd){
