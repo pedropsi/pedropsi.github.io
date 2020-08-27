@@ -2394,7 +2394,7 @@ TRHTML=function(dataArray){
 };
 
 TableHTML=function(caption,headers,rows){
-	console.log(caption);
+	
 	var headersHTML="";
 	if(IsString(headers))
 		headersHTML=headers;
