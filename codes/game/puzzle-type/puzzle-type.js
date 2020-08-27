@@ -39,44 +39,44 @@ function WinPaneHTML(){
 }
 
 var WinTexts={
-	"Direct":"Easy!",				
-	"Reverse":".eciN",
+	"Direct":"Good!",				
+	"Reverse":"",
 	"Follow":"Go on!",
-	"Consonant":"C-ngr-t-l-t--ns!",
-	"Second":"Well done, well done!",
-	"Rotate":"GRAET WOKR!",
-	//"Oppose":2,
-	"Rise":"Not bad!",				//improve
-	"Falls":"Good job!",			//improve
-	"Precedent":"Fantastic!",		//improve
-	"Teleporter":"From another world!",		
+	"Consonant":"C_NGR_TS!",
+	"Second":"Well done. Well done.",
+	"Rotate":"Ecxeellnt!",
+	//"Oppose":???,
+	"Rise":"Sky-high!",
+	"Falls":"Fall for the Puzzle Type!",
+	"Precedent":"Unprecedented!",		
+	"Teleporter":"Far-fetched!",		
 	"Superior":"Supreme!",			
-	//"Tangles":3,
-	"Difference":"Very impressive!", //improve
+	//"Tangles":???,
+	"Difference":"With distinction!",
 	//"Photocopier":???,
 	"Symmetries":"Spec(tac)ular!",
-	"Fillet":"Amazing!",				//improve
-	"Topological":"Excellent!",			//improve
-	"Wasd":"Wow!",						//improve
-	"Nokia 1998":"Classic!",
-	"Dvorak":"Unbelievable!",			//improve
+	"Fillet":"You made the cut!",
+	"Topological":"Logically!",
+	"Wasd":"aMAZEing...",
+	"Nokia 1998":"A classic!",
+	"Dvorak":"Puzzle Typing since 1932!",
 	"ひらがな":"驚くばかり",
 	"Nigeria":"World class!",
-	"Anagram":"Awesome!",				//improve
-	"Genetic.":"Phenomenal",			//improve
-	"Ironclad":"S-U-P-Er-B",
-	"Deaf":"Aced!",
+	"Anagram":"Gaga!",
+	"Genetic.":"GENIE",
+	"Ironclad":"SUPErB",
+	"Deaf":"Ace Badge#",
 	"⠍⠕⠗⠎⠑":"⠁⠺⠑⠐⠎",
 	"Dividi":"Ipsum bonum!",
-	"Magnetism":"Attractive!",
+	"Magnetism":"Electrifying!",
 	//"Fuchsia":"Stunning!",
-	"Odd":"Even better!",
-	"Latent clones":"Four-midable!",
-	"Shepherdess hence unladylike":"Beautiful!",
-	"Starting buds":"Incredible!",					//improve
+	"Odd":"EVEN better!",
+	"Latent clones":"FOURmidable!",
+	"Shepherdess hence unladylike":"Be cHERiSHEd!",
+	"Starting buds":"Startling!",
 	"La rapide surprise":"Très bien!",
-	"Just cut and paste":"Well well well done.",
-	"Order is all":"One step closer!"				//improve
+	"Just cut and paste":"Very very very good.",
+	"Order is all":"Steadfast!"
 };
 //Extraordinary, Stupendous, fabulous, Astounding, captivating,Wondrous, Unbelievable, breathtaking
 
