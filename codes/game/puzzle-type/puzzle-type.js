@@ -2936,6 +2936,9 @@ function LevelKeystrokesSimpler(title){
 		return Identity;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//Automations
+
 //Tutorial Mode
 
 function OpenTutorial(){
@@ -3040,6 +3043,58 @@ var ActionChains={
 		}]
 }
 
+//Winning automation
+
+function LevelSolution(title){ //In a separate file
+	if(In(LevelSolutions,title))
+		return LevelSolutions[title]
+	else
+		return "";
+};
+
+function SolutionTypingInterval(title){
+	var intervals={
+		"Topological":"1000",
+		"Nokia 1998":"1000"
+	}
+	if(In(intervals,title))
+		return intervals[title];
+	else
+		return 300;
+}
+
+function WinLevelAction(title){
+	var solAction=TypingAction(LevelSolution(title));
+		solAction.interval=SolutionTypingInterval(title);
+	return solAction;
+}
+
+function GotoAndWinLevelActions(title){
+	return [
+		{Starter:()=>GoToLevel(title)},
+		WinLevelAction(title)
+	]
+}
 
 
+function CurLevelWin(){
+	ChainSchedule(GotoAndWinLevelActions(CurLevelName()));
+}
 
+function GotoLevelWin(title){
+	ChainSchedule(GotoAndWinLevelActions(title));
+}
+
+function NextLevelsWin(title){
+	if(title)
+		var n=LevelTitleNumber(title);
+	else
+		n=CurLevelNumber();
+		
+	var remainingGoals=Range(n,MaxLevel()).map(n=>LevelGoals[n-1]);
+		remainingGoals=remainingGoals.filter(g=>!LevelWon(g));
+
+	var actions=remainingGoals.map(GotoAndWinLevelActions).flat();
+	
+	ChainSchedule(actions);
+}
