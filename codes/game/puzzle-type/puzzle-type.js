@@ -2951,39 +2951,49 @@ function CloseTutorialGoal(){
 }
 
 
-function TutorialWrite(string,time,waitstart,waitmiddle,waitend){
-	var steps=string.length;
-	var delay=(time-waitstart-waitend)/steps;
-
-	function EraserIterator(i){
+function UndoIterator(i){
+	return function(){
+		Throttle(Undo,100);
+	}
+}
+function LetterIterator(string){
+	return function (i){
 		return function(){
-			DeleteLetterAfter();
-			DrawLettersEndCaret();
+			GameKey(string[i]);
 		}
 	}
-	function WriterIterator(i){
-		return function(){
-			InputLetterAfter(string[i]);
-			DrawLettersEndCaret();
-		}
-	}
+}
 
-	ChainSchedule([{
-			steps:steps,
-			interval:delay*0.9,
-			Iterator:WriterIterator,
-			startDelay:waitstart,
+function TypingAction(string){
+	return{
+		steps:string.length,
+		interval:300,
+		Iterator:LetterIterator(string),
+		startDelay:2000
+	}
+}
+
+var ActionChains={
+	"tutorial-clue":[{
+			steps:"TYPE THE CLUE".length,
+			interval:300,
+			Iterator:LetterIterator("TYPE THE CLUE"),
+			startDelay:3000,
 			Starter:OpenTutorial,
-			endDelay:waitmiddle/2
+			endDelay:3000
 		},{
-			steps:steps,
-			interval:delay*0.1,
-			Iterator:EraserIterator,
-			startDelay:waitmiddle/2,
+			steps:"TYPE THE CLUE".length,
+			interval:200,
+			Iterator:UndoIterator,
+			startDelay:0,
 			Starter:CloseTutorialGoal,
-			endDelay:waitend,
+			endDelay:2000,
 			Ender:CloseTutorialLetters
-		}
-	])
+		},{
+			steps:"DIRECT".length,
+			interval:300,
+			Iterator:LetterIterator("DIRECT"),
+			startDelay:1000
+		}],
 }
 
