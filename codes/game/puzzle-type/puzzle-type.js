@@ -3111,11 +3111,11 @@ function GotoAndWinLevelActions(title){
 
 
 function CurLevelWin(){
-	ChainSchedule(GotoAndWinLevelActions(CurLevelName()));
+	MacroRun(GotoAndWinLevelActions(CurLevelName()));
 }
 
 function GotoLevelWin(title){
-	ChainSchedule(GotoAndWinLevelActions(title));
+	MacroRun(GotoAndWinLevelActions(title));
 }
 
 function NextLevelsWin(title){
@@ -3129,5 +3129,5 @@ function NextLevelsWin(title){
 
 	var actions=remainingGoals.map(GotoAndWinLevelActions).flat();
 	
-	ChainSchedule(actions);
+	MacroRun(actions);
 }

@@ -4674,7 +4674,7 @@ function SequenceSchedule(Obj){
 	for(var i=0;i<=steps;i=i+1){ScheduleAnim(i,startTime)};
 }
 
-function ChainSchedule(Objs){
+function MacroRun(Objs){
 	var actions=[...Objs];
 
 	function Chain(PrevEnder,ThisAction){
