@@ -1003,11 +1003,12 @@ function SolvedAllLevels(){
 }
 
 function LevelNumber(curscreen){
-	return LevelScreens().filter(function(l){return l<curscreen}).length+1;
+	var lvl=LevelScreens().filter(function(l){return l<curscreen}).length+1;
+	return Min(lvl,MaxLevel());
 }
 
 function CurLevelNumber(){
-	return LevelNumber(CurrentScreen());
+	return LevelNumber(CurrentScreen())
 }
 
 
