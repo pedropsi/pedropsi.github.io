@@ -3094,14 +3094,28 @@ function UnOverlayTutorialMacro(){return [
 	];
 }
 
+var ZoomMacro=[
+	{Starter:function(){
+		Class(".game-supra-Canvas","zoom"),
+		UnClass(".game-supra-Canvas","unzoom")},
+	endDelay:500}
+]
+
+var UnZoomMacro=[
+	{Starter:function(){
+		Class(".game-supra-Canvas","unzoom"),
+		UnClass(".game-supra-Canvas","zoom")}
+	}
+]
+
 function TutorialClueMacro(){
 	return [
 		...OverlayTutorialMacro(),	
-		{Starter:()=>Class(".game-supra-Canvas","zoom"),endDelay:500},
+		...ZoomMacro,
 		{Starter:()=>GoToLevel("Direct"),endDelay:500},
 		TypingAction("TYPE THE CLUE",{endDelay:2000}),
-		UnTypingAction("TYPE THE CLUE",{endDelay:1500}),
-		{Starter:()=>UnClass(".game-supra-Canvas","zoom")},
+		UnTypingAction("TYPE THE CLUE",{endDelay:0}),
+		...UnZoomMacro,
 		...UnOverlayTutorialMacro(),
 		TypingAction("DIRECT")
 	];
@@ -3111,8 +3125,10 @@ function TutorialRuleMacro(){
 	return [
 		{Starter:()=>GoToLevel("Reverse")},
 		...OverlayTutorialMacro(),
+		...ZoomMacro,
 		TypingAction("ELUR NEDDIH EHT DNIF",{startDelay:1000,endDelay:2000}),
 		UnTypingAction("ELUR NEDDIH EHT DNIF",{endDelay:1500}),
+		...UnZoomMacro,
 		...UnOverlayTutorialMacro(),
 		TypingAction("REVERS",{endDelay:2000}),
 		UnTypingAction("REVERS",{endDelay:1500}),

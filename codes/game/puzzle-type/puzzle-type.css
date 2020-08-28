@@ -207,7 +207,8 @@
    font-size: calc(var(--h4) + var(--w2));
    height: calc(var(--h8) + var(--w4));
    border-bottom-width: calc(var(--h1) + var(--w-2));
-   margin: -0.1px /*subtle effect*/
+   margin: -1px; /*subtle effect*/
+   border-radius: 1px;
 }
   
 .letter.caret, .caret .half{
@@ -216,8 +217,7 @@
     color:var(--letterTransparent);
     width: calc(var(--h4) + var(--w2));
     border-bottom-width: calc(var(--h1) + var(--w-2) - 0.1px);
-   margin-right: -0.5px; /*subtle effect*/
-   margin-left: 0.1px; /*subtle effect*/
+    border-radius: 0 0 calc(var(--h1) + var(--w-2)) 0;/*subtle*/
 }
 
 .win{
@@ -447,19 +447,27 @@
    --letterOn:var(--lightyellow);
    --letterMid:var(--blue);
    --letterTransparent:var(--darkblue);
+   
 }
 
 .tutor .letter{
-  filter: blur(var(--h-8));
   margin:0 calc(-1 * var(--w-2)) 0 calc(-1 * var(--w-2));
 }
 
 .tutor .letter.caret{
-  margin-left:var(--w-2);
-  margin-right:var(--w-2);
+  margin-left:calc(var(--w-2) - 0.5px);
+  margin-right:calc(var(--w-2) - 0.5px);
 }
 
 .game-supra-Canvas.zoom{
+   filter: unset;
    transform: translateY(calc(-35vh)) scale(1.7);
-   transition-duration: 2s
+   transition-duration: 2s;
+   transition-timing-function:linear
+}
+
+.game-supra-Canvas.unzoom{
+   transform: translateY(0) scale(1);
+   transition-duration: 2s;
+   transition-timing-function:linear
 }
