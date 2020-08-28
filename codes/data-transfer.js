@@ -4744,7 +4744,7 @@ function ClearSchedule(name){
 
 
 function MacroRun(Objs){
-	var actions=[...Objs];
+	var actions=Clone(Objs);
 
 	function Chain(PrevEnder,ThisAction){
 		return function(){
