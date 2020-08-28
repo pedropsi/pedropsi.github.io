@@ -1785,3 +1785,15 @@ p .icon{
 	font-weight: bold;
 	font-variant: small-caps;
 }
+
+/*Wallpapers*/
+svg.wallpaper{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+
+svg.wallpaper path{
+	fill: var(--smokewhite);
+}
