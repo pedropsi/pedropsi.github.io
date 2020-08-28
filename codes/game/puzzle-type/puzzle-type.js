@@ -62,8 +62,8 @@ var WinTexts={
 	"Dvorak":"Puzzle Typing since 1932",
 	"ひらがな":"驚くばかり",
 	"Nigeria":"Nawa oh!",
-	"Anagram":"Magna",						//improve
-	"Genetic.":"GENIE",						//improve
+	"Anagram":"MAGNificient!",
+	"Genetic.":"It's in your genes!",
 	"Ironclad":"Elementary!",
 	"Deaf":"Ace Badge#",
 	"⠍⠕⠗⠎⠑":"⠁⠺⠑⠐⠎",
