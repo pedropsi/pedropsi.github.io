@@ -2973,34 +2973,6 @@ function LevelKeystrokesSimpler(title){
 ///////////////////////////////////////////////////////////////////////////////
 //Automations
 
-//Tutorial Mode
-
-function FadeNotesKeystrokes(){
-	FadeElement(".top .keystrokes");
-	FadeElement(".top .notes");
-}
-function UnFadeNotesKeystrokes(){
-	UnFadeElement(".top .keystrokes");
-	UnFadeElement(".top .notes");
-}
-function OverlayTutorial(){
-	HideElement(".top .keystrokes");
-	HideElement(".top .notes");
-	Class(".middle","tutor");
-	Class(".top","tutor");
-}
-
-function CloseTutorialLetters(){
-	UnClass(".middle","tutor");
-}
-
-function CloseTutorialGoal(){
-	UnClass(".top","tutor");
-	UnHideUnFadeElement(".top .keystrokes");
-	UnHideUnFadeElement(".top .notes");
-}
-
-
 function UndoIterator(i){
 	return function(){
 		Throttle(Undo,100);
@@ -3034,48 +3006,6 @@ function UnTypingAction(string,Opts){
 		steps:string.length,
 		Iterator:UndoIterator
 	};
-}
-
-var TutorialMacro=[
-	{Starter:FadeNotesKeystrokes,endDelay:1000},
-	{Starter:OverlayTutorial,endDelay:1000}
-];
-
-var Macros={
-	"tutorial-clue":[
-		{Starter:()=>GoToLevel("Direct")},
-		...TutorialMacro,
-		TypingAction("TYPE THE CLUE",{startDelay:1000}),
-		UnTypingAction("TYPE THE CLUE",{
-			startDelay:1000,
-			Starter:CloseTutorialGoal,
-			endDelay:2000,
-			Ender:CloseTutorialLetters
-		}),
-		TypingAction("DIRECT")
-	],
-	"tutorial-rule":[
-		{Starter:()=>GoToLevel("Reverse")},
-		...TutorialMacro,
-		TypingAction("ELUR NEDDIH EHT DNIF",{
-			startDelay:3000,
-			Starter:OverlayTutorial,
-			endDelay:3000
-		}),
-		UnTypingAction("ELUR NEDDIH EHT DNIF",{
-			Starter:CloseTutorialGoal,
-			endDelay:1000,
-			Ender:CloseTutorialLetters
-		}),
-		TypingAction("REVERS",{
-			startDelay:2000,
-			endDelay:2000
-		}),
-		UnTypingAction("REVERS",{
-			endDelay:2000,
-		}),
-		TypingAction("ESREVER")
-	]
 }
 
 //Winning automation
@@ -3135,3 +3065,65 @@ function NextLevelsWin(title){
 	MacroRun(actions);
 }
  
+//Tutorial Mode
+
+function OverlayTutorial(){
+	Class(".middle","tutor");
+	Class(".top","tutor");
+}
+
+function UnOverlayTutorial(){
+	UnClass(".middle","tutor");
+	UnClass(".top","tutor");
+}
+
+
+function OverlayTutorialMacro(){return [
+	{Starter:()=>FadeElement(".top .notes")},
+	{Starter:()=>FadeElement(".top .keystrokes"),endDelay:500},
+	{Starter:()=>FadeElement(".top .goal"),endDelay:500},
+	{Starter:OverlayTutorial}
+	];
+}
+
+function UnOverlayTutorialMacro(){return [
+	{Starter:UnOverlayTutorial,endDelay:100},
+	{Starter:()=>UnFadeElement(".top .goal"),endDelay:100},
+	{Starter:()=>UnFadeElement(".top .keystrokes"),endDelay:100},
+	{Starter:()=>UnFadeElement(".top .notes"),endDelay:1000},
+	];
+}
+
+function TutorialClueMacro(){
+	return [
+		...OverlayTutorialMacro(),	
+		{Starter:()=>Class(".game-supra-Canvas","zoom"),endDelay:500},
+		{Starter:()=>GoToLevel("Direct"),endDelay:500},
+		TypingAction("TYPE THE CLUE",{endDelay:2000}),
+		UnTypingAction("TYPE THE CLUE",{endDelay:1500}),
+		{Starter:()=>UnClass(".game-supra-Canvas","zoom")},
+		...UnOverlayTutorialMacro(),
+		TypingAction("DIRECT")
+	];
+}
+
+function TutorialRuleMacro(){
+	return [
+		{Starter:()=>GoToLevel("Reverse")},
+		...OverlayTutorialMacro(),
+		TypingAction("ELUR NEDDIH EHT DNIF",{startDelay:1000,endDelay:2000}),
+		UnTypingAction("ELUR NEDDIH EHT DNIF",{endDelay:1500}),
+		...UnOverlayTutorialMacro(),
+		TypingAction("REVERS",{endDelay:2000}),
+		UnTypingAction("REVERS",{endDelay:1500}),
+		TypingAction("ESREVER")
+	];
+}
+
+function TutorialMacro(){
+	return [
+		{Starter:CollapseGameBar,endDelay:500},
+		...TutorialClueMacro(),
+		...TutorialRuleMacro()
+	];
+}
