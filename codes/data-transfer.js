@@ -4744,6 +4744,10 @@ function ClearSchedule(name){
 
 
 function MacroRun(Objs){
+	if(MacroRun.running)
+		return console.log("Macro running... Please wait!");
+	MacroRun.running=true;
+	
 	var actions=Clone(Objs);
 
 	function Chain(PrevEnder,ThisAction){
@@ -4755,6 +4759,12 @@ function MacroRun(Objs){
 
 	for(var j=actions.length-1;j>0;j--){
 		actions[j-1].Ender=Chain(Objs[j-1].Ender||Identity,actions[j]);
+	}
+	
+	var FinalEnder=actions[actions.length-1].Ender||Identity;
+	actions[actions.length-1].Ender=function(){
+		FinalEnder();
+		MacroRun.running=false;
 	}
 	
 	SequenceSchedule(actions[0]);
