@@ -526,9 +526,9 @@ Outflows=function(name){
 //////////////////////////////////////////////////////////////////////
 //Hall of Fame
 
-RequestHallOfFame=function(SuccessF){
-
-	var SuccessF=SuccessF||Identity;
+RequestHallOfFame=function(){
+	if(LocalStorage("hall-of-fame")===true)
+		return RequestWinnerMessage();
 
 	if(ConsoleExternal())
 		RequestDataPack([
@@ -552,19 +552,17 @@ RequestHallOfFame=function(SuccessF){
 	]],
 	{
 		destination:"hall-of-fame",
-		qonclose:RequestModalWinnerMessage,
-		qonsubmit:function(DP){
-			SuccessF();
-			RequestModalWinnerMessage(DP);
+		qonclose:RequestWinnerMessage,
+		qonsubmit:function(){
+			LocalStorage("hall-of-fame",true);
+			Once(RequestWinnerMessage);
+			console.log("call")
 		}
 	});
 }
 
-RequestModalWinnerMessage=function(previousDP){
-	
-	if(!RequestModalWinnerMessage[previousDP.qid])
-		RequestModalWinnerMessage[previousDP.qid]=true;
-	else
+RequestWinnerMessage=function(){
+	if(LocalStorage("winner-message")===true)
 		return;
 	
 	function DestinationChoice(choice){
@@ -590,7 +588,10 @@ RequestModalWinnerMessage=function(previousDP){
 	{
 		thanksmessage:"Thank you for your message.",
 		qonclose:GameFocus,
-		qonsubmit:GameFocus,
+		qonsubmit:function(){
+			LocalStorage("winner-message",true);
+			GameFocus();
+		},
 		findDestination:function(DP){return DestinationChoice(FindData("whence",DP.qid));}
 	}
 	);

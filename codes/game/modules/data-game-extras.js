@@ -1365,24 +1365,13 @@ function ResetStory(){
 	EraseLocalStorage('story');
 }
 
-function InviteHallOfFame(){
-	if(RequestHallOfFame===Identity)
-		return;
-	
-	function SaveHOF(){
-		LocalStorage("hall-of-fame",true)
-	}
-
-	if(LocalStorage("hall-of-fame")!==true)
-		RequestHallOfFame(SaveHOF);
-}
 
 function EndGame(){
 	ClearLevelRecord();
 	UpdateLevelSelectorButton();
 	ObtainPlayEndGameSound();
 	ObtainTitleScreenLoader();
-	InviteHallOfFame();
+	RequestHallOfFame();
 	CurrentScreen(0);//TODO CHECK IF BETTER BEHAVIOUR
 }
 
