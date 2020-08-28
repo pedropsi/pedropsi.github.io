@@ -90,7 +90,7 @@ PolarSwipe=function(F){
 }
 
 
-Shout("data-game-swipe")
+Shout("data-game-gestures")
 
 //Tests
 // Listen("swipe-left",function(){ConsoleAdd("swipe-LEFT")})

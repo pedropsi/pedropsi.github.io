@@ -208,7 +208,7 @@ var gameModulesEarly=[
 "codes/game/modules/data-game-undo.js",
 "codes/game/game-intro.js",
 "codes/game/modules/data-game-hints.js",
-"codes/game/modules/data-game-swipe.js",
+"codes/game/modules/data-game-gestures.js",
 // "codes/game/modules/data-game-hud.js"
 ]
 
