@@ -96,15 +96,29 @@
    /*! margin-top: calc(-1*var(--h8)); */
    /*! margin-bottom: calc(-1*var(--h2)); */
    justify-content: center;
+   align-items: baseline;
+   flex-wrap: wrap;
 }
 
 .goal div.letter{
-   font-size: calc(var(--w4) + var(--h4));
+   font-size: calc(var(--w4) + var(--h2));
    line-height: calc(var(--h2) + var(--w2) + var(--h1));
    font-variant-caps:small-caps; 
    font-weight: bold;
-   padding: 0 var(--w-8) 0 var(--w-8);
+   padding: 0 var(--w-16) 0 var(--w-16);
    height: auto;
+}
+
+.goal div.letter.space{
+   min-width: calc(var(--w1) + var(--h1));
+}
+
+.goal div.letter:first-child{
+   font-size: calc(1.2*var(--w4) + 1.2*var(--h2));
+}
+
+.goal svg.letter:first-child{
+   height:calc(1.2*var(--h4) + 1.2*var(--w2));
 }
 
 .notes{
