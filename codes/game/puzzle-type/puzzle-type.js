@@ -3133,3 +3133,4 @@ function NextLevelsWin(title){
 	
 	MacroRun(actions);
 }
+ 

@@ -4686,6 +4686,7 @@ UnScheduleAll=function(queueName){
 
 //Schedule Sequences of Actions
 function SequenceSchedule(Obj){
+	
 	var steps=Obj.steps||0;
 	var interval=Obj.interval||500;
 
@@ -4696,6 +4697,12 @@ function SequenceSchedule(Obj){
 	var endwait=Obj.endDelay||0;
 	var stawait=Obj.startDelay||0;
 
+	var name=Obj.id||GenerateId();
+	console.log("Scheduled ",name);
+
+	if(!SequenceSchedule[name])
+		SequenceSchedule[name]=[];
+
 	function ScheduleAnim(i,startTime){
 		var expectedTime=startTime+stawait+interval*i+(i===steps?endwait:0);
 		ScheduleAnim.delay=0;
@@ -4704,9 +4711,12 @@ function SequenceSchedule(Obj){
 			var actualTime=Date.now();
 			ScheduleAnim.delay=Max(actualTime-expectedTime,0);
 			setTimeout(i!==steps?Iterator(i):Ender,ScheduleAnim.delay);
+			var t=setTimeout(IterateOnTime,ScheduleAnim.delay);
+			SequenceSchedule[name].push(t);
 		}
 
-		setTimeout(TimedIterator,+stawait+interval*i+(i===steps?endwait:0))		
+		var T=setTimeout(TimedIterator,+stawait+interval*i+(i===steps?endwait:0));
+		SequenceSchedule[name].push(T);
 	}
 
 	Starter();
@@ -4718,6 +4728,18 @@ function SequenceSchedule(Obj){
 	
 	for(var i=0;i<=steps;i=i+1){ScheduleAnim(i,startTime)};
 }
+
+function ScheduleList(name){
+	return SequenceSchedule[name]||[];
+}
+
+function ClearSchedule(name){
+	if(SequenceSchedule[name]){
+		SequenceSchedule[name].map(clearTimeout);
+		SequenceSchedule[name]=[];
+	}
+}
+
 
 function MacroRun(Objs){
 	var actions=[...Objs];
