@@ -526,7 +526,10 @@ Outflows=function(name){
 //////////////////////////////////////////////////////////////////////
 //Hall of Fame
 
-RequestHallOfFame=function(){
+RequestHallOfFame=function(SuccessF){
+
+	var SuccessF=SuccessF||Identity;
+
 	if(ConsoleExternal())
 		RequestDataPack([
 		['alias',{
@@ -536,7 +539,8 @@ RequestHallOfFame=function(){
 			qerrorcustom:"The Hall of Fame's guards ask for at least 2 alphanumerics!"}
 		]],
 		{
-			destination:"hall-of-fame-global"
+			destination:"hall-of-fame-global",
+			qonsubmit:SuccessF
 		});
 	else
 		RequestDataPack([
@@ -549,7 +553,10 @@ RequestHallOfFame=function(){
 	{
 		destination:"hall-of-fame",
 		qonclose:RequestModalWinnerMessage,
-		qonsubmit:RequestModalWinnerMessage
+		qonsubmit:function(DP){
+			SuccessF();
+			RequestModalWinnerMessage(DP);
+		}
 	});
 }
 

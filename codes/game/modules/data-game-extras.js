@@ -886,8 +886,7 @@ function NextLevel(){
 		else if(curscreen<LastScreen())
 			AdvanceEndScreen();
 		else{
-			RequestHallOfFame();
-			ResetGame();
+			EndGame();
 		}
 	}
 }
@@ -1366,15 +1365,33 @@ function ResetStory(){
 	EraseLocalStorage('story');
 }
 
+function InviteHallOfFame(){
+	if(RequestHallOfFame===Identity)
+		return;
+	
+	function SaveHOF(){
+		LocalStorage("hall-of-fame",true)
+	}
+
+	if(LocalStorage("hall-of-fame")!==true)
+		RequestHallOfFame(SaveHOF);
+}
+
+function EndGame(){
+	ClearLevelRecord();
+	UpdateLevelSelectorButton();
+	ObtainPlayEndGameSound();
+	ObtainTitleScreenLoader();
+	InviteHallOfFame();
+	CurrentScreen(0);//TODO CHECK IF BETTER BEHAVIOUR
+}
+
 function ResetGame(){
 	EraseLocalsave();
 	ClearSolvedLevelScreens();
 	ResetLevel();
 	ResetCheckpoints();
-	ObtainTitleScreenLoader();
-	ObtainPlayEndGameSound();
-	ClearLevelRecord();
-	UpdateLevelSelectorButton()
+	EndGame();
 }
 
 function AdvanceLevel(){
