@@ -3011,14 +3011,32 @@ function LetterIterator(string){
 	}
 }
 
-function TypingAction(string){
-	return{
-		steps:string.length,
+function TypingAction(string,Opts){
+	var Opts=Opts||{};
+	return {
 		interval:300,
-		Iterator:LetterIterator(string),
-		startDelay:2000
-	}
+		startDelay:2000,
+		...Opts,
+		steps:string.length,
+		Iterator:LetterIterator(string)
+	};
 }
+
+function UnTypingAction(string,Opts){
+	var Opts=Opts||{};
+	return {
+		interval:200,
+		startDelay:1000,
+		...Opts,
+		steps:string.length,
+		Iterator:UndoIterator
+	};
+}
+
+var TutorialMacro=[
+	{Starter:FadeNotesKeystrokes,endDelay:1000},
+	{Starter:OverlayTutorial,endDelay:1000}
+];
 
 var Macros={
 	"tutorial-clue":[{
