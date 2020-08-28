@@ -5371,6 +5371,56 @@ StatusReporter=function(name,DefaultStatusReporter){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+//Patterns
+function WallpaperHTML(Opts){
+	if(IsString(Opts)){
+		var w=Wallpaper(Opts);
+		w?Opts=w:{path:Opts}
+	}
+	
+	var path=Opts.path||"M 0 0 L 100 0 L 100 100 Z";
+
+	var name=Opts.name||GenerateId();
+
+	var height=Opts.height||Opts.width||"100";
+	var width=Opts.width||Opts.height||"100";
+
+	var viewbox=Opts.viewbox||`0 0 ${width} ${height}`;
+	
+	var scale=Opts.scale||1;
+
+	var name=Opts.name||GenerateId();
+
+	return `<svg class='wallpaper' width="100%" height="100%">
+				<pattern id="${name}" x="0" y="0" width="${width*scale}" height="${height*scale}" patternUnits="userSpaceOnUse" viewBox="${viewbox}"> 
+					<g>
+						<path d="${path}" class="layer"/>
+					</g>
+				</pattern>
+				<rect x="0" y="0" width="100%" height="100%" fill="url(#${name})" />
+			</svg>`;
+}
+
+function AddWallpaper(patternObj,e){
+	AddElement(NewElement(WallpaperHTML(patternObj)),e);
+}
+
+function RemoveWallpaper(e){
+	GetElements(".wallpaper",e).map(RemoveElement);
+}
+
+function Wallpaper(name){
+	var patterns={
+		"triangle-5":{path:"M 0 0 L 20 0 L 20 20 Z",width:20},
+		"grid-5":{path:"M 0 0 L 1 0 L 1 7 L 0 7 M 0 8 L 1 8 L 1 9 L 0 9 M 2 9 L 9 9 L 9 8 L 2 8 Z",width:10}
+	}
+	if(In(patterns,name))
+		return patterns[name];
+	else
+		return undefined;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 //SVG Drawing
 
 SVGHTML=function(opts){
