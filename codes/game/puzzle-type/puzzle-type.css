@@ -217,7 +217,7 @@
     color:var(--letterTransparent);
     width: calc(var(--h4) + var(--w2));
     border-bottom-width: calc(var(--h1) + var(--w-2) - 0.1px);
-    border-radius: 0 0 calc(var(--h1) + var(--w-2)) 0;/*subtle*/
+    /*border-radius: 0 0 calc(var(--h1) + var(--w-2)) 0;subtle*/
 }
 
 .win{
