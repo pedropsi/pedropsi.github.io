@@ -1760,6 +1760,16 @@ function RequestMore(){
 	});
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//Collapse Game Bar
+
+CollapseGameBar=function(){
+	return Class(".game-supra-Canvas",".game-bar-collapse");
+}
+
+UnCollapseGameBar=function(){
+	return UnClass(".game-supra-Canvas",".game-bar-collapse")
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 Shout("data-game-extras");

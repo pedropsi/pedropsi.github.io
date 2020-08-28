@@ -53,7 +53,10 @@
     flex-grow: 1;
     justify-self: flex-start;
     overflow:hidden;
+    min-height: 0;
+    transition-duration: var(--durationOff)
 }
+
 #GameBar{
   justify-self: flex-end;
   z-index: 1;
@@ -61,9 +64,11 @@
 
 .game {
     height: calc(var(--gameH) - 2*var(--fontheight));
+    min-height: 0;
     touch-action: none;
     width: 100%;
     overflow: hidden;
+    transition-duration: var(--durationOff)
 }
 
 .game-rotation-container.rotate90 {
@@ -404,3 +409,14 @@
     ".    down .";
 }
 
+
+/*Collapse Game Bar, e.g. in tutorial mode*/
+.game-supra-Canvas.game-bar-collapse{
+    min-height:100vh;
+    transition-duration: var(--durationOff)
+}
+
+.game-bar-collapse .game{
+    min-height: 100vh;
+    transition-duration: var(--durationOff)
+}
