@@ -1370,13 +1370,15 @@ function ResetStory(){
 }
 
 
+
+
 function EndGame(){
 	ClearLevelRecord();
 	UpdateLevelSelectorButton();
 	ObtainPlayEndGameSound();
-	ObtainTitleScreenLoader();
 	RequestHallOfFame();
 	CurrentScreen(0);//TODO CHECK IF BETTER BEHAVIOUR
+	ObtainTitleScreenLoader();
 }
 
 function ResetGame(){
@@ -1384,8 +1386,10 @@ function ResetGame(){
 	ClearSolvedLevelScreens();
 	ResetLevel();
 	ResetCheckpoints();
-	EndGame();
+	CurrentScreen(0);//TODO CHECK IF BETTER BEHAVIOUR
+	ObtainTitleScreenLoader();
 }
+
 
 function AdvanceLevel(){
 	ObtainLevelTransition();
