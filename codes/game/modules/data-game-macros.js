@@ -12,4 +12,17 @@ function WinGameRun(){
 	var actions=UnSolvedLevelScreens().map(WinLevelMacro).flat();
 	MacroRun(actions);
 }
+
+function HallOfFameMacro(){
+	return [{
+		Starter:RequestHallOfFame,
+		endDelay:1000
+	},{
+		Starter:()=>GetElement("INPUT").value="PSI (test)",
+		endDelay:1000
+	},{
+		Starter:()=>GetElement(".button").click(),
+		endDelay:1000
+	}]
+}
  
