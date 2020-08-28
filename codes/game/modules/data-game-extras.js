@@ -945,6 +945,9 @@ function SolvedLevels(){
 	return SolvedLevels.levels;
 }
 
+function UnSolvedLevels(){
+	return Complement(Levels(),SolvedLevels());
+}
 function AddToSolvedScreens(curscreen){
 	function SortNumber(a,b){return a-b};
 	if(!IsScreenMessage(curscreen)&&!LevelScreenSolved(curscreen)){
