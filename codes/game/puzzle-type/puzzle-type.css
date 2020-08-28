@@ -95,11 +95,16 @@
    padding: 0;
    /*! margin-top: calc(-1*var(--h8)); */
    /*! margin-bottom: calc(-1*var(--h2)); */
-   line-height: calc(var(--h2) + var(--w2) + var(--h1));
    justify-content: center;
+}
+
+.goal div.letter{
    font-size: calc(var(--w4) + var(--h4));
-   font-variant-caps:small-caps;
+   line-height: calc(var(--h2) + var(--w2) + var(--h1));
+   font-variant-caps:small-caps; 
    font-weight: bold;
+   padding: 0 var(--w-8) 0 var(--w-8);
+   height: auto;
 }
 
 .notes{
@@ -446,8 +451,8 @@
 
    --letterOn:var(--lightyellow);
    --letterMid:var(--blue);
-   --letterTransparent:var(--darkblue);
-   
+   --letterTransparent:var(--darkblue);  
+}
 }
 
 .tutor .letter{
