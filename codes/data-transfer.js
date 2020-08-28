@@ -1082,11 +1082,13 @@ FuseObjectArray=function(objArray){
 }
 
 CloneObject=function(Obj){
-	return FuseObjects({},Obj);
+	var O={};
+	Keys(Obj).map(k=>O[k]=Clone(Obj[k]));
+	return O;
 }
 
 CloneArray=function(Arr){
-	return [].concat(Arr);
+	return [...Arr].map(Clone);
 }
 
 Clone=function(AOS){
