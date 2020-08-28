@@ -29,7 +29,8 @@ var ExtraModules=[
 		"data-game-overwrite",
 		"data-game-moves",
 		"data-game-hints",
-		"data-game-stats"
+		"data-game-stats",
+		"data-game-macros"
 	];
 
 //Forks in April 2020 (todo - remove need to update this list)
