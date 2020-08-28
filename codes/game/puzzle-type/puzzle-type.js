@@ -3106,6 +3106,7 @@ function WinLevelAction(title){
 
 function GotoAndWinLevelActions(title){
 	return [
+		{startDelay:1000},
 		{Starter:()=>GoToLevel(title)},
 		WinLevelAction(title)
 	]
