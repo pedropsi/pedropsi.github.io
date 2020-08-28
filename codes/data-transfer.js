@@ -852,7 +852,7 @@ EscapeTokens=function(tokenString){
 
 UnPrefix=function(word,prefix){
 	if(!word)
-		return "";
+		var word="";
 	if(!prefix)
 		return word;
 	var prefixFind=new RegExp("^"+EscapeTokens(prefix));
@@ -864,7 +864,7 @@ UnPrefix=function(word,prefix){
 }
 UnPosfix=function(word,suffix){ //suffix
 	if(!word)
-		return "";
+		var word="";
 	if(!suffix)
 		return word;
 	var suffixFind=new RegExp(EscapeTokens(suffix)+"$");
@@ -876,27 +876,27 @@ UnPosfix=function(word,suffix){ //suffix
 }
 Prefix=function(word,prefix){
 	if(!word)
-		return "";
+		var word="";
 	if(!prefix)
 		return word;
 	return prefix+UnPrefix(word,prefix);
 }
 Posfix=function(word,suffix){ //suffix
 	if(!word)
-		return "";
+		var word="";
 	if(!suffix)
 		return word;
 	return UnPosfix(word,suffix)+suffix;
 }
 Exfix=function(word,prefix,suffix){
 	if(!word)
-		return "";
+		var word="";
 	var suffix=suffix||prefix;
 	return Prefix(Posfix(word,suffix),prefix);
 }
 UnExfix=function(word,prefix,suffix){
 	if(!word)
-		return "";
+		var word="";
 	var suffix=suffix||prefix;
 	return UnPrefix(UnPosfix(word,suffix),prefix);
 }
@@ -910,12 +910,12 @@ Alternate=function(wordArray){
 
 Prefixed=function(word,prefix){
 	if(!word)
-		return !prefix;
+		var word="";
 	return UnPrefix(word,prefix)!==word;
 }
 Posfixed=function(word,suffix){
 	if(!word)
-		return !suffix;
+		var word="";
 	return UnPosfix(word,suffix)!==word;
 }
 
@@ -924,13 +924,13 @@ Posfixed=function(word,suffix){
 
 UnOnceBeforfix=function(word,prefix){
 	if(!word)
-		return "";
+		var word="";
 	var prefixFind=new RegExp(".*"+EscapeTokens(prefix));
 	return word.replace(prefixFind,"");
 }
 UnBeforfix=function(word,prefix){
 	if(!word)
-		return "";
+		var word="";
 	if(!prefix)
 		return word;
 	if(IsArray(prefix))
@@ -941,7 +941,7 @@ UnBeforfix=function(word,prefix){
 
 UnAfterfix=function(word,posfix){
 	if(!word)
-		return "";
+		var word="";
 	if(!posfix)
 		return word;
 	var posfixFind=new RegExp(EscapeTokens(posfix)+".*");
@@ -950,7 +950,7 @@ UnAfterfix=function(word,posfix){
 
 Afterfix=function(word,posfix){
 	if(!word)
-		return "";
+		var word="";
 	if(!posfix)
 		return "";
 	return UnPrefix(word.replace(UnAfterfix(word,posfix),""),posfix);
@@ -958,7 +958,7 @@ Afterfix=function(word,posfix){
 
 UnOverfix=function(word,posfix){
 	if(!word)
-		return "";
+		var word="";
 	if(!posfix)
 		return word;
 	return UnPosfix(word.replace(UnBeforfix(word,posfix),""),posfix);
@@ -966,7 +966,7 @@ UnOverfix=function(word,posfix){
 
 Overfix=function(word,posfix){
 	if(!word)
-		return "";
+		var word="";
 	if(!posfix)
 		return "";
 	return UnPrefix(word.replace(UnOverfix(word,posfix),""),posfix);
@@ -974,7 +974,7 @@ Overfix=function(word,posfix){
 
 UnUnderfix=function(word,prefix){
 	if(!word)
-		return "";
+		var word="";
 	if(!prefix)
 		return word;
 	return UnPrefix(word.replace(UnAfterfix(word,prefix),""),prefix);
@@ -982,7 +982,7 @@ UnUnderfix=function(word,prefix){
 
 Underfix=function(word,prefix){
 	if(!word)
-		return "";
+		var word="";
 	if(!prefix)
 		return "";
 	return UnPosfix(word.replace(UnUnderfix(word,prefix),""),prefix);
@@ -991,7 +991,7 @@ Underfix=function(word,prefix){
 /* redundant
 UnAfterfix=function(word,posfix){
 	if(!word)
-		return "";
+		var word="";
 	if(!posfix)
 		return word;
 	if(IsArray(posfix))
