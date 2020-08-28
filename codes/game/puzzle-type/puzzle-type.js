@@ -585,10 +585,7 @@ function FormattedTitle(title){
 }
 
 function FormattedGoal(title){
-	if(title==="Topological")
-		return title.toUpperCase().split("").map(LetterHTML(title)).join("");
-	else
-		return title;
+	return title.toUpperCase().split("").map(LetterHTML(title)).join("");
 }
 
 var LevelDifficulty={
@@ -2339,7 +2336,7 @@ function DrawSingleCaret(p){
 	if(p>=Letters().length)
 		AddElement(CaretHTML(),"#letters");
 	else
-		Class(GetElement(".letter-"+p),"caret")
+		Class(GetElement(".middle .letter-"+p),"caret")
 }
 
 function LetterPureHTML(L,cla){
@@ -2441,7 +2438,7 @@ function ClearLetters(){
 function DrawLetters(){
 	var letters=Letters().map(LetterHTML(CurLevelName())).join("\n");
 	ReplaceChildren(letters,"#letters");
-	GetElements(".letter").map((e,n)=>Class(e,"letter-"+n)); //number each letter
+	GetElements(".middle .letter").map((e,n)=>Class(e,"letter-"+n)); //number each letter
 	
 	TransitionLetters(CurLevelName());
 }
@@ -2461,7 +2458,7 @@ function TransitionExpansion(){
 		return;
 	
 	var p=memo.positions[memo.p]+(memo.positions.length>1?1:0);
-	var letterE=GetElement(".letter-"+p);
+	var letterE=GetElement(".middle .letter-"+p);
 	if(letterE){
 		letterE.outerHTML=`<div class="expanding">${letterE.outerHTML}</div>`
 		Class(letterE,"expanding");
