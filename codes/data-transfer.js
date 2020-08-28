@@ -3112,7 +3112,7 @@ UnHideElement=function(selectorE){
 	return e;
 }
 
-ShowUnFadeElement=function(e){
+UnHideUnFadeElement=function(e){
 	UnHideElement(e);
 	UnFadeElement(e);
 }
@@ -3157,7 +3157,7 @@ OpenElement=function(e,parentIDsel){
 	if(!e)
 		return;
 	e=NewElement(e);
-	ShowUnFadeElement(e);
+	UnHideUnFadeElement(e);
 	AddElement(e,parentIDsel);
 }
 

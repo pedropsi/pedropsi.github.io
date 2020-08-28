@@ -2975,26 +2975,29 @@ function LevelKeystrokesSimpler(title){
 
 //Tutorial Mode
 
-function OpenTutorial(){
-	OpenTutorialLetters();
-	OpenTutorialGoal();
-}
-
-function OpenTutorialLetters(){
-	Class(".middle","tutor");
-}
-function CloseTutorialLetters(){
-	UnClass(".middle","tutor");
-}
-function OpenTutorialGoal(){
-	Class(".top","tutor");
+function FadeNotesKeystrokes(){
 	FadeElement(".top .keystrokes");
 	FadeElement(".top .notes");
 }
-function CloseTutorialGoal(){
-	UnClass(".top","tutor");
+function UnFadeNotesKeystrokes(){
 	UnFadeElement(".top .keystrokes");
 	UnFadeElement(".top .notes");
+}
+function OverlayTutorial(){
+	HideElement(".top .keystrokes");
+	HideElement(".top .notes");
+	Class(".middle","tutor");
+	Class(".top","tutor");
+}
+
+function CloseTutorialLetters(){
+	UnClass(".middle","tutor");
+}
+
+function CloseTutorialGoal(){
+	UnClass(".top","tutor");
+	UnHideUnFadeElement(".top .keystrokes");
+	UnHideUnFadeElement(".top .notes");
 }
 
 
@@ -3039,60 +3042,40 @@ var TutorialMacro=[
 ];
 
 var Macros={
-	"tutorial-clue":[{
-			steps:"TYPE THE CLUE".length,
-			interval:300,
-			Iterator:LetterIterator("TYPE THE CLUE"),
-			startDelay:3000,
-			Starter:OpenTutorial,
-			endDelay:3000
-		},{
-			steps:"TYPE THE CLUE".length,
-			interval:200,
-			Iterator:UndoIterator,
-			startDelay:0,
+	"tutorial-clue":[
+		{Starter:()=>GoToLevel("Direct")},
+		...TutorialMacro,
+		TypingAction("TYPE THE CLUE",{startDelay:1000}),
+		UnTypingAction("TYPE THE CLUE",{
+			startDelay:1000,
 			Starter:CloseTutorialGoal,
 			endDelay:2000,
 			Ender:CloseTutorialLetters
-		},{
-			steps:"DIRECT".length,
-			interval:300,
-			Iterator:LetterIterator("DIRECT"),
-			startDelay:1000
-		}],
-	"tutorial-rule":[{
-			steps:"ELUR NEDDIH EHT DNIF".length,
-			interval:400,
-			Iterator:LetterIterator("ELUR NEDDIH EHT DNIF"),
+		}),
+		TypingAction("DIRECT")
+	],
+	"tutorial-rule":[
+		{Starter:()=>GoToLevel("Reverse")},
+		...TutorialMacro,
+		TypingAction("ELUR NEDDIH EHT DNIF",{
 			startDelay:3000,
-			Starter:OpenTutorial,
+			Starter:OverlayTutorial,
 			endDelay:3000
-		},{
-			steps:"ELUR NEDDIH EHT DNIF".length,
-			interval:200,
-			Iterator:UndoIterator,
-			startDelay:1000,
+		}),
+		UnTypingAction("ELUR NEDDIH EHT DNIF",{
 			Starter:CloseTutorialGoal,
 			endDelay:1000,
 			Ender:CloseTutorialLetters
-		},{
-			steps:"REVERS".length,
-			interval:300,
-			Iterator:LetterIterator("REVERS"),
+		}),
+		TypingAction("REVERS",{
 			startDelay:2000,
 			endDelay:2000
-		},{
-			steps:"REVERS".length,
-			interval:200,
-			Iterator:UndoIterator,
-			startDelay:1000,
-			endDelay:1000,
-		},{
-			steps:"ESREVER".length,
-			interval:400,
-			Iterator:LetterIterator("ESREVER"),
-			startDelay:2000
-		}]
+		}),
+		UnTypingAction("REVERS",{
+			endDelay:2000,
+		}),
+		TypingAction("ESREVER")
+	]
 }
 
 //Winning automation
