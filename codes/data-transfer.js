@@ -4710,8 +4710,8 @@ function SequenceSchedule(Obj){
 		function TimedIterator(){
 			var actualTime=Date.now();
 			ScheduleAnim.delay=Max(actualTime-expectedTime,0);
-			setTimeout(i!==steps?Iterator(i):Ender,ScheduleAnim.delay);
-			var t=setTimeout(IterateOnTime,ScheduleAnim.delay);
+			
+			var t=setTimeout(i!==steps?Iterator(i):Ender,ScheduleAnim.delay);
 			SequenceSchedule[name].push(t);
 		}
 
