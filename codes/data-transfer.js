@@ -4650,9 +4650,10 @@ DelayUntil=function(Condition,F,i){
 }
 
 //ExecuteOnce
-Once=function(F,id){
-	if(!Once[id]){
-		Once[id]=true;
+Once=function(F,name){
+	var name=name||FunctionName(F);
+	if(!Once[name]){
+		Once[name]=true;
 		return F();
 	}
 	return false;
@@ -4700,7 +4701,6 @@ function SequenceSchedule(Obj){
 	var stawait=Obj.startDelay||0;
 
 	var name=Obj.id||GenerateId();
-	console.log("Scheduled ",name);
 
 	if(!SequenceSchedule[name])
 		SequenceSchedule[name]=[];
