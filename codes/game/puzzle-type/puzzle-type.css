@@ -206,7 +206,8 @@
    justify-content: center;
    font-size: calc(var(--h4) + var(--w2));
    height: calc(var(--h8) + var(--w4));
-   border-bottom-width: calc(var(--h1) + var(--w-2)); 
+   border-bottom-width: calc(var(--h1) + var(--w-2));
+   margin: -0.1px /*subtle effect*/
 }
   
 .letter.caret, .caret .half{
@@ -214,6 +215,9 @@
     border-bottom-color: var(--letterTransparent);
     color:var(--letterTransparent);
     width: calc(var(--h4) + var(--w2));
+    border-bottom-width: calc(var(--h1) + var(--w-2) - 0.1px);
+   margin-right: -0.5px; /*subtle effect*/
+   margin-left: 0.1px; /*subtle effect*/
 }
 
 .win{
@@ -427,6 +431,12 @@
    background-color: var(--darkblue);
    filter: brightness(1.2);
 }
+.tutor.top .keystrokes{
+   opacity: 0;
+   transition-duration: 0;
+   transition-delay: 0;
+      
+}
 
 .tutor.middle{
   --ph:var(--h-8);
@@ -447,4 +457,9 @@
 .tutor .letter.caret{
   margin-left:var(--w-2);
   margin-right:var(--w-2);
+}
+
+.game-supra-Canvas.zoom{
+   transform: translateY(calc(-35vh)) scale(1.7);
+   transition-duration: 2s
 }
