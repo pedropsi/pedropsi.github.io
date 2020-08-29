@@ -38,13 +38,50 @@ ${FolderGalleryHTML("star-battle",[
 <p>Thanks to Icewing for helping perfecting the cube.</p>
 <p>Thanks to ${v.DELTA()} and ZachMan to help with the icosahedron fold lines.</p>
 
+<h2>How to make geometric star battle puzzles</h2>
+<p>You found an interesting grid geometry for a star battle puzzle, but how do you make a puzzle?</p>
+<p>To make a star battle puzzle, you must overcome two challenges: 1) finding a <em>constellation</em> and 2) drawing a set of <em>regions</em> with a unique solution.</p>
+
+<p>Let <b>r</b> be the number of <em>regions</em> and <b>n</b> the number of stars per <em>region</em>. In total you'll need <b>s = r * n</b> stars.</p>
+
+<h3>Finding a <em>constellation</em></h3>
+<p>Finding a star battle <em>constellation</em> means  filling the grid with a set of <b>s</b> stars such that no starred cells share any vertices, and no more than <b>n</b> stars per <em>line</em>.</p>
+<p>Different geometries impose different rules on which vertices are shared, and on what constitutes a <em>line</em>.</p> 
+
+<p>First ensure the grid is not too small, so that it is not impossible to find a <em>constellation</em>. Start by counting <b>s</b>, the total required number of stars. Then notice how many cells are adjacent to each cell (there may be a couple different cases at the grid boundary), and try to discount any overlaps. Do <b>s</b> stars fit the grid? If not, keep enlarging the grid by one unit until they fit.</p> 
+
+<p>Then, with a grid in place, the following two imperfect methods are are sometimes useful for finding a <em>constellation</em>.</p>
+
+<h4>Symmetry method</h4>
+<p>Usually the grids have some symmetries that can be used. For instance, shall there be a <em>m</em>-fold rotational symmetry around a central point, often you can place a <em>starting star</em> anywhere away from the center, and then place <em>m - 1 copies</em> at the symmetric points.</p>
+
+<h4>Knight's method</h4>
+<p>Place a <em>starting star</em> anywhere, and mark a <em>ring</em> of all its adjacent cells. Then place a second star outside and adjacent to the ring, as close to the <em>starting star</em> as possible, but on a different line. In a square grid, the second star is now a "knight's move" away.</p> 
+<p>Place more stars following the same pattern, until either you <b>wrap-around a boundary</b> and finish the <em>constellation</em> or you <b>must stop</b>.</p> 
+
+<p>If you <b>must stop</b>, try to place a secondary <em>starting star</em> also adjacent to the <em>rings</em> of the primary <em>starting star</em>, and continue the method.</p>
+
+
+
+<h3>Drawing <em>regions</em>, while ensuring unique solutions</h3>
+<p>Finding a valid <em>constellation</em> is relatively easy, and with a single <em>constellation</em> you can make a huge number of star battle puzzles, by drawing different sets of regions.</p>
+<p> However, ensuring that the puzzle has a unique solution can be very time consuming, unless you follow a good method. Even if you use a good computer program, the program must follow a good method.
+
+<h4>Nucleation Method</h4>
+<ol>
+	<li>Place a valid <em>constellation</em> on the grid, with r * n stars.</li>
+	<li>Draw r-1 small uninteresting <em>regions</em> to confine n*(r-1) stars, and name these <em>regions</em> crystals. Thus only n stars remain outside any crystal, in open territory. </li>
+	<li>The smaller the initial crystals you pick, the easier it is to verify uniqueness. So change the crystals manually now until you ensure a unique solution. Then, in the last step, you'll transform a boring unique solution into an interesting unique solution. </li>
+	<li>Pick one of the r-1 crystals. Grow it by one new cell into open territory where you can quickly check that no star from the crystal could be moved to the new cell (i.e., the new solution is still unique). Repeat this step until you're happy.</li>
+</ol>
+
 <h2>Idea overflow</h2>
 <p>Many ideas failed to produce interesting puzzles, or would require more time to explore. They're left here in case anyone wants to take them forward.</p>
 <ul>
-	<li>log spiral grid - current 2 star constellation with too many stars, possibly tedious;</li>
-	<li>liar star battle - where exactly one of the regions contains no stars;</li>
+	<li>log spiral grid - current 2 star <em>constellation</em> with too many stars, possibly tedious;</li>
+	<li>liar star battle - where exactly one of the <em>regions</em> contains no stars;</li>
 	<li>starrykabe - the location of the stars is actually the starting point for a nurikabe puzzle (the number assignment would be based either on order of placement of stars ot their coordinates);</li>
-	<li>origami star battle - this would require two orthogonal folds plus transparent paper. Folding could erase and create new regions, and reduce the number of stars.</li>
+	<li>origami star battle - this would require two orthogonal folds plus transparent paper. Folding could erase and create new <em>regions</em>, and reduce the number of stars.</li>
 </ul>
 
 `};</script><script src="data/page.js"></script>
