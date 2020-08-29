@@ -1327,22 +1327,22 @@ function GoToScreen(lvl){
 
 // Keyboard to Pick Level - records multiple digits within a 2000 ms timeframe to select the level
 
-function LevelUnlocked(lvl){
-	return In(UnlockedLevels(),Number(lvl));
+function IsUnlockedLevel(n){
+	return In(UnlockedLevels(),Number(n));
 }
 
-function DelayLevel(lvl){
+function DelayLevel(n){
 	clearTimeout(DelayLevel.timer);
 	var t=Date.now();
-	if((!DelayLevel.lastTime)||(t-DelayLevel.lastTime>2000)||!LevelUnlocked(DelayLevel.level+""+lvl)){ //Restart
-		DelayLevel.level=""+lvl;
+	if((!DelayLevel.lastTime)||(t-DelayLevel.lastTime>2000)||!IsUnlockedLevel(DelayLevel.level+""+n)){ //Restart
+		DelayLevel.level=""+n;
 		DelayLevel.lastTime=Date.now();
-		var lvl=Number(DelayLevel.level);
+		var n=Number(DelayLevel.level);
 	}
 	else{
-		DelayLevel.level=DelayLevel.level+""+lvl;
+		DelayLevel.level=DelayLevel.level+""+n;
 		DelayLevel.lastTime=Date.now();
-		var lvl=Number(DelayLevel.level);
+		var n=Number(DelayLevel.level);
 	}
 	
 	FocusElement("choice-"+StarLevelNumber(n));
