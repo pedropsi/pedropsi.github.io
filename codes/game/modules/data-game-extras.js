@@ -127,6 +127,15 @@ else if(ObtainLevelTitle==="Previous"){ //Case for title specified in message be
 		return title.replace(/[\-][\-\s]?/gi," ");
 	}
 }
+
+if(typeof ObtainLevelNotes==="undefined")
+	var ObtainLevelNotes=function(lvl){return ""};
+
+if(typeof ObtainLevelDescriptionTitle==="undefined")
+	var ObtainLevelDescriptionTitle=ObtainLevelTitle;
+
+
+
 //Read move defaults
 if(typeof ObtainIsUndoMove==="undefined")
 	var ObtainIsUndoMove=function(move){return move==="Z"}
@@ -1011,6 +1020,10 @@ function CurLevelNumber(){
 	return LevelNumber(CurrentScreen())
 }
 
+function CurLevelTitle(){
+	return ObtainLevelTitle(CurLevelNumber());
+}
+
 
 function UnlockedLevels(){
 	var LevelLookahead=ObtainLevelLookahead();
@@ -1086,18 +1099,29 @@ function SolvedRequiredLevelsBefore(lvl,howmany){
 
 // Level Selector
 
-function ChosenLevelDescription(){
+function LevelDescriptionHTML(lvl){
+	var title=ObtainLevelDescriptionTitle(lvl);
+	var notes=ObtainLevelNotes(lvl);
+
+	title=title?`<p>${title}</p>`:"";
+	notes=notes?`<p class='notes'>${notes}</p>`:"";
+	
+	return `${title}
+			${notes}`;
+}
+
+function ChosenLevelDescriptionHTML(){
 	var DP=CurrentDatapack();
 	if(DP){
 		var l=FindData("level",CurrentDatapack().qid);
 		if(l)
-			return ChosenLevelDescription.last=ObtainLevelTitle(UnstarLevel(l));
+			return ChosenLevelDescriptionHTML.last=LevelDescriptionHTML(UnstarLevel(l));
 	}
 	
-	if(ChosenLevelDescription.last)
-		return ChosenLevelDescription.last;
+	if(ChosenLevelDescriptionHTML.last)
+		return ChosenLevelDescriptionHTML.last;
 	else
-		return ObtainLevelTitle(CurLevelNumber());
+		return LevelDescriptionHTML(CurLevelNumber());
 }
 
 function LevelSelectorMessage(){
@@ -1110,7 +1134,7 @@ function LevelSelectorMessage(){
 function RequestLevelSelector(){
 	if(!Checkpointed()){
 		var DPOpts={
-			questionname:ChosenLevelDescription(),
+			questionname:ChosenLevelDescriptionHTML(),
 			qchoices:UnlockedLevels().map(StarLevelNumber),
 			qchoicesViewF:ObtainLevelNumberDisplay,
 			defaultChoice:function(i,c){return UnstarLevel(c)===CurLevelNumber()}
@@ -1199,7 +1223,7 @@ function UnstarLevel(l){
 }
 
 function UpdateAccessLevelMessage(){
-	ReplaceChildren(ChosenLevelDescription(),".question");
+	ReplaceChildren(ChosenLevelDescriptionHTML(),".question");
 }
 
 Listen("Set level",UpdateAccessLevelMessage);

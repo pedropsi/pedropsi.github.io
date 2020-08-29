@@ -140,13 +140,18 @@ var ObtainReadMove=Identity;
 //Level navigation
 function ObtainNewGameCondition(){return SolvedLevels().length<1&&CurLevelNumber()<=1};
 function ObtainStateScreens(){return LevelGoals;}
-function ObtainLevelTitle(l){
-	return FormattedTitle(LevelGoals[l-1]);
+
+function ObtainLevelTitle(lvl){
+	return LevelGoals[lvl-1];
+}
+
+function ObtainLevelDescription(lvl){
+	return LevelDescription(ObtainLevelTitle(lvl));
 }
 
 function ObtainLevelNumberDisplay(m){
 	var n=UnstarLevel(m);
-	var title=LevelGoals[n-1];
+	var title=ObtainLevelTitle(n);
 	if(!title||title.length<3)
 		return m;
 	title=title.toUpperCase();
@@ -436,7 +441,7 @@ function GameInput(key){
 			Restart();return;
 		}
 		else{
-			LevelInstructions[CurLevelName()](key);
+			LevelInstructions[CurLevelTitle()](key);
 			RegisterMove(key);
 		}
 	}
@@ -495,7 +500,7 @@ function ForbidNumberActions(key){
 		"La rapide surprise",
 		"Starting buds",
 		"Order is all",
-		"⠍⠕⠗⠎⠑"],CurLevelName())&&In(NumberCharacters,key));
+		"⠍⠕⠗⠎⠑"],CurLevelTitle())&&In(NumberCharacters,key));
 }
 
 function ForbidSpaceActions(key){
@@ -514,14 +519,14 @@ function ForbidSpaceActions(key){
 		"Starting buds",
 		"Just cut and paste",
 		"Order is all"
-	],CurLevelName())&&In([" ","Space","space"],key));
+	],CurLevelTitle())&&In([" ","Space","space"],key));
 }
 
 function ForbidEnterActions(key){
 	return (!In([
 		//"La rapide surprise"
 		//"Starting buds"
-	],CurLevelName())&&In(["Enter"],key));
+	],CurLevelTitle())&&In(["Enter"],key));
 }
 
 function ForbidArrowActions(key){
@@ -529,20 +534,20 @@ function ForbidArrowActions(key){
 		"Wasd",
 		"La rapide surprise",
 		"Starting buds",
-	],CurLevelName())&&In(ArrowKeys,key));
+	],CurLevelTitle())&&In(ArrowKeys,key));
 }
 
 var ArrowKeys=Directions.map(ObtainSymbol);
 
 function AllowExtraUndoKey(key){
-	return CurLevelName()==="Wasd"&&key==="Z";
+	return CurLevelTitle()==="Wasd"&&key==="Z";
 }
 function AllowExtraRestartKey(key){
-	return CurLevelName()==="Wasd"&&key==="R";
+	return CurLevelTitle()==="Wasd"&&key==="R";
 }
 
 function LevelWinSound(){
-	var leveltitle=CurLevelName();
+	var leveltitle=CurLevelTitle();
 	var customsounds={
 		"Deaf":function(){/*PlayChord("FACFACEGAC",true,3)*/}
 	}
@@ -577,14 +582,13 @@ function WinnerTitle(title){
 		return title.toUpperCase();
 }
 
-function FormattedTitle(title){
-	var level=title;
-	if(title!=="Deaf")
-		var title=title.toUpperCase();
-	return "<p>"+title+"</p><p class='notes'>"+LevelNotes(level)+"</p>";
+function ObtainLevelDescriptionTitle(lvl){
+	var title=ObtainLevelTitle(lvl);
+	return (title!=="Deaf")?title.toUpperCase():title;
 }
 
-function FormattedGoal(title){
+
+function GoalHTML(title){
 	return title.toUpperCase().split("").map(LetterHTML(title)).join("");
 }
 
@@ -684,7 +688,9 @@ var LanguageLevels=[
 	"La rapide surprise",
 ]
 
-function LevelNotes(title){
+
+function ObtainLevelNotes(lvl){
+	var title=ObtainLevelTitle(lvl);
 	var extras="";
 	if(In(SoundLevels,title))
 		extras+=" "+ObtainSymbol("music");
@@ -697,6 +703,7 @@ function LevelNotes(title){
 
 	return 	LevelDifficultyStars(title)+extras;
 }
+
 
 function LevelNumberNotes(n){
 	return String(n)+" "+(LevelSolved(n)?LevelHintStar(n):"");
@@ -798,9 +805,6 @@ function ObtainLevelReader(level){
 		return level;
 }
 
-function ObtainLevelsWriter(solvedlevels){
-	return solvedlevels.map(l=>LevelGoals[l]);
-}
 
 var LevelInstructions={
 	"Direct":Direct,
@@ -1733,7 +1737,7 @@ function WordTranslations(L,sentence){
 			possibilities=[suffix].concat(possibilities);
 		}
 		// closest to the goal
-		var goal=CurLevelName().toLowerCase();
+		var goal=CurLevelTitle().toLowerCase();
 		possibilities=possibilities.filter(i=>Prefixed(goal,prefix+i)).concat(possibilities.filter(i=>!Prefixed(goal,prefix+i)))
 		
 		found=(IsArray(possibilities)&&possibilities.length>0);
@@ -2436,11 +2440,11 @@ function ClearLetters(){
 }
 
 function DrawLetters(){
-	var letters=Letters().map(LetterHTML(CurLevelName())).join("\n");
+	var letters=Letters().map(LetterHTML(CurLevelTitle())).join("\n");
 	ReplaceChildren(letters,"#letters");
 	GetElements(".middle .letter").map((e,n)=>Class(e,"letter-"+n)); //number each letter
 	
-	TransitionLetters(CurLevelName());
+	TransitionLetters(CurLevelTitle());
 }
 
 function TransitionLetters(title){
@@ -2466,7 +2470,7 @@ function TransitionExpansion(){
 }
 
 function DrawKeystrokes(){
-	HighlightableWords(CurLevelName());
+	HighlightableWords(CurLevelTitle());
 	var keystrokes="<p>"+(Keystrokes().map(KeystrokeHTML).join(""))+"</p>";
 	ReplaceChildren(keystrokes,".keystrokes");
 }
@@ -2540,7 +2544,6 @@ function ModifyLetters(ChangeF,ConditionF){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Game execution
-function CurLevelName(){return LevelGoals[CurLevelNumber()-1]};//placeholder
 
 function ObtainTitleScreenLoader(){
 	if(!TitleScreen())
@@ -2572,12 +2575,12 @@ function ObtainTitleScreenLoader(){
 };
 
 function LevelLoader(){
-	if(!CurLevelName())
+	if(!CurLevelTitle())
 		return ConsoleAdd("Error: no levels were loaded!");
 	TitleScreen(false);
-	var goal=FormattedGoal(CurLevelName());
+	var goal=GoalHTML(CurLevelTitle());
 	var top=`
-		<div class='notes'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="level-notes">${LevelNotes(CurLevelName())}</p></div>
+		<div class='notes'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="level-notes">${ObtainLevelNotes(CurLevelNumber())}</p></div>
 		<div class='goal'>${goal}</div>
 		<div class='keystrokes'></div>
 		`
@@ -2616,7 +2619,7 @@ function ObtainUpdateLevel(state){
 }
 
 function CheckWin(){
-	var win=WinnerTitle(CurLevelName())===Word().replace(/\_/g,"");
+	var win=WinnerTitle(CurLevelTitle())===Word().replace(/\_/g,"");
 	
 	if(win){
 		if(!LevelWinSound())
@@ -2625,7 +2628,7 @@ function CheckWin(){
 			PlayWinSound();
 		MarkWonScreen();
 		BlockInput(1100);
-		UpdateWinPane(CurLevelName());
+		UpdateWinPane(CurLevelTitle());
 		setTimeout(NextLevel,1000);
 		ClearLevel();
 	}
@@ -2679,7 +2682,7 @@ function ClearLevel(){
 function Memo(m){
 
 	if(typeof Memo.memo==="undefined")
-		Memo.memo=StartingMemo(CurLevelName());
+		Memo.memo=StartingMemo(CurLevelTitle());
 
 	if(typeof m==="undefined")
 		return Clone(Memo.memo);
@@ -2733,7 +2736,7 @@ function EffectRenderer(level){
 		'Nokia 1998':function(){NokiaTimer.blocked=true},
 	};
 	if(!level)
-		return EffectRenderer(CurLevelName());
+		return EffectRenderer(CurLevelTitle());
 	if(In(timers,level))
 		return timers[level]();
 	else
@@ -2745,8 +2748,8 @@ function ObtainStartingLevelState(){
 		'letters':[],
 		'caret':0,
 		'keystrokes':[],
-		'memo':StartingMemo(CurLevelName())
-		// 'colour':StartingColour(CurLevelName())
+		'memo':StartingMemo(CurLevelTitle())
+		// 'colour':StartingColour(CurLevelTitle())
 	};
 	return state;
 }
@@ -2946,7 +2949,7 @@ function ExtractKeystrokes(el){
 	var strokes=GetElements("SPAN",parent);
 		strokes=strokes.filter(s=>!Classed(s,"keystroke-invalid")&&SelectedNode(s));
 	var text=strokes.map(s=>s.innerText).join("");	
-		text=LevelKeystrokesSimpler(CurLevelName())(text);
+		text=LevelKeystrokesSimpler(CurLevelTitle())(text);
 		text=text.replace(/\n+/gmi,"");//ensure single line
 		text=text.replace(/\_/gmi," ");//revert underscore -> space
 	return text;
@@ -3041,7 +3044,7 @@ function GotoAndWinLevelActions(title){
 
 
 function CurLevelWin(){
-	MacroRun(GotoAndWinLevelActions(CurLevelName()));
+	MacroRun(GotoAndWinLevelActions(CurLevelTitle()));
 }
 
 function GotoLevelWin(title){
@@ -3054,7 +3057,7 @@ function NextLevelsWin(title){
 	else
 		n=CurLevelNumber();
 		
-	var remainingGoals=Range(n,MaxLevel()).map(n=>LevelGoals[n-1]);
+	var remainingGoals=Range(n,MaxLevel()).map(n=>ObtainLevelTitle(n));
 		remainingGoals=remainingGoals.filter(g=>!LevelWon(g));
 
 	var actions=remainingGoals.map(GotoAndWinLevelActions).flat();
@@ -3140,3 +3143,5 @@ function TutorialMacro(){
 		...TutorialRuleMacro()
 	];
 }
+
+
