@@ -342,12 +342,6 @@ function P(){
 ///////////////////////////////////////////////////////////////////////////////
 //Keybinding
 
-var NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
-var LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-var AlphanumericCharacters=LetterCharacters.concat(NumberCharacters);
-var LetterSpaceCharacters=LetterCharacters.concat(" ");
-var Directions=["left","up","right","down"];
-
 function KeyActions(){
 	var keyactions={};
 	
@@ -632,10 +626,6 @@ var LevelDifficulty={
 	"Just cut and paste":3,
 	"Order is all":4
 };
-
-function LevelTitleNumber(title){
-	return LevelGoals.indexOf(title)+1;
-}
 
 
 function GoToLevel(title){

@@ -49,6 +49,14 @@ UnFunction=function(data){
 		return data;
 }
 
+//Key characters
+var NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
+var LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+var AlphanumericCharacters=LetterCharacters.concat(NumberCharacters);
+var LetterSpaceCharacters=LetterCharacters.concat(" ");
+var Directions=["left","up","right","down"];
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // Deep equality testing
 EqualArray=function(a,b){
@@ -4284,11 +4292,7 @@ ContextualDefaultShortcuts=function(){
 		"up":FocusPrev,
 		"down":FocusNext,
 		"left":FocusPrev,
-		"right":FocusNext,
-		"W":FocusPrev,
-		"S":FocusNext,
-		"A":FocusPrev,
-		"D":FocusNext
+		"right":FocusNext
 	},
 	".window":{
 		"escape":CloseCurrentDatapack,
@@ -4300,36 +4304,24 @@ ContextualDefaultShortcuts=function(){
 		"left":FocusPrev,
 		"right":FocusNext,
 		"up":FocusPrev,
-		"down":FocusNext,
-		"W":FocusPrev,
-		"S":FocusNext,
-		"A":FocusPrev,
-		"D":FocusNext
+		"down":FocusNext
 	},
 	".navi":{
 		"up":FocusPrevParent,
 		"down":FocusNextParent,
 		"left":ClickPrevBounded,
-		"right":ClickNextBounded,
-		"W":FocusPrevParent,
-		"S":FocusNextParent,
-		"A":ClickPrevBounded,
-		"D":ClickNextBounded
+		"right":ClickNextBounded
 	},
 	".buttonrow":{
 		"up":FocusPrevParent,
 		"down":FocusNextParent,
 		"left":FocusPrevBounded,
-		"right":FocusNextBounded,
-		"W":FocusPrevParent,
-		"S":FocusNextParent,
-		"A":FocusPrevBounded,
-		"D":FocusNextBounded
+		"right":FocusNextBounded
 	},
 	".button":{
 		"enter":ClickStay,
 		"space":ClickStay,
-		"X":ClickStay
+		// "X":ClickStay
 	},
 	"A":{
 		"space":ClickStay
@@ -4347,7 +4339,7 @@ ContextualDefaultShortcuts=function(){
 	".gif":{
 		"space":PlayPauseGif,
 		"enter":PlayPauseGif,
-		"X":PlayPauseGif
+		// "X":PlayPauseGif
 	}
 	}
 }

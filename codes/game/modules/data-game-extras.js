@@ -1024,6 +1024,13 @@ function CurLevelTitle(){
 	return ObtainLevelTitle(CurLevelNumber());
 }
 
+function LevelTitles(){
+	return Levels().map(ObtainLevelTitle);
+}
+
+function LevelTitleNumber(title){
+	return LevelTitles().indexOf(title)+1;
+}
 
 function UnlockedLevels(){
 	var LevelLookahead=ObtainLevelLookahead();
@@ -1149,20 +1156,11 @@ function RequestLevelSelector(){
 		}
 	}
 	
-	var LevelSelectorShortcuts=FuseObjects(ObtainKeyActionsGameBar(),{
-		"1":function(){DelayLevel(1)},
-		"2":function(){DelayLevel(2)},
-		"3":function(){DelayLevel(3)},
-		"4":function(){DelayLevel(4)},
-		"5":function(){DelayLevel(5)},
-		"6":function(){DelayLevel(6)},
-		"7":function(){DelayLevel(7)},
-		"8":function(){DelayLevel(8)},
-		"9":function(){DelayLevel(9)},
-		"0":function(){DelayLevel(0)}
-	});
-	
-	LevelSelectorShortcuts[ObtainMainKey("levelselector")]=CloseLevelSelector;
+	//Add dialing shortcuts
+	var LevelSelectorShortcuts=FuseObjects(ObtainKeyActionsGameBar(),{});
+		AlphanumericCharacters.map(function(C){LevelSelectorShortcuts[C]=function(){DialFocus(C)}});
+
+		LevelSelectorShortcuts[ObtainMainKey("levelselector")]=CloseLevelSelector;
 	
 	RequestDataPack([
 			['exclusivechoice',FuseObjects(DPOpts,{
@@ -1325,28 +1323,43 @@ function GoToScreen(lvl){
 	ResizeCanvas();
 };
 
-// Keyboard to Pick Level - records multiple digits within a 2000 ms timeframe to select the level
+// Keyboard to Pick Level - records multiple digits/letters within a 2000 ms timeframe to select the level number or title
 
-function IsUnlockedLevel(n){
-	return In(UnlockedLevels(),Number(n));
-}
-
-function DelayLevel(n){
-	clearTimeout(DelayLevel.timer);
-	var t=Date.now();
-	if((!DelayLevel.lastTime)||(t-DelayLevel.lastTime>2000)||!IsUnlockedLevel(DelayLevel.level+""+n)){ //Restart
-		DelayLevel.level=""+n;
-		DelayLevel.lastTime=Date.now();
-		var n=Number(DelayLevel.level);
+function DialedLevel(S){
+	if(!IsNan(Number(S))){
+		var lvl=Number(S);
+		return In(UnlockedLevels(),lvl)?lvl:false;
 	}
 	else{
-		DelayLevel.level=DelayLevel.level+""+n;
-		DelayLevel.lastTime=Date.now();
-		var n=Number(DelayLevel.level);
+		var title=LevelTitles().filter(function(title){return Prefixed(title.toLowerCase(),S.toLowerCase())});
+		if(!title.length)
+			return false;
+		else
+			return LevelTitleNumber(First(title));
+	}
+}
+
+function LevelDialed(S){
+	return DialedLevel(S)!==false;
+}
+
+function DialFocus(S){
+	clearTimeout(DialFocus.timer);
+	var t=Date.now();
+	if((!DialFocus.lastTime)||(t-DialFocus.lastTime>2000)||!LevelDialed(DialFocus.level+""+S)){ 
+		DialFocus.level=""+S;//Restart
+	}
+	else{
+		DialFocus.level=DialFocus.level+""+S;
 	}
 	
-	FocusElement("choice-"+StarLevelNumber(n));
-	
+	DialFocus.lastTime=Date.now();
+	var S=DialFocus.level;
+
+	if(!LevelDialed(S))
+		return;
+	else
+		FocusElement("choice-"+StarLevelNumber(DialedLevel(S)));
 }	
 	
 
