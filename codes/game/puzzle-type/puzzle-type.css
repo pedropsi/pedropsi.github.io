@@ -480,8 +480,7 @@
 }
 
 .game-supra-Canvas.zoom{
-   filter: unset;
-   transform: translateY(calc(-35vh)) scale(1.7);
+   transform: translateY(calc(-40vh)) scale(1.8);
    transition-duration: 2s;
    transition-timing-function:linear
 }
