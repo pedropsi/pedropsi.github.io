@@ -1439,6 +1439,8 @@ video{
 	width: 0 !important;
 	overflow: hidden;
 	transition-duration: var(--durationOff);
+	padding-right: 0 !important;
+	padding-left: 0 !important;
 	margin-right: 0 !important;
 	margin-left: 0 !important;
 	border-left-width: 0 !important;
