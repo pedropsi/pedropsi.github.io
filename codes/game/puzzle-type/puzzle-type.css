@@ -505,6 +505,12 @@
    transition-duration: 2s;
    transition-timing-function:linear
 }
+
+.tutor.middle .wallpaper path{
+   fill:var(--letterTransparent);
+   filter:brightness(1.3);
+}
+
 .middle .letter.borderless{
    transition-duration: 1s;
    border-bottom-width: 0;
