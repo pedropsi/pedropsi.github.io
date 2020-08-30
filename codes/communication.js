@@ -144,18 +144,19 @@ EchoData=function(data,url){
 }
 
 EchoDataBuffer=function(){
-	while(Connection.queue.length>0){
-		EchoPureData(Connection.queue[0][0],Connection.queue[0][1]);
-		Connection.queue.shift();
+	var queue=ConnectionQueue();
+	while(queue.length>0){
+		EchoPureData(queue[0][0],queue[0][1]);
+		queue.shift();
 	}
 };
 
 BufferData=function(data,url){
-	Connection.queue.push([data,url]);
+	ConnectionQueue().push([data,url]);
 }
 
 DataBufferEmpty=function(){
-	return Connection.queue.length<1;
+	return ConnectionQueue().length<1;
 }
 
 //Network status
@@ -175,11 +176,10 @@ MonitorConnection=function(){
 	ConsoleAdd(message);
 }
 
-Connection=function(){
-	if(!Connection.queue)
-		Connection.queue=[];
-	
-	ListenOnce('offline',MonitorConnection);
+ConnectionQueue=function(){
+	if(!ConnectionQueue.queue)
+		ConnectionQueue.queue=[];
+	return ConnectionQueue.queue;
 }
 
 

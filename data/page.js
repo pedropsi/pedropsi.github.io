@@ -96,7 +96,7 @@ PageFeaturesDOM=function(){
 	//Listen("click",function(e){FocusElement(e.target)});
 	//ResumeCapturingKeys(CaptureComboKey);
 	//PurchasedConfirm();
-	Connection();
+	ListenOnce('offline',MonitorConnection);
 	
 	AddElement(ScrollUpHTML(),".whiteboard");
 	IndexTitles();
