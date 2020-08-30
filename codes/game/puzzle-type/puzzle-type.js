@@ -3130,7 +3130,8 @@ function TutorialMacro(){
 	return [
 		{Starter:CollapseGameBar,endDelay:500},
 		...TutorialClueMacro(),
-		...TutorialRuleMacro()
+		...TutorialRuleMacro(),
+		{Starter:UnCollapseGameBar,endDelay:500},
 	];
 }
 
