@@ -25,13 +25,13 @@ function GameTopHTML(){
 
 return `
 	<div class='top'>
-		<h1 class='goal'>${gameTitle}</h1>
+		<h1 class='goal goaly'>${gameTitle}</h1>
 		${credits}
 	</div>`
 }
 
 function GameMiddleHTML(){
-	return `<div class='middle' id='letters'></div>`;
+	return `<div class='middle'><div id='letters'></div></div>`;
 }
 
 function WinPaneHTML(){
@@ -2330,7 +2330,7 @@ function DrawSingleCaret(p){
 	if(p>=Letters().length)
 		AddElement(CaretHTML(),"#letters");
 	else
-		Class(GetElement(".middle .letter-"+p),"caret")
+		Class("#letters .letter-"+p,"caret");
 }
 
 function LetterPureHTML(L,cla){
@@ -2432,8 +2432,8 @@ function ClearLetters(){
 function DrawLetters(){
 	var letters=Letters().map(LetterHTML(CurLevelTitle())).join("\n");
 	ReplaceChildren(letters,"#letters");
-	GetElements(".middle .letter").map((e,n)=>Class(e,"letter-"+n)); //number each letter
-	
+	GetElements("#letters .letter").map((e,n)=>Class(e,"letter-"+n)); //number each letter
+
 	TransitionLetters(CurLevelTitle());
 }
 
@@ -2452,7 +2452,7 @@ function TransitionExpansion(){
 		return;
 	
 	var p=memo.positions[memo.p]+(memo.positions.length>1?1:0);
-	var letterE=GetElement(".middle .letter-"+p);
+	var letterE=GetElement("#letters .letter-"+p);
 	if(letterE){
 		letterE.outerHTML=`<div class="expanding">${letterE.outerHTML}</div>`
 		Class(letterE,"expanding");
@@ -2571,7 +2571,7 @@ function LevelLoader(){
 	var goal=GoalHTML(CurLevelTitle());
 	var top=`
 		<div class='notes'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="level-notes">${ObtainLevelNotes(CurLevelNumber())}</p></div>
-		<div class='goal'>${goal}</div>
+		<div class='goal goaly'>${goal}</div>
 		<div class='keystrokes'></div>
 		`
 	ReplaceChildren(top,".top");
