@@ -99,11 +99,7 @@
    display: flex;
    flex-direction: row;
 }
-.middle #letters.goaly{
-   justify-content: center;
-   align-items: baseline;
-   flex-wrap: wrap;
-}
+
 
 .goaly div.letter{
    font-size: calc(0.9*var(--w4) + 0.9*var(--h2));
@@ -227,6 +223,7 @@
    font-size: var(--w8);
    font-weight: bold;
    color:var(--darkblue);
+   align-self: center;
 }
 
 .letter{
@@ -243,7 +240,8 @@
    font-size: calc(var(--h4) + var(--w2));
    height: calc(var(--h8) + var(--w4));
    border-bottom-width: calc(var(--h1) + var(--w-2));
-   margin: -1px; /*subtle effect*/
+   margin-left: -1px; /*subtle effect*/
+   margin-right: -1px; /*subtle effect*/
    border-radius: 1px;
 }
   
@@ -511,22 +509,32 @@
    filter:brightness(1.3);
 }
 
+
+/*mirror effect*/
 .middle .letter.borderless{
    transition-duration: 1s;
    border-bottom-width: 0;
+}
+.top.downwards{
+   height: 50%;
 }
 
 .top .letter.downwards{
    transition-duration: 2s;
    margin-bottom:-100vh;
-   transition-delay: 100;
 }
 .middle .letter.downwards{
    transition-duration: 2s;
    margin-top:-100vh;
 }
-
 .letter.downwards{
    color: transparent;
-   transition-delay: 100;
+}
+.letter.caret.shrinked{/*more specific selector*/
+   padding-left: 0;
+   padding-right: 0;
+}
+
+.middle #letters.downwards{/*multiline mirror*/
+   flex-wrap:wrap-reverse;
 }

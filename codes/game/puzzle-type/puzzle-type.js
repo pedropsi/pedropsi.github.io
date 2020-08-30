@@ -2653,10 +2653,10 @@ function LevelLoadMacro(){
 			Listen("click",CopyHandler(ExtractKeystrokes),".keystrokes");
 
 		},endDelay:1000},
-		{Starter:function(){
-			UnBlockInput();
-			UnFadeElement("#letters");
-		}}
+		{Starter:function(){UnFadeElement("#letters");},
+		 Ender:UnBlockInput,
+		 endDelay:500
+		}
 	]
 };
 
@@ -2697,11 +2697,14 @@ function CheckWin(){
 function LevelWinMacro(){
 	return [
 		{Starter:BlockInput},
-		{Starter:()=>FadeElement(".top .notes")},
-		{Starter:()=>FadeElement(".top .keystrokes"),endDelay:500},
+		{Starter:function(){
+			FadeElement(".top .notes");
+			FadeElement(".top .keystrokes");
+			Class(".top",".downwards");},endDelay:500},
 		...GoalMatchedMacro(),
 		//{Starter:()=>UpdateWinPane(CurLevelTitle()),endDelay:1000},
 		{Starter:function(){
+			UnClass(".top",".downwards");
 			NextLevel();//may need delay
 			ClearLevel();}},
 		{Starter:UnBlockInput},
@@ -2710,21 +2713,22 @@ function LevelWinMacro(){
 
 function GoalMatchedMacro(){
 	return [
+		{Starter:function(){Caret([Infinity]);DrawCaret();},endDelay:500},
 		{Starter:function(){
-			Class(".levelscreen","mirror-action");
-			Class(".middle","mirror-action");
+			// Class(".levelscreen","mirror-action");
+			Class(".middle #letters","downwards");
 			UnClass(".goal",".goaly");
 			GetElements(".goal .letter").map((e,n)=>Class(e,"letter-"+n));
-			Class(".goal",".letters");}
+			Class(".goal",".letters");
+			ShrinkElement(".caret");
+		}
 		,endDelay:500},
-		{Starter:function(){Caret([Infinity]);DrawCaret();},endDelay:500},
-		{Starter:function(){ShrinkElement(".caret")},endDelay:500},
-		{Starter:function(){FadeElement(".caret")},endDelay:500},
+		{Starter:function(){FadeElement(".caret")}},
 		BorderlessAction({endDelay:1000}),
-		MirrorAction({endDelay:3000}),
+		MirrorAction({endDelay:1000}),
 		{Starter:function(){
-			UnClass(".middle","mirror-action");
-			UnClass(".levelscreen","mirror-action");
+			UnClass(".middle #letters","downwards");
+			// UnClass(".levelscreen","mirror-action");
 		}}
 	];
 }
