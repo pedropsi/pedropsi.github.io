@@ -2612,16 +2612,42 @@ function CheckWin(){
 	var win=WinnerTitle(CurLevelTitle())===Word().replace(/\_/g,"");
 	
 	if(win){
-		if(!LevelWinSound())
+		MarkWonScreen();
+		
+		if(!LevelWinSound()&&!SolvedAllLevels())
 			PlaySound(MediaPath()+"/sound/win"+RandomChoice("123")+".mp3");
 		else
 			PlayWinSound();
-		MarkWonScreen();
-		BlockInput(1100);
-		UpdateWinPane(CurLevelTitle());
-		setTimeout(NextLevel,1000);
-		ClearLevel();
+		
+		Kinemate(LevelWinMacro());
 	}
+}
+
+function LevelWinMacro(){
+	return [
+		{Starter:BlockInput},
+		{Starter:()=>FadeElement(".top .notes")},
+		{Starter:()=>FadeElement(".top .keystrokes"),endDelay:500},
+		...GoalMatchedMacro(),
+		{Starter:()=>UpdateWinPane(CurLevelTitle()),endDelay:1000},
+		{Starter:function(){
+			NextLevel();//may need delay
+			ClearLevel();}},
+		{Starter:UnBlockInput},
+	]
+}
+
+function GoalMatchedMacro(){
+	return [
+		{Starter:function(){
+			Caret(Infinity);
+			DrawCaret();},endDelay:100},
+		BorderlessAction(),
+		{Starter:()=>FadeElement(".caret"),endDelay:1000},
+		{Starter:()=>Class("#letters",".goaly")},
+		UpwardsAction(),
+		{Starter:()=>UnClass("#letters",".goaly")},
+	];
 }
 
 function ObtainPlayEndGameSound(){
@@ -2961,7 +2987,7 @@ function LevelKeystrokesSimpler(title){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//Automations
+//Macros
 
 function UndoIterator(i){
 	return function(){
@@ -2996,6 +3022,28 @@ function UnTypingAction(string,Opts){
 		steps:string.length,
 		Iterator:UndoIterator
 	};
+}
+
+function LettersAction(Opts){
+	var Opts=Opts||{};
+	return {
+		interval:100,
+		...Opts,
+		steps:Letters().length
+	};
+}
+
+function UpwardsAction(Opts){
+	var Opts=Opts||{};
+		Opts.Iterator=function(i){Class("#letters .letter-"+i,"upwards")};
+	return LettersAction(Opts);
+}
+
+function BorderlessAction(Opts){
+	var Opts=Opts||{};
+		Opts.interval=50;
+		Opts.Iterator=function(i){Class("#letters .letter-"+i,"borderless");};
+	return LettersAction(Opts);
 }
 
 //Winning automation
@@ -3060,13 +3108,14 @@ function NextLevelsWin(title){
 function OverlayTutorial(){
 	Class(".middle","tutor");
 	Class(".top","tutor");
+	AddWallpaper("grid-5",".middle")
 }
 
 function UnOverlayTutorial(){
 	UnClass(".middle","tutor");
 	UnClass(".top","tutor");
+	RemoveWallpaper(".middle")
 }
-
 
 function OverlayTutorialMacro(){return [
 	{Starter:()=>FadeElement(".top .notes")},
@@ -3084,12 +3133,14 @@ function UnOverlayTutorialMacro(){return [
 	];
 }
 
+
 var ZoomMacro=[
 	{Starter:function(){
 		Class(".game-supra-Canvas","zoom"),
 		UnClass(".game-supra-Canvas","unzoom")},
 	endDelay:500}
 ]
+
 
 var UnZoomMacro=[
 	{Starter:function(){

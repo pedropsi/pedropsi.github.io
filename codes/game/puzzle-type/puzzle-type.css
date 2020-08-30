@@ -496,3 +496,11 @@
    transition-duration: 2s;
    transition-timing-function:linear
 }
+.middle .letter.borderless{
+   transition-duration: 1s;
+   border-bottom-width: 0;
+}
+.middle .letter.upwards{
+   transition-duration: 2s;
+   margin-top:-100vh;
+}
