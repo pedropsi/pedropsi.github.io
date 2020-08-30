@@ -104,8 +104,8 @@ if(typeof ObtainLevelTransition==="undefined")
 		messageselected=false;
 	}
 
-if(typeof ObtainTitleScreenLoader==="undefined")
-	var ObtainTitleScreenLoader=function(){goToTitleScreen()};
+if(typeof ObtainTitleScreenReLoader==="undefined")
+	var ObtainTitleScreenReLoader=function(){goToTitleScreen()};
 
 if(typeof ObtainPlayEndGameSound==="undefined")
 	var ObtainPlayEndGameSound=function(){tryPlayEndGameSound()};
@@ -1415,7 +1415,7 @@ function EndGame(){
 	ObtainPlayEndGameSound();
 	RequestHallOfFame();
 	CurrentScreen(0);//TODO CHECK IF BETTER BEHAVIOUR
-	ObtainTitleScreenLoader();
+	ObtainTitleScreenReLoader();
 }
 
 function ResetGame(){
@@ -1424,7 +1424,7 @@ function ResetGame(){
 	ResetLevel();
 	ResetCheckpoints();
 	CurrentScreen(0);//TODO CHECK IF BETTER BEHAVIOUR
-	ObtainTitleScreenLoader();
+	ObtainTitleScreenReLoader();
 }
 
 

@@ -55,7 +55,7 @@ var ObtainLevelLoader=LevelLoader;
 //Keybinding
 function ObtainKeyActionsGame(){
 	var keyactions={
-		"Escape":ObtainTitleScreenLoader,
+		"Escape":ObtainTitleScreenReLoader,
 		
 		"Shift R":ObtainRestart,
 		"Alt R":ObtainRestart,
@@ -132,7 +132,7 @@ function StartGame(){
 	ResumeCapturingKeys(CaptureComboKey);
 	Class(gameSelector,"Gallery");
 	LoadGame();
-	ObtainTitleScreenLoader();
+	ObtainTitleScreenReLoader();
 	GameFocus();
 	StartLevelFromTitle();
 };
@@ -563,7 +563,7 @@ function ObtainGameTitle(){
 	return PageTitle();
 }
 
-function ObtainTitleScreenLoader(){
+function ObtainTitleScreenReLoader(){
 	TitleScreen(true);
 	ReplaceChildren("<div class='top'><div class='title'></div><div class='credits'></div></div>",".top");
 	ReplaceChildren(ObtainGameTitle(),".title");

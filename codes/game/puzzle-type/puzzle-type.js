@@ -17,16 +17,9 @@ function GameFrameHTML(){
 }
 
 function GameTopHTML(){
-	// var credits=`
-	// 	<h2 class='credit-main'>a cryptic puzzle by Pedro PSI</h2>
-	// 	<h3 class='credit-extras'>with special thanks to Patrick Collin Eye & Kristian Hedeholm</h3>
-	// 	`;
-	var credits="";
-
-return `
+	return `
 	<div class='top'>
-		<h1 class='goal goaly'>${gameTitle}</h1>
-		${credits}
+		<div class='game-title'>${gameTitle}</div>
 	</div>`
 }
 
@@ -34,67 +27,67 @@ function GameMiddleHTML(){
 	return `<div class='middle'><div id='letters'></div></div>`;
 }
 
-function WinPaneHTML(){
-	return `<div class='winpane'></div>`;
-}
+// function WinPaneHTML(){
+// 	return `<div class='winpane'></div>`;
+// }
 
-var WinTexts={
-	"Direct":"Good!",				
-	"Reverse":".iceN",
-	"Follow":"Go on!",
-	"Consonant":"C_NGR_TS!",
-	"Second":"Well done. Well done.",
-	"Rotate":"Ecxeellnt",
-	//"Oppose":???,
-	"Rise":"Sky-high.",
-	"Falls":"Refreshing!",
-	"Precedent":"Unprecedented!",		
-	"Teleporter":"Far-fetched!",		
-	"Superior":"Superb!",			
-	//"Tangles":???,
-	"Difference":"Distinction!",
-	//"Photocopier":???,
-	"Symmetries":"Spec(tac)ular",
-	"Fillet":"You made the cut!",
-	"Topological":"Logically!",
-	"Wasd":"aMAZEing...",
-	"Nokia 1998":"A classic!",
-	"Dvorak":"Puzzle Typing since 1932",
-	"ひらがな":"驚くばかり",
-	"Nigeria":"Nawa oh!",
-	"Anagram":"MAGNificient!",
-	"Genetic.":"It's in your genes!",
-	"Ironclad":"Elementary!",
-	"Deaf":"Ace Badge#",
-	"⠍⠕⠗⠎⠑":"⠁⠺⠑⠐⠎",
-	"Dividi":"Ipsum bonum!",
-	"Magnetism":"Electrifying!",
-	//"Fuchsia":"Stunning!",
-	"Odd":"EVEN better!",
-	"Latent clones":"FOURmidable!",
-	"Shepherdess hence unladylike":"cHERiSHEd!",
-	"Starting buds":"Startling!",
-	"La rapide surprise":"Très bien!",
-	"Just cut and paste":"Very very very good.",
-	"Order is all":"Steadfast!"
-};
+// var WinTexts={
+// 	"Direct":"Good!",				
+// 	"Reverse":".iceN",
+// 	"Follow":"Go on!",
+// 	"Consonant":"C_NGR_TS!",
+// 	"Second":"Well done. Well done.",
+// 	"Rotate":"Ecxeellnt",
+// 	//"Oppose":???,
+// 	"Rise":"Sky-high.",
+// 	"Falls":"Refreshing!",
+// 	"Precedent":"Unprecedented!",		
+// 	"Teleporter":"Far-fetched!",		
+// 	"Superior":"Superb!",			
+// 	//"Tangles":???,
+// 	"Difference":"Distinction!",
+// 	//"Photocopier":???,
+// 	"Symmetries":"Spec(tac)ular",
+// 	"Fillet":"You made the cut!",
+// 	"Topological":"Logically!",
+// 	"Wasd":"aMAZEing...",
+// 	"Nokia 1998":"A classic!",
+// 	"Dvorak":"Puzzle Typing since 1932",
+// 	"ひらがな":"驚くばかり",
+// 	"Nigeria":"Nawa oh!",
+// 	"Anagram":"MAGNificient!",
+// 	"Genetic.":"It's in your genes!",
+// 	"Ironclad":"Elementary!",
+// 	"Deaf":"Ace Badge#",
+// 	"⠍⠕⠗⠎⠑":"⠁⠺⠑⠐⠎",
+// 	"Dividi":"Ipsum bonum!",
+// 	"Magnetism":"Electrifying!",
+// 	//"Fuchsia":"Stunning!",
+// 	"Odd":"EVEN better!",
+// 	"Latent clones":"FOURmidable!",
+// 	"Shepherdess hence unladylike":"cHERiSHEd!",
+// 	"Starting buds":"Startling!",
+// 	"La rapide surprise":"Très bien!",
+// 	"Just cut and paste":"Very very very good.",
+// 	"Order is all":"Steadfast!"
+// };
 //Extraordinary, Stupendous, fabulous, Astounding, captivating,Wondrous, Unbelievable, breathtaking
 
-function UpdateWinPane(title){
-	RemoveChildren(".winpane");
-	if(In(WinTexts,title))
-		var text=WinTexts[title];
-	else
-		var text="Well done!";
+// function UpdateWinPane(title){
+// 	RemoveChildren(".winpane");
+// 	if(In(WinTexts,title))
+// 		var text=WinTexts[title];
+// 	else
+// 		var text="Well done!";
 
-	var winElements="12345678".split("").map(n=>`<div class="winlegend">${n==2?text:""}</div>`).join("\n")
-	ReplaceChildren(winElements,".winpane");
+// 	var winElements="12345678".split("").map(n=>`<div class="winlegend">${n==2?text:""}</div>`).join("\n")
+// 	ReplaceChildren(winElements,".winpane");
 
-	setTimeout(()=>UnHideElement(".winpane"),250);
-	setTimeout(()=>ToggleClass(".winpane","animated"),500);
-	setTimeout(()=>HideElement(".winpane"),3000);
+// 	setTimeout(()=>UnHideElement(".winpane"),250);
+// 	setTimeout(()=>ToggleClass(".winpane","animated"),500);
+// 	setTimeout(()=>HideElement(".winpane"),3000);
 
-}
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
 // Game module hooks
@@ -260,9 +253,10 @@ function GameIntro(){
 
 function StartGame(){
 	GameFocus();
-	ObtainTitleScreenLoader();
 	PrepareGame();
 	LoadGame();
+	ObtainTitleScreenReLoader();
+	InitialiseGameCanvas();
 };
 
 TouchActionsMiddle=function(){
@@ -413,7 +407,7 @@ function GameKey(key){
 
 function GameInput(key){
 	if(key==="Escape"){
-		ObtainTitleScreenLoader();
+		ObtainTitleScreenReLoader();
 		return;
 	 }
 
@@ -444,7 +438,8 @@ function GameInput(key){
 }
 
 function TitleScreenInput(key){
-	if(key!=="Escape")StartLevelFromTitle();
+	if(key!=="Escape")
+		StartLevelFromTitle();
 }
 
 function InstructGameInput(key){
@@ -2536,60 +2531,128 @@ function ModifyLetters(ChangeF,ConditionF){
 ///////////////////////////////////////////////////////////////////////////////
 //Game execution
 
-function ObtainTitleScreenLoader(){
-	if(!TitleScreen())
-		PlaySound(MediaPath()+"/sound/startgame.mp3");
-	TitleScreen(true);
-
+function InitialiseGameCanvas(){
 	RemoveChildren("gameCanvas");
 	OpenElement(GameTopHTML(),"gameCanvas");
 	LaunchTouchActions(".top",TouchActionsTop());
 
 	OpenElement(GameMiddleHTML(),"gameCanvas");
 	LaunchTouchActions(".middle",TouchActionsMiddle());
-
-	AddElement(WinPaneHTML(),"gameCanvas")
-
-	UnClass(".top","levelscreen");
-	Class(".top","titlescreen");
 	
-	
+	//AddElement(WinPaneHTML(),"gameCanvas")
+}
 
-	if(SolvedLevels().length>0)
+function DrawTitleScreenOptions(){
+	if(SolvedLevels().length>0||CurLevelNumber()!==1)
 		Letters("CONTINUE");
 	else
 		Letters("START");
-	
+
 	Caret(Infinity);
 	DrawLevel();
-	
+}
+
+function ObtainTitleScreenReLoader(){
+	PlaySound(MediaPath()+"/sound/startgame.mp3");
+	Kinemate(TitleScreenLoaderMacro());
+	TitleScreen(true);
 };
 
-function LevelLoader(){
-	if(!CurLevelTitle())
-		return ConsoleAdd("Error: no levels were loaded!");
-	TitleScreen(false);
-	var goal=GoalHTML(CurLevelTitle());
-	var top=`
-		<div class='notes'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="level-notes">${ObtainLevelNotes(CurLevelNumber())}</p></div>
-		<div class='goal goaly'>${goal}</div>
-		<div class='keystrokes'></div>
-		`
-	ReplaceChildren(top,".top");
-	Class(".top","levelscreen");
-	UnClass(".top","titlescreen");
-
-	Listen("click",CopyHandler(ExtractKeystrokes),".keystrokes");
-
+CleanTitleScreen=function(){
+	TitleScreen(true);
+	Class(".top","titlescreen");UnClass(".top","levelscreen");
 	ClearLetters();
-	
-	if(goal==="Deaf")
-		Class(".goal","uncase");
-	else
-		UnClass(".goal","uncase");
-	ClearLevel();
-	ColoriseGameBar();//Change colour each level
 }
+
+function TitleScreenLoaderMacro(){
+	return [
+		{Starter:BlockInput},
+		{Starter:function(){ //If in level
+			CloseElement(".top .keystrokes");
+			CloseElement(".top .notes");
+			CloseElement(".top .goal");
+		},endDelay:1000},
+		{Starter:function(){
+			CleanTitleScreen();
+			ColoriseGameBar();
+		}},
+		{Starter:function(){
+			if(!GetElement(".top .game-title"))
+				OpenElement(`<div class='game-title'>${gameTitle}</div>`,".top")
+		},endDelay:100},
+		{Starter:function(){
+			DrawTitleScreenOptions()
+		},endDelay:1000},
+		{Starter:UnBlockInput},
+	]
+};
+
+
+
+function LevelLoader(){
+	if(!CurLevelTitle()){ //no loaded levels
+		return ObtainTitleScreenReLoader();
+	}
+	Kinemate(LevelLoadMacro())
+}
+
+CleanLevel=function(){
+	TitleScreen(false);
+	UnClass(".top","titlescreen");Class(".top","levelscreen");
+	ClearLetters();
+}
+
+function LevelLoadMacro(){
+	return [
+		{Starter:BlockInput},
+		{Starter:()=>CloseElement(".game-title")},//if in title screen;}
+		{Starter:function(){
+			FadeElement(".top .keystrokes");
+			FadeElement(".top .notes");
+			FadeElement(".top .goal");
+		},endDelay:1000},
+		{Starter:function(){
+			ClearLevel();
+			CleanLevel();
+			ColoriseGameBar();//Change colour each level
+		}},
+		{Starter:function(){
+			var notes=GetElement(".top .notes");
+			if(!notes)
+				OpenElement(`<div class='notes'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="level-notes">${ObtainLevelNotes(CurLevelNumber())}</p></div>`,".top")
+			else{
+				GetElement(".level-number").innerHTML=LevelNumberNotes(CurLevelNumber());
+				GetElement(".level-notes").innerHTML=ObtainLevelNotes(CurLevelNumber());
+				UnFadeElement(".top .notes")
+			}
+		},endDelay:100},
+		{Starter:function(){
+			var goalE=GetElement(".top .goal");
+			var goal=GoalHTML(CurLevelTitle())
+			if(!goalE)
+				AddElement(`<div class='goal goaly faded'>${goal}</div>`,".top")
+			else{
+				Class(".goal",".goaly");
+				goalE.innerHTML=goal;
+			}
+			UnFadeElement(".top .goal");
+
+			if(goal==="Deaf")
+				Class(".goal","uncase");
+			else
+				UnClass(".goal","uncase");
+
+			if(!GetElement(".top .keystrokes")){
+				AddElement(`<div class='keystrokes faded'></div>`,".top")
+			}
+			UnFadeElement(".top .keystrokes");
+			Listen("click",CopyHandler(ExtractKeystrokes),".keystrokes");
+
+		},endDelay:1000},
+		{Starter:UnBlockInput},
+	]
+};
+
 
 
 function ObtainUpdateLevel(state){
@@ -2630,7 +2693,7 @@ function LevelWinMacro(){
 		{Starter:()=>FadeElement(".top .notes")},
 		{Starter:()=>FadeElement(".top .keystrokes"),endDelay:500},
 		...GoalMatchedMacro(),
-		{Starter:()=>UpdateWinPane(CurLevelTitle()),endDelay:1000},
+		//{Starter:()=>UpdateWinPane(CurLevelTitle()),endDelay:1000},
 		{Starter:function(){
 			NextLevel();//may need delay
 			ClearLevel();}},
@@ -2649,9 +2712,8 @@ function GoalMatchedMacro(){
 		,endDelay:500},
 		{Starter:function(){Caret([Infinity]);DrawCaret();},endDelay:500},
 		{Starter:function(){ShrinkElement(".caret")},endDelay:500},
-		{Starter:function(){FadeElement(".caret")},endDelay:1000},
-		BorderlessAction({endDelay:3000}),
-		// {Starter:()=>Class("#letters",".goaly"),endDelay:2000},	
+		{Starter:function(){FadeElement(".caret")},endDelay:500},
+		BorderlessAction({endDelay:1000}),
 		MirrorAction({endDelay:3000}),
 		{Starter:function(){
 			UnClass(".middle","mirror-action");
