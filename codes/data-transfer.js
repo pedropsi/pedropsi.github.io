@@ -4770,9 +4770,9 @@ function ClearSchedule(name){
 
 
 function Kinemate(Objs){
-	if(Kinemate.running)
-		return console.log("Macro running... Please wait!");
-	Kinemate.running=true;
+	// if(Kinemate.running)
+	// 	return console.log("Macro running... Please wait!");
+	// Kinemate.running=true;
 	
 	var actions=Clone(Objs);
 
@@ -4790,7 +4790,7 @@ function Kinemate(Objs){
 	var FinalEnder=actions[actions.length-1].Ender||Identity;
 	actions[actions.length-1].Ender=function(){
 		FinalEnder();
-		Kinemate.running=false;
+		// Kinemate.running=false;
 	}
 	
 	SequenceSchedule(actions[0]);
@@ -5697,7 +5697,7 @@ function LazyLoader(target,Loader){
 function LazyLoad(targe,Loader){
 	var target=GetElement(targe);
 	if(!target)
-		return console.log("Observer error:",targe);
+		return;// console.log("Observer error:",targe);
 
 	var opts={
 		root: null,
