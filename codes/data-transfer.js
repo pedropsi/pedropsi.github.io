@@ -4769,10 +4769,10 @@ function ClearSchedule(name){
 }
 
 
-function MacroRun(Objs){
-	if(MacroRun.running)
+function Kinemate(Objs){
+	if(Kinemate.running)
 		return console.log("Macro running... Please wait!");
-	MacroRun.running=true;
+	Kinemate.running=true;
 	
 	var actions=Clone(Objs);
 
@@ -4790,7 +4790,7 @@ function MacroRun(Objs){
 	var FinalEnder=actions[actions.length-1].Ender||Identity;
 	actions[actions.length-1].Ender=function(){
 		FinalEnder();
-		MacroRun.running=false;
+		Kinemate.running=false;
 	}
 	
 	SequenceSchedule(actions[0]);

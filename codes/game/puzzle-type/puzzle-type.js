@@ -3034,11 +3034,11 @@ function GotoAndWinLevelActions(title){
 
 
 function CurLevelWin(){
-	MacroRun(GotoAndWinLevelActions(CurLevelTitle()));
+	Kinemate(GotoAndWinLevelActions(CurLevelTitle()));
 }
 
 function GotoLevelWin(title){
-	MacroRun(GotoAndWinLevelActions(title));
+	Kinemate(GotoAndWinLevelActions(title));
 }
 
 function NextLevelsWin(title){
@@ -3052,7 +3052,7 @@ function NextLevelsWin(title){
 
 	var actions=remainingGoals.map(GotoAndWinLevelActions).flat();
 	
-	MacroRun(actions);
+	Kinemate(actions);
 }
  
 //Tutorial Mode

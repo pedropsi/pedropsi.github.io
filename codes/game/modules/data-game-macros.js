@@ -10,7 +10,7 @@ function WinLevelMacro(screen){
 
 function WinGameRun(){
 	var actions=UnSolvedLevelScreens().map(WinLevelMacro).flat();
-	MacroRun(actions);
+	Kinemate(actions);
 }
 
 function HallOfFameMacro(){
