@@ -3108,7 +3108,7 @@ function LettersAction(Opts){
 function MirrorAction(Opts){
 	var Opts=Opts||{};
 		Opts.Iterator=function(i){
-			Class("#letters .letter-"+i,"upwards");
+			Class("#letters .letter-"+i,"downwards");
 			Class(".goal .letter-"+i,"downwards");
 		};
 	return LettersAction(Opts);

@@ -83,6 +83,11 @@
    justify-content: center;
 }
 
+.top .letter{
+   align-self: center; /*for animation*/
+}
+
+
 .top.levelscreen .goal{
    width: 100%;
    padding: 0;
@@ -119,10 +124,12 @@
 
 .goaly div.letter:first-child{
    font-size: calc(1.2*var(--w4) + 1.2*var(--h2));
+   padding-bottom:calc(1.2*var(--w1) + 1.2*var(--h-2));
 }
 
 .goaly svg.letter:first-child{
-   height:calc(1.2*var(--h4) + 1.2*var(--w2));
+   height:calc(1.15*var(--h4) + 1.15*var(--w2));
+   padding-bottom:calc(1.15*var(--w1) + 1.15*var(--h-2));
 }
 
 .notes{
@@ -508,11 +515,18 @@
    transition-duration: 1s;
    border-bottom-width: 0;
 }
-.middle .letter.upwards{
+
+.top .letter.downwards{
+   transition-duration: 2s;
+   margin-bottom:-100vh;
+   transition-delay: 100;
+}
+.middle .letter.downwards{
    transition-duration: 2s;
    margin-top:-100vh;
 }
-.goal .letter.downwards{
+
+.letter.downwards{
    color: transparent;
    transition-delay: 100;
 }
