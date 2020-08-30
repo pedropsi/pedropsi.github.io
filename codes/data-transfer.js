@@ -3138,6 +3138,13 @@ UnFadeElement=function(e){
 	Class(e,"opening");
 }
 
+ShrinkElement=function(e){
+	Class(e,"shrinked");
+}
+UnShrinkElement=function(e){
+	UnClass(e,"shrinked");
+}
+
 // Hide
 
 

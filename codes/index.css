@@ -1431,6 +1431,25 @@ video{
 .faded{
 	opacity: 0;
 }
+.hidden{
+	display:none !important;
+}
+.shrinked{
+	max-width: 0 !important;
+	width: 0 !important;
+	overflow: hidden;
+	transition-duration: var(--durationOff);
+	margin-right: 0 !important;
+	margin-left: 0 !important;
+	border-left-width: 0 !important;
+	border-right-width: 0 !important;
+}
+
+
+.hideCursor{
+	cursor:none;
+}
+
 
 .menu{
 	position:absolute;
@@ -1488,12 +1507,7 @@ kbd{
 }
 
 
-.hideCursor{
-	cursor:none;
-}
-.hidden{
-	display:none !important;
-}
+
 
 .label{
 	font-size:65%;
