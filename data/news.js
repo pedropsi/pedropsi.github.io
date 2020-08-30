@@ -1,11 +1,18 @@
 News={
+N_54:{
+		DATE:"2020-08-30",
+		HEADER:()=>"Level transitions, new levels, etc...",
+		PIECE:()=>`
+		<p>New animated transitions when entering/exiting a level and the title screen. Instructions mode added. Several changes and fixes.</p>
+		<p>Levels MAG*** and TEL*** added.</p>
+	`,ID:"puzzle-type"},
 N_53:{
 		DATE:"2020-08-01",
 		HEADER:()=>"Keystroke list, letter animation, better sound notes",
 		PIECE:()=>`
 		<p>${AHTML("puzzle-type")} now sports a hangman-style keystroke list with three different types of strokes: normal, invalid and special.</p>
 		<p>Also, the sound feedback for invalid strokes as well as the notes in level DEA*** were improved.</p>
-		<p>Level STA*** was worked on intensively, and letter insertion animated. Hints improved.</p>
+		<p>Level STA*** letter insertion animated. Hints improved.</p>
 		<p>All hints were completed.</p>
 		<p>Thanks ${v.HEDEHOLM()}, ${v.COLLINEYE()}, ${v.BLUBBERQUARK()}, ${v.BUILDER17()} for your help!</p>
 	`,ID:"puzzle-type"},
