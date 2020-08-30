@@ -733,7 +733,6 @@ var LevelGoals=[			//Required types of thinking:
 	"Dividi",				//Encoding, Arithmethic, Retroactive
 
 	"Magnetism",			//Positional, Retroactive, Science
-
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
@@ -2578,7 +2577,8 @@ function TitleScreenLoaderMacro(){
 		}},
 		{Starter:function(){
 			if(!GetElement(".top .game-title"))
-				OpenElement(`<div class='game-title'>${gameTitle}</div>`,".top")
+				AddElement(`<div class='game-title faded'>${gameTitle}</div>`,".top")
+			UnFadeElement(".top .game-title");
 		},endDelay:100},
 		{Starter:function(){
 			DrawTitleScreenOptions()
@@ -2605,7 +2605,11 @@ CleanLevel=function(){
 function LevelLoadMacro(){
 	return [
 		{Starter:BlockInput},
-		{Starter:()=>CloseElement(".game-title")},//if in title screen;}
+		{Starter:function(){
+			CloseElement(".game-title");
+			FadeElement("#letters");
+		}
+	},//if in title screen;}
 		{Starter:function(){
 			FadeElement(".top .keystrokes");
 			FadeElement(".top .notes");
@@ -2619,13 +2623,13 @@ function LevelLoadMacro(){
 		{Starter:function(){
 			var notes=GetElement(".top .notes");
 			if(!notes)
-				OpenElement(`<div class='notes'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="level-notes">${ObtainLevelNotes(CurLevelNumber())}</p></div>`,".top")
+				AddElement(`<div class='notes faded'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="level-notes">${ObtainLevelNotes(CurLevelNumber())}</p></div>`,".top")
 			else{
 				GetElement(".level-number").innerHTML=LevelNumberNotes(CurLevelNumber());
 				GetElement(".level-notes").innerHTML=ObtainLevelNotes(CurLevelNumber());
-				UnFadeElement(".top .notes")
 			}
-		},endDelay:100},
+			UnFadeElement(".top .notes");
+		},endDelay:500},
 		{Starter:function(){
 			var goalE=GetElement(".top .goal");
 			var goal=GoalHTML(CurLevelTitle())
@@ -2649,7 +2653,10 @@ function LevelLoadMacro(){
 			Listen("click",CopyHandler(ExtractKeystrokes),".keystrokes");
 
 		},endDelay:1000},
-		{Starter:UnBlockInput},
+		{Starter:function(){
+			UnBlockInput();
+			UnFadeElement("#letters");
+		}}
 	]
 };
 
