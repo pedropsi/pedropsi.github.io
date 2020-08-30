@@ -2454,7 +2454,8 @@ function TransitionExpansion(){
 	var p=memo.positions[memo.p]+(memo.positions.length>1?1:0);
 	var letterE=GetElement("#letters .letter-"+p);
 	if(letterE){
-		letterE.outerHTML=`<div class="expanding">${letterE.outerHTML}</div>`
+		var LeHTML=letterE.outerHTML;
+		letterE.outerHTML=`<div class="expanding">${LeHTML}</div>`
 		Class(letterE,"expanding");
 	}
 }
@@ -2640,13 +2641,22 @@ function LevelWinMacro(){
 function GoalMatchedMacro(){
 	return [
 		{Starter:function(){
-			Caret(Infinity);
-			DrawCaret();},endDelay:100},
-		BorderlessAction(),
-		{Starter:()=>FadeElement(".caret"),endDelay:1000},
-		{Starter:()=>Class("#letters",".goaly")},
-		UpwardsAction(),
-		{Starter:()=>UnClass("#letters",".goaly")},
+			Class(".levelscreen","mirror-action");
+			Class(".middle","mirror-action");
+			UnClass(".goal",".goaly");
+			GetElements(".goal .letter").map((e,n)=>Class(e,"letter-"+n));
+			Class(".goal",".letters");}
+		,endDelay:500},
+		{Starter:function(){Caret([Infinity]);DrawCaret();},endDelay:500},
+		{Starter:function(){ShrinkElement(".caret")},endDelay:500},
+		{Starter:function(){FadeElement(".caret")},endDelay:1000},
+		BorderlessAction({endDelay:3000}),
+		// {Starter:()=>Class("#letters",".goaly"),endDelay:2000},	
+		MirrorAction({endDelay:3000}),
+		{Starter:function(){
+			UnClass(".middle","mirror-action");
+			UnClass(".levelscreen","mirror-action");
+		}}
 	];
 }
 
@@ -3033,9 +3043,12 @@ function LettersAction(Opts){
 	};
 }
 
-function UpwardsAction(Opts){
+function MirrorAction(Opts){
 	var Opts=Opts||{};
-		Opts.Iterator=function(i){Class("#letters .letter-"+i,"upwards")};
+		Opts.Iterator=function(i){
+			Class("#letters .letter-"+i,"upwards");
+			Class(".goal .letter-"+i,"downwards");
+		};
 	return LettersAction(Opts);
 }
 

@@ -80,6 +80,7 @@
    margin: unset;
 }
 
+
 .top.levelscreen .title {
    width: 100%;
    font-size:var(--w8);
@@ -100,15 +101,23 @@
    align-items: baseline;
    flex-wrap: wrap;
 }
+.middle #letters.goaly{
+   justify-content: center;
+   align-items: baseline;
+   flex-wrap: wrap;
+}
 
 .goaly div.letter{
    font-size: calc(0.9*var(--w4) + 0.9*var(--h2));
    line-height: calc(var(--h2) + var(--w2) + var(--h1));
    font-variant-caps:small-caps; 
    font-weight: bold;
-   padding: 0 var(--w-16) 0 var(--w-16);
-   margin: 0 var(--w-16) 0 var(--w-16);
+   padding-left: var(--w-16);
+   padding-right: var(--w-16);
+   margin-left: var(--w-16);
+   margin-right: var(--w-16);
    height: auto;
+   transition-duration: var(--durationOff)
 }
 
 .goaly div.letter.space{
@@ -504,3 +513,6 @@
    transition-duration: 2s;
    margin-top:-100vh;
 }
+.goal .letter.downwards{
+   color: transparent;
+   transition-delay: 100;
