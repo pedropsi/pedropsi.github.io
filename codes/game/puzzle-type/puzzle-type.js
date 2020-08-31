@@ -1746,6 +1746,11 @@ function StartingBuds(L){
 		var insertions=CyclePossibilities(L,insertions);
 	}
 
+	if(!insertions){
+		ForbidCaret();
+		return;
+	}
+	
 	var possibilities=insertions.possibilities;
 	var p=insertions.p;
 	var choosing=insertions.choosing;
