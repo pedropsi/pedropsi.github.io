@@ -411,18 +411,20 @@
    text-decoration-thickness: var(--h-2);
    color: var(--lightblue);
 }
-
 .keystroke-invalid::selection{
    color: transparent;
    text-decoration-thickness: 0;
    text-decoration-color: transparent;
    text-decoration: none;
 }
-
 .keystroke-combo{
    font-weight: bold;
-   text-decoration: underline;
-   /*color: var(--blue);*/
+}
+.keystroke-combo svg{
+   fill: unset;
+}
+.keystroke-invalid svg{ /*just outline*/
+   fill: none
 }
 
 .window.keyboard{

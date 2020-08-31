@@ -942,11 +942,11 @@ function Wasd(L){
 
 	if(Word()===line){
 		Throttle(BumpSound,250);
-		AddStrokeValid(L);
+		AddStrokeInvalid(L);
 		ForbidCaret();
 	}
 	else
-		AddStrokeUnderline(L);
+		AddStrokeValid(L);
 
 	Letters(line);
 	Caret(line.indexOf("W"));
@@ -1355,7 +1355,7 @@ function Second(L){
 	AddStrokeValid(L);
 	
 	var l=Keystrokes.array.length;
-	Keystrokes.array=Keystrokes.array.map((k,i)=>((i+1)<=(l/2))?k+"-":k)
+	Keystrokes.array=Keystrokes.array.map((k,i)=>((i+1)<=(l/2))?Posfix(k,"-"):k)
 }
 
 function Consonant(L){
@@ -2362,7 +2362,9 @@ function ClearLetters(){
 }
 
 function DrawLetters(){
-	var letters=Letters().map(LetterHTML(CurLevelTitle())).join("\n");
+	var letters=Letters();
+		letters=letters.map(SymbolIcon);//Replace any icons
+		letters=letters.map(LetterHTML(CurLevelTitle())).join("\n");
 	ReplaceChildren(letters,"#letters");
 	GetElements("#letters .letter").map((e,n)=>Class(e,"letter-"+n)); //number each letter
 
@@ -2399,12 +2401,10 @@ function DrawKeystrokes(){
 }
 
 function KeystrokeHTML(K){
-	if(Posfixed(K,"-"))
-		return `<span class="keystroke-invalid">${UnPosfix(K,"-")}</span>`;
-	else if(Posfixed(K,"*"))
-		return `<span class="keystroke-combo">${UnPosfix(K,"*")}</span>`;
-	else
-		return `<span class="keystroke-valid">${K}</span>`;
+	var type=StrokeInvalid(K)?"invalid":(StrokeUnderlined(K)?"combo":"valid");
+	var K=CleanStroke(K);
+		K=SymbolIcon(K);//replace with icon, if available
+	return `<span class="keystroke keystroke-${type}">${K}</span>`;
 }
 
 function DrawLevel(){
@@ -2440,6 +2440,12 @@ function DeleteLetterAfter(n){
 	}
 }
 
+function DeleteLetters(array){
+	var positions=Unique(array).reverse();
+		positions=positions.filter(p=>(p===Max(0,Min(Letters().length-1,p))));
+		
+		positions.map(l=>Letter(l,false));
+}
 
 //Letters and Numbers
 function LetterNumber(A){
@@ -2653,9 +2659,23 @@ function LevelWinMacro(){
 	]
 }
 
+function RemoveLetterIcons(){
+	var positions=[];
+	GetElements("#letters .letter").map(
+		function(e,i){if(GetElement(".icon",e))positions.push(i)
+	});
+	DeleteLetters(positions);
+}
+
 function GoalMatchedMacro(){
+	var icons=GetElements("#letters .icon");
+	RemoveLetterIcons();
 	return [
-		{Starter:function(){Caret([Infinity]);DrawCaret();},endDelay:500},
+		{Starter:function(){
+			Caret([Infinity]);
+			DrawCaret();
+			GetElements("#letters .icon").map(e=>ParentElement(e)).map(ShrinkElement);
+		},endDelay:500},
 		{Starter:function(){
 			// Class(".levelscreen","mirror-action");
 			Class(".middle #letters","downwards");
@@ -2864,24 +2884,41 @@ function CleanStroke(L){
 function ValidateStroke(L){
 	return CleanStroke(L);
 }
+
 function InvalidateStroke(L){
 	if(L===separator)
 		return separator;
-	return Posfix(CleanStroke(L),"-");
+	return Posfix(UnInvalidateStroke(L),"-");
 }
 function UnderlineStroke(L){
 	if(L===separator)
 		return separator;
-	return Posfix(CleanStroke(L),"*");
+	return Posfix(UnUnderlineStroke(L),"*");
 }
-function UnderlineValidStroke(L){
-	if(InvalidStroke(L))
-		return L;
-	return UnderlineStroke(L);
+function UnInvalidateStroke(L){
+	if(L===separator)
+		return separator;
+	return L.replace(/\-/g,"");
+}
+function UnUnderlineStroke(L){
+	if(L===separator)
+		return separator;
+	return L.replace(/\*/g,"");
 }
 
-function InvalidStroke(L){
-	return Posfixed(L,"-");
+
+function UnderlineValidStroke(L){
+	if(StrokeInvalid(L))
+		return L;
+	else
+		return UnderlineStroke(L);
+}
+
+function StrokeInvalid(L){
+	return UnInvalidateStroke(L)!==L;
+}
+function StrokeUnderlined(L){
+	return UnUnderlineStroke(L)!==L;
 }
 
 function AddStrokeSeparator(){
@@ -2987,28 +3024,38 @@ function HighlightableWords(title){
 
 function ExtractKeystrokes(el){
 	var parent=FirstMatchingElement("parentElement",el,".keystrokes");
-	var strokes=GetElements("SPAN",parent);
+	var strokes=GetElements(".keystroke",parent);
 		strokes=strokes.filter(s=>!Classed(s,"keystroke-invalid")&&SelectedNode(s));
-	var text=strokes.map(s=>s.innerText).join("");	
-		text=LevelKeystrokesSimpler(CurLevelTitle())(text);
+	var text=strokes.map(KeystrokeString).join("");	
+		text=KeystrokeSimplifier(CurLevelTitle())(text);
 		text=text.replace(/\n+/gmi,"");//ensure single line
 		text=text.replace(/\_/gmi," ");//revert underscore -> space
 	return text;
 }
 
+function KeystrokeString(e){
+	if(!GetElement(".iconpath",e))
+		return e.innerText;
+	else
+		return ObtainSymbol(ElementSymbolName(e));
+}
 
-function LevelKeystrokesSimpler(title){
+function SimplerArrowCycleString(text){
 	var lr=ObtainSymbol("left")+ObtainSymbol("right");
-	var rl=ObtainSymbol("right")+ObtainSymbol("left");
+	var rl=ObtainSymbol("right")+ObtainSymbol("left");	
+	return FixedPoint(t=>t.replace(lr,"").replace(rl,""),text);
+}
 
-	var Simplifiers={
-		"Starting buds":text=>FixedPoint(t=>t.replace(lr,"").replace(rl,""),text)
-	}
-
-	if(In(Simplifiers,title))
-		return Simplifiers[title];
+function KeystrokeSimplifier(title){
+	if(In(KeystrokeSimplifiers,title))
+		return KeystrokeSimplifiers[title];
 	else
 		return Identity;
+}
+
+var KeystrokeSimplifiers={
+	"Starting buds":SimplerArrowCycleString,
+	"La rapide surprise":SimplerArrowCycleString
 }
 
 ///////////////////////////////////////////////////////////////////////////////
