@@ -100,7 +100,7 @@
 }
 
 .goaly{
-   --goalFontSize:calc(1.2 * var(--w4) + 1.2 * var(--h2));
+   --goalFontSize:calc( var(--w4) +  var(--h2));
 }
 
 .goaly div.letter{
