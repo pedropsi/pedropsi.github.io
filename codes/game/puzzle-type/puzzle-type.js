@@ -2374,10 +2374,20 @@ function DrawLetters(){
 		letters=letters.map(SymbolIcon);//Replace any icons
 		letters=letters.map(LetterHTML(CurLevelTitle())).join("\n");
 	ReplaceChildren(letters,"#letters");
-	GetElements("#letters .letter").map((e,n)=>Class(e,"letter-"+n)); //number each letter
-
+	NumberLetterElements();
 	TransitionLetters(CurLevelTitle());
 }
+
+function NumberLetterElements(target){
+	var target=target||"#letters .letter";
+	GetElements(target).map(function(e,n){
+		UnClass(".letter-"+n,".letter-"+n);
+	});
+	GetElements(target).map(function(e,n){
+		Class(e,"letter-"+n);
+	});
+}
+
 
 function TransitionLetters(title){
 	if(LevelLetterTransitions[title])
@@ -2404,7 +2414,7 @@ function TransitionExpansion(){
 
 function DrawKeystrokes(){
 	HighlightableWords(CurLevelTitle());
-	var keystrokes="<p>"+(Keystrokes().map(KeystrokeHTML).join(""))+"</p>";
+	var keystrokes="<p> "+(Keystrokes().map(KeystrokeHTML).join(""))+" </p>";
 	ReplaceChildren(keystrokes,".keystrokes");
 }
 
@@ -2667,17 +2677,8 @@ function LevelWinMacro(){
 	]
 }
 
-function RemoveLetterIcons(){
-	var positions=[];
-	GetElements("#letters .letter").map(
-		function(e,i){if(GetElement(".icon",e))positions.push(i)
-	});
-	DeleteLetters(positions);
-}
 
 function GoalMatchedMacro(){
-	var icons=GetElements("#letters .icon");
-	RemoveLetterIcons();
 	return [
 		{Starter:function(){
 			Caret([Infinity]);
@@ -2688,12 +2689,14 @@ function GoalMatchedMacro(){
 			// Class(".levelscreen","mirror-action");
 			Class(".middle #letters","downwards");
 			UnClass(".goal",".goaly");
-			GetElements(".goal .letter").map((e,n)=>Class(e,"letter-"+n));
 			Class(".goal",".letters");
 			ShrinkElement(".caret");
 		}
 		,endDelay:500},
-		{Starter:function(){FadeElement(".caret")}},
+		{Starter:function(){
+			FadeElement(".caret");
+			RemoveElements(".shrinked");
+		},endDelay:100},
 		BorderlessAction({endDelay:1000}),
 		MirrorAction({endDelay:1000}),
 		{Starter:function(){
@@ -3109,15 +3112,17 @@ function LettersAction(Opts){
 	return {
 		interval:100,
 		...Opts,
-		steps:Letters().length
+		steps:GetElements("#letters .letter").length
 	};
 }
 
 function MirrorAction(Opts){
 	var Opts=Opts||{};
 		Opts.Iterator=function(i){
-			Class("#letters .letter-"+i,"downwards");
-			Class(".goal .letter-"+i,"downwards");
+			var middleletters=GetElements("#letters .letter");
+			var goalletters=GetElements(".goal .letter");
+			Class(middleletters[i],"downwards");
+			Class(goalletters[i],"downwards");
 		};
 	return LettersAction(Opts);
 }
@@ -3125,7 +3130,9 @@ function MirrorAction(Opts){
 function BorderlessAction(Opts){
 	var Opts=Opts||{};
 		Opts.interval=50;
-		Opts.Iterator=function(i){Class("#letters .letter-"+i,"borderless");};
+		Opts.Iterator=function(i){
+			var middleletters=GetElements("#letters .letter");
+			Class(middleletters[i],"borderless")};
 	return LettersAction(Opts);
 }
 
