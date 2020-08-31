@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 if(PageIdentifier()!=="puzzle-type")
-AddElement("<style>html{overflow-y:hidden};</style>","HEAD")
+	AddElement("<style>html{overflow-y:hidden};</style>","HEAD")
 
 var gameTitle="Puzzle Type";
 
@@ -131,7 +131,7 @@ function ObtainIsRestartMove(move){return false;}
 var ObtainReadMove=Identity;
 
 //Level navigation
-function ObtainNewGameCondition(){return SolvedLevels().length<1&&CurLevelNumber()<=1};
+function ObtainNewGameCondition(){return !(SolvedLevels().length>0||CurLevelNumber()!==1)};
 function ObtainStateScreens(){return LevelGoals;}
 
 function ObtainLevelTitle(lvl){
@@ -2542,10 +2542,10 @@ function InitialiseGameCanvas(){
 }
 
 function DrawTitleScreenOptions(){
-	if(SolvedLevels().length>0||CurLevelNumber()!==1)
-		Letters("CONTINUE");
-	else
+	if(ObtainNewGameCondition())
 		Letters("START");
+	else
+		Letters("CONTINUE");
 
 	Caret(Infinity);
 	DrawLevel();
