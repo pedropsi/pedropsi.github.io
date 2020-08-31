@@ -18,13 +18,13 @@ function GameFrameHTML(){
 
 function GameTopHTML(){
 	return `
-	<div class='top'>
-		<div class='game-title'>${gameTitle}</div>
-	</div>`
+	<div class='top'></div>`
 }
 
 function GameMiddleHTML(){
-	return `<div class='middle'><div id='letters'></div></div>`;
+	return `<div class='middle'>
+				<div id='letters'></div>
+			</div>`;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -3102,8 +3102,9 @@ function WinLevelAction(title){
 
 function GotoAndWinLevelActions(title){
 	return [
-		{startDelay:1000},
+		{startDelay:4000},
 		{Starter:()=>GoToLevel(title)},
+		{startDelay:2000},
 		WinLevelAction(title)
 	]
 }
