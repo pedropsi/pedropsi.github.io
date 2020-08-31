@@ -2485,7 +2485,7 @@ function DrawTitleScreenOptions(){
 	else
 		Letters("CONTINUE");
 
-	Caret(Infinity);
+	Caret(Range(0,Letters().length-1));
 	DrawLevel();
 }
 
@@ -2508,6 +2508,7 @@ function TitleScreenLoaderMacro(){
 			CloseElement(".top .keystrokes");
 			CloseElement(".top .notes");
 			CloseElement(".top .goal");
+			FadeElement("#letters");
 		},endDelay:1000},
 		{Starter:function(){
 			CleanTitleScreen();
@@ -2517,11 +2518,14 @@ function TitleScreenLoaderMacro(){
 			if(!GetElement(".top .game-title"))
 				AddElement(`<div class='game-title faded'>${gameTitle}</div>`,".top")
 			UnFadeElement(".top .game-title");
-		},endDelay:100},
+		},endDelay:500},
 		{Starter:function(){
-			DrawTitleScreenOptions()
-		},endDelay:1000},
-		{Starter:UnBlockInput},
+			DrawTitleScreenOptions();
+			UnFadeElement("#letters");
+		}},
+		{Ender:UnBlockInput,
+			endDelay:500
+	   }
 	]
 };
 
