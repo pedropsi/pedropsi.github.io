@@ -5236,6 +5236,7 @@ CancelTypewriterBanner=function(thi,originaltext,queuename){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Symbol designs
+
 var Symbols={
 	"how-to-play":IconHTML("M182 32 C 131 42,96 91,105 142 C 106 149,110 166,110 166 C 110 166,154 156,154 156 C 154 156,153 151,151 144 C 143 106,163 77,199 76 C 255 76,270 151,218 173 C 209 177,204 180,204 181 C 204 181,202 184,199 186 C 181 199,168 218,163 239 C 161 246,158 262,158 263 C 158 263,201 271,201 271 C 201 271,202 266,203 261 C 209 235,217 224,238 214 C 322 175,311 57,222 33 C 213 31,192 30,182 32 M155 304 C 118 318,127 372,167 372 C 203 372,217 326,187 307 C 178 302,164 300,155 304"),
 	"credits":IconHTML("M178 0 C 34 15,-46 177,27 302 C 109 438,310 430,379 288 C 449 146,335 -15,178 0 M218 38 C 327 50,394 169,346 269 C 291 383,133 394,64 289 C -10 174,81 24,218 38 M185 78 C 104 88,56 172,87 248 C 117 320,209 344,273 297 C 284 289,310 260,309 257 C 308 256,273 229,271 229 C 271 229,267 233,263 238 C 232 280,183 286,148 252 C 89 195,156 98,230 132 C 244 139,253 146,267 167 L 271 171 274 169 C 275 168,284 162,293 155 L 310 143 308 141 C 282 104,259 87,224 80 C 217 78,192 77,185 78"),
@@ -5276,18 +5277,43 @@ var Symbols={
 	"close":"×"
 };
 
+var Icons={
+	"left":IconHTML("M 3 5 L 5 8 L 5 9 L 0 5 L 0 5 L 5 1 L 5 2 L 3 5 Z M 3 5 L 5 6 L 10 5 L 5 4 L 3 5 Z","10 10"),
+	"right":IconHTML("M 7 5 L 5 8 L 5 9 L 10 5 L 10 5 L 5 1 L 5 2 L 7 5 Z M 7 5 L 5 6 L 0 5 L 5 4 L 7 5 Z","10 10")
+}
+
 var MacKeys={
 	"ctrl":"cmd",
 	"alt":"opt"
 }
 
 ObtainSymbol=function(name){
-	if(!name)
+	if(name===undefined)
 		return Symbols;
 	else if(In(Symbols,name.toLowerCase()))
 		return Symbols[name.toLowerCase()];
 	else
 		return name;
+}
+
+var SymbolsNames=FlipKeysValues(Symbols);
+
+SymbolName=function(symbol){
+	if(symbol===undefined)
+		return SymbolsNames;	
+	if(In(SymbolsNames,symbol))
+		return SymbolsNames[symbol];
+	else
+		return symbol;
+}
+
+SymbolIcon=function(name){
+	var name=SymbolName(ObtainSymbol(name));
+
+	if(In(Icons,name))
+		return Icons[name];
+	else
+		return ObtainSymbol(name);
 }
 
 KBDSingleHTML=function(key){
