@@ -121,8 +121,8 @@
 }
 
 .goaly div.letter:first-child{
-   font-size: calc(1.1 * var(--goalFontSize)));
-   padding-bottom: calc(0.1 * var(--goalFontSize));
+   font-size: calc(1.2 * var(--goalFontSize));
+   padding-bottom: calc(0.2 * var(--goalFontSize));
 }
 
 .goaly svg.letter:first-child{
