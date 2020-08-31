@@ -516,7 +516,8 @@ function ObtainLevelDescriptionTitle(lvl){
 
 
 function GoalHTML(title){
-	return title.toUpperCase().split("").map(LetterHTML(title)).join("");
+	function LetterDisplay(L){return LetterHTML(title)(L.toUpperCase())};
+	return title.split("").map(LetterDisplay).join("");
 }
 
 var LevelDifficulty={

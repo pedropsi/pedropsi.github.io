@@ -2,7 +2,6 @@
 .game-supra-Canvas{
    width: 100%;
    position: relative;
-   --midHeight:calc( var(--w8) + var(--h8));
 }
 
 .winpane{
@@ -100,11 +99,14 @@
    flex-direction: row;
 }
 
+.goaly{
+   --goalFontSize:calc(1.2 * var(--w4) + 1.2 * var(--h2));
+}
 
 .goaly div.letter{
-   font-size: calc(0.9*var(--w4) + 0.9*var(--h2));
-   line-height: calc(var(--h2) + var(--w2) + var(--h1));
-   font-variant-caps:small-caps; 
+   font-size: var(--goalFontSize);
+   line-height: calc(var(--h2) + var(--w2));
+   font-variant-caps:small-caps;
    font-weight: bold;
    padding-left: var(--w-16);
    padding-right: var(--w-16);
@@ -119,8 +121,8 @@
 }
 
 .goaly div.letter:first-child{
-   font-size: calc(1.2*var(--w4) + 1.2*var(--h2));
-   padding-bottom:calc(1.2*var(--w1) + 1.2*var(--h-2));
+   font-size: calc(1.1 * var(--goalFontSize)));
+   padding-bottom: calc(0.1 * var(--goalFontSize));
 }
 
 .goaly svg.letter:first-child{
