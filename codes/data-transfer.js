@@ -5426,6 +5426,7 @@ function WallpaperHTML(Opts){
 	var path=Opts.path||"M 0 0 L 100 0 L 100 100 Z";
 
 	var name=Opts.name||GenerateId();
+	var cla=Opts.class?Opts.class:"";
 
 	var height=Opts.height||Opts.width||"100";
 	var width=Opts.width||Opts.height||"100";
@@ -5434,7 +5435,7 @@ function WallpaperHTML(Opts){
 	
 	var scale=Opts.scale||1;
 
-	return `<svg class='wallpaper' width="100%" height="100%">
+	return `<svg class='wallpaper ${cla}' width="100%" height="100%">
 				<pattern id="${name}" x="0" y="0" width="${width*scale}" height="${height*scale}" patternUnits="userSpaceOnUse" viewBox="${viewbox}"> 
 					<g>
 						<path d="${path}" class="layer"/>
@@ -5448,17 +5449,26 @@ function AddWallpaper(patternObj,e){
 	AddElement(NewElement(WallpaperHTML(patternObj)),e);
 }
 
-function RemoveWallpaper(e){
-	GetElements(".wallpaper",e).map(RemoveElement);
+function RemoveWallpaper(name,e){
+	if(name)
+		RemoveElement(GetElement(Prefix(name,"."),e));
+	else
+		GetElements(".wallpaper",e).map(RemoveElement);
 }
 
+var WallpaperPatterns={
+	"grid-mini":{path:"M 0 0 L 0 50 L 50 50 L 50 49 L 1 49 L 1 0 Z",width:50,scale:0.1},
+	"grid-cross":{path:"M 49 41 L 49 50 L 40 50 L 40 51 L 49 51 L 49 59 L 50 59 L 50 51 L 59 51 L 59 50 L 50 50 L 50 41 Z",width:100,scale:0.5},
+	"triangle-5":{path:"M 0 0 L 20 0 L 20 20 Z",width:20},
+	//"grid-5":{path:"M 0 0 L 1 0 L 1 7 L 0 7 M 0 8 L 1 8 L 1 9 L 0 9 M 2 9 L 9 9 L 9 8 L 2 8 Z",width:10}
+};
+
 function Wallpaper(name){
-	var patterns={
-		"triangle-5":{path:"M 0 0 L 20 0 L 20 20 Z",width:20},
-		"grid-5":{path:"M 0 0 L 1 0 L 1 7 L 0 7 M 0 8 L 1 8 L 1 9 L 0 9 M 2 9 L 9 9 L 9 8 L 2 8 Z",width:10}
+	if(In(WallpaperPatterns,name)){
+		var pattern=WallpaperPatterns[name];
+			pattern.class=name;
+			return pattern;
 	}
-	if(In(patterns,name))
-		return patterns[name];
 	else
 		return undefined;
 }
