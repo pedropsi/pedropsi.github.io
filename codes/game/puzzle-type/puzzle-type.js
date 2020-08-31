@@ -516,8 +516,10 @@ function ObtainLevelDescriptionTitle(lvl){
 
 
 function GoalHTML(title){
-	function LetterDisplay(L){return LetterHTML(title)(L.toUpperCase())};
-	return title.split("").map(LetterDisplay).join("");
+	function GoalDisplayer(L){return LetterPureHTML(L.toUpperCase())};
+	if(In(GoalDisplayers,title))
+		GoalDisplayer=GoalDisplayers[title];
+	return title.split("").map(GoalDisplayer).join("");
 }
 
 var LevelDifficulty={
@@ -2281,7 +2283,7 @@ function LetterPureHTML(L,cla){
 }
 
 
-var LetterDisplay={
+var LetterDisplayers={
 	//"Tangles":LetterDraftHTML,
 	"Symmetries":function(L){
 		
@@ -2332,6 +2334,11 @@ var LetterDisplay={
 	"Topological":BezierLetterSVG
 }
 
+var GoalDisplayers={
+	"Topological":function(l){return BezierLetterSVG(l.toUpperCase())},
+	"Deaf":LetterPureHTML
+}
+
 function BezierLetterSVG(L){
 	return BezierLetter(L);
 }
@@ -2344,10 +2351,10 @@ function LetterDraftHTML(L){
 }
 
 function LetterHTML(levelName){
-	if(TitleScreen()||!In(LetterDisplay,levelName))
+	if(TitleScreen()||!In(LetterDisplayers,levelName))
 		return LetterPureHTML;
 	else
-		return LetterDisplay[levelName];
+		return LetterDisplayers[levelName];
 }
 
 function CaretHTML(){

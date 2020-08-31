@@ -106,7 +106,6 @@
 .goaly div.letter{
    font-size: var(--goalFontSize);
    line-height: calc(var(--h2) + var(--w2));
-   font-variant-caps:small-caps;
    font-weight: bold;
    padding-left: var(--w-16);
    padding-right: var(--w-16);
@@ -183,10 +182,6 @@
    line-height: calc(var(--h2) + var(--w2));
    text-align: right;
    font-weight: normal;
-}
-
-.top .goal.uncase{
-   font-variant-caps:normal;
 }
 
 .middle{
