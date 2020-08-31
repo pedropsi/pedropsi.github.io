@@ -155,6 +155,7 @@
   overflow: hidden;
   color: var(--darkblue); 
   /*background-color: var(--white);*/
+   cursor: text;
 }
 
 .top.levelscreen .keystrokes p{
