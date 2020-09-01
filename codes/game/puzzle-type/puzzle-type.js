@@ -293,6 +293,11 @@ function KeyActions(){
 	Directions.map(DirectKeybinder);
 	["·","interpunkt"].map(Keybinder(Identity));//Do nothing
 
+	Keybinder(SelectPreviousLevel)("Ctrl down");
+	Keybinder(SelectPreviousLevel)("Ctrl left");
+	Keybinder(SelectNextLevel)("Ctrl up");
+	Keybinder(SelectNextLevel)("Ctrl right");
+
 	["Escape","Enter"].map(DirectKeybinder);
 	["undo",ObtainMainKey("undo"),"Backspace","Delete","Ctrl U","Ctrl Z"].map(Keybinder(ObtainUndo));
 	["redo",ObtainMainKey("redo"),"Shift Backspace","Shift Delete","Ctrl Y"].map(Keybinder(ObtainRedo));
