@@ -42,9 +42,9 @@ function ShiftBaseColour(basecolour){
 function ObtainRestartAllowed(){return true;}
 function ObtainUndoAllowed(){return true;}
 function ObtainRedoAllowed(){return true;}
-var ObtainUndo=function(){Undo();PulseSelect("#choice-"+"undo")};					//With Onscreen keyboard
-var ObtainRedo=function(){Redo();PulseSelect("#choice-"+"redo")};					//With Onscreen keyboard
-var ObtainRestart=function(){Restart();PulseSelect("#choice-"+"restart")};			//With Onscreen keyboard
+var ObtainUndo=function(){if(!InputBlocked()) Undo();PulseSelect("#choice-"+"undo")};					//With Onscreen keyboard
+var ObtainRedo=function(){if(!InputBlocked()) Redo();PulseSelect("#choice-"+"redo")};					//With Onscreen keyboard
+var ObtainRestart=function(){if(!InputBlocked())Restart();PulseSelect("#choice-"+"restart")};			//With Onscreen keyboard
 
 function ObtainMainKey(action){
 	if(!action)
@@ -1750,7 +1750,7 @@ function StartingBuds(L){
 		ForbidCaret();
 		return;
 	}
-	
+
 	var possibilities=insertions.possibilities;
 	var p=insertions.p;
 	var choosing=insertions.choosing;
@@ -3204,19 +3204,31 @@ function NextLevelsWin(title){
 function OverlayTutorial(){
 	Class(".middle","tutor");
 	Class(".top","tutor");
-	AddWallpaper("grid-5",".middle")
+	UnClass(".middle .grid-mini","faded");
+	UnClass(".middle .grid-cross","faded");
+	UnClass(".middle .grid-mini","opening");
+	UnClass(".middle .grid-cross","opening");	
 }
 
 function UnOverlayTutorial(){
 	UnClass(".middle","tutor");
 	UnClass(".top","tutor");
-	RemoveWallpaper(".middle")
+	CloseElement(".middle .grid-mini");
+	CloseElement(".middle .grid-cross");
 }
 
 function OverlayTutorialMacro(){return [
 	{Starter:()=>FadeElement(".top .notes")},
 	{Starter:()=>FadeElement(".top .keystrokes"),endDelay:500},
 	{Starter:()=>FadeElement(".top .goal"),endDelay:500},
+	{Starter:function(){
+		AddWallpaper("grid-mini",".middle");
+		AddWallpaper("grid-cross",".middle");
+		Class(".middle .grid-mini","faded");
+		Class(".middle .grid-cross","faded");
+		Class(".middle .grid-mini","opening");
+		Class(".middle .grid-cross","opening");	
+	},endDelay:500},
 	{Starter:OverlayTutorial}
 	];
 }
@@ -3226,6 +3238,13 @@ function UnOverlayTutorialMacro(){return [
 	{Starter:()=>UnFadeElement(".top .goal"),endDelay:100},
 	{Starter:()=>UnFadeElement(".top .keystrokes"),endDelay:100},
 	{Starter:()=>UnFadeElement(".top .notes"),endDelay:1000},
+	{Starter:function(){
+		FadeElement(".middle .grid-mini");
+		FadeElement(".middle .grid-cross");
+		UnClass(".middle .grid-mini","opening");
+		UnClass(".middle .grid-cross","opening");	
+	},endDelay:1000},
+	{Starter:UnOverlayTutorial}
 	];
 }
 
@@ -3247,14 +3266,14 @@ var UnZoomMacro=[
 
 function TutorialClueMacro(){
 	return [
-		...OverlayTutorialMacro(),	
+		{Starter:()=>GoToLevel("Direct")},
+		...OverlayTutorialMacro(),
 		...ZoomMacro,
-		{Starter:()=>GoToLevel("Direct"),endDelay:500},
 		TypingAction("TYPE THE CLUE",{endDelay:2000}),
 		UnTypingAction("TYPE THE CLUE",{endDelay:0}),
 		...UnZoomMacro,
 		...UnOverlayTutorialMacro(),
-		TypingAction("DIRECT")
+		TypingAction("DIRECT",{endDelay:4000})
 	];
 }
 

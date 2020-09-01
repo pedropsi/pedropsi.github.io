@@ -1430,6 +1430,7 @@ video{
 
 .faded{
 	opacity: 0;
+	transition-duration: var(--durationFade);
 }
 .hidden{
 	display:none !important;

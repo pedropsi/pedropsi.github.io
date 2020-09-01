@@ -478,18 +478,22 @@
   --sh:calc(-1 * var(--ph));
   --sw:calc(-1 * var(--pw));
 
-   --letterOn:var(--lightyellow);
-   --letterMid:var(--blue);
-   --letterTransparent:var(--darkblue);  
 }
 
 .tutor .letter{
-  margin:0 calc(-1 * var(--w-2)) 0 calc(-1 * var(--w-2));
+  margin:-0.1px;
+  padding: calc(var(--w-8) + var(--h-8));
+  height: calc(var(--w4) + var(--h4));
+  font-variant:all-small-caps;
+  color: var(--darkblue);
+  opacity: 0.90;
+  -webkit-text-stroke: 1px var(--darkblue);
 }
 
 .tutor .letter.caret{
-  margin-left:calc(var(--w-2) - 0.5px);
-  margin-right:calc(var(--w-2) - 0.5px);
+  margin-left:-0.5px;
+  margin-right:-0.5px;
+  opacity: 0.75;
 }
 
 .game-supra-Canvas.zoom{
@@ -502,11 +506,6 @@
    transform: translateY(0) scale(1);
    transition-duration: 2s;
    transition-timing-function:linear
-}
-
-.tutor.middle .wallpaper path{
-   fill:var(--letterTransparent);
-   filter:brightness(1.3);
 }
 
 
