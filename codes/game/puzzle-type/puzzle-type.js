@@ -3282,7 +3282,7 @@ function TutorialRuleMacro(){
 		{Starter:()=>GoToLevel("Reverse")},
 		...OverlayTutorialMacro(),
 		...ZoomMacro,
-		TypingAction("ELUR NEDDIH EHT DNIF",{startDelay:1000,endDelay:2000}),
+		TypingAction("ELUR NEDDIH EHT DNIF",{startDelay:1500,endDelay:2000}),
 		UnTypingAction("ELUR NEDDIH EHT DNIF",{endDelay:1500}),
 		...UnZoomMacro,
 		...UnOverlayTutorialMacro(),
@@ -3297,7 +3297,8 @@ function TutorialMacro(){
 		{Starter:CollapseGameBar,endDelay:500},
 		...TutorialClueMacro(),
 		...TutorialRuleMacro(),
-		{Starter:UnCollapseGameBar,endDelay:500},
+		{endDelay:5000},
+		{Starter:UnCollapseGameBar},
 	];
 }
 
