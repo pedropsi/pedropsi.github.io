@@ -475,6 +475,18 @@ ObjectArrayF=function(ArrayF,ObjectF){
 	}
 }
 
+DictionaryAccesser=function(Dictionary,Rewriter){
+	var Rewriter=Rewriter||Identity;
+	return function(name){
+		if(name===undefined)
+			return Dictionary;
+		else if(In(Dictionary,name.toLowerCase()))
+			return Dictionary[name.toLowerCase()];
+		else
+			return Rewriter(name);
+	}
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Set functions
 
