@@ -5458,7 +5458,7 @@ function RemoveWallpaper(name,e){
 
 var WallpaperPatterns={
 	"grid-mini":{path:"M 0 0 L 0 50 L 50 50 L 50 49 L 1 49 L 1 0 Z",width:50,scale:0.1},
-	"grid-cross":{path:"M 49 41 L 49 50 L 40 50 L 40 51 L 49 51 L 49 59 L 50 59 L 50 51 L 59 51 L 59 50 L 50 50 L 50 41 Z",width:100,scale:0.5},
+	"grid-cross":{path:"M 49 41 L 49 50 L 40 50 L 40 51 L 49 51 L 49 59 L 50 59 L 50 51 L 59 51 L 59 50 L 50 50 L 50 41 Z",width:200,scale:0.25},
 	"triangle-5":{path:"M 0 0 L 20 0 L 20 20 Z",width:20},
 	//"grid-5":{path:"M 0 0 L 1 0 L 1 7 L 0 7 M 0 8 L 1 8 L 1 9 L 0 9 M 2 9 L 9 9 L 9 8 L 2 8 Z",width:10}
 };
