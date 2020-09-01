@@ -1058,7 +1058,8 @@ ShortenString=function(string,maxchars){
 }
 
 //Sentence making
-Enumerate=function(StringArray){
+Enumerate=function(StringArray,and){
+	var and=and||"and";
 	if(!StringArray.length)
 		return "";
 	if(StringArray.length===1)
@@ -1068,17 +1069,25 @@ Enumerate=function(StringArray){
 	if(StringArray.some(a=>In(a,",")))
 		var comma="; ";
 	
-	var prelast=Last(Most(StringArray))
+	var prelast=Last(Most(StringArray));
 	var last=Last(StringArray);
 	
-	if(In(prelast," and ")||In(last," and "));
-		var and=" & ";
+	if(In(prelast,Exfix(and," "))||In(last,Exfix(and," ")))
+		and=DictionaryAccesser(EnumerationSynonyms)(and);
 	
 	if(StringArray.length===2)
-		return prelast+and+last;
+		return prelast+Exfix(and," ")+last;
 	
 	return Most(Most(StringArray)).join(comma)+comma+prelast+and+last;
 }
+
+var EnumerationSynonyms={
+	"and":"&",
+	"or":"/",
+	",":";"
+}
+
+EnumerationSynonyms={...EnumerationSynonyms,...FlipKeysValues(EnumerationSynonyms)};
 
 ///////////////////////////////////////////////////////////////////////////////
 //Get Function Name as a string, or make up a unique one based on the function's body
