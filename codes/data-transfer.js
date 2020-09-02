@@ -5308,16 +5308,18 @@ var StringSymbols={
 
 var Icons={
 	"left":	{path:"M 5 8 L 5 9 L 0 5 L 5 1 L 5 2 L 3 5 Z M 4 5 L 5 6 L 10 5 L 5 4 Z",vbmax:"10 10"},
-	"up":	{path:"M 5 3 L 2 5 L 1 5 L 5 0 L 9 5 L 8 5 Z M 4 5 L 5 4 L 6 5 L 5 10 Z",vbmax:"10 10"},
+	"up":	{primitive:"left",transform:"rotate-270"},
 	"right":{primitive:"left",transform:"flip-horizontal"},
-	"down":	{path:"M 5 7 L 2 5 L 1 5 L 5 10 L 9 5 L 8 5 Z M 4 5 L 5 6 L 6 5 L 5 0 Z",vbmax:"10 10"},
+	"down":	{primitive:"left",transform:"rotate-90"},
 
 	"cursor":{path:" M 10 0 L 2 30 L 8 29 L 9 40 L 11 40 L 12 29 L 18 30 Z",vbmin:"-10 -10",vbmax:"40 40"},
 	"hand":{path:"M 7 25 Q 6 0 9 0 Q 12 0 12 3 L 12 20 Q 12 17 15 17 Q 18 17 18 22 Q 18 18 21 18 Q 24 18 24 24 Q 24 21 26 21 Q 28 21 28 30 Q 27 39 17 40 Q 8 41 6 37 Q -1 23 1 17 Q 3 13 6 22 Z",vbmin:"-10 -10",vbmax:"40 40"},
 	
 	"tap"	:{primitive:"hand",path:"M 6 10 Q 0 10 0 0 Q 0 -10 10 -10 Q 20 -10 20 0 Q 20 10 13 10 L 13 9 Q 19 9 19 0 Q 19 -9 10 -9 Q 1 -9 1 0 Q 1 9 6 9 Z",vbmax:"50 50"},
 	"swipeleft"	:{primitive:"hand",path:"M 6 10 Q 0 10 0 0 Q 0 -7 13 -6 Q 46 0 38 2 Q 18 2 13 10 L 13 9 Q 17 1 38 1 Q 42 0 13 -5 Q 4 -5 3 0 Q 2 8 6 9 Z",vbmax:"50 50"},
+	"swipeup":{primitive:"swipeleft",transform:"rotate-270"},
 	"swiperight":{primitive:"swipeleft",transform:"flip-horizontal"},
+	"swiperdown":{primitive:"swipeleft",transform:"rotate-90"},
 
 	"mouseclick":{primitive:"cursor",path:"M 6 10 Q 0 10 0 0 Q 0 -10 10 -10 Q 20 -10 20 0 Q 20 10 13 10 L 13 9 Q 19 9 19 0 Q 19 -9 10 -9 Q 1 -9 1 0 Q 1 9 6 9 Z",vbmax:"50 50"},
 
@@ -5464,9 +5466,21 @@ function FlipN(x,min,max){
 	return -(x-xcentre)+xcentre;
 }
 
+function RotateXY(x,y,xmin,ymin,xmax,ymax,wise){
+	var xdelta=(xmax-xmin)/2;
+	var xcentre=xmax-xdelta;
+	var ydelta=(ymax-ymin)/2;
+	var ycentre=ymax-ydelta;
+	var wise=wise?1:-1;
+	return [-(y-ycentre)*wise+xcentre,(x-xcentre)*(-wise)+ycentre];
+}
+
 var SVGTransforms={
 	"flip-horizontal":(x,y,vbArray)=>[FlipN(x,vbArray[0],vbArray[2]),y],
-	"flip-vertical":(x,y,vbArray)=>[x,FlipN(y,vbArray[1],vbArray[3])]
+	"flip-vertical":(x,y,vbArray)=>[x,FlipN(y,vbArray[1],vbArray[3])],
+	"flip-both":(x,y,vbArray)=>[FlipN(x,vbArray[0],vbArray[2]),FlipN(y,vbArray[1],vbArray[3])],
+	"rotate-90":(x,y,vbArray)=>RotateXY(x,y,vbArray[0],vbArray[1],vbArray[2],vbArray[3],true),
+	"rotate-270":(x,y,vbArray)=>RotateXY(x,y,vbArray[0],vbArray[1],vbArray[2],vbArray[3],false)
 }
 
 function SVGPathTransform(path,name,viewbox){
@@ -5538,10 +5552,12 @@ ExplainKey=function(key){
 }
 
 var KeyExplanations={
-	"swiperight":"swipe right",
 	"swipeleft":"swipe left",
+	"swipeup":"swipe up",
+	"swiperight":"swipe right",
+	"swipedown":"swipe down",
 	"backsp":"backspace",
-	"mouseclick":"click",
+	"mouseclick":"click"
 }
 
 
