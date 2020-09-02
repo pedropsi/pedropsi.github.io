@@ -2724,7 +2724,7 @@ DataFieldTypes=function(){
 		qfield:"navi",
 		qclass:"nowrap",
 		questionname:"",
-		qchoices:[ObtainSymbol("left"),"OK",ObtainSymbol("right")],
+		qchoices:[StringSymbol("left"),"OK",StringSymbol("right")],
 		qtype:ExclusiveChoiceButtonRowHTML,
 		defaultChoice:function(i,txt){return txt==="OK";},
 		qsubmittable:false},

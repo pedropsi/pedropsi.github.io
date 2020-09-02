@@ -260,8 +260,8 @@ function RequestHint(){
 		var p=CyclePosition(curlevelHints);
 		SeeHint(CurLevelNumber(),p+1);
 		
-		var left=ObtainSymbol("left");
-		var right=ObtainSymbol("right");
+		var left=StringSymbol("left");
+		var right=StringSymbol("right");
 		var navichoices=[left,"OK",right];
 		var naviactions={
 			"OK":CloseHint
@@ -285,6 +285,7 @@ function RequestHint(){
 			['plain',DFOpts],
 			['navi',{
 				qchoices:navichoices,
+				qchoicesViewF:ObtainSymbol,
 				executeChoice:function(choice,pid){
 					if(In(naviactions,choice))
 						naviactions[choice]();
