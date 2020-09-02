@@ -5319,12 +5319,13 @@ var Icons={
 	"swipeleft"	:{primitive:"hand",path:"M 6 10 Q 0 10 0 0 Q 0 -7 13 -6 Q 46 0 38 2 Q 18 2 13 10 L 13 9 Q 17 1 38 1 Q 42 0 13 -5 Q 4 -5 3 0 Q 2 8 6 9 Z",vbmax:"50 50"},
 	"swipeup":{primitive:"swipeleft",transform:"rotate-270"},
 	"swiperight":{primitive:"swipeleft",transform:"flip-horizontal"},
-	"swiperdown":{primitive:"swipeleft",transform:"rotate-90"},
+	"swipedown":{primitive:"swipeleft",transform:"rotate-90"},
 
 	"mouseclick":{primitive:"cursor",path:"M 6 10 Q 0 10 0 0 Q 0 -10 10 -10 Q 20 -10 20 0 Q 20 10 13 10 L 13 9 Q 19 9 19 0 Q 19 -9 10 -9 Q 1 -9 1 0 Q 1 9 6 9 Z",vbmax:"50 50"},
 
 	"enter":{path:"M 7 6 L 7 0 L 9 0 L 9 8 L 4 8 L 4 10 L 0 7 L 4 4 L 4 6 Z",vbmax:"10 10"},
 	"backsp":{path:"M 4 15 L 10 23 L 28 23 L 28 7 L 10 7 L 8 5 L 30 5 L 30 25 L 8 25 L 0 15 L 8 5 L 10 7 Z M 22 21 L 24 19 L 20 15 L 24 11 L 22 9 L 18 13 L 14 9 L 12 11 L 16 15 L 12 19 L 14 21 L 18 17 Z",vbmax:"30 30"},
+	"delete":{primitive:"backsp",transform:"flip-horizontal"},
 
 	"how-to-play":{path:"M 18 1 C 10 1 7 7 9 14 C 9 14 13 13 13 13 C 12 8 14 5 18 5 C 23 5 25 12 19 15 C 15 17 14 19 13 24 L 17 25 C 18 21 18 19 21 18 C 30 15 29 1 18 1 Z M 14 28 C 9 28 9 35 14 35 C 19 35 19 28 14 28 Z",vbmax:"36 36"},
 	"credits":{path:"M 7 1 Q 13 1 13 7 Q 13 13 7 13 Q 1 13 1 7 Q 1 1 7 1 L 7 2 Q 2 2 2 7 Q 2 12 7 12 Q 9 12 11 10 L 9 8 Q 8 9 7 9 Q 5 9 5 7 Q 5 5 7 5 Q 8 5 9 6 L 11 4 Q 9 2 7 2 Z",vbmax:"14 14"},

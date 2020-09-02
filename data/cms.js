@@ -293,6 +293,24 @@ CMSObject=function(title){
 		return First(o);
 }
 
+
+// Keyboard Instuctions
+
+function ArrowGridKB(direction,i){
+	return `<kbd class="key-${Directions[i]}">${ObtainSymbol(direction)}</kbd>`;
+}	
+function ArrowKeysGridHTML(LURDArray){
+	return `<span class="grid controls-arrow">${LURDArray.map(ArrowGridKB).join("")}</span>`;
+}
+function ArrowKeysHyperText(){
+	var grids=[
+		ArrowKeysGridHTML(Directions),
+		ArrowKeysGridHTML(["A","W","D","S"]),
+		ArrowKeysGridHTML(Directions.map(d=>Prefix(d,"swipe")))];
+	return	Enumerate(grids,"or");
+}
+
+
 ExportCMSProperties=function(){
 	Page=PageObj(PageIdentifier());
 	DATA["page"]=Page;
