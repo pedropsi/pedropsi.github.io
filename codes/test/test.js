@@ -896,6 +896,12 @@ SaveTest(SplitCD,["ana banana maria","lol","lol"],"","not present");
 
 */
 
+SaveTest(SVGLinePairs,["M 1 2 3 4"],[[1,2],[3,4]],"make string pairs");
+
+SaveTest(SVGLineApply,["M 1 2 3 4",xy=>[xy[1],xy[0]]],"M 2 1 4 3 ","modify numbers");
+
+SaveTest(SVGPathSplit,["M 1 2 L 3 4 Q 5 6 7 8 Z"],["M 1 2 ","L 3 4 ","Q 5 6 7 8 ","Z "],"split path, multiple components");
+
 ///////////////////////////////////////////////////////////////////////////////
 //Run Tests only after loading the external resources below
 //ListenOnce("TestReady",Test);

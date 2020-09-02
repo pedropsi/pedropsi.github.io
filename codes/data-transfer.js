@@ -2369,7 +2369,7 @@ FigureHTML=function(source,caption){
 
 IconHTML=function(Opts){
 	var path=IsString(Opts)?Opts:(Opts.path||"M 10 10 L 20 10 L 10 20 Z");
-		
+	
 	var name=Opts.name||"unnamed";
 
 	var height=Opts.height||Opts.width||"20";
@@ -2379,6 +2379,9 @@ IconHTML=function(Opts){
 	var vbmax=Opts.vbmax||`400 400`;
 
 	var viewbox=Opts.viewbox||`${vbmin} ${vbmax}`;
+
+	if(Opts.transform) //transform name, that is
+		path=SVGPathTransform(path,Opts.transform,viewbox);
 
 	var svghtml=`
 		<svg class='iconpath icon-${name}' width='${width}' height='${height}' viewBox='${viewbox}'>
@@ -5306,7 +5309,7 @@ var StringSymbols={
 var Icons={
 	"left":	{path:"M 5 8 L 5 9 L 0 5 L 5 1 L 5 2 L 3 5 Z M 4 5 L 5 6 L 10 5 L 5 4 Z",vbmax:"10 10"},
 	"up":	{path:"M 5 3 L 2 5 L 1 5 L 5 0 L 9 5 L 8 5 Z M 4 5 L 5 4 L 6 5 L 5 10 Z",vbmax:"10 10"},
-	"right":{path:"M 5 8 L 5 9 L 10 5 L 5 1 L 5 2 L 7 5 Z M 6 5 L 5 6 L 0 5 L 5 4 Z",vbmax:"10 10"},
+	"right":{primitive:"left",transform:"flip-horizontal"},
 	"down":	{path:"M 5 7 L 2 5 L 1 5 L 5 10 L 9 5 L 8 5 Z M 4 5 L 5 6 L 6 5 L 5 0 Z",vbmax:"10 10"},
 
 	"cursor":{path:" M 10 0 L 2 30 L 8 29 L 9 40 L 11 40 L 12 29 L 18 30 Z",vbmin:"-10 -10",vbmax:"40 40"},
@@ -5314,7 +5317,7 @@ var Icons={
 	
 	"tap"	:{primitive:"hand",path:"M 6 10 Q 0 10 0 0 Q 0 -10 10 -10 Q 20 -10 20 0 Q 20 10 13 10 L 13 9 Q 19 9 19 0 Q 19 -9 10 -9 Q 1 -9 1 0 Q 1 9 6 9 Z",vbmax:"50 50"},
 	"swipeleft"	:{primitive:"hand",path:"M 6 10 Q 0 10 0 0 Q 0 -7 13 -6 Q 46 0 38 2 Q 18 2 13 10 L 13 9 Q 17 1 38 1 Q 42 0 13 -5 Q 4 -5 3 0 Q 2 8 6 9 Z",vbmax:"50 50"},
-	"swiperight":{primitive:"hand",path:"M 6 10 Q 4 10 -9 0 Q -13 -5 11 -4 Q 18 -4 19 3 Q 19 10 13 10 L 13 9 Q 18 9 17 3 Q 16 -3 11 -3 Q -11 -4 -7 0 Q -7 1 6 9 Z",vbmax:"50 50"},
+	"swiperight":{primitive:"swipeleft",transform:"flip-horizontal"},
 
 	"mouseclick":{primitive:"cursor",path:"M 6 10 Q 0 10 0 0 Q 0 -10 10 -10 Q 20 -10 20 0 Q 20 10 13 10 L 13 9 Q 19 9 19 0 Q 19 -9 10 -9 Q 1 -9 1 0 Q 1 9 6 9 Z",vbmax:"50 50"},
 
@@ -5323,15 +5326,15 @@ var Icons={
 
 	"how-to-play":{path:"M 18 1 C 10 1 7 7 9 14 C 9 14 13 13 13 13 C 12 8 14 5 18 5 C 23 5 25 12 19 15 C 15 17 14 19 13 24 L 17 25 C 18 21 18 19 21 18 C 30 15 29 1 18 1 Z M 14 28 C 9 28 9 35 14 35 C 19 35 19 28 14 28 Z",vbmax:"36 36"},
 	"credits":{path:"M 7 1 Q 13 1 13 7 Q 13 13 7 13 Q 1 13 1 7 Q 1 1 7 1 L 7 2 Q 2 2 2 7 Q 2 12 7 12 Q 9 12 11 10 L 9 8 Q 8 9 7 9 Q 5 9 5 7 Q 5 5 7 5 Q 8 5 9 6 L 11 4 Q 9 2 7 2 Z",vbmax:"14 14"},
-	"undo":{path:"M 106 149 L 58 127 L 85 242 L 194 192 L 152 170 C 240 56 333 138 346 248 L 394 246 C 377 59 215 7 106 149",vbmin:"0 -050"},
-	"redo":{path:"M 294 149 L 342 127 L 315 242 L 206 192 L 248 170 C 160 56 67 138 54 248 L 6 246 C 23 59 185 7 294 149",vbmin:"0 -050"},
+	"undo":{path:"M 106 149 L 58 127 L 85 242 L 194 192 L 152 170 C 240 56 333 138 346 248 L 394 246 C 377 59 215 7 106 149",vbmin:"0 -50"},
+	"redo":{primitive:"undo",transform:"flip-horizontal"},
 	"restart":{path:"M 180 90 L 252 188 L 264 145 C 348 211 307 320 225 340 C 144 360 40 267 129 139 L 92 118 C -23 262 110 418 238 384 C 370 350 398 174 277 98 L 291 42 Z"},
 	"fullscreen":{path:"M 236 85 L 309 85 L 309 154 L 346 154 L 346 48 L 236 48 L 236 85 M 38 200 L 75 200 L 75 121 L 148 121 L 148 84 L 38 84 L 38 200 M 38 363 L 148 363 L 148 326 L 75 326 L 75 253 L 38 253 L 38 363 M 272 326 L 199 326 L 199 363 L 309 363 L 309 253 L 272 253 L 272 326"},
 	"save":{path:"M 0 0 L 0 23 L 23 23 L 23 0 Z M 6 1 L 6 8 L 20 8 L 20 1 L 22 1 L 22 22 L 20 22 L 20 11 L 3 11 L 3 22 L 1 22 L 1 1 Z M 14 1 L 14 6 L 16 6 L 16 1 L 19 1 L 19 7 L 7 7 L 7 1 Z M 19 12 L 19 22 L 4 22 L 4 12 Z M 6 13 L 6 15 L 17 15 L 17 13 Z M 6 16 L 6 18 L 17 18 L 17 16 Z M 6 20 L 6 21 L 17 21 L 17 19 L 6 19",vbmax:"24 24"},
 	"feedback":{path:"M 7 139 L 7 274 L 393 274 L 393 4 L 7 4 L 7 139 M 301 42 L 198 146 L 94 41 L 301 41 M 355 41 L 355 237 L 44 237 L 44 47 L 197 200 L 355 42 M 58 307 L 58 379 L 95 379 L 95 307 L 58 307 M 305 307 L 304 379 L 341 379 L 341 307 L 304 307 M 181 337 L 181 392 L 218 392 L 218 337 L 181 337"},
 	"hint":{path:"M 327 36 L 152 207 C 128 190 88 188 59 203 C -16 240 -8 352 71 379 C 153 406 225 319 181 235 L 228 188 L 252 211 L 279 185 L 255 161 L 278 139 L 316 177 L 343 150 L 308 117 L 332 93 L 366 127 L 393 100 L 327 37 M 118 234 C 162 248 172 305 136 333 C 100 363 44 336 44 288 C 44 250 82 222 118 234"},
 	"keyboard":{path:"M 0 88 L 0 177 200 177 L 400 177 400 88 L 400 0 200 0 L 0 0 0 88 M384 88 L 384 161 200 161 L 15 161 15 88 L 15 15 200 15 L 384 15 384 88 M30 41 L 30 53 42 53 L 55 53 55 41 L 55 29 42 29 L 30 29 30 41 M69 41 L 69 53 81 53 L 94 53 94 41 L 94 29 81 29 L 69 29 69 41 M108 41 L 108 53 121 53 L 133 53 133 41 L 133 29 121 29 L 108 29 108 41 M148 41 L 148 53 160 53 L 173 53 173 41 L 173 29 160 29 L 148 29 148 41 M187 41 L 187 53 199 53 L 212 53 212 41 L 212 29 199 29 L 187 29 187 41 M226 41 L 226 53 239 53 L 251 53 251 41 L 251 29 239 29 L 226 29 226 41 M266 41 L 266 53 278 53 L 291 53 291 41 L 291 29 278 29 L 266 29 266 41 M305 41 L 305 53 317 53 L 330 53 330 41 L 330 29 317 29 L 305 29 305 41 M344 41 L 344 53 357 53 L 369 53 369 41 L 369 29 357 29 L 344 29 344 41 M30 87 L 30 98 42 98 L 55 98 55 87 L 55 75 42 75 L 30 75 30 87 M69 87 L 69 98 81 98 L 94 98 94 87 L 94 75 81 75 L 69 75 69 87 M108 87 L 108 98 121 98 L 133 98 133 87 L 133 75 121 75 L 108 75 108 87 M148 87 L 148 98 160 98 L 173 98 173 87 L 173 75 160 75 L 148 75 148 87 M187 87 L 187 98 199 98 L 212 98 212 87 L 212 75 199 75 L 187 75 187 87 M226 87 L 226 98 239 98 L 251 98 251 87 L 251 75 239 75 L 226 75 226 87 M266 87 L 266 98 278 98 L 291 98 291 87 L 291 75 278 75 L 266 75 266 87 M305 87 L 305 98 317 98 L 330 98 330 87 L 330 75 317 75 L 305 75 305 87 M344 87 L 344 98 357 98 L 369 98 369 87 L 369 75 357 75 L 344 75 344 87 M30 134 L 30 147 53 147 L 77 147 77 134 L 77 121 53 121 L 30 121 30 134 M93 134 L 93 147 200 147 L 307 147 307 134 L 307 121 200 121 L 93 121 93 134 M322 134 L 322 147 346 147 L 369 147 369 134 L 369 121 346 121 L 322 121 322 134",vbmax:"400 180"},
-	"wrench":{path:"M 205 90 L 153 124 L 155 204 L 28 333 L 54 360 L 188 234 L 273 231 L 308 179 L 282 177 L 256 203 L 214 204 L 185 177 L 186 139 L 208 113 L 205 92"},
+	"wrench":{path:"M 20 1 L 14 4 L 14 13 L 1 27 L 3 29 L 17 16 L 26 16 L 29 10 L 27 10 L 24 13 L 19 13 L 17 11 L 17 6 L 20 3 Z",vbmax:"30 30"},
 	"edit":{path:"M 326 10 L 85 252 L 151 317 L 392 75 L 327 10 M 339 75 L 151 263 L 139 252 L 327 64 L 339 75 M 81 257 L 21 383 L 145 321 L 81 257"},
 
 	"sun":{path:"M 14 10 Q 14 6 10 6 Q 6 6 6 10 Q 6 14 10 14 Q 14 14 14 10 Z M 11 0 L 11 4 L 9 4 L 9 0 Z M 11 20 L 11 16 L 9 16 L 9 20 Z M 20 11 L 16 11 L 16 9 L 20 9 Z M 0 11 L 4 11 L 4 9 L 0 9 M 3 2 L 6 5 L 5 6 L 2 3 Z M 20 11 L 16 11 L 16 9 L 20 9 M 17 2 L 14 5 L 15 6 L 18 3 Z M 17 18 L 14 15 L 15 14 L 18 17 Z M 3 18 L 6 15 L 5 14 L 2 17 Z",vbmax:"20 20"},
@@ -5385,7 +5388,9 @@ ObtainSymbol=function(name){
 		return StringSymbol(name);
 	else{
 		i.name=name;//name the icon in a class
-		return IconHTML(i);
+		if(ObtainSymbol[name])
+			return ObtainSymbol[name];
+		return ObtainSymbol[name]=IconHTML(i);
 	}
 }
 
@@ -5393,6 +5398,89 @@ IconName=function(iconElement){
 	var names=iconElement.classList.filter(c=>Prefixed(c,"icon-"));
 	if(names.length)
 		return UnPrefix(names[0],"icon-");
+}
+
+//SVG Path Parsing
+SVGSpacePattern="\\s+";
+SVGNumberPattern="\\-?\\d+(?:\\.\\d)*";
+SVGPairPattern=SVGNumberPattern+SVGSpacePattern+SVGNumberPattern+SVGSpacePattern;
+var SVGLetterPattern={
+	0:"Z",
+	1:"(?:V|H)",
+	2:"(?:L|M|T)",
+	4:"(?:Q|S)",
+	6:"C",
+	7:"A"
+}
+function SVGLinePattern(n){
+	if(In(SVGLetterPattern,String(n)))
+		return "(?:("+SVGLetterPattern[n]+")"+SVGSpacePattern+"("+(SVGNumberPattern+SVGSpacePattern).repeat(n)+"))";
+	else
+		return false;
+}
+
+function SVGPattern(){
+	var fullpattern=Keys(SVGLetterPattern).map(SVGLinePattern);
+		fullpattern=fullpattern.map(p=>"(?:"+p+")").join("|");
+	return fullpattern;
+}
+
+function SVGPathSplit(path){
+	var pattern=new RegExp(SVGPattern(),"g");
+	return (path+" ").match(pattern);
+}
+
+function SVGLinePairs(svgline){ //misses odd number off coords
+	var pairs=(svgline+" ").match(new RegExp(SVGPairPattern,"g"));
+		pairs=pairs.map(pair=>pair.match(new RegExp(SVGNumberPattern,"g")));
+		pairs=pairs.map(pair=>pair.map(Number));
+	return pairs;
+}
+
+function SVGLineApply(svgline,CoordinatesF){
+	var svgline=svgline.trim();
+	var linetype=First(svgline);
+	var xyArray=Rest(svgline);
+	if(xyArray){
+		xyArray=SVGLinePairs(xyArray);
+		xyArray=xyArray.map(CoordinatesF);
+		xyArray=xyArray.flat().join(" ");
+	}
+	return linetype+" "+xyArray+" ";
+}
+
+function SVGPathApply(path,CoordinatesF){
+	var svglineArray=SVGPathSplit(path);
+	return svglineArray.map(svgline=>SVGLineApply(svgline,CoordinatesF)).join("");
+}
+
+function ViewboxCoordinates(viewbox){
+	return viewbox.split(new RegExp(SVGSpacePattern,"g")).map(Number);
+}
+
+function FlipN(x,min,max){
+	var xdelta=(max-min)/2;
+	var xcentre=max-xdelta;
+	return -(x-xcentre)+xcentre;
+}
+
+var SVGTransforms={
+	"flip-horizontal":(x,y,vbArray)=>[FlipN(x,vbArray[0],vbArray[2]),y],
+	"flip-vertical":(x,y,vbArray)=>[x,FlipN(y,vbArray[1],vbArray[3])]
+}
+
+function SVGPathTransform(path,name,viewbox){
+	if(!In(SVGTransforms,name))
+		return path;
+
+	var T=SVGTransforms[name];
+	var viewboxArray=ViewboxCoordinates(viewbox);
+	
+	function SVGCoordinatesF(xy){
+		return T(xy[0],xy[1],viewboxArray)
+	}
+
+	return SVGPathApply(path,SVGCoordinatesF);
 }
 
 
