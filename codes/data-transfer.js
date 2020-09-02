@@ -305,6 +305,15 @@ IsNan=function(nan){
 	return (typeof nan==="number")&&!(nan<0)&&!(nan===0)&&!(nan>0);
 }
 
+EnArray=function(a){
+	if(typeof a==="undefined")
+		return []
+	else if(IsArray(a))
+		return a;
+	else
+		return [a];
+}
+
 //Apply function to Array or Object
 Apply=function(arrayOrObj,F){
 	if(IsArray(arrayOrObj))
