@@ -889,14 +889,15 @@ function NextLevel(){
 	
 	if (TitleScreen())
 		StartLevelFromTitle();
+	else if(GameEnded())
+		AdvanceScreen();
 	else {
 		if(!SolvedAllLevels())
 			AdvanceUnsolvedScreen();
 		else if(curscreen<LastScreen())
 			AdvanceEndScreen();
-		else{
+		else
 			EndGame();
-		}
 	}
 }
 
@@ -938,6 +939,10 @@ function LevelScreens(){
 		}
 		return LevelScreens.l=l;
 	}
+}
+
+function MaxScreen(){
+	return ObtainStateScreens().length-1;
 }
 
 function Levels(){
@@ -1410,6 +1415,8 @@ function ResetStory(){
 
 
 function EndGame(){
+	if(!EndGame.ended)
+		EndGame.ended=true;
 	ClearLevelRecord();
 	UpdateLevelSelectorButton();
 	ObtainPlayEndGameSound();
@@ -1417,6 +1424,11 @@ function EndGame(){
 	CurrentScreen(0);//TODO CHECK IF BETTER BEHAVIOUR
 	ObtainTitleScreenReLoader();
 }
+
+function GameEnded(){
+	return EndGame.ended||false;
+}
+
 
 function ResetGame(){
 	EraseLocalsave();
@@ -1434,6 +1446,11 @@ function AdvanceLevel(){
 	LoadLevelOrCheckpoint();
 	ClearLevelRecord();
 	UpdateLevelSelectorButton();
+}
+
+function AdvanceScreen(){
+	CurrentScreen((CurrentScreen()+1)%(MaxScreen()+1));
+	AdvanceLevel();	
 }
 
 function AdvanceUnsolvedScreen(){
