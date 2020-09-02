@@ -370,7 +370,7 @@ function GameBarTypewriterBanner(action){
 }
 
 function GameBarCancelTypewriterBanner(action){
-	return 'CancelTypewriterBanner(this,ObtainSymbol(\"'+action+'\"),\"'+action+'\")';
+	return 'CancelTypewriterBanner(this,StringSymbol(\"'+action+'\"),\"'+action+'\")';
 }
 
 function GameBarButtonHTML(action,attribs){

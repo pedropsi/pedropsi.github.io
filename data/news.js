@@ -48,7 +48,7 @@ N_49:{
 DATE:"2020-05-24",
 HEADER:()=>"Redo support",
 PIECE:()=>`
-	<p>As this feature was needed for ${AHTML("puzzle-type")}, the ${AHTML("game-bar")} now has a nice <kbd>${ObtainSymbol("redo")}</kbd> redo button - a suggestion by ${v.COLLINEYE()} and ${v.HEDEHOLM()}!</p>
+	<p>As this feature was needed for ${AHTML("puzzle-type")}, the ${AHTML("game-bar")} now has a nice ${KB("redo")} redo button - a suggestion by ${v.COLLINEYE()} and ${v.HEDEHOLM()}!</p>
 	`,ID:"puzzle-type"},
 	N_47:{
 DATE:"2020-05-24",
@@ -124,13 +124,13 @@ PIECE:()=>`
 DATE:"2019-11-20",
 HEADER:()=>"On-screen keyboard",
 PIECE:()=>`
-<p>There is now an on-screen keyboard <kbd>${ObtainSymbol("keyboard")}</kbd> for easier input on mobile devices. <kbd>${ObtainSymbol("undo")}</kbd>/<kbd>${ObtainSymbol("restart")}</kbd> buttons included.</p>
+<p>There is now an on-screen keyboard ${KB("keyboard")} for easier input on mobile devices. ${KB("undo")}/${KB("restart")} buttons included.</p>
 	`,ID:"puzzle-type"},
 	N_35:{
 DATE:"2020-01-05",
 HEADER:()=>"Related games in game console",
 PIECE:()=>`
-<p>Two new buttons: <kbd>${ObtainSymbol("more")}</kbd> (more games by the same author) and <kbd>${ObtainSymbol("wrench")}</kbd> (edit source).</p>
+<p>Two new buttons: ${KB("more")} (more games by the same author) and ${KB("wrench")} (edit source).</p>
 	`,ID:"game-console"},
 	N_34:{
 DATE:"2020-01-02",

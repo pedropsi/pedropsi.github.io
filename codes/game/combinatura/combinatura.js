@@ -70,7 +70,7 @@ function ObtainKeyActionsGame(){
 		//"Right":InstructNothing,
 		//"Down":InstructNothing
 	
-	keyactions[ObtainSymbol("restart")]=ObtainRestart;
+	keyactions[StringSymbol("restart")]=ObtainRestart;
 	
 	keyactions=FuseObjectArray([
 		keyactions,
