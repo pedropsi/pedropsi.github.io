@@ -15,23 +15,27 @@ ${v.FIGURE_SIMPLE()}
 <p>If at any point you feel <em>overwhelmed by too many possibilities</em> or like <em>brute-forcing your way</em>, that is a telltale sign you may be missing critical information! The hint symbols below may steer you into the right path again.<p>
 
 <h3>Controls</h3>
-<h4>Typing</h4>
+<h4>Typing on a keyboard</h4>
 <p>Type any of the 26 letters of the latin alphabet. Some levels may forbid certain characters, or allow spaces, digits and/or arrows.</p>
 
-<h4>On-screen keyboard</h4>
-<p>You may also use the translucent <b>on-screen keyboard</b> to type. To open it, simply tap the middle screen or <kbd>${ObtainSymbol("keyboard")}</kbd>. To close it, tap <kbd>${ObtainSymbol("keyboard")}</kbd> a second time or hit <kbd>${ObtainSymbol("close")}</kbd>.</p>
+<h4>Typing on-screen</h4>
+<p>You may also use the translucent <b>on-screen keyboard</b> to type. To open it, simply ${KB("tap")} the input area or press ${KB("keyboard")}. To close it, press ${KB("keyboard")} again or ${KB("close")}.</p>
 
-<h4>Undo & redo</h4>
-<p>To undo an action, press <kbd>backspace</kbd>, <kbd>delete</kbd>, <kbd>Alt</kbd>+<kbd>Z</kbd> or <kbd>${ObtainSymbol("undo")}</kbd>.</p>
-<p>To redo, press <kbd>shift</kbd>+<kbd>backspace</kbd>, <kbd>shift</kbd>+<kbd>delete</kbd> or <kbd>Alt</kbd>+<kbd>Y</kbd> or <kbd>${ObtainSymbol("redo")}</kbd>.</p>
+<h4>Undo</h4>
+<p>To undo an action, press either ${KB("backsp")}, ${KB("delete")}, ${KB("ctrl z")} or ${KB("undo")}.</p>
+<p>You may also ${KB("swipe-left")} on the input area.</p>
+
+<h4>Redo</h4>
+<p>To redo an undone action, press either ${KB("shift backsp")}, ${KB("shift delete")}, ${KB("ctrl y")} or ${KB("redo")}.</p>
+<p>You may also ${KB("swipe-right")} on the input area.</p>
 
 
 <h3>Graphical conventions</h3>
 <h4>Lighter tone characters</h4>
 <p>Temporary characters, sometimes coloured in a lighter tone, may be transformed when certain conditions be (or fail to be) met.</p>
 
-<h4>Arrows: ${ObtainSymbol("left")} and ${ObtainSymbol("right")}</h4>
-<p>The symbols ${ObtainSymbol("left")} and ${ObtainSymbol("right")} indicate you may press the arrows <kbd>${ObtainSymbol("left")}</kbd> and <kbd>${ObtainSymbol("right")}</kbd>.</p>
+<h4>Arrows</h4>
+<p>The arrows ${ObtainSymbol("left")} and ${ObtainSymbol("right")} indicate you may press the arrows ${KB("left")} and ${KB("right")}.</p>
 
 <h4>Level difficulty: ${ObtainSymbol("asterisk-heavy")}</h4>
 <p>Level difficulty is indicated by the number of ${ObtainSymbol("asterisk-heavy")}, in a scale of 1 (${ObtainSymbol("asterisk-heavy")}: very easy) to 5 (${ObtainSymbol("asterisk-heavy").repeat(5)}: very hard).</p>
@@ -44,11 +48,30 @@ ${v.FIGURE_SIMPLE()}
 
 
 <h3>Level navigation</h3>
-<p>To skip to the next level, <kbd>swipe right</kbd> on the level clue area. <kbd>swipe left</kbd> to return to the previous level.</p>
-<p>To open the level selector menu, simply <kbd>tap</kbd> on the level clue area. Alternatively, press  ${v.LEVEL_KEY()} or <kbd>Level X/Y</kbd> or <kbd>Level selector</kbd> in the game bar to navigate freely ${v.NAVOPTION()}.</p>
+<h4>Skipping a level</h4>
+<p>${KB("swipe-right")} on the level clue area, or press ${KB("ctrl right")}.</p>
+
+<h4>Going back to a previous level</h4>
+<p>${KB("swipe-left")} on the level clue area, or press ${KB("ctrl left")}.</p>
+
+<h4>Opening the selector menu</h4>
+<p>${KB("tap")} on the level clue area, or press ${v.LEVEL_KEY()}. You may also use the <kbd>Level selector</kbd> button in the game bar.</p>
 
 <h4>Picking levels in the selector menu</h4>
-<p>Type the level number directly with ${v.NUM_KEYS()}, press <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> or <kbd>${ObtainSymbol("left")}</kbd>/<kbd>${ObtainSymbol("right")}</kbd> to <em>cycle through levels</em>, <kbd>Enter</kbd> or <kbd>Click</kbd> to <em>confirm</em>, <kbd>Esc</kbd> or ${v.LEVEL_KEY()} to <em>cancel</em>.</p>
+<h5>Tap the level directly</h5>
+<p>On a touchscreen or with the mouse.</p>
+
+<h5>Type the level name</h5>
+<p>Start typing the level name and the cursor will move to the correct level. Press ${KB("enter")} to confirm.</p>
+
+<h5>Type the level number</h5>
+<p>Alternatively, you may type the level number with ${v.NUM_KEYS()}. Press ${KB("enter")} to confirm.</p>
+
+<h5>Arrow keys to move</h5>
+<p> Press ${KB("left")} or ${KB("right")} to move between levels. You may also use ${KB("tab")} or ${KB("shift tab")}. Press ${KB("enter")} to confirm.</p>
+
+<h4>Closing the selector menu</h4>
+<p>Pressing ${KB("esc")} or ${v.LEVEL_KEY()} will close the menu without changing level.</p>
 
 ${v.HINTS_TEXT()}
 ${v.FULLSCREEN_TEXT()}

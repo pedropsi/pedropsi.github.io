@@ -17,7 +17,7 @@ jsCode.setAttribute('type','text/javascript');
 document.body.appendChild(jsCode);
 console.log('Bookmarklet run!');void 0">Submit PuzzleScript Game</a> bookmarklet!</p>
 
-<p>How? Simply add the bookmarklet above to your bookmarks (instructions below), then on a game page of your choice run (${v.CLICK()} on) the new bookmarklet, causing the current game to add itself the ${v.TITLE_BOLD()} page.</p>
+<p>How? Simply add the bookmarklet above to your bookmarks (instructions below), then on a game page of your choice run (${KB("click")} on) the new bookmarklet, causing the current game to add itself the ${v.TITLE_BOLD()} page.</p>
 
 ${v.BOOKMARKLET_BROWSER_TEXT()}
 
@@ -32,7 +32,7 @@ ${LinkGroupHTML("ps-source")}
 <p>This is what makes the ${v.TITLE_BOLD()} so convenient - a single page where new games are gathered, so you won't need to search yourself. Any new game contributions are thus very welcome!</p>
 
 <h2>Adding to or correcting game entries</h2>
-<p>To correct a game entry in the ${v.TITLE_BOLD()}, simply <kbd>tap</kbd> it to reveal the edit button <kbd>${ObtainSymbol("edit")}</kbd>.</p>
+<p>To correct a game entry in the ${v.TITLE_BOLD()}, simply ${KB("tap")} it to reveal the edit button <kbd>${ObtainSymbol("edit")}</kbd>.</p>
 
 <h2>Conventions</h2>
 ${v.LOZ_SYMBOL_TEXT()}
@@ -46,7 +46,7 @@ ${v.FILTER_TEXT()}
 <h4>Author and Title</h4>
 <p>Within each date tier, all game entries are sorted alphabetically by author and then by title.</p>
 <h4>Custom</h4>
-<p>To sort the table differently, simply ${v.CLICK()} the table headers!</p>
+<p>To sort the table differently, simply ${KB("click")} the table headers!</p>
 
 <h3>Game <sup class="label">labels</sup></h3>
 <p>A game title may be unfinished or in progress <sup class="label">beta</sup>, an extended or modified version of another game <sup class="label">mod</sup>, a port of another game to puzzlescript <sup class="label">demake</sup> and may have appended a version number  <sup class="label">v0.0.0</sup> and other notes <sup class="label">etc...</sup></p>

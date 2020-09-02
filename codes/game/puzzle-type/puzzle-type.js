@@ -340,7 +340,7 @@ function InstructGameKeyF(key){
 }
 
 function GameKey(key){
-	var key=ObtainSymbol(key); //accept keywords space, dot, dash
+	var key=StringSymbol(key); //accept keywords space, dot, dash
 	function KeyInput(){
 		return InstructGameInput(key);
 	}
@@ -354,7 +354,7 @@ function GameInput(key){
 		return;
 	 }
 
-	if(key===ObtainSymbol("interpunkt")){//neuter separator
+	if(key===StringSymbol("interpunkt")){//neuter separator
 		ForbidCaret();
 		return;
 	}
@@ -469,7 +469,7 @@ function ForbidArrowActions(key){
 	],CurLevelTitle())&&In(ArrowKeys,key));
 }
 
-var ArrowKeys=Directions.map(ObtainSymbol);
+var ArrowKeys=Directions.map(StringSymbol);
 
 function AllowExtraUndoKey(key){
 	return CurLevelTitle()==="Wasd"&&key==="Z";
@@ -934,13 +934,13 @@ function Wasd(L){
 
 	var level=Memo();
 	
-	if(L==="W"||L===ObtainSymbol("up"))
+	if(L==="W"||L===StringSymbol("up"))
 		level=EmulateUp(level);
-	if(L==="A"||L===ObtainSymbol("left"))
+	if(L==="A"||L===StringSymbol("left"))
 		level=EmulateLeft(level);
-	if(L==="S"||L===ObtainSymbol("down"))
+	if(L==="S"||L===StringSymbol("down"))
 		level=EmulateDown(level);
-	if(L==="D"||L===ObtainSymbol("right"))
+	if(L==="D"||L===StringSymbol("right"))
 		level=EmulateRight(level);
 
 	Memo(level);
@@ -1594,7 +1594,7 @@ function Weightier(L){
 }
 
 function ArrowDisplay(word){
-	return ObtainSymbol("left")+word+ObtainSymbol("right");
+	return StringSymbol("left")+word+StringSymbol("right");
 }
 
 function Translate(L){
@@ -1791,9 +1791,9 @@ function CyclePossibilities(L,insertions){
 	if(!In(LetterSpaceCharacters,L)){
 		if(In(NumberCharacters,L))
 			p=(Number(L)-1)%possibilities.length;
-		else if(In(["left","up"].map(ObtainSymbol),L))
+		else if(In(["left","up"].map(StringSymbol),L))
 			p=(p+possibilities.length-1)%possibilities.length;
-		else if(In(["right","down"].map(ObtainSymbol),L))
+		else if(In(["right","down"].map(StringSymbol),L))
 			p=(p+possibilities.length+1)%possibilities.length;
 	
 		if(insertions.choosing){
@@ -1850,7 +1850,8 @@ function EnDictionary(){
 			"bing",
 			"gratin","gratins",
 			"git","gits",
-			"rin","rins"
+			"rin","rins",
+			"artsy"
 			//"tinging",//ingling	"tining",
 			// "ar",
 			// "irs",
@@ -2193,7 +2194,7 @@ function TemporaryWord(){
 
 function Word(){
 	var word=Letters.array.join("");
-	return word.replace(ObtainSymbol("left"),"").replace(ObtainSymbol("right"),"");
+	return word.replace(StringSymbol("left"),"").replace(StringSymbol("right"),"");
 }
 
 function Letters(array){
@@ -2381,7 +2382,7 @@ function ClearLetters(){
 
 function DrawLetters(){
 	var letters=Letters();
-		letters=letters.map(SymbolIcon);//Replace any icons
+		letters=letters.map(ObtainSymbol);//Replace any icons
 		letters=letters.map(LetterHTML(CurLevelTitle())).join("\n");
 	ReplaceChildren(letters,"#letters");
 	NumberLetterElements();
@@ -2431,7 +2432,7 @@ function DrawKeystrokes(){
 function KeystrokeHTML(K){
 	var type=StrokeInvalid(K)?"invalid":(StrokeUnderlined(K)?"combo":"valid");
 	var K=CleanStroke(K);
-		K=SymbolIcon(K);//replace with icon, if available
+		K=ObtainSymbol(K);//replace with icon, if available
 	return `<span class="keystroke keystroke-${type}">${K}</span>`;
 }
 
@@ -2897,7 +2898,7 @@ function AddStroke(L,symbol){
 	AddWordStroke(L,symbol);
 }
 
-var separator=ObtainSymbol("interpunkt");
+var separator=StringSymbol("interpunkt");
 
 function CleanStroke(L){
 	return L.replace(/\*|\-|\~/g,"");
@@ -3058,12 +3059,12 @@ function KeystrokeString(e){
 	if(!GetElement(".iconpath",e))
 		return e.innerText;
 	else
-		return ObtainSymbol(ElementSymbolName(e));
+		return StringSymbol(IconName(e));
 }
 
 function SimplerArrowCycleString(text){
-	var lr=ObtainSymbol("left")+ObtainSymbol("right");
-	var rl=ObtainSymbol("right")+ObtainSymbol("left");	
+	var lr=StringSymbol("left")+StringSymbol("right");
+	var rl=StringSymbol("right")+StringSymbol("left");	
 	return FixedPoint(t=>t.replace(lr,"").replace(rl,""),text);
 }
 
