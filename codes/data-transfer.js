@@ -1499,7 +1499,7 @@ IndexSubTitle=function(t,h){
 	t.setAttribute("data-index-depth",h);
 	Class(t,"index-item");
 	t.id=t.id?t.id:TocId(t.innerText); 
-	TitleSelfLink(t,h);
+	TitleSelfLink(t);
 	return t.id;
 }
 
@@ -1549,9 +1549,14 @@ ShowHideIndex=function(){
 	ShowHide(".h6");
 }
 
-TitleSelfLink=function(t,h){
+TitleSelfLink=function(t){
 	var title=t.innerText;
-	t.innerHTML=AHTML(title,PageUnFragment()+"#"+TocId(title));
+	t.innerHTML=HeaderAHTML(title);
+}
+
+HeaderAHTML=function(title,page){
+	var page=PageUnFragment(page);
+	return AHTML(title,page+"#"+TocId(title));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2459,6 +2464,9 @@ ButtonHTML=function(optionsObj){
 
 AHTML=function(title,ref,attribs){
 	if(typeof ref==="undefined"){
+		if(Prefixed(title,"#"))
+			return HeaderAHTML(UnPrefix(title,"#")); //self-anchors
+		
 		if(In(title,".html"))
 			return AHTML(title,title);
 		
