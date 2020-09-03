@@ -5530,7 +5530,7 @@ function SVGPathTransform(path,name,viewbox){
 
 //5
 KBDPureHTML=function(key){
-	return "<kbd>"+key+"</kbd>";
+	return `<kbd data-key="${key}">${key}</kbd>`;
 }
 
 //4+3
