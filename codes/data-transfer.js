@@ -5390,9 +5390,11 @@ var Icons={
 	"body-arm-left-up":{path:"M 5 7 L 5 3 Q 4 3 3 3 Q 1 0 1 2 Q 1 3 3 5 Q 3 7 4 7 Z",vbmax:"10 10"},
 	"body-leg-left-down":{path:"M 5 7 L 5 8 Q 5 10 4 10 Q 3 10 4 7 Z",vbmax:"10 10"},
 	"body-leg-left-up":{path:"M 5 7 L 5 8 Q 3 9 2 8 Q 1 7 4 7 Z",vbmax:"10 10"},
-	"body-head":{path:"M 5 0 Q 3 0 3 2 Q 3 4 5 4 Q 7 4 7 2 Q 7 0 5 0 Z",vbmax:"10 10"},
+	"body-head":{path:"M 5 0 Q 3 0 3 1 Q 3 3 5 3 Q 7 3 7 1 Q 7 0 5 0 Z",vbmax:"10 10"},
 
-	"human-hello":{primitive:["body-head","body-arm-left-up","body-leg-left-up"]}
+	"human-half-left":{primitive:["body-arm-left-up","body-leg-left-down"]},
+	"human-half-right":{primitive:"human-half-left",transform:"flip-horizontal"},
+	"human-hello":{primitive:["human-half-left","human-half-right","body-head"]}
 }
 
 var MacKeys={
