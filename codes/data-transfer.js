@@ -722,7 +722,7 @@ BaseFilter=function(Base,GroupObject){
 
 // Fold
 FoldM=function(F,x0,xArray){
-	if(xArray.length<1){
+	if(!xArray||xArray.length<1){
 		return x0;
 	}else if(xArray.length===1){
 		return F(x0,xArray[0]);
@@ -734,7 +734,7 @@ FoldM=function(F,x0,xArray){
 }
 
 Fold=function(F,x0,xArray){
-	return FoldM(F,x0,xArray.slice());
+	return FoldM(F,x0,Clone(xArray));
 }
 
 // Fixed point
