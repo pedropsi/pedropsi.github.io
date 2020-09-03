@@ -329,11 +329,12 @@ function PGDMenuHTML(){
 }
 
 function GameFrameHTML(){
-	return "<div class='game-container game-console' style=' background-color: var(--beije);	display: flex;	flex-direction: column;	align-items: center;	justify-content: center}'>\
-				<h2>Game Console</h2>\
-				<img class='image' alt='game-console' style='width:180px;height:180px' src='images/game-console.svg'/>\
-				"+PGDMenuHTML()+"\
-			</div>";
+	return `
+	<div class='game-container game-console' style=' background-color: var(--beije);	display: flex;	flex-direction: column;	align-items: center;	justify-content: center}'>
+		<h2>Game Console</h2>
+		<img class='image' alt='game-console' style='width:180px;height:180px' src='images/game-console.svg'/>
+		${PGDMenuHTML()}
+	</div>`;
 }
 
 function LoadPGDMenu(){
