@@ -5399,6 +5399,7 @@ SymbolIcon=function(name){
 	var primitive=symbolObj.primitive?SymbolIcon(symbolObj.primitive):{};
 	if(primitive.path){
 		var derivative=primitive.path+" "+symbolObj.path||"";
+		delete derivative["primitive"]; //stop copying forever
 		return {...primitive,...symbolObj,path:derivative};
 	}
 	else
