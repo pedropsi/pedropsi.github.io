@@ -25,7 +25,8 @@
 //	 		- "-ed", an adjective			: Binary value (true/false)
 //	 		- "-er"							: Function
 //	 		- "-s", a plural noun, "Array"	: an array
-//	 		- "Element"						: a HTML node element
+//	 		- "Element"						: a Node or HTML code or a Selector
+//	 		- "Node"						: a HTML node element
 //	 		- "HTML"						: HTML code
 //	 		- "String"						: a string
 //	 		- "Object"						: an object
