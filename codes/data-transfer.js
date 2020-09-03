@@ -1137,7 +1137,7 @@ FunctionName=function(FunctionF){
 }
 
 FunctionNamecode=function(F){
-	return FunctionName(F)||F.toString();
+	return FunctionName(F)||String(F);
 }
 
 FunctionBody=function(FunctionF){
