@@ -11,7 +11,7 @@ function EnableTestMode(){
 //provided there is an element in the page labelled with the result of TestingAreaSelector()
 
 function TestFunction(functionname,testname){
-	var functionname=(typeof functionname==="string")?functionname:FunctionName(functionname);
+	var functionname=FunctionNamecode(functionname);
 	var verifiername="";
 
 	var test=Test[functionname][testname];
@@ -21,7 +21,7 @@ function TestFunction(functionname,testname){
 			result=test["function"].apply(null,test["arguments"]);
 			if(test.VerifierF){
 				result=test.VerifierF(result);
-				verifiername=FunctionName(test.VerifierF);
+				verifiername=FunctionNamecode(test.VerifierF);
 			}
 		}
 		catch(e){
@@ -69,7 +69,7 @@ function Test(functionname){
 		return tests;
 	}
 
-	var functionname=(typeof functionname==="string")?functionname:FunctionName(functionname);
+	var functionname=FunctionNamecode(functionname);
 	var tests=Test[functionname];
 
 	return Keys(tests).map(function(testname){TestFunction(functionname,testname)});
@@ -77,7 +77,7 @@ function Test(functionname){
 
 function SaveTest(F,argArray,result,testname,VerifierF){
 
-	var functionname=FunctionName(F)||String(F);
+	var functionname=FunctionNamecode(F);
 
 	if(!Test.functions)
 		Test.functions=[];
@@ -376,6 +376,9 @@ SaveTest(FunctionBody,TestFunctionNameF,"{return true;}","named function, inline
 SaveTest(FunctionBody,function(){return true;},"{return true;}","anonymous function, inline");
 SaveTest(FunctionBody,function(){(1)===(1);},"{(1)===(1);}","regex ignores subsequent parentheses");
 
+SaveTest(FunctionNamecode,Identity,"Identity","named function");
+SaveTest(FunctionNamecode,"Identity","Identity","function name");
+SaveTest(FunctionNamecode,(i)=>i,"(i)=>i","function code");
 
 
 ///////////////////////////////////////////////////////////////////////////////

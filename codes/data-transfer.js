@@ -1124,6 +1124,10 @@ FunctionName=function(FunctionF){
 	}
 }
 
+FunctionNamecode=function(F){
+	return FunctionName(F)||F.toString();
+}
+
 FunctionBody=function(FunctionF){
 	return FunctionF.toString().replace(/[^\)]*\)/,"");
 }
