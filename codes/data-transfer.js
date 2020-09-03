@@ -1095,8 +1095,9 @@ Enumerate=function(StringArray,and){
 	if(In(prelast,Exfix(and," "))||In(last,Exfix(and," ")))
 		and=DictionaryAccesser(EnumerationSynonyms)(and);
 	
+	and=Exfix(and," ");
 	if(StringArray.length===2)
-		return prelast+Exfix(and," ")+last;
+		return prelast+and+last;
 	
 	return Most(Most(StringArray)).join(comma)+comma+prelast+and+last;
 }
