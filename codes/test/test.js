@@ -297,10 +297,8 @@ SaveTest(ThreadKeysValues,[{a:1,b:2},(a,b)=>a+b],["a1","b2"],"combine keys and v
 
 
 //Update Object Keys
-function UpdateKeysTestA(a){if(a==="a"){return "e"}else return a};
-function UpdateKeysTestE(e){if(e==="e"){return "f"}else return e};
-SaveTest(UpdateKeys,[{a:"1",b:"2",c:"3",d:"4"},UpdateKeysTestA],{b:"2",c:"3",d:"4",e:"1"},"matching key");
-SaveTest(UpdateKeys,[{a:"1",b:"2",c:"3",d:"4"},UpdateKeysTestE],{a:"1",b:"2",c:"3",d:"4"},"non-matching key");
+SaveTest(UpdateKeysObject,[{a:"1",b:"2",c:"3",d:"4"},(a)=>(a==="a"?"e":a)],{b:"2",c:"3",d:"4",e:"1"},"matching key");
+SaveTest(UpdateKeysObject,[{a:"1",b:"2",c:"3",d:"4"},(e)=>(e==="e"?"f":e)],{a:"1",b:"2",c:"3",d:"4"},"non-matching key");
 
 SaveTest(InString,["","a"],false,"empty string");
 SaveTest(InString,["abcd","a"],true,"matching");

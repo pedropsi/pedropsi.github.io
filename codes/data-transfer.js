@@ -408,16 +408,11 @@ ThreadKeysValues=function(Obj,KeyValuer){
 	return Keys(Obj).map(k=>KeyValuer(k,Obj[k]));
 }
 
-UpdateKeys=function(Obj,F){
-	var keys=Keys(Obj);
-	for (var i in keys){
-		if(Obj.hasOwnProperty(keys[i])){
-			Obj[F(keys[i])]=Obj[keys[i]];
-			if(F(keys[i])!==keys[i])
-				delete Obj[keys[i]];
-		}
-	}
-	return Obj;
+UpdateKeysObject=function(Obj,KeyModifier){
+	var KeyModifier=KeyModifier||Identity;
+	var Omod={};
+	Keys(Obj).map(k=>(Omod[KeyModifier(k)]=Obj[k]));
+	return Omod;
 };
 
 InString=function(string,n){
@@ -4487,7 +4482,7 @@ SubContext=function(elem){
 	Contextual();
 	var keyActions=FindFirstMatch(Contextual.shortcuts,elem);
 	if(keyActions)
-		return UpdateKeys(keyActions,ComboKeystring);
+		return UpdateKeysObject(keyActions,ComboKeystring);
 	else
 		return undefined;
 }
@@ -4495,12 +4490,12 @@ SubContext=function(elem){
 
 //Add Shortcuts
 OverwriteShortcuts=function(selector,keyActions){
-	var keyActions=UpdateKeys(Clone(keyActions),ComboKeystring);
+	var keyActions=UpdateKeysObject(Clone(keyActions),ComboKeystring);
 	Contextual();
 	if(!Contextual.shortcuts[selector])
 		Contextual.shortcuts[selector]=keyActions;
 	else
-		Contextual.shortcuts[selector]=FuseObjects(keyActions,UpdateKeys(Contextual.shortcuts[selector],ComboKeystring));
+		Contextual.shortcuts[selector]=FuseObjects(keyActions,UpdateKeysObject(Contextual.shortcuts[selector],ComboKeystring));
 
 	return Contextual.shortcuts[selector];
 }
