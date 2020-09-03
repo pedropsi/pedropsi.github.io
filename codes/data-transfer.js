@@ -387,10 +387,8 @@ FilterObject=function(Obj,F){
 	return O;
 }
 
-MapKeys=function(Obj,F){
-	var K=[];
-	MapObject(Obj,function(value,key,object){K.push(F(value,key,object))});
-	return K;
+ThreadKeysValues=function(Obj,KeyValuer){
+	return Keys(Obj).map(k=>KeyValuer(k,Obj[k]));
 }
 
 UpdateKeys=function(Obj,F){
@@ -1674,7 +1672,7 @@ ParameterPairString=function(key,value){
 }
 
 ParameterString=function(parametersObject){
-	return MapKeys(FlipKeysValues(parametersObject),ParameterPairString).join("&");
+	return ThreadKeysValues(parametersObject,ParameterPairString).join("&");
 }
 
 Parameters=function(url){

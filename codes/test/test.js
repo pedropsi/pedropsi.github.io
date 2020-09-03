@@ -263,8 +263,9 @@ SaveTest(FlipKeysValues,{a:1,b:2,c:3,d:4},{"1":"a","2":"b","3":"c","4":"d"},"num
 SaveTest(FlipKeysValues,{},{},"empty object");
 
 //PushKeys
-SaveTest(MapKeys,[{a:1,b:2},Identity],[1,2],"list the keys");
-SaveTest(MapKeys,[{a:1,b:2},function(x){return x+1}],[2,3],"sum 1");
+SaveTest(ThreadKeysValues,[{a:1,b:2},(a,b)=>b],[1,2],"list keys");
+SaveTest(ThreadKeysValues,[{a:1,b:2},(a,b)=>a],["a","b"],"list values");
+SaveTest(ThreadKeysValues,[{a:1,b:2},(a,b)=>a+b],["a1","b2"],"combine keys and values");
 
 
 //Update Object Keys
