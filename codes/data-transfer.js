@@ -5602,6 +5602,24 @@ var TypeSwipeKeys={
 ///////////////////////////////////////////////////////////////////////////////
 //Dynamic text
 
+Hypertexts={};
+
+Hypertext=function(name,text){
+	if(typeof text==="undefined"){
+		if(typeof Hypertexts[name]==="undefined"){
+			ListenOnce("hypertext-"+name,function(){ReplaceElement(Hypertexts[name],id)});
+			var id=GenerateId();
+			return `<span class="hypertext" id="${id}" data="${name}">Loading <em>${name}</em>...</span>`;
+		}else
+			return Hypertexts[name];
+	}
+	else{
+		Hypertexts[name]=text;
+		Shout("hypertext-"+name);
+		return text;
+	}
+}
+
 DynamicTextHTML=function(label,text){
 	var label=Prefix(label,"dynamic-");
 	return `<span class="${label}">
