@@ -360,8 +360,8 @@ N_12:{
 DATE:`2019-10-02`,
 HEADER:()=>`Game bar keyboard shortcuts system`,
 PIECE:()=>`
-<p>A better keyboard shortcut system was added. Menu navigation using (<kbd>ctrl</kbd>+)<kbd>enter</kbd>, <kbd>space</kbd>, (<kbd>shift</kbd>+)<kbd>tab</kbd> and <kbd>arrows</kbd> has improved.</p>
-<p>GIF hints can now be played/paused with <kbd>enter</kbd> or <kbd>space</kbd>.</p>
+<p>A better keyboard shortcut system was added. Menu navigation using (${KB("ctrl")}) ${KB("enter")}, ${KB("space")}, (${KB("shift")})${KB("tab")} and <kbd>arrows</kbd> has improved.</p>
+<p>GIF hints can now be played/paused with ${KB("enter")} or ${KB("space")}.</p>
 `,ID:"game-bar"},
 N_11:{
 DATE:`2019-09-21`,
