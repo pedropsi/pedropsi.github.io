@@ -5348,16 +5348,27 @@ var Icons={
 	"right":{primitive:"left",transform:"flip-horizontal"},
 	"down":	{primitive:"left",transform:"rotate-90"},
 
-	"cursor":{path:" M 10 0 L 2 30 L 8 29 L 9 40 L 11 40 L 12 29 L 18 30 Z",vbmin:"-10 -10",vbmax:"40 40"},
+	"cursor":{path:"M 10 0 L 2 30 L 8 29 L 9 40 L 11 40 L 12 29 L 18 30 Z",vbmin:"-10 -10",vbmax:"40 40"},
 	"hand":{path:"M 7 25 Q 6 0 9 0 Q 12 0 12 3 L 12 20 Q 12 17 15 17 Q 18 17 18 22 Q 18 18 21 18 Q 24 18 24 24 Q 24 21 26 21 Q 28 21 28 30 Q 27 39 17 40 Q 8 41 6 37 Q -1 23 1 17 Q 3 13 6 22 Z",vbmin:"-10 -10",vbmax:"40 40"},
 	
-	"tap"	:{primitive:"hand",path:"M 6 10 Q 0 10 0 0 Q 0 -10 10 -10 Q 20 -10 20 0 Q 20 10 13 10 L 13 9 Q 19 9 19 0 Q 19 -9 10 -9 Q 1 -9 1 0 Q 1 9 6 9 Z",vbmax:"50 50"},
+	"clickld":{path:"M 4 3 Q 4 6 0 8 Q 1 3 4 3 Z",vbmin:"0 -10",vbmax:"20 10"},
+	"clicklu":{primitive:"clickld",transform:"flip-vertical"},
+	"clickru":{primitive:"clicklu",transform:"flip-horizontal"},
+	"clickrd":{primitive:"clickru",transform:"flip-vertical"},
+	"clicklurd":{primitive:["clickld","clicklu","clickrd","clickru"]},
+	
+	"hold":{path:"M 6 10 Q 0 10 0 0 Q 0 -10 10 -10 Q 20 -10 20 0 Q 20 10 13 10 L 13 9 Q 19 9 19 0 Q 19 -9 10 -9 Q 1 -9 1 0 Q 1 9 6 9 Z",vbmax:"50 50"},
+	
+	"tap":{primitive:["hand","clicklurd"],vbmax:"50 50"},
+	"taphold":{primitive:["hand","hold"],vbmax:"50 50"},
+	
 	"swipeleft"	:{primitive:"hand",path:"M 6 10 Q 0 10 0 0 Q 0 -7 13 -6 Q 46 0 38 2 Q 18 2 13 10 L 13 9 Q 17 1 38 1 Q 42 0 13 -5 Q 4 -5 3 0 Q 2 8 6 9 Z",vbmax:"50 50"},
 	"swipeup":{primitive:"swipeleft",transform:"rotate-270"},
 	"swiperight":{primitive:"swipeleft",transform:"flip-horizontal"},
 	"swipedown":{primitive:"swipeleft",transform:"rotate-90"},
 
-	"mouseclick":{primitive:"cursor",path:"M 6 10 Q 0 10 0 0 Q 0 -10 10 -10 Q 20 -10 20 0 Q 20 10 13 10 L 13 9 Q 19 9 19 0 Q 19 -9 10 -9 Q 1 -9 1 0 Q 1 9 6 9 Z",vbmax:"50 50"},
+	"mouseclick":{primitive:["cursor","clicklurd"],vbmax:"50 50"},
+	"mousehold":{primitive:["cursor","hold"],vbmax:"50 50"},
 
 	"enter":{path:"M 7 6 L 7 0 L 9 0 L 9 8 L 4 8 L 4 10 L 0 7 L 4 4 L 4 6 Z",vbmax:"10 10"},
 	"backsp":{path:"M 4 15 L 10 23 L 28 23 L 28 7 L 10 7 L 8 5 L 30 5 L 30 25 L 8 25 L 0 15 L 8 5 L 10 7 Z M 22 21 L 24 19 L 20 15 L 24 11 L 22 9 L 18 13 L 14 9 L 12 11 L 16 15 L 12 19 L 14 21 L 18 17 Z",vbmax:"30 30"},
@@ -5416,6 +5427,9 @@ ElementSymbolName=function(e){
 }
 
 SymbolIcon=function(name){
+	if(SymbolIcon[name])
+		return SymbolIcon[name];
+
 	var name=SymbolName(StringSymbol(name));
 	var symbolObj=DictionaryAccesser(Icons)(name);
 	
@@ -5433,7 +5447,7 @@ SymbolIcon=function(name){
 		symbolObj.path=SVGPathTransform(symbolObj.path,symbolObj.transform,viewbox);
 
 	delete symbolObj.transform;
-	return symbolObj;
+	return SymbolIcon[name]=symbolObj;
 }
 
 ComposeSymbols=function(symbolObj,primitives){
@@ -5498,7 +5512,7 @@ function SVGPattern(){
 
 function SVGPathSplit(path){
 	var pattern=new RegExp(SVGPattern(),"g");
-	return (path+" ").match(pattern);
+	return (path+" ").match(pattern)||[];
 }
 
 function SVGLinePairs(svgline){ //misses odd number off coords
@@ -5558,7 +5572,9 @@ function SVGPathTransform(path,name,viewbox){
 
 	var T=SVGTransforms[name];
 	var viewboxArray=ViewboxCoordinates(viewbox);
-	
+
+	console.log(name,viewboxArray)
+
 	function SVGCoordinatesF(xy){
 		return T(xy[0],xy[1],viewboxArray)
 	}
@@ -5626,7 +5642,10 @@ var KeyExplanations={
 	"swiperight":"swipe right",
 	"swipedown":"swipe down",
 	"backsp":"backspace",
-	"mouseclick":"click"
+	"mouseclick":"click",
+	"handclick":"tap",
+	"taphold":"long tap",
+	"mousehold":"long click"
 }
 
 
@@ -5638,6 +5657,7 @@ KB=function(string,Opts){
 
 var TypeSwipeKeys={
 	"click":["tap","mouseclick"],
+	"hold":["taphold","mousehold"],
 	"previous":["swipeleft","shift tab"],
 	"next":["swiperight","tab"]
 }
