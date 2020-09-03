@@ -75,7 +75,7 @@ EqualArray=function(a,b){
 }
 
 EqualObject=function(a,b){
-	return EqualArray(Keys(a),Keys(b))&&EqualArray(Values(a),Values(b));
+	return EqualArray(SortedKeys(a),SortedKeys(b))&&EqualArray(SortedValues(a),SortedValues(b));
 }
 
 EqualFunction=function(a,b){
@@ -342,6 +342,13 @@ Keys=function(Obj){
 };
 Values=function(Obj){
 	return Keys(Obj).map(function(k){return Obj[k]})||[];
+};
+
+SortedKeys=function(Obj){
+	return Keys(Obj).sort();
+};
+SortedValues=function(Obj){
+	return SortedKeys(Obj).map(function(k){return Obj[k]});
 };
 
 //Flips object keys and values
