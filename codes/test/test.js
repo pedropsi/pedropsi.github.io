@@ -39,25 +39,48 @@ var ErrorReport=[];
 function ReportTest(functionname,testname,test,passed,result,expect,verifiername){
 	if(passed)
 		return;
-	var testfunctionid="test-"+functionname;
-	if(!GetElement(testfunctionid))
-		AddElement("<h3 class='test-function' id='"+testfunctionid+"'>"+functionname+"</h3>",TestingAreaSelector());
+	
+	var tID="test-"+functionname;
+	
+	var title=`
+		<h3 class='test-function' id='${tID}'>
+			${functionname}
+		</h3>`;
 
-	var testid=TocId("test-"+functionname+" "+testname);
+	if(!GetElement(tID))
+		AddElement(title,TestingAreaSelector());
+
 
 	var verifunctionname=functionname;
 	
 	if(verifiername)
 		verifunctionname=verifiername+"("+verifunctionname+")";
 
-	var testtitle="<h4>"+testname+"</h4>"+"<p><code>"+verifunctionname+"("+JSON.stringify(test["arguments"]).replace(/^\[/,"").replace(/\]$/,"")+")="+JSON.stringify(result)+"</code>";
+	var label=passed?LabelHTML("Passed","test"):LabelHTML("Failed","test Problem");
+
+	var tried=`
+		<h4>${testname}</h4>
+		<p>
+			<code>
+				${verifunctionname}(${test["arguments"].map(EnString).join(",")})=${EnString(result)}
+			</code>
+			${label}
+		</p>
+	`
+	var expected="<p>Expected:<code>"+JSON.stringify(expect)+"</code></p>"
 	
-	var testreport=(passed?LabelHTML("Passed","test"):(LabelHTML("Failed","test Problem")+"</p><p>Expected:<code>"+JSON.stringify(expect))+"</code></p>");
+	var report=`
+		<div class='test-result' id='${testid}'>
+			${tried}
+			${expected}
+		</div>`;
 
 	ErrorReport.push([functionname,testname]);
 	
+	var testid=TocId("test-"+functionname+" "+testname);
 	RemoveElement(testid);
-	AppendElement("<div class='test-result' id='"+testid+"'>"+testtitle+testreport+"</div>",testfunctionid);
+
+	AppendElement(report,tID);
 }
 
 function Test(functionname){
