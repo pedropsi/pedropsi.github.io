@@ -1554,9 +1554,9 @@ TitleSelfLink=function(t){
 	t.innerHTML=HeaderAHTML(title);
 }
 
-HeaderAHTML=function(title,page){
+HeaderAHTML=function(title,page,Opts){
 	var page=PageUnFragment(page);
-	return AHTML(title,page+"#"+TocId(title));
+	return AHTML(title,page+"#"+TocId(title),Opts);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2465,7 +2465,7 @@ ButtonHTML=function(optionsObj){
 AHTML=function(title,ref,attribs){
 	if(typeof ref==="undefined"){
 		if(Prefixed(title,"#"))
-			return HeaderAHTML(UnPrefix(title,"#")); //self-anchors
+			return HeaderAHTML(UnPrefix(title,"#"),undefined,{class:"innerlink"}); //self-anchors
 		
 		if(In(title,".html"))
 			return AHTML(title,title);
