@@ -299,7 +299,7 @@ UNDO_TEXT					:	()=>	`Press ${v.UNDO_KEY()} or ${KB("undo")} to undo a move.`,
 FEEDBACK_TEXT				:	()=>	`<h3>E-mail ${v.NAME()} real-time feedback</h3><p>Press ${v.FEEDBACK_KEY()} or ${KB("feedback")} anytime to e-mail real-time feedback to ${v.NAME()}! Much appreciated!</p>`,
 FULLSCREEN_TEXT				:	()=>	`<h3>Fullscreen</h3><p>Toggle Fullscreen by pressing ${v.FULLSCREEN_KEY()} or ${KB("fullscreen")}.</p>`,
 HINTS_TEXT					:	()=>	`<h3>Hints</h3><p>Request a <em>hint</em> by pressing ${v.HINT_KEY()} or ${KB("hint")}, but use them sparingly to preserve your standing, shall you enter ${v.HOF_SEARCH()}!</p>`,
-AVATAR_TEXT					:	()=>	`<p>Control your <em>avatar</em> with the ${ArrowKeysText()}.</p>`,
+AVATAR_TEXT					:	()=>	`<p>Control your <em>avatar</em> with the ${ArrowKeysHyperText()}.</p>`,
 
 NUM_KEYS					:	()=>	`<kbd>0</kbd> <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> <kbd>5</kbd> <kbd>6</kbd> <kbd>7</kbd> <kbd>8</kbd> <kbd>9</kbd>`,
 LEFT_KEY					:	()=>	`${KB("left")} or <kbd>A</kbd>`,
