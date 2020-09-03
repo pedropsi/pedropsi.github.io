@@ -2420,9 +2420,6 @@ IconHTML=function(Opts){
 
 	var viewbox=Opts.viewbox||`${vbmin} ${vbmax}`;
 
-	if(Opts.transform) //transform name, that is
-		path=SVGPathTransform(path,Opts.transform,viewbox);
-
 	var svghtml=`
 		<svg class='iconpath icon-${name}' width='${width}' height='${height}' viewBox='${viewbox}'>
 			<path d='${path}'/>
@@ -5425,10 +5422,31 @@ SymbolIcon=function(name){
 	if(symbolObj===name)
 		return name;
 	
-	var primitive=symbolObj.primitive?SymbolIcon(symbolObj.primitive):{};
+	var primitives=symbolObj.primitive?EnArray(symbolObj.primitive).map(SymbolIcon):[];
+	var symbolObj=Clone(symbolObj);
+		delete symbolObj["primitive"];
+	
+	symbolObj=ComposeSymbols(symbolObj,primitives);
+
+	var viewbox=symbolObj.viewbox||`${symbolObj.vbmin||"0 0"} ${symbolObj.vbmax||"400 400"}`;
+	if(symbolObj.transform) //transform name, that is
+		symbolObj.path=SVGPathTransform(symbolObj.path,symbolObj.transform,viewbox);
+
+	delete symbolObj.transform;
+	return symbolObj;
+}
+
+ComposeSymbols=function(symbolObj,primitives){
+	if(!primitives.length)
+		return symbolObj;
+	return Fold(ComposeSymbol,Clone(symbolObj),primitives);
+}
+
+ComposeSymbol=function(symbolObj,primitive){
+	var primitive=Clone(primitive);
 	if(primitive.path){
-		var derivative=primitive.path+" "+symbolObj.path||"";
-		delete derivative["primitive"]; //stop copying forever
+		var derivative=(primitive.path||"")+" "+(symbolObj.path||"");
+		delete(primitive["primitive"]);
 		return {...primitive,...symbolObj,path:derivative};
 	}
 	else
