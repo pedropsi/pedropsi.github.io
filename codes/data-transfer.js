@@ -4857,10 +4857,6 @@ function ClearSchedule(name){
 
 
 function Kinemate(Objs){
-	// if(Kinemate.running)
-	// 	return console.log("Macro running... Please wait!");
-	// Kinemate.running=true;
-	
 	var actions=Clone(Objs);
 
 	function Chain(PrevEnder,ThisAction){
@@ -5550,10 +5546,11 @@ KBDPureHTML=function(key){
 }
 
 //4+3
-KBDSymbol=function(key,Opts){
-	if(Opts.mac)
-		var key=DictionaryAccesser(MacKeys)(key);
-	return ObtainSymbol(key);
+KBDSymbol=function(key){
+	var mac="";
+	if(In(MacKeys,key))
+		mac=" / "+ObtainSymbol(MacKeys[key]);
+	return ObtainSymbol(key)+mac;
 }
 
 //2
@@ -5563,10 +5560,9 @@ KBDCombo=function(keystring){
 
 //All
 
-KBDHTML=function(keystring,Opts){
-	var Opts=Opts||{};
+KBDHTML=function(keystring){
 	var combo=KBDCombo(keystring);
-	var	keys=combo.map(k=>KBDSymbol(k,Opts));
+	var	keys=combo.map(KBDSymbol);
 		keys=keys.map(KBDPureHTML);
 	return keys.join("")+ExplainCombo(combo);
 }
@@ -5581,7 +5577,7 @@ ExplainCombo=function(combo){
 }
 
 KeyExplainable=function(key){
-	return key!==ObtainSymbol(key)
+	return key!==ObtainSymbol(key);
 }
 
 ExplainKey=function(key){
