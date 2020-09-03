@@ -2721,31 +2721,7 @@ function ObtainPlayEndGameSound(){
 	PlaySound(MediaPath()+"/sound/wingame.mp3");
 }
 
-// function CaretColour(hex){
-// 	if(!CaretColour.colour)
-// 		CaretColour.colour=false;
 
-// 	if(typeof hex==="undefined")
-// 		return CaretColour.colour;
-
-// 	CaretColour.colour=hex;
-
-// 	RemoveElement(".overcolour");
-// 	if(CaretColour.colour)
-// 		AddSingleElement("<style class='overcolour'>.letter{--letterOn:"+CaretColour.colour+";--letterMid:"+CaretColour.colour+"}</style>",'BODY','.overcolour');
-
-// 	return CaretColour.colour;
-// }
-
-// function StartingColour(title){
-// 	var colours={
-// 		"Fuchsia":ObtainFGColor()
-// 	}
-// 	if(In(colours,title))
-// 		return colours[title]
-// 	else
-// 		return false;
-// }
 
 //Undo / Restart related
 function ObtainSetLevelState(state){
