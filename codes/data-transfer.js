@@ -1887,7 +1887,12 @@ GetElementFromTextSelector=function(selector,parentElement){
 	if(!parentElement||!parentElement.querySelector)
 		var parentElement=document.body;
 
-	return parentElement.querySelector(selector);
+	try{
+		return parentElement.querySelector(selector);
+	}
+	catch{
+		return null;
+	}
 };
 
 GetElementIn=function(selector,parentElement){
@@ -2064,42 +2069,62 @@ PosteriorElement=function(targetE,priorIDselString){
 }
 
 // Add new element to page, under a parent element
-NewElement=function(htmlOrElement){
+NewNode=function(htmlOrElement){
 	var e=htmlOrElement;
 	if (typeof htmlOrElement==="string")
 		e=MakeElement(htmlOrElement);
 	return e;
 }
 
+// Add new element to page, after a sibling element
+ElementAdder=function(Adder){
+	return function(htmlOrElement,parentIDsel){
+		var s=GetElement(parentIDsel);
+		if(!s)
+			return;
+
+		var e=GetElement(htmlOrElement);
+
+		if(IsString(htmlOrElement)&&!e){
+			var id=GenerateId();
+			var e=NewNode(`<div id="${id}"></div>`);
+			Adder(s,e);
+			return e.outerHTML=htmlOrElement;
+		}
+
+		if(!e) //actual HTML code
+			e=NewNode(htmlOrElement);
+
+		return Adder(s,e);
+	};
+};
+
 AddElement=function(htmlOrElement,parentIDsel){
-	var e=NewElement(htmlOrElement);
-	var p=GetElement(parentIDsel);
-	if(p)
-		p.appendChild(e);
-	return e;
+	function Adder(s,e){
+		return s.appendChild(e);
+	};
+	return ElementAdder(Adder)(htmlOrElement,parentIDsel);
 };
 
 PreAddElement=function(htmlOrElement,parentIDsel){
-	var e=NewElement(htmlOrElement);
-	var p=GetElement(parentIDsel);
-	if(p)
-		p.prepend(e);
-	return e;
+	function Adder(s,e){
+		return s.prepend(e);
+	};
+	return ElementAdder(Adder)(htmlOrElement,parentIDsel);
 };
 
-// Add new element to page, after a sibling element
-AppendElement=function(htmlOrElement,selector){
-	var e=NewElement(htmlOrElement);
-	var s=GetElement(selector);
-	if(s)
+AppendElement=function(htmlOrElement,parentIDsel){
+	function Adder(s,e){
 		return s.insertAdjacentElement('afterend',e);
+	};
+	return ElementAdder(Adder)(htmlOrElement,parentIDsel);
 };
 
-PrependElement=function(htmlOrElement,selector){
-	var e=NewElement(htmlOrElement);
-	var s=GetElement(selector);
-	if(s)
+PrependElement=function(htmlOrElement,parentIDsel){
+	function Adder(s,e){
 		return s.insertAdjacentElement('beforebegin',e);
+	};
+	return ElementAdder(Adder)(htmlOrElement,parentIDsel);	
 };
 
 
@@ -2123,12 +2148,6 @@ ReplaceElements=function(htmlOrElement,elemIDsel){
 		GetElements(elemIDsel).map(function(e){ReplaceElement(htmlOrElement,e)});
 };
 
-AddSingleElement=function(html,parentIDsel,selfSel){
-	if(GetElement(selfSel))
-		return ReplaceElement(html,selfSel);
-	else
-		return AddElement(html,parentIDsel);
-};
 
 //Wrap Element
 WrapElement=function(html,elemIDsel,newparentIdsel){
@@ -3253,7 +3272,7 @@ ShowHide=function(selectorE){
 OpenElement=function(e,parentIDsel){
 	if(!e)
 		return;
-	e=NewElement(e);
+	e=NewNode(e);
 	UnHideUnFadeElement(e);
 	AddElement(e,parentIDsel);
 }
@@ -5365,7 +5384,7 @@ SymbolName=function(symbol){
 }
 
 ElementSymbolName=function(e){
-	var n=Keys(Symbols).filter(name=>(SymbolName(e.innerHTML)===NewElement("<span>"+SymbolIcon(name)+"</span>").innerHTML));
+	var n=Keys(Symbols).filter(name=>(SymbolName(e.innerHTML)===NewNode("<span>"+SymbolIcon(name)+"</span>").innerHTML));
 	if(n.length)
 		return n[0];
 }
@@ -5672,7 +5691,7 @@ function WallpaperHTML(Opts){
 }
 
 function AddWallpaper(patternObj,e){
-	AddElement(NewElement(WallpaperHTML(patternObj)),e);
+	AddElement(NewNode(WallpaperHTML(patternObj)),e);
 }
 
 function RemoveWallpaper(name,e){
