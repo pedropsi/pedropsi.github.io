@@ -315,6 +315,16 @@ EnArray=function(a){
 		return [a];
 }
 
+EnString=function(a){
+	if(IsString(a))
+		return `'${a}'`;
+	if(IsArray(a))
+		return `[${a.map(EnString).join(",")}]`;
+	if(IsObject(a))
+		return `{${ThreadKeysValues(a,(k,v)=>(EnString(k)+":"+EnString(v))).join(",")}}`;
+	return String(a);
+}
+
 //Apply function to Array or Object
 Apply=function(arrayOrObj,F){
 	if(IsArray(arrayOrObj))

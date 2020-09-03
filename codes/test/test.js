@@ -116,6 +116,11 @@ SaveTest(False,[undefined],false,"no arguments (undefined)");
 SaveTest(False,[["a","b","c","d"]],false,"list");
 SaveTest(False,function(){return false},false,"function");
 
+SaveTest(EnString,"1","'1'","string of string");
+SaveTest(EnString,["1",1],"['1',1]","array with string");
+SaveTest(EnString,{a:"1","b":1},"{'a':'1','b':1}","object with string");
+SaveTest(EnString,NaN,"NaN","NaN");
+
 ///////////////////////////////////////////////////////////////////////////////
 // Deep equality testing
 
