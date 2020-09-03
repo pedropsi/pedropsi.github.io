@@ -338,7 +338,7 @@ function GameFrameHTML(){
 }
 
 function LoadPGDMenu(){
-	var menu="<div class='drop-menu pgd-menu'><div class='drop-options'></div></table>";
+	var menu="<div class='drop-menu pgd-menu'><div class='drop-options'></div></div>";
 	ReplaceElement(menu,".pgd-menu")
 	PrependFilterInput(InputFilterPGDMenu,".pgd-menu .drop-options","drop-option",".drop-options");
 }
