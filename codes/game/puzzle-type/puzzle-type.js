@@ -670,6 +670,8 @@ var LevelGoals=[			//Required types of thinking:
 	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
 
 	"Nigeria",				//Word, Mapping, Geography
+	
+	"Magnetised",			//Positional, Retroactive, Science
 	"Genetic.",				//Encoding, Word, Science
 	"Anagram",				//Word, Mapping, Language, Once,
 	"Ironclad",				//Encoding, Word, Science
@@ -678,7 +680,6 @@ var LevelGoals=[			//Required types of thinking:
 	"⠍⠕⠗⠎⠑",			  //Encoding, Once
 	"Dividi",				//Encoding, Arithmethic, Retroactive
 
-	"Magnetised",			//Positional, Retroactive, Science
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
