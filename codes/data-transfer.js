@@ -5347,7 +5347,7 @@ var Icons={
 	"right":{primitive:"left",transform:"flip-horizontal"},
 	"down":	{primitive:"left",transform:"rotate-90"},
 
-	"cursor":{path:"M 10 0 L 2 30 L 8 29 L 9 40 L 11 40 L 12 29 L 18 30 Z",vbmin:"-10 -10",vbmax:"40 40"},
+	"cursor":{path:"M 10 0 L 0 30 L 8 29 L 9 40 L 11 40 L 12 29 L 20 30 ZM 10 0 L 2 30 L 8 29 L 9 40 L 11 40 L 12 29 L 18 30 Z",vbmin:"-10 -10",vbmax:"40 40"},
 	"hand":{path:"M 7 25 Q 6 0 9 0 Q 12 0 12 3 L 12 20 Q 12 17 15 17 Q 18 17 18 22 Q 18 18 21 18 Q 24 18 24 24 Q 24 21 26 21 Q 28 21 28 30 Q 27 39 17 40 Q 8 41 6 37 Q -1 23 1 17 Q 3 13 6 22 Z",vbmin:"-10 -10",vbmax:"40 40"},
 	
 	"clickld":{path:"M 4 3 Q 4 6 0 8 Q 1 3 4 3 Z",vbmin:"0 -10",vbmax:"20 10"},
@@ -5364,7 +5364,7 @@ var Icons={
 	"swipeleft"	:{primitive:"hand",path:"M 6 10 Q 0 10 0 0 Q 0 -7 13 -6 Q 46 0 38 2 Q 18 2 13 10 L 13 9 Q 17 1 38 1 Q 42 0 13 -5 Q 4 -5 3 0 Q 2 8 6 9 Z",vbmax:"50 50"},
 	"swipeup":{primitive:"swipeleft",transform:"rotate-270"},
 	"swiperight":{primitive:"swipeleft",transform:"flip-horizontal"},
-	"swipedown":{primitive:"swipeleft",transform:"rotate-90"},
+	"swipedown":{primitive:"swipeup",transform:"flip-vertical"},
 
 	"mouseclick":{primitive:["cursor","clicklurd"],vbmax:"50 50"},
 	"mousehold":{primitive:["cursor","hold"],vbmax:"50 50"},
