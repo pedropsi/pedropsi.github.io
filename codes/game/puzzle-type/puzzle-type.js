@@ -557,7 +557,7 @@ var LevelDifficulty={
 	"Deaf":3,
 	"⠍⠕⠗⠎⠑":3,
 	"Dividi":5,
-	"Magnetised":1,
+	"Magnetism":1,
 	//"Fuchsia":1,
 	"Odd":3,
 	"Latent clones":3,
@@ -671,7 +671,7 @@ var LevelGoals=[			//Required types of thinking:
 
 	"Nigeria",				//Word, Mapping, Geography
 	
-	"Magnetised",			//Positional, Retroactive, Science
+	"Magnetism",			//Positional, Retroactive, Science
 	"Genetic.",				//Encoding, Word, Science
 	"Anagram",				//Word, Mapping, Language, Once,
 	"Ironclad",				//Encoding, Word, Science
@@ -718,8 +718,7 @@ var LevelGoalAliases={
 	"Mon petit ami":"La rapide surprise",
 	"Starting anew":"Starting buds",
 	"String completing":"Starting buds",
-	"Starting strings":"Starting buds",
-	"Magnetism":"Magnetised"
+	"Starting strings":"Starting buds"
 }
 
 function GoalCanonicalName(title){
@@ -884,7 +883,7 @@ var LevelInstructions={
 		
 	},*/
 	"Dividi":Dividi,
-	"Magnetised":Magnetised,
+	"Magnetism":Magnetism,
 	"Order is all":Baba,
 	"Just cut and paste":Copypaste,
 	"Odd":function(L){
@@ -1460,9 +1459,9 @@ function BrailleNumber(braille){
 	return BrailleSorted.indexOf(braille.toLowerCase());
 }
 
-//Magnetised
+//Magnetism
 
-function Magnetised(L){
+function Magnetism(L){
 	if(In("NS",L)){
 		if(In(Word(),L)){
 			AddStrokeInvalid(L);
@@ -3321,7 +3320,7 @@ function TutorialMacro(){
 // 	"Deaf":"Ace Badge#",
 // 	"⠍⠕⠗⠎⠑":"⠁⠺⠑⠐⠎",
 // 	"Dividi":"Ipsum bonum!",
-// 	"Magnetised":"Electrifying!",
+// 	"Magnetism":"Electrifying!",
 // 	//"Fuchsia":"Stunning!",
 // 	"Odd":"EVEN better!",
 // 	"Latent clones":"FOURmidable!",
