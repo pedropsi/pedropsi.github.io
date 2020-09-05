@@ -55,7 +55,7 @@ var NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
 var LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 var AlphanumericCharacters=LetterCharacters.concat(NumberCharacters);
 var LetterSpaceCharacters=LetterCharacters.concat(" ");
-var Directions=["left","up","right","down"];
+Directions=["left","up","right","down"];
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1620,7 +1620,6 @@ LoadNodeSource=function(source){
 	var source=UnPosfix(source,".js");
 	if(!Prefixed(source,"."))
 		source=Prefix(UnPrefix(source,"/"),"../");
-	//console.log("loading source ",source);
 	require(source);
 }
 
@@ -5572,8 +5571,6 @@ function SVGPathTransform(path,name,viewbox){
 
 	var T=SVGTransforms[name];
 	var viewboxArray=ViewboxCoordinates(viewbox);
-
-	console.log(name,viewboxArray)
 
 	function SVGCoordinatesF(xy){
 		return T(xy[0],xy[1],viewboxArray)

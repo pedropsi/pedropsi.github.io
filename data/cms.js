@@ -296,13 +296,13 @@ CMSObject=function(title){
 
 // Keyboard Instuctions
 
-function ArrowGridKB(direction,i){
+ArrowGridKB=function(direction,i){
 	return `<kbd class="key-${Directions[i]}">${ObtainSymbol(direction)}</kbd>`;
 }	
-function ArrowKeysGridHTML(LURDArray){
+ArrowKeysGridHTML=function(LURDArray){
 	return `<span class="grid controls-arrow">${LURDArray.map(ArrowGridKB).join("")}</span>`;
 }
-function ArrowKeysHyperText(){
+ArrowKeysHyperText=function(){
 	var grids=[
 		ArrowKeysGridHTML(Directions),
 		ArrowKeysGridHTML(["A","W","D","S"]),

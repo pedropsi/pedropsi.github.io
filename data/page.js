@@ -121,6 +121,7 @@ DoctypeHTML=function(lang){
 <html lang="${lang}" prefix="og: http://ogp.me/ns#">`
 }
 
+
 PageWithMetaHTML=function(v,post){
 	return `${v.HTML_DOCTYPE()}
 	<head>
@@ -131,7 +132,7 @@ PageWithMetaHTML=function(v,post){
 	`
 }
 
-PageMetaReplace=function(code){
+PagePost=function(code){
 	var start='<script id="post">var v={POST:()=>`';
 	var end='`};</script><script src="data/page.js"></script>';
 
@@ -155,7 +156,7 @@ PageMetaReplace=function(code){
 		v.POST=(()=>evalpost);
 	}
 
-	return PageWithMetaHTML(v,post);
+	return post;
 }
 
 
