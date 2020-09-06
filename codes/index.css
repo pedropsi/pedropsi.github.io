@@ -324,12 +324,18 @@ nav{
 	background-color:var(--turquoise);
 }
 
+.text a.innerlink{
+	text-decoration-color:var(--green);
+}
+
 .text a, .footer a{
 	color:inherit;
 	text-decoration-line:underline;
 	text-decoration-style:double;
 	text-decoration-color:var(--lightblue);
 }
+
+
 
 .card a, a.card-supra{
 	text-decoration:unset;
@@ -348,6 +354,9 @@ nav{
 p a:hover ,
 p a:active,
 p a:focus ,
+p a.innerlink:hover ,
+p a.innerlink:active,
+p a.innerlink:focus ,
 .tag:hover ,
 .tag:active,
 .tag:focus ,

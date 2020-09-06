@@ -819,6 +819,9 @@ Capitalise=function(word){
 		return word;
 }
 
+KebabCaseString=function(s){
+	return UnExfix(s.replace(/([^A-Za-z0-9\_])+/g,"-"),"-");
+}
 
 CommonWords=function(){
 	var prepositions=["aboard","about","above","across","after","against","along","amid","among","anti","around","as","at","before","behind","below","beneath","beside","besides","between","beyond","but","by","concerning","considering","de","despite","down","during","except","excepting","excluding","following","for","from","in","inside","into","like","minus","near","of","off","on","onto","opposite","outside","over","past","per","plus","regarding","round","save","since","than","through","to","toward","towards","under","underneath","unlike","until","up","upon","versus","vs","via","with","within","without"];
@@ -1487,9 +1490,7 @@ AClick=function(url,opts){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Page auto index
-TocId=function(s){
-	return UnExfix(s.replace(/([^A-Za-z0-9\_])+/g,"-"),"-");
-}
+
 
 TitleIndexer=function(h){
 	return function(t){return IndexSubTitle(t,h)};
@@ -1498,7 +1499,7 @@ TitleIndexer=function(h){
 IndexSubTitle=function(t,h){
 	t.setAttribute("data-index-depth",h);
 	Class(t,"index-item");
-	t.id=t.id?t.id:TocId(t.innerText); 
+	t.id=t.id?t.id:KebabCaseString(t.innerText); 
 	TitleSelfLink(t);
 	return t.id;
 }
@@ -1556,7 +1557,8 @@ TitleSelfLink=function(t){
 
 HeaderAHTML=function(title,page,Opts){
 	var page=PageUnFragment(page);
-	return AHTML(title,page+"#"+TocId(title),Opts);
+	var fragment=KebabCaseString(CapitaliseSentence(title));
+	return AHTML(title,page+"#"+fragment,Opts);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2459,9 +2461,10 @@ ButtonHTML=function(optionsObj){
 };
 
 AHTML=function(title,ref,attribs){
+	if(Prefixed(title,"#"))
+		return HeaderAHTML(UnPrefix(title,"#"),ref,{...attribs,class:"innerlink"}); //self-anchors
+
 	if(typeof ref==="undefined"){
-		if(Prefixed(title,"#"))
-			return HeaderAHTML(UnPrefix(title,"#"),undefined,{class:"innerlink"}); //self-anchors
 		
 		if(In(title,".html"))
 			return AHTML(title,title);
@@ -2596,7 +2599,7 @@ ButtonOnClickHTML=function(title,onclicktxt){
 }
 
 ButtonLinkHTML=function(title,symbol,attribs){
-	var id='#'+TocId(title);
+	var id='#'+KebabCaseString(title);
 	var attribs=attribs||{};
 	if(!symbol)
 		var symbol=title;
@@ -4103,7 +4106,7 @@ SoundHTML=function(sourcepath,data,id){
 	return ElementHTML({
 		tag:"audio",
 		txt:" ",
-		attributes:FuseObjects({'class':'sound',type:'audio/mpeg',preload:'auto','src':sourcepath,'id':(id?id:TocId(sourcepath))},data?Datafy(data):{})
+		attributes:FuseObjects({'class':'sound',type:'audio/mpeg',preload:'auto','src':sourcepath,'id':(id?id:KebabCaseString(sourcepath))},data?Datafy(data):{})
 	});
 }
 

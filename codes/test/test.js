@@ -77,7 +77,7 @@ function ReportTest(functionname,testname,test,passed,result,expect,verifiername
 
 	ErrorReport.push([functionname,testname]);
 	
-	var testid=TocId("test-"+functionname+" "+testname);
+	var testid=KebabCaseString("test-"+functionname+" "+testname);
 	RemoveElement(testid);
 
 	AppendElement(report,tID);
@@ -618,10 +618,10 @@ SaveTest(PageSearch,["source","https://pedropsi.github.io/puzzle-type?source=hom
 
 ///////////////////////////////////////////////////////////////////////////////
 //Page auto index
-SaveTest(TocId,"How to play","How-to-play","simple text");
-SaveTest(TocId,"#How to play","How-to-play","starting hashtag removed");
-SaveTest(TocId,"     How      to    play      ","How-to-play","trailing spaces, multiple spaces");
-SaveTest(TocId,"|!\/!How\"#$%&/()=@£§€{[]}'to+*¨¨´´``~~-playçãôÒÌ","How-to-play","symbol mash");
+SaveTest(KebabCaseString,"How to play","How-to-play","simple text");
+SaveTest(KebabCaseString,"#How to play","How-to-play","starting hashtag removed");
+SaveTest(KebabCaseString,"     How      to    play      ","How-to-play","trailing spaces, multiple spaces");
+SaveTest(KebabCaseString,"|!\/!How\"#$%&/()=@£§€{[]}'to+*¨¨´´``~~-playçãôÒÌ","How-to-play","symbol mash");
 
 
 SaveTest(ShortenString,["1234567890",20],"1234567890","wide limit");
