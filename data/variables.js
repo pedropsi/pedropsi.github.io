@@ -1,3 +1,19 @@
+//Functions
+
+SubscribeHTML=function(Opts){
+	var Opts=Opts||{};
+	var description=Opts.description||`Learn first-hand about ${v.NAME()}'s next project!`
+	var button=Opts.button||v.BUTTON_SUBSCRIBE();
+	
+	return `<div class="announce">
+				${description}
+				${button}
+			</div>`;
+}
+
+//
+//Variables
+
 Variables={
 YEAR_NOW					:	()=>	Year(),
 YEAR_START					:	()=>	2010,
