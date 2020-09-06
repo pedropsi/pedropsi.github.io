@@ -37,11 +37,22 @@ ${FolderGalleryHTML("star-battle",[
 
 <h2>How to make geometric star battle puzzles</h2>
 <p>You found an interesting grid geometry for a star battle puzzle, but how do you make a puzzle?</p>
-<p>To make a star battle puzzle, you must overcome two challenges: 1) finding a <em>constellation</em> and 2) drawing a set of <em>regions</em> with a unique solution.</p>
+<p>At least two approaches can be distinguished, named <b>forward</b> or <b>backward</b> design. The forward approach should generate better puzzles, while the backward approach is sometimes easier.</p>
+<p>Finally, you'll need some ${AHTML("#tools")} to save you time!</p>
+
+
+<h3>Forward design approach</h3>
+<p>Here the focus is on particular deductions. So it is useful to have a list of interesting local region configurations in your mind.</p>
+
+<h4>Splitting method</h4>
+<p>You split one of the grid regions in a way that the two parts have a fixed number of stars. Iterate.</p>
+
+<h3>Backward design approach</h3>
+<p>The backward approach starts with the solution and attempts to make a puzzle around it. Thus, there are two steps: 1) finding a <em>constellation</em> and 2) drawing a set of <em>regions</em> with a unique solution.</p>
 
 <p>Let <b>r</b> be the number of <em>regions</em> and <b>n</b> the number of stars per <em>region</em>. In total you'll need <b>s = r * n</b> stars.</p>
 
-<h3>Finding a <em>constellation</em></h3>
+<h4>Finding a <em>constellation</em></h4>
 <p>Finding a star battle <em>constellation</em> means  filling the grid with a set of <b>s</b> stars such that no starred cells share any vertices, and no more than <b>n</b> stars per <em>line</em>.</p>
 <p>Different geometries impose different rules on which vertices are shared, and on what constitutes a <em>line</em>.</p> 
 
@@ -49,10 +60,10 @@ ${FolderGalleryHTML("star-battle",[
 
 <p>Then, with a grid in place, the following two imperfect methods are are sometimes useful for finding a <em>constellation</em>.</p>
 
-<h4>Symmetry method</h4>
+<h5>Symmetry method</h5>
 <p>Usually the grids have some symmetries that can be used. For instance, shall there be a <em>m</em>-fold rotational symmetry around a central point, often you can place a <em>starting star</em> anywhere away from the center, and then place <em>m - 1 copies</em> at the symmetric points.</p>
 
-<h4>Knight's method</h4>
+<h5>Knight's method</h5>
 <p>Place a <em>starting star</em> anywhere, and mark a <em>ring</em> of all its adjacent cells. Then place a second star outside and adjacent to the ring, as close to the <em>starting star</em> as possible, but on a different line. In a square grid, the second star is now a "knight's move" away.</p> 
 <p>Place more stars following the same pattern, until either you <b>wrap-around a boundary</b> and finish the <em>constellation</em> or you <b>must stop</b>.</p> 
 
@@ -60,11 +71,11 @@ ${FolderGalleryHTML("star-battle",[
 
 
 
-<h3>Drawing <em>regions</em>, while ensuring unique solutions</h3>
+<h4>Drawing <em>regions</em>, while ensuring unique solutions</h4>
 <p>Finding a valid <em>constellation</em> is relatively easy, and with a single <em>constellation</em> you can make a huge number of star battle puzzles, by drawing different sets of regions.</p>
 <p> However, ensuring that the puzzle has a unique solution can be very time consuming, Here's one method.</p>
 
-<h4>Nucleation Method</h4>
+<h5>Nucleation Method</h5>
 <ol>
 	<li>Place a valid <em>constellation</em> on the grid, with r * n stars.</li>
 	<li>Draw r-1 small uninteresting <em>regions</em> to confine n*(r-1) stars, and name these <em>regions</em> crystals. Thus only n stars remain outside any crystal, in open territory. </li>
@@ -72,7 +83,15 @@ ${FolderGalleryHTML("star-battle",[
 	<li>Pick one of the r-1 crystals. Grow it by one new cell into open territory where you can quickly check that no star from the crystal could be moved to the new cell (i.e., the new solution is still unique). Repeat this step until you're happy.</li>
 </ol>
 
-<h2>Idea overflow</h2>
+<h2>Tools</h2>
+
+<h3>Square grid editor</h3>
+<p>For simple square grids, check the handy ${AHTML("puzz.link star battle editor","https://puzz.link/p?starbattle/")}.</p>
+
+<h3>Other grids</h3>
+<p>TBA</p>
+
+<h2>More ideas</h2>
 <p>Many ideas failed to produce interesting puzzles, or would require more time to explore. They're left here in case anyone wants to take them forward.</p>
 <ul>
 	<li>log spiral grid - current 2 star <em>constellation</em> with too many stars, possibly tedious;</li>
