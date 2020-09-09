@@ -1594,8 +1594,23 @@ function Weightier(L){
 	return;
 }
 
-function ArrowDisplay(word){
-	return StringSymbol("left")+word+StringSymbol("right");
+function ArrowDisplay(word,type){
+	var left=(!type||type==="left")?StringSymbol("left"):"";
+	var right=(!type||type==="right")?StringSymbol("right"):"";
+	// var left=StringSymbol("left");
+	// var right=StringSymbol("right");
+	return left+word+right;
+}
+
+function ArrowDisplayDirection(insertions){
+	var dir=false;
+	var p=insertions.p;
+	var l=insertions.positions.length-1;
+	if(p>0&&p===l)
+		dir="left";
+	if(p===0&&p<l)
+		dir="right";
+	return dir;
 }
 
 function Translate(L){
@@ -1747,12 +1762,14 @@ function StartingBuds(L){
 		if(In(LetterSpaceCharacters,L))
 			var insertions=LetterInsertions(L,word);
 		else
-			var insertions=Memo()
+			var insertions=Memo();
 
 		var insertions=CyclePossibilities(L,insertions);
 	}
 
-	if(!insertions){
+	
+	if(!insertions||insertions.block){
+		AddStrokeInvalid(L);
 		ForbidCaret();
 		return;
 	}
@@ -1766,7 +1783,6 @@ function StartingBuds(L){
 		ForbidCaret();
 		AddStrokeInvalid(L);
 		insertions=Memo();
-		insertions.animate=false;
 		Memo(insertions);
 		return;
 	}
@@ -1776,10 +1792,10 @@ function StartingBuds(L){
 	Memo(insertions);
 	
 	if(possibilities.length>1&&choosing===true)
-		word=ArrowDisplay(word);
-
+		word=ArrowDisplay(word,ArrowDisplayDirection(insertions));
+		
 	Letters(word.toUpperCase());
-	Caret(Range(0,word.length-1));
+	Caret("Full");
 }
 
 
@@ -1791,17 +1807,21 @@ function CyclePossibilities(L,insertions){
 
 	if(!In(LetterSpaceCharacters,L)){
 		if(In(NumberCharacters,L))
-			p=(Number(L)-1)%possibilities.length;
+			p=Number(L);
 		else if(In(["left","up"].map(StringSymbol),L))
-			p=(p+possibilities.length-1)%possibilities.length;
+			p=(p-1);
 		else if(In(["right","down"].map(StringSymbol),L))
-			p=(p+possibilities.length+1)%possibilities.length;
+			p=(p+1);
 	
+		p=Max(Min(p,possibilities.length-1),0);
+
 		if(insertions.choosing){
-			insertions.animate=true;
 			SkipUndo();
 		}
 
+		if(insertions.p===p) //unchanged menas wrong input
+			insertions.block=true;
+		
 		insertions.p=p;
 	}
 
@@ -2241,21 +2261,26 @@ function Letter(position,letter){
 }
 
 function Caret(position){
+	var l=Letters().length;
 	if(!Caret.array)
-		Caret.array=[Letters().length]; //after last one
+		Caret.array=[l]; //after last one
 
 	if(typeof position==="undefined")
 		return Caret.array;
 
 	if(position==="Last")
-		var position=Letters().length-1;
+		var position=l-1;
 	if(position==="First")
 		var position=0;
+	if(position==="Full")
+		return Caret.array=Range(0,l-1);
+	// if(position==="NoArrows")
+	// 	return Caret.array=Range(0,l-1).filter(function(l,i){return !In(ArrowKeys,Letters()[i])});
 
 	if(IsArray(position))
 		Caret.array=position;
 	else{
-		var position=Max(-1,Min(position,Letters().length));
+		var position=Max(-1,Min(position,l));
 		Caret.array=[position];	
 	}
 }
@@ -2308,7 +2333,7 @@ var LetterDisplayers={
 			simclass=simclass+" inversion"
 		
 		//Superimpose Inversion symmetric letters to correct font assymetries
-		S=MakeElement("<div class='superimpose'><div class='symmetry superimposed"+simclass+"'>"+PureLetter(L)+"</div><div>"+PureLetter(L)+"</div></div>");
+		S=NewNode("<div class='superimpose'><div class='symmetry superimposed"+simclass+"'>"+PureLetter(L)+"</div><div>"+PureLetter(L)+"</div></div>");
 		
 		if(In(L,"-"))
 			Class(S,"vertical");
@@ -2331,7 +2356,7 @@ var LetterDisplayers={
 		var combined=CombineHalves(E);
 		//Superimpose two halves
 		if(combined.length>1){
-			S=MakeElement("<div class='superimpose'><div class='superimposed half upper'>"+PureLetter(E[0])+"</div><div class='half lower'>"+PureLetter(E[1])+"</div></div>");
+			S=NewNode("<div class='superimpose'><div class='superimposed half upper'>"+PureLetter(E[0])+"</div><div class='half lower'>"+PureLetter(E[1])+"</div></div>");
 			return LetterPureHTML(S.outerHTML);
 		}
 		else
@@ -2382,12 +2407,18 @@ function ClearLetters(){
 }
 
 function DrawLetters(){
+		
 	var letters=Letters();
 		letters=letters.map(ObtainSymbol);//Replace any icons
 		letters=letters.map(LetterHTML(CurLevelTitle())).join("\n");
 	ReplaceChildren(letters,"#letters");
 	NumberLetterElements();
-	TransitionLetters(CurLevelTitle());
+
+	//Transitions, only if different
+	if(!Equal(DrawLetters.last,Letters()))
+		TransitionLetters(CurLevelTitle());
+	
+	DrawLetters.last=Letters();	
 }
 
 function NumberLetterElements(target){
