@@ -1602,10 +1602,8 @@ function ArrowDisplay(word,type){
 	return left+word+right;
 }
 
-function ArrowDisplayDirection(insertions){
+function ArrowDisplayDirection(p,l){
 	var dir=false;
-	var p=insertions.p;
-	var l=insertions.positions.length-1;
 	if(p>0&&p===l)
 		dir="left";
 	if(p===0&&p<l)
@@ -1624,10 +1622,17 @@ function Translate(L){
 			AddStrokeValid(L)
 	}
 	else{
-		AddStrokeValid(L)
 		if(In(LetterSpaceCharacters,L))
 			insertions=WordTranslations(L,Word());
 		insertions=CyclePossibilities(L,insertions);
+
+		if(insertions.block){
+			ForbidCaret();
+			AddStrokeInvalid(L);
+			return;
+		}
+
+		AddStrokeValid(L)
 	}
 	
 
@@ -1646,9 +1651,10 @@ function Translate(L){
 	insertions.choosing=choosing;
 	Memo(insertions);
 
-	if(possibilities.length>1)
-		suffix=ArrowDisplay(suffix);
-	
+	if(possibilities.length>1){
+		suffix=ArrowDisplay(suffix,ArrowDisplayDirection(p,possibilities.length-1));
+	}
+
 	word=prefix+suffix;
 	Letters(word.toUpperCase());
 	
@@ -1792,7 +1798,7 @@ function StartingBuds(L){
 	Memo(insertions);
 	
 	if(possibilities.length>1&&choosing===true)
-		word=ArrowDisplay(word,ArrowDisplayDirection(insertions));
+		word=ArrowDisplay(word,ArrowDisplayDirection(p,possibilities.length-1));
 		
 	Letters(word.toUpperCase());
 	Caret("Full");
