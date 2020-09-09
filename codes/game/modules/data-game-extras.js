@@ -350,7 +350,7 @@ function PrepareGame(){
 		
 		GameFocus();
 
-		SelectLevelFromPage();
+		setTimeout(SelectLevelFromPage,2000);
 		
 		Shout("GameBar");
 	}
