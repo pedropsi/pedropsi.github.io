@@ -2076,9 +2076,13 @@ FirstMatchingElement=function(type,targetE,priorIDselString){
 }
 
 ParentElement=function(targetIDsel,parentIDselString){
+	var p=FirstParentElement(targetIDsel);
 	if(!parentIDselString)
-		return FirstParentElement(targetIDsel);
-	FirstMatchingElement("parentElement",targetIDsel,parentIDselString);
+		return p;
+	while(p&&!In(QueryAll(parentIDselString),p)){
+		p=FirstParentElement(p)
+	}
+	return p
 }
 
 PriorElement=function(targetE,priorIDselString){
