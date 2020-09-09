@@ -2452,7 +2452,8 @@ function TransitionExpansion(){
 	if(!memo||!memo.positions||memo.p===undefined||!memo.animate)
 		return;
 	
-	var p=memo.positions[memo.p]+(memo.positions.length>1?1:0);
+	var p=memo.positions[memo.p]+(In(Letters(),StringSymbol("left"))?1:0);
+	
 	var letterE=GetElement("#letters .letter-"+p);
 	if(letterE){
 		var LeHTML=letterE.outerHTML;
