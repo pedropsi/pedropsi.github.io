@@ -2453,7 +2453,7 @@ function TransitionExpansion(){
 		return;
 	
 	var p=memo.positions[memo.p]+(In(Letters(),StringSymbol("left"))?1:0);
-	
+
 	var letterE=GetElement("#letters .letter-"+p);
 	if(letterE){
 		var LeHTML=letterE.outerHTML;
@@ -2734,9 +2734,9 @@ function GoalMatchedMacro(){
 			Caret([Infinity]);
 			DrawCaret();
 			GetElements("#letters .icon").map(e=>ParentElement(e)).map(ShrinkElement);
+			UnWrapElement(".expanding");
 		},endDelay:500},
 		{Starter:function(){
-			// Class(".levelscreen","mirror-action");
 			Class(".middle #letters","downwards");
 			UnClass(".goal",".goaly");
 			Class(".goal",".letters");
@@ -2751,7 +2751,6 @@ function GoalMatchedMacro(){
 		MirrorAction({endDelay:1000}),
 		{Starter:function(){
 			UnClass(".middle #letters","downwards");
-			// UnClass(".levelscreen","mirror-action");
 		}}
 	];
 }

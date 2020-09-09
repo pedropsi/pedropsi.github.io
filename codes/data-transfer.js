@@ -2176,6 +2176,15 @@ WrapElement=function(html,elemIDsel,newparentIdsel){
 	AddElement(GetElement(elemIDsel),newparentIdsel);
 }
 
+UnWrapElement=function(elemIDsel,wrapIDsel){
+	var e=GetElement(elemIDsel);
+	if(!e)
+		return null;
+	
+	var i=GetElement(wrapIDsel)||e;
+	e.outerHTML=i.innerHTML;
+}
+
 
 // Remove Children
 RemoveChildren=function(parentID){
