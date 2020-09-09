@@ -1071,6 +1071,7 @@ function Nokia(N){
 }
 
 function NokiaTimer(delta){
+
 	if(!NokiaTimer.timeouts)
 		NokiaTimer.timeouts=[];
 
@@ -1078,7 +1079,7 @@ function NokiaTimer(delta){
 	NokiaTimer.timeouts.map(clearTimeout);
 
 	function Redraw(){
-		if(!NokiaTimer.blocked){
+		if(!NokiaTimer.blocked&&!CurLevelWon()){
 			AddStrokeSeparator();
 			Caret(Infinity);
 			DrawLevel();
@@ -2292,8 +2293,8 @@ function Caret(position){
 }
 
 function UnDrawCaret(){
-	Array.from(GetElement("#letters").children).filter(function(e){return e.innerHTML!==" "}).map(function(c){UnClass(c,"caret")});
-	RemoveElement(".caret");
+	GetElements(".caret").map(function(c){UnClass(c,"caret")});
+	GetElements(".caret-inside").map(function(c){RemoveElement(ParentElement(c))});
 }
 
 function DrawCaret(){
@@ -2401,7 +2402,7 @@ function LetterHTML(levelName){
 }
 
 function CaretHTML(){
-	return "<div class='letter caret'> </div>"
+	return "<div class='letter caret'><span class='caret-inside'></span></div>"
 }
 
 
@@ -2695,8 +2696,12 @@ function ObtainUpdateLevel(state){
 	DrawLevel();
 }
 
+function CurLevelWon(){
+	return WinnerTitle(CurLevelTitle())===Word().replace(/\_/g,"");
+}
+
 function CheckWin(){
-	var win=WinnerTitle(CurLevelTitle())===Word().replace(/\_/g,"");
+	var win=CurLevelWon();
 	
 	if(win){
 		MarkWonScreen();
@@ -2731,10 +2736,14 @@ function LevelWinMacro(){
 function GoalMatchedMacro(){
 	return [
 		{Starter:function(){
+			GetElements("#letters .icon-"+StringSymbol("left")).map(e=>ParentElement(e,".letter")).map(ShrinkElement);
+			GetElements("#letters .icon-"+StringSymbol("right")).map(e=>ParentElement(e,".letter")).map(ShrinkElement);
+			GetElements(".invisible").map(ShrinkElement);
+			UnWrapElement(".expanding");
+		},endDelay:500},
+		{Starter:function(){
 			Caret(Infinity);
 			DrawCaret();
-			GetElements("#letters .icon").map(e=>ParentElement(e)).map(ShrinkElement);
-			UnWrapElement(".expanding");
 		},endDelay:500},
 		{Starter:function(){
 			Class(".middle #letters","downwards");
