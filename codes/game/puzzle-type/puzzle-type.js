@@ -2731,7 +2731,7 @@ function LevelWinMacro(){
 function GoalMatchedMacro(){
 	return [
 		{Starter:function(){
-			Caret([Infinity]);
+			Caret(Infinity);
 			DrawCaret();
 			GetElements("#letters .icon").map(e=>ParentElement(e)).map(ShrinkElement);
 			UnWrapElement(".expanding");
