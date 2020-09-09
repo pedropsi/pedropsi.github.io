@@ -55,7 +55,7 @@ var NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
 var LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 var AlphanumericCharacters=LetterCharacters.concat(NumberCharacters);
 var LetterSpaceCharacters=LetterCharacters.concat(" ");
-Directions=["left","up","right","down"];
+var Directions=["left","up","right","down"];
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -5482,7 +5482,7 @@ ObtainSymbol=function(name){
 }
 
 IconName=function(iconElement){
-	var names=iconElement.classList.filter(c=>Prefixed(c,"icon-"));
+	var names=Classes(GetElement(".iconpath",iconElement)).filter(c=>Prefixed(c,"icon-"));
 	if(names.length)
 		return UnPrefix(names[0],"icon-");
 }
