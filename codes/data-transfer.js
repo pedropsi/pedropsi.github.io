@@ -5484,7 +5484,7 @@ ComposeSymbol=function(symbolObj,primitive){
 
 ObtainSymbol=function(name){
 	var i=SymbolIcon(StringSymbol(name));
-	if(i===name||i===StringSymbol(name))
+	if(i===name||i===SymbolName(name)||i===StringSymbol(name))
 		return StringSymbol(name);
 	else{
 		i.name=name;//name the icon in a class
