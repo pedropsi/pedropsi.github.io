@@ -963,16 +963,7 @@ var ColourNames=[
 
 function NamedColour(colorstring){
 	var rgb=RGB(Colour(colorstring)).colour;
-	var c=ColourNames.sort(function(a,b){ //Minimise Error
-		A=EuclideanDistance(a,rgb);
-		B=EuclideanDistance(b,rgb);
-		if(A>B)
-			return 1;
-		if(A<B)
-			return -1;
-		else
-			return 0;
-	})
+	var c=Sorter(a=>EuclideanDistance(a,rgb))(ColourNames);
 	return c[0][3];
 }
 

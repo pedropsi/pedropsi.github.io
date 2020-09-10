@@ -50,6 +50,25 @@ UnFunction=function(data){
 		return data;
 }
 
+//Functional Sorting
+
+SingleSorter=function(F){
+	return function(a,b){
+		Fa=F(a);
+		Fb=F(b);
+		return Fa<Fb?-1:(Equal(Fa,Fb)?0:1);
+	}
+}
+
+Sorter=function(...functions){
+	return function(array){
+		var funs=[...functions];
+		funs.map(f=>(array=array.sort(SingleSorter(f))));
+		return array;
+	}
+}
+
+
 //Key characters
 var NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
 var LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -5193,6 +5212,7 @@ DaysSortF=function(date1,date2){
 	var d=Days(date1,date2);
 	return d>0?1:d<0?-1:0;
 };
+
 
 DateDate=function(day,month,year){
 	if(typeof day==="undefined")

@@ -119,7 +119,7 @@ MusicTableHTML=function(tracks,headers){
 
 MusicCreditsHTML=function(id){
 	var tracks=Values(FilterObject(Media,t=>(t.CONTEXT_ID===id&&t.TYPE==="music")));
-	tracks=tracks.sort((a,b)=>a.N>b.N);
+	tracks=Sorter(a=>a.N)(tracks);
 	audiotracks=tracks.map(AudioTrackHMTL).join("\n")
 
 	if(tracks.length<1)

@@ -60,7 +60,7 @@ Keys(NumberPairs).map(function(d){
 	NumberPairsReversed["minus"+NumberPairs[d]]=-Number(d);
 });
 
-NumberNames=Keys(NumberPairsReversed).sort(function(a,b){return Number(NumberPairsReversed[a])>Number(NumberPairsReversed[b])});
+NumberNames=Sorter(a=>Number(NumberPairsReversed[a]))(Keys(NumberPairsReversed));
 
 function NameNumber(n){return NumberPairsReversed[n];}
 
@@ -111,13 +111,10 @@ function Positions(string,pattern){
 function NumberPositions(name){
 	var name=name.toLowerCase();
 	var positions=[];
+	
 	NumberNames.map(function(n){return Positions(name,n).map(function(p){positions.push([n,p]);})});
 	
-	positions=positions.sort(function(a,b){
-		if(a[1]===b[1])
-			return a[0].length>b[0].length;
-		else
-			return a[1]>b[1];});
+	positions=Sorter(x=>First(x).length,Last)(positions);
 	
 	var i=0;
 	while(i+1<positions.length){
@@ -134,7 +131,7 @@ function NumberPositions(name){
 		
 	positions=Complement(positions,positionsduplicate);
 
-	return positions.sort(function(a,b){return Last(a)>Last(b)});
+	return Sorter(Last)(positions);
 }
 
 function NumberDivisions(text){
@@ -186,7 +183,6 @@ function FuseAdjacentNumberPositions(numberpositions,text){
 
 	var groups=[numberpositions[0]];
 	var g=0;
-	var interspace;
 	var interstart;
 	var interend;
 	for(var i=1;i<numberpositions.length;i++){
