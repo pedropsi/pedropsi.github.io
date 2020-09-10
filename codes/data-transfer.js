@@ -525,6 +525,17 @@ DictionaryAccesser=function(Dictionary,Rewriter){
 	}
 }
 
+
+function AddDictionaryArray(Dict,name,array){
+	if(!Dict||!name)
+		return;
+	var name=name.toLowerCase();
+	if(!Dict[name])
+		Dict[name]=[];
+	return Dict[name]=Dict[name].concat(array||[]);
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //Set functions
 

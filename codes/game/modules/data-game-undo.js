@@ -71,4 +71,53 @@ function UnBlockUndo(){
 	Redo.blocked=false;
 }
 
+//Game bar buttons
+
+if(typeof GameBarButtons==="undefined")
+	var GameBarButtons={};
+
+if(typeof GameBarButtonTooltips==="undefined")
+	var GameBarButtonTooltips={};
+
+if(typeof ObtainUndoAllowed==="undefined")
+	var ObtainUndoAllowed=True;
+
+if(typeof ObtainRedoAllowed==="undefined")
+	var ObtainRedoAllowed=True;
+
+if(typeof ObtainRestartAllowed==="undefined")
+	var ObtainRestartAllowed=True;
+
+
+if(ObtainUndoAllowed()){
+	GameBarButtons['undo']={
+		onclick:'UndoAndFocus();',
+		onmousedown:'AutoRepeat(UndoAndFocus,250);',
+		ontouchstart:'AutoRepeat(UndoAndFocus,250);',
+		onmouseup:'AutoStop(UndoAndFocus);',
+		ontouchend:'AutoStop(UndoAndFocus);',
+		ontouchcancel:'AutoStop(UndoAndFocus);'
+	}
+	GameBarButtonTooltips["undo"]="Undo";
+}
+
+if(ObtainRedoAllowed()){
+	GameBarButtons['redo']={
+		onclick:'RedoAndFocus();',
+		onmousedown:'AutoRepeat(RedoAndFocus,250);',
+		ontouchstart:'AutoRepeat(RedoAndFocus,250);',
+		onmouseup:'AutoStop(RedoAndFocus);',
+		ontouchend:'AutoStop(RedoAndFocus);',
+		ontouchcancel:'AutoStop(RedoAndFocus);'
+	};
+	GameBarButtonTooltips["redo"]="Redo";
+}
+
+if(ObtainRestartAllowed()){
+	GameBarButtons['restart']={
+		onclick:'ObtainRestart();GameFocus();'
+	};
+	GameBarButtonTooltips["restart"]="Restart";
+}
+
 Shout("data-game-undo")

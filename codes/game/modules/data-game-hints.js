@@ -239,12 +239,12 @@ function RequestHint(){
 	
 	if(!RequestHint.requested||TitleScreen()){
 		RequestHint.requested=Hints().map(function(hl){return hl.map(function(x){return false;})});
-		var tip=CycleNextBounded(RequestHint["tips-welcome"]);
+		var tip=CycleNextBounded(HintTips["tips-welcome"]);
 		var DFOpts={questionname:tip};
 		var DPFields=[['plain',DFOpts]];
 	}
 	else if(IsScreenMessage(CurrentScreen())){
-		var tip=CycleNext(RequestHint["tips-interlevel"]);
+		var tip=CycleNext(HintTips["tips-interlevel"]);
 		var DFOpts={questionname:"<b>General tip:</b> "+HintDisplay(tip)};
 		var DPFields=[['plain',DFOpts]];
 	}
@@ -333,31 +333,31 @@ function HintsHonour(){
 //External hook
 var ObtainHints=Hints;
 
+if(typeof HintTips==="undefined")
+	var HintTips={};
 
-RequestHint["tips-welcome"]=[
-	"<p>Welcome to the <b>Hint Service</b>.</p><p>Press "+ActionKeyText("hint")+" anytime to reveal a hint!</p>",
-	"You got this! Now go ahead and play!"
-]
+AddDictionaryArray(HintTips,"tips-welcome",[
+		"<p>Welcome to the <b>Hint Service</b>.</p><p>Press "+ActionKeyText("hint")+" anytime to reveal a hint!</p>",
+		"You got this! Now go ahead and play!"
+	]);
 
-if(HasHOF()){
-RequestHint["tips-welcome"].splice(1,0,"Please note that <b>Hall of Fame</b> entries now count how many hints are used!");
-}
+AddDictionaryArray(HintTips,"tips-interlevel",[
+		"Just relax and have fun!",
+		"Remember to pause once in a while!",
+		"If you like this game, share it with your friends!",
+		"Open the level selector by pressing "+ActionKeyText("levelselector")+", then type a <kbd>number</kbd>.",
+		"Go Fullscreen by pressing "+ActionKeyText("fullscreen")+"!",
+		"Play or pause the music by pressing "+ActionKeyText("music")+"!"
+	]
+);
 
-RequestHint["tips-interlevel"]=[
-	"Just relax and have fun!",
-	"Remember to pause once in a while!",
-	"If you like this game, share it with your friends!",
-	"Open the level selector by pressing "+ActionKeyText("levelselector")+", then type a <kbd>number</kbd>.",
-	"Go Fullscreen by pressing "+ActionKeyText("fullscreen")+"!",
-	"Play or pause the music by pressing "+ActionKeyText("music")+"!"
-]
+if(HasHOF())
+	AddDictionaryArray(HintTips,"tips-welcome",[
+		"Please note that <b>Hall of Fame</b> entries now count how many hints are used!"
+	]);
 
-if(HasGameFeedback()){
-RequestHint["tips-interlevel"].splice(1,0,"Email Pedro PSI feedback by pressing "+ActionKeyText("feedback")+", anytime!");
-}
 
 var ObtainRequestHint=RequestHint;
-
 
 HearOnce("GameBar",LoadHints);
 

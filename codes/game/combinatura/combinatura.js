@@ -134,7 +134,7 @@ function StartGame(){
 	LoadGame();
 	ObtainTitleScreenReLoader();
 	GameFocus();
-	StartLevelFromTitle();
+	GoToTitlescreen();
 };
 
 DelayUntil(function(){return (typeof PrepareGame!=="undefined")},StartGame);

@@ -138,13 +138,16 @@ var ObtainRequestHint=ObtainRequestHint?ObtainRequestHint:Identity;
 
 var gameModulesEarly=[
 "codes/game/game.css",
-"codes/game/modules/data-game-extras.js",
+"codes/game/modules/data-game-storage.js",
+"codes/game/modules/data-game-logic.js",
+"codes/game/modules/data-game-bar.js",
 "codes/game/modules/data-game-moves.js",
 "codes/game/modules/data-game-colours.js",
 "codes/game/modules/data-game-undo.js",
 "codes/game/game-intro.js",
 "codes/game/modules/data-game-hints.js",
 "codes/game/modules/data-game-gestures.js",
+"codes/game/modules/data-game-keyboard-onscreen.js",
 // "codes/game/modules/data-game-hud.js"
 ]
 
@@ -192,7 +195,7 @@ function GameIntro(){
 function StartGame(){
 	GameFocus();
 	PrepareGame();
-	LoadGame();
+	ObtainLoadGame();
 	ObtainTitleScreenReLoader();
 	InitialiseGameCanvas();
 };
@@ -317,7 +320,7 @@ function ObtainKeyActionsGame(){
 };
 
 function ObtainKeyActionsGameBar(){
-	var KAGB=KeyActionsGameBar();
+	var KAGB=KeyActionsGameBar||{};
 	KAGB[ObtainMainKey("keyboard")]=RequestKeyboard;
 	KAGB[ObtainMainKey("hint")]=ObtainRequestHint;
 	return KAGB;
@@ -382,7 +385,7 @@ function GameInput(key){
 
 function TitleScreenInput(key){
 	if(key!=="Escape")
-		StartLevelFromTitle();
+		GoToTitlescreen();
 }
 
 function InstructGameInput(key){

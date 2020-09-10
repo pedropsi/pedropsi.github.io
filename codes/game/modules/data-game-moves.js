@@ -1,4 +1,17 @@
 ////////////////////////////////////////////////////////////////////////////////
+// Save and retrieve best solutions
+
+function SaveGameSolutions(solutions){
+	if(savePermission)
+		LocalStorage("solutions",solutions);
+}
+
+function GameSolutions(){
+	return LocalStorage("solutions",undefined,Number);
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
 // Echo
 
 function EchoLevelData(leveldata){
@@ -26,7 +39,7 @@ function EchoLevelWin(curlevel){
 function EchoCheckpoint(){
 	EchoData(Outflows("won"));
 
-	var leveldata=UpdateLevelCheckpointData(curlevel);
+	var leveldata=UpdateLevelCheckpointData(CurrentScreen());
 	EchoLevelData(leveldata);
 	ClearLevelRecord();
 }
@@ -49,7 +62,7 @@ function EchoLevelClose(curlevel){
 	EchoLevelData(leveldata);
 }
 
-ListenOnce("unload",function(){EchoLevelClose(curlevel)});
+ListenOnce("unload",function(){EchoLevelClose(CurrentScreen())});
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -172,7 +185,7 @@ function UpdateHintData(lvl,hintN){
 function UpdateSelectData(lvlch,type){
 	return FuseObjects(LevelData(),{
 		"type":"goto-"+type,
-		"level":(type==="checkpoint")?CheckpointString(curlevel,lvlch):lvlch,
+		"level":(type==="checkpoint")?CheckpointString(CurrentScreen(),lvlch):lvlch,
 		"timing":LevelTime()
 	});
 }
