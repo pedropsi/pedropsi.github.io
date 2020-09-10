@@ -2667,7 +2667,10 @@ function LevelLoadMacro(){
 				AddElement(`<div class='keystrokes faded'></div>`,".top")
 			}
 			UnFadeElement(".top .keystrokes");
-			Listen("click",CopyHandler(ExtractKeystrokes),".keystrokes");
+			
+			Listen("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
+			Listen("mouseup",CopyHandler(LetterExtractor("#letters")),"#letters");
+			Listen("mouseup",CopyHandler(LetterExtractor(".goal")),".goal");
 
 		},endDelay:1000},
 		{Starter:function(){UnFadeElement("#letters");},
@@ -3068,17 +3071,30 @@ function HighlightableWords(title){
 }
 
 function ExtractKeystrokes(el){
-	var parent=FirstMatchingElement("parentElement",el,".keystrokes");
+	var parent=ParentElement(el,".keystrokes");
 	var strokes=GetElements(".keystroke",parent);
 		strokes=strokes.filter(s=>!Classed(s,"keystroke-invalid")&&SelectedNode(s));
-	var text=strokes.map(KeystrokeString).join("");	
+	var text=strokes.map(LetterString).join("");	
 		text=KeystrokeSimplifier(CurLevelTitle())(text);
 		text=text.replace(/\n+/gmi,"");//ensure single line
 		text=text.replace(/\_/gmi," ");//revert underscore -> space
 	return text;
 }
 
-function KeystrokeString(e){
+function LetterExtractor(parentSelector){
+	return function Extractor(el){
+		var parent=ParentElement(el,parentSelector);
+		var letters=GetElements(".letter",parent);
+		var text=letters.map(LetterString).join("");	
+			text=text.replace(/\n+/gmi,"");//ensure single line
+			text=text.replace(/\_/gmi," ");//revert underscore -> space
+		return text;
+	}
+}
+
+
+
+function LetterString(e){
 	if(!GetElement(".iconpath",e))
 		return e.innerText;
 	else
