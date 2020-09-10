@@ -3081,16 +3081,23 @@ function ExtractKeystrokes(el){
 	return text;
 }
 
-function LetterExtractor(parentSelector){
-	return function Extractor(el){
+function LetterExtractor(parentSelector,letterSelector,Acceptor,Simplifier){
+	var letterSelector=letterSelector||".letter";
+	var Acceptor=Acceptor||True;
+	var Simplifier=Simplifier||Identity;
+	return function(el){
 		var parent=ParentElement(el,parentSelector);
-		var letters=GetElements(".letter",parent);
-		var text=letters.map(LetterString).join("");	
+		var strokes=GetElements(letterSelector,parent);
+			strokes=strokes.filter(s=>Acceptor(s)&&SelectedNode(s));
+		var text=strokes.map(LetterString).join("");	
+			text=Simplifier(text);
 			text=text.replace(/\n+/gmi,"");//ensure single line
 			text=text.replace(/\_/gmi," ");//revert underscore -> space
 		return text;
 	}
 }
+
+var ExtractKeystrokes=LetterExtractor(".keystrokes",".keystroke",s=>!Classed(s,"keystroke-invalid"),KeystrokeSimplifier(CurLevelTitle()));
 
 
 
