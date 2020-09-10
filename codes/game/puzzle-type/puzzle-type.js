@@ -557,7 +557,7 @@ var LevelDifficulty={
 	"Deaf":3,
 	"⠍⠕⠗⠎⠑":3,
 	"Dividi":5,
-	"Magnetism":1,
+	"Magnetism":2,
 	//"Fuchsia":1,
 	"Odd":3,
 	"Latent clones":3,
