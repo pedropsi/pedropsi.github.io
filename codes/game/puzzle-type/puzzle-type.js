@@ -838,7 +838,7 @@ var LevelInstructions={
 		AddStrokeValid(L);
 	},
 	"Precedent":function (L){
-		function ConditionF(K){return K===NumberLetter(Max(LetterNumber(L)-1,0));};
+		function ConditionF(K){return LetterNumber(K)===LetterNumber(L)-1;};
 		function ChangeF(K){return L;};
 		var m=ModifyLetters(ChangeF,ConditionF);
 		if(!m){
