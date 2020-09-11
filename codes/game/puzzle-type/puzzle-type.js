@@ -2550,6 +2550,7 @@ function InitialiseGameCanvas(){
 
 	OpenElement(GameMiddleHTML(),"gameCanvas");
 	LaunchTouchActions(".middle",TouchActionsMiddle());
+	Listen("mouseup",CopyHandler(LetterExtractor("#letters")),"#letters");
 	
 	//AddElement(WinPaneHTML(),"gameCanvas")
 }
@@ -2650,8 +2651,10 @@ function LevelLoadMacro(){
 		{Starter:function(){
 			var goalE=GetElement(".top .goal");
 			var goal=GoalHTML(CurLevelTitle())
-			if(!goalE)
+			if(!goalE){
 				AddElement(`<div class='goal goaly faded'>${goal}</div>`,".top")
+				Listen("mouseup",CopyHandler(LetterExtractor(".goal")),".goal");
+			}
 			else{
 				Class(".goal",".goaly");
 				goalE.innerHTML=goal;
@@ -2664,13 +2667,11 @@ function LevelLoadMacro(){
 				UnClass(".goal","uncase");
 
 			if(!GetElement(".top .keystrokes")){
-				AddElement(`<div class='keystrokes faded'></div>`,".top")
+				AddElement(`<div class='keystrokes faded'></div>`,".top");
+				Listen("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
 			}
 			UnFadeElement(".top .keystrokes");
 			
-			Listen("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
-			Listen("mouseup",CopyHandler(LetterExtractor("#letters")),"#letters");
-			Listen("mouseup",CopyHandler(LetterExtractor(".goal")),".goal");
 
 		},endDelay:1000},
 		{Starter:function(){UnFadeElement("#letters");},
