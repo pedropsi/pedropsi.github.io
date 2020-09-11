@@ -213,28 +213,6 @@ TouchActionsTop=function(){
 	}
 }
 
-LaunchTouchActions=function(touchSel,actions){
-
-	Listen('touchmove',function(e){  
-		e.preventDefault();
-		HandleTouchMover(touchSel)(e);
-	},touchSel);
-
-	Listen('touchend' ,function(e){
-		e.preventDefault();
-		HandleTouchEnder(touchSel)(e);
-	},touchSel);
-
-	Listen('touchstart',function(e){
-		e.preventDefault();
-		HandleTouchStart(e);
-	},touchSel);
-
-	Keys(actions).map(
-		key=>Listen(key,actions[key],touchSel)
-	)
-}
-
 
 function GameTrailer(){
 	var trailerHTML=`<video width="1280" height="1024" autoplay>

@@ -89,6 +89,30 @@ PolarSwipe=function(F){
 	F(swipeRadius,swipeAngle);
 }
 
+//Lauch Touch Actions
+
+LaunchTouchActions=function(touchSel,actions){
+
+	Listen('touchmove',function(e){  
+		e.preventDefault();
+		HandleTouchMover(touchSel)(e);
+	},touchSel);
+
+	Listen('touchend',function(e){
+		e.preventDefault();
+		HandleTouchEnder(touchSel)(e);
+	},touchSel);
+
+	Listen('touchstart',function(e){
+		e.preventDefault();
+		HandleTouchStart(e);
+	},touchSel);
+
+	Keys(actions).map(
+		key=>Listen(key,actions[key],touchSel)
+	)
+}
+
 
 Shout("data-game-gestures")
 
