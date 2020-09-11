@@ -605,6 +605,14 @@ var MathematicalLevels=[
 	"Difference"
 ]
 
+var StructuralLevels=[
+	"Superior",
+	"Difference",
+	"La rapide surprise",
+	"Just cut and paste",
+	"Order is all"
+]
+
 function ObtainLevelNotes(lvl){
 	var title=ObtainLevelTitle(lvl);
 	var extras="";
@@ -618,6 +626,8 @@ function ObtainLevelNotes(lvl){
 		extras+=" "+ObtainSymbol("magnifying-glass");
 	if(In(MathematicalLevels,title))
 		extras+=" "+ObtainSymbol("math");
+	if(In(StructuralLevels,title))
+		extras+=" "+ObtainSymbol("structure");
 
 	return 	LevelDifficultyStars(title)+extras;
 }
