@@ -5,9 +5,6 @@ if(typeof ObtainGameSelector==="undefined")
 var ConsoleExternal=function(){return PageIdentifier()==="game-console"};
 
 
-//Keybinding defaults
-if(typeof ObtainKeyActionsGameBar==="undefined")
-	var ObtainKeyActionsGameBar=KeyActionsGameBar;
 
 if(typeof ObtainGameAction==="undefined")
 	var ObtainGameAction=function(key){
@@ -140,6 +137,8 @@ function WrapGame(){
 if(typeof ObtainLoadPortable==="undefined")
 	var ObtainLoadPortable=Identity;
 
+if(typeof ResizeCanvas==="undefined")
+	var ResizeCanvas=Identity;
 
 function PrepareGame(){
 	var bar=GetElement("GameBar");
@@ -347,6 +346,10 @@ KeyActionsGameBar[ObtainMainKey("fullscreen")]=RequestGameFullscreen;
 KeyActionsGameBar[ObtainMainKey("hint")]=ObtainRequestHint;
 KeyActionsGameBar[ObtainMainKey("levelselector")]=ObtainLevelSelectorAllowed?RequestLevelSelector:Identity;
 KeyActionsGameBar[ObtainMainKey("music")]=ToggleCurrentSong;
+
+//Keybinding defaults
+if(typeof ObtainKeyActionsGameBar==="undefined")
+	var ObtainKeyActionsGameBar=function(){return KeyActionsGameBar};
 
 
 //Keybind to game element

@@ -20,13 +20,14 @@ var CoreModules=[
 		"parser"+JLRequire(),
 		"compiler"+JLRequire(),
 		"inputoutput",
-		"mobile"
+		//"mobile"
 	];
 
 var ExtraModules=[
 		"data-game-colours",
 		"data-game-storage",
 		"data-game-logic",
+		"data-game-gestures",
 		"data-game-bar",
 		"data-game-overwrite-puzzlescript",
 		"data-game-moves",

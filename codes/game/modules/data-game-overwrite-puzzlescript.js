@@ -1,4 +1,3 @@
-
 canYoutube=false;
 
 
@@ -256,7 +255,7 @@ function RequestMore(){
 		requireConnection:false,
 		shortcutExtras:ObtainKeyActionsGameBar(),
 		buttonSelector:"MoreButton",
-		spotlight:gameSelector
+		spotlight:ObtainGameSelector()
 	});
 }
 
@@ -356,15 +355,21 @@ function AdjustFlickscreen(){
 	}
 }
 
+TouchActionsPuzzlescript=function(){
+	return{
+	"swipe-tap":ObtainAction,
+	"swipe-left":InstructGameKeyF(37),
+	"swipe-up":InstructGameKeyF(38),
+	"swipe-right":InstructGameKeyF(39),
+	"swipe-down":InstructGameKeyF(40)
+	}
+}
 
-window.Mobile.GestureHandler.prototype.toggleMenu=RequestLevelSelector;
-if(typeof MobileInitialise!=="undefined")
-	MobileInitialise(window.Mobile.GestureHandler.prototype);
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
 //Puzzlescript connection modules
-
 
 
 function LegacyConversion(name,data,vers){

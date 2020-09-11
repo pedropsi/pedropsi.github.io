@@ -130,7 +130,7 @@ gameModulesExtra.map(LoaderInFolder("codes/game/combinatura"));
 function StartGame(){
 	PrepareGame();
 	ResumeCapturingKeys(CaptureComboKey);
-	Class(gameSelector,"Gallery");
+	Class(ObtainGameSelector(),"Gallery");
 	ObtainLoadGame();
 	ObtainTitleScreenReLoader();
 	GameFocus();
@@ -194,7 +194,7 @@ function RevealCard(n){
 }
 function DisplayCard(n){
 	if(!GetElement("combina"-CardNumber(Card(n))))
-		AddElement(CardHTML(Card(n)),gameSelector);
+		AddElement(CardHTML(Card(n)),ObtainGameSelector());
 }
 
 function RevealDisplayCard(n){
@@ -243,13 +243,13 @@ function LanguageToggle(lang){
 
 function ZenModeOff(){
 	zen=false;
-	UnClass(gameSelector,"zen");
+	UnClass(ObtainGameSelector(),"zen");
 }
 
 function ZenModeOn(){
 	Message("zen");
 	zen=true;
-	Class(gameSelector,"zen");
+	Class(ObtainGameSelector(),"zen");
 }
 
 function CardTranslate(card){
@@ -364,7 +364,7 @@ function CardHTML(card){
 }
 
 function BoardClear(){
-	RemoveChildren(gameSelector);
+	RemoveChildren(ObtainGameSelector());
 }
 
 function UpdateLevelSecretly(){ 
@@ -375,6 +375,7 @@ function UpdateLevelSecretly(){
 }
 
 function ResizeCanvas(){
+	var gameSelector=ObtainGameSelector();
 	UnClass(gameSelector,"size-medium");
 	UnClass(gameSelector,"size-mini");
 	var s=0;
