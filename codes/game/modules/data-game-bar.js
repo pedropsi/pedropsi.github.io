@@ -312,7 +312,7 @@ if(typeof ObtainInitialMessages==="undefined")
 
 if(typeof ObtainXYRotateCondition==="undefined")
 	var ObtainXYRotateCondition=function(x,y){return x<y*1.05};
-//	function ObtainXYRotateCondition(x,y){return false};
+
 
 // Screen rotation
 function GameRotation(){
