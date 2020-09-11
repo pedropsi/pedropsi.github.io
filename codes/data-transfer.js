@@ -3791,10 +3791,6 @@ SubmitValidAnswer=function(DP){
 	if(outflowData)
 		SubmitData(outflowData);
 
-	/*Legacy method, todo delete
-	var destinationObject=GetDestination(destination);
-	var dataObject=(destinationObject.Data)(DP.qid);
-	SubmitData(dataObject,destinationObject);*/
 }
 
 InvalidateAnswer=function(DF){
@@ -3908,7 +3904,6 @@ GetDefaultNodeData=function(field,id){
 };
 
 SetData=function(field,value,id){
-	//console.log(field,value,id);
 	var DP=GetDataPack(id);
 	if(DP!==undefined){
 		GetDataPack(id)[field]=value;
