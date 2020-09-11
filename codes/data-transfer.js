@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // (C) Pedro PSI 2017-2020
 
-const { waitForDebugger } = require('inspector');
 
 // functions are always defined as "function_name=function(args){body}" to:
 //		1) allow anonymous export as node modules, yet working normally in browser
@@ -6152,6 +6151,30 @@ TriggerImageLoad=function(id,src){
 	var img=GetElement(id);
 	img.setAttribute("src",src);
 }
+
+///////////////////////////////////////////////////////////////////////////////
+//Mutation Observer
+
+Observe=function(e,Look,Opts){
+	var e=GetElement(e);
+	if(!e)
+		return;
+	
+	var Look=Look||console.log;
+
+	var Opts=Opts||{};
+		Opts={attributes: true, childList: true, subtree: true, ...Opts};
+
+	var Observant = new MutationObserver(Look);
+	Observant.observe(e, Opts);
+	
+	return Observant;
+}
+
+UnObserve=function(Observant){
+	return Observant.disconnect();
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Clipboard
