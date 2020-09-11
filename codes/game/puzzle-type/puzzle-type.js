@@ -2607,10 +2607,10 @@ function LevelLoadMacro(){
 		}
 	},//if in title screen;}
 		{Starter:function(){
-			FadeElement(".top .keystrokes");
-			FadeElement(".top .notes");
-			FadeElement(".top .goal");
-		},endDelay:1000},
+			FadeElement(".top .keystrokes",200);
+			FadeElement(".top .notes",200);
+			FadeElement(".top .goal",200);
+		},endDelay:200},
 		{Starter:function(){
 			ClearLevel();
 			CleanLevel();
@@ -2624,7 +2624,7 @@ function LevelLoadMacro(){
 				GetElement(".level-number").innerHTML=LevelNumberNotes(CurLevelNumber());
 				GetElement(".level-notes").innerHTML=ObtainLevelNotes(CurLevelNumber());
 			}
-			UnFadeElement(".top .notes");
+			UnFadeElement(".top .notes",500);
 		},endDelay:500},
 		{Starter:function(){
 			var goalE=GetElement(".top .goal");
@@ -2637,7 +2637,7 @@ function LevelLoadMacro(){
 				Class(".goal",".goaly");
 				goalE.innerHTML=goal;
 			}
-			UnFadeElement(".top .goal");
+			UnFadeElement(".top .goal",500);
 
 			if(goal==="Deaf")
 				Class(".goal","uncase");
@@ -2648,11 +2648,11 @@ function LevelLoadMacro(){
 				AddElement(`<div class='keystrokes faded'></div>`,".top");
 				Listen("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
 			}
-			UnFadeElement(".top .keystrokes");
+			UnFadeElement(".top .keystrokes",500);
 			
 
-		},endDelay:1000},
-		{Starter:function(){UnFadeElement("#letters");},
+		},endDelay:500},
+		{Starter:function(){UnFadeElement("#letters",500);},
 		 Ender:UnBlockInput,
 		 endDelay:500
 		}
