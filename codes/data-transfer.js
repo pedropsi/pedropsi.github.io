@@ -6224,6 +6224,13 @@ UponElementOnce=function(...args){
 	return UponMutator(ObserveOnce)(...args)
 }
 
+//Execute whenever the element is ready
+HearElement=function(elementSelector,Action){
+	if(GetElement(elementSelector))
+		Action();
+	else
+		UponElementOnce(elementSelector,Action);
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
