@@ -33,6 +33,7 @@ var ExtraModules=[
 		"data-game-moves",
 		"data-game-feedback",
 		"data-game-hints",
+		"data-game-bar",
 		"data-game-stats",
 		"data-game-macros"
 	];
