@@ -645,17 +645,7 @@ RequestGameFeedback=function(){
 		RequestDataPack([['answer',DFsettingsObj],DFSnapshot],DPsettingsObj);
 	}
 
-}
 
-CloseFeedback=function(){
-	if(CurrentDatapack().buttonSelector==="FeedbackButton")
-		CloseCurrentDatapack();
-	GameFocus();
-}
-
-PrintGameState=function(){
-	return GetElement("gameCanvas").toDataURL();
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Guestbook & Comments

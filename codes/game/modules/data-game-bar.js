@@ -1,9 +1,6 @@
 if(typeof ObtainGameSelector==="undefined")
 	var ObtainGameSelector=function(){return '#gameCanvas'};
 
-//Game Console
-var ConsoleExternal=function(){return PageIdentifier()==="game-console"};
-
 
 
 if(typeof ObtainGameAction==="undefined")

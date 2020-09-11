@@ -40,10 +40,11 @@ function LoadHintsFile(){
 		return LoadData(ObtainHintsPath()+PageIdentifier()+".txt",LoadHintTxtData);
 }
 
-function LoadHints(){
-	if(!ConsoleExternal()&&!Hints.cached)
-		return LoadHintsFile();
-}
+if(typeof LoadHints==="undefined")
+	LoadHints=function(){
+		if(!Hints.cached)
+			return LoadHintsFile();
+	}
 
 
 ////////////////////////////////////////////////////////////////////////////////
