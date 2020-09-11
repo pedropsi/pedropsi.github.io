@@ -270,7 +270,7 @@ function consoleError(str){
 
 
 //doSetupTitleScreenLevelContinue - Level selector - start saving a stack of checkpoints
-function doSetupTitleScreenLevelContinue(){	LoadGame();};
+function doSetupTitleScreenLevelContinue(){	ObtainLoadGame();};
 
 doSetupTitleScreenLevelContinue()
 

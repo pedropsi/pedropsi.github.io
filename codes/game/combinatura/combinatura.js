@@ -131,7 +131,7 @@ function StartGame(){
 	PrepareGame();
 	ResumeCapturingKeys(CaptureComboKey);
 	Class(gameSelector,"Gallery");
-	LoadGame();
+	ObtainLoadGame();
 	ObtainTitleScreenReLoader();
 	GameFocus();
 	GoToTitlescreen();
