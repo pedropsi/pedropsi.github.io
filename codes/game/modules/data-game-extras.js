@@ -1509,34 +1509,34 @@ if(typeof ObtainKeyActionsGame==="undefined")
 	var ObtainKeyActionsGame=function(){
 		return {
 			//Arrows
-			"left"		:InstructGameKeyF(37),
-			"up"		:InstructGameKeyF(38),
-			"right"		:InstructGameKeyF(39),
-			"down"		:InstructGameKeyF(40),
-			"W"			:InstructGameKeyF(37),
-			"A"			:InstructGameKeyF(38),
-			"S"			:InstructGameKeyF(39),
-			"D"			:InstructGameKeyF(40),
+			"left"		:GameKeyHandler(37),
+			"up"		:GameKeyHandler(38),
+			"right"		:GameKeyHandler(39),
+			"down"		:GameKeyHandler(40),
+			"W"			:GameKeyHandler(37),
+			"A"			:GameKeyHandler(38),
+			"S"			:GameKeyHandler(39),
+			"D"			:GameKeyHandler(40),
 			//Action / Select
-			"enter"		:ObtainAction,	//InstructGameKeyF(88),
-			"C"			:ObtainAction,	//InstructGameKeyF(88),
-			"X"			:ObtainAction,	//InstructGameKeyF(88),
-			"spacebar"	:ObtainAction,	//InstructGameKeyF(88),
+			"enter"		:ObtainAction,	//GameKeyHandler(88),
+			"C"			:ObtainAction,	//GameKeyHandler(88),
+			"X"			:ObtainAction,	//GameKeyHandler(88),
+			"spacebar"	:ObtainAction,	//GameKeyHandler(88),
 			// Undo	 
-			"Z"			:ObtainUndo,	//InstructGameKeyF(85),
-			"U"			:ObtainUndo,	//InstructGameKeyF(85),
-			"Y"			:ObtainRedo,	//InstructGameKeyF(85),
-			/*"backspace"	:InstructGameKeyF(85),*/
+			"Z"			:ObtainUndo,	//GameKeyHandler(85),
+			"U"			:ObtainUndo,	//GameKeyHandler(85),
+			"Y"			:ObtainRedo,	//GameKeyHandler(85),
+			/*"backspace"	:GameKeyHandler(85),*/
 			// Restart
-			"R"			:ObtainRestart,	//InstructGameKeyF(82),
+			"R"			:ObtainRestart,	//GameKeyHandler(82),
 			// Quit
-			"escape"	:InstructGameKeyF(27),
-			"Q"			:InstructGameKeyF(27)
+			"escape"	:GameKeyHandler(27),
+			"Q"			:GameKeyHandler(27)
 		};
 	}
 	
-if(typeof InstructGameKeyF==="undefined")
-	var InstructGameKeyF=function(newkey){
+if(typeof GameKeyHandler==="undefined")
+	var GameKeyHandler=function(newkey){
 		return function(ev){ev.keyCode=newkey;InstructGame(ev)}
 	}
 	
