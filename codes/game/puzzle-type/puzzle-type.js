@@ -597,6 +597,13 @@ var LanguageLevels=[
 	"La rapide surprise",
 ]
 
+var MathematicalLevels=[
+	"Rise",
+	"Falls",
+	"Precedent",
+	"Superior",
+	"Difference"
+]
 
 function ObtainLevelNotes(lvl){
 	var title=ObtainLevelTitle(lvl);
@@ -609,6 +616,8 @@ function ObtainLevelNotes(lvl){
 		extras+=" "+ObtainSymbol("book");
 	if(In(ExternalLevels,title))
 		extras+=" "+ObtainSymbol("magnifying-glass");
+	if(In(MathematicalLevels,title))
+		extras+=" "+ObtainSymbol("math");
 
 	return 	LevelDifficultyStars(title)+extras;
 }
