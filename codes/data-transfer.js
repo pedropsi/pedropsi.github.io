@@ -6204,6 +6204,26 @@ ObserveOnce=function(selector,Look,Opts){
 	return Observe(selector,See,Opts,name)
 }
 
+UponMutator=function(ObserveF){
+	return function(elementSelector,Action,parentSelector){
+		function Upon(mutation){
+			var nodes=Array.from(mutation[0].addedNodes)||[];
+			if(nodes.some(Matcher(elementSelector)))
+				return Action();
+		}
+		var parentSelector=parentSelector||"body"
+		ObserveF(parentSelector,Upon,{attributes:false})
+	}
+}
+
+UponElement=function(...args){
+	return UponMutator(Observe)(...args)
+}
+
+UponElementOnce=function(...args){
+	return UponMutator(ObserveOnce)(...args)
+}
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
