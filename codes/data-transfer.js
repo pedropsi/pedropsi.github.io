@@ -1962,13 +1962,16 @@ QueryAll=function(selector){
 	return Array.from(document.querySelectorAll(QuerySelector(selector)));
 }
 
-Match=function(elem,selector){
-	return In(QueryAll(selector),elem);
+Match=function(node,selector){
+	return node.matches(QuerySelector(selector));
 }
 
-MatchAnyElement=function(elemArray,selector){
-	return elemArray.some(function(e){return Match(e,selector)});
+Matcher=function(selector){
+	return function NodeMatch(node){
+		return Match(node,selector)
+	}
 }
+
 
 //Find first Element matching selector
 FindFirstMatch=function(selectorArray,elem){
@@ -2056,10 +2059,10 @@ Children=function(targetIDsel,childIDselString){
 		return FirstChildren(targetIDsel);
 
 	var es=[GetElement(targetIDsel)];
-	var match=MatchAnyElement(es,childIDselString);
+	var match=es.some(Matcher(childIDselString));
 	while(es.length>0&&FirstChildren(es).length>0&&!match){
 		es=FirstChildren(es);
-		match=MatchAnyElement(es,childIDselString);
+		match=es.some(Matcher(childIDselString));
 	}
 	return match?es:undefined;
 }
