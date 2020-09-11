@@ -535,6 +535,8 @@ function SelectUnlockedLevel(lvl){
 	EchoSelect(lvl,"level");
 };
 
+if(typeof ResizeCanvas==="undefined")
+	var ResizeCanvas=Identity;
 
 function GoToScreen(lvl){
 	CurrentScreen(lvl);

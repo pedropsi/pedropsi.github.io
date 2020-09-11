@@ -52,8 +52,7 @@ if(typeof ObtainInitialMessages==="undefined")
 //	var ObtainInitialMessages=false;
 
 
-if(typeof ResizeCanvas==="undefined")
-	var ResizeCanvas=function(){canvasResize();}
+function ResizeCanvas(){canvasResize();}
 
 if(typeof titleScreen==="undefined")
 	var titleScreen=true;
@@ -137,12 +136,6 @@ if(typeof ObtainReadMove==="undefined")
 			default: return move;break;
 		}
 	};
-
-	var ObtainInterlevelMessage=False;
-if(!Portable())
-	ObtainInterlevelMessage=True;
-if(ConsoleExternal())
-	ObtainInterlevelMessage=False;
 
 if(typeof ObtainPlayEndLevelSound==="undefined")
 	var ObtainPlayEndLevelSound=function(){tryPlayEndLevelSound()};

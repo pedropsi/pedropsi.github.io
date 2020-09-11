@@ -19,8 +19,6 @@ if(typeof ObtainGameAction==="undefined")
 if(typeof ObtainKeyboardAllowed==="undefined")
 	var ObtainKeyboardAllowed=false;
 
-if(typeof ObtainKeyboardKeys==="undefined")
-	var ObtainKeyboardKeys=GameKeyboardKeys;
 
 if(typeof ObtainKeyboardLauncher==="undefined")
 	var ObtainKeyboardLauncher=function(){

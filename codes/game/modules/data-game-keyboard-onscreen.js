@@ -1,3 +1,9 @@
+function GameKeyboardKeys(){
+	return [["undo","redo","restart"]]; // Undo and Restart
+}
+if(typeof ObtainKeyboardKeys==="undefined")
+	var ObtainKeyboardKeys=GameKeyboardKeys;
+
 //Onscreen keyboard
 
 function RequestKeyboard(){
@@ -51,9 +57,7 @@ function GameFocusAndRestartUndoButtons(){
 	setTimeout(RestoreButtons,100); //Needed
 }
 
-function GameKeyboardKeys(){
-	return [["undo","redo","restart"]]; // Undo and Restart
-}
+
 
 function CloseKeyboard(){
 	if(CurrentDatapack().buttonSelector==="KeyboardButton")

@@ -25,7 +25,9 @@ var CoreModules=[
 
 var ExtraModules=[
 		"data-game-colours",
-		"data-game-extras",
+		"data-game-storage",
+		"data-game-logic",
+		"data-game-bar",
 		"data-game-overwrite-puzzlescript",
 		"data-game-moves",
 		"data-game-feedback",
