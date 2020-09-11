@@ -31,7 +31,7 @@ var ExtraModules=[
 		"data-game-bar",
 		"data-game-overwrite-puzzlescript",
 		"data-game-moves",
-		"data-game-feedback",
+		"data-game-hof-feedback",
 		"data-game-hints",
 		"data-game-bar",
 		"data-game-stats",
