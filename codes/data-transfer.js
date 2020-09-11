@@ -1,6 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 // (C) Pedro PSI 2017-2020
 
+const { waitForDebugger } = require('inspector');
+
 // functions are always defined as "function_name=function(args){body}" to:
 //		1) allow anonymous export as node modules, yet working normally in browser
 //			---regular expression to convert forth: 	
