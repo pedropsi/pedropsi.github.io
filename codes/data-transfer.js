@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // (C) Pedro PSI 2017-2020
 
-
 // functions are always defined as "function_name=function(args){body}" to:
 //		1) allow anonymous export as node modules, yet working normally in browser
 //			---regular expression to convert forth: 	
@@ -6155,25 +6154,54 @@ TriggerImageLoad=function(id,src){
 ///////////////////////////////////////////////////////////////////////////////
 //Mutation Observer
 
-Observe=function(e,Look,Opts){
-	var e=GetElement(e);
-	if(!e)
+Observe=function(selector,Look,Opts){
+	var e=GetElement(selector)
+	if(!selector||!e)
 		return;
 	
 	var Look=Look||console.log;
 
+	var name=selector+FunctionName(Look);
+
 	var Opts=Opts||{};
 		Opts={attributes: true, childList: true, subtree: true, ...Opts};
 
+
 	var Observant = new MutationObserver(Look);
-	Observant.observe(e, Opts);
+	Observant.observe(e,Opts);
 	
+	if(!Observe.encyclo) //registration
+		Observe.encyclo={};
+	Observe.encyclo[name]=Observant;
+
 	return Observant;
 }
 
-UnObserve=function(Observant){
-	return Observant.disconnect();
+UnObserve=function(selector,Look){
+	var e=GetElement(selector)
+	if(!selector||!e)
+		return;
+
+	var Look=Look||console.log;
+	var name=selector+FunctionName(Look);
+	
+	if(!Observe.encyclo)
+		return;
+	var Observant=Observe.encyclo[name];
+	
+	if(Observant)
+		return Observant.disconnect();
 }
+
+ObserveOnce=function(selector,Look,Opts){
+	var Look=Look||console.log;
+	function See(...args){
+		UnObserve(selector,See);
+		Look(...args);
+	}
+	return Observe(selector,See,Opts)
+}
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
