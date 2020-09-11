@@ -365,6 +365,7 @@ TouchActionsPuzzlescript=function(){
 	}
 }
 
+LaunchTouchActions(ObtainGameSelector(),TouchActionsPuzzlescript())
 
 
 
