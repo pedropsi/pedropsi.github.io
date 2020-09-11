@@ -2533,15 +2533,6 @@ function InitialiseGameCanvas(){
 	//AddElement(WinPaneHTML(),"gameCanvas")
 }
 
-function DrawTitleScreenOptions(){
-	if(ObtainNewGameCondition())
-		Letters("START");
-	else
-		Letters("CONTINUE");
-
-	Caret(Range(0,Letters().length-1));
-	DrawLevel();
-}
 
 function ObtainTitleScreenReLoader(){
 	PlaySound(MediaPath()+"/sound/startgame.mp3");
@@ -2549,39 +2540,11 @@ function ObtainTitleScreenReLoader(){
 	TitleScreen(true);
 };
 
-CleanTitleScreen=function(){
+function CleanTitleScreen(){
 	TitleScreen(true);
 	Class(".top","titlescreen");UnClass(".top","levelscreen");
 	ClearLetters();
 }
-
-function TitleScreenLoaderMacro(){
-	return [
-		{Starter:BlockInput},
-		{Starter:function(){ //If in level
-			CloseElement(".top .keystrokes");
-			CloseElement(".top .notes");
-			CloseElement(".top .goal");
-			FadeElement("#letters");
-		},endDelay:1000},
-		{Starter:function(){
-			CleanTitleScreen();
-			ColoriseGameBar();
-		}},
-		{Starter:function(){
-			if(!GetElement(".top .game-title"))
-				AddElement(`<div class='game-title faded'>${gameTitle}</div>`,".top")
-			UnFadeElement(".top .game-title");
-		},endDelay:500},
-		{Starter:function(){
-			DrawTitleScreenOptions();
-			UnFadeElement("#letters");
-		}},
-		{Ender:UnBlockInput,
-			endDelay:500
-	   }
-	]
-};
 
 
 
@@ -2592,73 +2555,11 @@ function LevelLoader(){
 	Kinemate(LevelLoadMacro())
 }
 
-CleanLevel=function(){
+function CleanLevel(){
 	TitleScreen(false);
 	UnClass(".top","titlescreen");Class(".top","levelscreen");
 	ClearLetters();
 }
-
-function LevelLoadMacro(){
-	return [
-		{Starter:BlockInput},
-		{Starter:function(){
-			CloseElement(".game-title");
-			FadeElement("#letters");
-		}
-	},//if in title screen;}
-		{Starter:function(){
-			FadeElement(".top .keystrokes",200);
-			FadeElement(".top .notes",200);
-			FadeElement(".top .goal",200);
-		},endDelay:200},
-		{Starter:function(){
-			ClearLevel();
-			CleanLevel();
-			ColoriseGameBar();//Change colour each level
-		}},
-		{Starter:function(){
-			var notes=GetElement(".top .notes");
-			if(!notes)
-				AddElement(`<div class='notes faded'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="level-notes">${ObtainLevelNotes(CurLevelNumber())}</p></div>`,".top")
-			else{
-				GetElement(".level-number").innerHTML=LevelNumberNotes(CurLevelNumber());
-				GetElement(".level-notes").innerHTML=ObtainLevelNotes(CurLevelNumber());
-			}
-			UnFadeElement(".top .notes",500);
-		},endDelay:500},
-		{Starter:function(){
-			var goalE=GetElement(".top .goal");
-			var goal=GoalHTML(CurLevelTitle())
-			if(!goalE){
-				AddElement(`<div class='goal goaly faded'>${goal}</div>`,".top")
-				Listen("mouseup",CopyHandler(LetterExtractor(".goal")),".goal");
-			}
-			else{
-				Class(".goal",".goaly");
-				goalE.innerHTML=goal;
-			}
-			UnFadeElement(".top .goal",500);
-
-			if(goal==="Deaf")
-				Class(".goal","uncase");
-			else
-				UnClass(".goal","uncase");
-
-			if(!GetElement(".top .keystrokes")){
-				AddElement(`<div class='keystrokes faded'></div>`,".top");
-				Listen("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
-			}
-			UnFadeElement(".top .keystrokes",500);
-			
-
-		},endDelay:500},
-		{Starter:function(){UnFadeElement("#letters",500);},
-		 Ender:UnBlockInput,
-		 endDelay:500
-		}
-	]
-};
-
 
 
 function ObtainUpdateLevel(state){
@@ -2671,7 +2572,6 @@ function ObtainUpdateLevel(state){
 			memo:Memo()
 			// colour:CaretColour()
 		}
-
 	
 	LevelState(state);
 	AddUndo(state);
@@ -2697,13 +2597,163 @@ function CheckWin(){
 	}
 }
 
+function ObtainPlayEndGameSound(){
+	PlaySound(MediaPath()+"/sound/wingame.mp3");
+}
+
+//Undo / Restart related
+function ObtainSetLevelState(state){
+	LevelState(state);
+	EffectRenderer();
+	DrawLevel();
+}
+
+function ClearLevel(){
+	EmptyUndo();
+	LevelState(ObtainStartingLevelState());
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Timed Transitions
+
+function TransitionTitleScreenOptions(duration){
+	var duration=duration||200;
+	if(ObtainNewGameCondition())
+		Letters("START");
+	else
+		Letters("CONTINUE");
+
+	Caret(Range(0,Letters().length-1));
+	DrawLevel();
+
+	TransitionLettersIn(duration);
+}
+
+function TransitionLettersIn(duration){
+	var duration=duration||200;
+	UnFadeElement("#letters",duration);
+}
+
+function TransitionLevelTopOut(duration){
+	var duration=duration||200;
+	CloseElement(".top .keystrokes",undefined,duration);
+	CloseElement(".top .notes",undefined,duration);
+	CloseElement(".top .goal",undefined,duration);
+	FadeElement("#letters",duration);
+}
+
+function TransitionLevelOut(duration){
+	var duration=duration||200;
+	TransitionLevelTopOut(duration);
+	FadeElement("#letters",duration);
+}
+
+function TransitionNotesIn(duration){
+	var duration=duration||200;
+	var notes=GetElement(".top .notes");
+	if(!notes)
+		AddElement(`<div class='notes faded'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="level-notes">${ObtainLevelNotes(CurLevelNumber())}</p></div>`,".top")
+	else{
+		GetElement(".level-number").innerHTML=LevelNumberNotes(CurLevelNumber());
+		GetElement(".level-notes").innerHTML=ObtainLevelNotes(CurLevelNumber());
+	}
+	UnFadeElement(".top .notes",duration);
+}
+
+function TransitionGoalIn(duration){
+	var duration=duration||200;
+	var goalE=GetElement(".top .goal");
+	var goal=GoalHTML(CurLevelTitle());
+	if(!goalE){
+		AddElement(`<div class='goal goaly faded'>${goal}</div>`,".top")
+		Listen("mouseup",CopyHandler(LetterExtractor(".goal")),".goal");
+	}
+	else{
+		Class(".goal",".goaly");
+		goalE.innerHTML=goal;
+	}
+	UnFadeElement(".top .goal",duration);
+
+	if(goal==="Deaf")
+		Class(".goal","uncase");
+	else
+		UnClass(".goal","uncase");
+
+}
+
+function TransitionKeystrokesIn(duration){
+	var duration=duration||200;
+	if(!GetElement(".top .keystrokes")){
+		AddElement(`<div class='keystrokes faded'></div>`,".top");
+		Listen("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
+	}
+	UnFadeElement(".top .keystrokes",duration);
+}
+
+function TransitionTitlescreenTitleIn(duration){
+	var duration=duration||200;
+	if(!GetElement(".top .game-title"))
+		AddElement(`<div class='game-title faded'>${gameTitle}</div>`,".top")
+	UnFadeElement(".top .game-title",duration);
+}
+
+function TransitionTitlescreenOut(duration){
+	var duration=duration||200;
+	CloseElement(".game-title",undefined,duration);
+	FadeElement("#letters",duration);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//Macros
+
+function TitleScreenLoaderMacro(){
+	return [
+		{Starter:BlockInput},
+		{Starter:TransitionLevelOut,endDelay:200},
+		{Starter:function(){
+			CleanTitleScreen();
+			ColoriseGameBar();
+		}},
+		{Starter:TransitionTitlescreenTitleIn,endDelay:200},
+		{Starter:TransitionTitleScreenOptions,endDelay:200},
+		{Starter:UnBlockInput}
+	]
+};
+
+function LevelTopInMacro(){
+	return [
+	{Starter:TransitionNotesIn,endDelay:200},
+	{Starter:TransitionGoalIn,endDelay:0},
+	{Starter:TransitionKeystrokesIn,endDelay:200}
+	];
+}
+
+function LevelLoadMacro(){
+	return [
+		{Starter:BlockInput},
+		{Starter:TransitionTitlescreenOut,endDelay:0},
+		{Starter:TransitionLevelTopOut,endDelay:200},
+		{Starter:function(){
+			ClearLevel();
+			CleanLevel();
+			ColoriseGameBar();//Change colour each level
+		}},
+		{Starter:TransitionNotesIn,endDelay:200},
+		...LevelTopInMacro(),
+		{Starter:UnBlockInput}
+	]
+};
+
+
 function LevelWinMacro(){
 	return [
 		{Starter:BlockInput},
 		{Starter:function(){
-			FadeElement(".top .notes");
-			FadeElement(".top .keystrokes");
-			Class(".top",".downwards");},endDelay:500},
+			FadeElement(".top .notes",200);
+			FadeElement(".top .keystrokes",200);
+			Class(".top",".downwards",200);
+		},endDelay:200},
 		...GoalMatchedMacro(),
 		//{Starter:()=>UpdateWinPane(CurLevelTitle()),endDelay:1000},
 		{Starter:function(){
@@ -2746,23 +2796,6 @@ function GoalMatchedMacro(){
 	];
 }
 
-function ObtainPlayEndGameSound(){
-	PlaySound(MediaPath()+"/sound/wingame.mp3");
-}
-
-
-
-//Undo / Restart related
-function ObtainSetLevelState(state){
-	LevelState(state);
-	EffectRenderer();
-	DrawLevel();
-}
-
-function ClearLevel(){
-	EmptyUndo();
-	LevelState(ObtainStartingLevelState());
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Level states
@@ -3266,9 +3299,7 @@ function OverlayTutorialMacro(){return [
 
 function UnOverlayTutorialMacro(){return [
 	{Starter:UnOverlayTutorial,endDelay:100},
-	{Starter:()=>UnFadeElement(".top .goal"),endDelay:100},
-	{Starter:()=>UnFadeElement(".top .keystrokes"),endDelay:100},
-	{Starter:()=>UnFadeElement(".top .notes"),endDelay:1000},
+	...LevelTopInMacro(),
 	{Starter:function(){
 		FadeElement(".middle .grid-mini");
 		FadeElement(".middle .grid-cross");
