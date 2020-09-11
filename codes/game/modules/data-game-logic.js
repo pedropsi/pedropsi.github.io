@@ -710,3 +710,5 @@ function LevelSections(){
 		return LevelSections.sections;
 }
 
+
+Shout("data-game-logic")
