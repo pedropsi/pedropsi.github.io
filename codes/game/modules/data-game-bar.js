@@ -139,15 +139,17 @@ function WrapGame(){
 
 
 function PrepareGame(){
-	var bar=GetElement("GameBar");
+	var GameBar=GetElement("GameBar");
 	WrapGame();
 	ObtainLoadPortable();
 
-	[250,500,1000,2000,4000,8000].map(function(t){
-		setTimeout(ResizeCanvas,t);
-	});
+	HearElement("GameBar",ResizeCanvas)
+
+	// [250,500,1000,2000,4000,8000].map(function(t){
+	// 	setTimeout(ResizeCanvas,t);
+	// });
 	
-	if(!bar){
+	if(!GameBar){
 
 		ResumeCapturingKeys(CaptureComboKey);
 		KeybindShortcuts();
