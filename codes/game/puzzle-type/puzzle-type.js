@@ -126,7 +126,7 @@ var ObtainRequestHint=ObtainRequestHint?ObtainRequestHint:Identity;
 // 	}
 
 // 	var letter=e.innerHTML.toUpperCase().replace("_","space");
-// 	InstructGameKeyF(letter)();
+// 	GameKeyHandler(letter)();
 // }
 
 // ObtainHUDElement=function(){
@@ -265,11 +265,11 @@ function KeyActions(){
 	}
 
 	DirectKeybinder=function(c){
-		keyactions[c]=InstructGameKeyF(c);
+		keyactions[c]=GameKeyHandler(c);
 	}
 
 	AlphanumericCharacters.map(DirectKeybinder);
-	LetterCharacters.map(c=>(keyactions["Shift "+c]=InstructGameKeyF(c)));
+	LetterCharacters.map(c=>(keyactions["Shift "+c]=GameKeyHandler(c)));
 	
 	Directions.map(DirectKeybinder);
 	["·","interpunkt"].map(Keybinder(Identity));//Do nothing
@@ -283,7 +283,7 @@ function KeyActions(){
 	["undo",ObtainMainKey("undo"),"Backspace","Delete","Ctrl U","Ctrl Z"].map(Keybinder(ObtainUndo));
 	["redo",ObtainMainKey("redo"),"Shift Backspace","Shift Delete","Ctrl Y"].map(Keybinder(ObtainRedo));
 	["restart",ObtainMainKey("restart"),"Ctrl Backspace","Ctrl Delete"].map(Keybinder(ObtainRestart));
-	["Spacebar","Space","_"].map(Keybinder(InstructGameKeyF("space")));
+	["Spacebar","Space","_"].map(Keybinder(GameKeyHandler("space")));
 	
 	keyactions["close"]=CloseKeyboard;
 	
@@ -311,7 +311,7 @@ function InstructNothing(){
 	}
 }
 
-function InstructGameKeyF(key){
+function GameKeyHandler(key){
 	return function(ev){
 		if(ev)
 			ev.preventDefault();
