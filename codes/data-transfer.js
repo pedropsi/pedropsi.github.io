@@ -325,6 +325,10 @@ IsNan=function(nan){
 	return (typeof nan==="number")&&!(nan<0)&&!(nan===0)&&!(nan>0);
 }
 
+IsNumber=function(n){
+	return (typeof n==="number");
+}
+
 EnArray=function(a){
 	if(typeof a==="undefined")
 		return []
@@ -3235,28 +3239,36 @@ PulseSelect=function(selectorE,clas,delay){
 
 // Fade/Unfade (opacity only)
 
-FadeElement=function(e){
+FadeElement=function(e,duration){
 	var e=GetElement(e);
 	if(!e||Classed(e,"faded"))
 		return;
 
+	var duration=FadeDuration(duration)
+
 	setTimeout(function(){
 		UnClass(e,"closing");
 		Class(e,"faded");
-	},1000)
+	},duration)
 	
+	e.style.setProperty("--durationFade",""+duration);
+
 	Class(e,"closing");
 }
 
-UnFadeElement=function(e){
+UnFadeElement=function(e,duration){
 	var e=GetElement(e);
 	if(!e)
 		return;
 
+	var duration=FadeDuration(duration)
+
 	setTimeout(function(){
 		UnClass(e,"opening");
 		UnClass(e,"faded");
-	},1000)
+	},duration)
+
+	e.style.setProperty("--durationFade",""+duration);
 
 	Class(e,"opening");
 }
@@ -3286,9 +3298,9 @@ UnHideElement=function(selectorE){
 	return e;
 }
 
-UnHideUnFadeElement=function(e){
+UnHideUnFadeElement=function(e,duration){
 	UnHideElement(e);
-	UnFadeElement(e);
+	UnFadeElement(e,duration);
 }
 
 HideElement=function(selectorE){
@@ -3327,19 +3339,30 @@ ShowHide=function(selectorE){
 ////////////////////////////////////////////////////////////////////////////////
 // Opening / Closing functions
 
-OpenElement=function(e,parentIDsel){
+function FadeDuration(n){
+	if(typeof n==="undefined")
+		return "1s";
+	if(IsNumber(n))
+		return n+"ms";
+	else
+		return n;
+}
+
+OpenElement=function(e,parentIDsel,duration){
 	if(!e)
 		return;
 	e=NewNode(e);
-	UnHideUnFadeElement(e);
+	var duration=FadeDuration(duration)
+	UnHideUnFadeElement(e,duration);
 	AddElement(e,parentIDsel);
 }
 
-CloseElement=function(targetIDsel,parentIDsel){
+CloseElement=function(targetIDsel,parentIDsel,duration){
 	var e=GetElement(targetIDsel,parentIDsel);
 	if(e){
-		FadeElement(e);
-		setTimeout(function(){RemoveElement(targetIDsel,parentIDsel)},1000);
+		var duration=FadeDuration(duration);
+		FadeElement(e,duration);
+		setTimeout(function(){RemoveElement(targetIDsel,parentIDsel)},duration);
 	}
 }
 
