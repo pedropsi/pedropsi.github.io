@@ -6154,14 +6154,14 @@ TriggerImageLoad=function(id,src){
 ///////////////////////////////////////////////////////////////////////////////
 //Mutation Observer
 
-Observe=function(selector,Look,Opts){
+Observe=function(selector,Look,Opts,name){
 	var e=GetElement(selector)
 	if(!selector||!e)
 		return;
 	
 	var Look=Look||console.log;
 
-	var name=selector+FunctionName(Look);
+	var name=name||(selector+FunctionName(Look));
 
 	var Opts=Opts||{};
 		Opts={attributes: true, childList: true, subtree: true, ...Opts};
@@ -6170,36 +6170,34 @@ Observe=function(selector,Look,Opts){
 	var Observant = new MutationObserver(Look);
 	Observant.observe(e,Opts);
 	
-	if(!Observe.encyclo) //registration
-		Observe.encyclo={};
-	Observe.encyclo[name]=Observant;
+	if(!Observe.list) //registration
+		Observe.list={};
+	Observe.list[name]=Observant;
 
 	return Observant;
 }
 
-UnObserve=function(selector,Look){
-	var e=GetElement(selector)
-	if(!selector||!e)
+UnObserve=function(name){
+	if(!Observe.list)
 		return;
+	var Observant=Observe.list[name];
+	
+	if(Observant){
+		Observant.disconnect();
+		delete Observe.list[name];
+		return true;
+	}
 
-	var Look=Look||console.log;
-	var name=selector+FunctionName(Look);
-	
-	if(!Observe.encyclo)
-		return;
-	var Observant=Observe.encyclo[name];
-	
-	if(Observant)
-		return Observant.disconnect();
 }
 
 ObserveOnce=function(selector,Look,Opts){
 	var Look=Look||console.log;
+	var name=GenerateId();
 	function See(...args){
-		UnObserve(selector,See);
+		UnObserve(name);
 		Look(...args);
 	}
-	return Observe(selector,See,Opts)
+	return Observe(selector,See,Opts,name)
 }
 
 
