@@ -84,10 +84,15 @@ if(typeof ObtainRequestHint==="undefined")
 if(typeof ObtainLevelNumberDisplay==="undefined")
 	ObtainLevelNumberDisplay=Identity;
 
+
+if(typeof ObtainLoadPortable==="undefined")
+	var ObtainLoadPortable=Identity;
+
+if(typeof ResizeCanvas==="undefined")
+	var ResizeCanvas=Identity;
+
 ////////////////////////////////////////////////////////////////////////////////
 //Hooks to Pedro PSI main site
-
-
 
 var HasHOF=True;
 if(typeof RequestHallOfFame==="undefined"){
@@ -131,11 +136,7 @@ function WrapGame(){
 	ConsoleLoad(".game-rotation-container");
 }
 
-if(typeof ObtainLoadPortable==="undefined")
-	var ObtainLoadPortable=Identity;
 
-if(typeof ResizeCanvas==="undefined")
-	var ResizeCanvas=Identity;
 
 function PrepareGame(){
 	var bar=GetElement("GameBar");
