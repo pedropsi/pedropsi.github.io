@@ -216,28 +216,6 @@ TouchActionsTop=function(){
 	}
 }
 
-LaunchTouchActions=function(touchSel,actions){
-
-	Listen('touchmove',function(e){  
-		e.preventDefault();
-		HandleTouchMover(touchSel)(e);
-	},touchSel);
-
-	Listen('touchend' ,function(e){
-		e.preventDefault();
-		HandleTouchEnder(touchSel)(e);
-	},touchSel);
-
-	Listen('touchstart',function(e){
-		e.preventDefault();
-		HandleTouchStart(e);
-	},touchSel);
-
-	Keys(actions).map(
-		key=>Listen(key,actions[key],touchSel)
-	)
-}
-
 
 function GameTrailer(){
 	var trailerHTML=`<video width="1280" height="1024" autoplay>
@@ -560,7 +538,7 @@ var LevelDifficulty={
 	"Deaf":3,
 	"⠍⠕⠗⠎⠑":3,
 	"Dividi":5,
-	"Magnetism":1,
+	"Magnetism":2,
 	//"Fuchsia":1,
 	"Odd":3,
 	"Latent clones":3,
@@ -841,7 +819,7 @@ var LevelInstructions={
 		AddStrokeValid(L);
 	},
 	"Precedent":function (L){
-		function ConditionF(K){return K===NumberLetter(Max(LetterNumber(L)-1,0));};
+		function ConditionF(K){return LetterNumber(K)===LetterNumber(L)-1;};
 		function ChangeF(K){return L;};
 		var m=ModifyLetters(ChangeF,ConditionF);
 		if(!m){
@@ -2553,6 +2531,7 @@ function InitialiseGameCanvas(){
 
 	OpenElement(GameMiddleHTML(),"gameCanvas");
 	LaunchTouchActions(".middle",TouchActionsMiddle());
+	Listen("mouseup",CopyHandler(LetterExtractor("#letters")),"#letters");
 	
 	//AddElement(WinPaneHTML(),"gameCanvas")
 }
@@ -2653,8 +2632,10 @@ function LevelLoadMacro(){
 		{Starter:function(){
 			var goalE=GetElement(".top .goal");
 			var goal=GoalHTML(CurLevelTitle())
-			if(!goalE)
+			if(!goalE){
 				AddElement(`<div class='goal goaly faded'>${goal}</div>`,".top")
+				Listen("mouseup",CopyHandler(LetterExtractor(".goal")),".goal");
+			}
 			else{
 				Class(".goal",".goaly");
 				goalE.innerHTML=goal;
@@ -2667,10 +2648,11 @@ function LevelLoadMacro(){
 				UnClass(".goal","uncase");
 
 			if(!GetElement(".top .keystrokes")){
-				AddElement(`<div class='keystrokes faded'></div>`,".top")
+				AddElement(`<div class='keystrokes faded'></div>`,".top");
+				Listen("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
 			}
 			UnFadeElement(".top .keystrokes");
-			Listen("click",CopyHandler(ExtractKeystrokes),".keystrokes");
+			
 
 		},endDelay:1000},
 		{Starter:function(){UnFadeElement("#letters");},
@@ -3071,17 +3053,37 @@ function HighlightableWords(title){
 }
 
 function ExtractKeystrokes(el){
-	var parent=FirstMatchingElement("parentElement",el,".keystrokes");
+	var parent=ParentElement(el,".keystrokes");
 	var strokes=GetElements(".keystroke",parent);
 		strokes=strokes.filter(s=>!Classed(s,"keystroke-invalid")&&SelectedNode(s));
-	var text=strokes.map(KeystrokeString).join("");	
+	var text=strokes.map(LetterString).join("");	
 		text=KeystrokeSimplifier(CurLevelTitle())(text);
 		text=text.replace(/\n+/gmi,"");//ensure single line
 		text=text.replace(/\_/gmi," ");//revert underscore -> space
 	return text;
 }
 
-function KeystrokeString(e){
+function LetterExtractor(parentSelector,letterSelector,Acceptor,Simplifier){
+	var letterSelector=letterSelector||".letter";
+	var Acceptor=Acceptor||True;
+	var Simplifier=Simplifier||Identity;
+	return function(el){
+		var parent=ParentElement(el,parentSelector);
+		var strokes=GetElements(letterSelector,parent);
+			strokes=strokes.filter(s=>Acceptor(s)&&SelectedNode(s));
+		var text=strokes.map(LetterString).join("");	
+			text=Simplifier(text);
+			text=text.replace(/\n+/gmi,"");//ensure single line
+			text=text.replace(/\_/gmi," ");//revert underscore -> space
+		return text;
+	}
+}
+
+var ExtractKeystrokes=LetterExtractor(".keystrokes",".keystroke",s=>!Classed(s,"keystroke-invalid"),KeystrokeSimplifier(CurLevelTitle()));
+
+
+
+function LetterString(e){
 	if(!GetElement(".iconpath",e))
 		return e.innerText;
 	else

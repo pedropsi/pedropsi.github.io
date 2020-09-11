@@ -1928,17 +1928,17 @@ QuerySelector=function(selector){
 }
 
 // Get element based on selectors: .class, #id, idsring, or the element itself
-GetElementFromTextSelector=function(selector,parentElement){
+GetSelectorElement=function(selector,parentElement){
 	if(!selector)
 		return document.body;
 	if(parentElement===null)
 		return null;
-	selector=QuerySelector(selector);
 
 	if(!parentElement||!parentElement.querySelector)
 		var parentElement=document.body;
 
 	try{
+		var selector=QuerySelector(selector);
 		return parentElement.querySelector(selector);
 	}
 	catch{
@@ -1946,9 +1946,9 @@ GetElementFromTextSelector=function(selector,parentElement){
 	}
 };
 
-GetElementIn=function(selector,parentElement){
+GetInElement=function(selector,parentElement){
 	if(typeof selector==="string")
-		return GetElementFromTextSelector(selector,parentElement);
+		return GetSelectorElement(selector,parentElement);
 	else
 		return selector; //in case the actual element is given in the beginning
 };
@@ -1961,11 +1961,11 @@ GetElement=function(selector,pSelector){
 		parentElement=document;
 	else{
 		if(typeof pSelector==="string")
-			parentElement=GetElementIn(pSelector,document);
+			parentElement=GetInElement(pSelector,document);
 		else
 			parentElement=pSelector;
 	}
-	return GetElementIn(selector,parentElement);
+	return GetInElement(selector,parentElement);
 }
 
 //Match Element to selector
@@ -1973,13 +1973,16 @@ QueryAll=function(selector){
 	return Array.from(document.querySelectorAll(QuerySelector(selector)));
 }
 
-Match=function(elem,selector){
-	return In(QueryAll(selector),elem);
+Match=function(node,selector){
+	return node.matches(QuerySelector(selector));
 }
 
-MatchAnyElement=function(elemArray,selector){
-	return elemArray.some(function(e){return Match(e,selector)});
+Matcher=function(selector){
+	return function NodeMatch(node){
+		return Match(node,selector)
+	}
 }
+
 
 //Find first Element matching selector
 FindFirstMatch=function(selectorArray,elem){
@@ -2043,13 +2046,14 @@ Outside=function(parentSelector,selector){
 }
 
 // Get element based on selectors: .class, tag, or the element itself
-GetElements=function(selectorString,parentIDsel){
-	var HTMLCollect;
-	var parentElement=GetElement(parentIDsel)||document;
-	if(IsString(selectorString)){
-		HTMLCollect=parentElement.querySelectorAll(selectorString);
-		return Array.prototype.slice.call(HTMLCollect);
-	}
+GetElements=function(selector,parentIDsel){
+	if(!selector||!IsString(selector))
+		return [];
+
+	var parent=GetElement(parentIDsel)||document;
+	var selector=QuerySelector(selector);
+
+	return Array.from(parent.querySelectorAll(selector));
 };
 
 // Get Children Elements
@@ -2067,10 +2071,10 @@ Children=function(targetIDsel,childIDselString){
 		return FirstChildren(targetIDsel);
 
 	var es=[GetElement(targetIDsel)];
-	var match=MatchAnyElement(es,childIDselString);
+	var match=es.some(Matcher(childIDselString));
 	while(es.length>0&&FirstChildren(es).length>0&&!match){
 		es=FirstChildren(es);
-		match=MatchAnyElement(es,childIDselString);
+		match=es.some(Matcher(childIDselString));
 	}
 	return match?es:undefined;
 }
@@ -5022,7 +5026,7 @@ IsGif=function(ref){
 StartGIF=function(gid){
 	var g=GetElement(gid);
 
-	RemoveElement(GetElementIn("CANVAS",g.parentElement));
+	RemoveElement(GetInElement("CANVAS",g.parentElement));
 	var c=AddElement("<canvas class='gif gifcanvas' tabindex='0'></canvas>",g.parentElement);
 
 	HideElement(g);
@@ -6161,6 +6165,77 @@ TriggerImageLoad=function(id,src){
 	var img=GetElement(id);
 	img.setAttribute("src",src);
 }
+
+///////////////////////////////////////////////////////////////////////////////
+//Mutation Observer
+
+Observe=function(selector,Look,Opts,name){
+	var e=GetElement(selector)
+	if(!selector||!e)
+		return;
+	
+	var Look=Look||console.log;
+
+	var name=name||(selector+FunctionName(Look));
+
+	var Opts=Opts||{};
+		Opts={attributes: true, childList: true, subtree: true, ...Opts};
+
+
+	var Observant = new MutationObserver(Look);
+	Observant.observe(e,Opts);
+	
+	if(!Observe.list) //registration
+		Observe.list={};
+	Observe.list[name]=Observant;
+
+	return Observant;
+}
+
+UnObserve=function(name){
+	if(!Observe.list)
+		return;
+	var Observant=Observe.list[name];
+	
+	if(Observant){
+		Observant.disconnect();
+		delete Observe.list[name];
+		return true;
+	}
+
+}
+
+ObserveOnce=function(selector,Look,Opts){
+	var Look=Look||console.log;
+	var name=GenerateId();
+	function See(...args){
+		UnObserve(name);
+		Look(...args);
+	}
+	return Observe(selector,See,Opts,name)
+}
+
+UponMutator=function(ObserveF){
+	return function(elementSelector,Action,parentSelector){
+		function Upon(mutation){
+			var nodes=Array.from(mutation[0].addedNodes)||[];
+			if(nodes.some(Matcher(elementSelector)))
+				return Action();
+		}
+		var parentSelector=parentSelector||"body"
+		ObserveF(parentSelector,Upon,{attributes:false})
+	}
+}
+
+UponElement=function(...args){
+	return UponMutator(Observe)(...args)
+}
+
+UponElementOnce=function(...args){
+	return UponMutator(ObserveOnce)(...args)
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Clipboard

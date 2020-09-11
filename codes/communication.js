@@ -267,7 +267,7 @@ SortableTable=function(tableSelector){
 }
 
 TableLength=function(idSel){
-	var target=GetElementIn("TBODY",idSel);
+	var target=GetInElement("TBODY",idSel);
 	if(target&&target.childNodes)
 		return Array.from(target.childNodes).filter(function(e){return e.childNodes.length>0}).length;
 	else
