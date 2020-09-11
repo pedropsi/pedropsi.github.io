@@ -325,6 +325,10 @@ IsNan=function(nan){
 	return (typeof nan==="number")&&!(nan<0)&&!(nan===0)&&!(nan>0);
 }
 
+IsNumber=function(n){
+	return (typeof n==="number");
+}
+
 EnArray=function(a){
 	if(typeof a==="undefined")
 		return []
@@ -3246,28 +3250,36 @@ PulseSelect=function(selectorE,clas,delay){
 
 // Fade/Unfade (opacity only)
 
-FadeElement=function(e){
+FadeElement=function(e,duration){
 	var e=GetElement(e);
 	if(!e||Classed(e,"faded"))
 		return;
 
+	var duration=FadeDuration(duration)
+
 	setTimeout(function(){
 		UnClass(e,"closing");
 		Class(e,"faded");
-	},1000)
+	},duration)
 	
+	e.style.setProperty("--durationFade",""+duration);
+
 	Class(e,"closing");
 }
 
-UnFadeElement=function(e){
+UnFadeElement=function(e,duration){
 	var e=GetElement(e);
 	if(!e)
 		return;
 
+	var duration=FadeDuration(duration)
+
 	setTimeout(function(){
 		UnClass(e,"opening");
 		UnClass(e,"faded");
-	},1000)
+	},MillisecondsDuration(duration))
+
+	e.style.setProperty("--durationFade",""+duration);
 
 	Class(e,"opening");
 }
@@ -3297,9 +3309,9 @@ UnHideElement=function(selectorE){
 	return e;
 }
 
-UnHideUnFadeElement=function(e){
+UnHideUnFadeElement=function(e,duration){
 	UnHideElement(e);
-	UnFadeElement(e);
+	UnFadeElement(e,duration);
 }
 
 HideElement=function(selectorE){
@@ -3338,19 +3350,45 @@ ShowHide=function(selectorE){
 ////////////////////////////////////////////////////////////////////////////////
 // Opening / Closing functions
 
-OpenElement=function(e,parentIDsel){
+function FadeDuration(n){
+	if(typeof n==="undefined")
+		return "1s";
+	if(IsNumber(n))
+		return n+"ms";
+	else
+		return n;
+}
+
+function MillisecondsDuration(n){
+	if(typeof n==="undefined")
+		return 1000;
+	if(IsNumber(n))
+		return n;
+	else if(Posfixed(n,"ms"))
+		return Number(UnPosfix(n,"ms"));
+	else if(Posfixed(n,"s"))
+		return Number(UnPosfix(n,"s"))*1000;
+	else
+		return 1000;
+}
+
+OpenElement=function(e,parentIDsel,duration){
 	if(!e)
 		return;
 	e=NewNode(e);
-	UnHideUnFadeElement(e);
+	var duration=FadeDuration(duration)
+	UnHideUnFadeElement(e,duration);
 	AddElement(e,parentIDsel);
 }
 
-CloseElement=function(targetIDsel,parentIDsel){
+CloseElement=function(targetIDsel,parentIDsel,duration){
 	var e=GetElement(targetIDsel,parentIDsel);
 	if(e){
-		FadeElement(e);
-		setTimeout(function(){RemoveElement(targetIDsel,parentIDsel)},1000);
+		var duration=FadeDuration(duration);
+		FadeElement(e,duration);
+		setTimeout(function(){
+			RemoveElement(targetIDsel,parentIDsel)
+		},MillisecondsDuration(duration));
 	}
 }
 
@@ -3802,10 +3840,6 @@ SubmitValidAnswer=function(DP){
 	if(outflowData)
 		SubmitData(outflowData);
 
-	/*Legacy method, todo delete
-	var destinationObject=GetDestination(destination);
-	var dataObject=(destinationObject.Data)(DP.qid);
-	SubmitData(dataObject,destinationObject);*/
 }
 
 InvalidateAnswer=function(DF){
@@ -3919,7 +3953,6 @@ GetDefaultNodeData=function(field,id){
 };
 
 SetData=function(field,value,id){
-	//console.log(field,value,id);
 	var DP=GetDataPack(id);
 	if(DP!==undefined){
 		GetDataPack(id)[field]=value;
