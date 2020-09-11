@@ -3266,7 +3266,7 @@ UnFadeElement=function(e,duration){
 	setTimeout(function(){
 		UnClass(e,"opening");
 		UnClass(e,"faded");
-	},duration)
+	},MillisecondsDuration(duration))
 
 	e.style.setProperty("--durationFade",""+duration);
 
@@ -3348,6 +3348,19 @@ function FadeDuration(n){
 		return n;
 }
 
+function MillisecondsDuration(n){
+	if(typeof n==="undefined")
+		return 1000;
+	if(IsNumber(n))
+		return n;
+	else if(Posfixed(n,"ms"))
+		return Number(UnPosfix(n,"ms"));
+	else if(Posfixed(n,"s"))
+		return Number(UnPosfix(n,"s"))*1000;
+	else
+		return 1000;
+}
+
 OpenElement=function(e,parentIDsel,duration){
 	if(!e)
 		return;
@@ -3362,7 +3375,9 @@ CloseElement=function(targetIDsel,parentIDsel,duration){
 	if(e){
 		var duration=FadeDuration(duration);
 		FadeElement(e,duration);
-		setTimeout(function(){RemoveElement(targetIDsel,parentIDsel)},duration);
+		setTimeout(function(){
+			RemoveElement(targetIDsel,parentIDsel)
+		},MillisecondsDuration(duration));
 	}
 }
 
