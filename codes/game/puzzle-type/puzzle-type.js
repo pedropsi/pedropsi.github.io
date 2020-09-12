@@ -2726,7 +2726,6 @@ function TransitionTitlescreenOut(duration){
 	var duration=duration||200;
 	CloseElement(".game-title",undefined,duration);
 	FadeElement("#letters",duration);
-	UnLaunchTouchActions(gameSelector,TouchActionsTitlescreen());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2772,6 +2771,7 @@ function LevelLoadMacro(){
 		...LevelTopInMacro(),
 		{Starter:TransitionLettersIn,endDelay:200},
 		{Starter:function(){
+			UnLaunchTouchActions(gameSelector,TouchActionsTitlescreen());
 			LaunchTouchActions(".top",TouchActionsTop());
 			LaunchTouchActions(".middle",TouchActionsMiddle());
 			Listen("mouseup",CopyHandler(LetterExtractor("#letters")),"#letters");
