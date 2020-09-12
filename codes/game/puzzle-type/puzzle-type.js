@@ -148,6 +148,7 @@ var gameModulesEarly=[
 "codes/game/modules/data-game-hints.js",
 "codes/game/modules/data-game-gestures.js",
 "codes/game/modules/data-game-keyboard-onscreen.js",
+"codes/game/modules/data-game-hof-feedback.js",
 // "codes/game/modules/data-game-hud.js"
 ]
 
@@ -3154,9 +3155,6 @@ function LetterExtractor(parentSelector,letterSelector,Acceptor,Simplifier){
 		return text;
 	}
 }
-
-var ExtractKeystrokes=LetterExtractor(".keystrokes",".keystroke",s=>!Classed(s,"keystroke-invalid"),KeystrokeSimplifier(CurLevelTitle()));
-
 
 
 function LetterString(e){
