@@ -2762,6 +2762,7 @@ function TitleScreenLoaderMacro(){
 			UnAttend("mouseup","#letters");
 			UnAttend("mouseup",".goal");
 			UnAttend("mouseup",".keystrokes");
+			UnAttend("mouseup",".best");
 		}},
 		{Starter:UnBlockInput}
 	]
@@ -2795,6 +2796,7 @@ function LevelLoadMacro(){
 			Attend("mouseup",CopyHandler(LetterExtractor("#letters")),"#letters");
 			Attend("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
 			Attend("mouseup",CopyHandler(LetterExtractor(".goal")),".goal");
+			Attend("mouseup",CopyHandler(best=>best.innerText),".best");
 			}
 		},
 		{Starter:UnBlockInput}
