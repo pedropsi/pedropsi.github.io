@@ -62,7 +62,7 @@ function RequestMore(){
 		requireConnection:false,
 		shortcutExtras:ObtainKeyActionsGameBar(),
 		buttonSelector:"MoreButton",
-		spotlight:gameSelector
+		spotlight:ObtainGameSelector()
 	});
 }
 

@@ -33,7 +33,7 @@ RequestGameFeedback=function(){
 		FocusAndResetFunction(RequestGameFeedback,GameFocus)();};
 	
 	var DPsettingsObj={
-		qtargetid:ParentSelector(gameSelector),
+		qtargetid:ParentSelector(ObtainGameSelector()),
 		qdisplay:LaunchAvatarBalloon,
 		qonsubmit:RecordAndLaunchThanksBalloon,
 		qonclose:FocusAndResetFunction(RequestGameFeedback,GameFocus),

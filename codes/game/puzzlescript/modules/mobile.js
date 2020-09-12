@@ -55,7 +55,7 @@ function MobileInitialise(proto) {
     };
 
     proto.bindEvents = function (){
-		var canvas=ParentElement(gameSelector);
+		var canvas=ParentElement(ObtainGameSelector());
         canvas.addEventListener('touchstart', this.onTouchStart.bind(this));
         canvas.addEventListener('touchend', this.onTouchEnd.bind(this));
         canvas.addEventListener('touchmove', this.onTouchMove.bind(this));

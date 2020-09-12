@@ -104,7 +104,7 @@ function ObtainKeyboardLauncher(){
 	return LaunchKeyboardBanner;
 }
 function ObtainKeyboardTarget(){
-	return gameSelector;
+	return ObtainGameSelector();
 }
 
 var ObtainKeyboardAllowed=true;
@@ -2746,10 +2746,10 @@ function TitleScreenLoaderMacro(){
 		{Starter:TransitionTitlescreenTitleIn,endDelay:200},
 		{Starter:TransitionTitleScreenOptions,endDelay:200},
 		{Starter:function(){
-			LaunchTouchActions(gameSelector,TouchActionsTitlescreen());
+			LaunchTouchActions(ObtainGameSelector(),TouchActionsTitlescreen());
 			UnLaunchTouchActions(".top",TouchActionsTop());
 			UnLaunchTouchActions(".middle",TouchActionsMiddle());
-			Attend("mouseup",LevelLoader,gameSelector);
+			Attend("mouseup",LevelLoader,ObtainGameSelector());
 			UnAttend("mouseup","#letters");
 			UnAttend("mouseup",".goal");
 			UnAttend("mouseup",".keystrokes");
@@ -2779,10 +2779,10 @@ function LevelLoadMacro(){
 		...LevelTopInMacro(),
 		{Starter:TransitionLettersIn,endDelay:200},
 		{Starter:function(){
-			UnLaunchTouchActions(gameSelector,TouchActionsTitlescreen());
+			UnLaunchTouchActions(ObtainGameSelector(),TouchActionsTitlescreen());
 			LaunchTouchActions(".top",TouchActionsTop());
 			LaunchTouchActions(".middle",TouchActionsMiddle());
-			UnAttend("mouseup",gameSelector);
+			UnAttend("mouseup",ObtainGameSelector());
 			Attend("mouseup",CopyHandler(LetterExtractor("#letters")),"#letters");
 			Attend("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
 			Attend("mouseup",CopyHandler(LetterExtractor(".goal")),".goal");

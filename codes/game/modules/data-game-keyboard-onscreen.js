@@ -31,7 +31,7 @@ function RequestKeyboard(){
 			shortcutExtras:Shortcuts,
 			requireConnection:false,
 			buttonSelector:"KeyboardButton",
-			spotlight:gameSelector,
+			spotlight:ObtainGameSelector(),
 			closeonblur:false,
 			layer:-1
 	});
