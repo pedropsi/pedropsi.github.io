@@ -42,9 +42,9 @@ function ShiftBaseColour(basecolour){
 function ObtainRestartAllowed(){return true;}
 function ObtainUndoAllowed(){return true;}
 function ObtainRedoAllowed(){return true;}
-var ObtainUndo=function(){if(!InputBlocked()) Undo();PulseSelect("#choice-"+"undo")};					//With Onscreen keyboard
-var ObtainRedo=function(){if(!InputBlocked()) Redo();PulseSelect("#choice-"+"redo")};					//With Onscreen keyboard
-var ObtainRestart=function(){if(!InputBlocked())Restart();PulseSelect("#choice-"+"restart")};			//With Onscreen keyboard
+var ObtainUndo=function(){if(!InputBlocked()) Undo();PulseSelect("#choice-"+"undo");GameFocus()};					//With Onscreen keyboard
+var ObtainRedo=function(){if(!InputBlocked()) Redo();PulseSelect("#choice-"+"redo");GameFocus()};					//With Onscreen keyboard
+var ObtainRestart=function(){if(!InputBlocked())Restart();PulseSelect("#choice-"+"restart");GameFocus()};			//With Onscreen keyboard
 
 function ObtainMainKey(action){
 	if(!action)
