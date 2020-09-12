@@ -423,11 +423,29 @@
 
 /*Clickwalls*/
 .clickwall{
+    --size:calc(var(--h1) + var(--w1));
     height: 100%;
     justify-content: center;
+    align-items: center;
     font-size: 150%;
     border-color: var(--darkblue);
-    border-style: solid;
-    border-width:var(--h2) var(--w2) var(--h2) var(--w2);
-    margin: var(--h1) var(--w1) var(--h1) var(--w1);
+    border:var(--size) solid var(--darkblue);
 }
+
+.circular{
+    --size:calc(var(--h1) + var(--w1));
+    border: var(--size) solid var(--darkblue);
+    padding: calc( 1.5 * var(--size));
+    margin: calc( 1.5 * var(--size));
+    border-radius: calc( 6 * var(--size));
+}
+
+.circular svg{
+    height: calc(var(--size) * 6);
+    width: calc(var(--size) * 6);
+}
+
+
+
+
+.

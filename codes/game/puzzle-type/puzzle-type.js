@@ -182,15 +182,15 @@ function GameIntro(){
 function Clickwall(){
 	AddElement(`
 		<div class="clickwall faded">
-			<p>Please turn on your sound ${ObtainSymbol("music")}.</p>
-			<p><b>${KB("click")} to start!</b><p>
+			<div class="circular">${ObtainSymbol("play")}</div>
+			<p><b>Please turn on your sound ${ObtainSymbol("music")}.</b></p>
 		</div>`,".game");
 	UnFadeElement(".clickwall",500);
 	function Start(){
 		CloseElement(".game .clickwall",500);
 		setTimeout(StartGame,500)
 	}
-	AttendOnce("click",Start,".cickwall");
+	AttendOnce("click",Start,".clickwall");
 }
 
 function StartGame(){
