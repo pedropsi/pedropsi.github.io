@@ -183,7 +183,7 @@ function Clickwall(){
 	AddElement(`
 		<div class="clickwall faded">
 			<div class="circular">${ObtainSymbol("play")}</div>
-			<p><b>Please turn on your sound ${ObtainSymbol("music")}.</b></p>
+			<p><b>Please turn on the sound ${ObtainSymbol("music")}, then click to start!</b></p>
 		</div>`,".game");
 	UnFadeElement(".clickwall",500);
 	function Start(){
