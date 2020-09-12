@@ -124,23 +124,14 @@ LaunchTouchActions=function(touchSel,actions){
 
 UnLaunchTouchActions=function(touchSel,actions){
 
-	UnAttend(
-		'touchmove',
-		DefaultHandler(HandleTouchMover(touchSel)),
-		touchSel);
+	UnAttend('touchmove',touchSel);
 
-	UnAttend(
-		'touchend',
-		DefaultHandler(HandleTouchEnder(touchSel)),
-		touchSel);
+	UnAttend('touchend',touchSel);
 
-	UnAttend(
-		'touchstart',
-		DefaultHandler(HandleTouchStart)
-		,touchSel);
+	UnAttend('touchstart',touchSel);
 
 	Keys(actions).map(
-		key=>UnAttend(key,actions[key],touchSel)
+		key=>UnAttend(key,touchSel)
 	)
 }
 
