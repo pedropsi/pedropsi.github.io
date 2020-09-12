@@ -197,6 +197,17 @@ function StartGame(){
 	ObtainTitleScreenReLoader();
 };
 
+
+TouchActionsTitlescreen=function(){
+	return{
+	"swipe-tap":SelectNextLevel,
+	"swipe-left":SelectNextLevel,
+	"swipe-up":SelectNextLevel,
+	"swipe-right":SelectNextLevel,
+	"swipe-down":SelectNextLevel
+	}
+}
+
 TouchActionsMiddle=function(){
 	return{
 	"swipe-tap":(()=>TitleScreen()?AdvanceUnsolvedScreen():RequestKeyboard()),
