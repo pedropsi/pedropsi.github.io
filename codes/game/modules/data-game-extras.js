@@ -1115,7 +1115,6 @@ function LevelDescriptionHTML(lvl){
 	var title=ObtainLevelDescriptionTitle(lvl);
 	var notes=ObtainLevelNotes(lvl);
 	var best=BestMove(ObtainLevelTitle(lvl));
-	console.log(title,notes,best)
 
 	title=title?`<p>${title}</p>`:"";
 	notes=notes?`<p class='notes'>${notes}</p>`:"";
