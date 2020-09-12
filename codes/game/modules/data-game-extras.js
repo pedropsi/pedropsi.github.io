@@ -1114,14 +1114,12 @@ function SolvedRequiredLevelsBefore(lvl,howmany){
 function LevelDescriptionHTML(lvl){
 	var title=ObtainLevelDescriptionTitle(lvl);
 	var notes=ObtainLevelNotes(lvl);
-	var best=BestMove(ObtainLevelTitle(lvl));
-
+	
 	title=title?`<p>${title}</p>`:"";
 	notes=notes?`<p class='notes'>${notes}</p>`:"";
 	
 	return `${title}
-			${notes}
-			${best}`;
+			${notes}`;
 }
 
 function ChosenLevelDescriptionHTML(){
