@@ -2681,7 +2681,7 @@ function TransitionNotesIn(duration){
 	var duration=duration||200;
 	var notes=GetElement(".top .notes");
 	if(!notes)
-		AddElement(`<div class='notes faded'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="level-notes">${ObtainLevelNotes(CurLevelNumber())}</p></div>`,".top")
+		PreAddElement(`<div class='notes faded'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="level-notes">${ObtainLevelNotes(CurLevelNumber())}</p></div>`,".top")
 	else{
 		GetElement(".level-number").innerHTML=LevelNumberNotes(CurLevelNumber());
 		GetElement(".level-notes").innerHTML=ObtainLevelNotes(CurLevelNumber());
