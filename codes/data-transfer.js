@@ -6322,15 +6322,18 @@ HearElement=function(elementSelector,Action){
 //Clipboard
 
 CopyHandler = function(Extractor){
-	return async function(event){
+	return function(event){
 		if (!navigator.clipboard)
 			return;
 		var text=Extractor(event.target);
+		function CopyLogger(){
+			navigator.clipboard.writeText(text);
+			ConsoleAdd(`"${text}" copied to clipboard!`)
+		};
 		if(!text)
 			return;
 		try{
-			await navigator.clipboard.writeText(text);
-			ConsoleAdd(`"${text}" copied to clipboard!`);
+			Throttle(CopyLogger,500)
 		}
 		catch(err){	}
 	};
