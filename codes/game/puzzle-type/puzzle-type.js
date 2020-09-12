@@ -193,8 +193,8 @@ function StartGame(){
 	GameFocus();
 	PrepareGame();
 	LoadGame();
-	ObtainTitleScreenReLoader();
 	InitialiseGameCanvas();
+	ObtainTitleScreenReLoader();
 };
 
 TouchActionsMiddle=function(){
