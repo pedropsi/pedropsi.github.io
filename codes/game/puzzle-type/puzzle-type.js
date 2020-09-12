@@ -2745,6 +2745,9 @@ function TitleScreenLoaderMacro(){
 			LaunchTouchActions(gameSelector,TouchActionsTitlescreen());
 			UnLaunchTouchActions(".top",TouchActionsTop());
 			UnLaunchTouchActions(".middle",TouchActionsMiddle());
+			UnAttend("mouseup","#letters");
+			UnAttend("mouseup",".goal");
+			UnAttend("mouseup",".keystrokes");
 		}},
 		{Starter:UnBlockInput}
 	]
@@ -2774,9 +2777,9 @@ function LevelLoadMacro(){
 			UnLaunchTouchActions(gameSelector,TouchActionsTitlescreen());
 			LaunchTouchActions(".top",TouchActionsTop());
 			LaunchTouchActions(".middle",TouchActionsMiddle());
-			Listen("mouseup",CopyHandler(LetterExtractor("#letters")),"#letters");
-			Listen("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
-			Listen("mouseup",CopyHandler(LetterExtractor(".goal")),".goal");
+			Attend("mouseup",CopyHandler(LetterExtractor("#letters")),"#letters");
+			Attend("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
+			Attend("mouseup",CopyHandler(LetterExtractor(".goal")),".goal");
 			}
 		},
 		{Starter:UnBlockInput}
