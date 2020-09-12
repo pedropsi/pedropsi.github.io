@@ -2616,12 +2616,17 @@ function CurLevelWon(){
 	return WinnerTitle(CurLevelTitle())===Word().replace(/\_/g,"");
 }
 
+function ObtainWonMoves(){
+	return Keystrokes().map(CleanStroke).join("");
+}
+
 function CheckWin(){
 	var win=CurLevelWon();
 	
 	if(win){
 		MarkWonScreen();
-		
+		BestMove(CurLevelTitle(),ObtainWonMoves());
+
 		if(!LevelWinSound()&&!SolvedAllLevels())
 			PlaySound(MediaPath()+"/sound/win"+RandomChoice("123")+".mp3");
 		else
@@ -2687,7 +2692,7 @@ function TransitionNotesIn(duration){
 	var duration=duration||200;
 	var notes=GetElement(".top .notes");
 	if(!notes)
-		PreAddElement(`<div class='notes faded'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="level-notes">${ObtainLevelNotes(CurLevelNumber())}</p></div>`,".top")
+		PreAddElement(`<div class='notes faded'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="best">${BestMove(CurLevelTitle())||""}</p><p class="level-notes">${ObtainLevelNotes(CurLevelNumber())}</p></div>`,".top")
 	else{
 		GetElement(".level-number").innerHTML=LevelNumberNotes(CurLevelNumber());
 		GetElement(".level-notes").innerHTML=ObtainLevelNotes(CurLevelNumber());

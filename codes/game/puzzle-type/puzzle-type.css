@@ -137,6 +137,14 @@
    /*background-color: var(--white);*/
 }
 
+.best{
+   font-size: calc( var(--w1) + var(--h1) );
+   font-weight: normal;
+   overflow: hidden;
+   align-items: center;
+   
+}
+
 .top.levelscreen .notes{
    width: calc(100% - var(--w2));
    justify-content: space-between;

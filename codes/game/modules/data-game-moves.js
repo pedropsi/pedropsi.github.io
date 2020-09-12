@@ -177,5 +177,41 @@ function UpdateSelectData(lvlch,type){
 	});
 }
 
+//Best moves
+
+function BestMoves(){
+	if(!BestMoves.moves){
+		BestMoves.moves=LocalStorage("bestmoves")
+		if(IsArray(BestMoves.moves)){
+			BestMoves.moves={};
+			LocalStorage("bestmoves",{});
+		}
+	}
+	return BestMoves.moves;
+}
+
+function BestMove(title,newmove){
+	if(!title)
+		return ;
+	var bestmoves=BestMoves();
+	var oldmove=bestmoves[title];
+	if(!newmove)
+		return bestmoves[title];
+	if(ObtainBestMoveSurpassed(newmove,oldmove)){
+		if(oldmove)
+			ConsoleAdd(`You solution for level ${title} improved!`);
+		BestMoves.moves[title]=newmove;
+		LocalStorage("bestmoves",BestMoves.moves);
+		return newmove;
+	}
+}
+
+if(typeof ObtainBestMoveSurpassed==="undefined")
+	ObtainBestMoveSurpassed=function(newMove,oldMove){
+		if(!oldMove)
+			return true;
+		return oldMove.length>newMove.length;
+	}
+
 ////////////////////////////////////////////////////////////////////////////////
 Shout("data-game-moves");
