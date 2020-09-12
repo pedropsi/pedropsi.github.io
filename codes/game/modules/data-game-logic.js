@@ -639,7 +639,7 @@ if(typeof ObtainLevelTransition==="undefined"){
 function AdvanceLevel(){
 	ObtainLevelTransition();
 	LocalsaveLevel(CurrentScreen());
-	ObtainLeverLoader();
+	ObtainLevelLoader();
 	ClearLevelRecord();
 	UpdateLevelSelectorButton();
 }
