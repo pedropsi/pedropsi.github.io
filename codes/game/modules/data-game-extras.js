@@ -1118,11 +1118,10 @@ function LevelDescriptionHTML(lvl){
 
 	title=title?`<p>${title}</p>`:"";
 	notes=notes?`<p class='notes'>${notes}</p>`:"";
-	best=best?`<p class='best'><b>best</b>:<em>${best}</em></p>`:"";
 	
 	return `${title}
-			${best}
-			${notes}`;
+			${notes}
+			${best}`;
 }
 
 function ChosenLevelDescriptionHTML(){

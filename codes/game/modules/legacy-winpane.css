@@ -1,0 +1,40 @@
+
+.winpane{
+   position: absolute;
+   width: 100%;
+   z-index: 2;
+}
+
+.winpane .winlegend{
+   width: 100%;
+   line-height:var(--h32);
+   min-height: var(--h32);
+   margin-top: calc( -1 * var(--h4));
+   overflow: hidden;   
+   
+   font-size:calc(var(--h16));
+   font-weight:bold;
+   font-variant-caps:small-caps;
+   
+   white-space: nowrap;
+   word-break:keep-all;
+   
+   background-color: var(--darkblue);
+   color: var(--white);
+   
+   transition-duration: 2s;
+   transition-timing-function:cubic-bezier(0.5,1,0.5,0);
+}
+
+.winpane .winlegend:nth-of-type(odd){
+   margin-left: 100vw;
+}
+.winpane .winlegend:nth-of-type(even){
+   margin-left: -100vw;
+}
+.winpane.animated .winlegend:nth-of-type(odd){
+   margin-left: -100vw;
+}
+.winpane.animated .winlegend:nth-of-type(even){
+   margin-left: 100vw;
+}
