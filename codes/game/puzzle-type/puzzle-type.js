@@ -193,7 +193,6 @@ function GameIntro(){
 }
 
 function StartGame(){
-	GameFocus();
 	PrepareGame();
 	ObtainLoadGame();
 	ObtainTitleScreenReLoader();
