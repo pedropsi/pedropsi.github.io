@@ -68,14 +68,6 @@ Sorter=function(...functions){
 	}
 }
 
-//Default
-function DefaultHandler(Handler){
-	var Handler=Handler||Identity;
-	return function(e){  
-		e.preventDefault();
-		return Handler(e);
-	}
-}
 
 
 //Key characters
@@ -3679,6 +3671,54 @@ if(!NodejsDetected()&&typeof window.CustomEvent!=="function"&&window.CustomEvent
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+//Event Listeners
+
+Attend=function(eventName,F,selector){
+	var name=eventName+"-"+selector;
+
+	UnAttend(eventName,selector);
+	Attend[name]=F;
+
+	var target=GetElement(selector)||window;
+	if(!target.addEventListener)
+		return;
+		
+	if(In(['click','mousedown'],eventName))
+		target.addEventListener(eventName,F,{"passive":true})
+	else
+		target.addEventListener(eventName,F)
+};
+
+AttendOnce=function(eventName,F,selector){
+	var name=eventName+"-"+selector;
+	function G(...args){
+		UnAttend(eventName,selector);
+		return F(...args);
+	}
+	Attend(eventName,G,selector);
+	Attend[name]=F;
+};
+
+UnAttend=function(eventName,selector){
+	var name=eventName+"-"+selector;
+
+	if(!Attend[name])
+		return;
+
+	var target=GetElement(selector)||window;
+	if(!target.removeEventListener)
+		return;
+		
+	var F=Attend[name];
+	delete Attend[name];
+
+	if(In(['click','mousedown'],eventName))
+		target.removeEventListener(eventName,F,{"passive":true})
+	else
+		target.removeEventListener(eventName,F)
+};
+
+
 //Event Listeners
 
 Listen=function(eventName,F,target){
