@@ -190,7 +190,6 @@ function GameIntro(){
 }
 
 function StartGame(){
-	GameFocus();
 	PrepareGame();
 	LoadGame();
 	InitialiseGameCanvas();
@@ -284,10 +283,10 @@ function KeyActions(){
 	Directions.map(DirectKeybinder);
 	["·","interpunkt"].map(Keybinder(Identity));//Do nothing
 
-	Keybinder(SelectPreviousLevel)("Ctrl down");
-	Keybinder(SelectPreviousLevel)("Ctrl left");
-	Keybinder(SelectNextLevel)("Ctrl up");
-	Keybinder(SelectNextLevel)("Ctrl right");
+	["Ctrl down","Ctrl left","page up"].map(Keybinder(SelectPreviousLevel));
+	["Ctrl up","Ctrl right","page down"].map(Keybinder(SelectNextLevel));
+
+	Keybinder(ObtainTitleScreenReLoader)("home");
 
 	["Escape","Enter"].map(DirectKeybinder);
 	["undo",ObtainMainKey("undo"),"Backspace","Delete","Ctrl U","Ctrl Z"].map(Keybinder(ObtainUndo));
@@ -2564,7 +2563,7 @@ function ObtainTitleScreenReLoader(){
 	TitleScreen(true);
 	Kinemate(TitleScreenLoaderMacro());
 	PlaySound(MediaPath()+"/sound/startgame.mp3");
-	Listen("mouseup",CopyHandler(LetterExtractor("#letters")),"#letters");
+	GameFocus();
 };
 
 function CleanTitleScreen(){
@@ -2694,7 +2693,6 @@ function TransitionGoalIn(duration){
 	var goal=GoalHTML(CurLevelTitle());
 	if(!goalE){
 		AppendElement(`<div class='goal goaly faded'>${goal}</div>`,".top .notes")
-		Listen("mouseup",CopyHandler(LetterExtractor(".goal")),".goal");
 	}
 	else{
 		Class(".goal",".goaly");
@@ -2713,7 +2711,6 @@ function TransitionKeystrokesIn(duration){
 	var duration=duration||200;
 	if(!GetElement(".top .keystrokes")){
 		AddElement(`<div class='keystrokes faded'></div>`,".top");
-		Listen("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
 	}
 	UnFadeElement(".top .keystrokes",duration);
 }
@@ -2777,6 +2774,9 @@ function LevelLoadMacro(){
 		{Starter:function(){
 			LaunchTouchActions(".top",TouchActionsTop());
 			LaunchTouchActions(".middle",TouchActionsMiddle());
+			Listen("mouseup",CopyHandler(LetterExtractor("#letters")),"#letters");
+			Listen("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
+			Listen("mouseup",CopyHandler(LetterExtractor(".goal")),".goal");
 			}
 		},
 		{Starter:UnBlockInput}
