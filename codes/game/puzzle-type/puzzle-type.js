@@ -16,16 +16,6 @@ function GameFrameHTML(){
 			</div>`;
 }
 
-function GameTopHTML(){
-	return `
-	<div class='top'></div>`
-}
-
-function GameMiddleHTML(){
-	return `<div class='middle'>
-				<div id='letters'></div>
-			</div>`;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Game module hooks
@@ -186,7 +176,21 @@ function GameIntro(){
 	PreAddElement(GameFrameHTML(),"BODY");
 	GameFocus();
 	LoadStyle(ModulesPath()+"/puzzle-type.css");
-	setTimeout(function(){PlayIntro(".game",StartGame)},300);
+	setTimeout(function(){PlayIntro(".game",Clickwall)},300);
+}
+
+function Clickwall(){
+	AddElement(`
+		<div class="clickwall faded">
+			<p>Please turn on your sound ${ObtainSymbol("music")}.</p>
+			<p><b>${KB("click")} to start!</b><p>
+		</div>`,".game");
+	UnFadeElement(".clickwall",500);
+	function Start(){
+		CloseElement(".game .clickwall",500);
+		setTimeout(StartGame,500)
+	}
+	AttendOnce("click",Start,".cickwall");
 }
 
 function StartGame(){
@@ -2554,8 +2558,10 @@ function ModifyLetters(ChangeF,ConditionF){
 
 function InitialiseGameCanvas(){
 	RemoveChildren("gameCanvas");
-	OpenElement(GameTopHTML(),"gameCanvas");
-	OpenElement(GameMiddleHTML(),"gameCanvas");
+	AddElement(`<div class='top faded'></div>`,"gameCanvas");
+	AddElement(`<div class='middle faded'><div id='letters'></div></div>`,"gameCanvas");
+	UnFadeElement(".top",500);
+	UnFadeElement(".middle",500);
 }
 
 
