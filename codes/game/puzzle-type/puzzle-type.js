@@ -666,12 +666,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Rise",					//Alphabetical 
 	"Falls",				//Alphabetical, Arithmethic, Retroactive
 	"Precedent",			//Alphabetical, Retroactive
-	"Teleporter",				//Positional, Retroactive
-	"Superior",				//Positional, Alphabetical, Retroactive
-	//"Tangles",			//Alphabetical, Cyclic, Arithmethic, Proactive
-	"Difference",			//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
-	//"Photocopier",		//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
-
+	
 	"Symmetries",			//Shape, Retroactive
 	"Fillet",				//Shape, Proactive 
 	"Topological",			//Shape, Growth, Monoactive
@@ -698,7 +693,14 @@ var LevelGoals=[			//Required types of thinking:
 	"Starting buds",					//Language
 	"La rapide surprise",				//Keyword, Swap, Retroactive, Language
 	"Just cut and paste",				//Keyword, Proactive, Redefinition
-	"Order is all"						//Keyword, Proactive, Increment, Redefinition
+	"Order is all",						//Keyword, Proactive, Increment, Redefinition
+
+	"Teleporter",				//Positional, Retroactive
+	"Superior",				//Positional, Alphabetical, Retroactive
+	//"Tangles",			//Alphabetical, Cyclic, Arithmethic, Proactive
+	"Difference",			//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
+	//"Photocopier",		//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
+
 ];
 
 function RestrictPlayableLevels(){
