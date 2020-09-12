@@ -6332,9 +6332,7 @@ CopyHandler = function(Extractor){
 		};
 		if(!text)
 			return;
-		try{
-			Throttle(CopyLogger,500)
-		}
+		try{Throttle(CopyLogger,500)}
 		catch(err){	}
 	};
 }
