@@ -623,7 +623,6 @@ var MathematicalLevels=[
 
 var StructuralLevels=[
 	"Superior",
-	"Difference",
 	"La rapide surprise",
 	"Just cut and paste",
 	"Order is all"
