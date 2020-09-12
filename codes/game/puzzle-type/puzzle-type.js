@@ -199,11 +199,11 @@ function StartGame(){
 
 TouchActionsTitlescreen=function(){
 	return{
-	"swipe-tap":SelectCurrentLevel,
-	"swipe-left":SelectCurrentLevel,
-	"swipe-up":SelectCurrentLevel,
-	"swipe-right":SelectCurrentLevel,
-	"swipe-down":SelectCurrentLevel
+	"swipe-tap":LevelLoader,
+	"swipe-left":LevelLoader,
+	"swipe-up":LevelLoader,
+	"swipe-right":LevelLoader,
+	"swipe-down":LevelLoader
 	}
 }
 
@@ -2579,6 +2579,7 @@ function LevelLoader(){
 		return ObtainTitleScreenReLoader();
 	}
 	Kinemate(LevelLoadMacro());
+	GameFocus();
 }
 
 function CleanLevel(){
@@ -2745,6 +2746,7 @@ function TitleScreenLoaderMacro(){
 			LaunchTouchActions(gameSelector,TouchActionsTitlescreen());
 			UnLaunchTouchActions(".top",TouchActionsTop());
 			UnLaunchTouchActions(".middle",TouchActionsMiddle());
+			Attend("mouseup",LevelLoader,gameSelector);
 			UnAttend("mouseup","#letters");
 			UnAttend("mouseup",".goal");
 			UnAttend("mouseup",".keystrokes");
@@ -2777,6 +2779,7 @@ function LevelLoadMacro(){
 			UnLaunchTouchActions(gameSelector,TouchActionsTitlescreen());
 			LaunchTouchActions(".top",TouchActionsTop());
 			LaunchTouchActions(".middle",TouchActionsMiddle());
+			UnAttend("mouseup",gameSelector);
 			Attend("mouseup",CopyHandler(LetterExtractor("#letters")),"#letters");
 			Attend("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
 			Attend("mouseup",CopyHandler(LetterExtractor(".goal")),".goal");
