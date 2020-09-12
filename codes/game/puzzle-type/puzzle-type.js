@@ -2790,6 +2790,7 @@ function LevelLoadMacro(){
 };
 
 
+
 function LevelWinMacro(){
 	return [
 		{Starter:BlockInput},
@@ -3151,9 +3152,6 @@ function LetterExtractor(parentSelector,letterSelector,Acceptor,Simplifier){
 		return text;
 	}
 }
-
-var ExtractKeystrokes=LetterExtractor(".keystrokes",".keystroke",s=>!Classed(s,"keystroke-invalid"),KeystrokeSimplifier(CurLevelTitle()));
-
 
 
 function LetterString(e){
