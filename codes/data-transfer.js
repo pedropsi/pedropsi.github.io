@@ -69,6 +69,7 @@ Sorter=function(...functions){
 }
 
 
+
 //Key characters
 var NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
 var LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -3683,6 +3684,54 @@ if(!NodejsDetected()&&typeof window.CustomEvent!=="function"&&window.CustomEvent
 ///////////////////////////////////////////////////////////////////////////////
 //Event Listeners
 
+Attend=function(eventName,F,selector){
+	var name=eventName+"-"+selector;
+
+	UnAttend(eventName,selector);
+	Attend[name]=F;
+
+	var target=GetElement(selector)||window;
+	if(!target.addEventListener)
+		return;
+		
+	if(In(['click','mousedown'],eventName))
+		target.addEventListener(eventName,F,{"passive":true})
+	else
+		target.addEventListener(eventName,F)
+};
+
+AttendOnce=function(eventName,F,selector){
+	var name=eventName+"-"+selector;
+	function G(...args){
+		UnAttend(eventName,selector);
+		return F(...args);
+	}
+	Attend(eventName,G,selector);
+	Attend[name]=F;
+};
+
+UnAttend=function(eventName,selector){
+	var name=eventName+"-"+selector;
+
+	if(!Attend[name])
+		return;
+
+	var target=GetElement(selector)||window;
+	if(!target.removeEventListener)
+		return;
+		
+	var F=Attend[name];
+	delete Attend[name];
+
+	if(In(['click','mousedown'],eventName))
+		target.removeEventListener(eventName,F,{"passive":true})
+	else
+		target.removeEventListener(eventName,F)
+};
+
+
+//Event Listeners
+
 Listen=function(eventName,F,target){
 	if(NodejsDetected()){
 		var eventName=UnPosfix(eventName,".js").replace(/.*\//g,"");
@@ -5476,6 +5525,9 @@ var Icons={
 	"eye":{path:"M 32 21 L 32 32 L 36 22 Q 41 23 41 30 Q 41 39 32 39 Q 23 39 23 30 Q 23 21 32 21 M 39 16 Q 46 18 47 30 Q 46 44 32 45 Q 18 44 17 30 Q 18 16 32 15 L 32 16 Q 19 17 18 30 Q 19 43 32 44 Q 45 43 46 30 Q 45 19 38 17 L 39 16 M 32 11 Q 52 11 64 30 Q 52 49 32 49 Q 13 49 0 30 Q 12 11 32 11 L 32 15 Q 14 15 5 30 Q 14 45 32 45 Q 50 45 59 30 Q 50 15 32 15 Z",vbmax:"65 65"},//"👁",
 	"magnifying-glass":{path:"M 1 24 L 3 26 L 11 18 L 12 16 Q 19 20 24 14 Q 28 8 23 3 Q 16 -2 11 4 Q 6 9 11 15 M 11 15 L 9 16 L 1 24 M 13 15 Q 8 10 12 5 Q 17 0 22 4 Q 26 8 23 13 Q 18 18 13 15 M 14 13 Q 19 15 22 11 Q 19 14 14 13",vbmax:"27 27"},//"Ϙ"//"⚲",
     "book":{path:"M 10 26 L 10 90 Q 40 80 50 90 Q 60 80 90 90 L 90 26 Q 63 13 50 23 Q 36 13 10 26 M 15 25 Q 35 15 50 25 Q 65 15 85 25 L 85 87 Q 65 78 50 87 Q 35 78 15 87 L 15 25 M 15 75 Q 25 69 50 77 Q 75 70 85 75 L 85 78 Q 72 72 50 80 Q 28 71 15 78 L 15 75 M 15 80 Q 29 74 50 82 Q 71 75 85 80 L 85 85 Q 70 77 50 85 Q 30 77 15 85 L 15 78 M 49 25 L 49 76 L 50 77 L 50 26 L 49 25",vbmax:"100 100"},//"🕮"
+	"math":{path:"M 5 15 L 8 4 L 19 4 L 18 5 L 9 5 L 5 18 L 3 11 L 1 11 L 1 9 L 4 9 Z M 13 11 L 13 11 L 16 8 L 16 17 L 17 17 L 18 18 L 13 18 L 14 17 L 15 17 L 15 11 Z M 9 14 L 12 14 L 12 15 L 9 15 L 9 14 Z",vbmax:"20 20"},
+	"structure":{path:"M 10 12 L 13 2 L 16 12 L 17 22 L 20 17 L 24 24 L 22 24 L 20 20 L 18 24 L 16 24 L 15 21 L 13 19 L 11 21 L 10 24 L 8 24 L 6 20 L 4 24 L 2 24 L 6 17 L 9 22 Z M 13 5 L 11 12 L 15 12 Z M 13 15 L 16 19 L 15 14 L 11 14 L 10 19 Z",vbmax:"25 25"},
+	
 
 	"body-arm-left-down":{path:"M 5 7 L 5 3 Q 3 3 2 4 Q 1 5 1 6 Q 1 8 3 5 Q 3 7 4 7 Z",vbmax:"10 10"},
 	"body-arm-left-up":{path:"M 5 7 L 5 3 Q 4 3 3 3 Q 1 0 1 2 Q 1 3 3 5 Q 3 7 4 7 Z",vbmax:"10 10"},

@@ -89,30 +89,51 @@ PolarSwipe=function(F){
 	F(swipeRadius,swipeAngle);
 }
 
-//Lauch Touch Actions
+//Launch Touch Actions
+
+//Default
+DefaultHandler=function(Handler){
+	var Handler=Handler||Identity;
+	return function(e){  
+		e.preventDefault();
+		return Handler(e);
+	}
+}
 
 LaunchTouchActions=function(touchSel,actions){
+	UnLaunchTouchActions(touchSel,actions);
+	Attend(
+		'touchmove',
+		DefaultHandler(HandleTouchMover(touchSel)),
+		touchSel);
 
-	Listen('touchmove',function(e){  
-		e.preventDefault();
-		HandleTouchMover(touchSel)(e);
-	},touchSel);
+	Attend(
+		'touchend',
+		DefaultHandler(HandleTouchEnder(touchSel)),
+		touchSel);
 
-	Listen('touchend',function(e){
-		e.preventDefault();
-		HandleTouchEnder(touchSel)(e);
-	},touchSel);
-
-	Listen('touchstart',function(e){
-		e.preventDefault();
-		HandleTouchStart(e);
-	},touchSel);
+	Attend(
+		'touchstart',
+		DefaultHandler(HandleTouchStart)
+		,touchSel);
 
 	Keys(actions).map(
-		key=>Listen(key,actions[key],touchSel)
+		key=>Attend(key,actions[key],touchSel)
 	)
 }
 
+UnLaunchTouchActions=function(touchSel,actions){
+
+	UnAttend('touchmove',touchSel);
+
+	UnAttend('touchend',touchSel);
+
+	UnAttend('touchstart',touchSel);
+
+	Keys(actions).map(
+		key=>UnAttend(key,touchSel)
+	)
+}
 
 Shout("data-game-gestures")
 
