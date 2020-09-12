@@ -93,20 +93,20 @@ PolarSwipe=function(F){
 
 LaunchTouchActions=function(touchSel,actions){
 
-	Listen('touchmove',function(e){  
-		e.preventDefault();
-		HandleTouchMover(touchSel)(e);
-	},touchSel);
+	Listen(
+		'touchmove',
+		DefaultHandler(HandleTouchMover(touchSel)),
+		touchSel);
 
-	Listen('touchend',function(e){
-		e.preventDefault();
-		HandleTouchEnder(touchSel)(e);
-	},touchSel);
+	Listen(
+		'touchend',
+		DefaultHandler(HandleTouchEnder(touchSel)),
+		touchSel);
 
-	Listen('touchstart',function(e){
-		e.preventDefault();
-		HandleTouchStart(e);
-	},touchSel);
+	Listen(
+		'touchstart',
+		DefaultHandler(HandleTouchStart)
+		,touchSel);
 
 	Keys(actions).map(
 		key=>Listen(key,actions[key],touchSel)

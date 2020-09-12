@@ -68,6 +68,15 @@ Sorter=function(...functions){
 	}
 }
 
+//Default
+function DefaultHandler(Handler){
+	var Handler=Handler||Identity;
+	return function(e){  
+		e.preventDefault();
+		return Handler(e);
+	}
+}
+
 
 //Key characters
 var NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
