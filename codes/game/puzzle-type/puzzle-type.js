@@ -200,11 +200,11 @@ function StartGame(){
 
 TouchActionsTitlescreen=function(){
 	return{
-	"swipe-tap":SelectNextLevel,
-	"swipe-left":SelectNextLevel,
-	"swipe-up":SelectNextLevel,
-	"swipe-right":SelectNextLevel,
-	"swipe-down":SelectNextLevel
+	"swipe-tap":SelectCurrentLevel,
+	"swipe-left":SelectCurrentLevel,
+	"swipe-up":SelectCurrentLevel,
+	"swipe-right":SelectCurrentLevel,
+	"swipe-down":SelectCurrentLevel
 	}
 }
 

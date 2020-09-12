@@ -1297,6 +1297,10 @@ function SelectPreviousLevel(){
 	SelectLevel(LevelNumber(CurrentScreen()-1));
 }
 
+function SelectCurrentLevel(){
+	SelectLevel(LevelNumber(CurrentScreen()));
+}
+
 function SelectNextLevel(){
 	SelectLevel(LevelNumber(CurrentScreen()+1));
 }
