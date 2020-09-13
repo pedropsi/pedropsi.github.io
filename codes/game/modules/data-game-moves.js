@@ -179,16 +179,24 @@ function UpdateSelectData(lvlch,type){
 
 //Best moves
 
+if(typeof ObtainCanonicalTitle==="undefined")
+	var ObtainCanonicalTitle=Identity;
+
 function BestMoves(){
 	if(!BestMoves.moves){
-		BestMoves.moves=LocalStorage("bestmoves")
+		BestMoves.moves=LocalStorage("bestmoves");
 		if(IsArray(BestMoves.moves)){
 			BestMoves.moves={};
 			LocalStorage("bestmoves",{});
 		}
+		else{
+			BestMoves.moves=CanonicalObject(BestMoves.moves,ObtainCanonicalTitle);
+			LocalStorage("bestmoves",BestMoves.moves);
+		}
 	}
 	return BestMoves.moves;
 }
+
 
 function BestMove(title,newmove){
 	if(!title)

@@ -530,6 +530,17 @@ DictionaryAccesser=function(Dictionary,Rewriter){
 	}
 }
 
+function CanonicalObject(Obj,CanonicalName){
+	if(!CanonicalName)
+		return Obj;
+	var keys=Keys(Obj).filter(k=>(k!==CanonicalName(k)));
+		keys.map(function(k){
+			Obj[CanonicalName(k)]=Obj[k];
+			delete Obj[k];
+		})
+	return Obj;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Set functions
 

@@ -82,6 +82,7 @@ function ObtainLevelNumberDisplay(m){
 
 var ObtainLevelLoader=LevelLoader;
 
+
 //Resize canvas
 function ResizeCanvas(){return ;}
 function ObtainXYRotateCondition(x,y){return y>x;}
@@ -473,12 +474,12 @@ function AllowExtraRestartKey(key){
 }
 
 function LevelWinSound(){
-	var leveltitle=CurLevelTitle();
+	var title=CurLevelTitle();
 	var customsounds={
 		"Deaf":function(){/*PlayChord("FACFACEGAC",true,3)*/}
 	}
-	if(In(customsounds,leveltitle))
-		return customsounds[leveltitle];
+	if(In(customsounds,title))
+		return customsounds[title];
 	else
 		return false;
 }
@@ -586,6 +587,7 @@ var ExternalLevels=[
 	"Deaf",
 	"⠍⠕⠗⠎⠑",
 	"Dividi",
+	"Magnetism"
 	//"Fuchsia",
 ]
 
@@ -735,7 +737,7 @@ var LevelGoalAliases={
 	"Starting strings":"Starting buds"
 }
 
-function GoalCanonicalName(title){
+function ObtainCanonicalTitle(title){
 	if(In(LevelGoalAliases,title)&&!In(LevelGoals,title))
 		return LevelGoalAliases[title];
 	else
@@ -744,12 +746,15 @@ function GoalCanonicalName(title){
 
 function ObtainLevelReader(level){
 	if(typeof level==="string"){
-		var levelname=GoalCanonicalName(level);
+		var levelname=ObtainCanonicalTitle(level);
 		return LevelGoals.indexOf(levelname);
 	}else
 		return level;
 }
 
+function ObtainLevelsWriter(solvedlevels){
+	return solvedlevels.map(ObtainLevelTitle).filter(Identity);
+}
 
 var LevelInstructions={
 	"Direct":Direct,
