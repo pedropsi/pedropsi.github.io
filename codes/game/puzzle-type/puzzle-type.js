@@ -636,15 +636,15 @@ var MathematicalLevels=[
 	"Falls",
 	"Precedent",
 	"Superior",
-	"Difference",
-	"Loosely less"
+	"Difference"
 ]
 
 var StructuralLevels=[
 	"Superior",
 	"La rapide surprise",
 	"Just cut and paste",
-	"Order is all"
+	"Order is all",
+	"Loosely less"
 ]
 
 function ObtainLevelNotes(lvl){
@@ -692,7 +692,6 @@ var LevelGoals=[			//Required types of thinking:
 	
 	"Nokia 1998",			//Keyboard
 	"Wasd",					//Keyboard, Emulation
-	"Loosely less",			//Keyboard, Shape, Proactive
 	"Dvorak",				//Keyboard, Cyclic
 
 	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
@@ -721,7 +720,7 @@ var LevelGoals=[			//Required types of thinking:
 	//"Tangles",			//Alphabetical, Cyclic, Arithmethic, Proactive
 	"Difference",			//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
 	//"Photocopier",		//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
-
+	"Loosely less",			//Keyboard, Shape, Proactive
 ];
 
 function RestrictPlayableLevels(){
@@ -2199,10 +2198,10 @@ function BelittleMath(digitstring){
 }
 
 function Belittle(L){
-	if(In(LEDLetterNumbers,L))
-		var L=LEDLetterNumbers[L];
-	var word=Word().replace(/\d+/g,BelittleMath);
+	var word=Word().split("").map(LEDLetterNumber).join("");
+		word=word.replace(/\d+/g,BelittleMath);
 		word=word+L;
+		word=word.split("").map(DictionaryAccesser(LEDNumberLetters)).join("");
 	Letters(word);
 	Caret(Infinity);
 }

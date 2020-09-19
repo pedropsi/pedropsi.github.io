@@ -31,7 +31,7 @@ var LEDLetters={
 	"3":"01236",
 	"4":"1256",
 	"5":"02356",
-	"6":"023456",
+	"6":"012346",
 	"7":"012",
 	"8":"0123456",
 	"9":"01256",
@@ -110,12 +110,23 @@ var LEDLetterNumbers={
 	"E":3,
 	// "Y":4,
 	"S":5,
-	"G":6,
+	//"G":6,
 	// "T":7,
 	"L":7,
 	"B":8,
 	// "G":9
 }
+
+var LEDNumberLetters=FlipKeysValues(LEDLetterNumbers);
+
+LEDLetterNumber=function(L){
+	var L=L.toUpperCase();
+	if(In(LEDLetterNumbers,L))
+		return LEDLetterNumbers[L];
+	else
+		return L;
+}
+
 
 function LEDLetterSVGHTML(ledstring){
 	var coordinates=ledstring.split("");
