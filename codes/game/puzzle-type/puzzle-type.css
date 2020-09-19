@@ -339,11 +339,6 @@
    align-items: center;
 }
 
-.question .bezier{
-   height:calc(var(--h1) + var(--w1));
-   padding:unset;
-   stroke: var(--blue);
-}
 
 .question{
    line-height: 0.5;
