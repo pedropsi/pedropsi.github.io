@@ -146,6 +146,7 @@ var gameModulesLater=[
 "lang-gender",
 "lang-kana",
 "letter-topology",
+"letter-led",
 "morse-braille",
 "nuclei",
 "number-reader",
@@ -363,7 +364,7 @@ function GameInput(key){
 	}
 	
 	else{
-		if(Letters.array.length>=50||AllowExtraRestartKey(key)){//Max Char Limit (arbitrary, to fit screen)
+		if(Letters.array.length>=CharLimit(CurLevelTitle())||AllowExtraRestartKey(key)){//Max Char Limit (arbitrary, to fit screen)
 			Restart();return;
 		}
 		else{
@@ -374,6 +375,17 @@ function GameInput(key){
 	ObtainUpdateLevel();
 	CheckWin();	
 }
+
+function CharLimit(title){
+	if(In(CharLimits,title))
+		return CharLimits[title]
+	else
+		return 50;
+}
+
+var CharLimits={
+	"Loosely less":15
+};
 
 function TitleScreenInput(key){
 	if(key!=="Escape")
@@ -422,6 +434,7 @@ function ForbidNumberActions(key){
 		"Symmetries",
 		// "Topological",
 		"Nokia 1998",
+		"Loosely less",
 		// "Fuchsia",
 		"Odd",
 		"La rapide surprise",
@@ -437,6 +450,7 @@ function ForbidSpaceActions(key){
 		"Second",
 		"Follow",
 		"Rotate",
+		"Loosely less",
 		"Latent clones",
 		"Shepherdess hence unladylike",
 		"Nigeria",
@@ -541,6 +555,7 @@ var LevelDifficulty={
 	"Symmetries":2,
 	"Fillet":3,
 	"Topological":4,
+	"Loosely less":5,
 	"Wasd":2,
 	"Nokia 1998":1,
 	"Dvorak":4,
@@ -601,6 +616,7 @@ var VisualLevels=[
 	"Symmetries",
 	"Fillet",
 	"Topological",
+	"Loosely less",
 	"Wasd",
 	"Nigeria",
 	"Dvorak",
@@ -620,7 +636,8 @@ var MathematicalLevels=[
 	"Falls",
 	"Precedent",
 	"Superior",
-	"Difference"
+	"Difference",
+	"Loosely less"
 ]
 
 var StructuralLevels=[
@@ -672,10 +689,12 @@ var LevelGoals=[			//Required types of thinking:
 	"Symmetries",			//Shape, Retroactive
 	"Fillet",				//Shape, Proactive 
 	"Topological",			//Shape, Growth, Monoactive
-
+	
 	"Nokia 1998",			//Keyboard
 	"Wasd",					//Keyboard, Emulation
+	"Loosely less",			//Keyboard, Shape, Proactive
 	"Dvorak",				//Keyboard, Cyclic
+
 	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
 
 	"Nigeria",				//Word, Mapping, Geography
@@ -721,6 +740,11 @@ RestrictPlayableLevels();
 var LevelGoalAliases={
 	"Vowel":"Consonant",
 	"Homeomorphic":"Topological",
+	"Loosely less":"Calculator",
+	"Loosely less":"Cooked books",
+	"Loosely less":"Time to cook",
+	"Loosely less":"Timed cooldown",
+	"Loosely less":"Less cool",
 	"White":"Fuchsia",
 	"Nucleus":"Ironclad",
 	"Tennessine":"Ironclad",
@@ -870,6 +894,7 @@ var LevelInstructions={
 	"Symmetries":Symmetries,
 	"Fillet":Fillet,
 	"Topological":Topological,
+	"Loosely less":Belittle,
 	"Dvorak":function (L){
 		AddStrokeValid(L);
 		var n=Letters.array.map(function(M){return DvorakMapping["row_"+M]});
@@ -2167,6 +2192,20 @@ function NokiaGroupNumber(L){
 }
 
 
+//Belittle
+function BelittleMath(digitstring){
+	var n=Max(0,Number(digitstring.split("").reverse().join(""))-1);
+	return String(n).split("").reverse().join("");
+}
+
+function Belittle(L){
+	if(In(LEDLetterNumbers,L))
+		var L=LEDLetterNumbers[L];
+	var word=Word().replace(/\d+/g,BelittleMath);
+		word=word+L;
+	Letters(word);
+	Caret(Infinity);
+}
 
 
 //Dvorak
@@ -2394,16 +2433,25 @@ var LetterDisplayers={
 	// "Fuchsia":LetterDraftHTML,
 	"Deaf":LetterDraftHTML,
 	"Nigeria":LetterDraftHTML,
-	"Topological":BezierLetterSVG
+	"Topological":BezierLetterSVG,
+	"Loosely less":LEDLetterSVG
 }
 
 var GoalDisplayers={
-	"Topological":function(l){return BezierLetterSVG(l.toUpperCase())},
+	"Topological":BezierLetterSVG,
+	"Loosely less":LEDLetterSVG,
 	"Deaf":LetterPureHTML
 }
 
 function BezierLetterSVG(L){
-	return BezierLetter(L);
+	return BezierLetter(L.toUpperCase());
+}
+
+function LEDLetterSVG(L){
+	if(L===" ")
+		return LetterPureHTML(" ");
+	else
+		return LEDLetterSVGHTML(LEDLetters[L.toUpperCase()]);
 }
 
 function LetterDraftHTML(L){
