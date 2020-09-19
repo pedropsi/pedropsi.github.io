@@ -770,7 +770,7 @@ function ObtainCanonicalTitle(title){
 function ObtainLevelReader(level){
 	if(typeof level==="string"){
 		var levelname=ObtainCanonicalTitle(level);
-		return LevelGoals.indexOf(levelname);
+		return LevelGoals.indexOf(levelname)+1;
 	}else
 		return level;
 }
