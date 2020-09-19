@@ -326,6 +326,7 @@
    stroke-linecap:round;
    padding-left: var(--w-4);
    padding-right: var(--w-4);
+   overflow: visible;
 }
 
 .bezier.letter.led{
