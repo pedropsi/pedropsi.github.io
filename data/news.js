@@ -1,4 +1,11 @@
 News={
+N_55:{
+		DATE:"2020-09-19",
+		HEADER:()=>"Reorderings, bugfix",
+		PIECE:()=>`
+		<p>${AHTML("puzzle-type")} levels were reordered after playtesting feedback, and new labels ${ObtainSymbol("structure")} and  ${ObtainSymbol("math")} were added. Some bugfixes. Thanks ${v.HEDEHOLM()} and ${v.DEUSOVI()}!
+		<p>Levels LOO*** added.</p>
+	`,ID:"puzzle-type"},
 N_54:{
 		DATE:"2020-08-30",
 		HEADER:()=>"Level transitions, new levels, etc...",

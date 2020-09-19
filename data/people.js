@@ -78,7 +78,7 @@ FARBS:{TYPE:"Developer",NAME:"Farbs",TWITTER:"FarbsMcFarbs",PERSONAL_PAGE:"farbs
 HITCHMAN:{TYPE:"Developer",NAME:"Ryan Hitchman",PERSONAL_PAGE:"https://the8bitpimp.wordpress.com/"},
 WHITEHEAD:{TYPE:"Developer",NAME:"Nathan Whitehead",GITHUB_COM:"nwhitehead"},
 JD:{TYPE:"Developer",NAME:"Jonathan",ALIAS:"JD",ITCH:"jdersch"},
-DEUSOVI:{TYPE:"Developer",NAME:"Deusovi"},
+DEUSOVI:{TYPE:"Developer",NAME:"Deusovi",TWITTER:"deusovi",PERSONAL_PAGE:"https://puzzling.stackexchange.com/users/11876/deusovi"},
 MAGO:{TYPE:"Developer",NAME:"mago314"},
 KNEXATOR:{TYPE:"Developer",NAME:"Daniel Hurtado",ALIAS:"knexator"},
 JOSHUASTONE:{TYPE:"Developer",NAME:"Joshua Stone",TWITTER:"IAmJoshuaStone"},
