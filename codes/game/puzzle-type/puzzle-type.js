@@ -3328,7 +3328,8 @@ function LevelSolution(title){ //In a separate file
 function SolutionTypingInterval(title){
 	var intervals={
 		"Topological":"1000",
-		"Nokia 1998":"1000"
+		"Nokia 1998":"1000",
+		"Loosely less":"100"
 	}
 	if(In(intervals,title))
 		return intervals[title];
