@@ -2473,11 +2473,13 @@ IconHTML=function(Opts){
 
 	var viewbox=Opts.viewbox||`${vbmin} ${vbmax}`;
 
+	var cla=Opts.cla||"";
+
 	if(Opts.transform)
 		path=SVGPathTransform(path,Opts.transform,viewbox);
 
 	var svghtml=`
-		<svg class='iconpath icon-${name}' width='${width}' height='${height}' viewBox='${viewbox}'>
+		<svg class='iconpath icon-${name} ${cla}' width='${width}' height='${height}' viewBox='${viewbox}'>
 			<path d='${path}'/>
 		</svg>`;
 	return SpanHTML(svghtml,"icon");
