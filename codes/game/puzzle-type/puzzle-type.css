@@ -331,7 +331,8 @@
 
 .bezier.letter.led{
    width:calc(var(--h4) + var(--w2));
-   stroke-width:1.5;
+   stroke-width:0.5;
+   fill: var(--darkblue);
 }
 
 .middle .bezier.letter{
