@@ -2468,8 +2468,8 @@ SVGHTML=function(Opts){
 	var height=Opts.height||Opts.width||"20";
 	var width=Opts.width||Opts.height||"20";
 
-	var vbmin=Opts.vbmin||`0 0`;
-	var vbmax=Opts.vbmax||`400 400`;
+	var vbmin=Opts.vbmin||SVGPathViewboxMin(path)||`0 0`;
+	var vbmax=Opts.vbmax||SVGPathViewboxMax(path)||`400 400`;
 
 	var viewbox=Opts.viewbox||`${vbmin} ${vbmax}`;
 
@@ -5517,7 +5517,7 @@ var Icons={
 
 	"how-to-play":{path:"M 18 1 C 10 1 7 7 9 14 C 9 14 13 13 13 13 C 12 8 14 5 18 5 C 23 5 25 12 19 15 C 15 17 14 19 13 24 L 17 25 C 18 21 18 19 21 18 C 30 15 29 1 18 1 Z M 14 28 C 9 28 9 35 14 35 C 19 35 19 28 14 28 Z",vbmax:"36 36"},
 	"credits":{path:"M 7 1 Q 13 1 13 7 Q 13 13 7 13 Q 1 13 1 7 Q 1 1 7 1 L 7 2 Q 2 2 2 7 Q 2 12 7 12 Q 9 12 11 10 L 9 8 Q 8 9 7 9 Q 5 9 5 7 Q 5 5 7 5 Q 8 5 9 6 L 11 4 Q 9 2 7 2 Z",vbmax:"14 14"},
-	"undo":{path:"M 106 149 L 58 127 L 85 242 L 194 192 L 152 170 C 240 56 333 138 346 248 L 394 246 C 377 59 215 7 106 149",vbmin:"0 -50"},
+	"undo":{path:"M 106 149 L 58 127 L 85 242 L 194 192 L 152 170 C 240 56 333 138 346 248 L 394 246 C 377 59 215 7 106 149",vbmin:"0 -50",vbmax:"400 400"},
 	"redo":{primitive:"undo",transform:"flip-horizontal"},
 	"restart":{path:"M 180 90 L 252 188 L 264 145 C 348 211 307 320 225 340 C 144 360 40 267 129 139 L 92 118 C -23 262 110 418 238 384 C 370 350 398 174 277 98 L 291 42 Z"},
 	"fullscreen":{path:"M 236 85 L 309 85 L 309 154 L 346 154 L 346 48 L 236 48 L 236 85 M 38 200 L 75 200 L 75 121 L 148 121 L 148 84 L 38 84 L 38 200 M 38 363 L 148 363 L 148 326 L 75 326 L 75 253 L 38 253 L 38 363 M 272 326 L 199 326 L 199 363 L 309 363 L 309 253 L 272 253 L 272 326"},
@@ -5725,7 +5725,31 @@ function SVGPathTransform(path,name,viewbox){
 	return SVGPathApply(path,SVGCoordinatesF);
 }
 
+function SVGLineChange(svgline,F){
+	var F=F||Identity;
+	var svgline=svgline.trim();
+	var xyArray=Rest(svgline);
+	if(!xyArray)
+		return "";
+	else{
+		xyArray=SVGLinePairs(xyArray);
+		xyArray=F(xyArray);
+		return xyArray;
+	}
+}
 
+function SVGPathViewboxMin(path){
+	var xs=SVGPathSplit(path).map(line=>SVGLineChange(line,p=>p.map(First).flat())).flat();
+	var ys=SVGPathSplit(path).map(line=>SVGLineChange(line,p=>p.map(Last).flat())).flat();
+	return Min(xs)+" "+Min(ys);
+}
+
+
+function SVGPathViewboxMax(path){
+	var xs=SVGPathSplit(path).map(line=>SVGLineChange(line,p=>p.map(First).flat())).flat();
+	var ys=SVGPathSplit(path).map(line=>SVGLineChange(line,p=>p.map(Last).flat())).flat();
+	return Max(xs)+" "+Max(ys);
+}
 
 //Keyboard Keys Description
 // 0: multiple actions
@@ -5955,6 +5979,7 @@ SVGHTML2=function(opts){
 	var x1=typeof opts.x1==="undefined"?1:opts.x1;
 	var y0=opts.y0||0;
 	var y1=typeof opts.y1==="undefined"?1:opts.y1;
+	var cla=opts.cla||"";
 	return `<svg ${cla?`class="${cla}"`:""} viewbox="${x0} ${y0} ${x1} ${y1}" ></svg>`;
 }
 
