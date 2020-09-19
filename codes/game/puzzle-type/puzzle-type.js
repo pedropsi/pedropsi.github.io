@@ -893,7 +893,7 @@ var LevelInstructions={
 	"Symmetries":Symmetries,
 	"Fillet":Fillet,
 	"Topological":Topological,
-	"Loosely less":Belittle,
+	"Loosely less":Loosely,
 	"Dvorak":function (L){
 		AddStrokeValid(L);
 		var n=Letters.array.map(function(M){return DvorakMapping["row_"+M]});
@@ -2191,17 +2191,21 @@ function NokiaGroupNumber(L){
 }
 
 
-//Belittle
-function BelittleMath(digitstring){
+//Loosely
+function LooselyMath(digitstring){
 	var n=Max(0,Number(digitstring.split("").reverse().join(""))-1);
 	return String(n).split("").reverse().join("");
 }
 
-function Belittle(L){
+function Loosely(L){
 	var word=Word().split("").map(LEDLetterNumber).join("");
-		word=word.replace(/\d+/g,BelittleMath);
+		word=word.replace(/\d+/g,LooselyMath);
 		word=word+L;
 		word=word.split("").map(DictionaryAccesser(LEDNumberLetters)).join("");
+	if(In(LEDNumberLetters,L)||In(LEDLetterNumbers,L))
+		AddStrokeUnderline(L);
+	else
+		AddStrokeValid(L);
 	Letters(word);
 	Caret(Infinity);
 }
