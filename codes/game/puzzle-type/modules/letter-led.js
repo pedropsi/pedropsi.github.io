@@ -5,7 +5,7 @@ var LEDLetters={
 	"D":"12XY",
 	"E":"01236",
 	"F":"1236",
-	"G":"01235X",
+	"G":"012356",
 	"H":"12456",
 	"I":"12",
 	"J":"0145",
@@ -104,8 +104,6 @@ function LEDLetterSVGHTML(ledstring){
 
 	return SVGHTML({
 		path:coordinates,
-		vbmin:"-4 -2",
-		vbmax:"22 22",
 		transform:"flip-vertical",
 		cla:"bezier letter led"
 	})
