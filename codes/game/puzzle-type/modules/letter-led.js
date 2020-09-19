@@ -97,16 +97,16 @@ var LEDCoordinates={
 // 	return string.replace(/9\s/g,"9.414 ").replace(/8\s/g,"7.585 ");
 // }
 
-function LEDLetterIconHTML(ledstring){
+function LEDLetterSVGHTML(ledstring){
 	var coordinates=ledstring.split("");
 		coordinates=coordinates.map(c=>LEDCoordinates[c]);
 		coordinates=coordinates.join(" ");
 
-	return IconHTML({
+	return SVGHTML({
 		path:coordinates,
 		vbmin:"-4 -2",
 		vbmax:"22 22",
 		transform:"flip-vertical",
-		cla:"led letter"
+		cla:"bezier letter led"
 	})
 }

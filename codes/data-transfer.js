@@ -2460,7 +2460,7 @@ FigureHTML=function(source,caption){
 			</figure>`;
 }
 
-IconHTML=function(Opts){
+SVGHTML=function(Opts){
 	var path=IsString(Opts)?Opts:(Opts.path||"M 10 10 L 20 10 L 10 20 Z");
 	
 	var name=Opts.name||"unnamed";
@@ -2482,7 +2482,11 @@ IconHTML=function(Opts){
 		<svg class='iconpath icon-${name} ${cla}' width='${width}' height='${height}' viewBox='${viewbox}'>
 			<path d='${path}'/>
 		</svg>`;
-	return SpanHTML(svghtml,"icon");
+	return svghtml;
+}
+
+IconHTML=function(Opts){
+	return SpanHTML(SVGHTML(Opts),"icon");
 }
 
 SpanHTML=function(html,clas){
@@ -5946,14 +5950,14 @@ function Wallpaper(name){
 ///////////////////////////////////////////////////////////////////////////////
 //SVG Drawing
 
-SVGHTML=function(opts){
+SVGHTML2=function(opts){
 	var x0=opts.x0||0;
 	var x1=typeof opts.x1==="undefined"?1:opts.x1;
 	var y0=opts.y0||0;
 	var y1=typeof opts.y1==="undefined"?1:opts.y1;
-	var cla=opts.cla||"";
 	return `<svg ${cla?`class="${cla}"`:""} viewbox="${x0} ${y0} ${x1} ${y1}" ></svg>`;
 }
+
 
 SVGLineHTML=function(opts){
 	if(opts.horizontal){
@@ -6195,7 +6199,7 @@ AddChartComponent=function(component,opts,chart){
 
 AddChart=function(opts,target){
 	var cla=opts.cla||"chart";
-	var chart=AddElement(SVGHTML({cla:cla}),target);
+	var chart=AddElement(SVGHTML2({cla:cla}),target);
 	
 	ChartComponents().map(function(c){
 		if(opts[c]){AddChartComponent(c,opts[c],Prefix(cla,"."))};
