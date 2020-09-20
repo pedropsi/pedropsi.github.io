@@ -852,20 +852,6 @@ function LoadGame(){
 }
 
 
-// Preserve original level save format (within checkpoint stack)
-
-function FormerLevel4Serialization() { //The original one
-	var ret = {
-		dat : Array.from(level.objects),
-		width : level.width,
-		height : level.height,
-		oldflickscreendat: oldflickscreendat.concat([]),
-		//New
-		lvl:CurrentScreen()
-	};
-	return ret;
-}
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Winning Logic (non-linear level navigation "jumping")

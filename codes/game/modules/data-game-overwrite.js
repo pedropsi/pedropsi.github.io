@@ -58,6 +58,20 @@ function level4Serialization() { //Intercept
 	return FormerLevel4Serialization();
 }
 
+// Preserve original level save format (within checkpoint stack)
+
+function FormerLevel4Serialization() { //The original one
+	var ret = {
+		dat : Array.from(level.objects),
+		width : level.width,
+		height : level.height,
+		oldflickscreendat: oldflickscreendat.concat([]),
+		//New
+		lvl:CurrentScreen()
+	};
+	return ret;
+}
+
 
 //playSound - custom sound effects, if available
 function playSound(seed) {
