@@ -1,6 +1,42 @@
+//Game Options
+function ObtainBGColor(){return state.bgcolor;}
+function ObtainFGColor(){return state.fgcolor;}
 
-if(typeof ObtainPlayEndLevelSound==="undefined")
-	var ObtainPlayEndLevelSound=function(){tryPlayEndLevelSound()};
+function ObtainRestartAllowed(){return !state.metadata.norestart;}
+function ObtainUndoAllowed(){return !state.metadata.noundo;}
+
+function ObtainStateScreens(){return state.levels;}
+function ObtainNewGameCondition(){return titleSelection===0}
+
+function ObtainLevelTransition(){
+	textMode=false;
+	titleScreen=false;
+	quittingMessageScreen=false;
+	messageselected=false;
+}
+
+function ObtainTitleScreenReLoader(){goToTitleScreen()};
+
+function ObtainPlayEndLevelSound(){tryPlayEndLevelSound()};
+
+function ObtainUndo(){
+	PulseSelect("UndoButton");
+	CheckRegisterKey({keyCode:85});
+}
+
+function ObtainRedo(){
+	PulseSelect("RedoButton");
+	CheckRegisterKey({keyCode:89}); //TODO REDO
+}
+
+function ObtainRestart(){
+	PulseSelect("RestartButton");
+	CheckRegisterKey({keyCode:82});
+}
+
+function ObtainAction(){
+		CheckRegisterKey({keyCode:88});
+}
 
 function ObtainLoadGame(){
 	if(HasLevel()){

@@ -21,42 +21,9 @@ function GameHackURL(){
 var gameSelector=gameSelector?gameSelector:'#gameCanvas';
 
 
-//Game Options
-if(typeof ObtainBGColor==="undefined")
-	var ObtainBGColor=function(){return state.bgcolor;}
-
-if(typeof ObtainFGColor==="undefined")
-	var ObtainFGColor=function(){return state.fgcolor;}
-
-
-if(typeof ObtainRestartAllowed==="undefined")
-	var ObtainRestartAllowed=function(){return !state.metadata.norestart;}
-
-if(typeof ObtainUndoAllowed==="undefined")
-	var ObtainUndoAllowed=function(){return !state.metadata.noundo;}
-
 if(typeof ObtainRedoAllowed==="undefined")
 	var ObtainRedoAllowed=False//ObtainUndoAllowed;
 
-if(typeof ObtainUndo==="undefined")
-	var ObtainUndo=function(){
-		PulseSelect("UndoButton");
-		CheckRegisterKey({keyCode:85});}
-
-if(typeof ObtainRedo==="undefined")
-	var ObtainRedo=function(){
-		PulseSelect("RedoButton");
-		CheckRegisterKey({keyCode:89}); //TODO REDO
-}
-
-if(typeof ObtainRestart==="undefined")
-	var ObtainRestart=function(){
-		PulseSelect("RestartButton");
-		CheckRegisterKey({keyCode:82});}
-
-if(typeof ObtainAction==="undefined")
-	var ObtainAction=function(){
-		CheckRegisterKey({keyCode:88});}
 
 //Game display Options
 if(typeof ObtainInitialScroll==="undefined")
@@ -86,28 +53,6 @@ if(typeof ObtainLevelLookahead==="undefined")
 if(typeof ObtainGateLevels==="undefined")
 	var ObtainGateLevels=function(){return []; //Gated "boss" levels require beating all previous levels to show up; all previous levels + itself to show levels afterwards. Example: [] = no gate levels, [2,5] = levels 2 and 5 are gate levels.
 	};
-
-if(typeof ObtainStateScreens==="undefined")
-	var ObtainStateScreens=function(){return state.levels;}
-
-if(typeof ObtainNewGameCondition==="undefined")
-	var ObtainNewGameCondition=function(){return titleSelection===0}
-
-
-
-if(typeof ObtainLevelTransition==="undefined")
-	var ObtainLevelTransition=function(){
-		textMode=false;
-		titleScreen=false;
-		quittingMessageScreen=false;
-		messageselected=false;
-	}
-
-if(typeof ObtainTitleScreenReLoader==="undefined")
-	var ObtainTitleScreenReLoader=function(){goToTitleScreen()};
-
-if(typeof ObtainPlayEndGameSound==="undefined")
-	var ObtainPlayEndGameSound=function(){tryPlayEndGameSound()};
 
 if(typeof ObtainLevelDescriptionTitle==="undefined")
 	var ObtainLevelDescriptionTitle=LevelGatedDescription;
@@ -1264,6 +1209,10 @@ function DialFocus(S){
 
 // Level Progression
 
+function ObtainNewGameCondition(){
+	return !(SolvedLevels().length>0||CurLevelNumber()!==1)
+};
+
 function StartLevelFromTitle(){
 	if(ObtainNewGameCondition()){//new game
 		ObtainResetLevel();
@@ -1317,6 +1266,8 @@ function ResetGame(){
 	ObtainTitleScreenReLoader();
 }
 
+if(typeof ObtainLevelTransition==="undefined")
+	var ObtainLevelTransition=Identity;
 
 function AdvanceLevel(){
 	ObtainLevelTransition();
