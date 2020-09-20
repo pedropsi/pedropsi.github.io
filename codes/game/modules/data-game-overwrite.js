@@ -68,6 +68,8 @@ if(ObtainLevelTitle==="Previous"){ //Case for title specified in message before 
 	}
 }
 
+function ObtainResizeCanvas(){canvasResize();}
+
 ////////////////////////////////////////////////////////////////////////////////
 //Puzzlescript overwrite
 
@@ -104,6 +106,7 @@ function nextLevel(){
 	AdjustFlickscreen();
 	canvasResize();
 }
+
 
 
 //level4Serialization - save a full checkpoint stack and echo

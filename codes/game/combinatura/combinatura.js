@@ -366,7 +366,7 @@ function UpdateLevelSecretly(){
 	DexDisplay();
 }
 
-function ResizeCanvas(){
+function ObtainResizeCanvas(){
 	UnClass(gameSelector,"size-medium");
 	UnClass(gameSelector,"size-mini");
 	var s=0;
@@ -577,7 +577,7 @@ function ObtainTitleScreenReLoader(){
 function UpdateBoard(){
 	BoardClear();
 	SolvedLevels().map(RevealDisplayCard);
-	ResizeCanvas();
+	ObtainResizeCanvas();
 }
 
 function LevelLoader(){

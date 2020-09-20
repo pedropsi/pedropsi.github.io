@@ -38,8 +38,8 @@ if(typeof ObtainXYRotateCondition==="undefined")
 	var ObtainXYRotateCondition=function(x,y){return x<y*1.05};
 //	function ObtainXYRotateCondition(x,y){return false};
 
-if(typeof ResizeCanvas==="undefined")
-	var ResizeCanvas=function(){canvasResize();}
+if(typeof ObtainResizeCanvas==="undefined")
+	var ObtainResizeCanvas=Identity;
 
 if(typeof titleScreen==="undefined")
 	var titleScreen=true;
@@ -249,7 +249,7 @@ function PrepareGame(){
 
 
 	[250,500,1000,2000,4000,8000].map(function(t){
-		setTimeout(ResizeCanvas,t);
+		setTimeout(ObtainResizeCanvas,t);
 	});
 	
 	if(!bar){
@@ -482,8 +482,8 @@ function GameRotation(){
 	else
 		UnClass('.game-rotation-container','rotate90');
 	
-	ResizeCanvas();
-	setTimeout(ResizeCanvas,1000);
+	ObtainResizeCanvas();
+	setTimeout(ObtainResizeCanvas,1000);
 }
 
 GameRotation();
@@ -1164,7 +1164,7 @@ function SelectUnlockedLevel(lvl){
 function GoToScreen(lvl){
 	CurrentScreen(lvl);
 	AdvanceLevel();
-	ResizeCanvas();
+	ObtainResizeCanvas();
 };
 
 // Keyboard to Pick Level - records multiple digits/letters within a 2000 ms timeframe to select the level number or title

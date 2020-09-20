@@ -90,7 +90,7 @@ function ResetCheckpoints(){
 function GoToScreenCheckpoint(n){
 	LoadCheckpoint(n);
 	loadLevelFromStateTarget(state,CurrentScreen(),curlevelTarget);
-	ResizeCanvas();
+	ObtainResizeCanvas();
 	
 	EchoSelect(n,"checkpoint");
 };
