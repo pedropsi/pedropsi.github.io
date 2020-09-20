@@ -61,14 +61,6 @@ function ObtainKeyActionsGame(){
 		"R":ObtainRestart
 	};
 	
-		//"Spacebar":InstructNothing,
-		//"Enter":InstructNothing,
-		
-		//"Left":InstructNothing,
-		//"Up":InstructNothing,
-		//"Right":InstructNothing,
-		//"Down":InstructNothing
-	
 	keyactions[StringSymbol("restart")]=ObtainRestart;
 	
 	keyactions=FuseObjectArray([

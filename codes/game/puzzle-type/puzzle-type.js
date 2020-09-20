@@ -328,12 +328,6 @@ function ObtainKeyActionsGameBar(){
 	return KAGB;
 }
 
-function InstructNothing(){
-	return function(ev){
-		ev.preventDefault();
-		ForbidCaret();
-	}
-}
 
 function GameKeyHandler(key){
 	return function(ev){
