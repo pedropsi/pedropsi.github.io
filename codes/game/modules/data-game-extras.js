@@ -259,9 +259,6 @@ if(typeof ClearLevelRecord==="undefined")
 if(typeof ClearSolvedLevelScreens==="undefined")
 	var ClearSolvedLevelScreens=Identity;
 
-if(typeof EchoLevelWin==="undefined")
-	var EchoLevelWin=Identity;
-
 if(typeof EchoSelect==="undefined")
 	var EchoSelect=Identity;
 
@@ -710,12 +707,12 @@ function HasLevel(){
 if(typeof ObtainLevelsWriter==="undefined")
 	var ObtainLevelsWriter=Identity;
 
-function LocalsaveLevel(curscreen){
-	if(typeof curscreen==="undefined")
-		var curscreen=CurrentScreen();
+function LocalsaveLevel(lvl){
+	if(!lvl)
+		var lvl=CurLevelNumber();
 	if(savePermission){
 		LocalStorage("solvedlevels",ObtainLevelsWriter(SolvedLevels()));
-		return LocalStorage("",curscreen);
+		return LocalStorage("",LevelScreen(lvl));
 	}
 	else
 		EraseLocalsaveLevel();
@@ -771,12 +768,14 @@ if(typeof ObtainLoadGame==="undefined"){
 ////////////////////////////////////////////////////////////////////////////////
 // Winning Logic (non-linear level navigation "jumping")
 
-function MarkWonScreen(screen){
-	var screen=screen||CurrentScreen();
+function MarkWonLevel(lvl){
+	var lvl=lvl||CurLevelNumber();
 	
-	EchoLevelWin(screen);
-	AddToSolvedScreens(screen);
-	LocalsaveLevel(screen);
+	AddToSolvedLevels(lvl);
+	LocalsaveLevel(lvl);
+
+	if(typeof EchoLevelWin!=="undefined")
+		EchoLevelWin(lvl);
 	
 	if(typeof RegisterLevelHonour!=="undefined")
 		RegisterLevelHonour();
@@ -863,11 +862,10 @@ function SolvedLevels(){
 function UnSolvedLevels(){
 	return Complement(Levels(),SolvedLevels());
 }
-function AddToSolvedScreens(curscreen){
-	function SortNumber(a,b){return a-b};
-	if(!IsScreenMessage(curscreen)&&!LevelScreenSolved(curscreen)){
-		SolvedLevels.levels.push(LevelNumber(curscreen));
-		SolvedLevels.levels=SolvedLevels.levels.sort(SortNumber);
+function AddToSolvedLevels(lvl){
+	if(!IsScreenMessage(LevelScreen(lvl))&&!LevelSolved(lvl)){
+		SolvedLevels.levels.push(lvl);
+		SolvedLevels.levels=SolvedLevels.levels.sort(SingleSorter());
 	}
 	return SolvedLevels();
 }

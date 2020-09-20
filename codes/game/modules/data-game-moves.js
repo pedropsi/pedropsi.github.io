@@ -16,13 +16,13 @@ function GameIdentifier(){
 }
 
 // Echo specifics
-function EchoLevelWin(curlevel){
+function EchoLevelWin(lvl){
 	if(!GameAnalyticsAllowed())
 		return;
 
 	EchoData(Outflows("won"));
 
-	var leveldata=UpdateLevelData(curlevel);
+	var leveldata=UpdateLevelData(lvl);
 	EchoLevelData(leveldata);
 }
 
@@ -83,10 +83,10 @@ function LevelData(){
 
 var leveldataURL="https://script.google.com/macros/s/AKfycbwuyyGb7XP7H91GH_8tZrXh6y_fjbZg4vSxl6S8xvAAEdyoIHcS/exec";
 
-function UpdateLevelData(curlevel){
+function UpdateLevelData(lvl){
 	return FuseObjects(LevelData(),{
 		"timing":LevelTime(),//Math.floor(ms.reduce(function(x,y){return (x+y[1])},0)/1000),
-		"level":LevelNumber(curlevel),
+		"level":LevelNumber(LevelScreen(lvl)),
 		"moves":JSON.stringify(RegisterMove.moveseq),
 		"winsequence":JSON.stringify(RegisterMove.winseq),
 		"type":"win"

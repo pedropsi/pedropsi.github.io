@@ -2689,7 +2689,7 @@ function CheckWin(){
 	var win=CurLevelWon();
 	
 	if(win){
-		MarkWonScreen();
+		MarkWonLevel();
 		BestMove(CurLevelTitle(),ObtainWonMoves());
 
 		if(!LevelWinSound()&&!SolvedAllLevels())

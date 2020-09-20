@@ -48,7 +48,7 @@ doSetupTitleScreenLevelContinue()
 //DoWin - Level selector - keep track of solved levels and echo win
 function DoWin() {
 	if (!winning) {
-		MarkWonScreen();
+		MarkWonLevel();
 		ObtainPlayEndLevelSound();
 		againing = false;
 		if (unitTesting){
