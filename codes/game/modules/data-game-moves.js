@@ -17,13 +17,24 @@ function GameIdentifier(){
 
 // Echo specifics
 function EchoLevelWin(curlevel){
+	if(!GameAnalyticsAllowed())
+		return;
+
 	EchoData(Outflows("won"));
 
 	var leveldata=UpdateLevelData(curlevel);
 	EchoLevelData(leveldata);
 }
 
+if(typeof ObtainWonColumn==="undefined")
+	var ObtainWonColumn=function(){
+		return CurLevelNumber();
+	}
+
 function EchoCheckpoint(){
+	if(!GameAnalyticsAllowed())
+		return;
+	
 	EchoData(Outflows("won"));
 
 	var leveldata=UpdateLevelCheckpointData(curlevel);
