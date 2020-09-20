@@ -53,10 +53,6 @@ function ObtainMainKey(action){
 		return ObtainMainKey()[action];
 }
 
-//Echo moves
-function ObtainIsUndoMove(move){return false;}
-function ObtainIsRestartMove(move){return false;}
-var ObtainReadMove=Identity;
 
 //Level navigation
 function ObtainStateScreens(){return LevelGoals;}

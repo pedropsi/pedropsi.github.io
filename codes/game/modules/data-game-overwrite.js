@@ -70,6 +70,26 @@ if(ObtainLevelTitle==="Previous"){ //Case for title specified in message before 
 
 function ObtainResizeCanvas(){canvasResize();}
 
+//Read move defaults
+function ObtainIsUndoMove(move){return move==="Z"}
+function ObtainIsRedoMove(move){return move==="Y"}
+function ObtainIsRestartMove(move){return move==="R"}
+function ObtainReadMove(move){
+	switch (move) {
+		case 27:return "Q";break;
+		case 37:return "A";break;
+		case 38:return "W";break;
+		case 39:return "D";break;
+		case 40:return "S";break;
+		case 82:return "R";break;
+		case 88:return "X";break;
+		case 85:return "Z";break;
+		case 89:return "Y";break;
+		default: return move;break;
+	}
+};
+
+
 ////////////////////////////////////////////////////////////////////////////////
 //Puzzlescript overwrite
 

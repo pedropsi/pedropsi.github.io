@@ -106,6 +106,15 @@ function ClearMoves(){
 	RegisterMove.winseq=[];
 }
 
+if(typeof ObtainIsUndoMove==="undefined")
+	var ObtainIsUndoMove=False;
+if(typeof ObtainIsRedoMove==="undefined")
+	var ObtainIsRedoMove=False;
+if(typeof ObtainIsRestartMove==="undefined")
+	var ObtainIsRestartMove=False;
+if(typeof ObtainReadMove==="undefined")
+	var ObtainReadMove=Identity;
+
 function RegisterMove(move){
 	var delta = DeltaTime();
 	var move=ObtainReadMove(move);
@@ -124,6 +133,7 @@ function RegisterMove(move){
 	else
 		RegisterMove.winseq.push([move,delta]);
 }
+
 
 
 //Timing
