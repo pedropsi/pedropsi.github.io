@@ -206,25 +206,24 @@ function ActionKeyText(action){
 	return S+((S!==""&&K!=="")?" or ":"")+K;
 }
 
+var Tooltips={
+	"credits":"Credits",
+	"how-to-play":"How to play?",
+	"save":"Save permissions",
+	"undo":"Undo",
+	"redo":"Redo",
+	"restart":"Restart",
+	"feedback":"E-mail feedback",
+	"fullscreen":"Fullscreen",
+	"hint":"Hints",
+	"keyboard":"Keyboard on screen",
+	"music":"Music toggle",
+	"wrench":"Hack this game",
+	"more":"More games by the same author"
+}
+
 function ObtainActionTooltip(action){
-	if(!action)
-		return {
-			"credits":"Credits",
-			"how-to-play":"How to play?",
-			"save":"Save permissions",
-			"undo":"Undo",
-			"redo":"Redo",
-			"restart":"Restart",
-			"feedback":"E-mail feedback",
-			"fullscreen":"Fullscreen",
-			"hint":"Hints",
-			"keyboard":"Keyboard on screen",
-			"music":"Music toggle",
-			"wrench":"Hack this game",
-			"more":"More games by the same author"
-		}
-	else
-		return ObtainActionTooltip()[action.toLowerCase()]||"";
+	return Accesser(Tooltips,undefined,a=>"")(action);
 }
 
 if(typeof ObtainHints==="undefined")
