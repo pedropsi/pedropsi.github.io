@@ -1273,8 +1273,6 @@ function StartLevelFromTitle(){
 	if(ObtainNewGameCondition()){//new game
 		ObtainResetLevel();
 	}
-	
-	LocalloadCheckpoint();
 	LoadLevel();
 }
 

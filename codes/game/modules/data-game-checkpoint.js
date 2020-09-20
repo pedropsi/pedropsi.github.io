@@ -100,11 +100,12 @@ ObtainResetLevel=function(){
 	ResetLevel();
 	ResetCheckpoints();
 	curlevelTarget=null;
+	//LocalloadCheckpoint(); may be needed
 }
 
-
-
-
+function ObtainWonColumn(){
+	return Checkpointed()?CurCheckpointString():CurLevelNumber();
+}
 
 
 
