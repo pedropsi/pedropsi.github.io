@@ -138,6 +138,7 @@ var ObtainRequestHint=ObtainRequestHint?ObtainRequestHint:Identity;
 
 var gameModulesEarly=[
 "codes/game/game.css",
+"codes/game/modules/data-game-fullscreen.js",
 "codes/game/modules/data-game-extras.js",
 "codes/game/modules/data-game-moves.js",
 "codes/game/modules/data-game-colours.js",

@@ -25,6 +25,7 @@ var CoreModules=[
 
 var ExtraModules=[
 		"data-game-colours",
+		"data-game-fullscreen",
 		"data-game-checkpoint",
 		"data-game-extras",
 		"data-game-overwrite",
