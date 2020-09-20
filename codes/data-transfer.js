@@ -530,6 +530,18 @@ DictionaryAccesser=function(Dictionary,Rewriter){
 	}
 }
 
+Accesser=function(Dict,Renamer,Failer){
+	var Renamer=Renamer||function(a){return a.toLowerCase()};
+	var Failer=Failer||Identity;
+	return function(Name){
+		var name=Renamer(Name);
+		if(In(Dict,name))
+			return Dict[name];
+		else
+			return Failer(Name);
+	}
+}
+
 function CanonicalObject(Obj,CanonicalName){
 	if(!CanonicalName)
 		return Obj;
