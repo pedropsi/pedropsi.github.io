@@ -784,7 +784,6 @@ function MarkWonLevel(lvl){
 function NextLevel(){
 	var curscreen=Min(CurrentScreen(),LastScreen()?LastScreen():CurrentScreen());
 	CurrentScreen(curscreen);
-	HideLevelMessage();
 	ResetStory();
 	
 	if (TitleScreen())
@@ -1646,20 +1645,6 @@ function CloseKeyboard(){
 	GameFocus();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//Better inter-level messages
-function ShowLevelMessage(lvlscreen){
-	if(!lvlscreen)
-		lvlscreen=CurrentScreen();
-	
-	HideLevelMessage();
-	AppendElement("<div class='game-message-container'><div class='game-message'><p>"+CurrentScreenMessage()+"</p></div></div>",gameSelector);
-	GameFocus();
-}
-
-function HideLevelMessage(){
-	RemoveElements('.game-message-container');
-}
 
 
 ////////////////////////////////////////////////////////////////////////////////
