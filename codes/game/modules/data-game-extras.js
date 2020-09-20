@@ -176,22 +176,21 @@ if(!Portable())
 if(ConsoleExternal())
 	ObtainInterlevelMessage=False;
 
+var MainKeys={
+	"undo":"Z",
+	"redo":"Y",
+	"restart":"R",
+	"feedback":"E",
+	"fullscreen":"F",
+	"hint":"H",
+	"keyboard":"K",
+	"levelselector":"L",
+	"music":"M"
+};
+
 if(typeof ObtainMainKey==="undefined")
 	var ObtainMainKey=function(action){
-		if(!action)
-			return {
-				"undo":"Z",
-				"redo":"Y",
-				"restart":"R",
-				"feedback":"E",
-				"fullscreen":"F",
-				"hint":"H",
-				"keyboard":"K",
-				"levelselector":"L",
-				"music":"M"
-			}
-		else
-			return ObtainMainKey()[action.toLowerCase()]||"";
+		return Accesser(MainKeys,undefined,a=>"")(action);
 	}
 
 function ActionKeyText(action){
