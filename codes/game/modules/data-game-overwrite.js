@@ -141,6 +141,17 @@ function AdjustFlickscreen(){
 	}
 }
 
+/*
+if(ObtainInterlevelMessage()){
+	function drawMessageScreen(){
+		titleMode=0;
+		textMode=true;
+		titleImage = deepClone(messagecontainer_template);
+		ShowLevelMessage()
+	//	canvasResize();
+	}
+}
+*/
 
 window.Mobile.GestureHandler.prototype.toggleMenu=RequestLevelSelector;
 if(typeof MobileInitialise!=="undefined")

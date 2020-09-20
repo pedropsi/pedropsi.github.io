@@ -170,6 +170,12 @@ if(typeof ObtainKeyboardTarget==="undefined")
 	}
 
 
+var ObtainInterlevelMessage=False;
+if(!Portable())
+	ObtainInterlevelMessage=True;
+if(ConsoleExternal())
+	ObtainInterlevelMessage=False;
+
 var MainKeys={
 	"undo":"Z",
 	"redo":"Y",
@@ -778,7 +784,7 @@ function MarkWonLevel(lvl){
 function NextLevel(){
 	var curscreen=Min(CurrentScreen(),LastScreen()?LastScreen():CurrentScreen());
 	CurrentScreen(curscreen);
-	
+	HideLevelMessage();
 	ResetStory();
 	
 	if (TitleScreen())
@@ -1113,6 +1119,11 @@ function UnstarLevel(l){
 	return Number(l.replace("★","").replace("☆",""));
 }
 
+function UpdateAccessLevelMessage(){
+	ReplaceChildren(ChosenLevelDescriptionHTML(),".question");
+}
+
+Listen("Set level",UpdateAccessLevelMessage);
 
 function LevelNumberFromTotal(lvl){
 	return PadLevelNumber(lvl)+"/"+MaxLevel()+LevelHintStar(lvl)
@@ -1633,6 +1644,21 @@ function CloseKeyboard(){
 	if(CurrentDatapack().buttonSelector==="KeyboardButton")
 		CloseCurrentDatapack();
 	GameFocus();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//Better inter-level messages
+function ShowLevelMessage(lvlscreen){
+	if(!lvlscreen)
+		lvlscreen=CurrentScreen();
+	
+	HideLevelMessage();
+	AppendElement("<div class='game-message-container'><div class='game-message'><p>"+CurrentScreenMessage()+"</p></div></div>",gameSelector);
+	GameFocus();
+}
+
+function HideLevelMessage(){
+	RemoveElements('.game-message-container');
 }
 
 
