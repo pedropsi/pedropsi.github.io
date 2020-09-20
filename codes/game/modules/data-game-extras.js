@@ -975,7 +975,7 @@ function MaxLevel(){
 
 //Level Title
 function LevelDescription(lvl){
-	var leveltitles=LevelLoadedTitles();
+	var leveltitles=LevelTitles();
 	if(!leveltitles||!leveltitles[lvl-1])
 		return UnnamedLevelDescription(lvl);
 	else
@@ -1562,6 +1562,11 @@ function LevelLoadedTitles(){
 	else
 		return LevelLoadedTitles.titles;
 }
+
+if(typeof ObtainLevelTitle==="undefined")
+	function ObtainLevelTitle(lvl){
+		return LevelLoadedTitles()[lvl-1];
+	}
 
 function LevelSections(){
 	if(!LevelSections.sections){
