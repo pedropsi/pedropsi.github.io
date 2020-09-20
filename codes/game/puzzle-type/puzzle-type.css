@@ -335,6 +335,10 @@
    fill: var(--darkblue);
 }
 
+.bezier.letter + .letter.space{
+   width: calc(var(--h4) + var(--w2));
+}
+
 .middle .bezier.letter{
    padding-top: calc(var(--h2) + var(--w1));
    padding-bottom: calc(var(--h2) + var(--h1) + var(--w1));
