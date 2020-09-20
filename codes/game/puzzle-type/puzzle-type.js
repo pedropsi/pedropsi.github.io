@@ -555,7 +555,7 @@ var LevelDifficulty={
 	"Symmetries":2,
 	"Fillet":3,
 	"Topological":4,
-	"Loosely less":5,
+	"Loosely less":4,
 	"Wasd":2,
 	"Nokia 1998":1,
 	"Dvorak":4,
