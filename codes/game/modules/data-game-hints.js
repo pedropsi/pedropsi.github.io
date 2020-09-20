@@ -13,6 +13,10 @@ function SaveLocalHints(usedhints){
 		LocalStorage("hintsused",usedhints);
 }
 
+if(typeof LocalSavers==="undefined")
+	var LocalSavers=[];
+LocalSavers.push(SaveLocalHints);
+
 function Hints(lvl){
 	if(!Hints.cached)
 		return false;

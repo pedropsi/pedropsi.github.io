@@ -93,8 +93,7 @@ if(typeof ObtainStateScreens==="undefined")
 if(typeof ObtainNewGameCondition==="undefined")
 	var ObtainNewGameCondition=function(){return titleSelection===0}
 
-if(typeof ObtainLevelLoader==="undefined")
-	var ObtainLevelLoader=function(){loadLevelFromState(state,curlevel)};
+
 
 if(typeof ObtainLevelTransition==="undefined")
 	var ObtainLevelTransition=function(){
@@ -110,30 +109,11 @@ if(typeof ObtainTitleScreenReLoader==="undefined")
 if(typeof ObtainPlayEndGameSound==="undefined")
 	var ObtainPlayEndGameSound=function(){tryPlayEndGameSound()};
 
-if(typeof ObtainLevelTitle==="undefined"){
-	var ObtainLevelTitle=function(lvl){
-		if(!lvl)
-			return "";
-		if(Checkpointed())
-			return "Select checkpoint "+lvl;
-		else
-			return LevelGatedTitle(lvl);
-	}
-}
-else if(ObtainLevelTitle==="Previous"){ //Case for title specified in message before the level
-	var ObtainLevelTitle=function(lvl){
-		var title= ObtainStateScreens()[LevelScreen(lvl)-1].message;
-		title=title.replace(/^[\-\"\_\:\'\s\n]*(level\s*\d*)*[\-\"\_\:\'\s\n]*/im,"").replace(/[\-\"\_\:\'\s\n]*$/im,"");
-		return title.replace(/[\-][\-\s]?/gi," ");
-	}
-}
+if(typeof ObtainLevelDescriptionTitle==="undefined")
+	var ObtainLevelDescriptionTitle=LevelGatedDescription;
 
 if(typeof ObtainLevelNotes==="undefined")
 	var ObtainLevelNotes=function(lvl){return ""};
-
-if(typeof ObtainLevelDescriptionTitle==="undefined")
-	var ObtainLevelDescriptionTitle=ObtainLevelTitle;
-
 
 
 //Read move defaults
@@ -174,7 +154,7 @@ if(typeof ObtainGameAction==="undefined")
 
 //On-screen keyboard
 if(typeof ObtainKeyboardAllowed==="undefined")
-	var ObtainKeyboardAllowed=false;
+	var ObtainKeyboardAllowed=False;
 
 if(typeof ObtainKeyboardKeys==="undefined")
 	var ObtainKeyboardKeys=GameKeyboardKeys;
@@ -467,7 +447,7 @@ function MusicButton(){
 }
 
 function KeyboardButton(){
-	if(ObtainKeyboardAllowed)
+	if(ObtainKeyboardAllowed())
 		return GameBarButtonHTML("keyboard",{onclick:'RequestKeyboard();'})
 	else
 		return "";
@@ -480,13 +460,16 @@ function WrenchButton(){
 		return "";
 }
 
-if(typeof ObtainLevelSelectorAllowed==="undefined")
-	function ObtainLevelSelectorAllowed(){
-		return MaxLevel()>1||(typeof sourceCode!=="undefined"&&In(sourceCode,"checkpoint"));
-	}
+
+function LevelSelectorAllowed(){
+	if(typeof ObtainLevelSelectorAllowed!=="undefined")
+		return ObtainLevelSelectorAllowed();
+	else
+		return MaxLevel()>1;
+}
 
 function LevelselectorButton(){
-	if(ObtainLevelSelectorAllowed())
+	if(LevelSelectorAllowed())
 		return ButtonHTML({txt:"Level selector",attributes:{onclick:'RequestLevelSelector();',id:"LevelselectorButton"}});
 	else
 		return "";
@@ -569,7 +552,6 @@ Listen('resize',GameRotation);
 /////////////////////////////////////////////////////////////////////////////////////
 // Save permissions
 
-var curcheckpoint=0;
 var savePermission=true;
 
 function ToggleSavePermission(thi){
@@ -608,7 +590,7 @@ function CurrentScreen(s){
 
 
 /////////////////////////////////////////////////////////////////////////////////////
-// Save Level & Checkpoint
+// Save Level
 
 if(typeof ObtainStorageURL==="undefined")
 	function ObtainStorageURL(){
@@ -720,9 +702,7 @@ function CanSaveLocally(){
 		}
 	catch(e){return false;} //Log error
 }
-function Checkpointed(){
-	return LocalStorage("checkpoint").length>0;
-}
+
 function HasLevel(){
 	return CanSaveLocally()&&!(LocalStorage("").length===0);
 }
@@ -733,6 +713,8 @@ if(typeof ObtainLevelsWriter==="undefined")
 	var ObtainLevelsWriter=Identity;
 
 function LocalsaveLevel(curscreen){
+	if(typeof curscreen==="undefined")
+		var curscreen=CurrentScreen();
 	if(savePermission){
 		LocalStorage("solvedlevels",ObtainLevelsWriter(SolvedLevels()));
 		return LocalStorage("",curscreen);
@@ -741,20 +723,13 @@ function LocalsaveLevel(curscreen){
 		EraseLocalsaveLevel();
 };
 
-function LocalsaveCheckpoints(newstack){
-	if(savePermission)
-		return LocalStorage("checkpoint",newstack);
-	else
-		EraseLocalsaveCheckpoints();
-}
 
-if(typeof SaveLocalHints==="undefined")
-	SaveLocalHints=False;
-	
+if(typeof LocalSavers==="undefined")
+	var LocalSavers=[];
+LocalSavers.push(LocalsaveLevel);
+
 function Localsave(){
-	LocalsaveLevel(CurrentScreen());
-	SaveLocalHints();
-	//LocalsaveCheckpoints();
+	LocalSavers.map(f=>f());
 }	
 
 function EraseLocalStorage(name){
@@ -773,9 +748,7 @@ function EraseLocalsaveLevel(){
 	return EraseLocalStorage("");
 };
 
-function EraseLocalsaveCheckpoints(){
-	return EraseLocalStorage("checkpoint");
-};
+
 
 
 function EraseLocalsave(){
@@ -788,70 +761,14 @@ function EraseLocalsave(){
 if(typeof ObtainLevelReader==="undefined")
 	var ObtainLevelReader=Number;
 
-function LoadLevel(){
+function LocalloadLevel(){
 	SolvedLevels.levels=LocalStorage("solvedlevels",undefined,ObtainLevelReader);
 	return CurrentScreen(LocalStorage(""));
 }
 
-function LocalloadCheckpoints(){
-	return LocalStorage("checkpoint");
+if(typeof ObtainLoadGame==="undefined"){
+	var ObtainLoadGame=LocalloadLevel;
 }
-
-
-function GetCheckpoints(){
-	if(GetCheckpoints.stack)
-		return GetCheckpoints.stack;
-	else
-		return GetCheckpoints.stack=LocalloadCheckpoints();
-}
-
-function LoadCheckpoint(n){
-	var stack=GetCheckpoints();
-
-	if(n<stack.length)
-		ConsoleAddOnce("Beware! Saving at a past checkpoint will erase former future progress...");
-	
-	curcheckpoint=Min(Max(n-1,0),stack.length-1); //decrement 1 unit
-	return curlevelTarget=stack[curcheckpoint];
-}
-
-
-function PushSaveCheckpoint(levelTarget){
-	var stack=GetCheckpoints();
-	
-	function EvacuateCheckpoints(stack,n){
-		var s=stack;
-		var i=s.length-1;
-		while(n<i){
-			i--;
-			s.pop();
-		}
-		return s;
-	};
-	
-	if(curcheckpoint+1<stack.length){
-		stack=EvacuateCheckpoints(stack,curcheckpoint);
-		ConsoleAdd("Saved in a past checkpoint. Future progress erased.")
-	}
-	
-	stack=stack.concat([levelTarget]);
-	curcheckpoint=stack.length-1;
-	
-	return GetCheckpoints.stack=stack;
-}
-
-
-
-function LoadGame(){
-	if(HasLevel()){
-		if(Checkpointed()){
-			LoadLastCheckpoint();
-		}
-		return LoadLevel();
-	}
-}
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Winning Logic (non-linear level navigation "jumping")
@@ -1011,9 +928,6 @@ function CurLevelNumber(){
 	return LevelNumber(CurrentScreen())
 }
 
-function CurLevelTitle(){
-	return ObtainLevelTitle(CurLevelNumber());
-}
 
 function LevelTitles(){
 	return Levels().map(ObtainLevelTitle);
@@ -1060,26 +974,28 @@ function MaxLevel(){
 
 
 //Level Title
-function LevelTitle(lvl){
+function LevelDescription(lvl){
 	var leveltitles=LevelLoadedTitles();
 	if(!leveltitles||!leveltitles[lvl-1])
-		return UnnamedLevelTitle(lvl)
+		return UnnamedLevelDescription(lvl);
 	else
 		return leveltitles[lvl-1];
 }
 
-function UnnamedLevelTitle(lvl){
+function UnnamedLevelDescription(lvl){
 	return "Select level "+LevelNumberFromTotal(lvl);
 }
 
-function LevelGatedTitle(lvl){
+function LevelGatedDescription(lvl){
+	if(!lvl)
+		return "";
 	var LevelLookahead=ObtainLevelLookahead();
 	if(In(ObtainGateLevels(),lvl)&&!SolvedAllLevelsBefore(lvl))
 		return "Level locked: all previous levels required.";
 	else if(LevelLookahead>0&&!SolvedRequiredLevelsBefore(lvl,LevelLookahead))
 		return "Level locked: all but "+(LevelLookahead-1)+" earlier levels required.";
 	else
-		return LevelTitle(lvl);
+		return LevelDescription(lvl);
 }
 
 function LevelsBefore(lvl,howmany){
@@ -1129,28 +1045,24 @@ function LevelSelectorMessage(){
 		return "Select one of the "+MaxLevel()+" levels";
 }
 
+if(typeof ObtainLevelSelectorOptions==="undefined")
+	var ObtainLevelSelectorOptions=LevelSelectorOptions;
+
+function LevelSelectorOptions(){
+	return {
+		questionname:ChosenLevelDescriptionHTML(),
+		qchoices:UnlockedLevels().map(StarLevelNumber),
+		qchoicesViewF:ObtainLevelNumberDisplay,
+		defaultChoice:function(i,c){return UnstarLevel(c)===CurLevelNumber()}
+	};
+}
+
 function RequestLevelSelector(){
-	if(!Checkpointed()){
-		var DPOpts={
-			questionname:ChosenLevelDescriptionHTML(),
-			qchoices:UnlockedLevels().map(StarLevelNumber),
-			qchoicesViewF:ObtainLevelNumberDisplay,
-			defaultChoice:function(i,c){return UnstarLevel(c)===CurLevelNumber()}
-		}
-	}
-	else{
-		var checkpointIndices=Object.keys(GetCheckpoints());
-		var DPOpts={
-			questionname:"Reached checkpoints:",
-			qchoices:checkpointIndices.map(function(l){return (Number(l)+1)+"";}),
-			defaultChoice:function(i,c){return Number(c)===checkpointIndices.length}
-		}
-	}
+	var DPOpts=ObtainLevelSelectorOptions();
 	
 	//Add dialing shortcuts
 	var LevelSelectorShortcuts=FuseObjects(ObtainKeyActionsGameBar(),{});
 		AlphanumericCharacters.map(function(C){LevelSelectorShortcuts[C]=function(){DialFocus(C)}});
-
 		LevelSelectorShortcuts[ObtainMainKey("levelselector")]=CloseLevelSelector;
 	
 	RequestDataPack([
@@ -1271,9 +1183,14 @@ function SelectLevelFromTitle(leveltitle){
 }
 
 function SelectLevel(lvl){
-	if(Checkpointed())
-		GoToScreenCheckpoint(lvl);
-	else if(In(UnlockedLevels(),lvl))
+	if(typeof ObtainSelectLevel!=="undefined")
+		return ObtainSelectLevel(lvl);
+	else
+		return SelectPureLevel(lvl);
+}
+
+function SelectPureLevel(lvl){
+	if(In(UnlockedLevels(),lvl))
 		SelectUnlockedLevel(lvl);
 	else
 		console.log("Level "+lvl+" locked!");
@@ -1303,14 +1220,6 @@ function SelectUnlockedLevel(lvl){
 	EchoSelect(lvl,"level");
 };
 
-
-function GoToScreenCheckpoint(n){
-	LoadCheckpoint(n);
-	loadLevelFromStateTarget(state,CurrentScreen(),curlevelTarget);
-	ResizeCanvas();
-	
-	EchoSelect(n,"checkpoint");
-};
 
 function GoToScreen(lvl){
 	CurrentScreen(lvl);
@@ -1362,35 +1271,23 @@ function DialFocus(S){
 
 function StartLevelFromTitle(){
 	if(ObtainNewGameCondition()){//new game
-		ResetLevel();
-		ResetCheckpoints();
+		ObtainResetLevel();
 	}
 	
-	LoadLastCheckpoint();
-	LoadLevelOrCheckpoint();
+	LocalloadCheckpoint();
+	LoadLevel();
 }
 
 function ResetLevel(){
 	CurrentScreen(0);
-	curlevelTarget=null;
 	ClearSolvedLevelScreens();
 	ClearLevelRecord();
 }
 
+if(typeof ObtainResetLevel==="undefined")
+	var ObtainResetLevel=ResetLevel;
 
-function LoadLastCheckpoint(){
-	if(Checkpointed()){
-		var stack=GetCheckpoints();
-		curcheckpoint=stack.length-1;
-		curlevelTarget=stack[curcheckpoint];
-	}
-}
 
-function ResetCheckpoints(){
-	curcheckpoint=0;
-	EraseLocalsaveCheckpoints();
-	GetCheckpoints.stack=[];
-}
 
 if(typeof ShoutStory==="undefined")
 	function ShoutStory(){return;}; 
@@ -1423,17 +1320,15 @@ function GameEnded(){
 function ResetGame(){
 	EraseLocalsave();
 	ClearSolvedLevelScreens();
-	ResetLevel();
-	ResetCheckpoints();
-	CurrentScreen(0);//TODO CHECK IF BETTER BEHAVIOUR
+	ObtainResetLevel();
 	ObtainTitleScreenReLoader();
 }
 
 
 function AdvanceLevel(){
 	ObtainLevelTransition();
-	LocalsaveLevel(CurrentScreen());
-	LoadLevelOrCheckpoint();
+	LocalsaveLevel();
+	LoadLevel();
 	ClearLevelRecord();
 	UpdateLevelSelectorButton();
 }
@@ -1469,13 +1364,11 @@ function AdvanceEndScreen(){
 	AdvanceLevel();		
 }
 
-function LoadLevelOrCheckpoint(){
-	if ((typeof curlevelTarget!=="undefined")&&(curlevelTarget!==null)){
-		loadLevelFromStateTarget(state,CurrentScreen(),curlevelTarget);
-		curlevelTarget=null;
-	}
-	else
+function LoadLevel(){
+	if(ObtainLevelLoader)
 		ObtainLevelLoader();
+	else
+		console.log("Please define ObtainLevelLoader");
 }
 
 
@@ -1488,9 +1381,15 @@ function KeyActionsGameBar(){
 		KAGB[ObtainMainKey("feedback")]=RequestGameFeedback;
 		KAGB[ObtainMainKey("fullscreen")]=RequestGameFullscreen;
 		KAGB[ObtainMainKey("hint")]=ObtainRequestHint;
-		KAGB[ObtainMainKey("keyboard")]=ObtainKeyboardAllowed?RequestKeyboard:Identity;
-		KAGB[ObtainMainKey("levelselector")]=ObtainLevelSelectorAllowed?RequestLevelSelector:Identity;
+		
+		if(ObtainKeyboardAllowed())
+			KAGB[ObtainMainKey("keyboard")]=RequestKeyboard;
+		
+		if(LevelSelectorAllowed())
+			KAGB[ObtainMainKey("levelselector")]=RequestLevelSelector;
+		
 		KAGB[ObtainMainKey("music")]=ToggleCurrentSong;
+
 	return KAGB;
 }
 
@@ -1689,7 +1588,7 @@ function LevelSections(){
 
 function RequestKeyboard(){
 	
-	if(!ObtainKeyboardAllowed)
+	if(!ObtainKeyboardAllowed())
 		return;
 	
 	var DFOpts={

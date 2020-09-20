@@ -33,7 +33,6 @@ function ObtainFGColor(){return window.getComputedStyle(document.body)["color"];
 var ObtainRestartAllowed=True;
 var ObtainUndoAllowed=False;
 
-//
 var ObtainLevelSelectorAllowed=False;
 
 //Echo moves
@@ -131,7 +130,7 @@ function StartGame(){
 	PrepareGame();
 	ResumeCapturingKeys(CaptureComboKey);
 	Class(gameSelector,"Gallery");
-	LoadGame();
+	ObtainLoadGame();
 	ObtainTitleScreenReLoader();
 	GameFocus();
 	StartLevelFromTitle();

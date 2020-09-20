@@ -2,6 +2,36 @@
 if(typeof ObtainPlayEndLevelSound==="undefined")
 	var ObtainPlayEndLevelSound=function(){tryPlayEndLevelSound()};
 
+function ObtainLoadGame(){
+	if(HasLevel()){
+		if(Checkpointed()){
+			LocalloadCheckpoint();
+		}
+		return LocalloadLevel();
+	}
+}
+
+function ObtainLevelLoader(){
+	if ((typeof curlevelTarget!=="undefined")&&(curlevelTarget!==null)){
+		loadLevelFromStateTarget(state,CurrentScreen(),curlevelTarget);
+		curlevelTarget=null;
+	}
+	else loadLevelFromState(state,curlevel)
+};
+
+function ObtainLevelSelectorAllowed(){
+	return MaxLevel()>1||(typeof sourceCode!=="undefined"&&In(sourceCode,"checkpoint"));
+}
+
+//Read 'Previous' titles
+if(ObtainLevelTitle==="Previous"){ //Case for title specified in message before the level
+	var ObtainLevelTitle=function(lvl){
+		var title= ObtainStateScreens()[LevelScreen(lvl)-1].message;
+		title=title.replace(/^[\-\"\_\:\'\s\n]*(level\s*\d*)*[\-\"\_\:\'\s\n]*/im,"").replace(/[\-\"\_\:\'\s\n]*$/im,"");
+		return title.replace(/[\-][\-\s]?/gi," ");
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 //Puzzlescript overwrite
 
@@ -11,7 +41,7 @@ function consoleError(str){
 
 
 //doSetupTitleScreenLevelContinue - Level selector - start saving a stack of checkpoints
-function doSetupTitleScreenLevelContinue(){	LoadGame();};
+function doSetupTitleScreenLevelContinue(){	ObtainLoadGame();};
 
 doSetupTitleScreenLevelContinue()
 

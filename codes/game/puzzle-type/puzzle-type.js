@@ -62,17 +62,26 @@ var ObtainReadMove=Identity;
 function ObtainNewGameCondition(){return !(SolvedLevels().length>0||CurLevelNumber()!==1)};
 function ObtainStateScreens(){return LevelGoals;}
 
+
 function ObtainLevelTitle(lvl){
+	return LevelTitle(lvl);
+}
+
+function LevelTitle(lvl){
 	return LevelGoals[lvl-1];
 }
 
+function CurLevelTitle(){
+	return LevelTitle(CurLevelNumber());
+}
+
 function ObtainLevelDescription(lvl){
-	return LevelDescription(ObtainLevelTitle(lvl));
+	return LevelDescription(LevelTitle(lvl));
 }
 
 function ObtainLevelNumberDisplay(m){
 	var n=UnstarLevel(m);
-	var title=ObtainLevelTitle(n);
+	var title=LevelTitle(n);
 	if(!title||title.length<3)
 		return m;
 	title=title.toUpperCase();
@@ -98,7 +107,7 @@ function ObtainKeyboardTarget(){
 	return gameSelector;
 }
 
-var ObtainKeyboardAllowed=true;
+var ObtainKeyboardAllowed=True;
 
 function ObtainHintsPath(){
 	return ModulesPath()+"/hints.js"
@@ -197,7 +206,7 @@ function Clickwall(){
 
 function StartGame(){
 	PrepareGame();
-	LoadGame();
+	ObtainLoadGame();
 	InitialiseGameCanvas();
 	ObtainTitleScreenReLoader();
 };
@@ -524,7 +533,7 @@ function WinnerTitle(title){
 }
 
 function ObtainLevelDescriptionTitle(lvl){
-	var title=ObtainLevelTitle(lvl);
+	var title=LevelTitle(lvl);
 	return (title!=="Deaf")?title.toUpperCase():title;
 }
 
@@ -648,7 +657,7 @@ var StructuralLevels=[
 ]
 
 function ObtainLevelNotes(lvl){
-	var title=ObtainLevelTitle(lvl);
+	var title=LevelTitle(lvl);
 	var extras="";
 	if(In(SoundLevels,title))
 		extras+=" "+ObtainSymbol("music");
@@ -769,14 +778,14 @@ function ObtainCanonicalTitle(title){
 
 function ObtainLevelReader(level){
 	if(typeof level==="string"){
-		var levelname=ObtainCanonicalTitle(level);
-		return LevelGoals.indexOf(levelname)+1;
+		var title=ObtainCanonicalTitle(level);
+		return LevelGoals.indexOf(title)+1;
 	}else
 		return level;
 }
 
 function ObtainLevelsWriter(solvedlevels){
-	return solvedlevels.map(ObtainLevelTitle).filter(Identity);
+	return solvedlevels.map(LevelTitle).filter(Identity);
 }
 
 var LevelInstructions={
@@ -2464,11 +2473,11 @@ function LetterDraftHTML(L){
 		return LetterPureHTML(L);
 }
 
-function LetterHTML(levelName){
-	if(TitleScreen()||!In(LetterDisplayers,levelName))
+function LetterHTML(title){
+	if(TitleScreen()||!In(LetterDisplayers,title))
 		return LetterPureHTML;
 	else
-		return LetterDisplayers[levelName];
+		return LetterDisplayers[title];
 }
 
 function CaretHTML(){
@@ -3367,7 +3376,7 @@ function NextLevelsWin(title){
 	else
 		n=CurLevelNumber();
 		
-	var remainingGoals=Range(n,MaxLevel()).map(n=>ObtainLevelTitle(n));
+	var remainingGoals=Range(n,MaxLevel()).map(n=>LevelTitle(n));
 		remainingGoals=remainingGoals.filter(g=>!LevelWon(g));
 
 	var actions=remainingGoals.map(GotoAndWinLevelActions).flat();
