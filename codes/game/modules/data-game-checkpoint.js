@@ -138,3 +138,8 @@ function ObtainLevelDescriptionTitle(lvl){
 	else
 		return LevelGatedDescription(lvl);
 }
+
+
+
+//
+Shout("data-game-checkpoint");
