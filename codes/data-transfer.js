@@ -531,7 +531,7 @@ DictionaryAccesser=function(Dictionary,Rewriter){
 }
 
 Accesser=function(Dict,Renamer,Failer){
-	var Renamer=Renamer||function(a){return a.toLowerCase()};
+	var Renamer=Renamer||LowerCase;
 	var Failer=Failer||Identity;
 	return function(Name){
 		var name=Renamer(Name);
@@ -542,7 +542,26 @@ Accesser=function(Dict,Renamer,Failer){
 	}
 }
 
-function CanonicalObject(Obj,CanonicalName){
+Register=function(Dict,Renamer){
+	var Renamer=Renamer||LowerCase;
+	return function(Name,Value){
+		var name=Renamer(Name);
+		Dict[name]=Value;
+		return Dict;
+	}
+}
+
+UnRegister=function(Dict,Renamer){
+	var Renamer=Renamer||LowerCase;
+	return function(Name){
+		var name=Renamer(Name);
+		delete Dict[name];
+		return Dict;
+	}
+}
+
+
+CanonicalObject=function(Obj,CanonicalName){
 	if(!CanonicalName)
 		return Obj;
 	var keys=Keys(Obj).filter(k=>(k!==CanonicalName(k)));
@@ -859,6 +878,13 @@ LowerSpacedString=function(string){
 }
 
 // Capitalise
+LowerCase=function(string){
+	if(!string||!string.toLowerCase)
+		return "";
+	else
+		return string.toLowerCase();
+}
+
 Capitalise=function(word){
 	if(word.length)
 		return word[0].toUpperCase()+Rest(word).toLowerCase();
