@@ -53,6 +53,7 @@ UnFunction=function(data){
 //Functional Sorting
 
 SingleSorter=function(F){
+	var F=F||Number;
 	return function(a,b){
 		Fa=F(a);
 		Fb=F(b);
