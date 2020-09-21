@@ -37,7 +37,6 @@ var LOGO=`
 </div>`;
 	
 function PlayIntro(targetIDsel,SuccessF){
-	PlayIntro.save=Children(targetIDsel);
 	Class(targetIDsel,"intro");
 	OpenElement(LOGO,".intro");
 	OpenElement(LOGONAME,".intro");
@@ -49,7 +48,6 @@ function UnPlayIntro(targetIDsel,SuccessF){
 	CloseElement(".logoname-supra",".intro");
 	setTimeout(function(){
 		UnClass(targetIDsel,"intro");
-		PlayIntro.save.map(UnFadeElement);
 		setTimeout(SuccessF,1000);
 	},1000);
 }
@@ -66,7 +64,7 @@ function GameFrameHTML(){
 function GameIntro(Callback){
 	RemoveElement("game-supra-Canvas");
 	PreAddElement(GameFrameHTML(),"BODY");
-	HearElement(".game-supra-Canvas",()=>PlayIntro(".game",()=>Clickwall(Callback)));
+	HearElement(".game-supra-Canvas",()=>Clickwall(Callback));
 }
 
 function Clickwall(Callback){
@@ -78,7 +76,7 @@ function Clickwall(Callback){
 	UnFadeElement(".clickwall",500);
 	function Start(){
 		CloseElement(".game .clickwall",500);
-		setTimeout(Callback,500)
+		setTimeout(()=>PlayIntro(".game",Callback),1000);
 	}
 	AttendOnce("click",Start,".clickwall");
 }
