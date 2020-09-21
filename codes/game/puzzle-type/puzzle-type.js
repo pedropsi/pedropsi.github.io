@@ -9,13 +9,6 @@ if(PageIdentifier()!=="puzzle-type")
 
 var gameTitle="Puzzle Type";
 
-function GameFrameHTML(){
-	return `<div class='game-supra-Canvas'>
-				<div class='game' id='gameCanvas'>
-				</div>
-			</div>`;
-}
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // Game module hooks
@@ -132,12 +125,12 @@ var ObtainRequestHint=ObtainRequestHint?ObtainRequestHint:Identity;
 
 var gameModulesEarly=[
 "codes/game/game.css",
+"codes/game/modules/data-game-intro.js",
 "codes/game/modules/data-game-fullscreen.js",
 "codes/game/modules/data-game-extras.js",
 "codes/game/modules/data-game-moves.js",
 "codes/game/modules/data-game-colours.js",
 "codes/game/modules/data-game-undo.js",
-"codes/game/game-intro.js",
 "codes/game/modules/data-game-hints.js",
 "codes/game/modules/data-game-gestures.js",
 // "codes/game/modules/data-game-hud.js"
@@ -171,33 +164,13 @@ var gameModulesLater=[
 function ModulesPath(){return "codes/game/puzzle-type"};
 function MediaPath(){return "media/puzzle-type"};
 
-
-LoadSources(gameModulesEarly,P()?GameIntro:GameTrailer);
+LoadStyle(ModulesPath()+"/puzzle-type.css");
+LoadSources(gameModulesEarly,P()?()=>GameIntro(StartGame):GameTrailer);
 gameModulesLater.map(LoaderInFolder(ModulesPath()+"/modules"));
 LoaderInFolder("codes/libraries")("tone.js");
 LoaderInFolder("codes/game/puzzle-type")(".solutions.js");
 
-function GameIntro(){
-	RemoveElement("game-supra-Canvas");
-	PreAddElement(GameFrameHTML(),"BODY");
-	GameFocus();
-	LoadStyle(ModulesPath()+"/puzzle-type.css");
-	setTimeout(function(){PlayIntro(".game",Clickwall)},300);
-}
 
-function Clickwall(){
-	AddElement(`
-		<div class="clickwall faded">
-			<div class="circular">${ObtainSymbol("play")}</div>
-			<p>Please turn on the sound ${ObtainSymbol("music")}.</p><p><b>Click anywhere to start!</b></p>
-		</div>`,".game");
-	UnFadeElement(".clickwall",500);
-	function Start(){
-		CloseElement(".game .clickwall",500);
-		setTimeout(StartGame,500)
-	}
-	AttendOnce("click",Start,".clickwall");
-}
 
 function StartGame(){
 	PrepareGame();

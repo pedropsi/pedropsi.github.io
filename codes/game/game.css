@@ -234,6 +234,12 @@
 
 
 /*Animated intro*/
+.intro .logo{
+    max-width: 75vw;
+    max-height: 75vh;
+    background-color: unset;
+}
+
 .intro{
     display: flex;
     flex-direction: column;
