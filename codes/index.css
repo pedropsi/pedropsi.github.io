@@ -52,7 +52,7 @@
 --huen:0;
 
 --hue1:180;
---hue2:170;
+--hue2:160;
 --hue3:60;
 
 --sat1:var(--sat);
@@ -106,18 +106,19 @@
   
 	--white:var(--pri9)      ;		
 	--smokewhite:var(--pri8) ;
-	
-	--darkblue:var(--pri1)	 ;
-	--blue:var(--pri2)			 ;
-	--lightblue:var(--pri3)	 ;
-	
-	--turquoise:var(--sec5)	 ;
-	--green:var(--sec6)			 ;
-	--lightgreen:var(--sec7) ;
-	
-	--beije:var(--ter6)      ;
-	--yellow:var(--ter7)		 ;
 	--lightyellow:var(--ter8);
+	--yellow:var(--ter7)		 ;
+	--beije:var(--ter7)      ;
+	
+	--lightgreen:var(--sec8) ;
+	--green:var(--sec6)			 ;
+	
+	--turquoise:var(--pri5)	 ;
+	
+	--lightblue:var(--pri3)	 ;
+	--blue:var(--pri2)			 ;
+	--darkblue:var(--pri1)	 ;
+	
 	
   
 	--rainbow:linear-gradient(115deg, 
@@ -152,9 +153,9 @@
   --l8:0.18;
   --l9:0.10;
 	
-	--hue1:10;
-  --hue2:20;
-  --hue3:30;
+	--hue1:0;
+  --hue2:30;
+  --hue3:10;
 	
 	--lightfilter: sepia(100%) saturate(4) hue-rotate(310deg);
 	--normalfilter: sepia(100%) saturate(4) hue-rotate(310deg);
@@ -824,7 +825,7 @@ figure .image{
 }
 
 .button{
-	background-color:var(--smokewhite);
+	background-color:var(--lightgreen);
 	max-width:80%;
 	text-align:center;
 	color:var(--blue);
@@ -1571,6 +1572,7 @@ kbd{
 	line-height:calc(var(--lineheight) + var(--h2) + var(--h-2));
 	font-family:unset;
 	font-variant:petite-caps;
+	background-color: var(--lightyellow);
 }
 
 

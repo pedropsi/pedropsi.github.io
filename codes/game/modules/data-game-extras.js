@@ -1394,75 +1394,54 @@ function RequestGameFullscreen(){
 ////////////////////////////////////////////////////////////////////////////////
 //Colorise game bar
 
-function Stylesheet(){return".game-supra-container{\
-	--white:rgba(255,255,255,var(--t));			/*#FFF*/\
-	--smokewhite:rgba(241,241,241,var(--t))		/*#f1f1f1*/;\
-	--darkblue:rgba(7,0,112,var(--t))			/*#070070*/;\
-	--blue:rgba(0,15,255,var(--t))				/*#000FFF*/;\
-	--lightblue:rgba(25,130,237,var(--t))		/*#1982ed*/;\
-	--turquoise:rgba(59,248,222,var(--t))		/*#3bf8de*/;\
-	--green: rgba(70,244,111,var(--t))			/*#46f46f*/;\
-	--lightgreen:rgba(12,252,189,var(--t))				   ;\
-	--yellow: rgba(240,248,175,var(--t))		/*#f0f8af*/;\
-	--lightyellow:rgba(255,249,201,var(--t))	/*#fff9c9*/;\
-	--beije:rgba(255,240,229,var(--t))					   ;\
-	--bgcolour:"+ObtainBGColor()+"	/*#fff9c9*/;\
-	--fgcolour:"+ObtainFGColor()+"	/*#fff9c9*/;\
-	}";
-}
+function GamebarColours(){
+	var PrimaryDark=ObtainBGColor();
+	var PrimaryLight=ObtainFGColor();
 
-
-function ReplaceColours(stylesheet,BackgroundColour,ForegroundColour){
-	var styleSheet=stylesheet;
-	var Lmax=Lightness(BackgroundColour);
-	
-	var PrimaryDark=(ForegroundColour=ObtainFGColor());
-	var PrimaryLight=(BackgroundColour=ObtainBGColor());
-	
 	// Pick the most saturated colour as text colour
-	if(Saturation(BackgroundColour)===0){
-		PrimaryLight=ForegroundColour;
-	}
-	if(Saturation(ForegroundColour)===0){
-		PrimaryDark=BackgroundColour;
-	}
+	if(Saturation(ObtainBGColor())===0)
+		PrimaryLight=ObtainFGColor();
+	if(Saturation(ObtainFGColor())===0)
+		PrimaryLight=ObtainBGColor();
 	
-	//Invert in case of dark background
-	if(Lightness(BackgroundColour)<0.5){
-		styleSheet=styleSheet.replace("rgba(255,255,255,var(--t))",	HEX(DarkenTo(PrimaryLight,-Lmax*0.50+0.950)).colour);
-		styleSheet=styleSheet.replace("rgba(241,241,241,var(--t))",	HEX(DarkenTo(PrimaryLight,-Lmax*0.50+0.925)).colour);
+	var inverted=Lightness(PrimaryDark)<Lightness(PrimaryLight);
 
-		styleSheet=styleSheet.replace("rgba(7,0,112,var(--t))",		HEX(DarkenTo(PrimaryDark, -Lmax*0.22+0.22 )).colour);
-		styleSheet=styleSheet.replace("rgba(0,15,255,var(--t))",	HEX(DarkenTo(PrimaryDark, -Lmax*0.40+0.40 )).colour);
-		styleSheet=styleSheet.replace("rgba(25,130,237,var(--t))",	HEX(DarkenTo(PrimaryDark, -Lmax*0.51+0.51 )).colour);
-		styleSheet=styleSheet.replace("rgba(59,248,222,var(--t))",	HEX(DarkenTo(PrimaryDark, -Lmax*0.89+0.89 )).colour);
-		styleSheet=styleSheet.replace("rgba(70,244,111,var(--t))",	HEX(DarkenTo(PrimaryDark, -Lmax*0.91+0.91 )).colour);
-		styleSheet=styleSheet.replace("rgba(12,252,189,var(--t))",	HEX(DarkenTo(PrimaryDark, -Lmax*0.92+0.92 )).colour);
-		styleSheet=styleSheet.replace("rgba(240,248,175,var(--t))",	HEX(DarkenTo(PrimaryDark, -Lmax*0.93+0.93 )).colour);
-		styleSheet=styleSheet.replace("rgba(255,249,201,var(--t))",	HEX(DarkenTo(PrimaryDark, -Lmax*0.95+0.95 )).colour);
-		styleSheet=styleSheet.replace("rgba(255,240,229,var(--t))",	HEX(DarkenTo(PrimaryDark, -Lmax*0.97+0.97 )).colour);
+	return `
+	.game-supra-container *{
+		--alp:1;
 		
-	}
-	else{
-		styleSheet=styleSheet.replace("rgba(255,255,255,var(--t))",	HEX(LightenTo(PrimaryLight,Lmax*0.925)).colour);
-		styleSheet=styleSheet.replace("rgba(241,241,241,var(--t))",	HEX(LightenTo(PrimaryLight,Lmax*0.900)).colour);
+		--hue1:${Round(Hue(PrimaryDark))};
+		--hue2:${Round(Hue(PrimaryLight))};
+		--hue3:${Round(Hue(PrimaryLight))};
 
-		styleSheet=styleSheet.replace("rgba(7,0,112,var(--t))",		HEX(LightenTo(PrimaryDark,(Lmax*0.22))).colour);
-		styleSheet=styleSheet.replace("rgba(0,15,255,var(--t))",	HEX(LightenTo(PrimaryDark,(Lmax*0.40))).colour);
-		styleSheet=styleSheet.replace("rgba(25,130,237,var(--t))",	HEX(LightenTo(PrimaryDark,(Lmax*0.51))).colour);
-		styleSheet=styleSheet.replace("rgba(59,248,222,var(--t))",	HEX(LightenTo(PrimaryDark,(Lmax*0.92))).colour);
-		styleSheet=styleSheet.replace("rgba(70,244,111,var(--t))",	HEX(LightenTo(PrimaryDark,(Lmax*0.93))).colour);
-		styleSheet=styleSheet.replace("rgba(12,252,189,var(--t))",	HEX(LightenTo(PrimaryDark,(Lmax*0.92))).colour);
-		styleSheet=styleSheet.replace("rgba(240,248,175,var(--t))",	HEX(LightenTo(PrimaryDark,(Lmax*0.94))).colour);
-		styleSheet=styleSheet.replace("rgba(255,249,201,var(--t))",	HEX(LightenTo(PrimaryDark,(Lmax*0.95))).colour);
-		styleSheet=styleSheet.replace("rgba(255,240,229,var(--t))",	HEX(LightenTo(PrimaryDark,(Lmax*0.97))).colour);
-	}
+		--lig1:${Min(50,2*Round(Lightness(PrimaryDark)*100))}%;
+		--lig2:50%;
+		--lig3:50%;
+
+		--sat1:${Round(Saturation(PrimaryDark),2)*100}%;
+		--sat2:${Round(Saturation(PrimaryLight),2)*100}%;
+		--sat3:${Round(Saturation(PrimaryLight),2)*100}%;
+
+		--white:var(--pri${inverted?2:8})      ;		
+		--smokewhite:var(--pri${inverted?3:7}) ;
 		
-	return styleSheet;
+		--darkblue:var(--sec${inverted?8:1})	;
+		--blue:var(--sec${inverted?7:3})		;
+		--lightblue:var(--sec5)					;
+		
+		--turquoise:var(--sec${inverted?2:8})	;
+		--green:var(--sec${inverted?3:7})		;
+		--lightgreen:var(--sec${inverted?2:8})	;
+		
+		--beije:var(--ter${inverted?4:6})     	;
+		--yellow:var(--ter${inverted?3:7})	 	;
+		--lightyellow:var(--ter${inverted?2:8})	;
+	}`;
+
 }
 
 function ColoriseGameBar(){
-	var stylesource=ReplaceColours(Stylesheet(),ObtainBGColor(),ObtainFGColor());
+	var stylesource=GamebarColours();
 	RemoveElement("game-bar-colours");
 	ReplaceStyleElement(stylesource,"game-bar-colours");
 }

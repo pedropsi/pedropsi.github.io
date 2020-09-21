@@ -27,6 +27,7 @@
     z-index: 2;
     overflow: hidden;
     z-index: 0;
+   background-color: var(--smokewhite);
 }
 
 
@@ -159,7 +160,7 @@
 .middle{
    --letterOn:var(--darkblue);
    --letterMid:var(--blue);
-   --letterTransparent:var(--lightyellow);
+   --letterTransparent:var(--white);
     min-height: 33.33%;
     max-height: 66.66%;
     flex-grow:2;
@@ -167,7 +168,6 @@
     align-items: center;
     justify-content: center;
     background-color: var(--letterTransparent);
-    filter: brightness(1.2);
     position: relative;
     overflow:hidden;
 }
