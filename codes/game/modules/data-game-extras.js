@@ -61,31 +61,7 @@ if(typeof ObtainLevelNotes==="undefined")
 	var ObtainLevelNotes=function(lvl){return ""};
 
 
-//Read move defaults
-if(typeof ObtainIsUndoMove==="undefined")
-	var ObtainIsUndoMove=function(move){return move==="Z"}
 
-if(typeof ObtainIsRedoMove==="undefined")
-	var ObtainIsRedoMove=function(move){return move==="Y"}
-
-if(typeof ObtainIsRestartMove==="undefined")
-	var ObtainIsRestartMove=function(move){return move==="R"}
-
-if(typeof ObtainReadMove==="undefined")
-	var ObtainReadMove=function(move){
-		switch (move) {
-			case 27:return "Q";break;
-			case 37:return "A";break;
-			case 38:return "W";break;
-			case 39:return "D";break;
-			case 40:return "S";break;
-			case 82:return "R";break;
-			case 88:return "X";break;
-			case 85:return "Z";break;
-			case 89:return "Y";break;
-			default: return move;break;
-		}
-	};
 
 //Keybinding defaults
 if(typeof ObtainKeyActionsGameBar==="undefined")
