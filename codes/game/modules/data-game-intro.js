@@ -37,6 +37,7 @@ var LOGO=`
 </div>`;
 	
 function PlayIntro(targetIDsel,SuccessF){
+	PlaySound("media/Intro.mp3");
 	Class(targetIDsel,"intro");
 	OpenElement(LOGO,".intro");
 	OpenElement(LOGONAME,".intro");
