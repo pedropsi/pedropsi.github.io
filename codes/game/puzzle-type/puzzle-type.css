@@ -1,3 +1,12 @@
+.game-supra-container .game-container *{
+   --sat1:90%;
+   --sat2:60%;
+   --sat3:90%;
+   
+   --lig1:60%;
+   --lig2:60%;
+   --lig3:60%;
+}
 
 .game-supra-Canvas{
    width: 100%;
