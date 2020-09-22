@@ -139,7 +139,6 @@
 	--lightfilter:sepia(1) hue-rotate(180deg) saturate(3);
 	--normalfilter:unset;
 	
-	transition-duration: 1s;
 }
 
 .nightmode, .nightmode *{
