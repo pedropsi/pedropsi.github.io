@@ -1879,3 +1879,12 @@ svg.wallpaper{
 svg.wallpaper path{
 	fill: var(--darkblue);
 }
+
+
+.highlight{
+	box-shadow: 0 0 100vmax 100vmax var(--darkblue);
+	outline: calc(var(--h-4) + var(--w-4)) solid var(--lightgreen);
+	padding: var(--h-2) var(--w-2) var(--h-2) var(--w-2);
+	background-color: unset;
+	z-index: 1000;
+}
