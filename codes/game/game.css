@@ -234,6 +234,16 @@
 
 
 /*Animated intro*/
+.intro *{
+   --sat1:90%;
+   --sat2:90%;
+   --sat3:90%;
+   
+   --lig1:60%;
+   --lig2:60%;
+   --lig3:60%;
+}
+
 .intro .logo{
     max-width: 75vw;
     max-height: 75vh;
