@@ -1,11 +1,11 @@
 .game-supra-container .game-container div,
 .game-supra-container .game-container a{
    --sat1:90%;
-   --sat2:80%;
+   --sat2:90%;
    --sat3:90%;
    
    --lig1:55%;
-   --lig2:50%;
+   --lig2:55%;
    --lig3:50%;
    
    --alp:1;
