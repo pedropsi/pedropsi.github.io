@@ -1,6 +1,6 @@
-.game-supra-container .game-container *{
+.game-supra-container .game-container div{
    --sat1:90%;
-   --sat2:60%;
+   --sat2:100%;
    --sat3:90%;
    
    --lig1:60%;
