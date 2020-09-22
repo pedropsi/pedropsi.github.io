@@ -1,11 +1,14 @@
-.game-supra-container .game-container div{
+.game-supra-container .game-container div,
+.game-supra-container .game-container a{
    --sat1:90%;
-   --sat2:100%;
+   --sat2:80%;
    --sat3:90%;
    
    --lig1:60%;
    --lig2:60%;
    --lig3:60%;
+   
+   -alp:1;
 }
 
 .game-supra-Canvas{
