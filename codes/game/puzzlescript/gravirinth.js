@@ -1,253 +1,3836 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Customisation
-
-function G_CountObtained(){
-var so=state.objects; //Global game state	
-var Orbindices=[so.gotorb1.id,so.gotorb2.id,so.gotorb3.id,so.gotorb4.id];//Four types of orbs
-	var G_Orbs=0;
-	function hasOrb(cellindex){
-		var f=0;
-		for(var i=0;i<Orbindices.length;i++)
-			if(level.getCell(cellindex).get(Orbindices[i]))
-				f=1;
-		return f}
-
-	for(var j=0;j<level.n_tiles;j++){
-		if(hasOrb(j))
-			G_Orbs++;
-	}
-	return G_Orbs;
-}
-
-
-//Hook to hall-of-fame
-function ObtainHonour(){
-	return "★".repeat(G_CountObtained());
-}
-
-
-function OID(name){
-	return state.objects[name.toLowerCase()].id;
-}
-
-function FindObjectXY(name){
-	var id=OID(name);
-	
-	var Rows=level.rowCellContents;
-	var l=Rows.length;
-	var found=false;
-	var y=0;
-	while(!found && y<l){
-		found=(Rows[y].get(id)===true);
-		y++;
-	}
-	if(!found)
-		return false;
-	
-	var Cols=level.colCellContents;
-		l=Cols.length;
-	
-	var found=false;
-	var x=0;
-	while(!found && x<l){
-		found=(Cols[x].get(id)===true);
-		x++;
-	}
-	if(!found)
-		return false;
-
-	return [y-1,x-1];
-}
-
-function FindObjectTile(name){
-	var id=OID(name);
-	var found=false;
-	var j=0;
-	while(!found && j<level.n_tiles){
-		found=(level.getCell(j).get(id)===true);
-		j++
-	}
-	if(found)
-		return j;
-	else
-		return false;
-}
-
-function ObjectTile(X,Y){
-	return X+Y*level.rowCellContents.length;
-}
-
-
-function InTile(name,x,y){
-	var id=OID(name);
-	return level.getCell(ObjectTile(x,y)).get(id);
-}
-
-function InPlayerTile(playername,names){
-	var p=FindObjectXY(playername);
-	
-	function Match(offset){return function(n){return InTile(n,p[0],p[1]+offset)?n:false};};
-	
-	var pre=Complement(names.map(Match(-1)),[false]); 
-	var at =Complement(names.map(Match(0)),[false]); 
-	var pos=Complement(names.map(Match(1)),[false]); 
-
-	return pre.concat(at).concat(pos);
-}
-
-function DetectStory(){
-	var stories=["story0","story1","story2","story3","story4","story5","story6","story7","story8","story9"];
-	return InPlayerTile("agent",stories);
-}
-
-function ShoutStory(){
-	if(typeof level==="undefined"||!level.getCell)
-		return;
-	
-	var dArray=DetectStory();
-	if(dArray.length<1)
-		return;
-	
-	var messagecode=dArray.map(function(s){return UnPrefix(UnPrefix(s,"room"),"story")}).join("");
-	if(messagecode.length<2)
-		return;
-	
-	var room="room"+messagecode;
-	var story="story"+messagecode;
-	
-	if(Stories[story]&&!In(ShoutStory["list"],story)){
-		ConsoleAddMany(Stories[story].map(PHTML),"Intercom");
-		ShoutStory["list"].push(story);
-	}
-	else if(Stories[room]){
-		if(!ShoutStory[room])
-			ShoutStory[room]=0;
-		
-		if(Date.now()>ShoutStory[room]+30*3600){
-			ShoutStory[room]=Date.now();
-			ConsoleAddMany(Stories[room].map(PHTML),"Intercom","room");
-			ShoutStory["list"].push(room);
-		}
-	}
-	else
-		return;
-	
-	Memory("story",ShoutStory["list"]);
-
-}
-
-
-
-ListenOnce("GameBar",function(){
-	ShoutStory["list"]=Memory("story");
-	AddElement('<div class="Console" id="Intercom"></div>',"puzzlescript-game")}
-);
-
-var Stories={
-"story00":['Where are you, Xeno?','Are you inside?','We told you this was a bad idea!','Your radio transmitter hasn\'t recovered yet...','...from the interference of those odd...','...gravitic signatures.','Now we just hope you can...','...beam us a sonar map...','...of your surroundings?'],
-
-'story10':['Excellent!','Now, how did you enter the Gravirinth?','We can\'t retrace your steps in the past hour.','Anyway, do do you remember...','...how to operate your exoskeleton?','Walk <span><kbd>left</kbd></span> or <span><kbd>right</kbd></span>...','...and press <span><kbd>up</kbd></span> to rise to a taller position.'],
-
-'story11':['When stepping on a heavy block...','...press <span><kbd>down</kbd></span> on the exopad to pick it.','Later, on tall position, press <span><kbd>up</kbd></span> to drop it.'],
-'story20':['The exopad also comes with decent time-travelling abilities.','Just press <span><kbd>Z</kbd></span> to go back a few steps in time.'],
-'story15':['Your exoskeleton can also throw blocks laterally...','...just try to move <span><kbd>left</kbd></span> or <span><kbd>right</kbd></span> against an edge.'],
-'story16':['When trapped, press <span><kbd>R</kbd></span> on the exopad.','This will retrace your steps to the last saved point.'],
-
-'story12':['Odd gravity signals ahead!'],
-'story13':['Your gravitic signature reversed!','Are you ok?'],
-'story17':['Those blocks seem suspended...','by an unstable local gravity field.'],
-'story81':['Breaking the balance of forces...','...lets those unstable fields vanish.'],
-'story91':['Wherever you go, we\'re tracking your steps...','...just in case you find something worthwhile.'],
-'story18':['What does that orb look like?','Its fourfold signature is quite mysterious to us.','There are others deeper in the Gravirinth...','...could you bring them to our lab?'],
-
-
-'room72':['To the "Tower"'],
-'room73':['To the "Catacombs"'],
-'room74':['To the "Antechamber"'],
-'room75':['Back to the "Main Hall"'],
-'room76':['Back to the "Main Hall"'],
-'room77':['"Antechamber"'],
-'room68':['"Exiting the "Tower"'],
-
-'room71':['"Main Hall"'],
-'room21':['"Gateway"'],
-'room22':['"Levitate"'],
-'room24':['"Bridge"'],
-'room23':['"Rose"'],
-'room25':['"Platforms, ..."'],
-'room26':['"... doors, ..."'],
-'room27':['"... and elevators."'],
-'room28':['"Clockwork"'],
-'room30':['"Infinity"'],
-'room31':['"Stairs"'],
-'room32':['"Circles"'],
-'room33':['"Hourglass"'],
-'room34':['"Deep dive"'],
-'room35':['"Vortex"'],
-'room36':['"Unplugged"'],
-'room37':['"Dual"'],
-'room38':['"Precisely"'],
-'room39':['"Brakes"'],
-'room40':['"Hidden chamber"'],
-'room41':['"Sieve"'],
-'room42':['"Top of the remote world"'],
-'room43':['"Zigzags"'],
-'room45':['"Contrarieties"'],
-'room46':['"Caroussel"'],
-'room47':['"Alternate ways"'],
-'room48':['"Double twist"'],
-'room49':['"Orthogonal"'],
-
-'room60':['"Upper Core"'],
-'room61':['"Lower Core"'],
-'story62':['The Gravirinth now becomes a deep gallery.','No worries, though!','We\'ve named every chamber so you don\'t get lost.','This one we call "Anterior Core"'],
-'room63':['"Posterior Core"'],
-
-
-'story80':['Xeno, the Gravirinth seems so intricate...','...it must have been build by a very advanced civilisation.','We wonder whether they were aware...','...of all those gravitational anomalies.'],
-'story14':['Xeno, the way the Gravirinth was built...','...almost seems it was meant to be explored.'],
-'story98':['Do you think the Gravirinth is unique?','In our solar system, at least...','...there are no other sources...','...with such strong gravitational signatures.'],
-'story94':['Let us hope those orbs you\'re collecting...','... are scientifically valuable.','Otherwise we might have trouble funding our next expedition.'],
-'story95':['Xeno we are wondering:','was the Gravitinth placed at gravitational anomaly, or...','...is it actively causing it?','How advanced would a civilization need to be to manipulate gravity?'],
-'story96':['You probably can\'t feel this Xeno, but...','... did you notice the walls\' inner structure?','Barely perceptible and probably random, but...','...it could in theory encode some information.','In our screen it looks like a pattern of Hieroglyphs!'],
-'story97':['Xeno, if the Gravirinth was meant to be found...','...why hide it so well?','It took us decades of research...','to be capable of detecting such gravitational anomalies.','Very few intelligent lifeforms would be pass such a test!'],
-'story99':['Now imagine for a moment...','...that those inner wall "Hieroglyphs" do carry meaning.','How could whoever made the Gravirinth expect us to read them?','How could we understand completely alien minds?'],
-'story92':['Xeno, when you lit up the first light...','...Gravirinth\'s overall signature became stronger.'],
-'story93':['We can\'t wait to analise those orbs...','...but our lab here is so small...','most analyses will wait until return to Earth...','...where we left the heaviest instruments.'],
-
-'story64':['What a powerful light!','The walls seem to let it through...','...as if pointing to something.'],
-'story65':['A second light!','Gravirinth\'s signal is becoming stronger!'],
-'story66':['A third light!','The signal is now oscillating mysteriously...','... as if emmiting a message.','Who\'d be listening?'],
-'story67':['The last light!','Wait, Xeno...','..the Gravirinth is emitting ominously...','...and part of the structure is collapsing!','It may no longer safe to keep exploring.','Just remember:','we promised to take you back to Earth in one piece.','Press the big <span><kbd>X</kbd></span> button to finish the expedition.','Don\'t explore any further until...','... we come to pick you. This is not the time for another adventure!']
-}
-
-
-//Playlist
-/*var p="media/gravirinth/music/";*/
-var ps="media/gravirinth/sound/";
-var soundtracks={
-/*		1:{src:p+'Stellardrone - Light Years - 03 Eternity.mp3',volume:0.25,start:0,next:2,stopall:true},
-		2:{src:p+'Stellardrone - Light Years - 07 Comet Halley.mp3',volume:0.25,start:5,next:3,sfx:22586308,stopall:true,play:function(){PlayTrack(2)}},
-		3:{src:p+'Stellardrone - A Moment Of Stillness - 02 Billions And Billions.mp3',volume:0.25,start:5,next:4,stopall:true},
-		4:{src:p+'Stellardrone - A Moment Of Stillness - 05 Twilight.mp3',volume:0.25,start:5,next:5,stopall:true},
-		5:{src:p+'Stellardrone - Between The Rings - 05 Between The Rings.mp3',volume:0.25,start:5,next:1,stopall:true},*/
-		left:	{src:ps+'left.mp3',		volume:0.3,sfx:13614108},
-		up:		{src:ps+'up.mp3',		volume:0.3,sfx:25636708},
-		right:	{src:ps+'right.mp3',	volume:0.3,sfx:79636308},
-		down:	{src:ps+'down.mp3',		volume:0.3,sfx:76346108},
-		orb:	{src:ps+'orb.mp3',		volume:0.3,sfx:50758708},
-		type:	{src:ps+'type.mp3',		volume:0.1,sfx:27763708},
-		light:	{src:ps+'light.mp3',	volume:0.3,sfx:40605508},
-		save:	{src:ps+'save.mp3',		volume:0.1,sfx:4002908},
-		undo:	{src:ps+'undo.mp3',		volume:0.1,sfx:85375308},
-		restart:{src:ps+'restart.mp3',	volume:0.1,sfx:35446108}
-	/* 20449708 endplay */
-}
-
-LoadSounds(soundtracks,"puzzlescript-game");
-AutoRepeat(ShoutStory);
+var ObtainLevelTitle="Previous";
 
 ////////////////////////////////////////////////////////////////////////////////
-// Source (global)
+// Source
+var sourceCode=`
+(- Copyright Pedro PSI 2018-2020 - All rights reserved  -)
+(- Version nº 22/09/2020 "Mini"                     .1  -)
+(--------------------------------------------------------)
 
-var sourceCode="(- Copyright Pedro PSI 2018-2020 - All rights reserved  -)\n(- Version nº 24/01/2020                            .1  -)\n(--------------------------------------------------------)\n\ntitle Gravirinth\nauthor Pedro PSI\nhomepage pedropsi.github.io\n\nbackground_color #190434 (darkest purple)\ntext_color #FF9703 (player orange) \n\nrealtime_interval 0.008\nkey_repeat_interval 0.033\n\nzoomscreen 30x17\nrun_rules_on_level_start\n\nlocal_radius 33\n\n(verbose_logging\ndebug)\n\n((Palette)\n(---------------------------------------------------)\n#190434 (darkest purple)\n#54268D (dark purple)\n#7346AD (purple)\n#9F76D3 (bright purple)\n\n#F17E9F (bright pink)\n#E6507B (pink)\n#BB2751 (dark pink)\n\n#FFAB85 (bright red)\n#FF8D59 (red)\n#D05E2B (dark red)\n\n#FFD885 (bright yellow)\n#FFCA59 (yellow)\n#D09B2B (dark yellow)\n\n#D05E2B (dark orange)\n#FF9703 (player orange) \n#FF8403 (pdayer orange)\n)\n\n========\nOBJECTS\n========\n\nBackground \n#190434 (darkest purple)\n\nWall \n#7346AD (purple) #54268D (dark purple) \n11111\n11111\n00000\n11111\n11111\n\nWallOver1\n#7346AD (purple)\n.....\n.....\n.....\n.....\n....0\n\nWallOver2\n#7346AD (purple)\n....0\n.....\n.....\n.....\n.....\n\nWallOver3\n#7346AD (purple)\n0....\n.....\n.....\n.....\n.....\n\nWallOver4\n#7346AD (purple)\n.....\n.....\n.....\n.....\n0....\n\nWallOver5\n#7346AD (purple)\n....0\n.....\n.....\n.....\n....0\n\nWallOver6\n#7346AD (purple) \n0...0\n.....\n.....\n.....\n.....\n\nWallOver7\n#7346AD (purple)\n0....\n.....\n.....\n.....\n0....\n\nWallOver8\n#7346AD (purple)\n.....\n.....\n.....\n.....\n0...0\n\nWallOver9\n#7346AD (purple)\n....0\n.....\n.....\n.....\n0...0\n\nWallOver10\n#7346AD (purple)\n0...0\n.....\n.....\n.....\n....0\n\nWallOver11\n#7346AD (purple)\n0...0\n.....\n.....\n.....\n0....\n\nWallOver12\n#7346AD (purple)\n....0\n.....\n.....\n.....\n0...0\n\nWallOver13\n#7346AD (purple)\n0...0\n.....\n.....\n.....\n0...0\n\nborderL\n#9F76D3 (bright purple)\n0....\n0....\n0....\n0....\n0....\n\nborderU\n#9F76D3 (bright purple)\n00000\n.....\n.....\n.....\n.....\n\nborderR\n#9F76D3 (bright purple)\n....0\n....0\n....0\n....0\n....0\n\nborderD \n#9F76D3 (bright purple)\n.....\n.....\n.....\n.....\n00000\n\n\nBoLXU\n#9F76D3 (bright purple)\n0....\n.....\n.....\n.....\n.....\n\nBoDXL\n#9F76D3 (bright purple)\n.....\n.....\n.....\n.....\n0....\n\nBoUXR\n#9F76D3 (bright purple)\n....0\n.....\n.....\n.....\n.....\n\nBoRXD\n#9F76D3 (bright purple)\n.....\n.....\n.....\n.....\n....0\n\n\nBorderDkL\ntransparent\nBorderDkR\ntransparent\nBorderUkL\ntransparent\nBorderUkR\ntransparent\n\nBorderRkD\ntransparent\nBorderRkU\ntransparent\nBorderLkD\ntransparent\nBorderLkU\ntransparent\n\n\nFixBorder\ntransparent (lightblue\n.....\n.....\n..1..\n.....\n.....)\n\nUnFixBorder\ntransparent\n\n\nPlayer (this becomes the camera)\ntransparent (white\n.....\n..1..\n..1..\n..1..\n.....)\n\nPlayerL \n#F17E9F (bright pink) #E6507B (pink)\n..10.\n11000\n.1000\n11000\n..10.\n\nPlayerU \n#FFD885 (bright yellow) #FFCA59 (yellow)\n.1.1.\n.111.\n10001\n00000\n.000.\n\nPlayerR \n#FFAB85 (bright red) #FF8D59 (red)\n.01..\n00011\n0001.\n00011\n.01..\n\nPlayerD \n#FF9703 (player orange) #FF8403 (pdayer orange)\n.000.\n00000\n10001\n.111.\n.1.1.\n\n\nPlayerLegsL\n#F17E9F (bright pink) #E6507B (pink)\n.....\n01111\n.....\n01111\n.....\n\nPlayerLegsU\n#FFD885 (bright yellow) #FFCA59 (yellow)\n.0.0.\n.1.1.\n.1.1.\n.1.1.\n.1.1.\n\nPlayerLegsR\n#FFAB85 (bright red)#FF8D59 (red)\n.....\n11110\n.....\n11110\n.....\n\nPlayerLegsD\n#FF9703 (pdayer orange) #FF8403 (player orange)\n.1.1.\n.1.1.\n.1.1.\n.1.1.\n.0.0.\n\nNextLegsL\ntransparent\nNextLegsU\ntransparent\nNextLegsR\ntransparent\nNextLegsD\ntransparent\n\n\nCrateSimpleL \n#F17E9F (bright pink) #E6507B (pink)\n1000.\n1100.\n1100.\n1100.\n1110.\nCrateSimpleU \n#FFCA59 (yellow) #FFD885 (bright yellow)\n00000\n00001\n01111\n11111\n.....\nCrateSimpleR\n#FFAB85 (bright red)#FF8D59 (red)\n.0111\n.0011\n.0011\n.0011\n.0001\nCrateSimpleD\n#FF8403 (player orange) #FF9703 (pdayer orange)\n.....\n11111\n11110\n10000\n00000\n \n\nPodL\ntransparent\nPodU\ntransparent\nPodR\ntransparent\nPodD\ntransparent\n\n\nFromL\nblack\n.....\n00...\n.....\n.....\n.....\n\nFromU\nblack\n...0.\n...0.\n.....\n.....\n.....\n\nFromR\nblack\n.....\n.....\n.....\n...00\n.....\n\nFromD\nblack\n.....\n.....\n.....\n.0...\n.0...\n\nFixedL\nwhite\n.....\n.....\n00...\n.....\n.....\n\nFixedU\nwhite\n..0..\n..0..\n.....\n.....\n.....\nFixedR\nwhite\n.....\n.....\n...00\n.....\n.....\nFixedD\nwhite\n.....\n.....\n.....\n..0..\n..0..\n\n\nBlock\n#7346AD (purple)\n.....\n.000.\n.0.0.\n.000.\n.....\n\n\nWallDecoD1\n#9F76D3 (bright purple)\n.000.\n.....\n.....\n.....\n.....\n\nWallDecoD2\n#9F76D3 (bright purple)\n.....\n.000.\n.....\n.....\n.....\n\nWallDecoD3\n#9F76D3 (bright purple)\n.....\n.....\n00000\n.....\n.....\n\nWallDecoD4\n#9F76D3 (bright purple)\n.....\n.....\n.000.\n.....\n.....\n\nWallDecoD5\n#9F76D3 (bright purple)\n.....\n.....\n..0..\n.....\n.....\n\n\nWallDecoU1\n#9F76D3 (bright purple)\n.....\n.....\n.....\n.....\n.000.\n\nWallDecoU2\n#9F76D3 (bright purple)\n.....\n.....\n.....\n.000.\n.....\n\nWallDecoU3\n#9F76D3 (bright purple)\n.....\n.....\n00000\n.....\n.....\n\nWallDecoU4\n#9F76D3 (bright purple)\n.....\n.....\n.000.\n.....\n.....\n\nWallDecoU5\n#9F76D3 (bright purple)\n.....\n.....\n..0..\n.....\n.....\n\n\nWallDecoR1\n#9F76D3 (bright purple)\n.....\n0....\n0....\n0....\n.....\n\nWallDecoR2\n#9F76D3 (bright purple)\n.....\n.0...\n.0...\n.0...\n.....\n\nWallDecoR3\n#9F76D3 (bright purple)\n..0..\n..0..\n..0..\n..0..\n..0..\n\nWallDecoR4\n#9F76D3 (bright purple)\n.....\n..0..\n..0..\n..0..\n.....\n\nWallDecoR5\n#9F76D3 (bright purple)\n.....\n.....\n..0..\n.....\n.....\n\nWallDecoL5\n#9F76D3 (bright purple)\n.....\n.....\n..0..\n.....\n.....\n\nWallDecoL4\n#9F76D3 (bright purple)\n.....\n..0..\n..0..\n..0..\n.....\n\nWallDecoL3\n#9F76D3 (bright purple)\n..0..\n..0..\n..0..\n..0..\n..0..\n\nWallDecoL2\n#9F76D3 (bright purple)\n.....\n...0.\n...0.\n...0.\n.....\n\nWallDecoL1\n#9F76D3 (bright purple)\n.....\n....0\n....0\n....0\n.....\n\nWallDecoL5Next\ntransparent\nWallDecoU5Next\ntransparent\nWallDecoR5Next\ntransparent\nWallDecoD5Next\ntransparent\n\nToL\ntransparent\nToU\ntransparent\nToR\ntransparent\nToD\ntransparent\n\n\nRotateDecoL5\n#F17E9F (bright pink)\n.....\n.....\n.....\n.....\n.....\n\nRotateDecoL4\n#F17E9F (bright pink)\n.....\n.....\n.....\n.....\n.....\n\nRotateDecoL3\n#F17E9F (bright pink)\n.....\n..0..\n.0...\n..0..\n.....\n\nRotateDecoL2\n#F17E9F (bright pink)\n.....\n..00.\n.00..\n..00.\n.....\n\nRotateDecoL1\n#F17E9F (bright pink)\n.....\n...0.\n..0..\n...0.\n.....\n\nRotateDecoU1\n#FFCA59 (yellow)\n.....\n.....\n..0..\n.0.0.\n.....\n\nRotateDecoU2\n#FFCA59 (yellow)\n.....\n..0..\n.000.\n.0.0.\n.....\n\nRotateDecoU3\n#FFCA59 (yellow)\n.....\n..0..\n.0.0.\n.....\n.....\n\nRotateDecoU4\n#FFCA59 (yellow)\n.....\n.....\n.....\n.....\n.....\n\nRotateDecoU5\n#FFCA59 (yellow)\n.....\n.....\n.....\n.....\n.....\n\n\nRotateDecoR1\n#FFAB85 (bright red)\n.....\n.0...\n..0..\n.0...\n.....\n\nRotateDecoR2\n#FFAB85 (bright red)\n.....\n.00..\n..00.\n.00..\n.....\n\nRotateDecoR3\n#FFAB85 (bright red)\n.....\n..0..\n...0.\n..0..\n.....\n\nRotateDecoR4\n#FFAB85 (bright red)\n.....\n.....\n.....\n.....\n.....\n\nRotateDecoR5\n#FFAB85 (bright red)\n.....\n.....\n.....\n.....\n.....\n\n\nRotateDecoD1\n#FF8403 (player orange)\n.....\n.0.0.\n..0..\n.....\n.....\n\nRotateDecoD2\n#FF8403 (player orange)\n.....\n.0.0.\n.000.\n..0..\n.....\n\nRotateDecoD3\n#FF8403 (player orange)\n.....\n.....\n.0.0.\n..0..\n.....\n\nRotateDecoD4\n#FF8403 (player orange)\n.....\n.....\n.....\n.....\n.....\n\nRotateDecoD5\n#FF8403 (player orange)\n.....\n.....\n.....\n.....\n.....\n\nCarriedL3\n#F17E9F (bright pink)\n.....\n.0...\n.0...\n.0...\n.....\n\nCarriedL2\n#F17E9F (bright pink)\n.....\n.00..\n.00..\n.00..\n.....\n\nCarriedL1\n#F17E9F (bright pink)\n.....\n...0.\n...0.\n...0.\n.....\n\nCarriedU1\n#FFCA59 (yellow)\n.....\n.....\n.....\n.000.\n.....\n\nCarriedU2\n#FFCA59 (yellow)\n.....\n.000.\n.000.\n.....\n.....\n\nCarriedU3\n#FFCA59 (yellow)\n.....\n.000.\n.....\n.....\n.....\n\nCarriedR1\n#FFAB85 (bright red)\n.....\n.0...\n.0...\n.0...\n.....\n\nCarriedR2\n#FFAB85 (bright red)\n.....\n..00.\n..00.\n..00.\n.....\n\nCarriedR3\n#FFAB85 (bright red)\n.....\n...0.\n...0.\n...0.\n.....\n\nCarriedD1\n#FF8403 (player orange)\n.....\n.000.\n.....\n.....\n.....\n\nCarriedD2\n#FF8403 (player orange)\n.....\n.000.\n.000.\n.....\n.....\n\nCarriedD3\n#FF8403 (player orange)\n.....\n.....\n.000.\n.....\n.....\n\nCarryL\ntransparent\nCarryU\ntransparent\nCarryR\ntransparent\nCarryD\ntransparent\n\n\nMovedL3\n#F17E9F (bright pink)\n.....\n.....\n.0...\n.....\n.....\n\nMovedL2\n#F17E9F (bright pink)\n.....\n.....\n.00..\n.....\n.....\n\nMovedL1\n#F17E9F (bright pink)\n.....\n.....\n...0.\n.....\n.....\n\nMovedU1\n#FFCA59 (yellow)\n.....\n.....\n.....\n..0..\n.....\n\nMovedU2\n#FFCA59 (yellow)\n.....\n..0..\n..0..\n.....\n.....\n\nMovedU3\n#FFCA59 (yellow)\n.....\n..0..\n.....\n.....\n.....\n\nMovedR1\n#FFAB85 (bright red)\n.....\n.....\n.0...\n.....\n.....\n\nMovedR2\n#FFAB85 (bright red)\n.....\n.....\n.00..\n.....\n.....\n\nMovedR3\n#FFAB85 (bright red)\n.....\n.....\n...0.\n.....\n.....\n\nMovedD1\n#FF8403 (player orange)\n.....\n..0..\n.....\n.....\n.....\n\nMovedD2\n#FF8403 (player orange)\n.....\n..0..\n..0..\n.....\n.....\n\nMovedD3\n#FF8403 (player orange)\n.....\n.....\n..0..\n.....\n.....\n\n\nThrowingLU\n#190434 (darkest purple) #E6507B (pink)\n..0.1\n.....\n.....\n.....\n.....\n\nThrowingLD\n#190434 (darkest purple) #E6507B (pink)\n.....\n.....\n.....\n.....\n..0.1\n\nThrowingUL\n#190434 (darkest purple) #FFCA59 (yellow)\n.....\n.....\n0....\n.....\n1....\n\nThrowingUR\n#190434 (darkest purple) #FFCA59 (yellow)\n.....\n.....\n....0\n.....\n....1\n\nThrowingRD\n#190434 (darkest purple) #FF8D59 (red)\n.....\n.....\n.....\n.....\n1.0..\nThrowingRU\n#190434 (darkest purple) #FF8D59 (red)\n1.0..\n.....\n.....\n.....\n.....\n\nThrowingDL\n#190434 (darkest purple) #FF8403 (player orange)\n1....\n.....\n0....\n.....\n.....\nThrowingDR\n#190434 (darkest purple) #FF8403 (player orange)\n....1\n.....\n....0\n.....\n.....\n\n\nOrb1 \n#F17E9F (bright pink) #E6507B (pink) \n.....\n.000.\n.100.\n.111.\n.....\n\nOrb2\n#FFAB85 (bright red)#FF8D59 (red)\n.....\n.001.\n.001.\n.011.\n.....\n\nOrb3\n#FFCA59 (yellow) #FFD885 (bright yellow)\n.....\n.111.\n.001.\n.000.\n.....\n\nOrb4\n#FF8403 (player orange) #FF9703 (pdayer orange)\n.....\n.110.\n.100.\n.100.\n.....\n\nGotOrb1 \n#F17E9F (bright pink) #E6507B (pink) \n.....\n.000.\n.100.\n.111.\n.....\n\nGotOrb2\n#FFAB85 (bright red)#FF8D59 (red)\n.....\n.001.\n.001.\n.011.\n.....\n\nGotOrb3\n#FFCA59 (yellow) #FFD885 (bright yellow)\n.....\n.111.\n.001.\n.000.\n.....\n\nGotOrb4\n#FF8403 (player orange) #FF9703 (pdayer orange)\n.....\n.110.\n.100.\n.100.\n.....\n\nAllOrbs\ntransparent\n\nLightL\n#BB2751 (dark pink)\n\nLightR\n#D05E2B (dark red)\n\nLightU\n#D09B2B (dark yellow)\n\nLightD\n#D05E2B (dark orange)\n\nLightOverL\n#BB2751 (dark pink)\n.....\n.....\n00000\n.....\n.....\n\nLightOverU\n#D09B2B (dark yellow)\n..0..\n..0..\n.000.\n..0..\n..0..\n\nLightOverR\n#D05E2B (dark red) \n.....\n.....\n00000\n.....\n.....\n\nLightOverD\n#D05E2B (dark orange)\n..0..\n..0..\n.000.\n..0..\n..0..\n\nLightGateL5\n#F17E9F (bright pink)\n.....\n.0...\n.0...\n.0...\n.....\n\nLightGateL4\n#F17E9F (bright pink)\n.....\n.00..\n.0...\n.00..\n.....\n\nLightGateL3\n#F17E9F (bright pink)\n.....\n.000.\n.0...\n.000.\n.....\n\nLightGateL2\n#F17E9F (bright pink)\n.....\n..00.\n.....\n..00.\n.....\n\nLightGateL1\n#F17E9F (bright pink)\n.....\n...0.\n.....\n...0.\n.....\n\nLightGateU5\n#FFCA59 (yellow)\n.....\n.000.\n.....\n.....\n.....\n\nLightGateU4\n#FFCA59 (yellow)\n.....\n.000.\n.0.0.\n.....\n.....\n\nLightGateU3\n#FFCA59 (yellow)\n.....\n.000.\n.0.0.\n.0.0.\n.....\n\nLightGateU2\n#FFCA59 (yellow)\n.....\n.....\n.0.0.\n.0.0.\n.....\n\nLightGateU1\n#FFCA59 (yellow)\n.....\n.....\n.....\n.0.0.\n.....\n\n\nLightGateR1\n#FFAB85 (bright red)\n.....\n.0...\n.....\n.0...\n.....\n\nLightGateR2\n#FFAB85 (bright red)\n.....\n.00..\n.....\n.00..\n.....\n\nLightGateR3\n#FFAB85 (bright red)\n.....\n.000.\n...0.\n.000.\n.....\n\nLightGateR4\n#FFAB85 (bright red)\n.....\n..00.\n...0.\n..00.\n.....\n\nLightGateR5\n#FFAB85 (bright red)\n.....\n...0.\n...0.\n...0.\n.....\n\nLightGateD1\n#FF8403 (player orange)\n.....\n.0.0.\n.....\n.....\n.....\n\nLightGateD2\n#FF8403 (player orange)\n.....\n.0.0.\n.0.0.\n.....\n.....\n\nLightGateD3\n#FF8403 (player orange)\n.....\n.0.0.\n.0.0.\n.000.\n.....\n\nLightGateD4\n#FF8403 (player orange)\n.....\n.....\n.0.0.\n.000.\n.....\n\nLightGateD5\n#FF8403 (player orange)\n.....\n.....\n.....\n.000.\n.....\n\n\nGravity\ntransparent\nGravityStart\ntransparent\nMovity\ntransparent\n\nBlockErase\ntransparent( red\n.....\n.....\n..1..\n.....\n.....)\n\nTickPlayer \"\ntransparent (yellow\n.....\n....1\n....1\n....1\n.....)\nTickTime '\ntransparent (blue\n.....\n....1\n....1\n....1\n.....\n)\nOnce\ntransparent\n\nAnimate »\ntransparent (blue\n.....\n..1..\n..1..\n..1..\n.....\n)\n\nLoop1\ntransparent\nLoop2\ntransparent\n\nInView $\ntransparent (red\n.....\n.....\n..1..\n.....\n.....)\nInViewAlways\ntransparent\n\nStartGame\ntransparent\n\nFOV0\ntransparent\nFOV1\ntransparent\nFOV2\ntransparent\nFOV3\ntransparent\nFOV4\ntransparent\nFOV5\ntransparent\nFOV6\ntransparent\nFOV7\ntransparent\nFOV8\ntransparent\nFOV9\ntransparent\n\nDarkness1\n#7346AD (purple) #54268D (dark purple) red\n11111\n11111\n00000\n11111\n11110\n\nDarkness2\n#7346AD (purple) #54268D (dark purple) red\n11110\n11111\n00000\n11111\n11111\n\nDarkness3\n#7346AD (purple) #54268D (dark purple) red\n01111\n11111\n00000\n11111\n11111\n\nDarkness4\n#7346AD (purple) #54268D (dark purple) red\n11111\n11111\n00000\n11111\n01111\n\nDarkness5\n#7346AD (purple) #54268D (dark purple)  red\n11110\n11111\n00000\n11111\n11110\n\nDarkness6\n#7346AD (purple) #54268D (dark purple)   red\n01110\n11111\n00000\n11111\n11111\n\nDarkness7\n#7346AD (purple) #54268D (dark purple)  red\n01111\n11111\n00000\n11111\n01111\n\nDarkness8\n#7346AD (purple) #54268D (dark purple)  red\n11111\n11111\n00000\n11111\n01110\n\nDarkness9\n#7346AD (purple) #54268D (dark purple)  red\n11110\n11111\n00000\n11111\n01110\n\nDarkness10\n#7346AD (purple) #54268D (dark purple)  red\n01110\n11111\n00000\n11111\n11110\n\nDarkness11\n#7346AD (purple) #54268D (dark purple)  red\n01110\n11111\n00000\n11111\n01111\n\nDarkness12\n#7346AD (purple) #54268D (dark purple)  red\n11110\n11111\n00000\n11111\n01110\n\nDarkness13\n#7346AD (purple) #54268D (dark purple)  red\n01110\n11111\n00000\n11111\n01110\n\nSeen\ntransparent (yellow\n.....\n.....\n..1..\n.....\n.....)\n\nFOVHinder\ntransparent (green\n.....\n.1.1.\n.....\n.1.1.\n.....)\n\nSave\n#9F76D3 (bright purple)\n.....\n.....\n..0..\n.....\n.....\n\nSaved\ntransparent\nNoSave\n#190434 (darkest purple)\n.....\n.....\n..0..\n.....\n.....\n\nFlash0\n#7346AD (purple) \n\nFlash1 \n#E6507B (pink) \n\nFlash2\n#FF8D59 (red)\n\nFlash3\n#FFD885 (bright yellow)\n\nFlash4\n#FF9703 (pdayer orange)\n\n(dialog)\n\nIntercom1\ntransparent\n\nIntercom2\ntransparent\n\nIntercom3\ntransparent\n\nIntercom4\ntransparent\n\nIntercom5\ntransparent\n\nIntercomL1\n#9F76D3 (bright purple) #190434 (darkest purple)\n0....\n.1...\n.....\n.....\n.....\n\nIntercomL2\n#9F76D3 (bright purple) #190434 (darkest purple)\n.0...\n0.1..\n.1...\n.....\n.....\n\nIntercomL3\n#9F76D3 (bright purple) #190434 (darkest purple)\n..0..\n..01.\n00.1.\n.11..\n.....\n\nIntercomU1\n#9F76D3 (bright purple) #190434 (darkest purple)\n....0\n...1.\n.....\n.....\n.....\n\nIntercomU2\n#9F76D3 (bright purple) #190434 (darkest purple)\n...0.\n..1.0\n...1.\n.....\n.....\n\nIntercomU3\n#9F76D3 (bright purple) #190434 (darkest purple)\n..0..\n.10..\n.1.00\n..11.\n.....\n\nIntercomR1\n#9F76D3 (bright purple) #190434 (darkest purple)\n.....\n.....\n.....\n...1.\n....0\n\nIntercomR2\n#9F76D3 (bright purple) #190434 (darkest purple)\n.....\n.....\n...1.\n..1.0\n...0.\n\nIntercomR3\n#9F76D3 (bright purple) #190434 (darkest purple)\n.....\n..11.\n.1.00\n.10..\n..0..\n\nIntercomD1\n#9F76D3 (bright purple) #190434 (darkest purple)\n.....\n.....\n.....\n.1...\n0....\n\nIntercomD2\n#9F76D3 (bright purple) #190434 (darkest purple)\n.....\n.....\n.1...\n0.1..\n.0...\n\nIntercomD3\n#9F76D3 (bright purple) #190434 (darkest purple)\n.....\n.11..\n00.1.\n..01.\n..0..\n\nStory0\ntransparent \nStory1\ntransparent\nStory2\ntransparent \nStory3\nTRANSPARENT\nStory4\nTRANSPARENT\nStory5\ntransparent \nStory6\ntransparent\nStory7\nTRANSPARENT\nStory8\nTRANSPARENT\nStory9\nTRANSPARENT\n\n\nConsoleTop =\n#190434 (darkest purple)\n\n\nToNextLine ¶\ntransparent\n\nFirstLine\ntransparent\n\nClearConsole\ntransparent(#BB2751 (dark pink))\n\n\nStorySelector1\ntransparent (#BB2751 (dark pink) \n.....\n.....\n.....\n0...0\n00.00)\n\nStorySelector2\ntransparent (#BB2751 (dark pink) \n00.00\n0...0\n.....\n.....\n.....)\n\n\nWinSignal\ntransparent\n\nConsL\ntransparent (lightred\n....1\n....1\n.....\n....1\n....1)\n\n\nConsR\ntransparent (lightblue\n1.1..\n1.1..\n1.1..\n1.1..\n1.1..)\n\n\nQuench\ntransparent (red\n1....\n.1...\n..1..\n...1.\n....1)\n\nQuenched\ntransparent\n\nBlockOver\n#7346AD (purple)\n.....\n.000.\n.0.0.\n.000.\n.....\n\nNextBlock\nwhite #7346AD (purple)\n0.0.0\n.....\n0...0\n.....\n0.0.0\n\n\nAgent\ntransparent (green\n.....\n.....\n.111.\n.....\n.....)\n\n\n\n\n\nPostWin ¥\ntransparent\n\nWallToRemove1\n#190434 (darkest purple) #7346AD (purple)\n11..1\n....1\n.....\n1....\n1..11\n\nWallToRemove2\n#190434 (darkest purple) #7346AD (purple)\n11..1\n....1\n00000\n1....\n1..11\n\nWallToRemove3\n#190434 (darkest purple) #7346AD (purple)\n1...1\n00000\n00000\n00000\n1...1\n\n=======\nLEGEND\n=======\n\n\n\\ = FOVHinder\n/ = Background\n‡ = Background and FOVHinder\n\n\nS = Save\n_ = Once\n\n꙳ = Orb1 and Block\n* = Orb1 \n⋆ = Orb1 \n§ = Background\n\n. = Background \n: = Block \n\n¤ = Wall and StartGame (and Seen)\n# = Wall and StartGame \n× = Wall and StartGame and WallToRemove1\n£ = Wall and StartGame \n\n\n\n\n& = Agent\nP = PlayerD and Player and Agent and Gravity and TickTime \n\n\na = CrateSimpleL \ne = CrateSimpleU \ni = CrateSimpleR \no = CrateSimpleD \n\ná = PodL and Loop2\né = PodU and Loop2\ní = PodR and Loop2\nó = PodD and Loop2\n\nLoop = Loop1 or Loop2\n\nà = LightGateL1 \nè = LightGateU1 \nì = LightGateR1 \nò = LightGateD1 \n\nG = Gravity\nM = Movity\n\nCrateL = CrateSimpleL \nCrateU = CrateSimpleU \nCrateR = CrateSimpleR \nCrateD = CrateSimpleD \n\n\nCrateSimple = CrateSimpleL or CrateSimpleU or CrateSimpleR or CrateSimpleD\nCrate = CrateSimple\n\nCrateXL = CrateU or CrateR or CrateD\nCrateXU = CrateR or CrateD or CrateL\nCrateXR = CrateD or CrateL or CrateU\nCrateXD = CrateL or CrateU or CrateR\n\n\nPlayers = PlayerL or PlayerU or PlayerR or PlayerD\nPlayerXL = PlayerU or PlayerR or PlayerD\nPlayerXU = PlayerR or PlayerD or PlayerL\nPlayerXR = PlayerD or PlayerL or PlayerU\nPlayerXD = PlayerL or PlayerU or PlayerR\n\nLegs = PlayerLegsL or PlayerLegsU or PlayerLegsR or PlayerLegsD\nLegsXL = PlayerLegsU or PlayerLegsR or PlayerLegsD\nLegsXU = PlayerLegsR or PlayerLegsD or PlayerLegsL\nLegsXR = PlayerLegsD or PlayerLegsL or PlayerLegsU\nLegsXD = PlayerLegsL or PlayerLegsU or PlayerLegsR\n\nNextLegs = NextLegsL or NextLegsU or NextLegsR or NextLegsD\n\n\nFallableL = PlayerL or PlayerLegsL or CrateL\nFallableU = PlayerU or PlayerLegsU or CrateU\nFallableR = PlayerR or PlayerLegsR or CrateR\nFallableD = PlayerD or PlayerLegsD or CrateD\n\nFallable = FallableL or FallableU or FallableR or FallableD\nFallableXL = FallableU or FallableR or FallableD\nFallableXU = FallableR or FallableD or FallableL\nFallableXR = FallableD or FallableL or FallableU\nFallableXD = FallableL or FallableU or FallableR\n\n\nToXL = ToU or ToR or ToD\nToXU = ToR or ToD or ToL\nToXR = ToD or ToL or ToU\nToXD = ToL or ToU or ToR\nTo = ToL or ToU or ToR or ToD\n\nFromXL = FromU or FromR or FromD\nFromXU = FromR or FromD or FromL\nFromXR = FromD or FromL or FromU\nFromXD = FromL or FromU or FromR\nFrom = FromL or FromU or FromR or FromD\n\n\nCarriableL = CrateL or PlayerLegsL or PlayerL\nCarriableU = CrateU or PlayerLegsU or PlayerU\nCarriableR = CrateR or PlayerLegsR or PlayerR\nCarriableD = CrateD or PlayerLegsD or PlayerD\n\nCarrierL = CrateXR or PlayerXR or LegsXR\nCarrierU = CrateXD or PlayerXD or LegsXD\nCarrierR = CrateXL or PlayerXL or LegsXL\nCarrierD = CrateXU or PlayerXU or LegsXU\n\nCarriedL = CarriedL1 or CarriedL2 or CarriedL3\nCarriedU = CarriedU1 or CarriedU2 or CarriedU3\nCarriedR = CarriedR1 or CarriedR2 or CarriedR3\nCarriedD = CarriedD1 or CarriedD2 or CarriedD3\n\nCarried = CarriedL or CarriedU or CarriedR or CarriedD\n\nMovedL = MovedL1 or MovedL2 or MovedL3\nMovedU = MovedU1 or MovedU2 or MovedU3\nMovedR = MovedR1 or MovedR2 or MovedR3\nMovedD = MovedD1 or MovedD2 or MovedD3\n\nMoved = MovedL or MovedU or MovedR or MovedD\n\n\nUnPushable = Wall or Block\n\nPushable = Players or Legs or Crate\nPusher = Pushable \n\nCarriable = Crate\n\nItem = Pushable or UnPushable\n\nPhase = Gravity or Movity or GravityStart\nFixed = FixedL or FixedR or FixedU or FixedD \n\nOrb = Orb1 or Orb2 or Orb3 or Orb4\nFlash = Flash0 or Flash1 or Flash2 or Flash3 or Flash4\n\nIntercom = Intercom1 or Intercom2 or Intercom3 or Intercom4 (or Intercom5)\n\n\n(Decoration)\nLight = LightL or LightU or LightR or LightD\nLightOver = LightOverL or LightOverU or LightOverR or LightOverD\n\nWallDecoL = WallDecoL1 or WallDecoL2 or WallDecoL3 or WallDecoL4 or WallDecoL5\nWallDecoU = WallDecoU1 or WallDecoU2 or WallDecoU3 or WallDecoU4 or WallDecoU5\nWallDecoR = WallDecoR1 or WallDecoR2 or WallDecoR3 or WallDecoR4 or WallDecoR5\nWallDecoD = WallDecoD1 or WallDecoD2 or WallDecoD3 or WallDecoD4 or WallDecoD5\n\nWallDeco = WallDecoL or WallDecoU or WallDecoR or WallDecoD\nWallDecoNext = WallDecoL5Next or WallDecoU5Next or WallDecoR5Next or WallDecoD5Next\n\nRotateDecoL = RotateDecoL1 or RotateDecoL2 or RotateDecoL3 or RotateDecoL4 or RotateDecoL5\nRotateDecoU = RotateDecoU1 or RotateDecoU2 or RotateDecoU3 or RotateDecoU4 or RotateDecoU5\nRotateDecoR = RotateDecoR1 or RotateDecoR2 or RotateDecoR3 or RotateDecoR4 or RotateDecoR5\nRotateDecoD = RotateDecoD1 or RotateDecoD2 or RotateDecoD3 or RotateDecoD4 or RotateDecoD5\n\nRotateDeco = RotateDecoL or RotateDecoU or RotateDecoR or RotateDecoD\n\nborder = borderL or borderR or borderU or borderD \n\nBoX = BoLXU or BoDXL or BoUXR or BoRXD\nBoXL = BoLXU or BoDXL\nBoXU = BoLXU or BoUXR\nBoXR = BoUXR or BoRXD\nBoXD = BoDXL or BoRXD\n\nThrowingL = ThrowingLU or ThrowingLD\nThrowingU = ThrowingUL or ThrowingUR\nThrowingR = ThrowingRD or ThrowingRU\nThrowingD = ThrowingDL or ThrowingDR\n\nThrowing = ThrowingL or ThrowingU or ThrowingR or ThrowingD\n\nThrowingLURD = ThrowingLU or ThrowingUL or ThrowingRD or ThrowingDL\nThrowingDRUL = ThrowingLD or ThrowingUR or ThrowingRU or ThrowingDR\n\nWallOver = WallOver1 or WallOver2 or WallOver3 or WallOver4 or WallOver5 or WallOver6 or WallOver7 or WallOver8 or WallOver9 or WallOver10 or WallOver11 or WallOver12 or WallOver13\n\nLightGateL = LightGateL1 or LightGateL2 or LightGateL3 or LightGateL4 or LightGateL5\nLightGateU = LightGateU1 or LightGateU2 or LightGateU3 or LightGateU4 or LightGateU5\nLightGateR = LightGateR1 or LightGateR2 or LightGateR3 or LightGateR4 or LightGateR5\nLightGateD = LightGateD1 or LightGateD2 or LightGateD3 or LightGateD4 or LightGateD5\n\nLightGate = LightGateL or LightGateU or LightGateR or LightGateD\n\n\nIntercomL = IntercomL1 or IntercomL2 or IntercomL3\nIntercomU = IntercomU1 or IntercomU2 or IntercomU3\nIntercomR = IntercomR1 or IntercomR2 or IntercomR3\nIntercomD = IntercomD1 or IntercomD2 or IntercomD3\n\nIntercomOver = IntercomL or IntercomU or IntercomR or IntercomD\n\n@ = InView and Seen\n\n(Story and dialogue)\n(---------------------------------------------------)\n\nStorySelector = StorySelector1 or StorySelector2\n\n\nStory = Story0 or Story1 or Story2 or Story3 or Story4 or Story5 or Story6 or Story7 or Story8 or Story9\n\n0 = Story0\n1 = Story1\n2 = Story2\n3 = Story3\n4 = Story4\n5 = Story5\n6 = Story6\n7 = Story7\n8 = Story8\n9 = Story9\n\n~ = FirstLine\n\n(Consoles)\n(---------------------------------------------------)\n\n\nGotOrb = GotOrb1 or GotOrb2 or GotOrb3 or GotOrb4\nDisplayable =  GotOrb\n\n\n\nConsoles = ConsoleTop\n\n\n\nDarkness = Darkness1 or Darkness2 or Darkness3 or Darkness4 or Darkness5 or Darkness6 or Darkness7 or Darkness8 or Darkness9 or Darkness10 or Darkness11 or Darkness12 or Darkness13\n\n\nFOV = FOV0 or FOV1 or FOV2 or FOV3 or FOV4 or FOV5 or FOV6 or FOV7 or FOV8 or FOV9\n\nFOV01 = FOV0  or FOV1\nFOV02 = FOV01 or FOV2\nFOV03 = FOV02 or FOV3\nFOV04 = FOV03 or FOV4\nFOV05 = FOV04 or FOV5\nFOV06 = FOV05 or FOV6\nFOV07 = FOV06 or FOV7\nFOV08 = FOV07 or FOV8\nFOV09 = FOV08 or FOV9\n\n\n\n\nCons  = ConsL or  ConsR\n\n\n\n\n\n\n\n\n\n\nWallToRemove = WallToRemove1 or WallToRemove2 or WallToRemove3\n\nConsClear = ConsL or ConsR  or ToNextLine or ConsoleTop or FirstLine\n\n\n=======\nSOUNDS\n=======\n\nsfx0 13614108\nsfx1 25636708\nsfx2 79636308\nsfx3 76346108\n\nsfx4 27763708 (typewriter)\n\nsfx5 40605508 (light)\n\nsfx6 50758708 (orb)\n \nsfx7 22586308 (start play)\nsfx8 20449708 (end play)\n\nsfx9 4002908 (save)\n\nundo 85375308\nrestart 35446108\n\n================\nCOLLISIONLAYERS\n================\n\nBackground\nLight\n\nSave, NoSave\nSaved\n\nOrb\nLightGate\n\nPodL\nPodU\nPodR\nPodD\nToL\nToU\nToR\nToD\nRotateDecoL\nRotateDecoU\nRotateDecoR\nRotateDecoD\n\nCarryL\nCarryU\nCarryR\nCarryD\n\nCarried\nMoved\n\nPlayer\nNextLegs\n\nPhase\nBlockErase\n\nBlockOver\nNextBlock\nItem\n\nOnce\n\nFixedL\nFixedU\nFixedR\nFixedD\n\nFromL\nFromU\nFromR\nFromD\n\nWallToRemove\nWallOver\nThrowingLURD\nThrowingDRUL\n\nFOV\nSeen\nDarkness\nFOVHinder\n\nborderL\nborderU\nborderR\nborderD\n\nBoLXU \nBoUXR \nBoDXL \nBoRXD\n\nBorderLkD\nBorderUkL\nBorderRkU\nBorderDkR\n\nBorderLkU\nBorderUkR\nBorderRkD\nBorderDkL\n\nFixBorder\nUnFixBorder\n\nLightOver\n\nWallDecoL\nWallDecoU\nWallDecoR\nWallDecoD\nWallDecoL5Next\nWallDecoU5Next\nWallDecoR5Next\nWallDecoD5Next\n\n\n\nIntercom\nIntercom5\nIntercomOver\n\nStory\n\nToNextLine,FirstLine\n\nStorySelector\nClearConsole\n\n\nConsoleTop\nGotOrb\n\n\nCons\n\nTickTime, TickPlayer\nAnimate\nLoop\nInview\nInViewAlways\nStartGame\n\nFlash\nWinSignal\n\nAgent\n\n\nQuench\nQuenched\n\n\nPostWin\nAllOrbs\n\n======\nRULES     \n======     \n(final win signal)\n[action Player][PostWin]->win\n\n[moving Player][&]->[Player][moving &]\n[action Player][&]->[Player][action &]\n\n(Font)\n(---------------------------------------------------)\n(---------------------------------------------------)\n\n\n\n(Clear the message console)\n(---------------------------------------------------)\n[moving &][ClearConsole]->[moving &][ClearConsole _] (require movement or action)\n\n[& Story][ClearConsole _]->[& Story][ClearConsole] (don't clear if a new story is coming)\n\n(clear console)\n[ClearConsole _]->[]\n[_]->[]\n\n\n\n\n\n(Animation and Decoration)\n(---------------------------------------------------)\n(---------------------------------------------------)\n\n(Hieroglyphs)\n(---------------------------------------------------)\nglobal late [Wall no WallOver]->[Wall random WallOver]\n\n\n(Ticking animation control in view)\n(---------------------------------------------------)\n\nglobal [\" no &][&]->[][& \"]\nglobal [' no &][&]->[][& ']\n\n [stationary &][\"]->[stationary &][']\n [moving     &][\"]->[moving     &][']\n\n [moving     &][']->[moving     &][\"]\n [action     &][']->[action     &][\"]\n\n [_]->[]\n [' no _]->[' » _] \n [' no _ »]->[' _]\n [_]->[]\n\n(Gravity Echo Decoration)\n(---------------------------------------------------)\n\n(Animate)\n\n[»][@ WallDecoL .]->[»][@ WallDecoL]\n[»][@ WallDecoL1 no .]->[»][@ WallDecoL2 .]\n[»][@ WallDecoL2 no .]->[»][@ WallDecoL3 .]\n[»][@ WallDecoL3 no .]->[»][@ WallDecoL4 .]\n[»][@ WallDecoL4 no .]->[»][@ WallDecoL5 .]\n[»][@ WallDecoL5 no .]->[»][@ WallDecoL5Next .]\n\n[»][@ WallDecoU .]->[»][@ WallDecoU]\n[»][@ WallDecoU1 no .]->[»][@ WallDecoU2 .]\n[»][@ WallDecoU2 no .]->[»][@ WallDecoU3 .]\n[»][@ WallDecoU3 no .]->[»][@ WallDecoU4 .]\n[»][@ WallDecoU4 no .]->[»][@ WallDecoU5 .]\n[»][@ WallDecoU5 no .]->[»][@ WallDecoU5Next .]\n\n[»][@ WallDecoR .]->[»][@ WallDecoR]\n[»][@ WallDecoR1 no .]->[»][@ WallDecoR2 .]\n[»][@ WallDecoR2 no .]->[»][@ WallDecoR3 .]\n[»][@ WallDecoR3 no .]->[»][@ WallDecoR4 .]\n[»][@ WallDecoR4 no .]->[»][@ WallDecoR5 .]\n[»][@ WallDecoR5 no .]->[»][@ WallDecoR5Next .]\n\n[»][@ WallDecoD .]->[»][@ WallDecoD]\n[»][@ WallDecoD1 no .]->[»][@ WallDecoD2 .]\n[»][@ WallDecoD2 no .]->[»][@ WallDecoD3 .]\n[»][@ WallDecoD3 no .]->[»][@ WallDecoD4 .]\n[»][@ WallDecoD4 no .]->[»][@ WallDecoD5 .]\n[»][@ WallDecoD5 no .]->[»][@ WallDecoD5Next .]\n\n\n(Initialise)\nleft [   FallableL no Wall @|Wall no WallDecoL no WallDecoL5Next @][»]->[FallableL @|Wall WallDecoL1  @][»]\nup   [   FallableU no Wall @|Wall no WallDecoU no WallDecoU5Next @][»]->[FallableU @|Wall WallDecoU1  @][»]\nright[   FallableR no Wall @|Wall no WallDecoR no WallDecoR5Next @][»]->[FallableR @|Wall WallDecoR1  @][»]\ndown [   FallableD no Wall @|Wall no WallDecoD no WallDecoD5Next @][»]->[FallableD @|Wall WallDecoD1  @][»]\nleft [no FallableL no Wall|Wall    WallDecoL5Next @][»]->[ |Wall  @][»]\nup   [no FallableU no Wall|Wall    WallDecoU5Next @][»]->[ |Wall  @][»]\nright[no FallableR no Wall|Wall    WallDecoR5Next @][»]->[ |Wall  @][»]\ndown [no FallableD no Wall|Wall    WallDecoD5Next @][»]->[ |Wall  @][»]\n\n\n(Rotator Beacon Decoration)\n(---------------------------------------------------)\n(Initialise)\n[ToL no RotateDecoL @][»]->[ToL RotateDecoL5 @][»]\n[ToU no RotateDecoU @][»]->[ToU RotateDecoU5 @][»]\n[ToR no RotateDecoR @][»]->[ToR RotateDecoR5 @][»]\n[ToD no RotateDecoD @][»]->[ToD RotateDecoD5 @][»]\n\n(Finalise)\nlate [no ToL RotateDecoL @][»]->[ @][»]\nlate [no ToU RotateDecoU @][»]->[ @][»]\nlate [no ToR RotateDecoR @][»]->[ @][»]\nlate [no ToD RotateDecoD @][»]->[ @][»]\n\n(Start to Animate)\n[»][@ RotateDeco .]->[»][@ RotateDeco ]\n\n[»][@ RotateDecoL1 no . Loop2]->[»][@ RotateDecoL2 . Loop1]\n[»][@ RotateDecoL1 no . Loop1]->[»][@ RotateDecoL2 .]\n\n[»][@ RotateDecoL1 no .|Pusher]->[»][@ RotateDecoL2 . Loop1|Pusher @]\n[»][@ RotateDecoL2 no .]->[»][@ RotateDecoL3 .]\n[»][@ RotateDecoL3 no .]->[»][@ RotateDecoL4 .]\n[»][@ RotateDecoL4 no .]->[»][@ RotateDecoL5 .]\n[»][@ RotateDecoL5 no .]->[»][@ RotateDecoL1 .]\n\n[»][@ RotateDecoU1 no . Loop2]->[»][@ RotateDecoU2 . Loop1]\n[»][@ RotateDecoU1 no . Loop1]->[»][@ RotateDecoU2 .]\n\n[»][@ RotateDecoU1 no .|Pusher]->[»][@ RotateDecoU2 . Loop1|Pusher @]\n[»][@ RotateDecoU2 no .]->[»][@ RotateDecoU3 .]\n[»][@ RotateDecoU3 no .]->[»][@ RotateDecoU4 .]\n[»][@ RotateDecoU4 no .]->[»][@ RotateDecoU5 .]\n[»][@ RotateDecoU5 no .]->[»][@ RotateDecoU1 .]\n\n[»][@ RotateDecoR1 no . Loop2]->[»][@ RotateDecoR2 . Loop1]\n[»][@ RotateDecoR1 no . Loop2]->[»][@ RotateDecoR2 .]\n\n[»][@ RotateDecoR1 no .|Pusher]->[»][@ RotateDecoR2 . Loop1|Pusher @]\n[»][@ RotateDecoR2 no .]->[»][@ RotateDecoR3 .]\n[»][@ RotateDecoR3 no .]->[»][@ RotateDecoR4 .]\n[»][@ RotateDecoR4 no .]->[»][@ RotateDecoR5 .]\n[»][@ RotateDecoR5 no .]->[»][@ RotateDecoR1 .]\n\n[»][@ RotateDecoD1 no . Loop2]->[»][@ RotateDecoD2 . Loop1]\n[»][@ RotateDecoD1 no . Loop1]->[»][@ RotateDecoD2 .]\n\n[»][@ RotateDecoD1 no .|Pusher]->[»][@ RotateDecoD2 . Loop1|Pusher @]\n[»][@ RotateDecoD2 no .]->[»][@ RotateDecoD3 .]\n[»][@ RotateDecoD3 no .]->[»][@ RotateDecoD4 .]\n[»][@ RotateDecoD4 no .]->[»][@ RotateDecoD5 .]\n[»][@ RotateDecoD5 no .]->[»][@ RotateDecoD1 .]\n\n(animate a second time, after use)\n[»][@ RotateDeco Pusher no Loop2]->[»][@ RotateDeco Pusher Loop2]\n\n\n(Carried Animation)\n(---------------------------------------------------)\n\n[»][@ Carried .]->[»][@ Carried]\n[»][@ CarriedL1 no .]->[»][@ CarriedL2 .]\n[»][@ CarriedL2 no .]->[»][@ CarriedL3 .]\n[»][@ CarriedL3 no .]->[»][@ .]\n\n[»][@ CarriedU1 no .]->[»][@ CarriedU2 .]\n[»][@ CarriedU2 no .]->[»][@ CarriedU3 .]\n[»][@ CarriedU3 no .]->[»][@ .]\n\n[»][@ CarriedR1 no .]->[»][@ CarriedR2 .]\n[»][@ CarriedR2 no .]->[»][@ CarriedR3 .]\n[»][@ CarriedR3 no .]->[»][@ .]\n\n[»][@ CarriedD1 no .]->[»][@ CarriedD2 .]\n[»][@ CarriedD2 no .]->[»][@ CarriedD3 .]\n[»][@ CarriedD3 no .]->[»][@ .]\n\n(Moved Animation)\n(---------------------------------------------------)\n[»][@ Moved .]->[»][@ Moved]\n[»][@ MovedL1 no .]->[»][@ MovedL2 .]\n[»][@ MovedL2 no .]->[»][@ MovedL3 .]\n[»][@ MovedL3 no .]->[»][@ .]\n\n[»][@ MovedU1 no .]->[»][@ MovedU2 .]\n[»][@ MovedU2 no .]->[»][@ MovedU3 .]\n[»][@ MovedU3 no .]->[»][@ .]\n\n[»][@ MovedR1 no .]->[»][@ MovedR2 .]\n[»][@ MovedR2 no .]->[»][@ MovedR3 .]\n[»][@ MovedR3 no .]->[»][@ .]\n\n[»][@ MovedD1 no .]->[»][@ MovedD2 .]\n[»][@ MovedD2 no .]->[»][@ MovedD3 .]\n[»][@ MovedD3 no .]->[»][@ .]\n\n(Orb Animation)\n(---------------------------------------------------)\n[»][@ Orb .]->[»][@ Orb]\n[»][@ Orb1 no .]->[»][@ Orb2 .]\n[»][@ Orb2 no .]->[»][@ Orb3 .]\n[»][@ Orb3 no .]->[»][@ Orb4 .]\n[»][@ Orb4 no .]->[»][@ Orb1 .]\n\n[»][ GotOrb .]->[»][ GotOrb]\n[»][ GotOrb1 no .]->[»][ GotOrb2 .]\n[»][ GotOrb2 no .]->[»][ GotOrb3 .]\n[»][ GotOrb3 no .]->[»][ GotOrb4 .]\n[»][ GotOrb4 no .]->[»][ GotOrb1 .]\n\n(Light gate decoration)\n(---------------------------------------------------)\n\n(Animate)\n[»][@ LightGate .]->[»][@ LightGate]\n[»][@ LightGateL1 no .]->[»][@ LightGateL2 .]\n[»][@ LightGateL2 no .]->[»][@ LightGateL3 .]\n[»][@ LightGateL3 no .]->[»][@ LightGateL4 .]\n[»][@ LightGateL4 no .]->[»][@ LightGateL5 .]\n[»][@ LightGateL5 no .]->[»][@ LightGateL1 .]\n\n[»][@ LightGateU1 no .]->[»][@ LightGateU2 .]\n[»][@ LightGateU2 no .]->[»][@ LightGateU3 .]\n[»][@ LightGateU3 no .]->[»][@ LightGateU4 .]\n[»][@ LightGateU4 no .]->[»][@ LightGateU5 .]\n[»][@ LightGateU5 no .]->[»][@ LightGateU1 .]\n\n[»][@ LightGateR1 no .]->[»][@ LightGateR2 .]\n[»][@ LightGateR2 no .]->[»][@ LightGateR3 .]\n[»][@ LightGateR3 no .]->[»][@ LightGateR4 .]\n[»][@ LightGateR4 no .]->[»][@ LightGateR5 .]\n[»][@ LightGateR5 no .]->[»][@ LightGateR1 .]\n\n[»][@ LightGateD1 no .]->[»][@ LightGateD2 .]\n[»][@ LightGateD2 no .]->[»][@ LightGateD3 .]\n[»][@ LightGateD3 no .]->[»][@ LightGateD4 .]\n[»][@ LightGateD4 no .]->[»][@ LightGateD5 .]\n[»][@ LightGateD5 no .]->[»][@ LightGateD1 .]\n\n(Activate gates and associated dialogue)\nright [& no Story|][LightGateR CrateR no LightR]->[& 6|4][LightGateR CrateR LightR] sfx5 (link to story 64)\n\nright [& no Story|][LightGateU CrateU no LightU][LightD]->[& 6|6][LightGateU CrateU LightU][LightD] sfx5\nright [& no Story|][LightGateD CrateD no LightD][LightU]->[& 6|6][LightGateD CrateD LightD][LightU] sfx5\n \nright [& no Story|][LightGateU CrateU no LightU]->[& 6|5][LightGateU CrateU LightU] sfx5\nright [& no Story|][LightGateD CrateD no LightD]->[& 6|5][LightGateD CrateD LightD] sfx5\n\n\nright [& no Story|][LightGateL CrateL no LightL]->[& 6|7 PostWin][LightGateL CrateL LightL] sfx5\n\n\n\n(propagate light)\nglobal late left  [no LightL |LightL ]->[LightL |LightL]\nglobal late up    [no LightU |LightU ]->[LightU |LightU]\nglobal late right [no LightR |LightR ]->[LightR |LightR]\nglobal late down  [no LightD |LightD ]->[LightD |LightD]\n\n(over walls too)\nglobal late [LightL Wall no LightOverL]->[LightL Wall LightOverL]\nglobal late [LightU Wall no LightOverU]->[LightU Wall LightOverU]\nglobal late [LightR Wall no LightOverR]->[LightR Wall LightOverR]\nglobal late [LightD Wall no LightOverD]->[LightD Wall LightOverD]\n\n\n(Incoming call)\n(---------------------------------------------------)\n(animate)\nlate  [»][@ Intercom .]->[»][@ Intercom]\nlate  [»][@ Intercom1 no .]->[»][@ Intercom2 .]\nlate  [»][@ Intercom2 no .]->[»][@ Intercom3 .]\nlate  [»][@ Intercom3 no .]->[»][@ Intercom4 .]\nlate  [»][@ Intercom4 no . no Intercom5]->[»][@ Intercom1 Intercom5 .]\nlate  [»][@ Intercom4 no .]->[»][@ .]\n\n(Reset backgrounds)\n(---------------------------------------------------)\n[no .]->[.]\n\n(Control and Phase Switching)\n(---------------------------------------------------)\n(---------------------------------------------------)\n\nglobal [M]->[]\nglobal [G]->[]\n\nlate [Players][& no Players]->[Players &][]\n\nstartloop\n\n(Phase Switch & darkness under reveal)\n(---------------------------------------------------)\n\nleft  [stationary FallableL @|no Item][& no G]->[FallableL @|@][& G]     \nup    [stationary FallableU @|no Item][& no G]->[FallableU @|@][& G]     \nright [stationary FallableR @|no Item][& no G]->[FallableR @|@][& G]     \ndown  [stationary FallableD @|no Item][& no G]->[FallableD @|@][& G]\n\nglobal [& no G no M]->[& M]\n\n\n\n(Player Movement Intent Transmission)\n(---------------------------------------------------)\n(prevent moving too quickly when rotating)\n[stationary Players > &][M][Quench @]->[Players stationary &][M][Quench @]\n[Quench]->[]\n\n(transmission)\n[stationary Players > &][M]->[> Players &][M]\n\n\n(Gravity - multidirectional)\n(---------------------------------------------------)\n[stationary FallableL @ no _][G]->[left  FallableL @ _][G]     \n[stationary FallableU @ no _][G]->[up    FallableU @ _][G]     \n[stationary FallableR @ no _][G]->[right FallableR @ _][G]     \n[stationary FallableD @ no _][G]->[down  FallableD @ _][G]\n\n(outside of view gravity acts once upon starting level)\nglobal [stationary FallableL  no _][GravityStart]->[left  FallableL _][GravityStart]     \nglobal [stationary FallableU  no _][GravityStart]->[up    FallableU _][GravityStart]     \nglobal [stationary FallableR  no _][GravityStart]->[right FallableR _][GravityStart]     \nglobal [stationary FallableD  no _][GravityStart]->[down  FallableD _][GravityStart]\n\n(Rise swap)\n(---------------------------------------------------)\nleft [Carriable|< PlayerL |PlayerLegsL][M]->[stationary PlayerL |stationary PlayerLegsL|stationary Carriable][M] \nup   [Carriable|< PlayerU |PlayerLegsU][M]->[stationary PlayerU |stationary PlayerLegsU|stationary Carriable][M] \nright[Carriable|< PlayerR |PlayerLegsR][M]->[stationary PlayerR |stationary PlayerLegsR|stationary Carriable][M] \ndown [Carriable|< PlayerD |PlayerLegsD][M]->[stationary PlayerD |stationary PlayerLegsD|stationary Carriable][M] \n\n(Pick)\n(---------------------------------------------------)\nleft [> PlayerL|stationary Carriable no Quench][M]->[Carriable| PlayerL][M] \nup   [> PlayerU|stationary Carriable no Quench][M]->[Carriable| PlayerU][M] \nright[> PlayerR|stationary Carriable no Quench][M]->[Carriable| PlayerR][M] \ndown [> PlayerD|stationary Carriable no Quench][M]->[Carriable| PlayerD][M] \n\n(Descend - against)\n(---------------------------------------------------)\n(register provenance falling)\nglobal left  [FallableL |no FromL LegsXL][M]->[FallableL|FromL LegsXL][M]\nglobal up    [FallableU |no FromU LegsXU][M]->[FallableU|FromU LegsXU][M]\nglobal right [FallableR |no FromR LegsXR][M]->[FallableR|FromR LegsXR][M]\nglobal down  [FallableD |no FromD LegsXD][M]->[FallableD|FromD LegsXD][M]\n\nleft [left  PlayerL|PlayerLegsL FromXL][M]->[stationary PlayerL|][M] \nup   [up    PlayerU|PlayerLegsU FromXU][M]->[stationary PlayerU|][M] \nright[right PlayerR|PlayerLegsR FromXR][M]->[stationary PlayerR|][M] \ndown [down  PlayerD|PlayerLegsD FromXD][M]->[stationary PlayerD|][M] \n\n\n(Carry - marking)\n(---------------------------------------------------)\nleft [stationary CarriableL @ no FixedU no Quench|up    CarrierL][M]->[CarryU CarriableL @|up    CarrierL][M]\nup   [stationary CarriableU @ no FixedR no Quench|right CarrierU][M]->[CarryR CarriableU @|right CarrierU][M]\nright[stationary CarriableR @ no FixedD no Quench|down  CarrierR][M]->[CarryD CarriableR @|down  CarrierR][M]\ndown [stationary CarriableD @ no FixedL no Quench|left  CarrierD][M]->[CarryL CarriableD @|left  CarrierD][M]\n\nleft [stationary CarriableL @ no FixedD no Quench|down  CarrierL][M]->[CarryD CarriableL @|down  CarrierL][M] \nup   [stationary CarriableU @ no FixedL no Quench|left  CarrierU][M]->[CarryL CarriableU @|left  CarrierU][M] \nright[stationary CarriableR @ no FixedU no Quench|up    CarrierR][M]->[CarryU CarriableR @|up    CarrierR][M] \ndown [stationary CarriableD @ no FixedR no Quench|right CarrierD][M]->[CarryR CarriableD @|right CarrierD][M]\n\n(Carry - execution)\n(---------------------------------------------------)\n[CarryU CarriableL @][M]->[up    CarriableL @][M] \n[CarryR CarriableU @][M]->[right CarriableU @][M] \n[CarryD CarriableR @][M]->[down  CarriableR @][M] \n[CarryL CarriableD @][M]->[left  CarriableD @][M]\n\n[CarryD CarriableL @][M]->[down  CarriableL @][M]  \n[CarryL CarriableU @][M]->[left  CarriableU @][M]  \n[CarryU CarriableR @][M]->[up    CarriableR @][M]  \n[CarryR CarriableD @][M]->[right CarriableD @][M] \n\n(Descend - clear)\n(---------------------------------------------------)\nleft [left  PlayerL|PlayerLegsL no FromXL][M]->[left  PlayerL|][M]     \nup   [up    PlayerU|PlayerLegsU no FromXU][M]->[up    PlayerU|][M]     \nright[right PlayerR|PlayerLegsR no FromXR][M]->[right PlayerR|][M]     \ndown [down  PlayerD|PlayerLegsD no FromXD][M]->[down  PlayerD|][M] \n\n(Dont over Ascend)\n(---------------------------------------------------)\nleft [< PlayerL |PlayerLegsL][M]->[stationary PlayerL|PlayerLegsL][M] \nup   [< PlayerU |PlayerLegsU][M]->[stationary PlayerU|PlayerLegsU][M] \nright[< PlayerR |PlayerLegsR][M]->[stationary PlayerR|PlayerLegsR][M] \ndown [< PlayerD |PlayerLegsD][M]->[stationary PlayerD|PlayerLegsD][M] \n\n\n(Push and Collide)\n(---------------------------------------------------)\n(Push)\nleft  [left  Pusher @ | stationary Pushable no FixedL no Quench][M]->[left  Pusher @| left  Pushable][M]\nup    [up    Pusher @ | stationary Pushable no FixedU no Quench][M]->[up    Pusher @| up    Pushable][M]\nright [right Pusher @ | stationary Pushable no FixedR no Quench][M]->[right Pusher @| right Pushable][M]\ndown  [down  Pusher @ | stationary Pushable no FixedD no Quench][M]->[down  Pusher @| down  Pushable][M]\n\n(register provenance)\nglobal left  [left  Item |no FromL]->[left  Item| FromL]\nglobal up    [up    Item |no FromU]->[up    Item| FromU]\nglobal right [right Item |no FromR]->[right Item| FromR]\nglobal down  [down  Item |no FromD]->[down  Item| FromD]\n\n(Collide)\nleft  [left  Pusher @| UnPushable][M]->[stationary Pusher @ FixedL| UnPushable][M]\nup    [up    Pusher @| UnPushable][M]->[stationary Pusher @ FixedU| UnPushable][M]\nright [right Pusher @| UnPushable][M]->[stationary Pusher @ FixedR| UnPushable][M]\ndown  [down  Pusher @| UnPushable][M]->[stationary Pusher @ FixedD| UnPushable][M]\n\n(Pre-collide by provenance)\nglobal [FromL FromXL Item no NextBlock]->[FromL FromXL Item NextBlock ]\nglobal [FromU FromXU Item no NextBlock]->[FromU FromXU Item NextBlock ]\nglobal [FromR FromXR Item no NextBlock]->[FromR FromXR Item NextBlock ]\nglobal [FromD FromXD Item no NextBlock]->[FromD FromXD Item NextBlock ]\n\nleft  [left  Pusher @| Nextblock]->[Pusher @ FixedL| Nextblock]\nup    [up    Pusher @| Nextblock]->[Pusher @ FixedU| Nextblock]\nright [right Pusher @| Nextblock]->[Pusher @ FixedR| Nextblock]\ndown  [down  Pusher @| Nextblock]->[Pusher @ FixedD| Nextblock]\n\n\n(Prevent unacomplished moves: Part 1)\n(---------------------------------------------------)\nleft  [left  Item @ no FixedL| stationary Item]->[left  Item @ FixedL| stationary Item]\nup    [up    Item @ no FixedU| stationary Item]->[up    Item @ FixedU| stationary Item]\nright [right Item @ no FixedR| stationary Item]->[right Item @ FixedR| stationary Item]\ndown  [down  Item @ no FixedD| stationary Item]->[down  Item @ FixedD| stationary Item]\n\nleft  [left  Item @ | FixedL]->[left  Item @ FixedL| FixedL]\nup    [up    Item @ | FixedU]->[up    Item @ FixedU| FixedU]\nright [right Item @ | FixedR]->[right Item @ FixedR| FixedR]\ndown  [down  Item @ | FixedD]->[down  Item @ FixedD| FixedD]\n\n\n(Prevent unacomplished moves: Part 2)\n(---------------------------------------------------)\nleft  [left  Item @ FixedL]->[stationary Item @ FixedL ]\nup    [up    Item @ FixedU]->[stationary Item @ FixedU ]\nright [right Item @ FixedR]->[stationary Item @ FixedR ]\ndown  [down  Item @ FixedD]->[stationary Item @ FixedD ]\n\n\nendloop\n\n[_]->[]\n\n\n\n(Carried Animations)\n(---------------------------------------------------)\n(---------------------------------------------------)\nlate [Throwing no &]->[]\n\n(principal)\nright [stationary PlayerL|...|down  CarriableL]->[stationary PlayerL ThrowingLU|...|down  CarriableL CarriedD1]\ndown  [stationary PlayerU|...|left  CarriableU]->[stationary PlayerU ThrowingUR|...|left  CarriableU CarriedL1]\nleft  [stationary PlayerR|...|up    CarriableR]->[stationary PlayerR ThrowingRD|...|up    CarriableR CarriedU1]\nup    [stationary PlayerD|...|right CarriableD]->[stationary PlayerD ThrowingDL|...|right CarriableD CarriedR1]\n\nright [stationary PlayerL|...|up    CarriableL]->[stationary PlayerL ThrowingLD|...|up    CarriableL CarriedU1]\ndown  [stationary PlayerU|...|right CarriableU]->[stationary PlayerU ThrowingUL|...|right CarriableU CarriedR1]\nleft  [stationary PlayerR|...|down  CarriableR]->[stationary PlayerR ThrowingRU|...|down  CarriableR CarriedD1]\nup    [stationary PlayerD|...|left  CarriableD]->[stationary PlayerD ThrowingDR|...|left  CarriableD CarriedL1]\n\n(lateral)\nright [stationary PlayerD|...|up    CarriableL]->[stationary PlayerD ThrowingDR|...|up    CarriableL CarriedU1]\ndown  [stationary PlayerL|...|right CarriableU]->[stationary PlayerL ThrowingLD|...|right CarriableU CarriedR1]\nleft  [stationary PlayerU|...|down  CarriableR]->[stationary PlayerU ThrowingUL|...|down  CarriableR CarriedD1]\nup    [stationary PlayerR|...|left  CarriableD]->[stationary PlayerR ThrowingRU|...|left  CarriableD CarriedL1]\n\nleft  [stationary PlayerD|...|up    CarriableR]->[stationary PlayerD ThrowingDL|...|up    CarriableR CarriedU1]\nup    [stationary PlayerL|...|right CarriableD]->[stationary PlayerL ThrowingLU|...|right CarriableD CarriedR1]\nright [stationary PlayerU|...|down  CarriableL]->[stationary PlayerU ThrowingUR|...|down  CarriableL CarriedD1]\ndown  [stationary PlayerR|...|left  CarriableU]->[stationary PlayerR ThrowingRD|...|left  CarriableU CarriedL1]\n\nright [stationary PlayerD|...|down  CarriableL]->[stationary PlayerD ThrowingDL|...|down  CarriableL CarriedD1]\ndown  [stationary PlayerL|...|left  CarriableU]->[stationary PlayerL ThrowingLU|...|left  CarriableU CarriedL1]\nleft  [stationary PlayerU|...|up    CarriableR]->[stationary PlayerU ThrowingUR|...|up    CarriableR CarriedU1]\nup    [stationary PlayerR|...|right CarriableD]->[stationary PlayerR ThrowingRD|...|right CarriableD CarriedR1]\n\nleft  [stationary PlayerD|...|down  CarriableR]->[stationary PlayerD ThrowingDR|...|down  CarriableR CarriedD1]\nup    [stationary PlayerL|...|left  CarriableD]->[stationary PlayerL ThrowingLD|...|left  CarriableD CarriedL1]\nright [stationary PlayerU|...|up    CarriableL]->[stationary PlayerU ThrowingUL|...|up    CarriableL CarriedU1]\ndown  [stationary PlayerR|...|right CarriableU]->[stationary PlayerR ThrowingRU|...|right CarriableU CarriedR1]\n\n\n(Propagate carried)\n(---------------------------------------------------)\nup    [left  CarrierL no CarriedL |left  CarriableL CarriedL]->[left  CarrierL |left  CarriableL no Carried  CarriedU1]\nright [up    CarrierU no CarriedU |up    CarriableU CarriedU]->[up    CarrierU |up    CarriableU no Carried  CarriedR1]\ndown  [right CarrierR no CarriedR |right CarriableR CarriedR]->[right CarrierR |right CarriableR no Carried  CarriedD1]\nleft  [down  CarrierD no CarriedD |down  CarriableD CarriedD]->[down  CarrierD |down  CarriableD no Carried  CarriedL1]\n\ndown  [left  CarrierL no CarriedL |left  CarriableL CarriedL]->[left  CarrierL |left  CarriableL no Carried  CarriedD1]\nleft  [up    CarrierU no CarriedU |up    CarriableU CarriedU]->[up    CarrierU |up    CarriableU no Carried  CarriedL1]\nup    [right CarrierR no CarriedR |right CarriableR CarriedR]->[right CarrierR |right CarriableR no Carried  CarriedU1]\nright [down  CarrierD no CarriedD |down  CarriableD CarriedD]->[down  CarrierD |down  CarriableD no Carried  CarriedR1]\n\n(Move)\n[left  Item no Carried no Moved]->[left  Item MovedL1]\n[up    Item no Carried no Moved]->[up    Item MovedU1]\n[right Item no Carried no Moved]->[right Item MovedR1]\n[down  Item no Carried no Moved]->[down  Item MovedD1]\n\n\n(Block conflicting moves)\n(---------------------------------------------------)\n(---------------------------------------------------)\n(prevent unnecessary  extra turn)\nglobal left  [FallableL @|no FromL]->[FallableL @|FromL]\nglobal up    [FallableU @|no FromU]->[FallableU @|FromU]\nglobal right [FallableR @|no FromR]->[FallableR @|FromR]\nglobal down  [FallableD @|no FromD]->[FallableD @|FromD]\n\n(Generate Blocks at conflict areas)\n(---------------------------------------------------)\nglobal late [NextBlock]->[]\n\nglobal [FromL FromXL no Item ]->[Block]\nglobal [FromU FromXU no Item ]->[Block]\nglobal [FromR FromXR no Item ]->[Block]\nglobal [FromD FromXD no Item ]->[Block]\n\nglobal [FromL FromXL Blockerase]->[]\nglobal [FromU FromXU Blockerase]->[]\nglobal [FromR FromXR Blockerase]->[]\nglobal [FromD FromXD Blockerase]->[]\n\nglobal late [Block]->[Block BlockOver]\nglobal late [BlockOver no Block][G]->[][G]\n\nglobal late    [Block BlockErase @]->[@]\nglobal late    [Block @]           ->   [Block BlockErase @]\n\nglobal late [Block|]->[Block InViewAlways|InViewAlways]\n\n\n\n\n\n(Animation: wall bumps)\n(---------------------------------------------------)\nleft [ Item FixedL no Wall @|Wall no WallDecoL no WallDecoL5Next]->[Item @|Wall WallDecoL1 _]\nup   [ Item FixedU no Wall @|Wall no WallDecoU no WallDecoU5Next]->[Item @|Wall WallDecoU1 _]\nright[ Item FixedR no Wall @|Wall no WallDecoR no WallDecoR5Next]->[Item @|Wall WallDecoR1 _]\ndown [ Item FixedD no Wall @|Wall no WallDecoD no WallDecoD5Next]->[Item @|Wall WallDecoD1 _]\n\nglobal [Fixed]->[]\nglobal [From]->[]\n\n\n\n\n(Long legs)\n(---------------------------------------------------)\n(---------------------------------------------------)\n\n(Remove orphan legs)\n(---------------------------------------------------)\nlate left [no PlayerL|PlayerLegsL]->[|]     \nlate up   [no PlayerU|PlayerLegsU]->[|]     \nlate right[no PlayerR|PlayerLegsR]->[|]     \nlate down [no PlayerD|PlayerLegsD]->[|] \n\n(Rise Player)\n(---------------------------------------------------)\n[right PlayerL][M]->[right PlayerL NextLegsL][M]     \n[down  PlayerU][M]->[down  PlayerU NextLegsU][M]     \n[left  PlayerR][M]->[left  PlayerR NextLegsR][M]     \n[up    PlayerD][M]->[up    PlayerD NextLegsD][M] \n\nlate left [PlayerL |NextLegsL no Item][M]->[PlayerL|PlayerLegsL][M] \nlate up   [PlayerU |NextLegsU no Item][M]->[PlayerU|PlayerLegsU][M] \nlate right[PlayerR |NextLegsR no Item][M]->[PlayerR|PlayerLegsR][M] \nlate down [PlayerD |NextLegsD no Item][M]->[PlayerD|PlayerLegsD][M] \n\nlate left [no PlayerL |no PlayerL NextLegsL][M]->[|][M] \nlate up   [no PlayerU |no PlayerU NextLegsU][M]->[|][M] \nlate right[no PlayerR |no PlayerR NextLegsR][M]->[|][M] \nlate down [no PlayerD |no PlayerD NextLegsD][M]->[|][M] \n\n\n\n\n(Specific Gravity)\n(---------------------------------------------------)\n(---------------------------------------------------)\n\n(prevent conflicts)\nglobal [ToL ToXL]->[]\nglobal [ToU ToXU]->[]\nglobal [ToR ToXR]->[]\nglobal [ToD ToXD]->[]\n\n\n(Rotate)\n(---------------------------------------------------)\nglobal [CrateSimple ToL]->[CrateSimpleL ToL]\nglobal [CrateSimple ToU]->[CrateSimpleU ToU]\nglobal [CrateSimple ToR]->[CrateSimpleR ToR]\nglobal [CrateSimple ToD]->[CrateSimpleD ToD]\n\n[Players no PlayerL ToL]->[PlayerL ToL ] sfx0\n[Players no PlayerU ToU]->[PlayerU ToU ] sfx1\n[Players no PlayerR ToR]->[PlayerR ToR ] sfx2\n[Players no PlayerD ToD]->[PlayerD ToD ] sfx3\n\n(prevent moving too quickly when rotating)\nglobal late [Item To no Quenched @]->[Item To Quench Quenched @]\nglobal late [Quenched no Item]->[]\n\n(Initialise)\nleft [no ToL PodL]->[ToL PodL]\nup   [no ToU PodU]->[ToU PodU]\nright[no ToR PodR]->[ToR PodR]\ndown [no ToD PodD]->[ToD PodD]\n\n\n\n(Capture movement direction)\n(---------------------------------------------------)\n[left  Players][M]->[left  Players ][M]\n[up    Players][M]->[up    Players ][M]\n[right Players][M]->[right Players ][M]\n[down  Players][M]->[down  Players ][M]\n\n\n(Checkpoint)\n(---------------------------------------------------)\n[Flash Saved]->[Flash _ no Save no Orb] checkpoint sfx9\nglobal [_][Flash]->[_][]\n[_]->[]\n[& Save][$]->[& Save Saved][Flash0 $]\n[$ Flash|no Flash no $ ]->[$ Flash| flash] (extend flash one unit outside $)\n\n\n(Orb collecting)\n(---------------------------------------------------)\n[& Orb1 no NoSave][$]->[& Orb1 Saved GotOrb1][$ Flash1]\n[& Orb2 no NoSave][$]->[& Orb2 Saved GotOrb2][$ Flash2]\n[& Orb3 no NoSave][$]->[& Orb3 Saved GotOrb3][$ Flash3]\n[& Orb4 no NoSave][$]->[& Orb4 Saved GotOrb4][$ Flash4]\n\n[& Orb1]->[& GotOrb1 AllOrbs] sfx6\n[& Orb2]->[& GotOrb2 AllOrbs] sfx6\n[& Orb3]->[& GotOrb3 AllOrbs] sfx6\n[& Orb4]->[& GotOrb4 AllOrbs] sfx6\n\n(Are all orbs collected?)\n[AllOrbs][Orb]->[][Orb]\n\n(find first empty spot)\n[_]->[]\nright[= ConsL |=][GotOrb no =]->[= ConsL _|=][GotOrb]\nright [_ = GotOrb|=][GotOrb no =]->[GotOrb =|_ =][GotOrb]\n[GotOrb no =][= _]->[][= _ GotOrb]\n[_]->[]\n\n\n\n\n\n\n(Limit camera to within frames)\n(---------------------------------------------------)\nlate [& no Player][Player no &]->[& Player][]\n\n\n(Field of View & Console)\n(---------------------------------------------------)\n(---------------------------------------------------)\n\n\n(Clear consoles & Attracts - fixed width)\n(---------------------------------------------------)\nlate [ConsClear]->[]\nlate [$]->[]\n(Place previous Centre)\n(---------------------------------------------------)\n\n(Draw Vertical)\n(---------------------------------------------------)\n(fixed height - centered)\nlate up [||||||||&| no $ |||||||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]\n\n(fixed height - bottom of level area)\nlate up [|||||||&| no $ ||||||||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]\nlate up [||||||&| no $ |||||||||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]\nlate up [|||||&| no $ ||||||||||]->[ $ _|$ ~ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]\nlate up [||||&| no $ |||||||||||]->[ $ _|$ ~ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]\nlate up [|||&| no $ ||||||||||||]->[ $ _|$ ~ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]\nlate up [||&| no $ |||||||||||||]->[ $ _|$ ~ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]\n\n(fixed height - top of level area)\nlate up [|||||||||&| no $ ||||||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]\nlate up [||||||||||&| no $ |||||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]\nlate up [|||||||||||&| no $ ||||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _ |$ _ =]\nlate up [||||||||||||&| no $ |||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _ |$ _ =]\nlate up [|||||||||||||&| no $ ||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _ |$ _ =]\nlate up [||||||||||||||&| no $ |]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _ |$ _ =]\n \n\n(Draw Horizontal)\n(---------------------------------------------------)\n(fixed width - centered)\nlate right [|||||||||||||||$ _|no $|||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\n\n(fixed width - left of level area)\nlate right [||||||||||||||$ _|no $||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [|||||||||||||$ _|no $|||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [||||||||||||$ _|no $||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [|||||||||||$ _|no $|||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [||||||||||$ _|no $||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [|||||||||$ _|no $|||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [||||||||$ _|no $||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [|||||||$ _|no $|||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [||||||$ _|no $||||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [|||||$ _|no $|||||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [||||$ _|no $||||||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [|||$ _|no $|||||||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [||$ _|no $||||||||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [|$ _|no $|||||||||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [$ _|no $||||||||||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\n(fixed width - right of level area)\nlate right [|||||||||||||||$ _|no $|||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [||||||||||||||||$ _|no $||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [|||||||||||||||||$ _|no $|||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [||||||||||||||||||$ _|no $||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [|||||||||||||||||||$ _|no $|||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [||||||||||||||||||||$ _|no $||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [|||||||||||||||||||||$ _|no $|||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [||||||||||||||||||||||$ _|no $||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [|||||||||||||||||||||||$ _|no $|||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [||||||||||||||||||||||||$ _|no $||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [|||||||||||||||||||||||||$ _|no $|||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [||||||||||||||||||||||||||$ _|no $||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [|||||||||||||||||||||||||||$ _|no $|]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\nlate right [||||||||||||||||||||||||||||$ _|no $]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]\n\nlate [_]->[]\n\n\n(Spread Consoles)\n(---------------------------------------------------)\n\nlate left[ConsR|...|=]->[ConsR = ¶|...|]\n\nlate horizontal [$ =|$ no =|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$]->[= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $]\n\n\n(Exception for unstable blocks)\n(---------------------------------------------------)\nglobal late [InViewAlways]->[InViewAlways $]\n\n\n\n(Align displayables within console)\n(---------------------------------------------------)\n(---------------------------------------------------)\n\nlate left [Displayable |= no Displayable]->[|= Displayable]\nlate up   [Displayable |= no Displayable]->[|= Displayable]\nlate right[Displayable |= no Displayable]->[|= Displayable]\nlate down [Displayable |= no Displayable]->[|= Displayable]\n\n\n\n(Dialogue)\n(---------------------------------------------------)\n(---------------------------------------------------)\n\n(Place intercom upon reading a story and follow player)\n(---------------------------------------------------)\n(place)\nlate [& Story no Intercom no StorySelector]->[& Story Intercom1]\n\n(follow)\nlate [_]->[]\nlate [&]->[& _]\n\nlate random down  [ _ |][Intercom][PlayerL]->[|_][Intercom][PlayerL]\nlate random right [ _ |][Intercom][PlayerL]->[|_][Intercom][PlayerL]\n\nlate random left  [ _ |][Intercom][PlayerU]->[|_][Intercom][PlayerU]\nlate random down  [ _ |][Intercom][PlayerU]->[|_][Intercom][PlayerU]\n\nlate random up    [ _ |][Intercom][PlayerR]->[|_][Intercom][PlayerR]\nlate random left  [ _ |][Intercom][PlayerR]->[|_][Intercom][PlayerR]\n\nlate random right [ _ |][Intercom][PlayerD]->[|_][Intercom][PlayerD]\nlate random up    [ _ |][Intercom][PlayerD]->[|_][Intercom][PlayerD]\n\n\nlate [Intercom no _][_]->[][Intercom _]\nlate [_]->[]\n\n\nlate [IntercomOver]->[]\nlate [Intercom1 no IntercomL][PlayerL]->[Intercom1 IntercomL1][PlayerL]\nlate [Intercom2 no IntercomL][PlayerL]->[Intercom2 IntercomL2][PlayerL]\nlate [Intercom3 no IntercomL][PlayerL]->[Intercom3 IntercomL3][PlayerL]\n\nlate [Intercom1 no IntercomU][PlayerU]->[Intercom1 IntercomU1][PlayerU]\nlate [Intercom2 no IntercomU][PlayerU]->[Intercom2 IntercomU2][PlayerU]\nlate [Intercom3 no IntercomU][PlayerU]->[Intercom3 IntercomU3][PlayerU]\n\nlate [Intercom1 no IntercomR][PlayerR]->[Intercom1 IntercomR1][PlayerR]\nlate [Intercom2 no IntercomR][PlayerR]->[Intercom2 IntercomR2][PlayerR]\nlate [Intercom3 no IntercomR][PlayerR]->[Intercom3 IntercomR3][PlayerR]\n\nlate [Intercom1 no IntercomD][PlayerD]->[Intercom1 IntercomD1][PlayerD]\nlate [Intercom2 no IntercomD][PlayerD]->[Intercom2 IntercomD2][PlayerD]\nlate [Intercom3 no IntercomD][PlayerD]->[Intercom3 IntercomD3][PlayerD]\n\n\n\n(Message selector)\n(---------------------------------------------------)\n(activate dialog)\nlate [& Story]->[& Story StorySelector1]\n\nlate right [Story | Story StorySelector1]-> [Story StorySelector1| Story ]\nlate right [Story StorySelector1| Story ]-> [Story StorySelector1| Story StorySelector2]\n\n\n\n(Darkness)\n(---------------------------------------------------)\n(---------------------------------------------------)\n(intiate FOV)\nlate [$ no Seen no Darkness]->[$ random Darkness]\n\nlate [&]->[& FOV0 Seen no Darkness]\n\n\nglobal [Wall no FOVHinder]->[Wall FOVHinder]\n\n(propagate FOV)\nlate [$ FOV0|no FOV01 no Wall]->[$ FOV0|FOV1 Seen no Darkness]\nlate [$ FOV1|no FOV02 no FovHinder]->[$ FOV1|FOV2 Seen no Darkness]\nlate [$ FOV2|no FOV03 no FovHinder]->[$ FOV2|FOV3 Seen no Darkness]\nlate [$ FOV3|no FOV04 no FovHinder]->[$ FOV3|FOV4 Seen no Darkness]\nlate [$ FOV4|no FOV05 no FovHinder]->[$ FOV4|FOV5 Seen no Darkness]\nlate [$ FOV5|no FOV06 no FovHinder]->[$ FOV5|FOV6 Seen no Darkness]\nlate [$ FOV6|no FOV07 no FovHinder]->[$ FOV6|FOV7 Seen no Darkness]\nlate [$ FOV7|no FOV08 no FovHinder]->[$ FOV7|FOV8 Seen no Darkness]\nlate [$ FOV8|no FOV09 no FovHinder]->[$ FOV8|FOV9 Seen no Darkness]\n\n(open new area suddenly)\nlate [$ Seen FOVHinder no Wall]->[$ Seen]\n\n(exception: open block neighbourhood suddenly)\nglobal late [FOV | : no FOV ]->[FOV |: FOV Seen no Darkness]\nglobal late [no FOV no FovHinder| : FOV]->[FOV Seen no Darkness |: FOV]\n\n\n(show wall borders)\nlate [$ Wall Darkness no FixBorder|FOV]->[$ Wall Seen FixBorder|FOV]\nlate [$ Wall FixBorder|Wall no UnFixBorder]->[$ Wall FixBorder|Wall Seen UnFixBorder no Darkness]\n\n\n(light wins against darkness)\nlate [$ Light]->[$ Light Seen no Darkness]\n\n\n(Wall borders)\n(---------------------------------------------------)\n\n(basic)\nglobal late left  [Wall no BorderL|no Wall ]-> [Wall BorderL|]\nglobal late up    [Wall no BorderU|no Wall ]-> [Wall BorderU|]\nglobal late right [Wall no BorderR|no Wall ]-> [Wall BorderR|]\nglobal late down  [Wall no BorderD|no Wall ]-> [Wall BorderD|]\n\n (corners)\nglobal late left  [Wall no BorderLkD|Wall BorderD]->[Wall BorderLkD|Wall BorderD]\nglobal late up    [Wall no BorderUkL|Wall BorderL]->[Wall BorderUkL|Wall BorderL]\nglobal late right [Wall no BorderRkU|Wall BorderU]->[Wall BorderRkU|Wall BorderU]\nglobal late down  [Wall no BorderDkR|Wall BorderR]->[Wall BorderDkR|Wall BorderR]\n \nglobal late left  [Wall no BorderLkU|Wall BorderU]->[Wall BorderLkU|Wall BorderU]\nglobal late up    [Wall no BorderUkR|Wall BorderR]->[Wall BorderUkR|Wall BorderR]\nglobal late right [Wall no BorderRkD|Wall BorderD]->[Wall BorderRkD|Wall BorderD]\nglobal late down  [Wall no BorderDkL|Wall BorderL]->[Wall BorderDkL|Wall BorderL]\n \nglobal late [Wall BorderLkU BorderUkL no BoLxU]->[Wall BorderLkU BorderUkL BoLxU]\nglobal late [Wall BorderUkR BorderRkU no BoUxR]->[Wall BorderUkR BorderRkU BoUxR]\nglobal late [Wall BorderRkD BorderDkR no BoRxD]->[Wall BorderRkD BorderDkR BoRxD]\nglobal late [Wall BorderDkL BorderLkD no BoDxL]->[Wall BorderDkL BorderLkD BoDxL]\n \n(Win)\n(---------------------------------------------------)\n(---------------------------------------------------)\n(move on with story, e.g. in starting animation)\nglobal [WinSignal &]-> win\n \n(win also when all orbs are collected and message)\nglobal [AllOrbs][WinSignal]->[][WinSignal]\nglobal [AllOrbs]->[WinSignal] message With enough orbs for a lifetime, it was time to leave.\n  \n(Perturb game map)\nglobal [WallToRemove3|Wall no StartGame][PostWin]->[WallToRemove3|Wall StartGame][PostWin]\n\n(Removable walls)\n[»][PostWin][@ WallToRemove .] ->[»][PostWin][@ WallToRemove]\n[»][PostWin][@ WallToRemove3 no .]->[»][PostWin][@ no Wall no border no boX no WallOver no LightOver .]\n[»][PostWin][@ WallToRemove2 no .]->[»][PostWin][@ WallToRemove3 .]\n[»][PostWin][@ WallToRemove1 no .]->[»][PostWin][@ WallToRemove2 .]\n\n\n==============\nWINCONDITIONS\n==============\n\n=======     \nLEVELS\n=======\n\nmessage In an unexplored sector in Oort's cloud ...\nmessage \"Where are you, Xeno?\"\nmessage \"Are you inside?\"\nmessage \"We told you this was a bad idea!\"\nmessage \"Your radio transmitter hasn't recovered yet from the interference...\"\nmessage \"...of those odd gravitic signatures.\"\nmessage \"Now we just hope...\"\nmessage \"...you can beam us a sonar map...\"\nmessage \"...of your surroundings.\"\n\n##############################################################################################\n##############################################################################################\n####‡í×××××××××#‡×.....o.#################...#####.../.......68../92##########################\n####.#########××S#i#ííí#.################..*..###..¤¤#¤¤99..#######..#####....34e......#######\n####áé.ioa....##×#.é...ó.################.¤¤¤42...¤¤¤.¤¤¤#o§########..####....S........#######\n####.¤¤¤¤¤....#××#.é.⋆.ó.#######...‡..####¤¤¤¤.§.¤¤¤¤.¤¤¤¤¤.#########.####ó.ó.......ó.ó#######\n####.é.iea....#×##.é...ó.#####...××××á####¤¤¤¤...¤¤¤¤...¤¤¤.#########.####í.á.......í.á#######\n####.¤¤¤¤£....#×##.#ááá#a#46S..×××××óé£e‡..S¤.....¤¤¤.../27.#########.####.ó.........ó.#######\n####.é.iea....#×##.e.....‡.#####.../S96.###25...../26...##.i#########.####...ó..§..ó...#######\n##S39¤¤¤¤¤....*‡.#############24...####.#####.....###.§.###e#########.####í.....é.....á#######\n##‡##########################‡.#...###########ioa####...#############.####.éí...o...áé.#######\n##×#..*95################....S##.§.#################io..oa###.45óS.‡\\.\\‡.#.á....¤....í.#######\n##×#.....###############.....###...##################e..o####.¤¤¤¤í##.##.‡//////ó//////‡á#####\n##×#..§...######eeó####......###oaa##################e¤¤o####.¤¤¤¤é##.####.....é£é.....#‡#####\n##×#a¤a¤a#######...####..§...###eee×‡×××#############eaaa####.ó.§.*##.##/..¤...á*í...###.#####\n##×#.....#######...#‡23..oa..###...×###×################.#####....###.##.####.......####.#####\n##é#a#a#a##.S.##...S.##..ie..###...#×á‡×################.#####ooá.###.##.###############.#####\n#×‡×.....41\\#......####......########×##.í............ó#.#####ooá.###.##‡#########*####.‡#####\n#########××#####...##################.....¤¤¤¤¤¤¤¤¤¤¤¤ó##############.##.#########ó####é######\n##########×ó×##....##################...77..........ó.í.................íS‡ó43...........#####\n############×##.ó..########íoó#######..í.§í¤¤¤¤¤¤¤¤¤¤.###############.###×##.....ó.....ó.#####\n#...........S‡#...#########.¤.#######.................á...............\\....#..áí....áí...#####\n#......§....#22.§.####...¤¤.....ó###...##.é##########‡######\\########.####á#......§93....#####\n#.iiiio.....###...####*..í..£¤.¤a###...#...####í..###‡######a########.####.#íé..á.íé..á.í#...#\n#######.....###...#######i¤.¤¤..á28###‡###á####73......ó.###‡########S####.#.íé....íé....#.#.#\n########....###...#######é.....¤¤óS##á.###/#####......##‡##.á75......\\.###.×............./.#.#\n######é××.21óá#...##########.¤.###....####.######74¤¤..#.####....§....####.#o....o....o..ó##.#\n#############é#éoo##########éeá#########íé77.../...¤£áS‡.‡á.##.....60###.#.################S‡#\n##*.e40××ó###S###################################74¤¤..#.#¤.###....o###..#/×##############37##\n###.e..¤#####............................../80###.....##‡#...####.####...#/××#############o###\n####e¤..#####################################.£##72..###.#..19###ò###í...#.#×############.eo##\n#######§S####################################...o/######.#....#######63S\\‡.‡.í#########....e.#\n########..#####.........91/..13....##############×######.#.§...ì###à...§.#.#.§########..#...##\n#꙳aa.####‡‡‡###14........./.....ó...#×####.16#####.#####.#....#######....#.#á...ó.###‡ó###§###\n#e...####××.............../..........×####...##.o...####\\#...i###è###....#.###¤í¤á###.###.ia##\n#e.ó#####××.............../..........#####¤.¤#17.¤.§..í#.#...####.####...#.##.ó.o.ó.#.##...ia#\n#49£.‡..................../....§.....íó‡....óS/#e¤:a¤¤...‡62###e....###..#.##í¤£:¤¤á#.###...##\n##...#..................../...¤......#‡...í.¤#####e¤¤¤í#.#.###.......###.#.##.é.e.é.#.####.###\n###í##..................../...¤......#.......#####.*¤¤.#\\####61..§....####\\####í¤á¤##á########\n######..................../...¤......#...§.....###18..é#.###........75e/.98####.é48‡S.########\n#.P.....o.........S....../12.é¤éSo..##í15...¤..#########.###S#################################\n#.10..###.###11.###.××....############¤........#########.###é........................97##.o.##\n#########.###o..###.×××..##‡...á######.S...é.###########.ó############################á##.e.##\n#########×#########o×.OO....#ó..######o############.....30....####.....###...........#.##.e.##\n###...###/#########o20########.####################...oó...ó..####.....S‡#....ó.ó....#.##¤§¤##\n###.*............#####×××‡×S..é××í‡×........ó.35‡##.í¤¤¤í¤¤¤..á#‡31....#32.í#í#.#á#á.#.#.....#\n###......38.......##××××###‡#######í..ó.......##..ó..¤¤¤§¤¤¤..íSó#.....###..é.....ó..#.#...óá#\n###.......¤aaa.....‡×###ó.....#####......ó....#####..¤¤¤á¤¤¤á.á###..§..×##.í#.¤¤¤.#..#‡#...á.#\n###.......o.......######í......#á##.........á.###××..é...ée...####io...×##..ói¤£¤.é..×é..é...#\n######..¤¤£¤¤¤¤...######é...⋆..#.##..í........###‡#...........×××#.io..×##..#.¤¤¤.#á.###/ó///#\n######............######é....47‡.##.....⋆.....###×##############××..io.×‡#..é.....ó..S‡#...á.#\n######............#######a.....#.##.....94.á..###×####.*.###############×#íí#í#.#á#á.#ó#...éá#\n######............é######.o....#..#.í.........###×####¤.¤#############×××#....é.é....#33.....#\n######............#########ííéá##.#....é......###×é###io....ó..óá#####£×#‡...........####¤§¤##\n#################################S‡.......é..á×‡××####¤:¤¤£¤¤¤¤..#####....###############.o.##\n#################################ó##é.....o..#########.e..ioa.¤.é##‡Só.##################.o.##\n######################################################¤¤...¤..¤...36#####################.e.##\n######################################################....iea...¤#############################\n##############################################################################################\n\nmessage Soon after Xeno left Gravirinth...\nmessage ...messengers from a far galaxy...\nmessage ...flooded the earth with wisdom.\nmessage The presidents of all nations then sent Xeno their most heartfelt...\nmessage -_-_-_- Congratulations! -_-_-_-\nmessage For unlocking the mysteries of...\nmessage -_-_-_-_-_  Gravirinth  _-_-_-_-_-                                  -_-_ by Pedro PSI (2018-2020) _-_-\nmessage - Music (CC-BY) by: Stellardrone -                                 ---  Eternity  ------------------- ---  Comet Halley  --------------- ---  Billions and billions  ------ ---  Twilight  ------------------- ---  Between the Rings  ----------";
+title Gravirinth [Mini]
+author Pedro PSI
+homepage pedropsi.github.io
+
+background_color #190434 (darkest purple)
+text_color #FF9703 (player orange) 
+
+realtime_interval 0.1
+key_repeat_interval 0.1
+
+zoomscreen 30x17
+run_rules_on_level_start
+
+
+(verbose_logging
+debug)
+
+((Palette)
+(---------------------------------------------------)
+#190434 (darkest purple)
+#54268D (dark purple)
+#7346AD (purple)
+#9F76D3 (bright purple)
+
+#F17E9F (bright pink)
+#E6507B (pink)
+#BB2751 (dark pink)
+
+#FFAB85 (bright red)
+#FF8D59 (red)
+#D05E2B (dark red)
+
+#FFD885 (bright yellow)
+#FFCA59 (yellow)
+#D09B2B (dark yellow)
+
+#D05E2B (dark orange)
+#FF9703 (player orange) 
+#FF8403 (pdayer orange)
+)
+
+========
+OBJECTS
+========
+
+Background 
+#190434 (darkest purple)
+
+Wall 
+#7346AD (purple) #54268D (dark purple) 
+11111
+11111
+00000
+11111
+11111
+
+WallOver1
+#7346AD (purple)
+.....
+.....
+.....
+.....
+....0
+
+WallOver2
+#7346AD (purple)
+....0
+.....
+.....
+.....
+.....
+
+WallOver3
+#7346AD (purple)
+0....
+.....
+.....
+.....
+.....
+
+WallOver4
+#7346AD (purple)
+.....
+.....
+.....
+.....
+0....
+
+WallOver5
+#7346AD (purple)
+....0
+.....
+.....
+.....
+....0
+
+WallOver6
+#7346AD (purple) 
+0...0
+.....
+.....
+.....
+.....
+
+WallOver7
+#7346AD (purple)
+0....
+.....
+.....
+.....
+0....
+
+WallOver8
+#7346AD (purple)
+.....
+.....
+.....
+.....
+0...0
+
+WallOver9
+#7346AD (purple)
+....0
+.....
+.....
+.....
+0...0
+
+WallOver10
+#7346AD (purple)
+0...0
+.....
+.....
+.....
+....0
+
+WallOver11
+#7346AD (purple)
+0...0
+.....
+.....
+.....
+0....
+
+WallOver12
+#7346AD (purple)
+....0
+.....
+.....
+.....
+0...0
+
+WallOver13
+#7346AD (purple)
+0...0
+.....
+.....
+.....
+0...0
+
+borderL
+#9F76D3 (bright purple)
+0....
+0....
+0....
+0....
+0....
+
+borderU
+#9F76D3 (bright purple)
+00000
+.....
+.....
+.....
+.....
+
+borderR
+#9F76D3 (bright purple)
+....0
+....0
+....0
+....0
+....0
+
+borderD 
+#9F76D3 (bright purple)
+.....
+.....
+.....
+.....
+00000
+
+
+BoLXU
+#9F76D3 (bright purple)
+0....
+.....
+.....
+.....
+.....
+
+BoDXL
+#9F76D3 (bright purple)
+.....
+.....
+.....
+.....
+0....
+
+BoUXR
+#9F76D3 (bright purple)
+....0
+.....
+.....
+.....
+.....
+
+BoRXD
+#9F76D3 (bright purple)
+.....
+.....
+.....
+.....
+....0
+
+
+BorderDkL
+transparent
+BorderDkR
+transparent
+BorderUkL
+transparent
+BorderUkR
+transparent
+
+BorderRkD
+transparent
+BorderRkU
+transparent
+BorderLkD
+transparent
+BorderLkU
+transparent
+
+
+FixBorder
+transparent (lightblue
+.....
+.....
+..1..
+.....
+.....)
+
+UnFixBorder
+transparent
+
+
+Player (this becomes the camera)
+transparent (white
+.....
+..1..
+..1..
+..1..
+.....)
+
+PlayerL 
+#F17E9F (bright pink) #E6507B (pink)
+..10.
+11000
+.1000
+11000
+..10.
+
+PlayerU 
+#FFD885 (bright yellow) #FFCA59 (yellow)
+.1.1.
+.111.
+10001
+00000
+.000.
+
+PlayerR 
+#FFAB85 (bright red) #FF8D59 (red)
+.01..
+00011
+0001.
+00011
+.01..
+
+PlayerD 
+#FF9703 (player orange) #FF8403 (pdayer orange)
+.000.
+00000
+10001
+.111.
+.1.1.
+
+
+PlayerLegsL
+#F17E9F (bright pink) #E6507B (pink)
+.....
+01111
+.....
+01111
+.....
+
+PlayerLegsU
+#FFD885 (bright yellow) #FFCA59 (yellow)
+.0.0.
+.1.1.
+.1.1.
+.1.1.
+.1.1.
+
+PlayerLegsR
+#FFAB85 (bright red)#FF8D59 (red)
+.....
+11110
+.....
+11110
+.....
+
+PlayerLegsD
+#FF9703 (pdayer orange) #FF8403 (player orange)
+.1.1.
+.1.1.
+.1.1.
+.1.1.
+.0.0.
+
+NextLegsL
+transparent
+NextLegsU
+transparent
+NextLegsR
+transparent
+NextLegsD
+transparent
+
+
+CrateSimpleL 
+#F17E9F (bright pink) #E6507B (pink)
+1000.
+1100.
+1100.
+1100.
+1110.
+CrateSimpleU 
+#FFCA59 (yellow) #FFD885 (bright yellow)
+00000
+00001
+01111
+11111
+.....
+CrateSimpleR
+#FFAB85 (bright red)#FF8D59 (red)
+.0111
+.0011
+.0011
+.0011
+.0001
+CrateSimpleD
+#FF8403 (player orange) #FF9703 (pdayer orange)
+.....
+11111
+11110
+10000
+00000
+ 
+
+PodL
+transparent
+PodU
+transparent
+PodR
+transparent
+PodD
+transparent
+
+
+FromL
+black
+.....
+00...
+.....
+.....
+.....
+
+FromU
+black
+...0.
+...0.
+.....
+.....
+.....
+
+FromR
+black
+.....
+.....
+.....
+...00
+.....
+
+FromD
+black
+.....
+.....
+.....
+.0...
+.0...
+
+FixedL
+white
+.....
+.....
+00...
+.....
+.....
+
+FixedU
+white
+..0..
+..0..
+.....
+.....
+.....
+FixedR
+white
+.....
+.....
+...00
+.....
+.....
+FixedD
+white
+.....
+.....
+.....
+..0..
+..0..
+
+
+Block
+#7346AD (purple)
+.....
+.000.
+.0.0.
+.000.
+.....
+
+
+WallDecoD1
+#9F76D3 (bright purple)
+.000.
+.....
+.....
+.....
+.....
+
+WallDecoD2
+#9F76D3 (bright purple)
+.....
+.000.
+.....
+.....
+.....
+
+WallDecoD3
+#9F76D3 (bright purple)
+.....
+.....
+00000
+.....
+.....
+
+WallDecoD4
+#9F76D3 (bright purple)
+.....
+.....
+.000.
+.....
+.....
+
+WallDecoD5
+#9F76D3 (bright purple)
+.....
+.....
+..0..
+.....
+.....
+
+
+WallDecoU1
+#9F76D3 (bright purple)
+.....
+.....
+.....
+.....
+.000.
+
+WallDecoU2
+#9F76D3 (bright purple)
+.....
+.....
+.....
+.000.
+.....
+
+WallDecoU3
+#9F76D3 (bright purple)
+.....
+.....
+00000
+.....
+.....
+
+WallDecoU4
+#9F76D3 (bright purple)
+.....
+.....
+.000.
+.....
+.....
+
+WallDecoU5
+#9F76D3 (bright purple)
+.....
+.....
+..0..
+.....
+.....
+
+
+WallDecoR1
+#9F76D3 (bright purple)
+.....
+0....
+0....
+0....
+.....
+
+WallDecoR2
+#9F76D3 (bright purple)
+.....
+.0...
+.0...
+.0...
+.....
+
+WallDecoR3
+#9F76D3 (bright purple)
+..0..
+..0..
+..0..
+..0..
+..0..
+
+WallDecoR4
+#9F76D3 (bright purple)
+.....
+..0..
+..0..
+..0..
+.....
+
+WallDecoR5
+#9F76D3 (bright purple)
+.....
+.....
+..0..
+.....
+.....
+
+WallDecoL5
+#9F76D3 (bright purple)
+.....
+.....
+..0..
+.....
+.....
+
+WallDecoL4
+#9F76D3 (bright purple)
+.....
+..0..
+..0..
+..0..
+.....
+
+WallDecoL3
+#9F76D3 (bright purple)
+..0..
+..0..
+..0..
+..0..
+..0..
+
+WallDecoL2
+#9F76D3 (bright purple)
+.....
+...0.
+...0.
+...0.
+.....
+
+WallDecoL1
+#9F76D3 (bright purple)
+.....
+....0
+....0
+....0
+.....
+
+WallDecoL5Next
+transparent
+WallDecoU5Next
+transparent
+WallDecoR5Next
+transparent
+WallDecoD5Next
+transparent
+
+ToL
+transparent
+ToU
+transparent
+ToR
+transparent
+ToD
+transparent
+
+
+RotateDecoL5
+#F17E9F (bright pink)
+.....
+.....
+.....
+.....
+.....
+
+RotateDecoL4
+#F17E9F (bright pink)
+.....
+.....
+.....
+.....
+.....
+
+RotateDecoL3
+#F17E9F (bright pink)
+.....
+..0..
+.0...
+..0..
+.....
+
+RotateDecoL2
+#F17E9F (bright pink)
+.....
+..00.
+.00..
+..00.
+.....
+
+RotateDecoL1
+#F17E9F (bright pink)
+.....
+...0.
+..0..
+...0.
+.....
+
+RotateDecoU1
+#FFCA59 (yellow)
+.....
+.....
+..0..
+.0.0.
+.....
+
+RotateDecoU2
+#FFCA59 (yellow)
+.....
+..0..
+.000.
+.0.0.
+.....
+
+RotateDecoU3
+#FFCA59 (yellow)
+.....
+..0..
+.0.0.
+.....
+.....
+
+RotateDecoU4
+#FFCA59 (yellow)
+.....
+.....
+.....
+.....
+.....
+
+RotateDecoU5
+#FFCA59 (yellow)
+.....
+.....
+.....
+.....
+.....
+
+
+RotateDecoR1
+#FFAB85 (bright red)
+.....
+.0...
+..0..
+.0...
+.....
+
+RotateDecoR2
+#FFAB85 (bright red)
+.....
+.00..
+..00.
+.00..
+.....
+
+RotateDecoR3
+#FFAB85 (bright red)
+.....
+..0..
+...0.
+..0..
+.....
+
+RotateDecoR4
+#FFAB85 (bright red)
+.....
+.....
+.....
+.....
+.....
+
+RotateDecoR5
+#FFAB85 (bright red)
+.....
+.....
+.....
+.....
+.....
+
+
+RotateDecoD1
+#FF8403 (player orange)
+.....
+.0.0.
+..0..
+.....
+.....
+
+RotateDecoD2
+#FF8403 (player orange)
+.....
+.0.0.
+.000.
+..0..
+.....
+
+RotateDecoD3
+#FF8403 (player orange)
+.....
+.....
+.0.0.
+..0..
+.....
+
+RotateDecoD4
+#FF8403 (player orange)
+.....
+.....
+.....
+.....
+.....
+
+RotateDecoD5
+#FF8403 (player orange)
+.....
+.....
+.....
+.....
+.....
+
+CarriedL3
+#F17E9F (bright pink)
+.....
+.0...
+.0...
+.0...
+.....
+
+CarriedL2
+#F17E9F (bright pink)
+.....
+.00..
+.00..
+.00..
+.....
+
+CarriedL1
+#F17E9F (bright pink)
+.....
+...0.
+...0.
+...0.
+.....
+
+CarriedU1
+#FFCA59 (yellow)
+.....
+.....
+.....
+.000.
+.....
+
+CarriedU2
+#FFCA59 (yellow)
+.....
+.000.
+.000.
+.....
+.....
+
+CarriedU3
+#FFCA59 (yellow)
+.....
+.000.
+.....
+.....
+.....
+
+CarriedR1
+#FFAB85 (bright red)
+.....
+.0...
+.0...
+.0...
+.....
+
+CarriedR2
+#FFAB85 (bright red)
+.....
+..00.
+..00.
+..00.
+.....
+
+CarriedR3
+#FFAB85 (bright red)
+.....
+...0.
+...0.
+...0.
+.....
+
+CarriedD1
+#FF8403 (player orange)
+.....
+.000.
+.....
+.....
+.....
+
+CarriedD2
+#FF8403 (player orange)
+.....
+.000.
+.000.
+.....
+.....
+
+CarriedD3
+#FF8403 (player orange)
+.....
+.....
+.000.
+.....
+.....
+
+CarryL
+transparent
+CarryU
+transparent
+CarryR
+transparent
+CarryD
+transparent
+
+
+MovedL3
+#F17E9F (bright pink)
+.....
+.....
+.0...
+.....
+.....
+
+MovedL2
+#F17E9F (bright pink)
+.....
+.....
+.00..
+.....
+.....
+
+MovedL1
+#F17E9F (bright pink)
+.....
+.....
+...0.
+.....
+.....
+
+MovedU1
+#FFCA59 (yellow)
+.....
+.....
+.....
+..0..
+.....
+
+MovedU2
+#FFCA59 (yellow)
+.....
+..0..
+..0..
+.....
+.....
+
+MovedU3
+#FFCA59 (yellow)
+.....
+..0..
+.....
+.....
+.....
+
+MovedR1
+#FFAB85 (bright red)
+.....
+.....
+.0...
+.....
+.....
+
+MovedR2
+#FFAB85 (bright red)
+.....
+.....
+.00..
+.....
+.....
+
+MovedR3
+#FFAB85 (bright red)
+.....
+.....
+...0.
+.....
+.....
+
+MovedD1
+#FF8403 (player orange)
+.....
+..0..
+.....
+.....
+.....
+
+MovedD2
+#FF8403 (player orange)
+.....
+..0..
+..0..
+.....
+.....
+
+MovedD3
+#FF8403 (player orange)
+.....
+.....
+..0..
+.....
+.....
+
+
+ThrowingLU
+#190434 (darkest purple) #E6507B (pink)
+..0.1
+.....
+.....
+.....
+.....
+
+ThrowingLD
+#190434 (darkest purple) #E6507B (pink)
+.....
+.....
+.....
+.....
+..0.1
+
+ThrowingUL
+#190434 (darkest purple) #FFCA59 (yellow)
+.....
+.....
+0....
+.....
+1....
+
+ThrowingUR
+#190434 (darkest purple) #FFCA59 (yellow)
+.....
+.....
+....0
+.....
+....1
+
+ThrowingRD
+#190434 (darkest purple) #FF8D59 (red)
+.....
+.....
+.....
+.....
+1.0..
+ThrowingRU
+#190434 (darkest purple) #FF8D59 (red)
+1.0..
+.....
+.....
+.....
+.....
+
+ThrowingDL
+#190434 (darkest purple) #FF8403 (player orange)
+1....
+.....
+0....
+.....
+.....
+ThrowingDR
+#190434 (darkest purple) #FF8403 (player orange)
+....1
+.....
+....0
+.....
+.....
+
+
+Orb1 
+#F17E9F (bright pink) #E6507B (pink) 
+.....
+.000.
+.100.
+.111.
+.....
+
+Orb2
+#FFAB85 (bright red)#FF8D59 (red)
+.....
+.001.
+.001.
+.011.
+.....
+
+Orb3
+#FFCA59 (yellow) #FFD885 (bright yellow)
+.....
+.111.
+.001.
+.000.
+.....
+
+Orb4
+#FF8403 (player orange) #FF9703 (pdayer orange)
+.....
+.110.
+.100.
+.100.
+.....
+
+GotOrb1 
+#F17E9F (bright pink) #E6507B (pink) 
+.....
+.000.
+.100.
+.111.
+.....
+
+GotOrb2
+#FFAB85 (bright red)#FF8D59 (red)
+.....
+.001.
+.001.
+.011.
+.....
+
+GotOrb3
+#FFCA59 (yellow) #FFD885 (bright yellow)
+.....
+.111.
+.001.
+.000.
+.....
+
+GotOrb4
+#FF8403 (player orange) #FF9703 (pdayer orange)
+.....
+.110.
+.100.
+.100.
+.....
+
+AllOrbs
+transparent
+
+LightL
+#BB2751 (dark pink)
+
+LightR
+#D05E2B (dark red)
+
+LightU
+#D09B2B (dark yellow)
+
+LightD
+#D05E2B (dark orange)
+
+LightOverL
+#BB2751 (dark pink)
+.....
+.....
+00000
+.....
+.....
+
+LightOverU
+#D09B2B (dark yellow)
+..0..
+..0..
+.000.
+..0..
+..0..
+
+LightOverR
+#D05E2B (dark red) 
+.....
+.....
+00000
+.....
+.....
+
+LightOverD
+#D05E2B (dark orange)
+..0..
+..0..
+.000.
+..0..
+..0..
+
+LightGateL5
+#F17E9F (bright pink)
+.....
+.0...
+.0...
+.0...
+.....
+
+LightGateL4
+#F17E9F (bright pink)
+.....
+.00..
+.0...
+.00..
+.....
+
+LightGateL3
+#F17E9F (bright pink)
+.....
+.000.
+.0...
+.000.
+.....
+
+LightGateL2
+#F17E9F (bright pink)
+.....
+..00.
+.....
+..00.
+.....
+
+LightGateL1
+#F17E9F (bright pink)
+.....
+...0.
+.....
+...0.
+.....
+
+LightGateU5
+#FFCA59 (yellow)
+.....
+.000.
+.....
+.....
+.....
+
+LightGateU4
+#FFCA59 (yellow)
+.....
+.000.
+.0.0.
+.....
+.....
+
+LightGateU3
+#FFCA59 (yellow)
+.....
+.000.
+.0.0.
+.0.0.
+.....
+
+LightGateU2
+#FFCA59 (yellow)
+.....
+.....
+.0.0.
+.0.0.
+.....
+
+LightGateU1
+#FFCA59 (yellow)
+.....
+.....
+.....
+.0.0.
+.....
+
+
+LightGateR1
+#FFAB85 (bright red)
+.....
+.0...
+.....
+.0...
+.....
+
+LightGateR2
+#FFAB85 (bright red)
+.....
+.00..
+.....
+.00..
+.....
+
+LightGateR3
+#FFAB85 (bright red)
+.....
+.000.
+...0.
+.000.
+.....
+
+LightGateR4
+#FFAB85 (bright red)
+.....
+..00.
+...0.
+..00.
+.....
+
+LightGateR5
+#FFAB85 (bright red)
+.....
+...0.
+...0.
+...0.
+.....
+
+LightGateD1
+#FF8403 (player orange)
+.....
+.0.0.
+.....
+.....
+.....
+
+LightGateD2
+#FF8403 (player orange)
+.....
+.0.0.
+.0.0.
+.....
+.....
+
+LightGateD3
+#FF8403 (player orange)
+.....
+.0.0.
+.0.0.
+.000.
+.....
+
+LightGateD4
+#FF8403 (player orange)
+.....
+.....
+.0.0.
+.000.
+.....
+
+LightGateD5
+#FF8403 (player orange)
+.....
+.....
+.....
+.000.
+.....
+
+
+Gravity
+transparent
+GravityStart
+transparent
+Movity
+transparent
+
+BlockErase
+transparent( red
+.....
+.....
+..1..
+.....
+.....)
+
+TickPlayer "
+transparent (yellow
+.....
+....1
+....1
+....1
+.....)
+TickTime '
+transparent (blue
+.....
+....1
+....1
+....1
+.....
+)
+Once
+transparent
+
+Animate »
+transparent (blue
+.....
+..1..
+..1..
+..1..
+.....
+)
+
+Loop1
+transparent
+Loop2
+transparent
+
+InView $
+transparent (red
+.....
+.....
+..1..
+.....
+.....)
+InViewAlways
+transparent
+
+StartGame
+transparent
+
+FOV0
+transparent
+FOV1
+transparent
+FOV2
+transparent
+FOV3
+transparent
+FOV4
+transparent
+FOV5
+transparent
+FOV6
+transparent
+FOV7
+transparent
+FOV8
+transparent
+FOV9
+transparent
+
+Darkness1
+#7346AD (purple) #54268D (dark purple) red
+11111
+11111
+00000
+11111
+11110
+
+Darkness2
+#7346AD (purple) #54268D (dark purple) red
+11110
+11111
+00000
+11111
+11111
+
+Darkness3
+#7346AD (purple) #54268D (dark purple) red
+01111
+11111
+00000
+11111
+11111
+
+Darkness4
+#7346AD (purple) #54268D (dark purple) red
+11111
+11111
+00000
+11111
+01111
+
+Darkness5
+#7346AD (purple) #54268D (dark purple)  red
+11110
+11111
+00000
+11111
+11110
+
+Darkness6
+#7346AD (purple) #54268D (dark purple)   red
+01110
+11111
+00000
+11111
+11111
+
+Darkness7
+#7346AD (purple) #54268D (dark purple)  red
+01111
+11111
+00000
+11111
+01111
+
+Darkness8
+#7346AD (purple) #54268D (dark purple)  red
+11111
+11111
+00000
+11111
+01110
+
+Darkness9
+#7346AD (purple) #54268D (dark purple)  red
+11110
+11111
+00000
+11111
+01110
+
+Darkness10
+#7346AD (purple) #54268D (dark purple)  red
+01110
+11111
+00000
+11111
+11110
+
+Darkness11
+#7346AD (purple) #54268D (dark purple)  red
+01110
+11111
+00000
+11111
+01111
+
+Darkness12
+#7346AD (purple) #54268D (dark purple)  red
+11110
+11111
+00000
+11111
+01110
+
+Darkness13
+#7346AD (purple) #54268D (dark purple)  red
+01110
+11111
+00000
+11111
+01110
+
+Seen
+transparent (yellow
+.....
+.....
+..1..
+.....
+.....)
+
+FOVHinder
+transparent (green
+.....
+.1.1.
+.....
+.1.1.
+.....)
+
+Save
+#9F76D3 (bright purple)
+.....
+.....
+..0..
+.....
+.....
+
+Saved
+transparent
+NoSave
+#190434 (darkest purple)
+.....
+.....
+..0..
+.....
+.....
+
+Flash0
+#7346AD (purple) 
+
+Flash1 
+#E6507B (pink) 
+
+Flash2
+#FF8D59 (red)
+
+Flash3
+#FFD885 (bright yellow)
+
+Flash4
+#FF9703 (pdayer orange)
+
+(dialog)
+
+Intercom1
+transparent
+
+Intercom2
+transparent
+
+Intercom3
+transparent
+
+Intercom4
+transparent
+
+Intercom5
+transparent
+
+IntercomL1
+#9F76D3 (bright purple) #190434 (darkest purple)
+0....
+.1...
+.....
+.....
+.....
+
+IntercomL2
+#9F76D3 (bright purple) #190434 (darkest purple)
+.0...
+0.1..
+.1...
+.....
+.....
+
+IntercomL3
+#9F76D3 (bright purple) #190434 (darkest purple)
+..0..
+..01.
+00.1.
+.11..
+.....
+
+IntercomU1
+#9F76D3 (bright purple) #190434 (darkest purple)
+....0
+...1.
+.....
+.....
+.....
+
+IntercomU2
+#9F76D3 (bright purple) #190434 (darkest purple)
+...0.
+..1.0
+...1.
+.....
+.....
+
+IntercomU3
+#9F76D3 (bright purple) #190434 (darkest purple)
+..0..
+.10..
+.1.00
+..11.
+.....
+
+IntercomR1
+#9F76D3 (bright purple) #190434 (darkest purple)
+.....
+.....
+.....
+...1.
+....0
+
+IntercomR2
+#9F76D3 (bright purple) #190434 (darkest purple)
+.....
+.....
+...1.
+..1.0
+...0.
+
+IntercomR3
+#9F76D3 (bright purple) #190434 (darkest purple)
+.....
+..11.
+.1.00
+.10..
+..0..
+
+IntercomD1
+#9F76D3 (bright purple) #190434 (darkest purple)
+.....
+.....
+.....
+.1...
+0....
+
+IntercomD2
+#9F76D3 (bright purple) #190434 (darkest purple)
+.....
+.....
+.1...
+0.1..
+.0...
+
+IntercomD3
+#9F76D3 (bright purple) #190434 (darkest purple)
+.....
+.11..
+00.1.
+..01.
+..0..
+
+Story0
+transparent 
+Story1
+transparent
+Story2
+transparent 
+Story3
+TRANSPARENT
+Story4
+TRANSPARENT
+Story5
+transparent 
+Story6
+transparent
+Story7
+TRANSPARENT
+Story8
+TRANSPARENT
+Story9
+TRANSPARENT
+
+
+ConsoleTop =
+#190434 (darkest purple)
+
+
+ToNextLine ¶
+transparent
+
+FirstLine
+transparent
+
+ClearConsole
+transparent(#BB2751 (dark pink))
+
+
+StorySelector1
+transparent (#BB2751 (dark pink) 
+.....
+.....
+.....
+0...0
+00.00)
+
+StorySelector2
+transparent (#BB2751 (dark pink) 
+00.00
+0...0
+.....
+.....
+.....)
+
+
+WinSignal
+transparent
+
+ConsL
+transparent (lightred
+....1
+....1
+.....
+....1
+....1)
+
+
+ConsR
+transparent (lightblue
+1.1..
+1.1..
+1.1..
+1.1..
+1.1..)
+
+
+Quench
+transparent (red
+1....
+.1...
+..1..
+...1.
+....1)
+
+Quenched
+transparent
+
+BlockOver
+#7346AD (purple)
+.....
+.000.
+.0.0.
+.000.
+.....
+
+NextBlock
+white #7346AD (purple)
+0.0.0
+.....
+0...0
+.....
+0.0.0
+
+
+Agent
+transparent (green
+.....
+.....
+.111.
+.....
+.....)
+
+
+
+
+
+PostWin ¥
+transparent
+
+WallToRemove1
+#190434 (darkest purple) #7346AD (purple)
+11..1
+....1
+.....
+1....
+1..11
+
+WallToRemove2
+#190434 (darkest purple) #7346AD (purple)
+11..1
+....1
+00000
+1....
+1..11
+
+WallToRemove3
+#190434 (darkest purple) #7346AD (purple)
+1...1
+00000
+00000
+00000
+1...1
+
+=======
+LEGEND
+=======
+
+
+\ = FOVHinder
+/ = Background
+‡ = Background and FOVHinder
+
+
+S = Save
+_ = Once
+
+꙳ = Orb1 and Block
+* = Orb1 
+⋆ = Orb1 
+§ = Background
+
+. = Background 
+: = Block 
+
+¤ = Wall and StartGame (and Seen)
+# = Wall and StartGame 
+× = Wall and StartGame and WallToRemove1
+£ = Wall and StartGame 
+
+
+
+
+& = Agent
+P = PlayerD and Player and Agent and Gravity and TickTime 
+
+
+a = CrateSimpleL 
+e = CrateSimpleU 
+i = CrateSimpleR 
+o = CrateSimpleD 
+
+á = PodL and Loop2
+é = PodU and Loop2
+í = PodR and Loop2
+ó = PodD and Loop2
+
+Loop = Loop1 or Loop2
+
+à = LightGateL1 
+è = LightGateU1 
+ì = LightGateR1 
+ò = LightGateD1 
+
+G = Gravity
+M = Movity
+
+CrateL = CrateSimpleL 
+CrateU = CrateSimpleU 
+CrateR = CrateSimpleR 
+CrateD = CrateSimpleD 
+
+
+CrateSimple = CrateSimpleL or CrateSimpleU or CrateSimpleR or CrateSimpleD
+Crate = CrateSimple
+
+CrateXL = CrateU or CrateR or CrateD
+CrateXU = CrateR or CrateD or CrateL
+CrateXR = CrateD or CrateL or CrateU
+CrateXD = CrateL or CrateU or CrateR
+
+
+Players = PlayerL or PlayerU or PlayerR or PlayerD
+PlayerXL = PlayerU or PlayerR or PlayerD
+PlayerXU = PlayerR or PlayerD or PlayerL
+PlayerXR = PlayerD or PlayerL or PlayerU
+PlayerXD = PlayerL or PlayerU or PlayerR
+
+Legs = PlayerLegsL or PlayerLegsU or PlayerLegsR or PlayerLegsD
+LegsXL = PlayerLegsU or PlayerLegsR or PlayerLegsD
+LegsXU = PlayerLegsR or PlayerLegsD or PlayerLegsL
+LegsXR = PlayerLegsD or PlayerLegsL or PlayerLegsU
+LegsXD = PlayerLegsL or PlayerLegsU or PlayerLegsR
+
+NextLegs = NextLegsL or NextLegsU or NextLegsR or NextLegsD
+
+
+FallableL = PlayerL or PlayerLegsL or CrateL
+FallableU = PlayerU or PlayerLegsU or CrateU
+FallableR = PlayerR or PlayerLegsR or CrateR
+FallableD = PlayerD or PlayerLegsD or CrateD
+
+Fallable = FallableL or FallableU or FallableR or FallableD
+FallableXL = FallableU or FallableR or FallableD
+FallableXU = FallableR or FallableD or FallableL
+FallableXR = FallableD or FallableL or FallableU
+FallableXD = FallableL or FallableU or FallableR
+
+
+ToXL = ToU or ToR or ToD
+ToXU = ToR or ToD or ToL
+ToXR = ToD or ToL or ToU
+ToXD = ToL or ToU or ToR
+To = ToL or ToU or ToR or ToD
+
+FromXL = FromU or FromR or FromD
+FromXU = FromR or FromD or FromL
+FromXR = FromD or FromL or FromU
+FromXD = FromL or FromU or FromR
+From = FromL or FromU or FromR or FromD
+
+
+CarriableL = CrateL or PlayerLegsL or PlayerL
+CarriableU = CrateU or PlayerLegsU or PlayerU
+CarriableR = CrateR or PlayerLegsR or PlayerR
+CarriableD = CrateD or PlayerLegsD or PlayerD
+
+CarrierL = CrateXR or PlayerXR or LegsXR
+CarrierU = CrateXD or PlayerXD or LegsXD
+CarrierR = CrateXL or PlayerXL or LegsXL
+CarrierD = CrateXU or PlayerXU or LegsXU
+
+CarriedL = CarriedL1 or CarriedL2 or CarriedL3
+CarriedU = CarriedU1 or CarriedU2 or CarriedU3
+CarriedR = CarriedR1 or CarriedR2 or CarriedR3
+CarriedD = CarriedD1 or CarriedD2 or CarriedD3
+
+Carried = CarriedL or CarriedU or CarriedR or CarriedD
+
+MovedL = MovedL1 or MovedL2 or MovedL3
+MovedU = MovedU1 or MovedU2 or MovedU3
+MovedR = MovedR1 or MovedR2 or MovedR3
+MovedD = MovedD1 or MovedD2 or MovedD3
+
+Moved = MovedL or MovedU or MovedR or MovedD
+
+
+UnPushable = Wall or Block
+
+Pushable = Players or Legs or Crate
+Pusher = Pushable 
+
+Carriable = Crate
+
+Item = Pushable or UnPushable
+
+Phase = Gravity or Movity or GravityStart
+Fixed = FixedL or FixedR or FixedU or FixedD 
+
+Orb = Orb1 or Orb2 or Orb3 or Orb4
+Flash = Flash0 or Flash1 or Flash2 or Flash3 or Flash4
+
+Intercom = Intercom1 or Intercom2 or Intercom3 or Intercom4 (or Intercom5)
+
+
+(Decoration)
+Light = LightL or LightU or LightR or LightD
+LightOver = LightOverL or LightOverU or LightOverR or LightOverD
+
+WallDecoL = WallDecoL1 or WallDecoL2 or WallDecoL3 or WallDecoL4 or WallDecoL5
+WallDecoU = WallDecoU1 or WallDecoU2 or WallDecoU3 or WallDecoU4 or WallDecoU5
+WallDecoR = WallDecoR1 or WallDecoR2 or WallDecoR3 or WallDecoR4 or WallDecoR5
+WallDecoD = WallDecoD1 or WallDecoD2 or WallDecoD3 or WallDecoD4 or WallDecoD5
+
+WallDeco = WallDecoL or WallDecoU or WallDecoR or WallDecoD
+WallDecoNext = WallDecoL5Next or WallDecoU5Next or WallDecoR5Next or WallDecoD5Next
+
+RotateDecoL = RotateDecoL1 or RotateDecoL2 or RotateDecoL3 or RotateDecoL4 or RotateDecoL5
+RotateDecoU = RotateDecoU1 or RotateDecoU2 or RotateDecoU3 or RotateDecoU4 or RotateDecoU5
+RotateDecoR = RotateDecoR1 or RotateDecoR2 or RotateDecoR3 or RotateDecoR4 or RotateDecoR5
+RotateDecoD = RotateDecoD1 or RotateDecoD2 or RotateDecoD3 or RotateDecoD4 or RotateDecoD5
+
+RotateDeco = RotateDecoL or RotateDecoU or RotateDecoR or RotateDecoD
+
+border = borderL or borderR or borderU or borderD 
+
+BoX = BoLXU or BoDXL or BoUXR or BoRXD
+BoXL = BoLXU or BoDXL
+BoXU = BoLXU or BoUXR
+BoXR = BoUXR or BoRXD
+BoXD = BoDXL or BoRXD
+
+ThrowingL = ThrowingLU or ThrowingLD
+ThrowingU = ThrowingUL or ThrowingUR
+ThrowingR = ThrowingRD or ThrowingRU
+ThrowingD = ThrowingDL or ThrowingDR
+
+Throwing = ThrowingL or ThrowingU or ThrowingR or ThrowingD
+
+ThrowingLURD = ThrowingLU or ThrowingUL or ThrowingRD or ThrowingDL
+ThrowingDRUL = ThrowingLD or ThrowingUR or ThrowingRU or ThrowingDR
+
+WallOver = WallOver1 or WallOver2 or WallOver3 or WallOver4 or WallOver5 or WallOver6 or WallOver7 or WallOver8 or WallOver9 or WallOver10 or WallOver11 or WallOver12 or WallOver13
+
+LightGateL = LightGateL1 or LightGateL2 or LightGateL3 or LightGateL4 or LightGateL5
+LightGateU = LightGateU1 or LightGateU2 or LightGateU3 or LightGateU4 or LightGateU5
+LightGateR = LightGateR1 or LightGateR2 or LightGateR3 or LightGateR4 or LightGateR5
+LightGateD = LightGateD1 or LightGateD2 or LightGateD3 or LightGateD4 or LightGateD5
+
+LightGate = LightGateL or LightGateU or LightGateR or LightGateD
+
+
+IntercomL = IntercomL1 or IntercomL2 or IntercomL3
+IntercomU = IntercomU1 or IntercomU2 or IntercomU3
+IntercomR = IntercomR1 or IntercomR2 or IntercomR3
+IntercomD = IntercomD1 or IntercomD2 or IntercomD3
+
+IntercomOver = IntercomL or IntercomU or IntercomR or IntercomD
+
+@ = InView and Seen
+
+(Story and dialogue)
+(---------------------------------------------------)
+
+StorySelector = StorySelector1 or StorySelector2
+
+
+Story = Story0 or Story1 or Story2 or Story3 or Story4 or Story5 or Story6 or Story7 or Story8 or Story9
+
+0 = Story0
+1 = Story1
+2 = Story2
+3 = Story3
+4 = Story4
+5 = Story5
+6 = Story6
+7 = Story7
+8 = Story8
+9 = Story9
+
+~ = FirstLine
+
+(Consoles)
+(---------------------------------------------------)
+
+
+GotOrb = GotOrb1 or GotOrb2 or GotOrb3 or GotOrb4
+Displayable =  GotOrb
+
+
+
+Consoles = ConsoleTop
+
+
+
+Darkness = Darkness1 or Darkness2 or Darkness3 or Darkness4 or Darkness5 or Darkness6 or Darkness7 or Darkness8 or Darkness9 or Darkness10 or Darkness11 or Darkness12 or Darkness13
+
+
+FOV = FOV0 or FOV1 or FOV2 or FOV3 or FOV4 or FOV5 or FOV6 or FOV7 or FOV8 or FOV9
+
+FOV01 = FOV0  or FOV1
+FOV02 = FOV01 or FOV2
+FOV03 = FOV02 or FOV3
+FOV04 = FOV03 or FOV4
+FOV05 = FOV04 or FOV5
+FOV06 = FOV05 or FOV6
+FOV07 = FOV06 or FOV7
+FOV08 = FOV07 or FOV8
+FOV09 = FOV08 or FOV9
+
+
+
+
+Cons  = ConsL or  ConsR
+
+
+
+
+
+
+
+
+
+
+WallToRemove = WallToRemove1 or WallToRemove2 or WallToRemove3
+
+ConsClear = ConsL or ConsR  or ToNextLine or ConsoleTop or FirstLine
+
+
+=======
+SOUNDS
+=======
+
+sfx0 13614108
+sfx1 25636708
+sfx2 79636308
+sfx3 76346108
+
+sfx4 27763708 (typewriter)
+
+sfx5 40605508 (light)
+
+sfx6 50758708 (orb)
+ 
+sfx7 22586308 (start play)
+sfx8 20449708 (end play)
+
+sfx9 4002908 (save)
+
+undo 85375308
+restart 35446108
+
+================
+COLLISIONLAYERS
+================
+
+Background
+Light
+
+Save, NoSave
+Saved
+
+Orb
+LightGate
+
+PodL
+PodU
+PodR
+PodD
+ToL
+ToU
+ToR
+ToD
+RotateDecoL
+RotateDecoU
+RotateDecoR
+RotateDecoD
+
+CarryL
+CarryU
+CarryR
+CarryD
+
+Carried
+Moved
+
+Player
+NextLegs
+
+Phase
+BlockErase
+
+BlockOver
+NextBlock
+Item
+
+Once
+
+FixedL
+FixedU
+FixedR
+FixedD
+
+FromL
+FromU
+FromR
+FromD
+
+WallToRemove
+WallOver
+ThrowingLURD
+ThrowingDRUL
+
+FOV
+Seen
+Darkness
+FOVHinder
+
+borderL
+borderU
+borderR
+borderD
+
+BoLXU 
+BoUXR 
+BoDXL 
+BoRXD
+
+BorderLkD
+BorderUkL
+BorderRkU
+BorderDkR
+
+BorderLkU
+BorderUkR
+BorderRkD
+BorderDkL
+
+FixBorder
+UnFixBorder
+
+LightOver
+
+WallDecoL
+WallDecoU
+WallDecoR
+WallDecoD
+WallDecoL5Next
+WallDecoU5Next
+WallDecoR5Next
+WallDecoD5Next
+
+
+
+Intercom
+Intercom5
+IntercomOver
+
+Story
+
+ToNextLine,FirstLine
+
+StorySelector
+ClearConsole
+
+
+ConsoleTop
+GotOrb
+
+
+Cons
+
+TickTime, TickPlayer
+Animate
+Loop
+Inview
+InViewAlways
+StartGame
+
+Flash
+WinSignal
+
+Agent
+
+
+Quench
+Quenched
+
+
+PostWin
+AllOrbs
+
+======
+RULES     
+======     
+(final win signal)
+[action Player][PostWin]->win
+
+[moving Player][&]->[Player][moving &]
+[action Player][&]->[Player][action &]
+
+(Font)
+(---------------------------------------------------)
+(---------------------------------------------------)
+
+
+
+(Clear the message console)
+(---------------------------------------------------)
+[moving &][ClearConsole]->[moving &][ClearConsole _] (require movement or action)
+
+[& Story][ClearConsole _]->[& Story][ClearConsole] (don't clear if a new story is coming)
+
+(clear console)
+[ClearConsole _]->[]
+[_]->[]
+
+
+
+
+
+(Animation and Decoration)
+(---------------------------------------------------)
+(---------------------------------------------------)
+
+(Hieroglyphs)
+(---------------------------------------------------)
+late [Wall no WallOver]->[Wall random WallOver]
+
+
+(Ticking animation control in view)
+(---------------------------------------------------)
+
+[" no &][&]->[][& "]
+[' no &][&]->[][& ']
+
+ [stationary &]["]->[stationary &][']
+ [moving     &]["]->[moving     &][']
+
+ [moving     &][']->[moving     &]["]
+ [action     &][']->[action     &]["]
+
+ [_]->[]
+ [' no _]->[' » _] 
+ [' no _ »]->[' _]
+ [_]->[]
+
+(Gravity Echo Decoration)
+(---------------------------------------------------)
+
+(Animate)
+
+[»][@ WallDecoL .]->[»][@ WallDecoL]
+[»][@ WallDecoL1 no .]->[»][@ WallDecoL2 .]
+[»][@ WallDecoL2 no .]->[»][@ WallDecoL3 .]
+[»][@ WallDecoL3 no .]->[»][@ WallDecoL4 .]
+[»][@ WallDecoL4 no .]->[»][@ WallDecoL5 .]
+[»][@ WallDecoL5 no .]->[»][@ WallDecoL5Next .]
+
+[»][@ WallDecoU .]->[»][@ WallDecoU]
+[»][@ WallDecoU1 no .]->[»][@ WallDecoU2 .]
+[»][@ WallDecoU2 no .]->[»][@ WallDecoU3 .]
+[»][@ WallDecoU3 no .]->[»][@ WallDecoU4 .]
+[»][@ WallDecoU4 no .]->[»][@ WallDecoU5 .]
+[»][@ WallDecoU5 no .]->[»][@ WallDecoU5Next .]
+
+[»][@ WallDecoR .]->[»][@ WallDecoR]
+[»][@ WallDecoR1 no .]->[»][@ WallDecoR2 .]
+[»][@ WallDecoR2 no .]->[»][@ WallDecoR3 .]
+[»][@ WallDecoR3 no .]->[»][@ WallDecoR4 .]
+[»][@ WallDecoR4 no .]->[»][@ WallDecoR5 .]
+[»][@ WallDecoR5 no .]->[»][@ WallDecoR5Next .]
+
+[»][@ WallDecoD .]->[»][@ WallDecoD]
+[»][@ WallDecoD1 no .]->[»][@ WallDecoD2 .]
+[»][@ WallDecoD2 no .]->[»][@ WallDecoD3 .]
+[»][@ WallDecoD3 no .]->[»][@ WallDecoD4 .]
+[»][@ WallDecoD4 no .]->[»][@ WallDecoD5 .]
+[»][@ WallDecoD5 no .]->[»][@ WallDecoD5Next .]
+
+
+(Initialise)
+left [   FallableL no Wall @|Wall no WallDecoL no WallDecoL5Next @][»]->[FallableL @|Wall WallDecoL1  @][»]
+up   [   FallableU no Wall @|Wall no WallDecoU no WallDecoU5Next @][»]->[FallableU @|Wall WallDecoU1  @][»]
+right[   FallableR no Wall @|Wall no WallDecoR no WallDecoR5Next @][»]->[FallableR @|Wall WallDecoR1  @][»]
+down [   FallableD no Wall @|Wall no WallDecoD no WallDecoD5Next @][»]->[FallableD @|Wall WallDecoD1  @][»]
+left [no FallableL no Wall|Wall    WallDecoL5Next @][»]->[ |Wall  @][»]
+up   [no FallableU no Wall|Wall    WallDecoU5Next @][»]->[ |Wall  @][»]
+right[no FallableR no Wall|Wall    WallDecoR5Next @][»]->[ |Wall  @][»]
+down [no FallableD no Wall|Wall    WallDecoD5Next @][»]->[ |Wall  @][»]
+
+
+(Rotator Beacon Decoration)
+(---------------------------------------------------)
+(Initialise)
+[ToL no RotateDecoL @][»]->[ToL RotateDecoL5 @][»]
+[ToU no RotateDecoU @][»]->[ToU RotateDecoU5 @][»]
+[ToR no RotateDecoR @][»]->[ToR RotateDecoR5 @][»]
+[ToD no RotateDecoD @][»]->[ToD RotateDecoD5 @][»]
+
+(Finalise)
+late [no ToL RotateDecoL @][»]->[ @][»]
+late [no ToU RotateDecoU @][»]->[ @][»]
+late [no ToR RotateDecoR @][»]->[ @][»]
+late [no ToD RotateDecoD @][»]->[ @][»]
+
+(Start to Animate)
+[»][@ RotateDeco .]->[»][@ RotateDeco ]
+
+[»][@ RotateDecoL1 no . Loop2]->[»][@ RotateDecoL2 . Loop1]
+[»][@ RotateDecoL1 no . Loop1]->[»][@ RotateDecoL2 .]
+
+[»][@ RotateDecoL1 no .|Pusher]->[»][@ RotateDecoL2 . Loop1|Pusher @]
+[»][@ RotateDecoL2 no .]->[»][@ RotateDecoL3 .]
+[»][@ RotateDecoL3 no .]->[»][@ RotateDecoL4 .]
+[»][@ RotateDecoL4 no .]->[»][@ RotateDecoL5 .]
+[»][@ RotateDecoL5 no .]->[»][@ RotateDecoL1 .]
+
+[»][@ RotateDecoU1 no . Loop2]->[»][@ RotateDecoU2 . Loop1]
+[»][@ RotateDecoU1 no . Loop1]->[»][@ RotateDecoU2 .]
+
+[»][@ RotateDecoU1 no .|Pusher]->[»][@ RotateDecoU2 . Loop1|Pusher @]
+[»][@ RotateDecoU2 no .]->[»][@ RotateDecoU3 .]
+[»][@ RotateDecoU3 no .]->[»][@ RotateDecoU4 .]
+[»][@ RotateDecoU4 no .]->[»][@ RotateDecoU5 .]
+[»][@ RotateDecoU5 no .]->[»][@ RotateDecoU1 .]
+
+[»][@ RotateDecoR1 no . Loop2]->[»][@ RotateDecoR2 . Loop1]
+[»][@ RotateDecoR1 no . Loop2]->[»][@ RotateDecoR2 .]
+
+[»][@ RotateDecoR1 no .|Pusher]->[»][@ RotateDecoR2 . Loop1|Pusher @]
+[»][@ RotateDecoR2 no .]->[»][@ RotateDecoR3 .]
+[»][@ RotateDecoR3 no .]->[»][@ RotateDecoR4 .]
+[»][@ RotateDecoR4 no .]->[»][@ RotateDecoR5 .]
+[»][@ RotateDecoR5 no .]->[»][@ RotateDecoR1 .]
+
+[»][@ RotateDecoD1 no . Loop2]->[»][@ RotateDecoD2 . Loop1]
+[»][@ RotateDecoD1 no . Loop1]->[»][@ RotateDecoD2 .]
+
+[»][@ RotateDecoD1 no .|Pusher]->[»][@ RotateDecoD2 . Loop1|Pusher @]
+[»][@ RotateDecoD2 no .]->[»][@ RotateDecoD3 .]
+[»][@ RotateDecoD3 no .]->[»][@ RotateDecoD4 .]
+[»][@ RotateDecoD4 no .]->[»][@ RotateDecoD5 .]
+[»][@ RotateDecoD5 no .]->[»][@ RotateDecoD1 .]
+
+(animate a second time, after use)
+[»][@ RotateDeco Pusher no Loop2]->[»][@ RotateDeco Pusher Loop2]
+
+
+(Carried Animation)
+(---------------------------------------------------)
+
+[»][@ Carried .]->[»][@ Carried]
+[»][@ CarriedL1 no .]->[»][@ CarriedL2 .]
+[»][@ CarriedL2 no .]->[»][@ CarriedL3 .]
+[»][@ CarriedL3 no .]->[»][@ .]
+
+[»][@ CarriedU1 no .]->[»][@ CarriedU2 .]
+[»][@ CarriedU2 no .]->[»][@ CarriedU3 .]
+[»][@ CarriedU3 no .]->[»][@ .]
+
+[»][@ CarriedR1 no .]->[»][@ CarriedR2 .]
+[»][@ CarriedR2 no .]->[»][@ CarriedR3 .]
+[»][@ CarriedR3 no .]->[»][@ .]
+
+[»][@ CarriedD1 no .]->[»][@ CarriedD2 .]
+[»][@ CarriedD2 no .]->[»][@ CarriedD3 .]
+[»][@ CarriedD3 no .]->[»][@ .]
+
+(Moved Animation)
+(---------------------------------------------------)
+[»][@ Moved .]->[»][@ Moved]
+[»][@ MovedL1 no .]->[»][@ MovedL2 .]
+[»][@ MovedL2 no .]->[»][@ MovedL3 .]
+[»][@ MovedL3 no .]->[»][@ .]
+
+[»][@ MovedU1 no .]->[»][@ MovedU2 .]
+[»][@ MovedU2 no .]->[»][@ MovedU3 .]
+[»][@ MovedU3 no .]->[»][@ .]
+
+[»][@ MovedR1 no .]->[»][@ MovedR2 .]
+[»][@ MovedR2 no .]->[»][@ MovedR3 .]
+[»][@ MovedR3 no .]->[»][@ .]
+
+[»][@ MovedD1 no .]->[»][@ MovedD2 .]
+[»][@ MovedD2 no .]->[»][@ MovedD3 .]
+[»][@ MovedD3 no .]->[»][@ .]
+
+(Orb Animation)
+(---------------------------------------------------)
+[»][@ Orb .]->[»][@ Orb]
+[»][@ Orb1 no .]->[»][@ Orb2 .]
+[»][@ Orb2 no .]->[»][@ Orb3 .]
+[»][@ Orb3 no .]->[»][@ Orb4 .]
+[»][@ Orb4 no .]->[»][@ Orb1 .]
+
+[»][ GotOrb .]->[»][ GotOrb]
+[»][ GotOrb1 no .]->[»][ GotOrb2 .]
+[»][ GotOrb2 no .]->[»][ GotOrb3 .]
+[»][ GotOrb3 no .]->[»][ GotOrb4 .]
+[»][ GotOrb4 no .]->[»][ GotOrb1 .]
+
+(Light gate decoration)
+(---------------------------------------------------)
+
+(Animate)
+[»][@ LightGate .]->[»][@ LightGate]
+[»][@ LightGateL1 no .]->[»][@ LightGateL2 .]
+[»][@ LightGateL2 no .]->[»][@ LightGateL3 .]
+[»][@ LightGateL3 no .]->[»][@ LightGateL4 .]
+[»][@ LightGateL4 no .]->[»][@ LightGateL5 .]
+[»][@ LightGateL5 no .]->[»][@ LightGateL1 .]
+
+[»][@ LightGateU1 no .]->[»][@ LightGateU2 .]
+[»][@ LightGateU2 no .]->[»][@ LightGateU3 .]
+[»][@ LightGateU3 no .]->[»][@ LightGateU4 .]
+[»][@ LightGateU4 no .]->[»][@ LightGateU5 .]
+[»][@ LightGateU5 no .]->[»][@ LightGateU1 .]
+
+[»][@ LightGateR1 no .]->[»][@ LightGateR2 .]
+[»][@ LightGateR2 no .]->[»][@ LightGateR3 .]
+[»][@ LightGateR3 no .]->[»][@ LightGateR4 .]
+[»][@ LightGateR4 no .]->[»][@ LightGateR5 .]
+[»][@ LightGateR5 no .]->[»][@ LightGateR1 .]
+
+[»][@ LightGateD1 no .]->[»][@ LightGateD2 .]
+[»][@ LightGateD2 no .]->[»][@ LightGateD3 .]
+[»][@ LightGateD3 no .]->[»][@ LightGateD4 .]
+[»][@ LightGateD4 no .]->[»][@ LightGateD5 .]
+[»][@ LightGateD5 no .]->[»][@ LightGateD1 .]
+
+(Activate gates and associated dialogue)
+[LightGateR CrateR no LightR]->[LightGateR CrateR LightR]
+[LightGateU CrateU no LightU]->[LightGateU CrateU LightU]
+[LightGateD CrateD no LightD]->[LightGateD CrateD LightD] 
+[LightGateL CrateL no LightL]->[LightGateL CrateL LightL]
+
+[LightGateR CrateR LightR no Postwin][LightGateU CrateU LightU][LightGateD CrateD LightD] [LightGateL CrateL LightL]->[LightGateR CrateR LightR Postwin][LightGateU CrateU LightU][LightGateD CrateD LightD] [LightGateL CrateL LightL]
+
+
+(propagate light)
+ late left  [no LightL |LightL ]->[LightL |LightL]
+ late up    [no LightU |LightU ]->[LightU |LightU]
+ late right [no LightR |LightR ]->[LightR |LightR]
+ late down  [no LightD |LightD ]->[LightD |LightD]
+
+(over walls too)
+ late [LightL Wall no LightOverL]->[LightL Wall LightOverL]
+ late [LightU Wall no LightOverU]->[LightU Wall LightOverU]
+ late [LightR Wall no LightOverR]->[LightR Wall LightOverR]
+ late [LightD Wall no LightOverD]->[LightD Wall LightOverD]
+
+
+(Incoming call)
+(---------------------------------------------------)
+(animate)
+late  [»][@ Intercom .]->[»][@ Intercom]
+late  [»][@ Intercom1 no .]->[»][@ Intercom2 .]
+late  [»][@ Intercom2 no .]->[»][@ Intercom3 .]
+late  [»][@ Intercom3 no .]->[»][@ Intercom4 .]
+late  [»][@ Intercom4 no . no Intercom5]->[»][@ Intercom1 Intercom5 .]
+late  [»][@ Intercom4 no .]->[»][@ .]
+
+(Reset backgrounds)
+(---------------------------------------------------)
+[no .]->[.]
+
+(Control and Phase Switching)
+(---------------------------------------------------)
+(---------------------------------------------------)
+
+ [M]->[]
+ [G]->[]
+
+late [Players][& no Players]->[Players &][]
+
+startloop
+
+(Phase Switch & darkness under reveal)
+(---------------------------------------------------)
+
+left  [stationary FallableL @|no Item][& no G]->[FallableL @|@][& G]     
+up    [stationary FallableU @|no Item][& no G]->[FallableU @|@][& G]     
+right [stationary FallableR @|no Item][& no G]->[FallableR @|@][& G]     
+down  [stationary FallableD @|no Item][& no G]->[FallableD @|@][& G]
+
+ [& no G no M]->[& M]
+
+
+
+(Player Movement Intent Transmission)
+(---------------------------------------------------)
+(prevent moving too quickly when rotating)
+[stationary Players > &][M][Quench @]->[Players stationary &][M][Quench @]
+[Quench]->[]
+
+(transmission)
+[stationary Players > &][M]->[> Players &][M]
+
+
+(Gravity - multidirectional)
+(---------------------------------------------------)
+[stationary FallableL @ no _][G]->[left  FallableL @ _][G]     
+[stationary FallableU @ no _][G]->[up    FallableU @ _][G]     
+[stationary FallableR @ no _][G]->[right FallableR @ _][G]     
+[stationary FallableD @ no _][G]->[down  FallableD @ _][G]
+
+(outside of view gravity acts once upon starting level)
+[stationary FallableL  no _][GravityStart]->[left  FallableL _][GravityStart]     
+[stationary FallableU  no _][GravityStart]->[up    FallableU _][GravityStart]     
+[stationary FallableR  no _][GravityStart]->[right FallableR _][GravityStart]     
+[stationary FallableD  no _][GravityStart]->[down  FallableD _][GravityStart]
+
+(Rise swap)
+(---------------------------------------------------)
+left [Carriable|< PlayerL |PlayerLegsL][M]->[stationary PlayerL |stationary PlayerLegsL|stationary Carriable][M] 
+up   [Carriable|< PlayerU |PlayerLegsU][M]->[stationary PlayerU |stationary PlayerLegsU|stationary Carriable][M] 
+right[Carriable|< PlayerR |PlayerLegsR][M]->[stationary PlayerR |stationary PlayerLegsR|stationary Carriable][M] 
+down [Carriable|< PlayerD |PlayerLegsD][M]->[stationary PlayerD |stationary PlayerLegsD|stationary Carriable][M] 
+
+(Pick)
+(---------------------------------------------------)
+left [> PlayerL|stationary Carriable no Quench][M]->[Carriable| PlayerL][M] 
+up   [> PlayerU|stationary Carriable no Quench][M]->[Carriable| PlayerU][M] 
+right[> PlayerR|stationary Carriable no Quench][M]->[Carriable| PlayerR][M] 
+down [> PlayerD|stationary Carriable no Quench][M]->[Carriable| PlayerD][M] 
+
+(Descend - against)
+(---------------------------------------------------)
+(register provenance falling)
+left  [FallableL |no FromL LegsXL][M]->[FallableL|FromL LegsXL][M]
+up    [FallableU |no FromU LegsXU][M]->[FallableU|FromU LegsXU][M]
+right [FallableR |no FromR LegsXR][M]->[FallableR|FromR LegsXR][M]
+down  [FallableD |no FromD LegsXD][M]->[FallableD|FromD LegsXD][M]
+
+left [left  PlayerL|PlayerLegsL FromXL][M]->[stationary PlayerL|][M] 
+up   [up    PlayerU|PlayerLegsU FromXU][M]->[stationary PlayerU|][M] 
+right[right PlayerR|PlayerLegsR FromXR][M]->[stationary PlayerR|][M] 
+down [down  PlayerD|PlayerLegsD FromXD][M]->[stationary PlayerD|][M] 
+
+
+(Carry - marking)
+(---------------------------------------------------)
+left [stationary CarriableL @ no FixedU no Quench|up    CarrierL][M]->[CarryU CarriableL @|up    CarrierL][M]
+up   [stationary CarriableU @ no FixedR no Quench|right CarrierU][M]->[CarryR CarriableU @|right CarrierU][M]
+right[stationary CarriableR @ no FixedD no Quench|down  CarrierR][M]->[CarryD CarriableR @|down  CarrierR][M]
+down [stationary CarriableD @ no FixedL no Quench|left  CarrierD][M]->[CarryL CarriableD @|left  CarrierD][M]
+
+left [stationary CarriableL @ no FixedD no Quench|down  CarrierL][M]->[CarryD CarriableL @|down  CarrierL][M] 
+up   [stationary CarriableU @ no FixedL no Quench|left  CarrierU][M]->[CarryL CarriableU @|left  CarrierU][M] 
+right[stationary CarriableR @ no FixedU no Quench|up    CarrierR][M]->[CarryU CarriableR @|up    CarrierR][M] 
+down [stationary CarriableD @ no FixedR no Quench|right CarrierD][M]->[CarryR CarriableD @|right CarrierD][M]
+
+(Carry - execution)
+(---------------------------------------------------)
+[CarryU CarriableL @][M]->[up    CarriableL @][M] 
+[CarryR CarriableU @][M]->[right CarriableU @][M] 
+[CarryD CarriableR @][M]->[down  CarriableR @][M] 
+[CarryL CarriableD @][M]->[left  CarriableD @][M]
+
+[CarryD CarriableL @][M]->[down  CarriableL @][M]  
+[CarryL CarriableU @][M]->[left  CarriableU @][M]  
+[CarryU CarriableR @][M]->[up    CarriableR @][M]  
+[CarryR CarriableD @][M]->[right CarriableD @][M] 
+
+(Descend - clear)
+(---------------------------------------------------)
+left [left  PlayerL|PlayerLegsL no FromXL][M]->[left  PlayerL|][M]     
+up   [up    PlayerU|PlayerLegsU no FromXU][M]->[up    PlayerU|][M]     
+right[right PlayerR|PlayerLegsR no FromXR][M]->[right PlayerR|][M]     
+down [down  PlayerD|PlayerLegsD no FromXD][M]->[down  PlayerD|][M] 
+
+(Dont over Ascend)
+(---------------------------------------------------)
+left [< PlayerL |PlayerLegsL][M]->[stationary PlayerL|PlayerLegsL][M] 
+up   [< PlayerU |PlayerLegsU][M]->[stationary PlayerU|PlayerLegsU][M] 
+right[< PlayerR |PlayerLegsR][M]->[stationary PlayerR|PlayerLegsR][M] 
+down [< PlayerD |PlayerLegsD][M]->[stationary PlayerD|PlayerLegsD][M] 
+
+
+(Push and Collide)
+(---------------------------------------------------)
+(Push)
+left  [left  Pusher @ | stationary Pushable no FixedL no Quench][M]->[left  Pusher @| left  Pushable][M]
+up    [up    Pusher @ | stationary Pushable no FixedU no Quench][M]->[up    Pusher @| up    Pushable][M]
+right [right Pusher @ | stationary Pushable no FixedR no Quench][M]->[right Pusher @| right Pushable][M]
+down  [down  Pusher @ | stationary Pushable no FixedD no Quench][M]->[down  Pusher @| down  Pushable][M]
+
+(register provenance)
+left  [left  Item |no FromL]->[left  Item| FromL]
+up    [up    Item |no FromU]->[up    Item| FromU]
+right [right Item |no FromR]->[right Item| FromR]
+down  [down  Item |no FromD]->[down  Item| FromD]
+
+(Collide)
+left  [left  Pusher @| UnPushable][M]->[stationary Pusher @ FixedL| UnPushable][M]
+up    [up    Pusher @| UnPushable][M]->[stationary Pusher @ FixedU| UnPushable][M]
+right [right Pusher @| UnPushable][M]->[stationary Pusher @ FixedR| UnPushable][M]
+down  [down  Pusher @| UnPushable][M]->[stationary Pusher @ FixedD| UnPushable][M]
+
+(Pre-collide by provenance)
+[FromL FromXL Item no NextBlock]->[FromL FromXL Item NextBlock ]
+[FromU FromXU Item no NextBlock]->[FromU FromXU Item NextBlock ]
+[FromR FromXR Item no NextBlock]->[FromR FromXR Item NextBlock ]
+[FromD FromXD Item no NextBlock]->[FromD FromXD Item NextBlock ]
+
+left  [left  Pusher @| Nextblock]->[Pusher @ FixedL| Nextblock]
+up    [up    Pusher @| Nextblock]->[Pusher @ FixedU| Nextblock]
+right [right Pusher @| Nextblock]->[Pusher @ FixedR| Nextblock]
+down  [down  Pusher @| Nextblock]->[Pusher @ FixedD| Nextblock]
+
+
+(Prevent unacomplished moves: Part 1)
+(---------------------------------------------------)
+left  [left  Item @ no FixedL| stationary Item]->[left  Item @ FixedL| stationary Item]
+up    [up    Item @ no FixedU| stationary Item]->[up    Item @ FixedU| stationary Item]
+right [right Item @ no FixedR| stationary Item]->[right Item @ FixedR| stationary Item]
+down  [down  Item @ no FixedD| stationary Item]->[down  Item @ FixedD| stationary Item]
+
+left  [left  Item @ | FixedL]->[left  Item @ FixedL| FixedL]
+up    [up    Item @ | FixedU]->[up    Item @ FixedU| FixedU]
+right [right Item @ | FixedR]->[right Item @ FixedR| FixedR]
+down  [down  Item @ | FixedD]->[down  Item @ FixedD| FixedD]
+
+
+(Prevent unacomplished moves: Part 2)
+(---------------------------------------------------)
+left  [left  Item @ FixedL]->[stationary Item @ FixedL ]
+up    [up    Item @ FixedU]->[stationary Item @ FixedU ]
+right [right Item @ FixedR]->[stationary Item @ FixedR ]
+down  [down  Item @ FixedD]->[stationary Item @ FixedD ]
+
+
+endloop
+
+[_]->[]
+
+
+
+(Carried Animations)
+(---------------------------------------------------)
+(---------------------------------------------------)
+late [Throwing no &]->[]
+
+(principal)
+right [stationary PlayerL|...|down  CarriableL]->[stationary PlayerL ThrowingLU|...|down  CarriableL CarriedD1]
+down  [stationary PlayerU|...|left  CarriableU]->[stationary PlayerU ThrowingUR|...|left  CarriableU CarriedL1]
+left  [stationary PlayerR|...|up    CarriableR]->[stationary PlayerR ThrowingRD|...|up    CarriableR CarriedU1]
+up    [stationary PlayerD|...|right CarriableD]->[stationary PlayerD ThrowingDL|...|right CarriableD CarriedR1]
+
+right [stationary PlayerL|...|up    CarriableL]->[stationary PlayerL ThrowingLD|...|up    CarriableL CarriedU1]
+down  [stationary PlayerU|...|right CarriableU]->[stationary PlayerU ThrowingUL|...|right CarriableU CarriedR1]
+left  [stationary PlayerR|...|down  CarriableR]->[stationary PlayerR ThrowingRU|...|down  CarriableR CarriedD1]
+up    [stationary PlayerD|...|left  CarriableD]->[stationary PlayerD ThrowingDR|...|left  CarriableD CarriedL1]
+
+(lateral)
+right [stationary PlayerD|...|up    CarriableL]->[stationary PlayerD ThrowingDR|...|up    CarriableL CarriedU1]
+down  [stationary PlayerL|...|right CarriableU]->[stationary PlayerL ThrowingLD|...|right CarriableU CarriedR1]
+left  [stationary PlayerU|...|down  CarriableR]->[stationary PlayerU ThrowingUL|...|down  CarriableR CarriedD1]
+up    [stationary PlayerR|...|left  CarriableD]->[stationary PlayerR ThrowingRU|...|left  CarriableD CarriedL1]
+
+left  [stationary PlayerD|...|up    CarriableR]->[stationary PlayerD ThrowingDL|...|up    CarriableR CarriedU1]
+up    [stationary PlayerL|...|right CarriableD]->[stationary PlayerL ThrowingLU|...|right CarriableD CarriedR1]
+right [stationary PlayerU|...|down  CarriableL]->[stationary PlayerU ThrowingUR|...|down  CarriableL CarriedD1]
+down  [stationary PlayerR|...|left  CarriableU]->[stationary PlayerR ThrowingRD|...|left  CarriableU CarriedL1]
+
+right [stationary PlayerD|...|down  CarriableL]->[stationary PlayerD ThrowingDL|...|down  CarriableL CarriedD1]
+down  [stationary PlayerL|...|left  CarriableU]->[stationary PlayerL ThrowingLU|...|left  CarriableU CarriedL1]
+left  [stationary PlayerU|...|up    CarriableR]->[stationary PlayerU ThrowingUR|...|up    CarriableR CarriedU1]
+up    [stationary PlayerR|...|right CarriableD]->[stationary PlayerR ThrowingRD|...|right CarriableD CarriedR1]
+
+left  [stationary PlayerD|...|down  CarriableR]->[stationary PlayerD ThrowingDR|...|down  CarriableR CarriedD1]
+up    [stationary PlayerL|...|left  CarriableD]->[stationary PlayerL ThrowingLD|...|left  CarriableD CarriedL1]
+right [stationary PlayerU|...|up    CarriableL]->[stationary PlayerU ThrowingUL|...|up    CarriableL CarriedU1]
+down  [stationary PlayerR|...|right CarriableU]->[stationary PlayerR ThrowingRU|...|right CarriableU CarriedR1]
+
+
+(Propagate carried)
+(---------------------------------------------------)
+up    [left  CarrierL no CarriedL |left  CarriableL CarriedL]->[left  CarrierL |left  CarriableL no Carried  CarriedU1]
+right [up    CarrierU no CarriedU |up    CarriableU CarriedU]->[up    CarrierU |up    CarriableU no Carried  CarriedR1]
+down  [right CarrierR no CarriedR |right CarriableR CarriedR]->[right CarrierR |right CarriableR no Carried  CarriedD1]
+left  [down  CarrierD no CarriedD |down  CarriableD CarriedD]->[down  CarrierD |down  CarriableD no Carried  CarriedL1]
+
+down  [left  CarrierL no CarriedL |left  CarriableL CarriedL]->[left  CarrierL |left  CarriableL no Carried  CarriedD1]
+left  [up    CarrierU no CarriedU |up    CarriableU CarriedU]->[up    CarrierU |up    CarriableU no Carried  CarriedL1]
+up    [right CarrierR no CarriedR |right CarriableR CarriedR]->[right CarrierR |right CarriableR no Carried  CarriedU1]
+right [down  CarrierD no CarriedD |down  CarriableD CarriedD]->[down  CarrierD |down  CarriableD no Carried  CarriedR1]
+
+(Move)
+[left  Item no Carried no Moved]->[left  Item MovedL1]
+[up    Item no Carried no Moved]->[up    Item MovedU1]
+[right Item no Carried no Moved]->[right Item MovedR1]
+[down  Item no Carried no Moved]->[down  Item MovedD1]
+
+
+(Block conflicting moves)
+(---------------------------------------------------)
+(---------------------------------------------------)
+(prevent unnecessary  extra turn)
+left  [FallableL @|no FromL]->[FallableL @|FromL]
+up    [FallableU @|no FromU]->[FallableU @|FromU]
+right [FallableR @|no FromR]->[FallableR @|FromR]
+down  [FallableD @|no FromD]->[FallableD @|FromD]
+
+(Generate Blocks at conflict areas)
+(---------------------------------------------------)
+late [NextBlock]->[]
+
+[FromL FromXL no Item ]->[Block]
+[FromU FromXU no Item ]->[Block]
+[FromR FromXR no Item ]->[Block]
+[FromD FromXD no Item ]->[Block]
+
+[FromL FromXL Blockerase]->[]
+[FromU FromXU Blockerase]->[]
+[FromR FromXR Blockerase]->[]
+[FromD FromXD Blockerase]->[]
+
+late [Block]->[Block BlockOver]
+late [BlockOver no Block][G]->[][G]
+
+late    [Block BlockErase @]->[@]
+late    [Block @]           ->   [Block BlockErase @]
+
+late [Block|]->[Block InViewAlways|InViewAlways]
+
+
+
+
+
+(Animation: wall bumps)
+(---------------------------------------------------)
+left [ Item FixedL no Wall @|Wall no WallDecoL no WallDecoL5Next]->[Item @|Wall WallDecoL1 _]
+up   [ Item FixedU no Wall @|Wall no WallDecoU no WallDecoU5Next]->[Item @|Wall WallDecoU1 _]
+right[ Item FixedR no Wall @|Wall no WallDecoR no WallDecoR5Next]->[Item @|Wall WallDecoR1 _]
+down [ Item FixedD no Wall @|Wall no WallDecoD no WallDecoD5Next]->[Item @|Wall WallDecoD1 _]
+
+[Fixed]->[]
+[From]->[]
+
+
+
+
+(Long legs)
+(---------------------------------------------------)
+(---------------------------------------------------)
+
+(Remove orphan legs)
+(---------------------------------------------------)
+late left [no PlayerL|PlayerLegsL]->[|]     
+late up   [no PlayerU|PlayerLegsU]->[|]     
+late right[no PlayerR|PlayerLegsR]->[|]     
+late down [no PlayerD|PlayerLegsD]->[|] 
+
+(Rise Player)
+(---------------------------------------------------)
+[right PlayerL][M]->[right PlayerL NextLegsL][M]     
+[down  PlayerU][M]->[down  PlayerU NextLegsU][M]     
+[left  PlayerR][M]->[left  PlayerR NextLegsR][M]     
+[up    PlayerD][M]->[up    PlayerD NextLegsD][M] 
+
+late left [PlayerL |NextLegsL no Item][M]->[PlayerL|PlayerLegsL][M] 
+late up   [PlayerU |NextLegsU no Item][M]->[PlayerU|PlayerLegsU][M] 
+late right[PlayerR |NextLegsR no Item][M]->[PlayerR|PlayerLegsR][M] 
+late down [PlayerD |NextLegsD no Item][M]->[PlayerD|PlayerLegsD][M] 
+
+late left [no PlayerL |no PlayerL NextLegsL][M]->[|][M] 
+late up   [no PlayerU |no PlayerU NextLegsU][M]->[|][M] 
+late right[no PlayerR |no PlayerR NextLegsR][M]->[|][M] 
+late down [no PlayerD |no PlayerD NextLegsD][M]->[|][M] 
+
+
+
+
+(Specific Gravity)
+(---------------------------------------------------)
+(---------------------------------------------------)
+
+(prevent conflicts)
+[ToL ToXL]->[]
+[ToU ToXU]->[]
+[ToR ToXR]->[]
+[ToD ToXD]->[]
+
+
+(Rotate)
+(---------------------------------------------------)
+[CrateSimple ToL]->[CrateSimpleL ToL]
+[CrateSimple ToU]->[CrateSimpleU ToU]
+[CrateSimple ToR]->[CrateSimpleR ToR]
+[CrateSimple ToD]->[CrateSimpleD ToD]
+
+[Players no PlayerL ToL]->[PlayerL ToL ] sfx0
+[Players no PlayerU ToU]->[PlayerU ToU ] sfx1
+[Players no PlayerR ToR]->[PlayerR ToR ] sfx2
+[Players no PlayerD ToD]->[PlayerD ToD ] sfx3
+
+(prevent moving too quickly when rotating)
+late [Item To no Quenched @]->[Item To Quench Quenched @]
+late [Quenched no Item]->[]
+
+(Initialise)
+left [no ToL PodL]->[ToL PodL]
+up   [no ToU PodU]->[ToU PodU]
+right[no ToR PodR]->[ToR PodR]
+down [no ToD PodD]->[ToD PodD]
+
+
+
+(Capture movement direction)
+(---------------------------------------------------)
+[left  Players][M]->[left  Players ][M]
+[up    Players][M]->[up    Players ][M]
+[right Players][M]->[right Players ][M]
+[down  Players][M]->[down  Players ][M]
+
+
+(Checkpoint)
+(---------------------------------------------------)
+[Flash Saved]->[Flash _ no Save no Orb]
+[_][Flash]->[_][]
+[_]->[]
+[& Save][$]->[& Save Saved][Flash0 $]
+[$ Flash|no Flash no $ ]->[$ Flash| flash] (extend flash one unit outside $)
+
+
+(Orb collecting)
+(---------------------------------------------------)
+[& Orb1 no NoSave][$]->[& Orb1 Saved GotOrb1][$ Flash1]
+[& Orb2 no NoSave][$]->[& Orb2 Saved GotOrb2][$ Flash2]
+[& Orb3 no NoSave][$]->[& Orb3 Saved GotOrb3][$ Flash3]
+[& Orb4 no NoSave][$]->[& Orb4 Saved GotOrb4][$ Flash4]
+
+[& Orb1]->[& GotOrb1 AllOrbs] sfx6
+[& Orb2]->[& GotOrb2 AllOrbs] sfx6
+[& Orb3]->[& GotOrb3 AllOrbs] sfx6
+[& Orb4]->[& GotOrb4 AllOrbs] sfx6
+
+(Are all orbs collected?)
+[AllOrbs][Orb]->[][Orb]
+
+(find first empty spot)
+[_]->[]
+right[= ConsL |=][GotOrb no =]->[= ConsL _|=][GotOrb]
+right [_ = GotOrb|=][GotOrb no =]->[GotOrb =|_ =][GotOrb]
+[GotOrb no =][= _]->[][= _ GotOrb]
+[_]->[]
+
+
+
+
+
+
+(Limit camera to within frames)
+(---------------------------------------------------)
+late [& no Player][Player no &]->[& Player][]
+
+
+(Field of View & Console)
+(---------------------------------------------------)
+(---------------------------------------------------)
+
+
+(Clear consoles & Attracts - fixed width)
+(---------------------------------------------------)
+late [ConsClear]->[]
+late [$]->[]
+(Place previous Centre)
+(---------------------------------------------------)
+
+(Draw Vertical)
+(---------------------------------------------------)
+(fixed height - centered)
+late up [||||||||&| no $ |||||||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]
+
+(fixed height - bottom of level area)
+late up [|||||||&| no $ ||||||||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]
+late up [||||||&| no $ |||||||||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]
+late up [|||||&| no $ ||||||||||]->[ $ _|$ ~ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]
+late up [||||&| no $ |||||||||||]->[ $ _|$ ~ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]
+late up [|||&| no $ ||||||||||||]->[ $ _|$ ~ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]
+late up [||&| no $ |||||||||||||]->[ $ _|$ ~ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]
+
+(fixed height - top of level area)
+late up [|||||||||&| no $ ||||||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]
+late up [||||||||||&| no $ |||||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _|$ _ |$ _ =]
+late up [|||||||||||&| no $ ||||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _|$ _ |$ _ =]
+late up [||||||||||||&| no $ |||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _|$ _ |$ _ =]
+late up [|||||||||||||&| no $ ||]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _|$ _ |$ _ =]
+late up [||||||||||||||&| no $ |]->[ $ _|$ ~ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|$ _|& $ _|$ _ |$ _ =]
+ 
+
+(Draw Horizontal)
+(---------------------------------------------------)
+(fixed width - centered)
+late right [|||||||||||||||$ _|no $|||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+
+(fixed width - left of level area)
+late right [||||||||||||||$ _|no $||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [|||||||||||||$ _|no $|||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [||||||||||||$ _|no $||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [|||||||||||$ _|no $|||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [||||||||||$ _|no $||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [|||||||||$ _|no $|||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [||||||||$ _|no $||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [|||||||$ _|no $|||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [||||||$ _|no $||||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [|||||$ _|no $|||||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [||||$ _|no $||||||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [|||$ _|no $|||||||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [||$ _|no $||||||||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [|$ _|no $|||||||||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [$ _|no $||||||||||||||||||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+(fixed width - right of level area)
+late right [|||||||||||||||$ _|no $|||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [||||||||||||||||$ _|no $||||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [|||||||||||||||||$ _|no $|||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [||||||||||||||||||$ _|no $||||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [|||||||||||||||||||$ _|no $|||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [||||||||||||||||||||$ _|no $||||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [|||||||||||||||||||||$ _|no $|||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [||||||||||||||||||||||$ _|no $||||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [|||||||||||||||||||||||$ _|no $|||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [||||||||||||||||||||||||$ _|no $||||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [|||||||||||||||||||||||||$ _|no $|||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [||||||||||||||||||||||||||$ _|no $||]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [|||||||||||||||||||||||||||$ _|no $|]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+late right [||||||||||||||||||||||||||||$ _|no $]->[ConsL $|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$ ConsR]
+
+late [_]->[]
+
+
+(Spread Consoles)
+(---------------------------------------------------)
+
+late left[ConsR|...|=]->[ConsR = ¶|...|]
+
+late horizontal [$ =|$ no =|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$|$]->[= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $|= $]
+
+
+(Exception for unstable blocks)
+(---------------------------------------------------)
+late [InViewAlways]->[InViewAlways $]
+
+
+
+(Align displayables within console)
+(---------------------------------------------------)
+(---------------------------------------------------)
+
+late left [Displayable |= no Displayable]->[|= Displayable]
+late up   [Displayable |= no Displayable]->[|= Displayable]
+late right[Displayable |= no Displayable]->[|= Displayable]
+late down [Displayable |= no Displayable]->[|= Displayable]
+
+
+
+(Dialogue)
+(---------------------------------------------------)
+(---------------------------------------------------)
+
+(Place intercom upon reading a story and follow player)
+(---------------------------------------------------)
+(place)
+late [& Story no Intercom no StorySelector]->[& Story Intercom1]
+
+(follow)
+late [_]->[]
+late [&]->[& _]
+
+late random down  [ _ |][Intercom][PlayerL]->[|_][Intercom][PlayerL]
+late random right [ _ |][Intercom][PlayerL]->[|_][Intercom][PlayerL]
+
+late random left  [ _ |][Intercom][PlayerU]->[|_][Intercom][PlayerU]
+late random down  [ _ |][Intercom][PlayerU]->[|_][Intercom][PlayerU]
+
+late random up    [ _ |][Intercom][PlayerR]->[|_][Intercom][PlayerR]
+late random left  [ _ |][Intercom][PlayerR]->[|_][Intercom][PlayerR]
+
+late random right [ _ |][Intercom][PlayerD]->[|_][Intercom][PlayerD]
+late random up    [ _ |][Intercom][PlayerD]->[|_][Intercom][PlayerD]
+
+
+late [Intercom no _][_]->[][Intercom _]
+late [_]->[]
+
+
+late [IntercomOver]->[]
+late [Intercom1 no IntercomL][PlayerL]->[Intercom1 IntercomL1][PlayerL]
+late [Intercom2 no IntercomL][PlayerL]->[Intercom2 IntercomL2][PlayerL]
+late [Intercom3 no IntercomL][PlayerL]->[Intercom3 IntercomL3][PlayerL]
+
+late [Intercom1 no IntercomU][PlayerU]->[Intercom1 IntercomU1][PlayerU]
+late [Intercom2 no IntercomU][PlayerU]->[Intercom2 IntercomU2][PlayerU]
+late [Intercom3 no IntercomU][PlayerU]->[Intercom3 IntercomU3][PlayerU]
+
+late [Intercom1 no IntercomR][PlayerR]->[Intercom1 IntercomR1][PlayerR]
+late [Intercom2 no IntercomR][PlayerR]->[Intercom2 IntercomR2][PlayerR]
+late [Intercom3 no IntercomR][PlayerR]->[Intercom3 IntercomR3][PlayerR]
+
+late [Intercom1 no IntercomD][PlayerD]->[Intercom1 IntercomD1][PlayerD]
+late [Intercom2 no IntercomD][PlayerD]->[Intercom2 IntercomD2][PlayerD]
+late [Intercom3 no IntercomD][PlayerD]->[Intercom3 IntercomD3][PlayerD]
+
+
+
+(Message selector)
+(---------------------------------------------------)
+(activate dialog)
+late [& Story]->[& Story StorySelector1]
+
+late right [Story | Story StorySelector1]-> [Story StorySelector1| Story ]
+late right [Story StorySelector1| Story ]-> [Story StorySelector1| Story StorySelector2]
+
+
+
+(Darkness)
+(---------------------------------------------------)
+(---------------------------------------------------)
+(intiate FOV)
+late [$ no Seen no Darkness]->[$ random Darkness]
+
+late [&]->[& FOV0 Seen no Darkness]
+
+
+[Wall no FOVHinder]->[Wall FOVHinder]
+
+(propagate FOV)
+late [$ FOV0|no FOV01 no Wall]->[$ FOV0|FOV1 Seen no Darkness]
+late [$ FOV1|no FOV02 no FovHinder]->[$ FOV1|FOV2 Seen no Darkness]
+late [$ FOV2|no FOV03 no FovHinder]->[$ FOV2|FOV3 Seen no Darkness]
+late [$ FOV3|no FOV04 no FovHinder]->[$ FOV3|FOV4 Seen no Darkness]
+late [$ FOV4|no FOV05 no FovHinder]->[$ FOV4|FOV5 Seen no Darkness]
+late [$ FOV5|no FOV06 no FovHinder]->[$ FOV5|FOV6 Seen no Darkness]
+late [$ FOV6|no FOV07 no FovHinder]->[$ FOV6|FOV7 Seen no Darkness]
+late [$ FOV7|no FOV08 no FovHinder]->[$ FOV7|FOV8 Seen no Darkness]
+late [$ FOV8|no FOV09 no FovHinder]->[$ FOV8|FOV9 Seen no Darkness]
+
+(open new area suddenly)
+late [$ Seen FOVHinder no Wall]->[$ Seen]
+
+(exception: open block neighbourhood suddenly)
+late [FOV | : no FOV ]->[FOV |: FOV Seen no Darkness]
+late [no FOV no FovHinder| : FOV]->[FOV Seen no Darkness |: FOV]
+
+
+(show wall borders)
+late [$ Wall Darkness no FixBorder|FOV]->[$ Wall Seen FixBorder|FOV]
+late [$ Wall FixBorder|Wall no UnFixBorder]->[$ Wall FixBorder|Wall Seen UnFixBorder no Darkness]
+
+
+(light wins against darkness)
+late [$ Light]->[$ Light Seen no Darkness]
+
+
+(Wall borders)
+(---------------------------------------------------)
+
+(basic)
+late left  [Wall no BorderL|no Wall ]-> [Wall BorderL|]
+late up    [Wall no BorderU|no Wall ]-> [Wall BorderU|]
+late right [Wall no BorderR|no Wall ]-> [Wall BorderR|]
+late down  [Wall no BorderD|no Wall ]-> [Wall BorderD|]
+
+ (corners)
+late left  [Wall no BorderLkD|Wall BorderD]->[Wall BorderLkD|Wall BorderD]
+late up    [Wall no BorderUkL|Wall BorderL]->[Wall BorderUkL|Wall BorderL]
+late right [Wall no BorderRkU|Wall BorderU]->[Wall BorderRkU|Wall BorderU]
+late down  [Wall no BorderDkR|Wall BorderR]->[Wall BorderDkR|Wall BorderR]
+ 
+late left  [Wall no BorderLkU|Wall BorderU]->[Wall BorderLkU|Wall BorderU]
+late up    [Wall no BorderUkR|Wall BorderR]->[Wall BorderUkR|Wall BorderR]
+late right [Wall no BorderRkD|Wall BorderD]->[Wall BorderRkD|Wall BorderD]
+late down  [Wall no BorderDkL|Wall BorderL]->[Wall BorderDkL|Wall BorderL]
+ 
+late [Wall BorderLkU BorderUkL no BoLxU]->[Wall BorderLkU BorderUkL BoLxU]
+late [Wall BorderUkR BorderRkU no BoUxR]->[Wall BorderUkR BorderRkU BoUxR]
+late [Wall BorderRkD BorderDkR no BoRxD]->[Wall BorderRkD BorderDkR BoRxD]
+late [Wall BorderDkL BorderLkD no BoDxL]->[Wall BorderDkL BorderLkD BoDxL]
+ 
+(Win)
+(---------------------------------------------------)
+(---------------------------------------------------)
+(move on with story, e.g. in starting animation)
+[WinSignal]-> win
+ 
+(win also when all orbs are collected and message)
+[AllOrbs][WinSignal]->[][WinSignal]
+[AllOrbs]->[WinSignal]
+  
+(Perturb game map)
+[WallToRemove3|Wall no StartGame][PostWin]->[WallToRemove3|Wall StartGame][PostWin]
+
+(Removable walls)
+[»][PostWin][@ WallToRemove .] ->[»][PostWin][@ WallToRemove]
+[»][PostWin][@ WallToRemove3 no .]->[»][PostWin][@ no Wall no border no boX no WallOver no LightOver .]
+[»][PostWin][@ WallToRemove2 no .]->[»][PostWin][@ WallToRemove3 .]
+[»][PostWin][@ WallToRemove1 no .]->[»][PostWin][@ WallToRemove2 .]
+
+
+==============
+WINCONDITIONS
+==============
+
+=======     
+LEVELS
+=======
+
+message "Why return to the Gravirinth?"
+message "This time it will be different..."
+
+message Antechamber 1
+message "Baby steps"
+##############################
+##############################
+##############################
+#######....###################
+#######..P.###################
+#######.######################
+####.......###################
+####..###..###################
+###*..#..................#####
+####..o...................*.##
+####..###.###...##..×.......##
+#########.###o..###.××..##..##
+###################o×.OOO...##
+###################o..########
+##############################
+##############################
+##############################
+##############################
+
+message Antechamber 2
+message "Odd gravitic signatures"
+##############################
+##############################
+##############################
+##############################
+##############################
+##########......##############
+#########....ó...#############
+########..........############
+########..........############
+#######*.....§....*###########
+########..........############
+########..........############
+########.P..é...o.############
+##########......##############
+##############################
+##############################
+##############################
+##############################
+##############################
+
+message Antechamber 3
+message "Slide-throw"
+##############################
+##############################
+##############################
+##############################
+#############...##############
+#############...##############
+#############¤.¤##############
+############...*##############
+###########..í.¤##############
+##########..§.....############
+#########í.....¤..############
+#########¤........############
+#########..P..é.##############
+#########o####################
+##############################
+##############################
+##############################
+##############################
+
+message Antechamber 4
+message "Unstable gravity fields"
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##########P....###############
+###########¤.§Oóá#############
+###########¤:a¤¤.#############
+############e¤¤¤.#############
+############.*¤¤é#############
+############18...#############
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+
+
+message Chamber 5
+message "Gateway"
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+###########.........##########
+###########....§..#.##########
+###########.iio...#*##########
+###############...#.##########
+################P...##########
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+
+message Chamber 6
+message "Contrarieties"
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+###########Pó.§.*#############
+############....##############
+############ooá.##############
+############ooá.##############
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+
+message Chamber 7
+message "Petals"
+##############################
+##############################
+##############################
+##############################
+##############################
+############...*##############
+###########.....##############
+##########......##############
+#########*..§...##############
+##########..oa..##############
+##########..ie..##############
+##########P.....##############
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+
+message Chamber 8
+message "Apex"
+##############################
+##############################
+##############################
+##############################
+##############################
+###############*##############
+##############...#############
+#############.....############
+############.§.....###########
+###########io.......##########
+##########..io.P.....#########
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+
+message Chamber 9
+message "Levitate"
+##############################
+##############################
+#############eeó##############
+#############...##############
+#############...##############
+#############...*#############
+############*...##############
+#############...##############
+############....##############
+############.ó..##############
+############...###############
+###########P.§.###############
+############...###############
+############...###############
+############éoo###############
+##############################
+##############################
+##############################
+##############################
+
+message Area 10
+message "Sieve"
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+############..*..#############
+############.....#############
+############..§...############
+############a¤a¤a#############
+############.....#############
+############a#a#a#############
+############.....P############
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+
+message Chamber 11
+message "Infinity"
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+#########...........##########
+#########...oó...ó..##########
+########í.í¤¤¤í¤¤¤..á#########
+#######Pá..¤¤¤§¤¤¤..í*########
+########í..¤¤¤á¤¤¤á.á#########
+#########..é...ée...##########
+#########...........##########
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+
+
+message Chamber 12
+message "You shall not pass"
+##############################
+##############################
+##############################
+##############################
+##############################
+#############P...*############
+##############...#############
+##############...#############
+##############...#############
+##############.§.#############
+##############...#############
+##############oaa#############
+##############eee#############
+##############...#############
+#############.....############
+##############################
+##############################
+##############################
+##############################
+
+message Chamber 13
+message "In circles"
+##############################
+##############################
+##############################
+##############################
+#########...........##########
+#########....ó.ó....##########
+#########.í#í#.#á#á.##########
+########P..é.....ó..##########
+#########.í#.¤¤¤.#..##########
+#########..ói¤£¤.é..##########
+#########..#.¤¤¤.#á.##########
+#########..é.....ó..*#########
+#########.í#í#.#á#á.##########
+#########....é.é....##########
+#########...........##########
+##############################
+##############################
+##############################
+##############################
+
+message Chamber 14
+message "Hourglass"
+##############################
+##############################
+#############.o.##############
+#############.e.##############
+#############.e.##############
+#############¤§¤##############
+############.....#############
+############...óá#############
+############...á.#############
+###########*.é...#############
+###########*/ó///#############
+############...á.#############
+############...éá#############
+############P....#############
+#############¤§¤##############
+#############.o.##############
+#############.o.##############
+#############.e.##############
+##############################
+##############################
+
+message Chamber 15
+message "Orthogonal"
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+############꙳aa.##############
+############e...##############
+############e.ó###############
+############49£..P############
+#############...##############
+##############á###############
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+
+message Chamber 16
+message "Vortex"
+##############################
+##############################
+##############################
+##############################
+#########×..e.....ó###########
+#########í..ó.......##########
+#########......ó....##########
+#########.........á.##########
+#########..í........##########
+#########.....⋆.....##########
+#########........á..##########
+#########.í.........##########
+#########....é......##########
+#########.......é..á##########
+##########é.....P..###########
+##############################
+##############################
+##############################
+##############################
+
+message Chamber 17
+message "Alternate ways"
+##############################
+##############################
+##############################
+##############################
+##############################
+###############.##############
+############ó.....############
+############í......###########
+############é...⋆..###########
+############é......P##########
+#############a.....###########
+#############.o....###########
+###############ííéá###########
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+
+message Chamber 18
+message "Zigzags"
+##############################
+##############################
+##############################
+##############################
+##############################
+##############*###############
+#######P.............#########
+########.....ó.....ó.#########
+########..áí....áí...#########
+########......§93....#########
+########íé..á.íé..á.í#########
+########.íé....íé....#########
+########.............#########
+########o....o....o..#########
+##############################
+##############################
+##############################
+##############################
+##############################
+
+message Chamber 19
+message "Caroussel"
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+############.....o.###########
+############i#ííí#.###########
+############.é...ó.###########
+############.é.⋆.ó.###########
+############.é...ó.###########
+############.#ááá#a###########
+############.e.P...###########
+##############################
+##############################
+##############################
+##############################
+##############################
+
+
+message Chamber 20
+message "Deep dive"
+##############################
+##############################
+##############################
+########......e......#########
+########.............#########
+########ó.ó.......ó.ó#########
+########í.á.......í.á#########
+########.ó....P....ó.#########
+########...ó..§..ó...#########
+########í.....é.....á#########
+########.éí...o...áé.#########
+########.á....¤....í.#########
+#######í//////ó//////á########
+#######*.....é£é.....*########
+#########¤...á*í...###########
+##########é.......é###########
+##############################
+##############################
+##############################
+
+message Chamber 21
+message "Platforms, doors and elevators"
+##############################
+##############################
+######...#####.../......######
+#####..*..###..¤¤#¤¤*...######
+#####.¤¤¤.....¤¤¤*¤¤¤#o§######
+######¤¤¤¤.§.¤¤¤¤.¤¤¤¤¤.######
+######¤¤¤¤...¤¤¤¤...¤¤¤.######
+########¤.....¤¤¤.../...######
+#######P....../.....##.i######
+#########.....###.§.###e######
+##########ioa####...##########
+################io..oa########
+#################e..o#########
+#################e¤¤o#########
+#################eaaa#########
+####################.#########
+####################.#########
+####################.#########
+##############################
+##############################
+
+
+message Chamber 22
+message "Double twist"
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##########*...ó.##############
+############¤í¤á##############
+###########.ó.o.ó.############
+###########í¤£:¤¤á############
+###########.é.e.é.############
+#############í¤á¤#############
+#############.é48‡P###########
+##############################
+##############################
+##############################
+##############################
+##############################
+
+
+
+message Chamber 23
+message "Brakes"
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##########áé.ioa....##########
+##########.¤¤¤¤¤....##########
+##########.é.iea....##########
+##########.¤¤¤¤£....##########
+##########.é.iea....##########
+##########P¤¤¤¤¤....*#########
+##############################
+##############################
+##############################
+##############################
+##############################
+
+message Chamber 24
+message "Clockwork"
+##############################
+##############################
+##############################
+##############################
+##############íoó#############
+##############.¤.#############
+#########...¤¤.....ó##########
+#########*..í..£¤.¤a##########
+############i¤.¤¤..á...#######
+############é.....¤¤..P#######
+###############.¤.############
+###############éeá############
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+
+
+
+message Chamber 25
+message "Unplugged"
+##############################
+##############################
+##############################
+##############################
+##############################
+########.*.###################
+########¤.¤###################
+########io....ó..óá###########
+########¤:¤¤£¤¤¤¤..###########
+########.e..ioa.¤.é###########
+########¤¤...¤..¤.P###########
+########....iea...¤###########
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+
+
+message Chamber 26
+message "Opposites"
+##############################
+##############################
+##############################
+################Pí############
+###############..#############
+###############o##############
+##############.eo#############
+############....e.############
+############*#...#############
+###############§##############
+##############.ia#############
+#############...ia############
+##############...#############
+###############.##############
+##############################
+##############################
+##############################
+##############################
+##############################
+
+
+message Chamber 27
+message "Precisely"
+##############################
+##############################
+##############################
+######...#####################
+######.*............##########
+######...............#########
+######......P¤aaa....#########
+######......oo.......#########
+#########..¤¤£¤¤¤¤...#########
+#########............#########
+#########............#########
+#########............#########
+#########............#########
+##############################
+##############################
+##############################
+##############################
+##############################
+##############################
+
+
+
+message Chamber 28
+message "Gravirinth Core"
+#####################################
+#####################################
+#####################################
+#####################################
+#####################################
+#####################################
+#####################################
+#####################################
+#####################################
+###########/...........P./###########
+###########í/.....§...ó#/.###########
+###########..##.......###.###########
+###########..###....o###..###########
+###########...#×××.×××#í..###########
+###########..19×*#ò#*×a..á###########
+###########....×#####×....###########
+###########.§...ì###à...§.###########
+###########...i×#####×....###########
+###########....×*#è#*×....###########
+###########..í#×××.×××#...###########
+###########..###e....###..###########
+###########.###.......###.###########
+###########./#é...§....#/.###########
+###########/............./###########
+#####################################
+#####################################
+#####################################
+#####################################
+#####################################
+#####################################
+#####################################
+#####################################
+#####################################
+
+message -_-_-_- Congratulations! -_-_-_-
+message For unlocking the mysteries of...
+message -_-_-_-_-_  Gravirinth  _-_-_-_-_-                                  -_-_ by Pedro PSI (2018-2020) _-_-
+message - Music (CC-BY) by: Stellardrone -                            ---  Eternity  ------------------- ---  Comet Halley  --------------- ---  Billions and billions  ------ ---  Twilight  ------------------- ---  Between the Rings  ----------
+`

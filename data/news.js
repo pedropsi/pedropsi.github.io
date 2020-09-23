@@ -259,8 +259,8 @@ N_24:{
 DATE:`2020-01-24`,
 HEADER:()=>`Gravirinth major update`,
 PIECE:()=>`
-<p>${AHTML("gravirinth")} now runs much faster thanks to ${v.A_LANCE_PS_FORK()}.</p>
-`,ID:"gravirinth"},
+<p>${AHTML("gravirinth-legacy")} now runs much faster thanks to ${v.A_LANCE_PS_FORK()}.</p>
+`,ID:"gravirinth-legacy"},
 N_22:{
 DATE:`2020-01-12`,
 HEADER:()=>`Database Search + submission options`,

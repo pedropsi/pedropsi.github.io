@@ -4,7 +4,7 @@ HearOnce('load',ServiceWorker);
 ///////////////////////////////////////////////////////////////////////////////
 //Find the Modules
 
-function JLRequire(){return (PageIdentifier()==="gravirinth")?"-JL":"";};
+function JLRequire(){return (PageIdentifier()==="gravirinth-legacy")?"-JL":"";};
 var CoreModules=[
 		//Puzzlescript modules
 		"globalVariables",
