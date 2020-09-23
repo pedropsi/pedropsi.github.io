@@ -2027,7 +2027,7 @@ QueryAll=function(selector){
 }
 
 Match=function(node,selector){
-	return node.matches(QuerySelector(selector));
+	return node.matches&&node.matches(QuerySelector(selector));
 }
 
 Matcher=function(selector){
@@ -2146,7 +2146,7 @@ FirstParentElement=function(targetIDsel){
 		return e.parentElement;
 }
 
-// Get Parent Element matching particular sleector
+// Get Parent Element matching particular selector
 
 FirstMatchingElement=function(type,targetE,priorIDselString){
 	var e=GetElement(targetE);
