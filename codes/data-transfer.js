@@ -5765,21 +5765,25 @@ var TypeSwipeKeys={
 ///////////////////////////////////////////////////////////////////////////////
 //Dynamic text
 
-Hypertexts={};
-
-Hypertext=function(name,text){
-	if(typeof text==="undefined"){
-		if(typeof Hypertexts[name]==="undefined"){
-			ListenOnce("hypertext-"+name,function(){ReplaceElement(Hypertexts[name],id)});
-			var id=GenerateId();
-			return `<span class="hypertext" id="${id}" data="${name}">Loading <em>${name}</em>...</span>`;
-		}else
-			return Hypertexts[name];
+HyperText=function(name,value){
+	if(value){
+		HyperText[name]=value;
+		return Shout("hypertext-"+name);
+	}
+	if(globalThis[name]){
+		var text=globalThis[name]();
+		return text;
 	}
 	else{
-		Hypertexts[name]=text;
-		Shout("hypertext-"+name);
-		return text;
+		if(!HyperText[name]){
+			LoadSource("data/hypertext/"+name+".js");
+			HyperText[name]=true;
+		}
+		var id=GenerateId();
+			function ReplaceHT(){
+				ReplaceElement(HyperText[name](),id);}
+			HearOnce("hypertext-"+name,ReplaceHT);
+			return `<span class="hypertext" id="${id}" data="${name}">Loading <em>${name}</em>...</span>`;
 	}
 }
 
