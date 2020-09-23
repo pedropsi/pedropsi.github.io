@@ -235,7 +235,8 @@ function RequestPrevHint(){
 	setTimeout(RequestHint,500);	
 }
 
-
+if(typeof IsScreenMessage==="undefined")
+	var IsScreenMessage=False;
 
 function RequestHint(){
 	if(!Hints())
