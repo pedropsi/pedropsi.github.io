@@ -2401,7 +2401,8 @@ AddShareSearch=function(patterntxt,elementSelector){
 
 	var shareLink=PageUnSearch()+"?search="+patterntxt+tableid;
 	RemoveElement(PosteriorElement(elementSelector,".share-link"));
-	AppendElement("<div class='share-link'><b>Share this search:</b>"+AHTML(shareLink,shareLink)+"</div>",elementSelector);
+	if(patterntxt)
+		AppendElement("<div class='share-link'><b>Share this search:</b>"+AHTML(shareLink,shareLink)+"</div>",elementSelector);
 }
 
 // Recognise filter table
