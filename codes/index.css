@@ -1574,6 +1574,7 @@ kbd{
 	background-color: var(--lightyellow);
 	display: inline-block;
 	min-width: calc(var(--w2) + var(--h2));
+	min-height:calc(var(--w2) + var(--h2));
 	text-align: center;
 	text-indent: 0;
 }
