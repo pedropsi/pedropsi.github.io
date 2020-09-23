@@ -3519,7 +3519,8 @@ ClosePreviousDatapacks=function(ConditionF){
 
 SubmitCurrentDatapack=function(){
 	var DP=CurrentDatapack();
-	DP.action(DP.qid);
+	if(DP)
+		DP.action(DP.qid);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
