@@ -364,22 +364,6 @@ TRAILER_LAUNCHER			:	()=>	`<img class="card" onclick='OpenVideoModal("${v.TRAILE
 
 REDACTED					:	()=>	`<s>Redacted</s> `,
 
-TH							:	()=>	`<th scope="col">`,
-
-GAME_TABLE_ITEM				:	()=>	`<tr><td><a href="${v.GAME_LINK()}" ${v.BLANK()}>${v.TITLE()}</a> ${v.GAME_LINK_PS()}</td><td>${v.Author()}</td><td>${v.YEAR()}</td><td>${v.TAGS()}</td></tr>`,
-GAME_TABLE_HEAD				:	()=>	`<thead><tr>${v.TH()}Title</th>${v.TH()}Author</th>${v.TH()}Year</th>${v.TH()}Tags</th></tr></thead>`,
-GAME_LIST					:	()=>	`<table class="top-left"><caption>${v.NAME()}'s selected puzzlescript games</caption>${v.GAME_TABLE_HEAD()}${v.GAME_TABLE_BODY()}</table>`,
-			
-MOD_TABLE_ITEM				:	()=>	`<tr><td><a href="${v.GAME_LINK()}" ${v.BLANK()}>${v.TITLE()}</a></td><td>${v.Author()}</td><td>${v.YEAR()}</td><td>${v.USE()}</td></tr>`,
-			
-MOD_TABLE_HEAD				:	()=>	`<thead><tr>${v.TH()}Title</th>${v.TH()}Author</th>${v.TH()}Year</th>${v.TH()}Usage</th></tr></thead>`,
-MOD_LIST					:	()=>	`<table class="top-left"><caption>Useful puzzlescript mods and forks</caption>${v.MOD_TABLE_HEAD()}${v.MOD_TABLE_BODY()}</table>`,
-			
-TOOL_TABLE_ITEM				:	()=>	`<tr><td><a href="${v.TOOL_LINK()}" ${v.BLANK()}>${v.TITLE()}</a></td><td>${v.Author()}</td><td>${v.YEAR()}</td><td>${v.USE()}</td><td>${v.TAGS()}</td></tr>`,
-			
-TOOL_TABLE_HEAD				:	()=>	`<thead><tr>${v.TH()}Title</th>${v.TH()}Author</th>${v.TH()}Year</th>${v.TH()}Usage</th>${v.TH()}Tags</th></tr></thead>`,
-TOOL_LIST					:	()=>	`<table class="top-left"><caption>Useful puzzlescript tools</caption>${v.TOOL_TABLE_HEAD()}${v.TOOL_TABLE_BODY()}</table>`,
-
 
 MANIFEST					:	()=>"",
 PWA_MANIFEST				:	()=>	`<link rel="manifest" id="manifest" href='data:application/manifest+json,${v.PWA_MANIFEST_CONTENT()}'/>`,
