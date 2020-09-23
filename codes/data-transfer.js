@@ -1674,6 +1674,15 @@ GenerateId=function(){
 ////////////////////////////////////////////////////////////////////////////////
 //Load resources
 
+
+SourceCoerceExtension=function(src,extensions,defaultext){
+	var defaultext=Prefix(defaultext,".");
+	if(!extensions.some(ex=>Posfixed(src,Prefix(ex,"."))))
+		return Posfix(src,defaultext);
+	else
+		return src;
+}
+
 SourceIdentifier=function(path){
 	return PageIdentifier(UnPosfix(UnPosfix(path,".js"),".css"));
 }
@@ -5021,9 +5030,7 @@ CyclePrevBounded=function(array){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Image
-ImageExtensions=function(){
-	return ["apng","bmp","gif","ico","cur","jpg","jpeg","jfif","pjpeg","pjp","png","svg","tif","tiff","webp"];
-}
+var ImageExtensions=["apng","bmp","gif","ico","cur","jpg","jpeg","jp2","jpx","j2k","j2c","jif","jfif","pjpeg","pjp","png","svg","tif","tiff","webp"];
 
 LoadImage=function(fullpath,parentIDsel){
 
@@ -5045,7 +5052,7 @@ LoadImage=function(fullpath,parentIDsel){
 }
 
 IsImageReference=function(ref){
-	return ImageExtensions().some(function(ext){return Posfixed(ref,"."+ext)});
+	return ImageExtensions.some(function(ext){return Posfixed(ref,Prefix(ext,"."))});
 }
 
 //GIF Pause Support

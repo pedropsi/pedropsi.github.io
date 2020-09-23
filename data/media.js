@@ -1,3 +1,4 @@
+
 Media={
 M_SPLASH:{TYPE:"music",AUTHOR:"Sei Mutsuki",TRACK:"Splash",YEAR:"2016",GENRE:"Chillout",LICENSE:"CC-BY 3.0",AUTHOR_LINK:"https://seimutsuki.bandcamp.com/",MUSIC_LINK:"https://soundcloud.com/sei_peridot/peritunematerial-splashroyalty-free-music",N:"1",CONTEXT_ID:"skilleblokker"},
 M_ICE_CAVE:{TYPE:"music",AUTHOR:"Sei Mutsuki",TRACK:"Ice Cave",YEAR:"2016",GENRE:"Ambient",LICENSE:"CC-BY 3.0",AUTHOR_LINK:"https://seimutsuki.bandcamp.com/",MUSIC_LINK:"https://soundcloud.com/sei_peridot/ice-cave",N:"2",CONTEXT_ID:"skilleblokker"},
@@ -147,17 +148,24 @@ MusicCreditsHTML=function(id){
 ImageCardHTML=function(ImageObj){
 	var id=GenerateId();
 	var src=`images/${ImageObj.FOLDER_SMALL}/${ImageObj.TRACK}`;
+		src=SourceCoerceExtension(src,ImageExtensions,"png");
+
+	var legend=ImageObj.LEGEND?`<div>${ImageObj.LEGEND}</div>`:"";
+
 	LazyImageLoader(id,src);
 
-	return `<a href="${src}" ${v.BLANK()} class="card-supra">
-		<div class="card">
-			<img	alt="${ImageObj.DESCRIPTION}" 
+	return `
+	<a href="${src}" ${v.BLANK()} class="card-supra">
+		<div class="card ${ImageObj.CLA||""}">
+			<img	alt="${ImageObj.ALT||ImageObj.DESCRIPTION}" 
 					title="${ImageObj.DESCRIPTION}"
 					class="image"
 					loading="lazy"
 					id="${id}"	/>
 		</div>
-	</a>`;
+	</a>
+	${legend}`
+	;
 }
 
 
@@ -176,15 +184,23 @@ ScreenshotGalleryHTML=function(id){
 
 
 FolderGalleryHTML=function(folder,names){
-	if(names.length<1)
-		return "";
-
-	var objects=names.map(function(n){
+	function ImageObj(name,Opts){
+		var Opts=Opts||{};
 		return {
+			...Opts,
 			FOLDER_SMALL:folder,
-			DESCRIPTION:n,
-			TRACK:n}
-			})
+			DESCRIPTION:name,
+			TRACK:name};
+	};
+
+	if(IsArray(names)){
+		if(names.length<1)
+			return "";
+		var objects=names.map(ImageObj);
+	}
+	else if(IsObject(names)){
+		var objects=ThreadKeysValues(names,ImageObj);
+	}
 	
 	var gallery=objects.map(ImageCardHTML).join("\n");
 	return `<div class="featured">${gallery}</div>`
