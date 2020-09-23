@@ -7,8 +7,9 @@
 
 ${v.HEADER()}
 
-${v.HOWTO_TEXT()}<p>Your goal is to reproduce on the left-hand side canvas the abstract painting shown on the right-hand-side.</p>
-<p><em>Move</em> with ${ArrowKeysHyperText()}. <em>Stepping towards</em> a coloured square will launch a <em>straight line of colour</em> onto the canvas all the way to the frame.</p>
+${v.HOWTO_TEXT()}
+<p>Your goal is to reproduce on the left-hand side canvas the abstract painting shown on the right-hand-side.</p>
+<p><em>Move</em> with ${HyperText("ArrowKeys")}. <em>Stepping towards</em> a coloured square will launch a <em>straight line of colour</em> onto the canvas all the way up to the frame.</p>
 
 ${v.UNDO_RESTART_TEXT()}
 ${v.GAME_EXTRAS_TEXT()}
@@ -57,10 +58,10 @@ ${v.CREDITS_ENGINE_SUPPORT()}
 <p>Absolutely. Check, for instance, ${v.A_PAISIBLE()} (thanks ${v.CHZ()} for the tip).</p>
 
 <h3> Which criteria guided the choice of artists and artworks?</h3>
-<p> The most important criterion for inclusion was the availability of at least one <b>public domain</b> artwork (per artist) that would broadly fit in the abstract category (e.g. Neoplasticism, Suprematism, Abstract Expressionism...). Critically, each artwork had to make <b>a good puzzle</b>, so those with very complicated details or too many colours were excluded. Also, due to the game mechanic and low resolution, right angles were preferred to obliques, and no curvature could be added. So, for instance, Rothko, Pollock, O'Keefe, Delaunay or Kandinsky couldn't be included.</p>
+<p>The most important criterion for inclusion was the availability of at least one <b>public domain</b> artwork (per artist) that would broadly fit in the abstract category (e.g. Neoplasticism, Suprematism, Abstract Expressionism...). Critically, each artwork had to make <b>a good puzzle</b>, so those with very complicated details or too many colours were excluded. Also, due to the game mechanic and low resolution, right angles were preferred to obliques, and no curvature could be added. So, for instance, Rothko, Pollock, O'Keefe, Delaunay or Kandinsky couldn't be included.</p>
 
-<h3> Why are there differences between the original artwork and its depiction in ${v.TITLE()}?</h3>
-<p> Most differences arise from the low-game resolution and by the limited colour palette (common to all paintings, chosen for simplicity). Canvas size was limited so it wouldn't be tedious to traverse by the player. Also, brush strokes and other tridimensional paint features were not considered.</p>
+<h3>Why are there differences between the original artwork and its depiction in ${v.TITLE()}?</h3>
+<p>Most differences arise from the low-game resolution and by the limited colour palette (common to all paintings, chosen for simplicity). Canvas size was limited so it wouldn't be tedious to traverse by the player. Also, brush strokes and other tridimensional paint features were not considered.</p>
 
 `};</script><script src="data/page.js"></script>
 	</head></html>
