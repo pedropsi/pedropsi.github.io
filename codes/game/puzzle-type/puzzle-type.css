@@ -1,5 +1,6 @@
 .game-supra-container .game-container div,
-.game-supra-container .game-container a{
+.game-supra-container .game-container .button
+{
    --sat1:90%;
    --sat2:90%;
    --sat3:90%;
