@@ -1048,7 +1048,7 @@ tr:active .editTD{
 	border:unset;
 	padding:var(--h2) var(--w2) var(--h2) var(--w2);
 	margin:unset;
-	font-size:300%;
+	font-size:calc( var(--w4) +  var(--h2));
 }
 
 .modal-content input,
@@ -1572,6 +1572,10 @@ kbd{
 	font-family:unset;
 	font-variant:petite-caps;
 	background-color: var(--lightyellow);
+	display: inline-block;
+	min-width: calc(var(--w2) + var(--h2));
+	text-align: center;
+	text-indent: 0;
 }
 
 
