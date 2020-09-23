@@ -1588,7 +1588,7 @@ function RequestMore(){
 
 	RequestDataPack(DPFields,{
 		qonclose:GameFocus,
-		qdisplay:LaunchAvatarBalloon,
+		qdisplay:LaunchBalloon,
 		qtargetid:".game-container",
 		requireConnection:false,
 		shortcutExtras:ObtainKeyActionsGameBar(),

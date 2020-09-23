@@ -3093,7 +3093,7 @@ LaunchThanksBalloon=function(DP){
 	RequestDataPack(
 		[['plain',{questionname:DP.thanksmessage}]],
 		{qtargetid:DP.qtargetid,
-		qdisplay:LaunchAvatarBalloon,
+		qdisplay:LaunchBalloon,
 		requireConnection:false});
 }
 
@@ -3101,9 +3101,6 @@ LaunchBalloon=function(DP){
 	OpenBalloon(QuestionHTML(DP),DP.qid,DP.qtargetid);
 }
 
-LaunchAvatarBalloon=function(DP){
-	OpenBalloon(QuestionHTML(DP),DP.qid,DP.qtargetid,true);
-}
 
 BalloonHTML=function(avatarHTML,content,id,classExtra){
 	var classExtra=classExtra||"";
@@ -5196,6 +5193,7 @@ Accumulate=function(acc,val){return acc+val};
 
 Today=function(){return new Date()};
 
+
 Month=function(date){
 	var date=date||Today();
 	return Number(date.toLocaleDateString().replace(/(\d)*\//,"").replace(/\/(\d)*/,""));
@@ -5292,6 +5290,7 @@ DateName=function(day,month,year){
 	date=DateDate(day,month,year);
 	return DateNamer(date);
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Range, in different order

@@ -613,7 +613,7 @@ RequestGameFeedback=function(){
 	
 	var DPsettingsObj={
 		qtargetid:ParentSelector(gameSelector),
-		qdisplay:LaunchAvatarBalloon,
+		qdisplay:LaunchBalloon,
 		qonsubmit:RecordAndLaunchThanksBalloon,
 		qonclose:FocusAndResetFunction(RequestGameFeedback,GameFocus),
 		shortcutExtras:FuseObjects(ObtainKeyActionsGameBar?ObtainKeyActionsGameBar():{},{"E":CloseFeedback}),

@@ -304,7 +304,7 @@ function RequestHint(){
 		actionvalid:CloseHint,
 		qonsubmit:CloseHint,
 		qonclose:GameFocus,
-		qdisplay:LaunchAvatarBalloon,
+		qdisplay:LaunchBalloon,
 		qtargetid:".game-container",
 		requireConnection:false,
 		shortcutExtras:FuseObjects(ObtainKeyActionsGameBar(),{"H":CloseHint}),
