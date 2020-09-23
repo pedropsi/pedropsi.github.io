@@ -296,7 +296,7 @@ N_20:{
 	DATE:`2019-12-07`,
 	HEADER:()=>`Store opens`,
 	PIECE:()=>`
-<p>The ${v.SITE_NAME()} now has a dedicated ${v.A_STORE()}, featuring pearls such as ${AHTML("puzzle-type")}.${v.L_EXP()}</p>`,
+<p>The ${v.SITE_NAME()} now has a dedicated ${v.A_STORE()}, featuring pearls such as ${AHTML("puzzle-type")}.${LabelHTML("Experimental")}</p>`,
 ID:"store"},
 N_32:{
 	DATE:`2019-12-06`,

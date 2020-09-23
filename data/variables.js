@@ -380,14 +380,6 @@ TOOL_TABLE_ITEM				:	()=>	`<tr><td><a href="${v.TOOL_LINK()}" ${v.BLANK()}>${v.T
 TOOL_TABLE_HEAD				:	()=>	`<thead><tr>${v.TH()}Title</th>${v.TH()}Author</th>${v.TH()}Year</th>${v.TH()}Usage</th>${v.TH()}Tags</th></tr></thead>`,
 TOOL_LIST					:	()=>	`<table class="top-left"><caption>Useful puzzlescript tools</caption>${v.TOOL_TABLE_HEAD()}${v.TOOL_TABLE_BODY()}</table>`,
 
-L_NEW						:	()=>	LabelHTML("New"),
-L_DONE						:	()=>	LabelHTML("Done"),
-L_PART						:	()=>	LabelHTML("Partly"),
-L_PROBLEM					:	()=>	LabelHTML("Problem"),
-L_SLOW						:	()=>	LabelHTML("Slow"),
-L_OK						:	()=>	LabelHTML("OK","Done"),
-L_EXP						:	()=>	LabelHTML("Experimental","Problem"),
-
 
 MANIFEST					:	()=>"",
 PWA_MANIFEST				:	()=>	`<link rel="manifest" id="manifest" href='data:application/manifest+json,${v.PWA_MANIFEST_CONTENT()}'/>`,

@@ -1580,7 +1580,6 @@ kbd{
 
 
 
-
 .label{
 	font-size:65%;
 	border-left:var(--w-2) solid var(--blue);
@@ -1589,6 +1588,7 @@ kbd{
 	padding:var(--h-8) var(--w1) var(--h-8) var(--w1);
 	font-weight:bold;
 	word-break:normal;
+	--sat:90%;
 }
 
 table .label{

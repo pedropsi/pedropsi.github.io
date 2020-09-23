@@ -2583,9 +2583,18 @@ AHTML=function(title,ref,attribs){
 
 
 LabelHTML=function(text,type){
-	var type=type||text||"";
+	var type=type||Labels[type]||text;
 	return "<sup class='label "+type+"'>"+text+"</sup>";
 }
+
+var Labels={
+	"New":"",
+	"Done":"",
+	"Partly":"",
+	"Problem":"",
+	"Experimental":"Problem"
+}
+
 
 ScrollUpHTML=function(){
 	return ButtonHTML({txt:ObtainSymbol("scroll-up"),attributes:{class:"scrollTop",onclick:"window.scrollTo(0,0)"}});
