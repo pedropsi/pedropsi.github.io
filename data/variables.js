@@ -404,11 +404,8 @@ RSS_SVG						:	()=>	`<svg viewBox="0 0 98.918 100" xml:space="preserve"><ellipse
 RSS_CHANNEL_IMAGE			:	()=>	`<image><link>${v.SITE()}</link><title>${v.SITE_NAME()}</title><url>${v.SITE()}/${v.LOGO_PATH()}</url></image>`,
 XML							:	()=>	`<?xml version="1.0" encoding="UTF-8"?>`,
 
-CHANGELOG					:	()=>	ChangelogHTML(),
-SECTION_CHANGELOG			:	()=>	v.CHANGELOG()?v.SECTION_OUT(v.WHITEBOARD_OUT(v.CHANGELOG())):"",
+SECTION_CHANGELOG			:	()=>	ChangelogHTML()?v.SECTION_OUT(v.WHITEBOARD_OUT(ChangelogHTML())):"",
 
-
-BOOKMARKLET_BROWSER_TEXT	:	()=>	`<h3>In Chrome</h3><p><kbd>Drag</kbd> the above bookmarklet link to your bookmarks toolbar.</p><h3>In Firefox</h3><p><kbd>Right click</kbd> on the above bookmarklet link, then select "bookmark this link".</p><h3>If nothing else works</h3><p>Replace the content of an old bookmark with the above link content. Or you could run the bookmarklet js code directly in a game page (it'd still be quicker than manual alternatives).</p>`,
 
 LOZ_SYMBOL_TEXT				:	()=>	`<h3>What is the ${ObtainSymbol("loz")} symbol?</h3><p>When available, links are opened in the ${AHTML("game-console")}, which loads the ${v.A_GAME_BAR()} by default. This is indicated by the ${ObtainSymbol("loz")} symbol. Clicking this symbol directly will, however, direct you to the original ${v.A_PUZZLESCRIPT()} game page!</p><p><b>NB:</b> To add a <em>level selector</em> and <em>fullscreen</em> option  on the fly to other games, just use the ${v.A_BOOKMARKLET()}!</p>`,
 LOZ_SYMBOL					:	()=>	`&loz`,
