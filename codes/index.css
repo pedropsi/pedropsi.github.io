@@ -1430,14 +1430,19 @@ video{
 .announce{
 	background-color:var(--darkblue);
 	background-image:var(--moonbow);
+	margin:var(--h1) 0 var(--h1) 0;
+	padding:var(--h4) 0 var(--h4) 0;
+	width:100%;
+	font-size:120%;
+}
+
+.announce p {
 	font-weight:bold;
 	font-size:120%;
 	color:var(--white);
 	padding:var(--h2) 0 var(--h2) 0;
 	margin:var(--h1) 0 var(--h1) 0;
-	align-items:center;
 	width:100%;
-	margin:var(--h2) 0 var(--h2) 0;
 }
 
 .announce a{
