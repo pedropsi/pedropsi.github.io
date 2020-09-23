@@ -1573,8 +1573,8 @@ kbd{
 	font-variant:petite-caps;
 	background-color: var(--lightyellow);
 	display: inline-block;
-	min-width: calc(var(--w2) + var(--h2));
-	min-height:calc(var(--w2) + var(--h2));
+	min-width: calc(var(--w-2) + var(--h-2));
+	min-height:calc(var(--w-2) + var(--h-2));
 	text-align: center;
 	text-indent: 0;
 }
