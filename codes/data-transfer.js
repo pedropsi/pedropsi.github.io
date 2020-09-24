@@ -5974,33 +5974,49 @@ RefreshSVG=function(svge){// trick to force rerendering
 
 //Chart Elements
 
+ChartGridline=function(opts){
+	return {
+		...opts,
+		scale:1,
+		up:1,
+		down:1,
+		type:"grid"
+	};
+};
+
+ChartTick=function(opts){
+	return {
+		...opts,
+		scale:0.5,
+		up:1/100,
+		down:1/100,
+		type:"tick"
+	};
+}
+
+ChartAxis=function(opts){
+	return {
+		...opts,
+		scale:1,
+		up:0,
+		down:0,
+		type:"axis",
+		minor:1,
+		major:1
+	};
+}
+
+
+AddChartAxis=function(opts,chart){
+	AddChartLine(ChartAxis(opts),chart);
+}
+
 AddChartGridline=function(opts,chart){
-	var opts=opts;
-	opts.scale=1;
-	opts.up=1;
-	opts.down=0;
-	opts.type="grid";
-	AddChartLine(opts,chart);
+	AddChartLine(ChartGridline(opts),chart);
 }
 
 AddChartTick=function(opts,chart){
-	var opts=opts;
-	opts.scale=0.5;
-	opts.up=1/100;
-	opts.down=1/100;
-	opts.type="tick";
-	AddChartLine(opts,chart);
-}
-
-AddChartAxis=function(opts,chart){
-	var opts=opts;
-	opts.scale=1;
-	opts.up=0;
-	opts.down=0;
-	opts.type="axis";
-	opts.minor=1;
-	opts.major=1;
-	AddChartLine(opts,chart);
+	AddChartLine(ChartTick(opts),chart);
 }
 
 AddChartLine=function(opts,chart){
@@ -6138,43 +6154,32 @@ AddChartBars=function(opts,chart){
 	RefreshSVG(chart)
 }
 
-ChartComponents=function(){
-		return ["XGridline","YGridline","XAxis","YAxis","XTick","YTick","XLegend","YLegend","XAxisLegend","YAxisLegend","Bar"];
-}
+var ChartComponents={
+	"XGridline":AddChartGridline,
+	"YGridline":AddChartGridline,
+	"XAxis":AddChartAxis,
+	"YAxis":AddChartAxis,
+	"XTick":AddChartTick,
+	"YTick":AddChartTick,
+	"XLegend":AddChartLegend,
+	"YLegend":AddChartLegend,
+	"XAxisLegend":AddChartAxisLegend,
+	"YAxisLegend":AddChartAxisLegend,
+	"Bar":AddChartBars
+};
 
 AddChartComponent=function(component,opts,chart){
-
-	if(component==="XGridline")
-		return AddChartGridline(opts,chart);
-	if(component==="YGridline")
-		return AddChartGridline(opts,chart);
-	if(component==="XAxis")
-		return AddChartAxis(opts,chart);
-	if(component==="YAxis")
-		return AddChartAxis(opts,chart);
-	if(component==="XTick")
-		return AddChartTick(opts,chart);
-	if(component==="YTick")
-		return AddChartTick(opts,chart);
-	if(component==="Bar")
-		return AddChartBars(opts,chart);
-	if(component==="XLegend")
-		return AddChartLegend(opts,chart);
-	if(component==="YLegend")
-		return AddChartLegend(opts,chart);
-	if(component==="XAxisLegend")
-		return AddChartAxisLegend(opts,chart);
-	if(component==="YAxisLegend")
-		return AddChartAxisLegend(opts,chart);
+	if(!In(ChartComponents,component))
+		return;
+	else
+		return ChartComponents[component](opts,chart);
 }
 
 AddChart=function(opts,target){
 	var cla=opts.cla||"chart";
 	var chart=AddElement(SVGHTML2({cla:cla}),target);
 	
-	ChartComponents().map(function(c){
-		if(opts[c]){AddChartComponent(c,opts[c],Prefix(cla,"."))};
-	});
+	Keys(opts).map(c=>AddChartComponent(c,opts[c],Prefix(cla,".")));
 	
 	chart.viewBox.baseVal.x+=-chart.viewBox.baseVal.width/4;
 	chart.viewBox.baseVal.y+=-chart.viewBox.baseVal.height/4;
