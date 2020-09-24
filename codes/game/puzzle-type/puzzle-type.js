@@ -2619,8 +2619,8 @@ function LevelLoader(){
 		PlaylistAwaken();
 	}
 	else{
-		PlaylistBlock();
 		PlaylistSleep();
+		PlaylistBlock();
 	}
 
 	Kinemate(LevelLoadMacro());
