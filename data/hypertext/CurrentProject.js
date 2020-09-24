@@ -4,5 +4,5 @@ HyperText("CurrentProject",function(){return AHTML(`
 		<p>An inductive typing puzzle for desktop.</p>
 		${ButtonHTML({txt:"Learn more"})}
 	</div>`
-	,"puzzle-type.html",{class:"announce"})
+	,"puzzle-type.html#announce",{class:"announce"})
 })
