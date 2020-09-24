@@ -4315,16 +4315,16 @@ LoadSounds=function(soundtrack,parentElement){
 
 PlaySound=function(src){
 	var s=new Audio(src);
-	PlaylistCrossFade(s.duration*1000,()=>s.play());
+	PlaylistCrossFade((s.duration?s.duration:1)*1000,()=>s.play());
 }
 
 PlaylistCrossFade=function(duration,Play){
 	var song=Playlist(Playlist.current);
 	if(HasSong())
 		Kinemate([
-			PlaylistCrossFadeInAction(song,Play,50),
+			PlaylistCrossFadeInAction(song,Play,duration),
 			{startDelay:duration},
-			PlaylistCrossFadeOutAction(song,50)
+			PlaylistCrossFadeOutAction(song,duration)
 		]);
 	else
 		Play();
@@ -4334,8 +4334,10 @@ PlaylistCrossFadeInAction=function(song,Play,duration){
 	var initialvolume=1;
 	var steps=10;
 	return{
-		interval:duration/steps,
+		interval:Min(100,duration/steps),
 		steps:steps,
+		startDelay:0,
+		endDelay:0,
 		Iterator:function(i){song.volume=(1-i/10)*initialvolume},
 		Ender:function(){song.pause();Play();}
 	}
@@ -4346,7 +4348,7 @@ PlaylistCrossFadeOutAction=function(song,duration){
 	var steps=10;
 	return{
 		Starter:()=>song.play(),
-		interval:duration/steps,
+		interval:Min(100,duration/steps),
 		steps:steps,
 		Iterator:function(i){song.volume=(i/10)*initialvolume},
 		

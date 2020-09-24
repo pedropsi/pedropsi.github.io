@@ -177,6 +177,7 @@ function StartGame(){
 	ObtainLoadGame();
 	InitialiseGameCanvas();
 	ObtainTitleScreenReLoader();
+	PlaylistStartPlay();
 };
 
 
@@ -2612,6 +2613,12 @@ function LevelLoader(){
 	if(!CurLevelTitle()){ //no loaded levels
 		return ObtainTitleScreenReLoader();
 	}
+	console.log(CurLevelTitle())
+	if(CurLevelTitle()!=="Deaf")
+		PlaylistAwaken();
+	else
+		PlaylistSleep();
+
 	Kinemate(LevelLoadMacro());
 	GameFocus();
 }
@@ -2653,6 +2660,9 @@ function CheckWin(){
 	if(win){
 		MarkWonLevel();
 		BestMove(CurLevelTitle(),ObtainWonMoves());
+
+		if(CurLevelTitle()==="Deaf")
+			PlaylistAwaken();
 
 		if(!LevelWinSound()&&!SolvedAllLevels())
 			PlaySound(MediaPath()+"/sound/win"+RandomChoice("123")+".mp3");
