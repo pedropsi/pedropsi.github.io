@@ -184,10 +184,10 @@ ScreenshotGalleryHTML=function(id){
 
 
 FolderGalleryHTML=function(folder,names){
-	function ImageObj(name,Opts){
-		var Opts=Opts||{};
+	function ImageObj(name,opts){
+		var opts=opts||{};
 		return {
-			...Opts,
+			...opts,
 			FOLDER_SMALL:folder,
 			DESCRIPTION:name,
 			TRACK:name};

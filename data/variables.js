@@ -1,9 +1,9 @@
 //Functions
 
-SubscribeHTML=function(Opts){
-	var Opts=Opts||{};
-	var description=Opts.description||`Learn first-hand about ${v.NAME()}'s next project!`
-	var button=Opts.button||v.BUTTON_SUBSCRIBE();
+SubscribeHTML=function(opts){
+	var opts=opts||{};
+	var description=opts.description||`Learn first-hand about ${v.NAME()}'s next project!`
+	var button=opts.button||v.BUTTON_SUBSCRIBE();
 	
 	return `<div class="announce">
 				${description}

@@ -3236,55 +3236,55 @@ function LetterIterator(string){
 	}
 }
 
-function TypingAction(string,Opts){
-	var Opts=Opts||{};
+function TypingAction(string,opts){
+	var opts=opts||{};
 	return {
 		interval:300,
 		startDelay:2000,
-		...Opts,
+		...opts,
 		steps:string.length,
 		Iterator:LetterIterator(string)
 	};
 }
 
-function UnTypingAction(string,Opts){
-	var Opts=Opts||{};
+function UnTypingAction(string,opts){
+	var opts=opts||{};
 	return {
 		interval:200,
 		startDelay:1000,
-		...Opts,
+		...opts,
 		steps:string.length,
 		Iterator:UndoIterator
 	};
 }
 
-function LettersAction(Opts){
-	var Opts=Opts||{};
+function LettersAction(opts){
+	var opts=opts||{};
 	return {
 		interval:100,
-		...Opts,
+		...opts,
 		steps:GetElements("#letters .letter").length
 	};
 }
 
-function MirrorAction(Opts){
-	var Opts=Opts||{};
-		Opts.Iterator=function(i){
+function MirrorAction(opts){
+	var opts=opts||{};
+		opts.Iterator=function(i){
 			var middleletters=GetElements("#letters .letter");
 			var goalletters=GetElements(".goal .letter");
 			Class(middleletters[i],"downwards");
 			Class(goalletters[i],"downwards");
 		};
-	return LettersAction(Opts);
+	return LettersAction(opts);
 }
 
-function BorderlessAction(Opts){
-	var Opts=Opts||{};
-		Opts.interval=50;
-		Opts.Iterator=function(i){
+function BorderlessAction(opts){
+	var opts=opts||{};
+		opts.interval=50;
+		opts.Iterator=function(i){
 			var middleletters=GetElements("#letters .letter");
 			Class(middleletters[i],"borderless")};
-	return LettersAction(Opts);
+	return LettersAction(opts);
 }
 
 //Winning automation
