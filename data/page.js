@@ -99,7 +99,7 @@ PageFeaturesDOM=function(){
 	ListenOnce('offline',MonitorConnection);
 	
 	AddElement(ScrollUpHTML(),".whiteboard");
-	IndexTitles();
+	setTimeout(IndexTitles,5000);
 	HearOnce("IndexTitles",
 		()=>AddTitleIndex(".main .whiteboard")//First whiteboard where main content is
 	)

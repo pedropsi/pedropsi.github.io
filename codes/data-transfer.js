@@ -1566,7 +1566,7 @@ TitleIndexer=function(h){
 IndexSubTitle=function(t,h){
 	t.setAttribute("data-index-depth",h);
 	Class(t,"index-item");
-	t.id=t.id?t.id:KebabCaseString(t.innerText); 
+	t.id=t.id?t.id:KebabCaseString(CapitaliseSentence(t.innerText));
 	TitleSelfLink(t);
 	return t.id;
 }
