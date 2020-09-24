@@ -28,6 +28,7 @@ M_IM_IN_SPACE:{TYPE:"music",AUTHOR:"Tim Beek",TRACK:"I'm in space",AUTHOR_LINK:"
 M_NOWHERE_LAND:{TYPE:"music",AUTHOR:"Kevin MacLeod",TRACK:"Nowhere Land",AUTHOR_LINK:"https://incompetech.com/",N:"1",CONTEXT_ID:"blockworks"},
 M_CHILLVOLUTION:{TYPE:"music",AUTHOR:"Longzijun",TRACK:"Chillvolution",AUTHOR_LINK:"https://longzijun.wordpress.com/",MUSIC_LINK:"https://longzijun.wordpress.com/2012/10/18/chillvolution-new-song-in-background-music-series/",N:"1",CONTEXT_ID:"unlucky-unlock"},
 M_ARPOLOGY_1_FRANTIC_SAX_VERSION:{TYPE:"music",AUTHOR:"Longzijun",TRACK:"Arpology 1, Frantic Sax Version",AUTHOR_LINK:"https://longzijun.wordpress.com/",N:"1",CONTEXT_ID:"tetrastrophe"},
+M_FIRST_SPRING_FOREST:{TYPE:"music",AUTHOR:"Pedro PSI",TRACK:"First Spring Forest",AUTHOR_LINK:"https://pedropsi.github.io/",N:"1",CONTEXT_ID:"puzzle-type"},
 S_gravirinth_screenshot_1:{TYPE:"screenshot",TRACK:"gravirinth-screenshot-1.png",DESCRIPTION:"gravirinth screenshot 1",N:"1",FOLDER_SMALL:"gravirinth",FOLDER_BIG:"gravirinth",CONTEXT_ID:"gravirinth"},
 S_gravirinth_screenshot_2:{TYPE:"screenshot",TRACK:"gravirinth-screenshot-2.png",DESCRIPTION:"gravirinth screenshot 2",N:"2",FOLDER_SMALL:"gravirinth",FOLDER_BIG:"gravirinth",CONTEXT_ID:"gravirinth"},
 S_gravirinth_screenshot_3:{TYPE:"screenshot",TRACK:"gravirinth-screenshot-3.png",DESCRIPTION:"gravirinth screenshot 3",N:"3",FOLDER_SMALL:"gravirinth",FOLDER_BIG:"gravirinth",CONTEXT_ID:"gravirinth"},
