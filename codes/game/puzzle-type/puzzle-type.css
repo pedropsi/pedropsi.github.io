@@ -171,8 +171,10 @@
 }
 
 .keystrokes .icon svg{
-   height: calc(1.5*var(--h1) + 1.5*var(--w1));
-   width: calc( 1.5*var(--h1) + 1.5*var(--w1));
+   min-height: calc(1.5*var(--h1) + 1.5*var(--w1));
+   min-width: calc( 1.5*var(--h1) + 1.5*var(--w1));
+   max-height: calc(1.5*var(--h1) + 1.5*var(--w1));
+   max-width: calc( 1.5*var(--h1) + 1.5*var(--w1));
 }
 
 .middle{
