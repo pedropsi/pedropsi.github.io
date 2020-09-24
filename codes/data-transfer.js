@@ -5773,18 +5773,7 @@ var TypeSwipeKeys={
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//Dynamic text
-
-// HyperText=function(name,value){
-// 	if(value||!In(name,"/"))
-// 		return HyperTextModule(name,value);
-// 	else{
-// 		var module=UnAfterfix(name,"/");
-// 		var name=UnPrefix(name,module+"/");
-// 		HyperTextModule(module);
-// 		return AwaitHypertext(name);
-// 	}
-// }
+//Dynamic text and HyperText 
 
 HyperText=function(name,value){
 	if(value){
