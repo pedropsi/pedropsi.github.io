@@ -412,13 +412,6 @@ MapObject=function(Obj,F){
 	return Obj;
 };
 
-/*function MapKeysValues(Object,F){
-	MapObject(Object,function(v,k,o){
-		delete o[k];
-		o[F(k)]=F(v);
-	});
-	return Object;
-}*/
 
 FilterObject=function(Obj,F){
 	var O={};
