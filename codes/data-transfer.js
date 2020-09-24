@@ -6134,22 +6134,25 @@ AddChartBars=function(opts,chart){
 	
 	for(var i=0;i<yvalues.length;i++){
 		var I=invert?(yvalues.length-i):i;
-		if(horizontal)
-			AddElement(SVGBarHTML({
-				x0:Round(I*widthmax+xspacing,5),
-				x1:Round((I+1)*widthmax-xspacing,5),
-				y0:Round(yview-yvalues[I],5),
-				y1:Round(yview,5),
-				cla:"bar"
-			}),chart)
-		else
-			AddElement(SVGBarHTML({
-				y0:Round(I*widthmax+xspacing,5),
-				y1:Round((I+1)*widthmax-xspacing,5),
-				x0:Round(yview-yvalues[I],5),
-				x1:Round(yview,5),
-				cla:"bar"
-			}),chart)
+		
+		var opts={
+			x0:Round(I*widthmax+xspacing,5),
+			x1:Round((I+1)*widthmax-xspacing,5),
+			y0:Round(yview-yvalues[I],5),
+			y1:Round(yview,5),
+			cla:"bar"
+		}
+
+		if(!horizontal){
+			var mem0=opts.x0;
+				opts.x0=opts.y0;
+				opts.y0=mem0;
+			var mem1=opts.x1;
+				opts.x1=opts.y1;
+				opts.y1=mem1;
+		}
+
+		AddElement(SVGBarHTML(opts),chart)
 	}
 	RefreshSVG(chart)
 }
