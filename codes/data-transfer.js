@@ -4319,14 +4319,14 @@ PlaySound=function(src){
 }
 
 PlaylistCrossFade=function(duration,Play){
-	var song=Playlist(Playlist.current);
-	if(HasSong())
+	if(HasSong()){
+		var song=CurrentSong();
 		Kinemate([
 			PlaylistCrossFadeInAction(song,Play,duration),
 			{startDelay:duration},
 			PlaylistCrossFadeOutAction(song,duration)
 		]);
-	else
+	}else
 		Play();
 }
 
@@ -4404,6 +4404,8 @@ ValidSong=function(song){
 
 
 PlaySong=function(song){
+	if(Playlist.blocked)
+		return;
 	if(ValidSong(song)&&song.paused){
 		song.play();
 		ListenOnce('ended',PlayNextF(song),song);
@@ -4423,6 +4425,8 @@ PauseSong=function(song){
 }
 
 ResumeSong=function(song){
+	if(Playlist.blocked)
+		return;
 	if(ValidSong(song)&&song.paused){
 		song.play();
 		ConsoleAdd("Resumed playing ♫♪♪ "+SongTitle(song));
@@ -4479,6 +4483,8 @@ PlaylistSleep=function(){
 }
 
 PlaylistAwaken=function(){
+	if(Playlist.blocked)
+		return;
 	if(Playlist.sleep){
 		Playlist.sleep=false;
 		ResumeSong(CurrentSong());
@@ -4486,6 +4492,13 @@ PlaylistAwaken=function(){
 	}
 }
 
+PlaylistBlock=function(){
+	Playlist.blocked=true;
+}
+
+PlaylistUnBlock=function(){
+	Playlist.blocked=false;
+}
 
 
 
