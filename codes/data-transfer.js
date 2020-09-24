@@ -4315,36 +4315,39 @@ LoadSounds=function(soundtrack,parentElement){
 
 PlaySound=function(src){
 	var s=new Audio(src);
-		s.pause();
-	if(HasSong()){
-		var song=Playlist(Playlist.current);
-		Kinemate([
-			PlaylistLowerVolumeAction(song,s),
-			{startDelay:s.duration*1000*2},
-			PlaylistUpperVolumeAction(song)
-		]);
-	}
-	else
-		s.play();
-	return;
+	PlaylistCrossFade(s.duration*1000,()=>s.play());
 }
 
-PlaylistLowerVolumeAction=function(song,interruptSong){
-	var initialvolume=song.volume||1;
+PlaylistCrossFade=function(duration,Play){
+	var song=Playlist(Playlist.current);
+	if(HasSong())
+		Kinemate([
+			PlaylistCrossFadeInAction(song,Play,50),
+			{startDelay:duration},
+			PlaylistCrossFadeOutAction(song,50)
+		]);
+	else
+		Play();
+}
+
+PlaylistCrossFadeInAction=function(song,Play,duration){
+	var initialvolume=1;
+	var steps=10;
 	return{
-		interval:100,
-		steps:10,
+		interval:duration/steps,
+		steps:steps,
 		Iterator:function(i){song.volume=(1-i/10)*initialvolume},
-		Ender:function(){song.pause();interruptSong.play();}
+		Ender:function(){song.pause();Play();}
 	}
 };
 
-PlaylistUpperVolumeAction=function(song){
-	var initialvolume=song.volume||1;
+PlaylistCrossFadeOutAction=function(song,duration){
+	var initialvolume=1;
+	var steps=10;
 	return{
 		Starter:()=>song.play(),
-		interval:100,
-		steps:10,
+		interval:duration/steps,
+		steps:steps,
 		Iterator:function(i){song.volume=(i/10)*initialvolume},
 		
 	}
