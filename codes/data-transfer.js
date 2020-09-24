@@ -1622,10 +1622,10 @@ TitleSelfLink=function(t){
 	t.innerHTML=HeaderAHTML(title);
 }
 
-HeaderAHTML=function(title,page,Opts){
+HeaderAHTML=function(title,page,opts){
 	var page=PageUnFragment(page);
 	var fragment=KebabCaseString(CapitaliseSentence(title));
-	return AHTML(title,page+"#"+fragment,Opts);
+	return AHTML(title,page+"#"+fragment,opts);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2502,23 +2502,23 @@ FigureHTML=function(source,caption){
 			</figure>`;
 }
 
-SVGHTML=function(Opts){
-	var path=IsString(Opts)?Opts:(Opts.path||"M 10 10 L 20 10 L 10 20 Z");
+SVGHTML=function(opts){
+	var path=IsString(opts)?opts:(opts.path||"M 10 10 L 20 10 L 10 20 Z");
 	
-	var name=Opts.name||"unnamed";
+	var name=opts.name||"unnamed";
 
-	var height=Opts.height||Opts.width||"20";
-	var width=Opts.width||Opts.height||"20";
+	var height=opts.height||opts.width||"20";
+	var width=opts.width||opts.height||"20";
 
-	var vbmin=Opts.vbmin||SVGPathViewboxMin(path)||`0 0`;
-	var vbmax=Opts.vbmax||SVGPathViewboxMax(path)||`400 400`;
+	var vbmin=opts.vbmin||SVGPathViewboxMin(path)||`0 0`;
+	var vbmax=opts.vbmax||SVGPathViewboxMax(path)||`400 400`;
 
-	var viewbox=Opts.viewbox||`${vbmin} ${vbmax}`;
+	var viewbox=opts.viewbox||`${vbmin} ${vbmax}`;
 
-	var cla=Opts.cla||"";
+	var cla=opts.cla||"";
 
-	if(Opts.transform)
-		path=SVGPathTransform(path,Opts.transform,viewbox);
+	if(opts.transform)
+		path=SVGPathTransform(path,opts.transform,viewbox);
 
 	var svghtml=`
 		<svg class='iconpath icon-${name} ${cla}' width='${width}' height='${height}' viewBox='${viewbox}'>
@@ -2527,8 +2527,8 @@ SVGHTML=function(Opts){
 	return svghtml;
 }
 
-IconHTML=function(Opts){
-	return SpanHTML(SVGHTML(Opts),"icon");
+IconHTML=function(opts){
+	return SpanHTML(SVGHTML(opts),"icon");
 }
 
 SpanHTML=function(html,clas){
@@ -5758,10 +5758,10 @@ var KeyExplanations={
 }
 
 
-KB=function(string,Opts){
-	var Opts=Opts||{};
+KB=function(string,opts){
+	var opts=opts||{};
 	var options=DictionaryAccesser(TypeSwipeKeys,EnArray)(string);
-	return Enumerate(options.map(o=>KBDHTML(o,Opts)),"or");
+	return Enumerate(options.map(o=>KBDHTML(o,opts)),"or");
 }
 
 var TypeSwipeKeys={
@@ -5861,23 +5861,23 @@ StatusReporter=function(name,DefaultStatusReporter){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Patterns
-function WallpaperHTML(Opts){
-	if(IsString(Opts)){
-		var w=Wallpaper(Opts);
-		w?Opts=w:{path:Opts}
+function WallpaperHTML(opts){
+	if(IsString(opts)){
+		var w=Wallpaper(opts);
+		w?opts=w:{path:opts}
 	}
 	
-	var path=Opts.path||"M 0 0 L 100 0 L 100 100 Z";
+	var path=opts.path||"M 0 0 L 100 0 L 100 100 Z";
 
-	var name=Opts.name||GenerateId();
-	var cla=Opts.class?Opts.class:"";
+	var name=opts.name||GenerateId();
+	var cla=opts.class?opts.class:"";
 
-	var height=Opts.height||Opts.width||"100";
-	var width=Opts.width||Opts.height||"100";
+	var height=opts.height||opts.width||"100";
+	var width=opts.width||opts.height||"100";
 
-	var viewbox=Opts.viewbox||`0 0 ${width} ${height}`;
+	var viewbox=opts.viewbox||`0 0 ${width} ${height}`;
 	
-	var scale=Opts.scale||1;
+	var scale=opts.scale||1;
 
 	return `<svg class='wallpaper ${cla}' width="100%" height="100%">
 				<pattern id="${name}" x="0" y="0" width="${width*scale}" height="${height*scale}" patternUnits="userSpaceOnUse" viewBox="${viewbox}"> 
@@ -6235,7 +6235,7 @@ TriggerImageLoad=function(id,src){
 ///////////////////////////////////////////////////////////////////////////////
 //Mutation Observer
 
-Observe=function(selector,Look,Opts,name){
+Observe=function(selector,Look,opts,name){
 	var e=GetElement(selector)
 	if(!selector||!e)
 		return;
@@ -6244,12 +6244,12 @@ Observe=function(selector,Look,Opts,name){
 
 	var name=name||(selector+FunctionName(Look));
 
-	var Opts=Opts||{};
-		Opts={attributes: true, childList: true, subtree: true, ...Opts};
+	var opts=opts||{};
+		opts={attributes: true, childList: true, subtree: true, ...opts};
 
 
 	var Observant = new MutationObserver(Look);
-	Observant.observe(e,Opts);
+	Observant.observe(e,opts);
 	
 	if(!Observe.list) //registration
 		Observe.list={};
@@ -6271,14 +6271,14 @@ UnObserve=function(name){
 
 }
 
-ObserveOnce=function(selector,Look,Opts){
+ObserveOnce=function(selector,Look,opts){
 	var Look=Look||console.log;
 	var name=GenerateId();
 	function See(...args){
 		UnObserve(name);
 		Look(...args);
 	}
-	return Observe(selector,See,Opts,name)
+	return Observe(selector,See,opts,name)
 }
 
 UponMutator=function(ObserveF){
