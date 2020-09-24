@@ -2614,10 +2614,14 @@ function LevelLoader(){
 		return ObtainTitleScreenReLoader();
 	}
 	console.log(CurLevelTitle())
-	if(CurLevelTitle()!=="Deaf")
+	if(CurLevelTitle()!=="Deaf"){
+		PlaylistUnBlock();
 		PlaylistAwaken();
-	else
+	}
+	else{
+		PlaylistBlock();
 		PlaylistSleep();
+	}
 
 	Kinemate(LevelLoadMacro());
 	GameFocus();
