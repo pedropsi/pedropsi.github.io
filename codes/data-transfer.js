@@ -5799,10 +5799,28 @@ HyperText=function(name,value){
 
 DynamicTextHTML=function(label,text){
 	var label=Prefix(label,"dynamic-");
+	var placeholder="";//"[------updating...---]"
 	return `<span class="${label}">
-					${text||"[------updating...---]"}
+				${text||placeholder}
 			</span>`;
 }
+
+AwaitText=function(label,text){
+	if(!label||NodejsDetected())
+		return;
+	var label=Prefix(label,"dynamic-");
+	if(!text){
+		RemoveElements("."+label);
+		return DynamicTextHTML(label);
+	}
+	else
+		ReplaceElement(text,"."+label);
+}
+
+UpdateHyperText=function(name){
+	AwaitText(name,HyperText(name));
+}
+
 
 DynamicText=function(label,text){
 	if(!label||NodejsDetected())
@@ -6134,7 +6152,6 @@ AddChartBars=function(opts,chart){
 	
 	for(var i=0;i<yvalues.length;i++){
 		var I=invert?(yvalues.length-i):i;
-		
 		var opts={
 			x0:Round(I*widthmax+xspacing,5),
 			x1:Round((I+1)*widthmax-xspacing,5),
@@ -6142,7 +6159,6 @@ AddChartBars=function(opts,chart){
 			y1:Round(yview,5),
 			cla:"bar"
 		}
-
 		if(!horizontal){
 			var mem0=opts.x0;
 				opts.x0=opts.y0;
@@ -6151,10 +6167,9 @@ AddChartBars=function(opts,chart){
 				opts.x1=opts.y1;
 				opts.y1=mem1;
 		}
-
 		AddElement(SVGBarHTML(opts),chart)
 	}
-	RefreshSVG(chart)
+	RefreshSVG(chart);
 }
 
 var ChartComponents={
