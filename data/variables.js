@@ -299,18 +299,8 @@ HEADER						:	()=>	`<header>${v.ABOUT_TEXT()}${v.ONE_LINER()}</header>`,
 
 ABOUT_TEXT					:	()=>	`<h2>About ${v.TITLE_BOLD()}</h2>`,
 HOWTO_TEXT					:	()=>	`${v.FIGURE_SIMPLE()}<h2>How to play</h2><h3>Controls - keyboard</h3>`,
-GAME_EXTRAS_TEXT			:	()=>	`${v.NAVIGATION_TEXT()}${v.FULLSCREEN_TEXT()}${v.FEEDBACK_TEXT()}${v.COMMUNITY()}`,
-GAME_EXTRAS_HINTS_TEXT		:	()=>	`${v.NAVIGATION_TEXT()}${v.FULLSCREEN_TEXT()}${v.HINTS_TEXT()}${v.FEEDBACK_TEXT()}${v.COMMUNITY()}`,
-NAVIGATION_TEXT				:	()=>	`<h3>Level navigation</h3><p>Press ${v.LEVEL_KEY()} or <kbd>Level X/Y</kbd> or <kbd>Level selector</kbd> in the game bar to navigate freely ${v.NAVOPTION()}.</p><p>Type the level number directly with ${v.NUM_KEYS()}, press (${KB("shift")})${KB("tab")} or ${KB("left")}/${KB("right")} to <em>cycle through levels</em>, <kbd>Enter</kbd> or <kbd>Click</kbd> to <em>confirm</em>, <kbd>Esc</kbd> or ${v.LEVEL_KEY()} to <em>cancel</em>.</p>`,
-NAVIGATION_TEXT_FREE		:	()=>	`between all levels.`,
-NAVIGATION_TEXT_CHECKPOINT	:	()=>	` to previous checkpoints, or return to the most recent one. Please be aware that saving after going to a past checkpoint will erase your most recent checkpoint saves.`,
-UNDO_TOUCH_TEXT				:	()=>	`<em>undo</em>, `,
-UNDO_RESTART_TEXT			:	()=>	`<p>${v.UNDO_TEXT()} ${v.RESTART_TEXT()}</p>`,
-RESTART_TEXT				:	()=>	`Press ${v.RESTART_KEY()} or ${KB("restart")} to restart the level.`,
-UNDO_TEXT					:	()=>	`Press ${v.UNDO_KEY()} or ${KB("undo")} to undo a move.`,
-FEEDBACK_TEXT				:	()=>	`<h3>E-mail ${v.NAME()} real-time feedback</h3><p>Press ${v.FEEDBACK_KEY()} or ${KB("feedback")} anytime to e-mail real-time feedback to ${v.NAME()}! Much appreciated!</p>`,
-FULLSCREEN_TEXT				:	()=>	`<h3>Fullscreen</h3><p>Toggle Fullscreen by pressing ${v.FULLSCREEN_KEY()} or ${KB("fullscreen")}.</p>`,
-HINTS_TEXT					:	()=>	`<h3>Hints</h3><p>Request a <em>hint</em> by pressing ${v.HINT_KEY()} or ${KB("hint")}, but use them sparingly to preserve your standing, shall you enter ${v.HOF_SEARCH()}!</p>`,
+
+
 
 NUM_KEYS					:	()=>	Enumerate(Range(0,9).map(String).map(KB),"or"),
 LEFT_KEY					:	()=>	Enumerate(["swipeleft","left","A"].map(KB),"or"),

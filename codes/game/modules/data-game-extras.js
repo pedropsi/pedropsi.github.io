@@ -315,7 +315,7 @@ function UndoButton(){
 	if(!ObtainUndoAllowed())
 		return "";
 	
-	UpdateHyperText("UndoInstructions");
+	UpdateHyperText("InstructionsUndo");
 	return GameBarButtonHTML('undo',{
 		onclick:'UndoAndFocus();',
 		onmousedown:'AutoRepeat(UndoAndFocus,250);',
@@ -344,7 +344,7 @@ function RestartButton(){
 	if(!ObtainRestartAllowed())
 		return "";
 
-	UpdateHyperText("RestartInstructions");
+	UpdateHyperText("InstructionsRestart");
 	return GameBarButtonHTML('restart',{onclick:'ObtainRestart();GameFocus();'});
 }
 

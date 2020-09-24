@@ -5775,6 +5775,17 @@ var TypeSwipeKeys={
 ///////////////////////////////////////////////////////////////////////////////
 //Dynamic text
 
+// HyperText=function(name,value){
+// 	if(value||!In(name,"/"))
+// 		return HyperTextModule(name,value);
+// 	else{
+// 		var module=UnAfterfix(name,"/");
+// 		var name=UnPrefix(name,module+"/");
+// 		HyperTextModule(module);
+// 		return AwaitHypertext(name);
+// 	}
+// }
+
 HyperText=function(name,value){
 	if(value){
 		HyperText[name]=value;
@@ -5789,12 +5800,16 @@ HyperText=function(name,value){
 			LoadSource("data/hypertext/"+name+".js");
 			HyperText[name]=true;
 		}
-		var id=GenerateId();
-			function ReplaceHT(){
-				ReplaceElement(HyperText[name](),id);}
-			HearOnce("hypertext-"+name,ReplaceHT);
-			return `<span class="hypertext" id="${id}" data="${name}">Loading <em>${name}</em>...</span>`;
+		return AwaitHypertext(name);
 	}
+}
+
+AwaitHypertext=function(name){
+	var id=GenerateId();
+	function ReplaceHT(){
+		ReplaceElement(HyperText[name](),id);}
+	HearOnce("hypertext-"+name,ReplaceHT);
+	return `<span class="hypertext" id="${id}" data="${name}">Loading <em>${name}</em>...</span>`;
 }
 
 DynamicTextHTML=function(label,text){

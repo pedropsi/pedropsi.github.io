@@ -1,4 +1,4 @@
-HyperText("LevelSelectorPick",function(){
+HyperText("InstructionsLevelSelectorPick",function(){
 	return `
 		<h4>Picking levels in the selector menu</h4>
 		<h5>Directly</h5>
