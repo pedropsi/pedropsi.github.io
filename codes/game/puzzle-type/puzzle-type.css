@@ -170,6 +170,11 @@
    font-weight: normal;
 }
 
+.keystrokes .icon svg{
+   height: calc(1.5*var(--h1) + 1.5*var(--w1));
+   width: calc( 1.5*var(--h1) + 1.5*var(--w1));
+}
+
 .middle{
    --letterOn:var(--darkblue);
    --letterMid:var(--blue);
