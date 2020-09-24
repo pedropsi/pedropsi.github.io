@@ -4315,9 +4315,40 @@ LoadSounds=function(soundtrack,parentElement){
 
 PlaySound=function(src){
 	var s=new Audio(src);
-	s.play();
+		s.pause();
+	if(HasSong()){
+		var song=Playlist(Playlist.current);
+		Kinemate([
+			PlaylistLowerVolumeAction(song,s),
+			{startDelay:s.duration*1000*2},
+			PlaylistUpperVolumeAction(song)
+		]);
+	}
+	else
+		s.play();
 	return;
 }
+
+PlaylistLowerVolumeAction=function(song,interruptSong){
+	var initialvolume=song.volume||1;
+	return{
+		interval:100,
+		steps:10,
+		Iterator:function(i){song.volume=(1-i/10)*initialvolume},
+		Ender:function(){song.pause();interruptSong.play();}
+	}
+};
+
+PlaylistUpperVolumeAction=function(song){
+	var initialvolume=song.volume||1;
+	return{
+		Starter:()=>song.play(),
+		interval:100,
+		steps:10,
+		Iterator:function(i){song.volume=(i/10)*initialvolume},
+		
+	}
+};
 
 ///////////////////////////////////////////////////////////////////////////////
 //Music Control
