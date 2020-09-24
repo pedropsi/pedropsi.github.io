@@ -4888,7 +4888,7 @@ UnScheduleAll=function(queueName){
 
 
 //Schedule Sequences of Actions
-function SequenceSchedule(Obj){
+SequenceSchedule=function(Obj){
 	
 	var steps=Obj.steps||0;
 	var interval=Obj.interval||500;

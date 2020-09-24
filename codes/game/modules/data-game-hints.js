@@ -77,7 +77,7 @@ function StartHints(hints){
 		Hints.used=hints.map(function(x){return 0}); //will add 1s progressively as used
 
 	ShowButton(HintButton);
-	UpdateHyperText("HintInstructions")
+	UpdateHyperText("InstructionsHints")
 }
 
 
