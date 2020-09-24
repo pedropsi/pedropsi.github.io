@@ -4474,7 +4474,7 @@ PlaylistSleep=function(){
 	if(!Playlist.sleep){
 		Playlist.sleep=true;
 		PauseSong(CurrentSong());
-		Listen("focus", PlaylistAwaken);
+		AttendOnce("focus", PlaylistAwaken);
 	}
 }
 
@@ -4482,7 +4482,7 @@ PlaylistAwaken=function(){
 	if(Playlist.sleep){
 		Playlist.sleep=false;
 		ResumeSong(CurrentSong());
-		window.removeEventListener("focus", PlaylistAwaken);
+		UnAttend("focus");
 	}
 }
 
