@@ -3,5 +3,5 @@ HyperText("Subscribe",function(){return AHTML(`
 		<p>Learn about ${v.NAME()}'s next project!</p>
 		${ButtonHTML({txt:"Subscribe"})}
 	</div>`
-	,"subscribe.html#announce,{class:"announce"})
+	,"subscribe.html#announce",{class:"announce"})
 })
