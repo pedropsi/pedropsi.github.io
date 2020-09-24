@@ -312,17 +312,18 @@ function SaveButton(){
 };
 
 function UndoButton(){
-	if(ObtainUndoAllowed())
-		return GameBarButtonHTML('undo',{
-			onclick:'UndoAndFocus();',
-			onmousedown:'AutoRepeat(UndoAndFocus,250);',
-			ontouchstart:'AutoRepeat(UndoAndFocus,250);',
-			onmouseup:'AutoStop(UndoAndFocus);',
-			ontouchend:'AutoStop(UndoAndFocus);',
-			ontouchcancel:'AutoStop(UndoAndFocus);'
-		})
-	else
+	if(!ObtainUndoAllowed())
 		return "";
+	
+	UpdateHyperText("UndoInstructions");
+	return GameBarButtonHTML('undo',{
+		onclick:'UndoAndFocus();',
+		onmousedown:'AutoRepeat(UndoAndFocus,250);',
+		ontouchstart:'AutoRepeat(UndoAndFocus,250);',
+		onmouseup:'AutoStop(UndoAndFocus);',
+		ontouchend:'AutoStop(UndoAndFocus);',
+		ontouchcancel:'AutoStop(UndoAndFocus);'
+	});
 }
 
 function RedoButton(){
@@ -340,10 +341,11 @@ function RedoButton(){
 }
 
 function RestartButton(){
-	if(ObtainRestartAllowed())
-		return GameBarButtonHTML('restart',{onclick:'ObtainRestart();GameFocus();'});
-	else
+	if(!ObtainRestartAllowed())
 		return "";
+
+	UpdateHyperText("RestartInstructions");
+	return GameBarButtonHTML('restart',{onclick:'ObtainRestart();GameFocus();'});
 }
 
 function FeedbackButton(){
