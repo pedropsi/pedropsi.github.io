@@ -1388,34 +1388,34 @@ video{
 	max-width:100%;
 }
 
-.tutorial>div{
+.alternator{
+	width: 100%;
+	margin:	var(--h1) 0 var(--h1) 0;
+}
+.alternate{
 	flex-direction:row;
 	align-items:center;
-	margin:	var(--h1) var(--w1) var(--h1) var(--w1);
-	padding:	var(--h1) var(--w1) var(--h1) var(--w1);
+	justify-content: space-between;
+	margin:	unset;
+	padding:	var(--h2) var(--w1) var(--h2) var(--w1);
 	height:100%;
 }
-.tutorial>div:nth-child(odd){
+.alternate:nth-child(odd){
 	background-color:var(--smokewhite);
+	flex-direction: row-reverse;
+}
+.alternate:nth-child(odd)::selection{ 
+	background:var(--white);
+	color:var(--blue);
+}
+.alternate p{
+	padding: var(--h1) var(--w1) var(--h1) var(--w1);
+}
+.alternate img{
+	height:calc(var(--w8) + var(--8));
+	width: auto;
 }
 
-.tutorial >div:nth-child(odd) ::-selection{ 
-	background:var(--white);
-	color:var(--blue);
-}
-/*.tutorial >div:nth-child(odd) ::-moz-selection{ 
-	background:var(--white);
-	color:var(--blue);
-}*/
-.tutorial	p{
-	padding:0 var(--w2) 0 var(--w2);
-}
-.tutorial	>div:nth-child(even) img{
-	background-color:var(--white);
-}
-.tutorial img{
-	max-width:85%;
-}
 
 .button-comment{
 	font-size:70%;
