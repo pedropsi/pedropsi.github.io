@@ -129,7 +129,7 @@ function PlayNote(A){
 function PlayBump(){
 	const synth = new Tone.MembraneSynth().toDestination();
 	var note=RandomChoice(["A","B","C","D","E","F","G"])+"1";
-	synth.triggerAttackRelease(note,"8n");
+	PlaylistCrossFade(Tone.Time("8n").toMilliseconds(),()=>synth.triggerAttackRelease(note,"8n"));
 }
 
 function PlayMorse(morsearray){
