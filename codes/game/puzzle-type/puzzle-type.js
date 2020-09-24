@@ -2613,7 +2613,7 @@ function LevelLoader(){
 	if(!CurLevelTitle()){ //no loaded levels
 		return ObtainTitleScreenReLoader();
 	}
-	console.log(CurLevelTitle())
+	
 	if(CurLevelTitle()!=="Deaf"){
 		PlaylistUnBlock();
 		PlaylistAwaken();
