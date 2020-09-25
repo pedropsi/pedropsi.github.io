@@ -1,4 +1,13 @@
 News={
+N_56:{
+		DATE:"2020-09-25",
+		HEADER:()=>"Autumn update",
+		PIECE:()=>`
+		<p>To mark the beginning of Autumn, a new colour theme was applied across the ${v.SITE_NAME()}.</p>
+		<p>${AHTML("puzzle-type")} colours were adjusted, and a tutorial mode added.</p>
+		<p>${AHTML("Gravirinth [mini]","gravirinth.html")} added.</p>
+		<p>Wide refactoring and bugfixes.</p>
+	`,ID:"index"},
 N_55:{
 		DATE:"2020-09-19",
 		HEADER:()=>"Reorderings, bugfix",

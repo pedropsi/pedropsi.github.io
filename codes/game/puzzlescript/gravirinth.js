@@ -3233,7 +3233,7 @@ message "Odd gravitic signatures"
 ##############################
 
 message Antechamber 3
-message "Slide-throw"
+message "Side-throw"
 ##############################
 ##############################
 ##############################
@@ -3277,7 +3277,7 @@ message "Unstable gravity fields"
 
 
 message Chamber 5
-message "Gateway"
+message "Spring bridge"
 ##############################
 ##############################
 ##############################
