@@ -4268,15 +4268,6 @@ ConsoleAddMany=function(messagesArray,consoleID,mClass){
 	ConsoleAddMany[consoleID]=Date.now()+delay;
 }
 
-ConsoleAddOnce=function(messageHTML,wait,duration){
-	if(!ConsoleAddOnce.messages)
-		ConsoleAddOnce.messages=[];
-
-	if(!In(ConsoleAddOnce.messages,messageHTML)){
-		ConsoleAdd(messageHTML,wait,duration)
-		ConsoleAddOnce.messages.push(messageHTML);
-	}
-}
 
 
 //DataPack integration in console
