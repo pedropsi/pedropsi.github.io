@@ -1224,7 +1224,8 @@ function EndGame(){
 		EndGame.ended=true;
 	ClearLevelRecord();
 	UpdateLevelSelectorButton();
-	ObtainPlayEndGameSound();
+	if(typeof ObtainPlayEndGameSound!=="undefined")
+		ObtainPlayEndGameSound();
 	RequestHallOfFame();
 	CurrentScreen(0);//TODO CHECK IF BETTER BEHAVIOUR
 	ObtainTitleScreenReLoader();
