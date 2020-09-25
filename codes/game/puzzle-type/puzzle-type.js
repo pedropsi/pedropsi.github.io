@@ -2613,15 +2613,6 @@ function LevelLoader(){
 	if(!CurLevelTitle()){ //no loaded levels
 		return ObtainTitleScreenReLoader();
 	}
-	
-	if(CurLevelTitle()!=="Deaf"){
-		PlaylistUnBlock();
-		PlaylistAwaken();
-	}
-	else{
-		PlaylistSleep();
-		PlaylistBlock();
-	}
 
 	Kinemate(LevelLoadMacro());
 	GameFocus();
@@ -2829,6 +2820,17 @@ function LevelLoadMacro(){
 		}},
 		...LevelTopInMacro(),
 		{Starter:TransitionLettersIn,endDelay:200},
+		{Starter:function(){
+				if(CurLevelTitle()!=="Deaf"){
+					PlaylistUnBlock();
+					PlaylistAwaken();
+				}
+				else{
+					PlaylistSleep();
+					PlaylistBlock();
+				}
+			}
+		},
 		{Starter:function(){
 			UnLaunchTouchActions(gameSelector,TouchActionsTitlescreen());
 			LaunchTouchActions(".top",TouchActionsTop());
