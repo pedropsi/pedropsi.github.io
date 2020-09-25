@@ -459,6 +459,7 @@
 }*/
 
 /*Tutorial mode*/
+
 .tutor.top{
    background-color: var(--darkblue);
    filter: brightness(1.2);
@@ -549,4 +550,17 @@
 .middle svg.grid-mini{
 	fill: var(--turquoise);
    stroke: var(--blue);
+}
+
+
+.tippy-box {
+   background-color: var(--darkblue);
+   border-radius: unset;
+   border-bottom: var(--h-2) solid var(--highlight);
+}
+
+.tippy-box .tippy-content{
+   color:var(--highlight);
+   font-size: calc( var(--w2) + var(--h2));
+   font-family: Arial;   
 }

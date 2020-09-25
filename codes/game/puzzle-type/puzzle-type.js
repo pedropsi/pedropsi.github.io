@@ -167,7 +167,7 @@ function MediaPath(){return "media/puzzle-type"};
 LoadStyle(ModulesPath()+"/puzzle-type.css");
 LoadSources(gameModulesEarly,P()?()=>GameIntro(StartGame):GameTrailer);
 gameModulesLater.map(LoaderInFolder(ModulesPath()+"/modules"));
-LoaderInFolder("codes/libraries")("tone.js");
+["tone.js","tippy.js"].map(LoaderInFolder("codes/libraries"));
 LoaderInFolder("codes/game/puzzle-type")(".solutions.js");
 
 
@@ -3498,10 +3498,18 @@ function OnboardMacro(){
 
 function Highlighter(selector,text){
 	return function(){
-		var selectors=EnArray(selector);
+		if(Highlighter.last)
+			Highlighter.last[0].hide();
+
 		UnClass(".highlight","highlight");
-		selectors.map(s=>Class(s,"highlight"));
-		ConsoleAdd(text);
+		Class(selector,"highlight");
+
+		Highlighter.last=tippy(selector,{
+			content:text,
+			placement:"top",
+			showOnCreate: true,
+			arrow: false
+		})
+		//ConsoleAdd(text,undefined,undefined,undefined,undefined,"tutorial");
 	}
 }
-
