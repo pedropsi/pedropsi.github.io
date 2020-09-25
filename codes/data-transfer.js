@@ -2715,11 +2715,15 @@ ButtonLinkHTML=function(title,symbol,attribs){
 	var attribs=attribs||{};
 	if(!symbol)
 		var symbol=title;
+
+	var button=ButtonHTML({txt:symbol,tag:"a",attributes:FuseObjects({href:id,onclick:'FullscreenClose()'},attribs)});
 	if(GetElement(id))
-		return ButtonHTML({txt:symbol,tag:"a",attributes:FuseObjects({href:id,onclick:'FullscreenClose()'},attribs)});
-	else
+		return button;
+	else{
 		return GhostHTML(id);
+	}
 }
+
 
 CloseButtonHTML=function(targetid){
 	return "<div class='closer'>"+ButtonHTML({tag:"span",txt:"&times;",attributes:{onclick:'CloseCurrentDatapack();CloseWindow(this);'}})+"</div>";
