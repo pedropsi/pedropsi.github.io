@@ -3483,13 +3483,13 @@ function OnboardMacro(){
 		WaitAction(2000),
 		{Starter:Highlighter(".goal",`The next clue is "Reverse"...`),endDelay:4000},
 		{Starter:Highlighter("#letters",`Let's try typing "Reverse"...`),endDelay:2000},
-		TypingAction("REVERSE",{endDelay:2000}),
-		{Starter:Highlighter("#letters","Oh! All is reversed..."),endDelay:2000},
-		{Starter:Highlighter(".keystrokes",`... even though we typed it exactly!`),endDelay:3000},
+		TypingAction("REVERSE",{endDelay:1000}),
+		{Starter:Highlighter(".keystrokes",`Oh! We typed "Reverse" correctly...`),endDelay:3000},
+		{Starter:Highlighter("#letters",`... but it was reversed!`),endDelay:3000},
 		UnTypingAction("ESREVER",{endDelay:2000}),
 		{Starter:function(){
 			UnClass(".highlight","highlight");
-			ConsoleAdd("Your turn!");
+			ConsoleAdd("What will you do? Your turn!");
 			UnBlockInput();
 			}
 		}

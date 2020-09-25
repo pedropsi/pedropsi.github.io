@@ -103,7 +103,8 @@ body,div {
 --ter8:	hsla(calc(var(--huen) + var(--hue3)),var(--sat3),calc(var(--darken) * var(--lig3) * var(--l8)),var(--alp));
 --ter9:	hsla(calc(var(--huen) + var(--hue3)),var(--sat3),calc(var(--darken) * var(--lig3) * var(--l9)),var(--alp));	
 
-  
+  --highlight:white;
+	
 	--white:var(--pri9)      ;		
 	--smokewhite:var(--pri8) ;
 	--lightyellow:var(--ter8);
@@ -1893,8 +1894,8 @@ svg.wallpaper path{
 .highlight{
 	--huen:10;
 	--darken:1.4;
-	background-color: var(--sec7);
-	box-shadow: 0 0 calc(var(--w1) + var(--h1)) calc(var(--w1) + var(--h1)) var(--sec7);
+	background-color: var(--highlight);
+	box-shadow: 0 0 calc(var(--w1) + var(--h1)) calc(var(--w1) + var(--h1)) var(--highlight);
 	transition-duration: var(--durationOff);
 	z-index: 1000;
 }
