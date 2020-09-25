@@ -6359,15 +6359,33 @@ ObserveOnce=function(selector,Look,opts){
 	return Observe(selector,See,opts,name)
 }
 
+MutationClassed=function(mutation,classSelector){
+	var m=mutation;
+	return m.type="attributes"&&m.attributeName==="class"&&Classed(m.target,classSelector)
+}
+
+MutationIded=function(mutation,id){
+	var m=mutation;
+	return m.type="attributes"&&m.attributeName==="id"&&m.target.id===UnPrefix(id,"#");
+}
+
 UponMutator=function(ObserveF){
 	return function(elementSelector,Action,parentSelector){
-		function Upon(mutation){
-			var nodes=Array.from(mutation[0].addedNodes)||[];
-			if(nodes.some(Matcher(elementSelector)))
+		function Upon(mutations){
+			var addedNodes=Array.from(mutations[0].addedNodes)||[];
+			if(addedNodes.some(Matcher(elementSelector)))
 				return Action();
+			
+			if(IsClass(elementSelector)&&mutations.some(m=>MutationClassed(m,elementSelector)))
+				return Action();
+
+			console.log(mutations);
+			if(!IsClass(elementSelector)&&mutations.some(m=>MutationIded(m,elementSelector)))
+				return Action();	
+				
 		}
 		var parentSelector=parentSelector||"body"
-		ObserveF(parentSelector,Upon,{attributes:false})
+		ObserveF(parentSelector,Upon)
 	}
 }
 
