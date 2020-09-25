@@ -2609,7 +2609,7 @@ ViewCounterHTML=function(){
 
 //Hidden Elements
 GhostHTML=function(id){
-	"<span id='"+id+"' class='hidden'></span>";
+	return "<span id='"+id+"' class='hidden'></span>";
 }
 
 
@@ -2717,12 +2717,11 @@ ButtonLinkHTML=function(title,symbol,attribs){
 		var symbol=title;
 
 	var button=ButtonHTML({txt:symbol,tag:"a",attributes:FuseObjects({href:id,onclick:'FullscreenClose()'},attribs)});
-	if(GetElement(id))
-		return button;
-	else{
-		return GhostHTML(id);
-	}
+	
+	return AwaitElement(id,button);
 }
+
+
 
 
 CloseButtonHTML=function(targetid){
@@ -6353,8 +6352,9 @@ ObserveOnce=function(selector,Look,opts){
 	var Look=Look||console.log;
 	var name=GenerateId();
 	function See(...args){
-		UnObserve(name);
-		Look(...args);
+		var result=Look(...args);
+		if(result!==false)
+			UnObserve(name);
 	}
 	return Observe(selector,See,opts,name)
 }
@@ -6379,10 +6379,10 @@ UponMutator=function(ObserveF){
 			if(IsClass(elementSelector)&&mutations.some(m=>MutationClassed(m,elementSelector)))
 				return Action();
 
-			console.log(mutations);
 			if(!IsClass(elementSelector)&&mutations.some(m=>MutationIded(m,elementSelector)))
 				return Action();	
-				
+
+			return false;				
 		}
 		var parentSelector=parentSelector||"body"
 		ObserveF(parentSelector,Upon)
@@ -6403,6 +6403,18 @@ HearElement=function(elementSelector,Action){
 		Action();
 	else
 		UponElementOnce(elementSelector,Action);
+}
+
+//Replace whenever the element is ready
+AwaitElement=function(selector,result){
+	if(GetElement(selector))
+		return result;
+	else{
+		var id=GenerateId();
+		function Replacer(){return ReplaceElement(result,id);}
+		UponElementOnce(selector,Replacer);
+		return GhostHTML(id);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
