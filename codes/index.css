@@ -42,7 +42,7 @@
 	--sh:1px;
 }
 
-body {
+body,div {
 --hue:0;
 --sat:50%;
 --lig:50%;
