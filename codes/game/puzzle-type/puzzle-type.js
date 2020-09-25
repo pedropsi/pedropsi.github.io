@@ -2898,6 +2898,7 @@ function GoalMatchedMacro(){
 }
 
 
+
 ///////////////////////////////////////////////////////////////////////////////
 //Level states
 
@@ -3463,4 +3464,44 @@ function TutorialMacro(){
 	];
 }
 
+function WaitAction(duration){
+	return {endDelay:duration};
+}
+
+function OnboardMacro(){
+	return [
+		{Starter:()=>GoToLevel("Direct")},
+		{Starter:BlockInput,endDelay:2000},
+		{Starter:Highlighter(".level-number","Welcome to the first level of Puzzle Type!"),endDelay:4000},
+		{Starter:Highlighter(".level-notes","It's an easy level, hence only 1 star."),endDelay:3000},
+		{Starter:Highlighter(".goal",`"Direct" is the clue.`),endDelay:2000},
+		{Starter:Highlighter("#letters","Your goal is to type the clue."),endDelay:2000},
+		TypingAction("DIRRCT",{endDelay:2000}),
+		{Starter:Highlighter("#letters .letter-3","If you make an mistake, just undo."),endDelay:3000},
+		UnTypingAction("RCT",{endDelay:1000}),
+		TypingAction("ECT",{endDelay:4000}),
+		WaitAction(2000),
+		{Starter:Highlighter(".goal",`The next clue is "Reverse"...`),endDelay:4000},
+		{Starter:Highlighter("#letters",`Let's try typing "Reverse"...`),endDelay:2000},
+		TypingAction("REVERSE",{endDelay:2000}),
+		{Starter:Highlighter("#letters","Oh! All is reversed..."),endDelay:2000},
+		{Starter:Highlighter(".keystrokes",`... even though we typed it exactly!`),endDelay:3000},
+		UnTypingAction("ESREVER",{endDelay:2000}),
+		{Starter:function(){
+			UnClass(".highlight","highlight");
+			ConsoleAdd("Your turn!");
+			UnBlockInput();
+			}
+		}
+	];
+}
+
+function Highlighter(selector,text){
+	return function(){
+		var selectors=EnArray(selector);
+		UnClass(".highlight","highlight");
+		selectors.map(s=>Class(s,"highlight"));
+		ConsoleAdd(text);
+	}
+}
 

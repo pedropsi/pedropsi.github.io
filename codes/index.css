@@ -1891,9 +1891,11 @@ svg.wallpaper path{
 
 
 .highlight{
-	box-shadow: 0 0 100vmax 100vmax var(--darkblue);
-	outline: calc(var(--h-4) + var(--w-4)) solid var(--lightgreen);
-	padding: var(--h-2) var(--w-2) var(--h-2) var(--w-2);
-	background-color: unset;
+	--huen:10;
+	--darken:1.4;
+	background-color: var(--sec7);
+	box-shadow: 0 0 calc(var(--w1) + var(--h1)) calc(var(--w1) + var(--h1)) var(--sec7);
+	transition-duration: var(--durationOff);
 	z-index: 1000;
 }
+
