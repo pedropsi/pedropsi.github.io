@@ -218,8 +218,6 @@ function PrepareGame(){
 			ConsoleAddMany([
 				"Puzzlescript Game bar loaded!",
 				"Issues? Suggestions? Head to pedropsi.github.io/game-bar."
-			//	"Localsave is ON for "+PageTitle()+".",
-			//	"To stop saving and erase all 2 cookies, please deselect "+ObtainSymbol("Save")+"."
 			]);
 	}
 
@@ -477,7 +475,7 @@ function ToggleSavePermission(thi){
 	if(savePermission){
 		savePermission=false;
 		EraseLocalsave();
-		ConsoleAdd("All "+LocalStorageName['list'].length+" cookies erased for "+PageTitle()+": Localsave is OFF across sessions.");
+		ConsoleAdd(`Localsave is OFF. The save file for ${PageTitle()} will be erased on page reload.`);
 	}
 	else 
 		ActivateSavePermission(thi);
@@ -488,7 +486,7 @@ function ActivateSavePermission(thi){
 	Localsave();
 	ConsoleAddMany([
 		"Localsave is ON for "+PageTitle()+".",
-		"To stop localsaving and erase all "+LocalStorageName['list'].length+" cookies, please deselect "+ObtainSymbol("Save")+"."
+		"To stop localsaving and erase the save file for ${PageTitle()}, deselect "+ObtainSymbol("Save")+"."
 		]);
 	Select(thi);
 }
