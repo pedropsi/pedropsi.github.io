@@ -2711,7 +2711,7 @@ ButtonOnClickHTML=function(title,onclicktxt){
 }
 
 ButtonLinkHTML=function(title,symbol,attribs){
-	var id='#'+KebabCaseString(title);
+	var id='#'+KebabCaseString(CapitaliseSentence(title));
 	var attribs=attribs||{};
 	if(!symbol)
 		var symbol=title;
