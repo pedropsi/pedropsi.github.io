@@ -6396,9 +6396,11 @@ HearElement=function(elementSelector,Action){
 ///////////////////////////////////////////////////////////////////////////////
 //Clipboard
 
-CopyHandler = function(Extractor){
+CopyHandler = function(Extractor,parentSelector){
 	return function(event){
 		if (!navigator.clipboard)
+			return;
+		if(parentSelector&&!GetElement(parentSelector).contains(event.target))
 			return;
 		var text=Extractor(event.target);
 		function CopyLogger(){

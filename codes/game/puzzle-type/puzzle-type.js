@@ -2834,10 +2834,10 @@ function LevelLoadMacro(){
 			LaunchTouchActions(".top",TouchActionsTop());
 			LaunchTouchActions(".middle",TouchActionsMiddle());
 			UnAttend("mouseup",gameSelector);
-			Attend("mouseup",CopyHandler(LetterExtractor("#letters")),"#letters");
-			Attend("mouseup",CopyHandler(ExtractKeystrokes),".keystrokes");
-			Attend("mouseup",CopyHandler(LetterExtractor(".goal")),".goal");
-			Attend("mouseup",CopyHandler(best=>best.innerText),".best");
+			Attend("mouseup",CopyHandler(LetterExtractor("#letters"),"#letters"),"#letters");
+			Attend("mouseup",CopyHandler(ExtractKeystrokes,".keystrokes"),".keystrokes");
+			Attend("mouseup",CopyHandler(LetterExtractor(".goal"),".goal"),".goal");
+			Attend("mouseup",CopyHandler(best=>best.innerText,".best"),".best");
 			}
 		},
 		{Starter:UnBlockInput}
