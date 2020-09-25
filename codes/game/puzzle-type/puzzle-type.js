@@ -3473,6 +3473,9 @@ function TipAction(selector,text){
 function HighlightAction(selector,text){
 	return {Starter:Highlighter(selector,text),endDelay:TextReadDuration(text)*2};
 }
+function UnHighlightAction(){
+	return {Starter:function(){UnClass(".highlight","highlight")}}
+}
 
 function OnboardMacro(){
 	return [
@@ -3483,21 +3486,22 @@ function OnboardMacro(){
 		HighlightAction(".goal",`DIRECT is the clue.`),
 		HighlightAction("#letters","Your goal is to type the clue."),
 		TypingAction("DIRECT"),
-		WaitAction(4000),
+		UnHighlightAction(),
+		WaitAction(6000),
 		HighlightAction(".goal",`The next clue is REVERSE...`),
 		HighlightAction(".level-notes","It should be easy (1 star)."),
 		HighlightAction("#letters",`Let's try typing REVERSE...`),
 		TypingAction("REVERSE",{endDelay:1000}),
 		HighlightAction(".keystrokes",`Oh! We typed REVERSE correctly...`),
-		HighlightAction("#letters",`... but it was reversed!`),
-		HighlightAction("#UndoButton","Luckily, it's easy to undo."),
-		UnTypingAction("ESREVER",{endDelay:2000}),
-		TipAction(".middle","It's your turn now. What will you do?"),
-		{Starter:function(){
-			UnClass(".highlight","highlight");
-			UnBlockInput();
-			}
-		}
+		HighlightAction("#letters",`... but it was reversed?`),
+		HighlightAction("#UndoButton","Luckily, it's easy to undo..."),
+		UnTypingAction("REV",{endDelay:2000}),
+		HighlightAction("#RestartButton","... or to restart altogether."),
+		{Starter:Restart},
+		WaitAction(1000),
+		UnHighlightAction(),
+		TipAction(".middle","Now it's your turn. What will you do?"),
+		{Starter:UnBlockInput}
 	];
 }
 
