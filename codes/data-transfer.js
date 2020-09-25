@@ -6405,7 +6405,6 @@ HearElement=function(elementSelector,Action){
 		UponElementOnce(elementSelector,Action);
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 //Clipboard
 
