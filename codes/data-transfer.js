@@ -3742,8 +3742,10 @@ if(!NodejsDetected()&&typeof window.CustomEvent!=="function"&&window.CustomEvent
 ///////////////////////////////////////////////////////////////////////////////
 //Event Listeners
 
-Attend=function(eventName,F,selector){
+Attend=function(eventName,F,selector,once){
 	var name=eventName+"-"+selector;
+	if(once)
+		var F=Oncer(F,GenerateId());
 
 	UnAttend(eventName,selector);
 	Attend[name]=F;
@@ -3760,11 +3762,12 @@ Attend=function(eventName,F,selector){
 
 AttendOnce=function(eventName,F,selector){
 	var name=eventName+"-"+selector;
+	
 	function G(...args){
 		UnAttend(eventName,selector);
 		return F(...args);
 	}
-	Attend(eventName,G,selector);
+	Attend(eventName,G,selector,true);
 	Attend[name]=F;
 };
 
@@ -4906,6 +4909,10 @@ Once=function(F,name){
 		return F();
 	}
 	return false;
+}
+
+Oncer=function(F,name){
+	return function(){return Once(F,name)};
 }
 
 //Schedule and UnSchedule
