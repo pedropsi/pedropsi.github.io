@@ -3467,49 +3467,58 @@ function TutorialMacro(){
 function WaitAction(duration){
 	return {endDelay:duration};
 }
+function TipAction(selector,text){
+	return {Starter:Tipper(selector,text),endDelay:TextReadDuration(text)*2};
+}
+function HighlightAction(selector,text){
+	return {Starter:Highlighter(selector,text),endDelay:TextReadDuration(text)*2};
+}
 
 function OnboardMacro(){
 	return [
 		{Starter:()=>GoToLevel("Direct")},
-		{Starter:BlockInput,endDelay:2000},
-		{Starter:Highlighter(".level-number","Welcome to the first level of Puzzle Type!"),endDelay:4000},
-		{Starter:Highlighter(".level-notes","It's an easy level, hence only 1 star."),endDelay:3000},
-		{Starter:Highlighter(".goal",`"Direct" is the clue.`),endDelay:2000},
-		{Starter:Highlighter("#letters","Your goal is to type the clue."),endDelay:2000},
-		TypingAction("DIRRCT",{endDelay:2000}),
-		{Starter:Highlighter("#letters .letter-3","If you make an mistake, just undo."),endDelay:3000},
-		UnTypingAction("RCT",{endDelay:1000}),
-		TypingAction("ECT",{endDelay:4000}),
-		WaitAction(2000),
-		{Starter:Highlighter(".goal",`The next clue is "Reverse"...`),endDelay:4000},
-		{Starter:Highlighter("#letters",`Let's try typing "Reverse"...`),endDelay:2000},
+		{Starter:BlockInput},
+		TipAction(".middle","Welcome to Puzzle Type!"),
+		HighlightAction(".level-number","Level 1 is a tutorial."),
+		HighlightAction(".goal",`DIRECT is the clue.`),
+		HighlightAction("#letters","Your goal is to type the clue."),
+		TypingAction("DIRECT"),
+		WaitAction(4000),
+		HighlightAction(".goal",`The next clue is REVERSE...`),
+		HighlightAction(".level-notes","It should be easy (1 star)."),
+		HighlightAction("#letters",`Let's try typing REVERSE...`),
 		TypingAction("REVERSE",{endDelay:1000}),
-		{Starter:Highlighter(".keystrokes",`Oh! We typed "Reverse" correctly...`),endDelay:3000},
-		{Starter:Highlighter("#letters",`... but it was reversed!`),endDelay:3000},
+		HighlightAction(".keystrokes",`Oh! We typed REVERSE correctly...`),
+		HighlightAction("#letters",`... but it was reversed!`),
+		HighlightAction("#UndoButton","Luckily, it's easy to undo."),
 		UnTypingAction("ESREVER",{endDelay:2000}),
+		TipAction(".middle","It's your turn now. What will you do?"),
 		{Starter:function(){
 			UnClass(".highlight","highlight");
-			ConsoleAdd("What will you do? Your turn!");
 			UnBlockInput();
 			}
 		}
 	];
 }
 
-function Highlighter(selector,text){
+function Tipper(selector,text){
+	var opts=opts||{};
 	return function(){
-		if(Highlighter.last)
-			Highlighter.last[0].hide();
-
-		UnClass(".highlight","highlight");
-		Class(selector,"highlight");
-
-		Highlighter.last=tippy(selector,{
+		var instance=First(tippy(selector,{
 			content:text,
+			delay: 500,
 			placement:"top",
 			showOnCreate: true,
 			arrow: false
-		})
-		//ConsoleAdd(text,undefined,undefined,undefined,undefined,"tutorial");
+		}))
+		setTimeout(function(){if(instance)instance.destroy()},500+TextReadDuration(text)*1.5);
+	}
+}
+
+function Highlighter(selector,text){
+	return function(){
+		UnClass(".highlight","highlight");
+		Class(selector,"highlight");
+		Tipper(selector,text)()
 	}
 }
