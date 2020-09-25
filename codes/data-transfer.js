@@ -3283,7 +3283,7 @@ Selected=function(selectorE){
 }
 
 Classed=function(selectorE,clas){
-	var clas=clas||'selected';
+	var clas=UnPrefix(clas,".")||'selected';
 	var e=GetElement(selectorE);
 	return e&&e.classList&&e.classList.contains(clas);
 }
@@ -3294,7 +3294,7 @@ Toggle=function(selectorE,clas){
 		clas=[clas];
 	var e=GetElement(selectorE);
 	if(e)
-		clas.map(c=>e.classList.toggle(c));
+		clas.map(c=>e.classList.toggle(UnPrefix(c,".")));
 	return e;
 }
 
