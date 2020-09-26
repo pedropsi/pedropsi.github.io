@@ -1301,16 +1301,26 @@ function LoadLevel(){
 function KeyActionsGameBar(){
 	var KAGB={};
 		KAGB[ObtainMainKey("feedback")]=RequestGameFeedback;
+		KAGB["ctrl "+ObtainMainKey("feedback")]=RequestGameFeedback;
+		
 		KAGB[ObtainMainKey("fullscreen")]=RequestGameFullscreen;
+		KAGB["ctrl "+ObtainMainKey("fullscreen")]=RequestGameFullscreen;
+		
 		KAGB[ObtainMainKey("hint")]=ObtainRequestHint;
+		KAGB["ctrl "+ObtainMainKey("hint")]=ObtainRequestHint;
 		
-		if(ObtainKeyboardAllowed())
+		if(ObtainKeyboardAllowed()){
 			KAGB[ObtainMainKey("keyboard")]=RequestKeyboard;
+			KAGB["ctrl "+ObtainMainKey("keyboard")]=RequestKeyboard;
+		}
 		
-		if(LevelSelectorAllowed())
+		if(LevelSelectorAllowed()){
 			KAGB[ObtainMainKey("levelselector")]=RequestLevelSelector;
+			KAGB["ctrl "+ObtainMainKey("levelselector")]=RequestLevelSelector;
 		
+		}
 		KAGB[ObtainMainKey("music")]=ToggleCurrentSong;
+		KAGB["ctrl +",ObtainMainKey("music")]=ToggleCurrentSong;
 
 	return KAGB;
 }
