@@ -219,22 +219,20 @@ function HintButton(){
 	return GameBarButtonHTML("hint",{onclick:'RequestHint();'});	
 }
 
-function CloseHint(){
+function CloseHint(Callback){
 	if(CurrentDatapack().buttonSelector==="HintButton")
-		CloseCurrentDatapack();
+		CloseCurrentDatapack(Callback);
 	GameFocus();
 }
 
 function RequestNextHint(){
 	CycleNextBounded(CurrentLevelHints());
-	CloseHint();
-	setTimeout(RequestHint,500);
+	CloseHint(RequestHint);
 }
 
 function RequestPrevHint(){
 	CyclePrevBounded(CurrentLevelHints());
-	CloseHint();
-	setTimeout(RequestHint,500);	
+	CloseHint(RequestHint);	
 }
 
 if(typeof IsScreenMessage==="undefined")

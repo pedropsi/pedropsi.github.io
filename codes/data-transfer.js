@@ -3444,13 +3444,14 @@ OpenElement=function(e,parentIDsel,duration){
 	AddElement(e,parentIDsel);
 }
 
-CloseElement=function(targetIDsel,parentIDsel,duration){
+CloseElement=function(targetIDsel,parentIDsel,duration,Callback){
 	var e=GetElement(targetIDsel,parentIDsel);
 	if(e){
 		var duration=FadeDuration(duration);
 		FadeElement(e,duration);
 		setTimeout(function(){
-			RemoveElement(targetIDsel,parentIDsel)
+			RemoveElement(targetIDsel,parentIDsel);
+			(Callback||Identity)();
 		},MillisecondsDuration(duration));
 	}
 }
@@ -3459,12 +3460,12 @@ CloseWindow=function(e){
 	CloseElement(ParentElement(e,".window"));
 }
 
-Close=function(targetid){
+Close=function(targetid,Callback){
 	var DP=GetDataPack(targetid);
 	if(DP)
-		CloseDatapack(DP);
+		CloseDatapack(DP,Callback);
 	else
-		CloseElement(targetid);
+		CloseElement(targetid,undefined,undefined,Callback);
 }
 
 CloseAndContinue=function(DP){
@@ -3491,7 +3492,7 @@ CurrentDatapack=function(ConditionF){
 		return undefined;
 }
 
-CloseDatapack=function(DP){
+CloseDatapack=function(DP,Callback){
 	if(DP){
 		Deselect(DP.buttonSelector);
 		PulseSelect(DP.qid+" .closer .button");
@@ -3502,12 +3503,12 @@ CloseDatapack=function(DP){
 		if(DP.spotlight)
 			FocusElement(DP.spotlight);
 
-		CloseElement(DP.qid);
+		CloseElement(DP.qid,undefined,undefined,Callback);
 	}
 }
 
-CloseCurrentDatapack=function(){
-	CloseDatapack(CurrentDatapack());
+CloseCurrentDatapack=function(Callback){
+	CloseDatapack(CurrentDatapack(),Callback);
 }
 
 ClosePreviousDatapacks=function(ConditionF){

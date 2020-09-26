@@ -1068,7 +1068,7 @@ function LoadFromLevelSelectorButton(qid){
 
 function ChooseLevelClose(choice,pid){
 	ChooseLevel(choice);
-	Close(pid);
+	Close(pid,GameFocus);
 	GameFocus();
 };
 
