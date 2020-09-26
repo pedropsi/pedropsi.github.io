@@ -4374,6 +4374,7 @@ Playlist=function(i){
 
 PlaylistStartPlay=function(){
 	PlaySong(Playlist(0));
+	return true;
 	//console.log("Music on");
 }
 
