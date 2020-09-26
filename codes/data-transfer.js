@@ -2959,12 +2959,14 @@ RequestDataPack=function(NamedFieldArray,Options){
 
 			DP.qdisplay(DP);
 			Select(DP.buttonSelector);		//Activate button
-			setTimeout(function(){FocusInside(DP.qid);},100);		//Focus on first question
 
-			if(DP.closeonblur)
-				setTimeout(function(){ListenOutside("click",function(){Close(DP.qid)},DP.qid)},500); //Click outside to close
+			HearElement(DP.qid,function(){
+				FocusInside(DP.qid);											//Focus on first question
+				if(DP.closeonblur)
+					ListenOutside("click",function(){Close(DP.qid)},DP.qid);	//Click outside to close
+			})
+			
 			SetDatapackShortcuts(DP);
-
 			return DP;
 		}
 	}
