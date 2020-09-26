@@ -78,6 +78,7 @@ function Clickwall(Callback){
 	function Start(){
 		CloseElement(".game .clickwall",500);
 		setTimeout(()=>PlayIntro(".game",Callback),1000);
+		return true;
 	}
 	AttendOnce("click",Start,".clickwall");
 }

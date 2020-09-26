@@ -2947,7 +2947,7 @@ RequestDataPack=function(NamedFieldArray,Options){
 
 		function SameType(DP1){return function(DP2){return DP1.buttonSelector===DP2.buttonSelector}};
 		function SameLayer(DP1){return function(DP2){return DP1.layer===DP2.layer}};
-
+		
 		if(DP.buttonSelector!=="none"&&CurrentDatapack(SameType(DP)))
 			ClosePreviousDatapacks(SameType(DP));
 		else{
@@ -2962,8 +2962,15 @@ RequestDataPack=function(NamedFieldArray,Options){
 
 			HearElement(DP.qid,function(){
 				FocusInside(DP.qid);											//Focus on first question
-				if(DP.closeonblur)
-					ListenOutside("click",function(){Close(DP.qid)},DP.qid);	//Click outside to close
+				if(DP.closeonblur){
+					AttendOnce("click",
+						function(e){
+							if(Outside(DP.qid,e.target)&&Outside(DP.buttonSelector,e.target)){
+								Close(DP.qid);
+								return true;
+							}
+						});
+				}
 			})
 			
 			SetDatapackShortcuts(DP);
@@ -3748,13 +3755,10 @@ if(!NodejsDetected()&&typeof window.CustomEvent!=="function"&&window.CustomEvent
 ///////////////////////////////////////////////////////////////////////////////
 //Event Listeners
 
-Attend=function(eventName,F,selector,once){
+Attend=function(eventName,F,selector){
 	var name=eventName+"-"+selector;
-	if(once)
-		var F=Oncer(F,GenerateId());
 
 	UnAttend(eventName,selector);
-	Attend[name]=F;
 
 	var target=GetElement(selector)||window;
 	if(!target.addEventListener)
@@ -3764,17 +3768,21 @@ Attend=function(eventName,F,selector,once){
 		target.addEventListener(eventName,F,{"passive":true})
 	else
 		target.addEventListener(eventName,F)
+
+	Attend[name]=F;
 };
 
 AttendOnce=function(eventName,F,selector){
 	var name=eventName+"-"+selector;
-	
+	Attend[name]=G;	
 	function G(...args){
-		UnAttend(eventName,selector);
-		return F(...args);
+		var result=F(...args);
+		if(result)
+			UnAttend(eventName,selector);
+		return result;
 	}
 	Attend(eventName,G,selector,true);
-	Attend[name]=F;
+
 };
 
 UnAttend=function(eventName,selector){
@@ -3834,15 +3842,6 @@ HearOnce=function(eventName,F,target){ //execute if heard or keep listening
 		ListenOnce(eventName,F,target);
 }
 
-ListenOutside=function(eventName,F,target){
-	var EFTC={
-		name:eventName,
-		F:F,
-		ConditionF:function(ev){return Outside(target,ev.target);},
-		target:window};
-
-	return ListenF(EFTC);
-}
 
 ListenF=function(EFTC){
 	var EFTC=EFTC;
@@ -4488,7 +4487,8 @@ PlaylistAwaken=function(){
 	if(Playlist.sleep){
 		Playlist.sleep=false;
 		ResumeSong(CurrentSong());
-		UnAttend("focus");
+		//UnAttend("focus");
+		return true;
 	}
 }
 
@@ -4906,10 +4906,6 @@ Once=function(F,name){
 		return F();
 	}
 	return false;
-}
-
-Oncer=function(F,name){
-	return function(){return Once(F,name)};
 }
 
 //Schedule and UnSchedule
