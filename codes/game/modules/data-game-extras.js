@@ -244,7 +244,7 @@ function PrepareGame(){
 		
 		GameFocus();
 
-		setTimeout(SelectLevelFromPage,2000);
+		setTimeout(SelectLevelFromPage,2000); //TOIMPROVE FAILS CLICKWALL
 		
 		Shout("GameBar");
 	}
@@ -1069,7 +1069,7 @@ function LoadFromLevelSelectorButton(qid){
 function ChooseLevelClose(choice,pid){
 	ChooseLevel(choice);
 	Close(pid);
-	setTimeout(GameFocus,100);
+	GameFocus();
 };
 
 function ChooseLevel(choice){
