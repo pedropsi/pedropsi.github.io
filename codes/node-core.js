@@ -1,13 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 // File utils
 
-var DIR="../../";
+var DIR="../";
 require(DIR+'codes/data-transfer');
 require(DIR+'data/page');
-require(DIR+'codes/core/search');
-
+// require(DIR+'codes/core/search');
 var fs = require('fs');
-const { SSL_OP_NETSCAPE_CHALLENGE_BUG } = require('constants');
 
 //Compatibilities
 SelectedGamesHTML=Identity;
@@ -41,7 +39,8 @@ function UpdateFileMeta(file){
 
 	UpdateMetaCode=function(){
 		var oldcode=fs.readFileSync(path,"utf8");
-		var newcode=PageWithMetaHTML(v,PagePost(oldcode));
+		var newcode=PageWithMetaHTML(v,PagePost(oldcode)).replace(/\t+/ig,`	`).replace(/\n+/ig,`
+		`).replace(/ +/ig,` `);
 
 		if(oldcode!==newcode){
 			var saved=true;
@@ -76,16 +75,18 @@ function ExtractText(file){
 	return text;
 }
 
-function ExportSearchTree(){
-	var Database={};
-	function UpdateSearchDatabase(file){
-		console.log(">>",file);
-		Database=AppendSearchTree(ExtractText(file),file,Database);
-	}
-	fs.readdir(DIR,FilenameMapper(UpdateSearchDatabase,True));
-	
-	setTimeout(()=>fs.writeFileSync(DIR+"data/search.js","var SearchDatabase="+EnString(Database),function(err){if(err)saved=false}),5000);
-	console.log(">>>>> exporting search database in 5 secs");
-}
 
-ExportSearchTree()
+// function ExportSearchTree(){
+// 	var Database={};
+// 	function UpdateSearchDatabase(file){
+// 		console.log(">>",file);
+// 		Database=AppendSearchTree(ExtractText(file),file,Database);
+// 	}
+// 	fs.readdir(DIR,FilenameMapper(UpdateSearchDatabase,True));
+	
+// 	setTimeout(()=>fs.writeFileSync(DIR+"data/search.js","var SearchDatabase="+EnString(Database),function(err){if(err)saved=false}),5000);
+// 	console.log(">>>>> exporting search database in 5 secs");
+// }
+
+//ExportSearchTree()
+RefreshDirectoryMeta()

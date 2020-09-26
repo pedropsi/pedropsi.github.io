@@ -125,7 +125,7 @@ DoctypeHTML=function(lang){
 PageWithMetaHTML=function(v,post){
 	return `${v.HTML_DOCTYPE()}
 	<head>
-		${v.HEAD()}
+		${v.HEAD().replace(/\s+/ig," ")}
 		<script src="codes/data-transfer.js"></script>
 		${post}
 	</head></html>

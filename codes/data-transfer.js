@@ -72,11 +72,11 @@ Sorter=function(...functions){
 
 
 //Key characters
-var NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
-var LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-var AlphanumericCharacters=LetterCharacters.concat(NumberCharacters);
-var LetterSpaceCharacters=LetterCharacters.concat(" ");
-var Directions=["left","up","right","down"];
+NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
+LetterCharacters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+AlphanumericCharacters=LetterCharacters.concat(NumberCharacters);
+LetterSpaceCharacters=LetterCharacters.concat(" ");
+Directions=["left","up","right","down"];
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1680,17 +1680,20 @@ SourceIdentifier=function(path){
 	return PageIdentifier(UnPosfix(UnPosfix(path,".js"),".css"));
 }
 
+LoadSource=function(...args){
+	if(NodejsDetected())
+		LoadNodeSource(...args);
+	else
+		LoadWebSource(...args);
+}
+
 LoadSources=function(sourceArray,SuccessF){
-	if(NodejsDetected()){
-		var shoutArray=sourceArray;
-		HearAll(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
-		sourceArray.map(LoadNodeSource);
-	}									
-	else{
-		var shoutArray=sourceArray.filter(function(f){return Posfixed(f,".js")}).map(SourceIdentifier);		//discards non-js files plus the folder structure to preserve file name
-		HearAll(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
-		sourceArray.map(LoadSource);											//loads asynchronously (each file MUST "Shout" its own identifier upon loading)
-	}
+	var shoutArray=sourceArray;
+	if(!NodejsDetected())
+		shoutArray=shoutArray.filter(function(f){return Posfixed(f,".js")}).map(SourceIdentifier);		//discards non-js files plus the folder structure to preserve file name
+
+	HearAll(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
+	sourceArray.map(LoadSource);											//loads asynchronously (each file MUST "Shout" its own identifier upon loading)
 	
 }
 
@@ -1702,7 +1705,7 @@ LoadNodeSource=function(source){
 }
 
 //Load scripts
-LoadSource=function(source){
+LoadWebSource=function(source){
 	if(Posfixed(source,".js"))
 		LoadScript(source);
 	if(Posfixed(source,".css"))
@@ -5068,7 +5071,7 @@ CyclePrevBounded=function(array){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Image
-var ImageExtensions=["apng","bmp","gif","ico","cur","jpg","jpeg","jp2","jpx","j2k","j2c","jif","jfif","pjpeg","pjp","png","svg","tif","tiff","webp"];
+ImageExtensions=["apng","bmp","gif","ico","cur","jpg","jpeg","jp2","jpx","j2k","j2c","jif","jfif","pjpeg","pjp","png","svg","tif","tiff","webp"];
 
 LoadImage=function(fullpath,parentIDsel){
 
@@ -5820,6 +5823,23 @@ var TypeSwipeKeys={
 //Dynamic text and HyperText 
 
 HyperText=function(name,value){
+	if(NodejsDetected()){
+		if(value){return globalThis[name]=value;}
+		return NodeHyperText(name);
+	}
+	else
+		return WebHyperText(name,value);
+}
+
+NodeHyperText=function(name){
+	LoadSource("data/hypertext/"+name+".js");
+	while(!globalThis[name]){}
+	var text=globalThis[name]();
+	return text.replace(/\s+/ig," ");
+}
+
+
+WebHyperText=function(name,value){
 	if(value){
 		HyperText[name]=value;
 		return Shout("hypertext-"+name);
