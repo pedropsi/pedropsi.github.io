@@ -459,11 +459,11 @@ function GameRotation(){
 		UnClass('.game-rotation-container','rotate90');
 	
 	ObtainResizeCanvas();
-	setTimeout(ObtainResizeCanvas,1000);
+	setTimeout(ObtainResizeCanvas,1000); //It takes 1 second to rotate
 }
 
-GameRotation();
-Listen('resize',GameRotation);
+AttendOnce("GameBar",GameRotation);
+Attend('resize',GameRotation);
 
 /////////////////////////////////////////////////////////////////////////////////////
 // Save permissions
