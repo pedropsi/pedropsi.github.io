@@ -1104,7 +1104,7 @@ video{
 	flex-direction:row;
 	justify-content:flex-start;
 	background-color:var(--white);
-	border-bottom:var(--h1) solid var(--turquoise);
+	border-top:var(--h1) solid var(--turquoise);
 	padding:var(--h2) var(--w2) var(--h2) var(--w2);
 	align-items:center;
 	overflow-y: auto;
