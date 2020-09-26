@@ -235,6 +235,7 @@ function PrepareGame(){
 		AddGameBar();
 		
 		AttendOnce('click',PlaylistStartPlay,gameSelector);
+		AttendOnce('keydown',PlaylistStartPlay);
 //		AttendOnce('touchstart',RequestKeyboard,gameSelector);
 		
 		if(ObtainInitialScroll)
