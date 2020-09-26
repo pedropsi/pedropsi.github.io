@@ -2,15 +2,33 @@
 		
 		
 	<url>
+		<loc>https://pedropsi.github.io/gravirinth</loc>
+		<lastmod>2020-9-26</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+
+	<url>
+		<loc>https://pedropsi.github.io/videoplaytesting-tips</loc>
+		<lastmod>2020-8-29</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+
+	<url>
+		<loc>https://pedropsi.github.io/star-battle</loc>
+		<lastmod>2020-06-18</lastmod>
+		<changefreq>yearly</changefreq>
+	</url>
+
+	<url>
 		<loc>https://pedropsi.github.io/hall-of-fame-global</loc>
 		<lastmod>2020-05-24</lastmod>
-		<changefreq>monthly</changefreq>
+		<changefreq>yearly</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/analytics</loc>
 		<lastmod>2020-05-05</lastmod>
-		<changefreq>monthly</changefreq>
+		<changefreq>yearly</changefreq>
 	</url>
 
 	<url>
@@ -51,7 +69,7 @@
 
 	<url>
 		<loc>https://pedropsi.github.io/puzzle-type</loc>
-		<lastmod>2020-06-06</lastmod>
+		<lastmod>2020-09-19</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 
@@ -128,7 +146,7 @@
 	</url>
 
 	<url>
-		<loc>https://pedropsi.github.io/gravirinth</loc>
+		<loc>https://pedropsi.github.io/gravirinth-legacy</loc>
 		<lastmod>2020-01-24</lastmod>
 		<changefreq>yearly</changefreq>
 	</url>
@@ -160,19 +178,19 @@
 	<url>
 		<loc>https://pedropsi.github.io/guestbook</loc>
 		<lastmod>2018-7-22</lastmod>
-		<changefreq>yearly</changefreq>
+		<changefreq>never</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/hastefulll</loc>
 		<lastmod>2018-7-12</lastmod>
-		<changefreq>yearly</changefreq>
+		<changefreq>never</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/combinatura</loc>
 		<lastmod>2018-7-6</lastmod>
-		<changefreq>yearly</changefreq>
+		<changefreq>never</changefreq>
 	</url>
 
 	<url>
@@ -194,7 +212,7 @@
 	</url>
 
 	<url>
-		<loc>https://pedropsi.github.io/fleur-de-lis</loc>
+		<loc>https://pedropsi.github.io/mosaic</loc>
 		<lastmod>2018-2-14</lastmod>
 		<changefreq>never</changefreq>
 	</url>
@@ -208,12 +226,6 @@
 	<url>
 		<loc>https://pedropsi.github.io/support</loc>
 		<lastmod>2018-2-8</lastmod>
-		<changefreq>never</changefreq>
-	</url>
-
-	<url>
-		<loc>https://pedropsi.github.io/veronese</loc>
-		<lastmod>2018-2-6</lastmod>
 		<changefreq>never</changefreq>
 	</url>
 
@@ -237,8 +249,8 @@
 
 	<url>
 		<loc>https://pedropsi.github.io/index</loc>
-		<lastmod>2020-05-07</lastmod>
-		<changefreq>monthly</changefreq>
+		<lastmod>2020-09-25</lastmod>
+		<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
@@ -256,18 +268,6 @@
 	<url>
 		<loc>https://pedropsi.github.io/terms-of-use</loc>
 		<lastmod>2017-11-30</lastmod>
-		<changefreq>never</changefreq>
-	</url>
-
-	<url>
-		<loc>https://pedropsi.github.io/scales</loc>
-		<lastmod>2017-11-24</lastmod>
-		<changefreq>never</changefreq>
-	</url>
-
-	<url>
-		<loc>https://pedropsi.github.io/viking-carpet</loc>
-		<lastmod>2017-10-10</lastmod>
 		<changefreq>never</changefreq>
 	</url>
 

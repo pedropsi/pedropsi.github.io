@@ -16,6 +16,129 @@
 		</image>
 		
 	<item>
+		<title><![CDATA[Autumn update]]></title>
+		<link>https://pedropsi.github.io/index.html#RSS</link>
+		<guid>https://pedropsi.github.io/index.html?guid=2020-09-25</guid>
+		<pubDate>Fri, 25 Sep 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/splash.svg" width="180" height="180" alt="Creative Archive" title="Creative Archive"/>
+			
+		<p>To mark the beginning of Autumn, a new colour theme was applied across the Creative Archive.</p>
+		<p><a href='puzzle-type.html'>Puzzle Type</a> colours were adjusted, and a tutorial mode added.</p>
+		<p><a href='gravirinth.html'>Gravirinth [mini]</a> added.</p>
+		<p>Wide refactoring and bugfixes.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Sitemap]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Reorderings, bugfix]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-09-19</guid>
+		<pubDate>Sat, 19 Sep 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+		<p><a href='puzzle-type.html'>Puzzle Type</a> levels were reordered after playtesting feedback, and new labels <span class='icon'>
+		<svg class='iconpath icon-structure ' width='20' height='20' viewBox='0 0 25 25'>
+			<path d='M 10 12 L 13 2 L 16 12 L 17 22 L 20 17 L 24 24 L 22 24 L 20 20 L 18 24 L 16 24 L 15 21 L 13 19 L 11 21 L 10 24 L 8 24 L 6 20 L 4 24 L 2 24 L 6 17 L 9 22 Z M 13 5 L 11 12 L 15 12 Z M 13 15 L 16 19 L 15 14 L 11 14 L 10 19 Z'/>
+		</svg></span> and  <span class='icon'>
+		<svg class='iconpath icon-math ' width='20' height='20' viewBox='0 0 20 20'>
+			<path d='M 5 15 L 8 4 L 19 4 L 18 5 L 9 5 L 5 18 L 3 11 L 1 11 L 1 9 L 4 9 Z M 13 11 L 13 11 L 16 8 L 16 17 L 17 17 L 18 18 L 13 18 L 14 17 L 15 17 L 15 11 Z M 9 14 L 12 14 L 12 15 L 9 15 L 9 14 Z'/>
+		</svg></span> were added. Some bugfixes. Thanks <a href='https://twitter.com/kristianhede' rel='noreferrer noopener'><span class="name">Kristian Hedeholm</span></a> and <a href='https://twitter.com/deusovi' rel='noreferrer noopener'><span class="name">Deusovi</span></a>!
+		<p>Levels LOO*** added.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Level transitions, new levels, etc...]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-08-30</guid>
+		<pubDate>Sun, 30 Aug 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+		<p>New animated transitions when entering/exiting a level and the title screen. Instructions mode added. Several changes and fixes.</p>
+		<p>Levels MAG*** and TEL*** added.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Keystroke list, letter animation, better sound notes]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-08-01</guid>
+		<pubDate>Sat, 1 Aug 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+		<p><a href='puzzle-type.html'>Puzzle Type</a> now sports a hangman-style keystroke list with three different types of strokes: normal, invalid and special.</p>
+		<p>Also, the sound feedback for invalid strokes as well as the notes in level DEA*** were improved.</p>
+		<p>Level STA*** letter insertion animated. Hints improved.</p>
+		<p>All hints were completed.</p>
+		<p>Thanks <a href='https://twitter.com/kristianhede' rel='noreferrer noopener'><span class="name">Kristian Hedeholm</span></a>, <a href='https://twitter.com/collin_eye' rel='noreferrer noopener'><span class="name">Patrick Collin Eye</span></a>, <a href='https://twitter.com/blubberquark' rel='noreferrer noopener'><span class="name">Blubberquark</span></a>, <span class="name">Builder17</span> for your help!</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Hint module & extras]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-07-19</guid>
+		<pubDate>Sun, 19 Jul 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+		<p>The hint module was expanded to add hints to some levels in <a href='puzzle-type.html'>Puzzle Type</a>.</p>
+		<p>Thanks <a href='https://twitter.com/kristianhede' rel='noreferrer noopener'><span class="name">Kristian Hedeholm</span></a> for the suggestions !</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Progress saving small fix]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-06-14</guid>
+		<pubDate>Sun, 14 Jun 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+		<p>The progress saving system In <a href='puzzle-type.html'>Puzzle Type</a> now withstands changes in level ordering. Thanks <a href='https://twitter.com/kristianhede' rel='noreferrer noopener'><span class="name">Kristian Hedeholm</span></a> and <a href='https://twitter.com/collin_eye' rel='noreferrer noopener'><span class="name">Patrick Collin Eye</span></a>!</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
 		<title><![CDATA[Difficulty stars & symbols, trailer, new level]]></title>
 		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
 		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-06-06</guid>
@@ -24,7 +147,13 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
 			
-		<p>In <a href='puzzle-type.html'>Puzzle Type</a>, ✲ indicates level difficulty, other symbols have different meanings: 👁 ⌕ ⚑. Thanks <a href='https://twitter.com/kristianhede' rel='noreferrer noopener'><span class="name">Kristian Hedeholm</span></a> and <a href='https://discord.gg/ZkV2zdb' rel='noreferrer noopener'><span class="name">Thinky Puzzle Games discord server</span></a>!</p>
+		<p>In <a href='puzzle-type.html'>Puzzle Type</a>, ✲ indicates level difficulty, other symbols have different meanings: <span class='icon'>
+		<svg class='iconpath icon-eye ' width='20' height='20' viewBox='0 0 65 65'>
+			<path d='M 32 21 L 32 32 L 36 22 Q 41 23 41 30 Q 41 39 32 39 Q 23 39 23 30 Q 23 21 32 21 M 39 16 Q 46 18 47 30 Q 46 44 32 45 Q 18 44 17 30 Q 18 16 32 15 L 32 16 Q 19 17 18 30 Q 19 43 32 44 Q 45 43 46 30 Q 45 19 38 17 L 39 16 M 32 11 Q 52 11 64 30 Q 52 49 32 49 Q 13 49 0 30 Q 12 11 32 11 L 32 15 Q 14 15 5 30 Q 14 45 32 45 Q 50 45 59 30 Q 50 15 32 15 Z'/>
+		</svg></span> ⌕ <span class='icon'>
+		<svg class='iconpath icon-book ' width='20' height='20' viewBox='10 13 100 100'>
+			<path d='M 10 26 L 10 90 Q 40 80 50 90 Q 60 80 90 90 L 90 26 Q 63 13 50 23 Q 36 13 10 26 M 15 25 Q 35 15 50 25 Q 65 15 85 25 L 85 87 Q 65 78 50 87 Q 35 78 15 87 L 15 25 M 15 75 Q 25 69 50 77 Q 75 70 85 75 L 85 78 Q 72 72 50 80 Q 28 71 15 78 L 15 75 M 15 80 Q 29 74 50 82 Q 71 75 85 80 L 85 85 Q 70 77 50 85 Q 30 77 15 85 L 15 78 M 49 25 L 49 76 L 50 77 L 50 26 L 49 25'/>
+		</svg></span>. Thanks <a href='https://twitter.com/kristianhede' rel='noreferrer noopener'><span class="name">Kristian Hedeholm</span></a> and <a href='https://discord.gg/ZkV2zdb' rel='noreferrer noopener'><span class="name">Thinky Puzzle Games discord server</span></a>!</p>
 		<p>A small trailer was added.</p>
 		<p>New level! STA***. Level MON*** became LA****, provisionally.</p>
 	
@@ -63,7 +192,13 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
 			
-	<p>As this feature was needed for <a href='puzzle-type.html'>Puzzle Type</a>, the <a href='game-bar.html'>Game Bar</a> now has a nice <kbd><span class='icon'><svg class='iconpath' width='20px' height=''20px' viewBox='0 -050 400 400'><path d='M216 78 C 226 84,263 106,288 139 L 294 148 300 145 C 303 144,313 139,323 134 C 342 125,342 125,342 127 C 342 127,336 153,329 184 C 322 215,316 241,315 242 C 315 244,206 194,206 192 C 206 191,215 186,227 181 C 239 175,248 170,248 170 C 249 168,236 155,230 150 C 179 110,107 122,72 177 C 61 194,57 211,56 237 L 55 248 45 247 C 40 247,29 246,21 246 L 6 246 6 240 C 6 192,21 153,52 122 C 97 88,138 71,184 78'/></svg></span></kbd> redo button - a suggestion by <a href='https://twitter.com/collin_eye' rel='noreferrer noopener'><span class="name">Patrick Collin Eye</span></a> and <a href='https://twitter.com/kristianhede' rel='noreferrer noopener'><span class="name">Kristian Hedeholm</span></a>!</p>
+	<p>As this feature was needed for <a href='puzzle-type.html'>Puzzle Type</a>, the <a href='game-bar.html'>Game Bar</a> now has a nice <kbd data-key="<span class='icon'>
+		<svg class='iconpath icon-redo ' width='20' height='20' viewBox='0 -50 400 400'>
+			<path d='M 294 149 L 342 127 L 315 242 L 206 192 L 248 170 C 160 56 67 138 54 248 L 6 246 C 23 59 185 7 294 149 '/>
+		</svg></span>"><span class='icon'>
+		<svg class='iconpath icon-redo ' width='20' height='20' viewBox='0 -50 400 400'>
+			<path d='M 294 149 L 342 127 L 315 242 L 206 192 L 248 170 C 160 56 67 138 54 248 L 6 246 C 23 59 185 7 294 149 '/>
+		</svg></span></kbd> (redo) redo button - a suggestion by <a href='https://twitter.com/collin_eye' rel='noreferrer noopener'><span class="name">Patrick Collin Eye</span></a> and <a href='https://twitter.com/kristianhede' rel='noreferrer noopener'><span class="name">Kristian Hedeholm</span></a>!</p>
 	
 		]]>
 		</description>
@@ -280,7 +415,7 @@
 		<pubDate>Sun, 29 Mar 2020 07:06:05 GMT</pubDate>
 		<description>
 		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/splash.svg" width="180" height="180" alt="Strata Hedges" title="Strata Hedges"/>
+			<img src="https://pedropsi.github.io/images/180/strata-hedges.png" width="180" height="180" alt="Strata Hedges" title="Strata Hedges"/>
 			
 <p>A first draft of <a href='strata-hedges.html'>Strata Hedges</a> was shared privately, showcasing the novel tridimensional mechanics.</p>
 	
@@ -391,14 +526,14 @@
 
 	<item>
 		<title><![CDATA[Gravirinth major update]]></title>
-		<link>https://pedropsi.github.io/gravirinth.html#RSS</link>
-		<guid>https://pedropsi.github.io/gravirinth.html?guid=2020-01-24</guid>
+		<link>https://pedropsi.github.io/gravirinth-legacy.html#RSS</link>
+		<guid>https://pedropsi.github.io/gravirinth-legacy.html?guid=2020-01-24</guid>
 		<pubDate>Fri, 24 Jan 2020 07:06:05 GMT</pubDate>
 		<description>
 		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/gravirinth.png" width="180" height="180" alt="Gravirinth" title="Gravirinth"/>
+			<img src="https://pedropsi.github.io/images/180/gravirinth-legacy.png" width="180" height="180" alt="Gravirinth [Legacy]" title="Gravirinth [Legacy]"/>
 			
-<p><a href='gravirinth.html'>Gravirinth</a> now runs much faster thanks to <a href='https://twitter.com/Jack_L_Lance' rel='noreferrer noopener'><span class="name">Jack Lance</span></a>'s <a href='https://jacklance.github.io/PuzzleScript/editor.html' rel='noreferrer noopener'>Large Maps Puzzlescript Fork</a>.</p>
+<p><a href='gravirinth-legacy.html'>Gravirinth Legacy</a> now runs much faster thanks to <a href='https://twitter.com/Jack_L_Lance' rel='noreferrer noopener'><span class="name">Jack Lance</span></a>'s <a href='https://jacklance.github.io/PuzzleScript/editor.html' rel='noreferrer noopener'>Large Maps Puzzlescript Fork</a>.</p>
 
 		]]>
 		</description>
@@ -456,7 +591,13 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/game-console.svg" width="180" height="180" alt="Game Console" title="Game Console"/>
 			
-<p>Two new buttons: <kbd>+</kbd> (more games by the same author) and <kbd><span class='icon'><svg class='iconpath' width='20px' height=''20px' viewBox='0 0 400 400'><path d='M152 112 L 121 147 124 188 L 127 228 75 280 L 23 332 32 341 C 37 346,40 349,40 350 C 39 351,44 356,53 365 L 66 378 122 323 L 177 267 213 266 C 242 265,250 265,250 264 C 251 263,251 263,252 264 C 253 265,253 265,254 263 C 255 263,269 247,285 228 C 301 210,315 195,315 194 C 315 194,287 169,286 169 C 286 169,279 177,271 186 L 256 203 246 203 C 240 204,231 204,225 204 L 214 204 198 190 C 190 183,183 176,183 175 C 183 174,182 166,182 156 L 180 138 196 121 C 205 111,212 102,212 102 C 212 102,185 77,184 77 C 184 77,169 93,152 112'/></svg></span></kbd> (edit source).</p>
+<p>Two new buttons: <kbd data-key="+">+</kbd> (more) (more games by the same author) and <kbd data-key="<span class='icon'>
+		<svg class='iconpath icon-wrench ' width='20' height='20' viewBox='0 0 30 30'>
+			<path d='M 20 1 L 14 4 L 14 13 L 1 27 L 3 29 L 17 16 L 26 16 L 29 10 L 27 10 L 24 13 L 19 13 L 17 11 L 17 6 L 20 3 Z'/>
+		</svg></span>"><span class='icon'>
+		<svg class='iconpath icon-wrench ' width='20' height='20' viewBox='0 0 30 30'>
+			<path d='M 20 1 L 14 4 L 14 13 L 1 27 L 3 29 L 17 16 L 26 16 L 29 10 L 27 10 L 24 13 L 19 13 L 17 11 L 17 6 L 20 3 Z'/>
+		</svg></span></kbd> (wrench) (edit source).</p>
 	
 		]]>
 		</description>
@@ -531,7 +672,7 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/store.svg" width="180" height="180" alt="Store" title="Store"/>
 			
-<p>The Creative Archive now has a dedicated <a href='store.html'>Store</a>, featuring pearls such as <a href='puzzle-type.html'>Puzzle Type</a>.<sup class='label Problem'>Experimental</sup></p>
+<p>The Creative Archive now has a dedicated <a href='store.html'>Store</a>, featuring pearls such as <a href='puzzle-type.html'>Puzzle Type</a>.<sup class='label Experimental'>Experimental</sup></p>
 		]]>
 		</description>
 		<category><![CDATA[Creative-Archive]]></category>
@@ -624,7 +765,25 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
 			
-<p>There is now an on-screen keyboard <kbd><span class='icon'><svg class='iconpath' width='20px' height=''20px' viewBox='0 0 400 180'><path d='M0 88 L 0 177 200 177 L 400 177 400 88 L 400 0 200 0 L 0 0 0 88 M384 88 L 384 161 200 161 L 15 161 15 88 L 15 15 200 15 L 384 15 384 88 M30 41 L 30 53 42 53 L 55 53 55 41 L 55 29 42 29 L 30 29 30 41 M69 41 L 69 53 81 53 L 94 53 94 41 L 94 29 81 29 L 69 29 69 41 M108 41 L 108 53 121 53 L 133 53 133 41 L 133 29 121 29 L 108 29 108 41 M148 41 L 148 53 160 53 L 173 53 173 41 L 173 29 160 29 L 148 29 148 41 M187 41 L 187 53 199 53 L 212 53 212 41 L 212 29 199 29 L 187 29 187 41 M226 41 L 226 53 239 53 L 251 53 251 41 L 251 29 239 29 L 226 29 226 41 M266 41 L 266 53 278 53 L 291 53 291 41 L 291 29 278 29 L 266 29 266 41 M305 41 L 305 53 317 53 L 330 53 330 41 L 330 29 317 29 L 305 29 305 41 M344 41 L 344 53 357 53 L 369 53 369 41 L 369 29 357 29 L 344 29 344 41 M30 87 L 30 98 42 98 L 55 98 55 87 L 55 75 42 75 L 30 75 30 87 M69 87 L 69 98 81 98 L 94 98 94 87 L 94 75 81 75 L 69 75 69 87 M108 87 L 108 98 121 98 L 133 98 133 87 L 133 75 121 75 L 108 75 108 87 M148 87 L 148 98 160 98 L 173 98 173 87 L 173 75 160 75 L 148 75 148 87 M187 87 L 187 98 199 98 L 212 98 212 87 L 212 75 199 75 L 187 75 187 87 M226 87 L 226 98 239 98 L 251 98 251 87 L 251 75 239 75 L 226 75 226 87 M266 87 L 266 98 278 98 L 291 98 291 87 L 291 75 278 75 L 266 75 266 87 M305 87 L 305 98 317 98 L 330 98 330 87 L 330 75 317 75 L 305 75 305 87 M344 87 L 344 98 357 98 L 369 98 369 87 L 369 75 357 75 L 344 75 344 87 M30 134 L 30 147 53 147 L 77 147 77 134 L 77 121 53 121 L 30 121 30 134 M93 134 L 93 147 200 147 L 307 147 307 134 L 307 121 200 121 L 93 121 93 134 M322 134 L 322 147 346 147 L 369 147 369 134 L 369 121 346 121 L 322 121 322 134'/></svg></span></kbd> for easier input on mobile devices. <kbd><span class='icon'><svg class='iconpath' width='20px' height=''20px' viewBox='0 -050 400 400'><path d='M216 78 C 174 84,137 106,112 139 L 106 148 100 145 C 97 144,87 139,77 134 C 58 125,58 125,58 127 C 58 127,64 153,71 184 C 78 215,84 241,85 242 C 85 244,194 194,194 192 C 194 191,185 186,173 181 C 161 175,152 170,152 170 C 151 168,164 155,170 150 C 221 110,293 122,328 177 C 339 194,343 211,344 237 L 345 248 355 247 C 360 247,371 246,379 246 L 394 246 394 240 C 394 192,379 153,348 122 C 313 88,262 71,216 78'/></svg></span></kbd>/<kbd><span class='icon'><svg class='iconpath' width='20px' height=''20px' viewBox='0 0 400 400'><path d='M235 65 C 205 79,180 90,180 90 C 180 90,196 112,216 139 C 235 166,252 188,252 188 C 252 187,255 178,258 167 C 261 156,263 146,264 145 C 264 143,269 147,278 157 C 337 218,307 320,225 340 C 144 360,71 285,93 204 C 97 187,105 174,121 155 L 127 148 125 146 C 122 143,92 118,92 118 C 89 118,65 151,59 164 C 1 284,110 418,238 384 C 370 350,398 174,283 101 C 278 98,277 96,277 95 C 277 95,280 83,284 69 C 288 55,291 43,291 42 C 292 40,295 39,235 65'/></svg></span></kbd> buttons included.</p>
+<p>There is now an on-screen keyboard <kbd data-key="<span class='icon'>
+		<svg class='iconpath icon-keyboard ' width='20' height='20' viewBox='0 0 400 180'>
+			<path d='M 0 88 L 0 177 200 177 L 400 177 400 88 L 400 0 200 0 L 0 0 0 88 M384 88 L 384 161 200 161 L 15 161 15 88 L 15 15 200 15 L 384 15 384 88 M30 41 L 30 53 42 53 L 55 53 55 41 L 55 29 42 29 L 30 29 30 41 M69 41 L 69 53 81 53 L 94 53 94 41 L 94 29 81 29 L 69 29 69 41 M108 41 L 108 53 121 53 L 133 53 133 41 L 133 29 121 29 L 108 29 108 41 M148 41 L 148 53 160 53 L 173 53 173 41 L 173 29 160 29 L 148 29 148 41 M187 41 L 187 53 199 53 L 212 53 212 41 L 212 29 199 29 L 187 29 187 41 M226 41 L 226 53 239 53 L 251 53 251 41 L 251 29 239 29 L 226 29 226 41 M266 41 L 266 53 278 53 L 291 53 291 41 L 291 29 278 29 L 266 29 266 41 M305 41 L 305 53 317 53 L 330 53 330 41 L 330 29 317 29 L 305 29 305 41 M344 41 L 344 53 357 53 L 369 53 369 41 L 369 29 357 29 L 344 29 344 41 M30 87 L 30 98 42 98 L 55 98 55 87 L 55 75 42 75 L 30 75 30 87 M69 87 L 69 98 81 98 L 94 98 94 87 L 94 75 81 75 L 69 75 69 87 M108 87 L 108 98 121 98 L 133 98 133 87 L 133 75 121 75 L 108 75 108 87 M148 87 L 148 98 160 98 L 173 98 173 87 L 173 75 160 75 L 148 75 148 87 M187 87 L 187 98 199 98 L 212 98 212 87 L 212 75 199 75 L 187 75 187 87 M226 87 L 226 98 239 98 L 251 98 251 87 L 251 75 239 75 L 226 75 226 87 M266 87 L 266 98 278 98 L 291 98 291 87 L 291 75 278 75 L 266 75 266 87 M305 87 L 305 98 317 98 L 330 98 330 87 L 330 75 317 75 L 305 75 305 87 M344 87 L 344 98 357 98 L 369 98 369 87 L 369 75 357 75 L 344 75 344 87 M30 134 L 30 147 53 147 L 77 147 77 134 L 77 121 53 121 L 30 121 30 134 M93 134 L 93 147 200 147 L 307 147 307 134 L 307 121 200 121 L 93 121 93 134 M322 134 L 322 147 346 147 L 369 147 369 134 L 369 121 346 121 L 322 121 322 134'/>
+		</svg></span>"><span class='icon'>
+		<svg class='iconpath icon-keyboard ' width='20' height='20' viewBox='0 0 400 180'>
+			<path d='M 0 88 L 0 177 200 177 L 400 177 400 88 L 400 0 200 0 L 0 0 0 88 M384 88 L 384 161 200 161 L 15 161 15 88 L 15 15 200 15 L 384 15 384 88 M30 41 L 30 53 42 53 L 55 53 55 41 L 55 29 42 29 L 30 29 30 41 M69 41 L 69 53 81 53 L 94 53 94 41 L 94 29 81 29 L 69 29 69 41 M108 41 L 108 53 121 53 L 133 53 133 41 L 133 29 121 29 L 108 29 108 41 M148 41 L 148 53 160 53 L 173 53 173 41 L 173 29 160 29 L 148 29 148 41 M187 41 L 187 53 199 53 L 212 53 212 41 L 212 29 199 29 L 187 29 187 41 M226 41 L 226 53 239 53 L 251 53 251 41 L 251 29 239 29 L 226 29 226 41 M266 41 L 266 53 278 53 L 291 53 291 41 L 291 29 278 29 L 266 29 266 41 M305 41 L 305 53 317 53 L 330 53 330 41 L 330 29 317 29 L 305 29 305 41 M344 41 L 344 53 357 53 L 369 53 369 41 L 369 29 357 29 L 344 29 344 41 M30 87 L 30 98 42 98 L 55 98 55 87 L 55 75 42 75 L 30 75 30 87 M69 87 L 69 98 81 98 L 94 98 94 87 L 94 75 81 75 L 69 75 69 87 M108 87 L 108 98 121 98 L 133 98 133 87 L 133 75 121 75 L 108 75 108 87 M148 87 L 148 98 160 98 L 173 98 173 87 L 173 75 160 75 L 148 75 148 87 M187 87 L 187 98 199 98 L 212 98 212 87 L 212 75 199 75 L 187 75 187 87 M226 87 L 226 98 239 98 L 251 98 251 87 L 251 75 239 75 L 226 75 226 87 M266 87 L 266 98 278 98 L 291 98 291 87 L 291 75 278 75 L 266 75 266 87 M305 87 L 305 98 317 98 L 330 98 330 87 L 330 75 317 75 L 305 75 305 87 M344 87 L 344 98 357 98 L 369 98 369 87 L 369 75 357 75 L 344 75 344 87 M30 134 L 30 147 53 147 L 77 147 77 134 L 77 121 53 121 L 30 121 30 134 M93 134 L 93 147 200 147 L 307 147 307 134 L 307 121 200 121 L 93 121 93 134 M322 134 L 322 147 346 147 L 369 147 369 134 L 369 121 346 121 L 322 121 322 134'/>
+		</svg></span></kbd> (keyboard) for easier input on mobile devices. <kbd data-key="<span class='icon'>
+		<svg class='iconpath icon-undo ' width='20' height='20' viewBox='0 -50 400 400'>
+			<path d='M 106 149 L 58 127 L 85 242 L 194 192 L 152 170 C 240 56 333 138 346 248 L 394 246 C 377 59 215 7 106 149'/>
+		</svg></span>"><span class='icon'>
+		<svg class='iconpath icon-undo ' width='20' height='20' viewBox='0 -50 400 400'>
+			<path d='M 106 149 L 58 127 L 85 242 L 194 192 L 152 170 C 240 56 333 138 346 248 L 394 246 C 377 59 215 7 106 149'/>
+		</svg></span></kbd> (undo)/<kbd data-key="<span class='icon'>
+		<svg class='iconpath icon-restart ' width='20' height='20' viewBox='-23 0 398 418'>
+			<path d='M 180 90 L 252 188 L 264 145 C 348 211 307 320 225 340 C 144 360 40 267 129 139 L 92 118 C -23 262 110 418 238 384 C 370 350 398 174 277 98 L 291 42 Z'/>
+		</svg></span>"><span class='icon'>
+		<svg class='iconpath icon-restart ' width='20' height='20' viewBox='-23 0 398 418'>
+			<path d='M 180 90 L 252 188 L 264 145 C 348 211 307 320 225 340 C 144 360 40 267 129 139 L 92 118 C -23 262 110 418 238 384 C 370 350 398 174 277 98 L 291 42 Z'/>
+		</svg></span></kbd> (restart) buttons included.</p>
 	
 		]]>
 		</description>
@@ -772,8 +931,20 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/game-bar.svg" width="180" height="180" alt="Game Bar" title="Game Bar"/>
 			
-<p>A better keyboard shortcut system was added. Menu navigation using (<kbd>ctrl</kbd>+)<kbd>enter</kbd>, <kbd>space</kbd>, (<kbd>shift</kbd>+)<kbd>tab</kbd> and <kbd>arrows</kbd> has improved.</p>
-<p>GIF hints can now be played/paused with <kbd>enter</kbd> or <kbd>space</kbd>.</p>
+<p>A better keyboard shortcut system was added. Menu navigation using (<kbd data-key="ctrl / ⌘">ctrl / ⌘</kbd>) <kbd data-key="<span class='icon'>
+		<svg class='iconpath icon-enter ' width='20' height='20' viewBox='0 0 10 10'>
+			<path d='M 7 6 L 7 0 L 9 0 L 9 8 L 4 8 L 4 10 L 0 7 L 4 4 L 4 6 Z'/>
+		</svg></span>"><span class='icon'>
+		<svg class='iconpath icon-enter ' width='20' height='20' viewBox='0 0 10 10'>
+			<path d='M 7 6 L 7 0 L 9 0 L 9 8 L 4 8 L 4 10 L 0 7 L 4 4 L 4 6 Z'/>
+		</svg></span></kbd> (enter), <kbd data-key=" "> </kbd> (space), (<kbd data-key="⇧">⇧</kbd> (shift))<kbd data-key="↹">↹</kbd> (tab) and <kbd>arrows</kbd> has improved.</p>
+<p>GIF hints can now be played/paused with <kbd data-key="<span class='icon'>
+		<svg class='iconpath icon-enter ' width='20' height='20' viewBox='0 0 10 10'>
+			<path d='M 7 6 L 7 0 L 9 0 L 9 8 L 4 8 L 4 10 L 0 7 L 4 4 L 4 6 Z'/>
+		</svg></span>"><span class='icon'>
+		<svg class='iconpath icon-enter ' width='20' height='20' viewBox='0 0 10 10'>
+			<path d='M 7 6 L 7 0 L 9 0 L 9 8 L 4 8 L 4 10 L 0 7 L 4 4 L 4 6 Z'/>
+		</svg></span></kbd> (enter) or <kbd data-key=" "> </kbd> (space).</p>
 
 		]]>
 		</description>
@@ -1037,124 +1208,6 @@
 			
 <p><a href='platformer-template.html'>Platformer Template</a> matures into its final version.</p>
 
-		]]>
-		</description>
-		<category><![CDATA[Game]]></category>
-<category><![CDATA[Platformer]]></category>
-<category><![CDATA[Puzzle]]></category>
-<category><![CDATA[Puzzlescript]]></category>
-	</item>
-	
-
-	<item>
-		<title><![CDATA[Tiaradventur princess behaviour]]></title>
-		<link>https://pedropsi.github.io/tiaradventur.html#RSS</link>
-		<guid>https://pedropsi.github.io/tiaradventur.html?guid=2019-01-30</guid>
-		<pubDate>Wed, 30 Jan 2019 07:06:05 GMT</pubDate>
-		<description>
-		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/tiaradventur.png" width="180" height="180" alt="Tiaradventur" title="Tiaradventur"/>
-			
-<p>The princess now stubbornly refuses to be left behind! On the last level, she will now consistently flee from the wolves and cause a fire - and gives clearer hints. It is also no longer possible to push an extra wolf into the last level.</p>
-	
-		]]>
-		</description>
-		<category><![CDATA[Game]]></category>
-<category><![CDATA[Puzzle]]></category>
-<category><![CDATA[Role-playing]]></category>
-<category><![CDATA[Puzzlescript]]></category>
-	</item>
-	
-
-	<item>
-		<title><![CDATA[Whirpuzzle physics fix]]></title>
-		<link>https://pedropsi.github.io/whirlpuzzle.html#RSS</link>
-		<guid>https://pedropsi.github.io/whirlpuzzle.html?guid=2019-01-30</guid>
-		<pubDate>Wed, 30 Jan 2019 07:06:05 GMT</pubDate>
-		<description>
-		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/whirlpuzzle.png" width="180" height="180" alt="Whirlpuzzle" title="Whirlpuzzle"/>
-			
-<p>Blocks that are stuck at some point in a sequence now won't push blocks located further away in the same sequence.</p>
-	
-		]]>
-		</description>
-		<category><![CDATA[Game]]></category>
-<category><![CDATA[Puzzle]]></category>
-<category><![CDATA[Puzzlescript]]></category>
-	</item>
-	
-
-	<item>
-		<title><![CDATA[Abxtract Tractx update]]></title>
-		<link>https://pedropsi.github.io/abxtract-tractx.html#RSS</link>
-		<guid>https://pedropsi.github.io/abxtract-tractx.html?guid=2018-10-08</guid>
-		<pubDate>Mon, 8 Oct 2018 07:06:05 GMT</pubDate>
-		<description>
-		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/abxtract-tractx.png" width="180" height="180" alt="Abxtract Tractx" title="Abxtract Tractx"/>
-			
-<p>Shortening of canvas size in <em>level 5</em>; improvements to colour contrast.</p>
-		]]>
-		</description>
-		<category><![CDATA[Art]]></category>
-<category><![CDATA[Game]]></category>
-<category><![CDATA[Puzzle]]></category>
-<category><![CDATA[Puzzlescript]]></category>
-	</item>
-	
-
-	<item>
-		<title><![CDATA[Tiaradventur updates]]></title>
-		<link>https://pedropsi.github.io/tiaradventur.html#RSS</link>
-		<guid>https://pedropsi.github.io/tiaradventur.html?guid=2018-09-29</guid>
-		<pubDate>Sat, 29 Sep 2018 07:06:05 GMT</pubDate>
-		<description>
-		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/tiaradventur.png" width="180" height="180" alt="Tiaradventur" title="Tiaradventur"/>
-			
-<p>Redesign of <em>level 3</em> to prevent unintended solution; minor tweaks to <em>levels 1, 2 and 4</em>; two crates removed from near the secret item; minor graphic changes (polishing margins, choosing smaller trees in key positions, fixing lamp flame animation); dialogue flow fix; player falling unintentionally into water disallowed; burning message added; diverse improvements of princess behaviour; fixes to auto-save system including a golden flash; new restart trigger; golden win animation.</p>
-	
-		]]>
-		</description>
-		<category><![CDATA[Game]]></category>
-<category><![CDATA[Puzzle]]></category>
-<category><![CDATA[Role-playing]]></category>
-<category><![CDATA[Puzzlescript]]></category>
-	</item>
-	
-
-	<item>
-		<title><![CDATA[PMGRP further improvements]]></title>
-		<link>https://pedropsi.github.io/pmgrp.html#RSS</link>
-		<guid>https://pedropsi.github.io/pmgrp.html?guid=2018-05-30</guid>
-		<pubDate>Wed, 30 May 2018 07:06:05 GMT</pubDate>
-		<description>
-		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/pmgrp.png" width="180" height="180" alt="Play Mini Gemini Replay (PMGRP)" title="Play Mini Gemini Replay (PMGRP)"/>
-			
-<p>Redesign of <em>level 0</em>; layout changes to <em>levels 6 and 7</em>; improvements in <b>replay mode</b> (highlighting, slowing down); future and present self no longer swap colours.</p>
-	
-		]]>
-		</description>
-		<category><![CDATA[Game]]></category>
-<category><![CDATA[Platformer]]></category>
-<category><![CDATA[Puzzle]]></category>
-<category><![CDATA[Puzzlescript]]></category>
-	</item>
-	
-
-	<item>
-		<title><![CDATA[PMGRP update]]></title>
-		<link>https://pedropsi.github.io/pmgrp.html#RSS</link>
-		<guid>https://pedropsi.github.io/pmgrp.html?guid=2018-05-20</guid>
-		<pubDate>Sun, 20 May 2018 07:06:05 GMT</pubDate>
-		<description>
-		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/pmgrp.png" width="180" height="180" alt="Play Mini Gemini Replay (PMGRP)" title="Play Mini Gemini Replay (PMGRP)"/>
-			
-<p>Aesthetical changes (including a redesign of respawn and goal animations);  improvement of multi-crate pile physics and dropping; suppression of <em>level 11</em>; all level numbers incremented by 1.</p>
-	
 		]]>
 		</description>
 		<category><![CDATA[Game]]></category>
