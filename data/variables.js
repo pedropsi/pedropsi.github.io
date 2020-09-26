@@ -298,7 +298,7 @@ TITLE_BY_CLEAN				:	()=>	`${v.TITLE_BY()}`,
 HEADER						:	()=>	`<header>${v.ABOUT_TEXT()}${v.ONE_LINER()}</header>`,
 
 ABOUT_TEXT					:	()=>	`<h2>About ${v.TITLE_BOLD()}</h2>`,
-HOWTO_TEXT					:	()=>	`${v.FIGURE_SIMPLE()}<h2>How to play</h2><h3>Controls - keyboard</h3>`,
+HOWTO_TEXT					:	()=>	`${v.FIGURE_SIMPLE()}<h2>How to play</h2><h3>Controls</h3>`,
 
 
 
