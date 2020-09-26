@@ -228,8 +228,6 @@ function PrepareGame(){
 	
 	if(!bar){
 		
-		// if(typeof onKeyDown!=="undefined")
-		// 	StopCapturingKeys(onKeyDown);
 		ResumeCapturingKeys(CaptureComboKey);
 		KeybindShortcuts();
 		

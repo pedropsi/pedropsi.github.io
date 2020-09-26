@@ -4529,15 +4529,9 @@ ContextualDefaultShortcuts=function(){
 		"up":FocusPrev,
 		"down":FocusNext
 	},
-	".navi":{
-		"up":FocusPrevParent,
-		"down":FocusNextParent,
-		"left":ClickPrevBounded,
-		"right":ClickNextBounded
-	},
 	".buttonrow":{
-		"up":FocusPrevParent,
-		"down":FocusNextParent,
+		"up":FocusPrevBounded,
+		"down":FocusNextBounded,
 		"left":FocusPrevBounded,
 		"right":FocusNextBounded
 	},

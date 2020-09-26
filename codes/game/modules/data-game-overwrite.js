@@ -205,5 +205,8 @@ window.Mobile.GestureHandler.prototype.toggleMenu=RequestLevelSelector;
 if(typeof MobileInitialise!=="undefined")
 	MobileInitialise(window.Mobile.GestureHandler.prototype);
 
+if(typeof onKeyDown!=="undefined")
+	StopCapturingKeys(onKeyDown);
+
 ////////////////////////////////////////////////////////////////////////////////
 Shout("data-game-overwrite")
