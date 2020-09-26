@@ -39,8 +39,7 @@ function UpdateFileMeta(file){
 
 	UpdateMetaCode=function(){
 		var oldcode=fs.readFileSync(path,"utf8");
-		var newcode=PageWithMetaHTML(v,PagePost(oldcode)).replace(/\t+/ig,`	`).replace(/\n+/ig,`
-		`).replace(/ +/ig,` `);
+		var newcode=PageWithMetaHTML(v,PagePost(oldcode));
 
 		if(oldcode!==newcode){
 			var saved=true;
