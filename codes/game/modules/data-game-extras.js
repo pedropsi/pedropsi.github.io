@@ -236,8 +236,8 @@ function PrepareGame(){
 		ColoriseGameBar();
 		AddGameBar();
 		
-		ListenOnce('click',PlaylistStartPlay,gameSelector);
-//		ListenOnce('touchstart',RequestKeyboard,gameSelector);
+		AttendOnce('click',PlaylistStartPlay,gameSelector);
+//		AttendOnce('touchstart',RequestKeyboard,gameSelector);
 		
 		if(ObtainInitialScroll)
 			ScrollInto(gameSelector);
@@ -460,10 +460,12 @@ function GameRotation(){
 	
 	ObtainResizeCanvas();
 	setTimeout(ObtainResizeCanvas,1000); //It takes 1 second to rotate
+	return true;
 }
 
 AttendOnce("GameBar",GameRotation);
 Attend('resize',GameRotation);
+
 
 /////////////////////////////////////////////////////////////////////////////////////
 // Save permissions
