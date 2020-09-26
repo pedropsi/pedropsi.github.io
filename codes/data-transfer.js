@@ -3562,11 +3562,11 @@ FocusElement=function(targetIDsel){
 
 
 // Which elements are focusable?
-FocusableInput=function(e){
+InputFocusable=function(e){
 	return Classed(e,"input")||In(["INPUT","TEXTAREA"],e.tagName);
 }
 Focusable=function(e){
-	return FocusableInput(e)||Classed(e,"button")||Classed(e,"gif")||e.tagName==="A";//List of element and classes
+	return InputFocusable(e)||Classed(e,"button")||Classed(e,"gif")||e.tagName==="A";//List of element and classes
 }
 UnFocusable=function(e){
 	return Classed(e,"closer")||Classed(e,"logo");
@@ -3577,7 +3577,7 @@ FocusInside=function(targetIDsel,backward){
 	var e=GetElement(targetIDsel);
 	if(!e)
 		return false;
-
+	
 	if(!backward)
 		var backward=false;
 
@@ -4033,7 +4033,7 @@ FindData=function(field,pid){
 };
 
 GetNodeData=function(field,elem){
-	if(FocusableInput(elem)&&elem.dataset&&(typeof elem.dataset[field]!=="undefined"))
+	if(InputFocusable(elem)&&elem.dataset&&(typeof elem.dataset[field]!=="undefined"))
 		return elem.value;
 	else
 		return elem.dataset[field];
@@ -4611,7 +4611,7 @@ ElementContext=function(targetSelector){
 }
 
 ContextBlocker=function(e){
-	return FocusableInput(e)||Classed(e,"window");
+	return InputFocusable(e)||Classed(e,"window");
 }
 
 SubContext=function(elem){
