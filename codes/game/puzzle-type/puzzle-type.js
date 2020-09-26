@@ -267,8 +267,8 @@ function KeyActions(){
 	Directions.map(DirectKeybinder);
 	["·","interpunkt"].map(Keybinder(Identity));//Do nothing
 
-	["Ctrl down","Ctrl left","page up"].map(Keybinder(SelectPreviousLevel));
-	["Ctrl up","Ctrl right","page down"].map(Keybinder(SelectNextLevel));
+	["Ctrl up","Ctrl left","page up"].map(Keybinder(SelectPreviousLevel));
+	["Ctrl down","Ctrl right","page down"].map(Keybinder(SelectNextLevel));
 
 	Keybinder(ObtainTitleScreenReLoader)("home");
 
