@@ -183,11 +183,12 @@ function StartGame(){
 
 TouchActionsTitlescreen=function(){
 	return{
-	"swipe-tap":LevelLoader,
-	"swipe-left":LevelLoader,
-	"swipe-up":LevelLoader,
-	"swipe-right":LevelLoader,
-	"swipe-down":LevelLoader
+	"mouseup":TitleScreenInput,
+	"swipe-tap":TitleScreenInput,
+	"swipe-left":TitleScreenInput,
+	"swipe-up":TitleScreenInput,
+	"swipe-right":TitleScreenInput,
+	"swipe-down":TitleScreenInput
 	}
 }
 
@@ -360,7 +361,11 @@ var CharLimits={
 };
 
 function TitleScreenInput(key){
-	if(key!=="Escape")
+	if(key==="Escape")
+		return
+	if(ObtainNewGameCondition())
+		Kinemate(OnboardMacro());
+	else
 		StartLevelFromTitle();
 }
 
@@ -2790,7 +2795,6 @@ function TitleScreenLoaderMacro(){
 			LaunchTouchActions(gameSelector,TouchActionsTitlescreen());
 			UnLaunchTouchActions(".top",TouchActionsTop());
 			UnLaunchTouchActions(".middle",TouchActionsMiddle());
-			Attend("mouseup",LevelLoader,gameSelector);
 			UnAttend("mouseup","#letters");
 			UnAttend("mouseup",".goal");
 			UnAttend("mouseup",".keystrokes");
@@ -2835,7 +2839,6 @@ function LevelLoadMacro(){
 			UnLaunchTouchActions(gameSelector,TouchActionsTitlescreen());
 			LaunchTouchActions(".top",TouchActionsTop());
 			LaunchTouchActions(".middle",TouchActionsMiddle());
-			UnAttend("mouseup",gameSelector);
 			Attend("mouseup",CopyHandler(LetterExtractor("#letters"),"#letters"),"#letters");
 			Attend("mouseup",CopyHandler(ExtractKeystrokes,".keystrokes"),".keystrokes");
 			Attend("mouseup",CopyHandler(LetterExtractor(".goal"),".goal"),".goal");
