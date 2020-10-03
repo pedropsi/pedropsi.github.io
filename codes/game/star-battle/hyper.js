@@ -19,7 +19,7 @@ ENVIRONMENT_IS_WEB = typeof window === "object";
 ENVIRONMENT_IS_WORKER = typeof importScripts === "function";
 ENVIRONMENT_IS_NODE = typeof process === "object" && typeof process.versions === "object" && typeof process.versions.node === "string";
 ENVIRONMENT_IS_SHELL = !ENVIRONMENT_IS_WEB && !ENVIRONMENT_IS_NODE && !ENVIRONMENT_IS_WORKER;
-var scriptDirectory = "";
+var scriptDirectory = "https://pedropsi.github.io/codes/game/star-battle/";
 
 function locateFile(path) {
 	if (Module["locateFile"]) {
@@ -764,7 +764,7 @@ function isFileURI(filename) {
 }
 var wasmBinaryFile = "hyper.wasm";
 if (!isDataURI(wasmBinaryFile)) {
-	wasmBinaryFile = locateFile(wasmBinaryFile)
+	wasmBinaryFile = locateFile(wasmBinaryFile);
 }
 
 function getBinary() {
