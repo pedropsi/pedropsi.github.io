@@ -152,17 +152,21 @@ ImageCardHTML=function(ImageObj){
 	var src=`images/${ImageObj.FOLDER_SMALL}/${ImageObj.TRACK}`;
 		src=SourceCoerceExtension(src,ImageExtensions,"png");
 
-	if(ImageObj.href)
+	if(ImageObj.href){
 		var link=ImageObj.href;
-	else //by default, link to image file
+		var target="";
+	}
+	else{ //by default, link to image file
 		var link=src;
+		var target=v.BLANK()
+	}
 
 	var legend=ImageObj.LEGEND?`<div>${ImageObj.LEGEND}</div>`:"";
 
 	LazyImageLoader(id,src);
 
 	return `
-	<a href="${link}" ${v.BLANK()} class="card-supra">
+	<a href="${link}" ${target} class="card-supra">
 		<div class="card ${ImageObj.CLA||""}">
 			<img	alt="${ImageObj.ALT||ImageObj.DESCRIPTION}" 
 					title="${ImageObj.DESCRIPTION}"
