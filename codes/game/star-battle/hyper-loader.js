@@ -1,4 +1,4 @@
-if(PageSearch("c")==="-sb"){
+if(PageSearch("c")){
 	PreAddElement(HyperCanvas(),"BODY");
 	var statusElement = document.getElementById('status');
 	var progressElement = document.getElementById('progress');
