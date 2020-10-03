@@ -5478,26 +5478,48 @@ var Icons={
 	"right":{primitive:"left",transform:"flip-horizontal"},
 	"down":	{primitive:"left",transform:"rotate-90"},
 
-	"cursor":{path:"M 10 0 L 0 30 L 8 29 L 9 40 L 11 40 L 12 29 L 20 30 ZM 10 0 L 2 30 L 8 29 L 9 40 L 11 40 L 12 29 L 18 30 Z",vbmin:"-10 -10",vbmax:"40 40"},
+	"cursor":{path:"M 10 0 L 0 30 L 8 29 L 9 40 L 11 40 L 12 29 L 20 30 Z",vbmin:"-10 -10",vbmax:"40 40"},
+	"cursor2":{path:"M 11 0 L 0 30 L 8 29 L 9 40 L 11 40 L 12 29 L 15 20 Z M 20 6 L 14 31 L 19 30 L 21 37 L 22 30 L 27 31 L 20 6 Z",vbmin:"-10 -10",vbmax:"40 40"},
 	"hand":{path:"M 7 25 Q 6 0 9 0 Q 12 0 12 3 L 12 20 Q 12 17 15 17 Q 18 17 18 22 Q 18 18 21 18 Q 24 18 24 24 Q 24 21 26 21 Q 28 21 28 30 Q 27 39 17 40 Q 8 41 6 37 Q -1 23 1 17 Q 3 13 6 22 Z",vbmin:"-10 -10",vbmax:"40 40"},
+	"hand2":{path:"M 7 25 Q 6 0 9 0 Q 12 0 12 3 L 12 20 Q 12 17 15 17 Q 18 17 18 22 Q 18 5 21 6 Q 23 6 24 24 Q 24 21 26 21 Q 28 21 28 30 Q 27 39 17 40 Q 8 41 6 37 Q -1 23 1 17 Q 3 13 6 22 Z",vbmin:"-10 -10",vbmax:"40 40"},
 	
 	"clickld":{path:"M 4 3 Q 4 6 0 8 Q 1 3 4 3 Z",vbmin:"0 -10",vbmax:"20 10"},
 	"clicklu":{primitive:"clickld",transform:"flip-vertical"},
 	"clickru":{primitive:"clicklu",transform:"flip-horizontal"},
 	"clickrd":{primitive:"clickru",transform:"flip-vertical"},
 	"clicklurd":{primitive:["clickld","clicklu","clickrd","clickru"]},
-	
+
+	"click2ld":{path:"M 18 6 Q 18 9 13 11 Q 15 6 18 6 Z",vbmin:"0 -10",vbmax:"45 15"},
+	"click2lu":{primitive:"click2ld",transform:"flip-vertical"},
+	"click2ru":{primitive:"click2lu",transform:"flip-horizontal"},
+	"click2rd":{primitive:"click2ru",transform:"flip-vertical"},
+	"click2lurd":{primitive:["click2ld","click2lu","click2rd","click2ru"]},
+
+	"dragl":{path:"M 6 10 Q 0 10 0 0 Q 0 -7 13 -6 Q 46 0 38 2 Q 18 2 13 10 L 13 9 Q 17 1 38 1 Q 42 0 13 -5 Q 4 -5 3 0 Q 2 8 6 9 Z",vbmax:"50 50"},
+	"dragu":{primitive:"dragl",transform:"rotate-270"},
+	"dragr":{primitive:"dragl",transform:"flip-horizontal"},
+	"dragd":{primitive:"dragu",transform:"flip-vertical"},
+
+	"swipel":{path:"M 17 2 Q 26 9 62 3 Q 11 20 17 2 Z",vbmax:"50 50"},
+	"swipeu":{primitive:"swipel",transform:"rotate-270"},
+	"swiper":{primitive:"swipel",transform:"flip-horizontal"},
+	"swiped":{primitive:"swipeu",transform:"flip-vertical"},
+
 	"hold":{path:"M 6 10 Q 0 10 0 0 Q 0 -10 10 -10 Q 20 -10 20 0 Q 20 10 13 10 L 13 9 Q 19 9 19 0 Q 19 -9 10 -9 Q 1 -9 1 0 Q 1 9 6 9 Z",vbmax:"50 50"},
 	
 	"tap":{primitive:["hand","clicklurd"],vbmax:"50 50"},
+	"tap2":{primitive:["hand2","click2lurd"],vbmax:"50 50"},
+	"tapdrag":{primitive:["hand","dragl"],vbmax:"50 50"},
 	"taphold":{primitive:["hand","hold"],vbmax:"50 50"},
-	
-	"swipeleft"	:{primitive:"hand",path:"M 6 10 Q 0 10 0 0 Q 0 -7 13 -6 Q 46 0 38 2 Q 18 2 13 10 L 13 9 Q 17 1 38 1 Q 42 0 13 -5 Q 4 -5 3 0 Q 2 8 6 9 Z",vbmax:"50 50"},
+
+	"swipeleft"	:{primitive:["hand","swipel"],vbmax:"50 50"},
 	"swipeup":{primitive:"swipeleft",transform:"rotate-270"},
 	"swiperight":{primitive:"swipeleft",transform:"flip-horizontal"},
 	"swipedown":{primitive:"swipeup",transform:"flip-vertical"},
 
 	"mouseclick":{primitive:["cursor","clicklurd"],vbmax:"50 50"},
+	"mouseclick2":{primitive:["cursor2","click2lurd"],vbmax:"50 50"},
+	"mousedrag":{primitive:["cursor","dragl"],vbmax:"50 50"},
 	"mousehold":{primitive:["cursor","hold"],vbmax:"50 50"},
 
 	"enter":{path:"M 7 6 L 7 0 L 9 0 L 9 8 L 4 8 L 4 10 L 0 7 L 4 4 L 4 6 Z",vbmax:"10 10"},
@@ -5799,9 +5821,14 @@ var KeyExplanations={
 	"swipedown":"swipe down",
 	"backsp":"backspace",
 	"mouseclick":"click",
+	"mouseclick2":"right click",
 	"handclick":"tap",
+	"tap2":"right tap",
+	"rightclick":"right click",
 	"taphold":"long tap",
-	"mousehold":"long click"
+	"mousehold":"long click",
+	"tapdrag":"tap and drag",
+	"mousedrag":"click and drag"
 }
 
 
@@ -5813,6 +5840,8 @@ KB=function(string,opts){
 
 var TypeSwipeKeys={
 	"click":["tap","mouseclick"],
+	"rightclick":["tap2","mouseclick2"],
+	"drag":["tapdrag","mousedrag"],
 	"hold":["taphold","mousehold"],
 	"previous":["swipeleft","shift tab"],
 	"next":["swiperight","tab"]
