@@ -1,6 +1,32 @@
-var statusElement = document.getElementById('status');
-var progressElement = document.getElementById('progress');
-showconsole = false;
+if(PageSearch("c")==="-sb"){
+	PreAddElement(HyperCanvas(),"BODY");
+	var statusElement = document.getElementById('status');
+	var progressElement = document.getElementById('progress');
+	showconsole = false;
+	
+	LoadScript("codes/game/star-battle/hyper.js");
+	LoadSource("codes/game/star-battle/hyper.css");
+
+
+function HyperCanvas(){return `
+
+<canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+
+<progress value="0" max="0" id="progress" hidden=""></progress>
+<div class="emscripten" id="status"></div>
+
+<center>
+  <input type="file" id="fileElem" multiple="" accept="*" style="display:none">
+  <input type="button" value="enable fullscreen" onclick="Module.requestFullscreen(false, false)">
+  <input type="button" value="show/hide console" onclick="
+  showconsole = !showconsole;
+  var element = document.getElementById('output');
+  if(showconsole) element.style = '';
+  else element.style = 'display:none';">
+</center>    	  
+
+`};
+
 
 function getQueryVariable(variable){
 	var query = window.location.search.substring(1);
@@ -122,9 +148,6 @@ window.onerror = function(event) {
 	xhr.send(null);
 })();
 
-var script = document.createElement('script');
-script.src = "hyper.js";
-document.body.appendChild(script);
 
 var default_arg = "?c=-sb+-zoom+.6"
 
@@ -152,3 +175,5 @@ window.addEventListener('deviceorientation', function(event) {
 	rotation_beta = event.beta;
 	rotation_gamma = event.gamma;
 });
+
+}

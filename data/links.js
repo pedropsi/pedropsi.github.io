@@ -28,6 +28,7 @@ A_FOLKEMUSEUM:{PAGE:"https://norskfolkemuseum.no",TITLE:"Norsk Folkemuseum",AUTH
 A_GOPHERS:{PAGE:"https://what-gophers-go-for.github.io/",TITLE:"What Gophers Go For",AUTHOR:"Thinky Collective",GROUP:"with-game-bar"},
 A_LICENSE_PUZZLESCRIPT:{PAGE:"https://github.com/increpare/PuzzleScript/blob/master/README.md",TITLE:"MIT License"},
 A_MANIFOLD_GARDEN:{PAGE:"https://manifold.garden",TITLE:"Manifold Garden",AUTHOR:"William Chyr"},
+A_HYPERROGUE:{PAGE:"https://roguetemple.com/z/hyper/",TITLE:"HyperRogue"}, //,AUTHOR:()=>v.ZENOROGUE()},
 A_11_LESSONS:{PAGE:"11-lessons-from-11-games",EXT:".html",TITLE:"11 lessons"},
 A_BOOKMARKLET:{PAGE:"game-bar",EXT:".html",TITLE:"Game bar Bookmarklet",AUTHOR:()=>v.NAME(),HASH:"Bookmarklet"},
 A_BUROKKU_KONEKUTA:{PAGE:"burokku-konekuta",EXT:".html",TITLE:"Burokku Konekuta"},

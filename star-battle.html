@@ -7,9 +7,13 @@
 
 ${v.HEADER()}
 
-<h2>Star battle geometric puzzle gallery</h2>
 <p>Here you'll find star battles in different geometries: triangular, penrose and hyperbolic star battles, folding cubes and icosahedrons (star battle in space), polar coordinates (polar star battle) and even a möbius strip (möbius star battle).</p>
-<p>The puzzles have different difficulties. Some are easier (one star) and others slightly harder (two star).</p>
+<p>The puzzles have different difficulties. One star puzzles tend to be easier, and two star puzzles a bit harder, but not always!</p>
+
+<h2>Paper star battles</h2>
+<p>To play these, all you need is pen and paper! Or, if you prefer, the flood-fill tool will work on every puzzle, e.g using MSPaint or other image editing software.</p>
+<p>Shall a star battle be named <em>in space</em>, then part of the challenge is <b>folding the puzzle</b> - in your head or after printing.</p>
+
 ${FolderGalleryHTML("star-battle",[
 	"triangular-star-battle-2.png",
 	"triangular-star-battle-3.png",
@@ -24,8 +28,46 @@ ${FolderGalleryHTML("star-battle",[
 	"tetrahedral-star-battle-12.png"
 ])}
 
-<h2>How to play star battle puzzles</h2>
+<h2>Interactive star battles</h2>
+<p>Pick one of the puzzles below to launch the <b>3D interactive star battle</b>, playable in your browser, thanks to ${v.ZENOROGUE()}!</p>
+
+${FolderGalleryHTML("star-battle",{
+	"triangular-star-battle-2.png":{
+		legend:"Triangular Star Battle (1*)",
+		href:"star-battle.html?c=-sb+-zoom+.6&amp;1=starbattle-triangle1.lev"},
+	"triangular-star-battle-3.png":{
+		legend:"Triangular Star Battle (2*)",
+		href:"star-battle.html?c=-sb+-zoom+.5&amp;1=starbattle-triangle2.lev"
+	},
+	"cube-star-battle-4.png":{
+		legend:"Star Battle 4x4x4 in space (1*)",
+		href:"star-battle.html?c=-sb&amp;1=starbattle-square.lev"
+	},
+	"icosahedron-star-battle-8.png":{
+		legend:"Star Battle in space -- icosahedron (2*)",
+		href:"star-battle.html?c=-sb&amp;1=starbattle-icosahedron.lev"
+	}})
+}
+
+
+<h3>Controls</h3>
+<h4>Placing stars</h4>
+<p>To place a star, ${KB("click")} on an empty cell.</p>
+<p>To remove a star, ${KB("click")} on it. ${KB("drag")} around to remove many.</p>
+
+<h4>Placing marks</h4>
+<p>To place a mark, ${KB("rightclick")} on an empty cell. Drag around to place many marks.</p>
+<p>To remove a mark, ${KB("rightclick")} on it. ${KB("drag")} around to remove many.</p>
+
+<h4>Panning</h4>
+<p>Use the the ${KB("middle mouse button")} to scroll. The position of the mouse around the center determines the direction of rotation.</p>
+
+
+<h2>Star battle rules</h2>
+<h3>Standard star battle puzzles</h3>
 <p>In standard star battle puzzles, you must deduce which cells in the (square) grid to place a star on, so that every line and region have a set number of stars (1 star: easy, 2 stars: medium, more stars: hard). Importantly, no two stars may touch each other diagonally, because they may not share vertices.</p>
+
+<h3>Geometric star battle puzzles</h3>
 <p>In star battle puzzles using different geometries, the rules are identical. However, lines may bend or wrap-around, there may be more than two lines per cell, and the number of cells per vertex / vertices per cell may differ, even locally.</p>
 <ul>
 	<li>Planar square grid: <b>2</b> lines per cell, <b>(1, 2 or) 4</b> cells per vertex, <b>(3, 5 or) 8</b> adjacent cells.</li>
@@ -40,7 +82,6 @@ ${FolderGalleryHTML("star-battle",[
 <p>You found an interesting grid geometry for a star battle puzzle, but how do you make a puzzle?</p>
 <p>At least two approaches can be distinguished, named <b>forward</b> or <b>backward</b> design. The forward approach should generate better puzzles, while the backward approach is sometimes easier.</p>
 <p>Finally, you'll need some ${AHTML("#tools")} to save you time!</p>
-
 
 <h3>Forward design approach</h3>
 <p>Here the focus is on particular deductions. So it is useful to have a list of interesting local region configurations in your mind.</p>
@@ -101,9 +142,12 @@ ${FolderGalleryHTML("star-battle",[
 	<li>origami star battle - this would require two orthogonal folds plus transparent paper. Folding could erase and create new <em>regions</em>, and reduce the number of stars.</li>
 </ul>
 
-<h2>Credits</h2>
-<p><a href="${v.LINK_URL()}.html">${v.TITLE_BOLD()}</a> by ${v.NAME_YEAR()}.</p>
 
+<h2>Credits</h2>
+<p><a href="${v.LINK_URL()}.html">${v.TITLE_BOLD()}</a> and ${v.NAME_YEAR()}, with special thanks to ${v.ZENOROGUE()} for adapting his brilliant engine, ${v.A_HYPERROGUE()}, for star battles.</p>
+
+
+<h3>Paper star battles</h3>
 <h4>Triangular</h4>
 <p>Thanks to the ${v.THINKY()}, especially ${v.SKYMOO()}, ${v.PORTPONKY()}, ${v.DEUSOVI()}, ${v.LANCE()}, ${v.VELLEIC()}  and ${v.DELTA()}, for important ideas, useful comments, mistake detection and trying out the triangular puzzles.</p>
 

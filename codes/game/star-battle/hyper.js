@@ -764,7 +764,8 @@ function isFileURI(filename) {
 }
 var wasmBinaryFile = "hyper.wasm";
 if (!isDataURI(wasmBinaryFile)) {
-	wasmBinaryFile = locateFile(wasmBinaryFile);
+	//wasmBinaryFile = locateFile(wasmBinaryFile);
+	wasmBinaryFile = "https://pedropsi.github.io/codes/game/star-battle/hyper.wasm"
 }
 
 function getBinary() {
@@ -3107,7 +3108,6 @@ var FS = {
 		Browser.init();
 		var fullname = name ? PATH_FS.resolve(PATH.join2(parent, name)) : parent;
 		var dep = getUniqueRunDependency("cp " + fullname);
-
 		function processData(byteArray) {
 			function finish(byteArray) {
 				if (preFinish) preFinish();
@@ -3132,6 +3132,7 @@ var FS = {
 		}
 		addRunDependency(dep);
 		if (typeof url == "string") {
+			var url="https://pedropsi.github.io/codes/game/star-battle/"+url;
 			Browser.asyncLoad(url, function(byteArray) {
 				processData(byteArray)
 			}, onerror)
