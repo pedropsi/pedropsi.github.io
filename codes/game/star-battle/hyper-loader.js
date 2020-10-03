@@ -6,24 +6,26 @@ if(PageSearch("c")){
 	
 	LoadScript("codes/game/star-battle/hyper.js");
 	LoadSource("codes/game/star-battle/hyper.css");
+	LoadSource("codes/game/game.css");
 
 
 function HyperCanvas(){return `
-<progress value="0" max="0" id="progress" hidden=""></progress>
-<div class="emscripten" id="status"></div>
-
-<center>
-  <input type="file" id="fileElem" multiple="" accept="*" style="display:none">
-  <input type="button" value="enable fullscreen" onclick="Module.requestFullscreen(false, false)">
-  <input type="button" value="show/hide console" onclick="
-  showconsole = !showconsole;
-  var element = document.getElementById('output');
-  if(showconsole) element.style = '';
-  else element.style = 'display:none';">
-</center>    	  
-
-<canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
-
+<div class="game-supra-container">
+	<div class="game-container">
+		<canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+		<div>
+			<progress value="0" max="0" id="progress" hidden=""></progress>
+			<div class="emscripten" id="status"></div>	
+			<input type="file" id="fileElem" multiple="" accept="*" style="display:none">
+			<input type="button" value="enable fullscreen" onclick="Module.requestFullscreen(false, false)">
+			<input type="button" value="show/hide console" onclick="
+			showconsole = !showconsole;
+			var element = document.getElementById('output');
+			if(showconsole) element.style = '';
+			else element.style = 'display:none';">
+		</div>
+	</div>
+</div>
 `};
 
 
