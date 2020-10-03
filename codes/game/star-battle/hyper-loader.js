@@ -9,9 +9,6 @@ if(PageSearch("c")){
 
 
 function HyperCanvas(){return `
-
-<canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
-
 <progress value="0" max="0" id="progress" hidden=""></progress>
 <div class="emscripten" id="status"></div>
 
@@ -24,6 +21,8 @@ function HyperCanvas(){return `
   if(showconsole) element.style = '';
   else element.style = 'display:none';">
 </center>    	  
+
+<canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
 
 `};
 
