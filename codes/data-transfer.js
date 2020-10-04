@@ -2201,7 +2201,8 @@ ElementAdder=function(Adder){
 			var id=GenerateId();
 			var e=NewNode(`<div id="${id}"></div>`);
 			Adder(s,e);
-			return e.outerHTML=htmlOrElement;
+			e.outerHTML=htmlOrElement;
+			return e;
 		}
 
 		if(!e) //actual HTML code
@@ -2520,15 +2521,15 @@ SVGHTML=function(opts){
 	var vbmin=opts.vbmin||SVGPathViewboxMin(path)||`0 0`;
 	var vbmax=opts.vbmax||SVGPathViewboxMax(path)||`400 400`;
 
-	var viewbox=opts.viewbox||`${vbmin} ${vbmax}`;
+	var viewBox=opts.viewBox||`${vbmin} ${vbmax}`;
 
 	var cla=opts.cla||"";
 
 	if(opts.transform)
-		path=SVGPathTransform(path,opts.transform,viewbox);
+		path=SVGPathTransform(path,opts.transform,viewBox);
 
 	var svghtml=`
-		<svg class='iconpath icon-${name} ${cla}' width='${width}' height='${height}' viewBox='${viewbox}'>
+		<svg class='iconpath icon-${name} ${cla}' width='${width}' height='${height}' viewBox='${viewBox}'>
 			<path d='${path}'/>
 		</svg>`;
 	return svghtml;
@@ -5604,9 +5605,9 @@ SymbolIcon=function(name){
 	
 	symbolObj=ComposeSymbols(symbolObj,primitives);
 
-	var viewbox=symbolObj.viewbox||`${symbolObj.vbmin||"0 0"} ${symbolObj.vbmax||"400 400"}`;
+	var viewBox=symbolObj.viewBox||`${symbolObj.vbmin||"0 0"} ${symbolObj.vbmax||"400 400"}`;
 	if(symbolObj.transform) //transform name, that is
-		symbolObj.path=SVGPathTransform(symbolObj.path,symbolObj.transform,viewbox);
+		symbolObj.path=SVGPathTransform(symbolObj.path,symbolObj.transform,viewBox);
 
 	delete symbolObj.transform;
 	return SymbolIcon[name]=symbolObj;
@@ -5701,8 +5702,8 @@ function SVGPathApply(path,CoordinatesF){
 	return svglineArray.map(svgline=>SVGLineApply(svgline,CoordinatesF)).join("");
 }
 
-function ViewboxCoordinates(viewbox){
-	return viewbox.split(new RegExp(SVGSpacePattern,"g")).map(Number);
+function ViewboxCoordinates(viewBox){
+	return viewBox.split(new RegExp(SVGSpacePattern,"g")).map(Number);
 }
 
 function FlipN(x,min,max){
@@ -5728,15 +5729,15 @@ var SVGTransforms={
 	"rotate-270":(x,y,vbArray)=>RotateXY(x,y,vbArray[0],vbArray[1],vbArray[2],vbArray[3],false)
 }
 
-function SVGPathTransform(path,name,viewbox){
+function SVGPathTransform(path,name,viewBox){
 	if(!In(SVGTransforms,name))
 		return path;
 
 	var T=SVGTransforms[name];
-	var viewboxArray=ViewboxCoordinates(viewbox);
+	var viewBoxArray=ViewboxCoordinates(viewBox);
 
 	function SVGCoordinatesF(xy){
-		return T(xy[0],xy[1],viewboxArray)
+		return T(xy[0],xy[1],viewBoxArray)
 	}
 
 	return SVGPathApply(path,SVGCoordinatesF);
@@ -5999,12 +6000,12 @@ function WallpaperHTML(opts){
 	var height=opts.height||opts.width||"100";
 	var width=opts.width||opts.height||"100";
 
-	var viewbox=opts.viewbox||`0 0 ${width} ${height}`;
+	var viewBox=opts.viewBox||`0 0 ${width} ${height}`;
 	
 	var scale=opts.scale||1;
 
 	return `<svg class='wallpaper ${cla}' width="100%" height="100%">
-				<pattern id="${name}" x="0" y="0" width="${width*scale}" height="${height*scale}" patternUnits="userSpaceOnUse" viewBox="${viewbox}"> 
+				<pattern id="${name}" x="0" y="0" width="${width*scale}" height="${height*scale}" patternUnits="userSpaceOnUse" viewBox="${viewBox}"> 
 					<g>
 						<path d="${path}" class="layer"/>
 					</g>
@@ -6050,7 +6051,7 @@ SVGHTML2=function(opts){
 	var y0=opts.y0||0;
 	var y1=typeof opts.y1==="undefined"?1:opts.y1;
 	var cla=opts.cla||"";
-	return `<svg ${cla?`class="${cla}"`:""} viewbox="${x0} ${y0} ${x1} ${y1}" ></svg>`;
+	return `<svg ${cla?`class="${cla}"`:""} viewBox="${x0} ${y0} ${x1} ${y1}" ></svg>`;
 }
 
 
@@ -6305,6 +6306,7 @@ AddChart=function(opts,target){
 	
 	Keys(opts).map(c=>AddChartComponent(c,opts[c],Prefix(cla,".")));
 	
+	chart=GetElement(".chart",target);
 	chart.viewBox.baseVal.x+=-chart.viewBox.baseVal.width/4;
 	chart.viewBox.baseVal.y+=-chart.viewBox.baseVal.height/4;
 	chart.viewBox.baseVal.width*=1.25;
