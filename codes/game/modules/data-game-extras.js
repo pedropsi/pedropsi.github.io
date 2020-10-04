@@ -4,12 +4,6 @@ var Portable=False;
 if(typeof RequestGameFeedback==="undefined"||typeof RequestHallOfFame==="undefined")
 	Portable=True;
 
-//Game Console
-var ConsoleExternal=function(){return PageIdentifier()==="game-console"};
-
-function GameHackURL(){
-	return "https://www.puzzlescript.net/editor.html?hack="+PageSearch("game");
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Game data link defaults, for puzzlescript, overwritable
@@ -88,11 +82,7 @@ if(typeof ObtainKeyboardTarget==="undefined")
 	}
 
 
-var ObtainInterlevelMessage=False;
-if(!Portable())
-	ObtainInterlevelMessage=True;
-if(ConsoleExternal())
-	ObtainInterlevelMessage=False;
+
 
 var MainKeys={
 	"undo":"Z",
@@ -155,11 +145,12 @@ if(typeof ObtainLevelNumberDisplay==="undefined")
 ////////////////////////////////////////////////////////////////////////////////
 //Hooks to Pedro PSI main site
 
-var HasGameFeedback=True;
-if(typeof RequestGameFeedback==="undefined"||ConsoleExternal()){
+if(typeof RequestGameFeedback==="undefined"){
 	var RequestGameFeedback=Identity;
-	HasGameFeedback=False;
+	var HasGameFeedback=False;
 }
+if(typeof HasGameFeedback==="undefined")
+	var HasGameFeedback=True;
 
 var HasHOF=True;
 if(typeof RequestHallOfFame==="undefined"){
@@ -357,13 +348,6 @@ function KeyboardButton(){
 		return "";
 }
 
-function WrenchButton(){
-	if(ConsoleExternal())
-		return GameBarButtonHTML("wrench",{onclick:'Navigate(GameHackURL(),false);'})
-	else
-		return "";
-}
-
 
 function LevelSelectorAllowed(){
 	if(typeof ObtainLevelSelectorAllowed!=="undefined")
@@ -396,8 +380,8 @@ function GameBar(){
 		LevelselectorButton(),
 		FeedbackButton(),
 		GameBarButtonLinkHTML("Credits","credits"),
-		WrenchButton(),
-		ConsoleExternal()?HiddenHTML('MoreButton'):"",
+		HiddenHTML('WrenchButton'),
+		HiddenHTML('MoreButton'),
 		MusicButton(),
 		FullscreenButton()
 	].join("");
@@ -1340,49 +1324,7 @@ function CloseKeyboard(){
 
 
 
-////////////////////////////////////////////////////////////////////////////////
-//Related games
-function MoreButton(){
-	return GameBarButtonHTML("more",{onclick:'RequestMore();'});	
-}
 
-if(Memory("PGD")){
-	HearOnce("GameBar",function(){ShowButton(MoreButton)});
-}else{
-	HearOnce("LoadPGD",function(){ShowButton(MoreButton)});
-}
-
-function RequestMore(){
-	if(!GameEntryData)
-		return;
-	var id=PageSearch("game");
-	var data=Memory(id);
-	if(!id||!data)
-		return;
-	
-	var author=data["author-consensus"];
-	function SameAuthor(au){
-		return function(d){
-			var d=Memory(d);//game data hook
-			return In(d["author-consensus"],au)||In(au,d["author-consensus"]);
-		}
-	}
-	var games=Memory("PGD").filter(SameAuthor(author)).map(function(id){return GameDropDownButtonHTML(id,false)});
-	var DPFields=[
-			['plain',{questionname:"More games by: <b>"+author+"</b>"}],
-			['plain',{questionname:games.join("\n")}],
-		];
-
-	RequestDataPack(DPFields,{
-		qonclose:GameFocus,
-		qdisplay:LaunchBalloon,
-		qtargetid:".game-container",
-		requireConnection:false,
-		shortcutExtras:ObtainKeyActionsGameBar(),
-		buttonSelector:"MoreButton",
-		spotlight:gameSelector
-	});
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 //Collapse Game Bar

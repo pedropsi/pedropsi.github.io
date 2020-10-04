@@ -23,18 +23,31 @@ var CoreModules=[
 		"mobile"
 	];
 
-var ExtraModules=[
-		"data-game-save",	
-		"data-game-colours",
-		"data-game-fullscreen",
-		"data-game-checkpoint",
-		"data-game-extras",
-		"data-game-overwrite",
-		"data-game-moves",
-		"data-game-hints",
-		"data-game-stats",
-		"data-game-macros"
-	];
+var InnerModules=[
+	"data-game-save",	
+	"data-game-colours",
+	"data-game-fullscreen",
+	"data-game-checkpoint",
+	"data-game-extras",
+	"data-game-overwrite",
+];
+
+var OuterModules=[
+	"data-game-moves",
+	"data-game-hints",
+	"data-game-stats",
+	"data-game-macros"
+];
+
+var ConsoleModules=[
+	"data-game-console"
+];
+
+if(!ConsoleExternal())
+	var ExtraModules=InnerModules.concat(OuterModules)
+else
+	var ExtraModules=InnerModules.concat(ConsoleModules)
+
 
 //Forks in April 2020 (todo - remove need to update this list)
 ///API  repos/{owner}/{repo}/forks  //https://docs.github.com/en/rest/reference/repos#forks

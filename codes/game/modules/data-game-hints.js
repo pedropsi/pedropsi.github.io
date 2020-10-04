@@ -45,7 +45,7 @@ function LoadHintsFile(){
 }
 
 function LoadHints(){
-	if(!ConsoleExternal()&&!Hints.cached)
+	if(!Hints.cached)
 		return LoadHintsFile();
 }
 

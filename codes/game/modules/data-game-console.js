@@ -1,21 +1,38 @@
 //Game Console
+
 var ConsoleExternal=function(){return PageIdentifier()==="game-console"};
+
+if(ConsoleExternal())
+	var HasGameFeedback=True;
+
+/////////////////////
+//Edit games
 
 function GameHackURL(){
 	return "https://www.puzzlescript.net/editor.html?hack="+PageSearch("game");
 }
 
+function WrenchButton(){
+	if(ConsoleExternal())
+		return GameBarButtonHTML("wrench",{onclick:'Navigate(GameHackURL(),false);'})
+	else
+		return "";
+}
 
 /////////////////////
 //Related games
+
 function MoreButton(){
 	return GameBarButtonHTML("more",{onclick:'RequestMore();'});	
 }
 
 if(Memory("PGD")){
 	HearOnce("GameBar",function(){ShowButton(MoreButton)});
+	HearOnce("GameBar",function(){ShowButton(WrenchButton)});
 }else{
 	HearOnce("LoadPGD",function(){ShowButton(MoreButton)});
+	HearOnce("LoadPGD",function(){ShowButton(WrenchButton)})
+
 }
 
 function RequestMore(){

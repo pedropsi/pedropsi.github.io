@@ -526,6 +526,8 @@ Outflows=function(name){
 //////////////////////////////////////////////////////////////////////
 //Hall of Fame
 
+var ConsoleExternal=function(){return PageIdentifier()==="game-console"};
+
 RequestHallOfFame=function(){
 	if(LocalStorage("hall-of-fame")===true)
 		return RequestWinnerMessage();
