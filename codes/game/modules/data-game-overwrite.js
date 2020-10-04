@@ -121,6 +121,7 @@ function nextLevel(){
 	againing=false;
 	messagetext="";
 	
+	ResetStory();
 	NextLevel();
 	
 	AdjustFlickscreen();
@@ -190,6 +191,17 @@ function playSound(seed) {
 	if (unitTesting) return;
 	var sound = cacheSeed(seed);
 	sound.play();
+}
+
+
+//Story
+if(typeof ShoutStory==="undefined")
+	function ShoutStory(){return;}; 
+
+function ResetStory(){
+	if(ShoutStory)
+		ShoutStory["list"]=LocalStorage("story");
+	EraseLocalStorage('story');
 }
 
 

@@ -24,6 +24,7 @@ var CoreModules=[
 	];
 
 var ExtraModules=[
+		"data-game-saves",	
 		"data-game-colours",
 		"data-game-fullscreen",
 		"data-game-checkpoint",
