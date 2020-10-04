@@ -6197,7 +6197,6 @@ AddChartAxisLegend=function(opts,chart){
 	var down=typeof opts.down==="undefined"?(-20/100):-Abs(opts.down);
 	var right=typeof opts.right==="undefined"?0:opts.right;
 	var scale=typeof opts.scale==="undefined"?0.5:opts.scale;
-	var type=opts.type;
 
 	var min=typeof opts.min==="undefined"?0:opts.min;
 	var max=typeof opts.max==="undefined"?1:opts.max;
