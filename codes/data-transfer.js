@@ -5510,6 +5510,7 @@ var Icons={
 	"tap":{primitive:["hand","clicklurd"],vbmax:"50 50"},
 	"tap2":{primitive:["hand2","click2lurd"],vbmax:"50 50"},
 	"tapdrag":{primitive:["hand","dragl"],vbmax:"50 50"},
+	"tap2drag":{primitive:["hand2","dragl"],vbmax:"50 50"},
 	"taphold":{primitive:["hand","hold"],vbmax:"50 50"},
 
 	"swipeleft"	:{primitive:["hand","swipel"],vbmax:"50 50"},
@@ -5520,6 +5521,7 @@ var Icons={
 	"mouseclick":{primitive:["cursor","clicklurd"],vbmax:"50 50"},
 	"mouseclick2":{primitive:["cursor2","click2lurd"],vbmax:"50 50"},
 	"mousedrag":{primitive:["cursor","dragl"],vbmax:"50 50"},
+	"mouse2drag":{primitive:["cursor2","dragl"],vbmax:"50 50"},
 	"mousehold":{primitive:["cursor","hold"],vbmax:"50 50"},
 
 	"enter":{path:"M 7 6 L 7 0 L 9 0 L 9 8 L 4 8 L 4 10 L 0 7 L 4 4 L 4 6 Z",vbmax:"10 10"},
@@ -5823,6 +5825,8 @@ var KeyExplanations={
 	"mouseclick":"click",
 	"mouseclick2":"right click",
 	"handclick":"tap",
+	"mouse2drag":"right click drag",
+	"tap2drag":"right tap drag",
 	"tap2":"right tap",
 	"rightclick":"right click",
 	"taphold":"long tap",
@@ -5842,6 +5846,7 @@ var TypeSwipeKeys={
 	"click":["tap","mouseclick"],
 	"rightclick":["tap2","mouseclick2"],
 	"drag":["tapdrag","mousedrag"],
+	"rightdrag":["tap2drag","mouse2drag"],
 	"hold":["taphold","mousehold"],
 	"previous":["swipeleft","shift tab"],
 	"next":["swiperight","tab"]
