@@ -1022,8 +1022,6 @@ if(typeof ObtainLevelTransition==="undefined")
 
 function AdvanceLevel(){
 	ObtainLevelTransition();
-	if(typeof ObtainLocalsaveLevel!=="undefined")
-		ObtainLocalsaveLevel();
 	LoadLevel();
 	ClearLevelRecord();
 	UpdateLevelSelectorButton();
@@ -1061,8 +1059,11 @@ function AdvanceEndScreen(){
 }
 
 function LoadLevel(){
-	if(ObtainLevelLoader)
+	if(ObtainLevelLoader){
 		ObtainLevelLoader();
+		if(ObtainLocalsaveLevel)
+			ObtainLocalsaveLevel();
+	}
 	else
 		console.log("Please define ObtainLevelLoader");
 }
