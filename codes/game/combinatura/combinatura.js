@@ -104,7 +104,7 @@ function InstructLanguage(lang){
 
 var gameModules=[
 "data-game-colours",
-"data-game-saves",
+"data-game-save",
 "data-game-fullscreen",
 "data-game-extras",
 "data-game-moves"

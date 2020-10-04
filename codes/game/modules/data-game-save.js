@@ -20,8 +20,8 @@ function ActivateSavePermission(thi){
 	savePermission=true;
 	Localsave();
 	ConsoleAddMany([
-		"Localsave is ON for "+PageTitle()+".",
-		"To stop localsaving and erase the save file for ${PageTitle()}, deselect "+ObtainSymbol("Save")+"."
+		`Localsave is ON for ${PageTitle()}`,
+		`To stop localsaving and erase the save file for ${PageTitle()}, deselect ${ObtainSymbol("Save")}.`
 		]);
 	Select(thi);
 }
@@ -181,7 +181,7 @@ function EraseLocalStorage(name){
 		}
 		catch(err){};
 	}
-	else
+	else if(LocalStorageName['list'])
 		LocalStorageName['list'].map(EraseLocalStorage);
 }
 
@@ -218,10 +218,16 @@ function SaveButton(){
 		return "";
 	return GameBarButtonHTML('save',{
 		onclick:'ToggleSavePermission(this);GameFocus();',
-		class:savePermission?'selected':''
 	})
 };
 
-HearElement("SaveButton",()=>ShowButton("SaveButton"));
 
-Shout("data-game-saves")
+
+AttendOnce("GameBar",function(){
+	ShowButton(SaveButton);
+	if(savePermission)
+		Select("SaveButton")
+});
+
+
+Shout("data-game-save")
