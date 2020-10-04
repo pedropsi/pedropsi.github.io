@@ -1706,6 +1706,10 @@ LoadNodeSource=function(source){
 
 //Load scripts
 LoadWebSource=function(source){
+	if(LoadWebSource[source])
+		return;
+
+	LoadWebSource[source]=true;
 	if(Posfixed(source,".js"))
 		LoadScript(source);
 	if(Posfixed(source,".css"))
@@ -5866,7 +5870,7 @@ HyperText=function(name,value){
 }
 
 NodeHyperText=function(name){
-	LoadSource("data/hypertext/"+name+".js");
+	LoadSource("data/hypertext/"+UnAfterfix(name,"/")+".js");
 	while(!globalThis[name]){}
 	var text=globalThis[name]();
 	return text.replace(/\s+/ig," ");
@@ -5884,7 +5888,7 @@ WebHyperText=function(name,value){
 	}
 	else{
 		if(!HyperText[name]){
-			LoadSource("data/hypertext/"+name+".js");
+			LoadSource("data/hypertext/"+UnAfterfix(name,"/")+".js");
 			HyperText[name]=true;
 		}
 		return AwaitHypertext(name);
