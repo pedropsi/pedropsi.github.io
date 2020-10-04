@@ -12,4 +12,7 @@ ArrowKeysHyperText=function(){
 	return	Enumerate(grids,"or");
 }
 
-HyperText("ArrowKeys",ArrowKeysHyperText)
+HyperText("ArrowKeys",ArrowKeysHyperText);
+HyperText("ArrowKeys/Arrows",()=>ArrowKeysGridHTML(Directions));
+
+LoadSource("codes/game/game.css")//if needed
