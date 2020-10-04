@@ -286,4 +286,4 @@ if(typeof onKeyDown!=="undefined")
 
 
 ////////////////////////////////////////////////////////////////////////////////
-Shout("data-game-overwrite")
+Shout("data-game-overwrite-puzzlescript")

@@ -45,7 +45,7 @@ ListDependencies=function(){
 		"codes/game/modules/mobile.js",
 		//PS game bar modules
 		"codes/game/modules/data-game-colours.js",
-		"codes/game/modules/data-game-overwrite.js",
+		"codes/game/modules/data-game-overwrite-puzzlescript.js",
 		"codes/game/modules/data-game-moves.js"
 	];
 	

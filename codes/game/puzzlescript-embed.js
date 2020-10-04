@@ -30,7 +30,7 @@ var InnerModules=[
 	"data-game-checkpoint",
 	"data-game-bar",
 	"data-game-level",
-	"data-game-overwrite",
+	"data-game-overwrite-puzzlescript",
 ];
 
 var OuterModules=[
