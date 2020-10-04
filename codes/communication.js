@@ -21,7 +21,7 @@ ListDependencies=function(){
 	dependencies=dependencies.concat([
 		name+".html",
 		//Common game bar modules
-		"codes/game/modules/data-game-extras.js",
+		"codes/game/modules/data-game-bar.js",
 		"codes/game/game.css"
 	]);
 	

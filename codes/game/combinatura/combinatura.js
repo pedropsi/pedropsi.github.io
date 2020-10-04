@@ -106,7 +106,7 @@ var gameModules=[
 "data-game-colours",
 "data-game-save",
 "data-game-fullscreen",
-"data-game-extras",
+"data-game-bar",
 "data-game-moves"
 ]
 

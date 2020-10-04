@@ -28,7 +28,8 @@ var InnerModules=[
 	"data-game-colours",
 	"data-game-fullscreen",
 	"data-game-checkpoint",
-	"data-game-extras",
+	"data-game-bar",
+	"data-game-level",
 	"data-game-overwrite",
 ];
 

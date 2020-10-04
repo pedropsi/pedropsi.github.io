@@ -216,36 +216,36 @@ function AdjustFlickscreen(){
 //Puzzlescript keybindings
 
 //Game keybinding profile
-if(typeof ObtainKeyActionsGame==="undefined")
-	var ObtainKeyActionsGame=function(){
-		return {
-			//Arrows
-			"left"		:GameKeyHandler(37),
-			"up"		:GameKeyHandler(38),
-			"right"		:GameKeyHandler(39),
-			"down"		:GameKeyHandler(40),
-			"W"			:GameKeyHandler(37),
-			"A"			:GameKeyHandler(38),
-			"S"			:GameKeyHandler(39),
-			"D"			:GameKeyHandler(40),
-			//Action / Select
-			"enter"		:ObtainAction,	//GameKeyHandler(88),
-			"C"			:ObtainAction,	//GameKeyHandler(88),
-			"X"			:ObtainAction,	//GameKeyHandler(88),
-			"spacebar"	:ObtainAction,	//GameKeyHandler(88),
-			// Undo	 
-			"Z"			:ObtainUndo,	//GameKeyHandler(85),
-			"U"			:ObtainUndo,	//GameKeyHandler(85),
-			"Y"			:ObtainRedo,	//GameKeyHandler(85),
-			/*"backspace"	:GameKeyHandler(85),*/
-			// Restart
-			"R"			:ObtainRestart,	//GameKeyHandler(82),
-			// Quit
-			"escape"	:GameKeyHandler(27),
-			"Q"			:GameKeyHandler(27)
-		};
-	}
+var ObtainKeyActionsGame=function(){
+	return {
+		//Arrows
+		"left"		:GameKeyHandler(37),
+		"up"		:GameKeyHandler(38),
+		"right"		:GameKeyHandler(39),
+		"down"		:GameKeyHandler(40),
+		"W"			:GameKeyHandler(37),
+		"A"			:GameKeyHandler(38),
+		"S"			:GameKeyHandler(39),
+		"D"			:GameKeyHandler(40),
+		//Action / Select
+		"enter"		:ObtainAction,	//GameKeyHandler(88),
+		"C"			:ObtainAction,	//GameKeyHandler(88),
+		"X"			:ObtainAction,	//GameKeyHandler(88),
+		"spacebar"	:ObtainAction,	//GameKeyHandler(88),
+		// Undo	 
+		"Z"			:ObtainUndo,	//GameKeyHandler(85),
+		"U"			:ObtainUndo,	//GameKeyHandler(85),
+		"Y"			:ObtainRedo,	//GameKeyHandler(85),
+		/*"backspace"	:GameKeyHandler(85),*/
+		// Restart
+		"R"			:ObtainRestart,	//GameKeyHandler(82),
+		// Quit
+		"escape"	:GameKeyHandler(27),
+		"Q"			:GameKeyHandler(27)
+	};
+}
 	
+
 if(typeof GameKeyHandler==="undefined")
 	var GameKeyHandler=function(newkey){
 		return function(ev){ev.keyCode=newkey;InstructGame(ev)}
@@ -282,6 +282,8 @@ if(typeof MobileInitialise!=="undefined")
 
 if(typeof onKeyDown!=="undefined")
 	StopCapturingKeys(onKeyDown);
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 Shout("data-game-overwrite")
