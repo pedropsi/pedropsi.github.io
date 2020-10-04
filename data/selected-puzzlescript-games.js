@@ -3,7 +3,7 @@
 */
 
 var SelectedGames=[
-	{LINK:`https://chemelia.itch.io/goosey-gardens`,TITLE:`Goosey Gardens`,AUTHOR_LINK:`https://twitter.com/chapliboy`,AUTHOR:`Chemelia`,YEAR:2020,TAGS:["Garden","Gravity","Sokoban"]},
+	{LINK:`https://chemelia.itch.io/goosey-gardens`,TITLE:`Goosey Gardens`,AUTHOR_LINK:`https://twitter.com/chapliboy`,AUTHOR:`Amelia Moser (Chemelia)`,YEAR:2020,TAGS:["Garden","Gravity","Sokoban"]},
 	{LINK:`https://nebu-soku.itch.io/gyoretu-puzzle`,TITLE:`Gyoretu Puzzle`,AUTHOR_LINK:`https://twitter.com/chapliboy`,AUTHOR:`Nebu Soku`,YEAR:2020,TAGS:["Swarm"]},
 	{LINK:`https://playtest.chapliboy.com/puzzlescript.html`,TITLE:`Mouse in slippers`,AUTHOR_LINK:`https://twitter.com/chapliboy`,AUTHOR:`Chapliboy`,YEAR:2020,TAGS:["Sokoban","Ice"]},
 	{LINK:`https://jacklance.github.io/MacAndCHI/`,TITLE:`Mac and CHI`,AUTHOR_LINK:`https://twitter.com/Jack_L_Lance`,AUTHOR:`Jack Lance & PHI`,YEAR:2020,TAGS:["Sokoban","Team"]},
