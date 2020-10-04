@@ -213,6 +213,69 @@ function AdjustFlickscreen(){
 }
 
 
+//Puzzlescript keybindings
+
+//Game keybinding profile
+if(typeof ObtainKeyActionsGame==="undefined")
+	var ObtainKeyActionsGame=function(){
+		return {
+			//Arrows
+			"left"		:GameKeyHandler(37),
+			"up"		:GameKeyHandler(38),
+			"right"		:GameKeyHandler(39),
+			"down"		:GameKeyHandler(40),
+			"W"			:GameKeyHandler(37),
+			"A"			:GameKeyHandler(38),
+			"S"			:GameKeyHandler(39),
+			"D"			:GameKeyHandler(40),
+			//Action / Select
+			"enter"		:ObtainAction,	//GameKeyHandler(88),
+			"C"			:ObtainAction,	//GameKeyHandler(88),
+			"X"			:ObtainAction,	//GameKeyHandler(88),
+			"spacebar"	:ObtainAction,	//GameKeyHandler(88),
+			// Undo	 
+			"Z"			:ObtainUndo,	//GameKeyHandler(85),
+			"U"			:ObtainUndo,	//GameKeyHandler(85),
+			"Y"			:ObtainRedo,	//GameKeyHandler(85),
+			/*"backspace"	:GameKeyHandler(85),*/
+			// Restart
+			"R"			:ObtainRestart,	//GameKeyHandler(82),
+			// Quit
+			"escape"	:GameKeyHandler(27),
+			"Q"			:GameKeyHandler(27)
+		};
+	}
+	
+if(typeof GameKeyHandler==="undefined")
+	var GameKeyHandler=function(newkey){
+		return function(ev){ev.keyCode=newkey;InstructGame(ev)}
+	}
+	
+if(typeof InstructGame==="undefined")
+	var InstructGame=function(event){
+		event.preventDefault();
+		var key=event.keyCode;
+	
+		//Avoid repetition?
+		if (In(keybuffer,key))
+			return;
+		
+		//Instruct the game
+		if (!In(keybuffer,key)){
+			keybuffer.splice(keyRepeatIndex,0,key);
+			keyRepeatTimer=0;
+			CheckRegisterKey(event);
+			}
+	}
+	
+	//Execute key instructions
+if(typeof CheckRegisterKey==="undefined")
+	var CheckRegisterKey=function(event){
+		checkKey(event,true);
+		RegisterMove(event.keyCode);
+	}
+		
+
 window.Mobile.GestureHandler.prototype.toggleMenu=RequestLevelSelector;
 if(typeof MobileInitialise!=="undefined")
 	MobileInitialise(window.Mobile.GestureHandler.prototype);
