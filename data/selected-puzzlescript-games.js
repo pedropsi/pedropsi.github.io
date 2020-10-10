@@ -3,11 +3,12 @@
 */
 
 var SelectedGames=[
-	{LINK:`https://galactical.itch.io/wall-clip`,TITLE:`Wall Clip`,AUTHOR_LINK:`https://galactical.itch.io`,AUTHOR:`Galactical`,YEAR:2020,TAGS:["Wraparound","Sokoban"]},
-	{LINK:`https://chemelia.itch.io/goosey-gardens`,AUTHOR_LINK:`https://chemelia.itch.io`,TITLE:`Goosey Gardens`,AUTHOR:`Amelia Moser (Chemelia)`,YEAR:2020,TAGS:["Garden","Gravity","Sokoban"]},
-	{LINK:`https://nebu-soku.itch.io/gyoretu-puzzle`,TITLE:`Gyoretu Puzzle`,AUTHOR_LINK:`https://twitter.com/chapliboy`,AUTHOR:`Nebu Soku`,YEAR:2020,TAGS:["Swarm"]},
-	{LINK:`https://playtest.chapliboy.com/puzzlescript.html`,TITLE:`Mouse in slippers`,AUTHOR_LINK:`https://twitter.com/chapliboy`,AUTHOR:`Chapliboy`,YEAR:2020,TAGS:["Sokoban","Ice"]},
-	{LINK:`https://jacklance.github.io/MacAndCHI/`,TITLE:`Mac and CHI`,AUTHOR_LINK:`https://twitter.com/Jack_L_Lance`,AUTHOR:`Jack Lance & PHI`,YEAR:2020,TAGS:["Sokoban","Team"]},
+{LINK:`https://nebu-soku.itch.io/sound-garden`,TITLE:`Sound Garden`,AUTHOR_LINK:`https://nebu-soku.itch.io/`,AUTHOR:`Nebu Soku`,YEAR:2020,TAGS:["Garden","Sandbox"]},
+{LINK:`https://galactical.itch.io/wall-clip`,TITLE:`Wall Clip`,AUTHOR_LINK:`https://galactical.itch.io`,AUTHOR:`Galactical`,YEAR:2020,TAGS:["Wraparound","Sokoban"]},
+{LINK:`https://chemelia.itch.io/goosey-gardens`,AUTHOR_LINK:`https://chemelia.itch.io`,TITLE:`Goosey Gardens`,AUTHOR:`Amelia Moser (Chemelia)`,YEAR:2020,TAGS:["Garden","Gravity","Sokoban"]},
+{LINK:`https://nebu-soku.itch.io/gyoretu-puzzle`,TITLE:`Gyoretu Puzzle`,AUTHOR_LINK:`https://nebu-soku.itch.io/`,AUTHOR:`Nebu Soku`,YEAR:2020,TAGS:["Swarm"]},
+{LINK:`https://playtest.chapliboy.com/puzzlescript.html`,TITLE:`Mouse in slippers`,AUTHOR_LINK:`https://twitter.com/chapliboy`,AUTHOR:`Chapliboy`,YEAR:2020,TAGS:["Sokoban","Ice"]},
+{LINK:`https://jacklance.github.io/MacAndCHI/`,TITLE:`Mac and CHI`,AUTHOR_LINK:`https://twitter.com/Jack_L_Lance`,AUTHOR:`Jack Lance & PHI`,YEAR:2020,TAGS:["Sokoban","Team"]},
 {LINK:`b47581d15bc95200036b30bed28393e7`,TITLE:`Polyomino Puzzle`,AUTHOR_LINK:`https://zithral.itch.io/`,AUTHOR:`Zithral`,YEAR:2020,TAGS:["Puzzle","Polyomino"]},
 {LINK:`https://bregehr.itch.io/cutters-and-concrete`,TITLE:`Cutters and Concrete`,AUTHOR_LINK:`https://bregehr.itch.io/`,AUTHOR:`Blake Regehr`,YEAR:2020,TAGS:["Sokoban","Subtraction"]},
 {LINK:`https://le-slo.itch.io/rainwater-honey-oil`,TITLE:`Metamor[ρ]hosis`,AUTHOR_LINK:`https://le-slo.itch.io/`,AUTHOR:`Lucas Le Slo`,YEAR:2020,TAGS:["Gravity"]},
