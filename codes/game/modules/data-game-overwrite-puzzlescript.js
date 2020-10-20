@@ -63,6 +63,8 @@ function ObtainLevelSelectorAllowed(){
 if(ObtainLevelTitle==="Previous"){ //Case for title specified in message before the level
 	var ObtainLevelTitle=function(lvl){
 		var title= ObtainStateScreens()[LevelScreen(lvl)-1].message;
+		if(!title)
+			return "";
 		title=title.replace(/^[\-\"\_\:\'\s\n]*(level\s*\d*)*[\-\"\_\:\'\s\n]*/im,"").replace(/[\-\"\_\:\'\s\n]*$/im,"");
 		return title.replace(/[\-][\-\s]?/gi," ");
 	}
