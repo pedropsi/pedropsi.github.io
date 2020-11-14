@@ -1535,7 +1535,7 @@ message "Enclosure"
 ###########
 
 
-message ...... Level 12 / 12 *** .......
+message ...... Level 12 / 12 **** .......
 message "Wheel of dharma"
 
 ############
