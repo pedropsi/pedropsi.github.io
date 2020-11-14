@@ -6,7 +6,7 @@ var ObtainLevelTitle="Previous";
 // Source
 var sourceCode=`
 (- Copyright Pedro PSI 2020                             -)
-(- Version nº 13/11/2020                            .11 -)
+(- Version nº 14/11/2020                            .12 -)
 (- RULES / LEGEND section under a CC-BY-NC license      -)
 (--------------------------------------------------------)
 
@@ -1337,7 +1337,7 @@ LEVELS
 =======
 
 message Welcome to Starkoban!
-message Just place one stone per area.
+message Place one stone per area.
 
 message ...... Level 1 / 10 * .......
 message "For star'ters"
@@ -1370,7 +1370,9 @@ message "Moth"
 ####..##
 ########
 
-message Single stones block entire lines.
+message Active stones are called "stars".
+message Stars block entire lines.
+
 message ...... Level 3 / 10 ** .......
 message "Linear"
 
@@ -1390,7 +1392,7 @@ message "Linear"
 ########
 
 
-message Stones cannot touch each other...
+message Stars cannot touch each other...
 message ... even diagonally.
 
 message ...... Level 4 / 10 ** .......
@@ -1407,7 +1409,7 @@ message "Touchy"
 #######
 
 
-message Lines extend across regions.
+message Starlines extend across regions.
 message ...... Level 5 / 10 *** .......
 message "Waltz"
 
@@ -1424,7 +1426,7 @@ message "Waltz"
 #########
 
 
-message Lines extend across gaps.
+message Starlines jump over gaps.
 message ...... Level 6 / 10 *** .......
 message "Intersect"
 
@@ -1442,7 +1444,7 @@ message "Intersect"
 ########
 
 
-message Stones may need an extra push.
+message Some stones need an extra push.
 message ...... Level 7 / 10 *** .......
 message "Imperfection"
 
@@ -1461,7 +1463,7 @@ message "Imperfection"
 ######
 
 
-message Stones are territorial.
+message Stars are territorial.
 message No more than one per area.
 
 message ...... Level 8 / 10 **** .......
@@ -1480,7 +1482,7 @@ message "Smallest star battle"
 
 
 message Well done!
-message You've learned the key mechanics.
+message You've learned the base rules.
 message So here are some bonus levels!
 
 message ...... Level 9 / 10 **** .......
