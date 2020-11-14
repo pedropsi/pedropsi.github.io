@@ -1698,6 +1698,8 @@ LoadSources=function(sourceArray,SuccessF){
 }
 
 LoadNodeSource=function(source){
+	if(Posfixed(source,".css"))
+		return;
 	var source=UnPosfix(source,".js");
 	if(!Prefixed(source,"."))
 		source=Prefix(UnPrefix(source,"/"),"../");

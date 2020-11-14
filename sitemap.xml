@@ -2,15 +2,21 @@
 		
 		
 	<url>
+		<loc>https://pedropsi.github.io/starkoban</loc>
+		<lastmod>2020-11-14</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+
+	<url>
 		<loc>https://pedropsi.github.io/gravirinth</loc>
 		<lastmod>2020-9-26</lastmod>
-		<changefreq>weekly</changefreq>
+		<changefreq>monthly</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/videoplaytesting-tips</loc>
 		<lastmod>2020-8-29</lastmod>
-		<changefreq>monthly</changefreq>
+		<changefreq>yearly</changefreq>
 	</url>
 
 	<url>
@@ -70,7 +76,7 @@
 	<url>
 		<loc>https://pedropsi.github.io/puzzle-type</loc>
 		<lastmod>2020-09-19</lastmod>
-		<changefreq>weekly</changefreq>
+		<changefreq>monthly</changefreq>
 	</url>
 
 	<url>
@@ -166,7 +172,7 @@
 	<url>
 		<loc>https://pedropsi.github.io/abxtract-tractx</loc>
 		<lastmod>2018-10-08</lastmod>
-		<changefreq>yearly</changefreq>
+		<changefreq>never</changefreq>
 	</url>
 
 	<url>
@@ -249,8 +255,8 @@
 
 	<url>
 		<loc>https://pedropsi.github.io/index</loc>
-		<lastmod>2020-09-25</lastmod>
-		<changefreq>weekly</changefreq>
+		<lastmod>2020-10-04</lastmod>
+		<changefreq>monthly</changefreq>
 	</url>
 
 	<url>

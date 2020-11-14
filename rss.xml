@@ -16,6 +16,24 @@
 		</image>
 		
 	<item>
+		<title><![CDATA[Star battle Interactive]]></title>
+		<link>https://pedropsi.github.io/index.html#RSS</link>
+		<guid>https://pedropsi.github.io/index.html?guid=2020-10-04</guid>
+		<pubDate>Sun, 4 Oct 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/splash.svg" width="180" height="180" alt="Creative Archive" title="Creative Archive"/>
+			
+		<p><a href='star-battle.html'>Star Battle</a> now integrates the <a href='https://roguetemple.com/z/hyper/' rel='noreferrer noopener'>HyperRogue</a> engine. Thanks <a href='https://twitter.com/ZenoRogue' rel='noreferrer noopener'><span class="name">ZenoRogue</span></a>!</p>
+		<p><a href='star-battle.html?c=-sb&1=starbattle-cube-13.lev'>Puzzle 13</a> added.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Sitemap]]></category>
+	</item>
+	
+
+	<item>
 		<title><![CDATA[Autumn update]]></title>
 		<link>https://pedropsi.github.io/index.html#RSS</link>
 		<guid>https://pedropsi.github.io/index.html?guid=2020-09-25</guid>
@@ -531,7 +549,7 @@
 		<pubDate>Fri, 24 Jan 2020 07:06:05 GMT</pubDate>
 		<description>
 		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/gravirinth-legacy.png" width="180" height="180" alt="Gravirinth [Legacy]" title="Gravirinth [Legacy]"/>
+			<img src="https://pedropsi.github.io/images/180/gravirinth-legacy.png" width="180" height="180" alt="Gravirinth Legacy" title="Gravirinth Legacy"/>
 			
 <p><a href='gravirinth-legacy.html'>Gravirinth Legacy</a> now runs much faster thanks to <a href='https://twitter.com/Jack_L_Lance' rel='noreferrer noopener'><span class="name">Jack Lance</span></a>'s <a href='https://jacklance.github.io/PuzzleScript/editor.html' rel='noreferrer noopener'>Large Maps Puzzlescript Fork</a>.</p>
 
@@ -1188,26 +1206,6 @@
 </ul>
 </p>
 	
-		]]>
-		</description>
-		<category><![CDATA[Game]]></category>
-<category><![CDATA[Platformer]]></category>
-<category><![CDATA[Puzzle]]></category>
-<category><![CDATA[Puzzlescript]]></category>
-	</item>
-	
-
-	<item>
-		<title><![CDATA[Platformer-template launches]]></title>
-		<link>https://pedropsi.github.io/platformer-template.html#RSS</link>
-		<guid>https://pedropsi.github.io/platformer-template.html?guid=2019-05-19</guid>
-		<pubDate>Sun, 19 May 2019 07:06:05 GMT</pubDate>
-		<description>
-		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/platformer-template.png" width="180" height="180" alt="Platformer Template" title="Platformer Template"/>
-			
-<p><a href='platformer-template.html'>Platformer Template</a> matures into its final version.</p>
-
 		]]>
 		</description>
 		<category><![CDATA[Game]]></category>
