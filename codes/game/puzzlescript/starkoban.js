@@ -1570,6 +1570,6 @@ message "Crystal clear"
 
 message ++++++++ Congratulations! ++++++++
 message +++++++++++ Starkoban ++++++++++++                                     ++++ by Pedro PSI (2020) ++++
-message +++++++++++++ Music ++++++++++++++                                     +++++ Poema2 by PeriTune +++++
+message +++++++ Music by PeriTune ++++++++                                       ++++++++++ Poema2 ++++++++++                                        ++++ Guitar  Gentle ++++
 
 `
