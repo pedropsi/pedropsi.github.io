@@ -4,4 +4,1390 @@ var ObtainLevelTitle="Previous";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Source
-var sourceCode="(- Copyright Pedro PSI 2019                             -)\n(- Version nº 10/07/2019                            .1  -)\n(- RULES / LEGEND section under a CC-BY-NC license      -)\n(--------------------------------------------------------)\n\ntitle Burokku Konekuta\nauthor Pedro PSI\nhomepage pedropsi.github.io\n\nbackground_color #37C7C7 (blue)\ntext_color #A1F5F5 (light blue)\n\nrealtime_interval 0.16\nkey_repeat_interval 0.16\n\nrun_rules_on_level_start\n\n(verbose_logging)\n(debug)\n\n((Palette)\n(---------------------------------------------------)\n#A1F5F5 (light blue)\n#37C7C7 (blue)\n#109898 (dark blue)\n\n#FF9703 (player orange) \n#FF8403 (pdayer orange)\n)\n\n========\nOBJECTS\n========\n\nBackground \n#A1F5F5 (light blue)\n\nWall \n#37C7C7 (blue)\n\nPlayer &\ntransparent (white\n.....\n..1..\n..1..\n..1..\n.....)\n\nPlayer1\n#FF9703 (player orange) #FF8403 (pdayer orange)\n.000.\n00000\n10001\n.111.\n.1.1.\n\n\nCrate 0\n#FF9703 (player orange) #FF8403 (pdayer orange)\n.....\n.000.\n.1.1.\n.111.\n.....\n\n\nFixedL\nwhite\n.....\n.....\n00...\n.....\n.....\n\nFixedU\nwhite\n..0..\n..0..\n.....\n.....\n.....\nFixedR\nwhite\n.....\n.....\n...00\n.....\n.....\nFixedD\nwhite\n.....\n.....\n.....\n..0..\n..0..\n\nFromLL\nblack gray\n.....\n100..\n.....\n.....\n.....\n\nFromLU\nblack gray\n...1.\n.00..\n.....\n.....\n.....\n\nFromLR\nblack gray\n.....\n.00..\n.....\n....1\n.....\n\nFromLD\nblack gray\n.....\n.00..\n.....\n.....\n.1...\n\nFromUL\nblack gray\n.....\n...0.\n1..0.\n.....\n.....\n\nFromUU\nblack gray\n..1..\n...0.\n...0.\n.....\n.....\n\nFromUR\nblack gray\n.....\n...0.\n...01\n.....\n.....\n\nFromUD\nblack gray\n.....\n...0.\n...0.\n.....\n..1..\n\nFromRL\nblack gray\n.....\n.....\n.....\n1.00.\n.....\n\nFromRU\nblack gray\n.1...\n.....\n.....\n..00.\n.....\n\nFromRR\nblack gray\n.....\n....1\n.....\n..00.\n.....\n\nFromRD\nblack gray\n.....\n.....\n.....\n..00.\n...1.\n\nFromDL\nblack gray\n.....\n.....\n.....\n.0...\n10...\n\nFromDU\nblack gray\n1....\n.....\n.....\n.0...\n.0...\n\nFromDR\nblack gray\n....1\n.....\n.....\n.0...\n.0...\n\nFromDD\nblack gray\n.....\n.....\n.....\n.0...\n10...\n\n\n\nMovedL1\n#109898 (dark blue)\n.....\n.....\n...0.\n.....\n.....\n\nMovedL2\n#109898 (dark blue)\n.....\n.....\n.00..\n.....\n.....\n\nMovedL3\n#109898 (dark blue)\n.....\n.....\n.0...\n.....\n.....\n\n\nMovedU1\n#109898 (dark blue)\n.....\n.....\n.....\n..0..\n.....\n\nMovedU2\n#109898 (dark blue)\n.....\n..0..\n..0..\n.....\n.....\n\nMovedU3\n#109898 (dark blue)\n.....\n..0..\n.....\n.....\n.....\n\nMovedR1\n#109898 (dark blue)\n.....\n.....\n.0...\n.....\n.....\n\nMovedR2\n#109898 (dark blue)\n.....\n.....\n.00..\n.....\n.....\n\nMovedR3\n#109898 (dark blue)\n.....\n.....\n...0.\n.....\n.....\n\nMovedD1\n#109898 (dark blue)\n.....\n..0..\n.....\n.....\n.....\n\nMovedD2\n#109898 (dark blue)\n.....\n..0..\n..0..\n.....\n.....\n\nMovedD3\n#109898 (dark blue)\n.....\n.....\n..0..\n.....\n.....\n\nDisplacedHide\n#A1F5F5 (light blue)\n.....\n.000.\n.000.\n.000.\n.....\n\n\n\n\nOnce\ntransparent\n\n\nMovity\ntransparent\nDashy\ntransparent\n\n\nTickPlayer \"\ntransparent (yellow\n.....\n....1\n....1\n....1\n.....)\nTickTime '\ntransparent (blue\n.....\n....1\n....1\n....1\n.....\n)\n\nAnimate »\ntransparent (blue\n.....\n..1..\n..1..\n..1..\n.....\n)\n\n\nWait\ntransparent\n\n\nWallDecoD1\n#109898 (dark blue)\n00000\n.....\n.....\n.....\n.....\n\nWallDecoD2\n#109898 (dark blue)\n.....\n.000.\n.....\n.....\n.....\n\nWallDecoD3\n#109898 (dark blue)\n.....\n.....\n..0..\n.....\n.....\n\n\nWallDecoU1\n#109898 (dark blue)\n.....\n.....\n.....\n.....\n00000\n\nWallDecoU2\n#109898 (dark blue)\n.....\n.....\n.....\n.000.\n.....\n\nWallDecoU3\n#109898 (dark blue)\n.....\n.....\n..0..\n.....\n.....\n\nWallDecoR1\n#109898 (dark blue)\n0....\n0....\n0....\n0....\n0....\n\nWallDecoR2\n#109898 (dark blue)\n.....\n.0...\n.0...\n.0...\n.....\n\nWallDecoR3\n#109898 (dark blue)\n.....\n.....\n..0..\n.....\n.....\n\nWallDecoL1\n#109898 (dark blue)\n....0\n....0\n....0\n....0\n....0\n\nWallDecoL2\n#109898 (dark blue)\n.....\n...0.\n...0.\n...0.\n.....\n\nWallDecoL3\n#109898 (dark blue)\n.....\n.....\n..0..\n.....\n.....\n\n\nBorderL\n#109898 (dark blue)\n0....\n0....\n0....\n0....\n0....\n\nBorderU\n#109898 (dark blue)\n00000\n.....\n.....\n.....\n.....\n\nBorderR\n#109898 (dark blue)\n....0\n....0\n....0\n....0\n....0\n\nBorderD \n#109898 (dark blue)\n.....\n.....\n.....\n.....\n00000\n\n\nBoLXU\n#109898 (dark blue) \n0....\n.....\n.....\n.....\n.....\n\nBoDXL\n#109898 (dark blue)\n.....\n.....\n.....\n.....\n0....\n\nBoUXR\n#109898 (dark blue)\n....0\n.....\n.....\n.....\n.....\n\nBoRXD\n#109898 (dark blue)\n.....\n.....\n.....\n.....\n....0\n\nBorderLkD\ntransparent\nBorderUkL\ntransparent\nBorderRkU\ntransparent\nBorderDkR\ntransparent\n\nBorderLkU\ntransparent\nBorderUkR\ntransparent\nBorderRkD\ntransparent\nBorderDkL\ntransparent\n\n\nDashL\n#37C7C7 (blue)\n.....\n.....\n.000.\n.....\n.....\n\nDashU\n#37C7C7 (blue)\n.....\n..0..\n..0..\n..0..\n.....\nDashR\n#37C7C7 (blue)\n.....\n.....\n.000.\n.....\n.....\nDashD\n#37C7C7 (blue)\n.....\n..0..\n..0..\n..0..\n.....\n\nDashWait1\ntransparent\nDashWait2\ntransparent\nDashWait3\ntransparent\nDashWait4\ntransparent\nDashWait5\ntransparent\nDashWait6\ntransparent\nDashWait7\ntransparent\nDashWait8\ntransparent\n\nDashingL\ntransparent\nDashingU\ntransparent\nDashingR\ntransparent\nDashingD\ntransparent\n\n\n\nLinkL\n#FF9703 (player orange) #FF8403 (pdayer orange)\n.....\n0....\n00...\n1....\n.....\nLinkU\n#FF9703 (player orange) #FF8403 (pdayer orange)\n.111.\n.111.\n.1...\n.....\n.....\nLinkR\n#FF9703 (player orange) #FF8403 (pdayer orange)\n.....\n....0\n...00\n....1\n.....\nLinkD\n#FF9703 (player orange) #FF8403 (pdayer orange)\n.....\n.....\n.....\n.....\n.111.\n\nLinker\ntransparent\n\n\nUntouched\ntransparent \nTouched\ntransparent\n\nConnected\ntransparent\nWinning\n#109898 (dark blue)\n.....\n.0.0.\n..0..\n.0.0.\n.....\n\n\n=======\nLEGEND\n=======\n\n. = Background \n# = Wall  \n\nAgent = Player\n_ = Once\n\nP = Agent and Player1 and TickTime \n\nO = Crate\nBlock = Crate\n\nPlayers = Player1\n\nPlayerBody1 = Player1\n\nPlayerBody = PlayerBody1 \n\nUnPushable = Wall\nPushable = PlayerBody or Block\n\nSymbol = Pushable\nPusher = Pushable \n\n\nItem = Pushable or UnPushable\n\n\nShadable = Pushable\nUnShadable = Wall\n\n(Phase)\n(---------------------------------------------------)\nM = Movity\nD = Dashy\nMD = Movity or Dashy\nMDS = Movity or Dashy\n\n\nPhase = Movity or Dashy\n\n\n(Physics)\n(---------------------------------------------------)\nFixed = FixedL or FixedR or FixedU or FixedD \n\nFromL = FromLL or FromLU or FromLR or FromLD\nFromU = FromUL or FromUU or FromUR or FromUD\nFromR = FromRL or FromRU or FromRR or FromRD\nFromD = FromDL or FromDU or FromDR or FromDD\n\nFrom = FromL or FromR or FromU or FromD\n\nFrom_L = FromLL or FromUL or FromRL or FromDL\nFrom_U = FromLU or FromUU or FromRU or FromDU\nFrom_R = FromLR or FromUR or FromRR or FromDR\nFrom_D = FromLD or FromUD or FromRD or FromDD\n\n\n(Link)\n(---------------------------------------------------)\nLink = LinkL or LinkR or LinkU or LinkD \n\noL = LinkL and O\noU = LinkU and O\noR = LinkR and O\noD = LinkD and O\n\nö = O and Linker\n\nꝋ = O and LinkR and LinkL\nø = O and LinkU and LinkD\n\nò = oL \nô = oU \nõ = oR \nǒ = oD \n\nLinkable = O\n\n\n(Animation)\n(---------------------------------------------------)\n\n\nMovedL = MovedL1 or MovedL2 or MovedL3\nMovedU = MovedU1 or MovedU2 or MovedU3\nMovedR = MovedR1 or MovedR2 or MovedR3\nMovedD = MovedD1 or MovedD2 or MovedD3\nMoved = MovedL or MovedU or MovedR or MovedD\n\nMoved1 = MovedL1 or MovedU1 or MovedR1 or MovedD1\nMoved2 = MovedL2 or MovedU2 or MovedR2 or MovedD2\nMoved3 = MovedL3 or MovedU3 or MovedR3 or MovedD3\n\nDisplaced = Moved\n\n\nWallDecoL = WallDecoL1 or WallDecoL2 or WallDecoL3\nWallDecoU = WallDecoU1 or WallDecoU2 or WallDecoU3\nWallDecoR = WallDecoR1 or WallDecoR2 or WallDecoR3\nWallDecoD = WallDecoD1 or WallDecoD2 or WallDecoD3\n\nWallDeco = WallDecoL or WallDecoU or WallDecoR or WallDecoD\n\nTouchable = Players or Block\n\n\n(Dashs)\n(---------------------------------------------------)\n\n\nDash = DashL or DashU or DashR or DashD\nDashing = DashingL or DashingU or DashingR or DashingD\n\nDashable = Item\n\nDashWait= DashWait1 or DashWait2 or DashWait3 or DashWait4 or DashWait5 or DashWait6 or DashWait7 or DashWait8\n\ná = DashL and Dashwait7\né = DashU and Dashwait7\ní = DashR and Dashwait7\nó = DashD and Dashwait7\n\nDashingXL = DashingU or DashingR or DashingD\nDashingXU = DashingR or DashingD or DashingL\nDashingXR = DashingD or DashingL or DashingU\nDashingXD = DashingL or DashingU or DashingR\n\n(Border)\n(---------------------------------------------------)\nBorder = BorderL or BorderR or BorderU or BorderD \n\nBoX = BoLXU or BoDXL or BoUXR or BoRXD\nBoXL = BoLXU or BoDXL\nBoXU = BoLXU or BoUXR\nBoXR = BoUXR or BoRXD\nBoXD = BoDXL or BoRXD\n\n\nPropertyIsotropic =  Fixed or Connected\nProperty = PropertyIsotropic or From\n\n\n=======\nSOUNDS\n=======\n\n================\nCOLLISIONLAYERS\n================\n\nBackground\n\nDash\nDashingL\nDashingU\nDashingR\nDashingD\n\n\nDashWait\n\n\nMoved\nDisplacedHide\n\n\nItem\n\nAgent\nWait\nOnce\n\nLinkL\nLinkU\nLinkR\nLinkD\nLinker\n\nBorderL\nBorderU\nBorderR\nBorderD\n\nBoLXU \nBoUXR \nBoDXL \nBoRXD\n\nBorderLkD\nBorderUkL\nBorderRkU\nBorderDkR\n\nBorderLkU\nBorderUkR\nBorderRkD\nBorderDkL\n\nWallDecoL\nWallDecoU\nWallDecoR\nWallDecoD\n\nFixedL\nFixedU\nFixedR\nFixedD\n\nFromLL\nFromLU\nFromLR\nFromLD\nFromUL\nFromUU\nFromUR\nFromUD\nFromRL\nFromRU\nFromRR\nFromRD\nFromDL\nFromDU\nFromDR\nFromDD\n\nConnected\n\nPhase\nTickTime, TickPlayer\nAnimate\n\nUntouched,Touched\n\nWinning\n\n======\nRULES     \n======     \n\n\n(Links)\n(---------------------------------------------------)\n(---------------------------------------------------)\n[Link no Linkable]->[]\n\n(place all links at start)\nleft  [Linker|Linkable]->[Linker LinkL|Linkable LinkR]\nup    [Linker|Linkable]->[Linker LinkU|Linkable LinkD]\nright [Linker|Linkable]->[Linker LinkR|Linkable LinkL]\ndown  [Linker|Linkable]->[Linker LinkD|Linkable LinkU]\n[Linker]->[]\n\n(sticky links)\nleft  [Linkable LinkL|Linkable no LinkR]->[Linkable LinkL|Linkable LinkR]\nup    [Linkable LinkU|Linkable no LinkD]->[Linkable LinkU|Linkable LinkD]\nright [Linkable LinkR|Linkable no LinkL]->[Linkable LinkR|Linkable LinkL]\ndown  [Linkable LinkD|Linkable no LinkU]->[Linkable LinkD|Linkable LinkU]\n\n\n(Connection)\n(---------------------------------------------------)\n(---------------------------------------------------)\n[Connected]->[]\nrandom [Crate]->[Crate Connected]\n\n\n\n(Animation and Decoration)\n(---------------------------------------------------)\n(---------------------------------------------------)\n\n(Wall borders)\n(---------------------------------------------------)\n\n(basic)\nlate left  [Wall no BorderL|no Wall]-> [Wall BorderL|]\nlate up    [Wall no BorderU|no Wall]-> [Wall BorderU|]\nlate right [Wall no BorderR|no Wall]-> [Wall BorderR|]\nlate down  [Wall no BorderD|no Wall]-> [Wall BorderD|]\n\n(corners)\nlate left  [Wall no BorderLkD|Wall BorderD]->[Wall BorderLkD|Wall BorderD]\nlate up    [Wall no BorderUkL|Wall BorderL]->[Wall BorderUkL|Wall BorderL]\nlate right [Wall no BorderRkU|Wall BorderU]->[Wall BorderRkU|Wall BorderU]\nlate down  [Wall no BorderDkR|Wall BorderR]->[Wall BorderDkR|Wall BorderR]\n\nlate left  [Wall no BorderLkU|Wall BorderU]->[Wall BorderLkU|Wall BorderU]\nlate up    [Wall no BorderUkR|Wall BorderR]->[Wall BorderUkR|Wall BorderR]\nlate right [Wall no BorderRkD|Wall BorderD]->[Wall BorderRkD|Wall BorderD]\nlate down  [Wall no BorderDkL|Wall BorderL]->[Wall BorderDkL|Wall BorderL]\n\nlate [Wall BorderLkU BorderUkL no BoLxU]->[Wall BorderLkU BorderUkL BoLxU]\nlate [Wall BorderUkR BorderRkU no BoUxR]->[Wall BorderUkR BorderRkU BoUxR]\nlate [Wall BorderRkD BorderDkR no BoRxD]->[Wall BorderRkD BorderDkR BoRxD]\nlate [Wall BorderDkL BorderLkD no BoDxL]->[Wall BorderDkL BorderLkD BoDxL]\n\n\n(Ticking animation control in view)\n(---------------------------------------------------)\n\n[stationary &][\"]->[stationary &][']\n[moving     &][\"]->[moving     &][']\n\n[moving     &][']->[moving     &][\"]\n[action     &][']->[action     &][\"]\n\n\n[_]->[]\n[' no _]->[' » _] \n[' no _ »]->[' _]\n[_]->[]\n\n(hide displaced marks under longer blocks)\n[DisplacedHide]->[]\nlate [Displaced Item]->[Displaced DisplacedHide Item]\n\n\n\n(Dash-moved)\n(---------------------------------------------------)\n[»][Dash DashWait8]->[»][Dash]\n[»][Dash DashWait7]->[»][Dash DashWait8]\n[»][Dash DashWait6]->[»][Dash DashWait7]\n[»][Dash DashWait5]->[»][Dash DashWait6]\n[»][Dash DashWait4]->[»][Dash DashWait5]\n[»][Dash DashWait3]->[»][Dash DashWait4]\n[»][Dash DashWait2]->[»][Dash DashWait3]\n[»][Dash DashWait1]->[»][Dash DashWait2]\n[»][Dash Moved3]->[»][Dash DashWait1]\n\n\n(Moved Animation)\n(---------------------------------------------------)\n[»][Moved .]->[»][Moved]\n[»][MovedL1 no .]->[»][MovedL2 .]\n[»][MovedL2 no .]->[»][MovedL3 .]\n[»][MovedL3 no .]->[»][.]\n\n[»][MovedU1 no .]->[»][MovedU2 .]\n[»][MovedU2 no .]->[»][MovedU3 .]\n[»][MovedU3 no .]->[»][.]\n\n[»][MovedR1 no .]->[»][MovedR2 .]\n[»][MovedR2 no .]->[»][MovedR3 .]\n[»][MovedR3 no .]->[»][.]\n\n[»][MovedD1 no .]->[»][MovedD2 .]\n[»][MovedD2 no .]->[»][MovedD3 .]\n[»][MovedD3 no .]->[»][.]\n\n\n\n(Dash Animation)\n(---------------------------------------------------)\n\nleft [DashL DashWait8|Dash ][»]->[DashL DashWait8|Dash DashWait5 no Moved][»]\nup   [DashU DashWait8|Dash ][»]->[DashU DashWait8|Dash DashWait5 no Moved][»]\nright[DashR DashWait8|Dash ][»]->[DashR DashWait8|Dash DashWait5 no Moved][»]\ndown [DashD DashWait8|Dash ][»]->[DashD DashWait8|Dash DashWait5 no Moved][»]\n\nleft [DashL no Moved no DashWait][»]->[DashL MovedL1][»]\nup   [DashU no Moved no DashWait][»]->[DashU MovedU1][»]\nright[DashR no Moved no DashWait][»]->[DashR MovedR1][»]\ndown [DashD no Moved no DashWait][»]->[DashD MovedD1][»]\n\n\n(Reset backgrounds)\n(---------------------------------------------------)\n[no .]->[.]\n\n\n\n(Wall Push Animation)\n(---------------------------------------------------)\n[»][WallDecoL .]->[»][WallDecoL]\n[»][WallDecoL1 no .]->[»][WallDecoL2 .]\n[»][WallDecoL2 no .]->[»][WallDecoL3 .]\n[»][WallDecoL3 no .]->[»][ .]\n\n[»][WallDecoU .]->[»][WallDecoU]\n[»][WallDecoU1 no .]->[»][WallDecoU2 .]\n[»][WallDecoU2 no .]->[»][WallDecoU3 .]\n[»][WallDecoU3 no .]->[»][ .]\n\n[»][WallDecoR .]->[»][WallDecoR]\n[»][WallDecoR1 no .]->[»][WallDecoR2 .]\n[»][WallDecoR2 no .]->[»][WallDecoR3 .]\n[»][WallDecoR3 no .]->[»][ .]\n\n[»][WallDecoD .]->[»][WallDecoD]\n[»][WallDecoD1 no .]->[»][WallDecoD2 .]\n[»][WallDecoD2 no .]->[»][WallDecoD3 .]\n[»][WallDecoD3 no .]->[»][ .]\n\n(Reset backgrounds)\n(---------------------------------------------------)\n[no .]->[.]\n\n\n\n(Phase Switch)\n(---------------------------------------------------)\n(---------------------------------------------------)\n\n[Phase]->[]\n\n(Detect Dashing Phase)\n(---------------------------------------------------)\n[Dashable Dash][& no D]->[Dashable Dash][& D]\n\n\n\n(Detect Gravity Phase)\n(---------------------------------------------------)\n\n(Other phases)\n[& no MD ]->[& M]\n\n\n(Transmit intent, but not on goal) \n[moving &][stationary Players][M]->[moving &][moving Players][M]\n[moving &][M]->[&][M]\n\n(Transmit Dashable intent)\n[Dashing]->[](Clear previous dashes)\nleft  [Dashable DashL no DashingL]->[Dashable DashL DashingL]\nup    [Dashable DashU no DashingU]->[Dashable DashU DashingU]\nright [Dashable DashR no DashingR]->[Dashable DashR DashingR]\ndown  [Dashable DashD no DashingD]->[Dashable DashD DashingD]\n\nleft  [Dashing LinkL|LinkR]->[Dashing LinkL|Dashing LinkR]\nup    [Dashing LinkU|LinkD]->[Dashing LinkU|Dashing LinkD]\nright [Dashing LinkR|LinkL]->[Dashing LinkR|Dashing LinkL]\ndown  [Dashing LinkD|LinkU]->[Dashing LinkD|Dashing LinkU]\n\nright [DashingL DashingXL]->[no Dashing no Dash]\nup    [DashingU DashingXU]->[no Dashing no Dash]\nleft  [DashingR DashingXR]->[no Dashing no Dash]\ndown  [DashingD DashingXD]->[no Dashing no Dash]\n\nleft  [stationary Dashable DashL DashingL]->[left  Dashable DashL DashingL]\nup    [stationary Dashable DashU DashingU]->[up    Dashable DashU DashingU]\nright [stationary Dashable DashR DashingR]->[right Dashable DashR DashingR]\ndown  [stationary Dashable DashD DashingD]->[down  Dashable DashD DashingD]\n\n\n\n\n\nstartloop\n\n\n(Block integrity)\n(---------------------------------------------------)\nleft  [PropertyIsotropic LinkL|LinkR]->[PropertyIsotropic LinkL|PropertyIsotropic LinkR]\nup    [PropertyIsotropic LinkU|LinkD]->[PropertyIsotropic LinkU|PropertyIsotropic LinkD]\nright [PropertyIsotropic LinkR|LinkL]->[PropertyIsotropic LinkR|PropertyIsotropic LinkL]\ndown  [PropertyIsotropic LinkD|LinkU]->[PropertyIsotropic LinkD|PropertyIsotropic LinkU]\n\nleft  [From_L LinkL |LinkR From no _]->[From_L LinkL |FromRL LinkR _]\nleft  [From_U LinkL |LinkR From no _]->[From_U LinkL |FromRU LinkR _]\nleft  [From_R LinkL |LinkR From no _]->[From_R LinkL |FromRR LinkR _]\nleft  [From_D LinkL |LinkR From no _]->[From_D LinkL |FromRD LinkR _]\nup    [From_L LinkU |LinkD From no _]->[From_L LinkU |FromDL LinkD _]\nup    [From_U LinkU |LinkD From no _]->[From_U LinkU |FromDU LinkD _]\nup    [From_R LinkU |LinkD From no _]->[From_R LinkU |FromDR LinkD _]\nup    [From_D LinkU |LinkD From no _]->[From_D LinkU |FromDD LinkD _]\nright [From_L LinkR |LinkL From no _]->[From_L LinkR |FromLL LinkL _]\nright [From_U LinkR |LinkL From no _]->[From_U LinkR |FromLU LinkL _]\nright [From_R LinkR |LinkL From no _]->[From_R LinkR |FromLR LinkL _]\nright [From_D LinkR |LinkL From no _]->[From_D LinkR |FromLD LinkL _]\ndown  [From_L LinkD |LinkU From no _]->[From_L LinkD |FromUL LinkU _]\ndown  [From_U LinkD |LinkU From no _]->[From_U LinkD |FromUU LinkU _]\ndown  [From_R LinkD |LinkU From no _]->[From_R LinkD |FromUR LinkU _]\ndown  [From_D LinkD |LinkU From no _]->[From_D LinkD |FromUD LinkU _]\n\n[Crate Connected|Crate no Connected]->[Crate Connected|Crate Connected]\n\n(Block move)\n(---------------------------------------------------)\nleft [moving Linkable LinkL|Linkable LinkR]-> [moving Linkable LinkL|moving Linkable LinkR]\nup   [moving Linkable LinkU|Linkable LinkD]-> [moving Linkable LinkU|moving Linkable LinkD]\nright[moving Linkable LinkR|Linkable LinkL]-> [moving Linkable LinkR|moving Linkable LinkL]\ndown [moving Linkable LinkD|Linkable LinkU]-> [moving Linkable LinkD|moving Linkable LinkU]\n\n\n(Push and Collide)\n(---------------------------------------------------)\n(Push)\nleft  [left  Pusher|stationary Pushable no FixedL]->[left  Pusher|left  Pushable FromLL]\nup    [up    Pusher|stationary Pushable no FixedU]->[up    Pusher|up    Pushable FromUU]\nright [right Pusher|stationary Pushable no FixedR]->[right Pusher|right Pushable FromRR]\ndown  [down  Pusher|stationary Pushable no FixedD]->[down  Pusher|down  Pushable FromDD]\n\n(Collide)\nleft  [left  Pusher|UnPushable]->[stationary Pusher FixedL|UnPushable FromLL]\nup    [up    Pusher|UnPushable]->[stationary Pusher FixedU|UnPushable FromUU]\nright [right Pusher|UnPushable]->[stationary Pusher FixedR|UnPushable FromRR]\ndown  [down  Pusher|UnPushable]->[stationary Pusher FixedD|UnPushable FromDD]\n\n\n\n\n(Prevent unacomplished moves: Part 1)\n(---------------------------------------------------)\nleft  [left  Item no FixedL no LinkL|no LinkR stationary Item]->[left  Item FixedL| stationary Item]\nup    [up    Item no FixedU no LinkU|no LinkD stationary Item]->[up    Item FixedU| stationary Item]\nright [right Item no FixedR no LinkR|no LinkL stationary Item]->[right Item FixedR| stationary Item]\ndown  [down  Item no FixedD no LinkD|no LinkU stationary Item]->[down  Item FixedD| stationary Item]\n\nleft  [left  Item | FixedL]->[left  Item FixedL| FixedL]\nup    [up    Item | FixedU]->[up    Item FixedU| FixedU]\nright [right Item | FixedR]->[right Item FixedR| FixedR]\ndown  [down  Item | FixedD]->[down  Item FixedD| FixedD]\n\n\n\n(Prevent unacomplished moves: Part 2)\n(---------------------------------------------------)\nleft  [left  Item FixedL]->[stationary Item FixedL ]\nup    [up    Item FixedU]->[stationary Item FixedU ]\nright [right Item FixedR]->[stationary Item FixedR ]\ndown  [down  Item FixedD]->[stationary Item FixedD ]\n\n\n(Prevent unacomplished moves: Part 3)\n(---------------------------------------------------)\nleft  [Pusher FixedL no LinkL|no LinkR FromLL]->[Pusher FixedL | FixedL FromLL]\nup    [Pusher FixedU no LinkU|no LinkD FromUU]->[Pusher FixedU | FixedU FromUU]\nright [Pusher FixedR no LinkR|no LinkL FromRR]->[Pusher FixedR | FixedR FromRR]\ndown  [Pusher FixedD no LinkD|no LinkU FromDD]->[Pusher FixedD | FixedD FromDD]\n\n[left  Pusher FixedL From_L]->[stationary Pusher FixedL From_L]\n[up    Pusher FixedU From_U]->[stationary Pusher FixedU From_U]\n[right Pusher FixedR From_R]->[stationary Pusher FixedR From_R]\n[down  Pusher FixedD From_D]->[stationary Pusher FixedD From_D]\n\n\n(Wall Touch)\n(---------------------------------------------------)\nleft  [Touchable FixedL no Wall|Wall no WallDeco][MDS]->[Touchable FixedL|Wall WallDecoL1][MDS]\nup    [Touchable FixedU no Wall|Wall no WallDeco][MDS]->[Touchable FixedU|Wall WallDecoU1][MDS]\nright [Touchable FixedR no Wall|Wall no WallDeco][MDS]->[Touchable FixedR|Wall WallDecoR1][MDS]\ndown  [Touchable FixedD no Wall|Wall no WallDeco][MDS]->[Touchable FixedD|Wall WallDecoD1][MDS]\n\n\nendloop\n\n\n[_]->[]\n[Fixed]->[]\n[From]->[]\n\n\n\n(Remove Dashables on execution)\n(---------------------------------------------------)\nleft  [left  Dashable DashL DashingL]->[left  Dashable no Dashwait]\nup    [up    Dashable DashU DashingU]->[up    Dashable no Dashwait]\nright [right Dashable DashR DashingR]->[right Dashable no Dashwait]\ndown  [down  Dashable DashD DashingD]->[down  Dashable no Dashwait]\n[Dashing Dash]->[no Dash]\n\n\n(Move)\n(---------------------------------------------------)\n[left  Item  no Moved]->[left  Item MovedL1]\n[up    Item  no Moved]->[up    Item MovedU1]\n[right Item  no Moved]->[right Item MovedR1]\n[down  Item  no Moved]->[down  Item MovedD1]\n\n\n(Move Links)\n(---------------------------------------------------)\n(---------------------------------------------------)\n[moving Linkable Link]->[moving Linkable moving Link]\n[Link no Linkable]->[]\n\n\n\n(Winning)\n(---------------------------------------------------)\n(---------------------------------------------------)\n\nlate [&]->[& Winning]\nlate [Crate no Connected][Winning]->[Crate no Connected][]\nlate [Winning][Crate no Winning]->[Winning][Crate Winning]\nlate [Winning no Crate]->[]\nlate [Winning Crate]->[Winning no Crate no Link]\n\n==============\nWINCONDITIONS\n==============\nsome Winning\n\n=======     \nLEVELS\n=======\nmessage Konnichiwa!\nmessage Kore wa burokku konekuta desu.\nmessage Gaijin: \"connect all blocks!\"\n\nmessage ...... Reberu 1 / 7 * .......\nmessage \"Tango\"\n(walk, push, connect)\n#########\n#########\n###...###\n###O#..##\n##..P..##\n##..#O###\n###...###\n#########\n#########\n\nmessage ...... Reberu 2 / 7 * .......\nmessage \"Karutetto\"\n(more than two blocks, push several blocks)\n#########\n####...##\n##...#..#\n##.#O##.#\n#..oPo..#\n#.##O#.##\n#..#...##\n##...####\n#########\n\nmessage ...... Reberu 3 / 7 ** ......\nmessage \"Taikakusen\"\n(larger blocks)\n#########\n####..###\n##o....##\n##.ooö..#\n#..oPo..#\n#..öoo.##\n##....o##\n###..####\n#########\n\nmessage ...... Reberu 4 / 7 *** .....\nmessage \"Bunkai\"\n(fully concave blocks)\n#########\n####O####\n####.####\n##.....##\n#.......#\n#.öoǒoö.#\n#.oõoòo.#\n#.ôòoõô.#\n#.......#\n##.....##\n####.####\n####P####\n#########\n\nmessage ...... Reberu 5 / 7 **** ....\nmessage \"Rupu\"\n(inside blocks)\n###############\n#.............#\n#.oööö...öööo.#\n#....ö.P.ö....#\n#.o.oo.#.oo.o.#\n#.ööoö.#.öoöö.#\n###############\n\nmessage ...... Reberu 6 / 7 ** ......\nmessage \"Yoku miru\"\n(vertical connections)\n##########\n#####..###\n#####o.P##\n####ǒ....#\n###ǒ.....#\n##ǒ....ô##\n#.....ô###\n#....ô####\n##..o#####\n###..#####\n##########\n\nmessage ...... Reberu 7 / 7 ***** ....\nmessage \"Porima\"\n(all connections)\n#########\n###ǒ.####\n##.....##\n##.ô.õ.ò#\n#...P...#\n#õ.ò.ǒ.##\n##.....##\n####.ô###\n#########\n\n(\nmessage ...... Reberu 9 / 7 *** ....\nmessage \"Yusen-do\"\n(dash after joining)\n#######\n###O###\n#.ó...#\n#..ò..#\n#.ǒPô.#\n#..õ..#\n#...é.#\n###O###\n#######\n\n)\n\nmessage ...... Omedeto gozaimasu! ......\nmessage ......  Burokku Konekuta  .......                                  ......  Pedro PSI (2019)  .......\n\nmessage Ongaku (CC-BY-3.0): Ju-nya                                            ...  Breeze ...................... ...  Traffic Lights ..............";
+var sourceCode=`
+(- Copyright Pedro PSI 2019                             -)
+(- Version nº 10/07/2019                            .1  -)
+(- RULES / LEGEND section under a CC-BY-NC license      -)
+(--------------------------------------------------------)
+
+title Burokku Konekuta
+author Pedro PSI
+homepage pedropsi.github.io
+
+background_color #37C7C7 (blue)
+text_color #A1F5F5 (light blue)
+
+realtime_interval 0.16
+key_repeat_interval 0.16
+
+run_rules_on_level_start
+
+(verbose_logging)
+(debug)
+
+((Palette)
+(---------------------------------------------------)
+#A1F5F5 (light blue)
+#37C7C7 (blue)
+#109898 (dark blue)
+
+#FF9703 (player orange) 
+#FF8403 (pdayer orange)
+)
+
+========
+OBJECTS
+========
+
+Background 
+#A1F5F5 (light blue)
+
+Wall 
+#37C7C7 (blue)
+
+Player &
+transparent (white
+.....
+..1..
+..1..
+..1..
+.....)
+
+Player1
+#FF9703 (player orange) #FF8403 (pdayer orange)
+.000.
+00000
+10001
+.111.
+.1.1.
+
+
+Crate 0
+#FF9703 (player orange) #FF8403 (pdayer orange)
+.....
+.000.
+.1.1.
+.111.
+.....
+
+
+FixedL
+white
+.....
+.....
+00...
+.....
+.....
+
+FixedU
+white
+..0..
+..0..
+.....
+.....
+.....
+FixedR
+white
+.....
+.....
+...00
+.....
+.....
+FixedD
+white
+.....
+.....
+.....
+..0..
+..0..
+
+FromLL
+black gray
+.....
+100..
+.....
+.....
+.....
+
+FromLU
+black gray
+...1.
+.00..
+.....
+.....
+.....
+
+FromLR
+black gray
+.....
+.00..
+.....
+....1
+.....
+
+FromLD
+black gray
+.....
+.00..
+.....
+.....
+.1...
+
+FromUL
+black gray
+.....
+...0.
+1..0.
+.....
+.....
+
+FromUU
+black gray
+..1..
+...0.
+...0.
+.....
+.....
+
+FromUR
+black gray
+.....
+...0.
+...01
+.....
+.....
+
+FromUD
+black gray
+.....
+...0.
+...0.
+.....
+..1..
+
+FromRL
+black gray
+.....
+.....
+.....
+1.00.
+.....
+
+FromRU
+black gray
+.1...
+.....
+.....
+..00.
+.....
+
+FromRR
+black gray
+.....
+....1
+.....
+..00.
+.....
+
+FromRD
+black gray
+.....
+.....
+.....
+..00.
+...1.
+
+FromDL
+black gray
+.....
+.....
+.....
+.0...
+10...
+
+FromDU
+black gray
+1....
+.....
+.....
+.0...
+.0...
+
+FromDR
+black gray
+....1
+.....
+.....
+.0...
+.0...
+
+FromDD
+black gray
+.....
+.....
+.....
+.0...
+10...
+
+
+
+MovedL1
+#109898 (dark blue)
+.....
+.....
+...0.
+.....
+.....
+
+MovedL2
+#109898 (dark blue)
+.....
+.....
+.00..
+.....
+.....
+
+MovedL3
+#109898 (dark blue)
+.....
+.....
+.0...
+.....
+.....
+
+
+MovedU1
+#109898 (dark blue)
+.....
+.....
+.....
+..0..
+.....
+
+MovedU2
+#109898 (dark blue)
+.....
+..0..
+..0..
+.....
+.....
+
+MovedU3
+#109898 (dark blue)
+.....
+..0..
+.....
+.....
+.....
+
+MovedR1
+#109898 (dark blue)
+.....
+.....
+.0...
+.....
+.....
+
+MovedR2
+#109898 (dark blue)
+.....
+.....
+.00..
+.....
+.....
+
+MovedR3
+#109898 (dark blue)
+.....
+.....
+...0.
+.....
+.....
+
+MovedD1
+#109898 (dark blue)
+.....
+..0..
+.....
+.....
+.....
+
+MovedD2
+#109898 (dark blue)
+.....
+..0..
+..0..
+.....
+.....
+
+MovedD3
+#109898 (dark blue)
+.....
+.....
+..0..
+.....
+.....
+
+DisplacedHide
+#A1F5F5 (light blue)
+.....
+.000.
+.000.
+.000.
+.....
+
+
+
+
+Once
+transparent
+
+
+Movity
+transparent
+Dashy
+transparent
+
+
+TickPlayer "
+transparent (yellow
+.....
+....1
+....1
+....1
+.....)
+TickTime '
+transparent (blue
+.....
+....1
+....1
+....1
+.....
+)
+
+Animate »
+transparent (blue
+.....
+..1..
+..1..
+..1..
+.....
+)
+
+
+Wait
+transparent
+
+
+WallDecoD1
+#109898 (dark blue)
+00000
+.....
+.....
+.....
+.....
+
+WallDecoD2
+#109898 (dark blue)
+.....
+.000.
+.....
+.....
+.....
+
+WallDecoD3
+#109898 (dark blue)
+.....
+.....
+..0..
+.....
+.....
+
+
+WallDecoU1
+#109898 (dark blue)
+.....
+.....
+.....
+.....
+00000
+
+WallDecoU2
+#109898 (dark blue)
+.....
+.....
+.....
+.000.
+.....
+
+WallDecoU3
+#109898 (dark blue)
+.....
+.....
+..0..
+.....
+.....
+
+WallDecoR1
+#109898 (dark blue)
+0....
+0....
+0....
+0....
+0....
+
+WallDecoR2
+#109898 (dark blue)
+.....
+.0...
+.0...
+.0...
+.....
+
+WallDecoR3
+#109898 (dark blue)
+.....
+.....
+..0..
+.....
+.....
+
+WallDecoL1
+#109898 (dark blue)
+....0
+....0
+....0
+....0
+....0
+
+WallDecoL2
+#109898 (dark blue)
+.....
+...0.
+...0.
+...0.
+.....
+
+WallDecoL3
+#109898 (dark blue)
+.....
+.....
+..0..
+.....
+.....
+
+
+BorderL
+#109898 (dark blue)
+0....
+0....
+0....
+0....
+0....
+
+BorderU
+#109898 (dark blue)
+00000
+.....
+.....
+.....
+.....
+
+BorderR
+#109898 (dark blue)
+....0
+....0
+....0
+....0
+....0
+
+BorderD 
+#109898 (dark blue)
+.....
+.....
+.....
+.....
+00000
+
+
+BoLXU
+#109898 (dark blue) 
+0....
+.....
+.....
+.....
+.....
+
+BoDXL
+#109898 (dark blue)
+.....
+.....
+.....
+.....
+0....
+
+BoUXR
+#109898 (dark blue)
+....0
+.....
+.....
+.....
+.....
+
+BoRXD
+#109898 (dark blue)
+.....
+.....
+.....
+.....
+....0
+
+BorderLkD
+transparent
+BorderUkL
+transparent
+BorderRkU
+transparent
+BorderDkR
+transparent
+
+BorderLkU
+transparent
+BorderUkR
+transparent
+BorderRkD
+transparent
+BorderDkL
+transparent
+
+
+DashL
+#37C7C7 (blue)
+.....
+.....
+.000.
+.....
+.....
+
+DashU
+#37C7C7 (blue)
+.....
+..0..
+..0..
+..0..
+.....
+DashR
+#37C7C7 (blue)
+.....
+.....
+.000.
+.....
+.....
+DashD
+#37C7C7 (blue)
+.....
+..0..
+..0..
+..0..
+.....
+
+DashWait1
+transparent
+DashWait2
+transparent
+DashWait3
+transparent
+DashWait4
+transparent
+DashWait5
+transparent
+DashWait6
+transparent
+DashWait7
+transparent
+DashWait8
+transparent
+
+DashingL
+transparent
+DashingU
+transparent
+DashingR
+transparent
+DashingD
+transparent
+
+
+
+LinkL
+#FF9703 (player orange) #FF8403 (pdayer orange)
+.....
+0....
+00...
+1....
+.....
+LinkU
+#FF9703 (player orange) #FF8403 (pdayer orange)
+.111.
+.111.
+.1...
+.....
+.....
+LinkR
+#FF9703 (player orange) #FF8403 (pdayer orange)
+.....
+....0
+...00
+....1
+.....
+LinkD
+#FF9703 (player orange) #FF8403 (pdayer orange)
+.....
+.....
+.....
+.....
+.111.
+
+Linker
+transparent
+
+
+Untouched
+transparent 
+Touched
+transparent
+
+Connected
+transparent
+Winning
+#109898 (dark blue)
+.....
+.0.0.
+..0..
+.0.0.
+.....
+
+
+=======
+LEGEND
+=======
+
+. = Background 
+# = Wall  
+
+Agent = Player
+_ = Once
+
+P = Agent and Player1 and TickTime 
+
+O = Crate
+Block = Crate
+
+Players = Player1
+
+PlayerBody1 = Player1
+
+PlayerBody = PlayerBody1 
+
+UnPushable = Wall
+Pushable = PlayerBody or Block
+
+Symbol = Pushable
+Pusher = Pushable 
+
+
+Item = Pushable or UnPushable
+
+
+Shadable = Pushable
+UnShadable = Wall
+
+(Phase)
+(---------------------------------------------------)
+M = Movity
+D = Dashy
+MD = Movity or Dashy
+MDS = Movity or Dashy
+
+
+Phase = Movity or Dashy
+
+
+(Physics)
+(---------------------------------------------------)
+Fixed = FixedL or FixedR or FixedU or FixedD 
+
+FromL = FromLL or FromLU or FromLR or FromLD
+FromU = FromUL or FromUU or FromUR or FromUD
+FromR = FromRL or FromRU or FromRR or FromRD
+FromD = FromDL or FromDU or FromDR or FromDD
+
+From = FromL or FromR or FromU or FromD
+
+From_L = FromLL or FromUL or FromRL or FromDL
+From_U = FromLU or FromUU or FromRU or FromDU
+From_R = FromLR or FromUR or FromRR or FromDR
+From_D = FromLD or FromUD or FromRD or FromDD
+
+
+(Link)
+(---------------------------------------------------)
+Link = LinkL or LinkR or LinkU or LinkD 
+
+oL = LinkL and O
+oU = LinkU and O
+oR = LinkR and O
+oD = LinkD and O
+
+ö = O and Linker
+
+ꝋ = O and LinkR and LinkL
+ø = O and LinkU and LinkD
+
+ò = oL 
+ô = oU 
+õ = oR 
+ǒ = oD 
+
+Linkable = O
+
+
+(Animation)
+(---------------------------------------------------)
+
+
+MovedL = MovedL1 or MovedL2 or MovedL3
+MovedU = MovedU1 or MovedU2 or MovedU3
+MovedR = MovedR1 or MovedR2 or MovedR3
+MovedD = MovedD1 or MovedD2 or MovedD3
+Moved = MovedL or MovedU or MovedR or MovedD
+
+Moved1 = MovedL1 or MovedU1 or MovedR1 or MovedD1
+Moved2 = MovedL2 or MovedU2 or MovedR2 or MovedD2
+Moved3 = MovedL3 or MovedU3 or MovedR3 or MovedD3
+
+Displaced = Moved
+
+
+WallDecoL = WallDecoL1 or WallDecoL2 or WallDecoL3
+WallDecoU = WallDecoU1 or WallDecoU2 or WallDecoU3
+WallDecoR = WallDecoR1 or WallDecoR2 or WallDecoR3
+WallDecoD = WallDecoD1 or WallDecoD2 or WallDecoD3
+
+WallDeco = WallDecoL or WallDecoU or WallDecoR or WallDecoD
+
+Touchable = Players or Block
+
+
+(Dashs)
+(---------------------------------------------------)
+
+
+Dash = DashL or DashU or DashR or DashD
+Dashing = DashingL or DashingU or DashingR or DashingD
+
+Dashable = Item
+
+DashWait= DashWait1 or DashWait2 or DashWait3 or DashWait4 or DashWait5 or DashWait6 or DashWait7 or DashWait8
+
+á = DashL and Dashwait7
+é = DashU and Dashwait7
+í = DashR and Dashwait7
+ó = DashD and Dashwait7
+
+DashingXL = DashingU or DashingR or DashingD
+DashingXU = DashingR or DashingD or DashingL
+DashingXR = DashingD or DashingL or DashingU
+DashingXD = DashingL or DashingU or DashingR
+
+(Border)
+(---------------------------------------------------)
+Border = BorderL or BorderR or BorderU or BorderD 
+
+BoX = BoLXU or BoDXL or BoUXR or BoRXD
+BoXL = BoLXU or BoDXL
+BoXU = BoLXU or BoUXR
+BoXR = BoUXR or BoRXD
+BoXD = BoDXL or BoRXD
+
+
+PropertyIsotropic =  Fixed or Connected
+Property = PropertyIsotropic or From
+
+
+=======
+SOUNDS
+=======
+
+================
+COLLISIONLAYERS
+================
+
+Background
+
+Dash
+DashingL
+DashingU
+DashingR
+DashingD
+
+
+DashWait
+
+
+Moved
+DisplacedHide
+
+
+Item
+
+Agent
+Wait
+Once
+
+LinkL
+LinkU
+LinkR
+LinkD
+Linker
+
+BorderL
+BorderU
+BorderR
+BorderD
+
+BoLXU 
+BoUXR 
+BoDXL 
+BoRXD
+
+BorderLkD
+BorderUkL
+BorderRkU
+BorderDkR
+
+BorderLkU
+BorderUkR
+BorderRkD
+BorderDkL
+
+WallDecoL
+WallDecoU
+WallDecoR
+WallDecoD
+
+FixedL
+FixedU
+FixedR
+FixedD
+
+FromLL
+FromLU
+FromLR
+FromLD
+FromUL
+FromUU
+FromUR
+FromUD
+FromRL
+FromRU
+FromRR
+FromRD
+FromDL
+FromDU
+FromDR
+FromDD
+
+Connected
+
+Phase
+TickTime, TickPlayer
+Animate
+
+Untouched,Touched
+
+Winning
+
+======
+RULES     
+======     
+
+
+(Links)
+(---------------------------------------------------)
+(---------------------------------------------------)
+[Link no Linkable]->[]
+
+(place all links at start)
+left  [Linker|Linkable]->[Linker LinkL|Linkable LinkR]
+up    [Linker|Linkable]->[Linker LinkU|Linkable LinkD]
+right [Linker|Linkable]->[Linker LinkR|Linkable LinkL]
+down  [Linker|Linkable]->[Linker LinkD|Linkable LinkU]
+[Linker]->[]
+
+(sticky links)
+left  [Linkable LinkL|Linkable no LinkR]->[Linkable LinkL|Linkable LinkR]
+up    [Linkable LinkU|Linkable no LinkD]->[Linkable LinkU|Linkable LinkD]
+right [Linkable LinkR|Linkable no LinkL]->[Linkable LinkR|Linkable LinkL]
+down  [Linkable LinkD|Linkable no LinkU]->[Linkable LinkD|Linkable LinkU]
+
+
+(Connection)
+(---------------------------------------------------)
+(---------------------------------------------------)
+[Connected]->[]
+random [Crate]->[Crate Connected]
+
+
+
+(Animation and Decoration)
+(---------------------------------------------------)
+(---------------------------------------------------)
+
+(Wall borders)
+(---------------------------------------------------)
+
+(basic)
+late left  [Wall no BorderL|no Wall]-> [Wall BorderL|]
+late up    [Wall no BorderU|no Wall]-> [Wall BorderU|]
+late right [Wall no BorderR|no Wall]-> [Wall BorderR|]
+late down  [Wall no BorderD|no Wall]-> [Wall BorderD|]
+
+(corners)
+late left  [Wall no BorderLkD|Wall BorderD]->[Wall BorderLkD|Wall BorderD]
+late up    [Wall no BorderUkL|Wall BorderL]->[Wall BorderUkL|Wall BorderL]
+late right [Wall no BorderRkU|Wall BorderU]->[Wall BorderRkU|Wall BorderU]
+late down  [Wall no BorderDkR|Wall BorderR]->[Wall BorderDkR|Wall BorderR]
+
+late left  [Wall no BorderLkU|Wall BorderU]->[Wall BorderLkU|Wall BorderU]
+late up    [Wall no BorderUkR|Wall BorderR]->[Wall BorderUkR|Wall BorderR]
+late right [Wall no BorderRkD|Wall BorderD]->[Wall BorderRkD|Wall BorderD]
+late down  [Wall no BorderDkL|Wall BorderL]->[Wall BorderDkL|Wall BorderL]
+
+late [Wall BorderLkU BorderUkL no BoLxU]->[Wall BorderLkU BorderUkL BoLxU]
+late [Wall BorderUkR BorderRkU no BoUxR]->[Wall BorderUkR BorderRkU BoUxR]
+late [Wall BorderRkD BorderDkR no BoRxD]->[Wall BorderRkD BorderDkR BoRxD]
+late [Wall BorderDkL BorderLkD no BoDxL]->[Wall BorderDkL BorderLkD BoDxL]
+
+
+(Ticking animation control in view)
+(---------------------------------------------------)
+
+[stationary &]["]->[stationary &][']
+[moving     &]["]->[moving     &][']
+
+[moving     &][']->[moving     &]["]
+[action     &][']->[action     &]["]
+
+
+[_]->[]
+[' no _]->[' » _] 
+[' no _ »]->[' _]
+[_]->[]
+
+(hide displaced marks under longer blocks)
+[DisplacedHide]->[]
+late [Displaced Item]->[Displaced DisplacedHide Item]
+
+
+
+(Dash-moved)
+(---------------------------------------------------)
+[»][Dash DashWait8]->[»][Dash]
+[»][Dash DashWait7]->[»][Dash DashWait8]
+[»][Dash DashWait6]->[»][Dash DashWait7]
+[»][Dash DashWait5]->[»][Dash DashWait6]
+[»][Dash DashWait4]->[»][Dash DashWait5]
+[»][Dash DashWait3]->[»][Dash DashWait4]
+[»][Dash DashWait2]->[»][Dash DashWait3]
+[»][Dash DashWait1]->[»][Dash DashWait2]
+[»][Dash Moved3]->[»][Dash DashWait1]
+
+
+(Moved Animation)
+(---------------------------------------------------)
+[»][Moved .]->[»][Moved]
+[»][MovedL1 no .]->[»][MovedL2 .]
+[»][MovedL2 no .]->[»][MovedL3 .]
+[»][MovedL3 no .]->[»][.]
+
+[»][MovedU1 no .]->[»][MovedU2 .]
+[»][MovedU2 no .]->[»][MovedU3 .]
+[»][MovedU3 no .]->[»][.]
+
+[»][MovedR1 no .]->[»][MovedR2 .]
+[»][MovedR2 no .]->[»][MovedR3 .]
+[»][MovedR3 no .]->[»][.]
+
+[»][MovedD1 no .]->[»][MovedD2 .]
+[»][MovedD2 no .]->[»][MovedD3 .]
+[»][MovedD3 no .]->[»][.]
+
+
+
+(Dash Animation)
+(---------------------------------------------------)
+
+left [DashL DashWait8|Dash ][»]->[DashL DashWait8|Dash DashWait5 no Moved][»]
+up   [DashU DashWait8|Dash ][»]->[DashU DashWait8|Dash DashWait5 no Moved][»]
+right[DashR DashWait8|Dash ][»]->[DashR DashWait8|Dash DashWait5 no Moved][»]
+down [DashD DashWait8|Dash ][»]->[DashD DashWait8|Dash DashWait5 no Moved][»]
+
+left [DashL no Moved no DashWait][»]->[DashL MovedL1][»]
+up   [DashU no Moved no DashWait][»]->[DashU MovedU1][»]
+right[DashR no Moved no DashWait][»]->[DashR MovedR1][»]
+down [DashD no Moved no DashWait][»]->[DashD MovedD1][»]
+
+
+(Reset backgrounds)
+(---------------------------------------------------)
+[no .]->[.]
+
+
+
+(Wall Push Animation)
+(---------------------------------------------------)
+[»][WallDecoL .]->[»][WallDecoL]
+[»][WallDecoL1 no .]->[»][WallDecoL2 .]
+[»][WallDecoL2 no .]->[»][WallDecoL3 .]
+[»][WallDecoL3 no .]->[»][ .]
+
+[»][WallDecoU .]->[»][WallDecoU]
+[»][WallDecoU1 no .]->[»][WallDecoU2 .]
+[»][WallDecoU2 no .]->[»][WallDecoU3 .]
+[»][WallDecoU3 no .]->[»][ .]
+
+[»][WallDecoR .]->[»][WallDecoR]
+[»][WallDecoR1 no .]->[»][WallDecoR2 .]
+[»][WallDecoR2 no .]->[»][WallDecoR3 .]
+[»][WallDecoR3 no .]->[»][ .]
+
+[»][WallDecoD .]->[»][WallDecoD]
+[»][WallDecoD1 no .]->[»][WallDecoD2 .]
+[»][WallDecoD2 no .]->[»][WallDecoD3 .]
+[»][WallDecoD3 no .]->[»][ .]
+
+(Reset backgrounds)
+(---------------------------------------------------)
+[no .]->[.]
+
+
+
+(Phase Switch)
+(---------------------------------------------------)
+(---------------------------------------------------)
+
+[Phase]->[]
+
+(Detect Dashing Phase)
+(---------------------------------------------------)
+[Dashable Dash][& no D]->[Dashable Dash][& D]
+
+
+
+(Detect Gravity Phase)
+(---------------------------------------------------)
+
+(Other phases)
+[& no MD ]->[& M]
+
+
+(Transmit intent, but not on goal) 
+[moving &][stationary Players][M]->[moving &][moving Players][M]
+[moving &][M]->[&][M]
+
+(Transmit Dashable intent)
+[Dashing]->[](Clear previous dashes)
+left  [Dashable DashL no DashingL]->[Dashable DashL DashingL]
+up    [Dashable DashU no DashingU]->[Dashable DashU DashingU]
+right [Dashable DashR no DashingR]->[Dashable DashR DashingR]
+down  [Dashable DashD no DashingD]->[Dashable DashD DashingD]
+
+left  [Dashing LinkL|LinkR]->[Dashing LinkL|Dashing LinkR]
+up    [Dashing LinkU|LinkD]->[Dashing LinkU|Dashing LinkD]
+right [Dashing LinkR|LinkL]->[Dashing LinkR|Dashing LinkL]
+down  [Dashing LinkD|LinkU]->[Dashing LinkD|Dashing LinkU]
+
+right [DashingL DashingXL]->[no Dashing no Dash]
+up    [DashingU DashingXU]->[no Dashing no Dash]
+left  [DashingR DashingXR]->[no Dashing no Dash]
+down  [DashingD DashingXD]->[no Dashing no Dash]
+
+left  [stationary Dashable DashL DashingL]->[left  Dashable DashL DashingL]
+up    [stationary Dashable DashU DashingU]->[up    Dashable DashU DashingU]
+right [stationary Dashable DashR DashingR]->[right Dashable DashR DashingR]
+down  [stationary Dashable DashD DashingD]->[down  Dashable DashD DashingD]
+
+
+
+
+
+startloop
+
+
+(Block integrity)
+(---------------------------------------------------)
+left  [PropertyIsotropic LinkL|LinkR]->[PropertyIsotropic LinkL|PropertyIsotropic LinkR]
+up    [PropertyIsotropic LinkU|LinkD]->[PropertyIsotropic LinkU|PropertyIsotropic LinkD]
+right [PropertyIsotropic LinkR|LinkL]->[PropertyIsotropic LinkR|PropertyIsotropic LinkL]
+down  [PropertyIsotropic LinkD|LinkU]->[PropertyIsotropic LinkD|PropertyIsotropic LinkU]
+
+left  [From_L LinkL |LinkR From no _]->[From_L LinkL |FromRL LinkR _]
+left  [From_U LinkL |LinkR From no _]->[From_U LinkL |FromRU LinkR _]
+left  [From_R LinkL |LinkR From no _]->[From_R LinkL |FromRR LinkR _]
+left  [From_D LinkL |LinkR From no _]->[From_D LinkL |FromRD LinkR _]
+up    [From_L LinkU |LinkD From no _]->[From_L LinkU |FromDL LinkD _]
+up    [From_U LinkU |LinkD From no _]->[From_U LinkU |FromDU LinkD _]
+up    [From_R LinkU |LinkD From no _]->[From_R LinkU |FromDR LinkD _]
+up    [From_D LinkU |LinkD From no _]->[From_D LinkU |FromDD LinkD _]
+right [From_L LinkR |LinkL From no _]->[From_L LinkR |FromLL LinkL _]
+right [From_U LinkR |LinkL From no _]->[From_U LinkR |FromLU LinkL _]
+right [From_R LinkR |LinkL From no _]->[From_R LinkR |FromLR LinkL _]
+right [From_D LinkR |LinkL From no _]->[From_D LinkR |FromLD LinkL _]
+down  [From_L LinkD |LinkU From no _]->[From_L LinkD |FromUL LinkU _]
+down  [From_U LinkD |LinkU From no _]->[From_U LinkD |FromUU LinkU _]
+down  [From_R LinkD |LinkU From no _]->[From_R LinkD |FromUR LinkU _]
+down  [From_D LinkD |LinkU From no _]->[From_D LinkD |FromUD LinkU _]
+
+[Crate Connected|Crate no Connected]->[Crate Connected|Crate Connected]
+
+(Block move)
+(---------------------------------------------------)
+left [moving Linkable LinkL|Linkable LinkR]-> [moving Linkable LinkL|moving Linkable LinkR]
+up   [moving Linkable LinkU|Linkable LinkD]-> [moving Linkable LinkU|moving Linkable LinkD]
+right[moving Linkable LinkR|Linkable LinkL]-> [moving Linkable LinkR|moving Linkable LinkL]
+down [moving Linkable LinkD|Linkable LinkU]-> [moving Linkable LinkD|moving Linkable LinkU]
+
+
+(Push and Collide)
+(---------------------------------------------------)
+(Push)
+left  [left  Pusher|stationary Pushable no FixedL]->[left  Pusher|left  Pushable FromLL]
+up    [up    Pusher|stationary Pushable no FixedU]->[up    Pusher|up    Pushable FromUU]
+right [right Pusher|stationary Pushable no FixedR]->[right Pusher|right Pushable FromRR]
+down  [down  Pusher|stationary Pushable no FixedD]->[down  Pusher|down  Pushable FromDD]
+
+(Collide)
+left  [left  Pusher|UnPushable]->[stationary Pusher FixedL|UnPushable FromLL]
+up    [up    Pusher|UnPushable]->[stationary Pusher FixedU|UnPushable FromUU]
+right [right Pusher|UnPushable]->[stationary Pusher FixedR|UnPushable FromRR]
+down  [down  Pusher|UnPushable]->[stationary Pusher FixedD|UnPushable FromDD]
+
+
+
+
+(Prevent unacomplished moves: Part 1)
+(---------------------------------------------------)
+left  [left  Item no FixedL no LinkL|no LinkR stationary Item]->[left  Item FixedL| stationary Item]
+up    [up    Item no FixedU no LinkU|no LinkD stationary Item]->[up    Item FixedU| stationary Item]
+right [right Item no FixedR no LinkR|no LinkL stationary Item]->[right Item FixedR| stationary Item]
+down  [down  Item no FixedD no LinkD|no LinkU stationary Item]->[down  Item FixedD| stationary Item]
+
+left  [left  Item | FixedL]->[left  Item FixedL| FixedL]
+up    [up    Item | FixedU]->[up    Item FixedU| FixedU]
+right [right Item | FixedR]->[right Item FixedR| FixedR]
+down  [down  Item | FixedD]->[down  Item FixedD| FixedD]
+
+
+
+(Prevent unacomplished moves: Part 2)
+(---------------------------------------------------)
+left  [left  Item FixedL]->[stationary Item FixedL ]
+up    [up    Item FixedU]->[stationary Item FixedU ]
+right [right Item FixedR]->[stationary Item FixedR ]
+down  [down  Item FixedD]->[stationary Item FixedD ]
+
+
+(Prevent unacomplished moves: Part 3)
+(---------------------------------------------------)
+left  [Pusher FixedL no LinkL|no LinkR FromLL]->[Pusher FixedL | FixedL FromLL]
+up    [Pusher FixedU no LinkU|no LinkD FromUU]->[Pusher FixedU | FixedU FromUU]
+right [Pusher FixedR no LinkR|no LinkL FromRR]->[Pusher FixedR | FixedR FromRR]
+down  [Pusher FixedD no LinkD|no LinkU FromDD]->[Pusher FixedD | FixedD FromDD]
+
+[left  Pusher FixedL From_L]->[stationary Pusher FixedL From_L]
+[up    Pusher FixedU From_U]->[stationary Pusher FixedU From_U]
+[right Pusher FixedR From_R]->[stationary Pusher FixedR From_R]
+[down  Pusher FixedD From_D]->[stationary Pusher FixedD From_D]
+
+
+(Wall Touch)
+(---------------------------------------------------)
+left  [Touchable FixedL no Wall|Wall no WallDeco][MDS]->[Touchable FixedL|Wall WallDecoL1][MDS]
+up    [Touchable FixedU no Wall|Wall no WallDeco][MDS]->[Touchable FixedU|Wall WallDecoU1][MDS]
+right [Touchable FixedR no Wall|Wall no WallDeco][MDS]->[Touchable FixedR|Wall WallDecoR1][MDS]
+down  [Touchable FixedD no Wall|Wall no WallDeco][MDS]->[Touchable FixedD|Wall WallDecoD1][MDS]
+
+
+endloop
+
+
+[_]->[]
+[Fixed]->[]
+[From]->[]
+
+
+
+(Remove Dashables on execution)
+(---------------------------------------------------)
+left  [left  Dashable DashL DashingL]->[left  Dashable no Dashwait]
+up    [up    Dashable DashU DashingU]->[up    Dashable no Dashwait]
+right [right Dashable DashR DashingR]->[right Dashable no Dashwait]
+down  [down  Dashable DashD DashingD]->[down  Dashable no Dashwait]
+[Dashing Dash]->[no Dash]
+
+
+(Move)
+(---------------------------------------------------)
+[left  Item  no Moved]->[left  Item MovedL1]
+[up    Item  no Moved]->[up    Item MovedU1]
+[right Item  no Moved]->[right Item MovedR1]
+[down  Item  no Moved]->[down  Item MovedD1]
+
+
+(Move Links)
+(---------------------------------------------------)
+(---------------------------------------------------)
+[moving Linkable Link]->[moving Linkable moving Link]
+[Link no Linkable]->[]
+
+
+
+(Winning)
+(---------------------------------------------------)
+(---------------------------------------------------)
+
+late [&]->[& Winning]
+late [Crate no Connected][Winning]->[Crate no Connected][]
+late [Winning][Crate no Winning]->[Winning][Crate Winning]
+late [Winning no Crate]->[]
+late [Winning Crate]->[Winning no Crate no Link]
+
+==============
+WINCONDITIONS
+==============
+some Winning
+
+=======     
+LEVELS
+=======
+message Konnichiwa!
+message Kore wa burokku konekuta desu.
+message Gaijin: "connect all blocks!"
+
+message ...... Reberu 1 / 7 * .......
+message "Tango"
+(walk, push, connect)
+#########
+#########
+###...###
+###O#..##
+##..P..##
+##..#O###
+###...###
+#########
+#########
+
+message ...... Reberu 2 / 7 * .......
+message "Karutetto"
+(more than two blocks, push several blocks)
+#########
+####...##
+##...#..#
+##.#O##.#
+#..oPo..#
+#.##O#.##
+#..#...##
+##...####
+#########
+
+message ...... Reberu 3 / 7 ** ......
+message "Taikakusen"
+(larger blocks)
+#########
+####..###
+##o....##
+##.ooö..#
+#..oPo..#
+#..öoo.##
+##....o##
+###..####
+#########
+
+message ...... Reberu 4 / 7 *** .....
+message "Bunkai"
+(fully concave blocks)
+#########
+####O####
+####.####
+##.....##
+#.......#
+#.öoǒoö.#
+#.oõoòo.#
+#.ôòoõô.#
+#.......#
+##.....##
+####.####
+####P####
+#########
+
+message ...... Reberu 5 / 7 **** ....
+message "Rupu"
+(inside blocks)
+###############
+#.............#
+#.oööö...öööo.#
+#....ö.P.ö....#
+#.o.oo.#.oo.o.#
+#.ööoö.#.öoöö.#
+###############
+
+message ...... Reberu 6 / 7 ** ......
+message "Yoku miru"
+(vertical connections)
+##########
+#####..###
+#####o.P##
+####ǒ....#
+###ǒ.....#
+##ǒ....ô##
+#.....ô###
+#....ô####
+##..o#####
+###..#####
+##########
+
+message ...... Reberu 7 / 7 ***** ....
+message "Porima"
+(all connections)
+#########
+###ǒ.####
+##.....##
+##.ô.õ.ò#
+#...P...#
+#õ.ò.ǒ.##
+##.....##
+####.ô###
+#########
+
+(
+message ...... Reberu 9 / 7 *** ....
+message "Yusen-do"
+(dash after joining)
+#######
+###O###
+#.ó...#
+#..ò..#
+#.ǒPô.#
+#..õ..#
+#...é.#
+###O###
+#######
+
+)
+
+message ...... Omedeto gozaimasu! ......
+message ......  Burokku Konekuta  .......                                  ......  Pedro PSI (2019)  .......
+
+message Ongaku (CC-BY-3.0): Ju-nya                                            ...  Breeze ...................... ...  Traffic Lights ..............
+`

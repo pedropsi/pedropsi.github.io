@@ -49,6 +49,7 @@ P_platformer_template:{...CMSGame,LINK:()=>`platformer-template`,CONTENT:()=>`a5
 P_burokku_konekuta:{...CMSGame,LINK:()=>`burokku-konekuta`,CONTENT:()=>`96384ea6851a66ff30c89a18995f5b8b`,THEMECOLOUR:()=>`rgb(55,199,199)`,TITLE:()=>`Burokku Konekuta`,DAY:()=>`10`,MONTH:()=>`7`,YEAR:()=>`2019`,TAGS:()=>[`Game`,`Puzzle`,`Puzzlescript`],FEATURED:()=>true,ONE_LINER:()=>`<p>Tidiness rules in ${v.TITLE_BOLD()}. Connect all the scattered pieces together to regain the harmony within your puzzled mind. </p>`},
 P_skilleblokker:{...CMSGame,LINK:()=>`skilleblokker`,CONTENT:()=>`d4716388dfe54118a82d4e1ec5d60bc4`,THEMECOLOUR:()=>`rgb(189,224,255)`,TITLE:()=>`Skilleblokker`,DAY:()=>`21`,MONTH:()=>`9`,YEAR:()=>`2019`,TAGS:()=>[`Game`,`Puzzle`,`Puzzlescript`],FEATURED:()=>true,ONE_LINER:()=>`<p>It is time to disconnect with ${v.TITLE_BOLD()}, the opposite twin of Burokku Konekuta. Can you chill out and isolate every block or will you slip astray on the ice?</p>`},
 P_strata_hedges:{...CMSGame,LINK:()=>`strata-hedges`,CONTENT:()=>`74e3b230123627da73d1466eea865f5b`,THEMECOLOUR:()=>`rgb(0,101,101)`,TITLE:()=>`Strata Hedges`,DAY:()=>`29`,MONTH:()=>`3`,YEAR:()=>`2020`,TAGS:()=>[`3D`,`Game`,`Prototype`,`Puzzle`,`Puzzlescript`],ONE_LINER:()=>`<p>The gardens in ${v.TITLE_BOLD()} have many dimensions. Sharpen your eyes and keep all in perspective!</p>`},
+P_starkoban:{...CMSGame,LINK:()=>`starkoban`,CONTENT:()=>`f20996db777cfb6f5725fd27c4268cf3`,THEMECOLOUR:()=>`rgb(55,55,55)`,TITLE:()=>`Starkoban`,DAY:()=>`14`,MONTH:()=>`11`,YEAR:()=>`2020`,TAGS:()=>[`Game`,`Puzzle`,`Puzzlescript`],ONE_LINER:()=>`<p>${v.TITLE_BOLD()} is a challenging mix of star battle and sokoban, for stark puzzlers.</p>`},
 P_puzzle_type:{...CMSGame,LINK:()=>`puzzle-type`,PRESCRIPT:()=>["data/store.js"],POSTSCRIPT:()=>v.GAME_SCRIPT(),TITLE:()=>`Puzzle type`,DAY:()=>`10`,MONTH:()=>`11`,YEAR:()=>`2019`,TAGS:()=>[`Game`,`Puzzle`],FEATURED:()=>true,IMAGE_EXT:()=>`gif`,ONE_LINER:()=>`<p>A <b>single clue</b> reveals the <b>hidden typing rule</b>. Explore each puzzle to discover its rule. To win, type the clue exactly as shown: <b>every symbol counts</b>!</p>`,ORIENTATION:()=>`portrait`,FEEDBACK_KEY:()=>`${KB("Ctrl E")}`,FULLSCREEN_KEY:()=>`${KB("Ctrl F")}`,HINT_KEY:()=>`${KB("Ctrl H")}`,LEVEL_KEY:()=>`${KB("Ctrl L")}`,MUSIC_KEY:()=>`${KB("Ctrl M")}`},
 P_terms_of_use:{...NoImage,LINK:()=>`terms-of-use`,TITLE:()=>`Terms of use`,DAY:()=>`30`,MONTH:()=>`11`,YEAR:()=>`2017`,TAGS:()=>[`Creative-Archive`,`Post`]},
 P_privacy_policy:{...NoImage,LINK:()=>`privacy-policy`,TITLE:()=>`Privacy Policy`,DAY:()=>`10`,MONTH:()=>`2`,YEAR:()=>`2018`,TAGS:()=>[`Creative-Archive`,`Post`]},
@@ -109,7 +110,13 @@ PageTagArray=function(){
 
 TagPageHTML=function(){
 	var tags=PageTagArray();
-	function HasTag(PageObj){return PageObj.TAGS&&tags.every(tag=>In(PageObj.TAGS(),tag));};
+	function HasTag(PageObj){
+		if(!PageObj.TAGS)
+			return false;
+		var pagetags=PageObj.TAGS().map(LowerSimpleString);
+		return tags.every(
+			tag=>In(pagetags,LowerSimpleString(tag))
+			);};
 	var CMSOptions=CMSOptionsObj();
 	return SectionHTML({
 		...CMSOptions,
