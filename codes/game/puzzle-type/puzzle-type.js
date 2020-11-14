@@ -669,7 +669,6 @@ var LevelGoals=[			//Required types of thinking:
 	"Precedent",			//Alphabetical, Retroactive
 	
 	"Symmetries",			//Shape, Retroactive
-	"РУССКАЯ",				//Language, Encoding
 
 	"Fillet",				//Shape, Proactive 
 	"Topological",			//Shape, Growth, Monoactive
@@ -678,6 +677,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Wasd",					//Keyboard, Emulation
 	"Dvorak",				//Keyboard, Cyclic
 
+	"РУССКАЯ",				//Language, Encoding
 	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
 
 	"Nigeria",				//Word, Mapping, Geography
