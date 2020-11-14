@@ -25,7 +25,7 @@ P_store:{...WithImage,LINK:()=>`store`,BODY:()=>v.PAGE_BARE(),CONTENT:()=>v.POST
 P_press:{...WithImage,LINK:()=>`press`,TITLE:()=>`Press kit`,DAY:()=>`2`,MONTH:()=>`2`,YEAR:()=>`2019`,TYPE:()=>`Post`,TAGS:()=>[`Creative-Archive`,`Press`,`Sitemap`],TYPEGRAPH:()=>`site`},
 P_news:{...WithImage,LINK:()=>`news`,TITLE:()=>`News`,DAY:()=>`20`,MONTH:()=>`9`,YEAR:()=>`2019`,TYPE:()=>`Archive`,TAGS:()=>[`Creative-Archive`,`Log`,`Post`,`Press`,`Sitemap`],IMAGE_ALT:()=>`${v.SITE_NAME()} News`,TYPEGRAPH:()=>`site`},
 
-P_mosaic:{...WithImage,LINK:()=>`mosaic`,TITLE:()=>`Pattern gallery`,DAY:()=>`14`,MONTH:()=>`2`,YEAR:()=>`2018`,TAGS:()=>[`Art`,`Travel`,`Wallpaper`],IMAGE_ALT:()=>`Wallpaper gallery`},
+P_mosaic:{...WithImage,IMAGE_NAME:()=>"fleur-de-lis",IMAGE_EXT:()=>"png",LINK:()=>`mosaic`,TITLE:()=>`Mosaic wallpaper gallery`,DAY:()=>`14`,MONTH:()=>`2`,YEAR:()=>`2018`,TAGS:()=>[`Art`,`Travel`,`Wallpaper`],IMAGE_ALT:()=>`Wallpaper gallery`},
 
 P_about:{...NoImage,LINK:()=>`about`,CONTENT:()=>v.POST(),TITLE:()=>`About`,DAY:()=>`2`,MONTH:()=>`2`,YEAR:()=>`2018`,TAGS:()=>[`Creative-Archive`,`Post`],TYPEGRAPH:()=>`profile`},
 P_404:{...NoImage,LINK:()=>`404`,BODY:()=>v.PAGE_SIMPLE(),CONTENT:()=>v.POST(),TITLE:()=>`Page not found….`,SHORTNAME:()=>`404`,DAY:()=>`1`,MONTH:()=>`12`,YEAR:()=>`2017`,TYPE:()=>`Backend`,TAGS:()=>[`Sitemap`],DESCRIPTION:()=>`Page not found in ${v.SITE_NAME()}.`,TYPEGRAPH:()=>`website`},
