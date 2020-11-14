@@ -144,6 +144,7 @@ var gameModulesLater=[
 "countries",
 "lang-gender",
 "lang-kana",
+"lang-cyrillic",
 "letter-topology",
 "letter-led",
 "morse-braille",
@@ -538,6 +539,7 @@ var LevelDifficulty={
 	"Wasd":2,
 	"Nokia 1998":1,
 	"Dvorak":4,
+	"РУССКАЯ":2,
 	"ひらがな":2,
 	"Nigeria":3,
 	"Anagram":2,
@@ -602,6 +604,7 @@ var VisualLevels=[
 ]
 
 var LanguageLevels=[
+	"РУССКАЯ",
 	"ひらがな",
 	"Anagram",
 	"Latent clones",
@@ -666,6 +669,8 @@ var LevelGoals=[			//Required types of thinking:
 	"Precedent",			//Alphabetical, Retroactive
 	
 	"Symmetries",			//Shape, Retroactive
+	"РУССКАЯ",				//Language, Encoding
+
 	"Fillet",				//Shape, Proactive 
 	"Topological",			//Shape, Growth, Monoactive
 	
@@ -933,6 +938,7 @@ var LevelInstructions={
 	"Starting buds":StartingBuds,
 	"La rapide surprise":Translate,
 	"Nigeria":Nigeria,
+	"РУССКАЯ":Cyrillic,
 	"ひらがな":function(L){
 		InputLetterAfter(L);
 		AddStrokeValid(L);
@@ -1169,12 +1175,12 @@ function Anagram(L){
 			InputLetterAfter(S);
 			
 			AddStrokeValid(L);
-			ModifyLastStroke(UnderlineValidStroke);
+			ModifyLatterStroke(UnderlineValidStroke);
 		}
 		else{
 			Letters(saved);
 			AddStrokeValid(L);
-			ModifyLastStroke(InvalidateStroke);
+			ModifyLatterStroke(InvalidateStroke);
 		}
 		AddStrokeSeparator();
 	}	
@@ -1223,7 +1229,7 @@ function Genetic(L){
 		Letters(saved);
 		if(In(RNACodonsAminoacids,codon)){
 			InputLetterAfter(RNACodonsAminoacids[codon]);
-			ModifyLastStroke(UnderlineValidStroke);
+			ModifyLatterStroke(UnderlineValidStroke);
 			AddStrokeSeparator();
 		}
 	}
@@ -1356,13 +1362,13 @@ function Deaf(L){
 		PlayChord(chord,false,0.5);
 		if(In(MajorChords,chord)){
 			InputLetterAfter(MajorChords[chord]);
-			ModifyLastStroke(UnderlineValidStroke);
+			ModifyLatterStroke(UnderlineValidStroke);
 		}
 		else if(In(MinorChords,chord)){
 			InputLetterAfter(MinorChords[chord].toLowerCase());
 		}
 		else
-			ModifyLastStroke(InvalidateStroke);
+			ModifyLatterStroke(InvalidateStroke);
 		
 		AddStrokeSeparator();
 	}
@@ -1523,9 +1529,62 @@ function Magnetism(L){
 		}
 	}
 
-		
-	
 }
+
+
+//Cyrillic
+
+function Cyrillic(L){
+	var last=Last(Letters());
+	if(last&&Posfixed(last,"*"))
+		CyrillicSyllabe(UnPosfix(last,"*"),L)
+	else
+		CyrillicLetter(L);
+}
+
+function CyrillicSyllabe(last,L){
+	var syllabe=LatinCyrillic[last+L];
+	if(syllabe){
+		DeleteLetterAfter();
+		InputLetterAfter(syllabe);
+		ModifyLastStroke(ValidateStroke);
+		AddStrokeValid(L);
+		Caret(Infinity);
+		return;
+	}
+	else{
+		var Y=LatinCyrillic[last]
+		if(Y){
+			DeleteLetterAfter();
+			InputLetterAfter(Y);
+			ModifyLastStroke(ValidateStroke);
+		}
+		else{
+			DeleteLetterAfter();
+			ModifyLastStroke(InvalidateStroke);
+		}
+		return CyrillicLetter(L);
+	}
+}
+
+function CyrillicLetter(L){
+	var syllabe=Keys(LatinCyrillic).filter(le=>le[0]==L&&le.length>1);
+	if(!syllabe.length){
+		var M=LatinCyrillic[L];
+		if(M){
+			InputLetterAfter(M);
+			AddStrokeValid(L);
+		}
+		else
+			AddStrokeInvalid(L);
+	}
+	else{
+		InputLetterAfter(L+"*");
+		AddStrokeValid(L);
+	}
+	Caret(Infinity);
+}
+
 
 //Dividi
 
@@ -2368,6 +2427,7 @@ function LetterPureHTML(L,cla){
 
 
 var LetterDisplayers={
+	"РУССКАЯ":LetterDraftHTML,
 	//"Tangles":LetterDraftHTML,
 	"Symmetries":function(L){
 		
@@ -3089,7 +3149,9 @@ function StrokeUnderlined(L){
 }
 
 function AddStrokeSeparator(){
-	AddStroke(separator);
+	var l=Keystrokes().length;
+	if(l&&l!==LastSeparatorIndex(Keystrokes()))
+		AddStroke(separator);
 }
 function AddStrokeValid(L){
 	var L=L.replace(" ","_");
@@ -3114,6 +3176,10 @@ function LastSeparatorIndex(array){
 		return -1;
 	else
 		return array.length-i;
+}
+
+function RemoveLatterStrokeSeparator(){
+	Keystrokes.array.splice(LastSeparatorIndex(Keystrokes.array,1));
 }
 
 function LastWordstroke(){
@@ -3154,7 +3220,7 @@ function ModifyStroke(word,symbol){
 // }
 
 
-function ModifiedLastStroke(Modifier){
+function ModifiedLatterStroke(Modifier){
 	var most=MostWordstroke();
 	var last=LastWordstroke().map(Modifier);
 	if(most.length)
@@ -3162,10 +3228,14 @@ function ModifiedLastStroke(Modifier){
 	return most.concat(last);
 }
 
-function ModifyLastStroke(Modifier){
-	Keystrokes(ModifiedLastStroke(Modifier));
+function ModifyLatterStroke(Modifier){
+	Keystrokes(ModifiedLatterStroke(Modifier));
 }
 
+function ModifyLastStroke(Modifier){
+	if(Keystrokes.array.length)
+		Keystrokes.array[Keystrokes.array.length-1]=Modifier(Keystrokes.array[Keystrokes.array.length-1])
+}
 
 
 function LevelHighlightableWords(title){
