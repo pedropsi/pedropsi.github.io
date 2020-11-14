@@ -807,10 +807,12 @@ figure .image{
 .input:focus,
 .input:hover,
 .input:active{
+	outline-style: none;
 	border-bottom-width:var(--h1);
 	margin-bottom: calc(var(--h1) - var(--h1) );
 	padding:var(--h1) var(--w1) var(--h1) var(--w1);
 	transition-duration:var(--durationOn);
+	filter: brightness(1.05);
 }
 .input:focus{
 	color:var(--blue);
@@ -818,6 +820,11 @@ figure .image{
 .input::selection{
 	background-color: var(--blue);
 	color:var(--lightyellow);
+}
+
+.input::placeholder{
+	color: currentColor;
+	opacity: 0.5;
 }
 
 .modal .input::placeholder{
