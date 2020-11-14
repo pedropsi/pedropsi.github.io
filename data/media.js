@@ -1,6 +1,7 @@
 
 Media={
 M_POEMA:{TYPE:"music",AUTHOR:"Sei Mutsuki",TRACK:"Poema2",YEAR:"2020",GENRE:"Guitar solo",LICENSE:"CC-BY 3.0",AUTHOR_LINK:"https://seimutsuki.bandcamp.com/",MUSIC_LINK:"https://soundcloud.com/sei_peridot/poema2-guitar-solo",N:"1",CONTEXT_ID:"starkoban"},
+M_GENTLE:{TYPE:"music",AUTHOR:"Sei Mutsuki",TRACK:"Guitar Gentle",YEAR:"2020",GENRE:"Guitar solo",LICENSE:"CC-BY 3.0",AUTHOR_LINK:"https://seimutsuki.bandcamp.com/",MUSIC_LINK:"https://soundcloud.com/sei_peridot/guitar-gentle",N:"2",CONTEXT_ID:"starkoban"},
 M_SPLASH:{TYPE:"music",AUTHOR:"Sei Mutsuki",TRACK:"Splash",YEAR:"2016",GENRE:"Chillout",LICENSE:"CC-BY 3.0",AUTHOR_LINK:"https://seimutsuki.bandcamp.com/",MUSIC_LINK:"https://soundcloud.com/sei_peridot/peritunematerial-splashroyalty-free-music",N:"1",CONTEXT_ID:"skilleblokker"},
 M_ICE_CAVE:{TYPE:"music",AUTHOR:"Sei Mutsuki",TRACK:"Ice Cave",YEAR:"2016",GENRE:"Ambient",LICENSE:"CC-BY 3.0",AUTHOR_LINK:"https://seimutsuki.bandcamp.com/",MUSIC_LINK:"https://soundcloud.com/sei_peridot/ice-cave",N:"2",CONTEXT_ID:"skilleblokker"},
 M_DEEP_VALLEY_2:{TYPE:"music",AUTHOR:"Sei Mutsuki",TRACK:"Deep Valley 2",YEAR:"2016",GENRE:"World",LICENSE:"CC-BY 3.0",AUTHOR_LINK:"https://seimutsuki.bandcamp.com/",MUSIC_LINK:"https://soundcloud.com/sei_peridot/deep-valley2",N:"3",CONTEXT_ID:"skilleblokker"},
