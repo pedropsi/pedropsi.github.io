@@ -17,8 +17,8 @@ homepage pedropsi.github.io
 background_color #555555 (gray)
 text_color #FF9703 (player orange)
 
-realtime_interval 0.1
-key_repeat_interval 0.1
+realtime_interval 0.16
+key_repeat_interval 0.16
 
 run_rules_on_level_start
 
@@ -1518,6 +1518,7 @@ message "Enclosure"
 ###.2142..#
 ####2222..#
 ###########
+
 
 (
 message Glass blocks no lines.
