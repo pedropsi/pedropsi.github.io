@@ -131,6 +131,39 @@ RegionSub
 transparent
 
 Region1
+#DED795 #D8D088
+11110
+11100
+11000
+10000
+00000
+Region2
+#B8CF8B #B0C97F
+11110
+11100
+11000
+10000
+00000
+Region3
+#DEBE95 #D8B688
+11110
+11100
+11000
+10000
+00000
+Region4
+#DE9695 #D88A88
+11110
+11100
+11000
+10000
+00000
+
+Highlight
+transparent
+
+
+Highlight1
 #F1E7B7 #F6ECBC
 11110
 11100
@@ -138,7 +171,7 @@ Region1
 10000
 00000
 
-Region2
+Highlight2
 #CFE1AB #D5E6AF
 11110
 11100
@@ -146,7 +179,7 @@ Region2
 10000
 00000
 
-Region3
+Highlight3
 #F1D8B7 #F6DDBC
 11110
 11100
@@ -154,7 +187,7 @@ Region3
 10000
 00000
 
-Region4
+Highlight4
 #F1B8B7 #F6BDBC
 11110
 11100
@@ -188,14 +221,14 @@ transparent transparent #555555 (gray)
 .....
 
 LineV1
-transparent #F6ECBC
+transparent #FFFEF4
 ..1..
 ..1..
 .....
 ..1..
 ..1..
 LineH1
-transparent #F6ECBC
+transparent #FFFEF4
 .....
 .....
 11.11
@@ -203,7 +236,7 @@ transparent #F6ECBC
 .....
 
 LineV2
-transparent #D5E6AF
+transparent #F6F9EE
 ..1..
 ..1..
 .....
@@ -211,7 +244,7 @@ transparent #D5E6AF
 ..1..
 
 LineH2
-transparent #D5E6AF
+transparent #F6F9EE
 .....
 .....
 11.11
@@ -219,14 +252,14 @@ transparent #D5E6AF
 .....
 
 LineV3
-transparent #F6DDBC
+transparent #FFFAF4
 ..1..
 ..1..
 .....
 ..1..
 ..1..
 LineH3
-transparent #F6DDBC
+transparent #FFFAF4
 .....
 .....
 11.11
@@ -234,14 +267,14 @@ transparent #F6DDBC
 .....
 
 LineV4
-transparent #F6BDBC
+transparent #FFF4F4
 ..1..
 ..1..
 .....
 ..1..
 ..1..
 LineH4
-transparent #F6BDBC
+transparent #FFF4F4
 .....
 .....
 11.11
@@ -408,37 +441,7 @@ transparent #CD8280
 .....
 .....
 
-Highlight
-transparent
 
-Highlight1
-#DED795 #D8D088
-11110
-11100
-11000
-10000
-00000
-Highlight2
-#B8CF8B #B0C97F
-11110
-11100
-11000
-10000
-00000
-Highlight3
-#DEBE95 #D8B688
-11110
-11100
-11000
-10000
-00000
-Highlight4
-#DE9695 #D88A88
-11110
-11100
-11000
-10000
-00000
 
 WallDecoD1
 #666666 (bright gray)
