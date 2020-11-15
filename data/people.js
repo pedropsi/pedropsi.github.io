@@ -108,8 +108,9 @@ BLUBBERQUARK:{TYPE:"Developer",NAME:"Blubberquark",TWITTER:"blubberquark"},
 DELTA:{NAME:"Katelyn Delta"},
 SKYMOO:{NAME:"Skymoo"},
 VELLEIC:{NAME:"Velleic"},
-SOFTFRO:{NAME:"SoftFro",PERSONAL_PAGE:"https://cryptics.jackbrounstein.com/user/27"}
-
+SOFTFRO:{NAME:"SoftFro",PERSONAL_PAGE:"https://cryptics.jackbrounstein.com/user/27"},
+MANSFIELD:{NAME:"Robert Mansfield",ALIAS:"sftrabbit",TWITTER:"https://twitter.com/sftrabbit"},
+KAROO:{NAME:"Karoo"}
 }
 
 PersonalPage=function(linkObj){
