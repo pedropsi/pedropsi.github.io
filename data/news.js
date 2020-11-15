@@ -1,4 +1,12 @@
 News={
+	N_58:{
+		DATE:"2020-11-15",
+		HEADER:()=>"Starkoban + Puzzle Type update + bugfixes",
+		PIECE:()=>`
+		<p>${AHTML("starkoban")}, a puzzly mix of star battle and sokoban, was released!</p>
+		<p>${AHTML("puzzle-type")} received a new level РУС*** and minor fixes. Major update and new trailer planned.</p>
+		<p>Controls in the landscape mode are now working correcly in all puzzlescript games. Thanks ${v.WELLS()}!</p>
+	`,ID:"index"},
 	N_57:{
 		DATE:"2020-10-04",
 		HEADER:()=>"Star battle Interactive",
