@@ -270,7 +270,7 @@ a{
 
 nav{
 	display:flex;
-	flex-direction:column;
+	flex-direction:row;
 	justify-content:center;
 	flex-wrap:wrap;
 	background-color:var(--white);
@@ -279,22 +279,10 @@ nav{
 .nav-link{
 	padding:var(--h2) var(--w4) var(--h2) var(--w4);
 	max-width:100%;
+	align-items: center;
+	min-width: calc(min(calc(100% - var(--h1)),var(--fontheight)*5));
 }
 
-@media only screen and (min-width:100px) and (max-width:1300px){
-	nav{
-		flex-direction:row;
-	}
-}
-@media only screen and (max-width:330px){
-	.main{
-		flex-direction:column;
-		word-break:break-all;
-	}
-	.nav-link{
-		padding:var(--h-2) var(--w4) var(--h-2) var(--w4);
-	}
-}
 
 .whiteboard{
 	width: 100%;

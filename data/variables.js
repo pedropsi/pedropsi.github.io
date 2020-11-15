@@ -144,7 +144,7 @@ RAINBOWLINE					:	()=>	`<div class="rainbowline"></div>`,
 
 NAVOPTION					:	()=>	"",
 NAVBAR_SELECTION			:	()=>	["about","news",{NAME:"Puzzles",LINK:"tag.html?search=Puzzle"},"posts","contact","guestbook","hall-of-fame"+(In(["selected-puzzlescrpt-games","puzzlescript-games-database","game-console","hall-of-fame"],PageIdentifier())?"-global":""),"store"],
-NAV_LINK					:	(link)=>(`<a href="${IsString(link)?link+".html":link.LINK}" class="nav-link" style="max-width: 728px;">${IsString(link)?Access(link,"TITLE"):link.NAME}</a>`),
+NAV_LINK					:	(link)=>(`<a href="${IsString(link)?link+".html":link.LINK}" class="nav-link";">${IsString(link)?Access(link,"TITLE"):link.NAME}</a>`),
 NAVBAR						:	()=>	`<div class="navbar">${v.NAV_LOGO()}<nav>${v.NAVBAR_SELECTION().map(v.NAV_LINK).join("\n")}${v.NIGHTMODE()}</nav>${v.RAINBOWLINE()}</div>`,
 NAV_LOGO					:	()=>	`<a href="index.html"><div class="logo">${v.LOGO_SVG()}</div></a>`,
 
