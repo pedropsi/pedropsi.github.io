@@ -131,28 +131,28 @@ RegionSub
 transparent
 
 Region1
-#DED795 #D8D088
+#F1E7B7 #F6ECBC #DED795 #D8D088
 11110
 11100
 11000
 10000
 00000
 Region2
-#B8CF8B #B0C97F
+#CFE1AB #D5E6AF #B8CF8B #B0C97F
 11110
 11100
 11000
 10000
 00000
 Region3
-#DEBE95 #D8B688
+#F1D8B7 #F6DDBC #DEBE95 #D8B688
 11110
 11100
 11000
 10000
 00000
 Region4
-#DE9695 #D88A88
+#F1B8B7 #F6BDBC #DE9695 #D88A88
 11110
 11100
 11000
@@ -221,14 +221,14 @@ transparent transparent #555555 (gray)
 .....
 
 LineV1
-transparent #FFFEF4
+transparent #CDC080 #FFFEF4
 ..1..
 ..1..
 .....
 ..1..
 ..1..
 LineH1
-transparent #FFFEF4
+transparent #CDC080 #FFFEF4
 .....
 .....
 11.11
@@ -236,7 +236,7 @@ transparent #FFFEF4
 .....
 
 LineV2
-transparent #F6F9EE
+transparent #A7BF77 #F6F9EE
 ..1..
 ..1..
 .....
@@ -244,7 +244,7 @@ transparent #F6F9EE
 ..1..
 
 LineH2
-transparent #F6F9EE
+transparent #A7BF77 #F6F9EE
 .....
 .....
 11.11
@@ -252,14 +252,14 @@ transparent #F6F9EE
 .....
 
 LineV3
-transparent #FFFAF4
+transparent #CDAC80 #FFFAF4
 ..1..
 ..1..
 .....
 ..1..
 ..1..
 LineH3
-transparent #FFFAF4
+transparent #CDAC80 #FFFAF4
 .....
 .....
 11.11
@@ -267,14 +267,14 @@ transparent #FFFAF4
 .....
 
 LineV4
-transparent #FFF4F4
+transparent #CD8280 #FFF4F4
 ..1..
 ..1..
 .....
 ..1..
 ..1..
 LineH4
-transparent #FFF4F4
+transparent #CD8280 #FFF4F4
 .....
 .....
 11.11
