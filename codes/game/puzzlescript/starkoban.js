@@ -5,7 +5,7 @@ var ObtainLevelTitle="Previous";
 ////////////////////////////////////////////////////////////////////////////////
 // Source
 var sourceCode=`(- Copyright Pedro PSI 2020                             -)
-(- Version nº 14/11/2020                            .13 -)
+(- Version nº 14/11/2020                            .14 -)
 (- RULES / LEGEND section under a CC-BY-NC license      -)
 (--------------------------------------------------------)
 
@@ -27,7 +27,7 @@ OBJECTS
 ========
 
 Background 
-#EEEEEE #F5F5F5
+#EEEEEE (white) #F5F5F5 (light white)
 11110
 11100
 11000
@@ -412,13 +412,33 @@ Highlight
 transparent
 
 Highlight1
-#FFF9DE
+#DED795 #D8D088
+11110
+11100
+11000
+10000
+00000
 Highlight2
-#E8F3D3
+#B8CF8B #B0C97F
+11110
+11100
+11000
+10000
+00000
 Highlight3
-#FFF1DE
+#DEBE95 #D8B688
+11110
+11100
+11000
+10000
+00000
 Highlight4
-#FFDFDE
+#DE9695 #D88A88
+11110
+11100
+11000
+10000
+00000
 
 WallDecoD1
 #666666 (bright gray)
@@ -599,6 +619,7 @@ BorderRkD
 transparent
 BorderDkL
 transparent
+
 
 FixedL
 white
@@ -789,6 +810,92 @@ transparent
 ZenMode
 transparent
 
+OutlineL
+#EEEEEE (white) #F5F5F5 (light white) 
+1....
+1....
+1....
+1....
+0....
+
+OutlineU
+#EEEEEE (white) #F5F5F5 (light white) 
+11110
+.....
+.....
+.....
+.....
+
+OutlineR
+#EEEEEE (white)
+....0
+....0
+....0
+....0
+....0
+
+OutlineD 
+#EEEEEE (white)
+.....
+.....
+.....
+.....
+00000
+
+
+OutlineLXU
+#EEEEEE (white) #F5F5F5 (light white)
+1....
+.....
+.....
+.....
+.....
+
+OutlineDXL
+#EEEEEE (white)
+.....
+.....
+.....
+.....
+0....
+
+OutlineUXR
+#EEEEEE (white)
+....0
+.....
+.....
+.....
+.....
+
+OutlineRXD
+#EEEEEE (white)
+.....
+.....
+.....
+.....
+....0
+
+OutlineLkD
+transparent
+OutlineUkL
+transparent
+OutlineRkU
+transparent
+OutlineDkR
+transparent
+
+OutlineLkU
+transparent
+OutlineUkR
+transparent
+OutlineRkD
+transparent
+OutlineDkL
+transparent
+
+
+
+
 =======
 LEGEND
 =======
@@ -876,6 +983,9 @@ Decorable = UnPushable
 
 Borders= BorderL or BorderU or BorderR or BorderD or BoLXU or BoUXR or BoDXL or BoRXD
 
+Outlines= OutlineL or OutlineU or OutlineR or OutlineD or OutlineLXU or OutlineUXR or OutlineDXL or OutlineRXD
+
+
 Signature = S0 or S1 or S2 or S3 or S4 or S5 or S6 or S7 or S8 or S9
 Signature_ = S0 and S1 and S2 and S3 and S4 and S5 and S6 and S7 and S8 and S9
 
@@ -907,6 +1017,26 @@ RegionSub
 Regions
 Highlight 
 Highlights
+
+OutlineL
+OutlineU
+OutlineR
+OutlineD
+
+OutlineLXU 
+OutlineUXR 
+OutlineDXL 
+OutlineRXD
+
+OutlineLkD
+OutlineUkL
+OutlineRkU
+OutlineDkR
+
+OutlineLkU
+OutlineUkR
+OutlineRkD
+OutlineDkL
 
 Moved
 Once
@@ -963,6 +1093,7 @@ BorderLkU
 BorderUkR
 BorderRkD
 BorderDkL
+
 
 Player, Star
 
@@ -1219,6 +1350,47 @@ late [Star Region2]->[Star Star2 Region2]
 late [Star Region3]->[Star Star3 Region3]
 late [Star Region4]->[Star Star4 Region4]
 
+
+(Region Outlines)
+(---------------------------------------------------)
+
+late left  [Region1 no OutlineL|no Region1]-> [Region1 OutlineL|]
+late up    [Region1 no OutlineU|no Region1]-> [Region1 OutlineU|]
+late right [Region1 no OutlineR|no Region1]-> [Region1 OutlineR|]
+late down  [Region1 no OutlineD|no Region1]-> [Region1 OutlineD|]
+
+late left  [Region2 no OutlineL|no Region2]-> [Region2 OutlineL|]
+late up    [Region2 no OutlineU|no Region2]-> [Region2 OutlineU|]
+late right [Region2 no OutlineR|no Region2]-> [Region2 OutlineR|]
+late down  [Region2 no OutlineD|no Region2]-> [Region2 OutlineD|]
+
+late left  [Region3 no OutlineL|no Region3]-> [Region3 OutlineL|]
+late up    [Region3 no OutlineU|no Region3]-> [Region3 OutlineU|]
+late right [Region3 no OutlineR|no Region3]-> [Region3 OutlineR|]
+late down  [Region3 no OutlineD|no Region3]-> [Region3 OutlineD|]
+
+late left  [Region4 no OutlineL|no Region4]-> [Region4 OutlineL|]
+late up    [Region4 no OutlineU|no Region4]-> [Region4 OutlineU|]
+late right [Region4 no OutlineR|no Region4]-> [Region4 OutlineR|]
+late down  [Region4 no OutlineD|no Region4]-> [Region4 OutlineD|]
+
+(corners)
+late left  [Regions no OutlineLkD|Regions OutlineD]->[Regions OutlineLkD|Regions OutlineD]
+late up    [Regions no OutlineUkL|Regions OutlineL]->[Regions OutlineUkL|Regions OutlineL]
+late right [Regions no OutlineRkU|Regions OutlineU]->[Regions OutlineRkU|Regions OutlineU]
+late down  [Regions no OutlineDkR|Regions OutlineR]->[Regions OutlineDkR|Regions OutlineR]
+
+late left  [Regions no OutlineLkU|Regions OutlineU]->[Regions OutlineLkU|Regions OutlineU]
+late up    [Regions no OutlineUkR|Regions OutlineR]->[Regions OutlineUkR|Regions OutlineR]
+late right [Regions no OutlineRkD|Regions OutlineD]->[Regions OutlineRkD|Regions OutlineD]
+late down  [Regions no OutlineDkL|Regions OutlineL]->[Regions OutlineDkL|Regions OutlineL]
+
+late [Regions OutlineLkU OutlineUkL no OutlineLxU]->[Regions OutlineLkU OutlineUkL OutlineLxU]
+late [Regions OutlineUkR OutlineRkU no OutlineUxR]->[Regions OutlineUkR OutlineRkU OutlineUxR]
+late [Regions OutlineRkD OutlineDkR no OutlineRxD]->[Regions OutlineRkD OutlineDkR OutlineRxD]
+late [Regions OutlineDkL OutlineLkD no OutlineDxL]->[Regions OutlineDkL OutlineLkD OutlineDxL]
+
+late [Highlights Outlines]->[Highlights]
 
 
 (Wall borders)
@@ -1585,5 +1757,3 @@ message "Wheel of dharma"
 message ++++++++ Congratulations! ++++++++
 message +++++++++++ Starkoban ++++++++++++                                     ++++ by Pedro PSI (2020) ++++
 message +++++++ Music by PeriTune ++++++++                                       ++++++++++ Poema2 ++++++++++                                        ++++ Guitar  Gentle ++++
-
-`
