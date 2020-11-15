@@ -463,7 +463,7 @@ RequestHallOfFame=function(){
 				RequestWinnerMessage();
 				//console.log(2);
 			}				
-			//LocalStorage("hall-of-fame",true);
+			LocalStorage("hall-of-fame",true);
 		}
 	});
 }
@@ -496,7 +496,7 @@ RequestWinnerMessage=function(){
 		thanksmessage:"Thank you for your message.",
 		qonclose:GameFocus,
 		qonsubmit:function(){
-			//LocalStorage("winner-message",true);
+			LocalStorage("winner-message",true);
 			GameFocus();
 		},
 		findDestination:function(DP){return DestinationChoice(FindData("whence",DP.qid));}
