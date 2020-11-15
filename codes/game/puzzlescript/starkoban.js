@@ -1034,7 +1034,6 @@ OutlineUkR
 OutlineRkD
 OutlineDkL
 
-Moved
 
 
 LinkL
@@ -1098,6 +1097,8 @@ WallDecoL
 WallDecoU
 WallDecoR
 WallDecoD
+
+Moved
 
 StarBump
 
