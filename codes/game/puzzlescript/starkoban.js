@@ -1344,7 +1344,7 @@ LEVELS
 message Welcome to Starkoban!
 message Place one stone per area.
 
-message ...... Level 1 / 12 * .......
+message ...... Level 1 / 14 * .......
 message "For star'ters"
 
 (goal and pushing)
@@ -1360,7 +1360,7 @@ message "For star'ters"
 #########
 
 message You may push many stones together.
-message ...... Level 2 / 12 * .......
+message ...... Level 2 / 14 * .......
 message "Moth"
 
 (multi pushing)
@@ -1378,7 +1378,7 @@ message "Moth"
 message Active stones are called "stars".
 message Stars block entire lines.
 
-message ...... Level 3 / 12 ** .......
+message ...... Level 3 / 14 ** .......
 message "Linear"
 
 (larger regions)
@@ -1400,7 +1400,7 @@ message "Linear"
 message Stars cannot touch each other...
 message ... even diagonally.
 
-message ...... Level 4 / 12 ** .......
+message ...... Level 4 / 14 ** .......
 message "Touchy"
 
 (adjacency)
@@ -1415,7 +1415,7 @@ message "Touchy"
 
 
 message Starlines extend across regions.
-message ...... Level 5 / 12 *** .......
+message ...... Level 5 / 14 *** .......
 message "Waltz"
 
 (line blocking across regions)
@@ -1432,7 +1432,7 @@ message "Waltz"
 
 
 message Starlines jump over gaps.
-message ...... Level 6 / 12 *** .......
+message ...... Level 6 / 14 *** .......
 message "Intersect"
 
 (disconnected lines)
@@ -1450,7 +1450,7 @@ message "Intersect"
 
 
 message Some stones need an extra push.
-message ...... Level 7 / 12 *** .......
+message ...... Level 7 / 14 *** .......
 message "Imperfection"
 
 (push special)
@@ -1468,7 +1468,7 @@ message "Imperfection"
 ######
 
 message Walls block starlines.
-message ...... Level 8 / 12 *** .......
+message ...... Level 8 / 14 *** .......
 message "Eyeglasses"
 
 ########
@@ -1482,7 +1482,7 @@ message "Eyeglasses"
 message Stars are territorial.
 message No more than one per area.
 
-message ...... Level 9 / 12 **** .......
+message ...... Level 9 / 14 **** .......
 message "Smallest star battle"
 
 (territoriality)
@@ -1502,7 +1502,7 @@ message Well done!
 message You've learned the base rules.
 message So here are some bonus levels!
 
-message ...... Level 10 / 12 **** .......
+message ...... Level 10 / 14 **** .......
 message "Four Plus"
 
 (more than four)
@@ -1518,7 +1518,7 @@ message "Four Plus"
 ###...####
 ##########
 
-message ...... Level 11 / 12 **** .......
+message ...... Level 11 / 14 **** .......
 message "Cycles"
 
 #######
@@ -1532,7 +1532,7 @@ message "Cycles"
 #######
 
 
-message ...... Level 12 / 12 *** .......
+message ...... Level 12 / 14 *** .......
 message "Birds flocking"
 
 (line obstruction)
@@ -1547,7 +1547,7 @@ message "Birds flocking"
 #.o.3.....##
 ############
 
-message ...... Level 13 / 12 **** .......
+message ...... Level 13 / 14 **** .......
 message "Enclosure"
 
 (closed regions)
@@ -1565,7 +1565,7 @@ message "Enclosure"
 ###########
 
 
-message ...... Level 14 / 12 *** .......
+message ...... Level 14 / 14 *** .......
 message "Wheel of dharma"
 
 ############
