@@ -4,9 +4,8 @@ var ObtainLevelTitle="Previous";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Source
-var sourceCode=`
-(- Copyright Pedro PSI 2020                             -)
-(- Version nº 14/11/2020                            .12 -)
+var sourceCode=`(- Copyright Pedro PSI 2020                             -)
+(- Version nº 14/11/2020                            .13 -)
 (- RULES / LEGEND section under a CC-BY-NC license      -)
 (--------------------------------------------------------)
 
@@ -799,6 +798,12 @@ LEGEND
 P = Player
 O = Star
 
+
+À = Player and Region1 and RegionSub
+È = Player and Region2 and RegionSub
+Ì = Player and Region3 and RegionSub
+Ò = Player and Region4 and RegionSub
+
 Á = Star and Region1 and RegionSub
 É = Star and Region2 and RegionSub
 Í = Star and Region3 and RegionSub
@@ -1462,11 +1467,22 @@ message "Imperfection"
 #....#
 ######
 
+message Walls block starlines.
+message ...... Level 8 / 12 *** .......
+message "Eyeglasses"
+
+########
+#....###
+#1o43o2#
+#1#43#2#
+#1o43o2#
+###..P.#
+########
 
 message Stars are territorial.
 message No more than one per area.
 
-message ...... Level 8 / 12 **** .......
+message ...... Level 9 / 12 **** .......
 message "Smallest star battle"
 
 (territoriality)
@@ -1481,11 +1497,12 @@ message "Smallest star battle"
 ########
 
 
+
 message Well done!
 message You've learned the base rules.
 message So here are some bonus levels!
 
-message ...... Level 9 / 12 **** .......
+message ...... Level 10 / 12 **** .......
 message "Four Plus"
 
 (more than four)
@@ -1501,8 +1518,21 @@ message "Four Plus"
 ###...####
 ##########
 
+message ...... Level 11 / 12 **** .......
+message "Cycles"
 
-message ...... Level 10 / 12 *** .......
+#######
+##4433#
+##4o#3#
+##3333#
+##OPO##
+#2222##
+#2#o1##
+#2211##
+#######
+
+
+message ...... Level 12 / 12 *** .......
 message "Birds flocking"
 
 (line obstruction)
@@ -1517,7 +1547,7 @@ message "Birds flocking"
 #.o.3.....##
 ############
 
-message ...... Level 11 / 12 **** .......
+message ...... Level 13 / 12 **** .......
 message "Enclosure"
 
 (closed regions)
@@ -1535,7 +1565,7 @@ message "Enclosure"
 ###########
 
 
-message ...... Level 12 / 12 **** .......
+message ...... Level 14 / 12 *** .......
 message "Wheel of dharma"
 
 ############
@@ -1550,22 +1580,6 @@ message "Wheel of dharma"
 ##441oo333##
 #####..#####
 ############
-
-
-(
-message Glass blocks no lines.
-message ...... Level 11 / 12 *** .......
-
-message "Crystal clear"
-(glass)
-
-#############
-####21432...#
-#.P.21UI2.O.#
-#.O.2AUI2.O.#
-#.O.2AU32.O.#
-#...21432####
-#############)
 
 
 message ++++++++ Congratulations! ++++++++
