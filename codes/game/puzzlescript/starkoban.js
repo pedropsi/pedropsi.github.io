@@ -891,6 +891,13 @@ OutlineDkL
 transparent
 
 
+Marker 
+#555555 (gray) #5A5A5A
+.....
+...0.
+..0..
+.0...
+.....
 
 
 =======
@@ -1088,6 +1095,7 @@ BorderUkR
 BorderRkD
 BorderDkL
 
+Marker
 
 Player, Star
 
@@ -1138,9 +1146,15 @@ S8
 S9
 
 
+
 ======
 RULES     
 ======    
+
+(Marker)
+(---------------------------------------------------)
+[action Player no Marker]->[Player Marker]
+[action Player Marker   ]->[Player]
 
 late [Signature]->[]
 late [Player]->[Player Signature_]
@@ -1484,6 +1498,7 @@ down  [Star FixedD no StarBump]->[Star FixedD StarBump1]
 
 
 
+
 ==============
 WINCONDITIONS
 ==============
@@ -1655,7 +1670,7 @@ message Well done!
 message You've learned the base rules.
 message So here are some bonus levels!
 
-message ...... Level 10 / 14 **** .......
+message ...... Level 10 / 14 ***** .......
 message "Four Plus"
 
 (more than four)
@@ -1700,7 +1715,7 @@ message "Birds flocking"
 #.o.3.....##
 ############
 
-message ...... Level 13 / 14 **** .......
+message ...... Level 13 / 14 ***** .......
 message "Enclosure"
 
 (closed regions)
