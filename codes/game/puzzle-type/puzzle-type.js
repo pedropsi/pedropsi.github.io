@@ -2812,10 +2812,10 @@ function TransitionGoalIn(duration){
 	}
 	UnFadeElement(".top .goal",duration);
 
-	if(goal==="Deaf")
-		Class(".goal","uncase");
+	if(CurLevelTitle()==="⠍⠕⠗⠎⠑")
+		UnClass(".goal","capitalise");
 	else
-		UnClass(".goal","uncase");
+		Class(".goal","capitalise");
 
 }
 
