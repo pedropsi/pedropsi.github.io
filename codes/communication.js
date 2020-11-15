@@ -420,9 +420,12 @@ Outflows=function(name){
 
 var ConsoleExternal=function(){return PageIdentifier()==="game-console"};
 
+
 RequestHallOfFame=function(){
 	if(LocalStorage("hall-of-fame")===true)
 		return RequestWinnerMessage();
+
+	var awaitwinner=true;
 
 	if(ConsoleExternal())
 		RequestDataPack([
@@ -446,11 +449,21 @@ RequestHallOfFame=function(){
 	]],
 	{
 		destination:"hall-of-fame",
-		qonclose:RequestWinnerMessage,
+		qonclose:function(){
+			if(awaitwinner){
+				awaitwinner=false;
+				RequestWinnerMessage();
+				//console.log(1);
+			}
+			
+		},
 		qonsubmit:function(){
-			LocalStorage("hall-of-fame",true);
-			Once(RequestWinnerMessage);
-			console.log("call")
+			if(awaitwinner){
+				awaitwinner=false;
+				RequestWinnerMessage();
+				//console.log(2);
+			}				
+			//LocalStorage("hall-of-fame",true);
 		}
 	});
 }
@@ -483,7 +496,7 @@ RequestWinnerMessage=function(){
 		thanksmessage:"Thank you for your message.",
 		qonclose:GameFocus,
 		qonsubmit:function(){
-			LocalStorage("winner-message",true);
+			//LocalStorage("winner-message",true);
 			GameFocus();
 		},
 		findDestination:function(DP){return DestinationChoice(FindData("whence",DP.qid));}
