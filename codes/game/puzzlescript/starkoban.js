@@ -5,7 +5,7 @@ var ObtainLevelTitle="Previous";
 ////////////////////////////////////////////////////////////////////////////////
 // Source
 var sourceCode=`(- Copyright Pedro PSI 2020                             -)
-(- Version nº 14/11/2020                            .14 -)
+(- Version nº 14/11/2020                            .15 -)
 (- RULES / LEGEND section under a CC-BY-NC license      -)
 (--------------------------------------------------------)
 
@@ -27,7 +27,7 @@ OBJECTS
 ========
 
 Background 
-#EEEEEE (white) #F5F5F5 (light white)
+#F7F7F7 (white) #FFFFFF (light white)
 11110
 11100
 11000
@@ -814,7 +814,7 @@ ZenMode
 transparent
 
 OutlineL
-#EEEEEE (white) #F5F5F5 (light white) 
+#F7F7F7 (white) #FFFFFF (light white)
 1....
 1....
 1....
@@ -822,7 +822,7 @@ OutlineL
 0....
 
 OutlineU
-#EEEEEE (white) #F5F5F5 (light white) 
+#F7F7F7 (white) #FFFFFF (light white)
 11110
 .....
 .....
@@ -830,7 +830,7 @@ OutlineU
 .....
 
 OutlineR
-#EEEEEE (white)
+#F7F7F7 (white) #FFFFFF (light white)
 ....0
 ....0
 ....0
@@ -838,7 +838,7 @@ OutlineR
 ....0
 
 OutlineD 
-#EEEEEE (white)
+#F7F7F7 (white) #FFFFFF (light white)
 .....
 .....
 .....
@@ -847,7 +847,7 @@ OutlineD
 
 
 OutlineLXU
-#EEEEEE (white) #F5F5F5 (light white)
+#F7F7F7 (white) #FFFFFF (light white)
 1....
 .....
 .....
@@ -855,7 +855,7 @@ OutlineLXU
 .....
 
 OutlineDXL
-#EEEEEE (white)
+#F7F7F7 (white) #FFFFFF (light white)
 .....
 .....
 .....
@@ -863,7 +863,7 @@ OutlineDXL
 0....
 
 OutlineUXR
-#EEEEEE (white)
+#F7F7F7 (white) #FFFFFF (light white)
 ....0
 .....
 .....
@@ -871,7 +871,7 @@ OutlineUXR
 .....
 
 OutlineRXD
-#EEEEEE (white)
+#F7F7F7 (white) #FFFFFF (light white)
 .....
 .....
 .....
@@ -1760,4 +1760,5 @@ message "Wheel of dharma"
 message ++++++++ Congratulations! ++++++++
 message +++++++++++ Starkoban ++++++++++++                                     ++++ by Pedro PSI (2020) ++++
 message +++++++ Music by PeriTune ++++++++                                       ++++++++++ Poema2 ++++++++++                                        ++++ Guitar  Gentle ++++
+
 `
