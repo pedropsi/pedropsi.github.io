@@ -21,6 +21,40 @@ window.Mobile.GestureHandler = function () {
     this.initialize.apply(this, arguments);
 };
 
+// Lookup table mapping action to keyCode.
+
+function ObtainRotateControls(rotated){
+	if(rotated)
+		PuzzlescriptKeymap=PuzzlescriptKeymapRotated;
+	else
+		PuzzlescriptKeymap=PuzzlescriptKeymapNormal;
+}
+
+var PuzzlescriptKeymap=PuzzlescriptKeymapNormal;
+
+var PuzzlescriptKeymapNormal = {
+	action:  88, // x
+	left:    37, // left arrow
+	right:   39, // right arrow
+	up:      38, // up arrow
+	down:    40, // down arrow
+	undo:    85, // u
+	restart: 82, // r
+	quit:    27 // escape
+}
+
+var PuzzlescriptKeymapRotated = {
+	action:  88, // x
+	left:    40, // left arrow
+	right:   38, // right arrow
+	up:      37, // up arrow
+	down:    39, // down arrow
+	undo:    85, // u
+	restart: 82, // r
+	quit:    27 // escape
+}
+
+
 function MobileInitialise(proto) {
     'use strict';
 
@@ -34,17 +68,7 @@ function MobileInitialise(proto) {
     // ... and not specified in state.metadata.key_repeat_interval.
     var DEFAULT_REPEAT_INTERVAL = 150;
 
-    // Lookup table mapping action to keyCode.
-    var CODE = {
-        action:  88, // x
-        left:    37, // left arrow
-        right:   39, // right arrow
-        up:      38, // up arrow
-        down:    40, // down arrow
-        undo:    85, // u
-        restart: 82, // r
-        quit:    27 // escape
-    }
+    
 
     /** Bootstrap Methods **/
 
@@ -295,7 +319,7 @@ function MobileInitialise(proto) {
     proto.emitKeydown = function (input) {
         var event;
 
-        event = { keyCode: CODE[input] };
+        event = { keyCode: PuzzlescriptKeymap[input] };
 
         this.fakeCanvasFocus();
         // Press, then release key.

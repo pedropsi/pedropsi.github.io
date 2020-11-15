@@ -421,14 +421,21 @@ function RedoAndFocus(){
 ////////////////////////////////////////////////////////////////////////////////
 // Screen rotation
 
+if(typeof ObtainRotateControls==="undefined")
+	var ObtainRotateControls=Identity;
+
 function GameRotation(){
 	var x=window.innerWidth;
 	var y=window.innerHeight;
 	
-	if(ObtainXYRotateCondition(x,y))
+	if(ObtainXYRotateCondition(x,y)){
 		Class('.game-rotation-container','rotate90');
-	else
+		ObtainRotateControls(true);
+	}
+	else{
 		UnClass('.game-rotation-container','rotate90');
+		ObtainRotateControls(false);
+	}
 	
 	ObtainResizeCanvas();
 	setTimeout(ObtainResizeCanvas,1000); //It takes 1 second to rotate
