@@ -805,13 +805,7 @@ MovedD3
 .....
 .....
 
-Once
-transparent
-Twice
-transparent
 
-ZenMode
-transparent
 
 OutlineL
 #F7F7F7 (white) #FFFFFF (light white)
@@ -1005,7 +999,6 @@ Moved3 = MovedL3 or MovedU3 or MovedR3 or MovedD3
 
 Deco = Moved or WallDeco or StarBump
 
-Zenable = Lines or Highlights
 
 =======
 SOUNDS
@@ -1042,8 +1035,7 @@ OutlineRkD
 OutlineDkL
 
 Moved
-Once
-Twice
+
 
 LinkL
 LinkU
@@ -1144,7 +1136,6 @@ S7
 S8
 S9
 
-ZenMode
 
 ======
 RULES     
@@ -1171,14 +1162,7 @@ late [Region4 Signature no Highlights]-> [Region4 Signature Highlight4]
 late [Line]->[]
 late [Lines]->[]
 
-(make lines single signature
-startloop
-late random [Star Signature no Once no Twice]->[Star Signature Once Twice]
-late vertical [Signature Once|no Wall]-> [Signature Once|Signature Once]
-late horizontal [Signature Twice|no Wall]-> [Signature Twice|Signature Twice]
-endloop
-late [Once]->[]
-late [Twice]->[])
+
 
 
 late vertical   [Star Region1 no LineV1]->[Star Region1 LineV1]
@@ -1495,13 +1479,6 @@ down  [Star FixedD no StarBump]->[Star FixedD StarBump1]
 [MovedD2 no .]->[MovedD3 .]
 [MovedD3 no .]->[.]
 
-
-(Zen Mode)
-(---------------------------------------------------
-[action Player][ZenMode]->[Player][]
-[action Player no ZenMode]->[Player ZenMode]
-late [ZenMode][Zenable]->[ZenMode][]
-)
 
 
 
