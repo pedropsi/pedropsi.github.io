@@ -1732,7 +1732,7 @@ message "Crux"
 
 
 message ...... Level 14 / 14 **** .......
-message "Wheel of dharma"
+message "Dharma wheel"
 
 ############
 #####..#####
