@@ -5,7 +5,7 @@ var ObtainLevelTitle="Previous";
 ////////////////////////////////////////////////////////////////////////////////
 // Source
 var sourceCode=`(- Copyright Pedro PSI 2020                             -)
-(- Version nº 14/11/2020                            .15 -)
+(- Version nº 14/11/2020                            .16 -)
 (- RULES / LEGEND section under a CC-BY-NC license      -)
 (--------------------------------------------------------)
 
@@ -1665,42 +1665,26 @@ message "Smallest star battle"
 ########
 
 
-
 message Well done!
 message You've learned the base rules.
 message So here are some bonus levels!
 
-message ...... Level 10 / 14 ***** .......
-message "Four Plus"
 
-(more than four)
-
-##########
-####P..###
-##2221o.##
-#.24111o##
-#.44412o.#
-#.o43222.#
-##o33324.#
-##.o3444##
-###...####
-##########
-
-message ...... Level 11 / 14 **** .......
+message ...... Level 10 / 14 *** .......
 message "Cycles"
 
-#######
-##4433#
-##4o#3#
-##3333#
-##OPO##
-#2222##
-#2#o1##
-#2211##
-#######
+#########
+###4433##
+###4o#3##
+#3333331#
+#4oOPOo2#
+#4222222#
+##2#o1###
+##2211###
+#########
 
 
-message ...... Level 12 / 14 *** .......
+message ...... Level 11 / 14 *** .......
 message "Birds flocking"
 
 (line obstruction)
@@ -1715,7 +1699,7 @@ message "Birds flocking"
 #.o.3.....##
 ############
 
-message ...... Level 13 / 14 ***** .......
+message ...... Level 12 / 14 **** .......
 message "Enclosure"
 
 (closed regions)
@@ -1732,8 +1716,22 @@ message "Enclosure"
 ####2222..#
 ###########
 
+message ...... Level 13 / 14 ***** .......
+message "Crux"
 
-message ...... Level 14 / 14 *** .......
+##########
+####P..###
+##2221o.##
+#.24111o##
+#.44412o.#
+#.o43222.#
+##o33324.#
+##.o3444##
+###...####
+##########
+
+
+message ...... Level 14 / 14 **** .......
 message "Wheel of dharma"
 
 ############
@@ -1753,5 +1751,6 @@ message "Wheel of dharma"
 message ++++++++ Congratulations! ++++++++
 message +++++++++++ Starkoban ++++++++++++                                     ++++ by Pedro PSI (2020) ++++
 message +++++++ Music by PeriTune ++++++++                                       ++++++++++ Poema2 ++++++++++                                        ++++ Guitar  Gentle ++++
+
 
 `
