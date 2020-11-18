@@ -4860,13 +4860,6 @@ AutoStop=function(RepeatF,delay,name){
 	},delay);
 }
 
-Monitor=function(MonitorF,delay,DisplayF){
-	var DisplayF=DisplayF?DisplayF:console.log;
-	function M(){
-		DisplayF(MonitorF());
-	}
-	AutoRepeat(M,delay);
-}
 
 
 //Prevent execution unless time cooldown exceeded, in ms
