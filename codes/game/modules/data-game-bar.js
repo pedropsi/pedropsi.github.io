@@ -333,11 +333,11 @@ function FeedbackButton(){
 }
 
 function MusicButton(){
-	if(Playlist().length<1)
+	if(typeof Playlist==="undefined")
 		return "";
 	else{
 		canYoutube=false;
-		return GameBarButtonHTML("music",{onclick:'ToggleCurrentSong();GameFocus();'});
+		return GameBarButtonHTML("music",{onclick:'PlaylistToggle();GameFocus();'});
 	}
 }
 
@@ -471,8 +471,8 @@ function KeyActionsGameBar(){
 			KAGB["ctrl "+ObtainMainKey("levelselector")]=RequestLevelSelector;
 		
 		}
-		KAGB[ObtainMainKey("music")]=ToggleCurrentSong;
-		KAGB["ctrl +",ObtainMainKey("music")]=ToggleCurrentSong;
+		KAGB[ObtainMainKey("music")]=PlaylistToggle;
+		KAGB["ctrl +",ObtainMainKey("music")]=PlaylistToggle;
 
 	return KAGB;
 }

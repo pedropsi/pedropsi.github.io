@@ -135,6 +135,7 @@ var gameModulesEarly=[
 "codes/game/modules/data-game-undo.js",
 "codes/game/modules/data-game-hints.js",
 "codes/game/modules/data-game-gestures.js",
+"codes/game/modules/data-game-music.js",
 // "codes/game/modules/data-game-hud.js"
 ]
 

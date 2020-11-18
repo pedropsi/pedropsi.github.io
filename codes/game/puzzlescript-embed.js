@@ -28,6 +28,7 @@ var InnerModules=[
 	"data-game-colours",
 	"data-game-fullscreen",
 	"data-game-checkpoint",
+	"data-game-music",
 	"data-game-bar",
 	"data-game-level",
 	"data-game-overwrite-puzzlescript",
