@@ -138,6 +138,17 @@ LoadGameHTML(GameFrameHTML());
 LoadStyle("codes/game/combinatura/combinatura.css");
 
 
+///////////////////////////////////////////////////////////////////////////////
+// Object Props
+
+PropertyF=function(propertyName){
+	return function(obj){return obj[propertyName];}
+}
+
+PropertyEqualsF=function(propertyName,propertyValue){
+	return function(obj){return obj[propertyName]===propertyValue;};
+}
+
 //////////////////////////////////////////////////////////////////////////////
 // Game Logic
 
