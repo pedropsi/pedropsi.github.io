@@ -1518,7 +1518,7 @@ GlocalPath=function(urlpath,relativepath){
 
 //NavigateGoToPage
 
-function RightPath(url){
+RightPath=function(url){
 	if(!PageRelative(url))
 		return url;
 	else{
@@ -3430,7 +3430,7 @@ ShowHide=function(selectorE){
 ////////////////////////////////////////////////////////////////////////////////
 // Opening / Closing functions
 
-function FadeDuration(n){
+FadeDuration=function(n){
 	if(typeof n==="undefined")
 		return "1s";
 	if(IsNumber(n))
@@ -3439,7 +3439,7 @@ function FadeDuration(n){
 		return n;
 }
 
-function MillisecondsDuration(n){
+MillisecondsDuration=function(n){
 	if(typeof n==="undefined")
 		return 1000;
 	if(IsNumber(n))
@@ -4759,11 +4759,11 @@ SequenceSchedule=function(Obj){
 	for(var i=0;i<=steps;i=i+1){ScheduleAnim(i,startTime)};
 }
 
-function ScheduleList(name){
+ScheduleList=function(name){
 	return SequenceSchedule[name]||[];
 }
 
-function ClearSchedule(name){
+ClearSchedule=function(name){
 	if(SequenceSchedule[name]){
 		SequenceSchedule[name].map(clearTimeout);
 		SequenceSchedule[name]=[];
@@ -4771,7 +4771,7 @@ function ClearSchedule(name){
 }
 
 
-function Kinemate(Objs){
+Kinemate=function(Objs){
 	var actions=Clone(Objs);
 
 	function Chain(PrevEnder,ThisAction){
@@ -5353,32 +5353,32 @@ var SVGLetterPattern={
 	6:"C",
 	7:"A"
 }
-function SVGLinePattern(n){
+SVGLinePattern=function(n){
 	if(In(SVGLetterPattern,String(n)))
 		return "(?:("+SVGLetterPattern[n]+")"+SVGSpacePattern+"("+(SVGNumberPattern+SVGSpacePattern).repeat(n)+"))";
 	else
 		return false;
 }
 
-function SVGPattern(){
+SVGPattern=function(){
 	var fullpattern=Keys(SVGLetterPattern).map(SVGLinePattern);
 		fullpattern=fullpattern.map(p=>"(?:"+p+")").join("|");
 	return fullpattern;
 }
 
-function SVGPathSplit(path){
+SVGPathSplit=function(path){
 	var pattern=new RegExp(SVGPattern(),"g");
 	return (path+" ").match(pattern)||[];
 }
 
-function SVGLinePairs(svgline){ //misses odd number off coords
+SVGLinePairs=function(svgline){ //misses odd number off coords
 	var pairs=(svgline+" ").match(new RegExp(SVGPairPattern,"g"));
 		pairs=pairs.map(pair=>pair.match(new RegExp(SVGNumberPattern,"g")));
 		pairs=pairs.map(pair=>pair.map(Number));
 	return pairs;
 }
 
-function SVGLineApply(svgline,CoordinatesF){
+SVGLineApply=function(svgline,CoordinatesF){
 	var svgline=svgline.trim();
 	var linetype=First(svgline);
 	var xyArray=Rest(svgline);
@@ -5390,22 +5390,22 @@ function SVGLineApply(svgline,CoordinatesF){
 	return linetype+" "+xyArray+" ";
 }
 
-function SVGPathApply(path,CoordinatesF){
+SVGPathApply=function(path,CoordinatesF){
 	var svglineArray=SVGPathSplit(path);
 	return svglineArray.map(svgline=>SVGLineApply(svgline,CoordinatesF)).join("");
 }
 
-function ViewboxCoordinates(viewBox){
+ViewboxCoordinates=function(viewBox){
 	return viewBox.split(new RegExp(SVGSpacePattern,"g")).map(Number);
 }
 
-function FlipN(x,min,max){
+FlipN=function(x,min,max){
 	var xdelta=(max-min)/2;
 	var xcentre=max-xdelta;
 	return -(x-xcentre)+xcentre;
 }
 
-function RotateXY(x,y,xmin,ymin,xmax,ymax,wise){
+RotateXY=function(x,y,xmin,ymin,xmax,ymax,wise){
 	var xdelta=(xmax-xmin)/2;
 	var xcentre=xmax-xdelta;
 	var ydelta=(ymax-ymin)/2;
@@ -5422,7 +5422,7 @@ var SVGTransforms={
 	"rotate-270":(x,y,vbArray)=>RotateXY(x,y,vbArray[0],vbArray[1],vbArray[2],vbArray[3],false)
 }
 
-function SVGPathTransform(path,name,viewBox){
+SVGPathTransform=function(path,name,viewBox){
 	if(!In(SVGTransforms,name))
 		return path;
 
@@ -5436,7 +5436,7 @@ function SVGPathTransform(path,name,viewBox){
 	return SVGPathApply(path,SVGCoordinatesF);
 }
 
-function SVGLineChange(svgline,F){
+SVGLineChange=function(svgline,F){
 	var F=F||Identity;
 	var svgline=svgline.trim();
 	var xyArray=Rest(svgline);
@@ -5449,14 +5449,14 @@ function SVGLineChange(svgline,F){
 	}
 }
 
-function SVGPathViewboxMin(path){
+SVGPathViewboxMin=function(path){
 	var xs=SVGPathSplit(path).map(line=>SVGLineChange(line,p=>p.map(First).flat())).flat();
 	var ys=SVGPathSplit(path).map(line=>SVGLineChange(line,p=>p.map(Last).flat())).flat();
 	return Min(xs)+" "+Min(ys);
 }
 
 
-function SVGPathViewboxMax(path){
+SVGPathViewboxMax=function(path){
 	var xs=SVGPathSplit(path).map(line=>SVGLineChange(line,p=>p.map(First).flat())).flat();
 	var ys=SVGPathSplit(path).map(line=>SVGLineChange(line,p=>p.map(Last).flat())).flat();
 	return Max(xs)+" "+Max(ys);
@@ -5679,7 +5679,7 @@ StatusReporter=function(name,DefaultStatusReporter){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Patterns
-function WallpaperHTML(opts){
+WallpaperHTML=function(opts){
 	if(IsString(opts)){
 		var w=Wallpaper(opts);
 		w?opts=w:{path:opts}
@@ -5707,11 +5707,11 @@ function WallpaperHTML(opts){
 			</svg>`;
 }
 
-function AddWallpaper(patternObj,e){
+AddWallpaper=function(patternObj,e){
 	AddElement(NewNode(WallpaperHTML(patternObj)),e);
 }
 
-function RemoveWallpaper(name,e){
+RemoveWallpaper=function(name,e){
 	if(name)
 		RemoveElement(GetElement(Prefix(name,"."),e));
 	else
@@ -5725,7 +5725,7 @@ var WallpaperPatterns={
 	//"grid-5":{path:"M 0 0 L 1 0 L 1 7 L 0 7 M 0 8 L 1 8 L 1 9 L 0 9 M 2 9 L 9 9 L 9 8 L 2 8 Z",width:10}
 };
 
-function Wallpaper(name){
+Wallpaper=function(name){
 	if(In(WallpaperPatterns,name)){
 		var pattern=WallpaperPatterns[name];
 			pattern.class=name;
@@ -6019,11 +6019,11 @@ ScaleMax=function(max){
 ///////////////////////////////////////////////////////////////////////////////
 //LazyLoader with Intersection Observer
 
-function LazyLoader(target,Loader){
+LazyLoader=function(target,Loader){
 	HearOnce("LazyLoader",function(){LazyLoad(target,Loader)});
 }
 
-function LazyLoad(targe,Loader){
+LazyLoad=function(targe,Loader){
 	var target=GetElement(targe);
 	if(!target)
 		return;// console.log("Observer error:",targe);
@@ -6184,7 +6184,7 @@ CopyHandler = function(Extractor,parentSelector){
 	};
 }
 
-function SelectedNode(e){
+SelectedNode=function(e){
 	var selection=window.getSelection();
 	return selection.containsNode(e,true);
 }
