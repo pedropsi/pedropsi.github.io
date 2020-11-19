@@ -2232,16 +2232,18 @@ function NokiaGroupNumber(L){
 
 //Loosely
 function LooselyMath(digitstring){
-	var n=Max(0,Number(digitstring.split("").reverse().join(""))-1);
-	return String(n).split("").reverse().join("");
+	var n=Max(0,Number(digitstring.replaceAll("_","").split("").reverse().join(""))-1);
+	return String(n).split("").reverse().map(DictionaryAccesser(LEDNumberLetters)).join("");
+
 }
 
 function Loosely(L){
-	var word=Word().split("").map(LEDLetterNumber).join("");
-		word=word.replace(/\d+/g,LooselyMath);
+	var word=Word().split("");
+		word=word.map(l=>In(LEDLetterNumbers,l)?(LEDLetterNumber(l)+"_"):l).join("");
+		word=word.replace(/(\d\_)+/g,LooselyMath);
 		word=word+L;
-		word=word.split("").map(DictionaryAccesser(LEDNumberLetters)).join("");
-	if(In(LEDNumberLetters,L)||In(LEDLetterNumbers,L))
+
+	if(In(LEDLetterNumbers,L))
 		AddStrokeUnderline(L);
 	else
 		AddStrokeValid(L);
