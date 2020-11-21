@@ -5,7 +5,7 @@ var ObtainLevelTitle="Previous";
 ////////////////////////////////////////////////////////////////////////////////
 // Source
 var sourceCode=`(- Copyright Pedro PSI 2020                             -)
-(- Version nº 14/11/2020                            .16 -)
+(- Version nº 21/11/2020                            .17 -)
 (- RULES / LEGEND section under a CC-BY-NC license      -)
 (--------------------------------------------------------)
 
@@ -1270,49 +1270,49 @@ late left  [Ml4 LineC4]->[]
 + down  [down  Pusher|stationary Pushable no FixedD]->[down  Pusher|down  Pushable]
 
 (Specific)
-left  [left  Star no Region1|Line1]->[Star FixedL|Line1]
-left  [left  Star no Region2|Line2]->[Star FixedL|Line2]
-left  [left  Star no Region3|Line3]->[Star FixedL|Line3]
-left  [left  Star no Region4|Line4]->[Star FixedL|Line4]
++left  [left  Star no Region1|Line1]->[Star FixedL|Line1]
++left  [left  Star no Region2|Line2]->[Star FixedL|Line2]
++left  [left  Star no Region3|Line3]->[Star FixedL|Line3]
++left  [left  Star no Region4|Line4]->[Star FixedL|Line4]
 
-up    [up    Star no Region1|Line1]->[Star FixedU|Line1]
-up    [up    Star no Region2|Line2]->[Star FixedU|Line2]
-up    [up    Star no Region3|Line3]->[Star FixedU|Line3]
-up    [up    Star no Region4|Line4]->[Star FixedU|Line4]
++up    [up    Star no Region1|Line1]->[Star FixedU|Line1]
++up    [up    Star no Region2|Line2]->[Star FixedU|Line2]
++up    [up    Star no Region3|Line3]->[Star FixedU|Line3]
++up    [up    Star no Region4|Line4]->[Star FixedU|Line4]
 
-right [right Star no Region1|Line1]->[Star FixedR|Line1]
-right [right Star no Region2|Line2]->[Star FixedR|Line2]
-right [right Star no Region3|Line3]->[Star FixedR|Line3]
-right [right Star no Region4|Line4]->[Star FixedR|Line4]
++right [right Star no Region1|Line1]->[Star FixedR|Line1]
++right [right Star no Region2|Line2]->[Star FixedR|Line2]
++right [right Star no Region3|Line3]->[Star FixedR|Line3]
++right [right Star no Region4|Line4]->[Star FixedR|Line4]
 
-down  [down  Star no Region1|Line1]->[Star FixedD|Line1]
-down  [down  Star no Region2|Line2]->[Star FixedD|Line2]
-down  [down  Star no Region3|Line3]->[Star FixedD|Line3]
-down  [down  Star no Region4|Line4]->[Star FixedD|Line4]
++down  [down  Star no Region1|Line1]->[Star FixedD|Line1]
++down  [down  Star no Region2|Line2]->[Star FixedD|Line2]
++down  [down  Star no Region3|Line3]->[Star FixedD|Line3]
++down  [down  Star no Region4|Line4]->[Star FixedD|Line4]
 
-left  [left  Star no S0|S0]->[Star FixedL|S0]
-left  [left  Star no S1|S1]->[Star FixedL|S1]
-left  [left  Star no S2|S2]->[Star FixedL|S2]
-left  [left  Star no S3|S3]->[Star FixedL|S3]
-left  [left  Star no S4|S4]->[Star FixedL|S4]
++left  [left  Star no S0|S0]->[Star FixedL|S0]
++left  [left  Star no S1|S1]->[Star FixedL|S1]
++left  [left  Star no S2|S2]->[Star FixedL|S2]
++left  [left  Star no S3|S3]->[Star FixedL|S3]
++left  [left  Star no S4|S4]->[Star FixedL|S4]
 
-up    [up    Star no S0|S0]->[Star FixedU|S0]
-up    [up    Star no S1|S1]->[Star FixedU|S1]
-up    [up    Star no S2|S2]->[Star FixedU|S2]
-up    [up    Star no S3|S3]->[Star FixedU|S3]
-up    [up    Star no S4|S4]->[Star FixedU|S4]
++up    [up    Star no S0|S0]->[Star FixedU|S0]
++up    [up    Star no S1|S1]->[Star FixedU|S1]
++up    [up    Star no S2|S2]->[Star FixedU|S2]
++up    [up    Star no S3|S3]->[Star FixedU|S3]
++up    [up    Star no S4|S4]->[Star FixedU|S4]
 
-right [right Star no S0|S0]->[Star FixedR|S0]
-right [right Star no S1|S1]->[Star FixedR|S1]
-right [right Star no S2|S2]->[Star FixedR|S2]
-right [right Star no S3|S3]->[Star FixedR|S3]
-right [right Star no S4|S4]->[Star FixedR|S4]
++right [right Star no S0|S0]->[Star FixedR|S0]
++right [right Star no S1|S1]->[Star FixedR|S1]
++right [right Star no S2|S2]->[Star FixedR|S2]
++right [right Star no S3|S3]->[Star FixedR|S3]
++right [right Star no S4|S4]->[Star FixedR|S4]
 
-down  [down  Star no S0|S0]->[Star FixedD|S0]
-down  [down  Star no S1|S1]->[Star FixedD|S1]
-down  [down  Star no S2|S2]->[Star FixedD|S2]
-down  [down  Star no S3|S3]->[Star FixedD|S3]
-down  [down  Star no S4|S4]->[Star FixedD|S4]
++down  [down  Star no S0|S0]->[Star FixedD|S0]
++down  [down  Star no S1|S1]->[Star FixedD|S1]
++down  [down  Star no S2|S2]->[Star FixedD|S2]
++down  [down  Star no S3|S3]->[Star FixedD|S3]
++down  [down  Star no S4|S4]->[Star FixedD|S4]
 
 
 
@@ -1617,26 +1617,8 @@ message "Intersect"
 ########
 
 
-message Some stones need an extra push.
-message ...... Level 7 / 14 *** .......
-message "Imperfection"
-
-(push special)
-
-######
-#3344#
-#3344#
-#11P2#
-#1122#
-##..##
-#....#
-#.Oo.#
-#.Oo.#
-#....#
-######
-
 message Walls block starlines.
-message ...... Level 8 / 14 *** .......
+message ...... Level 7 / 14 *** .......
 message "Eyeglasses"
 
 ########
@@ -1650,7 +1632,7 @@ message "Eyeglasses"
 message Stars are territorial.
 message No more than one per area.
 
-message ...... Level 9 / 14 **** .......
+message ...... Level 8 / 14 **** .......
 message "Smallest star battle"
 
 (territoriality)
@@ -1669,6 +1651,20 @@ message Well done!
 message You've learned the base rules.
 message So here are some bonus levels!
 
+message ...... Level 9 / 14 *** .......
+message "Imperfection"
+
+######
+#3344#
+#3344#
+#11P2#
+#1122#
+##..##
+#....#
+#.Oo.#
+#.Oo.#
+#....#
+######
 
 message ...... Level 10 / 14 *** .......
 message "Cycles"
@@ -1736,14 +1732,14 @@ message "Dharma wheel"
 
 ############
 #####..#####
-##222oo411##
+##222..411##
 ##23344441##
-##333..441##
-#.o3....2o.#
-#.o3....2o.#
-##411..222##
-##4111P223##
-##441oo333##
+##333oo441##
+#..3o#Po2..#
+#..3o##o2..#
+##411oo222##
+##41111223##
+##441..333##
 #####..#####
 ############
 
