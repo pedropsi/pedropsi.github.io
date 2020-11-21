@@ -38,6 +38,7 @@ var LEDLetters={
 	"9":"023456"
 };
 
+
 var LED90Rotations={
 	"0":"-5",
 	"1":"-0",
@@ -143,6 +144,23 @@ function LEDLetterSVGHTML(ledstring){
 	return SVGHTML({
 		path:coordinates,
 		transform:"flip-vertical",
-		cla:"bezier letter led"
+		cla:"bezier letter led",
+		viewBox:"0 0 20 20",
 	})
+}
+
+
+var LedShapeShifts={
+	"0":1,
+	"1":2,
+	"2":3,
+	"3":4,
+	"4":5,
+	"5":0
+}
+
+function LEDShapeShift(shape){
+	var shape=shape.split("");
+		shape=shape.map(Accesser(LedShapeShifts));
+		return shape.sort().join("");
 }

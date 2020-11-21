@@ -416,6 +416,7 @@ function ForbidNumberActions(key){
 		// "Topological",
 		"Nokia 1998",
 		"Loosely less",
+		"Reshape",
 		"White chocolate mint",
 		"Odd",
 		"La rapide surprise",
@@ -499,11 +500,17 @@ function InPart(arrayOrObj,n){
 ///////////////////////////////////////////////////////////////////////////////
 //Levels & Actions
 function WinnerTitle(title){
-	if(title==="Deaf")
-		return title;
+	if(In(WinnerTitles,title))
+		return WinnerTitles[title](title);
 	else
 		return title.toUpperCase();
 }
+
+var WinnerTitles={
+	"Deaf":Identity,
+	"Reshape":function(title){return title.toUpperCase().split("").map(Accesser(LEDLetters,Identity)).join("")}
+};
+
 
 function ObtainLevelDescriptionTitle(lvl){
 	var title=LevelTitle(lvl);
@@ -538,6 +545,7 @@ var LevelDifficulty={
 	"Fillet":3,
 	"Topological":4,
 	"Loosely less":4,
+	"Reshape":3,
 	"Wasd":2,
 	"Nokia 1998":1,
 	"Dvorak":4,
@@ -600,6 +608,7 @@ var VisualLevels=[
 	"Fillet",
 	"Topological",
 	"Loosely less",
+	"Reshape",
 	"Wasd",
 	"Nigeria",
 	"Dvorak",
@@ -674,6 +683,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Symmetries",			//Shape, Retroactive
 
 	"Fillet",				//Shape, Proactive 
+	"Reshape",				//Shape, Proactive 
 	"Topological",			//Shape, Growth, Monoactive
 	
 	"Nokia 1998",			//Keyboard
@@ -882,6 +892,7 @@ var LevelInstructions={
 	"Fillet":Fillet,
 	"Topological":Topological,
 	"Loosely less":Loosely,
+	"Reshape":Reshape,
 	"Dvorak":function (L){
 		AddStrokeValid(L);
 		var n=Letters.array.map(function(M){return DvorakMapping["row_"+M]});
@@ -2214,6 +2225,13 @@ function Loosely(L){
 	Caret(Infinity);
 }
 
+function Reshape(L){
+	var letters=Letters().map(LEDShapeShift);
+		letters.push(LEDLetters[L.toUpperCase()]);
+		Letters(letters);
+	AddStrokeValid(L);
+	Caret(Infinity);
+}
 
 //Dvorak
 
@@ -2442,12 +2460,14 @@ var LetterDisplayers={
 	"Deaf":LetterDraftHTML,
 	"Nigeria":LetterDraftHTML,
 	"Topological":BezierLetterSVG,
-	"Loosely less":LEDLetterSVG
+	"Loosely less":LEDLetterSVG,
+	"Reshape":LEDLetterShapeSVG
 }
 
 var GoalDisplayers={
 	"Topological":BezierLetterSVG,
 	"Loosely less":LEDLetterSVG,
+	"Reshape":LEDLetterSVG,
 	"Deaf":LetterPureHTML
 }
 
@@ -2459,7 +2479,11 @@ function LEDLetterSVG(L){
 	if(L===" ")
 		return LetterPureHTML(" ");
 	else
-		return LEDLetterSVGHTML(LEDLetters[L.toUpperCase()]);
+		return LEDLetterShapeSVG(LEDLetters[L.toUpperCase()]);
+}
+
+function LEDLetterShapeSVG(shape){
+	return LEDLetterSVGHTML(shape);
 }
 
 function LetterDraftHTML(L){
@@ -2778,12 +2802,18 @@ function TransitionGoalIn(duration){
 	}
 	UnFadeElement(".top .goal",duration);
 
-	if(CurLevelTitle()==="⠍⠕⠗⠎⠑")
+	if(In(UnCapitalisedGoals,CurLevelTitle()))
 		UnClass(".goal","capitalise");
 	else
 		Class(".goal","capitalise");
 
 }
+
+var UnCapitalisedGoals=[
+	"Reshape",
+	"⠍⠕⠗⠎⠑",
+	"Loosely Less"
+];
 
 function TransitionKeystrokesIn(duration){
 	var duration=duration||200;
