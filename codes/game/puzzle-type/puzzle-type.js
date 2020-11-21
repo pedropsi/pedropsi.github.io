@@ -416,7 +416,7 @@ function ForbidNumberActions(key){
 		// "Topological",
 		"Nokia 1998",
 		"Loosely less",
-		// "Fuchsia",
+		"White chocolate mint",
 		"Odd",
 		"La rapide surprise",
 		"Starting buds",
@@ -434,6 +434,7 @@ function ForbidSpaceActions(key){
 		"Loosely less",
 		"Latent clones",
 		"Shepherdess hence unladylike",
+		"White chocolate mint",
 		"Nigeria",
 		"Odd",
 		"Dvorak",
@@ -550,10 +551,10 @@ var LevelDifficulty={
 	"⠍⠕⠗⠎⠑":3,
 	"Dividi":5,
 	"Magnetism":2,
-	//"Fuchsia":1,
 	"Odd":3,
 	"Latent clones":3,
 	"Shepherdess hence unladylike":3,
+	"White chocolate mint":2,
 	"Starting buds":5,
 	"La rapide surprise":5,
 	"Just cut and paste":3,
@@ -584,8 +585,8 @@ var ExternalLevels=[
 	"Deaf",
 	"⠍⠕⠗⠎⠑",
 	"Dividi",
-	"Magnetism"
-	//"Fuchsia",
+	"Magnetism",
+	"White chocolate mint"
 ]
 
 var SoundLevels=[
@@ -602,6 +603,7 @@ var VisualLevels=[
 	"Wasd",
 	"Nigeria",
 	"Dvorak",
+	"White chocolate mint"
 ]
 
 var LanguageLevels=[
@@ -687,7 +689,6 @@ var LevelGoals=[			//Required types of thinking:
 	"Genetic.",				//Encoding, Word, Science
 	"Anagram",				//Word, Mapping, Language, Once,
 	"Ironclad",				//Encoding, Word, Science
-	//"Fuchsia",			//Encoding
 	"Deaf",					//Encoding, Music
 	"⠍⠕⠗⠎⠑",			  //Encoding, Once
 	"Dividi",				//Encoding, Arithmethic, Retroactive
@@ -695,6 +696,7 @@ var LevelGoals=[			//Required types of thinking:
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
+	"White chocolate mint",				//Encoding, Colour
 	"Starting buds",					//Language
 	"La rapide surprise",				//Keyword, Swap, Retroactive, Language
 	"Just cut and paste",				//Keyword, Proactive, Redefinition
@@ -729,13 +731,14 @@ var LevelGoalAliases={
 	"Loosely less":"Time to cook",
 	"Loosely less":"Timed cooldown",
 	"Loosely less":"Less cool",
-	"White":"Fuchsia",
 	"Nucleus":"Ironclad",
 	"Tennessine":"Ironclad",
 	"Carbonate":"Ironclad",
 	"Weightier":"Latent Clones",
 	"German Shepherd":"Shepherdess hence unladylike",
 	"Cherished Woman":"Shepherdess hence unladylike",
+	"Fuchsia":"White chocolate mint",
+	"White":"White chocolate mint",
 	"Baba is you":"Order is all",
 	"Copypaste":"Just cut and paste",
 	"Finest vernissage":"La rapide surprise",
@@ -947,7 +950,7 @@ var LevelInstructions={
 		Caret(Infinity);
 	},
 	"⠍⠕⠗⠎⠑":Morse,
-	//"Fuchsia":Fuchsia,
+	"White chocolate mint":Fuchsia,
 	"Deaf":Deaf,
 	"Anagram":Anagram,
 	"Ironclad":Ironclad,
@@ -1239,85 +1242,45 @@ function Genetic(L){
 }
 
 
-//var Hexadecimal=["A","B","C","D","E","F"].concat(NumberCharacters);
+function Fuchsia(L){
+	var saved=SavedLetters();
+	var color=TemporaryWord().toLowerCase();
 
-// function Fuchsia(L){
-// 	var colour=Memo().colour;
-// 	var used=Memo().used;
-// 	var freeze=Memo().freeze;
+	//Spacing between words
+	if(!color.length&&saved.length)
+		InputLetterAfter(" ");
 
+	if(color.length<1){
+		InputLetterAfter("#*");
+		AddStrokeValid(L);
+	}
+	else if(!In(Hexadecimal,L)){
+		ForbidCaret();
+		AddStrokeInvalid(L);
+	}
+	else if(color.length===6){
+		var color=Rest(color+L);
+			color=NamedColour(color).toUpperCase();
+		Letters(saved.join("")+color);
+		AddStrokeSeparator();
+	}
+	else{
+		InputLetterAfter(L+"*");
+		AddStrokeValid(L);
+	}
+	Caret(Infinity);
+}
 
-// 	function NewColour(){
-// 		ClearLetters();
-// 		ForbidCaret();
-// 		Memo({
-// 			colour:colour,
-// 			used:used,
-// 			freeze:false
-// 		});
-// 	}
+var Hexadecimal=["A","B","C","D","E","F"].concat(NumberCharacters);
 	
-	
-// 	if(freeze){
-// 		NewColour();
-// 		return;
-// 	}
-	
-// 	if(!In(Hexadecimal,L))
-// 		L="#";
-// 	// else if(In(Hexadecimal,L)&&In(used,L)){
-// 	//  	ForbidCaret();
-// 	//  	return;
-// 	// }
-// 	// else {
-// 	// 	used=used+L;
-// 	// 	Memo({
-// 	// 		colour:colour,
-// 	// 		used:used,
-// 	// 		freeze:freeze
-// 	// 	});
-// 	// }
-	
-// 	InputLetterAfter(L+"*");
-	
-// 	if(Letters.array.length===7){
-// 		var letters=PureLetter(Word());
-// 		var f=First(letters);
-// 		var r=Rest(letters);
-// 		if(f!=="#"||r.replace("#","").length!==r.length){
-// 			ClearLetters();
-// 			ForbidCaret();
-// 			return;
-// 		}
-// 		else{
-// 			SkipUndo();
-// 			var hex=PureLetter(Word());
-// 			console.log(hex,colour,MultiplyHEX(hex,colour));
-// 				hex=PlusHEX(hex,RotateHEX(colour));
-// 			var colourname=NamedColour(hex);
-// 				colourname=ColourApproximationString(hex,colourname);
-// 			Letters(colourname.toUpperCase());
-// 			Caret(Infinity);
-// 			CaretColour(hex);
-// 			Memo({
-// 				colour:hex,
-// 				used:used,
-// 				freeze:true
-// 			});
-// 			return;
-// 		}
-// 	}
-// 	Caret(Infinity);
-// }
-
-// function ColourApproximationString(colorstring,name){
-// 	var chosen=ColourNames.filter(function(c){return c[3]===name})[0];
-// 	var rgb=RGB(Colour(colorstring)).colour;
-// 	if(!Equal(rgb,Most(chosen)))
-// 		return "almost "+name+" ("+colorstring+")";
-// 	else
-// 		return name;
-// }
+function ColourApproximationString(colorstring,name){
+	var chosen=ColourCoordinateNames.filter(function(c){return c[3]===name})[0];
+	var rgb=RGB(Colour(colorstring)).colour;
+	if(!Equal(rgb,Most(chosen)))
+		return "almost "+name+" ("+colorstring+")";
+	else
+		return name;
+}
 
 
 function Deaf(L){
@@ -2475,7 +2438,7 @@ var LetterDisplayers={
 	"Ironclad":LetterDraftHTML,
 	"Genetic.":LetterDraftHTML,
 	"Anagram":LetterDraftHTML,
-	// "Fuchsia":LetterDraftHTML,
+	"White chocolate mint":LetterDraftHTML,
 	"Deaf":LetterDraftHTML,
 	"Nigeria":LetterDraftHTML,
 	"Topological":BezierLetterSVG,
@@ -2990,11 +2953,6 @@ function StartingMemo(level){
 		'Fillet':0,
 		'Anagram':[],
 		'Nigeria':false,
-		// 'Fuchsia':{
-		// 		colour:ObtainFGColor(),
-		// 		used:"",
-		// 		freeze:false
-		// 	},
 		'Nokia 1998':0,
 		'Just cut and paste':"",
 		'⠍⠕⠗⠎⠑':[],
@@ -3248,6 +3206,7 @@ function LevelHighlightableWords(title){
 		"Odd":["Odd","Even"],
 		"Latent clones":NumberNames,
 		"Shepherdess hence unladylike":GenderedMale,
+		"White chocolate mint":ColourNames,
 		"Just cut and paste":["cut","copy","paste"],
 		"Order is all":["is"]
 	}

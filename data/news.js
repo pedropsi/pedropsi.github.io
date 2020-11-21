@@ -1,9 +1,9 @@
 News={
 	N_59:{
-		DATE:"2020-11-16",
-		HEADER:()=>"New level + Sound fix",
+		DATE:"2020-11-21",
+		HEADER:()=>"2 new levels + Sound fix",
 		PIECE:()=>`
-		<p>${AHTML("puzzle-type")} received a new level РУС***.</p>
+		<p>${AHTML("puzzle-type")} received two new levels РУС*** and WHI*** (a nice remake of a wrongly discarded level).</p>
 		<p>Fixed a minor sound bug. Other bugfixes. Major update and new trailer planned.</p>
 	`,ID:"puzzle-type"},
 	N_58:{

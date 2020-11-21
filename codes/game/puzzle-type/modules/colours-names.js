@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////
 //Names Colours
 
-var ColourNames=[
+var ColourCoordinateNames=[
 [0,71,186,'Absolute Zero'],
 [176,191,26,'Acid green'],
 [125,186,232,'Aero'],
@@ -960,10 +960,11 @@ var ColourNames=[
 [56,166,143,'Zomp']
 ]
 
+var ColourNames=Unique(ColourCoordinateNames.map(cn=>cn[3].toLowerCase()).filter(n=>!In(n,[" ","-"])));
 
 function NamedColour(colorstring){
 	var rgb=RGB(Colour(colorstring)).colour;
-	var c=Sorter(a=>EuclideanDistance(a,rgb))(ColourNames);
+	var c=Sorter(a=>EuclideanDistance(a,rgb))(ColourCoordinateNames);
 	return c[0][3];
 }
 
