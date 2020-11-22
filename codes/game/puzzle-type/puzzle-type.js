@@ -367,9 +367,9 @@ var CharLimits={
 function TitleScreenInput(key){
 	if(key==="Escape")
 		return
-	if(ObtainNewGameCondition())
-		Kinemate(OnboardMacro());
-	else
+	// if(ObtainNewGameCondition())
+	// 	Kinemate(OnboardMacro());
+	// else
 		StartLevelFromTitle();
 }
 
@@ -1420,21 +1420,22 @@ function Morse(L){
 	position=[0].concat(position).reduce(Accumulate);
 
 
-	if(In(used,L)){
-		ForbidCaret();
-		AddStrokeInvalid(L);
-		return;
-	}
+	// if(In(used,L)){
+	// 	ForbidCaret();
+	// 	AddStrokeInvalid(L);
+	// 	return;
+	// }
 
-	AddStrokeValid(L);
+	if(Prefixed("STATION3ICY",used.join("")+L))
+		AddStrokeUnderline(L);
+	else
+		AddStrokeValid(L);
 	
 	used.push(L);
 	Memo(used);
 
 	var dotdash=MorseCode[L.toLowerCase()].split("");
 
-	// if(PlayMorse)
-	// 	PlayMorse(dotdash);
 	
 	var p,n,l,even, pa;
 	for(var i=0;i<dotdash.length;i++){		

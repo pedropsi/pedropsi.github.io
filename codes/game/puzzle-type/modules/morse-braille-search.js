@@ -1,5 +1,5 @@
 Variants
-// "...-.--..-/---....--./.-.-.-.---" Line,LR:TB "I awe at me. I wink." (I awe at me. I emit art)(station i weary)
+// "...-.--..-/---....--./.-.-.-.---" "station 3 in tent" "station3icy" "station 3 I try" Line,LR:TB "stations merc" "stations get art" "I awe at me. I wink." (I awe at me. I emit art)(station i weary)
 // ".-.-.-.---/---....--./...-.--..-" line,LR:BT
 
 // ".-.-.-.---/.--....---/...-.--..-" line,LRzig:BT (art jade aging)
