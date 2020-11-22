@@ -2812,7 +2812,7 @@ function TransitionGoalIn(duration){
 var UnCapitalisedGoals=[
 	"Reshape",
 	"⠍⠕⠗⠎⠑",
-	"Loosely Less"
+	"Loosely less"
 ];
 
 function TransitionKeystrokesIn(duration){
