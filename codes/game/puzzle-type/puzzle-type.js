@@ -1193,11 +1193,11 @@ function Denebola(L){
 
 	var star=TemporaryWord().replaceAll(" ","").toLowerCase();
 		star=Accesser(StarAliases)(star);
-	var stars=Keys(StarHourAngles);
+	var stars=Keys(StarHourAngles).map(s=>s.replaceAll(" ",""));
 	var c=stars.indexOf(star);
 
 	if(c>=0){
-		var nextstar=stars[(c+1)%stars.length].toUpperCase();
+		var nextstar=Keys(StarHourAngles)[(c+1)%stars.length].toUpperCase();
 		Letters(nextstar);
 		Memo(true);
 	}
