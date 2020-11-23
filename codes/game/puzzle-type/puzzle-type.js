@@ -153,6 +153,7 @@ var gameModulesLater=[
 "number-reader",
 "number-roman",
 "colours-names",
+"constellations",
 
 //"meta",
 
@@ -437,6 +438,7 @@ function ForbidSpaceActions(key){
 		"Shepherdess hence unladylike",
 		"White chocolate mint",
 		"Nigeria",
+		"Denebola",
 		"Odd",
 		"Dvorak",
 		"La rapide surprise",
@@ -552,6 +554,7 @@ var LevelDifficulty={
 	"РУССКАЯ":2,
 	"ひらがな":2,
 	"Nigeria":3,
+	"Denebola":4,
 	"Anagram":2,
 	"Genetic.":2,
 	"Ironclad":2,
@@ -588,6 +591,7 @@ var ExternalLevels=[
 	"Nokia 1998",
 	"Dvorak",
 	"Nigeria",
+	"Denebola",
 	"Genetic.",
 	"Ironclad",
 	"Deaf",
@@ -611,6 +615,7 @@ var VisualLevels=[
 	"Reshape",
 	"Wasd",
 	"Nigeria",
+	"Denebola",
 	"Dvorak",
 	"White chocolate mint"
 ]
@@ -694,6 +699,7 @@ var LevelGoals=[			//Required types of thinking:
 	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
 
 	"Nigeria",				//Word, Mapping, Geography
+	"Denebola",				//Word, Mapping, Astronomy
 	
 	"Magnetism",			//Positional, Retroactive, Science
 	"Genetic.",				//Encoding, Word, Science
@@ -953,6 +959,7 @@ var LevelInstructions={
 	"Starting buds":StartingBuds,
 	"La rapide surprise":Translate,
 	"Nigeria":Nigeria,
+	"Denebola":Denebola,
 	"РУССКАЯ":Cyrillic,
 	"ひらがな":function(L){
 		InputLetterAfter(L);
@@ -1170,6 +1177,34 @@ function Nigeria(L){
 		Caret(Infinity);
 	}
 
+function Denebola(L){
+	var freeze=Memo();
+	
+	if(freeze){
+		Memo(false);
+		Letters([]);
+		Caret(0);
+		AddStrokeSeparator();
+		return;
+	}
+	
+	InputLetterAfter(L+"*");
+	AddStrokeValid(L);
+
+	var star=TemporaryWord().replaceAll(" ","").toLowerCase();
+		star=Accesser(StarAliases)(star);
+	var stars=Keys(StarHourAngles);
+	var c=stars.indexOf(star);
+
+	if(c>=0){
+		var nextstar=stars[(c+1)%stars.length].toUpperCase();
+		Letters(nextstar);
+		Memo(true);
+	}
+	
+	Caret(Infinity);
+}
+	
 function Anagram(L){
 	var used=Memo();
 	var saved=SavedLetters();
@@ -2460,6 +2495,7 @@ var LetterDisplayers={
 	"White chocolate mint":LetterDraftHTML,
 	"Deaf":LetterDraftHTML,
 	"Nigeria":LetterDraftHTML,
+	"Denebola":LetterDraftHTML,
 	"Topological":BezierLetterSVG,
 	"Loosely less":LEDLetterSVG,
 	"Reshape":LEDLetterShapeSVG
@@ -2984,6 +3020,7 @@ function StartingMemo(level){
 		'Fillet':0,
 		'Anagram':[],
 		'Nigeria':false,
+		'Denebola':false,
 		'Nokia 1998':0,
 		'Just cut and paste':"",
 		'⠍⠕⠗⠎⠑':[],
@@ -3233,6 +3270,7 @@ function ModifyLastStroke(Modifier){
 function LevelHighlightableWords(title){
 	var LKC={
 		"Nigeria":Countries.concat(Capitals),
+		"Denebola":HighlightableStars,
 		"Ironclad":NucleiNames,
 		"Odd":["Odd","Even"],
 		"Latent clones":NumberNames,
