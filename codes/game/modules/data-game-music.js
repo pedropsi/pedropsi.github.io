@@ -273,7 +273,7 @@ PlaySound=function(src){
 }
 
 PlaylistCrossFade=function(duration,Play){
-	if(!PlaylistPlaying())
+	if(!PlaylistPlaying()||Playlist.blocked)
 		Play();
 	else {
 		var song=PlaylistCurrentSong();

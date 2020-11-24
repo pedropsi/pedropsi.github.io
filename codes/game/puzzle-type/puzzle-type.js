@@ -2750,7 +2750,7 @@ function CheckWin(){
 		MarkWonLevel();
 		BestMove(CurLevelTitle(),ObtainWonMoves());
 
-		if(CurLevelTitle()==="Deaf")
+		if(CurLevelTitle()!=="Deaf")
 			PlaylistAwaken();
 
 		if(!LevelWinSound()&&!SolvedAllLevels())
