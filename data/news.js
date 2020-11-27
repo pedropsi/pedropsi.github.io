@@ -1,4 +1,10 @@
 News={
+	N_60:{
+		DATE:"2020-11-28",
+		HEADER:()=>"New level",
+		PIECE:()=>`
+		<p>${AHTML("puzzle-type")} received new level: DEN***.</p>
+	`,ID:"puzzle-type"},
 	N_59:{
 		DATE:"2020-11-21",
 		HEADER:()=>"New levels + Sound fix",
