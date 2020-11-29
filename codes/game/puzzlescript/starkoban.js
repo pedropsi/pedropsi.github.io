@@ -5,7 +5,7 @@ var ObtainLevelTitle="Previous";
 ////////////////////////////////////////////////////////////////////////////////
 // Source
 var sourceCode=`(- Copyright Pedro PSI 2020                             -)
-(- Version nº 21/11/2020                            .17 -)
+(- Version nº 21/11/2020                            .18 -)
 (- RULES / LEGEND section under a CC-BY-NC license      -)
 (--------------------------------------------------------)
 
@@ -1510,10 +1510,14 @@ LEVELS
 =======
 
 message Welcome to Starkoban!
-message Place one stone per area.
+message Learn the rules in levels 1-8...
+message ... and enjoy 6 bonus levels.
+message Ready?
 
 message ...... Level 1 / 14 * .......
 message "For star'ters"
+
+message Place one stone per area.
 
 (goal and pushing)
 
@@ -1527,9 +1531,11 @@ message "For star'ters"
 ####4.P##
 #########
 
-message You may push many stones together.
 message ...... Level 2 / 14 * .......
 message "Moth"
+
+message You may push many stones together.
+
 
 (multi pushing)
 (enter and exit)
@@ -1543,11 +1549,12 @@ message "Moth"
 ####..##
 ########
 
+message ...... Level 3 / 14 ** .......
+message "Linear"
+
 message Active stones are called "stars".
 message Stars block entire lines.
 
-message ...... Level 3 / 14 ** .......
-message "Linear"
 
 (larger regions)
 (region blocking)
@@ -1565,11 +1572,12 @@ message "Linear"
 ########
 
 
+message ...... Level 4 / 14 ** .......
+message "Touchy"
+
 message Stars cannot touch each other...
 message ... even diagonally.
 
-message ...... Level 4 / 14 ** .......
-message "Touchy"
 
 (adjacency)
 
@@ -1582,9 +1590,11 @@ message "Touchy"
 #######
 
 
-message Starlines extend across regions.
 message ...... Level 5 / 14 *** .......
 message "Waltz"
+
+message Starlines extend across regions.
+
 
 (line blocking across regions)
 
@@ -1599,9 +1609,11 @@ message "Waltz"
 #########
 
 
-message Starlines jump over gaps.
 message ...... Level 6 / 14 *** .......
 message "Intersect"
+
+message Starlines jump over gaps.
+
 
 (disconnected lines)
 
@@ -1617,9 +1629,11 @@ message "Intersect"
 ########
 
 
-message Walls block starlines.
 message ...... Level 7 / 14 *** .......
 message "Eyeglasses"
+
+message Walls block starlines.
+
 
 ########
 #....###
@@ -1629,11 +1643,12 @@ message "Eyeglasses"
 ###..P.#
 ########
 
+message ...... Level 8 / 14 **** .......
+message "Smallest star battle"
+
 message Stars are territorial.
 message No more than one per area.
 
-message ...... Level 8 / 14 **** .......
-message "Smallest star battle"
 
 (territoriality)
 
@@ -1649,7 +1664,7 @@ message "Smallest star battle"
 
 message Well done!
 message You've learned the base rules.
-message So here are some bonus levels!
+message So here are the bonus levels!
 
 message ...... Level 9 / 14 *** .......
 message "Imperfection"
