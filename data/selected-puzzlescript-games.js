@@ -3,6 +3,7 @@
 */
 
 var SelectedGames=[
+{LINK:`https://competor.itch.io/simple-sokoban`,TITLE:`Simple Sokoban`,AUTHOR_LINK:`https://competor.io/`,AUTHOR:`Competor`,YEAR:2020,TAGS:["Sokoban"]},
 {LINK:`https://nebu-soku.itch.io/sound-garden`,TITLE:`Sound Garden`,AUTHOR_LINK:`https://nebu-soku.itch.io/`,AUTHOR:`Nebu Soku`,YEAR:2020,TAGS:["Garden","Sandbox"]},
 {LINK:`https://galactical.itch.io/wall-clip`,TITLE:`Wall Clip`,AUTHOR_LINK:`https://galactical.itch.io`,AUTHOR:`Galactical`,YEAR:2020,TAGS:["Wraparound","Sokoban"]},
 {LINK:`https://chemelia.itch.io/goosey-gardens`,AUTHOR_LINK:`https://chemelia.itch.io`,TITLE:`Goosey Gardens`,AUTHOR:`Amelia Moser (Chemelia)`,YEAR:2020,TAGS:["Garden","Gravity","Sokoban"]},
