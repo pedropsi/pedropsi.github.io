@@ -3,7 +3,7 @@ News={
 		DATE:"2020-11-28",
 		HEADER:()=>"New level",
 		PIECE:()=>`
-		<p>${AHTML("puzzle-type")} received new level: DEN***.</p>
+		<p>${AHTML("puzzle-type")} received new level: POL***.</p>
 	`,ID:"puzzle-type"},
 	N_59:{
 		DATE:"2020-11-21",
