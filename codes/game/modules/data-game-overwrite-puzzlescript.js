@@ -167,7 +167,7 @@ function FormerLevel4Serialization() { //The original one
 
 //playSound - custom sound effects, if available
 function playSound(seed) {
-	if (Muted())
+	if (typeof Muted!=="undefined"&&Muted())
 		return;
 	
 	//Play if memorised
