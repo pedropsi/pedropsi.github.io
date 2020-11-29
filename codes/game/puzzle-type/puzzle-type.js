@@ -419,6 +419,7 @@ function ForbidNumberActions(key){
 		"Loosely less",
 		"Reshape",
 		"White chocolate mint",
+		"Polaris Australis",
 		"Odd",
 		"La rapide surprise",
 		"Starting buds",
@@ -438,7 +439,7 @@ function ForbidSpaceActions(key){
 		"Shepherdess hence unladylike",
 		"White chocolate mint",
 		"Nigeria",
-		"Denebola",
+		"Polaris Australis",
 		"Odd",
 		"Dvorak",
 		"La rapide surprise",
@@ -554,7 +555,7 @@ var LevelDifficulty={
 	"РУССКАЯ":2,
 	"ひらがな":2,
 	"Nigeria":3,
-	"Denebola":4,
+	"Polaris Australis":4,
 	"Anagram":2,
 	"Genetic.":2,
 	"Ironclad":2,
@@ -591,7 +592,7 @@ var ExternalLevels=[
 	"Nokia 1998",
 	"Dvorak",
 	"Nigeria",
-	"Denebola",
+	"Polaris Australis",
 	"Genetic.",
 	"Ironclad",
 	"Deaf",
@@ -615,7 +616,7 @@ var VisualLevels=[
 	"Reshape",
 	"Wasd",
 	"Nigeria",
-	"Denebola",
+	"Polaris Australis",
 	"Dvorak",
 	"White chocolate mint"
 ]
@@ -699,7 +700,6 @@ var LevelGoals=[			//Required types of thinking:
 	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
 
 	"Nigeria",				//Word, Mapping, Geography
-	"Denebola",				//Word, Mapping, Astronomy
 	
 	"Magnetism",			//Positional, Retroactive, Science
 	"Genetic.",				//Encoding, Word, Science
@@ -715,6 +715,7 @@ var LevelGoals=[			//Required types of thinking:
 	"White chocolate mint",				//Encoding, Colour
 	"Starting buds",					//Language
 	"La rapide surprise",				//Keyword, Swap, Retroactive, Language
+	"Polaris Australis",				//Word, Mapping, Astronomy
 	"Just cut and paste",				//Keyword, Proactive, Redefinition
 	"Order is all",						//Keyword, Proactive, Increment, Redefinition
 
@@ -753,6 +754,7 @@ var LevelGoalAliases={
 	"Weightier":"Latent Clones",
 	"German Shepherd":"Shepherdess hence unladylike",
 	"Cherished Woman":"Shepherdess hence unladylike",
+	"Denebola":"Polaris Australis",
 	"Fuchsia":"White chocolate mint",
 	"White":"White chocolate mint",
 	"Baba is you":"Order is all",
@@ -959,7 +961,7 @@ var LevelInstructions={
 	"Starting buds":StartingBuds,
 	"La rapide surprise":Translate,
 	"Nigeria":Nigeria,
-	"Denebola":Denebola,
+	"Polaris Australis":PolarisAustralis,
 	"РУССКАЯ":Cyrillic,
 	"ひらがな":function(L){
 		InputLetterAfter(L);
@@ -1177,7 +1179,7 @@ function Nigeria(L){
 		Caret(Infinity);
 	}
 
-function Denebola(L){
+function PolarisAustralis(L){
 	var freeze=Memo();
 	
 	if(freeze){
@@ -1191,14 +1193,17 @@ function Denebola(L){
 	InputLetterAfter(L+"*");
 	AddStrokeValid(L);
 
-	var star=TemporaryWord().replaceAll(" ","").toLowerCase();
-		star=Accesser(StarAliases)(star);
-	var stars=Keys(StarHourAngles).map(s=>s.replaceAll(" ",""));
-	var c=stars.indexOf(star);
+	var star=TemporaryWord();
+	// 	star=Accesser(StarAliases)(star);
+	// var stars=Keys(StarHourAngles).map(s=>s.replaceAll(" ",""));
+	// var c=stars.indexOf(star);
+	var next=NextStar(star);
 
-	if(c>=0){
-		var nextstar=Keys(StarHourAngles)[(c+1)%stars.length].toUpperCase();
-		Letters(nextstar);
+	// if(c>=0){
+	if(next){
+		// var nextstar=Keys(StarHourAngles)[(c+1)%stars.length].toUpperCase();
+		// Letters(nextstar);
+		Letters(next.toUpperCase());
 		Memo(true);
 	}
 	
@@ -2495,7 +2500,7 @@ var LetterDisplayers={
 	"White chocolate mint":LetterDraftHTML,
 	"Deaf":LetterDraftHTML,
 	"Nigeria":LetterDraftHTML,
-	"Denebola":LetterDraftHTML,
+	"Polaris Australis":LetterDraftHTML,
 	"Topological":BezierLetterSVG,
 	"Loosely less":LEDLetterSVG,
 	"Reshape":LEDLetterShapeSVG
@@ -3020,7 +3025,7 @@ function StartingMemo(level){
 		'Fillet':0,
 		'Anagram':[],
 		'Nigeria':false,
-		'Denebola':false,
+		'Polaris Australis':false,
 		'Nokia 1998':0,
 		'Just cut and paste':"",
 		'⠍⠕⠗⠎⠑':[],
@@ -3270,7 +3275,7 @@ function ModifyLastStroke(Modifier){
 function LevelHighlightableWords(title){
 	var LKC={
 		"Nigeria":Countries.concat(Capitals),
-		"Denebola":HighlightableStars,
+		"Polaris Australis":HighlightableStars,
 		"Ironclad":NucleiNames,
 		"Odd":["Odd","Even"],
 		"Latent clones":NumberNames,

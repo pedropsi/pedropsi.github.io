@@ -384,6 +384,14 @@ FlipKeysValues=function(Obj){
 	return O;
 };
 
+//Reverse key order
+ReverseKeysObject=function(Obj){
+	var k=Keys(Obj).reverse();
+	var O={};
+	k.map(function(x){O[x]=Obj[x]});
+	return O;
+};
+
 // Does element exist?
 InArrayOrObj=function(arrayOrObj,n){
 	if(!arrayOrObj)
@@ -533,6 +541,21 @@ Accesser=function(Dict,Renamer,Failer){
 			return Dict[name];
 		else
 			return Failer(Name);
+	}
+}
+
+TransformAccesser=function(Dictionary,Transform){
+	var Transform=Transform||Identity;
+	var keys=Keys(Dictionary).map(Transform);
+	var values=Values(Dictionary);
+	return function(name){
+		if(name===undefined)
+			return Dictionary;
+		var namet=Transform(name);
+		if(In(keys,namet))
+			return values[keys.indexOf(namet)];
+		else
+			return name;
 	}
 }
 
@@ -835,6 +858,10 @@ ObjectRules=function(Obj){
 	}
 	return a;
 }
+
+// StringReplaceRulesObjectOnce=function(string,rulesObj){
+// 	return StringReplaceOnceRuleArray(string,ObjectRules(rulesObj));
+// }
 
 StringReplaceRulesObject=function(string,rulesObj){
 	return FixedPoint(function(s){return StringReplaceRuleArray(s,ObjectRules(rulesObj))},string);
