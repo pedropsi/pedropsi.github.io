@@ -59,14 +59,27 @@ function ObtainLevelSelectorAllowed(){
 	return MaxLevel()>1||(typeof sourceCode!=="undefined"&&In(sourceCode,"checkpoint"));
 }
 
+function MessageLevelTitle(screen){
+	var title= ObtainStateScreens()[screen].message;
+	if(!title)
+		return "";
+	title=title.replace(/^[\-\"\_\:\'\s\n]*(level\s*\d*)*[\-\"\_\:\'\s\n]*/im,"").replace(/[\-\"\_\:\'\s\n]*$/im,"");
+	return title.replace(/[\-][\-\s]?/gi," ");
+}
+
 //Read 'Previous' titles
 if(ObtainLevelTitle==="Previous"){ //Case for title specified in message before the level
 	var ObtainLevelTitle=function(lvl){
-		var title= ObtainStateScreens()[LevelScreen(lvl)-1].message;
-		if(!title)
-			return "";
-		title=title.replace(/^[\-\"\_\:\'\s\n]*(level\s*\d*)*[\-\"\_\:\'\s\n]*/im,"").replace(/[\-\"\_\:\'\s\n]*$/im,"");
-		return title.replace(/[\-][\-\s]?/gi," ");
+		return MessageLevelTitle(LevelScreen(lvl)-1);
+	}
+}
+else if(ObtainLevelTitle==="Find"){ //Case for title specified in message before the level
+	var ObtainLevelTitle=function(lvl){
+		if(!ObtainLevelTitle.titles){
+			ObtainLevelTitle.titles=Rest(sourceCode.split(/\nmessage[^\n]+level[^\n].*\*[^\n]+\n/ig))
+			ObtainLevelTitle.titles=ObtainLevelTitle.titles.map(title=>title.replace(/\n.*/ig,"").replace(/^message\s*/,"").replace(/^("|\')/ig,"").replace(/(\"|\')$/ig,""));
+		}
+		return ObtainLevelTitle.titles[lvl-1];
 	}
 }
 
