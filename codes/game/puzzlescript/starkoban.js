@@ -5,7 +5,7 @@ var ObtainLevelTitle="Previous";
 ////////////////////////////////////////////////////////////////////////////////
 // Source
 var sourceCode=`(- Copyright Pedro PSI 2020                             -)
-(- Version nº 21/11/2020                            .18 -)
+(- Version nº 29/11/2020                            .18 -)
 (- RULES / LEGEND section under a CC-BY-NC license      -)
 (--------------------------------------------------------)
 
