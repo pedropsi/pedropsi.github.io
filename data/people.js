@@ -110,7 +110,8 @@ SKYMOO:{NAME:"Skymoo"},
 VELLEIC:{NAME:"Velleic"},
 SOFTFRO:{NAME:"SoftFro",PERSONAL_PAGE:"https://cryptics.jackbrounstein.com/user/27"},
 MANSFIELD:{NAME:"Robert Mansfield",ALIAS:"sftrabbit",TWITTER:"https://twitter.com/sftrabbit"},
-KAROO:{NAME:"Karoo"}
+KAROO:{NAME:"Karoo"},
+HEMPULI:{NAME:"Arvi Teikari",ALIAS:"Hempuli",PERSONAL_PAGE:"https://www.hempuli.com/"}
 }
 
 PersonalPage=function(linkObj){
