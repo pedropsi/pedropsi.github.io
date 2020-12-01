@@ -1,6 +1,7 @@
 Links={
 A_GENERATOR:{PAGE:"generator",EXT:".html",TITLE:`generator`,AUTHOR:()=>v.SITE_NAME()},
 A_STARKOBAN_FEAT_1:{PAGE:"https://www.bontegames.com/2020/11/starkoban-browser.html",TITLE:"blog",AUTHOR:()=>v.BONTE(),GROUP:"mentioned",ID:"starkoban"},
+A_STARKOBAN_FEAT_2:{PAGE:"http://blog.livedoor.jp/lkrejg/archives/66144345.html",TITLE:"フラシュ - 無料ゲーム blog",AUTHOR:()=>v.LKREJG(),GROUP:"mentioned",ID:"starkoban"},
 A_BUROKKU_KONEKUTA_FEAT_1:{PAGE:"https://www.bontegames.com/2019/07/burokku-konekuta-browser.html",TITLE:"blog",AUTHOR:()=>v.BONTE(),GROUP:"mentioned",ID:"burokku-konekuta"},
 A_BUROKKU_KONEKUTA_FEAT_2:{PAGE:"http://blog.livedoor.jp/lkrejg/archives/66112536.html#comments",TITLE:"フラシュ - 無料ゲーム blog",AUTHOR:()=>v.LKREJG(),GROUP:"mentioned",ID:"burokku-konekuta"},
 A_HASTEFULLL_FEAT_1:{PAGE:"https://www.bontegames.com/2018/07/hastefulll-browser.html",TITLE:"blog",AUTHOR:()=>v.BONTE(),GROUP:"mentioned",ID:"hastefulll"},
