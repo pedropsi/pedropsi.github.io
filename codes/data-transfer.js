@@ -534,42 +534,29 @@ ObjectArrayF=function(ArrayF,ObjectF){
 	}
 }
 
-DictionaryAccesser=function(Dictionary,Rewriter){
-	var Rewriter=Rewriter||Identity;
-	return function(name){
-		if(name===undefined)
-			return Dictionary;
-		else if(In(Dictionary,name.toLowerCase()))
-			return Dictionary[name.toLowerCase()];
-		else
-			return Rewriter(name);
-	}
+
+DictionaryLowerAccesser=function(Dictionary,Rewriter){
+	return TransformAccesser(Dictionary,LowerCase,Identity,Rewriter);
 }
 
-Accesser=function(Dict,Renamer,Failer){
-	var Renamer=Renamer||LowerCase;
-	var Failer=Failer||Identity;
-	return function(Name){
-		var name=Renamer(Name);
-		if(In(Dict,name))
-			return Dict[name];
-		else
-			return Failer(Name);
-	}
+Accesser=function(Dictionary,Renamer,Failform){
+	return TransformAccesser(Dictionary,Renamer,Identity,Failform);
 }
 
-TransformAccesser=function(Dictionary,Transform){
+TransformAccesser=function(Dictionary,Transform,Retroform,Failform){
 	var Transform=Transform||Identity;
-	var keys=Keys(Dictionary).map(Transform);
+	var Retroform=Retroform||Transform;
+	var Failform=Failform||Identity;
+	var keyst=Keys(Dictionary).map(Retroform);
 	var values=Values(Dictionary);
 	return function(name){
 		if(name===undefined)
 			return Dictionary;
 		var namet=Transform(name);
-		if(In(keys,namet))
-			return values[keys.indexOf(namet)];
+		if(In(keyst,namet))
+			return values[keyst.indexOf(namet)];
 		else
-			return name;
+			return Failform(name);
 	}
 }
 
@@ -1215,7 +1202,7 @@ Enumerate=function(StringArray,and){
 	var last=Last(StringArray);
 	
 	if(In(prelast,Exfix(and," "))||In(last,Exfix(and," ")))
-		and=DictionaryAccesser(EnumerationSynonyms)(and);
+		and=DictionaryLowerAccesser(EnumerationSynonyms)(and);
 	
 	and=Exfix(and," ");
 	if(StringArray.length===2)
@@ -5339,13 +5326,13 @@ var MacKeys={
 }
 
 StringSymbol=function(name){
-	return DictionaryAccesser(StringSymbols)(name);
+	return DictionaryLowerAccesser(StringSymbols)(name);
 }
 
 var SymbolsNames=FlipKeysValues(StringSymbols);
 
 SymbolName=function(symbol){
-	return DictionaryAccesser(SymbolsNames)(symbol)
+	return DictionaryLowerAccesser(SymbolsNames)(symbol)
 }
 
 ElementSymbolName=function(e){
@@ -5359,7 +5346,7 @@ SymbolIcon=function(name){
 		return SymbolIcon[name];
 
 	var name=SymbolName(StringSymbol(name));
-	var symbolObj=DictionaryAccesser(Icons)(name);
+	var symbolObj=DictionaryLowerAccesser(Icons)(name);
 	
 	if(symbolObj===name)
 		return name;
@@ -5583,7 +5570,7 @@ KeyExplainable=function(key){
 }
 
 ExplainKey=function(key){
-	return DictionaryAccesser(KeyExplanations)(key);
+	return DictionaryLowerAccesser(KeyExplanations)(key);
 }
 
 var KeyExplanations={
@@ -5608,7 +5595,7 @@ var KeyExplanations={
 
 KB=function(string,opts){
 	var opts=opts||{};
-	var options=DictionaryAccesser(TypeSwipeKeys,EnArray)(string);
+	var options=DictionaryLowerAccesser(TypeSwipeKeys,EnArray)(string);
 	return Enumerate(options.map(o=>KBDHTML(o,opts)),"or");
 }
 

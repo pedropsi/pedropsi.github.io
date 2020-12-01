@@ -2250,7 +2250,7 @@ function NokiaGroupNumber(L){
 //Loosely
 function LooselyMath(digitstring){
 	var n=Max(0,Number(digitstring.replaceAll("_","").split("").reverse().join(""))-1);
-	return String(n).split("").reverse().map(DictionaryAccesser(LEDNumberLetters)).join("");
+	return String(n).split("").reverse().map(DictionaryLowerAccesser(LEDNumberLetters)).join("");
 
 }
 
