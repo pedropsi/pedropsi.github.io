@@ -5148,6 +5148,37 @@ DateName=function(day,month,year){
 	return DateNamer(date);
 }
 
+var DatePatterns={
+	"DMY":{
+		pattern:/^((?:[012]\d)|(?:30|31))[-\/\\\s\.]((?:0\d)|(?:10)|(?:11)|(?:12))[-\/\\\s\.](\d\d\d\d)$/ig,
+		order:["$1","$2","$3"]
+	},
+	"YMD":{
+		pattern:/^(\d\d\d\d)[-\/\\\s\.]((?:0\d)|(?:10)|(?:11)|(?:12))[-\/\\\s\.]((?:[012]\d)|(?:30|31))$/ig,
+		order:["$3","$2","$1"]
+	}
+	//Month name patterns to do
+}
+StringPatternDate=function(string,patternObj){
+	var p=patternObj.pattern;
+	if(string.match(p)){
+		var dmy=patternObj.order.map(s=>string.replace(p,s));
+		return DateDate(...dmy)
+	}
+	else
+		return false;
+}
+
+StringDate=function(string){
+	var patternNames=Keys(DatePatterns);
+	var i=0;
+	var found=false;
+	while(!found&&i<patternNames.length){
+		found=StringPatternDate(string,DatePatterns[patternNames[i]]);
+		i++;
+	}
+	return found;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Range, in different order
