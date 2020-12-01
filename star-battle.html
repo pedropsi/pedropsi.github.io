@@ -24,7 +24,7 @@ ${starbattlesData={
 	"moebius-star-battle-10.png":{},
 	"penrose-star-battle-9.png":{},
 	"icosahedron-star-battle-8.png":{
-		legend:"Star Battle in space -- icosahedron (2*)",
+		legend:"Star Battle in space - icosahedron (2*)",
 		href:"star-battle.html?c=-sb&amp;1=starbattle-icosahedron.lev"
 	},
 	"polar-star-battle-7.png":{},
@@ -46,12 +46,13 @@ ${starbattlesData={
 	""}
 
 <h2>Latest</h2>
+${FolderGalleryHTML("star-battle",FilterObject(starbattles,(o,k)=>In([0,1,2].map(i=>Keys(starbattles)[i]),k)))}
+
 ${
 	starbattlesFuture=FilterObject(starbattlesData,(o,k)=>(o.date&&Days(StringDate(o.date))<0)),
 	l=Last(starbattlesFuture),
-	l&&l.date?`<p>Scheduled next update: <b>${DateNamer(StringDate(l.date))}</b>!</p>`:""
+	l&&l.date?`<p>Scheduled next update: <b>${DateNamer(StringDate(l.date))}</b>, with <em>${l.legend?l.legend+"!":""}</em></p>`:""
 }
-${FolderGalleryHTML("star-battle",FilterObject(starbattles,(o,k)=>In([0,1,2].map(i=>Keys(starbattles)[i]),k)))}
 
 ${v.HEADER()}
 
