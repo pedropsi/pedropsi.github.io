@@ -5,7 +5,7 @@
 		<script src="codes/data-transfer.js"></script>
 		<script id="post">var v={POST:()=>`
 
-${starbattles={
+${starbattlesData={
 	"18-half-hex-star-battle.png":{
 		date:"05/12/2020",
 		legend:"Half-hex Star Battle (1*)"},
@@ -42,10 +42,15 @@ ${starbattles={
 		legend:"Triangular Star Battle (1*)",
 		href:"star-battle.html?c=-sb+-zoom+.6&amp;1=starbattle-triangle1.lev"}
 	},
-	starbattles=FilterObject(starbattles,(o,k)=>(!o.date||Days(StringDate(o.date))>=0)),
+	starbattles=FilterObject(starbattlesData,(o,k)=>(!o.date||Days(StringDate(o.date))>=0)),
 	""}
 
 <h2>Latest</h2>
+${
+	starbattlesFuture=FilterObject(starbattlesData,(o,k)=>(o.date&&Days(StringDate(o.date))<0)),
+	l=Last(starbattlesFuture),
+	l&&l.date?`<p>Scheduled next update: <b>${DateNamer(StringDate(l.date))}</b>!</p>`:""
+}
 ${FolderGalleryHTML("star-battle",FilterObject(starbattles,(o,k)=>In([0,1,2].map(i=>Keys(starbattles)[i]),k)))}
 
 ${v.HEADER()}
