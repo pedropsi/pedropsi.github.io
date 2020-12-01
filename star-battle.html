@@ -51,7 +51,7 @@ ${FolderGalleryHTML("star-battle",FilterObject(starbattles,(o,k)=>In([0,1,2].map
 ${
 	starbattlesFuture=FilterObject(starbattlesData,(o,k)=>(o.date&&Days(StringDate(o.date))<0)),
 	l=Last(starbattlesFuture),
-	l&&l.date?`<p>Scheduled next update: <b>${DateNamer(StringDate(l.date))}</b>, with <em>${l.legend?l.legend+"!":""}</em></p>`:""
+	l&&l.date?`<p>Next update: <b>${DateNamer(StringDate(l.date))}</b>, with <em>${l.legend?l.legend+"!":""}</em></p>`:""
 }
 
 ${v.HEADER()}
