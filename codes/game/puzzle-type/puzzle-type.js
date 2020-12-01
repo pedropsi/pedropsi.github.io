@@ -705,14 +705,16 @@ var LevelGoals=[			//Required types of thinking:
 	"Genetic.",				//Encoding, Word, Science
 	"Anagram",				//Word, Mapping, Language, Once,
 	"Ironclad",				//Encoding, Word, Science
+	
+	"White chocolate mint",	//Encoding, Colour
 	"Deaf",					//Encoding, Music
-	"⠍⠕⠗⠎⠑",			  //Encoding, Once
+	"⠍⠕⠗⠎⠑",			  //Encoding,
 	"Dividi",				//Encoding, Arithmethic, Retroactive
 
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-	"White chocolate mint",				//Encoding, Colour
+	
 	"Starting buds",					//Language
 	"La rapide surprise",				//Keyword, Swap, Retroactive, Language
 	"Polaris Australis",				//Word, Mapping, Astronomy
