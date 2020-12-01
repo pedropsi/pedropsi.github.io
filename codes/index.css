@@ -1307,8 +1307,8 @@ video{
 
 .comment{
 	background-color:var(--white);
-	margin:var(--h1) 0 0 0;
-	padding-top:var(--h2);
+	margin:var(--h-2) 0 0 0;
+	padding-top:var(--h-4);
 	text-align:left;
 }
 .comment:nth-child(odd){
@@ -1321,7 +1321,7 @@ video{
 }
 .comment[data-depth="1"]{
 	margin-left:unset;
-	margin-top:var(--h8);
+	margin-top:var(--h2);
 }
 .comment[data-depth="2"]{
 	margin-left:var(--h2);
@@ -1364,7 +1364,7 @@ video{
 }
 
 .comment p{
-	padding:0px var(--w2) 0px var(--w2);
+	padding:0 var(--w2) 0 var(--w2);
 	font-size:90%;
 	z-index:2;
 }
