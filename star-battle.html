@@ -6,6 +6,9 @@
 		<script id="post">var v={POST:()=>`
 
 ${starbattles={
+	"18-half-hex-star-battle.png":{
+		date:"05/12/2020",
+		legend:"Half-hex Star Battle (1*)"},
 	"17-kite-and-dart-star-battle.png":{
 		legend:"Kite and Dart Star Battle (1*)",
 		href:"star-battle.html?c=-sb+-zoom+.6&amp;1=17-kite-and-dart.lev"},
@@ -38,7 +41,9 @@ ${starbattles={
 	"triangular-star-battle-2.png":{
 		legend:"Triangular Star Battle (1*)",
 		href:"star-battle.html?c=-sb+-zoom+.6&amp;1=starbattle-triangle1.lev"}
-	},""}
+	},
+	starbattles=FilterObject(starbattles,(o,k)=>(!o.date||Days(StringDate(o.date))>=0)),
+	""}
 
 <h2>Latest</h2>
 ${FolderGalleryHTML("star-battle",FilterObject(starbattles,(o,k)=>In([0,1,2].map(i=>Keys(starbattles)[i]),k)))}
