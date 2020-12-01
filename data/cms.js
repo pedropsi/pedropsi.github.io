@@ -291,7 +291,7 @@ InlineSVG=function(){
 
 CMSAHTML=function(title){
 	var o=CMSObject(title);
-	return AHTML(UnFunction(o.TITLE),UnFunction(o.LINK)+".html");
+	return o?AHTML(UnFunction(o.TITLE),UnFunction(o.LINK)+".html"):"";
 }
 
 CMSObject=function(title){
