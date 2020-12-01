@@ -235,28 +235,39 @@ EuclideanDistance=function(vector1,vector2){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// Lists (AS = Array or String)
+// Array, Object, String (SAO)
 
-Last=function(AS){
-	if(AS&&AS.length)
-		return AS[AS.length-1];
+Last=function(SAO){
+	if(IsObject(SAO)){
+		var k=Last(Keys(SAO));
+		return k?SAO[k]:null;
+	}
+	else if(SAO&&SAO.length)
+		return SAO[SAO.length-1];
 	else
 		return null;
 }
 
-First=function(AS){
-	if(AS&&AS.length)
-		return AS[0];
+First=function(SAO){
+	if(IsObject(SAO)){
+		var k=First(Keys(SAO));
+		return k?SAO[k]:null;
+	}
+	else if(SAO&&SAO.length)
+		return SAO[0];
 	else
 		return null;
 }
 
-Rest=function(AS){
-	if(AS&&AS.length){
-		if(typeof AS==="string")
-			return Rest(AS.split("")).join("");
+Rest=function(SAO){
+	if(IsObject(SAO)){
+		return FilterObject(SAO,(o,k)=>(k!==First(Keys(SAO))));
+	}
+	if(SAO&&SAO.length){
+		if(typeof SAO==="string")
+			return Rest(SAO.split("")).join("");
 		else{
-			var A=Clone(AS);
+			var A=Clone(SAO);
 			A.shift();
 			return A;
 		}
@@ -265,12 +276,15 @@ Rest=function(AS){
 		return null;
 }
 
-Most=function(AS){
-	if(AS&&AS.length){
-		if(typeof AS==="string")
-			return Most(AS.split("")).join("");
+Most=function(SAO){
+	if(IsObject(SAO)){
+		return FilterObject(SAO,(o,k)=>(k!==Last(Keys(SAO))));
+	}
+	if(SAO&&SAO.length){
+		if(typeof SAO==="string")
+			return Most(SAO.split("")).join("");
 		else{
-			var A=Clone(AS);
+			var A=Clone(SAO);
 			A.pop();
 			return A;
 		}
