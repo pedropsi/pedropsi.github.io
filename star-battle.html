@@ -8,39 +8,110 @@
 ${starbattlesData={
 	"18-half-hex-star-battle.png":{
 		date:"05/12/2020",
-		legend:"Half-hex Star Battle (1*)"},
+		cell:"multiple",
+		legend:"Half-hex Star Battle (1*)",
+		stars:1
+	},
 	"17-kite-and-dart-star-battle.png":{
 		legend:"Kite and Dart Star Battle (1*)",
-		href:"star-battle.html?c=-sb+-zoom+.6&amp;1=17-kite-and-dart.lev"},
-	"16-good-morganing-ellipse.png":{},
-	"15-good-morganing-circle.png":{},
-	"14-star-battle-square-prism.png":{},
+		date:"28/11/2020",
+		cell:"multiple",
+		href:"star-battle.html?c=-sb+-zoom+.6&amp;1=17-kite-and-dart.lev",
+		stars:1
+	},
+	"16-good-morganing-ellipse.png":{
+		date:"21/11/2020",
+		variant:"good-morganing",
+		stars:2
+	},
+	"15-good-morganing-circle.png":{
+		date:"20/11/2020",
+		variant:"good-morganing",
+		stars:2
+	},
+	"14-star-battle-square-prism.png":{
+		date:"10/10/2020",
+		variant:"in space",
+		cell:"square",
+		stars:2
+	},
 	"cube-star-battle-13.png":{
+		date:"04/10/2020",
 		legend:"Star Battle 4x4x4 in space (2*)",
-		href:"star-battle.html?c=-sb&amp;1=starbattle-cube-13.lev"
+		variant:"in space",
+		cell:"square",
+		href:"star-battle.html?c=-sb&amp;1=starbattle-cube-13.lev",
+		stars:2
 	},
-	"tetrahedral-star-battle-12.png":{},
-	"ammann-beenker-star-battle-11.png":{},
-	"moebius-star-battle-10.png":{},
-	"penrose-star-battle-9.png":{},
+	"tetrahedral-star-battle-12.png":{
+		date:"12/09/2020",
+		cell:"triangular",
+		stars:1
+	},
+	"ammann-beenker-star-battle-11.png":{
+		date:"04/09/2020",
+		cell:"multiple",
+		stars:1
+	},
+	"moebius-star-battle-10.png":{
+		date:"29/08/2020",
+		variant:"in space",
+		cell:"square",
+		stars:2
+	},
+	"penrose-star-battle-9.png":{
+		date:"11/08/2020",
+		cell:"multiple",
+		stars:1
+	},
 	"icosahedron-star-battle-8.png":{
+		date:"09/08/2020",
 		legend:"Star Battle in space - icosahedron (2*)",
-		href:"star-battle.html?c=-sb&amp;1=starbattle-icosahedron.lev"
+		variant:"in space",
+		cell:"triangular",
+		href:"star-battle.html?c=-sb&amp;1=starbattle-icosahedron.lev",
+		stars:2
 	},
-	"polar-star-battle-7.png":{},
-	"hyperbolic-star-battle-6.png":{},
-	"hyperbolic-star-battle-5.png":{},
+	"polar-star-battle-7.png":{
+		date:"01/08/2020",
+		cell:"square",
+		geometry:"polar",
+		stars:2
+	},
+	"hyperbolic-star-battle-6.png":{
+		date:"12/07/2020",
+		cell:"square",
+		geometry:"hyperbolic",
+		stars:1
+	},
+	"hyperbolic-star-battle-5.png":{
+		date:"11/07/2020",
+		cell:"square",
+		geometry:"hyperbolic",
+		stars:1
+	},
 	"cube-star-battle-4.png":{
+		date:"19/06/2020",
 		legend:"Star Battle 4x4x4 in space (1*)",
-		href:"star-battle.html?c=-sb&amp;1=starbattle-square.lev"
+		variant:"in space",
+		cell:"square",
+		href:"star-battle.html?c=-sb&amp;1=starbattle-square.lev",
+		stars:1
 	},
 	"triangular-star-battle-3.png":{
+		date:"18/06/2020",
 		legend:"Triangular Star Battle (2*)",
-		href:"star-battle.html?c=-sb+-zoom+.5&amp;1=starbattle-triangle2.lev"
+		cell:"triangular",
+		href:"star-battle.html?c=-sb+-zoom+.5&amp;1=starbattle-triangle2.lev",
+		stars:2
 	},
 	"triangular-star-battle-2.png":{
+		date:"17/06/2020",
 		legend:"Triangular Star Battle (1*)",
-		href:"star-battle.html?c=-sb+-zoom+.6&amp;1=starbattle-triangle1.lev"}
+		cell:"triangular",
+		href:"star-battle.html?c=-sb+-zoom+.6&amp;1=starbattle-triangle1.lev",
+		stars:1
+	}
 	},
 	starbattles=FilterObject(starbattlesData,(o,k)=>(!o.date||Days(StringDate(o.date))>=0)),
 	""}
@@ -64,7 +135,7 @@ ${v.HEADER()}
 <p>To play these, all you need is pen and paper! Or, if you prefer, the flood-fill tool will work on every puzzle, e.g using MSPaint or other image editing software.</p>
 <p>Shall a star battle be named <em>in space</em>, then part of the challenge is <b>folding the puzzle</b> either in your head or an actual paper version.</p>
 
-${FolderGalleryHTML("star-battle",Keys(starbattles))}
+${FolderGalleryHTML("star-battle",starbattles)}
 
 <h2>Interactive star battles</h2>
 <p>Pick one of the puzzles below to launch the interactive <b>3D star battle player</b> in your browser, thanks to ${v.ZENOROGUE()}!</p>
