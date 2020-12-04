@@ -4271,7 +4271,7 @@ HTMLPattern=function(tags){
 
 TextReadDuration=function(textstring){ //by counting number of words, 250ms per word
 	var textstring=textstring.replace(HTMLPattern(["span","svg"])," oneword ");
-	return Min(Max(1000,(textstring.split(" ").length)*250),10000);
+	return Min(Max(1000,(textstring.split(/\s+/).length)*250),10000);
 }
 
 ConsoleAdd=function(messageHTML,wait,duration,mID,consoleID,mClass){
