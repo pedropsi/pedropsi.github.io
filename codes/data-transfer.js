@@ -4270,7 +4270,7 @@ HTMLPattern=function(tags){
 }
 
 TextReadDuration=function(textstring){ //by counting number of words, 250ms per word
-	var textstring=textstring.replace(HTMLPattern(["span","svg"]),"");
+	var textstring=textstring.replace(HTMLPattern(["span","svg"])," oneword ");
 	return Min(Max(1000,(textstring.split(" ").length)*250),10000);
 }
 
