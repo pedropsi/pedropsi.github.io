@@ -1857,9 +1857,22 @@ NextStarCode=function(starcode){
 		return "";
 }
 
+function ConstellationDeclinate(star){//Prevents infinite replacing hydra->hydrae->hydraee->etc...
+	if(!ConstellationDeclinate.l){
+		ConstellationDeclinate.l={};
+		Keys(ConstellationDeclinations).map(function(k){
+			ConstellationDeclinate.l[k+"$"]=ConstellationDeclinations[k];
+			ConstellationDeclinate.l[k+" "]=(ConstellationDeclinations[k]+" ");
+		})
+	}
+	return StringReplace(star,ConstellationDeclinate.l)
+}
+
 function NextStar(starname){
 	var nextstar=StarName(NextStarCode(StarCode(starname)));
-	return StringReplace(nextstar,GreekLetterNames);
+		nextstar=StringReplace(nextstar,GreekLetterNames);
+		nextstar=ConstellationDeclinate(nextstar);
+	return nextstar;
 }
 
 
