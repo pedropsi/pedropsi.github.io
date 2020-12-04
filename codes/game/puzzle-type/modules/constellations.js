@@ -192,9 +192,6 @@ var GreekNameLetters=FlipKeysValues(GreekLetterNames);
 // 	"alpheratz":358
 // }
 
-
-
-//declinations
 CodesConstellations={
 	"And":"Andromeda",
 	"Ant":"Antlia",
@@ -1861,11 +1858,10 @@ function ConstellationDeclinate(star){//Prevents infinite replacing hydra->hydra
 	if(!ConstellationDeclinate.l){
 		ConstellationDeclinate.l={};
 		Keys(ConstellationDeclinations).map(function(k){
-			ConstellationDeclinate.l[k+"$"]=ConstellationDeclinations[k];
 			ConstellationDeclinate.l[k+" "]=(ConstellationDeclinations[k]+" ");
 		})
 	}
-	return StringReplace(star,ConstellationDeclinate.l)
+	return StringReplace(star+" ",ConstellationDeclinate.l).replace(/\s+$/,"");
 }
 
 function NextStar(starname){
