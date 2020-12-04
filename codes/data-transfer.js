@@ -4262,8 +4262,15 @@ ConsoleMessageHTML=function(message,mID,mclass){
 	return '<div class="message '+mclass+'" id='+mID+'>'+message+'</div>';
 }
 
+HTMLPattern=function(tags){
+	if(IsString(tags))
+		var tags=[tags];
+	tags=Alternate(tags.map(t=>Prefix(t,"?:")));
+	return new RegExp(`\\<(${tags})(?:.|\\n)*\\<\\/\\1\\>`,"mig");
+}
+
 TextReadDuration=function(textstring){ //by counting number of words, 250ms per word
-	var textstring=textstring.replace(/\<(span|svg).*\<\/\1\>/ig,""); //remove svg and span contents (text icons)
+	var textstring=textstring.replace(HTMLPattern(["span","svg"]),"");
 	return Min(Max(1000,(textstring.split(" ").length)*250),10000);
 }
 
