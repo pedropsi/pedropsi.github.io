@@ -268,16 +268,12 @@ function GameBarButtonHTML(action,attribs){
 		})
 	});
 }
+
 function GameBarButtonLinkHTML(title,action){
-	var TWB=GameBarTypewriterBanner(action);
-	var UnTWB=GameBarCancelTypewriterBanner(action);
-	return ButtonLinkHTML(title,ObtainSymbol(action),{
-			onmouseover:TWB,
-			onfocus:TWB,
-			onmouseout:UnTWB,
-			onblur:UnTWB,
-			id:Capitalise(action)+'Button'
-		})
+	var id='#'+KebabCaseString(CapitaliseSentence(title));
+	var button=GameBarButtonHTML(action,{
+		onclick:`FullscreenClose();Navigate("${id}");`});
+	return AwaitElement(id,button);
 };
 
 function ShowButton(ButtonNameF){

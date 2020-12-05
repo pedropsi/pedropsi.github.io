@@ -1560,12 +1560,15 @@ RightPath=function(url){
 }
 
 Navigate=function(url,samewindow){
+	if(Prefixed(url,"#"))
+		return window.location.href=url;
+	
 	if(PageRelative(url)){
 		var samewindow=true;
 	}
 
 	var url=RightPath(url);
-
+	
 	if(samewindow)
 		window.location.href=url;
 	else{//NewTab
@@ -2747,19 +2750,6 @@ SectionHTML=function(SettingsObj){
 ButtonOnClickHTML=function(title,onclicktxt){
 	return ButtonHTML({txt:title,attributes:{onclick:onclicktxt}});
 }
-
-ButtonLinkHTML=function(title,symbol,attribs){
-	var id='#'+KebabCaseString(CapitaliseSentence(title));
-	var attribs=attribs||{};
-	if(!symbol)
-		var symbol=title;
-
-	var button=ButtonHTML({txt:symbol,tag:"a",attributes:FuseObjects({href:id,onclick:'FullscreenClose()'},attribs)});
-	
-	return AwaitElement(id,button);
-}
-
-
 
 
 CloseButtonHTML=function(targetid){
