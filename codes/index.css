@@ -1307,6 +1307,7 @@ video{
 
 .comment{
 	background-color:var(--white);
+	line-height:110%;
 	margin:var(--h-2) 0 0 0;
 	padding-top:var(--h-4);
 	text-align:left;
