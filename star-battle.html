@@ -6,6 +6,12 @@
 		<script id="post">var v={POST:()=>`
 
 ${starbattlesData={
+	"19-basked-weave-star-battle.png":{
+		date:"12/12/2020",
+		cell:"rectangle",
+		legend:"Basket weave Star Battle (1*)",
+		stars:1
+	},
 	"18-half-hex-star-battle.png":{
 		date:"05/12/2020",
 		cell:"multiple",
@@ -236,13 +242,17 @@ ${FolderGalleryHTML("star-battle",FilterObject(starbattles,o=>o.href))}
 <p>All ${AHTML("#Interactive star battles")} are editable, and you can even change the geometry, thanks to the ${v.A_HYPERROGUE()} engine!</p>
 
 <h2>More ideas</h2>
-<p>Many ideas failed to produce interesting puzzles, or would require more time to explore. They're left here in case anyone wants to take them forward.</p>
 <ul>
+	<li>LITS star battle - stars cannot be on the tetroids (${v.PORTPONKY()})</li>
+	<li>binary star battle 1: two types of stars, heavy and light. Light stars are alone in a line, heavy stars are together;</li>
+	<li>binary star battle 2: two types of stars, blue and red. Blue stars on every line, red stars on every region. Stars cannot be adjacent;</li>
 	<li>log spiral grid - current 2 star <em>constellation</em> with too many stars, possibly tedious;</li>
 	<li>liar star battle - where exactly one of the <em>regions</em> contains no stars;</li>
 	<li>starrykabe - the location of the stars is actually the starting point for a nurikabe puzzle (the number assignment would be based either on order of placement of stars ot their coordinates);</li>
 	<li>origami star battle - this would require two orthogonal folds plus transparent paper. Folding could erase and create new <em>regions</em>, and reduce the number of stars.</li>
 </ul>
+<p>HEGANOX (not star battle but lasers) using the half-hex grid</p>
+
 
 
 <h2>Credits</h2>
