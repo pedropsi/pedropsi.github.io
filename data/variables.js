@@ -379,7 +379,7 @@ PWA_WORKER					:	()=>	`"serviceworker":{"src":"${v.ORIGIN()}/cacher.js"}`,
 
 ORIENTATION					:()=>`landscape`,
 
-PWA_ICON_OBJ				:(size)=>`{"src":"${v.ORIGIN()}/${ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),size)}","type":"image/${v.IMAGE_EXT()}","sizes":"${size}x${size}"}`,
+PWA_ICON_OBJ				:(size)=>`{"src":"${v.ORIGIN()}/${ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),size)}","type":"image/${v.IMAGE_EXT()}","sizes":"${size}x${size}","purpose":"any maskable"}`,
 PWA_ICONS					:	()=>	`"icons":[${v.PWA_ICON_OBJ(512)},${v.PWA_ICON_OBJ(192)},${v.PWA_ICON_OBJ(180)}]`,
 
 NEWS_LIMIT_RECENT			:	()=>	3,
