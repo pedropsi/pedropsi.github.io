@@ -627,6 +627,7 @@ li::before{
 .navbar .logo:hover,.navbar .logo:focus,.navbar .logo:active{
 	background-color:var(--darkblue);
 	transition-duration:var(--durationOn);
+	color: var(--turquoise);
 }
 .logo svg{
 	height:calc(var(--w4) + var(--h4));
