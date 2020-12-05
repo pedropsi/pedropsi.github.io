@@ -60,7 +60,11 @@ function EchoLevelClose(curlevel){
 	EchoLevelData(leveldata);
 }
 
-ListenOnce("unload",function(){EchoLevelClose(curlevel)});
+function UnloadEventName(){
+	return "onpagehide" in self ?"pagehide":"unload";
+}
+
+ListenOnce(UnloadEventName(),function(){EchoLevelClose(curlevel)});
 
 
 ////////////////////////////////////////////////////////////////////////////////
