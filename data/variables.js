@@ -360,7 +360,7 @@ DESCRIPTION					:	()=>	v.PARSER_MARKSHORT(v.POST().replace(/\n+/g,"\t")),
 WORD_LIMIT_SHORT			:	()=>300,
 
 PARSER_MARKSHORT			:(txt)=> StripHTML(txt).slice(0,v.WORD_LIMIT_SHORT()),
-PARSER_UNDERSCORE			:(txt)=> StripHTML(txt).replace(/\s+/ig,"_"),
+PARSER_UNDERSCORE			:(txt)=> StripHTML(txt).replace(/\s+/ig,"_").replace(/"/ig,""),
 
 ONE_LINER					:	()=>"",
 ONE_LINER_U					:	()=>	v.PARSER_UNDERSCORE(v.ONE_LINER()),
@@ -371,9 +371,9 @@ DESCRIPTION_U				:	()=>	v.PARSER_UNDERSCORE(v.DESCRIPTION()),
 ORIGIN						:	()=>	v.SITE(),
 
 PWA_DISPLAY					:	()=>	`"theme_color":"${v.THEMECOLOUR()}","background_color":"${v.THEMECOLOUR()}","display":"standalone","orientation":"${v.ORIENTATION()}"`,
-PWA_DESC					:	()=>	`"description":"${v.DESCRIPTION_U()}","categories":[${v.CATEGORIES()}]`,
+PWA_DESC					:	()=>	`"description":"${v.DESCRIPTION_U()}","categories":[${v.CATEGORIES().map(c=>`"${c}"`)}]`,
 PWA_NAME					:	()=>	`"short_name":"${v.SHORTNAME_U()}","name":"${v.TITLE_BY_U()}"`,
-PWA_LANG					:	()=>	`"dir":"ltr","lang":${v.LANG()}`,
+PWA_LANG					:	()=>	`"dir":"ltr","lang":"${v.LANG()}"`,
 PWA_SCOPE					:	()=>	`"start_url":"${v.ORIGIN()}/${v.LINK()}.html?source=homescreen","scope":"${v.ORIGIN()}"`,
 PWA_WORKER					:	()=>	`"serviceworker":{"src":"${v.ORIGIN()}/cacher.js"}`,
 
