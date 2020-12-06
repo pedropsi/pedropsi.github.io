@@ -349,10 +349,16 @@
    overflow: visible;
 }
 
-.bezier.letter.led{
+.bezier.letter.led,
+.bezier.letter.morse{
    width:calc(var(--h4) + var(--w2));
    stroke-width:0.5;
    fill: var(--darkblue);
+}
+
+.bezier.letter.caret{
+   stroke: var(--white);
+   fill: var(--white);
 }
 
 .bezier.letter + .letter.space{

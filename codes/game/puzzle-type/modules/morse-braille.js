@@ -39,6 +39,116 @@ var MorseCode={
 	".":".-.-.-"
 }
 
+function BiMorse(morse){
+	var bimorse="";
+	var flip=false;
+	var morse=morse.replace(/\s+/mig," ");
+	for(var i=0;i<morse.length;i++){
+		if(morse[i]===" ")
+			flip=!flip;
+		else
+			bimorse=bimorse+morse[i].replaceAll((flip)?".":"nothing","!").replaceAll((flip)?"-":"nothing","_").replaceAll((!flip)?"!":"nothing",".").replaceAll((!flip)?"_":"nothing","-");
+	}
+	return bimorse;
+}
+
+function BiMorseAdd(bimo,L){
+	var Flipper=Identity;
+	if(bimo&&In(".-",Last(bimo)))
+		Flipper=function(c){return c.replaceAll(".","!").replaceAll("-","_")};
+	var L=Flipper(Accesser(MorseCode,LowerCase)(L));
+	return bimo+L;
+}
+
+function BiMorseLetters(bimorse){
+	var letters=[];
+	for(var j=0;j<=Floor(bimorse.length/6);j++){
+		letters[j]=bimorse.split("").slice(6*j,6*(j+1)).join("");
+	}
+	return letters;
+}
+
+BiBrailleShapes={
+	"0":"M 0 1 Q 0 0 1 0 Q 2 0 2 1 Q 2 2 1 2 Q 0 2 0 1 Z",
+	"1":"M 0 1 L 1 2 L 2 1 L 1 0 Z"
+}
+
+function BrailleCoordinates(code){
+	var hdist=4;
+	var vdist=4;
+	var shape=BiBrailleShapes[First(code)];
+	var n=Last(code);
+		shape=SVGPathDirectTransform(shape,(x,y)=>[x+Floor(n/3)*hdist,y+(n%3)*vdist]);
+	return shape;
+}
+
+function BrailleLetterSVGHTML(bimorsestring){
+	var path="M 0 0";
+	var code;
+	for(var j=0;j<bimorsestring.length;j++){
+		if(!In("-_",bimorsestring[j])){
+			code=(bimorsestring[j]==="."?"0":"1")+j;
+			path=path+" "+BrailleCoordinates(code);
+		}
+	}
+
+	return SVGHTML({
+		path:path,
+		cla:"bezier letter morse",
+		viewBox:"0 0 8 12",
+	})
+}
+
+function WordBiMorseArray(word){
+	var bimorse=Fold(BiMorseAdd,"",word.split(""));
+	var letters=BiMorseLetters(bimorse).filter(Identity);
+	return letters;
+}
+
+
+/*
+
+//Morse
+function MorseLegacy(L){
+	
+	var used=Memo();
+	
+	var position=used.map(function(d){return MorseCode[d.toLowerCase()].length});
+	position=[0].concat(position).reduce(Accumulate);
+
+	AddStrokeValid(L);
+	
+	used.push(L);
+	Memo(used);
+
+	var morsestring=MorseCode[L.toLowerCase()].split("");
+
+	var charlenh=2;
+	var charlenv=3;
+	var chardots=charlenh*charlenv;
+
+	var p,n,line,column,wordp,charp;
+	for(var i=0;i<morsestring.length;i++){		
+		p=position+i;		  					//full position
+		wordp=Floor(p/chardots);
+		charp=(p-wordp*chardots);
+		column=Floor(charp/charlenv);						
+		line=charp%charlenv;
+
+		console.log(position,p,wordp,charp,column,line);
+
+		n=(wordp<Letters.array.length)?BrailleNumber(Letters.array[wordp]):0; //prior information
+		n=Min(n+(morsestring[i]==="."?1:0)*Power(2,line+charlenv*column),63);		//dot=1, dash=0
+		Letters.array[wordp]=NumberBraille(n);
+	}
+
+	Caret(Floor((p+1)/chardots));
+
+}
+
+
+
+
 var BrailleCode={
 "a":"⠁",
 "b":"⠃",
@@ -141,20 +251,4 @@ function BrailleNumber(braille){
 	return BrailleSorted.indexOf(braille.toLowerCase());
 }
 
-Braille0Coordinates={
-	"01":"M 1 2 Q 1 1 2 1 Q 3 1 3 2 Q 3 3 2 3 Q 1 3 1 2 Z",
-	"02":"M 4 2 Q 4 1 5 1 Q 6 1 6 2 Q 6 3 5 3 Q 4 3 4 2 Z",
-	"03":"M 1 5 Q 1 4 2 4 Q 3 4 3 5 Q 3 6 2 6 Q 1 6 1 5 Z",
-	"04":"M 4 5 Q 4 4 5 4 Q 6 4 6 5 Q 6 6 5 6 Q 4 6 4 5 Z",
-	"05":"M 1 8 Q 1 7 2 7 Q 3 7 3 8 Q 3 9 2 9 Q 1 9 1 8 Z",
-	"06":"M 4 8 Q 4 7 5 7 Q 6 7 6 8 Q 6 9 5 9 Q 4 9 4 8 Z",
-}
-
-Braille1Coordinates={
-	"11":"M 1 2 Q 1 1 2 1 Q 3 1 3 2 Q 3 3 2 2 Q 1 1 1 2 Z",
-	"12":"M 4 2 Q 4 1 5 1 Q 6 1 6 2 Q 6 3 5 2 Q 4 1 4 2 Z",
-	"13":"M 1 5 Q 1 4 2 4 Q 3 4 3 5 Q 3 6 2 5 Q 1 4 1 5 Z",
-	"14":"M 4 5 Q 4 4 5 4 Q 6 4 6 5 Q 6 6 5 5 Q 4 4 4 5 Z",
-	"15":"M 1 8 Q 1 7 2 7 Q 3 7 3 8 Q 3 9 2 8 Q 1 7 1 8 Z",
-	"16":"M 4 8 Q 4 7 5 7 Q 6 7 6 8 Q 6 9 5 8 Q 4 7 4 8 Z",
-}
+*/

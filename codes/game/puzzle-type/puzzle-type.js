@@ -70,6 +70,7 @@ function ObtainLevelDescription(lvl){
 function ObtainLevelNumberDisplay(m){
 	var n=UnstarLevel(m);
 	var title=LevelTitle(n);
+		title=ObfuscateTitle(title);
 	if(!title||title.length<3)
 		return m;
 	title=title.toUpperCase();
@@ -424,7 +425,7 @@ function ForbidNumberActions(key){
 		"La rapide surprise",
 		"Starting buds",
 		"Order is all",
-		"⠍⠕⠗⠎⠑"],CurLevelTitle())&&In(NumberCharacters,key));
+		"EnactLawsMama"],CurLevelTitle())&&In(NumberCharacters,key));
 }
 
 function ForbidSpaceActions(key){
@@ -515,8 +516,10 @@ var WinnerTitles={
 };
 
 
+
 function ObtainLevelDescriptionTitle(lvl){
 	var title=LevelTitle(lvl);
+		title=ObfuscateTitle(title);
 	return (title!=="Deaf")?title.toUpperCase():title;
 }
 
@@ -525,7 +528,12 @@ function GoalHTML(title){
 	function GoalDisplayer(L){return LetterPureHTML(L.toUpperCase())};
 	if(In(GoalDisplayers,title))
 		GoalDisplayer=GoalDisplayers[title];
-	return title.split("").map(GoalDisplayer).join("");
+	
+	if(In(GoalSplitters,title))
+		var title=GoalSplitters[title](title);
+	else
+		var title=title.split("");
+	return title.map(GoalDisplayer).join("");
 }
 
 var LevelDifficulty={
@@ -560,7 +568,7 @@ var LevelDifficulty={
 	"Genetic.":2,
 	"Ironclad":2,
 	"Deaf":3,
-	"⠍⠕⠗⠎⠑":3,
+	"EnactLawsMama":3,
 	"Dividi":5,
 	"Magnetism":2,
 	"Odd":3,
@@ -596,7 +604,7 @@ var ExternalLevels=[
 	"Genetic.",
 	"Ironclad",
 	"Deaf",
-	"⠍⠕⠗⠎⠑",
+	"EnactLawsMama",
 	"Dividi",
 	"Magnetism",
 	"White chocolate mint"
@@ -708,7 +716,7 @@ var LevelGoals=[			//Required types of thinking:
 	
 	"White chocolate mint",	//Encoding, Colour
 	"Deaf",					//Encoding, Music
-	"⠍⠕⠗⠎⠑",			  //Encoding,
+	"EnactLawsMama",			  //Encoding,
 	"Dividi",				//Encoding, Arithmethic, Retroactive
 
 	"Odd",								//Keyword, Positional, Retroactive, Subtractive
@@ -742,8 +750,20 @@ function RestrictPlayableLevels(){
 
 RestrictPlayableLevels();
 
+function ObfuscateTitle(title){
+	if(In(GoalObfuscators,title))
+		title=GoalObfuscators[title];
+	return title;
+}
+
+var GoalObfuscators={
+	"EnactLawsMama":"⠍⠕⠗⠎⠑",
+}
+
 var LevelGoalAliases={
-	"Morse":"⠍⠕⠗⠎⠑",
+	//"._!.-_!_!-!_!!.-!__...__.-__.-":"EnactLawsMama",
+	"Morse":"EnactLawsMama",
+	"⠍⠕⠗⠎⠑":"EnactLawsMama",
 	"Vowel":"Consonant",
 	"Homeomorphic":"Topological",
 	"Loosely less":"Calculator",
@@ -972,7 +992,7 @@ var LevelInstructions={
 		Letters(StringReplaceRulesObject(Word().toLowerCase(),Hiragana).toUpperCase());
 		Caret(Infinity);
 	},
-	"⠍⠕⠗⠎⠑":Morse,
+	"EnactLawsMama":Morse,
 	"White chocolate mint":Fuchsia,
 	"Deaf":Deaf,
 	"Anagram":Anagram,
@@ -1456,41 +1476,12 @@ function FlipArray(array){
 
 //Morse
 function Morse(L){
-	
-	var used=Memo();
-	
-	var position=used.map(function(d){return MorseCode[d.toLowerCase()].length});
-	position=[0].concat(position).reduce(Accumulate);
-
+	var bimorse=BiMorseAdd(Word(),L);
 	AddStrokeValid(L);
-	
-	used.push(L);
-	Memo(used);
-
-	var morsestring=MorseCode[L.toLowerCase()].split("");
-
-	var charlenh=2;
-	var charlenv=3;
-	var chardots=charlenh*charlenv;
-
-	var p,n,line,column,wordp,charp;
-	for(var i=0;i<morsestring.length;i++){		
-		p=position+i;		  					//full position
-		wordp=Floor(p/chardots);
-		charp=(p-wordp*chardots);
-		column=Floor(charp/charlenv);						
-		line=charp%charlenv;
-
-		console.log(position,p,wordp,charp,column,line);
-
-		n=(wordp<Letters.array.length)?BrailleNumber(Letters.array[wordp]):0; //prior information
-		n=Min(n+(morsestring[i]==="."?1:0)*Power(2,line+charlenv*column),63);		//dot=1, dash=0
-		Letters.array[wordp]=NumberBraille(n);
-	}
-
-	Caret(Floor((p+1)/chardots));
-
+	Letters(BiMorseLetters(bimorse));
+	Caret(Floor((bimorse.length)/6));
 }
+
 
 
 
@@ -2489,6 +2480,7 @@ var LetterDisplayers={
 	"Anagram":LetterDraftHTML,
 	"White chocolate mint":LetterDraftHTML,
 	"Deaf":LetterDraftHTML,
+	"EnactLawsMama":BrailleSVG,
 	"Nigeria":LetterDraftHTML,
 	"Polaris Australis":LetterDraftHTML,
 	"Topological":BezierLetterSVG,
@@ -2497,10 +2489,15 @@ var LetterDisplayers={
 }
 
 var GoalDisplayers={
+	"EnactLawsMama":BrailleSVG,
 	"Topological":BezierLetterSVG,
 	"Loosely less":LEDLetterSVG,
 	"Reshape":LEDLetterSVG,
-	"Deaf":LetterPureHTML
+	"Deaf":LetterPureHTML,
+}
+
+var GoalSplitters={
+	"EnactLawsMama":function(title){return WordBiMorseArray(title)},
 }
 
 function BezierLetterSVG(L){
@@ -2516,6 +2513,10 @@ function LEDLetterSVG(L){
 
 function LEDLetterShapeSVG(shape){
 	return LEDLetterSVGHTML(shape);
+}
+
+function BrailleSVG(bimorse){
+	return BrailleLetterSVGHTML(bimorse);
 }
 
 function LetterDraftHTML(L){
@@ -2731,7 +2732,20 @@ function ObtainUpdateLevel(state){
 }
 
 function CurLevelWon(){
-	return WinnerTitle(CurLevelTitle())===Word().replace(/\_/g,"");
+	return LevelPassed(CurLevelTitle());
+}
+
+function LevelPassed(title){
+	if(In(WinPassers,title))
+		return WinPassers[title](Word());
+	else
+		return WinnerTitle(CurLevelTitle())===Word().replace(/\_/g,"");
+}
+
+WinPassers={
+	"EnactLawsMama":function(word){
+		return WordBiMorseArray(CurLevelTitle()).join("").replaceAll("-","_")===word.replaceAll("-","_");
+	}
 }
 
 function ObtainWonMoves(){
@@ -2843,7 +2857,7 @@ function TransitionGoalIn(duration){
 
 var UnCapitalisedGoals=[
 	"Reshape",
-	"⠍⠕⠗⠎⠑",
+	"EnactLawsMama",
 	"Loosely less"
 ];
 
@@ -3018,7 +3032,6 @@ function StartingMemo(level){
 		'Polaris Australis':false,
 		'Nokia 1998':0,
 		'Just cut and paste':"",
-		'⠍⠕⠗⠎⠑':[],
 		'Wasd':`_____...D_____
 				..S......_____
 				.....A._______
