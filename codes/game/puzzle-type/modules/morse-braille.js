@@ -65,7 +65,7 @@ function BiMorseLetters(bimorse){
 	for(var j=0;j<=Floor(bimorse.length/6);j++){
 		letters[j]=bimorse.split("").slice(6*j,6*(j+1)).join("");
 	}
-	return letters;
+	return letters.filter(Identity);
 }
 
 BiBrailleShapes={
