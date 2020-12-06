@@ -1487,7 +1487,7 @@ function Morse(L){
 		pa=Floor((p%s)/2);							//caret horizontal position
 		n=(pa<Letters.array.length)?BrailleNumber(Letters.array[pa]):0; //prior information
 		n=Min(n+(dotdash[i]==="."?1:0)*Power(2,l+3*(1-even)),63);	//dot=1, dash=0
-		Letters.array[pa]=Braille(n);
+		Letters.array[pa]=NumberBraille(n);
 	}
 
 	if(p>3*s){//Restart
@@ -1499,12 +1499,7 @@ function Morse(L){
 
 }
 
-function Braille(n){
-	return BrailleSorted[n];
-}
-function BrailleNumber(braille){
-	return BrailleSorted.indexOf(braille.toLowerCase());
-}
+
 
 //Magnetism
 

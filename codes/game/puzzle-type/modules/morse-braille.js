@@ -134,7 +134,11 @@ var BrailleSorted=[
 "⠾",
 "⠿"];
 
+function NumberBraille(n){
+	return BrailleSorted[n];
 }
+function BrailleNumber(braille){
+	return BrailleSorted.indexOf(braille.toLowerCase());
 }
 
 }
