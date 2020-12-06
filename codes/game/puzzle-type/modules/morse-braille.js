@@ -141,12 +141,20 @@ function BrailleNumber(braille){
 	return BrailleSorted.indexOf(braille.toLowerCase());
 }
 
+Braille0Coordinates={
+	"01":"M 1 2 Q 1 1 2 1 Q 3 1 3 2 Q 3 3 2 3 Q 1 3 1 2 Z",
+	"02":"M 4 2 Q 4 1 5 1 Q 6 1 6 2 Q 6 3 5 3 Q 4 3 4 2 Z",
+	"03":"M 1 5 Q 1 4 2 4 Q 3 4 3 5 Q 3 6 2 6 Q 1 6 1 5 Z",
+	"04":"M 4 5 Q 4 4 5 4 Q 6 4 6 5 Q 6 6 5 6 Q 4 6 4 5 Z",
+	"05":"M 1 8 Q 1 7 2 7 Q 3 7 3 8 Q 3 9 2 9 Q 1 9 1 8 Z",
+	"06":"M 4 8 Q 4 7 5 7 Q 6 7 6 8 Q 6 9 5 9 Q 4 9 4 8 Z",
 }
 
+Braille1Coordinates={
+	"11":"M 1 2 Q 1 1 2 1 Q 3 1 3 2 Q 3 3 2 2 Q 1 1 1 2 Z",
+	"12":"M 4 2 Q 4 1 5 1 Q 6 1 6 2 Q 6 3 5 2 Q 4 1 4 2 Z",
+	"13":"M 1 5 Q 1 4 2 4 Q 3 4 3 5 Q 3 6 2 5 Q 1 4 1 5 Z",
+	"14":"M 4 5 Q 4 4 5 4 Q 6 4 6 5 Q 6 6 5 5 Q 4 4 4 5 Z",
+	"15":"M 1 8 Q 1 7 2 7 Q 3 7 3 8 Q 3 9 2 8 Q 1 7 1 8 Z",
+	"16":"M 4 8 Q 4 7 5 7 Q 6 7 6 8 Q 6 9 5 8 Q 4 7 4 8 Z",
 }
-
-		}
-		}
-	}
-
-
