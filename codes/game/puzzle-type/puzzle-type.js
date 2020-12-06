@@ -1456,47 +1456,39 @@ function FlipArray(array){
 
 //Morse
 function Morse(L){
-	var s="⠍⠕⠗⠎⠑".length*2;
+	
 	var used=Memo();
 	
 	var position=used.map(function(d){return MorseCode[d.toLowerCase()].length});
 	position=[0].concat(position).reduce(Accumulate);
 
-
-	// if(In(used,L)){
-	// 	ForbidCaret();
-	// 	AddStrokeInvalid(L);
-	// 	return;
-	// }
-
-	if(Prefixed("STATION3ICY",used.join("")+L))
-		AddStrokeUnderline(L);
-	else
-		AddStrokeValid(L);
+	AddStrokeValid(L);
 	
 	used.push(L);
 	Memo(used);
 
-	var dotdash=MorseCode[L.toLowerCase()].split("");
+	var morsestring=MorseCode[L.toLowerCase()].split("");
 
-	
-	var p,n,l,even, pa;
-	for(var i=0;i<dotdash.length;i++){		
-		p=position+i;							//start horizontal position with caret
-		l=Floor(p/s);								//line number (0, 1 or 2)
-		even=(p+1)%2;						
-		pa=Floor((p%s)/2);							//caret horizontal position
-		n=(pa<Letters.array.length)?BrailleNumber(Letters.array[pa]):0; //prior information
-		n=Min(n+(dotdash[i]==="."?1:0)*Power(2,l+3*(1-even)),63);	//dot=1, dash=0
-		Letters.array[pa]=NumberBraille(n);
+	var charlenh=2;
+	var charlenv=3;
+	var chardots=charlenh*charlenv;
+
+	var p,n,line,column,wordp,charp;
+	for(var i=0;i<morsestring.length;i++){		
+		p=position+i;		  					//full position
+		wordp=Floor(p/chardots);
+		charp=(p-wordp*chardots);
+		column=Floor(charp/charlenv);						
+		line=charp%charlenv;
+
+		console.log(position,p,wordp,charp,column,line);
+
+		n=(wordp<Letters.array.length)?BrailleNumber(Letters.array[wordp]):0; //prior information
+		n=Min(n+(morsestring[i]==="."?1:0)*Power(2,line+charlenv*column),63);		//dot=1, dash=0
+		Letters.array[wordp]=NumberBraille(n);
 	}
 
-	if(p>3*s){//Restart
-		Restart();
-		return;
-	}
-	else
-		Caret(Floor(((p+1)%s)/2));
+	Caret(Floor((p+1)/chardots));
 
 }
 
