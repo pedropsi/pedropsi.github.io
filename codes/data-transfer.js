@@ -5452,6 +5452,8 @@ SVGPathApply=function(path,CoordinatesF){
 }
 
 ViewboxCoordinates=function(viewBox){
+	if(!viewBox)
+		return [0,0,1,1];
 	return viewBox.split(new RegExp(SVGSpacePattern,"g")).map(Number);
 }
 
@@ -5478,18 +5480,22 @@ var SVGTransforms={
 	"rotate-270":(x,y,vbArray)=>RotateXY(x,y,vbArray[0],vbArray[1],vbArray[2],vbArray[3],false)
 }
 
+SVGPathDirectTransform=function(path,Transform,viewBox){
+	
+	var viewBoxArray=ViewboxCoordinates(viewBox);
+
+	function SVGCoordinatesF(xy){
+		return Transform(xy[0],xy[1],viewBoxArray)
+	}
+
+	return SVGPathApply(path,SVGCoordinatesF);
+}
+
 SVGPathTransform=function(path,name,viewBox){
 	if(!In(SVGTransforms,name))
 		return path;
 
-	var T=SVGTransforms[name];
-	var viewBoxArray=ViewboxCoordinates(viewBox);
-
-	function SVGCoordinatesF(xy){
-		return T(xy[0],xy[1],viewBoxArray)
-	}
-
-	return SVGPathApply(path,SVGCoordinatesF);
+	return SVGPathDirectTransform(path,SVGTransforms[name],viewBox);
 }
 
 SVGLineChange=function(svgline,F){
