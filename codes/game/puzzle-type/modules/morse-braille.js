@@ -47,7 +47,7 @@ function BiMorse(morse){
 		if(morse[i]===" ")
 			flip=!flip;
 		else
-			bimorse=bimorse+morse[i].replaceAll((flip)?".":"nothing","!").replaceAll((flip)?"-":"nothing","_").replaceAll((!flip)?"!":"nothing",".").replaceAll((!flip)?"_":"nothing","-");
+			bimorse=bimorse+morse[i].replaceAll((flip)?".":"nothing","!").replaceAll((flip)?"-":"nothing","~").replaceAll((!flip)?"!":"nothing",".").replaceAll((!flip)?"~":"nothing","-");
 	}
 	return bimorse;
 }
@@ -55,7 +55,7 @@ function BiMorse(morse){
 function BiMorseAdd(bimo,L){
 	var Flipper=Identity;
 	if(bimo&&In(".-",Last(bimo)))
-		Flipper=function(c){return c.replaceAll(".","!").replaceAll("-","_")};
+		Flipper=function(c){return c.replaceAll(".","!").replaceAll("-","~")};
 	var L=Flipper(Accesser(MorseCode,LowerCase)(L));
 	return bimo+L;
 }
@@ -69,27 +69,24 @@ function BiMorseLetters(bimorse){
 }
 
 BiBrailleShapes={
-	"0":"M 0 1 Q 0 0 1 0 Q 2 0 2 1 Q 2 2 1 2 Q 0 2 0 1 Z",
-	"1":"M 0 1 L 1 2 L 2 1 L 1 0 Z"
+	".":"M 0 1 Q 0 0 1 0 Q 2 0 2 1 Q 2 2 1 2 Q 0 2 0 1 Z",
+	"!":"M 0 1 L 1 2 L 2 1 L 1 0 Z",
+	"-":"M 0 1 L 1 1 L 1 1.1 L 0 1.1 L 0 1 Z",
+	"~":"M 1 0 L 1 1 L 1.1 1 L 1.1 0 L 1 0 Z"
 }
 
-function BrailleCoordinates(code){
+function BrailleCoordinates(code,position){
 	var hdist=4;
 	var vdist=4;
-	var shape=BiBrailleShapes[First(code)];
-	var n=Last(code);
-		shape=SVGPathDirectTransform(shape,(x,y)=>[x+Floor(n/3)*hdist,y+(n%3)*vdist]);
+	var shape=BiBrailleShapes[code];
+		shape=SVGPathDirectTransform(shape,(x,y)=>[x+Floor(position/3)*hdist,y+(position%3)*vdist]);
 	return shape;
 }
 
 function BrailleLetterSVGHTML(bimorsestring){
 	var path="M 0 0";
-	var code;
 	for(var j=0;j<bimorsestring.length;j++){
-		if(!In("-_",bimorsestring[j])){
-			code=(bimorsestring[j]==="."?"0":"1")+j;
-			path=path+" "+BrailleCoordinates(code);
-		}
+		path=path+" "+BrailleCoordinates(bimorsestring[j],j);
 	}
 
 	return SVGHTML({

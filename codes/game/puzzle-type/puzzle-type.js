@@ -761,7 +761,6 @@ var GoalObfuscators={
 }
 
 var LevelGoalAliases={
-	//"._!.-_!_!-!_!!.-!__...__.-__.-":"EnactLawsMama",
 	"Morse":"EnactLawsMama",
 	"⠍⠕⠗⠎⠑":"EnactLawsMama",
 	"Vowel":"Consonant",
