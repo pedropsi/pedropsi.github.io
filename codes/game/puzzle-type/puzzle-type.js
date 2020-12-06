@@ -743,6 +743,7 @@ function RestrictPlayableLevels(){
 RestrictPlayableLevels();
 
 var LevelGoalAliases={
+	"Morse":"⠍⠕⠗⠎⠑",
 	"Vowel":"Consonant",
 	"Homeomorphic":"Topological",
 	"Loosely less":"Calculator",
