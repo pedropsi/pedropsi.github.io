@@ -100,24 +100,23 @@ StartGIF=function(gid){
 
 		var s=Power(w*h,0.5)/3;
 
-		DrawPolygon({
+		DrawCircle({
 			"size":s/2,
 			"fillColor":getComputedStyle(c)["color"],
 			"strokeColor":getComputedStyle(c)["background-color"],
 			"lineWidth":s/20,
-			"n":1,
 			x:w/2,
 			y:h/2,
-			"ctx":".gifcanvas"
+			"target":".gifcanvas"
 		});
 
-		DrawPolygon({
+		DrawRegularPolygon({
 			"size":s/2*0.8,
 			"fillColor":getComputedStyle(c)["background-color"],
 			"n":3,
 			x:w/2,
 			y:h/2,
-			"ctx":".gifcanvas"
+			"target":".gifcanvas"
 		});
 
 	}
