@@ -3961,6 +3961,37 @@ ListenNoMoreNode=function(lobj){
 	return RequireEventsNode();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// Drag Action
+
+function XYHandler(Action){
+	return function(e){
+		var el=GetElement(e.target);
+		var r=el.getBoundingClientRect();
+		var Xscale=el.width /r.width ;
+		var Yscale=el.height/r.height;
+		var X=(e.clientX-r.left)*Xscale;
+		var Y=(e.clientY-r.top )*Yscale;
+		Action(X,Y);
+	}
+}
+
+function AttendDrag(Actions,target){
+	if(!Actions.Starter)
+		return;
+
+	var Starter=function(ev){
+		XYHandler(Actions.Starter)(ev);
+		var Executer=XYHandler(Actions.Executer)||Identity;
+		Attend("mousemove",Executer,target);
+		var Ender=function(e){
+			XYHandler(Actions.Ender||Identity)(e);
+			UnAttend("mousemove",target);
+		}
+		AttendOnce("mouseup",Ender,target);
+	}
+	Attend("mousedown",Starter,target);
+};
 
 ////////////////////////////////////////////////////////////////////////////////
 // Data submission in forms
