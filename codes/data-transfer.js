@@ -3977,18 +3977,23 @@ function XYHandler(Action){
 }
 
 function AttendDrag(Actions,target){
-	if(!Actions.Starter)
+	if(!Actions.Starter&&!Actions.AltStarter)
 		return;
-
 	var Starter=function(ev){
-		XYHandler(Actions.Starter)(ev);
+		if(ev.which!==1)
+			XYHandler(Actions.AltStarter)(ev);	
+		else
+			XYHandler(Actions.Starter)(ev);
+
 		var Executer=XYHandler(Actions.Executer)||Identity;
 		Attend("mousemove",Executer,target);
-		var Ender=function(e){
-			XYHandler(Actions.Ender||Identity)(e);
+		var Ender=function(ev){
+			console.log("ended");
+			XYHandler(Actions.Ender||Identity)(ev);
 			UnAttend("mousemove",target);
+			UnAttend("mouseup",target);
 		}
-		AttendOnce("mouseup",Ender,target);
+		Attend("mouseup",Ender,target);
 	}
 	Attend("mousedown",Starter,target);
 };

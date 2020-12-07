@@ -224,6 +224,11 @@ function AddHighlightableCells(x,y){
 	ContinueHighlightableCells(x,y);
 }
 
+function PickHighlightableCells(x,y){
+	colour=colours[First(PolygonIntersections(x,y))];
+	ContinueHighlightableCells(x,y);
+}
+
 function ContinueHighlightableCells(x,y){
 	var cells=Complement(PolygonIntersections(x,y),selected);
 	selected=selected.concat(cells);
