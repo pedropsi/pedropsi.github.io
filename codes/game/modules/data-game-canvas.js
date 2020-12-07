@@ -75,7 +75,7 @@ DrawCircle=function(opts){
 	opts.Drawer=function(opts){
 		opts.ctx.arc(opts.x,opts.y,opts.size,0,PI*2);
 	}
-	DrawShape(opts)
+	DrawShape(opts);
 }
 
 DrawRectangles=function(opts,coordinates){

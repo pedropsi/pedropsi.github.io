@@ -10,23 +10,33 @@ function BWCellId(w,h,d,horizDivided){
 	return ""+w+" "+h+" "+d+" "+(HorizontallyDivided(w,h,horizDivided)?"-":"|");
 }
 
-function BWCellPolygon(w,h,d,width,height,divisions,horizDivided){
-	var cwidth=1000;
-	var cheight=1000;
+function BWCellPolygon(w,h,d,width,height,divisions,horizDivided,cwidth,cheight){
 	if(HorizontallyDivided(w,h,horizDivided))
 		return [
-			[w*cwidth/width,h*cheight/height],
-			[(w+1)*cwidth/width,(h+d/divisions)*cheight/height],
-			[(w+1)*cwidth/width,(h+(d+1)/divisions)*cheight/height],
-			[cwidth/width,(h+(d+1)/divisions)*cheight/height]
+			w*cwidth/width,
+			(h+d/divisions)*cheight/height,
+			(1)*cwidth/width,
+			(1/divisions)*cheight/height
 		];
 	else
 		return [
-			[w*cwidth/width,h*cheight/height],
-			[(w+d/divisions)*cwidth/width,h*cheight/height],
-			[(w+(d+1)/divisions)*cwidth/width,(h+1)*cheight/height],
-			[cwidth/width,(h+1)*cheight/height]
+			(w+d/divisions)*cwidth/width,
+			h*cheight/height,
+			(1/divisions)*cwidth/width,
+			(1)*cheight/height
 		];
+}
+
+function BWPolygons(width,height,divisions,horizDivided,cwidth,cheight){
+	var polygons=[];
+	for(var w=0;w<width;w++){
+		for(var h=0;h<height;h++){
+			for(var d=0;d<divisions;d++){
+				polygons.push(BWCellPolygon(w,h,d,width,height,divisions,horizDivided,cwidth,cheight))
+			}
+		}
+	}
+	return polygons;
 }
 
 function HorizontallyDivided(w,h,horizDivided){
