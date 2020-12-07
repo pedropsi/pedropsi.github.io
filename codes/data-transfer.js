@@ -1698,6 +1698,7 @@ GenerateId=function(){
 ////////////////////////////////////////////////////////////////////////////////
 //Load resources
 
+ImageExtensions=["apng","bmp","gif","ico","cur","jpg","jpeg","jp2","jpx","j2k","j2c","jif","jfif","pjpeg","pjp","png","svg","tif","tiff","webp"];
 
 SourceCoerceExtension=function(src,extensions,defaultext){
 	var defaultext=Prefix(defaultext,".");
@@ -4875,107 +4876,7 @@ CyclePrevBounded=function(array){
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//Image
-ImageExtensions=["apng","bmp","gif","ico","cur","jpg","jpeg","jp2","jpx","j2k","j2c","jif","jfif","pjpeg","pjp","png","svg","tif","tiff","webp"];
 
-LoadImage=function(fullpath,parentIDsel){
-
-	function ImageReplace(data){
-		if(data==="")
-			return console.log("no image found at: "+fullpath);
-
-		if(IsGif(fullpath)){
-			gifID=GenerateId();
-			loaded=ImageHTML({attributes:{id:gifID,src:fullpath,onload:'StartGIF('+gifID+')',tabindex:'0',class:"gif"}});
-		}
-		else
-			loaded=ImageHTML({attributes:{src:fullpath}});
-
-		ReplaceChildren(loaded,parentIDsel);
-	}
-
-	LoadData(fullpath,ImageReplace);
-}
-
-IsImageReference=function(ref){
-	return ImageExtensions.some(function(ext){return Posfixed(ref,Prefix(ext,"."))});
-}
-
-//GIF Pause Support
-IsGif=function(ref){
-	return Posfixed(ref,".gif");
-}
-
-StartGIF=function(gid){
-	var g=GetElement(gid);
-
-	RemoveElement(GetInElement("CANVAS",g.parentElement));
-	var c=AddElement("<canvas class='gif gifcanvas' tabindex='0'></canvas>",g.parentElement);
-
-	HideElement(g);
-	ResizeGIF();
-	c.addEventListener('resize',ResizeGIF);
-	StartGIF.e=c;
-	ListenOnce('click',PlayGif(c,gid),c);
-
-	function ResizeGIF(){
-		var g=GetElement(gid);
-		var c=g.nextSibling;
-		var w=g.width;
-		var h=g.height;
-		c.width=w;
-		c.height=h;
-		DrawImage({
-			"elem":g,
-			"width":w,
-			"height":h,
-			"ctx":".gifcanvas"
-		});
-
-		var s=Power(w*h,0.5)/3;
-
-		DrawPolygon({
-			"size":s/2,
-			"fillColor":getComputedStyle(c)["color"],
-			"strokeColor":getComputedStyle(c)["background-color"],
-			"lineWidth":s/20,
-			"n":1,
-			x:w/2,
-			y:h/2,
-			"ctx":".gifcanvas"
-		});
-
-		DrawPolygon({
-			"size":s/2*0.8,
-			"fillColor":getComputedStyle(c)["background-color"],
-			"n":3,
-			x:w/2,
-			y:h/2,
-			"ctx":".gifcanvas"
-		});
-
-	}
-
-}
-
-PlayGif=function(c,gid){
-	return function(){
-		var g=GetElement(gid);
-		function SG(){
-			return StartGIF(gid)
-		}
-		StartGIF.e=g;
-		ListenOnce('click',SG,g);
-		UnHideElement(g);
-		HideElement(c);
-	}
-}
-
-PlayPauseGif=function(){
-	if(StartGIF.e)
-		StartGIF.e.click();
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Reduce

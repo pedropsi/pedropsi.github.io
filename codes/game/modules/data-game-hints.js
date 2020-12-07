@@ -49,6 +49,99 @@ function LoadHints(){
 		return LoadHintsFile();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//Hint images
+
+HintImage=function(fullpath){
+	if(IsGif(fullpath)){
+		gifID=GenerateId();
+		loaded=ImageHTML({attributes:{id:gifID,src:fullpath,onload:'StartGIF('+gifID+')',tabindex:'0',class:"gif"}});
+	}
+	else
+		loaded=ImageHTML({attributes:{src:fullpath}});
+	
+	return `<div class='hint'>${loaded}</div>`;
+}
+
+IsImageReference=function(ref){
+	return ImageExtensions.some(function(ext){return Posfixed(ref,Prefix(ext,"."))});
+}
+
+//GIF Pause Support
+IsGif=function(ref){
+	return Posfixed(ref,".gif");
+}
+
+StartGIF=function(gid){
+	var g=GetElement(gid);
+
+	RemoveElement(GetInElement("CANVAS",g.parentElement));
+	var c=AddElement("<canvas class='gif gifcanvas' tabindex='0'></canvas>",g.parentElement);
+
+	HideElement(g);
+	ResizeGIF();
+	c.addEventListener('resize',ResizeGIF);
+	StartGIF.e=c;
+	ListenOnce('click',PlayGif(c,gid),c);
+
+	function ResizeGIF(){
+		var g=GetElement(gid);
+		var c=g.nextSibling;
+		var w=g.width;
+		var h=g.height;
+		c.width=w;
+		c.height=h;
+		DrawImage({
+			"elem":g,
+			"width":w,
+			"height":h,
+			"ctx":".gifcanvas"
+		});
+
+		var s=Power(w*h,0.5)/3;
+
+		DrawPolygon({
+			"size":s/2,
+			"fillColor":getComputedStyle(c)["color"],
+			"strokeColor":getComputedStyle(c)["background-color"],
+			"lineWidth":s/20,
+			"n":1,
+			x:w/2,
+			y:h/2,
+			"ctx":".gifcanvas"
+		});
+
+		DrawPolygon({
+			"size":s/2*0.8,
+			"fillColor":getComputedStyle(c)["background-color"],
+			"n":3,
+			x:w/2,
+			y:h/2,
+			"ctx":".gifcanvas"
+		});
+
+	}
+
+}
+
+PlayGif=function(c,gid){
+	return function(){
+		var g=GetElement(gid);
+		function SG(){
+			return StartGIF(gid)
+		}
+		StartGIF.e=g;
+		ListenOnce('click',SG,g);
+		UnHideElement(g);
+		HideElement(c);
+	}
+}
+
+PlayPauseGif=function(){
+	if(StartGIF.e)
+		StartGIF.e.click();
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //Text hints
@@ -84,9 +177,7 @@ function StartHints(hints){
 function HintDisplay(reference){
 	var fullpath=ObtainHintsPath()+PageIdentifier()+"/"+reference.replace(/\s*/,"");
 	if(IsImageReference(fullpath)){
-		var parentid=GenerateId();
-		LoadImage(fullpath,parentid);
-		return "<div class='hint' id='"+parentid+"'>"+PlaceholderImageHTML()+"</div>";
+		return HintImage(fullpath);
 	}
 	return "<div class='hint'><p>"+reference+"</p></div>";
 }
