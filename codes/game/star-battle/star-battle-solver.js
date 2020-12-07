@@ -4,7 +4,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
+
+///////////////////////////////////////////////////////////////////////////////
 //Basket Weave: BW
+// w: iterates horizontally
+// h: iterates vertically
+// d: iterates within each square - horizontally or vertically, depending on wheter HorizontallyDivided yields true or false
+
 
 function BWCellId(w,h,d,horizDivided){
 	return ""+w+" "+h+" "+d+" "+(HorizontallyDivided(w,h,horizDivided)?"-":"|");
@@ -28,11 +34,11 @@ function BWCellPolygon(w,h,d,width,height,divisions,horizDivided,cwidth,cheight)
 }
 
 function BWPolygons(width,height,divisions,horizDivided,cwidth,cheight){
-	var polygons=[];
+	var polygons={};
 	for(var w=0;w<width;w++){
 		for(var h=0;h<height;h++){
 			for(var d=0;d<divisions;d++){
-				polygons.push(BWCellPolygon(w,h,d,width,height,divisions,horizDivided,cwidth,cheight))
+				polygons[BWCellId(w,h,d,horizDivided)]=BWCellPolygon(w,h,d,width,height,divisions,horizDivided,cwidth,cheight);
 			}
 		}
 	}
@@ -181,3 +187,58 @@ function BWGraph(width,height,divisions,horizDivided){
 	return graph;
 }
 
+
+//UI
+
+var polygons=BWPolygons(6,6,2,true,600,600);
+
+function PolygonIntersections(x,y){
+	return Keys(polygons).filter(function(k){
+		var p=polygons[k];
+		return (x>=p[0])&&(x<=(p[0]+p[2]))&&(y>=p[1])&&(y<=(p[1]+p[3]))
+	});
+}
+function HighlightPolygons(cells,opts){
+	var opts={
+		lineWidth:"10px",
+		fillColor:"rgba(255,100,100,0.05)",
+		strokeColor:"rgba(255,100,100,0.1)",
+		...opts
+	};
+	DrawRectangles(opts,cells.map(k=>polygons[k])
+	)
+}
+
+
+
+var selected=[];
+var colours={};
+function RandomHEX(){
+	return HEX(Huen("#FFAAAA",RandomChoice(Range(0,360)))).colour;
+}
+var colour=RandomHEX();
+Keys(polygons).map(k=>colours[k]=colour);
+
+function AddHighlightableCells(x,y){
+	colour=RandomHEX();
+	ContinueHighlightableCells(x,y);
+}
+
+function ContinueHighlightableCells(x,y){
+	var cells=Complement(PolygonIntersections(x,y),selected);
+	selected=selected.concat(cells);
+	cells.map(c=>colours[c]=colour);
+	HighlightPolygons(cells,{fillColor:colour});
+}
+
+function ClearHighlightableCells(x,y){
+	selected=[];
+}
+
+
+
+// AttendDrag({
+// 	Starter:AddHighlightableCells,
+// 	Executer:AddHighlightableCells,
+// 	Ender:ClearHighlightableCells,
+// },"canvas")
