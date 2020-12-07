@@ -36,6 +36,7 @@ var InnerModules=[
 
 var OuterModules=[
 	"data-game-moves",
+	"data-game-canvas",//required for hints
 	"data-game-hints",
 	"data-game-stats",
 	"data-game-macros"
