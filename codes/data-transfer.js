@@ -50,8 +50,22 @@ UnFunction=function(data){
 		return data;
 }
 
+Empty=function(AOS){
+	if(IsArray(AOS))
+		return [];
+	if(IsObject(AOS))
+		return {};
+	if(IsString(AOS))
+		return "";
+	
+	console.log("empty what?",AOS);
+	return AOS;
+}
+
 ArgumentExtender=function(F){ // From pairs to infinite number of arguments
 	return function(...args){
+		if(args.length===0)
+			return null;
 		if(args.length<=2)
 			return F(...args);
 		else
@@ -629,7 +643,11 @@ ObjectComplement=function(objInclude,objExclude){
 	return unique;
 }
 
-BiComplement=function(){
+BiComplement=function(AO1,AO2){
+	if(!AO2)
+		return AO1;
+	if(!AO1)
+		return Empty(AO2);
 	return ObjectArrayF(ArrayComplement,ObjectComplement)(...arguments);
 }
 
@@ -659,8 +677,12 @@ ObjectIntersection=function(array1,array2){
 }
 
 
-BiIntersection=function(){
-	return ObjectArrayF(ArrayIntersection,ObjectIntersection)(...arguments);
+BiIntersection=function(AO1,AO2){
+	if(!AO2)
+		return AO1;
+	if(!AO1)
+		return Empty(AO2);
+	return ObjectArrayF(ArrayIntersection,ObjectIntersection)(AO1,AO2);
 }
 var Intersection=ArgumentExtender(BiIntersection);
 
@@ -668,6 +690,8 @@ var Intersection=ArgumentExtender(BiIntersection);
 BiUnion=function(AO1,AO2){
 	if(!AO2)
 		return Unique(AO1);
+	if(!AO1)
+		return Unique(AO2);
 	return Unique(AO1.concat(AO2));
 }
 
