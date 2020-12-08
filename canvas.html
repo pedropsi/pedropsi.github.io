@@ -6,7 +6,8 @@
 
 <script id="post">var v={POST:()=>`
 
-<p>Region mode:${TogglerButtonHTML("RegionModeActive")}.</p>
+<p>Region mode:${TogglerButtonHTML("RegionModeActive","RegionModeToggle")}.</p>
+<p>${ButtonHTML({txt:"Check",onclick:`function(){ConsoleAdd(StarBattleSolved(SBGRAPH))}`})}.</p>
 
 `};</script><script src="data/page.js"></script>
 
