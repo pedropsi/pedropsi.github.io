@@ -27,12 +27,16 @@ RegularPolygonPoints=function(opts){
 	var n=opts.n?opts.n:3;								//Number of sides
 	var startAngle=opts.startAngle?opts.startAngle:0;	//StartAngle
 	var coordinates=[];
+	var star=opts.star?true:false;
+	var weight=opts.weight?opts.weight:0.5;
 	if(n>=3){
 		for (var i=0;i<n;i++){
 			var angle=startAngle+i*PI*2/n;
 			var xpos=x+size*Cos(angle);
 			var ypos=y+size*Sin(angle);
 			coordinates.push([xpos,ypos]);
+			if(star)
+				coordinates.push([x+size*weight*Cos(angle+PI/n),y+size*weight*Sin(angle+PI/n)]);
 		}
 	}
 	return coordinates
@@ -59,6 +63,11 @@ DrawShape=function(opts){
 		ctx.strokeStyle=strokeColor;
 		ctx.stroke();
 	}
+}
+
+DrawStar=function(opts){
+	var opts={...opts,star:true};
+	DrawRegularPolygon(opts);
 }
 
 DrawRegularPolygon=function(opts){

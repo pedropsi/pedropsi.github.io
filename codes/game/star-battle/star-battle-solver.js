@@ -190,7 +190,15 @@ function BWGraph(width,height,divisions,horizDivided){
 
 //UI
 
-var polygons=BWPolygons(6,6,2,true,600,600);
+var W=6;
+var H=6;
+var D=2;
+var P=true;
+var CWIDTH=800;
+var CHEIGHT=300;
+
+
+var polygons=BWPolygons(W,H,D,P,CWIDTH,CHEIGHT);
 
 function PolygonIntersections(x,y){
 	return Keys(polygons).filter(function(k){
@@ -198,15 +206,46 @@ function PolygonIntersections(x,y){
 		return (x>=p[0])&&(x<=(p[0]+p[2]))&&(y>=p[1])&&(y<=(p[1]+p[3]))
 	});
 }
+
+var LW=Max(1,Floor((CWIDTH/W/100*CHEIGHT/H/100)**0.5));
+
 function HighlightPolygons(cells,opts){
 	var opts={
-		lineWidth:"10px",
+		lineWidth:`${LW}px`,
 		fillColor:"rgba(255,100,100,0.05)",
-		strokeColor:"rgba(255,100,100,0.1)",
+		strokeColor:"rgba(255,100,100,1)",
 		...opts
 	};
 	DrawRectangles(opts,cells.map(k=>polygons[k])
 	)
+}
+
+function HighlightStar(cell,opts){
+	var opts={
+		lineWidth:`${LW}px`,
+		fillColor:"black",
+		strokeColor:"transparent",
+		star:true,
+		n:7,
+		size:Min(CWIDTH/W/D/4,CHEIGHT/H/D/4),
+		...opts,
+		...StarXY(cell)
+	};
+	DrawStar(opts);
+}
+
+function UnHighlightStar(cell,opts){
+	HighlightStar(cell,{
+		...opts,
+		lineWidth:`${2*LW}px`,
+		fillColor:colours[cell],
+		strokeColor:colours[cell]
+	})
+}
+
+function StarXY(cell){
+	var p=polygons[cell];
+	return {x:p[0]+p[2]/2,y:p[1]+p[3]/2}
 }
 
 
@@ -216,34 +255,95 @@ var colours={};
 function RandomHEX(){
 	return HEX(Huen("#FFAAAA",RandomChoice(Range(0,360)))).colour;
 }
-var colour=RandomHEX();
+var colour="white";
 Keys(polygons).map(k=>colours[k]=colour);
 
-function AddHighlightableCells(x,y){
+
+var stars={};
+var staraddmode=true;
+
+RegionModeActive=StatusReporter(
+	"RegionModeActive",
+	function(){return true}
+)
+
+
+
+function AddStarCells(x,y){
+	var cell=First(PolygonIntersections(x,y));
+	if(stars[cell])
+		staraddmode=false;
+	else
+		staraddmode=true;
+	ContinueStarCells(x,y);
+}
+
+function ContinueStarCells(x,y){
+	var cells=Complement(PolygonIntersections(x,y),selected);
+	selected=selected.concat(cells);
+	cells.map(function(cell){
+		if(staraddmode){
+			stars[cell]=true;
+			HighlightStar(cell);
+		}else{
+			delete stars[cell];
+			UnHighlightStar(cell);
+		}
+	})
+}
+
+function AddRegionCells(x,y){
 	colour=RandomHEX();
-	ContinueHighlightableCells(x,y);
+	ContinueRegionCells(x,y);
 }
 
-function PickHighlightableCells(x,y){
+function PickRegionCells(x,y){
 	colour=colours[First(PolygonIntersections(x,y))];
-	ContinueHighlightableCells(x,y);
+	ContinueRegionCells(x,y);
 }
 
-function ContinueHighlightableCells(x,y){
+function ContinueRegionCells(x,y){
 	var cells=Complement(PolygonIntersections(x,y),selected);
 	selected=selected.concat(cells);
 	cells.map(c=>colours[c]=colour);
-	HighlightPolygons(cells,{fillColor:colour});
+	HighlightPolygons(cells,{
+		strokeColor:HEX(Darken(colour,2)).colour,
+		fillColor:colour
+	});
+	cells.map(
+		cell=>stars[cell]?HighlightStar(cell):Identity
+	)
 }
 
-function ClearHighlightableCells(x,y){
+function ClearSelectedCells(x,y){
 	selected=[];
 }
 
 
+function StarActionStarter(x,y){
+	return RegionModeActive()?AddRegionCells(x,y):AddStarCells(x,y);
+}
+function StarActionAltStarter(x,y){
+	return 	RegionModeActive()?PickRegionCells(x,y):Identity(x,y); //TODO,
+}
+function StarActionContinuer(x,y){
+	return RegionModeActive()?ContinueRegionCells(x,y):ContinueStarCells(x,y);
+}
+function StarActionEnder(x,y){
+	return ClearSelectedCells(x,y);	
+}
 
-// AttendDrag({
-// 	Starter:AddHighlightableCells,
-// 	Executer:AddHighlightableCells,
-// 	Ender:ClearHighlightableCells,
-// },"canvas")
+var StarDragActions={
+	Starter:StarActionStarter,
+	AltStarter:StarActionAltStarter,
+	Executer:StarActionContinuer,
+	Ender:StarActionEnder
+}
+
+setTimeout(function(){
+	PreAddElement(`<canvas id="test" width="${CWIDTH}" height="${CHEIGHT}"></div>`,"body");
+	AttendDrag(StarDragActions,"canvas");
+	// OverwriteShortcuts("canvas",{
+	// 	"R":function(){RegionModeActive=RegionModeActive()?False:True}
+	// })
+},1000)
