@@ -50,6 +50,15 @@ UnFunction=function(data){
 		return data;
 }
 
+ArgumentExtender=function(F){ // From pairs to infinite number of arguments
+	return function(...args){
+		if(args.length<=2)
+			return F(...args);
+		else
+			return Fold(F,args[0],Rest(args));
+	}
+}
+
 //Functional Sorting
 
 SingleSorter=function(F){
@@ -620,9 +629,11 @@ ObjectComplement=function(objInclude,objExclude){
 	return unique;
 }
 
-Complement=function(){
+BiComplement=function(){
 	return ObjectArrayF(ArrayComplement,ObjectComplement)(...arguments);
 }
+
+Complement=ArgumentExtender(BiComplement);
 
 //Intersection (force uniqueness, sort)
 ArrayIntersection=function(array1,array2){
@@ -647,16 +658,21 @@ ObjectIntersection=function(array1,array2){
 	return unique;
 }
 
-Intersection=function(){
+
+BiIntersection=function(){
 	return ObjectArrayF(ArrayIntersection,ObjectIntersection)(...arguments);
 }
+var Intersection=ArgumentExtender(BiIntersection);
 
 //Union (force uniqueness, sort)
-Union=function(AO1,AO2){
+BiUnion=function(AO1,AO2){
 	if(!AO2)
 		return Unique(AO1);
 	return Unique(AO1.concat(AO2));
 }
+
+var Union=ArgumentExtender(BiUnion);
+
 
 //Permutations of a set (enforces uniqueness or sort)
 // Permutations=function(array){
