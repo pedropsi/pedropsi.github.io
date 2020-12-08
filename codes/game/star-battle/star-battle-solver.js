@@ -102,9 +102,9 @@ function BWCellAdjacencies(w,h,d,width,height,divisions,horizDivided){
 			Range(0,divisions-1).map(di=>AdjPush(w+1,h,di));
 			//corners
 			if(h>0)
-				AdjPush(w+1,h-1,1);
+				AdjPush(w+1,h-1,0);
 			if(h<height-1)
-				AdjPush(w+1,h+1,1);
+				AdjPush(w+1,h+1,0);
 		}
 		if(d<divisions-1)//right, within
 			AdjPush(w,h,d+1);
@@ -119,15 +119,15 @@ function BWCellAdjacencies(w,h,d,width,height,divisions,horizDivided){
 }
 
 function BWCellVLine(w,h,d,width,height,divisions,horizDivided){
-	var lines=[];
+	var line=[];
 	function LinePush(ww,hh,dd){
-		lines.push(BWCellId(ww,hh,dd,horizDivided));
+		line.push(BWCellId(ww,hh,dd,horizDivided));
 	}
 	if(HorizontallyDivided(w,h,horizDivided)){
-		//Vertical line
-		for(var hi=0;hi<height;hi++){
-			Range(0,divisions-1).map(di=>LinePush(w,hi,di));
-		}
+		// //Vertical line
+		// for(var hi=0;hi<height;hi++){
+		// 	Range(0,divisions-1).map(di=>LinePush(w,hi,di));
+		// }
 	}
 	else{
 		//Vertical line
@@ -138,13 +138,13 @@ function BWCellVLine(w,h,d,width,height,divisions,horizDivided){
 				Range(0,divisions-1).map(di=>LinePush(w,hi,di));
 		}
 	}
-	return lines;
+	return line;
 }
 
 function BWCellHLine(w,h,d,width,height,divisions,horizDivided){
-	var lines=[];
+	var line=[];
 	function LinePush(ww,hh,dd){
-		lines.push(BWCellId(ww,hh,dd,horizDivided));
+		line.push(BWCellId(ww,hh,dd,horizDivided));
 	}
 	if(HorizontallyDivided(w,h,horizDivided)){
 		//Horizontal line
@@ -156,39 +156,52 @@ function BWCellHLine(w,h,d,width,height,divisions,horizDivided){
 		}
 	}
 	else{
-		//Horizontal line
-		for(var wi=0;wi<width;wi++){
-			Range(0,divisions-1).map(di=>LinePush(wi,h,di));
-		}
+		// //Horizontal line
+		// for(var wi=0;wi<width;wi++){
+		// 	Range(0,divisions-1).map(di=>LinePush(wi,h,di));
+		// }
 	}
-	return lines;
+	return line;
 }
 
 function BWGraph(width,height,divisions,horizDivided){
 	var graph={
-		vlines:{},
-		hlines:{},
+		geometry:"basket weave",
+		Aligners:{
+			vlines:BWCellVLine,
+			hlines:BWCellHLine,
+		},
+		lines:{},
 		adjacencies:{}
 	};
 	var cell="";
 	var horizDivided=horizDivided?1:0;
+	var linetypes=Keys(graph.Aligners);
+		linetypes.map(type=>graph.lines[type]={});
 	for(var w=0;w<width;w++){
 		for(var h=0;h<height;h++){
 			for(var d=0;d<divisions;d++){
 				cell=BWCellId(w,h,d,horizDivided);
 				graph.adjacencies[cell]=BWCellAdjacencies(w,h,d,width,height,divisions,horizDivided);
-				if(!Values(graph.vlines).some(line=>In(line,cell)))
-					graph.vlines[cell]=BWCellVLine(w,h,d,width,height,divisions,horizDivided);
-				if(!Values(graph.hlines).some(line=>In(line,cell)))
-					graph.hlines[cell]=BWCellHLine(w,h,d,width,height,divisions,horizDivided);
+				linetypes.map(function(type){
+					if(!Values(graph.lines[type]).some(line=>In(line,cell)))
+						graph.lines[type][cell]=graph.Aligners[type](w,h,d,width,height,divisions,horizDivided);
+				})
 			}
 		}
 	}
+	linetypes.map(function(type){
+		var l=graph.lines[type];
+		var emptylines=Keys(l).filter(k=>l[k].length<1);
+		emptylines.map(k=>delete l[k]);
+	});
+
 	return graph;
 }
 
 
-//UI
+///////////////////////////////////////////////////////////////////////////////
+//Interactive UI (for quick iteration)
 
 var W=6;
 var H=6;
@@ -408,4 +421,83 @@ setTimeout(function(){
 	// OverwriteShortcuts("canvas",{
 	// 	"R":function(){RegionModeActive=RegionModeActive()?False:True}
 	// })
-},1000)
+},100)
+
+
+// function LoadGraph(graph){
+
+// }
+
+function CopyGraph(graph){
+	ClipboardCopy(JSON.stringify(graph),"Graph copied!")
+}
+
+
+
+// function GraphSerial(graph){
+
+// }
+
+// function SerialGraph(serial){
+
+// }
+
+///////////////////////////////////////////////////////////////////////////////
+//Solver
+
+function ColoursRegions(colours){
+	var regions={};
+	Unique(Values(colours)).map(c=>regions[c]=[]);
+	Keys(colours).map(k=>regions[colours[k]].push(k));
+	return regions;
+}
+
+var STARSPERLINE=1;
+var STARSPERREGION=1;
+var STARSPERADJACENCY=0;
+
+function StarBattleGraph(){
+	var graph=BWGraph(W,H,D,P)
+		graph.regions=ColoursRegions(colours);
+		graph.conditions={
+			line:STARSPERLINE,
+			region:STARSPERREGION,
+			adjacency:STARSPERADJACENCY
+		};
+		graph.shades=crosses;
+		graph.stars=stars;
+		graph.solvable="?";
+	return graph;
+}
+
+function StarBattleFull(graph){
+	return Keys(graph.adjacencies).every(cell=>In(graph.stars,cell)||In(graph.shades,cell));
+}
+
+
+function StarBattleSolved(graph){
+	return StarBattleLinesSolved(graph)&&StarBattleRegionsSolved(graph)&&StarBattleAdjacenciesValid(graph);
+}
+
+function StarBattleRegionsSolved(graph){
+	var regionstars=Values(graph.regions);
+	var stars=Keys(graph.stars);
+	var n=graph.conditions.region;
+	return regionstars.every(region=>Count(region,cell=>In(stars,cell))===n);
+}
+
+function StarBattleAdjacenciesValid(graph){
+	var activeadjacencies=Keys(graph.stars).map(s=>graph.adjacencies[s]);
+	var n=graph.conditions.adjacency;
+	return activeadjacencies.every(adja=>Count(adja,cell=>In(stars,cell))===n);
+}
+
+function StarBattleLinesSolved(graph){
+	return Keys(graph.lines).every(type=>StarBattleLinesValid(graph,graph.lines[type]));
+}
+
+function StarBattleLinesValid(graph,lines){
+	var lines=Values(lines);
+	var n=graph.conditions.line;
+	return lines.every(line=>Count(line,cell=>In(stars,cell))===n);
+}
