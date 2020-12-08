@@ -6099,19 +6099,23 @@ AwaitElement=function(selector,result){
 ///////////////////////////////////////////////////////////////////////////////
 //Clipboard
 
+function ClipboardCopy(text,notice){
+	if (!navigator.clipboard)
+			return;
+	if(!text)
+		return;
+	navigator.clipboard.writeText(text);
+	ConsoleAdd(notice||`"${text}" copied to clipboard!`);
+};
+
 CopyHandler = function(Extractor,parentSelector){
 	return function(event){
-		if (!navigator.clipboard)
-			return;
 		if(parentSelector&&!GetElement(parentSelector).contains(event.target))
 			return;
 		var text=Extractor(event.target);
-		function CopyLogger(){
-			navigator.clipboard.writeText(text);
-			ConsoleAdd(`"${text}" copied to clipboard!`)
-		};
 		if(!text)
 			return;
+		function CopyLogger(){ClipboardCopy(text)};
 		try{Throttle(CopyLogger,500)}
 		catch(err){	}
 	};
