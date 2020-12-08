@@ -5398,16 +5398,19 @@ SVGLineChange=function(svgline,F){
 	}
 }
 
+SVGSplitLineMap=function(path,First){
+	return SVGPathSplit(path).map(line=>SVGLineChange(line,p=>p.map(First).flat())).flat();
+}
+
 SVGPathViewboxMin=function(path){
-	var xs=SVGPathSplit(path).map(line=>SVGLineChange(line,p=>p.map(First).flat())).flat();
-	var ys=SVGPathSplit(path).map(line=>SVGLineChange(line,p=>p.map(Last).flat())).flat();
+	var xs=SVGSplitLineMap(path,First);
+	var ys=SVGSplitLineMap(path,Last);
 	return Min(xs)+" "+Min(ys);
 }
 
-
 SVGPathViewboxMax=function(path){
-	var xs=SVGPathSplit(path).map(line=>SVGLineChange(line,p=>p.map(First).flat())).flat();
-	var ys=SVGPathSplit(path).map(line=>SVGLineChange(line,p=>p.map(Last).flat())).flat();
+	var xs=SVGSplitLineMap(path,First);
+	var ys=SVGSplitLineMap(path,Last);
 	return Max(xs)+" "+Max(ys);
 }
 
