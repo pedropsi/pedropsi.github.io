@@ -60,9 +60,9 @@ function BWCellAdjacencies(w,h,d,width,height,divisions,horizDivided){
 			Range(0,divisions-1).map(di=>AdjPush(w,h-1,di));
 			//corners
 			if(w>0)
-				AdjPush(w-1,h-1,0);
+				AdjPush(w-1,h-1,divisions-1);
 			if(w<width-1)
-				AdjPush(w+1,h-1,0);
+				AdjPush(w+1,h-1,divisions-1);
 			
 		}
 		if(d>=1)//above, within
@@ -102,9 +102,9 @@ function BWCellAdjacencies(w,h,d,width,height,divisions,horizDivided){
 			Range(0,divisions-1).map(di=>AdjPush(w+1,h,di));
 			//corners
 			if(h>0)
-				AdjPush(w+1,h-1,divisions-1);
+				AdjPush(w+1,h-1,1);
 			if(h<height-1)
-				AdjPush(w+1,h+1,divisions-1);
+				AdjPush(w+1,h+1,1);
 		}
 		if(d<divisions-1)//right, within
 			AdjPush(w,h,d+1);
