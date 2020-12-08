@@ -243,6 +243,30 @@ function UnHighlightStar(cell,opts){
 	})
 }
 
+
+function HighlightCross(cell,opts){
+	var opts={
+		lineWidth:`${LW}px`,
+		fillColor:"red",
+		strokeColor:"transparent",
+		cross:true,
+		n:4,
+		size:Min(CWIDTH/W/D/4,CHEIGHT/H/D/4),
+		...opts,
+		...StarXY(cell)
+	};
+	DrawStar(opts);
+}
+
+function UnHighlightCross(cell,opts){
+	HighlightCross(cell,{
+		...opts,
+		lineWidth:`${2*LW}px`,
+		fillColor:colours[cell],
+		strokeColor:colours[cell]
+	})
+}
+
 function StarXY(cell){
 	var p=polygons[cell];
 	return {x:p[0]+p[2]/2,y:p[1]+p[3]/2}
@@ -260,7 +284,11 @@ Keys(polygons).map(k=>colours[k]=colour);
 
 
 var stars={};
-var staraddmode=true;
+var starmode=true;
+var crosses={};
+var crossmode=true;
+
+var fromstar=true;
 
 RegionModeActive=StatusReporter(
 	"RegionModeActive",
@@ -272,25 +300,59 @@ RegionModeActive=StatusReporter(
 function AddStarCells(x,y){
 	var cell=First(PolygonIntersections(x,y));
 	if(stars[cell])
-		staraddmode=false;
+		starmode=false;
 	else
-		staraddmode=true;
-	ContinueStarCells(x,y);
+		starmode=true;
+	fromstar=true;
+	ContinueStarCrossCells(x,y);
+}	
+
+function AddCrossCells(x,y){
+	var cell=First(PolygonIntersections(x,y));
+	if(crosses[cell])
+		crossmode=false;
+	else
+		crossmode=true;
+	fromstar=false;
+	ContinueStarCrossCells(x,y);
 }
 
-function ContinueStarCells(x,y){
+
+function ContinueStarCrossCells(x,y){
 	var cells=Complement(PolygonIntersections(x,y),selected);
 	selected=selected.concat(cells);
 	cells.map(function(cell){
-		if(staraddmode){
+		if(fromstar&&starmode){
+			if(crosses[cell]){
+				delete crosses[cell];
+				UnHighlightCross(cell);
+			}
 			stars[cell]=true;
 			HighlightStar(cell);
-		}else{
-			delete stars[cell];
-			UnHighlightStar(cell);
+		}else if(fromstar&&!starmode){
+			if(stars[cell]){
+				delete stars[cell];
+				UnHighlightStar(cell);
+			}
+		}
+		else if(!fromstar&&crossmode){
+			if(stars[cell]){
+				delete stars[cell];
+				UnHighlightStar(cell);
+			}
+			crosses[cell]=true;
+			HighlightCross(cell);
+		}
+		else{
+			if(crosses[cell]){
+				delete crosses[cell];
+				UnHighlightCross(cell);
+			}
 		}
 	})
 }
+
+
 
 function AddRegionCells(x,y){
 	colour=RandomHEX();
@@ -324,10 +386,10 @@ function StarActionStarter(x,y){
 	return RegionModeActive()?AddRegionCells(x,y):AddStarCells(x,y);
 }
 function StarActionAltStarter(x,y){
-	return 	RegionModeActive()?PickRegionCells(x,y):Identity(x,y); //TODO,
+	return 	RegionModeActive()?PickRegionCells(x,y):AddCrossCells(x,y);
 }
 function StarActionContinuer(x,y){
-	return RegionModeActive()?ContinueRegionCells(x,y):ContinueStarCells(x,y);
+	return RegionModeActive()?ContinueRegionCells(x,y):ContinueStarCrossCells(x,y);
 }
 function StarActionEnder(x,y){
 	return ClearSelectedCells(x,y);	

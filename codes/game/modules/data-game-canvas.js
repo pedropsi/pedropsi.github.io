@@ -27,7 +27,8 @@ RegularPolygonPoints=function(opts){
 	var n=opts.n?opts.n:3;								//Number of sides
 	var startAngle=opts.startAngle?opts.startAngle:0;	//StartAngle
 	var coordinates=[];
-	var star=opts.star?true:false;
+	var cross=opts.cross?true:false;
+	var star=opts.star?true:cross;
 	var weight=opts.weight?opts.weight:0.5;
 	if(n>=3){
 		for (var i=0;i<n;i++){
@@ -37,6 +38,10 @@ RegularPolygonPoints=function(opts){
 			coordinates.push([xpos,ypos]);
 			if(star)
 				coordinates.push([x+size*weight*Cos(angle+PI/n),y+size*weight*Sin(angle+PI/n)]);
+			if(cross){
+				coordinates.push([x+size*weight*Cos(angle+PI/2/n),y+size*weight*Sin(angle+PI/2/n)]);
+				coordinates.push([x+size*weight*Cos(angle-PI/2/n),y+size*weight*Sin(angle-PI/2/n)]);
+			}
 		}
 	}
 	return coordinates
