@@ -424,5 +424,14 @@ function RotateHEX(colourA){
 	return HEX(a).colour;
 }
 
+
+////////////////////////////////////////////////////////////////////////////////
+//Palettes
+
+function RandomHuenHEX(base){
+	var base=base||"#FFAAAA";
+	return HEX(Huen(base,RandomChoice(Range(0,360)))).colour;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 Shout("data-game-colours");
