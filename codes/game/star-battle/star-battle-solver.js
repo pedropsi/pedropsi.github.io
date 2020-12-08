@@ -19,17 +19,17 @@ function BWCellId(w,h,d,horizDivided){
 function BWCellPolygon(w,h,d,width,height,divisions,horizDivided,cwidth,cheight){
 	if(HorizontallyDivided(w,h,horizDivided))
 		return [
-			w*cwidth/width,
-			(h+d/divisions)*cheight/height,
-			(1)*cwidth/width,
-			(1/divisions)*cheight/height
+			Round(w*cwidth/width,1),
+			Round((h+d/divisions)*cheight/height,1),
+			Round((1)*cwidth/width,1),
+			Round((1/divisions)*cheight/height,1)
 		];
 	else
 		return [
-			(w+d/divisions)*cwidth/width,
-			h*cheight/height,
-			(1/divisions)*cwidth/width,
-			(1)*cheight/height
+			Round((w+d/divisions)*cwidth/width,1),
+			Round(h*cheight/height,1),
+			Round((1/divisions)*cwidth/width,1),
+			Round((1)*cheight/height,1)
 		];
 }
 
@@ -202,9 +202,102 @@ function BWGraph(width,height,divisions,horizDivided){
 
 
 ///////////////////////////////////////////////////////////////////////////////
+//Solver
+
+function ColoursRegions(colours){
+	var regions={};
+	Unique(Values(colours)).map(c=>regions[c]=[]);
+	Keys(colours).map(k=>regions[colours[k]].push(k));
+	return regions;
+}
+
+var SBGRAPH={
+	conditions:{ //How many stars per line, region, adjacent area;
+		lines:1,
+		regions:1,
+		adjacencies:0
+	},
+	W:6,
+	H:6,
+	D:2,
+	P:true,
+	CWIDTH:800,
+	CHEIGHT:300,
+	selected:[],
+	colours:{},
+	Regions:function(){return ColoursRegions(SBGRAPH.colours)},
+	colour:"white",
+	stars:{},
+	crosses:{},
+	starmode:true,
+	crossmode:false,
+	fromstar:true,
+	regionmode:true
+}
+
+SBGRAPH.LW=Max(1,Floor((SBGRAPH.CWIDTH/SBGRAPH.W/100*SBGRAPH.CHEIGHT/SBGRAPH.H/100)**0.5));
+SBGRAPH.starsize=Min(SBGRAPH.CWIDTH/SBGRAPH.W/SBGRAPH.D/4,SBGRAPH.CHEIGHT/SBGRAPH.H/SBGRAPH.D/4);
+SBGRAPH.polygons=BWPolygons(SBGRAPH.W,SBGRAPH.H,SBGRAPH.D,SBGRAPH.P,SBGRAPH.CWIDTH,SBGRAPH.CHEIGHT);
+Keys(SBGRAPH.polygons).map(k=>SBGRAPH.colours[k]=SBGRAPH.colour);
+
+function StarBattleGraph(){
+	var graph=BWGraph(SBGRAPH.W,SBGRAPH.H,SBGRAPH.D,SBGRAPH.P);
+		graph={...graph,...SBGRAPH}
+		graph.solvable="?";
+	return SBGRAPH=graph;
+}
+
+function StarBattleFull(graph){
+	return Keys(graph.adjacencies).every(cell=>In(graph.stars,cell)||In(graph.crosses,cell));
+}
+
+
+function StarBattleSolved(graph){
+	return StarBattleLinesSolved(graph)&&StarBattleRegionsSolved(graph)&&StarBattleAdjacenciesValid(graph);
+}
+
+
+function StarBattleRegionsSolved(graph){
+	var stars=Keys(graph.stars);
+	var n=graph.conditions.regions;
+	var regionstars=Values(graph.Regions());
+	return regionstars.every(region=>Count(region,cell=>In(stars,cell))===n);
+}
+
+function StarBattleAdjacenciesValid(graph){
+	var stars=Keys(graph.stars);
+	var n=graph.conditions.adjacencies;
+	var activeadjacencies=stars.map(s=>graph.adjacencies[s]);
+	return activeadjacencies.every(adja=>Count(adja,cell=>In(stars,cell))===n);
+}
+
+function StarBattleLinesSolved(graph){
+	return Keys(graph.lines).every(type=>StarBattleLinesValid(graph,graph.lines[type]));
+}
+
+function StarBattleLinesValid(graph,lines){
+	var stars=Keys(graph.stars);
+	var n=graph.conditions.lines;
+	var lines=Values(lines);
+	return lines.every(line=>Count(line,cell=>In(stars,cell))===n);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 //Interactive UI (for quick iteration)
 
 
+function DrawGraph(){
+	var regions=SBGRAPH.Regions();
+	Keys(regions).map(
+		colour=>MarkPolygons(regions[colour],{
+			strokeColor:HEX(Darken(colour,2)).colour,
+			fillColor:colour
+		})
+	);
+	Keys(SBGRAPH.stars).map(MarkStar);
+	Keys(SBGRAPH.crosses).map(MarkCross);
+}
 
 
 
@@ -215,7 +308,7 @@ function PolygonIntersections(x,y){
 	});
 }
 
-function HighlightPolygons(cells,opts){
+function MarkPolygons(cells,opts){
 	var opts={
 		lineWidth:`${SBGRAPH.LW}px`,
 		fillColor:"rgba(255,100,100,0.05)",
@@ -226,7 +319,7 @@ function HighlightPolygons(cells,opts){
 	)
 }
 
-function HighlightStar(cell,opts){
+function MarkStar(cell,opts){
 	var opts={
 		lineWidth:`${SBGRAPH.LW}px`,
 		fillColor:"black",
@@ -240,8 +333,8 @@ function HighlightStar(cell,opts){
 	DrawStar(opts);
 }
 
-function UnHighlightStar(cell,opts){
-	HighlightStar(cell,{
+function UnMarkStar(cell,opts){
+	MarkStar(cell,{
 		...opts,
 		lineWidth:`${2*SBGRAPH.LW}px`,
 		fillColor:SBGRAPH.colours[cell],
@@ -250,7 +343,7 @@ function UnHighlightStar(cell,opts){
 }
 
 
-function HighlightCross(cell,opts){
+function MarkCross(cell,opts){
 	var opts={
 		lineWidth:`${SBGRAPH.LW}px`,
 		fillColor:"red",
@@ -264,8 +357,8 @@ function HighlightCross(cell,opts){
 	DrawStar(opts);
 }
 
-function UnHighlightCross(cell,opts){
-	HighlightCross(cell,{
+function UnMarkCross(cell,opts){
+	MarkCross(cell,{
 		...opts,
 		lineWidth:`${2*SBGRAPH.LW}px`,
 		fillColor:SBGRAPH.colours[cell],
@@ -319,28 +412,28 @@ function ContinueStarCrossCells(x,y){
 		if(SBGRAPH.fromstar&&SBGRAPH.starmode){
 			if(SBGRAPH.crosses[cell]){
 				delete SBGRAPH.crosses[cell];
-				UnHighlightCross(cell);
+				UnMarkCross(cell);
 			}
 			SBGRAPH.stars[cell]=true;
-			HighlightStar(cell);
+			MarkStar(cell);
 		}else if(SBGRAPH.fromstar&&!SBGRAPH.starmode){
 			if(SBGRAPH.stars[cell]){
 				delete SBGRAPH.stars[cell];
-				UnHighlightStar(cell);
+				UnMarkStar(cell);
 			}
 		}
 		else if(!SBGRAPH.fromstar&&SBGRAPH.crossmode){
 			if(SBGRAPH.stars[cell]){
 				delete SBGRAPH.stars[cell];
-				UnHighlightStar(cell);
+				UnMarkStar(cell);
 			}
 			SBGRAPH.crosses[cell]=true;
-			HighlightCross(cell);
+			MarkCross(cell);
 		}
 		else{
 			if(SBGRAPH.crosses[cell]){
 				delete SBGRAPH.crosses[cell];
-				UnHighlightCross(cell);
+				UnMarkCross(cell);
 			}
 		}
 	})
@@ -366,12 +459,12 @@ function ContinueRegionCells(x,y){
 	var colour=SBGRAPH.colour;
 	SBGRAPH.selected=SBGRAPH.selected.concat(cells);
 	cells.map(c=>SBGRAPH.colours[c]=colour);
-	HighlightPolygons(cells,{
+	MarkPolygons(cells,{
 		strokeColor:HEX(Darken(colour,2)).colour,
 		fillColor:colour
 	});
 	cells.map(
-		cell=>SBGRAPH.stars[cell]?HighlightStar(cell):SBGRAPH.crosses[cell]?HighlightCross(cell):Identity
+		cell=>SBGRAPH.stars[cell]?MarkStar(cell):SBGRAPH.crosses[cell]?MarkCross(cell):Identity
 	)
 }
 
@@ -403,6 +496,7 @@ var StarDragActions={
 setTimeout(function(){
 	PreAddElement(`<canvas id="test" width="${SBGRAPH.CWIDTH}" height="${SBGRAPH.CHEIGHT}"></div>`,"body");
 	AttendDrag(StarDragActions,"canvas");
+	DrawGraph();
 },100)
 
 
@@ -423,84 +517,3 @@ function CopyGraph(graph){
 // function SerialGraph(serial){
 
 // }
-
-///////////////////////////////////////////////////////////////////////////////
-//Solver
-
-function ColoursRegions(colours){
-	var regions={};
-	Unique(Values(colours)).map(c=>regions[c]=[]);
-	Keys(colours).map(k=>regions[colours[k]].push(k));
-	return regions;
-}
-
-var SBGRAPH={
-	conditions:{ //How many stars per line, region, adjacent area;
-		lines:1,
-		regions:1,
-		adjacencies:0
-	},
-	W:6,
-	H:6,
-	D:2,
-	P:true,
-	CWIDTH:800,
-	CHEIGHT:300,
-	selected:[],
-	colours:{},
-	colour:"white",
-	stars:{},
-	crosses:{},
-	starmode:true,
-	crossmode:false,
-	fromstar:true,
-	regionmode:true
-}
-
-SBGRAPH.LW=Max(1,Floor((SBGRAPH.CWIDTH/SBGRAPH.W/100*SBGRAPH.CHEIGHT/SBGRAPH.H/100)**0.5));
-SBGRAPH.starsize=Min(SBGRAPH.CWIDTH/SBGRAPH.W/SBGRAPH.D/4,SBGRAPH.CHEIGHT/SBGRAPH.H/SBGRAPH.D/4);
-SBGRAPH.polygons=BWPolygons(SBGRAPH.W,SBGRAPH.H,SBGRAPH.D,SBGRAPH.P,SBGRAPH.CWIDTH,SBGRAPH.CHEIGHT);
-Keys(SBGRAPH.polygons).map(k=>SBGRAPH.colours[k]=SBGRAPH.colour);
-
-function StarBattleGraph(opts){
-	var graph=BWGraph(SBGRAPH.W,SBGRAPH.H,SBGRAPH.D,SBGRAPH.P);
-		graph={...graph,...SBGRAPH}
-		graph.regions=ColoursRegions(colours);
-		graph.solvable="?";
-	return graph;
-}
-
-function StarBattleFull(graph){
-	return Keys(graph.adjacencies).every(cell=>In(graph.stars,cell)||In(graph.crosses,cell));
-}
-
-
-function StarBattleSolved(graph){
-	return StarBattleLinesSolved(graph)&&StarBattleRegionsSolved(graph)&&StarBattleAdjacenciesValid(graph);
-}
-
-
-function StarBattleRegionsSolved(graph){
-	var stars=Keys(graph.stars);
-	var n=graph.conditions.regions;
-	var regionstars=Values(graph.regions);
-	return regionstars.every(region=>Count(region,cell=>In(stars,cell))===n);
-}
-
-function StarBattleAdjacenciesValid(graph){
-	var stars=Keys(graph.stars);
-	var n=graph.conditions.adjacencies;
-	var activeadjacencies=stars.map(s=>graph.adjacencies[s]);
-	return activeadjacencies.every(adja=>Count(adja,cell=>In(stars,cell))===n);
-}
-
-function StarBattleLinesSolved(graph){
-	return Keys(graph.lines).every(type=>StarBattleLinesValid(graph,graph.lines[type]));
-}
-
-function StarBattleLinesValid(graph,lines){
-	var stars=Keys(graph.stars);
-	var n=graph.conditions.lines;
-	var lines=Values(lines);
-	return lines.every(line=>Count(line,cell=>In(stars,cell))===n);
-}
