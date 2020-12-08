@@ -5573,27 +5573,28 @@ DynamicText=function(label,text){
 	}
 }
 
-Toggler=function(StatusReporterName){
+
+Toggler=function(StatusReporterName,StatusChangerName){
 	return function(){
 		var status=globalThis[StatusReporterName]();
+		var Changer=globalThis[StatusChangerName]||Identity;
+			Changer(status);
 		if(status){
 			globalThis[StatusReporterName]=False;
-			Memory(StatusReporterName,False());
-		}else{
+		}else
 			globalThis[StatusReporterName]=True;
-			Memory(StatusReporterName,True());
-		}
+		Memory(StatusReporterName,globalThis[StatusReporterName]());
 		return DynamicText(StatusReporterName,TogglerButtonHTML(StatusReporterName));
 	}
 }
 
-TogglerButtonHTML=function(StatusReporterName,opts){
+TogglerButtonHTML=function(StatusReporterName,StatusChangerName){
 	if(!globalThis[StatusReporterName]||typeof globalThis[StatusReporterName]!=="function")
 		return DynamicText(StatusReporterName);
 
 	var status=ButtonHTML({
 		txt:globalThis[StatusReporterName]()?"active":"inactive",
-		attributes:{href:"",onclick:'Toggler("'+StatusReporterName+'")()',class:"inline"}
+		attributes:{href:"",onclick:'Toggler("'+StatusReporterName+'","'+StatusChangerName+'")()',class:"inline"}
 	});
 	
 	return DynamicText(StatusReporterName,status);
