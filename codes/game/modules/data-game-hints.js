@@ -141,6 +141,14 @@ PlayPauseGif=function(){
 		StartGIF.e.click();
 }
 
+// OverwriteShortcuts(
+// 	".gif":{
+// 		"space":PlayPauseGif,
+// 		"enter":PlayPauseGif,
+// 		// "X":PlayPauseGif
+// 	}
+// )
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //Text hints

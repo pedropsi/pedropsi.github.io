@@ -4406,11 +4406,6 @@ ContextualDefaultShortcuts=function(){
 		"ctrl enter":SubmitCurrentDatapack,
 		"tab":FocusNext,
 		"shift tab":FocusPrev
-	},
-	".gif":{
-		"space":PlayPauseGif,
-		"enter":PlayPauseGif,
-		// "X":PlayPauseGif
 	}
 	}
 }
