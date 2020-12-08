@@ -202,7 +202,7 @@ function BWGraph(width,height,divisions,horizDivided){
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//Solver
+//Initialise
 
 function ColoursRegions(colours){
 	var regions={};
@@ -224,6 +224,7 @@ var SBGRAPH={
 	CWIDTH:800,
 	CHEIGHT:300,
 	selected:[],
+	highlights:[],
 	colours:{},
 	Regions:function(){return ColoursRegions(SBGRAPH.colours)},
 	colour:"white",
@@ -232,7 +233,8 @@ var SBGRAPH={
 	starmode:true,
 	crossmode:false,
 	fromstar:true,
-	regionmode:true
+	regionmode:true,
+	errormode:true
 }
 
 SBGRAPH.LW=Max(1,Floor((SBGRAPH.CWIDTH/SBGRAPH.W/100*SBGRAPH.CHEIGHT/SBGRAPH.H/100)**0.5));
@@ -240,12 +242,12 @@ SBGRAPH.starsize=Min(SBGRAPH.CWIDTH/SBGRAPH.W/SBGRAPH.D/4,SBGRAPH.CHEIGHT/SBGRAP
 SBGRAPH.polygons=BWPolygons(SBGRAPH.W,SBGRAPH.H,SBGRAPH.D,SBGRAPH.P,SBGRAPH.CWIDTH,SBGRAPH.CHEIGHT);
 Keys(SBGRAPH.polygons).map(k=>SBGRAPH.colours[k]=SBGRAPH.colour);
 
-function StarBattleGraph(){
-	var graph=BWGraph(SBGRAPH.W,SBGRAPH.H,SBGRAPH.D,SBGRAPH.P);
-		graph={...graph,...SBGRAPH}
-		graph.solvable="?";
-	return SBGRAPH=graph;
-}
+var gra=BWGraph(SBGRAPH.W,SBGRAPH.H,SBGRAPH.D,SBGRAPH.P);
+SBGRAPH={...gra,...SBGRAPH};
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Validator
 
 function StarBattleFull(graph){
 	return Keys(graph.adjacencies).every(cell=>In(graph.stars,cell)||In(graph.crosses,cell));
@@ -256,30 +258,165 @@ function StarBattleSolved(graph){
 	return StarBattleLinesSolved(graph)&&StarBattleRegionsSolved(graph)&&StarBattleAdjacenciesValid(graph);
 }
 
-
-function StarBattleRegionsSolved(graph){
+//Regions
+function StarBattleRegionsApply(Transform,graph){
 	var stars=Keys(graph.stars);
 	var n=graph.conditions.regions;
-	var regionstars=Values(graph.Regions());
-	return regionstars.every(region=>Count(region,cell=>In(stars,cell))===n);
+	var groups=Values(graph.Regions());
+	return Transform(groups,stars,n);
+}
+
+function StarBattleRegionsSolved(graph){
+	function Test(regionstars,stars,n){return regionstars.every(region=>Count(region,cell=>In(stars,cell))===n)}
+	return StarBattleRegionsApply(Test,graph);
+}
+
+function StarBattleLongRegions(graph){
+	var Filter=function(regionstars,stars,n){return regionstars.filter(region=>Count(region,cell=>In(stars,cell))>n)}
+	return StarBattleRegionsApply(Filter,graph);
+}
+
+function StarBattleShortRegions(graph){
+	var Filter=function(regionstars,stars,n){return regionstars.filter(region=>Count(region,cell=>In(stars,cell))<n)}
+	return StarBattleRegionsApply(Filter,graph);
+}
+
+//Adjacencies
+function StarBattleAdjacenciesApply(Transform,graph){
+	var stars=Keys(graph.stars);
+	var n=graph.conditions.adjacencies;
+	var groups=stars.map(s=>graph.adjacencies[s]);
+	return Transform(groups,stars,n);
 }
 
 function StarBattleAdjacenciesValid(graph){
-	var stars=Keys(graph.stars);
-	var n=graph.conditions.adjacencies;
-	var activeadjacencies=stars.map(s=>graph.adjacencies[s]);
-	return activeadjacencies.every(adja=>Count(adja,cell=>In(stars,cell))===n);
+	function Test(activeadjacencies,stars,n){return activeadjacencies.every(adja=>Count(adja,cell=>In(stars,cell))===n);}
+	return StarBattleAdjacenciesApply(Test,graph);
 }
 
+function StarBattleInvalidAdjacencies(graph){
+	function Filter(activeadjacencies,stars,n){
+		adjacencies=activeadjacencies.filter(adja=>Count(adja,cell=>In(stars,cell))>n);
+		return Intersection(Union(...adjacencies),stars);
+	}
+	return StarBattleAdjacenciesApply(Filter,graph);
+}
+
+
+//Lines
 function StarBattleLinesSolved(graph){
 	return Keys(graph.lines).every(type=>StarBattleLinesValid(graph,graph.lines[type]));
 }
 
-function StarBattleLinesValid(graph,lines){
+function StarBattleLinesApply(Transform,graph,lines){
 	var stars=Keys(graph.stars);
 	var n=graph.conditions.lines;
 	var lines=Values(lines);
-	return lines.every(line=>Count(line,cell=>In(stars,cell))===n);
+	return Transform(lines,stars,n);
+}
+
+function StarBattleLinesValid(graph,lines){
+	function Test(lines,stars,n){return lines.every(line=>Count(line,cell=>In(stars,cell))===n)};
+	return StarBattleLinesApply(Test,graph,lines);
+}
+
+function StarBattleLongSubLines(graph,lines){
+	function Filter(lines,stars,n){return lines.filter(line=>Count(line,cell=>In(stars,cell))>n)};
+	return StarBattleLinesApply(Filter,graph,lines);
+}
+
+function StarBattleShortSubLines(graph,lines){
+	function Filter(lines,stars,n){return lines.filter(line=>Count(line,cell=>In(stars,cell))<n)};
+	return StarBattleLinesApply(Filter,graph,lines);
+}
+
+function StarBattleLongLines(graph){
+	return Keys(graph.lines).map(type=>StarBattleLongSubLines(graph,graph.lines[type]));
+}
+
+function StarBattleShortLines(graph){
+	return Keys(graph.lines).map(type=>StarBattleShortSubLines(graph,graph.lines[type]));
+}
+
+
+//Highlight errors
+
+function MarkWrongCell(cell){
+	if(In(SBGRAPH.highlights,cell))
+		return;
+	SBGRAPH.highlights.push(cell);
+	var colour=SBGRAPH.colours[cell];
+	MarkPolygons([cell],{
+		strokeColor:HEX(Lighten(colour,2)).colour,
+		fillColor:HEX(Darken(colour,2)).colour
+	})
+
+	if(SBGRAPH.stars[cell])
+		MarkStar(cell);
+	if(SBGRAPH.crosses[cell])
+		MarkCross(cell);
+}
+
+function UnMarkWrongCell(cell){
+	if(!In(SBGRAPH.highlights,cell))
+		return;
+	SBGRAPH.highlights=Complement(SBGRAPH.highlights,[cell]);
+	var colour=SBGRAPH.colours[cell];
+	MarkPolygons([cell],{
+		strokeColor:HEX(Darken(colour,2)).colour,
+		fillColor:colour
+	})
+
+	if(SBGRAPH.stars[cell])
+		MarkStar(cell);
+	if(SBGRAPH.crosses[cell])
+		MarkCross(cell);
+}
+
+function MarkWrongArea(area){
+	return area.map(MarkWrongCell);
+}
+function UnMarkWrongArea(area){
+	return area.map(UnMarkWrongCell);
+}
+
+
+function MarkWrongLines(){
+	MarkWrongArea(StarBattleLongLines(SBGRAPH).flat().flat());
+	MarkWrongArea(StarBattleShortLines(SBGRAPH).flat().flat());
+}
+function MarkWrongRegions(){
+	StarBattleLongRegions(SBGRAPH).map(MarkWrongArea);
+	StarBattleShortRegions(SBGRAPH).map(MarkWrongArea);
+}
+function UnMarkWrongLines(){
+	UnMarkWrongArea(StarBattleLongLines(SBGRAPH).flat().flat());
+	UnMarkWrongArea(StarBattleShortLines(SBGRAPH).flat().flat());
+}
+function UnMarkWrongRegions(){
+	StarBattleLongRegions(SBGRAPH).map(UnMarkWrongArea);
+	StarBattleShortRegions(SBGRAPH).map(UnMarkWrongArea);
+}
+
+function MarkWrongAdjacencies(){
+	MarkWrongArea(StarBattleInvalidAdjacencies(SBGRAPH));
+}
+function UnMarkWrongAdjacencies(){
+	UnMarkWrongArea(StarBattleInvalidAdjacencies(SBGRAPH));
+}
+
+function MarkErrors(){
+	if(!SBGRAPH.errormode)
+		return;
+	MarkWrongAdjacencies();
+	MarkWrongLines();
+	MarkWrongRegions();
+}
+
+function UnMarkErrors(){
+	UnMarkWrongAdjacencies();
+	UnMarkWrongLines();
+	UnMarkWrongRegions();
 }
 
 
@@ -382,6 +519,18 @@ RegionModeToggle=function(mode){
 	return SBGRAPH.regionmode=!mode;
 }
 
+ErrorModeActive=StatusReporter(
+	"ErrorModeActive",
+	function(){return SBGRAPH.errormode}
+)
+
+ErrorModeToggle=function(mode){
+	if(SBGRAPH.errormode)
+		UnMarkErrors();
+	else
+		MarkErrors();
+	return SBGRAPH.errormode=!mode;
+}
 
 
 function AddStarCells(x,y){
@@ -408,6 +557,7 @@ function AddCrossCells(x,y){
 function ContinueStarCrossCells(x,y){
 	var cells=Complement(PolygonIntersections(x,y),SBGRAPH.selected);
 	SBGRAPH.selected=SBGRAPH.selected.concat(cells);
+	UnMarkErrors();
 	cells.map(function(cell){
 		if(SBGRAPH.fromstar&&SBGRAPH.starmode){
 			if(SBGRAPH.crosses[cell]){
@@ -437,6 +587,7 @@ function ContinueStarCrossCells(x,y){
 			}
 		}
 	})
+	MarkErrors();
 }
 
 
@@ -457,6 +608,7 @@ function PickRegionCells(x,y){
 function ContinueRegionCells(x,y){
 	var cells=Complement(PolygonIntersections(x,y),SBGRAPH.selected);
 	var colour=SBGRAPH.colour;
+	UnMarkErrors();
 	SBGRAPH.selected=SBGRAPH.selected.concat(cells);
 	cells.map(c=>SBGRAPH.colours[c]=colour);
 	MarkPolygons(cells,{
@@ -466,6 +618,7 @@ function ContinueRegionCells(x,y){
 	cells.map(
 		cell=>SBGRAPH.stars[cell]?MarkStar(cell):SBGRAPH.crosses[cell]?MarkCross(cell):Identity
 	)
+	MarkErrors();
 }
 
 function ClearSelectedCells(x,y){
