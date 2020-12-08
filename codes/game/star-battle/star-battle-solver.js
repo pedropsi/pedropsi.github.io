@@ -19,18 +19,18 @@ function BWCellId(w,h,d,horizDivided){
 function BWCellPolygon(w,h,d,width,height,divisions,horizDivided,cwidth,cheight){
 	if(HorizontallyDivided(w,h,horizDivided))
 		return [
-			Round(w*cwidth/width,1),
-			Round((h+d/divisions)*cheight/height,1),
-			Round((1)*cwidth/width,1),
-			Round((1/divisions)*cheight/height,1)
-		];
+			w*cwidth/width,
+			(h+d/divisions)*cheight/height,
+			(1)*cwidth/width,
+			(1/divisions)*cheight/height
+		].map(n=>Round(n,1));
 	else
 		return [
-			Round((w+d/divisions)*cwidth/width,1),
-			Round(h*cheight/height,1),
-			Round((1/divisions)*cwidth/width,1),
-			Round((1)*cheight/height,1)
-		];
+			(w+d/divisions)*cwidth/width,
+			h*cheight/height,
+			(1/divisions)*cwidth/width,
+			(1)*cheight/height
+		].map(n=>Round(n,1));
 }
 
 function BWPolygons(width,height,divisions,horizDivided,cwidth,cheight){
