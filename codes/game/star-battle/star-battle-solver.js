@@ -500,9 +500,6 @@ setTimeout(function(){
 },100)
 
 
-// function LoadGraph(graph){
-
-// }
 
 function CopyGraph(graph){
 	ClipboardCopy(JSON.stringify(graph),"Graph copied!")
