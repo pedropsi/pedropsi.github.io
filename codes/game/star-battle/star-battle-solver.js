@@ -204,44 +204,36 @@ function BWGraph(width,height,divisions,horizDivided){
 ///////////////////////////////////////////////////////////////////////////////
 //Interactive UI (for quick iteration)
 
-var W=6;
-var H=6;
-var D=2;
-var P=true;
-var CWIDTH=800;
-var CHEIGHT=300;
 
 
-var polygons=BWPolygons(W,H,D,P,CWIDTH,CHEIGHT);
+
 
 function PolygonIntersections(x,y){
-	return Keys(polygons).filter(function(k){
-		var p=polygons[k];
+	return Keys(SBGRAPH.polygons).filter(function(k){
+		var p=SBGRAPH.polygons[k];
 		return (x>=p[0])&&(x<=(p[0]+p[2]))&&(y>=p[1])&&(y<=(p[1]+p[3]))
 	});
 }
 
-var LW=Max(1,Floor((CWIDTH/W/100*CHEIGHT/H/100)**0.5));
-
 function HighlightPolygons(cells,opts){
 	var opts={
-		lineWidth:`${LW}px`,
+		lineWidth:`${SBGRAPH.LW}px`,
 		fillColor:"rgba(255,100,100,0.05)",
 		strokeColor:"rgba(255,100,100,1)",
 		...opts
 	};
-	DrawRectangles(opts,cells.map(k=>polygons[k])
+	DrawRectangles(opts,cells.map(k=>SBGRAPH.polygons[k])
 	)
 }
 
 function HighlightStar(cell,opts){
 	var opts={
-		lineWidth:`${LW}px`,
+		lineWidth:`${SBGRAPH.LW}px`,
 		fillColor:"black",
 		strokeColor:"transparent",
 		star:true,
 		n:7,
-		size:Min(CWIDTH/W/D/4,CHEIGHT/H/D/4),
+		size:SBGRAPH.starsize,
 		...opts,
 		...StarXY(cell)
 	};
@@ -251,7 +243,7 @@ function HighlightStar(cell,opts){
 function UnHighlightStar(cell,opts){
 	HighlightStar(cell,{
 		...opts,
-		lineWidth:`${2*LW}px`,
+		lineWidth:`${2*SBGRAPH.LW}px`,
 		fillColor:SBGRAPH.colours[cell],
 		strokeColor:SBGRAPH.colours[cell]
 	})
@@ -260,12 +252,12 @@ function UnHighlightStar(cell,opts){
 
 function HighlightCross(cell,opts){
 	var opts={
-		lineWidth:`${LW}px`,
+		lineWidth:`${SBGRAPH.LW}px`,
 		fillColor:"red",
 		strokeColor:"transparent",
 		cross:true,
 		n:4,
-		size:Min(CWIDTH/W/D/4,CHEIGHT/H/D/4),
+		size:SBGRAPH.starsize,
 		...opts,
 		...StarXY(cell)
 	};
@@ -275,14 +267,14 @@ function HighlightCross(cell,opts){
 function UnHighlightCross(cell,opts){
 	HighlightCross(cell,{
 		...opts,
-		lineWidth:`${2*LW}px`,
+		lineWidth:`${2*SBGRAPH.LW}px`,
 		fillColor:SBGRAPH.colours[cell],
 		strokeColor:SBGRAPH.colours[cell]
 	})
 }
 
 function StarXY(cell){
-	var p=polygons[cell];
+	var p=SBGRAPH.polygons[cell];
 	return {x:p[0]+p[2]/2,y:p[1]+p[3]/2}
 }
 
@@ -294,8 +286,8 @@ RegionModeActive=StatusReporter(
 )
 
 RegionModeToggle=function(mode){
-	console.log("change ",mode);
-	return SBGRAPH.regionmode=!mode};
+	return SBGRAPH.regionmode=!mode;
+}
 
 
 
@@ -379,7 +371,7 @@ function ContinueRegionCells(x,y){
 		fillColor:colour
 	});
 	cells.map(
-		cell=>SBGRAPH.stars[cell]?HighlightStar(cell):Identity
+		cell=>SBGRAPH.stars[cell]?HighlightStar(cell):SBGRAPH.crosses[cell]?HighlightCross(cell):Identity
 	)
 }
 
@@ -409,7 +401,7 @@ var StarDragActions={
 }
 
 setTimeout(function(){
-	PreAddElement(`<canvas id="test" width="${CWIDTH}" height="${CHEIGHT}"></div>`,"body");
+	PreAddElement(`<canvas id="test" width="${SBGRAPH.CWIDTH}" height="${SBGRAPH.CHEIGHT}"></div>`,"body");
 	AttendDrag(StarDragActions,"canvas");
 },100)
 
@@ -448,6 +440,12 @@ var SBGRAPH={
 		regions:1,
 		adjacencies:0
 	},
+	W:6,
+	H:6,
+	D:2,
+	P:true,
+	CWIDTH:800,
+	CHEIGHT:300,
 	selected:[],
 	colours:{},
 	colour:"white",
@@ -458,10 +456,14 @@ var SBGRAPH={
 	fromstar:true,
 	regionmode:true
 }
-Keys(polygons).map(k=>SBGRAPH.colours[k]=SBGRAPH.colour);
+
+SBGRAPH.LW=Max(1,Floor((SBGRAPH.CWIDTH/SBGRAPH.W/100*SBGRAPH.CHEIGHT/SBGRAPH.H/100)**0.5));
+SBGRAPH.starsize=Min(SBGRAPH.CWIDTH/SBGRAPH.W/SBGRAPH.D/4,SBGRAPH.CHEIGHT/SBGRAPH.H/SBGRAPH.D/4);
+SBGRAPH.polygons=BWPolygons(SBGRAPH.W,SBGRAPH.H,SBGRAPH.D,SBGRAPH.P,SBGRAPH.CWIDTH,SBGRAPH.CHEIGHT);
+Keys(SBGRAPH.polygons).map(k=>SBGRAPH.colours[k]=SBGRAPH.colour);
 
 function StarBattleGraph(opts){
-	var graph=BWGraph(W,H,D,P);
+	var graph=BWGraph(SBGRAPH.W,SBGRAPH.H,SBGRAPH.D,SBGRAPH.P);
 		graph={...graph,...SBGRAPH}
 		graph.regions=ColoursRegions(colours);
 		graph.solvable="?";
