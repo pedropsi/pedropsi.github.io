@@ -67,7 +67,7 @@ WILLIAMS:{TYPE:"Developer",NAME:"John M. Williams",ALIAS:"Gate 88",TWITTER:"gate
 ZUBOVIC:{TYPE:"Developer",NAME:"Dario Zubovic",TWITTER:"dario_zubovic"},
 SPLEEEN:{TYPE:"Developer",NAME:"Spleeen",ITCH:"spleeen"},
 CLARK:{TYPE:"Developer",NAME:"Ethan Clark",ALIAS:"EPGA Studios",TWITTER:"EthanIClark1"},
-NCRECC:{TYPE:"Developer",NAME:"Ncrecc"},
+NCRECC:{TYPE:"Developer",NAME:"Nathan Recchia",ALIAS:"Ncrecc"},
 DANWILLIAMS:{TYPE:"Developer",NAME:"Dan Williams",TWITTER:"videospacegames"},
 JCMILLER:{TYPE:"Developer",NAME:"J. C. Miller",ALIAS:"jcGyo",GITHUB_COM:"jcmiller11"},
 OBSCURE:{TYPE:"Developer",NAME:"Xavier Direz",ALIAS:"Narkhos",PERSONAL_PAGE:"http://lafaceobscuredupixel.fr/"},
