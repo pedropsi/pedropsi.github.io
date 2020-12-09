@@ -647,7 +647,7 @@ var StarDragActions={
 }
 
 setTimeout(function(){
-	PreAddElement(`<canvas id="test" width="${SBGRAPH.CWIDTH}" height="${SBGRAPH.CHEIGHT}"></div>`,"body");
+	PreAddElement(`<canvas id="test" oncontextmenu="return false;" width="${SBGRAPH.CWIDTH}" height="${SBGRAPH.CHEIGHT}"></div>`,"body");
 	AttendDrag(StarDragActions,"canvas");
 	DrawGraph();
 },100)
