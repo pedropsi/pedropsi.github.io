@@ -134,8 +134,9 @@ ${FolderGalleryHTML("star-battle",FilterObject(starbattles,(o,k)=>In([0,1,2].map
 ${
 	starbattlesFuture=FilterObject(starbattlesData,(o,k)=>(o.date&&Days(StringDate(o.date))<0)),
 	l=Last(starbattlesFuture),
-	l&&l.date?`<p>Next update: <b>${DateNamer(StringDate(l.date))}</b>, with <em>${l.legend?l.legend+"!":""}</em></p>`:""
+	l&&l.date?`<p>Next update: <b>${DateNamer(StringDate(l.date))}</b>, with <em>${l.legend?l.legend:""}</em>!</p>`:""
 }
+<p>Possible future puzzles are listed under ${AHTML("#More Ideas")}. Excited about a particular idea? Do ${v.A_LET_ME_KNOW()}!</p>
 
 ${v.HEADER()}
 
@@ -248,8 +249,11 @@ ${FolderGalleryHTML("star-battle",FilterObject(starbattles,o=>o.href))}
 <p>All ${AHTML("#Interactive star battles")} are editable, and you can even change the geometry, thanks to the ${v.A_HYPERROGUE()} engine!</p>
 
 <h2>More ideas</h2>
+<p>A list ideas for future puzzles, for self-reference. If you make one of these, please let me know - happy to add it to the list (with proper credit).</p>
 <ul>
-	<li>LITS star battle - stars cannot be on the tetroids (${v.PORTPONKY()})</li>
+	<li>Fractal star battle: confirmed possibility, currently looking for a good puzzle.</li>
+	<li>LITS vs star battle: an hyperpuzzle - stars cannot be on the tetroids (${v.PORTPONKY()})</li>
+	<li>Toroidal star battle, with self-intersecting lines. Stars are placed at intersections (${v.THINKY()}.</li>
 	<li>binary star battle 1: two types of stars, heavy and light. Light stars are alone in a line, heavy stars are together;</li>
 	<li>binary star battle 2: two types of stars, blue and red. Blue stars on every line, red stars on every region. Stars cannot be adjacent;</li>
 	<li>log spiral grid - current 2 star <em>constellation</em> with too many stars, possibly tedious;</li>
