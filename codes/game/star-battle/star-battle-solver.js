@@ -226,7 +226,6 @@ var SBGRAPH={
 	selected:[],
 	highlights:[],
 	colours:{},
-	Regions:function(){return ColoursRegions(SBGRAPH.colours)},
 	colour:"white",
 	stars:{},
 	crosses:{},
@@ -237,14 +236,32 @@ var SBGRAPH={
 	errormode:true
 }
 
-SBGRAPH.LW=Max(1,Floor((SBGRAPH.CWIDTH/SBGRAPH.W/100*SBGRAPH.CHEIGHT/SBGRAPH.H/100)**0.5));
-SBGRAPH.starsize=Min(SBGRAPH.CWIDTH/SBGRAPH.W/SBGRAPH.D/4,SBGRAPH.CHEIGHT/SBGRAPH.H/SBGRAPH.D/4);
-SBGRAPH.polygons=BWPolygons(SBGRAPH.W,SBGRAPH.H,SBGRAPH.D,SBGRAPH.P,SBGRAPH.CWIDTH,SBGRAPH.CHEIGHT);
-Keys(SBGRAPH.polygons).map(k=>SBGRAPH.colours[k]=SBGRAPH.colour);
+function InitialiseGraph(graph){
+	var graph=graph;
+	var CWIDTH=graph.CWIDTH;
+	var CHEIGHT=graph.CHEIGHT;
+	var W=graph.W;
+	var H=graph.H;
+	var D=graph.D;
+	var P=graph.P;
 
-var gra=BWGraph(SBGRAPH.W,SBGRAPH.H,SBGRAPH.D,SBGRAPH.P);
-SBGRAPH={...gra,...SBGRAPH};
+	graph.LW=Max(1,Floor((CWIDTH/W/100*CHEIGHT/H/100)**0.5));
+	graph.starsize=Min(CWIDTH/W/D/4,CHEIGHT/H/D/4);
+	graph.polygons=BWPolygons(W,H,D,P,CWIDTH,CHEIGHT);
+	Keys(graph.polygons).map(k=>graph.colours[k]=graph.colour);
 
+	var gra=BWGraph(W,H,D,P);
+	graph={...gra,...graph};
+	graph= FinaliseGraph(graph);
+	return graph
+}
+
+function FinaliseGraph(graph){
+	graph.Regions=function(){return ColoursRegions(SBGRAPH.colours)};
+	return graph;
+}
+
+SBGRAPH=InitialiseGraph(SBGRAPH);
 
 ///////////////////////////////////////////////////////////////////////////////
 //Validator
@@ -436,6 +453,10 @@ function DrawGraph(){
 	Keys(SBGRAPH.crosses).map(MarkCross);
 }
 
+function LoadGraph(graph){
+	SBGRAPH=FinaliseGraph(graph);
+	DrawGraph();
+}
 
 
 function PolygonIntersections(x,y){
