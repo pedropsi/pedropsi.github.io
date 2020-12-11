@@ -1,5 +1,5 @@
-LoadAsync("cacher",".");
-HearOnce('load',ServiceWorker);
+// LoadAsync("cacher",".");
+// HearOnce('load',ServiceWorker);
 
 ///////////////////////////////////////////////////////////////////////////////
 //Find the Modules
