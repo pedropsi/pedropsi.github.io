@@ -132,8 +132,8 @@ function StartGame(){
 
 DelayUntil(function(){return (typeof PrepareGame!=="undefined")},StartGame);
 
-LoadAsync("cacher",".");
-ServiceWorker();
+// LoadAsync("cacher",".");
+// ServiceWorker();
 LoadGameHTML(GameFrameHTML());
 LoadStyle("codes/game/combinatura/combinatura.css");
 
