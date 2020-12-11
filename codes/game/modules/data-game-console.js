@@ -66,3 +66,5 @@ function RequestMore(){
 		spotlight:gameSelector
 	});
 }
+
+Shout("data-game-console")
