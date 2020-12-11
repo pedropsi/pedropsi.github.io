@@ -1820,6 +1820,13 @@ LoaderInFolder=function(folder){
 	return function(sourcename){return LoadAsync(sourcename,folder)};
 }
 
+BiJoinFolder=function(folderString,subfolderString){
+	return UnPosfix(folderString,"/")+"/"+UnPrefix(subfolderString,"/");
+}
+
+JoinFolder=ArgumentExtender(BiJoinFolder);
+
+
 //Load styles
 
 LoadStyle=function(sourcename){
