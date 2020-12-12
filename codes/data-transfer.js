@@ -1764,12 +1764,12 @@ LoadSource=function(...args){
 		LoadWebSource(...args);
 }
 
-LoadSources=function(sourceArray,SuccessF){
+LoadSources=function(sourceArray,Successer){
 	var shoutArray=sourceArray;
 	if(!NodejsDetected())
 		shoutArray=shoutArray.filter(function(f){return Posfixed(f,".js")}).map(SourceIdentifier);		//discards non-js files plus the folder structure to preserve file name
 
-	HearAll(shoutArray,SuccessF); 									//waits until the last one is loaded before firing SuccessF
+	HearAll(shoutArray,Successer); 									//waits until the last one is loaded before firing Successer
 	sourceArray.map(LoadSource);											//loads asynchronously (each file MUST "Shout" its own identifier upon loading)
 	
 }
@@ -1850,6 +1850,24 @@ ReplaceStyleElement=function(stylesource,id){
 	AddElement("<style id='"+id+"'>"+stylesource+"</style>",'head');
 }
 
+//Load objects from HTML pages
+
+LoadHTMLObject=function(Obj,Successer){
+	var source=Obj.source;
+	var name=Obj.name;
+	var Successer=Successer||Identity;
+	if(!source||!name)
+		return "";
+	var Reader=function(code){
+		var code=IsolateCode(code,name+"=","}}")+"}}";
+		LoadCode(`
+			${name}=${code};
+		`);
+		Successer(globalThis[name]);
+	}
+	LoadData(source,Reader);	
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Data Reception
 
@@ -1894,7 +1912,7 @@ MacroURL=function(parameters){
 }
 
 //Fetch data from url
-LoadDataFromNetwork=function(url,SuccessF,header,FailureF){
+LoadDataFromNetwork=function(url,Successer,header,FailureF){
 	var FailureF=FailureF||Identity;
 	var rawFile=new XMLHttpRequest();
 	rawFile.open("GET",url,true);
@@ -1912,7 +1930,7 @@ LoadDataFromNetwork=function(url,SuccessF,header,FailureF){
 				}
 				else{
 					Memory(url,rawFile.responseText,new Date());
-					SuccessF(data);
+					Successer(data);
 				}
 			}
 		}
@@ -1922,13 +1940,29 @@ LoadDataFromNetwork=function(url,SuccessF,header,FailureF){
 	rawFile.send(null);
 };
 
-LoadData=function(url,SuccessF,header,FailureF){
+LoadData=function(url,Successer,header,FailureF){
 	var saved=Memory(url);
 	if(saved&&!MemoryExpired(url))
-		return SuccessF(saved);
+		return Successer(saved);
 	else
-		return LoadDataFromNetwork(url,SuccessF,header,FailureF);
+		return LoadDataFromNetwork(url,Successer,header,FailureF);
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// Parsing
+
+var ObjectKeyPattern=/[\d\D\_]+/;
+
+IsolateCode=function(code,startstring,endstring){
+	var code=code.split("\n").join("").split(/\n/).join("").split(/\t/).join("");
+	if(startstring)
+		code=UnBeforfix(code,startstring);
+	if(endstring)
+		code=UnAfterfix(code,endstring);
+	return code;
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Persistent Memory
@@ -3964,7 +3998,7 @@ ListenIndeed=function(EFTC){
 }
 
 //Listen for all events in array before firing
-HearAll=function(shoutArray,SuccessF){
+HearAll=function(shoutArray,Successer){
 	function Heard(shoutcode){
 		if(!Heard.array)
 			Heard.array=[];
@@ -3975,7 +4009,7 @@ HearAll=function(shoutArray,SuccessF){
 		//console.log("heard so far:",Heard.array)
 
 		if(Equal(Heard.array,Unique(shoutArray)))
-			SuccessF();
+			Successer();
 	}
 
 	function Hear(shoutcode){
