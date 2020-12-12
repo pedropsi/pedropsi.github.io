@@ -111,7 +111,8 @@ VELLEIC:{NAME:"Velleic"},
 SOFTFRO:{NAME:"SoftFro",PERSONAL_PAGE:"https://cryptics.jackbrounstein.com/user/27"},
 MANSFIELD:{NAME:"Robert Mansfield",ALIAS:"sftrabbit",TWITTER:"https://twitter.com/sftrabbit"},
 KAROO:{NAME:"Karoo"},
-HEMPULI:{NAME:"Arvi Teikari",ALIAS:"Hempuli",PERSONAL_PAGE:"https://www.hempuli.com/"}
+HEMPULI:{NAME:"Arvi Teikari",ALIAS:"Hempuli",PERSONAL_PAGE:"https://www.hempuli.com/"},
+PANCELOR:{ALIAS:"Pancelor",ITCH:"pancelor"}
 }
 
 PersonalPage=function(linkObj){
@@ -134,7 +135,9 @@ PersonalPage=function(linkObj){
 PersonTemplate=function(linkObj){
 	var name=UnFunction(linkObj.NAME);
 	var alias=UnFunction(linkObj.ALIAS||"");
-	if(alias)
+	if(!name&&alias)
+		name=alias;
+	else if(alias)
 		name=`${name} (${alias})`;
 
 	var page=PersonalPage(linkObj);
