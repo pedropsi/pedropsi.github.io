@@ -173,6 +173,11 @@ ${LinkGroupHTML("with-game-bar")}
 <h2>Music</h2>
 <h3>Just add the music files!</h3>
 <p>To control a music playlist via the game bar, each music track should be added to the page inside ${v.CSI()}audio class="music"${v.CSF()} tags, placed anywhere in the page. If these tags are detected, a music button will be revealed automatically.</p>
+<h4>Example 1) a local file</h4>
+<p> ${v.CSI()}audio class="music" src="folder/.../your track.wav"${v.CSF()}.</p>
+<h4>Example 2) a file from the internet</h4>
+<p> ${v.CSI()}audio class="music" src="https://example.com/music.mp3"${v.CSF()}.</p>
+
 
 <h2>Other buttons</h2>
 <h3>"Credits" button</h3>
