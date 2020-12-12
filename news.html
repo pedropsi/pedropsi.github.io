@@ -7,6 +7,7 @@
 
 <p>This is the ${v.SITE_NAME()}'s news stream, live since <b>${v.DATE_TEXT(v)}</b>. Check back often to keep abreast of the most relevant developments, or ${AHTML("subscribe")}!</p>
 
+${Keys(NewsSources).map(k=>ImportNewsObject(NewsSources[k]))}
 ${NewsHTML()}
 
 ${v.SUBSCRIBE_ANNOUNCE()}

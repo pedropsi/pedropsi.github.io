@@ -651,6 +651,7 @@ DownloadSitemap=function(){
 ImportNewsObject=function(newsObj){
 	function AddNews(Obj){
 		Keys(Obj).map(k=>News[k]=newsObj.Transformer(Obj[k],k));
+		//setTimeout(()=>ReplaceElement(NewsHTML(),"news"),1000);
 	}
 	LoadHTMLObject(newsObj,AddNews);	
 }
@@ -679,8 +680,6 @@ var NewsSources={
 		}
 	}
 }
-
-Keys(NewsSources).map(k=>ImportNewsObject(NewsSources[k]));
 
 
 DATA["news"]=News;
