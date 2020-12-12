@@ -477,12 +477,12 @@ PIECE:()=>`
 
 
 SortNewsByDate=function(pageA,pageB){
-	return Days(new Date(pageA.DATE),new Date(pageB.DATE));
+	return Days(StringDate(pageA.DATE),StringDate(pageB.DATE));
 }
 
 ChangelogEntryHTML=function(change){
 	return `
-	<h3>${DateNamer(new Date(change.DATE))}</h3>
+	<h3>${DateNamer(StringDate(change.DATE))}</h3>
 	${change.PIECE()}
 	`;
 }
@@ -500,7 +500,7 @@ ChangelogHTML=function(){
 
 NonFutureItem=function(npObj){//news or page Object
 	if(npObj.DATE)
-		return Days(new Date(npObj.DATE))>=0
+		return Days(StringDate(npObj.DATE))>=0
 	if(npObj.DAY){
 		var d=DateDate(UnFunction(npObj.DAY),UnFunction(npObj.MONTH),UnFunction(npObj.YEAR));
 		console.log(d);
@@ -510,39 +510,41 @@ NonFutureItem=function(npObj){//news or page Object
 
 NewsEntryHTML=function(change){
 	return `
-	<h2>${DateNamer(new Date(change.DATE))}</h2>
-	${change.HEADER?`<h3>${change.HEADER()}</h3>`:""}
-	${change.PIECE()}
+	<h2>${DateNamer(StringDate(change.DATE))}</h2>
+	${change.HEADER?`<h3>${UnFunction(change.HEADER)}</h3>`:""}
+	${UnFunction(change.PIECE)}
 	`;
+}
+
+var NewsOptions={
+	ItemHTML:NewsEntryHTML,
+	Sorter:SortNewsByDate,
+	FilterF:NonFutureItem
 }
 
 NewsHTML=function(){
 	return SectionHTML({
+		...NewsOptions,
 		Source:News,
-		ItemHTML:NewsEntryHTML,
-		Sorter:SortNewsByDate
 	})
 }
 
 RecentNewsHTML=function(){
 	return SectionHTML({
+		...NewsOptions,
 		Source:News,
-		ItemHTML:NewsEntryHTML,
 		max:v.NEWS_LIMIT_RECENT(),
 		header:`<h1 class="title">Recent changes</h1>`,
-		FilterF:NonFutureItem,
 		InnerWrapper:v.WHITEBOARD_OUT,
-		Sorter:SortNewsByDate
 	})
 }
 
 RSSXML=function(){
 	return SectionHTML({
+		...NewsOptions,
 		Source:News,
 		ItemHTML:RSSItemXML,
 		max:v.RSS_LIMIT(),
-		Sorter:SortNewsByDate,
-		FilterF:NonFutureItem,
 		header:RSSHeadXML(),
 		OuterWrapper:function(body){return `${v.XML()}<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" >
 			<channel>
@@ -576,7 +578,7 @@ RSSItemXML=function(change){
 		<title><![CDATA[${change.HEADER()}]]></title>
 		<link>${v.SITE()}/${change.ID}.html#RSS</link>
 		<guid>${v.SITE()}/${change.ID}.html?guid=${change.DATE}</guid>
-		<pubDate>${DateRSS(new Date(change.DATE))} 07:06:05 GMT</pubDate>
+		<pubDate>${DateRSS(StringDate(change.DATE))} 07:06:05 GMT</pubDate>
 		<description>
 		<![CDATA[
 			${v.PICTURE_RSS(v,180)}
@@ -641,6 +643,43 @@ DownloadSitemap=function(){
 	var type="text/xml";//application/rss+xml
 	Download(data,filename,type);
 }
+
+
+
+
+ImportNewsObject=function(newsObj){
+	function AddNews(Obj){
+		Keys(Obj).map(k=>News[k]=newsObj.Transformer(Obj[k],k));
+	}
+	LoadHTMLObject(newsObj,AddNews);	
+}
+
+var NewsSources={
+	starbattle:{
+		name:"starbattlesData",
+		source:"https://pedropsi.github.io/star-battle.html",
+		Transformer:function(item,key){
+			var number=UnAfterfix(key,"-");
+			var title=item.legend||key;
+			var stars=item.stars?(item.stars+ObtainSymbol("star")):"";
+			var suffix=(item.variant?(" - "+item.variant):"");
+				title=title+suffix;
+			var varitext=item.variant?(Capitalise(item.variant)+" is a star battle variant."):"";
+			var link=AHTML(title,item.href?item.href:"star-battle.html");
+				title=title+(stars?(", "+stars):"");
+				console.log(item,key,title,number,suffix,varitext);
+			return {
+				DATE:item.date,
+				HEADER:title,
+				PIECE:`
+				<p>${link}, puzzle #${number} in the ${AHTML("star battle collection","star-battle.html")}, now released.</p>
+				<p>${varitext}</p>`,
+			}
+		}
+	}
+}
+
+Keys(NewsSources).map(k=>ImportNewsObject(NewsSources[k]));
 
 
 DATA["news"]=News;

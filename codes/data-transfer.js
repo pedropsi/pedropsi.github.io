@@ -1734,6 +1734,11 @@ GenerateId=function(){
 	return Syllabe()+Syllabe()+Syllabe()+Syllabe()+Syllabe();
 };
 
+HTMLIder=function(id){
+	return function(content){
+		return `<div id="${id}">${content}</span>`;
+	}
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 //Load resources
@@ -2626,6 +2631,12 @@ SpanHTML=function(html,clas){
 	else
 		var clas="";
 	return "<span"+clas+">"+html+"</span>";
+}
+
+HTMLIder=function(id){
+	return function(content){
+		return `<div class="${id}">${content}</span>`;
+	}
 }
 
 ButtonHTML=function(optionsObj){
