@@ -526,6 +526,7 @@ NewsHTML=function(){
 	return SectionHTML({
 		...NewsOptions,
 		Source:News,
+		OuterWrapper:HTMLIder("news") //for auto-update
 	})
 }
 
