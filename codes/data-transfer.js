@@ -151,6 +151,8 @@ Equal=function(a,b){
 		return true;
 	else if(IsNode(a)&&IsNode(b))
 		return a.isEqualNode(b);
+	else if(IsDate(a)&&IsDate(b))
+		return a===b;
 	else{
 		console.log("check this new case:",a,b);
 		return false;
@@ -367,6 +369,11 @@ IsNan=function(nan){
 IsNumber=function(n){
 	return (typeof n==="number");
 }
+
+IsDate=function(n){
+	return (typeof n==="object")&&n.getDate;
+}
+
 
 EnArray=function(a){
 	if(typeof a==="undefined")
@@ -780,14 +787,14 @@ Substrings=function(string){
 	return subs;
 }
 
-//Gather
+//Gather Objects
 
 Gather=function(Obj,Equaliser){
-	var Equaliser=Equaliser||Equal;
-	var uniquekeys=Unique(Values(Obj).map(Equaliser));
+	var Equaliser=Equaliser||Identity;
+	var uniquekeys=Unique(Values(Obj).map(Equaliser).map(String));
 	var o={};
-		uniquekeys.map(k=>(o[k]=FilterObject(Obj,v=>(Equaliser(v)===k))));
-		return o;
+		uniquekeys.map(k=>(o[k]=FilterObject(Obj,v=>(String(Equaliser(v))===k))));
+	return o;
 }
 
 
@@ -6344,7 +6351,7 @@ CoreFunctionNames=[
 	"Equal","EqualFunction","EqualRegex",
 	"IsNan","IsArray",
 	"FunctionName","FunctionBody",
-	"IsObject","IsRegex","IsNode",
+	"IsObject","IsRegex","IsNode","IsDate",
 	"Apply",
 	"Memory","MemorySlot"
 ]
