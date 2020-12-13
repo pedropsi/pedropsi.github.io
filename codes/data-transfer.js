@@ -50,16 +50,16 @@ UnFunction=function(data){
 		return data;
 }
 
-Empty=function(AOS){
-	if(IsArray(AOS))
+Empty=function(SAO){
+	if(IsArray(SAO))
 		return [];
-	if(IsObject(AOS))
+	if(IsObject(SAO))
 		return {};
-	if(IsString(AOS))
+	if(IsString(SAO))
 		return "";
 	
-	console.log("empty what?",AOS);
-	return AOS;
+	console.log("empty what?",SAO);
+	return SAO;
 }
 
 ArgumentExtender=function(F){ // From pairs to infinite number of arguments
@@ -788,7 +788,7 @@ Delete=function(array,i){
 	return a.slice(0,i).concat(a.slice(i+1,a.length));
 }
 
-Reverse=function(AOS){
+Reverse=function(SAO){
 	if(IsString(SAO))
 		return SAO.split("").reverse().join("");
 	else if(IsObject(SAO))
@@ -1321,12 +1321,12 @@ CloneArray=function(Arr){
 	return [...Arr].map(Clone);
 }
 
-Clone=function(AOS){
-	if(IsObject(AOS))
-		return CloneObject(AOS);
-	if(IsArray(AOS))
-		return CloneArray(AOS);
-	return AOS;
+Clone=function(SAO){
+	if(IsObject(SAO))
+		return CloneObject(SAO);
+	if(IsArray(SAO))
+		return CloneArray(SAO);
+	return SAO;
 }
 
 
