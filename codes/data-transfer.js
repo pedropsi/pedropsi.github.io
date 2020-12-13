@@ -440,22 +440,22 @@ InArrayOrObj=function(arrayOrObj,n){
 };
 
 //Update Object Keys
-MapObject=function(Obj,F){
+MapObject=function(Obj,ValueKeyer){
 	var keys=Keys(Obj);
 	for (var i in keys){
 		if(Obj.hasOwnProperty(keys[i])){
 			//F(value, key, obj)
-			F(Obj[keys[i]],keys[i],Obj);
+			ValueKeyer(Obj[keys[i]],keys[i],Obj);
 		}
 	}
 	return Obj;
 };
 
 
-FilterObject=function(Obj,F){
+FilterObject=function(Obj,ValueKeyer){
 	var O={};
 	MapObject(Obj,function (v,k,o){
-		if(F(v,k))
+		if(ValueKeyer(v,k))
 			O[k]=v;
 	})
 	return O;
