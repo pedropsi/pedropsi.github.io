@@ -780,6 +780,17 @@ Substrings=function(string){
 	return subs;
 }
 
+//Gather
+
+Gather=function(Obj,Equaliser){
+	var Equaliser=Equaliser||Equal;
+	var uniquekeys=Unique(Values(Obj).map(Equaliser));
+	var o={};
+		uniquekeys.map(k=>(o[k]=FilterObject(Obj,v=>(Equaliser(v)===k))));
+		return o;
+}
+
+
 //delete from array
 Delete=function(array,i){
 	if(!array||typeof i!=="number"||i<0||i>=array.length)
@@ -803,6 +814,7 @@ ReverseKeysObject=function(Obj){ //Reverse key order
 	k.map(function(x){O[x]=Obj[x]});
 	return O;
 };
+
 
 RotateMatrix=function(as,left){
 	var width=as.map(function(line){return line.length});
@@ -5095,9 +5107,19 @@ YearsString=function(start,end){
 }
 
 DateNamer=function(date){
+	return `${DayNamer(date)} of ${MonthYearNamer(date)}`;
+}
+
+DayNamer=function(date){
 	if(!date)
-		return DateNamer(Today());
-	return `${WeekDay(date,DayNames())}, ${Day(date)}<sup>${DayST(Day(date))}</sup> of ${MonthName(Month(date),Months())} ${Year(date)}`;
+		return MonthYearNamer(Today());
+	return `${WeekDay(date,DayNames())}, ${Day(date)}<sup>${DayST(Day(date))}</sup>`;
+}
+
+MonthYearNamer=function(date){
+	if(!date)
+		return MonthYearNamer(Today());
+	return `${MonthName(Month(date),Months())} ${Year(date)}`;
 }
 
 DateRSS=function(date){

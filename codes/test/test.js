@@ -373,6 +373,7 @@ SaveTest(RotateString,["Hi!"],"H\ni\n!","rotate right, monoline");
 SaveTest(RotateString,["NE\nWS"],"WN\nSE","rotate right, square");
 SaveTest(RotateString,[""],"","empty string");
 
+SaveTest(Gather,[{a:1,b:2,c:3,d:3},x=>x%2],{0:{b:2},1:{a:1,c:3,d:3}},"gather object, custom equaliser");
 
 ///////////////////////////////////////////////////////////////////////////////
 //Repetitive functions

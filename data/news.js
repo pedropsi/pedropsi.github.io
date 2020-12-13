@@ -508,10 +508,12 @@ NonFutureItem=function(npObj){//news or page Object
 	}
 };
 
-NewsEntryHTML=function(change){
+NewsEntryHTML=function(change,Opts){
+	var d=Opts.depth||2;
+	var DateNamer=Opts.DateNamer||DateNamer;
 	return `
-	<h2>${DateNamer(StringDate(change.DATE))}</h2>
-	${change.HEADER?`<h3>${UnFunction(change.HEADER)}</h3>`:""}
+	<h${d}>${DateNamer(StringDate(change.DATE))}</h${d}>
+	${change.HEADER?`<h${d+1}>${UnFunction(change.HEADER)}</h${d+1}>`:""}
 	${UnFunction(change.PIECE)}
 	`;
 }
@@ -522,12 +524,20 @@ var NewsOptions={
 	FilterF:NonFutureItem
 }
 
-NewsHTML=function(){
+NewsMonthSectionHTML=function(News){
+	var month=MonthYearNamer(StringDate(First(News).DATE));
 	return SectionHTML({
 		...NewsOptions,
+		ItemHTML:item=>NewsEntryHTML(item,{depth:3,DateNamer:DayNamer}),
 		Source:News,
-		OuterWrapper:HTMLIder("news") //for auto-update
+		header:`<h2>${month}</h2>`
 	})
+}
+
+NewsHTML=function(){
+	var monthsObj=Gather(News,piece=>Month(StringDate(piece.DATE))/13+Year(StringDate(piece.DATE)));
+	var monthly=Reverse(Values(monthsObj)).map(NewsMonthSectionHTML).join("");
+	return HTMLIder("news")(monthly) //for auto-update
 }
 
 RecentNewsHTML=function(){
