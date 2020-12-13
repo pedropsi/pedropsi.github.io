@@ -1573,9 +1573,12 @@ if(typeof Local==="undefined")
 		return /^file\:.*/.test(document.URL);
 	}
 	
-JoinPath=function(path,subpath){
-	return path.replace(/\\*$/,"")+"/"+subpath.replace(/^\\*/,"");
+BiJoinPath=function(path,subpath){
+	return UnPosfix(path,"/")+"/"+UnPrefix(subpath,"/");
 }
+
+JoinPath=ArgumentExtender(BiJoinPath);
+
 GlocalPath=function(urlpath,relativepath){
 	if(Local())
 		var u="..";
@@ -1824,12 +1827,6 @@ LoadAsync=function(sourcename,folder){
 LoaderInFolder=function(folder){
 	return function(sourcename){return LoadAsync(sourcename,folder)};
 }
-
-BiJoinFolder=function(folderString,subfolderString){
-	return UnPosfix(folderString,"/")+"/"+UnPrefix(subfolderString,"/");
-}
-
-JoinFolder=ArgumentExtender(BiJoinFolder);
 
 
 //Load styles
