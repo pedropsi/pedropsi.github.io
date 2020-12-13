@@ -666,16 +666,14 @@ var NewsSources={
 			var stars=item.stars?(item.stars+ObtainSymbol("star")):"";
 			var suffix=(item.variant?(" - "+item.variant):"");
 				title=title+suffix;
-			var varitext=item.variant?(Capitalise(item.variant)+" is a star battle variant."):"";
 			var link=AHTML(title,item.href?item.href:"star-battle.html");
 				title=title+(stars?(", "+stars):"");
-				console.log(item,key,title,number,suffix,varitext);
+
 			return {
 				DATE:item.date,
 				HEADER:title,
 				PIECE:`
-				<p>${link}, puzzle #${number} in the ${AHTML("star battle collection","star-battle.html")}, now released.</p>
-				<p>${varitext}</p>`,
+				<p>${link}, puzzle #${number} in the ${AHTML("star battle collection","star-battle.html")}, now released.</p>`,
 			}
 		}
 	}
