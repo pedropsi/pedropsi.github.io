@@ -510,7 +510,6 @@ NonFutureItem=function(npObj){//news or page Object
 
 NewsEntryHTML=function(change,Opts){
 	var d=Opts.depth||2;
-	var DateNamer=Opts.DateNamer||DateNamer;
 	return `
 	<h${d}>${DateNamer(StringDate(change.DATE))}</h${d}>
 	${change.HEADER?`<h${d+1}>${UnFunction(change.HEADER)}</h${d+1}>`:""}
