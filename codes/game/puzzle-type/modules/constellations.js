@@ -2937,11 +2937,10 @@ function AggregateObject(ObjectOfObject){
 }
 
 var StarCodes=AggregateObject(StarCodesFull);
-	//StarCodes={...StarHRCodes,...StarCodes};
 var	SelfStarCodes={};
 	Values(StarCodes).map(v=>SelfStarCodes[v]=v);
 	Keys(StarsByMagnitude).map(k=>StarsByMagnitude[k].map(v=>SelfStarCodes[v]=v));
-	SelfStarCodes={...SelfStarCodes,...StarCodes};
+	SelfStarCodes={...StarHRCodes,...SelfStarCodes,...StarCodes};
 
 var DeclinationsConstellation={};
 	Keys(ConstellationDeclinations).map(
