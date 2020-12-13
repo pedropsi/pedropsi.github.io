@@ -403,7 +403,7 @@ var StarCodesFull={
 		"Sadalsund":"β Aqr",
 		"Saad el Sund":"β Aqr",
 		"Nir Saad al Saaoud":"β Aqr",
-		"Lucida Fortunæ Fortunarum":"β Aqr",
+		"Lucida Fortunae Fortunarum":"β Aqr",
 		"Sadalmelik":"α Aqr",
 		"Sadal Melik":"α Aqr",
 		"Sadalmelek":"α Aqr",
@@ -425,12 +425,12 @@ var StarCodesFull={
 		"Albali":"ε Aqr",
 		"Al Bali":"ε Aqr",
 		"Nir Saad Bula":"ε Aqr",
-		"Lucida Fortunæ Dissipantis":"ε Aqr",
+		"Lucida Fortunae Dissipantis":"ε Aqr",
 		"Ancha":"θ Aqr",
 		"EN Aqr":"3 Aqr",
 		"Bunda":"ξ Aqr",
 		"Thanih Saad al Saaoud":"ξ Aqr",
-		"Secunda Fortunæ Fortunarum":"ξ Aqr",
+		"Secunda Fortunae Fortunarum":"ξ Aqr",
 		"Kae Uh":"ο Aqr",
 		"Situla":"κ Aqr",
 		"ET Aqr":"108 Aqr",
@@ -2937,7 +2937,7 @@ function AggregateObject(ObjectOfObject){
 }
 
 var StarCodes=AggregateObject(StarCodesFull);
-	StarCodes={...StarHRCodes,...StarCodes};
+	//StarCodes={...StarHRCodes,...StarCodes};
 var	SelfStarCodes={};
 	Values(StarCodes).map(v=>SelfStarCodes[v]=v);
 	Keys(StarsByMagnitude).map(k=>StarsByMagnitude[k].map(v=>SelfStarCodes[v]=v));
