@@ -540,7 +540,6 @@ function GamebarColours(){
 
 function ColoriseGameBar(){
 	var stylesource=GamebarColours();
-	RemoveElement("game-bar-colours");
 	ReplaceStyleElement(stylesource,"game-bar-colours");
 }
 

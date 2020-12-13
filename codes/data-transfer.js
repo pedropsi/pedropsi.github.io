@@ -1849,7 +1849,7 @@ LoadStyle=function(sourcename){
 
 ReplaceStyleElement=function(stylesource,id){
 	RemoveElement(id);
-	AddElement("<style id='"+id+"'>"+stylesource+"</style>",'head');
+	AddElement(`<style id="${id}">${stylesource}</style>`,'head');
 }
 
 //Load objects from HTML pages
