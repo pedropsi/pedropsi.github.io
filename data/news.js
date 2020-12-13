@@ -651,7 +651,7 @@ DownloadSitemap=function(){
 ImportNewsObject=function(newsObj){
 	function AddNews(Obj){
 		Keys(Obj).map(k=>News[k]=newsObj.Transformer(Obj[k],k));
-		//setTimeout(()=>ReplaceElement(NewsHTML(),"news"),1000);
+		ReplaceElement(NewsHTML(),".news")
 	}
 	LoadHTMLObject(newsObj,AddNews);	
 }
