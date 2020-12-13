@@ -291,7 +291,8 @@ if(typeof CheckRegisterKey==="undefined")
 	}
 		
 
-window.Mobile.GestureHandler.prototype.toggleMenu=RequestLevelSelector;
+if(typeof RequestLevelSelector!=="undefined")
+	window.Mobile.GestureHandler.prototype.toggleMenu=RequestLevelSelector;
 if(typeof MobileInitialise!=="undefined")
 	MobileInitialise(window.Mobile.GestureHandler.prototype);
 
