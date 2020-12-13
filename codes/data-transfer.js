@@ -421,13 +421,7 @@ FlipKeysValues=function(Obj){
 	return O;
 };
 
-//Reverse key order
-ReverseKeysObject=function(Obj){
-	var k=Keys(Obj).reverse();
-	var O={};
-	k.map(function(x){O[x]=Obj[x]});
-	return O;
-};
+
 
 // Does element exist?
 InArrayOrObj=function(arrayOrObj,n){
@@ -557,6 +551,8 @@ ObjectArrayF=function(ArrayF,ObjectF){
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//Dictionaries
 
 DictionaryLowerAccesser=function(Dictionary,Rewriter){
 	return TransformAccesser(Dictionary,LowerCase,Identity,Rewriter);
@@ -792,12 +788,21 @@ Delete=function(array,i){
 	return a.slice(0,i).concat(a.slice(i+1,a.length));
 }
 
-Invert=function(as){
-	if(IsString(as))
-		return as.split("").reverse().join("");
+Reverse=function(AOS){
+	if(IsString(SAO))
+		return SAO.split("").reverse().join("");
+	else if(IsObject(SAO))
+		return ReverseKeysObject(SAO);
 	else
-		return as.reverse();
+		return SAO.reverse();
 }
+
+ReverseKeysObject=function(Obj){ //Reverse key order
+	var k=Keys(Obj).reverse();
+	var O={};
+	k.map(function(x){O[x]=Obj[x]});
+	return O;
+};
 
 RotateMatrix=function(as,left){
 	var width=as.map(function(line){return line.length});

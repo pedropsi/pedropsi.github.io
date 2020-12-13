@@ -1047,7 +1047,7 @@ function EmulateRight(levelstring){
 	return EmulatePushRight(levelstring);	
 }
 function EmulateLeft(levelstring){
-	return Invert(EmulatePushRight(Invert(levelstring)));	
+	return Reverse(EmulatePushRight(Reverse(levelstring)));	
 }
 function EmulateDown(levelstring){
 	return EmulateVertical(levelstring,true);
@@ -2072,7 +2072,7 @@ function Symmetries(L){
 
 	if(InversionSymmetric(L)){
 		ModifyLetters(ToggleInversion);
-		Letters.array=Letters.array.reverse();
+		Letters.array=Reverse(Letters.array);
 		direction=!direction;
 		Memo(direction);
 
@@ -2083,7 +2083,7 @@ function Symmetries(L){
 	}
 	if(HorizontalSymmetric(L)){
 		ModifyLetters(ToggleHorizontal);
-		Letters.array=Letters.array.reverse();
+		Letters.array=Reverse(Letters.array);
 		
 		direction=!direction;
 		Memo(direction);
@@ -2227,8 +2227,8 @@ function NokiaGroupNumber(L){
 
 //Loosely
 function LooselyMath(digitstring){
-	var n=Max(0,Number(digitstring.replaceAll("_","").split("").reverse().join(""))-1);
-	return String(n).split("").reverse().map(DictionaryLowerAccesser(LEDNumberLetters)).join("");
+	var n=Max(0,Number(Reverse(digitstring.replaceAll("_","")))-1);
+	return Reverse(String(n).split("")).map(DictionaryLowerAccesser(LEDNumberLetters)).join("");
 
 }
 
@@ -2641,7 +2641,7 @@ function DeleteLetterAfter(n){
 }
 
 function DeleteLetters(array){
-	var positions=Unique(array).reverse();
+	var positions=Reverse(Unique(array));
 		positions=positions.filter(p=>(p===Max(0,Min(Letters().length-1,p))));
 		
 		positions.map(l=>Letter(l,false));
@@ -3207,7 +3207,7 @@ function UnderlineWordstroke(word){
 }
 
 function LastSeparatorIndex(array){
-	var i=[...array].reverse().indexOf(separator);
+	var i=Reverse([...array]).indexOf(separator);
 	if(i===-1)
 		return -1;
 	else
@@ -3236,12 +3236,13 @@ function MostWordstroke(){
 
 function ModifyStroke(word,symbol){
 	Keystrokes();
-	var word=word.toUpperCase().split("").reverse().join("~");
-	var strokes=Keystrokes.array.reverse().join("~");
+	var word=Reverse(word.toUpperCase().split("")).join("~");
+	var strokes=Reverse(Keystrokes.array).join("~");
 	//console.log(word,strokes);
 	strokes=strokes.replace(word,word.replace(/\~/g,symbol+"~"+symbol)).split("~");
 	//console.log(strokes);
-	strokes=strokes.map(k=>In(k,symbol)?Posfix(UnPrefix(k,symbol),symbol):k).reverse();
+	strokes=strokes.map(k=>In(k,symbol)?Posfix(UnPrefix(k,symbol),symbol):k);
+	strokes=Reverse(strokes);
 	//console.log(strokes);
 	Keystrokes(strokes)
 }
