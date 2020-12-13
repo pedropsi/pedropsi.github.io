@@ -524,13 +524,23 @@ var NewsOptions={
 	FilterF:NonFutureItem
 }
 
-NewsMonthSectionHTML=function(News){
-	var month=MonthYearNamer(StringDate(First(News).DATE));
+NewsMonthSectionHTML=function(MonthNews){
+	var month=MonthYearNamer(StringDate(First(MonthNews).DATE));
+	var daysObj=Gather(MonthNews,piece=>StringDate(piece.DATE));
+	var daily=Values(daysObj).map(NewsDaySectionHTML).join("");
+	return `
+		<h2>${month}</h2>
+		${daily}`
+}
+
+NewsDaySectionHTML=function(DayNews){
+	var day=DayNamer(StringDate(First(DayNews).DATE));
 	return SectionHTML({
-		...NewsOptions,
-		ItemHTML:item=>NewsEntryHTML(item,{depth:3,DateNamer:DayNamer}),
-		Source:News,
-		header:`<h2>${month}</h2>`
+		Source:DayNews,
+		header:`<h3>${day}</h3>`,
+		ItemHTML:function(item){return`
+			${item.HEADER?`<h4>${UnFunction(item.HEADER)}</h4>`:""}
+			${UnFunction(item.PIECE)}`;}
 	})
 }
 
