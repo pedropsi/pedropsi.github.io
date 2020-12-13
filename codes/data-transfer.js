@@ -1301,7 +1301,7 @@ FunctionBody=function(FunctionF){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Join Objects, overwriting conflicting properties
-FuseObjects=function(obj,newObj){
+BiFuseObjects=function(obj,newObj){
 	var O={};
 	function SetValueKey(value,key){O[key]=value};
 	if(obj)
@@ -1311,17 +1311,9 @@ FuseObjects=function(obj,newObj){
 	return O;
 }
 
-FuseObjectArray=function(objArray){
-	if(objArray.length<1)
-		return {};
-	else{
-		var O=objArray[0];
-		for(var i=1;i<=objArray.length;i++){
-			O=FuseObjects(O,objArray[i])
-		}
-		return O;
-	}
-}
+FuseObjects=ArgumentExtender(BiFuseObjects);
+
+
 
 CloneObject=function(Obj){
 	var O={};

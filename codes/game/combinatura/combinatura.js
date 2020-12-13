@@ -63,14 +63,14 @@ function ObtainKeyActionsGame(){
 	
 	keyactions[StringSymbol("restart")]=ObtainRestart;
 	
-	keyactions=FuseObjectArray([
+	keyactions=FuseObjects(
 		keyactions,
 		LanguageKeyActions("D","DE"),
 		LanguageKeyActions("E","EN"),
 		LanguageKeyActions("F","FR"),
 		LanguageKeyActions("P","PT"),
 		LanguageKeyActions("Z","ZEN")
-	]);
+	);
 	
 	return keyactions;
 };
