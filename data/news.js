@@ -24,7 +24,6 @@ News={
 		HEADER:()=>"Star battle Interactive",
 		PIECE:()=>`
 		<p>${AHTML("star-battle")} now integrates the ${v.A_HYPERROGUE()} engine. Thanks ${v.ZENOROGUE()}!</p>
-		<p>${AHTML("Puzzle 13","star-battle.html?c=-sb&1=starbattle-cube-13.lev")} added.</p>
 	`,ID:"index"},
 N_56:{
 		DATE:"2020-09-25",
