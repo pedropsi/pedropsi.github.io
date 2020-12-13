@@ -701,6 +701,27 @@ BiUnion=function(AO1,AO2){
 var Union=ArgumentExtender(BiUnion);
 
 
+JoinSAO=function(SAO1,SAO2){
+	if(IsString(SAO1)&&IsString(SAO2))
+		return SAO1+SAO2;
+	else if(IsObject(SAO1)&&IsObject(SAO2))
+		return {...SAO1,...SAO2	};
+	else if(IsArray(SAO1)&&IsArray(SAO2))
+		return SAO1.concat(SAO2);
+	else
+		console.log("error in JoinSAO", SAO1,SAO2);
+}
+
+BiJoin=function(AO1,AO2){
+	if(!AO2)
+		return AO1;
+	if(!AO1)
+		return AO2;
+	return JoinSAO(AO1,AO2);
+}
+
+var Join=ArgumentExtender(BiJoin);
+
 //Permutations of a set (enforces uniqueness or sort)
 // Permutations=function(array){
 // 	var array=Unique(array);

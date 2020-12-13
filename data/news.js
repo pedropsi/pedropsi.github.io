@@ -523,29 +523,38 @@ var NewsOptions={
 	FilterF:NonFutureItem
 }
 
-NewsMonthSectionHTML=function(MonthNews){
-	var month=MonthYearNamer(StringDate(First(MonthNews).DATE));
-	var daysObj=Gather(MonthNews,piece=>StringDate(piece.DATE));
-	var daily=Values(daysObj).map(NewsDaySectionHTML).join("");
-	return `
-		<h2>${month}</h2>
-		${daily}`
+DayNewsArray=function(News){
+	var daysArray=Gather(News,piece=>StringDate(piece.DATE));
+	return Values(daysArray);
 }
 
-NewsDaySectionHTML=function(DayNews){
-	var day=DayNamer(StringDate(First(DayNews).DATE));
+NewsMonthSectionHTML=function(MonthNews){
+	var daysObj=DayNewsArray(MonthNews);
+		daysObj=Join(...daysObj);
+
+	var month=MonthYearNamer(StringDate(First(daysObj).DATE));
+
 	return SectionHTML({
-		Source:DayNews,
-		header:`<h3>${day}</h3>`,
-		ItemHTML:function(item){return`
-			${item.HEADER?`<h4>${UnFunction(item.HEADER)}</h4>`:""}
-			${UnFunction(item.PIECE)}`;}
+		...NewsOptions,
+		Source:daysObj,
+		header:`<h2>${month}</h2>`,
+		ItemHTML:NewsDaySectionHTML
 	})
 }
 
+NewsDaySectionHTML=function(item){
+	return `<h3>${DayNamer(StringDate(item.DATE))}</h3>
+			${item.HEADER?`<h4>${UnFunction(item.HEADER)}</h4>`:""}
+			${UnFunction(item.PIECE)}`;
+}
+
+MonthNewsArray=function(News){
+	var monthsArray=Gather(News,piece=>Month(StringDate(piece.DATE))/13+Year(StringDate(piece.DATE)));
+	return Reverse(Values(monthsArray));
+}
+
 NewsHTML=function(){
-	var monthsObj=Gather(News,piece=>Month(StringDate(piece.DATE))/13+Year(StringDate(piece.DATE)));
-	var monthly=Reverse(Values(monthsObj)).map(NewsMonthSectionHTML).join("");
+	var monthly=MonthNewsArray(News).map(NewsMonthSectionHTML).join("");
 	return HTMLIder("news")(monthly) //for auto-update
 }
 
