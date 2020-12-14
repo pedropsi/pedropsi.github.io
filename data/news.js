@@ -1,4 +1,10 @@
 News={
+	N_61:{
+		DATE:"2020-12-13",
+		HEADER:()=>"Level updates",
+		PIECE:()=>`
+		<p>${AHTML("puzzle-type")} levels POL*** and WHI*** updated in response to player feedback. Thanks ${v.DEUSOVI()} and ${v.PLURMORANT()}!</p>
+	`,ID:"puzzle-type"},
 	N_60:{
 		DATE:"2020-11-28",
 		HEADER:()=>"New level",
