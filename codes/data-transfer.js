@@ -1942,7 +1942,6 @@ MacroBareURL=function(c,parametersObject){
 };
 
 MacroURL=function(parameters){
-	return MacroBareURL("",parameters);
 	return MacroBareURL("AKfycbyvKrxqk9mHkpmVqsmHN0y2jO-8x40zurf4tdS7p2H-KExfnvM",parameters);
 }
 
