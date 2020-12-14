@@ -1314,6 +1314,10 @@ function Genetic(L){
 	Caret(Infinity);
 }
 
+var ColorSynonyms={
+	"mint green":"mint",
+	"mint cream":"mint"
+}
 
 function Fuchsia(L){
 	var saved=SavedLetters();
@@ -1333,7 +1337,9 @@ function Fuchsia(L){
 	}
 	else if(color.length===6){
 		var color=Rest(color+L);
-			color=NamedColour(color).toUpperCase();
+			color=NamedColour(color);
+			color=TransformAccesser(ColorSynonyms,LowerCase)(color)
+			color=color.toUpperCase();
 		Letters(saved.join("")+color);
 		AddStrokeSeparator();
 	}
