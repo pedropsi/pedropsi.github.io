@@ -1314,11 +1314,6 @@ function Genetic(L){
 	Caret(Infinity);
 }
 
-var ColorSynonyms={
-	"mint green":"mint",
-	"mint cream":"mint"
-}
-
 function Fuchsia(L){
 	var saved=SavedLetters();
 	var color=TemporaryWord().toLowerCase();

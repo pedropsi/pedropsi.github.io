@@ -968,6 +968,12 @@ function NamedColour(colorstring){
 	return c[0][3];
 }
 
+var ColorSynonyms={
+	"mint green":"mint",
+	"mint cream":"mint",
+	"magic mint":"mint"
+}
+
 try{
 	SaveTest(NamedColour,"#FFFFFF","White","hex to white");
 	SaveTest(NamedColour,"#FF0000","Red","hex to red");
