@@ -157,6 +157,7 @@ var gameModulesLater=[
 "constellations",
 
 //"meta",
+"lang-en-verb-tenses",
 
 "lang-fr-adj",
 "lang-fr-adv-extra",
@@ -438,6 +439,7 @@ function ForbidSpaceActions(key){
 		"Loosely less",
 		"Latent clones",
 		"Shepherdess hence unladylike",
+		"Store delay corrodes present",
 		"White chocolate mint",
 		"Nigeria",
 		"Polaris Australis",
@@ -574,6 +576,7 @@ var LevelDifficulty={
 	"Odd":3,
 	"Latent clones":3,
 	"Shepherdess hence unladylike":3,
+	"Store delay corrodes present":3,
 	"White chocolate mint":2,
 	"Starting buds":5,
 	"La rapide surprise":5,
@@ -635,6 +638,7 @@ var LanguageLevels=[
 	"Anagram",
 	"Latent clones",
 	"Shepherdess hence unladylike",
+	"Store delay corrodes present",
 	"Starting buds",
 	"La rapide surprise",
 ]
@@ -719,6 +723,7 @@ var LevelGoals=[			//Required types of thinking:
 	
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
+	"Store delay corrodes present",			//Keyword, Swap, Retroactive, Language
 	"La rapide surprise",				//Keyword, Swap, Retroactive, Language
 	"Starting buds",					//Language
 
@@ -777,6 +782,7 @@ var LevelGoalAliases={
 	"Weightier":"Latent Clones",
 	"German Shepherd":"Shepherdess hence unladylike",
 	"Cherished Woman":"Shepherdess hence unladylike",
+	"playmate resents flit":"Store delay corrodes present",
 	"Denebola":"Polaris Australis",
 	"Fuchsia":"White chocolate mint",
 	"White":"White chocolate mint",
@@ -980,7 +986,7 @@ var LevelInstructions={
 		Letters(FirstReplaceString(Word(),GenderReplacementRules));
 		Caret(Infinity);		
 	},
-	"Foresaw delay but negotiates":function(L){
+	"Store delay corrodes present":function(L){
 		InputLetterAfter(L);
 		AddStrokeValid(L);
 		Letters(FirstReplaceString(Word(),VerbPastTenseReplacementRules));
@@ -3291,6 +3297,7 @@ function LevelHighlightableWords(title){
 		"Odd":["Odd","Even"],
 		"Latent clones":NumberNames,
 		"Shepherdess hence unladylike":GenderedMale,
+		"Store delay corrodes present":EnVerbsInfinitive,
 		"White chocolate mint":ColourNames,
 		"Just cut and paste":["cut","copy","paste"],
 		"Order is all":["is"]

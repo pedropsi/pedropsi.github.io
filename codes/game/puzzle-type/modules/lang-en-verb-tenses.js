@@ -4117,6 +4117,7 @@ var EnRegularVerbsInfinitive=[
 	"trump",
 	"trumpet",
 	"truncate",
+	"trust",
 	"tuck",
 	"tumble",
 	"tune",
