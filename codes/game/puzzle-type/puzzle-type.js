@@ -695,7 +695,6 @@ var LevelGoals=[			//Required types of thinking:
 	"Precedent",			//Alphabetical, Retroactive
 	
 	"Symmetries",			//Shape, Retroactive
-
 	"Fillet",				//Shape, Proactive 
 	"Reshape",				//Shape, Proactive 
 	"Topological",			//Shape, Growth, Monoactive
@@ -710,32 +709,33 @@ var LevelGoals=[			//Required types of thinking:
 	"Nigeria",				//Word, Mapping, Geography
 	"Polaris Australis",	//Word, Mapping, Astronomy
 	
-	"Magnetism",			//Positional, Retroactive, Science
 	"Genetic.",				//Encoding, Word, Science
 	"Anagram",				//Word, Mapping, Language, Once,
 	"Ironclad",				//Encoding, Word, Science
-	
 	"White chocolate mint",	//Encoding, Colour
 	"Deaf",					//Encoding, Music
-	"EnactLawsMama",			  //Encoding,
-	"Dividi",				//Encoding, Arithmethic, Retroactive
 
-	"Odd",								//Keyword, Positional, Retroactive, Subtractive
+	"EnactLawsMama",		//Encoding, Languages
+	
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-	
-	"Starting buds",					//Language
 	"La rapide surprise",				//Keyword, Swap, Retroactive, Language
-	
-	"Just cut and paste",				//Keyword, Proactive, Redefinition
-	"Order is all",						//Keyword, Proactive, Increment, Redefinition
+	"Starting buds",					//Language
 
-	"Teleporter",				//Positional, Retroactive
+	"Teleporter",			//Positional, Retroactive
 	"Superior",				//Positional, Alphabetical, Retroactive
 	//"Tangles",			//Alphabetical, Cyclic, Arithmethic, Proactive
 	"Difference",			//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
 	//"Photocopier",		//Positional, Alphabetical, Arithmethic, Proactive, Retroactive
-	"Loosely less",			//Keyboard, Shape, Proactive
+
+	"Loosely less",			//Keyboard, Shape, Proactive, Arithmetic
+
+	"Magnetism",						//Keyword, Positional, Retroactive
+	"Odd",								//Keyword, Positional, Retroactive, Subtractive
+	"Just cut and paste",				//Keyword, Proactive, Redefinition
+	"Order is all",						//Keyword, Proactive, Increment, Redefinition
+	"Dividi",					//Encoding, Arithmethic, Retroactive
+	
 ];
 
 function RestrictPlayableLevels(){
