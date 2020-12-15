@@ -708,6 +708,7 @@ var LevelGoals=[			//Required types of thinking:
 	"ひらがな",				//Keyboard, Syllabe, Language, Encoding
 
 	"Nigeria",				//Word, Mapping, Geography
+	"Polaris Australis",	//Word, Mapping, Astronomy
 	
 	"Magnetism",			//Positional, Retroactive, Science
 	"Genetic.",				//Encoding, Word, Science
@@ -725,7 +726,7 @@ var LevelGoals=[			//Required types of thinking:
 	
 	"Starting buds",					//Language
 	"La rapide surprise",				//Keyword, Swap, Retroactive, Language
-	"Polaris Australis",				//Word, Mapping, Astronomy
+	
 	"Just cut and paste",				//Keyword, Proactive, Redefinition
 	"Order is all",						//Keyword, Proactive, Increment, Redefinition
 
