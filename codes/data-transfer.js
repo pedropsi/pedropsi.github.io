@@ -934,6 +934,27 @@ StringReplaceOnceRuleArray=function(string,ruleArray){
 	return Fold(StringReplaceOnceRule,string,ruleArray);
 }
 
+FirstReplaceString=function(string,ruleArray){
+	var i=0;
+	var found=false;
+	var replaced;
+	while(!found&&i<ruleArray.length){
+		rule=ruleArray[i];
+		replaced=StringReplaceOnceRule(string,rule);
+		found=(replaced!==string);
+		if(!found)
+			i++;
+	}
+	return found?replaced:string;
+}
+
+StringPrefixes=function(string){
+	return Range(1,string.length).map(i=>string.slice(0,i))}
+
+StringSuffixes=function(string){
+	var l=string.length;
+	return Range(0,l-1).map(i=>string.slice(i,l))}
+
 ObjectRules=function(Obj){
 	var keys=Keys(Obj);
 	var a=[];

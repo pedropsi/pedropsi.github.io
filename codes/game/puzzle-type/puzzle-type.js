@@ -977,6 +977,13 @@ var LevelInstructions={
 		InputLetterAfter(L);
 		AddStrokeValid(L);
 		Letters(StringReplaceOnceRuleArray(Word(),GenderReplacementRules));
+		Letters(FirstReplaceString(Word(),GenderReplacementRules));
+		Caret(Infinity);		
+	},
+	"Foresaw delay but negotiates":function(L){
+		InputLetterAfter(L);
+		AddStrokeValid(L);
+		Letters(FirstReplaceString(Word(),VerbPastTenseReplacementRules));
 		Caret(Infinity);		
 	},
 	"Latent clones":Weightier,
@@ -3295,7 +3302,8 @@ function LevelHighlightableWords(title){
 }
 
 function HighlightableWords(title){
-	var combos=LevelHighlightableWords(title);
+	var keystrokes=Keystrokes().map(First).filter(Identity).join("").toLowerCase();
+	var combos=LevelHighlightableWords(title).filter(w=>In(keystrokes,w));
 	combos.map(UnderlineWordstroke);
 }
 
