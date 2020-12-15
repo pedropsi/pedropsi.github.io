@@ -976,7 +976,6 @@ var LevelInstructions={
 	"Shepherdess hence unladylike":function(L){
 		InputLetterAfter(L);
 		AddStrokeValid(L);
-		Letters(StringReplaceOnceRuleArray(Word(),GenderReplacementRules));
 		Letters(FirstReplaceString(Word(),GenderReplacementRules));
 		Caret(Infinity);		
 	},
