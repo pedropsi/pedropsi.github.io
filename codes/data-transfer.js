@@ -87,11 +87,38 @@ SingleSorter=function(F){
 Sorter=function(...functions){
 	return function(array){
 		var funs=[...functions];
+		if(!funs.length)
+			funs=[Identity];
 		funs.map(f=>(array=array.sort(SingleSorter(f))));
 		return array;
 	}
 }
 
+function SortObjectKeys(Obj,...Sorters){
+	var sortedkeys=Sorter(...Sorters)(Keys(Obj));
+	var o={};
+		sortedkeys.map(k=>o[k]=Obj[k]);
+		return o;
+}
+
+function SortObjectValues(Obj,...Sorters){
+	var sortedkeys=Sorter(...Sorters)(Values(Obj));
+	var o={};
+		sortedkeys.map(k=>o[k]=Obj[k]);
+		return o;
+}
+
+function SortArray(v,...Sorters){
+	return Sorter(...Sorters)(v);
+}
+
+function Sort(SAO,...Sorters){
+	if(IsArray(SAO))
+		return SortArray(SAO,...Sorters);
+	if(IsObject(SAO))
+		return SortObjectKeys(SAO,...Sorters);
+	return SAO;
+}
 
 
 //Key characters
