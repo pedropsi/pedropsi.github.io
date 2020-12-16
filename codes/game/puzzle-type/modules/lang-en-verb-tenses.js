@@ -4376,9 +4376,10 @@ var PastWords={
 }
 
 Range(0,11).map(m=>PastWords[Months()[m]]=Months()[(m+11)%12]);
-Range(0,12).map(m=>PastWords[m+" AM"]=(m+1)%12+" AM");
-Range(0,12).map(m=>PastWords[m+" PM"]=(m+1)%12+" PM");
-Range(0,12).map(m=>PastWords[m+" o clock"]=(m+11)%12+" o clock");
+Range(0,12).map(m=>PastWords[ReadNumber(m)+" AM"]=ReadNumber((m+1)%12)+" AM");
+Range(0,12).map(m=>PastWords[ReadNumber(m)+" PM"]=ReadNumber((m+1)%12)+" PM");
+Range(0,12).map(m=>PastWords[ReadNumber(m)+" o clock"]=ReadNumber((m+11)%12)+" o clock");
+Range(0,12).map(m=>PastWords[ReadNumber(m)+" sharp"]=ReadNumber((m+11)%12)+" sharp");
 
 
 
@@ -4386,6 +4387,7 @@ var PastReplacementRules=Keys(PastWords).sort(SingleSorter(w=>-w.length)).map(
 	w=>[new RegExp(w.toUpperCase()+"$"),PastWords[w].toUpperCase()]
 );
 
-PastReplacementRules=Join(VerbPastTenseReplacementRules,PastReplacementRules)
+PastReplacementRules=Join(VerbPastTenseReplacementRules,PastReplacementRules);
+PastReplacementRules=Sort(PastReplacementRules,rule=>-rule[0].source.length);
 
 var HighlightablePast=Join(EnVerbsInfinitive,Keys(PastWords));
