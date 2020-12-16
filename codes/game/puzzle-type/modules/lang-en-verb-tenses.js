@@ -1,4 +1,8 @@
 IrregularVerbPasts={
+	"am":"was",
+	"are":"was",
+	"is":"was",
+
 	"arise":"arose",
 	"awake":"awakened",
 	"backslide":"backslid",
@@ -4315,3 +4319,73 @@ var	VerbPastTenseReplacementRules=EnVerbsInfinitive.sort(SingleSorter(x=>-x.leng
 );
 
 
+var PastWords={
+	"present":"past",
+	"future":"present",
+	"now":"then",
+	"today":"yesterday",
+	"tomorrow":"today",
+	"tonight":"yestereve",
+	"tonight":"yestermorn",
+	"this year":"yesteryear",
+	"this week":"yesterweek",
+	"this month":"yestermonth",
+
+	"next":"previous",
+	"after":"before",
+	"first":"last",
+	"afterwards":"beforehand",
+	"hereafter":"heretofore",
+
+	// "afterword":"foreword",
+	
+	"young":"old",
+
+	"sunrise":"dawn",
+	"dawn":"morning",
+	"morning":"noon",
+	"noon":"afternoon",
+	"afternoon":"evening",
+	"evening":"dusk",
+	"dusk":"sunset",
+	"sunset":"night",
+	"night":"midnight",
+	"midnight":"wee hours",
+	"wee hours":"sunrise",
+	
+	"spring":"summer",
+	"summer":"autumn",
+	"autumn":"winter",
+	"winter":"spring",
+
+	"solstice":"equinox",
+	"equinox":"solstice",
+	
+	"vernal equinox":"spring",
+	"autumnal equinox":"autumn",
+	"summer solstice":"summer",
+	"winter solstice":"winter",
+
+
+	"new moon":"first quarter moon",
+	"first quarter moon":"full moon",
+	"full moon":"third quarter moon",
+	"third quarter moon":"new moon",
+
+	//All festive dates across the world "Xmas":	
+}
+
+Range(0,11).map(m=>PastWords[Months()[m]]=Months()[(m+11)%12]);
+Range(0,12).map(m=>PastWords[m+" AM"]=(m+1)%12+" AM");
+Range(0,12).map(m=>PastWords[m+" PM"]=(m+1)%12+" PM");
+Range(0,12).map(m=>PastWords[m+" o clock"]=(m+11)%12+" o clock");
+
+
+
+var PastReplacementRules=Keys(PastWords).sort(SingleSorter(w=>-w.length)).map(
+	w=>[new RegExp(w.toUpperCase()+"$"),PastWords[w].toUpperCase()]
+);
+
+PastReplacementRules=Join(VerbPastTenseReplacementRules,PastReplacementRules)
+
+var HighlightablePast=Join(EnVerbsInfinitive,Keys(PastWords));

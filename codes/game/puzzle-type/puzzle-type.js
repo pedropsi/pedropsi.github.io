@@ -439,7 +439,7 @@ function ForbidSpaceActions(key){
 		"Loosely less",
 		"Latent clones",
 		"Shepherdess hence unladylike",
-		"Store delay corrodes present",
+		"Doves flit before winter",
 		"White chocolate mint",
 		"Nigeria",
 		"Polaris Australis",
@@ -576,10 +576,10 @@ var LevelDifficulty={
 	"Odd":3,
 	"Latent clones":3,
 	"Shepherdess hence unladylike":3,
-	"Store delay corrodes present":3,
+	"Doves flit before winter":4,
+	"La rapide surprise":5,
 	"White chocolate mint":2,
 	"Starting buds":5,
-	"La rapide surprise":5,
 	"Just cut and paste":3,
 	"Order is all":4
 };
@@ -638,7 +638,7 @@ var LanguageLevels=[
 	"Anagram",
 	"Latent clones",
 	"Shepherdess hence unladylike",
-	"Store delay corrodes present",
+	"Doves flit before winter",
 	"Starting buds",
 	"La rapide surprise",
 ]
@@ -723,7 +723,7 @@ var LevelGoals=[			//Required types of thinking:
 	
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-	"Store delay corrodes present",			//Keyword, Swap, Retroactive, Language
+	"Doves flit before winter",			//Keyword, Swap, Retroactive, Language
 	"La rapide surprise",				//Keyword, Swap, Retroactive, Language
 	"Starting buds",					//Language
 
@@ -782,7 +782,10 @@ var LevelGoalAliases={
 	"Weightier":"Latent Clones",
 	"German Shepherd":"Shepherdess hence unladylike",
 	"Cherished Woman":"Shepherdess hence unladylike",
-	"playmate resents flit":"Store delay corrodes present",
+	"Playmate resents flit":"Doves flit before winter",
+	"Store delay corrodes present":"Doves flit before winter",
+	"Present state delays":"Doves flit before winter",
+	"Doves flit past":"Doves flit before winter",
 	"Denebola":"Polaris Australis",
 	"Fuchsia":"White chocolate mint",
 	"White":"White chocolate mint",
@@ -986,10 +989,10 @@ var LevelInstructions={
 		Letters(FirstReplaceString(Word(),GenderReplacementRules));
 		Caret(Infinity);		
 	},
-	"Store delay corrodes present":function(L){
+	"Doves flit before winter":function(L){
 		InputLetterAfter(L);
 		AddStrokeValid(L);
-		Letters(FirstReplaceString(Word(),VerbPastTenseReplacementRules));
+		Letters(FirstReplaceString(Word(),PastReplacementRules));
 		Caret(Infinity);		
 	},
 	"Latent clones":Weightier,
@@ -3297,7 +3300,7 @@ function LevelHighlightableWords(title){
 		"Odd":["Odd","Even"],
 		"Latent clones":NumberNames,
 		"Shepherdess hence unladylike":GenderedMale,
-		"Store delay corrodes present":EnVerbsInfinitive,
+		"Doves flit before winter":HighlightablePast,
 		"White chocolate mint":ColourNames,
 		"Just cut and paste":["cut","copy","paste"],
 		"Order is all":["is"]
