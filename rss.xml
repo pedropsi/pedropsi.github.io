@@ -16,6 +16,79 @@
 		</image>
 		
 	<item>
+		<title><![CDATA[Level updates]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-12-13</guid>
+		<pubDate>Sun, 13 Dec 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+		<p><a href='puzzle-type.html'>Puzzle Type</a> levels POL*** and WHI*** updated in response to player feedback. Thanks <a href='https://twitter.com/deusovi' rel='noreferrer noopener'><span class="name">Deusovi</span></a> and <a href='https://twitter.com/schulzy12' rel='noreferrer noopener'><span class="name">Plurmorant</span></a>!</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[New level]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-11-28</guid>
+		<pubDate>Sat, 28 Nov 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+		<p><a href='puzzle-type.html'>Puzzle Type</a> received new level: POL***.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[New levels + Sound fix]]></title>
+		<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+		<guid>https://pedropsi.github.io/puzzle-type.html?guid=2020-11-21</guid>
+		<pubDate>Sat, 21 Nov 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
+			
+		<p><a href='puzzle-type.html'>Puzzle Type</a> received three new levels: RES***, РУС*** and WHI*** (a nice remake of a wrongly discarded level).</p>
+		<p>Fixed a minor sound bug. Other bugfixes. Major update and new trailer planned.</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Game]]></category>
+<category><![CDATA[Puzzle]]></category>
+	</item>
+	
+
+	<item>
+		<title><![CDATA[Starkoban + bugfixes]]></title>
+		<link>https://pedropsi.github.io/index.html#RSS</link>
+		<guid>https://pedropsi.github.io/index.html?guid=2020-11-15</guid>
+		<pubDate>Sun, 15 Nov 2020 07:06:05 GMT</pubDate>
+		<description>
+		<![CDATA[
+			<img src="https://pedropsi.github.io/images/180/splash.svg" width="180" height="180" alt="Creative Archive" title="Creative Archive"/>
+			
+		<p><a href='starkoban.html'>Starkoban</a>, a puzzly mix of star battle and sokoban, was released!</p>		
+		<p>Controls in the landscape mode are now working correcly in all puzzlescript games. Thanks <a href='https://tophwells.itch.io/' rel='noreferrer noopener'><span class="name">Cristopher Wells (Toph Wells)</span></a>!</p>
+	
+		]]>
+		</description>
+		<category><![CDATA[Sitemap]]></category>
+	</item>
+	
+
+	<item>
 		<title><![CDATA[Star battle Interactive]]></title>
 		<link>https://pedropsi.github.io/index.html#RSS</link>
 		<guid>https://pedropsi.github.io/index.html?guid=2020-10-04</guid>
@@ -25,7 +98,6 @@
 			<img src="https://pedropsi.github.io/images/180/splash.svg" width="180" height="180" alt="Creative Archive" title="Creative Archive"/>
 			
 		<p><a href='star-battle.html'>Star Battle</a> now integrates the <a href='https://roguetemple.com/z/hyper/' rel='noreferrer noopener'>HyperRogue</a> engine. Thanks <a href='https://twitter.com/ZenoRogue' rel='noreferrer noopener'><span class="name">ZenoRogue</span></a>!</p>
-		<p><a href='star-battle.html?c=-sb&1=starbattle-cube-13.lev'>Puzzle 13</a> added.</p>
 	
 		]]>
 		</description>
@@ -362,7 +434,7 @@
 		<![CDATA[
 			<img src="https://pedropsi.github.io/images/180/puzzle-type.gif" width="180" height="180" alt="Puzzle type" title="Puzzle type"/>
 			
-<p>Ongoing beta playtesting changes: clue HOMEOMORPHIC became TOP*** (with new rules); CHERISHEDWOMAN became SHE*** (expanded ruleset, same logic); O** received a new keyword; NOK*** lost the backspace glitch; small CSS tweaks and spacebar inputs support. Many thanks, <span class="name">Plurmorant</span>!</p>
+<p>Ongoing beta playtesting changes: clue HOMEOMORPHIC became TOP*** (with new rules); CHERISHEDWOMAN became SHE*** (expanded ruleset, same logic); O** received a new keyword; NOK*** lost the backspace glitch; small CSS tweaks and spacebar inputs support. Many thanks, <a href='https://twitter.com/schulzy12' rel='noreferrer noopener'><span class="name">Plurmorant</span></a>!</p>
 	
 		]]>
 		</description>
@@ -1120,97 +1192,6 @@
 		</description>
 		<category><![CDATA[Resource]]></category>
 <category><![CDATA[Tutorial]]></category>
-<category><![CDATA[Puzzlescript]]></category>
-	</item>
-	
-
-	<item>
-		<title><![CDATA[Logo hovering]]></title>
-		<link>https://pedropsi.github.io/undefined.html#RSS</link>
-		<guid>https://pedropsi.github.io/undefined.html?guid=2019-08-01</guid>
-		<pubDate>Thu, 1 Aug 2019 07:06:05 GMT</pubDate>
-		<description>
-		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/game-bar.svg" width="180" height="180" alt="Game Bar" title="Game Bar"/>
-			
-<p>After a mathematical simplification, the Creative Archive's logo, converted to a svg vector, reveals a different pattern on hover.</p>
-
-		]]>
-		</description>
-		<category><![CDATA[Resource]]></category>
-<category><![CDATA[Tutorial]]></category>
-<category><![CDATA[Puzzlescript]]></category>
-	</item>
-	
-
-	<item>
-		<title><![CDATA[Burokku Konekuta launches]]></title>
-		<link>https://pedropsi.github.io/burokku-konekuta.html#RSS</link>
-		<guid>https://pedropsi.github.io/burokku-konekuta.html?guid=2019-07-12</guid>
-		<pubDate>Fri, 12 Jul 2019 07:06:05 GMT</pubDate>
-		<description>
-		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/burokku-konekuta.png" width="180" height="180" alt="Burokku Konekuta" title="Burokku Konekuta"/>
-			
-<p><a href='burokku-konekuta.html'>Burokku Konekuta</a> がリリースされました!</p>
-
-		]]>
-		</description>
-		<category><![CDATA[Game]]></category>
-<category><![CDATA[Puzzle]]></category>
-<category><![CDATA[Puzzlescript]]></category>
-	</item>
-	
-
-	<item>
-		<title><![CDATA[Plaformer Template minor update]]></title>
-		<link>https://pedropsi.github.io/platformer-template.html#RSS</link>
-		<guid>https://pedropsi.github.io/platformer-template.html?guid=2019-06-30</guid>
-		<pubDate>Sun, 30 Jun 2019 07:06:05 GMT</pubDate>
-		<description>
-		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/platformer-template.png" width="180" height="180" alt="Platformer Template" title="Platformer Template"/>
-			
-<ul>
-<li><b>level 31:</b> displaced a dash to remove one unintended solution; reduced level size by rearranging elements; simplified lesson;</li>
-<li><b>level 32:</b> switched places with former level 31.</li>
-</ul>
-	
-		]]>
-		</description>
-		<category><![CDATA[Game]]></category>
-<category><![CDATA[Platformer]]></category>
-<category><![CDATA[Puzzle]]></category>
-<category><![CDATA[Puzzlescript]]></category>
-	</item>
-	
-
-	<item>
-		<title><![CDATA[Data-driven changes to Plaformer Template]]></title>
-		<link>https://pedropsi.github.io/platformer-template.html#RSS</link>
-		<guid>https://pedropsi.github.io/platformer-template.html?guid=2019-05-30</guid>
-		<pubDate>Thu, 30 May 2019 07:06:05 GMT</pubDate>
-		<description>
-		<![CDATA[
-			<img src="https://pedropsi.github.io/images/180/platformer-template.png" width="180" height="180" alt="Platformer Template" title="Platformer Template"/>
-			
-<p>Major data-driven changes to selected levels, based on average time required to win a level, plus several minor tweaks:
-<ul>
-<li><b>level 10:</b> displacement of a single block to try to guide players towards the elusive solution;</li>
-<li><b>level 26:</b> major redesign to make it easier;</li>
-<li><b>level 43:</b> major redesign and simplification while retaining the core ideas;</li>
-<li><b>level 44:</b> reduction of level size;</li>
-<li><b>level 46:</b> reduction of level size and decluttering;</li>
-<li><b>level 48:</b> major redesign to declutter and ramp up the challenge;</li>
-<li><b>level 50:</b> remotion of one single dash causing one unintended solution.</li>
-</ul>
-</p>
-	
-		]]>
-		</description>
-		<category><![CDATA[Game]]></category>
-<category><![CDATA[Platformer]]></category>
-<category><![CDATA[Puzzle]]></category>
 <category><![CDATA[Puzzlescript]]></category>
 	</item>
 	

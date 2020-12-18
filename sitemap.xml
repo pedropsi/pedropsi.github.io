@@ -2,15 +2,21 @@
 		
 		
 	<url>
+		<loc>https://pedropsi.github.io/kudamono</loc>
+		<lastmod>2020-12-18</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+
+	<url>
 		<loc>https://pedropsi.github.io/starkoban</loc>
 		<lastmod>2020-11-14</lastmod>
-		<changefreq>weekly</changefreq>
+		<changefreq>monthly</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/gravirinth</loc>
 		<lastmod>2020-9-26</lastmod>
-		<changefreq>monthly</changefreq>
+		<changefreq>yearly</changefreq>
 	</url>
 
 	<url>
@@ -75,8 +81,8 @@
 
 	<url>
 		<loc>https://pedropsi.github.io/puzzle-type</loc>
-		<lastmod>2020-09-19</lastmod>
-		<changefreq>monthly</changefreq>
+		<lastmod>2020-12-13</lastmod>
+		<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
@@ -160,13 +166,13 @@
 	<url>
 		<loc>https://pedropsi.github.io/subscribe</loc>
 		<lastmod>2018-12-6</lastmod>
-		<changefreq>yearly</changefreq>
+		<changefreq>never</changefreq>
 	</url>
 
 	<url>
 		<loc>https://pedropsi.github.io/gravirinth-log</loc>
 		<lastmod>2018-11-22</lastmod>
-		<changefreq>yearly</changefreq>
+		<changefreq>never</changefreq>
 	</url>
 
 	<url>
@@ -255,7 +261,7 @@
 
 	<url>
 		<loc>https://pedropsi.github.io/index</loc>
-		<lastmod>2020-10-04</lastmod>
+		<lastmod>2020-11-15</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 
