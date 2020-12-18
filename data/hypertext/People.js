@@ -111,7 +111,7 @@ var PeopleObj={
 	// SKYMOO:{alias:"Skymoo"},
 	// VELLEIC:{alias:"Velleic"},
 	// SOFTFRO:{name:"SoftFro",PERSONAL_PAGE:"https://cryptics.jackbrounstein.com/user/27"},
-	"mansfield":{name:"Robert Mansfield",alias:"sftrabbit",TWITTER:"https://twitter.com/sftrabbit"},
+	"mansfield":{name:"Robert Mansfield",alias:"sftrabbit",TWITTER:"sftrabbit"},
 	// KAROO:{name:"Karoo"},
 	// HEMPULI:{name:"Arvi Teikari",alias:"Hempuli",PERSONAL_PAGE:"https://www.hempuli.com/"},
 	// PANCELOR:{alias:"Pancelor",ITCH:"pancelor"},
