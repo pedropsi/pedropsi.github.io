@@ -682,6 +682,8 @@ DownloadSitemap=function(){
 
 
 ImportNewsObject=function(newsObj){
+	if(NodejsDetected())
+		return {}; //Ignore for now
 	function AddNews(Obj){
 		Keys(Obj).map(k=>News[k]=newsObj.Transformer(Obj[k],k));
 		ReplaceElement(NewsHTML(),".news")
@@ -689,7 +691,7 @@ ImportNewsObject=function(newsObj){
 	LoadHTMLObject(newsObj,AddNews);	
 }
 
-var NewsSources={
+NewsSources={
 	starbattle:{
 		name:"starbattlesData",
 		source:"https://pedropsi.github.io/star-battle.html",
