@@ -725,7 +725,7 @@ BiUnion=function(AO1,AO2){
 	return Unique(AO1.concat(AO2));
 }
 
-var Union=ArgumentExtender(BiUnion);
+Union=ArgumentExtender(BiUnion);
 
 
 JoinSAO=function(SAO1,SAO2){
@@ -747,7 +747,7 @@ BiJoin=function(AO1,AO2){
 	return JoinSAO(AO1,AO2);
 }
 
-var Join=ArgumentExtender(BiJoin);
+Join=ArgumentExtender(BiJoin);
 
 //Permutations of a set (enforces uniqueness or sort)
 // Permutations=function(array){
