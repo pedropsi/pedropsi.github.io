@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="theme-color" content="rgb(7,0,112)"><link href="images/favicon-32x32.png" rel="icon" type="image/png"/><link href="images/favicon-32x32.png" rel="shortcut icon" type="image/x-icon"/><link href="images/180/star-battle.png" rel="apple-touch-icon"/><title>Star Battle geometries</title><meta property="og:title" content="Star Battle geometries"/><meta name="description" content="  About  Star Battle geometries  What if you could play  Star Battle  on  different geometries ? Now you can! 	 Star battle geometric gallery 	 Here you'll find star battles in different geometries: triangular, penrose and hyperbolic star battles, folding cubes and icosahedrons (star battle in space"/><meta property="og:description" content="  About  Star Battle geometries  What if you could play  Star Battle  on  different geometries ? Now you can! 	 Star battle geometric gallery 	 Here you'll find star battles in different geometries: triangular, penrose and hyperbolic star battles, folding cubes and icosahedrons (star battle in space"/><meta property="og:image" content="https://pedropsi.github.io/images/512/star-battle.png"/><meta name="twitter:image" content="https://pedropsi.github.io/images/512/star-battle.png"><meta property="og:url" content="https://pedropsi.github.io/star-battle.html"/><meta property="og:type" content="article"/><meta property="og:image:alt" content="Star Battle geometries"/><link href="codes/index.css" rel="stylesheet" type="text/css"/>
+		<script src="codes/data-transfer.js"></script>
+		<script id="post">var v={POST:()=>`
+
+${kudamonosData={
+	"20-kudamono.png":{
+		date:"16/12/2020",
+		difficulty:"easy",
+		author:"Pedro PSI",
+		playtesting:["Dohz","Notan"],
+		size:"8x8"
+	},
+	"21-kudamono.png":{
+		date:"17/12/2020",
+		difficulty:"medium",
+		author:"Pedro PSI",
+		playtesting:["Dohz"],
+		size:"8x8"
+	},
+	"23-kudamono.png":{
+		date:"18/12/2020",
+		difficulty:"hard",
+		author:"Pedro PSI",
+		playtesting:["Dohz","Portponky"],
+		size:"10x11"
+	}
+
+	},
+	kudamonos=FilterObject(kudamonosData,(o,k)=>(!o.date||Days(StringDate(o.date))>=0)),
+	""}
+
+
+<h2>Latest</h2>
+${FolderGalleryHTML("kudamono",FilterObject(kudamonos,(o,k)=>In([0,1,2].map(i=>Keys(kudamonos)[i]),k)))}
+
+${
+	kudamonosFuture=FilterObject(kudamonosData,(o,k)=>(o.date&&Days(StringDate(o.date))<0)),
+	l=Last(kudamonosFuture),
+	l&&l.date?`<p>Next update: <b>${DateNamer(StringDate(l.date))}</b>, with <em>${l.legend?l.legend:""}</em>!</p>`:""
+}
+<p>Possible future puzzles are listed under ${AHTML("#More Ideas")}. Excited about a particular idea? Do ${v.A_LET_ME_KNOW()}!</p>
+
+${v.HEADER()}
+
+<p>To play Kudamono, all you need is pen and paper! Or, if you prefer, the flood-fill tool will work on every puzzle, e.g using MSPaint or other image editing software.</p>
+
+<h3>Rules of Kudamono</h3>
+${LazyImageHTML({src:"kudamono/Kudamono-rules.png"})}
+
+<h3>Example of kudamono issues</h3>
+${LazyImageHTML({src:"kudamono/Kudamono-issues.png"})}
+
+<h2>Kudamono Paper Puzzles</h2>
+${FolderGalleryHTML("kudamono",Keys(kudamonos))}
+
+<h2>How to make kudamono puzzles</h2>
+<p>Download the ${AHTML("Kudamono template.pptx","images/Kudamono-template.pptx")}!</p>
+
+<h2>Credits</h2>
+<p>Special thanks to ${P("Dohz")} for trying all the puzzles, resulting in substantial improvements!</p>
+<p>Thanks for help clarifying the rules, and for an interesting discussion about the importance of uniqueness in paper puzzles: ${P("Dohz")}, ${P("Toomblercatz")}, ${v.PORTPONKY()} and ${v.DEUSOVI()},${v.KNEXATOR()} and ${P("mansfield")}.</p>
+
+<h2>FAQ</h2>
+<h3>Why is the puzzle named kudamono?</h3>
+<p>kudamono is a japanese word for fruit. It's common for paper puzzles to have names in japanese (e.g Sudoku, Kakuro, etc...) because many were invented in Japan.</p>
+
+<h2>More ideas</h2>
+<p>Listed for self-reference or in case anyone wants to make them real earlier. More potential fruit types:</p>
+<ul>
+	<li>banana - bananas connect to a single point (which is not a banana);</li>
+	<li>tomato - each tomato can pretend to be a fruit (of a different type);</li>
+	<li>pomegranate - pomegranate lines must surround any number of pomegranates without leaving empty space within.</li>
+	<li>chestnuts - crossed chestnuts connect diagonally;</li>
+	<li>pineapple - pineapples connect from the bottom (such a strange fruit);</li>
+	<li>coconut - cocunuts float at sea (must have a waterline below and none above);</li>
+	<li>etc... </li>
+</ul>
+
+
+
+`};</script><script src="data/page.js"></script>
+	</head></html>
+	
