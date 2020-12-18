@@ -5662,6 +5662,10 @@ var TypeSwipeKeys={
 ///////////////////////////////////////////////////////////////////////////////
 //Dynamic text and HyperText 
 
+P=function(name){
+	return HyperText("People/"+LowerSimpleString(name));
+}
+
 HyperText=function(name,value){
 	if(NodejsDetected()){
 		if(value){return globalThis[name]=value;}
