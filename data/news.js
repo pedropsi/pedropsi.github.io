@@ -709,6 +709,22 @@ var NewsSources={
 				<p>${link}, puzzle #${number} in the ${AHTML("star battle collection","star-battle.html")}, now released.</p>`,
 			}
 		}
+	},
+	kudamono:{
+		name:"kudamonosData",
+		source:"https://pedropsi.github.io/kudamono.html",
+		Transformer:function(item,key){
+			var number=UnAfterfix(key,"-");
+			var title=`Kudamono (puzzle ${number})`;
+			var link=AHTML(title,"kudamono.html");
+
+			return {
+				DATE:item.date,
+				HEADER:title,
+				PIECE:`
+				<p>${link}, from the ${AHTML("kudamono puzzle collection","kudamono.html")}, now released.</p>`,
+			}
+		}
 	}
 }
 
