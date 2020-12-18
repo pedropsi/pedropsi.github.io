@@ -147,13 +147,16 @@ MusicCreditsHTML=function(id){
 	return caption+table+audiotracks;
 }
 
-LazyImageHTML=function(ImageObj){
-	var id=GenerateId();
-
+ImageSource=function(ImageObj){
 	var src=ImageObj.src?`images/${ImageObj.src}`:`images/${ImageObj.FOLDER_SMALL}/${ImageObj.TRACK}`;
 		src=SourceCoerceExtension(src,ImageExtensions,"png");
 
-	LazyImageLoader(id,src);
+	return src
+}
+
+LazyImageHTML=function(ImageObj){
+	var id=GenerateId();
+	LazyImageLoader(id,ImageSource(ImageObj));
 
 	return `
 	<img	alt="${ImageObj.ALT||ImageObj.DESCRIPTION}" 
@@ -164,15 +167,12 @@ LazyImageHTML=function(ImageObj){
 }
 
 ImageCardHTML=function(ImageObj){
-	var src=ImageObj.src?`images/${ImageObj.src}`:`images/${ImageObj.FOLDER_SMALL}/${ImageObj.TRACK}`;
-		src=SourceCoerceExtension(src,ImageExtensions,"png");
-
 	if(ImageObj.href){
 		var link=ImageObj.href;
 		var target="";
 	}
 	else{ //by default, link to image file
-		var link=src;
+		var link=ImageSource(ImageObj);
 		var target=v.BLANK()
 	}
 

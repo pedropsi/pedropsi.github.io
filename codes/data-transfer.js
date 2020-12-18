@@ -4331,15 +4331,15 @@ ExecuteChoice=function(field,value,pid){
 // Modals
 
 ModalHTML=function(content,id,type){
-	var t=type?(" "+type):"";
-	return'<div class="modal window'+t+'" id="'+id+'">\
-			<div class="modal-frame">\
-				'+CloseButtonHTML(id)+'\
-				<div class="modal-content">\
-					'+content+'\
-				</div>\
-			</div>\
-		</div>';
+	var type=type?(" "+type):"";
+	return `<div class="modal window ${type}" id="${id}">
+			<div class="modal-frame">
+				${CloseButtonHTML(id)}
+				<div class="modal-content">
+					${content}
+				</div>
+			</div>
+		</div>`;
 }
 
 OpenModal=function(content,id,targetid){
