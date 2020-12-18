@@ -147,11 +147,24 @@ MusicCreditsHTML=function(id){
 	return caption+table+audiotracks;
 }
 
-
-ImageCardHTML=function(ImageObj){
+LazyImageHTML=function(ImageObj){
 	var id=GenerateId();
 
-	var src=`images/${ImageObj.FOLDER_SMALL}/${ImageObj.TRACK}`;
+	var src=ImageObj.src?`images/${ImageObj.src}`:`images/${ImageObj.FOLDER_SMALL}/${ImageObj.TRACK}`;
+		src=SourceCoerceExtension(src,ImageExtensions,"png");
+
+	LazyImageLoader(id,src);
+
+	return `
+	<img	alt="${ImageObj.ALT||ImageObj.DESCRIPTION}" 
+		title="${ImageObj.DESCRIPTION}"
+		class="image"
+		loading="lazy"
+		id="${id}"	/>`
+}
+
+ImageCardHTML=function(ImageObj){
+	var src=ImageObj.src?`images/${ImageObj.src}`:`images/${ImageObj.FOLDER_SMALL}/${ImageObj.TRACK}`;
 		src=SourceCoerceExtension(src,ImageExtensions,"png");
 
 	if(ImageObj.href){
@@ -165,20 +178,13 @@ ImageCardHTML=function(ImageObj){
 
 	var legend=ImageObj.LEGEND?`<div>${ImageObj.LEGEND}</div>`:"";
 
-	LazyImageLoader(id,src);
-
 	return `
 	<a href="${link}" ${target} class="card-supra">
 		<div class="card ${ImageObj.CLA||""}">
-			<img	alt="${ImageObj.ALT||ImageObj.DESCRIPTION}" 
-					title="${ImageObj.DESCRIPTION}"
-					class="image"
-					loading="lazy"
-					id="${id}"	/>
+			${LazyImageHTML(ImageObj)}
 		</div>
 	</a>
-	${legend}`
-	;
+	${legend}`;
 }
 
 

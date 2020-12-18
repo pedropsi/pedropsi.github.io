@@ -2699,18 +2699,6 @@ PlaceholderImageHTML=function(){
 	return ImageHTML();
 };
 
-FigureHTML=function(source,caption){
-	if(caption)
-		caption=`<figcaption class="legend">${caption}</figcaption>`;
-	else
-		caption="";
-	
-	var source=Prefix(source,"images/");
-	return `<figure class="figure">
-				${ImageHTML({attributes:{src:source}})}
-				${caption}
-			</figure>`;
-}
 
 SVGHTML=function(opts){
 	var path=IsString(opts)?opts:(opts.path||"M 10 10 L 20 10 L 10 20 Z");
