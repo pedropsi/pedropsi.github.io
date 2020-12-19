@@ -5665,12 +5665,12 @@ var TypeSwipeKeys={
 P=function(...names){
 	var names=[...names];
 	if(names.length>1)
-		return Enumerate(names.map(HyperName));
+		return Enumerate(names.map(HyperPerson));
 	else
-		return HyperName(First(names));
+		return HyperPerson(First(names));
 }
 
-HyperName=function(name){
+HyperPerson=function(name){
 	return HyperText("People/"+LowerSimpleString(name));
 }
 
