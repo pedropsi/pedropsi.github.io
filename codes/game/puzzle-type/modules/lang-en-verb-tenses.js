@@ -4339,6 +4339,34 @@ var PastWords={
 
 	// "afterword":"foreword",
 	
+	"early":"late",
+	"earliness":"lateness",
+	"contemporary":"historic",
+	"modern":"classical",
+	"recent":"ancient",
+	"coeval":"bygone",
+	"current":"historic",
+	
+	"latter":"former",
+	"forthcoming":"bygone",
+
+	"daughter":"mother",
+	"son":"father",
+	"father":"grandfather",
+	"mother":"grandmother",
+	"dad":"grandpa",
+	"mom":"grandma",
+	"noob":"veteran",
+	"newbie":"veteran",
+	"apprentice":"expert",
+	"student":"master",
+	"pupil":"tutor",
+	"descendant":"ancestor",
+	
+
+	"cutting edge":"legacy",
+
+	//bygone, historic, heritage, antiquarian, traditional, folk, old-world, ancestral, time-honoured, vintage, quaint
 	"young":"old",
 
 	"sunrise":"dawn",
