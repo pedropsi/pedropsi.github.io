@@ -9,7 +9,7 @@ News={
 		DATE:"2020-12-13",
 		HEADER:()=>"Level updates",
 		PIECE:()=>`
-		<p>${AHTML("puzzle-type")} levels POL*** and WHI*** updated in response to player feedback. Thanks ${v.DEUSOVI()} and ${v.PLURMORANT()}!</p>
+		<p>${AHTML("puzzle-type")} levels POL*** and WHI*** updated in response to player feedback. Thanks ${P("deusovi","plurmorant")}!</p>
 	`,ID:"puzzle-type"},
 	N_60:{
 		DATE:"2020-11-28",
@@ -29,13 +29,13 @@ News={
 		HEADER:()=>"Starkoban + bugfixes",
 		PIECE:()=>`
 		<p>${AHTML("starkoban")}, a puzzly mix of star battle and sokoban, was released!</p>		
-		<p>Controls in the landscape mode are now working correcly in all puzzlescript games. Thanks ${v.WELLS()}!</p>
+		<p>Controls in the landscape mode are now working correcly in all puzzlescript games. Thanks ${P("wells")}!</p>
 	`,ID:"index"},
 	N_57:{
 		DATE:"2020-10-04",
 		HEADER:()=>"Star battle Interactive",
 		PIECE:()=>`
-		<p>${AHTML("star-battle")} now integrates the ${v.A_HYPERROGUE()} engine. Thanks ${v.ZENOROGUE()}!</p>
+		<p>${AHTML("star-battle")} now integrates the ${v.A_HYPERROGUE()} engine. Thanks ${P("zenorogue")}!</p>
 	`,ID:"index"},
 N_56:{
 		DATE:"2020-09-25",
@@ -50,7 +50,7 @@ N_55:{
 		DATE:"2020-09-19",
 		HEADER:()=>"Reorderings, bugfix",
 		PIECE:()=>`
-		<p>${AHTML("puzzle-type")} levels were reordered after playtesting feedback, and new labels ${ObtainSymbol("structure")} and  ${ObtainSymbol("math")} were added. Some bugfixes. Thanks ${v.HEDEHOLM()} and ${v.DEUSOVI()}!
+		<p>${AHTML("puzzle-type")} levels were reordered after playtesting feedback, and new labels ${ObtainSymbol("structure")} and  ${ObtainSymbol("math")} were added. Some bugfixes. Thanks ${P("hedeholm","deusovi")}!
 		<p>Levels LOO*** added.</p>
 	`,ID:"puzzle-type"},
 N_54:{
@@ -68,26 +68,26 @@ N_53:{
 		<p>Also, the sound feedback for invalid strokes as well as the notes in level DEA*** were improved.</p>
 		<p>Level STA*** letter insertion animated. Hints improved.</p>
 		<p>All hints were completed.</p>
-		<p>Thanks ${v.HEDEHOLM()}, ${v.COLLINEYE()}, ${v.BLUBBERQUARK()}, ${v.BUILDER17()} for your help!</p>
+		<p>Thanks ${P("hedeholm","collineye","blubberquark","builder17")} for your help!</p>
 	`,ID:"puzzle-type"},
 N_52:{
 		DATE:"2020-07-19",
 		HEADER:()=>"Hint module & extras",
 		PIECE:()=>`
 		<p>The hint module was expanded to add hints to some levels in ${AHTML("puzzle-type")}.</p>
-		<p>Thanks ${v.HEDEHOLM()} for the suggestions !</p>
+		<p>Thanks ${P("hedeholm")} for the suggestions !</p>
 	`,ID:"puzzle-type"},
 N_51:{
 		DATE:"2020-06-14",
 		HEADER:()=>"Progress saving small fix",
 		PIECE:()=>`
-		<p>The progress saving system In ${AHTML("puzzle-type")} now withstands changes in level ordering. Thanks ${v.HEDEHOLM()} and ${v.COLLINEYE()}!</p>
+		<p>The progress saving system In ${AHTML("puzzle-type")} now withstands changes in level ordering. Thanks ${P("hedeholm","collineye")}!</p>
 	`,ID:"puzzle-type"},
 N_50:{
 		DATE:"2020-06-06",
 		HEADER:()=>"Difficulty stars & symbols, trailer, new level",
 		PIECE:()=>`
-		<p>In ${AHTML("puzzle-type")}, ${ObtainSymbol("asterisk-heavy")} indicates level difficulty, other symbols have different meanings: ${ObtainSymbol("eye")} ${ObtainSymbol("search")} ${ObtainSymbol("book")}. Thanks ${v.HEDEHOLM()} and ${v.THINKY()}!</p>
+		<p>In ${AHTML("puzzle-type")}, ${ObtainSymbol("asterisk-heavy")} indicates level difficulty, other symbols have different meanings: ${ObtainSymbol("eye")} ${ObtainSymbol("search")} ${ObtainSymbol("book")}. Thanks ${P("hedeholm","thinky")}!</p>
 		<p>A small trailer was added.</p>
 		<p>New level! STA***. Level MON*** became LA****, provisionally.</p>
 	`,ID:"puzzle-type"},
@@ -102,7 +102,7 @@ N_49:{
 DATE:"2020-05-24",
 HEADER:()=>"Redo support",
 PIECE:()=>`
-	<p>As this feature was needed for ${AHTML("puzzle-type")}, the ${AHTML("game-bar")} now has a nice ${KB("redo")} redo button - a suggestion by ${v.COLLINEYE()} and ${v.HEDEHOLM()}!</p>
+	<p>As this feature was needed for ${AHTML("puzzle-type")}, the ${AHTML("game-bar")} now has a nice ${KB("redo")} redo button - a suggestion by ${P("collineye","hedeholm")}!</p>
 	`,ID:"puzzle-type"},
 	N_47:{
 DATE:"2020-05-24",
@@ -121,7 +121,7 @@ PIECE:()=>`
 DATE:"2020-05-17",
 HEADER:()=>"Puzzle type beta changes V",
 PIECE:()=>`
-<p>More updates: level CAR*** became IRO***, adding a couple twists. DEA*** was expanded and synthesised sounds added. Many thanks, ${v.COLLINEYE()}!</p>
+<p>More updates: level CAR*** became IRO***, adding a couple twists. DEA*** was expanded and synthesised sounds added. Many thanks, ${P("collineye")}!</p>
 <p>New level MON*** added, still experimental!</p>
 	`,ID:"puzzle-type"},
 	N_44:{
@@ -148,13 +148,13 @@ PIECE:()=>`
 DATE:"2020-04-18",
 HEADER:()=>"Puzzle type beta changes II",
 PIECE:()=>`
-<p>Ongoing beta playtesting changes: a clearer deduction path was added to DVO***, the NOK*** space display was improved, SYM*** operates now at word level, minor additions to ANA***, NIG*** was expanded, MOR*** was fully redesigned, and the clue in WEI*** changed to LAT***. Number and space input was allowed where helpful. Replaced SUP*** with APA***. Added FIL***,  DEA*** and WAS*** so the total number of levels is now 29. Many thanks, ${v.COLLINEYE()}!</p>
+<p>Ongoing beta playtesting changes: a clearer deduction path was added to DVO***, the NOK*** space display was improved, SYM*** operates now at word level, minor additions to ANA***, NIG*** was expanded, MOR*** was fully redesigned, and the clue in WEI*** changed to LAT***. Number and space input was allowed where helpful. Replaced SUP*** with APA***. Added FIL***,  DEA*** and WAS*** so the total number of levels is now 29. Many thanks, ${P("collineye")}!</p>
 	`,ID:"puzzle-type"},
 	N_40:{
 DATE:"2020-04-10",
 HEADER:()=>"Puzzle type beta changes I",
 PIECE:()=>`
-<p>Ongoing beta playtesting changes: clue HOMEOMORPHIC became TOP*** (with new rules); CHERISHEDWOMAN became SHE*** (expanded ruleset, same logic); O** received a new keyword; NOK*** lost the backspace glitch; small CSS tweaks and spacebar inputs support. Many thanks, ${v.PLURMORANT()}!</p>
+<p>Ongoing beta playtesting changes: clue HOMEOMORPHIC became TOP*** (with new rules); CHERISHEDWOMAN became SHE*** (expanded ruleset, same logic); O** received a new keyword; NOK*** lost the backspace glitch; small CSS tweaks and spacebar inputs support. Many thanks, ${P("plurmorant")}!</p>
 	`,ID:"puzzle-type"},
 	N_39:{
 DATE:"2020-04-07",
@@ -190,7 +190,7 @@ PIECE:()=>`
 DATE:"2020-01-02",
 HEADER:()=>"Puzzle Type new levels",
 PIECE:()=>`
-<p>Two new levels. Thanks ${v.MINOTALEN()} for testing!</p>
+<p>Two new levels. Thanks ${P("minotalen")} for testing!</p>
 	`,ID:"puzzle-type"},
 	N_33:{
 DATE:"2020-02-14",
@@ -427,13 +427,13 @@ N_10:{
 DATE:`2019-09-19`,
 HEADER:()=>`Bookmarklet`,
 PIECE:()=>`
-<p>The game bar now can be applied to any online puzzlescript game by means of a ${v.A_BOOKMARKLET()}, a suggestion by ${v.MINOTALEN()}.</p>
+<p>The game bar now can be applied to any online puzzlescript game by means of a ${v.A_BOOKMARKLET()}, a suggestion by ${P("minotalen")}.</p>
 `,ID:"game-bar"},
 N_9:{
 DATE:`2019-09-11`,
 HEADER:()=>`Hints system`,
 PIECE:()=>`
-<p>The game bar now includes support for Hints, a suggestion by ${v.MINOTALEN()}. Hints were added to ${AHTML("platformer-template")}.</p>
+<p>The game bar now includes support for Hints, a suggestion by ${P("minotalen")}. Hints were added to ${AHTML("platformer-template")}.</p>
 `,ID:"game-bar"},
 N_8:{
 DATE:`2019-09-07`,
