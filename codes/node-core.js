@@ -35,6 +35,7 @@ function SetPage(file){
 
 function UpdateFileMeta(file){
 	var path=DIR+file;
+	console.log("..............",file);
 	SetPage(file);
 
 	UpdateMetaCode=function(){
@@ -51,6 +52,8 @@ function UpdateFileMeta(file){
 
 	if(CMSObject(CurrentIdentifier()))
 		UpdateMetaCode();
+	else
+		console.log("jumped "+file+" with id: ",CurrentIdentifier());
 }
 
 

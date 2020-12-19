@@ -297,7 +297,7 @@ CMSAHTML=function(title){
 }
 
 CMSObject=function(title){
-	var o=BaseFilter(CMS,o=>UnFunction(o.TITLE)&&LowerSimpleString(UnFunction(o.TITLE))===LowerSimpleString(title));
+	var o=BaseFilter(CMS,o=>UnFunction(o.TITLE)&&LowerSimpleString(UnFunction(o.TITLE))===LowerSimpleString(title)||LowerSimpleString(UnFunction(o.LINK))===LowerSimpleString(title));
 	if(o.length)
 		return First(o);
 }
