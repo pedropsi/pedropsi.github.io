@@ -154,13 +154,14 @@ ImageSource=function(ImageObj){
 	return src
 }
 
+
 LazyImageHTML=function(ImageObj){
 	var id=GenerateId();
 	LazyImageLoader(id,ImageSource(ImageObj));
 
 	return `
-	<img	alt="${ImageObj.ALT||ImageObj.DESCRIPTION}" 
-		title="${ImageObj.DESCRIPTION}"
+	<img	alt="${ImageObj.ALT||ImageObj.DESCRIPTION||ImageObj.src}" 
+		title="${ImageObj.DESCRIPTION||ImageObj.src}"
 		class="image"
 		loading="lazy"
 		id="${id}"	/>`
