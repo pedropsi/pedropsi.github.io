@@ -4,7 +4,6 @@ CMSDependenciesList=[
 	"data/cms.js",
 	"data/links.js",
 	"data/media.js",
-	"data/people.js",
 	"data/news.js"];
 
 LoadCMS=function(){
@@ -25,7 +24,6 @@ ConsolidatedVariables=function(){
 		...DATA["variables"],
 		...DATA["cms"],
 		...DATA["media"],
-		...DATA["people"],
 		...DATA["news"],
 		...DATA["page"],
 		...DATA["links"]

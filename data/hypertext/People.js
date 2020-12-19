@@ -116,6 +116,7 @@ var Persons={//People
 	"hempuli":{name:"Arvi Teikari",alias:"Hempuli",PERSONAL_PAGE:"https://www.hempuli.com/"},
 	"pancelor":{alias:"Pancelor",ITCH:"pancelor"},
 	"dohz":{alias:"dohz",ITCH:"dohz"},
+	"jarsp":{alias:"jarsp"},
 	"toomblercatz":{alias:"toomblercatz",ITCH:"toombler"}
 }
 
@@ -141,6 +142,8 @@ NameAliasString=function(linkObj){
 	var name=UnFunction(linkObj.name);
 	var alias=UnFunction(linkObj.alias||"");
 	
+	if(!name&&!alias)
+		return console.log("missing!");
 	if(!name&&alias)
 		return alias;
 	
@@ -158,4 +161,4 @@ PersonHTML=function(linkObj){
 		return name;
 }
 	
-Keys(Persons).map(k=>HyperText("People/"+k,()=>PersonHTML(Persons[k])));
+Keys(Persons).map(k=>HyperText("People/"+k,()=>PersonHTML(Persons[k],k)));
