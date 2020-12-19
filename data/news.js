@@ -1,4 +1,10 @@
 News={
+	N_62:{
+		DATE:"2020-12-18",
+		HEADER:()=>"Kudamono Puzzle",
+		PIECE:()=>`
+		<p>${AHTML("Kudamono")} puzzles released, and polished. Special thanks to ${P("dohz")} for checking the puzzles and ${P("Portponky")} for suggesting the cantaloupe silhuette!</p>
+	`,ID:"kudamono"},
 	N_61:{
 		DATE:"2020-12-13",
 		HEADER:()=>"Level updates",
