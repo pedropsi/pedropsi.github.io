@@ -177,9 +177,10 @@ ImageCardHTML=function(ImageObj){
 	}
 
 	var legend=ImageObj.LEGEND?`<div>${ImageObj.LEGEND}</div>`:"";
+	var id=ImageObj.id||GenerateId();
 
 	return `
-	<a href="${link}" ${target} class="card-supra">
+	<a href="${link}" ${target} id="${id}" class="card-supra">
 		<div class="card ${ImageObj.CLA||""}">
 			${LazyImageHTML(ImageObj)}
 		</div>
@@ -206,6 +207,7 @@ FolderGalleryHTML=function(folder,names,ObjectRenderer){
 	function ImageObj(name,opts){
 		var opts=opts||{};
 		return {
+			id:name,
 			...opts,
 			FOLDER_SMALL:folder,
 			DESCRIPTION:name,

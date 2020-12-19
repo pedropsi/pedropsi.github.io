@@ -701,7 +701,7 @@ NewsSources={
 			var stars=item.stars?(item.stars+ObtainSymbol("star")):"";
 			var suffix=(item.variant?(" - "+item.variant):"");
 				title=title+suffix;
-			var link=AHTML(title,item.href?item.href:"star-battle.html");
+			var link=AHTML(title,item.href?item.href:("star-battle.html#"+key))
 				title=title+(stars?(", "+stars):"");
 
 			return {
@@ -718,13 +718,13 @@ NewsSources={
 		Transformer:function(item,key){
 			var number=UnAfterfix(key,"-");
 			var title=`Kudamono (puzzle ${number})`;
-			var link=AHTML(title,"kudamono.html");
+			var link=AHTML(title,"kudamono.html#"+key);
 
 			return {
 				DATE:item.date,
 				HEADER:title,
 				PIECE:`
-				<p>${link}, from the ${AHTML("kudamono puzzle collection","kudamono.html")}, now released.</p>`,
+				<p>${link}, from the ${AHTML("kudamono puzzle collection","kudamono.html")}, now released.</p>`
 			}
 		}
 	}
