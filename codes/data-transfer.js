@@ -5696,7 +5696,11 @@ var TypeSwipeKeys={
 ///////////////////////////////////////////////////////////////////////////////
 //Dynamic text and HyperText 
 
-P=function(...names){
+A=function(link){ //Links
+	return AHTML(link);
+}
+
+P=function(...names){ //People
 	var names=[...names];
 	if(names.length>1)
 		return Enumerate(names.map(HyperPerson));

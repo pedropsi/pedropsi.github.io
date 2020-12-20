@@ -254,7 +254,7 @@ LABEL_TAGS					:	(page)=>	page.TAGS?page.TAGS().map(v.LABEL_TAG).join("\n"):"",
 LABEL_TAG					:	(tag)=>		`<a class="tag button" href="tag.html?search=${tag}">${tag}</a>`,
 
 FOOTER_AREA					:	()=>	`<footer class="footer">${v.FOOTER_LINES()}</footer>`,
-FOOTER_LINES				:	()=>	`<p>${ViewCounterHTML()}</p><p>${v.COPYRIGHT_TEXT()}. ${v.A_TERMS()}. ${AHTML("privacy-policy")}. ${AHTML("status")}. ${v.DEBUGGER()}.</p><p> ${v.A_PRESS()}. ${AHTML("subscribe")} and ${v.A_SUPPORT()}!</p>`,
+FOOTER_LINES				:	()=>	`<p>${ViewCounterHTML()}</p><p>${v.COPYRIGHT_TEXT()}. ${v.A_TERMS()}. ${A("privacy-policy")}. ${A("status")}. ${v.DEBUGGER()}.</p><p> ${v.A_PRESS()}. ${A("subscribe")} and ${v.A_SUPPORT()}!</p>`,
 
 DEBUGGER					:	()=>	`<span onclick="RequestDebugger()">Debug</span>`,
 
@@ -321,9 +321,9 @@ CREDITS						:	()=>	`<h2>Credits</h2>${v.CREDITS_AUTHORSHIP()}${v.CREDITS_MUSIC(
 CREDITS_AUTHORSHIP			:	()=>	`<p><a href="${v.LINK_URL()}.html">${v.TITLE_BOLD()}</a> by ${v.NAME_YEAR()}.</p>`,
 CREDITS_MUSIC				:	()=>	MusicCreditsHTML(v.LINK()),
 CREDITS_ENGINE_SUPPORT		:	()=>	`<h3>Game Engine</h3>${v.PUZZLESCRIPT_TEXT()}${v.SOURCE_TEXT()}`,
-CREDITS_ENGINE_VANILLA		:	()=>	`<p>Made with vanilla JS and CSS, including ${v.A_GAME_BAR()}!</p>`,
+CREDITS_ENGINE_VANILLA		:	()=>	`<p>Made with vanilla JS and CSS, including ${A("game-bar")}!</p>`,
 CREDITS_ENGINE_CLOSED		:	()=>	`<h3>Game Engine</h3>${v.PUZZLESCRIPT_TEXT()} The source will be available some time after the release.`,
-PUZZLESCRIPT_TEXT			:	()=>	`<p>Made with ${v.A_PUZZLESCRIPT()} and ${v.A_GAME_BAR()}!</p>`,
+PUZZLESCRIPT_TEXT			:	()=>	`<p>Made with ${v.A_PUZZLESCRIPT()} and ${A("game-bar")}!</p>`,
 SOURCE_TEXT					:	()=>	`<p>Inspect the ${v.A_SOURCE()} freely, but consider the option to ${v.A_SUPPORT()}!</p>`,
 A_SOURCE					:	()=>	`<a ${v.BLANK()} href='http://puzzlescript.net/editor.html?hack=${v.CONTENT()}'><b>source</b></a>`,
 
@@ -336,7 +336,7 @@ HOF_SEARCH					:	()=> AHTML("Hall of fame","hall-of-fame.html?search="+PageIdent
 COMMUNITY					:	()=>	`<h2>Community</h2>${v.GUESTBOOK_MESSAGE()}${v.HALL_OF_FAME_TEXT_SHORT()}${v.STATS()}${v.MENTIONS()}`,
 STATS						:	()=>	`<h3>Game stats</h3><p class="won-area">Do you wonder how you compare with other players? Find out in the game stats below.</p>`,
 
-GUESTBOOK_POST_TEXT			:	()=>	`<p>Enjoyed ${v.TITLE_BOLD()}? Add <b>your message</b> below to the ${AHTML("guestbook")}!</p>`,
+GUESTBOOK_POST_TEXT			:	()=>	`<p>Enjoyed ${v.TITLE_BOLD()}? Add <b>your message</b> below to the ${A("guestbook")}!</p>`,
 GUESTBOOK_MESSAGE			:	()=>	`<h3>Guestbook</h3>${v.GUESTBOOK_POST_TEXT()}${v.GUESTBOOK_ADD()}`,
 
 FEEDBACK					:	()=>	`<h2>Feedback</h2><h3>Problems? Suggestions?</h3><p>Please ${v.A_LET_ME_KNOW()} !</p><h3>Praise?</h3>${v.GUESTBOOK_POST_TEXT()}${v.GUESTBOOK_ADD()}`,

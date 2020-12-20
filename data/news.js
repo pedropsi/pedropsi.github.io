@@ -3,46 +3,46 @@ News={
 		DATE:"2020-12-18",
 		HEADER:()=>"Kudamono Puzzle",
 		PIECE:()=>`
-		<p>${AHTML("Kudamono")} puzzles released, and polished. Special thanks to ${P("dohz")} for checking the puzzles and ${P("Portponky")} for suggesting the cantaloupe silhuette!</p>
+		<p>${A("Kudamono")} puzzles released, and polished. Special thanks to ${P("dohz")} for checking the puzzles and ${P("Portponky")} for suggesting the cantaloupe silhuette!</p>
 	`,ID:"kudamono"},
 	N_61:{
 		DATE:"2020-12-13",
 		HEADER:()=>"Level updates",
 		PIECE:()=>`
-		<p>${AHTML("puzzle-type")} levels POL*** and WHI*** updated in response to player feedback. Thanks ${P("deusovi","plurmorant")}!</p>
+		<p>${A("puzzle-type")} levels POL*** and WHI*** updated in response to player feedback. Thanks ${P("deusovi","plurmorant")}!</p>
 	`,ID:"puzzle-type"},
 	N_60:{
 		DATE:"2020-11-28",
 		HEADER:()=>"New level",
 		PIECE:()=>`
-		<p>${AHTML("puzzle-type")} received new level: POL***.</p>
+		<p>${A("puzzle-type")} received new level: POL***.</p>
 	`,ID:"puzzle-type"},
 	N_59:{
 		DATE:"2020-11-21",
 		HEADER:()=>"New levels + Sound fix",
 		PIECE:()=>`
-		<p>${AHTML("puzzle-type")} received three new levels: RES***, РУС*** and WHI*** (a nice remake of a wrongly discarded level).</p>
+		<p>${A("puzzle-type")} received three new levels: RES***, РУС*** and WHI*** (a nice remake of a wrongly discarded level).</p>
 		<p>Fixed a minor sound bug. Other bugfixes. Major update and new trailer planned.</p>
 	`,ID:"puzzle-type"},
 	N_58:{
 		DATE:"2020-11-15",
 		HEADER:()=>"Starkoban + bugfixes",
 		PIECE:()=>`
-		<p>${AHTML("starkoban")}, a puzzly mix of star battle and sokoban, was released!</p>		
+		<p>${A("starkoban")}, a puzzly mix of star battle and sokoban, was released!</p>		
 		<p>Controls in the landscape mode are now working correcly in all puzzlescript games. Thanks ${P("wells")}!</p>
 	`,ID:"index"},
 	N_57:{
 		DATE:"2020-10-04",
 		HEADER:()=>"Star battle Interactive",
 		PIECE:()=>`
-		<p>${AHTML("star-battle")} now integrates the ${v.A_HYPERROGUE()} engine. Thanks ${P("zenorogue")}!</p>
+		<p>${A("star-battle")} now integrates the ${v.A_HYPERROGUE()} engine. Thanks ${P("zenorogue")}!</p>
 	`,ID:"index"},
 N_56:{
 		DATE:"2020-09-25",
 		HEADER:()=>"Autumn update",
 		PIECE:()=>`
 		<p>To mark the beginning of Autumn, a new colour theme was applied across the ${v.SITE_NAME()}.</p>
-		<p>${AHTML("puzzle-type")} colours were adjusted, and a tutorial mode added.</p>
+		<p>${A("puzzle-type")} colours were adjusted, and a tutorial mode added.</p>
 		<p>${AHTML("Gravirinth [mini]","gravirinth.html")} added.</p>
 		<p>Wide refactoring and bugfixes.</p>
 	`,ID:"index"},
@@ -50,7 +50,7 @@ N_55:{
 		DATE:"2020-09-19",
 		HEADER:()=>"Reorderings, bugfix",
 		PIECE:()=>`
-		<p>${AHTML("puzzle-type")} levels were reordered after playtesting feedback, and new labels ${ObtainSymbol("structure")} and  ${ObtainSymbol("math")} were added. Some bugfixes. Thanks ${P("hedeholm","deusovi")}!
+		<p>${A("puzzle-type")} levels were reordered after playtesting feedback, and new labels ${ObtainSymbol("structure")} and  ${ObtainSymbol("math")} were added. Some bugfixes. Thanks ${P("hedeholm","deusovi")}!
 		<p>Levels LOO*** added.</p>
 	`,ID:"puzzle-type"},
 N_54:{
@@ -64,7 +64,7 @@ N_53:{
 		DATE:"2020-08-01",
 		HEADER:()=>"Keystroke list, letter animation, better sound notes",
 		PIECE:()=>`
-		<p>${AHTML("puzzle-type")} now sports a hangman-style keystroke list with three different types of strokes: normal, invalid and special.</p>
+		<p>${A("puzzle-type")} now sports a hangman-style keystroke list with three different types of strokes: normal, invalid and special.</p>
 		<p>Also, the sound feedback for invalid strokes as well as the notes in level DEA*** were improved.</p>
 		<p>Level STA*** letter insertion animated. Hints improved.</p>
 		<p>All hints were completed.</p>
@@ -74,20 +74,20 @@ N_52:{
 		DATE:"2020-07-19",
 		HEADER:()=>"Hint module & extras",
 		PIECE:()=>`
-		<p>The hint module was expanded to add hints to some levels in ${AHTML("puzzle-type")}.</p>
+		<p>The hint module was expanded to add hints to some levels in ${A("puzzle-type")}.</p>
 		<p>Thanks ${P("hedeholm")} for the suggestions !</p>
 	`,ID:"puzzle-type"},
 N_51:{
 		DATE:"2020-06-14",
 		HEADER:()=>"Progress saving small fix",
 		PIECE:()=>`
-		<p>The progress saving system In ${AHTML("puzzle-type")} now withstands changes in level ordering. Thanks ${P("hedeholm","collineye")}!</p>
+		<p>The progress saving system In ${A("puzzle-type")} now withstands changes in level ordering. Thanks ${P("hedeholm","collineye")}!</p>
 	`,ID:"puzzle-type"},
 N_50:{
 		DATE:"2020-06-06",
 		HEADER:()=>"Difficulty stars & symbols, trailer, new level",
 		PIECE:()=>`
-		<p>In ${AHTML("puzzle-type")}, ${ObtainSymbol("asterisk-heavy")} indicates level difficulty, other symbols have different meanings: ${ObtainSymbol("eye")} ${ObtainSymbol("search")} ${ObtainSymbol("book")}. Thanks ${P("hedeholm","thinky")}!</p>
+		<p>In ${A("puzzle-type")}, ${ObtainSymbol("asterisk-heavy")} indicates level difficulty, other symbols have different meanings: ${ObtainSymbol("eye")} ${ObtainSymbol("search")} ${ObtainSymbol("book")}. Thanks ${P("hedeholm","thinky")}!</p>
 		<p>A small trailer was added.</p>
 		<p>New level! STA***. Level MON*** became LA****, provisionally.</p>
 	`,ID:"puzzle-type"},
@@ -102,7 +102,7 @@ N_49:{
 DATE:"2020-05-24",
 HEADER:()=>"Redo support",
 PIECE:()=>`
-	<p>As this feature was needed for ${AHTML("puzzle-type")}, the ${AHTML("game-bar")} now has a nice ${KB("redo")} redo button - a suggestion by ${P("collineye","hedeholm")}!</p>
+	<p>As this feature was needed for ${A("puzzle-type")}, the ${A("game-bar")} now has a nice ${KB("redo")} redo button - a suggestion by ${P("collineye","hedeholm")}!</p>
 	`,ID:"puzzle-type"},
 	N_47:{
 DATE:"2020-05-24",
@@ -160,13 +160,13 @@ PIECE:()=>`
 DATE:"2020-04-07",
 HEADER:()=>"Puzzle type fix (for the Safari browser)",
 PIECE:()=>`
-<p>"Hoisting of functions inside conditionals" was the Javascript inconsistency blocking ${AHTML("puzzle-type")} on Safari - not anymore!</p>
+<p>"Hoisting of functions inside conditionals" was the Javascript inconsistency blocking ${A("puzzle-type")} on Safari - not anymore!</p>
 	`,ID:"puzzle-type"},
 	N_38:{
 DATE:"2020-04-06",
 HEADER:()=>"Game Console Fork support",
 PIECE:()=>`
-<p>The ${AHTML("game-console")} learned to request the appropriate PS fork for each game.</p>
+<p>The ${A("game-console")} learned to request the appropriate PS fork for each game.</p>
 	`,ID:"game-console"},
 	N_37:{
 DATE:"2020-03-31",
@@ -256,7 +256,7 @@ PIECE:()=>`
 DATE:"2020-03-29",
 HEADER:()=>"Strata Hedges mechanics draft",
 PIECE:()=>`
-<p>A first draft of ${AHTML("strata-hedges")} was shared privately, showcasing the novel tridimensional mechanics.</p>
+<p>A first draft of ${A("strata-hedges")} was shared privately, showcasing the novel tridimensional mechanics.</p>
 	`,ID:"strata-hedges"},
 	N_TA_1:{
 DATE:"2018-09-29",
@@ -281,7 +281,7 @@ DATE:`2020-03-28`,
 HEADER:()=>`${v.SITE_NAME()} Generator Update`,
 PIECE:()=>`
 <p>The ${v.SITE_NAME()} is now 100% generated in Javascript, thus bringing faster editing speeds. The new Generator uses <b>String Templates</b>.</p>
-<p>Good side effects include reduced page size, plus new functionalities such as multiple ${v.A_TAG()} filtering.</p>
+<p>Good side effects include reduced page size, plus new functionalities such as multiple ${v.A("tag")} filtering.</p>
 <p>Bugs are to be expected.</p>
 `,ID:"generator"},
 N_26:{
@@ -300,25 +300,25 @@ N_23:{
 DATE:`2020-01-25`,
 HEADER:()=>`Puzzlescript Components Database`,
 PIECE:()=>`
-<p>A database of Puzzlescript components, prototypes and mechanic demonstrations was added to ${AHTML("game-tools")} to complement the ${AHTML("puzzlescript-games-database")}.</p>
+<p>A database of Puzzlescript components, prototypes and mechanic demonstrations was added to ${A("game-tools")} to complement the ${A("puzzlescript-games-database")}.</p>
 `},
 N_24:{
 DATE:`2020-01-24`,
 HEADER:()=>`Gravirinth major update`,
 PIECE:()=>`
-<p>${AHTML("gravirinth-legacy")} now runs much faster thanks to ${v.A_LANCE_PS_FORK()}.</p>
+<p>${A("gravirinth-legacy")} now runs much faster thanks to ${v.A_LANCE_PS_FORK()}.</p>
 `,ID:"gravirinth-legacy"},
 N_22:{
 DATE:`2020-01-12`,
 HEADER:()=>`Database Search + submission options`,
 PIECE:()=>`
-<p>The ${AHTML("puzzlescript-games-database")} underwent several improvements. Among them, there are now more submission options, and search was added across all data categories. Search can be triggered by user input and indicated in the URL.</p>
+<p>The ${A("puzzlescript-games-database")} underwent several improvements. Among them, there are now more submission options, and search was added across all data categories. Search can be triggered by user input and indicated in the URL.</p>
 `,ID:"puzzlescript-games-database"},
 N_28:{
 	DATE:`2020-01-11`,
 	HEADER:()=>`Game bar icon embellishment`,
 	PIECE:()=>`
-<p>The ${v.A_GAME_BAR()} now sports cross-platform icons, which activate a nice typewriter tooltip effect on hover, revealing the button function plus the corresponding keyboard shortcut.</p>
+<p>The ${A("game-bar")} now sports cross-platform icons, which activate a nice typewriter tooltip effect on hover, revealing the button function plus the corresponding keyboard shortcut.</p>
 `,ID:"game-bar"},
 N_21:{
 	DATE:`2019-12-14`,
@@ -337,13 +337,13 @@ N_31:{
 	DATE:`2019-12-11`,
 	HEADER:()=>`Puzzlescript games database expansion`,
 	PIECE:()=>`
-<p>The ${AHTML("puzzlescript-games-database")} now sports over 1300 titles.</p>
+<p>The ${A("puzzlescript-games-database")} now sports over 1300 titles.</p>
 `,ID:"puzzlescript-games-database"},
 N_20:{
 	DATE:`2019-12-07`,
 	HEADER:()=>`Store opens`,
 	PIECE:()=>`
-<p>The ${v.SITE_NAME()} now has a dedicated ${v.A_STORE()}, featuring pearls such as ${AHTML("puzzle-type")}.${LabelHTML("Experimental")}</p>`,
+<p>The ${v.SITE_NAME()} now has a dedicated ${v.A_STORE()}, featuring pearls such as ${A("puzzle-type")}.${LabelHTML("Experimental")}</p>`,
 ID:"store"},
 N_32:{
 	DATE:`2019-12-06`,
@@ -360,18 +360,18 @@ N_30:{
 	DATE:`2019-11-30`,
 HEADER:()=>`Status page`,
 PIECE:()=>`
-<p>Users may now perform self-checks by visiting the ${AHTML("status")} page, which performs automatic tests.</p>
+<p>Users may now perform self-checks by visiting the ${A("status")} page, which performs automatic tests.</p>
 `,ID:"status"},
 N_18:{
 DATE:`2019-11-24`,
 HEADER:()=>`Tables of Contents`,
 PIECE:()=>`
-<p>Most ${v.SITE_NAME()} pages now have an auto-generated <b>Table of Contents</b>. This will be especially useful to document projects like the ${v.A_GAME_BAR()} - whose features are also now better documented.</p>`},
+<p>Most ${v.SITE_NAME()} pages now have an auto-generated <b>Table of Contents</b>. This will be especially useful to document projects like the ${A("game-bar")} - whose features are also now better documented.</p>`},
 N_18:{
 DATE:`2019-11-23`,
 HEADER:()=>`Level titles & selector improvements`,
 PIECE:()=>`
-<p>The ${v.A_GAME_BAR()} now supports assigning level titles from within the hints file. These titles will be shown atop the level selector window, which received some extra polish.</p>
+<p>The ${A("game-bar")} now supports assigning level titles from within the hints file. These titles will be shown atop the level selector window, which received some extra polish.</p>
 `,ID:"game-bar"},
 N_17:{
 DATE:`2019-11-09`,
@@ -421,7 +421,7 @@ N_11:{
 DATE:`2019-09-21`,
 HEADER:()=>`Skilleblokker launches`,
 PIECE:()=>`
-<p>${AHTML("skilleblokker")} spillet utgitt!</p>
+<p>${A("skilleblokker")} spillet utgitt!</p>
 `,ID:"skilleblokker"},
 N_10:{
 DATE:`2019-09-19`,
@@ -433,7 +433,7 @@ N_9:{
 DATE:`2019-09-11`,
 HEADER:()=>`Hints system`,
 PIECE:()=>`
-<p>The game bar now includes support for Hints, a suggestion by ${P("minotalen")}. Hints were added to ${AHTML("platformer-template")}.</p>
+<p>The game bar now includes support for Hints, a suggestion by ${P("minotalen")}. Hints were added to ${A("platformer-template")}.</p>
 `,ID:"game-bar"},
 N_8:{
 DATE:`2019-09-07`,
@@ -475,13 +475,13 @@ N_2:{
 DATE:`2019-07-12`,
 HEADER:()=>`Burokku Konekuta launches`,
 PIECE:()=>`
-<p>${AHTML("burokku-konekuta")} がリリースされました!</p>
+<p>${A("burokku-konekuta")} がリリースされました!</p>
 `,ID:"burokku-konekuta"},
 N_1:{
 DATE:`2019-05-19`,
 HEADER:()=>`Platformer-template launches`,
 PIECE:()=>`
-<p>${AHTML("platformer-template")} matures into its final version.</p>
+<p>${A("platformer-template")} matures into its final version.</p>
 `,ID:"platformer-template"}
 }
 
