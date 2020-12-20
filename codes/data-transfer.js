@@ -1025,8 +1025,38 @@ UnWhitespace=function(string){
 	return string.replace(/\s*/gi,"");
 	//StringReplace(string,[[/\s/m,""],[/\t/m,""],[/\n/m,""]]);
 }
+
+CharacterUniformisations={
+	"æ":"ae","ß":"ss","ĳ":"ij","ø":"o","œ":"oe","þ":"th",
+	
+	"ä":"a","ë":"e","ï":"i","ö":"o","ü":"u","ÿ":"y",
+	"á":"a","é":"e","í":"i","ó":"o","ú":"u","ý":"y",
+	"à":"a","è":"e","ì":"i","ò":"o","ù":"u",
+	"â":"a","ê":"e","î":"i","ô":"o","û":"u","ŷ":"y",
+	"ã":"a",		"ĩ":"i","õ":"o","ũ":"u",		"ñ":"n",
+	
+	"ā":"a","ă":"a","ą":"a",
+	"ç":"c","ć":"c","ĉ":"c","ċ":"c","č":"c",
+	"ď":"d","đ":"d",
+	"ē":"e","ĕ":"e","ė":"e","ę":"e","ě":"e",
+	"ĝ":"g","ğ":"g","ġ":"g","ģ":"g",
+	"ĥ":"h","ħ":"h",
+	"ī":"i","ĭ":"i","į":"i","ı":"i",
+	"ĵ":"j",
+	"ķ":"k",
+	"ĺ":"l","ļ":"l","ľ":"l","ŀ":"l","ł":"l",
+	"ń":"n","ņ":"n","ň":"n","ŉ":"n","ŋ":"n",
+	"ō":"o","ŏ":"o","ő":"o",
+	"ŕ":"r","ŗ":"r","ř":"r",
+	"ś":"s","ŝ":"s","ş":"s","š":"s",
+	"ţ":"t","ť":"t","ŧ":"t",
+	"ũ":"u","ū":"u","ŭ":"u","ů":"u","ű":"u","ų":"u",
+	"ŵ":"w",
+	"ź":"z","ż":"z","ž":"z"
+}
+
 LowerSimpleString=function(string){
-	return SafeString(UnWhitespace(string).toLowerCase());
+	return StringReplace(SafeString(UnWhitespace(string).toLowerCase()),CharacterUniformisations);
 }
 LowerSpacedString=function(string){
 	return string.toLowerCase().replace(new RegExp("["+EscapeTokens(Tokens())+"]+","g")," ").replace(/[\n\s\t]+/g," ");
