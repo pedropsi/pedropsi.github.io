@@ -5705,7 +5705,7 @@ P=function(...names){
 }
 
 HyperPerson=function(name){
-	return HyperText("People/"+LowerSimpleString(name));
+	return HyperText("People/"+UniformString(name));
 }
 
 HyperText=function(name,value){
