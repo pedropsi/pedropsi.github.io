@@ -1055,8 +1055,12 @@ CharacterUniformisations={
 	"ź":"z","ż":"z","ž":"z"
 }
 
+UniformString=function(string){
+	return StringReplace(LowerSimpleString(string),CharacterUniformisations);
+}
+
 LowerSimpleString=function(string){
-	return StringReplace(SafeString(UnWhitespace(string).toLowerCase()),CharacterUniformisations);
+	return SafeString(UnWhitespace(string).toLowerCase());
 }
 LowerSpacedString=function(string){
 	return string.toLowerCase().replace(new RegExp("["+EscapeTokens(Tokens())+"]+","g")," ").replace(/[\n\s\t]+/g," ");

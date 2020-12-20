@@ -185,7 +185,7 @@ PersonHTML=function(linkObj){
 }
 	
 RegisterPerson=function(alias,key){
-	HyperText("People/"+LowerSimpleString(alias),()=>PersonHTML(Persons[key],key));
+	HyperText("People/"+UniformString(alias),()=>PersonHTML(Persons[key],key));
 }
 
 MemorableHyperStrings=function(string){
