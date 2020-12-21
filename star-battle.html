@@ -6,15 +6,8 @@
 		<script id="post">var v={POST:()=>`
 
 ${starbattlesData={
-	"21-lits-star-battle.png":{
-		date:"15/01/2021",
-		cell:"rectangle",
-		legend:"LITS",
-		variant:"versus",
-		stars:2
-	},
-	"20-fractal-star-battle.png":{
-		date:"08/01/2021",
+	"25-fractal-star-battle.png":{
+		date:"02/01/2021",
 		cell:"square",
 		legend:"Fractal",
 		stars:2
@@ -153,7 +146,7 @@ ${FolderGalleryHTML("star-battle",FilterObject(starbattles,(o,k)=>In([0,1,2].map
 ${
 	starbattlesFuture=FilterObject(starbattlesData,(o,k)=>(o.date&&Days(StringDate(o.date))<0)),
 	l=Last(starbattlesFuture),
-	l&&l.date?`<p>Next update: <b>${DateNamer(StringDate(l.date))}</b>, with <em>${l.legend?l.legend:""}</em>!</p>`:""
+	l&&l.date?`<p>Next update: <b>${DateNamer(StringDate(l.date))}</b>, with <em>${l.legend?l.legend:""} star battle</em>!</p>`:""
 }
 <p>Possible future puzzles are listed under ${AHTML("#More Ideas")}. Excited about a particular idea? Do ${v.A_LET_ME_KNOW()}!</p>
 
