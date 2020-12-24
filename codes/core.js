@@ -4923,10 +4923,15 @@ DelayUntil=function(Condition,F,i){
 	}
 }
 
-function Delayer(Executor){
-	return function(...args){
-		setTimeout(function(){Executor(...args)});
+function OnceDelayer(Executer){
+	if(!OnceDelayer["Executer"]){
+		OnceDelayer["Executer"]=true;
+		return function(...args){
+			setTimeout(function(){Executer(...args)});
+		}
 	}
+	else
+		return Identity;
 }
 
 //ExecuteOnce

@@ -281,7 +281,7 @@ DATE:`2020-03-28`,
 HEADER:()=>`${v.SITE_NAME()} Generator Update`,
 PIECE:()=>`
 <p>The ${v.SITE_NAME()} is now 100% generated in Javascript, thus bringing faster editing speeds. The new Generator uses <b>String Templates</b>.</p>
-<p>Good side effects include reduced page size, plus new functionalities such as multiple ${v.A("tag")} filtering.</p>
+<p>Good side effects include reduced page size, plus new functionalities such as multi-tag filtering.</p>
 <p>Bugs are to be expected.</p>
 `,ID:"generator"},
 N_26:{

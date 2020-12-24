@@ -43,7 +43,7 @@ ${kudamonosData={
 
 	},
 	kudamonos=FilterObject(kudamonosData,(o,k)=>(!o.date||Days(StringDate(o.date))>=0)),
-	Delayer(FocusImageFragment)(kudamonos),
+	OnceDelayer(FocusImageFragment)(kudamonos),
 	""}
 
 <h2>Latest</h2>
