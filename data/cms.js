@@ -1,7 +1,6 @@
 NoImage={IMAGE_NAME:()=>"splash",IMAGE_EXT:()=>"svg"};
 WithImage={IMAGE_NAME:(v)=>v.LINK(v),IMAGE_EXT:()=>"svg",IMAGE_ALT:(v)=>v.TITLE(v)};
 
-CMSMosaic={...WithImage,BODY:()=>v.PAGE_SIMPLE(),CONTENT:()=>v.FIGURE_MOSAIC(),POSTSCRIPT:()=>["data/intercom-mosaic.js"],STYLE:()=>`visual`,TYPE:()=>`Mosaic`,TYPEGRAPH:()=>`image`,IMAGE_EXT:()=>`png`};
 CMSGame={...WithImage,POSTSCRIPT:()=>v.PUZZLE_SCRIPT(),TYPE:()=>`Game`,CATEGORIES:()=>[`entertainment`,`kids`,`games`],TYPEGRAPH:()=>`game`,MANIFEST:()=>v.PWA_MANIFEST(),IMAGE_EXT:()=>`png`};
 
 

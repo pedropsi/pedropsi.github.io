@@ -26,8 +26,6 @@ NAME						:	()=>	`Pedro PSI`,
 NAME_LINK					:	()=>	`<a href="${v.SITE()}">${v.NAME()}</a>`,
 NAME_YEAR					:	()=>	`${v.NAME_LINK()}, ${v.YEAR()}`,
 	
-MOSAIC_TEXT					:	()=>	`<kbd>Click</kbd> on the mosaic above to change this page's background. Try it!`,
-	
 LANG						:	()=>	`en-US`,
 
 PERSON_LANG					:	()=>	1,
@@ -191,7 +189,6 @@ PICTURE_DYNAMIC_SIZE		:function(){
 
 FIGURE						:	()=>	`<figure class="figure">${v.PICTURE_DYNAMIC()}<figcaption class="legend">${v.CONTENT()}</figcaption></figure>`,
 FIGURE_SIMPLE				:	()=>	`<figure class="figure">${v.PICTURE_DYNAMIC()}</figure>`,
-FIGURE_MOSAIC				:	()=>	`<figure class="figure mosaic" onclick="(function(){ToggleBGMode('${v.LINK()}')})()">${v.PICTURE_DYNAMIC()}<figcaption class="legend">${v.POST()}</figcaption><p>${v.MOSAIC_TEXT()}</p></figure>`,
 
 GIF							:	()=>	`<video autoplay loop muted playsinline><source src="${v.IMAGE_180()}" type="video/mp4"></source></video>`,
 
