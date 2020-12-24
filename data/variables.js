@@ -95,7 +95,7 @@ IMAGE_ALT					:	()=>	`A geometric lotus flower composed of eight rows of eight p
 APPLEICON					:	()=>	ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),180),
 FAVICON32					:	()=>	ImagePath("favicon-32x32","png"),
 
-BODY						:	()=>v.PAGE_POST(),
+BODY						:	()=>	v.PAGE_POST(),
 
 HEAD						:	()=>	v.HEAD_SIMPLE(),
 HEAD_SIMPLE					:	()=>	`${v.HEAD_ITEMS()}${v.CSS_REL()}`,
@@ -194,8 +194,6 @@ BUTTON_SUBSCRIBE			:	()=>	NavigationButtonHTML("subscribe"),
 
 COPYRIGHT					:	()=>	`Copyright ${v.NAME()} ${v.YEAR_SPAN()}, all rights reserved`,
 COPYRIGHT_TEXT				:	()=>	`© ${v.NAME()} ${YearsString(v.YEAR_START(),v.YEAR_NOW())}`,
-LICENSE						:	()=>	`${HyperText("License/CC-BY-4.0")}`,
-
 
 
 BLANK						:	()=>	`target='_blank' rel="noopener noreferrer"`,
@@ -248,26 +246,16 @@ TWITTER_URL					:	()=>	`https://twitter.com/`,
 GITHUB_IO_URL				:	()=>	`.github.io/`,
 GITHUB_COM_URL				:	()=>	`.github.com/`,
 PUZZLESCRIPT_URL			:	()=>	`https://www.puzzlescript.net/`,
-PUZZLESCRIPT_URL_PLAY		:	()=>	`${v.PUZZLESCRIPT_URL()}play.html?p=`,
-CONSOLE_URL_PLAY			:	()=>	`${v.SITE()}/game-console.html?game=`,
 ITCH_URL					:	()=>	`.itch.io/`,
 
 YT_URL						:	()=>	`https://www.youtube.com/watch?v=`,
 
-DOC_URL						:	()=>	`https://docs.google.com`,
 MACRO_URL					:	()=>	`https://script.google.com/macros/s/`,
-SHEET_URL					:	()=>	`${v.DOC_URL()}/spreadsheets/d/`,
-SHEET_OPT					:	()=>	`&single=true&widget=false&chrome=false&headers=false`,
-IFRAME_OPTS					:	()=>	`width="100%" height="500px" frameborder="0" marginheight="0" marginwidth="0"`,
 				
 TITLE_BY					:	()=>	`${v.TITLE()} by ${v.NAME()} ${v.YEAR()}`,
 TITLE_BY_AL					:	()=>	`${v.NAME()} et al., ${v.YEAR()}, <em>${v.TITLE()}</em>`,
-TITLE_YEAR					:	()=>	`${v.TITLE()} (${v.YEAR()}) `,
 TITLELONG					:	()=>	`${v.TITLE()} - ${v.TAGLINE()}`,
 TITLE_BOLD					:	()=>	`<b>${v.TITLE()}</b>`,
-				
-TITLE_CLEAN					:	()=>	`${v.TITLE()}`,
-TITLE_BY_CLEAN				:	()=>	`${v.TITLE_BY()}`,
 
 
 HEADER						:	()=>	`<header>${v.ABOUT_TEXT()}${v.ONE_LINER()}</header>`,
