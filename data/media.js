@@ -246,8 +246,9 @@ FolderGalleryHTML=function(subfolder,names,ObjectRenderer){
 }
 
 FocusImageFragment=function(obj){
-	console.log("lol?")
 	var	frag=PageFragment();
+	if(!frag)
+		return;
 	var folder=PageIdentifier();
 	function Simplify(sourcefragment){
 		return UnPosfix(sourcefragment,ImageExtensions).replace(folder,"");
