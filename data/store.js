@@ -41,13 +41,27 @@ function StoreHTML(){
 	return products.map(ProductHTML).join("\n");
 }
 
+function StoreImageHTML(obj){
+	var id=GenerateId();
+	var size=180;
+	var src=ImagePath(obj.LINK(),obj.IMAGE_EXT()||v.IMAGE_EXT(),size);
+	LazyImageLoader(id,src);							
+	return `<img id="${id}" 
+				class="image" 
+				width="${size}" 
+				height="${size}" 
+				alt="${obj.IMAGE_ALT(v)}" 
+				title="${obj.IMAGE_ALT(v)}" 
+				loading="lazy"/>`
+}
+
 function ProductHTML(ProdObj){
 	var ProdObj={...v,...ProdObj};
 	return `<div class="product-container">
 		<h2 class="product-title">${ProdObj.TITLE()}</h2>
 		<p class="product-tagline">${ProdObj.TAGLINE()}</p>
 		<div class="product-image">
-		${v.PICTURE(ProdObj,180)}</div>
+		${StoreImageHTML(ProdObj)}</div>
 		<div class="product-details text">${ProdObj.DETAILS()}</div>
 		<div class="checkout">
 			<div class="product-call text">${ProdObj.CALL()}</div>

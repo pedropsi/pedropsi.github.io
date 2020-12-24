@@ -62,8 +62,6 @@ BuildCMSPage=function(){
 	document.head.innerHTML=v.HEAD();
 	document.body.innerHTML=v.BODY();
 
-	var LOGO=v.LOGO_SVG();
-
 	var sources=["codes/intercom.js","data/guestbook.js","codes/insight.js"];
 	LoadSources(sources,PageFeatures);
 

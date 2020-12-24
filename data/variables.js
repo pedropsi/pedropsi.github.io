@@ -177,10 +177,7 @@ PICTURE_DYNAMIC_SIZE		:function(){
 									return 512;
 							},
 
-FIGURE						:	()=>	`<figure class="figure">${v.PICTURE_DYNAMIC()}<figcaption class="legend">${v.CONTENT()}</figcaption></figure>`,
 FIGURE_SIMPLE				:	()=>	`<figure class="figure">${v.PICTURE_DYNAMIC()}</figure>`,
-
-GIF							:	()=>	`<video autoplay loop muted playsinline><source src="${v.IMAGE_180()}" type="video/mp4"></source></video>`,
 
 PUZZLE_SCRIPT_GAME			:	()=>	`codes/game/puzzlescript/${v.LINK()}.js`,
 PUZZLE_SCRIPT_EMBED			:	()=>	`codes/game/puzzlescript-embed.js`,
