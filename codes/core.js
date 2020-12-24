@@ -3353,12 +3353,8 @@ BalloonHTML=function(avatarHTML,content,id,classExtra){
 	return b;
 }
 
-OpenBalloon=function(content,id,targetid,avatar){
-	if(!avatar||typeof LOGO==="undefined")
-		var avatar="";
-	else
-		var avatar='<div class="logo avatar">'+LOGO+'</div>';
-	AddElement(BalloonHTML(avatar,content,id),targetid);
+OpenBalloon=function(content,id,targetid){
+	AddElement(BalloonHTML("",content,id),targetid);
 }
 
 //Banner (e.g for keyboard)
@@ -4371,6 +4367,7 @@ ExecuteChoice=function(field,value,pid){
 
 ModalHTML=function(content,id,type){
 	var type=type?(" "+type):"";
+	var id=id||GenerateId();
 	return `<div class="modal window ${type}" id="${id}">
 			<div class="modal-frame">
 				${CloseButtonHTML(id)}
@@ -4381,8 +4378,10 @@ ModalHTML=function(content,id,type){
 		</div>`;
 }
 
-OpenModal=function(content,id,targetid){
-	AddElement(ModalHTML(content,id),targetid);
+OpenModal=function(content,id,target){
+	var id=id||GenerateId();
+	var target=target||"body"
+	AddElement(ModalHTML(content,id),target);
 	FocusInside(id);
 }
 
