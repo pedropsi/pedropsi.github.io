@@ -1034,6 +1034,9 @@ tr:active .editTD{
 	outline: none;
 }
 
+.modal-content img{
+	max-height: calc(100vh - var(--h16) -  var(--h8));
+}
 
 .closer{
 	width:100%;

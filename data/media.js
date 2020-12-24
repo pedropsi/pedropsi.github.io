@@ -154,17 +154,24 @@ ImageSource=function(ImageObj){
 	return src
 }
 
+ImageHTML=function(ImageObj){
+	if(!ImageObj.lazy)
+		var src=`src="${ImageSource(ImageObj)}"`;
+	return `
+	<img
+		alt="${ImageObj.ALT||ImageObj.DESCRIPTION||ImageObj.src}" 
+		title="${ImageObj.DESCRIPTION||ImageObj.src}"
+		class="image"
+		loading="lazy"
+		${src}
+		id="${ImageObj.id}"
+	/>`
+}
 
 LazyImageHTML=function(ImageObj){
 	var id=GenerateId();
 	LazyImageLoader(id,ImageSource(ImageObj));
-
-	return `
-	<img	alt="${ImageObj.ALT||ImageObj.DESCRIPTION||ImageObj.src}" 
-		title="${ImageObj.DESCRIPTION||ImageObj.src}"
-		class="image"
-		loading="lazy"
-		id="${id}"	/>`
+	return ImageHTML({...ImageObj,id:id,lazy:true});
 }
 
 ImageCardHTML=function(ImageObj){
@@ -189,6 +196,14 @@ ImageCardHTML=function(ImageObj){
 	${legend}`;
 }
 
+LaunchImageModal=function(subfolder,title){
+	var ImageObj=ImageObject({
+		folder:subfolder,
+		name:title
+	});
+	OpenModal(ImageHTML(ImageObj))
+}
+
 
 
 ScreenshotGalleryHTML=function(id){
@@ -202,32 +217,47 @@ ScreenshotGalleryHTML=function(id){
 	<div class="featured">${gallery}</div>`
 }
 
+function ImageObject(opts){
+	var opts=opts||{};
+	var name=opts.name;
+	var folder=opts.folder;
+	return {
+		id:name,
+		...opts,
+		FOLDER_SMALL:folder,
+		DESCRIPTION:name,
+		TRACK:name};
+};
 
 
-FolderGalleryHTML=function(folder,names,ObjectRenderer){
-	function ImageObj(name,opts){
-		var opts=opts||{};
-		return {
-			id:name,
-			...opts,
-			FOLDER_SMALL:folder,
-			DESCRIPTION:name,
-			TRACK:name};
-	};
-
+FolderGalleryHTML=function(subfolder,names,ObjectRenderer){
 	if(IsArray(names)){
 		if(names.length<1)
 			return "";
-		var objects=names.map(ImageObj);
+		var objects=names.map(name=>ImageObject({name:name,folder:subfolder}));
 	}
 	else if(IsObject(names)){
-		var objects=ThreadKeysValues(names,ImageObj);
+		var objects=Keys(names).map(n=>ImageObject(Join(names[n],{name:n,folder:subfolder})));
 	}
 	
 	var ObjectRenderer=ObjectRenderer||ImageCardHTML;
 	var gallery=objects.map(ObjectRenderer).join("\n");
 	return `<div class="featured">${gallery}</div>`
 }
+
+FocusImageFragment=function(obj){
+	console.log("lol?")
+	var	frag=PageFragment();
+	var folder=PageIdentifier();
+	function Simplify(sourcefragment){
+		return UnPosfix(sourcefragment,ImageExtensions).replace(folder,"");
+	}
+	var focuses=Keys(obj).filter(k=>In(Simplify(k),Simplify(frag)));
+	if(focuses.length)
+		LaunchImageModal(folder,First(focuses))
+}
+
+
 
 DATA["media"]=Media;
 Shout("media");

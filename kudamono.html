@@ -43,8 +43,8 @@ ${kudamonosData={
 
 	},
 	kudamonos=FilterObject(kudamonosData,(o,k)=>(!o.date||Days(StringDate(o.date))>=0)),
+	Delayer(FocusImageFragment)(kudamonos),
 	""}
-
 
 <h2>Latest</h2>
 ${FolderGalleryHTML("kudamono",FilterObject(kudamonos,(o,k)=>In([0,1,2].map(i=>Keys(kudamonos)[i]),k)))}

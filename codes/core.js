@@ -4923,6 +4923,12 @@ DelayUntil=function(Condition,F,i){
 	}
 }
 
+function Delayer(Executor){
+	return function(...args){
+		setTimeout(function(){Executor(...args)});
+	}
+}
+
 //ExecuteOnce
 Once=function(F,name){
 	var name=name||FunctionName(F);
