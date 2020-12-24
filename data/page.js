@@ -64,7 +64,7 @@ BuildCMSPage=function(){
 
 	var LOGO=v.LOGO_SVG();
 
-	var sources=["codes/communication.js","data/guestbook.js","codes/analytics.js"];
+	var sources=["codes/intercom.js","data/guestbook.js","codes/insight.js"];
 	LoadSources(sources,PageFeatures);
 
 	if(v.POSTSCRIPT)
@@ -124,7 +124,7 @@ PageWithMetaHTML=function(v,post){
 	return `${v.HTML_DOCTYPE()}
 	<head>
 		${v.HEAD().replace(/\s+/ig," ")}
-		<script src="codes/data-transfer.js"></script>
+		<script src="codes/core.js"></script>
 		${post}
 	</head></html>
 	`

@@ -6,10 +6,10 @@ var preCacheFiles=[
 	"/",
 	"cacher.js",
 	
-	"codes/index.css",
-	"codes/communication.js",
-	"codes/data-transfer.js",
-	"codes/analytics.js"
+	"codes/lotus.css",
+	"codes/intercom.js",
+	"codes/core.js",
+	"codes/insight.js"
 ];
 
 function CatchError(error){

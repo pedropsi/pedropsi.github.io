@@ -1,8 +1,8 @@
 ﻿User-agent: *
 Allow: /data
 Allow: /images
-Allow: /codes/index.css
-Allow: /codes/data-transfer.js
+Allow: /codes/lotus.css
+Allow: /codes/core.js
 Disallow: /codes
 Disallow: /hints
 Disallow: /media

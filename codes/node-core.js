@@ -2,7 +2,7 @@
 // File utils
 
 var DIR="../";
-require(DIR+'codes/data-transfer');
+require(DIR+'codes/core');
 require(DIR+'data/page');
 // require(DIR+'codes/core/search');
 var fs = require('fs');

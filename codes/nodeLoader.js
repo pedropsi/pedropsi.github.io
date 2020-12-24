@@ -38,6 +38,6 @@ UpdateAll=function(){
 
 // Do it
 
-require('../codes/data-transfer');
+require('../codes/core');
 Listen("ConsolidateVariables",UpdateAll);
 LoadNodeSource('../data/page');
