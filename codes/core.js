@@ -2719,19 +2719,6 @@ ElementHTML=function(opts){
 
 // Basic Elements
 
-ImageHTML=function(optionsObj){
-	var o=optionsObj?optionsObj:{};
-	o.tag="img";
-	if(!o.attributes)
-		o.attributes={src:"images/splash.png"}
-	return SingleElementHTML(o);
-};
-
-PlaceholderImageHTML=function(){
-	return ImageHTML();
-};
-
-
 SVGHTML=function(opts){
 	var path=IsString(opts)?opts:(opts.path||"M 10 10 L 20 10 L 10 20 Z");
 	
