@@ -2701,20 +2701,19 @@ ScrollInto=function(elementIDsel){
 // Element Generator
 
 AttributesHTML=function(opts){
+	var opts=opts||{};
 	return Keys(opts).map(k=>`${k}='${opts[k]}'`).join(" ");
 }
 
 ElementHTML=function(opts){
 	var tag=opts.tag?opts.tag:"div";
-	var attributes=(opts.attributes)?(' '+AttributesHTML(opts.attributes)):'';	//attributes is an Object
+	var attribs=AttributesHTML(opts.attributes||{});
 	var txt=opts.txt?opts.txt:"";
-	return `<${tag}${attributes}>${txt}</${tag}>`;		//txt and tag
-};
-
-SingleElementHTML=function(opts){
-	var tag=opts.tag?opts.tag:"div";
-	var attributes=(opts.attributes)?' '+AttributesHTML(opts.attributes):'';	//attributes is an Object
-	return "<"+tag+attributes+"/>";
+	var start=`<${tag} ${attribs}>`
+	var end=`</${tag}>`
+	if(opts.single)
+		return start.replace(/\>$/ig,"/>");
+	return `${start}${txt}${end}`;		//txt and tag
 };
 
 
@@ -2805,12 +2804,20 @@ FragmentAHTML=function(title,ref,attribs){
 	return HeaderAHTML(title,ref,{...attribs,class:"innerlink"}); //self-anchors
 }
 
+AnchorHTML=function(content,ref,attribs){
+	var attribs=attribs||{};
+		attribs["href"]=ref;
+	if(Prefixed(ref,"http"))
+		attribs["rel"]="noreferrer noopener";
+
+	return ElementHTML({tag:"a",txt:content,attributes:attribs});
+}
+
 AHTML=function(title,ref,attribs){
 	if(Prefixed(title,"#"))
 		return FragmentAHTML(title,ref,attribs);
 
 	if(typeof ref==="undefined"){
-		
 		if(In(title,".html"))
 			return AHTML(title,title);
 		
@@ -2819,12 +2826,7 @@ AHTML=function(title,ref,attribs){
 			ref=RightPath(ref);
 	}
 	
-	var attribs=attribs||{};
-		attribs["href"]=ref;
-	if(Prefixed(ref,"http"))
-		attribs["rel"]="noreferrer noopener";
-
-	return ElementHTML({tag:"a",txt:title,attributes:attribs});
+	return AnchorHTML(title,ref,attribs)
 }
 
 
