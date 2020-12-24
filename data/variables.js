@@ -194,14 +194,8 @@ BUTTON_SUBSCRIBE			:	()=>	NavigationButtonHTML("subscribe"),
 
 COPYRIGHT					:	()=>	`Copyright ${v.NAME()} ${v.YEAR_SPAN()}, all rights reserved`,
 COPYRIGHT_TEXT				:	()=>	`© ${v.NAME()} ${YearsString(v.YEAR_START(),v.YEAR_NOW())}`,
-LICENSE						:	()=>	`${v.LICENSE_CC_BY_4()}`,
+LICENSE						:	()=>	`${HyperText("License/CC-BY-4.0")}`,
 
-LICENSE_MIT					:	()=>	`<a href="https://opensource.org/licenses/MIT" ${v.BLANK()}>MIT</a>`,
-LICENSE_CC_BY_3				:	()=>	`<a href="https://creativecommons.org/licenses/by/3" ${v.BLANK()}>CC_BY 3.0</a>`,
-LICENSE_CC_BY_4				:	()=>	`<a href="https://creativecommons.org/licenses/by/3.0" ${v.BLANK()}>CC_BY 4.0</a>`,
-LICENSE_CC_BY_NC_SA_4		:	()=>	`<a href="https://creativecommons.org/licenses/BY_nc_SA/4.0/">CC BY_NC_SA 4.0</a>`,
-
-DISCLAIMER					:	()=>	`<p class="disclaimer">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>`,
 
 
 BLANK						:	()=>	`target='_blank' rel="noopener noreferrer"`,
@@ -365,7 +359,7 @@ NEWS_LIMIT_RECENT			:	()=>	3,
 LATEST_LIMIT				:	()=>	12,
 RSS_LIMIT					:	()=>	60,
 RSS_PATH					:	()=>	`${v.SITE()}/rss.xml`,
-RSS_SITE_DESCRIPTION		:	()=>	`Don't miss out on novelties from The ${v.SITE_NAME()}!`,
+RSS_SITE_DESCRIPTION		:	()=>	`Don't miss out on the ${v.SITE_NAME()}!`,
 RSS_CHANNEL_IMAGE			:	()=>	`<image><link>${v.SITE()}</link><title>${v.SITE_NAME()}</title><url>${v.SITE()}/${v.LOGO_PATH()}</url></image>`,
 XML							:	()=>	`<?xml version="1.0" encoding="UTF-8"?>`,
 
