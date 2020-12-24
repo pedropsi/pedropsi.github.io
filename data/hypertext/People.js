@@ -144,19 +144,27 @@ var OtherPeople={
 
 var Persons=Join(Developers,Contributors,Musicians,OtherPeople)
 
+var CommonURLS={
+	GOOGLE_PLUS:`https://plus.google.com/u/0/`,
+	TWITTER:`https://twitter.com/`,
+	GITHUB_IO:`.github.io/`,
+	GITHUB_COM:`.github.com/`,
+	ITCH:`.itch.io/`
+}
+
 PersonalPage=function(linkObj){
 	if(linkObj.ITCH)
-		return "https://"+UnFunction(linkObj.ITCH)+v.ITCH_URL();
+		return `https://${linkObj.ITCH}.${CommonURLS.ITCH}`;
 	if(linkObj.TWITTER)
-		return v.TWITTER_URL()+UnFunction(linkObj.TWITTER);
+		return `${CommonURLS.TWITTER}${linkObj.TWITTER}`;
 	if(linkObj.GITHUB_IO)
-		return "https://"+UnFunction(linkObj.GITHUB_IO)+v.GITHUB_IO_URL();
+		return `https://${linkObj.GITHUB_IO}${CommonURLS.GITHUB_IO}`;
 	if(linkObj.GITHUB_COM)
-		return "https://"+UnFunction(linkObj.GITHUB_COM)+v.GITHUB_COM_URL();
+		return `https://${linkObj.GITHUB_COM}${CommonURLS.GITHUB_COM}`;
 	if(linkObj.PERSONAL_PAGE)
-		return UnFunction(linkObj.PERSONAL_PAGE);
+		return `${linkObj.PERSONAL_PAGE}`;
 	if(linkObj.GOOGLE_PLUS)
-		return v.GOOGLE_PLUS_URL()+UnFunction(linkObj.GOOGLE_PLUS);
+		return `${CommonURLS.GOOGLE_PLUS}${linkObj.GOOGLE_PLUS}`;
 	else
 		return "";
 }

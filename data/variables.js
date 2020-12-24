@@ -241,17 +241,12 @@ SUBSCRIBE_EMAIL				:	()=>	`<a onclick="OpenModalSubscribe()">Subscribe to email 
 
 DO_COMMENT					:	()=>	`<a href="#" onclick="RequestGuestbook()">Leave a comment!</a>`,
 
-GOOGLE_PLUS_URL				:	()=>	`https://plus.google.com/u/0/`,
-TWITTER_URL					:	()=>	`https://twitter.com/`,
-GITHUB_IO_URL				:	()=>	`.github.io/`,
-GITHUB_COM_URL				:	()=>	`.github.com/`,
-PUZZLESCRIPT_URL			:	()=>	`https://www.puzzlescript.net/`,
-ITCH_URL					:	()=>	`.itch.io/`,
 
 YT_URL						:	()=>	`https://www.youtube.com/watch?v=`,
 
 MACRO_URL					:	()=>	`https://script.google.com/macros/s/`,
-				
+
+
 TITLE_BY					:	()=>	`${v.TITLE()} by ${v.NAME()} ${v.YEAR()}`,
 TITLE_BY_AL					:	()=>	`${v.NAME()} et al., ${v.YEAR()}, <em>${v.TITLE()}</em>`,
 TITLELONG					:	()=>	`${v.TITLE()} - ${v.TAGLINE()}`,
