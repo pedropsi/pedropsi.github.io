@@ -1105,7 +1105,7 @@ CapitaliseSentence=function(sentence){
 }
 
 CapitaliseSlug=function(slug){
-	return CapitaliseSentence(slug.replace("-"," "));
+	return CapitaliseSentence(slug.replaceAll("-"," "));
 }
 
 //Escape
@@ -2700,21 +2700,20 @@ ScrollInto=function(elementIDsel){
 ////////////////////////////////////////////////////////////////////////////////
 // Element Generator
 
-ReadAttributes=function(attributesObj){
-	function Attrib(k){return k+"='"+attributesObj[k]+"'";};
-	return Keys(attributesObj).map(Attrib).join(" ");
+AttributesHTML=function(opts){
+	return Keys(opts).map(k=>`${k}='${opts[k]}'`).join(" ");
 }
 
-ElementHTML=function(optionsObj){
-	var tag=optionsObj.tag?optionsObj.tag:"div";
-	var attributes=(optionsObj.attributes)?' '+ReadAttributes(optionsObj.attributes):'';	//attributes is an Object
-	var txt=optionsObj.txt?optionsObj.txt:"???";
-	return "<"+tag+attributes+">"+txt+"</"+tag+">";		//txt and tag
+ElementHTML=function(opts){
+	var tag=opts.tag?opts.tag:"div";
+	var attributes=(opts.attributes)?(' '+AttributesHTML(opts.attributes)):'';	//attributes is an Object
+	var txt=opts.txt?opts.txt:"";
+	return `<${tag}${attributes}>${txt}</${tag}>`;		//txt and tag
 };
 
-SingleElementHTML=function(optionsObj){
-	var tag=optionsObj.tag?optionsObj.tag:"div";
-	var attributes=(optionsObj.attributes)?' '+ReadAttributes(optionsObj.attributes):'';	//attributes is an Object
+SingleElementHTML=function(opts){
+	var tag=opts.tag?opts.tag:"div";
+	var attributes=(opts.attributes)?' '+AttributesHTML(opts.attributes):'';	//attributes is an Object
 	return "<"+tag+attributes+"/>";
 };
 
@@ -2801,9 +2800,14 @@ ButtonHTML=function(optionsObj){
 	return ElementHTML(o);
 };
 
+FragmentAHTML=function(title,ref,attribs){
+	var title=UnPrefix(title,"#");
+	return HeaderAHTML(title,ref,{...attribs,class:"innerlink"}); //self-anchors
+}
+
 AHTML=function(title,ref,attribs){
 	if(Prefixed(title,"#"))
-		return HeaderAHTML(UnPrefix(title,"#"),ref,{...attribs,class:"innerlink"}); //self-anchors
+		return FragmentAHTML(title,ref,attribs);
 
 	if(typeof ref==="undefined"){
 		
@@ -2811,14 +2815,15 @@ AHTML=function(title,ref,attribs){
 			return AHTML(title,title);
 		
 		var ref=title;
-		var title=CapitaliseSlug(title.replace("-"," "));
+		var title=CapitaliseSlug(title);
 			ref=RightPath(ref);
 	}
-	var external=Prefixed(ref,"http");
+	
 	var attribs=attribs||{};
-	attribs["href"]=ref;
-	if(external)
+		attribs["href"]=ref;
+	if(Prefixed(ref,"http"))
 		attribs["rel"]="noreferrer noopener";
+
 	return ElementHTML({tag:"a",txt:title,attributes:attribs});
 }
 
