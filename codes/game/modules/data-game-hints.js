@@ -52,13 +52,21 @@ function LoadHints(){
 ////////////////////////////////////////////////////////////////////////////////
 //Hint images
 
+HintImageHTML=function(opts){
+	var o=opts?opts:{};
+	o.tag="img";
+	if(!o.attributes)
+		o.attributes={src:"images/splash.png",single:true}
+	return ElementHTML(o);
+};
+
 HintImage=function(fullpath){
 	if(IsGif(fullpath)){
 		gifID=GenerateId();
-		loaded=ImageHTML({attributes:{id:gifID,src:fullpath,onload:'StartGIF('+gifID+')',tabindex:'0',class:"gif"}});
+		loaded=HintImageHTML({attributes:{id:gifID,src:fullpath,onload:'StartGIF('+gifID+')',tabindex:'0',class:"gif"}});
 	}
 	else
-		loaded=ImageHTML({attributes:{src:fullpath}});
+		loaded=HintImageHTML({attributes:{src:fullpath}});
 	
 	return `<div class='hint'>${loaded}</div>`;
 }
