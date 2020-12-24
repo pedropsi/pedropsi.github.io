@@ -119,17 +119,7 @@ HEAD_IMAGE					:	()=>	`<meta property="og:image" content="${v.SITE()}/${v.IMAGE_
 	
 SITEMAP_PATH				:	()=>	`sitemap.xml`,
 	
-CONTACT_FORM_URL			:	()=>	`${v.DOC_URL()}/forms/d/e/1FAIpQLSc7pMuScBJIJesW4LMXdegzH2nJh5tbnwR8PmqZvyMhNrUl8A/viewform?embedded=true`,
-CONTACT_FORM_CUSTOM			:	()=>	`${v.MACRO_URL()}AKfycbzJnrnkaamwSWZbNKhgNxX4bNRx53A14LpaRQcGWQ/exec`,
-CONTACTAREA					:	()=>	`<iframe src="${v.CONTACT_FORM_URL()}" ${v.IFRAME_OPTS()}>Loading...</iframe>`,
-	
-SHEET_URL_RECORD			:	()=>	`${v.SHEET_URL()}e/2PACX-1vQwd7CTU3k1HsrT4fPLljY9HSW5eWbOv118H3zn5nsRg6Uc1b_aTg577hjFoHLPCUbKAEmht603qmc7/pubhtml?gid=`,
-SHEET_URL_GAMES_LIST		:	()=>	`${v.SHEET_URL()}e/2PACX-1vQIyh0-r33j0GqPOAtttQEP-MiOZ2Zk_hggfcFMH5_hiclaUCZu30MRaO58h1Hty9UGWefP25gBB56a/pubhtml?gid=`,
-
-DISPLAY_LEGACY				:(idcode)=>`${v.SHEET_URL_RECORD()}${idcode}${v.SHEET_OPT()}`,
 DISPLAY_EXTERNAL			:	()=>	`<div id="${v.LINK()}-area" class="external-area">Loading...</div>`,
-
-DISPLAY_SCRIPT				:	()=>	`<script>DisplayTable()</script>`,
 
 AREA_PRE					:	()=>	`<div class="container">`,
 TABULAR_AREA				:	()=>	`${v.AREA_PRE()}${v.DISPLAY_EXTERNAL()}${v.POST_PLUS_LABELS()}</div>`,
