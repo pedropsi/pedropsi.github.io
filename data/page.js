@@ -131,6 +131,7 @@ PageWithMetaHTML=function(v,post){
 PagePost=function(code){
 	var start='<script id="post">var v={POST:()=>`';
 	var end='`};</script><script src="data/page.js"></script>';
+	var post="";
 
 	if(!In(code,start)||!In(code,end))
 		v.POST=(()=>`
