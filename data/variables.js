@@ -191,9 +191,6 @@ GAME_SCRIPT_GAME			:	()=>	`codes/game/${v.LINK()}/${v.LINK()}.js`,
 GAME_SCRIPT					:	()=>	[v.GAME_SCRIPT_GAME(),v.GAME_STYLE()],
 
 GUESTBOOK_ADD				:	()=>	`<div class="button centered" onclick="RequestGuestbook()" tabindex="0">Leave your message!</div>`,
-BUTTON_BUY					:	(v)=>`<a href="https://transactions.sendowl.com/products/${v.OWL()}/add_to_cart" rel="nofollow"><div class="button">${v.PRICE()}</div></a>`,
-BUTTON_BUY_FULL					:	(v)=>`<a href="https://transactions.sendowl.com/products/${v.OWL()}/add_to_cart" rel="nofollow"><div class="button">Buy now (${v.PRICE()})</div></a>`,
-
 
 BUTTON_SUBSCRIBE			:	()=>	NavigationButtonHTML("subscribe"),
 
@@ -335,8 +332,6 @@ OTHER_INQUIRIES				:	()=>	`<h3>Other inquiries</h3><p>Check also the ${v.A_PRESS
 
 VIDEO_SRC					:	()=>	`media/${v.LINK()}/${v.LINK()}.mp4`,
 TRAILER_LAUNCHER			:	()=>	`<img class="card" onclick='OpenVideoModal("${v.TRAILER()}")' src="images/${v.TRAILER_IMAGE()}" alt="${v.TITLE()}'s trailer" title="${v.TITLELONG()} (trailer)" loading="lazy"/>`,
-
-REDACTED					:	()=>	`<s>Redacted</s> `,
 
 
 MANIFEST					:	()=>"",
