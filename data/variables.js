@@ -64,7 +64,6 @@ ALIAS						: 	()=>	`pedropsi`,
 SITE_SHORT					:	()=>	`${v.ALIAS()}.github.io`,
 SOURCE_URL					:	()=>	`https://github.com/${v.ALIAS()}`,
 SITE						:	()=>	`https://${v.SITE_SHORT()}`,
-SITE_HTTP					:	()=>	`http://${v.SITE_SHORT()}`,
 SITE_LINK					:	()=>	`<a href="${v.SITE()}">${v.SITE_NAME()}</a>`,
 SITE_LINK_SELF				:	()=>	`<a href="${v.SITE()}">${v.SITE()}</a>`,
 LINK_URL					:	()=>	`${v.SITE()}/${v.LINK()}`,
@@ -84,14 +83,11 @@ CSS_ABS						:	()=>	v.CSS_TAG(`${v.SITE()}/${v.CSS_PATH()}`),
 CODES_FOLDER 				:	()=>	`codes`,
 CODES_FOLDER_URL			:	()=>	`${v.SITE()}/${v.CODES_FOLDER()}/`,
 
-IMAGE_180					:	()=>	ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),180),
-IMAGE_192					:	()=>	ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),192),
-IMAGE_512					:	()=>	ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),512),
-
 IMAGE_NAME					:	()=>	`splash`,
 IMAGE_EXT					:	()=>	`svg`,
 IMAGE_ALT					:	()=>	`A geometric lotus flower composed of eight rows of eight petals in rainbow progression - ${v.SITE_NAME()}'s logo`,
 
+IMAGE_512					:	()=>	ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),512),
 APPLEICON					:	()=>	ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),180),
 FAVICON32					:	()=>	ImagePath("favicon-32x32","png"),
 
@@ -201,7 +197,7 @@ BLANK						:	()=>	`target='_blank' rel="noopener noreferrer"`,
 
 HTML_DOCTYPE				:	()=>	DoctypeHTML(v.LANG()),
 
-HTML_OUT					:(content)=>	`${v.HTML_DOCTYPE()}${v.HEAD()}<body class="body" id="${v.LINK()}">${content}${v.FOOTER_AREA()}</body></html>`,
+HTML_OUT					:	(content)=>	`${v.HTML_DOCTYPE()}${v.HEAD()}<body class="body" id="${v.LINK()}">${content}${v.FOOTER_AREA()}</body></html>`,
 
 PAGE_SIMPLE					:	()=>	v.MONO_OUT(v.WHITEBOARD_SIMPLE()),
 PAGE_BARE					:	()=>	v.MONO_OUT(v.CONTENT()),
@@ -240,9 +236,6 @@ SUBSCRIBE_RSS				:	()=>	`<a href="${v.RSS_PATH()}" id="rss">Subscribe to RSS fee
 SUBSCRIBE_EMAIL				:	()=>	`<a onclick="OpenModalSubscribe()">Subscribe to email alerts.</a>`,
 
 DO_COMMENT					:	()=>	`<a href="#" onclick="RequestGuestbook()">Leave a comment!</a>`,
-
-
-YT_URL						:	()=>	`https://www.youtube.com/watch?v=`,
 
 MACRO_URL					:	()=>	`https://script.google.com/macros/s/`,
 

@@ -32,7 +32,7 @@ A_MANIFOLD_GARDEN:{link:"https://manifold.garden",TITLE:"Manifold Garden",AUTHOR
 A_HYPERROGUE:{link:"https://roguetemple.com/z/hyper/",TITLE:"HyperRogue"}, //,AUTHOR:()=>P("zenorogue")},
 A_11_LESSONS:{link:"11-lessons-from-11-games",EXT:".html",TITLE:"11 lessons"},
 A_BOOKMARKLET:{link:"game-bar",EXT:".html",TITLE:"Game bar Bookmarklet",AUTHOR:()=>v.NAME(),HASH:"Bookmarklet"},
-A_BUROKKU_KONEKUTA_FEAT_3:{link:()=>`${v.YT_URL()}D58VbHjrSHA`,EXT:".html",TITLE:"【今日のフリーゲーム】",GROUP:"mentioned",ID:"burokku-konekuta"},
+A_BUROKKU_KONEKUTA_FEAT_3:{link:()=>`https://www.youtube.com/watch?v=D58VbHjrSHA`,EXT:".html",TITLE:"【今日のフリーゲーム】",GROUP:"mentioned",ID:"burokku-konekuta"},
 A_GAME_JOURNEY:{link:"a-game-making-journey",EXT:".html",TITLE:"11-game-making journey"},
 A_GAMES:{link:"tag",EXT:".html",TITLE:"games",AUTHOR:()=>v.NAME(),SEARCH:"Game"},
 A_GIST:{link:"https://gist.github.com",TITLE:"Gists",AUTHOR:"Github"},
