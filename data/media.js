@@ -245,7 +245,7 @@ FolderGalleryHTML=function(subfolder,names,ObjectRenderer){
 	return `<div class="featured">${gallery}</div>`
 }
 
-FocusImageFragment=function(obj){
+ModalImageFragment=function(obj){
 	var	frag=PageFragment();
 	if(!frag)
 		return;
