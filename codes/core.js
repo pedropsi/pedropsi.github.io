@@ -4924,8 +4924,9 @@ DelayUntil=function(Condition,F,i){
 }
 
 function OnceDelayer(Executer){
-	if(!OnceDelayer["Executer"]){
-		OnceDelayer["Executer"]=true;
+	var name=FunctionName(Executer);
+	if(!OnceDelayer[name]){
+		OnceDelayer[name]=true;
 		return function(...args){
 			setTimeout(function(){Executer(...args)});
 		}
