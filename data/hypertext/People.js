@@ -67,7 +67,8 @@ var Contributors={//People
 	"pancelor":{alias:"Pancelor",ITCH:"pancelor"},
 	"dohz":{alias:"dohz",ITCH:"dohz"},
 	"jarsp":{alias:"jarsp"},
-	"toomblercatz":{alias:"toomblercatz",ITCH:"toombler"}
+	"toomblercatz":{alias:"toomblercatz",ITCH:"toombler"},
+	"zach":{name:"Zach"}
 }
 
 var Musicians={
