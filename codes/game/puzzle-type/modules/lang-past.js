@@ -4389,10 +4389,19 @@ var PastWords={
 	"solstice":"equinox",
 	"equinox":"solstice",
 	
-	"vernal equinox":"spring",
-	"autumnal equinox":"autumn",
-	"summer solstice":"summer",
-	"winter solstice":"winter",
+	"vernal equinox":"summer solstice",
+	"spring equinox":"summer solstice",
+	
+	"autumnal equinox":"winter solstice",
+	"march equinox":"winter solstice",
+	
+	"summer solstice":"autumnal equinox",
+	"estival solstice":"autumnal equinox",
+	"midsummer":"autumnal equinox",
+
+	"winter solstice":"vernal equinox",
+	"hiernal solstice":"vernal equinox",
+	"hibernal solstice":"vernal equinox",
 
 
 	"new moon":"first quarter moon",
