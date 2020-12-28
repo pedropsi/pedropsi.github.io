@@ -439,7 +439,7 @@ function ForbidSpaceActions(key){
 		"Loosely less",
 		"Latent clones",
 		"Shepherdess hence unladylike",
-		"Doves flit today before winter",
+		"Today doves flit before winter",
 		"White chocolate mint",
 		"Nigeria",
 		"Polaris Australis",
@@ -576,7 +576,7 @@ var LevelDifficulty={
 	"Odd":3,
 	"Latent clones":3,
 	"Shepherdess hence unladylike":3,
-	"Doves flit today before winter":4,
+	"Today doves flit before winter":4,
 	"La rapide surprise":5,
 	"White chocolate mint":2,
 	"Starting buds":5,
@@ -638,7 +638,7 @@ var LanguageLevels=[
 	"Anagram",
 	"Latent clones",
 	"Shepherdess hence unladylike",
-	"Doves flit today before winter",
+	"Today doves flit before winter",
 	"Starting buds",
 	"La rapide surprise",
 ]
@@ -723,7 +723,7 @@ var LevelGoals=[			//Required types of thinking:
 	
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-	"Doves flit today before winter",			//Keyword, Swap, Retroactive, Language
+	"Today doves flit before winter",			//Keyword, Swap, Retroactive, Language
 	"La rapide surprise",				//Keyword, Swap, Retroactive, Language
 	"Starting buds",					//Language
 
@@ -782,11 +782,11 @@ var LevelGoalAliases={
 	"Weightier":"Latent Clones",
 	"German Shepherd":"Shepherdess hence unladylike",
 	"Cherished Woman":"Shepherdess hence unladylike",
-	"Playmate resents flit":"Doves flit today before winter",
-	"Store delay corrodes present":"Doves flit today before winter",
-	"Present state delays":"Doves flit today before winter",
-	"Doves flit past":"Doves flit today before winter",
-	"Doves flit before winter":"Doves flit today before winter",
+	"Playmate resents flit":"Today doves flit before winter",
+	"Store delay corrodes present":"Today doves flit before winter",
+	"Present state delays":"Today doves flit before winter",
+	"Doves flit past":"Today doves flit before winter",
+	"Doves flit before winter":"Today doves flit before winter",
 	"Denebola":"Polaris Australis",
 	"Fuchsia":"White chocolate mint",
 	"White":"White chocolate mint",
@@ -990,7 +990,7 @@ var LevelInstructions={
 		Letters(FirstReplaceString(Word(),GenderReplacementRules));
 		Caret(Infinity);		
 	},
-	"Doves flit today before winter":function(L){
+	"Today doves flit before winter":function(L){
 		InputLetterAfter(L);
 		AddStrokeValid(L);
 		Letters(FirstReplaceString(Word(),PastReplacementRules));
@@ -3301,7 +3301,7 @@ function LevelHighlightableWords(title){
 		"Odd":["Odd","Even"],
 		"Latent clones":NumberNames,
 		"Shepherdess hence unladylike":GenderedMale,
-		"Doves flit today before winter":HighlightablePast,
+		"Today doves flit before winter":HighlightablePast,
 		"White chocolate mint":ColourNames,
 		"Just cut and paste":["cut","copy","paste"],
 		"Order is all":["is"]
