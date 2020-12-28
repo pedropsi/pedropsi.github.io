@@ -4427,4 +4427,4 @@ var PastReplacementRules=Keys(PastWords).sort(SingleSorter(w=>-w.length)).map(
 PastReplacementRules=Join(VerbPastTenseReplacementRules,PastReplacementRules);
 PastReplacementRules=Sort(PastReplacementRules,rule=>-rule[0].source.length);
 
-var HighlightablePast=Join(EnVerbsInfinitive,Keys(PastWords));
+var HighlightablePast=Join(Keys(PastWords),EnVerbsInfinitive).sort(SingleSorter(x=>-x.length));
