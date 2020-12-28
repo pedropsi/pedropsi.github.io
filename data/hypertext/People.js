@@ -14,7 +14,7 @@ var Contributors={//People
 	"mattison":{name:"S. Mattison",GOOGLE_PLUS:"116049570908402327989"},
 	"chz":{name:"Ili Butterfield",alias:"Chz",ITCH:"chz"},
 	"perconti":{name:"Jamie Perconti",TWITTER:"InfinitNutshell"},
-	"escaper":{name:"William Hu",alias:"TheGreatEscaper",PERSONAL_PAGE:"http://warpdoor.com/tag/thegreatescaper/"},
+	"escaper":{name:"William Hu",alias:"TheGreatEscaper",PERSONAL_PAGE:"https://puzzling.stackexchange.com/users/32596/thegreatescaper"},//PERSONAL_PAGE:"http://warpdoor.com/tag/thegreatescaper/"},
 	"vandevander":{name:"Matthew VanDevander",TWITTER:"mvandevander"},
 	"grant":{name:"Elyot Grant",PERSONAL_PAGE:"http://lunarchstudios.com/"},
 	"ahlman":{name:"Ove Ahlman",TWITTER:"ahlmanove"},
