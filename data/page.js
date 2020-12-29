@@ -135,13 +135,27 @@ PageWithMetaHTML=function(v,post){
 	`
 }
 
+DebuggerHTML=function(){
+	return `<span onclick="RequestDebugger()">Debug</span>`
+}
+
 FooterHTML=function(){
 	return `
 	<footer class="footer">
 		<p>${ViewCounterHTML()}</p>
-		<p>${v.COPYRIGHT_TEXT()}. ${v.A_TERMS()}. ${A("privacy-policy")}. ${A("status")}. ${v.DEBUGGER()}.</p>
+		<p>${v.COPYRIGHT_TEXT()}. ${v.A_TERMS()}. ${A("privacy-policy")}. ${A("status")}. ${DebuggerHTML()}.</p>
 		<p> ${v.A_PRESS()}. ${A("subscribe")} and ${v.A_SUPPORT()}!</p>
 	</footer>`
+}
+
+TagOpenHTML=function(tagattribs){
+	return `<code><span><</span>${tagattribs}<span>></span></code>`;	
+}
+TagCloseHTML=function(tagattribs){
+	return TagOpenHTML(Prefix(UnAfterfix(tagattribs," "),"/"));
+}
+CHTML=function(tagattribs,close){
+	return TagOpenHTML(tagattribs)+(close?TagCloseHTML(tagattribs):"");
 }
 
 //Post HTML

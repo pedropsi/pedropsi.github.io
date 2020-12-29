@@ -39,7 +39,7 @@ ${LinkGroupHTML("with-game-bar")}
 
 <h3>Middle way (live version)</h3>
 <p>Include the <b>javascript source</b> ${v.A_GB_SOURCE()} in a regular Puzzlescript export or in a custom page.</p>
-<p>To ensure the ${v.TITLE_BOLD()} overwrites all needed functions, please load it <b>after</b> the game has loaded fully, i.e. by placing at the end of the ${v.CSI()}body${v.CSF()} the snippet ${v.CSI()}script type="text/javascript" src="GameBar.js"${v.CSF()}${v.CSI()}/script${v.CSF()}.</p>
+<p>To ensure the ${v.TITLE_BOLD()} overwrites all needed functions, please load it <b>after</b> the game has loaded fully, i.e. by placing at the end of the ${CHTML("body")} the snippet ${CHTML(`script type="text/javascript" src="GameBar.js"`,true)}.</p>
 
 <h3>Advanced way (customised version) </h3>
 <p>By default, including the <code>GameBar.js</code> source code will load the <b>live</b> version from ${v.SITE_NAME()}. If you need to make changes to the ${v.TITLE_BOLD()} source code, you should download a copy of the ${v.A_GB_LATEST()} and make your changes there. ${LabelHTML("Experimental")}</p>
@@ -117,7 +117,7 @@ ${LinkGroupHTML("with-game-bar")}
 
 
 <h3>Multi-line hints</h3>
-<p>Within one hint line, include as many HTML paragraph tags as required: ${v.CSI()}p${v.CSF()}<code><b>Line 1</b></code>${v.CSI()}/p${v.CSF()} ${v.CSI()}p${v.CSF()}<code><b>Line 2</b></code>${v.CSI()}/p${v.CSF()} etc.... This will cause an hint to display as multiple paragraphs.</p>
+<p>Within one hint line, include as many HTML paragraph tags as required: ${CHTML(`p`)}<code><b>Line 1</b></code>${CHTML(`/p`)} ${CHTML(`p`)}<code><b>Line 2</b></code>${CHTML(`/p`)} etc.... This will cause an hint to display as multiple paragraphs.</p>
 
 <h2>Level titles </h2>
 <p>Level names ${LabelHTML("Experimental")} may be included in the hints file, as long as the following convention is respected:</p>
@@ -172,11 +172,11 @@ ${LinkGroupHTML("with-game-bar")}
 
 <h2>Music</h2>
 <h3>Just add the music files!</h3>
-<p>To control a music playlist via the game bar, each music track should be added to the page inside ${v.CSI()}audio class="music"${v.CSF()} tags, placed anywhere in the page. If these tags are detected, a music button will be revealed automatically.</p>
+<p>To control a music playlist via the game bar, each music track should be added to the page inside ${CHTML(`audio class="music"`)} tags, placed anywhere in the page. If these tags are detected, a music button will be revealed automatically.</p>
 <h4>Example 1) a local file</h4>
-<p> ${v.CSI()}audio class="music" src="folder/.../your track.wav"${v.CSF()}.</p>
+<p> ${CHTML(`audio class="music" src="folder/.../your track.wav"`)}.</p>
 <h4>Example 2) a file from the internet</h4>
-<p> ${v.CSI()}audio class="music" src="https://example.com/music.mp3"${v.CSF()}.</p>
+<p> ${CHTML(`audio class="music" src="https://example.com/music.mp3"`)}.</p>
 
 
 <h2>Other buttons</h2>
@@ -205,9 +205,9 @@ ${LinkGroupHTML("with-game-bar")}
 
 <h3>You are hosting your game at the itch.io platform and...</h3>
 <h4> ... nothing shows.</h4>
-<p>Please ensure that the ${v.TITLE_BOLD()} <b>javascript source</b> is loaded from within the ${v.CSI()}iframe${v.CSF()} containing the game, rather than from the main itch page.</p>
+<p>Please ensure that the ${v.TITLE_BOLD()} <b>javascript source</b> is loaded from within the ${CHTML(`iframe`)} containing the game, rather than from the main itch page.</p>
 <h4> ... save progress is wiped when a <b>new game version</b> is uploaded.</h4>
-<p>Please add the line <code> ObtainStorageURL(){return state.metadata.title;} </code> to your page javascript code. This will associate the save files with your game title, probably a stabler value than the default page URL (which may change when uploading new game versions).</p>
+<p>Please add the line <code> ObtainStorageURL=function(){return state.metadata.title;} </code> to your page javascript code. This will associate the save files with your game title, probably a stabler value than the default page URL (which may change when uploading new game versions).</p>
 
 <h3>You ran the bookmarklet on itch.io and it doesn't show</h3>
 <p>The bookmarklet must be run from within any iframe containing the game (otherwise it can't connect with the game).</p>

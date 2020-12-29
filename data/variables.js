@@ -213,11 +213,6 @@ LABEL_DATE					:	(page)=>	!page.DAY?"":`<a class="tag button" href="posts.html">
 LABEL_TAGS					:	(page)=>	page.TAGS?page.TAGS().map(v.LABEL_TAG).join("\n"):"",
 LABEL_TAG					:	(tag)=>		`<a class="tag button" href="tag.html?search=${tag}">${tag}</a>`,
 
-FOOTER_AREA					:	()=>	`<footer class="footer">${v.FOOTER_LINES()}</footer>`,
-FOOTER_LINES				:	()=>	`<p>${ViewCounterHTML()}</p><p>${v.COPYRIGHT_TEXT()}. ${v.A_TERMS()}. ${A("privacy-policy")}. ${A("status")}. ${v.DEBUGGER()}.</p><p> ${v.A_PRESS()}. ${A("subscribe")} and ${v.A_SUPPORT()}!</p>`,
-
-DEBUGGER					:	()=>	`<span onclick="RequestDebugger()">Debug</span>`,
-
 
 
 SECTION_SUBSCRIBE			:	()=>	v.SECTION_OUT(`<div class="container">${v.SUBSCRIBE_ANNOUNCE()}</div>`),
@@ -225,7 +220,6 @@ SUBSCRIBE_ANNOUNCE			:	()=>	`<div class="announce"><p>Learn first-hand about ${v
 SUBSCRIBE_RSS				:	()=>	`<a href="${v.RSS_PATH()}" id="rss">Subscribe to RSS feed.</a>`,
 SUBSCRIBE_EMAIL				:	()=>	`<a onclick="OpenModalSubscribe()">Subscribe to email alerts.</a>`,
 
-DO_COMMENT					:	()=>	`<a href="#" onclick="RequestGuestbook()">Leave a comment!</a>`,
 
 MACRO_URL					:	()=>	`https://script.google.com/macros/s/`,
 
@@ -337,11 +331,6 @@ DATE						:	(page)=>	`${page.DAY()}-${page.MONTH()}-${page.YEAR()}`,
 
 DATE_TEXT					:	(page)=>	page&&page.DAY&&page.MONTH&&page.YEAR?DateName(page.DAY(),page.MONTH(),page.YEAR()):"",
 
-FILTER_TEXT_CODE			:	(keyword)=>	`<code>?search=<b>${keyword}</b></code>`,
-FILTER_TEXT					:	()=>	`<h3>Filtering</h3><p>Filter the ${v.TITLE_BOLD()} by keywords such as <b>name</b>, <b>author</b> and <b>date added</b>. Just type a keyword in the search field atop the table. Keywords are space- and case-insensitive.</p><p>To save and link to a specific filtered view of the table, ensure this page's URL ends with ${v.FILTER_TEXT_CODE("keywords")}.</p><p>All saved filtered views update whenever the ${v.TITLE_BOLD()} updates.</p>`,
-
-CSI							:	()=>	`<code><span><</span>`,
-CSF							:	()=>	`<span>></span></code>`
 
 };
 
