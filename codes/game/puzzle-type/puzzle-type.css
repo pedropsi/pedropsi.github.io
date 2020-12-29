@@ -580,6 +580,7 @@
    justify-content: center;
    max-height: var(--h1);
    --fontheight:calc(18px + var(--w-2) + var(--w-4));
+   color: currentColor;
 }
 
 .question .description-title .letter.space{
