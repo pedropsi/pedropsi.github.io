@@ -214,10 +214,6 @@ SECTION_CHANGELOG			:	()=>	ChangelogHTML()?v.SECTION_OUT(v.WHITEBOARD_OUT(Change
 
 DATE						:	(page)=>	`${page.DAY()}-${page.MONTH()}-${page.YEAR()}`,
 
-DATE_TEXT					:	(page)=>	page&&page.DATE?DateName(StringDate(page.DATE())):"",
-
-
-
 
 
 MANIFEST					:	()=>"",
