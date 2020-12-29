@@ -4339,6 +4339,9 @@ var PastWords={
 
 	// "afterword":"foreword",
 	
+
+	
+	//Temporal adjectives
 	"early":"late",
 	"earliness":"lateness",
 	"contemporary":"historic",
@@ -4350,6 +4353,13 @@ var PastWords={
 	"latter":"former",
 	"forthcoming":"bygone",
 
+	"cutting edge":"legacy",
+	"young":"old",
+	//bygone, historic, heritage, antiquarian, traditional, folk, old-world, ancestral, time-honoured, vintage, quaint
+
+
+
+	//Stages of life
 	"daughter":"mother",
 	"son":"father",
 	"father":"grandfather",
@@ -4364,11 +4374,8 @@ var PastWords={
 	"descendant":"ancestor",
 	
 
-	"cutting edge":"legacy",
 
-	//bygone, historic, heritage, antiquarian, traditional, folk, old-world, ancestral, time-honoured, vintage, quaint
-	"young":"old",
-
+	//Astronomy, natural cycles
 	"sunrise":"dawn",
 	"dawn":"morning",
 	"morning":"noon",
@@ -4403,15 +4410,19 @@ var PastWords={
 	"hiernal solstice":"vernal equinox",
 	"hibernal solstice":"vernal equinox",
 
-
 	"new moon":"first quarter moon",
 	"first quarter moon":"full moon",
 	"full moon":"third quarter moon",
 	"third quarter moon":"new moon",
 
-	//All festive dates across the world "Xmas":	
+	//Festive dates 
+	//"Xmas":
+	//"Hannukah":
+	//"Ramadan":
+	//"Chinese new year":
 }
 
+	//Dates, hours
 Range(0,11).map(m=>PastWords[Months()[m]]=Months()[(m+11)%12]);
 Range(0,12).map(m=>PastWords[ReadNumber(m)+" AM"]=ReadNumber((m+1)%12)+" AM");
 Range(0,12).map(m=>PastWords[ReadNumber(m)+" PM"]=ReadNumber((m+1)%12)+" PM");
