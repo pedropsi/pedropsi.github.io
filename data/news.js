@@ -539,24 +539,32 @@ DayNewsArray=function(News){
 	return Values(daysArray);
 }
 
+
 NewsMonthSectionHTML=function(MonthNews){
 	var daysObj=DayNewsArray(MonthNews);
-		daysObj=Join(...daysObj);
-
-	var month=MonthYearNamer(StringDate(First(daysObj).DATE));
+	var month=MonthYearNamer(StringDate(First(First(daysObj)).DATE));
 
 	return SectionHTML({
 		...NewsOptions,
 		Source:daysObj,
 		header:`<h2>${month}</h2>`,
-		ItemHTML:NewsDaySectionHTML
+		ItemHTML:days=>NewsDaySectionHTML(days),
+		Sorter:(dayA,dayB)=>SortNewsByDate(First(dayA),First(dayB)),
+		FilterF:days=>NonFutureItem(First(days))
 	})
 }
 
-NewsDaySectionHTML=function(item){
-	return `<h3>${DayNamer(StringDate(item.DATE))}</h3>
-			${item.HEADER?`<h4>${UnFunction(item.HEADER)}</h4>`:""}
-			${UnFunction(item.PIECE)}`;
+NewsDaySectionHTML=function(items){
+	return `<h3>${DayNamer(StringDate(First(items).DATE))}</h3>
+			${Keys(items).map(k=>NewsPieceHTML(items[k])).join(`
+			`)}`
+}
+
+NewsPieceHTML=function(item){
+	return`
+		${item.HEADER?`<h4>${UnFunction(item.HEADER)}</h4>`:""}
+		${UnFunction(item.PIECE)}
+	`
 }
 
 MonthNewsArray=function(News){
