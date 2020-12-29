@@ -113,8 +113,6 @@ HEAD_TYPE					:	()=>	`<meta property="og:type" content="${v.TYPEGRAPH()}"/><meta
 HEAD_LINK					:	()=>	`<meta property="og:url" content="${v.SITE()}/${v.LINK()}.html"/>`,
 HEAD_IMAGE					:	()=>	`<meta property="og:image" content="${v.SITE()}/${v.IMAGE_512()}"/><meta name="twitter:image" content="${v.SITE()}/${v.IMAGE_512()}">`,
 	
-SITEMAP_PATH				:	()=>	`sitemap.xml`,
-	
 DISPLAY_EXTERNAL			:	()=>	`<div id="${v.LINK()}-area" class="external-area">Loading...</div>`,
 
 AREA_PRE					:	()=>	`<div class="container">`,
@@ -196,8 +194,6 @@ BLANK						:	()=>	`target='_blank' rel="noopener noreferrer"`,
 
 
 HTML_DOCTYPE				:	()=>	DoctypeHTML(v.LANG()),
-
-HTML_OUT					:	(content)=>	`${v.HTML_DOCTYPE()}${v.HEAD()}<body class="body" id="${v.LINK()}">${content}${v.FOOTER_AREA()}</body></html>`,
 
 PAGE_SIMPLE					:	()=>	v.MONO_OUT(v.WHITEBOARD_SIMPLE()),
 PAGE_BARE					:	()=>	v.MONO_OUT(v.CONTENT()),

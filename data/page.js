@@ -56,7 +56,7 @@ LoadPrescript=function(){
 		BuildCMSPage();
 }
 
-RebuildHead=function(){
+HeadReAdd=function(){
 	//RemoveElements("script");
 	RemoveElements("meta");
 	RemoveElements("title");
@@ -65,7 +65,7 @@ RebuildHead=function(){
 }
 
 BuildCMSPage=function(){
-	RebuildHead();
+	HeadReAdd();
 	
 	document.body.innerHTML=v.BODY();
 
