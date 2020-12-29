@@ -1795,7 +1795,7 @@ AddTitleIndex=function(section){
 	if(indexArray.length<=1)
 		return;
 	RemoveElement(".index",section);
-	PreAddElement(PageIndexHTML(indexArray),section);
+	PrependElement(PageIndexHTML(indexArray),section);
 	Class(".h1","collapse");
 	ShowHideIndex();
 }
