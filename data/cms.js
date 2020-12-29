@@ -65,6 +65,7 @@ P_kudamono:{...WithImage,LINK:()=>`kudamono`,TITLE:()=>`Kudamono fruit puzzles`,
 }
 
 
+
 //Labels
 
 PageLabelsHTML=function(page){
@@ -332,17 +333,20 @@ InlineSVG=function(){
 	images.map(ReplaceSource);
 }
 
-CMSAHTML=function(title){
-	var o=CMSObject(title);
-	return o?AHTML(UnFunction(o.TITLE),UnFunction(o.LINK)+".html"):"";
-}
-
 CMSObject=function(title){
 	var o=BaseFilter(CMS,o=>UnFunction(o.TITLE)&&LowerSimpleString(UnFunction(o.TITLE))===LowerSimpleString(title)||LowerSimpleString(UnFunction(o.LINK))===LowerSimpleString(title));
 	if(o.length)
 		return First(o);
 }
 
+//Links
+A=function(link){
+	var cmslink=CMSObject(PageSimpleIdentifier(link));
+	if(cmslink)
+		return AHTML(cmslink.TITLE(),cmslink.LINK());
+	else
+		return AHTML(link);
+}
 
 // Keyboard Instuctions
 

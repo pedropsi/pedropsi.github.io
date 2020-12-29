@@ -5697,11 +5697,6 @@ var TypeSwipeKeys={
 ///////////////////////////////////////////////////////////////////////////////
 //Dynamic text and HyperText 
 
-A=function(link){ //Links
-	var pagelink=PageIdentifier(link);
-	return CMSAHTML(pagelink)||AHTML(link);
-}
-
 P=function(...names){ //People
 	var names=[...names];
 	if(names.length>1)
