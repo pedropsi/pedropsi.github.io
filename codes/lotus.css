@@ -465,7 +465,6 @@ a div:hover .image{
 	padding:var(--h4) var(--w4) var(--h4) var(--w4);
 }
 .index a.index-link{
-	align-self:left;
 	justify-self:left;
 	font-size:calc(var(--scaling) * var(--fontheight));
 	line-height:calc(4px + var(--scaling) * var(--lineheight));
@@ -884,7 +883,7 @@ thead th{
 	background-color:var(--blue);
 	color:var(--white);
 	text-align:center;
-	text-emphasis:bold;
+	font-weight:bold;
 	transition-duration:var(--durationOff);
 	padding-top:var(--tagheight);
 	padding-bottom:var(--tagheight);
