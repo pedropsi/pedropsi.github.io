@@ -2493,14 +2493,14 @@ var LetterDisplayers={
 	"EnactLawsMama":BrailleSVG,
 	"Nigeria":LetterDraftHTML,
 	"Polaris Australis":LetterDraftHTML,
-	"Topological":BezierLetterSVG,
+	"Topological":TopologicalLetterSVG,
 	"Loosely less":LEDLetterSVG,
 	"Reshape":LEDLetterShapeSVG
 }
 
 var GoalDisplayers={
 	"EnactLawsMama":BrailleSVG,
-	"Topological":BezierLetterSVG,
+	"Topological":TopologicalLetterSVG,
 	"Loosely less":LEDLetterSVG,
 	"Reshape":LEDLetterSVG,
 	"Deaf":LetterPureHTML,
@@ -2510,8 +2510,8 @@ var GoalSplitters={
 	"EnactLawsMama":function(title){return WordBiMorseArray(title)},
 }
 
-function BezierLetterSVG(L){
-	return BezierLetter(L.toUpperCase());
+function TopologicalLetterSVG(L){
+	return BezierLetter(L.toUpperCase(),undefined,"topological");
 }
 
 function LEDLetterSVG(L){

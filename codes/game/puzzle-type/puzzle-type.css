@@ -571,34 +571,27 @@
    font-family: Arial;   
 }
 
-.number-initials{
-   padding:calc(var(--fontheight) * 0.05);
-}
-
-.question .letter,
-.number-initials .letter{
-   padding: calc(var(--fontheight) * 0.05);
-   max-height: var(--fontheight);
-   font-size: var(--fontheight);
-}
-
-.number-initials .letter{
-   stroke: currentColor;
-}
-
-.number-initials .letter.led,
-.number-initials .letter.morse,
-.question .letter.led,
-.question .letter.morse{
-   width: unset;
-   fill: currentColor;
-   height: calc(var(--fontheight)*0.7);
-}
-
-
-.question .description-title,
-.number-initials{
+.question .description-title{
    padding: unset;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: nowrap;
+   align-items: center;
+   justify-content: center;
+   max-height: var(--h1);
+   --fontheight:calc(18px + var(--w-2) + var(--w-4));
+}
+
+.question .description-title .letter.space{
+   max-width: calc(var(--fontheight)*0.5);
+}
+
+
+.number-initials{
+   margin: calc(var(--fontheight) * 0.1);
+   padding: calc(var(--fontheight) * 0.1);
+   max-height: var(--fontheight);
+   max-width: var(--fontheight);
    display: flex;
    flex-direction: row;
    flex-wrap: nowrap;
@@ -606,7 +599,43 @@
    justify-content: center;
 }
 
-.description-title{
-   max-height: var(--h2);
-   display: inline-block;
+.question .description-title .letter,
+.number-initials .letter{
+   padding: calc(var(--fontheight) * 0.05);
+   max-height: var(--fontheight);
+   font-size: var(--fontheight);
+   stroke: currentColor;
+}
+
+.question .description-title .letter.led,
+.number-initials .letter.led{
+   fill: currentColor;
+   height: calc(var(--fontheight)*0.7);
+   max-width: calc(var(--fontheight)*0.7);
+   margin-top: calc(var(--fontheight)*0.1);
+   padding-right: calc(var(--fontheight)*0.05);
+   stroke-width: 1.3;
+}
+
+.question .description-title .letter.morse,
+.number-initials .letter.morse{
+   fill: currentColor;
+   height: calc(var(--fontheight)*0.9);
+   max-width: calc(var(--fontheight)*0.9);
+   margin: 0;
+   margin-top: calc(var(--fontheight)*0.1);
+   stroke-width: 1;
+   padding: 0;
+}
+
+.question .description-title .letter.topological,
+.number-initials .letter.topological{
+   stroke-width: 1.6;
+   height: calc(var(--fontheight)*0.8);
+   margin-top: calc(var(--fontheight)*0.05);
+   padding-right: calc(var(--fontheight)*0.1);
+}
+
+.question .notes{
+   min-height: calc(var(--fontheight)*1.1);
 }
