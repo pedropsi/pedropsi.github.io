@@ -1818,6 +1818,8 @@ TitleSelfLink=function(t){
 HeaderAHTML=function(title,page,opts){
 	var page=PageUnFragment(page);
 	var fragment=KebabCaseString(CapitaliseSentence(title));
+	var opts=opts||{};
+	opts.onclick=`ScrollInto("#${fragment}")`
 	return AHTML(title,page+"#"+fragment,opts);
 }
 
@@ -2688,11 +2690,14 @@ FilterableTable=function(tableSelector){
 
 
 //////////////////////////////////////////////////
-// Scroll into
+// Scroll into (even if the page changes meanwhile)
 
 ScrollInto=function(elementIDsel){
 	var e=GetElement(elementIDsel);
+	if(!e)
+		return;
 	e.scrollIntoView();
+	WhileOutViewExecute(e,()=>e.scrollIntoView(),{delay:250,max:10,end:true});
 }
 
 
@@ -6173,13 +6178,41 @@ ScaleMax=function(max){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//LazyLoader with Intersection Observer
+// Intersection Observer
 
-LazyLoader=function(target,Loader){
-	HearOnce("LazyLoader",function(){LazyLoad(target,Loader)});
+
+InViewExecute=function(...args){
+	ObserveExecute(...args,x=>x===true);
 }
 
-LazyLoad=function(targe,Loader){
+OutViewExecute=function(...args){
+	ObserveExecute(...args,x=>x===false);
+}
+
+WhileOutViewExecute=function(target,Executer,Opts){
+	var id=GenerateId();
+
+	var Opts=Opts||{};
+	var delay=Opts.delay||500;
+	var maxtime=Opts.maxtime||((Opts.max||10)*delay);
+	var end=Opts.end||false;
+
+	//Stopping
+	InViewExecute(target,function(){
+		AutoStop(undefined,delay,id);
+		if(end)
+			setTimeout(Executer,delay);
+	});
+
+	//Trying
+	AutoRepeat(function(){OutViewExecute(target,Executer)},delay,id);
+
+	//Cleaning
+	setTimeout(()=>AutoStop(undefined,delay,id),maxtime);
+}
+
+
+ObserveExecute=function(targe,Executer,Conditioner){
 	var target=GetElement(targe);
 	if(!target)
 		return;// console.log("Observer error:",targe);
@@ -6191,8 +6224,8 @@ LazyLoad=function(targe,Loader){
 	};
 	
 	function HandleInview(obj){
-		if(obj[0].isIntersecting===true){
-			Loader();
+		if(Conditioner(obj[0].isIntersecting)){
+			Executer();
 			Observer.disconnect();
 		}
 	}
@@ -6200,6 +6233,14 @@ LazyLoad=function(targe,Loader){
 	var Observer=new IntersectionObserver(HandleInview,opts);
 	Observer.observe(target);
 
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Lazy loader
+
+LazyLoader=function(target,Loader){
+	HearOnce("LazyLoader",function(){InViewExecute(target,Loader)});
 }
 
 LazyImageLoader=function(id,src){
