@@ -93,8 +93,7 @@ FAVICON32					:	()=>	ImagePath("favicon-32x32","png"),
 
 BODY						:	()=>	v.PAGE_POST(),
 
-HEAD						:	()=>	v.HEAD_SIMPLE(),
-HEAD_SIMPLE					:	()=>	`${v.HEAD_ITEMS()}${v.CSS_REL()}`,
+HEAD						:	()=>	`${v.HEAD_ITEMS()}${v.CSS_REL()}`,
 
 HEAD_ITEMS					:	()=>	`${v.HEAD_CHARSET()}${v.HEAD_VIEWPORT()}${v.HEAD_THEME()}${v.HEAD_ICONS()}${v.HEAD_DATA_GRAPH()}${v.MANIFEST()}`,
 HEAD_CHARSET				:	()=>	`<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="utf-8">`,
@@ -195,10 +194,10 @@ HTML_DOCTYPE				:	()=>	DoctypeHTML(v.LANG()),
 
 PAGE_SIMPLE					:	()=>	v.MONO_OUT(v.WHITEBOARD_SIMPLE()),
 PAGE_BARE					:	()=>	v.MONO_OUT(v.CONTENT()),
-PAGE_POST					:	()=>	v.MAIN_OUT(v.WHITEBOARD())+v.SECTION_CHANGELOG()+v.SECTION_OUT(v.GUESTBOOK_COMMENTS())+v.FOOTER_AREA(),
+PAGE_POST					:	()=>	v.MAIN_OUT(v.WHITEBOARD())+v.SECTION_CHANGELOG()+v.SECTION_OUT(v.GUESTBOOK_COMMENTS())+FooterHTML(),
 
 MAIN_OUT					:	(post)=>	`<div class="main">${v.NAVBAR()}${post}</div>`,
-MONO_OUT					:	(post)=>	`<div class="main">${v.NAVBAR()}${post}</div>${v.FOOTER_AREA()}`,
+MONO_OUT					:	(post)=>	`<div class="main">${v.NAVBAR()}${post}</div>${FooterHTML()}`,
 SECTION_OUT					:	(content)=>	`<section class="section"><div class="container">${content}</div></section>`,
 
 PAGE_TITLE					:	()=>	`<h1 class="title">${v.TITLE()}</h1>`,
@@ -219,7 +218,6 @@ FOOTER_LINES				:	()=>	`<p>${ViewCounterHTML()}</p><p>${v.COPYRIGHT_TEXT()}. ${v
 
 DEBUGGER					:	()=>	`<span onclick="RequestDebugger()">Debug</span>`,
 
-LOG_LINK					:	()=>	`<b><a href="${v.LINK()}-log.html">${v.TITLE_BOLD()}'s log</a></b>`,
 
 
 SECTION_SUBSCRIBE			:	()=>	v.SECTION_OUT(`<div class="container">${v.SUBSCRIBE_ANNOUNCE()}</div>`),

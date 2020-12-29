@@ -135,6 +135,17 @@ PageWithMetaHTML=function(v,post){
 	`
 }
 
+FooterHTML=function(){
+	return `
+	<footer class="footer">
+		<p>${ViewCounterHTML()}</p>
+		<p>${v.COPYRIGHT_TEXT()}. ${v.A_TERMS()}. ${A("privacy-policy")}. ${A("status")}. ${v.DEBUGGER()}.</p>
+		<p> ${v.A_PRESS()}. ${A("subscribe")} and ${v.A_SUPPORT()}!</p>
+	</footer>`
+}
+
+//Post HTML
+
 PagePost=function(code){
 	var start='<script id="post">var v={POST:()=>`';
 	var end='`};</script><script src="data/page.js"></script>';
