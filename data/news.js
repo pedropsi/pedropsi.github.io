@@ -493,7 +493,7 @@ SortNewsByDate=function(pageA,pageB){
 
 ChangelogEntryHTML=function(change){
 	return `
-	<h3>${DateNamer(StringDate(change.DATE))}</h3>
+	<h3>${DateName(StringDate(change.DATE))}</h3>
 	${change.PIECE()}
 	`;
 }
@@ -522,7 +522,7 @@ NonFutureItem=function(npObj){//news or page Object
 NewsEntryHTML=function(change,Opts){
 	var d=Opts.depth||2;
 	return `
-	<h${d}>${DateNamer(StringDate(change.DATE))}</h${d}>
+	<h${d}>${DateName(StringDate(change.DATE))}</h${d}>
 	${change.HEADER?`<h${d+1}>${UnFunction(change.HEADER)}</h${d+1}>`:""}
 	${UnFunction(change.PIECE)}
 	`;
@@ -668,9 +668,9 @@ SitemapItemXML=function(PageObj){
 	
 	var PageObj={...v,...PageObj};
 
-	var lastdate=PageDateYMD(PageObj);
+	var lastdate=PageObj.DATE||"2017-01-01";
 	
-	var id=PageObj.LINK();console.log(id,lastdate)
+	var id=PageObj.LINK();
 	var changes=BaseFilter(News,{ID:id}).sort(SortNewsByDate).map(ch=>ch.DATE);
 		lastdate=changes[0]||lastdate;
 	var freq=FrequencyName(Days(new Date(lastdate)));//Days since last modification

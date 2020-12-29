@@ -5201,7 +5201,7 @@ YearsString=function(start,end){
 		return start;
 }
 
-DateNamer=function(date){
+DateName=function(date){
 	return `${DayNamer(date)} of ${MonthYearNamer(date)}`;
 }
 
@@ -5223,10 +5223,6 @@ DateRSS=function(date){
 	return `${WeekDay(date,DayNamesShort())}, ${Day(date)} ${MonthName(Month(date),MonthsShort())} ${Year(date)}`;
 }
 
-DateName=function(day,month,year){
-	date=DateDate(day,month,year);
-	return DateNamer(date);
-}
 
 var DatePatterns={
 	"DMY":{

@@ -68,7 +68,7 @@ ${FolderGalleryHTML("kudamono",FilterObject(kudamonos,(o,k)=>In([0,1,2].map(i=>K
 ${
 	kudamonosFuture=FilterObject(kudamonosData,(o,k)=>(o.date&&Days(StringDate(o.date))<0)),
 	l=Last(kudamonosFuture),
-	l&&l.date?`<p>Next update: <b>${DateNamer(StringDate(l.date))}</b>, with <em>${l.legend?l.legend:""}</em>!</p>`:""
+	l&&l.date?`<p>Next update: <b>${DateName(StringDate(l.date))}</b>, with <em>${l.legend?l.legend:""}</em>!</p>`:""
 }
 <p>Possible future puzzles are listed under ${A("#More Ideas")}. Excited about a particular idea? Do ${v.A_LET_ME_KNOW()}!</p>
 

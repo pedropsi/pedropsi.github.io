@@ -5,6 +5,8 @@ Variables={
 YEAR_START					:	()=>	2010,
 DATE_FOUNDED				:	()=>	`December, 2017`,
 LOCATION					:	()=>	`a private location`,
+
+YEAR						:	()=>	v.DATE?Year(StringDate(v.DATE())):v.YEAR_START(),
 	
 NAME						:	()=>	`Pedro PSI`,
 NAME_LINK					:	()=>	`<a href="${v.SITE()}">${v.NAME()}</a>`,
@@ -77,7 +79,7 @@ DISPLAY_EXTERNAL			:	()=>	`<div id="${v.LINK()}-area" class="external-area">Load
 
 AREA_PRE					:	()=>	`<div class="container">`,
 TABULAR_AREA				:	()=>	`${v.AREA_PRE()}${v.DISPLAY_EXTERNAL()}${v.POST_PLUS_LABELS()}</div>`,
-GUESTBOOK_AREA				:	()=>	`${v.AREA_PRE()}<h1 class="title">${v.TITLE()}</h1><div class="whiteboard"><div class="text ${v.STYLE()} post" id="post">${v.POST()}</div></div>${v.LABELS(v)}${v.DISPLAY_EXTERNAL()}</div>`,
+GUESTBOOK_AREA				:	()=>	`${v.AREA_PRE()}<h1 class="title">${v.TITLE()}</h1><div class="whiteboard"><div class="text ${v.STYLE()} post" id="post">${v.POST()}</div></div>${PageLabelsHTML(v)}${v.DISPLAY_EXTERNAL()}</div>`,
 GUESTBOOK_COMMENTS			:	()=>	`<div id="guestbook-area"></div>`,
 
 
@@ -133,13 +135,9 @@ SHORTNAME					:	()=>	v.TITLE(),
 
 WHITEBOARD_OUT				:	(post)=>	`<div class="whiteboard"><div class="text ${v.STYLE()} post" id="post">${post}</div></div>`,
 WHITEBOARD					:	()=>		v.SECTION_OUT(v.POST_PLUS_LABELS(v)),
-POST_PLUS_LABELS			:	()=>		v.PAGE_TITLE()+v.WHITEBOARD_OUT(v.POST())+v.LABELS(v),
-WHITEBOARD_SIMPLE			:	()=>		v.SECTION_OUT(v.PAGE_TITLE()+v.WHITEBOARD_OUT(v.CONTENT())+v.LABELS(v)),
+POST_PLUS_LABELS			:	()=>		v.PAGE_TITLE()+v.WHITEBOARD_OUT(v.POST())+PageLabelsHTML(v),
+WHITEBOARD_SIMPLE			:	()=>		v.SECTION_OUT(v.PAGE_TITLE()+v.WHITEBOARD_OUT(v.CONTENT())+PageLabelsHTML(v)),
 
-LABELS						:	(page)=>	`<div class="tags buttonrow">${v.LABEL_DATE(page)}${v.LABEL_TAGS(page)}</div>`,
-LABEL_DATE					:	(page)=>	!page.DAY?"":`<a class="tag button" href="posts.html"><time datetime="${v.DATE(page)}">${v.DATE_TEXT(page)}</time></a>`,
-LABEL_TAGS					:	(page)=>	page.TAGS?page.TAGS().map(v.LABEL_TAG).join("\n"):"",
-LABEL_TAG					:	(tag)=>		`<a class="tag button" href="tag.html?search=${tag}">${tag}</a>`,
 
 
 
@@ -216,7 +214,7 @@ SECTION_CHANGELOG			:	()=>	ChangelogHTML()?v.SECTION_OUT(v.WHITEBOARD_OUT(Change
 
 DATE						:	(page)=>	`${page.DAY()}-${page.MONTH()}-${page.YEAR()}`,
 
-DATE_TEXT					:	(page)=>	page&&page.DAY&&page.MONTH&&page.YEAR?DateName(page.DAY(),page.MONTH(),page.YEAR()):"",
+DATE_TEXT					:	(page)=>	page&&page.DATE?DateName(StringDate(page.DATE())):"",
 
 
 
