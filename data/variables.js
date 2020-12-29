@@ -95,8 +95,6 @@ BODY						:	()=>	v.PAGE_POST(),
 
 HEAD						:	()=>	v.HEAD_SIMPLE(),
 HEAD_SIMPLE					:	()=>	`${v.HEAD_ITEMS()}${v.CSS_REL()}`,
-HEAD_BARE					:	()=>	v.HEAD_ITEMS(),
-
 
 HEAD_ITEMS					:	()=>	`${v.HEAD_CHARSET()}${v.HEAD_VIEWPORT()}${v.HEAD_THEME()}${v.HEAD_ICONS()}${v.HEAD_DATA_GRAPH()}${v.MANIFEST()}`,
 HEAD_CHARSET				:	()=>	`<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="utf-8">`,
@@ -198,8 +196,6 @@ HTML_DOCTYPE				:	()=>	DoctypeHTML(v.LANG()),
 PAGE_SIMPLE					:	()=>	v.MONO_OUT(v.WHITEBOARD_SIMPLE()),
 PAGE_BARE					:	()=>	v.MONO_OUT(v.CONTENT()),
 PAGE_POST					:	()=>	v.MAIN_OUT(v.WHITEBOARD())+v.SECTION_CHANGELOG()+v.SECTION_OUT(v.GUESTBOOK_COMMENTS())+v.FOOTER_AREA(),
-
-PAGE_UNSTYLED				:	()=>	`${v.HTML_DOCTYPE()}${v.HEAD_BARE()}<body class="body" id="${v.LINK()}">${v.CONTENT()}${v.FOOTER_AREA()}</body></html>`,
 
 MAIN_OUT					:	(post)=>	`<div class="main">${v.NAVBAR()}${post}</div>`,
 MONO_OUT					:	(post)=>	`<div class="main">${v.NAVBAR()}${post}</div>${v.FOOTER_AREA()}`,
