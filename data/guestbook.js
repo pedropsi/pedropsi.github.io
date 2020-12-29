@@ -24,7 +24,7 @@ CommentObject=function(dataline,dataarray){
 	var Obj={};
 
 	Obj.date=SafeString(dataline[0]);
-	Obj.link=CMSAHTML(SafeString(dataline[1]||"guestbook"));
+	Obj.link=A(SafeString(dataline[1]||"guestbook"));
 	Obj.author=SafeString(dataline[2]);
 	Obj.quote=SafeString(dataline[3]);
 	Obj.id=SafeString(dataline[4]);

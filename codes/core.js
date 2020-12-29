@@ -5698,7 +5698,8 @@ var TypeSwipeKeys={
 //Dynamic text and HyperText 
 
 A=function(link){ //Links
-	return AHTML(link);
+	var pagelink=PageIdentifier(link);
+	return CMSAHTML(pagelink)||AHTML(link);
 }
 
 P=function(...names){ //People

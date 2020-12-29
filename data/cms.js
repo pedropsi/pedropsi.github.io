@@ -64,6 +64,7 @@ P_kudamono:{...WithImage,LINK:()=>`kudamono`,TITLE:()=>`Kudamono fruit puzzles`,
 
 }
 
+
 //Labels
 
 PageLabelsHTML=function(page){

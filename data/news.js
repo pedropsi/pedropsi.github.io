@@ -290,12 +290,6 @@ HEADER:()=>`Night mode VS Dark Theme`,
 PIECE:()=>`
 <p>Night mode will now activate when the operating system prefers a dark theme. Its colour tones are now nicer: slighly less red/black, and now more orange/dark gray.</p>
 `},
-N_25:{
-DATE:`2020-02-02`,
-HEADER:()=>`PuzzleScript Editor + Game Bar`,
-PIECE:()=>`
-<p>There is now a convenient ${v.A_EDITOR()} which exports any PuzzleScript game with game bar by default.</p>
-`,ID:"game-bar"},
 N_23:{
 DATE:`2020-01-25`,
 HEADER:()=>`Puzzlescript Components Database`,
@@ -331,7 +325,7 @@ N_31:{
 	DATE:`2019-12-13`,
 	HEADER:()=>`LUL development ongoing`,
 	PIECE:()=>`
-<p> ${v.A_LUL()} parser is being developed, an interesting challenge.</p>`,
+<p> ${A("lul")} parser is being developed, an interesting challenge.</p>`,
 ID:"lul"},
 N_31:{
 	DATE:`2019-12-11`,
@@ -343,7 +337,7 @@ N_20:{
 	DATE:`2019-12-07`,
 	HEADER:()=>`Store opens`,
 	PIECE:()=>`
-<p>The ${v.SITE_NAME()} now has a dedicated ${v.A_STORE()}, featuring pearls such as ${A("puzzle-type")}.${LabelHTML("Experimental")}</p>`,
+<p>The ${v.SITE_NAME()} now has a dedicated ${A("store")}, featuring pearls such as ${A("puzzle-type")}.${LabelHTML("Experimental")}</p>`,
 ID:"store"},
 N_32:{
 	DATE:`2019-12-06`,
@@ -354,7 +348,7 @@ N_19:{
 	DATE:`2019-12-01`,
 	HEADER:()=>`LUL in development`,
 	PIECE:()=>`
-<p>The ${v.A_LUL()} draft is released for discussion.</p>`,
+<p>The ${A("lul")} draft is released for discussion.</p>`,
 	ID:"lul"},
 N_30:{
 	DATE:`2019-11-30`,
@@ -514,7 +508,6 @@ NonFutureItem=function(npObj){//news or page Object
 		return Days(StringDate(npObj.DATE))>=0
 	if(npObj.DAY){
 		var d=DateDate(UnFunction(npObj.DAY),UnFunction(npObj.MONTH),UnFunction(npObj.YEAR));
-		console.log(d);
 		return d>=0;
 	}
 };

@@ -33,11 +33,8 @@ ${LinkGroupHTML("with-game-bar")}
 <p>You can load your game directly in the ${A("game-console")}, to see how it would look like with the game bar.</p>
 
 <h2>How to add the ${v.TITLE_BOLD()} to your own game</h2>
-<h3>Easy way</h3>
-<p>Just paste your game code in ${v.A_EDITOR()}, run it, then ${KB("click")} the <b>Export + Game Bar</b> option.</p>
-<p>This will create the standard puzlescript HTML page, with the ${v.TITLE_BOLD()} added. </p>
 
-<h3>Middle way (live version)</h3>
+<h3>Easy way (live version)</h3>
 <p>Include the <b>javascript source</b> ${v.A_GB_SOURCE()} in a regular Puzzlescript export or in a custom page.</p>
 <p>To ensure the ${v.TITLE_BOLD()} overwrites all needed functions, please load it <b>after</b> the game has loaded fully, i.e. by placing at the end of the ${CHTML("body")} the snippet ${CHTML(`script type="text/javascript" src="GameBar.js"`,true)}.</p>
 
