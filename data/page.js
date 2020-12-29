@@ -169,6 +169,9 @@ NavbarHTML=function(){
 	</div>`
 }
 
+
+//Logo
+
 LogoSVG=function(Opts){
 	var Opts=Opts||{};
 	var cla=Opts.rectclass?(Opts.rectclass+" "):"";
@@ -177,22 +180,25 @@ LogoSVG=function(Opts){
 	return `
 <?xml version="1.0"?>
 <svg viewBox="${viewBox}" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
-	<rect ${dims} class="${cla} darkblue"		fill="#070070"></rect>
-	<rect ${dims} class="${cla} darkblue"		fill="#070070" transform="rotate(45)">					</rect>
-	<rect ${dims} class="${cla} blue"			fill="#000fff" transform="scale(0.765367) rotate(22.5)"></rect>
-	<rect ${dims} class="${cla} blue"			fill="#000fff" transform="scale(0.765367) rotate(67.5)"></rect>
-	<rect ${dims} class="${cla} lightblue"		fill="#1982ed" transform="scale(0.585786) rotate(0)">	</rect>
-	<rect ${dims} class="${cla} lightblue"		fill="#1982ed" transform="scale(0.585786) rotate(45)">	</rect>
-	<rect ${dims} class="${cla} turquoise"		fill="#3bf8de" transform="scale(0.448342) rotate(22.5)"></rect>
-	<rect ${dims} class="${cla} turquoise"		fill="#3bf8de" transform="scale(0.448342) rotate(67.5)"></rect>
-	<rect ${dims} class="${cla} green"			fill="#46f46f" transform="scale(0.343146) rotate(0)">	</rect>
-	<rect ${dims} class="${cla} green"			fill="#46f46f" transform="scale(0.343146) rotate(45)">	</rect>
-	<rect ${dims} class="${cla} yellow"			fill="#f0f8af" transform="scale(0.262632) rotate(22.5)"></rect>
-	<rect ${dims} class="${cla} yellow"			fill="#f0f8af" transform="scale(0.262632) rotate(67.5)"></rect>
-	<rect ${dims} class="${cla} lightyellow"	fill="#fff9c9" transform="scale(0.201010) rotate(0)">	</rect>
-	<rect ${dims} class="${cla} lightyellow"	fill="#fff9c9" transform="scale(0.201010) rotate(45)">	</rect>
+	${LogoGeometry.map(c=>LogoRect(c,dims,cla))}
 </svg>`
 }
+
+LogoGeometry=[
+	["darkblue"		,"#070070",1.000000,[0,45]],
+	["blue"			,"#000fff",0.765367,[22.5,67.5]],
+	["lightblue"	,"#1982ed",0.585786,[0,45]],
+	["turquoise"	,"#3bf8de",0.448342,[22.5,67.5]],
+	["green"		,"#46f46f",0.343146,[0,45]],
+	["yellow"		,"#f0f8af",0.262632,[22.5,67.5]],
+	["lightyellow"	,"#fff9c9",0.201010,[0,45]]
+]
+
+LogoRect=function(Arr,dims,cla){
+	return Arr[3].map(rot=>`<rect ${dims} class="${cla} ${Arr[0]}" fill="${Arr[1]}" transform="scale(${Arr[2]}) rotate(${rot})"></rect>`).join(`
+	`);
+}
+
 
 DebuggerHTML=function(){
 	return `<span onclick="RequestDebugger()">Debug</span>`
