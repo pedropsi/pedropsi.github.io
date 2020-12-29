@@ -1,7 +1,7 @@
 //Variables
 
 Variables={
-YEAR_NOW					:	()=>	Year(),
+
 YEAR_START					:	()=>	2010,
 DATE_FOUNDED				:	()=>	`December, 2017`,
 LOCATION					:	()=>	`a private location`,

@@ -97,7 +97,7 @@ A_PS_SEARCH_2:{link:"https://discordapp.com/channels/473538592896188446/47353859
 A_PS_SEARCH_1:{link:"https://groups.google.com/forum/#!forum/puzzlescript",TITLE:"Forum",AUTHOR:"Puzzlescript",GROUP:"ps-source",N:1},
 A_PS_SEARCH_3:{link:"https://itch.io/games/newest/made-with-puzzlescript",TITLE:"Newest Puzzlescript Games",AUTHOR:"Itch.io",GROUP:"ps-source",N:3},
 A_PS_SEARCH_5:{link:"https://gist.github.com/search?o=desc&q=puzzlescript&s=updated",TITLE:"recently updated puzzlescript gists",AUTHOR:"Github.com",GROUP:"ps-source",N:5},
-A_FILTER_SEARCH:{link:()=>`${v.LINK_URL_SEARCH()}${v.YEAR_NOW()}`,TITLE:()=>`${v.LINK_URL_SEARCH()}${v.YEAR_NOW()}`},
+A_FILTER_SEARCH:{link:()=>`${v.LINK_URL_SEARCH()}${Year()}`,TITLE:()=>`${v.LINK_URL_SEARCH()}${Year()}`},
 A_SHAPECATCHER:{link:"https://shapecatcher.com/",TITLE:"Shapecatcher"},
 A_LANCE_PS_FORK:{link:"https://jacklance.github.io/PuzzleScript/editor.html",TITLE:"Large Maps Puzzlescript Fork",AUTHOR:()=>P("lance")},
 A_EDITOR:{link:"game-editor",EXT:".html",TITLE:"Adapted Puzzlescript editor",AUTHOR:()=>v.NAME()},
