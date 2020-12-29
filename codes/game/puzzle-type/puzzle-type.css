@@ -570,3 +570,43 @@
    font-size: calc( var(--w2) + var(--h2));
    font-family: Arial;   
 }
+
+.number-initials{
+   padding:calc(var(--fontheight) * 0.05);
+}
+
+.question .letter,
+.number-initials .letter{
+   padding: calc(var(--fontheight) * 0.05);
+   max-height: var(--fontheight);
+   font-size: var(--fontheight);
+}
+
+.number-initials .letter{
+   stroke: currentColor;
+}
+
+.number-initials .letter.led,
+.number-initials .letter.morse,
+.question .letter.led,
+.question .letter.morse{
+   width: unset;
+   fill: currentColor;
+   height: calc(var(--fontheight)*0.7);
+}
+
+
+.question .description-title,
+.number-initials{
+   padding: unset;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: nowrap;
+   align-items: center;
+   justify-content: center;
+}
+
+.description-title{
+   max-height: var(--h2);
+   display: inline-block;
+}

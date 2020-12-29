@@ -70,12 +70,11 @@ function ObtainLevelDescription(lvl){
 function ObtainLevelNumberDisplay(m){
 	var n=UnstarLevel(m);
 	var title=LevelTitle(n);
-		title=ObfuscateTitle(title);
+		title=GoalDisplayLetters(title);
 	if(!title||title.length<3)
 		return m;
-	title=title.toUpperCase();
 	var star=LevelHintStar(n);
-	return title[0]+title[1]+title[2]+star;
+	return `<span class="number-initials">${title[0]+title[1]+title[2]+star}</span>`;
 }
 
 var ObtainLevelLoader=LevelLoader;
@@ -521,12 +520,11 @@ var WinnerTitles={
 
 function ObtainLevelDescriptionTitle(lvl){
 	var title=LevelTitle(lvl);
-		title=ObfuscateTitle(title);
-	return (title!=="Deaf")?title.toUpperCase():title;
+		title=GoalHTML(title);
+	return `<div class="description-title">${title}</div>`;
 }
 
-
-function GoalHTML(title){
+function GoalDisplayLetters(title){
 	function GoalDisplayer(L){return LetterPureHTML(L.toUpperCase())};
 	if(In(GoalDisplayers,title))
 		GoalDisplayer=GoalDisplayers[title];
@@ -535,7 +533,11 @@ function GoalHTML(title){
 		var title=GoalSplitters[title](title);
 	else
 		var title=title.split("");
-	return title.map(GoalDisplayer).join("");
+	return title.map(GoalDisplayer);
+}
+
+function GoalHTML(title){
+	return GoalDisplayLetters(title).join("");
 }
 
 var LevelDifficulty={
@@ -756,15 +758,6 @@ function RestrictPlayableLevels(){
 
 RestrictPlayableLevels();
 
-function ObfuscateTitle(title){
-	if(In(GoalObfuscators,title))
-		title=GoalObfuscators[title];
-	return title;
-}
-
-var GoalObfuscators={
-	"EnactLawsMama":"⠍⠕⠗⠎⠑",
-}
 
 var LevelGoalAliases={
 	"Morse":"EnactLawsMama",
