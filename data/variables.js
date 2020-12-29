@@ -212,9 +212,6 @@ RSS_PATH					:	()=>	`${v.SITE()}/rss.xml`,
 
 SECTION_CHANGELOG			:	()=>	ChangelogHTML()?v.SECTION_OUT(v.WHITEBOARD_OUT(ChangelogHTML())):"",
 
-DATE						:	(page)=>	`${page.DAY()}-${page.MONTH()}-${page.YEAR()}`,
-
-
 
 MANIFEST					:	()=>"",
 PWA_MANIFEST				:	()=>	`<link rel="manifest" id="manifest" href='data:application/manifest+json,${v.PWA_MANIFEST_CONTENT()}'/>`,

@@ -69,14 +69,16 @@ P_kudamono:{...WithImage,LINK:()=>`kudamono`,TITLE:()=>`Kudamono fruit puzzles`,
 
 PageLabelsHTML=function(page){
 	var tags=page.TAGS?page.TAGS():[];
-	console.log("d",StringDate(page.DATE()));
-	return `
-	<div class="tags buttonrow">
+	var date=!page.DATE?"":`
 		<a class="tag button" href="posts.html">
 			<time datetime="${page.DATE()}">
 				${DateName(StringDate(page.DATE()))}
 			</time>
-		</a>
+		</a>`
+	
+	return `
+	<div class="tags buttonrow">
+		${date}
 		${tags.map(TagLabelHTML).join(`
 		`)}
 	</div>`
@@ -115,7 +117,7 @@ SortPageByDate=function(pageA,pageB){
 }
 
 PageDate=function(page){
-	if(!page||!page.DATE())
+	if(!page||!page.DATE)
 		return Today();
 	return StringDate(page.DATE());
 }
