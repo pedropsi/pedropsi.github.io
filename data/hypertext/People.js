@@ -67,7 +67,7 @@ var Contributors={//People
 	"pancelor":{alias:"Pancelor",ITCH:"pancelor"},
 	"dohz":{alias:"dohz",ITCH:"dohz"},
 	"jarsp":{alias:"jarsp"},
-	"toomblercatz":{alias:"toomblercatz",ITCH:"toombler"},
+	"toomblercazz":{alias:"Toombler",ITCH:"toombler"},
 	"zach":{name:"Zach"},
 	"norgg":{alias:"Norgg",TWITTER:"Norgg"}
 }

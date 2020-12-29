@@ -1,24 +1,9 @@
-//Functions
-
-SubscribeHTML=function(opts){
-	var opts=opts||{};
-	var description=opts.description||`Learn first-hand about ${v.NAME()}'s next project!`
-	var button=opts.button||v.BUTTON_SUBSCRIBE();
-	
-	return `<div class="announce">
-				${description}
-				${button}
-			</div>`;
-}
-
-//
 //Variables
 
 Variables={
 YEAR_NOW					:	()=>	Year(),
 YEAR_START					:	()=>	2010,
 DATE_FOUNDED				:	()=>	`December, 2017`,
-YEAR_SPAN					:	()=>	`${YearsString(v.YEAR_START(),v.YEAR_NOW())}`,
 	
 LOCATION					:	()=>	`a private location`,
 	
@@ -28,33 +13,12 @@ NAME_YEAR					:	()=>	`${v.NAME_LINK()}, ${v.YEAR()}`,
 	
 LANG						:	()=>	`en-US`,
 
-PERSON_LANG					:	()=>	1,
-NUMBER_LANG					:	()=>	1,
-PERSON_LANG_FULL			:	()=>	v.PERSON_LANG()+(v.NUMBER_LANG()-1)*3,
-THIRD_PERSON				:	()=>	(v.PERSON_LANG()===3&&v.NUMBER_LANG()===1)?2:1,
-GENDER_LANG					:	()=>	1,
-LANG_CHOOSE					:	function(opts,type){return opts[type-1]},
-HIM_OPTS					:	()=>	["him","her"],
-HIS_OPTS					:	()=>	["his","her"],
-HE_OPTS						:	()=>	["he","she"],
-HIM_LANG					:	()=>	v.LANG_CHOOSE(v.HIM_OPTS(),v.GENDER_LANG()),
-HIS_LANG					:	()=>	v.LANG_CHOOSE(v.HIS_OPTS(),v.GENDER_LANG()),
-HE_LANG						:	()=>	v.LANG_CHOOSE(v.HE_OPTS(),v.GENDER_LANG()),
-ME_OPTS						:	()=>	["me","you",`${v.HIM_LANG()}`,"us","you","them"],
-MY_OPTS						:	()=>	["my","your",`${v.HIS_LANG()}`,"our","your","their"],
-I_OPTS						:	()=>	["I","you",`${v.HE_LANG()}`,"we","you","they"],
-AM_OPTS						:	()=>	["am","are","is","are","are","are"],
-SELF_OPTS					:	()=>	["self","selves"],
-HAVE_OPTS					:	()=>	["have","has"],
-ME							:	()=>	v.LANG_CHOOSE(v.ME_OPTS(),v.PERSON_LANG_FULL()),
-MY							:	()=>	v.LANG_CHOOSE(v.MY_OPTS(),v.PERSON_LANG_FULL()),
-I							:	()=>	v.LANG_CHOOSE(v.I_OPTS(),v.PERSON_LANG_FULL()),
-AM							:	()=>	v.LANG_CHOOSE(v.AM_OPTS(),v.PERSON_LANG_FULL()),
-HAVE						:	()=>	v.LANG_CHOOSE(v.HAVE_OPTS(),v.THIRD_PERSON()),
-SELF 						:	()=>	v.LANG_CHOOSE(v.SELF_OPTS(),v.NUMBER_LANG()),
-IM							:	()=>	`${v.I()} ${v.AM()}`,
-IVE							:	()=>	`${v.I()} ${v.HAVE()}`,
-MYSELF						:	()=>	`${v.MY()}${v.SELF()}`,
+ME							:	()=>	`me`,
+MY							:	()=>	`my`,
+I							:	()=>	`I`,
+IM							:	()=>	`I'm`,
+IVE							:	()=>	`I've`,
+MYSELF						:	()=>	`myself`,
 PERSONAL					:	()=>	`personal`,
 	
 ROOT						:	()=>	``,
