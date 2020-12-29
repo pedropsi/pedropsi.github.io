@@ -138,7 +138,7 @@ PageWithMetaHTML=function(v,post){
 
 NavbarItems=[
 	"news",
-	"posts",
+	{NAME:"All posts",LINK:"tag.html?search=!Class+!Sitemap"},
 	{NAME:"Puzzles",LINK:"tag.html?search=Puzzle"},
 	"hall-of-fame"+(In(["selected-puzzlescript-games","puzzlescript-games-database","game-console","hall-of-fame"],PageIdentifier())?"-global":""),
 	"about",

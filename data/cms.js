@@ -9,7 +9,7 @@ P_index:{...NoImage,BODY:()=>v.POST(),LINK:()=>`index`,TITLE:()=>v.SITE_NAME(),D
 P_purpose:{...NoImage,LINK:()=>`purpose`,TITLE:()=>`The purpose of the ${v.SITE_NAME()}`,SHORTNAME:()=>`Purpose`,DATE:()=>"2017-12-01",TAGS:()=>[`Creative-Archive`,`Post`],ONE_LINER:()=>`${v.SITE_NAME()}'s first post!`},
 P_support:{...NoImage,LINK:()=>`support`,TITLE:()=>`Support the ${v.SITE_NAME()}`,SHORTNAME:()=>`Suport`,DATE:()=>"2018-02-08",TAGS:()=>[`Creative-Archive`,`Finance`,`Post`],ONE_LINER:()=>`Support the ${v.SITE_NAME()}!`},
 P_making_of:{...NoImage,LINK:()=>`making-of`,TITLE:()=>`The making of the ${v.SITE_NAME()}`,SHORTNAME:()=>`making-of`,DATE:()=>"2019-12-15",TAGS:()=>[`Creative-Archive`,`Finance`,`Post`],ONE_LINER:()=>`Support the ${v.SITE_NAME()}!`},
-P_wikipedia_donation:{...NoImage,LINK:()=>`wikipedia-donation`,TITLE:()=>`My first wikipedia donation`,SHORTNAME:()=>`Donation`,DATE:()=>"2018-01-04",TAGS:()=>[`Finance`,`Post`],ONE_LINER:()=>`My first wikipedia donation.`},
+
 P_selected_puzzlescript_games:{...WithImage,LINK:()=>`selected-puzzlescript-games`,FEATURED:()=>true,TITLE:()=>`Selected Puzzlescript Games 2014-${Year()}`,SHORTNAME:()=>`Selected PS Games`,DATE:()=>"2019-01-31",TAGS:()=>[`List`,`Post`,`Puzzlescript`],ONE_LINER:()=>`This is a <em>short</em> list of <em>very good</em> puzzlescript games, in ${v.MY()} opinion. It serves as a <em>${v.PERSONAL()}</em>, yet publicly shared, reference (to be updated whenever needed).`},
 P_11_lessons_from_11_games:{...WithImage,LINK:()=>`11-lessons-from-11-games`,TITLE:()=>`11 Lessons from a 11-game-making journey`,SHORTNAME:()=>`Lessons`,DATE:()=>"2019-04-14",TAGS:()=>[`Game`,`Learning`,`List`,`Post`]},
 P_a_game_making_journey:{...WithImage,LINK:()=>`a-game-making-journey`,TITLE:()=>`A game-making journey`,SHORTNAME:()=>`Journey`,DATE:()=>"2019-04-14",TAGS:()=>[`Game`,`Learning`,`List`,`Log`,`Post`,`Puzzlescript`]},
@@ -29,7 +29,7 @@ P_mosaic:{...WithImage,IMAGE_NAME:()=>"fleur-de-lis",IMAGE_EXT:()=>"png",LINK:()
 P_about:{...NoImage,LINK:()=>`about`,CONTENT:()=>v.POST(),TITLE:()=>`About`,DATE:()=>"2018-02-02",TAGS:()=>[`Creative-Archive`,`Post`],TYPEGRAPH:()=>`profile`},
 P_404:{...NoImage,LINK:()=>`404`,BODY:()=>v.PAGE_SIMPLE(),CONTENT:()=>v.POST(),TITLE:()=>`Page not found….`,SHORTNAME:()=>`404`,DATE:()=>"2017-12-01",TYPE:()=>`Backend`,TAGS:()=>[`Sitemap`],DESCRIPTION:()=>`Page not found in ${v.SITE_NAME()}.`,TYPEGRAPH:()=>`website`},
 P_guestbook:{...WithImage,LINK:()=>`guestbook`,BODY:()=>v.PAGE_BARE(),CONTENT:()=>v.GUESTBOOK_AREA(),TITLE:()=>`Guestbook`,DATE:()=>"2018-07-22",TYPE:()=>`Guestbook`,TAGS:()=>[`Creative-Archive`],IMAGE_ALT:()=>`Write your message on the ${v.SITE_NAME()}'s guestbook!`,DESCRIPTION:()=>`The Guestbook of the ${v.SITE_NAME()}!`,TYPEGRAPH:()=>`website`},
-P_contact:{...NoImage,LINK:()=>`contact`,TITLE:()=>`Contact`,TYPE:()=>`Backend`,TAGS:()=>[`Creative-Archive`],DESCRIPTION:()=>`Leave a message to contact ${v.NAME()}`,TYPEGRAPH:()=>`website`},
+P_contact:{...NoImage,LINK:()=>`contact`,TITLE:()=>`Contact`,TYPE:()=>`Backend`,TAGS:()=>[`Sitemap`],DESCRIPTION:()=>`Leave a message to contact ${v.NAME()}`,TYPEGRAPH:()=>`website`},
 P_hall_of_fame:{...WithImage,LINK:()=>`hall-of-fame`,BODY:()=>v.PAGE_BARE(),CONTENT:()=>v.TABULAR_AREA(),POSTSCRIPT:()=>["data/hof.js"],TITLE:()=>`Hall of Fame`,SHORTNAME:()=>`HOF`,DATE:()=>"2018-03-26",TYPE:()=>`Hall of Fame`,TAGS:()=>[`Creative-Archive`,`Community`],IMAGE_ALT:()=>`Hall of fame of the ${v.SITE_NAME()}. Laurel and stars.`,ONE_LINER:()=>`<p>Puzzlers who solved any of the puzzles in the ${v.SITE_NAME()} earn the right to record their name (or alias) for posterity in the ${A("hall-of-fame")}.</p>`,DESCRIPTION:()=>`Hall of fame: winners of ${v.NAME()}'s challenges.`,TYPEGRAPH:()=>`website`},
 P_hall_of_fame_global:{...WithImage,LINK:()=>`hall-of-fame-global`,BODY:()=>v.PAGE_BARE(),CONTENT:()=>v.TABULAR_AREA(),POSTSCRIPT:()=>["data/hof.js"],TITLE:()=>`Hall of Fame (global)`,SHORTNAME:()=>`HOFG`,DATE:()=>"2020-05-24",TYPE:()=>`Hall of Fame`,TAGS:()=>[`Community`],IMAGE_ALT:()=>`Hall of fame (global). Laurel and stars.`,ONE_LINER:()=>`<p>After beating a game listed in the ${A("puzzlescript-games-database")}, puzzlers anywhere in the globe may add their name (or alias) to this ${v.TITLE_BOLD()}.</p>`,DESCRIPTION:()=>`Hall of fame: global winners.`,TYPEGRAPH:()=>`website`},
 P_tetrastrophe:{...CMSGame,LINK:()=>`tetrastrophe`,CONTENT:()=>`f60664326442967c1fcd97bb36f1af94`,THEMECOLOUR:()=>`rgb(112,84,0)`,TITLE:()=>`Tetrastrophe`,DATE:()=>"2014-05-14",TAGS:()=>[`Game`,`Platformer`,`Puzzle`,`Puzzlescript`],ONE_LINER:()=>`<p>Blocks are falling from the sky! Reach the <em>flag</em> to avoid a catastrophe! There are 10 levels before reaching absolute safety.</p>`},
@@ -54,10 +54,10 @@ P_terms_of_use:{...NoImage,LINK:()=>`terms-of-use`,TITLE:()=>`Terms of use`,DATE
 P_privacy_policy:{...NoImage,LINK:()=>`privacy-policy`,TITLE:()=>`Privacy Policy`,DATE:()=>"2018-02-10",TAGS:()=>[`Creative-Archive`,`Post`]},
 P_subscribe:{...WithImage,LINK:()=>`subscribe`,TITLE:()=>`Subscribe`,DATE:()=>"2018-12-06",TAGS:()=>[`Creative-Archive`,`Post`],IMAGE_ALT:()=>`Subscribe to ${v.SITE_NAME()} news!`,DESCRIPTION:()=>`Curious about the next project by ${v.NAME()}? Subscribe to ${v.SITE_NAME()}!`},
 P_rss:{...NoImage,LINK:()=>`rss`,BODY:()=>`${v.RSS()}`,TYPE:()=>`RSS`,TYPEGRAPH:()=>`website`,EXT:()=>`xml`},
-P_tag:{...NoImage,LINK:()=>`tag`,BODY:()=>v.PAGE_SIMPLE(),CONTENT:()=>TagPageHTML(),STYLE:()=>`archive`,TITLE:()=>Equal(PageTagArray(),[""])?"All Tags":`Classed as ${Enumerate(PageTagArray())}`,FREQ:()=>`monthly`,TYPE:()=>`Tag`,TAGS:()=>[`Class`],DESCRIPTION:()=>`All tagged posts in the ${v.SITE_NAME()}`,TYPEGRAPH:()=>"site"},
-P_posts:{...NoImage,LINK:()=>`posts`,BODY:()=>v.PAGE_SIMPLE(),CONTENT:()=>PostPageHTML(),STYLE:()=>`archive`,TITLE:()=>`All posts`,FREQ:()=>`monthly`,TYPE:()=>`Archive`,TAGS:()=>[`Sitemap`],DESCRIPTION:()=>`Archive of All posts`,TYPEGRAPH:()=>`website`},
+P_tag:{...NoImage,LINK:()=>`tag`,BODY:()=>v.PAGE_SIMPLE(),CONTENT:()=>TagPageHTML(),STYLE:()=>`archive`,TITLE:()=>PageTagText(),FREQ:()=>`monthly`,TYPE:()=>`Tag`,TAGS:()=>[`Class`],DESCRIPTION:()=>`All tagged posts in the ${v.SITE_NAME()}`,TYPEGRAPH:()=>"site"},
+//P_posts:{...NoImage,LINK:()=>`posts`,BODY:()=>v.PAGE_SIMPLE(),CONTENT:()=>PostPageHTML(),STYLE:()=>`archive`,TITLE:()=>`All posts`,FREQ:()=>`monthly`,TYPE:()=>`Archive`,TAGS:()=>[`Sitemap`],DESCRIPTION:()=>`Archive of All posts`,TYPEGRAPH:()=>`website`},
 P_generator:{...NoImage,LINK:()=>`generator`,POSTSCRIPT:()=>["data/news.js"],TITLE:()=>`${v.SITE_NAME()} Generator`,DATE:()=>"2020-03-26",TAGS:()=>[`Creative-Archive`,`Sitemap`],ONE_LINER:()=>`Generate ${v.SITE_NAME()}'s pages such as sitemap, rss and more!`},
-P_insight:{...NoImage,FEATURED:()=>false,LINK:()=>`insight`,POSTSCRIPT:()=>["codes/game/modules/data-game-colours.js","data/worldmap.js"],TITLE:()=>`Analytics dashboard`,DATE:()=>"2020-05-05",TYPE:()=>`Backend`,TAGS:()=>[`Creative-Archive`,`Sitemap`],ONE_LINER:()=>`Analytics dashboard of the ${v.SITE_NAME()}`},
+P_insight:{...NoImage,FEATURED:()=>false,LINK:()=>`analytics`,POSTSCRIPT:()=>["codes/game/modules/data-game-colours.js","data/worldmap.js"],TITLE:()=>`Analytics dashboard`,DATE:()=>"2020-05-05",TYPE:()=>`Backend`,TAGS:()=>[`Creative-Archive`,`Sitemap`],ONE_LINER:()=>`Analytics dashboard of the ${v.SITE_NAME()}`},
 P_videoplaytesting_tips:{...WithImage,LINK:()=>`videoplaytesting-tips`,TITLE:()=>`Videoplaytesting Tips`,DATE:()=>"2020-08-29",TAGS:()=>[`List`,`Post`],ONE_LINER:()=>`Would you like to videoplaytest a game but not sure how to go about it? Here are some tips!`,IMAGE_EXT:()=>`png`},
 
 P_star_battle:{...WithImage,LINK:()=>`star-battle`,POSTSCRIPT:()=>["codes/game/star-battle/hyper-loader.js"],TITLE:()=>`Star Battle geometries`,DATE:()=>"2020-06-18",TYPE:()=>`Post`,TAGS:()=>[`Paper`,`Puzzle`],ONE_LINER:()=>`What if you could play <b>Star Battle</b> on <em>different geometries</em>? Now you can!`,IMAGE_EXT:()=>`png`},
@@ -123,20 +123,43 @@ PageDate=function(page){
 }
 
 
-PageTagArray=function(){
+PageBiTagArray=function(){
 	var tags=PageSearch("search");
 		return Complement(tags.split("+"),["","Class"]);
 }
 
+PageTagArray=function(){
+	return PageBiTagArray().filter(t=>!Prefixed(t,"!"));
+}
+
+PageUnTagArray=function(){
+	return PageBiTagArray().filter(t=>Prefixed(t,"!")).map(t=>UnPrefix(t,"!"));
+}
+
+PageTagText=function(){
+	var tags=PageTagArray();
+	var untags=PageUnTagArray();
+	if(!tags.length&&!untags.length)
+		return "All pages";
+	if(!untags.length)
+		return `Classed as ${Enumerate(tags)}`
+	if(!tags.length)
+		return `Not classed as ${Enumerate(untags)}`
+	else
+		return `Classed as ${Enumerate(tags)} but not as ${Enumerate(untags)}`
+}
+
+
 TagPageHTML=function(){
 	var tags=PageTagArray();
+	var untags=PageUnTagArray();
 	function HasTag(PageObj){
 		if(!PageObj.TAGS)
 			return false;
 		var pagetags=PageObj.TAGS().map(LowerSimpleString);
-		return tags.every(
-			tag=>In(pagetags,LowerSimpleString(tag))
-			);};
+		return tags.every(tag=>In(pagetags,LowerSimpleString(tag)))&&
+				untags.every(tag=>!In(pagetags,LowerSimpleString(tag)))
+			;};
 	var CMSOptions=CMSOptionsObj();
 	return SectionHTML({
 		...CMSOptions,

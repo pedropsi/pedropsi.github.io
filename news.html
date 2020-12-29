@@ -5,9 +5,10 @@
 		<script src="codes/core.js"></script>
 		<script id="post">var v={POST:()=>`
 
-<p>This is the ${v.SITE_NAME()}'s news stream, live since <b>${DateName(StringDate(v.DATE()))}</b>. Check back often to keep abreast of the most relevant developments, or ${A("subscribe")}!</p>
+<p>This is the ${v.SITE_NAME()}'s news stream, live since <b>${DateName(StringDate(v.DATE()))}</b>. Check back often to keep abreast of the latest developments, or ${A("subscribe")}!</p>
 
-${Keys(NewsSources).map(k=>ImportNewsObject(NewsSources[k]))}
+${Keys(NewsSources).map(k=>ImportNewsObject(NewsSources[k])).join(`
+	`)}
 ${NewsHTML()}
 
 ${v.SUBSCRIBE_ANNOUNCE()}
