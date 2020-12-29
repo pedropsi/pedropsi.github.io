@@ -731,13 +731,13 @@ NewsSources={
 		Transformer:function(item,key){
 			var number=UnAfterfix(key,"-");
 			var title=`${number}# Kudamono`;
-			var link=AHTML(title,"kudamono.html#"+key);
+			var link=AHTML("Puzzle #"+number,"kudamono.html#"+key);
 
 			return {
 				DATE:item.date,
 				HEADER:title,
 				PIECE:`
-				<p>${link}, from the ${AHTML("kudamono puzzle collection","kudamono.html")}, now released.</p>`
+				<p> ${link}, from the ${AHTML("kudamono collection","kudamono.html")}, now released.</p>`
 			}
 		}
 	}
