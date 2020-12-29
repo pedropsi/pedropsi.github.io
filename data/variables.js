@@ -4,7 +4,6 @@ Variables={
 YEAR_NOW					:	()=>	Year(),
 YEAR_START					:	()=>	2010,
 DATE_FOUNDED				:	()=>	`December, 2017`,
-	
 LOCATION					:	()=>	`a private location`,
 	
 NAME						:	()=>	`Pedro PSI`,
@@ -83,35 +82,6 @@ GUESTBOOK_COMMENTS			:	()=>	`<div id="guestbook-area"></div>`,
 
 BUTTON_SOON					:	()=>	`<div>Coming soon...</div>`,
 
-RAINBOWLINE					:	()=>	`<div class="rainbowline"></div>`,
-
-NAVOPTION					:	()=>	"",
-NAVBAR_SELECTION			:	()=>	["news","posts",{NAME:"Puzzles",LINK:"tag.html?search=Puzzle"},"hall-of-fame"+(In(["selected-puzzlescrpt-games","puzzlescript-games-database","game-console","hall-of-fame"],PageIdentifier())?"-global":""),"about","contact","guestbook","store"],
-NAV_LINK					:	(link)=>(`<a href="${IsString(link)?link+".html":link.LINK}" class="nav-link">${IsString(link)?Access(link,"TITLE"):link.NAME}</a>`),
-NAVBAR						:	()=>	`<div class="navbar">${v.NAV_LOGO()}<nav>${v.NAVBAR_SELECTION().map(v.NAV_LINK).join("\n")}${v.NIGHTMODE()}</nav>${v.RAINBOWLINE()}</div>`,
-NAV_LOGO					:	()=>	`<a href="index.html"><div class="logo">${v.LOGO_SVG()} Home</div></a>`,
-
-NIGHTMODE					:	()=>	`<div class="nav-link" id="NightMode" onclick='ToggleNightMode()'>${ObtainSymbol("moon")}</div>`,
-
-LOGO_DIMS					:	()=>	`x="-5" y="-5" width="10" height="10"`,
-LOGO_DIMS_DISPLAY			:	()=>	"width=100 height=100",
-LOGO_SVG					:	()=>	`<?xml version="1.0"?>
-<svg viewBox="-8 -8 16 16" xmlns="http://www.w3.org/2000/svg" ${v.LOGO_DIMS_DISPLAY()}>
-	<rect ${v.LOGO_DIMS()} class="darkblue"		fill="#070070"></rect>
-	<rect ${v.LOGO_DIMS()} class="darkblue"		fill="#070070" transform="rotate(45)"></rect>
-	<rect ${v.LOGO_DIMS()} class="blue"			fill="#000fff" transform="scale(0.765367) rotate(22.5)"></rect>
-	<rect ${v.LOGO_DIMS()} class="blue"			fill="#000fff" transform="scale(0.765367) rotate(67.5)"></rect>
-	<rect ${v.LOGO_DIMS()} class="lightblue"	fill="#1982ed" transform="scale(0.585786) rotate(0)"></rect>
-	<rect ${v.LOGO_DIMS()} class="lightblue"	fill="#1982ed" transform="scale(0.585786) rotate(45)"></rect>
-	<rect ${v.LOGO_DIMS()} class="turquoise"	fill="#3bf8de" transform="scale(0.448342) rotate(22.5)"></rect>
-	<rect ${v.LOGO_DIMS()} class="turquoise"	fill="#3bf8de" transform="scale(0.448342) rotate(67.5)"></rect>
-	<rect ${v.LOGO_DIMS()} class="green"		fill="#46f46f" transform="scale(0.343146) rotate(0)"></rect>
-	<rect ${v.LOGO_DIMS()} class="green"		fill="#46f46f" transform="scale(0.343146) rotate(45)"></rect>
-	<rect ${v.LOGO_DIMS()} class="yellow"		fill="#f0f8af" transform="scale(0.262632) rotate(22.5)"></rect>
-	<rect ${v.LOGO_DIMS()} class="yellow"		fill="#f0f8af" transform="scale(0.262632) rotate(67.5)"></rect>
-	<rect ${v.LOGO_DIMS()} class="lightyellow"	fill="#fff9c9" transform="scale(0.201010) rotate(0)"></rect>
-	<rect ${v.LOGO_DIMS()} class="lightyellow"	fill="#fff9c9" transform="scale(0.201010) rotate(45)"></rect>
-</svg>`,
 
 STYLE						:()=>`prose`,
 TYPEGRAPH					:()=>`article`,
@@ -156,8 +126,8 @@ PAGE_SIMPLE					:	()=>	v.MONO_OUT(v.WHITEBOARD_SIMPLE()),
 PAGE_BARE					:	()=>	v.MONO_OUT(v.CONTENT()),
 PAGE_POST					:	()=>	v.MAIN_OUT(v.WHITEBOARD())+v.SECTION_CHANGELOG()+v.SECTION_OUT(v.GUESTBOOK_COMMENTS())+FooterHTML(),
 
-MAIN_OUT					:	(post)=>	`<div class="main">${v.NAVBAR()}${post}</div>`,
-MONO_OUT					:	(post)=>	`<div class="main">${v.NAVBAR()}${post}</div>${FooterHTML()}`,
+MAIN_OUT					:	(post)=>	`<div class="main">${NavbarHTML()}${post}</div>`,
+MONO_OUT					:	(post)=>	`<div class="main">${NavbarHTML()}${post}</div>${FooterHTML()}`,
 SECTION_OUT					:	(content)=>	`<section class="section"><div class="container">${content}</div></section>`,
 
 PAGE_TITLE					:	()=>	`<h1 class="title">${v.TITLE()}</h1>`,

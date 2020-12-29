@@ -135,6 +135,65 @@ PageWithMetaHTML=function(v,post){
 	`
 }
 
+
+NavbarItems=[
+	"news",
+	"posts",
+	{NAME:"Puzzles",LINK:"tag.html?search=Puzzle"},
+	"hall-of-fame"+(In(["selected-puzzlescript-games","puzzlescript-games-database","game-console","hall-of-fame"],PageIdentifier())?"-global":""),
+	"about",
+	"contact",
+	"guestbook",
+	"store"];
+
+NavLinkHTML=function(link){
+	return `<a href="${IsString(link)?link+".html":link.LINK}" class="nav-link">${IsString(link)?Access(link,"TITLE"):link.NAME}</a>`
+}
+
+NightModeButton=function(){
+	return `<div class="nav-link" id="NightMode" onclick='ToggleNightMode()'>${ObtainSymbol("moon")}</div>`
+}
+
+NavbarHTML=function(){
+	return`
+	<div class="navbar">
+		<a href="index.html">
+			<div class="logo">${LogoSVG()} Home</div>
+		</a>
+		<nav>
+			${NavbarItems.map(NavLinkHTML).join(`
+			`)}
+			${NightModeButton()}
+		</nav>
+		<div class="rainbowline"></div>
+	</div>`
+}
+
+LogoSVG=function(Opts){
+	var Opts=Opts||{};
+	var cla=Opts.rectclass?(Opts.rectclass+" "):"";
+	var dims=`x="-5" y="-5" width="10" height="10"`;
+	var vb=Opts.viewBox?Opts.viewBox:"-8 -8 16 16";
+	return `
+<?xml version="1.0"?>
+<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+	<rect ${dims} class="${cla} darkblue"		fill="#070070"></rect>
+	<rect ${dims} class="${cla} darkblue"		fill="#070070" transform="rotate(45)">					</rect>
+	<rect ${dims} class="${cla} blue"			fill="#000fff" transform="scale(0.765367) rotate(22.5)"></rect>
+	<rect ${dims} class="${cla} blue"			fill="#000fff" transform="scale(0.765367) rotate(67.5)"></rect>
+	<rect ${dims} class="${cla} lightblue"		fill="#1982ed" transform="scale(0.585786) rotate(0)">	</rect>
+	<rect ${dims} class="${cla} lightblue"		fill="#1982ed" transform="scale(0.585786) rotate(45)">	</rect>
+	<rect ${dims} class="${cla} turquoise"		fill="#3bf8de" transform="scale(0.448342) rotate(22.5)"></rect>
+	<rect ${dims} class="${cla} turquoise"		fill="#3bf8de" transform="scale(0.448342) rotate(67.5)"></rect>
+	<rect ${dims} class="${cla} green"			fill="#46f46f" transform="scale(0.343146) rotate(0)">	</rect>
+	<rect ${dims} class="${cla} green"			fill="#46f46f" transform="scale(0.343146) rotate(45)">	</rect>
+	<rect ${dims} class="${cla} yellow"			fill="#f0f8af" transform="scale(0.262632) rotate(22.5)"></rect>
+	<rect ${dims} class="${cla} yellow"			fill="#f0f8af" transform="scale(0.262632) rotate(67.5)"></rect>
+	<rect ${dims} class="${cla} lightyellow"	fill="#fff9c9" transform="scale(0.201010) rotate(0)">	</rect>
+	<rect ${dims} class="${cla} lightyellow"	fill="#fff9c9" transform="scale(0.201010) rotate(45)">	</rect>
+</svg>`
+}
+
 DebuggerHTML=function(){
 	return `<span onclick="RequestDebugger()">Debug</span>`
 }
