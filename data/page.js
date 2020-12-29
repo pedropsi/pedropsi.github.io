@@ -56,10 +56,17 @@ LoadPrescript=function(){
 		BuildCMSPage();
 }
 
-
+RebuildHead=function(){
+	//RemoveElements("script");
+	RemoveElements("meta");
+	RemoveElements("title");
+	GetElements("link").filter(e=>!In(e.type,"css")).map(RemoveElement);
+	AddElement(v.HEAD_ITEMS(),"HEAD");
+}
 
 BuildCMSPage=function(){
-	document.head.innerHTML=v.HEAD();
+	RebuildHead();
+	
 	document.body.innerHTML=v.BODY();
 
 	var sources=["codes/intercom.js","data/guestbook.js","codes/insight.js"];
