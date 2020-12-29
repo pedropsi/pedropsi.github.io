@@ -80,8 +80,6 @@ TABULAR_AREA				:	()=>	`${v.AREA_PRE()}${v.DISPLAY_EXTERNAL()}${v.POST_PLUS_LABE
 GUESTBOOK_AREA				:	()=>	`${v.AREA_PRE()}<h1 class="title">${v.TITLE()}</h1><div class="whiteboard"><div class="text ${v.STYLE()} post" id="post">${v.POST()}</div></div>${v.LABELS(v)}${v.DISPLAY_EXTERNAL()}</div>`,
 GUESTBOOK_COMMENTS			:	()=>	`<div id="guestbook-area"></div>`,
 
-BUTTON_SOON					:	()=>	`<div>Coming soon...</div>`,
-
 
 STYLE						:()=>`prose`,
 TYPEGRAPH					:()=>`article`,
@@ -104,17 +102,17 @@ PICTURE_DYNAMIC_SIZE		:function(){
 
 FIGURE_SIMPLE				:	()=>	`<figure class="figure">${v.PICTURE_DYNAMIC()}</figure>`,
 
-PUZZLE_SCRIPT_GAME			:	()=>	`codes/game/puzzlescript/${v.LINK()}.js`,
-PUZZLE_SCRIPT_EMBED			:	()=>	`codes/game/puzzlescript-embed.js`,
-PUZZLE_SCRIPT				:	()=>	[v.PUZZLE_SCRIPT_EMBED(),v.PUZZLE_SCRIPT_GAME(),v.GAME_STYLE()],
 
 GAME_STYLE					:	()=>	`codes/game/game.css`,
 GAME_SCRIPT_GAME			:	()=>	`codes/game/${v.LINK()}/${v.LINK()}.js`,
 GAME_SCRIPT					:	()=>	[v.GAME_SCRIPT_GAME(),v.GAME_STYLE()],
 
-GUESTBOOK_ADD				:	()=>	`<div class="button centered" onclick="RequestGuestbook()" tabindex="0">Leave your message!</div>`,
+PUZZLE_SCRIPT				:	()=>	[`codes/game/puzzlescript-embed.js`,`codes/game/puzzlescript/${v.LINK()}.js`,v.GAME_STYLE()],
 
+
+GUESTBOOK_ADD				:	()=>	`<div class="button centered" onclick="RequestGuestbook()" tabindex="0">Leave your message!</div>`,
 BUTTON_SUBSCRIBE			:	()=>	NavigationButtonHTML("subscribe"),
+BUTTON_SOON					:	()=>	`<div>Coming soon...</div>`,
 
 
 BLANK						:	()=>	`target='_blank' rel="noopener noreferrer"`,
@@ -156,7 +154,6 @@ MACRO_URL					:	()=>	`https://script.google.com/macros/s/`,
 
 TITLE_BY					:	()=>	`${v.TITLE()} by ${v.NAME()} ${v.YEAR()}`,
 TITLE_BY_AL					:	()=>	`${v.NAME()} et al., ${v.YEAR()}, <em>${v.TITLE()}</em>`,
-TITLELONG					:	()=>	`${v.TITLE()} - ${v.TAGLINE()}`,
 TITLE_BOLD					:	()=>	`<b>${v.TITLE()}</b>`,
 
 
@@ -209,7 +206,20 @@ PRESS_TEXT					:	()=>	`${v.PRESS_USAGE()}${ScreenshotGalleryHTML(v.LINK())}${v.O
 PRESS_USAGE					:	()=>	`<h2>Editorial uses</h2><p>All the material on this page is ${HyperText("Copyright")}, but you are granted permission to use it for editorial purposes, as long as you provide appropriate credit (including a direct link to this page) and do not spoil other people's enjoyment.</p>`,
 OTHER_INQUIRIES				:	()=>	`<h3>Other inquiries</h3><p>Check also the ${v.A_PRESS()} or ${v.A_CONTACT_ME()} for all unusual requests!</p>`,
 
-TRAILER_LAUNCHER			:	()=>	`<img class="card" onclick='OpenVideoModal("${v.TRAILER()}")' src="images/${v.TRAILER_IMAGE()}" alt="${v.TITLE()}'s trailer" title="${v.TITLELONG()} (trailer)" loading="lazy"/>`,
+
+TRAILER_LAUNCHER			:	()=>	`<img class="card" onclick='OpenVideoModal("${v.TRAILER()}")' src="images/${v.TRAILER_IMAGE()}" alt="${v.TITLE()}'s trailer" title="${v.TITLE()} - ${v.TAGLINE()} (trailer)" loading="lazy"/>`,
+
+
+RSS_PATH					:	()=>	`${v.SITE()}/rss.xml`,
+
+SECTION_CHANGELOG			:	()=>	ChangelogHTML()?v.SECTION_OUT(v.WHITEBOARD_OUT(ChangelogHTML())):"",
+
+DATE						:	(page)=>	`${page.DAY()}-${page.MONTH()}-${page.YEAR()}`,
+
+DATE_TEXT					:	(page)=>	page&&page.DAY&&page.MONTH&&page.YEAR?DateName(page.DAY(),page.MONTH(),page.YEAR()):"",
+
+
+
 
 
 MANIFEST					:	()=>"",
@@ -241,23 +251,6 @@ ORIENTATION					:()=>`landscape`,
 
 PWA_ICON_OBJ				:(size)=>`{"src":"${v.ORIGIN()}/${ImagePath(v.IMAGE_NAME(v),v.IMAGE_EXT(),size)}","type":"image/${v.IMAGE_EXT()}","sizes":"${size}x${size}","purpose":"any maskable"}`,
 PWA_ICONS					:	()=>	`"icons":[${v.PWA_ICON_OBJ(512)},${v.PWA_ICON_OBJ(192)},${v.PWA_ICON_OBJ(180)}]`,
-
-NEWS_LIMIT_RECENT			:	()=>	3,
-LATEST_LIMIT				:	()=>	12,
-RSS_LIMIT					:	()=>	60,
-RSS_PATH					:	()=>	`${v.SITE()}/rss.xml`,
-RSS_SITE_DESCRIPTION		:	()=>	`Don't miss out on the ${v.SITE_NAME()}!`,
-RSS_CHANNEL_IMAGE			:	()=>	`<image><link>${v.SITE()}</link><title>${v.SITE_NAME()}</title><url>${v.SITE()}/${v.LOGO_PATH()}</url></image>`,
-XML							:	()=>	`<?xml version="1.0" encoding="UTF-8"?>`,
-
-SECTION_CHANGELOG			:	()=>	ChangelogHTML()?v.SECTION_OUT(v.WHITEBOARD_OUT(ChangelogHTML())):"",
-
-
-
-DATE						:	(page)=>	`${page.DAY()}-${page.MONTH()}-${page.YEAR()}`,
-
-DATE_TEXT					:	(page)=>	page&&page.DAY&&page.MONTH&&page.YEAR?DateName(page.DAY(),page.MONTH(),page.YEAR()):"",
-
 
 };
 

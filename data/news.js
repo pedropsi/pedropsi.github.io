@@ -573,20 +573,26 @@ RecentNewsHTML=function(){
 	return SectionHTML({
 		...NewsOptions,
 		Source:News,
-		max:v.NEWS_LIMIT_RECENT(),
+		max:3,
 		header:`<h1 class="title">Recent changes</h1>`,
 		InnerWrapper:v.WHITEBOARD_OUT,
 	})
 }
+
+
+
+RSS_LIMIT=60;
+XML=`<?xml version="1.0" encoding="UTF-8"?>`;
+
 
 RSSXML=function(){
 	return SectionHTML({
 		...NewsOptions,
 		Source:News,
 		ItemHTML:RSSItemXML,
-		max:v.RSS_LIMIT(),
+		max:RSS_LIMIT,
 		header:RSSHeadXML(),
-		OuterWrapper:function(body){return `${v.XML()}<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" >
+		OuterWrapper:function(body){return `${XML}<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" >
 			<channel>
 				${body}
 			</channel>
@@ -599,7 +605,7 @@ RSSHeadXML=function(){
 		<atom:link href="${v.RSS_PATH()}" rel="self" type="application/rss+xml" />
 		<title>${v.SITE_NAME()}</title>
 		<link>${v.SITE()}</link>
-		<description>${v.RSS_SITE_DESCRIPTION()}</description>
+		<description>Don't miss out on the ${v.SITE_NAME()}!</description>
 		<language>${v.LANG()}</language> 
 		<docs>https://cyber.harvard.edu/rss/rss.html</docs>
 		<copyright>${HyperText("Copyright")}</copyright>
@@ -643,7 +649,7 @@ SitemapXML=function(){
 		ItemHTML:SitemapItemXML,
 		Sorter:SortPageByDate,
 		FilterF:NonFutureItem,
-		OuterWrapper:function(body){return`${v.XML()}<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${body}</urlset>`;}
+		OuterWrapper:function(body){return`${XML}<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${body}</urlset>`;}
 	});
 }
 

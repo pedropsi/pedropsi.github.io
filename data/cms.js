@@ -178,7 +178,7 @@ LatestHTML=function(){
 		exclude:{FEATURED:()=>false},
 		header:`<h1 class="title">Latest posts</h1>`,
 		ItemHTML:MiniCardHTML,
-		max:v.LATEST_LIMIT(),
+		max:12,
 		InnerWrapper:(latest)=>`<div class="latest">${latest}</div>`,
 	})
 }

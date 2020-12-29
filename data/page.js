@@ -173,10 +173,10 @@ LogoSVG=function(Opts){
 	var Opts=Opts||{};
 	var cla=Opts.rectclass?(Opts.rectclass+" "):"";
 	var dims=`x="-5" y="-5" width="10" height="10"`;
-	var vb=Opts.viewBox?Opts.viewBox:"-8 -8 16 16";
+	var viewBox=Opts.viewBox?Opts.viewBox:"-8 -8 16 16";
 	return `
 <?xml version="1.0"?>
-<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+<svg viewBox="${viewBox}" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
 	<rect ${dims} class="${cla} darkblue"		fill="#070070"></rect>
 	<rect ${dims} class="${cla} darkblue"		fill="#070070" transform="rotate(45)">					</rect>
 	<rect ${dims} class="${cla} blue"			fill="#000fff" transform="scale(0.765367) rotate(22.5)"></rect>
