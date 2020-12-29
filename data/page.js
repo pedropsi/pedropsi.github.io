@@ -143,7 +143,7 @@ FooterHTML=function(){
 	return `
 	<footer class="footer">
 		<p>${ViewCounterHTML()}</p>
-		<p>${v.COPYRIGHT_TEXT()}. ${v.A_TERMS()}. ${A("privacy-policy")}. ${A("status")}. ${DebuggerHTML()}.</p>
+		<p>${HyperText("Copyright")}. ${v.A_TERMS()}. ${A("privacy-policy")}. ${A("status")}. ${DebuggerHTML()}.</p>
 		<p> ${v.A_PRESS()}. ${A("subscribe")} and ${v.A_SUPPORT()}!</p>
 	</footer>`
 }

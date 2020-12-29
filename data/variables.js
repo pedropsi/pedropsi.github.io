@@ -183,10 +183,6 @@ GUESTBOOK_ADD				:	()=>	`<div class="button centered" onclick="RequestGuestbook(
 BUTTON_SUBSCRIBE			:	()=>	NavigationButtonHTML("subscribe"),
 
 
-COPYRIGHT					:	()=>	`Copyright ${v.NAME()} ${v.YEAR_SPAN()}, all rights reserved`,
-COPYRIGHT_TEXT				:	()=>	`© ${v.NAME()} ${YearsString(v.YEAR_START(),v.YEAR_NOW())}`,
-
-
 BLANK						:	()=>	`target='_blank' rel="noopener noreferrer"`,
 
 
@@ -257,7 +253,6 @@ CREDITS_AUTHORSHIP			:	()=>	`<p><a href="${v.LINK_URL()}.html">${v.TITLE_BOLD()}
 CREDITS_MUSIC				:	()=>	MusicCreditsHTML(v.LINK()),
 CREDITS_ENGINE_SUPPORT		:	()=>	`<h3>Game Engine</h3>${v.PUZZLESCRIPT_TEXT()}${v.SOURCE_TEXT()}`,
 CREDITS_ENGINE_VANILLA		:	()=>	`<p>Made with vanilla JS and CSS, including ${A("game-bar")}!</p>`,
-CREDITS_ENGINE_CLOSED		:	()=>	`<h3>Game Engine</h3>${v.PUZZLESCRIPT_TEXT()} The source will be available some time after the release.`,
 PUZZLESCRIPT_TEXT			:	()=>	`<p>Made with ${v.A_PUZZLESCRIPT()} and ${A("game-bar")}!</p>`,
 SOURCE_TEXT					:	()=>	`<p>Inspect the ${v.A_SOURCE()} freely, but consider the option to ${v.A_SUPPORT()}!</p>`,
 A_SOURCE					:	()=>	`<a ${v.BLANK()} href='http://puzzlescript.net/editor.html?hack=${v.CONTENT()}'><b>source</b></a>`,
@@ -276,12 +271,10 @@ GUESTBOOK_MESSAGE			:	()=>	`<h3>Guestbook</h3>${v.GUESTBOOK_POST_TEXT()}${v.GUES
 
 FEEDBACK					:	()=>	`<h2>Feedback</h2><h3>Problems? Suggestions?</h3><p>Please ${v.A_LET_ME_KNOW()} !</p><h3>Praise?</h3>${v.GUESTBOOK_POST_TEXT()}${v.GUESTBOOK_ADD()}`,
 
-PRESS_TEXT					:	()=>	`<h2>Editorial uses</h2>${v.PRESS_USAGE()}${ScreenshotGalleryHTML(v.LINK())}${v.OTHER_INQUIRIES()}`,
-PRESS_USAGE					:	()=>	`<p>All the material on this page is ${v.COPYRIGHT_TEXT()}, but you are granted permission to use it for editorial purposes, as long as you provide appropriate credit (including a direct link to this page) and do not spoil other people's enjoyment.</p>`,
-
+PRESS_TEXT					:	()=>	`${v.PRESS_USAGE()}${ScreenshotGalleryHTML(v.LINK())}${v.OTHER_INQUIRIES()}`,
+PRESS_USAGE					:	()=>	`<h2>Editorial uses</h2><p>All the material on this page is ${HyperText("Copyright")}, but you are granted permission to use it for editorial purposes, as long as you provide appropriate credit (including a direct link to this page) and do not spoil other people's enjoyment.</p>`,
 OTHER_INQUIRIES				:	()=>	`<h3>Other inquiries</h3><p>Check also the ${v.A_PRESS()} or ${v.A_CONTACT_ME()} for all unusual requests!</p>`,
 
-VIDEO_SRC					:	()=>	`media/${v.LINK()}/${v.LINK()}.mp4`,
 TRAILER_LAUNCHER			:	()=>	`<img class="card" onclick='OpenVideoModal("${v.TRAILER()}")' src="images/${v.TRAILER_IMAGE()}" alt="${v.TITLE()}'s trailer" title="${v.TITLELONG()} (trailer)" loading="lazy"/>`,
 
 

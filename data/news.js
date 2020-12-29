@@ -602,7 +602,7 @@ RSSHeadXML=function(){
 		<description>${v.RSS_SITE_DESCRIPTION()}</description>
 		<language>${v.LANG()}</language> 
 		<docs>https://cyber.harvard.edu/rss/rss.html</docs>
-		<copyright>${v.COPYRIGHT_TEXT()}</copyright>
+		<copyright>${HyperText("Copyright")}</copyright>
 		<image>
 			<link>${v.SITE()}</link>
 			<title>${v.SITE_NAME()}</title>
@@ -712,7 +712,7 @@ NewsSources={
 
 			return {
 				DATE:item.date,
-				HEADER:title,
+				HEADER:`${number}# ${title}`,
 				PIECE:`
 				<p>${link}, puzzle #${number} in the ${AHTML("star battle collection","star-battle.html")}, now released.</p>`,
 			}
@@ -723,7 +723,7 @@ NewsSources={
 		source:"https://pedropsi.github.io/kudamono.html",
 		Transformer:function(item,key){
 			var number=UnAfterfix(key,"-");
-			var title=`Kudamono (puzzle ${number})`;
+			var title=`${number}# Kudamono`;
 			var link=AHTML(title,"kudamono.html#"+key);
 
 			return {
