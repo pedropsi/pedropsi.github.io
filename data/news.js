@@ -1,4 +1,11 @@
 News={
+	N_63:{
+		DATE:"2020-12-30",
+		HEADER:()=>"Kudamono Puzzle updates",
+		PIECE:()=>`
+		<p>Set II of ${A("kudamono")} has been released this week, and the issues sheet polished.</p>
+		<p>A list of issues and ideas under consideration (that emerged at the ${P("thinky")}) has been added to the page, along with a template so you can make your own Kudamonos.</p>
+	`,ID:"kudamono"},
 	N_62:{
 		DATE:"2020-12-18",
 		HEADER:()=>"Kudamono Puzzle",
