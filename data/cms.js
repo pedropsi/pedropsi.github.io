@@ -342,8 +342,13 @@ CMSObject=function(title){
 //Links
 A=function(link){
 	var cmslink=CMSObject(PageSimpleIdentifier(link));
-	if(cmslink)
-		return AHTML(cmslink.TITLE(),PageReFragment(Posfix(cmslink.LINK(),".html"),PageFragment(link)));
+	if(cmslink){
+		var fragment=PageFragment(link);
+		if(fragment)
+			return AHTML(CapitaliseSentence(fragment.replace("-"," ")),PageReFragment(Posfix(cmslink.LINK(),".html"),fragment));
+		else
+			return AHTML(cmslink.TITLE(),Posfix(cmslink.LINK(),".html"));
+	}
 	else
 		return AHTML(link);
 }

@@ -1,6 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
 // (C) Pedro PSI 2017-2020
-
 // functions are always defined as "function_name=function(args){body}" to:
 //		1) allow anonymous export as node modules, yet working normally in browser
 //			---regular expression to convert forth: 	
@@ -1764,6 +1763,17 @@ IndexFragment=function(text){
 	return KebabCaseString(CapitaliseSentence(text));
 }
 
+ClosestFragment=function(fragment){
+	var fragment=IndexFragment(fragment);
+	if(!fragment)
+		return "";
+	var matches=IndexTitles.filter(t=>Prefixed(LowerSimpleString(t),LowerSimpleString(fragment))||Prefixed(LowerSimpleString(fragment),LowerSimpleString(t)));
+	if(matches.length)
+		return First(matches);
+	else
+		return "";
+}
+
 IndexSubTitle=function(t,h){
 	t.setAttribute("data-index-depth",h);
 	Class(t,"index-item");
@@ -1776,10 +1786,12 @@ IndexTag=function(h){
 	return GetElements(".main .prose "+h).map(TitleIndexer(h));
 }
 
-IndexTitles=function(){
-	var indexed=["h1","h2","h3","h4","h5","h6"].map(IndexTag);
-	Shout("IndexTitles");
-	return indexed;
+IndexTitles=[];
+
+TitlesIndex=function(){
+	IndexTitles=["h1","h2","h3","h4","h5","h6"].map(IndexTag).flat();
+	Shout("TitlesIndex");
+	return IndexTitles;
 }
 
 PageIndexHTML=function(indexArray){

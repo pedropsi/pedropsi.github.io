@@ -88,14 +88,15 @@ PageFeatures=function(){
 }
 
 PageIndex=function(){
-	HearOnce("IndexTitles",
+	HearOnce("TitlesIndex",
 			function(){
 				AddTitleIndex(".main .whiteboard")//First whiteboard where main content is
-				var fragment=PageFragment(); //required for dynamism
-				ScrollInto(IndexFragment(fragment))
+				var fragment=ClosestFragment(PageFragment()); //required for dynamism
+				if(fragment)
+					ScrollInto(fragment)
 			}
 		)
-	IndexTitles();
+	TitlesIndex();
 }
 
 PageFeaturesDOM=function(){
