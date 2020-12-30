@@ -87,6 +87,17 @@ PageFeatures=function(){
 
 }
 
+PageIndex=function(){
+	HearOnce("IndexTitles",
+			function(){
+				AddTitleIndex(".main .whiteboard")//First whiteboard where main content is
+				var fragment=PageFragment(); //required for dynamism
+				ScrollInto(IndexFragment(fragment))
+			}
+		)
+	IndexTitles();
+}
+
 PageFeaturesDOM=function(){
 	HearOnce('beforeinstallprompt',PWAInstallAsk);
 	HearOnce('appinstalled',PWAInstallConfirm);
@@ -102,11 +113,8 @@ PageFeaturesDOM=function(){
 	ListenOnce('offline',MonitorConnection);
 	
 	AddElement(ScrollUpHTML(),".whiteboard");
-	setTimeout(IndexTitles,5000);
-	HearOnce("IndexTitles",
-		()=>AddTitleIndex(".main .whiteboard")//First whiteboard where main content is
-	)
-	
+	setTimeout(PageIndex,2000);
+
 	if(PageSearch("debug"))
 		RequestDebugger();
 

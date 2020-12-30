@@ -1525,7 +1525,7 @@ PageDomain=function(url){
 
 PageFragment=function(url){
 	var url=DefaultURL(url);
-	return Afterfix(url,"#");
+	return decodeURI(Afterfix(url,"#"));
 }
 
 PageUnFragment=function(url){
@@ -1756,10 +1756,14 @@ TitleIndexer=function(h){
 	return function(t){return IndexSubTitle(t,h)};
 }
 
+IndexFragment=function(text){
+	return KebabCaseString(CapitaliseSentence(text));
+}
+
 IndexSubTitle=function(t,h){
 	t.setAttribute("data-index-depth",h);
 	Class(t,"index-item");
-	t.id=t.id?t.id:KebabCaseString(CapitaliseSentence(t.innerText));
+	t.id=t.id?t.id:IndexFragment(t.innerText);
 	TitleSelfLink(t);
 	return t.id;
 }
@@ -1817,7 +1821,7 @@ TitleSelfLink=function(t){
 
 HeaderAHTML=function(title,page,opts){
 	var page=PageUnFragment(page);
-	var fragment=KebabCaseString(CapitaliseSentence(title));
+	var fragment=IndexFragment(title);
 	var opts=opts||{};
 	opts.onclick=`ScrollInto("#${fragment}")`
 	return AHTML(title,page+"#"+fragment,opts);
@@ -2697,7 +2701,7 @@ ScrollInto=function(elementIDsel){
 	if(!e)
 		return;
 	e.scrollIntoView();
-	WhileOutViewExecute(e,()=>e.scrollIntoView(),{delay:250,max:10,end:true});
+	WhileOutViewExecute(e,()=>e.scrollIntoView(),{delay:250,max:10,end:true,enddelay:1000});
 }
 
 
@@ -6196,12 +6200,13 @@ WhileOutViewExecute=function(target,Executer,Opts){
 	var delay=Opts.delay||500;
 	var maxtime=Opts.maxtime||((Opts.max||10)*delay);
 	var end=Opts.end||false;
+	var enddelay=Opts.enddelay||(delay*4)
 
 	//Stopping
 	InViewExecute(target,function(){
 		AutoStop(undefined,delay,id);
 		if(end)
-			setTimeout(Executer,delay);
+			setTimeout(Executer,enddelay);
 	});
 
 	//Trying
