@@ -1533,6 +1533,10 @@ PageUnFragment=function(url){
 	return UnAfterfix(url,"#");
 }
 
+PageReFragment=function(url,fragment){
+	return PageUnFragment(url)+(fragment?("#"+fragment):"");
+}
+
 PageUnSearch=function(url){
 	var url=DefaultURL(url);
 

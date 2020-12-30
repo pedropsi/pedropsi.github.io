@@ -343,7 +343,7 @@ CMSObject=function(title){
 A=function(link){
 	var cmslink=CMSObject(PageSimpleIdentifier(link));
 	if(cmslink)
-		return AHTML(cmslink.TITLE(),cmslink.LINK());
+		return AHTML(cmslink.TITLE(),PageReFragment(Posfix(cmslink.LINK(),".html"),PageFragment(link)));
 	else
 		return AHTML(link);
 }
