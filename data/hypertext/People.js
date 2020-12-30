@@ -2,6 +2,8 @@ HyperText("People",function(){return Persons.join(`
 `)})
 
 var Contributors={//People
+	"wainwright":{name:"Mark Wainwright"},
+	"questioner":{alias:"Questioner"},
 	"leslo":{name:"Lucas Salafranca",alias:"Le Slo",TWITTER:"leslodev"},
 	"draknek":{name:"Alan Hazelden",alias:"Draknek",TWITTER:"draknek"},
 	"lavelle":{name:"Stephen Lavelle",alias:"Increpare",TWITTER:"increpare"},
@@ -65,7 +67,7 @@ var Contributors={//People
 	"karoo":{name:"Karoo"},
 	"hempuli":{name:"Arvi Teikari",alias:"Hempuli",PERSONAL_PAGE:"https://www.hempuli.com/"},
 	"pancelor":{alias:"Pancelor",ITCH:"pancelor"},
-	"dohz":{alias:"dohz",ITCH:"dohz"},
+	"dohz":{alias:"dohz",ITCH:"dohz",PERSONAL_PAGE:"dohz.waterfall.social"},
 	"jarsp":{alias:"jarsp"},
 	"toomblercazz":{alias:"Toombler",ITCH:"toombler"},
 	"zach":{name:"Zach"},
@@ -140,9 +142,7 @@ var Developers={
 var OtherPeople={
 	"lkrejg":{TYPE:"Press",alias:"Lkrejg",TWITTER:"lkrejg"},
 	"puzzlescript":{TYPE:"Community",name:"Puzzlescript forum members",PERSONAL_PAGE:"https://groups.google.com/forum/#!forum/puzzlescript"},
-	"thinky":{TYPE:"Community",name:"Thinky Puzzles discord server",PERSONAL_PAGE:"https://discord.gg/ZkV2zdb"},
-	"wainwright":{TYPE:"Publikum",name:"Mark Wainwright"},
-	"questioner":{TYPE:"Publikum",alias:"Questioner"}
+	"thinky":{TYPE:"Community",name:"Thinky Puzzles discord server",PERSONAL_PAGE:"https://discord.gg/ZkV2zdb"}
 }
 
 var Persons=Join(Developers,Contributors,Musicians,OtherPeople)
