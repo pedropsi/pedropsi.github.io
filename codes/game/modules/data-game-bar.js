@@ -270,7 +270,7 @@ function GameBarButtonHTML(action,attribs){
 }
 
 function GameBarButtonLinkHTML(title,action){
-	var id='#'+KebabCaseString(CapitaliseSentence(title));
+	var id='#'+IndexFragment(title);
 	var button=GameBarButtonHTML(action,{
 		onclick:`FullscreenClose();Navigate("${id}");`});
 	return AwaitElement(id,button);
