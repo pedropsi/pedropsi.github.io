@@ -69,7 +69,8 @@ var Contributors={//People
 	"jarsp":{alias:"jarsp"},
 	"toomblercazz":{alias:"Toombler",ITCH:"toombler"},
 	"zach":{name:"Zach"},
-	"norgg":{alias:"Norgg",TWITTER:"Norgg"}
+	"norgg":{alias:"Norgg",TWITTER:"Norgg"},
+	"ihnn":{alias:"IHNN",TWITCH:"ihavenonamesda"}
 }
 
 var Musicians={
@@ -167,6 +168,8 @@ PersonalPage=function(linkObj){
 		return `${linkObj.PERSONAL_PAGE}`;
 	if(linkObj.GOOGLE_PLUS)
 		return `${CommonURLS.GOOGLE_PLUS}${linkObj.GOOGLE_PLUS}`;
+	if(linkObj.TWITCH)
+		return `https://www.twitch.tv/${linkObj.TWITCH}`
 	else
 		return "";
 }
