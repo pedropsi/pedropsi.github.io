@@ -2712,12 +2712,23 @@ FilterableTable=function(tableSelector){
 //////////////////////////////////////////////////
 // Scroll into (even if the page changes meanwhile)
 
-ScrollInto=function(elementIDsel){
+ScrollOnto=function(elementIDsel){
 	var e=GetElement(elementIDsel);
 	if(!e)
 		return;
 	e.scrollIntoView();
 	WhileOutViewExecute(e,()=>e.scrollIntoView(),{delay:250,max:10,end:true,enddelay:1000});
+}
+
+ScrollInto=function(elementIDsel){
+	var e=GetElement(elementIDsel);
+	if(e)
+		ScrollOnto(e);	
+	else if(IsString(elementIDsel)){
+		e=ClosestFragment(elementIDsel);
+		if(e)
+			ScrollOnto(e);
+	}
 }
 
 

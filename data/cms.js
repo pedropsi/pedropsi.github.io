@@ -341,6 +341,9 @@ CMSObject=function(title){
 
 //Links
 A=function(link){
+	if(PageSimpleIdentifier(link)===PageSimpleIdentifier())
+		return A(Prefix(PageFragment(link),"#"));
+	
 	var cmslink=CMSObject(PageSimpleIdentifier(link));
 	if(cmslink){
 		var fragment=PageFragment(link);
