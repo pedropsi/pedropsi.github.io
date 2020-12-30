@@ -70,7 +70,7 @@ ${
 	l=Last(kudamonosFuture),
 	l&&l.date?`<p>Next update: <b>${DateName(StringDate(l.date))}</b>, with <em>${l.legend?l.legend:""}</em>!</p>`:""
 }
-<p>Possible future puzzles are listed under ${A("#More Ideas")}. Excited about a particular idea? Do ${v.A_LET_ME_KNOW()}!</p>
+<p>Possible future puzzles are listed under ${A("#Fruit Expansions")}, alongside current ${A("#Issues")}. Suggestion? Excited about a particular idea? Do ${v.A_LET_ME_KNOW()}!</p>
 
 ${v.HEADER()}
 
@@ -91,17 +91,17 @@ ${FolderGalleryHTML("kudamono",Keys(kudamonos))}
 <h2>How to make kudamono puzzles</h2>
 <p>Download the ${AHTML("Kudamono template.pptx","images/kudamono/Kudamono-template.pptx")}!</p>
 
+${LazyImageHTML({src:"kudamono/kudamono-cover.png"})}
+
 <h2>Credits</h2>
 <p>Special thanks to ${P("Dohz")} for trying all the puzzles, resulting in substantial improvements!</p>
 <p>Thanks for help clarifying the rules (specially of melons and pears), testing the puzzles, for interesting discussions about uniqueness, and for new ideas: ${P("Dohz","toomblercazz","portponky","deusovi","knexator","mansfield","draknek","norgg","hempuli","zach","skymoo","escaper","ihnn")}.</p>
 
-<h2>FAQ</h2>
-<h3>Why is the puzzle named Kudamono?</h3>
-<p>Kudamono is a japanese word for fruit. It's common for paper puzzles to have names in japanese (e.g Sudoku, Kakuro, etc...) because many were invented in Japan.</p>
 
+<h2>Roadmap</h2>
+<p>Listed for self-reference and to help any contributors.</p>
 
-<h2>More ideas</h2>
-<p>Listed for self-reference or in case anyone wants to make them real earlier. More potential fruit types:</p>
+<h3>Fruit Expansions</h3>
 <ul>
 	<li>banana - bananas connect to a single point (which is not a banana): ${P("draknek","portponky")};</li>
 	<li>tomato - each tomato can pretend to be a fruit (of a different type);</li>
@@ -118,7 +118,51 @@ ${FolderGalleryHTML("kudamono",Keys(kudamonos))}
 	<li>etc... </li>
 </ul>
 
-${LazyImageHTML({src:"kudamono/kudamono-cover.png"})}
+<h3>Issues</h3>
+<h4>Memorability</h4>
+<p>As more fruits are added, it can be difficult remember the rules.</p>
+<h5>Approach so far (with room for improvement):</h5>
+<ul>
+	<li> relating each rule to a certain property of the fruit (e.g. cherry - pairing);</li>
+	<li> keeping each fruit rule as concise as possible;</li>
+	<li> adding a small rhyme;</li>
+	<li> having a separate <em>issues examples</em> sheet;</li>
+</ul>
+<h5>Suggestions:</h5>
+<ul>
+	<li> adding mnemonics: ${P("escaper")};</li>
+	<li> changing the symbols to reflect the rules more accurately: ${P("koswara")};</li>
+	<li> adding visual representations of the rules to each puzzle (instead of standalone): ${P("koswara")};</li>
+	<li> adding feedback/interaction: ${P("deusovi")};</li>
+</ul>
+
+<h4>Learnability</h4>
+<p>Rules do not work standalone, only in combination (this is by design). As a consequence, to learn a rule, one may need to consider it in combination with other rules, steepening the learning curve.</p>
+<h5>Approach so far (with room for improvement):</h5>
+<ul>
+	<li> keeping each fruit rule as simple & clean as possible;</li>
+</ul>
+
+<h4>Consistency</h4>
+<p>The rules may feel inconsistent or lacking of a "main thing" (apart from the fruits).</p>
+
+<h2>FAQ</h2>
+<h3>Why is the puzzle named Kudamono?</h3>
+<p>Kudamono is a japanese word for fruit. It's common for paper puzzles to have names in japanese (e.g Sudoku, Kakuro, etc...) because many were invented in Japan.</p>
+
+<h3>How do the Kudamono rules relate other puzzles'?</h3>
+<p>Thanks to ${P("deusovi","koswara","hempuli","ihnn","dohz")} for initiating this discussion.</p>
+
+<h4>The Witness</h4>
+<p>Two conceptual similarities: the puzzles focus on drawing lines and there is a set of symbols, each with its own rule. Two core differences: Kudamono requires no specific start or endpoints (plus, multiple paths and loops can be drawn); fruit rules only work in combination (there are no single-fruit puzzles).</p>
+
+<h4>The Witless</h4>
+<p>Again, both puzzles focus on drawing lines and there is a set of symbols, each with its own rule. In the Witless, the focus is <em>discovering the rules</em> and lines go <em>around</em> the symbols, while in Kudamono, the rules are open and lines go <em>through</em> the fruits.</p>
+
+<h4>Geisterbahn</h4>
+<p>Under consideration.</p>
+
+
 
 `};</script><script src="data/page.js"></script>
 	</head></html>
