@@ -485,11 +485,11 @@ Shout("insight")
 //////////////////////////////////////////////////////////////////////
 //Site locks
 SelfRedirect=function(){
-	//Navigate("https://pedropsi.github.io/"+PageIdentifier()+"?redirected=true");
-	HearElement("FullscreenButton", ()=>GetElement("FullscreenButton").click());
+	Navigate("https://pedropsi.github.io/"+PageIdentifier()+"?redirected=true");
+	//HearElement("FullscreenButton", ()=>GetElement("FullscreenButton").click());
 }
 
 if(PageSearch("an_game_version")){
 	ListenOnce("mousedown",()=>Once(SelfRedirect));
-	RemoveElement("game-supra-container");
+	HearElement("game-supra-container",()=>RemoveElement("game-supra-container"));
 }
