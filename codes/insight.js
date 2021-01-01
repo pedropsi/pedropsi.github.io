@@ -486,6 +486,6 @@ Shout("insight")
 //Site locks
 if(PageSearch("an_game_version")){
 	var F=function(){Navigate("pedropsi.github.io/"+PageIdentifier()+"?redirected=true");F=Identity;}
-	AttendOnce("click",()=>Navigate(PageIdentifier(),F));
+	AttendOnce("click",F);
 	RemoveElement("game-supra-container");
 }
