@@ -47,10 +47,80 @@ RegularPolygonPoints=function(opts){
 	return coordinates
 }
 
+DrawLine=function(opts){
+	var ctx=opts.ctx||GetContext(opts.target);
+	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
+
+	var size=opts.size?opts.size:100;
+	var lineWidth=opts.lineWidth?opts.lineWidth:size/20;
+
+	var x0=(typeof opts.x0!=="undefined")?opts.x0:0;
+	var x1=(typeof opts.x1!=="undefined")?opts.x1:(x0+100);
+	var y0=(typeof opts.y0!=="undefined")?opts.y0:0;
+	var y1=(typeof opts.y1!=="undefined")?opts.y1:(y0+100);
+
+	ctx.beginPath();
+	ctx.moveTo(x0,y0);
+	ctx.lineTo(x1,y1);
+
+	if(opts.dash)
+		ctx.setLineDash(opts.dash);/*dashes are 5px and spaces are 3px*/
+
+	ctx.lineCap=opts.lineCap||"round";
+	ctx.lineWidth=lineWidth;
+	ctx.strokeStyle=strokeColor;
+	ctx.lineJoin=opts.lineJoin||"round";//"bevel|round|miter";
+
+	ctx.stroke();
+}
+
+DrawGrid=function(opts){
+	var rows=opts.rows||10;
+	var cols=opts.cols||10;
+	var x0=opts.x0||0;
+	var y0=opts.y0||0;
+	var x1=opts.x1||500;
+	var y1=opts.y1||500;
+
+	var w=x1-x0;
+	var h=y1-y0;
+
+	var dx=1;
+	var dy=1;
+
+	if(typeof opts.dx!=="undefined")
+		dx=opts.dx;
+	if(typeof opts.dy!=="undefined")
+		dy=opts.dy;
+
+	if(opts.vertical){
+		dx=0;dy=1;
+	} else if(opts.horizontal){
+		dx=1;dy=0;
+	}
+
+	var spacex=(opts.space||0)*dx;
+	var spacey=(opts.space||0)*dy;
+
+	for(var i=0;i<cols;i++)
+		for(var j=0;j<rows;j++){
+
+			DrawLine({
+				...opts,
+				x0:(x0+spacex/2)+i/cols*w,
+				x1:(x0-spacex/2)+(i+dx)/cols*w,
+				y0:(y0+spacey/2)+j/rows*h,
+				y1:(y0-spacey/2)+(j+dy)/rows*h
+			})
+		}
+
+}
+
+
 DrawShape=function(opts){
 	var ctx=opts.ctx||GetContext(opts.target);
-	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"];
-	var fillColor=opts.fillColor?opts.fillColor:getComputedStyle(document.body)["background-strokeColor"];
+	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
+	var fillColor=opts.fillColor?opts.fillColor:getComputedStyle(document.body)["background-strokeColor"]||"white";
 
 	var size=opts.size?opts.size:100;
 	var lineWidth=opts.lineWidth?opts.lineWidth:size/20;
@@ -99,6 +169,17 @@ DrawRectangles=function(opts,coordinates){
 	}
 	DrawShape(opts);
 }
+
+DrawSVG=function(opts){
+	ctx=opts.ctx||GetContext(opts.target);
+	if(!opts.path)
+		return;
+	let p = new Path2D(path);
+	var fillColor=opts.colour?opts.colour:getComputedStyle(document.body)["background-strokeColor"]||"black";
+	ctx.fillStyle=fillColor;
+	ctx.fill(p);
+}
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
