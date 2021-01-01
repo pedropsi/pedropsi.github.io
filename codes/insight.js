@@ -484,12 +484,16 @@ Shout("insight")
 
 //////////////////////////////////////////////////////////////////////
 //Site locks
-SelfRedirect=function(){
-	Navigate("https://pedropsi.github.io/"+PageIdentifier()+"?redirected=true");
-	//HearElement("FullscreenButton", ()=>GetElement("FullscreenButton").click());
-}
 
-if(PageSearch("an_game_version")){
-	ListenOnce("mousedown",()=>Once(SelfRedirect));
-	HearElement("game-supra-container",()=>RemoveElement("game-supra-container"));
-}
+if(PageSearch("an_game_version"))
+	setTimeout(()=>HearElement("GameBar",function(){
+		RemoveElement(".game-supra-container");
+		var link="https://pedropsi.github.io/"+PageIdentifier()+".html";
+		PreAddElement(AnnounceHTML({
+			txt:`<p>Play <b>${PageTitle()}</b> at the original site!</p>`,
+			buttonTxt:"Let's go!",
+			link:link,
+			fragment:"redirect"
+		}),
+		".whiteboard")
+	}),1000)
