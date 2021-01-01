@@ -486,19 +486,22 @@ Shout("insight")
 //Site locks
 
 if(PageSearch("an_game_version"))
-	setTimeout(()=>HearElement("GameBar",function(){
-		RemoveElement(".game-supra-container");
-		var link="https://pedropsi.github.io/"+PageIdentifier()+".html";
-		PreAddElement(AnnounceHTML({
-			txt:`
-			<p>Play <b>${PageTitle()}</b> at the original site!</p>
-			<p>Jouez <b>${PageTitle()}</b> à l'original!</p>
-			<p>Spielen Sie <b>${PageTitle()}</b> im Original!</p>
-			<p>Speel <b>${PageTitle()}</b> bij het origineel!</p>
-			`,
-			buttonTxt:"Let's go!",
-			link:link,
-			fragment:"redirect"
-		}),
-		".whiteboard")
-	}),1000)
+	top.location.href = 'http://pedropsi.github.io/'+PageIdentifier()+"#redirect"
+	// setTimeout(()=>HearElement("GameBar",function(){
+	// 	RemoveElements(".container");
+	// 	RemoveElements(".navbar");
+	// 	RemoveElements(".navbar");
+	// 	var link="https://pedropsi.github.io/"+PageIdentifier()+".html";
+	// 	PreAddElement(AnnounceHTML({
+	// 		txt:`
+	// 		<p>Play <b>${PageTitle()}</b> at the original site!</p>
+	// 		<p>Jouez <b>${PageTitle()}</b> à l'original!</p>
+	// 		<p>Spielen Sie <b>${PageTitle()}</b> im Original!</p>
+	// 		<p>Speel <b>${PageTitle()}</b> bij het origineel!</p>
+	// 		`,
+	// 		buttonTxt:"Let's go!",
+	// 		link:link,
+	// 		fragment:"redirect"
+	// 	}),
+	// 	".whiteboard")
+	// }),1000)
