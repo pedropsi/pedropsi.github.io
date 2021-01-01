@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+    
+    <ShortName>Puzzlescript Games Database</ShortName>
+
+    <Description>All Puzzlescript Games' Database, by Pedro PSI et al</Description>
+    <Tags>pedropsi puzzlescript game database browser html5 games</Tags>
+    <InputEncoding>UTF-8</InputEncoding>
+    <Image height="16" width="16" type="image/x-icon">https://pedropsi.github.io/images/puzzlescript-games-database-favicon.ico</Image>
+
+    <Url type="text/html" method="get" template="https://pedropsi.github.io/puzzlescript-games-database?search={searchTerms}" /> %>
+    
+</OpenSearchDescription>
