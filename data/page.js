@@ -232,6 +232,16 @@ CHTML=function(tagattribs,close){
 	return TagOpenHTML(tagattribs)+(close?TagCloseHTML(tagattribs):"");
 }
 
+AnnounceHTML=function(Opts){
+	return AHTML(`
+	<div>
+		${Opts.txt}
+		${ButtonHTML({txt:Opts.buttonTxt||"Learn more"})}
+	</div>`,
+	PageReFragment(Opts.link,Opts.fragment||"announce"),
+	{class:"announce"})
+}
+
 //Post HTML
 
 PagePost=function(code){

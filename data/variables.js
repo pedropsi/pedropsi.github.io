@@ -141,8 +141,6 @@ WHITEBOARD_SIMPLE			:	()=>		v.SECTION_OUT(v.PAGE_TITLE()+v.WHITEBOARD_OUT(v.CONT
 
 
 
-SECTION_SUBSCRIBE			:	()=>	v.SECTION_OUT(`<div class="container">${v.SUBSCRIBE_ANNOUNCE()}</div>`),
-SUBSCRIBE_ANNOUNCE			:	()=>	`<div class="announce"><p>Learn first-hand about ${v.NAME()}'s next project!</p>${v.BUTTON_SUBSCRIBE()}</div>`,
 SUBSCRIBE_RSS				:	()=>	`<a href="${v.RSS_PATH()}" id="rss">Subscribe to RSS feed.</a>`,
 SUBSCRIBE_EMAIL				:	()=>	`<a onclick="OpenModalSubscribe()">Subscribe to email alerts.</a>`,
 
