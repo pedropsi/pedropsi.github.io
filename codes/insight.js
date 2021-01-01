@@ -484,8 +484,12 @@ Shout("insight")
 
 //////////////////////////////////////////////////////////////////////
 //Site locks
-// if(PageSearch("an_game_version")){
-// 	var F=function(){Navigate("https://pedropsi.github.io/"+PageIdentifier()+"?redirected=true");F=Identity;}
-// 	AttendOnce("click",F);
-// 	RemoveElement("game-supra-container");
-// }
+SelfRedirect=function(){
+	//Navigate("https://pedropsi.github.io/"+PageIdentifier()+"?redirected=true");
+	HearElement("FullscreenButton", ()=>GetElement("FullscreenButton").click());
+}
+
+if(PageSearch("an_game_version")){
+	ListenOnce("mousedown",()=>Once(SelfRedirect));
+	RemoveElement("game-supra-container");
+}
