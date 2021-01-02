@@ -174,7 +174,7 @@ DrawSVG=function(opts){
 	ctx=opts.ctx||GetContext(opts.target);
 	if(!opts.path)
 		return;
-	let p = new Path2D(path);
+	let p = new Path2D(opts.path);
 	var fillColor=opts.colour?opts.colour:getComputedStyle(document.body)["background-strokeColor"]||"black";
 	ctx.fillStyle=fillColor;
 	ctx.fill(p);
