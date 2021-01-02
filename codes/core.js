@@ -5513,7 +5513,7 @@ IconName=function(iconElement){
 
 //SVG Path Parsing
 SVGSpacePattern="\\s+";
-SVGNumberPattern="\\-?\\d+(?:\\.\\d)*";
+SVGNumberPattern="\\-?\\d+(?:\\.\\d+)*";
 SVGPairPattern=SVGNumberPattern+SVGSpacePattern+SVGNumberPattern+SVGSpacePattern;
 var SVGLetterPattern={
 	0:"Z",
