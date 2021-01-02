@@ -5568,10 +5568,17 @@ SVGPathApply=function(path,CoordinatesF){
 ViewboxCoordinates=function(viewBox){
 	if(!viewBox)
 		return [0,0,1,1];
-	return viewBox.split(new RegExp(SVGSpacePattern,"g")).map(Number);
+	if(IsArray(viewBox))
+		return viewBox;
+	return viewBox.replace(/(\s+$)|(^\s+)/g,"").split(new RegExp(SVGSpacePattern,"g")).map(Number);
 }
 
-FlipN=function(x,min,max){
+ViewboxString=function(viewBox){
+	return ViewboxCoordinates(viewBox).join(" ");
+}
+
+
+MirrorXY=function(x,min,max){
 	var xdelta=(max-min)/2;
 	var xcentre=max-xdelta;
 	return -(x-xcentre)+xcentre;
@@ -5586,10 +5593,35 @@ RotateXY=function(x,y,xmin,ymin,xmax,ymax,wise){
 	return [-(y-ycentre)*wise+xcentre,(x-xcentre)*(-wise)+ycentre];
 }
 
+RescaleWidthXYer=function(W){
+	return function(x,y,vbArray){
+		var width=vbArray[2]-vbArray[0];
+		var n=Ceiling(Log(width/W,10));
+		return [Round(x*W/width,n),Round(y*W/width,n)];
+	}
+};
+
+RescaleHeightXYer=function(H){
+	return function(x,y,vbArray){
+		var height=vbArray[3]-vbArray[1];
+		var n=Ceiling(Log(height/H,10));
+		return [Round(x*H/height,n),Round(y*H/height,n)];
+	}
+};
+
+DisplaceXYer=function(dx,dy){
+	return function(x,y,vbArray){
+		return [x+dx,y+dy];
+	}
+};
+
+
 var SVGTransforms={
-	"flip-horizontal":(x,y,vbArray)=>[FlipN(x,vbArray[0],vbArray[2]),y],
-	"flip-vertical":(x,y,vbArray)=>[x,FlipN(y,vbArray[1],vbArray[3])],
-	"flip-both":(x,y,vbArray)=>[FlipN(x,vbArray[0],vbArray[2]),FlipN(y,vbArray[1],vbArray[3])],
+	"rescale-width-20":RescaleWidthXYer(20),
+	"rescale-height-20":RescaleHeightXYer(20),
+	"flip-horizontal":(x,y,vbArray)=>[MirrorXY(x,vbArray[0],vbArray[2]),y],
+	"flip-vertical":(x,y,vbArray)=>[x,MirrorXY(y,vbArray[1],vbArray[3])],
+	"flip-both":(x,y,vbArray)=>[MirrorXY(x,vbArray[0],vbArray[2]),MirrorXY(y,vbArray[1],vbArray[3])],
 	"rotate-90":(x,y,vbArray)=>RotateXY(x,y,vbArray[0],vbArray[1],vbArray[2],vbArray[3],true),
 	"rotate-270":(x,y,vbArray)=>RotateXY(x,y,vbArray[0],vbArray[1],vbArray[2],vbArray[3],false)
 }
@@ -5605,11 +5637,17 @@ SVGPathDirectTransform=function(path,Transform,viewBox){
 	return SVGPathApply(path,SVGCoordinatesF);
 }
 
-SVGPathTransform=function(path,name,viewBox){
-	if(!In(SVGTransforms,name))
-		return path;
+SVGPathTransform=function(path,nameorf,viewBox){
+	if(!IsString(nameorf))
+		var Transform=nameorf;
+	else{
+		if(!In(SVGTransforms,nameorf))
+			return path;
+		
+		var Transform=SVGTransforms[nameorf];
+	}
 
-	return SVGPathDirectTransform(path,SVGTransforms[name],viewBox);
+	return SVGPathDirectTransform(path,Transform,viewBox);
 }
 
 SVGLineChange=function(svgline,F){
