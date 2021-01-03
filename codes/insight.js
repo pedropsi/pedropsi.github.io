@@ -29,6 +29,7 @@ DataUnit=function(datatype){
 	var data=DataUnit("Analytics");
 	
 	var referrer=document.referrer;
+	var from=PageSearch("from");
 	
 	var source=PageSearch("source");
 		source=source?source:PageFragment();
@@ -40,7 +41,7 @@ DataUnit=function(datatype){
 					window.screen.width,
 					window.screen.colorDepth].join("x"),
 		"agent":window.navigator.userAgent,
-		"from":InnerLinked(referrer)?PageIdentifier(referrer):referrer,
+		"from":from?from:(InnerLinked(referrer)?PageIdentifier(referrer):referrer),
 		"campaign":source?source:"none"
 		});		
 }
