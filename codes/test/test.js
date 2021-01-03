@@ -266,11 +266,11 @@ SaveTest(IsObject,{},true,"object - empty");
 SaveTest(IsObject,"abcd",false,"string");
 
 
-//Apply function to Array or Object
-SaveTest(Apply,[true,Identity],undefined,"boolean");
-SaveTest(Apply,["abcd",Identity],undefined,"string");
-SaveTest(Apply,[["a","b","c","d"],First],"a","array - normal");
-SaveTest(Apply,[{a:"1",b:"2"},Identity],["a","b"],"object - normal");
+//AOApply function to Array or Object
+SaveTest(AOApply,[true,Identity],undefined,"boolean");
+SaveTest(AOApply,["abcd",Identity],undefined,"string");
+SaveTest(AOApply,[["a","b","c","d"],First],"a","array - normal");
+SaveTest(AOApply,[{a:"1",b:"2"},Identity],["a","b"],"object - normal");
 
 
 // Does element exist?

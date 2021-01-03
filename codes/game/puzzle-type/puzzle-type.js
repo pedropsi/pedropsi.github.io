@@ -499,7 +499,7 @@ function InPart(arrayOrObj,n){
 		return false;
 	var m=a=new RegExp("^"+n,"i");
 	function F(ao){return ao.some(function(s){return InString(s,m)})};
-	return Apply(arrayOrObj,F)||false;
+	return AOApply(arrayOrObj,F)||false;
 };
 
 ///////////////////////////////////////////////////////////////////////////////

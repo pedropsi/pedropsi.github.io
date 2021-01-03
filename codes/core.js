@@ -72,6 +72,10 @@ ArgumentExtender=function(F){ // From pairs to infinite number of arguments
 	}
 }
 
+Apply=function(Function,Array){
+	return Function.apply(null, Array);
+}
+
 //Functional Sorting
 
 SingleSorter=function(F){
@@ -421,7 +425,7 @@ EnString=function(a){
 }
 
 //Apply function to Array or Object
-Apply=function(arrayOrObj,F){
+AOApply=function(arrayOrObj,F){
 	if(IsArray(arrayOrObj))
 		return F(arrayOrObj);
 	else if(IsObject(arrayOrObj))
@@ -469,7 +473,7 @@ InArrayOrObj=function(arrayOrObj,n){
 		}
 		return found;	
 	};
-	return Apply(arrayOrObj,F)||false;
+	return AOApply(arrayOrObj,F)||false;
 };
 
 //Update Object Keys
@@ -2310,7 +2314,7 @@ FindFirstMatch=function(selectorArray,elem){
 		return a.find(function(sel){return Match(elem,sel);});
 	};
 
-	var item=Apply(selectorArray,F);
+	var item=AOApply(selectorArray,F);
 	if(IsObject(selectorArray))
 		return selectorArray[item];
 	else 
