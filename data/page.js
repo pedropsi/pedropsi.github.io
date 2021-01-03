@@ -80,7 +80,7 @@ BuildCMSPage=function(){
 PageFeatures=function(){
 	//Redirect
 	if(window.location.href!==top.location.href)
-		returntop.location.href=PageReFragment(JoinPath(v.SITE(),Posfix(PageIdentifier(),".html")),"redirect");
+		return top.location.href=PageReFragment(JoinPath(v.SITE(),Posfix(PageIdentifier(),".html")),"redirect");
 
 	PageFeaturesDOM();
 	if(PageFragment()!=="")
