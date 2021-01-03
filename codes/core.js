@@ -76,6 +76,13 @@ Apply=function(Function,Array){
 	return Function.apply(null, Array);
 }
 
+FunctionJoiner=function(){
+	var Actions=[...arguments];
+	return function(){
+		return Actions.map(Action=>Action(...arguments));
+	}
+}
+
 //Functional Sorting
 
 SingleSorter=function(F){
@@ -401,6 +408,10 @@ IsString=function(s){
 	if(!s)
 		return false;
 	return typeof s==="string";
+}
+
+IsFunction=function(F){
+	return typeof F==="function";
 }
 
 IsNode=function(node){
@@ -746,15 +757,15 @@ BiUnion=function(AO1,AO2){
 Union=ArgumentExtender(BiUnion);
 
 
-JoinSAO=function(SAO1,SAO2){
+BiJoinSAO=function(SAO1,SAO2){
 	if(IsString(SAO1)&&IsString(SAO2))
 		return SAO1+SAO2;
 	else if(IsObject(SAO1)&&IsObject(SAO2))
-		return {...SAO1,...SAO2	};
+		return {...SAO1,...SAO2};
 	else if(IsArray(SAO1)&&IsArray(SAO2))
 		return SAO1.concat(SAO2);
 	else
-		console.log("error in JoinSAO", SAO1,SAO2);
+		console.log("error in JoinSAO",SAO1,SAO2);
 }
 
 BiJoin=function(AO1,AO2){
@@ -762,10 +773,17 @@ BiJoin=function(AO1,AO2){
 		return AO1;
 	if(!AO1)
 		return AO2;
-	return JoinSAO(AO1,AO2);
+	return BiJoinSAO(AO1,AO2);
 }
 
-Join=ArgumentExtender(BiJoin);
+JoinSAO=ArgumentExtender(BiJoin);
+
+Join=function(a){
+	if(IsFunction(a))
+		return FunctionJoiner(...arguments);
+	else
+		return JoinSAO(...arguments);
+}
 
 //Permutations of a set (enforces uniqueness or sort)
 // Permutations=function(array){
