@@ -68,7 +68,7 @@ HEAD_THEME					:	()=>	`<meta name="theme-color" content="${v.THEMECOLOUR()}">`,
 
 TITLE						:	()=>	Capitalise(PageIdentifier().replace("-"," ")),
 LINK						:	()=>	PageIdentifier(),
-HEAD_DATA_GRAPH				:	()=>	`${v.HEAD_TITLE()}${v.HEAD_DESCRIPTION()}${v.HEAD_IMAGE()}${v.HEAD_LINK()}${v.HEAD_TYPE()}${v.HEAD_COPYRIGHT()}${v.HEAD_SITENAME()}${v.HEAD_OPENSEARCH()}`,
+HEAD_DATA_GRAPH				:	()=>	`${v.HEAD_TITLE()}${v.HEAD_DESCRIPTION()}${v.HEAD_IMAGE()}${v.HEAD_LINK()}${v.HEAD_TYPE()}${v.HEAD_COPYRIGHT()}${v.HEAD_SITENAME()}${v.HEAD_OPENSEARCH()}${v.HEAD_KEYWORDS()}`,
 HEAD_TITLE					:	()=>	`<title>${v.TITLE()}</title><meta property="og:title" content="${v.TITLE()}"/>`,
 HEAD_DESCRIPTION			:	()=>	`<meta name="description" content="${v.DESCRIPTION()}"/><meta property="og:description" content="${v.DESCRIPTION()}"/>`,
 HEAD_TYPE					:	()=>	`<meta property="og:type" content="${v.TYPEGRAPH()}"/><meta property="og:image:alt" content="${v.IMAGE_ALT(v)}"/>`,
@@ -76,6 +76,7 @@ HEAD_LINK					:	()=>	`<meta property="og:url" content="${v.SITE()}/${v.LINK()}.h
 HEAD_IMAGE					:	()=>	`<meta property="og:image" content="${v.SITE()}/${v.IMAGE_512()}"/><meta name="twitter:image" content="${v.SITE()}/${v.IMAGE_512()}">`,
 HEAD_COPYRIGHT				:	()=>	`<meta itemprop="copyrightHolder" content="${v.NAME()}"><meta itemprop="copyrightYear" content="${v.YEAR()}"><meta itemprop="publisher" content="${v.NAME()}">`,
 HEAD_SITENAME				:	()=>	`<meta property="og:site_name" content="${v.TITLE()} | ${v.NAME()}">`,
+HEAD_KEYWORDS				:	()=>	`<meta name="keywords" content="${[v.TITLE()].concat(v.TAGS?v.TAGS():[]).join(", ")}"></meta>`,
 
 HEAD_OPENSEARCH				:	()=>	(PageIdentifier()!=="puzzlescript-games-database")?"":`<link href="/puzzlescript-games-database-search.xml" rel="search" title="Puzzlescript Games Database search" type="application/opensearchdescription+xml">`,
 
