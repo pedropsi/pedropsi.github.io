@@ -1116,12 +1116,13 @@ UniformString=function(string){
 LowerSimpleString=function(string){
 	return SafeString(UnWhitespace(string).toLowerCase());
 }
-LowerSpacedString=function(string){
-	return SpacedString(string.toLowerCase().replace(new RegExp("["+EscapeTokens(Tokens())+"]+","g")," "));
-}
 
 SpacedString=function(string){
-	return string.replace(/[\n\s\t]+/g," ")
+	return string.replace(/[\n\s\t]+/g," ");
+}
+
+LowerSpacedString=function(string){
+	return SpacedString(string.toLowerCase().replace(new RegExp("["+EscapeTokens(Tokens())+"]+","g")," "));
 }
 
 // Capitalise
@@ -1199,18 +1200,6 @@ EscapeTokens=function(tokenString){
 // UnBeforfix	# 		     d
 
 
-// UnOncePrefix=function(word,prefix){
-// 	if(!prefix)
-// 		return word;
-// 	var prefixFind=new RegExp("^"+EscapeTokens(prefix));
-// 	return word.replace(prefixFind,"");
-// }
-// UnOncePosfix=function(word,suffix){ //suffix
-// 	if(!suffix)
-// 		return word;
-// 	var suffixFind=new RegExp(EscapeTokens(suffix)+"$");
-// 	return word.replace(suffixFind,"");
-// }
 
 UnPrefix=function(word,prefix){
 	if(!word)
@@ -1350,18 +1339,6 @@ Underfix=function(word,prefix){
 	return UnPosfix(word.replace(UnUnderfix(word,prefix),""),prefix);
 }
 
-/* redundant
-UnAfterfix=function(word,posfix){
-	if(!word)
-		var word="";
-	if(!posfix)
-		return word;
-	if(IsArray(posfix))
-		return Fold(UnOnceAfterfix,word,posfix);
-	else
-		return UnOnceAfterfix(word,posfix);
-}
-*/
 
 // Padding
 PadLR=function(txt,symbol,n){
