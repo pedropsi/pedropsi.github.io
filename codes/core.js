@@ -104,25 +104,25 @@ Sorter=function(...functions){
 	}
 }
 
-function SortObjectKeys(Obj,...Sorters){
+SortObjectKeys=function(Obj,...Sorters){
 	var sortedkeys=Sorter(...Sorters)(Keys(Obj));
 	var o={};
 		sortedkeys.map(k=>o[k]=Obj[k]);
 		return o;
 }
 
-function SortObjectValues(Obj,...Sorters){
+SortObjectValues=function(Obj,...Sorters){
 	var sortedkeys=Sorter(...Sorters)(Values(Obj));
 	var o={};
 		sortedkeys.map(k=>o[k]=Obj[k]);
 		return o;
 }
 
-function SortArray(v,...Sorters){
+SortArray=function(v,...Sorters){
 	return Sorter(...Sorters)(v);
 }
 
-function Sort(SAO,...Sorters){
+Sort=function(SAO,...Sorters){
 	if(IsArray(SAO))
 		return SortArray(SAO,...Sorters);
 	if(IsObject(SAO))
