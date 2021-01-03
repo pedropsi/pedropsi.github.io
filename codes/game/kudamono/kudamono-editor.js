@@ -81,13 +81,15 @@ DrawDirectFruit=function(Opts){
 	DrawSVG(Opts);
 }
 
-DrawFruit=function(type,px,py){
+DrawFruit=function(type,px,py,state){
+	if(px<0||px>state.W||py<0||py>state.H)
+		return;
 	var Opts=FruitIcons[type];
-		Opts.scale=STATE.grid.fruitScale;
+		Opts.scale=state.grid.fruitScale;
 	DrawDirectFruit({
 		...Opts,
-		dx:px*(STATE.grid.width-2*STATE.grid.border)/STATE.W+STATE.grid.border-STATE.grid.fruitDx,
-		dy:py*(STATE.grid.height-2*STATE.grid.border)/STATE.H+STATE.grid.border-STATE.grid.fruitDy
+		dx:px*(state.grid.width-2*state.grid.border)/state.W+state.grid.border-state.grid.fruitDx,
+		dy:py*(state.grid.height-2*state.grid.border)/state.H+state.grid.border-state.grid.fruitDy
 	})
 }
 
@@ -95,7 +97,7 @@ DrawLevel=function(state){
 	var types=Keys(state.level);
 	types.map(function(type){
 		var coordinates=state.level[type];
-		coordinates.map(xy=>DrawFruit(type,xy[0],xy[1]))
+		coordinates.map(xy=>DrawFruit(type,xy[0],xy[1],state))
 	});
 }
 
@@ -393,14 +395,14 @@ var STATE={
 		colour:"gray"		//current line colour (defaults to gray)
 	},
 	grid:{
-		colour:"#BBBBBB",
+		colour:"#DDDDDD",
 		thickness:3,
-		dashing:[12,12],
+		dashing:[10,10],
 		background:"#FFFFFF",
 		width:1200,
 		height:1200,
-		border:100,
-		fruitScale:120,
+		border:200,
+		fruitScale:100,
 		fruitDx:30,
 		fruitDy:50,
 	},	
@@ -432,32 +434,6 @@ var STATE={
 	}
 }
 
-function InitialiseState(state){
-	// var state=state;
-	// var CWIDTH=state.grid.width;
-	// var CHEIGHT=state.grid.height;
-	// var W=state.W;
-	// var H=state.H;
-	// var D=state.D;
-	// var P=state.P;
-
-	// state.LW=Max(1,Floor((CWIDTH/W/100*CHEIGHT/H/100)**0.5));
-	// state.starsize=Min(CWIDTH/W/D/4,CHEIGHT/H/D/4);
-	// state.polygons=BWPolygons(W,H,D,P,CWIDTH,CHEIGHT);
-	// Keys(state.polygons).map(k=>state.colours[k]=state.colour);
-
-	// var gra=BWState(W,H,D,P);
-	// state={...gra,...state};
-	// state= FinaliseState(state);
-	return state
-}
-
-function FinaliseState(state){
-	// state.Regions=function(){return ColoursRegions(STATE.colours)};
-	return state;
-}
-
-STATE=InitialiseState(STATE);
 
 ///////////////////////////////////////////////////////////////////////////////
 //Validator
@@ -643,8 +619,8 @@ function DrawState(){
 	var x1=STATE.grid.width-STATE.grid.border;
 	var y1=STATE.grid.height-STATE.grid.border;
 	var gridOpts={
-		rows:STATE.W,
-		cols:STATE.H,
+		rows:STATE.H,
+		cols:STATE.W,
 		strokeColor:STATE.grid.colour,
 		dash:STATE.grid.dashing,
 		lineWidth:STATE.grid.thickness,
@@ -655,9 +631,16 @@ function DrawState(){
 	}
 	DrawRectangles({
 		fillColor:STATE.grid.background,
-	},[[x0,y0,x1,y1]])
+	},[[x0,y0,x1-STATE.grid.border,y1-STATE.grid.border]])
+
 	DrawGrid({...gridOpts,vertical:true});
 	DrawGrid({...gridOpts,horizontal:true});
+
+	DrawGrid({...gridOpts,x0:x1,rows:1,vertical:true,dash:[1,1]});
+	DrawGrid({...gridOpts,y0:y1,cols:1,horizontal:true,dash:[1,1]});
+	DrawGrid({...gridOpts,x1:x0,rows:1,vertical:true,dash:[1,1]});
+	DrawGrid({...gridOpts,y1:y0,cols:1,horizontal:true,dash:[1,1]});
+
 	DrawLevel(STATE);
 }
 
@@ -869,6 +852,7 @@ PathGrower=function(dx,dy){
 }
 
 function DragActionStarter(x,y){
+	console.log(x,y);
 	//return RegionModeActive()?AddRegionCells(x,y):AddStarCells(x,y);
 }
 function DragActionAltStarter(x,y){
@@ -933,7 +917,7 @@ setTimeout(function(){
 		STATE=SerialState(PageSearchObject(),STATE);
 	}
 	DrawState();
-},100)
+},250)
 
 
 function CopyState(state){
