@@ -77,10 +77,16 @@ BuildCMSPage=function(){
 
 }
 
+RedirectSelf=function(){
+	return top.location.href=PageReFragment(JoinPath(v.SITE(),Posfix(PageIdentifier(),".html")),"redirect");
+}
+
 PageFeatures=function(){
 	//Redirect
-	if(window.location.href!==top.location.href)
-		return top.location.href=PageReFragment(JoinPath(v.SITE(),Posfix(PageIdentifier(),".html")),"redirect");
+	try{
+		if(window.location.href!==top.location.href)
+			return RedirectSelf()
+	}catch(e){return RedirectSelf()}
 
 	PageFeaturesDOM();
 	if(PageFragment()!=="")
