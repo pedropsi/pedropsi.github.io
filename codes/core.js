@@ -204,6 +204,21 @@ Min=function(){
 	return Math.min(...args);
 }
 
+BiPlus=function(a,b){
+	return (a||0)+(b||0);
+}
+BiTimes=function(a,b){
+	if(typeof a==="undefined")
+		return 1;
+	if(typeof b==="undefined")
+		return a;
+	return a*b;
+}
+
+Plus=ArgumentExtender(BiPlus);
+Times=ArgumentExtender(BiTimes);
+
+
 
 Floor=Math.floor;
 Ceiling=Math.ceil;
