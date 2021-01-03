@@ -836,12 +836,27 @@ Substrings=function(string){
 
 //Gather Objects
 
-Gather=function(Obj,Equaliser){
+GatherArray=function(Arr,Equaliser){
+	var Equaliser=Equaliser||Identity;
+	var uniquekeys=Unique(Arr.map(Equaliser));
+	var o=[];
+		uniquekeys.map(k=>(o.push(Arr.filter(v=>(Equaliser(v)===k)))));
+	return o;
+}
+
+GatherObject=function(Obj,Equaliser){
 	var Equaliser=Equaliser||Identity;
 	var uniquekeys=Unique(Values(Obj).map(Equaliser).map(String));
 	var o={};
 		uniquekeys.map(k=>(o[k]=FilterObject(Obj,v=>(String(Equaliser(v))===k))));
 	return o;
+}
+
+Gather=function(AO,Equaliser){
+	if(IsObject(AO))
+		return GatherObject(AO,Equaliser);
+	else
+		return GatherArray(AO,Equaliser);
 }
 
 
