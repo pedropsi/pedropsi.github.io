@@ -35,7 +35,6 @@ CommentObject=function(dataline,dataarray){
 	else
 		Obj.title="Guestbook";
 
-	console.log(Obj);
 	return Obj;
 };
 

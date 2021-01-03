@@ -585,17 +585,11 @@ InLazyString=function(string,n){ //Lazy matching, 1 error
 	return matchers.some(m=>string.replace(m,"")!==string);
 }
 
-InSingle=function(SAO,n){
+In=function(SAO,n){
 	if(typeof SAO==="string")
 		return InString(SAO,n);
 	else
 		return InArrayOrObj(SAO,n);
-}
-
-In=function(SAO,n){
-	if(IsArray(n))
-		return n.map(m=>In(SAO,m)).some(Identity);
-	return InSingle(SAO,n);
 }
 
 ContainsF=function(n){
@@ -702,7 +696,7 @@ ArrayComplement=function(arrayInclude,arrayExclude){
 	var value;
 	for(var i=0;i<arrayInclude.length;i++){
 		value=arrayInclude[i];
-		if(!InSingle(arrayExclude,value)&&!InSingle(unique,value))
+		if(!In(arrayExclude,value)&&!In(unique,value))
 			unique.push(value);
 	}
 	return unique.sort();
@@ -735,7 +729,7 @@ ArrayIntersection=function(array1,array2){
 	var value;
 	for(var i=0;i<array1.length;i++){
 		value=array1[i];
-		if(InSingle(array2,value)&&!InSingle(unique,value))
+		if(In(array2,value)&&!In(unique,value))
 			unique.push(value);
 	}
 	return unique.sort();

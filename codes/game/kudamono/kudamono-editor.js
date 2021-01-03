@@ -874,7 +874,7 @@ OvertoggleFruit=function(x,y,state){
 		oldfruit=First(oldfruit);
 	else
 		oldfruit=false;
-	
+	console.log(oldfruit);
 	
 	if(overfruit&&oldfruit)
 		state.level[oldfruit]=state.level[oldfruit].filter(cr=>!Equal(cr,colrow));
