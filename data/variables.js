@@ -74,7 +74,7 @@ HEAD_DESCRIPTION			:	()=>	`<meta name="description" content="${v.DESCRIPTION()}"
 HEAD_TYPE					:	()=>	`<meta property="og:type" content="${v.TYPEGRAPH()}"/><meta property="og:image:alt" content="${v.IMAGE_ALT(v)}"/>`,
 HEAD_LINK					:	()=>	`<meta property="og:url" content="${v.SITE()}/${v.LINK()}.html"/>`,
 HEAD_IMAGE					:	()=>	`<meta property="og:image" content="${v.SITE()}/${v.IMAGE_512()}"/><meta name="twitter:image" content="${v.SITE()}/${v.IMAGE_512()}">`,
-HEAD_COPYRIGHT				:	()=>	`<meta itemprop="copyrightHolder" content="${v.NAME()}"><meta itemprop="copyrightYear" content="${v.YEAR()}"><meta itemprop="publisher" content="${v.NAME()}">`,
+HEAD_COPYRIGHT				:	()=>	`<meta itemprop="copyrightHolder" content="${v.NAME()}"><meta itemprop="copyrightYear" content="${v.YEAR()}"><meta itemprop="publisher" content="${v.NAME()}"><meta name="author" content="${v.NAME()}">`,
 HEAD_SITENAME				:	()=>	`<meta property="og:site_name" content="${v.TITLE()} | ${v.NAME()}">`,
 HEAD_KEYWORDS				:	()=>	`<meta name="keywords" content="${[v.TITLE()].concat(v.TAGS?v.TAGS():[]).join(", ")}"></meta>`,
 
