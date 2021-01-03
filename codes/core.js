@@ -11,7 +11,6 @@
 //				 	 
 //  	2) avoid Safari Conditional Hoisting bugs
 //				(modules ask whether a function was defined before, thus not overwriting it)
-
 // Function naming conventions (goal: concise self-documenting code):
 //		- function names are Capitalised (this avoids conflicts with most JS libraries)
 //
