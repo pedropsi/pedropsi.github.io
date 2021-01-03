@@ -369,6 +369,19 @@ Most=function(SAO){
 		return null;
 }
 
+Take=function(Array,n){
+	if(n<0)
+		return Array.slice(n,Array.length);
+	return Array.slice(0,n);
+}
+
+UnTake=function(Array,n){
+	return n<0?Take(Array,Array.length+n):Take(Array,-(Array.length-n));
+`	UnTake([5,6,7,8,9],2)===[7,8,9];
+	UnTake([5,6,7,8,9],-1)===[5,6,7,8];
+`
+}
+
 Insert=function(array,n,p){
 	if(typeof array==="string")
 		return Insert(array.split(""),n,p).join("");
@@ -483,6 +496,11 @@ FlipKeysValues=function(Obj){
 	return O;
 };
 
+ReKeyObject=function(Obj,Transformer){
+	var O={};
+	Keys(Obj).map(k=>O[Transformer(k)]=Obj[k]);
+	return O;
+}
 
 
 // Does element exist?
@@ -1696,6 +1714,11 @@ PageSearch=function(parameter,page){
 	return decodeURI(id.replace(/\&.*/,""));
 }
 
+PageSearchObject=function(page){
+	var searchObj={};
+	UnPrefix(PageSearch(page),"?").split("&").map(parval=>searchObj[UnAfterfix(parval,"=")]=UnBeforfix(parval,"="));
+	return searchObj;
+}
 
 // Safe string loading
 SafeString=function(tex){
