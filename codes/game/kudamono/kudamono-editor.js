@@ -69,7 +69,6 @@ DisplacePath=function(Opts){
 	var dx=Opts.dx||0
 	var dy=Opts.dy||0;
 	var viewBox=ViewboxCoordinates(Opts.viewBox);
-	console.log(viewBox);
 	var Displace=function(x,y){return DisplaceXYer(dx,dy)(x,y)};
 	Opts.path=SVGPathDirectTransform(Opts.path,Displace,viewBox);
 	Opts.viewBox=ViewboxString(Displace(viewBox[0],viewBox[1]).concat(Displace(viewBox[2],viewBox[3])));
@@ -88,14 +87,14 @@ DrawFruit=function(type,px,py){
 	DrawDirectFruit({
 		...Opts,
 		dx:px*(STATE.grid.width-2*STATE.grid.border)/STATE.W+STATE.grid.border-STATE.grid.fruitDx,
-		dy:py*(STATE.grid.height-2*STATE.grid.border)/STATE.W+STATE.grid.border-STATE.grid.fruitDy
+		dy:py*(STATE.grid.height-2*STATE.grid.border)/STATE.H+STATE.grid.border-STATE.grid.fruitDy
 	})
 }
 
-DrawFruits=function(){
-	var types=Keys(STATE.level);
+DrawLevel=function(state){
+	var types=Keys(state.level);
 	types.map(function(type){
-		var coordinates=STATE.level[type];
+		var coordinates=state.level[type];
 		coordinates.map(xy=>DrawFruit(type,xy[0],xy[1]))
 	});
 }
@@ -117,7 +116,7 @@ CoordinateHorizontalDifferences=function(coordinates,W){
 }
 
 DifferencesHorizontalCoordinates=function(differences,W){
-	var accumulated=differences.map((n,i)=>Plus(differences.slice(0,i)));
+	var accumulated=differences.map((n,i)=>Apply(Plus,Take(differences,i+1)));
 	return accumulated.map(a=>[a%W,Floor(a/W)]);
 }
 
@@ -155,9 +154,30 @@ FruitSerialsCoordinates=function(serials,W){
 
 SerialLevel=function(serial,state){
 	var fruitserials=Gather(serial.match(FruitSerialPattern),First);
-	var coordinates=fruitserials.map(fs=>FruitSerialsCoordinates(fs,state.W));
+	var coordinates=fruitserials.map(s=>FruitSerialsCoordinates(s,state.W));
 	return Apply(Join,coordinates);
 }
+
+
+SerialState=function(serialObj,state){
+	var state={...state};
+	var serialObj=ReKeyObject(serialObj,LowerCase);
+		state.W=serialObj.w||serialObj.h;
+		state.H=serialObj.h||serialObj.w;
+		state.level=SerialLevel(serialObj.l,state);
+	return state;
+}
+
+StateSerial=function(state){
+	var Opts={};
+		Opts.W=state.W;
+	if(state.H!==state.W)
+		Opts.H=state.H;
+		Opts.L=StateLevelSerial(state);
+	return ParameterString(Opts);
+}
+
+
 
 
 
@@ -638,6 +658,7 @@ function DrawState(){
 	},[[x0,y0,x1,y1]])
 	DrawGrid({...gridOpts,vertical:true});
 	DrawGrid({...gridOpts,horizontal:true});
+	DrawLevel(STATE);
 }
 
 function LoadState(state){
@@ -908,6 +929,9 @@ var DragActions={
 setTimeout(function(){
 	PreAddElement(`<canvas id="test" oncontextmenu="return false;" width="${STATE.grid.width}" height="${STATE.grid.height}"></div>`,"body");
 	AttendDrag(DragActions,"canvas");
+	if(PageSearch("l")||PageSearch("L")){
+		STATE=SerialState(PageSearchObject(),STATE);
+	}
 	DrawState();
 },100)
 
