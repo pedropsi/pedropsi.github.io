@@ -78,7 +78,7 @@ BuildCMSPage=function(){
 }
 
 RedirectSelf=function(){
-	return top.location.href=PageReFragment(JoinPath(v.SITE(),PageIdentifier()+".html?from="+document.referrer));
+	return top.location.href=PageReFragment(JoinPath(v.SITE(),PageIdentifier()+".html?from="+document.referrer),"redirect");
 }
 
 PageFeatures=function(){
