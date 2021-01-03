@@ -81,8 +81,12 @@ DrawDirectFruit=function(Opts){
 	DrawSVG(Opts);
 }
 
+PositionValid=function(px,py,state){
+	return !(px<0||px>state.W||py<0||py>state.H);
+}
+
 DrawFruit=function(type,px,py,state){
-	if(px<0||px>state.W||py<0||py>state.H)
+	if(!PositionValid(px,py,state))
 		return;
 	var Opts=FruitIcons[type];
 		Opts.scale=state.grid.fruitScale;
@@ -126,12 +130,14 @@ StateLevelSerial=function(state){
 	return Keys(state.level).map(fruit=>FruitSerial(fruit,state)).join("");
 }
 
+
 StateSerial=function(state){
 	var Opts={};
 		Opts.W=state.W;
 	if(state.H!==state.W)
 		Opts.H=state.H;
 		Opts.L=StateLevelSerial(state);
+		// Opts.P=StatePathSerial(state);
 	return ParameterString(Opts);
 }
 
@@ -851,8 +857,39 @@ PathGrower=function(dx,dy){
 	return [x,y];
 }
 
+CoordinatePosition=function(x,y,state){
+	var col=Floor((x-state.grid.border+state.grid.fruitDx)*state.W/(state.grid.width-2*state.grid.border));
+	var row=Floor((y-state.grid.border+state.grid.fruitDy)*state.H/(state.grid.height-2*state.grid.border));
+	return [col,row];
+}
+
+OvertoggleFruit=function(x,y,state){
+	var state={...state};
+	var colrow=CoordinatePosition(x,y,state);
+	if(!PositionValid(colrow[0],colrow[1],state))
+		return;
+	var overfruit=state.mode.symbol;
+	var oldfruit=Keys(state.level).filter(k=>In(state.level[k],colrow));
+	if(oldfruit.length)
+		oldfruit=First(oldfruit);
+	else
+		oldfruit=false;
+	
+	
+	if(overfruit&&oldfruit)
+		state.level[oldfruit]=state.level[oldfruit].filter(cr=>!Equal(cr,colrow));
+
+	if(overfruit!==oldfruit){
+		state.level[overfruit].push(colrow);
+		state.level[overfruit]=state.level[overfruit].sort();
+	}
+	return state;
+}
+
 function DragActionStarter(x,y){
-	console.log(x,y);
+	if(STATE.mode.edit){
+		STATE=OvertoggleFruit(x,y,STATE);
+	}
 	//return RegionModeActive()?AddRegionCells(x,y):AddStarCells(x,y);
 }
 function DragActionAltStarter(x,y){
@@ -862,7 +899,8 @@ function DragActionContinuer(x,y){
 	//return RegionModeActive()?ContinueRegionCells(x,y):ContinueStarCrossCells(x,y);
 }
 function DragActionEnder(x,y){
-	//return ClearSelected(x,y);	
+	//return ClearSelected(x,y);
+	DrawState()	
 }
 
 DecrementCanvasWidth=function(){STATE.W=Max(STATE.W||0-1,3)};
