@@ -270,7 +270,7 @@ PagePost=function(code){
 
 			//Get Middle and trim spaces
 			post=postitems.split(token)[1];
-			post=post.replace(/^\s+/ig,"").replace(/\s+$/ig,"");
+			post=TrimWhitespaceString(post);
 			
 		var evalpost=eval("`"+post+"`");
 

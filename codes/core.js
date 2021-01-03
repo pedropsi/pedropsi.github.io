@@ -1054,6 +1054,10 @@ StringReplace=function(string,rules){
 
 // Unspace
 
+TrimWhitespaceString=function(string){
+	return string.replace(/^\s+/ig,"").replace(/\s+$/ig,"");
+}
+
 UnWhitespace=function(string){
 	return string.replace(/\s*/gi,"");
 	//StringReplace(string,[[/\s/m,""],[/\t/m,""],[/\n/m,""]]);
@@ -1096,7 +1100,11 @@ LowerSimpleString=function(string){
 	return SafeString(UnWhitespace(string).toLowerCase());
 }
 LowerSpacedString=function(string){
-	return string.toLowerCase().replace(new RegExp("["+EscapeTokens(Tokens())+"]+","g")," ").replace(/[\n\s\t]+/g," ");
+	return SpacedString(string.toLowerCase().replace(new RegExp("["+EscapeTokens(Tokens())+"]+","g")," "));
+}
+
+SpacedString=function(string){
+	return string.replace(/[\n\s\t]+/g," ")
 }
 
 // Capitalise
@@ -1384,6 +1392,13 @@ ShortenString=function(string,maxchars){
 		else
 			return string.split("").splice(0,maxchars-3).join("")+"...";
 	}
+}
+
+DescriptionString=function(html,maxchars){
+	var text=StripHTML(html);
+		text=SpacedString(text).replace(/\s(\.\,\!\?)+/,"$1");
+		text=TrimWhitespaceString(text);
+	return ShortenString(text,maxchars);
 }
 
 //Sentence making
@@ -5596,7 +5611,7 @@ ViewboxCoordinates=function(viewBox){
 		return [0,0,1,1];
 	if(IsArray(viewBox))
 		return viewBox;
-	return viewBox.replace(/(\s+$)|(^\s+)/g,"").split(new RegExp(SVGSpacePattern,"g")).map(Number);
+	return TrimWhitespaceString(viewBox).split(new RegExp(SVGSpacePattern,"g")).map(Number);
 }
 
 ViewboxString=function(viewBox){

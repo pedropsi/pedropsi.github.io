@@ -206,10 +206,6 @@ function ParseDenumberLine(hintline){ //Remove numeric indicators, optionally sp
 	return hintline.replace(/^(\d+)(\.\d+)*\s*/,"");
 }
 
-function ParseNoTrailingWhitespace(hintline){ //Remove numeric indicators, optionally split by full stops
-	return hintline.replace(/^\s*/,"").replace(/\s*$/,"");
-}
-
 
 function ParseHintsFile(hintstxt){//ignore most whitespace at junctions
 
@@ -250,19 +246,19 @@ function ParseAssignLevelInfo(hintparagraph){
 	
 	var unclockconditions=titleline.replace(/.*\brequire\:/i,"");
 	if(unclockconditions!==titleline)
-		info["unlock"]=ParseNoTrailingWhitespace(unclockconditions);
+		info["unlock"]=TrimWhitespaceString(unclockconditions);
 	
 	titleline=titleline.replace(/\brequire\:.*/i,""); //remove unlock conditions
 	
 	var section=titleline.replace(/.*\§\s*/g,"");
 	if(section!==titleline)
-		info["section"]=ParseNoTrailingWhitespace(section);
+		info["section"]=TrimWhitespaceString(section);
 
 	titleline=titleline.replace(/\§.*/g,"");//remove section
 
-	var title=ParseNoTrailingWhitespace(titleline);
+	var title=TrimWhitespaceString(titleline);
 		title=ParseDenumberLine(title);
-		title=ParseNoTrailingWhitespace(title);
+		title=TrimWhitespaceString(title);
 	if(title)
 		info["title"]=title;
 

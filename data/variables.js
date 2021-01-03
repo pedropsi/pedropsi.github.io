@@ -220,11 +220,9 @@ MANIFEST					:	()=>"",
 PWA_MANIFEST				:	()=>	`<link rel="manifest" id="manifest" href='data:application/manifest+json,${v.PWA_MANIFEST_CONTENT()}'/>`,
 PWA_MANIFEST_CONTENT		:	()=>	`{${v.PWA_NAME()},${v.PWA_DISPLAY()},${v.PWA_ICONS()},${v.PWA_DESC()},${v.PWA_LANG()},${v.PWA_SCOPE()},${v.PWA_WORKER()}}`,
 
-DESCRIPTION					:	()=>	v.PARSER_MARKSHORT(v.POST().replace(/\n+/g,"\t")),
-WORD_LIMIT_SHORT			:	()=>300,
-
-PARSER_MARKSHORT			:(txt)=> StripHTML(txt).slice(0,v.WORD_LIMIT_SHORT()),
-PARSER_UNDERSCORE			:(txt)=> StripHTML(txt).replace(/\s+/ig,"_").replace(/"/ig,""),
+DESCRIPTION200				:	()=>	DescriptionString(v.DESCRIPTION(),200),
+DESCRIPTION					:	()=>	DescriptionString(v.POST(),300),
+PARSER_UNDERSCORE			:	(txt)=> StripHTML(txt).replace(/\s+/ig,"_").replace(/"/ig,""),
 
 ONE_LINER					:	()=>"",
 ONE_LINER_U					:	()=>	v.PARSER_UNDERSCORE(v.ONE_LINER()),
