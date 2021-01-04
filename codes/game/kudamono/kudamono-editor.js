@@ -173,8 +173,8 @@ SerialLevel=function(serial,state){
 SerialState=function(serialObj,state){
 	var state={...state};
 	var serialObj=ReKeyObject(serialObj,LowerCase);
-		state.W=serialObj.w||serialObj.h;
-		state.H=serialObj.h||serialObj.w;
+		state.W=Number(serialObj.w||serialObj.h);
+		state.H=Number(serialObj.h||serialObj.w);
 		state.level=SerialLevel(serialObj.l,state);
 	return state;
 }
@@ -926,9 +926,9 @@ IncrementCanvasHeight=function(){STATE.H=Max(STATE.H+1,3);UpdateState();};
 
 
 var KeyboardActions={
-	"ctrl left":DecrementCanvasWidth,
-	"ctrl up":IncrementCanvasWidth,
-	"ctrl right":IncrementCanvasHeight,
+	"ctrl left":IncrementCanvasWidth,
+	"ctrl up":IncrementCanvasHeight,
+	"ctrl right":DecrementCanvasWidth,
 	"ctrl down":DecrementCanvasHeight,
 	"left":PathGrower(-1,0),
 	"up":PathGrower(0,1),
