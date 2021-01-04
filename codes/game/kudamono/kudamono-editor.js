@@ -662,7 +662,12 @@ function DrawState(){
 
 function UpdateState(){
 	DrawState();
+	NavigateSerial(StateSerial(STATE));
+}
 
+function NavigateSerial(serial){
+	if(history)
+		history.pushState({},"",PageReSearch(PageURL(),serial));
 }
 
 function LoadState(state){

@@ -1811,6 +1811,13 @@ Navigate=function(url,samewindow){
 	}
 }
 
+function NavigateSerial(serial){
+	if(history)
+		history.pushState({},"",PageReSearch(PageURL(),serial));
+	else
+		console.log("cannot navigate to: ",serial);
+}
+
 AClick=function(url,opts){
 	var id=GenerateId();
 	var opts=opts||{};
