@@ -1132,6 +1132,10 @@ LowerSpacedString=function(string){
 	return SpacedString(string.toLowerCase().replace(new RegExp("["+EscapeTokens(Tokens())+"]+","g")," "));
 }
 
+UnquoteString=function(string){
+	return string.replaceAll(/\"/ig,"");
+}
+
 // Capitalise
 LowerCase=function(string){
 	if(!string||!string.toLowerCase)
@@ -1397,7 +1401,8 @@ ShortenString=function(string,maxchars){
 
 DescriptionString=function(html,maxchars){
 	var text=StripHTML(html);
-		text=SpacedString(text).replace(/\s(\.\,\!\?)+/,"$1");
+		text=UnquoteString(text);
+		text=SpacedString(text).replaceAll(/\s([\.\,\!\?])+/ig,"$1");
 		text=TrimWhitespaceString(text);
 	return ShortenString(text,maxchars);
 }
