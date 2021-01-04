@@ -763,12 +763,24 @@ BiUnion=function(AO1,AO2){
 
 Union=ArgumentExtender(BiUnion);
 
+JoinObjects=function(O1,O2){
+	var O={...O1};
+	Keys(O2).map(
+		function(k){
+			if(!O1[k])
+				O[k]=O2[k]
+			else
+				O[k]=Join(O1[k],O2[k])
+		}
+	)
+	return O;
+}
 
 BiJoinSAO=function(SAO1,SAO2){
 	if(IsString(SAO1)&&IsString(SAO2))
 		return SAO1+SAO2;
 	else if(IsObject(SAO1)&&IsObject(SAO2))
-		return {...SAO1,...SAO2};
+		return JoinObjects(SAO1,SAO2);
 	else if(IsArray(SAO1)&&IsArray(SAO2))
 		return SAO1.concat(SAO2);
 	else
@@ -4640,8 +4652,7 @@ LaunchConsoleThanks=function(DP){
 ///////////////////////////////////////////////////////////////////////////////
 //Contextual Shortcuts
 
-ContextualDefaultShortcuts=function(){
-	return{
+DefaultKeybindings={
 	"BODY":{
 		"tab":FocusNext,
 		"shift tab":FocusPrev,
@@ -4671,7 +4682,6 @@ ContextualDefaultShortcuts=function(){
 	".button":{
 		"enter":ClickStay,
 		"space":ClickStay,
-		// "X":ClickStay
 	},
 	"A":{
 		"space":ClickStay
@@ -4686,15 +4696,9 @@ ContextualDefaultShortcuts=function(){
 		"tab":FocusNext,
 		"shift tab":FocusPrev
 	}
-	}
 }
 
-Contextual=function(){
-	if(!Contextual.shortcuts)
-		return Contextual.shortcuts=ContextualDefaultShortcuts();
-	else
-		return Contextual.shortcuts;
-}
+var Keybindings={};
 
 
 //Context finding
@@ -4737,8 +4741,8 @@ ContextBlocker=function(e){
 }
 
 SubContext=function(elem){
-	Contextual();
-	var keyActions=FindFirstMatch(Contextual.shortcuts,elem);
+	var bindings=Join(DefaultKeybindings,Keybindings);
+	var keyActions=FindFirstMatch(bindings,elem);
 	if(keyActions)
 		return ReKeyObject(keyActions,ComboKeystring);
 	else
@@ -4750,20 +4754,17 @@ SubContext=function(elem){
 Keybind=function(keyActions,selector){
 	var selector=selector||"BODY";
 	var keyActions=ReKeyObject(keyActions,ComboKeystring);
-	Contextual();
-	if(!Contextual.shortcuts[selector])
-		Contextual.shortcuts[selector]=keyActions;
+	if(!Keybindings[selector])
+		Keybindings[selector]=keyActions;
 	else
-		Contextual.shortcuts[selector]=FuseObjects(keyActions,ReKeyObject(Contextual.shortcuts[selector],ComboKeystring));
-
-	return Contextual.shortcuts[selector];
+		Keybindings[selector]={...keyActions,...Keybindings[selector]};
+	return Keybindings[selector];
 }
 
 UnKeybind=function(selector){
-	Contextual();
-	if(Contextual.shortcuts[selector])
-		delete Contextual.shortcuts[selector];
-	return Contextual.shortcuts;
+	if(Keybindings[selector])
+		delete Keybindings[selector];
+	return Keybindings;
 }
 
 
@@ -4955,7 +4956,7 @@ ResumeCapturingKeys=function(OnKeyDown){ // TODO improve
 SetDatapackShortcuts=function(DP){
 	return Keybind(DP.shortcutExtras,"#"+DP.qid);
 }
- 
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
