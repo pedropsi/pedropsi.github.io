@@ -4713,7 +4713,7 @@ ElementContext=function(targetSelector){
 	var context=SubContext(e)||{};
 	var subcontext;
 
-	while(e.parentElement&&!ContextBlocker(e)){
+	while(e.parentElement&&!ContextLimited(e)){
 		e=e.parentElement;
 		subcontext=SubContext(e);
 		if(!subcontext)
@@ -4726,16 +4726,16 @@ ElementContext=function(targetSelector){
 	return context;
 }
 
-ContextBlocker=function(e){
+ContextLimited=function(e){
 	return Classed(e,"window")//||InputFocusable(e);
 }
 
 ExcludeContext=function(context,elem){
-	var blocks=Keys(BlockedKeylists).filter(sel=>Match(elem,sel));
-	if(blocks.length){
-		blocks=blocks.map(b=>BlockedKeylists[b].map(ComboKeystring));
-		blocks=Union(...	blocks);
-		blocks.map(b=>delete context[b]);
+	var exclusions=Keys(BlockedKeylists).filter(sel=>Match(elem,sel));
+	if(exclusions.length){
+		exclusions=exclusions.map(b=>BlockedKeylists[b].map(ComboKeystring));
+		exclusions=Union(...exclusions);
+		exclusions.map(b=>delete context[b]);
 	}
 	return context;
 }
