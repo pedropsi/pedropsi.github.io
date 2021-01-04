@@ -612,6 +612,7 @@ function RequestKeyboard(){
 			shortcutExtras:Shortcuts,
 			requireConnection:false,
 			buttonSelector:"KeyboardButton",
+			shortcutTarget:"KeyboardWindow",
 			spotlight:gameSelector,
 			closeonblur:false,
 			layer:-1

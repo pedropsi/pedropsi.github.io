@@ -526,6 +526,7 @@ RequestGameFeedback=function(){
 		shortcutExtras:FuseObjects(ObtainKeyActionsGameBar?ObtainKeyActionsGameBar():{},{"E":CloseFeedback}),
 		thanksmessage:"★ Thank you for your feedback! ★",
 		buttonSelector:"FeedbackButton",
+		shortcutTarget:"FeedbackWindow"
 	};
 	
 	var DFsettingsObj={};

@@ -928,7 +928,7 @@ IncrementCanvasHeight=function(){STATE.H=Max(STATE.H||0+1,3)};
 [	DecrementCanvasWidth,
 	DecrementCanvasHeight,
 	IncrementCanvasWidth,
-	IncrementCanvasHeight].map(F=>F=FunctionJoiner(F,UpdateState));
+	IncrementCanvasHeight].map(F=>F=JoinFunctison(F,UpdateState));
 
 
 var KeyboardActions={

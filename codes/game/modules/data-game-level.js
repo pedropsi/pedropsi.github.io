@@ -325,6 +325,7 @@ function RequestLevelSelector(){
 			shortcutExtras:LevelSelectorShortcuts,
 			requireConnection:false,
 			buttonSelector:"LevelselectorButton",
+			shortcutTarget:"LevelselectorButtonWindow",
 			spotlight:gameSelector
 	});
 }

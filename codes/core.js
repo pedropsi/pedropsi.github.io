@@ -75,7 +75,7 @@ Apply=function(Function,Array){
 	return Function.apply(null, Array);
 }
 
-FunctionJoiner=function(){
+MergeFunction=function(){
 	var Actions=[...arguments];
 	return function(){
 		return Actions.map(Action=>Action(...arguments));
@@ -770,7 +770,7 @@ JoinObjects=function(O1,O2){
 			if(!O1[k])
 				O[k]=O2[k]
 			else
-				O[k]=Join(O1[k],O2[k])
+				O[k]=Join(O1[k],O2[k]) //overwrites if joining impossible
 		}
 	)
 	return O;
@@ -784,7 +784,7 @@ BiJoinSAO=function(SAO1,SAO2){
 	else if(IsArray(SAO1)&&IsArray(SAO2))
 		return SAO1.concat(SAO2);
 	else
-		console.log("error in JoinSAO",SAO1,SAO2);
+		return SAO2; //overwrites if joining impossible
 }
 
 BiJoin=function(AO1,AO2){
@@ -795,14 +795,8 @@ BiJoin=function(AO1,AO2){
 	return BiJoinSAO(AO1,AO2);
 }
 
-JoinSAO=ArgumentExtender(BiJoin);
+Join=ArgumentExtender(BiJoin);
 
-Join=function(a){
-	if(IsFunction(a))
-		return FunctionJoiner(...arguments);
-	else
-		return JoinSAO(...arguments);
-}
 
 //Permutations of a set (enforces uniqueness or sort)
 // Permutations=function(array){
@@ -2362,22 +2356,6 @@ Matcher=function(selector){
 }
 
 
-//Find first Element matching selector
-FindFirstMatch=function(selectorArray,elem){
-	var elem=GetElement(elem);
-
-	function F(a){
-		return a.find(function(sel){return Match(elem,sel);});
-	};
-
-	var item=AOApply(selectorArray,F);
-	if(IsObject(selectorArray))
-		return selectorArray[item];
-	else 
-		return item;
-}
-
-
 //Siblings of any depth
 Siblings=function(thi,depth,maxParent){
 	var depth=depth||1;
@@ -3283,6 +3261,8 @@ RequestDataPack=function(NamedFieldArray,Options){
 			Select(DP.buttonSelector);		//Activate button
 
 			HearElement(DP.qid,function(){
+				if(DP.shortcutTarget)
+					Class(DP.qid,DP.shortcutTarget);
 				FocusInside(DP.qid);											//Focus on first question
 				if(DP.closeonblur){
 					AttendOnce("click",
@@ -4723,15 +4703,16 @@ ElementContext=function(targetSelector){
 		return console.log("no element for context",targetSelector); //Add last context
 	}
 
-	var context=SubContext(e);
+	var context=SubContext(e)||{};
 	var subcontext;
 
 	while(e.parentElement&&!ContextBlocker(e)){
 		e=e.parentElement;
 		subcontext=SubContext(e);
+		console.log(e,subcontext);
 		if(!subcontext)
 			subcontext={};
-		context=FuseObjects(Clone(subcontext),context);
+		context={...subcontext,...context};
 	}
 	return context;
 }
@@ -4742,11 +4723,14 @@ ContextBlocker=function(e){
 
 SubContext=function(elem){
 	var bindings=Join(DefaultKeybindings,Keybindings);
-	var keyActions=FindFirstMatch(bindings,elem);
-	if(keyActions)
-		return ReKeyObject(keyActions,ComboKeystring);
-	else
+	var matches=Keys(bindings).filter(sel=>Match(elem,sel));
+	if(!matches.length)
 		return undefined;
+
+	var keyActions=matches.map(k=>bindings[k]);
+		keyActions=Join(...keyActions);
+
+	return ReKeyObject(keyActions,ComboKeystring);
 }
 
 
@@ -4771,16 +4755,16 @@ UnKeybind=function(selector){
 ///////////////////////////////////////////////////////////////////////////////
 //Keyboard input
 UnCtrlKeyString=function(keystring){
-	return keystring.replace(/co?n?tro?l/i,"").replace(/co?mm?a?n?d/i,"");
+	return keystring.replaceAll(/co?n?tro?l/ig,"").replaceAll(/co?mm?a?n?d/ig,"");
 }
 UnShiftKeyString=function(keystring){
-	return keystring.replace(/sh?i?ft?/i,"");
+	return keystring.replaceAll(/sh?i?ft?/ig,"");
 }
 UnAltKeyString=function(keystring){
-	return keystring.replace(/alt/i,"");
+	return keystring.replaceAll(/alt/ig,"");
 }
 UnEnterKeyString=function(keystring){
-	return keystring.replace(/ente?r/i,"").replace(/re?tu?rn/i,"");
+	return keystring.replaceAll(/ente?r/ig,"").replaceAll(/re?tu?rn/ig,"");
 }
 
 
@@ -4953,7 +4937,11 @@ ResumeCapturingKeys=function(OnKeyDown){ // TODO improve
 
 //Datapack Integration
 SetDatapackShortcuts=function(DP){
-	return Keybind(DP.shortcutExtras,"#"+DP.qid);
+	if(DP.shortcutTarget)
+		var target="."+DP.shortcutTarget;
+	else
+		var target=DP.qid;
+	return Keybind(DP.shortcutExtras,target);
 }
 
 

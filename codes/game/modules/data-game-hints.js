@@ -411,6 +411,7 @@ function RequestHint(){
 		requireConnection:false,
 		shortcutExtras:FuseObjects(ObtainKeyActionsGameBar(),{"H":CloseHint}),
 		buttonSelector:"HintButton",
+		shortcutTarget:"HintWindow",
 		spotlight:gameSelector
 	});
 }
