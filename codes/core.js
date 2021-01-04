@@ -4678,6 +4678,12 @@ DefaultKeybindings={
 	}
 }
 
+var BlockedKeylists={
+	".input":["space"]
+}
+
+BlockedKeylists[".input"]=Join(BlockedKeylists[".input"],AlphanumericCharacters);
+
 var Keybindings={};
 
 
@@ -4698,28 +4704,42 @@ Context=function(targetSelector){
 }
 
 ElementContext=function(targetSelector){
-	var e=GetElement(targetSelector);
-	if(!e){
+	var elem=GetElement(targetSelector);
+	if(!elem){
 		return console.log("no element for context",targetSelector); //Add last context
 	}
 
+	var e=elem;
 	var context=SubContext(e)||{};
 	var subcontext;
 
 	while(e.parentElement&&!ContextBlocker(e)){
 		e=e.parentElement;
 		subcontext=SubContext(e);
-		console.log(e,subcontext);
 		if(!subcontext)
 			subcontext={};
 		context={...subcontext,...context};
 	}
+
+	context=ExcludeContext(context,elem);
+
 	return context;
 }
 
 ContextBlocker=function(e){
-	return InputFocusable(e)||Classed(e,"window");
+	return Classed(e,"window")//||InputFocusable(e);
 }
+
+ExcludeContext=function(context,elem){
+	var blocks=Keys(BlockedKeylists).filter(sel=>Match(elem,sel));
+	if(blocks.length){
+		blocks=blocks.map(b=>BlockedKeylists[b].map(ComboKeystring));
+		blocks=Union(...	blocks);
+		blocks.map(b=>delete context[b]);
+	}
+	return context;
+}
+
 
 SubContext=function(elem){
 	var bindings=Join(DefaultKeybindings,Keybindings);
@@ -4730,7 +4750,9 @@ SubContext=function(elem){
 	var keyActions=matches.map(k=>bindings[k]);
 		keyActions=Join(...keyActions);
 
-	return ReKeyObject(keyActions,ComboKeystring);
+		keyActions=ReKeyObject(keyActions,ComboKeystring);
+		
+	return keyActions;
 }
 
 
