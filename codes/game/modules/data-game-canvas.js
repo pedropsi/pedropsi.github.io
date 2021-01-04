@@ -2,8 +2,12 @@
 // Canvas Drawing
 
 GetContext=function(targetIDsel){
+	return GetContextElement(targetIDsel).getContext("2d");
+}
+
+GetContextElement=function(targetIDsel){
 	var targetIDsel=targetIDsel||"CANVAS";
-	return GetElement(targetIDsel).getContext("2d");
+	return GetElement(targetIDsel);
 }
 
 DrawImage=function(opts){
@@ -180,7 +184,12 @@ DrawSVG=function(opts){
 	ctx.fill(p);
 }
 
-
+//
+UnDraw=function(opts){
+	var opts=opts||{}
+	var canvas=GetContextElement(opts.target);
+	GetContext(opts.target).clearRect(0, 0, canvas.width,canvas.height);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 Shout("data-game-canvas");

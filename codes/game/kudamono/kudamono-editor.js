@@ -118,7 +118,10 @@ FruitSerial=function(fruit,state){
 }
 
 CoordinateHorizontalDifferences=function(coordinates,W){
-	return coordinates.map(xy=>xy[0]+xy[1]*W);
+	var linepositions=coordinates.map(xy=>xy[0]+xy[1]*W);
+		linepositions=Sort(linepositions);
+		linepositions.unshift(0);
+	return Rest(linepositions).map((p,i)=>p-linepositions[i]);
 }
 
 DifferencesHorizontalCoordinates=function(differences,W){
@@ -154,6 +157,7 @@ LetterFruit=function(l){
 FruitSerialsCoordinates=function(serials,W){
 	var fruit=LetterFruit(First(First(serials)));
 	var differences=serials.map(s=>Number(Rest(s)));
+	console.log("diff",differences)	
 	var coordinates=DifferencesHorizontalCoordinates(differences,W);
 	var fsc={};
 		fsc[fruit]=coordinates;
@@ -163,6 +167,7 @@ FruitSerialsCoordinates=function(serials,W){
 SerialLevel=function(serial,state){
 	var fruitserials=Gather(serial.match(FruitSerialPattern),First);
 	var coordinates=fruitserials.map(s=>FruitSerialsCoordinates(s,state.W));
+	console.log(coordinates,"coord")
 	return Apply(Join,coordinates);
 }
 
@@ -619,25 +624,26 @@ var STATE={
 //Interactive UI (for quick iteration)
 
 
-function DrawState(){
-	var x0=STATE.grid.border;
-	var y0=STATE.grid.border;
-	var x1=STATE.grid.width-STATE.grid.border;
-	var y1=STATE.grid.height-STATE.grid.border;
+function DrawStateGrid(state){
+	var x0=state.grid.border;
+	var y0=state.grid.border;
+	var x1=state.grid.width-state.grid.border;
+	var y1=state.grid.height-state.grid.border;
 	var gridOpts={
-		rows:STATE.H,
-		cols:STATE.W,
-		strokeColor:STATE.grid.colour,
-		dash:STATE.grid.dashing,
-		lineWidth:STATE.grid.thickness,
+		rows:state.H,
+		cols:state.W,
+		strokeColor:state.grid.colour,
+		dash:state.grid.dashing,
+		lineWidth:state.grid.thickness,
 		x0:x0,
 		y0:y0,
 		x1:x1,
 		y1:y1
 	}
+
 	DrawRectangles({
-		fillColor:STATE.grid.background,
-	},[[x0,y0,x1-STATE.grid.border,y1-STATE.grid.border]])
+		fillColor:state.grid.background,
+	},[[x0,y0,x1-state.grid.border,y1-state.grid.border]])
 
 	DrawGrid({...gridOpts,vertical:true});
 	DrawGrid({...gridOpts,horizontal:true});
@@ -645,9 +651,18 @@ function DrawState(){
 	DrawGrid({...gridOpts,x0:x1,rows:1,vertical:true,dash:[1,1]});
 	DrawGrid({...gridOpts,y0:y1,cols:1,horizontal:true,dash:[1,1]});
 	DrawGrid({...gridOpts,x1:x0,rows:1,vertical:true,dash:[1,1]});
-	DrawGrid({...gridOpts,y1:y0,cols:1,horizontal:true,dash:[1,1]});
+	DrawGrid({...gridOpts,y1:y0,cols:1,horizontal:true,dash:[1,1]});	
+}
 
+function DrawState(){
+	UnDraw();
+	DrawStateGrid(STATE);
 	DrawLevel(STATE);
+}
+
+function UpdateState(){
+	DrawState();
+
 }
 
 function LoadState(state){
@@ -900,7 +915,7 @@ function DragActionContinuer(x,y){
 }
 function DragActionEnder(x,y){
 	//return ClearSelected(x,y);
-	DrawState()	
+	UpdateState()	
 }
 
 DecrementCanvasWidth=function(){STATE.W=Max(STATE.W||0-1,3)};
@@ -911,7 +926,7 @@ IncrementCanvasHeight=function(){STATE.H=Max(STATE.H||0+1,3)};
 [	DecrementCanvasWidth,
 	DecrementCanvasHeight,
 	IncrementCanvasWidth,
-	IncrementCanvasHeight].map(F=>F=FunctionJoiner(F,DrawState));
+	IncrementCanvasHeight].map(F=>F=FunctionJoiner(F,UpdateState));
 
 
 var KeyboardActions={
@@ -954,7 +969,7 @@ setTimeout(function(){
 	if(PageSearch("l")||PageSearch("L")){
 		STATE=SerialState(PageSearchObject(),STATE);
 	}
-	DrawState();
+	UpdateState();
 },250)
 
 

@@ -4262,7 +4262,6 @@ function AttendDrag(Actions,target){
 		var Executer=XYHandler(Actions.Executer)||Identity;
 		Attend("mousemove",Executer,target);
 		var Ender=function(ev){
-			console.log("ended");
 			XYHandler(Actions.Ender||Identity)(ev);
 			UnAttend("mousemove",target);
 			UnAttend("mouseup",target);
