@@ -157,7 +157,6 @@ LetterFruit=function(l){
 FruitSerialsCoordinates=function(serials,W){
 	var fruit=LetterFruit(First(First(serials)));
 	var differences=serials.map(s=>Number(Rest(s)));
-	console.log("diff",differences)	
 	var coordinates=DifferencesHorizontalCoordinates(differences,W);
 	var fsc={};
 		fsc[fruit]=coordinates;
@@ -167,7 +166,6 @@ FruitSerialsCoordinates=function(serials,W){
 SerialLevel=function(serial,state){
 	var fruitserials=Gather(serial.match(FruitSerialPattern),First);
 	var coordinates=fruitserials.map(s=>FruitSerialsCoordinates(s,state.W));
-	console.log(coordinates,"coord")
 	return Apply(Join,coordinates);
 }
 
@@ -891,12 +889,13 @@ OvertoggleFruit=function(x,y,state){
 		oldfruit=First(oldfruit);
 	else
 		oldfruit=false;
-	console.log(oldfruit);
 	
 	if(overfruit&&oldfruit)
 		state.level[oldfruit]=state.level[oldfruit].filter(cr=>!Equal(cr,colrow));
 
 	if(overfruit!==oldfruit){
+		if(!state.level[overfruit])
+			state.level[overfruit]=[];
 		state.level[overfruit].push(colrow);
 		state.level[overfruit]=state.level[overfruit].sort();
 	}
@@ -920,15 +919,10 @@ function DragActionEnder(x,y){
 	UpdateState()	
 }
 
-DecrementCanvasWidth=function(){STATE.W=Max(STATE.W||0-1,3)};
-DecrementCanvasHeight=function(){STATE.H=Max(STATE.H||0-1,3)};
-IncrementCanvasWidth=function(){STATE.W=Max(STATE.W||0+1,3)};
-IncrementCanvasHeight=function(){STATE.H=Max(STATE.H||0+1,3)};
-
-[	DecrementCanvasWidth,
-	DecrementCanvasHeight,
-	IncrementCanvasWidth,
-	IncrementCanvasHeight].map(F=>F=JoinFunctison(F,UpdateState));
+DecrementCanvasWidth=function(){STATE.W=Max(STATE.W-1,3);UpdateState();};
+DecrementCanvasHeight=function(){STATE.H=Max(STATE.H-1,3);UpdateState();};
+IncrementCanvasWidth=function(){STATE.W=Max(STATE.W+1,3);UpdateState();};
+IncrementCanvasHeight=function(){STATE.H=Max(STATE.H+1,3);UpdateState();};
 
 
 var KeyboardActions={
@@ -942,20 +936,11 @@ var KeyboardActions={
 	"down":PathGrower(0,-1)
 };
 
-ActionSwitcher=function(key,Acter){
-	return ()=>Acter(key);
+FruitSetter=function(fruit){
+	KeyboardActions[FruitIcons[fruit].letter]=function(){STATE.mode.symbol=fruit}
 }
 
-SetFruit=function(letter){
-	var fruits=Keys(FruitIcons).filter(k=>FruitIcons[k].letter===letter);
-	if(fruits.length){
-		STATE.symbol=FruitIcons[First(fruits)].letter;
-		console.log(STATE.symbol);
-	}
-}
-
-Keys(FruitIcons).map(f=>KeyboardActions[f.letter]=ActionSwitcher(f.letter,SetFruit));
-
+Keys(FruitIcons).map(FruitSetter);
 
 
 var DragActions={
@@ -966,12 +951,14 @@ var DragActions={
 }
 
 setTimeout(function(){
-	PreAddElement(`<canvas id="test" oncontextmenu="return false;" width="${STATE.grid.width}" height="${STATE.grid.height}"></div>`,"body");
+	PreAddElement(`<canvas id="kudamono-canvas" oncontextmenu="return false;" width="${STATE.grid.width}" height="${STATE.grid.height}"></div>`,"body");
 	AttendDrag(DragActions,"canvas");
 	if(PageSearch("l")||PageSearch("L")){
 		STATE=SerialState(PageSearchObject(),STATE);
 	}
 	UpdateState();
+	Keybind(KeyboardActions,"kudamono-canvas");
+	ResumeCapturingKeys(CaptureComboKey);
 },250)
 
 

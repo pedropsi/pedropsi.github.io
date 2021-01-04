@@ -118,9 +118,7 @@ PageFeaturesDOM=function(){
 	InlineSVG();
 	//Capture events
 	Listen("mousedown",function(e){FocusElement(e.target)});//Focus clicked items (also to escape focus by clicking in unfocusable parents)
-	//Listen("click",function(e){FocusElement(e.target)});
-	//ResumeCapturingKeys(CaptureComboKey);
-	//PurchasedConfirm();
+
 	ListenOnce('offline',MonitorConnection);
 	
 	AddElement(ScrollUpHTML(),".whiteboard");

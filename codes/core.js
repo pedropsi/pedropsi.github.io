@@ -75,13 +75,6 @@ Apply=function(Function,Array){
 	return Function.apply(null, Array);
 }
 
-MergeFunction=function(){
-	var Actions=[...arguments];
-	return function(){
-		return Actions.map(Action=>Action(...arguments));
-	}
-}
-
 //Functional Sorting
 
 SingleSorter=function(F){
