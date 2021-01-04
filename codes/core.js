@@ -4754,11 +4754,10 @@ SubContext=function(elem){
 Keybind=function(keyActions,selector){
 	var selector=selector||"BODY";
 	var keyActions=ReKeyObject(keyActions,ComboKeystring);
-	if(!Keybindings[selector])
-		Keybindings[selector]=keyActions;
-	else
-		Keybindings[selector]={...keyActions,...Keybindings[selector]};
-	return Keybindings[selector];
+	var bindings={}
+		bindings[selector]=keyActions;
+	return Keybindings=Join(Keybindings,bindings);
+
 }
 
 UnKeybind=function(selector){
