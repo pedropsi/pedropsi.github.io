@@ -297,8 +297,8 @@ SaveTest(ThreadKeysValues,[{a:1,b:2},(a,b)=>a+b],["a1","b2"],"combine keys and v
 
 
 //Update Object Keys
-SaveTest(UpdateKeysObject,[{a:"1",b:"2",c:"3",d:"4"},(a)=>(a==="a"?"e":a)],{b:"2",c:"3",d:"4",e:"1"},"matching key");
-SaveTest(UpdateKeysObject,[{a:"1",b:"2",c:"3",d:"4"},(e)=>(e==="e"?"f":e)],{a:"1",b:"2",c:"3",d:"4"},"non-matching key");
+SaveTest(ReKeyObject,[{a:"1",b:"2",c:"3",d:"4"},(a)=>(a==="a"?"e":a)],{b:"2",c:"3",d:"4",e:"1"},"matching key");
+SaveTest(ReKeyObject,[{a:"1",b:"2",c:"3",d:"4"},(e)=>(e==="e"?"f":e)],{a:"1",b:"2",c:"3",d:"4"},"non-matching key");
 
 SaveTest(InString,["","a"],false,"empty string");
 SaveTest(InString,["abcd","a"],true,"matching");

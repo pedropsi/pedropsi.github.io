@@ -149,12 +149,12 @@ PlayPauseGif=function(){
 		StartGIF.e.click();
 }
 
-// OverwriteShortcuts(
-// 	".gif":{
+// Keybind(
+//		{
 // 		"space":PlayPauseGif,
 // 		"enter":PlayPauseGif,
 // 		// "X":PlayPauseGif
-// 	}
+// 	},".gif"
 // )
 
 

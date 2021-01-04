@@ -478,8 +478,8 @@ if(typeof ObtainKeyActionsGame==="undefined")
 
 //Keybind to game element
 function KeybindShortcuts(){
-	var FullShortcuts=FuseObjects(ObtainKeyActionsGameBar(),ObtainKeyActionsGame());
-	OverwriteShortcuts(ParentSelector(gameSelector),FullShortcuts);
+	var FullShortcuts={...ObtainKeyActionsGameBar(),...ObtainKeyActionsGame()};
+	Keybind(FullShortcuts,ParentSelector(gameSelector));
 }
 
 

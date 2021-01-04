@@ -496,11 +496,12 @@ FlipKeysValues=function(Obj){
 	return O;
 };
 
-ReKeyObject=function(Obj,Transformer){
+ReKeyObject=function(Obj,Modifier){
+	var Modifier=Modifier||Identity;
 	var O={};
-	Keys(Obj).map(k=>O[Transformer(k)]=Obj[k]);
+	Keys(Obj).map(k=>(O[Modifier(k)]=Obj[k]));
 	return O;
-}
+};
 
 
 // Does element exist?
@@ -545,12 +546,7 @@ ThreadKeysValues=function(Obj,KeyValuer){
 	return Keys(Obj).map(k=>KeyValuer(k,Obj[k]));
 }
 
-UpdateKeysObject=function(Obj,KeyModifier){
-	var KeyModifier=KeyModifier||Identity;
-	var Omod={};
-	Keys(Obj).map(k=>(Omod[KeyModifier(k)]=Obj[k]));
-	return Omod;
-};
+
 
 InString=function(string,n){
 	var s=string;
@@ -3813,7 +3809,7 @@ CloseDatapack=function(DP,Callback){
 	if(DP){
 		Deselect(DP.buttonSelector);
 		PulseSelect(DP.qid+" .closer .button");
-		DeleteShortcuts(DP.qid);
+		UnKeybind(DP.qid);
 		DP.closed=true;
 		if(DP.qonclose)
 			DP.qonclose(DP);
@@ -4744,25 +4740,26 @@ SubContext=function(elem){
 	Contextual();
 	var keyActions=FindFirstMatch(Contextual.shortcuts,elem);
 	if(keyActions)
-		return UpdateKeysObject(keyActions,ComboKeystring);
+		return ReKeyObject(keyActions,ComboKeystring);
 	else
 		return undefined;
 }
 
 
 //Add Shortcuts
-OverwriteShortcuts=function(selector,keyActions){
-	var keyActions=UpdateKeysObject(Clone(keyActions),ComboKeystring);
+Keybind=function(keyActions,selector){
+	var selector=selector||"BODY";
+	var keyActions=ReKeyObject(keyActions,ComboKeystring);
 	Contextual();
 	if(!Contextual.shortcuts[selector])
 		Contextual.shortcuts[selector]=keyActions;
 	else
-		Contextual.shortcuts[selector]=FuseObjects(keyActions,UpdateKeysObject(Contextual.shortcuts[selector],ComboKeystring));
+		Contextual.shortcuts[selector]=FuseObjects(keyActions,ReKeyObject(Contextual.shortcuts[selector],ComboKeystring));
 
 	return Contextual.shortcuts[selector];
 }
 
-DeleteShortcuts=function(selector){
+UnKeybind=function(selector){
 	Contextual();
 	if(Contextual.shortcuts[selector])
 		delete Contextual.shortcuts[selector];
@@ -4956,7 +4953,7 @@ ResumeCapturingKeys=function(OnKeyDown){ // TODO improve
 
 //Datapack Integration
 SetDatapackShortcuts=function(DP){
-	return OverwriteShortcuts("#"+DP.qid,DP.shortcutExtras);
+	return Keybind(DP.shortcutExtras,"#"+DP.qid);
 }
  
 
