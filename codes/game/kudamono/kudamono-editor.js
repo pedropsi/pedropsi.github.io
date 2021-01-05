@@ -123,41 +123,23 @@ DrawLevel=function(state){
 
 //Generate Serial
 
-FruitSerial=function(fruit,state){
-	var coordinates=state.level[fruit].sort().filter((xy)=>PositionValid(xy[0],xy[1],STATE));
-	if(!coordinates.length)
-		return "";
-	var differences=CoordinateHorizontalDifferences(coordinates,state.W+1);
-	var letter=FruitIcons[fruit].letter.toLowerCase();
-	return differences.map(d=>letter+d).join("")
+FruitLetter=function(fruit){
+	return FruitIcons[fruit].letter.toLowerCase();
 }
 
-CoordinateHorizontalDifferences=function(coordinates,W){
-	var linepositions=coordinates.map(xy=>xy[0]+xy[1]*W);
-		linepositions=Sort(linepositions);
-		linepositions.unshift(0);
-	return Rest(linepositions).map((p,i)=>p-linepositions[i]);
-}
-
-DifferencesHorizontalCoordinates=function(differences,W){
-	var accumulated=differences.map((n,i)=>Apply(Plus,Take(differences,i+1)));
-	return accumulated.map(a=>[a%W,Floor(a/W)]);
-}
 
 StateLevelSerial=function(state){
-	return Keys(state.level).map(fruit=>FruitSerial(fruit,state)).join("");
+	var fruitsxys=Keys(state.level).map(fruit=>state.level[fruit].map(xy=>[FruitLetter(fruit),xy[0],xy[1]]));
+		fruitsxys=Join(...fruitsxys);
+		fruitsxys=fruitsxys.filter(fxy=>PositionValid(fxy[1],fxy[2],state));
+		fruitsxys=fruitsxys.map(fxy=>[fxy[0],fxy[1]+fxy[2]*(state.W+1)]);
+		fruitsxys=Sort(fruitsxys,Last);
+		fruitsxys=Join([["",0]],fruitsxys);
+		fruitsxys=Rest(fruitsxys).map((p,i)=>p[0]+(p[1]-fruitsxys[i][1]));
+	
+	return fruitsxys.join("");
 }
 
-
-StateSerial=function(state){
-	var Opts={};
-		Opts.W=state.W;
-	if(state.H!==state.W)
-		Opts.H=state.H;
-		Opts.L=StateLevelSerial(state);
-		// Opts.P=StatePathSerial(state);
-	return ParameterString(Opts);
-}
 
 //Read Serial
 
@@ -169,19 +151,18 @@ LetterFruit=function(l){
 		return First(fruits);
 }
 
-FruitSerialsCoordinates=function(serials,W){
-	var fruit=LetterFruit(First(First(serials)));
-	var differences=serials.map(s=>Number(Rest(s)));
-	var coordinates=DifferencesHorizontalCoordinates(differences,W+1);
-	var fsc={};
-		fsc[fruit]=coordinates;
-	return fsc;
-}
+
 
 SerialLevel=function(serial,state){
-	var fruitserials=Gather(serial.match(FruitSerialPattern),First);
-	var coordinates=fruitserials.map(s=>FruitSerialsCoordinates(s,state.W));
-	return Apply(Join,coordinates);
+	var fruitserials=serial.match(FruitSerialPattern);
+	var fruitdiffs=fruitserials.map(s=>[s[0],Number(s[1])]);
+	var differences=fruitdiffs.map(Last);
+	var accumulated=fruitdiffs.map((fd,i)=>[fd[0],Apply(Plus,Take(differences,i+1))]);
+	var W=state.W;
+		accumulated=accumulated.map(fd=>[fd[0],[fd[1]%(W+1),Floor(fd[1]/(W+1))]]);
+	var level={};
+	Keys(FruitIcons).map(fruit=>(level[fruit]=accumulated.filter(a=>a[0]===FruitLetter(fruit)).map(Last)));
+	return level;
 }
 
 
