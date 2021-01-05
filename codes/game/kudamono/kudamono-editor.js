@@ -66,20 +66,26 @@ PositionValid=function(px,py,state){
 	return !(px<0||px>state.W||py<0||py>state.H);
 }
 
-DrawFruit=function(type,px,py,state){
-	if(!PositionValid(px,py,state))
+DrawFruit=function(Opts,state){
+	if(!PositionValid(Opts.px,Opts.py,state)||!Opts.type)
 		return;
-
+	var type=Opts.type;
+	var colour=Opts.colour;
 	var Opts={
+		...Opts,
 		...state.grid,
 		...FruitIcons[type],
 		rows:state.H,
-		cols:state.W,
-		px:px,
-		py:py
+		cols:state.W
 	};
-	if(state.monochrome)
-		Opts.colour=state.monochromeColour||"black";
+	if(colour){
+		if(IsFunction(colour))
+			Opts.colour=colour(Opts.colour)
+		else
+			Opts.colour=colour;
+	}
+	if(state.visuals.monochrome)
+		Opts.colour=HEXSaturater(0)(Opts.colour);
 	if(typeof Opts.shiftx==="undefined")
 		Opts.shiftx=0;
 	if(typeof Opts.shifty==="undefined")
@@ -91,22 +97,32 @@ DrawFruit=function(type,px,py,state){
 	DrawSVG(Opts);
 }
 
+DrawFruits=function(type,coordinates,Opts){
+	var Opts=Opts||{};
+	if(!coordinates)
+		var coordinates=STATE.level[type]||[];
+	coordinates.map(xy=>DrawFruit({...Opts,type:type,px:xy[0],py:xy[1]},STATE));
+
+}
+
 DrawLevel=function(state){
 	var types=Keys(state.level);
-	types.map(function(type){
-		var coordinates=state.level[type];
-		coordinates.map(xy=>DrawFruit(type,xy[0],xy[1],state))
-	});
+	types.map(fruit=>DrawFruits(fruit));
+
+	if(!state.mode.clearing)
+		DrawFruits(state.mode.symbol,state.mode.selection,{colour:HEXSaturater(1)});
+	else
+		DrawFruits(state.mode.symbol,state.mode.selection,{colour:HEXSaturater(0)});
 }
 
 
 //Generate Serial
 
 FruitSerial=function(fruit,state){
-	var coordinates=state.level[fruit].sort();
+	var coordinates=state.level[fruit].sort().filter((xy)=>PositionValid(xy[0],xy[1],STATE));
 	if(!coordinates.length)
 		return "";
-	var differences=CoordinateHorizontalDifferences(coordinates,state.W);
+	var differences=CoordinateHorizontalDifferences(coordinates,state.W+1);
 	var letter=FruitIcons[fruit].letter.toLowerCase();
 	return differences.map(d=>letter+d).join("")
 }
@@ -151,7 +167,7 @@ LetterFruit=function(l){
 FruitSerialsCoordinates=function(serials,W){
 	var fruit=LetterFruit(First(First(serials)));
 	var differences=serials.map(s=>Number(Rest(s)));
-	var coordinates=DifferencesHorizontalCoordinates(differences,W);
+	var coordinates=DifferencesHorizontalCoordinates(differences,W+1);
 	var fsc={};
 		fsc[fruit]=coordinates;
 	return fsc;
@@ -391,8 +407,9 @@ StateSerial=function(state){
 var STATE={
 	//visuals
 	target:"kudamono-canvas",
-	monochrome:false,
-	monochromeColour:"#444444",
+	visuals:{
+		monochrome:false
+	},
 	line:{
 		opacity:0.5,
 		lineWidth:"10px",
@@ -430,10 +447,11 @@ var STATE={
 	//Interaction
 	mode:{
 		edit:true,			//true:adding fruits, false:solving
-		symbol:"cherry",	//current fruit to be added,
+		clearing:false,		//whether clearing fruits, lines, etc...
+		symbol:"cherry",	//current fruit to be added
 		line:false,			//whether adding lines,
 		fruitline:false,	//which fruit the path connects to (defaults to none)
-		path:[[0,0]],			//accumulates grid points for current path (to go back and forth)
+		selection:[],		//current points selected (accumulates)
 		error:false			//whether to display errors
 	}
 }
@@ -617,7 +635,7 @@ var STATE={
 //Interactive UI (for quick iteration)
 
 
-function DrawStateGrid(state){
+DrawStateGrid=function(state){
 	var w=state.grid.width;
 	var h=state.grid.height;
 	var b=state.grid.border;
@@ -635,68 +653,24 @@ function DrawStateGrid(state){
 	DrawSquaresGrid(gridOpts);	
 }
 
-function DrawState(){
+DrawState=function(){
 	UnDraw();
 	DrawStateGrid(STATE);
 	DrawLevel(STATE);
 }
 
-function StateUpdater(opts){
+StateUpdater=function(opts){
 	return function(){
 		UpdateState(opts);
 	}
 }
 
-function UpdateState(opts){
+UpdateState=function(opts){
 	if(opts)
 		Keys(opts).map(k=>STATE[k]=opts[k](STATE[k]));
 	DrawState();
 	NavigateSerial(StateSerial(STATE));
 }
-
-
-
-
-// function PolygonIntersections(x,y){
-// 	return Keys(STATE.polygons).filter(function(k){
-// 		var p=STATE.polygons[k];
-// 		return (x>=p[0])&&(x<=(p[0]+p[2]))&&(y>=p[1])&&(y<=(p[1]+p[3]))
-// 	});
-// }
-
-// function MarkPolygons(cells,opts){
-// 	var opts={
-// 		lineWidth:`${STATE.LW}px`,
-// 		fillColor:"rgba(255,100,100,0.05)",
-// 		strokeColor:"rgba(255,100,100,1)",
-// 		...opts
-// 	};
-// 	DrawAbsRectangles(opts,cells.map(k=>STATE.polygons[k])
-// 	)
-// }
-
-// function MarkStar(cell,opts){
-// 	var opts={
-// 		lineWidth:`${STATE.LW}px`,
-// 		fillColor:"black",
-// 		strokeColor:"transparent",
-// 		star:true,
-// 		n:7,
-// 		size:STATE.starsize,
-// 		...opts,
-// 		...StarXY(cell)
-// 	};
-// 	DrawStar(opts);
-// }
-
-// function UnMarkStar(cell,opts){
-// 	MarkStar(cell,{
-// 		...opts,
-// 		lineWidth:`${2*STATE.LW}px`,
-// 		fillColor:STATE.colours[cell],
-// 		strokeColor:STATE.colours[cell]
-// 	})
-// }
 
 
 // function MarkCross(cell,opts){
@@ -752,111 +726,19 @@ function UpdateState(opts){
 // }
 
 
-// function AddStarCells(x,y){
-// 	var cell=First(PolygonIntersections(x,y));
-// 	if(STATE.lines[cell])
-// 		STATE.starmode=false;
-// 	else
-// 		STATE.starmode=true;
-// 	STATE.fromstar=true;
-// 	ContinueStarCrossCells(x,y);
-// }	
+// PathGrower=function(dx,dy){
+// 	if(!STATE.mode.selection||!STATE.mode.selection.length)
+// 		STATE.mode.selection=[[0,0]];
 
-// function AddCrossCells(x,y){
-// 	var cell=First(PolygonIntersections(x,y));
-// 	if(STATE.crosses[cell])
-// 		STATE.crossmode=false;
-// 	else
-// 		STATE.crossmode=true;
-// 	STATE.fromstar=false;
-// 	ContinueStarCrossCells(x,y);
-// }
+// 	var xy=Last(STATE.mode.selection);
+// 	var x=Max(Min(xy[0]+dx||0,STATE.W),0);
+// 	var y=Max(Min(xy[1]+dy||0,STATE.H),0);
 
-
-// function ContinueStarCrossCells(x,y){
-// 	var cells=Complement(PolygonIntersections(x,y),STATE.selected);
-// 	STATE.selected=STATE.selected.concat(cells);
-// 	UnMarkErrors();
-// 	cells.map(function(cell){
-// 		if(STATE.fromstar&&STATE.starmode){
-// 			if(STATE.crosses[cell]){
-// 				delete STATE.crosses[cell];
-// 				UnMarkCross(cell);
-// 			}
-// 			STATE.lines[cell]=true;
-// 			MarkStar(cell);
-// 		}else if(STATE.fromstar&&!STATE.starmode){
-// 			if(STATE.lines[cell]){
-// 				delete STATE.lines[cell];
-// 				UnMarkStar(cell);
-// 			}
-// 		}
-// 		else if(!STATE.fromstar&&STATE.crossmode){
-// 			if(STATE.lines[cell]){
-// 				delete STATE.lines[cell];
-// 				UnMarkStar(cell);
-// 			}
-// 			STATE.crosses[cell]=true;
-// 			MarkCross(cell);
-// 		}
-// 		else{
-// 			if(STATE.crosses[cell]){
-// 				delete STATE.crosses[cell];
-// 				UnMarkCross(cell);
-// 			}
-// 		}
-// 	})
-// 	MarkErrors();
-// }
-
-
-
-// function AddRegionCells(x,y){
-// 	var colour=First(STATE.colours)||"white";
-// 	while(In(STATE.colours,colour)&&STATE.colours.length<359);
-// 		colour=RandomHuenHEX();
-// 	STATE.colour=colour;
-// 	ContinueRegionCells(x,y);
-// }
-
-// function PickRegionCells(x,y){
-// 	STATE.colour=STATE.colours[First(PolygonIntersections(x,y))];
-// 	ContinueRegionCells(x,y);
-// }
-
-// function ContinueRegionCells(x,y){
-// 	var cells=Complement(PolygonIntersections(x,y),STATE.selected);
-// 	var colour=STATE.colour;
-// 	UnMarkErrors();
-// 	STATE.selected=STATE.selected.concat(cells);
-// 	cells.map(c=>STATE.colours[c]=colour);
-// 	MarkPolygons(cells,{
-// 		strokeColor:HEX(Darken(colour,2)).colour,
-// 		fillColor:colour
-// 	});
-// 	cells.map(
-// 		cell=>STATE.lines[cell]?MarkStar(cell):STATE.crosses[cell]?MarkCross(cell):Identity
-// 	)
-// 	MarkErrors();
-// }
-
-// function ClearSelected(x,y){
-// 	STATE.selected=[];
-// }
-
-PathGrower=function(dx,dy){
-	if(!STATE.mode.path||!STATE.mode.path.length)
-		STATE.mode.path=[[0,0]];
-
-	var xy=Last(STATE.mode.path);
-	var x=Max(Min(xy[0]+dx||0,STATE.W),0);
-	var y=Max(Min(xy[1]+dy||0,STATE.H),0);
-
-	if(xy[0]!==x||xy[1]!==y)
-		STATE.mode.path.push([x,y]);
+// 	if(xy[0]!==x||xy[1]!==y)
+// 		STATE.mode.selection.push([x,y]);
 	
-	return [x,y];
-}
+// 	return [x,y];
+// }
 
 CanvasPosition=function(x,y,state){
 	var extremes=GridExtremes({
@@ -870,45 +752,72 @@ CanvasPosition=function(x,y,state){
 	return [col,row];
 }
 
-OvertoggleFruit=function(x,y,state){
-	var state={...state};
-	var colrow=CanvasPosition(x,y,state);
-	if(!PositionValid(colrow[0],colrow[1],state))
-		return state;
-	var overfruit=state.mode.symbol;
-	var oldfruit=Keys(state.level).filter(k=>In(state.level[k],colrow));
-	if(oldfruit.length)
-		oldfruit=First(oldfruit);
+XYFruit=function(xy,state){
+	var fruits=Keys(state.level).filter(k=>In(state.level[k],xy));
+	if(fruits.length)
+		return First(fruits);
 	else
-		oldfruit=false;
-	
-	if(overfruit&&oldfruit)
-		state.level[oldfruit]=state.level[oldfruit].filter(cr=>!Equal(cr,colrow));
+		return false;
+}
 
-	if(overfruit!==oldfruit){
-		if(!state.level[overfruit])
-			state.level[overfruit]=[];
-		state.level[overfruit].push(colrow);
-		state.level[overfruit]=state.level[overfruit].sort();
-	}
-	
-	return state;
+XYFruitRemove=function(xy){
+	var oldfruit=XYFruit(xy,STATE);
+	if(oldfruit)
+		STATE.level[oldfruit]=STATE.level[oldfruit].filter(cr=>!Equal(cr,xy));
+	return STATE;
+}
+
+XYFruitAdd=function(xy){
+
+	if(!PositionValid(xy[0],xy[1],STATE))
+		return;
+
+	XYFruitRemove(xy);
+
+	var overfruit=STATE.mode.symbol;
+	if(!STATE.level[overfruit])
+		STATE.level[overfruit]=[];
+
+	STATE.level[overfruit].push(xy);
+	STATE.level[overfruit]=STATE.level[overfruit].sort();
 }
 
 function DragActionStarter(x,y){
+	var xy=CanvasPosition(x,y,STATE);
+	STATE.mode.symbol=XYFruit(xy,STATE)||STATE.mode.symbol;
 	if(STATE.mode.edit){
-		STATE=OvertoggleFruit(x,y,STATE);
+		STATE.mode.clearing=!!XYFruit(xy,STATE);
+		STATE.mode.selection=[xy];
+		DrawState();
 	}
-	//return RegionModeActive()?AddRegionCells(x,y):AddStarCells(x,y);
 }
 function DragActionAltStarter(x,y){
 	//return 	RegionModeActive()?PickRegionCells(x,y):AddCrossCells(x,y);
 }
 function DragActionContinuer(x,y){
+	var xy=CanvasPosition(x,y,STATE);
+	if(STATE.mode.edit){
+		if(!STATE.mode.selection)
+			STATE.mode.selection=[];
+		
+		if(!In(STATE.mode.selection,xy)){
+			STATE.mode.selection=Union(STATE.mode.selection,[xy]);
+			DrawState();
+		}
+
+	}
 	//return RegionModeActive()?ContinueRegionCells(x,y):ContinueStarCrossCells(x,y);
 }
 function DragActionEnder(x,y){
-	//return ClearSelected(x,y);
+	var xy=CanvasPosition(x,y,STATE);
+	if(STATE.mode.edit){
+		if(STATE.mode.clearing)
+			STATE.mode.selection.map(XYFruitRemove);
+		else
+			STATE.mode.selection.map(XYFruitAdd);
+
+		STATE.mode.selection=[];
+	}
 	UpdateState()	
 }
 
@@ -937,11 +846,11 @@ var KeyboardActions={
 	"ctrl up":IncrementCanvasHeight,
 	"ctrl right":IncrementCanvasWidth,
 	"ctrl down":DecrementCanvasHeight,
-	"ctrl b":StateUpdater({monochrome:M=>M?false:true}),
-	"left":PathGrower(-1,0),
-	"up":PathGrower(0,1),
-	"right":PathGrower(1,0),
-	"down":PathGrower(0,-1)
+	"ctrl b":function(){STATE.visuals.monochrome=!!!STATE.visuals.monochrome;UpdateState();},
+	// "left":PathGrower(-1,0),
+	// "up":PathGrower(0,1),
+	// "right":PathGrower(1,0),
+	// "down":PathGrower(0,-1)
 };
 
 FruitSetter=function(fruit){
@@ -958,6 +867,12 @@ var DragActions={
 	Ender:DragActionEnder
 }
 
+CanvasResize=function(){
+	GetElement(STATE.target).width=window.innerWidth;
+	GetElement(STATE.target).height=window.innerHeight;
+	DrawState();
+}
+
 setTimeout(function(){
 	PreAddElement(`
 		<canvas 
@@ -967,6 +882,7 @@ setTimeout(function(){
 			height="${window.innerHeight}"
 		></div>`,"body");
 	AttendDrag(DragActions,"canvas");
+	Attend('resize',CanvasResize)
 	if(PageSearch("l")||PageSearch("L")){
 		STATE=SerialState(PageSearchObject(),STATE);
 	}
@@ -975,6 +891,8 @@ setTimeout(function(){
 	ResumeCapturingKeys(CaptureComboKey);
 },500)
 
+var sources=["data-game-colours.js"];
+sources.map(LoaderInFolder("codes/game/modules"));
 
 function CopyState(state){
 	ClipboardCopy(JSON.stringify(state),"State copied!")
