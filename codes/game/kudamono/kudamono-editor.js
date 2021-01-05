@@ -84,8 +84,9 @@ DrawFruit=function(Opts,state){
 		else
 			Opts.colour=colour;
 	}
-	if(state.visuals.monochrome)
+	if(state.visuals.monochrome&&!state.mode.dragging)
 		Opts.colour=HEXSaturater(0)(Opts.colour);
+
 	if(typeof Opts.shiftx==="undefined")
 		Opts.shiftx=0;
 	if(typeof Opts.shifty==="undefined")
@@ -109,10 +110,10 @@ DrawLevel=function(state){
 	var types=Keys(state.level);
 	types.map(fruit=>DrawFruits(fruit));
 
-	if(!state.mode.clearing)
-		DrawFruits(state.mode.symbol,state.mode.selection,{colour:HEXSaturater(1)});
+	if(state.mode.clearing)
+		DrawFruits(state.mode.symbol,state.mode.selection,{colour:HEXLightener(0.9)});
 	else
-		DrawFruits(state.mode.symbol,state.mode.selection,{colour:HEXSaturater(0)});
+		DrawFruits(state.mode.symbol,state.mode.selection,{colour:HEXDarkener(0.8)});
 }
 
 
@@ -447,6 +448,7 @@ var STATE={
 	//Interaction
 	mode:{
 		edit:true,			//true:adding fruits, false:solving
+		dragging:false,		//whether dragging
 		clearing:false,		//whether clearing fruits, lines, etc...
 		symbol:"cherry",	//current fruit to be added
 		line:false,			//whether adding lines,
@@ -785,6 +787,7 @@ XYFruitAdd=function(xy){
 function DragActionStarter(x,y){
 	var xy=CanvasPosition(x,y,STATE);
 	STATE.mode.symbol=XYFruit(xy,STATE)||STATE.mode.symbol;
+	STATE.mode.dragging=true;
 	if(STATE.mode.edit){
 		STATE.mode.clearing=!!XYFruit(xy,STATE);
 		STATE.mode.selection=[xy];
@@ -810,6 +813,7 @@ function DragActionContinuer(x,y){
 }
 function DragActionEnder(x,y){
 	var xy=CanvasPosition(x,y,STATE);
+	STATE.mode.dragging=false;
 	if(STATE.mode.edit){
 		if(STATE.mode.clearing)
 			STATE.mode.selection.map(XYFruitRemove);
