@@ -2,6 +2,10 @@
 //Kudamono Editor (c) Pedro PSI, 2021
 ///////////////////////////////////////////////////////////////////////////////
 
+var sources=["data-game-colours.js","data-game-canvas.js"];
+sources.map(LoaderInFolder("codes/game/modules"));
+
+///////////////////////////////////////////////////////////////////////////////
 FruitIcons={
 	"apple":{
 		letter:"a",
@@ -877,7 +881,7 @@ CanvasResize=function(){
 	DrawState();
 }
 
-setTimeout(function(){
+InitialiseKudamono=function(){
 	PreAddElement(`
 		<canvas 
 			id="${STATE.target}" 
@@ -893,11 +897,12 @@ setTimeout(function(){
 	UpdateState();
 	Keybind(KeyboardActions,STATE.target);
 	ResumeCapturingKeys(CaptureComboKey);
-},500)
+}
 
-var sources=["data-game-colours.js"];
-sources.map(LoaderInFolder("codes/game/modules"));
 
 function CopyState(state){
 	ClipboardCopy(JSON.stringify(state),"State copied!")
 }
+
+if(PageSearch("W")&&PageSearch("L"))
+	setTimeout(InitialiseKudamono,500)
