@@ -11,6 +11,7 @@ FruitIcons={
 		letter:"a",
 		colour:"rgb(153,0,0)",
 		viewBox:"0 0 1691 1192",
+		shifty:0.1,
 		path:"M 482 0 C 453 67 436 174 443 248 L 449 311 L 397 284 C 303 235 168 253 103 324 C 38 394 4 523 13 665 C 20 780 40 856 87 952 C 174 1131 338 1216 445 1138 C 462 1126 467 1126 489 1141 C 530 1168 626 1163 680 1130 C 780 1071 868 952 917 808 C 942 735 945 714 945 592 C 945 472 942 451 922 407 C 898 355 859 308 825 289 C 754 251 631 252 563 292 C 545 302 530 307 530 303 C 530 298 551 282 577 267 C 679 206 800 51 800 -21 L 800 -49 L 768 -32 C 708 -2 632 61 599 108 L 565 154 L 555 80 C 547 19 521 -48 506 -48 C 504 -48 493 -27 482 0 Z",
 	},
 	"pear":{
@@ -82,6 +83,7 @@ DrawFruit=function(Opts,state){
 		rows:state.H,
 		cols:state.W
 	};
+	
 	if(colour){
 		if(IsFunction(colour))
 			Opts.colour=colour(Opts.colour)
@@ -95,24 +97,21 @@ DrawFruit=function(Opts,state){
 		Opts.shiftx=0;
 	if(typeof Opts.shifty==="undefined")
 		Opts.shifty=0;
-	Opts.shiftx+=0.3;
-	Opts.shifty+=0.3;
-
-	Opts=ReKeyObject(Opts,x=>(x==="fruitScale"?"scale":x));
+	Opts.shiftx+=Opts.nudge;
+	Opts.shifty+=Opts.nudge;
+	
 	DrawSVG(Opts);
 }
 
 DrawFruits=function(type,coordinates,Opts){
 	var Opts=Opts||{};
-	if(!coordinates)
-		var coordinates=STATE.level[type]||[];
 	coordinates.map(xy=>DrawFruit({...Opts,type:type,px:xy[0],py:xy[1]},STATE));
 
 }
 
 DrawLevel=function(state){
 	var types=Keys(state.level);
-	types.map(fruit=>DrawFruits(fruit));
+	types.map(fruit=>DrawFruits(fruit,state.level[fruit]));
 
 	if(state.mode.clearing)
 		DrawFruits(state.mode.symbol,state.mode.selection,{colour:HEXLightener(0.9)});
@@ -411,7 +410,8 @@ var STATE={
 		width:1200,
 		height:1200,
 		border:0.5,
-		fruitScale:100
+		scale:0.75,		//fruit scale
+		nudge:0.2		//fruit nudge
 	},	
 
 	//Puzzle
