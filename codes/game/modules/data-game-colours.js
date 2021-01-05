@@ -356,6 +356,7 @@ function HueTo(colour,n){
 	return colour;
 } 
 
+
 //Accept pure numbers or extract parameter from another colour
 function HueNumber(n){
 	if(typeof n!=="number")
@@ -432,6 +433,22 @@ function RandomHuenHEX(base){
 	var base=base||"#FFAAAA";
 	return HEX(Huen(base,RandomChoice(Range(0,360)))).colour;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+//Hex coercer modifiers
+
+function Hexer(Modifier){
+	return function(n){
+		return function(colour){
+			return HEX(Modifier(colour,n)).colour;
+		}
+	} 
+}
+
+var HEXLightener=Hexer(LightenTo);
+var HEXDarkener=Hexer(DarkenTo);
+var HEXSaturater=Hexer(SaturateTo);
+var HEXHuer=Hexer(HueTo);
 
 ////////////////////////////////////////////////////////////////////////////////
 Shout("data-game-colours");
