@@ -2870,6 +2870,7 @@ FragmentAHTML=function(title,ref,attribs){
 	return HeaderAHTML(title,ref,{...attribs,class:"innerlink"}); //self-anchors
 }
 
+
 AnchorHTML=function(content,ref,attribs){
 	var attribs=attribs||{};
 		attribs["href"]=ref;
@@ -2880,6 +2881,11 @@ AnchorHTML=function(content,ref,attribs){
 }
 
 AHTML=function(title,ref,attribs){
+	if(Prefixed(ref,"?")){
+		var ref=PageReSearch(PageURL(),ref);
+		return AnchorHTML(title,ref,{...attribs,class:"innerlink"});
+	}
+
 	if(Prefixed(title,"#"))
 		return FragmentAHTML(title,ref,attribs);
 
