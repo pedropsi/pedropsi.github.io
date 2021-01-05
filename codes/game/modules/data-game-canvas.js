@@ -122,13 +122,18 @@ DrawGrid=function(opts){
 	var y0=opts.y0;
 	var y1=opts.y1;
 
-	DrawSegmentLine({...opts,vertical:true});
-	DrawSegmentLine({...opts,horizontal:true});
+	var s=Power((y1-y0)*(x1-x0)/(opts.rows*opts.cols),0.5)*50;
 
-	DrawLine({...opts,x0:x1,rows:1,dash:[1,1]});
-	DrawLine({...opts,y0:y1,cols:1,dash:[1,1]});
-	DrawLine({...opts,x1:x0,rows:1,dash:[1,1]});
-	DrawLine({...opts,y1:y0,cols:1,dash:[1,1]});	
+	var dash=[2*s,2*s];
+	var lineWidth=s/4;
+	DrawSegmentLine({...opts,vertical:true,dash:dash,lineWidth:lineWidth});
+	DrawSegmentLine({...opts,horizontal:true,dash:dash,lineWidth:lineWidth});
+
+	var frameOpts={...opts,dash:[1,1],lineWidth:lineWidth*2};
+	DrawLine({...frameOpts,x0:x1,rows:1});
+	DrawLine({...frameOpts,y0:y1,cols:1});
+	DrawLine({...frameOpts,x1:x0,rows:1});
+	DrawLine({...frameOpts,y1:y0,cols:1});	
 }
 
 

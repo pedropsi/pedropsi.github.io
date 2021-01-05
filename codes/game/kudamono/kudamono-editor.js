@@ -417,7 +417,7 @@ var STATE={
 	},
 	line:{
 		opacity:0.5,
-		lineWidth:"10px",
+		lineWidth:10,
 		cap:"round",
 		corners:"round",
 		colour:"gray"		//current line colour (defaults to gray)
