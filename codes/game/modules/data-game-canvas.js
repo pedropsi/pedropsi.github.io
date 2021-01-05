@@ -136,6 +136,9 @@ function GridExtremes(opts){
 	var opts=opts||{};
 	var rows=opts.rows;
 	var cols=opts.cols;
+	if(typeof opts.b==="undefined")
+		opts.b=1;
+	var b=opts.b*2;
 
 	if(typeof opts.canvasWidth==="undefined")
 		opts.canvasWidth=GetContextElement(opts.target).width;
@@ -146,7 +149,7 @@ function GridExtremes(opts){
 	var width=opts.canvasWidth;
 	var height=opts.canvasHeight;
 
-	var square=Min(width/cols,height/rows);
+	var square=Min(width/(cols+b),height/(rows+b));
 	var dimin=Min(width,height);
 
 	var unit=square/dimin;
