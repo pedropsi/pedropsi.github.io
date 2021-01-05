@@ -424,12 +424,12 @@ var STATE={
 	},
 	grid:{
 		colour:"#DDDDDD",
-		lineWidth:3,
-		dash:[10,10],
+		lineWidth:2,
+		dash:[6,12],
 		background:"#FFFFFF",
 		width:1200,
 		height:1200,
-		border:200,
+		border:0.5,
 		fruitScale:100
 	},	
 

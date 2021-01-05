@@ -116,7 +116,7 @@ DrawSegmentLine=function(opts){
 		}
 }
 
-function DrawGrid(opts){
+DrawGrid=function(opts){
 	var x0=opts.x0;
 	var x1=opts.x1;
 	var y0=opts.y0;
@@ -136,9 +136,9 @@ function GridExtremes(opts){
 	var opts=opts||{};
 	var rows=opts.rows;
 	var cols=opts.cols;
-	if(typeof opts.b==="undefined")
-		opts.b=1;
-	var b=opts.b*2;
+	if(typeof opts.border==="undefined")
+		opts.border=1;
+	var b=opts.border*2;
 
 	if(typeof opts.canvasWidth==="undefined")
 		opts.canvasWidth=GetContextElement(opts.target).width;
@@ -180,16 +180,14 @@ function GridExtremes(opts){
 	};
 }
 
-function DrawSquaresGrid(opts){
+DrawSquaresGrid=function(opts){
 	var gridOpts={
 		...opts,
 		...GridExtremes(opts)
 	};
 	
 	DrawRectangle(gridOpts);
-	DrawGrid(gridOpts);
-	
-	
+	DrawGrid(gridOpts);	
 }
 
 
