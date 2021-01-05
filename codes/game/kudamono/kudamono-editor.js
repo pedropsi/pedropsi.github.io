@@ -69,6 +69,7 @@ PositionValid=function(px,py,state){
 DrawFruit=function(type,px,py,state){
 	if(!PositionValid(px,py,state))
 		return;
+
 	var Opts={
 		...state.grid,
 		...FruitIcons[type],
@@ -77,6 +78,8 @@ DrawFruit=function(type,px,py,state){
 		px:px,
 		py:py
 	};
+	if(state.monochrome)
+		Opts.colour=state.monochromeColour||"black";
 	if(typeof Opts.shiftx==="undefined")
 		Opts.shiftx=0;
 	if(typeof Opts.shifty==="undefined")
@@ -388,22 +391,24 @@ StateSerial=function(state){
 var STATE={
 	//visuals
 	target:"kudamono-canvas",
+	monochrome:false,
+	monochromeColour:"#444444",
 	line:{
 		opacity:0.5,
-		thickness:"10px",
+		lineWidth:"10px",
 		cap:"round",
 		corners:"round",
 		colour:"gray"		//current line colour (defaults to gray)
 	},
 	grid:{
 		colour:"#DDDDDD",
-		thickness:3,
-		dashing:[10,10],
+		lineWidth:3,
+		dash:[10,10],
 		background:"#FFFFFF",
 		width:1200,
 		height:1200,
 		border:200,
-		fruitScale:100,
+		fruitScale:100
 	},	
 
 	//Puzzle
@@ -622,8 +627,8 @@ function DrawStateGrid(state){
 		rows:state.H,
 		cols:state.W,
 		strokeColor:state.grid.colour,
-		dash:state.grid.dashing,
-		lineWidth:state.grid.thickness,
+		dash:state.grid.dash,
+		lineWidth:state.grid.lineWidth,
 		background:"#FFFFFF"
 	}
 
@@ -932,6 +937,7 @@ var KeyboardActions={
 	"ctrl up":IncrementCanvasHeight,
 	"ctrl right":IncrementCanvasWidth,
 	"ctrl down":DecrementCanvasHeight,
+	"ctrl b":StateUpdater({monochrome:M=>M?false:true}),
 	"left":PathGrower(-1,0),
 	"up":PathGrower(0,1),
 	"right":PathGrower(1,0),

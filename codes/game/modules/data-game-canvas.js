@@ -176,7 +176,7 @@ function GridExtremes(opts){
 		xscale:xscale,
 		yscale:yscale,
 		width:width,
-		height:height,
+		height:height
 	};
 }
 
