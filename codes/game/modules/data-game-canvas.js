@@ -52,23 +52,26 @@ RegularPolygonPoints=function(opts){
 }
 
 DrawLine=function(opts){
+	var e=GetContextElement(opts.target)
+	var W=e.width;
+	var H=e.height;
 	var ctx=opts.ctx||GetContext(opts.target);
+	
 	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
 
-	var size=opts.size?opts.size:100;
-	var lineWidth=opts.lineWidth?opts.lineWidth:size/20;
+	var lineWidth=opts.lineWidth?opts.lineWidth:(2/100);
 
 	var x0=(typeof opts.x0!=="undefined")?opts.x0:0;
-	var x1=(typeof opts.x1!=="undefined")?opts.x1:(x0+100);
+	var x1=(typeof opts.x1!=="undefined")?opts.x1:1;
 	var y0=(typeof opts.y0!=="undefined")?opts.y0:0;
-	var y1=(typeof opts.y1!=="undefined")?opts.y1:(y0+100);
+	var y1=(typeof opts.y1!=="undefined")?opts.y1:1;
 
 	ctx.beginPath();
-	ctx.moveTo(x0,y0);
-	ctx.lineTo(x1,y1);
+	ctx.moveTo(x0*W,y0*H);
+	ctx.lineTo(x1*W,y1*H);
 
 	if(opts.dash)
-		ctx.setLineDash(opts.dash);/*dashes are 5px and spaces are 3px*/
+		ctx.setLineDash(opts.dash);/*px convert to relative*/
 
 	ctx.lineCap=opts.lineCap||"round";
 	ctx.lineWidth=lineWidth;
@@ -78,16 +81,13 @@ DrawLine=function(opts){
 	ctx.stroke();
 }
 
-DrawGrid=function(opts){
+DrawSegmentLine=function(opts){
 	var rows=opts.rows||10;
 	var cols=opts.cols||10;
 	var x0=opts.x0||0;
 	var y0=opts.y0||0;
-	var x1=opts.x1||500;
-	var y1=opts.y1||500;
-
-	var w=x1-x0;
-	var h=y1-y0;
+	var x1=opts.x1||1;
+	var y1=opts.y1||1;
 
 	var dx=1;
 	var dy=1;
@@ -103,22 +103,92 @@ DrawGrid=function(opts){
 		dx=1;dy=0;
 	}
 
-	var spacex=(opts.space||0)*dx;
-	var spacey=(opts.space||0)*dy;
-
 	for(var i=0;i<cols;i++)
 		for(var j=0;j<rows;j++){
 
 			DrawLine({
 				...opts,
-				x0:(x0+spacex/2)+i/cols*w,
-				x1:(x0-spacex/2)+(i+dx)/cols*w,
-				y0:(y0+spacey/2)+j/rows*h,
-				y1:(y0-spacey/2)+(j+dy)/rows*h
+				x0:x0+i/cols*(x1-x0),
+				x1:x0+(i+dx)/cols*(x1-x0),
+				y0:y0+j/rows*(y1-y0),
+				y1:y0+(j+dy)/rows*(y1-y0)
 			})
 		}
-
 }
+
+function DrawGrid(opts){
+	var x0=opts.x0;
+	var x1=opts.x1;
+	var y0=opts.y0;
+	var y1=opts.y1;
+
+	DrawSegmentLine({...opts,vertical:true});
+	DrawSegmentLine({...opts,horizontal:true});
+
+	DrawLine({...opts,x0:x1,rows:1,dash:[1,1]});
+	DrawLine({...opts,y0:y1,cols:1,dash:[1,1]});
+	DrawLine({...opts,x1:x0,rows:1,dash:[1,1]});
+	DrawLine({...opts,y1:y0,cols:1,dash:[1,1]});	
+}
+
+
+function GridExtremes(opts){
+	var opts=opts||{};
+	var rows=opts.rows;
+	var cols=opts.cols;
+
+	if(typeof opts.canvasWidth==="undefined")
+		opts.canvasWidth=GetContextElement(opts.target).width;
+	
+	if(typeof opts.canvasHeight==="undefined")
+		opts.canvasHeight=GetContextElement(opts.target).height;
+	
+	var width=opts.canvasWidth;
+	var height=opts.canvasHeight;
+
+	var square=Min(width/cols,height/rows);
+	var dimin=Min(width,height);
+
+	var unit=square/dimin;
+
+	var xscale=1;
+	var yscale=1;
+	if(dimin!==width)
+		xscale=dimin/width;
+	if(dimin!==height)
+		yscale=dimin/height;
+
+	var	x0=Round(0.5-unit*cols/2*xscale,5);
+	var	y0=Round(0.5-unit*rows/2*yscale,5);
+	var	x1=Round(0.5+unit*cols/2*xscale,5);
+	var	y1=Round(0.5+unit*rows/2*yscale,5);
+
+	return {
+		x0:x0,
+		x1:x1,
+		y0:y0,
+		y1:y1,
+		square:square,
+		unit:unit,
+		xscale:xscale,
+		yscale:yscale,
+		width:width,
+		height:height,
+	};
+}
+
+function DrawSquaresGrid(opts){
+	var gridOpts={
+		...opts,
+		...GridExtremes(opts)
+	};
+	
+	DrawRectangle(gridOpts);
+	DrawGrid(gridOpts);
+	
+	
+}
+
 
 
 DrawShape=function(opts){
@@ -166,7 +236,7 @@ DrawCircle=function(opts){
 	DrawShape(opts);
 }
 
-DrawRectangles=function(opts,coordinates){
+DrawAbsRectangles=function(opts,coordinates){
 	opts.ctx=opts.ctx||GetContext(opts.target);
 	opts.Drawer=function(opts){
 		coordinates.map(abcd=>opts.ctx.rect(abcd[0],abcd[1],abcd[2],abcd[3]));
@@ -174,14 +244,53 @@ DrawRectangles=function(opts,coordinates){
 	DrawShape(opts);
 }
 
+DrawRectangle=function(opts){
+	var e=GetContextElement(opts.target);
+	var w=e.width;
+	var h=e.height;
+	opts.ctx=GetContext(opts.target);
+
+	opts.Drawer=function(opts){
+		opts.ctx.rect(opts.x0*w,opts.y0*h,(opts.x1-opts.x0)*w,(opts.y1-opts.y0)*h);
+	}
+	DrawShape(opts);
+}
+
+
+
+RescalePath=function(opts){
+	var opts={square:1,...opts};
+	var viewBox=ViewboxCoordinates(opts.viewBox);
+	var Rescale=function(x,y){return RescaleWidthXYer(opts.square)(x,y,viewBox)};
+	opts.path=SVGPathDirectTransform(opts.path,Rescale,viewBox);
+	opts.viewBox=ViewboxString(Rescale(viewBox[0],viewBox[1]).concat(Rescale(viewBox[2],viewBox[3])));
+	return opts;
+}
+
+DisplacePath=function(opts){
+	var opts={square:1,shiftx:0,shifty:0,...opts};
+	var dx=(opts.x0+(opts.x1-opts.x0)*(opts.px-opts.shiftx)/opts.cols)*opts.width;
+	var dy=(opts.y0+(opts.y1-opts.y0)*(opts.py-opts.shifty)/opts.rows)*opts.height;
+	var viewBox=ViewboxCoordinates(opts.viewBox);
+	var Displace=function(x,y){return DisplaceXYer(dx,dy)(x,y)};
+	opts.path=SVGPathDirectTransform(opts.path,Displace,viewBox);
+	opts.viewBox=ViewboxString(Displace(viewBox[0],viewBox[1]).concat(Displace(viewBox[2],viewBox[3])));
+	return opts;
+}
+
 DrawSVG=function(opts){
-	ctx=opts.ctx||GetContext(opts.target);
+	opts.ctx=GetContext(opts.target);
 	if(!opts.path)
 		return;
+
+	opts={...opts,...GridExtremes(opts)}	//loads x0,x1,y0,y1
+	var opts=RescalePath(opts);
+		opts=DisplacePath(opts);
+	
 	let p = new Path2D(opts.path);
 	var fillColor=opts.colour?opts.colour:getComputedStyle(document.body)["background-strokeColor"]||"black";
-	ctx.fillStyle=fillColor;
-	ctx.fill(p);
+	opts.ctx.fillStyle=fillColor;
+	opts.ctx.fill(p);
 }
 
 //

@@ -4239,7 +4239,7 @@ function XYHandler(Action){
 		var Yscale=el.height/r.height;
 		var X=(e.clientX-r.left)*Xscale;
 		var Y=(e.clientY-r.top )*Yscale;
-		Action(X,Y);
+		Action(X,Y,r.right-r.left,r.bottom-r.top);
 	}
 }
 

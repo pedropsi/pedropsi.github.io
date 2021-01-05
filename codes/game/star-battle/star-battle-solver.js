@@ -473,7 +473,7 @@ function MarkPolygons(cells,opts){
 		strokeColor:"rgba(255,100,100,1)",
 		...opts
 	};
-	DrawRectangles(opts,cells.map(k=>SBGRAPH.polygons[k])
+	DrawAbsRectangles(opts,cells.map(k=>SBGRAPH.polygons[k])
 	)
 }
 
