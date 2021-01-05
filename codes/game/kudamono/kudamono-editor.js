@@ -854,7 +854,9 @@ var KeyboardActions={
 	"ctrl up":IncrementCanvasHeight,
 	"ctrl right":IncrementCanvasWidth,
 	"ctrl down":DecrementCanvasHeight,
+	
 	"ctrl b":function(){STATE.visuals.monochrome=!!!STATE.visuals.monochrome;UpdateState();},
+	"ctrl s":ExportSerial,
 	// "left":PathGrower(-1,0),
 	// "up":PathGrower(0,1),
 	// "right":PathGrower(1,0),
@@ -900,8 +902,8 @@ InitialiseKudamono=function(){
 }
 
 
-function CopyState(state){
-	ClipboardCopy(JSON.stringify(state),"State copied!")
+function ExportSerial(){
+	ClipboardCopy(PageURL(),"Copied this puzzle's URL to clipboard, for saving!")
 }
 
 if(PageSearch("W")&&PageSearch("L"))
