@@ -267,7 +267,6 @@ DrawRectangle=function(opts){
 RescalePath=function(opts){
 	var opts={square:1,scale:1,...opts};
 	var viewBox=ViewboxCoordinates(opts.viewBox);
-	console.log(opts.square)
 	var Rescale=function(x,y){return RescaleWidthXYer(opts.square*opts.scale)(x,y,viewBox)};
 	opts.path=SVGPathDirectTransform(opts.path,Rescale,viewBox);
 	opts.viewBox=ViewboxString(Rescale(viewBox[0],viewBox[1]).concat(Rescale(viewBox[2],viewBox[3])));
