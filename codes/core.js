@@ -204,8 +204,20 @@ Min=function(){
 }
 
 BiPlus=function(a,b){
-	return (a||0)+(b||0);
+	if(!b)
+		return a||0;
+	if(IsNumber(a)&&IsNumber(b))
+		return a+b;
+	if(IsArray(a)&&IsArray(b))
+		return MapThread(Plus,a,b);
+	else if(IsArray(a))
+		return a.map(n=>Plus(b,n));
+	else{
+		console.log("Plus error",a,b)
+		return 0;
+	}
 }
+
 BiTimes=function(a,b){
 	if(typeof a==="undefined")
 		return 1;
@@ -217,6 +229,42 @@ BiTimes=function(a,b){
 Plus=ArgumentExtender(BiPlus);
 Times=ArgumentExtender(BiTimes);
 
+
+Symmetric=function(a){
+	if(IsNumber(a))
+		return -a;
+	if(IsArray(a))
+		return a.map(Symmetric);
+	else{
+		console.log("error")
+		return a;
+	}
+}
+
+Minus=function(a,b){
+	return Plus(a,Symmetric(b));
+}
+
+Inverse=function(a){
+	if(a===0)
+		return Infinity;
+	if(a===Infinity)
+		return 0;
+	if(IsNumber(a))
+		return 1/a;
+	if(IsArray(a))
+		return a.map(Inverse);
+}
+
+Divide=function(a,b){
+	return Times(a,Inverse(b));
+}
+
+Mean=function(){
+	var args=[...arguments];
+	args=args.map(arr=>IsArray(arr)?Mean(...arr):arr)
+	return Plus(...args)/args.length;
+}
 
 
 Floor=Math.floor;
@@ -275,28 +323,20 @@ VectorOperation=function(vector1,vector2,F){
 	}
 }
 
-VectorPlus=function(vector1,vector2){
-	return VectorOperation(vector1,vector2,function(a,b){return a+b});
-}
-VectorMinus=function(vector1,vector2){
-	return VectorOperation(vector1,vector2,function(a,b){return a-b});
-}
-VectorTimes=function(vector1,vector2){
-	return VectorOperation(vector1,vector2,function(a,b){return a*b});
-}
-VectorDivide=function(vector1,vector2){
-	return VectorOperation(vector1,vector2,function(a,b){return a/b});
-}
-VectorMean=function(vector1,vector2){
-	return VectorOperation(vector1,vector2,function(a,b){return (a+b)/2});
+Vectoriser=function(Operation){
+	return function(vector1,vector2){
+		return VectorOperation(vector1,vector2,Operation);
+	}
 }
 
-VectorMax=function(vector1,vector2){
-	return VectorOperation(vector1,vector2,Max);
-}
-VectorMin=function(vector1,vector2){
-	return VectorOperation(vector1,vector2,Min);
-}
+var VectorPlus=Vectoriser(Plus);
+var VectorMinus=Vectoriser(Minus);
+var VectorTimes=Vectoriser(Times);
+var VectorDivide=Vectoriser(Divide);
+
+var VectorMean=Vectoriser(Mean);
+var VectorMax=Vectoriser(Max);
+var VectorMin=Vectoriser(Min);
 
 
 EuclideanDistance=function(vector1,vector2){
