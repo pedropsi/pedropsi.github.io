@@ -130,15 +130,15 @@ DrawGrid=function(opts){
 	DrawSegmentLine({...opts,horizontal:true,dash:dash,lineWidth:lineWidth});
 
 	var frameOpts={...opts,dash:[1,1],lineWidth:lineWidth*2};
-	DrawLine({...frameOpts,x0:x1,rows:1});
-	DrawLine({...frameOpts,y0:y1,cols:1});
-	DrawLine({...frameOpts,x1:x0,rows:1});
-	DrawLine({...frameOpts,y1:y0,cols:1});	
+	DrawLine({...frameOpts,x0:x1});
+	DrawLine({...frameOpts,y0:y1});
+	DrawLine({...frameOpts,x1:x0});
+	DrawLine({...frameOpts,y1:y0});	
 }
 
 
 function GridExtremes(opts){
-	var opts=opts||{};
+	var opts={...opts};
 	var rows=opts.rows;
 	var cols=opts.cols;
 	if(typeof opts.border==="undefined")
@@ -190,12 +190,28 @@ DrawSquaresGrid=function(opts){
 		...opts,
 		...GridExtremes(opts)
 	};
-	
 	DrawRectangle(gridOpts);
 	DrawGrid(gridOpts);	
 }
 
+DrawGridLine=function(opts){
+	var gridOpts=GridExtremes(opts);
+	var x0=gridOpts.x0;
+	var x1=gridOpts.x1;
+	var y0=gridOpts.y0;
+	var y1=gridOpts.y1;
+	var rows=opts.rows;
+	var cols=opts.cols;
 
+	var newopts={
+		...opts,
+		x0:x0+opts.px0/cols*(x1-x0),
+		y0:y0+opts.py0/rows*(y1-y0),
+		x1:x0+opts.px1/cols*(x1-x0),
+		y1:y0+opts.py1/rows*(y1-y0)
+	}
+	DrawLine(newopts);	
+}
 
 DrawShape=function(opts){
 	var ctx=opts.ctx||GetContext(opts.target);
@@ -210,6 +226,7 @@ DrawShape=function(opts){
 	ctx.beginPath();
 	Drawer(opts);
 	ctx.closePath();
+
 	ctx.fillStyle=fillColor;
 	ctx.fill();
 

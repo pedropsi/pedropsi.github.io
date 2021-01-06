@@ -65,6 +65,42 @@ FruitIcons={
 
 
 
+DrawPath=function(coords,state){
+	var coords=coords.filter(xy=>PositionValid(xy[0],xy[1],state));
+	var fruits=Keys(state.level).filter(fruit=>Intersection(state.level[fruit],coords).length>0);
+	var colour="#CCCCCC";
+	if(fruits.length>1)
+		colour="#000000";
+	else if(fruits.length===1)
+		colour=FruitIcons[First(fruits)].colour;
+
+	var segments=Rest(coords);
+		segments=segments.map((c,i)=>[coords[i],segments[i]]);
+
+	segments.map(abcd=>DrawSegment({
+		px0:abcd[0][0],
+		px1:abcd[1][0],
+		py0:abcd[0][1],
+		py1:abcd[1][1],
+		strokeColor:CompelRGBA(colour,0.5),
+		dash:[1,1],
+		lineWidth:10,
+		cols:state.W,
+		rows:state.H},state))
+}
+
+DrawSegment=function(opts,state){
+	var gridOpts={
+		...state.grid,
+		rows:state.H,
+		cols:state.W
+	}
+	DrawGridLine({
+		...gridOpts,
+		...opts
+	})
+}
+
 
 
 PositionValid=function(px,py,state){
@@ -120,7 +156,7 @@ DrawLevel=function(state){
 }
 
 
-//Generate Serial
+//Serials
 
 FruitLetter=function(fruit){
 	return FruitIcons[fruit].letter.toLowerCase();
@@ -140,8 +176,6 @@ StateLevelSerial=function(state){
 }
 
 
-//Read Serial
-
 FruitSerialPattern=/(\w)(\d+)/g;
 
 LetterFruit=function(l){
@@ -150,20 +184,105 @@ LetterFruit=function(l){
 		return First(fruits);
 }
 
-
+AccumulateTokenCoords=function(tokendiffs,W){
+	var differences=tokendiffs.map(Last);
+	var accumulated=tokendiffs.map((td,i)=>[td[0],Apply(Plus,Take(differences,i+1))]);
+	return accumulated.map(td=>[td[0],[td[1]%(W),Floor(td[1]/(W))]]);
+}
 
 SerialLevel=function(serial,state){
 	var fruitserials=serial.match(FruitSerialPattern);
 	var fruitdiffs=fruitserials.map(s=>[s[0],Number(s[1])]);
-	var differences=fruitdiffs.map(Last);
-	var accumulated=fruitdiffs.map((fd,i)=>[fd[0],Apply(Plus,Take(differences,i+1))]);
-	var W=state.W;
-		accumulated=accumulated.map(fd=>[fd[0],[fd[1]%(W+1),Floor(fd[1]/(W+1))]]);
+	var accumulated=AccumulateTokenCoords(fruitdiffs,state.W+1);
 	var level={};
 	Keys(FruitIcons).map(fruit=>(level[fruit]=accumulated.filter(a=>a[0]===FruitLetter(fruit)).map(Last)));
 	return level;
 }
 
+LineSerialPattern=/\d+\D+/ig;
+
+DirectionsLetter={
+	"LLL":"a",
+	"LLU":"b",
+	"LLD":"c",
+	"LUL":"d",
+	"LUU":"e",
+	"LUR":"f",
+	"LDL":"g",
+	"LDR":"h",
+	"LDD":"i",
+	"ULL":"j",
+	"ULU":"k",
+	"ULD":"l",
+	"UUL":"m",
+	"UUU":"n",
+	"UUR":"o",
+	"URU":"p",
+	"URR":"q",
+	"URD":"r",
+	"RUL":"s",
+	"RUU":"t",
+	"RUR":"u",
+	"RRU":"v",
+	"RRR":"w",
+	"RRD":"x",
+	"RDL":"y",
+	"RDR":"z",
+	"RDD":"A",
+	"DLL":"B",
+	"DLU":"C",
+	"DLD":"E",
+	"DRU":"F",
+	"DRR":"G",
+	"DRD":"H",
+	"DDL":"I",
+	"DDR":"J",
+	"DDD":"K",
+
+	"LL":"M",
+	"LU":"N",
+	"LD":"O",
+	"UL":"P",
+	"UU":"Q",
+	"UR":"S",
+	"RU":"T",
+	"RR":"V",
+	"RD":"W",
+	"DL":"X",
+	"DR":"Y",
+	"DD":"Z",
+
+	"L":"L",
+	"U":"U",
+	"R":"R",
+	"D":"D"
+}
+
+DirectionsCoordinates={
+	"L":[-1,0],
+	"U":[0,-1],
+	"R":[1,0],
+	"D":[0,1]
+}
+
+LetterDirections=FlipKeysValues(DirectionsLetter);
+
+LetterPath=function(letters,startxy){
+	var directions=letters.split("").map(Accesser(LetterDirections)).join("").split("");
+		directions=directions.map(Accesser(DirectionsCoordinates));
+	var coordinates=directions;
+		coordinates=coordinates.map((c,i)=>Apply(VectorPlus,Take(directions,i+1)));
+		coordinates.unshift([0,0]);
+		coordinates=coordinates.map(c=>VectorPlus(c,startxy))
+	return coordinates;
+}
+
+SerialLines=function(serial,state){
+	var lineserials=serial.match(LineSerialPattern);
+	var linediffs=lineserials.map(s=>[First(s.match(/\D+/ig)),Number(First(s.match(/\d+/ig)))]);
+	var accumulated=AccumulateTokenCoords(linediffs,state.W);
+	return accumulated.map(lp=>LetterPath(lp[0],lp[1]));
+}
 
 SerialState=function(serialObj,state){
 	var state={...state};
@@ -184,210 +303,7 @@ StateSerial=function(state){
 }
 
 
-
-
-
-///////////////////////////////////////////////////////////////////////////////
-
-
-// function BWCellId(w,h,d,horizDivided){
-// 	return ""+w+" "+h+" "+d+" "+(HorizontallyDivided(w,h,horizDivided)?"-":"|");
-// }
-
-// function BWCellPolygon(w,h,d,width,height,divisions,horizDivided,cwidth,cheight){
-// 	if(HorizontallyDivided(w,h,horizDivided))
-// 		return [
-// 			w*cwidth/width,
-// 			(h+d/divisions)*cheight/height,
-// 			(1)*cwidth/width,
-// 			(1/divisions)*cheight/height
-// 		].map(n=>Round(n,1));
-// 	else
-// 		return [
-// 			(w+d/divisions)*cwidth/width,
-// 			h*cheight/height,
-// 			(1/divisions)*cwidth/width,
-// 			(1)*cheight/height
-// 		].map(n=>Round(n,1));
-// }
-
-// function BWPolygons(width,height,divisions,horizDivided,cwidth,cheight){
-// 	var polygons={};
-// 	for(var w=0;w<width;w++){
-// 		for(var h=0;h<height;h++){
-// 			for(var d=0;d<divisions;d++){
-// 				polygons[BWCellId(w,h,d,horizDivided)]=BWCellPolygon(w,h,d,width,height,divisions,horizDivided,cwidth,cheight);
-// 			}
-// 		}
-// 	}
-// 	return polygons;
-// }
-
-// function HorizontallyDivided(w,h,horizDivided){
-// 	return horizDivided&&(w+h)%2===1||!horizDivided&&(w+h)%2!==1
-// }
-
-// function BWCellAdjacencies(w,h,d,width,height,divisions,horizDivided){
-// 	var adjacencies=[];
-// 	function AdjPush(ww,hh,dd){
-// 		adjacencies.push(BWCellId(ww,hh,dd,horizDivided));
-// 	}
-// 	if(HorizontallyDivided(w,h,horizDivided)){ //horizontal
-// 		if(h>=1&&d===0){
-// 			//above, prev line
-// 			Range(0,divisions-1).map(di=>AdjPush(w,h-1,di));
-// 			//corners
-// 			if(w>0)
-// 				AdjPush(w-1,h-1,divisions-1);
-// 			if(w<width-1)
-// 				AdjPush(w+1,h-1,divisions-1);
-			
-// 		}
-// 		if(d>=1)//above, within
-// 			AdjPush(w,h,d-1);
-// 		if(h<height-1&&d===divisions-1){
-// 			//below, next line
-// 			Range(0,divisions-1).map(di=>AdjPush(w,h+1,di));
-// 			//corners
-// 			if(w>0)
-// 				AdjPush(w-1,h+1,0);
-// 			if(w<width-1)
-// 				AdjPush(w+1,h+1,0);
-			
-// 		}
-// 		if(d<divisions-1)//below, within
-// 			AdjPush(w,h,d+1);
-
-// 		if(w>=1)//left
-// 			AdjPush(w-1,h,divisions-1);
-// 		if(w<width-1)//right
-// 			AdjPush(w+1,h,0);
-	
-// 	}else{ //vertically divided
-// 		if(w>=1&&d===0){
-// 			//left, prev column
-// 			Range(0,divisions-1).map(di=>AdjPush(w-1,h,di));
-// 			//corners
-// 			if(h>0)
-// 				AdjPush(w-1,h-1,divisions-1);
-// 			if(h<height-1)
-// 				AdjPush(w-1,h+1,divisions-1);
-// 		}
-// 		if(d>=1)//left, within
-// 			AdjPush(w,h,d-1);
-// 		if(w<width-1&&d===divisions-1){
-// 			//right, next column
-// 			Range(0,divisions-1).map(di=>AdjPush(w+1,h,di));
-// 			//corners
-// 			if(h>0)
-// 				AdjPush(w+1,h-1,0);
-// 			if(h<height-1)
-// 				AdjPush(w+1,h+1,0);
-// 		}
-// 		if(d<divisions-1)//right, within
-// 			AdjPush(w,h,d+1);
-
-// 		if(h>=1)//above
-// 			AdjPush(w,h-1,divisions-1);
-// 		if(h<height-1)//below
-// 			AdjPush(w,h+1,0);
-// 	}
-
-// 	return adjacencies;
-// }
-
-// function BWCellVLine(w,h,d,width,height,divisions,horizDivided){
-// 	var line=[];
-// 	function LinePush(ww,hh,dd){
-// 		line.push(BWCellId(ww,hh,dd,horizDivided));
-// 	}
-// 	if(HorizontallyDivided(w,h,horizDivided)){
-// 		// //Vertical line
-// 		// for(var hi=0;hi<height;hi++){
-// 		// 	Range(0,divisions-1).map(di=>LinePush(w,hi,di));
-// 		// }
-// 	}
-// 	else{
-// 		//Vertical line
-// 		for(var hi=0;hi<height;hi++){
-// 			if(!HorizontallyDivided(w,hi,horizDivided))
-// 				LinePush(w,hi,d)
-// 			else
-// 				Range(0,divisions-1).map(di=>LinePush(w,hi,di));
-// 		}
-// 	}
-// 	return line;
-// }
-
-// function BWCellHLine(w,h,d,width,height,divisions,horizDivided){
-// 	var line=[];
-// 	function LinePush(ww,hh,dd){
-// 		line.push(BWCellId(ww,hh,dd,horizDivided));
-// 	}
-// 	if(HorizontallyDivided(w,h,horizDivided)){
-// 		//Horizontal line
-// 		for(var wi=0;wi<width;wi++){
-// 			if(HorizontallyDivided(wi,h,horizDivided))
-// 				LinePush(wi,h,d)
-// 			else
-// 				Range(0,divisions-1).map(di=>LinePush(wi,h,di));
-// 		}
-// 	}
-// 	else{
-// 		// //Horizontal line
-// 		// for(var wi=0;wi<width;wi++){
-// 		// 	Range(0,divisions-1).map(di=>LinePush(wi,h,di));
-// 		// }
-// 	}
-// 	return line;
-// }
-
-// function BWState(width,height,divisions,horizDivided){
-// 	var state={
-// 		geometry:"basket weave",
-// 		Aligners:{
-// 			vlines:BWCellVLine,
-// 			hlines:BWCellHLine,
-// 		},
-// 		Polygoner:BWCellPolygon,
-// 		lines:{},
-// 		adjacencies:{}
-// 	};
-// 	var cell="";
-// 	var horizDivided=horizDivided?1:0;
-// 	var linetypes=Keys(state.Aligners);
-// 		linetypes.map(type=>state.lines[type]={});
-// 	for(var w=0;w<width;w++){
-// 		for(var h=0;h<height;h++){
-// 			for(var d=0;d<divisions;d++){
-// 				cell=BWCellId(w,h,d,horizDivided);
-// 				state.adjacencies[cell]=BWCellAdjacencies(w,h,d,width,height,divisions,horizDivided);
-// 				linetypes.map(function(type){
-// 					if(!Values(state.lines[type]).some(line=>In(line,cell)))
-// 						state.lines[type][cell]=state.Aligners[type](w,h,d,width,height,divisions,horizDivided);
-// 				})
-// 			}
-// 		}
-// 	}
-// 	linetypes.map(function(type){
-// 		var l=state.lines[type];
-// 		var emptylines=Keys(l).filter(k=>l[k].length<1);
-// 		emptylines.map(k=>delete l[k]);
-// 	});
-
-// 	return state;
-// }
-
-
-///////////////////////////////////////////////////////////////////////////////
 //Initialise
-
-// function ColoursRegions(colours){
-// 	var regions={};
-// 	Unique(Values(colours)).map(c=>regions[c]=[]);
-// 	Keys(colours).map(k=>regions[colours[k]].push(k));
-// 	return regions;
-// }
 
 var STATE={
 	//visuals
@@ -395,23 +311,23 @@ var STATE={
 	visuals:{
 		monochrome:false
 	},
-	line:{
+	segment:{
 		opacity:0.5,
 		lineWidth:10,
 		cap:"round",
 		corners:"round",
-		colour:"gray"		//current line colour (defaults to gray)
+		colour:"rgba(155,155,155,0.5)"		//default line colour
 	},
 	grid:{
-		colour:"#DDDDDD",
-		lineWidth:2,
-		dash:[6,12],
-		background:"#FFFFFF",
-		width:1200,
-		height:1200,
-		border:0.5,
-		scale:0.75,		//fruit scale
-		nudge:0.2		//fruit nudge
+		strokeColor:"#BBBBBB",				//grid lines
+		fillColor:"#FFFFFF",				//background
+		lineWidth:2,						//width   of grid lines
+		dash:[6,12],						//dashing of grid lines
+		width:1200,							
+		height:1200,						
+		border:0.5,							//how many squares to add to the border (to each of the shortest sides)
+		scale:0.75,							//fruit scale (how large)
+		nudge:0.2							//fruit nudge (small adjustments to position)
 	},	
 
 	//Puzzle
@@ -623,21 +539,12 @@ var STATE={
 
 
 DrawStateGrid=function(state){
-	var w=state.grid.width;
-	var h=state.grid.height;
-	var b=state.grid.border;
-
 	var gridOpts={
-		border:state.grid.border,
+		...state.grid,
 		rows:state.H,
-		cols:state.W,
-		strokeColor:state.grid.colour,
-		dash:state.grid.dash,
-		lineWidth:state.grid.lineWidth,
-		background:"#FFFFFF"
+		cols:state.W
 	}
-
-	DrawSquaresGrid(gridOpts);	
+	DrawSquaresGrid(gridOpts);
 }
 
 DrawState=function(){
@@ -816,10 +723,10 @@ TransformLevel=function(level,CoordinateTransform){
 	return newlevel;
 };
 
-DecrementCanvasWidth	=StateUpdater({W:W=>Max(W-1,3)});
-DecrementCanvasHeight	=StateUpdater({H:H=>Max(H-1,3)});
-IncrementCanvasWidth	=StateUpdater({W:W=>Max(W+1,3)});
-IncrementCanvasHeight	=StateUpdater({H:H=>Max(H+1,3)});
+DecrementCanvasWidth	=StateUpdater({W:W=>Max(W-1,2)});
+DecrementCanvasHeight	=StateUpdater({H:H=>Max(H-1,2)});
+IncrementCanvasWidth	=StateUpdater({W:W=>Max(W+1,2)});
+IncrementCanvasHeight	=StateUpdater({H:H=>Max(H+1,2)});
 
 UnShiftCanvasHeight	=StateUpdater({level:level=>TransformLevel(level,xy=>[xy[0]  ,xy[1]+1])});
 UnShiftCanvasWidth	=StateUpdater({level:level=>TransformLevel(level,xy=>[xy[0]+1,xy[1]  ])});
