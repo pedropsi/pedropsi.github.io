@@ -191,17 +191,19 @@ Equal=function(a,b){
 ///////////////////////////////////////////////////////////////////////////////
 // Math
 
-Max=function(){
-	var args=[...arguments];
-	args=args.map(arr=>IsArray(arr)?Max(...arr):arr)
-	return Math.max(...args);
+ArgumentFlattener=function(Operation){
+	var Op=function(){
+		var args=[...arguments];
+		args=args.map(arr=>IsArray(arr)?Op(...arr):arr)
+		return Operation(args);
+	}
+	return Op;
 }
 
-Min=function(){
-	var args=[...arguments];
-	args=args.map(arr=>IsArray(arr)?Min(...arr):arr)
-	return Math.min(...args);
-}
+Max=ArgumentFlattener(args=>Math.max(...args));
+Min=ArgumentFlattener(args=>Math.min(...args));
+Mean=ArgumentFlattener(args=>Plus(...args)/args.length)
+
 
 BiPlus=function(a,b){
 	if(!b)
@@ -260,11 +262,6 @@ Divide=function(a,b){
 	return Times(a,Inverse(b));
 }
 
-Mean=function(){
-	var args=[...arguments];
-	args=args.map(arr=>IsArray(arr)?Mean(...arr):arr)
-	return Plus(...args)/args.length;
-}
 
 
 Floor=Math.floor;
@@ -329,11 +326,14 @@ Vectoriser=function(Operation){
 	}
 }
 
-var VectorPlus=Vectoriser(Plus);
-var VectorMinus=Vectoriser(Minus);
-var VectorTimes=Vectoriser(Times);
-var VectorDivide=Vectoriser(Divide);
+var VectorBiPlus=Vectoriser(Plus);
+var VectorBiTimes=Vectoriser(Times);
 
+VectorPlus=ArgumentExtender(VectorBiPlus);
+VectorTimes=ArgumentExtender(VectorBiTimes);
+
+var VectorMinus=Vectoriser(Minus);
+var VectorDivide=Vectoriser(Divide);
 var VectorMean=Vectoriser(Mean);
 var VectorMax=Vectoriser(Max);
 var VectorMin=Vectoriser(Min);
