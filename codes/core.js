@@ -75,6 +75,7 @@ Apply=function(Function,Array){
 	return Function.apply(null, Array);
 }
 
+
 //Functional Sorting
 
 SingleSorter=function(F){
@@ -238,7 +239,7 @@ Symmetric=function(a){
 	if(IsArray(a))
 		return a.map(Symmetric);
 	else{
-		console.log("error")
+		console.log("error Symmetric ",a);
 		return a;
 	}
 }
@@ -256,6 +257,10 @@ Inverse=function(a){
 		return 1/a;
 	if(IsArray(a))
 		return a.map(Inverse);
+	else{
+		console.log("error Inverse ",a)
+		return a;
+	}
 }
 
 Divide=function(a,b){
@@ -275,6 +280,8 @@ Log=function(a,b){
 	return Math.log(a)/Math.log(b);
 }
 Round=function(n,m){
+	if(IsArray(n))
+		return n.map(a=>Round(a,m));
 	var m=m||0;
 	return Floor(n*Power(10,m)+0.5)/Power(10,m);
 }
@@ -305,7 +312,9 @@ PoweredSum=function(vector,power){
 		return vector.map(Power(power)).reduce(Accumulate);
 }
 
-VectorOperation=function(vector1,vector2,F){
+VectorOperation=function(Operation,vector1,vector2){
+	if(typeof vector2==="undefined")
+		return vector1;
 	if(vector1.length<1||vector2.length<1)
 		return [];
 	else{
@@ -316,13 +325,13 @@ VectorOperation=function(vector1,vector2,F){
 			var v1=vector1;
 			var v2=vector2;
 		}
-		return v1.map(function(x,i){return F(x,v2[i])});
+		return v1.map(function(x,i){return Operation(x,v2[i])});
 	}
 }
 
 Vectoriser=function(Operation){
 	return function(vector1,vector2){
-		return VectorOperation(vector1,vector2,Operation);
+		return VectorOperation(Operation,vector1,vector2);
 	}
 }
 
