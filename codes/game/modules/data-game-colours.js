@@ -451,4 +451,15 @@ var HEXSaturater=Hexer(SaturateTo);
 var HEXHuer=Hexer(HueTo);
 
 ////////////////////////////////////////////////////////////////////////////////
+//RGBA
+
+function CompelRGBA(colour,opacity){
+	var rgb=RGB(Colour(colour)).colour;
+	if(typeof opacity==="undefined")
+		var opacity=1;
+	return `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${opacity})`
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
 Shout("data-game-colours");
