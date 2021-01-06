@@ -345,15 +345,21 @@ function BezierPathHTML(sta,end,mid){
 	var sta=[sta[0]+BezierPadding,BezierHeight-BezierPadding-sta[1]];
 	var end=[end[0]+BezierPadding,BezierHeight-BezierPadding-end[1]];
 	if(mid){
-		var mid=[mid[0]+BezierPadding,BezierHeight-BezierPadding-mid[1]];
-		return `<path  d="M${sta} Q${mid} ${end}"/>`;
+		mid=[mid[0]+BezierPadding,BezierHeight-BezierPadding-mid[1]];
+		mid=`Q ${Round(mid,3).join(" ")}`;
 	}
-	else
-		return `<path  d="M${sta} L${VectorMean(sta,end)} L${end}"/>`;
+	else{
+		var mid=VectorMean(sta,end);
+		mid=`L ${Round(mid,3).join(" ")} L`;
+	}
+	sta=Round(sta,3).join(" ");
+	end=Round(end,3).join(" ");
+	return `<path  d="M ${sta} ${mid} ${end}"/>`;
 }
 
 function BezierLetter(Z,id,cla){
-	var cla=cla||("bezier-"+Z);
+	var cla=cla||"";
+		cla=Posfix(cla," bezier-"+Z);
 	var id=id||"";
 	if(BezierLetter[Z])
 		return BezierLetter[Z];
@@ -373,8 +379,9 @@ function LetterInterpolatedCoordinates(A,B,t){
 	var b=LetterCoordinates(B);
 	var interpolated={};
 	var ks=Keys(a);
-	for(var i=0;i<ks.length;i++)
-		interpolated[ks[i]]=VectorOperation(a[ks[i]],b[ks[i]],function(x,y){return (1-t)*x+t*y});
+	for(var i=0;i<ks.length;i++){
+		interpolated[ks[i]]=VectorOperation(function(x,y){return (1-t)*x+t*y},a[ks[i]],b[ks[i]]);
+	}
 	return interpolated;
 }
 
@@ -393,12 +400,11 @@ function BezierDynamicLetter(Z,oldY,id,parentE){
 
 function MorphLetter(A,B,parentE,Starter,Ender){
 	var steps=10;
-	var delay=350/steps;
+	var id=GenerateId();
 	function FullEnder(){
 		BezierDynamicLetter(B,A,id,parentE);
 		Ender();
 	}
-	var id=GenerateId();
 	function Iterator(i){
 		return function(){
 			BezierDynamicLetter(LetterInterpolatedCoordinates(A,B,i/steps),A,id,parentE);
