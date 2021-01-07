@@ -72,7 +72,7 @@ TrackFruits=function(track,state){
 		point=>track.some(segment=>In(segment,point))));
 }
 
-TrackStyleOpts=function(track,state){
+TrackStyleOpts=function(track,state,Opts){
 	var fruits=TrackFruits(track,state);
 	
 	var colour;
@@ -83,17 +83,18 @@ TrackStyleOpts=function(track,state){
 	else
 		colour=FruitIcons[First(fruits)].colour;
 
+	var s=Opts.lineScale||1;
 	return {
 		strokeColor:CompelRGBA(colour,0.5),
 		dash:[1,1],
-		lineWidth:20,
+		lineWidth:5*s,
 	}
 
 }
 
-DrawTrack=function(track,state){
+DrawTrack=function(track,state,Opts){
 	var track=track.filter(segment=>SegmentValid(segment,state));
-	var trackStyleOpts=TrackStyleOpts(track,state);
+	var trackStyleOpts=TrackStyleOpts(track,state,Opts);
 	track.map(segment=>DrawSegment({
 		px0:segment[0][0],
 		px1:segment[1][0],
@@ -378,7 +379,11 @@ var STATE={
 		[[2,0],[3,0]],
 		[[4,1],[4,2]],
 		[[4,2],[4,3]],
-		[[4,3],[4,4]]
+		[[4,3],[4,4]],
+		[[0,3],[0,4]],
+		[[0,3],[1,3]],
+		[[1,4],[0,4]],
+		[[1,3],[1,4]]
 	],
 	crosses:{},
 
@@ -585,7 +590,8 @@ DrawStateGrid=function(state){
 
 DrawStatePaths=function(state){
 	var tracks=ContiguousTracks(state.segments);
-	tracks.map(track=>DrawTrack(track,STATE));
+	var Opts=Extremes(state);
+	tracks.map(track=>DrawTrack(track,STATE,Opts));
 }
 
 DrawState=function(){
@@ -678,13 +684,16 @@ UpdateState=function(opts){
 // 	return [x,y];
 // }
 
-CanvasPosition=function(x,y,state){
-	var extremes=GridExtremes({
+Extremes=function(state){
+	return GridExtremes({
 		rows:state.H,
 		cols:state.W,
 		target:state.target
-	})
+	});
+}
 
+CanvasPosition=function(x,y,state){
+	var extremes=Extremes(state);
 	var col=Floor(state.W*(x-extremes.x0*extremes.width)/(extremes.x1-extremes.x0)/extremes.width+0.5);
 	var row=Floor(state.H*(y-extremes.y0*extremes.height)/(extremes.y1-extremes.y0)/extremes.height+0.5);
 	return [col,row];
@@ -763,9 +772,7 @@ ContiguousTracks=function(segments){
 	var added;
 	var segment;
 	while(i<segments.length){
-		console.log(segments);
 		segment=Sort(segments[i]);
-		console.log(segment);
 		xy=segment[0];
 		za=segment[1];
 		j=0;
