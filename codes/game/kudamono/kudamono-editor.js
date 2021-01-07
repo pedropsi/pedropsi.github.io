@@ -63,30 +63,46 @@ FruitIcons={
 	}
 }
 
+SegmentValid=function(segment,state){
+	return PositionValid(segment[0][0],segment[0][1],state)&&PositionValid(segment[1][0],segment[1][1],state);
+}
 
+TrackFruits=function(track,state){
+	return Keys(state.level).filter(fruit=>state.level[fruit].some(
+		point=>track.some(segment=>In(segment,point))));
+}
 
-DrawPath=function(coords,state){
-	var coords=coords.filter(xy=>PositionValid(xy[0],xy[1],state));
-	var fruits=Keys(state.level).filter(fruit=>Intersection(state.level[fruit],coords).length>0);
-	var colour="#CCCCCC";
-	if(fruits.length>1)
-		colour="#000000";
-	else if(fruits.length===1)
+TrackStyleOpts=function(track,state){
+	var fruits=TrackFruits(track,state);
+	
+	var colour;
+	if(fruits.length<1)
+		colour=state.segment.deficitColour;
+	else if(fruits.length>1)
+		colour=state.segment.excessColour;
+	else
 		colour=FruitIcons[First(fruits)].colour;
 
-	var segments=Rest(coords);
-		segments=segments.map((c,i)=>[coords[i],segments[i]]);
-
-	segments.map(abcd=>DrawSegment({
-		px0:abcd[0][0],
-		px1:abcd[1][0],
-		py0:abcd[0][1],
-		py1:abcd[1][1],
+	return {
 		strokeColor:CompelRGBA(colour,0.5),
 		dash:[1,1],
-		lineWidth:10,
+		lineWidth:20,
+	}
+
+}
+
+DrawTrack=function(track,state){
+	var track=track.filter(segment=>SegmentValid(segment,state));
+	var trackStyleOpts=TrackStyleOpts(track,state);
+	track.map(segment=>DrawSegment({
+		px0:segment[0][0],
+		px1:segment[1][0],
+		py0:segment[0][1],
+		py1:segment[1][1],
 		cols:state.W,
-		rows:state.H},state))
+		rows:state.H,
+		...trackStyleOpts
+	},state))
 }
 
 DrawSegment=function(opts,state){
@@ -175,6 +191,15 @@ StateLevelSerial=function(state){
 	return fruitsxys.join("");
 }
 
+// StatePathsSerial=function(state){
+// 	var paths=state.paths.filter(paths=>path.every(xy=>PositionValid(xy[0],xy[1],state);
+// 		paths=paths.map(fxy=>[fxy[0],fxy[1]+fxy[2]*(state.W+1)]);
+// 		fruitsxys=Sort(fruitsxys,Last);
+// 		fruitsxys=Join([["",0]],fruitsxys);
+// 		fruitsxys=Rest(fruitsxys).map((p,i)=>p[0]+(p[1]-fruitsxys[i][1]));
+	
+// 	return fruitsxys.join("");
+// }
 
 FruitSerialPattern=/(\w)(\d+)/g;
 
@@ -274,7 +299,7 @@ LetterPath=function(letters,startxy){
 		coordinates=coordinates.map((c,i)=>Apply(VectorPlus,Take(directions,i+1)));
 		coordinates.unshift([0,0]);
 		coordinates=coordinates.map(c=>VectorPlus(c,startxy))
-	return coordinates;
+	return PointsTrack(coordinates);
 }
 
 SerialLines=function(serial,state){
@@ -316,7 +341,9 @@ var STATE={
 		lineWidth:10,
 		cap:"round",
 		corners:"round",
-		colour:"rgba(155,155,155,0.5)"		//default line colour
+		colour:"rgba(155,155,155,0.5)",		//default line colour
+		excessColour:"#000000",				//path colour, too many fruit
+		deficitColour:"#CCCCCC" 			//path colour, zero		fruit
 	},
 	grid:{
 		strokeColor:"#BBBBBB",				//grid lines
@@ -343,7 +370,16 @@ var STATE={
 		"melon":[[4,4],[3,4]],
 		"orange":[[2,1],[2,5]],
 	},
-	paths:{},
+	segments:[
+		[[0,0],[0,1]],
+		[[0,1],[1,1]],
+		[[2,2],[2,1]],
+		[[2,1],[2,0]],
+		[[2,0],[3,0]],
+		[[4,1],[4,2]],
+		[[4,2],[4,3]],
+		[[4,3],[4,4]]
+	],
 	crosses:{},
 
 	//Interaction
@@ -547,11 +583,19 @@ DrawStateGrid=function(state){
 	DrawSquaresGrid(gridOpts);
 }
 
+DrawStatePaths=function(state){
+	var tracks=ContiguousTracks(state.segments);
+	tracks.map(track=>DrawTrack(track,STATE));
+}
+
 DrawState=function(){
 	UnDraw();
 	DrawStateGrid(STATE);
+	DrawStatePaths(STATE);
 	DrawLevel(STATE);
 }
+
+
 
 StateUpdater=function(opts){
 	return function(){
@@ -646,6 +690,7 @@ CanvasPosition=function(x,y,state){
 	return [col,row];
 }
 
+
 XYFruit=function(xy,state){
 	var fruits=Keys(state.level).filter(k=>In(state.level[k],xy));
 	if(fruits.length)
@@ -675,6 +720,120 @@ XYFruitAdd=function(xy){
 	STATE.level[overfruit].push(xy);
 	STATE.level[overfruit]=STATE.level[overfruit].sort();
 }
+
+OrthonormalXYDir=function(xyza){
+	var xy=Round(xyza[0],0);
+	var dir=VectorMinus(xy,Round(xyza[1],0));
+	if(Abs(dir[0])>=Abs(dir[1])){
+		dir[0]=Sign(dir[0])
+		dir[1]=0;
+	}else{
+		dir[1]=Sign(dir[1])
+		dir[0]=0;
+	}
+	if(dir[0]<0||dir[0]===0&&dir[1]<0)
+		return [za,VectorMinus(za,dir)]
+	else
+		return [xy,VectorPlus(xy,dir)];
+}
+
+PointsTrack=function(path){
+	var track=Rest(path).map((xy,i)=>[path[i],xy]);
+	return SortTrack(track)
+}
+
+SortTrack=function(track){
+	function Switcher(segmin,segment){
+		return segmin[0]>segment[0]||(segmin[0]===segment[0]&&segmin[1]>segment[1])}
+	return CycleSort(track.map(Sort),Switcher)
+}
+
+
+TrackPath=function(track){
+	var stas=track.map(First);
+	return stas.concat([Last(Last(track))]);
+}
+
+ContiguousTracks=function(segments){
+	var i=0;
+	var j;
+	var tracks=[];
+	var xy;
+	var za;
+	var added;
+	var segment;
+	while(i<segments.length){
+		console.log(segments);
+		segment=Sort(segments[i]);
+		console.log(segment);
+		xy=segment[0];
+		za=segment[1];
+		j=0;
+		added=false;
+		while(j<tracks.length&&!added){
+			if(tracks[j].some(seg=>In(seg,xy)||In(seg,za))){
+				tracks[j]=Union(tracks[j],[segment]);
+				added=true;
+			}
+			j++;
+		}
+		if(!added)
+			tracks.push([segment]);
+		i++;
+	}
+	return tracks;
+}
+
+
+TrackAdd=function(track){
+	return track.map(SegmentAdd);
+}
+
+SegmentAdd=function(segment){
+	var segment1=OrthonormalXYDir(segment);
+	var segment2=OrthonormalXYDir(Reverse(segment));
+	var xy=segment1[0];
+	var za=segment1[1];
+
+	var tracks=STATE.paths.map(PointsTrack);
+	
+	var extendable=tracks.filter(track=>track.some(segment=>In(segment,xy)||In(segment,za)));
+	if(!extendable.length)
+		STATE.paths.push(segment1);
+	else if(extendable.length===1){
+		var exttrack=First(extendable);
+		
+		//already there
+		if(In(exttrack,segment1)||In(exttrack,segment2))
+			return;
+		
+		//branching
+		else if(exttrack.filter(segment=>In(segment,xy).length===2||exttrack.filter(segment=>In(segment,za).length===2)))
+			return STATE.paths.push(segment1);
+		
+		//looping or extending
+		else if(exttrack.filter(segment=>In(segment,xy).length===1||exttrack.filter(segment=>In(segment,za).length===1))){
+			var i=tracks.findIndex(track=>Equal(track,exttrack));
+			var path=STATE.paths[i];
+			var sta=First(path);
+			var end=Last(path);
+			if(Equal(end,xy))
+				return path.push(za);
+			else if(Equal(end,za))
+				return path.push(xy);
+			if(Equal(sta,xy))
+				return path.unshift(za);
+			else if(Equal(sta,za))
+				return path.unshift(xy);
+
+		}
+	}
+	else{ //many possibilities -> rebuild
+			
+	}
+}
+
+
 
 function DragActionStarter(x,y){
 	var xy=CanvasPosition(x,y,STATE);
