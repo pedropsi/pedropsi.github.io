@@ -122,7 +122,7 @@ DrawGrid=function(opts){
 	var y0=opts.y0;
 	var y1=opts.y1;
 
-	var s=Power((y1-y0)*(x1-x0)/(opts.rows*opts.cols),0.5)*50;
+	var s=opts.lineScale;
 
 	var dash=[2*s,2*s];
 	var lineWidth=s/4;
@@ -171,6 +171,8 @@ function GridExtremes(opts){
 	var	x1=Round(0.5+unit*cols/2*xscale,5);
 	var	y1=Round(0.5+unit*rows/2*yscale,5);
 
+	var lineScale=Power((y1-y0)*(x1-x0)/(rows*cols),0.5)*50
+
 	return {
 		x0:x0,
 		x1:x1,
@@ -181,7 +183,8 @@ function GridExtremes(opts){
 		xscale:xscale,
 		yscale:yscale,
 		width:width,
-		height:height
+		height:height,
+		lineScale:lineScale
 	};
 }
 
