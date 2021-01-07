@@ -1,11 +1,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 //Kudamono Editor (c) Pedro PSI, 2021
+//All rights reserved.
 ///////////////////////////////////////////////////////////////////////////////
 
 var sources=["data-game-colours.js","data-game-canvas.js"];
 sources.map(LoaderInFolder("codes/game/modules"));
 
 ///////////////////////////////////////////////////////////////////////////////
+//Fruits
 FruitIcons={
 	"apple":{
 		letter:"a",
@@ -63,9 +65,150 @@ FruitIcons={
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//Path segments
+//A track is a set of segments. A segment is a pair of points (x,y).
+
+
+OrthonormalXYDir=function(xyza){
+	var xy=Round(xyza[0],0);
+	var dir=VectorMinus(xy,Round(xyza[1],0));
+	if(Abs(dir[0])>=Abs(dir[1])){
+		dir[0]=Sign(dir[0])
+		dir[1]=0;
+	}else{
+		dir[1]=Sign(dir[1])
+		dir[0]=0;
+	}
+	if(dir[0]<0||dir[0]===0&&dir[1]<0)
+		return [za,VectorMinus(za,dir)]
+	else
+		return [xy,VectorPlus(xy,dir)];
+}
+
+PointsTrack=function(path){
+	var track=Rest(path).map((xy,i)=>[path[i],xy]);
+	return SortTrack(track);
+}
+
+SortTrack=function(track){
+	function Switcher(segmin,segment){
+		return segmin[0]>segment[0]||(segmin[0]===segment[0]&&segmin[1]>segment[1])}
+	return CycleSort(track.map(segment=>segment.sort()),Switcher)
+}
+
+
+TrackPath=function(track){
+	var stas=track.map(First);
+	return stas.concat([Last(Last(track))]);
+}
+
+SplitContiguousTracks=function(segments,state){
+	var i=0;
+	var j;
+	var tracks=[];
+	var xy;
+	var za;
+	var added;
+	var segment;
+	var segments=segments.sort();
+	while(i<segments.length){
+		segment=Sort(segments[i]);
+		xy=segment[0];
+		za=segment[1];
+		j=0;
+		added=false;
+		while(j<tracks.length&&!added){
+			if(tracks[j].some(seg=>In(seg,xy)||In(seg,za))){
+				tracks[j]=Union(tracks[j],[segment]);
+				added=true;
+			}
+			j++;
+		}
+		if(!added)
+			tracks.push([segment]);
+		i++;
+	}
+	tracks=tracks.map(CanonicalContiguousTrack);
+	tracks=Sort(tracks,track=>Linearise(First(First(track).sort()),STATE))
+	return tracks;
+}
+
+SegmentTouched=function(segment,track){
+	return NextSegments(segment,track).length>0;
+}
+
+SegmentOverlapped=function(segment,track){
+	return In(track,segment)||In(track,Reverse(segment));
+}
+
+DeleteSegmentTrack=function(segment,track){
+	return track.filter(seg=>!In([segment,Reverse(segment)],seg));
+}
+
+NextSegments=function(segment,track){
+	var intrack=DeleteSegmentTrack(segment,track);
+	return intrack.filter(seg=>(In(seg,segment[0])||In(seg,segment[1])));
+}
+
+TrackEndsegments=function(track){
+	var endsegments=track.filter(endsegment=>NextSegments(endsegment,track).length<=1);
+	return endsegments;
+}
+
+TrackEndpoints=function(track){
+	var endsegments=TrackEndsegments(track);
+	if(!endsegments.length)
+		return [];
+	else
+		return Join(...endsegments).filter(xy=>track.filter(segment=>In(segment,xy)).length===1);
+}
+
+TrackLooped=function(track){
+	return TrackEndpoints(track).length===0&&track.length>0;
+}
+
+TrackBranched=function(track){
+	return TrackEndpoints(track).length>2;
+}
+
+TrackStartPoint=function(track){
+	var endpoints=TrackEndpoints(track);
+	return First(endpoints)||First(First(track));
+}
+
+CanonicalContiguousTrack=function(track){
+	var endsegments=TrackEndsegments(track);
+	if(!endsegments.length)	//a loop
+		endsegments=track;
+	
+	var previoussegment=null;
+	var nextsegment=First(endsegments.sort());
+	var canonicaltrack=[];
+	var oldtrack=track;
+	while(oldtrack.length>0&&nextsegment!==previoussegment){
+		previoussegment=nextsegment;
+		oldtrack=DeleteSegmentTrack(previoussegment,oldtrack);
+		nextsegment=First(NextSegments(previoussegment,oldtrack));
+		if(!nextsegment||In(nextsegment,previoussegment[1]))
+			canonicaltrack.push(previoussegment);
+		else
+			canonicaltrack.push(Reverse(previoussegment));
+		
+	}
+	return canonicaltrack;
+}
+
+
 SegmentValid=function(segment,state){
 	return PositionValid(segment[0][0],segment[0][1],state)&&PositionValid(segment[1][0],segment[1][1],state);
 }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Draw
+//draws the board
+
 
 TrackFruits=function(track,state){
 	return Keys(state.level).filter(fruit=>state.level[fruit].some(
@@ -77,9 +220,9 @@ TrackStyleOpts=function(track,state,Opts){
 	
 	var colour;
 	if(fruits.length<1)
-		colour=state.segment.deficitColour;
+		colour=state.line.deficitColour;
 	else if(fruits.length>1)
-		colour=state.segment.excessColour;
+		colour=state.line.excessColour;
 	else
 		colour=FruitIcons[First(fruits)].colour;
 
@@ -93,7 +236,6 @@ TrackStyleOpts=function(track,state,Opts){
 }
 
 DrawTrack=function(track,state,Opts){
-	var track=track.filter(segment=>SegmentValid(segment,state));
 	var trackStyleOpts=TrackStyleOpts(track,state,Opts);
 	track.map(segment=>DrawSegment({
 		px0:segment[0][0],
@@ -172,19 +314,24 @@ DrawLevel=function(state){
 		DrawFruits(state.mode.symbol,state.mode.selection,{colour:HEXDarkener(0.8)});
 }
 
-
+///////////////////////////////////////////////////////////////////////////////
 //Serials
+//serials represent the state of the board as an URL, compact and exactly
+
+ExportSerial=function(){
+	ClipboardCopy(PageURL(),"Copied this puzzle's URL to clipboard, for saving!")
+}
 
 FruitLetter=function(fruit){
 	return FruitIcons[fruit].letter.toLowerCase();
 }
 
+LevelSerial=function(state){
+	var xyfruits=Keys(state.level).map(fruit=>state.level[fruit].map(xy=>[xy[0],xy[1],FruitLetter(fruit)]));
+		xyfruits=Join(...xyfruits);
+		xyfruits=xyfruits.filter(fxy=>PositionValid(fxy[0],fxy[1],state));
 
-StateLevelSerial=function(state){
-	var fruitsxys=Keys(state.level).map(fruit=>state.level[fruit].map(xy=>[FruitLetter(fruit),xy[0],xy[1]]));
-		fruitsxys=Join(...fruitsxys);
-		fruitsxys=fruitsxys.filter(fxy=>PositionValid(fxy[1],fxy[2],state));
-		fruitsxys=fruitsxys.map(fxy=>[fxy[0],fxy[1]+fxy[2]*(state.W+1)]);
+	var	fruitsxys=xyfruits.map(fxy=>[fxy[2],Linearise(fxy,(state.W+1))]);
 		fruitsxys=Sort(fruitsxys,Last);
 		fruitsxys=Join([["",0]],fruitsxys);
 		fruitsxys=Rest(fruitsxys).map((p,i)=>p[0]+(p[1]-fruitsxys[i][1]));
@@ -192,6 +339,13 @@ StateLevelSerial=function(state){
 	return fruitsxys.join("");
 }
 
+Linearise=function(xy,W){
+	return xy[0]+xy[1]*W;
+}
+
+UnLinearise=function(n,W){
+	return [n%W,Floor(n/W)]
+}
 
 FruitSerialPattern=/(\w)(\d+)/g;
 
@@ -204,8 +358,10 @@ LetterFruit=function(l){
 AccumulateTokenCoords=function(tokendiffs,W){
 	var differences=tokendiffs.map(Last);
 	var accumulated=tokendiffs.map((td,i)=>[td[0],Apply(Plus,Take(differences,i+1))]);
-	return accumulated.map(td=>[td[0],[td[1]%(W),Floor(td[1]/(W))]]);
+	return accumulated.map(td=>[td[0],UnLinearise(td[1],W)]);
 }
+
+
 
 SerialLevel=function(serial,state){
 	var fruitserials=serial.match(FruitSerialPattern);
@@ -283,6 +439,7 @@ DirectionsCoordinates={
 }
 
 LetterDirections=FlipKeysValues(DirectionsLetter);
+CoordinatesDirections=FlipKeysValues(DirectionsCoordinates);
 
 LetterContiguousPath=function(letters,startxy){
 	var directions=letters.split("").map(Accesser(LetterDirections)).join("").split("");
@@ -303,23 +460,32 @@ SerialSegments=function(serial,state){
 }
 
 
-SegmentsSerial=function(segments,state){
-	var segments=segments.filter(SegmentValid);
-	var tracks=ContiguousTracks(segments);
-		tracks=tracks.map
 
-// 		paths=paths.map(fxy=>[fxy[0],fxy[1]+fxy[2]*(state.W+1)]);
-// 		fruitsxys=Sort(fruitsxys,Last);
-// 		fruitsxys=Join([["",0]],fruitsxys);
-// 		fruitsxys=Rest(fruitsxys).map((p,i)=>p[0]+(p[1]-fruitsxys[i][1]));
-	
-// 	return fruitsxys.join("");
+SegmentsSerial=function(state){
+	var tracks=STATE.tracks;
+	var W=state.W;
+	var pointtracks=tracks.map(track=>[TrackStartPoint(track),track]);
+		pointtracks=pointtracks.map(pt=>[Linearise(pt[0],W+1),pt[1]]);
+		pointtracks=Sort(pointtracks,First);
+		differences=[0].concat(pointtracks.map(First));
+		pointtracks=pointtracks.map((pt,i)=>[pt[0]-differences[i],pt[1]]);
+	var serials=pointtracks.map(PointTrackSerial);
+	return serials.join("");
+}
 
-	var pathserials=serial.match(PathSerialPattern);
-	var pathdiffs=pathserials.map(s=>[First(s.match(/\D+/ig)),Number(First(s.match(/\d+/ig)))]);
-	var accumulated=AccumulateTokenCoords(pathdiffs,state.W);
-	var tracks=accumulated.map(lp=>LetterContiguousPath(lp[0],lp[1]));
-	return Join(...tracks);
+PointTrackSerial=function(pointtrack){
+	console.log(pointtrack[1]);
+	return String(pointtrack[0])+TrackDirectionSerial(pointtrack[1]);
+}
+
+TrackDirectionSerial=function(track){
+	var directions=track.map(SegmentDirection);
+		directions=directions.join("").split(/(\D\D\D)/g).filter(Identity);
+	console.log(directions);
+	return directions.map(Accesser(DirectionsLetter));
+}
+SegmentDirection=function(segment){
+	return Accesser(CoordinatesDirections)(String(VectorMinus(segment[1],segment[0])));
 }
 
 
@@ -329,7 +495,8 @@ SerialState=function(serialObj,state){
 		state.W=Number(serialObj.w||serialObj.h);
 		state.H=Number(serialObj.h||serialObj.w);
 		state.level=SerialLevel(serialObj.l,state);
-		state.segments=SerialSegments(serialObj.s,state)
+		if(serialObj.s)
+			state.segments=SerialSegments(serialObj.s,state)
 	return state;
 }
 
@@ -338,12 +505,16 @@ StateSerial=function(state){
 		Opts.W=state.W;
 	if(state.H!==state.W)
 		Opts.H=state.H;
-		Opts.L=StateLevelSerial(state);
+		Opts.L=LevelSerial(state);
+		Opts.S=SegmentsSerial(state);
 	return ParameterString(Opts);
 }
 
 
-//Initialise
+///////////////////////////////////////////////////////////////////////////////
+//State
+//a friendly representation of the board state.
+//The source of truth: updating STATE must update everything.
 
 var STATE={
 	//visuals
@@ -351,7 +522,7 @@ var STATE={
 	visuals:{
 		monochrome:false
 	},
-	segment:{
+	line:{
 		opacity:0.5,
 		lineWidth:10,
 		cap:"round",
@@ -399,6 +570,7 @@ var STATE={
 		[[1,4],[0,4]],
 		[[1,3],[1,4]]
 	],
+	tracks:[],
 	crosses:{},
 
 	//Interaction
@@ -413,6 +585,361 @@ var STATE={
 		error:false			//whether to display errors
 	}
 }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Interactive UI (for quick iteration)
+
+DrawStateGrid=function(state){
+	var gridOpts={
+		...state.grid,
+		rows:state.H,
+		cols:state.W
+	}
+	DrawSquaresGrid(gridOpts);
+}
+
+DrawStatePaths=function(state){
+	var tracks=state.tracks;
+	var Opts=Extremes(state);
+	tracks.map(track=>DrawTrack(track,STATE,Opts));
+}
+
+DrawState=function(){
+	UnDraw();
+	DrawStateGrid(STATE);
+	DrawStatePaths(STATE);
+	DrawLevel(STATE);
+}
+
+
+
+StateUpdater=function(opts){
+	return function(){
+		UpdateState(opts);
+	}
+}
+
+UpdateState=function(opts){
+	if(opts)
+		Keys(opts).map(k=>STATE[k]=opts[k](STATE[k]));
+	STATE.tracks=SplitContiguousTracks(STATE.segments.filter(seg=>SegmentValid(seg,STATE)),STATE);
+	DrawState();
+	NavigateSerial(StateSerial(STATE));
+}
+
+
+// function MarkCross(cell,opts){
+// 	var opts={
+// 		lineWidth:`${STATE.LW}px`,
+// 		fillColor:"red",
+// 		strokeColor:"transparent",
+// 		cross:true,
+// 		n:4,
+// 		size:STATE.starsize,
+// 		...opts,
+// 		...StarXY(cell)
+// 	};
+// 	DrawStar(opts);
+// }
+
+// function UnMarkCross(cell,opts){
+// 	MarkCross(cell,{
+// 		...opts,
+// 		lineWidth:`${2*STATE.LW}px`,
+// 		fillColor:STATE.colours[cell],
+// 		strokeColor:STATE.colours[cell]
+// 	})
+// }
+
+// function StarXY(cell){
+// 	var p=STATE.polygons[cell];
+// 	return {x:p[0]+p[2]/2,y:p[1]+p[3]/2}
+// }
+
+
+
+// RegionModeActive=StatusReporter(
+// 	"RegionModeActive",
+// 	function(){return STATE.regionmode}
+// )
+
+// RegionModeToggle=function(mode){
+// 	return STATE.regionmode=!mode;
+// }
+
+// ErrorModeActive=StatusReporter(
+// 	"ErrorModeActive",
+// 	function(){return STATE.errormode}
+// )
+
+// ErrorModeToggle=function(mode){
+// 	if(STATE.errormode)
+// 		UnMarkErrors();
+// 	else
+// 		MarkErrors();
+// 	return STATE.errormode=!mode;
+// }
+
+
+// PathGrower=function(dx,dy){
+// 	if(!STATE.mode.selection||!STATE.mode.selection.length)
+// 		STATE.mode.selection=[[0,0]];
+
+// 	var xy=Last(STATE.mode.selection);
+// 	var x=Max(Min(xy[0]+dx||0,STATE.W),0);
+// 	var y=Max(Min(xy[1]+dy||0,STATE.H),0);
+
+// 	if(xy[0]!==x||xy[1]!==y)
+// 		STATE.mode.selection.push([x,y]);
+	
+// 	return [x,y];
+// }
+
+Extremes=function(state){
+	return GridExtremes({
+		rows:state.H,
+		cols:state.W,
+		target:state.target
+	});
+}
+
+CanvasPosition=function(x,y,state){
+	var extremes=Extremes(state);
+	var col=Floor(state.W*(x-extremes.x0*extremes.width)/(extremes.x1-extremes.x0)/extremes.width+0.5);
+	var row=Floor(state.H*(y-extremes.y0*extremes.height)/(extremes.y1-extremes.y0)/extremes.height+0.5);
+	return [col,row];
+}
+
+
+XYFruit=function(xy,state){
+	var fruits=Keys(state.level).filter(k=>In(state.level[k],xy));
+	if(fruits.length)
+		return First(fruits);
+	else
+		return false;
+}
+
+XYFruitRemove=function(xy){
+	var oldfruit=XYFruit(xy,STATE);
+	if(oldfruit)
+		STATE.level[oldfruit]=STATE.level[oldfruit].filter(cr=>!Equal(cr,xy));
+	return STATE;
+}
+
+XYFruitAdd=function(xy){
+
+	if(!PositionValid(xy[0],xy[1],STATE))
+		return;
+
+	XYFruitRemove(xy);
+
+	var overfruit=STATE.mode.symbol;
+	if(!STATE.level[overfruit])
+		STATE.level[overfruit]=[];
+
+	STATE.level[overfruit].push(xy);
+	STATE.level[overfruit]=STATE.level[overfruit].sort();
+}
+
+
+
+TrackAdd=function(track){
+	return track.map(SegmentAdd);
+}
+
+SegmentAdd=function(segment){
+	var segment1=OrthonormalXYDir(segment);
+	var segment2=OrthonormalXYDir(Reverse(segment));
+	var xy=segment1[0];
+	var za=segment1[1];
+
+	var tracks=STATE.paths.map(PointsTrack);
+	
+	var extendable=tracks.filter(track=>track.some(segment=>In(segment,xy)||In(segment,za)));
+	if(!extendable.length)
+		STATE.paths.push(segment1);
+	else if(extendable.length===1){
+		var exttrack=First(extendable);
+		
+		//already there
+		if(In(exttrack,segment1)||In(exttrack,segment2))
+			return;
+		
+		//branching
+		else if(exttrack.filter(segment=>In(segment,xy).length===2||exttrack.filter(segment=>In(segment,za).length===2)))
+			return STATE.paths.push(segment1);
+		
+		//looping or extending
+		else if(exttrack.filter(segment=>In(segment,xy).length===1||exttrack.filter(segment=>In(segment,za).length===1))){
+			var i=tracks.findIndex(track=>Equal(track,exttrack));
+			var path=STATE.paths[i];
+			var sta=First(path);
+			var end=Last(path);
+			if(Equal(end,xy))
+				return path.push(za);
+			else if(Equal(end,za))
+				return path.push(xy);
+			if(Equal(sta,xy))
+				return path.unshift(za);
+			else if(Equal(sta,za))
+				return path.unshift(xy);
+
+		}
+	}
+	else{ //many possibilities -> rebuild
+			
+	}
+}
+
+
+
+function DragActionStarter(x,y){
+	var xy=CanvasPosition(x,y,STATE);
+	STATE.mode.symbol=XYFruit(xy,STATE)||STATE.mode.symbol;
+	STATE.mode.dragging=true;
+	if(STATE.mode.edit){
+		STATE.mode.clearing=!!XYFruit(xy,STATE);
+		STATE.mode.selection=[xy];
+		DrawState();
+	}
+}
+function DragActionAltStarter(x,y){
+	//return 	RegionModeActive()?PickRegionCells(x,y):AddCrossCells(x,y);
+}
+function DragActionContinuer(x,y){
+	var xy=CanvasPosition(x,y,STATE);
+	if(STATE.mode.edit){
+		if(!STATE.mode.selection)
+			STATE.mode.selection=[];
+		
+		if(!In(STATE.mode.selection,xy)){
+			STATE.mode.selection=Union(STATE.mode.selection,[xy]);
+			DrawState();
+		}
+
+	}
+	//return RegionModeActive()?ContinueRegionCells(x,y):ContinueStarCrossCells(x,y);
+}
+function DragActionEnder(x,y){
+	var xy=CanvasPosition(x,y,STATE);
+	STATE.mode.dragging=false;
+	if(STATE.mode.edit){
+		if(STATE.mode.clearing)
+			STATE.mode.selection.map(XYFruitRemove);
+		else
+			STATE.mode.selection.map(XYFruitAdd);
+	}
+	// else {
+	// 	if(STATE.mode.clearing)
+	// 		STATE.mode.selection.map(XYSegmentRemove);
+	// 	else
+	// 		CanonicalContiguousTrack(STATE.mode.selection).map(XYSegmentAdd);
+	// }
+	STATE.mode.selection=[];
+	UpdateState()	
+}
+
+TransformLevel=function(level,CoordinateTransform){
+	var newlevel={};
+	Keys(level).map(k=>newlevel[k]=level[k].map(CoordinateTransform));
+	return newlevel;
+};
+
+DecrementCanvasWidth	=StateUpdater({W:W=>Max(W-1,2)});
+DecrementCanvasHeight	=StateUpdater({H:H=>Max(H-1,2)});
+IncrementCanvasWidth	=StateUpdater({W:W=>Max(W+1,2)});
+IncrementCanvasHeight	=StateUpdater({H:H=>Max(H+1,2)});
+
+BoardShifter=function(L){
+	return function(){
+		LevelShifter(L)();
+		SegmentsShifter(L)();
+	};
+}
+
+LevelShifter=function(L){
+	return StateUpdater({level:level=>TransformLevel(level,LetterCoordinatesShifter(L))});
+}
+SegmentsShifter=function(L){
+	return StateUpdater({
+		segments:segments=>segments.map(seg=>seg.map(LetterCoordinatesShifter(L)))});
+}
+
+LetterCoordinatesShifter=function(L){
+	return function(xy){
+		return VectorPlus(xy,DirectionsCoordinates[L])
+	}
+}
+
+var KeyboardActions={
+	"alt left":LevelShifter("L"),
+	"alt up":LevelShifter("U"),
+	"alt right":LevelShifter("R"),
+	"alt down":LevelShifter("D"),
+	
+	"shift left":BoardShifter("L"),
+	"shift up":BoardShifter("U"),
+	"shift right":BoardShifter("R"),
+	"shift down":BoardShifter("D"),
+
+	"shift alt left":SegmentsShifter("L"),
+	"shift alt up":SegmentsShifter("U"),
+	"shift alt right":SegmentsShifter("R"),
+	"shift alt down":SegmentsShifter("D"),
+	
+	"ctrl left":DecrementCanvasWidth,
+	"ctrl up":IncrementCanvasHeight,
+	"ctrl right":IncrementCanvasWidth,
+	"ctrl down":DecrementCanvasHeight,
+	
+	"ctrl b":function(){STATE.visuals.monochrome=!!!STATE.visuals.monochrome;UpdateState();},
+	"ctrl s":ExportSerial,
+	// "left":PathGrower(-1,0),
+	// "up":PathGrower(0,1),
+	// "right":PathGrower(1,0),
+	// "down":PathGrower(0,-1)
+};
+
+FruitSetter=function(fruit){
+	KeyboardActions[FruitIcons[fruit].letter]=function(){STATE.mode.symbol=fruit}
+}
+
+Keys(FruitIcons).map(FruitSetter);
+
+
+var DragActions={
+	Starter:DragActionStarter,
+	AltStarter:DragActionAltStarter,
+	Executer:DragActionContinuer,
+	Ender:DragActionEnder
+}
+
+CanvasResize=function(){
+	GetElement(STATE.target).width=window.innerWidth;
+	GetElement(STATE.target).height=window.innerHeight;
+	DrawState();
+}
+
+InitialiseKudamono=function(){
+	PreAddElement(`
+		<canvas 
+			id="${STATE.target}" 
+			oncontextmenu="return false;" 
+			width="${window.innerWidth}" 
+			height="${window.innerHeight}"
+		></div>`,"body");
+	AttendDrag(DragActions,"canvas");
+	Attend('resize',CanvasResize)
+	if(PageSearch("l")||PageSearch("L")){
+		STATE=SerialState(PageSearchObject(),STATE);
+	}
+	UpdateState();
+	Keybind(KeyboardActions,STATE.target);
+	ResumeCapturingKeys(CaptureComboKey);
+}
+
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -587,445 +1114,6 @@ var STATE={
 // 	UnMarkWrongLines();
 // 	UnMarkWrongRegions();
 // }
-
-
-///////////////////////////////////////////////////////////////////////////////
-//Interactive UI (for quick iteration)
-
-
-DrawStateGrid=function(state){
-	var gridOpts={
-		...state.grid,
-		rows:state.H,
-		cols:state.W
-	}
-	DrawSquaresGrid(gridOpts);
-}
-
-DrawStatePaths=function(state){
-	var tracks=ContiguousTracks(state.segments);
-	var Opts=Extremes(state);
-	tracks.map(track=>DrawTrack(track,STATE,Opts));
-}
-
-DrawState=function(){
-	UnDraw();
-	DrawStateGrid(STATE);
-	DrawStatePaths(STATE);
-	DrawLevel(STATE);
-}
-
-
-
-StateUpdater=function(opts){
-	return function(){
-		UpdateState(opts);
-	}
-}
-
-UpdateState=function(opts){
-	if(opts)
-		Keys(opts).map(k=>STATE[k]=opts[k](STATE[k]));
-	DrawState();
-	NavigateSerial(StateSerial(STATE));
-}
-
-
-// function MarkCross(cell,opts){
-// 	var opts={
-// 		lineWidth:`${STATE.LW}px`,
-// 		fillColor:"red",
-// 		strokeColor:"transparent",
-// 		cross:true,
-// 		n:4,
-// 		size:STATE.starsize,
-// 		...opts,
-// 		...StarXY(cell)
-// 	};
-// 	DrawStar(opts);
-// }
-
-// function UnMarkCross(cell,opts){
-// 	MarkCross(cell,{
-// 		...opts,
-// 		lineWidth:`${2*STATE.LW}px`,
-// 		fillColor:STATE.colours[cell],
-// 		strokeColor:STATE.colours[cell]
-// 	})
-// }
-
-// function StarXY(cell){
-// 	var p=STATE.polygons[cell];
-// 	return {x:p[0]+p[2]/2,y:p[1]+p[3]/2}
-// }
-
-
-
-// RegionModeActive=StatusReporter(
-// 	"RegionModeActive",
-// 	function(){return STATE.regionmode}
-// )
-
-// RegionModeToggle=function(mode){
-// 	return STATE.regionmode=!mode;
-// }
-
-// ErrorModeActive=StatusReporter(
-// 	"ErrorModeActive",
-// 	function(){return STATE.errormode}
-// )
-
-// ErrorModeToggle=function(mode){
-// 	if(STATE.errormode)
-// 		UnMarkErrors();
-// 	else
-// 		MarkErrors();
-// 	return STATE.errormode=!mode;
-// }
-
-
-// PathGrower=function(dx,dy){
-// 	if(!STATE.mode.selection||!STATE.mode.selection.length)
-// 		STATE.mode.selection=[[0,0]];
-
-// 	var xy=Last(STATE.mode.selection);
-// 	var x=Max(Min(xy[0]+dx||0,STATE.W),0);
-// 	var y=Max(Min(xy[1]+dy||0,STATE.H),0);
-
-// 	if(xy[0]!==x||xy[1]!==y)
-// 		STATE.mode.selection.push([x,y]);
-	
-// 	return [x,y];
-// }
-
-Extremes=function(state){
-	return GridExtremes({
-		rows:state.H,
-		cols:state.W,
-		target:state.target
-	});
-}
-
-CanvasPosition=function(x,y,state){
-	var extremes=Extremes(state);
-	var col=Floor(state.W*(x-extremes.x0*extremes.width)/(extremes.x1-extremes.x0)/extremes.width+0.5);
-	var row=Floor(state.H*(y-extremes.y0*extremes.height)/(extremes.y1-extremes.y0)/extremes.height+0.5);
-	return [col,row];
-}
-
-
-XYFruit=function(xy,state){
-	var fruits=Keys(state.level).filter(k=>In(state.level[k],xy));
-	if(fruits.length)
-		return First(fruits);
-	else
-		return false;
-}
-
-XYFruitRemove=function(xy){
-	var oldfruit=XYFruit(xy,STATE);
-	if(oldfruit)
-		STATE.level[oldfruit]=STATE.level[oldfruit].filter(cr=>!Equal(cr,xy));
-	return STATE;
-}
-
-XYFruitAdd=function(xy){
-
-	if(!PositionValid(xy[0],xy[1],STATE))
-		return;
-
-	XYFruitRemove(xy);
-
-	var overfruit=STATE.mode.symbol;
-	if(!STATE.level[overfruit])
-		STATE.level[overfruit]=[];
-
-	STATE.level[overfruit].push(xy);
-	STATE.level[overfruit]=STATE.level[overfruit].sort();
-}
-
-OrthonormalXYDir=function(xyza){
-	var xy=Round(xyza[0],0);
-	var dir=VectorMinus(xy,Round(xyza[1],0));
-	if(Abs(dir[0])>=Abs(dir[1])){
-		dir[0]=Sign(dir[0])
-		dir[1]=0;
-	}else{
-		dir[1]=Sign(dir[1])
-		dir[0]=0;
-	}
-	if(dir[0]<0||dir[0]===0&&dir[1]<0)
-		return [za,VectorMinus(za,dir)]
-	else
-		return [xy,VectorPlus(xy,dir)];
-}
-
-PointsTrack=function(path){
-	var track=Rest(path).map((xy,i)=>[path[i],xy]);
-	return SortTrack(track);
-}
-
-SortTrack=function(track){
-	function Switcher(segmin,segment){
-		return segmin[0]>segment[0]||(segmin[0]===segment[0]&&segmin[1]>segment[1])}
-	return CycleSort(track.map(segment=>segment.sort()),Switcher)
-}
-
-
-TrackPath=function(track){
-	var stas=track.map(First);
-	return stas.concat([Last(Last(track))]);
-}
-
-ContiguousTracks=function(segments){
-	var i=0;
-	var j;
-	var tracks=[];
-	var xy;
-	var za;
-	var added;
-	var segment;
-	var segments=segments.sort();
-	while(i<segments.length){
-		segment=Sort(segments[i]);
-		xy=segment[0];
-		za=segment[1];
-		j=0;
-		added=false;
-		while(j<tracks.length&&!added){
-			if(tracks[j].some(seg=>In(seg,xy)||In(seg,za))){
-				tracks[j]=Union(tracks[j],[segment]);
-				added=true;
-			}
-			j++;
-		}
-		if(!added)
-			tracks.push([segment]);
-		i++;
-	}
-	return tracks.map(CanonicalContiguousPath);
-}
-
-SegmentTouched=function(segment,track){
-	return NextSegments(segment,track).length>0;
-}
-
-SegmentOverlapped=function(segment,track){
-	return In(track,segment)||In(track,Reverse(segment));
-}
-
-DeleteSegmentTrack=function(segment,track){
-	return track.filter(seg=>!In([segment,Reverse(segment)],seg));
-}
-
-NextSegments=function(segment,track){
-	var intrack=DeleteSegmentTrack(segment,track);
-	return intrack.filter(seg=>(In(seg,segment[0])||In(seg,segment[1])));
-}
-
-TrackEndsegments=function(track){
-	var endsegments=track.filter(endsegment=>NextSegments(endsegment,track).length<=1);
-	return endsegments;
-}
-
-TrackEndpoints=function(track){
-	var endsegments=TrackEndsegments(track);
-	if(!endsegments.length)
-		return [];
-	else
-		return Join(...endsegments).filter(xy=>track.filter(segment=>In(segment,xy)).length===1);
-}
-
-CanonicalContiguousTrack=function(track){
-	var endsegments=TrackEndsegments(track);
-	if(!endsegments.length)	//a loop
-		endsegments=track;
-	
-	var previoussegment=null;
-	var nextsegment=First(endsegments.sort());
-	var canonicaltrack=[];
-	var oldtrack=track;
-	while(oldtrack.length>0&&nextsegment!==previoussegment){
-		previoussegment=nextsegment;
-		canonicaltrack.push(nextsegment);	
-		oldtrack=DeleteSegmentTrack(nextsegment,oldtrack);
-		nextsegment=First(NextSegments(previoussegment,oldtrack));
-	}
-	return canonicaltrack;
-}
-
-TrackAdd=function(track){
-	return track.map(SegmentAdd);
-}
-
-SegmentAdd=function(segment){
-	var segment1=OrthonormalXYDir(segment);
-	var segment2=OrthonormalXYDir(Reverse(segment));
-	var xy=segment1[0];
-	var za=segment1[1];
-
-	var tracks=STATE.paths.map(PointsTrack);
-	
-	var extendable=tracks.filter(track=>track.some(segment=>In(segment,xy)||In(segment,za)));
-	if(!extendable.length)
-		STATE.paths.push(segment1);
-	else if(extendable.length===1){
-		var exttrack=First(extendable);
-		
-		//already there
-		if(In(exttrack,segment1)||In(exttrack,segment2))
-			return;
-		
-		//branching
-		else if(exttrack.filter(segment=>In(segment,xy).length===2||exttrack.filter(segment=>In(segment,za).length===2)))
-			return STATE.paths.push(segment1);
-		
-		//looping or extending
-		else if(exttrack.filter(segment=>In(segment,xy).length===1||exttrack.filter(segment=>In(segment,za).length===1))){
-			var i=tracks.findIndex(track=>Equal(track,exttrack));
-			var path=STATE.paths[i];
-			var sta=First(path);
-			var end=Last(path);
-			if(Equal(end,xy))
-				return path.push(za);
-			else if(Equal(end,za))
-				return path.push(xy);
-			if(Equal(sta,xy))
-				return path.unshift(za);
-			else if(Equal(sta,za))
-				return path.unshift(xy);
-
-		}
-	}
-	else{ //many possibilities -> rebuild
-			
-	}
-}
-
-
-
-function DragActionStarter(x,y){
-	var xy=CanvasPosition(x,y,STATE);
-	STATE.mode.symbol=XYFruit(xy,STATE)||STATE.mode.symbol;
-	STATE.mode.dragging=true;
-	if(STATE.mode.edit){
-		STATE.mode.clearing=!!XYFruit(xy,STATE);
-		STATE.mode.selection=[xy];
-		DrawState();
-	}
-}
-function DragActionAltStarter(x,y){
-	//return 	RegionModeActive()?PickRegionCells(x,y):AddCrossCells(x,y);
-}
-function DragActionContinuer(x,y){
-	var xy=CanvasPosition(x,y,STATE);
-	if(STATE.mode.edit){
-		if(!STATE.mode.selection)
-			STATE.mode.selection=[];
-		
-		if(!In(STATE.mode.selection,xy)){
-			STATE.mode.selection=Union(STATE.mode.selection,[xy]);
-			DrawState();
-		}
-
-	}
-	//return RegionModeActive()?ContinueRegionCells(x,y):ContinueStarCrossCells(x,y);
-}
-function DragActionEnder(x,y){
-	var xy=CanvasPosition(x,y,STATE);
-	STATE.mode.dragging=false;
-	if(STATE.mode.edit){
-		if(STATE.mode.clearing)
-			STATE.mode.selection.map(XYFruitRemove);
-		else
-			STATE.mode.selection.map(XYFruitAdd);
-	}
-	else {
-		if(STATE.mode.clearing)
-			PointsTrack(STATE.mode.selection).map(XYSegmentRemove);
-		else
-			PointsTrack(STATE.mode.selection).map(XYSegmentAdd);
-	}
-	STATE.mode.selection=[];
-	UpdateState()	
-}
-
-TransformLevel=function(level,CoordinateTransform){
-	var newlevel={};
-	Keys(level).map(k=>newlevel[k]=level[k].map(CoordinateTransform));
-	return newlevel;
-};
-
-DecrementCanvasWidth	=StateUpdater({W:W=>Max(W-1,2)});
-DecrementCanvasHeight	=StateUpdater({H:H=>Max(H-1,2)});
-IncrementCanvasWidth	=StateUpdater({W:W=>Max(W+1,2)});
-IncrementCanvasHeight	=StateUpdater({H:H=>Max(H+1,2)});
-
-UnShiftCanvasHeight	=StateUpdater({level:level=>TransformLevel(level,xy=>[xy[0]  ,xy[1]+1])});
-UnShiftCanvasWidth	=StateUpdater({level:level=>TransformLevel(level,xy=>[xy[0]+1,xy[1]  ])});
-ShiftCanvasHeight	=StateUpdater({level:level=>TransformLevel(level,xy=>[xy[0]  ,xy[1]-1])});
-ShiftCanvasWidth	=StateUpdater({level:level=>TransformLevel(level,xy=>[xy[0]-1,xy[1]  ])});
-
-var KeyboardActions={
-	"shift left":ShiftCanvasWidth,
-	"shift up":ShiftCanvasHeight,
-	"shift right":UnShiftCanvasWidth,
-	"shift down":UnShiftCanvasHeight,
-	"ctrl left":DecrementCanvasWidth,
-	"ctrl up":IncrementCanvasHeight,
-	"ctrl right":IncrementCanvasWidth,
-	"ctrl down":DecrementCanvasHeight,
-	
-	"ctrl b":function(){STATE.visuals.monochrome=!!!STATE.visuals.monochrome;UpdateState();},
-	"ctrl s":ExportSerial,
-	// "left":PathGrower(-1,0),
-	// "up":PathGrower(0,1),
-	// "right":PathGrower(1,0),
-	// "down":PathGrower(0,-1)
-};
-
-FruitSetter=function(fruit){
-	KeyboardActions[FruitIcons[fruit].letter]=function(){STATE.mode.symbol=fruit}
-}
-
-Keys(FruitIcons).map(FruitSetter);
-
-
-var DragActions={
-	Starter:DragActionStarter,
-	AltStarter:DragActionAltStarter,
-	Executer:DragActionContinuer,
-	Ender:DragActionEnder
-}
-
-CanvasResize=function(){
-	GetElement(STATE.target).width=window.innerWidth;
-	GetElement(STATE.target).height=window.innerHeight;
-	DrawState();
-}
-
-InitialiseKudamono=function(){
-	PreAddElement(`
-		<canvas 
-			id="${STATE.target}" 
-			oncontextmenu="return false;" 
-			width="${window.innerWidth}" 
-			height="${window.innerHeight}"
-		></div>`,"body");
-	AttendDrag(DragActions,"canvas");
-	Attend('resize',CanvasResize)
-	if(PageSearch("l")||PageSearch("L")){
-		STATE=SerialState(PageSearchObject(),STATE);
-	}
-	UpdateState();
-	Keybind(KeyboardActions,STATE.target);
-	ResumeCapturingKeys(CaptureComboKey);
-}
-
-
-function ExportSerial(){
-	ClipboardCopy(PageURL(),"Copied this puzzle's URL to clipboard, for saving!")
-}
 
 if(PageSearch("W")&&PageSearch("L"))
 	setTimeout(InitialiseKudamono,500)
