@@ -123,11 +123,11 @@ Sort=function(SAO,...Sorters){
 	return SAO;
 }
 
-MinimalPosition=function(array,Switcher,offset){
-	var i=offset||0;
+MinimalPosition=function(array,Switcher){
+	var i=0;
 	var Switcher=Switcher||Smaller;
 	var l=array.length;
-	var p=0;
+	var p=i;
 	while(i<l){
 		if(Switcher(array[i],array[p]))
 			p=i;
@@ -135,7 +135,7 @@ MinimalPosition=function(array,Switcher,offset){
 	}
 	return p;
 }
-
+	
 CycleSort=function(array,Switcher){
 	var l=array.length;
 	var p=MinimalPosition(array,Switcher||Smaller);
