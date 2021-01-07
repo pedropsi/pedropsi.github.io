@@ -123,6 +123,24 @@ Sort=function(SAO,...Sorters){
 	return SAO;
 }
 
+MinimalPosition=function(array,Switcher,offset){
+	var i=offset||0;
+	var Switcher=Switcher||Smaller;
+	var l=array.length;
+	var p=0;
+	while(i<l){
+		if(Switcher(array[i],array[p]))
+			p=i;
+		i++
+	}
+	return p;
+}
+
+CycleSort=function(array,Switcher){
+	var l=array.length;
+	var p=MinimalPosition(array,Switcher||Smaller);
+	return array.map((t,j)=>array[(j+p+l)%l]);
+}
 
 //Key characters
 NumberCharacters=["0","1","2","3","4","5","6","7","8","9"];
@@ -275,10 +293,24 @@ Sin=Math.sin;
 Cos=Math.cos;
 PI=Math.PI;
 Abs=Math.abs;
+Sign=function(n){
+	if(n>0)
+		return 1
+	else if(n<0)
+		return -1
+	else
+		return 0;
+}
 Log10=Math.log10;
 Log=function(a,b){
 	return Math.log(a)/Math.log(b);
 }
+
+Smaller=function(n,m){
+	return n<m;
+}
+
+
 Round=function(n,m){
 	if(IsArray(n))
 		return n.map(a=>Round(a,m));
