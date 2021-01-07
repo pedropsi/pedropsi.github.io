@@ -122,7 +122,7 @@ DrawGrid=function(opts){
 	var y0=opts.y0;
 	var y1=opts.y1;
 
-	var s=opts.lineScale;
+	var s=opts.lineScale||4;
 
 	var dash=[2*s,2*s];
 	var lineWidth=s/4;
