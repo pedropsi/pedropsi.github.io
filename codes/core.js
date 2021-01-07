@@ -998,7 +998,7 @@ Reverse=function(SAO){
 	else if(IsObject(SAO))
 		return ReverseKeysObject(SAO);
 	else
-		return SAO.reverse();
+		return [...SAO].reverse();
 }
 
 ReverseKeysObject=function(Obj){ //Reverse key order
