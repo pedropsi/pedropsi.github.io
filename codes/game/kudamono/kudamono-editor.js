@@ -748,13 +748,13 @@ OrthonormalXYDir=function(xyza){
 
 PointsTrack=function(path){
 	var track=Rest(path).map((xy,i)=>[path[i],xy]);
-	return SortTrack(track)
+	return SortTrack(track);
 }
 
 SortTrack=function(track){
 	function Switcher(segmin,segment){
 		return segmin[0]>segment[0]||(segmin[0]===segment[0]&&segmin[1]>segment[1])}
-	return CycleSort(track.map(Sort),Switcher)
+	return CycleSort(track.map(segment=>segment.sort()),Switcher)
 }
 
 
@@ -877,9 +877,14 @@ function DragActionEnder(x,y){
 			STATE.mode.selection.map(XYFruitRemove);
 		else
 			STATE.mode.selection.map(XYFruitAdd);
-
-		STATE.mode.selection=[];
 	}
+	else {
+		if(STATE.mode.clearing)
+			PointsTrack(STATE.mode.selection).map(XYSegmentRemove);
+		else
+			PointsTrack(STATE.mode.selection).map(XYSegmentAdd);
+	}
+	STATE.mode.selection=[];
 	UpdateState()	
 }
 
