@@ -104,6 +104,7 @@ TrackPath=function(track){
 }
 
 SplitContiguousTracks=function(segments,state){
+	var segments=segments.filter(seg=>SegmentValid(seg,state));
 	var i=0;
 	var j;
 	var tracks=[];
@@ -129,8 +130,7 @@ SplitContiguousTracks=function(segments,state){
 			tracks.push([segment]);
 		i++;
 	}
-	tracks=tracks.map(CanonicalContiguousTrack);
-	tracks=Sort(tracks,track=>Linearise(First(First(track).sort()),STATE))
+	tracks=tracks.map(track=>CanonicalContiguousTrack(track,Lineariser(state.W)));
 	return tracks;
 }
 
@@ -177,13 +177,31 @@ TrackStartPoint=function(track){
 	return First(endpoints)||First(First(track));
 }
 
-CanonicalContiguousTrack=function(track){
+
+CanonicalContiguousTrack=function(track,Posit){
 	var endsegments=TrackEndsegments(track);
-	if(!endsegments.length)	//a loop
+	var endpoints=TrackEndpoints(track);
+
+	if(!endpoints.length)	//a loop
+		endpoints=track.map(First);
+
+	startpoint=First(Sort(endpoints,Posit));
+
+	if(endsegments.length<1)
 		endsegments=track;
+
+	endsegments=endsegments.filter(s=>In(s,startpoint));
 	
+	if(endsegments.length>1)
+		endsegments=endsegments.filter(s=>(In([[1,0],[-1,0]],VectorMinus(s[0],s[1])))); //TODO minimise with POSIT on both vertexes instead, generalises better
+	
+	var	nextsegment=First(endsegments);
+	
+	if(Equal(Last(nextsegment),startpoint)){
+		nextsegment=Reverse(First(endsegments));
+	}
 	var previoussegment=null;
-	var nextsegment=First(endsegments.sort());
+
 	var canonicaltrack=[];
 	var oldtrack=track;
 	while(oldtrack.length>0&&nextsegment!==previoussegment){
@@ -326,25 +344,32 @@ FruitLetter=function(fruit){
 	return FruitIcons[fruit].letter.toLowerCase();
 }
 
+
+Linearise=function(xy,W){
+	return xy[0]+xy[1]*(W+1);
+}
+
+Lineariser=function(W){
+	return function(xy){
+		return Linearise(xy,W);
+	}
+}
+
+UnLinearise=function(n,W){
+	return [n%W,Floor(n/W)]
+}
+
 LevelSerial=function(state){
 	var xyfruits=Keys(state.level).map(fruit=>state.level[fruit].map(xy=>[xy[0],xy[1],FruitLetter(fruit)]));
 		xyfruits=Join(...xyfruits);
 		xyfruits=xyfruits.filter(fxy=>PositionValid(fxy[0],fxy[1],state));
 
-	var	fruitsxys=xyfruits.map(fxy=>[fxy[2],Linearise(fxy,(state.W+1))]);
+	var	fruitsxys=xyfruits.map(fxy=>[fxy[2],Linearise(fxy,(state.W))]);
 		fruitsxys=Sort(fruitsxys,Last);
 		fruitsxys=Join([["",0]],fruitsxys);
 		fruitsxys=Rest(fruitsxys).map((p,i)=>p[0]+(p[1]-fruitsxys[i][1]));
 	
 	return fruitsxys.join("");
-}
-
-Linearise=function(xy,W){
-	return xy[0]+xy[1]*W;
-}
-
-UnLinearise=function(n,W){
-	return [n%W,Floor(n/W)]
 }
 
 FruitSerialPattern=/(\w)(\d+)/g;
@@ -460,12 +485,11 @@ SerialSegments=function(serial,state){
 }
 
 
-
 SegmentsSerial=function(state){
 	var tracks=STATE.tracks;
 	var W=state.W;
 	var pointtracks=tracks.map(track=>[TrackStartPoint(track),track]);
-		pointtracks=pointtracks.map(pt=>[Linearise(pt[0],W+1),pt[1]]);
+		pointtracks=pointtracks.map(pt=>[Linearise(pt[0],W),pt[1]]);
 		pointtracks=Sort(pointtracks,First);
 		differences=[0].concat(pointtracks.map(First));
 		pointtracks=pointtracks.map((pt,i)=>[pt[0]-differences[i],pt[1]]);
@@ -623,7 +647,7 @@ StateUpdater=function(opts){
 UpdateState=function(opts){
 	if(opts)
 		Keys(opts).map(k=>STATE[k]=opts[k](STATE[k]));
-	STATE.tracks=SplitContiguousTracks(STATE.segments.filter(seg=>SegmentValid(seg,STATE)),STATE);
+	STATE.tracks=SplitContiguousTracks(STATE.segments,STATE);
 	DrawState();
 	NavigateSerial(StateSerial(STATE));
 }
@@ -834,7 +858,7 @@ function DragActionEnder(x,y){
 	// 	if(STATE.mode.clearing)
 	// 		STATE.mode.selection.map(XYSegmentRemove);
 	// 	else
-	// 		CanonicalContiguousTrack(STATE.mode.selection).map(XYSegmentAdd);
+	// 		STATE.mode.selection.map(XYSegmentAdd);
 	// }
 	STATE.mode.selection=[];
 	UpdateState()	
