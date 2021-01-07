@@ -192,15 +192,6 @@ StateLevelSerial=function(state){
 	return fruitsxys.join("");
 }
 
-// StatePathsSerial=function(state){
-// 	var paths=state.paths.filter(paths=>path.every(xy=>PositionValid(xy[0],xy[1],state);
-// 		paths=paths.map(fxy=>[fxy[0],fxy[1]+fxy[2]*(state.W+1)]);
-// 		fruitsxys=Sort(fruitsxys,Last);
-// 		fruitsxys=Join([["",0]],fruitsxys);
-// 		fruitsxys=Rest(fruitsxys).map((p,i)=>p[0]+(p[1]-fruitsxys[i][1]));
-	
-// 	return fruitsxys.join("");
-// }
 
 FruitSerialPattern=/(\w)(\d+)/g;
 
@@ -225,7 +216,7 @@ SerialLevel=function(serial,state){
 	return level;
 }
 
-LineSerialPattern=/\d+\D+/ig;
+PathSerialPattern=/\d+\D+/ig;
 
 DirectionsLetter={
 	"LLL":"a",
@@ -293,7 +284,7 @@ DirectionsCoordinates={
 
 LetterDirections=FlipKeysValues(DirectionsLetter);
 
-LetterPath=function(letters,startxy){
+LetterContiguousPath=function(letters,startxy){
 	var directions=letters.split("").map(Accesser(LetterDirections)).join("").split("");
 		directions=directions.map(Accesser(DirectionsCoordinates));
 	var coordinates=directions;
@@ -303,12 +294,34 @@ LetterPath=function(letters,startxy){
 	return PointsTrack(coordinates);
 }
 
-SerialLines=function(serial,state){
-	var lineserials=serial.match(LineSerialPattern);
-	var linediffs=lineserials.map(s=>[First(s.match(/\D+/ig)),Number(First(s.match(/\d+/ig)))]);
-	var accumulated=AccumulateTokenCoords(linediffs,state.W);
-	return accumulated.map(lp=>LetterPath(lp[0],lp[1]));
+SerialSegments=function(serial,state){
+	var pathserials=serial.match(PathSerialPattern);
+	var pathdiffs=pathserials.map(s=>[First(s.match(/\D+/ig)),Number(First(s.match(/\d+/ig)))]);
+	var accumulated=AccumulateTokenCoords(pathdiffs,state.W);
+	var tracks=accumulated.map(lp=>LetterContiguousPath(lp[0],lp[1]));
+	return Join(...tracks);
 }
+
+
+SegmentsSerial=function(segments,state){
+	var segments=segments.filter(SegmentValid);
+	var tracks=ContiguousTracks(segments);
+		tracks=tracks.map
+
+// 		paths=paths.map(fxy=>[fxy[0],fxy[1]+fxy[2]*(state.W+1)]);
+// 		fruitsxys=Sort(fruitsxys,Last);
+// 		fruitsxys=Join([["",0]],fruitsxys);
+// 		fruitsxys=Rest(fruitsxys).map((p,i)=>p[0]+(p[1]-fruitsxys[i][1]));
+	
+// 	return fruitsxys.join("");
+
+	var pathserials=serial.match(PathSerialPattern);
+	var pathdiffs=pathserials.map(s=>[First(s.match(/\D+/ig)),Number(First(s.match(/\d+/ig)))]);
+	var accumulated=AccumulateTokenCoords(pathdiffs,state.W);
+	var tracks=accumulated.map(lp=>LetterContiguousPath(lp[0],lp[1]));
+	return Join(...tracks);
+}
+
 
 SerialState=function(serialObj,state){
 	var state={...state};
@@ -316,6 +329,7 @@ SerialState=function(serialObj,state){
 		state.W=Number(serialObj.w||serialObj.h);
 		state.H=Number(serialObj.h||serialObj.w);
 		state.level=SerialLevel(serialObj.l,state);
+		state.segments=SerialSegments(serialObj.s,state)
 	return state;
 }
 
@@ -771,6 +785,7 @@ ContiguousTracks=function(segments){
 	var za;
 	var added;
 	var segment;
+	var segments=segments.sort();
 	while(i<segments.length){
 		segment=Sort(segments[i]);
 		xy=segment[0];
@@ -788,9 +803,56 @@ ContiguousTracks=function(segments){
 			tracks.push([segment]);
 		i++;
 	}
-	return tracks;
+	return tracks.map(CanonicalContiguousPath);
 }
 
+SegmentTouched=function(segment,track){
+	return NextSegments(segment,track).length>0;
+}
+
+SegmentOverlapped=function(segment,track){
+	return In(track,segment)||In(track,Reverse(segment));
+}
+
+DeleteSegmentTrack=function(segment,track){
+	return track.filter(seg=>!In([segment,Reverse(segment)],seg));
+}
+
+NextSegments=function(segment,track){
+	var intrack=DeleteSegmentTrack(segment,track);
+	return intrack.filter(seg=>(In(seg,segment[0])||In(seg,segment[1])));
+}
+
+TrackEndsegments=function(track){
+	var endsegments=track.filter(endsegment=>NextSegments(endsegment,track).length<=1);
+	return endsegments;
+}
+
+TrackEndpoints=function(track){
+	var endsegments=TrackEndsegments(track);
+	if(!endsegments.length)
+		return [];
+	else
+		return Join(...endsegments).filter(xy=>track.filter(segment=>In(segment,xy)).length===1);
+}
+
+CanonicalContiguousTrack=function(track){
+	var endsegments=TrackEndsegments(track);
+	if(!endsegments.length)	//a loop
+		endsegments=track;
+	
+	var previoussegment=null;
+	var nextsegment=First(endsegments.sort());
+	var canonicaltrack=[];
+	var oldtrack=track;
+	while(oldtrack.length>0&&nextsegment!==previoussegment){
+		previoussegment=nextsegment;
+		canonicaltrack.push(nextsegment);	
+		oldtrack=DeleteSegmentTrack(nextsegment,oldtrack);
+		nextsegment=First(NextSegments(previoussegment,oldtrack));
+	}
+	return canonicaltrack;
+}
 
 TrackAdd=function(track){
 	return track.map(SegmentAdd);
