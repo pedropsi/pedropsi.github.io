@@ -992,6 +992,25 @@ Delete=function(array,i){
 	return a.slice(0,i).concat(a.slice(i+1,a.length));
 }
 
+RemoveFirst=function(array,item){
+	var i=array.findIndex(x=>Equal(x,item));
+	if(i>=0)
+		return Delete(array,i);
+	else
+		return array;
+}
+
+Remove=function(array,item){
+	return FixedPoint(arr=>RemoveFirst(arr,item),array);
+}
+
+AddOnce=function(array,item){
+	if(!In(array,item))
+		return array.concat([item]);
+	else
+		return array;
+}
+
 Reverse=function(SAO){
 	if(IsString(SAO))
 		return SAO.split("").reverse().join("");
