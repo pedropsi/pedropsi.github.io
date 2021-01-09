@@ -3,7 +3,7 @@
 //All rights reserved.
 ///////////////////////////////////////////////////////////////////////////////
 
-var sources=["data-game-colours.js","data-game-canvas.js"];
+var sources=["data-game-colours.js","data-game-canvas.js","data-game-undo.js"];
 sources.map(LoaderInFolder("codes/game/modules"));
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -91,7 +91,7 @@ OrthonormalXYDir=function(xyza){
 		return [xy,VectorPlus(xy,dir)];
 }
 
-PointsTrack=function(path){
+PathTrack=function(path){
 	var track=Rest(path).map((xy,i)=>[path[i],xy]);
 	return SortTrack(track);
 }
@@ -106,6 +106,81 @@ SortTrack=function(track){
 TrackPath=function(track){
 	var stas=track.map(First);
 	return stas.concat([Last(Last(track))]);
+}
+
+PointSegmentContained=function(point,segment){
+	return In(segment,point);
+}
+
+PointTrackContained=function(point,track){
+	return track.some(segment=>PointSegmentContained(point,segment));
+}
+
+SegmentTrackContained=function(segment,track){
+	return In(track,segment)||In(track,Reverse(segment));
+}
+
+SegmentPoints=function(segment,points){
+	//return [segment[0],segment[1]]
+	return segment;
+}
+
+TrackPoints=function(track){
+	return Union(Join(...track.map(SegmentPoints)));
+}
+
+// SegmentTrackTouched=function(segment,track){
+// 	return SegmentContiguousTrackSegments(segment,track).length>0;
+// }
+
+DeletePointTrack=function(point,track){
+	return track.filter(seg=>!PointSegmentContained(point,seg));
+}
+
+DeleteSegmentTrack=function(segment,track){
+	return track.filter(seg=>!In([segment,Reverse(segment)],seg));
+}
+
+SegmentContiguousTrackSegments=function(segment,track){
+	var intrack=DeleteSegmentTrack(segment,track);
+	return Join(...SegmentPoints(segment).map(point=>PointContiguousTrackSegments(point,intrack)))
+}
+
+PointContiguousTrackSegments=function(point,track){
+	return track.filter(seg=>In(SegmentPoints(seg),point));
+}
+
+TrackEndsegments=function(track){
+	var endsegments=track.filter(endsegment=>
+		SegmentPoints(endsegment).some(
+			point=>(PointContiguousTrackSegments(point,DeleteSegmentTrack(endsegment,track)).length===0)
+		));
+	return endsegments;
+}
+
+TrackEndpoints=function(track){
+	var endsegments=TrackEndsegments(track);
+	if(!endsegments.length)
+		return [];
+	else
+		return Join(...endsegments).filter(xy=>track.filter(segment=>In(segment,xy)).length===1);
+}
+
+TrackBranchpoints=function(track){
+	return TrackPoints(track).filter(point=>PointContiguousTrackSegments(point,track).length>=3);
+}
+
+TrackLooped=function(track){
+	return track.length>0&&TrackEndpoints(track).length===0&&TrackBranchpoints(track).length===0;
+}
+
+TrackBranched=function(track){
+	return TrackBranchpoints(track).length>0;
+}
+
+TrackStartPoint=function(track){
+	var endpoints=TrackEndpoints(track);
+	return First(endpoints)||First(First(track));
 }
 
 SplitContiguousTracks=function(segments,state){
@@ -124,10 +199,10 @@ SplitContiguousTracks=function(segments,state){
 			break;
 		}
 
-		var next=NextSegments(segment,segments);
+		var next=SegmentContiguousTrackSegments(segment,segments);
 
 		if(!next.length){
-			next=track.map(seg=>NextSegments(seg,segments));
+			next=track.map(seg=>SegmentContiguousTrackSegments(seg,segments));
 			next=Join(...next);
 		}
 
@@ -161,7 +236,7 @@ LinearTracks=function(contiguouscanonicalsegments){
 			break;
 		}
 
-		var next=NextSegments(segment,segments);
+		var next=SegmentContiguousTrackSegments(segment,segments);
 
 		if(!next.length){
 			lineartracks.push(track);
@@ -174,49 +249,6 @@ LinearTracks=function(contiguouscanonicalsegments){
 
 	}
 	return lineartracks;
-}
-
-SegmentTouched=function(segment,track){
-	return NextSegments(segment,track).length>0;
-}
-
-SegmentOverlapped=function(segment,track){
-	return In(track,segment)||In(track,Reverse(segment));
-}
-
-DeleteSegmentTrack=function(segment,track){
-	return track.filter(seg=>!In([segment,Reverse(segment)],seg));
-}
-
-NextSegments=function(segment,track){
-	var intrack=DeleteSegmentTrack(segment,track);
-	return intrack.filter(seg=>(In(seg,segment[0])||In(seg,segment[1])));
-}
-
-TrackEndsegments=function(track){
-	var endsegments=track.filter(endsegment=>NextSegments(endsegment,track).length<=1);
-	return endsegments;
-}
-
-TrackEndpoints=function(track){
-	var endsegments=TrackEndsegments(track);
-	if(!endsegments.length)
-		return [];
-	else
-		return Join(...endsegments).filter(xy=>track.filter(segment=>In(segment,xy)).length===1);
-}
-
-TrackLooped=function(track){
-	return TrackEndpoints(track).length===0&&track.length>0;
-}
-
-TrackBranched=function(track){
-	return TrackEndpoints(track).length>2;
-}
-
-TrackStartPoint=function(track){
-	var endpoints=TrackEndpoints(track);
-	return First(endpoints)||First(First(track));
 }
 
 
@@ -249,7 +281,7 @@ CanonicalContiguousTrack=function(track,Posit){
 	while(oldtrack.length>0&&nextsegment!==previoussegment){
 		previoussegment=nextsegment;
 		oldtrack=DeleteSegmentTrack(previoussegment,oldtrack);
-		nextsegment=First(NextSegments(previoussegment,oldtrack));
+		nextsegment=First(SegmentContiguousTrackSegments(previoussegment,oldtrack));
 		if(!nextsegment||In(nextsegment,previoussegment[1]))
 			canonicaltrack.push(previoussegment);
 		else
@@ -277,6 +309,13 @@ TrackFruits=function(track,state){
 
 TrackStyleOpts=function(track,state,Opts){
 	var fruits=TrackFruits(track,state);
+	var s=Opts.lineScale||1;
+	var dash=[1,1];
+
+	if(TrackBranched(track))
+		dash=[1,2];
+
+	console.log(TrackBranched(track),track)
 	
 	var colour;
 	if(fruits.length<1)
@@ -286,10 +325,10 @@ TrackStyleOpts=function(track,state,Opts){
 	else
 		colour=FruitIcons[First(fruits)].colour;
 
-	var s=Opts.lineScale||1;
+	
 	return {
 		strokeColor:CompelRGBA(colour,0.5),
-		dash:[1,1],
+		dash:dash,
 		lineWidth:5*s,
 	}
 
@@ -540,7 +579,7 @@ LetterContiguousPath=function(letters,startxy){
 		coordinates=coordinates.map((c,i)=>Apply(VectorPlus,Take(directions,i+1)));
 		coordinates.unshift([0,0]);
 		coordinates=coordinates.map(c=>VectorPlus(c,startxy))
-	return PointsTrack(coordinates);
+	return PathTrack(coordinates);
 }
 
 SerialSegments=function(serial,state){
@@ -641,75 +680,81 @@ StateSerial=function(state){
 //a friendly representation of the board state.
 //The source of truth: updating STATE must update everything.
 
-var STATE={
-	//visuals
-	target:"kudamono-canvas",
-	visuals:{
-		monochrome:false
-	},
-	line:{
-		opacity:0.5,
-		lineWidth:10,
-		cap:"round",
-		corners:"round",
-		colour:"rgba(155,155,155,0.5)",		//default line colour
-		excessColour:"#000000",				//path colour, too many fruit
-		deficitColour:"#CCCCCC" 			//path colour, zero		fruit
-	},
-	grid:{
-		strokeColor:"#BBBBBB",				//grid lines
-		fillColor:"#FFFFFF",				//background
-		lineWidth:2,						//width   of grid lines
-		dash:[6,12],						//dashing of grid lines
-		width:1200,							
-		height:1200,						
-		border:0.5,							//how many squares to add to the border (to each of the shortest sides)
-		scale:0.75,							//fruit scale (how large)
-		nudge:0.2							//fruit nudge (small adjustments to position)
-	},	
 
-	//Puzzle
-	W:7,
-	H:7,
-	level:{
-		"apple":[[1,1],[5,5]],
-		"pear":[[3,3]],
-		"cherry":[[2,2],[1,4]],
-		"blueberry":[[3,1]],
-		"grape":[[5,1],[1,2]],
-		"lemon":[[6,1],[6,2]],
-		"melon":[[4,4],[3,4]],
-		"orange":[[2,1],[2,5]],
-	},
-	segments:[
-		[[0,0],[0,1]],
-		[[0,1],[1,1]],
-		[[2,2],[2,1]],
-		[[2,1],[2,0]],
-		[[2,0],[3,0]],
-		[[4,1],[4,2]],
-		[[4,2],[4,3]],
-		[[4,3],[4,4]],
-		[[0,3],[0,4]],
-		[[0,3],[1,3]],
-		[[1,4],[0,4]],
-		[[1,3],[1,4]]
-	],
-	tracks:[],
-	crosses:{},
+ObtainStartingLevelState=function(){
+	return {
+		//visuals
+		target:"kudamono-canvas",
+		visuals:{
+			monochrome:false
+		},
+		line:{
+			opacity:0.5,
+			lineWidth:10,
+			cap:"round",
+			corners:"round",
+			colour:"rgba(155,155,155,0.5)",		//default line colour
+			excessColour:"#000000",				//path colour, too many fruit
+			deficitColour:"#CCCCCC" 			//path colour, zero		fruit
+		},
+		grid:{
+			strokeColor:"#BBBBBB",				//grid lines
+			fillColor:"#FFFFFF",				//background
+			lineWidth:2,						//width   of grid lines
+			dash:[6,12],						//dashing of grid lines
+			width:1200,							
+			height:1200,						
+			border:0.5,							//how many squares to add to the border (to each of the shortest sides)
+			scale:0.75,							//fruit scale (how large)
+			nudge:0.2							//fruit nudge (small adjustments to position)
+		},	
 
-	//Interaction
-	mode:{
-		edit:true,			//true:adding fruits, false:solving
-		dragging:false,		//whether dragging
-		clearing:false,		//whether clearing fruits, lines, etc...
-		symbol:"cherry",	//current fruit to be added
-		line:false,			//whether adding lines,
-		fruitline:false,	//which fruit the path connects to (defaults to none)
-		selection:[],		//current points selected (accumulates)
-		error:false			//whether to display errors
+		//Puzzle
+		W:7,
+		H:7,
+		level:{
+			"apple":[[1,1],[5,5]],
+			"pear":[[3,3]],
+			"cherry":[[2,2],[1,4]],
+			"blueberry":[[3,1]],
+			"grape":[[5,1],[1,2]],
+			"lemon":[[6,1],[6,2]],
+			"melon":[[4,4],[3,4]],
+			"orange":[[2,1],[2,5]],
+		},
+		segments:[
+			[[0,0],[0,1]],
+			[[0,1],[1,1]],
+			[[2,2],[2,1]],
+			[[2,1],[2,0]],
+			[[2,0],[3,0]],
+			[[4,1],[4,2]],
+			[[4,2],[4,3]],
+			[[4,3],[4,4]],
+			[[0,3],[0,4]],
+			[[0,3],[1,3]],
+			[[1,4],[0,4]],
+			[[1,3],[1,4]]
+		],
+		tracks:[],
+		crosses:{},
+
+		//Interaction
+		mode:{
+			edit:false,			//true:adding fruits, false:solving
+			dragging:false,		//whether dragging
+			clearing:false,		//whether clearing fruits, lines, etc...
+			symbol:"cherry",	//current fruit to be added
+			line:false,			//whether adding lines,
+			fruitline:false,	//which fruit the path connects to (defaults to none)
+			selection:[],		//current points selected (accumulates)
+			error:false			//whether to display errors
+		}
 	}
 }
+
+STATE=ObtainStartingLevelState()
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -729,9 +774,9 @@ DrawStatePaths=function(state){
 	var Opts=Extremes(state);
 	
 	if(!state.mode.edit&&state.mode.selection.length>1){
-		var seltrack=PointsTrack(state.mode.selection);
+		var seltrack=PathTrack(state.mode.selection);
 		if(state.mode.clearing)
-			DrawTrack(seltrack,STATE,{colour:HEXLightener(0.9),dash:[2,2]});
+			DrawTrack(seltrack,STATE,{colour:HEXLightener(0.9)});
 		else
 			DrawTrack(seltrack,STATE,{colour:HEXDarkener(0.9)});
 	}
@@ -759,8 +804,10 @@ UpdateState=function(opts){
 		Keys(opts).map(k=>STATE[k]=opts[k](STATE[k]));
 	STATE.tracks=SplitContiguousTracks(STATE.segments,STATE);
 	DrawState();
+	AddUndo(STATE);
 	NavigateSerial(StateSerial(STATE));
 }
+
 
 
 // function MarkCross(cell,opts){
@@ -877,7 +924,6 @@ XYFruitAdd=function(xy){
 }
 
 XYSegments=function(xy,state){
-	console.log(xy)
 	var segments=state.segments.filter(s=>In(s,xy));
 	return segments;
 }
@@ -911,7 +957,7 @@ SegmentAdd=function(segment){
 	var xy=segment1[0];
 	var za=segment1[1];
 
-	var tracks=STATE.paths.map(PointsTrack);
+	var tracks=STATE.paths.map(PathTrack);
 	
 	var extendable=tracks.filter(track=>track.some(segment=>In(segment,xy)||In(segment,za)));
 	if(!extendable.length)
@@ -991,7 +1037,7 @@ function DragActionEnder(x,y){
 	
 		STATE.mode.clearing=selected.length<2||Intersection(XYSegments(selected[0],STATE),XYSegments(selected[1],STATE)).length>=1;
 
-		var segments=PointsTrack(STATE.mode.selection);
+		var segments=PathTrack(STATE.mode.selection);
 
 		if(STATE.mode.clearing)
 			segments.map(XYSegmentRemove);
@@ -1060,19 +1106,21 @@ var KeyboardActions={
 
 	"space":function(){STATE.mode.edit=!STATE.mode.edit;UpdateState();},
 
-	"ctrl r":ClearSegments,
-	"ctrl shift r":ClearFruit,
-	"ctrl alt r":ClearBoard,
+	"ctrl r":function(){STATE.segments=[];UpdateState();},
+	"ctrl shift r":function(){STATE.level={};UpdateState();},
+	"ctrl alt r":function(){STATE.level={};STATE.segments=[];UpdateState();},
 
 	// "left":PathGrower(-1,0),
 	// "up":PathGrower(0,1),
 	// "right":PathGrower(1,0),
 	// "down":PathGrower(0,-1)
+
+	"ctrl z":function(){Undo()}
 };
 
-var ClearBoard=StateUpdater({segments:[],level:{}});
-var ClearSegments=StateUpdater({segments:[]});
-var ClearFruit=StateUpdater({level:{}});
+var ClearBoard=StateUpdater({segments:segments=>[],level:level=>{}});
+var ClearSegments=StateUpdater({segments:segments=>[]});
+var ClearFruit=StateUpdater({level:level=>{}});
 
 FruitSetter=function(fruit){
 	KeyboardActions[FruitIcons[fruit].letter]=function(){
