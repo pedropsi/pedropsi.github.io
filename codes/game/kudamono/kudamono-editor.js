@@ -293,7 +293,7 @@ CanonicalContiguousTrack=function(track,Posit){
 
 
 SegmentValid=function(segment,state){
-	return PositionValid(segment[0][0],segment[0][1],state)&&PositionValid(segment[1][0],segment[1][1],state);
+	return In(Values(DirectionsCoordinates),VectorMinus(segment[0],segment[1]))&&SegmentPoints(segment).every(point=>PointValid(point,state));
 }
 
 
@@ -312,10 +312,12 @@ TrackStyleOpts=function(track,state,Opts){
 	var s=Opts.lineScale||1;
 	var dash=[1,1];
 
-	if(TrackBranched(track))
-		dash=[1,2];
+	var lineCap="round";
+	if(TrackLooped(track))
+		lineCap="square";
 
-	console.log(TrackBranched(track),track)
+	if(TrackBranched(track))
+		dash=[1,20];
 	
 	var colour;
 	if(fruits.length<1)
@@ -329,6 +331,7 @@ TrackStyleOpts=function(track,state,Opts){
 	return {
 		strokeColor:CompelRGBA(colour,0.5),
 		dash:dash,
+		lineCap:lineCap,
 		lineWidth:5*s,
 	}
 
@@ -336,7 +339,7 @@ TrackStyleOpts=function(track,state,Opts){
 
 DrawTrack=function(track,state,Opts){
 	var trackStyleOpts=TrackStyleOpts(track,state,Opts);
-	track.map(segment=>DrawSegment({
+	track.filter(segment=>SegmentValid(segment,state)).map(segment=>DrawSegment({
 		px0:segment[0][0],
 		px1:segment[1][0],
 		py0:segment[0][1],
@@ -360,6 +363,9 @@ DrawSegment=function(opts,state){
 }
 
 
+PointValid=function(xy,state){
+	return PositionValid(xy[0],xy[1],state);
+}
 
 PositionValid=function(px,py,state){
 	return !(px<0||px>state.W||py<0||py>state.H);
@@ -468,7 +474,7 @@ UnLinearise=function(n,W){
 LevelSerial=function(state){
 	var xyfruits=Keys(state.level).map(fruit=>state.level[fruit].map(xy=>[xy[0],xy[1],FruitLetter(fruit)]));
 		xyfruits=Join(...xyfruits);
-		xyfruits=xyfruits.filter(fxy=>PositionValid(fxy[0],fxy[1],state));
+		xyfruits=xyfruits.filter(fxy=>PointValid(fxy,state));
 
 	var	fruitsxys=xyfruits.map(fxy=>[fxy[2],Linearise(fxy,(state.W))]);
 		fruitsxys=Sort(fruitsxys,Last);
@@ -910,7 +916,7 @@ XYFruitRemove=function(xy){
 
 XYFruitAdd=function(xy){
 
-	if(!PositionValid(xy[0],xy[1],STATE))
+	if(!PointValid(xy,STATE))
 		return;
 
 	XYFruitRemove(xy);
@@ -999,6 +1005,8 @@ SegmentAdd=function(segment){
 
 function DragActionStarter(x,y){
 	var xy=CanvasPosition(x,y,STATE);
+	if(!PointValid(xy,STATE))
+		return;
 	STATE.mode.symbol=XYFruit(xy,STATE)||STATE.mode.symbol;
 	STATE.mode.dragging=true;
 	STATE.mode.selection=[xy];
@@ -1014,6 +1022,8 @@ function DragActionAltStarter(x,y){
 }
 function DragActionContinuer(x,y){
 	var xy=CanvasPosition(x,y,STATE);
+	if(!PointValid(xy,STATE))
+		return;
 	if(!STATE.mode.selection)
 		STATE.mode.selection=[];
 	if(!In(STATE.mode.selection,xy)){
@@ -1023,7 +1033,6 @@ function DragActionContinuer(x,y){
 
 }
 function DragActionEnder(x,y){
-	var xy=CanvasPosition(x,y,STATE);
 	STATE.mode.dragging=false;
 	if(STATE.mode.edit){
 		if(STATE.mode.clearing)
