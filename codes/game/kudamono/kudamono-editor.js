@@ -960,10 +960,7 @@ function DragActionStarter(x,y){
 		STATE.mode.clearing=!!XYFruit(xy,STATE);
 		DrawState();
 	}
-	else{
-		STATE.mode.clearing=XYSegments(xy,STATE).length>1;
-	}
-	
+
 
 }
 function DragActionAltStarter(x,y){
@@ -989,8 +986,13 @@ function DragActionEnder(x,y){
 			STATE.mode.selection.map(XYFruitAdd);
 	}
 	else {
+		
+		var selected=STATE.mode.selection;
+	
+		STATE.mode.clearing=selected.length<2||Intersection(XYSegments(selected[0],STATE),XYSegments(selected[1],STATE)).length>=1;
+
 		var segments=PointsTrack(STATE.mode.selection);
-		console.log(STATE.mode.selection);
+
 		if(STATE.mode.clearing)
 			segments.map(XYSegmentRemove);
 		else
