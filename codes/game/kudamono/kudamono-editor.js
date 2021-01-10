@@ -733,6 +733,7 @@ StateSerial=function(state){
 		if(l)
 			Opts.L=l;
 		var s=SegmentsSerial(state);
+		if(s)
 			Opts.S=s;
 	return ParameterString(Opts);
 }
@@ -768,8 +769,8 @@ ObtainStartingLevelState=function(){
 			width:1200,							
 			height:1200,						
 			border:0.5,							//how many squares to add to the border (to each of the shortest sides)
-			scale:0.75,							//fruit scale (how large)
-			nudge:0.2							//fruit nudge (small adjustments to position)
+			scale:0.95,							//fruit scale (how large)
+			nudge:0.3							//fruit nudge (small adjustments to position)
 		},	
 
 		//Puzzle
