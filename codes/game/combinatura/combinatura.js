@@ -122,7 +122,7 @@ gameModulesExtra.map(LoaderInFolder("codes/game/combinatura"));
 
 function StartGame(){
 	PrepareGame();
-	ResumeCapturingKeys(CaptureComboKey);
+	ResumeCapturingKeys(ComboKeyPressHandler);
 	Class(gameSelector,"Gallery");
 	ObtainLoadGame();
 	ObtainTitleScreenReLoader();

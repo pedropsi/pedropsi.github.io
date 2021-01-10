@@ -216,7 +216,7 @@ function PrepareGame(){
 	
 	if(!bar){
 		
-		ResumeCapturingKeys(CaptureComboKey);
+		ResumeCapturingKeys(ComboKeyPressHandler);
 		KeybindShortcuts();
 		
 		ColoriseGameBar();

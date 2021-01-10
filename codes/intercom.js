@@ -717,7 +717,7 @@ function SubmitPassword(SuccessF){
 
 if(PageIdentifier()==="game-editor"){
 
-	StopCapturingKeys(CaptureComboKey);//bug
+	StopCapturingKeys(ComboKeyPressHandler);//bug
 	
 	function tryLoadFile(fileName) {
 		var fileOpenClient = new XMLHttpRequest();

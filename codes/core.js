@@ -1232,6 +1232,10 @@ LowerSpacedString=function(string){
 	return SpacedString(string.toLowerCase().replace(new RegExp("["+EscapeTokens(Tokens())+"]+","g")," "));
 }
 
+LowerTrimmedString=function(string){
+	return TrimWhitespaceString(SpacedString(string.toLowerCase()));
+}
+
 UnquoteString=function(string){
 	return string.replaceAll(/\"/ig,"");
 }
@@ -4825,7 +4829,7 @@ Context=function(targetSelector){
 		context=ElementContext(e)||ElementContext("BODY");
 	}
 
-	return context;
+	return ReKeyObject(context,LowerCase);
 }
 
 ElementContext=function(targetSelector){
@@ -4901,38 +4905,50 @@ UnKeybind=function(selector){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Keyboard input
-UnCtrlKeyString=function(keystring){
-	return keystring.replaceAll(/co?n?tro?l/ig,"").replaceAll(/co?mm?a?n?d/ig,"");
-}
-UnShiftKeyString=function(keystring){
-	return keystring.replaceAll(/sh?i?ft?/ig,"");
-}
-UnAltKeyString=function(keystring){
-	return keystring.replaceAll(/alt/ig,"");
-}
-UnEnterKeyString=function(keystring){
-	return keystring.replaceAll(/ente?r/ig,"").replaceAll(/re?tu?rn/ig,"");
+
+ActionPatterns={
+	"ctrl":/(co?n?tro?l)|(co?mm?a?n?d)/ig,
+	"shift":/(sh?i?ft?)|(uppe?r)/ig,
+	"alt":/(alt)|(opti?o?n?)/ig,
+	"enter":/(ente?r)|(re?tu?rn)/ig,
+	"backspace":/ba?c?k?spa?ce?/ig,
+	"space":/(^|[^ck])spa?ce?b?a?r?/ig,
+	"rightclick":/ri?g?h?t?cli?c?k?/ig, //solve issue
+	"click":/((le?f?t?)|[^right]|^)cli?c?k?/ig,
+	"drag":/dra?g?/ig,
+	"move":/mo?ve?/ig
 }
 
-
-UnSpaceKeyString=function(keystring){
-	return keystring.replace(/spa?ce?b?a?r?/i,"");
+ActionKeys=function(keystring){
+	if(!keystring)
+		return [];
+	return Keys(ActionPatterns).filter(
+		key=>keystring.replace(ActionPatterns[key],"")!==keystring
+	);
 }
 
-CtrlKey=function(keystring){
-	return keystring!==UnCtrlKeyString(keystring);
+UnActionsKeyString=function(keystring){
+	if(!keystring)
+		return "";
+	return Fold(UnActionKeyString,keystring,ActionKeys(keystring));
 }
-ShiftKey=function(keystring){
-	return keystring!==UnShiftKeyString(keystring);
+
+UnActionKeyString=function(keystring,actionKey){
+	var actionKey=First(ActionKeys(actionKey));
+	var keystring=keystring.replaceAll(ActionPatterns[actionKey],"");
+	return LowerTrimmedString(keystring);
 }
-AltKey=function(keystring){
-	return keystring!==UnAltKeyString(keystring);
+
+ReActionsKeyString=function(keystring){
+	if(!keystring)
+		return "";
+	return Fold(ReActionKeyString,keystring,ActionKeys(keystring));
 }
-EnterKey=function(keystring){
-	return keystring!==UnEnterKeyString(keystring);
-}
-SpaceKey=function(keystring){
-	return keystring!==UnSpaceKeyString(keystring);
+
+ReActionKeyString=function(keystring,actionKey){
+	var actionKey=First(ActionKeys(actionKey));
+	var keystring=Prefix(UnActionKeyString(keystring,actionKey),actionKey+" ");
+	return LowerTrimmedString(keystring);
 }
 
 
@@ -4943,52 +4959,22 @@ EventKeystring=function(event){
 	(event.altKey?  "alt "  :"")+
 	(event.shiftKey?"shift ":"")+
 	KeyNumberLookup(event.keyCode);
-	return ComboKeystring(keystring);
+	keystring=ComboKeystring(keystring);
+	return keystring;
 }
 
 ComboKeystring=function(key){
 	if(typeof key==="number")
 		return ComboKeystring(KeyNumberLookup(key));
-	else {//reduce to one space, lowercase, order: ctrl alt shift
-		var keystring=key.toLowerCase();
-
-		keystring=UnShiftKeyString(keystring);
-		keystring=UnAltKeyString(keystring);
-		keystring=UnCtrlKeyString(keystring);
-		keystring=UnEnterKeyString(keystring);
-		keystring=UnSpaceKeyString(keystring);
-
-		keystring=keystring.replace(/[\+\.\-\ ]*/g,"");
-
-		if(SpaceKey(key))
-			keystring="space "+keystring;
-		if(EnterKey(key))
-			keystring="enter "+keystring;
-		if(ShiftKey(key))
-			keystring="shift "+keystring;
-		if(AltKey(key))
-			keystring="alt "+keystring;
-		if(CtrlKey(key))
-			keystring="ctrl "+keystring;
-
-		keystring=UnPosfix(keystring," ");
-
-		return keystring;
-	}
+	else
+		return ReActionsKeyString(key);
 }
 
 KeyNumberLookup=function(keynumber){
-	var keyCodes=KeyCodes();
-	for(var i in keyCodes){
-		if(keyCodes[i]===keynumber)
-			return i;
-	}
-	//console.log("no key for number:",keynumber);
-	return "";
+	return Accesser(CodeKeys,String,()=>"")(keynumber);
 }
 
-KeyCodes=function(){
-	return{
+KeyCodes={
 	'none':0,
 	'break':3,
 	'backspace':8,
@@ -5007,13 +4993,9 @@ KeyCodes=function(){
 	'end':35,
 	'home':36,
 	'left':37,
-	'arrowleft':37,
 	'up':38,
-	'arrowup':38,
 	'right':39,
-	'arrowright':39,
 	'down':40,
-	'arrowdown':40,
 	'select':41,
 	'print':42,
 	'execute':43,
@@ -5058,31 +5040,68 @@ KeyCodes=function(){
 	'x':88,
 	'y':89,
 	'z':90
-	}
-}
+};
+
+CodeKeys=FlipKeysValues(KeyCodes);
 
 
 //Key Capturing
-CaptureComboKey=function(event){
+ComboKeyPressHandler=function(event){
 	event=event||window.event;
 	var keystring=EventKeystring(event);
 	var context=Context();
+
 	if(In(context,keystring)){
 		event.preventDefault();
 		context[keystring](event);
 	}
+	PressingComboKeys(keystring);
+}
+
+PressingComboKeys=function(keystring,excluded){
+	if(!PressingComboKeys.list)
+		PressingComboKeys.list=[];
+	var keys=keystring.split(" ");
+	if(!excluded)
+		PressingComboKeys.list=Union(PressingComboKeys.list,keys);
+	else
+		PressingComboKeys.list=Complement(PressingComboKeys.list,keys);
+	return PressingComboKeys.list;
+}
+
+UnPressingComboKeys=function(){
+	PressingComboKeys.list=[];
+}
+
+ComboKeyUnPressHandler=function(event){
+	event=event||window.event;
+	var keystring=EventKeystring(event);
+	PressingComboKeys(keystring,true);
+}
+
+KeyHeld=function(key){
+	return In(PressingComboKeys.list||[],key)
+}
+
+KeyComboHeld=function(keycombo){
+	var keys=ComboKeystring(keycombo);
+	return keys.split(" ").every(KeyHeld);
 }
 
 //Key Capturing Setters
 StopCapturingKeys=function(OnKeyDown){
 	document.removeEventListener('keydown',OnKeyDown);
-	document.removeEventListener('keyup',OnKeyUp);
+	document.removeEventListener('keyup',ComboKeyUnPressHandler);
+	document.addEventListener('blur',UnPressingComboKeys);
 }
 ResumeCapturingKeys=function(OnKeyDown){
 	StopCapturingKeys(OnKeyDown);
 	document.addEventListener('keydown',OnKeyDown);
-	document.addEventListener('keyup',OnKeyUp);
+	document.addEventListener('keyup',ComboKeyUnPressHandler);
+	document.addEventListener('blur',UnPressingComboKeys);
 }
+
+
 
 //Datapack Integration
 SetDatapackShortcuts=function(DP){
