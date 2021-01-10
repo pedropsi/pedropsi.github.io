@@ -437,21 +437,21 @@ DrawFruit=function(Opts,state){
 	DrawSVG(Opts);
 }
 
-DrawFruits=function(type,coordinates,Opts){
+DrawFruits=function(type,coordinates,Opts,state){
 	var Opts=Opts||{};
-	coordinates.map(xy=>DrawFruit({...Opts,type:type,px:xy[0],py:xy[1]},STATE));
+	coordinates.map(xy=>DrawFruit({...Opts,type:type,px:xy[0],py:xy[1]},state));
 
 }
 
 DrawLevel=function(state){
 	var types=Keys(state.level);
-	types.map(fruit=>DrawFruits(fruit,state.level[fruit]));
+	types.map(fruit=>DrawFruits(fruit,state.level[fruit],undefined,state));
 
 	if(state.mode.edit)
 		if(state.mode.clearing)
-			DrawFruits(state.mode.symbol,state.mode.selection,{colour:HEXLightener(0.9)});
+			DrawFruits(state.mode.symbol,state.mode.selection,{colour:HEXLightener(0.9)},state);
 		else
-			DrawFruits(state.mode.symbol,state.mode.selection,{colour:HEXDarkener(0.8)});
+			DrawFruits(state.mode.symbol,state.mode.selection,{colour:HEXDarkener(0.8)},state);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -632,7 +632,7 @@ SerialSegments=function(serial,state){
 
 
 PathsSerial=function(state){
-	var lineartracksets=STATE.tracks.map(LinearTracks);
+	var lineartracksets=state.tracks.map(LinearTracks);
 	var	lineartracks=Join(...lineartracksets);
 	var W=state.W;
 	var pointtracks=lineartracks.map(track=>[SegmentLineariser(W)(First(track)),track]);
@@ -696,9 +696,10 @@ DirectionCode=function(direction){
 SerialState=function(serialObj,state){
 	var state={...state};
 	var serialObj=ReKeyObject(serialObj,LowerCase);
-		state.W=Number(serialObj.w||serialObj.h);
-		state.H=Number(serialObj.h||serialObj.w);
-		state.level=SerialLevel(serialObj.l,state);
+		state.W=Max(Number(serialObj.w||serialObj.h)||0,2);
+		state.H=Max(Number(serialObj.h||serialObj.w)||0,2);
+		if(serialObj.l)
+			state.level=SerialLevel(serialObj.l,state);
 		if(serialObj.s)
 			state.segments=SerialSegments(serialObj.s,state)
 	return state;
@@ -709,7 +710,9 @@ StateSerial=function(state){
 		Opts.W=state.W;
 	if(state.H!==state.W)
 		Opts.H=state.H;
-		Opts.L=LevelSerial(state);
+		var l=LevelSerial(state);
+		if(l)
+			Opts.L=l;
 		//Opts.S=PathsSerial(state);
 	return ParameterString(Opts);
 }
@@ -722,7 +725,7 @@ StateSerial=function(state){
 
 
 ObtainStartingLevelState=function(){
-	return {
+	var state={
 		//visuals
 		target:"kudamono-canvas",
 		visuals:{
@@ -750,6 +753,30 @@ ObtainStartingLevelState=function(){
 		},	
 
 		//Puzzle
+		W:2,
+		H:2,
+		level:{},
+		segments:[],
+		tracks:[],
+		crosses:{},
+
+		//Interaction
+		mode:{
+			edit:false,			//true:adding fruits, false:solving
+			dragging:false,		//whether dragging
+			clearing:false,		//whether clearing fruits, lines, etc...
+			symbol:"cherry",	//current fruit to be added
+			line:false,			//whether adding lines,
+			fruitline:false,	//which fruit the path connects to (defaults to none)
+			selection:[],		//current points selected (accumulates)
+			error:false			//whether to display errors
+		}
+	}
+	if(PageSearch("W")||PageSearch("H"))
+		state=SerialState(PageSearchObject(),state);
+	else
+	state={
+		...state,
 		W:7,
 		H:7,
 		level:{
@@ -775,22 +802,9 @@ ObtainStartingLevelState=function(){
 			// [[0,3],[1,3]],
 			// [[1,4],[0,4]],
 			// [[1,3],[1,4]]
-		],
-		tracks:[],
-		crosses:{},
-
-		//Interaction
-		mode:{
-			edit:false,			//true:adding fruits, false:solving
-			dragging:false,		//whether dragging
-			clearing:false,		//whether clearing fruits, lines, etc...
-			symbol:"cherry",	//current fruit to be added
-			line:false,			//whether adding lines,
-			fruitline:false,	//which fruit the path connects to (defaults to none)
-			selection:[],		//current points selected (accumulates)
-			error:false			//whether to display errors
-		}
+		]
 	}
+	return state;
 }
 
 STATE=ObtainStartingLevelState()
@@ -816,19 +830,19 @@ DrawStatePaths=function(state){
 	if(!state.mode.edit&&state.mode.selection.length>1){
 		var seltrack=PathTrack(state.mode.selection);
 		if(state.mode.clearing)
-			DrawTrack(seltrack,STATE,{colour:HEXLightener(0.9),dash:[1,20]});//not working?
+			DrawTrack(seltrack,state,{colour:HEXLightener(0.9),dash:[1,20]});//not working?
 		else
-			DrawTrack(seltrack,STATE,{colour:HEXDarkener(0.9)});
+			DrawTrack(seltrack,state,{colour:HEXDarkener(0.9)});
 	}
-	tracks.map(track=>DrawTrack(track,STATE,Opts));
+	tracks.map(track=>DrawTrack(track,state,Opts));
 
 }
 
-DrawState=function(){
+DrawState=function(state){
 	UnDraw();
-	DrawStateGrid(STATE);
-	DrawStatePaths(STATE);
-	DrawLevel(STATE);
+	DrawStateGrid(state);
+	DrawStatePaths(state);
+	DrawLevel(state);
 }
 
 
@@ -843,7 +857,7 @@ UpdateState=function(opts){
 	if(opts)
 		Keys(opts).map(k=>STATE[k]=opts[k](STATE[k]));
 	STATE.tracks=SplitContiguousTracks(STATE.segments,STATE);
-	DrawState();
+	DrawState(STATE);
 	AddUndo(STATE);
 	NavigateSerial(StateSerial(STATE));
 }
@@ -851,77 +865,9 @@ UpdateState=function(opts){
 //Undo
 ObtainSetLevelState=function(state){
 	STATE=state;
-	DrawState();
+	DrawState(state);
 }
 
-
-
-// function MarkCross(cell,opts){
-// 	var opts={
-// 		lineWidth:`${STATE.LW}px`,
-// 		fillColor:"red",
-// 		strokeColor:"transparent",
-// 		cross:true,
-// 		n:4,
-// 		size:STATE.starsize,
-// 		...opts,
-// 		...StarXY(cell)
-// 	};
-// 	DrawStar(opts);
-// }
-
-// function UnMarkCross(cell,opts){
-// 	MarkCross(cell,{
-// 		...opts,
-// 		lineWidth:`${2*STATE.LW}px`,
-// 		fillColor:STATE.colours[cell],
-// 		strokeColor:STATE.colours[cell]
-// 	})
-// }
-
-// function StarXY(cell){
-// 	var p=STATE.polygons[cell];
-// 	return {x:p[0]+p[2]/2,y:p[1]+p[3]/2}
-// }
-
-
-
-// RegionModeActive=StatusReporter(
-// 	"RegionModeActive",
-// 	function(){return STATE.regionmode}
-// )
-
-// RegionModeToggle=function(mode){
-// 	return STATE.regionmode=!mode;
-// }
-
-// ErrorModeActive=StatusReporter(
-// 	"ErrorModeActive",
-// 	function(){return STATE.errormode}
-// )
-
-// ErrorModeToggle=function(mode){
-// 	if(STATE.errormode)
-// 		UnMarkErrors();
-// 	else
-// 		MarkErrors();
-// 	return STATE.errormode=!mode;
-// }
-
-
-// PathGrower=function(dx,dy){
-// 	if(!STATE.mode.selection||!STATE.mode.selection.length)
-// 		STATE.mode.selection=[[0,0]];
-
-// 	var xy=Last(STATE.mode.selection);
-// 	var x=Max(Min(xy[0]+dx||0,STATE.W),0);
-// 	var y=Max(Min(xy[1]+dy||0,STATE.H),0);
-
-// 	if(xy[0]!==x||xy[1]!==y)
-// 		STATE.mode.selection.push([x,y]);
-	
-// 	return [x,y];
-// }
 
 Extremes=function(state){
 	return GridExtremes({
@@ -990,59 +936,6 @@ XYSegmentRemove=function(segment){
 }
 
 
-
-
-
-TrackAdd=function(track){
-	return track.map(SegmentAdd);
-}
-
-SegmentAdd=function(segment){
-	var segment1=OrthonormalXYDir(segment);
-	var segment2=OrthonormalXYDir(Reverse(segment));
-	var xy=segment1[0];
-	var za=segment1[1];
-
-	var tracks=STATE.paths.map(PathTrack);
-	
-	var extendable=tracks.filter(track=>track.some(segment=>In(segment,xy)||In(segment,za)));
-	if(!extendable.length)
-		STATE.paths.push(segment1);
-	else if(extendable.length===1){
-		var exttrack=First(extendable);
-		
-		//already there
-		if(In(exttrack,segment1)||In(exttrack,segment2))
-			return;
-		
-		//branching
-		else if(exttrack.filter(segment=>In(segment,xy).length===2||exttrack.filter(segment=>In(segment,za).length===2)))
-			return STATE.paths.push(segment1);
-		
-		//looping or extending
-		else if(exttrack.filter(segment=>In(segment,xy).length===1||exttrack.filter(segment=>In(segment,za).length===1))){
-			var i=tracks.findIndex(track=>Equal(track,exttrack));
-			var path=STATE.paths[i];
-			var sta=First(path);
-			var end=Last(path);
-			if(Equal(end,xy))
-				return path.push(za);
-			else if(Equal(end,za))
-				return path.push(xy);
-			if(Equal(sta,xy))
-				return path.unshift(za);
-			else if(Equal(sta,za))
-				return path.unshift(xy);
-
-		}
-	}
-	else{ //many possibilities -> rebuild
-			
-	}
-}
-
-
-
 function DragActionStarter(x,y){
 	var xy=CanvasPosition(x,y,STATE);
 	if(!PointValid(xy,STATE))
@@ -1052,7 +945,7 @@ function DragActionStarter(x,y){
 	STATE.mode.selection=[xy];
 	if(STATE.mode.edit){
 		STATE.mode.clearing=!!XYFruit(xy,STATE);
-		DrawState();
+		DrawState(STATE);
 	}
 
 
@@ -1068,7 +961,7 @@ function DragActionContinuer(x,y){
 		STATE.mode.selection=[];
 	if(!In(STATE.mode.selection,xy)){
 		STATE.mode.selection=AddOnce(STATE.mode.selection,xy);
-		DrawState();
+		DrawState(STATE);
 	}
 
 }
@@ -1193,8 +1086,9 @@ var DragActions={
 CanvasResize=function(){
 	GetElement(STATE.target).width=window.innerWidth;
 	GetElement(STATE.target).height=window.innerHeight;
-	DrawState();
+	DrawState(STATE);
 }
+
 
 InitialiseKudamono=function(){
 	PreAddElement(`
@@ -1206,190 +1100,12 @@ InitialiseKudamono=function(){
 		></div>`,"body");
 	AttendDrag(DragActions,"canvas");
 	Attend('resize',CanvasResize)
-	if(PageSearch("l")||PageSearch("L")){
-		STATE=SerialState(PageSearchObject(),STATE);
-	}
-	UpdateState();
 	Keybind(KeyboardActions,STATE.target);
 	ResumeCapturingKeys(ComboKeyPressHandler);
+	DrawState(STATE);
 	setTimeout(()=>FocusElement(STATE.target),500)
 }
 
 
-
-
-///////////////////////////////////////////////////////////////////////////////
-//Validator
-
-// function KudamonoFull(state){
-// 	return Keys(state.adjacencies).every(cell=>In(state.lines,cell)||In(state.crosses,cell));
-// }
-
-
-// function KudamonoSolved(state){
-// 	return KudamonoLinesSolved(state)&&KudamonoRegionsSolved(state)&&KudamonoAdjacenciesValid(state);
-// }
-
-// //Regions
-// function KudamonoRegionsApply(Transform,state){
-// 	var lines=Keys(state.lines);
-// 	var n=state.conditions.regions;
-// 	var groups=Values(state.Regions());
-// 	return Transform(groups,lines,n);
-// }
-
-// function KudamonoRegionsSolved(state){
-// 	function Test(regionstars,lines,n){return regionstars.every(region=>Count(region,cell=>In(lines,cell))===n)}
-// 	return KudamonoRegionsApply(Test,state);
-// }
-
-// function KudamonoLongRegions(state){
-// 	var Filter=function(regionstars,lines,n){return regionstars.filter(region=>Count(region,cell=>In(lines,cell))>n)}
-// 	return KudamonoRegionsApply(Filter,state);
-// }
-
-// function KudamonoShortRegions(state){
-// 	var Filter=function(regionstars,lines,n){return regionstars.filter(region=>Count(region,cell=>In(lines,cell))<n)}
-// 	return KudamonoRegionsApply(Filter,state);
-// }
-
-// //Adjacencies
-// function KudamonoAdjacenciesApply(Transform,state){
-// 	var lines=Keys(state.lines);
-// 	var n=state.conditions.adjacencies;
-// 	var groups=lines.map(s=>state.adjacencies[s]);
-// 	return Transform(groups,lines,n);
-// }
-
-// function KudamonoAdjacenciesValid(state){
-// 	function Test(activeadjacencies,lines,n){return activeadjacencies.every(adja=>Count(adja,cell=>In(lines,cell))===n);}
-// 	return KudamonoAdjacenciesApply(Test,state);
-// }
-
-// function KudamonoInvalidAdjacencies(state){
-// 	function Filter(activeadjacencies,lines,n){
-// 		adjacencies=activeadjacencies.filter(adja=>Count(adja,cell=>In(lines,cell))>n);
-// 		return Intersection(Union(...adjacencies),lines);
-// 	}
-// 	return KudamonoAdjacenciesApply(Filter,state);
-// }
-
-
-// //Lines
-// function KudamonoLinesSolved(state){
-// 	return Keys(state.lines).every(type=>KudamonoLinesValid(state,state.lines[type]));
-// }
-
-// function KudamonoLinesApply(Transform,state,lines){
-// 	var lines=Keys(state.lines);
-// 	var n=state.conditions.lines;
-// 	var lines=Values(lines);
-// 	return Transform(lines,lines,n);
-// }
-
-// function KudamonoLinesValid(state,lines){
-// 	function Test(lines,lines,n){return lines.every(line=>Count(line,cell=>In(lines,cell))===n)};
-// 	return KudamonoLinesApply(Test,state,lines);
-// }
-
-// function KudamonoLongSubLines(state,lines){
-// 	function Filter(lines,lines,n){return lines.filter(line=>Count(line,cell=>In(lines,cell))>n)};
-// 	return KudamonoLinesApply(Filter,state,lines);
-// }
-
-// function KudamonoShortSubLines(state,lines){
-// 	function Filter(lines,lines,n){return lines.filter(line=>Count(line,cell=>In(lines,cell))<n)};
-// 	return KudamonoLinesApply(Filter,state,lines);
-// }
-
-// function KudamonoLongLines(state){
-// 	return Keys(state.lines).map(type=>KudamonoLongSubLines(state,state.lines[type]));
-// }
-
-// function KudamonoShortLines(state){
-// 	return Keys(state.lines).map(type=>KudamonoShortSubLines(state,state.lines[type]));
-// }
-
-
-//Highlight errors
-
-// function MarkWrongCell(cell){
-// 	if(In(STATE.highlights,cell))
-// 		return;
-// 	STATE.highlights.push(cell);
-// 	var colour=STATE.colours[cell];
-// 	MarkPolygons([cell],{
-// 		strokeColor:HEX(Lighten(colour,2)).colour,
-// 		fillColor:HEX(Darken(colour,2)).colour
-// 	})
-
-// 	if(STATE.lines[cell])
-// 		MarkStar(cell);
-// 	if(STATE.crosses[cell])
-// 		MarkCross(cell);
-// }
-
-// function UnMarkWrongCell(cell){
-// 	if(!In(STATE.highlights,cell))
-// 		return;
-// 	STATE.highlights=Complement(STATE.highlights,[cell]);
-// 	var colour=STATE.colours[cell];
-// 	MarkPolygons([cell],{
-// 		strokeColor:HEX(Darken(colour,2)).colour,
-// 		fillColor:colour
-// 	})
-
-// 	if(STATE.lines[cell])
-// 		MarkStar(cell);
-// 	if(STATE.crosses[cell])
-// 		MarkCross(cell);
-// }
-
-// function MarkWrongArea(area){
-// 	return area.map(MarkWrongCell);
-// }
-// function UnMarkWrongArea(area){
-// 	return area.map(UnMarkWrongCell);
-// }
-
-
-// function MarkWrongLines(){
-// 	MarkWrongArea(KudamonoLongLines(STATE).flat().flat());
-// 	MarkWrongArea(KudamonoShortLines(STATE).flat().flat());
-// }
-// function MarkWrongRegions(){
-// 	KudamonoLongRegions(STATE).map(MarkWrongArea);
-// 	KudamonoShortRegions(STATE).map(MarkWrongArea);
-// }
-// function UnMarkWrongLines(){
-// 	UnMarkWrongArea(KudamonoLongLines(STATE).flat().flat());
-// 	UnMarkWrongArea(KudamonoShortLines(STATE).flat().flat());
-// }
-// function UnMarkWrongRegions(){
-// 	KudamonoLongRegions(STATE).map(UnMarkWrongArea);
-// 	KudamonoShortRegions(STATE).map(UnMarkWrongArea);
-// }
-
-// function MarkWrongAdjacencies(){
-// 	MarkWrongArea(KudamonoInvalidAdjacencies(STATE));
-// }
-// function UnMarkWrongAdjacencies(){
-// 	UnMarkWrongArea(KudamonoInvalidAdjacencies(STATE));
-// }
-
-// function MarkErrors(){
-// 	if(!STATE.errormode)
-// 		return;
-// 	MarkWrongAdjacencies();
-// 	MarkWrongLines();
-// 	MarkWrongRegions();T
-// }
-
-// function UnMarkErrors(){
-// 	UnMarkWrongAdjacencies();
-// 	UnMarkWrongLines();
-// 	UnMarkWrongRegions();
-// }
-
-if(PageSearch("W")&&PageSearch("L"))
+if(PageSearch("W")||PageSearch("H"))
 	setTimeout(InitialiseKudamono,500)
