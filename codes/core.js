@@ -2783,11 +2783,20 @@ PrependFilterInput=function(InputFilterF,parentSelector){
 	}
 
 	var uid=UniqueId(parentSelector);
-	filterHTML="<input class='input search filter-"+uid+"' placeholder='search "+StringSymbol("search")+"' onkeyup='"+FunctionName(InputFilterF)+"(\""+uid+"\",\".filter-"+uid+"\")'></input>";
+	filterHTML=FilterHTML(FunctionName(InputFilterF),uid);
 	input=PrependElement(filterHTML,parentSelector);
 	if(value!==""&&input.value===""){
 		input.value=value;
 	}
+}
+
+FilterHTML=function(functionname,uid){
+	return `
+	<input 
+		class='input search filter-${uid}'
+		placeholder='search ${StringSymbol("search")}'
+		onkeyup='${functionname}("${uid}",".filter-${uid}")'>
+	</input>`;
 }
 
 AddShareSearch=function(patterntxt,elementSelector){	
@@ -5054,11 +5063,13 @@ CaptureComboKey=function(event){
 
 //Key Capturing Setters
 StopCapturingKeys=function(OnKeyDown){
-	document.removeEventListener('keydown',OnKeyDown); // TODO improve
+	document.removeEventListener('keydown',OnKeyDown);
+	document.removeEventListener('keyup',OnKeyUp);
 }
-ResumeCapturingKeys=function(OnKeyDown){ // TODO improve
+ResumeCapturingKeys=function(OnKeyDown){
 	StopCapturingKeys(OnKeyDown);
 	document.addEventListener('keydown',OnKeyDown);
+	document.addEventListener('keyup',OnKeyUp);
 }
 
 //Datapack Integration
