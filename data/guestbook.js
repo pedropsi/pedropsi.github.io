@@ -70,11 +70,7 @@ GuestbookHTML=function(jsonstring){
 		return CommentHTML(CommentObject(dataline,dataarray))
 	}
 
-	return `<table>
-				<tbody>
-					${dataarray.map(CommHTML).join("\n")}
-				</tbody>
-			</table>`;
+	return TableHTML({rows:dataarray.map(CommHTML).join("\n")})
 }
 
 CompareDatalineId=function(dl1,dl2){

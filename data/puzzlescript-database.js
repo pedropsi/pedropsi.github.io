@@ -96,7 +96,7 @@ function OverwritePGD(){
 function DeployPGD(headers,RowGenerator,targetID){
 	var caption="<span class='discard caption'>"+databaseTitle+" <b>up-to-date</b>.</span>";
 	var rowArray=Memory("PGD").map(RowGenerator);
-	var table=TableHTML(caption,headers,rowArray);
+	var table=TableHTML({caption:caption,headers:headers,rows:rowArray});
 	ReplaceChildren(table,targetID);
 	function TableSorter(header){SortTable(targetID,header,true)};
 	headers.map(TableSorter);

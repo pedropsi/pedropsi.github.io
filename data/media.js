@@ -117,7 +117,7 @@ MusicTableHTML=function(tracks,headers){
 	
 	var caption=`<em>${v.TITLE()}'s soundtrack playlist:</em>`;
 	var rows=tracks.map(MusicTableRowF(headers));
-	return TableHTML(caption,headers,rows);
+	return TableHTML({caption:caption,headers:headers,rows:rows});
 }
 
 

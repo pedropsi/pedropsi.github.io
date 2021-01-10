@@ -3062,28 +3062,40 @@ TRHTML=function(dataArray){
 	return "\t<tr>\n"+dataArray+"</tr>";
 };
 
-TableHTML=function(caption,headers,rows){
-	
+TheadHTML=function(headers){
 	var headersHTML="";
+	if(!headers)
+		return "";
 	if(IsString(headers))
 		headersHTML=headers;
 	if(IsArray(headers))
 		headersHTML="<th>"+headers.join("</th><th>")+"</th>";
+	if(headersHTML)
+		headersHTML=`<thead>${headersHTML}</thead>`;
+	return headersHTML;
+}
 
+TbodyHTML=function(rows){
 	var rowsHTML="";
+	if(!rows)
+		return "";
 	if(IsString(rows))
 		rowsHTML=rows;
 	if(IsArray(rows))
 		rowsHTML=rows.map(TRHTML).join("\n")
-		
+	if(rowsHTML)
+		rowsHTML=`<tbody>${rowsHTML}</tbody>`;
+	return rowsHTML;
+}
+
+TableHTML=function(Opts){
+	var caption=Opts.caption?`<caption><span class="caption">${Opts.caption}</span></caption>`:"";
 	return `
-	<div class="table">
-		<caption><span class="caption">${caption}</span></caption>
+	<div class="${Opts.cla||"table"}">
+		${caption}
 		<table>
-			<thead>${headersHTML}</thead>
-			<tbody>
-				${rowsHTML}
-			</tbody>
+			${TheadHTML(Opts.headers||"")}
+			${TbodyHTML(Opts.rows||"")}
 		</table>
 	</div>
 	`;

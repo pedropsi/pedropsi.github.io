@@ -189,7 +189,7 @@ LoadTableHTML=function(jsondata,RowF,headers){
 	if(!RowF)
 		var RowF=Identity;
 	var rowArray=JSON.parse(jsondata).map(RowF);
-	return TableHTML(PageTitle(),headers,rowArray);
+	return TableHTML({caption:PageTitle(),headers:headers,rows:rowArray});
 }
 
 

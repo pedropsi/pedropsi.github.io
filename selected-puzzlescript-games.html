@@ -154,10 +154,10 @@ SelectedGamesHTML=function(){
 		return Keys(games).map(k=>SelectedGamesRow(k,Join(games[k],{YEAR:year})))
 	});
 		rows=Join(...rows).sort(SingleSorter(x=>-x[2]));
-	return TableHTML(
-		`${v.NAME()}'s selected puzzlescript games`,
-		["Title","Author","Year","Tags"],
-		rows)
+	return TableHTML({
+		caption:`${v.NAME()}'s selected puzzlescript games`,
+		headers:["Title","Author","Year","Tags"],
+		rows:rows})
 },
 SelectedGamesHTML()}
 
