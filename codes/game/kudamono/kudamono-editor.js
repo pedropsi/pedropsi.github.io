@@ -848,6 +848,12 @@ UpdateState=function(opts){
 	NavigateSerial(StateSerial(STATE));
 }
 
+//Undo
+ObtainSetLevelState=function(state){
+	STATE=state;
+	DrawState();
+}
+
 
 
 // function MarkCross(cell,opts){
@@ -1158,7 +1164,9 @@ var KeyboardActions={
 	// "right":PathGrower(1,0),
 	// "down":PathGrower(0,-1)
 
-	"ctrl z":function(){Undo()}
+	"ctrl z":function(){Undo()},
+	"ctrl shift z":function(){Redo()},
+	"ctrl y":function(){Redo()}
 };
 
 var ClearBoard=StateUpdater({segments:segments=>[],level:level=>{}});
