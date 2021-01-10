@@ -20,7 +20,7 @@ var Contributors={//People
 	"vandevander":{name:"Matthew VanDevander",TWITTER:"mvandevander"},
 	"grant":{name:"Elyot Grant",PERSONAL_PAGE:"http://lunarchstudios.com/"},
 	"ahlman":{name:"Ove Ahlman",TWITTER:"ahlmanove"},
-	"edderiofer":{alias:"Edderiofer",TWITTER:"edderiofer"},
+	"edderiofer":{alias:"Edderiofer",TWITTER:"edderiofer",PERSONAL_PAGE:"http://edderiofer.blogspot.com"},
 	"personman":{name:"Personman"},
 	"one":{name:"Doomsday One"},
 	"jung":{name:"Nils Jung"},
