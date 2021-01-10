@@ -536,7 +536,7 @@ AccumulateTokenCoords=function(tokendiffs,W){
 
 SerialLevel=function(serial,state){
 	var fruitserials=serial.match(FruitSerialPattern);
-	var fruitdiffs=fruitserials.map(s=>[s[0],Number(s[1])]);
+	var fruitdiffs=fruitserials.map(s=>[s[0],Number(Rest(s))]);
 	var accumulated=AccumulateTokenCoords(fruitdiffs,state.W+1);
 	var level={};
 	Keys(FruitIcons).map(fruit=>(level[fruit]=accumulated.filter(a=>a[0]===FruitLetter(fruit)).map(Last)));
