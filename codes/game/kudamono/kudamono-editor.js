@@ -506,6 +506,8 @@ UnLinearise=function(n,W){
 }
 
 LevelSerial=function(state){
+	if(!state.level||Keys(state.level).length<1)
+		return "";
 	var xyfruits=Keys(state.level).map(fruit=>state.level[fruit].map(xy=>[xy[0],xy[1],FruitLetter(fruit)]));
 		xyfruits=Join(...xyfruits);
 		xyfruits=xyfruits.filter(fxy=>PointValid(fxy,state));
@@ -631,7 +633,9 @@ SerialSegments=function(serial,state){
 }
 
 
-PathsSerial=function(state){
+SegmentsSerial=function(state){
+	if(!state.tracks||!state.tracks.length)
+		return "";
 	var lineartracksets=state.tracks.map(LinearTracks);
 	var	lineartracks=Join(...lineartracksets);
 	var W=state.W;
@@ -657,7 +661,6 @@ TrackDirectionSerial=function(track){
 	}else{
 		directions=Rest(track).map(function(segment,i){
 			var dir=SegmentPairNextDirection(track[i],segment);
-			console.log(dir,track[i],segment);
 			return dir;
 		});
 		directions.unshift(SegmentPairSelfNextDirection(track[0],track[1]));
@@ -713,7 +716,8 @@ StateSerial=function(state){
 		var l=LevelSerial(state);
 		if(l)
 			Opts.L=l;
-		//Opts.S=PathsSerial(state);
+		var s=SegmentsSerial(state);
+			Opts.S=s;
 	return ParameterString(Opts);
 }
 
@@ -975,7 +979,7 @@ function DragActionEnder(x,y){
 	}
 	else {
 		
-		var selected=STATE.mode.selection;
+		var selected=STATE.mode.selection||[];
 	
 		STATE.mode.clearing=selected.length<2||Intersection(XYSegments(selected[0],STATE),XYSegments(selected[1],STATE)).length>=1;
 
