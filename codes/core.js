@@ -1074,20 +1074,20 @@ BaseFilter=function(Base,GroupObject){
 //Repetitive functions
 
 // Fold
-FoldM=function(F,x0,xArray){
-	if(!xArray||xArray.length<1){
+FoldM=function(F,x0,array){
+	if(!array||array.length<1){
 		return x0;
-	}else if(xArray.length===1){
-		return F(x0,xArray[0]);
+	}else if(array.length===1){
+		return F(x0,array[0]);
 	}else{
-		var x1=xArray[0];
-		xArray.shift();
-		return FoldM(F,F(x0,x1),xArray);
+		var x1=array[0];
+		array.shift();
+		return FoldM(F,F(x0,x1),array);
 	}
 }
 
-Fold=function(F,x0,xArray){
-	return FoldM(F,x0,Clone(xArray));
+Fold=function(F,x0,array){
+	return FoldM(F,x0,Clone(array));
 }
 
 // Fixed point
