@@ -148,11 +148,8 @@ OrthonormalXYDir=function(xyza){
 		return [xy,VectorPlus(xy,dir)];
 }
 
-PathTrack=function(path,state){
-	if(path.length<=1)
-		return [];
+PathTrack=function(path){
 	var track=Rest(path).map((xy,i)=>[path[i],xy]);
-	track=track.filter(s=>SegmentValid(s,state));
 	return SortTrack(track);
 }
 
@@ -648,17 +645,15 @@ LetterContiguousPath=function(letters,startxy){
 		coordinates=coordinates.map((c,i)=>Apply(VectorPlus,Take(directions,i+1)));
 		coordinates.unshift([0,0]);
 		coordinates=coordinates.map(c=>VectorPlus(c,startxy))
-	return PathTrack(coordinates,state);
+	return PathTrack(coordinates);
 }
 
 SerialSegments=function(serial,state){
 	var pathserials=serial.match(PathSerialPattern);
 	var pathdiffs=pathserials.map(s=>[First(s.match(/\D+/ig)),Number(First(s.match(/\d+/ig)))]);
 	var accumulated=AccumulateTokenCoords(pathdiffs,state.W+1);
-	var tracks=accumulated.map(lp=>LetterContiguousPath(lp[0],lp[1],state));
-		tracks=Join(...tracks);
-		tracks=tracks.filter(s=>SegmentValid(s,state));
-	return tracks;
+	var tracks=accumulated.map(lp=>LetterContiguousPath(lp[0],lp[1]));
+	return Join(...tracks);
 }
 
 
@@ -862,7 +857,7 @@ DrawStatePaths=function(state){
 	var Opts=Extremes(state);
 	
 	if(!state.mode.edit&&state.mode.selection.length>1){
-		var seltrack=PathTrack(state.mode.selection,state);
+		var seltrack=PathTrack(state.mode.selection);
 		if(state.mode.clearing)
 			DrawTrack(seltrack,state,{colour:HEXLightener(0.9),dash:[1,20]});//not working?
 		else
@@ -1013,12 +1008,12 @@ function DragActionEnder(x,y){
 	
 		STATE.mode.clearing=selected.length<2||Intersection(XYSegments(selected[0],STATE),XYSegments(selected[1],STATE)).length>=1;
 
+		var segments=PathTrack(STATE.mode.selection);
 
 		if(STATE.mode.clearing)
 			segments.map(XYSegmentRemove);
 		else
 			segments.map(XYSegmentAdd);
-		var segments=PathTrack(STATE.mode.selection,STATE);
 	}
 	STATE.mode.selection=[];
 	UpdateState()	
