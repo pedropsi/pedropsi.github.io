@@ -930,6 +930,8 @@ CanvasPosition=function(x,y,state){
 	var col=Floor(state.W*(x-extremes.x0*extremes.width)/(extremes.x1-extremes.x0)/extremes.width+0.5);
 	var row=Floor(state.H*(y-extremes.y0*extremes.height)/(extremes.y1-extremes.y0)/extremes.height+0.5);
 	return [col,row];
+}
+
 CanvasBoxPosition=function(x,y,state){
 	xy=CanvasBoardPosition(x,y,state);
 	var x=FractionalPart(xy[0]/state.W);
@@ -1098,6 +1100,7 @@ function DragActionEnder(x,y){
 	STATE.mode.selection=[];
 	UpdateState();
 }
+
 
 TransformLevel=function(level,CoordinateTransform){
 	var newlevel={};
