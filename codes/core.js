@@ -289,6 +289,7 @@ Divide=function(a,b){
 
 Floor=Math.floor;
 Ceiling=Math.ceil;
+FractionalPart=function(n){return n-Floor(n)};
 Sin=Math.sin;
 Cos=Math.cos;
 PI=Math.PI;
@@ -6669,6 +6670,15 @@ CopyHandler = function(Extractor,parentSelector){
 SelectedNode=function(e){
 	var selection=window.getSelection();
 	return selection.containsNode(e,true);
+}
+///////////////////////////////////////////////////////////////////////////////
+
+Monitor=function(Opts){
+	if(!GetElement(".monitor")){
+		AddElement(`<div class="monitor"></div>`,"BODY")
+	}
+	report=Keys(Opts).map(name=>`<div>${name}:${Opts[name]}</div>`).join("");
+	ReplaceChildren(report,".monitor");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
