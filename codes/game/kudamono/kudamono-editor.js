@@ -982,11 +982,6 @@ function DragActionStarter(x,y){
 		STATE.mode.clearing=!!XYFruit(xy,STATE);
 		DrawState(STATE);
 	}
-
-
-}
-function DragActionAltStarter(x,y){
-	//return 	RegionModeActive()?PickRegionCells(x,y):AddCrossCells(x,y);
 }
 function DragActionContinuer(x,y){
 	var xy=CanvasPosition(x,y,STATE);
@@ -1120,7 +1115,7 @@ Keys(FruitIcons).map(FruitSetter);
 
 var DragActions={
 	Starter:DragActionStarter,
-	AltStarter:DragActionAltStarter,
+	//AltStarter:DragActionAltStarter,
 	Executer:DragActionContinuer,
 	Ender:DragActionEnder
 }
