@@ -977,6 +977,22 @@ XYFruit=function(xy,state){
 		return false;
 }
 
+
+XYMark=function(xy,state){
+	var marks=Keys(state.marks).filter(k=>In(state.marks[k],xy));
+	if(marks.length)
+		return First(marks);
+	else
+		return false;
+}
+
+XYMarkRemove=function(xy){
+	var oldmark=XYMark(xy,STATE);
+	if(oldmark)
+		STATE.marks[oldmark]=STATE.marks[oldmark].filter(cr=>!Equal(cr,xy));
+	return STATE;
+}
+
 XYFruitRemove=function(xy){
 	var oldfruit=XYFruit(xy,STATE);
 	if(oldfruit)
