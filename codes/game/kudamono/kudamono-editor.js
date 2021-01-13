@@ -128,6 +128,19 @@ FruitIcons={
 	}
 }
 
+MarkIcons={
+	"cross":{
+		letter:"x",
+		path:"M 1 0 L 5 4 L 9 0 L 10 1 L 6 5 L 10 9 L 9 10 L 5 6 L 1 10 L 0 9 L 4 5 L 0 1 Z",
+		viewBox:"0 0 10 10",
+		colour:"rgb(155,155,155)"},
+	"dot":{
+		letter:"0",
+		viewBox:"0 0 10 10",
+		path:"M 4 5 L 5 6 L 6 5 L 5 4 Z",
+		colour:"rgb(155,155,155)"}
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Path segments
 //A track is a set of segments. A segment is a pair of points (x,y).
