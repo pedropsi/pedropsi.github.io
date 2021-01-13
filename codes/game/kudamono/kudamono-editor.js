@@ -930,6 +930,42 @@ CanvasPosition=function(x,y,state){
 	var col=Floor(state.W*(x-extremes.x0*extremes.width)/(extremes.x1-extremes.x0)/extremes.width+0.5);
 	var row=Floor(state.H*(y-extremes.y0*extremes.height)/(extremes.y1-extremes.y0)/extremes.height+0.5);
 	return [col,row];
+CanvasBoxPosition=function(x,y,state){
+	xy=CanvasBoardPosition(x,y,state);
+	var x=FractionalPart(xy[0]/state.W);
+	var y=FractionalPart(xy[1]/state.H);
+	var s=1/4;//centre box width
+	if(x>s&&x<1-s&&y>s&&y<1-s)
+		return 0;
+	if(x>s){
+		if(y>s){
+			if(y<x)
+				return 1;
+			else
+				return 8;
+		}
+		else{
+			if(y<x-1)
+				return 3;
+			else
+				return 2;
+		}
+	}
+	else{
+		if(y>s){
+			if(y<x)
+				return 4;
+			else
+				return 5;
+		}
+		else{
+			if(y<x-1)
+				return 6;
+			else
+				return 7;
+		}
+
+	}
 }
 
 
