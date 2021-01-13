@@ -1456,7 +1456,7 @@ video{
 	align-self:center;
 }
 
-.Console{
+.Console,.monitor{
 	pointer-events:none;
 	position:fixed;
 	top:var(--h2);
