@@ -53,8 +53,8 @@ RegularPolygonPoints=function(opts){
 
 DrawLine=function(opts){
 	var e=GetContextElement(opts.target)
-	var W=e.width;
-	var H=e.height;
+	var W=e.getBoundingClientRect().width;
+	var H=e.getBoundingClientRect().height;
 	var ctx=opts.ctx||GetContext(opts.target);
 	
 	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
@@ -146,10 +146,10 @@ function GridExtremes(opts){
 	var b=opts.border*2;
 
 	if(typeof opts.canvasWidth==="undefined")
-		opts.canvasWidth=GetContextElement(opts.target).width;
+		opts.canvasWidth=GetContextElement(opts.target).getBoundingClientRect().width;
 	
 	if(typeof opts.canvasHeight==="undefined")
-		opts.canvasHeight=GetContextElement(opts.target).height;
+		opts.canvasHeight=GetContextElement(opts.target).getBoundingClientRect().height;
 	
 	var width=opts.canvasWidth;
 	var height=opts.canvasHeight;
@@ -324,7 +324,7 @@ DrawSVG=function(opts){
 UnDraw=function(opts){
 	var opts=opts||{}
 	var canvas=GetContextElement(opts.target);
-	GetContext(opts.target).clearRect(0, 0, canvas.width,canvas.height);
+	GetContext(opts.target).clearRect(0, 0, canvas.getBoundingClientRect().width,canvas.getBoundingClientRect().height);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
