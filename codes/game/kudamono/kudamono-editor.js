@@ -1002,27 +1002,26 @@ function DragActionContinuer(x,y){
 }
 function DragActionEnder(x,y){
 	STATE.mode.dragging=false;
+	var selected=STATE.mode.selection||[];
 	if(STATE.mode.edit){
 		if(STATE.mode.clearing)
-			STATE.mode.selection.map(XYFruitRemove);
+			selected.map(XYFruitRemove);
 		else
-			STATE.mode.selection.map(XYFruitAdd);
+			selected.map(XYFruitAdd);
 	}
 	else {
-		
 		var selected=STATE.mode.selection||[];
-	
 		STATE.mode.clearing=selected.length<2||Intersection(XYSegments(selected[0],STATE),XYSegments(selected[1],STATE)).length>=1;
-
-		var segments=PathTrack(STATE.mode.selection);
-
-		if(STATE.mode.clearing)
-			segments.map(XYSegmentRemove);
-		else
-			segments.map(XYSegmentAdd);
+		if(selected.length>1){
+			var segments=PathTrack(selected);
+			if(STATE.mode.clearing)
+				segments.map(XYSegmentRemove);
+			else
+				segments.map(XYSegmentAdd);
+		}
 	}
 	STATE.mode.selection=[];
-	UpdateState()	
+	UpdateState();
 }
 
 TransformLevel=function(level,CoordinateTransform){
