@@ -445,7 +445,7 @@ PointValid=function(xy,state){
 }
 
 PositionValid=function(px,py,state){
-	return !(px<0||px>state.W||py<0||py>state.H);
+	return !(px<0||px>state.W)&&!(py<0||py>state.H);
 }
 
 DrawFruit=function(Opts,state){
