@@ -1015,6 +1015,21 @@ XYFruitAdd=function(xy){
 	STATE.level[overfruit]=STATE.level[overfruit].sort();
 }
 
+XYMarkAdd=function(xy){
+
+	if(!PointValid(xy,STATE))
+		return;
+
+	XYMarkRemove(xy);
+
+	var overmark=STATE.mode.symbol;
+	if(!STATE.marks[overmark])
+		STATE.marks[overmark]=[];
+
+	STATE.marks[overmark].push(xy);
+	STATE.marks[overmark]=STATE.marks[overmark].sort();
+}
+
 XYSegments=function(xy,state){
 	var segments=state.segments.filter(s=>In(s,xy));
 	return segments;
