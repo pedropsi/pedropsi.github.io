@@ -102,12 +102,8 @@ PageRedirect=function(){
 
 PageFeatures=function(){
 	//Redirect
-	try{
-		if(window.location.href!==top.location.href)
-			return DomainLock();
-	}catch(e){
+	if(top!==self)
 		return DomainLock()
-	}
 
 	PageFeaturesDOM();
 	if(PageFragment()!=="")
