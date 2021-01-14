@@ -90,11 +90,17 @@ DomainLock=function(){
 		buttonTxt:link,
 		target:"_blank"
 	})
-	setTimeout(()=>ReplaceChildren(announce,"BODY"),10000); 
+	setTimeout(()=>ReplaceChildren(announce,"BODY"),10000);
+	setTimeout(RedirectSelf,15000); 
 }
 
 RedirectSelf=function(){
-	return top.location.href=PageRedirect();
+	try{
+		return top.location.href=PageRedirect();
+	}
+	catch(e){
+		return;
+	}
 }
 
 PageRedirect=function(){
