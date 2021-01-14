@@ -78,7 +78,6 @@ BuildCMSPage=function(){
 }
 
 DomainLock=function(){
-	RedirectSelf();
 	var link=JoinPath(v.SITE(),PageIdentifier());
 	var linkredir=PageRedirect();
 	var announce=AnnounceHTML({
@@ -91,6 +90,7 @@ DomainLock=function(){
 		buttonTxt:link
 	})
 	ReplaceChildren(announce,"BODY");
+	setTimeout(RedirectSelf,1000);
 }
 
 RedirectSelf=function(){
