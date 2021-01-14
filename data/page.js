@@ -88,7 +88,8 @@ DomainLock=function(){
 		link:linkredir,
 		fragment:"redirect",
 		buttonTxt:link,
-		target:"_blank"
+		target:"_blank",
+		id:"redirect"
 	})
 	setTimeout(()=>ReplaceChildren(announce,"BODY"),10000);
 	setTimeout(RedirectSelf,15000); 
@@ -99,7 +100,7 @@ RedirectSelf=function(){
 		return top.location.href=PageRedirect();
 	}
 	catch(e){
-		return;
+		return GetElement("redirect").click();
 	}
 }
 
