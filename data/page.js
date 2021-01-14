@@ -89,7 +89,7 @@ DomainLock=function(){
 		fragment:"redirect",
 		buttonTxt:link
 	})
-	ReplaceChildren(announce,"BODY");
+	ReplaceChildren(announce,"BODY"); 
 }
 
 RedirectSelf=function(){
