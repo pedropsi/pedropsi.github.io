@@ -90,7 +90,6 @@ DomainLock=function(){
 		buttonTxt:link
 	})
 	ReplaceChildren(announce,"BODY");
-	setTimeout(RedirectSelf,1000);
 }
 
 RedirectSelf=function(){
@@ -105,8 +104,7 @@ PageFeatures=function(){
 	//Redirect
 	try{
 		if(window.location.href!==top.location.href)
-			return DomainLock()
-
+			return DomainLock();
 	}catch(e){
 		return DomainLock()
 	}
