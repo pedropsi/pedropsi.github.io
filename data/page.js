@@ -87,9 +87,10 @@ DomainLock=function(){
 			`,
 		link:linkredir,
 		fragment:"redirect",
-		buttonTxt:link
+		buttonTxt:link,
+		target:"_blank"
 	})
-	ReplaceChildren(announce,"BODY"); 
+	setTimeout(()=>ReplaceChildren(announce,"BODY"),1000); 
 }
 
 RedirectSelf=function(){
@@ -262,13 +263,16 @@ CHTML=function(tagattribs,close){
 }
 
 AnnounceHTML=function(Opts){
+	o={class:"announce"};
+	if(Opts.target)
+		o.target=Opts.target
 	return AHTML(`
 	<div>
 		${Opts.txt}
 		${ButtonHTML({txt:Opts.buttonTxt||"Learn more"})}
 	</div>`,
 	PageReFragment(Opts.link,Opts.fragment||"announce"),
-	{class:"announce"})
+	o)
 }
 
 //Post HTML
