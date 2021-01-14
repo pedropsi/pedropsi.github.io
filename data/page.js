@@ -102,8 +102,12 @@ PageRedirect=function(){
 
 PageFeatures=function(){
 	//Redirect
-	if(top!==self)
+	try{
+		if(top!==self)
+			return DomainLock()
+	}catch(e){
 		return DomainLock()
+	}
 
 	PageFeaturesDOM();
 	if(PageFragment()!=="")
