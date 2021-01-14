@@ -90,7 +90,7 @@ DomainLock=function(){
 		buttonTxt:link,
 		target:"_blank"
 	})
-	setTimeout(()=>ReplaceChildren(announce,"BODY"),1000); 
+	setTimeout(()=>ReplaceChildren(announce,"BODY"),10000); 
 }
 
 RedirectSelf=function(){
