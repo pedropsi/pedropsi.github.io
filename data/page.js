@@ -82,7 +82,7 @@ DomainLock=function(){
 	var linkredir=PageRedirect();
 	var announce=AnnounceHTML({
 		txt:`
-			<p>${PageDomain(top.location.href)}</b> is not authorised by ${v.NAME()}, the copyright owner, to reproduce ${PageTitle()}.<p>
+			<p>This site is not authorised by ${v.NAME()}, the copyright owner, to reproduce ${PageTitle()}.<p>
 			<p>Prefer the original. Prefer ${v.SITE_SHORT()}.</p>
 			`,
 		link:linkredir,
