@@ -90,9 +90,6 @@ DomainLock=function(){
 		buttonTxt:link
 	})
 	ReplaceChildren(announce,"BODY");
-	try{
-		RedirectSelf();
-	}
 }
 
 RedirectSelf=function(){
