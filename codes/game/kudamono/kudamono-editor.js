@@ -793,8 +793,6 @@ ObtainStartingLevelState=function(){
 			fillColor:"#FFFFFF",				//background
 			lineWidth:2,						//width   of grid lines
 			dash:[6,12],						//dashing of grid lines
-			width:1200,							
-			height:1200,						
 			border:0.5,							//how many squares to add to the border (to each of the shortest sides)
 			scale:0.95,							//fruit scale (how large)
 			nudge:0.3							//fruit nudge (small adjustments to position)
@@ -918,19 +916,30 @@ ObtainSetLevelState=function(state){
 
 
 Extremes=function(state){
-	return GridExtremes({
+	var gridOpts={
+		...state.grid,
 		rows:state.H,
-		cols:state.W,
-		target:state.target
-	});
+		cols:state.W
+	}
+	return GridExtremes(gridOpts);
 }
+
 
 CanvasPosition=function(x,y,state){
 	var extremes=Extremes(state);
-	var col=Floor(state.W*(x-extremes.x0*extremes.width)/(extremes.x1-extremes.x0)/extremes.width+0.5);
-	var row=Floor(state.H*(y-extremes.y0*extremes.height)/(extremes.y1-extremes.y0)/extremes.height+0.5);
-	return [col,row];
+	var X=state.W*(x-extremes.x0)/(extremes.x1-extremes.x0);
+	var Y=state.H*(y-extremes.y0)/(extremes.y1-extremes.y0);
+	return [X,Y];
 }
+
+CanvasPoint=function(x,y,state){
+	var p=CanvasPosition(x,y,state);
+	return [
+		Floor((p[0]+0.5)),
+		Floor((p[1]+0.5))
+	]
+}
+
 
 CanvasBoxPosition=function(x,y,state){
 	xy=CanvasBoardPosition(x,y,state);
@@ -1054,7 +1063,7 @@ XYSegmentRemove=function(segment){
 
 
 function DragActionStarter(x,y){
-	var xy=CanvasPosition(x,y,STATE);
+	var xy=CanvasPoint(x,y,STATE);
 	if(!PointValid(xy,STATE))
 		return;//TODO OTHER OPTIONS
 	STATE.mode.symbol=XYFruit(xy,STATE)||STATE.mode.symbol;
@@ -1066,7 +1075,7 @@ function DragActionStarter(x,y){
 	}
 }
 function DragActionContinuer(x,y){
-	var xy=CanvasPosition(x,y,STATE);
+	var xy=CanvasPoint(x,y,STATE);
 	if(!PointValid(xy,STATE))
 		return;
 	if(!STATE.mode.selection)
@@ -1204,8 +1213,9 @@ var DragActions={
 }
 
 CanvasResize=function(){
-	GetElement(STATE.target).width=window.innerWidth;
-	GetElement(STATE.target).height=window.innerHeight;
+	var e=GetElement(STATE.target);
+	e.width=Min(window.innerWidth,e.width||Infinity,e.scrollWidth||Infinity);
+	e.height=Min(window.innerHeight,e.height||Infinity,e.scrollHeight||Infinity);
 	DrawState(STATE);
 }
 
@@ -1218,6 +1228,7 @@ InitialiseKudamono=function(){
 			width="${window.innerWidth}" 
 			height="${window.innerHeight}"
 		></div>`,"body");
+	CanvasResize();
 	AttendDrag(DragActions,"canvas");
 	Attend('resize',CanvasResize)
 	Keybind(KeyboardActions,STATE.target);

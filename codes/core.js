@@ -4363,14 +4363,13 @@ ListenNoMoreNode=function(lobj){
 ////////////////////////////////////////////////////////////////////////////////
 // Drag Action
 
+
 function XYHandler(Action){
 	return function(e){
 		var el=GetElement(e.target);
 		var r=el.getBoundingClientRect();
-		// var Xscale=el.width /r.width ;
-		// var Yscale=el.height/r.height;
-		var X=(e.clientX-r.left)//*Xscale;
-		var Y=(e.clientY-r.top )//*Yscale;
+		var X=(e.clientX-r.left);
+		var Y=(e.clientY-r.top);
 		Action(X,Y,r.right-r.left,r.bottom-r.top);
 	}
 }
