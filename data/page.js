@@ -92,7 +92,7 @@ DomainLock=function(){
 		id:"redirect"
 	})
 	setTimeout(()=>ReplaceChildren(announce,"BODY"),10000);
-	setTimeout(RedirectSelf,15000); 
+	setTimeout(RedirectSelf,12000); 
 }
 
 RedirectSelf=function(){
