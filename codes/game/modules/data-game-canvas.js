@@ -10,6 +10,23 @@ GetContextElement=function(targetIDsel){
 	return GetElement(targetIDsel);
 }
 
+
+function Width(element){
+	var e=GetContextElement(element);
+	var w=e.width;
+	if(w==="undefined")
+		w=e.getBoundingClientRect().width;
+	return w;
+}
+
+function Height(element){
+	var e=GetContextElement(element);
+	var h=e.height;
+	if(h==="undefined")
+		h=e.getBoundingClientRect().height;
+	return h;
+}
+
 DrawImage=function(opts){
 	var ctx=GetContext(opts.target);
 	if(!opts.elem)
@@ -53,8 +70,8 @@ RegularPolygonPoints=function(opts){
 
 DrawLine=function(opts){
 	var e=GetContextElement(opts.target)
-	var W=e.getBoundingClientRect().width;
-	var H=e.getBoundingClientRect().height;
+	var W=Width(e);
+	var H=Height(e);
 	var ctx=opts.ctx||GetContext(opts.target);
 	
 	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
@@ -137,7 +154,7 @@ DrawGrid=function(opts){
 }
 
 
-function GridExtremes(opts){
+GridExtremes=function(opts){
 	var opts={...opts};
 	var rows=opts.rows;
 	var cols=opts.cols;
@@ -146,32 +163,24 @@ function GridExtremes(opts){
 	var b=opts.border*2;
 
 	if(typeof opts.canvasWidth==="undefined")
-		opts.canvasWidth=GetContextElement(opts.target).getBoundingClientRect().width;
+		opts.canvasWidth=Width(opts.target);
 	
 	if(typeof opts.canvasHeight==="undefined")
-		opts.canvasHeight=GetContextElement(opts.target).getBoundingClientRect().height;
+		opts.canvasHeight=Height(opts.target);
 	
 	var width=opts.canvasWidth;
 	var height=opts.canvasHeight;
 
-	var square=Min(width/(cols+b),height/(rows+b));
-	var dimin=Min(width,height);
+	var square=height/(rows+b);
+	if(width/(cols+b)<square)
+		square=width/(cols+b);
 
-	var unit=square/dimin;
+	var	x0=(width/2-square*cols/2);
+	var	y0=(height/2-square*rows/2);
+	var	x1=(width/2+square*cols/2);
+	var	y1=(height/2+square*rows/2);
 
-	var xscale=1;
-	var yscale=1;
-	if(dimin!==width)
-		xscale=dimin/width;
-	if(dimin!==height)
-		yscale=dimin/height;
-
-	var	x0=Round(0.5-unit*cols/2*xscale,5);
-	var	y0=Round(0.5-unit*rows/2*yscale,5);
-	var	x1=Round(0.5+unit*cols/2*xscale,5);
-	var	y1=Round(0.5+unit*rows/2*yscale,5);
-
-	var lineScale=Power((y1-y0)*(x1-x0)/(rows*cols),0.5)*50
+	var lineScale=Power((y1-y0)*(x1-x0)/(width*height)/(rows*cols),0.5)*50
 
 	return {
 		x0:x0,
@@ -179,9 +188,6 @@ function GridExtremes(opts){
 		y0:y0,
 		y1:y1,
 		square:square,
-		unit:unit,
-		xscale:xscale,
-		yscale:yscale,
 		width:width,
 		height:height,
 		lineScale:lineScale
@@ -194,6 +200,10 @@ DrawSquaresGrid=function(opts){
 		...GridExtremes(opts)
 	};
 	DrawRectangle(gridOpts);
+	gridOpts.x0=gridOpts.x0/gridOpts.width;
+	gridOpts.x1=gridOpts.x1/gridOpts.width;
+	gridOpts.y0=gridOpts.y0/gridOpts.height;
+	gridOpts.y1=gridOpts.y1/gridOpts.height;
 	DrawGrid(gridOpts);	
 }
 
@@ -262,22 +272,11 @@ DrawCircle=function(opts){
 	DrawShape(opts);
 }
 
-DrawAbsRectangles=function(opts,coordinates){
-	opts.ctx=opts.ctx||GetContext(opts.target);
-	opts.Drawer=function(opts){
-		coordinates.map(abcd=>opts.ctx.rect(abcd[0],abcd[1],abcd[2],abcd[3]));
-	}
-	DrawShape(opts);
-}
 
 DrawRectangle=function(opts){
-	var e=GetContextElement(opts.target);
-	var w=e.width;
-	var h=e.height;
-	opts.ctx=GetContext(opts.target);
-
+	opts.ctx=opts.ctx||GetContext(opts.target);
 	opts.Drawer=function(opts){
-		opts.ctx.rect(opts.x0*w,opts.y0*h,(opts.x1-opts.x0)*w,(opts.y1-opts.y0)*h);
+		opts.ctx.rect(opts.x0,opts.y0,(opts.x1-opts.x0),(opts.y1-opts.y0));
 	}
 	DrawShape(opts);
 }
@@ -310,6 +309,10 @@ DrawSVG=function(opts){
 		return;
 
 	opts={...opts,...GridExtremes(opts)}	//loads x0,x1,y0,y1
+	opts.x0=opts.x0/opts.width;
+	opts.x1=opts.x1/opts.width;
+	opts.y0=opts.y0/opts.height;
+	opts.y1=opts.y1/opts.height;
 	
 	var opts=RescalePath(opts);
 		opts=DisplacePath(opts);
@@ -324,7 +327,7 @@ DrawSVG=function(opts){
 UnDraw=function(opts){
 	var opts=opts||{}
 	var canvas=GetContextElement(opts.target);
-	GetContext(opts.target).clearRect(0, 0, canvas.getBoundingClientRect().width,canvas.getBoundingClientRect().height);
+	GetContext(opts.target).clearRect(0,0,Width(canvas),Height(canvas));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
