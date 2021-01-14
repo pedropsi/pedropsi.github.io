@@ -42,6 +42,10 @@
 	--sh:1px;
 }
 
+body{
+	min-height: 100vh
+}
+
 body,div {
 --hue:0;
 --sat:50%;

@@ -77,16 +77,39 @@ BuildCMSPage=function(){
 
 }
 
+DomainLock=function(){
+	RedirectSelf();
+	var link=JoinPath(v.SITE(),PageIdentifier());
+	var linkredir=PageRedirect();
+	var announce=AnnounceHTML({
+		txt:`
+			<p>${PageDomain(top.location.href)}</b> is not authorised by ${v.NAME()}, the copyright owner, to reproduce ${PageTitle()}.<p>
+			<p>Prefer the original. Prefer ${v.SITE_SHORT()}.</p>
+			`,
+		link:linkredir,
+		fragment:"redirect",
+		buttonTxt:link
+	})
+	ReplaceChildren(announce,"BODY");
+}
+
 RedirectSelf=function(){
-	return top.location.href=PageReFragment(JoinPath(v.SITE(),PageIdentifier()+".html?from="+document.referrer),"redirect");
+	return top.location.href=PageRedirect();
+}
+
+PageRedirect=function(){
+	return PageReFragment(JoinPath(v.SITE(),PageIdentifier()+".html?from="+document.referrer),"redirect");
 }
 
 PageFeatures=function(){
 	//Redirect
 	try{
 		if(window.location.href!==top.location.href)
-			return RedirectSelf()
-	}catch(e){return RedirectSelf()}
+			return DomainLock()
+
+	}catch(e){
+		return DomainLock()
+	}
 
 	PageFeaturesDOM();
 	if(PageFragment()!=="")
