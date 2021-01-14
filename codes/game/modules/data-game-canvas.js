@@ -209,10 +209,10 @@ DrawSquaresGrid=function(opts){
 
 DrawGridLine=function(opts){
 	var gridOpts=GridExtremes(opts);
-	var x0=gridOpts.x0;
-	var x1=gridOpts.x1;
-	var y0=gridOpts.y0;
-	var y1=gridOpts.y1;
+	var x0=gridOpts.x0/gridOpts.width;
+	var x1=gridOpts.x1/gridOpts.width;
+	var y0=gridOpts.y0/gridOpts.height;
+	var y1=gridOpts.y1/gridOpts.height;
 	var rows=opts.rows;
 	var cols=opts.cols;
 
@@ -318,9 +318,20 @@ DrawSVG=function(opts){
 		opts=DisplacePath(opts);
 	
 	let p = new Path2D(opts.path);
+	
+	if(opts.strokeStyle){
+		opts.ctx.strokeStyle=opts.strokeStyle;
+		opts.ctx.lineWidth=opts.lineWidth||1;
+		opts.ctx.stroke(p);
+	}
+
 	var fillColor=opts.colour?opts.colour:getComputedStyle(document.body)["background-strokeColor"]||"black";
 	opts.ctx.fillStyle=fillColor;
 	opts.ctx.fill(p);
+
+
+	
+
 }
 
 //

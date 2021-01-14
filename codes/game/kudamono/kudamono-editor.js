@@ -467,6 +467,13 @@ DrawFruit=function(Opts,state){
 		else
 			Opts.colour=colour;
 	}
+
+	
+	if(PointTrackContained([Opts.px,Opts.py],STATE.segments)){
+		Opts.strokeStyle=state.grid.fillColor;
+		Opts.lineWidth=state.visuals.skin||0;
+	}
+
 	if(state.visuals.monochrome&&!state.mode.dragging)
 		Opts.colour=HEXSaturater(0)(Opts.colour);
 
@@ -777,7 +784,8 @@ ObtainStartingLevelState=function(){
 		//visuals
 		target:"kudamono-canvas",
 		visuals:{
-			monochrome:false
+			monochrome:false,
+			skin:5								//fruit skin thickness
 		},
 		line:{
 			opacity:0.5,
