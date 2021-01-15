@@ -511,7 +511,7 @@ DrawFruit=function(Opts,state){
 
 	if(!state.visuals.solid){
 		if(PointTrackContained([Opts.px,Opts.py],STATE.segments)){
-			Opts.strokeStyle=HEXLightener(1)(Opts.colour);
+			//Opts.strokeStyle=HEXLightener(1)(Opts.colour);
 		}
 		else if(In(state.mode.selection,[Opts.px,Opts.py])){
 			Opts.strokeStyle=Opts.colour;
