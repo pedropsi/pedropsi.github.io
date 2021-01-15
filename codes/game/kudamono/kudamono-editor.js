@@ -169,7 +169,7 @@ OrthonormalXYDir=function(xyza){
 
 PathTrack=function(path){
 	var track=Rest(path).map((xy,i)=>[path[i],xy]);
-		track=track.map(SegmentUnitiseTrack);
+		track=track.map(SegmentDiscretiseTrack);
 		track=Join(...track);
 	return SortTrack(track);
 }
@@ -201,8 +201,7 @@ SegmentTrackContained=function(segment,track){
 	return In(track,segment)||In(track,Reverse(segment));
 }
 
-SegmentPoints=function(segment,points){
-	//return [segment[0],segment[1]]
+SegmentPoints=function(segment){
 	return segment;
 }
 
@@ -210,9 +209,9 @@ TrackPoints=function(track){
 	return Union(Join(...track.map(SegmentPoints)));
 }
 
-// SegmentTrackTouched=function(segment,track){
-// 	return SegmentContiguousTrackSegments(segment,track).length>0;
-// }
+SegmentTouched=function(segment1,segment2){
+ 	return SegmentPoints(segment1).some(point=>PointSegmentContained(point,segment2));
+}
 
 DeletePointTrack=function(point,track){
 	return track.filter(seg=>!PointSegmentContained(point,seg));
@@ -374,10 +373,10 @@ CanonicalContiguousTrack=function(track,Posit){
 
 
 SegmentValid=function(segment,state){
-	return SegmentUnitised(segment)&&SegmentPoints(segment).every(point=>PointValid(point,state));
+	return SegmentDiscretised(segment)&&SegmentPoints(segment).every(point=>PointValid(point,state));
 }
 
-SegmentUnitised=function(segment){
+SegmentDiscretised=function(segment){
 	return In(Values(DirectionsCoordinates),SegmentDirection(segment));
 }
 
@@ -385,7 +384,11 @@ SegmentDirection=function(segment){
 	return VectorMinus(segment[1],segment[0]);
 }
 
-SegmentUnitiseTrack=function(segment){
+SegmentUnitDirection=function(segment){
+	return UnitVector(SegmentDirection(segment));
+}
+
+SegmentDiscretiseTrack=function(segment){
 	var previousPoint=segment[0];
 	var nextPoint;
 	var direction=SegmentDirection(segment);
@@ -408,6 +411,45 @@ SegmentUnitiseTrack=function(segment){
 	}
 	return track;
 }
+
+UnDiscretiseTrack=function(track){
+	var track=track;
+	var l=track.length;
+	var i=0;
+	while(i<l-1){
+		j=i+1;
+		while(j<l){
+			if(SegmentFollowed(track[i],track[j])){
+				track[i]=FuseFollowedSegment(track[i],track[j]);
+				track=Delete(track,j);
+				i=0;
+				j=i+1;
+				l=l-1;
+			}
+			else{
+				j++
+			}
+		}
+		i++
+	}
+	return track;
+}
+
+SegmentFollowed=function(segment1,segment2){
+	var d1=SegmentDirection(segment1);
+	var d2=SegmentDirection(segment1);
+	return Equal(SegmentDirection(segment1),SegmentDirection(segment2))&&SegmentTouched(segment1,segment2);
+}
+
+FuseFollowedSegment=function(segment1,segment2){
+	var d=SegmentDirection(segment1);
+	if(Equal(segment1.map(p=>VectorPlus(d,p)),segment2))
+		return [First(segment1),Last(segment2)]
+	else
+	return [First(segment2),Last(segment1)]
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Draw
@@ -451,13 +493,13 @@ TrackStyleOpts=function(track,state,Opts){
 
 DrawTrack=function(track,state,Opts){
 	var trackStyleOpts=TrackStyleOpts(track,state,Opts);
-	track.filter(segment=>SegmentValid(segment,state)).map(segment=>DrawSegment({
+	var track=track.filter(segment=>SegmentValid(segment,state));
+		track=UnDiscretiseTrack(track);
+	track.map(segment=>DrawSegment({
 		px0:segment[0][0],
 		px1:segment[1][0],
 		py0:segment[0][1],
 		py1:segment[1][1],
-		cols:state.W,
-		rows:state.H,
 		...trackStyleOpts
 	},state))
 }
