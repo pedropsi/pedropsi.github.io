@@ -169,7 +169,7 @@ OrthonormalXYDir=function(xyza){
 
 PathTrack=function(path){
 	var track=Rest(path).map((xy,i)=>[path[i],xy]);
-		track=track.map(SegmentUnitisedTrack);
+		track=track.map(SegmentUnitiseTrack);
 		track=Join(...track);
 	return SortTrack(track);
 }
@@ -385,7 +385,7 @@ SegmentDirection=function(segment){
 	return VectorMinus(segment[1],segment[0]);
 }
 
-SegmentUnitisedTrack=function(segment){
+SegmentUnitiseTrack=function(segment){
 	var previousPoint=segment[0];
 	var nextPoint;
 	var direction=SegmentDirection(segment);
@@ -1139,6 +1139,11 @@ function DragActionContinuer(x,y){
 		STATE.mode.selection=AddOnce(STATE.mode.selection,xy);
 		DrawState(STATE);
 	}
+	else if(STATE.mode.selection.length>1&&Equal(First(Take(STATE.mode.selection,-2)),xy)){
+		STATE.mode.selection=Remove(STATE.mode.selection,Last(STATE.mode.selection));
+		DrawState(STATE);
+	}
+
 
 }
 function DragActionEnder(x,y){
