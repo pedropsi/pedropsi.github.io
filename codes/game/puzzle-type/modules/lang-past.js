@@ -4313,8 +4313,10 @@ function PastTense(verb){
 var RegularVerbPasts={};
 	EnRegularVerbsInfinitive.map(v=>RegularVerbPasts[v]=RegularPastTense(v));
 
+var LongestSorter=Sorter(EnVerbsInfinitive,x=>-x.length);
+
 var EnVerbsInfinitive=Join(Keys(RegularVerbPasts),Keys(IrregularVerbPasts),Keys(SemiRegularVerbPasts));
-var	VerbPastTenseReplacementRules=EnVerbsInfinitive.sort(SingleSorter(x=>-x.length)).map(
+var	VerbPastTenseReplacementRules=LongestSorter(EnVerbsInfinitive).map(
 	k=>[new RegExp(k.toUpperCase()+"$"),PastTense(k).toUpperCase()]
 );
 
@@ -4431,11 +4433,11 @@ Range(0,12).map(m=>PastWords[ReadNumber(m)+" sharp"]=ReadNumber((m+11)%12)+" sha
 
 
 
-var PastReplacementRules=Keys(PastWords).sort(SingleSorter(w=>-w.length)).map(
+var PastReplacementRules=LongestSorter(Keys(PastWords)).map(
 	w=>[new RegExp(w.toUpperCase()+"$"),PastWords[w].toUpperCase()]
 );
 
 PastReplacementRules=Join(VerbPastTenseReplacementRules,PastReplacementRules);
-PastReplacementRules=Sort(PastReplacementRules,rule=>-rule[0].source.length);
+PastReplacementRules=Sorter(rule=>-rule[0].source.length)(PastReplacementRules);
 
-var HighlightablePast=Join(Keys(PastWords),EnVerbsInfinitive).sort(SingleSorter(x=>-x.length));
+var HighlightablePast=LongestSorter(Join(Keys(PastWords),EnVerbsInfinitive));
