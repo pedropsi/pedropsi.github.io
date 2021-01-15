@@ -371,7 +371,7 @@ VectorOperation=function(Operation,vector1,vector2){
 			var v1=vector1;
 			var v2=vector2;
 		}
-		return v1.map(function(x,i){return Operation(x,v2[i])});
+		return Clone(v1).map(function(x,i){return Operation(x,v2[i])});
 	}
 }
 
