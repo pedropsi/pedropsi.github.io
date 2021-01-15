@@ -105,17 +105,18 @@ Access=function(page,field){
 CMSOptionsObj=function(){
 	return{
 		Source:CMS,
-		Sorter:SortPageByDate,
+		Sorter:PageDateComparer,
 		ItemHTML:PageCardHTML
 	};
 }
 
-SortPageByDate=function(pageA,pageB){
-	
+PageDateComparer=function(pageA,pageB){
 	var pageA={...v,...pageA};
 	var pageB={...v,...pageB};
-	return Days(PageDate(pageA),PageDate(pageB));
+	var d=Days(PageDate(pageA),PageDate(pageB));
+	return d
 }
+
 
 PageDate=function(page){
 	if(!page||!page.DATE)
@@ -300,7 +301,7 @@ PostPageHTML=function(){
 			years=Union(years,[PageObj.YEAR()])
 	}
 	FilterObject(CMS,GetYear);
-	years=years.sort((a,b)=>a<b);
+	years=Reverse(Sort(years));
 	return years.map(ArchiveYearHTML).join("\n");
 }
 
