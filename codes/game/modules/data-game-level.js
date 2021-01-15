@@ -111,7 +111,7 @@ function UnSolvedLevels(){
 function AddToSolvedLevels(lvl){
 	if(!IsScreenMessage(LevelScreen(lvl))&&!LevelSolved(lvl)){
 		SolvedLevels.levels.push(lvl);
-		SolvedLevels.levels=SolvedLevels.levels.sort(SingleSorter());
+		SolvedLevels.levels=Sort(SolvedLevels.levels);
 	}
 	return SolvedLevels();
 }
