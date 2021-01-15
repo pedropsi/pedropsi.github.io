@@ -233,6 +233,8 @@ BiPlus=function(a,b){
 		return MapThread(Plus,a,b);
 	else if(IsArray(a))
 		return a.map(n=>Plus(b,n));
+	else if(IsArray(b))
+		return b.map(n=>Plus(a,n));
 	else{
 		console.log("Plus error",a,b)
 		return 0;
@@ -244,7 +246,18 @@ BiTimes=function(a,b){
 		return 1;
 	if(typeof b==="undefined")
 		return a;
-	return a*b;
+	if(IsNumber(a)&&IsNumber(b))
+		return a*b;
+	if(IsArray(a)&&IsArray(b))
+		return MapThread(Times,a,b);
+	else if(IsArray(a))
+		return a.map(n=>Times(b,n));
+	else if(IsArray(b))
+		return b.map(n=>Times(a,n));
+	else{
+		console.log("Times error",a,b)
+		return 1;
+	}
 }
 
 Plus=ArgumentExtender(BiPlus);
@@ -383,6 +396,13 @@ var VectorMin=Vectoriser(Min);
 
 EuclideanDistance=function(vector1,vector2){
 	return Power(PoweredSum(VectorMinus(vector2,vector1),2),1/2);
+}
+
+UnitVector=function(vector){
+	if(Equal(vector,[0,0]))
+		return [0,0];
+	var d=EuclideanDistance([0,0],vector);
+	return Divide(vector,d);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
