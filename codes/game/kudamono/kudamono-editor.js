@@ -963,7 +963,7 @@ ObtainStartingLevelState=function(){
 	return state;
 }
 
-STATE=ObtainStartingLevelState()
+STATE=ObtainStartingLevelState();
 
 
 
@@ -1351,7 +1351,7 @@ InitialiseKudamono=function(){
 	Attend('resize',CanvasResize)
 	Keybind(KeyboardActions,STATE.target);
 	ResumeCapturingKeys(ComboKeyPressHandler);
-	DrawState(STATE);
+	UpdateState();
 	setTimeout(()=>FocusElement(STATE.target),500)
 }
 
