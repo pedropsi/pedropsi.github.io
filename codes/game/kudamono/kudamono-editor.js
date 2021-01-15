@@ -765,15 +765,15 @@ DirectionsCoordinates={
 LetterDirections=FlipKeysValues(DirectionsLetter);
 CoordinatesDirections=FlipKeysValues(DirectionsCoordinates);
 
-// LetterContiguousPath=function(letters,startxy){
-// 	var directions=letters.split("").map(Accesser(LetterDirections)).join("").split("");
-// 		directions=directions.map(Accesser(DirectionsCoordinates));
-// 	var coordinates=directions;
-// 		coordinates=coordinates.map((c,i)=>Apply(VectorPlus,Take(directions,i+1)));
-// 		coordinates.unshift([0,0]);
-// 		coordinates=coordinates.map(c=>VectorPlus(c,startxy))
-// 	return SortTrack(PathTrack(coordinates));
-// }
+LetterContiguousPath=function(letters,startxy){
+	var directions=letters.split("").map(Accesser(LetterDirections)).join("").split("");
+		directions=directions.map(Accesser(DirectionsCoordinates));
+	var coordinates=directions;
+		coordinates=coordinates.map((c,i)=>Apply(VectorPlus,Take(directions,i+1)));
+		coordinates.unshift([0,0]);
+		coordinates=coordinates.map(c=>VectorPlus(c,startxy))
+	return SortTrack(PathTrack(coordinates));
+}
 
 SerialSegments=function(serial,state){
 	var pathserials=serial.match(PathSerialPattern);
@@ -854,8 +854,8 @@ SerialState=function(serialObj,state){
 		state.H=Max(Number(serialObj.h||serialObj.w)||0,2);
 		if(serialObj.l)
 			state.level=SerialLevel(serialObj.l,state);
-		// if(serialObj.s)
-		// 	state.segments=SerialSegments(serialObj.s,state)
+		if(serialObj.s)
+		 	state.segments=SerialSegments(serialObj.s,state)
 	return state;
 }
 
