@@ -291,12 +291,12 @@ function LetterCoordinates(Z){
 		explicitCoordinates[implicitPoints[i]]=explicitCoordinates[c];
 	}
 
-	ShapeInvisiblePoints.map(InvisibleCoordinatesSandartiser(explicitCoordinates));
+	ShapeInvisiblePoints.map(InvisibleCoordinatesStandartiser(explicitCoordinates));
 
 	return LetterCoordinates[Z]=explicitCoordinates;
 }
 
-function InvisibleCoordinatesSandartiser(explicitCoordinates){
+function InvisibleCoordinatesStandartiser(explicitCoordinates){
 	return function(Ij){
 		var Ij=Ij.split("").sort().join("");
 		var jI=Ij[1]+Ij[0];
