@@ -169,8 +169,12 @@ OrthonormalXYDir=function(xyza){
 
 PathTrack=function(path){
 	var track=Rest(path).map((xy,i)=>[path[i],xy]);
+		track=track.map(SegmentUnitisedTrack);
+		track=Join(...track);
 	return SortTrack(track);
 }
+
+
 
 
 SortTrack=function(track){
@@ -370,9 +374,40 @@ CanonicalContiguousTrack=function(track,Posit){
 
 
 SegmentValid=function(segment,state){
-	return In(Values(DirectionsCoordinates),VectorMinus(segment[0],segment[1]))&&SegmentPoints(segment).every(point=>PointValid(point,state));
+	return SegmentUnitised(segment)&&SegmentPoints(segment).every(point=>PointValid(point,state));
 }
 
+SegmentUnitised=function(segment){
+	return In(Values(DirectionsCoordinates),SegmentDirection(segment));
+}
+
+SegmentDirection=function(segment){
+	return VectorMinus(segment[1],segment[0]);
+}
+
+SegmentUnitisedTrack=function(segment){
+	var previousPoint=segment[0];
+	var nextPoint;
+	var direction=SegmentDirection(segment);
+	var i=0;
+	var track=[];
+	var dx=Sign(direction[0]);
+	var dy=Sign(direction[1]);
+	while(Abs(i)<Abs(direction[0])){
+		nextPoint=VectorPlus(previousPoint,[dx,0]);
+		track.push([previousPoint,nextPoint]);
+		previousPoint=nextPoint;
+		i+=dx;
+	}
+	var j=0;
+	while(Abs(j)<Abs(direction[1])){
+		nextPoint=VectorPlus(previousPoint,[0,dy]);
+		track.push([previousPoint,nextPoint]);
+		previousPoint=nextPoint;
+		j+=dy;
+	}
+	return track;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Draw
