@@ -4384,35 +4384,45 @@ ListenNoMoreNode=function(lobj){
 // Drag Action
 
 
-function XYHandler(Action){
+XYHandler=function(Action){
 	return function(e){
+		e.preventDefault();
 		var el=GetElement(e.target);
 		var r=el.getBoundingClientRect();
+		if(e.touches&&e.touches[0])
+			var e=e.touches[0];
 		var X=(e.clientX-r.left);
 		var Y=(e.clientY-r.top);
 		Action(X,Y,r.right-r.left,r.bottom-r.top);
 	}
 }
 
-function AttendDrag(Actions,target){
+AttendDrag=function(Actions,target){
 	if(!Actions.Starter&&!Actions.AltStarter)
 		return;
 	var Starter=function(ev){
-		if(ev.which!==1)
-			XYHandler(Actions.AltStarter)(ev);	
-		else
+		ev.preventDefault();
+		if(ev.which===1||ev.touches)
 			XYHandler(Actions.Starter)(ev);
+		else
+			XYHandler(Actions.AltStarter)(ev);	
 
 		var Executer=XYHandler(Actions.Executer)||Identity;
 		Attend("mousemove",Executer,target);
+		Attend("touchmove",Executer,target);
 		var Ender=function(ev){
+			ev.preventDefault();
 			XYHandler(Actions.Ender||Identity)(ev);
 			UnAttend("mousemove",target);
+			UnAttend("touchmove",target);
 			UnAttend("mouseup",target);
+			UnAttend("touchend",target);
 		}
 		Attend("mouseup",Ender,target);
+		Attend("touchend",Ender,target);
 	}
 	Attend("mousedown",Starter,target);
+	Attend("touchstart",Starter,target);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
