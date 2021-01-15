@@ -468,14 +468,25 @@ DrawFruit=function(Opts,state){
 			Opts.colour=colour;
 	}
 
-	
-	if(PointTrackContained([Opts.px,Opts.py],STATE.segments)){
-		Opts.strokeStyle=state.grid.fillColor;
-		Opts.lineWidth=state.visuals.skin||0;
-	}
-
 	if(state.visuals.monochrome&&!state.mode.dragging)
 		Opts.colour=HEXSaturater(0)(Opts.colour);
+
+	Opts.dash=false;
+	Opts.lineWidth=state.visuals.skin||0;
+
+	if(!state.visuals.solid){
+		if(PointTrackContained([Opts.px,Opts.py],STATE.segments)){
+			Opts.strokeStyle=HEXLightener(1)(Opts.colour);
+		}
+		else if(In(state.mode.selection,[Opts.px,Opts.py])){
+			Opts.strokeStyle=Opts.colour;
+			Opts.colour=HEXLightener(0.9)(Opts.colour);		
+		}
+		else{
+			Opts.strokeStyle=Opts.colour;
+				Opts.colour=HEXLightener(1)(Opts.colour);		
+		}
+	}
 
 	if(typeof Opts.shiftx==="undefined")
 		Opts.shiftx=0;
@@ -785,7 +796,8 @@ ObtainStartingLevelState=function(){
 		target:"kudamono-canvas",
 		visuals:{
 			monochrome:false,
-			skin:5								//fruit skin thickness
+			solid:false,
+			skin:1								//fruit skin thickness
 		},
 		line:{
 			opacity:0.5,
@@ -1173,6 +1185,7 @@ var KeyboardActions={
 	"ctrl down":DecrementCanvasHeight,
 	
 	"ctrl b":function(){STATE.visuals.monochrome=!!!STATE.visuals.monochrome;UpdateState();},
+	"ctrl shift b":function(){STATE.visuals.solid=!!!STATE.visuals.solid;UpdateState();},
 	"ctrl s":ExportSerial,
 
 	"space":function(){STATE.mode.edit=!STATE.mode.edit;UpdateState();},

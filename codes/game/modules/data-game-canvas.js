@@ -319,19 +319,19 @@ DrawSVG=function(opts){
 	
 	let p = new Path2D(opts.path);
 	
+	if(!opts.dash)
+		opts.dash=[];
+
 	if(opts.strokeStyle){
+		opts.ctx.setLineDash(opts.dash)
 		opts.ctx.strokeStyle=opts.strokeStyle;
-		opts.ctx.lineWidth=opts.lineWidth||1;
+		opts.ctx.lineWidth=opts.lineWidth*opts.lineScale;
 		opts.ctx.stroke(p);
 	}
 
 	var fillColor=opts.colour?opts.colour:getComputedStyle(document.body)["background-strokeColor"]||"black";
 	opts.ctx.fillStyle=fillColor;
 	opts.ctx.fill(p);
-
-
-	
-
 }
 
 //
