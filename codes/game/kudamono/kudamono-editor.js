@@ -690,7 +690,7 @@ FruitLetter=function(fruit){
 
 
 Linearise=function(xy,H){
-	return xy[1]+xy[0]*(H+1);
+	return xy[0]*(H+1)+xy[1];
 }
 
 
@@ -737,7 +737,7 @@ LevelSerial=function(state){
 		xyfruits=xyfruits.filter(fxy=>PointValid(fxy,state));
 
 	var	fruitsxys=xyfruits.map(fxy=>[fxy[2],Linearise(fxy,(state.H))]);
-		fruitsxys=ReverseSorter(Last)(fruitsxys);
+		fruitsxys=Sorter(Last)(fruitsxys);
 		fruitsxys=Join([["",0]],fruitsxys);
 		fruitsxys=Rest(fruitsxys).map((p,i)=>p[0]+(p[1]-fruitsxys[i][1]));
 	
