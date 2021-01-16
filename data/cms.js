@@ -105,18 +105,14 @@ Access=function(page,field){
 CMSOptionsObj=function(){
 	return{
 		Source:CMS,
-		Sorter:PageDateComparer,
+		Orderer:PageElapsedDays,
 		ItemHTML:PageCardHTML
 	};
 }
 
-PageDateComparer=function(pageA,pageB){
-	var pageA={...v,...pageA};
-	var pageB={...v,...pageB};
-	var d=Days(PageDate(pageA),PageDate(pageB));
-	return d
+PageElapsedDays=function(page){
+	return -1*PageDate({DATE:()=>"01/01/0000",...page});
 }
-
 
 PageDate=function(page){
 	if(!page||!page.DATE)
@@ -224,6 +220,7 @@ LatestHTML=function(){
 		ItemHTML:MiniCardHTML,
 		max:12,
 		InnerWrapper:(latest)=>`<div class="latest">${latest}</div>`,
+		footer:`<div class="whiteboard"><div class="text"><p>See all ${AHTML("older posts","tag.html?search=!sitemap+!class")}.</div></div>`,
 	})
 }
 
