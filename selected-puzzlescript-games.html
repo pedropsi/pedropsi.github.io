@@ -142,7 +142,7 @@ SelectedGamesRow=function(name,Opts,year){
 
 	var authorHTML=P(Opts.author);
 
-	var tags=Enumerate(Opts.TAGS.sort());
+	var tags=Enumerate(Sort(Opts.TAGS));
 
 	return [titleHTML,authorHTML,Opts.YEAR,tags];
 },

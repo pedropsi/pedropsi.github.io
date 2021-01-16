@@ -202,7 +202,7 @@ function UnlockedLevels(){
 			lvl++;
 		}
 		//console.log(showlevels);
-		return showlevels.sort(function(a,b){return a>b;});
+		return Sort(showlevels);
 	}
 }
 

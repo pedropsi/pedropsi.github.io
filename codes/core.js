@@ -3177,9 +3177,7 @@ SectionHTML=function(SettingsObj){
 	}
 
 	if(Orderer){
-		console.log(changes);
 		changes=Sorter(Orderer)(changes);
-		console.log("sor",Equal(changes,SortBy(changes,Sorter)))
 	}
 	
 	if(max)
