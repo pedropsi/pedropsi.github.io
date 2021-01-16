@@ -7,11 +7,14 @@
 
 ${LoadSource("codes/game/kudamono/kudamono-editor.js"),""}
 
+
 ${kudamonosData={
 	"39-kudamono.png":{
 		date:"14/01/2021",
 		difficulty:"easy",
-		board:"W=6&H=7&L=q2q2q4q2q1q3q1q1q3q1q2q11q6q4q2q3q3q2&S=1URDRRDRRDDLULLLDLLULDDR15DLLDLDDRURURURUR4DLDLDLDLDLU13RDDLUL12RDLL3DLL"
+		board:"W=6&H=7&L=q2q2q4q2q1q3q1q1q3q1q2q11q6q4q2q3q3q2&S=1URDRRDRRDDLULLLDLLULDDR15DLLDLDDRURURURUR4DLDLDLDLDLU13RDDLUL12RDLL3DLL",
+		etc:"W=8&L=g0d1o1a3q1q1d5q3q1q1d2d1l4q2g1c1o2q4g3c1a1c2g4c3m9p4b1m2p4p2p1g1m1m1b1p2p1&S=0DDDDRDLDDD1DDRR3UR2URDRDLLLDDRRURUDL7DDDL15RD13DLL14URRDLDLU6DR7DR",
+		etc2:"W=35&H=23&L=b37a43b67g1a4c2o3l4p3m3c210a32b25b1g3a5c5q150l21m10o24l1p6m8d2&S=37DDD2DLDRD1DDDRRUUU3RRDDDLL3URRDDD3URDRURDDD4URRDDDLLUU3URDDDRUUU3URRDDDLLUU20RDL3DD3DD7DD161URDDRURURDDLDLLDDLUUUU5URDDDDRRUUUURDDDDDLLLLUUUU5URRRRDDDDDLLLLURUUUL5URRRRDDDDDLULLDLUUUU6URDDDDDDDDDLUUUUUUUU27URDDDLUU4URRDDLLU94URRDLL70URRDRURDDDDDLULULDDLUUUU5URRRRDDDDDLLLLUUUU5URDRDRUURDDDDDLULULDDLUUUU5URRRRDDDDDLLLLUUUU27URRDDDLLUU10URRDDDLLUU113URDL"
 	},
 	"38-kudamono.png":{
 		date:"14/01/2021",
@@ -151,21 +154,32 @@ ${AHTML(LazyImageHTML({src:"kudamono/kudamono-cover.png"}),"images/kudamono/Kuda
 <p>An interactive version of Kudamono (App) may be released in the future.</p>
 
 <h3>Fruit Expansions</h3>
+<h4>Under consideration</h4>
 <ul>
-	<li>banana - bananas connect to a single point (which is not a banana): ${P("draknek","portponky")};</li>
+	<li>blackberries - lines curve always, except at a blackberry, where they go straight: ${P("Mansfield")};</li>
+	<li>banana - bananas connect to a single point (which is a banana): ${P("draknek","portponky")};</li>
+	<li>banana - bananas connect diagonally: ${P("draknek")};</li>
+	<li>star fruit - a show-offy fruit type which must have more line segments dedicated to it than any other fruit type (requires counting):${P("toomblercazz")}</li>
+	<li>pomegranate - pomegranate lines must surround any number of pomegranates without leaving empty space within.</li>
+	<li>pineapple - pineapples connect from the bottom (such a strange fruit): ${P("portponky")}</li>
+	<li>strawberries, blackcurrants and other iconic fruit:${P("portponky")}</li>
+	<li>etc... </li>
+</ul>
+
+<h4>Also under consideration</h4>
+<ul>
 	<li>tomato - each tomato can pretend to be a fruit (of a different type);</li>
 	<li>melon seeds - must be contained inside melon loops: ${P("draknek")};</li>
-	<li>pomegranate - pomegranate lines must surround any number of pomegranates without leaving empty space within.</li>
-	<li>fruits connecting diagonally (45 degrees): ${P("draknek")};</li>
-	<li>pineapple - pineapples connect from the bottom (such a strange fruit): ${P("portponky")}</li>
-	<li>coconut - cocunuts float at sea (must have a waterline below and none above);</li>
 	<li>(apple) tree: if there is a tree in the puzzle, all apples have to be the same shape: ${P("draknek")};</li>
 	<li>fruits inside squares: ${P("draknek")};</li>
 	<li>region division puzzles: ${P("koswara")};</li>
+</ul>
+
+<h4>Resolved</h4>
+<ul>
+	<li>coconut  - cocunuts float at sea (must have a waterline below and none above);</li>
 	<li>dates - there is a ‘branch network’ of straight lines connecting every single date. Every straight line in this branch network has a date at (at least?) one of its endpoints: ${P("escaper")};</li>
-	<li>star fruit - a show-offy fruit type which must have more line segments dedicated to it than any other fruit type (requires counting):${P("toomblercazz")}</li>
 	<li>raisins - connect like grapes, but diagonally (because of all the sunlight): ${P("portponky")};</li>
-	<li>etc... </li>
 </ul>
 
 <h3>Issues</h3>
