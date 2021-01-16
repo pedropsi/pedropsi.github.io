@@ -281,19 +281,20 @@ DrawRectangle=function(opts){
 	DrawShape(opts);
 }
 
-
-
-RescalePath=function(opts){
+RescalePath=function(opts,heighted){
+	var Rescaler=RescaleWidthXYer;
+	if(heighted)
+		Rescaler=RescaleHeightXYer;
 	var opts={square:1,scale:1,...opts};
 	var viewBox=ViewboxCoordinates(opts.viewBox);
-	var Rescale=function(x,y){return RescaleWidthXYer(opts.square*opts.scale)(x,y,viewBox)};
+	var Rescale=function(x,y){return Rescaler(opts.square*opts.scale)(x,y,viewBox)};
 	opts.path=SVGPathDirectTransform(opts.path,Rescale,viewBox);
 	opts.viewBox=ViewboxString(Rescale(viewBox[0],viewBox[1]).concat(Rescale(viewBox[2],viewBox[3])));
 	return opts;
 }
 
 DisplacePath=function(opts){
-	var opts={shiftx:0,shifty:0,...opts};
+	var opts={cols:1,rows:1,x0:0,x1:1,y0:0,y1:1,width:1,height:1,shiftx:0,shifty:0,...opts};
 	var dx=(opts.x0+(opts.x1-opts.x0)*(opts.px-opts.shiftx)/opts.cols)*opts.width;
 	var dy=(opts.y0+(opts.y1-opts.y0)*(opts.py-opts.shifty)/opts.rows)*opts.height;
 	var viewBox=ViewboxCoordinates(opts.viewBox);

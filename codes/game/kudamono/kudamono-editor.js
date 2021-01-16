@@ -1105,8 +1105,13 @@ UpdateCursor=function(name){
 		var opts={};
 		if(In(FruitIcons,name)){
 			cursor=FruitIcons[name];
+			cursor=RescalePath({...cursor,scale:1,square:100},true);
+			cursor=DisplacePath({...cursor,px:10,py:10});
+			cursor=BuildSymbolIcon({...cursor,primitive:"cursor-triangle"});
 			opts.fill=FruitIcons[name].colour;
 		}
+		opts.width=80;
+		opts.height=80;
 		SetCursor(STATE.target,cursor,opts);
 	}
 }
