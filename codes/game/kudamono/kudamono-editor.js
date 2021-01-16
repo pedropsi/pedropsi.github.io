@@ -199,7 +199,7 @@ PathTrack=function(path){
 SortTrack=function(track){
 	function Switcher(segmin,segment){
 		return segmin[0]>segment[0]||(segmin[0]===segment[0]&&segmin[1]>segment[1])}
-	return CycleSort(track.map(segment=>segment.sort()),Switcher)
+	return CycleSort(track.map(t=>Sort(t)),Switcher)
 }
 
 
@@ -242,19 +242,15 @@ DeleteSegmentTrack=function(segment,track){
 
 SegmentContiguousTrackSegments=function(segment,track){
 	var intrack=DeleteSegmentTrack(segment,track);
-	return Join(...SegmentPoints(segment).map(point=>PointContiguousTrackSegments(point,intrack)))
+	return Join(...SegmentPoints(segment).map(point=>PointContainedSegments(point,intrack)))
 }
 
-PointContiguousTrackSegments=function(point,track){
+PointContainedSegments=function(point,track){
 	return track.filter(seg=>In(SegmentPoints(seg),point));
 }
 
 TrackEndsegments=function(track){
-	var endsegments=track.filter(endsegment=>
-		SegmentPoints(endsegment).some(
-			point=>(PointContiguousTrackSegments(point,DeleteSegmentTrack(endsegment,track)).length===0)
-		));
-	return endsegments;
+	return track.filter(segment=>SegmentContiguousTrackSegments(segment,track).length<=1);
 }
 
 TrackEndpoints=function(track){
@@ -266,7 +262,7 @@ TrackEndpoints=function(track){
 }
 
 TrackBranchpoints=function(track){
-	return TrackPoints(track).filter(point=>PointContiguousTrackSegments(point,track).length>=3);
+	return TrackPoints(track).filter(point=>PointContainedSegments(point,track).length>=3);
 }
 
 TrackLooped=function(track){
@@ -318,17 +314,30 @@ SplitContiguousTracks=function(segments){
 	return contiguoustracks.map(CanonicalTrack);
 }
 
-LinearTracks=function(contiguousCanonicalTrack){
-	var segments=Clone(contiguousCanonicalTrack);
-	if(!segments.length)
+EndsegmentsFirst=function(endsegments,segments){
+	if(endsegments.length)
+		return First(endsegments);
+	else
+		return First(segments);
+}
+
+LinearTracks=function(trackset){
+	var lineartrackset=trackset.map(TrackLinearTracks);
+	return Join(...lineartrackset);
+}
+
+TrackLinearTracks=function(contiguousTrack){
+	if(!contiguousTrack.length)
 		return [];
+	var segments=Clone(contiguousTrack);
+	var endsegments=TrackEndsegments(segments);
+	var segment=EndsegmentsFirst(endsegments,segments);
 
 	var track=[];
 	var lineartracks=[];
-	var segment=First(segments);
-	while(segment&&segments.length){
+	
+	while(segments.length){
 		track.push(segment);
-		
 		segments=Remove(segments,segment);
 		if(!segments.length){
 			lineartracks.push(track);
@@ -340,7 +349,8 @@ LinearTracks=function(contiguousCanonicalTrack){
 		if(!next.length){
 			lineartracks.push(track);
 			track=[];
-			segment=First(segments);
+			endsegments=TrackEndsegments(segments);
+			segment=EndsegmentsFirst(endsegments,segments);
 		}
 		else{
 			segment=First(next);
@@ -348,6 +358,22 @@ LinearTracks=function(contiguousCanonicalTrack){
 
 	}
 	return lineartracks;
+}
+
+OrientedTrack=function(lineartrack){
+	var orientedtrack=Clone(lineartrack);
+	if(orientedtrack.length<2)
+	return orientedtrack;
+	var i=0;
+	var l=orientedtrack.length;
+	while(i<l-1){
+		if(PointSegmentContained(First(orientedtrack[i]),orientedtrack[i+1]))
+			orientedtrack[i]=Reverse(orientedtrack[i]);
+		i++
+	}
+	if(PointSegmentContained(Last(orientedtrack[l-1]),orientedtrack[l-2]))
+		orientedtrack[l-1]=Reverse(orientedtrack[l-1]);
+	return orientedtrack;
 }
 
 
@@ -358,7 +384,7 @@ CanonicalContiguousTrack=function(track,Posit){
 	if(!endpoints.length)	//a loop
 		endpoints=track.map(First);
 
-	startpoint=First(Sort(endpoints,Posit));
+	startpoint=First(ReverseSorter(Posit)(endpoints));
 
 	if(endsegments.length<1)
 		endsegments=track;
@@ -645,14 +671,28 @@ Linearise=function(xy,W){
 	return xy[0]+xy[1]*(W+1);
 }
 
+
+LineariseSegment=function(segment,W){
+	return Linearise(First(segment),W);
+}
+
 SegmentLineariser=function(W){
 	return function(segment){
-		return Linearise(First(CanonicalSegment(segment,W)),W);
+		return LineariseSegment(segment,W);
+	}
+}
+
+TrackLineariser=function(W){
+	return function(track){
+		return SegmentLineariser(W)(First(track));
 	}
 }
 
 CanonicalSegment=function(segment){
-	return Sort(segment);
+	if(!In([[0,1],[1,0]],SegmentUnitDirection(segment)))
+		return Reverse(segment);
+	else
+		return segment;
 }
 
 CanonicalTrack=function(track){
@@ -675,7 +715,7 @@ LevelSerial=function(state){
 		xyfruits=xyfruits.filter(fxy=>PointValid(fxy,state));
 
 	var	fruitsxys=xyfruits.map(fxy=>[fxy[2],Linearise(fxy,(state.W))]);
-		fruitsxys=Sort(fruitsxys,Last);
+		fruitsxys=ReverseSorter(Last)(fruitsxys);
 		fruitsxys=Join([["",0]],fruitsxys);
 		fruitsxys=Rest(fruitsxys).map((p,i)=>p[0]+(p[1]-fruitsxys[i][1]));
 	
@@ -798,13 +838,15 @@ SerialSegments=function(serial,state){
 SegmentsSerial=function(state){
 	if(!state.tracks||!state.tracks.length)
 		return "";
-	var lineartracksets=state.tracks.map(LinearTracks);
-	var	lineartracks=Join(...lineartracksets);
+	var	lineartracks=LinearTracks(state.tracks);
+		lineartracks=lineartracks.map(OrientedTrack);
 	var W=state.W;
-	var pointtracks=lineartracks.map(track=>[SegmentLineariser(W)(First(track)),track]);
-		pointtracks=Sort(pointtracks,First);
-	var differences=[0].concat(pointtracks.map(First));
-		pointtracks=pointtracks.map((pt,i)=>[pt[0]-differences[i],pt[1]]);
+		lineartracks=Sorter(TrackLineariser(W))(lineartracks);
+	var overpath=lineartracks.map(TrackLineariser(W));
+	var differences=[0].concat(overpath);
+		differences=Rest(differences).map((d,i)=>d-differences[i]);
+	var pointtracks=lineartracks.map((l,i)=>[differences[i],l]);
+		console.log(pointtracks);
 	var serials=pointtracks.map(PointTrackSerial);
 		return serials.join("");
 }
@@ -1141,7 +1183,7 @@ XYFruitAdd=function(xy){
 		STATE.level[overfruit]=[];
 
 	STATE.level[overfruit].push(xy);
-	STATE.level[overfruit]=STATE.level[overfruit].sort();
+	STATE.level[overfruit]=Sort(STATE.level[overfruit]);
 }
 
 XYMarkAdd=function(xy){
@@ -1156,7 +1198,7 @@ XYMarkAdd=function(xy){
 		STATE.marks[overmark]=[];
 
 	STATE.marks[overmark].push(xy);
-	STATE.marks[overmark]=STATE.marks[overmark].sort();
+	STATE.marks[overmark]=Sort(STATE.marks[overmark]);
 }
 
 XYSegments=function(xy,state){
