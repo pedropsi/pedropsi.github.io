@@ -78,7 +78,7 @@ Apply=function(Function,Array){
 
 //Functional Sorting
 
-SingleSorter=function(F){
+Comparer=function(F){
 	var F=F||Number;
 	return function(a,b){
 		Fa=F(a);
@@ -92,7 +92,26 @@ Sorter=function(...functions){
 		var funs=[...functions];
 		if(!funs.length)
 			funs=[Identity];
-		funs.map(f=>(array=array.sort(SingleSorter(f))));
+		funs.map(f=>(array=Clone(array).sort(Comparer(f))));
+		return array;
+	}
+}
+
+ReverseComparer=function(F){
+	var F=F||Number;
+	return function(a,b){
+		Fa=F(a);
+		Fb=F(b);
+		return Fa<Fb?1:(Equal(Fa,Fb)?0:-1);
+	}
+}
+
+ReverseSorter=function(...functions){
+	return function(array){
+		var funs=[...functions];
+		if(!funs.length)
+			funs=[Identity];
+		funs.map(f=>(array=Clone(array).sort(ReverseComparer(f))));
 		return array;
 	}
 }
@@ -115,12 +134,16 @@ SortArray=function(v,...Sorters){
 	return Sorter(...Sorters)(v);
 }
 
-Sort=function(SAO,...Sorters){
-	if(IsArray(SAO))
-		return SortArray(SAO,...Sorters);
-	if(IsObject(SAO))
-		return SortObjectKeys(SAO,...Sorters);
-	return SAO;
+SortBy=function(AO,...Sorters){
+	if(IsArray(AO))
+		return SortArray(AO,...Sorters);
+	if(IsObject(AO))
+		return SortObjectKeys(AO,...Sorters);
+	return AO;
+}
+
+Sort=function(AO){
+	return SortBy(AO,Comparer(Identity));
 }
 
 MinimalPosition=function(array,Switcher){
@@ -3135,7 +3158,7 @@ SectionHTML=function(SettingsObj){
 	var InnerWrapper=SettingsObj.InnerWrapper||Identity;
 	var OuterWrapper=SettingsObj.OuterWrapper||Identity;
 	
-	var Sorter=SettingsObj.Sorter;
+	var ReverseSorter=SettingsObj.ReverseSorter;
 	var ItemHTML=SettingsObj.ItemHTML;
 	var include=SettingsObj.include||{};
 	var exclude=SettingsObj.exclude||false;
