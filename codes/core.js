@@ -5705,6 +5705,7 @@ var Icons={
 	"edit":{path:"M 326 10 L 85 252 L 151 317 L 392 75 L 327 10 M 339 75 L 151 263 L 139 252 L 327 64 L 339 75 M 81 257 L 21 383 L 145 321 L 81 257"},
 	"pencil":{path:"M 305 373 L 64 131 L 130 66 L 371 308 Z M 318 308 L 130 120 L 118 131 L 306 319 Z M 60 126 L 0 0 L 124 62 Z M 310 379 Q 346 414 381 379 Q 412 348 376 313 Z"},
 	"pencil-erase":{path:"M 91 24 L 332 266 L 266 331 L 25 89 Z M 78 89 L 266 277 L 278 266 L 90 78 Z M 336 271 L 396 397 L 272 335 Z M 86 18 Q 50 -17 15 18 Q -16 49 20 84 Z"},
+	"cursor-triangle":{path:"M 0 0 L 25 0 L 0 25 Z"},
 
 	"sun":{path:"M 14 10 Q 14 6 10 6 Q 6 6 6 10 Q 6 14 10 14 Q 14 14 14 10 Z M 11 0 L 11 4 L 9 4 L 9 0 Z M 11 20 L 11 16 L 9 16 L 9 20 Z M 20 11 L 16 11 L 16 9 L 20 9 Z M 0 11 L 4 11 L 4 9 L 0 9 M 3 2 L 6 5 L 5 6 L 2 3 Z M 20 11 L 16 11 L 16 9 L 20 9 M 17 2 L 14 5 L 15 6 L 18 3 Z M 17 18 L 14 15 L 15 14 L 18 17 Z M 3 18 L 6 15 L 5 14 L 2 17 Z",vbmax:"20 20"},
 	"moon":{path:"M 3 10 Q 3 0 16 0 Q 10 1 8 6 Q 6 10 8 14 Q 10 19 16 20 Q 3 20 3 10",vbmax:"20 20"},
@@ -5759,8 +5760,12 @@ SymbolIcon=function(name){
 	if(symbolObj===name)
 		return name;
 	
-	var primitives=symbolObj.primitive?EnArray(symbolObj.primitive).map(SymbolIcon):[];
+	return SymbolIcon[name]=BuildSymbolIcon(symbolObj);
+}
+
+BuildSymbolIcon=function(symbolObj){
 	var symbolObj=Clone(symbolObj);
+	var primitives=symbolObj.primitive?EnArray(symbolObj.primitive).map(SymbolIcon):[];
 		delete symbolObj["primitive"];
 	
 	symbolObj=ComposeSymbols(symbolObj,primitives);
@@ -5768,9 +5773,8 @@ SymbolIcon=function(name){
 	var viewBox=symbolObj.viewBox||`${symbolObj.vbmin||"0 0"} ${symbolObj.vbmax||"400 400"}`;
 	if(symbolObj.transform) //transform name, that is
 		symbolObj.path=SVGPathTransform(symbolObj.path,symbolObj.transform,viewBox);
-
 	delete symbolObj.transform;
-	return SymbolIcon[name]=symbolObj;
+	return symbolObj;
 }
 
 ComposeSymbols=function(symbolObj,primitives){
