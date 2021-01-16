@@ -960,6 +960,7 @@ ObtainStartingLevelState=function(){
 		target:"kudamono-canvas",
 		visuals:{
 			cursor:"pencil",
+			cursorsize:80,
 			monochrome:false,
 			solid:false,
 			skin:1								//fruit skin thickness
@@ -1099,8 +1100,8 @@ DrawCursor=function(){
 }
 
 UpdateCursor=function(name){
-	if(!STATE.cursor||STATE.cursor!==name){
-		STATE.cursor=name;
+	if(!STATE.visuals.cursor||STATE.visuals.cursor!==name){
+		STATE.visuals.cursor=name;
 		var cursor=name;
 		var opts={};
 		if(In(FruitIcons,name)){
@@ -1110,8 +1111,8 @@ UpdateCursor=function(name){
 			cursor=BuildSymbolIcon({...cursor,primitive:"cursor-triangle"});
 			opts.fill=FruitIcons[name].colour;
 		}
-		opts.width=80;
-		opts.height=80;
+		opts.width=STATE.visuals.cursorsize||80;
+		opts.height=STATE.visuals.cursorsize||80;
 		SetCursor(STATE.target,cursor,opts);
 	}
 }
@@ -1438,26 +1439,30 @@ var DragActions={
 
 CanvasResize=function(){
 	var e=GetElement(STATE.target);
-	e.width=Min(window.innerWidth,e.width||Infinity,e.scrollWidth||Infinity);
-	e.height=Min(window.innerHeight,e.height||Infinity,e.scrollHeight||Infinity);
+	e.width=Max(window.innerWidth,e.width||0,e.scrollWidth||0);
+	e.height=Max(window.innerHeight,e.height||0,e.scrollHeight||0);
 	DrawState(STATE);
 }
 
 
 InitialiseKudamono=function(){
 	PreAddElement(`
+	<div>
 		<canvas 
 			id="${STATE.target}" 
 			oncontextmenu="return false;" 
 			width="${window.innerWidth}" 
-			height="${window.innerHeight}"
-		></div>`,"body");
+			height="${window.innerHeight*0.9}"
+		>
+		<div class="title">Kudamono</div>
+	</div>`,"body");
 	CanvasResize();
 	AttendDrag(DragActions,"canvas");
 	Attend('resize',CanvasResize)
 	Keybind(KeyboardActions,STATE.target);
 	ResumeCapturingKeys(ComboKeyPressHandler);
 	UpdateState();
+	SetCursor(STATE.target,STATE.visuals.cursor);
 	setTimeout(()=>FocusElement(STATE.target),500)
 }
 
