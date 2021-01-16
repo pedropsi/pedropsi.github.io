@@ -488,8 +488,8 @@ PIECE:()=>`
 
 
 
-NewsDateComparer=function(pageA,pageB){
-	return Days(StringDate(pageA.DATE),StringDate(pageB.DATE));
+NewsDays=function(page){
+	return Days(StringDate(page.DATE));
 }
 
 ChangelogEntryHTML=function(change){
@@ -506,7 +506,7 @@ ChangelogHTML=function(){
 		include:{ID:PageIdentifier()},
 		FilterF:NonFutureItem,
 		ItemHTML:ChangelogEntryHTML,
-		Sorter:NewsDateComparer
+		Orderer:NewsDays
 	})
 }
 
@@ -530,7 +530,7 @@ NewsEntryHTML=function(change,Opts){
 
 var NewsOptions={
 	ItemHTML:NewsEntryHTML,
-	Sorter:NewsDateComparer,
+	Orderer:NewsDays,
 	FilterF:NonFutureItem
 }
 
@@ -549,7 +549,7 @@ NewsMonthSectionHTML=function(MonthNews){
 		Source:daysObj,
 		header:`<h2>${month}</h2>`,
 		ItemHTML:days=>NewsDaySectionHTML(days),
-		Sorter:(dayA,dayB)=>NewsDateComparer(First(dayA),First(dayB)),
+		Orderer:day=>NewsDays(First(day)),
 		FilterF:days=>NonFutureItem(First(days))
 	})
 }
@@ -655,7 +655,7 @@ SitemapXML=function(){
 	return SectionHTML({
 		Source:CMS,
 		ItemHTML:SitemapItemXML,
-		Sorter:PageDateComparer,
+		Orderer:PageElapsedDays,
 		FilterF:NonFutureItem,
 		OuterWrapper:function(body){return`${XML}<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${body}</urlset>`;}
 	});
@@ -679,7 +679,7 @@ SitemapItemXML=function(PageObj){
 	var lastdate=PageObj.DATE||"2017-01-01";
 	
 	var id=PageObj.LINK();
-	var changes=BaseFilter(News,{ID:id}).sort(NewsDateComparer).map(ch=>ch.DATE);
+	var changes=Sorter(NewsDays)(BaseFilter(News,{ID:id})).map(ch=>ch.DATE);
 		lastdate=changes[0]||lastdate;
 	var freq=FrequencyName(Days(new Date(lastdate)));//Days since last modification
 	
