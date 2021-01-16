@@ -143,7 +143,7 @@ SortBy=function(AO,...Sorters){
 }
 
 Sort=function(AO){
-	return SortBy(AO,Comparer(Identity));
+	return SortBy(AO,Identity);
 }
 
 MinimalPosition=function(array,Switcher){
@@ -3158,7 +3158,7 @@ SectionHTML=function(SettingsObj){
 	var InnerWrapper=SettingsObj.InnerWrapper||Identity;
 	var OuterWrapper=SettingsObj.OuterWrapper||Identity;
 	
-	var ReverseSorter=SettingsObj.ReverseSorter;
+	var Orderer=SettingsObj.Orderer;
 	var ItemHTML=SettingsObj.ItemHTML;
 	var include=SettingsObj.include||{};
 	var exclude=SettingsObj.exclude||false;
@@ -3176,8 +3176,12 @@ SectionHTML=function(SettingsObj){
 		changes=Complement(changes,unchanges);
 	}
 
-	if(Sorter)
-		changes=changes.sort(Sorter);
+	if(Orderer){
+		console.log(changes);
+		changes=Sorter(Orderer)(changes);
+		console.log("sor",Equal(changes,SortBy(changes,Sorter)))
+	}
+	
 	if(max)
 		changes=changes.slice(0,max);
 	changes=changes.map(ItemHTML).join("\n")
