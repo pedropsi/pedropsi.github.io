@@ -153,7 +153,7 @@ SelectedGamesHTML=function(){
 		var games=SelectedGames[year];
 		return Keys(games).map(k=>SelectedGamesRow(k,Join(games[k],{YEAR:year})))
 	});
-		rows=Join(...rows).sort(SingleSorter(x=>-x[2]));
+		rows=SortBy(Join(...rows),x=>-x[2]);
 	return TableHTML({
 		caption:`${v.NAME()}'s selected puzzlescript games`,
 		headers:["Title","Author","Year","Tags"],
