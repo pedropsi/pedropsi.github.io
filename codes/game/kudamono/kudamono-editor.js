@@ -362,8 +362,11 @@ TrackLinearTracks=function(contiguousTrack){
 
 OrientedTrack=function(lineartrack){
 	var orientedtrack=Clone(lineartrack);
-	if(orientedtrack.length<2)
-	return orientedtrack;
+	if(!orientedtrack.length)
+		return orientedtrack;
+	if(orientedtrack.length<2){
+		return OrderedTrack(orientedtrack);
+	}
 	var i=0;
 	var l=orientedtrack.length;
 	while(i<l-1){
@@ -371,11 +374,30 @@ OrientedTrack=function(lineartrack){
 			orientedtrack[i]=Reverse(orientedtrack[i]);
 		i++
 	}
+		
 	if(PointSegmentContained(Last(orientedtrack[l-1]),orientedtrack[l-2]))
 		orientedtrack[l-1]=Reverse(orientedtrack[l-1]);
-	return orientedtrack;
+	
+	// if(TrackLooped(orientedtrack))
+	// 	orientedtrack=OrientedLoopTrack(orientedtrack);
+
+	return OrderedTrack(orientedtrack);
 }
 
+ReverseTrack=function(track){
+	return Reverse(track.map(Reverse))
+}
+
+PointsOrdered=function(points1,points2){
+	return Equal([points1,points2],Sort([points1,points2]))
+}
+
+OrderedTrack=function(orientedtrack){
+	if(!PointsOrdered(First(First(orientedtrack)),Last(Last(orientedtrack)))){
+		return ReverseTrack(orientedtrack);
+	}
+	else return orientedtrack;
+}
 
 CanonicalContiguousTrack=function(track,Posit){
 	var endsegments=TrackEndsegments(track);
@@ -667,24 +689,24 @@ FruitLetter=function(fruit){
 }
 
 
-Linearise=function(xy,W){
-	return xy[0]+xy[1]*(W+1);
+Linearise=function(xy,H){
+	return xy[1]+xy[0]*(H+1);
 }
 
 
-LineariseSegment=function(segment,W){
-	return Linearise(First(segment),W);
+LineariseSegment=function(segment,H){
+	return Linearise(First(segment),H);
 }
 
-SegmentLineariser=function(W){
+SegmentLineariser=function(H){
 	return function(segment){
-		return LineariseSegment(segment,W);
+		return LineariseSegment(segment,H);
 	}
 }
 
-TrackLineariser=function(W){
+TrackLineariser=function(H){
 	return function(track){
-		return SegmentLineariser(W)(First(track));
+		return SegmentLineariser(H)(First(track));
 	}
 }
 
@@ -703,8 +725,8 @@ CanonicalTrack=function(track){
 }
 
 
-UnLinearise=function(n,W){
-	return [n%W,Floor(n/W)]
+UnLinearise=function(n,H){
+	return [Floor(n/H),n%H]
 }
 
 LevelSerial=function(state){
@@ -714,7 +736,7 @@ LevelSerial=function(state){
 		xyfruits=Join(...xyfruits);
 		xyfruits=xyfruits.filter(fxy=>PointValid(fxy,state));
 
-	var	fruitsxys=xyfruits.map(fxy=>[fxy[2],Linearise(fxy,(state.W))]);
+	var	fruitsxys=xyfruits.map(fxy=>[fxy[2],Linearise(fxy,(state.H))]);
 		fruitsxys=ReverseSorter(Last)(fruitsxys);
 		fruitsxys=Join([["",0]],fruitsxys);
 		fruitsxys=Rest(fruitsxys).map((p,i)=>p[0]+(p[1]-fruitsxys[i][1]));
@@ -730,10 +752,10 @@ LetterFruit=function(l){
 		return First(fruits);
 }
 
-AccumulateTokenCoords=function(tokendiffs,W){
+AccumulateTokenCoords=function(tokendiffs,H){
 	var differences=tokendiffs.map(Last);
 	var accumulated=tokendiffs.map((td,i)=>[td[0],Apply(Plus,Take(differences,i+1))]);
-	return accumulated.map(td=>[td[0],UnLinearise(td[1],W)]);
+	return accumulated.map(td=>[td[0],UnLinearise(td[1],H)]);
 }
 
 
@@ -741,7 +763,7 @@ AccumulateTokenCoords=function(tokendiffs,W){
 SerialLevel=function(serial,state){
 	var fruitserials=serial.match(FruitSerialPattern);
 	var fruitdiffs=fruitserials.map(s=>[s[0],Number(Rest(s))]);
-	var accumulated=AccumulateTokenCoords(fruitdiffs,state.W+1);
+	var accumulated=AccumulateTokenCoords(fruitdiffs,state.H+1);
 	var level={};
 	Keys(FruitIcons).map(fruit=>(level[fruit]=accumulated.filter(a=>a[0]===FruitLetter(fruit)).map(Last)));
 	return level;
@@ -829,7 +851,7 @@ LetterContiguousPath=function(letters,startxy){
 SerialSegments=function(serial,state){
 	var pathserials=serial.match(PathSerialPattern);
 	var pathdiffs=pathserials.map(s=>[First(s.match(/\D+/ig)),Number(First(s.match(/\d+/ig)))]);
-	var accumulated=AccumulateTokenCoords(pathdiffs,state.W+1);
+	var accumulated=AccumulateTokenCoords(pathdiffs,state.H+1);
 	var tracks=accumulated.map(lp=>LetterContiguousPath(lp[0],lp[1]));
 	return Join(...tracks);
 }
@@ -840,13 +862,12 @@ SegmentsSerial=function(state){
 		return "";
 	var	lineartracks=LinearTracks(state.tracks);
 		lineartracks=lineartracks.map(OrientedTrack);
-	var W=state.W;
-		lineartracks=Sorter(TrackLineariser(W))(lineartracks);
-	var overpath=lineartracks.map(TrackLineariser(W));
+	var H=state.H;
+		lineartracks=Sorter(TrackLineariser(H))(lineartracks);
+	var overpath=lineartracks.map(TrackLineariser(H));
 	var differences=[0].concat(overpath);
 		differences=Rest(differences).map((d,i)=>d-differences[i]);
 	var pointtracks=lineartracks.map((l,i)=>[differences[i],l]);
-		console.log(pointtracks);
 	var serials=pointtracks.map(PointTrackSerial);
 		return serials.join("");
 }
@@ -938,6 +959,7 @@ ObtainStartingLevelState=function(){
 		//visuals
 		target:"kudamono-canvas",
 		visuals:{
+			cursor:"pencil",
 			monochrome:false,
 			solid:false,
 			skin:1								//fruit skin thickness
@@ -1063,9 +1085,30 @@ UpdateState=function(opts){
 	if(opts)
 		Keys(opts).map(k=>STATE[k]=opts[k](STATE[k]));
 	STATE.tracks=SplitContiguousTracks(STATE.segments);
+	DrawCursor();
 	DrawState(STATE);
 	AddUndo(STATE);
 	NavigateSerial(StateSerial(STATE));
+}
+
+DrawCursor=function(){
+	if(!STATE.mode.edit)
+		UpdateCursor("pencil")
+	else
+		UpdateCursor(STATE.mode.symbol)
+}
+
+UpdateCursor=function(name){
+	if(!STATE.cursor||STATE.cursor!==name){
+		STATE.cursor=name;
+		var cursor=name;
+		var opts={};
+		if(In(FruitIcons,name)){
+			cursor=FruitIcons[name];
+			opts.fill=FruitIcons[name].colour;
+		}
+		SetCursor(STATE.target,cursor,opts);
+	}
 }
 
 //Undo
@@ -1252,6 +1295,10 @@ function DragActionContinuer(x,y){
 	if(!STATE.mode.edit){
 		var selected=STATE.mode.selection;
 		STATE.mode.clearing=Intersection(XYSegments(selected[0],STATE),XYSegments(selected[1],STATE)).length>=1;
+		if(STATE.mode.clearing)
+			UpdateCursor("pencil-erase")
+		else
+			UpdateCursor("pencil")
 	}
 
 }
@@ -1369,7 +1416,8 @@ var ClearFruit=StateUpdater({level:level=>{}});
 FruitSetter=function(fruit){
 	KeyboardActions[FruitIcons[fruit].letter]=function(){
 		STATE.mode.edit=true;
-		STATE.mode.symbol=fruit
+		STATE.mode.symbol=fruit;
+		DrawCursor();
 	}
 }
 
