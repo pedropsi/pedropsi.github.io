@@ -156,27 +156,6 @@ MarkIcons={
 //Path segments
 //A track is a set of segments. A segment is a pair of points (x,y).
 
-OrthoXY=function(xy){
-	var dir=xy;
-	if(Abs(dir[0])>=Abs(dir[1])){
-		dir[0]=Sign(dir[0])
-		dir[1]=0;
-	}else{
-		dir[1]=Sign(dir[1])
-		dir[0]=0;
-	}
-	return dir;
-}
-
-OrthonormalXYDir=function(xyza){
-	var xy=Round(xyza[0],0);
-	var dir=VectorMinus(xy,Round(xyza[1],0));
-		dir=OrthoXY(dir);
-	if(dir[0]<0||dir[0]===0&&dir[1]<0)
-		return [za,VectorMinus(za,dir)]
-	else
-		return [xy,VectorPlus(xy,dir)];
-}
 
 PathTrack=function(path){
 	var path=Clone(path);
@@ -406,7 +385,7 @@ CanonicalContiguousTrack=function(track,Posit){
 	if(!endpoints.length)	//a loop
 		endpoints=track.map(First);
 
-	startpoint=First(ReverseSorter(Posit)(endpoints));
+	startpoint=First(Sorter(Posit)(endpoints));
 
 	if(endsegments.length<1)
 		endsegments=track;
@@ -706,7 +685,7 @@ SegmentLineariser=function(H){
 
 TrackLineariser=function(H){
 	return function(track){
-		return SegmentLineariser(H)(First(track));
+		return LineariseSegment(First(track),H);
 	}
 }
 
@@ -861,13 +840,13 @@ SegmentsSerial=function(state){
 	if(!state.tracks||!state.tracks.length)
 		return "";
 	var	lineartracks=LinearTracks(state.tracks);
-		lineartracks=lineartracks.map(OrientedTrack);
+	var	orientedlineartracks=lineartracks.map(OrientedTrack);
 	var H=state.H;
-		lineartracks=Sorter(TrackLineariser(H))(lineartracks);
-	var overpath=lineartracks.map(TrackLineariser(H));
+	var	orientedtracks=Sorter(TrackLineariser(H))(orientedlineartracks);
+	var overpath=orientedtracks.map(TrackLineariser(H));
 	var differences=[0].concat(overpath);
 		differences=Rest(differences).map((d,i)=>d-differences[i]);
-	var pointtracks=lineartracks.map((l,i)=>[differences[i],l]);
+	var pointtracks=orientedtracks.map((l,i)=>[differences[i],l]);
 	var serials=pointtracks.map(PointTrackSerial);
 		return serials.join("");
 }
@@ -879,10 +858,10 @@ PointTrackSerial=function(pointtrack){
 TrackDirectionSerial=function(track){
 	if(!track.length)
 		return "";
-
+	var track=Clone(track);
 	var directions;
 	if(track.length<2){
-		directions=[SegmentSingleDirection(First(track))]
+		directions=[SegmentUnitDirection(First(track))]
 	}else{
 		directions=Rest(track).map(function(segment,i){
 			var dir=SegmentPairNextDirection(track[i],segment);
@@ -912,10 +891,7 @@ SegmentPairSelfNextDirection=function(segment1,segment2){
 	return VectorTimes([-1,-1],SegmentPairNextDirection(segment2,segment1));
 }
 
-SegmentSingleDirection=function(segment){
-	var diff=VectorMinus(segment[1],segment[2])
-	return OrthoXY(diff);
-}
+
 
 DirectionCode=function(direction){
 	return Accesser(CoordinatesDirections)(String(direction));
