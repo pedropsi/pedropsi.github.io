@@ -2020,8 +2020,14 @@ TitlesIndex=function(){
 }
 
 PageIndexHTML=function(indexArray){
-	return "<div class='index'><a class='index-link h1' id='Table-of-Contents' href='#Table-of-Contents' onclick='ShowHideIndex()'>Table of contents</a>"+indexArray.map(IndexItemHTML).join("\
-	")+"</div>";
+	return `
+		<div class='index'>
+			<a class='index-link h1' id='Table-of-Contents' href='#Table-of-Contents' onclick='ShowHideIndex()'>
+				Table of contents
+			</a>
+			${indexArray.map(IndexItemHTML).join(`
+			`)}
+		</div>`;
 }
 
 IndexItemHTML=function(e){
@@ -2029,7 +2035,7 @@ IndexItemHTML=function(e){
 		return "";
 	else{
 		var depth=e.getAttribute("data-index-depth")||"";
-		return "<a class='index-link "+depth+"' href='#"+e.id+"'>"+e.textContent+"</a>";
+		return HeaderAHTML(e.textContent,Prefix(e.id,"#"),{class:"index-link "+depth});
 	}
 }
 
@@ -2064,8 +2070,11 @@ HeaderAHTML=function(title,page,opts){
 	var page=PageUnFragment(page);
 	var fragment=IndexFragment(title);
 	var opts=opts||{};
-	opts.onclick=`ScrollInto("#${fragment}")`
-	return AHTML(title,page+"#"+fragment,opts);
+	if(fragment){
+		fragment=Prefix(fragment,"#");
+		opts.onclick=`ScrollInto("${fragment}")`
+	}
+	return AHTML(title,page+fragment,opts);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
