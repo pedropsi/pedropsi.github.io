@@ -72,7 +72,8 @@ var Contributors={//People
 	"toomblercazz":{alias:"Toombler",ITCH:"toombler"},
 	"zach":{name:"Zach"},
 	"norgg":{alias:"Norgg",TWITTER:"Norgg"},
-	"ihnn":{alias:"IHNN",TWITCH:"ihavenonamesda"}
+	"ihnn":{name:"Jeffrey",alias:"IHNN",PERSONAL_PAGE:"https://ihnnpuzzles.blogspot.com",TWITCH:"ihavenonamesda"},
+	"omnipresentoffee":{alias:"OmnipresentCoffee"}
 }
 
 var Musicians={

@@ -1,4 +1,12 @@
 News={
+	N_634:{
+		DATE:"2021-01-17",
+		HEADER:()=>"Kudamono set 3 and editor",
+		PIECE:()=>`
+		<p>Dates and Coconuts were the two new fruits  added to the ${A("kudamono#Kudamono paper puzzle collection")} this week.</p>
+		<p>The ${A("kudamono#Roadmap")} for Kudamono as well as the ${A("kudamono#Design Goals")} were clarified.</p>
+		<p>The ${A("kudamono#Editor")} is gainign shape.</p>
+	`,ID:"kudamono"},
 	N_63:{
 		DATE:"2020-12-30",
 		HEADER:()=>"Kudamono Puzzle updates",

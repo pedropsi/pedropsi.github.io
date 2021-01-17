@@ -133,32 +133,50 @@ ${LazyImageHTML({src:"kudamono/kudamono-issues.png"})}
 <p>The issues sheet below is currently outdated, as the pear rule has changed. It may however be reinstated in the future.</p>
 ${LazyImageHTML({src:"kudamono/kudamono-issues-2.png"})}
 
-<h2>Kudamono Paper Puzzles</h2>
+<h2>Kudamono Paper Puzzle Collection</h2>
 ${FolderGalleryHTML("kudamono",Keys(kudamonos))}
 
-<h2>Make a Kudamono Puzzle</h2>
+<h2>Make your own Kudamono</h2>
 <p>Simply download the ${AHTML("Kudamono template.pptx","images/kudamono/Kudamono-template.pptx")}!</p>
 
 ${AHTML(LazyImageHTML({src:"kudamono/kudamono-cover.png"}),"images/kudamono/Kudamono-template.pptx")}
 
 <h2>Credits</h2>
-<p>Special thanks to ${P("Dohz")} for trying all the puzzles, resulting in substantial improvements!</p>
-<p>Thanks for help clarifying the rules (specially of melons and pears), testing the puzzles, for interesting discussions about uniqueness, and for new ideas: ${P("Dohz","toomblercazz","portponky","deusovi","knexator","mansfield","draknek","norgg","hempuli","zach","skymoo","escaper","koswara","ihnn")}.</p>
+<p>Special thanks to ${P("Dohz")} for trying (almost) all the puzzles, resulting in substantial improvements!</p>
+<p>Thanks to the ${P("thinky")} for feedback, new ideas, rule clarification, playtesting, interesting discussions about uniqueness, and for new ideas. In no particular order: ${P("Dohz","toomblercazz","portponky","deusovi","knexator","mansfield","draknek","norgg","hempuli","zach","skymoo","escaper","koswara","ihnn","omnipresentcoffee","le slo","kutilek")}.</p>
 
 
 <h2>Roadmap</h2>
-<p>Listed for self-reference and to facilitate contributions.</p>
+<p>Aspirational, listed for self-reference and feedback.</p>
 
-<h3>Long term possibilities</h3>
-<p>Some Kudamono puzzles could possibly be published in a newspapers or magazines, or form a printable booklet.</p>
-<p>An interactive version of Kudamono (App) may be released in the future.</p>
+<h3>Publishing</h3>
+<p>Some Kudamono puzzles could be published in a newspapers or magazines. If interested, please ${v.A_CONTACT_ME()}.</p>
+<p>A printable booklet could also be made.</p>
+
+<h3>Kudamono App</h3>
+<p>An interactive version of Kudamono (App) may be released in the future specifically for mobile devices.</p>
+
+<h3>Kudamono web editor</h3>
+<h4>Phase 0 - faster drawing / prototyping </h4>
+<p>A functional editor allows for faster placement of fruit and drawing lines drawing ${LabelHTML("Done")}.</p>
+<h4>Phase 1 - playable </h4>
+<p>Can be used to play Kudamono.</p>
+<p>Gives visual feedback on errors, checks correct solutions ${LabelHTML("Ongoing")}. This ups prototyping speed too.</p>
+<h4>Phase 2 - shareable editor</h4>
+<p>Anyone can make and share their own levels, with existing fruits.</p>
+<p>A nice editing interface, plus comprehensive documentation, makes the process easy.</p>
+<h4>Phase 3 - expansions on request</h4>
+<p>Other fruits and other puzzle types can be added on request.</p>
+<h4>Phase 4 - general puzzle editor</h4>
+<p>A modular system represents a wide range of rules common to multiple puzzle types, allowing for error checking.</p>
+<p>Anyone can make their own rules and symbols, and share their new playable genres.</p>
 
 <h3>Fruit Expansions</h3>
 <h4>Under consideration</h4>
 <ul>
-	<li>blackberries - lines curve always, except at a blackberry, where they go straight: ${P("Mansfield")};</li>
+	<li>blackberries ${LabelHTML("Ongoing")} - lines curve always, except at a blackberry, where they go straight: ${P("Mansfield")};</li>
 	<li>banana - bananas connect to a single point (which is a banana): ${P("draknek","portponky")};</li>
-	<li>banana - bananas connect diagonally: ${P("draknek")};</li>
+	<li>banana ${LabelHTML("Ongoing")} - bananas connect diagonally: ${P("draknek")};</li>
 	<li>star fruit - a show-offy fruit type which must have more line segments dedicated to it than any other fruit type (requires counting):${P("toomblercazz")}</li>
 	<li>pomegranate - pomegranate lines must surround any number of pomegranates without leaving empty space within.</li>
 	<li>pineapple - pineapples connect from the bottom (such a strange fruit): ${P("portponky")}</li>
@@ -175,60 +193,97 @@ ${AHTML(LazyImageHTML({src:"kudamono/kudamono-cover.png"}),"images/kudamono/Kuda
 	<li>region division puzzles: ${P("koswara")};</li>
 </ul>
 
-<h4>Resolved</h4>
+<h4>Resolved </h4>
 <ul>
-	<li>coconut  - cocunuts float at sea (must have a waterline below and none above);</li>
-	<li>dates - there is a ‘branch network’ of straight lines connecting every single date. Every straight line in this branch network has a date at (at least?) one of its endpoints: ${P("escaper")};</li>
+	<li>coconut ${LabelHTML("Done")};</li>
+	<li>dates ${LabelHTML("Done")} - a ‘branch network’ of straight lines connecting every single date. Every straight line in this branch network has a date at (at least?) one of its endpoints: ${P("escaper")};</li>
 	<li>raisins - connect like grapes, but diagonally (because of all the sunlight): ${P("portponky")};</li>
 </ul>
 
-<h3>Issues</h3>
-<h4>Memorability</h4>
-<p>As more fruits are added, it can be difficult remember the rules.</p>
-<h5>Approach so far (with room for improvement):</h5>
+<h2>Design goals in Kudamono</h2>
+<h3>Memorability</h3>
+<p>The rules in kudamono, as well as the assigned fruit, should be easy to remember, even if dozens of fruits are added.</p>
+<h4>Approach</h4>
 <ul>
-	<li> relating each rule to a certain property of the fruit (e.g. cherry - pairing);</li>
-	<li> keeping each fruit rule as concise as possible;</li>
-	<li> adding a small rhyme;</li>
-	<li> having a separate <em>issues examples</em> sheet;</li>
+	<li> Related - rules or path shapes should be related to a certain property of the fruit. Cherry - pairs, Grape - bunch (all together), Blackberry - path resembles brambles, Date - path resembles a branch of dates;</li>
+	<li> Concise - each rule is described with few words and the example path fits a small 2x2 square;</li>
+	<li> Available - each puzzle contains the subset of applicable rules;</li>
+	<li> Paired - many rules are paired (e.g grapes and cherries, apples and pears);</li>
 </ul>
-<h5>Suggestions:</h5>
+<p>Early puzzles contained a small rhyme. This was fun but didn't work that well. Other suggestions include adding mnemonics: ${P("escaper")}, changing the symbols to reflect the rules more accurately: ${P("koswara")};</li>
+
+<h3>Learnability</h3>
+<p>Kudamono should be easy to learn, even if the puzzles are challenging.</p>
+<h4>Approach</h4>
 <ul>
-	<li> adding mnemonics: ${P("escaper")};</li>
-	<li> changing the symbols to reflect the rules more accurately: ${P("koswara")};</li>
-	<li> adding visual representations of the rules to each puzzle (instead of standalone) - a la Geisterbahn: ${P("koswara")};</li>
-	<li> adding feedback/interaction: ${P("deusovi")};</li>
+	<li> Concise (see above);</li>
+	<li> Available (see above);</li>
+	<li> Example - some issue sheets are presented, displaying the different types of errors, on the path to a compelte puzzle;</li>
+	<li> Feedback - the interactive version of Kudamono highlights errors, alerts on completion, and by way of input excludes some possibilities;</li>
+</ul>
+<p>Some fruit rules only make complete sense in combination with other fruits, and this steepens the learning curve.</p>
+
+<h3>System</h3>
+<p>Kudamono should be a well-thought system, from the point of view of:</p>
+<ul>
+	<li>Line Hue - lines start gray and acquire the colour of the fruit they touch. Touching too many fruits, they become black.</li>
+	<li>Line Thickness - lines are thin when planned, and thick when set.</li>
+	<li>Line Dashes - a dashed line is either wrong or ready to be erased.</li>
+<ul>
+
+<h3>Agreableness</h3>
+<p>Kudamono should evoke feelings of happiness, cuteness.</p>
+<h4>Approach:</h4>
+<ul>
+	<li>Fruity- everybody likes some fruit.</li>
+	<li>Colourful - graphics use a single colour per fruit.</li>
+	<li>Gradual - the more close to completion a level is, the greater the amount of colours on screen/paper.</li>
+	<li>Details - some details, like the fruity cursor, are cute.</li>
 </ul>
 
-<h4>Learnability</h4>
-<p>Rules do not work standalone, only in combination (this is by design). As a consequence, to learn a rule, one may need to consider it in combination with other rules, steepening the learning curve.</p>
-<h5>Approach so far (with room for improvement):</h5>
+<h3>Multimedia</h3>
+<p>Kudamono should be playable on different media. Print a Kudamono and play it with crayons, or load Kudamono on a touchscreen and play with your fingers. Play only with a mouse, or only with a keyboard.</p>
+<h4>Approach:</h4>
 <ul>
-	<li> keeping each fruit rule as simple & clean as possible;</li>
+	<li>Silhouettes - each fruit has a distinct silhouette, so it is distinguished even in black anfd white, for printing.</li>
+	<li>Multiple controls</li>
 </ul>
+
+
+<h3>Issues</h3>
 
 <h4>Consistency</h4>
 <p>The rules may feel inconsistent or lacking of a "main thing" (apart from the fruits).</p>
 
+<h4>Standalonability</h4>
+<p>Some rules do not work standalone, only in combination with other fruits. Newly added fruits will be playable both standalone and in combination.</p>
+
+
 <h2>FAQ</h2>
 <h3>Why is the puzzle named Kudamono?</h3>
-<p>Kudamono is a japanese word for fruit. It's common for paper puzzles to have names in japanese (e.g Sudoku, Kakuro, etc...) because many were invented in Japan.</p>
+<p>Kudamono is a japanese word for fruit. It's common for paper puzzles to have names in japanese (e.g Sudoku, Kakuro, Masyu, etc...) because many were invented in Japan.</p>
 
-<h3>How do the Kudamono rules relate to other puzzles'?</h3>
-<p>Thanks to ${P("deusovi","koswara","hempuli","ihnn","dohz")} for initiating this discussion.</p>
-
-<h4>The Witness</h4>
-<p>Two conceptual similarities: the puzzles focus on drawing lines and there is a set of symbols, each with its own rule. Two core differences: Kudamono requires no specific start or endpoints (plus, multiple paths and loops can be drawn); fruit rules only work in combination (there are no single-fruit puzzles).</p>
-
-<h4>The Witless</h4>
-<p>Again, both puzzles focus on drawing lines and there is a set of symbols, each with its own rule. In the Witless, the focus is <em>discovering the rules</em> and lines go <em>around</em> the symbols, while in Kudamono, the rules are open and lines go <em>through</em> the fruits.</p>
+<h3>How do the Kudamono rules relate to those in other puzzles?</h3>
 
 <h4>Geisterbahn</h4>
-<p>The puzzles are similar in that there is a set of rules, a subset of which apply to each puzzle. Geisterbahn focus on placing numbers, while Kudamono on drawing lines.</p>
-<p>In Geisterbahn, the regions are defined from the start (in every cell it is clear which rules apply) while in Kudamono the regions are variable (because a line may come from different fruits, hence subject to different rules).</p>
-<p>Clue presentation in Geisterbahn is more intuitive, in that a concise symbol captures each rule (after undestanding the rule, the symbol becomes self-descriptive).</p>
+<h5>Similarities</h5>
+<p>Both puzzles contain a rich set of rules, a subset of which apply to each puzzle Both puzzles present the rules visually, at the start of each puzzle, via a concise, self-descriptive depiction.</p> 
+<h5>Differences</h5>
+<p>While Geisterbahn is about placing numbers, Kudamono is about drawing lines.</p>
+<p>In Geisterbahn, it is clear form the start which rules apply to which cells, while in Kudamono, it is important to deduce which cells belong to which line (subject to different rules, when containing different fruits).</p>
 
-<h2>Kudamono editor (coming soon)</h2>
+<h4>Masyu, Hiking track, and other paper puzzles</h4>
+<p>Some of the rules in Kudamono may be similar, either by accident or inspiration, to those in other paper puzzles. As long as the rules are perceived as sufficiently distinct and integrate pleasantly in combination, all is well.</p>
+<p>For instance, the <em>Coconut</em> rule may be seen as a simplified form of that of Hiking Track (by Hempuli). The <em>Blackberry</em> rule was directly inspired by Masyu.</p>
+
+<h4>The Witness / the Witless</h4>
+<h5>Similarities</h5>
+<p>Both puzzles focus on drawing lines and contain a rich set of rules assigned to different symbols, to be used alone or combined in a single puzzle.</p>
+<h5>Differences</h5>
+<p>Kudamono rules are explained (no need to infer them). There are generally many interacting paths in a Kudamono puzzle, and no starting circles nor endpoints are explicitly marked. Loops appear prominently in Kudamono. Also, lines go through symbols, rather than around them. Finally, Kudamono is normally restricted to an euclidean grid.</p>
+
+
+<h2>Editor (coming soon)</h2>
 
 <p>Try the ${AHTML("alpha version","?W=7&L=a0a1a1c5a1c6c1a1b2c5p4l2p1m2m1l4m3m1g4g2p4p3g1o1b2g3g1g1")}.</p>
 
