@@ -1455,6 +1455,14 @@ InitialiseKudamono=function(){
 	setTimeout(()=>FocusElement(STATE.target),500)
 }
 
+//Auto instructions
+
+HyperText("Kudamono/FruitShortcuts",()=>TableHTML({
+		headers:["Shortcut","Fruit"],
+		caption:"Choose a fruit by pressing:",
+		rows:Sort(Keys(FruitIcons)).map(fruit=>[KB("ctrl "+FruitIcons[fruit].letter),fruit])
+	}))
+
 
 if(PageSearch("W")||PageSearch("H"))
 	setTimeout(InitialiseKudamono,500)

@@ -210,7 +210,7 @@ ${AHTML(LazyImageHTML({src:"kudamono/kudamono-cover.png"}),"images/kudamono/Kuda
 <p>The rules in kudamono, as well as the assigned fruit, should be easy to remember, even if dozens of fruits are added.</p>
 <h4>Approach</h4>
 <ul>
-	<li> Related - rules or path shapes should be related to a certain property of the fruit. Cherry - pairs, Grape - bunch (all together), Blackberry - path resembles brambles, Date - path resembles a branch of dates;</li>
+	<li> Related - rules or path shapes should be related to a certain property of the fruit (e.g. cherry: pairs, grape: bunch (all together), blackberry: path resembles brambles, date: path resembles a branch of dates);</li>
 	<li> Concise - each rule is described with few words and the example path fits a small 2x2 square;</li>
 	<li> Available - each puzzle contains the subset of applicable rules;</li>
 	<li> Paired - many rules are paired (e.g grapes and cherries, apples and pears);</li>
@@ -223,18 +223,20 @@ ${AHTML(LazyImageHTML({src:"kudamono/kudamono-cover.png"}),"images/kudamono/Kuda
 <ul>
 	<li> Concise (see above);</li>
 	<li> Available (see above);</li>
-	<li> Example - some issue sheets are presented, displaying the different types of errors, on the path to a compelte puzzle;</li>
+	<li> Standalone - wherever possible, standalone puzzles cointaining a single fruit type are produced as tutorials;</li>
+	<li> Example - some issue sheets are presented, displaying the different types of errors, on the path to a solved puzzle;</li>
 	<li> Feedback - the interactive version of Kudamono highlights errors, alerts on completion, and by way of input excludes some possibilities;</li>
 </ul>
 <p>Some fruit rules only make complete sense in combination with other fruits, and this steepens the learning curve.</p>
 
 <h3>System</h3>
-<p>Kudamono should be a well-thought system, from the point of view of:</p>
+<p>Kudamono should be a well-thought system. Graphic properties should have consistent meaning:</p>
 <ul>
 	<li>Line Hue - lines start gray and acquire the colour of the fruit they touch. Touching too many fruits, they become black.</li>
 	<li>Line Thickness - lines are thin when planned, and thick when set.</li>
 	<li>Line Dashes - a dashed line is either wrong or ready to be erased.</li>
-<ul>
+</ul>
+
 
 <h3>Agreableness</h3>
 <p>Kudamono should evoke feelings of happiness, cuteness.</p>
@@ -296,7 +298,8 @@ ${AHTML(LazyImageHTML({src:"kudamono/kudamono-cover.png"}),"images/kudamono/Kuda
 <p>You can...</p>
 
 <h4>Add fruit</h4>
-<p> Choose a fruit by pressing: ${KB("a")} apple, ${KB("b")} blueberry, ${KB("c")} cherry,  ${KB("g")} grape, ${KB("l")} lemon, ${KB("m")} melon,  ${KB("o")} orange, ${KB("p")} pear. </p>
+${HyperText("Kudamono/FruitShortcuts")}
+
 <p> Then ${KB("click")} on an empty cell to add the chosen fruit there. </p>
 <p> Starting from an empty cell, ${KB("drag")} to add many fruits at once. Dragging over another fruit will replace it by the new one.</p>
 
