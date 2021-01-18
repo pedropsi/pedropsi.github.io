@@ -5685,9 +5685,9 @@ var Icons={
 	"tap2drag":{primitive:["hand2","dragl"],vbmax:"50 50"},
 	"taphold":{primitive:["hand","hold"],vbmax:"50 50"},
 
-	"swipeleft"	:{primitive:["hand","swipel"],vbmax:"50 50"},
-	"swipeup":{primitive:"swipeleft",transform:"rotate-270"},
-	"swiperight":{primitive:"swipeleft",transform:"flip-horizontal"},
+	"swipe-left"	:{primitive:["hand","swipel"],vbmax:"50 50"},
+	"swipeup":{primitive:"swipe-left",transform:"rotate-270"},
+	"swipe-right":{primitive:"swipe-left",transform:"flip-horizontal"},
 	"swipedown":{primitive:"swipeup",transform:"flip-vertical"},
 
 	"mouseclick":{primitive:["cursor","clicklurd"],vbmax:"50 50"},
@@ -6042,9 +6042,9 @@ ExplainKey=function(key){
 }
 
 var KeyExplanations={
-	"swipeleft":"swipe left",
+	"swipe-left":"swipe left",
 	"swipeup":"swipe up",
-	"swiperight":"swipe right",
+	"swipe-right":"swipe right",
 	"swipedown":"swipe down",
 	"backsp":"backspace",
 	"mouseclick":"click",
@@ -6073,8 +6073,8 @@ var TypeSwipeKeys={
 	"drag":["tapdrag","mousedrag"],
 	"rightdrag":["tap2drag","mouse2drag"],
 	"hold":["taphold","mousehold"],
-	"previous":["swipeleft","shift tab"],
-	"next":["swiperight","tab"]
+	"previous":["swipe-left","shift tab"],
+	"next":["swipe-right","tab"]
 }
 
 
