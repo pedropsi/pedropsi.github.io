@@ -148,7 +148,7 @@ ${AHTML(LazyImageHTML({src:"kudamono/kudamono-cover.png"}),"images/kudamono/Kuda
 
 <h2>Credits</h2>
 <p>Special thanks to ${P("Dohz")} for trying (almost) all the puzzles, resulting in substantial improvements!</p>
-<p>Thanks to the ${P("thinky")} for feedback, new ideas, rule clarification, playtesting, interesting discussions about uniqueness, and for new ideas. In no particular order: ${P("Dohz","toomblercazz","portponky","deusovi","knexator","mansfield","draknek","norgg","hempuli","zach","skymoo","escaper","koswara","ihnn","omnipresentcoffee","le slo","kutilek")}.</p>
+<p>Thanks to the ${P("thinky")} for feedback, new ideas & inspiration, rule clarification, playtesting, interesting discussions about uniqueness, and great puzzle references. In no particular order: ${P("Dohz","toomblercazz","portponky","deusovi","knexator","mansfield","draknek","norgg","hempuli","zach","skymoo","escaper","koswara","ihnn","omnipresentcoffee","le slo","kutilek")}.</p>
 
 
 <h2>Roadmap</h2>
@@ -274,7 +274,7 @@ ${AHTML(LazyImageHTML({src:"kudamono/kudamono-cover.png"}),"images/kudamono/Kuda
 
 <h4>Geisterbahn</h4>
 <h5>Similarities</h5>
-<p>Both puzzles contain a rich set of rules, a subset of which apply to each puzzle Both puzzles present the rules visually, at the start of each puzzle, via a concise, self-descriptive depiction.</p> 
+<p>Both puzzles contain a rich set of rules, a subset of which are picked for each puzzle. Both puzzles present the rules visually, at the start of each puzzle, via a concise, self-descriptive depiction.</p>
 <h5>Differences</h5>
 <p>While Geisterbahn is about placing numbers, Kudamono is about drawing lines.</p>
 <p>In Geisterbahn, it is clear form the start which rules apply to which cells, while in Kudamono, it is important to deduce which cells belong to which line (subject to different rules, when containing different fruits).</p>
@@ -294,7 +294,21 @@ ${AHTML(LazyImageHTML({src:"kudamono/kudamono-cover.png"}),"images/kudamono/Kuda
 
 <p>Try the ${AHTML("alpha version","?W=7&L=a0a1a1c5a1c6c1a1b2c5p4l2p1m2m1l4m3m1g4g2p4p3g1o1b2g3g1g1")}.</p>
 
-<h3>Edit mode</h3>
+${HyperText("InstructionsUndo")}
+${HyperText("InstructionsRestart")}
+
+<h3>Player mode</h3>
+<p>You can...</p>
+
+<h4>Draw lines</h4>
+<p> ${KB("click hold")} on any grid point to start a new line, and ${KB("drag")} in any cardinal direction to draw it. Keep dragging to grow the line.</p>
+<p>If you make a mistake, keep dragging, but in the opposite direction, to shrink the line.</p>
+
+<h4>Erase lines</h4>
+<p> ${KB("click")} on any line segment and ${KB("drag")} along that segment to erase it. Keep dragging to erase other lines.</p>
+<p>If you make a mistake, simply keep dragging, but in the opposite direction, to prevent erasing a line.</p>
+
+<h3>Editor mode</h3>
 <p>You can...</p>
 
 <h4>Add fruit</h4>
@@ -320,12 +334,14 @@ ${HyperText("Kudamono/FruitShortcuts")}
 
 <h3>Utilities</h3>
 <p>You can also...</p>
+<h4>Toggle monochrome and outlines</h4>
+<p>Pressing ${KB("ctrl b")} will toggle the black and white mode.</p> 
+<p>Pressing ${KB("ctrl shift b")} will toggle the fruit outlines.</p>
+<p>Both options should be useful for printing and sharing images of the puzzles.</p>
 
 <h4>Save the Kudamono board</h4>
 <p>Pressing ${KB("ctrl s")} will save a copy the current board as a url to the clipboard.</p>
 
-<h4>Toggle monochrome</h4>
-<p>Pressing ${KB("ctrl b")} will toggle the black and white mode, which may be useful for printing.</p>
 
 
 `};</script><script src="data/page.js"></script>
