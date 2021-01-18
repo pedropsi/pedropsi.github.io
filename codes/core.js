@@ -5686,9 +5686,9 @@ var Icons={
 	"taphold":{primitive:["hand","hold"],vbmax:"50 50"},
 
 	"swipe-left"	:{primitive:["hand","swipel"],vbmax:"50 50"},
-	"swipeup":{primitive:"swipe-left",transform:"rotate-270"},
+	"swipe-up":{primitive:"swipe-left",transform:"rotate-270"},
 	"swipe-right":{primitive:"swipe-left",transform:"flip-horizontal"},
-	"swipedown":{primitive:"swipeup",transform:"flip-vertical"},
+	"swipe-down":{primitive:"swipe-up",transform:"flip-vertical"},
 
 	"mouseclick":{primitive:["cursor","clicklurd"],vbmax:"50 50"},
 	"mouseclick2":{primitive:["cursor2","click2lurd"],vbmax:"50 50"},
@@ -6043,9 +6043,9 @@ ExplainKey=function(key){
 
 var KeyExplanations={
 	"swipe-left":"swipe left",
-	"swipeup":"swipe up",
+	"swipe-up":"swipe up",
 	"swipe-right":"swipe right",
-	"swipedown":"swipe down",
+	"swipe-down":"swipe down",
 	"backsp":"backspace",
 	"mouseclick":"click",
 	"mouseclick2":"right click",

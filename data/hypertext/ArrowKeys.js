@@ -8,7 +8,7 @@ ArrowKeysHyperText=function(){
 	var grids=[
 		ArrowKeysGridHTML(Directions),
 		ArrowKeysGridHTML(["A","W","D","S"]),
-		ArrowKeysGridHTML(Directions.map(d=>Prefix(d,"swipe")))];
+		ArrowKeysGridHTML(Directions.map(d=>Prefix(d,"swipe-")))];
 	return	Enumerate(grids,"or");
 }
 

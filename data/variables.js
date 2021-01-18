@@ -168,9 +168,9 @@ HOWTO_TEXT					:	()=>	`${v.FIGURE_SIMPLE()}<h2>How to play</h2><h3>Controls</h3>
 
 NUM_KEYS					:	()=>	Enumerate(Range(0,9).map(String).map(KB),"or"),
 LEFT_KEY					:	()=>	Enumerate(["swipe-left","left","A"].map(KB),"or"),
-UP_KEY						:	()=>	Enumerate(["swipeup","up","W"].map(KB),"or"),
+UP_KEY						:	()=>	Enumerate(["swipe-up","up","W"].map(KB),"or"),
 RIGHT_KEY					:	()=>	Enumerate(["swipe-right","right","D"].map(KB),"or"),
-DOWN_KEY					:	()=>	Enumerate(["swipedown","down","S"].map(KB),"or"),
+DOWN_KEY					:	()=>	Enumerate(["swipe-down","down","S"].map(KB),"or"),
 ACTION_KEY					:	()=>	Enumerate(["tap","X","spacebar","enter"].map(KB),"or"),
 UNDO_KEY					:	()=>	`<kbd>Z</kbd>`,
 RESTART_KEY					:	()=>	`<kbd>R</kbd>`,
