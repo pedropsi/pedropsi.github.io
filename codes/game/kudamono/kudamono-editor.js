@@ -114,16 +114,17 @@ FruitIcons={
 			depiction:"W=2&L=c0c2c4c2&S=0RR6RR"
 		}
 	},
-	"orange":{
-		letter:"o",
-		colour:"rgb(255,122,31)",
-		viewBox:"-5 -5 40 40",
-		path:"M 4 26 Q 7 30 15 30 Q 28 29 30 15 Q 30 5 26 4 Q 25 0 15 0 Q 1 1 0 15 Q 0 23 4 26 Z",
+	"blackberry":{
+		letter:"k",
+		colour:"rgb(0,0,66)",
+		viewBox:"0 0 500 500",
+		path:"M 82 5 C 81 7 75 9 68 9 C 56 9 42 20 42 30 C 42 33 37 40 31 46 C 25 52 21 60 21 68 C 21 75 18 83 14 86 C 10 90 8 97 9 105 C 10 113 8 121 5 124 C -1 130 -1 152 5 159 C 8 162 10 168 9 173 C 6 187 15 200 27 203 C 33 205 38 208 38 211 C 38 220 53 231 66 231 C 73 231 82 233 85 237 C 92 246 112 245 120 235 C 124 231 133 226 140 225 C 148 223 153 218 157 209 C 162 197 182 190 182 201 C 182 203 179 205 174 205 C 163 205 153 221 153 237 C 153 244 152 256 150 263 C 148 274 149 279 158 287 C 163 292 170 302 173 308 C 176 315 183 322 188 325 C 194 327 201 334 203 340 C 206 345 213 352 220 355 C 226 358 237 366 243 372 C 252 381 258 384 270 384 C 279 384 294 385 302 386 C 315 388 319 387 324 380 C 327 375 336 371 344 370 C 356 369 360 366 365 355 C 369 348 376 341 382 339 C 394 336 402 320 397 304 C 395 298 394 286 395 279 C 396 269 393 262 386 255 C 379 248 376 241 377 231 C 379 217 369 201 359 201 C 356 201 353 197 351 192 C 350 188 343 180 336 176 C 329 172 323 166 322 162 C 318 149 299 140 286 144 C 276 147 273 147 267 140 C 261 131 260 131 252 145 C 244 160 237 162 229 152 C 221 142 217 148 217 167 C 217 183 216 185 207 182 C 202 181 196 180 194 180 C 188 179 191 162 200 154 C 206 148 208 141 207 134 C 206 128 208 122 213 117 C 223 108 223 92 213 82 C 206 75 206 74 211 65 C 217 57 217 56 200 53 C 183 51 182 50 185 38 C 188 25 184 24 160 33 C 155 35 152 31 148 18 C 142 -1 141 -2 131 7 C 125 13 124 13 119 7 C 113 0 87 -2 82 5",
 		rule:{
-			maxconnected:1,
-			maxconnectable:1,
-			description:"No Orange is connectable with another (no path could be drawn).",
-			depiction:"W=2&L=o0o6o2&S=1DD"
+			description:"Paths cross Blackberries straight and always turn elsewhere.",
+			depiction:"W=2&L=k3k4&S=1URRDDLUL",
+			turnatclue:false,
+			mustturn:true,
+			minconnected:2
 		}
 	},
 	"lemon":{
@@ -135,6 +136,18 @@ FruitIcons={
 			maxconnected:1,
 			description:"No path passes through a Lemon.",
 			depiction:"L=l4&S=3RR"
+		}
+	},
+	"orange":{
+		letter:"o",
+		colour:"rgb(255,122,31)",
+		viewBox:"-5 -5 40 40",
+		path:"M 4 26 Q 7 30 15 30 Q 28 29 30 15 Q 30 5 26 4 Q 25 0 15 0 Q 1 1 0 15 Q 0 23 4 26 Z",
+		rule:{
+			maxconnected:1,
+			maxconnectable:1,
+			description:"No Orange is connectable with another (no path could be drawn).",
+			depiction:"W=2&L=o0o6o2&S=1DD"
 		}
 	}
 }
