@@ -408,7 +408,7 @@ function ForbidCaret(){
 
 function ForbidNumberActions(key){
 	return (!In([
-		"Direct",
+		"Type this",
 		"Reverse",
 		"Second",
 		"Follow",
@@ -430,7 +430,7 @@ function ForbidNumberActions(key){
 
 function ForbidSpaceActions(key){
 	return (!In([
-		"Direct",
+		"Type this",
 		"Reverse",
 		"Second",
 		"Follow",
@@ -541,7 +541,7 @@ function GoalHTML(title){
 }
 
 var LevelDifficulty={
-	"Direct":1,				
+	"Type this":1,				
 	"Reverse":1,
 	"Follow":2,
 	"Consonant":2,
@@ -687,7 +687,7 @@ function LevelNumberNotes(n){
 
 var LevelGoals=[			//Required types of thinking:
 	//Positional (caret position), Spacial (position of letters in 2D system), Alphabetical (letters are ordered, and may correspond to numbers), Syllabe (syllabes as unit of input), Word (full words as units of input), Adjacent, Cyclic, Mapping (cyphers), Language, Knowledge, Cultural, Retroactive, Proactive,
-	"Direct",				
+	"Type this",				
 
 	"Reverse",				//Positional,
 	"Follow",				//Positional, Monoactive
@@ -760,6 +760,7 @@ RestrictPlayableLevels();
 
 
 var LevelGoalAliases={
+	"Direct":"Type this",
 	"Morse":"EnactLawsMama",
 	"⠍⠕⠗⠎⠑":"EnactLawsMama",
 	"Vowel":"Consonant",
@@ -812,7 +813,7 @@ function ObtainLevelsWriter(solvedlevels){
 }
 
 var LevelInstructions={
-	"Direct":Direct,
+	"Type this":Direct,
 	"Reverse":function(L){
 		InputLetterBefore(L);
 		AddStrokeValid(L);
@@ -3555,14 +3556,14 @@ var UnZoomMacro=[
 
 function TutorialClueMacro(){
 	return [
-		{Starter:()=>GoToLevel("Direct")},
+		{Starter:()=>GoToLevel("Type this")},
 		...OverlayTutorialMacro(),
 		...ZoomMacro,
 		TypingAction("TYPE THE CLUE",{endDelay:2000}),
 		UnTypingAction("TYPE THE CLUE",{endDelay:0}),
 		...UnZoomMacro,
 		...UnOverlayTutorialMacro(),
-		TypingAction("DIRECT",{endDelay:4000})
+		TypingAction("TYPE THIS",{endDelay:4000})
 	];
 }
 
@@ -3606,13 +3607,13 @@ function UnHighlightAction(){
 
 function OnboardMacro(){
 	return [
-		{Starter:()=>GoToLevel("Direct")},
+		{Starter:()=>GoToLevel("Type this")},
 		{Starter:BlockInput},
 		TipAction(".middle","Welcome to Puzzle Type!"),
 		HighlightAction(".level-number","Level 1 is a tutorial."),
-		HighlightAction(".goal",`DIRECT is the clue.`),
-		HighlightAction("#letters","Your goal is to type the clue."),
-		TypingAction("DIRECT"),
+		HighlightAction(".goal",`TYPE THIS is the clue.`),
+		HighlightAction("#letters","Your goal is to type this clue."),
+		TypingAction("TYPE THIS"),
 		UnHighlightAction(),
 		WaitAction(6000),
 		HighlightAction(".goal",`The next clue is REVERSE...`),
