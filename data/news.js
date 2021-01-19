@@ -12,7 +12,7 @@ News={
 		PIECE:()=>`
 		<p>Dates and Coconuts were the two new fruits  added to the ${A("kudamono#Kudamono paper puzzle collection")} this week.</p>
 		<p>The ${A("kudamono#Roadmap")} for Kudamono as well as the ${A("kudamono#Design Goals")} were clarified.</p>
-		<p>The ${A("kudamono#Editor")} is gainign shape.</p>
+		<p>The ${A("kudamono#Editor")} is gaining shape.</p>
 	`,ID:"kudamono"},
 	N_63:{
 		DATE:"2020-12-30",
