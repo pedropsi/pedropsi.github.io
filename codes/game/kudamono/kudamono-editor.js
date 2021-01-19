@@ -6,6 +6,12 @@
 var sources=["data-game-colours.js","data-game-canvas.js","data-game-undo.js"];
 sources.map(LoaderInFolder("codes/game/modules"));
 
+/*
+	etc:"W=8&L=g0d1o1a3q1q1d5q3q1q1d2d1l4q2g1c1o2q4g3c1a1c2g4c3m9p4b1m2p4p2p1g1m1m1b1p2p1&S=0DDDDRDLDDD1DDRR3UR2URDRDLLLDDRRURUDL7DDDL15RD13DLL14URRDLDLU6DR7DR",
+	etc2:"W=35&H=23&L=b37a43b67g1a4c2o3l4p3m3c210a32b25b1g3a5c5q150l21m10o24l1p6m8d2&S=37DDD2DLDRD1DDDRRUUU3RRDDDLL3URRDDD3URDRURDDD4URRDDDLLUU3URDDDRUUU3URRDDDLLUU20RDL3DD3DD7DD161URDDRURURDDLDLLDDLUUUU5URDDDDRRUUUURDDDDDLLLLUUUU5URRRRDDDDDLLLLURUUUL5URRRRDDDDDLULLDLUUUU6URDDDDDDDDDLUUUUUUUU27URDDDLUU4URRDDLLU94URRDLL70URRDRURDDDDDLULULDDLUUUU5URRRRDDDDDLLLLUUUU5URDRDRUURDDDDDLULULDDLUUUU5URRRRDDDDDLLLLUUUU27URRDDDLLUU10URRDDDLLUU113URDL",
+	etc3:"W=24&H=13&L=d16d5o1b1d11d10g3g2d11g15g2a10c1c2a1a25a2o2q12q28l15o1l27k13l12k1k2k13p15p12p15p12m3m26o3b1&S=16DDDRDRUU3DD3RRRRRRR1RRRRRRRRRRRRRRRRRRRRRR10D13R1DDRRUU40RRDDDDLL1DD44DD28UULLDDRRDD15UUURRURRD1RRRRRRRRRRR24DDD16URRDDLLU43UUR27UUR14URRDDLLU"
+*/
+
 ///////////////////////////////////////////////////////////////////////////////
 //Fruits
 FruitIcons={
@@ -32,7 +38,7 @@ FruitIcons={
 		rule:{
 			minconnected:2,
 			mintracks:2,
-			shape:"translations",
+			commonForm:"UnTranslateTrack",
 			description:"All Pear paths are exactly alike, and there is more than one.",
 			depiction:"W=2&L=p1p2p2p2&S=1DR2DR"
 		}
@@ -70,9 +76,12 @@ FruitIcons={
 		path:"M 172 3 C 74 22 2 105 2 199 C 3 228 11 263 19 263 C 21 263 27 267 32 272 C 38 278 40 279 40 276 C 40 260 64 255 76 269 C 94 291 70 315 48 297 C 40 291 40 291 40 297 C 40 304 49 311 58 311 C 65 311 80 325 80 332 C 80 336 108 349 131 355 C 236 381 357 314 386 213 C 392 191 401 111 397 108 C 396 106 394 98 394 90 C 394 79 393 74 389 71 C 385 68 383 64 383 62 C 383 59 379 55 375 53 C 370 51 366 46 365 43 C 364 40 361 37 358 37 C 355 37 349 34 344 31 C 336 25 298 14 249 4 C 225 -0 191 -1 172 3",
 		rule:{
 			loopallowed:true,
-			branchallowed:true,
 			minconnected:2,
-			branchatclue:true,
+			shapesatsymbol:["LUR","URD","RDL","DLU"],
+			description:"Paths branch, as T-junctions, only at every Coconut. No branch returns to its origin.",
+			depiction:"W=2&L=q3q2&S=1URDRDDLLU3D",//TODO
+
+			branchallowed:true,
 			branchspawns:1,
 			branchloop:false
 		}
@@ -84,10 +93,13 @@ FruitIcons={
 		shiftx:-0.1,
 		path:"M 186 11 C 173 22 172 24 174 42 L 176 62 L 148 67 C 58 82 0 117 0 155 C 0 200 62 205 144 166 C 173 152 175 151 180 159 C 185 166 183 167 159 175 C 59 209 1 261 21 299 C 33 320 74 326 105 310 C 117 303 117 304 97 329 C 29 414 76 489 153 418 C 161 410 164 409 166 413 C 186 481 205 511 233 516 C 288 526 293 452 244 347 L 228 313 L 258 344 C 304 393 344 406 365 381 C 391 351 358 293 278 230 L 263 219 L 290 231 C 351 260 397 246 389 201 C 383 171 323 131 253 109 C 237 104 223 98 222 94 C 219 87 220 87 239 95 C 350 141 440 110 380 45 C 349 12 213 -12 186 11",
 		rule:{
-			branchallowed:true,
 			minconnected:Infinity,
-			branchatclue:false,
-			branchspawns:1,
+			shapesatsymbol:["L","U","R","D"],
+			shapesnosymbol:["LR","UD","LUR","URD","RDL","DLU"],
+			description:"The first two Dates connect via a straight line. Non-endpoints may spawn up to one straight branch ending at a Date.",
+			depiction:"W=2&L=d1d4d1d2&S=1RDRUD",//TODO
+
+			branchallowed:true,
 			branchstraight:true
 		}
 	},
@@ -126,11 +138,11 @@ FruitIcons={
 		rule:{
 			loopallowed:true,
 			looprequired:true,
+			minconnected:2,
+			shapesatsymbol:["LR","UD"],
+			shapesnosymbol:["LU","UR","RD","DL"],
 			description:"Paths cross Blackberries straight and always turn elsewhere.",
-			depiction:"W=2&L=k3k4&S=1URRDDLUL",
-			turnatclue:false,
-			mustturn:true,
-			minconnected:2
+			depiction:"W=2&L=k3k4&S=1URRDDLUL"
 		}
 	},
 	"lemon":{
@@ -281,6 +293,20 @@ TrackBranched=function(track){
 TrackStartPoint=function(track){
 	var endpoints=TrackEndpoints(track);
 	return First(endpoints)||First(First(track));
+}
+
+UnTranslateTrack=function(track){
+	var minx=Min(TrackPoints(track).map(First));
+	var miny=Min(TrackPoints(track).map(Last));
+	return TranslateTrack(track,-1*minx,-1*miny);
+}
+
+TranslateTrack=function(track,x,y){
+	return track.map(segment=>TranslateSegment(segment,x,y));
+}
+
+TranslateSegment=function(segment,x,y){
+	return segment.map(point=>VectorPlus(point,[x,y]));
 }
 
 SplitContiguousTracks=function(segments){
