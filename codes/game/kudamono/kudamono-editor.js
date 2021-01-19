@@ -1509,7 +1509,7 @@ InitialiseKudamono=function(){
 HyperText("Kudamono/FruitShortcuts",()=>TableHTML({
 		headers:["Shortcut","Fruit"],
 		caption:"Choose a fruit by pressing:",
-		rows:Sort(Keys(FruitIcons)).map(fruit=>[KB("ctrl "+FruitIcons[fruit].letter),fruit])
+		rows:Sort(Keys(FruitIcons)).map(fruit=>[KB(FruitIcons[fruit].letter),fruit])
 	}))
 
 
