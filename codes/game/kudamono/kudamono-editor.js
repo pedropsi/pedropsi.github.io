@@ -261,6 +261,11 @@ TrackEndpoints=function(track){
 		return Join(...endsegments).filter(xy=>track.filter(segment=>In(segment,xy)).length===1);
 }
 
+TrackDangled=function(track,state){
+	var endpoints=TrackEndpoints(track);
+	return endpoints.some(point=>!In(Join(...Values(state.level)),point));
+}
+
 TrackBranchpoints=function(track){
 	return TrackPoints(track).filter(point=>PointContainedSegments(point,track).length>=3);
 }
@@ -589,7 +594,9 @@ TrackStyleOpts=function(track,state,Opts){
 			
 		if(!wrong&&!rule.branchallowed&&TrackBranched(track))
 			wrong=true;
-	
+
+		if(!wrong&&TrackDangled(track,state))
+			colour=HEXSaturater(0.5)(colour);
 	}
 
 	var s=Opts.lineScale||1;
@@ -599,6 +606,8 @@ TrackStyleOpts=function(track,state,Opts){
 	if(wrong)
 		dash=[1,20];
 	
+
+
 	if(Opts.edit){
 		colour=HEXDarkener(0.9)(colour);
 		if(Opts.clearing)
