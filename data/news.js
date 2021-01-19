@@ -1,5 +1,12 @@
 News={
-	N_634:{
+	N_65:{
+		DATE:"2021-01-22",
+		HEADER:()=>"New level, improvements",
+		PIECE:()=>`
+		<p>${A("puzzle-type")} received new level: TOD***, standing now comfortably at 40 levels</p>
+		<p>The first level clue changed! Now it's more interesting and a gentler introduction to the game interface and mechanics.</p>
+	`,ID:"puzzle-type"},
+	N_64:{
 		DATE:"2021-01-17",
 		HEADER:()=>"Kudamono set 3 and editor",
 		PIECE:()=>`
