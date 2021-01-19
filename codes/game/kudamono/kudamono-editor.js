@@ -16,6 +16,7 @@ FruitIcons={
 		shifty:0.1,
 		path:"M 482 0 C 453 67 436 174 443 248 L 449 311 L 397 284 C 303 235 168 253 103 324 C 38 394 4 523 13 665 C 20 780 40 856 87 952 C 174 1131 338 1216 445 1138 C 462 1126 467 1126 489 1141 C 530 1168 626 1163 680 1130 C 780 1071 868 952 917 808 C 942 735 945 714 945 592 C 945 472 942 451 922 407 C 898 355 859 308 825 289 C 754 251 631 252 563 292 C 545 302 530 307 530 303 C 530 298 551 282 577 267 C 679 206 800 51 800 -21 L 800 -49 L 768 -32 C 708 -2 632 61 599 108 L 565 154 L 555 80 C 547 19 521 -48 506 -48 C 504 -48 493 -27 482 0 Z",
 		rule:{
+			loopallowed:true,
 			minconnected:2,
 			shape:"symmetries",
 			description:"Every Apple belongs to a mirror or rotationally symmetric path.",
@@ -42,6 +43,7 @@ FruitIcons={
 		viewBox:"0 0 1669 1100",
 		path:"M 641 1062 L 645 1025 L 591 1020 C 490 1009 411 938 393 839 L 386 800 L 374 830 C 346 896 251 939 187 914 C 161 904 159 906 151 936 C 143 966 142 967 135 945 C 129 926 123 923 99 928 C 72 934 70 932 67 897 C 64 864 60 858 32 851 L 0 843 L 19 810 C 33 788 39 760 39 718 C 39 615 101 543 189 543 L 224 543 L 191 517 C 103 447 76 316 132 221 C 147 195 173 164 190 152 L 220 131 L 193 102 L 165 73 L 207 73 C 247 73 249 72 249 43 C 249 26 252 13 256 13 C 259 13 282 25 307 39 L 351 65 L 384 33 L 418 0 L 442 55 C 461 98 476 115 512 137 C 561 165 601 210 619 257 C 630 286 630 286 644 266 C 661 241 718 213 751 213 C 764 213 792 222 814 234 C 851 254 853 254 866 237 C 878 220 879 220 879 240 C 879 252 887 263 899 266 C 917 271 918 275 909 299 C 899 323 901 329 919 343 L 940 359 L 914 373 C 900 381 880 406 869 430 C 826 527 703 541 644 456 L 620 420 L 606 455 C 576 526 472 583 372 583 L 330 583 L 354 618 C 367 638 383 670 390 690 L 401 725 L 419 686 C 456 602 545 543 644 536 C 695 532 712 535 759 560 C 837 600 874 662 874 752 C 874 793 867 831 856 853 C 841 884 841 894 853 940 L 867 992 L 822 995 C 779 998 776 1000 761 1038 C 741 1090 742 1089 721 1070 C 697 1048 690 1049 661 1076 L 637 1098 L 641 1062 Z",
 		rule:{
+			crossforbidden:true,
 			minconnectable:2,
 			maxconnected:1,
 			description:"Every Blueberry is connectable with at least one other (as if a path were drawn).",
@@ -55,7 +57,6 @@ FruitIcons={
 		shifty:0.1,
 		path:"M 526 17 L 497 30 L 499 125 C 503 296 454 446 366 541 L 320 590 L 274 575 C 184 545 76 594 28 686 C -4 746 -3 843 31 903 C 81 994 177 1038 271 1013 C 331 997 404 924 420 863 C 436 805 427 721 401 685 L 381 656 L 431 603 C 513 515 571 375 586 226 C 593 164 593 163 612 180 C 647 212 720 330 745 396 C 758 432 771 485 772 515 L 775 568 L 740 566 C 641 559 555 610 514 697 C 471 789 491 893 564 961 C 658 1048 779 1041 862 944 C 928 867 936 764 884 675 C 864 641 859 622 864 595 C 872 541 853 431 822 349 C 784 253 730 172 648 90 C 611 53 580 18 580 13 C 580 0 562 2 526 17 Z",
 		rule:{
-			mayloop:false,
 			minconnected:2,
 			maxconnected:2,
 			description:"Cherries connect only in pairs (not in a loop).",
@@ -68,6 +69,8 @@ FruitIcons={
 		viewBox:"0 0 700 700",
 		path:"M 172 3 C 74 22 2 105 2 199 C 3 228 11 263 19 263 C 21 263 27 267 32 272 C 38 278 40 279 40 276 C 40 260 64 255 76 269 C 94 291 70 315 48 297 C 40 291 40 291 40 297 C 40 304 49 311 58 311 C 65 311 80 325 80 332 C 80 336 108 349 131 355 C 236 381 357 314 386 213 C 392 191 401 111 397 108 C 396 106 394 98 394 90 C 394 79 393 74 389 71 C 385 68 383 64 383 62 C 383 59 379 55 375 53 C 370 51 366 46 365 43 C 364 40 361 37 358 37 C 355 37 349 34 344 31 C 336 25 298 14 249 4 C 225 -0 191 -1 172 3",
 		rule:{
+			loopallowed:true,
+			branchallowed:true,
 			minconnected:2,
 			branchatclue:true,
 			branchspawns:1,
@@ -81,7 +84,8 @@ FruitIcons={
 		shiftx:-0.1,
 		path:"M 186 11 C 173 22 172 24 174 42 L 176 62 L 148 67 C 58 82 0 117 0 155 C 0 200 62 205 144 166 C 173 152 175 151 180 159 C 185 166 183 167 159 175 C 59 209 1 261 21 299 C 33 320 74 326 105 310 C 117 303 117 304 97 329 C 29 414 76 489 153 418 C 161 410 164 409 166 413 C 186 481 205 511 233 516 C 288 526 293 452 244 347 L 228 313 L 258 344 C 304 393 344 406 365 381 C 391 351 358 293 278 230 L 263 219 L 290 231 C 351 260 397 246 389 201 C 383 171 323 131 253 109 C 237 104 223 98 222 94 C 219 87 220 87 239 95 C 350 141 440 110 380 45 C 349 12 213 -12 186 11",
 		rule:{
-			minconnected:2,
+			branchallowed:true,
+			minconnected:Infinity,
 			branchatclue:false,
 			branchspawns:1,
 			branchstraight:true
@@ -95,7 +99,8 @@ FruitIcons={
 		shifty:0.2,
 		path:"M 523 -50 C 502 -23 451 31 409 71 C 346 130 315 151 239 184 C 187 207 116 234 81 244 C 46 254 15 264 13 266 C 10 270 29 362 34 370 C 35 371 113 352 207 329 L 379 286 L 398 307 C 408 318 433 351 453 379 L 489 430 L 435 483 C 376 542 315 648 284 748 C 259 828 259 1004 283 1084 C 312 1177 359 1251 435 1327 C 553 1442 683 1496 842 1495 C 1121 1494 1313 1348 1405 1066 C 1445 943 1419 750 1345 627 C 1278 514 1238 474 1122 405 C 986 325 771 309 609 368 C 585 377 558 386 550 389 C 540 392 517 368 483 321 L 432 249 L 541 107 L 650 -35 L 617 -59 C 563 -100 563 -100 523 -50 Z",
 		rule:{
-			mustloop:true,
+			loopallowed:true,
+			looprequired:true,
 			minconnected:2,
 			description:"Melons belong to closed loops (over 1 melon per loop).",
 			depiction:"W=2&L=c0c2c4c2&S=0RR6RR"
@@ -108,8 +113,7 @@ FruitIcons={
 		shifty:0.1,
 		path:"M 372 -181 C 364 -169 360 -159 362 -157 C 364 -156 407 -129 458 -98 C 508 -66 550 -37 550 -31 C 550 -18 520 10 464 49 C 425 76 405 83 368 83 C 312 83 277 111 255 174 C 246 203 236 214 218 216 C 178 221 153 239 129 282 C 109 316 105 336 107 394 C 108 460 106 467 84 479 C 0 523 -14 706 60 780 C 79 798 99 808 119 808 C 143 808 152 814 165 843 C 174 862 188 882 196 889 C 206 897 208 915 204 957 C 196 1029 214 1093 251 1131 C 276 1155 287 1159 320 1156 C 357 1153 360 1154 376 1193 C 385 1215 395 1255 396 1283 C 401 1352 437 1418 482 1443 C 519 1462 520 1463 554 1444 C 574 1433 596 1410 606 1389 C 624 1351 630 1271 618 1227 C 611 1203 612 1202 640 1206 C 706 1216 760 1140 760 1039 C 760 997 766 969 780 945 C 820 878 815 771 768 705 C 749 679 749 676 765 633 C 785 581 782 499 758 452 C 750 434 746 414 750 407 C 769 373 771 307 756 255 C 731 169 672 131 612 162 C 595 171 576 186 571 195 C 563 208 561 190 560 127 L 560 42 L 622 -41 C 681 -121 683 -125 665 -138 C 647 -151 643 -149 614 -115 L 583 -78 L 504 -127 C 461 -154 416 -181 405 -189 C 387 -200 383 -199 372 -181 Z M 498 209 C 478 222 476 221 459 173 L 442 128 L 474 103 L 505 78 L 508 140 C 510 182 507 204 498 209 Z",
 		rule:{
-			mayloop:false,
-			minconnected:"all",
+			minconnected:Infinity,
 			description:"All Grapes are connected by a single path (not a loop).",
 			depiction:"W=2&L=c0c2c4c2&S=0RR6RR"
 		}
@@ -118,8 +122,10 @@ FruitIcons={
 		letter:"k",
 		colour:"rgb(0,0,66)",
 		viewBox:"0 0 500 500",
-		path:"M 82 5 C 81 7 75 9 68 9 C 56 9 42 20 42 30 C 42 33 37 40 31 46 C 25 52 21 60 21 68 C 21 75 18 83 14 86 C 10 90 8 97 9 105 C 10 113 8 121 5 124 C -1 130 -1 152 5 159 C 8 162 10 168 9 173 C 6 187 15 200 27 203 C 33 205 38 208 38 211 C 38 220 53 231 66 231 C 73 231 82 233 85 237 C 92 246 112 245 120 235 C 124 231 133 226 140 225 C 148 223 153 218 157 209 C 162 197 182 190 182 201 C 182 203 179 205 174 205 C 163 205 153 221 153 237 C 153 244 152 256 150 263 C 148 274 149 279 158 287 C 163 292 170 302 173 308 C 176 315 183 322 188 325 C 194 327 201 334 203 340 C 206 345 213 352 220 355 C 226 358 237 366 243 372 C 252 381 258 384 270 384 C 279 384 294 385 302 386 C 315 388 319 387 324 380 C 327 375 336 371 344 370 C 356 369 360 366 365 355 C 369 348 376 341 382 339 C 394 336 402 320 397 304 C 395 298 394 286 395 279 C 396 269 393 262 386 255 C 379 248 376 241 377 231 C 379 217 369 201 359 201 C 356 201 353 197 351 192 C 350 188 343 180 336 176 C 329 172 323 166 322 162 C 318 149 299 140 286 144 C 276 147 273 147 267 140 C 261 131 260 131 252 145 C 244 160 237 162 229 152 C 221 142 217 148 217 167 C 217 183 216 185 207 182 C 202 181 196 180 194 180 C 188 179 191 162 200 154 C 206 148 208 141 207 134 C 206 128 208 122 213 117 C 223 108 223 92 213 82 C 206 75 206 74 211 65 C 217 57 217 56 200 53 C 183 51 182 50 185 38 C 188 25 184 24 160 33 C 155 35 152 31 148 18 C 142 -1 141 -2 131 7 C 125 13 124 13 119 7 C 113 0 87 -2 82 5",
+		path:"M 108 2 C 95 6 85 19 85 33 C 69 29 47 38 49 60 C 22 55 5 90 18 109 C 1 125 -5 151 9 169 C 0 182 -1 198 11 210 C -2 232 18 257 38 253 C 42 280 77 293 102 272 C 120 295 158 279 151 260 C 175 271 185 255 184 245 C 207 246 210 228 211 222 C 219 220 218 222 215 226 C 212 228 209 233 210 247 C 192 245 189 281 206 286 C 198 313 219 328 234 319 C 235 341 253 345 261 336 C 263 349 295 353 298 339 C 310 348 331 344 333 331 C 340 341 360 332 357 320 C 363 328 379 325 372 312 C 378 318 391 306 384 295 C 399 294 407 282 393 266 C 412 259 399 225 384 226 C 393 208 373 189 359 196 C 364 189 354 172 337 182 C 340 162 311 160 306 172 C 297 157 278 160 274 171 C 255 154 246 175 245 171 C 264 152 263 123 237 116 C 249 100 232 80 221 79 C 219 60 210 51 194 46 C 196 29 173 3 149 16 C 147 18 145 16 140 11 C 137 7 132 4 130 3 C 121 0 113 0 108 2",
 		rule:{
+			loopallowed:true,
+			looprequired:true,
 			description:"Paths cross Blackberries straight and always turn elsewhere.",
 			depiction:"W=2&L=k3k4&S=1URRDDLUL",
 			turnatclue:false,
@@ -133,6 +139,7 @@ FruitIcons={
 		viewBox:"-15 -15 45 45",
 		path:"M 0 30 Q 3 31 5 30 Q 28 30 30 7 Q 32 3 30 0 Q 27 -2 23 0 Q 0 2 0 25 Q -1 28 0 30 Z",
 		rule:{
+			crossforbidden:true,
 			maxconnected:1,
 			description:"No path passes through a Lemon.",
 			depiction:"L=l4&S=3RR"
@@ -144,6 +151,7 @@ FruitIcons={
 		viewBox:"-5 -5 40 40",
 		path:"M 4 26 Q 7 30 15 30 Q 28 29 30 15 Q 30 5 26 4 Q 25 0 15 0 Q 1 1 0 15 Q 0 23 4 26 Z",
 		rule:{
+			crossforbidden:true,
 			maxconnected:1,
 			maxconnectable:1,
 			description:"No Orange is connectable with another (no path could be drawn).",
@@ -524,32 +532,73 @@ FuseFollowedSegment=function(segment1,segment2){
 //Draw
 //draws the board
 
+FruitRule=function(fruit){
+	return FruitIcons[fruit].rule;
+}
 
 TrackFruits=function(track,state){
 	return Keys(state.level).filter(fruit=>state.level[fruit].some(
 		point=>track.some(segment=>In(segment,point))));
 }
 
+TrackFruitNumber=function(track,fruit,state){
+	return Count(state.level[fruit],point=>PointTrackContained(point,track));
+}
+
+TrackFruitsNumber=function(track,state){
+	return Keys(state.level).map(fruit=>TrackFruitNumber(track,fruit,state));
+}
+
+FruitNumber=function(fruit,state){
+	return state.level[fruit].length;
+}
+
+
 TrackStyleOpts=function(track,state,Opts){
 	var fruits=TrackFruits(track,state);
-	var s=Opts.lineScale||1;
-	var dash=[1,1];
 
-	var lineCap="round";
-	if(TrackLooped(track))
-		lineCap="square";
-
-	if(TrackBranched(track))
-		dash=[1,20];
+	var wrong=false;
 	
 	var colour;
 	if(fruits.length<1)
 		colour=state.line.deficitColour;
-	else if(fruits.length>1)
+	else if(fruits.length>1){
 		colour=state.line.excessColour;
-	else
-		colour=FruitIcons[First(fruits)].colour;
+	}
+	else{
+		var fruit=First(fruits);
+		colour=FruitIcons[fruit].colour;
+		var rule=FruitRule(fruit);
 
+		if(!wrong&&rule.crossforbidden)
+			wrong=true;
+
+		if(!wrong&&rule.minconnected||rule.maxconnected){
+			var min=rule.minconnected;
+			if(min===Infinity)
+				min=FruitNumber(fruit,state);
+			var n=TrackFruitNumber(track,fruit,state);
+			wrong=(n>rule.maxconnected||n<min)
+		}
+
+		if(!wrong&&!rule.loopallowed&&TrackLooped(track))
+			wrong=true;
+
+		if(!wrong&&rule.looprequired&&!TrackLooped(track))
+			wrong=true;
+			
+		if(!wrong&&!rule.branchallowed&&TrackBranched(track))
+			wrong=true;
+	
+	}
+
+	var s=Opts.lineScale||1;
+	var dash=[1,1];
+	var lineCap="round";
+
+	if(wrong)
+		dash=[1,20];
+	
 	if(Opts.edit){
 		colour=HEXDarkener(0.9)(colour);
 		if(Opts.clearing)
