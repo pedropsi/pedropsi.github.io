@@ -5,6 +5,7 @@
 
 var sources=["data-game-colours.js","data-game-canvas.js","data-game-undo.js"];
 sources.map(LoaderInFolder("codes/game/modules"));
+LoaderInFolder("codes/game/kudamono/")("genres.js")
 
 /*
 	etc:"W=8&L=g0d1o1a3q1q1d5q3q1q1d2d1l4q2g1c1o2q4g3c1a1c2g4c3m9p4b1m2p4p2p1g1m1m1b1p2p1&S=0DDDDRDLDDD1DDRR3UR2URDRDLLLDDRRURUDL7DDDL15RD13DLL14URRDLDLU6DR7DR",
@@ -169,12 +170,6 @@ FruitIcons={
 			description:"No Orange is connectable with another (no path could be drawn).",
 			depiction:"W=2&L=o0o6o2&S=1DD"
 		}
-	},
-	"flower":{
-		letter:"w",
-		colour:"rgb(153,217,234)",
-		viewBox:"0 0 600 600",
-		path:"M 181 1 C 143 9 116 43 116 83 C 116 95 116 97 115 97 C 101 91 74 89 60 94 C -19 119 -19 233 60 256 L 66 258 62 265 C 50 285 48 312 55 334 C 75 392 152 411 194 367 L 201 360 203 363 C 207 368 219 376 228 380 C 301 414 375 339 339 266 C 337 261 335 257 335 257 C 335 257 338 256 342 255 C 395 240 417 172 384 126 C 363 97 324 84 291 94 L 283 97 283 85 C 285 31 234 -10 181 1 Z M 200 167 C 216 167 218 166 225 164 L 232 161 232 176 C 232 192 234 201 241 214 L 245 222 238 224 C 224 229 210 238 202 247 L 198 252 194 248 C 187 239 173 231 160 227 C 152 224 152 224 156 218 C 164 205 168 189 167 172 L 166 161 175 164 C 182 166 184 167 200 167 Z",
 	}
 }
 
@@ -959,10 +954,10 @@ SegmentsSerial=function(state){
 		return serials.join("");
 }
 
-GameSerial=function(state){
-	if(!state.game||!In(GameLetters,state.game))
+GenreSerial=function(state){
+	if(!state.genre||!In(GenreLetters,state.genre))
 		return "";
-	return GameLetters[state.game];
+	return GenreLetters[state.genre];
 }
 
 PointTrackSerial=function(pointtrack){
@@ -1021,9 +1016,9 @@ SerialState=function(serialObj,state){
 		if(serialObj.s)
 			 state.segments=SerialSegments(serialObj.s,state)
 		if(serialObj.g)
-			 if(In(LettersGame,serialObj.g)){
-				 state.game=LettersGame[serialObj.g];
-				 state=Merge(state,Games[state.game])
+			 if(In(LettersGenre,serialObj.g)){
+				 state.genre=LettersGenre[serialObj.g];
+				 state=Merge(state,Genres[state.genre])
 			 }
 	return state;
 }
@@ -1039,7 +1034,7 @@ StateSerial=function(state){
 	var s=SegmentsSerial(state);
 	if(s)
 		Opts.S=s;
-	var g=GameSerial(state);
+	var g=GenreSerial(state);
 	if(g)
 		Opts.G=g;
 	return ParameterString(Opts);
@@ -1052,37 +1047,6 @@ StateSerial=function(state){
 //The source of truth: updating STATE must update everything.
 
 
-var Games={
-	"bonsai":{
-		letter:"b",
-		author:"Lucas Le Slo",
-		date:"2021-01-18",
-		visuals:{
-			solid:true
-		},
-		line:{
-			lineJoin:"miter",
-			cap:"square",
-			opacity:1,
-			lineWidth:4,
-			colour:"rgb(134,0,16)",
-			excessColour:"rgb(134,0,16)",
-			dash:[1,0],
-		},
-		grid:{
-			strokeColor:"rgb(77,77,77)",
-			dual:true,
-			border:0.5,
-			dash:[1,0],
-			scale:0.75,
-			nudge:0.25	
-		}
-	}
-}
-
-var LettersGame={};
-Keys(Games).map(name=>LettersGame[Games[name].letter]=name);
-var GameLetters=FlipKeysValues(LettersGame);
 
 ObtainStartingLevelState=function(){
 	var state={
@@ -1188,7 +1152,6 @@ DrawStateGrid=function(state){
 		gridOpts.cols-=1;
 		gridOpts.border=1;
 	}
-	console.log(gridOpts);
 	DrawSquaresGrid(gridOpts);
 }
 
