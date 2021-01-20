@@ -683,6 +683,8 @@ TrackStyleOpts=function(track,state,Opts){
 		var rule=Merge(state.rules,FruitRule(fruit));
 		wrong=FruitTrackStateUnRuled(fruit,track,state,rule);
 		//TODO global rules
+		if(Intersection(rule.simpleshapes,Shape1s).length)
+			rule.dangleallowed=true;
 		if(!wrong&&!rule.dangleallowed&&TrackDangled(track,state))
 			colour=HEXSaturater(0.5)(colour);
 	}
