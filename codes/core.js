@@ -5040,7 +5040,8 @@ ActionPatterns={
 	"rightclick":/ri?g?h?t?cli?c?k?/ig, //solve issue
 	"click":/((le?f?t?)|[^right]|^)cli?c?k?/ig,
 	"drag":/dra?g?/ig,
-	"move":/mo?ve?/ig
+	"move":/mo?ve?/ig,
+	"wheel":/whe?e?l/ig
 }
 
 ActionKeys=function(keystring){
@@ -6077,6 +6078,9 @@ var KeyExplanations={
 	"swipe-up":"swipe up",
 	"swipe-right":"swipe right",
 	"swipe-down":"swipe down",
+	"wheel-up":"wheel up",
+	"wheel-down":"wheel down",
+	"wheel-click":"wheel click",
 	"backsp":"backspace",
 	"mouseclick":"click",
 	"mouseclick2":"right click",
