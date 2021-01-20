@@ -36,8 +36,7 @@ FruitIcons={
 		path:"M 482 0 C 453 67 436 174 443 248 L 449 311 L 397 284 C 303 235 168 253 103 324 C 38 394 4 523 13 665 C 20 780 40 856 87 952 C 174 1131 338 1216 445 1138 C 462 1126 467 1126 489 1141 C 530 1168 626 1163 680 1130 C 780 1071 868 952 917 808 C 942 735 945 714 945 592 C 945 472 942 451 922 407 C 898 355 859 308 825 289 C 754 251 631 252 563 292 C 545 302 530 307 530 303 C 530 298 551 282 577 267 C 679 206 800 51 800 -21 L 800 -49 L 768 -32 C 708 -2 632 61 599 108 L 565 154 L 555 80 C 547 19 521 -48 506 -48 C 504 -48 493 -27 482 0 Z",
 		rule:{
 			loopallowed:true,
-			minconnected:2,
-			shape:"symmetries",
+			trackValidator:TrackSymmetrised,
 			description:"Every Apple belongs to a mirror or rotationally symmetric path.",
 			depiction:"W=2&L=a1a2a4a1&S=1DRD2DR"
 		}
@@ -49,7 +48,6 @@ FruitIcons={
 		shifty:0.2,
 		path:"M 26 5 L 28 4 L 34 20 Q 42 18 48 42 Q 57 44 63 67 Q 68 101 31 99 Q 4 95 7 63 Q 13 35 24 24 Q 26 21 31 19 Q 16 16 13 2 Q 23 4 31 18 L 26 5 Z",
 		rule:{
-			minconnected:2,
 			mintracks:2,
 			commonForm:"UnTranslateTrack",
 			description:"All Pear paths are exactly alike, and there is more than one.",
@@ -65,6 +63,7 @@ FruitIcons={
 			crossforbidden:true,
 			minconnectable:2,
 			maxconnected:1,
+			minconnected:1,
 			description:"Every Blueberry is connectable with at least one other (as if a path were drawn).",
 			depiction:"W=2&L=b0b6b2&S=1DD"
 		}
@@ -76,7 +75,6 @@ FruitIcons={
 		shifty:0.1,
 		path:"M 526 17 L 497 30 L 499 125 C 503 296 454 446 366 541 L 320 590 L 274 575 C 184 545 76 594 28 686 C -4 746 -3 843 31 903 C 81 994 177 1038 271 1013 C 331 997 404 924 420 863 C 436 805 427 721 401 685 L 381 656 L 431 603 C 513 515 571 375 586 226 C 593 164 593 163 612 180 C 647 212 720 330 745 396 C 758 432 771 485 772 515 L 775 568 L 740 566 C 641 559 555 610 514 697 C 471 789 491 893 564 961 C 658 1048 779 1041 862 944 C 928 867 936 764 884 675 C 864 641 859 622 864 595 C 872 541 853 431 822 349 C 784 253 730 172 648 90 C 611 53 580 18 580 13 C 580 0 562 2 526 17 Z",
 		rule:{
-			minconnected:2,
 			maxconnected:2,
 			description:"Cherries connect only in pairs (not in a loop).",
 			depiction:"W=2&L=c0c2c4c2&S=0RR6RR"
@@ -89,7 +87,6 @@ FruitIcons={
 		path:"M 172 3 C 74 22 2 105 2 199 C 3 228 11 263 19 263 C 21 263 27 267 32 272 C 38 278 40 279 40 276 C 40 260 64 255 76 269 C 94 291 70 315 48 297 C 40 291 40 291 40 297 C 40 304 49 311 58 311 C 65 311 80 325 80 332 C 80 336 108 349 131 355 C 236 381 357 314 386 213 C 392 191 401 111 397 108 C 396 106 394 98 394 90 C 394 79 393 74 389 71 C 385 68 383 64 383 62 C 383 59 379 55 375 53 C 370 51 366 46 365 43 C 364 40 361 37 358 37 C 355 37 349 34 344 31 C 336 25 298 14 249 4 C 225 -0 191 -1 172 3",
 		rule:{
 			loopallowed:true,
-			minconnected:2,
 			symbolshapes:Shape3s,
 			simpleshapes:Shape2s,
 			description:"Paths branch, as T-junctions, only at every Coconut. No branch returns to its origin.",
@@ -124,7 +121,6 @@ FruitIcons={
 		rule:{
 			loopallowed:true,
 			looprequired:true,
-			minconnected:2,
 			description:"Melons belong to closed loops (over 1 melon per loop).",
 			depiction:"W=2&L=c0c2c4c2&S=0RR6RR"
 		}
@@ -149,7 +145,6 @@ FruitIcons={
 		rule:{
 			loopallowed:true,
 			looprequired:true,
-			minconnected:2,
 			symbolshapes:Shape2Straights,
 			simpleshapes:Shape2Corners,
 			description:"Paths cross Blackberries straight and always turn elsewhere.",
@@ -164,6 +159,7 @@ FruitIcons={
 		rule:{
 			crossforbidden:true,
 			maxconnected:1,
+			minconnected:1,
 			description:"No path passes through a Lemon.",
 			depiction:"L=l4&S=3RR"
 		}
@@ -176,6 +172,7 @@ FruitIcons={
 		rule:{
 			crossforbidden:true,
 			maxconnected:1,
+			minconnected:1,
 			maxconnectable:1,
 			description:"No Orange is connectable with another (no path could be drawn).",
 			depiction:"W=2&L=o0o6o2&S=1DD"
@@ -635,8 +632,9 @@ FruitNumber=function(fruit,state){
 }
 
 
-FruitTrackStateUnRuled=function(fruit,track,state){
-	var rule=FruitRule(fruit);
+FruitTrackStateUnRuled=function(fruit,track,state,rule){
+	if(!rule)
+		var rule=Merge(state.rules,FruitRule(fruit));
 	var wrong=false;
 	if(!wrong&&rule.crossforbidden)
 		wrong=true;
@@ -682,10 +680,10 @@ TrackStyleOpts=function(track,state,Opts){
 	else{
 		var fruit=First(fruits);
 		colour=FruitIcons[fruit].colour;
-		wrong=FruitTrackStateUnRuled(fruit,track,state);
-		// if(!wrong&&GlobalRulesViolated(track,fruit,state))
-		// 	wrong=true
-		if(!wrong&&TrackDangled(track,state))
+		var rule=Merge(state.rules,FruitRule(fruit));
+		wrong=FruitTrackStateUnRuled(fruit,track,state,rule);
+		//TODO global rules
+		if(!wrong&&!rule.dangleallowed&&TrackDangled(track,state))
 			colour=HEXSaturater(0.5)(colour);
 	}
 
@@ -1150,6 +1148,14 @@ ObtainStartingLevelState=function(){
 		segments:[],
 		tracks:[],
 		crosses:{},
+
+		//global rules
+		rules:{
+			minconnected:2,
+			branchallowed:false,
+			loopallowed:false,
+			dangleallowed:false
+		},
 
 		//Interaction
 		mode:{
