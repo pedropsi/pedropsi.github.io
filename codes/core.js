@@ -894,15 +894,15 @@ JoinObjects=function(O1,O2){
 	return O;
 }
 
-BiJoinSAO=function(SAO1,SAO2){
-	if(IsString(SAO1)&&IsString(SAO2))
-		return SAO1+SAO2;
-	else if(IsObject(SAO1)&&IsObject(SAO2))
-		return JoinObjects(SAO1,SAO2);
-	else if(IsArray(SAO1)&&IsArray(SAO2))
-		return SAO1.concat(SAO2);
+BiJoinAO=function(AO1,AO2){
+	if(IsString(AO1)&&IsString(AO2))
+		return AO1+AO2;
+	if(IsObject(AO1)&&IsObject(AO2))
+		return JoinObjects(AO1,AO2);
+	else if(IsArray(AO1)&&IsArray(AO2))
+		return AO1.concat(AO2);
 	else
-		return SAO2; //overwrites if joining impossible
+		return AO2; //overwrites if joining impossible
 }
 
 BiJoin=function(AO1,AO2){
@@ -910,11 +910,42 @@ BiJoin=function(AO1,AO2){
 		return AO1;
 	if(!AO1)
 		return AO2;
-	return BiJoinSAO(AO1,AO2);
+	return BiJoinAO(AO1,AO2);
 }
 
 Join=ArgumentExtender(BiJoin);
 
+
+
+MergeObjects=function(O1,O2){
+	var O={...O1};
+	Keys(O2).map(
+		function(k){
+			if(!O1[k])
+				O[k]=O2[k]
+			else
+				O[k]=BiMergeAO(O1[k],O2[k]) //overwrites if joining impossible
+		}
+	)
+	return O;
+}
+
+BiMergeAO=function(AO1,AO2){
+	if(IsObject(AO1)&&IsObject(AO2))
+		return MergeObjects(AO1,AO2);
+	else
+		return AO2; //overwrites if merging impossible
+}
+
+BiMerge=function(AO1,AO2){
+	if(!AO2)
+		return AO1;
+	if(!AO1)
+		return AO2;
+	return BiMergeAO(AO1,AO2);
+}
+
+Merge=ArgumentExtender(BiMerge);
 
 //Permutations of a set (enforces uniqueness or sort)
 // Permutations=function(array){
