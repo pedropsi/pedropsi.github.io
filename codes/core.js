@@ -4519,6 +4519,31 @@ AttendDrag=function(Actions,target){
 	Attend("touchstart",Starter,target);
 };
 
+// Wheel
+ 
+
+AttendWheel=function(Actions,target){
+	if(!Actions.WheelUpper&&!Actions.WheelDowner)
+		return;
+	var WheelUpper=Actions.WheelUpper||Identity;
+	var WheelDowner=Actions.WheelDowner||Identity;
+	var WheelLefter=Actions.WheelLefter||Identity;
+	var WheelRighter=Actions.WheelRighter||Identity;
+	function Wheeler(event) {
+		event.preventDefault();
+		if(event.deltaY>0)
+			return WheelDowner();
+		if(event.deltaY<0)
+			return WheelUpper();
+		if(event.deltaX>0)
+			return WheelRighter();
+		else if(event.deltaX<0)
+			return WheelLefter();
+	}
+	Attend("wheel",Wheeler,target);
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // Data submission in forms
 
