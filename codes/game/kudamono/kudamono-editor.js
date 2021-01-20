@@ -14,6 +14,18 @@ LoaderInFolder("codes/game/kudamono/")("genres.js")
 */
 
 ///////////////////////////////////////////////////////////////////////////////
+//Line Shapes
+
+var Shape1s=["L","U","R","D"];
+var Shape2Straights=["LR","UD"];
+var Shape2Corners=["LU","UR","RD","LD"];
+var Shape2s=Join(Shape2Straights,Shape2Corners);
+var Shape3s=["LUR","URD","LRD","LUD"];
+var Shape4s=["LURD"];
+var ShapeBranches=Join(Shape3s,Shape4s);
+
+
+///////////////////////////////////////////////////////////////////////////////
 //Fruits
 FruitIcons={
 	"apple":{
@@ -78,12 +90,10 @@ FruitIcons={
 		rule:{
 			loopallowed:true,
 			minconnected:2,
-			shapesatsymbol:["LUR","URD","RDL","DLU"],
+			symbolshapes:Shape3s,
+			simpleshapes:Shape2s,
 			description:"Paths branch, as T-junctions, only at every Coconut. No branch returns to its origin.",
 			depiction:"W=2&L=q3q2&S=1URDRDDLLU3D",//TODO
-
-			branchallowed:true,
-			branchspawns:1,
 			branchloop:false
 		}
 	},
@@ -95,13 +105,13 @@ FruitIcons={
 		path:"M 186 11 C 173 22 172 24 174 42 L 176 62 L 148 67 C 58 82 0 117 0 155 C 0 200 62 205 144 166 C 173 152 175 151 180 159 C 185 166 183 167 159 175 C 59 209 1 261 21 299 C 33 320 74 326 105 310 C 117 303 117 304 97 329 C 29 414 76 489 153 418 C 161 410 164 409 166 413 C 186 481 205 511 233 516 C 288 526 293 452 244 347 L 228 313 L 258 344 C 304 393 344 406 365 381 C 391 351 358 293 278 230 L 263 219 L 290 231 C 351 260 397 246 389 201 C 383 171 323 131 253 109 C 237 104 223 98 222 94 C 219 87 220 87 239 95 C 350 141 440 110 380 45 C 349 12 213 -12 186 11",
 		rule:{
 			minconnected:Infinity,
-			shapesatsymbol:["L","U","R","D"],
-			shapesnosymbol:["LR","UD","LUR","URD","RDL","DLU"],
+			symbolshapes:Shape1s,
+			simpleshapes:Join(Shape2Straights,Shape3s),
 			description:"The first two Dates connect via a straight line. Non-endpoints may spawn up to one straight branch ending at a Date.",
 			depiction:"W=2&L=d1d4d1d2&S=1RDRUD",//TODO
-
-			branchallowed:true,
-			branchstraight:true
+			
+			branchstraight:true,
+			specialstartbranch:true
 		}
 	},
 	"melon":{
@@ -140,8 +150,8 @@ FruitIcons={
 			loopallowed:true,
 			looprequired:true,
 			minconnected:2,
-			shapesatsymbol:["LR","UD"],
-			shapesnosymbol:["LU","UR","RD","DL"],
+			symbolshapes:Shape2Straights,
+			simpleshapes:Shape2Corners,
 			description:"Paths cross Blackberries straight and always turn elsewhere.",
 			depiction:"W=2&L=k3k4&S=1URRDDLUL"
 		}
@@ -255,11 +265,16 @@ DeleteSegmentTrack=function(segment,track){
 
 SegmentContiguousTrackSegments=function(segment,track){
 	var intrack=DeleteSegmentTrack(segment,track);
-	return Join(...SegmentPoints(segment).map(point=>PointContainedSegments(point,intrack)))
+	return Join(...SegmentPoints(segment).map(point=>PointContainedTrackSegments(point,intrack)))
 }
 
-PointContainedSegments=function(point,track){
+PointContainedTrackSegments=function(point,track){
 	return track.filter(seg=>In(SegmentPoints(seg),point));
+}
+
+PointContainedTracksSegments=function(point,tracks){
+	var pointsets=tracks.map(track=>PointContainedTrackSegments(point,track));
+	return Union(...pointsets);
 }
 
 TrackEndsegments=function(track){
@@ -280,7 +295,7 @@ TrackDangled=function(track,state){
 }
 
 TrackBranchpoints=function(track){
-	return TrackPoints(track).filter(point=>PointContainedSegments(point,track).length>=3);
+	return TrackPoints(track).filter(point=>PointContainedTrackSegments(point,track).length>=3);
 }
 
 TrackLooped=function(track){
@@ -558,6 +573,40 @@ FuseFollowedSegment=function(segment1,segment2){
 		return s;
 }
 
+var DirectionSort=Sorter(d=>Keys(LetterDirections).findIndex(D=>D===d))
+
+PointStateShape=function(point,state){
+	var segments=PointContainedTracksSegments(point,state.tracks);
+	if(!segments||!segments.length){
+		console.log(point,state.tracks)
+		return "";
+	}
+	var directions=segments.map(s=>TranslateSegment(s,-1*point[0],-1*point[1]));
+		directions=directions.map(s=>First(Remove(s,[0,0])));
+		directions=directions.map(DirectionCode);
+	return DirectionSort(directions).join("");
+}
+
+FruitStatePoints=function(fruit,state){
+	return state.level[fruit];
+}
+
+FruitTrackStatePoints=function(fruit,track,state){
+	return FruitStatePoints(fruit,state).filter(point=>PointTrackContained(point,track));
+}
+
+
+FruitStateShapes=function(fruit,state){
+	return FruitPoints(fruit,state).map(point=>PointStateShape(point,state));
+}
+
+FruitTrackStateShapes=function(fruit,track,state){
+	return FruitTrackStatePoints(fruit,track,state).map(point=>PointStateShape(point,state));
+}
+
+UnFruitTrackStateShapes=function(fruit,track,state){
+	return Complement(TrackPoints(track),FruitTrackStatePoints(fruit,track,state)).map(point=>PointStateShape(point,state));
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -586,6 +635,39 @@ FruitNumber=function(fruit,state){
 }
 
 
+FruitTrackStateUnRuled=function(fruit,track,state){
+	var rule=FruitRule(fruit);
+	var wrong=false;
+	if(!wrong&&rule.crossforbidden)
+		wrong=true;
+
+	if(!wrong&&rule.minconnected||rule.maxconnected){
+		var min=rule.minconnected;
+		if(min===Infinity)
+			min=FruitNumber(fruit,state);
+		var n=TrackFruitNumber(track,fruit,state);
+		wrong=(n>rule.maxconnected||n<min)
+	}
+	if(!wrong&&rule.symbolshapes){
+		wrong=Complement(FruitTrackStateShapes(fruit,track,state),rule.symbolshapes).length>0;
+		rule.branchallowed=rule.branchallowed||Intersection(rule.symbolshapes,ShapeBranches).length>0;
+	}
+	if(!wrong&&rule.simpleshapes){
+		wrong=Complement(UnFruitTrackStateShapes(fruit,track,state),rule.simpleshapes).length>0;
+		rule.branchallowed=rule.branchallowed||Intersection(rule.simpleshapes,ShapeBranches).length>0;
+	}
+	if(!wrong&&!rule.loopallowed&&TrackLooped(track))
+		wrong=true;
+		
+	if(!wrong&&rule.looprequired&&!TrackLooped(track))
+		wrong=true;
+		
+	if(!wrong&&!rule.branchallowed&&TrackBranched(track))
+		wrong=true;
+		
+	return wrong;
+}
+
 TrackStyleOpts=function(track,state,Opts){
 	var fruits=TrackFruits(track,state);
 
@@ -600,28 +682,9 @@ TrackStyleOpts=function(track,state,Opts){
 	else{
 		var fruit=First(fruits);
 		colour=FruitIcons[fruit].colour;
-		var rule=FruitRule(fruit);
-
-		if(!wrong&&rule.crossforbidden)
-			wrong=true;
-
-		if(!wrong&&rule.minconnected||rule.maxconnected){
-			var min=rule.minconnected;
-			if(min===Infinity)
-				min=FruitNumber(fruit,state);
-			var n=TrackFruitNumber(track,fruit,state);
-			wrong=(n>rule.maxconnected||n<min)
-		}
-
-		if(!wrong&&!rule.loopallowed&&TrackLooped(track))
-			wrong=true;
-
-		if(!wrong&&rule.looprequired&&!TrackLooped(track))
-			wrong=true;
-			
-		if(!wrong&&!rule.branchallowed&&TrackBranched(track))
-			wrong=true;
-
+		wrong=FruitTrackStateUnRuled(fruit,track,state);
+		// if(!wrong&&GlobalRulesViolated(track,fruit,state))
+		// 	wrong=true
 		if(!wrong&&TrackDangled(track,state))
 			colour=HEXSaturater(0.5)(colour);
 	}
@@ -661,6 +724,7 @@ DrawTrack=function(track,state,Opts){
 	var trackStyleOpts=TrackStyleOpts(track,state,Opts);
 	var track=track.filter(segment=>SegmentValid(segment,state));
 		track=UnDiscretiseTrack(track);
+		
 	track.map(segment=>DrawSegment({
 		px0:segment[0][0],
 		px1:segment[1][0],
