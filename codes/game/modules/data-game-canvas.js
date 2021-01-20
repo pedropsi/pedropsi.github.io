@@ -142,6 +142,8 @@ DrawGrid=function(opts){
 	var s=opts.lineScale||4;
 
 	var dash=[2*s,2*s];
+	if(opts.dash)
+		dash=Times(opts.dash,s);
 	var lineWidth=s/4;
 	DrawSegmentLine({...opts,vertical:true,dash:dash,lineWidth:lineWidth});
 	DrawSegmentLine({...opts,horizontal:true,dash:dash,lineWidth:lineWidth});
@@ -160,7 +162,14 @@ GridExtremes=function(opts){
 	var cols=opts.cols;
 	if(typeof opts.border==="undefined")
 		opts.border=1;
-	var b=opts.border*2;
+	
+	var bx=opts.border*2
+	if(typeof opts.bx!=="undefined")
+		var bx=opts.bx*2;
+
+	var by=opts.border*2;
+	if(typeof opts.by!=="undefined")
+		var by=opts.by*2;
 
 	if(typeof opts.canvasWidth==="undefined")
 		opts.canvasWidth=Width(opts.target);
@@ -171,9 +180,9 @@ GridExtremes=function(opts){
 	var width=opts.canvasWidth;
 	var height=opts.canvasHeight;
 
-	var square=height/(rows+b);
-	if(width/(cols+b)<square)
-		square=width/(cols+b);
+	var square=height/(rows+by);
+	if(width/(cols+bx)<square)
+		square=width/(cols+bx);
 
 	var	x0=(width/2-square*cols/2);
 	var	y0=(height/2-square*rows/2);

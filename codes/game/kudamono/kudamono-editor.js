@@ -169,6 +169,12 @@ FruitIcons={
 			description:"No Orange is connectable with another (no path could be drawn).",
 			depiction:"W=2&L=o0o6o2&S=1DD"
 		}
+	},
+	"flower":{
+		letter:"w",
+		colour:"rgb(153,217,234)",
+		viewBox:"0 0 600 600",
+		path:"M 181 1 C 143 9 116 43 116 83 C 116 95 116 97 115 97 C 101 91 74 89 60 94 C -19 119 -19 233 60 256 L 66 258 62 265 C 50 285 48 312 55 334 C 75 392 152 411 194 367 L 201 360 203 363 C 207 368 219 376 228 380 C 301 414 375 339 339 266 C 337 261 335 257 335 257 C 335 257 338 256 342 255 C 395 240 417 172 384 126 C 363 97 324 84 291 94 L 283 97 283 85 C 285 31 234 -10 181 1 Z M 200 167 C 216 167 218 166 225 164 L 232 161 232 176 C 232 192 234 201 241 214 L 245 222 238 224 C 224 229 210 238 202 247 L 198 252 194 248 C 187 239 173 231 160 227 C 152 224 152 224 156 218 C 164 205 168 189 167 172 L 166 161 175 164 C 182 166 184 167 200 167 Z",
 	}
 }
 
@@ -640,12 +646,17 @@ TrackStyleOpts=function(track,state,Opts){
 			dash=Times(s,[5,5]);
 	}
 	
-	return {
+	var opts={
 		strokeColor:CompelRGBA(colour,0.5),
 		dash:dash,
 		lineCap:lineCap,
 		lineWidth:5*s,
 	}
+
+	if(state.line.lineWidth)
+		opts.lineWidth=state.line.lineWidth;
+
+	return opts
 
 }
 
@@ -948,6 +959,12 @@ SegmentsSerial=function(state){
 		return serials.join("");
 }
 
+GameSerial=function(state){
+	if(!state.game||!In(GameLetters,state.game))
+		return "";
+	return GameLetters[state.game];
+}
+
 PointTrackSerial=function(pointtrack){
 	return String(pointtrack[0])+TrackDirectionSerial(pointtrack[1]);
 }
@@ -1002,7 +1019,12 @@ SerialState=function(serialObj,state){
 		if(serialObj.l)
 			state.level=SerialLevel(serialObj.l,state);
 		if(serialObj.s)
-		 	state.segments=SerialSegments(serialObj.s,state)
+			 state.segments=SerialSegments(serialObj.s,state)
+		if(serialObj.g)
+			 if(In(LettersGame,serialObj.g)){
+				 state.game=LettersGame[serialObj.g];
+				 state=Merge(state,Games[state.game])
+			 }
 	return state;
 }
 
@@ -1011,12 +1033,15 @@ StateSerial=function(state){
 		Opts.W=state.W;
 	if(state.H!==state.W)
 		Opts.H=state.H;
-		var l=LevelSerial(state);
-		if(l)
-			Opts.L=l;
-		var s=SegmentsSerial(state);
-		if(s)
-			Opts.S=s;
+	var l=LevelSerial(state);
+	if(l)
+		Opts.L=l;
+	var s=SegmentsSerial(state);
+	if(s)
+		Opts.S=s;
+	var g=GameSerial(state);
+	if(g)
+		Opts.G=g;
 	return ParameterString(Opts);
 }
 
@@ -1026,6 +1051,38 @@ StateSerial=function(state){
 //a friendly representation of the board state.
 //The source of truth: updating STATE must update everything.
 
+
+var Games={
+	"bonsai":{
+		letter:"b",
+		author:"Lucas Le Slo",
+		date:"2021-01-18",
+		visuals:{
+			solid:true
+		},
+		line:{
+			lineJoin:"miter",
+			cap:"square",
+			opacity:1,
+			lineWidth:4,
+			colour:"rgb(134,0,16)",
+			excessColour:"rgb(134,0,16)",
+			dash:[1,0],
+		},
+		grid:{
+			strokeColor:"rgb(77,77,77)",
+			dual:true,
+			border:0.5,
+			dash:[1,0],
+			scale:0.75,
+			nudge:0.25	
+		}
+	}
+}
+
+var LettersGame={};
+Keys(Games).map(name=>LettersGame[Games[name].letter]=name);
+var GameLetters=FlipKeysValues(LettersGame);
 
 ObtainStartingLevelState=function(){
 	var state={
@@ -1042,7 +1099,7 @@ ObtainStartingLevelState=function(){
 			opacity:0.5,
 			lineWidth:10,
 			cap:"round",
-			corners:"round",
+			lineJoin:"round",
 			colour:"rgba(155,155,155,0.5)",		//default line colour
 			excessColour:"#000000",				//path colour, too many fruit
 			deficitColour:"#CCCCCC" 			//path colour, zero		fruit
@@ -1054,7 +1111,8 @@ ObtainStartingLevelState=function(){
 			dash:[6,12],						//dashing of grid lines
 			border:0.5,							//how many squares to add to the border (to each of the shortest sides)
 			scale:0.95,							//fruit scale (how large)
-			nudge:0.3							//fruit nudge (small adjustments to position)
+			nudge:0.3,							//fruit nudge (small adjustments to position)
+			dual:false							//disalign squares and grid
 		},	
 
 		//Puzzle
@@ -1085,14 +1143,14 @@ ObtainStartingLevelState=function(){
 		W:7,
 		H:7,
 		level:{
-			"apple":[[1,1],[5,5]],
-			"pear":[[3,3]],
-			"cherry":[[2,2],[1,4]],
-			"blueberry":[[3,1]],
-			"grape":[[5,1],[1,2]],
-			"lemon":[[6,1],[6,2]],
-			"melon":[[4,4],[3,4]],
-			"orange":[[2,1],[2,5]]
+			// "apple":[[1,1],[5,5]],
+			// "pear":[[3,3]],
+			// "cherry":[[2,2],[1,4]],
+			// "blueberry":[[3,1]],
+			// "grape":[[5,1],[1,2]],
+			// "lemon":[[6,1],[6,2]],
+			// "melon":[[4,4],[3,4]],
+			// "orange":[[2,1],[2,5]]
 		},
 		segments:[
 			// [[0,0],[0,1]],
@@ -1125,6 +1183,12 @@ DrawStateGrid=function(state){
 		rows:state.H,
 		cols:state.W
 	}
+	if(state.grid.dual){
+		gridOpts.rows-=1;
+		gridOpts.cols-=1;
+		gridOpts.border=1;
+	}
+	console.log(gridOpts);
 	DrawSquaresGrid(gridOpts);
 }
 
