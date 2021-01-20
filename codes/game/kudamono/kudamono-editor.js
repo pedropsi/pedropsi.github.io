@@ -1434,8 +1434,12 @@ XYSegmentRemove=function(segment){
 	STATE.segments=Remove(STATE.segments,segment);
 }
 
+DragActionAltStarter=function(x,y){
+	STATE.mode.edit=false;
+	DragActionStarter(x,y);
+}
 
-function DragActionStarter(x,y){
+DragActionStarter=function(x,y){
 	var xy=CanvasPoint(x,y,STATE);
 	if(!PointValid(xy,STATE))
 		return;//TODO OTHER OPTIONS
@@ -1447,7 +1451,7 @@ function DragActionStarter(x,y){
 		DrawState(STATE);
 	}
 }
-function DragActionContinuer(x,y){
+DragActionContinuer=function(x,y){
 	var xy=CanvasPoint(x,y,STATE);
 	if(!PointValid(xy,STATE))
 		return;
@@ -1472,7 +1476,7 @@ function DragActionContinuer(x,y){
 	}
 
 }
-function DragActionEnder(x,y){
+DragActionEnder=function(x,y){
 	STATE.mode.dragging=false;
 	var selected=STATE.mode.selection||[];
 	var segments=PathTrack(selected);
@@ -1596,10 +1600,36 @@ Keys(FruitIcons).map(FruitSetter);
 
 var DragActions={
 	Starter:DragActionStarter,
-	//AltStarter:DragActionAltStarter,
+	AltStarter:DragActionAltStarter,
 	Executer:DragActionContinuer,
 	Ender:DragActionEnder
 }
+
+CycleStateSymbol=function(state,n){
+	var state=Clone(state);
+	if(!n)
+		var n=1;
+	if(!state.mode.edit)
+		state.mode.edit=true;
+	var symbols=Keys(FruitIcons);
+	if(!state.mode.symbol)
+		state.mode.symbol=First(symbols);
+	else{
+		symbols=CycleSort(symbols,a=>a===state.mode.symbol)
+		state.mode.symbol=symbols[(symbols.length+n)%symbols.length];
+	}
+	return state
+}
+
+var WheelActions={
+	WheelUpper:function(){
+		STATE=CycleStateSymbol(STATE,-1);
+		UpdateState();},
+	WheelDowner:function(){
+		STATE=CycleStateSymbol(STATE,1);
+		UpdateState();}
+}
+
 
 CanvasResize=function(){
 	var e=GetElement(STATE.target);
@@ -1622,7 +1652,8 @@ InitialiseKudamono=function(){
 	</div>`,"body");
 	CanvasResize();
 	AttendDrag(DragActions,"canvas");
-	Attend('resize',CanvasResize)
+	AttendWheel(WheelActions,"canvas",100);
+	Attend('resize',CanvasResize);
 	Keybind(KeyboardActions,STATE.target);
 	ResumeCapturingKeys(ComboKeyPressHandler);
 	UpdateState();
