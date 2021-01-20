@@ -1617,7 +1617,7 @@ CycleStateSymbol=function(state,n){
 		var n=1;
 	if(!state.mode.edit)
 		state.mode.edit=true;
-	var symbols=Keys(FruitIcons);
+	var symbols=Sort(Keys(FruitIcons));
 	if(!state.mode.symbol)
 		state.mode.symbol=First(symbols);
 	else{
