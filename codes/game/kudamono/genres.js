@@ -1,9 +1,13 @@
 
 var Genres={
 	"bonsai":{
-		letter:"bonsai",
+		letter:"b",
+		genre:"bonsai",
 		author:"Lucas Le Slo",
 		date:"2021-01-18",
+		examples:[
+			
+		],
 		visuals:{
 			solid:true
 		},
@@ -56,7 +60,8 @@ var Genres={
 		}
 	},
 	"subway":{
-		letter:"subway",
+		letter:"s",
+		genre:"subway",
 		author:"Portponky",
 		date:"2020-12-29",
 		line:{
@@ -117,5 +122,4 @@ var LettersGenre={};
 Keys(Genres).map(name=>LettersGenre[Genres[name].letter]=name);
 var GenreLetters=FlipKeysValues(LettersGenre);
 
-Shout("kudamono/genres")
-console.log("g")
+Shout("kudamono-genres")

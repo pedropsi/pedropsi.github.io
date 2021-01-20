@@ -3,15 +3,11 @@
 //All rights reserved.
 ///////////////////////////////////////////////////////////////////////////////
 
-var sources=["data-game-colours.js","data-game-canvas.js","data-game-undo.js"];
+var sources=["data-game-colours","data-game-canvas","data-game-undo"];
 sources.map(LoaderInFolder("codes/game/modules"));
-LoaderInFolder("codes/game/kudamono/")("genres.js")
+if(PageSearch("G"))
+	LoaderInFolder("codes/game/kudamono")("genres.js")
 
-/*
-	etc:"W=8&L=g0d1o1a3q1q1d5q3q1q1d2d1l4q2g1c1o2q4g3c1a1c2g4c3m9p4b1m2p4p2p1g1m1m1b1p2p1&S=0DDDDRDLDDD1DDRR3UR2URDRDLLLDDRRURUDL7DDDL15RD13DLL14URRDLDLU6DR7DR",
-	etc2:"W=35&H=23&L=b37a43b67g1a4c2o3l4p3m3c210a32b25b1g3a5c5q150l21m10o24l1p6m8d2&S=37DDD2DLDRD1DDDRRUUU3RRDDDLL3URRDDD3URDRURDDD4URRDDDLLUU3URDDDRUUU3URRDDDLLUU20RDL3DD3DD7DD161URDDRURURDDLDLLDDLUUUU5URDDDDRRUUUURDDDDDLLLLUUUU5URRRRDDDDDLLLLURUUUL5URRRRDDDDDLULLDLUUUU6URDDDDDDDDDLUUUUUUUU27URDDDLUU4URRDDLLU94URRDLL70URRDRURDDDDDLULULDDLUUUU5URRRRDDDDDLLLLUUUU5URDRDRUURDDDDDLULULDDLUUUU5URRRRDDDDDLLLLUUUU27URRDDDLLUU10URRDDDLLUU113URDL",
-	etc3:"W=24&H=13&L=d16d5o1b1d11d10g3g2d11g15g2a10c1c2a1a25a2o2q12q28l15o1l27k13l12k1k2k13p15p12p15p12m3m26o3b1&S=16DDDRDRUU3DD3RRRRRRR1RRRRRRRRRRRRRRRRRRRRRR10D13R1DDRRUU40RRDDDDLL1DD44DD28UULLDDRRDD15UUURRURRD1RRRRRRRRRRR24DDD16URRDDLLU43UUR27UUR14URRDDLLU"
-*/
 
 ///////////////////////////////////////////////////////////////////////////////
 //Line Shapes
@@ -24,6 +20,30 @@ var Shape3s=["LUR","URD","LRD","LUD"];
 var Shape4s=["LURD"];
 var ShapeBranches=Join(Shape3s,Shape4s);
 
+TrackSymmetrised=function(track){
+	return TrackHorizontallySymmetrised(track)||TrackVerticallySymmetrised(track)||TrackPointwiseSymmetrised(track);
+}
+
+TrackGeometricCentrePoint=function(track){
+	var points=TrackPoints(track);
+	return [Mean(PathXs(points)),Mean(PathYs(points))];
+}
+
+PathXs=function(points){return points.map(First)};
+PathYs=function(points){return points.map(Last)};
+
+TrackHorizontallySymmetrised=function(track){
+	var X=TrackGeometricCentrePoint(track)[0];
+	console.log(X);
+	var Lsegments=track.filter(segment=>PathXs(SegmentPoints(segment))).some(x=>x<X);
+	var Rsegments=track.filter(segment=>PathXs(SegmentPoints(segment))).some(x=>x>X);
+	var Mirrorer=function(point){
+		var d=X-point[0];
+		return [point[0]-2*d,point[1]];
+	}
+	var MirrorSegments=Rsegments.map(segment=>TransformSegment(segment,Mirrorer));
+	return Equal(Intersection(MirrorSegments,Lsegments),Lsegments)
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Fruits
@@ -180,6 +200,74 @@ FruitIcons={
 	}
 }
 
+var Kudamono={
+	genre:"kudamono",
+	author:"Pedro",
+	date:"2021-12-18",
+	examples:[
+		"W=8&L=g0d1o1a3q1q1d5q3q1q1d2d1l4q2g1c1o2q4g3c1a1c2g4c3m9p4b1m2p4p2p1g1m1m1b1p2p1&S=0DDDDRDLDDD1DDRR3UR2URDRDLLLDDRRURUDL7DDDL15RD13DLL14URRDLDLU6DR7DR",
+		"W=35&H=23&L=b37a43b67g1a4c2o3l4p3m3c210a32b25b1g3a5c5q150l21m10o24l1p6m8d2&S=37DDD2DLDRD1DDDRRUUU3RRDDDLL3URRDDD3URDRURDDD4URRDDDLLUU3URDDDRUUU3URRDDDLLUU20RDL3DD3DD7DD161URDDRURURDDLDLLDDLUUUU5URDDDDRRUUUURDDDDDLLLLUUUU5URRRRDDDDDLLLLURUUUL5URRRRDDDDDLULLDLUUUU6URDDDDDDDDDLUUUUUUUU27URDDDLUU4URRDDLLU94URRDLL70URRDRURDDDDDLULULDDLUUUU5URRRRDDDDDLLLLUUUU5URDRDRUURDDDDDLULULDDLUUUU5URRRRDDDDDLLLLUUUU27URRDDDLLUU10URRDDDLLUU113URDL",
+		"W=24&H=13&L=d16d5o1b1d11d10g3g2d11g15g2a10c1c2a1a25a2o2q12q28l15o1l27k13l12k1k2k13p15p12p15p12m3m26o3b1&S=16DDDRDRUU3DD3RRRRRRR1RRRRRRRRRRRRRRRRRRRRRR10D13R1DDRRUU40RRDDDDLL1DD44DD28UULLDDRRDD15UUURRURRD1RRRRRRRRRRR24DDD16URRDDLLU43UUR27UUR14URRDDLLU"
+	],
+	symbols:FruitIcons,
+	//visuals
+	target:"kudamono-canvas",
+	visuals:{
+		cursor:"pencil",
+		cursorsize:80,
+		monochrome:false,
+		solid:false,
+		skin:1								//fruit skin thickness
+	},
+	line:{
+		opacity:0.5,
+		lineWidth:10,
+		cap:"round",
+		lineJoin:"round",
+		colour:"rgba(155,155,155,0.5)",		//default line colour
+		excessColour:"#000000",				//path colour, too many fruit
+		deficitColour:"#CCCCCC" 			//path colour, zero		fruit
+	},
+	grid:{
+		strokeColor:"#BBBBBB",				//grid lines
+		fillColor:"#FFFFFF",				//background
+		lineWidth:2,						//width   of grid lines
+		dash:[6,12],						//dashing of grid lines
+		border:0.5,							//how many squares to add to the border (to each of the shortest sides)
+		scale:0.95,							//fruit scale (how large)
+		nudge:0.3,							//fruit nudge (small adjustments to position)
+		dual:false							//disalign squares and grid
+	},	
+
+	//Puzzle
+	W:2,
+	H:2,
+	level:{},
+	segments:[],
+	tracks:[],
+	crosses:{},
+
+	//global rules
+	rules:{
+		minconnected:2,
+		branchallowed:false,
+		loopallowed:false,
+		dangleallowed:false
+	},
+
+	symbolgroups:{},// multi-symbol lines, if allowed
+
+	//Interaction
+	mode:{
+		edit:false,					//true:adding fruits, false:solving
+		dragging:false,				//whether dragging
+		clearing:false,				//whether clearing fruits, lines, etc...
+		symbol:First(FruitIcons),	//current fruit to be added
+		selection:[],				//current points selected (accumulates)
+		error:false					//whether to display errors
+	}
+}
+
 MarkIcons={
 	"cross":{
 		letter:"x",
@@ -192,6 +280,10 @@ MarkIcons={
 		path:"M 4 5 L 5 6 L 6 5 L 5 4 Z",
 		colour:"rgb(155,155,155)"}
 }
+
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Path segments
@@ -309,8 +401,9 @@ TrackStartPoint=function(track){
 }
 
 UnTranslateTrack=function(track){
-	var minx=Min(TrackPoints(track).map(First));
-	var miny=Min(TrackPoints(track).map(Last));
+	var points=TrackPoints(track);
+	var minx=Min(PathXs(points));
+	var miny=Min(PathYs(track));
 	return TranslateTrack(track,-1*minx,-1*miny);
 }
 
@@ -320,6 +413,9 @@ TranslateTrack=function(track,x,y){
 
 TranslateSegment=function(segment,x,y){
 	return segment.map(point=>VectorPlus(point,[x,y]));
+}
+TransformSegment=function(segment,Transformer){
+	return segment.map(point=>Transformer(point));
 }
 
 SplitContiguousTracks=function(segments){
@@ -575,7 +671,6 @@ var DirectionSort=Sorter(d=>Keys(LetterDirections).findIndex(D=>D===d))
 PointStateShape=function(point,state){
 	var segments=PointContainedTracksSegments(point,state.tracks);
 	if(!segments||!segments.length){
-		console.log(point,state.tracks)
 		return "";
 	}
 	var directions=segments.map(s=>TranslateSegment(s,-1*point[0],-1*point[1]));
@@ -610,8 +705,8 @@ UnFruitTrackStateShapes=function(fruit,track,state){
 //Draw
 //draws the board
 
-FruitRule=function(fruit){
-	return FruitIcons[fruit].rule;
+FruitStateRule=function(fruit,state){
+	return state.symbols[fruit].rule;
 }
 
 TrackFruits=function(track,state){
@@ -634,7 +729,7 @@ FruitNumber=function(fruit,state){
 
 FruitTrackStateUnRuled=function(fruit,track,state,rule){
 	if(!rule)
-		var rule=Merge(state.rules,FruitRule(fruit));
+		var rule=Merge(state.rules,FruitStateRule(fruit,state));
 	var wrong=false;
 	if(!wrong&&rule.crossforbidden)
 		wrong=true;
@@ -679,8 +774,8 @@ TrackStyleOpts=function(track,state,Opts){
 	}
 	else{
 		var fruit=First(fruits);
-		colour=FruitIcons[fruit].colour;
-		var rule=Merge(state.rules,FruitRule(fruit));
+		colour=state.symbols[fruit].colour;
+		var rule=Merge(state.rules,FruitStateRule(fruit,state));
 		wrong=FruitTrackStateUnRuled(fruit,track,state,rule);
 		//TODO global rules
 		if(Intersection(rule.simpleshapes,Shape1s).length)
@@ -756,14 +851,14 @@ PositionValid=function(px,py,state){
 }
 
 DrawFruit=function(Opts,state){
-	if(!PositionValid(Opts.px,Opts.py,state)||!Opts.type)
+	if(!PositionValid(Opts.px,Opts.py,state)||!Opts.fruit)
 		return;
-	var type=Opts.type;
+	var fruit=Opts.fruit;
 	var colour=Opts.colour;
 	var Opts={
 		...Opts,
 		...state.grid,
-		...FruitIcons[type],
+		...state.symbols[fruit],
 		rows:state.H,
 		cols:state.W
 	};
@@ -805,9 +900,9 @@ DrawFruit=function(Opts,state){
 	DrawSVG(Opts);
 }
 
-DrawFruits=function(type,coordinates,Opts,state){
+DrawFruits=function(fruit,coordinates,Opts,state){
 	var Opts=Opts||{};
-	coordinates.map(xy=>DrawFruit({...Opts,type:type,px:xy[0],py:xy[1]},state));
+	coordinates.map(xy=>DrawFruit({...Opts,fruit:fruit,px:xy[0],py:xy[1]},state));
 
 }
 
@@ -830,8 +925,8 @@ ExportSerial=function(){
 	ClipboardCopy(PageURL(),"Copied this puzzle's URL to clipboard, for saving!")
 }
 
-FruitLetter=function(fruit){
-	return FruitIcons[fruit].letter.toLowerCase();
+FruitStateLetter=function(fruit,state){
+	return state.symbols[fruit].letter.toLowerCase();
 }
 
 
@@ -878,7 +973,7 @@ UnLinearise=function(n,H){
 LevelSerial=function(state){
 	if(!state.level||Keys(state.level).length<1)
 		return "";
-	var xyfruits=Keys(state.level).map(fruit=>state.level[fruit].map(xy=>[xy[0],xy[1],FruitLetter(fruit)]));
+	var xyfruits=Keys(state.level).map(fruit=>state.level[fruit].map(xy=>[xy[0],xy[1],FruitStateLetter(fruit,state)]));
 		xyfruits=Join(...xyfruits);
 		xyfruits=xyfruits.filter(fxy=>PointValid(fxy,state));
 
@@ -891,12 +986,6 @@ LevelSerial=function(state){
 }
 
 FruitSerialPattern=/(\w)(\d+)/g;
-
-LetterFruit=function(l){
-	var fruits=Keys(FruitIcons).filter(fruit=>FruitIcons[fruit].letter===l);
-	if(fruits.length)
-		return First(fruits);
-}
 
 AccumulateTokenCoords=function(tokendiffs,H){
 	var differences=tokendiffs.map(Last);
@@ -911,7 +1000,7 @@ SerialLevel=function(serial,state){
 	var fruitdiffs=fruitserials.map(s=>[s[0],Number(Rest(s))]);
 	var accumulated=AccumulateTokenCoords(fruitdiffs,state.H+1);
 	var level={};
-	Keys(FruitIcons).map(fruit=>(level[fruit]=accumulated.filter(a=>a[0]===FruitLetter(fruit)).map(Last)));
+	Keys(state.symbols).map(fruit=>(level[fruit]=accumulated.filter(a=>a[0]===FruitStateLetter(fruit,state)).map(Last)));
 	return level;
 }
 
@@ -1019,7 +1108,7 @@ SegmentsSerial=function(state){
 }
 
 GenreSerial=function(state){
-	if(!state.genre||!In(GenreLetters,state.genre))
+	if(typeof GenreLetters==="undefined"||!state.genre||!In(GenreLetters,state.genre))
 		return "";
 	return GenreLetters[state.genre];
 }
@@ -1079,7 +1168,7 @@ SerialState=function(serialObj,state){
 			state.level=SerialLevel(serialObj.l,state);
 		if(serialObj.s)
 			 state.segments=SerialSegments(serialObj.s,state)
-		if(serialObj.g)
+		if(typeof LettersGenre!=="undefined"&&serialObj.g)
 			 if(In(LettersGenre,serialObj.g)){
 				 state.genre=LettersGenre[serialObj.g];
 				 state=Merge(state,Genres[state.genre])
@@ -1103,111 +1192,6 @@ StateSerial=function(state){
 		Opts.G=g;
 	return ParameterString(Opts);
 }
-
-
-///////////////////////////////////////////////////////////////////////////////
-//State
-//a friendly representation of the board state.
-//The source of truth: updating STATE must update everything.
-
-
-
-ObtainStartingLevelState=function(){
-	var state={
-		//visuals
-		target:"kudamono-canvas",
-		visuals:{
-			cursor:"pencil",
-			cursorsize:80,
-			monochrome:false,
-			solid:false,
-			skin:1								//fruit skin thickness
-		},
-		line:{
-			opacity:0.5,
-			lineWidth:10,
-			cap:"round",
-			lineJoin:"round",
-			colour:"rgba(155,155,155,0.5)",		//default line colour
-			excessColour:"#000000",				//path colour, too many fruit
-			deficitColour:"#CCCCCC" 			//path colour, zero		fruit
-		},
-		grid:{
-			strokeColor:"#BBBBBB",				//grid lines
-			fillColor:"#FFFFFF",				//background
-			lineWidth:2,						//width   of grid lines
-			dash:[6,12],						//dashing of grid lines
-			border:0.5,							//how many squares to add to the border (to each of the shortest sides)
-			scale:0.95,							//fruit scale (how large)
-			nudge:0.3,							//fruit nudge (small adjustments to position)
-			dual:false							//disalign squares and grid
-		},	
-
-		//Puzzle
-		W:2,
-		H:2,
-		level:{},
-		segments:[],
-		tracks:[],
-		crosses:{},
-
-		//global rules
-		rules:{
-			minconnected:2,
-			branchallowed:false,
-			loopallowed:false,
-			dangleallowed:false
-		},
-
-		//Interaction
-		mode:{
-			edit:false,			//true:adding fruits, false:solving
-			dragging:false,		//whether dragging
-			clearing:false,		//whether clearing fruits, lines, etc...
-			symbol:"cherry",	//current fruit to be added
-			line:false,			//whether adding lines,
-			fruitline:false,	//which fruit the path connects to (defaults to none)
-			selection:[],		//current points selected (accumulates)
-			error:false			//whether to display errors
-		}
-	}
-	if(PageSearch("W")||PageSearch("H"))
-		state=SerialState(PageSearchObject(),state);
-	else
-	state={
-		...state,
-		W:7,
-		H:7,
-		level:{
-			// "apple":[[1,1],[5,5]],
-			// "pear":[[3,3]],
-			// "cherry":[[2,2],[1,4]],
-			// "blueberry":[[3,1]],
-			// "grape":[[5,1],[1,2]],
-			// "lemon":[[6,1],[6,2]],
-			// "melon":[[4,4],[3,4]],
-			// "orange":[[2,1],[2,5]]
-		},
-		segments:[
-			// [[0,0],[0,1]],
-			// [[0,1],[1,1]],
-			// [[2,2],[2,1]],
-			// [[2,1],[2,0]],
-			// [[2,0],[3,0]],
-			// [[4,1],[4,2]],
-			// [[4,2],[4,3]],
-			// [[4,3],[4,4]],
-			// [[0,3],[0,4]],
-			// [[0,3],[1,3]],
-			// [[1,4],[0,4]],
-			// [[1,3],[1,4]]
-		]
-	}
-	return state;
-}
-
-STATE=ObtainStartingLevelState();
-
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1276,12 +1260,13 @@ UpdateCursor=function(name){
 		STATE.visuals.cursor=name;
 		var cursor=name;
 		var opts={};
-		if(In(FruitIcons,name)){
-			cursor=FruitIcons[name];
+		var Icons=STATE.symbols;
+		if(In(Icons,name)){
+			cursor=Icons[name];
 			cursor=RescalePath({...cursor,scale:1,square:100},true);
 			cursor=DisplacePath({...cursor,px:10,py:10});
 			cursor=BuildSymbolIcon({...cursor,primitive:"cursor-triangle"});
-			opts.fill=FruitIcons[name].colour;
+			opts.fill=Icons[name].colour;
 		}
 		opts.width=STATE.visuals.cursorsize||80;
 		opts.height=STATE.visuals.cursorsize||80;
@@ -1322,43 +1307,43 @@ CanvasPoint=function(x,y,state){
 }
 
 
-CanvasBoxPosition=function(x,y,state){
-	xy=CanvasBoardPosition(x,y,state);
-	var x=FractionalPart(xy[0]/state.W);
-	var y=FractionalPart(xy[1]/state.H);
-	var s=1/4;//centre box width
-	if(x>s&&x<1-s&&y>s&&y<1-s)
-		return 0;
-	if(x>s){
-		if(y>s){
-			if(y<x)
-				return 1;
-			else
-				return 8;
-		}
-		else{
-			if(y<x-1)
-				return 3;
-			else
-				return 2;
-		}
-	}
-	else{
-		if(y>s){
-			if(y<x)
-				return 4;
-			else
-				return 5;
-		}
-		else{
-			if(y<x-1)
-				return 6;
-			else
-				return 7;
-		}
+// CanvasBoxPosition=function(x,y,state){
+// 	xy=CanvasBoardPosition(x,y,state);
+// 	var x=FractionalPart(xy[0]/state.W);
+// 	var y=FractionalPart(xy[1]/state.H);
+// 	var s=1/4;//centre box width
+// 	if(x>s&&x<1-s&&y>s&&y<1-s)
+// 		return 0;
+// 	if(x>s){
+// 		if(y>s){
+// 			if(y<x)
+// 				return 1;
+// 			else
+// 				return 8;
+// 		}
+// 		else{
+// 			if(y<x-1)
+// 				return 3;
+// 			else
+// 				return 2;
+// 		}
+// 	}
+// 	else{
+// 		if(y>s){
+// 			if(y<x)
+// 				return 4;
+// 			else
+// 				return 5;
+// 		}
+// 		else{
+// 			if(y<x-1)
+// 				return 6;
+// 			else
+// 				return 7;
+// 		}
 
-	}
-}
+// 	}
+// }
 
 
 XYFruit=function(xy,state){
@@ -1573,11 +1558,6 @@ var KeyboardActions={
 	"ctrl shift r":function(){STATE.level={};UpdateState();},
 	"ctrl alt r":function(){STATE.level={};STATE.segments=[];UpdateState();},
 
-	// "left":PathGrower(-1,0),
-	// "up":PathGrower(0,1),
-	// "right":PathGrower(1,0),
-	// "down":PathGrower(0,-1)
-
 	"ctrl z":function(){Undo()},
 	"ctrl shift z":function(){Redo()},
 	"backspace":function(){Undo()},
@@ -1596,14 +1576,12 @@ var ClearSegments=StateUpdater({segments:segments=>[]});
 var ClearFruit=StateUpdater({level:level=>{}});
 
 FruitSetter=function(fruit){
-	KeyboardActions[FruitIcons[fruit].letter]=function(){
+	KeyboardActions[STATE.symbols[fruit].letter]=function(){
 		STATE.mode.edit=true;
 		STATE.mode.symbol=fruit;
 		DrawCursor();
 	}
 }
-
-Keys(FruitIcons).map(FruitSetter);
 
 
 var DragActions={
@@ -1619,7 +1597,7 @@ CycleStateSymbol=function(state,n){
 		var n=1;
 	if(!state.mode.edit)
 		state.mode.edit=true;
-	var symbols=Sort(Keys(FruitIcons));
+	var symbols=Sort(Keys(state.symbols));
 	if(!state.mode.symbol)
 		state.mode.symbol=First(symbols);
 	else{
@@ -1647,7 +1625,29 @@ CanvasResize=function(){
 }
 
 
-InitialiseKudamono=function(){
+///////////////////////////////////////////////////////////////////////////////
+//State
+//a friendly representation of the board state.
+//The source of truth: updating STATE must update everything.
+
+ObtainStartingLevelState=function(){
+	var state=Kudamono;
+	if(PageSearch("W")||PageSearch("H"))
+		state=SerialState(PageSearchObject(),state);
+	else
+	state={
+		...state,
+		W:7,
+		H:7,
+		level:{},
+		segments:[]
+	}
+	return state;
+}
+
+STATE=ObtainStartingLevelState();
+
+InitialisePuzzle=function(){
 	PreAddElement(`
 	<div>
 		<canvas 
@@ -1659,11 +1659,14 @@ InitialiseKudamono=function(){
 		<div class="title">Kudamono</div>
 	</div>`,"body");
 	CanvasResize();
+
 	AttendDrag(DragActions,"canvas");
 	AttendWheel(WheelActions,"canvas",100);
 	Attend('resize',CanvasResize);
+	Keys(STATE.symbols).map(FruitSetter);
 	Keybind(KeyboardActions,STATE.target);
 	ResumeCapturingKeys(ComboKeyPressHandler);
+
 	UpdateState();
 	SetCursor(STATE.target,STATE.visuals.cursor);
 	setTimeout(()=>FocusElement(STATE.target),500)
@@ -1678,5 +1681,6 @@ HyperText("Kudamono/FruitShortcuts",()=>TableHTML({
 	}))
 
 
-if(PageSearch("W")||PageSearch("H"))
-	setTimeout(InitialiseKudamono,500)
+if(PageSearch("W")||PageSearch("H")){
+	HearAll(sources,InitialisePuzzle)
+}
