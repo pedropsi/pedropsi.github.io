@@ -4479,6 +4479,8 @@ ListenNoMoreNode=function(lobj){
 
 
 XYHandler=function(Action){
+	if(!Action)
+		return Identity;
 	return function(e){
 		e.preventDefault();
 		var el=GetElement(e.target);
@@ -4492,15 +4494,18 @@ XYHandler=function(Action){
 }
 
 AttendDrag=function(Actions,target){
-	if(!Actions.Starter&&!Actions.AltStarter)
+	if(!Actions||!Actions.Starter&&!Actions.AltStarter)
 		return;
+	var Actions=Clone(Actions);
 	var Starter=function(ev){
 		ev.preventDefault();
-		if(ev.which===1||ev.touches)
-			XYHandler(Actions.Starter)(ev);
+		if(ev.buttons>2)
+			XYHandler(Actions.MidStarter||Identity)(ev);
+		else if(ev.which===1||ev.touches)
+			XYHandler(Actions.Starter||Identity)(ev);
 		else
-			XYHandler(Actions.AltStarter)(ev);	
-
+			XYHandler(Actions.AltStarter||Identity)(ev);
+		
 		var Executer=XYHandler(Actions.Executer)||Identity;
 		Attend("mousemove",Executer,target);
 		Attend("touchmove",Executer,target);
@@ -4522,7 +4527,7 @@ AttendDrag=function(Actions,target){
 // Wheel
  
 
-AttendWheel=function(Actions,target){
+AttendWheel=function(Actions,target,delay){
 	if(!Actions.WheelUpper&&!Actions.WheelDowner)
 		return;
 	var WheelUpper=Actions.WheelUpper||Identity;
@@ -4530,15 +4535,22 @@ AttendWheel=function(Actions,target){
 	var WheelLefter=Actions.WheelLefter||Identity;
 	var WheelRighter=Actions.WheelRighter||Identity;
 	function Wheeler(event) {
-		event.preventDefault();
+		var Executer;
 		if(event.deltaY>0)
-			return WheelDowner();
-		if(event.deltaY<0)
-			return WheelUpper();
-		if(event.deltaX>0)
-			return WheelRighter();
+			Executer=WheelDowner;
+		else if(event.deltaY<0)
+			Executer=WheelUpper;
+		else if(event.deltaX>0)
+			Executer=WheelRighter;
 		else if(event.deltaX<0)
-			return WheelLefter();
+			Executer=WheelLefter;
+		if(Executer){
+			event.preventDefault();
+			if(delay)
+				Throttle(Executer,delay);
+			else
+				Executer();
+		}
 	}
 	Attend("wheel",Wheeler,target);
 }
