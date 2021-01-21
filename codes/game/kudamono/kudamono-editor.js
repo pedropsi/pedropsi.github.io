@@ -202,16 +202,8 @@ FruitIcons={
 	}
 }
 
-var Kudamono={
-	genre:"kudamono",
-	author:"Pedro",
-	date:"2021-12-18",
-	examples:[
-		"W=8&L=g0d1o1a3q1q1d5q3q1q1d2d1l4q2g1c1o2q4g3c1a1c2g4c3m9p4b1m2p4p2p1g1m1m1b1p2p1&S=0DDDDRDLDDD1DDRR3UR2URDRDLLLDDRRURUDL7DDDL15RD13DLL14URRDLDLU6DR7DR",
-		"W=35&H=23&L=b37a43b67g1a4c2o3l4p3m3c210a32b25b1g3a5c5q150l21m10o24l1p6m8d2&S=37DDD2DLDRD1DDDRRUUU3RRDDDLL3URRDDD3URDRURDDD4URRDDDLLUU3URDDDRUUU3URRDDDLLUU20RDL3DD3DD7DD161URDDRURURDDLDLLDDLUUUU5URDDDDRRUUUURDDDDDLLLLUUUU5URRRRDDDDDLLLLURUUUL5URRRRDDDDDLULLDLUUUU6URDDDDDDDDDLUUUUUUUU27URDDDLUU4URRDDLLU94URRDLL70URRDRURDDDDDLULULDDLUUUU5URRRRDDDDDLLLLUUUU5URDRDRUURDDDDDLULULDDLUUUU5URRRRDDDDDLLLLUUUU27URRDDDLLUU10URRDDDLLUU113URDL",
-		"W=24&H=13&L=d16d5o1b1d11d10g3g2d11g15g2a10c1c2a1a25a2o2q12q28l15o1l27k13l12k1k2k13p15p12p15p12m3m26o3b1&S=16DDDRDRUU3DD3RRRRRRR1RRRRRRRRRRRRRRRRRRRRRR10D13R1DDRRUU40RRDDDDLL1DD44DD28UULLDDRRDD15UUURRURRD1RRRRRRRRRRR24DDD16URRDDLLU43UUR27UUR14URRDDLLU"
-	],
-	symbols:FruitIcons,
+var BlankState={
+	
 	//visuals
 	target:"kudamono-canvas",
 	visuals:{
@@ -242,8 +234,8 @@ var Kudamono={
 	},	
 
 	//Puzzle
-	W:2,
-	H:2,
+	W:7,
+	H:7,
 	level:{},
 	segments:[],
 	tracks:[],
@@ -264,9 +256,24 @@ var Kudamono={
 		edit:false,					//true:adding fruits, false:solving
 		dragging:false,				//whether dragging
 		clearing:false,				//whether clearing fruits, lines, etc...
-		symbol:First(FruitIcons),	//current fruit to be added
 		selection:[],				//current points selected (accumulates)
 		error:false					//whether to display errors
+	}
+}
+
+var Kudamono={
+	genre:"kudamono",
+	author:"Pedro",
+	date:"2021-12-18",
+	examples:[
+		"W=8&L=g0d1o1a3q1q1d5q3q1q1d2d1l4q2g1c1o2q4g3c1a1c2g4c3m9p4b1m2p4p2p1g1m1m1b1p2p1&S=0DDDDRDLDDD1DDRR3UR2URDRDLLLDDRRURUDL7DDDL15RD13DLL14URRDLDLU6DR7DR",
+		"W=35&H=23&L=b37a43b67g1a4c2o3l4p3m3c210a32b25b1g3a5c5q150l21m10o24l1p6m8d2&S=37DDD2DLDRD1DDDRRUUU3RRDDDLL3URRDDD3URDRURDDD4URRDDDLLUU3URDDDRUUU3URRDDDLLUU20RDL3DD3DD7DD161URDDRURURDDLDLLDDLUUUU5URDDDDRRUUUURDDDDDLLLLUUUU5URRRRDDDDDLLLLURUUUL5URRRRDDDDDLULLDLUUUU6URDDDDDDDDDLUUUUUUUU27URDDDLUU4URRDDLLU94URRDLL70URRDRURDDDDDLULULDDLUUUU5URRRRDDDDDLLLLUUUU5URDRDRUURDDDDDLULULDDLUUUU5URRRRDDDDDLLLLUUUU27URRDDDLLUU10URRDDDLLUU113URDL",
+		"W=24&H=13&L=d16d5o1b1d11d10g3g2d11g15g2a10c1c2a1a25a2o2q12q28l15o1l27k13l12k1k2k13p15p12p15p12m3m26o3b1&S=16DDDRDRUU3DD3RRRRRRR1RRRRRRRRRRRRRRRRRRRRRR10D13R1DDRRUU40RRDDDDLL1DD44DD28UULLDDRRDD15UUURRURRD1RRRRRRRRRRR24DDD16URRDDLLU43UUR27UUR14URRDDLLU"
+	],
+	symbols:FruitIcons,
+	//visuals
+	mode:{
+		symbol:First(FruitIcons),	//current fruit to be added
 	}
 }
 
@@ -1162,7 +1169,7 @@ DirectionCode=function(direction){
 }
 
 SerialState=function(serialObj,state){
-	var state={...state};
+	var state=Clone(state);
 	var serialObj=ReKeyObject(serialObj,LowerCase);
 		state.W=Max(Number(serialObj.w||serialObj.h)||0,2);
 		state.H=Max(Number(serialObj.h||serialObj.w)||0,2);
@@ -1180,12 +1187,12 @@ SerialGenreState=function(g,state){
 	if(typeof LettersGenre==="undefined")
 		return state;
 	var state=Clone(state);
-	console.log("!!")
 	if(In(LettersGenre,g)){
 		state.genre=LettersGenre[g];
 		state=Merge(state,Genres[state.genre])
-		console.log(state)
 	}
+	else
+		state=Merge(state,Kudamono);//Default to kudamono
 	return state
 }
 
@@ -1646,17 +1653,9 @@ CanvasResize=function(){
 //The source of truth: updating STATE must update everything.
 
 ObtainStartingLevelState=function(){
-	var state=Kudamono;
+	var state=Clone(BlankState)
 	if(PageSearch("W")||PageSearch("H"))
-		state=SerialState(PageSearchObject(),state);
-	else
-	state={
-		...state,
-		W:7,
-		H:7,
-		level:{},
-		segments:[]
-	}
+		state=SerialState(PageSearchObject(),state);		
 	return state;
 }
 

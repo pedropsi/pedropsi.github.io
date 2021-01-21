@@ -29,6 +29,7 @@ var Genres={
 			nudge:0.25	
 		},
 		rules:{
+			loopallowed:false,
 			simpleshapes:Join(Shape1s,Shape2s,Shape3s),
 			maxtracks:1
 		},
