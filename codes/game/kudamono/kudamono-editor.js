@@ -5,8 +5,10 @@
 
 var sources=["data-game-colours","data-game-canvas","data-game-undo"];
 sources.map(LoaderInFolder("codes/game/modules"));
-if(PageSearch("G"))
-	LoaderInFolder("codes/game/kudamono")("genres.js")
+if(PageSearch("G")){
+	LoaderInFolder("codes/game/kudamono")("genres.js");
+	sources=sources.concat("kudamono-genres")
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -877,7 +879,7 @@ DrawFruit=function(Opts,state){
 	Opts.lineWidth=state.visuals.skin||0;
 
 	if(!state.visuals.solid){
-		if(PointTrackContained([Opts.px,Opts.py],STATE.segments)){
+		if(PointTrackContained([Opts.px,Opts.py],state.segments)){
 			//Opts.strokeStyle=HEXLightener(1)(Opts.colour);
 		}
 		else if(In(state.mode.selection,[Opts.px,Opts.py])){
@@ -1108,7 +1110,7 @@ SegmentsSerial=function(state){
 }
 
 GenreSerial=function(state){
-	if(typeof GenreLetters==="undefined"||!state.genre||!In(GenreLetters,state.genre))
+	if(typeof GenreLetters==="undefined"||!In(GenreLetters,state.genre))
 		return "";
 	return GenreLetters[state.genre];
 }
@@ -1164,16 +1166,27 @@ SerialState=function(serialObj,state){
 	var serialObj=ReKeyObject(serialObj,LowerCase);
 		state.W=Max(Number(serialObj.w||serialObj.h)||0,2);
 		state.H=Max(Number(serialObj.h||serialObj.w)||0,2);
+		if(serialObj.g)
+			state=SerialGenreState(serialObj.g,state)
 		if(serialObj.l)
 			state.level=SerialLevel(serialObj.l,state);
 		if(serialObj.s)
-			 state.segments=SerialSegments(serialObj.s,state)
-		if(typeof LettersGenre!=="undefined"&&serialObj.g)
-			 if(In(LettersGenre,serialObj.g)){
-				 state.genre=LettersGenre[serialObj.g];
-				 state=Merge(state,Genres[state.genre])
-			 }
+			state.segments=SerialSegments(serialObj.s,state)
+
 	return state;
+}
+
+SerialGenreState=function(g,state){
+	if(typeof LettersGenre==="undefined")
+		return state;
+	var state=Clone(state);
+	console.log("!!")
+	if(In(LettersGenre,g)){
+		state.genre=LettersGenre[g];
+		state=Merge(state,Genres[state.genre])
+		console.log(state)
+	}
+	return state
 }
 
 StateSerial=function(state){
@@ -1242,25 +1255,26 @@ UpdateState=function(opts){
 	if(opts)
 		Keys(opts).map(k=>STATE[k]=opts[k](STATE[k]));
 	STATE.tracks=SplitContiguousTracks(STATE.segments);
-	DrawCursor();
+	DrawCursor(STATE);
 	DrawState(STATE);
 	AddUndo(STATE);
 	NavigateSerial(StateSerial(STATE));
 }
 
-DrawCursor=function(){
-	if(!STATE.mode.edit)
-		UpdateCursor("pencil")
+DrawCursor=function(state){
+	if(!state.mode.edit)
+		STATE=CursorStateUpdate("pencil",STATE)
 	else
-		UpdateCursor(STATE.mode.symbol)
+		STATE=CursorStateUpdate(state.mode.symbol,STATE)
 }
 
-UpdateCursor=function(name){
-	if(!STATE.visuals.cursor||STATE.visuals.cursor!==name){
-		STATE.visuals.cursor=name;
+CursorStateUpdate=function(name,state){
+	var state=Clone(state);
+	if(!state.visuals.cursor||state.visuals.cursor!==name){
+		state.visuals.cursor=name;
 		var cursor=name;
 		var opts={};
-		var Icons=STATE.symbols;
+		var Icons=state.symbols;
 		if(In(Icons,name)){
 			cursor=Icons[name];
 			cursor=RescalePath({...cursor,scale:1,square:100},true);
@@ -1268,10 +1282,11 @@ UpdateCursor=function(name){
 			cursor=BuildSymbolIcon({...cursor,primitive:"cursor-triangle"});
 			opts.fill=Icons[name].colour;
 		}
-		opts.width=STATE.visuals.cursorsize||80;
-		opts.height=STATE.visuals.cursorsize||80;
-		SetCursor(STATE.target,cursor,opts);
+		opts.width=state.visuals.cursorsize||80;
+		opts.height=state.visuals.cursorsize||80;
+		SetCursor(state.target,cursor,opts);
 	}
+	return state;
 }
 
 //Undo
@@ -1463,9 +1478,9 @@ DragActionContinuer=function(x,y){
 		var selected=STATE.mode.selection;
 		STATE.mode.clearing=Intersection(XYSegments(selected[0],STATE),XYSegments(selected[1],STATE)).length>=1;
 		if(STATE.mode.clearing)
-			UpdateCursor("pencil-erase")
+			STATE=CursorStateUpdate("pencil-erase",STATE)
 		else
-			UpdateCursor("pencil")
+			STATE=CursorStateUpdate("pencil",STATE)
 	}
 
 }
@@ -1579,7 +1594,7 @@ FruitSetter=function(fruit){
 	KeyboardActions[STATE.symbols[fruit].letter]=function(){
 		STATE.mode.edit=true;
 		STATE.mode.symbol=fruit;
-		DrawCursor();
+		DrawCursor(STATE);
 	}
 }
 
@@ -1645,9 +1660,10 @@ ObtainStartingLevelState=function(){
 	return state;
 }
 
-STATE=ObtainStartingLevelState();
+
 
 InitialisePuzzle=function(){
+	STATE=ObtainStartingLevelState();
 	PreAddElement(`
 	<div>
 		<canvas 
