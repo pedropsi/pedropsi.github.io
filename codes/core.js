@@ -5075,10 +5075,11 @@ ActionPatterns={
 	"backspace":/ba?c?k?spa?ce?/ig,
 	"space":/(^|[^ck])spa?ce?b?a?r?/ig,
 	"rightclick":/ri?g?h?t?cli?c?k?/ig, //solve issue
-	"click":/((le?f?t?)|[^right]|^)cli?c?k?/ig,
-	"drag":/dra?g?/ig,
+	"click":/((le?f?t?)|[^rightmouse]|^)cli?c?k?/ig,
+	"drag":/([^tp2mouse]|^)dra?g?/ig,
 	"move":/mo?ve?/ig,
-	"wheel":/whe?e?l/ig
+	"wheelup":/wh?e?e?l?up?/ig,
+	"wheeldown":/wh?e?e?l?do?w?n?/ig
 }
 
 ActionKeys=function(keystring){
@@ -5754,6 +5755,16 @@ var Icons={
 	"tap2drag":{primitive:["hand2","dragl"],vbmax:"50 50"},
 	"taphold":{primitive:["hand","hold"],vbmax:"50 50"},
 
+	"mouse-up":{path:"M 1 3 L 1 21 Q 1 25 5 23 Q 12 20 7 8 Q 9 7 8 5 Q 7 3 5 4 Q 1 -2 1 3 Z",vbmax:"25 25"},
+	"wheel-arrow-up":{path:"M 9 0 L 17 2 L 14 3 Q 20 12 10 11 Q 17 11 12 5 L 11 7 Z",vbmax:"25 25"},
+	"mouse-down":{primitive:"mouse-up",transform:"flip-vertical"},
+	"wheel-arrow-down":{primitive:"wheel-arrow-up",transform:"flip-vertical"},
+	"wheel-arrow-ud":{path:"M 9 0 L 17 2 L 14 3 Q 22 10 15 14 L 18 15 L 12 15 L 14 10 L 14 13 Q 19 10 12 5 L 11 7 Z",vbmax:"25 25"},
+	
+	
+	"wheel-up":{primitive:["mouse-up","wheel-arrow-up"]},
+	"wheel-down":{primitive:["mouse-down","wheel-arrow-down"]},
+
 	"swipe-left"	:{primitive:["hand","swipel"],vbmax:"50 50"},
 	"swipe-up":{primitive:"swipe-left",transform:"rotate-270"},
 	"swipe-right":{primitive:"swipe-left",transform:"flip-horizontal"},
@@ -6115,9 +6126,12 @@ var KeyExplanations={
 	"swipe-up":"swipe up",
 	"swipe-right":"swipe right",
 	"swipe-down":"swipe down",
-	"wheel-up":"wheel up",
-	"wheel-down":"wheel down",
+	"wheel-up":"scroll up with the mouse wheel",
+	"wheel-down":"scroll down with the mouse wheel",
 	"wheel-click":"wheel click",
+	"bifinger-up":"scroll up with two fingers",
+	"bifinger-down":"scroll down with two fingers",
+	"bifinger-click":"click with two fingers",
 	"backsp":"backspace",
 	"mouseclick":"click",
 	"mouseclick2":"right click",
@@ -6135,11 +6149,11 @@ var KeyExplanations={
 
 KB=function(string,opts){
 	var opts=opts||{};
-	var options=DictionaryLowerAccesser(TypeSwipeKeys,EnArray)(string);
+	var options=DictionaryLowerAccesser(MultimediaKeys,EnArray)(string);
 	return Enumerate(options.map(o=>KBDHTML(o,opts)),"or");
 }
 
-var TypeSwipeKeys={
+var MultimediaKeys={
 	"click":["tap","mouseclick"],
 	"rightclick":["tap2","mouseclick2"],
 	"drag":["tapdrag","mousedrag"],
