@@ -55,6 +55,7 @@ A_GDPR_A4:{link:"https://gdpr-info.eu/art-4-gdpr/",TITLE:"Article 4",AUTHOR:"GDP
 A_GDPR:{link:"https://gdpr-info.eu",TITLE:"GDPR"},
 A_UNLUCKY_UNLOCK_FEAT_1:{link:"http://www.bontegames.com/2014/07/unlucky-unlock.html",TITLE:"blog",AUTHOR:()=>P("bonte"),GROUP:"mentioned",ID:"unlucky-unlock"},
 A_UNLUCKY_UNLOCK_FEAT_2:{link:"http://warpdoor.com/2014/07/18/unlucky-unlock-pedro-psi",TITLE:"Warpdoor",GROUP:"mentioned",ID:"unlucky-unlock"},
+A_UNLUCKY_UNLOCK_FEAT_3:{link:"http://clickmazes.com/ps/new-ps.htm",TITLE:"Puzzlescript Collection",GROUP:"mentioned",ID:"unlucky-unlock",AUTHOR:()=>P("andrea")},						
 A_CASTELVECCHIO:{link:"https://museodicastelvecchio.comune.verona.it/",TITLE:"Castelvecchio",AUTHOR:"Verona"},
 A_PAISIBLE:{link:"https://troleoleo.itch.io/paisible-apres-midi-au-fil-des-toiles",TITLE:"Paisible après midi au fil des toiles",AUTHOR:"Leo Lefebvre and Sacha Chouery"},
 A_ROTATE:{link:"https://www.crazygames.com/game/rotate",TITLE:"Rotate",AUTHOR:()=>P("joshuastone")},
