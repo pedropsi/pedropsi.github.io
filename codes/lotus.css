@@ -1588,6 +1588,10 @@ kbd{
 	text-indent: 0;
 }
 
+kbd[data-key=" "]{
+	min-width:calc( var(--w4) + var(--h4));
+	min-height:calc( var(--w1) + var(--h1));
+}
 
 
 .label{

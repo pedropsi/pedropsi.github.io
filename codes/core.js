@@ -5075,8 +5075,8 @@ ActionPatterns={
 	"backspace":/ba?c?k?spa?ce?/ig,
 	"space":/(^|[^ck])spa?ce?b?a?r?/ig,
 	"rightclick":/ri?g?h?t?cli?c?k?/ig, //solve issue
-	"click":/((le?f?t?)|[^rightmouse]|^)cli?c?k?/ig,
-	"drag":/([^tp2mouse]|^)dra?g?/ig,
+	"click":/((le?f?t?)|[^rightmouse\-]|^)cli?c?k?/ig,
+	"drag":/([^tp2mouse\-]|^)dra?g?/ig,
 	"move":/mo?ve?/ig,
 	"wheelup":/wh?e?e?l?up?/ig,
 	"wheeldown":/wh?e?e?l?do?w?n?/ig
@@ -5715,16 +5715,15 @@ var StringSymbols={
 };
 
 var Icons={
-	"left":	{path:"M 5 8 L 5 9 L 0 5 L 5 1 L 5 2 L 3 5 Z M 4 5 L 5 6 L 10 5 L 5 4 Z",vbmax:"10 10"},
-	"up":	{primitive:"left",transform:"rotate-270"},
-	"right":{primitive:"left",transform:"flip-horizontal"},
-	"down":	{primitive:"left",transform:"rotate-90"},
 
+	//Pointers
 	"cursor":{path:"M 10 0 L 0 30 L 8 29 L 9 40 L 11 40 L 12 29 L 20 30 Z",vbmin:"-10 -10",vbmax:"40 40"},
 	"cursor2":{path:"M 11 0 L 0 30 L 8 29 L 9 40 L 11 40 L 12 29 L 15 20 Z M 20 6 L 14 31 L 19 30 L 21 37 L 22 30 L 27 31 L 20 6 Z",vbmin:"-10 -10",vbmax:"40 40"},
 	"hand":{path:"M 7 25 Q 6 0 9 0 Q 12 0 12 3 L 12 20 Q 12 17 15 17 Q 18 17 18 22 Q 18 18 21 18 Q 24 18 24 24 Q 24 21 26 21 Q 28 21 28 30 Q 27 39 17 40 Q 8 41 6 37 Q -1 23 1 17 Q 3 13 6 22 Z",vbmin:"-10 -10",vbmax:"40 40"},
 	"hand2":{path:"M 7 25 Q 6 0 9 0 Q 12 0 12 3 L 12 20 Q 12 17 15 17 Q 18 17 18 22 Q 18 5 21 6 Q 23 6 24 24 Q 24 21 26 21 Q 28 21 28 30 Q 27 39 17 40 Q 8 41 6 37 Q -1 23 1 17 Q 3 13 6 22 Z",vbmin:"-10 -10",vbmax:"40 40"},
+	"wheel":{path:"M 1 3 L 1 21 Q 1 25 5 23 Q 12 20 7 8 Q 9 7 8 5 Q 7 3 5 4 Q 1 -2 1 3 Z",vbmax:"25 25"},
 	
+	//Effects
 	"clickld":{path:"M 4 3 Q 4 6 0 8 Q 1 3 4 3 Z",vbmin:"0 -10",vbmax:"20 10"},
 	"clicklu":{primitive:"clickld",transform:"flip-vertical"},
 	"clickru":{primitive:"clicklu",transform:"flip-horizontal"},
@@ -5749,32 +5748,39 @@ var Icons={
 
 	"hold":{path:"M 6 10 Q 0 10 0 0 Q 0 -10 10 -10 Q 20 -10 20 0 Q 20 10 13 10 L 13 9 Q 19 9 19 0 Q 19 -9 10 -9 Q 1 -9 1 0 Q 1 9 6 9 Z",vbmax:"50 50"},
 	
+	"wheel-arrow-u":{path:"M 9 0 L 17 2 L 14 3 Q 20 12 10 11 Q 17 11 12 5 L 11 7 Z",vbmax:"25 25"},
+	"wheel-arrow-d":{primitive:"wheel-arrow-u",transform:"flip-vertical"},
+	"wheel-arrow-ud":{path:"M 9 0 L 17 2 L 14 3 Q 22 10 15 14 L 18 15 L 12 15 L 14 10 L 14 13 Q 19 10 12 5 L 11 7 Z",vbmax:"25 25"},
+
+	//Gestures 
 	"tap":{primitive:["hand","clicklurd"],vbmax:"50 50"},
 	"tap2":{primitive:["hand2","click2lurd"],vbmax:"50 50"},
+	
 	"tapdrag":{primitive:["hand","dragl"],vbmax:"50 50"},
 	"tap2drag":{primitive:["hand2","dragl"],vbmax:"50 50"},
+	
 	"taphold":{primitive:["hand","hold"],vbmax:"50 50"},
+	"mousehold":{primitive:["cursor","hold"],vbmax:"50 50"},
 
-	"mouse-up":{path:"M 1 3 L 1 21 Q 1 25 5 23 Q 12 20 7 8 Q 9 7 8 5 Q 7 3 5 4 Q 1 -2 1 3 Z",vbmax:"25 25"},
-	"wheel-arrow-up":{path:"M 9 0 L 17 2 L 14 3 Q 20 12 10 11 Q 17 11 12 5 L 11 7 Z",vbmax:"25 25"},
-	"mouse-down":{primitive:"mouse-up",transform:"flip-vertical"},
-	"wheel-arrow-down":{primitive:"wheel-arrow-up",transform:"flip-vertical"},
-	"wheel-arrow-ud":{path:"M 9 0 L 17 2 L 14 3 Q 22 10 15 14 L 18 15 L 12 15 L 14 10 L 14 13 Q 19 10 12 5 L 11 7 Z",vbmax:"25 25"},
-	
-	
-	"wheel-up":{primitive:["mouse-up","wheel-arrow-up"]},
-	"wheel-down":{primitive:["mouse-down","wheel-arrow-down"]},
+	"wheel-up":{primitive:["wheel","wheel-arrow-u"]},
+	"wheel-down":{primitive:"wheel-up",transform:"flip-vertical"},
 
 	"swipe-left"	:{primitive:["hand","swipel"],vbmax:"50 50"},
 	"swipe-up":{primitive:"swipe-left",transform:"rotate-270"},
 	"swipe-right":{primitive:"swipe-left",transform:"flip-horizontal"},
 	"swipe-down":{primitive:"swipe-up",transform:"flip-vertical"},
 
-	"mouseclick":{primitive:["cursor","clicklurd"],vbmax:"50 50"},
-	"mouseclick2":{primitive:["cursor2","click2lurd"],vbmax:"50 50"},
+	"cursor-click":{primitive:["cursor","clicklurd"],vbmax:"50 50"},
+	"cursor-click2":{primitive:["cursor2","click2lurd"],vbmax:"50 50"},
 	"mousedrag":{primitive:["cursor","dragl"],vbmax:"50 50"},
 	"mouse2drag":{primitive:["cursor2","dragl"],vbmax:"50 50"},
 	"mousehold":{primitive:["cursor","hold"],vbmax:"50 50"},
+
+	//Other
+	"left":	{path:"M 5 8 L 5 9 L 0 5 L 5 1 L 5 2 L 3 5 Z M 4 5 L 5 6 L 10 5 L 5 4 Z",vbmax:"10 10"},
+	"up":	{primitive:"left",transform:"rotate-270"},
+	"right":{primitive:"left",transform:"flip-horizontal"},
+	"down":	{primitive:"left",transform:"rotate-90"},
 
 	"enter":{path:"M 7 6 L 7 0 L 9 0 L 9 8 L 4 8 L 4 10 L 0 7 L 4 4 L 4 6 Z",vbmax:"10 10"},
 	"backsp":{path:"M 4 15 L 10 23 L 28 23 L 28 7 L 10 7 L 8 5 L 30 5 L 30 25 L 8 25 L 0 15 L 8 5 L 10 7 Z M 22 21 L 24 19 L 20 15 L 24 11 L 22 9 L 18 13 L 14 9 L 12 11 L 16 15 L 12 19 L 14 21 L 18 17 Z",vbmax:"30 30"},
@@ -6122,6 +6128,8 @@ ExplainKey=function(key){
 }
 
 var KeyExplanations={
+	"cursor-click":"click",
+	"cursor-click2":"right click",
 	"swipe-left":"swipe left",
 	"swipe-up":"swipe up",
 	"swipe-right":"swipe right",
@@ -6133,8 +6141,6 @@ var KeyExplanations={
 	"bifinger-down":"scroll down with two fingers",
 	"bifinger-click":"click with two fingers",
 	"backsp":"backspace",
-	"mouseclick":"click",
-	"mouseclick2":"right click",
 	"handclick":"tap",
 	"mouse2drag":"right click drag",
 	"tap2drag":"right tap drag",
@@ -6154,8 +6160,8 @@ KB=function(string,opts){
 }
 
 var MultimediaKeys={
-	"click":["tap","mouseclick"],
-	"rightclick":["tap2","mouseclick2"],
+	"click":["tap","cursor-click"],
+	"rightclick":["tap2","cursor-click2"],
 	"drag":["tapdrag","mousedrag"],
 	"rightdrag":["tap2drag","mouse2drag"],
 	"hold":["taphold","mousehold"],
