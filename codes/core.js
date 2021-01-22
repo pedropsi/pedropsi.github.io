@@ -3109,7 +3109,7 @@ AnchorHTML=function(content,ref,attribs){
 AHTML=function(title,ref,attribs){
 	if(Prefixed(ref,"?")){
 		var ref=PageReSearch(PageURL(),ref);
-		return AnchorHTML(title,ref,{...attribs,class:"innerlink"});
+		return AnchorHTML(title,PageUnFragment(ref),{...attribs,class:"innerlink"});
 	}
 
 	if(Prefixed(title,"#"))
