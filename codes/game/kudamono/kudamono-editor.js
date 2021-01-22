@@ -226,7 +226,7 @@ var BlankState={
 		strokeColor:"#BBBBBB",				//grid lines
 		fillColor:"#FFFFFF",				//background
 		lineWidth:2,						//width   of grid lines
-		dash:[6,12],						//dashing of grid lines
+		dash:[2,2],							//dashing of grid lines
 		border:0.5,							//how many squares to add to the border (to each of the shortest sides)
 		scale:0.95,							//fruit scale (how large)
 		nudge:0.3,							//fruit nudge (small adjustments to position)
@@ -1173,8 +1173,11 @@ SerialState=function(serialObj,state){
 	var serialObj=ReKeyObject(serialObj,LowerCase);
 		state.W=Max(Number(serialObj.w||serialObj.h)||0,2);
 		state.H=Max(Number(serialObj.h||serialObj.w)||0,2);
-		if(serialObj.g)
+		if(serialObj.g){
 			state=SerialGenreState(serialObj.g,state)
+		}
+		else
+			state=Merge(state,Kudamono);
 		if(serialObj.l)
 			state.level=SerialLevel(serialObj.l,state);
 		if(serialObj.s)
@@ -1185,7 +1188,7 @@ SerialState=function(serialObj,state){
 
 SerialGenreState=function(g,state){
 	if(typeof LettersGenre==="undefined")
-		return state;
+		return Merge(state,Kudamono);//Default to kudamono;
 	var state=Clone(state);
 	if(In(LettersGenre,g)){
 		state.genre=LettersGenre[g];
@@ -1653,7 +1656,7 @@ CanvasResize=function(){
 //The source of truth: updating STATE must update everything.
 
 ObtainStartingLevelState=function(){
-	var state=Clone(BlankState)
+	var state=Clone(BlankState);
 	if(PageSearch("W")||PageSearch("H"))
 		state=SerialState(PageSearchObject(),state);		
 	return state;

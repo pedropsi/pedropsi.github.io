@@ -9,7 +9,7 @@ var Genres={
 			
 		],
 		visuals:{
-			solid:true
+			solid:true,
 		},
 		line:{
 			lineJoin:"miter",
