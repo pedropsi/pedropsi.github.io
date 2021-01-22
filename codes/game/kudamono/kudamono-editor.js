@@ -49,41 +49,72 @@ TrackPointwiseSymmetrised=function(track,XY){
 	return Equal(Dsegments,Usegments)
 }
 
-TrackVerticallySymmetrised=function(track,XY){
-	var Y=XY[1];
+SymetriseVerticallyTrack=function(track,Y){
 	var VMirrorer=function(point){
 		var dy=Y-point[1];
 		return [point[0],point[1]+2*dy];
 	}
+	return track.map(segment=>TransformSegment(segment,VMirrorer));
+}
+
+TrackVerticallySymmetrised=function(track,XY){
+	var Y=XY[1];
 	var Dsegments=track.filter(segment=>PathYs(SegmentPoints(segment)).every(y=>y<=Y));
 	var Usegments=track.filter(segment=>PathYs(SegmentPoints(segment)).every(y=>y>=Y));
 	
-	Usegments=Usegments.map(segment=>TransformSegment(segment,VMirrorer));
+	Usegments=SymetriseVerticallyTrack(Usegments,Y);
 	Usegments=Sort(Usegments.map(CanonicalSegment));
 	Dsegments=Sort(Dsegments.map(CanonicalSegment));
-	console.log(Dsegments,Usegments)
 	return Equal(Dsegments,Usegments)
 }
 
-TrackHorizontallySymmetrised=function(track,XY){
-	var X=XY[0];
+SymetriseHorizontallyTrack=function(track,X){
 	var HMirrorer=function(point){
 		var dx=X-point[0];
 		return [point[0]+2*dx,point[1]];
 	}
+	return track.map(segment=>TransformSegment(segment,HMirrorer));
+}
+
+
+TrackHorizontallySymmetrised=function(track,XY){
+	var X=XY[0];
 	var Lsegments=track.filter(segment=>PathXs(SegmentPoints(segment)).every(x=>x<=X));
 	var Rsegments=track.filter(segment=>PathXs(SegmentPoints(segment)).every(x=>x>=X));
 	
-	Rsegments=Rsegments.map(segment=>TransformSegment(segment,HMirrorer));
+	Rsegments=SymetriseHorizontallyTrack(Rsegments,X);
 	Rsegments=Sort(Rsegments.map(CanonicalSegment));
 	Lsegments=Sort(Lsegments.map(CanonicalSegment));
 		
 	return Equal(Lsegments,Rsegments)
 }
 
+
+TrackDiagonallySymmetrised=function(track,XY){
+	var X=XY[0];
+	var Y=XY[1];
+	var track=Clone(track).map(segment=>TranslateSegment(segment,-1*X,-1*Y));
+
+	var Flipper=function(point){
+		return [point[1],point[0]];
+	}
+	var Invpper=function(point){
+		return [-point[1],point[0]];
+	}
+
+	fliptrack=track.map(segment=>TransformSegment(segment,Flipper));
+	invtrack=track.map(segment=>TransformSegment(segment,Invpper));
+	fliptrack=Sort(fliptrack);
+	invtrack=Sort(invtrack);
+	track=Sort(track);
+		
+	return Equal(fliptrack,track)||Equal(invtrack,track);
+}
+
+
 TrackSymmetrised=function(track){
 	var XY=TrackGeometricCentrePoint(track);
-	return TrackHorizontallySymmetrised(track,XY)||TrackVerticallySymmetrised(track,XY)||TrackPointwiseSymmetrised(track,XY);
+	return TrackHorizontallySymmetrised(track,XY)||TrackVerticallySymmetrised(track,XY)||TrackPointwiseSymmetrised(track,XY)||TrackDiagonallySymmetrised(track,XY);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
