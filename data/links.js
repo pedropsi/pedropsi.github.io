@@ -99,7 +99,17 @@ A_LANCE_PS_FORK:{link:"https://jacklance.github.io/PuzzleScript/editor.html",TIT
 A_PUZZLE_COMMUNITY:{link:"selected-puzzlescript-games",EXT:".html",TITLE:"Puzzle-making community"},
 A_SELENES_LABYRINTH:{link:"https://jcgyo.itch.io/selenes-labyrinth",EXT:".html",TITLE:"Selene's Labyrinth",AUTHOR:()=>P("jcmiller")},
 A_SASQUATCH:{link:"https://jcgyo.itch.io/sasquatch",EXT:".html",TITLE:"Sasquatch Sokoban",AUTHOR:()=>P("jcmiller"),GROUP:"with-game-bar"},
-A_CUTTERS_AND_CONCRETE:{link:"https://bregehr.itch.io/cutters-and-concrete",EXT:".html",TITLE:"Cutters and Concrete",AUTHOR:()=>P("regehr"),GROUP:"with-game-bar"}
+A_CUTTERS_AND_CONCRETE:{link:"https://bregehr.itch.io/cutters-and-concrete",EXT:".html",TITLE:"Cutters and Concrete",AUTHOR:()=>P("regehr"),GROUP:"with-game-bar"},
+
+A_GOPHER_FEAT_1:{link:"https://www.bontegames.com/2019/10/what-gophers-go-for-browser.html",TITLE:"blog",GROUP:"mentioned",ID:"thinky-collective",AUTHOR:()=>P("bonte")},
+A_GOPHER_FEAT_2:{link:"http://warpdoor.com/2020/08/26/what-gophers-go-for/",TITLE:"Warpdoor",GROUP:"mentioned",ID:"thinky-collective"},
+A_GOPHER_FEAT_3:{link:"https://www.youtube.com/watch?v=39ucKcdt2W4",TITLE:"What Gophers Go For - Part 1: Grotesque Mess",GROUP:"mentioned",ID:"thinky-collective",AUTHOR:()=>P("mansfield")},
+A_GOPHER_FEAT_4:{link:"https://www.youtube.com/watch?v=K1nWbcVj_6c",TITLE:"What Gophers Go For - Part 2: Grotesque Mess",GROUP:"mentioned",ID:"thinky-collective",AUTHOR:()=>P("mansfield")},
+
+A_DR_JELLY_MR_SLIME_FEAT_1:{link:"https://www.bontegames.com/2020/08/dr-jelly-and-mr-slime-browser.html",TITLE:"blog",GROUP:"mentioned",ID:"thinky-collective",AUTHOR:()=>P("bonte")},
+A_DR_JELLY_MR_SLIME_FEAT_2:{link:"http://warpdoor.com/2020/08/03/dr-jelly-and-mr-slime/",TITLE:"warpdoor",GROUP:"mentioned",ID:"thinky-collective"},
+A_DR_JELLY_MR_SLIME_FEAT_3:{link:"https://www.youtube.com/watch?v=z8q8vYwdDg0",TITLE:"Dr Jelly and Mr Slime - Playthrough and Development Commentary",GROUP:"mentioned",ID:"thinky-collective",AUTHOR:()=>P("mansfield")},
+
 };
 
 LinksNormalised=Clone(Links);

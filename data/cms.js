@@ -60,8 +60,8 @@ P_insight:{...NoImage,FEATURED:()=>false,LINK:()=>`analytics`,POSTSCRIPT:()=>["c
 P_videoplaytesting_tips:{...WithImage,LINK:()=>`videoplaytesting-tips`,TITLE:()=>`Videoplaytesting Tips`,DATE:()=>"2020-08-29",TAGS:()=>[`List`,`Post`],ONE_LINER:()=>`Would you like to videoplaytest a game but not sure how to go about it? Here are some tips!`,IMAGE_EXT:()=>`png`},
 
 P_star_battle:{...WithImage,LINK:()=>`star-battle`,POSTSCRIPT:()=>["codes/game/star-battle/hyper-loader.js"],TITLE:()=>`Star Battle geometries`,DATE:()=>"2020-06-18",TYPE:()=>`Post`,TAGS:()=>[`Paper`,`Puzzle`],ONE_LINER:()=>`What if you could play <b>Star Battle</b> on <em>different geometries</em>? Now you can!`,IMAGE_EXT:()=>`png`},
-P_kudamono:{...WithImage,LINK:()=>`kudamono`,TITLE:()=>`Kudamono fruit puzzles`,DATE:()=>"2020-12-18",TYPE:()=>`Post`,TAGS:()=>[`Paper`,`Puzzle`],ONE_LINER:()=>`Kudamono (fruits) is a paper puzzle, where you draw lines to connect fruits, with different rules for different fruit types.`,IMAGE_EXT:()=>`png`}
-
+P_kudamono:{...WithImage,LINK:()=>`kudamono`,TITLE:()=>`Kudamono fruit puzzles`,DATE:()=>"2020-12-18",TYPE:()=>`Post`,TAGS:()=>[`Paper`,`Puzzle`],ONE_LINER:()=>`Kudamono (fruits) is a paper puzzle, where you draw lines to connect fruits, with different rules for different fruit types.`,IMAGE_EXT:()=>`png`},
+P_thinkycollective:{...WithImage,LINK:()=>`thinky-collective`,TITLE:()=>`Thinky Collective`,DATE:()=>"2019-10-21",TYPE:()=>`Post`,TAGS:()=>[`Post`,`List`],ONE_LINER:()=>`The ${v.TITLE_BOLD()} is a distributed group of puzzle enthusiasts, that produced a puzzlescript game series using an "exquisite corpse" methodology.`,IMAGE_EXT:()=>`png`},
 }
 
 

@@ -32,7 +32,7 @@ var Contributors={//People
 	"koswara":{name:"Ivan Koswara",alias:"Chaotic Iak",TWITTER:"chaotic_puzzles",PERSONAL_PAGE:"https://chaosatthesky.wordpress.com/"},
 	"connorses":{name:"Connor McHarney",GOOGLE_PLUS:"+Connorses"},
 	"cubestudio":{name:"Noa Hoffmann",alias:"Noa Cube Studio",TWITTER:"noa_cubestudio"},
-	"kutilek":{name:"Jack Kutilek",ITCH:"jackkutilek"},
+	"kutilek":{name:"Jack Kutilek",ITCH:"jackkutilek",shorthand:"jackk"},
 	"patrick":{name:"Patrick Traynor",alias:"Patrickgh3",TWITTER:"clockworkpat"},
 	"zabel":{name:"Zachary Abel",alias:"Zabel"},
 	"regehr":{name:"Blake Regehr"},
@@ -40,7 +40,7 @@ var Contributors={//People
 	"zubovic":{name:"Dario Zubovic",TWITTER:"dario_zubovic"},
 	"clark":{name:"Ethan Clark",alias:"EPGA Studios",TWITTER:"EthanIClark1"},
 	"ncrecc":{name:"Nathan Recchia",alias:"Ncrecc"},
-	"danwilliams":{name:"Dan Williams",TWITTER:"videospacegames"},
+	"danwilliams":{name:"Dan Williams",TWITTER:"videospacegames",shorthand:"daneel"},
 	"jcmiller":{name:"J. C. Miller",alias:"jcGyo",GITHUB_COM:"jcmiller11",ITCH:"jcgyo"},
 	"wells":{name:"Cristopher Wells",alias:"Toph Wells",ITCH:"tophwells"},
 	"davidpfx":{name:"David PFX",GITHUB_COM:"david-pfx"},
@@ -63,7 +63,7 @@ var Contributors={//People
 	"skymoo":{alias:"Skymoo"},
 	"velleic":{alias:"Velleic"},
 	"softfro":{name:"SoftFro",PERSONAL_PAGE:"https://cryptics.jackbrounstein.com/user/27"},
-	"mansfield":{name:"Robert Mansfield",alias:"sftrabbit",TWITTER:"sftrabbit"},
+	"mansfield":{name:"Robert Mansfield",alias:"sftrabbit",TWITTER:"sftrabbit",PERSONAL_PAGE:"https://josephmansfield.uk/"},
 	"karoo":{name:"Karoo"},
 	"hempuli":{name:"Arvi Teikari",alias:"Hempuli",PERSONAL_PAGE:"https://www.hempuli.com/"},
 	"pancelor":{alias:"Pancelor",ITCH:"pancelor"},
@@ -139,7 +139,19 @@ var Developers={
 	"obscure":{name:"Xavier Direz",alias:"Narkhos",PERSONAL_PAGE:"http://lafaceobscuredupixel.fr/"},
 	"shadow":{name:"Mark Signorelli",alias:"Rosden Shadow",TWITTER:"Rosden_Shadow"},
 	"cyathea":{name:"Cyathea Tree Studio",TWITTER:"cyatheatree",PERSONAL_PAGE:"http://cyatheatree.com/"},
-	"tyrrell":{name:"Malcolm Tyrrell",PERSONAL_PAGE:"https://sites.google.com/site/malcolmsprojects/"}
+	"tyrrell":{name:"Malcolm Tyrrell",PERSONAL_PAGE:"https://sites.google.com/site/malcolmsprojects/"},
+	"auroriax":{name:"Tom Hermans",alias:"Auroriax",ITCH:"auroriax"},
+	"camus":{name:"Dom Camus",alias:"Fast Ram Design",ITCH:"bateleur",TWITTER:"fastramdesign"},
+	"clementsparrow":{name:"Clement Sparrow",PERSONAL_PAGE:"https://www.reddit.com/user/Clementsparrow"},
+	"notajumble":{alias:"NotAJumbleOfNumbers",PERSONAL_PAGE:"https://scratch.mit.edu/users/NotAJumbleOfNumbers/projects/",PERSONAL_PAGE2:"https://itch.io/profile/notajumbleofnumbers"},
+	"blookerstein":{alias:"blookerstein",ITCH:"agentclyde"},
+	"stevenjmiller":{name:"Steven J. Miller",TWITTER:"stevenjmiller37",ITCH:"steven-miller"},
+	"grapefruit":{alias:"Grapefruit"},
+	"winterbeak":{alias:"Winterbeak"},
+	"bagenzo":{alias:"bagenzo",ITCH:"bagenzo",TWITTER:"bagenzo"},
+	"hroll":{alias:"HRoll",PERSONAL_PAGE:"https://github.com/HRoll"},//may be wrong
+	"henriquedelima":{name:"Henrique de Lima"},
+	"trevnewt":{name:"Trevor Newton",TWITTER:"trevnewt",ITCH:"drupes"}
 }
 
 var OtherPeople={
@@ -160,7 +172,7 @@ var CommonURLS={
 
 PersonalPage=function(linkObj){
 	if(linkObj.ITCH)
-		return `https://${linkObj.ITCH}.${CommonURLS.ITCH}`;
+		return `https://${linkObj.ITCH}${CommonURLS.ITCH}`;
 	if(linkObj.TWITTER)
 		return `${CommonURLS.TWITTER}${linkObj.TWITTER}`;
 	if(linkObj.GITHUB_IO)
@@ -186,8 +198,8 @@ NameAliasString=function(linkObj){
 	if(!name&&alias)
 		return alias;
 	
-	alias=alias?`(${alias})`:"";
-	return `${name} ${alias}`;
+	alias=alias?` (${alias})`:"";
+	return `${name}${alias}`;
 }
 
 PersonHTML=function(linkObj){
@@ -216,5 +228,7 @@ Keys(Persons).map(function(k){
 	RegisterPerson(k,k);
 	MemorableHyperStrings(Persons[k].alias||"").map(n=>RegisterPerson(n,k))
 	MemorableHyperStrings(Persons[k].name||"").map(n=>RegisterPerson(n,k))
+	MemorableHyperStrings(Persons[k].shorthand||"").map(n=>RegisterPerson(n,k))
+	MemorableHyperStrings(Persons[k].TWITTER||"").map(n=>RegisterPerson(n,k))
 });
 
