@@ -47,7 +47,7 @@ var Contributors={//People
 	"tows":{name:"Guilherme Stutz Töws",alias:"Zaratustra Productions",GITHUB_COM:"zarawesome",ITCH:"zaratustra"},
 	"deusovi":{alias:"Deusovi",TWITTER:"deusovi",PERSONAL_PAGE:"https://puzzling.stackexchange.com/users/11876/deusovi"},
 	"mago":{alias:"mago314"},
-	"knexator":{name:"Daniel Hurtado",alias:"knexator"},
+	"knexator":{name:"Daniel Hurtado",alias:"knexator",TWITTER:"knexator"},
 	"builder17":{alias:"Builder17"},
 	"parachor":{alias:"Parachor",ITCH:"parachor"},
 	"croubble":{name:"Crouble",alias:"NarrowAdder",TWITTER:"Croubble",ITCH:"dazed-pidgeon"},
