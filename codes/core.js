@@ -6155,6 +6155,7 @@ var TypeSwipeKeys={
 
 P=function(...names){ //People
 	var names=[...names];
+	names=Join(...names.map(n=>n.split(",")));
 	if(names.length>1)
 		return Enumerate(names.map(HyperPerson));
 	else
