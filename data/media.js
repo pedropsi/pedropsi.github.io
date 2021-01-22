@@ -174,6 +174,12 @@ LazyImageHTML=function(ImageObj){
 	return ImageHTML({...ImageObj,id:id,lazy:true});
 }
 
+I=function(src){
+	if(!Posfixed(src,ImageExtensions))
+		var src=Posfix(src,".png");
+	return LazyImageHTML({src:src});
+}
+
 ImageCardHTML=function(ImageObj){
 	if(ImageObj.href){
 		var link=ImageObj.href;
