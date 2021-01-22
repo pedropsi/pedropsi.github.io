@@ -22,9 +22,6 @@ var Shape3s=["LUR","URD","LRD","LUD"];
 var Shape4s=["LURD"];
 var ShapeBranches=Join(Shape3s,Shape4s);
 
-TrackSymmetrised=function(track){
-	return TrackHorizontallySymmetrised(track)||TrackVerticallySymmetrised(track)||TrackPointwiseSymmetrised(track);
-}
 
 TrackGeometricCentrePoint=function(track){
 	var points=TrackPoints(track);
@@ -34,17 +31,59 @@ TrackGeometricCentrePoint=function(track){
 PathXs=function(points){return points.map(First)};
 PathYs=function(points){return points.map(Last)};
 
-TrackHorizontallySymmetrised=function(track){
-	var X=TrackGeometricCentrePoint(track)[0];
-	console.log(X);
-	var Lsegments=track.filter(segment=>PathXs(SegmentPoints(segment))).some(x=>x<X);
-	var Rsegments=track.filter(segment=>PathXs(SegmentPoints(segment))).some(x=>x>X);
-	var Mirrorer=function(point){
-		var d=X-point[0];
-		return [point[0]-2*d,point[1]];
+TrackPointwiseSymmetrised=function(track,XY){
+	var X=XY[0];
+	var Y=XY[1];
+	var VHMirrorer=function(point){
+		var dx=X-point[0];
+		var dy=Y-point[1];
+		return [point[0]+2*dx,point[1]+2*dy];
 	}
-	var MirrorSegments=Rsegments.map(segment=>TransformSegment(segment,Mirrorer));
-	return Equal(Intersection(MirrorSegments,Lsegments),Lsegments)
+	var Dsegments=track.filter(segment=>PathYs(SegmentPoints(segment)).every(y=>y<=Y));
+	var Usegments=track.filter(segment=>PathYs(SegmentPoints(segment)).every(y=>y>=Y));
+	
+	Usegments=Usegments.map(segment=>TransformSegment(segment,VHMirrorer));
+	Usegments=Sort(Usegments.map(CanonicalSegment));
+	Dsegments=Sort(Dsegments.map(CanonicalSegment));
+		
+	return Equal(Dsegments,Usegments)
+}
+
+TrackVerticallySymmetrised=function(track,XY){
+	var Y=XY[1];
+	var VMirrorer=function(point){
+		var dy=Y-point[1];
+		return [point[0],point[1]+2*dy];
+	}
+	var Dsegments=track.filter(segment=>PathYs(SegmentPoints(segment)).every(y=>y<=Y));
+	var Usegments=track.filter(segment=>PathYs(SegmentPoints(segment)).every(y=>y>=Y));
+	
+	Usegments=Usegments.map(segment=>TransformSegment(segment,VMirrorer));
+	Usegments=Sort(Usegments.map(CanonicalSegment));
+	Dsegments=Sort(Dsegments.map(CanonicalSegment));
+	console.log(Dsegments,Usegments)
+	return Equal(Dsegments,Usegments)
+}
+
+TrackHorizontallySymmetrised=function(track,XY){
+	var X=XY[0];
+	var HMirrorer=function(point){
+		var dx=X-point[0];
+		return [point[0]+2*dx,point[1]];
+	}
+	var Lsegments=track.filter(segment=>PathXs(SegmentPoints(segment)).every(x=>x<=X));
+	var Rsegments=track.filter(segment=>PathXs(SegmentPoints(segment)).every(x=>x>=X));
+	
+	Rsegments=Rsegments.map(segment=>TransformSegment(segment,HMirrorer));
+	Rsegments=Sort(Rsegments.map(CanonicalSegment));
+	Lsegments=Sort(Lsegments.map(CanonicalSegment));
+		
+	return Equal(Lsegments,Rsegments)
+}
+
+TrackSymmetrised=function(track){
+	var XY=TrackGeometricCentrePoint(track);
+	return TrackHorizontallySymmetrised(track,XY)||TrackVerticallySymmetrised(track,XY)||TrackPointwiseSymmetrised(track,XY);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -750,6 +789,8 @@ FruitTrackStateUnRuled=function(fruit,track,state,rule){
 		var n=TrackFruitNumber(track,fruit,state);
 		wrong=(n>rule.maxconnected||n<min)
 	}
+	if(!wrong&&rule.trackValidator&&!rule.trackValidator(track))
+		wrong=true;
 	if(!wrong&&rule.symbolshapes){
 		wrong=Complement(FruitTrackStateShapes(fruit,track,state),rule.symbolshapes).length>0;
 		rule.branchallowed=rule.branchallowed||Intersection(rule.symbolshapes,ShapeBranches).length>0;
