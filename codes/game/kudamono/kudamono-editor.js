@@ -49,7 +49,7 @@ TrackPointwiseSymmetrised=function(track,XY){
 	return Equal(Dsegments,Usegments)
 }
 
-SymetriseVerticallyTrack=function(track,Y){
+SymmetriseVerticallyTrack=function(track,Y){
 	var VMirrorer=function(point){
 		var dy=Y-point[1];
 		return [point[0],point[1]+2*dy];
@@ -62,13 +62,13 @@ TrackVerticallySymmetrised=function(track,XY){
 	var Dsegments=track.filter(segment=>PathYs(SegmentPoints(segment)).every(y=>y<=Y));
 	var Usegments=track.filter(segment=>PathYs(SegmentPoints(segment)).every(y=>y>=Y));
 	
-	Usegments=SymetriseVerticallyTrack(Usegments,Y);
+	Usegments=SymmetriseVerticallyTrack(Usegments,Y);
 	Usegments=Sort(Usegments.map(CanonicalSegment));
 	Dsegments=Sort(Dsegments.map(CanonicalSegment));
 	return Equal(Dsegments,Usegments)
 }
 
-SymetriseHorizontallyTrack=function(track,X){
+SymmetriseHorizontallyTrack=function(track,X){
 	var HMirrorer=function(point){
 		var dx=X-point[0];
 		return [point[0]+2*dx,point[1]];
@@ -82,39 +82,38 @@ TrackHorizontallySymmetrised=function(track,XY){
 	var Lsegments=track.filter(segment=>PathXs(SegmentPoints(segment)).every(x=>x<=X));
 	var Rsegments=track.filter(segment=>PathXs(SegmentPoints(segment)).every(x=>x>=X));
 	
-	Rsegments=SymetriseHorizontallyTrack(Rsegments,X);
+	Rsegments=SymmetriseHorizontallyTrack(Rsegments,X);
 	Rsegments=Sort(Rsegments.map(CanonicalSegment));
 	Lsegments=Sort(Lsegments.map(CanonicalSegment));
 		
 	return Equal(Lsegments,Rsegments)
 }
 
-
-TrackDiagonallySymmetrised=function(track,XY){
+UnTranslateTrack=function(track){
+	var XY=TrackGeometricCentrePoint(track);
 	var X=XY[0];
 	var Y=XY[1];
-	var track=Clone(track).map(segment=>TranslateSegment(segment,-1*X,-1*Y));
+	return Clone(track).map(segment=>TranslateSegment(segment,-1*X,-1*Y));
+}
+
+TrackDiagonallySymmetrised=function(track){
+	var track=UnTranslateTrack(track);
 
 	var Flipper=function(point){
 		return [point[1],point[0]];
 	}
-	var Invpper=function(point){
-		return [-point[1],point[0]];
-	}
 
-	fliptrack=track.map(segment=>TransformSegment(segment,Flipper));
-	invtrack=track.map(segment=>TransformSegment(segment,Invpper));
-	fliptrack=Sort(fliptrack);
-	invtrack=Sort(invtrack);
-	track=Sort(track);
-		
-	return Equal(fliptrack,track)||Equal(invtrack,track);
+	fliptrack=Clone(track).map(segment=>TransformSegment(segment,Flipper));
+	fliptrack=Sort(fliptrack.map(CanonicalSegment));
+	track=Sort(track.map(CanonicalSegment));
+	
+	return Equal(fliptrack,track);
 }
 
 
 TrackSymmetrised=function(track){
 	var XY=TrackGeometricCentrePoint(track);
-	return TrackHorizontallySymmetrised(track,XY)||TrackVerticallySymmetrised(track,XY)||TrackPointwiseSymmetrised(track,XY)||TrackDiagonallySymmetrised(track,XY);
+	return TrackHorizontallySymmetrised(track,XY)||TrackVerticallySymmetrised(track,XY)||TrackPointwiseSymmetrised(track,XY)||TrackDiagonallySymmetrised(track)||TrackDiagonallySymmetrised(SymmetriseVerticallyTrack(track,0));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -477,13 +476,6 @@ TrackBranched=function(track){
 TrackStartPoint=function(track){
 	var endpoints=TrackEndpoints(track);
 	return First(endpoints)||First(First(track));
-}
-
-UnTranslateTrack=function(track){
-	var points=TrackPoints(track);
-	var minx=Min(PathXs(points));
-	var miny=Min(PathYs(track));
-	return TranslateTrack(track,-1*minx,-1*miny);
 }
 
 TranslateTrack=function(track,x,y){
