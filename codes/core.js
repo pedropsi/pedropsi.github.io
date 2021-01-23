@@ -1938,11 +1938,6 @@ ShallowableLinked=function(url){
 	return !FragmentLinked(url)&&(RelativeLinked(url)||OwnLinked(url));
 }
 
-//Glocal Files
-if(typeof Local==="undefined")
-	function Local(){
-		return FileLinked(PageURL());
-	}
 	
 BiJoinPath=function(path,subpath){
 	return UnPosfix(path,"/")+"/"+UnPrefix(subpath,"/");
@@ -1951,7 +1946,7 @@ BiJoinPath=function(path,subpath){
 JoinPath=ArgumentExtender(BiJoinPath);
 
 GlocalPath=function(urlpath,relativepath){
-	if(Local())
+	if(FileLinked(PageURL()))
 		var u="..";
 	else
 		var u=urlpath;

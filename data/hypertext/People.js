@@ -29,7 +29,7 @@ var Contributors={//People
 	"knauf":{name:"Tim Knauf",TWITTER:"timknauf"},
 	"lance":{name:"Jack Lance",TWITTER:"Jack_L_Lance"},
 	"pickel":{name:"Chris Pickel",alias:"Sfiera",GOOGLE_PLUS:"103135105268961087396"},
-	"koswara":{name:"Ivan Koswara",alias:"Chaotic Iak",TWITTER:"chaotic_puzzles",PERSONAL_PAGE:"https://chaosatthesky.wordpress.com/"},
+	"koswara":{name:"Ivan Koswara",alias:"Chaotic Iak",TWITTER:"chaotic_puzzles",PERSONAL_PAGE2:"https://chaosatthesky.wordpress.com/",PERSONAL_PAGE:"https://chaoticiak.github.io/works.html"},
 	"connorses":{name:"Connor McHarney",GOOGLE_PLUS:"+Connorses"},
 	"cubestudio":{name:"Noa Hoffmann",alias:"Noa Cube Studio",TWITTER:"noa_cubestudio"},
 	"kutilek":{name:"Jack Kutilek",ITCH:"jackkutilek",shorthand:"jackk"},
