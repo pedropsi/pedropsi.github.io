@@ -1298,6 +1298,10 @@ DrawStateGrid=function(state){
 	DrawSquaresGrid(gridOpts);
 }
 
+DrawTracks=function(tracks,state,Opts){
+	tracks.map(track=>DrawTrack(track,state,Opts));
+}
+
 DrawStatePaths=function(state){
 	var tracks=state.tracks;
 	var Opts=Extremes(state);
@@ -1306,8 +1310,8 @@ DrawStatePaths=function(state){
 		var seltrack=PathTrack(state.mode.selection);
 		DrawTrack(seltrack,state,{edit:true,clearing:state.mode.clearing})
 	}
-	tracks.map(track=>DrawTrack(track,state,Opts));
 
+	DrawTracks(tracks,state,Opts);
 }
 
 DrawState=function(state){
