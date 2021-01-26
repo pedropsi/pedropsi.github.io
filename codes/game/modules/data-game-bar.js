@@ -60,7 +60,7 @@ if(typeof ObtainKeyActionsGameBar==="undefined")
 
 if(typeof ObtainGameAction==="undefined")
 	var ObtainGameAction=function(key){
-		Context(gameSelector)[ComboKeystring(key)]();
+		Context(gameSelector)[LowerCase(ComboKeystring(key))]();
 		GameFocus();
 	}
 
