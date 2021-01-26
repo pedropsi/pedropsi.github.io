@@ -1299,7 +1299,8 @@ DrawStateGrid=function(state){
 }
 
 DrawTracks=function(tracks,state,Opts){
-	tracks.map(track=>DrawTrack(track,state,Opts));
+	if(tracks)
+		tracks.map(track=>DrawTrack(track,state,Opts));
 }
 
 DrawStatePaths=function(state){
