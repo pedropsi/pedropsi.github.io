@@ -4,7 +4,7 @@ HyperText("People",function(){return Persons.join(`
 var Contributors={//People
 	"wainwright":{name:"Mark Wainwright"},
 	"questioner":{alias:"Questioner"},
-	"leslo":{name:"Lucas Salafranca",alias:"Le Slo",TWITTER:"leslodev"},
+	"leslo":{name:"Lucas Salafranca",name:"Lucas",alias:"Le Slo",TWITTER:"leslodev"},
 	"draknek":{name:"Alan Hazelden",alias:"Draknek",TWITTER:"draknek"},
 	"lavelle":{name:"Stephen Lavelle",alias:"Increpare",TWITTER:"increpare"},
 	"hunkydory":{name:"Hunkydory"},
