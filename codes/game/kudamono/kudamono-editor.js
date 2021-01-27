@@ -347,6 +347,8 @@ var BlankState={
 
 var Kudamono={
 	genre:"kudamono",
+	description:`Draw paths of a single fruit type along the grid, each containing at least two fruits.
+	Unless otherwise indicated, paths do not loop, cross, branch or dangle.`,
 	author:"Pedro",
 	date:"2021-12-18",
 	examples:[
@@ -1376,33 +1378,52 @@ DrawMetadata=function(state){
 		fontSize:"calc(var(--h4) + var(--w4))",
 		y:0.1
 	})
-	var title=state.metadata.title?(Exfix(state.metadata.title,'"')+" "):"";
-	var author=state.metadata.author?("by "+state.metadata.author):"";
 
 	Opts={
 		...Opts,
-		fontSize:"calc(var(--h1) + var(--w1))",
+		fontSize:"calc(var(--h1) + var(--w1))"
+	};
+
+	state.description.split(/\n/).map((line,i)=>DrawText({
+		...Opts,
+		txt:line,
+		fontWeight:"italic",
+		y:0.15+0.04*i
+	}))
+	
+
+
+	Opts={
+		...Opts,
 		textAlign:"right",
 		x:0.95
 	};
 
-	if(title+author)
-		DrawText({
-			...Opts,
-			txt:title+author,
-			y:0.94
-		})
-	
+	var title=state.metadata.title?(Exfix(state.metadata.title,'"')+" "):"";
+	var author=state.metadata.author?("by "+state.metadata.author):"";
 	var date=state.metadata.date||"";
 	if(date){
-		date=TrimWhitespaceString(SpacedString(StripHTML(StringDateName(date))))
+		date=" - "+TrimWhitespaceString(SpacedString(StripHTML(StringDateName(date))))
+	}
+	var url=state.metadata.url||""
+
+	var y=0.98;
+	if(url){
+		y=0.94;
+		DrawText({
+			...Opts,
+			txt:url,
+			y:y+0.04,
+			fontWeight:"italic"
+		})
 	}
 
-	DrawText({
-		...Opts,
-		txt:date,
-		y:0.98
-	})
+	if(title+author+date)
+		DrawText({
+			...Opts,
+			txt:title+author+date,
+			y:y
+		})	
 }
 
 

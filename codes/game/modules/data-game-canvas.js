@@ -184,11 +184,14 @@ GridExtremes=function(opts){
 	if(width/(cols+bx)<square)
 		square=width/(cols+bx);
 
+	var offsetX=opts.offsetX||1;
+	var offsetY=opts.offsetY||1;
+
 	square=square*(opts.scaleGrid||1);
-	var	x0=(width/2-square*cols/2);
-	var	y0=(height/2-square*rows/2);
-	var	x1=(width/2+square*cols/2);
-	var	y1=(height/2+square*rows/2);
+	var	x0=(width/2*offsetX-square*cols/2);
+	var	y0=(height/2*offsetY-square*rows/2);
+	var	x1=(width/2*offsetX+square*cols/2);
+	var	y1=(height/2*offsetY+square*rows/2);
 
 	var lineScale=Power((y1-y0)*(x1-x0)/(width*height)/(rows*cols),0.5)*50
 
@@ -360,7 +363,9 @@ DrawText=function(opts){
 	var ctx=GetContext(canvas);
 	opts.fontSize=opts.fontSize||"30px";
 	opts.fontFamily=opts.fontFamily||"Arial";
-	ctx.font=opts.font||(opts.fontSize+" "+opts.fontFamily);
+	opts.fontWeight=opts.fontWeight||"";
+	opts.fontVariant=opts.fontVariant||"";
+	ctx.font=opts.font||(opts.fontWeight+" "+opts.fontVariant+" "+opts.fontSize+" "+opts.fontFamily);
 	if(typeof opts.x==="undefined")
 		opts.x=1/2;
 	if(typeof opts.y==="undefined")
