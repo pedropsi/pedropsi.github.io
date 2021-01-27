@@ -2728,6 +2728,7 @@ ReplaceChildren=function(html,parentIDsel){
 	var p=GetElement(parentIDsel);
 	if(p)
 		p.innerHTML=html;
+	return p;
 };
 
 // Replace element with new element
@@ -6213,7 +6214,7 @@ NodeHyperText=function(name){
 WebHyperText=function(name,value){
 	if(value){
 		HyperText[name]=value;
-		return Shout("hypertext-"+name);
+		return Shout(KebabCaseString("hypertext-"+name));
 	}
 	if(globalThis[name]){
 		var text=Evaluate(globalThis[name]);
@@ -6229,11 +6230,18 @@ WebHyperText=function(name,value){
 }
 
 AwaitHypertext=function(name){
-	var id=GenerateId();
+	var cla=KebabCaseString("hypertext-"+name);
 	function ReplaceHT(){
-		ReplaceElement(HyperText[name](),id);}
-	Hear("hypertext-"+name,ReplaceHT);
-	return `<span class="hypertext" id="${id}" data="${name}">Loading <em>${name}</em>...</span>`;
+		var t=Evaluate(HyperText[name]);
+		var targets=GetElements("."+cla);
+		var Replacer=ReplaceChildren;
+		var m=MakeElement(t);
+		if(m&&m.tagName==="A")
+			Replacer=ReplaceElement;
+		targets.map(a=>Replacer(t,a));
+	}
+	Hear(cla,ReplaceHT);
+	return `<span class="hypertext ${cla}" data="${name}">Loading <em>${name}</em>...</span>`;
 }
 
 DynamicTextHTML=function(label,text){
