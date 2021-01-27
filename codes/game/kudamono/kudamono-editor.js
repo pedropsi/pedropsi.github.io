@@ -1822,12 +1822,14 @@ CycleStateSymbol=function(state,n){
 }
 
 var WheelActions={
-	WheelUpper:function(){
+	"wheel-up":function(){
 		STATE=CycleStateSymbol(STATE,-1);
-		UpdateState();},
-	WheelDowner:function(){
+		UpdateState();
+	},
+	"wheel-down":function(){
 		STATE=CycleStateSymbol(STATE,1);
-		UpdateState();}
+		UpdateState();
+	}
 }
 
 
@@ -1869,7 +1871,7 @@ InitialisePuzzle=function(){
 	CanvasResize();
 
 	AttendDrag(DragActions,"canvas");
-	AttendWheel(WheelActions,"canvas",100);
+	AttendWheel(WheelActions,"canvas",75);
 	Attend('resize',CanvasResize);
 	Keys(STATE.symbols).map(FruitSetter);
 	Keybind(KeyboardActions,STATE.target);

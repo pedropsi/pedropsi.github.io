@@ -4549,26 +4549,29 @@ AttendDrag=function(Actions,target){
  
 
 AttendWheel=function(Actions,target,delay){
-	if(!Actions.WheelUpper&&!Actions.WheelDowner)
+	if(!Actions["wheel-up"]&&!Actions["wheel-down"])
 		return;
-	var WheelUpper=Actions.WheelUpper||Identity;
-	var WheelDowner=Actions.WheelDowner||Identity;
-	var WheelLefter=Actions.WheelLefter||Identity;
-	var WheelRighter=Actions.WheelRighter||Identity;
-	function Wheeler(event) {
-		var Executer;
+	function Wheeler(event){	
+		var name=false;
 		if(event.deltaY>0)
-			Executer=WheelDowner;
+			name="wheel-down";
 		else if(event.deltaY<0)
-			Executer=WheelUpper;
+			name="wheel-up";
 		else if(event.deltaX>0)
-			Executer=WheelRighter;
+			name="wheel-right";
 		else if(event.deltaX<0)
-			Executer=WheelLefter;
-		if(Executer){
-			event.preventDefault();
+			name="wheel-left";
+		if(name){
+			Executer=function(){
+				event.preventDefault();
+				Evaluate(Accesser(Actions)(name));
+			}
+			FastExecuter=function(){
+				//event.preventDefault();
+				Evaluate(Accesser(Actions)("fast-"+name));
+			}
 			if(delay)
-				Throttle(Executer,delay);
+				Throttle(Executer,delay,name,FastExecuter);
 			else
 				Executer();
 		}
@@ -5318,16 +5321,15 @@ AutoStop=function(RepeatF,delay,name){
 	},delay);
 }
 
-
-
 //Prevent execution unless time cooldown exceeded, in ms
-Throttle=function(F,cooldown,name){
+Throttle=function(F,cooldown,name,AltF){
 	var name=name||FunctionName(F);
+	var AltF=AltF||False;
 	if(!Throttle[name]||Date.now()-Throttle[name]>=cooldown){
 		Throttle[name]=Date.now();
 		return F();
 	}
-	return false;
+	return AltF();
 }
 
 //Delay execution until certain condition is met
