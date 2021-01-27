@@ -6236,8 +6236,13 @@ AwaitHypertext=function(name){
 		var targets=GetElements("."+cla);
 		var Replacer=ReplaceChildren;
 		var m=MakeElement(t);
-		if(m&&m.tagName==="A")
-			Replacer=ReplaceElement;
+		console.log(m);
+		if(m&&Classed(m,".announce")){
+			Replacer=function(content,target){
+				e=ReplaceElement(m,target);
+				e=Class(e,cla);
+			}
+		}
 		targets.map(a=>Replacer(t,a));
 	}
 	Hear(cla,ReplaceHT);
