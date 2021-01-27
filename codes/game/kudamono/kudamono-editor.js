@@ -314,7 +314,9 @@ var BlankState={
 		scale:0.95,							//fruit scale (how large)
 		nudge:0.3,							//fruit nudge (small adjustments to position)
 		dual:false,							//disalign squares and grid
-		scaleGrid:0.8
+		scaleGrid:0.75,						//reduce the grid size
+		offsetX:0,							//displace the grid horizontally
+		offsetY:1.15,						//displace the grid verticallly
 	},	
 
 	//Puzzle
@@ -1271,7 +1273,8 @@ var MetadataAbbreviations={
 	"author":"a",
 	"date":"d",
 	"title":"t",
-	"url":"u"
+	"url":"u",
+	"thanks":"k"
 }
 
 var AbbreviationsMetadata=FlipKeysValues(MetadataAbbreviations);
@@ -1371,6 +1374,7 @@ DrawMetadata=function(state){
 	var Opts={
 		target:state.target,
 		colour:state.metadata.textColour,
+		fontWeight:"bold"
 	}
 	DrawText({
 		...Opts,
@@ -1424,6 +1428,18 @@ DrawMetadata=function(state){
 			txt:title+author+date,
 			y:y
 		})	
+
+	var thanks=state.metadata.thanks?("With thanks to "+Enumerate(state.metadata.thanks.split(","))+"."):"";
+	if(thanks)
+		DrawText({
+			...Opts,
+			txt:thanks,
+			fontWeight:"bold italic",
+			x:0.05,
+			textAlign:"left",
+			y:y
+		})	
+	
 }
 
 
