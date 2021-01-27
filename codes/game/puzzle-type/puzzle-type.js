@@ -171,7 +171,7 @@ function ModulesPath(){return "codes/game/puzzle-type"};
 function MediaPath(){return "media/puzzle-type"};
 
 LoadStyle(ModulesPath()+"/puzzle-type.css");
-LoadSources(gameModulesEarly,P()?()=>GameIntro(StartGame):GameTrailer);
+LoadSources(gameModulesEarly,P()?()=>GameIntro(StartGame):Identity);//GameTrailer);
 gameModulesLater.map(LoaderInFolder(ModulesPath()+"/modules"));
 ["tone.js","tippy.js"].map(LoaderInFolder("codes/libraries"));
 LoaderInFolder("codes/game/puzzle-type")(".solutions.js");
