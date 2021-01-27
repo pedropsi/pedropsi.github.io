@@ -76,7 +76,8 @@ DrawLine=function(opts){
 	
 	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
 
-	var lineWidth=opts.lineWidth?opts.lineWidth:(2/100);
+	var s=opts.lineScale||1;
+	var lineWidth=(opts.lineWidth?opts.lineWidth:(2/100))*s;
 
 	var x0=(typeof opts.x0!=="undefined")?opts.x0:0;
 	var x1=(typeof opts.x1!=="undefined")?opts.x1:1;
@@ -88,7 +89,7 @@ DrawLine=function(opts){
 	ctx.lineTo(x1*W,y1*H);
 
 	if(opts.dash)
-		ctx.setLineDash(opts.dash);/*px convert to relative*/
+		ctx.setLineDash(VectorTimes(opts.dash,s));
 
 	ctx.lineCap=opts.lineCap||"round";
 	ctx.lineWidth=lineWidth;
@@ -145,10 +146,10 @@ DrawGrid=function(opts){
 	if(opts.dash)
 		dash=Times(opts.dash,s);
 	var lineWidth=s/4;
-	DrawSegmentLine({...opts,vertical:true,dash:dash,lineWidth:lineWidth});
-	DrawSegmentLine({...opts,horizontal:true,dash:dash,lineWidth:lineWidth});
+	DrawSegmentLine({...opts,vertical:true,dash:dash,lineWidth:lineWidth,lineScale:false});
+	DrawSegmentLine({...opts,horizontal:true,dash:dash,lineWidth:lineWidth,lineScale:false});
 
-	var frameOpts={...opts,dash:[1,1],lineWidth:lineWidth*2};
+	var frameOpts={...opts,dash:[1,1],lineWidth:lineWidth*2,lineScale:false};
 	DrawLine({...frameOpts,x0:x1});
 	DrawLine({...frameOpts,y0:y1});
 	DrawLine({...frameOpts,x1:x0});

@@ -156,7 +156,7 @@ FruitIcons={
 		rule:{
 			crossforbidden:true,
 			minconnectable:2,
-			maxconnected:1,
+			maxconnected:0,
 			minconnected:1,
 			description:"Every Blueberry is connectable with at least one other (as if a path were drawn).",
 			depiction:"W=2&L=b0b6b2&S=1DD"
@@ -259,7 +259,7 @@ FruitIcons={
 		path:"M 1 31 Q 4 32 6 31 Q 29 31 31 8 Q 33 4 31 1 Q 28 -1 24 1 Q 1 3 1 26 Q 0 29 1 31 Z",
 		rule:{
 			crossforbidden:true,
-			maxconnected:1,
+			maxconnected:0,
 			minconnected:1,
 			description:"No path passes through a Lemon.",
 			depiction:"L=l4&S=3RR"
@@ -273,7 +273,7 @@ FruitIcons={
 		path:"M 416 61 L 372 61 L 372 214 C 128 225 9 425 0 603 C -1 798 144 1021 382 1022 C 606 1024 755 866 771 658 C 780 408 656 232 408 217 L 411 150 C 579 239 691 259 883 108 C 691 -56 572 -4 411 129 Z",
 		rule:{
 			crossforbidden:true,
-			maxconnected:1,
+			maxconnected:0,
 			minconnected:1,
 			maxconnectable:1,
 			description:"No Orange is connectable with another (no path could be drawn).",
@@ -295,7 +295,9 @@ var BlankState={
 	},
 	line:{
 		opacity:0.5,
-		lineWidth:10,
+		overlineOpacity:1,
+		lineWidth:4,						//fruitline width
+		overlineWidth:1,					//width of ie being drawn
 		cap:"round",
 		lineJoin:"round",
 		colour:"rgba(155,155,155,0.5)",		//default line colour
@@ -876,33 +878,30 @@ TrackStyleOpts=function(track,state,Opts){
 			colour=HEXSaturater(0.5)(colour);
 	}
 
-	var s=Opts.lineScale||1;
+	
 	var dash=[1,1];
 	var lineCap="round";
 
 	if(wrong)
 		dash=[1,20];
 	
-
-
 	if(Opts.edit){
 		colour=HEXDarkener(0.9)(colour);
 		if(Opts.clearing)
-			dash=Times(s,[5,5]);
+			dash=[5,5];
 	}
+	if(typeof Opts.opacity!=="undefined")
+		colour=CompelRGBA(colour,Opts.opacity||0);
 	
+
 	var opts={
-		strokeColor:CompelRGBA(colour,0.5),
+		strokeColor:colour,
 		dash:dash,
 		lineCap:lineCap,
-		lineWidth:5*s,
+		lineWidth:Opts.lineWidth||state.line.lineWidth||1
 	}
 
-	if(state.line.lineWidth)
-		opts.lineWidth=state.line.lineWidth;
-
-	return opts
-
+	return opts;
 }
 
 DrawTrack=function(track,state,Opts){
@@ -927,10 +926,12 @@ DrawSegment=function(opts,state){
 		rows:state.H,
 		cols:state.W
 	}
-	DrawGridLine({
+	var opts={
 		...gridOpts,
+		...GridExtremes(gridOpts),
 		...opts
-	})
+	}
+	DrawGridLine(opts);
 }
 
 
@@ -1356,9 +1357,27 @@ DrawStatePaths=function(state){
 	
 	if(!state.mode.edit&&state.mode.selection.length>1){
 		var seltrack=PathTrack(state.mode.selection);
-		DrawTrack(seltrack,state,{edit:true,clearing:state.mode.clearing})
+		DrawTrack(seltrack,state,{
+			...Opts,
+			edit:true,
+			clearing:state.mode.clearing,
+			lineWidth:state.line.overlineWidth||1,
+			opacity:state.line.overlineOpacity||1
+		})
 	}
 
+// 	var commonfruits=Keys(state.level).filter(symbol=>state.symbols[symbol].rule.commonValidator);
+// 	var indepfruits=Complement(Keys(state.level),commonfruits);
+
+// 	var indeptracks=indepfruits.map(fruit=>FruitStateTracks(fruit,state));
+// 		DrawTracks(Join(...indeptracks),state,Opts);
+
+// 	var commontracks=commonfruits.map(fruit=>FruitStateTracks(fruit,state));
+	Opts={
+		...Opts,
+		opacity:state.line.opacity,
+		lineWidth:state.line.lineWidth
+	}
 	DrawTracks(tracks,state,Opts);
 }
 
