@@ -2762,7 +2762,11 @@ UnWrapElement=function(elemIDsel,wrapIDsel){
 
 // Remove Children
 RemoveChildren=function(parentID){
-	ReplaceChildren("",parentID)
+	var e=GetElement(parentID);
+	while (e&&e.hasChildNodes()){  
+		e.removeChild(e.firstChild);
+	}
+	return e;
 }
 
 // Remove Element
