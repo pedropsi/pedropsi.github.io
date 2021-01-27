@@ -6195,8 +6195,12 @@ HyperText=function(name,value){
 		return WebHyperText(name,value);
 }
 
+LoadHyperTextSource=function(name){
+	return LoadSource("data/hypertext/"+UnAfterfix(name,"/")+".js");
+}
+
 NodeHyperText=function(name){
-	LoadSource("data/hypertext/"+UnAfterfix(name,"/")+".js");
+	LoadHyperTextSource(name);
 	while(!globalThis[name]){}
 	var text=globalThis[name]();
 	return text.replace(/\s+/ig," ");
@@ -6214,7 +6218,7 @@ WebHyperText=function(name,value){
 	}
 	else{
 		if(!HyperText[name]){
-			LoadSource("data/hypertext/"+UnAfterfix(name,"/")+".js");
+			LoadHyperTextSource(name);
 			HyperText[name]=true;
 		}
 		return AwaitHypertext(name);
