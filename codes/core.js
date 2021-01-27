@@ -4567,7 +4567,7 @@ AttendWheel=function(Actions,target,delay){
 				Evaluate(Accesser(Actions)(name));
 			}
 			FastExecuter=function(){
-				//event.preventDefault();
+				//do not event.preventDefault() so users can escape with the mouse wheel
 				Evaluate(Accesser(Actions)("fast-"+name));
 			}
 			if(delay)
