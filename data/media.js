@@ -150,17 +150,19 @@ MusicCreditsHTML=function(id){
 ImageSource=function(ImageObj){
 	var src=ImageObj.src?`images/${ImageObj.src}`:`images/${ImageObj.FOLDER_SMALL}/${ImageObj.TRACK}`;
 		src=SourceCoerceExtension(src,ImageExtensions,"png");
-
+	if(Prefixed(ImageObj.src,"data:"))
+		src=ImageObj.src;
 	return src
 }
 
 ImageHTML=function(ImageObj){
+	var ImageObj=ReKeyObject(ImageObj,LowerCase);
 	if(!ImageObj.lazy)
 		var src=`src="${ImageSource(ImageObj)}"`;
 	return `
 	<img
-		alt="${ImageObj.ALT||ImageObj.DESCRIPTION||ImageObj.src}" 
-		title="${ImageObj.DESCRIPTION||ImageObj.src}"
+		alt="${ImageObj.alt||ImageObj.description||ImageObj.src}" 
+		title="${ImageObj.description||ImageObj.title||ImageObj.src}"
 		class="image"
 		loading="lazy"
 		${src}
