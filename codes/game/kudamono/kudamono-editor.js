@@ -1756,17 +1756,24 @@ InitialisePuzzle=function(){
 
 	UpdateState();
 	SetCursor(STATE.target,STATE.visuals.cursor);
-	setTimeout(()=>FocusElement(STATE.target),500)
+	setTimeout(()=>FocusElement(STATE.target),500);
+
+	//Auto instructions
+	AutoInstructions(STATE.symbols)
+	
 }
 
-//Auto instructions
 
-HyperText("Kudamono/FruitShortcuts",()=>TableHTML({
-		headers:["Shortcut","Fruit"],
-		caption:"Choose a fruit by pressing:",
-		rows:Sort(Keys(FruitIcons)).map(fruit=>[KB(FruitIcons[fruit].letter),fruit])
-	}))
+AutoInstructions=function(symbols){
+	HyperText("KudamonoFruitShortcuts",function(){
+		return TableHTML({
+		headers:["Shortcut","Symbol"],
+		caption:"Choose a symbol by pressing:",
+		rows:Sort(Keys(symbols)).map(name=>[KB(symbols[name].letter),name])
+		})});
+}
 
+AutoInstructions(FruitIcons)
 
 if(PageSearch("W")||PageSearch("H")){
 	HearAll(sources,InitialisePuzzle)
