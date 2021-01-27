@@ -73,7 +73,7 @@ PageLabelsHTML=function(page){
 	var date=!page.DATE?"":`
 		<a class="tag button" href="posts.html">
 			<time datetime="${page.DATE()}">
-				${DateName(StringDate(page.DATE()))}
+				${StringDateName(page.DATE())}
 			</time>
 		</a>`
 	

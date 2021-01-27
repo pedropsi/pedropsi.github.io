@@ -5670,6 +5670,10 @@ StringDate=function(string){
 	return found;
 }
 
+StringDateName=function(string){
+	return DateName(StringDate(string));
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Range, in different order
 Range=function(min,max){
@@ -6236,7 +6240,6 @@ AwaitHypertext=function(name){
 		var targets=GetElements("."+cla);
 		var Replacer=ReplaceChildren;
 		var m=MakeElement(t);
-		console.log(m);
 		if(m&&Classed(m,".announce")){
 			Replacer=function(content,target){
 				e=ReplaceElement(m,target);

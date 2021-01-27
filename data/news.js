@@ -509,7 +509,7 @@ NewsDays=function(page){
 
 ChangelogEntryHTML=function(change){
 	return `
-	<h3>${DateName(StringDate(change.DATE))}</h3>
+	<h3>${StringDateName(change.DATE)}</h3>
 	${change.PIECE()}
 	`;
 }
@@ -537,7 +537,7 @@ NonFutureItem=function(npObj){//news or page Object
 NewsEntryHTML=function(change,Opts){
 	var d=Opts.depth||2;
 	return `
-	<h${d}>${DateName(StringDate(change.DATE))}</h${d}>
+	<h${d}>${StringDateName(change.DATE)}</h${d}>
 	${change.HEADER?`<h${d+1}>${Evaluate(change.HEADER)}</h${d+1}>`:""}
 	${Evaluate(change.PIECE)}
 	`;
