@@ -2754,15 +2754,14 @@ UnWrapElement=function(elemIDsel,wrapIDsel){
 	var e=GetElement(elemIDsel);
 	if(!e)
 		return null;
-	
 	var i=GetElement(wrapIDsel)||e;
 	e.outerHTML=i.innerHTML;
 }
 
 
 // Remove Children
-RemoveChildren=function(parentID){
-	var e=GetElement(parentID);
+RemoveChildren=function(parentIDsel){
+	var e=GetElement(parentIDsel);
 	while (e&&e.hasChildNodes()){  
 		e.removeChild(e.firstChild);
 	}
