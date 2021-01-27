@@ -116,12 +116,12 @@ LinksNormalised=Clone(Links);
 
 
 LinkTemplate=function(linkObj){
-	var title=UnFunction(linkObj.TITLE);
-	var author=UnFunction(linkObj.AUTHOR||"");
+	var title=Evaluate(linkObj.TITLE);
+	var author=Evaluate(linkObj.AUTHOR||"");
 
-	var page=UnFunction(linkObj.link||title);
-	var ext=UnFunction(linkObj.EXT||"");
-	var search=UnFunction(linkObj.SEARCH||"");
+	var page=Evaluate(linkObj.link||title);
+	var ext=Evaluate(linkObj.EXT||"");
+	var search=Evaluate(linkObj.SEARCH||"");
 
 	if(ext)
 		ext=Prefix(ext,".")

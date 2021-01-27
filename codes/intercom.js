@@ -252,7 +252,7 @@ Inflows=function(name){
 		}
 	};
 	if(name)
-		return UnFunction(flows[name]);
+		return Evaluate(flows[name]);
 	else
 		return flows;
 }
@@ -407,7 +407,7 @@ Outflows=function(name){
 		}},
 	};
 	if(name)
-		return UnFunction(flows[name]);
+		return Evaluate(flows[name]);
 	else
 		return flows;
 }

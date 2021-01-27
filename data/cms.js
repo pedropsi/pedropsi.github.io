@@ -332,7 +332,7 @@ InlineSVG=function(){
 }
 
 CMSObject=function(title){
-	var o=BaseFilter(CMS,o=>UnFunction(o.TITLE)&&LowerSimpleString(UnFunction(o.TITLE))===LowerSimpleString(title)||LowerSimpleString(UnFunction(o.LINK))===LowerSimpleString(title));
+	var o=BaseFilter(CMS,o=>Evaluate(o.TITLE)&&LowerSimpleString(Evaluate(o.TITLE))===LowerSimpleString(title)||LowerSimpleString(Evaluate(o.LINK))===LowerSimpleString(title));
 	if(o.length)
 		return First(o);
 }

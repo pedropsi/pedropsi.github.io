@@ -190,8 +190,8 @@ PersonalPage=function(linkObj){
 }
 	
 NameAliasString=function(linkObj){
-	var name=UnFunction(linkObj.name);
-	var alias=UnFunction(linkObj.alias||"");
+	var name=Evaluate(linkObj.name);
+	var alias=Evaluate(linkObj.alias||"");
 	
 	if(!name&&!alias)
 		return console.log("missing!");

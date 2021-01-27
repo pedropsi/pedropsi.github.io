@@ -41,7 +41,7 @@ Identity=function(i){return i;};
 True=function(){return true};
 False=function(){return false};
 
-UnFunction=function(data){
+Evaluate=function(data){
 	if (typeof data==="function")
 		return data();
 	else
@@ -2331,8 +2331,6 @@ LoadData=function(url,Successer,header,FailureF){
 ///////////////////////////////////////////////////////////////////////////////
 // Parsing
 
-var ObjectKeyPattern=/[\d\D\_]+/;
-
 IsolateCode=function(code,startstring,endstring){
 	var code=code.split("\n").join("").split(/\n/).join("").split(/\t/).join("");
 	if(startstring)
@@ -4379,6 +4377,13 @@ HearOnce=function(eventName,F,target){ //execute if heard or keep listening
 		ListenOnce(eventName,F,target);
 }
 
+Hear=function(eventName,F,target){ //execute if heard or keep listening
+	if(Shouted(eventName)&&!target)
+		F();
+	else
+		Listen(eventName,F,target);
+}
+
 
 ListenF=function(EFTC){
 	var EFTC=EFTC;
@@ -6204,7 +6209,7 @@ WebHyperText=function(name,value){
 		return Shout("hypertext-"+name);
 	}
 	if(globalThis[name]){
-		var text=globalThis[name]();
+		var text=Evaluate(globalThis[name]);
 		return text;
 	}
 	else{

@@ -31,7 +31,7 @@ CommentObject=function(dataline,dataarray){
 	Obj.replyId=NextReplyMessageId(Obj.id,dataarray);
 	Obj.title=CMSObject(SafeString(dataline[1]))
 	if(Obj.title)
-		Obj.title=UnFunction(Obj.title.TITLE);
+		Obj.title=Evaluate(Obj.title.TITLE);
 	else
 		Obj.title="Guestbook";
 

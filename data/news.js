@@ -529,7 +529,7 @@ NonFutureItem=function(npObj){//news or page Object
 	if(npObj.DATE)
 		return Days(StringDate(npObj.DATE))>=0
 	if(npObj.DAY){
-		var d=DateDate(UnFunction(npObj.DAY),UnFunction(npObj.MONTH),UnFunction(npObj.YEAR));
+		var d=DateDate(Evaluate(npObj.DAY),Evaluate(npObj.MONTH),Evaluate(npObj.YEAR));
 		return d>=0;
 	}
 };
@@ -538,8 +538,8 @@ NewsEntryHTML=function(change,Opts){
 	var d=Opts.depth||2;
 	return `
 	<h${d}>${DateName(StringDate(change.DATE))}</h${d}>
-	${change.HEADER?`<h${d+1}>${UnFunction(change.HEADER)}</h${d+1}>`:""}
-	${UnFunction(change.PIECE)}
+	${change.HEADER?`<h${d+1}>${Evaluate(change.HEADER)}</h${d+1}>`:""}
+	${Evaluate(change.PIECE)}
 	`;
 }
 
@@ -577,8 +577,8 @@ NewsDaySectionHTML=function(items){
 
 NewsPieceHTML=function(item){
 	return`
-		${item.HEADER?`<h4>${UnFunction(item.HEADER)}</h4>`:""}
-		${UnFunction(item.PIECE)}
+		${item.HEADER?`<h4>${Evaluate(item.HEADER)}</h4>`:""}
+		${Evaluate(item.PIECE)}
 	`
 }
 
