@@ -184,6 +184,7 @@ GridExtremes=function(opts){
 	if(width/(cols+bx)<square)
 		square=width/(cols+bx);
 
+	square=square*(opts.scaleGrid||1);
 	var	x0=(width/2-square*cols/2);
 	var	y0=(height/2-square*rows/2);
 	var	x1=(width/2+square*cols/2);
@@ -349,6 +350,24 @@ UnDraw=function(opts){
 	var opts=opts||{}
 	var canvas=GetContextElement(opts.target);
 	GetContext(opts.target).clearRect(0,0,Width(canvas),Height(canvas));
+}
+
+DrawText=function(opts){
+	if(!opts.txt)
+		return;
+	var opts={...opts};
+	var canvas=GetContextElement(opts.target);
+	var ctx=GetContext(canvas);
+	opts.fontSize=opts.fontSize||"30px";
+	opts.fontFamily=opts.fontFamily||"Arial";
+	ctx.font=opts.font||(opts.fontSize+" "+opts.fontFamily);
+	if(typeof opts.x==="undefined")
+		opts.x=1/2;
+	if(typeof opts.y==="undefined")
+		opts.y=1/2;
+	ctx.fillStyle=opts.colour||"black";
+	ctx.textAlign=opts.textAlign||"center";
+	ctx.fillText(opts.txt,canvas.width*opts.x,canvas.height*opts.y);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

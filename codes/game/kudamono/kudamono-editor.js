@@ -1245,10 +1245,34 @@ SerialState=function(serialObj,state){
 		if(serialObj.l)
 			state.level=SerialLevel(serialObj.l,state);
 		if(serialObj.s)
-			state.segments=SerialSegments(serialObj.s,state)
-
+			state.segments=SerialSegments(serialObj.s,state);
+		state.metadata=SerialMetadata(serialObj)
 	return state;
 }
+
+var MetadataAbbreviations={
+	"author":"a",
+	"date":"d",
+	"title":"t",
+	"url":"u"
+}
+
+var AbbreviationsMetadata=FlipKeysValues(MetadataAbbreviations);
+
+SerialMetadata=function(serialObj){
+	var metadata=ObjectKeyIntersection(serialObj,AbbreviationsMetadata);
+		metadata=ReKeyObject(metadata,Accesser(AbbreviationsMetadata));
+		Keys(metadata).map(k=>metadata[k]=decodeURIComponent(metadata[k]));
+	return metadata;
+}
+
+MetadataSerial=function(metadata){
+	var serialObj=ObjectKeyIntersection(metadata,MetadataAbbreviations);
+		serialObj=ReKeyObject(serialObj,Accesser(MetadataAbbreviations,LowerCase));
+	return serialObj;
+}
+
+
 
 SerialGenreState=function(g,state){
 	if(typeof LettersGenre==="undefined")
@@ -1277,6 +1301,9 @@ StateSerial=function(state){
 	var g=GenreSerial(state);
 	if(g)
 		Opts.G=g;
+	if(state.metadata)
+		Opts=Merge(Opts,MetadataSerial(state.metadata))
+	Opts=ReKeyObject(Opts,UpperCase);
 	return ParameterString(Opts);
 }
 
@@ -1320,8 +1347,48 @@ DrawState=function(state){
 	DrawStateGrid(state);
 	DrawStatePaths(state);
 	DrawLevel(state);
+	DrawMetadata(state);
 }
 
+DrawMetadata=function(state){
+	var Opts={
+		target:state.target,
+		colour:state.line.colour,
+	}
+	DrawText({
+		...Opts,
+		txt:Capitalise(state.genre),
+		fontSize:"calc(var(--h4) + var(--w4))",
+		y:0.1
+	})
+	var title=state.metadata.title?(Exfix(state.metadata.title,'"')+" "):"";
+	var author=state.metadata.author?("by "+state.metadata.author):"";
+
+	Opts={
+		...Opts,
+		fontSize:"calc(var(--h2) + var(--w2))",
+		textAlign:"right",
+		x:0.95
+	};
+
+	if(title+author)
+		DrawText({
+			...Opts,
+			txt:title+author,
+			y:0.93
+		})
+	
+	var date=state.metadata.date||"";
+	if(date){
+		date=TrimWhitespaceString(SpacedString(StripHTML(StringDateName(date))))
+	}
+
+	DrawText({
+		...Opts,
+		txt:date,
+		y:0.98
+	})
+}
 
 
 StateUpdater=function(opts){
