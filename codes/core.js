@@ -742,7 +742,7 @@ ObjectArrayF=function(ArrayF,ObjectF){
 ///////////////////////////////////////////////////////////////////////////////
 //Dictionaries
 
-DictionaryLowerAccesser=function(Dictionary,Rewriter){
+LowerAccesser=function(Dictionary,Rewriter){
 	return TransformAccesser(Dictionary,LowerCase,Identity,Rewriter);
 }
 
@@ -849,15 +849,24 @@ ArrayIntersection=function(array1,array2){
 	return unique.sort();
 }
 
-ObjectIntersection=function(array1,array2){
+ObjectIntersection=function(O1,O2){
 	var unique={};
 	var value;
-	for(var i in array1){
-		value=array1[i];
-		if(Equal(array2[i],value))
+	for(var i in O1){
+		value=O1[i];
+		if(Equal(O2[i],value))
 			unique[i]=value;
 	}
 	return unique;
+}
+
+ObjectKeyIntersection=function(O1,O2){
+	var O={};
+	for(var i in O1){
+		if(typeof O2[i]!=="undefined")
+			O[i]=O1[i];
+	}
+	return O;
 }
 
 
@@ -1323,6 +1332,14 @@ LowerCase=function(string){
 		return string.toLowerCase();
 }
 
+UpperCase=function(string){
+	if(!string||!string.toUpperCase)
+		return "";
+	else
+		return string.toUpperCase();
+}
+
+
 Capitalise=function(word){
 	if(word.length)
 		return word[0].toUpperCase()+Rest(word).toLowerCase();
@@ -1602,7 +1619,7 @@ Enumerate=function(StringArray,and){
 	var last=Last(StringArray);
 	
 	if(In(prelast,Exfix(and," "))||In(last,Exfix(and," ")))
-		and=DictionaryLowerAccesser(EnumerationSynonyms)(and);
+		and=LowerAccesser(EnumerationSynonyms)(and);
 	
 	and=Exfix(and," ");
 	if(StringArray.length===2)
@@ -5838,13 +5855,13 @@ var MacKeys={
 }
 
 StringSymbol=function(name){
-	return DictionaryLowerAccesser(StringSymbols)(name);
+	return LowerAccesser(StringSymbols)(name);
 }
 
 var SymbolsNames=FlipKeysValues(StringSymbols);
 
 SymbolName=function(symbol){
-	return DictionaryLowerAccesser(SymbolsNames)(symbol)
+	return LowerAccesser(SymbolsNames)(symbol)
 }
 
 ElementSymbolName=function(e){
@@ -5858,7 +5875,7 @@ SymbolIcon=function(name){
 		return SymbolIcon[name];
 
 	var name=SymbolName(StringSymbol(name));
-	var symbolObj=DictionaryLowerAccesser(Icons)(name);
+	var symbolObj=LowerAccesser(Icons)(name);
 	
 	if(symbolObj===name)
 		return name;
@@ -6132,7 +6149,7 @@ KeyExplainable=function(key){
 }
 
 ExplainKey=function(key){
-	return DictionaryLowerAccesser(KeyExplanations)(key);
+	return LowerAccesser(KeyExplanations)(key);
 }
 
 var KeyExplanations={
@@ -6163,7 +6180,7 @@ var KeyExplanations={
 
 KB=function(string,opts){
 	var opts=opts||{};
-	var options=DictionaryLowerAccesser(MultimediaKeys,EnArray)(string);
+	var options=LowerAccesser(MultimediaKeys,EnArray)(string);
 	return Enumerate(options.map(o=>KBDHTML(o,opts)),"or");
 }
 
