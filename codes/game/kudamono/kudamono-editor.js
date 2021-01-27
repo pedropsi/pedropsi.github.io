@@ -302,6 +302,9 @@ var BlankState={
 		excessColour:"#000000",				//path colour, too many fruit
 		deficitColour:"#CCCCCC" 			//path colour, zero		fruit
 	},
+	metadata:{
+		textColour:"#555555"				//text colour for metadata
+	},
 	grid:{
 		strokeColor:"#BBBBBB",				//grid lines
 		fillColor:"#FFFFFF",				//background
@@ -310,7 +313,8 @@ var BlankState={
 		border:0.5,							//how many squares to add to the border (to each of the shortest sides)
 		scale:0.95,							//fruit scale (how large)
 		nudge:0.3,							//fruit nudge (small adjustments to position)
-		dual:false							//disalign squares and grid
+		dual:false,							//disalign squares and grid
+		scaleGrid:0.8
 	},	
 
 	//Puzzle
@@ -1257,7 +1261,7 @@ SerialState=function(serialObj,state){
 			state.level=SerialLevel(serialObj.l,state);
 		if(serialObj.s)
 			state.segments=SerialSegments(serialObj.s,state);
-		state.metadata=SerialMetadata(serialObj)
+		state.metadata=Merge(state.metadata||{},SerialMetadata(serialObj))
 	return state;
 }
 
@@ -1364,7 +1368,7 @@ DrawState=function(state){
 DrawMetadata=function(state){
 	var Opts={
 		target:state.target,
-		colour:state.line.colour,
+		colour:state.metadata.textColour,
 	}
 	DrawText({
 		...Opts,
@@ -1377,7 +1381,7 @@ DrawMetadata=function(state){
 
 	Opts={
 		...Opts,
-		fontSize:"calc(var(--h2) + var(--w2))",
+		fontSize:"calc(var(--h1) + var(--w1))",
 		textAlign:"right",
 		x:0.95
 	};
@@ -1386,7 +1390,7 @@ DrawMetadata=function(state){
 		DrawText({
 			...Opts,
 			txt:title+author,
-			y:0.93
+			y:0.94
 		})
 	
 	var date=state.metadata.date||"";
