@@ -293,14 +293,22 @@ var BlankState={
 		solid:false,
 		skin:1								//fruit skin thickness
 	},
+	overline:{
+		opacity:0.75,
+		lineWidth:2,
+		colour:"rgb(155,155,155)",
+		dash:[1,1],
+		//clearOpacity:0.75,
+		//clearLineWidth:1,
+		clearColour:"rgb(200,200,200)",
+		clearDash:[5,5]
+	},
 	line:{
 		opacity:0.5,
-		overlineOpacity:1,
 		lineWidth:4,						//fruitline width
-		overlineWidth:1,					//width of ie being drawn
 		cap:"round",
 		lineJoin:"round",
-		colour:"rgba(155,155,155,0.5)",		//default line colour
+		colour:"rgba(155,155,155)",			//default line colour
 		excessColour:"#000000",				//path colour, too many fruit
 		deficitColour:"#CCCCCC" 			//path colour, zero		fruit
 	},
@@ -856,28 +864,32 @@ FruitTrackStateUnRuled=function(fruit,track,state,rule){
 }
 
 TrackStyleOpts=function(track,state,Opts){
-	var fruits=TrackFruits(track,state);
-
-	var wrong=false;
 	
 	var colour;
-	if(fruits.length<1)
-		colour=state.line.deficitColour;
-	else if(fruits.length>1){
-		colour=state.line.excessColour;
-	}
-	else{
-		var fruit=First(fruits);
-		colour=state.symbols[fruit].colour;
-		var rule=Merge(state.rules,FruitStateRule(fruit,state));
-		wrong=FruitTrackStateUnRuled(fruit,track,state,rule);
-		//TODO global rules
-		if(Intersection(rule.simpleshapes,Shape1s).length)
-			rule.dangleallowed=true;
-		if(!wrong&&!rule.dangleallowed&&TrackDangled(track,state))
-			colour=HEXSaturater(0.5)(colour);
-	}
 
+	if(!Opts.edit){
+		var fruits=TrackFruits(track,state);
+		var wrong=false;
+		if(fruits.length<1)
+			colour=state.line.deficitColour;
+		else if(fruits.length>1){
+			colour=state.line.excessColour;
+		}
+		else{
+			var fruit=First(fruits);
+			colour=state.symbols[fruit].colour;
+			var rule=Merge(state.rules,FruitStateRule(fruit,state));
+			wrong=FruitTrackStateUnRuled(fruit,track,state,rule);
+			//TODO global rules
+
+
+
+			if(Intersection(rule.simpleshapes,Shape1s).length)
+				rule.dangleallowed=true;
+			if(!wrong&&!rule.dangleallowed&&TrackDangled(track,state))
+				colour=HEXSaturater(0.5)(colour);
+		}
+	}
 	
 	var dash=[1,1];
 	var lineCap="round";
@@ -886,9 +898,16 @@ TrackStyleOpts=function(track,state,Opts){
 		dash=[1,20];
 	
 	if(Opts.edit){
-		colour=HEXDarkener(0.9)(colour);
-		if(Opts.clearing)
-			dash=[5,5];
+		dash=state.overline.dash||dash;
+		colour=state.overline.colour;
+		opacity=state.overline.opacity;
+		lineWidth=state.overline.lineWidth;
+		if(Opts.clearing){
+			dash=state.overline.clearDash||dash;
+			colour=state.overline.clearColour||colour;
+			opacity=state.overline.clearOpacity||opacity;
+			lineWidth=state.overline.clearLineWidth||lineWidth;
+		}
 	}
 	if(typeof Opts.opacity!=="undefined")
 		colour=CompelRGBA(colour,Opts.opacity||0);
@@ -1355,15 +1374,23 @@ DrawStatePaths=function(state){
 	var tracks=state.tracks;
 	var Opts=Extremes(state);
 	
+	Opts={
+		...Opts,
+		opacity:state.line.opacity,
+		lineWidth:state.line.lineWidth
+	}
+
+	DrawTracks(tracks,state,Opts);
+
 	if(!state.mode.edit&&state.mode.selection.length>1){
 		var seltrack=PathTrack(state.mode.selection);
-		DrawTrack(seltrack,state,{
+		Opts={
 			...Opts,
 			edit:true,
 			clearing:state.mode.clearing,
-			lineWidth:state.line.overlineWidth||1,
-			opacity:state.line.overlineOpacity||1
-		})
+			...state.overline
+		}
+		DrawTrack(seltrack,state,Opts)
 	}
 
 // 	var commonfruits=Keys(state.level).filter(symbol=>state.symbols[symbol].rule.commonValidator);
@@ -1373,12 +1400,7 @@ DrawStatePaths=function(state){
 // 		DrawTracks(Join(...indeptracks),state,Opts);
 
 // 	var commontracks=commonfruits.map(fruit=>FruitStateTracks(fruit,state));
-	Opts={
-		...Opts,
-		opacity:state.line.opacity,
-		lineWidth:state.line.lineWidth
-	}
-	DrawTracks(tracks,state,Opts);
+
 }
 
 DrawState=function(state){

@@ -13,11 +13,15 @@ var Genres={
 		visuals:{
 			solid:true,
 		},
+		overline:{
+			lineWidth:1,
+			colour:"rgb(134,0,16)",
+		},
 		line:{
 			lineJoin:"miter",
 			cap:"square",
-			opacity:1,
-			lineWidth:4,
+			opacity:0.9,
+			lineWidth:2,
 			colour:"rgb(134,0,16)",
 			excessColour:"rgb(134,0,16)",
 			dash:[1,0],
