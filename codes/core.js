@@ -6229,7 +6229,7 @@ AwaitHypertext=function(name){
 	var id=GenerateId();
 	function ReplaceHT(){
 		ReplaceElement(HyperText[name](),id);}
-	HearOnce("hypertext-"+name,ReplaceHT);
+	Hear("hypertext-"+name,ReplaceHT);
 	return `<span class="hypertext" id="${id}" data="${name}">Loading <em>${name}</em>...</span>`;
 }
 
