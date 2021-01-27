@@ -304,6 +304,8 @@ var BlankState={
 		clearDash:[5,5]
 	},
 	line:{
+		dash:[1,1],
+		wrongDash:[1,6],
 		opacity:0.5,
 		lineWidth:4,						//fruitline width
 		cap:"round",
@@ -891,11 +893,11 @@ TrackStyleOpts=function(track,state,Opts){
 		}
 	}
 	
-	var dash=[1,1];
+	var dash=state.line.dash;
 	var lineCap="round";
 
 	if(wrong)
-		dash=[1,20];
+		dash=state.line.wrongDash;
 	
 	if(Opts.edit){
 		dash=state.overline.dash||dash;

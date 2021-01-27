@@ -88,9 +88,9 @@ DrawLine=function(opts){
 	ctx.moveTo(x0*W,y0*H);
 	ctx.lineTo(x1*W,y1*H);
 
-	if(opts.dash)
-		ctx.setLineDash(VectorTimes(opts.dash,s));
-
+	var dash=Times(opts.dash||[1,1],s);
+	
+	ctx.setLineDash(dash);
 	ctx.lineCap=opts.lineCap||"round";
 	ctx.lineWidth=lineWidth;
 	ctx.strokeStyle=strokeColor;
