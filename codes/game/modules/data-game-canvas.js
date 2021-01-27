@@ -351,9 +351,16 @@ DrawSVG=function(opts){
 
 //
 UnDraw=function(opts){
-	var opts=opts||{}
+	var opts=opts||{};
 	var canvas=GetContextElement(opts.target);
-	GetContext(opts.target).clearRect(0,0,Width(canvas),Height(canvas));
+	opts={
+		x0:0,
+		x1:Width(canvas),
+		y0:0,
+		y1:Height(canvas),
+		...opts
+	}
+	GetContext(opts.target).clearRect(opts.x0,opts.y0,opts.x1,opts.y1);
 }
 
 DrawText=function(opts){

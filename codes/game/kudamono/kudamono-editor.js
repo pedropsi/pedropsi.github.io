@@ -1407,10 +1407,24 @@ DrawStatePaths=function(state){
 
 DrawState=function(state){
 	UnDraw();
+	DrawBoard(state);
+	DrawMetadata(state);
+}
+
+DrawBoard=function(state){
+	UnDrawBoard(state);
 	DrawStateGrid(state);
 	DrawStatePaths(state);
 	DrawLevel(state);
-	DrawMetadata(state);
+}
+
+UnDrawBoard=function(state){
+	var gridExtremes=Extremes(state);
+	gridExtremes.x0-=gridExtremes.square/2;
+	gridExtremes.y0-=gridExtremes.square/2;
+	gridExtremes.x1+=gridExtremes.square/2;
+	gridExtremes.y1+=gridExtremes.square/2;
+	UnDraw(gridExtremes);
 }
 
 DrawMetadata=function(state){
@@ -1488,6 +1502,8 @@ DrawMetadata=function(state){
 
 StateUpdater=function(opts){
 	return function(){
+		if(opts.W||opts.H)
+			UnDrawBoard(STATE)
 		UpdateState(opts);
 	}
 }
@@ -1497,7 +1513,7 @@ UpdateState=function(opts){
 		Keys(opts).map(k=>STATE[k]=opts[k](STATE[k]));
 	STATE.tracks=SplitContiguousTracks(STATE.segments);
 	DrawCursor(STATE);
-	DrawState(STATE);
+	DrawBoard(STATE);
 	AddUndo(STATE);
 	NavigateSerial(StateSerial(STATE));
 }
@@ -1534,7 +1550,7 @@ CursorStateUpdate=function(name,state){
 //Undo
 ObtainSetLevelState=function(state){
 	STATE=state;
-	DrawState(state);
+	DrawBoard(state);
 }
 
 
@@ -1698,7 +1714,7 @@ DragActionStarter=function(x,y){
 	STATE.mode.selection=[xy];
 	if(STATE.mode.edit){
 		STATE.mode.clearing=!!XYFruit(xy,STATE);
-		DrawState(STATE);
+		DrawBoard(STATE);
 	}
 }
 DragActionContinuer=function(x,y){
@@ -1709,11 +1725,11 @@ DragActionContinuer=function(x,y){
 		STATE.mode.selection=[];
 	if(!In(STATE.mode.selection,xy)){
 		STATE.mode.selection=AddOnce(STATE.mode.selection,xy);
-		DrawState(STATE);
+		DrawBoard(STATE);
 	}
 	else if(STATE.mode.selection.length>1&&Equal(First(Take(STATE.mode.selection,-2)),xy)){
 		STATE.mode.selection=Remove(STATE.mode.selection,Last(STATE.mode.selection));
-		DrawState(STATE);
+		DrawBoard(STATE);
 	}
 
 	if(!STATE.mode.edit){
@@ -1805,6 +1821,11 @@ var KeyboardActions={
 	"ctrl right":IncrementCanvasWidth,
 	"ctrl down":DecrementCanvasHeight,
 	
+	"ctrl shift up":StateUpdater({H:H=>BlankState.H}),
+	"ctrl shift right":StateUpdater({W:W=>BlankState.W}),
+	"ctrl shift left":StateUpdater({H:H=>2}),
+	"ctrl shift down":StateUpdater({W:W=>2}),
+
 	"ctrl b":function(){STATE.visuals.monochrome=!!!STATE.visuals.monochrome;UpdateState();},
 	"ctrl shift b":function(){STATE.visuals.solid=!!!STATE.visuals.solid;UpdateState();},
 	"ctrl s":ExportSerial,
