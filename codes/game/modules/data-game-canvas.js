@@ -360,7 +360,7 @@ UnDraw=function(opts){
 		y1:Height(canvas),
 		...opts
 	}
-	GetContext(opts.target).clearRect(opts.x0,opts.y0,opts.x1,opts.y1);
+	GetContext(opts.target).clearRect(opts.x0,opts.y0,opts.x1-opts.x0,opts.y1-opts.y0);
 }
 
 DrawText=function(opts){

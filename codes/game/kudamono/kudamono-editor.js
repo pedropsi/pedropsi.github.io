@@ -1420,10 +1420,11 @@ DrawBoard=function(state){
 
 UnDrawBoard=function(state){
 	var gridExtremes=Extremes(state);
-	gridExtremes.x0-=gridExtremes.square/2;
-	gridExtremes.y0-=gridExtremes.square/2;
-	gridExtremes.x1+=gridExtremes.square/2;
-	gridExtremes.y1+=gridExtremes.square/2;
+	var c=1.05;//small correction
+	gridExtremes.x0-=gridExtremes.square/2*c;
+	gridExtremes.y0-=gridExtremes.square/2*c;
+	gridExtremes.x1+=gridExtremes.square/2*c;
+	gridExtremes.y1+=gridExtremes.square/2*c;
 	UnDraw(gridExtremes);
 }
 
@@ -1932,7 +1933,6 @@ InitialisePuzzle=function(){
 	STATE.width=window.innerWidth;
 	STATE.height=window.innerHeight*0.9;
 	PreAddStateCanvas(STATE,"body");
-	CanvasResize();
 
 	AttendDrag(DragActions,"canvas");
 	AttendWheel(WheelActions,"canvas",75);
@@ -1945,6 +1945,7 @@ InitialisePuzzle=function(){
 	SetCursor(STATE.target,STATE.visuals.cursor);
 	setTimeout(()=>FocusElement(STATE.target),500);
 
+	CanvasResize();
 	//Auto instructions
 	AutoInstructions(STATE.symbols)
 	
