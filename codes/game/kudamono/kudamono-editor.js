@@ -1798,20 +1798,21 @@ ObtainStartingLevelState=function(){
 	return state;
 }
 
-
+PreAddStateCanvas=function(state,target){
+	PreAddElement(`
+	<canvas 
+		id="${state.target}" 
+		oncontextmenu="return false;" 
+		width="${state.width}" 
+		height="${state.height}"
+	>`,target);
+}
 
 InitialisePuzzle=function(){
 	STATE=ObtainStartingLevelState();
-	PreAddElement(`
-	<div>
-		<canvas 
-			id="${STATE.target}" 
-			oncontextmenu="return false;" 
-			width="${window.innerWidth}" 
-			height="${window.innerHeight*0.9}"
-		>
-		<div class="title">Kudamono</div>
-	</div>`,"body");
+	STATE.width=window.innerWidth;
+	STATE.height=window.innerHeight*0.9;
+	PreAddStateCanvas(STATE,"body");
 	CanvasResize();
 
 	AttendDrag(DragActions,"canvas");
@@ -1828,6 +1829,13 @@ InitialisePuzzle=function(){
 	//Auto instructions
 	AutoInstructions(STATE.symbols)
 	
+}
+
+StateImage=function(state){
+	var target=state.target;
+	var e=GetElement(target);
+	var href=e.toDataURL("image/png");
+	return ImageHTML({src:href,alt:"kudamono",title:"kudamono"})
 }
 
 
