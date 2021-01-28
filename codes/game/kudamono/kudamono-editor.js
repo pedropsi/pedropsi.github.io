@@ -1615,15 +1615,16 @@ Extremes=function(state){
 }
 
 
-CanvasPosition=function(x,y,state){
+CanvasPosition=function(x,y,w,h,state){
 	var extremes=Extremes(state);
-	var X=state.W*(x-extremes.x0)/(extremes.x1-extremes.x0);
-	var Y=state.H*(y-extremes.y0)/(extremes.y1-extremes.y0);
+	var X=state.W*(x/w*extremes.width-extremes.x0)/(extremes.x1-extremes.x0);
+	var Y=state.H*(y/h*extremes.height-extremes.y0)/(extremes.y1-extremes.y0);
+	Monitor({x,y,w,h,X,Y,...extremes});
 	return [X,Y];
 }
 
-CanvasPoint=function(x,y,state){
-	var p=CanvasPosition(x,y,state);
+CanvasPoint=function(x,y,w,h,state){
+	var p=CanvasPosition(x,y,w,h,state);
 	return [
 		Floor((p[0]+0.5)),
 		Floor((p[1]+0.5))
@@ -1761,8 +1762,8 @@ DragActionAltStarter=function(x,y){
 	DragActionStarter(x,y);
 }
 
-DragActionStarter=function(x,y){
-	var xy=CanvasPoint(x,y,STATE);
+DragActionStarter=function(x,y,w,h){
+	var xy=CanvasPoint(x,y,w,h,STATE);
 	if(!PointValid(xy,STATE))
 		return;//TODO OTHER OPTIONS
 	STATE.mode.symbol=XYFruit(xy,STATE)||STATE.mode.symbol;
@@ -1773,8 +1774,8 @@ DragActionStarter=function(x,y){
 		DrawBoard(STATE);
 	}
 }
-DragActionContinuer=function(x,y){
-	var xy=CanvasPoint(x,y,STATE);
+DragActionContinuer=function(x,y,w,h){
+	var xy=CanvasPoint(x,y,w,h,STATE);
 	if(!PointValid(xy,STATE))
 		return;
 	if(!STATE.mode.selection)
