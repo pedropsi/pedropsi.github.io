@@ -1903,6 +1903,7 @@ var DragActions={
 	"drag-on-3":DragActionDrawStarter,
 	"drag-on-4":ClearSegments,
 	"drag-on-5":ClearFruit,
+	"drag-on-6":()=>ScrollInto(".main"),
 	"drag-continue":DragActionContinuer,
 	"drag-off":DragActionEnder
 }
