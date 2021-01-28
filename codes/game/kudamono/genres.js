@@ -15,16 +15,18 @@ var Genres={
 		},
 		overline:{
 			lineWidth:1,
-			colour:"rgb(134,0,16)",
+			dash:[1,0],
+			colour:"rgb(16,134,0)",
 		},
 		line:{
 			lineJoin:"miter",
 			cap:"square",
 			opacity:0.9,
-			lineWidth:2,
+			lineWidth:1.5,
 			colour:"rgb(134,0,16)",
 			excessColour:"rgb(134,0,16)",
 			dash:[1,0],
+			wrongDash:[1,3],
 		},
 		grid:{
 			strokeColor:"rgb(77,77,77)",
