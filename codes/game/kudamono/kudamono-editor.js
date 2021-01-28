@@ -924,6 +924,9 @@ TrackStyleOpts=function(track,state,Opts){
 		else{
 			var fruit=First(fruits);
 			var wrong=false;
+			if(typeof Opts.wrong!=="undefined")
+				wrong=Opts.wrong;
+
 			if(fruits.length>1){
 				colour=state.groups[SymbolGroupName(fruit,state)].colour||state.line.excessColour;
 				while(!wrong&&fruits.length){
@@ -933,7 +936,7 @@ TrackStyleOpts=function(track,state,Opts){
 			}
 			else{
 				colour=state.symbols[fruit].colour;
-				wrong=FruitTrackStateUnRuled(fruit,track,state);
+				wrong=wrong||FruitTrackStateUnRuled(fruit,track,state);
 			}
 		}
 	}
@@ -1418,8 +1421,21 @@ DrawStateGrid=function(state){
 }
 
 DrawTracks=function(tracks,state,Opts){
-	if(tracks)
-		tracks.map(track=>DrawTrack(track,state,Opts));
+	//todo memorise some of these calculations in state
+	var globalSymbols=Keys(state.level).filter(symbol=>state.symbols[symbol].rule.equaliser);
+	var globalTracksPool=globalSymbols.map(symbol=>FruitStateTracks(symbol,state,tracks));
+	
+	var localTracks=Complement(tracks,Join(...globalTracksPool));
+		localTracks.map(track=>DrawTrack(track,state,Opts));
+
+	globalTracksPool.map((tracks,i)=>DrawGlobalTracks(tracks,state,globalSymbols[i],Opts));
+}
+
+DrawGlobalTracks=function(tracks,state,symbol,Opts){
+	var Opts={...Opts};
+	var Equaliser=state.symbols[symbol].rule.equaliser;
+	Opts.wrong=Unique(tracks.map(Equaliser)).length>1;
+	tracks.map(track=>DrawTrack(track,state,Opts));
 }
 
 DrawStatePaths=function(state){
@@ -1445,13 +1461,7 @@ DrawStatePaths=function(state){
 		DrawTrack(seltrack,state,Opts)
 	}
 
-// 	var commonfruits=Keys(state.level).filter(symbol=>state.symbols[symbol].rule.commonValidator);
-// 	var indepfruits=Complement(Keys(state.level),commonfruits);
 
-// 	var indeptracks=indepfruits.map(fruit=>FruitStateTracks(fruit,state));
-// 		DrawTracks(Join(...indeptracks),state,Opts);
-
-// 	var commontracks=commonfruits.map(fruit=>FruitStateTracks(fruit,state));
 
 }
 
