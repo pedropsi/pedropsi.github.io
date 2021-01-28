@@ -865,6 +865,7 @@ FruitNumber=function(fruit,state){
 
 FruitTrackStateUnRuled=function(fruit,track,state){
 	var rule=Merge(state.rules,FruitStateRule(fruit,state));
+	
 	var wrong=false;
 	if(!wrong&&rule.crossforbidden)
 		wrong=true;
@@ -1516,7 +1517,7 @@ DrawMetadata=function(state){
 	var author=state.metadata.author?("by "+state.metadata.author):"";
 	var date=state.metadata.date||"";
 	if(date){
-		date=" — "+TrimWhitespaceString(SpacedString(StripHTML(StringDateName(date))))
+		date=" — "+TrimWhitespaceString(SpacedString(StripHTML(StringDateName(date,{simplified:true}))))
 	}
 	var url=state.metadata.url||""
 
