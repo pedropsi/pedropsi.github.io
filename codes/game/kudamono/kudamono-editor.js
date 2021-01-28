@@ -347,7 +347,7 @@ var BlankState={
 		dangleallowed:false
 	},
 
-	symbolgroups:{},// multi-symbol lines, if allowed
+	groups:{},// multi-symbol lines, if allowed
 
 	//Interaction
 	mode:{
@@ -874,17 +874,19 @@ TrackStyleOpts=function(track,state,Opts){
 		var wrong=false;
 		if(fruits.length<1)
 			colour=state.line.deficitColour;
-		else if(fruits.length>1){
+		else if(Gather(fruits,fruit=>SymbolGroupName(fruit,state)).length>1){
 			colour=state.line.excessColour;
 		}
 		else{
 			var fruit=First(fruits);
-			colour=state.symbols[fruit].colour;
+			if(fruits.length>1){
+				colour=state.groups[SymbolGroupName(fruit,state)].colour||state.line.excessColour;
+			}
+			else{
+				colour=state.symbols[fruit].colour;
+			}
 			var rule=Merge(state.rules,FruitStateRule(fruit,state));
 			wrong=FruitTrackStateUnRuled(fruit,track,state,rule);
-			//TODO global rules
-
-
 
 			if(Intersection(rule.simpleshapes,Shape1s).length)
 				rule.dangleallowed=true;

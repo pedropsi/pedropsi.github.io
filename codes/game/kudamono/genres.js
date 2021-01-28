@@ -39,8 +39,11 @@ var Genres={
 			simpleshapes:Join(Shape1s,Shape2s,Shape3s),
 			maxtracks:1
 		},
-		symbolgroups:{
-			"bonsai":["flower","fruit"]
+		groups:{
+			"bonsai":{
+				symbols:["flower","fruit"],
+				colour:"rgb(134,0,16)"
+			}
 		},
 		symbols:{
 			"flower":{
@@ -87,7 +90,7 @@ var Genres={
 			simpleshapes:["LR","LE","LS","RN","RW","UD","UW","US","DN","DE","NS","EW","LURD","NESW"],
 			maxtracks:1
 		},
-		symbolgroups:{
+		groups:{
 			"subway":["station","park-N","park-E","park-S","park-W"]
 		},
 		symbols:{
