@@ -829,9 +829,8 @@ FruitNumber=function(fruit,state){
 }
 
 
-FruitTrackStateUnRuled=function(fruit,track,state,rule){
-	if(!rule)
-		var rule=Merge(state.rules,FruitStateRule(fruit,state));
+FruitTrackStateUnRuled=function(fruit,track,state){
+	var rule=Merge(state.rules,FruitStateRule(fruit,state));
 	var wrong=false;
 	if(!wrong&&rule.crossforbidden)
 		wrong=true;
@@ -861,8 +860,20 @@ FruitTrackStateUnRuled=function(fruit,track,state,rule){
 		
 	if(!wrong&&!rule.branchallowed&&TrackBranched(track))
 		wrong=true;
+
+	if(!wrong&&Intersection(rule.simpleshapes,Shape1s).length)
+		rule.dangleallowed=true;
+
+	if(!wrong&&!rule.dangleallowed&&TrackDangled(track,state))
+		wrong=true;
 		
 	return wrong;
+}
+
+SymbolGroupName=function(symbol,state){
+	if(!state.groups)
+		return symbol;
+	return Keys(state.groups).find(k=>In(state.groups[k].symbols,symbol))||symbol;
 }
 
 TrackStyleOpts=function(track,state,Opts){
@@ -871,7 +882,6 @@ TrackStyleOpts=function(track,state,Opts){
 
 	if(!Opts.edit){
 		var fruits=TrackFruits(track,state);
-		var wrong=false;
 		if(fruits.length<1)
 			colour=state.line.deficitColour;
 		else if(Gather(fruits,fruit=>SymbolGroupName(fruit,state)).length>1){
@@ -879,19 +889,18 @@ TrackStyleOpts=function(track,state,Opts){
 		}
 		else{
 			var fruit=First(fruits);
+			var wrong=false;
 			if(fruits.length>1){
 				colour=state.groups[SymbolGroupName(fruit,state)].colour||state.line.excessColour;
+				while(!wrong&&fruits.length){
+					wrong=FruitTrackStateUnRuled(First(fruits),track,state);
+					fruits=Rest(fruits)
+				}
 			}
 			else{
 				colour=state.symbols[fruit].colour;
+				wrong=FruitTrackStateUnRuled(fruit,track,state);
 			}
-			var rule=Merge(state.rules,FruitStateRule(fruit,state));
-			wrong=FruitTrackStateUnRuled(fruit,track,state,rule);
-
-			if(Intersection(rule.simpleshapes,Shape1s).length)
-				rule.dangleallowed=true;
-			if(!wrong&&!rule.dangleallowed&&TrackDangled(track,state))
-				colour=HEXSaturater(0.5)(colour);
 		}
 	}
 	
