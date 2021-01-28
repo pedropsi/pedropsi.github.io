@@ -727,7 +727,7 @@ Count=function(array,itemOrF){
 }
 
 
-ObjectArrayF=function(ArrayF,ObjectF){
+ArrayObjectF=function(ArrayF,ObjectF){
 	return function(AOInclude,AOExclude){
 		if(IsArray(AOInclude)&&IsArray(AOExclude))
 			return ArrayF(AOInclude,AOExclude);
@@ -856,7 +856,7 @@ BiComplement=function(AO1,AO2){
 		return AO1;
 	if(!AO1)
 		return Empty(AO2);
-	return ObjectArrayF(ArrayComplement,ObjectComplement)(...arguments);
+	return ArrayObjectF(ArrayComplement,ObjectComplement)(...arguments);
 }
 
 Complement=ArgumentExtender(BiComplement);
@@ -899,7 +899,7 @@ BiIntersection=function(AO1,AO2){
 		return AO1;
 	if(!AO1)
 		return Empty(AO2);
-	return ObjectArrayF(ArrayIntersection,ObjectIntersection)(AO1,AO2);
+	return ArrayObjectF(ArrayIntersection,ObjectIntersection)(AO1,AO2);
 }
 var Intersection=ArgumentExtender(BiIntersection);
 
@@ -1163,11 +1163,17 @@ RotateString=function(string,left){
 	return string.join("\n");
 }
 
+SubsetArray=function(ASuper,ASub){
+	return Complement(ASub,ASuper).length===0
+}
 
-//Subset (TODO: ARRAYS SUBSET=>SMALLEST===INTERSECTION LARGE WITH SMALLEST)
-Subset=function(Object,SubsetObject){
-	var keys=Keys(SubsetObject);
-	return keys.every(k=>Equal(Object[k],SubsetObject[k]));
+SubsetObject=function(OSuper,OSub){
+	var keys=Keys(OSub);
+	return keys.every(k=>Equal(OSuper[k],OSub[k]));
+}
+
+Subset=function(AOSuper,AOSub){
+	return ArrayObjectF(SubsetArray,SubsetObject)(AOSuper,AOSub);
 }
 
 //Object Arrays (BASE)
