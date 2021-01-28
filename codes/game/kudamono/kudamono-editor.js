@@ -485,14 +485,6 @@ TrackEndsegments=function(track){
 	return track.filter(segment=>SegmentContiguousTrackSegments(segment,track).length<=1);
 }
 
-TrackEndpoints=function(track){
-	var endsegments=TrackEndsegments(track);
-	if(!endsegments.length)
-		return [];
-	else
-		return Join(...endsegments).filter(xy=>track.filter(segment=>In(segment,xy)).length===1);
-}
-
 TrackDangled=function(track,state){
 	var endpoints=TrackEndpoints(track);
 	return endpoints.some(point=>!In(Join(...Values(state.level)),point));
@@ -510,14 +502,18 @@ TrackBranchpoints=function(track){
 	return TrackOverDegreePoints(track,3);
 }
 
+TrackEndpoints=function(track){
+	return TrackDegreePoints(track,1);
+}
+
 TrackLooped=function(track){
 	if(!track.length)
 		return false;
-	var singles=TrackEndpoints(track).length;
+	var singles=TrackDegreePoints(track,1).length;
 	var threes=TrackDegreePoints(track,3).length;
 	var fours=TrackDegreePoints(track,4).length;
 	
-	return singles===0||(threes*3+fours*4-singles*1)/(threes+fours)>1;
+	return singles===0||(threes*3+fours*4-singles*1)/(threes+fours)>=2;
 }
 
 TrackBranched=function(track){
