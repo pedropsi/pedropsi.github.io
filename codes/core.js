@@ -800,14 +800,14 @@ CanonicalObject=function(Obj,CanonicalName){
 ///////////////////////////////////////////////////////////////////////////////
 //Set functions
 
-DistinctArray=function(A,Transform){
-	var Transform=Transform||Identity;
+DistinctArray=function(A,Equaliser){
+	var Equaliser=Equaliser||Identity;
 	var B=[];
 	var C=[];
 	var i=0;
 	while(i<A.length){
 		var a=A[i];
-		var b=Transform(a)
+		var b=Equaliser(a)
 		if(!In(B,b)){
 			B.push(b);
 			C.push(a);
@@ -817,12 +817,17 @@ DistinctArray=function(A,Transform){
 	return C;
 }
 
-DistinctKeysObject=function(O,Transform){
+DistinctKeysObject=function(O,Equaliser){
 	var Ob={};
-	DistinctArray(Keys(O),Transform).map(k=>Ob[k]=Clone(O[k]));
+	DistinctArray(Keys(O),Equaliser).map(k=>Ob[k]=Clone(O[k]));
 	return Ob;
 }
 
+Equaliser=function(Transform){
+	return function(a,b){
+		return Equal(Transform(a),Transform(b))
+	}
+}
 
 Unique=function(AO){
 	return Intersection(AO,AO);
