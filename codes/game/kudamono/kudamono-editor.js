@@ -26,7 +26,7 @@ var ShapeBranches=Join(Shape3s,Shape4s);
 
 TrackGeometricCentrePoint=function(track){
 	var points=TrackPoints(track);
-	return [Mean(PathXs(points)),Mean(PathYs(points))];
+	return Round([Mean(PathXs(points)),Mean(PathYs(points))],3);
 }
 
 PathXs=function(points){return points.map(First)};
@@ -144,7 +144,7 @@ FruitIcons={
 		path:"M 20 3 L 22 2 L 28 18 Q 36 16 42 40 Q 51 42 57 65 Q 62 99 25 97 Q -4 95 1 61 Q 7 33 18 22 Q 20 19 25 17 Q 10 14 7 0 Q 17 2 25 16 L 20 3 Z",
 		rule:{
 			mintracks:2,
-			commonForm:"UnTranslateTrack",
+			equaliser:UnTranslateTrack,
 			description:"All Pear paths are exactly alike, and there is more than one.",
 			depiction:"W=2&L=p1p2p2p2&S=1DR2DR"
 		}
