@@ -5672,14 +5672,17 @@ YearsString=function(start,end){
 		return start;
 }
 
-DateName=function(date){
-	return `${DayNamer(date)} of ${MonthYearNamer(date)}`;
+DateName=function(date,opts){
+	return `${DayNamer(date,opts||{})} of ${MonthYearNamer(date)}`;
 }
 
-DayNamer=function(date){
+DayNamer=function(date,opts){
 	if(!date)
 		return MonthYearNamer(Today());
-	return `${WeekDay(date,DayNames())}, ${Day(date)}<sup>${DayST(Day(date))}</sup>`;
+	var st=DayST(Day(date));
+	if(!opts||!opts.simplified)
+		st=`<sup>${st}</sup>`;
+	return `${WeekDay(date,DayNames())}, ${Day(date)}${st}`;
 }
 
 MonthYearNamer=function(date){
@@ -5727,8 +5730,8 @@ StringDate=function(string){
 	return found;
 }
 
-StringDateName=function(string){
-	return DateName(StringDate(string));
+StringDateName=function(string,opts){
+	return DateName(StringDate(string),opts||{});
 }
 
 ///////////////////////////////////////////////////////////////////////////////
