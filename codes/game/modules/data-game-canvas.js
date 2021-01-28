@@ -11,7 +11,7 @@ GetContextElement=function(targetIDsel){
 }
 
 
-function Width(element){
+Width=function(element){
 	var e=GetContextElement(element);
 	var w=e.width;
 	if(w==="undefined")
@@ -19,7 +19,7 @@ function Width(element){
 	return w;
 }
 
-function Height(element){
+Height=function(element){
 	var e=GetContextElement(element);
 	var h=e.height;
 	if(h==="undefined")

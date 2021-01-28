@@ -1807,6 +1807,35 @@ LetterCoordinatesShifter=function(L){
 	}
 }
 
+
+var ClearBoard=StateUpdater({segments:segments=>[],level:level=>Empty({})});
+var ClearSegments=StateUpdater({segments:segments=>[]});
+var ClearFruit=StateUpdater({level:level=>Empty({})});
+
+FruitSetter=function(fruit){
+	KeyboardActions[STATE.symbols[fruit].letter]=function(){
+		STATE.mode.edit=true;
+		STATE.mode.symbol=fruit;
+		DrawCursor(STATE);
+	}
+}
+
+CycleStateSymbol=function(state,n){
+	var state=Clone(state);
+	if(!n)
+		var n=1;
+	if(!state.mode.edit)
+		state.mode.edit=true;
+	var symbols=Sort(Keys(state.symbols));
+	if(!state.mode.symbol)
+		state.mode.symbol=First(symbols);
+	else{
+		symbols=CycleSort(symbols,a=>a===state.mode.symbol)
+		state.mode.symbol=symbols[(symbols.length+n)%symbols.length];
+	}
+	return state
+}
+
 var KeyboardActions={
 	"alt left":LevelShifter("L"),
 	"alt up":LevelShifter("U"),
@@ -1839,9 +1868,9 @@ var KeyboardActions={
 
 	"space":function(){STATE.mode.edit=!STATE.mode.edit;UpdateState();},
 
-	"ctrl r":function(){STATE.segments=[];UpdateState();},
-	"ctrl shift r":function(){STATE.level={};UpdateState();},
-	"ctrl alt r":function(){STATE.level={};STATE.segments=[];UpdateState();},
+	"ctrl r":ClearSegments,
+	"ctrl shift r":ClearFruit,
+	"ctrl alt r":ClearBoard,
 
 	"ctrl z":function(){Undo()},
 	"ctrl shift z":function(){Redo()},
@@ -1855,37 +1884,6 @@ var KeyboardActions={
 	"shift delete":ClearBoard
 
 };
-
-var ClearBoard=StateUpdater({segments:segments=>[],level:level=>{}});
-var ClearSegments=StateUpdater({segments:segments=>[]});
-var ClearFruit=StateUpdater({level:level=>{}});
-
-FruitSetter=function(fruit){
-	KeyboardActions[STATE.symbols[fruit].letter]=function(){
-		STATE.mode.edit=true;
-		STATE.mode.symbol=fruit;
-		DrawCursor(STATE);
-	}
-}
-
-
-
-
-CycleStateSymbol=function(state,n){
-	var state=Clone(state);
-	if(!n)
-		var n=1;
-	if(!state.mode.edit)
-		state.mode.edit=true;
-	var symbols=Sort(Keys(state.symbols));
-	if(!state.mode.symbol)
-		state.mode.symbol=First(symbols);
-	else{
-		symbols=CycleSort(symbols,a=>a===state.mode.symbol)
-		state.mode.symbol=symbols[(symbols.length+n)%symbols.length];
-	}
-	return state
-}
 
 var WheelActions={
 	"wheel-up":function(){
@@ -1903,6 +1901,8 @@ var DragActions={
 	"drag-on-alt":DragActionDrawStarter,
 	"drag-on-2":WheelActions["wheel-down"],
 	"drag-on-3":DragActionDrawStarter,
+	"drag-on-4":ClearSegments,
+	"drag-on-5":ClearFruit,
 	"drag-continue":DragActionContinuer,
 	"drag-off":DragActionEnder
 }
@@ -1943,8 +1943,8 @@ InitialisePuzzle=function(){
 	STATE.height=window.innerHeight*0.9;
 	PreAddStateCanvas(STATE,"body");
 
-	AttendDrag(DragActions,"canvas");
-	AttendWheel(WheelActions,"canvas",75);
+	AttendDrag(DragActions,STATE.target);
+	AttendWheel(WheelActions,STATE.target,75);
 	Attend('resize',CanvasResize);
 	Keys(STATE.symbols).map(FruitSetter);
 	Keybind(KeyboardActions,STATE.target);
