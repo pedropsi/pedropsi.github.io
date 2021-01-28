@@ -1459,7 +1459,9 @@ video{
 	color:var(--lightblue);
 	align-self:center;
 }
-
+.monitor{
+	background-color: var(--lightyellow)
+}
 .Console,.monitor{
 	pointer-events:none;
 	position:fixed;
