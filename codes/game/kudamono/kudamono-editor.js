@@ -872,6 +872,9 @@ FruitTrackStateUnRuled=function(fruit,track,state){
 		wrong=Complement(UnFruitTrackStateShapes(fruit,track,state),rule.simpleshapes).length>0;
 		rule.branchallowed=rule.branchallowed||Intersection(rule.simpleshapes,ShapeBranches).length>0;
 	}
+	if(!wrong&&rule.unconsecutiveshapes){
+		wrong=TrackConsecutiveShapePairs(track).some(pair=>rule.unconsecutiveshapes.some(incompatibles=>Subset(incompatibles,pair)));
+	}
 	if(!wrong&&!rule.loopallowed&&TrackLooped(track))
 		wrong=true;
 		
@@ -926,6 +929,8 @@ TrackStyleOpts=function(track,state,Opts){
 	
 	var dash=state.line.dash;
 	var lineCap="round";
+	var lineWidth=Opts.lineWidth||state.line.lineWidth||1;
+	var opacity=Opts.opacity||state.line.opacity||1;
 
 	if(wrong)
 		dash=state.line.wrongDash;
@@ -950,7 +955,7 @@ TrackStyleOpts=function(track,state,Opts){
 		strokeColor:colour,
 		dash:dash,
 		lineCap:lineCap,
-		lineWidth:Opts.lineWidth||state.line.lineWidth||1
+		lineWidth:lineWidth
 	}
 
 	return opts;

@@ -15,6 +15,9 @@ var Genres={
 		},
 		overline:{
 			lineWidth:1,
+			clearLineWidth:3,
+			clearColour:"rgb(230,230,230)",
+			clearOpacity:1,
 			dash:[1,0],
 			colour:"rgb(16,134,0)",
 		},
