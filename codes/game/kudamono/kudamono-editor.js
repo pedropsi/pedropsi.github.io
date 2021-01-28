@@ -498,12 +498,26 @@ TrackDangled=function(track,state){
 	return endpoints.some(point=>!In(Join(...Values(state.level)),point));
 }
 
+TrackDegreePoints=function(track,n){
+	return TrackPoints(track).filter(point=>PointContainedTrackSegments(point,track).length===n);
+}
+
+TrackOverDegreePoints=function(track,n){
+	return TrackPoints(track).filter(point=>PointContainedTrackSegments(point,track).length>=n);
+}
+
 TrackBranchpoints=function(track){
-	return TrackPoints(track).filter(point=>PointContainedTrackSegments(point,track).length>=3);
+	return TrackOverDegreePoints(track,3);
 }
 
 TrackLooped=function(track){
-	return track.length>0&&TrackEndpoints(track).length===0&&TrackBranchpoints(track).length===0;
+	if(!track.length)
+		return false;
+	var singles=TrackEndpoints(track).length;
+	var threes=TrackDegreePoints(track,3).length;
+	var fours=TrackDegreePoints(track,4).length;
+	
+	return singles===0||(threes*3+fours*4-singles*1)/(threes+fours)>1;
 }
 
 TrackBranched=function(track){
