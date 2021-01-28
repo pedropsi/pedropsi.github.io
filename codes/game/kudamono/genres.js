@@ -42,7 +42,7 @@ var Genres={
 			maxtracks:1
 		},
 		groups:{
-			"bonsai":{
+			"tree":{
 				symbols:["flower","fruit"],
 				colour:"rgb(134,0,16)"
 			}
