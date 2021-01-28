@@ -1701,8 +1701,13 @@ XYSegmentRemove=function(segment){
 	STATE.segments=Remove(STATE.segments,segment);
 }
 
-DragActionAltStarter=function(x,y){
+DragActionDrawStarter=function(x,y){
 	STATE.mode.edit=false;
+	DragActionStarter(x,y);
+}
+
+DragActionAltStarter=function(x,y){
+	STATE.mode.edit=!STATE.mode.edit;
 	DragActionStarter(x,y);
 }
 
@@ -1863,12 +1868,7 @@ FruitSetter=function(fruit){
 }
 
 
-var DragActions={
-	Starter:DragActionStarter,
-	AltStarter:DragActionAltStarter,
-	Executer:DragActionContinuer,
-	Ender:DragActionEnder
-}
+
 
 CycleStateSymbol=function(state,n){
 	var state=Clone(state);
@@ -1897,6 +1897,14 @@ var WheelActions={
 	}
 }
 
+var DragActions={
+	"drag-on":DragActionStarter,
+	"drag-on-alt":DragActionDrawStarter,
+	"drag-on-2":WheelActions["wheel-down"],
+	"drag-on-3":DragActionDrawStarter,
+	"drag-continue":DragActionContinuer,
+	"drag-off":DragActionEnder
+}
 
 CanvasResize=function(){
 	var e=GetElement(STATE.target);

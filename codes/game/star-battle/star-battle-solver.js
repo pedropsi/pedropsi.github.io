@@ -661,10 +661,10 @@ function StarActionEnder(x,y){
 }
 
 var StarDragActions={
-	Starter:StarActionStarter,
-	AltStarter:StarActionAltStarter,
-	Executer:StarActionContinuer,
-	Ender:StarActionEnder
+	"drag-on":StarActionStarter,
+	"drag-on-alt":StarActionAltStarter,
+	"drag-continue":StarActionContinuer,
+	"drag-end":StarActionEnder
 }
 
 setTimeout(function(){

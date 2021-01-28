@@ -4515,24 +4515,32 @@ XYHandler=function(Action){
 }
 
 AttendDrag=function(Actions,target){
-	if(!Actions||!Actions.Starter&&!Actions.AltStarter)
+	if(!Actions||!Actions["drag-on"]&&!Actions["drag-on-alt"])
 		return;
 	var Actions=Clone(Actions);
 	var Starter=function(ev){
 		ev.preventDefault();
-		if(ev.buttons>2)
-			XYHandler(Actions.MidStarter||Identity)(ev);
+
+		var name=false;
+		if(ev.touches&&ev.touches.length>=2)//multi-finger touch
+			name="drag-on-"+ev.touches.length;
+		else if(ev.buttons>2)
+			name="drag-on-mid";
 		else if(ev.which===1||ev.touches)
-			XYHandler(Actions.Starter||Identity)(ev);
+			name="drag-on";
 		else
-			XYHandler(Actions.AltStarter||Identity)(ev);
+			name="drag-on-alt";
 		
-		var Executer=XYHandler(Actions.Executer)||Identity;
+		//Start
+		XYHandler(Actions[name]||Identity)(ev);
+		
+		var Executer=XYHandler(Actions["drag-continue"]||Identity);
+
 		Attend("mousemove",Executer,target);
 		Attend("touchmove",Executer,target);
 		var Ender=function(ev){
 			ev.preventDefault();
-			XYHandler(Actions.Ender||Identity)(ev);
+			XYHandler(Actions["drag-off"]||Identity)(ev);
 			UnAttend("mousemove",target);
 			UnAttend("touchmove",target);
 			UnAttend("mouseup",target);
