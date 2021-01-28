@@ -833,6 +833,12 @@ TrackConsecutiveShapePairs=function(track){
 }
 
 
+FruitStateTracks=function(fruit,state,tracks){
+	var points=FruitStatePoints(fruit,state);
+	return tracks.filter(track=>points.some(point=>PointTrackContained(point,track)));
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //Draw
 //draws the board
