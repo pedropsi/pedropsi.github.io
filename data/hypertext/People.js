@@ -70,11 +70,12 @@ var Contributors={//People
 	"dohz":{alias:"dohz",ITCH:"dohz",PERSONAL_PAGE:"dohz.waterfall.social"},
 	"jarsp":{alias:"jarsp"},
 	"toomblercazz":{alias:"Toombler",ITCH:"toombler"},
-	"zach":{name:"Zach"},
+	"zach":{name:"Zach",alias:"TheZachMan"},
 	"norgg":{alias:"Norgg",TWITTER:"Norgg"},
 	"ihnn":{name:"Jeffrey",alias:"IHNN",PERSONAL_PAGE:"https://ihnnpuzzles.blogspot.com",TWITCH:"ihavenonamesda"},
 	"omnipresentoffee":{alias:"OmnipresentCoffee"},
-	"clickmazes":{name:"Andrea Gilbert",ALIAS:"Clickmazes",PERSONAL_PAGE:"https://clickmazes.com"}
+	"clickmazes":{name:"Andrea Gilbert",ALIAS:"Clickmazes",PERSONAL_PAGE:"https://clickmazes.com"},
+	"kneeckoh":{alias:"Kneeckoh",TWITTER:"Kneeckoh"}
 }
 
 var Musicians={
@@ -151,7 +152,16 @@ var Developers={
 	"bagenzo":{alias:"bagenzo",ITCH:"bagenzo",TWITTER:"bagenzo"},
 	"hroll":{alias:"HRoll",PERSONAL_PAGE:"https://github.com/HRoll"},//may be wrong
 	"henriquedelima":{name:"Henrique de Lima"},
-	"trevnewt":{name:"Trevor Newton",TWITTER:"trevnewt",ITCH:"drupes"}
+	"trevnewt":{name:"Trevor Newton",TWITTER:"trevnewt",ITCH:"drupes"},
+	"crychair":{name:"Evan Malmud",alias:"crychair"},
+	"devness":{alias:"devness",ITCH:"devness",TWITTER:"devness"},
+	"kamener":{name:"Mischka Kamener",PERSONAL_PAGE:"https://mischkakamener.com",TWITTER:"mischkakamener"},
+	"stacko":{alias:"stacko",TWITCH:"kramff"},
+	"pichusuperlover":{alias:"pichusuperlover",ITCH:"pichusuperlover",TWITTER:"Pichusuperlover"},
+	"aspeon":{alias:"aspeon",TWITCH:"anosep"},
+	"strangecreation":{alias:"strangecreation"},
+	"d5r":{alias:"d5r",name:"Tamiko Tadeo",TWITTER:"ttadeo_dev",TWITCH:"d5r188"},
+	"twak":{name:"Matt",alias:"twak"}
 }
 
 var OtherPeople={
