@@ -1619,7 +1619,6 @@ CanvasPosition=function(x,y,w,h,state){
 	var extremes=Extremes(state);
 	var X=state.W*(x/w*extremes.width-extremes.x0)/(extremes.x1-extremes.x0);
 	var Y=state.H*(y/h*extremes.height-extremes.y0)/(extremes.y1-extremes.y0);
-	Monitor({x,y,w,h,X,Y,...extremes});
 	return [X,Y];
 }
 
