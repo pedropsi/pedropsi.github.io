@@ -161,7 +161,8 @@ var Developers={
 	"aspeon":{alias:"aspeon",TWITCH:"anosep"},
 	"strangecreation":{alias:"strangecreation"},
 	"d5r":{alias:"d5r",name:"Tamiko Tadeo",TWITTER:"ttadeo_dev",TWITCH:"d5r188"},
-	"twak":{name:"Matt",alias:"twak"}
+	"twak":{name:"Matt",alias:"twak"},
+	"hess":{name:"Adam Hess",PERSONAL_PAGE:"https://hparker.io"}
 }
 
 var OtherPeople={
