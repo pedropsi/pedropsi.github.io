@@ -208,8 +208,10 @@ Equal=function(a,b){
 		return false;
 	else if(IsNan(a)&&IsNan(b))
 		return true;
-	else if((typeof a==="string"&&typeof b==="string")||(typeof a==="boolean"&&typeof b==="boolean")||(typeof a==="number"&&typeof b==="number"))
+	else if((typeof a==="string"&&typeof b==="string")||(typeof a==="boolean"&&typeof b==="boolean"))
 		return a===b;
+	else if((typeof a==="number"&&typeof b==="number"))
+		return (a===Infinity&&b===Infinity)||Abs(b-a)<1e-10;//precision limit
 	else if(IsArray(a)&&IsArray(b))
 		return EqualArray(a,b);
 	else if(IsObject(a)&&IsObject(b))
