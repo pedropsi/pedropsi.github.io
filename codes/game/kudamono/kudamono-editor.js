@@ -16,6 +16,7 @@ if(PageSearch("G")){
 
 var Shape1s=["L","U","R","D"];
 var Shape2Straights=["LR","UD"];
+var ShapeStraights=Join(Shape1s,Shape2Straights);
 var Shape2Corners=["LU","UR","RD","LD"];
 var Shape2s=Join(Shape2Straights,Shape2Corners);
 var Shape3s=["LUR","URD","LRD","LUD"];
@@ -475,6 +476,11 @@ PointContainedTracksSegments=function(point,tracks){
 	return Union(...pointsets);
 }
 
+PointContiguousTrackPoints=function(point,track){
+	var points=Join(...PointContainedTrackSegments(point,track).map(SegmentPoints));
+	return Complement(points,[point]);
+}
+
 TrackEndsegments=function(track){
 	return track.filter(segment=>SegmentContiguousTrackSegments(segment,track).length<=1);
 }
@@ -770,8 +776,8 @@ FuseFollowedSegment=function(segment1,segment2){
 
 var DirectionSort=Sorter(d=>Keys(LetterDirections).findIndex(D=>D===d))
 
-PointStateShape=function(point,state){
-	var segments=PointContainedTracksSegments(point,state.tracks);
+PointTrackShape=function(point,track){
+	var segments=PointContainedTrackSegments(point,track);
 	if(!segments||!segments.length){
 		return "";
 	}
@@ -779,6 +785,10 @@ PointStateShape=function(point,state){
 		directions=directions.map(s=>First(Remove(s,[0,0])));
 		directions=directions.map(DirectionCode);
 	return DirectionSort(directions).join("");
+}
+
+PointStateShape=function(point,state){
+	return Join(...state.tracks.map(track=>PointTrackShape(point,track)));
 }
 
 FruitStatePoints=function(fruit,state){
@@ -800,6 +810,16 @@ FruitTrackStateShapes=function(fruit,track,state){
 
 UnFruitTrackStateShapes=function(fruit,track,state){
 	return Complement(TrackPoints(track),FruitTrackStatePoints(fruit,track,state)).map(point=>PointStateShape(point,state));
+}
+
+PointConsecutiveShapePairs=function(point,track){//Todo slash points in half
+	var consecutivepoints=PointContiguousTrackPoints(point,track);
+	var shape=PointTrackShape(point,track);
+	return consecutivepoints.map(point=>[shape,PointTrackShape(point,track)]);
+}
+
+TrackConsecutiveShapePairs=function(track){
+	return DistinctArray(Join(...TrackPoints(track).map(point=>PointConsecutiveShapePairs(point,track))),Sort);
 }
 
 
