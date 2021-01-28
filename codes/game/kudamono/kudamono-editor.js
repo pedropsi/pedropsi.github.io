@@ -1040,7 +1040,8 @@ ExportSerial=function(){
 }
 
 FruitStateLetter=function(fruit,state){
-	return state.symbols[fruit].letter.toLowerCase();
+	var symbol=state.symbols[fruit]||First(state.symbols);
+	return symbol.letter.toLowerCase();
 }
 
 
@@ -1465,7 +1466,7 @@ DrawMetadata=function(state){
 	var author=state.metadata.author?("by "+state.metadata.author):"";
 	var date=state.metadata.date||"";
 	if(date){
-		date=" - "+TrimWhitespaceString(SpacedString(StripHTML(StringDateName(date))))
+		date=" — "+TrimWhitespaceString(SpacedString(StripHTML(StringDateName(date))))
 	}
 	var url=state.metadata.url||""
 
