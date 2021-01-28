@@ -800,6 +800,30 @@ CanonicalObject=function(Obj,CanonicalName){
 ///////////////////////////////////////////////////////////////////////////////
 //Set functions
 
+DistinctArray=function(A,Transform){
+	var Transform=Transform||Identity;
+	var B=[];
+	var C=[];
+	var i=0;
+	while(i<A.length){
+		var a=A[i];
+		var b=Transform(a)
+		if(!In(B,b)){
+			B.push(b);
+			C.push(a);
+		}
+		i++;	
+	}
+	return C;
+}
+
+DistinctKeysObject=function(O,Transform){
+	var Ob={};
+	DistinctArray(Keys(O),Transform).map(k=>Ob[k]=Clone(O[k]));
+	return Ob;
+}
+
+
 Unique=function(AO){
 	return Intersection(AO,AO);
 }

@@ -38,6 +38,7 @@ var Genres={
 			dangleallowed:true,
 			loopallowed:false,
 			simpleshapes:Join(Shape1s,Shape2s,Shape3s),
+			unconsecutiveshapes:[ShapeStraights,Shape2Corners,Shape3s],
 			maxtracks:1
 		},
 		groups:{
