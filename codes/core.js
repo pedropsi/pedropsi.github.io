@@ -6258,8 +6258,13 @@ P=function(...names){ //People
 }
 
 HyperPerson=function(name){
+	var alias=UniformString(name);
+	if(In(HyperPerson.ambiguous,alias))
+		console.log("warning, ambiguous name:",name);
 	return HyperText("People/"+UniformString(name));
 }
+
+HyperPerson.ambiguous=[];
 
 HyperText=function(name,value){
 	if(NodejsDetected()){

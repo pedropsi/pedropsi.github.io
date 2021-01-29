@@ -96,13 +96,11 @@ var Developers={
 	"nebu soku":{alias:"Nebu Soku",ITCH:"nebu-soku"},
 	"Galactical":{name:"Galactical",ITCH:"galactical"},
 	"Amelia Moser":{name:"Amelia Moser",alias:"Chemelia",ITCH:"chemelia"},
-	"Nebu Soku":{name:"Nebu Soku",ITCH:"nebu-soku"},
 	"Chapliboy":{name:"Chapliboy",TWITTER:"chapliboy"},
 	"Zithral":{name:"Zithral",ITCH:"zithral"},
-	"Lucas Le Slo":{name:"Lucas Le Slo",TWITTER:"leslodev"},
 	"David Skinner":{name:"David Skinner"},
 	"Jonathan":{name:"Jonathan",alias:"JD",ITCH:"jdersch"},
-	"John M. Williams":{name:"John M. Williams",alias:"Gate 88",TWITTER:"gateeightyeight"},
+	"John Williams":{name:"John M. Williams",alias:"Gate 88",TWITTER:"gateeightyeight",ITCH:"gate"},
 	"Lukas Schüller":{name:"Lukas Schüller"},
 	"Chyme":{name:"Chyme",ITCH:"chyme"},
 	"Jere Majava":{name:"Jere Majava"},
@@ -135,7 +133,6 @@ var Developers={
 	"lexaloffle":{name:"Joseph White",alias:"Lexaloffle",PERSONAL_PAGE:"https://www.lexaloffle.com/"},
 	"gahr":{name:"Joel Gahr",ITCH:"joelgahr"},
 	"skychan":{name:"Sky Chan",ITCH:"skyychann"},
-	"williams":{name:"John M. Williams",alias:"Gate 88",TWITTER:"gateeightyeight",ITCH:"gate"},
 	"spleeen":{alias:"Spleeen",ITCH:"spleeen"},
 	"obscure":{name:"Xavier Direz",alias:"Narkhos",PERSONAL_PAGE:"http://lafaceobscuredupixel.fr/"},
 	"shadow":{name:"Mark Signorelli",alias:"Rosden Shadow",TWITTER:"Rosden_Shadow"},
@@ -213,6 +210,8 @@ NameAliasString=function(linkObj){
 	return `${name}${alias}`;
 }
 
+var PersonAliases={};
+
 PersonHTML=function(linkObj,key){
 	var page=PersonalPage(linkObj);
 	var name=`<span class="name">${NameAliasString(linkObj)}</span>`;
@@ -222,9 +221,16 @@ PersonHTML=function(linkObj,key){
 	
 	return name;
 }
-	
+
 RegisterPerson=function(alias,key){
-	HyperText("People/"+UniformString(alias),()=>PersonHTML(Persons[key],key));
+	var alias=UniformString(alias);
+	if(PersonAliases[alias]){
+		if(PersonAliases[alias]!==key)
+			HyperPerson.ambiguous.push(alias);
+	}else{
+		PersonAliases[alias]=key;
+		HyperText("People/"+alias,()=>PersonHTML(Persons[key],key));
+	}
 }
 
 MemorableHyperStrings=function(string){
@@ -232,8 +238,6 @@ MemorableHyperStrings=function(string){
 		return [];
 	return string.split(/(\s|\.)+/).concat(string).filter(n=>n.length>2);
 }
-
-
 
 Keys(Persons).map(function(k){
 	RegisterPerson(k,k);
