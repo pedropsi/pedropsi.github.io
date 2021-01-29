@@ -1600,6 +1600,13 @@ Underfix=function(word,prefix){
 	return UnPosfix(word.replace(UnUnderfix(word,prefix),""),prefix);
 }
 
+Infix=function(word,prefix,suffix){
+	if(!word)
+		var word="";
+	var suffix=suffix||prefix;
+	return UnBeforfix(UnAfterfix(word,suffix),prefix);
+}
+
 
 // Padding
 PadLR=function(txt,symbol,n){
