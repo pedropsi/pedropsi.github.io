@@ -214,12 +214,12 @@ var PersonAliases={};
 
 PersonHTML=function(linkObj,key){
 	var page=PersonalPage(linkObj);
-	var name=`<span class="name">${NameAliasString(linkObj)}</span>`;
-
-	var id="p-"+KebabCaseString(key);
+	var name=NameAliasString(linkObj);
+	var element=`<span class="name">${name}</span>`;
+	var id=IndexCaseString("p-"+key);
 	if(page!=="")
-		name=AHTML(name,page,{class:"person "+id,id:id,"data-first":UnAfterFix(name," ")});
-	return name;
+		element=AHTML(element,page,{class:"person "+id,id:id,"data-first":UnAfterfix(name," ")});
+	return element;
 }
 
 RegisterPerson=function(alias,key){
@@ -251,7 +251,7 @@ PeopleSelfReferencer=function(){
 	var peopleElements=GetElements(".person");
 	var firstElements=DistinctArray(peopleElements,Classes);
 	var referenceElements=UnDistinctArray(peopleElements,Classes);
-	referenceElements.map(e=>e.outerHTML=A(e["data-first"],"#"+e.id));
+	referenceElements.map(e=>e.outerHTML=InnerAHTML(e.getAttribute("data-first"),"#"+e.id));
 }
 
 setTimeout(PeopleSelfReferencer,2000);

@@ -2081,12 +2081,12 @@ TitleIndexer=function(h){
 	return function(t){return IndexSubTitle(t,h)};
 }
 
-IndexFragment=function(text){
+IndexCaseString=function(text){
 	return KebabCaseString(CapitaliseSentence(text));
 }
 
 ClosestFragment=function(fragment){
-	var fragment=IndexFragment(fragment);
+	var fragment=IndexCaseString(fragment);
 	if(!fragment)
 		return "";
 	var matches=IndexTitles.filter(t=>Prefixed(LowerSimpleString(t),LowerSimpleString(fragment))||Prefixed(LowerSimpleString(fragment),LowerSimpleString(t)));
@@ -2099,7 +2099,7 @@ ClosestFragment=function(fragment){
 IndexSubTitle=function(t,h){
 	t.setAttribute("data-index-depth",h);
 	Class(t,"index-item");
-	t.id=t.id?t.id:IndexFragment(t.innerText);
+	t.id=t.id?t.id:IndexCaseString(t.innerText);
 	TitleSelfLink(t);
 	return t.id;
 }
@@ -2165,7 +2165,7 @@ TitleSelfLink=function(t){
 
 HeaderAHTML=function(title,page,opts){
 	var page=PageUnFragment(page);
-	var fragment=IndexFragment(title);
+	var fragment=IndexCaseString(title);
 	var opts=opts||{};
 	if(fragment){
 		fragment=Prefix(fragment,"#");
@@ -3164,6 +3164,10 @@ FragmentAHTML=function(title,ref,attribs){
 	return HeaderAHTML(title,ref,{...attribs,class:"innerlink"}); //self-anchors
 }
 
+function InnerAHTML(title,ref,attribs){
+	var title=UnPrefix(title,"#");
+	return AnchorHTML(title,ref,{...attribs,class:"innerlink"})
+}
 
 AnchorHTML=function(content,ref,attribs){
 	var attribs=attribs||{};
