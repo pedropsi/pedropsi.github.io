@@ -33,7 +33,7 @@ var Contributors={//People
 	"connorses":{name:"Connor McHarney",GOOGLE_PLUS:"+Connorses"},
 	"cubestudio":{name:"Noa Hoffmann",alias:"Noa Cube Studio",TWITTER:"noa_cubestudio"},
 	"kutilek":{name:"Jack Kutilek",ITCH:"jackkutilek",shorthand:"jackk"},
-	"patrick":{name:"Patrick Traynor",alias:"Patrickgh3",TWITTER:"clockworkpat"},
+	"traynor":{name:"Patrick Traynor",alias:"Patrickgh3",TWITTER:"clockworkpat"},
 	"zabel":{name:"Zachary Abel",alias:"Zabel",ITCH:"zacharyabel"},
 	"regehr":{name:"Blake Regehr",ITCH:"bregehr"},
 	"minotalen":{alias:"minotalen",TWITTER:"minotalen"},
@@ -213,14 +213,14 @@ NameAliasString=function(linkObj){
 	return `${name}${alias}`;
 }
 
-PersonHTML=function(linkObj){
+PersonHTML=function(linkObj,key){
 	var page=PersonalPage(linkObj);
 	var name=`<span class="name">${NameAliasString(linkObj)}</span>`;
 
 	if(page!=="")
-		return AHTML(name,page);
-	else
-		return name;
+		name=AHTML(name,page);
+	
+	return name;
 }
 	
 RegisterPerson=function(alias,key){
