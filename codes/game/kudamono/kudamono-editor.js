@@ -1598,7 +1598,7 @@ UpdateState=function(opts){
 DrawCursor=function(state){
 	if(!state.mode.edit)
 		STATE=CursorStateUpdate("pencil",STATE)
-	else
+	else if(state.mode.symbol)
 		STATE=CursorStateUpdate(state.mode.symbol,STATE)
 }
 
