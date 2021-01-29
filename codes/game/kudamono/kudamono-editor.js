@@ -396,8 +396,8 @@ var Kudamono={
 		},
 		grid:{
 			dash:[3,4.5,1,4.5,3],
-			fillColor:"rgb(240,255,255)",
-			strokeColor:"#99FF99"
+			//fillColor:"rgb(240,255,255)",
+			strokeColor:"#55BB55"
 		}
 	}
 }
@@ -862,10 +862,9 @@ FruitStateTracks=function(fruit,state,tracks){
 	return tracks.filter(track=>points.some(point=>PointTrackContained(point,track)));
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
-//Draw
-//draws the board
+//Error detection
+
 
 FruitStateRule=function(fruit,state){
 	return state.symbols[fruit].rule;
@@ -888,8 +887,7 @@ FruitNumber=function(fruit,state){
 	return state.level[fruit].length;
 }
 
-
-FruitTrackStateUnRuled=function(fruit,track,state){
+FruitTrackStateLocallyErred=function(fruit,track,state){
 	var rule=Merge(state.rules,FruitStateRule(fruit,state));
 	
 	var wrong=false;
@@ -940,75 +938,87 @@ SymbolGroupName=function(symbol,state){
 	return Keys(state.groups).find(k=>In(state.groups[k].symbols,symbol))||symbol;
 }
 
-TrackStyleOpts=function(track,state,Opts){
+TrackStateErrors=function(track,state){
+	var fruits=TrackFruits(track,state);
+	var errors={};
+	if(fruits.length<1)
+		errors.deficit=true;
+	else if(Gather(fruits,type=>SymbolGroupName(type,state)).length>1)
+		errors.excess=true;
+	else{
+		if(fruits.length===1) //Single-type paths
+			errors.localised=FruitTrackStateLocallyErred(First(fruits),track,state);
+		else
+			while(!errors.equalised&&fruits.length){ //Multi-type paths
+				errors.equalised=FruitTrackStateLocallyErred(First(fruits),track,state);
+				fruits=Rest(fruits);
+			}
+	}
+	return errors;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Draw
+
+TrackStyles=function(track,state,styles,errors){
+	var errors=errors||{};
+	var fruits=TrackFruits(track,state);
+	var fruit=First(fruits);
+	var group=SymbolGroupName(fruit,state);
 	
 	var colour;
-
-	if(!Opts.edit){
-		var fruits=TrackFruits(track,state);
-		if(fruits.length<1)
-			colour=state.line.deficitColour;
-		else if(Gather(fruits,fruit=>SymbolGroupName(fruit,state)).length>1){
-			colour=state.line.excessColour;
-		}
-		else{
-			var fruit=First(fruits);
-			var wrong=false;
-			if(typeof Opts.wrong!=="undefined")
-				wrong=Opts.wrong;
-
-			if(fruits.length>1){
-				colour=state.groups[SymbolGroupName(fruit,state)].colour||state.line.excessColour;
-				while(!wrong&&fruits.length){
-					wrong=FruitTrackStateUnRuled(First(fruits),track,state);
-					fruits=Rest(fruits)
-				}
-			}
-			else{
-				colour=state.symbols[fruit].colour;
-				wrong=wrong||FruitTrackStateUnRuled(fruit,track,state);
-			}
-		}
-	}
 	
-	var dash=state.line.dash;
+	if(errors.deficit)
+		colour=state.line.deficitColour;
+	else if(errors.excess)
+		colour=state.line.excessColour;
+	else if(group&&state.groups[group])
+		colour=state.groups[group].colour||state.line.excessColour;
+	else if(fruit)
+		colour=state.symbols[fruit].colour;
+	
 	var lineCap="round";
-	var lineWidth=Opts.lineWidth||state.line.lineWidth||1;
-	var opacity=Opts.opacity||state.line.opacity||1;
+	var lineWidth=styles.lineWidth||state.line.lineWidth||1;
+	var opacity=styles.opacity||state.line.opacity||1;
 
-	if(wrong)
+	var dash=state.line.dash;
+	if(errors.localised||errors.equalised)
 		dash=state.line.wrongDash;
 	
-	if(Opts.edit){
+	if(styles.edit){
 		dash=state.overline.dash||dash;
 		colour=state.overline.colour;
 		opacity=state.overline.opacity;
 		lineWidth=state.overline.lineWidth;
-		if(Opts.clearing){
+		if(styles.clearing){
 			dash=state.overline.clearDash||dash;
 			colour=state.overline.clearColour||colour;
 			opacity=state.overline.clearOpacity||opacity;
 			lineWidth=state.overline.clearLineWidth||lineWidth;
 		}
 	}
-	if(typeof Opts.opacity!=="undefined")
-		colour=CompelRGBA(colour,Opts.opacity||0);
-	
 
-	var opts={
+	if(state.visuals.monochrome)
+		colour=HEXSaturater(0)(styles.colour);
+	
+	if(typeof styles.opacity!=="undefined")
+		colour=CompelRGBA(colour,styles.opacity);
+	
+	return {
 		strokeColor:colour,
 		dash:dash,
 		lineCap:lineCap,
-		lineWidth:lineWidth
+		lineWidth:lineWidth,
 	}
-
-	return opts;
 }
 
-DrawTrack=function(track,state,Opts){
+DrawTrack=function(track,state,styles,errors){
 	if(!track.length)
-		return;
-	var trackStyleOpts=TrackStyleOpts(track,state,Opts);
+		return false;
+	
+	var trackStyles=TrackStyles(track,state,styles,errors||{});
+
 	var track=track.filter(segment=>SegmentValid(segment,state));
 		track=UnDiscretiseTrack(track);
 		
@@ -1017,8 +1027,10 @@ DrawTrack=function(track,state,Opts){
 		px1:segment[1][0],
 		py0:segment[0][1],
 		py1:segment[1][1],
-		...trackStyleOpts
+		...trackStyles
 	},state))
+
+	return errors;
 }
 
 DrawSegment=function(opts,state){
@@ -1447,25 +1459,70 @@ DrawStateGrid=function(state){
 		gridOpts.cols-=1;
 		gridOpts.border=1;
 	}
+	if(state.win.won)
+		gridOpts=Merge(gridOpts,state.win.grid);
+
+	if(state.visuals.monochrome){
+		if(gridOpts.strokeColor)
+			gridOpts.strokeColor=HEXSaturater(0)(gridOpts.strokeColor);
+		if(gridOpts.fillColor)
+			gridOpts.fillColor=HEXSaturater(0)(gridOpts.fillColor);
+
+	}
 	DrawSquaresGrid(gridOpts);
 }
 
-DrawTracks=function(tracks,state,Opts){
-	//todo memorise some of these calculations in state
+StateAtErrors=function(state){
+	var positionErrors={};
+	var tracks=state.tracks;
 	var globalSymbols=Keys(state.level).filter(symbol=>state.symbols[symbol].rule.equaliser);
-	var globalTracksPool=globalSymbols.map(symbol=>FruitStateTracks(symbol,state,tracks));
-	
-	var localTracks=Complement(tracks,Join(...globalTracksPool));
-		localTracks.map(track=>DrawTrack(track,state,Opts));
 
-	globalTracksPool.map((tracks,i)=>DrawGlobalTracks(tracks,state,globalSymbols[i],Opts));
+	var globalTracksPool=globalSymbols.map(symbol=>FruitStateTracks(symbol,state,tracks));
+	var localTracks=Complement(tracks,Join(...globalTracksPool));
+	var localOrder=Order(tracks,localTracks);
+	var localErrors=localTracks.map(track=>TrackStateErrors(track,state));
+	
+		localOrder.map((p,i)=>positionErrors[p]=localErrors[i]);
+
+	var globalErrors=Join(...globalTracksPool.map((tracks,i)=>GlobalTracksErrors(tracks,state,globalSymbols[i])));
+	var globalOrder=Order(tracks,Join(...globalTracksPool));
+
+		globalOrder.map((p,i)=>positionErrors[p]=globalErrors[i]);
+
+	return positionErrors;
 }
 
-DrawGlobalTracks=function(tracks,state,symbol,Opts){
-	var Opts={...Opts};
+GlobalTracksErrors=function(tracks,state,symbol){
+	var globalerrors={}
 	var Equaliser=state.symbols[symbol].rule.equaliser;
-	Opts.wrong=Unique(tracks.map(Equaliser)).length>1;
-	tracks.map(track=>DrawTrack(track,state,Opts));
+	if(Equaliser)
+		globalerrors.equalised=Unique(tracks.map(Equaliser)).length>1;
+
+	var localErrors=tracks.map(track=>TrackStateErrors(track,state));
+		localErrors=localErrors.map(errors=>Merge(errors,globalerrors));
+	return localErrors;
+}
+
+DrawTracks=function(tracks,state,Opts){
+	var positionErrors=state.atErrors;
+	tracks.map((track,i)=>DrawTrack(track,state,Opts,positionErrors[i]));
+}
+
+
+StateWon=function(state){
+	var wrong=false;
+	if(state.atErrors)
+		wrong=Values(state.atErrors).map(errors=>Values(errors).some(Identity)).some(Identity);
+	if(!wrong&&state.win.rule){
+		var rule=state.win.rule;
+		if(!wrong&&rule.minlines&&state.tracks.length<rule.minlines)
+			wrong=true;
+		if(!wrong&&rule.maxlines&&state.tracks.length>rule.maxlines)
+			wrong=true;
+		// if(!wrong&&rule.fillboard)
+		// wrong=;
+	}
+	return !wrong;
 }
 
 DrawStatePaths=function(state){
@@ -1478,7 +1535,7 @@ DrawStatePaths=function(state){
 		lineWidth:state.line.lineWidth
 	}
 
-	DrawTracks(tracks,state,Opts);
+	var wrong=DrawTracks(tracks,state,Opts);
 
 	if(!state.mode.edit&&state.mode.selection.length>1){
 		var seltrack=PathTrack(state.mode.selection);
@@ -1490,9 +1547,7 @@ DrawStatePaths=function(state){
 		}
 		DrawTrack(seltrack,state,Opts)
 	}
-
-
-
+	return wrong;
 }
 
 DrawState=function(state){
@@ -1603,6 +1658,8 @@ UpdateState=function(opts){
 	if(opts)
 		Keys(opts).map(k=>STATE[k]=opts[k](STATE[k]));
 	STATE.tracks=SplitContiguousTracks(STATE.segments);
+	STATE.atErrors=StateAtErrors(STATE);
+	STATE.win.won=StateWon(STATE);
 	DrawCursor(STATE);
 	DrawBoard(STATE);
 	AddUndo(STATE);
