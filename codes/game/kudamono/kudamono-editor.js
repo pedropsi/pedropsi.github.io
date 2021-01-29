@@ -105,16 +105,26 @@ TrackDiagonallySymmetrised=function(track){
 	}
 
 	fliptrack=Clone(track).map(segment=>TransformSegment(segment,Flipper));
-	fliptrack=Sort(fliptrack.map(CanonicalSegment));
-	track=Sort(track.map(CanonicalSegment));
-	
-	return Equal(fliptrack,track);
+		
+	return Equaliser(track=>Sort(track.map(CanonicalSegment)))(fliptrack,track);
+}
+
+TrackSlantlySymmetrised=function(track){
+	var track=UnTranslateTrack(track);
+
+	var Flipper=function(point){
+		return [-point[1],-point[0]];
+	}
+
+	fliptrack=Clone(track).map(segment=>TransformSegment(segment,Flipper));
+		
+	return Equaliser(track=>Sort(track.map(CanonicalSegment)))(fliptrack,track);
 }
 
 
 TrackSymmetrised=function(track){
 	var XY=TrackGeometricCentrePoint(track);
-	return TrackHorizontallySymmetrised(track,XY)||TrackVerticallySymmetrised(track,XY)||TrackPointwiseSymmetrised(track,XY)||TrackDiagonallySymmetrised(track)||TrackDiagonallySymmetrised(SymmetriseVerticallyTrack(track,0));
+	return TrackHorizontallySymmetrised(track,XY)||TrackVerticallySymmetrised(track,XY)||TrackPointwiseSymmetrised(track,XY)||TrackDiagonallySymmetrised(track)||TrackSlantlySymmetrised(track);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
