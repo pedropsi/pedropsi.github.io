@@ -168,7 +168,6 @@ FruitIcons={
 			crossforbidden:true,
 			minconnectable:2,
 			maxconnected:0,
-			minconnected:1,
 			description:"Every Blueberry is connectable with at least one other (as if a path were drawn).",
 			depiction:"W=2&L=b0b6b2&S=1DD"
 		}
@@ -271,7 +270,6 @@ FruitIcons={
 		rule:{
 			crossforbidden:true,
 			maxconnected:0,
-			minconnected:1,
 			description:"No path passes through a Lemon.",
 			depiction:"L=l4&S=3RR"
 		}
@@ -285,7 +283,6 @@ FruitIcons={
 		rule:{
 			crossforbidden:true,
 			maxconnected:0,
-			minconnected:1,
 			maxconnectable:1,
 			description:"No Orange is connectable with another (no path could be drawn).",
 			depiction:"W=2&L=o0o6o2&S=1DD"
@@ -462,6 +459,10 @@ PointTrackContained=function(point,track){
 	return track.some(segment=>PointSegmentContained(point,segment));
 }
 
+PointTracksContained=function(point,tracks){
+	return tracks.some(track=>PointTrackContained(point,track));
+}
+
 SegmentTrackContained=function(segment,track){
 	return In(track,segment)||In(track,Reverse(segment));
 }
@@ -557,7 +558,7 @@ TranslateSegment=function(segment,x,y){
 	return segment.map(point=>VectorPlus(point,[x,y]));
 }
 TransformSegment=function(segment,Transformer){
-	return segment.map(point=>Transformer(point));
+	return Clone(segment).map(point=>Transformer(point));
 }
 
 SplitContiguousTracks=function(segments){
@@ -857,7 +858,8 @@ TrackConsecutiveShapePairs=function(track){
 }
 
 
-FruitStateTracks=function(fruit,state,tracks){
+FruitStateTracks=function(fruit,state){
+	var tracks=state.tracks;
 	var points=FruitStatePoints(fruit,state);
 	return tracks.filter(track=>points.some(point=>PointTrackContained(point,track)));
 }
@@ -957,6 +959,77 @@ TrackStateErrors=function(track,state){
 	return errors;
 }
 
+StateAtErrors=function(state){
+	var positionErrors={};
+	var tracks=state.tracks;
+	var globalSymbols=Keys(state.level).filter(symbol=>state.symbols[symbol].rule.equaliser);
+
+	var globalTracksPool=globalSymbols.map(symbol=>FruitStateTracks(symbol,state));
+	var localTracks=Complement(tracks,Join(...globalTracksPool));
+	var localOrder=Order(tracks,localTracks);
+	var localErrors=localTracks.map(track=>TrackStateErrors(track,state));
+	
+		localOrder.map((p,i)=>positionErrors[p]=localErrors[i]);
+
+	var globalErrors=Join(...globalTracksPool.map((tracks,i)=>GlobalTracksErrors(tracks,state,globalSymbols[i])));
+	var globalOrder=Order(tracks,Join(...globalTracksPool));
+
+		globalOrder.map((p,i)=>positionErrors[p]=globalErrors[i]);
+
+	return positionErrors;
+}
+
+GlobalTracksErrors=function(tracks,state,symbol){
+	var globalerrors={}
+	var Equaliser=state.symbols[symbol].rule.equaliser;
+	if(Equaliser)
+		globalerrors.equalised=Unique(tracks.map(Equaliser)).length>1;
+
+	var localErrors=tracks.map(track=>TrackStateErrors(track,state));
+		localErrors=localErrors.map(errors=>Merge(errors,globalerrors));
+	return localErrors;
+}
+
+SymbolRuleLonely=function(rule){
+	var lonely=false;
+	if(typeof rule.maxconnected!=="undefined")
+		lonely=rule.maxconnected<2;
+	if(!lonely&&(typeof rule.minconnected!=="undefined"))
+		lonely=rule.minconnected>rule.maxconnected;
+	if(typeof rule.maxconnectable!=="undefined")
+		lonely=rule.maxconnectable<2;
+	if(!lonely&&(typeof rule.minconnectable!=="undefined"))
+		lonely=rule.minconnectable>rule.maxconnectable;	
+	return lonely;
+}
+
+SocialSymbolsTrackContained=function(state){
+	var socialsymbols=Keys(state.symbols).filter(symbol=>!SymbolRuleLonely(state.symbols[symbol].rule));
+	console.log(socialsymbols);
+	var socialsymbolpoints=Join(...socialsymbols.map(fruit=>FruitStatePoints(fruit,state)));
+	return socialsymbolpoints.every(point=>PointTracksContained(point,state.tracks));
+}
+
+
+StateWon=function(state){
+	var wrong=false;
+	if(state.atErrors)
+		wrong=Values(state.atErrors).map(errors=>Values(errors).some(Identity)).some(Identity);
+
+	if(!wrong)
+		wrong=!SocialSymbolsTrackContained(state);
+	
+	if(!wrong&&state.win.rule){
+		var rule=state.win.rule;
+		if(!wrong&&rule.minlines&&state.tracks.length<rule.minlines)
+			wrong=true;
+		if(!wrong&&rule.maxlines&&state.tracks.length>rule.maxlines)
+			wrong=true;
+		// if(!wrong&&rule.fillboard)
+		// wrong=;
+	}
+	return !wrong;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Draw
@@ -1445,6 +1518,11 @@ StateSerial=function(state){
 }
 
 
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //Interactive UI (for quick iteration)
 
@@ -1472,36 +1550,6 @@ DrawStateGrid=function(state){
 	DrawSquaresGrid(gridOpts);
 }
 
-StateAtErrors=function(state){
-	var positionErrors={};
-	var tracks=state.tracks;
-	var globalSymbols=Keys(state.level).filter(symbol=>state.symbols[symbol].rule.equaliser);
-
-	var globalTracksPool=globalSymbols.map(symbol=>FruitStateTracks(symbol,state,tracks));
-	var localTracks=Complement(tracks,Join(...globalTracksPool));
-	var localOrder=Order(tracks,localTracks);
-	var localErrors=localTracks.map(track=>TrackStateErrors(track,state));
-	
-		localOrder.map((p,i)=>positionErrors[p]=localErrors[i]);
-
-	var globalErrors=Join(...globalTracksPool.map((tracks,i)=>GlobalTracksErrors(tracks,state,globalSymbols[i])));
-	var globalOrder=Order(tracks,Join(...globalTracksPool));
-
-		globalOrder.map((p,i)=>positionErrors[p]=globalErrors[i]);
-
-	return positionErrors;
-}
-
-GlobalTracksErrors=function(tracks,state,symbol){
-	var globalerrors={}
-	var Equaliser=state.symbols[symbol].rule.equaliser;
-	if(Equaliser)
-		globalerrors.equalised=Unique(tracks.map(Equaliser)).length>1;
-
-	var localErrors=tracks.map(track=>TrackStateErrors(track,state));
-		localErrors=localErrors.map(errors=>Merge(errors,globalerrors));
-	return localErrors;
-}
 
 DrawTracks=function(tracks,state,Opts){
 	var positionErrors=state.atErrors;
@@ -1509,21 +1557,6 @@ DrawTracks=function(tracks,state,Opts){
 }
 
 
-StateWon=function(state){
-	var wrong=false;
-	if(state.atErrors)
-		wrong=Values(state.atErrors).map(errors=>Values(errors).some(Identity)).some(Identity);
-	if(!wrong&&state.win.rule){
-		var rule=state.win.rule;
-		if(!wrong&&rule.minlines&&state.tracks.length<rule.minlines)
-			wrong=true;
-		if(!wrong&&rule.maxlines&&state.tracks.length>rule.maxlines)
-			wrong=true;
-		// if(!wrong&&rule.fillboard)
-		// wrong=;
-	}
-	return !wrong;
-}
 
 DrawStatePaths=function(state){
 	var tracks=state.tracks;
