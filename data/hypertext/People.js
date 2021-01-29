@@ -212,13 +212,22 @@ NameAliasString=function(linkObj){
 
 var PersonAliases={};
 
+NameHTML=function(name){
+	return `<span class="name">${name}</span>`;
+}
+
+AbbreviatedNameHTML=function(name){
+	var name=In(name,"(")?Infix(name,"(",")"):UnAfterfix(name," ");
+	return NameHTML(name);
+}
+
 PersonHTML=function(linkObj,key){
 	var page=PersonalPage(linkObj);
 	var name=NameAliasString(linkObj);
-	var element=`<span class="name">${name}</span>`;
+	var element=NameHTML(name);
 	var id=IndexCaseString("p-"+key);
 	if(page!=="")
-		element=AHTML(element,page,{class:"person "+id,id:id,"data-first":UnAfterfix(name," ")});
+		element=AHTML(element,page,{class:"person "+id,id:id});
 	return element;
 }
 
@@ -251,7 +260,7 @@ PeopleSelfReferencer=function(){
 	var peopleElements=GetElements(".person");
 	var firstElements=DistinctArray(peopleElements,Classes);
 	var referenceElements=UnDistinctArray(peopleElements,Classes);
-	referenceElements.map(e=>e.outerHTML=InnerAHTML(e.getAttribute("data-first"),"#"+e.id));
+	referenceElements.map(e=>e.outerHTML=InnerAHTML(AbbreviatedNameHTML(e.innerText),"#"+e.id,{class:"person"}));
 }
 
 setTimeout(PeopleSelfReferencer,2000);

@@ -3167,13 +3167,17 @@ ButtonHTML=function(optionsObj){
 };
 
 FragmentAHTML=function(title,ref,attribs){
+	var attribs=attribs||{};
 	var title=UnPrefix(title,"#");
-	return HeaderAHTML(title,ref,{...attribs,class:"innerlink"}); //self-anchors
+		attribs.class=(attribs.class||"")+" innerlink";
+	return HeaderAHTML(title,ref,attribs); //self-anchors
 }
 
 function InnerAHTML(title,ref,attribs){
+	var attribs=attribs||{};
 	var title=UnPrefix(title,"#");
-	return AnchorHTML(title,ref,{...attribs,class:"innerlink"})
+		attribs.class=(attribs.class||"")+" innerlink";
+	return AnchorHTML(title,ref,attribs)
 }
 
 AnchorHTML=function(content,ref,attribs){
