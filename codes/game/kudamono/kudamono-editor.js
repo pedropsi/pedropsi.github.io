@@ -990,6 +990,10 @@ GlobalTracksErrors=function(tracks,state,symbol){
 	return localErrors;
 }
 
+SymbolLonely=function(symbol,state){
+	return SymbolRuleLonely(state.symbols[symbol].rule)
+}
+
 SymbolRuleLonely=function(rule){
 	var lonely=false;
 	if(typeof rule.maxconnected!=="undefined")
@@ -1004,7 +1008,7 @@ SymbolRuleLonely=function(rule){
 }
 
 SocialSymbolsTrackContained=function(state){
-	var socialsymbols=Keys(state.symbols).filter(symbol=>!SymbolRuleLonely(state.symbols[symbol].rule));
+	var socialsymbols=Keys(state.symbols).filter(symbol=>!SymbolLonely(symbol,state));
 	console.log(socialsymbols);
 	var socialsymbolpoints=Join(...socialsymbols.map(fruit=>FruitStatePoints(fruit,state)));
 	return socialsymbolpoints.every(point=>PointTracksContained(point,state.tracks));
@@ -1131,29 +1135,25 @@ PositionValid=function(px,py,state){
 	return !(px<0||px>state.W)&&!(py<0||py>state.H);
 }
 
-DrawFruit=function(Opts,state){
-	if(!PositionValid(Opts.px,Opts.py,state)||!Opts.fruit)
+DrawStateFruit=function(state,fruit,xy,Opts){
+	if(!xy||!PositionValid(xy[0],xy[1],state)||!fruit)
 		return;
-	var fruit=Opts.fruit;
-	var colour=Opts.colour;
+
 	var Opts={
 		...Opts,
 		...state.grid,
 		...state.symbols[fruit],
 		rows:state.H,
-		cols:state.W
+		cols:state.W,
+		px:xy[0],
+		py:xy[1]
 	};
 
-	if(colour){
-		if(IsFunction(colour))
-			Opts.colour=colour(Opts.colour)
-		else
-			Opts.colour=colour;
-	}
+	var colour=Opts.colour;
+	if(colour&&Opts.coloriser)
+		colour=Opts.coloriser(colour)
 
-	if(state.visuals.monochrome&&!state.mode.dragging)
-		Opts.colour=HEXSaturater(0)(Opts.colour);
-
+	var strokeStyle;
 	Opts.dash=false;
 	Opts.lineWidth=state.visuals.skin||0;
 
@@ -1162,28 +1162,36 @@ DrawFruit=function(Opts,state){
 			//Opts.strokeStyle=HEXLightener(1)(Opts.colour);
 		}
 		else if(In(state.mode.selection,[Opts.px,Opts.py])){
-			Opts.strokeStyle=Opts.colour;
-			Opts.colour=HEXLightener(0.9)(Opts.colour);		
+			strokeStyle=colour;
+			colour=HEXLightener(0.9)(colour);		
 		}
 		else{
-			Opts.strokeStyle=Opts.colour;
-				Opts.colour=HEXLightener(1)(Opts.colour);		
+			strokeStyle=colour;
+			colour=HEXLightener(1)(colour);		
 		}
+	}
+
+	if(state.visuals.monochrome){
+		strokeStyle=HEXSaturater(0)(strokeStyle);
+		colour=HEXSaturater(0)(colour);
 	}
 
 	if(typeof Opts.shiftx==="undefined")
 		Opts.shiftx=0;
 	if(typeof Opts.shifty==="undefined")
 		Opts.shifty=0;
+
 	Opts.shiftx+=Opts.nudge;
 	Opts.shifty+=Opts.nudge;
-	
+	Opts.colour=colour;
+	Opts.strokeStyle=strokeStyle;
+
 	DrawSVG(Opts);
 }
 
 DrawFruits=function(fruit,coordinates,Opts,state){
 	var Opts=Opts||{};
-	coordinates.map(xy=>DrawFruit({...Opts,fruit:fruit,px:xy[0],py:xy[1]},state));
+	coordinates.map(xy=>DrawStateFruit(state,fruit,xy,Opts));
 
 }
 
@@ -1193,9 +1201,9 @@ DrawLevel=function(state){
 
 	if(state.mode.edit)
 		if(state.mode.clearing)
-			DrawFruits(state.mode.symbol,state.mode.selection,{colour:HEXLightener(0.9)},state);
+			DrawFruits(state.mode.symbol,state.mode.selection,{coloriser:HEXLightener(0.9)},state);
 		else
-			DrawFruits(state.mode.symbol,state.mode.selection,{colour:HEXDarkener(0.8)},state);
+			DrawFruits(state.mode.symbol,state.mode.selection,{coloriser:HEXDarkener(0.8)},state);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
