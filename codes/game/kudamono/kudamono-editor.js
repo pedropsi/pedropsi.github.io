@@ -332,7 +332,7 @@ var BlankState={
 		strokeColor:"#BBBBBB",				//grid lines
 		fillColor:"#FFFFFF",				//background
 		lineWidth:2,						//width   of grid lines
-		dash:[2,2],							//dashing of grid lines
+		dash:[8/6,8/3,8/3,8/3,8/3,8/3,8/6], //dashing of grid lines
 		border:0.5,							//how many squares to add to the border (to each of the shortest sides)
 		scale:0.95,							//fruit scale (how large)
 		nudge:0.3,							//fruit nudge (small adjustments to position)
@@ -359,7 +359,9 @@ var BlankState={
 	},
 
 	groups:{},// multi-symbol lines, if allowed
-
+	win:{
+		won:false
+	},
 	//Interaction
 	mode:{
 		edit:false,					//true:adding fruits, false:solving
@@ -385,6 +387,18 @@ var Kudamono={
 	//visuals
 	mode:{
 		symbol:First(FruitIcons),	//current fruit to be added
+	},
+	win:{
+		rule:{
+			minlines:1,
+			maxlines:Infinity,
+			fillgrid:false
+		},
+		grid:{
+			dash:[3,4.5,1,4.5,3],
+			fillColor:"rgb(240,255,255)",
+			strokeColor:"#99FF99"
+		}
 	}
 }
 
