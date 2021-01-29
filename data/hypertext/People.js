@@ -216,9 +216,9 @@ PersonHTML=function(linkObj,key){
 	var page=PersonalPage(linkObj);
 	var name=`<span class="name">${NameAliasString(linkObj)}</span>`;
 
+	var id="p-"+KebabCaseString(key);
 	if(page!=="")
-		name=AHTML(name,page,{cla:"person p-"+KebabCaseString(key)});
-	
+		name=AHTML(name,page,{class:"person "+id,id:id,"data-first":UnAfterFix(name," ")});
 	return name;
 }
 
