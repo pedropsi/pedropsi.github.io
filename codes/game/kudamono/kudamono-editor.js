@@ -299,7 +299,7 @@ var BlankState={
 		cursorsize:80,
 		monochrome:false,
 		solid:false,
-		skin:1								//fruit skin thickness
+		skin:0.6								//fruit skin thickness
 	},
 	overline:{
 		opacity:0.75,
@@ -1018,6 +1018,11 @@ SocialSymbolsTrackContained=function(state){
 	return Join(...socialsymbolpoints).every(point=>PointTracksContained(point,state.tracks));
 }
 
+XYFruitStateErred=function(xy,fruit,state){
+	var lonely=SymbolLonely(fruit,state);
+	var tracked=PointTracksContained(xy,state.tracks);
+	return (lonely&&tracked)||(!lonely&&!tracked);
+}
 
 StateWon=function(state){
 	var wrong=false;
@@ -1064,7 +1069,7 @@ TrackStyles=function(track,state,styles,errors){
 	var opacity=styles.opacity||state.line.opacity||1;
 
 	var dash=state.line.dash;
-	if(errors.localised||errors.equalised)
+	if(errors.localised||errors.equalised||errors.excess)
 		dash=state.line.wrongDash;
 	
 	if(styles.edit){
@@ -1153,27 +1158,28 @@ DrawStateFruit=function(state,fruit,xy,Opts){
 		py:xy[1]
 	};
 
-	var colour=Opts.colour;
-	if(colour&&Opts.coloriser)
-		colour=Opts.coloriser(colour)
+	var error=XYFruitStateErred(xy,fruit,state);
 
-	var strokeStyle;
-	Opts.dash=false;
-	Opts.lineWidth=state.visuals.skin||0;
+	var primarycolour=Opts.colour;
+	if(primarycolour&&Opts.coloriser)
+		primarycolour=Opts.coloriser(primarycolour);
 
-	if(!state.visuals.solid){
-		if(PointTrackContained([Opts.px,Opts.py],state.segments)){
-			//Opts.strokeStyle=HEXLightener(1)(Opts.colour);
-		}
-		else if(In(state.mode.selection,[Opts.px,Opts.py])){
-			strokeStyle=colour;
-			colour=HEXLightener(0.9)(colour);		
-		}
-		else{
-			strokeStyle=colour;
-			colour=HEXLightener(1)(colour);		
-		}
+	var colour=primarycolour;
+	var strokeStyle=primarycolour;
+	var lineWidth=state.visuals.skin||0.1;
+
+	if(In(state.mode.selection,[Opts.px,Opts.py])){
+		colour=HEXLightener(0.9)(colour);
+		lineWidth=2*lineWidth;
 	}
+	else{
+		if(error&&!state.visuals.solid){
+			colour=HEXLightener(1)(colour);
+		}
+		else
+			lineWidth=0.1;
+	}
+
 
 	if(state.visuals.monochrome){
 		strokeStyle=HEXSaturater(0)(strokeStyle);
@@ -1187,8 +1193,13 @@ DrawStateFruit=function(state,fruit,xy,Opts){
 
 	Opts.shiftx+=Opts.nudge;
 	Opts.shifty+=Opts.nudge;
+
 	Opts.colour=colour;
 	Opts.strokeStyle=strokeStyle;
+
+	Opts.dash=false;
+	Opts.lineWidth=lineWidth;
+	
 
 	DrawSVG(Opts);
 }
@@ -1196,7 +1207,6 @@ DrawStateFruit=function(state,fruit,xy,Opts){
 DrawFruits=function(fruit,coordinates,Opts,state){
 	var Opts=Opts||{};
 	coordinates.map(xy=>DrawStateFruit(state,fruit,xy,Opts));
-
 }
 
 DrawLevel=function(state){

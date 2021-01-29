@@ -77,7 +77,7 @@ DrawLine=function(opts){
 	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
 
 	var s=opts.lineScale||1;
-	var lineWidth=(opts.lineWidth?opts.lineWidth:(2/100))*s;
+	var lineWidth=((typeof opts.lineWidth!=="undefined")?(opts.lineWidth):(2/100))*s;
 
 	var x0=(typeof opts.x0!=="undefined")?opts.x0:0;
 	var x1=(typeof opts.x1!=="undefined")?opts.x1:1;
@@ -246,7 +246,7 @@ DrawShape=function(opts){
 	var fillColor=opts.fillColor?opts.fillColor:getComputedStyle(document.body)["background-strokeColor"]||"white";
 
 	var size=opts.size?opts.size:100;
-	var lineWidth=opts.lineWidth?opts.lineWidth:size/20;
+	var lineWidth=(typeof opts.lineWidth!=="undefined")?(opts.lineWidth):(size/20);
 
 	var Drawer=opts.Drawer||Identity;
 
@@ -340,7 +340,7 @@ DrawSVG=function(opts){
 	if(opts.strokeStyle){
 		opts.ctx.setLineDash(opts.dash)
 		opts.ctx.strokeStyle=opts.strokeStyle;
-		opts.ctx.lineWidth=opts.lineWidth*opts.lineScale;
+		opts.ctx.lineWidth=(opts.lineWidth||0)*(opts.lineScale||0);
 		opts.ctx.stroke(p);
 	}
 
