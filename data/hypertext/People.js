@@ -247,3 +247,11 @@ Keys(Persons).map(function(k){
 	MemorableHyperStrings(Persons[k].TWITTER||"").map(n=>RegisterPerson(n,k))
 });
 
+PeopleSelfReferencer=function(){
+	var peopleElements=GetElements(".person");
+	var firstElements=DistinctArray(peopleElements,Classes);
+	var referenceElements=UnDistinctArray(peopleElements,Classes);
+	referenceElements.map(e=>e.outerHTML=A(e["data-first"],"#"+e.id));
+}
+
+setTimeout(PeopleSelfReferencer,2000);
