@@ -217,7 +217,7 @@ NameHTML=function(name){
 }
 
 AbbreviatedNameHTML=function(name){
-	var name=In(name,"(")?Infix(name,"(",")"):UnAfterfix(name," ");
+	var name=In(name,"(")?Infix(name,"(",")"):name;
 	return NameHTML(name);
 }
 
