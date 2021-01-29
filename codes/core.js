@@ -842,11 +842,18 @@ DistinctKeysObject=function(O,Equaliser){
 	return Ob;
 }
 
-Equaliser=function(Transform){
+Equaliser=function(Standardise){
+	var Standardise=Standardise||Identity;
 	return function(a,b){
-		return Equal(Transform(a),Transform(b))
+		return Equal(Standardise(a),Standardise(b))
 	}
 }
+
+Order=function(canon,list,Standardise){
+	var Standardise=Standardise||Identity;
+	return list.map(item=>canon.findIndex(c=>Equaliser(Standardise)(item,c)))
+}
+
 
 Unique=function(AO){
 	return Intersection(AO,AO);
