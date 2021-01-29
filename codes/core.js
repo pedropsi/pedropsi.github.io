@@ -850,6 +850,8 @@ Equaliser=function(Standardise){
 }
 
 Order=function(canon,list,Standardise){
+	if(!list)
+		return [];
 	var Standardise=Standardise||Identity;
 	return list.map(item=>canon.findIndex(c=>Equaliser(Standardise)(item,c)))
 }

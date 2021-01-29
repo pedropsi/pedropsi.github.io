@@ -827,7 +827,7 @@ PointStateShape=function(point,state){
 }
 
 FruitStatePoints=function(fruit,state){
-	return state.level[fruit];
+	return state.level[fruit]||[];
 }
 
 FruitTrackStatePoints=function(fruit,track,state){
@@ -960,12 +960,17 @@ TrackStateErrors=function(track,state){
 }
 
 StateAtErrors=function(state){
-	var positionErrors={};
+	
 	var tracks=state.tracks;
+	if(!tracks.length)
+		return {};
+	
+	var positionErrors={};
 	var globalSymbols=Keys(state.level).filter(symbol=>state.symbols[symbol].rule.equaliser);
 
 	var globalTracksPool=globalSymbols.map(symbol=>FruitStateTracks(symbol,state));
 	var localTracks=Complement(tracks,Join(...globalTracksPool));
+
 	var localOrder=Order(tracks,localTracks);
 	var localErrors=localTracks.map(track=>TrackStateErrors(track,state));
 	
@@ -1009,9 +1014,8 @@ SymbolRuleLonely=function(rule){
 
 SocialSymbolsTrackContained=function(state){
 	var socialsymbols=Keys(state.symbols).filter(symbol=>!SymbolLonely(symbol,state));
-	console.log(socialsymbols);
-	var socialsymbolpoints=Join(...socialsymbols.map(fruit=>FruitStatePoints(fruit,state)));
-	return socialsymbolpoints.every(point=>PointTracksContained(point,state.tracks));
+	var socialsymbolpoints=socialsymbols.map(fruit=>FruitStatePoints(fruit,state));
+	return Join(...socialsymbolpoints).every(point=>PointTracksContained(point,state.tracks));
 }
 
 
@@ -1698,9 +1702,11 @@ StateUpdater=function(opts){
 UpdateState=function(opts){
 	if(opts)
 		Keys(opts).map(k=>STATE[k]=opts[k](STATE[k]));
+	
 	STATE.tracks=SplitContiguousTracks(STATE.segments);
 	STATE.atErrors=StateAtErrors(STATE);
 	STATE.win.won=StateWon(STATE);
+
 	DrawCursor(STATE);
 	DrawBoard(STATE);
 	AddUndo(STATE);
