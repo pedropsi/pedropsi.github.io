@@ -1713,16 +1713,16 @@ UpdateState=function(opts){
 	NavigateSerial(StateSerial(STATE));
 }
 
-DrawCursor=function(state){
+DrawCursor=function(state,forced){
 	if(!state.mode.edit)
-		STATE=CursorStateUpdate("pencil",STATE)
+		STATE=CursorStateUpdate("pencil",STATE,forced)
 	else if(state.mode.symbol)
-		STATE=CursorStateUpdate(state.mode.symbol,STATE)
+		STATE=CursorStateUpdate(state.mode.symbol,STATE,forced)
 }
 
-CursorStateUpdate=function(name,state){
+CursorStateUpdate=function(name,state,forced){
 	var state=Clone(state);
-	if(!state.visuals.cursor||state.visuals.cursor!==name){
+	if(forced||!state.visuals.cursor||state.visuals.cursor!==name){
 		state.visuals.cursor=name;
 		var cursor=name;
 		var opts={};
@@ -1734,6 +1734,9 @@ CursorStateUpdate=function(name,state){
 			cursor.viewBox="0 0 110 110",
 			cursor=BuildSymbolIcon({...cursor,primitive:"cursor-triangle"});
 			opts.fill=Icons[name].colour;
+			if(state.visuals.monochrome){
+				opts.fill=CompelRGBA(HEXSaturater(0)(Icons[name].colour));
+			}
 		}
 		opts.width=state.visuals.cursorsize||80;
 		opts.height=state.visuals.cursorsize||80;
@@ -2055,7 +2058,7 @@ var KeyboardActions={
 	"ctrl shift left":StateUpdater({H:H=>2}),
 	"ctrl shift down":StateUpdater({W:W=>2}),
 
-	"ctrl b":function(){STATE.visuals.monochrome=!!!STATE.visuals.monochrome;UpdateState();},
+	"ctrl b":function(){STATE.visuals.monochrome=!!!STATE.visuals.monochrome;UpdateState();DrawCursor(STATE,true);},
 	"ctrl shift b":function(){STATE.visuals.solid=!!!STATE.visuals.solid;UpdateState();},
 	"ctrl s":ExportSerial,
 
