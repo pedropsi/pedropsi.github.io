@@ -819,6 +819,23 @@ DistinctArray=function(A,Equaliser){
 	return C;
 }
 
+UnDistinctArray=function(A,Equaliser){
+	var Equaliser=Equaliser||Identity;
+	var B=[];
+	var C=[];
+	var i=0;
+	while(i<A.length){
+		var a=A[i];
+		var b=Equaliser(a)
+		if(!In(B,b))
+			B.push(b);
+		else
+			C.push(a);
+		i++;	
+	}
+	return C;
+}
+
 DistinctKeysObject=function(O,Equaliser){
 	var Ob={};
 	DistinctArray(Keys(O),Equaliser).map(k=>Ob[k]=Clone(O[k]));
