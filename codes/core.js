@@ -3032,6 +3032,7 @@ ScrollOnto=function(elementIDsel){
 	if(!e)
 		return;
 	e.scrollIntoView();
+	BlinkSelect(e);
 	WhileOutViewExecute(e,()=>e.scrollIntoView(),{delay:250,max:10,end:true,enddelay:1000});
 }
 
@@ -3905,6 +3906,11 @@ Select=function(selectorE){ //With Pulse by default
 	var e=Class(selectorE,'selected');
 	PulseSelect(selectorE);
 	return e;
+}
+
+BlinkSelect=function(e){
+	Select(e);
+	setTimeout(()=>Deselect(e),2000);
 }
 
 Deselect=function(selectorE){ 

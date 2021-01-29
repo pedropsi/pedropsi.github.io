@@ -432,6 +432,8 @@ p a.innerlink:focus ,
 	cursor:pointer;
 	outline:none;
 	text-shadow:unset;
+	background-image:unset;
+	border-color: var(--darkblue);
 }
 
 .card-supra:hover .image,
@@ -505,6 +507,8 @@ h1,h2,h3,h4,h5,h6{
 .index-item + .index-item{
   margin-top: unset;
 }
+
+
 
 .whiteboard h1 a,
 .whiteboard h2 a,
