@@ -6246,7 +6246,16 @@ var MultimediaKeys={
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//Dynamic text and HyperText 
+//Dynamic people
+
+HyperPerson=function(name){
+	var alias=UniformString(name);
+	if(In(HyperPerson.ambiguous,alias))
+		console.log("warning, ambiguous name:",name);
+	return HyperText("People/"+UniformString(name));
+}
+
+HyperPerson.ambiguous=[];
 
 P=function(...names){ //People
 	var names=[...names];
@@ -6257,14 +6266,10 @@ P=function(...names){ //People
 		return HyperPerson(First(names));
 }
 
-HyperPerson=function(name){
-	var alias=UniformString(name);
-	if(In(HyperPerson.ambiguous,alias))
-		console.log("warning, ambiguous name:",name);
-	return HyperText("People/"+UniformString(name));
-}
 
-HyperPerson.ambiguous=[];
+
+
+//Dynamic text and HyperText 
 
 HyperText=function(name,value){
 	if(NodejsDetected()){
