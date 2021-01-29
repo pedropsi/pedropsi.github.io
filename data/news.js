@@ -18,7 +18,7 @@ News={
 		DATE:"2020-12-30",
 		HEADER:()=>"Kudamono Puzzle updates",
 		PIECE:()=>`
-		<p>${A("kudamono#Set 2")} of ${A("kudamono")} released this week, with  a polished issues sheet.</p>
+		<p>A second set of ${A("kudamono")} released this week, with  a polished issues sheet.</p>
 		<p>A list of ${A("kudamono#Fruit Expansions")} and ${A("kudamono#Issues")} under consideration (that emerged at the ${P("thinky")}) added to the page, along with a template so you can ${A("kudamono#Make")} your own Kudamonos!</p>
 	`,ID:"kudamono"},
 	N_62:{

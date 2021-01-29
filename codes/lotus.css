@@ -374,6 +374,7 @@ nav{
 
 .text a.innerlink{
 	text-decoration-color:var(--green);
+	cursor: help !important;
 }
 
 .text a, .footer a{
