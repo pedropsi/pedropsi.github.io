@@ -404,9 +404,9 @@ var Kudamono={
 			fillgrid:false
 		},
 		grid:{
-			dash:[3,4.5,1,4.5,3],
-			//fillColor:"rgb(240,255,255)",
-			strokeColor:"#55BB55"
+			// dash:[3,4.5,1,4.5,3],
+			fillColor:"#FFFFDD",
+			strokeColor:"#FFFFFF"
 		}
 	}
 }
