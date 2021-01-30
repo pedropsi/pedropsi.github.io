@@ -3245,6 +3245,7 @@ var Labels={
 	"Experimental":"Problem"
 }
 
+L=LabelHTML;
 
 ScrollUpHTML=function(){
 	return ButtonHTML({txt:ObtainSymbol("scroll-up"),attributes:{class:"scrollTop",onclick:"window.scrollTo(0,0)"}});

@@ -39,7 +39,7 @@ ${LinkGroupHTML("with-game-bar")}
 <p>To ensure the ${v.TITLE_BOLD()} overwrites all needed functions, please load it <b>after</b> the game has loaded fully, i.e. by placing at the end of the ${CHTML("body")} the snippet ${CHTML(`script type="text/javascript" src="GameBar.js"`,true)}.</p>
 
 <h3>Advanced way (customised version) </h3>
-<p>By default, including the <code>GameBar.js</code> source code will load the <b>live</b> version from ${v.SITE_NAME()}. If you need to make changes to the ${v.TITLE_BOLD()} source code, you should download a copy of the ${v.A_GB_LATEST()} and make your changes there. ${LabelHTML("Experimental")}</p>
+<p>By default, including the <code>GameBar.js</code> source code will load the <b>live</b> version from ${v.SITE_NAME()}. If you need to make changes to the ${v.TITLE_BOLD()} source code, you should download a copy of the ${v.A_GB_LATEST()} and make your changes there. ${L("Experimental")}</p>
 <p>So, after you make your changes, assuming you keep the folder structure intact:</p>
 	<ul>
 		<li>main page <code>your-page.html</code>, which runs <code>GameBar.js</code>, alongside</li>
@@ -117,7 +117,7 @@ ${LinkGroupHTML("with-game-bar")}
 <p>Within one hint line, include as many HTML paragraph tags as required: ${CHTML(`p`)}<code><b>Line 1</b></code>${CHTML(`/p`)} ${CHTML(`p`)}<code><b>Line 2</b></code>${CHTML(`/p`)} etc.... This will cause an hint to display as multiple paragraphs.</p>
 
 <h2>Level titles </h2>
-<p>Level names ${LabelHTML("Experimental")} may be included in the hints file, as long as the following convention is respected:</p>
+<p>Level names ${L("Experimental")} may be included in the hints file, as long as the following convention is respected:</p>
 <ol>
 <li>Each level name requires exactly one line;</li>
 <li>every level line is separated by at least one empty line, plus an optional group of hint lines inbetween;</li>
@@ -136,7 +136,7 @@ ${LinkGroupHTML("with-game-bar")}
 <p>For a simple example, see the level names specified in the hints file located at ${v.A_BW_HINTS()}, belonging to the ${A("blockworks")} game page (no hints, only level titles). An example combining level titles with hints, is ${v.A_SB_HINTS()}, from game ${A("skilleblokker")}.</p>
 
 <h2>Level sections</h2>
-<p>Level sections ${LabelHTML("Experimental")} may be appended to the level title by means of the section sign (§). For example, to assign the first level to a section named "Tutorial", within the hints file, write <code>level </em>1 optional level name</em> <b>§ Tutorial </b></code></p>
+<p>Level sections ${L("Experimental")} may be appended to the level title by means of the section sign (§). For example, to assign the first level to a section named "Tutorial", within the hints file, write <code>level </em>1 optional level name</em> <b>§ Tutorial </b></code></p>
 <p>As soon as a section is assigned, all following levels will be assumed to belong to that section, until a new section is opened. So each section name is written only once.</p>
 <p>Section names instruct a better level selector layout. In the future, section names will also be useful when defining custom level progressions.</p>
 
@@ -223,10 +223,10 @@ ${LinkGroupHTML("with-game-bar")}
 <h3>After publishing a game with the game bar, you changed the level order and now worry the player's save files might have become jumbled</h3>
 <p>Adding or reordering levels may indeed change the way a save file is interpreted. For example, suppose the following save file: 1★, 2★, 3★, 4, 5★, 6 (star denotes a beaten level) will be interpreted after the following changes:<p>
 <ul>
-<li> <b>Adding several final levels</b> (levels 7,8,9): 1★, 2★, 3★, 4, 5★, 6, 7, 8, 9 ${LabelHTML("OK")};</li>
-<li> <b>Adding an intermediate level</b> (level 2.5): 1★, 2★, 2.5★, 3, 4★, 5, 6 ${LabelHTML("Problem")};</li>
-<li> <b>Reordering levels (worst case)</b> (switching levels 3 and 4): 1★, 2★, 4★, 3, 5★, 6 ${LabelHTML("Problem")};</li>
-<li> <b>Reordering levels (best case)</b> (switching levels 1 and 2): the save file becomes 2★, 1★, 3★, 4, 5★, 6 ${LabelHTML("OK")}.</li>
+<li> <b>Adding several final levels</b> (levels 7,8,9): 1★, 2★, 3★, 4, 5★, 6, 7, 8, 9 ${L("OK")};</li>
+<li> <b>Adding an intermediate level</b> (level 2.5): 1★, 2★, 2.5★, 3, 4★, 5, 6 ${L("Problem")};</li>
+<li> <b>Reordering levels (worst case)</b> (switching levels 3 and 4): 1★, 2★, 4★, 3, 5★, 6 ${L("Problem")};</li>
+<li> <b>Reordering levels (best case)</b> (switching levels 1 and 2): the save file becomes 2★, 1★, 3★, 4, 5★, 6 ${L("OK")}.</li>
 </ul>
 <p>With a jumbled save file, players can still play normally, while noticing that their progress changed for no apparent reason.</p> 
 

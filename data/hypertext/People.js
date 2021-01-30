@@ -75,7 +75,8 @@ var Contributors={//People
 	"ihnn":{name:"Jeffrey",alias:"IHNN",PERSONAL_PAGE:"https://ihnnpuzzles.blogspot.com",TWITCH:"ihavenonamesda"},
 	"omnipresentoffee":{alias:"OmnipresentCoffee"},
 	"clickmazes":{name:"Andrea Gilbert",ALIAS:"Clickmazes",PERSONAL_PAGE:"https://clickmazes.com"},
-	"kneeckoh":{alias:"Kneeckoh",TWITTER:"Kneeckoh"}
+	"kneeckoh":{alias:"Kneeckoh",TWITTER:"Kneeckoh"},
+	"colin":{name:"Colin"}
 }
 
 var Musicians={
