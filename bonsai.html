@@ -36,7 +36,7 @@ ${
 	""}
 
 <h2>Latest</h2>
-${FolderGalleryHTML("kudamono",FilterObject(bonsais,(o,k)=>In([0,1,2].map(i=>Keys(bonsais)[i]),k)))}
+${FolderGalleryHTML("bonsai",FilterObject(bonsais,(o,k)=>In([0,1,2].map(i=>Keys(bonsais)[i]),k)))}
 
 ${
 	bonsaisFuture=FilterObject(bonsaisData,(o,k)=>(o.date&&Days(StringDate(o.date))<0)),
@@ -46,14 +46,14 @@ ${
 
 ${v.HEADER()}
 
-<p><em>Bonsai gardening</em> is a paper puzzle designed by ${P("leslo")} in January 2021. Despite the simple Zen theme, the puzzles tend to grow in complex fairly quickly.</p>
-<p>Bonsai puzzles are related to ${A("kudamono")}.</p>
+<p>This genre was designed by ${P("leslo")} in January 2021. Despite the simple Zen theme, the puzzles tend to grow in complexity fairly quickly.</p>
+<p><em>Bonsai gardening</em> puzzles are related to ${A("kudamono")}.</p>
 <h3>Goal</h3>
 <p>Your goal as a zen gardener is to ensure the bonsai tree keeps a perfect shape: flowers blossom at "1-pieces" (endings) and some fruits may only grow on straight "2-pieces" (trunks). There is only one tree, whose main trunk is rooted at the bottom of the board. Obviously, no loops are allowed.</p>
 <p>Importantly, no consecutive "pieces" may be of same type (see table below):</p>
 ${I("bonsai/bonsai-shapes")}
 
-${HyperText("KudamonoEditor")}
+<p>To play ${v.TITLE()}, all you need is pen and paper... or the ${AHTML("Kudamono Editor (bonsai mode)","?W=6&G=b")}!</p>
 
 <h2>Variant: 4-way Bonsai</h2>
 <p>What if it was possible to design a Bonsai puzzle, which would not be symmetric, but if rotated, would still be uniquely solvable? This simple question, posed by ${P("Andrea")} gave rise to this variant.</p>
@@ -61,11 +61,11 @@ ${HyperText("KudamonoEditor")}
 <p>In this special Bonsai variant, the trunk may be rooted in any of the 4 sides of the board. Hence a single grid gives rise to 4 distinct, unique puzzles!</p>
 
 <h3>An earlier failed attempt</h3>
-<p>Although East and West are not unique, the ${AHTML("puzzles","?"+bonsaisData["43-Cardinal"].board)} are still interesting.</p>
+<p>Although East and West are not unique, these are still ${AHTML("interesting puzzles","?"+bonsaisData["43-Cardinal"].board)}!</p>
 ${I("bonsai/43-bonsai-cardinal.png")}
 
 <h3>A successful attempt</h3>
-<p>The uniqueness of this ${AHTML("puzzle","?"+bonsaisData["44-Four-way"].board)} was confirmed by ${P("knexator","dohz")}.</p>
+<p>${P("knexator","dohz")} confirmed the uniqueness of this puzzle. Play it now in the ${AHTML("Kudamono editor (bonsai mode)","?"+bonsaisData["44-Four-way"].board)}!</p>
 ${I("bonsai/44-bonsai-four-way.png")}
 
 
@@ -74,7 +74,7 @@ ${I("bonsai/44-bonsai-four-way.png")}
 ${FolderGalleryHTML("bonsai",Keys(bonsais))}
 
 <h2>Make your own ${v.TITLE()}</h2>
-<p>Simply load the ${AHTML(v.TITLE()+" editor","?W=6")}!</p>
+<p>Simply load the ${AHTML("Kudamono editor (bonsai mode)","?W=6")} to start making your own ${v.TITLE()}!</p>
 
 <h2>Credits</h2>
 <p>First and foremost thanks to ${P("Le Slo")} for inventing this genre, for trying most of the puzzles, and in general, for crafting puzzle gems.</p>
