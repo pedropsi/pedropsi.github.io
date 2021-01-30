@@ -8,7 +8,8 @@ var Genres={
 		description:`Pave the whole grid with a continuous path using the given pieces (rotations allowed). Consecutive pieces must be of different type, and:
 		a) flowers are at 1-pieces (endpoints); b) fruits are at straight 2-pieces (trunks); c) there is exactly one trunk rooted to the bottom.`,
 		examples:[
-			
+			"W=7&L=f11f2f4w1w3w1f4f2f5f4f6w1w1f1f4f2&S=10R2R7RUDDLD3LUUUUURRDRRDRDDLLU22LDDRRULUU&G=b&A=Pedro PSI&D=26-01-2021&T=4-way Bonsai",
+			"W=6&L=w8f15f1f1&S=8DRUR8RRDLLDLDDR2RRDRD8R3RDDL&G=b&T=Triparityte&A=Pedro PSI&D=30-01-2021"
 		],
 		visuals:{
 			solid:true,
