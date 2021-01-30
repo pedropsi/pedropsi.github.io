@@ -1559,8 +1559,14 @@ SerialState=function(serialObj,state){
 			state=Merge(state,Kudamono);
 		if(serialObj.l)
 			state.level=SerialLevel(serialObj.l,state);
+		else{
+			state.mode.edit=true;
+			state.mode.symbol=First(Keys(state.symbols));
+		}
+
 		if(serialObj.s)
 			state.segments=SerialSegments(serialObj.s,state);
+
 		state.metadata=Merge(state.metadata||{},SerialMetadata(serialObj))
 	return state;
 }
@@ -2250,8 +2256,9 @@ InitialisePuzzle=function(){
 	Keybind(KeyboardActions,STATE.target);
 	ResumeCapturingKeys(ComboKeyPressHandler);
 
-	UpdateState();
+	
 	SetCursor(STATE.target,STATE.visuals.cursor);
+	UpdateState();
 	setTimeout(()=>FocusElement(STATE.target),500);
 
 	CanvasResize();
