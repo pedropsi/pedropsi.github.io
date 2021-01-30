@@ -1166,6 +1166,8 @@ PointValid=function(xy,state){
 }
 
 PositionValid=function(px,py,state){
+	if(isNaN(px)||isNaN(py))
+		return false;
 	if(state.grid.dual)
 		return !(px<1||px>state.W-1)&&!(py<1||py>state.H-1);
 	return !(px<0||px>state.W)&&!(py<0||py>state.H);
