@@ -489,14 +489,14 @@ Most=function(SAO){
 		return null;
 }
 
-Take=function(Array,n){
+Take=function(AS,n){
 	if(n<0)
-		return Array.slice(n,Array.length);
-	return Array.slice(0,n);
+		return AS.slice(n,AS.length);
+	return AS.slice(0,n);
 }
 
-UnTake=function(Array,n){
-	return n<0?Take(Array,Array.length+n):Take(Array,-(Array.length-n));
+UnTake=function(AS,n){
+	return n<0?Take(AS,AS.length+n):Take(AS,-(AS.length-n));
 `	UnTake([5,6,7,8,9],2)===[7,8,9];
 	UnTake([5,6,7,8,9],-1)===[5,6,7,8];
 `
@@ -1653,15 +1653,26 @@ StripHTML=function(string){
 	return string;
 }
 
+
 //Shortening
-ShortenString=function(string,maxchars){
+ShortenString=function(string,maxchars,stoppers){
 	if(!string)
 		return "";
 	else{
 		if(string.length<=maxchars)
 			return string;
-		else
-			return string.split("").splice(0,maxchars-3).join("")+"...";
+		else{
+			var string=Take(string,maxchars-3);
+			var i=string.length;
+			var found=false;
+			var stoppers=stoppers||(Tokens()+" ");
+			while(i>0&&!found){
+				found=In(stoppers,Last(string))
+				string=Most(string);
+				i--;
+			}
+			return string+"...";
+		}
 	}
 }
 
@@ -1670,7 +1681,7 @@ DescriptionString=function(html,maxchars){
 		text=UnquoteString(text);
 		text=SpacedString(text).replaceAll(/\s([\.\,\!\?])+/ig,"$1");
 		text=TrimWhitespaceString(text);
-	return ShortenString(text,maxchars);
+	return ShortenString(text,maxchars," ");
 }
 
 //Sentence making
