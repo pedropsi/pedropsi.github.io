@@ -46,6 +46,15 @@ var Genres={
 			unconsecutiveshapes:[ShapeStraights,Shape2Corners,Shape3s],
 			maxtracks:1
 		},
+		win:{
+			rule:{
+				fillboard:true
+			},
+			grid:{
+				fillColor:"#FFFFED",
+				strokeColor:"#FFFFED"
+			}
+		},
 		groups:{
 			"tree":{
 				symbols:["flower","fruit"],

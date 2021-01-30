@@ -1032,16 +1032,30 @@ StateWon=function(state){
 	if(!wrong)
 		wrong=!SocialSymbolsTrackContained(state);
 	
-	if(!wrong&&state.win.rule){
-		var rule=state.win.rule;
+	var rule=state.win.rule;
+	if(!wrong&&rule){
 		if(!wrong&&rule.minlines&&state.tracks.length<rule.minlines)
 			wrong=true;
 		if(!wrong&&rule.maxlines&&state.tracks.length>rule.maxlines)
 			wrong=true;
-		// if(!wrong&&rule.fillboard)
-		// wrong=;
+		if(!wrong&&rule.fillboard)
+			wrong=!BoardFilled(state);
 	}
 	return !wrong;
+}
+
+StatePoints=function(state){
+	var points=[];
+	for(var x=0;x<state.W;x++)
+		for(y=0;y<state.H;y++)
+			if(PointValid([x,y],state))
+				points.push([x,y])
+
+	return points;
+}
+
+BoardFilled=function(state){
+	return StatePoints(state).every(xy=>PointTracksContained(xy,state.tracks))
 }
 
 ///////////////////////////////////////////////////////////////////////////////
