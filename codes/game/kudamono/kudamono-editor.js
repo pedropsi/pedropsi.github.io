@@ -331,7 +331,6 @@ var BlankState={
 		lineWidth:2,						//width   of grid lines
 		dash:[8/6,8/3,8/3,8/3,8/3,8/3,8/6], //dashing of grid lines
 		border:{
-			strokeColor:"#777777",
 			lineWidth:3,
 			lineJoin:"miter",
 			dash:false
