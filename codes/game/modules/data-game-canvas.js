@@ -161,14 +161,14 @@ GridExtremes=function(opts){
 	var opts={...opts};
 	var rows=opts.rows;
 	var cols=opts.cols;
-	if(typeof opts.border==="undefined")
-		opts.border=1;
+	if(typeof opts.edge==="undefined")
+		opts.edge=1;
 	
-	var bx=opts.border*2
+	var bx=opts.edge*2
 	if(typeof opts.bx!=="undefined")
 		var bx=opts.bx*2;
 
-	var by=opts.border*2;
+	var by=opts.edge*2;
 	if(typeof opts.by!=="undefined")
 		var by=opts.by*2;
 
@@ -213,12 +213,22 @@ DrawSquaresGrid=function(opts){
 		...opts,
 		...GridExtremes(opts)
 	};
-	DrawRectangle(gridOpts);
-	gridOpts.x0=gridOpts.x0/gridOpts.width;
-	gridOpts.x1=gridOpts.x1/gridOpts.width;
-	gridOpts.y0=gridOpts.y0/gridOpts.height;
-	gridOpts.y1=gridOpts.y1/gridOpts.height;
-	DrawGrid(gridOpts);	
+	var gridCoords={
+		x0:gridOpts.x0/gridOpts.width,
+		x1:gridOpts.x1/gridOpts.width,
+		y0:gridOpts.y0/gridOpts.height,
+		y1:gridOpts.y1/gridOpts.height
+	}
+
+	DrawRectangle({...gridOpts,lineWidth:0});
+	DrawGrid({...gridOpts,...gridCoords},);
+
+	var borderOpts=gridOpts;
+	if(gridOpts.border)
+		borderOpts=Merge(gridOpts,gridOpts.border);
+	
+	DrawRectangle({...borderOpts,fillColor:"transparent"});
+
 }
 
 DrawGridLine=function(opts){

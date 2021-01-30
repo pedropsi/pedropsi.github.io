@@ -330,14 +330,27 @@ var BlankState={
 		fillColor:"#FFFFFF",				//background
 		lineWidth:2,						//width   of grid lines
 		dash:[8/6,8/3,8/3,8/3,8/3,8/3,8/6], //dashing of grid lines
-		border:0.5,							//how many squares to add to the border (to each of the shortest sides)
+		border:{
+			strokeColor:"#777777",
+			lineWidth:3,
+			lineJoin:"miter",
+			dash:false
+		},
+		edge:0.5,							//how many squares to add to the edge (to each of the shortest sides)
 		scale:0.95,							//fruit scale (how large)
 		nudge:0.3,							//fruit nudge (small adjustments to position)
 		dual:false,							//disalign squares and grid
 		scaleGrid:0.75,						//reduce the grid size
 		offsetX:0,							//displace the grid horizontally
-		offsetY:1.15,						//displace the grid verticallly
-	},	
+		offsetY:1.15						//displace the grid verticallly
+	},
+	gridEdit:{//grid in edit mode
+		dash:[1,2,1,2,1,2,1,2,1],
+		lineWidth:0.5,
+		border:{
+			strokeColor:"#BBBBBB"
+		},				
+	},
 
 	//Puzzle
 	W:7,
@@ -1571,8 +1584,10 @@ DrawStateGrid=function(state){
 	if(state.grid.dual){
 		gridOpts.rows-=1;
 		gridOpts.cols-=1;
-		gridOpts.border=1;
+		gridOpts.edge=1;
 	}
+	if(state.mode.edit&&state.gridEdit)
+		gridOpts=Merge(gridOpts,state.gridEdit);
 	if(state.win.won)
 		gridOpts=Merge(gridOpts,state.win.grid);
 
@@ -1583,6 +1598,7 @@ DrawStateGrid=function(state){
 			gridOpts.fillColor=HEXSaturater(0)(gridOpts.fillColor);
 
 	}
+	DrawRectangle({...gridOpts,lineWidth:0});
 	DrawSquaresGrid(gridOpts);
 }
 

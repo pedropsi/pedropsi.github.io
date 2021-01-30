@@ -35,7 +35,7 @@ var Genres={
 		grid:{
 			strokeColor:"rgb(77,77,77)",
 			dual:true,
-			border:0.5,
+			edge:0.5,
 			dash:[1,0],
 			scale:0.75,
 			nudge:0.25	
