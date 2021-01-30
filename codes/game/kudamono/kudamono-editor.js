@@ -345,7 +345,7 @@ var BlankState={
 		offsetY:1.15						//displace the grid verticallly
 	},
 	gridEdit:{//grid in edit mode
-		dash:[1,2,1,2,1,2,1,2,1],
+		dash:[1,2,1,2,1,2,1,2,1,2,1],
 		lineWidth:0.5,
 		border:{
 			strokeColor:"#BBBBBB"
