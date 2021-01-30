@@ -2108,6 +2108,7 @@ var KeyboardActions={
 	"ctrl s":ExportSerial,
 
 	"space":function(){STATE.mode.edit=!STATE.mode.edit;UpdateState();},
+	"escape":function(){STATE.mode.edit=false;UpdateState();},
 
 	"ctrl r":ClearSegments,
 	"ctrl shift r":ClearFruit,
