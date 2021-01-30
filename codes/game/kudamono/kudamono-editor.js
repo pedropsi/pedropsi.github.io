@@ -1739,8 +1739,12 @@ UpdateState=function(opts){
 }
 
 DrawCursor=function(state,forced){
-	if(!state.mode.edit)
-		STATE=CursorStateUpdate("pencil",STATE,forced)
+	if(!state.mode.edit){
+		if(STATE.mode.clearing)
+			STATE=CursorStateUpdate("pencil-erase",STATE,forced)
+		else
+			STATE=CursorStateUpdate("pencil",STATE,forced)
+	}
 	else if(state.mode.symbol){
 		if(STATE.mode.clearing)
 			STATE=CursorStateUpdate("eraser",STATE,forced)
@@ -1957,22 +1961,17 @@ DragActionContinuer=function(x,y,w,h){
 		STATE.mode.selection=[];
 	if(!In(STATE.mode.selection,xy)){
 		STATE.mode.selection=AddOnce(STATE.mode.selection,xy);
-		DrawBoard(STATE);
 	}
 	else if(STATE.mode.selection.length>1&&Equal(First(Take(STATE.mode.selection,-2)),xy)){
 		STATE.mode.selection=Remove(STATE.mode.selection,Last(STATE.mode.selection));
-		DrawBoard(STATE);
 	}
 
 	if(!STATE.mode.edit){
 		var selected=STATE.mode.selection;
 		STATE.mode.clearing=Intersection(XYSegments(selected[0],STATE),XYSegments(selected[1],STATE)).length>=1;
-		if(STATE.mode.clearing)
-			STATE=CursorStateUpdate("pencil-erase",STATE)
-		else
-			STATE=CursorStateUpdate("pencil",STATE)
 	}
 
+	DrawBoard(STATE);
 }
 DragActionEnder=function(x,y){
 	STATE.mode.dragging=false;
