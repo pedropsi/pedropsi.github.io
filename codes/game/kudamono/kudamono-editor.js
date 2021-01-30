@@ -1630,6 +1630,7 @@ DrawBoard=function(state){
 	DrawStateGrid(state);
 	DrawStatePaths(state);
 	DrawLevel(state);
+	DrawCursor(state);
 }
 
 UnDrawBoard=function(state){
@@ -1731,7 +1732,7 @@ UpdateState=function(opts){
 	STATE.atErrors=StateAtErrors(STATE);
 	STATE.win.won=StateWon(STATE);
 
-	DrawCursor(STATE);
+	
 	DrawBoard(STATE);
 	AddUndo(STATE);
 	NavigateSerial(StateSerial(STATE));
@@ -1740,8 +1741,12 @@ UpdateState=function(opts){
 DrawCursor=function(state,forced){
 	if(!state.mode.edit)
 		STATE=CursorStateUpdate("pencil",STATE,forced)
-	else if(state.mode.symbol)
-		STATE=CursorStateUpdate(state.mode.symbol,STATE,forced)
+	else if(state.mode.symbol){
+		if(STATE.mode.clearing)
+			STATE=CursorStateUpdate("eraser",STATE,forced)
+		else
+			STATE=CursorStateUpdate(state.mode.symbol,STATE,forced)
+	}
 }
 
 CursorStateUpdate=function(name,state,forced){
@@ -1991,6 +1996,7 @@ DragActionEnder=function(x,y){
 		}
 	}
 	STATE.mode.selection=[];
+	STATE.mode.clearing=false;
 	UpdateState();
 }
 
