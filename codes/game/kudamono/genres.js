@@ -5,8 +5,8 @@ var Genres={
 		genre:"bonsai",
 		author:"Le Slo",
 		date:"2021-01-18",
-		description:`Pave the whole grid with the given pieces (rotations allowed) such to form a continuous path that. No two consecutive pieces belong to the same type.
-		a) flowers are at endpoints (1-pieces); b) fruits are at straight 2-pieces; c) the trunk is a straight 2-piece, rooted outside the bottom of the board.`,
+		description:`Pave the whole grid with a continuous path using the given pieces (rotations allowed). Consecutive pieces must be of different type, and:
+		a) flowers are at 1-pieces (endpoints); b) fruits are at straight 2-pieces (trunks); c) there is exactly one trunk rooted to the bottom.`,
 		examples:[
 			
 		],
