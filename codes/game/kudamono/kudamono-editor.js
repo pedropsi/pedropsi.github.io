@@ -876,6 +876,42 @@ FruitStateTracks=function(fruit,state){
 	return tracks.filter(track=>points.some(point=>PointTrackContained(point,track)));
 }
 
+PointStateTrack=function(point,state){
+	var tracks=state.tracks;
+	return First(tracks.filter(track=>PointTrackContained(point,track)));
+}
+
+
+PointUnFruited=function(xy,fruits,state){
+	return !XYFruit(xy,state)||In(fruits,XYFruit(xy,state));
+}
+PointUnFruitTracked=function(xy,fruits,state){
+	var track=PointStateTrack(xy,state);
+	return !track||Subset(fruits,TrackFruits(track,state));
+}
+PointConnectableAble=function(xy,fruits,state){
+	return PointUnFruited(xy,fruits,state)&&PointUnFruitTracked(xy,fruits,state);
+}
+
+ConnectableFruitsPoints=function(xy,fruits,state){
+	var seenPoints=[];
+	var plannedPoints=[xy];
+	var point;
+	var nextPoints;
+	while(plannedPoints.length){
+		point=First(plannedPoints);
+		nextPoints=PointContiguousPoints(point).filter(xy=>PointValid(xy,state)&&PointConnectableAble(xy,fruits,state)).filter(xy=>!In(plannedPoints,xy)&&!In(seenPoints,xy))
+		plannedPoints=plannedPoints.concat(nextPoints);
+		plannedPoints=Rest(plannedPoints);
+		seenPoints.push(point);
+	}
+	return seenPoints;
+}
+
+PointContiguousPoints=function(point){
+	return Values(DirectionsCoordinates).map(v=>VectorPlus(point,v));
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Error detection
 
