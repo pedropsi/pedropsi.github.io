@@ -887,13 +887,16 @@ PointUnFruited=function(xy,fruits,state){
 }
 PointUnFruitTracked=function(xy,fruits,state){
 	var track=PointStateTrack(xy,state);
-	return !track||Subset(fruits,TrackFruits(track,state));
+	if(!track)
+		return true;
+	var trackfruits=TrackFruits(track,state);
+	return trackfruits.length&&Subset(fruits,trackfruits); //includes empty tracks
 }
 PointConnectableAble=function(xy,fruits,state){
 	return PointUnFruited(xy,fruits,state)&&PointUnFruitTracked(xy,fruits,state);
 }
 
-ConnectableFruitsPoints=function(xy,fruits,state){
+PointConnectablePoints=function(xy,fruits,state){
 	var seenPoints=[];
 	var plannedPoints=[xy];
 	var point;
@@ -906,6 +909,12 @@ ConnectableFruitsPoints=function(xy,fruits,state){
 		seenPoints.push(point);
 	}
 	return seenPoints;
+}
+
+PointConnectableFruitPoints=function(xy,fruit,state){
+	var connectablePoints=PointConnectablePoints(xy,[fruit],state);
+	var positions=(state.level[fruit]||[]);
+	return positions.filter(xy=>In(connectablePoints,xy));
 }
 
 PointContiguousPoints=function(point){
@@ -951,6 +960,7 @@ FruitTrackStateLocallyErred=function(fruit,track,state){
 		var n=TrackFruitNumber(track,fruit,state);
 		wrong=(n>rule.maxconnected||n<min)
 	}
+
 	if(!wrong&&rule.trackValidator&&!rule.trackValidator(track))
 		wrong=true;
 	if(!wrong&&rule.symbolshapes){
@@ -1066,10 +1076,20 @@ SocialSymbolsTrackContained=function(state){
 	return Join(...socialsymbolpoints).every(point=>PointTracksContained(point,state.tracks));
 }
 
-XYFruitStateErred=function(xy,fruit,state){
+XYFruitStateErrors=function(xy,fruit,state){
+	var errors={};
 	var lonely=SymbolLonely(fruit,state);
 	var tracked=PointTracksContained(xy,state.tracks);
-	return (lonely&&tracked)||(!lonely&&!tracked);
+	
+	errors.lonely=(lonely&&tracked)||(!lonely&&!tracked);
+	
+	var rule=state.symbols[fruit].rule;
+	if(rule.maxconnectable||rule.minconnectable){
+		var connectables=PointConnectableFruitPoints(xy,fruit,state);
+		errors.maxconnectable=connectables.length>rule.maxconnectable;
+		errors.minconnectable=connectables.length<rule.minconnectable;
+	}
+	return errors;
 }
 
 StateWon=function(state){
@@ -1222,7 +1242,7 @@ DrawStateFruit=function(state,fruit,xy,Opts){
 		py:xy[1]
 	};
 
-	var error=XYFruitStateErred(xy,fruit,state);
+	var errors=XYFruitStateErrors(xy,fruit,state);
 
 	var primarycolour=Opts.colour;
 	if(primarycolour&&Opts.coloriser)
@@ -1237,7 +1257,7 @@ DrawStateFruit=function(state,fruit,xy,Opts){
 		lineWidth=2*lineWidth;
 	}
 	else{
-		if(error&&!state.visuals.solid){
+		if(Values(errors).some(Identity)&&!state.visuals.solid){
 			colour=HEXLightener(1)(colour);
 		}
 		else
