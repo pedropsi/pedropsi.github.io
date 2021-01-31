@@ -1439,8 +1439,14 @@ CapitaliseSlug=function(slug){
 
 //Escape
 
+PunctuationSeparCharacters=",;.:-?!".split("");
+PunctuationParenCaracters="(){}[]«»".split("");
+OtherCharacters="_~^*+´`¨''@£§#$%&/|=".split("");
+
+TokenCharacters=PunctuationSeparCharacters.join("")+PunctuationParenCaracters.join("")+OtherCharacters.join("");
+
 Tokens=function(){
-	return ",;.:-_~^*+´`¨«»'?!'@£§#$%&/|(){}[]=";
+	return TokenCharacters;
 }
 
 EscapeToken=function(token){
@@ -1718,7 +1724,8 @@ var EnumerationSynonyms={
 EnumerationSynonyms={...EnumerationSynonyms,...FlipKeysValues(EnumerationSynonyms)};
 
 EnumerateSentence=function(list,and){
-	var sentence=Enumerate(list||[],and||"");
+	var list=(list||[]).map(s=>UnPosfix(s,PunctuationSeparCharacters));
+	var sentence=Enumerate(list,and||"");
 	if(sentence)
 		sentence=Posfix(sentence,".");
 	return Capitalise(sentence);

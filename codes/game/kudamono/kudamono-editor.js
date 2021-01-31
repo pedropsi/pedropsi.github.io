@@ -1574,9 +1574,11 @@ SerialState=function(serialObj,state){
 var MetadataAbbreviations={
 	"author":"a",
 	"date":"d",
+	"difficulty":"f",
+	"thanks":"k",
+	"number":"n",	
 	"title":"t",
-	"url":"u",
-	"thanks":"k"
+	"url":"u"
 }
 
 var AbbreviationsMetadata=FlipKeysValues(MetadataAbbreviations);
@@ -1726,6 +1728,19 @@ LevelSymbols=function(state){
 	return Keys(state.level).filter(s=>state.level[s]&&state.level[s].length);
 }
 
+MetadataColophon=function(metadata){
+	var number=metadata.number?(Prefix(metadata.number,"#")+" "):"";
+	var difficulty=metadata.difficulty?(ObtainSymbol("asterisk-heavy").repeat(metadata.difficulty)+" "):"";
+	
+	var title=metadata.title?(Exfix(metadata.title,'"')+" "):"";
+	var author=metadata.author?("by "+metadata.author):"";
+	var date=metadata.date||"";
+	if(date){
+		date=" — "+TrimWhitespaceString(SpacedString(StripHTML(StringDateName(date,{simplified:true}))))
+	}
+	return number+title+difficulty+author+date;
+}
+
 DrawMetadata=function(state){
 	var Opts={
 		target:state.target,
@@ -1762,13 +1777,7 @@ DrawMetadata=function(state){
 		textAlign:"right",
 		x:0.95
 	};
-
-	var title=state.metadata.title?(Exfix(state.metadata.title,'"')+" "):"";
-	var author=state.metadata.author?("by "+state.metadata.author):"";
-	var date=state.metadata.date||"";
-	if(date){
-		date=" — "+TrimWhitespaceString(SpacedString(StripHTML(StringDateName(date,{simplified:true}))))
-	}
+	
 	var url=state.metadata.url||""
 
 	var y=0.98;
@@ -1781,11 +1790,13 @@ DrawMetadata=function(state){
 			fontWeight:"italic"
 		})
 	}
+	
+	var colophon=MetadataColophon(state.metadata);
 
-	if(title+author+date)
+	if(colophon)
 		DrawText({
 			...Opts,
-			txt:title+author+date,
+			txt:colophon,
 			y:y
 		})	
 
