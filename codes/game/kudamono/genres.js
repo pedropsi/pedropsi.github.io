@@ -58,7 +58,7 @@ var Genres={
 		},
 		groups:{
 			"tree":{
-				symbols:["flower","fruit"],
+				symbols:["flower","fruit","monkey"],
 				colour:"rgb(134,0,16)"
 			}
 		},
