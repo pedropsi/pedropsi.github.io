@@ -3245,6 +3245,7 @@ var Labels={
 	"Experimental":"Problem"
 }
 
+//Abbreviation - Label
 L=LabelHTML;
 
 ScrollUpHTML=function(){
@@ -6317,7 +6318,9 @@ HyperPerson=function(name){
 
 HyperPerson.ambiguous=[];
 
-P=function(...names){ //People
+
+//Abbreviation - People
+P=function(...names){
 	var names=[...names];
 	names=Join(...names.map(n=>n.split(",")));
 	if(names.length>1)
