@@ -2190,16 +2190,7 @@ TitleSelfLink=function(t){
 	t.innerHTML=HeaderAHTML(title);
 }
 
-HeaderAHTML=function(title,page,opts){
-	var page=PageUnFragment(page);
-	var fragment=IndexCaseString(title);
-	var opts=opts||{};
-	if(fragment){
-		fragment=Prefix(fragment,"#");
-		opts.onclick=`ScrollInto("${fragment}")`
-	}
-	return AHTML(title,page+fragment,opts);
-}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Unique random identifier
@@ -3215,11 +3206,22 @@ FragmentAHTML=function(title,ref,attribs){
 	return HeaderAHTML(title,ref,attribs); //self-anchors
 }
 
-function InnerAHTML(title,ref,attribs){
+InnerAHTML=function(title,ref,attribs){
 	var attribs=attribs||{};
 	var title=UnPrefix(title,"#");
 		attribs.class=(attribs.class||"")+" innerlink";
 	return AnchorHTML(title,ref,attribs)
+}
+
+HeaderAHTML=function(title,page,attribs){
+	var page=PageUnFragment(page);
+	var fragment=IndexCaseString(title);
+	var attribs=attribs||{};
+	if(fragment){
+		fragment=Prefix(fragment,"#");
+		attribs.onclick=`ScrollInto("${fragment}")`
+	}
+	return AHTML(title,page+fragment,attribs);
 }
 
 AnchorHTML=function(content,ref,attribs){
