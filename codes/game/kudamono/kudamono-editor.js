@@ -1723,7 +1723,7 @@ UnDrawBoard=function(state){
 }
 
 LevelSymbols=function(state){
-	return Keys(state.symbols).filter(s=>In(Keys(state.level),s));
+	return Keys(state.level).filter(s=>state.level[s]&&state.level[s].length);
 }
 
 DrawMetadata=function(state){
@@ -1746,7 +1746,7 @@ DrawMetadata=function(state){
 
 	var levelSymbols=LevelSymbols(state);
 	var usedRules=levelSymbols.map(symbol=>state.symbols[symbol].rule.description).filter(Identity);
-	var subtitle=state.description+"\n"+Posfix(Enumerate(usedRules),".");
+	var subtitle=state.description+"\n"+EnumerateSentence(usedRules);
 
 	subtitle.split(/\n/).map((line,i)=>DrawText({
 		...Opts,
@@ -1820,7 +1820,7 @@ UpdateState=function(opts){
 	STATE.win.won=StateWon(STATE);
 
 	
-	DrawBoard(STATE);
+	DrawState(STATE);
 	AddUndo(STATE);
 	NavigateSerial(StateSerial(STATE));
 }
@@ -2037,7 +2037,7 @@ DragActionStarter=function(x,y,w,h){
 	STATE.mode.selection=[xy];
 	if(STATE.mode.edit){
 		STATE.mode.clearing=!!XYFruit(xy,STATE);
-		DrawBoard(STATE);
+		DrawState(STATE);
 	}
 }
 DragActionContinuer=function(x,y,w,h){
@@ -2058,7 +2058,7 @@ DragActionContinuer=function(x,y,w,h){
 		STATE.mode.clearing=Intersection(XYSegments(selected[0],STATE),XYSegments(selected[1],STATE)).length>=1;
 	}
 
-	DrawBoard(STATE);
+	DrawState(STATE);
 }
 DragActionEnder=function(x,y){
 	STATE.mode.dragging=false;

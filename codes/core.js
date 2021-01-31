@@ -1717,6 +1717,13 @@ var EnumerationSynonyms={
 
 EnumerationSynonyms={...EnumerationSynonyms,...FlipKeysValues(EnumerationSynonyms)};
 
+EnumerateSentence=function(list,and){
+	var sentence=Enumerate(list||[],and||"");
+	if(sentence)
+		sentence=Posfix(sentence,".");
+	return Capitalise(sentence);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Get Function Name as a string, or make up a unique one based on the function's body
 FunctionName=function(FunctionF){
