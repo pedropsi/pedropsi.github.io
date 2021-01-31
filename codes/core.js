@@ -2966,13 +2966,6 @@ RowFilterer=function(patterntxt){
 
 TableFilter=function(patterntxt,table){
 	var table=GetElement("TBODY",table);
-	
-	var oldpattern=table.getAttribute("data-filter");
-	if(oldpattern&&TrimWhitespaceString(oldpattern)===patterntxt)
-		return;
-	else
-		table.setAttribute("data-filter",TrimWhitespaceString(patterntxt));
-
 	var rows=GetElements("TR",table);
 	rows.map(RowFilterer(patterntxt));
 	AddShareSearch(patterntxt,table);
@@ -3053,9 +3046,16 @@ FilterSearchURL=function(){
 }
 
 InputFilter=function(parentSelector,filterSelector){
-	var textfilter=GetElement(filterSelector).value;
-	var parentSelector=GetElement(parentSelector);
-	TableFilter(textfilter,parentSelector);
+	var filterString=GetElement(filterSelector).value;
+	var parent=GetElement(parentSelector);
+
+	var oldpattern=parent.getAttribute("data-filter");
+	if(oldpattern&&TrimWhitespaceString(oldpattern)===TrimWhitespaceString(filterString))
+		return;
+	else
+		parent.setAttribute("data-filter",filterString);
+
+	TableFilter(filterString,parent);
 }
 
 FilterableTable=function(tableSelector){
