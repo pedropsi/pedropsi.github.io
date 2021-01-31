@@ -1687,7 +1687,7 @@ DescriptionString=function(html,maxchars){
 //Sentence making
 Enumerate=function(StringArray,and){
 	var and=and||"and";
-	if(!StringArray.length)
+	if(!StringArray||!StringArray.length)
 		return "";
 	if(StringArray.length===1)
 		return StringArray[0];

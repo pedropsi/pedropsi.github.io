@@ -150,6 +150,7 @@ SelectedGamesRow=function(name,Opts,year){
 
 	var authorHTML=P(Opts.author);
 
+	console.log(Opts)
 	var tags=Enumerate(Sort(Opts.TAGS));
 
 	return [titleHTML,authorHTML,Opts.YEAR,tags];
@@ -181,7 +182,7 @@ ${HyperText("Lozenge")}
 ${HyperText("Filtering")}
 
 <h2>More lists</h2>
-<p>You may also like ${P("andrea")}'s ${A("collection","http://clickmazes.com/ps/new-ps.htm")} and ${P("lavelle")}'s ${A("gallery","https://puzzlescriptgallery.tumblr.com/")}.</p>
+<p>You may also like ${P("andrea")}'s ${AHTML("collection","http://clickmazes.com/ps/new-ps.htm")} and ${P("lavelle")}'s ${AHTML("gallery","https://puzzlescriptgallery.tumblr.com/")}.</p>
 <p>Finally, the ${A("puzzlescript-games-database")} lists all puzzlescript games ever made.</p>
 
 
