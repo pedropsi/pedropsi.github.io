@@ -82,6 +82,17 @@ var Genres={
 					symbolshapes:Shape2Straights,
 					minconnected:Infinity
 				}
+			},
+			"monkey":{
+				letter:"m",
+				colour:"rgb(173,107,178)",
+				viewBox:"0 0 18 18",
+				scale:0.65,
+				path:"M 1 1 Q 5 -1 6 2 Q 9 6 12 6 Q 14 3 16 5 Q 18 8 17 10 Q 16 11 16 10 Q 17 8 15 6 Q 13 5 13 8 Q 12 13 14 15 Q 15 16 14 16 Q 10 16 13 15 Q 11 14 11 11 Q 10 11 10 11 Q 8 13 8 15 Q 9 16 7 16 Q 5 16 7 15 Q 7 13 8 11 Q 6.5 11 5 8 Q 3 11 3 15 Q 6 15 3 16 Q 2 16 2 15 Q 2 10 3 5 Q 2 7 0 5 q 0 -1 1 -2 Z",
+				rule:{
+					symbolshapes:Shape2Corners,
+					minconnected:Infinity
+				}
 			}
 		}
 	},
