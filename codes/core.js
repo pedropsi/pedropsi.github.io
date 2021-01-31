@@ -2934,10 +2934,10 @@ FilterChildren=function(filterF,parentSelector,childSelector,subparentSelector){
 	ApplyOriginalChildren(FilterCh,parentSelector,childSelector,subparentSelector);
 }
 
-InSubPart=function(celltxt,subparts){
-	var celltxt=UnWhitespace(celltxt);
+InSubPart=function(string,subparts){
+	var string=UnWhitespace(string);
 	var subparts=AccPermutations(subparts,3).map(p=>p.join(""));
-	return subparts.some(txt=>InString(celltxt,txt));
+	return subparts.some(txt=>InString(string,txt));
 }
 
 StringsContained=function(strings,patterntxt){
@@ -2965,7 +2965,15 @@ RowFilterer=function(patterntxt){
 }
 
 TableFilter=function(patterntxt,table){
-	var rows=GetElements("TR",GetElement("TBODY",table));
+	var table=GetElement("TBODY",table);
+	
+	var oldpattern=table.getAttribute("data-filter");
+	if(oldpattern&&TrimWhitespaceString(oldpattern)===patterntxt)
+		return;
+	else
+		table.setAttribute("data-filter",TrimWhitespaceString(patterntxt));
+
+	var rows=GetElements("TR",table);
 	rows.map(RowFilterer(patterntxt));
 	AddShareSearch(patterntxt,table);
 }
@@ -3269,10 +3277,6 @@ ViewCounterHTML=function(){
 	return DynamicTextHTML("view-counter"," ");
 }
 
-//Hidden Elements
-GhostHTML=function(id){
-	return "<span id='"+id+"' class='hidden'></span>";
-}
 
 
 // Table Elements
@@ -7005,7 +7009,7 @@ AwaitElement=function(selector,result){
 		var id=GenerateId();
 		function Replacer(){return ReplaceElement(result,id);}
 		UponElementOnce(selector,Replacer);
-		return GhostHTML(id);
+		return HiddenHTML(id);
 	}
 }
 
