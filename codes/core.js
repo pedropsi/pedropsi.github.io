@@ -2940,20 +2940,33 @@ InSubPart=function(celltxt,subparts){
 	return subparts.some(txt=>InString(celltxt,txt));
 }
 
-RowFilterer=function(row,patterntxt){
+StringsContained=function(strings,patterntxt){
 	var patterntxt=LowerSpacedString(patterntxt);
 	if(patterntxt.replace(/\s*/g,"")==="")
 		return true;
-	var cells=GetElements("td",row).map(function(r){return LowerSpacedString(r.innerText)});
+	var strings=strings.map(LowerSpacedString);
 	var subparts=patterntxt.split(" ").filter(Identity);
-	var cellstring=UnWhitespace(cells.join(""));
-	return cells.some(celltxt=>InSubPart(celltxt,subparts))&&subparts.every(part=>InString(cellstring,part));
+	var whole=UnWhitespace(strings.join(""));
+	return strings.some(celltxt=>InSubPart(celltxt,subparts))&&subparts.every(part=>InString(whole,part));
 }
 
+RowFiltered=function(row,patterntxt){
+	var strings=GetElements("td",row).map(r=>r.innerText);
+	return StringsContained(strings,patterntxt);
+}
+
+RowFilterer=function(patterntxt){
+	return function(row){
+		if(RowFiltered(row,patterntxt))
+			UnHideElement(row);
+		else
+			HideElement(row);
+	};
+}
 
 TableFilter=function(patterntxt,table){
 	var rows=GetElements("TR",GetElement("TBODY",table));
-	rows.map(row=>RowFilterer(row,patterntxt)?UnHideElement(row):HideElement(row));
+	rows.map(RowFilterer(patterntxt));
 	AddShareSearch(patterntxt,table);
 }
 
