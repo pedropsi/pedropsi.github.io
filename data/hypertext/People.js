@@ -261,7 +261,7 @@ PeopleSelfReferencer=function(){
 	var peopleElements=GetElements(".person");
 	var firstElements=DistinctArray(peopleElements,Classes);
 	var referenceElements=UnDistinctArray(peopleElements,Classes);
-	referenceElements.map(e=>e.outerHTML=InnerAHTML(AbbreviatedNameHTML(e.innerText)+HiddenHTML(GenerateId()," "+e.innerText,true),"#"+e.id,{class:"person"}));
+	referenceElements.map(e=>e.outerHTML=InnerAHTML(HiddenHTML(GenerateId(),e.innerText+" ",true)+AbbreviatedNameHTML(e.innerText),"#"+e.id,{class:"person"}));
 }
 
 setTimeout(PeopleSelfReferencer,2000);
