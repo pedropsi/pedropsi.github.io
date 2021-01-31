@@ -16,7 +16,7 @@ CMS={
 "a-game-making-journey":{...WithImage,TITLE:()=>`A game-making journey`,SHORTNAME:()=>`Journey`,DATE:()=>"2019-04-14",TAGS:()=>[`Game`,`Learning`,`List`,`Log`,`Post`,`Puzzlescript`]},
 "game-bar":{...WithImage,FEATURED:()=>true,TITLE:()=>`Game Bar`,DATE:()=>"2019-07-27",TAGS:()=>[`Resource`,`Tutorial`,`Puzzlescript`]},
 "puzzlescript-games-database":{...WithImage,FEATURED:()=>true,BODY:()=>v.PAGE_BARE(),CONTENT:()=>v.SECTION_OUT()+v.SECTION_OUT(v.WHITEBOARD()),POSTSCRIPT:()=>[`data/puzzlescript-database-game.js`],PRESCRIPT:()=>[`data/puzzlescript-database.js`],TITLE:()=>`Puzzlescript games database`,SHORTNAME:()=>`PS database`,DATE:()=>"2019-10-10",TAGS:()=>[`Community`,`List`,`Puzzlescript`],ONE_LINER:()=>`This aims to be the definitive list of all (public) puzzlescript games, ever made, worldwide. Even the terrible ones qualify!`,DESCRIPTION:()=>`The complete list of all puzzlescript games, good or bad.`},
-"game-tools":{...WithImage,POSTSCRIPT:()=>[`data/puzzlescript-database-component.js`],PRESCRIPT:()=>[`data/puzzlescript-database.js`],TITLE:()=>`Game tools`,DATE:()=>"2019-10-12",TAGS:()=>[`Community`,`List`,`Log`,`Post`,`Puzzlescript`,`Resource`],ONE_LINER:()=>`Useful tools to make games, including puzzlescript forks, wrappers and puzzlescript sprite editors.`},
+"game-tools":{...WithImage,FEATURED:()=>true,POSTSCRIPT:()=>[`data/puzzlescript-database-component.js`],PRESCRIPT:()=>[`data/puzzlescript-database.js`],TITLE:()=>`Game tools`,DATE:()=>"2019-10-12",TAGS:()=>[`Community`,`List`,`Log`,`Post`,`Puzzlescript`,`Resource`],ONE_LINER:()=>`Useful tools to make games, including puzzlescript forks, wrappers and puzzlescript sprite editors.`},
 "game-console":{...CMSGame,POSTSCRIPT:()=>v.PUZZLE_SCRIPT().concat([`data/puzzlescript-database-game.js`]),PRESCRIPT:()=>[`data/puzzlescript-database.js`],TITLE:()=>`Game Console`,DATE:()=>"2019-10-29",TYPE:()=>`Console`,TAGS:()=>[`Community`,`Puzzlescript`,`Resource`],ONE_LINER:()=>`Load any puzzlescript game in ${v.NAME()}'s console and to use the game bar!`,TYPEGRAPH:()=>`website`,IMAGE_EXT:()=>"svg"},
 
 "status":{...WithImage,POSTSCRIPT:()=>["codes/test/test.js"],TITLE:()=>`Status`,DATE:()=>"2019-11-25",TAGS:()=>[`Creative-Archive`,`Resource`,`Sitemap`],ONE_LINER:()=>`Test whether every ${v.SITE_NAME()} function is supported in your browser.`},
@@ -256,34 +256,6 @@ CMSTags=function(){
 	return tags;
 }
 
-// PageMinimalCodeStyleHTML=function(){
-// 	return `
-// 	<link href="codes/lotus.css" rel="stylesheet" type="text/css"/>
-// 	<script src="codes/core.js"></script>`
-// }
-
-// PageMinimalPosHTML=function(){
-// 	return `</html>`
-// }
-
-// TagPageHTML=function(){
-// 	return `${DoctypeHTML()}
-// ${PageMinimalCodeStyleHTML()}
-// <script id="post">var Post={POST:()=>""};
-// try{v={...v,...Post}}catch{v=Post}</script>
-// ${PageMinimalPosHTML()}`;
-// }
-
-// GenerateTagPage=function(tag){
-// 	var page=TagPageHTML();
-// 	var name=`tag-${tag}.html`;
-// 	Download(page,name,"html");
-// }
-
-// GenerateTagPages=function(){
-// 	CMSTags().map(GenerateTagPage);
-// }
-
 ArchiveYearHTML=function(year){
 	function InYear(PageObj){return PageObj.YEAR&&PageObj.YEAR()===year;};
 	var CMSOptions=CMSOptionsObj();
@@ -358,7 +330,6 @@ A=function(link){
 		return AHTML(link);
 }
 
-// Keyboard Instuctions
 
 
 
