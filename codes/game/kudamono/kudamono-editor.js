@@ -1722,6 +1722,10 @@ UnDrawBoard=function(state){
 	UnDraw(gridExtremes);
 }
 
+LevelSymbols=function(state){
+	return Keys(state.symbols).filter(s=>In(Keys(state.level),s));
+}
+
 DrawMetadata=function(state){
 	var Opts={
 		target:state.target,
@@ -1740,7 +1744,11 @@ DrawMetadata=function(state){
 		fontSize:"calc(var(--h1) + var(--w1))"
 	};
 
-	state.description.split(/\n/).map((line,i)=>DrawText({
+	var levelSymbols=LevelSymbols(state);
+	var usedRules=levelSymbols.map(symbol=>state.symbols[symbol].rule.description).filter(Identity);
+	var subtitle=state.description+"\n"+Posfix(Enumerate(usedRules),".");
+
+	subtitle.split(/\n/).map((line,i)=>DrawText({
 		...Opts,
 		txt:line,
 		fontWeight:"italic",
