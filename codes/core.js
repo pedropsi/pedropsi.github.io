@@ -4033,9 +4033,10 @@ UnShrinkElement=function(e){
 
 // Hide
 
-
-HiddenHTML=function(id){
-	return "<span id='"+UnPrefix(id,"#")+"' class='hidden'></span>"
+HiddenHTML=function(id,text,fromview){
+	var text=text||";"
+	var fromview=fromview?"-from-view":"";
+	return `<span id='${UnPrefix(id,"#")}' class='hidden${fromview}'>${text}</span>`;
 }
 
 UnHideElement=function(selectorE){
