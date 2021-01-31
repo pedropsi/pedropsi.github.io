@@ -5,7 +5,7 @@ var Genres={
 		genre:"bonsai",
 		author:"Le Slo",
 		date:"2021-01-18",
-		description:`Pave the whole grid with a continuous path, rooted to the bottom via a straight 2-piece.
+		description:`Pave the whole grid with a continuous path, rooted to the bottom via a straight trunk (2-piece).
 		Use the given pieces (rotations allowed), without repeating them consecutively.`,
 		examples:[
 			"W=7&L=f11f2f4w1w3w1f4f2f5f4f6w1w1f1f4f2&S=10R2R7RUDDLD3LUUUUURRDRRDRDDLLU22LDDRRULUU&G=b&A=Pedro PSI&D=26-01-2021&T=4-way Bonsai",
