@@ -5,8 +5,8 @@ var Genres={
 		genre:"bonsai",
 		author:"Le Slo",
 		date:"2021-01-18",
-		description:`Pave the whole grid with a continuous path using the given pieces (rotations allowed). Consecutive pieces must be of different type, and:
-		a) flowers are at 1-pieces (endpoints); b) fruits are at straight 2-pieces (trunks); c) there is exactly one trunk rooted to the bottom.`,
+		description:`Pave the whole grid with a continuous path, rooted to the bottom via a straight 2-piece.
+		Use the given pieces (rotations allowed), without repeating them consecutively.`,
 		examples:[
 			"W=7&L=f11f2f4w1w3w1f4f2f5f4f6w1w1f1f4f2&S=10R2R7RUDDLD3LUUUUURRDRRDRDDLLU22LDDRRULUU&G=b&A=Pedro PSI&D=26-01-2021&T=4-way Bonsai",
 			"W=6&L=w8f15f1f1&S=8DRUR8RRDLLDLDDR2RRDRD8R3RDDL&G=b&T=Triparityte&A=Pedro PSI&D=30-01-2021"
@@ -72,6 +72,7 @@ var Genres={
 					symbolshapes:Shape1s,
 					minconnected:Infinity
 				},
+				description:"flowers are at 1-pieces (endpoints)"
 			},
 			"fruit":{
 				letter:"f",
@@ -81,19 +82,34 @@ var Genres={
 				rule:{
 					symbolshapes:Shape2Straights,
 					minconnected:Infinity
-				}
+				},
+				description:"fruits are at straight 2-pieces (trunks)"
 			},
-			"monkey":{
-				letter:"m",
-				colour:"rgb(173,107,178)",
-				viewBox:"0 0 18 18",
-				scale:0.65,
-				path:"M 1 1 Q 5 -1 6 2 Q 9 6 12 6 Q 14 3 16 5 Q 18 8 17 10 Q 16 11 16 10 Q 17 8 15 6 Q 13 5 13 8 Q 12 13 14 15 Q 15 16 14 16 Q 10 16 13 15 Q 11 14 11 11 Q 10 11 10 11 Q 8 13 8 15 Q 9 16 7 16 Q 5 16 7 15 Q 7 13 8 11 Q 6.5 11 5 8 Q 3 11 3 15 Q 6 15 3 16 Q 2 16 2 15 Q 2 10 3 5 Q 2 7 0 5 q 0 -1 1 -2 Z",
-				rule:{
-					symbolshapes:Shape2Corners,
-					minconnected:Infinity
-				}
-			}
+			"hummingbird":{
+					letter:"h",
+					colour:"rgb(173,107,178)",
+					viewBox:"0 0 42 42",
+					scale:0.8,
+					shiftx:0.1,
+					path:"M 6 4 Q 5 3 5 3 Q 4 3 3 2 Q 2 2 1 1 Q -2 0 0 0 Q 9 0 19 6 Q 21 2 23 1 Q 27 0 29 3 Q 30 5 33 5 Q 63 5 33 6 Q 30 7 29 8 Q 26 11 25 14 Q 23 18 18 21 Q 15 23 13 23 Q 11 24 9 23 Q -1 29 8 23 Q -2 29 7 22 Q -3 30 6 21 Q -4 31 5 20 Q 8 14 12 12 Q 10 12 10 11 Q 8 11 8 10 Q 6 10 6 9 Q 5 9 4 8 Q 3 8 2 7 Q 1 7 0 6 Q -1 6 -2 5 Q -3 5 -4 4 Q -7 3 -4 3 Q 1 2 6 4 Z",
+					rule:{
+						symbolshapes:Shape2Corners,
+						minconnected:Infinity
+					},
+					description:"hummingbirds are at corner 2-pieces"
+			},
+			// "monkey":{
+			// 	letter:"m",
+			// 	colour:"rgb(173,107,178)",
+			// 	viewBox:"0 0 18 18",
+			// 	scale:0.65,
+			// 	path:"M 1 1 Q 5 -1 6 2 Q 9 6 12 6 Q 14 3 16 5 Q 18 8 17 10 Q 16 11 16 10 Q 17 8 15 6 Q 13 5 13 8 Q 12 13 14 15 Q 15 16 14 16 Q 10 16 13 15 Q 11 14 11 11 Q 10 11 10 11 Q 8 13 8 15 Q 9 16 7 16 Q 5 16 7 15 Q 7 13 8 11 Q 6.5 11 5 8 Q 3 11 3 15 Q 6 15 3 16 Q 2 16 2 15 Q 2 10 3 5 Q 2 7 0 5 q 0 -1 1 -2 Z",
+			// 	rule:{
+			// 		symbolshapes:Shape2Corners,
+			// 		minconnected:Infinity
+			// 	},
+			// 	description:"monkeys are at corner 2-pieces"
+			// }
 		}
 	},
 	"subway":{
