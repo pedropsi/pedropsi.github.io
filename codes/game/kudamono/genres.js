@@ -58,7 +58,7 @@ var Genres={
 		},
 		groups:{
 			"tree":{
-				symbols:["flower","fruit","monkey"],
+				symbols:["flower","fruit","hummingbird"],
 				colour:"rgb(134,0,16)"
 			}
 		},
@@ -89,7 +89,7 @@ var Genres={
 					letter:"h",
 					colour:"rgb(173,107,178)",
 					viewBox:"0 0 42 42",
-					scale:0.8,
+					scale:0.7,
 					shiftx:0.1,
 					path:"M 6 4 Q 5 3 5 3 Q 4 3 3 2 Q 2 2 1 1 Q -2 0 0 0 Q 9 0 19 6 Q 21 2 23 1 Q 27 0 29 3 Q 30 5 33 5 Q 63 5 33 6 Q 30 7 29 8 Q 26 11 25 14 Q 23 18 18 21 Q 15 23 13 23 Q 11 24 9 23 Q -1 29 8 23 Q -2 29 7 22 Q -3 30 6 21 Q -4 31 5 20 Q 8 14 12 12 Q 10 12 10 11 Q 8 11 8 10 Q 6 10 6 9 Q 5 9 4 8 Q 3 8 2 7 Q 1 7 0 6 Q -1 6 -2 5 Q -3 5 -4 4 Q -7 3 -4 3 Q 1 2 6 4 Z",
 					rule:{
