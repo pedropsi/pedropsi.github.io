@@ -11,6 +11,9 @@ if(PageSearch("G")){
 }
 
 
+//Definitions
+GlobalTrackRules=["equaliser","mintracks","maxtracks"];
+
 ///////////////////////////////////////////////////////////////////////////////
 //Line Shapes
 
@@ -1024,8 +1027,8 @@ StateAtErrors=function(state){
 		return {};
 	
 	var positionErrors={};
-	var globalSymbols=Keys(state.level).filter(symbol=>state.symbols[symbol].rule.equaliser);
-
+	var globalSymbols=Keys(state.level).filter(symbol=>Intersection(Keys(state.symbols[symbol].rule),GlobalTrackRules).length);
+	
 	var globalTracksPool=globalSymbols.map(symbol=>FruitStateTracks(symbol,state));
 	var localTracks=Complement(tracks,Join(...globalTracksPool));
 
@@ -1038,16 +1041,20 @@ StateAtErrors=function(state){
 	var globalOrder=Order(tracks,Join(...globalTracksPool));
 
 		globalOrder.map((p,i)=>positionErrors[p]=globalErrors[i]);
-
 	return positionErrors;
 }
 
 GlobalTracksErrors=function(tracks,state,symbol){
 	var globalerrors={}
-	var Equaliser=state.symbols[symbol].rule.equaliser;
+	var rule=state.symbols[symbol].rule
+	var Equaliser=rule.equaliser;
 	if(Equaliser)
 		globalerrors.equalised=Unique(tracks.map(Equaliser)).length>1;
-
+	if(rule.mintracks)
+		globalerrors.mintracks=tracks.length<rule.mintracks;
+	if(rule.maxtracks)
+		globalerrors.maxtracks=tracks.length>rule.maxtracks;
+	
 	var localErrors=tracks.map(track=>TrackStateErrors(track,state));
 		localErrors=localErrors.map(errors=>Merge(errors,globalerrors));
 	return localErrors;
@@ -1685,7 +1692,7 @@ DrawStatePaths=function(state){
 		lineWidth:state.line.lineWidth
 	}
 
-	var wrong=DrawTracks(tracks,state,Opts);
+	DrawTracks(tracks,state,Opts);
 
 	if(!state.mode.edit&&state.mode.selection.length>1){
 		var seltrack=PathTrack(state.mode.selection);
@@ -1697,7 +1704,6 @@ DrawStatePaths=function(state){
 		}
 		DrawTrack(seltrack,state,Opts)
 	}
-	return wrong;
 }
 
 DrawState=function(state){

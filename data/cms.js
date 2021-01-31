@@ -21,7 +21,7 @@ CMS={
 
 "status":{...WithImage,POSTSCRIPT:()=>["codes/test/test.js"],TITLE:()=>`Status`,DATE:()=>"2019-11-25",TAGS:()=>[`Creative-Archive`,`Resource`,`Sitemap`],ONE_LINER:()=>`Test whether every ${v.SITE_NAME()} function is supported in your browser.`},
 "lul":{...WithImage,TITLE:()=>`Level unlocking language`,SHORTNAME:()=>`LUL`,DATE:()=>"2019-11-30",TAGS:()=>[`Prototype`,`Resource`,`Tutorial`],ONE_LINER:()=>`${v.TITLE()} (LUL) is a simple language to express level precedence rules, also known as level unlocking conditions.`},
-"store":{...WithImage,BODY:()=>v.PAGE_BARE(),CONTENT:()=>v.POST(),PRESCRIPT:()=>[/*"https://js.stripe.com/v3",*/"data/store.js"],STYLE:()=>`store`,TITLE:()=>`Store`,DATE:()=>"2019-11-27",TYPE:()=>`Store`,TAGS:()=>[`Creative-Archive`,`Finance`,`List`,`Sitemap`],ONE_LINER:()=>`Shop for exclusive ${v.NAME()} games and more!`,TYPEGRAPH:()=>`site`},
+"store":{...WithImage,BODY:()=>v.PAGE_BARE(),CONTENT:()=>v.POST(),PRESCRIPT:()=>["data/store.js"],STYLE:()=>`store`,TITLE:()=>`Store`,DATE:()=>"2019-11-27",TYPE:()=>`Store`,TAGS:()=>[`Creative-Archive`,`Finance`,`List`,`Sitemap`],ONE_LINER:()=>`Shop for exclusive ${v.NAME()} games and more!`,TYPEGRAPH:()=>`site`},
 "press":{...WithImage,TITLE:()=>`Press kit`,DATE:()=>"2019-02-02",TYPE:()=>`Post`,TAGS:()=>[`Creative-Archive`,`Press`,`Sitemap`],TYPEGRAPH:()=>`site`},
 "news":{...WithImage,TITLE:()=>`News`,DATE:()=>"2019-09-20",TYPE:()=>`Archive`,TAGS:()=>[`Creative-Archive`,`Log`,`Post`,`Press`,`Sitemap`],IMAGE_ALT:()=>`${v.SITE_NAME()} News`,TYPEGRAPH:()=>`site`},
 
