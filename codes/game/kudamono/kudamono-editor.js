@@ -1158,7 +1158,7 @@ TrackStyles=function(track,state,styles,errors){
 	var opacity=styles.opacity||state.line.opacity||1;
 
 	var dash=state.line.dash;
-	if(errors.localised||errors.equalised||errors.excess)
+	if(!errors.deficit&&Values(errors).some(Identity))//global and local errors
 		dash=state.line.wrongDash;
 	
 	if(styles.edit){
@@ -1193,7 +1193,7 @@ DrawTrack=function(track,state,styles,errors){
 		return false;
 	
 	var trackStyles=TrackStyles(track,state,styles,errors||{});
-
+	
 	var track=track.filter(segment=>SegmentValid(segment,state));
 		track=UnDiscretiseTrack(track);
 		
