@@ -150,8 +150,8 @@ FruitIcons={
 		rule:{
 			loopallowed:true,
 			trackValidator:"TrackSymmetrised",
-			description:"Every Apple belongs to a mirror or rotationally symmetric path.",
-			depiction:"W=2&L=a1a2a4a1&S=1DRD2DR"
+			description:"Every Apple belongs to a mirror or rotationally symmetric path (loops allowed).",
+			depiction:"W=2&L=a1a2a2a3&S=1DR2DRD"
 		}
 	},
 	"pear":{
@@ -165,7 +165,7 @@ FruitIcons={
 		rule:{
 			mintracks:2,
 			trackequaliser:"UnTranslateTrack",
-			description:"All Pear paths are exactly alike, and there is more than one.",
+			description:"All paths under Pears are exact translations (there is more than one).",
 			depiction:"W=2&L=p1p2p2p2&S=1DR2DR"
 		}
 	},
@@ -179,7 +179,7 @@ FruitIcons={
 			minconnectable:2,
 			maxconnected:0,
 			description:"Every Blueberry is connectable with at least one other (as if a path were drawn).",
-			depiction:"W=2&L=b0b6b2&S=1DD"
+			depiction:"W=2&L=b0b8&S=3DD"
 		}
 	},
 	"cherry":{
@@ -190,8 +190,8 @@ FruitIcons={
 		path:"M 526 17 L 497 30 L 499 125 C 503 296 454 446 366 541 L 320 590 L 274 575 C 184 545 76 594 28 686 C -4 746 -3 843 31 903 C 81 994 177 1038 271 1013 C 331 997 404 924 420 863 C 436 805 427 721 401 685 L 381 656 L 431 603 C 513 515 571 375 586 226 C 593 164 593 163 612 180 C 647 212 720 330 745 396 C 758 432 771 485 772 515 L 775 568 L 740 566 C 641 559 555 610 514 697 C 471 789 491 893 564 961 C 658 1048 779 1041 862 944 C 928 867 936 764 884 675 C 864 641 859 622 864 595 C 872 541 853 431 822 349 C 784 253 730 172 648 90 C 611 53 580 18 580 13 C 580 0 562 2 526 17 Z",
 		rule:{
 			maxconnected:2,
-			description:"Cherries connect only in pairs (not in a loop).",
-			depiction:"W=2&L=c0c2c4c2&S=0RR6RR"
+			description:"Cherries connect only in pairs.",
+			depiction:"W=2&L=c0c2c4c2&S=0DD6DD"
 		}
 	},
 	"coconut":{
@@ -204,8 +204,8 @@ FruitIcons={
 			loopallowed:true,
 			symbolshapes:Shape3s,
 			simpleshapes:Shape2s,
-			description:"Paths branch, as T-junctions, only at every Coconut. No branch returns to its origin.",
-			depiction:"W=2&L=q3q2&S=1URDRDDLLU3D",//TODO
+			description:"Paths branch, as T-junctions, only at every Coconut, and no branch returns to its origin.",
+			depiction:"W=2&L=q3q2&S=0RDDLUU3RDDL",
 			branchloop:false
 		}
 	},
@@ -221,9 +221,8 @@ FruitIcons={
 			symbolshapes:Shape1s,
 			simpleshapes:Join(Shape2Straights,Shape3s),
 			description:"The first two Dates connect via a straight line. Non-endpoints may spawn up to one straight branch ending at a Date.",
-			depiction:"W=2&L=d1d4d1d2&S=1RDRUD",//TODO
-			
-			branchstraight:true,
+			depiction:"W=2&L=d1d4d1d2&S=1RD3RU3D",
+			//TODO
 			specialstartbranch:true
 		}
 	},
@@ -238,8 +237,8 @@ FruitIcons={
 		rule:{
 			loopallowed:true,
 			looprequired:true,
-			description:"Melons belong to closed loops (over 1 melon per loop).",
-			depiction:"W=2&L=c0c2c4c2&S=0RR6RR"
+			description:"Melons belong to closed loops.",
+			depiction:"W=2&L=m0m2m4m2&S=1URRDDLLU"
 		}
 	},
 	"grape":{
@@ -252,8 +251,8 @@ FruitIcons={
 		path:"M 362 19 C 354 31 350 41 352 43 C 354 44 397 71 448 102 C 498 134 540 163 540 169 C 540 182 510 210 454 249 C 415 276 395 283 358 283 C 302 283 267 311 245 374 C 236 403 226 414 208 416 C 168 421 143 439 119 482 C 99 516 95 536 97 594 C 98 660 96 667 74 679 C -10 723 -24 906 50 980 C 69 998 89 1008 109 1008 C 133 1008 142 1014 155 1043 C 164 1062 178 1082 186 1089 C 196 1097 198 1115 194 1157 C 186 1229 204 1293 241 1331 C 266 1355 277 1359 310 1356 C 347 1353 350 1354 366 1393 C 375 1415 385 1455 386 1483 C 391 1552 427 1618 472 1643 C 509 1662 510 1663 544 1644 C 564 1633 586 1610 596 1589 C 614 1551 620 1471 608 1427 C 601 1403 602 1402 630 1406 C 696 1416 750 1340 750 1239 C 750 1197 756 1169 770 1145 C 810 1078 805 971 758 905 C 739 879 739 876 755 833 C 775 781 772 699 748 652 C 740 634 736 614 740 607 C 759 573 761 507 746 455 C 721 369 662 331 602 362 C 585 371 566 386 561 395 C 553 408 551 390 550 327 L 550 242 L 612 159 C 671 79 673 75 655 62 C 637 49 633 51 604 85 L 573 122 L 494 73 C 451 46 406 19 395 11 C 377 0 373 1 362 19 Z M 488 409 C 468 422 466 421 449 373 L 432 328 L 464 303 L 495 278 L 498 340 C 500 382 497 404 488 409 Z",
 		rule:{
 			minconnected:Infinity,
-			description:"All Grapes are connected by a single path (not a loop).",
-			depiction:"W=2&L=c0c2c4c2&S=0RR6RR"
+			description:"All Grapes are connected by a single path.",
+			depiction:"W=2&L=g0g2g4g2&S=0DDRRUU"
 		}
 	},
 	"blackberry":{
@@ -267,7 +266,7 @@ FruitIcons={
 			looprequired:true,
 			symbolshapes:Shape2Straights,
 			simpleshapes:Shape2Corners,
-			description:"Paths cross Blackberries straight and always turn elsewhere.",
+			description:"Paths cross Blackberries straight and always turn elsewhere, forming loops.",
 			depiction:"W=2&L=k3k4&S=1URRDDLUL"
 		}
 	},
@@ -281,7 +280,7 @@ FruitIcons={
 			crossforbidden:true,
 			maxconnected:0,
 			description:"No path passes through a Lemon.",
-			depiction:"L=l4&S=3RR"
+			depiction:"W=2&L=l4&S=1RR"
 		}
 	},
 	"orange":{
@@ -295,7 +294,7 @@ FruitIcons={
 			maxconnected:0,
 			maxconnectable:1,
 			description:"No Orange is connectable with another (no path could be drawn).",
-			depiction:"W=2&L=o0o6o2&S=1DD"
+			depiction:"W=2&L=o0o8&S=3DD"
 		}
 	}
 }
