@@ -458,6 +458,10 @@ PathTrack=function(path){
 	return Join(...track);
 }
 
+PatchedPoints=function(points){
+	return TrackPoints(PathTrack(points));
+}
+
 
 SortTrack=function(track){
 	function Switcher(segmin,segment){
@@ -492,7 +496,10 @@ SegmentPoints=function(segment){
 }
 
 TrackPoints=function(track){
-	return Union(Join(...track.map(SegmentPoints)));
+	if(!track.length)
+		return [];
+	var points=Join(...track.map(SegmentPoints));
+	return DistinctArray(points);
 }
 
 SegmentTouched=function(segment1,segment2){
@@ -2091,7 +2098,7 @@ DragActionContinuer=function(x,y,w,h){
 	if(!mode.selection)
 		mode.selection=[];
 	if(!In(mode.selection,xy)){
-		mode.selection=AddOnce(mode.selection,xy);
+		mode.selection=PatchedPoints(AddOnce(mode.selection,xy));
 	}
 	else if(mode.selection.length>1&&Equal(First(Take(mode.selection,-2)),xy)){
 		mode.selection=Remove(mode.selection,Last(mode.selection));
