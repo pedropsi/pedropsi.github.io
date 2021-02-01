@@ -1844,7 +1844,7 @@ UpdateState=function(substate,options){
 	var changed=Keys(ObjectComplement(STATE,OLDSTATE));
 	
 	if(Intersected(changed,BoardProperties)||options.initialise){
-		STATE.tracks=SplitContiguousTracks(STATE.segments);
+		STATE.tracks=SplitContiguousTracks(ValidSegments(STATE.segments,STATE));
 		STATE.atErrors=StateAtErrors(STATE);
 		STATE.win.won=StateWon(STATE);
 		changed=Keys(ObjectComplement(STATE,OLDSTATE));
