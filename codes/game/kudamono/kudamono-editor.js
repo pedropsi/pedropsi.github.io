@@ -1829,13 +1829,24 @@ StateUpdater=function(opts){
 }
 
 UpdateState=function(opts){
-	if(opts)
-		Keys(opts).map(k=>STATE[k]=opts[k](STATE[k]));
-	
-	STATE.tracks=SplitContiguousTracks(STATE.segments);
-	STATE.atErrors=StateAtErrors(STATE);
-	STATE.win.won=StateWon(STATE);
-
+	var changed=[];
+	if(opts){
+		Keys(opts).map(
+			function(k){
+				var v=Evaluate(opts[k],STATE[k]);
+				if(STATE[k]!==v){
+					STATE[k]=v;
+					changed.push(k)
+				}
+			})
+	}
+	if(In(changed,"segments")){
+		STATE.tracks=SplitContiguousTracks(STATE.segments);
+	}
+	if(Intersection(changed,["segments","level"])){
+		STATE.atErrors=StateAtErrors(STATE);
+		STATE.win.won=StateWon(STATE);
+	}
 	
 	DrawState(STATE);
 	AddUndo(STATE);
@@ -1962,77 +1973,50 @@ XYFruit=function(xy,state){
 		return false;
 }
 
-
-XYMark=function(xy,state){
-	var marks=Keys(state.marks).filter(k=>In(state.marks[k],xy));
-	if(marks.length)
-		return First(marks);
-	else
-		return false;
+XYFruitsRemove=function(points,state){
+	var level=Clone(state.level);
+	points.map(function(xy){
+		if(!PointValid(xy,state))
+			return;
+		var oldfruit=XYFruit(xy,state);
+		if(oldfruit)
+			level[oldfruit]=level[oldfruit].filter(cr=>!Equal(cr,xy));
+	})
+	UpdateState({level:level});
 }
 
-XYMarkRemove=function(xy){
-	var oldmark=XYMark(xy,STATE);
-	if(oldmark)
-		STATE.marks[oldmark]=STATE.marks[oldmark].filter(cr=>!Equal(cr,xy));
-	return STATE;
+XYFruitsAdd=function(points,state){
+	XYFruitsRemove(points,state);
+	
+	var level=Clone(state.level);
+	
+	points.map(function(xy){
+		if(!PointValid(xy,state))
+			return;
+		var overfruit=state.mode.symbol;
+		level[overfruit]=Union(level[overfruit],[xy]);
+	})
+	UpdateState({level:level});
 }
 
-XYFruitRemove=function(xy){
-	var oldfruit=XYFruit(xy,STATE);
-	if(oldfruit)
-		STATE.level[oldfruit]=STATE.level[oldfruit].filter(cr=>!Equal(cr,xy));
-	return STATE;
-}
-
-XYFruitAdd=function(xy){
-
-	if(!PointValid(xy,STATE))
-		return;
-
-	XYFruitRemove(xy);
-
-	var overfruit=STATE.mode.symbol;
-	if(!STATE.level[overfruit])
-		STATE.level[overfruit]=[];
-
-	STATE.level[overfruit].push(xy);
-	STATE.level[overfruit]=Sort(STATE.level[overfruit]);
-}
-
-XYMarkAdd=function(xy){
-
-	if(!PointValid(xy,STATE))
-		return;
-
-	XYMarkRemove(xy);
-
-	var overmark=STATE.mode.symbol;
-	if(!STATE.marks[overmark])
-		STATE.marks[overmark]=[];
-
-	STATE.marks[overmark].push(xy);
-	STATE.marks[overmark]=Sort(STATE.marks[overmark]);
-}
 
 XYSegments=function(xy,state){
 	var segments=state.segments.filter(s=>In(s,xy));
 	return segments;
 }
 
-XYSegmentAdd=function(segment){
-	if(!SegmentValid(segment,STATE))
+XYSegmentsAdd=function(segments,state){
+	var segments=ValidSegments(segments,state).map(CanonicalSegment);
+	if(!segments.length)
 		return;
-	var segment=CanonicalSegment(segment);
-	if(!In(STATE.segments,segment))
-		STATE.segments.push(segment);
+	UpdateState({segments:Union(state.segments,segments)});
 }
 
-XYSegmentRemove=function(segment){
-	if(!SegmentValid(segment,STATE))
+XYSegmentsRemove=function(segments,state){
+	var segments=ValidSegments(segments,state).map(CanonicalSegment);
+	if(!segments.length)
 		return;
-	var segment=CanonicalSegment(segment);
-	STATE.segments=Remove(STATE.segments,segment);
+	UpdateState({segments:Complement(state.segments,segments)});
 }
 
 DragActionDrawStarter=function(x,y){
@@ -2078,29 +2062,29 @@ DragActionContinuer=function(x,y,w,h){
 	DrawState(STATE);
 }
 DragActionEnder=function(x,y){
-	STATE.mode.dragging=false;
+	var mode=Clone(STATE.mode)
+	mode.dragging=false;
 	var selected=STATE.mode.selection||[];
-	var segments=PathTrack(selected);
-
-	if(STATE.mode.edit){
-		if(STATE.mode.clearing)
-			selected.map(XYFruitRemove);
+	if(mode.edit){
+		if(mode.clearing)
+			XYFruitsRemove(selected,STATE);
 		else
-			selected.map(XYFruitAdd);
+			XYFruitsAdd(selected,STATE);
 	}
 	else {
-		selected=STATE.mode.selection||[];
 		if(selected.length>1){
-			if(STATE.mode.clearing)
-				segments.map(XYSegmentRemove);
+			var segments=PathTrack(selected);
+			if(mode.clearing)
+				XYSegmentsRemove(segments,STATE);
 			else{
-				segments.map(XYSegmentAdd);
+				XYSegmentsAdd(segments,STATE);
 			}
 		}
 	}
-	STATE.mode.selection=[];
-	STATE.mode.clearing=false;
-	UpdateState();
+
+	mode.selection=[];
+	mode.clearing=false;
+	UpdateState({mode:mode})
 }
 
 
@@ -2149,7 +2133,7 @@ FruitSetter=function(fruit){
 	}
 }
 
-CycleStateSymbol=function(state,n){
+CycleSymbolState=function(state,n){
 	var state=Clone(state);
 	if(!n)
 		var n=1;
@@ -2162,7 +2146,7 @@ CycleStateSymbol=function(state,n){
 		symbols=CycleSort(symbols,a=>a===state.mode.symbol)
 		state.mode.symbol=symbols[(symbols.length+n)%symbols.length];
 	}
-	return state
+	return state;
 }
 
 var KeyboardActions={
@@ -2217,12 +2201,10 @@ var KeyboardActions={
 
 var WheelActions={
 	"wheel-up":function(){
-		STATE=CycleStateSymbol(STATE,-1);
-		UpdateState();
+		UpdateState(CycleSymbolState(STATE,-1));
 	},
 	"wheel-down":function(){
-		STATE=CycleStateSymbol(STATE,1);
-		UpdateState();
+		UpdateState(CycleSymbolState(STATE,1));
 	}
 }
 
