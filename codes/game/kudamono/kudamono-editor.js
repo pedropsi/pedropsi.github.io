@@ -1111,6 +1111,9 @@ StateWon=function(state){
 
 	if(!wrong)
 		wrong=!SocialSymbolsTrackContained(state);
+
+	if(!wrong)
+		wrong=Keys(state.level).some(fruit=>state.level[fruit].some(xy=>XYFruitErred(xy,fruit,state)))
 	
 	var rule=state.win.rule;
 	if(!wrong&&rule){
@@ -1240,6 +1243,11 @@ PositionValid=function(px,py,state){
 	return !(px<0||px>state.W)&&!(py<0||py>state.H);
 }
 
+XYFruitErred=function(xy,fruit,state){
+	var errors=XYFruitStateErrors(xy,fruit,state);
+	return Values(errors).some(Identity);
+}
+
 DrawStateFruit=function(state,fruit,xy,Opts){
 	if(!fruit||!xy||!PositionValid(xy[0],xy[1],state)||!fruit)
 		return;
@@ -1254,7 +1262,7 @@ DrawStateFruit=function(state,fruit,xy,Opts){
 		py:xy[1]
 	};
 
-	var errors=XYFruitStateErrors(xy,fruit,state);
+	var wrong=XYFruitErred(xy,fruit,state);
 
 	var primarycolour=Opts.colour;
 	if(primarycolour&&Opts.coloriser)
@@ -1269,9 +1277,8 @@ DrawStateFruit=function(state,fruit,xy,Opts){
 		lineWidth=2*lineWidth;
 	}
 	else{
-		if(Values(errors).some(Identity)&&!state.visuals.solid){
-			colour=HEXLightener(1)(colour);
-		}
+		if(wrong&&!state.visuals.solid)
+			colour=HEXLightener(0.95)(colour);
 		else
 			lineWidth=0.1;
 	}
@@ -1713,6 +1720,7 @@ DrawStatePaths=function(state){
 
 DrawState=function(state){
 	UnDraw();
+	CanvasResize(state);
 	DrawBoard(state);
 	DrawMetadata(state);
 }
@@ -1856,12 +1864,12 @@ UpdateState=function(substate,options){
 		NavigateSerial(StateSerial(STATE));
 	}
 
-	if(Intersected(changed,["visuals","mode"])){
+	if(Intersected(changed,["visuals","mode"])||options.initialise){
 		STATE.visuals.cursor=StateCursorName(STATE);
 		DrawCursor(STATE);
 	}
 	
-	if(Intersected(changed,DrawableProperties))
+	if(Intersected(changed,DrawableProperties)||options.initialise)
 		DrawState(STATE);
 }
 
@@ -2244,12 +2252,10 @@ var DragActions={
 	"drag-off":DragActionEnder
 }
 
-CanvasResize=function(){
-	var state=STATE;
+CanvasResize=function(state){
 	var e=GetElement(state.target);
 		e.width=Max(window.innerWidth,e.width||0,e.scrollWidth||0);
 		e.height=Max(window.innerHeight,e.height||0,e.scrollHeight||0);
-	DrawState(state);
 }
 
 
@@ -2283,18 +2289,16 @@ InitialisePuzzle=function(){
 
 	AttendDrag(DragActions,STATE.target);
 	AttendWheel(WheelActions,STATE.target,75);
-	Attend('resize',CanvasResize);
+	Attend('resize',()=>DrawState(STATE));
 
 	KeyboardActions=Merge(KeyboardActions,KeyboardSymbolsActions(STATE));
 	Keybind(KeyboardActions,STATE.target);
 	ResumeCapturingKeys(ComboKeyPressHandler);
-
-	console.log(STATE.target,STATE.visuals.cursor)
-	SetCursor(STATE.target,"pencil");
+	
 	setTimeout(LazyPasser(FocusElement)(STATE.target),500);
 
 	UpdateState({},{initialise:true})
-	CanvasResize();
+	
 	//Auto instructions
 	AutoInstructions(STATE.symbols)
 	
