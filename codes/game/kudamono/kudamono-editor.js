@@ -2121,9 +2121,9 @@ LetterCoordinatesShifter=function(L){
 }
 
 
-var ClearBoard=StateUpdater({segments:segments=>[],level:level=>Empty({})});
-var ClearSegments=StateUpdater({segments:segments=>[]});
-var ClearFruit=StateUpdater({level:level=>Empty({})});
+var ClearBoard=StateUpdater({segments:[],level:{}});
+var ClearSegments=StateUpdater({segments:[]});
+var ClearFruit=StateUpdater({level:{}});
 
 FruitSetter=function(fruit){
 	KeyboardActions[STATE.symbols[fruit].letter]=function(){
