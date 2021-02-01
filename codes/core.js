@@ -43,7 +43,7 @@ False=function(){return false};
 
 Evaluate=function(data){
 	if (typeof data==="function")
-		return data();
+		return data(Rest(...arguments));
 	else
 		return data;
 }
