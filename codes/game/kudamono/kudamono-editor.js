@@ -1722,7 +1722,6 @@ DrawBoard=function(state){
 	DrawStateGrid(state);
 	DrawStatePaths(state);
 	DrawLevel(state);
-	//DrawCursor(state);
 }
 
 UnDrawBoard=function(state){
@@ -1844,25 +1843,22 @@ UpdateState=function(substate,options){
 
 	var changed=Keys(ObjectComplement(STATE,OLDSTATE));
 	
-	if(In(changed,"segments")||options.initialise){
-		STATE.tracks=SplitContiguousTracks(STATE.segments);
-		changed=Keys(ObjectComplement(STATE,OLDSTATE));
-	}
-	
 	if(Intersected(changed,BoardProperties)||options.initialise){
+		STATE.tracks=SplitContiguousTracks(STATE.segments);
 		STATE.atErrors=StateAtErrors(STATE);
 		STATE.win.won=StateWon(STATE);
 		changed=Keys(ObjectComplement(STATE,OLDSTATE));
 	}
-	
 
 	if(Intersected(changed,UndoableProperties)){
 		AddUndo(STATE);
 		NavigateSerial(StateSerial(STATE));
 	}
 
-	if(Intersected(changed,["visuals","mode"]))
+	if(Intersected(changed,["visuals","mode"])){
+		STATE.visuals.cursor=StateCursorName(STATE);
 		DrawCursor(STATE);
+	}
 	
 	if(Intersected(changed,DrawableProperties))
 		DrawState(STATE);
@@ -1870,8 +1866,8 @@ UpdateState=function(substate,options){
 
 StateUpdater=LazyPasser(UpdateState);
 
-DrawCursor=function(state){
-	var cursor;
+StateCursorName=function(state){
+	var cursor=state.visuals.cursor||"pencil";
 	if(!state.mode.edit){
 		if(state.mode.clearing)
 			cursor="pencil-erase";
@@ -1884,26 +1880,25 @@ DrawCursor=function(state){
 		else
 			cursor=state.mode.symbol;
 	}
-	if(cursor)
-		CursorStateUpdate(cursor,state)
+	return cursor;
 }
 
-CursorStateUpdate=function(name,state){
-	state.visuals.cursor=name;
+DrawCursor=function(state){
+	var name=StateCursorName(state);
 	var cursor=name;
 	var opts={};
 	var Icons=state.symbols;
 	if(In(Icons,name)){
 		cursor=Icons[name];
-		if(!CursorStateUpdate[name]){
+		if(!DrawCursor[name]){
 			cursor=RescalePath({...cursor,scale:1,square:100},true);
 			cursor=DisplacePath({...cursor,px:10,py:10});
 			cursor.viewBox="0 0 110 110",
 			cursor=BuildSymbolIcon({...cursor,primitive:"cursor-triangle"});
-			CursorStateUpdate[name]=cursor;
+			DrawCursor[name]=cursor;
 		}
 		else
-			cursor=CursorStateUpdate[name];
+			cursor=DrawCursor[name];
 					
 		opts.fill=Icons[name].colour;
 		if(state.visuals.monochrome){
@@ -1913,7 +1908,6 @@ CursorStateUpdate=function(name,state){
 	opts.width=state.visuals.cursorsize||80;
 	opts.height=state.visuals.cursorsize||80;
 	SetCursor(state.target,cursor,opts);
-	UpdateState({visuals:{cursor:name}},);
 }
 
 //Undo
@@ -2153,11 +2147,7 @@ var ClearSegments=StateUpdater({segments:[]});
 var ClearFruit=StateUpdater({level:{}},{overwrite:true});
 
 FruitSetter=function(fruit){
-	KeyboardActions[STATE.symbols[fruit].letter]=function(){
-		STATE.mode.edit=true;
-		STATE.mode.symbol=fruit;
-		DrawCursor(STATE);
-	}
+	KeyboardActions[STATE.symbols[fruit].letter]=StateUpdater({mode:{edit:true,symbol:fruit},visuals:{cursor:fruit}})
 }
 
 CycleSymbolMode=function(state,n){
