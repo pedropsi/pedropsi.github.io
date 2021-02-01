@@ -2170,10 +2170,10 @@ var KeyboardActions={
 	"ctrl right":IncrementCanvasWidth,
 	"ctrl down":DecrementCanvasHeight,
 	
-	"ctrl shift up":StateUpdater({H:H=>BlankState.H}),
-	"ctrl shift right":StateUpdater({W:W=>BlankState.W}),
-	"ctrl shift left":StateUpdater({H:H=>2}),
-	"ctrl shift down":StateUpdater({W:W=>2}),
+	"ctrl shift up":StateUpdater({H:BlankState.H}),
+	"ctrl shift right":StateUpdater({W:BlankState.W}),
+	"ctrl shift left":StateUpdater({H:2}),
+	"ctrl shift down":StateUpdater({W:2}),
 
 	"ctrl b":function(){STATE.visuals.monochrome=!!!STATE.visuals.monochrome;UpdateState();DrawCursor(STATE,true);},
 	"ctrl shift b":function(){STATE.visuals.solid=!!!STATE.visuals.solid;UpdateState();},
