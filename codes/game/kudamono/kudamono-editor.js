@@ -1857,7 +1857,6 @@ UpdateState=function(substate,options){
 		NavigateSerial(StateSerial(STATE));
 	}
 
-	Monitor({changed})
 	if(Intersected(changed,["visuals","mode"]))
 		DrawCursor(STATE);
 	
