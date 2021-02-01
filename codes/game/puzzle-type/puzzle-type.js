@@ -242,7 +242,7 @@ function P(){
 
 function P(){
 	var pagetag=PageFragment();
-	var fulltokens=["PatrickEye","Plurmorant","mago314","Deusovi","minotalen","KristianHedeholm","builder17","blubberquark"];
+	var fulltokens=["PatrickEye","Plurmorant","mago314","Deusovi","minotalen","KristianHedeholm","builder17","blubberquark","IGF2021"];
 	var semitokens=[];
 	var apptokens=fulltokens.map(function(t){return "homescreen-"+t});
 	var manifest=GetElement("manifest");
