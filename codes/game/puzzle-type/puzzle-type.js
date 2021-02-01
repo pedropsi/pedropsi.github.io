@@ -248,7 +248,7 @@ function P(){
 	var manifest=GetElement("manifest");
 	if(manifest)
 		manifest.href=manifest.href.replace("homescreen","homescreen-"+pagetag);
-	return In(fulltokens,pagetag)||In(apptokens,PageSearch("source"))||(In(semitokens,pagetag)&&PageSearch("levels"))||(PageSearch("code")==="IGF"&&In(["WIN","MAC"],PageSearch("build")));
+	return In(fulltokens,pagetag)||In(apptokens,PageSearch("source"))||(In(semitokens,pagetag)&&PageSearch("levels"))||(PageSearch("code")==="IGF2021"&&In(["WIN","MAC"],PageSearch("build")));
 }
 
 
