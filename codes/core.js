@@ -79,6 +79,12 @@ Apply=function(Function,Array){
 }
 
 
+LazyPasser=function(F){
+	return function(...args){
+		return function(){F(...args)}
+	}
+}
+
 //Functional Sorting
 
 Comparer=function(F){
@@ -938,6 +944,9 @@ BiIntersection=function(AO1,AO2){
 	return ArrayObjectF(ArrayIntersection,ObjectIntersection)(AO1,AO2);
 }
 var Intersection=ArgumentExtender(BiIntersection);
+
+Intersected=function(){
+	return Intersection(...arguments).length>0}
 
 //Union (force uniqueness, sort)
 BiUnion=function(AO1,AO2){
@@ -3183,12 +3192,14 @@ SVGEncodedURL=function(opts){
 
 SetCursor=function(element,nameSO,Opts){
 	var e=GetElement(element);
+	var Opts=Opts||{};
 	if(!nameSO)
 		e.style["cursor"]="auto";
 	e.style["cursor"]=`${IconEncodedURL(nameSO,{width:40,height:40,...Opts})},auto`;
 }
 
 IconEncodedURL=function(nameSO,Opts){
+	var Opts=Opts||{};
 	var Obj=IsString(nameSO)?SymbolIcon(StringSymbol(nameSO)):nameSO;
 	var icon={...SVGObject(Obj),...Opts};
 	return SVGEncodedURL(icon);
