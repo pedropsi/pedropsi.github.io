@@ -42,8 +42,10 @@ True=function(){return true};
 False=function(){return false};
 
 Evaluate=function(data){
-	if (typeof data==="function")
-		return data(Rest(...arguments));
+	if (typeof data==="function"){
+		args=Rest([...arguments]);
+		return data(...args);
+	}
 	else
 		return data;
 }
