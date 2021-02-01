@@ -40,6 +40,7 @@ NodejsDetected=function(){
 Identity=function(i){return i;};
 True=function(){return true};
 False=function(){return false};
+Flipped=function(a){return !a};
 
 Evaluate=function(data){
 	if (typeof data==="function"){
@@ -545,11 +546,11 @@ IsString=function(s){
 }
 
 IsFunction=function(F){
-	return typeof F==="function";
+	return F&&(typeof F==="function");
 }
 
 IsNode=function(node){
-	return typeof node==="object"&&node.isEqualNode;
+	return node&&(typeof node==="object")&&node.isEqualNode;
 }
 
 IsNan=function(nan){
@@ -561,7 +562,7 @@ IsNumber=function(n){
 }
 
 IsDate=function(n){
-	return (typeof n==="object")&&n.getDate;
+	return n&&(typeof n==="object")&&n.getDate;
 }
 
 
@@ -989,7 +990,7 @@ MergeObjects=function(O1,O2){
 	var O={...O1};
 	Keys(O2).map(
 		function(k){
-			if(!O1[k])
+			if(typeof O1[k]!=="undefined")
 				O[k]=O2[k]
 			else
 				O[k]=BiMergeAO(O1[k],O2[k]) //overwrites if joining impossible
@@ -1006,14 +1007,34 @@ BiMergeAO=function(AO1,AO2){
 }
 
 BiMerge=function(AO1,AO2){
-	if(!AO2)
+	if(typeof AO2==="undefined")
 		return AO1;
-	if(!AO1)
+	if(typeof AO1==="undefined")
 		return AO2;
 	return BiMergeAO(AO1,AO2);
 }
 
 Merge=ArgumentExtender(BiMerge);
+
+
+MergeEvaluateObject=function(Obj,SubObj){
+	var Obj=Clone(Obj||{})
+	if(!SubObj)
+		return Obj;
+	Keys(SubObj).map(
+		function(k){
+			var v=Evaluate(SubObj[k],Obj[k]);
+			if(IsObject(v)&&IsObject(Obj[k])){
+				v=MergeEvaluateObject(Obj[k],v);
+			}
+			v=Merge(Obj[k],v);
+			if(Obj[k]!==v){
+				Obj[k]=v;
+			}
+		})
+	return Obj;
+}
+
 
 //Permutations of a set (enforces uniqueness or sort)
 // Permutations=function(array){
