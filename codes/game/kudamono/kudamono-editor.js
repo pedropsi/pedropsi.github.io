@@ -1844,7 +1844,6 @@ UpdateState=function(substate,options){
 		var changed=Keys(ObjectComplement(STATE,OLDSTATE));
 	}
 	
-	
 	if(Intersected(changed,BoardProperties)||options.initialise){
 		STATE.tracks=SplitContiguousTracks(ValidSegments(STATE.segments,STATE));
 		STATE.atErrors=StateAtErrors(STATE);
@@ -2087,7 +2086,7 @@ DragActionContinuer=function(x,y,w,h){
 DragActionEnder=function(x,y){
 	var mode=Clone(STATE.mode)
 	mode.dragging=false;
-	var selected=STATE.mode.selection||[];
+	var selected=mode.selection||[];
 	if(mode.edit){
 		if(mode.clearing)
 			XYFruitsRemove(selected,STATE);
@@ -2148,9 +2147,7 @@ var ClearBoard=StateUpdater({segments:[],level:{}},{overwrite:true});
 var ClearSegments=StateUpdater({segments:[]});
 var ClearFruit=StateUpdater({level:{}},{overwrite:true});
 
-FruitSetter=function(fruit){
-	KeyboardActions[STATE.symbols[fruit].letter]=StateUpdater({mode:{edit:true,symbol:fruit},visuals:{cursor:fruit}})
-}
+
 
 CycleSymbolMode=function(state,n){
 	var mode=Clone(state.mode);
@@ -2220,6 +2217,16 @@ var KeyboardActions={
 
 };
 
+KeyboardSymbolsActions=function(state){
+	var Actions={};
+	Keys(state.symbols).map(
+		function(fruit){
+			Actions[state.symbols[fruit].letter]=StateUpdater({mode:{edit:true,symbol:fruit},visuals:{cursor:fruit}});
+	});
+	return Actions;
+}
+
+
 var WheelActions={
 	"wheel-up":()=>UpdateState({mode:CycleSymbolMode(STATE,-1)}),
 	"wheel-down":()=>UpdateState({mode:CycleSymbolMode(STATE,1)})
@@ -2277,7 +2284,8 @@ InitialisePuzzle=function(){
 	AttendDrag(DragActions,STATE.target);
 	AttendWheel(WheelActions,STATE.target,75);
 	Attend('resize',CanvasResize);
-	Keys(STATE.symbols).map(FruitSetter);
+
+	KeyboardActions=Merge(KeyboardActions,KeyboardSymbolsActions(STATE));
 	Keybind(KeyboardActions,STATE.target);
 	ResumeCapturingKeys(ComboKeyPressHandler);
 
