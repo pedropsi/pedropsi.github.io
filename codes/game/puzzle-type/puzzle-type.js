@@ -242,13 +242,13 @@ function P(){
 
 function P(){
 	var pagetag=PageFragment();
-	var fulltokens=["PatrickEye","Plurmorant","mago314","Deusovi","minotalen","KristianHedeholm","builder17","blubberquark","IGF2021"];
+	var fulltokens=["PatrickEye","Plurmorant","mago314","Deusovi","minotalen","KristianHedeholm","builder17","blubberquark"];
 	var semitokens=[];
 	var apptokens=fulltokens.map(function(t){return "homescreen-"+t});
 	var manifest=GetElement("manifest");
 	if(manifest)
 		manifest.href=manifest.href.replace("homescreen","homescreen-"+pagetag);
-	return In(fulltokens,pagetag)||In(apptokens,PageSearch("source"))||(In(semitokens,pagetag)&&PageSearch("levels"));
+	return In(fulltokens,pagetag)||In(apptokens,PageSearch("source"))||(In(semitokens,pagetag)&&PageSearch("levels"))||(PageSearch("code")==="IGF"&&In(["WIN","MAC"],PageSearch("build")));
 }
 
 
