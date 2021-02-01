@@ -52,7 +52,7 @@ ${FolderGalleryHTML("bonsai",FilterObject(bonsais,(o,k)=>In([0,1,2].map(i=>Keys(
 ${
 	bonsaisFuture=FilterObject(bonsaisData,(o,k)=>(o.date&&Days(StringDate(o.date))<0)),
 	l=Last(bonsaisFuture),
-	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>, with <em>${l.legend?l.legend:""}</em>!</p>`:""
+	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>${l.legend?(", with <em>"+l.legend):""}</em>!</p>`:""
 }
 
 ${v.HEADER()}

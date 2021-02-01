@@ -129,7 +129,7 @@ ${FolderGalleryHTML("kudamono",FilterObject(kudamonos,(o,k)=>In([0,1,2].map(i=>K
 ${
 	kudamonosFuture=FilterObject(kudamonosData,(o,k)=>(o.date&&Days(StringDate(o.date))<0)),
 	l=Last(kudamonosFuture),
-	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>, with <em>${l.legend?l.legend:""}</em>!</p>`:""
+	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>${l.legend?(", with <em>"+l.legend):""}</em>!</p>`:""
 }
 <p>Possible future puzzles are listed under ${A("#Fruit Expansions")}, alongside current ${A("#Issues")}. Suggestion? Excited about a particular idea? Do ${v.A_LET_ME_KNOW()}!</p>
 
