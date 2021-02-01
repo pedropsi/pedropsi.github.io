@@ -29,6 +29,7 @@ var Genres={
 			lineWidth:1.5,
 			colour:"rgb(134,0,16)",
 			excessColour:"rgb(134,0,16)",
+			deficitColour:"#CCCCCC",
 			dash:[1,0],
 			wrongDash:[1,3],
 		},

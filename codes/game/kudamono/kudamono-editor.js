@@ -1176,7 +1176,7 @@ TrackStyles=function(track,state,styles,errors){
 		colour=state.line.deficitColour;
 	else if(errors.excess)
 		colour=state.line.excessColour;
-	else if(group&&state.groups[group])
+	else if(group&&state.groups[group]&&fruits.length>1)
 		colour=state.groups[group].colour||state.line.excessColour;
 	else if(fruit)
 		colour=state.symbols[fruit].colour;
