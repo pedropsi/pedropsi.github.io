@@ -1828,7 +1828,7 @@ DrawMetadata=function(state){
 
 BoardProperties=["segments","level","W","H"];
 UndoableProperties=BoardProperties;
-DrawableProperties=Join(UndoableProperties,["mode"]);
+DrawableProperties=Join(UndoableProperties,["mode","visuals"]);
 
 
 
@@ -1857,6 +1857,7 @@ UpdateState=function(substate,options){
 		NavigateSerial(StateSerial(STATE));
 	}
 
+	Monitor({changed})
 	if(Intersected(changed,["visuals","mode"]))
 		DrawCursor(STATE);
 	
@@ -1885,33 +1886,31 @@ DrawCursor=function(state){
 }
 
 CursorStateUpdate=function(name,state){
-	if(!state.visuals.cursor||state.visuals.cursor!==name){
-		state.visuals.cursor=name;
-		var cursor=name;
-		var opts={};
-		var Icons=state.symbols;
-		if(In(Icons,name)){
-			cursor=Icons[name];
-			if(!CursorStateUpdate[name]){
-				cursor=RescalePath({...cursor,scale:1,square:100},true);
-				cursor=DisplacePath({...cursor,px:10,py:10});
-				cursor.viewBox="0 0 110 110",
-				cursor=BuildSymbolIcon({...cursor,primitive:"cursor-triangle"});
-				CursorStateUpdate[name]=cursor;
-			}
-			else
-				cursor=CursorStateUpdate[name];
-						
-			opts.fill=Icons[name].colour;
-			if(state.visuals.monochrome){
-				opts.fill=CompelRGBA(HEXSaturater(0)(Icons[name].colour));
-			}
+	state.visuals.cursor=name;
+	var cursor=name;
+	var opts={};
+	var Icons=state.symbols;
+	if(In(Icons,name)){
+		cursor=Icons[name];
+		if(!CursorStateUpdate[name]){
+			cursor=RescalePath({...cursor,scale:1,square:100},true);
+			cursor=DisplacePath({...cursor,px:10,py:10});
+			cursor.viewBox="0 0 110 110",
+			cursor=BuildSymbolIcon({...cursor,primitive:"cursor-triangle"});
+			CursorStateUpdate[name]=cursor;
 		}
-		opts.width=state.visuals.cursorsize||80;
-		opts.height=state.visuals.cursorsize||80;
-		SetCursor(state.target,cursor,opts);
-		UpdateState({visuals:{cursor:name}},);
+		else
+			cursor=CursorStateUpdate[name];
+					
+		opts.fill=Icons[name].colour;
+		if(state.visuals.monochrome){
+			opts.fill=CompelRGBA(HEXSaturater(0)(Icons[name].colour));
+		}
 	}
+	opts.width=state.visuals.cursorsize||80;
+	opts.height=state.visuals.cursorsize||80;
+	SetCursor(state.target,cursor,opts);
+	UpdateState({visuals:{cursor:name}},);
 }
 
 //Undo
