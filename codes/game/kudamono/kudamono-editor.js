@@ -442,6 +442,7 @@ MarkIcons={
 
 PathTrack=function(path){
 	var path=Clone(path);
+	
 	var track=[];
 	if(path.length<2)
 		return [];
@@ -764,18 +765,31 @@ SegmentUnitDirection=function(segment){
 SegmentDiscretiseTrack=function(segment){
 	var previousPoint=segment[0];
 	var nextPoint;
-	var direction=SegmentUnitDirection(segment);
+	var direction=SegmentDirection(segment);
 	var i=0;
+	var j=0;
 	var disctrack=[];
 	var dx=Sign(direction[0]);
 	var dy=Sign(direction[1]);
+	
+	while(Abs(i)<Abs(direction[0])&&Abs(j)<Abs(direction[1])){
+		nextPoint=VectorPlus(previousPoint,[dx,0]);
+		disctrack.push([previousPoint,nextPoint]);
+		previousPoint=Clone(nextPoint);
+		i+=dx;
+		nextPoint=VectorPlus(previousPoint,[0,dy]);
+		disctrack.push([previousPoint,nextPoint]);
+		previousPoint=Clone(nextPoint);
+		j+=dy;
+	}
+
 	while(Abs(i)<Abs(direction[0])){
 		nextPoint=VectorPlus(previousPoint,[dx,0]);
 		disctrack.push([previousPoint,nextPoint]);
 		previousPoint=Clone(nextPoint);
 		i+=dx;
 	}
-	var j=0;
+
 	while(Abs(j)<Abs(direction[1])){
 		nextPoint=VectorPlus(previousPoint,[0,dy]);
 		disctrack.push([previousPoint,nextPoint]);
