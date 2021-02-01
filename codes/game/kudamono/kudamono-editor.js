@@ -1836,12 +1836,14 @@ UpdateState=function(substate,options){
 	var options=options||{}	;
 	var OLDSTATE=Clone(STATE);
 
-	if(options.overwrite)
+	if(options.overwrite){
 		STATE={...STATE,...substate};
-	else
+		var changed=Keys(substate);
+	}else{
 		STATE=MergeEvaluateObject(STATE,substate);
-
-	var changed=Keys(ObjectComplement(STATE,OLDSTATE));
+		var changed=Keys(ObjectComplement(STATE,OLDSTATE));
+	}
+	
 	
 	if(Intersected(changed,BoardProperties)||options.initialise){
 		STATE.tracks=SplitContiguousTracks(ValidSegments(STATE.segments,STATE));
