@@ -1828,7 +1828,7 @@ DrawMetadata=function(state){
 
 BoardProperties=["segments","level","W","H"];
 UndoableProperties=BoardProperties;
-DrawableProperties=Join(UndoableProperties,["mode","visuals"]);
+DrawableProperties=Join(UndoableProperties,["mode","visuals","win"]);
 
 
 
@@ -1846,13 +1846,17 @@ UpdateState=function(substate,options){
 	
 	if(In(changed,"segments")||options.initialise){
 		STATE.tracks=SplitContiguousTracks(STATE.segments);
+		changed=Keys(ObjectComplement(STATE,OLDSTATE));
 	}
+	
 	if(Intersected(changed,BoardProperties)||options.initialise){
 		STATE.atErrors=StateAtErrors(STATE);
 		STATE.win.won=StateWon(STATE);
+		changed=Keys(ObjectComplement(STATE,OLDSTATE));
 	}
+	
 
-	if(Intersected(changed,UndoableProperties)&&!options.silent){
+	if(Intersected(changed,UndoableProperties)){
 		AddUndo(STATE);
 		NavigateSerial(StateSerial(STATE));
 	}
@@ -1860,7 +1864,7 @@ UpdateState=function(substate,options){
 	if(Intersected(changed,["visuals","mode"]))
 		DrawCursor(STATE);
 	
-	if(Intersected(changed,DrawableProperties)&&!options.hide)
+	if(Intersected(changed,DrawableProperties))
 		DrawState(STATE);
 }
 
