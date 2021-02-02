@@ -122,7 +122,8 @@ var Genres={
 		date:"2021-02-02",
 		description:`Fill the entire grid with non-branching pipes, connecting endings of the same colour.`,
 		examples:[
-			"W=8&L=v10g13r1v6v11b11g5v2r1b4&S=23RURURURRDL1RRRUURRDDDLU28LLLLUUURULURURDRURRR&G=pp&D=02-02-2021&T=Mario, Luigi and a brother&A=Pedro PSI&N=49"
+			"W=8&L=v10g13r1v6v11b11g5v2r1b4&G=pp&D=02-02-2021&T=Mario, Luigi and a brother&A=Pedro PSI&N=49",
+			//"W=8&L=v10g13r1v6v11b11g5v2r1b4&S=23RURURURRDL1RRRUURRDDDLU28LLLLUUURULURURDRURRR&G=pp&D=02-02-2021&T=Mario, Luigi and a brother&A=Pedro PSI&N=49"
 		],
 		visuals:{
 			solid:true,
