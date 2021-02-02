@@ -115,6 +115,115 @@ var Genres={
 			// }
 		}
 	},
+	"ponkysplumbers":{
+		letter:"pp",
+		designation:"Ponky's Plumbers",
+		author:"Portponky",
+		date:"2021-02-02",
+		description:`Fill the entire grid with non-branching pipes, connecting endings of the same colour.`,
+		examples:[
+			"W=8&L=v10g13r1v6v11b11g5v2r1b4&S=23RURURURRDL1RRRUURRDDDLU28LLLLUUURULURURDRURRR&G=pp&D=02-02-2021&T=Mario, Luigi and a brother&A=Pedro PSI&N=49"
+		],
+		visuals:{
+			solid:true,
+		},
+		overline:{
+			lineWidth:1,
+			clearLineWidth:3,
+			clearColour:"rgb(230,230,230)",
+			clearOpacity:1,
+			dash:[1,0],
+			colour:"rgb(153,0,0)",
+		},
+		line:{
+			lineJoin:"miter",
+			cap:"round",
+			opacity:0.95,
+			lineWidth:5,
+			colour:"#BBBBBB",
+			excessColour:"#555555",
+			deficitColour:"#CCCCCC",
+			dash:[1,0],
+			wrongDash:[1,6],
+		},
+		grid:{
+			strokeColor:"rgb(77,77,77)",
+			dual:true,
+			edge:0.5,
+			dash:[1,0],
+			scale:0.75,
+			nudge:0.35,
+			scaleGrid:0.7,
+			offsetY:1.1
+		},
+		rules:{
+			dangleallowed:false,
+			loopallowed:false
+		},
+		win:{
+			rule:{
+				fillboard:true
+			},
+			grid:{
+				fillColor:"#FFFFED",
+				strokeColor:"#FFFFED"
+			}
+		},
+		groups:{
+		},
+		symbols:{
+			"valve":{
+				letter:"v",
+				colour:"rgb(153,0,0)",
+				viewBox:"0 0 20 20",
+				path:"M 9 2 L 9 2 Q 2 2 2 10 Q 2 18 10 18 Q 18 18 18 10 Q 18 2 11 2 L 11 0 Q 20 0 20 10 Q 20 20 10 20 Q 0 20 0 10 Q 0 0 9 0 L 11 0 L 11 8 Q 12 8 12 9 L 18 9 L 18 11 L 12 11 Q 12 12 11 12 L 11 18 L 9 18 L 9 12 Q 8 12 8 11 L 2 11 L 2 9 L 8 9 Q 8 8 9 8 L 9 2 Z",
+				rule:{
+					crossforbidden:true,
+					maxconnected:0,
+					description:"No pipe passes through a valve."
+				},
+			},
+			"end-red":{
+				letter:"r",
+				colour:"rgb(255,0,0)",
+				viewBox:"0 0 20 20",
+				path:"M 10 0 Q 20 0 20 10 Q 20 20 10 20 Q 0 20 0 10 Q 0 0 10 0",
+				rule:{
+					symbolshapes:Shape1s,
+					simpleshapes:Shape2s,
+					maxconnected:2,
+					minconnected:2,
+					description:""
+				},
+			},
+			"end-green":{
+				letter:"g",
+				colour:"rgb(0,255,0)",
+				viewBox:"0 0 20 20",
+				path:"M 10 0 Q 20 0 20 10 Q 20 20 10 20 Q 0 20 0 10 Q 0 0 10 0",
+				rule:{
+					symbolshapes:Shape1s,
+					simpleshapes:Shape2s,
+					maxconnected:2,
+					minconnected:2,
+					description:""
+				},
+			},
+			"end-blue":{
+				letter:"b",
+				colour:"rgb(0,0,255)",
+				viewBox:"0 0 20 20",
+				path:"M 10 0 Q 20 0 20 10 Q 20 20 10 20 Q 0 20 0 10 Q 0 0 10 0",
+				rule:{
+					symbolshapes:Shape1s,
+					simpleshapes:Shape2s,
+					maxconnected:2,
+					minconnected:2,
+					description:""
+				},
+			}
+		}
+	},
 	"subway":{
 		letter:"s",
 		designation:"Subway",
