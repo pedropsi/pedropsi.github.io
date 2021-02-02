@@ -392,6 +392,7 @@ var BlankState={
 
 var Kudamono={
 	genre:"kudamono",
+	designation:"Kudamono",
 	description:`Draw paths of a single fruit type along the grid, each containing at least two fruits.
 	Unless otherwise indicated, paths do not loop, cross, branch or dangle.`,
 	author:"Pedro",
@@ -1702,7 +1703,6 @@ DrawStateGrid=function(state){
 			gridOpts.fillColor=HEXSaturater(0)(gridOpts.fillColor);
 
 	}
-	DrawRectangle({...gridOpts,lineWidth:0});
 	DrawSquaresGrid(gridOpts);
 }
 
@@ -1787,7 +1787,7 @@ DrawMetadata=function(state){
 	}
 	DrawText({
 		...Opts,
-		txt:Capitalise(state.genre),
+		txt:Capitalise(state.designation||state.genre),
 		fontSize:"calc(var(--h4) + var(--w4))",
 		y:0.1
 	})

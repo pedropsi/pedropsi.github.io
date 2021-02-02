@@ -2,7 +2,7 @@
 var Genres={
 	"bonsai":{
 		letter:"b",
-		genre:"bonsai",
+		designation:"Bonsai Gardening",
 		author:"Le Slo",
 		date:"2021-01-18",
 		description:`Pave the whole grid with a continuous path, rooted to the bottom via a straight trunk (2-piece).
@@ -39,7 +39,7 @@ var Genres={
 			edge:0.5,
 			dash:[1,0],
 			scale:0.75,
-			nudge:0.25	
+			nudge:0.25
 		},
 		rules:{
 			dangleallowed:true,
@@ -115,7 +115,7 @@ var Genres={
 	},
 	"subway":{
 		letter:"s",
-		genre:"subway",
+		designation:"Subway",
 		author:"Portponky",
 		date:"2020-12-29",
 		line:{
@@ -173,7 +173,10 @@ var Genres={
 }
 
 var LettersGenre={};
-Keys(Genres).map(name=>LettersGenre[Genres[name].letter]=name);
+Keys(Genres).map(function(name){
+	LettersGenre[Genres[name].letter]=name;
+	Genres[name.genre]=name;
+});
 var GenreLetters=FlipKeysValues(LettersGenre);
 
 Shout("kudamono-genres")
