@@ -2930,17 +2930,11 @@ var StarHRCodes={
 	"HR8032": "33 Vul"
   }
 
-function AggregateObject(ObjectOfObject){
-	var o={};
-	Values(ObjectOfObject).map(v=>o={...o,...v});
-	return o
-}
-
-var StarCodes=AggregateObject(StarCodesFull);
+var StarCodes=Apply(Merge,Values(StarCodesFull));
 var	SelfStarCodes={};
 	Values(StarCodes).map(v=>SelfStarCodes[v]=v);
 	Keys(StarsByMagnitude).map(k=>StarsByMagnitude[k].map(v=>SelfStarCodes[v]=v));
-	SelfStarCodes={...StarHRCodes,...SelfStarCodes,...StarCodes};
+	SelfStarCodes=Merge(StarHRCodes,SelfStarCodes,StarCodes);
 
 var DeclinationsConstellation={};
 	Keys(ConstellationDeclinations).map(
