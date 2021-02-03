@@ -249,14 +249,6 @@ PWA_ICONS					:	()=>	`"icons":[${v.PWA_ICON_OBJ(512)},${v.PWA_ICON_OBJ(192)},${v
 
 //Variables
 
-
-NormaliseVariables=function(Variables,TemplateFunction) {
-	return MapObject(Variables,function (v,k,o){
-		o[k]=(()=>TemplateFunction(v));
-	})
-}
-
-
 DATA["variables"]=Variables;
 Shout("variables");
 ExportNodeFunctions();

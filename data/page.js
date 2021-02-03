@@ -30,8 +30,9 @@ ConsolidatedVariables=function(){
 	}
 }
 
+
 ConsolidateVariables=function(){
-	DATA["links"]=NormaliseVariables(DATA["links"],LinkTemplate);
+	DATA["links"]=ReValueObject(DATA["links"],function(v){return ()=>LinkTemplate(v)});
 
 	if(typeof v==="undefined")
 		v={};
