@@ -105,7 +105,7 @@ Empty=function(SAO){
 	if(IsString(SAO))
 		return "";
 	
-	console.log("empty what?",SAO);
+	Wtyp(SAO);
 	return SAO;
 }
 
@@ -132,15 +132,30 @@ LazyPasser=function(F){
 ///////////////////////////////////////////////////////////////////////////////
 //Error report
 Warner=function(type){
+	var font="font-family:Calibri,Arial; ";
+	var yellowfont="color:lightyellow; "+font;
+	var bold="font-weight:bold; ";
 	var types={
-		"error":['color:darkred; font-family:Calibri,Arial; font-weight:bold;',
-				'color:darkred; font-family:Calibri,Arial; background: lightyellow;'],
-		"info":['color:lightyellow; font-family:Calibri,Arial; background: darkgreen; font-weight:bold;',
-				'color:lightyellow; font-family:Calibri,Arial; background: darkgreen;'],
-		"network":['color:lightyellow; font-family:Calibri,Arial; background: blue; font-weight:bold;',
-				'color:lightyellow; font-family:Calibri,Arial; background: blue;'],
-		"debug":['color:lightyellow; font-family:Calibri,Arial; background: purple; font-weight:bold;',
-				'color:lightyellow; font-family:Calibri,Arial; background: purple;']
+		"error":[
+			'color:darkred; font-family:Calibri,Arial; font-weight:bold;',
+			'color:darkred; font-family:Calibri,Arial; background: lightyellow;'
+		],
+		"type error":[
+			yellowfont+bold+' background: darkred;',
+			yellowfont+' background: darkred;'
+		],
+		"info":[
+			yellowfont+bold+' background: darkgreen;',
+			yellowfont+' background: darkgreen;'
+		],
+		"network":[
+			yellowfont+bold+' background: blue;',
+			yellowfont+' background: blue;'
+		],
+		"debug":[
+			yellowfont+bold+' background: purple',
+			yellowfont+' background: purple'
+		]
 	};
 	return function W(message){
 		var message=message||"";
@@ -149,20 +164,21 @@ Warner=function(type){
 		var styles=types[type]||types[error];
 
 		var values=Rest(Values(arguments)||[]);
-			values=[`%c ${caller} %c ${message} `].concat(styles).concat(values);
+			values=[`%c ${caller} %c ${type} : ${message} `].concat(styles).concat(values);
 
 		Apply(console.warn,values);
 	}
 }
 
 Warn=Warner("error");
+Wtyp=Warner("type error");
 Winf=Warner("info");
 Wnet=Warner("network");
 Wbug=Warner("debug");
 
 FindCallerName=function(code){
-	if(FunctionHead(code));
-		return FunctionHead(code);;
+	if(FunctionHead(code))
+		return FunctionHead(code);
 	if(!FindCallerName["caller-code-bodies"]){
 		FindCallerName["caller-code-bodies"]=ReValueObject(globalThis,(v,x)=>IsFunction(x)?UnWhitespace(FunctionBody(v)):"");
 		FindCallerName["caller-code-bodies"]=FlipKeysValues(FindCallerName["caller-code-bodies"])
@@ -313,7 +329,7 @@ Equal=function(a,b){
 	else if(IsDate(a)&&IsDate(b))
 		return a===b;
 	else{
-		console.log("check this new case:",a,b);
+		Warn("check this new case:",a,b);
 		return false;
 	}
 }
@@ -347,7 +363,7 @@ BiPlus=function(a,b){
 	else if(IsArray(b))
 		return b.map(n=>Plus(a,n));
 	else{
-		console.log("Plus error",a,b)
+		Warn("Plus error",a,b)
 		return 0;
 	}
 }
@@ -366,7 +382,7 @@ BiTimes=function(a,b){
 	else if(IsArray(b))
 		return b.map(n=>Times(a,n));
 	else{
-		console.log("Times error",a,b)
+		Wtyp(a,b);
 		return 1;
 	}
 }
@@ -381,7 +397,7 @@ Symmetric=function(a){
 	if(IsArray(a))
 		return a.map(Symmetric);
 	else{
-		console.log("error Symmetric ",a);
+		Wtyp(a,b);
 		return a;
 	}
 }
@@ -400,7 +416,7 @@ Inverse=function(a){
 	if(IsArray(a))
 		return a.map(Inverse);
 	else{
-		console.log("error Inverse ",a)
+		Wtyp(a);
 		return a;
 	}
 }
@@ -687,7 +703,7 @@ AOApply=function(arrayOrObj,F){
 	else if(IsObject(arrayOrObj))
 		return F(Keys(arrayOrObj));
 	else{
-		console.log("error, nor array nor object");
+		Wtyp(arrayOrObj);
 		return undefined;
 	}
 };
@@ -842,7 +858,7 @@ ArrayObjectF=function(ArrayF,ObjectF){
 		if(IsObject(AOInclude)&&IsObject(AOExclude))
 			return ObjectF(AOInclude,AOExclude);
 
-		return console.log("error: mismatch obj and array in "+FunctionName(ArrayF)+"/"+FunctionName(ArrayF));
+		return Wtyp(ArrayF,ObjectF);
 	}
 }
 
@@ -1499,7 +1515,7 @@ StringReplace=function(string,rules){
 			return StringReplaceRule(string,rules);
 	}
 	else{
-		console.log("error: can't make string rule from",r);
+		Wtyp(r);
 		return string;
 	}
 }
@@ -2215,7 +2231,7 @@ function NavigateSerial(serial){
 	if(history)
 		history.pushState({},"",PageReSearch(PageURL(),serial));
 	else
-		console.log("cannot navigate to: ",serial);
+		Wnet("cannot navigate to: ",serial);
 }
 
 AClick=function(url,opts){
@@ -2517,13 +2533,13 @@ LoadDataFromNetwork=function(url,Successer,header,FailureF){
 	rawFile.onreadystatechange=function(){
 		if(rawFile.readyState===4){
 			if(rawFile.status===404){
-				console.log("Nothing found at: ",url,", not necessarily an error!");
+				Wnet("Nothing found at: ",url,", not necessarily an error!");
 				FailureF();
 			}
 			else if(rawFile.status===200||rawFile.status==0){
 				var data=rawFile.responseText;
 				if(data===""){
-					console.log("No data received from: ",url,". Connection problems?");
+					Wnet("No data received from: ",url,". Connection problems?");
 					FailureF();
 				}
 				else{
@@ -5277,7 +5293,7 @@ Context=function(targetSelector){
 ElementContext=function(targetSelector){
 	var elem=GetElement(targetSelector);
 	if(!elem){
-		return console.log("no element for context",targetSelector); //Add last context
+		return Warn("no element for context",targetSelector); //Add last context
 	}
 
 	var e=elem;
@@ -5609,7 +5625,7 @@ DelayUntil=function(Condition,F,i){
 			setTimeout(D,100*(Power(2,DelayUntil[n])));
 		}
 		else
-			console.log("Timed out: ",n);
+			Wnet("Timed out: ",n);
 	}
 }
 
@@ -6465,7 +6481,7 @@ var MultimediaKeys={
 HyperPerson=function(name){
 	var alias=UniformString(name);
 	if(In(HyperPerson.ambiguous,alias))
-		console.log("warning, ambiguous name:",name);
+		Winf("warning, ambiguous name:",name);
 	return HyperText("People/"+UniformString(name));
 }
 
