@@ -393,5 +393,19 @@ DrawText=function(opts){
 	ctx.fillText(opts.txt,canvas.width*opts.x,canvas.height*opts.y);
 }
 
+//
+
+function SaveCanvas(source,name){
+	var name=name||"image";
+	var source=source||"canvas";
+	(SaveCanvas[name]=(SaveCanvas[name]||0)+1);
+	var n=SaveCanvas[name]-1;
+	var imagecode=GetElement(source).toDataURL();
+	var name=name+(n?n:"");
+	var a=AnchorHTML("d",imagecode,{id:name,download:name});
+	MakeElement(a).click();
+}
+ 
+
 ////////////////////////////////////////////////////////////////////////////////
 Shout("data-game-canvas");

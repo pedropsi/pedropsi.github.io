@@ -2222,7 +2222,8 @@ var KeyboardActions={
 	"b ctrl"		:StateUpdater({visuals:{monochrome:Flipped}}),
 	"b ctrl shift"	:StateUpdater({visuals:{solid:Flipped}}),
 
-	"s ctrl":ExportSerial,
+	"c ctrl":ExportSerial,
+	"s ctrl":()=>SaveCanvas(),
 
 	"space":StateUpdater({mode:{edit:Flipped}}),
 	
