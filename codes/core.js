@@ -1289,9 +1289,23 @@ RemoveFirst=function(array,item){
 		return array;
 }
 
-Remove=function(array,item){
+RemoveItemArray=function(array,item){
 	return FixedPoint(arr=>RemoveFirst(arr,item),array);
 }
+
+RemoveKeyObject=function(O,key){
+	var P=Clone(O);
+	delete P[key];
+	return P;
+}
+
+Remove=function(AO,key){
+	if(IsObject(AO))
+		return RemoveKeyObject(AO,key);
+	else
+		return RemoveItemArray(AO,key);
+}
+
 
 AddOnce=function(array,item){
 	if(!In(array,item))
