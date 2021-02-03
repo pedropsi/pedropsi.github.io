@@ -40,12 +40,11 @@ NodejsDetected=function(){
 FunctionName=function(FunctionF){
 	if(FunctionF.name)
 		return FunctionF.name;
-	var name=FunctionF.toString().replace(/\(.*/,"").replace("function ","");
-	name=name.replace(/\s.*/gm,"");
-	if(name!=="function")
-		return name;
+	var head=FunctionHead(FunctionF);
+	if(head!=="function")
+		return head;
 	else{
-		var body=FunctionF.toString().replace(/[^\)]*\)/,"");
+		var body=FunctionBody(FunctionF);
 		return body.replace(/[^ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890]/gi,"").replace(/^[1234567890]*/,"");
 	}
 }
@@ -57,6 +56,17 @@ FunctionNamecode=function(F){
 FunctionBody=function(FunctionF){
 	return FunctionF.toString().replace(/[^\)]*\)/,"");
 }
+
+FunctionHead=function(FunctionF){
+	if(FunctionF.name)
+		return FunctionF.name;
+	var head=FunctionF.toString().replace(/\(.*/,"").replace("function ","");
+	return head.replace(/\s.*/gm,"");
+}
+
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Do nothing
