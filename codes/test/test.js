@@ -1,4 +1,3 @@
-
 /*
 function EnableTestMode(){
 	LoadAsync("test-behaviour","codes");
@@ -8,115 +7,163 @@ function EnableTestMode(){
 ///////////////////////////////////////////////////////////////////////////////
 //Test suite saver
 //Run Test() to execute and report the tests on the list of saved functions
-//provided there is an element in the page labelled with the result of TestingAreaSelector()
+//provided there is an element in the page labelled with TestingAreaSelector
 
-function TestFunction(functionname,testname){
-	var functionname=FunctionNamecode(functionname);
-	var verifiername="";
+TestingAreaSelector=".test-suite";
 
-	var test=Test[functionname][testname];
-	if(test){
-		var result="___WRONGRESULT___";
-		try{
-			result=test["function"].apply(null,test["arguments"]);
-			if(test.VerifierF){
-				result=test.VerifierF(result);
-				verifiername=FunctionNamecode(test.VerifierF);
-			}
-		}
-		catch(e){
-			console.log(e);
-		}
-		var expect=test["expected"];
-		var passed=(Equal(result,expect));
-		ReportTest(functionname,testname,test,passed,result,expect,verifiername);
-		return passed;
+TestFunction=function(callerName,testname){
+	var callerName=FunctionNamecode(callerName);
+
+	var unitObj=Test[callerName][testname];
+	if(!unitObj)
+		return;
+
+	var passed=false;
+	var result=null;
+	try{
+		result=eval(unitObj.call);
+		passed=Equal(result,unitObj.expected)||!!Evaluate(unitObj.VerifierF)
 	}
+	catch(e){
+		passed=false;
+	}
+
+	unitObj.passed=passed;
+	unitObj.result=result;
+	
+	ReportTest(unitObj);
+
+	return passed;
 }
 
 var ErrorReport=[];
 
-function ReportTest(functionname,testname,test,passed,result,expect,verifiername){
-	if(passed)
+ReportTest=function(unitTest){
+	if(unitTest.passed)
 		return;
 	
-	var tID="test-"+functionname;
-	
-	var title=`
+	var callerName=unitTest.callerName;
+
+	var tID="test-"+callerName;
+	var header=`
 		<h3 class='test-function' id='${tID}'>
-			${functionname}
+			${callerName}
 		</h3>`;
 
+
 	if(!GetElement(tID))
-		AddElement(title,TestingAreaSelector());
+		AddElement(header,TestingAreaSelector);
 
+	var callresult=`${unitTest.call}===${EnString(unitTest.result)}`;
+	var expected="";
 
-	var verifunctionname=functionname;
+	if(unitTest.verifierName)
+		callresult=callresult+` (verified)`;
+	else{
+		expected="<p>Expected:<code>"+JSON.stringify(unitTest.expected)+"</code></p>"
+	}	
+		// Wbug(expected);
 	
-	if(verifiername)
-		verifunctionname=verifiername+"("+verifunctionname+")";
-
-	var label=passed?LabelHTML("Passed","test"):LabelHTML("Failed","test Problem");
-
+	var title=unitTest.title;
+	var label=LabelHTML("Failed","test Problem");
 	var tried=`
-		<h4>${testname}</h4>
+		<h4>${title}</h4>
 		<p>
-			<code>
-				${verifunctionname}(${test["arguments"].map(EnString).join(",")})=${EnString(result)}
-			</code>
-			${label}
+			<code>${callresult}</code>${label}
 		</p>
 	`
-	var expected="<p>Expected:<code>"+JSON.stringify(expect)+"</code></p>"
-	
+	var testid=KebabCaseString("test-"+callerName+" "+title);
+	RemoveElement(testid);
+
 	var report=`
 		<div class='test-result' id='${testid}'>
 			${tried}
 			${expected}
 		</div>`;
 
-	ErrorReport.push([functionname,testname]);
-	
-	var testid=KebabCaseString("test-"+functionname+" "+testname);
-	RemoveElement(testid);
-
+	ErrorReport.push([callerName,title]);
 	AppendElement(report,tID);
 }
 
-function Test(functionname){
-	if(!functionname&&Test.functions){
-		AddElement("<p>Tests complete!</p>",TestingAreaSelector());
+Test=function(callerName){
+	if(!callerName&&Test.functions){
+		AddElement("<p>Tests complete!</p>",TestingAreaSelector);
 		var tests=Test.functions.map(Test);
 		if(ErrorReport.length>0)
 			RegisterStatus(ErrorReport);
 		return tests;
 	}
 
-	var functionname=FunctionNamecode(functionname);
-	var tests=Test[functionname];
+	var callerName=FunctionNamecode(callerName);
+	var tests=Test[callerName];
 
-	return Keys(tests).map(function(testname){TestFunction(functionname,testname)});
+	return Keys(tests).map(function(testname){TestFunction(callerName,testname)});
 }
 
-function SaveTest(F,argArray,result,testname,VerifierF){
+SaveTest=function(F,argArray,expected,testname,VerifierF){
+	var callerName=FunctionNamecode(F);
+	var argArray=IsArray(argArray)?argArray:[argArray];
+	var call=callerName+JSON.stringify(argArray).replace(/^\[/,"(").replace(/\]$/,")")
 
-	var functionname=FunctionNamecode(F);
+	SaveUnitTest({
+		title:testname,
+		call:call,
+		callerName:callerName,
+		expected:expected,
+		VerifierF:VerifierF
+	})
+}
+
+SaveUnitTest=function(unitObj){
+	var callerName=unitObj.callerName;
 
 	if(!Test.functions)
 		Test.functions=[];
 
-	if(!Test[functionname]){
-		Test[functionname]={};
-		Test.functions.push(functionname);
+	if(!Test[callerName]){
+		Test[callerName]={};
+		Test.functions.push(callerName);
 	}
-	var argArray=IsArray(argArray)?argArray:[argArray];
-	var testname=testname?testname:(functionname+"("+argArray.map(String).join(",")+")");
-	
-	Test[functionname][testname]={"function":F,"arguments":argArray,"expected":result,"VerifierF":VerifierF};
+
+	Test[callerName][unitObj.call]=unitObj;
 }
 
-function TestingAreaSelector(){
-	return ".test-suite";
+
+//TestRoll format
+
+TestRollUnitTexts=function(testRoll){
+	//spit on two or more paragraphs
+	return testRoll.split(/\n((\s|\t)+)?(\n((\s|\t)+)?)+/).filter(x=>x&&x.replace(/(\n((\s|\t)+)?)/,"").length);
+}
+
+TextTestUnit=function(unitText){
+	var lines=unitText.split("\n").filter(Identity);
+	if(lines.length<2){
+		console.error("this unit test is missing either the call or the expected result",lines)
+		return {};
+	}
+	var title=lines[0];
+	
+	if(lines.length===2){
+		var title="missing title";
+		lines=Prepend(lines,title);
+	}
+	var call=lines[1];
+	var callerName=call.replace(/\(.*$/,"");
+	if(!globalThis[callerName]){
+		console.error("the function is undefined:",callerName)
+		return {};
+	}
+	var expected=lines[2];
+	expected=expected.replace(/^(\s|\t|\n)?(Object|Array|function)(\s|\t|\n)?(\(\d+\))?/,"");
+	expected=eval("Identity("+expected+")");//prevents error with lone objects
+
+	return {
+		title:title,
+		call:call,
+		callerName:callerName,
+		expected:expected
+	};
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -656,12 +703,12 @@ SaveTest(ShortenString,["1234567890",0],"...","zero");
 ///////////////////////////////////////////////////////////////////////////////
 // DOM Manipulation
 
-function GetElementV(clas){
-	return function Verify(result){return Classed(result,clas)};
-}
+// function GetElementV(clas){
+// 	return function Verify(result){return Classed(result,clas)};
+// }
 
-SaveTest(GetElement,".rainbowline",true,"existing element of class .rainbowline",GetElementV("rainbowline"));
-SaveTest(GetElement,".rainbline",undefined,"non-existing element of class .rainbline",GetElementV("rainbline"))
+// SaveTest(GetElement,".rainbowline",true,"existing element of class .rainbowline",GetElementV("rainbowline"));
+// SaveTest(GetElement,".rainbline",undefined,"non-existing element of class .rainbline",GetElementV("rainbline"))
 
 //////////////////////////////////////////////////
 // Scroll into
@@ -682,121 +729,69 @@ SaveTest(SafeUrl,"https://google.com","https://google.com","don't enforce http:"
 SaveTest(SafeUrl,"<script>tame(dangers)</script>","","script attempt")
 
 
-//////////////////////////////////////////////////
-// Transformer: Table
-
-//////////////////////////////////////////////////
-// Guestbook 
+var more=`
 
 
 
-////////////////////////////////////////////////////////////////////////////////
-// Element Generator
+
+"Form a parameter pair"
+ParameterPairString,("a",1)
+"a=1"
+
+"Convert spaces to UTF"
+ParameterPairString("a","how fascinating")
+"a=how%20fascinating"
 
 
-////////////////////////////////////////////////////////////////////////////////
-// DataField and DataPack system : default DataField (customisable), many of which constitute a DataPack 
+"From a multi-parameter string"
+ParameterString({"a":1,"b":2})
+"a=1&b=2"
 
 
-////////////////////////////////////////////////////////////////////////////////
-// Opener & Closer Functions with focus option, 
-// -> to use within Datapack RequestFunctions
+`
+
+var TestTextRoll=`
 
 
-////////////////////////////////////////////////////////////////////////////////
-// Toggling class & buttons
+make string pairs
+SVGLinePairs("M 1 2 3 4")
+[[1,2],[3,4]]
+
+modify numbers
+SVGLineApply("M 1 2 3 4",xy=>[xy[1],xy[0]])
+"M 2 1 4 3 "
+
+"split path, multiple components"
+SVGPathSplit("M 1 2 L 3 4 Q 5 6 7 8 Z")
+["M 1 2 ","L 3 4 ","Q 5 6 7 8 ","Z "]
+
+deep evaluation
+MergeEvaluateObject({a:1,b:2,c:{d:3}},{a:x=>x+1,c:{d:x=>2*x}})
+{a:2,b:2,c:{d:6}}
+
+Change values based on keys and values
+ReValueObject({a:1,b:2},(x,l)=>l.repeat(2*x))
+{a:"aa",b:"bbbb"}
 
 
+From array, multiple values
+Remove([1,2,3,3,2,8],2)
+Array(4) [ 1, 3, 3, 8 ]
 
-////////////////////////////////////////////////////////////////////////////////
-// Closing functions
+From object, key present
+Remove({a:1,b:2},"a")
+Object { b: 2 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Focus functions
-
-
-///////////////////////////////////////////////////////////////////////////////
-//Event Listeners
-
-
-////////////////////////////////////////////////////////////////////////////////
-// Data submission in forms
-
-////////////////////////////////////////////////////////////////////////////////
-// Data finding in forms
+From object, key absent
+Remove({a:1,b:2},2)
+Object { a: 1, b: 2 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-// Global Data Transmission Variables
+`
 
-///////////////////////////////////////////////////////////////////////////////
-// Modals
-
-///////////////////////////////////////////////////////////////////////////////
-// Form Validators and Modifiers
+TestRollUnitTexts(TestTextRoll).map(TextTestUnit).map(SaveUnitTest);
 
 
-///////////////////////////////////////////////////////////////////////////////
-//Message Console 
-
-
-
-///////////////////////////////////////////////////////////////////////////////
-//Sounds Control
-
-///////////////////////////////////////////////////////////////////////////////
-//Music Control
-
-///////////////////////////////////////////////////////////////////////////////
-//Fullscreen
-
-
-///////////////////////////////////////////////////////////////////////////////
-//Contextual Shortcuts
-
-///////////////////////////////////////////////////////////////////////////////
-//Keyboard input
-
-///////////////////////////////////////////////////////////////////////////////
-// Time-based functions
-
-///////////////////////////////////////////////////////////////////////////////
-// Cycle
-
-///////////////////////////////////////////////////////////////////////////////
-//Image
-
-
-///////////////////////////////////////////////////////////////////////////////
-// Canvas Drawing
-
-///////////////////////////////////////////////////////////////////////////////
-//Reduce
-
-
-///////////////////////////////////////////////////////////////////////////////
-// Custom events 
-
-
-//////////////////////////////////////////////////////////////////////////////
-// Data transmission
-
-SaveTest(ParameterPairString,["a",1],"a=1","parameter pair");
-SaveTest(ParameterPairString,["a","how fascinating"],"a=how%20fascinating","utf");
-
-SaveTest(ParameterString,[{"a":1,"b":2}],"a=1&b=2","full parameter string");
-
-
-
-SaveTest(SVGLinePairs,["M 1 2 3 4"],[[1,2],[3,4]],"make string pairs");
-
-SaveTest(SVGLineApply,["M 1 2 3 4",xy=>[xy[1],xy[0]]],"M 2 1 4 3 ","modify numbers");
-
-SaveTest(SVGPathSplit,["M 1 2 L 3 4 Q 5 6 7 8 Z"],["M 1 2 ","L 3 4 ","Q 5 6 7 8 ","Z "],"split path, multiple components");
-
-SaveTest(MergeEvaluateObject,[{a:1,b:2,c:{d:3}},{a:x=>x+1,c:{d:x=>2*x}}],{a:2,b:2,c:{d:6}},"deep evaluation");
-
-SaveTest(ReValueObject,[{a:1,b:2},(x,l)=>l.repeat(2*x)],{a:"aa",b:"bbbb"},"change values based on keys and values");
 ///////////////////////////////////////////////////////////////////////////////
 //Run Tests only after loading the external resources below
 //ListenOnce("TestReady",Test);
