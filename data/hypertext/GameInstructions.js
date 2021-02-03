@@ -5,5 +5,5 @@ HyperText("GameInstructions",function(){
 	${HyperText("InstructionsLevelSelector")}
 	${HyperText("InstructionsFullscreen")}
 	${AwaitText("InstructionsHints")}
-	${HyperText("InstructionsFeedback")}
+	${/*HyperText("InstructionsFeedback")*/""}
 `})
