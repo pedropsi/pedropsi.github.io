@@ -520,6 +520,18 @@ Insert=function(array,n,p){
 	return array;
 }
 
+Append=function(A,item){
+	if(typeof item==="undefined")
+		return A;
+	return Insert(A,item,A.length)
+}
+
+Prepend=function(A,item){
+	if(typeof item==="undefined")
+		return A;
+	return Insert(A,item,0)
+}
+
 InsertCut=function(array,n,p){
 	var p=Max(Min(p,array.length),0);
 	array.splice(p,array.length-p,n);
@@ -625,10 +637,17 @@ FlipKeysValues=function(Obj){
 	return O;
 };
 
-ReKeyObject=function(Obj,Modifier){
+ReKeyObject=function(Obj,Modifier){//key, then value (optional)
 	var Modifier=Modifier||Identity;
 	var O={};
-	Keys(Obj).map(k=>(O[Modifier(k)]=Obj[k]));
+	Keys(Obj).map(k=>(O[Modifier(k,Obj[k])]=Obj[k]));
+	return O;
+};
+
+ReValueObject=function(Obj,Modifier){//value, then key (optional)
+	var Modifier=Modifier||Identity;
+	var O={};
+	Keys(Obj).map(k=>(O[k]=Modifier(Obj[k],k)));
 	return O;
 };
 
