@@ -4850,7 +4850,7 @@ SubmitAnswerSet=function(DP){
 		}
 		if(DP.requireConnection&&!Online()){
 			ListenOnce("online",SubAndContinue);
-			ConsoleAdd("<b>Network offline...</b>Submission saved - will be re-sent when back online.");
+			ConsoleAdd("<b>Network offline...</b> Submission saved - will be re-sent when back online.");
 		}
 		else
 			SubAndContinue();
