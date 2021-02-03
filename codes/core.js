@@ -138,23 +138,6 @@ Sorter=function(...functions){
 	}
 }
 
-ReverseComparer=function(F){
-	var F=F||Number;
-	return function(a,b){
-		Fa=F(a);
-		Fb=F(b);
-		return Fa<Fb?1:(Equal(Fa,Fb)?0:-1);
-	}
-}
-
-ReverseSorter=function(...functions){
-	return function(array){
-		var funs=[...functions];
-		if(!funs.length)
-			funs=[Identity];
-		funs.map(f=>(array=Clone(array).sort(ReverseComparer(f))));
-		return array;
-	}
 }
 
 SortObjectKeys=function(Obj,...Sorters){
