@@ -64,6 +64,9 @@ Identity=function(i){return i;};
 True=function(){return true};
 False=function(){return false};
 Flipped=function(a){return !a};
+Trued=function(a){return a===true};
+Falsed=function(a){return a===false};
+
 
 Apply=function(Function,Array){
 	return Function.apply(null, Array);
