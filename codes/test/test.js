@@ -236,11 +236,11 @@ SaveTest(PoweredSum,[[1,2,3],2],14,"tridimensional, 2");
 SaveTest(PoweredSum,[[1,2,3],3],36,"tridimensional, 3");
 SaveTest(PoweredSum,[[1,2,3,4],2],30,"tetradimensional");
 
-SaveTest(VectorPlus,[[],[]],[],"both empty");
-SaveTest(VectorPlus,[[1],[2]],[3],"monodimensional");
-SaveTest(VectorPlus,[[1,2],[3,4]],[4,6],"multidimensional");
-SaveTest(VectorPlus,[[1,2],[3]],[4],"ragged underflow");
-SaveTest(VectorPlus,[[1],[3,4]],[4],"ragged overflow");
+SaveTest("VectorPlus",[[],[]],[],"both empty");
+SaveTest("VectorPlus",[[1],[2]],[3],"monodimensional");
+SaveTest("VectorPlus",[[1,2],[3,4]],[4,6],"multidimensional");
+SaveTest("VectorPlus",[[1,2],[3]],[4],"ragged underflow");
+SaveTest("VectorPlus",[[1],[3,4]],[4],"ragged overflow");
 
 SaveTest(EuclideanDistance,[[],[]],0,"both empty");
 SaveTest(EuclideanDistance,[[1],[2]],1,"monodimensional");
@@ -389,18 +389,18 @@ SaveTest(Complement,[["b","b","a","c","c"],["a"]],["b","c"],"eliminate duplicate
 SaveTest(Complement,[["d","c","b","a"],["b","d"]],["a","c"],"sort");
 SaveTest(Complement,[[["d","c"],[["b"]],"a"],["c","d",[["b"]]]],["a",["d","c"]],"deep array");
 
-SaveTest(Intersection,[["a","b","c"],["b"]],["b"],"one common element");
-SaveTest(Intersection,[["a","b","c"],["d"]],[],"no common element");
-SaveTest(Intersection,[["a","b","c"],[]],[],"empty list");
-SaveTest(Intersection,[["b"],["a","b","c"]],["b"],"reverse argument order");
-SaveTest(Intersection,[["b","b","a","c"],["b","c","c"]],["b","c"],"eliminate duplicates");
-SaveTest(Intersection,[["d","c","b","a"],["a","c","b","d"]],["a","b","c","d"],"sort");
+SaveTest("Intersection",[["a","b","c"],["b"]],["b"],"one common element");
+SaveTest("Intersection",[["a","b","c"],["d"]],[],"no common element");
+SaveTest("Intersection",[["a","b","c"],[]],[],"empty list");
+SaveTest("Intersection",[["b"],["a","b","c"]],["b"],"reverse argument order");
+SaveTest("Intersection",[["b","b","a","c"],["b","c","c"]],["b","c"],"eliminate duplicates");
+SaveTest("Intersection",[["d","c","b","a"],["a","c","b","d"]],["a","b","c","d"],"sort");
 
-SaveTest(Union,[["a","b","c"],["b"]],["a","b","c"],"one common element");
-SaveTest(Union,[["a","b","c"],["d"]],["a","b","c","d"],"new element");
-SaveTest(Union,[["a","b","c"],[]],["a","b","c"],"empty list");
-SaveTest(Union,[["b"],["a","b","c"]],["a","b","c"],"reverse argument order");
-SaveTest(Union,[["b","b","a","c","c"],["a"]],["a","b","c"],"eliminate duplicates and sort");
+SaveTest("Union",[["a","b","c"],["b"]],["a","b","c"],"one common element");
+SaveTest("Union",[["a","b","c"],["d"]],["a","b","c","d"],"new element");
+SaveTest("Union",[["a","b","c"],[]],["a","b","c"],"empty list");
+SaveTest("Union",[["b"],["a","b","c"]],["a","b","c"],"reverse argument order");
+SaveTest("Union",[["b","b","a","c","c"],["a"]],["a","b","c"],"eliminate duplicates and sort");
 
 SaveTest(Permutations,[[]],[],"empty array");
 SaveTest(Permutations,[[1]],[[1]],"one symbol array");
@@ -458,15 +458,15 @@ SaveTest(FunctionNamecode,(i)=>i,"(i)=>i","function code");
 ///////////////////////////////////////////////////////////////////////////////
 //Join Objects, overwriting conflicting properties
 
-SaveTest(FuseObjects,[{a:1,b:2},{a:3}],{a:3,b:2},"object - has key");
-SaveTest(FuseObjects,[{a:1,b:2},{c:3}],{a:1,b:2,c:3},"object - hasn't key");
-SaveTest(FuseObjects,[{a:1,b:2},{c:3,d:4}],{a:1,b:2,c:3,d:4},"object - hasn't key");
-SaveTest(FuseObjects,[{a:3},{a:1,b:2}],{a:1,b:2},"multiple properties");
-SaveTest(FuseObjects,[{a:1,b:2},{c:3}],{a:1,b:2,c:3},"object - hasn't key");
-SaveTest(FuseObjects,[{a:1,b:2},{}],{a:1,b:2},"add empty object");
-SaveTest(FuseObjects,[{},{a:1,b:2}],{a:1,b:2},"add to empty object");
-SaveTest(FuseObjects,[{a:1,b:2}],{a:1,b:2},"only one argument");
-SaveTest(FuseObjects,[],{},"zero argument");
+SaveTest("Merge",[{a:1,b:2},{a:3}],{a:3,b:2},"object - has key");
+SaveTest("Merge",[{a:1,b:2},{c:3}],{a:1,b:2,c:3},"object - hasn't key");
+SaveTest("Merge",[{a:1,b:2},{c:3,d:4}],{a:1,b:2,c:3,d:4},"object - hasn't key");
+SaveTest("Merge",[{a:3},{a:1,b:2}],{a:1,b:2},"multiple properties");
+SaveTest("Merge",[{a:1,b:2},{c:3}],{a:1,b:2,c:3},"object - hasn't key");
+SaveTest("Merge",[{a:1,b:2},{}],{a:1,b:2},"add empty object");
+SaveTest("Merge",[{},{a:1,b:2}],{a:1,b:2},"add to empty object");
+SaveTest("Merge",[{a:1,b:2}],{a:1,b:2},"only one argument");
+SaveTest("Merge",[],{},"zero argument");
 
 SaveTest(Clone,{a:1,b:2},{a:1,b:2},"object - hasn't key"); //Improve - How to test cloning?
 SaveTest(Clone,{},{},"empty object");
@@ -732,11 +732,15 @@ SaveTest(SafeUrl,"<script>tame(dangers)</script>","","script attempt")
 var more=`
 
 
+`
+
+var TestTextRoll=`
 
 
 "Form a parameter pair"
-ParameterPairString,("a",1)
+ParameterPairString("a",1)
 "a=1"
+
 
 "Convert spaces to UTF"
 ParameterPairString("a","how fascinating")
@@ -746,11 +750,6 @@ ParameterPairString("a","how fascinating")
 "From a multi-parameter string"
 ParameterString({"a":1,"b":2})
 "a=1&b=2"
-
-
-`
-
-var TestTextRoll=`
 
 
 make string pairs
