@@ -6,7 +6,7 @@ RegisterNgram=function(Ngrams,ngram,link){
 		var links=(Ngrams&&Ngrams.links)||[];
 		if(links.indexOf(link)<0)
 			links.push(link);
-		return {...Ngrams,links:links};
+		return Merge(Ngrams,{links:links});
 	}
 
 	var f=ngram[0];

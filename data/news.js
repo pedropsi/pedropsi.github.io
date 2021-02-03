@@ -559,14 +559,14 @@ NewsMonthSectionHTML=function(MonthNews){
 	var daysObj=DayNewsArray(MonthNews);
 	var month=MonthYearNamer(StringDate(First(First(daysObj)).DATE));
 
-	return SectionHTML({
-		...NewsOptions,
+	return SectionHTML(Merge(
+		NewsOptions,{
 		Source:daysObj,
 		header:`<h2>${month}</h2>`,
 		ItemHTML:days=>NewsDaySectionHTML(days),
 		Orderer:day=>NewsDays(First(day)),
 		FilterF:days=>NonFutureItem(First(days))
-	})
+	}))
 }
 
 NewsDaySectionHTML=function(items){
@@ -593,13 +593,12 @@ NewsHTML=function(){
 }
 
 RecentNewsHTML=function(){
-	return SectionHTML({
-		...NewsOptions,
+	return SectionHTML(Merge(NewsOptions,{
 		Source:News,
 		max:3,
 		header:`<h1 class="title">Recent changes</h1>`,
 		InnerWrapper:v.WHITEBOARD_OUT,
-	})
+	}))
 }
 
 
@@ -609,8 +608,7 @@ XML=`<?xml version="1.0" encoding="UTF-8"?>`;
 
 
 RSSXML=function(){
-	return SectionHTML({
-		...NewsOptions,
+	return SectionHTML(Merge(NewsOptions,{
 		Source:News,
 		ItemHTML:RSSItemXML,
 		max:RSS_LIMIT,
@@ -620,7 +618,7 @@ RSSXML=function(){
 				${body}
 			</channel>
 		</rss>`}
-	})
+	}))
 }
 
 RSSHeadXML=function(){
@@ -641,7 +639,7 @@ RSSHeadXML=function(){
 
 RSSItemXML=function(change){
 	var page=PageObj(change.ID);
-	v={...v,...page};
+	v=Merge(v,page);
 	return `
 	<item>
 		<title><![CDATA[${change.HEADER()}]]></title>
@@ -689,7 +687,7 @@ FrequencyName=function(days){
 
 SitemapItemXML=function(PageObj){
 	
-	var PageObj={...v,...PageObj};
+	var PageObj=Merge(v,PageObj);
 
 	var lastdate=PageObj.DATE||"2017-01-01";
 	

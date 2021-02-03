@@ -20,14 +20,14 @@ if(typeof DATA==="undefined")
 	DATA={};
 
 ConsolidatedVariables=function(){
-	return {
-		...DATA["variables"],
-		...DATA["cms"],
-		...DATA["media"],
-		...DATA["news"],
-		...DATA["page"],
-		...DATA["links"]
-	}
+	return Merge(
+		DATA["variables"],
+		DATA["cms"],
+		DATA["media"],
+		DATA["news"],
+		DATA["page"],
+		DATA["links"]
+	)
 }
 
 
@@ -37,10 +37,7 @@ ConsolidateVariables=function(){
 	if(typeof v==="undefined")
 		v={};
 
-	v={
-		...ConsolidatedVariables(),
-		...v
-	};
+	v=Merge(ConsolidatedVariables(),v);
 
 	Shout("ConsolidateVariables");	
 }

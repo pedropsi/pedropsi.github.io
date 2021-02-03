@@ -80,8 +80,8 @@ Applier=function(Function){
 
 Evaluate=function(data){
 	if (typeof data==="function"){
-		args=Rest([...arguments]);
-		return data(...args);
+		args=Rest(Values(arguments))||[];
+		return Apply(data,args);
 	}
 	else
 		return data;
@@ -100,11 +100,12 @@ Empty=function(SAO){
 }
 
 ArgumentExtender=function(F){ // From pairs to infinite number of arguments
-	return function(...args){
+	return function(){
+		var args=Values(arguments);
 		if(args.length===0)
 			return null;
 		if(args.length<=2)
-			return F(...args);
+			return Apply(F,args);
 		else
 			return Fold(F,args[0],Rest(args));
 	}
@@ -112,8 +113,9 @@ ArgumentExtender=function(F){ // From pairs to infinite number of arguments
 
 
 LazyPasser=function(F){
-	return function(...args){
-		return function(){F(...args)}
+	return function(){
+		var args=Values(arguments);
+		return function(){return Apply(F,args)}
 	}
 }
 
@@ -128,41 +130,45 @@ Comparer=function(F){
 	}
 }
 
-Sorter=function(...functions){
+Sorter=function(){
+	var funs=Values(arguments);
+	if(!funs.length)
+		funs=[Identity];
 	return function(array){
-		var funs=[...functions];
-		if(!funs.length)
-			funs=[Identity];
 		funs.map(f=>(array=Clone(array).sort(Comparer(f))));
 		return array;
 	}
 }
 
+SortArray=function(v){
+	var Sorters=Rest(Values(arguments))||[];
+	return Apply(Sorter,Sorters)(v);
 }
 
-SortObjectKeys=function(Obj,...Sorters){
-	var sortedkeys=Sorter(...Sorters)(Keys(Obj));
+SortObjectKeys=function(Obj){
+	var Sorters=Rest(Values(arguments))||[];
+	var sortedkeys=Apply(Sorter,Sorters)(Keys(Obj));
 	var o={};
 		sortedkeys.map(k=>o[k]=Obj[k]);
 		return o;
 }
 
-SortObjectValues=function(Obj,...Sorters){
-	var sortedkeys=Sorter(...Sorters)(Values(Obj));
+SortObjectValues=function(Obj){
+	var Sorters=Rest(Values(arguments))||[];
+	var sortedkeys=Apply(Sorter,Sorters)(Values(Obj));
 	var o={};
 		sortedkeys.map(k=>o[k]=Obj[k]);
 		return o;
 }
 
-SortArray=function(v,...Sorters){
-	return Sorter(...Sorters)(v);
-}
 
-SortBy=function(AO,...Sorters){
+SortBy=function(AO){
+//SortBy=function(AO,...Sorters){
+	var Sorters=Rest(Values(arguments))||[];
 	if(IsArray(AO))
-		return SortArray(AO,...Sorters);
+		return Apply(function(S){return SortArray(AO,S)},Sorters);
 	if(IsObject(AO))
-		return SortObjectKeys(AO,...Sorters);
+		return Apply(function(S){return SortObjectKeys(AO,S)},Sorters);
 	return AO;
 }
 
@@ -261,8 +267,8 @@ Equal=function(a,b){
 
 ArgumentFlattener=function(Operation){
 	var Op=function(){
-		var args=[...arguments];
-		args=args.map(arr=>IsArray(arr)?Op(...arr):arr)
+		var args=Values(arguments);
+		args=args.map(arr=>IsArray(arr)?Apply(Op,arr):arr)
 		return Operation(args);
 	}
 	return Op;
@@ -932,7 +938,9 @@ BiComplement=function(AO1,AO2){
 		return AO1;
 	if(!AO1)
 		return Empty(AO2);
-	return ArrayObjectF(ArrayComplement,ObjectComplement)(...arguments);
+	
+	var args=Values(arguments);
+	return Apply(ArrayObjectF(ArrayComplement,ObjectComplement),args);
 }
 
 Complement=ArgumentExtender(BiComplement);
@@ -980,7 +988,9 @@ BiIntersection=function(AO1,AO2){
 var Intersection=ArgumentExtender(BiIntersection);
 
 Intersected=function(){
-	return Intersection(...arguments).length>0}
+	var args=Values(arguments);
+	return Apply(Intersection,args).length>0
+}
 
 //Union (force uniqueness, sort)
 BiUnion=function(AO1,AO2){
@@ -994,13 +1004,13 @@ BiUnion=function(AO1,AO2){
 Union=ArgumentExtender(BiUnion);
 
 JoinObjects=function(O1,O2){
-	var O={...O1};
+	var O=Clone(O1);
 	Keys(O2).map(
 		function(k){
 			if(!O1[k])
 				O[k]=O2[k]
 			else
-				O[k]=Join(O1[k],O2[k]) //overwrites if joining impossible
+				O[k]=Join(O1[k],O2[k])
 		}
 	)
 	return O;
@@ -1030,7 +1040,7 @@ Join=ArgumentExtender(BiJoin);
 
 
 MergeObjects=function(O1,O2){
-	var O={...O1};
+	var O=Clone(O1);
 	Keys(O2).map(
 		function(k){
 			if(typeof O1[k]!=="undefined")
@@ -1224,7 +1234,7 @@ Reverse=function(SAO){
 	else if(IsObject(SAO))
 		return ReverseKeysObject(SAO);
 	else
-		return [...SAO].reverse();
+		return Clone(SAO).reverse();
 }
 
 ReverseKeysObject=function(Obj){ //Reverse key order
@@ -1836,7 +1846,7 @@ var EnumerationSynonyms={
 	",":";"
 }
 
-EnumerationSynonyms={...EnumerationSynonyms,...FlipKeysValues(EnumerationSynonyms)};
+EnumerationSynonyms=Merge(EnumerationSynonyms,FlipKeysValues(EnumerationSynonyms));
 
 EnumerateSentence=function(list,and){
 	var list=(list||[]).map(s=>UnPosfix(s,PunctuationSeparCharacters));
@@ -2312,11 +2322,12 @@ SourceIdentifier=function(path){
 	return PageIdentifier(UnPosfix(UnPosfix(path,".js"),".css"));
 }
 
-LoadSource=function(...args){
+LoadSource=function(){
+	var args=Values(arguments);
 	if(NodejsDetected())
-		LoadNodeSource(...args);
+		Apply(LoadNodeSource,args);
 	else
-		LoadWebSource(...args);
+		Apply(LoadWebSource,args);
 }
 
 LoadSources=function(sourceArray,Successer){
@@ -3211,13 +3222,13 @@ SetCursor=function(element,nameSO,Opts){
 	var Opts=Opts||{};
 	if(!nameSO)
 		e.style["cursor"]="auto";
-	e.style["cursor"]=`${IconEncodedURL(nameSO,{width:40,height:40,...Opts})},auto`;
+	e.style["cursor"]=`${IconEncodedURL(nameSO,Merge({width:40,height:40},Opts))},auto`;
 }
 
 IconEncodedURL=function(nameSO,Opts){
 	var Opts=Opts||{};
 	var Obj=IsString(nameSO)?SymbolIcon(StringSymbol(nameSO)):nameSO;
-	var icon={...SVGObject(Obj),...Opts};
+	var icon=Merge(SVGObject(Obj),Opts);
 	return SVGEncodedURL(icon);
 }
 
@@ -3300,7 +3311,7 @@ AnchorHTML=function(content,ref,attribs){
 AHTML=function(title,ref,attribs){
 	if(Prefixed(ref,"?")){
 		var ref=PageReSearch(PageURL(),ref);
-		return AnchorHTML(title,PageUnFragment(ref),{...attribs,class:"innerlink"});
+		return AnchorHTML(title,PageUnFragment(ref),Merge(attribs,{class:"innerlink"}));
 	}
 
 	if(Prefixed(title,"#"))
@@ -4512,8 +4523,9 @@ Attend=function(eventName,F,selector){
 AttendOnce=function(eventName,F,selector){
 	var name=eventName+"-"+selector;
 	Attend[name]=G;	
-	function G(...args){
-		var result=F(...args);
+	function G(){
+		var args=arguments;
+		var result=Apply(F,args);
 		if(result)
 			UnAttend(eventName,selector);
 		return result;
@@ -5221,7 +5233,7 @@ ElementContext=function(targetSelector){
 		subcontext=SubContext(e);
 		if(!subcontext)
 			subcontext={};
-		context={...subcontext,...context};
+		context=Merge(subcontext,context);
 	}
 
 	context=ExcludeContext(context,elem);
@@ -5237,7 +5249,7 @@ ExcludeContext=function(context,elem){
 	var exclusions=Keys(BlockedKeylists).filter(sel=>Match(elem,sel));
 	if(exclusions.length){
 		exclusions=exclusions.map(b=>BlockedKeylists[b].map(ComboKeystring));
-		exclusions=Union(...exclusions);
+		exclusions=Appy(Union,exclusions);
 		exclusions.map(b=>delete context[b]);
 	}
 	return context;
@@ -5251,7 +5263,7 @@ SubContext=function(elem){
 		return undefined;
 
 	var keyActions=matches.map(k=>bindings[k]);
-		keyActions=Join(...keyActions);
+		keyActions=Apply(Join,keyActions);
 
 		keyActions=ReKeyObject(keyActions,ComboKeystring);
 		
@@ -5549,8 +5561,9 @@ function OnceDelayer(Executer){
 	var name=FunctionName(Executer);
 	if(!OnceDelayer[name]){
 		OnceDelayer[name]=true;
-		return function(...args){
-			setTimeout(function(){Executer(...args)});
+		return function(){
+			var args=Values(arguments);
+			setTimeout(function(){Apply(Executer,args)});
 		}
 	}
 	else
@@ -5864,7 +5877,7 @@ StringPatternDate=function(string,patternObj){
 	var p=patternObj.pattern;
 	if(string.match(p)){
 		var dmy=patternObj.order.map(s=>string.replace(p,s));
-		return DateDate(...dmy)
+		return Apply(DateDate,dmy);
 	}
 	else
 		return false;
@@ -6103,10 +6116,10 @@ ComposeSymbol=function(symbolObj,primitive){
 	if(primitive.path){
 		var derivative=(primitive.path||"")+" "+(symbolObj.path||"");
 		delete(primitive["primitive"]);
-		return {...primitive,...symbolObj,path:derivative};
+		return Merge(primitive,symbolObj,{path:derivative});
 	}
 	else
-		return {...primitive,...symbolObj};
+		return Merge(primitive,symbolObj);
 }
 
 ObtainSymbol=function(name){
@@ -6404,9 +6417,9 @@ HyperPerson.ambiguous=[];
 
 
 //Abbreviation - People
-P=function(...names){
-	var names=[...names];
-	names=Join(...names.map(n=>n.split(",")));
+P=function(){
+	var names=Values(arguments);
+	names=Apply(Join,names.map(n=>n.split(",")));
 	if(names.length>1)
 		return Enumerate(names.map(HyperPerson));
 	else
@@ -6673,35 +6686,33 @@ RefreshSVG=function(svge){// trick to force rerendering
 //Chart Elements
 
 ChartGridline=function(opts){
-	return {
-		...opts,
+	return Merge(opts||{},{
 		scale:1,
 		up:1,
 		down:1,
 		type:"grid"
-	};
+	});
 };
 
 ChartTick=function(opts){
-	return {
-		...opts,
+	return Merge(opts||{},{
+		scale:1,
 		scale:0.5,
 		up:1/100,
 		down:1/100,
 		type:"tick"
-	};
+	});
 }
 
 ChartAxis=function(opts){
-	return {
-		...opts,
+	return Merge(opts||{},{
 		scale:1,
 		up:0,
 		down:0,
 		type:"axis",
 		minor:1,
 		major:1
-	};
+	});
 }
 
 
@@ -6887,7 +6898,7 @@ AddChart=function(opts,target){
 	return chart;
 }
 
-//Selects the right display scale - todo improve, for decimal numbers...
+//Selects the right display scale - todo improve, for decimal numbers
 ScaleMax=function(max){
 	var a=Power(10,Ceiling(Log10(max)));
 	var b=a*3/4;
@@ -6900,12 +6911,14 @@ ScaleMax=function(max){
 // Intersection Observer
 
 
-InViewExecute=function(...args){
-	ObserveExecute(...args,x=>x===true);
+InViewExecute=function(){
+	var args=Append(Values(arguments),Trued);
+	Apply(ObserveExecute,args);
 }
 
-OutViewExecute=function(...args){
-	ObserveExecute(...args,x=>x===false);
+OutViewExecute=function(){
+	var args=Append(Values(arguments),Falsed);
+	Apply(ObserveExecute,args);
 }
 
 WhileOutViewExecute=function(target,Executer,Opts){
@@ -6985,7 +6998,7 @@ Observe=function(selector,Look,opts,name){
 	var name=name||(selector+FunctionName(Look));
 
 	var opts=opts||{};
-		opts={attributes: true, childList: true, subtree: true, ...opts};
+		opts=Merge({attributes: true, childList: true, subtree: true},opts);
 
 
 	var Observant = new MutationObserver(Look);
@@ -7014,8 +7027,9 @@ UnObserve=function(name){
 ObserveOnce=function(selector,Look,opts){
 	var Look=Look||console.log;
 	var name=GenerateId();
-	function See(...args){
-		var result=Look(...args);
+	function See(){
+		var args=Values(arguments);
+		var result=Apply(Look,args);
 		if(result!==false)
 			UnObserve(name);
 	}
@@ -7052,12 +7066,14 @@ UponMutator=function(ObserveF){
 	}
 }
 
-UponElement=function(...args){
-	return UponMutator(Observe)(...args)
+UponElement=function(){
+	var args=Values(arguments);
+	return Apply(UponMutator(Observe),args);
 }
 
-UponElementOnce=function(...args){
-	return UponMutator(ObserveOnce)(...args)
+UponElementOnce=function(){
+	var args=Values(arguments);
+	return Apply(UponMutator(ObserveOnce),args);
 }
 
 //Execute whenever the element is ready
@@ -7239,10 +7255,11 @@ Capture=function(functionName){
 
 	Capture[functionName]=globalThis[functionName];
 	globalThis[functionName]=function(){
+		var args=Values(arguments);
 		Capture["list"].push(functionName);
 		Capture["list"]=Union(Capture["list"]);
 		globalThis[functionName]=Capture[functionName];
-		return (globalThis[functionName])(...arguments);
+		return Apply(globalThis[functionName],args);
 	}
 }
 

@@ -173,7 +173,7 @@ ImageHTML=function(ImageObj){
 LazyImageHTML=function(ImageObj){
 	var id=GenerateId();
 	LazyImageLoader(id,ImageSource(ImageObj));
-	return ImageHTML({...ImageObj,id:id,lazy:true});
+	return ImageHTML(Merge(ImageObj,{id:id,lazy:true}));
 }
 
 I=function(src){
@@ -229,14 +229,24 @@ function ImageObject(opts){
 	var opts=opts||{};
 	var name=opts.name;
 	var folder=opts.folder;
-	return {
-		id:name,
-		...opts,
+	return Merge({id:name},opts,{
 		FOLDER_SMALL:folder,
 		DESCRIPTION:name,
-		TRACK:name};
+		TRACK:name});
 };
 
+
+// ObjectsGalleryHTML=function(objDict,ObjectRenderer,opts){
+// 	if(!IsObject(objDict))
+// 		return "";
+
+// 	var ObjectRenderer=ObjectRenderer||ImageCardHTML;
+// 	var opts=opts||{};
+// 	var objects=ReValueObject(objDict,(data,name)=>ObjectRenderer(Join(data,{name:name},opts)));
+		
+// 	var gallery=objects.map(ObjectRenderer).join("\n");
+// 	return `<div class="featured">${gallery}</div>`
+// }
 
 FolderGalleryHTML=function(subfolder,names,ObjectRenderer){
 	if(IsArray(names)){
