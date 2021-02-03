@@ -794,8 +794,9 @@ SaveTest(SVGLineApply,["M 1 2 3 4",xy=>[xy[1],xy[0]]],"M 2 1 4 3 ","modify numbe
 
 SaveTest(SVGPathSplit,["M 1 2 L 3 4 Q 5 6 7 8 Z"],["M 1 2 ","L 3 4 ","Q 5 6 7 8 ","Z "],"split path, multiple components");
 
-SaveTest(MergeEvaluateObject,[{a:1,b:2,c:{d:3}},{a:x=>x+1,c:{d:x=>2*x}}],{a:2,b:2,c:{d:6}},"deep evaluation")
+SaveTest(MergeEvaluateObject,[{a:1,b:2,c:{d:3}},{a:x=>x+1,c:{d:x=>2*x}}],{a:2,b:2,c:{d:6}},"deep evaluation");
 
+SaveTest(ReValueObject,[{a:1,b:2},(x,l)=>l.repeat(2*x)],{a:"aa",b:"bbbb"},"change values based on keys and values");
 ///////////////////////////////////////////////////////////////////////////////
 //Run Tests only after loading the external resources below
 //ListenOnce("TestReady",Test);
