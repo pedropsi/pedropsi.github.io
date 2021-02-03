@@ -3219,7 +3219,7 @@ function UnderlineWordstroke(word){
 }
 
 function LastSeparatorIndex(array){
-	var i=Reverse([...array]).indexOf(separator);
+	var i=Reverse(array).indexOf(separator);
 	if(i===-1)
 		return -1;
 	else
