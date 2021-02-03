@@ -110,10 +110,6 @@ ArgumentExtender=function(F){ // From pairs to infinite number of arguments
 	}
 }
 
-Apply=function(Function,Array){
-	return Function.apply(null, Array);
-}
-
 
 LazyPasser=function(F){
 	return function(...args){
