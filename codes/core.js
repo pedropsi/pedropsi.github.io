@@ -36,6 +36,29 @@ NodejsDetected=function(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+//Get Function Name as a string, or make up a unique one based on the function's body
+FunctionName=function(FunctionF){
+	if(FunctionF.name)
+		return FunctionF.name;
+	var name=FunctionF.toString().replace(/\(.*/,"").replace("function ","");
+	name=name.replace(/\s.*/gm,"");
+	if(name!=="function")
+		return name;
+	else{
+		var body=FunctionF.toString().replace(/[^\)]*\)/,"");
+		return body.replace(/[^ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890]/gi,"").replace(/^[1234567890]*/,"");
+	}
+}
+
+FunctionNamecode=function(F){
+	return FunctionName(F)||String(F);
+}
+
+FunctionBody=function(FunctionF){
+	return FunctionF.toString().replace(/[^\)]*\)/,"");
+}
+
+///////////////////////////////////////////////////////////////////////////////
 //Do nothing
 Identity=function(i){return i;};
 True=function(){return true};
@@ -1298,6 +1321,55 @@ FixedPoint=function(F,x){
 }
 
 
+///////////////////////////////////////////////////////////////////////////////
+//Join Objects, overwriting conflicting properties
+BiFuseObjects=function(obj,newObj){
+	var O={};
+	function SetValueKey(value,key){O[key]=value};
+	if(obj)
+		MapObject(obj,SetValueKey);
+	if(newObj)
+		MapObject(newObj,SetValueKey);
+	return O;
+}
+
+FuseObjects=ArgumentExtender(BiFuseObjects);
+
+CloneObject=function(Obj){
+	var O={};
+	Keys(Obj).map(k=>O[k]=Clone(Obj[k]));
+	return O;
+}
+
+CloneArray=function(A){
+	var B=[];
+	var i=0;
+	var l=A.length;
+	while(i<l){
+		B.push(Clone(A[i]));
+		i++;
+	}
+	return B;
+}
+
+Clone=function(SAO){
+	if(IsObject(SAO))
+		return CloneObject(SAO);
+	if(IsArray(SAO))
+		return CloneArray(SAO);
+	return SAO;
+}
+
+
+Datafy=function(obj){
+	var O={};
+	function SetValueKey(value,key){
+		var datakey=Prefix(key,"data-");
+		O[datakey]=value;
+	}
+	MapObject(obj,SetValueKey);
+	return O;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // String Functions
@@ -1782,73 +1854,6 @@ EnumerateSentence=function(list,and){
 	return Capitalise(sentence);
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//Get Function Name as a string, or make up a unique one based on the function's body
-FunctionName=function(FunctionF){
-	if(FunctionF.name)
-		return FunctionF.name;
-	var name=FunctionF.toString().replace(/\(.*/,"").replace("function ","");
-	name=name.replace(/\s.*/gm,"");
-	if(name!=="function")
-		return name;
-	else{
-		var body=FunctionF.toString().replace(/[^\)]*\)/,"");
-		return body.replace(/[^ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890]/gi,"").replace(/^[1234567890]*/,"");
-	}
-}
-
-FunctionNamecode=function(F){
-	return FunctionName(F)||String(F);
-}
-
-FunctionBody=function(FunctionF){
-	return FunctionF.toString().replace(/[^\)]*\)/,"");
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//Join Objects, overwriting conflicting properties
-BiFuseObjects=function(obj,newObj){
-	var O={};
-	function SetValueKey(value,key){O[key]=value};
-	if(obj)
-		MapObject(obj,SetValueKey);
-	if(newObj)
-		MapObject(newObj,SetValueKey);
-	return O;
-}
-
-FuseObjects=ArgumentExtender(BiFuseObjects);
-
-
-
-CloneObject=function(Obj){
-	var O={};
-	Keys(Obj).map(k=>O[k]=Clone(Obj[k]));
-	return O;
-}
-
-CloneArray=function(Arr){
-	return [...Arr].map(Clone);
-}
-
-Clone=function(SAO){
-	if(IsObject(SAO))
-		return CloneObject(SAO);
-	if(IsArray(SAO))
-		return CloneArray(SAO);
-	return SAO;
-}
-
-
-Datafy=function(obj){
-	var O={};
-	function SetValueKey(value,key){
-		var datakey=Prefix(key,"data-");
-		O[datakey]=value;
-	}
-	MapObject(obj,SetValueKey);
-	return O;
-}
 
 //////////////////////////////////////////////////
 //Promises
