@@ -65,6 +65,16 @@ True=function(){return true};
 False=function(){return false};
 Flipped=function(a){return !a};
 
+Apply=function(Function,Array){
+	return Function.apply(null, Array);
+}
+
+Applier=function(Function){
+	return function(arg){
+		return Apply(Function,arg);
+	}
+}
+
 Evaluate=function(data){
 	if (typeof data==="function"){
 		args=Rest([...arguments]);
@@ -276,9 +286,9 @@ ArgumentFlattener=function(Operation){
 	return Op;
 }
 
-Max=ArgumentFlattener(args=>Math.max(...args));
-Min=ArgumentFlattener(args=>Math.min(...args));
-Mean=ArgumentFlattener(args=>Plus(...args)/args.length)
+Max=ArgumentFlattener(Applier(Math.max));
+Min=ArgumentFlattener(Applier(Math.min));
+Mean=ArgumentFlattener(function(args){return Apply(Plus,args)/args.length})
 
 
 BiPlus=function(a,b){
