@@ -152,8 +152,6 @@ if(typeof RequestGameFeedback==="undefined"){
 if(typeof HasGameFeedback==="undefined")
 	var HasGameFeedback=True;
 
-var HasGameFeedback=False;
-
 var HasHOF=True;
 if(typeof RequestHallOfFame==="undefined"){
 	var RequestHallOfFame=Identity;
