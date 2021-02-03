@@ -164,7 +164,7 @@ Warner=function(type){
 		var styles=types[type]||types[error];
 
 		var values=Rest(Values(arguments)||[]);
-			values=[`%c ${caller} %c ${type} : ${message} `].concat(styles).concat(values);
+			values=[`%c ${caller} %c ${type} `].concat(styles).concat([message]).concat(values);
 
 		Apply(console.warn,values);
 	}
