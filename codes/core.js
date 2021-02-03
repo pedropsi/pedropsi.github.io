@@ -129,6 +129,52 @@ LazyPasser=function(F){
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//Error report
+Warner=function(type){
+	var types={
+		"error":['color:darkred; font-family:Calibri,Arial; font-weight:bold;',
+				'color:darkred; font-family:Calibri,Arial; background: lightyellow;'],
+		"info":['color:lightyellow; font-family:Calibri,Arial; background: darkgreen; font-weight:bold;',
+				'color:lightyellow; font-family:Calibri,Arial; background: darkgreen;'],
+		"network":['color:lightyellow; font-family:Calibri,Arial; background: blue; font-weight:bold;',
+				'color:lightyellow; font-family:Calibri,Arial; background: blue;'],
+		"debug":['color:lightyellow; font-family:Calibri,Arial; background: purple; font-weight:bold;',
+				'color:lightyellow; font-family:Calibri,Arial; background: purple;']
+	};
+	return function W(message){
+		var message=message||"";
+		var caller=FindCallerName(W.caller||"")||"top level";
+		
+		var styles=types[type]||types[error];
+
+		var values=Rest(Values(arguments)||[]);
+			values=[`%c ${caller} %c ${message} `].concat(styles).concat(values);
+
+		Apply(console.warn,values);
+	}
+}
+
+Warn=Warner("error");
+Winf=Warner("info");
+Wnet=Warner("network");
+Wbug=Warner("debug");
+
+FindCallerName=function(code){
+	if(FunctionHead(code));
+		return FunctionHead(code);;
+	if(!FindCallerName["caller-code-bodies"]){
+		FindCallerName["caller-code-bodies"]=ReValueObject(globalThis,(v,x)=>IsFunction(x)?UnWhitespace(FunctionBody(v)):"");
+		FindCallerName["caller-code-bodies"]=FlipKeysValues(FindCallerName["caller-code-bodies"])
+	}
+	if(!code)
+		return "";
+	var code=UnWhitespace(code);
+	if(FindCallerName[code])
+		return FindCallerName[code]
+	return "";
+}
+
 //Functional Sorting
 
 Comparer=function(F){
