@@ -45,7 +45,7 @@ var Contributors={//People
 	"wells":{name:"Cristopher Wells",alias:"Toph Wells",ITCH:"tophwells"},
 	"davidpfx":{name:"David PFX",GITHUB_COM:"david-pfx"},
 	"tows":{name:"Guilherme Stutz Töws",alias:"Zaratustra Productions",GITHUB_COM:"zarawesome",ITCH:"zaratustra"},
-	"deusovi":{alias:"Deusovi",TWITTER:"deusovi",PERSONAL_PAGE:"https://puzzling.stackexchange.com/users/11876/deusovi"},
+	"deusovi":{alias:"Deusovi",TWITTER:"deusovi",PERSONAL_PAGE:"https://deusovi.github.io/"},
 	"mago":{alias:"mago314"},
 	"knexator":{name:"Daniel Hurtado",alias:"knexator",TWITTER:"knexator"},
 	"builder17":{alias:"Builder17"},
