@@ -26,3 +26,5 @@ function HallOfFameMacro(){
 	}]
 }
  
+
+Shout("data-game-macros")
