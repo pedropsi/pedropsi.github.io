@@ -595,11 +595,34 @@ Take=function(AS,n){
 	if(n<0)
 		return AS.slice(n,AS.length);
 	return AS.slice(0,n);
+
+`
+from beginning
+Take([5,6,7,8,9],2)
+[5,6];
+
+from end
+Take([5,6,7,8,9],-1)
+[9]
+
+zero
+Take([5,6,7,8,9],0)
+[]
+
+over bounds
+Take([5,6,7,8,9],-10)
+[5,6,7,8,9]
+
+Infinity
+Take([5,6,7,8,9],Infinity)
+[5,6,7,8,9]
+`
 }
 
 UnTake=function(AS,n){
-	return n<0?Take(AS,AS.length+n):Take(AS,-(AS.length-n));
-`	
+	return n<0?Take(AS,Max(0,AS.length+n)):Take(AS,-Max(0,AS.length-n));
+
+`
 remove from beginning
 UnTake([5,6,7,8,9],2)
 [7,8,9];
@@ -607,6 +630,10 @@ UnTake([5,6,7,8,9],2)
 remove from end
 UnTake([5,6,7,8,9],-1)
 [5,6,7,8]
+
+zero
+UnTake([5,6,7,8,9],0)
+[5,6,7,8,9]
 
 over bounds
 UnTake([5,6,7,8,9],-10)
@@ -629,19 +656,43 @@ Insert=function(array,n,p){
 Append=function(A,item){
 	if(typeof item==="undefined")
 		return A;
-	return Insert(A,item,A.length)
+	return Insert(A,item,A.length);
+`
+add
+Append([1],2)
+[1,2];
+`
 }
 
 Prepend=function(A,item){
 	if(typeof item==="undefined")
 		return A;
-	return Insert(A,item,0)
+	return Insert(A,item,0);
+`
+add
+Prepend([1],2)
+[2,1];
+`
 }
 
-InsertCut=function(array,n,p){
-	var p=Max(Min(p,array.length),0);
-	array.splice(p,array.length-p,n);
-	return array;
+InsertCut=function(array,item,p){
+	if(p>0)
+		return Append(Take(array,p),item)
+	else
+		return Prepend(Take(array,p),item);
+	`
+	remove tail and add element
+	InsertCut([1,2,3,4,5],"a",3)
+	[1,2,3,"a"]
+
+	remove head and add element
+	InsertCut([1,2,3,4,5],"a",3)
+	["a",3,4,5]
+
+	both
+	InsertCut([1,2,3,4,5],"a",0)
+	["a"]
+	`
 }
 
 //Distinguish Objects and Arrays
@@ -1550,12 +1601,11 @@ StringReplace=function(string,rules){
 // Unspace
 
 TrimWhitespaceString=function(string){
-	return string.replace(/^\s+/ig,"").replace(/\s+$/ig,"");
+	return string.replace(/^(\r|\s)+/ig,"").replace(/(\r|\s)+$/ig,"");
 }
 
 UnWhitespace=function(string){
-	return string.replace(/\s*/gi,"");
-	//StringReplace(string,[[/\s/m,""],[/\t/m,""],[/\n/m,""]]);
+	return string.replace(/(\s|\r)*/gi,"");
 }
 
 CharacterUniformisations={
@@ -5377,7 +5427,6 @@ Keybind=function(keyActions,selector){
 	var bindings={}
 		bindings[selector]=keyActions;
 	return Keybindings=Join(Keybindings,bindings);
-
 }
 
 UnKeybind=function(selector){
@@ -7363,18 +7412,19 @@ SaveUnitTest=function(unitObj){
 //TestRoll format
 
 SaveTestRoll=function(textRoll){
-	return TestRollUnitTexts(textRoll).map(TextTestUnit).map(SaveUnitTest);
+	return TestRollUnitTestTexts(textRoll).map(TextRollTestUnit).map(SaveUnitTest);
 }
 
-TestRollUnitTexts=function(testRoll){
-	//spit on two or more paragraphs
-	return testRoll.split(/\n((\s|\t)+)?(\n((\s|\t)+)?)+/).filter(x=>x&&x.replace(/(\n((\s|\t)+)?)/,"").length);
+TestRollUnitTestTexts=function(testRoll){
+	//split on two or more paragraphs
+	return testRoll.split(/\n((\s|\t|\r)+)?(\n((\s|\t)+)?)+/).filter(x=>x&&x.replace(/(\n((\s|\t)+)?)/,"").length);
 }
 
-TextTestUnit=function(unitText){
+TextRollTestUnit=function(unitText){
 	var lines=unitText.split("\n").filter(Identity);
+		lines=lines.map(line=>UnPosfix(line,[";",","]));
 	if(lines.length<2){
-		console.error("this unit test is missing either the call or the expected result",lines)
+		Warn("missing either the call or the expected result",lines)
 		return {};
 	}
 	var title=lines[0];
@@ -7386,7 +7436,7 @@ TextTestUnit=function(unitText){
 	var call=lines[1];
 	var callerName=call.replace(/\(.*$/,"");
 	if(!globalThis[callerName]){
-		console.error("the function is undefined:",callerName)
+		Warn("caller function is undefined:",callerName)
 		return {};
 	}
 	var expected=lines[2];
@@ -7400,6 +7450,50 @@ TextTestUnit=function(unitText){
 		expected:expected
 	};
 }
+
+//Self-tests, intentionally using unreachable code
+UnReachableCode=function(functionBody){
+	var lines=functionBody.split("\n");
+
+	var returnPattern=/^(\s|\t|\r)?return.*;(\s|\t|\r)?$/ig;
+	var i=lines.findIndex(r=>r.match(returnPattern));
+	if(i===-1)
+		return "";
+
+	lines=UnBeforTake(lines,r=>r.match(returnPattern));
+
+	var emptyPattern=/^(\s|\t|\r)*\}+;*(\s|\t|\r)*/ig;
+	lines=Reverse(UnBeforTake(Reverse(lines),r=>r.match(emptyPattern)));
+	
+	lines=lines.map(line=>line.replaceAll(/(\r)/g,"").replaceAll("\t","")).join("\n");
+	lines=UnExfix(TrimWhitespaceString(lines),"`")
+	return lines;
+}
+
+UnBeforTake=function(list,Verifier){
+	var i=list.findIndex(Verifier);
+	if(i===-1)
+		return list;
+	while(i=list.findIndex(Verifier)!==-1)
+		list=UnTake(list,i);
+	return list;
+}
+
+UnreachableCodes=function(){
+	var O={};
+	Introspect().map(function(fname){
+		var code=UnReachableCode(FunctionBody(eval(fname)));
+		if(code.length)
+			O[fname]=code;
+	});
+	return O;
+}
+
+SaveTestableFunctionsTests=function(){
+	var testRolls=Values(UnreachableCodes());
+	testRolls.map(SaveTestRoll);
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Introspection - lists all defined functions!
