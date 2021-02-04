@@ -174,7 +174,7 @@ LoadStyle(ModulesPath()+"/puzzle-type.css");
 LoadSources(gameModulesEarly,P()?()=>GameIntro(StartGame):Identity);//GameTrailer);
 gameModulesLater.map(LoaderInFolder(ModulesPath()+"/modules"));
 ["tone.js","tippy.js"].map(LoaderInFolder("codes/libraries"));
-LoaderInFolder("codes/game/puzzle-type")(".solutions.js");
+LoaderInFolder("../puzzle-type")("solutions.js");
 
 
 
@@ -725,7 +725,7 @@ var LevelGoals=[			//Required types of thinking:
 	
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-	"Today doves flit before winter",			//Keyword, Swap, Retroactive, Language
+	"Today doves flit before winter",	//Keyword, Swap, Retroactive, Language
 	"La rapide surprise",				//Keyword, Swap, Retroactive, Language
 	"Starting buds",					//Language
 
@@ -3454,7 +3454,7 @@ function SolutionTypingInterval(title){
 }
 
 function WinLevelAction(title){
-	var solAction=TypingAction(LevelSolution(title));
+	var solAction=TypingAction(LevelSolution(title).replaceAll("_"," "));
 		solAction.interval=SolutionTypingInterval(title);
 	return solAction;
 }
