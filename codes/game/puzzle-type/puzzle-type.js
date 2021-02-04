@@ -1327,13 +1327,13 @@ function Genetic(L){
 
 function Fuchsia(L){
 	var saved=SavedLetters();
-	var color=TemporaryWord().toLowerCase();
+	var colour=TemporaryWord().toLowerCase();
 
 	//Spacing between words
-	if(!color.length&&saved.length)
+	if(!colour.length&&saved.length)
 		InputLetterAfter(" ");
 
-	if(color.length<1){
+	if(colour.length<1){
 		InputLetterAfter("#*");
 		AddStrokeValid(L);
 	}
@@ -1341,12 +1341,12 @@ function Fuchsia(L){
 		ForbidCaret();
 		AddStrokeInvalid(L);
 	}
-	else if(color.length===6){
-		var color=Rest(color+L);
-			color=NamedColour(color);
-			color=TransformAccesser(ColorSynonyms,LowerCase)(color)
-			color=color.toUpperCase();
-		Letters(saved.join("")+color);
+	else if(colour.length===6){
+		var colour=Rest(colour+L);
+			colour=NamedColour(colour);
+			colour=TransformAccesser(ColorSynonyms,LowerCase)(colour)
+			colour=colour.toUpperCase();
+		Letters(saved.join("")+colour);
 		AddStrokeSeparator();
 	}
 	else{
