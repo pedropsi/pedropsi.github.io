@@ -20,8 +20,8 @@ UploadData=function(data,url){
 		xhr.open('POST',url);
 		xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		xhr.onreadystatechange=function(){
-			console.log(xhr.status, xhr.statusText);
-			console.log(xhr.responseText);
+			Wnet(xhr.status, xhr.statusText);
+			Wnet(xhr.responseText);
 			return;
 		};
 		xhr.send(encoded);

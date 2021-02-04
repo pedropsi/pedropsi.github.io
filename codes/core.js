@@ -1327,6 +1327,11 @@ GatherObject=function(Obj,Equaliser){
 	var o={};
 		uniquekeys.map(k=>(o[k]=FilterObject(Obj,v=>(String(Equaliser(v))===k))));
 	return o;
+	`
+	gather object, custom equaliser
+	GatherObject({a:1,b:2,c:3,d:3},x=>x%2)
+	{0:{b:2},1:{a:1,c:3,d:3}}
+`
 }
 
 Gather=function(AO,Equaliser){
@@ -2587,10 +2592,30 @@ Offline=function(){return !Online()};
 //Parameter requests
 ParameterPairString=function(key,value){
 	return encodeURIComponent(key)+'='+encodeURIComponent(value);
+
+`
+Form a parameter pair
+ParameterPairString("a",1)
+"a=1"
+	
+Convert spaces to UTF
+ParameterPairString("a","how fascinating")
+"a=how%20fascinating"
+`
 }
 
 ParameterString=function(parametersObject){
 	return ThreadKeysValues(parametersObject,ParameterPairString).join("&");
+
+`
+empty string
+ParameterString({})
+""
+
+From a multi-parameter string
+ParameterString({"a":1,"b":2})
+"a=1&b=2"
+`
 }
 
 //External resources
@@ -2760,20 +2785,60 @@ IsTag=function(selector){
 	if(!IsString(selector))
 		return false;
 	return In(HTMLTags,selector.toUpperCase());
+`
+IsTag("BODY")
+true
+
+IsTag(".random-class")
+false
+
+IsTag("#randomid")
+false
+`
 }
 IsClass=function(selector){
 	if(!IsString(selector))
 		return false;
 	return Prefixed(selector,".");
+`
+IsClass("BODY")
+false
+
+IsClass(".random-class")
+true
+
+IsClass("#randomid")
+false
+`
 }
 IsID=function(selector){
 	if(!IsString(selector))
 		return false;
 	return Prefixed(selector,"#");
+`
+IsID("BODY")
+false
+
+IsID(".random-class")
+false
+
+IsID("#randomid")
+true
+`
 }
 
 IsQuerySelector=function(selector){
 	return IsID(selector)||IsClass(selector)||IsTag(selector);
+`
+IsQuerySelector("BODY")
+true
+
+IsQuerySelector(".random-class")
+true
+
+IsQuerySelector("#randomid")
+true
+`
 }
 
 ParentSelector=function(targetIDsel){
