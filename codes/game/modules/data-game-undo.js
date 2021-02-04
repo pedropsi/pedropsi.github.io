@@ -27,7 +27,7 @@ function AddUndo(state){
 		EmptyUndo();
 
 	if(!Equal(Undo.backups[Undo.pointer-1],state)){
-		InsertCut(Undo.backups,state,Undo.pointer);
+		Undo.backups=InsertCut(Undo.backups,state,Undo.pointer);
 		Undo.pointer=Undo.pointer+1;
 	}
 }
