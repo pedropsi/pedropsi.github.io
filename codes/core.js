@@ -680,19 +680,19 @@ InsertCut=function(array,item,p){
 		return Append(Take(array,p),item)
 	else
 		return Prepend(Take(array,p),item);
-	`
-	remove tail and add element
-	InsertCut([1,2,3,4,5],"a",3)
-	[1,2,3,"a"]
+`
+remove tail and add element
+InsertCut([1,2,3,4,5],"a",3)
+[1,2,3,"a"]
 
-	remove head and add element
-	InsertCut([1,2,3,4,5],"a",3)
-	["a",3,4,5]
+remove head and add element
+InsertCut([1,2,3,4,5],"a",3)
+["a",3,4,5]
 
-	both
-	InsertCut([1,2,3,4,5],"a",0)
-	["a"]
-	`
+both
+InsertCut([1,2,3,4,5],"a",0)
+["a"]
+`
 }
 
 //Distinguish Objects and Arrays
