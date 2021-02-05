@@ -541,7 +541,7 @@ function GoalHTML(title){
 }
 
 var LevelDifficulty={
-	"Type this":1,				
+	"Type this":0,				
 	"Reverse":1,
 	"Follow":2,
 	"Consonant":2,
@@ -3560,10 +3560,10 @@ function TutorialClueMacro(){
 		...OverlayTutorialMacro(),
 		...ZoomMacro,
 		TypingAction("TYPE THE CLUE",{endDelay:2000}),
-		UnTypingAction("TYPE THE CLUE",{endDelay:0}),
+		UnTypingAction("HE CLUE",{endDelay:0}),
 		...UnZoomMacro,
 		...UnOverlayTutorialMacro(),
-		TypingAction("TYPE THIS",{endDelay:4000})
+		TypingAction("IS",{endDelay:4000})
 	];
 }
 
@@ -3572,8 +3572,8 @@ function TutorialRuleMacro(){
 		{Starter:()=>GoToLevel("Reverse")},
 		...OverlayTutorialMacro(),
 		...ZoomMacro,
-		TypingAction("ELUR NEDDIH EHT DNIF",{startDelay:1500,endDelay:2000}),
-		UnTypingAction("ELUR NEDDIH EHT DNIF",{endDelay:1500}),
+		TypingAction("TERCES EHT DNIF",{startDelay:1500,endDelay:2000}),
+		UnTypingAction("TERCES EHT DNIF",{endDelay:1500}),
 		...UnZoomMacro,
 		...UnOverlayTutorialMacro(),
 		TypingAction("REVERS",{endDelay:2000}),
