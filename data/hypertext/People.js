@@ -160,7 +160,8 @@ var Developers={
 	"strangecreation":{alias:"strangecreation"},
 	"d5r":{alias:"d5r",name:"Tamiko Tadeo",TWITTER:"ttadeo_dev",TWITCH:"d5r188"},
 	"twak":{name:"Matt",alias:"twak"},
-	"hess":{name:"Adam Hess",PERSONAL_PAGE:"https://hparker.io"}
+	"hess":{name:"Adam Hess",PERSONAL_PAGE:"https://hparker.io"},
+	"stollemayer":{name:"Philipp Stollenmayer",PERSONAL_PAGE:"https://www.kamibox.de"}
 }
 
 var OtherPeople={
