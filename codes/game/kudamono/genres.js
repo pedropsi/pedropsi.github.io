@@ -1,3 +1,19 @@
+var Pieces={
+	"PonkyEnd":{
+		letter:"e",
+		colour:"rgb(150,150,150)",
+		viewBox:"0 0 20 20",
+		path:"M 10 0 Q 20 0 20 10 Q 20 20 10 20 Q 0 20 0 10 Q 0 0 10 0",
+		rule:{
+			symbolshapes:Shape1s,
+			minconnected:Infinity,
+			description:"Connect all ends."
+		}
+	}
+}
+
+var PonkyPipes=["junction-right"];
+
 
 var Genres={
 	"bonsai":{
@@ -159,7 +175,8 @@ var Genres={
 		},
 		rules:{
 			dangleallowed:false,
-			loopallowed:false
+			loopallowed:false,
+			simpleshapes:Shape2s
 		},
 		win:{
 			rule:{
@@ -171,6 +188,9 @@ var Genres={
 			}
 		},
 		groups:{
+			"red":{symbols:Join(["end-red"],PonkyPipes),colour:"rgb(200,0,0)"},
+			"green":{symbols:Join(["end-green"],PonkyPipes),colour:"rgb(0,200,0)"},
+			"blue":{symbols:Join(["end-blue"],PonkyPipes),colour:"rgb(0,0,200)"},
 		},
 		symbols:{
 			"valve":{
@@ -184,44 +204,30 @@ var Genres={
 					description:"No pipe passes through a valve."
 				},
 			},
-			"end-red":{
+			"end-red":Merge(Pieces["PonkyEnd"],{
 				letter:"r",
-				colour:"rgb(255,0,0)",
-				viewBox:"0 0 20 20",
-				path:"M 10 0 Q 20 0 20 10 Q 20 20 10 20 Q 0 20 0 10 Q 0 0 10 0",
-				rule:{
-					symbolshapes:Shape1s,
-					simpleshapes:Shape2s,
-					maxconnected:2,
-					minconnected:2,
-					description:""
-				},
-			},
-			"end-green":{
+				colour:"rgb(255,0,0)"
+				}),
+			"end-green":Merge(Pieces["PonkyEnd"],{
 				letter:"g",
 				colour:"rgb(0,255,0)",
-				viewBox:"0 0 20 20",
-				path:"M 10 0 Q 20 0 20 10 Q 20 20 10 20 Q 0 20 0 10 Q 0 0 10 0",
-				rule:{
-					symbolshapes:Shape1s,
-					simpleshapes:Shape2s,
-					maxconnected:2,
-					minconnected:2,
-					description:""
-				},
-			},
-			"end-blue":{
+				}),
+			"end-blue":Merge(Pieces["PonkyEnd"],{
 				letter:"b",
 				colour:"rgb(0,0,255)",
+				}),
+			"junction-right":{
+				letter:"d",
+				colour:"rgb(153,0,0)",
 				viewBox:"0 0 20 20",
-				path:"M 10 0 Q 20 0 20 10 Q 20 20 10 20 Q 0 20 0 10 Q 0 0 10 0",
+				scale:1.1,
+				shiftx:0.2,
+				shifty:0.2,
+				path:"M 13 7 L 17 7 L 18 6 L 20 6 L 20 14 L 18 14 L 17 13 L 13 13 L 13 17 L 14 18 L 14 20 L 6 20 L 6 18 L 7 17 L 7 3 L 6 2 L 6 0 L 14 0 L 14 2 L 13 3 Z",
 				rule:{
-					symbolshapes:Shape1s,
-					simpleshapes:Shape2s,
-					maxconnected:2,
-					minconnected:2,
-					description:""
-				},
+					symbolshapes:["URD"],
+					description:"Three pipes connect at triple junctions."
+				}
 			}
 		}
 	},
