@@ -7523,6 +7523,7 @@ TestRollUnitTestTexts=function(testRoll){
 
 TextRollTestUnit=function(unitText){
 	var lines=unitText.split("\n").filter(Identity);
+		lines=lines.map(TrimWhitespaceString);
 		lines=lines.map(line=>UnPosfix(line,[";",","]));
 	if(lines.length<2){
 		Warn("missing either the call or the expected result",lines)
@@ -7635,7 +7636,6 @@ FunctionSourceTokens=function(F){
 	if(!F)
 		return [];
 
-	var source=F.toString();
 	var separator="SecretSePaRaToR"; //must not be confoundable
 	var symbols=Tokens().split("").concat([" ","\n","\t","\r"]); //things to ignore
 
