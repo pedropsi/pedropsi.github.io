@@ -148,7 +148,7 @@ MusicCreditsHTML=function(id){
 }
 
 ImageSource=function(ImageObj){
-	var src=ImageObj.src?`images/${ImageObj.src}`:`images/${ImageObj.FOLDER_SMALL||ImageObj.folder||""}/${ImageObj.TRACK||ImageObj.name}`;
+	var src=ImageObj.src?`images/${ImageObj.src}`:`images/${ImageObj.FOLDER_SMALL||ImageObj.folder||""}/${ImageObj.name||ImageObj.name}`;
 		src=SourceCoerceExtension(src,ImageExtensions,"png");
 	if(Prefixed(ImageObj.src,"data:"))
 		src=ImageObj.src;
@@ -234,6 +234,10 @@ function ImageObject(opts){
 		TRACK:name});
 };
 
+GalleryHTML=function(objects,Renderer){
+	var gallery=objects.map(Renderer).join("\n");
+	return `<div class="featured">${gallery}</div>`
+}
 
 // ObjectsGalleryHTML=function(objDict,ObjectRenderer,opts){
 // 	if(!IsObject(objDict))
@@ -257,9 +261,7 @@ FolderGalleryHTML=function(subfolder,names,ObjectRenderer){
 		var objects=Keys(names).map(n=>ImageObject(Join(names[n],{name:n,folder:subfolder})));
 	}
 	
-	var ObjectRenderer=ObjectRenderer||ImageCardHTML;
-	var gallery=objects.map(ObjectRenderer).join("\n");
-	return `<div class="featured">${gallery}</div>`
+	return GalleryHTML(objects,ObjectRenderer||ImageCardHTML);
 }
 
 ModalImageFragment=function(obj){
