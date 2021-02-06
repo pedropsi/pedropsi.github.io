@@ -406,6 +406,11 @@ function ForbidCaret(){
 	c.map(function(caret){PulseSelect(caret,"forbidden",500)});
 }
 
+ForbidKeystrokesLevels=[
+	"Type this",
+	"Reverse"
+];
+
 function ForbidNumberActions(key){
 	return (!In([
 		"Type this",
@@ -2622,7 +2627,8 @@ function KeystrokeHTML(K){
 function DrawLevel(){
 	DrawLetters();
 	DrawCaret();
-	DrawKeystrokes();
+	if(!In(ForbidKeystrokesLevels,CurLevelTitle()))
+		DrawKeystrokes();
 }
 
 
