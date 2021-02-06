@@ -239,17 +239,6 @@ GalleryHTML=function(objects,Renderer){
 	return `<div class="featured">${gallery}</div>`
 }
 
-// ObjectsGalleryHTML=function(objDict,ObjectRenderer,opts){
-// 	if(!IsObject(objDict))
-// 		return "";
-
-// 	var ObjectRenderer=ObjectRenderer||ImageCardHTML;
-// 	var opts=opts||{};
-// 	var objects=ReValueObject(objDict,(data,name)=>ObjectRenderer(Join(data,{name:name},opts)));
-		
-// 	var gallery=objects.map(ObjectRenderer).join("\n");
-// 	return `<div class="featured">${gallery}</div>`
-// }
 
 FolderGalleryHTML=function(subfolder,names,ObjectRenderer){
 	if(IsArray(names)){
