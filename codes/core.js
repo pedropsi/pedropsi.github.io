@@ -1,7 +1,53 @@
 ///////////////////////////////////////////////////////////////////////////////
-// (C) Pedro PSI 2017-2020
-// functions are always defined as "function_name=function(args){body}" to:
-//		1) allow anonymous export as node modules, yet working normally in browser
+// (C) Pedro PSI 2017-2021
+// Conventions for concise, self-documenting code (and automated testing)
+///////////////////////////////////////////////////////////////////////////////
+//
+// Naming conventions
+//
+//	1) function names are Capitalised:
+//		- avoids conflicts with most JS libraries
+//		- feels natural
+//		- marks functions as distinct from other variable types
+//		- (this includes camel-casing separate words)
+//
+// 	2)	the last word reveals the return type:
+//		- verb					: side effects (may optionally may return a value)
+//	 	- "-ed", an adjective	: binary (true/false)
+//	 	- "-er", "-or", "F"		: another function
+//	 	- "Array", "A"			: an array
+//	 	- "String", "S"			: a string
+//	 	- "Object", "Obj", "O"	: an object
+//
+//	 	- "-s", a plural noun	: an array (occasionally an object)
+//
+//	 	- "Element"				: a Node or HTML code or a Selector
+//	 	- "Node"				: a HTML node element
+//	 	- "HTML"				: HTML code, as a string
+//		- ...
+//
+// 	3)	modifiers:
+//		-"Un-"					: returns the Opposite / Complementary value
+//
+//	4) self-describing names are preferred. For instance "FirstSecond...Type" receives those "First","Second",... as arguments and returns "Type"
+//
+//  5) the first word may also refer to a particular set of related functions (to be improved). 
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// Unit testing
+//
+//   All unit tests of a given function are stored as comments after its return statement, to:
+//		-explain the function by example
+//		-keep code organised (what belongs together should stay together)
+//		-be extracted automatically by the unit testing framework 
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// Other technical considerations
+//
+// 1) Functions are defined with "function_name=function(args){body}" to:
+//		1.1) allow anonymous export as node modules, while working normally in browser too
 //			---regular expression to convert forth: 	
 //				 	\nfunction ([^\(]+)
 //					\n$1=function
@@ -9,31 +55,20 @@
 //				 	\n([^=\n]+)=function
 //					\nfunction $1
 //				 	 
-//  	2) avoid Safari Conditional Hoisting bugs
+			NodejsDetected=function(){
+				return typeof window==="undefined";
+			}
+//
+//  	1.2) avoid Safari Conditional Hoisting bugs
 //				(modules ask whether a function was defined before, thus not overwriting it)
-// Function naming conventions (goal: concise self-documenting code):
-//		- function names are Capitalised (this avoids conflicts with most JS libraries)
 //
-// 		- function names can be read as self describing sentences, usually VERB-->OBJECT
+// 2) Modern ES Syntax is avoided, to avoid the need for a transpiler.
+//		2.1) The "spread operator" (...) is replaced with the functions "Merge" or "Join"
+//		2.1) The "arrow notation" (=>) is replaced with function(...){...} ------------------TODO
 //
-// 		- the first word may also refer to a particular set of related functions (to be improved). 
-//
-// 		- the last word reveals the function return type, while completing the sentence:
-//	 		- a verb: not specified (if obvious - to be improved) or without a return value, only side effects
-//	 		- "-ed", an adjective			: Binary value (true/false)
-//	 		- "-er"							: Function
-//	 		- "-s", a plural noun, "Array"	: an array
-//	 		- "Element"						: a Node or HTML code or a Selector
-//	 		- "Node"						: a HTML node element
-//	 		- "HTML"						: HTML code
-//	 		- "String"						: a string
-//	 		- "Object"						: an object
-//			etc...
 
 
-NodejsDetected=function(){
-	return typeof window==="undefined";
-}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Get Function Name as a string, or make up a unique one based on the function's body
