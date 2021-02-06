@@ -148,7 +148,7 @@ MusicCreditsHTML=function(id){
 }
 
 ImageSource=function(ImageObj){
-	var src=ImageObj.src?`images/${ImageObj.src}`:`images/${ImageObj.FOLDER_SMALL}/${ImageObj.TRACK}`;
+	var src=ImageObj.src?`images/${ImageObj.src}`:`images/${ImageObj.FOLDER_SMALL||ImageObj.folder||""}/${ImageObj.TRACK||ImageObj.name}`;
 		src=SourceCoerceExtension(src,ImageExtensions,"png");
 	if(Prefixed(ImageObj.src,"data:"))
 		src=ImageObj.src;
