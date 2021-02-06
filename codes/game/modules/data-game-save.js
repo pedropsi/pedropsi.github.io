@@ -10,7 +10,7 @@ function ToggleSavePermission(thi){
 	if(savePermission){
 		savePermission=false;
 		EraseLocalsave();
-		ConsoleAdd(`Localsave is OFF. The save file for ${PageTitle()} will be erased on page reload.`);
+		ConsoleAdd(`The local save file for ${PageTitle()} is OFF. Reload the page to erase it.`);
 	}
 	else 
 		ActivateSavePermission(thi);
@@ -20,8 +20,8 @@ function ActivateSavePermission(thi){
 	savePermission=true;
 	Localsave();
 	ConsoleAddMany([
-		`Localsave is ON for ${PageTitle()}`,
-		`To stop localsaving and erase the save file for ${PageTitle()}, deselect ${ObtainSymbol("Save")}.`
+		`The local save file is ON for ${PageTitle()}.`,
+		`To erase the save file, deselect ${ObtainSymbol("Save")} and reload the page.`
 		]);
 	Select(thi);
 }
