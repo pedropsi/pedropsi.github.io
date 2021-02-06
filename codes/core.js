@@ -596,7 +596,7 @@ Take=function(AS,n){
 		return AS.slice(n,AS.length);
 	return AS.slice(0,n);
 
-`
+/***
 from beginning
 Take([5,6,7,8,9],2)
 [5,6];
@@ -616,13 +616,13 @@ Take([5,6,7,8,9],-10)
 Infinity
 Take([5,6,7,8,9],Infinity)
 [5,6,7,8,9]
-`
+***/
 }
 
 UnTake=function(AS,n){
 	return n<0?Take(AS,Max(0,AS.length+n)):Take(AS,-Max(0,AS.length-n));
 
-`
+/***
 remove from beginning
 UnTake([5,6,7,8,9],2)
 [7,8,9];
@@ -641,7 +641,8 @@ UnTake([5,6,7,8,9],-10)
 
 Infinity
 UnTake([5,6,7,8,9],Infinity)
-[]`
+[]
+***/
 }
 
 Insert=function(array,n,p){
@@ -657,22 +658,22 @@ Append=function(A,item){
 	if(typeof item==="undefined")
 		return A;
 	return Insert(A,item,A.length);
-`
+/***
 add
 Append([1],2)
 [1,2];
-`
+***/
 }
 
 Prepend=function(A,item){
 	if(typeof item==="undefined")
 		return A;
 	return Insert(A,item,0);
-`
+/***
 add
 Prepend([1],2)
 [2,1];
-`
+***/
 }
 
 InsertCut=function(array,item,p){
@@ -680,7 +681,7 @@ InsertCut=function(array,item,p){
 		return Append(Take(array,p),item)
 	else
 		return Prepend(Take(array,p),item);
-`
+/***
 remove tail and add element
 InsertCut([1,2,3,4,5],"a",3)
 [1,2,3,"a"]
@@ -692,7 +693,7 @@ InsertCut([1,2,3,4,5],"a",3)
 both
 InsertCut([1,2,3,4,5],"a",0)
 ["a"]
-`
+***/
 }
 
 //Distinguish Objects and Arrays
@@ -1327,11 +1328,11 @@ GatherObject=function(Obj,Equaliser){
 	var o={};
 		uniquekeys.map(k=>(o[k]=FilterObject(Obj,v=>(String(Equaliser(v))===k))));
 	return o;
-	`
+/***
 	gather object, custom equaliser
 	GatherObject({a:1,b:2,c:3,d:3},x=>x%2)
 	{0:{b:2},1:{a:1,c:3,d:3}}
-`
+***/
 }
 
 Gather=function(AO,Equaliser){
@@ -2593,7 +2594,7 @@ Offline=function(){return !Online()};
 ParameterPairString=function(key,value){
 	return encodeURIComponent(key)+'='+encodeURIComponent(value);
 
-`
+/***
 Form a parameter pair
 ParameterPairString("a",1)
 "a=1"
@@ -2601,13 +2602,13 @@ ParameterPairString("a",1)
 Convert spaces to UTF
 ParameterPairString("a","how fascinating")
 "a=how%20fascinating"
-`
+***/
 }
 
 ParameterString=function(parametersObject){
 	return ThreadKeysValues(parametersObject,ParameterPairString).join("&");
 
-`
+/***
 empty string
 ParameterString({})
 ""
@@ -2615,7 +2616,7 @@ ParameterString({})
 From a multi-parameter string
 ParameterString({"a":1,"b":2})
 "a=1&b=2"
-`
+***/
 }
 
 //External resources
@@ -2785,7 +2786,7 @@ IsTag=function(selector){
 	if(!IsString(selector))
 		return false;
 	return In(HTMLTags,selector.toUpperCase());
-`
+/***
 IsTag("BODY")
 true
 
@@ -2794,13 +2795,13 @@ false
 
 IsTag("#randomid")
 false
-`
+***/
 }
 IsClass=function(selector){
 	if(!IsString(selector))
 		return false;
 	return Prefixed(selector,".");
-`
+/***
 IsClass("BODY")
 false
 
@@ -2809,13 +2810,13 @@ true
 
 IsClass("#randomid")
 false
-`
+***/
 }
 IsID=function(selector){
 	if(!IsString(selector))
 		return false;
 	return Prefixed(selector,"#");
-`
+/***
 IsID("BODY")
 false
 
@@ -2824,12 +2825,12 @@ false
 
 IsID("#randomid")
 true
-`
+***/
 }
 
 IsQuerySelector=function(selector){
 	return IsID(selector)||IsClass(selector)||IsTag(selector);
-`
+/***
 IsQuerySelector("BODY")
 true
 
@@ -2838,7 +2839,7 @@ true
 
 IsQuerySelector("#randomid")
 true
-`
+***/
 }
 
 ParentSelector=function(targetIDsel){
@@ -7531,9 +7532,10 @@ UnReachableCode=function(functionBody){
 	lines=Reverse(UnBeforTake(Reverse(lines),r=>r.match(emptyPattern)));
 	
 	lines=lines.map(line=>line.replaceAll(/(\r)/g,"").replaceAll("\t","")).join("\n");
-	lines=UnExfix(TrimWhitespaceString(lines),"`")
+	lines=UnExfix(TrimWhitespaceString(lines),"`").replaceAll(/(\/\*+)|(\*+\/)/g,"");
 	return lines;
 }
+
 
 UnBeforTake=function(list,Verifier){
 	var i=list.findIndex(Verifier);
