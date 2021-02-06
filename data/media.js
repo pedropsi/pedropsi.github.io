@@ -195,13 +195,12 @@ ImageCardHTML=function(ImageObj){
 	var legend=ImageObj.LEGEND?`<div>${ImageObj.LEGEND}</div>`:"";
 	var id=ImageObj.id||GenerateId();
 
-	return `
-	<a href="${link}" ${target} id="${id}" class="card-supra">
-		<div class="card ${ImageObj.CLA||""}">
-			${LazyImageHTML(ImageObj)}
-		</div>
-	</a>
-	${legend}`;
+	var cardTop=`
+	<div class="card ${ImageObj.CLA||""}">
+		${LazyImageHTML(ImageObj)}
+	</div>
+	`;
+	return AHTML(cardTop,link,{target:target,id:id,class:"card-supra"})+legend;
 }
 
 LaunchImageModal=function(subfolder,title){
