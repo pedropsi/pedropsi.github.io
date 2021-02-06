@@ -883,6 +883,32 @@ FilterObject=function(Obj,ValueKeyer){
 	return O;
 }
 
+FilterKeysObject=function(Obj,Validator){
+	if(!Validator)
+		return Obj;
+	var O={};
+	Keys(Obj).filter(k=>Validator(k,Obj[k])).map(k=>O[k]=Obj[k]);
+	return O;
+/***
+Simple filter
+FilterKeysObject({a:1,b:2,c:3,d:4},l=>l==="b")
+{b:2}
+***/
+}
+
+FilterValuesObject=function(Obj,Validator){
+	if(!Validator)
+		return obj;
+	var O={};
+	Keys(Obj).filter(k=>Validator(Obj[k],k)).map(k=>O[k]=Obj[k]);
+	return O;
+/***
+Simple filter2
+FilterValuesObject({a:1,b:2,c:3,d:4},v=>v%2)
+{a:1,c:3}
+***/
+}
+
 ThreadKeysValues=function(Obj,KeyValuer){
 	return Keys(Obj).map(k=>KeyValuer(k,Obj[k]));
 }
