@@ -838,10 +838,40 @@ ReKeyObject=function(Obj,Modifier){//key, then value (optional)
 };
 
 ReValueObject=function(Obj,Modifier){//value, then key (optional)
+	if(IsObject(Modifier))
+		return ReValueObject(Obj,function(v,k){
+			if(In(Modifier,k)){
+				return Evaluate(Modifier[k],Obj[k])
+			}
+			else
+				return Obj[k];
+		});
 	var Modifier=Modifier||Identity;
 	var O={};
 	Keys(Obj).map(k=>(O[k]=Modifier(Obj[k],k)));
 	return O;
+
+/***
+Change values based on keys and values
+ReValueObject({a:1,b:2},(x,l)=>l.repeat(2*x))
+{a:"aa",b:"bbbb"}
+
+Modify Object Values based on a special object
+ReValueObject({a:1,b:1},{a:x=>x+1,b:x=>x-1})
+{a:2,b:0}
+
+Modify Object Values based on a special object
+ReValueObject({a:1,b:1},{a:x=>100,b:x=>10})
+{a:100,b:10}
+
+Modify Object Values based on a special object
+ReValueObject({a:1,b:1},{a:x=>x+1})
+{a:2,b:1}
+
+Modify Object Values based on function
+ReValueObject({a:1,b:1},{a:x=>100,b:x=>10})
+{a:100,b:10}
+***/
 };
 
 
@@ -908,6 +938,7 @@ FilterValuesObject({a:1,b:2,c:3,d:4},v=>v%2)
 {a:1,c:3}
 ***/
 }
+
 
 ThreadKeysValues=function(Obj,KeyValuer){
 	return Keys(Obj).map(k=>KeyValuer(k,Obj[k]));

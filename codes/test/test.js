@@ -592,10 +592,6 @@ deep evaluation
 MergeEvaluateObject({a:1,b:2,c:{d:3}},{a:x=>x+1,c:{d:x=>2*x}})
 {a:2,b:2,c:{d:6}}
 
-Change values based on keys and values
-ReValueObject({a:1,b:2},(x,l)=>l.repeat(2*x))
-{a:"aa",b:"bbbb"}
-
 
 From array, multiple values
 Remove([1,2,3,3,2,8],2)
