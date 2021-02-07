@@ -358,20 +358,16 @@ function BezierPathHTML(sta,end,mid){
 }
 
 function BezierLetter(Z,id,cla){
-	var cla=cla||"";
-		cla=Posfix(cla," bezier-"+Z);
+	var clas=(cla||"")+(" bezier-"+Z);
 	var id=id||"";
-	if(BezierLetter[Z])
-		return BezierLetter[Z];
-	else
-		return BezierLetter[Z]=CoordinatesBezierSVG(LetterCoordinates(Z),id,cla);
+	return CoordinatesBezierSVG(LetterCoordinates(Z),id,clas);
 }
 
 function CoordinatesBezierSVG(coordinates,id,cla){
 	var xs=Values(coordinates).map(First);
 	var BezierWidth=Max(xs);
 	var id=id?('id="'+id+'"'):"";
-	return `<svg viewbox="0 0 ${BezierWidth+2} ${BezierHeight}"	${id} class="bezier letter ${cla}"> ${CoordinatePaths(coordinates).join("")}</svg>`
+	return `<svg viewbox="0 0 ${BezierWidth+2} ${BezierHeight}"	${id} class="bezier ${cla}"> ${CoordinatePaths(coordinates).join("")}</svg>`
 }
 
 function LetterInterpolatedCoordinates(A,B,t){
@@ -387,9 +383,9 @@ function LetterInterpolatedCoordinates(A,B,t){
 
 function BezierDynamicLetter(Z,oldY,id,parentE){
 	if(typeof Z==="string")
-		var e=BezierLetter(Z);
+		var e=BezierLetter(Z,undefined,"letter");
 	else
-		var e=CoordinatesBezierSVG(Z,id,"bezier-"+oldY);
+		var e=CoordinatesBezierSVG(Z,id,"letter bezier-"+oldY);
 	
 	try{//get the element with current id or a new oe without id assigned	
 		var oldY=GetElement(id)||Last(GetElements(".bezier-"+oldY,parentE).filter(e=>!e.id));

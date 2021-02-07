@@ -2459,29 +2459,18 @@ function LetterHalvesHTML(E){
 }
 
 function LetterSymmetryHTML(L){
-	var simclass=["symmetry"];
-	if(VerticalSymmetric(L))
-		simclass.push("vertical");
-	if(HorizontalSymmetric(L))
-		simclass.push("horizontal");
-	if(InversionSymmetric(L))
-		simclass.push("inversion");
-		
-	var S=NewNode(TopologicalLetterSVG(PureLetter(L)));
-	
-	simclass.map(sym=>Class(S,sym));
-	UnClass(S,"letter");
-
-	if(In(L,"-"))
-		Class(S,"vertical");
-	
-	if(In(L,"|"))
-		Class(S,"horizontal");
-
-	if(In(L,"%"))
-		Class(S,"inversion");
-	
-	return LetterPureHTML(S.outerHTML);
+	var L=UpperCase(L);
+	var simclass="topological symmetry";
+	if(VerticalSymmetric(L)||In(L,"-")){
+		simclass=simclass+" vertical";
+	}
+	if(HorizontalSymmetric(L)||In(L,"|")){
+		simclass=simclass+" horizontal";
+	}
+	if(InversionSymmetric(L)||In(L,"%")){
+		simclass=simclass+" inversion";
+	}
+	return LetterPureHTML(BezierLetter(PureLetter(L),undefined,simclass));
 }
 
 var LetterDisplayers={
@@ -2504,7 +2493,7 @@ var LetterDisplayers={
 
 var GoalDisplayers={
 	"EnactLawsMama":BrailleSVG,
-	"Symmetries":TopologicalLetterSVG,
+	"Symmetries":LetterSymmetryHTML,
 	"Topological":TopologicalLetterSVG,
 	"Loosely less":LEDLetterSVG,
 	"Reshape":LEDLetterSVG,
@@ -2516,7 +2505,7 @@ var GoalSplitters={
 }
 
 function TopologicalLetterSVG(L){
-	return BezierLetter(L.toUpperCase(),undefined,"topological");
+	return BezierLetter(L.toUpperCase(),undefined,"letter topological");
 }
 
 function LEDLetterSVG(L){
