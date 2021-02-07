@@ -634,11 +634,19 @@
 }
 
 .question .description-title .letter.topological,
-.number-initials .letter.topological{
+.question .description-title .letter .topological,
+.number-initials .letter.topological,
+.number-initials .letter .topological{
+   stroke: currentColor;
    stroke-width: 1.6;
    height: calc(var(--fontheight)*0.8);
    margin-top: calc(var(--fontheight)*0.05);
    padding-right: calc(var(--fontheight)*0.1);
+}
+
+.number-initials .letter .topological{
+   padding-left: calc(var(--fontheight)*0.4);
+   padding-right: calc(var(--fontheight)*0.4);
 }
 
 .question .notes{
