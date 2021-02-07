@@ -298,6 +298,10 @@
    transform: scaleX(1) scaleY(1);
    transition-duration: var(--durationOff);
 }
+.symmetry.bezier{
+   padding-right:unset;
+   padding-left:unset;
+}
 
 .superimpose{
    position: relative; 
