@@ -77,7 +77,7 @@ var Genres={
 		},
 		groups:{
 			"tree":{
-				symbols:["flower","fruit","hummingbird"],
+				symbols:["flower","fruit","hummingbird","question"],
 				colour:"rgb(134,0,16)"
 			}
 		},
@@ -116,6 +116,18 @@ var Genres={
 						minconnected:Infinity,
 						description:"hummingbirds are at corner 2-pieces"
 					},
+			},
+			"question":{
+				letter:"q",
+				colour:"rgb(100,100,100)",
+				viewBox:"0 0 36 36",
+				scale:0.5,
+				path:"M 18 1 C 10 1 7 7 9 14 C 9 14 13 13 13 13 C 12 8 14 5 18 5 C 23 5 25 12 19 15 C 15 17 14 19 13 24 L 17 25 C 18 21 18 19 21 18 C 30 15 29 1 18 1 Z M 14 28 C 9 28 9 35 14 35 C 19 35 19 28 14 28 Z",
+				rule:{
+					symbolshapes:Join(Shape2Straights,Shape1s,Shape2Corners),
+					minconnected:Infinity,
+					description:"a question mark replaces a flower, fruit or hummingbird"
+				},
 			},
 			// "monkey":{
 			// 	letter:"m",
