@@ -1908,7 +1908,7 @@ StateCursorName=function(state){
 			cursor="pencil";
 	}
 	else if(state.mode.symbol){
-		if(STATE.mode.clearing)
+		if(state.mode.clearing)
 			cursor="eraser";
 		else
 			cursor=state.mode.symbol;
