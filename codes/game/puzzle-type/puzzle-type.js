@@ -2447,50 +2447,48 @@ function LetterPureHTML(L,cla){
 	return "<div class='letter"+cla+"'>"+L+"</div>"
 }
 
+function LetterHalvesHTML(E){
+	var combined=CombineHalves(E);
+	//Superimpose two halves
+	if(combined.length>1){
+		S=NewNode("<div class='superimpose'><div class='superimposed half upper'>"+PureLetter(E[0])+"</div><div class='half lower'>"+PureLetter(E[1])+"</div></div>");
+		return LetterPureHTML(S.outerHTML);
+	}
+	else
+		return LetterPureHTML(combined);
+}
+
+function LetterSymmetryHTML(L){
+	var simclass=["symmetry"];
+	if(VerticalSymmetric(L))
+		simclass.push("vertical");
+	if(HorizontalSymmetric(L))
+		simclass.push("horizontal");
+	if(InversionSymmetric(L))
+		simclass.push("inversion");
+		
+	var S=NewNode(TopologicalLetterSVG(PureLetter(L)));
+	
+	simclass.map(sym=>Class(S,sym));
+	UnClass(S,"letter");
+
+	if(In(L,"-"))
+		Class(S,"vertical");
+	
+	if(In(L,"|"))
+		Class(S,"horizontal");
+
+	if(In(L,"%"))
+		Class(S,"inversion");
+	
+	return LetterPureHTML(S.outerHTML);
+}
 
 var LetterDisplayers={
 	"РУССКАЯ":LetterDraftHTML,
 	//"Tangles":LetterDraftHTML,
-	"Symmetries":function(L){
-		
-		var simclass="";
-		if(VerticalSymmetric(L))
-			simclass=simclass+" vertical"
-		if(HorizontalSymmetric(L))
-			simclass=simclass+" horizontal"
-		if(InversionSymmetric(L))
-			simclass=simclass+" inversion"
-		
-		//Superimpose Inversion symmetric letters to correct font assymetries
-		S=NewNode("<div class='superimpose'><div class='symmetry superimposed"+simclass+"'>"+PureLetter(L)+"</div><div>"+PureLetter(L)+"</div></div>");
-		
-		if(In(L,"-"))
-			Class(S,"vertical");
-		
-		if(In(L,"|"))
-			Class(S,"horizontal");
-	
-		if(In(L,"%"))
-			Class(S,"inversion");
-	
-	
-		if(Classed(S,"vertical")||Classed(S,"horizontal")||Classed(S,"inversion")){
-			Class(S,"symmetry");
-		}
-		
-		return LetterPureHTML(S.outerHTML);
-		
-	},
-	"Fillet":function(E){
-		var combined=CombineHalves(E);
-		//Superimpose two halves
-		if(combined.length>1){
-			S=NewNode("<div class='superimpose'><div class='superimposed half upper'>"+PureLetter(E[0])+"</div><div class='half lower'>"+PureLetter(E[1])+"</div></div>");
-			return LetterPureHTML(S.outerHTML);
-		}
-		else
-			return LetterPureHTML(combined);
-	},
+	"Symmetries":LetterSymmetryHTML,
+	"Fillet":LetterHalvesHTML,
 	"Ironclad":LetterDraftHTML,
 	"Genetic.":LetterDraftHTML,
 	"Anagram":LetterDraftHTML,
@@ -2506,6 +2504,7 @@ var LetterDisplayers={
 
 var GoalDisplayers={
 	"EnactLawsMama":BrailleSVG,
+	"Symmetries":TopologicalLetterSVG,
 	"Topological":TopologicalLetterSVG,
 	"Loosely less":LEDLetterSVG,
 	"Reshape":LEDLetterSVG,
