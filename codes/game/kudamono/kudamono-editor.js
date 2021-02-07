@@ -950,6 +950,8 @@ PointContiguousPoints=function(point){
 	return Values(DirectionsCoordinates).map(v=>VectorPlus(point,v));
 }
 
+//TODO self-loop oconut PointContiguousTrackPoints
+
 ///////////////////////////////////////////////////////////////////////////////
 //Error detection
 
