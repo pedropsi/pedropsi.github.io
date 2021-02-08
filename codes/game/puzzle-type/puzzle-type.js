@@ -329,17 +329,17 @@ function GameInput(key){
 		return;
 	}
 
-	if(key==="undo"){
+	if(key==="undo"||AllowExtraUndoKey(key)){
 		Undo();
 		return;
 	}
 
-	if(key==="redo"){
+	if(key==="redo"||AllowExtraRedoKey(key)){
 		Redo();
 		return;
 	}
 
-	if(key==="restart"){
+	if(key==="restart"||AllowExtraRestartKey(key)){
 		Restart();
 		return;
 	}
@@ -352,13 +352,9 @@ function GameInput(key){
 	if(ForbidEnterActions(key)||ForbidNumberActions(key)||ForbidSpaceActions(key)||ForbidArrowActions(key)){
 		ForbidCaret();return;
 	}
-
-	if(AllowExtraUndoKey(key)){
-		Undo();return;
-	}
 	
 	else{
-		if(Letters.array.length>=CharLimit(CurLevelTitle())||AllowExtraRestartKey(key)){//Max Char Limit (arbitrary, to fit screen)
+		if(Letters.array.length>=CharLimit(CurLevelTitle())){//Max Char Limit (arbitrary, to fit screen)
 			Restart();return;
 		}
 		else{
@@ -485,6 +481,9 @@ var ArrowKeys=Directions.map(StringSymbol);
 
 function AllowExtraUndoKey(key){
 	return CurLevelTitle()==="Wasd"&&key==="Z";
+}
+function AllowExtraRedoKey(key){
+	return CurLevelTitle()==="Wasd"&&key==="Y";
 }
 function AllowExtraRestartKey(key){
 	return CurLevelTitle()==="Wasd"&&key==="R";
