@@ -397,6 +397,8 @@ function BezierDynamicLetter(Z,oldY,id,parentE){
 function MorphLetter(A,B,parentE,Starter,Ender){
 	var steps=10;
 	var id=GenerateId();
+	var Starter=Starter||Identity;
+	var Ender=Ender||Identity;
 	function FullEnder(){
 		BezierDynamicLetter(B,A,id,parentE);
 		Ender();
