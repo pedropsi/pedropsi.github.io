@@ -870,7 +870,7 @@ var LevelInstructions={
 	"Teleporter":function (L){
 		var pre=Caret()[0];
 		
-		var word=Clone(Letters.array);
+		var word=Letters();
 		var l=word.length;
 
 		Letter(pre,L);
