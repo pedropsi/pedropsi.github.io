@@ -2180,43 +2180,50 @@ function InversionSymmetric(O){
 
 //Topological
 
-function Topological(L){	
-	
+function TopoMorphed(M,L){
+	var classL=HomeomorphicClass(L);
+	var classM=HomeomorphicClass(M);
+	return In(TopologyRequirement[classM],classL)
+};
+
+function Topological(L){
+	var letters=Letters();	
+	function Morpher(i){
+		var M=Letter(i);
+		if(TopoMorphed(M,L)){
+			MorphLetter(M,L,"letters",Identity,function(){
+				Letter(i,L);
+			});
+		}
+	}
 	if(Letters.array.length===0){
+		Wbug("Inp0",L)
 		InputLetterAfter(L);
 		AddStrokeValid(L);
 	}
 	else{
-		var classL=HomeomorphicClass(L);
-		var letters=Clone(Letters());
-
-		function MorphInferior(i){
-			var M=Letter(i);
-			var classM=HomeomorphicClass(M);
-			if(In(TopologyRequirement[classM],classL)){
-				MorphLetter(M,L,"letters",Starter,Ender);
-				function Starter(){
-					BlockInput();
-				}
-				function Ender(){
-					Letter(i,L);
-					if(i===letters.length-1){
-						UnBlockInput();
+		if(Letters.array.some(M=>TopoMorphed(M,L))){
+			Kinemate([
+				{Starter:BlockInput},
+				{Starter:
+					function(){
+						Wbug("started");
+						for(var i=0;i<letters.length;i++)
+							Morpher(i)
+					},
+				endDelay:500,
+				Ender:
+					function(){
+						Wbug("ended");
 						AddStrokeUnderline(L);
 						ObtainUpdateLevel();
+						UnBlockInput();
 						CheckWin();
 					}
 				}
-			return true;
-			}
-			else return false;
+			])	
 		}
-
-		var morphed=false;
-		for(var i=0;i<letters.length;i++){
-			morphed=MorphInferior(i)||morphed;
-		}
-		if(!morphed){
+		else{
 			InputLetterAfter(L);
 			AddStrokeValid(L);
 		}
