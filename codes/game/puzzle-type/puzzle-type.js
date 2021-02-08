@@ -2197,7 +2197,6 @@ function Topological(L){
 		}
 	}
 	if(Letters.array.length===0){
-		Wbug("Inp0",L)
 		InputLetterAfter(L);
 		AddStrokeValid(L);
 	}
@@ -2211,10 +2210,9 @@ function Topological(L){
 						for(var i=0;i<letters.length;i++)
 							Morpher(i)
 					},
-				endDelay:500,
+				endDelay:400,
 				Ender:
 					function(){
-						Wbug("ended");
 						AddStrokeUnderline(L);
 						ObtainUpdateLevel();
 						UnBlockInput();
