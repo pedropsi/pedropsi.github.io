@@ -1640,7 +1640,7 @@ function Copypaste(L){
 	InputLetterAfter(L);
 	AddStrokeValid(L);
 
-	var word=Letters().join("");
+	var word=Word();
 	
 	if(Posfixed(word,"COPY")){
 		word=UnPosfix(word,"COPY");
@@ -1666,7 +1666,7 @@ function Baba(L){
 	InputLetterAfter(L);
 	AddStrokeValid(L);
 
-	var word=Letters().join("");
+	var word=Word();
 	var pattern=/\s*([^\s]+)\s+IS\s+([^\s]+)\s*/;
 	if(pattern.test(word)){
 		var subject=word.replace(pattern,"$1");
