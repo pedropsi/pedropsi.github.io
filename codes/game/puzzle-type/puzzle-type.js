@@ -25,10 +25,9 @@ function ShiftBaseColour(basecolour){
 function ObtainRestartAllowed(){return true;}
 function ObtainUndoAllowed(){return true;}
 function ObtainRedoAllowed(){return true;}
-var ObtainUndo=function(){if(!InputBlocked()) Undo();PulseSelect("#choice-"+"undo");GameFocus()};					//With Onscreen keyboard
-var ObtainRedo=function(){if(!InputBlocked()) Redo();PulseSelect("#choice-"+"redo");GameFocus()};					//With Onscreen keyboard
-var ObtainRestart=function(){if(!InputBlocked())Restart();PulseSelect("#choice-"+"restart");GameFocus()};			//With Onscreen keyboard
-
+var ObtainUndo=GameKeyHandler("undo");
+var ObtainRedo=GameKeyHandler("redo");
+var ObtainRestart=GameKeyHandler("redo");
 function ObtainMainKey(action){
 	if(!action)
 		return {
@@ -325,9 +324,25 @@ function GameKey(key){
 
 function GameInput(key){
 	if(key==="Escape"){
+		CloseKeyboard();//if needed
 		ObtainTitleScreenReLoader();
 		return;
-	 }
+	}
+
+	if(key==="undo"){
+		Undo();
+		return;
+	}
+
+	if(key==="redo"){
+		Redo();
+		return;
+	}
+
+	if(key==="restart"){
+		Restart();
+		return;
+	}
 
 	if(key===StringSymbol("interpunkt")){//neuter separator
 		ForbidCaret();
@@ -367,12 +382,7 @@ var CharLimits={
 };
 
 function TitleScreenInput(key){
-	if(key==="Escape")
-		return
-	// if(ObtainNewGameCondition())
-	// 	Kinemate(OnboardMacro());
-	// else
-		StartLevelFromTitle();
+	StartLevelFromTitle();
 }
 
 function InstructGameInput(key){
@@ -2188,12 +2198,10 @@ function Topological(L){
 				MorphLetter(M,L,"letters",Starter,Ender);
 				function Starter(){
 					BlockInput();
-					BlockUndo();
 				}
 				function Ender(){
 					Letter(i,L);
 					UnBlockInput();
-					UnBlockUndo();
 					if(i===letters.length-1)
 						ObtainUpdateLevel();
 					CheckWin();
@@ -2690,6 +2698,7 @@ function InitialiseGameCanvas(){
 
 
 function ObtainTitleScreenReLoader(){
+	BlockInput();
 	TitleScreen(true);
 	Kinemate(TitleScreenLoaderMacro());
 	PlaySound(MediaPath()+"/sound/startgame.mp3");

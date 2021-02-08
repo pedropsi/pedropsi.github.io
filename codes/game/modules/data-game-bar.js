@@ -627,6 +627,7 @@ function RequestKeyboard(){
 	}
 	
 	HideButtons();
+	GameFocus();
 }
 
 function GameFocusAndRestartUndoButtons(){
@@ -646,7 +647,7 @@ function GameKeyboardKeys(){
 }
 
 function CloseKeyboard(){
-	if(CurrentDatapack().buttonSelector==="KeyboardButton")
+	if(CurrentDatapack()&&CurrentDatapack().buttonSelector==="KeyboardButton")
 		CloseCurrentDatapack();
 	GameFocus();
 }
