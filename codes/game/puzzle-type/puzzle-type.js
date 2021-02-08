@@ -561,14 +561,14 @@ var LevelDifficulty={
 	//"Tangles":3,
 	"Difference":5,
 	//"Photocopier":???,
-	"Symmetries":2,
-	"Fillet":3,
+	"Fillet":2,
+	"Symmetries":3,
+	"Reshape":3,
 	"Topological":4,
 	"Loosely less":4,
-	"Reshape":3,
 	"Wasd":2,
 	"Nokia 1998":1,
-	"Dvorak":4,
+	"Dvorak":3,
 	"РУССКАЯ":1,
 	"ひらがな":2,
 	"Nigeria":3,
@@ -705,8 +705,8 @@ var LevelGoals=[			//Required types of thinking:
 	"Falls",				//Alphabetical, Arithmethic, Retroactive
 	"Precedent",			//Alphabetical, Retroactive
 	
-	"Symmetries",			//Shape, Retroactive
 	"Fillet",				//Shape, Proactive 
+	"Symmetries",			//Shape, Retroactive
 	"Reshape",				//Shape, Proactive 
 	"Topological",			//Shape, Growth, Monoactive
 	
