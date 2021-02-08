@@ -2200,10 +2200,12 @@ function Topological(L){
 				}
 				function Ender(){
 					Letter(i,L);
-					UnBlockInput();
-					if(i===letters.length-1)
+					if(i===letters.length-1){
+						UnBlockInput();
+						AddStrokeUnderline(L);
 						ObtainUpdateLevel();
-					CheckWin();
+						CheckWin();
+					}
 				}
 			return true;
 			}
@@ -2217,9 +2219,6 @@ function Topological(L){
 		if(!morphed){
 			InputLetterAfter(L);
 			AddStrokeValid(L);
-		}
-		else{
-			AddStrokeUnderline(L);
 		}
 	}
 	Caret(Infinity);
