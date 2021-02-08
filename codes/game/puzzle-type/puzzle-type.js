@@ -2356,7 +2356,7 @@ function Letters(array){
 	if(!Letters.array)
 		Letters.array=[];
 	if(typeof array==="undefined")
-		return Letters.array;
+		return Clone(Letters.array);
 	
 	if(typeof array==="string")
 		return Letters.array=array.split("");
