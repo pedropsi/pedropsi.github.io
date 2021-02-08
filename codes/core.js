@@ -193,7 +193,8 @@ Warner=function(type){
 		]
 	};
 	return function W(message){
-		var message=message||"";
+		if(typeof message==="undefined")
+			var message="";
 		var caller=FindCallerName(W.caller||"")||"top level";
 		
 		var styles=types[type]||types[error];
