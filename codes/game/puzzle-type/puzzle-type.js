@@ -1241,15 +1241,9 @@ function PolarisAustralis(L){
 	AddStrokeValid(L);
 
 	var star=TemporaryWord();
-	// 	star=Accesser(StarAliases)(star);
-	// var stars=Keys(StarHourAngles).map(s=>s.replaceAll(" ",""));
-	// var c=stars.indexOf(star);
 	var next=NextStar(star);
 
-	// if(c>=0){
 	if(next){
-		// var nextstar=Keys(StarHourAngles)[(c+1)%stars.length].toUpperCase();
-		// Letters(nextstar);
 		Letters(next.toUpperCase());
 		Memo(true);
 	}
@@ -1417,10 +1411,6 @@ function Deaf(L){
 
 	if(NotesLength()===3){
 		Letters(savednotes);
-		// if(Prefixed(chord,"#")){
-		// 	AddStrokeSeparator();
-		// 	return;
-		// }
 
 		PlayChord(chord,false,0.5);
 		if(In(MajorChords,chord)){
@@ -1701,8 +1691,6 @@ function Weightier(L){
 function ArrowDisplay(word,type){
 	var left=(!type||type==="left")?StringSymbol("left"):"";
 	var right=(!type||type==="right")?StringSymbol("right"):"";
-	// var left=StringSymbol("left");
-	// var right=StringSymbol("right");
 	return left+word+right;
 }
 
@@ -2413,8 +2401,6 @@ function Caret(position){
 		var position=0;
 	if(position==="Full")
 		return Caret.array=Range(0,l-1);
-	// if(position==="NoArrows")
-	// 	return Caret.array=Range(0,l-1).filter(function(l,i){return !In(ArrowKeys,Letters()[i])});
 
 	if(IsArray(position))
 		Caret.array=position;
@@ -2740,7 +2726,6 @@ function ObtainUpdateLevel(state){
 			caret:Caret(),
 			keystrokes:Keystrokes(),
 			memo:Memo()
-			// colour:CaretColour()
 		}
 	
 	LevelState(state);
@@ -3102,7 +3087,6 @@ function CurrentLevelState(){
 		'caret':Caret(),
 		'keystrokes':Keystrokes(),
 		'memo':Memo()
-		// 'colour':CaretColour()
 	};
 	return state;
 }
@@ -3121,7 +3105,6 @@ function LevelState(state){
 	Caret(state.caret);
 	Keystrokes(state.keystrokes);
 	Memo(state.memo);
-	// CaretColour(state.colour);
 
 }
 
@@ -3256,23 +3239,11 @@ function ModifyStroke(word,symbol){
 	Keystrokes();
 	var word=Reverse(word.toUpperCase().split("")).join("~");
 	var strokes=Reverse(Keystrokes.array).join("~");
-	//console.log(word,strokes);
 	strokes=strokes.replace(word,word.replace(/\~/g,symbol+"~"+symbol)).split("~");
-	//console.log(strokes);
 	strokes=strokes.map(k=>In(k,symbol)?Posfix(UnPrefix(k,symbol),symbol):k);
 	strokes=Reverse(strokes);
-	//console.log(strokes);
 	Keystrokes(strokes)
 }
-
-// function UnderlineLastWordstroke(word){
-// 	var strokes=CleanStroke(Keystrokes().join(""));
-// 	var last=word.toUpperCase();
-// 	var most=UnOverfix(strokes,last);
-// 		strokes=[].concat(most.split("")).concat(last.split("").map(UnderlineStroke));
-// 	Keystrokes(strokes);
-	
-// }
 
 
 function ModifiedLatterStroke(Modifier){
