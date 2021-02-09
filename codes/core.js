@@ -3612,6 +3612,10 @@ ButtonHTML=function(attribs){
 		class:"button selectable underborderable ",
 		onclick:"PulseSelect(this); "
 	}
+	if(attribs.href){
+		joinableAttribs.onclick+=`Navigate("${attribs.href}")`;
+		delete joinableAttribs["href"];
+	}
 	var mergedAttribs=Join(joinableAttribs,Merge(overwritableAttribs,attribs));
 	return ElementHTML(mergedAttribs);
 };

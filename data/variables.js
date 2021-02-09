@@ -147,8 +147,8 @@ WHITEBOARD_SIMPLE			:	()=>		v.SECTION_OUT(v.PAGE_TITLE()+v.WHITEBOARD_OUT(v.CONT
 
 
 
-SUBSCRIBE_RSS				:	()=>	`<a href="${v.RSS_PATH()}" id="rss">Subscribe to RSS feed.</a>`,
-SUBSCRIBE_EMAIL				:	()=>	`<a onclick="OpenModalSubscribe()">Subscribe to email alerts.</a>`,
+SUBSCRIBE_RSS				:	()=>	ButtonHTML({txt:"Subscribe to RSS feed","href":v.RSS_PATH(),"class":"button selectable",id:"rss"}),
+SUBSCRIBE_EMAIL				:	()=>	ButtonHTML({txt:"Subscribe to email alerts.",onclick:"OpenModalSubscribe()"}),
 
 
 MACRO_URL					:	()=>	`https://script.google.com/macros/s/`,
@@ -187,7 +187,7 @@ CREDITS_MUSIC				:	()=>	MusicCreditsHTML(v.LINK()),
 CREDITS_ENGINE_SUPPORT		:	()=>	`<h3>Game Engine</h3><p>Made with ${v.A_PUZZLESCRIPT()} and ${A("game-bar")}!</p>${v.SOURCE_TEXT()}`,
 CREDITS_ENGINE_VANILLA		:	()=>	`<p>Made with vanilla JS and CSS, including ${A("game-bar")}!</p>`,
 SOURCE_TEXT					:	()=>	`<p>Inspect the ${v.A_SOURCE()} freely, but consider the option to ${v.A_SUPPORT()}!</p>`,
-A_SOURCE					:	()=>	`<a ${v.BLANK()} href='http://puzzlescript.net/editor.html?hack=${v.CONTENT()}'><b>source</b></a>`,
+A_SOURCE					:	()=>	AnchorHTML("<b>source</b>",'http://puzzlescript.net/editor.html?hack='+v.CONTENT()),
 
 MENTIONS					:	()=>v.MENTIONS_LINKS()?`<h3>Mentions</h3><ul>${v.MENTIONS_LINKS()}</ul>`:"",
 MENTIONS_LINKS				:	()=>LinkGroupHTML({GROUP:"mentioned",ID:v.LINK()}),
