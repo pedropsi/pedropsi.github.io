@@ -755,15 +755,21 @@ NewsSources={
 			var url="kudamono.html";
 			var N=UnAfterfix(key,"-");
 			var name=UnPrefix(key,N+"-");
+				name=item.legend||name;
+				if(name="kudamono")
+					name="";
 			if(board){
 				var params=SearchParameters(board);
 					delete params["S"];
 					params=Merge(
 						{"A":v.NAME(),
 						"D":item.date,
+						"F":Accesser({"very easy":1,"easy":2,"medium":3,"hard":4,"very hard":5,"evil":5})(item.difficulty||""),
 						"N":N,
-						"T":item.legend||name
+						"T":name,
+						"U":JoinPath(v.SITE(),"kudamono")
 					},params);
+					params=FilterValuesObject(params,Identity);
 				var url=PageReSearch(url,params);
 			}else
 				var url=PageReFragment(url,key);
