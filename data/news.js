@@ -751,7 +751,23 @@ NewsSources={
 		Transformer:function(item,key){
 			var number=UnAfterfix(key,"-");
 			var title=`${number}# Kudamono`;
-			var link=AHTML("Puzzle #"+number,"kudamono.html#"+key);
+			var board=item.board;
+			var url="kudamono.html";
+			var N=UnAfterfix(key,"-");
+			var name=UnPrefix(key,N+"-");
+			if(board){
+				var params=SearchParameters(board);
+					delete params["S"];
+					params=Merge(
+						{"A":v.NAME(),
+						"D":item.date,
+						"N":N,
+						"T":item.legend||name
+					},params);
+				var url=PageReSearch(url,params);
+			}else
+				var url=PageReFragment(url,key);
+			var link=AHTML("Puzzle #"+number,url)
 
 			return {
 				DATE:item.date,
