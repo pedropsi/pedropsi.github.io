@@ -192,11 +192,15 @@ NavbarItems=[
 	"store"];
 
 NavLinkHTML=function(link){
-	return `<a href="${IsString(link)?link+".html":link.LINK}" class="nav-link">${IsString(link)?Access(link,"TITLE"):link.NAME}</a>`
+	return AnchorHTML(
+		IsString(link)?Access(link,"TITLE"):link.NAME,
+		IsString(link)?link+".html":link.LINK,
+		{class:"nav-link"}
+	);
 }
 
 NightModeButton=function(){
-	return `<div class="nav-link" id="NightMode" onclick='ToggleNightMode()'>${ObtainSymbol("moon")}</div>`
+	return `<div class="nav-link selectable" id="NightMode" onclick='ToggleNightMode()'>${ObtainSymbol("moon")}</div>`
 }
 
 NavbarHTML=function(){

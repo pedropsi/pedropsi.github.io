@@ -259,16 +259,14 @@ function GameBarCancelTypewriterBanner(action){
 function GameBarButtonHTML(action,attribs){
 	var TWB=GameBarTypewriterBanner(action);
 	var UnTWB=GameBarCancelTypewriterBanner(action);
-	return ButtonHTML({
-		txt:ObtainSymbol(action),
-		attributes:FuseObjects(attribs,{
+	return ButtonHTML(FuseObjects(attribs,{
+			txt:ObtainSymbol(action),
 			onmouseover:TWB,
 			onfocus:TWB,
 			onmouseout:UnTWB,
 			onblur:UnTWB,
 			id:Capitalise(action)+'Button'
-		})
-	});
+		}));
 }
 
 function GameBarButtonLinkHTML(title,action){
@@ -356,7 +354,10 @@ function LevelSelectorAllowed(){
 
 function LevelselectorButton(){
 	if(LevelSelectorAllowed())
-		return ButtonHTML({txt:"Level selector",attributes:{onclick:'RequestLevelSelector();',id:"LevelselectorButton"}});
+		return ButtonHTML({
+			txt:"Level selector",
+			onclick:'RequestLevelSelector();',
+			id:"LevelselectorButton"});
 	else
 		return "";
 }

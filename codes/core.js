@@ -3503,13 +3503,16 @@ ScrollInto=function(elementIDsel){
 
 AttributesHTML=function(opts){
 	var opts=opts||{};
+	delete opts["tag"];
+	delete opts["txt"];
 	return Keys(opts).map(k=>`${k}='${opts[k]}'`).join(" ");
 }
 
 ElementHTML=function(opts){
 	var tag=opts.tag?opts.tag:"div";
-	var attribs=AttributesHTML(opts.attributes||{});
 	var txt=opts.txt?opts.txt:"";
+	
+	var attribs=AttributesHTML(opts);
 	var start=`<${tag} ${attribs}>`
 	var end=`</${tag}>`
 	if(opts.single)
@@ -3594,28 +3597,24 @@ HTMLIder=function(id){
 	}
 }
 
-ButtonHTML=function(optionsObj){
-	var o=optionsObj?optionsObj:{};
-	o.tag=o.tag?o.tag:"div";			//defaults to div
-	if(!o.attributes)
-		o.attributes={class:"button"}
-	else if(!o.attributes['class'])
-		o.attributes['class']="button";
-	else
-		o.attributes['class']=Posfix(o.attributes['class']," button");
-	o.txt=o.txt?o.txt:"???";
-
-	var ao=o.attributes['onclick'];
-	o.attributes['onclick']="PulseSelect(this);"+(ao?ao:"");
-
-	//Context Menu and Select prevention
-	o.attributes['oncontextmenu']="(function(e){e.preventDefault()})(event);";
-	o.attributes['unselectable']="on";
-	o.attributes['onselectstart']="return false;";
-
-	o.attributes['tabindex']="0";
-
-	return ElementHTML(o);
+ButtonHTML=function(attribs){
+	var overwritableAttribs={
+		tag:"div",
+		txt:"???",
+		//Context Menu and Select prevention
+		oncontextmenu:"(function(e){e.preventDefault()})(event);",
+		unselectable:"on",
+		onselectstart:"return false;",
+		tabindex:"0",
+		//Pulse
+	}
+	var joinableAttribs={
+		class:"button selectable ",
+		onclick:"PulseSelect(this); "
+	}
+	var mergedAttribs=Join(joinableAttribs,Merge(overwritableAttribs,attribs));
+	Wbug(attribs,mergedAttribs)
+	return ElementHTML(mergedAttribs);
 };
 
 //Links 
@@ -3626,7 +3625,8 @@ AnchorHTML=function(content,ref,attribs){
 		attribs["rel"]="noreferrer noopener";
 	if(OuterLinked(ref))
 		attribs.class=Posfix(attribs.class||""," outerlink");
-	return ElementHTML({tag:"a",txt:content,attributes:attribs});
+	attribs.class=Posfix(attribs.class||""," selectable");
+	return ElementHTML(Merge(attribs,{tag:"a",txt:content}));
 }
 
 InnerAHTML=function(title,ref,attribs,header){
@@ -3699,7 +3699,11 @@ var Labels={
 L=LabelHTML;
 
 ScrollUpHTML=function(){
-	return ButtonHTML({txt:ObtainSymbol("scroll-up"),attributes:{class:"scrollTop",onclick:"window.scrollTo(0,0)"}});
+	return ButtonHTML({
+		txt:ObtainSymbol("scroll-up"),
+		class:"scrollTop",
+		onclick:"window.scrollTo(0,0)"
+	});
 }
 
 ViewCounterHTML=function(){
@@ -3816,12 +3820,12 @@ SectionHTML=function(SettingsObj){
 // Basic Buttons
 
 ButtonOnClickHTML=function(title,onclicktxt){
-	return ButtonHTML({txt:title,attributes:{onclick:onclicktxt}});
+	return ButtonHTML({txt:title,onclick:onclicktxt});
 }
 
 
 CloseButtonHTML=function(targetid){
-	return "<div class='closer'>"+ButtonHTML({tag:"span",txt:"&times;",attributes:{onclick:'CloseCurrentDatapack();CloseWindow(this);'}})+"</div>";
+	return "<div class='closer'>"+ButtonHTML({tag:"span",txt:"&times;",onclick:'CloseCurrentDatapack();CloseWindow(this);'})+"</div>";
 }
 
 OkButtonHTML=function(targetid){
@@ -4101,16 +4105,19 @@ ExclusiveChoiceButtonHTML=function(choice,dataField,i){
 		buAttribs=FuseObjects(buAttribs,{class:"selected",onload:SetF});
 		SetData(dataField.qfield,choice,dataField.pid);//Actualy choose it
 	}
-
-	return ButtonHTML({txt:dataField.qchoicesViewF(choice),attributes:buAttribs});
+	buAttribs.txt=dataField.qchoicesViewF(choice);
+	return ButtonHTML(buAttribs);
 };
 
 MultiChoiceButtonHTML=function(choice,dataField,i){
 		var args='(\''+dataField.qfield+'\',\''+choice+'\',\''+dataField.pid+'\')';
 		var SelectF='ToggleThis(event,this);ToggleData'+args;
-		var buAttribs={'onclick':SelectF,'onfocus':SelectF,id:"choice-"+choice};
-
-		return ButtonHTML({txt:dataField.qchoicesViewF(choice),attributes:buAttribs});
+		var buAttribs={
+			'onclick':SelectF,
+			'onfocus':SelectF,
+			id:"choice-"+choice,
+			txt:dataField.qchoicesViewF(choice)};
+		return ButtonHTML(buAttribs);
 	};
 
 ChoiceRowHTML=function(dataField,buttontype){
@@ -4292,8 +4299,8 @@ KeyboardButtonHTML=function(choice,dataFiel,i){
 		'ontouchend':Stop,
 		'ontouchcancel':Stop,
 		id:ID};
-
-	return ButtonHTML({txt:dataFiel.qchoicesViewF(choice),attributes:buAttribs});
+	buAttribs.txt=dataFiel.qchoicesViewF(choice);
+	return ButtonHTML(buAttribs);
 };
 
 FadeSelect=function(targetIDsel){
@@ -6905,7 +6912,7 @@ TogglerButtonHTML=function(StatusReporterName,StatusChangerName){
 
 	var status=ButtonHTML({
 		txt:globalThis[StatusReporterName]()?"active":"inactive",
-		attributes:{href:"",onclick:'Toggler("'+StatusReporterName+'","'+StatusChangerName+'")()',class:"inline"}
+		href:"",onclick:'Toggler("'+StatusReporterName+'","'+StatusChangerName+'")()',class:"inline"
 	});
 	
 	return DynamicText(StatusReporterName,status);

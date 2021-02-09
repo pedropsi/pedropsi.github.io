@@ -2,11 +2,17 @@
 //Sound loading
 
 SoundHTML=function(sourcepath,data,id){
-	return ElementHTML({
+	var data=data?Datafy(data):{};
+	var defaults={
 		tag:"audio",
 		txt:" ",
-		attributes:FuseObjects({'class':'sound',type:'audio/mpeg',preload:'auto','src':sourcepath,'id':(id?id:KebabCaseString(sourcepath))},data?Datafy(data):{})
-	});
+		'class':'sound',
+		type:'audio/mpeg',
+		preload:'auto',
+		'src':sourcepath,
+		'id':(id?id:KebabCaseString(sourcepath))
+	};
+	return ElementHTML(Merge(defaults,data));
 }
 
 LoadSound=function(soundpath,data,id,parentElement){

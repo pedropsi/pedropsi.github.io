@@ -63,10 +63,10 @@ HintImageHTML=function(opts){
 HintImage=function(fullpath){
 	if(IsGif(fullpath)){
 		gifID=GenerateId();
-		loaded=HintImageHTML({attributes:{id:gifID,src:fullpath,onload:'StartGIF('+gifID+')',tabindex:'0',class:"gif"}});
+		loaded=HintImageHTML({id:gifID,src:fullpath,onload:'StartGIF('+gifID+')',tabindex:'0',class:"gif"});
 	}
 	else
-		loaded=HintImageHTML({attributes:{src:fullpath}});
+		loaded=HintImageHTML({src:fullpath});
 	
 	return `<div class='hint'>${loaded}</div>`;
 }

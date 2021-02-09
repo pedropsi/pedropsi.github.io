@@ -294,7 +294,7 @@ function GameEntryData(dataline){
 function EditButtonTD(id){
 	var bu=ButtonHTML({
 		txt:ObtainSymbol("edit"),
-		attributes:{onclick:"RequestPGDSubmission(\""+id+"\",true);"}});
+		onclick:"RequestPGDSubmission(\""+id+"\",true);"});
 	return "<td class='editTD'>"+bu+"</td>";
 };
 
@@ -369,7 +369,8 @@ function GameDropDownButtonHTML(id,showauthor){
 		var author="";
 	return ButtonHTML({
 		txt:(title+author),
-		attributes:{class:"drop-option",onclick:'Navigate(\"'+data["playlink"]+'\")'}
+		class:"drop-option",
+		onclick:'Navigate(\"'+data["playlink"]+'\")'
 	});
 }
 
