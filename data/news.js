@@ -724,6 +724,44 @@ ImportNewsObject=function(newsObj){
 	LoadHTMLObject(newsObj,AddNews);	
 }
 
+PuzzleLinker=function(puzzle){
+	var puzzle=LowerCase(puzzle);
+	return function(item,key){
+		var number=UnAfterfix(key,"-");
+		var title=`${number}# `+Capitalise(puzzle);
+		var board=item.board;
+		var url=puzzle+".html";
+		var N=UnAfterfix(key,"-");
+		var name=UnPrefix(key,N+"-");
+			name=item.legend||name;
+			if(name=puzzle)
+				name="";
+		if(board){
+			var params=SearchParameters(board);
+				delete params["S"];
+				params=Merge(
+					{"A":v.NAME(),
+					"D":item.date,
+					"F":Accesser({"very easy":1,"easy":2,"medium":3,"hard":4,"very hard":5,"evil":5})(item.difficulty||""),
+					"N":N,
+					"T":name,
+					"U":JoinPath(v.SITE(),puzzle)
+				},params);
+				params=FilterValuesObject(params,Identity);
+			var url=PageReSearch(url,params);
+		}else
+			var url=PageReFragment(url,key);
+		var link=AHTML("Puzzle #"+number,url)
+
+		return {
+			DATE:item.date,
+			HEADER:title,
+			PIECE:`
+			<p> ${link}, from the ${AHTML(Capitalise(puzzle)+" collection",url)}, now released.</p>`
+		}
+	}
+}
+
 NewsSources={
 	starbattle:{
 		name:"starbattlesData",
@@ -748,40 +786,7 @@ NewsSources={
 	kudamono:{
 		name:"kudamonosData",
 		source:"https://pedropsi.github.io/kudamono.html",
-		Transformer:function(item,key){
-			var number=UnAfterfix(key,"-");
-			var title=`${number}# Kudamono`;
-			var board=item.board;
-			var url="kudamono.html";
-			var N=UnAfterfix(key,"-");
-			var name=UnPrefix(key,N+"-");
-				name=item.legend||name;
-				if(name="kudamono")
-					name="";
-			if(board){
-				var params=SearchParameters(board);
-					delete params["S"];
-					params=Merge(
-						{"A":v.NAME(),
-						"D":item.date,
-						"F":Accesser({"very easy":1,"easy":2,"medium":3,"hard":4,"very hard":5,"evil":5})(item.difficulty||""),
-						"N":N,
-						"T":name,
-						"U":JoinPath(v.SITE(),"kudamono")
-					},params);
-					params=FilterValuesObject(params,Identity);
-				var url=PageReSearch(url,params);
-			}else
-				var url=PageReFragment(url,key);
-			var link=AHTML("Puzzle #"+number,url)
-
-			return {
-				DATE:item.date,
-				HEADER:title,
-				PIECE:`
-				<p> ${link}, from the ${AHTML("kudamono collection","kudamono.html")}, now released.</p>`
-			}
-		}
+		Transformer:PuzzleLinker("kudamono")
 	}
 }
 
