@@ -182,7 +182,7 @@ MUSIC_KEY					:	()=>	`<kbd>M</kbd>`,
 
 
 CREDITS						:	()=>	`<h2>Credits</h2>${v.CREDITS_AUTHORSHIP()}${v.CREDITS_MUSIC()}${v.CREDITS_ENGINE_SUPPORT()}`,
-CREDITS_AUTHORSHIP			:	()=>	`<p><a href="${v.LINK_URL()}.html">${v.TITLE_BOLD()}</a> by ${v.NAME_YEAR()}.</p>`,
+CREDITS_AUTHORSHIP			:	()=>	`<p><b>${AnchorHTML(v.TITLE(),v.LINK_URL()+".html")}</b> by ${v.NAME_YEAR()}.</p>`,
 CREDITS_MUSIC				:	()=>	MusicCreditsHTML(v.LINK()),
 CREDITS_ENGINE_SUPPORT		:	()=>	`<h3>Game Engine</h3><p>Made with ${v.A_PUZZLESCRIPT()} and ${A("game-bar")}!</p>${v.SOURCE_TEXT()}`,
 CREDITS_ENGINE_VANILLA		:	()=>	`<p>Made with vanilla JS and CSS, including ${A("game-bar")}!</p>`,

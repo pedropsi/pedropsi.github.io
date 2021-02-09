@@ -74,12 +74,13 @@ Keys(CMS).map(l=>CMS[l].LINK=()=>l);
 
 PageLabelsHTML=function(page){
 	var tags=page.TAGS?page.TAGS():[];
-	var time=`
-		<time datetime="${page.DATE()}">
-			${StringDateName(page.DATE())}
+	var date=Evaluate(page.DATE);
+	var time=date?`
+		<time datetime="${date}">
+			${StringDateName(date)}
 		</time>
-	`;
-	var date=!page.DATE?"":AnchorHTML(time,"posts.html",{"class":"tag button selectable"});
+	`:"";
+	date=!date?"":AnchorHTML(time,"posts.html",{"class":"tag button selectable"});
 
 	return `
 	<div class="tags buttonrow">
