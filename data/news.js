@@ -745,6 +745,7 @@ PuzzleLinker=function(puzzle){
 					"F":Accesser({"very easy":1,"easy":2,"medium":3,"hard":4,"very hard":5,"evil":5})(item.difficulty||""),
 					"N":N,
 					"T":name,
+					"K":item.thanks?(item.thanks.join(",")):"",
 					"U":JoinPath(v.SITE(),puzzle)
 				},params);
 				params=FilterValuesObject(params,Identity);
