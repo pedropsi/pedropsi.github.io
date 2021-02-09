@@ -3624,7 +3624,6 @@ AnchorHTML=function(content,ref,attribs){
 		attribs["href"]=ref;
 	if(Prefixed(ref,"http"))
 		attribs["rel"]="noreferrer noopener";
-	Wbug(ref,OuterLinked(ref));
 	if(OuterLinked(ref))
 		content=content+ObtainSymbol("link-outer");
 	return ElementHTML({tag:"a",txt:content,attributes:attribs});
