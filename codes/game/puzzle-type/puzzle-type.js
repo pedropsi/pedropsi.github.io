@@ -1539,6 +1539,7 @@ function Magnetism(L){
 			letters[south]=letters[south-1];
 			letters[south-1]="S";
 		}
+		Letters(letters)
 	}
 
 }
