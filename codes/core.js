@@ -2352,14 +2352,40 @@ OwnLinked=function(url){
 	return PageDomain(url)===PageDomain();
 }
 FragmentLinked=function(url){
-	return PageFragment(url)&&PageUnFragment(url)==="";
+	return !!(PageFragment(url)&&PageUnFragment(url)==="");
+/***
+Just fragment
+FragmentLinked("#Section")
+true
+
+No fragment, domain
+FragmentLinked("www.xx.yyy")
+false
+
+No fragment, parameter
+FragmentLinked("?what=1")
+false
+***/
 }
 
 InnerLinked=function(url){
-	return !FragmentLinked(url)&&(LocalLinked(url)||OwnLinked(url));
+	return LocalLinked(url)||OwnLinked(url)||!PageDomain(url);
+/***
+Inner links with fragment
+InnerLinked("page.html#Section")
+true
+
+Inner links, simple
+InnerLinked("page.html")
+true
+
+Inner links, parameters
+InnerLinked("?p=1")
+true
+***/
 }
 OuterLinked=function(url){
-	return !FragmentLinked(url)&&!(LocalLinked(url)||OwnLinked(url));
+	return !InnerLinked(url);
 }
 
 ShallowableLinked=function(url){
@@ -3592,38 +3618,47 @@ ButtonHTML=function(optionsObj){
 	return ElementHTML(o);
 };
 
-FragmentAHTML=function(title,ref,attribs){
-	var attribs=attribs||{};
-	var title=UnPrefix(title,"#");
-		attribs.class=(attribs.class||"")+" innerlink";
-	return HeaderAHTML(title,ref,attribs); //self-anchors
-}
-
-InnerAHTML=function(title,ref,attribs){
-	var attribs=attribs||{};
-	var title=UnPrefix(title,"#");
-		attribs.class=(attribs.class||"")+" innerlink";
-	return AnchorHTML(title,ref,attribs)
-}
-
-HeaderAHTML=function(title,page,attribs){
-	var page=PageUnFragment(page);
-	var fragment=IndexCaseString(title);
-	var attribs=attribs||{};
-	if(fragment){
-		fragment=Prefix(fragment,"#");
-		attribs.onclick=`ScrollInto("${fragment}")`
-	}
-	return AHTML(title,page+fragment,attribs);
-}
-
+//Links 
 AnchorHTML=function(content,ref,attribs){
 	var attribs=attribs||{};
 		attribs["href"]=ref;
 	if(Prefixed(ref,"http"))
 		attribs["rel"]="noreferrer noopener";
-
+	Wbug(ref,OuterLinked(ref));
+	if(OuterLinked(ref))
+		content=content+ObtainSymbol("link-outer");
 	return ElementHTML({tag:"a",txt:content,attributes:attribs});
+}
+
+InnerAHTML=function(title,ref,attribs,header){
+	var attribs=attribs||{};
+	var title=UnPrefix(title,"#");
+	if(!header)
+		attribs.class=(attribs.class||"")+" innerlink";
+	var fragment=PageFragment(ref);
+	if(fragment){
+		fragment=Prefix(fragment,"#");
+		attribs.onclick=`ScrollInto("${fragment}")`;
+		return AnchorHTML(title,fragment,attribs)
+	}
+	else{
+		attribs.class=UnPosfix(attribs.class," innerlink");
+		return AnchorHTML(title,ref,attribs);
+	}
+}
+
+
+HeaderAHTML=function(title,page,attribs){
+	var page=PageUnFragment(page);
+	var fragment=Prefix(IndexCaseString(title),"#");
+	return InnerAHTML(title,page+fragment,attribs,true);
+}
+
+FragmentAHTML=function(title,ref,attribs){
+	var attribs=attribs||{};
+	var title=UnPrefix(title,"#");
+		attribs.class=(attribs.class||"")+" innerlink";
+	return HeaderAHTML(title,ref,attribs); //self-anchors
 }
 
 AHTML=function(title,ref,attribs){
@@ -6362,6 +6397,7 @@ var Icons={
 	"structure":{path:"M 10 12 L 13 2 L 16 12 L 17 22 L 20 17 L 24 24 L 22 24 L 20 20 L 18 24 L 16 24 L 15 21 L 13 19 L 11 21 L 10 24 L 8 24 L 6 20 L 4 24 L 2 24 L 6 17 L 9 22 Z M 13 5 L 11 12 L 15 12 Z M 13 15 L 16 19 L 15 14 L 11 14 L 10 19 Z",vbmax:"25 25"},
 
 	"play":{path:"M 1 1 L 3 2 L 1 3 Z",vbmax:"4 4"},
+	"link-outer":{path:"M 0 1 L 2 1 L 2 2 L 1 2 L 1 3 L 0 3 Z M 8 0 L 7 1 L 9 1 L 6 5 L 6 5 L 10 2 L 10 4 L 11 3 L 11 0 Z M 10 9 L 10 11 L 8 11 L 8 10 L 9 10 L 9 9 Z M 0 9 L 1 9 L 1 10 L 2 10 L 2 11 L 0 11 Z",vbmax:"15 15"},
 
 	"body-arm-left-down":{path:"M 5 7 L 5 3 Q 3 3 2 4 Q 1 5 1 6 Q 1 8 3 5 Q 3 7 4 7 Z",vbmax:"10 10"},
 	"body-arm-left-up":{path:"M 5 7 L 5 3 Q 4 3 3 3 Q 1 0 1 2 Q 1 3 3 5 Q 3 7 4 7 Z",vbmax:"10 10"},
