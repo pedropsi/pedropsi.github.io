@@ -1861,27 +1861,25 @@ EscapeTokens=function(tokenString){
 // UnAfterfix	# 		a     
 // UnBeforfix	# 		     d
 
-
-
-UnPrefix=function(word,prefix){
+UnFixer=function(word,sfix,befor,after,flags){
+	if(typeof flags==="undefined")
+		var flags="sig";
 	if(!word)
 		var word="";
-	if(!prefix)
+	if(!sfix)
 		return word;
-	if(!IsArray(prefix))
-		var prefix=[prefix];
-	var prefixFind=new RegExp("^(("+prefix.map(EscapeTokens).join(")|(")+"))+");
-	return word.replace(prefixFind,"");
+	if(!IsArray(sfix))
+		var sfix=[sfix];
+	var pattern=new RegExp(befor+"(("+sfix.map(EscapeTokens).join(")|(")+"))+"+after,flags);
+	return word.replace(pattern,"");
 }
-UnPosfix=function(word,suffix){ //suffix
-	if(!word)
-		var word="";
-	if(!suffix)
-		return word;
-	if(!IsArray(suffix))
-		var suffix=[suffix];
-	var suffixFind=new RegExp("(("+suffix.map(EscapeTokens).join(")|(")+"))+$");
-	return word.replace(suffixFind,"");
+
+UnPrefix=function(word,prefix,flags){
+	return UnFixer(word,prefix,"^","",flags);
+}
+
+UnPosfix=function(word,suffix,flags){
+	return UnFixer(word,suffix,"","$",flags);
 /***
 Repeating sequence
 UnPosfix("What !!!?!?.?.?.?",".?")
@@ -1950,24 +1948,12 @@ UnOnceBeforfix=function(word,prefix){
 	var prefixFind=new RegExp(".*"+EscapeTokens(prefix));
 	return word.replace(prefixFind,"");
 }
-UnBeforfix=function(word,prefix){
-	if(!word)
-		var word="";
-	if(!prefix)
-		return word;
-	if(IsArray(prefix))
-		return Fold(UnOnceBeforfix,word,prefix);
-	else
-		return UnOnceBeforfix(word,prefix);
+UnBeforfix=function(word,prefix,flags){
+	return UnFixer(word,prefix,"^.*","",flags);
 }
 
-UnAfterfix=function(word,posfix){
-	if(!word)
-		var word="";
-	if(!posfix)
-		return word;
-	var posfixFind=new RegExp(EscapeTokens(posfix)+".*");
-	return word.replace(posfixFind,"");
+UnAfterfix=function(word,suffix,flags){
+	return UnFixer(word,suffix,"",".*$",flags);
 }
 
 Afterfix=function(word,posfix){
