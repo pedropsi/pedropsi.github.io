@@ -348,7 +348,7 @@ var BlankState={
 		scale:0.95,							//fruit scale (how large)
 		nudge:0.3,							//fruit nudge (small adjustments to position)
 		dual:false,							//disalign squares and grid
-		scaleGrid:0.75,						//reduce the grid size
+		scaleGrid:0.70,						//reduce the grid size
 		offsetX:0,							//displace the grid horizontally
 		offsetY:1.15						//displace the grid verticallly
 	},
