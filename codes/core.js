@@ -3625,7 +3625,7 @@ AnchorHTML=function(content,ref,attribs){
 	if(Prefixed(ref,"http"))
 		attribs["rel"]="noreferrer noopener";
 	if(OuterLinked(ref))
-		content=content+ObtainSymbol("link-outer");
+		attribs.class=Posfix(attribs.class||""," outerlink");
 	return ElementHTML({tag:"a",txt:content,attributes:attribs});
 }
 

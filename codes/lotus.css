@@ -377,6 +377,12 @@ nav{
 	cursor: help !important;
 }
 
+
+.text a.outerlink{
+	text-decoration-color:var(--blue);
+	text-decoration-style:dotted;
+}
+
 .text a, .footer a{
 	color:inherit;
 	text-decoration-line:underline;
