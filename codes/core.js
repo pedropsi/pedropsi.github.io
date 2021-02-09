@@ -3613,7 +3613,6 @@ ButtonHTML=function(attribs){
 		onclick:"PulseSelect(this); "
 	}
 	var mergedAttribs=Join(joinableAttribs,Merge(overwritableAttribs,attribs));
-	Wbug(attribs,mergedAttribs)
 	return ElementHTML(mergedAttribs);
 };
 
