@@ -2305,9 +2305,19 @@ PageSearch=function(parameter,page){
 	return decodeURI(id.replace(/\&.*/,""));
 }
 
-PageSearchObject=function(page){
+PageSearchParameters=function(page){
+	return SearchParameters(PageSearch(page));
+/***
+Read Parameters Object from page
+PageSearchParameters("www.xxx.yyy?b=a&a=2")
+{b:"a",a:"2"}
+
+***/
+}
+
+SearchParameters=function(searchString){
 	var searchObj={};
-	UnPrefix(PageSearch(page),"?").split("&").map(parval=>searchObj[UnAfterfix(parval,"=")]=UnBeforfix(parval,"="));
+	UnPrefix(searchString,"?").split("&").map(parval=>searchObj[UnAfterfix(parval,"=")]=UnBeforfix(parval,"="));
 	return searchObj;
 }
 
