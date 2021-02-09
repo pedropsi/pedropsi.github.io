@@ -200,7 +200,7 @@ ImageCardHTML=function(ImageObj){
 		${LazyImageHTML(ImageObj)}
 	</div>
 	`;
-	return AHTML(cardTop,link,{target:target,id:id,class:"card-supra"})+legend;
+	return AHTML(cardTop,link,{target:target,id:id,class:"card-supra underborderable"})+legend;
 }
 
 LaunchImageModal=function(subfolder,title){

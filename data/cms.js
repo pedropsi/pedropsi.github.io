@@ -74,13 +74,13 @@ Keys(CMS).map(l=>CMS[l].LINK=()=>l);
 
 PageLabelsHTML=function(page){
 	var tags=page.TAGS?page.TAGS():[];
-	var date=!page.DATE?"":`
-		<a class="tag button" href="posts.html">
-			<time datetime="${page.DATE()}">
-				${StringDateName(page.DATE())}
-			</time>
-		</a>`
-	
+	var time=`
+		<time datetime="${page.DATE()}">
+			${StringDateName(page.DATE())}
+		</time>
+	`;
+	var date=!page.DATE?"":AnchorHTML(time,"posts.html",{"class":"tag button selectable"});
+
 	return `
 	<div class="tags buttonrow">
 		${date}
@@ -173,33 +173,35 @@ PageCardHTML=function(page){
 	var id=GenerateId();
 	LazyImageLoader(id,path);
 	
-	return`
-	<a href="${page.LINK()}.html" class="card-supra">
+	var card=`
 		<div class="card">
 			<h3>${page.TITLE()}</h3>
-				<img id="${id}" class="image" width="${size}" height="${size}" alt="${page.IMAGE_ALT(page)}" title="${page.IMAGE_ALT(page)}" loading="lazy"/>
-		</div>
-	</a>`;
+			<img id="${id}" class="image" width="${size}" height="${size}" alt="${page.IMAGE_ALT(page)}" title="${page.IMAGE_ALT(page)}" loading="lazy"/>
+		</div>`;
+
+	return AnchorHTML(card,page.LINK()+".html",{"class":"card-supra underborderable"});
 }
 
 MiniCardHTML=function(page){
 	var page=Merge(v,page);
+
 	var size=180;
 	var path=ImagePath(page.IMAGE_NAME(page),page.IMAGE_EXT(),size);
 	var id=GenerateId();
 	LazyImageLoader(id,path);
+	var img=`<img id=${id} class="image" width="${size}" height="${size}" alt="${page.IMAGE_ALT(page)}" title="${page.IMAGE_ALT(page)}" loading="lazy"/>`;
+		img=AnchorHTML(img,link)
 
+	var link=page.LINK()+".html";
+	var title=AnchorHTML(`<h3>${page.TITLE()}</h3>`,link);
+	
 	return`
-	<div class="mini">
+	<div class="mini selectable underborderable">
 		<div>
-			<a href="${page.LINK()}.html">
-				<h3>${page.TITLE()}</h3>
-			</a>
+			${title}
 			${PageLabelsHTML(page)}
 		</div>
-		<a href="${page.LINK()}.html">
-			<img id=${id} class="image" width="${size}" height="${size}" alt="${page.IMAGE_ALT(page)}" title="${page.IMAGE_ALT(page)}" loading="lazy"/>
-		</a>
+		${img}
 	</div>`;
 }
 

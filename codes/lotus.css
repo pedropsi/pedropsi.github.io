@@ -192,12 +192,6 @@ body{
 	flex-direction:column;/*Fix for overlapping layout issues*/
 }
 
-@media only screen and (max-width:250px){
-	.avatar{
-		display:none;
-	}
-} 
-
 
 div{
 	max-width:100%;
@@ -341,13 +335,7 @@ nav{
 	flex-grow:1;
 }
 
-.card-supra:hover ,
-.card-supra:active,
-.card-supra:focus{
-	background-color:var(--darkblue);
-	transition-duration:var(--durationOn);
-	border-bottom-color:var(--turquoise); 
-}
+
 
 .card-supra .image{
 	opacity:0.5;
@@ -396,29 +384,17 @@ nav{
 	text-decoration:unset;
 }
 
-
-.button:hover	a,
-.button:active a,
-.button:focus	a,
 .selectable:hover ,
 .selectable:active,
 .selectable:focus ,
-a.selected,
-.mini:hover	.tag,
-.mini:active .tag,
-.mini:focus	.tag,
-.mini:hover	h3,
-.mini:active h3,
-.mini:focus	h3,
-.mini:hover ,
-.mini:active,
-.mini:focus ,
-.card-supra:hover .image,
-.card-supra:focus .image,
-.card-supra:active .image,
-.mini:hover .image,
-.mini:focus .image,
-.mini:active .image,
+.selectable:hover .selectable,
+.selectable:active .selectable,
+.selectable:focus .selectable,
+.selectable:hover .image,
+.selectable:focus .image,
+.selectable:active .image,
+.selectable.selected,
+.selected .selectable,
 .selected{
 	color:var(--turquoise);
 	text-decoration-color:currentColor;
@@ -432,30 +408,17 @@ a.selected,
 	border-color: var(--darkblue);
 }
 
-.card-supra:hover .image,
-.card-supra:focus .image,
-.card-supra:active .image,
-.mini:hover .image,
-.mini:focus .image,
-.mini:active .image{
+.selectable:hover .image,
+.selectable:focus .image,
+.selectable:active .image{
 	opacity: unset;
 	filter: var(--normalfilter);
 }
 
-.mini .tag:hover{
-	background-color:var(--white);
-	color:var(--darkblue);
-	transition-duration:var(--durationOn);
-	cursor:pointer;
-}
-
-.nav-link:hover{text-decoration-line:none;}
-.nav-link{text-decoration-line:none;}
-
-a div:hover .image{
-	background-color:var(--lightyellow);
-	transition-duration:var(--durationOff);
-	cursor:pointer;
+.underborderable:hover ,
+.underborderable:active,
+.underborderable:focus{
+	border-bottom-color:var(--turquoise); 
 }
 
 /* Indices and Headings */
@@ -1111,11 +1074,6 @@ video{
 	align-items:center;
 	overflow-y: auto;
 	scrollbar-width: thin;
-}
-
-.baloon-content .avatar{
-	max-width:calc(var(--w4) + 30px);
-	background-color:transparent;
 }
 
 .baloon-content .subtitle{

@@ -3609,7 +3609,7 @@ ButtonHTML=function(attribs){
 		//Pulse
 	}
 	var joinableAttribs={
-		class:"button selectable ",
+		class:"button selectable underborderable ",
 		onclick:"PulseSelect(this); "
 	}
 	var mergedAttribs=Join(joinableAttribs,Merge(overwritableAttribs,attribs));
