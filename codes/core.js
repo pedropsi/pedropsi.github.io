@@ -2042,7 +2042,7 @@ StripHTML=function(string){
 
 
 //Shortening
-ShortenString=function(string,maxchars,stoppers){
+ShortenSentence=function(string,maxchars,stoppers){
 	if(!string)
 		return "";
 	else{
@@ -2061,6 +2061,28 @@ ShortenString=function(string,maxchars,stoppers){
 			return string+"...";
 		}
 	}
+/***
+Below limit
+ShortenSentence("1234567890",20)
+"1234567890"
+
+Exactly at limit
+ShortenSentence("1234567890",10)
+"1234567890"
+
+Limit below 3 characters
+ShortenSentence("1234567890",2)
+"..."
+
+Limit at end of word
+ShortenSentence("That was fantastic!",11)
+"That was..."
+
+Limit inside word
+ShortenSentence("That was fantastic!",10)
+"That..."
+
+***/
 }
 
 DescriptionString=function(html,maxchars){
@@ -2068,7 +2090,7 @@ DescriptionString=function(html,maxchars){
 		text=UnquoteString(text);
 		text=SpacedString(text).replaceAll(/\s([\.\,\!\?])+/ig,"$1");
 		text=TrimWhitespaceString(text);
-	return ShortenString(text,maxchars," ");
+	return ShortenSentence(text,maxchars," ");
 }
 
 //Sentence making
