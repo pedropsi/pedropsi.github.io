@@ -91,7 +91,7 @@ PageLabelsHTML=function(page){
 }
 
 TagLabelHTML=function(tag){
-	return `<a class="tag button" href="tag.html?search=${tag}">${tag}</a>`
+	return AHTML(tag,"tag.html?search="+tag,{"class":"tag button"});
 }
 
 
