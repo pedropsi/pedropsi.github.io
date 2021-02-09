@@ -2294,7 +2294,7 @@ CanvasResize=function(state){
 ObtainStartingLevelState=function(){
 	var state=Clone(BlankState);
 	if(PageSearch("W")||PageSearch("H"))
-		state=SerialState(PageSearchObject(),state);		
+		state=SerialState(PageSearchParameters(),state);		
 	return state;
 }
 
