@@ -1868,24 +1868,33 @@ UnPrefix=function(word,prefix){
 		var word="";
 	if(!prefix)
 		return word;
-	var prefixFind=new RegExp("^"+EscapeTokens(prefix));
-	return FixedPoint(
-		word=>word.replace(prefixFind,""),
-		word
-	)
-		//StringReplace(word,[prefixFind,""]);
+	if(!IsArray(prefix))
+		var prefix=[prefix];
+	var prefixFind=new RegExp("^(("+prefix.map(EscapeTokens).join(")|(")+"))+");
+	return word.replace(prefixFind,"");
 }
 UnPosfix=function(word,suffix){ //suffix
 	if(!word)
 		var word="";
 	if(!suffix)
 		return word;
-	var suffixFind=new RegExp(EscapeTokens(suffix)+"$");
-	return FixedPoint(
-		word=>word.replace(suffixFind,""),
-		word
-	)
-		//StringReplace(word,[suffixFind,""]);
+	if(!IsArray(suffix))
+		var suffix=[suffix];
+	var suffixFind=new RegExp("(("+suffix.map(EscapeTokens).join(")|(")+"))+$");
+	return word.replace(suffixFind,"");
+/***
+Repeating sequence
+UnPosfix("What !!!?!?.?.?.?",".?")
+"What !!!?!?"
+
+Must be at end
+UnPosfix("What !!!?!?.?.?.?","?.")
+"What !!!?!?.?.?.?"
+
+Any order
+UnPosfix("What !!!?!?.?.?.?",[".","?","!"])
+"What "
+***/
 }
 Prefix=function(word,prefix){
 	if(!word)
