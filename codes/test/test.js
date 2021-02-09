@@ -488,18 +488,6 @@ SaveTest(PageSearch,["source","https://pedropsi.github.io/anypage.html"],"","no 
 SaveTest(PageSearch,["source","https://pedropsi.github.io/anypage.html&y=z"],"","no wanted string (absent)");
 SaveTest(PageSearch,["source","https://pedropsi.github.io/puzzle-type?source=homepage&result=success"],"homepage","no wanted string (absent)");
 
-//SECONDARY
-
-
-// SaveTest(FromUTF8,"%20"," ","single character");
-// SaveTeest(FromUTF8,"%20"," ","single character");
-// SaveTest(FromUTF8,"%20%21"," !","multiple characters");
-
-
-//Glocal Files
-
-///////////////////////////////////////////////////////////////////////////////
-//Page traversal
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -510,50 +498,6 @@ SaveTest(KebabCaseString,"     How      to    play      ","How-to-play","trailin
 SaveTest(KebabCaseString,"|!\/!How\"#$%&/()=@£§€{[]}'to+*¨¨´´``~~-playçãôÒÌ","How-to-play","symbol mash");
 
 
-SaveTest(ShortenString,["1234567890",20],"1234567890","wide limit");
-SaveTest(ShortenString,["1234567890",10],"1234567890","exact width");
-SaveTest(ShortenString,["1234567890",8],"12345...","within 3 characters...");
-SaveTest(ShortenString,["1234567890",5],"12...","shorten normally");
-SaveTest(ShortenString,["1234567890",2],"...","below 3");
-SaveTest(ShortenString,["1234567890",0],"...","zero");
-
-///////////////////////////////////////////////////////////////////////////////
-//Unique random identifier
-
-////////////////////////////////////////////////////////////////////////////////
-//Load scripts
-
-//Load styles
-
-///////////////////////////////////////////////////////////////////////////////
-//Data Reception
-
-//Fetch data from url
-
-
-
-///////////////////////////////////////////////////////////////////////////////
-// Data transmission - JSON, to a script in url "url"
-
-
-//Network status
-
-///////////////////////////////////////////////////////////////////////////////
-// DOM Manipulation
-
-// function GetElementV(clas){
-// 	return function Verify(result){return Classed(result,clas)};
-// }
-
-// SaveTest(GetElement,".rainbowline",true,"existing element of class .rainbowline",GetElementV("rainbowline"));
-// SaveTest(GetElement,".rainbline",undefined,"non-existing element of class .rainbline",GetElementV("rainbline"))
-
-//////////////////////////////////////////////////
-// Scroll into
-
-
-//////////////////////////////////////////////////
-//Sort tables
 
 //////////////////////////////////////////////////
 // Safe string loading
@@ -566,11 +510,6 @@ SaveTest(SafeUrl,"http://google.com","http://google.com","don't enforce http:");
 SaveTest(SafeUrl,"https://google.com","https://google.com","don't enforce http:");
 SaveTest(SafeUrl,"<script>tame(dangers)</script>","","script attempt")
 
-
-var more=`
-
-
-`
 
 var TestTextRoll=`
 make string pairs
@@ -611,33 +550,6 @@ SaveTestRoll(TestTextRoll);
 ///////////////////////////////////////////////////////////////////////////////
 //Run Tests only after loading the external resources below
 //ListenOnce("TestReady",Test);
-
-///////////////////////////////////////////////////////////////////////////////
-// To Improve
-/*
-(function MockLoadPuzzlescript(){
-	var a=PageIdentifier;
-	console.log(a.toString());
-	PageIdentifier=function(){return "burokku-konekuta"};
-	LoadAsync("puzzlescript-embed","./codes/game/");
-	ListenOnce("GameBar",
-		function(){
-			RemoveElement(".game-supra-container");
-			delete Window["Mobile"];
-			PageIdentifier=a;
-			if(Equal(PageIdentifier,a))
-				Shout("TestReady")
-			}
-			)
-})();
-*/
-/*
-(function TestInEnvironment(PrepareF,ReadySignal,TestF,CleanupSignal,CleanupF){
-	PrepareF();
-	Listen(ReadySignal,TestF);
-	Listen(CleanupSignal,CleanupF);
-})();*/
-
 
 
 ///////////////////////////////////////////////////////////////////////////////
