@@ -37,7 +37,6 @@ SaveTest(EnString,NaN,"NaN","NaN");
 
 SaveTest(Equal,[true,true],true,"boolean - true true");
 SaveTest(Equal,[true,false],false,"boolean - false false");
-SaveTest(Equal,[true,false],false,"boolean - different");
 SaveTest(Equal,[false,0],false,"type mixture - false and zero");
 SaveTest(Equal,[false,""],false,"type mixture - false and nostring");
 SaveTest(Equal,[null,false],false,"type mixture - false and null");
@@ -59,9 +58,7 @@ SaveTest(Equal,[{a:1,b:2,c:3},{a:1,b:2}],false,"object - different length, shall
 SaveTest(Equal,[{a:1,b:{bb:2},c:{cc:"3",d:{dd:4}}},{a:1,b:{bb:2},c:{cc:"3",d:{dd:4}}}],true,"object - equal, deep");
 SaveTest(Equal,[{a:1,b:{bb:2},c:{cc:"3",d:{dd:4}}},{a:1,b:{bb:2},c:{cc:"3",d:{dd:5}}}],false,"object - different, deep");
 
-SaveTest(Equal,[/a/g,/a/g],true,"regex - equal source and flags");
-SaveTest(Equal,[/a/g,/a/gi],false,"regex - different flags");
-SaveTest(Equal,[/a/g,/b/g],false,"regex - different source");
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Math

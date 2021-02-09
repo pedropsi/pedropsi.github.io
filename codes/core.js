@@ -337,6 +337,19 @@ EqualFunction=function(a,b){
 
 EqualRegex=function(a,b){
 	return (a.source===b.source)&&(a.flags===b.flags);
+/***
+Equal source and flags
+EqualRegex(/a/g,/a/g)
+true
+
+Different flags
+EqualRegex(/a/g,/a/gi)
+false
+
+Different source
+EqualRegex(/a/g,/b/g)
+false
+***/
 }
 
 Equal=function(a,b){
