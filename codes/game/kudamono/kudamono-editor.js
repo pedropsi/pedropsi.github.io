@@ -1869,35 +1869,38 @@ OverwritableProperties=["level"]
 
 UpdateState=function(substate,options){
 	var options=options||{}	;
-	var OLDSTATE=Clone(STATE);
+	var state=Clone(STATES[options.id]);
+	var OLDSTATE=state;
 	
 	var overwrSubstate=FilterKeysObject(substate,p=>In(OverwritableProperties,p));
 	var normalSubstate=FilterKeysObject(substate,p=>!In(OverwritableProperties,p));
 	
-	STATE={...STATE,...overwrSubstate};
-	STATE=MergeEvaluateObject(STATE,normalSubstate);
+	state={...state,...overwrSubstate};
+	state=MergeEvaluateObject(state,normalSubstate);
 
-	changed=Keys(ObjectComplement(STATE,OLDSTATE));
+	changed=Keys(ObjectComplement(state,OLDSTATE));
 
 	if(Intersected(changed,BoardProperties)||options.initialise){
-		STATE.tracks=SplitContiguousTracks(ValidSegments(STATE.segments,STATE));
-		STATE.atErrors=StateAtErrors(STATE);
-		STATE.win.won=StateWon(STATE);
-		changed=Union(changed,Keys(ObjectComplement(STATE,OLDSTATE)));
+		state.tracks=SplitContiguousTracks(ValidSegments(state.segments,state));
+		state.atErrors=StateAtErrors(state);
+		state.win.won=StateWon(state);
+		changed=Union(changed,Keys(ObjectComplement(state,OLDSTATE)));
 	}
 	
 	if(Intersected(changed,UndoableProperties)&&!options.skipundo){
-		AddUndo(STATE);
-		NavigateSerial(StateSerial(STATE));
+		AddUndo(state);
+		NavigateSerial(StateSerial(state));
 	}
 
 	if(Intersected(changed,["visuals","mode"])||options.initialise){
-		STATE.visuals.cursor=StateCursorName(STATE);
-		DrawCursor(STATE);
+		state.visuals.cursor=StateCursorName(state);
+		DrawCursor(state);
 	}
 	
 	if(Intersected(changed,DrawableProperties)||options.initialise)
-		DrawState(STATE);
+		DrawState(state);
+
+	SaveState(state);
 }
 
 StateUpdater=LazyPasser(UpdateState);
@@ -1951,7 +1954,7 @@ ObtainSetLevelState=function(state){
 	state.mode.selection=BlankState.mode.selection;
 	state.mode.dragging=BlankState.mode.dragging;
 	state.mode.clearing=BlankState.mode.clearing;
-	UpdateState(state,{skipundo:true});
+	UpdateState(state,{skipundo:true,id:state.id});
 	DrawState(state);
 }
 
@@ -2080,18 +2083,18 @@ XYSegmentsRemove=function(segments,state){
 	UpdateState({segments:Complement(state.segments,segments)},{id:state.id});
 }
 
-DragActionDrawStarter=function(x,y){
-	UpdateState({mode:{edit:false}},{id:STATE.id});
-	DragActionStarter(x,y);
+DragActionDrawStarter=function(x,y,w,h,target){
+	UpdateState({mode:{edit:false}},{id:GetState(target).id});
+	DragActionStarter(x,y,w,h,target);
 }
 
-DragActionAltStarter=function(x,y){
-	UpdateState({mode:{edit:Flipped}},{id:STATE.id});
-	DragActionStarter(x,y);
+DragActionAltStarter=function(x,y,w,h,target){
+	UpdateState({mode:{edit:Flipped}},{id:GetState(target).id});
+	DragActionStarter(x,y,w,h,target);
 }
 
 DragActionStarter=function(x,y,w,h,target){
-	var state=Clone(STATE);
+	var state=GetState(target);
 	var xy=CanvasPoint(x,y,w,h,state);
 	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
@@ -2105,7 +2108,7 @@ DragActionStarter=function(x,y,w,h,target){
 	UpdateState({mode:mode},{id:state.id});
 }
 DragActionContinuer=function(x,y,w,h,target){
-	var state=Clone(STATE);
+	var state=GetState(target);
 	var xy=CanvasPoint(x,y,w,h,state);
 	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
@@ -2127,7 +2130,7 @@ DragActionContinuer=function(x,y,w,h,target){
 	UpdateState({mode:mode},{id:state.id});
 }
 DragActionEnder=function(x,y,w,h,target){
-	var state=Clone(STATE)
+	var state=GetState(target);
 	var mode=state.mode;
 		mode.dragging=false;
 	var selected=mode.selection||[];
@@ -2273,8 +2276,8 @@ KeyboardSymbolsActions=function(state){
 
 
 var WheelActions={
-	"wheel-up":()=>UpdateState({mode:CycleSymbolMode(STATE,-1)},{id:STATE.id}),
-	"wheel-down":()=>UpdateState({mode:CycleSymbolMode(STATE,1)},{id:STATE.id})
+	"wheel-up":(id)=>UpdateState({mode:CycleSymbolMode(STATES[id],-1)},{id:id}),
+	"wheel-down":(id)=>UpdateState({mode:CycleSymbolMode(STATES[id],1)},{id:id})
 }
 
 var DragActions={
@@ -2317,26 +2320,34 @@ PreAddStateCanvas=function(state,target){
 	>`,target);
 }
 
-InitialisePuzzle=function(){
-	STATE=ObtainStartingLevelState();
-	STATE.width=window.innerWidth;
-	STATE.height=window.innerHeight*0.9;
-	PreAddStateCanvas(STATE,"body");
 
-	AttendDrag(DragActions,STATE.id);
-	AttendWheel(WheelActions,STATE.id,75);
-	Attend('resize',()=>DrawState(STATE));
+DrawStates=function(){Values(STATES).map(DrawState)};
 
-	KeyboardActions=Merge(KeyboardActions,KeyboardSymbolsActions(STATE));
-	Keybind(KeyboardActions,STATE.id);
+InitialisePuzzle=function(id){
+	var state=ObtainStartingLevelState();
+		state.id=state.id||id||GenerateID();
+		
+	state.width=window.innerWidth;
+	state.height=window.innerHeight*0.9;
+	PreAddStateCanvas(state,"body");
+
+	AttendDrag(DragActions,state.id);
+	AttendWheel(WheelActions,state.id,75);
+
+	Attend('resize',DrawStates);
+
+	KeyboardActions=Merge(KeyboardActions,KeyboardSymbolsActions(state));
+	Keybind(KeyboardActions,state.id);
 	ResumeCapturingKeys(ComboKeyPressHandler);
 	
-	setTimeout(LazyPasser(FocusElement)(STATE.id),500);
+	setTimeout(LazyPasser(FocusElement)(state.id),500);
 
-	UpdateState({},{initialise:true,id:STATE.id})
+	SaveState(state)
+	UpdateState({},{initialise:true,id:state.id})
 	
 	//Auto instructions
-	AutoInstructions(STATE.symbols)
+	AutoInstructions(state.symbols)
+	
 	
 }
 
@@ -2357,6 +2368,19 @@ AutoInstructions=function(symbols){
 }
 
 AutoInstructions(FruitIcons)
+
+
+
+var STATES={};
+
+SaveState=function(state){
+	STATES[state.id]=state;
+}
+GetState=function(target){
+	var id=target.id;
+	return Clone(STATES[id]);
+}
+
 
 if(PageSearch("W")||PageSearch("H")){
 	HearAll(sources,InitialisePuzzle)
