@@ -1869,8 +1869,8 @@ OverwritableProperties=["level"]
 
 UpdateState=function(substate,options){
 	var options=options||{}	;
-	var state=Clone(STATES[options.id]);
-	var OLDSTATE=state;
+	var state=GetState(options);
+	var OLDSTATE=Clone(state);
 	
 	var overwrSubstate=FilterKeysObject(substate,p=>In(OverwritableProperties,p));
 	var normalSubstate=FilterKeysObject(substate,p=>!In(OverwritableProperties,p));
@@ -1903,7 +1903,11 @@ UpdateState=function(substate,options){
 	SaveState(state);
 }
 
-StateUpdater=LazyPasser(UpdateState);
+StateKeyHandlerer=function(options){
+	return function(e){
+		UpdateState(options,{id:Spotlight().id});
+	}
+};
 
 StateCursorName=function(state){
 	var cursor=state.visuals.cursor||"pencil";
@@ -2163,10 +2167,10 @@ TransformLevel=function(level,CoordinateTransform){
 	return newlevel;
 };
 
-DecrementCanvasWidth	=StateUpdater({W:W=>Max(W-1,2)});
-DecrementCanvasHeight	=StateUpdater({H:H=>Max(H-1,2)});
-IncrementCanvasWidth	=StateUpdater({W:W=>Max(W+1,2)});
-IncrementCanvasHeight	=StateUpdater({H:H=>Max(H+1,2)});
+DecrementCanvasWidth	=StateKeyHandlerer({W:W=>Max(W-1,2)});
+DecrementCanvasHeight	=StateKeyHandlerer({H:H=>Max(H-1,2)});
+IncrementCanvasWidth	=StateKeyHandlerer({W:W=>Max(W+1,2)});
+IncrementCanvasHeight	=StateKeyHandlerer({H:H=>Max(H+1,2)});
 
 BoardShifter=function(L){
 	return function(){
@@ -2176,10 +2180,10 @@ BoardShifter=function(L){
 }
 
 LevelShifter=function(L){
-	return StateUpdater({level:level=>TransformLevel(level,LetterCoordinatesShifter(L))});
+	return StateKeyHandlerer({level:level=>TransformLevel(level,LetterCoordinatesShifter(L))});
 }
 SegmentsShifter=function(L){
-	return StateUpdater({
+	return StateKeyHandlerer({
 		segments:segments=>segments.map(seg=>seg.map(LetterCoordinatesShifter(L)))});
 }
 
@@ -2190,9 +2194,9 @@ LetterCoordinatesShifter=function(L){
 }
 
 
-var ClearBoard=StateUpdater({segments:[],level:{}});
-var ClearSegments=StateUpdater({segments:[]});
-var ClearFruit=StateUpdater({level:{}});
+var ClearBoard=StateKeyHandlerer({segments:[],level:{}});
+var ClearSegments=StateKeyHandlerer({segments:[]});
+var ClearFruit=StateKeyHandlerer({level:{}});
 
 
 
@@ -2233,20 +2237,20 @@ var KeyboardActions={
 	"ctrl right"	:IncrementCanvasWidth,
 	"ctrl down"		:DecrementCanvasHeight,
 	
-	"ctrl shift up"		:StateUpdater({H:BlankState.H}),
-	"ctrl shift right"	:StateUpdater({W:BlankState.W}),
-	"ctrl shift left"	:StateUpdater({H:2}),
-	"ctrl shift down"	:StateUpdater({W:2}),
+	"ctrl shift up"		:StateKeyHandlerer({H:BlankState.H}),
+	"ctrl shift right"	:StateKeyHandlerer({W:BlankState.W}),
+	"ctrl shift left"	:StateKeyHandlerer({H:2}),
+	"ctrl shift down"	:StateKeyHandlerer({W:2}),
 
-	"b ctrl"		:StateUpdater({visuals:{monochrome:Flipped}}),
-	"b ctrl shift"	:StateUpdater({visuals:{solid:Flipped}}),
+	"b ctrl"		:StateKeyHandlerer({visuals:{monochrome:Flipped}}),
+	"b ctrl shift"	:StateKeyHandlerer({visuals:{solid:Flipped}}),
 
 	"c ctrl":ExportSerial,
 	"s ctrl":()=>SaveCanvas(),
 
-	"space":StateUpdater({mode:{edit:Flipped}}),
+	"space":StateKeyHandlerer({mode:{edit:Flipped}}),
 	
-	"escape":StateUpdater({mode:{edit:false}}),
+	"escape":StateKeyHandlerer({mode:{edit:false}}),
 
 	"r ctrl"		:ClearSegments,
 	"r ctrl shift"	:ClearFruit,
@@ -2269,7 +2273,7 @@ KeyboardSymbolsActions=function(state){
 	var Actions={};
 	Keys(state.symbols).map(
 		function(fruit){
-			Actions[state.symbols[fruit].letter]=StateUpdater({mode:{edit:true,symbol:fruit},visuals:{cursor:fruit}});
+			Actions[state.symbols[fruit].letter]=StateKeyHandlerer({mode:{edit:true,symbol:fruit},visuals:{cursor:fruit}});
 	});
 	return Actions;
 }
