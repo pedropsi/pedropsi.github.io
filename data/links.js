@@ -138,7 +138,7 @@ LinkTemplate=function(linkObj){
 LinkGroup=function(GroupObject){
 	if(typeof GroupObject==="string")
 		return LinkGroup({GROUP:GroupObject});
-	return BaseFilter(LinksNormalised,GroupObject);
+	return FilterBase(LinksNormalised,GroupObject);
 }
 
 LinkGroupHTML=function(GroupObject){

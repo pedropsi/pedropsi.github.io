@@ -303,7 +303,7 @@ InlineSVG=function(){
 }
 
 CMSObject=function(title){
-	var o=BaseFilter(CMS,o=>Evaluate(o.TITLE)&&LowerSimpleString(Evaluate(o.TITLE))===LowerSimpleString(title)||LowerSimpleString(Evaluate(o.LINK))===LowerSimpleString(title));
+	var o=FilterBase(CMS,o=>Evaluate(o.TITLE)&&LowerSimpleString(Evaluate(o.TITLE))===LowerSimpleString(title)||LowerSimpleString(Evaluate(o.LINK))===LowerSimpleString(title));
 	if(o.length)
 		return First(o);
 }

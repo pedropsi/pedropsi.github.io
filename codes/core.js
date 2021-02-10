@@ -1603,7 +1603,7 @@ Subsetted=function(AOSuper,AOSub){
 }
 
 //Object Arrays (BASE)
-BaseFilter=function(Base,GroupObject){
+FilterBase=function(Base,GroupObject){
 	var Filterer=GroupObject;
 	if(IsObject(GroupObject))
 		Filterer=function(g){return Subsetted(g,GroupObject)};
@@ -3883,10 +3883,10 @@ SectionHTML=function(SettingsObj){
 	if(FilterF)
 		changes=Values(FilterValuesObject(changes,FilterF));
 	if(include)
-		changes=BaseFilter(changes,include);
+		changes=FilterBase(changes,include);
 	
 	if(exclude){
-		var unchanges=BaseFilter(changes,exclude);
+		var unchanges=FilterBase(changes,exclude);
 		changes=Complement(changes,unchanges);
 	}
 

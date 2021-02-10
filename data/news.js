@@ -692,7 +692,7 @@ SitemapItemXML=function(PageObj){
 	var lastdate=PageObj.DATE||"2017-01-01";
 	
 	var id=PageObj.LINK();
-	var changes=Sorter(NewsDays)(BaseFilter(News,{ID:id})).map(ch=>ch.DATE);
+	var changes=Sorter(NewsDays)(FilterBase(News,{ID:id})).map(ch=>ch.DATE);
 		lastdate=changes[0]||lastdate;
 	var freq=FrequencyName(Days(new Date(lastdate)));//Days since last modification
 	
