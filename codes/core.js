@@ -3906,20 +3906,19 @@ SectionHTML=function(SettingsObj){
 
 // Basic Buttons
 
-ButtonOnClickHTML=function(title,onclicktxt){
-	return ButtonHTML({txt:title,onclick:onclicktxt});
-}
-
-
 CloseButtonHTML=function(targetid){
 	return "<div class='closer'>"+ButtonHTML({tag:"span",txt:"&times;",onclick:'CloseCurrentDatapack();CloseWindow(this);'})+"</div>";
 }
 
 OkButtonHTML=function(targetid){
-	return ButtonOnClickHTML("OK",'Close(\"'+targetid+'\")');
+	return ButtonHTML({txt:"OK",onclick:'Close(\"'+targetid+'\")'});
 }
+
 SubmitButtonHTML=function(DP){
-	return ButtonOnClickHTML(DP.actionText,FunctionName(DP.action)+"(\""+DP.qid+"\")");
+	return ButtonHTML({
+		txt:DP.actionText,
+		onclick:FunctionName(DP.action)+"(\""+DP.qid+"\")"
+	});
 }
 NavigationButtonHTML=function(pageName){
 	return `<div class="button centered" tabindex="0" onclick="Navigate('${pageName}')">${Capitalise(pageName)}</div>`

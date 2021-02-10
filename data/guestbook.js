@@ -41,7 +41,10 @@ CommentObject=function(dataline,dataarray){
 
 CommentHTML=function(Obj){
 
-	var b=ButtonOnClickHTML("Reply to "+Obj.author,'RequestMessageReply("'+Obj.replyId+'","'+Obj.title+'")');
+	var b=ButtonHTML({
+		txt:"Reply to "+Obj.author,
+		onclick:'RequestMessageReply("'+Obj.replyId+'","'+Obj.title+'")'
+	});
 	
 	if(!Obj.quote)
 		Obj.quote="...";
