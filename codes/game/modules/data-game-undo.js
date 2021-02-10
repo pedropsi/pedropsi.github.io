@@ -37,9 +37,12 @@ function Undo(){
 	if(Undo.blocked)
 		return;
 
+	if(!Undo.backups)
+		EmptyUndo();
+
 	Undo.pointer=Max(1,Undo.pointer-1);
 
-	var state=Undo.backups[Undo.pointer-1];
+	var state=Clone(Undo.backups[Undo.pointer-1]);
 	
 	ObtainSetLevelState(state);
 	
@@ -50,10 +53,13 @@ function Undo(){
 function Redo(){
 	if(Redo.blocked)
 		return;
+	
+	if(!Undo.backups)
+		EmptyUndo();
 
 	Undo.pointer=Min(Undo.backups.length,Undo.pointer+1);
 
-	var state=Undo.backups[Undo.pointer-1];
+	var state=Clone(Undo.backups[Undo.pointer-1]);
 	
 	ObtainSetLevelState(state);
 	
