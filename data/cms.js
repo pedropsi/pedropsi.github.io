@@ -100,7 +100,7 @@ TagLabelHTML=function(tag){
 //Index pages
 
 PageObj=function(id){
-	return Values(FilterObject(CMS,p=>(p.LINK()===id)))[0];
+	return Values(FilterValuesObject(CMS,p=>(p.LINK()===id)))[0];
 }
 
 Access=function(page,field){
@@ -268,7 +268,7 @@ PostPageHTML=function(){
 		if(PageObj.YEAR)
 			years=Union(years,[PageObj.YEAR()])
 	}
-	FilterObject(CMS,GetYear);
+	FilterValuesObject(CMS,GetYear);
 	years=Reverse(Sort(years));
 	return years.map(ArchiveYearHTML).join("\n");
 }

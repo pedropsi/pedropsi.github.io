@@ -122,7 +122,7 @@ MusicTableHTML=function(tracks,headers){
 
 
 MusicCreditsHTML=function(id){
-	var tracks=Values(FilterObject(Media,t=>(t.CONTEXT_ID===id&&t.TYPE==="music")));
+	var tracks=Values(FilterValuesObject(Media,t=>(t.CONTEXT_ID===id&&t.TYPE==="music")));
 	tracks=Sorter(a=>a.N)(tracks);
 	audiotracks=tracks.map(AudioTrackHMTL).join("\n")
 
@@ -214,7 +214,7 @@ LaunchImageModal=function(subfolder,title){
 
 
 ScreenshotGalleryHTML=function(id){
-	var screenshots=Values(FilterObject(Media,t=>(t.CONTEXT_ID===id&&t.TYPE==="screenshot")));
+	var screenshots=Values(FilterValuesObject(Media,t=>(t.CONTEXT_ID===id&&t.TYPE==="screenshot")));
 	if(screenshots.length<1)
 		return "";
 	var gallery=screenshots.map(ImageCardHTML).join("\n");

@@ -1486,12 +1486,12 @@ GatherObject=function(Obj,Equaliser){
 	var Equaliser=Equaliser||Identity;
 	var uniquekeys=Unique(Values(Obj).map(Equaliser).map(String));
 	var o={};
-		uniquekeys.map(k=>(o[k]=FilterObject(Obj,v=>(String(Equaliser(v))===k))));
+		uniquekeys.map(k=>(o[k]=FilterValuesObject(Obj,v=>(String(Equaliser(v))===k))));
 	return o;
 /***
-	gather object, custom equaliser
-	GatherObject({a:1,b:2,c:3,d:3},x=>x%2)
-	{0:{b:2},1:{a:1,c:3,d:3}}
+Custom equaliser
+GatherObject({a:1,b:2,c:3,d:3},x=>x%2)
+{0:{b:2},1:{a:1,c:3,d:3}}
 ***/
 }
 
