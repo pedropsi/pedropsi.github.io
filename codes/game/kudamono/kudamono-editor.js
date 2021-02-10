@@ -302,7 +302,7 @@ FruitIcons={
 var BlankState={
 	
 	//visuals
-	target:"kudamono-canvas",
+	id:"kudamono-canvas",
 	visuals:{
 		cursor:"pencil",
 		cursorsize:80,
@@ -1787,7 +1787,7 @@ MetadataColophon=function(metadata){
 
 DrawMetadata=function(state){
 	var Opts={
-		target:state.target,
+		target:state.id,
 		colour:state.metadata.textColour,
 		fontWeight:"bold"
 	}
@@ -1862,30 +1862,30 @@ DrawMetadata=function(state){
 BoardProperties=["segments","level","W","H"];
 UndoableProperties=BoardProperties;
 DrawableProperties=Join(UndoableProperties,["mode","visuals","win"]);
-
+OverwritableProperties=["level"]
 
 
 
 UpdateState=function(substate,options){
 	var options=options||{}	;
 	var OLDSTATE=Clone(STATE);
-
-	if(options.overwrite){
-		STATE={...STATE,...substate};
-		var changed=Keys(substate);
-	}else{
-		STATE=MergeEvaluateObject(STATE,substate);
-		var changed=Keys(ObjectComplement(STATE,OLDSTATE));
-	}
 	
+	var overwrSubstate=FilterKeysObject(substate,p=>In(OverwritableProperties,p));
+	var normalSubstate=FilterKeysObject(substate,p=>!In(OverwritableProperties,p));
+	
+	STATE={...STATE,...overwrSubstate};
+	STATE=MergeEvaluateObject(STATE,normalSubstate);
+
+	changed=Keys(ObjectComplement(STATE,OLDSTATE));
+
 	if(Intersected(changed,BoardProperties)||options.initialise){
 		STATE.tracks=SplitContiguousTracks(ValidSegments(STATE.segments,STATE));
 		STATE.atErrors=StateAtErrors(STATE);
 		STATE.win.won=StateWon(STATE);
-		changed=Keys(ObjectComplement(STATE,OLDSTATE));
+		changed=Union(changed,Keys(ObjectComplement(STATE,OLDSTATE)));
 	}
-
-	if(Intersected(changed,UndoableProperties)){
+	
+	if(Intersected(changed,UndoableProperties)&&!options.skipundo){
 		AddUndo(STATE);
 		NavigateSerial(StateSerial(STATE));
 	}
@@ -1942,13 +1942,16 @@ DrawCursor=function(state){
 	}
 	opts.width=state.visuals.cursorsize||80;
 	opts.height=state.visuals.cursorsize||80;
-	SetCursor(state.target,cursor,opts);
+	SetCursor(state.id,cursor,opts);
 }
 
 //Undo
 ObtainSetLevelState=function(state){
-	STATE=state;
-	DrawBoard(state);
+	state.mode.selection=BlankState.mode.selection;
+	state.mode.dragging=BlankState.mode.dragging;
+	state.mode.clearing=BlankState.mode.clearing;
+	UpdateState(state,{skipundo:true});
+	DrawState(state);
 }
 
 
@@ -2028,21 +2031,24 @@ XYFruit=function(xy,state){
 		return false;
 }
 
-
-
-XYFruitsRemove=function(points,state){
+XYFruitsRemoveLevel=function(points,state){
 	var level=Clone(state.level);
 	points.map(function(xy){
 		if(!PointValid(xy,state))
 			return;
 		XYFruits(xy,state).map(oldfruit=>level[oldfruit]=level[oldfruit].filter(cr=>!Equal(cr,xy)));
 	})
-	UpdateState({level:level},{overwrite:true});
+	return level;
+}
+
+XYFruitsRemove=function(points,state){
+	var level=XYFruitsRemoveLevel(points,state);
+	UpdateState({level:level},{id:state.id});
 	return level;
 }
 
 XYFruitsAdd=function(points,state){
-	var level=XYFruitsRemove(points,state);
+	var level=XYFruitsRemoveLevel(points,state);
 	
 	points.map(function(xy){
 		if(!PointValid(xy,state))
@@ -2050,7 +2056,7 @@ XYFruitsAdd=function(points,state){
 		var overfruit=state.mode.symbol;
 		level[overfruit]=Union(level[overfruit],[xy]);
 	})
-	UpdateState({level:level},{overwrite:true});
+	UpdateState({level:level},{id:state.id});
 }
 
 
@@ -2063,44 +2069,46 @@ XYSegmentsAdd=function(segments,state){
 	var segments=ValidSegments(segments,state).map(CanonicalSegment);
 	if(!segments.length)
 		return;
-	UpdateState({segments:Union(state.segments,segments)});
+	UpdateState({segments:Union(state.segments,segments)},{id:state.id});
 }
 
 XYSegmentsRemove=function(segments,state){
 	var segments=ValidSegments(segments,state).map(CanonicalSegment);
 	if(!segments.length)
 		return;
-	UpdateState({segments:Complement(state.segments,segments)});
+	UpdateState({segments:Complement(state.segments,segments)},{id:state.id});
 }
 
 DragActionDrawStarter=function(x,y){
-	UpdateState({mode:{edit:false}});
+	UpdateState({mode:{edit:false}},{id:STATE.id});
 	DragActionStarter(x,y);
 }
 
 DragActionAltStarter=function(x,y){
-	UpdateState({mode:{edit:Flipped}});
+	UpdateState({mode:{edit:Flipped}},{id:STATE.id});
 	DragActionStarter(x,y);
 }
 
 DragActionStarter=function(x,y,w,h){
-	var xy=CanvasPoint(x,y,w,h,STATE);
-	if(!PointValid(xy,STATE))
+	var state=Clone(STATE);
+	var xy=CanvasPoint(x,y,w,h,state);
+	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
-	var mode=Clone(STATE.mode);
-	mode.symbol=XYFruit(xy,STATE)||mode.symbol;
+	var mode=state.mode;
+	mode.symbol=XYFruit(xy,state)||mode.symbol;
 	mode.dragging=true;
 	mode.selection=[xy];
 	if(mode.edit){
-		mode.clearing=!!XYFruit(xy,STATE);
+		mode.clearing=!!XYFruit(xy,state);
 	}
-	UpdateState({mode:mode});
+	UpdateState({mode:mode},{id:state.id});
 }
 DragActionContinuer=function(x,y,w,h){
-	var xy=CanvasPoint(x,y,w,h,STATE);
-	if(!PointValid(xy,STATE))
-		return;
-	var mode=Clone(STATE.mode);
+	var state=Clone(STATE);
+	var xy=CanvasPoint(x,y,w,h,state);
+	if(!PointValid(xy,state))
+		return;//TODO OTHER OPTIONS
+	var mode=state.mode;
 	if(!mode.selection)
 		mode.selection=[];
 	if(!In(mode.selection,xy)){
@@ -2112,35 +2120,36 @@ DragActionContinuer=function(x,y,w,h){
 
 	if(!mode.edit){
 		var selected=mode.selection;
-		mode.clearing=Intersected(XYSegments(selected[0],STATE),XYSegments(selected[1],STATE));
+		mode.clearing=Intersected(XYSegments(selected[0],state),XYSegments(selected[1],state));
 	}
 
-	UpdateState({mode:mode});
+	UpdateState({mode:mode},{id:state.id});
 }
 DragActionEnder=function(x,y){
-	var mode=Clone(STATE.mode)
-	mode.dragging=false;
+	var state=Clone(STATE)
+	var mode=state.mode;
+		mode.dragging=false;
 	var selected=mode.selection||[];
 	if(mode.edit){
 		if(mode.clearing)
-			XYFruitsRemove(selected,STATE);
+			XYFruitsRemove(selected,state);
 		else
-			XYFruitsAdd(selected,STATE);
+			XYFruitsAdd(selected,state);
 	}
 	else {
 		if(selected.length>1){
 			var segments=PathTrack(selected);
 			if(mode.clearing)
-				XYSegmentsRemove(segments,STATE);
+				XYSegmentsRemove(segments,state);
 			else{
-				XYSegmentsAdd(segments,STATE);
+				XYSegmentsAdd(segments,state);
 			}
 		}
 	}
 
 	mode.selection=[];
 	mode.clearing=false;
-	UpdateState({mode:mode})
+	UpdateState({mode:mode},{id:state.id})
 }
 
 
@@ -2177,9 +2186,9 @@ LetterCoordinatesShifter=function(L){
 }
 
 
-var ClearBoard=StateUpdater({segments:[],level:{}},{overwrite:true});
+var ClearBoard=StateUpdater({segments:[],level:{}});
 var ClearSegments=StateUpdater({segments:[]});
-var ClearFruit=StateUpdater({level:{}},{overwrite:true});
+var ClearFruit=StateUpdater({level:{}});
 
 
 
@@ -2263,8 +2272,8 @@ KeyboardSymbolsActions=function(state){
 
 
 var WheelActions={
-	"wheel-up":()=>UpdateState({mode:CycleSymbolMode(STATE,-1)}),
-	"wheel-down":()=>UpdateState({mode:CycleSymbolMode(STATE,1)})
+	"wheel-up":()=>UpdateState({mode:CycleSymbolMode(STATE,-1)},{id:STATE.id}),
+	"wheel-down":()=>UpdateState({mode:CycleSymbolMode(STATE,1)},{id:STATE.id})
 }
 
 var DragActions={
@@ -2280,7 +2289,7 @@ var DragActions={
 }
 
 CanvasResize=function(state){
-	var e=GetElement(state.target);
+	var e=GetElement(state.id);
 		e.width=Max(window.innerWidth,e.width||0,e.scrollWidth||0);
 		e.height=Max(window.innerHeight,e.height||0,e.scrollHeight||0);
 }
@@ -2301,8 +2310,8 @@ ObtainStartingLevelState=function(){
 PreAddStateCanvas=function(state,target){
 	PreAddElement(`
 	<canvas 
-		id="${state.target}" 
-		oncontextmenu="return false;" 
+		id="${state.id}" 
+		oncontextmenu="return false;"
 		width="${state.width}" 
 		height="${state.height}"
 	>`,target);
@@ -2314,17 +2323,17 @@ InitialisePuzzle=function(){
 	STATE.height=window.innerHeight*0.9;
 	PreAddStateCanvas(STATE,"body");
 
-	AttendDrag(DragActions,STATE.target);
-	AttendWheel(WheelActions,STATE.target,75);
+	AttendDrag(DragActions,STATE.id);
+	AttendWheel(WheelActions,STATE.id,75);
 	Attend('resize',()=>DrawState(STATE));
 
 	KeyboardActions=Merge(KeyboardActions,KeyboardSymbolsActions(STATE));
-	Keybind(KeyboardActions,STATE.target);
+	Keybind(KeyboardActions,STATE.id);
 	ResumeCapturingKeys(ComboKeyPressHandler);
 	
-	setTimeout(LazyPasser(FocusElement)(STATE.target),500);
+	setTimeout(LazyPasser(FocusElement)(STATE.id),500);
 
-	UpdateState({},{initialise:true})
+	UpdateState({},{initialise:true,id:STATE.id})
 	
 	//Auto instructions
 	AutoInstructions(STATE.symbols)
@@ -2332,8 +2341,7 @@ InitialisePuzzle=function(){
 }
 
 StateImage=function(state){
-	var target=state.target;
-	var e=GetElement(target);
+	var e=GetElement(state.id);
 	var href=e.toDataURL("image/png");
 	return ImageHTML({src:href,alt:"kudamono",title:"kudamono"})
 }
