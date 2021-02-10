@@ -1630,10 +1630,11 @@ SerialMetadata=function(serialObj){
 		metadata=ReKeyObject(metadata,Accesser(AbbreviationsMetadata));
 		Keys(metadata).map(k=>metadata[k]=decodeURIComponent(metadata[k]));
 	return metadata;
-	`sort, ignore capitalised abbreviations,  ignore anything not in abbreviations,
-	SerialMetadata({T:"Title",a:"Name Surname",thrash:"Thrash"})
-	"a=Name%20Surnams&t=Title"
-	`
+/***
+sort, ignore capitalised abbreviations, anything not in abbreviations
+SerialMetadata({T:"Title",a:"Name Surname",thrash:"Thrash"})
+"a=Name%20Surnams&t=Title"
+***/
 }
 
 MetadataSerial=function(metadata){
