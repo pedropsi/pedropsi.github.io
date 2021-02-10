@@ -998,6 +998,19 @@ FilterValuesObject({a:1,b:2,c:3,d:4},v=>v%2)
 ***/
 }
 
+FilterArray=function(A,Validator){
+	return A.filter(Validator||Identity);
+}
+
+Filter=function(AO,Validator){
+	if(IsArray(AO))
+		return FilterArray(AO,Validator);
+	if(IsObject(AO))
+		return FilterValuesObject(AO,Validator);
+	Wtyp("no object or array");
+	return AO;
+}
+
 
 ThreadKeysValues=function(Obj,KeyValuer){
 	return Keys(Obj).map(k=>KeyValuer(k,Obj[k]));
@@ -1585,7 +1598,7 @@ SubsetObject=function(OSuper,OSub){
 	return keys.every(k=>Equal(OSuper[k],OSub[k]));
 }
 
-Subset=function(AOSuper,AOSub){
+Subsetted=function(AOSuper,AOSub){
 	return ArrayObjectF(SubsetArray,SubsetObject)(AOSuper,AOSub);
 }
 
@@ -1593,7 +1606,7 @@ Subset=function(AOSuper,AOSub){
 BaseFilter=function(Base,GroupObject){
 	var Filterer=GroupObject;
 	if(IsObject(GroupObject))
-		Filterer=function(g){return Subset(g,GroupObject)};
+		Filterer=function(g){return Subsetted(g,GroupObject)};
 	
 	return Values(FilterValuesObject(Base,Filterer));
 }

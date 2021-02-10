@@ -289,8 +289,8 @@ function StarBattleRegionsSolved(graph){
 }
 
 function StarBattleLongRegions(graph){
-	var Filter=function(regionstars,stars,n){return regionstars.filter(region=>Count(region,cell=>In(stars,cell))>n)}
-	return StarBattleRegionsApply(Filter,graph);
+	var FilterSB=function(regionstars,stars,n){return regionstars.filter(region=>Count(region,cell=>In(stars,cell))>n)}
+	return StarBattleRegionsApply(FilterSB,graph);
 }
 
 function StarBattleShortRegions(graph){

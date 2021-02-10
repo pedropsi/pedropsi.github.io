@@ -12,13 +12,13 @@ SelectedGamesHTML=Identity;
 StoreHTML=Identity;
 
 
-function FilenameMapper(Modifier,Filter){
-	var Filter=Filter||True;
+function FilenameMapper(Modifier,FileFilter){
+	var FileFilter=FileFilter||True;
 	return function F(err,filenames){
 				if(err){
 					return console.log('Unable to scan directory: ' + err);
 				}
-				filenames.filter(f=>(Posfixed(f,".html")&&Filter(f))).map(Modifier);
+				filenames.filter(f=>(Posfixed(f,".html")&&FileFilter(f))).map(Modifier);
 	};
 }
 

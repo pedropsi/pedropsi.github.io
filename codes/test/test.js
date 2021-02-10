@@ -194,11 +194,11 @@ SaveTest(In,["abcd","A"],false,"case-sensitive");
 
 SaveTest(In,[[["b"]],["b"]],true,"deep array, present");
 
-SaveTest(Subset,[{A:1},{B:2}],false,"non-overlapping")
-SaveTest(Subset,[{A:1},{A:2}],false,"right key but wrong value")
-SaveTest(Subset,[{A:1},{A:1}],true,"identical")
-SaveTest(Subset,[{A:1,B:2},{B:2}],true,"strict subset")
-SaveTest(Subset,[{A:1,B:2},{A:1,C:2}],false,"only partial overlap")
+SaveTest(Subsetted,[{A:1},{B:2}],false,"non-overlapping")
+SaveTest(Subsetted,[{A:1},{A:2}],false,"right key but wrong value")
+SaveTest(Subsetted,[{A:1},{A:1}],true,"identical")
+SaveTest(Subsetted,[{A:1,B:2},{B:2}],true,"strict subset")
+SaveTest(Subsetted,[{A:1,B:2},{A:1,C:2}],false,"only partial overlap")
 
 ///////////////////////////////////////////////////////////////////////////////
 //Set functions

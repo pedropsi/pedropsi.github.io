@@ -919,7 +919,7 @@ PointUnFruitTracked=function(xy,fruits,state){
 	if(!track)
 		return true;
 	var trackfruits=TrackFruits(track,state);
-	return trackfruits.length&&Subset(fruits,trackfruits); //includes empty tracks
+	return trackfruits.length&&Subsetted(fruits,trackfruits); //includes empty tracks
 }
 PointConnectableAble=function(xy,fruits,state){
 	return PointUnFruited(xy,fruits,state)&&PointUnFruitTracked(xy,fruits,state);
@@ -1003,7 +1003,7 @@ FruitTrackStateLocallyErred=function(fruit,track,state){
 		rule.branchallowed=rule.branchallowed||Intersected(rule.simpleshapes,ShapeBranches);
 	}
 	if(!wrong&&rule.unconsecutiveshapes){
-		wrong=TrackConsecutiveShapePairs(track).some(pair=>rule.unconsecutiveshapes.some(incompatibles=>Subset(incompatibles,pair)));
+		wrong=TrackConsecutiveShapePairs(track).some(pair=>rule.unconsecutiveshapes.some(incompatibles=>Subsetted(incompatibles,pair)));
 	}
 	if(!wrong&&!rule.loopallowed&&TrackLooped(track))
 		wrong=true;
