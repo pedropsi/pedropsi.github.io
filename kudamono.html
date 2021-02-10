@@ -113,15 +113,15 @@ ${kudamonosData={
 	}
 
 	},
-	kudamonos=FilterObject(kudamonosData,(o,k)=>(!o.date||Days(StringDate(o.date))>=0)),
+	kudamonos=FilterValuesObject(kudamonosData,o=>(!o.date||Days(StringDate(o.date))>=0)),
 	OnceDelayer(ModalImageFragment)(kudamonos),
 	""}
 
 <h2>Latest</h2>
-${FolderGalleryHTML("kudamono",FilterObject(kudamonos,(o,k)=>In([0,1,2].map(i=>Keys(kudamonos)[i]),k)))}
+${FolderGalleryHTML("kudamono",Take(kudamonos,3))}
 
 ${
-	kudamonosFuture=FilterObject(kudamonosData,(o,k)=>(o.date&&Days(StringDate(o.date))<0)),
+	kudamonosFuture=FilterValuesObject(kudamonosData,o=>(o.date&&Days(StringDate(o.date))<0)),
 	l=Last(kudamonosFuture),
 	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>${l.legend?(", with <em>"+l.legend):""}</em>!</p>`:""
 }
