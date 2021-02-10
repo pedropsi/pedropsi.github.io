@@ -5147,7 +5147,7 @@ XYHandler=function(Action){
 			var e=e.touches[0];
 		var X=(e.clientX-r.left);
 		var Y=(e.clientY-r.top);
-		Action(X,Y,r.right-r.left,r.bottom-r.top);
+		Action(X,Y,r.right-r.left,r.bottom-r.top,e.target);
 	}
 }
 

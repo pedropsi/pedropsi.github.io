@@ -2090,7 +2090,7 @@ DragActionAltStarter=function(x,y){
 	DragActionStarter(x,y);
 }
 
-DragActionStarter=function(x,y,w,h){
+DragActionStarter=function(x,y,w,h,target){
 	var state=Clone(STATE);
 	var xy=CanvasPoint(x,y,w,h,state);
 	if(!PointValid(xy,state))
@@ -2104,7 +2104,7 @@ DragActionStarter=function(x,y,w,h){
 	}
 	UpdateState({mode:mode},{id:state.id});
 }
-DragActionContinuer=function(x,y,w,h){
+DragActionContinuer=function(x,y,w,h,target){
 	var state=Clone(STATE);
 	var xy=CanvasPoint(x,y,w,h,state);
 	if(!PointValid(xy,state))
@@ -2126,7 +2126,7 @@ DragActionContinuer=function(x,y,w,h){
 
 	UpdateState({mode:mode},{id:state.id});
 }
-DragActionEnder=function(x,y){
+DragActionEnder=function(x,y,w,h,target){
 	var state=Clone(STATE)
 	var mode=state.mode;
 		mode.dragging=false;
@@ -2298,8 +2298,7 @@ CanvasResize=function(state){
 
 ///////////////////////////////////////////////////////////////////////////////
 //State
-//a friendly representation of the board state.
-//The source of truth: updating STATE must update everything.
+//a friendly representation of the board state, and the source of truth
 
 ObtainStartingLevelState=function(){
 	var state=Clone(BlankState);
