@@ -632,7 +632,7 @@ null
 
 Rest=function(SAO){
 	if(IsObject(SAO))
-		return Rest(Keys(SAO)).map(k=>SAO[k]);
+		return FilterKeysObject(SAO,k=>In(Rest(Keys(SAO)),k));
 	if(IsString(SAO))
 		return Rest(SAO.split("")).join("");
 	if(IsArray(SAO)){
@@ -655,7 +655,7 @@ Rest("")
 
 Most=function(SAO){
 	if(IsObject(SAO))
-		return Most(Keys(SAO)).map(k=>SAO[k]);
+		return FilterKeysObject(SAO,k=>In(Most(Keys(SAO)),k));
 	if(IsString(SAO))
 		return Most(SAO.split("")).join("");
 	if(IsArray(SAO)){
@@ -676,10 +676,12 @@ Most("")
 ***/
 }
 
-Take=function(AS,n){
+Take=function(SAO,n){
+	if(IsObject(SAO))
+		return FilterKeysObject(SAO,k=>In(Take(Keys(SAO),n),k));
 	if(n<0)
-		return AS.slice(n,AS.length);
-	return AS.slice(0,n);
+		return SAO.slice(n,SAO.length);
+	return SAO.slice(0,n);
 
 /***
 from beginning
@@ -701,11 +703,17 @@ Take([5,6,7,8,9],-10)
 Infinity
 Take([5,6,7,8,9],Infinity)
 [5,6,7,8,9]
+
+Objects
+Take({a:1,b:4,c:7},2)
+{a:1,b:4}
 ***/
 }
 
-UnTake=function(AS,n){
-	return n<0?Take(AS,Max(0,AS.length+n)):Take(AS,-Max(0,AS.length-n));
+UnTake=function(SAO,n){
+	if(IsObject(SAO))
+		return FilterKeysObject(SAO,k=>In(UnTake(Keys(SAO),n),k));
+	return n<0?Take(SAO,Max(0,SAO.length+n)):Take(SAO,-Max(0,SAO.length-n));
 
 /***
 remove from beginning
@@ -727,6 +735,10 @@ UnTake([5,6,7,8,9],-10)
 Infinity
 UnTake([5,6,7,8,9],Infinity)
 []
+
+Objects
+UnTake({a:1,b:4,c:7},2)
+{c:7}
 ***/
 }
 

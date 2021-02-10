@@ -143,16 +143,16 @@ ${starbattlesData={
 		stars:1
 	}
 	},
-	starbattles=FilterObject(starbattlesData,(o,k)=>(!o.date||Days(StringDate(o.date))>=0)),
+	starbattles=FilterValuesObject(starbattlesData,o=>(!o.date||Days(StringDate(o.date))>=0)),
 	OnceDelayer(ModalImageFragment)(starbattles),
 	""}
 
 
 <h2>Latest</h2>
-${FolderGalleryHTML("star-battle",FilterObject(starbattles,(o,k)=>In([0,1,2].map(i=>Keys(starbattles)[i]),k)))}
+${FolderGalleryHTML("star-battle",Take(starbattles,3))}
 
 ${
-	starbattlesFuture=FilterObject(starbattlesData,(o,k)=>(o.date&&Days(StringDate(o.date))<0)),
+	starbattlesFuture=FilterValuesObject(starbattlesData,o=>(o.date&&Days(StringDate(o.date))<0)),
 	l=Last(starbattlesFuture),
 	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>${l.legend?(", with <em>"+l.legend+" star battle"):""}</em>!</p>`:""
 }
