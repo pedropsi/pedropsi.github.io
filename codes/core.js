@@ -5209,11 +5209,11 @@ AttendWheel=function(Actions,target,delay){
 		if(name){
 			Executer=function(){
 				event.preventDefault();
-				Evaluate(Accesser(Actions)(name));
+				Evaluate(Accesser(Actions)(name),target);
 			}
 			FastExecuter=function(){
 				//do not event.preventDefault() so users can escape with the mouse wheel
-				Evaluate(Accesser(Actions)("fast-"+name));
+				Evaluate(Accesser(Actions)("fast-"+name),target);
 			}
 			if(delay)
 				Throttle(Executer,delay,name,FastExecuter);
