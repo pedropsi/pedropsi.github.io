@@ -7725,7 +7725,7 @@ UnBeforTake=function(list,Verifier){
 	return list;
 }
 
-UnreachableCodes=function(){
+UnReachableCodes=function(){
 	var O={};
 	Introspect().map(function(fname){
 		var code=UnReachableCode(FunctionBody(eval(fname)));
@@ -7736,10 +7736,41 @@ UnreachableCodes=function(){
 }
 
 SaveTestableFunctionsTests=function(){
-	var testRolls=Values(UnreachableCodes());
+	var testRolls=Values(UnReachableCodes());
 	testRolls.map(SaveTestRoll);
 }
 
+
+
+// UnReachableComment=function(F){
+// 	var body=FunctionBody(F);
+// 	var lastComment=UnBeforfix(body,"/*");		 //Finds the comment inbetween
+// 	if(lastComment===body)
+// 		return "";
+
+// 	lastComment=UnAfterfix(lastComment,"*/");
+// 	lastComment=UnPrefix(UnPosfix(lastComment,["*","/"]),["*","/"]);	//Cleans excess symbols
+	
+// 	var remainder=UnBeforfix(body,lastComment);
+// 	var emptyPattern=/(\s|\t|\r|\n|\}|;|\*|\/)*/sig;		//requires no more expressions after
+// 	if(remainder.replaceAll(emptyPattern,"")!=="")
+// 		return "";
+
+// 	lastComment=lastComment.replaceAll(/\r/sig,"");
+
+// 	return lastComment;
+// }
+
+// UnReachableComments=function(){
+// 	var O={};
+// 	Introspect().map(function(fname){
+// 		var code=UnReachableComment(eval(fname));
+// 		if(code.length){
+// 			O[fname]=code;
+// 		}
+// 	});
+// 	return O;
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
 //Introspection - lists all defined functions!
