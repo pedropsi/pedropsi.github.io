@@ -119,7 +119,6 @@ PUZZLE_SCRIPT				:	()=>	[`codes/game/puzzlescript-embed.js`,`codes/game/puzzlesc
 
 
 GUESTBOOK_ADD				:	()=>	`<div class="button centered" onclick="RequestGuestbook()" tabindex="0">Leave your message!</div>`,
-BUTTON_SUBSCRIBE			:	()=>	NavigationButtonHTML("subscribe"),
 BUTTON_SOON					:	()=>	`<div>Coming soon...</div>`,
 
 
