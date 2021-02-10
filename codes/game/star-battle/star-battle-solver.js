@@ -294,8 +294,8 @@ function StarBattleLongRegions(graph){
 }
 
 function StarBattleShortRegions(graph){
-	var Filter=function(regionstars,stars,n){return regionstars.filter(region=>Count(region,cell=>In(stars,cell))<n)}
-	return StarBattleRegionsApply(Filter,graph);
+	var FilterSB=function(regionstars,stars,n){return regionstars.filter(region=>Count(region,cell=>In(stars,cell))<n)}
+	return StarBattleRegionsApply(FilterSB,graph);
 }
 
 //Adjacencies
