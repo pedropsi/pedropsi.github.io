@@ -199,7 +199,7 @@ Warner=function(type){
 		
 		var styles=types[type]||types[error];
 
-		var values=Rest(Values(arguments)||[]);
+		var values=Rest(Values(arguments));
 			values=[`%c ${caller} %c ${type} `].concat(styles).concat([message]).concat(values);
 
 		Apply(console.warn,values);
@@ -249,12 +249,12 @@ Sorter=function(){
 }
 
 SortArray=function(v){
-	var Sorters=Rest(Values(arguments))||[];
+	var Sorters=Rest(Values(arguments));
 	return Apply(Sorter,Sorters)(v);
 }
 
 SortObjectKeys=function(Obj){
-	var Sorters=Rest(Values(arguments))||[];
+	var Sorters=Rest(Values(arguments));
 	var sortedkeys=Apply(Sorter,Sorters)(Keys(Obj));
 	var o={};
 		sortedkeys.map(k=>o[k]=Obj[k]);
@@ -262,7 +262,7 @@ SortObjectKeys=function(Obj){
 }
 
 SortObjectValues=function(Obj){
-	var Sorters=Rest(Values(arguments))||[];
+	var Sorters=Rest(Values(arguments));
 	var sortedkeys=Apply(Sorter,Sorters)(Values(Obj));
 	var o={};
 		sortedkeys.map(k=>o[k]=Obj[k]);
@@ -272,7 +272,7 @@ SortObjectValues=function(Obj){
 
 SortBy=function(AO){
 //SortBy=function(AO,...Sorters){
-	var Sorters=Rest(Values(arguments))||[];
+	var Sorters=Rest(Values(arguments));
 	if(IsArray(AO))
 		return Apply(function(S){return SortArray(AO,S)},Sorters);
 	if(IsObject(AO))
@@ -584,60 +584,96 @@ UnitVector=function(vector){
 ///////////////////////////////////////////////////////////////////////////////
 // Array, Object, String (SAO)
 
-Last=function(SAO){
-	if(IsObject(SAO)){
-		var k=Last(Keys(SAO));
-		return k?SAO[k]:null;
-	}
-	else if(SAO&&SAO.length)
-		return SAO[SAO.length-1];
-	else
-		return null;
-}
-
 First=function(SAO){
 	if(IsObject(SAO)){
 		var k=First(Keys(SAO));
 		return k?SAO[k]:null;
 	}
-	else if(SAO&&SAO.length)
-		return SAO[0];
-	else
+	if(IsString(SAO)||IsArray(SAO)){
+		if(SAO.length)
+			return SAO[0];
 		return null;
+	}
+	Wtyp("no string, array or object")
+	return null;
+/***
+Empty list
+First([])
+null
+
+Empty string
+First("")
+null
+***/
+}
+
+Last=function(SAO){
+	if(IsObject(SAO)){
+		var k=Last(Keys(SAO));
+		return k?SAO[k]:null;
+	}
+	if(IsString(SAO)||IsArray(SAO)){
+		if(SAO.length)
+			return SAO[SAO.length-1];
+		return null;
+	}
+	Wtyp("no string, array or object")
+	return null;
+/***
+Empty list
+Last([])
+null
+
+Empty string
+Last("")
+null
+***/
 }
 
 Rest=function(SAO){
-	if(IsObject(SAO)){
-		return FilterObject(SAO,(o,k)=>(k!==First(Keys(SAO))));
+	if(IsObject(SAO))
+		return Rest(Keys(SAO)).map(k=>SAO[k]);
+	if(IsString(SAO))
+		return Rest(SAO.split("")).join("");
+	if(IsArray(SAO)){
+		var A=Clone(SAO);
+		A.shift();
+		return A;
 	}
-	if(SAO&&SAO.length){
-		if(typeof SAO==="string")
-			return Rest(SAO.split("")).join("");
-		else{
-			var A=Clone(SAO);
-			A.shift();
-			return A;
-		}
-	}
-	else
-		return null;
+	Wtyp("no string, array or object")
+	return null;
+/***
+Empty list
+Rest([])
+[]
+
+Empty string
+Rest("")
+""
+***/
 }
 
 Most=function(SAO){
-	if(IsObject(SAO)){
-		return FilterObject(SAO,(o,k)=>(k!==Last(Keys(SAO))));
+	if(IsObject(SAO))
+		return Most(Keys(SAO)).map(k=>SAO[k]);
+	if(IsString(SAO))
+		return Most(SAO.split("")).join("");
+	if(IsArray(SAO)){
+		var A=Clone(SAO);
+		A.pop();
+		return A;
 	}
-	if(SAO&&SAO.length){
-		if(typeof SAO==="string")
-			return Most(SAO.split("")).join("");
-		else{
-			var A=Clone(SAO);
-			A.pop();
-			return A;
-		}
-	}
-	else
-		return null;
+	Wtyp("no string, array or object")
+	return null;
+/***
+Empty list
+Most([])
+[]
+
+Empty string
+Most("")
+""
+***/
 }
 
 Take=function(AS,n){
@@ -765,9 +801,15 @@ IsRegex=function(obj){
 }
 
 IsString=function(s){
-	if(!s)
+	if(typeof s==="undefined")
 		return false;
 	return typeof s==="string";
+/***
+Empty string
+IsString("")
+true
+
+***/
 }
 
 IsFunction=function(F){
@@ -6573,7 +6615,7 @@ SVGLineApply=function(svgline,CoordinatesF){
 	var svgline=svgline.trim();
 	var linetype=First(svgline);
 	var xyArray=Rest(svgline);
-	if(xyArray){
+	if(xyArray.length){
 		xyArray=SVGLinePairs(xyArray);
 		xyArray=xyArray.map(CoordinatesF);
 		xyArray=xyArray.flat().join(" ");
@@ -6675,7 +6717,7 @@ SVGLineChange=function(svgline,F){
 	var F=F||Identity;
 	var svgline=svgline.trim();
 	var xyArray=Rest(svgline);
-	if(!xyArray)
+	if(!xyArray.length)
 		return "";
 	else{
 		xyArray=SVGLinePairs(xyArray);

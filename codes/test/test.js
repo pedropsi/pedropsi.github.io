@@ -119,16 +119,6 @@ SaveTest(Last,[["a"]],"a","mono-element list");
 SaveTest(Rest,[["a"]],[],"mono-element list");
 SaveTest(Most,[["a"]],[],"mono-element list");
 
-SaveTest(First,"",null,"empty string");
-SaveTest(Last,"",null,"empty string");
-SaveTest(Rest,"",null,"empty string");
-SaveTest(Most,"",null,"empty string");
-
-SaveTest(First,[[]],null,"empty list");
-SaveTest(Last,[[]],null,"empty list");
-SaveTest(Rest,[[]],null,"empty list");
-SaveTest(Most,[[]],null,"empty list");
-
 
 //Distinguish Objects and Arrays
 
