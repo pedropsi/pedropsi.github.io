@@ -972,15 +972,6 @@ MapObject=function(Obj,ValueKeyer){
 };
 
 
-FilterObject=function(Obj,ValueKeyer){
-	var O={};
-	MapObject(Obj,function (v,k,o){
-		if(ValueKeyer(v,k))
-			O[k]=v;
-	})
-	return O;
-}
-
 FilterKeysObject=function(Obj,Validator){
 	if(!Validator)
 		return Obj;
@@ -1054,9 +1045,6 @@ In=function(SAO,n){
 		return InArrayOrObj(SAO,n);
 }
 
-ContainsF=function(n){
-	return function(SAO){return In(SAO,n)};
-}
 
 Count=function(array,itemOrF){
 	if(typeof array==="string"&&typeof itemOrF==="string"){
@@ -1603,10 +1591,11 @@ Subset=function(AOSuper,AOSub){
 
 //Object Arrays (BASE)
 BaseFilter=function(Base,GroupObject){
+	var Filterer=GroupObject;
 	if(IsObject(GroupObject))
-		return Values(FilterObject(Base,g=>Subset(g,GroupObject)));
-	else
-		return Values(FilterObject(Base,GroupObject));
+		Filterer=function(g){return Subset(g,GroupObject)};
+	
+	return Values(FilterValuesObject(Base,Filterer));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -3879,7 +3868,7 @@ SectionHTML=function(SettingsObj){
 
 	var changes=Source;
 	if(FilterF)
-		changes=Values(FilterObject(changes,FilterF));
+		changes=Values(FilterValuesObject(changes,FilterF));
 	if(include)
 		changes=BaseFilter(changes,include);
 	

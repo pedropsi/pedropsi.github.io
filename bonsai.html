@@ -47,15 +47,15 @@ ${
 		board:"W=6&H=5&L=f13w1w7f1f4w1&G=b"
 	}
 	},
-	bonsais=FilterObject(bonsaisData,(o,k)=>(!o.date||Days(StringDate(o.date))>=0)),
+	bonsais=FilterValuesObject(bonsaisData,o=>(!o.date||Days(StringDate(o.date))>=0)),
 	OnceDelayer(ModalImageFragment)(bonsais),
 	""}
 
 <h2>Latest</h2>
-${FolderGalleryHTML("bonsai",FilterObject(bonsais,(o,k)=>In([0,1,2].map(i=>Keys(bonsais)[i]),k)))}
+${FolderGalleryHTML("bonsai",Take(bonsais,3))}
 
 ${
-	bonsaisFuture=FilterObject(bonsaisData,(o,k)=>(o.date&&Days(StringDate(o.date))<0)),
+	bonsaisFuture=FilterValuesObject(bonsaisData,o=>(o.date&&Days(StringDate(o.date))<0)),
 	l=Last(bonsaisFuture),
 	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>${l.legend?(", with <em>"+l.legend):""}</em>!</p>`:""
 }
