@@ -79,6 +79,7 @@ ReadGameData=function(){
 	}
 
 	data["year-edit"]=String(Year());
+	data["is-duplicate"]="example";
 	return data;
 };
 
@@ -89,7 +90,6 @@ function SubmitGameData(){
 		data.post=true;
 		data.docId="158LEND9dCQF53UFvB5BEWjQmgm47PUv2jBXdr8W3xWc";
 		data.sheetName="PGD";
-		data["is-duplicate"]="example";
 	
 		LoadDataFromNetwork(MacroURL(data),Identity);
 		alert("Game "+data.title+" by "+data.author+" submitted, if not already!");
