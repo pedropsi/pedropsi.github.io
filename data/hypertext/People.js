@@ -70,7 +70,7 @@ var Contributors={//People
 	"dohz":{alias:"dohz",ITCH:"dohz",PERSONAL_PAGE:"dohz.waterfall.social"},
 	"jarsp":{alias:"jarsp"},
 	"toomblercazz":{alias:"Toombler",ITCH:"toombler"},
-	"zach":{name:"Zach",alias:"TheZachMan"},
+	"zach":{name:"Zachary Barbanell",alias:"TheZachMan"},
 	"norgg":{alias:"Norgg",TWITTER:"Norgg"},
 	"ihnn":{name:"Jeffrey",alias:"IHNN",PERSONAL_PAGE:"https://ihnnpuzzles.blogspot.com",TWITCH:"ihavenonamesda"},
 	"omnipresentoffee":{alias:"OmnipresentCoffee"},
