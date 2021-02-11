@@ -2028,7 +2028,7 @@ ObtainSetLevelState=function(state){
 	state.mode.selection=BlankState.mode.selection;
 	state.mode.dragging=BlankState.mode.dragging;
 	state.mode.clearing=BlankState.mode.clearing;
-	UpdateState(state,{skipundo:true,id:state.id});
+	SaveState(state);
 	DrawState(state);
 }
 
@@ -2406,8 +2406,8 @@ ControlsBind=function(state){
 //a friendly representation of the board state, and the source of truth
 
 ObtainStartingLevelState=function(id,blankState){
-	var blankState=BlankState||blankState;
-	var state=Clone(BlankState);
+	var blankState=blankState||BlankState;
+	var state=Clone(blankState);
 		state=Merge(state,{
 			id:id||GenerateId(),
 			width:window.innerWidth,
