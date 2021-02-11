@@ -294,7 +294,7 @@ FruitIcons={
 			maxconnected:0,
 			maxconnectable:1,
 			description:"No Orange is connectable with another (no path could be drawn).",
-			depiction:"W=2&L=o0o8&S=3DD"
+			depiction:"W=2&L=o0o2o6&S=3DD"
 		}
 	}
 }
