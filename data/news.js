@@ -764,7 +764,7 @@ PuzzleLinker=function(puzzle){
 			DATE:item.date,
 			HEADER:title,
 			PIECE:`
-			<p> ${link}, from the ${AHTML(Capitalise(puzzle)+" collection",url)}, now released.</p>`
+			<p> ${link}, from the ${AHTML(Capitalise(puzzle)+" collection",PageUnSearch(url))}, now released.</p>`
 		}
 	}
 }
@@ -794,6 +794,11 @@ NewsSources={
 		name:"kudamonosData",
 		source:"https://pedropsi.github.io/kudamono.html",
 		Transformer:PuzzleLinker("kudamono")
+	},
+	bonsai:{
+		name:"bonsaisData",
+		source:"https://pedropsi.github.io/bonsai.html",
+		Transformer:PuzzleLinker("bonsai")
 	}
 }
 
