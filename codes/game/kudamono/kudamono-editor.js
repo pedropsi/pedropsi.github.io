@@ -1717,7 +1717,7 @@ StateSerial=function(state){
 ///////////////////////////////////////////////////////////////////////////////
 //Interactive UI (for quick iteration)
 
-DrawStateGrid=function(state){
+StateGridDraw=function(state){
 	var gridOpts={
 		...state.grid,
 		rows:state.H,
@@ -1775,7 +1775,6 @@ StatePathsDraw=function(state){
 	}
 }
 
-DrawState=function(state){
 	if(state.render.hide)
 		return;
 	if(state.render.main){
@@ -1796,6 +1795,7 @@ RulestatesDraw=function(rulestates,state){
 				scaleGrid:0.30,
 				offsetX:x+i%2*0.25,
 				offsetY:2*Floor(i/2)
+StateDraw=function(state){
 			},
 			render:{
 				main:false,
@@ -1813,7 +1813,7 @@ DrawBoard=function(state,supraState){
 	DrawLevel(state);
 }
 
-UnDrawBoard=function(state){
+BoardUnDraw=function(state){
 	var gridExtremes=Extremes(state);
 	var c=1.05;//small correction
 	gridExtremes.x0-=gridExtremes.square/2*c;
@@ -2432,7 +2432,7 @@ PreAddStateCanvas=function(state,target){
 }
 
 
-DrawStates=function(){Values(STATES).map(DrawState)};
+StateDraws=function(){Values(STATES).map(StateDraw)};
 
 InitialisePuzzle=function(id,options){
 	var options=options||{};
