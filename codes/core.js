@@ -1231,6 +1231,17 @@ ObjectComplement=function(objInclude,objExclude){
 	return unique;
 }
 
+ComplementKeysObject=function(keys,Obj){
+	var O={};
+	var keys=keys||[];
+	Keys(Obj).map(function(k){
+		if(!In(keys,k))
+			O[k]=Obj[k];
+	})
+	return O;
+}
+
+
 BiComplement=function(AO1,AO2){
 	if(!AO2)
 		return AO1;

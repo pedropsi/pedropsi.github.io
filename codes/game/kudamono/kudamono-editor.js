@@ -302,10 +302,11 @@ FruitIcons={
 var BlankState={
 	
 	//visuals
-	id:"kudamono-canvas",
+	id:"puzzle",
 	render:{
 		hide:false,
-		main:true
+		main:true,
+		target:"kudamono-canvas"
 	},
 	visuals:{
 		cursor:"pencil",
@@ -1778,17 +1779,34 @@ DrawState=function(state){
 	if(state.render.hide)
 		return;
 	if(state.render.main){
-		UnDraw({target:state.id});
+		UnDraw(state.render);
 		CanvasResize(state);
 		DrawBoard(state);
 		DrawMetadata(state);
 	}
-	else{
-		DrawBoard(state);
-	}
 }
 
-DrawBoard=function(state){
+RulestatesDraw=function(rulestates,state){
+	var n=rulestates.length;
+	var x=-0.5;
+	for(var i=0;i<n;i++){
+		rulestates[i]=Join(
+			rulestates[i],
+			{grid:{
+				scaleGrid:0.30,
+				offsetX:x+i%2*0.25,
+				offsetY:2*Floor(i/2)
+			},
+			render:{
+				main:false,
+				target:state.target
+			}
+		})
+	}
+	rulestates.map(rs=>DrawBoard(rs))
+}
+
+DrawBoard=function(state,supraState){
 	UnDrawBoard(state);
 	DrawStateGrid(state);
 	DrawStatePaths(state);
@@ -1824,7 +1842,7 @@ MetadataColophon=function(metadata){
 
 DrawMetadata=function(state){
 	var Opts={
-		target:state.id,
+		target:state.render.target,
 		colour:state.metadata.textColour,
 		fontWeight:"bold"
 	}
@@ -1844,6 +1862,10 @@ DrawMetadata=function(state){
 	var usedRules=levelSymbols.map(symbol=>state.symbols[symbol].rule.description).filter(Identity);
 	var subtitle=state.description+"\n"+EnumerateSentence(usedRules);
 
+	var ruleStates=levelSymbols.map(fruit=>SymbolSerialState(fruit,state.symbols[fruit].rule.depiction,state));
+
+	RulestatesDraw(ruleStates,state);
+	
 	subtitle.split(/\n/).map((line,i)=>DrawText({
 		...Opts,
 		txt:line,
@@ -1891,8 +1913,16 @@ DrawMetadata=function(state){
 			textAlign:"left",
 			y:y
 		})	
-	
 }
+
+SymbolSerialState=function(symbol,serial,suprastate){
+	var state=SerialState(SearchParameters(serial),Clone(suprastate));
+		state.id="rule-"+symbol;
+		state.render={main:false,target:suprastate.render.target};
+		state=ComplementKeysObject(["examples","designation"],state);	
+	return state;
+}
+
 
 
 
@@ -1905,7 +1935,7 @@ OverwritableProperties=["level"]
 
 UpdateState=function(substate,options){
 	var options=options||{}	;
-	var state=GetState(options);
+	var state=IdState(options.id);
 	var OLDSTATE=Clone(state);
 	
 	var overwrSubstate=FilterKeysObject(substate,p=>In(OverwritableProperties,p));
@@ -1913,7 +1943,6 @@ UpdateState=function(substate,options){
 	
 	state={...state,...overwrSubstate};
 	state=MergeEvaluateObject(state,normalSubstate);
-
 	changed=Keys(ObjectComplement(state,OLDSTATE));
 
 	if(Intersected(changed,BoardProperties)||options.initialise){
@@ -1935,15 +1964,18 @@ UpdateState=function(substate,options){
 		}
 	}
 
-	if(Intersected(changed,DrawableProperties)||options.initialise)
+	
+	if(Intersected(changed,DrawableProperties)||options.initialise||options.draw)
 		DrawState(state);
 
-	SaveState(state);
+	if(!options.unsave)
+		SaveState(state);
 }
 
-StateKeyHandlerer=function(options){
+StateKeyHandlerer=function(substate){
 	return function(e){
-		UpdateState(options,{id:Spotlight().id});
+		var id=TargetState(Spotlight().id).id;
+		UpdateState(substate,{id:id});
 	}
 };
 
@@ -1988,7 +2020,7 @@ DrawCursor=function(state){
 	}
 	opts.width=state.visuals.cursorsize||80;
 	opts.height=state.visuals.cursorsize||80;
-	SetCursor(state.id,cursor,opts);
+	SetCursor(state.render.target,cursor,opts);
 }
 
 //Undo
@@ -2089,8 +2121,8 @@ XYFruitsRemoveLevel=function(points,state){
 
 XYFruitsRemove=function(points,state){
 	var level=XYFruitsRemoveLevel(points,state);
-	UpdateState({level:level},{id:state.id});
-	return level;
+	if(!Equal(level,state.level))
+		UpdateState({level:level},{id:state.id,draw:true});
 }
 
 XYFruitsAdd=function(points,state){
@@ -2102,7 +2134,8 @@ XYFruitsAdd=function(points,state){
 		var overfruit=state.mode.symbol;
 		level[overfruit]=Union(level[overfruit],[xy]);
 	})
-	UpdateState({level:level},{id:state.id});
+	if(!Equal(level,state.level))
+		UpdateState({level:level},{id:state.id,draw:true});
 }
 
 
@@ -2115,46 +2148,51 @@ XYSegmentsAdd=function(segments,state){
 	var segments=ValidSegments(segments,state).map(CanonicalSegment);
 	if(!segments.length)
 		return;
-	UpdateState({segments:Union(state.segments,segments)},{id:state.id});
+	var newsegments=Union(state.segments,segments);
+	if(!Equal(newsegments,state.segments))
+		UpdateState({segments:newsegments},{id:state.id,draw:true});
 }
 
 XYSegmentsRemove=function(segments,state){
 	var segments=ValidSegments(segments,state).map(CanonicalSegment);
 	if(!segments.length)
 		return;
-	UpdateState({segments:Complement(state.segments,segments)},{id:state.id});
+	var newsegments=Complement(state.segments,segments);
+	if(!Equal(newsegments,state.segments))
+	UpdateState({segments:newsegments},{id:state.id,draw:true});
 }
 
 DragActionDrawStarter=function(x,y,w,h,target){
-	UpdateState({mode:{edit:false}},{id:GetState(target).id});
+	UpdateState({mode:{edit:false}},{id:TargetState(target).id});
 	DragActionStarter(x,y,w,h,target);
 }
 
 DragActionAltStarter=function(x,y,w,h,target){
-	UpdateState({mode:{edit:Flipped}},{id:GetState(target).id});
+	UpdateState({mode:{edit:Flipped}},{id:TargetState(target).id});
 	DragActionStarter(x,y,w,h,target);
 }
 
 DragActionStarter=function(x,y,w,h,target){
-	var state=GetState(target);
+	var state=TargetState(target);
 	var xy=CanvasPoint(x,y,w,h,state);
 	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
-	var mode=state.mode;
+	var mode=Clone(state.mode);
 	mode.symbol=XYFruit(xy,state)||mode.symbol;
 	mode.dragging=true;
 	mode.selection=[xy];
 	if(mode.edit){
 		mode.clearing=!!XYFruit(xy,state);
 	}
-	UpdateState({mode:mode},{id:state.id});
+	if(!Equal(mode,state.mode))
+		UpdateState({mode:mode},{id:state.id,draw:true});
 }
 DragActionContinuer=function(x,y,w,h,target){
-	var state=GetState(target);
+	var state=TargetState(target);
 	var xy=CanvasPoint(x,y,w,h,state);
 	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
-	var mode=state.mode;
+	var mode=Clone(state.mode);
 	if(!mode.selection)
 		mode.selection=[];
 	if(!In(mode.selection,xy)){
@@ -2168,11 +2206,11 @@ DragActionContinuer=function(x,y,w,h,target){
 		var selected=mode.selection;
 		mode.clearing=Intersected(XYSegments(selected[0],state),XYSegments(selected[1],state));
 	}
-
-	UpdateState({mode:mode},{id:state.id});
+	if(!Equal(mode,state.mode))
+		UpdateState({mode:mode},{id:state.id,draw:true});
 }
 DragActionEnder=function(x,y,w,h,target){
-	var state=GetState(target);
+	var state=TargetState(target);
 	var mode=state.mode;
 		mode.dragging=false;
 	var selected=mode.selection||[];
@@ -2316,10 +2354,19 @@ KeyboardSymbolsActions=function(state){
 	return Actions;
 }
 
+SymbolCycler=function(n){
+	return function(target){
+		var state=TargetState(target);
+		UpdateState(
+			{mode:CycleSymbolMode(state,n)},
+			{id:state.id}
+		)
+	}
+}
 
 var WheelActions={
-	"wheel-up":(id)=>UpdateState({mode:CycleSymbolMode(STATES[id],-1)},{id:id}),
-	"wheel-down":(id)=>UpdateState({mode:CycleSymbolMode(STATES[id],1)},{id:id})
+	"wheel-up":SymbolCycler(-1),
+	"wheel-down":SymbolCycler(1)
 }
 
 var DragActions={
@@ -2335,19 +2382,22 @@ var DragActions={
 }
 
 CanvasResize=function(state){
-	var e=GetElement(state.id);
-		e.width=Max(window.innerWidth,e.width||0,e.scrollWidth||0);
-		e.height=Max(window.innerHeight,e.height||0,e.scrollHeight||0);
+	var e=GetElement(state.render.target);
+	if(!e)
+		return;
+
+	e.width=Max(window.innerWidth,e.width||0,e.scrollWidth||0);
+	e.height=Max(window.innerHeight,e.height||0,e.scrollHeight||0);
 }
 
 ControlsBind=function(state){
-	AttendDrag(DragActions,state.id);
-	AttendWheel(WheelActions,state.id,75);
+	AttendDrag(DragActions,state.render.target);
+	AttendWheel(WheelActions,state.render.target,75);
 
 	Attend('resize',DrawStates);
 
 	KeyboardActions=Merge(KeyboardActions,KeyboardSymbolsActions(state));
-	Keybind(KeyboardActions,state.id);
+	Keybind(KeyboardActions,state.render.target);
 	ResumeCapturingKeys(ComboKeyPressHandler);
 }
 
@@ -2355,20 +2405,26 @@ ControlsBind=function(state){
 //State
 //a friendly representation of the board state, and the source of truth
 
-ObtainStartingLevelState=function(id){
+ObtainStartingLevelState=function(id,blankState){
+	var blankState=BlankState||blankState;
 	var state=Clone(BlankState);
-	if(id)
-		state.id=id;
+		state=Merge(state,{
+			id:id||GenerateId(),
+			width:window.innerWidth,
+			height:window.innerHeight*0.9
+		});
+		
 	if(PageSearch("W")||PageSearch("H"))
-		state=SerialState(PageSearchParameters(),state);		
+		state=SerialState(PageSearchParameters(),state);
+	delete state["examples"]
 	return state;
 }
 
 PreAddStateCanvas=function(state,target){
-	if(!GetElement(state.id))
+	if(!GetElement(state.render.target))
 		PreAddElement(`
 		<canvas 
-			id="${state.id}" 
+			id="${state.render.target}" 
 			oncontextmenu="return false;"
 			width="${state.width}" 
 			height="${state.height}"
@@ -2379,17 +2435,15 @@ PreAddStateCanvas=function(state,target){
 DrawStates=function(){Values(STATES).map(DrawState)};
 
 InitialisePuzzle=function(id,options){
+	var options=options||{};
 	var state=ObtainStartingLevelState(id);
-		state.id=state.id||id||GenerateID();
-	
-	state.width=window.innerWidth;
-	state.height=window.innerHeight*0.9;
+		
 	
 	var options=options||{};
 	if(state.render.main){
 		PreAddStateCanvas(state,"body");
 		ControlsBind(state);
-		setTimeout(LazyPasser(FocusElement)(state.id),500);
+		setTimeout(LazyPasser(FocusElement)(state.render.target),500);
 	}
 	else{
 		var subgrid={
@@ -2411,7 +2465,7 @@ InitialisePuzzle=function(id,options){
 
 
 StateImage=function(state){
-	var e=GetElement(state.id);
+	var e=GetElement(state.render.target);
 	var href=e.toDataURL("image/png");
 	return ImageHTML({src:href,alt:"kudamono",title:"kudamono"})
 }
@@ -2435,9 +2489,14 @@ var STATES={};
 SaveState=function(state){
 	STATES[state.id]=state;
 }
-GetState=function(target){
-	var id=target.id;
-	return Clone(STATES[id]);
+TargetState=function(target){
+	var target=GetElement(target).id;
+	var state=First(FilterValuesObject(STATES,state=>state.render.main&&state.render.target===target));
+	return state;
+}
+
+IdState=function(id){
+	return STATES[id];
 }
 
 

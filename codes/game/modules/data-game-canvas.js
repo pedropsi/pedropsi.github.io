@@ -13,6 +13,10 @@ GetContextElement=function(targetIDsel){
 
 Width=function(element){
 	var e=GetContextElement(element);
+	if(!e){
+		Warn("no element found");
+		return null;
+	}
 	var w=e.width;
 	if(w==="undefined")
 		w=e.getBoundingClientRect().width;
@@ -21,6 +25,10 @@ Width=function(element){
 
 Height=function(element){
 	var e=GetContextElement(element);
+	if(!e){
+		Warn("no element found");
+		return null;
+	}
 	var h=e.height;
 	if(h==="undefined")
 		h=e.getBoundingClientRect().height;
@@ -363,6 +371,8 @@ DrawSVG=function(opts){
 UnDraw=function(opts){
 	var opts=opts||{};
 	var canvas=GetContextElement(opts.target);
+	if(!canvas)
+		return;
 	opts={
 		x0:0,
 		x1:Width(canvas),
