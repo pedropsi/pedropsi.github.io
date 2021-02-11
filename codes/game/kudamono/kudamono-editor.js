@@ -303,6 +303,10 @@ var BlankState={
 	
 	//visuals
 	id:"kudamono-canvas",
+	render:{
+		hide:false,
+		main:true
+	},
 	visuals:{
 		cursor:"pencil",
 		cursorsize:80,
@@ -745,6 +749,9 @@ OrderedTrack=function(orientedtrack){
 // 		else
 // 			canonicaltrack.push(Reverse(previoussegment));
 		
+// 	}
+// 	return canonicaltrack;
+// }
 
 
 SegmentValid=function(segment,state){
@@ -872,6 +879,9 @@ FruitTrackStatePoints=function(fruit,track,state){
 	return FruitStatePoints(fruit,state).filter(point=>PointTrackContained(point,track));
 }
 
+TrackStateFruitPoints=function(track,state){
+	return Apply(Union,TrackFruits(track,state).map(fruit=>FruitTrackStatePoints(fruit,track,state)));
+}
 
 FruitStateShapes=function(fruit,state){
 	return FruitPoints(fruit,state).map(point=>PointStateShape(point,state));
@@ -947,7 +957,29 @@ PointContiguousPoints=function(point){
 	return Values(DirectionsCoordinates).map(v=>VectorPlus(point,v));
 }
 
-//TODO self-loop oconut PointContiguousTrackPoints
+
+//TODO self-loop coconut - not working! (yet)
+PointTrackNextNodePoints=function(xy,track,state){
+	var seenPoints=[];
+	var plannedPoints=[xy];
+	var point;
+	var nextPoints;
+	var nodePoints=[];
+	var fruitPoints=TrackStateFruitPoints(track,state);
+	while(plannedPoints.length){
+		point=First(plannedPoints);
+		seenPoints.push(point);
+		if(In(fruitPoints,xy)){
+			nodePoints.push(xy);
+		}
+		nextPoints=PointContiguousTrackPoints(point,track).filter(xy=>PointValid(xy,state)).filter(xy=>!In(plannedPoints,xy)&&!In(seenPoints,xy)&&!In(nodePoints,xy))
+		plannedPoints=plannedPoints.concat(nextPoints);
+		plannedPoints=Rest(plannedPoints);
+	}
+	return nodePoints;
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Error detection
@@ -1743,10 +1775,17 @@ DrawStatePaths=function(state){
 }
 
 DrawState=function(state){
-	UnDraw();
-	CanvasResize(state);
-	DrawBoard(state);
-	DrawMetadata(state);
+	if(state.render.hide)
+		return;
+	if(state.render.main){
+		UnDraw({target:state.id});
+		CanvasResize(state);
+		DrawBoard(state);
+		DrawMetadata(state);
+	}
+	else{
+		DrawBoard(state);
+	}
 }
 
 DrawBoard=function(state){
@@ -1792,13 +1831,13 @@ DrawMetadata=function(state){
 	DrawText({
 		...Opts,
 		txt:Capitalise(state.designation||state.genre),
-		fontSize:"calc(var(--h4) + var(--w4))",
+		fontSize:"calc(4 * var(--fontheight))",
 		y:0.1
 	})
 
 	Opts={
 		...Opts,
-		fontSize:"calc(var(--h1) + var(--w1))"
+		fontSize:"calc(1.2 * var(--fontheight))"
 	};
 
 	var levelSymbols=LevelSymbols(state);
@@ -1884,16 +1923,18 @@ UpdateState=function(substate,options){
 		changed=Union(changed,Keys(ObjectComplement(state,OLDSTATE)));
 	}
 	
-	if(Intersected(changed,UndoableProperties)&&!options.skipundo){
-		AddUndo(state);
-		NavigateSerial(StateSerial(state));
+	if(state.render.main){
+		if(Intersected(changed,UndoableProperties)&&!options.skipundo){
+			AddUndo(state);
+			NavigateSerial(StateSerial(state));
+		}
+
+		if(Intersected(changed,["visuals","mode"])||options.initialise){
+			state.visuals.cursor=StateCursorName(state);
+			DrawCursor(state);
+		}
 	}
 
-	if(Intersected(changed,["visuals","mode"])||options.initialise){
-		state.visuals.cursor=StateCursorName(state);
-		DrawCursor(state);
-	}
-	
 	if(Intersected(changed,DrawableProperties)||options.initialise)
 		DrawState(state);
 
@@ -2299,39 +2340,7 @@ CanvasResize=function(state){
 		e.height=Max(window.innerHeight,e.height||0,e.scrollHeight||0);
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
-//State
-//a friendly representation of the board state, and the source of truth
-
-ObtainStartingLevelState=function(){
-	var state=Clone(BlankState);
-	if(PageSearch("W")||PageSearch("H"))
-		state=SerialState(PageSearchParameters(),state);		
-	return state;
-}
-
-PreAddStateCanvas=function(state,target){
-	PreAddElement(`
-	<canvas 
-		id="${state.id}" 
-		oncontextmenu="return false;"
-		width="${state.width}" 
-		height="${state.height}"
-	>`,target);
-}
-
-
-DrawStates=function(){Values(STATES).map(DrawState)};
-
-InitialisePuzzle=function(id){
-	var state=ObtainStartingLevelState();
-		state.id=state.id||id||GenerateID();
-		
-	state.width=window.innerWidth;
-	state.height=window.innerHeight*0.9;
-	PreAddStateCanvas(state,"body");
-
+ControlsBind=function(state){
 	AttendDrag(DragActions,state.id);
 	AttendWheel(WheelActions,state.id,75);
 
@@ -2340,17 +2349,66 @@ InitialisePuzzle=function(id){
 	KeyboardActions=Merge(KeyboardActions,KeyboardSymbolsActions(state));
 	Keybind(KeyboardActions,state.id);
 	ResumeCapturingKeys(ComboKeyPressHandler);
-	
-	setTimeout(LazyPasser(FocusElement)(state.id),500);
+}
 
-	SaveState(state)
-	UpdateState({},{initialise:true,id:state.id})
+///////////////////////////////////////////////////////////////////////////////
+//State
+//a friendly representation of the board state, and the source of truth
+
+ObtainStartingLevelState=function(id){
+	var state=Clone(BlankState);
+	if(id)
+		state.id=id;
+	if(PageSearch("W")||PageSearch("H"))
+		state=SerialState(PageSearchParameters(),state);		
+	return state;
+}
+
+PreAddStateCanvas=function(state,target){
+	if(!GetElement(state.id))
+		PreAddElement(`
+		<canvas 
+			id="${state.id}" 
+			oncontextmenu="return false;"
+			width="${state.width}" 
+			height="${state.height}"
+		>`,GetElement(target)||"BODY");
+}
+
+
+DrawStates=function(){Values(STATES).map(DrawState)};
+
+InitialisePuzzle=function(id,options){
+	var state=ObtainStartingLevelState(id);
+		state.id=state.id||id||GenerateID();
+	
+	state.width=window.innerWidth;
+	state.height=window.innerHeight*0.9;
+	
+	var options=options||{};
+	if(state.render.main){
+		PreAddStateCanvas(state,"body");
+		ControlsBind(state);
+		setTimeout(LazyPasser(FocusElement)(state.id),500);
+	}
+	else{
+		var subgrid={
+			scaleGrid:0.30,
+			offsetX:-1
+		}
+		options.grid=subgrid;
+	}
+	
+	SaveState(state);
+	var options=Merge(options,{initialise:true,id:state.id});
+	UpdateState({},options)
 	
 	//Auto instructions
 	AutoInstructions(state.symbols)
 	
-	
 }
+
+
 
 StateImage=function(state){
 	var e=GetElement(state.id);

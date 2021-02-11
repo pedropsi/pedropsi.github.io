@@ -10086,7 +10086,7 @@ var PGDHTML=`
 			<path d="M 326 10 L 85 252 L 151 317 L 392 75 L 327 10 M 339 75 L 151 263 L 139 252 L 327 64 L 339 75 M 81 257 L 21 383 L 145 321 L 81 257"></path>
 		</svg></span></div></td></tr><tr id="e59a00bd3b1fd7fa1251d48961654be8">
 		<td><a href="game-console.html?game=e59a00bd3b1fd7fa1251d48961654be8">Pousser des caisses</a> <a href="https://www.puzzlescript.net/play.html?p=e59a00bd3b1fd7fa1251d48961654be8" rel="noreferrer noopener">◊</a></td>
-		<td><a href="https://:" rel="noreferrer noopener">Docteur Glandois</a></td>
+		<td><a href="https://" rel="noreferrer noopener">Docteur Glandois</a></td>
 		<td> (0000 please add year)</td>
 <td class="editTD"><div onclick="PulseSelect(this);RequestPGDSubmission(&quot;e59a00bd3b1fd7fa1251d48961654be8&quot;,true);" class="button" oncontextmenu="(function(e){e.preventDefault()})(event);" unselectable="on" onselectstart="return false;" tabindex="0"><span class="icon">
 		<svg class="iconpath icon-edit " width="20" height="20" viewBox="21 10 392 383">
