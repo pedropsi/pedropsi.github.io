@@ -2487,7 +2487,7 @@ AutoInstructions(FruitIcons)
 var STATES={};
 
 SaveState=function(state){
-	STATES[state.id]=state;
+	STATES[state.id]=Clone(state);
 }
 TargetState=function(target){
 	var target=GetElement(target).id;
