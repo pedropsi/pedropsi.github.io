@@ -1931,7 +1931,14 @@ UndoableProperties=BoardProperties;
 DrawableProperties=Join(UndoableProperties,["mode","visuals","win"]);
 OverwritableProperties=["level"]
 
-
+CompleteState=function(state){
+	var state=Clone(state);
+	state.tracks=SplitContiguousTracks(ValidSegments(state.segments,state));
+	state.atErrors=StateAtErrors(state);
+	if(state.render.main)
+		state.win.won=StateWon(state);
+	return state;
+}
 
 UpdateState=function(substate,options){
 	var options=options||{}	;
