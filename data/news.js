@@ -1,4 +1,10 @@
 News={
+	N_66:{
+		DATE:"2021-02-11",
+		HEADER:()=>"Game Tools reshuffle",
+		PIECE:()=>`
+		<p>The list of ${A("game-tools")} was merged and split into smaller thematic lists, as it was becoming a bit too unwieldy.</p>
+	`,ID:"game-tools"},
 	N_65:{
 		DATE:"2021-01-22",
 		HEADER:()=>"New level, improvements",

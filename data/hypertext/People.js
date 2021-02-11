@@ -162,10 +162,16 @@ var Developers={
 	"d5r":{alias:"d5r",name:"Tamiko Tadeo",TWITTER:"ttadeo_dev",TWITCH:"d5r188"},
 	"twak":{name:"Matt",alias:"twak"},
 	"hess":{name:"Adam Hess",PERSONAL_PAGE:"https://hparker.io"},
-	"stollemayer":{name:"Philipp Stollenmayer",PERSONAL_PAGE:"https://www.kamibox.de"}
+	"stollemayer":{name:"Philipp Stollenmayer",PERSONAL_PAGE:"https://www.kamibox.de"},
+	"gritfish":{alias:"Gritfish",GITHUB_COM:"gritfish"},
+	"Rogerup":{alias:"Rogerup",PERSONAL_PAGE:"https://plassion.com/"},
+	"keyser":{name:"Kevin De Keyser",PERSONAL_PAGE:"https://dekeyser.ch/"},
+	"owengoss":{name:"Owen Goss",TWITTER:"owengoss"},
+	"coltonphillips":{name:"Colton Phillips",GITHUB_COM:"ColtonPhillips"},
 }
 
 var OtherPeople={
+	"anonymous":{TYPE:"???",alias:"???",name:"Anonymous"},
 	"lkrejg":{TYPE:"Press",alias:"Lkrejg",TWITTER:"lkrejg"},
 	"puzzlescript":{TYPE:"Community",name:"Puzzlescript forum members",PERSONAL_PAGE:"https://groups.google.com/forum/#!forum/puzzlescript"},
 	"thinky":{TYPE:"Community",name:"Thinky Puzzles discord server",PERSONAL_PAGE:"https://discord.gg/ZkV2zdb"}

@@ -5,62 +5,126 @@
 		<script src="codes/core.js"></script>
 		<script id="post">var v={POST:()=>`
 
+${
+YearlyData={
+2020:{
+	"https://super-puzzlescript.github.io/":{title:"Super Puzzlescript",author:"sftrabbit",description:"Create puzzle games from the comfort of your favorite text editor and terminal with some nifty code generation power-ups",tags:["code","syntax"]},
+	"https://github.com/HParker/puzzleengine":{title:"Puzzle Engine",author:"Adam Hess",description:"C (ncurses/SDL) engine for running puzzlescript games outside of the browser.",tags:["compiler","executable"]},
+	"https://github.com/pancelor/PuzzleScript/tree/level-select":{title:"Level select fork",author:"Pancelor",description:"Level select, seamlessly integrated in puzzlescript. Press Esc to return to the selector.",tags:["fork","selector"]},
+	"https://jacklance.github.io/PuzzleScript/editor.html":{title:"Large Maps Fork",author:"Jack Lance",description:"Speeds up the puzzlescript engine on large game maps, by evaluating only the local rules",tags:["fork","map","performance"]},
+	"https://github.com/Croubble/PuzzleScriptFlickScreenUtil":{title:"Puzzlescript Command Prompt Flick Utility",author:"Crouble",description:"make a giant flickscreen map by automatically stitching individual levels into the right position",tags:["flickscreen","map","tool"]},
+},
+2019:{
+	"https://dekeyser.ch/mixedaim/":{title:"MixedAim Level Tool",author:"Kevin De Keyser",description:"Interactively co-create PuzzleScript games with your computer, using a level transformer (plus a level editor, test mode and solver)",tags:["editor","testing","solver","transform"]},
+	"https://groups.google.com/forum/#!topic/puzzlescript/uydhXEf8j0E":{title:"Level selector",author:"Alan Hazelden",description:"Level selector",tags:["selector"]},
+	"https://www.msx.org/forum/msx-talk/development/puzzlescript-on-msx":{title:"PSengine",author:"Rogerup",description:"Megadrive / MSX puzzlescript compiler",tags:["compiler","executable"]},
+	"https://jcmiller11.github.io/psUtil/":{title:"Level and Sprite Rotator and Flipper",author:"jcGyo",description:"Rotate levels and sprites; flip horizontal and vertically",tags:["tool","transform","sprite"]},
+	"http://lafaceobscuredupixel.fr/pzSprt/":{title:"Sprite Editor",author:"Xavier Direz",description:"Edit sprites quickly",tags:["tool","sprite"]},
+	"https://github.com/Clark-E/PuzzleScript-Video-Codec/":{title:"Puzzlescript Video Codec",author:"Ethan Clark",description:"Convert a sequence of images (video) to PuzzleScript source code",tags:["tool","convert","video"]},
+	"https://cdn.discordapp.com/attachments/474018445680312340/584165272735318017/PuzzleScriptUDL.xml":{title:"Puzzlescript Syntax Highlighter for Notepad++",author:"HugoBDesigner",description:"A User-Defined Language for PuzzleScript with 99% accurate highlight.",tags:["code","syntax"]},
+},
+2018:{
+	"https://marcosdon.github.io/PuzzleScriptWithSolver/editor.html":{title:"Automatic level solver",author:"Marcos Donnantuoni",description:"Check for unintended solutions in puzzle designs. Building block for procedural level generation.",tags:["fork","solver"]},
+	"https://dario-zubovic.github.io/PuzzleScript/editor.html":{title:"Dario Zubovic's PS Fork",author:"Dario Zubovic",description:"Multifeature PS Fork: gamepad, level select, custom font, arbitrary sprite size, transparent colours, case sensitiveness, nosave",tags:["fork","selector","font","sprite","colour","save","gamepad"]},
+	"https://cyatheatree.github.io/PuzzleScript/editor.html":{title:"Sprites 8x8",author:"Cyathea Tree Studio",description:"8x8 sprites (higher resolution)",tags:["fork","sprite"]},
+	"https://github.com/zarawesome/PuzzleScript/tree/mouse_action":{title:"Mouse Action Fork",author:"Guilherme Stutz Töws",description:"Click a tile to trigger an Action command",tags:["fork","mouse"]},
+	"https://github.com/ThatScar/PuzzleScript/":{title:"Mouse Dragging Fork",author:"that Scar",description:"Interact with the game by dragging the mouse",tags:["fork","mouse"]},
+	"https://github.com/Narkhos/Puzzlescript-Wrapper":{title:"Puzzlescript C++ Wrapper",author:"Xavier Direz",description:"Create standalone puzzlescript executables",tags:["compiler","executable"]},
+	"https://david-pfx.github.io/PuzzlangWeb/":{title:"Puzzlang Web Viewer",author:"David PFX",description:"Display Puzzlescript games within a Unity WebGL wrapper",tags:["compiler","unity"]},
+	"http://dungeonscript.farbs.org/":{title:"Dungeonscript",author:"Farbs",description:"First-person perspective for any puzzlescript game",tags:["fork","3d"]},
+	"https://github.com/gritfish/puzzlebit":{title:"Puzzlebit",author:"Gritfish",description:"A mobile UI for Bitsy and PuzzleScript games.",tags:["mobile","UI"]},
+	"https://philschatz.com/puzzlescript/":{title:"Accessible Puzzlescript Games",author:"Phil Schatz",description:"Accessible PuzzleScript Interpreter for screen readers",tags:["accessibility","input","UI"]}
+},
+2017:{
+	"https://github.com/richlocke87/PuzzleScript":{title:"Puzzlescript with Test Framework",author:"Richard Locke",description:"Testing framework within the puzzlescript Language",tags:["fork","testing"]},
+	"https://github.com/nwhitehead/pzfxr":{title:"PZFXR",author:"Nathan Whitehead",year:2017,description:"PZFXR Command line WAV generation of sounds",tags:["tool","sound"]},
+	"https://thorduragust.github.io/puzzlescriptMuteLink/":{title:"Add mute link",author:"Thordur Agust",description:"Add mute link to exported PuzzleScript page",tags:["tool","sound","music"]},
+},
+2016:{
+	"http://tmtg.net/tinyspriteeditor/":{title:"Sprite Editor",author:"Boris van Schooten",description:"HTML spritesheet editor with Puzzlescript import/export functions",tags:["tool","sprite"]},
+	"https://github.com/raggy/puzzlescript-embed":{title:"Puzzlescript Embed",author:"Benjamin Davis",description:"embed a PuzzleScript game in any page",tags:["tool","UI"]},
+	"https://gist.github.com/ColtonPhillips/e86a77a824f16e1c100ad703ee041880":{title:"PZR",author:"Colton Phillips",description:"Turn png files into puzzlescript format quickly",tags:["tool","convert","png"]},
+	"https://groups.google.com/forum/#!topic/puzzlescript/fivnOtTK97Y":{title:"PUZGraphical",author:"Anonymous",description:"Convert png to puzzlescript images and back",tags:["tool","convert","png"]},
+},
+2013:{
+	"https://github.com/jtpercon/PuzzleScript":{title:"Beepbox Integration",author:"Jamie Perconti",description:"Set as background music files generated by beepbox.co",tags:["music"]},
+	"http://streamingcolour.com/liveapps/puzzlescript/psspriteeditor/":{title:"Sprite Editor - bare bones",author:"Owen Goss",description:"a really bare bones HTML5 sprite editor that generates PuzzleScript sprite code",tags:["tool","sprite"]},
+},
+0000:{
+	"https://www.freeformatter.com/javascript-escape.html":{title:"JavaScript String Escape / Unescape",author:"Anonymous",description:"Recover PuzzleScript source code from an exported HTML file",tags:["tool","code"]},	
+}},
+years=Keys(YearlyData).map(Number),
+years.map(function(year){
+	Keys(YearlyData[year]).map(k=>YearlyData[year][k]=Join(YearlyData[year][k],{YEAR:year}))
+}),
+Data=Apply(Merge,Values(YearlyData)),
+ToolRow=function(name,item){
+	var fulllink=name;
+	var titleHTML=AHTML(item.title,fulllink);
+	var authorHTML=P(item.author);
+	var description=item.description;
+	var year=item.YEAR;
+	var tags=Enumerate(Sort(item.tags).map(Capitalise));
+	return [titleHTML,authorHTML,year,tags,description];
+},
+ToolsHTML=function(caption,include,exclude){
+	var include=EnArray(include).map(LowerSimpleString);
+	var exclude=EnArray(exclude).map(LowerSimpleString);
+	
+	var rows=FilterValuesObject(Data,function(item){
+			var tags=item.tags.map(LowerSimpleString);
+			return (!include.length||Intersected(tags,include))&&!Intersected(tags,exclude||[])
+		});	
+		rows=Keys(rows).map(k=>ToolRow(k,rows[k]));
+		rows=SortBy(rows,x=>-x[2]);
+	return TableHTML({
+		caption:caption,
+		headers:["Title","Author","Year","Tags","Description"],
+		rows:rows})
+},""
+}
+
 <h2>Purpose</h2>
 <p>This is a <em>concise</em> compilation of (puzzlescript) game tools, including useful <b>forks or mods</b>, <b>helpful tools</b> plus an extensive list of <b>Puzzlescript Code Samples</b> for many game components (and even some unfinished games). As a publicly shared, personal reference, it may be updated anytime.</p>
+<p><em><b>Latest update:</b> ${StringDateName("2021-02-11")}.</em></p>
 
-<h2>Puzzlescript forks or mods</h2>
-<p>Over 100 puzzlescript forks were made since 2013, and some of them are highlighted in the table below. They may include useful features and language extensions not incorporated yet in the original repository. The engine has also been adapted to create 3D games, and wrapped to run in different environments.</p>
-<p><b>NB:</b>${v.A_BOOKMARKLET()} adds a <em>level selector</em> and a <em>fullscreen mode</em> to any puzzlescript game on the fly, and supports a flexible <em>hints system</em> and a <em>background music</em> playlist.</p>
+<h2>Puzzlescript forks and tools</h2>
+<p>Over 100 puzzlescript forks were made since 2013, and some of them are highlighted in the tables below, alongside helpful tools. These cover useful features and language extensions not incorporated yet in the original repository. The engine has also been adapted to create 3D games, and wrapped to run in different environments.</p>
 
+<p><b>NB:</b>${v.NAME()}'s ${A("game bar#bookmarklet")} adds a <em>level selector</em> and a <em>fullscreen mode</em> to any puzzlescript game on the fly, and supports a flexible <em>${A("game bar#hints")} system</em> and a <em>background ${A("game bar#music")}</em> playlist.</p>
 
-<div class="table">
-	<caption><span class="caption">Useful puzzlescript mods and forks</span></caption>
-	<table class="top-left">
-<thead><tr><th scope="col">Title</th><th scope="col">Author</th><th scope="col">Year</th><th scope="col">Usage</th></tr></thead>
-<tbody>
-<tr><td><a href="https://github.com/HParker/puzzleengine" target="_blank" rel="noopener noreferrer">Puzzle Engine</a></td><td><a href="https://hparker.io/" target="_blank" rel="noopener noreferrer">Adam Hess</a></td><td>2020</td><td>C (ncurses/SDL) engine for running puzzlescript games outside of the browser.</td></tr>
-<tr><td><a href="https://github.com/pancelor/PuzzleScript/tree/level-select" target="_blank" rel="noopener noreferrer">Pancelor's level select fork</a></td><td><a href="https://pancelor.itch.io" target="_blank" rel="noopener noreferrer">Pancelor</a></td><td>2020</td><td>Level select, seamlessly integrated in puzzlescript. Press Esc to return to the selector.</td></tr>
-<tr><td><a href="https://marcosdon.github.io/PuzzleScriptWithSolver/editor.html" target="_blank" rel="noopener noreferrer">Automatic level solver</a></td><td><a href="https://twitter.com/marcos_don" target="_blank" rel="noopener noreferrer">Marcos Donnantuoni</a></td><td>2018</td><td>Check for unintended solutions in puzzle designs. Building block for procedural level generation.</td></tr>
-<tr><td><a href="https://dario-zubovic.github.io/PuzzleScript/editor.html" target="_blank" rel="noopener noreferrer">Dario Zubovic's PS Fork</a></td><td><a href="https://twitter.com/dario_zubovic" target="_blank" rel="noopener noreferrer">Dario Zubovic</a></td><td>2018</td><td>Multifeature PS Fork: gamepad, level select, custom font, arbitrary sprite size, transparent colours, case sensitiveness, nosave</td></tr>
-<tr><td><a href="https://cyatheatree.github.io/PuzzleScript/editor.html" target="_blank" rel="noopener noreferrer">Sprites 8x8</a></td><td><a href="https://twitter.com/cyatheatree" target="_blank" rel="noopener noreferrer">Cyathea Tree Studio</a></td><td>2018</td><td>8x8 sprites (higher resolution)</td></tr>
-<tr><td><a href="https://github.com/zarawesome/PuzzleScript/tree/mouse_action" target="_blank" rel="noopener noreferrer">Mouse Action Fork</a></td><td><a href="https://zaratustra.itch.io/" target="_blank" rel="noopener noreferrer">Guilherme Stutz Töws (Zaratustra Productions)</a></td><td>2018</td><td>Click a tile to trigger an "Action" command</td></tr>
-<tr><td><a href="https://github.com/ThatScar/PuzzleScript/" target="_blank" rel="noopener noreferrer">Mouse Dragging Fork</a></td><td>Skalmantas Šimenas (that Scar)</td><td>2018</td><td>Interact with the game by dragging the mouse</td></tr>
-<tr><td><a href="https://github.com/Narkhos/Puzzlescript-Wrapper" target="_blank" rel="noopener noreferrer">Puzzlescript C++ Wrapper</a></td><td><a href="http://lafaceobscuredupixel.fr/" target="_blank" rel="noopener noreferrer">Xavier Direz (Narkhos)</a></td><td>2018</td><td>Create standalone puzzlescript executables</td></tr>
-<tr><td><a href="https://david-pfx.github.io/PuzzlangWeb/" target="_blank" rel="noopener noreferrer">Puzzlang Web Viewer</a></td><td><a href="https://github.com/david-pfx" target="_blank" rel="noopener noreferrer">David PFX</a></td><td>2018</td><td>Display Puzzlescript games within a Unity WebGL wrapper</td></tr>
-<tr><td><a href="http://dungeonscript.farbs.org/" target="_blank" rel="noopener noreferrer">Dungeonscript</a></td><td><a href="https://twitter.com/FarbsMcFarbs" target="_blank" rel="noopener noreferrer">Farbs</a></td><td>2018</td><td>First-person perspective for any puzzlescript game</td></tr>
-<tr><td><a href="https://github.com/jtpercon/PuzzleScript" target="_blank" rel="noopener noreferrer">Beepbox Integration</a></td><td><a href="https://twitter.com/InfinitNutshell" target="_blank" rel="noopener noreferrer">Jamie Perconti</a></td><td>2013</td><td>Set as background music files generated by beepbox.co</td></tr>
-<tr><td><a href="https://github.com/richlocke87/PuzzleScript" target="_blank" rel="noopener noreferrer">Puzzlescript with Test Framework</a></td><td><a href="http://www.richardlocke.co.uk" target="_blank" rel="noopener noreferrer">Richard Locke</a></td><td>2017</td><td>Testing framework within Puzzlescript Language</td></tr>
-<tr><td><a href="https://github.com/gritfish/puzzlebit" target="_blank" rel="noopener noreferrer">Puzzlebit</a></td><td>Gritfish</td><td>2018</td><td>A mobile UI for Bitsy and PuzzleScript games. </td></tr>
-<tr><td><a href="https://philschatz.com/puzzlescript/" target="_blank" rel="noopener noreferrer">Accessible Puzzlescript Games</a></td><td><a href="https://philschatz.com/" target="_blank" rel="noopener noreferrer">Phil Schatz</a></td><td>2018</td><td>Accessible PuzzleScript Interpreter for screen readers</td></tr>
-<tr><td><a href="https://groups.google.com/forum/#!topic/puzzlescript/uydhXEf8j0E" target="_blank" rel="noopener noreferrer">Level selector</a></td><td><a href="https://twitter.com/draknek" target="_blank" rel="noopener noreferrer">Alan Hazelden</a></td><td>2019</td><td>Level selector</td></tr>
-<tr><td><a href="https://www.msx.org/forum/msx-talk/development/puzzlescript-on-msx" target="_blank" rel="noopener noreferrer">PSengine</a></td><td>Rogerup</td><td>2019</td><td>Megadrive / MSX puzzlescript compiler</td></tr>
-<tr><td><a href="https://jacklance.github.io/PuzzleScript/editor.html" target="_blank" rel="noopener noreferrer">Jack Lance's PS Fork for Large Maps</a></td><td><a href="https://twitter.com/Jack_L_Lance" target="_blank" rel="noopener noreferrer">Jack Lance</a></td><td>2020</td><td>Speeds up the puzzlescript engine on large game maps, by evaluating only the local rules</td></tr>
-</tbody>
-</table>
-</div>
+<h3>Design tools for levels and mechanics</h3>
+<p>Designing good levels and writing puzzlescript rules in more complex situations is a potentially long process. These tools aim to speed that up a bit.</p>
+${ToolsHTML("level and rule design tools",["solver","testing","transformer","syntax"])}
 
+<h3>Level selector</h3>
+<p>Adding a level selector to a puzzlescript game is a very common wish, for which there are many options, including ${v.NAME()}'s ${A("game bar")}!</p>
+${ToolsHTML("adding a level selector",["selector"])}
 
-<h2>Helpful tools</h2>
+<h3>Music and sounds</h3>
+<p>Sometimes a little extra control over music or sound effects in puzzlescript is desired.</p>
+${ToolsHTML("music and sounds",["music","sound"])}
+<p>${v.NAME()}'s ${A("game bar")} also supports adding a ${A("game bar#music")} playlist.</p>
+
+<h3>Accessibility and controllers</h3>
+<p>Adding a mouse or a gamepad as controllers for a puzzlescript game, and other accessibility-focussed initiatives.</p>
+${ToolsHTML("alternative input modes and other accessibility initiatives",["accessibility","mouse","gamepad"])}
+
+<h3>Large level maps</h3>
 <p>Making larger games with puzzlescript is regarded by many people as a challenge. In that case, these helpful tools make it less heroic.</p>
+${ToolsHTML("making large level maps",["map"])}
 
-<div class="table">
-<caption><span class="caption">Useful puzzlescript tools</span></caption>
-<table class="top-left" id="fôunpdãôxìdôõdvháez"><thead><tr><th scope="col">Title</th><th scope="col">Author</th><th scope="col">Year</th><th scope="col">Usage</th><th scope="col">Tags</th></tr></thead>
-<tbody><tr><td><a href="https://github.com/Croubble/PuzzleScriptFlickScreenUtil" target="_blank" rel="noopener noreferrer">Puzzlescript Command Prompt Flick Utility</a></td><td><a href="https://twitter.com/Croubble" target="_blank" rel="noopener noreferrer">Crouble (NarrowAdder)</a></td><td>2020</td><td>make a giant flickscreen map by automatically stitching individual levels into the right position</td><td>Levels, flickscreen</td></tr>
-<tr><td><a href="https://jcmiller11.github.io/psUtil/" target="_blank" rel="noopener noreferrer">Level and Sprite Rotator and Flipper</a></td><td><a href="https://github.com/jcmiller11" target="_blank" rel="noopener noreferrer">J. C. Miller (jcGyo)</a></td><td>2019</td><td>Rotate levels and sprites; flip horizontal and vertically</td><td>Levels, sprites</td></tr>
-<tr><td><a href="http://lafaceobscuredupixel.fr/pzSprt/" target="_blank" rel="noopener noreferrer">Sprite Editor</a></td><td><a href="http://lafaceobscuredupixel.fr/" target="_blank" rel="noopener noreferrer">Xavier Direz (Narkhos)</a></td><td>2019</td><td>Edit sprites quickly</td><td>Sprites</td></tr>
-<tr><td><a href="https://github.com/Clark-E/PuzzleScript-Video-Codec/" target="_blank" rel="noopener noreferrer">Puzzlescript Video Codec</a></td><td><a href="https://twitter.com/EthanIClark1" target="_blank" rel="noopener noreferrer">Ethan Clark (EPGA Studios)</a></td><td>2019</td><td>Convert a sequence of images (video) to PuzzleScript source code</td><td>Sprites, video</td></tr>
-<tr><td><a href="https://cdn.discordapp.com/attachments/474018445680312340/584165272735318017/PuzzleScriptUDL.xml" target="_blank" rel="noopener noreferrer">Puzzlescript Syntax Highlighter for Notepad++</a></td><td><a href="https://twitter.com/HugoBDesigner" target="_blank" rel="noopener noreferrer">Hugo B.</a></td><td>2019</td><td>A User-Defined Language for PuzzleScript with 99% accurate highlight.</td><td>Language</td></tr>
-<tr><td><a href="https://github.com/nwhitehead/pzfxr" target="_blank" rel="noopener noreferrer">PZFXR</a></td><td><a href="https://github.com/nwhitehead" target="_blank" rel="noopener noreferrer">Nathan Whitehead</a></td><td>2017</td><td>PZFXR Command line WAV generation of sounds</td><td>Sounds</td></tr>
-<tr><td><a href="https://github.com/raggy/puzzlescript-embed" target="_blank" rel="noopener noreferrer">Puzzlescript Embed</a></td><td><a href="https://github.com/raggy" target="_blank" rel="noopener noreferrer">Benjamin Davis</a></td><td>????</td><td>embed a puzzlescript game in any page</td><td>Code</td></tr>
-<tr><td><a href="https://www.freeformatter.com/javascript-escape.html" target="_blank" rel="noopener noreferrer">JavaScript String Escape / Unescape</a></td><td>Anonymous</td><td>????</td><td>Recover PuzzleScript source code from an exported HTML file</td><td>Code</td></tr>
-<tr><td><a href="https://groups.google.com/forum/#!topic/puzzlescript/fivnOtTK97Y" target="_blank" rel="noopener noreferrer">PUZGraphical</a></td><td>Anonymous</td><td>????</td><td>Convert png to puzzlescript images and back</td><td>Image</td></tr>
-<tr><td><a href="https://thorduragust.github.io/puzzlescriptMuteLink/" target="_blank" rel="noopener noreferrer">Add mute link</a></td><td><a href="https://thordur.itch.io/" target="_blank" rel="noopener noreferrer">Thordur Agust</a></td><td>????</td><td>Add mute link to exported puzzlescript page</td><td>Sounds</td></tr>
-<tr><td><a href="http://tmtg.net/tinyspriteeditor/" target="_blank" rel="noopener noreferrer">Sprite Editor</a></td><td>Boris van Schooten</td><td>????</td><td>HTML spritesheet editor with Puzzlescript import/export functions</td><td>Sprites</td></tr>
-<tr><td><a href="http://streamingcolour.com/liveapps/puzzlescript/psspriteeditor/" target="_blank" rel="noopener noreferrer">Sprite Editor - bare bones</a></td><td>Owen Goss</td><td>????</td><td>a really bare bones HTML5 sprite editor that generates PuzzleScript sprite code</td><td>Sprites</td></tr>
-</tbody>
-</table>
-</div>
+<h3>Graphics</h3>
+<p>Using larger sprites, adding transparency, changing the default font, or even playing puzzlescript in 3D are possible!</p>
+${ToolsHTML("graphical utilities",["sprite","colour","font","3d","convert"])}
+
+<h3>Engines and UIs</h3>
+<p>With these engines, puzzlescript can run in different environments, in and out of the browser. There are also some alternative user interfaces.</p>
+${ToolsHTML("alternative puzzlescript engines and interfaces",["compiler","ui"])}
+
+<h3>Other helpful tools</h3>
+<p>Other useful tools not listed above are gathered here.</p>
+${ToolsHTML("other helpful tools",[],["fork","compiler","music","sound","map","selector","testing","sprite","colour","font","3d","accessibility","mouse","convert","gamepad","ui","syntax"])}
 
 
 <h2>Puzzlescript examples</h2>
