@@ -710,44 +710,41 @@ OrderedTrack=function(orientedtrack){
 	else return orientedtrack;
 }
 
-CanonicalContiguousTrack=function(track,Posit){
-	var endsegments=TrackEndsegments(track);
-	var endpoints=TrackEndpoints(track);
+// CanonicalContiguousTrack=function(track,Posit){
+// 	var endsegments=TrackEndsegments(track);
+// 	var endpoints=TrackEndpoints(track);
 
-	if(!endpoints.length)	//a loop
-		endpoints=track.map(First);
+// 	if(!endpoints.length)	//a loop
+// 		endpoints=track.map(First);
 
-	startpoint=First(Sorter(Posit)(endpoints));
+// 	startpoint=First(Sorter(Posit)(endpoints));
 
-	if(endsegments.length<1)
-		endsegments=track;
+// 	if(endsegments.length<1)
+// 		endsegments=track;
 
-	endsegments=endsegments.filter(s=>In(s,startpoint));
+// 	endsegments=endsegments.filter(s=>In(s,startpoint));
 	
-	if(endsegments.length>1)
-		endsegments=endsegments.filter(s=>(In([[1,0],[-1,0]],VectorMinus(s[0],s[1])))); //TODO minimise with POSIT on both vertexes instead, generalises better
+// 	if(endsegments.length>1)
+// 		endsegments=endsegments.filter(s=>(In([[1,0],[-1,0]],VectorMinus(s[0],s[1])))); //TODO minimise with POSIT on both vertexes instead, generalises better
 	
-	var	nextsegment=First(endsegments);
+// 	var	nextsegment=First(endsegments);
 	
-	if(Equal(Last(nextsegment),startpoint)){
-		nextsegment=Reverse(First(endsegments));
-	}
-	var previoussegment=null;
+// 	if(Equal(Last(nextsegment),startpoint)){
+// 		nextsegment=Reverse(First(endsegments));
+// 	}
+// 	var previoussegment=null;
 
-	var canonicaltrack=[];
-	var oldtrack=track;
-	while(oldtrack.length>0&&nextsegment!==previoussegment){
-		previoussegment=nextsegment;
-		oldtrack=DeleteSegmentTrack(previoussegment,oldtrack);
-		nextsegment=First(SegmentContiguousTrackSegments(previoussegment,oldtrack));
-		if(!nextsegment||In(nextsegment,previoussegment[1]))
-			canonicaltrack.push(previoussegment);
-		else
-			canonicaltrack.push(Reverse(previoussegment));
+// 	var canonicaltrack=[];
+// 	var oldtrack=track;
+// 	while(oldtrack.length>0&&nextsegment!==previoussegment){
+// 		previoussegment=nextsegment;
+// 		oldtrack=DeleteSegmentTrack(previoussegment,oldtrack);
+// 		nextsegment=First(SegmentContiguousTrackSegments(previoussegment,oldtrack));
+// 		if(!nextsegment||In(nextsegment,previoussegment[1]))
+// 			canonicaltrack.push(previoussegment);
+// 		else
+// 			canonicaltrack.push(Reverse(previoussegment));
 		
-	}
-	return canonicaltrack;
-}
 
 
 SegmentValid=function(segment,state){
