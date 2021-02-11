@@ -2802,7 +2802,7 @@ LoadHTMLObject=function(Obj,Successer){
 //Data Reception
 
 //Network status
-Online=function(){return navigator.onLine};
+Online=function(){return !!navigator.onLine};
 Offline=function(){return !Online()};
 
 //Parameter requests
@@ -3652,6 +3652,8 @@ SVGEncodedURL=function(opts){
 
 SetCursor=function(element,nameSO,Opts){
 	var e=GetElement(element);
+	if(!e)
+		return;
 	var Opts=Opts||{};
 	if(!nameSO)
 		e.style["cursor"]="auto";
