@@ -354,7 +354,7 @@ var BlankState={
 		nudge:0.3,							//fruit nudge (small adjustments to position)
 		dual:false,							//disalign squares and grid
 		scaleGrid:0.70,						//reduce the grid size
-		offsetX:0,							//displace the grid horizontally
+		offsetX:1,							//displace the grid horizontally
 		offsetY:1.15						//displace the grid verticallly
 	},
 	gridEdit:{//grid in edit mode
@@ -1710,10 +1710,6 @@ StateSerial=function(state){
 
 
 
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////
 //Interactive UI (for quick iteration)
 
@@ -1775,41 +1771,72 @@ StatePathsDraw=function(state){
 	}
 }
 
-	if(state.render.hide)
-		return;
-	if(state.render.main){
-		UnDraw(state.render);
-		CanvasResize(state);
-		DrawBoard(state);
-		DrawMetadata(state);
-	}
+StateDraw=function(state){
+	UnDraw(state.render);
+	CanvasResize(state);
+	BoardDraw(state);
+	MetadataDraw(state);
 }
 
-RulestatesDraw=function(rulestates,state){
-	var n=rulestates.length;
-	var x=-0.5;
-	for(var i=0;i<n;i++){
-		rulestates[i]=Join(
-			rulestates[i],
-			{grid:{
-				scaleGrid:0.30,
-				offsetX:x+i%2*0.25,
-				offsetY:2*Floor(i/2)
-StateDraw=function(state){
+RulesDraw=function(state){
+	var levelSymbols=LevelSymbols(state);
+	var n=levelSymbols.length;
+
+	var dH=1/4;
+	var dV=2/7;
+	var cols=2;
+	var x=1/3;
+	var y=1/2;
+	var scale=0.15;
+
+	for(var i=0;i<levelSymbols.length;i++){
+		var symbol=levelSymbols[i];
+		var rule=state.symbols[symbol].rule;
+		
+		var rendering={
+			grid:{
+				scaleGrid:scale,
+				offsetX:x+dH*((n-i)%cols),
+				offsetY:y+Ceiling((i+1)/cols)*dV
 			},
 			render:{
 				main:false,
 				target:state.target
 			}
-		})
+		}
+
+		var subtitle=rule.description;
+		RuleDescriptionDraw(subtitle,rendering);
+
+		var miniboard=SymbolSerialState(symbol,rule.depiction,state);
+			miniboard=CompleteState(Join(miniboard,rendering));
+		BoardDraw(miniboard);
 	}
-	rulestates.map(rs=>DrawBoard(rs))
 }
 
-DrawBoard=function(state,supraState){
-	UnDrawBoard(state);
-	DrawStateGrid(state);
-	DrawStatePaths(state);
+SymbolSerialState=function(symbol,serial,suprastate){
+	var state=SerialState(SearchParameters(serial),Clone(suprastate));
+		state.id="rule-"+symbol;
+		state.render={main:false,target:suprastate.render.target};
+		state=ComplementKeysObject(["examples","designation"],state);	
+	return state;
+}
+
+RuleDescriptionDraw=function(subtitle,rendering){
+	var suby=0.05;
+	DrawText({
+		...rendering,
+		txt:subtitle,
+		fontWeight:"italic",
+		x:rendering.offsetX,
+		y:rendering.offsetY+suby
+	})
+}
+
+BoardDraw=function(state){
+	BoardUnDraw(state);
+	StateGridDraw(state);
+	StatePathsDraw(state);
 	DrawLevel(state);
 }
 
@@ -1824,7 +1851,7 @@ BoardUnDraw=function(state){
 }
 
 LevelSymbols=function(state){
-	return Keys(state.level).filter(s=>state.level[s]&&state.level[s].length);
+	return Keys(state.level).filter(s=>state.level[s].filter(xy=>PointValid(xy,state)).length);
 }
 
 MetadataColophon=function(metadata){
@@ -1853,33 +1880,21 @@ MetadataDraw=function(state){
 		y:0.1
 	})
 
+	RulesDraw(state);
+
 	Opts={
 		...Opts,
 		fontSize:"calc(1.2 * var(--fontheight))"
-	};
+	}
 
-	var levelSymbols=LevelSymbols(state);
-	var usedRules=levelSymbols.map(symbol=>state.symbols[symbol].rule.description).filter(Identity);
-	var subtitle=state.description+"\n"+EnumerateSentence(usedRules);
+	var subtitle=state.description;
 
-	var ruleStates=levelSymbols.map(fruit=>SymbolSerialState(fruit,state.symbols[fruit].rule.depiction,state));
-
-	RulestatesDraw(ruleStates,state);
-	
 	subtitle.split(/\n/).map((line,i)=>DrawText({
 		...Opts,
 		txt:line,
 		fontWeight:"italic",
 		y:0.15+0.04*i
 	}))
-	
-
-
-	Opts={
-		...Opts,
-		textAlign:"right",
-		x:0.95
-	};
 	
 	var url=state.metadata.url||""
 
@@ -1915,13 +1930,6 @@ MetadataDraw=function(state){
 		})	
 }
 
-SymbolSerialState=function(symbol,serial,suprastate){
-	var state=SerialState(SearchParameters(serial),Clone(suprastate));
-		state.id="rule-"+symbol;
-		state.render={main:false,target:suprastate.render.target};
-		state=ComplementKeysObject(["examples","designation"],state);	
-	return state;
-}
 
 
 
@@ -1953,9 +1961,7 @@ UpdateState=function(substate,options){
 	changed=Keys(ObjectComplement(state,OLDSTATE));
 
 	if(Intersected(changed,BoardProperties)||options.initialise){
-		state.tracks=SplitContiguousTracks(ValidSegments(state.segments,state));
-		state.atErrors=StateAtErrors(state);
-		state.win.won=StateWon(state);
+		state=CompleteState(state);
 		changed=Union(changed,Keys(ObjectComplement(state,OLDSTATE)));
 	}
 	
@@ -2445,20 +2451,9 @@ InitialisePuzzle=function(id,options){
 	var options=options||{};
 	var state=ObtainStartingLevelState(id);
 		
-	
-	var options=options||{};
-	if(state.render.main){
-		PreAddStateCanvas(state,"body");
-		ControlsBind(state);
-		setTimeout(LazyPasser(FocusElement)(state.render.target),500);
-	}
-	else{
-		var subgrid={
-			scaleGrid:0.30,
-			offsetX:-1
-		}
-		options.grid=subgrid;
-	}
+	PreAddStateCanvas(state,"body");
+	ControlsBind(state);
+	setTimeout(LazyPasser(FocusElement)(state.render.target),500);
 	
 	SaveState(state);
 	var options=Merge(options,{initialise:true,id:state.id});
