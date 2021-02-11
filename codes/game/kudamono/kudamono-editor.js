@@ -1301,7 +1301,7 @@ XYFruitErred=function(xy,fruit,state){
 	return Values(errors).some(Identity);
 }
 
-DrawStateFruit=function(state,fruit,xy,Opts){
+StateDrawFruit=function(state,fruit,xy,Opts){
 	if(!fruit||!xy||!PositionValid(xy[0],xy[1],state)||!fruit)
 		return;
 
@@ -1362,7 +1362,7 @@ DrawStateFruit=function(state,fruit,xy,Opts){
 
 DrawFruits=function(fruit,coordinates,Opts,state){
 	var Opts=Opts||{};
-	(coordinates||[]).map(xy=>DrawStateFruit(state,fruit,xy,Opts));
+	(coordinates||[]).map(xy=>StateDrawFruit(state,fruit,xy,Opts));
 }
 
 DrawLevel=function(state){
@@ -1744,14 +1744,14 @@ DrawStateGrid=function(state){
 }
 
 
-DrawTracks=function(tracks,state,Opts){
+TracksDraw=function(tracks,state,Opts){
 	var positionErrors=state.atErrors;
 	tracks.map((track,i)=>DrawTrack(track,state,Opts,positionErrors[i]));
 }
 
 
 
-DrawStatePaths=function(state){
+StatePathsDraw=function(state){
 	var tracks=state.tracks;
 	var Opts=Extremes(state);
 	
@@ -1761,7 +1761,7 @@ DrawStatePaths=function(state){
 		lineWidth:state.line.lineWidth
 	}
 
-	DrawTracks(tracks,state,Opts);
+	TracksDraw(tracks,state,Opts);
 
 	if(!state.mode.edit&&state.mode.selection&&state.mode.selection.length>1){
 		var seltrack=PathTrack(state.mode.selection);
@@ -1840,7 +1840,7 @@ MetadataColophon=function(metadata){
 	return number+title+difficulty+author+date;
 }
 
-DrawMetadata=function(state){
+MetadataDraw=function(state){
 	var Opts={
 		target:state.render.target,
 		colour:state.metadata.textColour,
@@ -1966,7 +1966,7 @@ UpdateState=function(substate,options){
 
 	
 	if(Intersected(changed,DrawableProperties)||options.initialise||options.draw)
-		DrawState(state);
+		StateDraw(state);
 
 	if(!options.unsave)
 		SaveState(state);
@@ -2029,7 +2029,7 @@ ObtainSetLevelState=function(state){
 	state.mode.dragging=BlankState.mode.dragging;
 	state.mode.clearing=BlankState.mode.clearing;
 	SaveState(state);
-	DrawState(state);
+	StateDraw(state);
 }
 
 
@@ -2394,7 +2394,7 @@ ControlsBind=function(state){
 	AttendDrag(DragActions,state.render.target);
 	AttendWheel(WheelActions,state.render.target,75);
 
-	Attend('resize',DrawStates);
+	Attend('resize',StateDraws);
 
 	KeyboardActions=Merge(KeyboardActions,KeyboardSymbolsActions(state));
 	Keybind(KeyboardActions,state.render.target);
