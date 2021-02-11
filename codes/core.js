@@ -172,8 +172,8 @@ Warner=function(type){
 	var bold="font-weight:bold; ";
 	var types={
 		"error":[
-			'color:darkred; font-family:Calibri,Arial; font-weight:bold;',
-			'color:darkred; font-family:Calibri,Arial; background: lightyellow;'
+			yellowfont+bold+' background: gray;',
+			yellowfont+' background: gray;'
 		],
 		"type error":[
 			yellowfont+bold+' background: darkred;',
