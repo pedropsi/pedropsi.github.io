@@ -444,7 +444,7 @@ PointContainedTrackSegments=function(point,track){
 //Forest + point
 
 PointForestContained=function(point,forest){
-	return forest.some(track=>PointTrackContained(point,forest));
+	return forest.some(track=>PointTrackContained(point,track));
 }
 
 //Forest + segment + point
