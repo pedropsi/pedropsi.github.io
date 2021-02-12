@@ -6,8 +6,9 @@
 
 
 //Segments: [s1,....sn]			(any set of segments, usually not contiguous)
-//Track: [s1,....sn] 			(any set of segments, usually contiguous)
-//Twig: track					(a contiguous track, without bifurcations - converts easily to a path)
+//Track: 	[s1,....sn] 		(any set of segments, usually contiguous)
+//Trunk:	track				(any of contiguous segments, potentially branched)
+//Twig:		trunk				(a trunk, without bifurcations - converts easily to a path)
 
 //Forest: [t1,....tn] 			(any set of tracks, may or not touch each other)
 //Orchard: forest	 			(a set of tracks, none of which touch each other)
@@ -58,7 +59,15 @@ PatchedPath=function(path){
 	return TrackPoints(PathTrack(path));
 }
 
+//Path + segment
 
+SegmentPathContained=function(segment,path){
+	return SegmentPoints(segment).every(point=>In(path,point));
+}
+
+SegmentPathsContained=function(segment,paths){
+	return paths.some(path=>SegmentPathContained(segment,path));
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Segment
@@ -231,12 +240,13 @@ GrowWay=function(way,segments,endpoint,forward,seenPoints){
 	}
 	while(endpoint){
 		seenPoints=Union(seenPoints,way);
-		endpoint=First(Complement(PointTrackContiguousInterpoints(endpoint,segments),seenPoints));
+		endpoint=First(Complement(PointTrackContiguousUnBranchpoints(endpoint,segments),seenPoints));
 		if(endpoint)
 			way=Pend(way,endpoint);
 	}
 	endpoint=First(Complement(PointTrackContiguousPoints(Terminus(way),segments),way));
-	way=Pend(way,endpoint);
+	if(endpoint)
+		way=Pend(way,endpoint);
 	return way;
 }
 
@@ -251,20 +261,38 @@ SegmentsNodepointWay=function(segments,nodepoint,seenPoints){
 }
 
 SegmentsWays=function(segments){
+	if(!segments)
+		return [];
+	var ways=[];
+	var subways=SegmentsLongWays(segments);
+	var ways=Join(ways,subways);
+	var segments=segments.filter(s=>!SegmentPathsContained(s,ways));
+	while(segments.length){
+		subways=SegmentsLongWays(segments);
+		ways=Join(ways,subways);
+		segments=segments.filter(s=>!SegmentPathsContained(s,ways));
+	}
+	Wbug(segments)
+	return SupersetsArray(ways);
+}
+
+SegmentsLongWays=function(segments){
 	var ways=[];
 	if(!segments.length)
 		return ways;
 
 	var segments=Clone(segments);
-	var pickedpoints=Sort(TrackNodepoints(segments));
+	var pickedpoints=Sort(TrackEndpoints(segments));
 	if(!pickedpoints.length) //Single loop without nodes
 		pickedpoints=[First(Sort(TrackPoints(segments)))];
 	
 	while(pickedpoints.length){
 		ways=Append(ways,SegmentsNodepointWay(segments,First(pickedpoints),Apply(Union,ways)));
+		pickedpoints=Rest(pickedpoints);
 	}
 	return ways;
 }
+
 
 OrderedTrack=function(orientedtwig){
 	if(!PointsOrdered(First(First(orientedtwig)),Last(Last(orientedtwig)))){
@@ -367,8 +395,8 @@ PointTrackContiguousPoints=function(point,track){
 	return Complement(points,[point]);
 }
 
-PointTrackContiguousInterpoints=function(point,segments){
-	return PointTrackContiguousPoints(point,segments).filter(Point=>PointTrackInterpointed(Point,segments));
+PointTrackContiguousUnBranchpoints=function(point,segments){
+	return PointTrackContiguousPoints(point,segments).filter(Point=>PointTrackUnBranchpointed(Point,segments));
 }
 
 PointTrackDegree=function(point,track){
@@ -378,13 +406,19 @@ PointTrackDegree=function(point,track){
 TrackDegreePoints=function(track,n){
 	return TrackPoints(track).filter(point=>PointTrackDegree(point,track)===n);
 }
-
 TrackOverDegreePoints=function(track,n){
-	return TrackPoints(track).filter(point=>PointTrackDegree(point,track)>=n);
+	return TrackPoints(track).filter(point=>PointTrackDegree(point,track)>n);
+}
+TrackUnderDegreePoints=function(track,n){
+	return TrackPoints(track).filter(point=>PointTrackDegree(point,track)<n);
 }
 
 PointTrackInterpointed=function(point,track){
 	return In(TrackInterpoints(track),point);
+}
+
+PointTrackUnBranchpointed=function(point,track){
+	return In(TrackUnderDegreePoints(track,3),point);
 }
 
 TrackEndpoints=function(track){
@@ -397,7 +431,7 @@ TrackNodepoints=function(track){
 	return Complement(TrackPoints(track),TrackInterpoints(track));
 }
 TrackBranchpoints=function(track){
-	return TrackOverDegreePoints(track,3);
+	return TrackOverDegreePoints(track,2);
 }
 
 
@@ -665,7 +699,7 @@ AccumulateTokenCoords=function(tokendiffs,H){
 
 PathSerialPattern=/\d+\D+/ig;
 
-DirectionsLetter={
+TripletLetters={
 	"LLL":"a",
 	"LLU":"b",
 	"LLD":"c",
@@ -729,11 +763,16 @@ DirectionsCoordinates={
 	"D":[0,1]
 }
 
-LetterDirections=FlipKeysValues(DirectionsLetter);
+LetterTriplets=FlipKeysValues(TripletLetters);
 CoordinatesDirections=FlipKeysValues(DirectionsCoordinates);
 
-DirectionCode=function(direction){
-	return Accesser(CoordinatesDirections)(String(direction));
+CoordinateLetter=function(direction){
+	var direction=String(direction);
+	if(!In(CoordinatesDirections,direction)){
+		Warn("unrecognised direction",direction);
+		return "";
+	}else
+		return Accesser(CoordinatesDirections)(direction);
 }
 
 SegmentPairNextDirection=function(segment1,segment2){
@@ -758,7 +797,7 @@ SegmentPairSelfNextDirection=function(segment1,segment2){
 
 
 LetterContiguousPath=function(letters,startxy){
-	var directions=letters.split("").map(Accesser(LetterDirections)).join("").split("");
+	var directions=letters.split("").map(Accesser(LetterTriplets)).join("").split("");
 		directions=directions.map(Accesser(DirectionsCoordinates));
 	var coordinates=directions;
 		coordinates=coordinates.map((c,i)=>Apply(VectorPlus,Take(directions,i+1)));
@@ -775,46 +814,46 @@ SerialOrchard=function(serial,H){
 	return Join(...tracks);
 }
 
-OrchardSerial=function(tracks,H){
-	if(!tracks||!tracks.length)
+OrchardSerial=function(orchard,H){
+	if(!orchard||!orchard.length)
 		return "";
-	var	twigs=ForestTwigs(tracks);
-	var	orientedtwigs=twigs.map(OrientedTwig);
-	var	orientedtwigs=Sorter(TrackLineariser(H))(orientedtwigs);
-	var overpath=orientedtwigs.map(TrackLineariser(H));
-	var differences=[0].concat(overpath);
-		differences=Rest(differences).map((d,i)=>d-differences[i]);
-	var pointtracks=orientedtwigs.map((l,i)=>[differences[i],l]);
-	var serials=pointtracks.map(PointTrackSerial);
-		return serials.join("");
-}
-
-
-PointTrackSerial=function(pointtrack){
-	return String(pointtrack[0])+TrackDirectionSerial(pointtrack[1]);
-}
-
-TrackDirectionSerial=function(track){
-	if(!track.length)
-		return "";
-	var track=Clone(track);
-	var directions;
-	if(track.length<2){
-		directions=[SegmentUnitDirection(First(track))]
-	}else{
-		directions=Rest(track).map(function(segment,i){
-			var dir=SegmentPairNextDirection(track[i],segment);
-			return dir;
-		});
-		directions.unshift(SegmentPairSelfNextDirection(track[0],track[1]));
-	}
+	var ways=Apply(Union,orchard.map(SegmentsWays));
+	var points=ways.map(First);
+	var linears=points.map(p=>Linearise(p,H));
+	var sortedlinears=Sort(linears);
+	var order=Order(sortedlinears,linears);
 	
-	//directions=directions.map(DirectionCode).join("").split(/(\D\D\D)/g).filter(Identity);
-	directions=directions.map(DirectionCode).filter(Identity);
-	directions=directions.map(Accesser(DirectionsLetter))
-	return directions.join("");
+	points=Pick(points,order);
+	  ways=Pick(ways,order);
+
+	var differences=[0].concat(sortedlinears);
+		differences=Rest(differences).map((d,i)=>d-differences[i]);
+
+	return MapThread(DiffWaySerial,differences,ways).join("");
 }
 
+
+DiffWaySerial=function(n,way){
+	return String(n)+WayDirectionSerial(way);
+}
+
+WaySegments=function(way){
+	return Rest(way).map((point,i)=>[way[i],point]);
+}
+
+WayDirectionSerial=function(way){
+	if(!way.length||way.length<2)
+		return "";
+	var directions=WaySegments(way).map(SegmentDirection);
+	return DirectionsTripletSerial(directions);
+}
+
+DirectionsTripletSerial=function(directions){
+	var letters=directions.map(CoordinateLetter);
+		triplets=letters.join("").split(/(\D\D\D)/g);
+		letters=triplets.map(Accesser(TripletLetters));
+	return letters.join("");
+}
 
 
 
@@ -842,7 +881,7 @@ TrackLineariser=function(H){
 	}
 }
 
-var DirectionSort=Sorter(d=>Keys(LetterDirections).findIndex(D=>D===d))
+var DirectionSort=Sorter(d=>Keys(LetterTriplets).findIndex(D=>D===d))
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -867,9 +906,10 @@ PointTrackShape=function(point,track){
 	}
 	var directions=segments.map(s=>TranslateSegment(s,-1*point[0],-1*point[1]));
 		directions=directions.map(s=>First(Remove(s,[0,0])));
-		directions=directions.map(DirectionCode);
+		directions=directions.map(CoordinateLetter);
 	return DirectionSort(directions).join("");
 }
+
 
 PointConsecutiveShapePairs=function(point,track){//Todo slash points in half
 	var consecutivepoints=PointTrackContiguousPoints(point,track);
