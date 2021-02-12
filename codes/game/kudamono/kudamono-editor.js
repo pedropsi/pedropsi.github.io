@@ -546,7 +546,7 @@ FruitTrackStateLocallyErred=function(fruit,track,state){
 	if(!wrong&&rule.looprequired&&!TrackLooped(track))
 		wrong=true;
 		
-	if(!wrong&&!rule.branchallowed&&TrackBranched(track))
+	if(!wrong&&!rule.branchallowed&&TrackTwigged(track))
 		wrong=true;
 
 	if(!wrong&&Intersected(rule.simpleshapes,Shape1s))
@@ -938,7 +938,7 @@ SerialState=function(serialObj,state){
 		}
 
 		if(serialObj.s)
-			state.segments=SerialSegments(serialObj.s,state.H);
+			state.segments=SerialOrchard(serialObj.s,state.H);
 
 		state.metadata=Merge(state.metadata||{},SerialMetadata(serialObj))
 	return state;
@@ -997,7 +997,7 @@ StateSerial=function(state){
 	var l=LevelSerial(state);
 	if(l)
 		Opts.L=l;
-	var s=SegmentsSerial(state.orchard,state.H);
+	var s=OrchardSerial(state.orchard,state.H);
 	if(s)
 		Opts.S=s;
 	var g=GenreSerial(state);

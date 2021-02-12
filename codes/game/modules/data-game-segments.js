@@ -1,17 +1,17 @@
 ///////////////////////////////////////////////////////////////////////////////
-//Point: [x,y]				(pair of coordinates)
-//Segment: [[x1,y1],[x2,y2] (pair of points)
-//Path: [p1,....pn] 		(a set of points - a segment is a path of length 2)
+//Point: [x,y]					(pair of coordinates)
+//Segment: [[x1,y1],[x2,y2]	 	(pair of points)
+//Path: [p1,....pn] 			(a set of points - a segment is a path of length 2)
 
-//Segments: [s1,....sn]		 (any set of segments, usually not contiguous)
-//Track: [s1,....sn] 		(any set of segments, usually contiguous)
-//Branch: track				(a contiguous track, without bifurcations - converts easily to a path)
+//Segments: [s1,....sn]			(any set of segments, usually not contiguous)
+//Track: [s1,....sn] 			(any set of segments, usually contiguous)
+//Twig: track					(a contiguous track, without bifurcations - converts easily to a path)
 
-//Forest: [t1,....tn] 		(any set of tracks, may or not touch each other)
-//Orchard: forest	 		(a set of tracks, none of which touch each other)
+//Forest: [t1,....tn] 			(any set of tracks, may or not touch each other)
+//Orchard: forest	 			(a set of tracks, none of which touch each other)
+//Twigs: [t1,....tn]			(a set of twigs)
 
-
-//Endpoint: point 		(a point that is connected to exactly one other point, in a track)
+//Endpoint: point 				(a point that is connected to exactly one other point, in a track)
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -143,8 +143,8 @@ TrackLooped=function(track){
 	return singles===0||(threes*3+fours*4-singles*1)/(threes+fours)>=2;
 }
 
-TrackBranched=function(track){
-	return TrackBranchpoints(track).length>0;
+TrackTwigged=function(track){
+	return TrackBudPoints(track).length>0;
 }
 
 TranslateTrack=function(track,x,y){
@@ -152,7 +152,7 @@ TranslateTrack=function(track,x,y){
 }
 
 
-TrackBranches=function(contiguousTrack){
+TrackTwigs=function(contiguousTrack){
 	if(!contiguousTrack.length)
 		return [];
 	var segments=Clone(contiguousTrack);
@@ -160,20 +160,20 @@ TrackBranches=function(contiguousTrack){
 	var segment=EndsegmentsFirst(endsegments,segments);
 
 	var track=[];
-	var branches=[];
+	var twigs=[];
 	
 	while(segments.length){
 		track.push(segment);
 		segments=Remove(segments,segment);
 		if(!segments.length){
-			branches.push(track);
+			twigs.push(track);
 			break;
 		}
 
 		var next=SegmentContiguousTrackSegments(segment,segments);
 
 		if(!next.length){
-			branches.push(track);
+			twigs.push(track);
 			track=[];
 			endsegments=TrackEndsegments(segments);
 			segment=EndsegmentsFirst(endsegments,segments);
@@ -183,11 +183,11 @@ TrackBranches=function(contiguousTrack){
 		}
 
 	}
-	return branches;
+	return twigs;
 }
 
-OrientedBranch=function(branch){
-	var orientedtrack=Clone(branch);
+OrientedTwig=function(twig){
+	var orientedtrack=Clone(twig);
 	if(!orientedtrack.length)
 		return orientedtrack;
 	if(orientedtrack.length<2){
@@ -214,30 +214,30 @@ ReverseTrack=function(track){
 	return Reverse(track.map(Reverse))
 }
 
-LinearBranch=function(segments,endpoint){ //TODO
+SegmentsEndpointTwig=function(segments,endpoint){ //TODO
 	var segments=Clone(segments);
 	var nextpoints=PointContiguousPoints(endpoint,);
-	var branches=[];
+	var twigs=[];
 	while(endpoints.length){
 		//remove previously visited endpoints;
 		endpoint=First(endpoints);
-		branches.push(LinearBranch(segments,enpoint))
-		endpoints=Complement(endpoints,Apply(Union,TrackPoints(branches)||[]));
-		segments=Complement(segments,Apply(Union,branches)||[]);
+		twigs.push(SegmentsTwig(segments,enpoint))
+		endpoints=Complement(endpoints,Apply(Union,TrackPoints(twigs)||[]));
+		segments=Complement(segments,Apply(Union,twigs)||[]);
 	}
 
 }
 
-SegmentsBranches=function(segments){
+SegmentsTwigs=function(segments){
 	var segments=Clone(segments);
-	var endpoints=TrackEndpoints(segments);
-	var branches=[];
+	var endPoints=Sort(TrackUnBiPoints(segments));
+	var twigs=[];
 	while(endpoints.length){
 		//remove previously visited endpoints;
-		endpoint=First(endpoints);
-		branches.push(LinearBranch(segments,enpoint))
-		endpoints=Complement(endpoints,Apply(Union,TrackPoints(branches)||[]));
-		segments=Complement(segments,Apply(Union,branches)||[]);
+		endpoint=First(endPoints);
+		twigs.push(SegmentsEndpointTwig(segments,endpoint));
+		endpoints=Complement(endpoints,Apply(Union,TrackPoints(twigs)||[]));
+		segments=Complement(segments,Apply(Union,twigs)||[]);
 	}
 }
 
@@ -351,12 +351,16 @@ TrackOverDegreePoints=function(track,n){
 	return TrackPoints(track).filter(point=>PointContainedTrackSegments(point,track).length>=n);
 }
 
-TrackBranchpoints=function(track){
+TrackBudPoints=function(track){
 	return TrackOverDegreePoints(track,3);
 }
 
 TrackEndpoints=function(track){
 	return TrackDegreePoints(track,1);
+}
+
+TrackUnBiPoints=function(track){
+	return Union(TrackOverDegreePoints(track,3),TrackEndpoints(track));
 }
 
 TrackStartPoint=function(track){
@@ -494,9 +498,9 @@ SegmentsOrchard=function(segments){
 
 
 
-Branches=function(forest){
-	var branches=forest.map(TrackBranches);
-	return Join(...branches);
+ForestTwigs=function(forest){
+	var twigs=forest.map(TrackTwigs);
+	return Join(...twigs);
 }
 
 
@@ -729,7 +733,7 @@ LetterContiguousPath=function(letters,startxy){
 	return SortTrack(PathTrack(coordinates));
 }
 
-SerialSegments=function(serial,H){
+SerialOrchard=function(serial,H){
 	var pathserials=serial.match(PathSerialPattern);
 	var pathdiffs=pathserials.map(s=>[First(s.match(/\D+/ig)),Number(First(s.match(/\d+/ig)))]);
 	var accumulated=AccumulateTokenCoords(pathdiffs,H+1);
@@ -737,13 +741,12 @@ SerialSegments=function(serial,H){
 	return Join(...tracks);
 }
 
-
-SegmentsSerial=function(tracks,H){
+OrchardSerial=function(tracks,H){
 	if(!tracks||!tracks.length)
 		return "";
-	var	branches=Branches(tracks);
-	var	orientedbranches=branches.map(OrientedBranch);
-	var	orientedtracks=Sorter(TrackLineariser(H))(orientedbranches);
+	var	twigs=ForestTwigs(tracks);
+	var	orientedtwigs=twigs.map(OrientedTwig);
+	var	orientedtracks=Sorter(TrackLineariser(H))(orientedtwigs);
 	var overpath=orientedtracks.map(TrackLineariser(H));
 	var differences=[0].concat(overpath);
 		differences=Rest(differences).map((d,i)=>d-differences[i]);
@@ -819,7 +822,7 @@ var Shape2Corners=["LU","UR","RD","LD"];
 var Shape2s=Join(Shape2Straights,Shape2Corners);
 var Shape3s=["LUR","URD","LRD","LUD"];
 var Shape4s=["LURD"];
-var ShapeBranches=Join(Shape3s,Shape4s);
+var ShapeTwigs=Join(Shape3s,Shape4s);
 
 
 
