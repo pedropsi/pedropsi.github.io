@@ -608,50 +608,50 @@ StateAtErrors=function(state){
 }
 
 GlobalOrchardErrors=function(orchard,state,fruit){
-	var globalerrors={}
+	var globalErrors={}
 	var rule=state.fruits[fruit].rule
 	var Equaliser=RuleVerifiers()[rule.trackequaliser];
 	if(Equaliser)
-		globalerrors.equalised=Unique(orchard.map(Equaliser)).length>1;
+		globalErrors.equalised=Unique(orchard.map(Equaliser)).length>1;
 	if(rule.mintracks)
-		globalerrors.mintracks=orchard.length<rule.mintracks;
+		globalErrors.mintracks=orchard.length<rule.mintracks;
 	if(rule.maxtracks)
-		globalerrors.maxtracks=orchard.length>rule.maxtracks;
+		globalErrors.maxtracks=orchard.length>rule.maxtracks;
 	
 	var localErrors=orchard.map(track=>TrackStateErrors(track,state));
-		localErrors=localErrors.map(errors=>Merge(errors,globalerrors));
+		localErrors=localErrors.map(errors=>Merge(errors,globalErrors));
 	return localErrors;
 }
 
-FruitLonely=function(fruit,state){
-	return FruitRuleLonely(state.fruits[fruit].rule)
+FruitLoned=function(fruit,state){
+	return FruitRuleLoned(state.fruits[fruit].rule)
 }
 
-FruitRuleLonely=function(rule){
-	var lonely=false;
+FruitRuleLoned=function(rule){
+	var loned=false;
 	if(typeof rule.maxconnected!=="undefined")
-		lonely=rule.maxconnected<2;
-	if(!lonely&&(typeof rule.minconnected!=="undefined"))
-		lonely=rule.minconnected>rule.maxconnected;
+		loned=rule.maxconnected<2;
+	if(!loned&&(typeof rule.minconnected!=="undefined"))
+		loned=rule.minconnected>rule.maxconnected;
 	if(typeof rule.maxconnectable!=="undefined")
-		lonely=rule.maxconnectable<2;
-	if(!lonely&&(typeof rule.minconnectable!=="undefined"))
-		lonely=rule.minconnectable>rule.maxconnectable;	
-	return lonely;
+		loned=rule.maxconnectable<2;
+	if(!loned&&(typeof rule.minconnectable!=="undefined"))
+		loned=rule.minconnectable>rule.maxconnectable;	
+	return loned;
 }
 
 SocialFruitsTrackContained=function(state){
-	var socialfruits=Keys(state.fruits).filter(fruit=>!FruitLonely(fruit,state));
+	var socialfruits=Keys(state.fruits).filter(fruit=>!FruitLoned(fruit,state));
 	var socialfruitpoints=socialfruits.map(fruit=>FruitStatePoints(fruit,state));
 	return Join(...socialfruitpoints).every(point=>PointForestContained(point,state.orchard));
 }
 
 XYFruitStateErrors=function(xy,fruit,state){
 	var errors={};
-	var lonely=FruitLonely(fruit,state);
+	var loned=FruitLoned(fruit,state);
 	var tracked=PointForestContained(xy,state.orchard);
 	
-	errors.lonely=(lonely&&tracked)||(!lonely&&!tracked);
+	errors.loned=(loned&&tracked)||(!loned&&!tracked);
 	
 	var rule=state.fruits[fruit].rule;
 	if(rule.maxconnectable||rule.minconnectable){
