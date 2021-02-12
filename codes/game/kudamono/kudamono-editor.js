@@ -1106,12 +1106,24 @@ RulesDraw=function(state){
 			}
 		}
 
-		var subtitle=rule.description;
-		RuleDescriptionDraw(subtitle,rendering);
-
+	
 		var miniboard=SymbolSerialState(symbol,rule.depiction,state);
 			miniboard=CompleteState(Join(miniboard,rendering));
+
 		BoardDraw(miniboard);
+		
+		var s={
+			dH:dH,
+			dV:dV,
+			x:x,
+			y:y,
+			cols:cols,
+			offsetX:x+dH*((n-i)%cols),
+			offsetY:y+Ceiling((i+1)/cols)*dV
+		};
+		var description=rule.description;
+		RuleDescriptionDraw(description,miniboard,s);
+		
 	}
 }
 
@@ -1123,15 +1135,18 @@ SymbolSerialState=function(symbol,serial,suprastate){
 	return state;
 }
 
-RuleDescriptionDraw=function(subtitle,rendering){
-	var suby=0.05;
-	DrawText({
-		...rendering,
+RuleDescriptionDraw=function(subtitle,state,subs){
+	var ext=Extremes(state);
+	var opts={
+		...opts,
 		txt:subtitle,
 		fontWeight:"italic",
-		x:rendering.offsetX,
-		y:rendering.offsetY+suby
-	})
+		fontSize:"calc(var(--fontheight))",
+		x:subs.offsetX,
+		y:subs.offsetY
+	}
+	
+	DrawText(opts);
 }
 
 BoardDraw=function(state){
