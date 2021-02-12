@@ -105,7 +105,7 @@ FruitIcons={
 		path:"M 172 3 C 74 22 2 105 2 199 C 3 228 11 263 19 263 C 21 263 27 267 32 272 C 38 278 40 279 40 276 C 40 260 64 255 76 269 C 94 291 70 315 48 297 C 40 291 40 291 40 297 C 40 304 49 311 58 311 C 65 311 80 325 80 332 C 80 336 108 349 131 355 C 236 381 357 314 386 213 C 392 191 401 111 397 108 C 396 106 394 98 394 90 C 394 79 393 74 389 71 C 385 68 383 64 383 62 C 383 59 379 55 375 53 C 370 51 366 46 365 43 C 364 40 361 37 358 37 C 355 37 349 34 344 31 C 336 25 298 14 249 4 C 225 -0 191 -1 172 3",
 		rule:{
 			loopallowed:true,
-			symbolshapes:Shape3s,
+			fruitshapes:Shape3s,
 			simpleshapes:Shape2s,
 			description:"Paths branch, as T-junctions, only at every Coconut, and no branch returns to its origin.",
 			depiction:"W=2&L=q3q2&S=0RDDLUU3RDDL",
@@ -121,7 +121,7 @@ FruitIcons={
 		path:"M 186 11 C 173 22 172 24 174 42 L 176 62 L 148 67 C 58 82 0 117 0 155 C 0 200 62 205 144 166 C 173 152 175 151 180 159 C 185 166 183 167 159 175 C 59 209 1 261 21 299 C 33 320 74 326 105 310 C 117 303 117 304 97 329 C 29 414 76 489 153 418 C 161 410 164 409 166 413 C 186 481 205 511 233 516 C 288 526 293 452 244 347 L 228 313 L 258 344 C 304 393 344 406 365 381 C 391 351 358 293 278 230 L 263 219 L 290 231 C 351 260 397 246 389 201 C 383 171 323 131 253 109 C 237 104 223 98 222 94 C 219 87 220 87 239 95 C 350 141 440 110 380 45 C 349 12 213 -12 186 11",
 		rule:{
 			minconnected:Infinity,
-			symbolshapes:Shape1s,
+			fruitshapes:Shape1s,
 			simpleshapes:Join(Shape2Straights,Shape3s),
 			description:"The first two Dates connect via a straight line. Non-endpoints may spawn up to one straight branch ending at a Date.",
 			depiction:"W=2&L=d1d4d1d2&S=1RD3RU3D",
@@ -167,7 +167,7 @@ FruitIcons={
 		rule:{
 			loopallowed:true,
 			looprequired:true,
-			symbolshapes:Shape2Straights,
+			fruitshapes:Shape2Straights,
 			simpleshapes:Shape2Corners,
 			description:"Paths cross Blackberries straight and always turn elsewhere, forming loops.",
 			depiction:"W=2&L=k3k4&S=1URRDDLUL"
@@ -284,7 +284,7 @@ var BlankState={
 		dangleallowed:false
 	},
 
-	groups:{},// multi-symbol lines, if allowed
+	groups:{},// multi-fruit lines, if allowed
 	win:{
 		won:false
 	},
@@ -310,10 +310,10 @@ var Kudamono={
 		"W=35&H=23&L=b37a43b67g1a4c2o3l4p3m3c210a32b25b1g3a5c5q150l21m10o24l1p6m8d2&S=37DDD2DLDRD1DDDRRUUU3RRDDDLL3URRDDD3URDRURDDD4URRDDDLLUU3URDDDRUUU3URRDDDLLUU20RDL3DD3DD7DD161URDDRURURDDLDLLDDLUUUU5URDDDDRRUUUURDDDDDLLLLUUUU5URRRRDDDDDLLLLURUUUL5URRRRDDDDDLULLDLUUUU6URDDDDDDDDDLUUUUUUUU27URDDDLUU4URRDDLLU94URRDLL70URRDRURDDDDDLULULDDLUUUU5URRRRDDDDDLLLLUUUU5URDRDRUURDDDDDLULULDDLUUUU5URRRRDDDDDLLLLUUUU27URRDDDLLUU10URRDDDLLUU113URDL",
 		"W=24&H=13&L=d16d5o1b1d11d10g3g2d11g15g2a10c1c2a1a25a2o2q12q28l15o1l27k13l12k1k2k13p15p12p15p12m3m26o3b1&S=16DDDRDRUU3DD3RRRRRRR1RRRRRRRRRRRRRRRRRRRRRR10D13R1DDRRUU40RRDDDDLL1DD44DD28UULLDDRRDD15UUURRURRD1RRRRRRRRRRR24DDD16URRDDLLU43UUR27UUR14URRDDLLU"
 	],
-	symbols:FruitIcons,
+	fruits:FruitIcons,
 	//visuals
 	mode:{
-		symbol:First(FruitIcons),	//current fruit to be added
+		fruit:First(FruitIcons),	//current fruit to be added
 	},
 	win:{
 		rule:{
@@ -492,7 +492,7 @@ PointTrackNextNodePoints=function(xy,track,state){
 //Error detection
 
 FruitStateRule=function(fruit,state){
-	return state.symbols[fruit].rule;
+	return state.fruits[fruit].rule;
 }
 
 TrackFruits=function(track,state){
@@ -529,9 +529,9 @@ FruitTrackStateLocallyErred=function(fruit,track,state){
 
 	if(!wrong&&rule.trackValidator&&!RuleVerifiers()[rule.trackValidator](track))
 		wrong=true;
-	if(!wrong&&rule.symbolshapes){
-		wrong=Complement(FruitTrackStateShapes(fruit,track,state),rule.symbolshapes).length>0;
-		rule.branchallowed=rule.branchallowed||Intersected(rule.symbolshapes,ShapeBranches);
+	if(!wrong&&rule.fruitshapes){
+		wrong=Complement(FruitTrackStateShapes(fruit,track,state),rule.fruitshapes).length>0;
+		rule.branchallowed=rule.branchallowed||Intersected(rule.fruitshapes,ShapeBranches);
 	}
 	if(!wrong&&rule.simpleshapes){
 		wrong=Complement(UnFruitTrackStateShapes(fruit,track,state),rule.simpleshapes).length>0;
@@ -558,10 +558,10 @@ FruitTrackStateLocallyErred=function(fruit,track,state){
 	return wrong;
 }
 
-SymbolGroupName=function(symbol,state){
+FruitGroupName=function(fruit,state){
 	if(!state.groups)
-		return symbol;
-	return Keys(state.groups).find(k=>In(state.groups[k].symbols,symbol))||symbol;
+		return fruit;
+	return Keys(state.groups).find(k=>In(state.groups[k].fruits,fruit))||fruit;
 }
 
 TrackStateErrors=function(track,state){
@@ -569,7 +569,7 @@ TrackStateErrors=function(track,state){
 	var errors={};
 	if(fruits.length<1)
 		errors.deficit=true;
-	else if(Gather(fruits,type=>SymbolGroupName(type,state)).length>1)
+	else if(Gather(fruits,type=>FruitGroupName(type,state)).length>1)
 		errors.excess=true;
 	else{
 		if(fruits.length===1) //Single-type paths
@@ -590,9 +590,9 @@ StateAtErrors=function(state){
 		return {};
 	
 	var positionErrors={};
-	var globalSymbols=Keys(state.level).filter(symbol=>Intersected(Keys(state.symbols[symbol].rule),GlobalTrackRules));
+	var globalFruits=Keys(state.level).filter(fruit=>Intersected(Keys(state.fruits[fruit].rule),GlobalTrackRules));
 	
-	var globalOrchardPool=globalSymbols.map(symbol=>FruitStateOrchard(symbol,state));
+	var globalOrchardPool=globalFruits.map(fruit=>FruitStateOrchard(fruit,state));
 	var localOrchard=Complement(orchard,Join(...globalOrchardPool));
 
 	var localOrder=Order(orchard,localOrchard);
@@ -600,16 +600,16 @@ StateAtErrors=function(state){
 	
 		localOrder.map((p,i)=>positionErrors[p]=localErrors[i]);
 
-	var globalErrors=Join(...globalOrchardPool.map((orchard,i)=>GlobalOrchardErrors(orchard,state,globalSymbols[i])));
+	var globalErrors=Join(...globalOrchardPool.map((orchard,i)=>GlobalOrchardErrors(orchard,state,globalFruits[i])));
 	var globalOrder=Order(orchard,Join(...globalOrchardPool));
 
 		globalOrder.map((p,i)=>positionErrors[p]=globalErrors[i]);
 	return positionErrors;
 }
 
-GlobalOrchardErrors=function(orchard,state,symbol){
+GlobalOrchardErrors=function(orchard,state,fruit){
 	var globalerrors={}
-	var rule=state.symbols[symbol].rule
+	var rule=state.fruits[fruit].rule
 	var Equaliser=RuleVerifiers()[rule.trackequaliser];
 	if(Equaliser)
 		globalerrors.equalised=Unique(orchard.map(Equaliser)).length>1;
@@ -623,11 +623,11 @@ GlobalOrchardErrors=function(orchard,state,symbol){
 	return localErrors;
 }
 
-SymbolLonely=function(symbol,state){
-	return SymbolRuleLonely(state.symbols[symbol].rule)
+FruitLonely=function(fruit,state){
+	return FruitRuleLonely(state.fruits[fruit].rule)
 }
 
-SymbolRuleLonely=function(rule){
+FruitRuleLonely=function(rule){
 	var lonely=false;
 	if(typeof rule.maxconnected!=="undefined")
 		lonely=rule.maxconnected<2;
@@ -640,20 +640,20 @@ SymbolRuleLonely=function(rule){
 	return lonely;
 }
 
-SocialSymbolsTrackContained=function(state){
-	var socialsymbols=Keys(state.symbols).filter(symbol=>!SymbolLonely(symbol,state));
-	var socialsymbolpoints=socialsymbols.map(fruit=>FruitStatePoints(fruit,state));
-	return Join(...socialsymbolpoints).every(point=>PointForestContained(point,state.orchard));
+SocialFruitsTrackContained=function(state){
+	var socialfruits=Keys(state.fruits).filter(fruit=>!FruitLonely(fruit,state));
+	var socialfruitpoints=socialfruits.map(fruit=>FruitStatePoints(fruit,state));
+	return Join(...socialfruitpoints).every(point=>PointForestContained(point,state.orchard));
 }
 
 XYFruitStateErrors=function(xy,fruit,state){
 	var errors={};
-	var lonely=SymbolLonely(fruit,state);
+	var lonely=FruitLonely(fruit,state);
 	var tracked=PointForestContained(xy,state.orchard);
 	
 	errors.lonely=(lonely&&tracked)||(!lonely&&!tracked);
 	
-	var rule=state.symbols[fruit].rule;
+	var rule=state.fruits[fruit].rule;
 	if(rule.maxconnectable||rule.minconnectable){
 		var connectables=PointConnectableFruitPoints(xy,fruit,state);
 		errors.maxconnectable=connectables.length>rule.maxconnectable;
@@ -671,7 +671,7 @@ StateWon=function(state){
 		wrong=Values(state.atErrors).map(errors=>Values(errors).some(Identity)).some(Identity);
 
 	if(!wrong)
-		wrong=!SocialSymbolsTrackContained(state);
+		wrong=!SocialFruitsTrackContained(state);
 
 	if(!wrong)
 		wrong=Keys(state.level).some(fruit=>state.level[fruit].some(xy=>XYFruitErred(xy,fruit,state)))
@@ -709,7 +709,7 @@ TrackStyles=function(track,state,styles,errors){
 	var errors=errors||{};
 	var fruits=TrackFruits(track,state);
 	var fruit=First(fruits);
-	var group=SymbolGroupName(fruit,state);
+	var group=FruitGroupName(fruit,state);
 	
 	var colour;
 	
@@ -720,7 +720,7 @@ TrackStyles=function(track,state,styles,errors){
 	else if(group&&state.groups[group]&&fruits.length>1)
 		colour=state.groups[group].colour||state.line.excessColour;
 	else if(fruit)
-		colour=state.symbols[fruit].colour;
+		colour=state.fruits[fruit].colour;
 	
 	var lineCap="round";
 	var lineWidth=styles.lineWidth||state.line.lineWidth||1;
@@ -806,7 +806,7 @@ StateDrawFruit=function(state,fruit,xy,Opts){
 	var Opts={
 		...Opts,
 		...state.grid,
-		...state.symbols[fruit],
+		...state.fruits[fruit],
 		rows:state.H,
 		cols:state.W,
 		px:xy[0],
@@ -869,9 +869,9 @@ DrawLevel=function(state){
 
 	if(state.mode.edit)
 		if(state.mode.clearing)
-			DrawFruits(state.mode.symbol,state.mode.selection,{coloriser:HEXLightener(0.9)},state);
+			DrawFruits(state.mode.fruit,state.mode.selection,{coloriser:HEXLightener(0.9)},state);
 		else
-			DrawFruits(state.mode.symbol,state.mode.selection,{coloriser:HEXDarkener(0.8)},state);
+			DrawFruits(state.mode.fruit,state.mode.selection,{coloriser:HEXDarkener(0.8)},state);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -883,8 +883,8 @@ ExportSerial=function(){
 }
 
 FruitStateLetter=function(fruit,state){
-	var symbol=state.symbols[fruit]||First(state.symbols);
-	return symbol.letter.toLowerCase();
+	var fruit=state.fruits[fruit]||First(state.fruits);
+	return fruit.letter.toLowerCase();
 }
 
 
@@ -909,7 +909,7 @@ SerialLevel=function(serial,state){
 	var fruitdiffs=fruitserials.map(s=>[s[0],Number(Rest(s))]);
 	var accumulated=AccumulateTokenCoords(fruitdiffs,state.H+1);
 	var level={};
-	Keys(state.symbols).map(fruit=>(level[fruit]=accumulated.filter(a=>a[0]===FruitStateLetter(fruit,state)).map(Last)));
+	Keys(state.fruits).map(fruit=>(level[fruit]=accumulated.filter(a=>a[0]===FruitStateLetter(fruit,state)).map(Last)));
 	return level;
 }
 
@@ -934,7 +934,7 @@ SerialState=function(serialObj,state){
 			state.level=SerialLevel(serialObj.l,state);
 		else{
 			state.mode.edit=true;
-			state.mode.symbol=First(Keys(state.symbols));
+			state.mode.fruit=First(Keys(state.fruits));
 		}
 
 		if(serialObj.s)
@@ -1080,8 +1080,8 @@ StateDraw=function(state){
 }
 
 RulesDraw=function(state){
-	var levelSymbols=LevelSymbols(state);
-	var n=levelSymbols.length;
+	var levelFruits=LevelFruits(state);
+	var n=levelFruits.length;
 
 	var dH=1/4;
 	var dV=2/7;
@@ -1090,9 +1090,9 @@ RulesDraw=function(state){
 	var y=1/2;
 	var scale=0.15;
 
-	for(var i=0;i<levelSymbols.length;i++){
-		var symbol=levelSymbols[i];
-		var rule=state.symbols[symbol].rule;
+	for(var i=0;i<levelFruits.length;i++){
+		var fruit=levelFruits[i];
+		var rule=state.fruits[fruit].rule;
 		
 		var rendering={
 			grid:{
@@ -1107,7 +1107,7 @@ RulesDraw=function(state){
 		}
 
 	
-		var miniboard=SymbolSerialState(symbol,rule.depiction,state);
+		var miniboard=FruitSerialState(fruit,rule.depiction,state);
 			miniboard=CompleteState(Join(miniboard,rendering));
 
 		BoardDraw(miniboard);
@@ -1127,9 +1127,9 @@ RulesDraw=function(state){
 	}
 }
 
-SymbolSerialState=function(symbol,serial,suprastate){
+FruitSerialState=function(fruit,serial,suprastate){
 	var state=SerialState(SearchParameters(serial),Clone(suprastate));
-		state.id="rule-"+symbol;
+		state.id="rule-"+fruit;
 		state.render={main:false,target:suprastate.render.target};
 		state=ComplementKeysObject(["examples","designation"],state);	
 	return state;
@@ -1166,13 +1166,13 @@ BoardUnDraw=function(state){
 	UnDraw(gridExtremes);
 }
 
-LevelSymbols=function(state){
+LevelFruits=function(state){
 	return Keys(state.level).filter(s=>state.level[s].filter(xy=>PointValid(xy,state)).length);
 }
 
 MetadataColophon=function(metadata){
 	var number=metadata.number?(Prefix(metadata.number,"#")+" "):"";
-	var difficulty=metadata.difficulty?(ObtainSymbol("asterisk-heavy").repeat(metadata.difficulty)+" "):"";
+	var difficulty=metadata.difficulty?(ObtainFruit("asterisk-heavy").repeat(metadata.difficulty)+" "):"";
 	
 	var title=metadata.title?(Exfix(metadata.title,'"')+" "):"";
 	var author=metadata.author?("by "+metadata.author):"";
@@ -1316,11 +1316,11 @@ StateCursorName=function(state){
 		else
 			cursor="pencil";
 	}
-	else if(state.mode.symbol){
+	else if(state.mode.fruit){
 		if(state.mode.clearing)
 			cursor="eraser";
 		else
-			cursor=state.mode.symbol;
+			cursor=state.mode.fruit;
 	}
 	return cursor;
 }
@@ -1329,7 +1329,7 @@ DrawCursor=function(state){
 	var name=StateCursorName(state);
 	var cursor=name;
 	var opts={};
-	var Icons=state.symbols;
+	var Icons=state.fruits;
 	if(In(Icons,name)){
 		cursor=Icons[name];
 		if(!DrawCursor[name]){
@@ -1460,7 +1460,7 @@ XYFruitsAdd=function(points,state){
 	points.map(function(xy){
 		if(!PointValid(xy,state))
 			return;
-		var overfruit=state.mode.symbol;
+		var overfruit=state.mode.fruit;
 		level[overfruit]=Union(level[overfruit],[xy]);
 	})
 	if(!Equal(level,state.level))
@@ -1507,7 +1507,7 @@ DragActionStarter=function(x,y,w,h,target){
 	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
 	var mode=Clone(state.mode);
-	mode.symbol=XYFruit(xy,state)||mode.symbol;
+	mode.fruit=XYFruit(xy,state)||mode.fruit;
 	mode.dragging=true;
 	mode.selection=[xy];
 	if(mode.edit){
@@ -1605,18 +1605,18 @@ var ClearFruit=StateKeyHandlerer({level:{}});
 
 
 
-CycleSymbolMode=function(state,n){
+CycleFruitMode=function(state,n){
 	var mode=Clone(state.mode);
 	if(!n)
 		var n=1;
 	if(!mode.edit)
 		mode.edit=true;
-	var symbols=Sort(Keys(state.symbols));
-	if(!mode.symbol)
-		mode.symbol=First(symbols);
+	var fruits=Sort(Keys(state.fruits));
+	if(!mode.fruit)
+		mode.fruit=First(fruits);
 	else{
-		symbols=CycleSort(symbols,a=>a===mode.symbol)
-		mode.symbol=symbols[(symbols.length+n)%symbols.length];
+		fruits=CycleSort(fruits,a=>a===mode.fruit)
+		mode.fruit=fruits[(fruits.length+n)%fruits.length];
 	}
 	return mode;
 }
@@ -1674,28 +1674,28 @@ var KeyboardActions={
 
 };
 
-KeyboardSymbolsActions=function(state){
+KeyboardFruitsActions=function(state){
 	var Actions={};
-	Keys(state.symbols).map(
+	Keys(state.fruits).map(
 		function(fruit){
-			Actions[state.symbols[fruit].letter]=StateKeyHandlerer({mode:{edit:true,symbol:fruit},visuals:{cursor:fruit}});
+			Actions[state.fruits[fruit].letter]=StateKeyHandlerer({mode:{edit:true,fruit:fruit},visuals:{cursor:fruit}});
 	});
 	return Actions;
 }
 
-SymbolCycler=function(n){
+FruitCycler=function(n){
 	return function(target){
 		var state=TargetState(target);
 		UpdateState(
-			{mode:CycleSymbolMode(state,n)},
+			{mode:CycleFruitMode(state,n)},
 			{id:state.id}
 		)
 	}
 }
 
 var WheelActions={
-	"wheel-up":SymbolCycler(-1),
-	"wheel-down":SymbolCycler(1)
+	"wheel-up":FruitCycler(-1),
+	"wheel-down":FruitCycler(1)
 }
 
 var DragActions={
@@ -1725,7 +1725,7 @@ ControlsBind=function(state){
 
 	Attend('resize',StateDraws);
 
-	KeyboardActions=Merge(KeyboardActions,KeyboardSymbolsActions(state));
+	KeyboardActions=Merge(KeyboardActions,KeyboardFruitsActions(state));
 	Keybind(KeyboardActions,state.render.target);
 	ResumeCapturingKeys(ComboKeyPressHandler);
 }
@@ -1776,7 +1776,7 @@ InitialisePuzzle=function(id,options){
 	UpdateState({},options)
 	
 	//Auto instructions
-	AutoInstructions(state.symbols)
+	AutoInstructions(state.fruits)
 	
 }
 
@@ -1789,12 +1789,12 @@ StateImage=function(state){
 }
 
 
-AutoInstructions=function(symbols){
+AutoInstructions=function(fruits){
 	HyperText("KudamonoFruitShortcuts",function(){
 		return TableHTML({
-		headers:["Shortcut","Symbol"],
-		caption:"Choose a symbol by pressing:",
-		rows:Sort(Keys(symbols)).map(name=>[KB(symbols[name].letter),name])
+		headers:["Shortcut","Fruit"],
+		caption:"Choose a fruit by pressing:",
+		rows:Sort(Keys(fruits)).map(name=>[KB(fruits[name].letter),name])
 		})});
 }
 

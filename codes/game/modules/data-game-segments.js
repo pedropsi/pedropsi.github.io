@@ -3,9 +3,9 @@
 //Segment: [[x1,y1],[x2,y2] (pair of points)
 //Path: [p1,....pn] 		(a set of points - a segment is a path of length 2)
 
-//Segments: [s1,....sn]		 	(any set of segments, usually not contiguous)
+//Segments: [s1,....sn]		 (any set of segments, usually not contiguous)
 //Track: [s1,....sn] 		(any set of segments, usually contiguous)
-//Branch: track				(a contiguous track, without bifurcations)
+//Branch: track				(a contiguous track, without bifurcations - converts easily to a path)
 
 //Forest: [t1,....tn] 		(any set of tracks, may or not touch each other)
 //Orchard: forest	 		(a set of tracks, none of which touch each other)
