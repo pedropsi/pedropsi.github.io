@@ -592,16 +592,16 @@ StateAtErrors=function(state){
 	var positionErrors={};
 	var globalFruits=Keys(state.level).filter(fruit=>Intersected(Keys(state.fruits[fruit].rule),GlobalTrackRules));
 	
-	var globalOrchardPool=globalFruits.map(fruit=>FruitStateOrchard(fruit,state));
-	var localOrchard=Complement(orchard,Join(...globalOrchardPool));
+	var globalOrchards=globalFruits.map(fruit=>FruitStateOrchard(fruit,state));
+	var localOrchard=Complement(orchard,Join(...globalOrchards));
 
 	var localOrder=Order(orchard,localOrchard);
 	var localErrors=localOrchard.map(track=>TrackStateErrors(track,state));
 	
 		localOrder.map((p,i)=>positionErrors[p]=localErrors[i]);
 
-	var globalErrors=Join(...globalOrchardPool.map((orchard,i)=>GlobalOrchardErrors(orchard,state,globalFruits[i])));
-	var globalOrder=Order(orchard,Join(...globalOrchardPool));
+	var globalErrors=Join(...globalOrchards.map((orchard,i)=>GlobalOrchardErrors(orchard,state,globalFruits[i])));
+	var globalOrder=Order(orchard,Join(...globalOrchards));
 
 		globalOrder.map((p,i)=>positionErrors[p]=globalErrors[i]);
 	return positionErrors;
