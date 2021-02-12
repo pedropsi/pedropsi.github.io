@@ -448,7 +448,7 @@ PointConnectablePoints=function(xy,fruits,state){
 	var nextPoints;
 	while(plannedPoints.length){
 		point=First(plannedPoints);
-		nextPoints=PointContiguousPoints(point).filter(xy=>PointValid(xy,state)&&PointConnectableAble(xy,fruits,state)).filter(xy=>!In(plannedPoints,xy)&&!In(seenPoints,xy))
+		nextPoints=PointNeighbourPoints(point).filter(xy=>PointValid(xy,state)&&PointConnectableAble(xy,fruits,state)).filter(xy=>!In(plannedPoints,xy)&&!In(seenPoints,xy))
 		plannedPoints=plannedPoints.concat(nextPoints);
 		plannedPoints=Rest(plannedPoints);
 		seenPoints.push(point);
@@ -546,7 +546,7 @@ FruitTrackStateLocallyErred=function(fruit,track,state){
 	if(!wrong&&rule.looprequired&&!TrackLooped(track))
 		wrong=true;
 		
-	if(!wrong&&!rule.branchallowed&&TrackTwigged(track))
+	if(!wrong&&!rule.branchallowed&&TrackBranched(track))
 		wrong=true;
 
 	if(!wrong&&Intersected(rule.simpleshapes,Shape1s))
