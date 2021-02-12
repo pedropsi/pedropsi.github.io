@@ -273,7 +273,7 @@ var BlankState={
 	H:7,
 	level:{},
 	segments:[],
-	tracks:[],
+	orchard:[],
 	crosses:{},
 
 	//global rules
@@ -389,15 +389,15 @@ TrackStateFruitPoints=function(track,state){
 
 
 
-FruitStateTracks=function(fruit,state){
-	var tracks=state.tracks;
+FruitStateOrchard=function(fruit,state){
+	var orchard=state.orchard;
 	var points=FruitStatePoints(fruit,state);
-	return tracks.filter(track=>points.some(point=>PointTrackContained(point,track)));
+	return orchard.filter(track=>points.some(point=>PointTrackContained(point,track)));
 }
 
 PointStateTrack=function(point,state){
-	var tracks=state.tracks;
-	return First(tracks.filter(track=>PointTrackContained(point,track)));
+	var orchard=state.orchard;
+	return First(orchard.filter(track=>PointTrackContained(point,track)));
 }
 
 PointUnFruited=function(xy,fruits,state){
@@ -416,7 +416,7 @@ PointUnFruitTracked=function(xy,fruits,state){
 //Shapes
 
 PointStateShape=function(point,state){
-	return Join(...state.tracks.map(track=>PointTrackShape(point,track)));
+	return Join(...state.orchard.map(track=>PointTrackShape(point,track)));
 }
 
 FruitStateShapes=function(fruit,state){
@@ -585,40 +585,40 @@ TrackStateErrors=function(track,state){
 
 StateAtErrors=function(state){
 	
-	var tracks=state.tracks;
-	if(!tracks.length)
+	var orchard=state.orchard;
+	if(!orchard.length)
 		return {};
 	
 	var positionErrors={};
 	var globalSymbols=Keys(state.level).filter(symbol=>Intersected(Keys(state.symbols[symbol].rule),GlobalTrackRules));
 	
-	var globalTracksPool=globalSymbols.map(symbol=>FruitStateTracks(symbol,state));
-	var localTracks=Complement(tracks,Join(...globalTracksPool));
+	var globalOrchardPool=globalSymbols.map(symbol=>FruitStateOrchard(symbol,state));
+	var localOrchard=Complement(orchard,Join(...globalOrchardPool));
 
-	var localOrder=Order(tracks,localTracks);
-	var localErrors=localTracks.map(track=>TrackStateErrors(track,state));
+	var localOrder=Order(orchard,localOrchard);
+	var localErrors=localOrchard.map(track=>TrackStateErrors(track,state));
 	
 		localOrder.map((p,i)=>positionErrors[p]=localErrors[i]);
 
-	var globalErrors=Join(...globalTracksPool.map((tracks,i)=>GlobalTracksErrors(tracks,state,globalSymbols[i])));
-	var globalOrder=Order(tracks,Join(...globalTracksPool));
+	var globalErrors=Join(...globalOrchardPool.map((orchard,i)=>GlobalOrchardErrors(orchard,state,globalSymbols[i])));
+	var globalOrder=Order(orchard,Join(...globalOrchardPool));
 
 		globalOrder.map((p,i)=>positionErrors[p]=globalErrors[i]);
 	return positionErrors;
 }
 
-GlobalTracksErrors=function(tracks,state,symbol){
+GlobalOrchardErrors=function(orchard,state,symbol){
 	var globalerrors={}
 	var rule=state.symbols[symbol].rule
 	var Equaliser=RuleVerifiers()[rule.trackequaliser];
 	if(Equaliser)
-		globalerrors.equalised=Unique(tracks.map(Equaliser)).length>1;
+		globalerrors.equalised=Unique(orchard.map(Equaliser)).length>1;
 	if(rule.mintracks)
-		globalerrors.mintracks=tracks.length<rule.mintracks;
+		globalerrors.mintracks=orchard.length<rule.mintracks;
 	if(rule.maxtracks)
-		globalerrors.maxtracks=tracks.length>rule.maxtracks;
+		globalerrors.maxtracks=orchard.length>rule.maxtracks;
 	
-	var localErrors=tracks.map(track=>TrackStateErrors(track,state));
+	var localErrors=orchard.map(track=>TrackStateErrors(track,state));
 		localErrors=localErrors.map(errors=>Merge(errors,globalerrors));
 	return localErrors;
 }
@@ -643,13 +643,13 @@ SymbolRuleLonely=function(rule){
 SocialSymbolsTrackContained=function(state){
 	var socialsymbols=Keys(state.symbols).filter(symbol=>!SymbolLonely(symbol,state));
 	var socialsymbolpoints=socialsymbols.map(fruit=>FruitStatePoints(fruit,state));
-	return Join(...socialsymbolpoints).every(point=>PointTracksContained(point,state.tracks));
+	return Join(...socialsymbolpoints).every(point=>PointForestContained(point,state.orchard));
 }
 
 XYFruitStateErrors=function(xy,fruit,state){
 	var errors={};
 	var lonely=SymbolLonely(fruit,state);
-	var tracked=PointTracksContained(xy,state.tracks);
+	var tracked=PointForestContained(xy,state.orchard);
 	
 	errors.lonely=(lonely&&tracked)||(!lonely&&!tracked);
 	
@@ -678,9 +678,9 @@ StateWon=function(state){
 	
 	var rule=state.win.rule;
 	if(!wrong&&rule){
-		if(!wrong&&rule.minlines&&state.tracks.length<rule.minlines)
+		if(!wrong&&rule.minlines&&state.orchard.length<rule.minlines)
 			wrong=true;
-		if(!wrong&&rule.maxlines&&state.tracks.length>rule.maxlines)
+		if(!wrong&&rule.maxlines&&state.orchard.length>rule.maxlines)
 			wrong=true;
 		if(!wrong&&rule.fillboard)
 			wrong=!BoardFilled(state);
@@ -699,7 +699,7 @@ StatePoints=function(state){
 }
 
 BoardFilled=function(state){
-	return StatePoints(state).every(xy=>PointTracksContained(xy,state.tracks))
+	return StatePoints(state).every(xy=>PointForestContained(xy,state.orchard))
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -997,7 +997,7 @@ StateSerial=function(state){
 	var l=LevelSerial(state);
 	if(l)
 		Opts.L=l;
-	var s=SegmentsSerial(state.tracks,state.H);
+	var s=SegmentsSerial(state.orchard,state.H);
 	if(s)
 		Opts.S=s;
 	var g=GenreSerial(state);
@@ -1041,15 +1041,15 @@ StateGridDraw=function(state){
 }
 
 
-TracksDraw=function(tracks,state,Opts){
+ForestDraw=function(forest,state,Opts){
 	var positionErrors=state.atErrors;
-	tracks.map((track,i)=>DrawTrack(track,state,Opts,positionErrors[i]));
+	forest.map((track,i)=>DrawTrack(track,state,Opts,positionErrors[i]));
 }
 
 
 
 StatePathsDraw=function(state){
-	var tracks=state.tracks;
+	var orchard=state.orchard;
 	var Opts=Extremes(state);
 	
 	Opts={
@@ -1058,7 +1058,7 @@ StatePathsDraw=function(state){
 		lineWidth:state.line.lineWidth
 	}
 
-	TracksDraw(tracks,state,Opts);
+	ForestDraw(orchard,state,Opts);
 
 	if(!state.mode.edit&&state.mode.selection&&state.mode.selection.length>1){
 		var seltrack=PathTrack(state.mode.selection);
@@ -1257,7 +1257,7 @@ OverwritableProperties=["level"]
 
 CompleteState=function(state){
 	var state=Clone(state);
-	state.tracks=SplitContiguousTracks(ValidSegments(state.segments,state));
+	state.orchard=SegmentsOrchard(ValidSegments(state.segments,state));
 	state.atErrors=StateAtErrors(state);
 	if(state.render.main)
 		state.win.won=StateWon(state);
@@ -1525,7 +1525,7 @@ DragActionContinuer=function(x,y,w,h,target){
 	if(!mode.selection)
 		mode.selection=[];
 	if(!In(mode.selection,xy)){
-		mode.selection=PatchedPoints(AddOnce(mode.selection,xy));
+		mode.selection=PatchedPath(AddOnce(mode.selection,xy));
 	}
 	else if(mode.selection.length>1&&Equal(First(Take(mode.selection,-2)),xy)){
 		mode.selection=Remove(mode.selection,Last(mode.selection));
