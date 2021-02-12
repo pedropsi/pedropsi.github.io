@@ -1173,7 +1173,7 @@ LevelFruits=function(state){
 
 MetadataColophon=function(metadata){
 	var number=metadata.number?(Prefix(metadata.number,"#")+" "):"";
-	var difficulty=metadata.difficulty?(ObtainFruit("asterisk-heavy").repeat(metadata.difficulty)+" "):"";
+	var difficulty=metadata.difficulty?(ObtainSymbol("asterisk-heavy").repeat(metadata.difficulty)+" "):"";
 	
 	var title=metadata.title?(Exfix(metadata.title,'"')+" "):"";
 	var author=metadata.author?("by "+metadata.author):"";
