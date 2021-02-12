@@ -115,6 +115,11 @@ Falsed=function(a){return a===false};
 
 Apply=function(Function,Array){
 	return Function.apply(null, Array);
+/***
+Apply a function to any number of arguments
+Apply(Plus,[1,2,3])
+6
+***/
 }
 
 Applier=function(Function){
@@ -130,6 +135,15 @@ Evaluate=function(data){
 	}
 	else
 		return data;
+/***
+Simple string
+Evaluate("hi")
+"hi"
+
+A function
+Evaluate(function(){return "wait"})
+"wait"
+***/
 }
 
 Empty=function(SAO){
@@ -162,6 +176,27 @@ LazyPasser=function(F){
 		var args=Values(arguments);
 		return function(){return Apply(F,args)}
 	}
+}
+
+MapThread=function(F){
+	var args=Rest(Values(arguments));
+	if(!args.length)
+		return [];
+	var l=Min(args.map(list=>list.length));
+	var result=[];
+	for(var i=0;i<l;i++){
+		result.push(Apply(F,args.map(li=>li[i])));
+	}
+	return result;
+/***
+Variable number of arguments, fixed size
+MapThread(Plus,[1,2,3],[4,5,6],[7,8,9])
+[12,15,18]
+
+Uneven sizes, select shortest
+MapThread(Plus,[1,2],[4,5,6],[7])
+[12]
+***/
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1203,6 +1238,15 @@ Order=function(canon,list,Standardise){
 	return list.map(item=>canon.findIndex(c=>Equaliser(Standardise)(item,c)))
 }
 
+Pick=function(list,order){
+	var picked=[];
+	for(var i=0;i<order.length;i++){
+		var o=order[i];
+		if(0<o<list.length)
+			picked=Append(picked,list[o])
+	}
+	return picked;
+}
 
 Unique=function(AO){
 	return Intersection(AO,AO);
@@ -1611,6 +1655,10 @@ SubsetObject=function(OSuper,OSub){
 
 Subsetted=function(AOSuper,AOSub){
 	return ArrayObjectF(SubsetArray,SubsetObject)(AOSuper,AOSub);
+}
+
+SupersetsArray=function(list){
+	return list.filter(item=>Remove(list,item).every(other=>!Subsetted(other,item)));
 }
 
 //Object Arrays (BASE)
