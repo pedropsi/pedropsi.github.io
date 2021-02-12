@@ -1131,6 +1131,7 @@ FruitSerialState=function(fruit,serial,suprastate){
 	var state=SerialState(SearchParameters(serial),Clone(suprastate));
 		state.id="rule-"+fruit;
 		state.render={main:false,target:suprastate.render.target};
+		state.mode.selection=[];
 		state=ComplementKeysObject(["examples","designation"],state);	
 	return state;
 }
