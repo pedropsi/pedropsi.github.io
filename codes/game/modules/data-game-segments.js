@@ -257,6 +257,9 @@ SegmentsNodepointWay=function(segments,nodepoint,seenPoints){
 	way=GrowWay(way,segments,nodepoint,true,seenPoints);//Grow in first direction
 	way=GrowWay(way,segments,nodepoint,false,seenPoints);//Grow in second direction
 
+	if(TrackLooped(segments)) //join ends
+		way=Append(way,First(way));
+
 	return way;
 }
 
@@ -272,7 +275,6 @@ SegmentsWays=function(segments){
 		ways=Join(ways,subways);
 		segments=segments.filter(s=>!SegmentPathsContained(s,ways));
 	}
-	Wbug(segments)
 	return SupersetsArray(ways);
 }
 
@@ -283,6 +285,7 @@ SegmentsLongWays=function(segments){
 
 	var segments=Clone(segments);
 	var pickedpoints=Sort(TrackEndpoints(segments));
+
 	if(!pickedpoints.length) //Single loop without nodes
 		pickedpoints=[First(Sort(TrackPoints(segments)))];
 	
@@ -818,18 +821,15 @@ OrchardSerial=function(orchard,H){
 	if(!orchard||!orchard.length)
 		return "";
 	var ways=Apply(Union,orchard.map(SegmentsWays));
-	var points=ways.map(First);
-	var linears=points.map(p=>Linearise(p,H));
-	var sortedlinears=Sort(linears);
-	var order=Order(sortedlinears,linears);
-	
-	points=Pick(points,order);
-	  ways=Pick(ways,order);
 
-	var differences=[0].concat(sortedlinears);
+	var pairs=ways.map(way=>[Linearise(First(way),H),way]);
+		pairs=SortBy(pairs,First);
+
+	var differences=Prepend(pairs.map(First),0);
 		differences=Rest(differences).map((d,i)=>d-differences[i]);
+		
 
-	return MapThread(DiffWaySerial,differences,ways).join("");
+	return differences.map((d,i)=>DiffWaySerial(d,ways[i])).join("");
 }
 
 
