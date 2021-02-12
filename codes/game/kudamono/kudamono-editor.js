@@ -1122,7 +1122,7 @@ RulesDraw=function(state){
 			offsetY:y+Ceiling((i+1)/cols)*dV
 		};
 		var description=rule.description;
-		RuleDescriptionDraw(description,miniboard,s);
+		//RuleDescriptionDraw(description,miniboard,s);
 		
 	}
 }

@@ -135,7 +135,6 @@ SegmentsSerial=function(tracks,H){
 	if(!tracks||!tracks.length)
 		return "";
 	var	lineartracks=LinearTracks(tracks);
-	Wbug(lineartracks);
 	var	orientedlineartracks=lineartracks.map(OrientedTrack);
 	var	orientedtracks=Sorter(TrackLineariser(H))(orientedlineartracks);
 	var overpath=orientedtracks.map(TrackLineariser(H));
@@ -565,7 +564,7 @@ SegmentsLinearTracks=function(segments){
 	}
 }
 
-LinearBranch=function(segments,endpoint){
+LinearBranch=function(segments,endpoint){ //TODO
 	var segments=Clone(segments);
 	var nextpoints=PointContiguousPoints(endpoint,);
 	var lineartracks=[];
