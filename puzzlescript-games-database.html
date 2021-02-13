@@ -23,7 +23,7 @@ ${HyperText("Bookmarklet")}
 
 <h3>Manual submission</h3>
 <p>You can also submit a game to the ${v.TITLE_BOLD()} by typing all details manually. This is only recommended when more practical than using the bookmarklet.</p>
-<div class="button" onclick="RequestPGDSubmission()">Submit a game to the ${v.TITLE_BOLD()}!</div>
+${ButtonHTML({txt:"Submit a game to the "+v.TITLE_BOLD(),onclick:"RequestPGDSubmission()"})}
 <p>As your edits will be immediately available on database refresh, please be type carefully - even though all game entries can be corrected or completed later, by any user.</p>
 
 <h3>Where to find new games to add</h3>

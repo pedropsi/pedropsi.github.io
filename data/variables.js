@@ -118,7 +118,7 @@ GAME_SCRIPT					:	()=>	[v.GAME_SCRIPT_GAME(),v.GAME_STYLE()],
 PUZZLE_SCRIPT				:	()=>	[`codes/game/puzzlescript-embed.js`,`codes/game/puzzlescript/${v.LINK()}.js`,v.GAME_STYLE()],
 
 
-GUESTBOOK_ADD				:	()=>	`<div class="button centered" onclick="RequestGuestbook()" tabindex="0">Leave your message!</div>`,
+GUESTBOOK_ADD				:	()=>	ButtonHTML({txt:"Leave your message!",onclick:"RequestGuestbook()"}),
 BUTTON_SOON					:	()=>	`<div>Coming soon...</div>`,
 
 
