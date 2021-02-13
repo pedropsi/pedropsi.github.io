@@ -1429,25 +1429,23 @@ MergeObjects=function(O1,O2){
 			if(typeof O1[k]!=="undefined")
 				O[k]=O2[k]
 			else
-				O[k]=BiMergeAO(O1[k],O2[k]) //overwrites if joining impossible
+				O[k]=BiMerge(O1[k],O2[k]) //overwrites if joining impossible
 		}
 	)
 	return O;
 }
 
-BiMergeAO=function(AO1,AO2){
-	if(IsObject(AO1)&&IsObject(AO2))
-		return MergeObjects(AO1,AO2);
-	else
-		return AO2; //overwrites if merging impossible
-}
-
 BiMerge=function(AO1,AO2){
+	if(typeof AO1==="undefined"&&typeof AO2==="undefined")
+		return {};
 	if(typeof AO2==="undefined")
 		return AO1;
 	if(typeof AO1==="undefined")
 		return AO2;
-	return BiMergeAO(AO1,AO2);
+	if(IsObject(AO1)&&IsObject(AO2))
+		return MergeObjects(AO1,AO2);
+	else
+		return AO2; //overwrites if merging impossible
 
 /*
 object with key
