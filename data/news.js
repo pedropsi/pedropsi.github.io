@@ -740,8 +740,9 @@ PuzzleLinker=function(puzzle){
 		var N=UnAfterfix(key,"-");
 		var name=UnPrefix(key,N+"-");
 			name=item.legend||name;
-			if(name=puzzle)
+			if(name===puzzle)
 				name="";
+			Wbug(key);
 		if(board){
 			var params=SearchParameters(board);
 				delete params["S"];
