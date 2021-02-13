@@ -3,6 +3,7 @@
 //All rights reserved.
 ///////////////////////////////////////////////////////////////////////////////
 
+LoadSource("codes/game/kudamono/kudamono-styles.css");
 var sources=[
 	"data-game-colours",
 	"data-game-canvas",

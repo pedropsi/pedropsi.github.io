@@ -1,0 +1,10 @@
+.game-supra-canvas{
+	position: relative;
+    overflow: hidden;
+    height:95vh;
+
+}
+.game-supra-canvas canvas{
+	top:0;
+	position: absolute;
+}
