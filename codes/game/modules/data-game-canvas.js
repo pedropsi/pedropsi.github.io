@@ -202,7 +202,7 @@ GridExtremes=function(opts){
 	var	x1=(width/2*offsetX+square*cols/2);
 	var	y1=(height/2*offsetY+square*rows/2);
 
-	var lineScale=Power((y1-y0)*(x1-x0)/(width*height)/(rows*cols),0.5)*50
+	var lineScale=SquareRoot((y1-y0)*(x1-x0)/(width*height)/(rows*cols))*50
 
 	return {
 		x0:x0,

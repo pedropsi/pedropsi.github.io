@@ -522,6 +522,8 @@ Sin=Math.sin;
 Cos=Math.cos;
 PI=Math.PI;
 Abs=Math.abs;
+SquareRoot=Math.sqrt;
+
 Sign=function(n){
 	if(n>0)
 		return 1
@@ -560,10 +562,7 @@ Remainder=function(n,d){
 }
 
 Power=function(n,exp){
-	if(typeof exp==="undefined")
-		return function(m){return Math.pow(m,n)}
-	else
-		return Math.pow(n,exp);
+	return Math.pow(n,exp);
 /*
 of zero
 Power(2,0)
@@ -576,10 +575,7 @@ Power(2,3)
 }
 
 PoweredSum=function(vector,power){
-	if(vector.length<1)
-		return 0;
-	else
-		return vector.map(Power(power)).reduce(Accumulate);
+	return Apply(Plus,vector.map(v=>Power(v,power)));
 /*
 zero-dimensional
 PoweredSum([],2)
@@ -640,7 +636,7 @@ var VectorMin=Vectoriser(Min);
 
 
 EuclideanDistance=function(vector1,vector2){
-	return Power(PoweredSum(VectorMinus(vector2,vector1),2),1/2);
+	return SquareRoot(PoweredSum(VectorMinus(vector2,vector1),2));
 }
 
 UnitVector=function(vector){

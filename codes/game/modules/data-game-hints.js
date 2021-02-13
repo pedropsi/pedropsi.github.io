@@ -106,7 +106,7 @@ StartGIF=function(gid){
 			"ctx":".gifcanvas"
 		});
 
-		var s=Power(w*h,0.5)/3;
+		var s=SquareRoot(w*h)/3;
 
 		DrawCircle({
 			"size":s/2,

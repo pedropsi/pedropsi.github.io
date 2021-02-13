@@ -83,7 +83,7 @@ HandleTouchMover=function(target){return function(e){
 PolarSwipe=function(F){
 	xCenter=xEnd-window.innerWidth/2;
 	yCenter=yEnd-window.innerHeight/2;
-	var swipeRadius=Power(xCenter*xCenter+yCenter*yCenter,0.5);
+	var swipeRadius=SquareRoot(xCenter*xCenter+yCenter*yCenter);
 	var swipeAngle=-Math.atan2(yCenter,xCenter);
 
 	F(swipeRadius,swipeAngle);
