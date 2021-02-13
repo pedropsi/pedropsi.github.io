@@ -165,8 +165,6 @@ Empty=function(SAO){
 ArgumentExtender=function(F){ // From pairs to infinite number of arguments
 	return function(){
 		var args=Values(arguments);
-		if(args.length===0)
-			return null;
 		if(args.length<=2)
 			return Apply(F,args);
 		else
