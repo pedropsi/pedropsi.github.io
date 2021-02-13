@@ -742,7 +742,6 @@ PuzzleLinker=function(puzzle){
 			name=item.legend||name;
 			if(name===puzzle)
 				name="";
-			Wbug(key);
 		if(board){
 			var params=SearchParameters(board);
 				delete params["S"];
