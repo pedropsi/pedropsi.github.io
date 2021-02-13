@@ -1828,7 +1828,7 @@ StringReplace=function(string,rules){
 // Unspace
 
 TrimWhitespaceString=function(string){
-	return string.replace(/^(\r|\s)+/ig,"").replace(/(\r|\s)+$/ig,"");
+	return string.replace(/^(\r|\s)+/gi,"").replace(/(\r|\s)+$/gi,"");
 }
 
 UnWhitespace=function(string){
@@ -1976,6 +1976,7 @@ EscapeTokens=function(tokenString){
 // UnAfterfix	# 		a     
 // UnBeforfix	# 		     d
 
+
 UnFixer=function(word,sfix,befor,after,flags){
 	if(typeof flags==="undefined")
 		var flags="sig";
@@ -2029,11 +2030,11 @@ Exfix=function(word,prefix,suffix){
 	var suffix=suffix||prefix;
 	return Prefix(Posfix(word,suffix),prefix);
 }
-UnExfix=function(word,prefix,suffix){
+UnExfix=function(word,prefix,suffix,flags){
 	if(!word)
 		var word="";
 	var suffix=suffix||prefix;
-	return UnPrefix(UnPosfix(word,suffix),prefix);
+	return UnPrefix(UnPosfix(word,suffix,flags),prefix,flags);
 }
 
 Parenthise=function(word){
@@ -2055,14 +2056,6 @@ Posfixed=function(word,suffix){
 }
 
 
-
-
-UnOnceBeforfix=function(word,prefix){
-	if(!word)
-		var word="";
-	var prefixFind=new RegExp(".*"+EscapeTokens(prefix));
-	return word.replace(prefixFind,"");
-}
 UnBeforfix=function(word,prefix,flags){
 	return UnFixer(word,prefix,"^.*","",flags);
 }
@@ -2079,12 +2072,13 @@ Afterfix=function(word,posfix){
 	return UnPrefix(word.replace(UnAfterfix(word,posfix),""),posfix);
 }
 
-UnOverfix=function(word,posfix){
+UnOverfix=function(word,posfix,flags){
 	if(!word)
 		var word="";
 	if(!posfix)
 		return word;
-	return UnPosfix(word.replace(UnBeforfix(word,posfix),""),posfix);
+	var fin=UnBeforfix(word,posfix,flags);
+	return UnPosfix(UnPosfix(word,fin,flags),posfix,flags);
 }
 
 Overfix=function(word,posfix){
@@ -2095,12 +2089,13 @@ Overfix=function(word,posfix){
 	return UnPrefix(word.replace(UnOverfix(word,posfix),""),posfix);
 }
 
-UnUnderfix=function(word,prefix){
+UnUnderfix=function(word,prefix,flags){
 	if(!word)
 		var word="";
 	if(!prefix)
 		return word;
-	return UnPrefix(word.replace(UnAfterfix(word,prefix),""),prefix);
+	var ini=UnAfterfix(word,prefix,flags);
+	return UnPrefix(UnPrefix(word,ini,flags),prefix,flags);
 }
 
 Underfix=function(word,prefix){
