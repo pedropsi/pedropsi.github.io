@@ -1804,10 +1804,20 @@ Fold(Plus,1,[])
 // Fixed point
 FixedPoint=function(F,x){
 	var i=x;
-	while(i!==F(i)){
+	while(!Equal(i,F(i))){
 		i=F(i);
 	}
 	return i;
+
+/*
+do until nothing changes
+FixedPoint(Identity,"ended")
+"ended"
+
+robust comparison (e.g. for arrays)
+FixedPoint(Rest,[1,2,3])
+[]
+*/
 }
 
 
