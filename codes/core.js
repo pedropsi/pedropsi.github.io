@@ -1310,14 +1310,29 @@ ComplementArray=function(arrayInclude,arrayExclude){
 }
 
 ComplementObject=function(objInclude,objExclude){
+	if(typeof objExclude==="undefined"||!IsObject(objInclude)||!IsObject(objExclude))
+		return objInclude;
+
 	var unique={};
-	var value;
 	for(var i in objInclude){
-		value=objInclude[i];
-		if(!Equal(objExclude[i],value))
-			unique[i]=value;
+		if(!Equal(objInclude[i],objExclude[i]))
+			unique[i]=ComplementObject(objInclude[i],objExclude[i]);
 	}
 	return unique;
+/*
+
+Simple complement
+ComplementObject({a:1,b:2},{a:1})
+{b:2}
+
+Different value for same key, still distinct
+ComplementObject({a:1,b:2},{a:2})
+{a:1,b:2}
+
+Deep removal
+ComplementObject({a:1,b:{c:3,d:4}},{a:1,b:{c:3}})
+{b:{d:4}}
+*/
 }
 
 ComplementKeysObject=function(keys,Obj){
