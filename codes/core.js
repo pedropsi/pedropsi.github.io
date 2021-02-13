@@ -40,7 +40,7 @@
 //   All unit tests of a given function are stored as comments after its return statement, to:
 //		-explain the function by example
 //		-keep code organised (what belongs together should stay together)
-//		-be extracted automatically by the unit testing framework 
+//		-be extracted automatically by the unit testing framework
 //
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -105,7 +105,26 @@ FunctionHead=function(FunctionF){
 
 ///////////////////////////////////////////////////////////////////////////////
 //Do nothing
-Identity=function(i){return i;};
+Identity=function(i){return i;
+/*
+a boolean
+Identity(false)
+false
+
+a string
+Identity("abcd")
+"abcd"
+
+an array
+Identity([])
+[]
+
+a function
+Identity(Identity)
+Identity
+*/
+};
+
 True=function(){return true};
 False=function(){return false};
 Flipped=function(a){return !a};
@@ -115,7 +134,7 @@ Falsed=function(a){return a===false};
 
 Apply=function(Function,Array){
 	return Function.apply(null, Array);
-/***
+/*
 to any number of arguments
 Apply(Plus,[1,2,3])
 6
@@ -123,7 +142,7 @@ Apply(Plus,[1,2,3])
 to an empty list
 Apply(Plus,[])
 0
-***/
+*/
 }
 
 Applier=function(Function){
@@ -139,7 +158,7 @@ Evaluate=function(data){
 	}
 	else
 		return data;
-/***
+/*
 Simple string
 Evaluate("hi")
 "hi"
@@ -147,7 +166,7 @@ Evaluate("hi")
 A function
 Evaluate(function(){return "wait"})
 "wait"
-***/
+*/
 }
 
 Empty=function(SAO){
@@ -190,7 +209,7 @@ MapThread=function(F){
 		result.push(Apply(F,args.map(li=>li[i])));
 	}
 	return result;
-/***
+/*
 Variable number of arguments, fixed size
 MapThread(Plus,[1,2,3],[4,5,6],[7,8,9])
 [12,15,18]
@@ -198,7 +217,7 @@ MapThread(Plus,[1,2,3],[4,5,6],[7,8,9])
 Uneven sizes, select shortest
 MapThread(Plus,[1,2],[4,5,6],[7])
 [12]
-***/
+*/
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -374,7 +393,7 @@ EqualFunction=function(a,b){
 
 EqualRegex=function(a,b){
 	return (a.source===b.source)&&(a.flags===b.flags);
-/***
+/*
 Equal source and flags
 EqualRegex(/a/g,/a/g)
 true
@@ -386,7 +405,7 @@ false
 Different source
 EqualRegex(/a/g,/b/g)
 false
-***/
+*/
 }
 
 Equal=function(a,b){
@@ -659,7 +678,7 @@ First=function(SAO){
 	}
 	Wtyp("no string, array or object")
 	return null;
-/***
+/*
 Empty list
 First([])
 null
@@ -667,7 +686,7 @@ null
 Empty string
 First("")
 null
-***/
+*/
 }
 
 Last=function(SAO){
@@ -682,7 +701,7 @@ Last=function(SAO){
 	}
 	Wtyp("no string, array or object")
 	return null;
-/***
+/*
 Empty list
 Last([])
 null
@@ -690,7 +709,7 @@ null
 Empty string
 Last("")
 null
-***/
+*/
 }
 
 Rest=function(SAO){
@@ -705,7 +724,7 @@ Rest=function(SAO){
 	}
 	Wtyp("no string, array or object")
 	return null;
-/***
+/*
 Empty list
 Rest([])
 []
@@ -713,7 +732,7 @@ Rest([])
 Empty string
 Rest("")
 ""
-***/
+*/
 }
 
 Most=function(SAO){
@@ -728,7 +747,7 @@ Most=function(SAO){
 	}
 	Wtyp("no string, array or object")
 	return null;
-/***
+/*
 Empty list
 Most([])
 []
@@ -736,7 +755,7 @@ Most([])
 Empty string
 Most("")
 ""
-***/
+*/
 }
 
 Take=function(SAO,n){
@@ -746,7 +765,7 @@ Take=function(SAO,n){
 		return SAO.slice(n,SAO.length);
 	return SAO.slice(0,n);
 
-/***
+/*
 from beginning
 Take([5,6,7,8,9],2)
 [5,6];
@@ -770,7 +789,7 @@ Take([5,6,7,8,9],Infinity)
 Objects
 Take({a:1,b:4,c:7},2)
 {a:1,b:4}
-***/
+*/
 }
 
 UnTake=function(SAO,n){
@@ -778,7 +797,7 @@ UnTake=function(SAO,n){
 		return FilterKeysObject(SAO,k=>In(UnTake(Keys(SAO),n),k));
 	return n<0?Take(SAO,Max(0,SAO.length+n)):Take(SAO,-Max(0,SAO.length-n));
 
-/***
+/*
 remove from beginning
 UnTake([5,6,7,8,9],2)
 [7,8,9];
@@ -802,7 +821,7 @@ UnTake([5,6,7,8,9],Infinity)
 Objects
 UnTake({a:1,b:4,c:7},2)
 {c:7}
-***/
+*/
 }
 
 Insert=function(array,n,p){
@@ -818,22 +837,22 @@ Append=function(A,item){
 	if(typeof item==="undefined")
 		return A;
 	return Insert(A,item,A.length);
-/***
+/*
 add
 Append([1],2)
 [1,2];
-***/
+*/
 }
 
 Prepend=function(A,item){
 	if(typeof item==="undefined")
 		return A;
 	return Insert(A,item,0);
-/***
+/*
 add
 Prepend([1],2)
 [2,1];
-***/
+*/
 }
 
 InsertCut=function(array,item,p){
@@ -841,7 +860,7 @@ InsertCut=function(array,item,p){
 		return Append(Take(array,p),item)
 	else
 		return Prepend(Take(array,p),item);
-/***
+/*
 remove tail and add element
 InsertCut([1,2,3,4,5],"a",3)
 [1,2,3,"a"]
@@ -853,7 +872,7 @@ InsertCut([1,2,3,4,5],"a",-3)
 both
 InsertCut([1,2,3,4,5],"a",0)
 ["a"]
-***/
+*/
 }
 
 //Distinguish Objects and Arrays
@@ -879,12 +898,12 @@ IsString=function(s){
 	if(typeof s==="undefined")
 		return false;
 	return typeof s==="string";
-/***
+/*
 Empty string
 IsString("")
 true
 
-***/
+*/
 }
 
 IsFunction=function(F){
@@ -982,7 +1001,7 @@ ReValueObject=function(Obj,Modifier){//value, then key (optional)
 	Keys(Obj).map(k=>(O[k]=Modifier(Obj[k],k)));
 	return O;
 
-/***
+/*
 Change values based on keys and values
 ReValueObject({a:1,b:2},(x,l)=>l.repeat(2*x))
 {a:"aa",b:"bbbb"}
@@ -1002,7 +1021,7 @@ ReValueObject({a:1,b:1},{a:x=>x+1})
 Modify Object Values based on function
 ReValueObject({a:1,b:1},{a:x=>100,b:x=>10})
 {a:100,b:10}
-***/
+*/
 };
 
 
@@ -1041,11 +1060,11 @@ FilterKeysObject=function(Obj,Validator){
 	var O={};
 	Keys(Obj).filter(k=>Validator(k,Obj[k])).map(k=>O[k]=Obj[k]);
 	return O;
-/***
+/*
 Simple filter
 FilterKeysObject({a:1,b:2,c:3,d:4},l=>l==="b")
 {b:2}
-***/
+*/
 }
 
 FilterValuesObject=function(Obj,Validator){
@@ -1054,11 +1073,11 @@ FilterValuesObject=function(Obj,Validator){
 	var O={};
 	Keys(Obj).filter(k=>Validator(Obj[k],k)).map(k=>O[k]=Obj[k]);
 	return O;
-/***
+/*
 Simple filter2
 FilterValuesObject({a:1,b:2,c:3,d:4},v=>v%2)
 {a:1,c:3}
-***/
+*/
 }
 
 FilterArray=function(A,Validator){
@@ -1613,11 +1632,11 @@ GatherObject=function(Obj,Equaliser){
 	var o={};
 		uniquekeys.map(k=>(o[k]=FilterValuesObject(Obj,v=>(String(Equaliser(v))===k))));
 	return o;
-/***
+/*
 Custom equaliser
 GatherObject({a:1,b:2,c:3,d:3},x=>x%2)
 {0:{b:2},1:{a:1,c:3,d:3}}
-***/
+*/
 }
 
 Gather=function(AO,Equaliser){
@@ -1770,6 +1789,16 @@ FoldM=function(F,x0,array){
 
 Fold=function(F,x0,array){
 	return FoldM(F,x0,Clone(array));
+
+/*
+function, initial value and array
+Fold(Plus,1,[2,3,4])
+10
+
+empty array
+Fold(Plus,1,[])
+1
+*/
 }
 
 // Fixed point
@@ -2078,7 +2107,7 @@ UnPrefix=function(word,prefix,flags){
 
 UnPosfix=function(word,suffix,flags){
 	return UnFixer(word,suffix,"","$",flags);
-/***
+/*
 Repeating sequence
 UnPosfix("What !!!?!?.?.?.?",".?")
 "What !!!?!?"
@@ -2090,7 +2119,7 @@ UnPosfix("What !!!?!?.?.?.?","?.")
 Any order
 UnPosfix("What !!!?!?.?.?.?",[".","?","!"])
 "What "
-***/
+*/
 }
 Prefix=function(word,prefix){
 	if(!word)
@@ -2253,7 +2282,7 @@ ShortenSentence=function(string,maxchars,stoppers){
 			return string+"...";
 		}
 	}
-/***
+/*
 Below limit
 ShortenSentence("1234567890",20)
 "1234567890"
@@ -2274,7 +2303,7 @@ Limit inside word
 ShortenSentence("That was fantastic!",10)
 "That..."
 
-***/
+*/
 }
 
 DescriptionString=function(html,maxchars){
@@ -2529,12 +2558,12 @@ PageSearch=function(parameter,page){
 
 PageSearchParameters=function(page){
 	return SearchParameters(PageSearch(page));
-/***
+/*
 Read Parameters Object from page
 PageSearchParameters("www.xxx.yyy?b=a&a=2")
 {b:"a",a:"2"}
 
-***/
+*/
 }
 
 SearchParameters=function(searchString){
@@ -2575,7 +2604,7 @@ OwnLinked=function(url){
 }
 FragmentLinked=function(url){
 	return !!(PageFragment(url)&&PageUnFragment(url)==="");
-/***
+/*
 Just fragment
 FragmentLinked("#Section")
 true
@@ -2587,12 +2616,12 @@ false
 No fragment, parameter
 FragmentLinked("?what=1")
 false
-***/
+*/
 }
 
 InnerLinked=function(url){
 	return LocalLinked(url)||OwnLinked(url)||!PageDomain(url);
-/***
+/*
 Inner links with fragment
 InnerLinked("page.html#Section")
 true
@@ -2604,7 +2633,7 @@ true
 Inner links, parameters
 InnerLinked("?p=1")
 true
-***/
+*/
 }
 OuterLinked=function(url){
 	return !InnerLinked(url);
@@ -2945,7 +2974,7 @@ Offline=function(){return !Online()};
 ParameterPairString=function(key,value){
 	return encodeURIComponent(key)+'='+encodeURIComponent(value);
 
-/***
+/*
 Form a parameter pair
 ParameterPairString("a",1)
 "a=1"
@@ -2953,13 +2982,13 @@ ParameterPairString("a",1)
 Convert spaces to UTF
 ParameterPairString("a","how fascinating")
 "a=how%20fascinating"
-***/
+*/
 }
 
 ParameterString=function(parametersObject){
 	return ThreadKeysValues(parametersObject,ParameterPairString).join("&");
 
-/***
+/*
 empty string
 ParameterString({})
 ""
@@ -2967,7 +2996,7 @@ ParameterString({})
 From a multi-parameter string
 ParameterString({"a":1,"b":2})
 "a=1&b=2"
-***/
+*/
 }
 
 //External resources
@@ -3137,7 +3166,7 @@ IsTag=function(selector){
 	if(!IsString(selector))
 		return false;
 	return In(HTMLTags,selector.toUpperCase());
-/***
+/*
 IsTag("BODY")
 true
 
@@ -3146,13 +3175,13 @@ false
 
 IsTag("#randomid")
 false
-***/
+*/
 }
 IsClass=function(selector){
 	if(!IsString(selector))
 		return false;
 	return Prefixed(selector,".");
-/***
+/*
 IsClass("BODY")
 false
 
@@ -3161,13 +3190,13 @@ true
 
 IsClass("#randomid")
 false
-***/
+*/
 }
 IsID=function(selector){
 	if(!IsString(selector))
 		return false;
 	return Prefixed(selector,"#");
-/***
+/*
 IsID("BODY")
 false
 
@@ -3176,12 +3205,12 @@ false
 
 IsID("#randomid")
 true
-***/
+*/
 }
 
 IsQuerySelector=function(selector){
 	return IsID(selector)||IsClass(selector)||IsTag(selector);
-/***
+/*
 IsQuerySelector("BODY")
 true
 
@@ -3190,7 +3219,7 @@ true
 
 IsQuerySelector("#randomid")
 true
-***/
+*/
 }
 
 ParentSelector=function(targetIDsel){

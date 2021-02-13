@@ -10,10 +10,7 @@ SaveTestableFunctionsTests()
 ///////////////////////////////////////////////////////////////////////////////
 //Do nothing
 
-SaveTest(Identity,true,true,"boolean");
-SaveTest(Identity,"abcd","abcd","string");
-SaveTest(Identity,[["a","b","c","d"]],["a","b","c","d"],"list");
-SaveTest(Identity,function(){return false},function(){return false},"function");
+
 
 SaveTest(True,true,true,"boolean - true");
 SaveTest(True,false,true,"boolean -false");
@@ -240,18 +237,6 @@ SaveTest(RotateString,[""],"","empty string");
 
 
 
-///////////////////////////////////////////////////////////////////////////////
-//Repetitive functions
-
-function TestFoldA(a,b){return a+b;};
-SaveTest(Fold,[TestFoldA,1,[2,3,4]],10,"simple sum");
-SaveTest(Fold,[TestFoldA,1,[]],1,"empty array");
-
-function TestFoldB(a){return a.replace("ab","a")};
-SaveTest(FixedPoint,[TestFoldB,"abbbbbba"],"aa","fixed point");
-
-///////////////////////////////////////////////////////////////////////////////
-// String Replace
 
 ///////////////////////////////////////////////////////////////////////////////
 //Get Function Name as a string, or make up a unique one based on the function's body
