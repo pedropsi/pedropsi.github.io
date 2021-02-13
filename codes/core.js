@@ -1298,7 +1298,7 @@ Unique=function(AO){
 }
 
 //Complement (force uniqueness, sort)
-ArrayComplement=function(arrayInclude,arrayExclude){
+ComplementArray=function(arrayInclude,arrayExclude){
 	var unique=[];
 	var value;
 	for(var i=0;i<arrayInclude.length;i++){
@@ -1309,7 +1309,7 @@ ArrayComplement=function(arrayInclude,arrayExclude){
 	return unique.sort();
 }
 
-ObjectComplement=function(objInclude,objExclude){
+ComplementObject=function(objInclude,objExclude){
 	var unique={};
 	var value;
 	for(var i in objInclude){
@@ -1338,7 +1338,7 @@ BiComplement=function(AO1,AO2){
 		return Empty(AO2);
 	
 	var args=Values(arguments);
-	return Apply(ArrayObjectF(ArrayComplement,ObjectComplement),args);
+	return Apply(ArrayObjectF(ComplementArray,ComplementObject),args);
 }
 
 Complement=ArgumentExtender(BiComplement);
