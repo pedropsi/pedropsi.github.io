@@ -667,14 +667,14 @@ UnitVector=function(vector){
 // Array, Object, String (SAO)
 
 First=function(SAO){
-	if(IsObject(SAO)){
-		var k=First(Keys(SAO));
-		return k?SAO[k]:null;
-	}
-	if(IsString(SAO)||IsArray(SAO)){
+	if(IsArray(SAO)||IsString(SAO)){
 		if(SAO.length)
 			return SAO[0];
 		return null;
+	}
+	if(IsObject(SAO)){
+		var k=First(Keys(SAO));
+		return k?SAO[k]:null;
 	}
 	Wtyp("no string, array or object")
 	return null;
@@ -690,14 +690,14 @@ null
 }
 
 Last=function(SAO){
-	if(IsObject(SAO)){
-		var k=Last(Keys(SAO));
-		return k?SAO[k]:null;
-	}
-	if(IsString(SAO)||IsArray(SAO)){
+	if(IsArray(SAO)||IsString(SAO)){
 		if(SAO.length)
 			return SAO[SAO.length-1];
 		return null;
+	}
+	if(IsObject(SAO)){
+		var k=Last(Keys(SAO));
+		return k?SAO[k]:null;
 	}
 	Wtyp("no string, array or object")
 	return null;
@@ -713,15 +713,15 @@ null
 }
 
 Rest=function(SAO){
+	if(IsArray(SAO)){
+		var A=CloneArray(SAO);
+		A.shift();
+		return A;
+	}
 	if(IsObject(SAO))
 		return FilterKeysObject(SAO,k=>In(Rest(Keys(SAO)),k));
 	if(IsString(SAO))
 		return Rest(SAO.split("")).join("");
-	if(IsArray(SAO)){
-		var A=Clone(SAO);
-		A.shift();
-		return A;
-	}
 	Wtyp("no string, array or object")
 	return null;
 /*
@@ -736,15 +736,15 @@ Rest("")
 }
 
 Most=function(SAO){
+	if(IsArray(SAO)){
+		var A=CloneArray(SAO);
+		A.pop();
+		return A;
+	}
 	if(IsObject(SAO))
 		return FilterKeysObject(SAO,k=>In(Most(Keys(SAO)),k));
 	if(IsString(SAO))
 		return Most(SAO.split("")).join("");
-	if(IsArray(SAO)){
-		var A=Clone(SAO);
-		A.pop();
-		return A;
-	}
 	Wtyp("no string, array or object")
 	return null;
 /*
@@ -883,9 +883,7 @@ IsArray=function(array){
 }
 
 IsObject=function(obj){
-	if(!obj)
-		return false;
-	return FunctionName(obj.constructor)==="Object";
+	return obj&&In(String(obj.constructor),"Object");
 }
 
 IsRegex=function(obj){
@@ -962,7 +960,7 @@ Keys=function(Obj){
 	return Object.keys(Obj)||[];
 };
 Values=function(Obj){
-	return Keys(Obj).map(function(k){return Obj[k]})||[];
+	return Object.values(Obj)||[];
 };
 
 SortedKeys=function(Obj){
@@ -1853,10 +1851,10 @@ CloneArray=function(A){
 }
 
 Clone=function(SAO){
-	if(IsObject(SAO))
-		return CloneObject(SAO);
 	if(IsArray(SAO))
 		return CloneArray(SAO);
+	if(IsObject(SAO))
+		return CloneObject(SAO);
 	return SAO;
 }
 
