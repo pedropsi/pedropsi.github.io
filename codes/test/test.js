@@ -63,16 +63,6 @@ SaveTest(Equal,[{a:1,b:{bb:2},c:{cc:"3",d:{dd:4}}},{a:1,b:{bb:2},c:{cc:"3",d:{dd
 ///////////////////////////////////////////////////////////////////////////////
 // Math
 
-SaveTest(Power,[2,0],1,"power of zero");
-SaveTest(Power,[2,3],8,"normal power");
-
-SaveTest(PoweredSum,[[],2],0,"zero-dimensional");
-SaveTest(PoweredSum,[[2],2],4,"monodimensional");
-SaveTest(PoweredSum,[[3,4],2],25,"tridimensional");
-SaveTest(PoweredSum,[[1,2,3],1],6,"tridimensional, 1");
-SaveTest(PoweredSum,[[1,2,3],2],14,"tridimensional, 2");
-SaveTest(PoweredSum,[[1,2,3],3],36,"tridimensional, 3");
-SaveTest(PoweredSum,[[1,2,3,4],2],30,"tetradimensional");
 
 SaveTest("VectorPlus",[[],[]],[],"both empty");
 SaveTest("VectorPlus",[[1],[2]],[3],"monodimensional");
@@ -285,16 +275,6 @@ SaveTest(FunctionNamecode,(i)=>i,"(i)=>i","function code");
 
 ///////////////////////////////////////////////////////////////////////////////
 //Join Objects, overwriting conflicting properties
-
-SaveTest("Merge",[{a:1,b:2},{a:3}],{a:3,b:2},"object - has key");
-SaveTest("Merge",[{a:1,b:2},{c:3}],{a:1,b:2,c:3},"object - hasn't key");
-SaveTest("Merge",[{a:1,b:2},{c:3,d:4}],{a:1,b:2,c:3,d:4},"object - hasn't key");
-SaveTest("Merge",[{a:3},{a:1,b:2}],{a:1,b:2},"multiple properties");
-SaveTest("Merge",[{a:1,b:2},{c:3}],{a:1,b:2,c:3},"object - hasn't key");
-SaveTest("Merge",[{a:1,b:2},{}],{a:1,b:2},"add empty object");
-SaveTest("Merge",[{},{a:1,b:2}],{a:1,b:2},"add to empty object");
-SaveTest("Merge",[{a:1,b:2}],{a:1,b:2},"only one argument");
-SaveTest("Merge",[],{},"zero argument");
 
 SaveTest(Clone,{a:1,b:2},{a:1,b:2},"object - hasn't key"); //Improve - How to test cloning?
 SaveTest(Clone,{},{},"empty object");
@@ -509,28 +489,6 @@ SVGLinePairs("M 1 2 3 4")
 modify numbers
 SVGLineApply("M 1 2 3 4",xy=>[xy[1],xy[0]])
 "M 2 1 4 3 "
-
-"split path, multiple components"
-SVGPathSplit("M 1 2 L 3 4 Q 5 6 7 8 Z")
-["M 1 2 ","L 3 4 ","Q 5 6 7 8 ","Z "]
-
-deep evaluation
-MergeEvaluateObject({a:1,b:2,c:{d:3}},{a:x=>x+1,c:{d:x=>2*x}})
-{a:2,b:2,c:{d:6}}
-
-
-From array, multiple values
-Remove([1,2,3,3,2,8],2)
-Array(4) [ 1, 3, 3, 8 ]
-
-From object, key present
-Remove({a:1,b:2},"a")
-Object { b: 2 }
-
-From object, key absent
-Remove({a:1,b:2},2)
-Object { a: 1, b: 2 }
-
 
 `
 

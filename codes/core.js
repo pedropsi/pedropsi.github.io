@@ -116,9 +116,13 @@ Falsed=function(a){return a===false};
 Apply=function(Function,Array){
 	return Function.apply(null, Array);
 /***
-Apply a function to any number of arguments
+to any number of arguments
 Apply(Plus,[1,2,3])
 6
+
+to an empty list
+Apply(Plus,[])
+0
 ***/
 }
 
@@ -560,6 +564,15 @@ Power=function(n,exp){
 		return function(m){return Math.pow(m,n)}
 	else
 		return Math.pow(n,exp);
+/*
+of zero
+Power(2,0)
+1
+
+of a positive exponent
+Power(2,3)
+8
+*/
 }
 
 PoweredSum=function(vector,power){
@@ -567,6 +580,27 @@ PoweredSum=function(vector,power){
 		return 0;
 	else
 		return vector.map(Power(power)).reduce(Accumulate);
+/*
+zero-dimensional
+PoweredSum([],2)
+0
+
+monodimensional
+PoweredSum([2],2)
+4
+
+bidimensional
+PoweredSum([3,4],2)
+25
+
+tridimensional
+PoweredSum([1,2,3],1)
+6
+
+tetradimensional
+PoweredSum([1,2,3,4],2)
+30
+*/
 }
 
 VectorOperation=function(Operation,vector1,vector2){
@@ -819,7 +853,7 @@ InsertCut([1,2,3,4,5],"a",3)
 [1,2,3,"a"]
 
 remove head and add element
-InsertCut([1,2,3,4,5],"a",3)
+InsertCut([1,2,3,4,5],"a",-3)
 ["a",3,4,5]
 
 both
@@ -1418,6 +1452,44 @@ BiMerge=function(AO1,AO2){
 	if(typeof AO1==="undefined")
 		return AO2;
 	return BiMergeAO(AO1,AO2);
+
+/*
+object with key
+BiMerge({a:1,b:2},{a:3})
+{a:3,b:2}
+
+object no key
+BiMerge({a:1,b:2},{c:3})
+{a:1,b:2,c:3}
+
+object hasn't key
+BiMerge({a:1,b:2},{c:3,d:4})
+{a:1,b:2,c:3,d:4}
+
+multiple properties
+BiMerge({a:3},{a:1,b:2})
+{a:1,b:2}
+
+add empty object
+BiMerge({a:1,b:2},{})
+{a:1,b:2}
+
+add to empty object
+BiMerge({},{a:1,b:2})
+{a:1,b:2}
+
+only one argument
+BiMerge({a:1,b:2})
+{a:1,b:2}
+
+zero argument
+BiMerge()
+{}
+
+not recursive (use join or that)
+BiMerge({a:{c:3,d:4}},{a:{e:5}})
+{a:{e:5}}
+*/
 }
 
 Merge=ArgumentExtender(BiMerge);
@@ -1439,6 +1511,11 @@ MergeEvaluateObject=function(Obj,SubObj){
 			}
 		})
 	return Obj;
+/*
+deep evaluation
+MergeEvaluateObject({a:1,b:2,c:{d:3}},{a:x=>x+1,c:{d:x=>2*x}})
+{a:2,b:2,c:{d:6}}
+*/
 }
 
 
@@ -1590,6 +1667,19 @@ Remove=function(AO,key){
 		return RemoveKeyObject(AO,key);
 	else
 		return RemoveItemArray(AO,key);
+/*
+From array, multiple values
+Remove([1,2,3,3,2,8],2)
+Array(4) [ 1, 3, 3, 8 ]
+
+From object, key present
+Remove({a:1,b:2},"a")
+Object { b: 2 }
+
+From object, key absent
+Remove({a:1,b:2},2)
+Object { a: 1, b: 2 }
+*/
 }
 
 
@@ -4398,7 +4488,7 @@ LaunchKeyboardBalloon=function(DP){
 
 // On-screen Keyboard
 DefaultKeyboardKeys=function(){
-	return [["1","2","3","4","5","6","7","8","9","0"],["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M"/*,"dot","dash"*/],["undo","redo","space","restart","close"]]};
+	return [["1","2","3","4","5","6","7","8","9","0"],["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M"],["undo","redo","space","restart","close"]]};
 
 KeyboardRowsHTML=function(dataField,buttontype){
 	var kblines="";
@@ -6668,6 +6758,11 @@ SVGPattern=function(){
 SVGPathSplit=function(path){
 	var pattern=new RegExp(SVGPattern(),"g");
 	return (path+" ").match(pattern)||[];
+/*
+split path, multiple components
+SVGPathSplit("M 1 2 L 3 4 Q 5 6 7 8 Z")
+["M 1 2 ","L 3 4 ","Q 5 6 7 8 ","Z "]
+*/
 }
 
 SVGLinePairs=function(svgline){ //misses odd number off coords
