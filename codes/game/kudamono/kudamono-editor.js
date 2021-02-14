@@ -488,6 +488,9 @@ PointTrackNextNodePoints=function(xy,track,state){
 }
 
 
+LevelFruits=function(state){
+	return Keys(state.level).filter(s=>state.level[s].filter(xy=>PointValid(xy,state)).length);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Error detection
@@ -758,7 +761,7 @@ TrackStyles=function(track,state,styles,errors){
 	}
 }
 
-DrawTrack=function(track,state,styles,errors){
+TrackDraw=function(track,state,styles,errors){
 	if(!track.length)
 		return false;
 	
@@ -766,8 +769,8 @@ DrawTrack=function(track,state,styles,errors){
 	
 	var track=track.filter(segment=>SegmentValid(segment,state));
 		track=UnDiscretiseTrack(track);
-		
-	track.map(segment=>DrawSegment({
+	
+	track.map(segment=>SegmentDraw({
 		px0:segment[0][0],
 		px1:segment[1][0],
 		py0:segment[0][1],
@@ -778,7 +781,7 @@ DrawTrack=function(track,state,styles,errors){
 	return errors;
 }
 
-DrawSegment=function(opts,state){
+SegmentDraw=function(opts,state){
 	var gridOpts={
 		...state.grid,
 		rows:state.H,
@@ -789,7 +792,7 @@ DrawSegment=function(opts,state){
 		...GridExtremes(gridOpts),
 		...opts
 	}
-	DrawGridLine(opts);
+	GridLineDraw(opts);
 }
 
 
@@ -800,7 +803,7 @@ XYFruitErred=function(xy,fruit,state){
 	return Values(errors).some(Identity);
 }
 
-StateDrawFruit=function(state,fruit,xy,Opts){
+StateFruitDraw=function(state,fruit,xy,Opts){
 	if(!fruit||!xy||!PositionValid(xy[0],xy[1],state)||!fruit)
 		return;
 
@@ -855,8 +858,7 @@ StateDrawFruit=function(state,fruit,xy,Opts){
 	Opts.dash=false;
 	Opts.lineWidth=lineWidth;
 	
-
-	DrawSVG(Opts);
+	SVGDraw(Opts);
 }
 
 DrawFruits=function(fruit,coordinates,Opts,state){
@@ -1015,7 +1017,7 @@ StateSerial=function(state){
 ///////////////////////////////////////////////////////////////////////////////
 //Interactive UI (for quick iteration)
 
-StateGridDraw=function(state){
+GridDraw=function(state){
 	var gridOpts={
 		...state.grid,
 		rows:state.H,
@@ -1038,18 +1040,17 @@ StateGridDraw=function(state){
 			gridOpts.fillColor=HEXSaturater(0)(gridOpts.fillColor);
 
 	}
-	DrawSquaresGrid(gridOpts);
+	SquaresGridDraw(gridOpts);
 }
 
 
 ForestDraw=function(forest,state,Opts){
 	var positionErrors=state.atErrors;
-	forest.map((track,i)=>DrawTrack(track,state,Opts,positionErrors[i]));
+
+	forest.map((track,i)=>TrackDraw(track,state,Opts,positionErrors[i]));
 }
 
-
-
-StatePathsDraw=function(state){
+OrchardDraw=function(state){
 	var orchard=state.orchard;
 	var Opts=Extremes(state);
 	
@@ -1327,22 +1328,22 @@ StateCursorName=function(state){
 	return cursor;
 }
 
-DrawCursor=function(state){
+CursorDraw=function(state){
 	var name=StateCursorName(state);
 	var cursor=name;
 	var opts={};
 	var Icons=state.fruits;
 	if(In(Icons,name)){
 		cursor=Icons[name];
-		if(!DrawCursor[name]){
+		if(!CursorDraw[name]){
 			cursor=RescalePath({...cursor,scale:1,square:100},true);
 			cursor=DisplacePath({...cursor,px:10,py:10});
 			cursor.viewBox="0 0 110 110",
 			cursor=BuildSymbolIcon({...cursor,primitive:"cursor-triangle"});
-			DrawCursor[name]=cursor;
+			CursorDraw[name]=cursor;
 		}
 		else
-			cursor=DrawCursor[name];
+			cursor=CursorDraw[name];
 					
 		opts.fill=Icons[name].colour;
 		if(state.visuals.monochrome){
