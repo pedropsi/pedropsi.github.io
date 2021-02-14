@@ -33,7 +33,7 @@ PointsOrdered=function(point1,point2){
 //Paths
 
 PathTrack=function(path){
-	var path=Clone(path);
+	var path=Clone(path||[]);
 	
 	var track=[];
 	if(path.length<2)

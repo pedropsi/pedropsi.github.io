@@ -1450,27 +1450,31 @@ ObjectKeyIntersection=function(O1,O2){
 }
 
 
-BiIntersection=function(AO1,AO2){
-	if(!AO2)
-		return AO1;
-	if(!AO1)
-		return Empty(AO2);
-	return ArrayObjectF(ArrayIntersection,ObjectIntersection)(AO1,AO2);
+BiIntersection=function(A1,A2){
+	if(!A1&&!A2)
+	return [];
+	if(!A2)
+		return A1;
+	if(!A1)
+		return A2;
+	return ArrayIntersection(A1,A2);
 }
 var Intersection=ArgumentExtender(BiIntersection);
 
 Intersected=function(){
 	var args=Values(arguments);
-	return Apply(Intersection,args).length>0
+	return (Apply(Intersection,args)).length>0
 }
 
 //Union (force uniqueness, sort)
-BiUnion=function(AO1,AO2){
-	if(!AO2)
-		return Unique(AO1);
-	if(!AO1)
-		return Unique(AO2);
-	return Unique(AO1.concat(AO2));
+BiUnion=function(A1,A2){
+	if(!A1&&!A2)
+		return [];
+	if(!A2)
+		return Unique(A1);
+	if(!A1)
+		return Unique(A2);
+	return Unique(A1.concat(A2));
 }
 
 Union=ArgumentExtender(BiUnion);
