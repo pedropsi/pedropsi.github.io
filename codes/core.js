@@ -1092,6 +1092,29 @@ Filter=function(AO,Validator){
 }
 
 
+
+TreeKeys=function(Obj){
+	var full=[];
+	var keys=Keys(Obj);
+		keys.map(function(k){
+			if(IsObject(Obj[k]))
+				full=full.concat(TreeKeys(Obj[k]).map(f=>k+"."+f));	
+			else
+				full.push(k);
+		})
+	return full;
+/*
+Shallow Object
+TreeKeys({a:1,b:2})
+["a","b"]
+
+Deep Object
+TreeKeys({a:1,b:{c:3,d:{e:5}}})
+["a","b-c","b-d-e"]
+*/
+}
+
+
 ThreadKeysValues=function(Obj,KeyValuer){
 	return Keys(Obj).map(k=>KeyValuer(k,Obj[k]));
 }
@@ -1320,7 +1343,6 @@ ComplementObject=function(objInclude,objExclude){
 	}
 	return unique;
 /*
-
 Simple complement
 ComplementObject({a:1,b:2},{a:1})
 {b:2}
@@ -1329,7 +1351,7 @@ Different value for same key, still distinct
 ComplementObject({a:1,b:2},{a:2})
 {a:1,b:2}
 
-Deep removal
+Deep removal, keep structure
 ComplementObject({a:1,b:{c:3,d:4}},{a:1,b:{c:3}})
 {b:{d:4}}
 */
