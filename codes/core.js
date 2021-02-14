@@ -1122,12 +1122,13 @@ Filter=function(AO,Validator){
 
 
 
-TreeKeys=function(Obj){
+TreeKeys=function(Obj,separator){
+	var separator=String(separator||".");
 	var full=[];
 	var keys=Keys(Obj);
 		keys.map(function(k){
 			if(IsObject(Obj[k]))
-				full=full.concat(TreeKeys(Obj[k]).map(f=>k+"."+f));	
+				full=full.concat(TreeKeys(Obj[k],separator).map(f=>k+separator+f));	
 			else
 				full.push(k);
 		})
@@ -1139,7 +1140,11 @@ TreeKeys({a:1,b:2})
 
 Deep Object
 TreeKeys({a:1,b:{c:3,d:{e:5}}})
-["a","b-c","b-d-e"]
+["a","b.c","b.d.e"]
+
+Custom separator
+TreeKeys({a:1,b:{c:3}},"»»")
+["a","b»»c"]
 */
 }
 
@@ -1887,6 +1892,27 @@ FixedPoint(Rest,[1,2,3])
 */
 }
 
+ItemPrecedents=function(item,precedentsObj){
+	if(typeof item==="undefined")
+		return [];
+	var item=item;
+	var levels=[item];
+	var precedentsObj=precedentsObj||{};
+	while(In(precedentsObj,item)&&!In(levels,precedentsObj[item])){
+		item=precedentsObj[item];
+		levels.push(item);
+	}
+	return levels;
+/*
+No precedents
+ItemPrecedents("a",{b:"c"})
+["a"]
+
+Break infinite loops
+ItemPrecedents("a",{a:"b",b:"c",c:"a"})
+["a","b","c"]
+*/
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Join Objects, overwriting conflicting properties
