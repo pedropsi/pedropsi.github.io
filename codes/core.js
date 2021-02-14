@@ -666,6 +666,34 @@ UnitVector=function(vector){
 ///////////////////////////////////////////////////////////////////////////////
 // Array, Object, String (SAO)
 
+Length=function(SAO){
+	if(IsArray(SAO)||IsString(SAO)){
+		return SAO.length
+	}
+	if(IsObject(SAO)){
+		return Keys(SAO).length;
+	}
+	Wtyp("no string, array or object")
+	return 1;
+/*
+Empty list
+Length([])
+0
+
+Empty object
+Length({})
+0
+
+Empty string
+Length("")
+0
+
+a function
+Length(Identity)
+1
+*/
+}
+
 First=function(SAO){
 	if(IsArray(SAO)||IsString(SAO)){
 		if(SAO.length)
@@ -962,6 +990,7 @@ Keys=function(Obj){
 Values=function(Obj){
 	return Object.values(Obj)||[];
 };
+
 
 SortedKeys=function(Obj){
 	return Keys(Obj).sort();
@@ -1379,6 +1408,9 @@ BiComplement=function(AO1,AO2){
 }
 
 Complement=ArgumentExtender(BiComplement);
+
+
+
 
 //Intersection (force uniqueness, sort)
 ArrayIntersection=function(array1,array2){
