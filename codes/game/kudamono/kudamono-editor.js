@@ -886,7 +886,7 @@ LevelDraw=function(state){
 	var target=state.render.target+"-level";
 	ClearCanvas(target);
 	var fruits=Keys(state.level);
-		fruits.map(fruit=>DrawFruits(fruit,state.level[fruit],{target:state.render.target+"-level"},state));
+		fruits.map(fruit=>DrawFruits(fruit,state.level[fruit],{target:target},state));
 }
 
 GridDraw=function(state){
@@ -1315,16 +1315,17 @@ LayerPainter=function(layer){
 
 LayersChanged={
 	grid:["W","L","visuals","win.won","grid"],
-	line:["W","L","visuals","orchard"],
-	overline:["W","L","visuals"],
 	level:["W","L","visuals","orchard","level"],
 	overlevel:["W","L","visuals"],
+	line:["W","L","visuals","orchard"],
+	overline:["W","L","visuals"],
 	rules:["rules"],
 	metadata:["metadata"]
 }
 
 ChangedLayers=function(changed,state){
 	var layerschanged=Clone(LayersChanged);
+
 	if(state.mode.dragging){
 		if(state.mode.edit)
 			layerschanged.overlevel=["mode.selection","level"].concat(layerschanged.overlevel);
@@ -1332,8 +1333,10 @@ ChangedLayers=function(changed,state){
 			layerschanged.overline=["mode.selection","segments"].concat(layerschanged.overline);
 	}
 	var changes=layerschanged;
-	if(changed)
+	if(changed){
+		changed=changed.map(cha=>UnPosfix(cha,Afterfix(cha,"level")));
 		changes=FilterValuesObject(layerschanged,changes=>Intersected(changed,changes));
+	}
 	return Keys(changes);
 }
 
@@ -1347,7 +1350,6 @@ StateDraw=function(state,changed){
 UpdateState=function(substate,options){
 	var state=AdvanceState(substate,options);
 	var changed=TreeKeys(state.changed);
-	
 	StateDraw(state,changed);
 	
 	if(Intersected(changed,["visuals.monochrome","mode.fruit","mode.edit","mode.clearing"])||options.initialise){
@@ -1506,7 +1508,6 @@ XYFruitsRemoveLevel=function(points,state){
 }
 
 LevelUpdate=function(level,state){
-	Wbug("trying",level)
 	if(!Equal(level,state.level))
 		UpdateState({level:level},{id:state.id});
 }
