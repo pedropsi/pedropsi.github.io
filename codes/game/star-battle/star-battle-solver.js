@@ -488,7 +488,7 @@ function MarkStar(cell,opts){
 		...opts,
 		...StarXY(cell)
 	};
-	DrawStar(opts);
+	StarDraw(opts);
 }
 
 function UnMarkStar(cell,opts){
@@ -512,7 +512,7 @@ function MarkCross(cell,opts){
 		...opts,
 		...StarXY(cell)
 	};
-	DrawStar(opts);
+	StarDraw(opts);
 }
 
 function UnMarkCross(cell,opts){

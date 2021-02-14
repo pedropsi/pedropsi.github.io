@@ -2,9 +2,11 @@
 	position: relative;
     overflow: hidden;
     height:95vh;
+	background-color: transparent;
 
 }
 .game-supra-canvas canvas{
 	top:0;
 	position: absolute;
+	background-color: transparent;
 }

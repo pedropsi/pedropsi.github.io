@@ -2,17 +2,17 @@
 // Canvas Drawing
 
 GetContext=function(targetIDsel){
-	return GetContextElement(targetIDsel).getContext("2d");
+	return Canvas(targetIDsel).getContext("2d");
 }
 
-GetContextElement=function(targetIDsel){
-	var targetIDsel=targetIDsel||"CANVAS";
-	return GetElement(targetIDsel);
+Canvas=function(targetIDsel){
+	var targetIDsel=targetIDsel;
+	return GetElement(targetIDsel)||GetElement("CANVAS");
 }
 
 
 Width=function(element){
-	var e=GetContextElement(element);
+	var e=Canvas(element);
 	if(!e){
 		Warn("no element found");
 		return null;
@@ -24,7 +24,7 @@ Width=function(element){
 }
 
 Height=function(element){
-	var e=GetContextElement(element);
+	var e=Canvas(element);
 	if(!e){
 		Warn("no element found");
 		return null;
@@ -77,7 +77,7 @@ RegularPolygonPoints=function(opts){
 }
 
 DrawLine=function(opts){
-	var e=GetContextElement(opts.target)
+	var e=Canvas(opts.target)
 	var W=Width(e);
 	var H=Height(e);
 	var ctx=opts.ctx||GetContext(opts.target);
@@ -216,10 +216,10 @@ GridExtremes=function(opts){
 	};
 }
 
-DrawSquaresGrid=function(opts){
+SquaresGridDraw=function(opts){
 	var gridOpts={
 		...opts,
-		...GridExtremes(opts)
+		...GridExtremes(opts),
 	};
 	var gridCoords={
 		x0:gridOpts.x0/gridOpts.width,
@@ -228,18 +228,17 @@ DrawSquaresGrid=function(opts){
 		y1:gridOpts.y1/gridOpts.height
 	}
 
-	DrawRectangle({...gridOpts,lineWidth:0});
+	RectangleDraw({...gridOpts,lineWidth:0});
 	DrawGrid({...gridOpts,...gridCoords},);
 
 	var borderOpts=gridOpts;
 	if(gridOpts.border)
 		borderOpts=Merge(gridOpts,gridOpts.border);
 	
-	DrawRectangle({...borderOpts,fillColor:"transparent"});
 
 }
 
-DrawGridLine=function(opts){
+GridLineDraw=function(opts){
 	var gridOpts=GridExtremes(opts);
 	var x0=gridOpts.x0/gridOpts.width;
 	var x1=gridOpts.x1/gridOpts.width;
@@ -258,7 +257,7 @@ DrawGridLine=function(opts){
 	DrawLine(newopts);	
 }
 
-DrawShape=function(opts){
+ShapeDraw=function(opts){
 	var ctx=opts.ctx||GetContext(opts.target);
 	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
 	var fillColor=opts.fillColor?opts.fillColor:getComputedStyle(document.body)["background-strokeColor"]||"white";
@@ -282,35 +281,35 @@ DrawShape=function(opts){
 	}
 }
 
-DrawStar=function(opts){
+StarDraw=function(opts){
 	var opts={...opts,star:true};
-	DrawRegularPolygon(opts);
+	RegularPolygonDraw(opts);
 }
 
-DrawRegularPolygon=function(opts){
+RegularPolygonDraw=function(opts){
 	opts.coordinates=RegularPolygonPoints(opts);
 	opts.ctx=opts.ctx||GetContext(opts.target);
 	opts.Drawer=function(opts){
 		opts.coordinates.map(xy=>opts.ctx.lineTo(xy[0],xy[1]));
 	}
-	DrawShape(opts)
+	ShapeDraw(opts)
 }
 
-DrawCircle=function(opts){
+CircleDraw=function(opts){
 	opts.ctx=opts.ctx||GetContext(opts.target);
 	opts.Drawer=function(opts){
 		opts.ctx.arc(opts.x,opts.y,opts.size,0,PI*2);
 	}
-	DrawShape(opts);
+	ShapeDraw(opts);
 }
 
 
-DrawRectangle=function(opts){
-	opts.ctx=opts.ctx||GetContext(opts.target);
+RectangleDraw=function(opts){
+	opts.ctx=GetContext(opts.target);
 	opts.Drawer=function(opts){
 		opts.ctx.rect(opts.x0,opts.y0,(opts.x1-opts.x0),(opts.y1-opts.y0));
 	}
-	DrawShape(opts);
+	ShapeDraw(opts);
 }
 
 RescalePath=function(opts,heighted){
@@ -336,7 +335,7 @@ DisplacePath=function(opts){
 	return opts;
 }
 
-DrawSVG=function(opts){
+SVGDraw=function(opts){
 	opts.ctx=GetContext(opts.target);
 	if(!opts.path)
 		return;
@@ -368,26 +367,20 @@ DrawSVG=function(opts){
 }
 
 //
-UnDraw=function(opts){
-	var opts=opts||{};
-	var canvas=GetContextElement(opts.target);
+
+ClearCanvas=function(e){
+	var canvas=GetElement(e);
 	if(!canvas)
-		return;
-	opts={
-		x0:0,
-		x1:Width(canvas),
-		y0:0,
-		y1:Height(canvas),
-		...opts
-	}
-	GetContext(opts.target).clearRect(opts.x0,opts.y0,opts.x1-opts.x0,opts.y1-opts.y0);
+		Warn("cant find canvas",e);
+	else
+		canvas.getContext("2d").clearRect(0,0,canvas.width,canvas.height);
 }
 
 DrawText=function(opts){
 	if(!opts.txt)
 		return;
 	var opts={...opts};
-	var canvas=GetContextElement(opts.target);
+	var canvas=Canvas(opts.target);
 	var ctx=GetContext(canvas);
 	opts.fontSize=opts.fontSize||"30px";
 	opts.fontFamily=opts.fontFamily||"Arial";

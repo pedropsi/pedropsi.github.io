@@ -108,7 +108,7 @@ StartGIF=function(gid){
 
 		var s=SquareRoot(w*h)/3;
 
-		DrawCircle({
+		CircleDraw({
 			"size":s/2,
 			"fillColor":getComputedStyle(c)["color"],
 			"strokeColor":getComputedStyle(c)["background-color"],
@@ -118,7 +118,7 @@ StartGIF=function(gid){
 			"target":".gifcanvas"
 		});
 
-		DrawRegularPolygon({
+		RegularPolygonDraw({
 			"size":s/2*0.8,
 			"fillColor":getComputedStyle(c)["background-color"],
 			"n":3,
