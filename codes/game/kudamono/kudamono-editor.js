@@ -1802,7 +1802,7 @@ ObtainStartingLevelState=function(id,blankState){
 	return state;
 }
 
-SpecialLayers=["metadatacolphon","metadatatitle","rules"]
+SpecialLayers=["metadatacolophon","metadatatitle","rules"]
 
 SubBoardHTML=function(name,state){
 	if(In(SpecialLayers,name))
