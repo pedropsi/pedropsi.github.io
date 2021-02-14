@@ -872,14 +872,15 @@ DrawFruits=function(fruit,coordinates,Opts,state){
 OverLevelDraw=function(state){
 	var target=state.render.target+"-overlevel";
 	ClearCanvas(target);
-	DrawFruits(
-		state.mode.fruit,
-		state.mode.selection,
-		{
-			coloriser:state.mode.clearing?HEXLightener(0.9):HEXDarkener(0.8),
-			target:target
-		},
-		state);
+	if(state.mode.dragging&&state.mode.edit)
+		DrawFruits(
+			state.mode.fruit,
+			state.mode.selection,
+			{
+				coloriser:state.mode.clearing?HEXLightener(0.9):HEXDarkener(0.8),
+				target:target
+			},
+			state);
 }
 
 LevelDraw=function(state){
@@ -926,7 +927,6 @@ ForestDraw=function(forest,state,Opts){
 	if(state.mode.edit)
 		target=state.render.target+"-overline";
 	
-	ClearCanvas(target);
 	forest.map((track,i)=>TrackDraw(track,state,Opts,positionErrors[i]));
 }
 
@@ -938,7 +938,7 @@ OrchardDraw=function(state){
 		opacity:state.line.opacity,
 		lineWidth:state.line.lineWidth,
 	}
-
+	ClearCanvas(state.render.target+"-line");
 	ForestDraw(orchard,state,Opts);
 }
 
@@ -952,7 +952,8 @@ OverlineDraw=function(state){
 
 	var target=state.render.target+"-overline";
 	ClearCanvas(target);
-	TrackDraw(seltrack,state,Opts)
+	if(!state.mode.edit&&state.mode.dragging)
+		TrackDraw(seltrack,state,Opts)
 }
 
 
@@ -1288,6 +1289,10 @@ AdvanceState=function(substate,options){
 		changed=Join(changed,ComplementObject(state,OLDSTATE));
 	}
 
+	if(Intersected(changed,LayersChanged["cursor"])||options.initialise){
+		state.visuals.cursor=StateCursorName(state);
+	}
+
 	state.changed=changed;
 	return state;
 }
@@ -1302,10 +1307,11 @@ LayerPainter=function(layer){
 	"grid":GridDraw,
 	"line":OrchardDraw,
 	"overline":OverlineDraw,
-	"overlevel":OverLevelDraw,
 	"level":LevelDraw,
+	"overlevel":OverLevelDraw,
 	"rules":RulesDraw,
-	"metadata":MetadataDraw
+	"metadata":MetadataDraw,
+	"cursor":CursorDraw
 	}
 	if(In(layerspainters,layer))
 		return layerspainters[layer];
@@ -1314,34 +1320,47 @@ LayerPainter=function(layer){
 }
 
 LayersChanged={
-	grid:["W","L","visuals","win.won","grid"],
-	level:["W","L","visuals","orchard","level"],
-	overlevel:["W","L","visuals"],
-	line:["W","L","visuals","orchard"],
-	overline:["W","L","visuals"],
-	rules:["rules"],
-	metadata:["metadata"]
+	grid:["force-grid","W","H","visuals.monochrome","win.won","grid","mode.edit"],
+	level:["force-level","W","H","visuals.monochrome","orchard","level"],
+	overlevel:["force-overlevel","W","H","visuals.monochrome","mode.edit","mode.selection","mode.dragging","mode.fruit"],
+	line:["force-line","W","H","visuals.monochrome","orchard"],
+	overline:["force-overline","W","H","visuals.monochrome","mode.edit","mode.selection"],
+	rules:["force-rules","visuals.monochrome","rules"],
+	metadata:["force-metadata","metadata"],
+	cursor:["visuals.monochrome","mode.fruit","mode.edit","mode.clearing"]
 }
+
+LayerSubsequents={
+	grid:"level",
+	level:"overlevel",
+	overlevel:"line",
+	line:"overline"
+}
+
+
+
 
 ChangedLayers=function(changed,state){
 	var layerschanged=Clone(LayersChanged);
 
-	if(state.mode.dragging){
-		if(state.mode.edit)
-			layerschanged.overlevel=["mode.selection","level"].concat(layerschanged.overlevel);
-		else
-			layerschanged.overline=["mode.selection","segments"].concat(layerschanged.overline);
-	}
+	
 	var changes=layerschanged;
 	if(changed){
 		changed=changed.map(cha=>UnPosfix(cha,Afterfix(cha,"level")));
 		changes=FilterValuesObject(layerschanged,changes=>Intersected(changed,changes));
 	}
-	return Keys(changes);
+	var layers=Keys(changes);
+		layers=layers.map(l=>ItemPrecedents(l,LayerSubsequents));
+		layers=Apply(Union,layers)||[];
+	return layers;
 }
 
 StateDraw=function(state,changed){
-	ChangedLayers(changed,state).map(layer=>LayerPainter(layer)(state));
+	var layers=Keys(LayersChanged);
+	Wbug(changed)
+	if(changed)
+		layers=ChangedLayers(changed,state);
+	layers.map(layer=>LayerPainter(layer)(state));
 }
 
 
@@ -1350,12 +1369,8 @@ StateDraw=function(state,changed){
 UpdateState=function(substate,options){
 	var state=AdvanceState(substate,options);
 	var changed=TreeKeys(state.changed);
+		changed=Union(changed,options.draw||[])
 	StateDraw(state,changed);
-	
-	if(Intersected(changed,["visuals.monochrome","mode.fruit","mode.edit","mode.clearing"])||options.initialise){
-		state.visuals.cursor=StateCursorName(state);
-		CursorDraw(state);
-	}
 
 	if(changed.length)
 		SaveState(state);
@@ -1606,15 +1621,14 @@ DragActionEnder=function(x,y,w,h,target){
 	var mode=state.mode;
 		mode.dragging=false;
 	var selected=mode.selection||[];
+
 	if(mode.edit){
-		ClearCanvas(state.render.target+"-overlevel")
 		if(mode.clearing)
 			XYFruitsRemove(selected,state);
 		else
 			XYFruitsAdd(selected,state);
 	}
 	else {
-		ClearCanvas(state.render.target+"-overline")
 		if(selected.length>1){
 			var segments=PathTrack(selected);
 			if(mode.clearing)
@@ -1625,9 +1639,12 @@ DragActionEnder=function(x,y,w,h,target){
 		}
 	}
 
+	ClearCanvas(state.render.target+"-overlevel")
+	ClearCanvas(state.render.target+"-overline")
+
 	mode.selection=[];
 	mode.clearing=false;	
-	UpdateState({mode:mode},{id:state.id})
+	UpdateState({mode:mode},{id:state.id,draw:["force-level"]})
 }
 
 
@@ -1858,12 +1875,9 @@ InitialisePuzzle=function(id,options){
 	SaveState(state);
 	var options=Merge(options,{initialise:true,id:state.id});
 	UpdateState({},options);
-
-	CanvasResize(state)
 	
 	//Auto instructions
 	AutoInstructions(state.fruits)
-	
 }
 
 
