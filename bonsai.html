@@ -10,41 +10,48 @@ ${LoadSource("codes/game/kudamono/kudamono-editor.js"),""}
 
 ${
 	bonsaisData={
-	"50-Questioning":{
-		date:"22/02/2021",
-		board:"W=6&L=q10q7f1q4w2q2h4q1q7&S=8RDLDDDRRDRRUULD4R4DR7URRD3R13D&G=b",
-		difficulty:"hard"
-	},
-	"48-Flocking":{
-		date:"15/02/2021",
-		board:"W=6&L=h9h2h4h4h10h4h4f1h1&S=8DRUR2DRURUL2RU12RUUR2URDRUUL7R&G=b",
-		difficulty:"easy"
-	},
-	"47-Hummingbirds":{
-		date:"08/02/2021",
-		difficulty:"medium",
-		board:"W=6&L=h16f1h1f5f2h5f1w9&S=8D1G2W1R3X4t13ojZ1U5U2P&G=b"
-	},
-	"46-Narrow":{
-		date:"07/02/2021",
-		difficulty:"medium",
-		board:"W=8&H=6&L=w11w1f3w2w1w26w1w5w1&G=b"
-	},
-	"45-Triparityte":{
-		date:"30/01/2021",
-		difficulty:"medium",
-		board:"W=6&L=w8f15f1f1&G=b"
-	},
-	"44-Four-way":{
-		date:"14/01/2021",
-		difficulty:"easy",
-		board:"W=7&L=f11f2f4w1w3w1f4f2f5f4f6w1w1f1f4f2&G=b"
-	},
-	"43-Cardinal":{
-		date:"21/01/2021",
-		difficulty:"easy",
-		board:"W=6&H=5&L=f13w1w7f1f4w1&G=b"
-	}
+		"51-Long way up":{
+			date:"06/03/2021",
+			unique:"no, see top part",
+			board:"W=5&H=10&L=w12q5w6w2h1f4w4w2h1q2w6&S=12Y2D3Y2Y4D1IHKtpkU10D4L7X2D4U2P&G=b",
+			difficulty:"hard"
+		},
+		"50-Questioning":{
+			date:"28/02/2021",
+			board:"W=6&L=q10q7f1q4w2q2h4q1q7&S=8RDLDDDRRDRRUULD4R4DR7URRD3R13D&G=b",
+			difficulty:"hard"
+		},
+		"48-Flocking":{
+			date:"21/02/2021",
+			board:"W=6&L=h9h2h4h4h10h4h4f1h1&S=8DRUR2DRURUL2RU12RUUR2URDRUUL7R&G=b",
+			difficulty:"easy"
+		},
+		"47-Hummingbirds":{
+			date:"07/02/2021",
+			difficulty:"medium",
+			board:"W=6&L=h16f1h1f5f2h5f1w9&S=8D1G2W1R3X4t13ojZ1U5U2P&G=b",
+			thanks:["andrea"]
+		},
+		"46-Narrow":{
+			date:"14/02/2021",
+			difficulty:"medium",
+			board:"W=8&H=6&L=w11w1f3w2w1w26w1w5w1&G=b"
+		},
+		"45-Triparityte":{
+			date:"30/01/2021",
+			difficulty:"medium",
+			board:"W=6&L=w8f15f1f1&G=b"
+		},
+		"44-Four-way":{
+			date:"14/01/2021",
+			difficulty:"easy",
+			board:"W=7&L=f11f2f4w1w3w1f4f2f5f4f6w1w1f1f4f2&G=b"
+		},
+		"43-Cardinal":{
+			date:"21/01/2021",
+			difficulty:"easy",
+			board:"W=6&H=5&L=f13w1w7f1f4w1&G=b"
+		}
 	},
 	bonsais=FilterValuesObject(bonsaisData,o=>(!o.date||Days(StringDate(o.date))>=0)),
 	OnceDelayer(ModalImageFragment)(bonsais),
