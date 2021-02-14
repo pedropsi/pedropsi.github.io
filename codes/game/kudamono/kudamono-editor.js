@@ -1036,67 +1036,27 @@ MetadataColophon=function(metadata){
 	return number+title+difficulty+author+date;
 }
 
-MetadataDraw=function(state){
-	var Opts={
-		target:state.render.target,
-		colour:state.metadata.textColour,
-		fontWeight:"bold"
-	}
-	Opts.target=state.render.target+"-metadata";
-
-	DrawText({
-		...Opts,
-		txt:Capitalise(state.designation||state.genre),
-		fontSize:"calc(4 * var(--fontheight))",
-		y:0.1
-	})
-
-	Opts={
-		...Opts,
-		fontSize:"calc(1.2 * var(--fontheight))"
-	}
-
+MetadataTitleDraw=function(state){
+	var title=Capitalise(state.designation||state.genre);
 	var subtitle=state.description;
 
-	subtitle.split(/\n/).map((line,i)=>DrawText({
-		...Opts,
-		txt:line,
-		fontWeight:"italic",
-		y:0.15+0.04*i
-	}))
-	
-	var url=state.metadata.url||""
+	ReplaceChildren(`
+		<div class="title">${title}</div>
+		<div class="subtitle">${subtitle}</div>`,
+		state.render.target+"-metadatatitle");
+}
 
-	var y=0.98;
-	if(url){
-		y=0.94;
-		DrawText({
-			...Opts,
-			txt:url,
-			y:y+0.04,
-			fontWeight:"italic"
-		})
-	}
-	
+MetadataColophonDraw=function(state){
+	var url=state.metadata.url||"";
 	var colophon=MetadataColophon(state.metadata);
-
-	if(colophon)
-		DrawText({
-			...Opts,
-			txt:colophon,
-			y:y
-		})	
-
 	var thanks=state.metadata.thanks?("With thanks to "+Enumerate(state.metadata.thanks.split(","))+"."):"";
-	if(thanks)
-		DrawText({
-			...Opts,
-			txt:thanks,
-			fontWeight:"bold italic",
-			x:0.05,
-			textAlign:"left",
-			y:y
-		})	
+
+	ReplaceChildren(`
+	<div class="colophon>${colophon}</div>
+	<div class="url>${url}</div>
+	<div class="thanks>${thanks}</div>
+	`,
+	state.render.target+"-metadatacolophon");
 }
 
 
@@ -1310,7 +1270,8 @@ LayerPainter=function(layer){
 	"level":LevelDraw,
 	"overlevel":OverLevelDraw,
 	"rules":RulesDraw,
-	"metadata":MetadataDraw,
+	"metadatatitle":MetadataTitleDraw,
+	"metadatacolophon":MetadataColophonDraw,
 	"cursor":CursorDraw
 	}
 	if(In(layerspainters,layer))
@@ -1326,7 +1287,8 @@ LayersChanged={
 	line:["force-line","W","H","visuals.monochrome","orchard"],
 	overline:["force-overline","W","H","visuals.monochrome","mode.edit","mode.selection"],
 	rules:["force-rules","visuals.monochrome","rules"],
-	metadata:["force-metadata","metadata"],
+	metadatatitle:["force-metadata","force-metadatatitle"],
+	metadatacolophon:["force-metadata","force-metadatacolophon"],
 	cursor:["visuals.monochrome","mode.fruit","mode.edit","mode.clearing"]
 }
 
@@ -1357,7 +1319,6 @@ ChangedLayers=function(changed,state){
 
 StateDraw=function(state,changed){
 	var layers=Keys(LayersChanged);
-	Wbug(changed)
 	if(changed)
 		layers=ChangedLayers(changed,state);
 	layers.map(layer=>LayerPainter(layer)(state));
@@ -1799,7 +1760,7 @@ CanvasResize=function(state){
 
 	canvasses.map(function(e){
 		e.width=Max(window.innerWidth,e.width||0,e.scrollWidth||0);
-		e.height=Max(window.innerHeight,e.height||0,e.scrollHeight||0);
+		e.height="Max(window.innerHeight,e.height||0,e.scrollHeight||0)";
 	});
 
 	StateDraw(state)
@@ -1841,7 +1802,11 @@ ObtainStartingLevelState=function(id,blankState){
 	return state;
 }
 
+SpecialLayers=["metadatacolphon","metadatatitle","rules"]
+
 SubBoardHTML=function(name,state){
+	if(In(SpecialLayers,name))
+		return `<div id="${state.render.target}-${name}" class="${name}"></div>`;
 	return `<canvas 
 			id="${state.render.target}-${name}" 
 			width="${state.width}" 
@@ -1850,22 +1815,34 @@ SubBoardHTML=function(name,state){
 }
 
 
+
 PreAddStateCanvas=function(state,target){
-	var subBoards=Keys(LayersChanged).map(name=>SubBoardHTML(name,state)).join("");
+	var canvasLayers=Keys(LayersChanged).filter(layer=>!In(SpecialLayers,layer));
+	
+	var subBoards=canvasLayers.map(name=>SubBoardHTML(name,state)).join("");
 	var BoardHTML=`<div id="${state.render.target}"
 		class="game-supra-canvas"
 		oncontextmenu="return false;"
 		width="${state.width}" 
 		height="${state.height}">${subBoards}</div>`;
+	
+	var specialLayers=Keys(LayersChanged).filter(layer=>In(SpecialLayers,layer));
+	var BoxHTML=specialLayers.map(name=>SubBoardHTML(name,state)).join("");
+
+	var GameHTML=`<div class="game-container">
+		${BoxHTML}	
+		${BoardHTML}
+	</div>`;
+
 	if(!GetElement(state.render.target))
-		PreAddElement(BoardHTML,GetElement(target)||"BODY");
+		PreAddElement(GameHTML,GetElement(target)||"BODY");
 }
 
 
 
 
-InitialisePuzzle=function(id,options){
-	var options=options||{};
+InitialisePuzzle=function(id){
+	
 	var state=ObtainStartingLevelState(id);
 		
 	PreAddStateCanvas(state,"body");
@@ -1873,7 +1850,7 @@ InitialisePuzzle=function(id,options){
 	setTimeout(LazyPasser(FocusElement)(state.render.target),500);
 	
 	SaveState(state);
-	var options=Merge(options,{initialise:true,id:state.id});
+	var options={initialise:true,id:state.id,draw:["force-metadata"]};
 	UpdateState({},options);
 	
 	//Auto instructions

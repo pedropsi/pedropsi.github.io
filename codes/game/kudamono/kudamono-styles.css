@@ -1,12 +1,25 @@
 .game-supra-canvas{
 	position: relative;
     overflow: hidden;
-    height:95vh;
+    height:80vh;
 	background-color: transparent;
-
 }
 .game-supra-canvas canvas{
 	top:0;
 	position: absolute;
 	background-color: transparent;
+}
+
+.game-container .title{
+	font-size:calc(3*var(--fontheight));
+	font-weight:bold;
+	background-color:unset;
+	padding:var(--h1) 0 var(--h2) 0;
+}
+
+.game-container .subtitle{
+	font-size:calc(var(--fontheight));
+	font-weight:bold;
+	font-style:italic;
+	padding:var(--h1) var(--w8) var(--h1) var(--w8)
 }
