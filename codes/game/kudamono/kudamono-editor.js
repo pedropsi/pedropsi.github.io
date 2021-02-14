@@ -203,14 +203,16 @@ FruitIcons={
 	}
 }
 
+
 var BlankState={
 	
 	//visuals
 	id:"puzzle",
 	render:{
-		hide:false,
 		main:true,
-		target:"kudamono-canvas"
+		target:"kudamono-canvas",
+		once:false,
+		drawn:false
 	},
 	visuals:{
 		cursor:"pencil",
@@ -754,10 +756,11 @@ TrackStyles=function(track,state,styles,errors){
 		colour=CompelRGBA(colour,styles.opacity);
 	
 	return {
+		target:state.render.target+(styles.edit?"-overline":"-line"),
 		strokeColor:colour,
 		dash:dash,
 		lineCap:lineCap,
-		lineWidth:lineWidth,
+		lineWidth:lineWidth
 	}
 }
 
@@ -863,23 +866,245 @@ StateFruitDraw=function(state,fruit,xy,Opts){
 
 DrawFruits=function(fruit,coordinates,Opts,state){
 	var Opts=Opts||{};
-	(coordinates||[]).map(xy=>StateDrawFruit(state,fruit,xy,Opts));
+	(coordinates||[]).map(xy=>StateFruitDraw(state,fruit,xy,Opts));
 }
 
-DrawLevel=function(state){
-	var types=Keys(state.level);
-	types.map(fruit=>DrawFruits(fruit,state.level[fruit],undefined,state));
+OverLevelDraw=function(state){
+	var target=state.render.target+"-overlevel";
+	ClearCanvas(target);
+	DrawFruits(
+		state.mode.fruit,
+		state.mode.selection,
+		{
+			coloriser:state.mode.clearing?HEXLightener(0.9):HEXDarkener(0.8),
+			target:target
+		},
+		state);
+}
 
+LevelDraw=function(state){
+	var target=state.render.target+"-level";
+	ClearCanvas(target);
+	var fruits=Keys(state.level);
+		fruits.map(fruit=>DrawFruits(fruit,state.level[fruit],{target:state.render.target+"-level"},state));
+}
+
+GridDraw=function(state){
+	var target=state.render.target+"-grid";
+	var gridOpts={
+		...state.grid,
+		rows:state.H,
+		cols:state.W,
+	}
+	if(state.grid.dual){
+		gridOpts.rows-=1;
+		gridOpts.cols-=1;
+		gridOpts.edge=1;
+	}
+	if(state.mode.edit&&state.gridEdit)
+		gridOpts=Merge(gridOpts,state.gridEdit);
+	if(state.win.won)
+		gridOpts=Merge(gridOpts,state.win.grid);
+
+	if(state.visuals.monochrome){
+		if(gridOpts.strokeColor)
+			gridOpts.strokeColor=HEXSaturater(0)(gridOpts.strokeColor);
+		if(gridOpts.fillColor)
+			gridOpts.fillColor=HEXSaturater(0)(gridOpts.fillColor);
+
+	}
+	ClearCanvas(target);
+	gridOpts.target=target;
+	SquaresGridDraw(gridOpts);
+}
+
+
+ForestDraw=function(forest,state,Opts){
+	var positionErrors=state.atErrors;
+
+	var target=state.render.target+"-line";
 	if(state.mode.edit)
-		if(state.mode.clearing)
-			DrawFruits(state.mode.fruit,state.mode.selection,{coloriser:HEXLightener(0.9)},state);
-		else
-			DrawFruits(state.mode.fruit,state.mode.selection,{coloriser:HEXDarkener(0.8)},state);
+		target=state.render.target+"-overline";
+	
+	ClearCanvas(target);
+	forest.map((track,i)=>TrackDraw(track,state,Opts,positionErrors[i]));
 }
+
+OrchardDraw=function(state){
+	var orchard=state.orchard;
+	var Opts=Extremes(state);
+	Opts={
+		...Opts,
+		opacity:state.line.opacity,
+		lineWidth:state.line.lineWidth,
+	}
+
+	ForestDraw(orchard,state,Opts);
+}
+
+OverlineDraw=function(state){
+	var seltrack=PathTrack(state.mode.selection);
+	Opts={
+		edit:true,
+		clearing:state.mode.clearing,
+		...state.overline,
+	}
+
+	var target=state.render.target+"-overline";
+	ClearCanvas(target);
+	TrackDraw(seltrack,state,Opts)
+}
+
+
+RulesDraw=function(state){
+	var levelFruits=LevelFruits(state);
+	var n=levelFruits.length;
+
+	var dH=1/4;
+	var dV=2/7;
+	var cols=2;
+	var x=1/3;
+	var y=1/2;
+	var scale=0.15;
+
+	for(var i=0;i<levelFruits.length;i++){
+		var fruit=levelFruits[i];
+		var rule=state.fruits[fruit].rule;
+		
+		var rendering={
+			grid:{
+				scaleGrid:scale,
+				offsetX:x+dH*((n-i)%cols),
+				offsetY:y+Ceiling((i+1)/cols)*dV
+			},
+			render:{
+				main:false,
+				target:state.target
+			}
+		}
+
+	
+		var miniboard=FruitSerialState(fruit,rule.depiction,state);
+			miniboard=CompleteState(Join(miniboard,rendering));
+
+		//BoardDraw(miniboard,"rules");
+		
+		var s={
+			dH:dH,
+			dV:dV,
+			x:x,
+			y:y,
+			cols:cols,
+			offsetX:x+dH*((n-i)%cols),
+			offsetY:y+Ceiling((i+1)/cols)*dV
+		};
+		var description=rule.description;
+		//RuleDescriptionDraw(description,miniboard,s);
+		
+	}
+}
+
+
+
+RuleDescriptionDraw=function(subtitle,state,subs){
+	var ext=Extremes(state);
+	var opts={
+		...opts,
+		txt:subtitle,
+		fontWeight:"italic",
+		fontSize:"calc(var(--fontheight))",
+		x:subs.offsetX,
+		y:subs.offsetY
+	}
+	
+	DrawText(opts);
+}
+
+
+
+MetadataColophon=function(metadata){
+	var number=metadata.number?(Prefix(metadata.number,"#")+" "):"";
+	var difficulty=metadata.difficulty?(ObtainSymbol("asterisk-heavy").repeat(metadata.difficulty)+" "):"";
+	
+	var title=metadata.title?(Exfix(metadata.title,'"')+" "):"";
+	var author=metadata.author?("by "+metadata.author):"";
+	var date=metadata.date||"";
+	if(date){
+		date=" — "+TrimWhitespaceString(SpacedString(StripHTML(StringDateName(date,{simplified:true}))))
+	}
+	return number+title+difficulty+author+date;
+}
+
+MetadataDraw=function(state){
+	var Opts={
+		target:state.render.target,
+		colour:state.metadata.textColour,
+		fontWeight:"bold"
+	}
+	Opts.target=state.render.target+"-metadata";
+
+	DrawText({
+		...Opts,
+		txt:Capitalise(state.designation||state.genre),
+		fontSize:"calc(4 * var(--fontheight))",
+		y:0.1
+	})
+
+	Opts={
+		...Opts,
+		fontSize:"calc(1.2 * var(--fontheight))"
+	}
+
+	var subtitle=state.description;
+
+	subtitle.split(/\n/).map((line,i)=>DrawText({
+		...Opts,
+		txt:line,
+		fontWeight:"italic",
+		y:0.15+0.04*i
+	}))
+	
+	var url=state.metadata.url||""
+
+	var y=0.98;
+	if(url){
+		y=0.94;
+		DrawText({
+			...Opts,
+			txt:url,
+			y:y+0.04,
+			fontWeight:"italic"
+		})
+	}
+	
+	var colophon=MetadataColophon(state.metadata);
+
+	if(colophon)
+		DrawText({
+			...Opts,
+			txt:colophon,
+			y:y
+		})	
+
+	var thanks=state.metadata.thanks?("With thanks to "+Enumerate(state.metadata.thanks.split(","))+"."):"";
+	if(thanks)
+		DrawText({
+			...Opts,
+			txt:thanks,
+			fontWeight:"bold italic",
+			x:0.05,
+			textAlign:"left",
+			y:y
+		})	
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Serials
 //serials represent the state of the board as an URL, compact and exactly
+
+
 
 ExportSerial=function(){
 	ClipboardCopy(PageURL(),"Copied this puzzle's URL to clipboard, for saving!")
@@ -1013,261 +1238,40 @@ StateSerial=function(state){
 }
 
 
-
-///////////////////////////////////////////////////////////////////////////////
-//Interactive UI (for quick iteration)
-
-GridDraw=function(state){
-	var gridOpts={
-		...state.grid,
-		rows:state.H,
-		cols:state.W
-	}
-	if(state.grid.dual){
-		gridOpts.rows-=1;
-		gridOpts.cols-=1;
-		gridOpts.edge=1;
-	}
-	if(state.mode.edit&&state.gridEdit)
-		gridOpts=Merge(gridOpts,state.gridEdit);
-	if(state.win.won)
-		gridOpts=Merge(gridOpts,state.win.grid);
-
-	if(state.visuals.monochrome){
-		if(gridOpts.strokeColor)
-			gridOpts.strokeColor=HEXSaturater(0)(gridOpts.strokeColor);
-		if(gridOpts.fillColor)
-			gridOpts.fillColor=HEXSaturater(0)(gridOpts.fillColor);
-
-	}
-	SquaresGridDraw(gridOpts);
-}
-
-
-ForestDraw=function(forest,state,Opts){
-	var positionErrors=state.atErrors;
-
-	forest.map((track,i)=>TrackDraw(track,state,Opts,positionErrors[i]));
-}
-
-OrchardDraw=function(state){
-	var orchard=state.orchard;
-	var Opts=Extremes(state);
-	
-	Opts={
-		...Opts,
-		opacity:state.line.opacity,
-		lineWidth:state.line.lineWidth
-	}
-
-	ForestDraw(orchard,state,Opts);
-
-	if(!state.mode.edit&&state.mode.selection&&state.mode.selection.length>1){
-		var seltrack=PathTrack(state.mode.selection);
-		Opts={
-			...Opts,
-			edit:true,
-			clearing:state.mode.clearing,
-			...state.overline
-		}
-		DrawTrack(seltrack,state,Opts)
-	}
-}
-
-StateDraw=function(state){
-	UnDraw(state.render);
-	CanvasResize(state);
-	BoardDraw(state);
-	MetadataDraw(state);
-}
-
-RulesDraw=function(state){
-	var levelFruits=LevelFruits(state);
-	var n=levelFruits.length;
-
-	var dH=1/4;
-	var dV=2/7;
-	var cols=2;
-	var x=1/3;
-	var y=1/2;
-	var scale=0.15;
-
-	for(var i=0;i<levelFruits.length;i++){
-		var fruit=levelFruits[i];
-		var rule=state.fruits[fruit].rule;
-		
-		var rendering={
-			grid:{
-				scaleGrid:scale,
-				offsetX:x+dH*((n-i)%cols),
-				offsetY:y+Ceiling((i+1)/cols)*dV
-			},
-			render:{
-				main:false,
-				target:state.target
-			}
-		}
-
-	
-		var miniboard=FruitSerialState(fruit,rule.depiction,state);
-			miniboard=CompleteState(Join(miniboard,rendering));
-
-		BoardDraw(miniboard);
-		
-		var s={
-			dH:dH,
-			dV:dV,
-			x:x,
-			y:y,
-			cols:cols,
-			offsetX:x+dH*((n-i)%cols),
-			offsetY:y+Ceiling((i+1)/cols)*dV
-		};
-		var description=rule.description;
-		//RuleDescriptionDraw(description,miniboard,s);
-		
-	}
-}
-
 FruitSerialState=function(fruit,serial,suprastate){
 	var state=SerialState(SearchParameters(serial),Clone(suprastate));
 		state.id="rule-"+fruit;
-		state.render={main:false,target:suprastate.render.target};
+		state.render={main:false,target:suprastate.render.target,once:true,drawn:false};
 		state.mode.selection=[];
 		state=ComplementKeysObject(["examples","designation"],state);	
 	return state;
 }
 
-RuleDescriptionDraw=function(subtitle,state,subs){
-	var ext=Extremes(state);
-	var opts={
-		...opts,
-		txt:subtitle,
-		fontWeight:"italic",
-		fontSize:"calc(var(--fontheight))",
-		x:subs.offsetX,
-		y:subs.offsetY
-	}
-	
-	DrawText(opts);
+///////////////////////////////////////////////////////////////////////////////
+
+
+//Undo
+ObtainSetLevelState=function(state){
+	state.mode.selection=BlankState.mode.selection;
+	state.mode.dragging=BlankState.mode.dragging;
+	state.mode.clearing=BlankState.mode.clearing;
+	SaveState(state);
+	StateDraw(state);
 }
-
-BoardDraw=function(state){
-	BoardUnDraw(state);
-	StateGridDraw(state);
-	StatePathsDraw(state);
-	DrawLevel(state);
-}
-
-BoardUnDraw=function(state){
-	var gridExtremes=Extremes(state);
-	var c=1.05;//small correction
-	gridExtremes.x0-=gridExtremes.square/2*c;
-	gridExtremes.y0-=gridExtremes.square/2*c;
-	gridExtremes.x1+=gridExtremes.square/2*c;
-	gridExtremes.y1+=gridExtremes.square/2*c;
-	UnDraw(gridExtremes);
-}
-
-LevelFruits=function(state){
-	return Keys(state.level).filter(s=>state.level[s].filter(xy=>PointValid(xy,state)).length);
-}
-
-MetadataColophon=function(metadata){
-	var number=metadata.number?(Prefix(metadata.number,"#")+" "):"";
-	var difficulty=metadata.difficulty?(ObtainSymbol("asterisk-heavy").repeat(metadata.difficulty)+" "):"";
-	
-	var title=metadata.title?(Exfix(metadata.title,'"')+" "):"";
-	var author=metadata.author?("by "+metadata.author):"";
-	var date=metadata.date||"";
-	if(date){
-		date=" — "+TrimWhitespaceString(SpacedString(StripHTML(StringDateName(date,{simplified:true}))))
-	}
-	return number+title+difficulty+author+date;
-}
-
-MetadataDraw=function(state){
-	var Opts={
-		target:state.render.target,
-		colour:state.metadata.textColour,
-		fontWeight:"bold"
-	}
-	DrawText({
-		...Opts,
-		txt:Capitalise(state.designation||state.genre),
-		fontSize:"calc(4 * var(--fontheight))",
-		y:0.1
-	})
-
-	RulesDraw(state);
-
-	Opts={
-		...Opts,
-		fontSize:"calc(1.2 * var(--fontheight))"
-	}
-
-	var subtitle=state.description;
-
-	subtitle.split(/\n/).map((line,i)=>DrawText({
-		...Opts,
-		txt:line,
-		fontWeight:"italic",
-		y:0.15+0.04*i
-	}))
-	
-	var url=state.metadata.url||""
-
-	var y=0.98;
-	if(url){
-		y=0.94;
-		DrawText({
-			...Opts,
-			txt:url,
-			y:y+0.04,
-			fontWeight:"italic"
-		})
-	}
-	
-	var colophon=MetadataColophon(state.metadata);
-
-	if(colophon)
-		DrawText({
-			...Opts,
-			txt:colophon,
-			y:y
-		})	
-
-	var thanks=state.metadata.thanks?("With thanks to "+Enumerate(state.metadata.thanks.split(","))+"."):"";
-	if(thanks)
-		DrawText({
-			...Opts,
-			txt:thanks,
-			fontWeight:"bold italic",
-			x:0.05,
-			textAlign:"left",
-			y:y
-		})	
-}
-
-
-
-
-
-BoardProperties=["segments","level","W","H"];
-UndoableProperties=BoardProperties;
-DrawableProperties=Join(UndoableProperties,["mode","visuals","win"]);
-OverwritableProperties=["level"]
 
 CompleteState=function(state){
+	if(state.render.once&&state.render.expanded)
+		return state;
 	var state=Clone(state);
 	state.orchard=SegmentsOrchard(ValidSegments(state.segments,state));
 	state.atErrors=StateAtErrors(state);
 	if(state.render.main)
 		state.win.won=StateWon(state);
+	state.render.expanded=true;
 	return state;
 }
 
-UpdateState=function(substate,options){
+AdvanceState=function(substate,options){
 	var options=options||{}	;
 	var state=IdState(options.id);
 	var OLDSTATE=Clone(state);
@@ -1277,32 +1281,89 @@ UpdateState=function(substate,options){
 	
 	state={...state,...overwrSubstate};
 	state=MergeEvaluateObject(state,normalSubstate);
-	changed=Keys(ObjectComplement(state,OLDSTATE));
+	changed=ComplementObject(state,OLDSTATE);
 
-	if(Intersected(changed,BoardProperties)||options.initialise){
+	if(Intersected(Keys(changed),CompletableProperties)||options.initialise){
 		state=CompleteState(state);
-		changed=Union(changed,Keys(ObjectComplement(state,OLDSTATE)));
-	}
-	
-	if(state.render.main){
-		if(Intersected(changed,UndoableProperties)&&!options.skipundo){
-			AddUndo(state);
-			NavigateSerial(StateSerial(state));
-		}
-
-		if(Intersected(changed,["visuals","mode"])||options.initialise){
-			state.visuals.cursor=StateCursorName(state);
-			DrawCursor(state);
-		}
+		changed=Join(changed,ComplementObject(state,OLDSTATE));
 	}
 
-	
-	if(Intersected(changed,DrawableProperties)||options.initialise||options.draw)
-		StateDraw(state);
-
-	if(!options.unsave)
-		SaveState(state);
+	state.changed=changed;
+	return state;
 }
+
+CompletableProperties=["segments","level","W","H"];
+UndoableProperties=CompletableProperties;
+DrawableProperties=Join(UndoableProperties,["mode","visuals","win"]);
+OverwritableProperties=["level"]
+
+LayerPainter=function(layer){
+	var layerspainters={
+	"grid":GridDraw,
+	"line":OrchardDraw,
+	"overline":OverlineDraw,
+	"overlevel":OverLevelDraw,
+	"level":LevelDraw,
+	"rules":RulesDraw,
+	"metadata":MetadataDraw
+	}
+	if(In(layerspainters,layer))
+		return layerspainters[layer];
+	else
+		return Identity;
+}
+
+LayersChanged={
+	grid:["W","L","visuals","win.won","grid"],
+	line:["W","L","visuals","orchard"],
+	overline:["W","L","visuals"],
+	level:["W","L","visuals","orchard","level"],
+	overlevel:["W","L","visuals"],
+	rules:["rules"],
+	metadata:["metadata"]
+}
+
+ChangedLayers=function(changed,state){
+	var layerschanged=Clone(LayersChanged);
+	if(state.mode.dragging){
+		if(state.mode.edit)
+			layerschanged.overlevel=["mode.selection","level"].concat(layerschanged.overlevel);
+		else
+			layerschanged.overline=["mode.selection","segments"].concat(layerschanged.overline);
+	}
+	var changes=layerschanged;
+	if(changed)
+		changes=FilterValuesObject(layerschanged,changes=>Intersected(changed,changes));
+	return Keys(changes);
+}
+
+StateDraw=function(state,changed){
+	ChangedLayers(changed,state).map(layer=>LayerPainter(layer)(state));
+}
+
+
+
+
+UpdateState=function(substate,options){
+	var state=AdvanceState(substate,options);
+	var changed=TreeKeys(state.changed);
+	
+	StateDraw(state,changed);
+	
+	if(Intersected(changed,["visuals.monochrome","mode.fruit","mode.edit","mode.clearing"])||options.initialise){
+		state.visuals.cursor=StateCursorName(state);
+		CursorDraw(state);
+	}
+
+	if(changed.length)
+		SaveState(state);
+	if(Intersected(changed,UndoableProperties)){
+		AddUndo(state);
+		NavigateSerial(StateSerial(state));
+	}
+}
+	
+
 
 StateKeyHandlerer=function(substate){
 	return function(e){
@@ -1355,14 +1416,7 @@ CursorDraw=function(state){
 	SetCursor(state.render.target,cursor,opts);
 }
 
-//Undo
-ObtainSetLevelState=function(state){
-	state.mode.selection=BlankState.mode.selection;
-	state.mode.dragging=BlankState.mode.dragging;
-	state.mode.clearing=BlankState.mode.clearing;
-	SaveState(state);
-	StateDraw(state);
-}
+
 
 
 Extremes=function(state){
@@ -1451,23 +1505,26 @@ XYFruitsRemoveLevel=function(points,state){
 	return level;
 }
 
+LevelUpdate=function(level,state){
+	Wbug("trying",level)
+	if(!Equal(level,state.level))
+		UpdateState({level:level},{id:state.id});
+}
+
 XYFruitsRemove=function(points,state){
 	var level=XYFruitsRemoveLevel(points,state);
-	if(!Equal(level,state.level))
-		UpdateState({level:level},{id:state.id,draw:true});
+	LevelUpdate(level,state);
 }
 
 XYFruitsAdd=function(points,state){
 	var level=XYFruitsRemoveLevel(points,state);
-	
 	points.map(function(xy){
 		if(!PointValid(xy,state))
 			return;
 		var overfruit=state.mode.fruit;
 		level[overfruit]=Union(level[overfruit],[xy]);
 	})
-	if(!Equal(level,state.level))
-		UpdateState({level:level},{id:state.id,draw:true});
+	LevelUpdate(level,state);
 }
 
 
@@ -1476,13 +1533,17 @@ XYSegments=function(xy,state){
 	return segments;
 }
 
+SegmentsUpdate=function(segments,state){
+	if(!Equal(segments,state.segments))
+		UpdateState({segments:segments},{id:state.id});
+}
+
 XYSegmentsAdd=function(segments,state){
 	var segments=ValidSegments(segments,state).map(CanonicalSegment);
 	if(!segments.length)
 		return;
 	var newsegments=Union(state.segments,segments);
-	if(!Equal(newsegments,state.segments))
-		UpdateState({segments:newsegments},{id:state.id,draw:true});
+	SegmentsUpdate(newsegments,state);
 }
 
 XYSegmentsRemove=function(segments,state){
@@ -1490,8 +1551,7 @@ XYSegmentsRemove=function(segments,state){
 	if(!segments.length)
 		return;
 	var newsegments=Complement(state.segments,segments);
-	if(!Equal(newsegments,state.segments))
-	UpdateState({segments:newsegments},{id:state.id,draw:true});
+	SegmentsUpdate(newsegments,state);
 }
 
 DragActionDrawStarter=function(x,y,w,h,target){
@@ -1517,7 +1577,7 @@ DragActionStarter=function(x,y,w,h,target){
 		mode.clearing=!!XYFruit(xy,state);
 	}
 	if(!Equal(mode,state.mode))
-		UpdateState({mode:mode},{id:state.id,draw:true});
+		UpdateState({mode:mode},{id:state.id});
 }
 DragActionContinuer=function(x,y,w,h,target){
 	var state=TargetState(target);
@@ -1533,13 +1593,12 @@ DragActionContinuer=function(x,y,w,h,target){
 	else if(mode.selection.length>1&&Equal(First(Take(mode.selection,-2)),xy)){
 		mode.selection=Remove(mode.selection,Last(mode.selection));
 	}
-
 	if(!mode.edit){
 		var selected=mode.selection;
 		mode.clearing=Intersected(XYSegments(selected[0],state),XYSegments(selected[1],state));
 	}
 	if(!Equal(mode,state.mode))
-		UpdateState({mode:mode},{id:state.id,draw:true});
+		UpdateState({mode:mode},{id:state.id});
 }
 DragActionEnder=function(x,y,w,h,target){
 	var state=TargetState(target);
@@ -1547,12 +1606,14 @@ DragActionEnder=function(x,y,w,h,target){
 		mode.dragging=false;
 	var selected=mode.selection||[];
 	if(mode.edit){
+		ClearCanvas(state.render.target+"-overlevel")
 		if(mode.clearing)
 			XYFruitsRemove(selected,state);
 		else
 			XYFruitsAdd(selected,state);
 	}
 	else {
+		ClearCanvas(state.render.target+"-overline")
 		if(selected.length>1){
 			var segments=PathTrack(selected);
 			if(mode.clearing)
@@ -1564,7 +1625,7 @@ DragActionEnder=function(x,y,w,h,target){
 	}
 
 	mode.selection=[];
-	mode.clearing=false;
+	mode.clearing=false;	
 	UpdateState({mode:mode},{id:state.id})
 }
 
@@ -1714,19 +1775,29 @@ var DragActions={
 }
 
 CanvasResize=function(state){
-	var e=GetElement(state.render.target);
-	if(!e)
+	var canvasses=GetElements(state.render.target+" canvas");
+	if(!canvasses.length)
 		return;
 
-	e.width=Max(window.innerWidth,e.width||0,e.scrollWidth||0);
-	e.height=Max(window.innerHeight,e.height||0,e.scrollHeight||0);
+	canvasses.map(function(e){
+		e.width=Max(window.innerWidth,e.width||0,e.scrollWidth||0);
+		e.height=Max(window.innerHeight,e.height||0,e.scrollHeight||0);
+	});
+
+	StateDraw(state)
+}
+
+CanvasResizer=function(state){
+	return function(){
+		CanvasResize(STATES[state.id]);
+	};
 }
 
 ControlsBind=function(state){
 	AttendDrag(DragActions,state.render.target);
 	AttendWheel(WheelActions,state.render.target,75);
 
-	Attend('resize',StateDraws);
+	Attend('resize',CanvasResizer(state));
 
 	KeyboardActions=Merge(KeyboardActions,KeyboardFruitsActions(state));
 	Keybind(KeyboardActions,state.render.target);
@@ -1752,19 +1823,28 @@ ObtainStartingLevelState=function(id,blankState){
 	return state;
 }
 
-PreAddStateCanvas=function(state,target){
-	if(!GetElement(state.render.target))
-		PreAddElement(`
-		<canvas 
-			id="${state.render.target}" 
-			oncontextmenu="return false;"
+SubBoardHTML=function(name,state){
+	return `<canvas 
+			id="${state.render.target}-${name}" 
 			width="${state.width}" 
 			height="${state.height}"
-		>`,GetElement(target)||"BODY");
+	></canvas>`;
 }
 
 
-StateDraws=function(){Values(STATES).map(StateDraw)};
+PreAddStateCanvas=function(state,target){
+	var subBoards=Keys(LayersChanged).map(name=>SubBoardHTML(name,state)).join("");
+	var BoardHTML=`<div id="${state.render.target}"
+		class="game-supra-canvas"
+		oncontextmenu="return false;"
+		width="${state.width}" 
+		height="${state.height}">${subBoards}</div>`;
+	if(!GetElement(state.render.target))
+		PreAddElement(BoardHTML,GetElement(target)||"BODY");
+}
+
+
+
 
 InitialisePuzzle=function(id,options){
 	var options=options||{};
@@ -1776,7 +1856,9 @@ InitialisePuzzle=function(id,options){
 	
 	SaveState(state);
 	var options=Merge(options,{initialise:true,id:state.id});
-	UpdateState({},options)
+	UpdateState({},options);
+
+	CanvasResize(state)
 	
 	//Auto instructions
 	AutoInstructions(state.fruits)
@@ -1811,7 +1893,7 @@ SaveState=function(state){
 	STATES[state.id]=Clone(state);
 }
 TargetState=function(target){
-	var target=GetElement(target).id;
+	var target=ParentElement(target).id||GetElement(target).id;
 	var state=First(FilterValuesObject(STATES,state=>state.render.main&&state.render.target===target));
 	return state;
 }
