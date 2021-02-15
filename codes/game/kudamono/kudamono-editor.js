@@ -970,7 +970,8 @@ MiniBoardDraw=function(fruit,rule,state){
 	var miniboard=FruitSerialState(fruit,rule.depiction,state);
 		miniboard=CompleteState(Join(miniboard,rendering));
 
-//	StateDraw(miniboard)
+	if(state.render.main)//prevent recursion
+		StateDraw(miniboard)
 }
 
 RuleDescriptionDraw=function(fruit,rule){
