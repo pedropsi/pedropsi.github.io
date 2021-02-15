@@ -957,70 +957,45 @@ OverlineDraw=function(state){
 }
 
 
+MiniBoardDraw=function(fruit,rule,state){
+	var rendering={
+		grid:{scaleGrid:0.15},
+		render:{
+			main:false,
+			target:".kudamono-canvas-explainer .explainer-"+fruit,
+			container:".explainer-"+fruit
+		}
+	}
+
+	var miniboard=FruitSerialState(fruit,rule.depiction,state);
+		miniboard=CompleteState(Join(miniboard,rendering));
+
+//	StateDraw(miniboard)
+}
+
+RuleDescriptionDraw=function(fruit,rule){
+	var description=rule.description;
+	ReplaceChildren(description,".description-"+fruit);
+}
+
 ExplainerDraw=function(state){
 	var levelFruits=LevelFruits(state);
-	var n=levelFruits.length;
-
-	var dH=1/4;
-	var dV=2/7;
-	var cols=2;
-	var x=1/3;
-	var y=1/2;
-	var scale=0.15;
+	var miniboards=levelFruits.map(function(fruit){return `
+		<div class="explainer-${fruit}">
+			<canvas class="depiction depiction-${fruit}">The picture will appear here.</canvas>
+			<div class="description description-${fruit}">The rule of this particular fruit will be here.</div>
+		</div>`;
+	});
+	ReplaceChildren(UnTake(miniboards,miniboards.length/2).join(""),state.render.target+"-explainereven");
+	ReplaceChildren(Take(miniboards,miniboards.length/2).join(""),state.render.target+"-explainerodd");
 
 	for(var i=0;i<levelFruits.length;i++){
 		var fruit=levelFruits[i];
 		var rule=state.fruits[fruit].rule;
-		
-		var rendering={
-			grid:{
-				scaleGrid:scale,
-				offsetX:x+dH*((n-i)%cols),
-				offsetY:y+Ceiling((i+1)/cols)*dV
-			},
-			render:{
-				main:false,
-				target:state.target
-			}
-		}
-
-	
-		var miniboard=FruitSerialState(fruit,rule.depiction,state);
-			miniboard=CompleteState(Join(miniboard,rendering));
-
-		//BoardDraw(miniboard,"explainer");
-		
-		var s={
-			dH:dH,
-			dV:dV,
-			x:x,
-			y:y,
-			cols:cols,
-			offsetX:x+dH*((n-i)%cols),
-			offsetY:y+Ceiling((i+1)/cols)*dV
-		};
-		var description=rule.description;
-		//RuleDescriptionDraw(description,miniboard,s);
-		
+		MiniBoardDraw(fruit,rule,state);
+		RuleDescriptionDraw(fruit,rule);
 	}
 }
-
-
-
-RuleDescriptionDraw=function(subtitle,state,subs){
-	var ext=Extremes(state);
-	var opts={
-		...opts,
-		txt:subtitle,
-		fontWeight:"italic",
-		fontSize:"calc(var(--fontheight))",
-		x:subs.offsetX,
-		y:subs.offsetY
-	}
-	
-	DrawText(opts);
-}
-
 
 
 MetadataColophon=function(metadata){
@@ -1274,7 +1249,8 @@ LayerPainter=function(layer){
 	"overline":OverlineDraw,
 	"level":LevelDraw,
 	"overlevel":OverLevelDraw,
-	"explainer":ExplainerDraw,
+	"explainereven":ExplainerDraw,
+	"explainerodd":ExplainerDraw,
 	"metadatatitle":MetadataTitleDraw,
 	"metadatacolophon":MetadataColophonDraw,
 	"cursor":CursorDraw
@@ -1291,7 +1267,8 @@ LayersChanged={
 	overlevel:["force-overlevel","W","H","visuals.monochrome","mode.edit","mode.selection","mode.dragging","mode.fruit"],
 	line:["force-line","W","H","visuals.monochrome","orchard"],
 	overline:["force-overline","W","H","visuals.monochrome","mode.edit","mode.selection"],
-	explainer:["force-explainer","visuals.monochrome"],
+	explainereven:["force-level","level","force-explainer","visuals.monochrome"],
+	explainerodd:["force-level","level","force-explainer","visuals.monochrome"],
 	metadatatitle:["force-metadata","force-metadatatitle"],
 	metadatacolophon:["force-metadata","force-metadatacolophon"],
 	cursor:["visuals.monochrome","mode.fruit","mode.edit","mode.clearing"]
@@ -1406,7 +1383,8 @@ Extremes=function(state){
 	var gridOpts={
 		...state.grid,
 		rows:state.H,
-		cols:state.W
+		cols:state.W,
+		target:state.render.target
 	}
 	return GridExtremes(gridOpts);
 }
@@ -1778,9 +1756,9 @@ ObtainStartingLevelState=function(id,blankState){
 }
 
 
-SubBoardHTML=function(name,state){
+SubBoardHTML=function(name,state,cla){
 	if(In(SpecialLayers,name))
-		return `<div id="${state.render.target}-${name}" class="${name}">.</div>`;
+		return `<div id="${state.render.target}-${name}" class="${cla||name}">${name} layer</div>`;
 	return `<canvas 
 			id="${state.render.target}-${name}" 
 			width="${state.width}" 
@@ -1788,7 +1766,7 @@ SubBoardHTML=function(name,state){
 	></canvas>`;
 }
 
-SpecialLayers=["metadatacolophon","metadatatitle","explainer"]
+SpecialLayers=["metadatacolophon","metadatatitle","explainereven","explainerodd"]
 
 PreAddStateCanvas=function(state,target){
 	var canvasLayers=Keys(LayersChanged).filter(layer=>!In(SpecialLayers,layer));
@@ -1796,14 +1774,14 @@ PreAddStateCanvas=function(state,target){
 	var BoardHTML=`<div id="${state.render.target}"
 		class="game-supra-canvas"
 		oncontextmenu="return false;"
-		width="${state.width}" 
-		height="${state.height}">${subBoards}</div>`;
+		>${subBoards}</div>`;
 	
 	var GameHTML=`<div class="game-container">
 		${SubBoardHTML("metadatatitle",state)}
 		<div class="tabletop">
+			${SubBoardHTML("explainereven",state,"explainer")}	
 			${BoardHTML}
-			${SubBoardHTML("explainer",state)}
+			${SubBoardHTML("explainerodd",state,"explainer")}
 		</div>
 		${SubBoardHTML("metadatacolophon",state)}
 	</div>`;
