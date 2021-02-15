@@ -211,7 +211,7 @@ var BlankState={
 	render:{
 		main:true,
 		target:"kudamono-canvas",
-		container:".game-container",
+		container:".game-supra-canvas",
 		once:false,
 		reduce:1
 	},
@@ -262,7 +262,7 @@ var BlankState={
 		dual:false,							//disalign squares and grid
 		scaleGrid:1,						//reduce the grid size
 		offsetX:1,							//displace the grid horizontally
-		offsetY:1						//displace the grid verticallly
+		offsetY:1							//displace the grid verticallly
 	},
 	gridEdit:{//grid in edit mode
 		dash:[1,2,1,2,1,2,1,2,1,2,1],
@@ -1727,26 +1727,18 @@ CanvasResize=function(state){
 		return;
 
 	var container=GetElement(state.render.container);
-	
-	var W=ElementWidth(container);
-	
+	var W=ElementComputedWidth(container);
 	var H=ElementComputedHeight(container);
-	var chi=Children(container).filter(c=>!GetElement("canvas",c));
-	var h=Apply(Plus,chi.map(ElementComputedHeight));
 	
 	canvasses.map(function(e){
 		e.width=Floor(W);
-		e.height=Floor(H-h)*state.render.reduce;
-		//e.height="calc(100vh - 9*var(--fontheight) - var(--h2))"
+		e.height=Floor(H);
 	});
 
 	StateDraw(state)
 }
 
-ElementComputedHeight=function(e){
-	var px=window.getComputedStyle(e).getPropertyValue('height');
-	return Number(UnPosfix(px,"px"));
-}
+
 
 CanvasResizer=function(state){
 	return function(){

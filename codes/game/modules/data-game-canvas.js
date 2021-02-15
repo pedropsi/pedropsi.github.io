@@ -11,33 +11,33 @@ Canvas=function(targetIDsel){
 }
 
 
-CanvasWidth=function(element){
-	var e=Canvas(element);
-	if(!e){
-		Warn("no element found");
-		return null;
-	}
-	return ElementWidth(e);
-}
+// CanvasWidth=function(element){
+// 	var e=Canvas(element);
+// 	if(!e){
+// 		Warn("no element found");
+// 		return null;
+// 	}
+// 	return ElementWidth(e);
+// }
 
-ElementWidth=function(e){
-	var r=GetElement(e).getBoundingClientRect();
-	return r.right-r.left;
-}
+// ElementWidth=function(e){
+// 	var r=GetElement(e).getBoundingClientRect();
+// 	return r.right-r.left;
+// }
 
-CanvasHeight=function(element){
-	var e=Canvas(element);
-	if(!e){
-		Warn("no element found");
-		return null;
-	}
-	return ElementHeight(e)
-}
+// CanvasHeight=function(element){
+// 	var e=Canvas(element);
+// 	if(!e){
+// 		Warn("no element found");
+// 		return null;
+// 	}
+// 	return ElementHeight(e)
+// }
 
-ElementHeight=function(e){
-	var r=GetElement(e).getBoundingClientRect();
-	return r.bottom-r.top;
-}
+// ElementHeight=function(e){
+// 	var r=GetElement(e).getBoundingClientRect();
+// 	return r.bottom-r.top;
+// }
 
 DrawImage=function(opts){
 	var ctx=GetContext(opts.target);
@@ -82,8 +82,8 @@ RegularPolygonPoints=function(opts){
 
 DrawLine=function(opts){
 	var e=Canvas(opts.target)
-	var W=CanvasWidth(e);
-	var H=CanvasHeight(e);
+	var W=ElementComputedWidth(e);
+	var H=ElementComputedHeight(e);
 	var ctx=opts.ctx||GetContext(opts.target);
 	
 	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
@@ -185,22 +185,24 @@ GridExtremes=function(opts){
 		var by=opts.by*2;
 
 	if(typeof opts.canvasWidth==="undefined")
-		opts.canvasWidth=CanvasWidth(opts.target);
+		opts.canvasWidth=ElementComputedWidth(opts.target);
 	
 	if(typeof opts.canvasHeight==="undefined")
-		opts.canvasHeight=CanvasHeight(opts.target);
+		opts.canvasHeight=ElementComputedHeight(opts.target);
 	
 	var width=opts.canvasWidth;
 	var height=opts.canvasHeight;
+
 
 	var square=height/(rows+by);
 	if(width/(cols+bx)<square)
 		square=width/(cols+bx);
 
-	var offsetX=opts.offsetX||1;
-	var offsetY=opts.offsetY||1;
+	
+	var offsetX=(typeof opts.offsetX==="undefined")?1:opts.offsetX;
+	var offsetY=(typeof opts.offsetY==="undefined")?1:opts.offsetY;
 
-	square=square*(opts.scaleGrid||1);
+	square=square*((typeof opts.scaleGrid==="undefined")?1:opts.scaleGrid);
 	var	x0=(width/2*offsetX-square*cols/2);
 	var	y0=(height/2*offsetY-square*rows/2);
 	var	x1=(width/2*offsetX+square*cols/2);
@@ -208,7 +210,7 @@ GridExtremes=function(opts){
 
 	var lineScale=SquareRoot((y1-y0)*(x1-x0)/(width*height)/(rows*cols))*50
 
-	return {
+	var extremes={
 		x0:x0,
 		x1:x1,
 		y0:y0,
@@ -218,6 +220,8 @@ GridExtremes=function(opts){
 		height:height,
 		lineScale:lineScale
 	};
+
+	return extremes;
 }
 
 SquaresGridDraw=function(opts){
