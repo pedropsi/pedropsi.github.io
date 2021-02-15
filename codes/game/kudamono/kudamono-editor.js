@@ -913,6 +913,7 @@ GridDraw=function(state){
 	}
 	ClearCanvas(target);
 	gridOpts.target=target;
+	Wbug(gridOpts);
 	SquaresGridDraw(gridOpts);
 }
 

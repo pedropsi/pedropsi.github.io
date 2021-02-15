@@ -88,8 +88,8 @@ DrawLine=function(opts){
 	
 	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
 
-	var s=opts.lineScale||1;
-	var lineWidth=((typeof opts.lineWidth!=="undefined")?(opts.lineWidth):(2/100))*s;
+	var s=(opts.square||100)/100;
+	var lineWidth=((typeof opts.lineWidth!=="undefined")?(opts.lineWidth):1)*s;
 
 	var x0=(typeof opts.x0!=="undefined")?opts.x0:0;
 	var x1=(typeof opts.x1!=="undefined")?opts.x1:1;
@@ -100,7 +100,9 @@ DrawLine=function(opts){
 	ctx.moveTo(x0*W,y0*H);
 	ctx.lineTo(x1*W,y1*H);
 
-	var dash=Times(opts.dash||[1,1],s);
+	var dash=[]
+	if(opts.dash)
+		dash=Times(opts.dash||[1,1],s);
 	
 	ctx.setLineDash(dash);
 	ctx.lineCap=opts.lineCap||"round";
@@ -146,22 +148,22 @@ DrawSegmentLine=function(opts){
 		}
 }
 
-DrawGrid=function(opts){
+GridLinesDraw=function(opts){
 	var x0=opts.x0;
 	var x1=opts.x1;
 	var y0=opts.y0;
 	var y1=opts.y1;
 
-	var s=opts.lineScale||4;
 
-	var dash=[2*s,2*s];
+	var dash=[2,2];
 	if(opts.dash)
-		dash=Times(opts.dash,s);
-	var lineWidth=s/4;
+		dash=opts.dash;
+
+	var lineWidth=1;
 	DrawSegmentLine({...opts,vertical:true,dash:dash,lineWidth:lineWidth,lineScale:false});
 	DrawSegmentLine({...opts,horizontal:true,dash:dash,lineWidth:lineWidth,lineScale:false});
 
-	var frameOpts={...opts,dash:[1,1],lineWidth:lineWidth*2,lineScale:false};
+	var frameOpts={...opts,dash:[1,1],lineWidth:lineWidth*2};
 	DrawLine({...frameOpts,x0:x1});
 	DrawLine({...frameOpts,y0:y1});
 	DrawLine({...frameOpts,x1:x0});
@@ -237,7 +239,7 @@ SquaresGridDraw=function(opts){
 	}
 
 	RectangleDraw({...gridOpts,lineWidth:0});
-	DrawGrid({...gridOpts,...gridCoords},);
+	GridLinesDraw({...gridOpts,...gridCoords},);
 
 	var borderOpts=gridOpts;
 	if(gridOpts.border)
@@ -270,9 +272,10 @@ ShapeDraw=function(opts){
 	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
 	var fillColor=opts.fillColor?opts.fillColor:getComputedStyle(document.body)["background-strokeColor"]||"white";
 
-	var size=opts.size?opts.size:100;
-	var lineWidth=(typeof opts.lineWidth!=="undefined")?(opts.lineWidth):(size/20);
-
+	var s=(opts.square||100)/100;
+	var lineWidth=((typeof opts.lineWidth!=="undefined")?(opts.lineWidth):1)*s;
+	
+	
 	var Drawer=opts.Drawer||Identity;
 
 	ctx.beginPath();
@@ -359,13 +362,15 @@ SVGDraw=function(opts){
 	
 	let p = new Path2D(opts.path);
 	
+	var s=(opts.square||100)/100;
+
 	if(!opts.dash)
 		opts.dash=[];
-
+	opts.dash=Times(opts.dash,s);
 	if(opts.strokeStyle){
 		opts.ctx.setLineDash(opts.dash)
 		opts.ctx.strokeStyle=opts.strokeStyle;
-		opts.ctx.lineWidth=(opts.lineWidth||0)*(opts.lineScale||0);
+		opts.ctx.lineWidth=((typeof opts.lineWidth!=="undefined")?(opts.lineWidth):1)*s;
 		opts.ctx.stroke(p);
 	}
 
