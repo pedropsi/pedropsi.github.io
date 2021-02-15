@@ -7249,7 +7249,7 @@ DynamicText=function(label,text){
 			return DynamicTextHTML(label);
 	}
 	else{//Setter
-		var e=DynamicTextHTML(label,text);
+		var e=DynamicTextHTML(label,Evaluate(text));
 		ReplaceElements(e,"."+label);
 		return e;
 	}
