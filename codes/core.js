@@ -1599,7 +1599,7 @@ zero argument
 BiMerge()
 {}
 
-not recursive (use join or that)
+not recursive (use join for that)
 BiMerge({a:{c:3,d:4}},{a:{e:5}})
 {a:{e:5}}
 */
