@@ -556,10 +556,8 @@ FruitTrackStateLocallyErred=function(fruit,track,state){
 		
 	if(!wrong&&!rule.branchallowed&&TrackBranched(track))
 		wrong=true;
-
-	if(!wrong&&Intersected(rule.simpleshapes,Shape1s))
+	if(!wrong&&rule.simpleshapes&&Intersected(rule.simpleshapes,Shape1s))
 		rule.dangleallowed=true;
-
 	if(!wrong&&!rule.dangleallowed&&TrackDangled(track,state))
 		wrong=true;
 		
