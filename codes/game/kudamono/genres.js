@@ -56,8 +56,6 @@ var Genres={
 			dash:[1,0],
 			scale:0.75,
 			nudge:0.25,
-			scaleGrid:0.7,
-			offsetY:1.1
 		},
 		rules:{
 			dangleallowed:true,
