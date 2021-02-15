@@ -213,6 +213,10 @@ a{
 	transition-duration: var(--durationOff);
 }
 
+a:visited{
+	color:var(--lightblue)
+}
+
 .image{
 		transition-duration: var(--durationOff);
 }
