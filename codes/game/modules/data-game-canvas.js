@@ -11,28 +11,32 @@ Canvas=function(targetIDsel){
 }
 
 
-Width=function(element){
+CanvasWidth=function(element){
 	var e=Canvas(element);
 	if(!e){
 		Warn("no element found");
 		return null;
 	}
-	var w=e.width;
-	if(w==="undefined")
-		w=e.getBoundingClientRect().width;
-	return w;
+	return ElementWidth(e);
 }
 
-Height=function(element){
+ElementWidth=function(e){
+	var r=GetElement(e).getBoundingClientRect();
+	return r.right-r.left;
+}
+
+CanvasHeight=function(element){
 	var e=Canvas(element);
 	if(!e){
 		Warn("no element found");
 		return null;
 	}
-	var h=e.height;
-	if(h==="undefined")
-		h=e.getBoundingClientRect().height;
-	return h;
+	return ElementHeight(e)
+}
+
+ElementHeight=function(e){
+	var r=GetElement(e).getBoundingClientRect();
+	return r.bottom-r.top;
 }
 
 DrawImage=function(opts){
@@ -78,8 +82,8 @@ RegularPolygonPoints=function(opts){
 
 DrawLine=function(opts){
 	var e=Canvas(opts.target)
-	var W=Width(e);
-	var H=Height(e);
+	var W=CanvasWidth(e);
+	var H=CanvasHeight(e);
 	var ctx=opts.ctx||GetContext(opts.target);
 	
 	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
@@ -181,10 +185,10 @@ GridExtremes=function(opts){
 		var by=opts.by*2;
 
 	if(typeof opts.canvasWidth==="undefined")
-		opts.canvasWidth=Width(opts.target);
+		opts.canvasWidth=CanvasWidth(opts.target);
 	
 	if(typeof opts.canvasHeight==="undefined")
-		opts.canvasHeight=Height(opts.target);
+		opts.canvasHeight=CanvasHeight(opts.target);
 	
 	var width=opts.canvasWidth;
 	var height=opts.canvasHeight;

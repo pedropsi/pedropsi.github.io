@@ -211,8 +211,9 @@ var BlankState={
 	render:{
 		main:true,
 		target:"kudamono-canvas",
+		container:".game-container",
 		once:false,
-		drawn:false
+		reduce:0.8
 	},
 	visuals:{
 		cursor:"pencil",
@@ -259,9 +260,9 @@ var BlankState={
 		scale:0.95,							//fruit scale (how large)
 		nudge:0.3,							//fruit nudge (small adjustments to position)
 		dual:false,							//disalign squares and grid
-		scaleGrid:0.70,						//reduce the grid size
+		scaleGrid:1,						//reduce the grid size
 		offsetX:1,							//displace the grid horizontally
-		offsetY:1.15						//displace the grid verticallly
+		offsetY:1						//displace the grid verticallly
 	},
 	gridEdit:{//grid in edit mode
 		dash:[1,2,1,2,1,2,1,2,1,2,1],
@@ -1049,12 +1050,17 @@ MetadataTitleDraw=function(state){
 MetadataColophonDraw=function(state){
 	var url=state.metadata.url||"";
 	var colophon=MetadataColophon(state.metadata);
-	var thanks=state.metadata.thanks?("With thanks to "+Enumerate(state.metadata.thanks.split(","))+"."):"";
+	
+	var thanks=state.metadata.thanks?("With thanks to "+P(state.metadata.thanks)+"."):"";
 
 	ReplaceChildren(`
-	<div class="colophon>${colophon}</div>
-	<div class="url>${url}</div>
-	<div class="thanks>${thanks}</div>
+	<div class="colophon">
+		<div class="authorship">
+			<div class="author">${colophon}</div>
+			<div class="url">${url}</div>
+		</div>
+		<div class="thanks">${thanks}</div>
+	</div>
 	`,
 	state.render.target+"-metadatacolophon");
 }
@@ -1202,7 +1208,7 @@ StateSerial=function(state){
 FruitSerialState=function(fruit,serial,suprastate){
 	var state=SerialState(SearchParameters(serial),Clone(suprastate));
 		state.id="rule-"+fruit;
-		state.render={main:false,target:suprastate.render.target,once:true,drawn:false};
+		state.render={main:false,target:suprastate.render.target,once:true};
 		state.mode.selection=[];
 		state=ComplementKeysObject(["examples","designation"],state);	
 	return state;
@@ -1758,17 +1764,32 @@ CanvasResize=function(state){
 	if(!canvasses.length)
 		return;
 
+	var container=GetElement(state.render.container);
+	
+	var W=ElementWidth(container);
+	
+	var H=ElementComputedHeight(container);
+	var chi=Children(container).filter(c=>!GetElement("canvas",c));
+	var h=Apply(Plus,chi.map(ElementComputedHeight))*state.render.reduce;
+	
 	canvasses.map(function(e){
-		e.width=Max(window.innerWidth,e.width||0,e.scrollWidth||0);
-		e.height="Max(window.innerHeight,e.height||0,e.scrollHeight||0)";
+		e.width=Floor(W);
+		e.height=Floor(H-h);
+		//e.height="calc(100vh - 9*var(--fontheight) - var(--h2))"
 	});
 
 	StateDraw(state)
 }
 
+ElementComputedHeight=function(e){
+	var px=window.getComputedStyle(e).getPropertyValue('height');
+	return Number(UnPosfix(px,"px"));
+}
+
 CanvasResizer=function(state){
 	return function(){
 		CanvasResize(STATES[state.id]);
+		setTimeout(()=>CanvasResize(STATES[state.id]),500);
 	};
 }
 
@@ -1802,11 +1823,10 @@ ObtainStartingLevelState=function(id,blankState){
 	return state;
 }
 
-SpecialLayers=["metadatacolophon","metadatatitle","rules"]
 
 SubBoardHTML=function(name,state){
 	if(In(SpecialLayers,name))
-		return `<div id="${state.render.target}-${name}" class="${name}"></div>`;
+		return `<div id="${state.render.target}-${name}" class="${name}">.</div>`;
 	return `<canvas 
 			id="${state.render.target}-${name}" 
 			width="${state.width}" 
@@ -1814,11 +1834,10 @@ SubBoardHTML=function(name,state){
 	></canvas>`;
 }
 
-
+SpecialLayers=["metadatacolophon","metadatatitle","rules"]
 
 PreAddStateCanvas=function(state,target){
 	var canvasLayers=Keys(LayersChanged).filter(layer=>!In(SpecialLayers,layer));
-	
 	var subBoards=canvasLayers.map(name=>SubBoardHTML(name,state)).join("");
 	var BoardHTML=`<div id="${state.render.target}"
 		class="game-supra-canvas"
@@ -1826,12 +1845,10 @@ PreAddStateCanvas=function(state,target){
 		width="${state.width}" 
 		height="${state.height}">${subBoards}</div>`;
 	
-	var specialLayers=Keys(LayersChanged).filter(layer=>In(SpecialLayers,layer));
-	var BoxHTML=specialLayers.map(name=>SubBoardHTML(name,state)).join("");
-
 	var GameHTML=`<div class="game-container">
-		${BoxHTML}	
+		${SubBoardHTML("metadatatitle",state)}
 		${BoardHTML}
+		${SubBoardHTML("metadatacolophon",state)}
 	</div>`;
 
 	if(!GetElement(state.render.target))

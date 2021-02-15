@@ -1,12 +1,12 @@
 .game-container{
 	display:flex;
 	flex-direction:column;
-	justify-content:center;
+	height:95vh;
+	min-height:95vh;
 }
 .game-supra-canvas{
 	position: relative;
-    overflow: hidden;
-    height:95vh;
+    height:calc(95vh - 9*var(--fontheight) - var(--h4));
 	background-color: transparent;
 }
 .game-supra-canvas canvas{
@@ -21,17 +21,34 @@
 	background-color:unset;
 	padding:var(--h1) 0 var(--h2) 0;
 }
+.game-container .colophon{
+	position:absolute;
+	bottom:var(--h1);
+    font-size:calc(var(--fontheight));
+	font-weight:bold;
+	font-style:italic;
+	width:100%;
+}
 
 .game-container .subtitle{
 	font-size:calc(var(--fontheight));
 	font-weight:bold;
 	font-style:italic;
-	padding:var(--h1) var(--w8) var(--h1) var(--w8)
+	padding:var(--h1) var(--w8) 0 var(--w8);
 }
 
-.game-container .metadatacolophon{
-	font-size:calc(var(--fontheight));
-	font-weight:bold;
-	font-style:italic;
-	padding:var(--h1) var(--w8) var(--h1) var(--w8)
+.colophon .thanks{
+	position:absolute;
+	width:100%;
+	text-align:left;
+	padding:0 0 0 var(--w4);
+}
+
+.colophon .authorship{
+	width:100%;
+	text-align:right;
+}
+
+.authorship div{
+	padding:0 var(--w2) 0;
 }
