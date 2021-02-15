@@ -1014,7 +1014,7 @@ MetadataColophon=function(metadata){
 
 MetadataTitleDraw=function(state){
 	var title=Capitalise(state.designation||state.genre);
-	var subtitle=state.description;
+	var subtitle=state.description.split("\n").map(PHTML).join("");
 
 	ReplaceChildren(`
 		<div class="title">${title}</div>
