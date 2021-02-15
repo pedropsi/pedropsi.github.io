@@ -1737,7 +1737,7 @@ FruitCycler=function(n){
 		var state=TargetState(target);
 		UpdateState(
 			{mode:CycleFruitMode(state,n)},
-			{id:state.id}
+			{id:state.id,draw:["force-cursor"]}
 		)
 	}
 }
@@ -1869,7 +1869,7 @@ InitialisePuzzle=function(id){
 	SaveState(state);
 	var options={initialise:true,id:state.id,draw:["force-metadata"]};
 	UpdateState({},options);
-	
+
 	setTimeout(CanvasResizer(state),500)
 	
 	//Auto instructions
