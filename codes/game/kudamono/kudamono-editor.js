@@ -1888,7 +1888,7 @@ StateImage=function(state){
 
 
 AutoInstructions=function(fruits){
-	HyperText("KudamonoFruitShortcuts",function(){
+	DynamicText("KudamonoFruitShortcuts",function(){
 		return TableHTML({
 		headers:["Shortcut","Fruit"],
 		caption:"Choose a fruit by pressing:",
