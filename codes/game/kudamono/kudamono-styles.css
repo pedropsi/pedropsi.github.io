@@ -4,15 +4,44 @@
 	height:95vh;
 	min-height:95vh;
 }
-.game-supra-canvas{
+
+.game-container .tabletop{
+	display:flex;
+	flex-direction:row;
 	position: relative;
     height:calc(95vh - 9*var(--fontheight) - var(--h4));
 	background-color: transparent;
 }
-.game-supra-canvas canvas{
+
+.tabletop .game-supra-canvas{
+	flex:0 0 50%;
+}
+
+.tabletop .explainer{
+	flex:0 1 25%;
+	display:flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	font-size:calc(var(--fontheight)*0.75);
+	line-height:var(--h2);
+}
+
+
+.tabletop .explainer .depiction{
+	max-width:var(--w8);
+	overflow:hidden;
+}
+.tabletop .explainer .description{
+	max-width:var(--w8);
+	overflow:hidden;
+}
+
+
+.tabletop .game-supra-canvas canvas{
 	top:0;
 	position: absolute;
 	background-color: transparent;
+
 }
 
 .game-container .title{
@@ -52,3 +81,4 @@
 .authorship div{
 	padding:0 var(--w2) 0;
 }
+
