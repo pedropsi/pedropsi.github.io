@@ -375,7 +375,8 @@ ValidSegments=function(segments,state){
 
 TrackDangled=function(track,state){
 	var endpoints=TrackEndpoints(track);
-	return endpoints.some(point=>!In(Join(...Values(state.level)),point));
+	var dangled=endpoints.some(point=>!In(Join(...Values(state.level)),point));
+	return dangled;
 }
 
 
@@ -958,7 +959,7 @@ OverlineDraw=function(state){
 }
 
 
-RulesDraw=function(state){
+ExplainerDraw=function(state){
 	var levelFruits=LevelFruits(state);
 	var n=levelFruits.length;
 
@@ -989,7 +990,7 @@ RulesDraw=function(state){
 		var miniboard=FruitSerialState(fruit,rule.depiction,state);
 			miniboard=CompleteState(Join(miniboard,rendering));
 
-		//BoardDraw(miniboard,"rules");
+		//BoardDraw(miniboard,"explainer");
 		
 		var s={
 			dH:dH,
@@ -1275,7 +1276,7 @@ LayerPainter=function(layer){
 	"overline":OverlineDraw,
 	"level":LevelDraw,
 	"overlevel":OverLevelDraw,
-	"rules":RulesDraw,
+	"explainer":ExplainerDraw,
 	"metadatatitle":MetadataTitleDraw,
 	"metadatacolophon":MetadataColophonDraw,
 	"cursor":CursorDraw
@@ -1292,7 +1293,7 @@ LayersChanged={
 	overlevel:["force-overlevel","W","H","visuals.monochrome","mode.edit","mode.selection","mode.dragging","mode.fruit"],
 	line:["force-line","W","H","visuals.monochrome","orchard"],
 	overline:["force-overline","W","H","visuals.monochrome","mode.edit","mode.selection"],
-	rules:["force-rules","visuals.monochrome","rules"],
+	explainer:["force-explainer","visuals.monochrome"],
 	metadatatitle:["force-metadata","force-metadatatitle"],
 	metadatacolophon:["force-metadata","force-metadatacolophon"],
 	cursor:["visuals.monochrome","mode.fruit","mode.edit","mode.clearing"]
@@ -1834,7 +1835,7 @@ SubBoardHTML=function(name,state){
 	></canvas>`;
 }
 
-SpecialLayers=["metadatacolophon","metadatatitle","rules"]
+SpecialLayers=["metadatacolophon","metadatatitle","explainer"]
 
 PreAddStateCanvas=function(state,target){
 	var canvasLayers=Keys(LayersChanged).filter(layer=>!In(SpecialLayers,layer));
@@ -1847,7 +1848,10 @@ PreAddStateCanvas=function(state,target){
 	
 	var GameHTML=`<div class="game-container">
 		${SubBoardHTML("metadatatitle",state)}
-		${BoardHTML}
+		<div class="tabletop">
+			${BoardHTML}
+			${SubBoardHTML("explainer",state)}
+		</div>
 		${SubBoardHTML("metadatacolophon",state)}
 	</div>`;
 
