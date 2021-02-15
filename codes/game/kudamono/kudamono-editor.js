@@ -224,19 +224,19 @@ var BlankState={
 	},
 	overline:{
 		opacity:0.6,
-		lineWidth:24,
+		lineWidth:64,
 		colour:"#333333",
 		dash:[],
 		clearOpacity:0.6,
-		clearLineWidth:56,
+		clearLineWidth:180,
 		clearColour:"#CCCCCC",
-		clearDash:[32,72]
+		clearDash:[180,360]
 	},
 	line:{
-		dash:[6,48],
-		wrongDash:[6,48],
+		dash:[],
+		wrongDash:[36,180],
 		opacity:0.5,
-		lineWidth:32,						//fruitline width
+		lineWidth:112,						//fruitline width
 		cap:"round",
 		lineJoin:"round",
 		colour:"rgba(155,155,155)",			//default line colour
@@ -263,8 +263,8 @@ var BlankState={
 		offsetY:1							//displace the grid verticallly
 	},
 	gridEdit:{//grid in edit mode
-		dash:[1,2,1,2,1,2,1,2,1,2,1],
-		lineWidth:0.5,
+		dash:[6,12,6,12,6,12,6,12,6,12,6],
+		lineWidth:6,
 		border:{
 			strokeColor:"#BBBBBB"
 		},				
