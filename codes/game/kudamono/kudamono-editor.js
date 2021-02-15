@@ -210,8 +210,8 @@ var BlankState={
 	id:"puzzle",
 	render:{
 		main:true,
-		target:"kudamono-canvas",
-		container:".game-supra-canvas",
+		target:"kudamono-canvas",	   //where the canvas layers reside
+		container:".game-supra-canvas",// to calculate the available drawing space
 		once:false,
 		reduce:1
 	},
@@ -1756,7 +1756,7 @@ ObtainStartingLevelState=function(id,blankState){
 
 
 SubBoardHTML=function(name,state,cla){
-	if(In(SpecialLayers,name))
+	if(In(OuterLayers,name))
 		return `<div id="${state.render.target}-${name}" class="${cla||name}">${name} layer</div>`;
 	return `<canvas 
 			id="${state.render.target}-${name}" 
@@ -1765,29 +1765,43 @@ SubBoardHTML=function(name,state,cla){
 	></canvas>`;
 }
 
-SpecialLayers=["metadatacolophon","metadatatitle","explainer"]
+OuterLayers=["metadatacolophon","metadatatitle","explainer"]
 
-PreAddStateCanvas=function(state,target){
-	var canvasLayers=Keys(LayersChanged).filter(layer=>!In(SpecialLayers,layer));
+CanvasLayersHTML=function(state){
+	var container=GetElement(state.render.container,state.render.target);
+	var canvasLayers=Keys(LayersChanged).filter(layer=>!In(OuterLayers,layer));
 	var subBoards=canvasLayers.map(name=>SubBoardHTML(name,state)).join("");
-	var BoardHTML=`<div id="${state.render.target}"
-		class="game-supra-canvas"
-		oncontextmenu="return false;"
-		>${subBoards}</div>`;
+	return subBoards;
+}
 	
+BoardHTML=function(state){
+	return `<div id="${state.render.target}"
+	class="${UnPrefix(state.render.container,".")}"
+	oncontextmenu="return false;">BOARD</div>`;
+}	
+
+PreAddOuter=function(state,pagetarget){
 	var GameHTML=`<div class="game-container">
 		${SubBoardHTML("metadatatitle",state)}
 		<div class="tabletop">
 			${SubBoardHTML("explainer",state)}	
-			${BoardHTML}
+			${BoardHTML(state)}
 		</div>
 		${SubBoardHTML("metadatacolophon",state)}
 	</div>`;
 
 	if(!GetElement(state.render.target))
-		PreAddElement(GameHTML,GetElement(target)||"BODY");
+		PreAddElement(GameHTML,GetElement(pagetarget)||"BODY");
 }
 
+BoardPrepare=function(state){
+	HearElement(state.render.container,()=>ReplaceChildren(CanvasLayersHTML(state),state.render.container))
+}
+
+PreAddPuzzle=function(state,pagetarget){
+	PreAddOuter(state,pagetarget);
+	BoardPrepare(state);
+}
 
 
 
@@ -1795,7 +1809,7 @@ InitialisePuzzle=function(id){
 	
 	var state=ObtainStartingLevelState(id);
 		
-	PreAddStateCanvas(state,"body");
+	PreAddPuzzle(state,"body");
 	ControlsBind(state);
 	setTimeout(LazyPasser(FocusElement)(state.render.target),500);
 	
