@@ -213,7 +213,7 @@ var BlankState={
 		target:"kudamono-canvas",
 		container:".game-container",
 		once:false,
-		reduce:0.8
+		reduce:1
 	},
 	visuals:{
 		cursor:"pencil",
@@ -1770,11 +1770,11 @@ CanvasResize=function(state){
 	
 	var H=ElementComputedHeight(container);
 	var chi=Children(container).filter(c=>!GetElement("canvas",c));
-	var h=Apply(Plus,chi.map(ElementComputedHeight))*state.render.reduce;
+	var h=Apply(Plus,chi.map(ElementComputedHeight));
 	
 	canvasses.map(function(e){
 		e.width=Floor(W);
-		e.height=Floor(H-h);
+		e.height=Floor(H-h)*state.render.reduce;
 		//e.height="calc(100vh - 9*var(--fontheight) - var(--h2))"
 	});
 
