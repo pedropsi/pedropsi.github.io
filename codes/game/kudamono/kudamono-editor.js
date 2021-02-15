@@ -986,8 +986,8 @@ ExplainerDraw=function(state){
 			<div class="description description-${fruit}">The rule of this particular fruit will be here.</div>
 		</div>`;
 	});
-	ReplaceChildren(UnTake(miniboards,miniboards.length/2).join(""),state.render.target+"-explainereven");
-	ReplaceChildren(Take(miniboards,miniboards.length/2).join(""),state.render.target+"-explainerodd");
+	ReplaceChildren(miniboards.join(""),state.render.target+"-explainer");
+	
 
 	for(var i=0;i<levelFruits.length;i++){
 		var fruit=levelFruits[i];
@@ -1249,8 +1249,7 @@ LayerPainter=function(layer){
 	"overline":OverlineDraw,
 	"level":LevelDraw,
 	"overlevel":OverLevelDraw,
-	"explainereven":ExplainerDraw,
-	"explainerodd":ExplainerDraw,
+	"explainer":ExplainerDraw,
 	"metadatatitle":MetadataTitleDraw,
 	"metadatacolophon":MetadataColophonDraw,
 	"cursor":CursorDraw
@@ -1267,8 +1266,7 @@ LayersChanged={
 	overlevel:["force-overlevel","W","H","visuals.monochrome","mode.edit","mode.selection","mode.dragging","mode.fruit"],
 	line:["force-line","W","H","visuals.monochrome","orchard"],
 	overline:["force-overline","W","H","visuals.monochrome","mode.edit","mode.selection"],
-	explainereven:["force-level","level","force-explainer","visuals.monochrome"],
-	explainerodd:["force-level","level","force-explainer","visuals.monochrome"],
+	explainer:["force-level","level","force-explainer","visuals.monochrome"],
 	metadatatitle:["force-metadata","force-metadatatitle"],
 	metadatacolophon:["force-metadata","force-metadatacolophon"],
 	cursor:["visuals.monochrome","mode.fruit","mode.edit","mode.clearing"]
@@ -1766,7 +1764,7 @@ SubBoardHTML=function(name,state,cla){
 	></canvas>`;
 }
 
-SpecialLayers=["metadatacolophon","metadatatitle","explainereven","explainerodd"]
+SpecialLayers=["metadatacolophon","metadatatitle","explainer"]
 
 PreAddStateCanvas=function(state,target){
 	var canvasLayers=Keys(LayersChanged).filter(layer=>!In(SpecialLayers,layer));
@@ -1779,9 +1777,8 @@ PreAddStateCanvas=function(state,target){
 	var GameHTML=`<div class="game-container">
 		${SubBoardHTML("metadatatitle",state)}
 		<div class="tabletop">
-			${SubBoardHTML("explainereven",state,"explainer")}	
+			${SubBoardHTML("explainer",state)}	
 			${BoardHTML}
-			${SubBoardHTML("explainerodd",state,"explainer")}
 		</div>
 		${SubBoardHTML("metadatacolophon",state)}
 	</div>`;
@@ -1806,6 +1803,7 @@ InitialisePuzzle=function(id){
 	UpdateState({},options);
 
 	setTimeout(CanvasResizer(state),500)
+	setTimeout(CanvasResizer(state),1000)
 	
 	//Auto instructions
 	AutoInstructions(state.fruits)
