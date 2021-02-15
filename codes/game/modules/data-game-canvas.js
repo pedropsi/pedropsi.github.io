@@ -88,9 +88,9 @@ DrawLine=function(opts){
 	
 	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
 
-	var s=(opts.square||100)/100;
+	var s=opts.scaleFactor||1;
 	var lineWidth=((typeof opts.lineWidth!=="undefined")?(opts.lineWidth):1)*s;
-
+	
 	var x0=(typeof opts.x0!=="undefined")?opts.x0:0;
 	var x1=(typeof opts.x1!=="undefined")?opts.x1:1;
 	var y0=(typeof opts.y0!=="undefined")?opts.y0:0;
@@ -100,7 +100,7 @@ DrawLine=function(opts){
 	ctx.moveTo(x0*W,y0*H);
 	ctx.lineTo(x1*W,y1*H);
 
-	var dash=[]
+	var dash=[];
 	if(opts.dash)
 		dash=Times(opts.dash||[1,1],s);
 	
@@ -160,8 +160,8 @@ GridLinesDraw=function(opts){
 		dash=opts.dash;
 
 	var lineWidth=1;
-	DrawSegmentLine({...opts,vertical:true,dash:dash,lineWidth:lineWidth,lineScale:false});
-	DrawSegmentLine({...opts,horizontal:true,dash:dash,lineWidth:lineWidth,lineScale:false});
+	DrawSegmentLine({...opts,vertical:true,dash:dash,lineWidth:lineWidth});
+	DrawSegmentLine({...opts,horizontal:true,dash:dash,lineWidth:lineWidth});
 
 	var frameOpts={...opts,dash:[1,1],lineWidth:lineWidth*2};
 	DrawLine({...frameOpts,x0:x1});
@@ -195,12 +195,11 @@ GridExtremes=function(opts){
 	var width=opts.canvasWidth;
 	var height=opts.canvasHeight;
 
-
 	var square=height/(rows+by);
 	if(width/(cols+bx)<square)
 		square=width/(cols+bx);
 
-	
+				
 	var offsetX=(typeof opts.offsetX==="undefined")?1:opts.offsetX;
 	var offsetY=(typeof opts.offsetY==="undefined")?1:opts.offsetY;
 
@@ -210,7 +209,7 @@ GridExtremes=function(opts){
 	var	x1=(width/2*offsetX+square*cols/2);
 	var	y1=(height/2*offsetY+square*rows/2);
 
-	var lineScale=SquareRoot((y1-y0)*(x1-x0)/(width*height)/(rows*cols))*50
+	var scaleFactor=SquareRoot((y1-y0)*(x1-x0)/(width*height)/(rows*cols))
 
 	var extremes={
 		x0:x0,
@@ -220,7 +219,7 @@ GridExtremes=function(opts){
 		square:square,
 		width:width,
 		height:height,
-		lineScale:lineScale
+		scaleFactor:scaleFactor
 	};
 
 	return extremes;
@@ -258,6 +257,7 @@ GridLineDraw=function(opts){
 	var cols=opts.cols;
 
 	var newopts={
+		...gridOpts,
 		...opts,
 		x0:x0+opts.px0/cols*(x1-x0),
 		y0:y0+opts.py0/rows*(y1-y0),
@@ -272,7 +272,7 @@ ShapeDraw=function(opts){
 	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
 	var fillColor=opts.fillColor?opts.fillColor:getComputedStyle(document.body)["background-strokeColor"]||"white";
 
-	var s=(opts.square||100)/100;
+	var s=opts.scaleFactor||1;
 	var lineWidth=((typeof opts.lineWidth!=="undefined")?(opts.lineWidth):1)*s;
 	
 	
@@ -327,9 +327,9 @@ RescalePath=function(opts,heighted){
 	var Rescaler=RescaleWidthXYer;
 	if(heighted)
 		Rescaler=RescaleHeightXYer;
-	var opts={square:1,scale:1,...opts};
+	var opts={square:1,scale:1,grow:1,...opts};
 	var viewBox=ViewboxCoordinates(opts.viewBox);
-	var Rescale=function(x,y){return Rescaler(opts.square*opts.scale)(x,y,viewBox)};
+	var Rescale=function(x,y){return Rescaler(opts.square*opts.scale*opts.grow)(x,y,viewBox)};
 	opts.path=SVGPathDirectTransform(opts.path,Rescale,viewBox);
 	opts.viewBox=ViewboxString(Rescale(viewBox[0],viewBox[1]).concat(Rescale(viewBox[2],viewBox[3])));
 	return opts;
@@ -362,7 +362,7 @@ SVGDraw=function(opts){
 	
 	let p = new Path2D(opts.path);
 	
-	var s=(opts.square||100)/100;
+	var s=opts.scaleFactor||1;
 
 	if(!opts.dash)
 		opts.dash=[];

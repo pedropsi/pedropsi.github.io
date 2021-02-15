@@ -220,41 +220,42 @@ var BlankState={
 		cursorsize:80,
 		monochrome:false,
 		solid:false,
-		skin:0.6								//fruit skin thickness
+		skin:10								//fruit skin thickness
 	},
 	overline:{
-		opacity:0.75,
-		lineWidth:2,
-		colour:"rgb(155,155,155)",
-		dash:[1,1],
-		//clearOpacity:0.75,
-		//clearLineWidth:1,
-		clearColour:"rgb(200,200,200)",
-		clearDash:[5,5]
+		opacity:0.6,
+		lineWidth:24,
+		colour:"#333333",
+		dash:[],
+		clearOpacity:0.6,
+		clearLineWidth:56,
+		clearColour:"#CCCCCC",
+		clearDash:[32,72]
 	},
 	line:{
-		dash:[1,1],
-		wrongDash:[1,6],
+		dash:[6,48],
+		wrongDash:[6,48],
 		opacity:0.5,
-		lineWidth:4,						//fruitline width
+		lineWidth:32,						//fruitline width
 		cap:"round",
 		lineJoin:"round",
 		colour:"rgba(155,155,155)",			//default line colour
 		excessColour:"#000000",				//path colour, too many fruit
-		deficitColour:"#CCCCCC" 			//path colour, zero		fruit
+		deficitColour:"#777777" 			//path colour, zero		fruit
 	},
 	grid:{
 		strokeColor:"#BBBBBB",				//grid lines
 		fillColor:"#FFFFFF",				//background
 		lineWidth:2,						//width   of grid lines
-		dash:[8/6,8/3,8/3,8/3,8/3,8/3,8/6], //dashing of grid lines
+		dash:[8,16,16,16,16,16,8], //dashing of grid lines
 		border:{
 			lineWidth:3,
 			lineJoin:"miter",
 			dash:false
 		},
 		edge:0.5,							//how many squares to add to the edge (to each of the shortest sides)
-		scale:0.95,							//fruit scale (how large)
+		scale:1,							//specific fruit scale 
+		grow:1,								//common   fruit scale (applies to all fruits)
 		nudge:0.3,							//fruit nudge (small adjustments to position)
 		dual:false,							//disalign squares and grid
 		scaleGrid:1,						//reduce the grid size
@@ -713,7 +714,7 @@ TrackStyles=function(track,state,styles,errors){
 	var fruits=TrackFruits(track,state);
 	var fruit=First(fruits);
 	var group=FruitGroupName(fruit,state);
-	
+	var styles={...styles};
 	var colour;
 	
 	if(errors.deficit)
@@ -726,13 +727,14 @@ TrackStyles=function(track,state,styles,errors){
 		colour=state.fruits[fruit].colour;
 	
 	var lineCap="round";
-	var lineWidth=styles.lineWidth||state.line.lineWidth||1;
+	var lineWidth=styles.lineWidth||state.line.lineWidth;
 	var opacity=styles.opacity||state.line.opacity||1;
 
 	var dash=state.line.dash;
 	if(!errors.deficit&&Values(errors).some(Identity))//global and local errors
 		dash=state.line.wrongDash;
 	
+
 	if(styles.edit){
 		dash=state.overline.dash||dash;
 		colour=state.overline.colour;
@@ -749,16 +751,16 @@ TrackStyles=function(track,state,styles,errors){
 	if(state.visuals.monochrome)
 		colour=HEXSaturater(0)(styles.colour);
 	
-	if(typeof styles.opacity!=="undefined")
-		colour=CompelRGBA(colour,styles.opacity);
+	colour=CompelRGBA(colour,opacity);
 	
-	return {
-		target:state.render.target+(styles.edit?"-overline":"-line"),
-		strokeColor:colour,
-		dash:dash,
-		lineCap:lineCap,
-		lineWidth:lineWidth
-	}
+	styles.strokeColor=colour;
+	styles.dash=dash;
+	styles.lineCap=lineCap;
+	styles.lineWidth=lineWidth;
+	
+	styles.target=state.render.target+(styles.edit?"-overline":"-line");
+
+	return styles;
 }
 
 TrackDraw=function(track,state,styles,errors){
@@ -777,21 +779,19 @@ TrackDraw=function(track,state,styles,errors){
 		py1:segment[1][1],
 		...trackStyles
 	},state))
-
+	
 	return errors;
 }
 
 SegmentDraw=function(opts,state){
-	var gridOpts={
+	var opts={
 		...state.grid,
 		rows:state.H,
-		cols:state.W
+		cols:state.W,
+		...Extremes(state),
+		...opts,
 	}
-	var opts={
-		...gridOpts,
-		...GridExtremes(gridOpts),
-		...opts
-	}
+
 	GridLineDraw(opts);
 }
 
@@ -913,7 +913,6 @@ GridDraw=function(state){
 	}
 	ClearCanvas(target);
 	gridOpts.target=target;
-	Wbug(gridOpts);
 	SquaresGridDraw(gridOpts);
 }
 
@@ -921,9 +920,9 @@ GridDraw=function(state){
 ForestDraw=function(forest,state,Opts){
 	var positionErrors=state.atErrors;
 
-	var target=state.render.target+"-line";
+	Opts.target=state.render.target+"-line";
 	if(state.mode.edit)
-		target=state.render.target+"-overline";
+		Opts.target=state.render.target+"-overline";
 	
 	forest.map((track,i)=>TrackDraw(track,state,Opts,positionErrors[i]));
 }
@@ -945,9 +944,9 @@ OverlineDraw=function(state){
 	Opts={
 		edit:true,
 		clearing:state.mode.clearing,
-		...state.overline,
+		...state.overline
 	}
-
+	
 	var target=state.render.target+"-overline";
 	ClearCanvas(target);
 	if(!state.mode.edit&&state.mode.dragging)
@@ -957,14 +956,13 @@ OverlineDraw=function(state){
 
 MiniBoardDraw=function(fruit,rule,state){
 	var rendering={
-		grid:{scaleGrid:0.15},
 		render:{
 			main:false,
 			target:"depiction-"+fruit,
 			container:".depiction-"+fruit
 		},
 		grid:{
-			scale:1,
+			scale:1.2,
 			offsetX:0,
 			offsetY:0,
 		},
