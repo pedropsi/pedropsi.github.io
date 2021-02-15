@@ -790,8 +790,8 @@ Take=function(SAO,n){
 	if(IsObject(SAO))
 		return FilterKeysObject(SAO,k=>In(Take(Keys(SAO),n),k));
 	if(n<0)
-		return SAO.slice(n,SAO.length);
-	return SAO.slice(0,n);
+		return SAO.slice(SAO.length-1*Floor(Abs(n)),SAO.length);
+	return SAO.slice(0,Floor(n));
 
 /*
 from beginning
@@ -817,14 +817,23 @@ Take([5,6,7,8,9],Infinity)
 Objects
 Take({a:1,b:4,c:7},2)
 {a:1,b:4}
+
+Incomplete, beginning
+Take([1,2,3],1.5)
+[1]
+
+Incomplete, end
+Take([1,2,3],-1.5)
+[3]
 */
 }
 
 UnTake=function(SAO,n){
 	if(IsObject(SAO))
 		return FilterKeysObject(SAO,k=>In(UnTake(Keys(SAO),n),k));
-	return n<0?Take(SAO,Max(0,SAO.length+n)):Take(SAO,-Max(0,SAO.length-n));
-
+	if(n<0)
+		return SAO.slice(0,SAO.length+Ceiling(n));
+	return SAO.slice(Floor(n),SAO.length);
 /*
 remove from beginning
 UnTake([5,6,7,8,9],2)
@@ -849,6 +858,14 @@ UnTake([5,6,7,8,9],Infinity)
 Objects
 UnTake({a:1,b:4,c:7},2)
 {c:7}
+
+Incomplete, beginning
+UnTake([1,2,3],1.5)
+[2,3]
+
+Incomplete, end
+UnTake([1,2,3],-1.5)
+[1,2]
 */
 }
 
