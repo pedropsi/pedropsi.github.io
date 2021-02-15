@@ -962,7 +962,7 @@ MiniBoardDraw=function(fruit,rule,state){
 		grid:{scaleGrid:0.15},
 		render:{
 			main:false,
-			target:".kudamono-canvas-explainer .explainer-"+fruit,
+			target:".explainer-"+fruit,
 			container:".explainer-"+fruit
 		}
 	}
@@ -982,7 +982,7 @@ RuleDescriptionDraw=function(fruit,rule){
 ExplainerDraw=function(state){
 	var levelFruits=LevelFruits(state);
 	var miniboards=levelFruits.map(function(fruit){return `
-		<div class="explainer-${fruit}">
+		<div class="explanation explanation-${fruit}">
 			<canvas class="depiction depiction-${fruit}">The picture will appear here.</canvas>
 			<div class="description description-${fruit}">The rule of this particular fruit will be here.</div>
 		</div>`;

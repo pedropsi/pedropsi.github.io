@@ -24,11 +24,16 @@
 	flex-wrap:wrap;
 	font-size:calc(var(--fontheight)*0.75);
 	line-height:var(--h2);
-	padding:var(--h1) var(--w4) var(--h1) var(--w4);
+	margin:var(--h2) 0 0 var(--w2);
 }
 
+.tabletop .explainer .explanation{
+	margin:var(--h2) var(--w1) var(--h1) var(--w1);
+}
 
 .tabletop .explainer .depiction{
+	min-height:50%;
+	background-color:blue;
 	max-width:var(--w8);
 	overflow:hidden;
 }
