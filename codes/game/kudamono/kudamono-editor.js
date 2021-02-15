@@ -1870,6 +1870,8 @@ InitialisePuzzle=function(id){
 	var options={initialise:true,id:state.id,draw:["force-metadata"]};
 	UpdateState({},options);
 	
+	setTimeout(CanvasResizer(state),500)
+	
 	//Auto instructions
 	AutoInstructions(state.fruits)
 }
