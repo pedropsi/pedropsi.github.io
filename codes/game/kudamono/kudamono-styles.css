@@ -13,6 +13,10 @@
 	background-color: transparent;
 }
 
+.depiction{
+	position:relative;
+}
+
 .tabletop .game-supra-canvas{
 	flex:0 0 75%;
 }
@@ -33,7 +37,6 @@
 
 .tabletop .explainer .depiction{
 	min-height:50%;
-	background-color:blue;
 	max-width:var(--w8);
 	overflow:hidden;
 }
@@ -43,7 +46,7 @@
 }
 
 
-.tabletop .game-supra-canvas canvas{
+.tabletop .layer{
 	top:0;
 	position: absolute;
 	background-color: transparent;

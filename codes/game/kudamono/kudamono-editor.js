@@ -243,9 +243,6 @@ var BlankState={
 		excessColour:"#000000",				//path colour, too many fruit
 		deficitColour:"#CCCCCC" 			//path colour, zero		fruit
 	},
-	metadata:{
-		textColour:"#555555"				//text colour for metadata
-	},
 	grid:{
 		strokeColor:"#BBBBBB",				//grid lines
 		fillColor:"#FFFFFF",				//background
@@ -962,16 +959,25 @@ MiniBoardDraw=function(fruit,rule,state){
 		grid:{scaleGrid:0.15},
 		render:{
 			main:false,
-			target:".explainer-"+fruit,
-			container:".explainer-"+fruit
-		}
+			target:"depiction-"+fruit,
+			container:".depiction-"+fruit
+		},
+		grid:{
+			scale:1,
+			offsetX:0,
+			offsetY:0,
+		},
+		width:"100px",
+		height:"100px"
 	}
 
 	var miniboard=FruitSerialState(fruit,rule.depiction,state);
 		miniboard=CompleteState(Join(miniboard,rendering));
 
-	if(state.render.main)//prevent recursion
+	if(state.render.main){//prevent recursion
+		BoardPrepare(miniboard)
 		StateDraw(miniboard)
+	}
 }
 
 RuleDescriptionDraw=function(fruit,rule){
@@ -983,7 +989,7 @@ ExplainerDraw=function(state){
 	var levelFruits=LevelFruits(state);
 	var miniboards=levelFruits.map(function(fruit){return `
 		<div class="explanation explanation-${fruit}">
-			<canvas class="depiction depiction-${fruit}">The picture will appear here.</canvas>
+			<div class="depiction depiction-${fruit}">The picture will appear here.</div>
 			<div class="description description-${fruit}">The rule of this particular fruit will be here.</div>
 		</div>`;
 	});
@@ -1759,6 +1765,7 @@ SubBoardHTML=function(name,state,cla){
 	if(In(OuterLayers,name))
 		return `<div id="${state.render.target}-${name}" class="${cla||name}">${name} layer</div>`;
 	return `<canvas 
+			class="layer"
 			id="${state.render.target}-${name}" 
 			width="${state.width}" 
 			height="${state.height}"
