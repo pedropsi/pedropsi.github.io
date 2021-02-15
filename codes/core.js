@@ -1510,8 +1510,8 @@ JoinObjects=function(O1,O2){
 }
 
 BiJoinAO=function(AO1,AO2){
-	if(IsString(AO1)&&IsString(AO2))
-		return AO1+AO2;
+	// if(IsString(AO1)&&IsString(AO2))
+	// 	return AO1+AO2;
 	if(IsObject(AO1)&&IsObject(AO2))
 		return JoinObjects(AO1,AO2);
 	else if(IsArray(AO1)&&IsArray(AO2))
@@ -1526,6 +1526,15 @@ BiJoin=function(AO1,AO2){
 	if(!AO1)
 		return AO2;
 	return BiJoinAO(AO1,AO2);
+/*
+recursive
+BiJoin({a:{c:3,d:4}},{a:{e:5}})
+{a:{c:3,d:4,e:5}}
+
+also combines arrays
+BiJoin({a:[1,2,3]},{a:[4,5]})
+{a:[1,2,3,4,5]}
+*/
 }
 
 Join=ArgumentExtender(BiJoin);
