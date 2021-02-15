@@ -24,6 +24,7 @@
 	flex-wrap:wrap;
 	font-size:calc(var(--fontheight)*0.75);
 	line-height:var(--h2);
+	padding:var(--h1) var(--w4) var(--h1) var(--w4);
 }
 
 
@@ -63,6 +64,7 @@
 	font-size:calc(var(--fontheight));
 	font-weight:bold;
 	font-style:italic;
+	line-height:0;
 	padding:var(--h1) var(--w8) 0 var(--w8);
 }
 
