@@ -8681,6 +8681,7 @@ UnitTestReportHTML=function(unitTest){
 	AppendElement(report,tID);
 }
 
+
 TestReportHTML=function(){
 	var functionNames=Introspect();
 	var unitTests=functionNames.map(FunctionNameUnitTests).filter(Length);
@@ -8690,11 +8691,13 @@ TestReportHTML=function(){
 	AddElement("<p>Tests complete!</p>",TestingAreaSelector);
 
 	var testedFunctionNames=unitTests.map(t=>First(t).callerName);
-	var untestedFunctionNames=Complement(functionNames,testedFunctionNames);
+	var sideFunctionNames=functionNames.filter(name=>!In(FunctionBody(window[name]),"return"));
+	var untestedFunctionNames=Complement(functionNames,testedFunctionNames,sideFunctionNames);
 	
 	DynamicText("code-coverage",PercentageText(Length(testedFunctionNames)/Length(untestedFunctionNames),2));
 	DynamicText("code-coverage-included",Enumerate(testedFunctionNames));
 	DynamicText("code-coverage-excluded",Enumerate(untestedFunctionNames));
+	DynamicText("code-coverage-side",Enumerate(sideFunctionNames));
 
 	return report;
 }

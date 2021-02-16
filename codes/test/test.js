@@ -296,4 +296,5 @@ SaveTest(PadLeft,["hi","","8"],"hi","nosymbol");
 
 
 
-TestReportHTML()
+TestReportHTML();
+//setTimeout(()=>DynamicText("code-orphan-functions",Enumerate(OrphanFunctions())),2000);

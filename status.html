@@ -13,15 +13,27 @@ As such, it is very likely that your own platform-device combination was never t
 
 <h2>Problems found?</h2>
 <div class="test-suite">Please wait while tests are running...</div> 
+${TestReportHTML(),""}
 
 <h2>Code coverage</h2>
-<p>Current code coverage stands at ${DynamicText("code-coverage")} of all functions.</p>
-<h3>Functions tested:</h3>
+<h3>Testable functions</h3>
+<p>Current code coverage stands at ${DynamicText("code-coverage")} of all testable functions.</p>
+<h4>Functions tested</h4>
 <p>${DynamicText("code-coverage-included")}.</p>
-<h3>Functions not covered:</h3>
+<h4>Functions not yet tested</h4>
 <p>${DynamicText("code-coverage-excluded")}.</p>
 
-${v.FEEDBACK()}
+<h3>Untestable functions</h3>
+<p>These functions do not return a value, only a side effect, and are not currently testable.</p>
+<p>${DynamicText("code-coverage-side")}.</p>
+
+
+<h2>Dependencies</h2>
+<h3>Orphan Functions</h3>
+<p>These functions are potentially no longer used (deeper check pending).</p>
+<p>${DynamicText("code-orphan-functions")}.</p>
+${ButtonHTML({txt:"Retrieve",onclick:`DynamicText("code-orphan-functions",Enumerate(OrphanFunctions()))`})}
+
 
 `};</script><script src="data/page.js"></script>
 	</head></html>
