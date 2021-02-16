@@ -1,46 +1,52 @@
 ///////////////////////////////////////////////////////////////////////////////
 // (C) Pedro PSI 2017-2021
-// Conventions for concise, self-documenting code (and automated testing)
+// Conventions for concise, self-documenting, self-testing code
+// (and memorable function names, in the thousands range)
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Naming conventions
 //
-//	1) function names are Capitalised:
-//		- avoids conflicts with most JS libraries
-//		- feels natural
-//		- marks functions as distinct from other variable types
-//		- (this includes camel-casing separate words)
-//
-// 	2)	the last word reveals the return type:
-//		- verb					: side effects (may optionally may return a value)
-//	 	- "-ed", an adjective	: binary (true/false)
+// 	1)	the last word reveals the return type:
+//		- verb					: side effects	(may optionally return a value)
+//	 	- "-ed", an adjective	: binary 		(true/false)
 //	 	- "-er", "-or", "F"		: another function
 //	 	- "Array", "A"			: an array
 //	 	- "String", "S"			: a string
 //	 	- "Object", "Obj", "O"	: an object
 //
-//	 	- "-s", a plural noun	: an array (occasionally an object)
+//	 	- "-s", a plural noun	: an array		(occasionally an object)
 //
 //	 	- "Element"				: a Node or HTML code or a Selector
 //	 	- "Node"				: a HTML node element
 //	 	- "HTML"				: HTML code, as a string
 //		- ...
 //
-// 	3)	modifiers:
+//	 	- "Draw"				: Draws something on the screen (side-effect)
+//		- ...
+//
+// 	2)	modifiers:
 //		-"Un-"					: returns the Opposite / Complementary value
+//		-"Re-"					: enforces/coerces/compels a particular type or format
 //
-//	4) self-describing names are preferred. For instance "FirstSecond...Type" receives those "First","Second",... as arguments and returns "Type"
+//	3) self-describing names are preferred. For instance "FirstSecond...Type" receives those "First","Second",... as arguments and returns "Type"
 //
-//  5) the first word may also refer to a particular set of related functions (to be improved). 
+//  4) the first word may also refer to a particular set of related functions (to be improved). 
+//
+//  5) Forbidden names: anything vague, such as: "data" (to be improved)
+//
+//	6) function names are Capitalised (and camel-cased):
+//		- avoids conflicts with most JS libraries
+//		- feels natural
+//		- marks functions as distinct from other variable types
 //
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Unit testing
 //
 //   All unit tests of a given function are stored as comments after its return statement, to:
-//		-explain the function by example
-//		-keep code organised (what belongs together should stay together)
-//		-be extracted automatically by the unit testing framework
+//		-explain the function by example, right there
+//		-keep code organised (what belongs together stays together)
+//		-be extracted automatically by the unit testing framework (also in core.js)
 //
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -63,7 +69,7 @@
 //				(modules ask whether a function was defined before, thus not overwriting it)
 //
 // 2) Modern ES Syntax is avoided, to avoid the need for a transpiler.
-//		2.1) The "spread operator" (...) is replaced with the functions "Merge" or "Join"
+//		2.1) The "spread operator" (...) is replaced with the function "Merge"
 //		2.1) The "arrow notation" (=>) is replaced with function(...){...} ------------------TODO
 //
 
