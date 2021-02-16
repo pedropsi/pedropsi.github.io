@@ -8153,8 +8153,17 @@ TextRollTestUnit=function(unitText){
 
 //Self-tests
 
-UnInlineComment=function(string){
 	return UnAfterfix(string,"//","mig");
+UnInlineCommentCode=function(code){
+}
+
+UnMultilineCommentCode=function(code){
+	return UnInfix(code,"/*","*/");
+}
+
+UnCommentCode=function(code){
+	var code=UnMultilineCommentCode(UnInlineCommentCode(code));
+	return code;
 }
 
 SaveTestableFunctionsTests=function(){
