@@ -8281,8 +8281,6 @@ Introspect=function(){
 	return Introspect.list;
 }
 
-var JavascriptFunctions=["RegExp","Array","Object","Date","String","Number","Set","Math"];
-
 FunctionCalledFunctions=function(F){
 	var code=UnCommentCode(FunctionBody(F));
 	var callers=code.match(/(\w+)\(/sig);
@@ -8298,6 +8296,8 @@ FunctionCalledFunctions(FunctionCalledFunctions)
 ["FunctionBody","match","if","map","UnPosfix","DistinctArray"]
 */
 }
+
+JavascriptFunctionNames=["RegExp","Array","Object","Date","String","Number","Set","Math"];
 
 FunctionCalledDependents=function(F){
 	var selfName=FunctionName(this);
@@ -8318,7 +8318,7 @@ FunctionSourceTokens=function(F){
 
 	var tokens=StringReplace(F.toString(),symbols.map(t=>[t,separator])).split(separator);
 	tokens=tokens.filter(t=>t&&t[0].toLowerCase()!==t[0])
-	tokens=Complement(tokens,JavascriptFunctions);
+	tokens=Complement(tokens,JavascriptFunctionNames);
 	
 	return tokens;
 }
