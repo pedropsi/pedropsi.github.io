@@ -8283,7 +8283,7 @@ Introspect=function(){
 
 FunctionCalledFunctions=function(F){
 	var code=UnCommentCode(FunctionBody(F));
-	var callers=code.match(/(\w+)\(/sig);
+	var callers=code.match(new RegExp("(\\w+)\\(","sig"));
 	if(callers===null){
 		return [];
 	}
