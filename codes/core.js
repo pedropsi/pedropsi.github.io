@@ -95,14 +95,13 @@ FunctionNamecode=function(F){
 }
 
 FunctionBody=function(FunctionF){
-	return FunctionF.toString().replace(/[^\)]*\)/,"");
+	return UnUnderfix(FunctionF.toString(),")");
 }
 
 FunctionHead=function(FunctionF){
 	if(FunctionF.name)
 		return FunctionF.name;
-	var head=FunctionF.toString().replace(/\(.*/,"").replace("function ","");
-	return head.replace(/\s.*/gm,"");
+	return UnPrefix(UnPrefix(UnAfterfix(FunctionF.toString(),"("),"function")," ");
 }
 
 
@@ -8542,7 +8541,7 @@ UnitTextUnitTest=function(unitText){
 		lines=Prepend(lines,title);
 	}
 	var call=lines[1];
-	var callerName=call.replace(/\(.*$/,"");
+	var callerName=UnAfterfix(call,"(");
 	if(!globalThis[callerName]){
 		Warn("caller function is undefined:",callerName)
 		return {};
