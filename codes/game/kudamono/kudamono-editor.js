@@ -83,7 +83,7 @@ FruitIcons={
 			minconnectable:2,
 			maxconnected:0,
 			description:"Every Blueberry is connectable with at least one other (as if a path were drawn).",
-			depiction:"W=2&L=b0b8&S=3DD"
+			depiction:"W=2&L=b0b2b6&S=3DD"
 		}
 	},
 	"cherry":{
@@ -965,12 +965,23 @@ MiniBoardDraw=function(fruit,rule,state){
 			container:".depiction-"+fruit
 		},
 		grid:{
-			scale:1.2,
+			border:{
+				lineWidth:6,
+			},
+			lineWidth:3,
+			scale:1,
 			offsetX:state.grid.dual?1:0,
 			offsetY:state.grid.dual?1:0,
 		},
 		width:"100px",
-		height:"100px"
+		height:"100px",
+		line:{
+			wrongDash:[1,5],
+			lineWidth:5						//fruitline width
+		},
+		visuals:{
+			skin:5
+		}		
 	}
 
 	var miniboard=FruitSerialState(fruit,rule.depiction,state);
