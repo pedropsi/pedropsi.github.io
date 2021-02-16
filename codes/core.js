@@ -2413,6 +2413,26 @@ UnLastfix("ok!maybe!very!not!useful","!")
 */
 }
 
+Lastfix=function(word,prefix,suffix){
+	if(!word)
+		return "";
+	var suffix=suffix||prefix;
+	return UnBeforfix(UnPosfix(UnPosfix(word,Overfix(word,suffix)),suffix),prefix);
+/*
+Last of several
+Lastfix("ok<maybe>very<not>useful","<",">")
+"not"
+
+nothing
+Lastfix("ok","<",">")
+""
+
+equal prefix and suffix
+Lastfix("ok!maybe!very!not!useful","!")
+"not"
+*/
+}
+
 UnFirstfix=function(word,prefix,suffix){
 	if(!word)
 		return "";
