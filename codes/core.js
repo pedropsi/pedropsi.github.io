@@ -2396,23 +2396,31 @@ StripHTML=function(string){
 
 
 //Shortening
-ShortenSentence=function(string,maxchars,stoppers){
+ShortenSentence=function(string,maxchars,stoppers,ender){
+	var stoppers=stoppers||" ";
+	var ender=ender||"..."
+	var E=ender.length;
+	var LIMIT=Max(0,maxchars-E);
 	if(!string)
 		return "";
 	else{
 		if(string.length<=maxchars)
 			return string;
+		if(LIMIT===0)
+			return Take(string,maxchars);
 		else{
-			var string=Take(string,maxchars-3);
-			var i=string.length;
-			var found=false;
-			var stoppers=stoppers||(Tokens()+" ");
-			while(i>0&&!found){
-				found=In(stoppers,Last(string))
-				string=Most(string);
-				i--;
+			if(!In(string,stoppers))
+				return Take(string,LIMIT)+ender;
+			var unoverstring=Take(string,maxchars);
+			var i=maxchars;
+			while(i>0&&unoverstring.length>LIMIT){
+				unoverstring=UnOverfix(unoverstring,stoppers);
+				i++;
 			}
-			return string+"...";
+			if((unoverstring.length<=LIMIT))
+				return unoverstring+ender;
+			else
+				return Take(string,LIMIT)+ender;
 		}
 	}
 /*
@@ -2426,7 +2434,15 @@ ShortenSentence("1234567890",10)
 
 Limit below 3 characters
 ShortenSentence("1234567890",2)
-"..."
+"12"
+
+No stoppers
+ShortenSentence("1234567890",5)
+"12..."
+
+Different ender, with different length
+ShortenSentence("1234567890",8," ","*****")
+"123*****"
 
 Limit at end of word
 ShortenSentence("That was fantastic!",11)
