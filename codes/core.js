@@ -5998,8 +5998,10 @@ ElementComputedHeight=function(e){
 	var e=GetElement(e);
 	if(e===Window)
 		return window.innerHeight;
-	if(!e)
+	if(!e){
+		Warn("cannot find element",e)
 		return 0;
+	}
 	var px=window.getComputedStyle(e).getPropertyValue('height');
 	return Number(UnPosfix(px,"px"));
 }
@@ -6008,8 +6010,10 @@ ElementComputedWidth=function(e){
 	var e=GetElement(e);
 	if(e===Window)
 		return window.innerWidth;
-	if(!e)
+	if(!e){
+		Warn("cannot find element",e)
 		return 0;
+	}
 	var px=window.getComputedStyle(e).getPropertyValue('width');
 	return Number(UnPosfix(px,"px"));
 }
