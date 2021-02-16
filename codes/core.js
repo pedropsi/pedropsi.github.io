@@ -8143,12 +8143,12 @@ UnInlineComment=function(string){
 }
 
 SaveTestableFunctionsTests=function(){
-	var testRolls=Values(UnReachableComments());
+	var testRolls=Values(FunctionCommentedTestRolls());
 	testRolls.map(SaveTestRoll);
 }
 
 
-UnReachableComment=function(F){
+FunctionCommentedTestRoll=function(F){
 	var body=FunctionBody(F);
 	var lastComment=UnBeforfix(body,"/"+"*");		 //Finds the comment inbetween
 	if(lastComment===body)
@@ -8164,10 +8164,10 @@ UnReachableComment=function(F){
 	return lastComment;
 }
 
-UnReachableComments=function(){
+FunctionCommentedTestRolls=function(){
 	var O={};
 	Introspect().map(function(fname){
-		var code=UnReachableComment(eval(fname));
+		var code=FunctionCommentedTestRoll(eval(fname));
 		if(code.length){
 			O[fname]=code;
 		}
