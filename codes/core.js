@@ -8477,11 +8477,9 @@ Monitor=function(Opts){
 	ReplaceChildren(report,".monitor");
 }
 
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-//Test suite saver
 
-//Self-tests
+///////////////////////////////////////////////////////////////////////////////
+//Testing framework
 
 UnInlineCommentCode=function(code){
 	return UnAfterfix(code,"//","mig");
@@ -8615,11 +8613,6 @@ RollsSave=function(){
 }
 
 
-
-
-//Run Test() to execute and report the tests on the list of saved functions
-//provided there is an element in the page labelled with TestingAreaSelector
-
 TestingAreaSelector=".test-suite";
 
 UnitTestEvaluate=function(unitObj){
@@ -8738,6 +8731,7 @@ Introspect=function(){
 	return Introspect.list;
 }
 
+
 FunctionCalledFunctions=function(F){
 	var code=UnCommentCode(FunctionBody(F));
 	var callers=code.match(new RegExp("(\\w+)\\(","sig"));
@@ -8766,6 +8760,23 @@ FunctionCalledDependents(FunctionCalledDependents)
 */
 }
 
+Dependencies=function(nameslist){
+	if(!nameslist)
+		var nameslist=Introspect();
+	var O={};
+	Introspect().map(function(fname){
+		O[fname]=FunctionCalledDependents(window[fname])
+	});
+	return O;
+}
+
+OrphanFunctions=function(dependencies){
+	if(!dependencies)
+		var dependencies=Dependencies();
+	var calledFunctionNames=Apply(Union,Values(dependencies));
+	var uncalled=Keys(FilterKeysObject(dependencies,k=>!In(calledFunctionNames,k)));
+	return uncalled;
+}
 
 //Node mass exporter (one-liner)
 ExportFunction=function(name){
