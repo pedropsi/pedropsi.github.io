@@ -8164,17 +8164,17 @@ FunctionNameTestsSave=function(fname){
 		return FunctionTestsSave(window[fname]);
 }
 
-TestRolls=function(){
+Rolls=function(){
 	return Introspect().map(FunctionNameTestsSave);
 }
 
-SaveTestRoll=function(textRoll){
-	return TestRollUnitTexts(textRoll).map(UnitTextUnitTest).map(UnitTestSave);
+RollSave=function(roll){
+	return RollUnitTests(roll).map(UnitTestSave);
 }
 
 SaveTestableFunctionsTests=function(){
-	var testRolls=TestRolls();
-	testRolls.map(SaveTestRoll);
+	var rolls=Rolls();
+	rolls.map(RollSave);
 }
 
 
