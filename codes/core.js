@@ -3031,7 +3031,7 @@ HTMLIder=function(id){
 
 ImageExtensions=["apng","bmp","gif","ico","cur","jpg","jpeg","jp2","jpx","j2k","j2c","jif","jfif","pjpeg","pjp","png","svg","tif","tiff","webp"];
 
-SourceCoerceExtension=function(src,extensions,defaultext){
+ReSourceExtension=function(src,extensions,defaultext){
 	var defaultext=Prefix(defaultext,".");
 	if(!extensions.some(ex=>Posfixed(src,Prefix(ex,"."))))
 		return Posfix(src,defaultext);
