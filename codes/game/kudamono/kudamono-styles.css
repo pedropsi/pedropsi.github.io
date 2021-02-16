@@ -36,8 +36,8 @@
 }
 
 .tabletop .explainer .depiction{
-	min-height:50%;
-	max-width:var(--w8);
+	min-height:calc(var(--w8) + var(--h4));
+	max-width:calc(var(--w8) + var(--h4));
 	overflow:hidden;
 }
 .tabletop .explainer .description{

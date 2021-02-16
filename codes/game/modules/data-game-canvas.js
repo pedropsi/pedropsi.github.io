@@ -159,11 +159,10 @@ GridLinesDraw=function(opts){
 	if(opts.dash)
 		dash=opts.dash;
 
-	var lineWidth=1;
-	DrawSegmentLine({...opts,vertical:true,dash:dash,lineWidth:lineWidth});
-	DrawSegmentLine({...opts,horizontal:true,dash:dash,lineWidth:lineWidth});
+	DrawSegmentLine({...opts,vertical:true,dash:dash});
+	DrawSegmentLine({...opts,horizontal:true,dash:dash});
 
-	var frameOpts={...opts,dash:[1,1],lineWidth:lineWidth*2};
+	var frameOpts={...opts,...opts.border};
 	DrawLine({...frameOpts,x0:x1});
 	DrawLine({...frameOpts,y0:y1});
 	DrawLine({...frameOpts,x1:x0});
@@ -238,12 +237,11 @@ SquaresGridDraw=function(opts){
 	}
 
 	RectangleDraw({...gridOpts,lineWidth:0});
-	GridLinesDraw({...gridOpts,...gridCoords},);
-
+	GridLinesDraw({...gridOpts,...gridCoords});
+	Wnet({...gridOpts,...gridCoords});
 	var borderOpts=gridOpts;
 	if(gridOpts.border)
 		borderOpts=Merge(gridOpts,gridOpts.border);
-	
 
 }
 

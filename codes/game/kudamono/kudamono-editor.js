@@ -246,12 +246,12 @@ var BlankState={
 	grid:{
 		strokeColor:"#BBBBBB",				//grid lines
 		fillColor:"#FFFFFF",				//background
-		lineWidth:2,						//width   of grid lines
-		dash:[8,16,16,16,16,16,8], //dashing of grid lines
+		lineWidth:8,						//width   of grid lines
+		dash:[8,24], //dashing of grid lines
 		border:{
-			lineWidth:3,
+			lineWidth:12,
 			lineJoin:"miter",
-			dash:false
+			dash:[]
 		},
 		edge:0.5,							//how many squares to add to the edge (to each of the shortest sides)
 		scale:1,							//specific fruit scale 
@@ -266,7 +266,10 @@ var BlankState={
 		dash:[6,12,6,12,6,12,6,12,6,12,6],
 		lineWidth:6,
 		border:{
-			strokeColor:"#BBBBBB"
+			strokeColor:"#BBBBBB",
+			lineWidth:12,
+			lineJoin:"miter",
+			dash:[]
 		},				
 	},
 
@@ -963,8 +966,8 @@ MiniBoardDraw=function(fruit,rule,state){
 		},
 		grid:{
 			scale:1.2,
-			offsetX:0,
-			offsetY:0,
+			offsetX:state.grid.dual?1:0,
+			offsetY:state.grid.dual?1:0,
 		},
 		width:"100px",
 		height:"100px"
