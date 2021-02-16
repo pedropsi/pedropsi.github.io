@@ -220,7 +220,7 @@ var BlankState={
 		cursorsize:80,
 		monochrome:false,
 		solid:false,
-		skin:10								//fruit skin thickness
+		skin:20								//fruit skin thickness
 	},
 	overline:{
 		opacity:0.6,
