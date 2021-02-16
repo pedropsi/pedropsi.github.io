@@ -8293,7 +8293,7 @@ FunctionCalledFunctions=function(F){
 /*
 self-inspect
 FunctionCalledFunctions(FunctionCalledFunctions)
-["FunctionBody","match","if","map","UnPosfix","DistinctArray"]
+["FunctionBody","match","RegExp","if","map","UnPosfix","DistinctArray"]
 */
 }
 
@@ -8301,7 +8301,7 @@ JavascriptFunctionNames=["RegExp","Array","Object","Date","String","Number","Set
 
 FunctionCalledDependents=function(F){
 	var selfName=FunctionName(this);
-	return FunctionCalledFunctions(F).filter(Name=>Capitalise(Name[0])===Name[0]&&!In(JavascriptFunctions,Name)&&Name!==selfName);
+	return FunctionCalledFunctions(F).filter(Name=>Capitalise(Name[0])===Name[0]&&!In(JavascriptFunctionNames,Name)&&Name!==selfName);
 /*
 self-inspect, removing itself
 FunctionCalledDependents(FunctionCalledDependents)
