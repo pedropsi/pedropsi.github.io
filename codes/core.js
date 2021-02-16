@@ -2198,6 +2198,24 @@ Capitalise=function(word){
 
 KebabCaseString=function(s){
 	return UnExfix(s.replace(/([^A-Za-z0-9\_])+/g,"-"),"-");
+/*
+simple text
+KebabCaseString("How to play")
+"How-to-play"
+
+starting hashtag removed
+KebabCaseString("#How to play")
+"How-to-play"
+
+trailing spaces)
+ multiple spaces
+KebabCaseString("     How      to    play      ")
+"How-to-play"
+
+symbol mash
+KebabCaseString("|!\/!How\"#$%&/()=@£§€{[]}'to+*¨¨´´``~~-playçãôÒÌ")
+"How-to-play"
+*/
 }
 
 CommonWords=function(){
@@ -2244,10 +2262,15 @@ EscapeToken=function(token){
 		return "\\"+token;
 }
 
-EscapeTokens=function(tokenString){
-	if(IsArray(tokenString))
-		return Alternate(tokenString.map(EscapeTokens));
+EscapeTokensString=function(tokenString){
+	//var tokenString=tokenString.replaceAll("\\\\","\\");
 	return tokenString.split("").map(EscapeToken).join("");
+}
+
+EscapeTokens=function(AS){
+	if(IsArray(AS))
+		return Alternate(AS.map(EscapeTokens));
+	return EscapeTokensString(AS);
 }
 
 
@@ -2277,11 +2300,36 @@ UnFixer=function(word,sfix,befor,after,flags){
 
 UnPrefix=function(word,prefix,flags){
 	return UnFixer(word,prefix,"^","",flags);
+/*
+repeated prefix
+UnPrefix("antiantiantiall","anti")
+"all"
+*/
 }
 
 UnPosfix=function(word,suffix,flags){
 	return UnFixer(word,suffix,"","$",flags);
 /*
+repeated end, also spaces
+UnPosfix("all is well well well"," well")
+"all is"
+
+multiple terminations, one
+UnPosfix("song.mp3",[".mp3",".wav"])
+"song"
+
+multiple terminations, many
+UnPosfix("song.mp3.wav",[".mp3",".wav"])
+"song"
+
+multiple terminations, many reverse ordered
+UnPosfix("song.wav.mp3",[".mp3",".wav"])
+"song"
+
+empty suffix list
+UnPosfix("song.mp3",[])
+"song.mp3"
+
 Repeating sequence
 UnPosfix("What !!!?!?.?.?.?",".?")
 "What !!!?!?"
@@ -2295,31 +2343,103 @@ UnPosfix("What !!!?!?.?.?.?",[".","?","!"])
 "What "
 */
 }
+
 Prefix=function(word,prefix){
 	if(!word)
 		var word="";
 	if(!prefix)
 		return word;
 	return prefix+UnPrefix(word,prefix);
+/*
+no prefix
+Prefix("rie")
+"rie"
+
+empty prefix
+Prefix("rie","")
+"rie"
+
+no name, just prefix
+Prefix("","Ma")
+"Ma"
+
+prefix absent
+Prefix("rie","Ma")
+"Marie"
+
+prefix already present, don't duplicate
+Prefix("Marie","Ma")
+"Marie"
+*/
 }
+
 Posfix=function(word,suffix){ //suffix
 	if(!word)
 		var word="";
 	if(!suffix)
 		return word;
 	return UnPosfix(word,suffix)+suffix;
+/*
+no posfix
+Posfix("rie")
+"rie"
+
+empty posfix
+Posfix("rie","")
+"rie"
+
+no name, just posfix
+Posfix("","Ma")
+"Ma"
+
+posfix absent
+Posfix("Ma","rie")
+"Marie"
+
+posfix already present, don't duplicate
+Posfix("Marie","rie")
+"Marie"
+
+posfix with spaces, a clever regex
+Posfix("blue"," button")
+"blue button"
+
+posfix with spaces, a clever regex (present)
+Posfix("blue button"," button")
+"blue button"
+*/
 }
+
 Exfix=function(word,prefix,suffix){
 	if(!word)
 		var word="";
 	var suffix=suffix||prefix;
 	return Prefix(Posfix(word,suffix),prefix);
+/*
+different prefix and suffix
+Exfix("ok","(",")")
+"(ok)"
+
+same prefix and suffix
+Exfix("__","-")
+"-__-"
+*/
 }
+
 UnExfix=function(word,prefix,suffix,flags){
 	if(!word)
 		var word="";
 	var suffix=suffix||prefix;
 	return UnPrefix(UnPosfix(word,suffix,flags),prefix,flags);
+/*
+different prefix and suffix
+UnExfix("(ok)","(",")")
+"ok"
+
+same prefix and suffix
+UnExfix("-__-","-")
+"__"
+*/
 }
 
 Parenthise=function(word){
@@ -2343,10 +2463,36 @@ Posfixed=function(word,suffix){
 
 UnBeforfix=function(word,prefix,flags){
 	return UnFixer(word,prefix,"^.*","",flags);
+/*
+basic
+UnBeforfix("a#bc#d","#")
+"d"
+
+repeated
+UnBeforfix("a##bc##d","#")
+"d"
+
+long prefix
+UnBeforfix("somethingantiantiantiall","anti")
+"all"
+*/
 }
 
 UnAfterfix=function(word,suffix,flags){
 	return UnFixer(word,suffix,"",".*$",flags);
+/*
+basic
+UnAfterfix("a#bc#d","#")
+"a"
+
+repeated
+UnAfterfix("a##bc##d","#")
+"a"
+
+long prefix
+UnAfterfix("all is well well well something"," well")
+"all is"
+*/
 }
 
 Afterfix=function(word,posfix){
@@ -2364,6 +2510,15 @@ UnOverfix=function(word,posfix,flags){
 		return word;
 	var fin=UnBeforfix(word,posfix,flags);
 	return UnPosfix(UnPosfix(word,fin,flags),posfix,flags);
+/*
+basic
+UnOverfix("a#bc#d","#")
+"a#bc"
+
+repeated
+UnOverfix("a##bc##d","#")
+"a##bc"
+*/
 }
 
 Overfix=function(word,posfix){
@@ -2381,6 +2536,15 @@ UnUnderfix=function(word,prefix,flags){
 		return word;
 	var ini=UnAfterfix(word,prefix,flags);
 	return UnPrefix(UnPrefix(word,ini,flags),prefix,flags);
+/*
+basic
+UnUnderfix("a#bc#d","#")
+"bc#d"
+
+repeated
+UnUnderfix("a##bc##d","#")
+"bc##d"
+*/
 }
 
 Underfix=function(word,prefix){
@@ -2659,6 +2823,27 @@ PageProtocol=function(url){
 	if(!In(url,"://"))
 		return "";
 	return new URL(url).protocol;
+/*
+file:///
+PageProtocol("file:///D:/Robert/pedropsi.github.io/folder/guestbook.html")
+"file:"
+
+https://
+PageProtocol("https://pedropsi.github.io/folder/guestbook.html")
+"https:"
+
+file://
+PageProtocol("http://pedropsi.github.io/folder/guestbook.html")
+"http:"
+
+relative
+PageProtocol("folder/guestbook.html")
+""
+
+www yet relative
+PageProtocol("www.xxx.yyy")
+""
+*/
 }
 
 PageUnProtocol=function(url){
@@ -2666,6 +2851,27 @@ PageUnProtocol=function(url){
 	url=UnPrefix(url,PageProtocol(url));
 	url=UnPrefix(url,"/");
 	return url;
+/*
+file:///
+PageUnProtocol("file:///D:/Robert/pedropsi.github.io/folder/guestbook.html")
+"D:/Robert/pedropsi.github.io/folder/guestbook.html"
+
+https://
+PageUnProtocol("https://pedropsi.github.io/folder/guestbook.html")
+"pedropsi.github.io/folder/guestbook.html"
+
+http://
+PageUnProtocol("http://pedropsi.github.io/folder/guestbook.html")
+"pedropsi.github.io/folder/guestbook.html"
+
+relative
+PageUnProtocol("folder/guestbook.html")
+"folder/guestbook.html"
+
+www yet relative
+PageUnProtocol("www.xxx.yyy")
+"www.xxx.yyy"
+*/
 }
 
 //Relative pages don't have a domain and vice versa
@@ -2689,17 +2895,60 @@ PageDomain=function(url){
 		url=UnAfterfix(url,"/");
 	
 	return url;
+/*
+simple html
+PageDomain("https://pedropsi.github.io/guestbook.html")
+"pedropsi.github.io"
+
+buried file folder
+PageDomain("file://E:/Folder1/pedropsi.github.io/status.html")
+"pedropsi.github.io"
+
+earliest
+PageDomain("https://www.first.com/Folder1/pedropsi.github.io/status.html")
+"www.first.com"
+
+nothing but folders
+PageDomain("just/folders/and/folders")
+""
+
+a final file
+PageDomain("just/folders/and/a.file")
+""
+*/
 }
 
 
 PageFragment=function(url){
 	var url=DefaultURL(url);
 	return decodeURI(Afterfix(url,"#"));
+/*
+local tag
+PageFragment("file:///D:/Robert/pedropsi.github.io/folder/guestbook.html#one")
+"one"
+
+online tag
+PageFragment("http://pedropsi.github.io/folder/guestbook.html#one")
+"one"
+
+double chained tags
+PageFragment("folder/guestbook.html#one#more")
+"one#more"
+
+empty tag
+PageFragment("https://pedropsi.github.io/folder/guestbook.html#")
+""
+*/
 }
 
 PageUnFragment=function(url){
 	var url=DefaultURL(url);
 	return UnAfterfix(url,"#");
+/*
+strange tag
+PageUnFragment("https://pedropsi.github.io/gravirinth.html#$%F0%9F%93%B0%C2%BB")
+"https://pedropsi.github.io/gravirinth.html"
+*/
 }
 
 PageReFragment=function(url,fragment){
@@ -2715,6 +2964,15 @@ PageUnSearch=function(url){
 		if(fragment)
 			url=url+Prefix(fragment,"#");
 	return url;
+/*
+simple
+PageUnSearch("pedropsi.github.io/console.html?game=2")
+"pedropsi.github.io/console.html"
+
+with tag
+PageUnSearch("pedropsi.github.io/console.html?game=2&level=3#tag")
+"pedropsi.github.io/console.html#tag"
+*/
 }
 
 PageReSearch=function(url,searchstring){
@@ -2746,12 +3004,42 @@ PageRelativePath=function(url){//folder + file
 		url=UnBeforfix(url,domain);
 	
 	return UnPrefix(url,"/");
+/*
+convoluted folder structure
+PageRelativePath("file://E:/Folder1/pedropsi.github.io/important/status.html")
+"important/status.html"
+
+convoluted folder structure
+PageRelativeFolder("file://E:/Folder1/pedropsi.github.io/important/status.html")
+"important"
+
+already relative
+PageRelativePath("data/one/two/three.js")
+"data/one/two/three.js"
+
+relative with tag
+PageRelativePath("data/variables/a.ext#lol")
+"data/variables/a.ext"
+*/
 }
 
 PageFile=function(url){//file only
 	var url=DefaultURL(url);
 		url=PageRelativePath(url);
 	return UnBeforfix(url,"/");
+/*
+convoluted folder structure
+PageFile("file://E:/Folder1/pedropsi.github.io/important/status.html")
+"status.html"
+
+relative file
+PageFile("data/one/two/three.js")
+"three.js"
+
+relative with tag
+PageFile("data/variables/a.ext#lol")
+"a.ext"
+*/
 }
 
 PageRelativeFolder=function(url){//folder only
@@ -2792,6 +3080,51 @@ PageIdentifier=function(url){
 	var url=DefaultURL(url);
 	var identifier=PageSimpleIdentifier(url);
 	return identifier||"index";
+/*
+file:///
+PageIdentifier("file:///D:/Robert/pedropsi.github.io/folder/guestbook.html")
+"guestbook"
+
+https://
+PageIdentifier("https://pedropsi.github.io/folder/guestbook.html")
+"guestbook"
+
+http://
+PageIdentifier("http://pedropsi.github.io/folder/guestbook.html")
+"guestbook"
+
+relative
+PageIdentifier("folder/guestbook.html")
+"guestbook"
+
+http no subfolder
+PageIdentifier("http://www.xxx.yyy")
+"index"
+
+http subfolder
+PageIdentifier("http://www.xxx.yyy/great/greater.htm")
+"greater"
+
+http file in root folder
+PageIdentifier("http://www.xxx.yyy/greater.htm")
+"greater"
+
+psi file in root folder
+PageIdentifier("https://pedropsi.github.io/guestbook.html")
+"guestbook"
+
+UTF
+PageIdentifier("https://pedropsi.github.io/gravirinth.html#$%F0%9F%93%B0%C2%BB")
+"gravirinth"
+
+duplication of tag in title
+PageIdentifier("https://pedropsi.github.io/puzzlescript-games-database#puzzlescript")
+"puzzlescript-games-database"
+
+nothing but search
+PageIdentifier("https://pedropsi.github.io/?test=true")
+"index"
+*/
 }
 
 PageURL=function(url){
@@ -2821,6 +3154,27 @@ PageSearch=function(parameter,page){
 	if(id===l)
 		id="";
 	return decodeURI(id.replace(/\&.*/,""));
+/*
+present query string
+PageSearch("source","https://pedropsi.github.io/anypage.html?source=homepage")
+"homepage"
+
+duplicates, prefer last parameter)
+PageSearch("source","https://pedropsi.github.io/anypage.html?source=homepage&source=elsewhere")
+"elsewhere"
+
+no string (absent)
+PageSearch("source","https://pedropsi.github.io/anypage.html")
+""
+
+no wanted string (absent)
+PageSearch("source","https://pedropsi.github.io/anypage.html&y=z")
+""
+
+no wanted string (absent)
+PageSearch("source","https://pedropsi.github.io/puzzle-type?source=homepage&result=success")
+"homepage"
+*/
 }
 
 PageSearchParameters=function(page){
@@ -2842,6 +3196,15 @@ SearchParameters=function(searchString){
 // Safe string loading
 SafeString=function(tex){
 	return String(tex).replace(/[\<\>\=\+\-\(\)\*\'\"]/g,"");
+/*
+no dangers
+SafeString("abcd")
+"abcd"
+
+tame dangers
+SafeString("<script>a=1;b=2-3;function c(){return d}</script>")
+"scripta1;b23;function c{return d}/script"
+*/
 }
 
 SafeUrl=function(tex){
@@ -2852,18 +3215,57 @@ SafeUrl=function(tex){
 	if(In(tex,"http:"))
 		prefix="http://";
 	return Prefix(tex,prefix);
+/*
+don't enforce http:
+SafeUrl("http://google.com")
+"http://google.com"
+
+don't enforce http:
+SafeUrl("https://google.com")
+"https://google.com"
+
+script attempt
+SafeUrl("<script>tame(dangers)</script>")
+""
+*/
 }
 
 //SECONDARY
 
 RelativeLinked=function(url){
 	return PageRelativePath(url)===url;
+/*
+local
+RelativeLinked("file:///D:/Robert/pedropsi.github.io/folder/guestbook.html")
+false
+
+online
+RelativeLinked("http://pedropsi.github.io/folder/guestbook.html")
+false
+
+relative domain
+RelativeLinked("folder/guestbook.html")
+true
+*/
 }
 FileLinked=function(url){
 	return PageProtocol(url)==="file:";
 }
 LocalLinked=function(url){
 	return RelativeLinked(url)||FileLinked(url);
+/*
+local
+LocalLinked("file:///D:/Robert/pedropsi.github.io/folder/guestbook.html")
+true
+
+online
+LocalLinked("http://pedropsi.github.io/folder/guestbook.html")
+false
+
+relative domain
+LocalLinked("folder/guestbook.html")
+true
+*/
 }
 
 OwnLinked=function(url){
@@ -2889,6 +3291,30 @@ false
 InnerLinked=function(url){
 	return LocalLinked(url)||OwnLinked(url)||!PageDomain(url);
 /*
+local
+InnerLinked("file:///D:/Robert/pedropsi.github.io/folder/guestbook.html")
+true
+
+absolute domain
+InnerLinked("http://pedropsi.github.io/folder/guestbook.html")
+true
+
+relative domain
+InnerLinked("folder/guestbook.html")
+true
+
+online external www
+InnerLinked("www.xxx.yyy")
+false
+
+online external full http
+InnerLinked("http://www.xxx.yyyl")
+false
+
+from google
+InnerLinked("https://www.google.com/url?q=https%3A%2F%2Fpedropsi.github.io%2Fguestbook.html%23randomsomething")
+false
+
 Inner links with fragment
 InnerLinked("page.html#Section")
 true
@@ -7082,6 +7508,11 @@ SVGLinePairs=function(svgline){ //misses odd number off coords
 		pairs=pairs.map(pair=>pair.match(new RegExp(SVGNumberPattern,"g")));
 		pairs=pairs.map(pair=>pair.map(Number));
 	return pairs;
+/*
+make string pairs
+SVGLinePairs("M 1 2 3 4")
+[[1,2],[3,4]]
+*/
 }
 
 SVGLineApply=function(svgline,CoordinatesF){
@@ -7094,6 +7525,11 @@ SVGLineApply=function(svgline,CoordinatesF){
 		xyArray=xyArray.flat().join(" ");
 	}
 	return linetype+" "+xyArray+" ";
+/*
+modify numbers
+SVGLineApply("M 1 2 3 4",xy=>[xy[1],xy[0]])
+"M 2 1 4 3 "
+*/
 }
 
 SVGPathApply=function(path,CoordinatesF){
@@ -8116,7 +8552,6 @@ UnitTextUnitTest=function(unitText){
 		var expected=lines[2];
 		expected=expected.replace(/^(\s|\t|\n)?(Object|Array|function)(\s|\t|\n)?(\(\d+\))?/,"");
 		expected=eval("Identity("+expected+")");//prevents error with lone objects
-		Wnet(call);
 		return {
 			title:title,
 			call:call,
@@ -8130,6 +8565,9 @@ UnitTextUnitTest=function(unitText){
 	}
 }
 
+FunctionNameUnitTests=function(fname){
+	return FunctionUnitTests(window[fname]);
+}
 
 FunctionUnitTests=function(F){
 	return RollUnitTests(FunctionRoll(F));
@@ -8152,7 +8590,11 @@ UnitTestSave=function(unitObj){
 		UnitTests.push(callerName);
 	}
 
-	UnitTests[callerName][unitObj.call]=unitObj;
+	return UnitTests[callerName][unitObj.call]=unitObj;
+}
+
+UnitTestsCoverage=function(){
+	return PercentageText(UnitTests.functions.length/Introspect().length,2);
 }
 
 FunctionTestsSave=function(F){
@@ -8172,16 +8614,9 @@ RollSave=function(roll){
 	return RollUnitTests(roll).map(UnitTestSave);
 }
 
-SaveTestableFunctionsTests=function(){
-	var rolls=Rolls();
-	rolls.map(RollSave);
+RollsSave=function(){
+	return Rolls().map(RollSave);
 }
-
-
-
-
-
-
 
 
 
@@ -8191,13 +8626,10 @@ SaveTestableFunctionsTests=function(){
 
 TestingAreaSelector=".test-suite";
 
-TestFunction=function(callerName,testname){
-	var callerName=FunctionNamecode(callerName);
-
-	var unitObj=UnitTests[callerName][testname];
+UnitTestEvaluate=function(unitObj){
 	if(!unitObj)
 		return;
-
+	
 	var passed=false;
 	var result=null;
 	try{
@@ -8211,25 +8643,23 @@ TestFunction=function(callerName,testname){
 	unitObj.passed=passed;
 	unitObj.result=result;
 	
-	ReportTest(unitObj);
-
-	return passed;
+	return unitObj;
 }
 
-var ErrorReport=[];
 
-ReportTest=function(unitTest){
-	if(unitTest.passed)
-		return;
+UnitTestReportHTML=function(unitTest){
+	if(!unitTest)
+		return null;
 	
-	var callerName=unitTest.callerName;
+	if(unitTest.passed)
+		return "";
 
+	var callerName=unitTest.callerName;
 	var tID="test-"+callerName;
 	var header=`
 		<h3 class='test-function' id='${tID}'>
 			${callerName}
 		</h3>`;
-
 
 	if(!GetElement(tID))
 		AddElement(header,TestingAreaSelector);
@@ -8239,10 +8669,8 @@ ReportTest=function(unitTest){
 
 	if(unitTest.verifierName)
 		callresult=callresult+` (verified)`;
-	else{
+	else
 		expected="<p>Expected:<code>"+JSON.stringify(unitTest.expected)+"</code></p>"
-	}	
-		// Wbug(expected);
 	
 	var title=unitTest.title;
 	var label=LabelHTML("Failed","test Problem");
@@ -8261,27 +8689,27 @@ ReportTest=function(unitTest){
 			${expected}
 		</div>`;
 
-	ErrorReport.push([callerName,title]);
 	AppendElement(report,tID);
 }
 
-Test=function(callerName){
-	if(!callerName&&Test.functions){
-		AddElement("<p>Tests complete!</p>",TestingAreaSelector);
-		var tests=Test.functions.map(Test);
-		if(ErrorReport.length>0)
-			RegisterStatus(ErrorReport);
-		return tests;
-	}
+TestReportHTML=function(){
+	var functionNames=Introspect();
+	var unitTests=functionNames.map(FunctionNameUnitTests).filter(Length);
+	
+	var report=unitTests.flat().map(UnitTestEvaluate).map(UnitTestReportHTML).filter(Identity).join("");
+	
+	AddElement("<p>Tests complete!</p>",TestingAreaSelector);
 
-	var callerName=FunctionNamecode(callerName);
-	var tests=UnitTests[callerName];
+	var testedFunctionNames=unitTests.map(t=>First(t).callerName);
+	DynamicText("code-coverage-included",Enumerate(testedFunctionNames));
+	DynamicText("code-coverage-excluded",Enumerate(Complement(functionNames,testedFunctionNames)));
 
-	return Keys(tests).map(function(testname){TestFunction(callerName,testname)});
+	return report;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////
-//Introspection - lists all defined functions!
+//Introspection - lists all defined functions, and analyses them
 
 Introspect=function(){ 
 	if(!Introspect.list)
@@ -8323,7 +8751,7 @@ FunctionCalledFunctions=function(F){
 /*
 self-inspect
 FunctionCalledFunctions(FunctionCalledFunctions)
-["FunctionBody","match","RegExp","if","map","UnPosfix","DistinctArray"]
+["UnCommentCode","FunctionBody","match","RegExp","if","map","UnPosfix","DistinctArray"]
 */
 }
 
@@ -8339,118 +8767,6 @@ FunctionCalledDependents(FunctionCalledDependents)
 */
 }
 
-FunctionSourceTokens=function(F){
-	if(!F)
-		return [];
-
-	var separator="SecretSePaRaToR"; //must not be confoundable
-	var symbols=Tokens().split("").concat([" ","\n","\t","\r"]); //things to ignore
-
-	var tokens=StringReplace(F.toString(),symbols.map(t=>[t,separator])).split(separator);
-	tokens=tokens.filter(t=>t&&t[0].toLowerCase()!==t[0])
-	tokens=Complement(tokens,JavascriptFunctionNames);
-	
-	return tokens;
-}
-
-FunctionDirectDependencies=function(F){
-	var Fname=IsString(F)?F:FunctionName(F);
-	var F=IsString(F)?globalThis[F]:F;
-
-	if(!FunctionDirectDependencies.o)
-		FunctionDirectDependencies.o={};
-
-	var dependencies=FunctionDirectDependencies.o;
-
-	if(dependencies[Fname])
-		return dependencies[Fname];
-
-	return dependencies[Fname]=FunctionSourceTokens(F);
-}
-
-var FunctionDependents={};
-AddDependent=function(ascendent,dependent){
-	if(!FunctionDependents[ascendent])
-		FunctionDependents[ascendent]=[dependent];
-	else if(!In(FunctionDependents[ascendent],dependent))
-		FunctionDependents[ascendent].push(dependent);
-	
-	return FunctionDependents[ascendent];
-}
-
-FunctionDependencies=function(F){
-
-	var dependencies=FunctionDirectDependencies(F);
-	var newd=dependencies.map(FunctionDirectDependencies).flat();
-		newd=Complement(newd,dependencies);
-		dependencies=Union(newd,dependencies);
-	while(newd.length>0){
-		newd=newd.map(FunctionDirectDependencies).flat();
-		newd=Complement(newd,dependencies);
-		dependencies=Union(newd,dependencies);
-	}
-
-	var Fname=IsString(F)?F:FunctionName(F);
-	dependencies.map(d=>AddDependent(d,Fname))
-
-	if(FunctionDependencies[Fname])
-		return FunctionDependencies[Fname];
-
-	return FunctionDependencies[Fname]=dependencies;
-}
-
-FunctionImportance=function(F){
-	return FunctionDependencies(F).length;
-}
-
-CoreFunctionNames=[
-	"In","InString","InArrayOrObj",
-	"Capture",
-	"Union","Unique","Intersection",
-	"Equal","EqualFunction","EqualRegex",
-	"IsNan","IsArray",
-	"FunctionName","FunctionBody",
-	"IsObject","IsRegex","IsNode","IsDate",
-	"Apply",
-	"Memory","MemorySlot"
-]
-
-Capture=function(functionName){
-	if(In(CoreFunctionNames,functionName))
-		return;
-
-	if(!Capture["list"])
-		Capture["list"]=[];
-
-	Capture[functionName]=globalThis[functionName];
-	globalThis[functionName]=function(){
-		var args=Values(arguments);
-		Capture["list"].push(functionName);
-		Capture["list"]=Union(Capture["list"]);
-		globalThis[functionName]=Capture[functionName];
-		return Apply(globalThis[functionName],args);
-	}
-}
-
-UsedFunctions=function(){
-	if(!Capture["list"]){
-		Introspect().map(Capture);
-		return [];
-	}
-	else{
-		used=Capture["list"];
-		if(!Memory("UsedFunctions"))
-			Memory("UsedFunctions",used)
-		else
-			Memory("UsedFunctions",Union(Memory("UsedFunctions"),used));
-
-		return Memory("UsedFunctions");
-	}
-}
-
-UnusedFunctions=function(){
-	return Complement(Complement(Introspect(),UsedFunctions()),CoreFunctionNames);
-}
 
 //Node mass exporter (one-liner)
 ExportFunction=function(name){

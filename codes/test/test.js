@@ -1,17 +1,10 @@
-/*
-function EnableTestMode(){
-	LoadAsync("test-behaviour","codes");
-}
-*/
-
-
 
 SaveTest=function(F,argArray,expected,testname,VerifierF){
 	var callerName=FunctionNamecode(F);
 	var argArray=IsArray(argArray)?argArray:[argArray];
 	var call=callerName+JSON.stringify(argArray).replace(/^\[/,"(").replace(/\]$/,")")
 
-	SaveUnitTest({
+	UnitTestSave({
 		title:testname,
 		call:call,
 		callerName:callerName,
@@ -20,25 +13,7 @@ SaveTest=function(F,argArray,expected,testname,VerifierF){
 	})
 }
 
-SaveTestableFunctionsTests()
-
-///////////////////////////////////////////////////////////////////////////////
-//Do nothing
-
-
-
-SaveTest(True,true,true,"boolean - true");
-SaveTest(True,false,true,"boolean -false");
-SaveTest(True,[undefined],true,"no arguments (undefined)");
-SaveTest(True,[["a","b","c","d"]],true,"list");
-SaveTest(True,function(){return false},true,"function");
-
-SaveTest(False,true,false,"boolean - true");
-SaveTest(False,false,false,"boolean -false");
-SaveTest(False,[undefined],false,"no arguments (undefined)");
-SaveTest(False,[["a","b","c","d"]],false,"list");
-SaveTest(False,function(){return false},false,"function");
-
+//SaveTestableFunctionsTests()
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -186,7 +161,6 @@ SaveTest(In,["","a"],false,"in empty string");
 SaveTest(In,["abcd","a"],true,"matching");
 SaveTest(In,["abcd","e"],false,"non-matching");
 SaveTest(In,["abcd","A"],false,"case-sensitive");
-
 SaveTest(In,[[["b"]],["b"]],true,"deep array, present");
 
 SaveTest(Subsetted,[{A:1},{B:2}],false,"non-overlapping")
@@ -304,51 +278,6 @@ SaveTest(Capitalise,"marie","Marie","simple");
 SaveTest(Capitalise,"Marie","Marie","already capitalised");
 SaveTest(Capitalise,"mARIE","Marie","inversely capitalised");
 
-SaveTest(Prefix,["rie"],"rie","no prefix");
-SaveTest(Prefix,["rie",""],"rie","empty prefix");
-SaveTest(Prefix,["","Ma"],"Ma","no name, just prefix");
-SaveTest(Prefix,["rie","Ma"],"Marie","prefix absent");
-SaveTest(Prefix,["Marie","Ma"],"Marie","prefix already present, don't duplicate");
-
-SaveTest(Posfix,["rie"],"rie","no posfix");
-SaveTest(Posfix,["rie",""],"rie","empty posfix");
-SaveTest(Posfix,["","Ma"],"Ma","no name, just posfix");
-SaveTest(Posfix,["Ma","rie"],"Marie","posfix absent");
-SaveTest(Posfix,["Marie","rie"],"Marie","posfix already present, don't duplicate");
-
-SaveTest(Posfix,["blue"," button"],"blue button","posfix with spaces, a clever regex");
-SaveTest(Posfix,["blue button"," button"],"blue button","posfix with spaces, a clever regex (present)");
-
-
-SaveTest(UnPosfix,["song.mp3",[".mp3",".wav"]],"song","multiple terminations, one");
-SaveTest(UnPosfix,["song.mp3.wav",[".mp3",".wav"]],"song","multiple terminations, many");
-SaveTest(UnPosfix,["song.wav.mp3",[".mp3",".wav"]],"song","multiple terminations, many reverse ordered");
-SaveTest(UnPosfix,["song.mp3",[]],"song.mp3","empty suffix list");
-
-SaveTest(UnPrefix,["antiantiantiall","anti"],"all","repeated prefix");
-SaveTest(UnPosfix,["all is well well well"," well"],"all is","repeated end, also spaces");
-
-SaveTest(Exfix,["ok","(",")"],"(ok)","different prefix and suffix");
-SaveTest(Exfix,["__","-"],"-__-","same prefix and suffix");
-
-SaveTest(UnExfix,["(ok)","(",")"],"ok","different prefix and suffix");
-SaveTest(UnExfix,["-__-","-"],"__","same prefix and suffix");
-
-
-SaveTest(UnOverfix,["a#bc#d","#"],"a#bc","basic"),
-SaveTest(UnUnderfix,["a#bc#d","#"],"bc#d","basic"),
-SaveTest(UnAfterfix,["a#bc#d","#"],"a","basic"),
-SaveTest(UnBeforfix,["a#bc#d","#"],"d","basic"),
-
-SaveTest(UnOverfix,["a##bc##d","#"],"a##bc","repeated"),
-SaveTest(UnUnderfix,["a##bc##d","#"],"bc##d","repeated"),
-SaveTest(UnAfterfix,["a##bc##d","#"],"a","repeated"),
-SaveTest(UnBeforfix,["a##bc##d","#"],"d","repeated"),
-
-SaveTest(UnBeforfix,["somethingantiantiantiall","anti"],"all","long prefix");
-SaveTest(UnAfterfix,["all is well well well something"," well"],"all is","long prefix");
-
-
 
 
 SaveTest(Parenthise,"ok","(ok)","parenthesis absent");
@@ -366,122 +295,5 @@ SaveTest(PadLeft,["hi","-_","0"],"hi","zero");
 SaveTest(PadLeft,["hi","","8"],"hi","nosymbol");
 
 
-///////////////////////////////////////////////////////////////////////////////
-//Regex
 
-///////////////////////////////////////////////////////////////////////////////
-//URL MANIPULATION
-
-SaveTest(PageProtocol,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html","file:","file:///");
-SaveTest(PageProtocol,"https://pedropsi.github.io/folder/guestbook.html","https:","https://");
-SaveTest(PageProtocol,"http://pedropsi.github.io/folder/guestbook.html","http:","file://");
-SaveTest(PageProtocol,"folder/guestbook.html","","relative");
-SaveTest(PageProtocol,"www.xxx.yyy","","www yet relative");
-
-SaveTest(PageUnProtocol,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html","D:/Robert/pedropsi.github.io/folder/guestbook.html","file:///");
-SaveTest(PageUnProtocol,"https://pedropsi.github.io/folder/guestbook.html","pedropsi.github.io/folder/guestbook.html","https://");
-SaveTest(PageUnProtocol,"http://pedropsi.github.io/folder/guestbook.html","pedropsi.github.io/folder/guestbook.html","http://");
-SaveTest(PageUnProtocol,"folder/guestbook.html","folder/guestbook.html","relative");
-SaveTest(PageUnProtocol,"www.xxx.yyy","www.xxx.yyy","www yet relative");
-
-
-SaveTest(PageFragment,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html#one","one","local tag");
-SaveTest(PageFragment,"http://pedropsi.github.io/folder/guestbook.html#one","one","online tag");
-SaveTest(PageFragment,"folder/guestbook.html#one#more","one#more","double chained tags");
-SaveTest(PageFragment,"https://pedropsi.github.io/folder/guestbook.html#","","empty tag");
-
-SaveTest(PageUnFragment,"https://pedropsi.github.io/gravirinth.html#$%F0%9F%93%B0%C2%BB","https://pedropsi.github.io/gravirinth.html","strange tag");
-
-SaveTest(PageIdentifier,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html","guestbook","file:///");
-SaveTest(PageIdentifier,"https://pedropsi.github.io/folder/guestbook.html","guestbook","https://");
-SaveTest(PageIdentifier,"http://pedropsi.github.io/folder/guestbook.html","guestbook","http://");
-SaveTest(PageIdentifier,"folder/guestbook.html","guestbook","relative");
-SaveTest(PageIdentifier,"http://www.xxx.yyy","index","http no subfolder");
-SaveTest(PageIdentifier,"http://www.xxx.yyy/great/greater.htm","greater","http subfolder");
-SaveTest(PageIdentifier,"http://www.xxx.yyy/greater.htm","greater","http file in root folder");
-SaveTest(PageIdentifier,"https://pedropsi.github.io/guestbook.html","guestbook","psi file in root folder");
-SaveTest(PageIdentifier,"https://pedropsi.github.io/gravirinth.html#$%F0%9F%93%B0%C2%BB","gravirinth","UTF");
-SaveTest(PageIdentifier,"https://pedropsi.github.io/puzzlescript-games-database#puzzlescript","puzzlescript-games-database","duplication of tag in title");
-SaveTest(PageIdentifier,"https://pedropsi.github.io/?test=true","index","nothing but search");
-
-SaveTest(PageDomain,"https://pedropsi.github.io/guestbook.html","pedropsi.github.io","simple html");
-SaveTest(PageDomain,"file://E:/Folder1/pedropsi.github.io/status.html","pedropsi.github.io","buried file folder");
-SaveTest(PageDomain,"https://www.first.com/Folder1/pedropsi.github.io/status.html","www.first.com","earliest");
-SaveTest(PageDomain,"just/folders/and/folders","","nothing but folders");
-SaveTest(PageDomain,"just/folders/and/a.file","","a final file");
-
-
-SaveTest(PageRelativePath,"file://E:/Folder1/pedropsi.github.io/important/status.html","important/status.html","convoluted folder structure");
-SaveTest(PageRelativeFolder,"file://E:/Folder1/pedropsi.github.io/important/status.html","important","convoluted folder structure");
-SaveTest(PageFile,"file://E:/Folder1/pedropsi.github.io/important/status.html","status.html","convoluted folder structure");
-
-SaveTest(PageRelativePath,"data/one/two/three.js","data/one/two/three.js","already relative");
-SaveTest(PageFile,"data/one/two/three.js","three.js","relative file");
-
-SaveTest(PageRelativePath,"data/variables/a.ext#lol","data/variables/a.ext","relative with tag");
-SaveTest(PageFile,"data/variables/a.ext#lol","a.ext", "relative with tag");
-
-SaveTest(PageUnSearch,"pedropsi.github.io/console.html?game=2","pedropsi.github.io/console.html","simple");
-SaveTest(PageUnSearch,"pedropsi.github.io/console.html?game=2&level=3#tag","pedropsi.github.io/console.html#tag","with tag");
-
-
-
-SaveTest(RelativeLinked,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html",false,"local");
-SaveTest(RelativeLinked,"http://pedropsi.github.io/folder/guestbook.html",false,"online");
-SaveTest(RelativeLinked,"folder/guestbook.html",true,"relative domain");
-
-SaveTest(LocalLinked,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html",true,"local");
-SaveTest(LocalLinked,"http://pedropsi.github.io/folder/guestbook.html",false,"online");
-SaveTest(LocalLinked,"folder/guestbook.html",true,"relative domain");
-
-SaveTest(InnerLinked,"file:///D:/Robert/pedropsi.github.io/folder/guestbook.html",true,"local");
-SaveTest(InnerLinked,"http://pedropsi.github.io/folder/guestbook.html",true,"absolute domain");
-SaveTest(InnerLinked,"folder/guestbook.html",true,"relative domain");
-SaveTest(InnerLinked,"www.xxx.yyy",false,"online external www");
-SaveTest(InnerLinked,"http://www.xxx.yyyl",false,"online external full http");
-SaveTest(InnerLinked,"https://www.google.com/url?q=https%3A%2F%2Fpedropsi.github.io%2Fguestbook.html%23randomsomething",false,"from google");
-
-SaveTest(PageSearch,["source","https://pedropsi.github.io/anypage.html?source=homepage"],"homepage","present query string");
-SaveTest(PageSearch,["source","https://pedropsi.github.io/anypage.html?source=homepage&source=elsewhere"],"elsewhere","duplicates, prefer last parameter)");
-SaveTest(PageSearch,["source","https://pedropsi.github.io/anypage.html"],"","no string (absent)");
-SaveTest(PageSearch,["source","https://pedropsi.github.io/anypage.html&y=z"],"","no wanted string (absent)");
-SaveTest(PageSearch,["source","https://pedropsi.github.io/puzzle-type?source=homepage&result=success"],"homepage","no wanted string (absent)");
-
-
-
-///////////////////////////////////////////////////////////////////////////////
-//Page auto index
-SaveTest(KebabCaseString,"How to play","How-to-play","simple text");
-SaveTest(KebabCaseString,"#How to play","How-to-play","starting hashtag removed");
-SaveTest(KebabCaseString,"     How      to    play      ","How-to-play","trailing spaces, multiple spaces");
-SaveTest(KebabCaseString,"|!\/!How\"#$%&/()=@£§€{[]}'to+*¨¨´´``~~-playçãôÒÌ","How-to-play","symbol mash");
-
-
-
-//////////////////////////////////////////////////
-// Safe string loading
-
-SaveTest(SafeString,"abcd","abcd","no dangers")
-SaveTest(SafeString,"<script>a=1;b=2-3;function c(){return d}</script>","scripta1;b23;function c{return d}/script","tame dangers")
-
-
-SaveTest(SafeUrl,"http://google.com","http://google.com","don't enforce http:");
-SaveTest(SafeUrl,"https://google.com","https://google.com","don't enforce http:");
-SaveTest(SafeUrl,"<script>tame(dangers)</script>","","script attempt")
-
-
-///////////////////////////////////////////////////////////////////////////////
-//Run Tests only after loading the external resources below
-//ListenOnce("TestReady",Test);
-
-
-///////////////////////////////////////////////////////////////////////////////
-CodeCoverage=function(){
-	return PercentageText(Test.functions.length/Introspect().length,2);
-}
-
-DynamicText("code-coverage",CodeCoverage());
-DynamicText("code-coverage-included",Enumerate(Test.functions));
-DynamicText("code-coverage-excluded",Enumerate(Complement(Introspect(),Test.functions)));
-
-Test()
+TestReportHTML()
