@@ -1943,9 +1943,13 @@ Fold(Plus,1,[])
 // Fixed point
 FixedPoint=function(F,x){
 	var i=x;
-	while(!Equal(i,F(i))){
+	var j=100;
+	while(!Equal(i,F(i))&&j>0){
+		j--;
 		i=F(i);
 	}
+	if(j<=0)
+		Warn("Iteration  limit exceeded. Result:",i);
 	return i;
 
 /*
