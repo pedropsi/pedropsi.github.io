@@ -86,7 +86,7 @@ function ExtractText(file){
 // 	}
 // 	fs.readdir(DIR,FilenameMapper(UpdateSearchDatabase,True));
 	
-// 	setTimeout(()=>fs.writeFileSync(DIR+"data/search.js","var SearchDatabase="+EnString(Database),function(err){if(err)saved=false}),5000);
+// 	setTimeout(()=>fs.writeFileSync(DIR+"data/search.js","var SearchDatabase="+ReString(Database),function(err){if(err)saved=false}),5000);
 // 	console.log(">>>>> exporting search database in 5 secs");
 // }
 

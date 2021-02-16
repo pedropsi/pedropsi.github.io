@@ -162,18 +162,18 @@ function Colour(colour){
 		if(typeof c==="string"){
 			c=c.toLowerCase();
 			if(c.replace("rgb","")!==c)
-				return {space:'RGB',colour:CompelRGB(ColourExtract(c))};
+				return {space:'RGB',colour:ReRGB(ColourExtract(c))};
 			else if(c.replace("hsl","")!==c){
-				return {space:'HSL',colour:CompelHSL(ColourExtract(c))};
+				return {space:'HSL',colour:ReHSL(ColourExtract(c))};
 			}else
-				return {space:'HEX',colour:CompelHEX(c)};
+				return {space:'HEX',colour:ReHEX(c)};
 		}
 		else if(typeof c==="object"){
 			c.push[0];c.push[0];c.push[0];
 			if(c[0]>=0&&c[1]>=0&&c[2]>=0&&c[0]<360&&c[1]<=1&&c[2]<=1)
-				return {space:'HSL',colour:CompelHSL(c)};
+				return {space:'HSL',colour:ReHSL(c)};
 			else
-				return {space:'RGB',colour:CompelRGB(c)};
+				return {space:'RGB',colour:ReRGB(c)};
 		} 
 		return {space:'RGB',colour:[0,0,0]};			
 	}
@@ -181,7 +181,7 @@ function Colour(colour){
 		return colour;
 }
 
-function CompelHEX(hexstring){
+function ReHEX(hexstring){
 	var hexstring=hexstring.replace("#","");
 	if(hexstring.length===0){
 		return "#000000";
@@ -200,7 +200,7 @@ function CompelHEX(hexstring){
 	return "#"+hexstring;
 }
 
-function CompelRGB(rgbarray){
+function ReRGB(rgbarray){
 	var rgbarray=rgbarray;
 	if(rgbarray.length===3){
 		function RBGBind(n){return Max(Min(n,255.999999999),0);};
@@ -208,11 +208,11 @@ function CompelRGB(rgbarray){
 	}
 	else{
 		rgbarray.push(0);rgbarray.push(0);rgbarray.push(0);
-		return CompelRGB(rgbarray.slice(0,3));
+		return ReRGB(rgbarray.slice(0,3));
 	}
 }
 
-function CompelHSL(rgbarray){
+function ReHSL(rgbarray){
 	var rgbarray=rgbarray;
 	if(rgbarray.length===3){
 		rgbarray[0]=Max(Min(rgbarray[0],359.999999999),0);
@@ -222,7 +222,7 @@ function CompelHSL(rgbarray){
 	}
 	else{
 		rgbarray.push(0);rgbarray.push(0);rgbarray.push(0);
-		return CompelRGB(rgbarray.slice(0,3));
+		return ReRGB(rgbarray.slice(0,3));
 	}
 }
 
@@ -453,7 +453,7 @@ var HEXHuer=Hexer(HueTo);
 ////////////////////////////////////////////////////////////////////////////////
 //RGBA
 
-function CompelRGBA(colour,opacity){
+function ReRGBA(colour,opacity){
 	var rgb=RGB(Colour(colour)).colour;
 	if(typeof opacity==="undefined")
 		var opacity=1;

@@ -970,7 +970,7 @@ IsDate=function(n){
 }
 
 
-EnArray=function(a){
+ReArray=function(a){
 	if(typeof a==="undefined")
 		return []
 	else if(IsArray(a))
@@ -979,14 +979,32 @@ EnArray=function(a){
 		return [a];
 }
 
-EnString=function(a){
+ReString=function(a){
 	if(IsString(a))
 		return `'${a}'`;
 	if(IsArray(a))
-		return `[${a.map(EnString).join(",")}]`;
+		return `[${a.map(ReString).join(",")}]`;
 	if(IsObject(a))
-		return `{${ThreadKeysValues(a,(k,v)=>(EnString(k)+":"+EnString(v))).join(",")}}`;
+		return `{${ThreadKeysValues(a,(k,v)=>(ReString(k)+":"+ReString(v))).join(",")}}`;
 	return String(a);
+
+/*
+string of string
+ReString("1")
+"'1'"
+
+array with string
+ReString(["1",1])
+"['1',1]"
+
+object with string
+ReString({a:"1","b":1})
+"{'a':'1','b':1}"
+
+Nans
+ReString(NaN)
+"NaN";
+*/
 }
 
 //Apply function to Array or Object
@@ -1168,6 +1186,19 @@ TreeKeys({a:1,b:{c:3}},"»»")
 
 ThreadKeysValues=function(Obj,KeyValuer){
 	return Keys(Obj).map(k=>KeyValuer(k,Obj[k]));
+/*
+list keys
+ThreadKeysValues({a:1,b:2},(a,b)=>b)
+[1,2]
+
+list values
+ThreadKeysValues({a:1,b:2},(a,b)=>a)
+["a","b"]
+
+combine keys and values
+ThreadKeysValues({a:1,b:2},(a,b)=>a+b)
+["a1","b2"]
+*/
 }
 
 
@@ -6872,7 +6903,7 @@ SymbolIcon=function(name){
 
 BuildSymbolIcon=function(symbolObj){
 	var symbolObj=Clone(symbolObj);
-	var primitives=symbolObj.primitive?EnArray(symbolObj.primitive).map(SymbolIcon):[];
+	var primitives=symbolObj.primitive?ReArray(symbolObj.primitive).map(SymbolIcon):[];
 		delete symbolObj["primitive"];
 	
 	symbolObj=ComposeSymbols(symbolObj,primitives);
@@ -7172,7 +7203,7 @@ var KeyExplanations={
 
 KB=function(string,opts){
 	var opts=opts||{};
-	var options=LowerAccesser(MultimediaKeys,EnArray)(string);
+	var options=LowerAccesser(MultimediaKeys,ReArray)(string);
 	return Enumerate(options.map(o=>KBDHTML(o,opts)),"or");
 }
 
@@ -7970,7 +8001,7 @@ ReportTest=function(unitTest){
 	if(!GetElement(tID))
 		AddElement(header,TestingAreaSelector);
 
-	var callresult=`${unitTest.call}===${EnString(unitTest.result)}`;
+	var callresult=`${unitTest.call}===${ReString(unitTest.result)}`;
 	var expected="";
 
 	if(unitTest.verifierName)

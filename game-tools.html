@@ -68,8 +68,8 @@ ToolRow=function(name,item){
 	return [titleHTML,authorHTML,year,tags,description];
 },
 ToolsHTML=function(caption,include,exclude){
-	var include=EnArray(include).map(LowerSimpleString);
-	var exclude=EnArray(exclude).map(LowerSimpleString);
+	var include=ReArray(include).map(LowerSimpleString);
+	var exclude=ReArray(exclude).map(LowerSimpleString);
 	
 	var rows=FilterValuesObject(Data,function(item){
 			var tags=item.tags.map(LowerSimpleString);

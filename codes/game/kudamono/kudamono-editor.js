@@ -754,7 +754,7 @@ TrackStyles=function(track,state,styles,errors){
 	if(state.visuals.monochrome)
 		colour=HEXSaturater(0)(styles.colour);
 	
-	colour=CompelRGBA(colour,opacity);
+	colour=ReRGBA(colour,opacity);
 	
 	styles.strokeColor=colour;
 	styles.dash=dash;
@@ -1375,7 +1375,7 @@ CursorDraw=function(state){
 					
 		opts.fill=Icons[name].colour;
 		if(state.visuals.monochrome){
-			opts.fill=CompelRGBA(HEXSaturater(0)(Icons[name].colour));
+			opts.fill=ReRGBA(HEXSaturater(0)(Icons[name].colour));
 		}
 	}
 	opts.width=state.visuals.cursorsize||80;

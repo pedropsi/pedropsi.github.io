@@ -24,10 +24,7 @@ SaveTest(False,[undefined],false,"no arguments (undefined)");
 SaveTest(False,[["a","b","c","d"]],false,"list");
 SaveTest(False,function(){return false},false,"function");
 
-SaveTest(EnString,"1","'1'","string of string");
-SaveTest(EnString,["1",1],"['1',1]","array with string");
-SaveTest(EnString,{a:"1","b":1},"{'a':'1','b':1}","object with string");
-SaveTest(EnString,NaN,"NaN","NaN");
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Deep equality testing
@@ -152,10 +149,6 @@ SaveTest(FlipKeysValues,{a:"A",b:"B"},{"A":"a","B":"b"},"simple flip");
 SaveTest(FlipKeysValues,{a:1,b:2,c:3,d:4},{"1":"a","2":"b","3":"c","4":"d"},"numeric values to string");
 SaveTest(FlipKeysValues,{},{},"empty object");
 
-//PushKeys
-SaveTest(ThreadKeysValues,[{a:1,b:2},(a,b)=>b],[1,2],"list keys");
-SaveTest(ThreadKeysValues,[{a:1,b:2},(a,b)=>a],["a","b"],"list values");
-SaveTest(ThreadKeysValues,[{a:1,b:2},(a,b)=>a+b],["a1","b2"],"combine keys and values");
 
 
 //Update Object Keys
