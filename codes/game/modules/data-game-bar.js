@@ -259,7 +259,7 @@ function GameBarCancelTypewriterBanner(action){
 function GameBarButtonHTML(action,attribs){
 	var TWB=GameBarTypewriterBanner(action);
 	var UnTWB=GameBarCancelTypewriterBanner(action);
-	return ButtonHTML(FuseObjects(attribs,{
+	return ButtonHTML(Merge(attribs,{
 			txt:ObtainSymbol(action),
 			onmouseover:TWB,
 			onfocus:TWB,

@@ -370,7 +370,7 @@ Outflows=function(name){
 		
 			delete data['year'];
 		
-			return FuseObjects(data,Outflows("PGD_default"));
+			return Merge(data,Outflows("PGD_default"));
 			},
 		"won":function(){return{
 			post:true,
@@ -523,7 +523,7 @@ RequestGameFeedback=function(){
 		qdisplay:LaunchBalloon,
 		qonsubmit:RecordAndLaunchThanksBalloon,
 		qonclose:FocusAndResetFunction(RequestGameFeedback,GameFocus),
-		shortcutExtras:FuseObjects(ObtainKeyActionsGameBar?ObtainKeyActionsGameBar():{},{"E":CloseFeedback}),
+		shortcutExtras:Merge(ObtainKeyActionsGameBar?ObtainKeyActionsGameBar():{},{"E":CloseFeedback}),
 		thanksmessage:"★ Thank you for your feedback! ★",
 		buttonSelector:"FeedbackButton",
 		shortcutTarget:"FeedbackWindow"

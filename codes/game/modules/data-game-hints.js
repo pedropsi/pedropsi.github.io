@@ -409,7 +409,7 @@ function RequestHint(){
 		qdisplay:LaunchBalloon,
 		qtargetid:".game-container",
 		requireConnection:false,
-		shortcutExtras:FuseObjects(ObtainKeyActionsGameBar(),{"H":CloseHint}),
+		shortcutExtras:Merge(ObtainKeyActionsGameBar(),{"H":CloseHint}),
 		buttonSelector:"HintButton",
 		shortcutTarget:"HintWindow",
 		spotlight:gameSelector

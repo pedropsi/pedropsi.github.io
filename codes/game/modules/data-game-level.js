@@ -303,12 +303,12 @@ function RequestLevelSelector(){
 	var DPOpts=ObtainLevelSelectorOptions();
 	
 	//Add dialing shortcuts
-	var LevelSelectorShortcuts=FuseObjects(ObtainKeyActionsGameBar(),{});
+	var LevelSelectorShortcuts=Merge(ObtainKeyActionsGameBar(),{});
 		AlphanumericCharacters.map(function(C){LevelSelectorShortcuts[C]=function(){DialFocus(C)}});
 		LevelSelectorShortcuts[ObtainMainKey("levelselector")]=CloseLevelSelector;
 	
 	RequestDataPack([
-			['exclusivechoice',FuseObjects(DPOpts,{
+			['exclusivechoice',Merge(DPOpts,{
 				qsubmittable:false,
 				qfield:"level",
 				qclass:"level-selector",

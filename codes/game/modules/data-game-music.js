@@ -21,7 +21,7 @@ LoadSound=function(soundpath,data,id,parentElement){
 
 LS=function(soundobject,id,parentElement){
 	var src=soundobject.src;
-	var opts=FuseObjects(soundobject,{});
+	var opts=Merge(soundobject,{});
 	delete opts.src;
 	LoadSound(src,opts,id,parentElement);
 };

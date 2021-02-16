@@ -54,7 +54,7 @@ function EchoHint(lvl,hintN){
 }
 
 function EchoLevelClose(curlevel){
-	var leveldata=FuseObjects(UpdateLevelData(curlevel),{
+	var leveldata=Merge(UpdateLevelData(curlevel),{
 		"winsequence":"-",
 		"type":"close"});
 	EchoLevelData(leveldata);
@@ -88,7 +88,7 @@ function LevelData(){
 var leveldataURL="https://script.google.com/macros/s/AKfycbwuyyGb7XP7H91GH_8tZrXh6y_fjbZg4vSxl6S8xvAAEdyoIHcS/exec";
 
 function UpdateLevelData(lvl){
-	return FuseObjects(LevelData(),{
+	return Merge(LevelData(),{
 		"timing":LevelTime(),//Math.floor(ms.reduce(function(x,y){return (x+y[1])},0)/1000),
 		"level":LevelNumber(LevelScreen(lvl)),
 		"moves":JSON.stringify(RegisterMove.moveseq),
@@ -177,7 +177,7 @@ function CurCheckpointString(){
 }
 
 function UpdateLevelCheckpointData(curlevel){
-	return FuseObjects(UpdateLevelData(curlevel),{
+	return Merge(UpdateLevelData(curlevel),{
 		"type":"checkpoint",
 		"level":CheckpointString(curlevel,curcheckpoint+1)
 	});
@@ -185,7 +185,7 @@ function UpdateLevelCheckpointData(curlevel){
 
 //Hint
 function UpdateHintData(lvl,hintN){
-	return FuseObjects(LevelData(),{
+	return Merge(LevelData(),{
 		"type":"hint",
 		"level":lvl,
 		"timing":LevelTime(),
@@ -195,7 +195,7 @@ function UpdateHintData(lvl,hintN){
 
 //Select
 function UpdateSelectData(lvlch,type){
-	return FuseObjects(LevelData(),{
+	return Merge(LevelData(),{
 		"type":"goto-"+type,
 		"level":(type==="checkpoint")?CheckpointString(curlevel,lvlch):lvlch,
 		"timing":LevelTime()

@@ -1666,7 +1666,43 @@ MergeEvaluateObject({a:1,b:2,c:{d:3}},{a:x=>x+1,c:{d:x=>2*x}})
 {a:2,b:2,c:{d:6}}
 */
 }
+//Fuses objects, and any contained strings
+FuseObjects=function(O1,O2){
+	var O=Clone(O1);
+	Keys(O2).map(
+		function(k){
+			if(typeof O1[k]!=="undefined")
+				O[k]=BiFuse(O1[k],O2[k]);
+			else
+				O[k]=O2[k] //overwrites if fusing impossible
+		}
+	)
+	return O;
+}
 
+BiFuse=function(AO1,AO2){
+	if(typeof AO1==="undefined"&&typeof AO2==="undefined")
+		return {};
+	if(typeof AO2==="undefined")
+		return AO1;
+	if(typeof AO1==="undefined")
+		return AO2;
+	if(IsString(AO1)&&IsString(AO2))
+		return AO1+AO2;
+	if(IsObject(AO1)&&IsObject(AO2))
+		return FuseObjects(AO1,AO2);
+	else
+		return AO2; //overwrites if merging impossible
+
+/*
+object with key
+BiFuse({a:"a",b:2},{a:"3"})
+{a:"a3",b:2}
+
+*/
+}
+
+Fuse=ArgumentExtender(BiFuse);
 
 //Permutations of a set (enforces uniqueness or sort)
 // Permutations=function(array){
@@ -1986,17 +2022,6 @@ ItemPrecedents("a",{a:"b",b:"c",c:"a"})
 
 ///////////////////////////////////////////////////////////////////////////////
 //Join Objects, overwriting conflicting properties
-BiFuseObjects=function(obj,newObj){
-	var O={};
-	function SetValueKey(value,key){O[key]=value};
-	if(obj)
-		MapObject(obj,SetValueKey);
-	if(newObj)
-		MapObject(newObj,SetValueKey);
-	return O;
-}
-
-FuseObjects=ArgumentExtender(BiFuseObjects);
 
 CloneObject=function(Obj){
 	var O={};
@@ -4554,14 +4579,14 @@ ButtonHTML=function(attribs){
 		//Pulse
 	}
 	var joinableAttribs={
-		class:"button selectable underborderable ",
-		onclick:"PulseSelect(this); "
+		class:" button selectable underborderable ",
+		onclick:" PulseSelect(this); "
 	}
 	if(attribs.href){
 		joinableAttribs.onclick+=`Navigate("${attribs.href}")`;
 		delete joinableAttribs["href"];
 	}
-	var mergedAttribs=Join(joinableAttribs,Merge(overwritableAttribs,attribs));
+	var mergedAttribs=Fuse(joinableAttribs,Merge(overwritableAttribs,attribs));
 	return ElementHTML(mergedAttribs);
 };
 
@@ -4960,12 +4985,12 @@ CustomDataField=function(type,obj){
 	var DF=DefaultDataField();
 	var dataFieldTypes=DataFieldTypes();
 	if(In(dataFieldTypes,type))
-		DF=FuseObjects(DF,dataFieldTypes[type]);
-	return FuseObjects(DF,obj);
+		DF=Merge(DF,dataFieldTypes[type]);
+	return Merge(DF,obj);
 }
 
 UpdateDataPack=function(DP,obj){
-	return FuseObjects(DP,obj);
+	return Merge(DP,obj);
 }
 
 NewDataPack=function(obj){
@@ -5033,7 +5058,7 @@ PlainHTML=function(dataField){
 
 ExclusiveChoiceButtonHTML=function(choice,dataField,i){
 	var args='(\"'+dataField.qfield+'\",\"'+choice+'\",\"'+dataField.pid+'\");';
-	var SetF='SetData'+args;
+	var SetF=' SetData'+args;
 	var ExecuteF='ExecuteChoice'+args;
 	var SelectF='ToggleThisOnly(event,this,'+dataField.pid+');'+SetF;
 
@@ -5046,7 +5071,8 @@ ExclusiveChoiceButtonHTML=function(choice,dataField,i){
 		id:"choice-"+choice};
 
 	if(dataField.defaultChoice(i,choice)){
-		buAttribs=FuseObjects(buAttribs,{class:"selected",onload:SetF});
+		buAttribs.class=" selected";
+		buAttribs.onload=SetF;
 		SetData(dataField.qfield,choice,dataField.pid);//Actualy choose it
 	}
 	buAttribs.txt=dataField.qchoicesViewF(choice);

@@ -19,7 +19,7 @@ DataUnit=function(datatype){
 	var type=datatype.toLowerCase();
 	var headers=dataHeaders[type];
 	if(headers)
-		return FuseObjects(DataUnitHeaders(),{
+		return Merge(DataUnitHeaders(),{
 			formDataNameOrder:headers,
 			formGoogleSheetName:type
 			});
@@ -34,7 +34,7 @@ DataUnit=function(datatype){
 	var source=PageSearch("source");
 		source=source?source:PageFragment();
 	
-	return FuseObjects(data,{
+	return Merge(data,{
 		"language":LangUpperCase(window.navigator.language),
 		"timezone":Date(),
 		"screen":[	window.screen.height,
@@ -66,7 +66,7 @@ UserCountry=function(){
 
 FingerprintAction=function(type,target){
 	var data=DataUnit("Actions");
-	return FuseObjects(data,{
+	return Merge(data,{
 		"target":target,
 		"type":type
 	});
@@ -85,7 +85,7 @@ FingerprintLink=function(ref){
 
 FingerprintStatus=function(error){
 	var data=DataUnit("Status");
-	return FuseObjects(data,{
+	return Merge(data,{
 		"errors":error,
 		"agent":window.navigator.userAgent
 	});

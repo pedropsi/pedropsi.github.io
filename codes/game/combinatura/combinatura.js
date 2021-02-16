@@ -63,7 +63,7 @@ function ObtainKeyActionsGame(){
 	
 	keyactions[StringSymbol("restart")]=ObtainRestart;
 	
-	keyactions=FuseObjects(
+	keyactions=Merge(
 		keyactions,
 		LanguageKeyActions("D","DE"),
 		LanguageKeyActions("E","EN"),

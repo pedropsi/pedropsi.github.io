@@ -46,7 +46,7 @@ function UnRomanMulti(s){
 	}
 }
 
-var numerals=FuseObjects(uniNumerals,biNumerals);
+var numerals=Merge(uniNumerals,biNumerals);
 var thresholdValues=Values(numerals).sort(function(a,b){return a<b?1:a>b?-1:0});
 var	TN=FlipKeysValues(numerals);
 

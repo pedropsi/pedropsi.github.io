@@ -349,13 +349,13 @@ function AutoCheckYear(){
 	var yedit=data["year-edit"];
 	console.log("YEARS",year,yedit);
 	if(year>0&&year!==yedit){
-		data=FuseObjects(data,{
+		data=Merge(data,{
 			"year-edit":year,
 			"title":data.title,
 			"author":data.author,
 			"mode":"edit"
 			});
-		data=FuseObjects(data,Outflows("PGD_default"));
+		data=Merge(data,Outflows("PGD_default"));
 		SubmitData(data);
 	}
 }
