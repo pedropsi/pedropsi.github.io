@@ -8200,8 +8200,8 @@ TextRollTestUnit=function(unitText){
 
 //Self-tests
 
-	return UnAfterfix(string,"//","mig");
 UnInlineCommentCode=function(code){
+	return UnAfterfix(code,"//","mig");
 }
 
 UnMultilineCommentCode=function(code){
