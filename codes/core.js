@@ -8041,7 +8041,7 @@ UnCommentCode=function(code){
 	return code;
 }
 
-FunctionTestRoll=function(F){
+FunctionRoll=function(F){
 	var body=FunctionBody(F);
 	var lastComment=UnBeforfix(body,"/"+"*");		 //Finds the comment inbetween
 	if(lastComment===body)
@@ -8057,16 +8057,16 @@ FunctionTestRoll=function(F){
 	return lastComment;
 }
 
-FunctionNameTestRoll=function(fname){
+FunctionNameRoll=function(fname){
 	if(!window[fname])
 		return "";
-	return FunctionTestRoll(window[fname]);
+	return FunctionRoll(window[fname]);
 }
 
 
-TestRollUnitTexts=function(testRoll){
+RollUnitTexts=function(roll){
 	//split on two or more paragraphs
-	return testRoll.split(/\n((\s|\t|\r)+)?(\n((\s|\t)+)?)+/).filter(x=>x&&x.replace(/(\n((\s|\t)+)?)/,"").length);
+	return roll.split(/\n((\s|\t|\r)+)?(\n((\s|\t)+)?)+/).filter(x=>x&&x.replace(/(\n((\s|\t)+)?)/,"").length);
 }
 
 UnitTextUnitTest=function(unitText){
@@ -8112,8 +8112,11 @@ UnitTextUnitTest=function(unitText){
 
 
 FunctionUnitTests=function(F){
-	var textRoll=FunctionTestRoll(F);
-	return TestRollUnitTexts(textRoll).map(UnitTextUnitTest);
+	return RollUnitTests(FunctionRoll(F));
+}
+
+RollUnitTests=function(roll){
+	return RollUnitTexts(roll).map(UnitTextUnitTest);
 }
 
 

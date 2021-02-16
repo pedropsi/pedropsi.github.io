@@ -470,20 +470,6 @@ SaveTest(SafeUrl,"https://google.com","https://google.com","don't enforce http:"
 SaveTest(SafeUrl,"<script>tame(dangers)</script>","","script attempt")
 
 
-// var TestTextRoll=`
-// make string pairs
-// SVGLinePairs("M 1 2 3 4")
-// [[1,2],[3,4]]
-
-// modify numbers
-// SVGLineApply("M 1 2 3 4",xy=>[xy[1],xy[0]])
-// "M 2 1 4 3 "
-
-// `
-
-// SaveTestRoll(TestTextRoll);
-
-
 ///////////////////////////////////////////////////////////////////////////////
 //Run Tests only after loading the external resources below
 //ListenOnce("TestReady",Test);
