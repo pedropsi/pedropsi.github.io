@@ -2394,20 +2394,62 @@ UnLastfix=function(word,prefix,suffix){
 		return "";
 	var suffix=suffix||prefix;
 	return UnOverfix(UnOverfix(word,suffix),prefix)+Overfix(word,suffix);
+/*
+Last of several
+UnLastfix("ok<maybe>very<not>useful","<",">")
+"ok<maybe>veryuseful"
+
+nothing
+UnLastfix("ok","<",">")
+"ok"
+
+equal prefix and suffix
+UnLastfix("ok!maybe!very!not!useful","!")
+"ok!maybe!veryuseful"
+*/
 }
+
 UnFirstfix=function(word,prefix,suffix){
 	if(!word)
 		return "";
 	var suffix=suffix||prefix;
 	return Underfix(word,prefix)+UnUnderfix(UnUnderfix(word,prefix),suffix);
 
+/*
+Last of several
+UnFirstfix("ok<maybe>very<not>useful","<",">")
+"okvery<not>useful"
+
+nothing
+UnFirstfix("ok","<",">")
+"ok"
+
+equal prefix and suffix
+UnFirstfix("ok!maybe!very!not!useful","!")
+"okvery!not!useful"
+*/
 }
+
 UnInfix=function(word,prefix,suffix){
 	if(!word)
 		return "";
 	return FixedPoint(word=>UnLastfix(word,prefix,suffix),word);
 
+/*
+remove all, keep stuff in between
+UnInfix("ok<maybe>very<not>useful","<",">")
+"okveryuseful"
+
+nothing
+UnInfix("ok","<",">")
+"ok"
+
+equal prefix and suffix
+UnInfix("ok!maybe!very!not!useful","!")
+"okveryuseful"
+*/
 }
+
 
 
 // Padding
