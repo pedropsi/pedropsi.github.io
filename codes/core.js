@@ -5527,13 +5527,17 @@ XYHandler=function(Action){
 	if(!Action)
 		return Identity;
 	return function(e){
-		e.preventDefault();
+		if(e.cancelable)
+			e.preventDefault();
+		
 		var el=GetElement(e.target);
+
 		var r=el.getBoundingClientRect();
 		if(e.touches&&e.touches[0])
 			var e=e.touches[0];
 		var X=(e.clientX-r.left);
 		var Y=(e.clientY-r.top);
+
 		Action(X,Y,r.right-r.left,r.bottom-r.top,e.target);
 	}
 }
@@ -5543,7 +5547,8 @@ AttendDrag=function(Actions,target){
 		return;
 	var Actions=Clone(Actions);
 	var Starter=function(ev){
-		ev.preventDefault();
+		if(ev.cancelable)
+			ev.preventDefault();
 
 		var name=false;
 		if(ev.touches&&ev.touches.length>=2)//multi-finger touch
