@@ -2387,11 +2387,26 @@ Underfix=function(word,prefix){
 	return UnPosfix(word.replace(UnUnderfix(word,prefix),""),prefix);
 }
 
-Infix=function(word,prefix,suffix){
+
+
+UnLastfix=function(word,prefix,suffix){
 	if(!word)
-		var word="";
+		return "";
 	var suffix=suffix||prefix;
-	return UnBeforfix(UnAfterfix(word,suffix),prefix);
+	return UnOverfix(UnOverfix(word,suffix),prefix)+Overfix(word,suffix);
+}
+UnFirstfix=function(word,prefix,suffix){
+	if(!word)
+		return "";
+	var suffix=suffix||prefix;
+	return Underfix(word,prefix)+UnUnderfix(UnUnderfix(word,prefix),suffix);
+
+}
+UnInfix=function(word,prefix,suffix){
+	if(!word)
+		return "";
+	return FixedPoint(word=>UnLastfix(word,prefix,suffix),word);
+
 }
 
 

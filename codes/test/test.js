@@ -334,10 +334,6 @@ SaveTest(UnBeforfix,["somethingantiantiantiall","anti"],"all","long prefix");
 SaveTest(UnAfterfix,["all is well well well something"," well"],"all is","long prefix");
 
 
-/*SaveTest(UnExfix,["a##b##ef##c##d","#"],"b##ef##c","shallowest"),
-SaveTest(UnInfix,["a##b##ef##c##d","#"],"ad","shallowest"),
-SaveTest(UnExtrafix,["a##b##ef##c##d","#"],"ef","deepest"),
-SaveTest(UnIntrafix,["a##b##ef##c##d","#"],"a##bc##d","deepest"),*/
 
 
 SaveTest(Parenthise,"ok","(ok)","parenthesis absent");
