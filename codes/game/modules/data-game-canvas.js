@@ -238,7 +238,6 @@ SquaresGridDraw=function(opts){
 
 	RectangleDraw({...gridOpts,lineWidth:0});
 	GridLinesDraw({...gridOpts,...gridCoords});
-	Wnet({...gridOpts,...gridCoords});
 	var borderOpts=gridOpts;
 	if(gridOpts.border)
 		borderOpts=Merge(gridOpts,gridOpts.border);
