@@ -46,7 +46,6 @@ var Contributors={//People
 	"davidpfx":{name:"David PFX",GITHUB_COM:"david-pfx"},
 	"tows":{name:"Guilherme Stutz Töws",alias:"Zaratustra Productions",GITHUB_COM:"zarawesome",ITCH:"zaratustra"},
 	"deusovi":{alias:"Deusovi",TWITTER:"deusovi",PERSONAL_PAGE:"https://deusovi.github.io/"},
-	"mago":{alias:"mago314"},
 	"knexator":{name:"Daniel Hurtado",alias:"knexator",TWITTER:"knexator"},
 	"builder17":{alias:"Builder17"},
 	"parachor":{alias:"Parachor",ITCH:"parachor"},
