@@ -4,8 +4,23 @@ function EnableTestMode(){
 }
 */
 
-SaveTestableFunctionsTests()
 
+
+SaveTest=function(F,argArray,expected,testname,VerifierF){
+	var callerName=FunctionNamecode(F);
+	var argArray=IsArray(argArray)?argArray:[argArray];
+	var call=callerName+JSON.stringify(argArray).replace(/^\[/,"(").replace(/\]$/,")")
+
+	SaveUnitTest({
+		title:testname,
+		call:call,
+		callerName:callerName,
+		expected:expected,
+		VerifierF:VerifierF
+	})
+}
+
+SaveTestableFunctionsTests()
 
 ///////////////////////////////////////////////////////////////////////////////
 //Do nothing
@@ -455,18 +470,18 @@ SaveTest(SafeUrl,"https://google.com","https://google.com","don't enforce http:"
 SaveTest(SafeUrl,"<script>tame(dangers)</script>","","script attempt")
 
 
-var TestTextRoll=`
-make string pairs
-SVGLinePairs("M 1 2 3 4")
-[[1,2],[3,4]]
+// var TestTextRoll=`
+// make string pairs
+// SVGLinePairs("M 1 2 3 4")
+// [[1,2],[3,4]]
 
-modify numbers
-SVGLineApply("M 1 2 3 4",xy=>[xy[1],xy[0]])
-"M 2 1 4 3 "
+// modify numbers
+// SVGLineApply("M 1 2 3 4",xy=>[xy[1],xy[0]])
+// "M 2 1 4 3 "
 
-`
+// `
 
-SaveTestRoll(TestTextRoll);
+// SaveTestRoll(TestTextRoll);
 
 
 ///////////////////////////////////////////////////////////////////////////////

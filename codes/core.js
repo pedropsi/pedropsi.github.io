@@ -8025,6 +8025,144 @@ Monitor=function(Opts){
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 //Test suite saver
+
+//Self-tests
+
+UnInlineCommentCode=function(code){
+	return UnAfterfix(code,"//","mig");
+}
+
+UnMultilineCommentCode=function(code){
+	return UnInfix(code,"/"+"*","*"+"/");
+}
+
+UnCommentCode=function(code){
+	var code=UnMultilineCommentCode(UnInlineCommentCode(code));
+	return code;
+}
+
+FunctionTestRoll=function(F){
+	var body=FunctionBody(F);
+	var lastComment=UnBeforfix(body,"/"+"*");		 //Finds the comment inbetween
+	if(lastComment===body)
+		return "";
+	
+	lastComment=lastComment.replaceAll(/\r/sig,"").replaceAll(/\t/sig,"");
+	
+	lastComment=UnAfterfix(lastComment,"*"+"/");
+	lastComment=UnPrefix(UnPosfix(lastComment,"*"),"*");	//Cleans excess symbols
+	
+	lastComment=UnExfix(lastComment," ","mig");
+
+	return lastComment;
+}
+
+FunctionNameTestRoll=function(fname){
+	if(!window[fname])
+		return "";
+	return FunctionTestRoll(window[fname]);
+}
+
+
+TestRollUnitTexts=function(testRoll){
+	//split on two or more paragraphs
+	return testRoll.split(/\n((\s|\t|\r)+)?(\n((\s|\t)+)?)+/).filter(x=>x&&x.replace(/(\n((\s|\t)+)?)/,"").length);
+}
+
+UnitTextUnitTest=function(unitText){
+	if(!unitText)
+		return;
+	var lines=unitText.split("\n").filter(Identity);
+		lines=lines.map(TrimWhitespaceString);
+		lines=lines.map(line=>UnPosfix(line,[";",","]));
+	if(lines.length<2){
+		Warn("missing either the call or the expected result",lines,unitText)
+		return {};
+	}
+	var title=lines[0];
+	
+	if(lines.length===2){
+		var title="missing title";
+		lines=Prepend(lines,title);
+	}
+	var call=lines[1];
+	var callerName=call.replace(/\(.*$/,"");
+	if(!globalThis[callerName]){
+		Warn("caller function is undefined:",callerName)
+		return {};
+	}
+	
+	try{
+		var expected=lines[2];
+		expected=expected.replace(/^(\s|\t|\n)?(Object|Array|function)(\s|\t|\n)?(\(\d+\))?/,"");
+		expected=eval("Identity("+expected+")");//prevents error with lone objects
+		Wnet(call);
+		return {
+			title:title,
+			call:call,
+			callerName:callerName,
+			expected:expected
+		};
+	}
+	catch(e){
+		Warn("couldnt eval test",expected,unitText);
+		return null
+	}
+}
+
+
+FunctionUnitTests=function(F){
+	var textRoll=FunctionTestRoll(F);
+	return TestRollUnitTexts(textRoll).map(UnitTextUnitTest);
+}
+
+
+UnitTests=[];
+
+UnitTestSave=function(unitObj){
+	if(!unitObj)
+		return;
+	var callerName=unitObj.callerName;
+
+	if(!UnitTests[callerName]){
+		UnitTests[callerName]={};
+		UnitTests.push(callerName);
+	}
+
+	UnitTests[callerName][unitObj.call]=unitObj;
+}
+
+FunctionTestsSave=function(F){
+	return FunctionUnitTests(F).map(UnitTestSave);
+}
+
+FunctionNameTestsSave=function(fname){
+	if(window[fname])
+		return FunctionTestsSave(window[fname]);
+}
+
+TestRolls=function(){
+	return Introspect().map(FunctionNameTestsSave);
+}
+
+SaveTestRoll=function(textRoll){
+	return TestRollUnitTexts(textRoll).map(UnitTextUnitTest).map(UnitTestSave);
+}
+
+SaveTestableFunctionsTests=function(){
+	var testRolls=TestRolls();
+	testRolls.map(SaveTestRoll);
+}
+
+
+
+
+
+
+
+
+
+
 //Run Test() to execute and report the tests on the list of saved functions
 //provided there is an element in the page labelled with TestingAreaSelector
 
@@ -8033,7 +8171,7 @@ TestingAreaSelector=".test-suite";
 TestFunction=function(callerName,testname){
 	var callerName=FunctionNamecode(callerName);
 
-	var unitObj=Test[callerName][testname];
+	var unitObj=UnitTests[callerName][testname];
 	if(!unitObj)
 		return;
 
@@ -8114,140 +8252,9 @@ Test=function(callerName){
 	}
 
 	var callerName=FunctionNamecode(callerName);
-	var tests=Test[callerName];
+	var tests=UnitTests[callerName];
 
 	return Keys(tests).map(function(testname){TestFunction(callerName,testname)});
-}
-
-SaveTest=function(F,argArray,expected,testname,VerifierF){
-	var callerName=FunctionNamecode(F);
-	var argArray=IsArray(argArray)?argArray:[argArray];
-	var call=callerName+JSON.stringify(argArray).replace(/^\[/,"(").replace(/\]$/,")")
-
-	SaveUnitTest({
-		title:testname,
-		call:call,
-		callerName:callerName,
-		expected:expected,
-		VerifierF:VerifierF
-	})
-}
-
-SaveUnitTest=function(unitObj){
-	if(!unitObj)
-		return;
-	var callerName=unitObj.callerName;
-
-	if(!Test.functions)
-		Test.functions=[];
-
-	if(!Test[callerName]){
-		Test[callerName]={};
-		Test.functions.push(callerName);
-	}
-
-	Test[callerName][unitObj.call]=unitObj;
-}
-
-
-//TestRoll format
-
-SaveTestRoll=function(textRoll){
-	return TestRollUnitTestTexts(textRoll).map(TextRollTestUnit).map(SaveUnitTest);
-}
-
-TestRollUnitTestTexts=function(testRoll){
-	//split on two or more paragraphs
-	return testRoll.split(/\n((\s|\t|\r)+)?(\n((\s|\t)+)?)+/).filter(x=>x&&x.replace(/(\n((\s|\t)+)?)/,"").length);
-}
-
-TextRollTestUnit=function(unitText){
-	if(!unitText)
-		return;
-	var lines=unitText.split("\n").filter(Identity);
-		lines=lines.map(TrimWhitespaceString);
-		lines=lines.map(line=>UnPosfix(line,[";",","]));
-	if(lines.length<2){
-		Warn("missing either the call or the expected result",lines,unitText)
-		return {};
-	}
-	var title=lines[0];
-	
-	if(lines.length===2){
-		var title="missing title";
-		lines=Prepend(lines,title);
-	}
-	var call=lines[1];
-	var callerName=call.replace(/\(.*$/,"");
-	if(!globalThis[callerName]){
-		Warn("caller function is undefined:",callerName)
-		return {};
-	}
-	
-	try{
-		var expected=lines[2];
-		expected=expected.replace(/^(\s|\t|\n)?(Object|Array|function)(\s|\t|\n)?(\(\d+\))?/,"");
-		expected=eval("Identity("+expected+")");//prevents error with lone objects
-
-		return {
-			title:title,
-			call:call,
-			callerName:callerName,
-			expected:expected
-		};
-	}
-	catch(e){
-		Warn("couldnt eval test",expected,unitText);
-		return null
-	}
-}
-
-//Self-tests
-
-UnInlineCommentCode=function(code){
-	return UnAfterfix(code,"//","mig");
-}
-
-UnMultilineCommentCode=function(code){
-	return UnInfix(code,"/*","*/");
-}
-
-UnCommentCode=function(code){
-	var code=UnMultilineCommentCode(UnInlineCommentCode(code));
-	return code;
-}
-
-SaveTestableFunctionsTests=function(){
-	var testRolls=Values(FunctionCommentedTestRolls());
-	testRolls.map(SaveTestRoll);
-}
-
-
-FunctionCommentedTestRoll=function(F){
-	var body=FunctionBody(F);
-	var lastComment=UnBeforfix(body,"/"+"*");		 //Finds the comment inbetween
-	if(lastComment===body)
-		return "";
-	
-	lastComment=lastComment.replaceAll(/\r/sig,"").replaceAll(/\t/sig,"");
-	
-	lastComment=UnAfterfix(lastComment,"*"+"/");
-	lastComment=UnPrefix(UnPosfix(lastComment,"*"),"*");	//Cleans excess symbols
-	
-	lastComment=UnExfix(lastComment," ","mig");
-
-	return lastComment;
-}
-
-FunctionCommentedTestRolls=function(){
-	var O={};
-	Introspect().map(function(fname){
-		var code=FunctionCommentedTestRoll(eval(fname));
-		if(code.length){
-			O[fname]=code;
-		}
-	});
-	return O;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
