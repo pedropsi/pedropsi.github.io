@@ -8479,6 +8479,10 @@ Monitor=function(Opts){
 	ReplaceChildren(report,".monitor");
 }
 
+UnMonitor=function(){
+	RemoveElement(".monitor")
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Testing framework

@@ -1253,6 +1253,11 @@ AdvanceState=function(substate,options){
 		state.visuals.cursor=StateCursorName(state);
 	}
 
+	if(state.monitored)
+		Monitor(state)
+	else
+		UnMonitor()
+
 	state.changed=changed;
 	return state;
 }
@@ -1663,6 +1668,7 @@ var KeyboardActions={
 	"space":StateKeyHandlerer({mode:{edit:Flipped}}),
 	
 	"escape":StateKeyHandlerer({mode:{edit:false}}),
+	"m ctrl shift":StateKeyHandlerer({monitored:Flipped}),
 
 	"r ctrl"		:ClearSegments,
 	"r ctrl shift"	:ClearFruit,
