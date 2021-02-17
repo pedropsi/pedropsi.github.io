@@ -251,11 +251,6 @@ SaveTest(Clone,"ab","ab",2,"string");
 SaveTest(Clone,"","","empty string");
 
 
-
-SaveTest(Datafy,{a:1,b:2},{"data-a":1,"data-b":2},"object - has key");
-SaveTest(Datafy,{},{},"empty object");
-
-
 // String 
 
 SaveTest(ObjectRules,{},[],"empty rule");

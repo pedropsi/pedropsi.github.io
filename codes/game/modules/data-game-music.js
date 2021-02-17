@@ -1,8 +1,17 @@
 ///////////////////////////////////////////////////////////////////////////////
 //Sound loading
 
+ReData=function(O){
+	return MapKeysObject(O,key=>Prefix(key,"data-"));
+/*
+change object keys to data-attributes
+ReData({a:1,b:2})
+{"data-a":1,"data-b":2}
+*/
+}
+
 SoundHTML=function(sourcepath,data,id){
-	var data=data?Datafy(data):{};
+	var data=data?ReData(data):{};
 	var defaults={
 		tag:"audio",
 		txt:" ",

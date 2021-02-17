@@ -2031,16 +2031,6 @@ Clone=function(SAO){
 }
 
 
-Datafy=function(obj){
-	var O={};
-	function SetValueKey(value,key){
-		var datakey=Prefix(key,"data-");
-		O[datakey]=value;
-	}
-	MapObject(obj,SetValueKey);
-	return O;
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 // String Functions
 
