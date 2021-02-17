@@ -606,11 +606,12 @@ StateAtErrors=function(state){
 	var localErrors=localOrchard.map(track=>TrackStateErrors(track,state));
 	
 		localOrder.map((p,i)=>positionErrors[p]=localErrors[i]);
+		
+	var globalErrors=Apply(Join,globalOrchards.map((orchard,i)=>GlobalOrchardErrors(orchard,state,globalFruits[i])));
 
-	var globalErrors=Join(...globalOrchards.map((orchard,i)=>GlobalOrchardErrors(orchard,state,globalFruits[i])));
-	var globalOrder=Order(orchard,Join(...globalOrchards));
+	var globalOrder=Order(orchard,Apply(Join,globalOrchards));
 
-		globalOrder.map((p,i)=>positionErrors[p]=globalErrors[i]);
+	globalOrder.map((p,i)=>positionErrors[p]=globalErrors[i]);
 	return positionErrors;
 }
 
@@ -985,7 +986,7 @@ MiniBoardDraw=function(fruit,rule,state){
 	}
 
 	var miniboard=FruitSerialState(fruit,rule.depiction,state);
-		miniboard=CompleteState(Join(miniboard,rendering));
+		miniboard=CompleteState(Group(miniboard,rendering));
 
 	if(state.render.main){//prevent recursion
 		BoardPrepare(miniboard)
@@ -1232,29 +1233,40 @@ CompleteState=function(state){
 	return state;
 }
 
+CompletableProperties=["segments","level","W","H"];
+UndoableProperties=CompletableProperties;
+DrawableProperties=Join(UndoableProperties,["mode","visuals","win"]);
+
+StateCombiner=Combiner({
+	"Evaluate":TypeCombiners["Evaluate"],
+	"level":{
+		ValidateKey:Equaler("level"),
+		Validate1:True,
+		Validate2:True,
+		Combine:(L1,L2)=>L2
+	}
+});
+
 AdvanceState=function(substate,options){
-	var options=options||{}	;
+	var options=options||{};
 	var state=IdState(options.id);
 	var OLDSTATE=Clone(state);
 	
-	var overwrSubstate=FilterKeysObject(substate,p=>In(OverwritableProperties,p));
-	var normalSubstate=FilterKeysObject(substate,p=>!In(OverwritableProperties,p));
+	state=StateCombiner(state,substate);
 	
-	state={...state,...overwrSubstate};
-	state=MergeEvaluateObject(state,normalSubstate);
 	changed=ComplementObject(state,OLDSTATE);
 
-	if(Intersected(Keys(changed),CompletableProperties)||options.initialise){
+	if(Intersected(TreeKeys(changed),CompletableProperties)||options.initialise){
 		state=CompleteState(state);
-		changed=Join(changed,ComplementObject(state,OLDSTATE));
+		changed=Overwrite(changed,ComplementObject(state,OLDSTATE));
 	}
 
-	if(Intersected(changed,LayersChanged["cursor"])||options.initialise){
+	// if(Intersected(TreeKeys(changed),LayersChanged["cursor"])||options.initialise){
 		state.visuals.cursor=StateCursorName(state);
-	}
+	// }
 
 	if(state.monitored)
-		Monitor(state)
+		Monitor(substate);
 	else
 		UnMonitor()
 
@@ -1262,10 +1274,6 @@ AdvanceState=function(substate,options){
 	return state;
 }
 
-CompletableProperties=["segments","level","W","H"];
-UndoableProperties=CompletableProperties;
-DrawableProperties=Join(UndoableProperties,["mode","visuals","win"]);
-OverwritableProperties=["level"]
 
 LayerPainter=function(layer){
 	var layerspainters={
@@ -1351,7 +1359,7 @@ UpdateState=function(substate,options){
 StateKeyHandlerer=function(substate){
 	return function(e){
 		var id=TargetState(Spotlight().id).id;
-		UpdateState(substate,{id:id});
+		UpdateState(Clone(substate),{id:id});
 	}
 };
 
@@ -1578,11 +1586,7 @@ DragActionEnder=function(x,y,w,h,target){
 }
 
 
-TransformLevel=function(level,CoordinateTransform){
-	var newlevel={};
-	Keys(level).map(k=>newlevel[k]=level[k].map(CoordinateTransform));
-	return newlevel;
-};
+
 
 DecrementCanvasWidth	=StateKeyHandlerer({W:W=>Max(W-1,2)});
 DecrementCanvasHeight	=StateKeyHandlerer({H:H=>Max(H-1,2)});
@@ -1591,17 +1595,45 @@ IncrementCanvasHeight	=StateKeyHandlerer({H:H=>Max(H+1,2)});
 
 BoardShifter=function(L){
 	return function(){
-		LevelShifter(L)();
-		SegmentsShifter(L)();
+		LevelShifterHandlerer(L)();
+		SegmentsShifterHandlerer(L)();
 	};
 }
 
-LevelShifter=function(L){
-	return StateKeyHandlerer({level:level=>TransformLevel(level,LetterCoordinatesShifter(L))});
-}
-SegmentsShifter=function(L){
+BoardIncrementer=function(L,size){
+	var v=DirectionsCoordinates[L];
+	var counterShifts={"L":Times([1,0],size),"U":Times([0,1],size),"R":Times([0,0],1),"D":Times([0,0],1)};
+	var w=counterShifts[L];
 	return StateKeyHandlerer({
-		segments:segments=>segments.map(seg=>seg.map(LetterCoordinatesShifter(L)))});
+		W:w=>w+Abs(v[0])*size,
+		H:h=>h+Abs(v[1])*size,
+		segments:SegmentsShifter(w),
+		level:LevelShifter(w)
+	},{draw:["force-level","force-explainer"]})
+}
+
+
+LevelShifterHandlerer=function(L){
+	return StateKeyHandlerer({level:LevelShifter(LetterCoordinatesShifter(L))});
+}
+LevelShifter=function(v){
+	return function(level){
+		return TransformLevel(level,xy=>VectorPlus(xy,v));
+	}
+}
+TransformLevel=function(level,CoordinateTransform){
+	var newlevel={};
+	Keys(level).map(k=>newlevel[k]=level[k].map(CoordinateTransform));
+	return newlevel;
+};
+
+SegmentsShifterHandlerer=function(L){
+	return StateKeyHandlerer({segments:SegmentsShifter(LetterCoordinatesShifter(L))});
+}
+SegmentsShifter=function(v){
+	return function(segments){
+		return segments.map(seg=>seg.map(xy=>VectorPlus(xy,v)));
+	}
 }
 
 LetterCoordinatesShifter=function(L){
@@ -1633,31 +1665,38 @@ CycleFruitMode=function(state,n){
 	return mode;
 }
 
-var KeyboardActions={
-	"alt left"	:LevelShifter("L"),
-	"alt up"	:LevelShifter("U"),
-	"alt right"	:LevelShifter("R"),
-	"alt down"	:LevelShifter("D"),
-	
-	"shift left"	:BoardShifter("L"),
-	"shift up"		:BoardShifter("U"),
-	"shift right"	:BoardShifter("R"),
-	"shift down"	:BoardShifter("D"),
 
-	"shift alt left"	:SegmentsShifter("L"),
-	"shift alt up"		:SegmentsShifter("U"),
-	"shift alt right"	:SegmentsShifter("R"),
-	"shift alt down"	:SegmentsShifter("D"),
+
+
+var KeyboardActions=function(){return{
+	"ctrl left"			:BoardIncrementer("L",1),
+	"ctrl up"			:BoardIncrementer("U",1),
+	"ctrl right"		:BoardIncrementer("R",1),
+	"ctrl down"			:BoardIncrementer("D",1),
 	
-	"ctrl left"		:DecrementCanvasWidth,
-	"ctrl up"		:IncrementCanvasHeight,
-	"ctrl right"	:IncrementCanvasWidth,
-	"ctrl down"		:DecrementCanvasHeight,
+	"ctrl left  shift"	:BoardIncrementer("L",-1),
+	"ctrl up    shift"	:BoardIncrementer("U",-1),
+	"ctrl right shift"	:BoardIncrementer("R",-1),
+	"ctrl down  shift"	:BoardIncrementer("D",-1),
+
+	// "shift left"		:BoardShifter("L"),
+	// "shift up"			:BoardShifter("U"),
+	// "shift right"		:BoardShifter("R"),
+	// "shift down"		:BoardShifter("D"),
+
+	// "alt left"			:LevelShifterHandlerer("L"),
+	// "alt up"			:LevelShifterHandlerer("U"),
+	// "alt right"			:LevelShifterHandlerer("R"),
+	// "alt down"			:LevelShifterHandlerer("D"),
+
+	// "shift alt left"	:SegmentsShifterHandlerer("L"),
+	// "shift alt up"		:SegmentsShifterHandlerer("U"),
+	// "shift alt right"	:SegmentsShifterHandlerer("R"),
+	// "shift alt down"	:SegmentsShifterHandlerer("D"),
+
+
 	
-	"ctrl shift up"		:StateKeyHandlerer({H:BlankState.H}),
-	"ctrl shift right"	:StateKeyHandlerer({W:BlankState.W}),
-	"ctrl shift left"	:StateKeyHandlerer({H:2}),
-	"ctrl shift down"	:StateKeyHandlerer({W:2}),
+
 
 	"b ctrl"		:StateKeyHandlerer({visuals:{monochrome:Flipped}}),
 	"b ctrl shift"	:StateKeyHandlerer({visuals:{solid:Flipped}}),
@@ -1666,8 +1705,9 @@ var KeyboardActions={
 	"s ctrl":()=>SaveCanvas(),
 
 	"space":StateKeyHandlerer({mode:{edit:Flipped}}),
-	
 	"escape":StateKeyHandlerer({mode:{edit:false}}),
+	"insert":StateKeyHandlerer({mode:{edit:true}}),
+
 	"m ctrl shift":StateKeyHandlerer({monitored:Flipped}),
 
 	"r ctrl"		:ClearSegments,
@@ -1683,8 +1723,8 @@ var KeyboardActions={
 	"backspace"			:function(){Undo()},
 	"shift backspace"	:function(){Redo()},
 	"y ctrl shift"		:function(){Undo()},
-	"y ctrl"			:function(){Redo()},
-
+	"y ctrl"			:function(){Redo()}
+	}
 };
 
 KeyboardFruitsActions=function(state){
@@ -1755,8 +1795,9 @@ ControlsBind=function(state){
 
 	Attend('resize',CanvasResizer(state));
 
-	KeyboardActions=Merge(KeyboardActions,KeyboardFruitsActions(state));
-	Keybind(KeyboardActions,state.render.target);
+	Keybind(
+		Merge(KeyboardActions(),KeyboardFruitsActions(state)),
+		state.render.target);
 	ResumeCapturingKeys(ComboKeyPressHandler);
 }
 
