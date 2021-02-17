@@ -444,6 +444,19 @@ Equal=function(a,b){
 	}
 }
 
+Equaler=function(value){
+	return function(n){return Equal(n,value)};
+/*
+equal here
+Equaler(1)(1)
+true
+
+unequal there
+Equaler(1)(0)
+false
+*/
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Math
 
@@ -1541,28 +1554,33 @@ TypeCombiners={
 	"Array":{
 		Validate1:IsArray,
 		Validate2:IsArray,
+		ValidateKey:True,
 		Combine:(A1,A2)=>A1.concat(A2)},
-	"Function":{
+	"Evaluate":{
 		Validate1:True,
 		Validate2:IsFunction,
+		ValidateKey:True,
 		Combine:(SAO1,F2)=>Evaluate(F2,SAO1)},
 	"String":{
 		Validate1:IsString,
 		Validate2:IsString,
+		ValidateKey:True,
 		Combine:(S1,S2)=>S1+S2},
 	"Object":{
 		Validate1:IsObject,
 		Validate2:IsObject,
+		ValidateKey:True,
 		Combine:function(O1,O2){return {...O1,...O2}}
 	}
 }
 
-Combiner=function(TypeCombinersNames){
+Combiner=function(TypeCombinersNames,typeCombiners){
 	var names=TypeCombinersNames||[];
-	var Validators=FilterKeysObject(TypeCombiners,name=>In(names,name));
+	var typeCombiners=typeCombiners||TypeCombiners;
+	var Validators=FilterKeysObject(typeCombiners,name=>In(names,name));
 		names=Keys(Validators);
 	var l=names.length;
-	function BiCombine(SAO1,SAO2){
+	function BiCombine(SAO1,SAO2,key){
 		if(typeof SAO1==="undefined"&&typeof SAO2==="undefined")
 			return {};
 		if(typeof SAO2==="undefined")
@@ -1571,15 +1589,15 @@ Combiner=function(TypeCombinersNames){
 			return SAO2;
 		var i=0;
 		while(i<l){
-			if(TypeCombiners[names[i]].Validate1(SAO1)&&TypeCombiners[names[i]].Validate2(SAO2))
-				return TypeCombiners[names[i]].Combine(SAO1,SAO2);
+			if(typeCombiners[names[i]].Validate1(SAO1)&&typeCombiners[names[i]].Validate2(SAO2)&&typeCombiners[names[i]].ValidateKey(key))
+				return typeCombiners[names[i]].Combine(SAO1,SAO2);
 			i++;
 		}
 		if(IsObject(SAO1)&&IsObject(SAO2)){//recursive by default, but this may be overriden
 			var O=Clone(SAO1);
 			Keys(SAO2).map(
 				function(k){
-					O[k]=BiCombine(SAO1[k],SAO2[k]);
+					O[k]=BiCombine(SAO1[k],SAO2[k],k);
 				}
 			);
 			return O;
@@ -1603,6 +1621,12 @@ Join({a:1},{b:2},{c:3})
 empty
 Join()
 {}
+
+
+
+deep evaluation
+JoinEvaluate({a:1,b:2,c:{d:3}},{a:x=>x+1,c:{d:x=>2*x}})
+{a:2,b:2,c:{d:6}}
 
 
 
@@ -1644,24 +1668,29 @@ Merge({a:{c:3,d:4}},{a:{e:5}})
 
 
 
-deep evaluation
-MergeEvaluateObject({a:1,b:2,c:{d:3}},{a:x=>x+1,c:{d:x=>2*x}})
-{a:2,b:2,c:{d:6}}
-
-
-
 object with key
-BiFuse({a:"a",b:2},{a:"3"})
+Fuse({a:"a",b:2},{a:"3"})
 {a:"a3",b:2}
+
+
+
+overwrite any values, but merge any objects
+Overwrite({a:{c:3,d:4},b:2},{a:{e:5},b:{f:6}})
+{a:{c:3,d:4,e:5},b:{f:6}}
+
+
+custom key validator
+Combiner(["a"],{"a":{ValidateKey:Equaler("a"),Combine:(SAO1,SAO2)=>SAO1,Validate1:True,Validate2:True}})({a:1,b:2,c:3},{a:10,b:20,c:30})
+{a:1,b:20,c:30}
 
 */
 }
 
+Overwrite=Combiner([]);
 Merge=Combiner(["Object"]);
-MergeEvaluate=Combiner(["Object","Function"]);
 
 Join=Combiner(["Array"]);
-JoinEvaluate=Combiner(["Array","Function"]);
+JoinEvaluate=Combiner(["Array","Evaluate"]);
 
 Fuse=Combiner(["Array","String"]);
 
