@@ -1444,6 +1444,31 @@ CanonicalObject=function(Obj,CanonicalName){
 ///////////////////////////////////////////////////////////////////////////////
 //Set functions
 
+Unique=function(A){
+	return Intersection(A,A);
+/*
+array of unique values
+Unique(["a","b","c"])
+["a","b","c"]
+
+unique but similar values
+Unique(["1",1,true])
+["1",1,true]
+
+array of duplicate values
+Unique(["b","b","c"])
+["b","c"]
+
+empty array
+Unique([])
+[]
+
+deep array
+Unique([[1,2],[1,2]])
+[[1,2]]
+*/
+}
+
 DistinctArray=function(A,Equaliser){
 	var Equaliser=Equaliser||Identity;
 	var B=[];
@@ -1459,6 +1484,11 @@ DistinctArray=function(A,Equaliser){
 		i++;	
 	}
 	return C;
+/*
+keeps no duplicates, does not sort
+DistinctArray([1,2,2,3,3,0,0,0,0])
+[1,2,3,0]
+*/
 }
 
 UnDistinctArray=function(A,Equaliser){
@@ -1476,44 +1506,17 @@ UnDistinctArray=function(A,Equaliser){
 		i++;	
 	}
 	return C;
+/*
+keeps only duplicates, does not sort
+UnDistinctArray([0,1,1,2,2,2,3,3,3,3])
+[1,2,2,3,3,3]
+*/
 }
 
-DistinctKeysObject=function(O,Equaliser){
-	var Ob={};
-	DistinctArray(Keys(O),Equaliser).map(k=>Ob[k]=Clone(O[k]));
-	return Ob;
-}
 
-Equaliser=function(Standardise){
-	var Standardise=Standardise||Identity;
-	return function(a,b){
-		return Equal(Standardise(a),Standardise(b))
-	}
-}
-
-Order=function(canon,list,Standardise){
-	if(!list)
-		return [];
-	var Standardise=Standardise||Identity;
-	return list.map(item=>canon.findIndex(c=>Equaliser(Standardise)(item,c)))
-}
-
-Pick=function(list,order){
-	var picked=[];
-	for(var i=0;i<order.length;i++){
-		var o=order[i];
-		if(0<o<list.length)
-			picked=Append(picked,list[o])
-	}
-	return picked;
-}
-
-Unique=function(AO){
-	return Intersection(AO,AO);
-}
-
-//Complement (force uniqueness, sort)
 ComplementArray=function(arrayInclude,arrayExclude){
+	var arrayInclude=arrayInclude||[];
+	var arrayExclude=arrayExclude||[];
 	var unique=[];
 	var value;
 	for(var i=0;i<arrayInclude.length;i++){
@@ -1522,6 +1525,35 @@ ComplementArray=function(arrayInclude,arrayExclude){
 			unique.push(value);
 	}
 	return unique.sort();
+/*
+one element to exclude
+ComplementArray(["a","b","c"],["b"])
+["a","c"]
+
+no matching element to exclude
+ComplementArray(["a","b","c"],["d"])
+["a","b","c"]
+
+empty exclusion list
+ComplementArray(["a","b","c"],[])
+["a","b","c"]
+
+inclusions as first argument, exclusions as second argument
+ComplementArray(["b"],["a","b","c"])
+[]
+
+eliminate duplicates
+ComplementArray(["b","b","a","c","c"],["a"])
+["b","c"]
+
+sort
+ComplementArray(["d","c","b","a"],["b","d"])
+["a","c"]
+
+shallow, preserves structure
+ComplementArray([["d","c"],[["b"]],"a"],["c","d",[["b"]]])
+["a",["d","c"]]
+*/
 }
 
 ComplementObject=function(objInclude,objExclude){
@@ -1561,13 +1593,14 @@ ComplementKeysObject=function(keys,Obj){
 
 
 BiComplement=function(AO1,AO2){
-	if(!AO2)
+	if(IsArray(AO1)&&IsArray(AO2))
+		return ComplementArray(AO1,AO2);
+	if(IsObject(AO1)&&IsObject(AO2))
+		return ComplementObject(AO1,AO2);
+	if(typeof AO2==="undefined")
 		return AO1;
-	if(!AO1)
-		return Empty(AO2);
-	
-	var args=Values(arguments);
-	return Apply(ArrayObjectF(ComplementArray,ComplementObject),args);
+	Wtyp("not array or object")
+	return AO1;
 }
 
 Complement=ArgumentExtender(BiComplement);
@@ -1576,7 +1609,9 @@ Complement=ArgumentExtender(BiComplement);
 
 
 //Intersection (force uniqueness, sort)
-ArrayIntersection=function(array1,array2){
+IntersectionArray=function(array1,array2){
+	var array1=array1||[];
+	var array2=array2||[];
 	var unique=[];
 	var value;
 	for(var i=0;i<array1.length;i++){
@@ -1585,20 +1620,41 @@ ArrayIntersection=function(array1,array2){
 			unique.push(value);
 	}
 	return unique.sort();
+/*
+one common element
+IntersectionArray(["a","b","c"],["b"])
+["b"]
+
+no common element
+IntersectionArray(["a","b","c"],["d"])
+[]
+
+empty list
+IntersectionArray(["a","b","c"],[])
+[]
+
+reverse argument order
+IntersectionArray(["b"],["a","b","c"])
+["b"]
+
+eliminate duplicates
+IntersectionArray(["b","b","a","c"],["b","c","c"])
+["b","c"]
+
+sort
+IntersectionArray(["d","c","b","a"],["a","c","b","d"])
+["a","b","c","d"]
+*/
 }
 
-ObjectIntersection=function(O1,O2){
-	var unique={};
-	var value;
-	for(var i in O1){
-		value=O1[i];
-		if(Equal(O2[i],value))
-			unique[i]=value;
-	}
-	return unique;
+var Intersection=ArgumentExtender(IntersectionArray);
+
+Intersected=function(){
+	var args=Values(arguments);
+	return (Apply(Intersection,args)).length>0
 }
 
-ObjectKeyIntersection=function(O1,O2){
+IntersectionKeysObject=function(O1,O2){
 	var O={};
 	for(var i in O1){
 		if(typeof O2[i]!=="undefined")
@@ -1608,20 +1664,31 @@ ObjectKeyIntersection=function(O1,O2){
 }
 
 
-BiIntersection=function(A1,A2){
-	if(!A1&&!A2)
-	return [];
-	if(!A2)
-		return A1;
-	if(!A1)
-		return A2;
-	return ArrayIntersection(A1,A2);
-}
-var Intersection=ArgumentExtender(BiIntersection);
 
-Intersected=function(){
-	var args=Values(arguments);
-	return (Apply(Intersection,args)).length>0
+
+UnionArray=function(A1,A2){
+	return Unique(A1.concat(A2));
+/*
+one common element
+UnionArray(["a","b","c"],["b"])
+["a","b","c"]
+
+new element
+UnionArray(["a","b","c"],["d"])
+["a","b","c","d"]
+
+empty list
+UnionArray(["a","b","c"],[])
+["a","b","c"]
+
+reverse argument order
+UnionArray(["b"],["a","b","c"])
+["a","b","c"]
+
+eliminate duplicates and sort
+UnionArray(["b","b","a","c","c"],["a"])
+["a","b","c"]
+*/
 }
 
 //Union (force uniqueness, sort)
@@ -1632,11 +1699,37 @@ BiUnion=function(A1,A2){
 		return Unique(A1);
 	if(!A1)
 		return Unique(A2);
-	return Unique(A1.concat(A2));
+	return UnionArray(A1,A2);
 }
 
 Union=ArgumentExtender(BiUnion);
 
+
+
+//Sort and Pick
+Equaliser=function(Standardise){
+	var Standardise=Standardise||Identity;
+	return function(a,b){
+		return Equal(Standardise(a),Standardise(b))
+	}
+}
+
+Order=function(canon,list,Standardise){
+	if(!list)
+		return [];
+	var Standardise=Standardise||Identity;
+	return list.map(item=>canon.findIndex(c=>Equaliser(Standardise)(item,c)))
+}
+
+Pick=function(list,order){
+	var picked=[];
+	for(var i=0;i<order.length;i++){
+		var o=order[i];
+		if(0<o<list.length)
+			picked=Append(picked,list[o])
+	}
+	return picked;
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2003,7 +2096,32 @@ SubsetObject=function(OSuper,OSub){
 }
 
 Subsetted=function(AOSuper,AOSub){
-	return ArrayObjectF(SubsetArray,SubsetObject)(AOSuper,AOSub);
+	if(IsArray(AOSuper)&&IsArray(AOSub))
+		return SubsetArray(AOSuper,AOSub);
+	if(IsObject(AOSuper)&&IsObject(AOSub))
+		return SubsetObject(AOSuper,AOSub);
+	return false;
+/*
+non-overlapping
+Subsetted({A:1},{B:2})
+false
+
+right key but wrong value
+Subsetted({A:1},{A:2})
+false
+
+identical
+Subsetted({A:1},{A:1})
+true
+
+strict subset
+Subsetted({A:1,B:2},{B:2})
+true
+
+only partial overlap
+Subsetted({A:1,B:2},{A:1,C:2})
+false
+*/
 }
 
 SupersetsArray=function(list){

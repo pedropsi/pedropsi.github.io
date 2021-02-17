@@ -151,41 +151,12 @@ SaveTest(In,["abcd","e"],false,"non-matching");
 SaveTest(In,["abcd","A"],false,"case-sensitive");
 SaveTest(In,[[["b"]],["b"]],true,"deep array, present");
 
-SaveTest(Subsetted,[{A:1},{B:2}],false,"non-overlapping")
-SaveTest(Subsetted,[{A:1},{A:2}],false,"right key but wrong value")
-SaveTest(Subsetted,[{A:1},{A:1}],true,"identical")
-SaveTest(Subsetted,[{A:1,B:2},{B:2}],true,"strict subset")
-SaveTest(Subsetted,[{A:1,B:2},{A:1,C:2}],false,"only partial overlap")
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //Set functions
 
-SaveTest(Unique,[["a","b","c"]],["a","b","c"],"array of unique values");
-SaveTest(Unique,[["1",1,true]],["1",1,true],"unique but similar values");
-SaveTest(Unique,[["b","b","c"]],["b","c"],"array of duplicate values");
-SaveTest(Unique,[[]],[],"empty array");
-SaveTest(Unique,[[[1,2],[1,2]]],[[1,2]],"deep array");
 
-SaveTest("Complement",[["a","b","c"],["b"]],["a","c"],"one element to exclude");
-SaveTest("Complement",[["a","b","c"],["d"]],["a","b","c"],"no matching element to exclude");
-SaveTest("Complement",[["a","b","c"],[]],["a","b","c"],"empty exclusion list");
-SaveTest("Complement",[["b"],["a","b","c"]],[],"reverse argument order");
-SaveTest("Complement",[["b","b","a","c","c"],["a"]],["b","c"],"eliminate duplicates");
-SaveTest("Complement",[["d","c","b","a"],["b","d"]],["a","c"],"sort");
-SaveTest("Complement",[[["d","c"],[["b"]],"a"],["c","d",[["b"]]]],["a",["d","c"]],"deep array");
-
-SaveTest("Intersection",[["a","b","c"],["b"]],["b"],"one common element");
-SaveTest("Intersection",[["a","b","c"],["d"]],[],"no common element");
-SaveTest("Intersection",[["a","b","c"],[]],[],"empty list");
-SaveTest("Intersection",[["b"],["a","b","c"]],["b"],"reverse argument order");
-SaveTest("Intersection",[["b","b","a","c"],["b","c","c"]],["b","c"],"eliminate duplicates");
-SaveTest("Intersection",[["d","c","b","a"],["a","c","b","d"]],["a","b","c","d"],"sort");
-
-SaveTest("Union",[["a","b","c"],["b"]],["a","b","c"],"one common element");
-SaveTest("Union",[["a","b","c"],["d"]],["a","b","c","d"],"new element");
-SaveTest("Union",[["a","b","c"],[]],["a","b","c"],"empty list");
-SaveTest("Union",[["b"],["a","b","c"]],["a","b","c"],"reverse argument order");
-SaveTest("Union",[["b","b","a","c","c"],["a"]],["a","b","c"],"eliminate duplicates and sort");
 
 SaveTest(Permutations,[[]],[],"empty array");
 SaveTest(Permutations,[[1]],[[1]],"one symbol array");
