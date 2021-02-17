@@ -8485,7 +8485,7 @@ Monitor=function(Opts){
 	if(!GetElement(".monitor")){
 		AddElement(`<div class="monitor"></div>`,"BODY")
 	}
-	report=Keys(Opts).map(name=>`<div>${name}:${Opts[name]}</div>`).join("");
+	report=Keys(Opts).map(name=>`<div>${name}:${ReString(Opts[name])}</div>`).join("");
 	ReplaceChildren(report,".monitor");
 }
 
