@@ -214,13 +214,13 @@ CountryCitySynonyms={
 CountrySimplifications=MapValuesObject(CountrySimplifications,UpperCase,UpperCase);
 
 function CountrySimpler(name){
-	return StringReplaceRulesObject(name.toUpperCase(),CountrySimplifications).replace(/\s+/g," ");
+	return MonospaceString(StringReplaceRulesObject(name.toUpperCase(),CountrySimplifications));
 };
 
 CountryCitySynonyms=MapValuesObject(CountryCitySynonyms,CountrySimpler,CountrySimpler);
 
 function CountrySimple(name){
-	return StringReplaceRulesObject(CountrySimpler(name),CountryCitySynonyms).replace(/\s+/g," ");
+	return MonospaceString(StringReplaceRulesObject(CountrySimpler(name),CountryCitySynonyms));
 };
 
 Countries=Countries.map(CountrySimple);
