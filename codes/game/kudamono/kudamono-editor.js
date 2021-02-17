@@ -1011,7 +1011,7 @@ MiniBoardDraw=function(fruit,rule,state){
 }
 
 RuleDescriptionDraw=function(fruit,rule){
-	var description=rule.description;
+	var description=`<p>${rule.description}</p>`;
 	ReplaceChildren(description,".description-"+fruit);
 }
 

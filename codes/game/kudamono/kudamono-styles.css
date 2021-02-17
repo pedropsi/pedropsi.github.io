@@ -38,7 +38,6 @@
 	flex:auto;
 	flex-direction:column;
 	min-width:var(--w16);
-	overflow:hidden;
 	padding:0;
 	margin:var(--h1) var(--w1) var(--h1) var(--w1);
 
@@ -50,12 +49,21 @@
 	left:0
 }
 .tabletop .explainer .description{
-	max-width:var(--w8);
+	width:var(--w16);
+	align-self:flex-end;
+	z-index:2;
+	height:100%;
+    position:relative;
+    overflow:visible;
+}
+.tabletop .explainer .description p{
 	font-style:italic;
 	font-weight:bold;
 	text-align:right;
 	align-self:flex-end;
-	z-index:2;
+    position:relative;
+	top:calc(-1*var(--h4));
+	width:100%;
     background-color:var(--lightyellow);
     padding:var(--h1) var(--w1) var(--h1) var(--w1);
     line-height:calc(0.75 * var(--fontheight))
