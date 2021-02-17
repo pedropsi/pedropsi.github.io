@@ -1603,18 +1603,13 @@ DragActionEnder=function(x,y,w,h,target){
 }
 
 
-
-
-DecrementCanvasWidth	=StateKeyHandlerer({W:W=>Max(W-1,2)});
-DecrementCanvasHeight	=StateKeyHandlerer({H:H=>Max(H-1,2)});
-IncrementCanvasWidth	=StateKeyHandlerer({W:W=>Max(W+1,2)});
-IncrementCanvasHeight	=StateKeyHandlerer({H:H=>Max(H+1,2)});
+//Actions
 
 BoardShifter=function(L){
-	return function(){
-		LevelShifterHandlerer(L)();
-		SegmentsShifterHandlerer(L)();
-	};
+	return StateKeyHandlerer({
+		level:LevelShifter(DirectionsCoordinates[L]),
+		segments:SegmentsShifter(DirectionsCoordinates[L])
+	});
 }
 
 BoardIncrementer=function(L,size){
@@ -1631,7 +1626,7 @@ BoardIncrementer=function(L,size){
 
 
 LevelShifterHandlerer=function(L){
-	return StateKeyHandlerer({level:LevelShifter(LetterCoordinatesShifter(L))});
+	return StateKeyHandlerer({level:LevelShifter(DirectionsCoordinates[L])});
 }
 LevelShifter=function(v){
 	return function(level){
@@ -1645,17 +1640,11 @@ TransformLevel=function(level,CoordinateTransform){
 };
 
 SegmentsShifterHandlerer=function(L){
-	return StateKeyHandlerer({segments:SegmentsShifter(LetterCoordinatesShifter(L))});
+	return StateKeyHandlerer({segments:SegmentsShifter(DirectionsCoordinates[L])});
 }
 SegmentsShifter=function(v){
 	return function(segments){
 		return segments.map(seg=>seg.map(xy=>VectorPlus(xy,v)));
-	}
-}
-
-LetterCoordinatesShifter=function(L){
-	return function(xy){
-		return VectorPlus(xy,DirectionsCoordinates[L])
 	}
 }
 
@@ -1677,35 +1666,31 @@ CycleFruitMode=function(state,n){
 
 
 
-
 var KeyboardActions=function(){return{
-	"ctrl left"			:BoardIncrementer("L",1),
-	"ctrl up"			:BoardIncrementer("U",1),
-	"ctrl right"		:BoardIncrementer("R",1),
-	"ctrl down"			:BoardIncrementer("D",1),
+	"left"				:BoardIncrementer("L",1),
+	"up"				:BoardIncrementer("U",1),
+	"right"				:BoardIncrementer("R",1),
+	"down"				:BoardIncrementer("D",1),
 	
-	"ctrl left  shift"	:BoardIncrementer("L",-1),
-	"ctrl up    shift"	:BoardIncrementer("U",-1),
-	"ctrl right shift"	:BoardIncrementer("R",-1),
-	"ctrl down  shift"	:BoardIncrementer("D",-1),
+	"alt left"			:BoardIncrementer("L",-1),
+	"alt up"			:BoardIncrementer("U",-1),
+	"alt right"			:BoardIncrementer("R",-1),
+	"alt down"			:BoardIncrementer("D",-1),
 
-	// "shift left"		:BoardShifter("L"),
-	// "shift up"			:BoardShifter("U"),
-	// "shift right"		:BoardShifter("R"),
-	// "shift down"		:BoardShifter("D"),
-
-	// "alt left"			:LevelShifterHandlerer("L"),
-	// "alt up"			:LevelShifterHandlerer("U"),
-	// "alt right"			:LevelShifterHandlerer("R"),
-	// "alt down"			:LevelShifterHandlerer("D"),
-
-	// "shift alt left"	:SegmentsShifterHandlerer("L"),
-	// "shift alt up"		:SegmentsShifterHandlerer("U"),
-	// "shift alt right"	:SegmentsShifterHandlerer("R"),
-	// "shift alt down"	:SegmentsShifterHandlerer("D"),
-
-
+	"ctrl left"			:LevelShifterHandlerer("L"),
+	"ctrl up"			:LevelShifterHandlerer("U"),
+	"ctrl right"		:LevelShifterHandlerer("R"),
+	"ctrl down"			:LevelShifterHandlerer("D"),
 	
+	"shift left"		:SegmentsShifterHandlerer("L"),
+	"shift up"			:SegmentsShifterHandlerer("U"),
+	"shift right"		:SegmentsShifterHandlerer("R"),
+	"shift down"		:SegmentsShifterHandlerer("D"),
+
+	"ctrl shift left"	:BoardShifter("L"),
+	"ctrl shift up"		:BoardShifter("U"),
+	"ctrl shift right"	:BoardShifter("R"),
+	"ctrl shift down"	:BoardShifter("D"),
 
 
 	"b ctrl"		:StateKeyHandlerer({visuals:{monochrome:Flipped}}),
