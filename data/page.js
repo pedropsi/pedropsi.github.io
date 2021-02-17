@@ -173,7 +173,7 @@ DoctypeHTML=function(lang){
 PageWithMetaHTML=function(v,post){
 	return `${v.HTML_DOCTYPE()}
 	<head>
-		${v.HEAD().replace(/\s+/ig," ")}
+		${MonospaceString(v.HEAD())}
 		<script src="codes/core.js"></script>
 		${post}
 	</head></html>

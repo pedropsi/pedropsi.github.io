@@ -277,12 +277,12 @@ FindCallerName=function(code){
 	if(FunctionHead(code))
 		return FunctionHead(code);
 	if(!FindCallerName["caller-code-bodies"]){
-		FindCallerName["caller-code-bodies"]=ReValueObject(globalThis,(v,x)=>IsFunction(x)?UnWhitespace(FunctionBody(v)):"");
+		FindCallerName["caller-code-bodies"]=ReValueObject(globalThis,(v,x)=>IsFunction(x)?UnWhitespaceString(FunctionBody(v)):"");
 		FindCallerName["caller-code-bodies"]=FlipKeysValues(FindCallerName["caller-code-bodies"])
 	}
 	if(!code)
 		return "";
-	var code=UnWhitespace(code);
+	var code=UnWhitespaceString(code);
 	if(FindCallerName[code])
 		return FindCallerName[code]
 	return "";
@@ -2316,8 +2316,25 @@ TrimWhitespaceString=function(string){
 	return string.replace(/^(\r|\s)+/gi,"").replace(/(\r|\s)+$/gi,"");
 }
 
-UnWhitespace=function(string){
+UnWhitespaceString=function(string){
 	return string.replace(/(\s|\r)*/gi,"");
+/*
+UnWhitespaceString(" 	e	 mpty_\t\r   space")
+"empty_space"
+*/
+}
+
+MonospaceString=function(string){
+	return string.replace(/(\s|\r)+/gi," ");
+/*
+Eliminates spaces, carriage returns
+MonospaceString(" 	e	 mpty_\t\r   space")
+" e mpty_ space"
+
+Eliminates paragraphs too
+MonospaceString("empty   \n   lines")
+"empty lines"
+*/
 }
 
 CharacterUniformisations={
@@ -2354,7 +2371,7 @@ UniformString=function(string){
 }
 
 LowerSimpleString=function(string){
-	return SafeString(UnWhitespace(string).toLowerCase());
+	return SafeString(UnWhitespaceString(string).toLowerCase());
 }
 
 SpacedString=function(string){
@@ -2541,6 +2558,10 @@ UnPosfix("What !!!?!?.?.?.?","?.")
 Any order
 UnPosfix("What !!!?!?.?.?.?",[".","?","!"])
 "What "
+
+Multiple whitespace types
+UnPosfix("away with all spaces!  \t\t \r\r "," ")
+"away with all spaces!"
 */
 }
 
@@ -4487,7 +4508,7 @@ FilterChildren=function(filterF,parentSelector,childSelector,subparentSelector){
 }
 
 InSubPart=function(string,subparts){
-	var string=UnWhitespace(string);
+	var string=UnWhitespaceString(string);
 	var subparts=AccPermutations(subparts,3).map(p=>p.join(""));
 	return subparts.some(txt=>InString(string,txt));
 }
@@ -4498,7 +4519,7 @@ StringsContained=function(strings,patterntxt){
 		return true;
 	var strings=strings.map(LowerSpacedString);
 	var subparts=patterntxt.split(" ").filter(Identity);
-	var whole=UnWhitespace(strings.join(""));
+	var whole=UnWhitespaceString(strings.join(""));
 	return strings.some(celltxt=>InSubPart(celltxt,subparts))&&subparts.every(part=>InString(whole,part));
 }
 
@@ -7996,7 +8017,7 @@ NodeHyperText=function(name){
 	LoadHyperTextSource(name);
 	while(!globalThis[name]){}
 	var text=globalThis[name]();
-	return text.replace(/\s+/ig," ");
+	return MonospaceString(text);
 }
 
 

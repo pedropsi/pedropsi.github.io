@@ -2946,7 +2946,7 @@ function SimpleStarName(name){
 		name=name.replaceAll(/(\s|\-|\+)+/g," ");
 		name=StringReplace(name,GreekLetterNames);
 		name=name.split(" ").map(n=>TransformAccesser(CodesConstellations,LowerCase)(n)).join("").toLowerCase();
-		name=name.replaceAll(/\s+/g,"");
+		name=UnWhitespaceString(name);
 		name=StringReplace(name,DeclinationsConstellation);
 	return name;
 }
@@ -2996,7 +2996,7 @@ function ConstellationDeclinate(star){//Prevents infinite replacing hydra->hydra
 			ConstellationDeclinate.l[k+" "]=(ConstellationDeclinations[k]+" ");
 		})
 	}
-	return StringReplace(star+" ",ConstellationDeclinate.l).replace(/\s+$/,"");
+	return UnPosfix(StringReplace(star+" ",ConstellationDeclinate.l)," ");
 }
 
 function NextStar(starname){

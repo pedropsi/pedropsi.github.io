@@ -42,7 +42,7 @@ var MorseCode={
 function BiMorse(morse){
 	var bimorse="";
 	var flip=false;
-	var morse=morse.replace(/\s+/mig," ");
+	var morse=MonospaceString(morse);
 	for(var i=0;i<morse.length;i++){
 		if(morse[i]===" ")
 			flip=!flip;
