@@ -2044,9 +2044,7 @@ StringReplaceRule=function(string,rule){
 StringReplaceRuleArray=function(string,ruleArray){
 	return Fold(StringReplaceRule,string,ruleArray);
 }
-StringReplaceOnceRuleArray=function(string,ruleArray){
-	return Fold(StringReplaceOnceRule,string,ruleArray);
-}
+
 
 FirstReplaceString=function(string,ruleArray){
 	var i=0;
@@ -2079,10 +2077,6 @@ ObjectRules=function(Obj){
 	}
 	return a;
 }
-
-// StringReplaceRulesObjectOnce=function(string,rulesObj){
-// 	return StringReplaceOnceRuleArray(string,ObjectRules(rulesObj));
-// }
 
 StringReplaceRulesObject=function(string,rulesObj){
 	return FixedPoint(function(s){return StringReplaceRuleArray(s,ObjectRules(rulesObj))},string);
