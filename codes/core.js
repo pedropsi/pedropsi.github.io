@@ -1667,26 +1667,13 @@ Fuse=Combiner(["Array","String"]);
 
 
 
-//Permutations of a set (enforces uniqueness or sort)
-// Permutations=function(array){
-// 	var array=Unique(array);
-// 	if(array.length===1)
-// 		return [array];
-	
-// 	var subpermutations=[];
-// 	var permutations=[];
-// 	for(var i=0;i<array.length;i++){
-// 		subpermutations=Permutations(Delete(array,i));
-// 		subpermutations=subpermutations.map(function(s){return [array[i]].concat(s)});
-// 		permutations=permutations.concat(subpermutations);
-// 	}
-// 	return permutations;
-// }
+
+
+
 
 StringPermutations=function(string){
 	return Permutations(string.split("")).map(function(p){return p.join("");});
 }
-
 
 //Factorial numbers and arrays
 Factorial=function(n){
