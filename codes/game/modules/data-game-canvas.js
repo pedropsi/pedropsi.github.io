@@ -235,7 +235,6 @@ SquaresGridDraw=function(opts){
 		y0:gridOpts.y0/gridOpts.height,
 		y1:gridOpts.y1/gridOpts.height
 	}
-
 	RectangleDraw({...gridOpts,lineWidth:0});
 	GridLinesDraw({...gridOpts,...gridCoords});
 	var borderOpts=gridOpts;

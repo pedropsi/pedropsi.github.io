@@ -987,11 +987,11 @@ MiniBoardDraw=function(fruit,rule,state){
 			},
 			lineWidth:3,
 			scale:1,
-			offsetX:state.grid.dual?1:0,
-			offsetY:state.grid.dual?1:0,
+			offsetX:state.grid.dual?2/3:1/2,
+			offsetY:state.grid.dual?2/3:1
 		},
-		width:"100px",
-		height:"100px",
+		width:"var(--w4)",
+		height:"var(--h4)",
 		line:{
 			wrongDash:[1,5],
 			lineWidth:5						//fruitline width
@@ -1363,7 +1363,7 @@ UpdateState=function(substate,options){
 
 	if(changed.length)
 		SaveState(state);
-	if(Intersected(changed,UndoableProperties)){
+	if(Intersected(TreeKeys(changed),UndoableProperties)){
 		AddUndo(state);
 		NavigateSerial(StateSerial(state));
 	}
