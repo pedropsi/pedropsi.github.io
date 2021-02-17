@@ -98,7 +98,7 @@ var Gendered={//cherished woman//
 }
 
 var GenderReplacementRules=[];
-MapObject(Gendered,function(f,m){
+MapValuesObject(Gendered,function(f,m){
 	GenderReplacementRules.push([new RegExp(m.toUpperCase()+"$"),f.toUpperCase()]);
 });
 

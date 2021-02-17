@@ -506,15 +506,6 @@ function PlayWinSound(){
 		Sound();
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
-function InPart(arrayOrObj,n){
-	if(!arrayOrObj)
-		return false;
-	var m=a=new RegExp("^"+n,"i");
-	function F(ao){return ao.some(function(s){return InString(s,m)})};
-	return AOApply(arrayOrObj,F)||false;
-};
 
 ///////////////////////////////////////////////////////////////////////////////
 //Levels & Actions

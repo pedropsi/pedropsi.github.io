@@ -211,19 +211,13 @@ CountryCitySynonyms={
 	"São Tomé and Príncipe":"São Tomé e Príncipe"
 }
 
-MapObject(CountrySimplifications,function(v,k,o){
-	delete o[k];
-	o[k.toUpperCase()]=v.toUpperCase();
-})
+CountrySimplifications=MapValuesObject(CountrySimplifications,UpperCase,UpperCase);
 
 function CountrySimpler(name){
 	return StringReplaceRulesObject(name.toUpperCase(),CountrySimplifications).replace(/\s+/g," ");
 };
 
-MapObject(CountryCitySynonyms,function(v,k,o){
-	delete o[k];
-	o[CountrySimpler(k)]=CountrySimpler(v);
-})
+CountryCitySynonyms=MapValuesObject(CountryCitySynonyms,CountrySimpler,CountrySimpler);
 
 function CountrySimple(name){
 	return StringReplaceRulesObject(CountrySimpler(name),CountryCitySynonyms).replace(/\s+/g," ");
@@ -493,10 +487,7 @@ var CapitalCountry={
 //"Longyearbyen":"Svalbard"
 }
 
-CapitalCountry=MapObject(CapitalCountry,function(v,k,o){
-	delete o[k];
-	o[CountrySimple(k)]=CountrySimple(v);
-})
+CapitalCountry=MapValuesObject(CapitalCountry,CountrySimple,CountrySimple)
 
 var CountryCapital=FlipKeysValues(CapitalCountry);
 var Capitals=Countries.map(function(c){return CountryCapital[c]});//Preserve ordering

@@ -115,20 +115,8 @@ SaveTest(IsObject,{},true,"object - empty");
 SaveTest(IsObject,"abcd",false,"string");
 
 
-//AOApply function to Array or Object
-SaveTest(AOApply,[true,Identity],undefined,"boolean");
-SaveTest(AOApply,["abcd",Identity],undefined,"string");
-SaveTest(AOApply,[["a","b","c","d"],First],"a","array - normal");
-SaveTest(AOApply,[{a:"1",b:"2"},Identity],["a","b"],"object - normal");
 
 
-// Does element exist?
-SaveTest(InArrayOrObj,[true,"a"],false,"boolean");
-SaveTest(InArrayOrObj,["abcd","a"],false,"string");
-SaveTest(InArrayOrObj,[["a","b","c","d"],"a"],true,"present in array");
-SaveTest(InArrayOrObj,[["a","b","c","d"],"e"],false,"absent from array");
-SaveTest(InArrayOrObj,[{a:"1",b:"2",c:"3",d:"4"},"a"],true,"present in keys");
-SaveTest(InArrayOrObj,[{a:"1",b:"2",c:"3",d:"4"},"1"],false,"absent from keys, but in values");
 
 //Values
 SaveTest(Values,{a:1,b:2,c:3,d:4},[1,2,3,4],"values");

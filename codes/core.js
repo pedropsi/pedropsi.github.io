@@ -1025,17 +1025,8 @@ ReString(NaN)
 */
 }
 
-//Apply function to Array or Object
-AOApply=function(arrayOrObj,F){
-	if(IsArray(arrayOrObj))
-		return F(arrayOrObj);
-	else if(IsObject(arrayOrObj))
-		return F(Keys(arrayOrObj));
-	else{
-		Wtyp(arrayOrObj);
-		return undefined;
-	}
-};
+
+//Objects
 
 Keys=function(Obj){
 	return Object.keys(Obj)||[];
@@ -1121,17 +1112,35 @@ InArrayOrObj=function(arrayOrObj,n){
 	return AOApply(arrayOrObj,F)||false;
 };
 
-//Update Object Keys
-MapObject=function(Obj,ValueKeyer){
-	var keys=Keys(Obj);
-	for (var i in keys){
-		if(Obj.hasOwnProperty(keys[i])){
-			//F(value, key, obj)
-			ValueKeyer(Obj[keys[i]],keys[i],Obj);
-		}
-	}
-	return Obj;
+MapValuesObject=function(Obj,ValueTransform,KeyTransform){
+	var ValueTransform=ValueTransform||Identity;
+	var KeyTransform=KeyTransform||Identity;
+	var O={};
+	Keys(Obj).map(key=>O[KeyTransform(key,Obj[key])]=ValueTransform(Obj[key],key))
+	return O;
+/*
+Change values
+MapValuesObject({a:1,b:2},v=>2*v)
+{a:2,b:4}
+
+Change values, based on keys
+MapValuesObject({a:1,b:2},(v,k)=>k+v)
+{a:"a1",b:"b2"}
+
+Change keys, based on values
+MapValuesObject({a:1,b:2},Identity,(k,v)=>k+v)
+{"a1":1,"b2":2}
+*/
 };
+
+MapKeysObject=function(Obj,KeyTransform,ValueTransform){
+	return MapValuesObject(Obj,ValueTransform,KeyTransform);
+/*
+Change keys
+MapKeysObject({a:1,b:2},k=>k+k)
+{aa:1,bb:2}
+*/
+}
 
 
 FilterKeysObject=function(Obj,Validator){
@@ -1172,6 +1181,8 @@ Filter=function(AO,Validator){
 	Wtyp("no object or array");
 	return AO;
 }
+
+
 
 
 
@@ -2003,7 +2014,7 @@ ItemPrecedents("a",{a:"b",b:"c",c:"a"})
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//Join Objects, overwriting conflicting properties
+//Clone
 
 CloneObject=function(Obj){
 	var O={};
@@ -6915,17 +6926,17 @@ UnSchedule=function(unactionF,time,queueName){
 	if(!Schedule[queueName]||!Schedule[queueName][time])
 		return;
 	unactionF();
-	UnScheduleF(queueName)(time);
+	UnScheduler(queueName)(time);
 }
 
-UnScheduleF=function(queueName){
+UnScheduler=function(queueName){
 	return function(time){clearTimeout(time);delete Schedule[queueName][time];};
 }
 
 UnScheduleAll=function(queueName){
 	if(!Schedule[queueName])
 		return;
-	MapObject(Schedule[queueName],UnScheduleF(queueName))
+	Keys(Schedule[queueName]).map(UnScheduler(queueName))
 	delete Schedule[queueName];
 }
 
