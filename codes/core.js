@@ -1532,169 +1532,124 @@ BiUnion=function(A1,A2){
 
 Union=ArgumentExtender(BiUnion);
 
-JoinObjects=function(O1,O2){
-	var O=Clone(O1);
-	Keys(O2).map(
-		function(k){
-			if(!O1[k])
-				O[k]=O2[k]
-			else
-				O[k]=Join(O1[k],O2[k])
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Object combiners - combines objects in a myriad different ways
+
+TypeCombiners={
+	"Array":{
+		Validate1:IsArray,
+		Validate2:IsArray,
+		Combine:(A1,A2)=>A1.concat(A2)},
+	"Function":{
+		Validate1:True,
+		Validate2:IsFunction,
+		Combine:(SAO1,F2)=>Evaluate(F2,SAO1)},
+	"String":{
+		Validate1:IsString,
+		Validate2:IsString,
+		Combine:(S1,S2)=>S1+S2},
+	"Object":{
+		Validate1:IsObject,
+		Validate2:IsObject,
+		Combine:function(O1,O2){return {...O1,...O2}}
+	}
+}
+
+Combiner=function(TypeCombinersNames){
+	var names=TypeCombinersNames||[];
+	var Validators=FilterKeysObject(TypeCombiners,name=>In(names,name));
+		names=Keys(Validators);
+	var l=names.length;
+	function BiCombine(SAO1,SAO2){
+		if(typeof SAO1==="undefined"&&typeof SAO2==="undefined")
+			return {};
+		if(typeof SAO2==="undefined")
+			return SAO1;
+		if(typeof SAO1==="undefined")
+			return SAO2;
+		var i=0;
+		while(i<l){
+			if(TypeCombiners[names[i]].Validate1(SAO1)&&TypeCombiners[names[i]].Validate2(SAO2))
+				return TypeCombiners[names[i]].Combine(SAO1,SAO2);
+			i++;
 		}
-	)
-	return O;
-}
-
-BiJoinAO=function(AO1,AO2){
-	// if(IsString(AO1)&&IsString(AO2))
-	// 	return AO1+AO2;
-	if(IsObject(AO1)&&IsObject(AO2))
-		return JoinObjects(AO1,AO2);
-	else if(IsArray(AO1)&&IsArray(AO2))
-		return AO1.concat(AO2);
-	else
-		return AO2; //overwrites if joining impossible
-}
-
-BiJoin=function(AO1,AO2){
-	if(!AO2)
-		return AO1;
-	if(!AO1)
-		return AO2;
-	return BiJoinAO(AO1,AO2);
+		if(IsObject(SAO1)&&IsObject(SAO2)){//recursive by default, but this may be overriden
+			var O=Clone(SAO1);
+			Keys(SAO2).map(
+				function(k){
+					O[k]=BiCombine(SAO1[k],SAO2[k]);
+				}
+			);
+			return O;
+		}
+		return SAO2;
+	};
+	return ArgumentExtender(BiCombine);
 /*
 recursive
-BiJoin({a:{c:3,d:4}},{a:{e:5}})
+Join({a:{c:3,d:4}},{a:{e:5}})
 {a:{c:3,d:4,e:5}}
 
 also combines arrays
-BiJoin({a:[1,2,3]},{a:[4,5]})
+Join({a:[1,2,3]},{a:[4,5]})
 {a:[1,2,3,4,5]}
-*/
-}
 
-Join=ArgumentExtender(BiJoin);
+polyarity
+Join({a:1},{b:2},{c:3})
+{a:1,b:2,c:3}
+
+empty
+Join()
+{}
 
 
 
-MergeObjects=function(O1,O2){
-	var O=Clone(O1);
-	Keys(O2).map(
-		function(k){
-			if(typeof O1[k]!=="undefined")
-				O[k]=O2[k]
-			else
-				O[k]=BiMerge(O1[k],O2[k]) //overwrites if joining impossible
-		}
-	)
-	return O;
-}
-
-BiMerge=function(AO1,AO2){
-	if(typeof AO1==="undefined"&&typeof AO2==="undefined")
-		return {};
-	if(typeof AO2==="undefined")
-		return AO1;
-	if(typeof AO1==="undefined")
-		return AO2;
-	if(IsObject(AO1)&&IsObject(AO2))
-		return MergeObjects(AO1,AO2);
-	else
-		return AO2; //overwrites if merging impossible
-
-/*
 object with key
-BiMerge({a:1,b:2},{a:3})
+Merge({a:1,b:2},{a:3})
 {a:3,b:2}
 
 object no key
-BiMerge({a:1,b:2},{c:3})
+Merge({a:1,b:2},{c:3})
 {a:1,b:2,c:3}
 
 object hasn't key
-BiMerge({a:1,b:2},{c:3,d:4})
+Merge({a:1,b:2},{c:3,d:4})
 {a:1,b:2,c:3,d:4}
 
 multiple properties
-BiMerge({a:3},{a:1,b:2})
+Merge({a:3},{a:1,b:2})
 {a:1,b:2}
 
 add empty object
-BiMerge({a:1,b:2},{})
+Merge({a:1,b:2},{})
 {a:1,b:2}
 
 add to empty object
-BiMerge({},{a:1,b:2})
+Merge({},{a:1,b:2})
 {a:1,b:2}
 
 only one argument
-BiMerge({a:1,b:2})
+Merge({a:1,b:2})
 {a:1,b:2}
 
 zero argument
-BiMerge()
+Merge()
 {}
 
 not recursive (use join for that)
-BiMerge({a:{c:3,d:4}},{a:{e:5}})
+Merge({a:{c:3,d:4}},{a:{e:5}})
 {a:{e:5}}
-*/
-}
-
-Merge=ArgumentExtender(BiMerge);
 
 
-MergeEvaluateObject=function(Obj,SubObj){
-	var Obj=Clone(Obj||{})
-	if(!SubObj)
-		return Obj;
-	Keys(SubObj).map(
-		function(k){
-			var v=Evaluate(SubObj[k],Obj[k]);
-			if(IsObject(v)&&IsObject(Obj[k])){
-				v=MergeEvaluateObject(Obj[k],v);
-			}
-			v=Merge(Obj[k],v);
-			if(Obj[k]!==v){
-				Obj[k]=v;
-			}
-		})
-	return Obj;
-/*
+
 deep evaluation
 MergeEvaluateObject({a:1,b:2,c:{d:3}},{a:x=>x+1,c:{d:x=>2*x}})
 {a:2,b:2,c:{d:6}}
-*/
-}
-//Fuses objects, and any contained strings
-FuseObjects=function(O1,O2){
-	var O=Clone(O1);
-	Keys(O2).map(
-		function(k){
-			if(typeof O1[k]!=="undefined")
-				O[k]=BiFuse(O1[k],O2[k]);
-			else
-				O[k]=O2[k] //overwrites if fusing impossible
-		}
-	)
-	return O;
-}
 
-BiFuse=function(AO1,AO2){
-	if(typeof AO1==="undefined"&&typeof AO2==="undefined")
-		return {};
-	if(typeof AO2==="undefined")
-		return AO1;
-	if(typeof AO1==="undefined")
-		return AO2;
-	if(IsString(AO1)&&IsString(AO2))
-		return AO1+AO2;
-	if(IsObject(AO1)&&IsObject(AO2))
-		return FuseObjects(AO1,AO2);
-	else
-		return AO2; //overwrites if merging impossible
 
-/*
+
 object with key
 BiFuse({a:"a",b:2},{a:"3"})
 {a:"a3",b:2}
@@ -1702,7 +1657,15 @@ BiFuse({a:"a",b:2},{a:"3"})
 */
 }
 
-Fuse=ArgumentExtender(BiFuse);
+Merge=Combiner(["Object"]);
+MergeEvaluate=Combiner(["Object","Function"]);
+
+Join=Combiner(["Array"]);
+JoinEvaluate=Combiner(["Array","Function"]);
+
+Fuse=Combiner(["Array","String"]);
+
+
 
 //Permutations of a set (enforces uniqueness or sort)
 // Permutations=function(array){
