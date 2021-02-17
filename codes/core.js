@@ -938,38 +938,91 @@ InsertCut([1,2,3,4,5],"a",0)
 */
 }
 
-//Distinguish Objects and Arrays
-IsArray=function(array){
-	if(!array)
-		return false;
-	return FunctionName(array.constructor)==="Array";
+//Data Types: Arrays, Objects, Strings, Regex, Date, Boolean, etc...
+
+Iser=function(TypeConstructorName){
+	return function(a){
+		if(!a)
+			return false;
+		return FunctionName(a.constructor)===TypeConstructorName;
+	}
+/*
+not even an argument
+IsArray()
+false
+
+empty object
+IsArray({})
+false
+
+empty array
+IsArray([])
+true
+
+empty object
+IsObject({})
+true
+
+empty array
+IsObject([])
+false
+
+regex - valid, with flags
+IsRegex(/\d/mig)
+true
+
+regex - actually just a string
+IsRegex("/\d/mig")
+false
+*/
 }
 
-IsObject=function(obj){
-	return obj&&In(String(obj.constructor),"Object");
-}
+IsArray=Iser("Array");
+IsObject=Iser("Object");
+IsRegex=Iser("RegExp")
 
-IsRegex=function(obj){
-	if(!obj)
-		return false;
-	return FunctionName(obj.constructor)==="RegExp";
-}
 
-IsString=function(s){
-	if(typeof s==="undefined")
-		return false;
-	return typeof s==="string";
+TypeOfer=function(typeName){
+	return function(s){
+		if(typeof s==="undefined")
+			return false;
+		return typeof s===typeName;
+	}
 /*
 Empty string
 IsString("")
 true
 
+requires an argument
+IsString()
+false
+
+actual string
+IsString("hi")
+true
+
+function, named
+IsFunction(IsFunction)
+true
+
+function, anonymous
+IsFunction(x=>x)
+true
+
+number, falsy
+IsNumber(0)
+true
+
+number, nan
+IsNumber(NaN)
+true
 */
 }
 
-IsFunction=function(F){
-	return F&&(typeof F==="function");
-}
+IsString=TypeOfer("string");
+IsFunction=TypeOfer("function");
+IsNumber=TypeOfer("number");
+
 
 IsNode=function(node){
 	return node&&(typeof node==="object")&&node.isEqualNode;
@@ -979,10 +1032,6 @@ IsNan=function(nan){
 	return (typeof nan==="number")&&!(nan<0)&&!(nan===0)&&!(nan>0);
 }
 
-IsNumber=function(n){
-	return (typeof n==="number");
-}
-
 IsDate=function(n){
 	return n&&(typeof n==="object")&&n.getDate;
 }
@@ -990,7 +1039,7 @@ IsDate=function(n){
 
 ReArray=function(a){
 	if(typeof a==="undefined")
-		return []
+		return [];
 	else if(IsArray(a))
 		return a;
 	else
@@ -1096,21 +1145,6 @@ ReValueObject({a:1,b:1},{a:x=>100,b:x=>10})
 };
 
 
-// Does element exist?
-InArrayOrObj=function(arrayOrObj,n){
-	if(!arrayOrObj)
-		return false;
-	function F(array){
-		var i=0;
-		var found=false;
-		while(!found&&i<array.length){
-			found=Equal(array[i],n);
-			i++;
-		}
-		return found;	
-	};
-	return AOApply(arrayOrObj,F)||false;
-};
 
 MapValuesObject=function(Obj,ValueTransform,KeyTransform){
 	var ValueTransform=ValueTransform||Identity;
@@ -1266,10 +1300,57 @@ InLazyString=function(string,n){ //Lazy matching, 1 error
 }
 
 In=function(SAO,n){
-	if(typeof SAO==="string")
+	if(IsArray(SAO)){
+		var i=0;
+		var l=SAO.length;
+		var found=false;
+		while(!found&&i<l){
+			found=Equal(SAO[i],n);
+			i++;
+		}
+		return found;	
+	}
+	if(IsObject(SAO))
+		return In(Keys(SAO),n);
+	if(IsString(SAO))
 		return InString(SAO,n);
-	else
-		return InArrayOrObj(SAO,n);
+	else {
+		Wtyp("expected string, array or object")
+		return false
+	}
+/*
+boolean, or otther unexpected data types
+In(true,"a")
+false
+
+present in string
+In("abcd","a")
+true
+
+absent from string
+In("abcd","z")
+false
+
+empty is always there
+In("abcd","")
+true
+
+present in array
+In(["a","b","c","d"],"a")
+true
+
+absent from array
+In(["a","b","c","d"],"e")
+false
+
+present in keys
+In({a:"1",b:"2",c:"3",d:"4"},"a")
+true
+
+absent from keys, even if in values
+In({a:"1",b:"2",c:"3",d:"4"},"1")
+false
+*/
 }
 
 
