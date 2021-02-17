@@ -42,7 +42,7 @@ var PCDHTML=`
 		<td>prototype</td>
 		<td>Teleport</td></tr><tr id="game-console.html?game=0ff75df026048463f2da4777e15515fa">
 		<td><a href="game-console.html?game=0ff75df026048463f2da4777e15515fa">Simple Block Swapping Game</a> <a href="https://www.puzzlescript.net/play.html?p=0ff75df026048463f2da4777e15515fa" target="_blank">&loz;</a></td>
-		<td>www.puzzlescript.net</td>
+		<td>???</td>
 		<td>example</td>
 		<td>teleport</td></tr><tr id="game-console.html?game=8a4d08484adeb28ddede1510a80e12d3">
 		<td><a href="game-console.html?game=8a4d08484adeb28ddede1510a80e12d3">Teleport colourfully</a> <a href="https://www.puzzlescript.net/play.html?p=8a4d08484adeb28ddede1510a80e12d3" target="_blank">&loz;</a></td>
