@@ -137,8 +137,8 @@ Trued=function(a){return a===true};
 Falsed=function(a){return a===false};
 
 
-Apply=function(Function,Array){
-	return Function.apply(null, Array);
+Apply=function(F,A){
+	return F.apply(null,A);
 /*
 to any number of arguments
 Apply(Plus,[1,2,3])
@@ -150,9 +150,9 @@ Apply(Plus,[])
 */
 }
 
-Applier=function(Function){
+Applier=function(F){
 	return function(arg){
-		return Apply(Function,arg);
+		return Apply(F,arg);
 	}
 }
 
