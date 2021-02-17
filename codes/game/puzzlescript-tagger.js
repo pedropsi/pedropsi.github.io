@@ -116,40 +116,17 @@ ParameterPairString=function(key,value){
 	return encodeURIComponent(key)+'='+encodeURIComponent(value);
 }
 
+ThreadKeysValues=function(Obj,KeyValuer){
+	return Keys(Obj).map(k=>KeyValuer(k,Obj[k]));
+}
+
 ParameterString=function(parametersObject){
-	return MapKeys(FlipKeysValues(parametersObject),ParameterPairString).join("&");
+	return ThreadKeysValues(parametersObject,ParameterPairString).join("&");
 }
 
 Keys=function(Obj){
 	return Object.keys(Obj)||[];
 };
-Values=function(Obj){
-	return Keys(Obj).map(function(k){return Obj[k]})||[];
-};
-
-FlipKeysValues=function(Obj){
-	var k=Keys(Obj);
-	var O={};
-	k.map(function(x){O[Obj[x]]=x});
-	return O;
-};
-
-MapObject=function(Obj,F){
-	var keys=Keys(Obj);
-	for (var i in keys){
-		if(Obj.hasOwnProperty(keys[i])){
-			//F(value, key, obj)
-			F(Obj[keys[i]],keys[i],Obj);
-		}
-	}
-	return Obj;
-};
-
-MapKeys=function(Obj,F){
-	var K=[];
-	MapObject(Obj,function(value,key,object){K.push(F(value,key,object))});
-	return K;
-}
 
 Identity=function(a){return a;}
 
