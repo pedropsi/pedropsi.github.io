@@ -1541,7 +1541,7 @@ DragActionStarter=function(x,y,w,h,target){
 	var mode=Clone(state.mode);
 	var atFruit=XYFruit(xy,state);
 	if(atFruit)
-		mode.fruitIndex=FruitStateIndex(atfruit,state);
+		mode.fruitIndex=FruitStateIndex(atFruit,state);
 	mode.dragging=true;
 	mode.selection=[xy];
 	if(mode.edit){
