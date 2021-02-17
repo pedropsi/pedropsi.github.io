@@ -55,7 +55,7 @@ YearlyData={
 }},
 years=Keys(YearlyData).map(Number),
 years.map(function(year){
-	Keys(YearlyData[year]).map(k=>YearlyData[year][k]=Join(YearlyData[year][k],{YEAR:year}))
+	Keys(YearlyData[year]).map(k=>YearlyData[year][k]=Group(YearlyData[year][k],{YEAR:year}))
 }),
 Data=Apply(Merge,Values(YearlyData)),
 ToolRow=function(name,item){

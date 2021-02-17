@@ -247,7 +247,7 @@ FolderGalleryHTML=function(subfolder,names,ObjectRenderer){
 		var objects=names.map(name=>ImageObject({name:name,folder:subfolder}));
 	}
 	else if(IsObject(names)){
-		var objects=Keys(names).map(n=>ImageObject(Join(names[n],{name:n,folder:subfolder})));
+		var objects=Keys(names).map(n=>ImageObject(Group(names[n],{name:n,folder:subfolder})));
 	}
 	
 	return GalleryHTML(objects,ObjectRenderer||ImageCardHTML);

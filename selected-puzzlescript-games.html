@@ -159,7 +159,7 @@ SelectedGamesHTML=function(){
 	var years=Keys(SelectedGames).map(Number);
 	var rows=years.map(function(year){
 		var games=SelectedGames[year];
-		return Keys(games).map(k=>SelectedGamesRow(k,Join(games[k],{YEAR:year})))
+		return Keys(games).map(k=>SelectedGamesRow(k,Group(games[k],{YEAR:year})))
 	});
 		rows=SortBy(Join(...rows),x=>-x[2]);
 	return TableHTML({

@@ -1705,6 +1705,22 @@ BiUnion=function(A1,A2){
 Union=ArgumentExtender(BiUnion);
 
 
+BiJoinArray=function(A1,A2){
+	var A1=A1||[];
+	return A1.concat(A2||[]);
+/*
+Polyarity, ignore misformats, keep duplicates
+Join([],[1],[2],[2],null)
+[1,2,2]
+
+Even with zero arguments
+Join()
+[]
+*/
+}
+
+Join=ArgumentExtender(BiJoinArray);
+
 
 //Sort and Pick
 Equaliser=function(Standardise){
@@ -1740,17 +1756,20 @@ TypeCombiners={
 		Validate1:IsArray,
 		Validate2:IsArray,
 		ValidateKey:True,
-		Combine:(A1,A2)=>A1.concat(A2)},
+		Combine:BiJoinArray
+	},
 	"Evaluate":{
 		Validate1:True,
 		Validate2:IsFunction,
 		ValidateKey:True,
-		Combine:(SAO1,F2)=>Evaluate(F2,SAO1)},
+		Combine:(SAO1,F2)=>Evaluate(F2,SAO1)
+	},
 	"String":{
 		Validate1:IsString,
 		Validate2:IsString,
 		ValidateKey:True,
-		Combine:(S1,S2)=>S1+S2},
+		Combine:(S1,S2)=>S1+S2
+	},
 	"Object":{
 		Validate1:IsObject,
 		Validate2:IsObject,
@@ -1795,21 +1814,24 @@ Combiner=function(typeCombiners){
 	return ArgumentExtender(BiCombine);
 /*
 recursive
-Join({a:{c:3,d:4}},{a:{e:5}})
+Group({a:{c:3,d:4}},{a:{e:5}})
 {a:{c:3,d:4,e:5}}
 
 also combines arrays
-Join({a:[1,2,3]},{a:[4,5]})
+Group({a:[1,2,3]},{a:[4,5]})
 {a:[1,2,3,4,5]}
 
 polyarity
-Join({a:1},{b:2},{c:3})
+Group({a:1},{b:2},{c:3})
 {a:1,b:2,c:3}
 
 empty
-Join()
+Group()
 {}
 
+Will also merge arrays
+Group({z:["a","b"]},{z:["c"]})
+{z:["a","b","c"]}
 
 
 deep evaluation
@@ -1877,7 +1899,7 @@ Combiner({"a":{ValidateKey:Equaler("a"),Combine:(SAO1,SAO2)=>SAO1,Validate1:True
 Overwrite=Combiner([]);
 Merge=Combiner(["Object"]);
 
-Join=Combiner(["Array"]);
+Group=Combiner(["Array"]);
 JoinEvaluate=Combiner(["Array","Evaluate"]);
 
 Fuse=Combiner(["Array","String"]);
@@ -6807,13 +6829,13 @@ ExcludeContext=function(context,elem){
 
 
 SubContext=function(elem){
-	var bindings=Join(DefaultKeybindings,Keybindings);
+	var bindings=Group(DefaultKeybindings,Keybindings);
 	var matches=Keys(bindings).filter(sel=>Match(elem,sel));
 	if(!matches.length)
 		return undefined;
 
 	var keyActions=matches.map(k=>bindings[k]);
-		keyActions=Apply(Join,keyActions);
+		keyActions=Apply(Group,keyActions);
 
 		keyActions=ReKeyObject(keyActions,ComboKeystring);
 		
@@ -6827,7 +6849,7 @@ Keybind=function(keyActions,selector){
 	var keyActions=ReKeyObject(keyActions,ComboKeystring);
 	var bindings={}
 		bindings[selector]=keyActions;
-	return Keybindings=Join(Keybindings,bindings);
+	return Keybindings=Group(Keybindings,bindings);
 }
 
 UnKeybind=function(selector){

@@ -176,7 +176,7 @@ var OtherPeople={
 	"thinky":{TYPE:"Community",name:"Thinky Puzzles discord server",PERSONAL_PAGE:"https://discord.gg/ZkV2zdb"}
 }
 
-var Persons=Join(Developers,Contributors,Musicians,OtherPeople)
+var Persons=Group(Developers,Contributors,Musicians,OtherPeople)
 
 var CommonURLS={
 	GOOGLE_PLUS:`https://plus.google.com/u/0/`,
