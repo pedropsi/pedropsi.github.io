@@ -6025,7 +6025,7 @@ ElementComputedHeight=function(e){
 	if(e===Window)
 		return window.innerHeight;
 	if(!e){
-		Warn("cannot find element",e)
+		//Warn("cannot find element",e)
 		return 0;
 	}
 	var px=window.getComputedStyle(e).getPropertyValue('height');
@@ -6037,7 +6037,7 @@ ElementComputedWidth=function(e){
 	if(e===Window)
 		return window.innerWidth;
 	if(!e){
-		Warn("cannot find element",e)
+		//Warn("cannot find element",e)
 		return 0;
 	}
 	var px=window.getComputedStyle(e).getPropertyValue('width');
