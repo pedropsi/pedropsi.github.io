@@ -1276,9 +1276,9 @@ AdvanceState=function(substate,options){
 		changed=Overwrite(changed,ComplementObject(state,OLDSTATE));
 	}
 
-	// if(Intersected(TreeKeys(changed),LayersChanged["cursor"])||options.initialise){
+	if(Intersected(TreeKeys(changed),LayersChanged["cursor"])||options.initialise){
 		state.visuals.cursor=StateCursorName(state);
-	// }
+	}
 
 	if(state.monitored)
 		Monitor(state);
@@ -1539,7 +1539,9 @@ DragActionStarter=function(x,y,w,h,target){
 	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
 	var mode=Clone(state.mode);
-	mode.fruitIndex=FruitStateIndex(XYFruit(xy,state),state);
+	var atFruit=XYFruit(xy,state);
+	if(atFruit)
+		mode.fruitIndex=FruitStateIndex(atfruit,state);
 	mode.dragging=true;
 	mode.selection=[xy];
 	if(mode.edit){
