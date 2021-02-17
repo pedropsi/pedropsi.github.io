@@ -1146,7 +1146,7 @@ var MetadataAbbreviations={
 var AbbreviationsMetadata=FlipKeysValues(MetadataAbbreviations);
 
 SerialMetadata=function(serialObj){
-	var metadata=ObjectKeyIntersection(serialObj,AbbreviationsMetadata);
+	var metadata=IntersectionKeysObject(serialObj,AbbreviationsMetadata);
 		metadata=ReKeyObject(metadata,Accesser(AbbreviationsMetadata));
 		Keys(metadata).map(k=>metadata[k]=decodeURIComponent(metadata[k]));
 	return metadata;
@@ -1158,7 +1158,7 @@ SerialMetadata({T:"Title",a:"Name Surname",thrash:"Thrash"})
 }
 
 MetadataSerial=function(metadata){
-	var serialObj=ObjectKeyIntersection(metadata,MetadataAbbreviations);
+	var serialObj=IntersectionKeysObject(metadata,MetadataAbbreviations);
 		serialObj=ReKeyObject(serialObj,Accesser(MetadataAbbreviations,LowerCase));
 	return serialObj;
 }
