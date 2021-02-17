@@ -208,6 +208,7 @@ CountryCitySynonyms={
 	"Sahrawi Arab Democratic Republic":"Western Sahara",
 	"Nur-Sultan":"Astana",
 	"East Timor":"Timor-Leste",
+	"Myanmar":"Burma",
 	"São Tomé and Príncipe":"São Tomé e Príncipe"
 }
 
