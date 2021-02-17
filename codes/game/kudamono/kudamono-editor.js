@@ -740,17 +740,17 @@ TrackStyles=function(track,state,styles,errors){
 		dash=state.line.wrongDash;
 	
 
-	if(styles.edit){
+	if(styles.edit&&!styles.clearing){
 		dash=state.overline.dash||dash;
 		colour=state.overline.colour;
 		opacity=state.overline.opacity;
 		lineWidth=state.overline.lineWidth;
-		if(styles.clearing){
-			dash=state.overline.clearDash||dash;
-			colour=state.overline.clearColour||colour;
-			opacity=state.overline.clearOpacity||opacity;
-			lineWidth=state.overline.clearLineWidth||lineWidth;
-		}
+	}
+	if(styles.edit&&styles.clearing){
+		dash=state.overline.clearDash||dash;
+		colour=state.overline.clearColour||colour;
+		opacity=state.overline.clearOpacity||opacity;
+		lineWidth=state.overline.clearLineWidth||lineWidth;
 	}
 
 	if(state.visuals.monochrome)
