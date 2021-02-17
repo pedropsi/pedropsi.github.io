@@ -3524,10 +3524,6 @@ relative domain
 InnerLinked("folder/guestbook.html")
 true
 
-online external www
-InnerLinked("www.xxx.yyy")
-false
-
 online external full http
 InnerLinked("http://www.xxx.yyyl")
 false

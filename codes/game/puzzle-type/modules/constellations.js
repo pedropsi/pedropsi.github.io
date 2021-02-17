@@ -2989,7 +2989,7 @@ NextStarCode=function(starcode){
 		return "";
 }
 
-function ConstellationDeclinate(star){//Prevents infinite replacing hydra->hydrae->hydraee->etc...
+function ConstellationDeclinate(star){
 	if(!ConstellationDeclinate.l){
 		ConstellationDeclinate.l={};
 		Keys(ConstellationDeclinations).map(function(k){
@@ -2997,6 +2997,15 @@ function ConstellationDeclinate(star){//Prevents infinite replacing hydra->hydra
 		})
 	}
 	return UnPosfix(StringReplace(star+" ",ConstellationDeclinate.l)," ");
+/*
+Declinate once
+ConstellationDeclinate("alpha Hydra")
+"alpha Hydrae"
+
+and only once (no hydraae)
+ConstellationDeclinate("alpha Hydrae")
+"alpha Hydrae"
+*/
 }
 
 function NextStar(starname){
