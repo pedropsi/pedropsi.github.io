@@ -295,6 +295,7 @@ var BlankState={
 	},
 	//Interaction
 	mode:{
+		fruitIndex:0,				//start with first fruit
 		edit:false,					//true:adding fruits, false:solving
 		dragging:false,				//whether dragging
 		clearing:false,				//whether clearing fruits, lines, etc...
@@ -870,12 +871,27 @@ DrawFruits=function(fruit,coordinates,Opts,state){
 	(coordinates||[]).map(xy=>StateFruitDraw(state,fruit,xy,Opts));
 }
 
+StateIndexFruit=function(state){
+	var fruits=Keys(state.fruits);
+	var l=fruits.length;
+	return fruits[Max(0,state.mode.fruitIndex||0)%l];
+}
+
+FruitStateIndex=function(fruit,state){
+	var fruits=Keys(state.fruits);
+	var p=fruits.indexOf(fruit);
+	if(p===-1)
+		return 0;
+	else
+		return p;
+}
+
 OverLevelDraw=function(state){
 	var target=state.render.target+"-overlevel";
 	ClearCanvas(target);
 	if(state.mode.dragging&&state.mode.edit)
 		DrawFruits(
-			state.mode.fruit,
+			StateIndexFruit(state),
 			state.mode.selection,
 			{
 				coloriser:state.mode.clearing?HEXLightener(0.9):HEXDarkener(0.8),
@@ -1124,7 +1140,6 @@ SerialState=function(serialObj,state){
 			state.level=SerialLevel(serialObj.l,state);
 		else{
 			state.mode.edit=true;
-			state.mode.fruit=First(Keys(state.fruits));
 		}
 
 		if(serialObj.s)
@@ -1266,7 +1281,7 @@ AdvanceState=function(substate,options){
 	// }
 
 	if(state.monitored)
-		Monitor(substate);
+		Monitor(state);
 	else
 		UnMonitor()
 
@@ -1296,13 +1311,13 @@ LayerPainter=function(layer){
 LayersChanged={
 	grid:["force-grid","W","H","visuals.monochrome","win.won","grid","mode.edit"],
 	level:["force-level","W","H","visuals.monochrome","orchard","level"],
-	overlevel:["force-overlevel","W","H","visuals.monochrome","mode.edit","mode.selection","mode.dragging","mode.fruit"],
+	overlevel:["force-overlevel","W","H","visuals.monochrome","mode.edit","mode.selection","mode.dragging","mode.fruitIndex"],
 	line:["force-line","W","H","visuals.monochrome","orchard"],
 	overline:["force-overline","W","H","visuals.monochrome","mode.edit","mode.selection"],
 	explainer:["force-level","level","W","H","force-explainer","visuals.monochrome"],
 	metadatatitle:["force-metadata","force-metadatatitle"],
 	metadatacolophon:["force-metadata","force-metadatacolophon"],
-	cursor:["visuals.monochrome","mode.fruit","mode.edit","mode.clearing"]
+	cursor:["visuals.monochrome","mode.fruitIndex","mode.edit","mode.clearing"]
 }
 
 LayerSubsequents={
@@ -1371,11 +1386,11 @@ StateCursorName=function(state){
 		else
 			cursor="pencil";
 	}
-	else if(state.mode.fruit){
+	else {
 		if(state.mode.clearing)
 			cursor="eraser";
 		else
-			cursor=state.mode.fruit;
+			cursor=StateIndexFruit(state);
 	}
 	return cursor;
 }
@@ -1475,7 +1490,7 @@ XYFruitsAdd=function(points,state){
 	points.map(function(xy){
 		if(!PointValid(xy,state))
 			return;
-		var overfruit=state.mode.fruit;
+		var overfruit=StateIndexFruit(state);
 		level[overfruit]=Union(level[overfruit],[xy]);
 	})
 	LevelUpdate(level,state);
@@ -1524,7 +1539,7 @@ DragActionStarter=function(x,y,w,h,target){
 	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
 	var mode=Clone(state.mode);
-	mode.fruit=XYFruit(xy,state)||mode.fruit;
+	mode.fruitIndex=FruitStateIndex(XYFruit(xy,state),state);
 	mode.dragging=true;
 	mode.selection=[xy];
 	if(mode.edit){
@@ -1651,17 +1666,10 @@ var ClearFruit=StateKeyHandlerer({level:{}});
 
 CycleFruitMode=function(state,n){
 	var mode=Clone(state.mode);
-	if(!n)
-		var n=1;
+	var fruits=Keys(state.fruits);
 	if(!mode.edit)
 		mode.edit=true;
-	var fruits=Sort(Keys(state.fruits));
-	if(!mode.fruit)
-		mode.fruit=First(fruits);
-	else{
-		fruits=CycleSort(fruits,a=>a===mode.fruit)
-		mode.fruit=fruits[(fruits.length+n)%fruits.length];
-	}
+	mode.fruitIndex=(fruits.length+(mode.fruitIndex||0)+(n||1))%fruits.length;
 	return mode;
 }
 
