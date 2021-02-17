@@ -1574,11 +1574,14 @@ TypeCombiners={
 	}
 }
 
-Combiner=function(TypeCombinersNames,typeCombiners){
-	var names=TypeCombinersNames||[];
-	var typeCombiners=typeCombiners||TypeCombiners;
-	var Validators=FilterKeysObject(typeCombiners,name=>In(names,name));
-		names=Keys(Validators);
+Combiner=function(typeCombiners){
+	if(IsArray(typeCombiners)){
+		var names=typeCombiners;
+		var	typeCombiners=FilterKeysObject(TypeCombiners,name=>In(names,name))
+	}
+	else{
+		var names=Keys(typeCombiners);	
+	}
 	var l=names.length;
 	function BiCombine(SAO1,SAO2,key){
 		if(typeof SAO1==="undefined"&&typeof SAO2==="undefined")
@@ -1680,7 +1683,7 @@ Overwrite({a:{c:3,d:4},b:2},{a:{e:5},b:{f:6}})
 
 
 custom key validator
-Combiner(["a"],{"a":{ValidateKey:Equaler("a"),Combine:(SAO1,SAO2)=>SAO1,Validate1:True,Validate2:True}})({a:1,b:2,c:3},{a:10,b:20,c:30})
+Combiner({"a":{ValidateKey:Equaler("a"),Combine:(SAO1,SAO2)=>SAO1,Validate1:True,Validate2:True}})({a:1,b:2,c:3},{a:10,b:20,c:30})
 {a:1,b:20,c:30}
 
 */
