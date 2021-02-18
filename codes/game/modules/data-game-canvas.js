@@ -11,34 +11,6 @@ Canvas=function(targetIDsel){
 }
 
 
-// CanvasWidth=function(element){
-// 	var e=Canvas(element);
-// 	if(!e){
-// 		Warn("no element found");
-// 		return null;
-// 	}
-// 	return ElementWidth(e);
-// }
-
-// ElementWidth=function(e){
-// 	var r=GetElement(e).getBoundingClientRect();
-// 	return r.right-r.left;
-// }
-
-// CanvasHeight=function(element){
-// 	var e=Canvas(element);
-// 	if(!e){
-// 		Warn("no element found");
-// 		return null;
-// 	}
-// 	return ElementHeight(e)
-// }
-
-// ElementHeight=function(e){
-// 	var r=GetElement(e).getBoundingClientRect();
-// 	return r.bottom-r.top;
-// }
-
 DrawImage=function(opts){
 	var ctx=GetContext(opts.target);
 	if(!opts.elem)
@@ -193,7 +165,7 @@ GridExtremes=function(opts){
 	
 	var width=opts.canvasWidth;
 	var height=opts.canvasHeight;
-
+	
 	var square=height/(rows+by);
 	if(width/(cols+bx)<square)
 		square=width/(cols+bx);
@@ -208,7 +180,7 @@ GridExtremes=function(opts){
 	var	x1=(width/2*offsetX+square*cols/2);
 	var	y1=(height/2*offsetY+square*rows/2);
 
-	var scaleFactor=SquareRoot((y1-y0)*(x1-x0)/(width*height)/(rows*cols))
+	var scaleFactor=square/Min(width,height)
 
 	var extremes={
 		x0:x0,
