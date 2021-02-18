@@ -1458,14 +1458,16 @@ CanvasDot=function(x,y,w,h,state){
 	];
 	var centeredDistance=[-xy[0]+p[0],-xy[1]+p[1]];
 	var cornered=EuclideanDistance([0,0],centeredDistance)<0.4;
-	var bordered=Abs(centeredDistance[0])<0.2||Abs(centeredDistance[1])<0.2;
+	var borderedH=Abs(centeredDistance[1])<0.2;
+	var borderedV=Abs(centeredDistance[0])<0.2;
 	var dot={
 			p:p,
 			xy:xy,
 			diff:centeredDistance,
 			cornered:cornered,
-			bordered:bordered,
-			midbordered:!cornered&&bordered
+			bordered:borderedH||borderedV,
+			midborderedH:!cornered&&borderedH,
+			midborderedV:!cornered&&borderedV
 		};
 	StatePropertyMonitor(state,{x:x,y:y,w:w,h:h,...dot},"dragxy");
 	return dot
@@ -1555,7 +1557,8 @@ DragActionAltStarter=function(x,y,w,h,target){
 
 DragActionStarter=function(x,y,w,h,target){
 	var state=TargetState(target);
-	var xy=CanvasDot(x,y,w,h,state).xy;
+	var dot=CanvasDot(x,y,w,h,state);
+	var xy=dot.xy;
 	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
 	var mode=Clone(state.mode);
@@ -1572,7 +1575,8 @@ DragActionStarter=function(x,y,w,h,target){
 }
 DragActionContinuer=function(x,y,w,h,target){
 	var state=TargetState(target);
-	var xy=CanvasDot(x,y,w,h,state).xy;
+	var dot=CanvasDot(x,y,w,h,state);
+	var xy=dot.xy;
 	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
 	var mode=Clone(state.mode);
