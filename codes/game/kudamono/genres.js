@@ -137,7 +137,7 @@ var Genres={
 				rule:{
 					fruitshapes:Join(Shape2Straights,Shape1s,Shape2Corners),
 					minconnected:Infinity,
-					description:"a question mark may be a flower, fruit or hummingbird",
+					description:"a question marks a flower, fruit or hummingbird",
 					depiction:"W=4&L=q6q6q6&S=6D1V1U3W2T&G=b"
 				},
 			},

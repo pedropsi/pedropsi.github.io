@@ -45,13 +45,10 @@
 }
 
 .tabletop .explainer .description p{
-	font-style:italic;
-	font-weight:bold;
-    background-color:var(--white);
     padding:var(--h-2) var(--w-2) var(--h-2) 0;
     margin:0;
-    line-height:calc(0.6 * var(--fontheight));
-    font-size:calc(var(--fontheight)*0.6);
+    line-height:calc(0.65 * var(--fontheight));
+    font-size:calc(var(--fontheight)*0.7);
     text-align:right
 }
 
@@ -75,6 +72,7 @@
 	font-weight:bold;
 	font-style:italic;
 	width:100%;
+	background-color:var(--smokewhite);
 }
 
 .game-container .subtitle{
@@ -104,4 +102,3 @@
 .authorship div{
 	padding:0 var(--w2) 0;
 }
-

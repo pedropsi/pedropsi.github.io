@@ -1021,8 +1021,10 @@ MiniBoardCanvasDraw=function(fruit,rule,state,rendering){
 	}
 }
 
-RuleDescriptionDraw=function(fruit,rule){
-	var description=`<p>${rule.description}</p>`;
+RuleDescriptionDraw=function(fruit,rule,colour){
+	var description=`<p>${ReSentence(rule.description)}</p>`;
+		description=description.replace(new RegExp("("+UnTake(fruit,-1)+"\\w+)","ig"),`<b style="color:${colour};">$1</b>`);
+
 	ReplaceChildren(description,".description-"+fruit);
 }
 
@@ -1043,7 +1045,7 @@ ExplainerDraw=function(state){
 		var fruit=levelFruits[i];
 		var rule=state.fruits[fruit].rule;
 		MiniBoardDraw(fruit,rule,state);
-		RuleDescriptionDraw(fruit,rule);
+		RuleDescriptionDraw(fruit,rule,state.fruits[fruit].colour);
 	}
 }
 
@@ -1063,7 +1065,7 @@ MetadataColophon=function(metadata){
 
 MetadataTitleDraw=function(state){
 	var title=Capitalise(state.designation||state.genre);
-	var subtitle=state.description.split("\n").map(PHTML).join("");
+	var subtitle=state.description.split("\n").map(ReSentence).map(PHTML).join("");
 
 	ReplaceChildren(`
 		<div class="title">${title}</div>
