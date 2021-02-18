@@ -407,11 +407,31 @@ DrawText=function(opts){
 
 //
 
-function SaveCanvas(source,name){
+FuseCanvas=function(id){
+	var layers=GetElements(id+" canvas");
+	var overlayer=MakeElement(layers[0].outerHTML);
+	AppendElement(overlayer,"BODY");
+	//overlayerClone.getContext("2d").clearRect(0,0,canvas.width,canvas.height);
+	var ctx=overlayer.getContext("2d")
+	layers.map(l=>ctx.drawImage(l,0,0));
+	return overlayer;
+}
+
+FuseCanvasURI=function(id){
+	var fusedCanvas=FuseCanvas(id);
+	return fusedCanvas.toDataURL();
+}
+
+FuseCanvasSave=function(id,name){
+	var fusedCanvas=FuseCanvas(id);
+	CanvasSave(fusedCanvas,name);
+	RemoveElement(fusedCanvas);
+}
+
+CanvasSave=function(source,name){
 	var name=name||"image";
-	var source=source||"canvas";
-	(SaveCanvas[name]=(SaveCanvas[name]||0)+1);
-	var n=SaveCanvas[name]-1;
+	(CanvasSave[name]=(CanvasSave[name]||0)+1);
+	var n=CanvasSave[name]-1;
 	var imagecode=GetElement(source).toDataURL();
 	var name=name+(n?n:"");
 	var a=AnchorHTML("d",imagecode,{id:name,download:name});
