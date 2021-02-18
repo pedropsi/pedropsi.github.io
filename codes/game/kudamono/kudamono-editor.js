@@ -248,10 +248,10 @@ var BlankState={
 		fillColor:"#FFFFFF",				//background
 		lineWidth:8,						//width   of grid lines
 		dash:[8,24], //dashing of grid lines
-		border:{
-			lineWidth:12,
-			lineJoin:"miter",
-			dash:[]
+		frame:{								//default frame style, around the board
+			lineWidth:12,					//width of the frame lines
+			dash:[],						//dash pattern of the frame lines
+			lineJoin:"miter"				//join style of the frame lines
 		},
 		edge:0.5,							//how many squares to add to the edge (to each of the shortest sides)
 		scale:1,							//specific fruit scale 
@@ -265,11 +265,11 @@ var BlankState={
 	gridEdit:{//grid in edit mode
 		dash:[6,12,6,12,6,12,6,12,6,12,6],
 		lineWidth:6,
-		border:{
-			strokeColor:"#BBBBBB",
-			lineWidth:12,
-			lineJoin:"miter",
-			dash:[]
+		frame:{
+			lineWidth:12,					//width of the "editing" frame lines
+			strokeColor:"#BBBBBB",			//colour of the "editing" frame lines
+			dash:[],						//dash pattern of the "editing" frame lines
+			lineJoin:"miter"				//line join style of the "editing" frame lines
 		},				
 	},
 
@@ -985,7 +985,7 @@ MiniBoardDraw=function(fruit,rule,state){
 			container:".depiction-"+fruit
 		},
 		grid:{
-			border:{
+			frame:{
 				lineWidth:6,
 			},
 			lineWidth:3,

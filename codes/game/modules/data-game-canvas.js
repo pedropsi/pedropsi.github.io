@@ -162,7 +162,7 @@ GridLinesDraw=function(opts){
 	DrawSegmentLine({...opts,vertical:true,dash:dash});
 	DrawSegmentLine({...opts,horizontal:true,dash:dash});
 
-	var frameOpts={...opts,...opts.border};
+	var frameOpts={...opts,...opts.frame};
 	DrawLine({...frameOpts,x0:x1});
 	DrawLine({...frameOpts,y0:y1});
 	DrawLine({...frameOpts,x1:x0});
@@ -238,8 +238,8 @@ SquaresGridDraw=function(opts){
 	RectangleDraw({...gridOpts,lineWidth:0});
 	GridLinesDraw({...gridOpts,...gridCoords});
 	var borderOpts=gridOpts;
-	if(gridOpts.border)
-		borderOpts=Merge(gridOpts,gridOpts.border);
+	if(gridOpts.frame)
+		borderOpts=Merge(gridOpts,gridOpts.frame);
 
 }
 
