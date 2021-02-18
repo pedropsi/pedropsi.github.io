@@ -1180,7 +1180,7 @@ SerialMetadata=function(serialObj){
 /***
 sort, ignore capitalised abbreviations, anything not in abbreviations
 SerialMetadata({T:"Title",a:"Name Surname",thrash:"Thrash"})
-"a=Name%20Surnams&t=Title"
+"a=Name%20Surname&t=Title"
 ***/
 }
 
