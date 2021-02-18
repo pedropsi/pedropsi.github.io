@@ -1231,7 +1231,7 @@ FruitSerialState=function(fruit,serial,suprastate){
 		state.id="rule-"+fruit;
 		state.render={main:false,target:suprastate.render.target,once:true};
 		state.mode.selection=[];
-		state=ComplementKeysObject(["examples","designation"],state);	
+		state=KeysComplementObject(["examples","designation"],state);	
 	return state;
 }
 
@@ -1293,7 +1293,7 @@ AdvanceState=function(substate,options){
 		NavigateSerial(StateSerial(state));
 	}
 
-	StatePropertyMonitor(state,ComplementKeysObject(["fruits"],state),"state");
+	StatePropertyMonitor(state,KeysComplementObject(["fruits"],state),"state");
 
 	state.changed=changed;
 	return state;
