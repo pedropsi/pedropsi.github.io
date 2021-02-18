@@ -26,8 +26,6 @@
 	display:flex;
 	flex-direction:row;
 	flex-wrap:wrap;
-	font-size:calc(var(--fontheight)*0.75);
-	line-height:var(--h2);
 	margin:var(--h2) 0 0 var(--w2);
 	justify-content:center;
 	overflow:hidden
@@ -40,17 +38,11 @@
 	min-width:var(--w16);
 	padding:0;
 	margin:var(--h1) var(--w1) var(--h1) var(--w1);
-
 }
 
-.tabletop .explainer .depiction{
-	min-width:100%;
-	min-height:0%;
-	left:0
-}
 .tabletop .explainer .description{
 	width:var(--w16);
-	align-self:flex-end;
+	align-self:flex-start;
 	z-index:2;
 	height:100%;
     position:relative;
@@ -66,7 +58,8 @@
 	width:100%;
     background-color:var(--lightyellow);
     padding:var(--h1) var(--w1) var(--h1) var(--w1);
-    line-height:calc(0.75 * var(--fontheight))
+    line-height:calc(0.75 * var(--fontheight));
+    font-size:calc(var(--fontheight)*0.75);
 }
 
 .tabletop .layer{
