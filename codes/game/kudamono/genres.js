@@ -91,7 +91,7 @@ var Genres={
 					fruitshapes:Shape1s,
 					minconnected:Infinity,
 					description:"flowers are at 1-pieces (endpoints)",
-					depiction:"W=4&L=w7w4&S=7DRRUUL&G=b"
+					depiction:"W=4&L=w6w5w2&S=6D1V4W2N5U&G=b"
 				},
 			},
 			"fruit":{
@@ -103,7 +103,7 @@ var Genres={
 					fruitshapes:Shape2Straights,
 					minconnected:Infinity,
 					description:"fruits are at straight 2-pieces (trunks)",
-					depiction:"W=4&L=f13f4&S=7DRRUUL&G=b"
+					depiction:"W=4&L=f7f4&S=12R1ex5U&G=b"
 				},
 			},
 			"hummingbird":{
@@ -117,7 +117,7 @@ var Genres={
 						fruitshapes:Shape2Corners,
 						minconnected:Infinity,
 						description:"hummingbirds are at corner 2-pieces",
-						depiction:"W=4&L=h8h8h2&S=7DRRUUL&G=b"
+						depiction:"W=4&L=h6&S=7V4O2N3D2U&G=b"
 					},
 			},
 			"question":{
@@ -130,7 +130,7 @@ var Genres={
 					fruitshapes:Join(Shape2Straights,Shape1s,Shape2Corners),
 					minconnected:Infinity,
 					description:"a question mark replaces a flower, fruit or hummingbird",
-					depiction:"W=4&L=q7q6q3&S=7DRRUUL&G=b"
+					depiction:"W=4&L=q12q4q2&S=6D1V1U3W2T&G=b"
 				},
 			},
 			// "monkey":{
