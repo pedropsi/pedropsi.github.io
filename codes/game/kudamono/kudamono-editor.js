@@ -1592,11 +1592,11 @@ DragActionContinuer=function(x,y,w,h,target){
 	var mode=Clone(state.mode);
 	if(!mode.selection)
 		mode.selection=[];
-	if(!In(mode.selection,xy)){
-		mode.selection=PatchedPath(AddOnce(mode.selection,xy));
+	if(!In(Take(mode.selection,-2),xy)&&Count(mode.selection,xy)<4){
+		mode.selection=Append(mode.selection,xy);
 	}
 	else if(mode.selection.length>1&&Equal(First(Take(mode.selection,-2)),xy)){
-		mode.selection=Remove(mode.selection,Last(mode.selection));
+		mode.selection=Most(mode.selection);
 	}
 	if(!mode.edit){
 		var selected=mode.selection;

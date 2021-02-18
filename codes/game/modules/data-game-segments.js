@@ -48,6 +48,11 @@ PathTrack=function(path){
 		i++
 	}
 	return Join(...track);
+/*
+even accepts loops
+PathTrack([[0,0],[0,1],[1,1],[1,0],[0,0]])
+[[[0,0],[0,1]],[[0,1],[1,1]],[[1,1],[1,0]],[[1,0],[0,0]]]
+*/
 }
 
 TrackPath=function(track){
@@ -56,7 +61,7 @@ TrackPath=function(track){
 }
 
 PatchedPath=function(path){
-	return TrackPoints(PathTrack(path));
+	return TrackUnDistinctPoints(PathTrack(path));
 }
 
 //Path + segment
@@ -387,6 +392,22 @@ TrackPoints=function(track){
 		return [];
 	var points=Join(...track.map(SegmentPoints));
 	return DistinctArray(points);
+/*
+discards duplicates, in order
+TrackUnDistinctPoints([[[0,0],[0,1]],[[0,1],[1,1]],[[1,1],[1,0]],[[1,0],[0,0]]])
+[[0,0],[0,1],[1,1],[1,0]]
+*/
+}
+
+TrackUnDistinctPoints=function(track){
+	if(!track.length)
+		return [];
+	return [First(First(track))].concat(Rest(track).map(Last));
+/*
+keeps duplicate points
+TrackUnDistinctPoints([[[0,0],[0,1]],[[0,1],[1,1]],[[1,1],[1,0]],[[1,0],[0,0]]])
+[[0,0],[0,1],[1,1],[1,0],[0,0]]
+*/
 }
 
 DeletePointTrack=function(point,track){
