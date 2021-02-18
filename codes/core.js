@@ -8719,7 +8719,7 @@ Monitor=function(Opts,id){
 	if(!GetElement(".monitor")){
 		AddElement(`<div class="monitor" id=${"monitor-"+id}></div>`,"BODY")
 	}
-	report=Keys(Opts).map(name=>`<div>${name}:${ReString(Opts[name])}</div>`).join("");
+	report=Keys(Opts).map(name=>`<div><b>${name}:</b>${ReString(Opts[name])}</div>`).join("");
 	ReplaceChildren(report,".monitor");
 }
 

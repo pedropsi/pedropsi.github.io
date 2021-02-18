@@ -1422,7 +1422,15 @@ video{
 	align-self:center;
 }
 .monitor{
-	background-color: var(--lightyellow)
+	background-color: var(--lightyellow);
+	width: 100%;
+	height: auto;
+	padding-left: var(--w-2);
+}
+.monitor div{
+	flex-direction: row;
+	width: 100%;
+	line-height:calc(0.90 * var(--fontheight));
 }
 .Console,.monitor{
 	pointer-events:none;
