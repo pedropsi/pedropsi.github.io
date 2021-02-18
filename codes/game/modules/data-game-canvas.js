@@ -397,7 +397,9 @@ FuseCanvas=function(id){
 
 FuseCanvasURI=function(id){
 	var fusedCanvas=FuseCanvas(id);
-	return fusedCanvas.toDataURL();
+	var uri=fusedCanvas.toDataURL();
+	RemoveElement(fusedCanvas);
+	return uri;
 }
 
 FuseCanvasSave=function(id,name){
