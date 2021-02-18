@@ -303,6 +303,7 @@ var BlankState={
 		error:false					//whether to display errors
 	},
 	monitor:{//for debugging
+		state:false
 	}
 }
 
@@ -1286,7 +1287,7 @@ AdvanceState=function(substate,options){
 		NavigateSerial(StateSerial(state));
 	}
 
-	StatePropertyMonitor(state,state,"state");
+	StatePropertyMonitor(state,ComplementKeysObject(["fruits"],state),"state");
 
 	state.changed=changed;
 	return state;
@@ -1373,9 +1374,6 @@ UpdateState=function(substate,options){
 	if(changed.length)
 		SaveState(state);
 		
-	StatePropertyMonitor(state,state.changed,"changed");
-
-
 }
 	
 
