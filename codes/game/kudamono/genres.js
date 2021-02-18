@@ -36,7 +36,7 @@ var Genres={
 			colour:"rgb(16,134,0)",
 			dash:[],
 			clearOpacity:0.6,
-			clearLineWidth:8,
+			clearLineWidth:12,
 			clearColour:"#CCCCCC",
 			clearDash:[9,19]
 		},
@@ -138,7 +138,7 @@ var Genres={
 					fruitshapes:Join(Shape2Straights,Shape1s,Shape2Corners),
 					minconnected:Infinity,
 					description:"a question mark may be a flower, fruit or hummingbird",
-					depiction:"W=4&L=q12q4q2&S=6D1V1U3W2T&G=b"
+					depiction:"W=4&L=q6q6q6&S=6D1V1U3W2T&G=b"
 				},
 			},
 			// "monkey":{

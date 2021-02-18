@@ -211,7 +211,6 @@ var BlankState={							//default styles applied to all genres
 		target:"kudamono-canvas",	   		//where in the page the canvas layers reside
 		container:".game-supra-canvas",		//to calculate the available drawing space
 		once:false,
-		drawn:false							//whether not to regenerate the drawing forever							
 	},
 	visuals:{
 		cursor:"pencil",					//name of the current symbol used as cursor
@@ -985,33 +984,31 @@ OverlineDraw=function(state){
 
 
 MiniBoardDraw=function(fruit,rule,state){
+	var target="depiction-"+fruit;
+	var container=".depiction-"+fruit;
 	var rendering={
 		render:{
 			main:false,
-			target:"depiction-"+fruit,
-			container:".depiction-"+fruit,
-			drawn:true
-		},
-		grid:{
-			frame:{
-				lineWidth:6,
-			},
-			lineWidth:3,
-			scale:1,
-			offsetX:state.grid.dual?2/3:1/2,
-			offsetY:state.grid.dual?2/3:1
-		},
-		width:"var(--w4)",
-		height:"var(--h4)",
-		line:{
-			wrongDash:[1,5],
-			lineWidth:5						//fruitline width
-		},
-		visuals:{
-			skin:5
-		}		
+			target:target,
+			container:container
+		}			
 	}
 
+	var iuri=MiniBoardDraw[fruit];
+	if(!iuri){
+		MiniBoardCanvasDraw(fruit,rule,state,rendering);
+		HearElement(container+" canvas",function(){
+			var uri=FuseCanvasURI(container);
+			var iuri=I(uri)
+			ReplaceElement(iuri,container);
+			MiniBoardDraw[fruit]=iuri;
+		})
+	}
+	else
+		ReplaceElement(iuri,container);
+}
+
+MiniBoardCanvasDraw=function(fruit,rule,state,rendering){
 	var miniboard=FruitSerialState(fruit,rule.depiction,state);
 		miniboard=CompleteState(Group(miniboard,rendering));
 
@@ -1030,9 +1027,9 @@ ExplainerDraw=function(state){
 	var levelFruits=LevelFruits(state);
 	var miniboards=levelFruits.map(function(fruit){return `
 		<div class="explanation explanation-${fruit}">
-		<div class="supra-depiction">
-		<div class="depiction depiction-${fruit}">The picture will appear here.</div>
-		</div>
+			<div class="supra-depiction">
+				<div class="depiction depiction-${fruit}">The picture will appear here.</div>
+			</div>
 			<div class="description description-${fruit}">The rule of this particular fruit will be here.</div>
 		</div>`;
 	});

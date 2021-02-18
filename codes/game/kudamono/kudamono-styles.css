@@ -1,8 +1,8 @@
 .game-container{
 	display:flex;
 	flex-direction:column;
-	height:95vh;
-	min-height:95vh;
+	height:100vh;
+	overflow:hidden;
 }
 
 .game-container .tabletop{
@@ -13,12 +13,9 @@
 	background-color: transparent;
 }
 
-.depiction{
-	position:relative;
-}
-
 .tabletop .game-supra-canvas{
-	flex:0 0 50%;
+	flex:0 1 100%;
+
 }
 
 .tabletop .explainer{
@@ -28,39 +25,36 @@
 	flex-wrap:wrap;
 	margin:var(--h2) 0 0 var(--w2);
 	justify-content:center;
-	overflow:hidden
+
 }
 
 .tabletop .explainer .explanation{
 	display:flex;
-	flex:auto;
-	flex-direction:column;
-	min-width:var(--w16);
+	max-width:calc(var(--w8) + var(--h4));
 	padding:0;
-	margin:var(--h1) var(--w1) var(--h1) var(--w1);
+	margin:var(--h-4) var(--w-4) var(--h-4) var(--w-4);
+	position:relative;
+}
+.tabletop .explainer img{
+	align-self:center;
+	min-width:calc(var(--w16) + var(--h8));
 }
 
 .tabletop .explainer .description{
-	width:var(--w16);
-	align-self:flex-start;
-	z-index:2;
-	height:100%;
-    position:relative;
-    overflow:visible;
+	width:100%;
+	margin-top:calc( -1 * var(--h2))
 }
+
 .tabletop .explainer .description p{
 	font-style:italic;
 	font-weight:bold;
-	text-align:right;
-	align-self:flex-end;
-    position:relative;
-	top:calc(-1*var(--h4));
-	width:100%;
     background-color:var(--lightyellow);
     padding:var(--h1) var(--w1) var(--h1) var(--w1);
     line-height:calc(0.75 * var(--fontheight));
-    font-size:calc(var(--fontheight)*0.75);
+    font-size:calc(var(--fontheight)*0.6);
 }
+
+
 
 .tabletop .layer{
 	top:0;
@@ -86,8 +80,12 @@
 	font-size:calc(var(--fontheight));
 	font-weight:bold;
 	font-style:italic;
-	line-height:0;
+	line-height:calc(0.85 * var(--fontheight));
 	padding:var(--h1) var(--w8) 0 var(--w8);
+	margin:calc(0.2 * var(--fontheight));
+}
+.game-container .subtitle p{
+    margin:calc(0.2 * var(--fontheight));
 }
 
 .colophon .thanks{
