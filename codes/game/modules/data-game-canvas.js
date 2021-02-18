@@ -56,11 +56,13 @@ DrawLine=function(opts){
 	var e=Canvas(opts.target)
 	var W=ElementComputedWidth(e);
 	var H=ElementComputedHeight(e);
+
 	var ctx=opts.ctx||GetContext(opts.target);
 	
 	var strokeColor=opts.strokeColor?opts.strokeColor:getComputedStyle(document.body)["strokeColor"]||"black";
+	
+	var s=(opts.scaleFactor||1)
 
-	var s=opts.scaleFactor||1;
 	var lineWidth=((typeof opts.lineWidth!=="undefined")?(opts.lineWidth):1)*s;
 	
 	var x0=(typeof opts.x0!=="undefined")?opts.x0:0;
@@ -180,7 +182,10 @@ GridExtremes=function(opts){
 	var	x1=(width/2*offsetX+square*cols/2);
 	var	y1=(height/2*offsetY+square*rows/2);
 
-	var scaleFactor=square/Min(width,height)
+	var e=Canvas(opts.target)
+	var W=ElementComputedWidth(e);
+	var H=ElementComputedHeight(e);
+	var scaleFactor=square/Min(width,height)*Min(W,H)/100;
 
 	var extremes={
 		x0:x0,
@@ -192,6 +197,7 @@ GridExtremes=function(opts){
 		height:height,
 		scaleFactor:scaleFactor
 	};
+	//Monitor(extremes);
 
 	return extremes;
 }
@@ -330,7 +336,7 @@ SVGDraw=function(opts){
 	
 	let p = new Path2D(opts.path);
 	
-	var s=opts.scaleFactor||1;
+	var s=(opts.scaleFactor||1)
 
 	if(!opts.dash)
 		opts.dash=[];

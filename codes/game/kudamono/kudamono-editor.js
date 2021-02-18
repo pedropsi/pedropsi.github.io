@@ -218,39 +218,39 @@ var BlankState={							//default styles applied to all genres
 		cursorsize:80,						//size of cursor
 		monochrome:false,					//whether to use grayscale instead of colour
 		solid:false,						//whether the fruits are solid-coloured
-		skin:20								//line thickness of the fruit skin
+		skin:4								//line thickness of the fruit skin
 	},
 	overline:{								//styles for new "overlines" as we draw/erase
 		opacity:0.6,						//opacity of the overline
-		lineWidth:64,						//width of the overline
+		lineWidth:6,						//width of the overline
 		colour:"#333333",					//colour of the overline
 		dash:[],							//dash pattern of the overline
 		
 		clearOpacity:0.6,					//opacity of the overline, when erasing
-		clearLineWidth:180,					//width of the overline, when erasing
+		clearLineWidth:24,					//width of the overline, when erasing
 		clearColour:"#CCCCCC",				//colour of the overline, when erasing
-		clearDash:[180,360]					//dash pattern of the overline, when erasing
+		clearDash:[6,30]					//dash pattern of the overline, when erasing
 	},
 	line:{									//default line styles
-		lineWidth:112,						//width of the default line
+		lineWidth:12,						//width of the default line
 		opacity:0.5,						//opacity of the default line
 		colour:"rgba(155,155,155)",			//colour of the default line
 		dash:[],							//dash pattern of the default line
 		cap:"round",						//cap style of the default line
 		lineJoin:"round",					//join style of the default line
 
-		wrongDash:[36,180],					//dash pattern applied on error
+		wrongDash:[4,18],					//dash pattern applied on error
 
 		excessColour:"#000000",				//colour applied on an "excess fruit" error
 		deficitColour:"#777777" 			//colour applied on an "no fruit" error
 	},
 	grid:{									//default grid styles
-		lineWidth:8,						//width of grid lines
+		lineWidth:2,						//width of grid lines
 		strokeColor:"#BBBBBB",				//colour of grid lines
-		dash:[8,24], 						//dash pattern of grid lines
+		dash:[12,10,12,10],					//dash pattern of grid lines
 
 		frame:{								//default frame style, around the board
-			lineWidth:12,					//width of the frame lines
+			lineWidth:6,					//width of the frame lines
 			dash:[],						//dash pattern of the frame lines
 			lineJoin:"miter"				//join style of the frame lines
 		},
@@ -269,10 +269,10 @@ var BlankState={							//default styles applied to all genres
 		offsetY:1							//displace the grid verticallly
 	},
 	gridEdit:{								//styles for the grid, when in edit mode
-		lineWidth:6,						//line width of the editing grid
-		dash:[6,12,6,12,6,12,6,12,6,12,6],	//dash pattern of the editing grid
+		lineWidth:2,						//line width of the editing grid
+		dash:[2,4,2,4,2,4,2,4,2,4,2],	//dash pattern of the editing grid
 		frame:{
-			lineWidth:12,					//width of the "editing" frame lines
+			lineWidth:3,					//width of the "editing" frame lines
 			strokeColor:"#BBBBBB",			//colour of the "editing" frame lines
 			dash:[],						//dash pattern of the "editing" frame lines
 			lineJoin:"miter"				//line join style of the "editing" frame lines
