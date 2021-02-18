@@ -1253,8 +1253,7 @@ CompleteState=function(state){
 }
 
 CompletableProperties=["segments","level","W","H"];
-UndoableProperties=CompletableProperties;
-DrawableProperties=Join(UndoableProperties,["mode","visuals","win"]);
+DrawableProperties=Join(CompletableProperties,["mode","visuals","win"]);
 
 StateCombiner=Combiner({
 	"Evaluate":TypeCombiners["Evaluate"],
@@ -1279,9 +1278,12 @@ AdvanceState=function(substate,options){
 		state=CompleteState(state);
 		changed=Overwrite(changed,ComplementObject(state,OLDSTATE));
 	}
-
 	if(Intersected(TreeKeys(changed),LayersChanged["cursor"])||options.initialise){
 		state.visuals.cursor=StateCursorName(state);
+	}
+	if(Intersected(TreeKeys(changed),CompletableProperties)){
+		AddUndo(state);
+		NavigateSerial(StateSerial(state));
 	}
 
 	StatePropertyMonitor(state,state,"state");
@@ -1370,10 +1372,10 @@ UpdateState=function(substate,options){
 
 	if(changed.length)
 		SaveState(state);
-	if(Intersected(TreeKeys(changed),UndoableProperties)){
-		AddUndo(state);
-		NavigateSerial(StateSerial(state));
-	}
+		
+	StatePropertyMonitor(state,state.changed,"changed");
+
+
 }
 	
 
@@ -1745,6 +1747,8 @@ var KeyboardActions=function(){return{
 
 	"m ctrl shift":StateKeyHandlerer({monitor:{state:Flipped}}),
 	"x ctrl shift":StateKeyHandlerer({monitor:{dragxy:Flipped}}),
+	"c ctrl shift":StateKeyHandlerer({monitor:{changed:Flipped}}),
+
 
 	}
 };
