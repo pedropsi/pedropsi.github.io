@@ -1764,8 +1764,8 @@ var KeyboardActions=function(){return{
 KeyboardFruitsActions=function(state){
 	var Actions={};
 	Keys(state.fruits).map(
-		function(fruit){
-			Actions[state.fruits[fruit].letter]=StateKeyHandlerer({mode:{edit:true,fruit:fruit},visuals:{cursor:fruit}});
+		function(fruit,i){
+			Actions[state.fruits[fruit].letter]=StateKeyHandlerer({mode:{edit:true,fruitIndex:i},visuals:{cursor:fruit}});
 	});
 	return Actions;
 }
