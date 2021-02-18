@@ -8714,16 +8714,20 @@ SelectedNode=function(e){
 }
 ///////////////////////////////////////////////////////////////////////////////
 
-Monitor=function(Opts){
+Monitor=function(Opts,id){
+	var id=id||GenerateId();
 	if(!GetElement(".monitor")){
-		AddElement(`<div class="monitor"></div>`,"BODY")
+		AddElement(`<div class="monitor" id=${"monitor-"+id}></div>`,"BODY")
 	}
 	report=Keys(Opts).map(name=>`<div>${name}:${ReString(Opts[name])}</div>`).join("");
 	ReplaceChildren(report,".monitor");
 }
 
-UnMonitor=function(){
-	RemoveElement(".monitor")
+UnMonitor=function(id){
+	if(id)
+		RemoveElement("monitor-"+id);
+	else
+		RemoveElements(".monitor");
 }
 
 

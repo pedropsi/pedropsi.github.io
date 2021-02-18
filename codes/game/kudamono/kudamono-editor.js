@@ -301,6 +301,10 @@ var BlankState={
 		clearing:false,				//whether clearing fruits, lines, etc...
 		selection:[],				//current points selected (accumulates)
 		error:false					//whether to display errors
+	},
+	monitor:{//for debugging
+		state:false,
+		xy:false
 	}
 }
 
@@ -1019,7 +1023,9 @@ ExplainerDraw=function(state){
 	var levelFruits=LevelFruits(state);
 	var miniboards=levelFruits.map(function(fruit){return `
 		<div class="explanation explanation-${fruit}">
-			<div class="depiction depiction-${fruit}">The picture will appear here.</div>
+		<div class="supra-depiction">
+		<div class="depiction depiction-${fruit}">The picture will appear here.</div>
+		</div>
 			<div class="description description-${fruit}">The rule of this particular fruit will be here.</div>
 		</div>`;
 	});
@@ -1280,15 +1286,18 @@ AdvanceState=function(substate,options){
 		state.visuals.cursor=StateCursorName(state);
 	}
 
-	if(state.monitored)
-		Monitor(state);
-	else
-		UnMonitor()
+	StatePropertyMonitor(state,state,"state");
 
 	state.changed=changed;
 	return state;
 }
 
+StatePropertyMonitor=function(state,property,name){
+	if(state.monitor[name])
+		Monitor(property,"name");
+	else
+		UnMonitor("name")
+}
 
 LayerPainter=function(layer){
 	var layerspainters={
@@ -1553,6 +1562,7 @@ DragActionStarter=function(x,y,w,h,target){
 DragActionContinuer=function(x,y,w,h,target){
 	var state=TargetState(target);
 	var xy=CanvasPoint(x,y,w,h,state);
+	StatePropertyMonitor(state,{x,y,w,h,xy},"dragxy");
 	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
 	var mode=Clone(state.mode);
@@ -1703,8 +1713,6 @@ var KeyboardActions=function(){return{
 	"escape":StateKeyHandlerer({mode:{edit:false}}),
 	"insert":StateKeyHandlerer({mode:{edit:true}}),
 
-	"m ctrl shift":StateKeyHandlerer({monitored:Flipped}),
-
 	"r ctrl"		:ClearSegments,
 	"r ctrl shift"	:ClearFruit,
 	"r ctrl alt"	:ClearBoard,
@@ -1718,7 +1726,12 @@ var KeyboardActions=function(){return{
 	"backspace"			:function(){Undo()},
 	"shift backspace"	:function(){Redo()},
 	"y ctrl shift"		:function(){Undo()},
-	"y ctrl"			:function(){Redo()}
+	"y ctrl"			:function(){Redo()},
+
+
+	"m ctrl shift":StateKeyHandlerer({monitor:{state:Flipped}}),
+	"x ctrl shift":StateKeyHandlerer({monitor:{dragxy:Flipped}}),
+
 	}
 };
 
