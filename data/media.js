@@ -177,6 +177,8 @@ LazyImageHTML=function(ImageObj){
 }
 
 I=function(src){
+	if(Prefixed(src,"data:"))
+		return `<img src="${src}"/>`
 	if(!Posfixed(src,ImageExtensions))
 		var src=Posfix(src,".png");
 	return LazyImageHTML({src:src});
