@@ -210,7 +210,8 @@ var BlankState={							//default styles applied to all genres
 		main:true,							//whether this is the main puzzle
 		target:"kudamono-canvas",	   		//where in the page the canvas layers reside
 		container:".game-supra-canvas",		//to calculate the available drawing space
-		once:false							
+		once:false,
+		drawn:false							//whether not to regenerate the drawing forever							
 	},
 	visuals:{
 		cursor:"pencil",					//name of the current symbol used as cursor
@@ -988,7 +989,8 @@ MiniBoardDraw=function(fruit,rule,state){
 		render:{
 			main:false,
 			target:"depiction-"+fruit,
-			container:".depiction-"+fruit
+			container:".depiction-"+fruit,
+			drawn:true
 		},
 		grid:{
 			frame:{
@@ -1014,8 +1016,8 @@ MiniBoardDraw=function(fruit,rule,state){
 		miniboard=CompleteState(Group(miniboard,rendering));
 
 	if(state.render.main){//prevent recursion
-		BoardPrepare(miniboard)
-		StateDraw(miniboard)
+		BoardPrepare(miniboard);
+		StateDraw(miniboard);	
 	}
 }
 
@@ -1726,8 +1728,8 @@ var KeyboardActions=function(){return{
 	"b ctrl"		:StateKeyHandlerer({visuals:{monochrome:Flipped}}),
 	"b ctrl shift"	:StateKeyHandlerer({visuals:{solid:Flipped}}),
 
-	"c ctrl":ExportSerial,
-	"s ctrl":()=>SaveCanvas(),
+	//"c ctrl":ExportSerial,
+	//"s ctrl":()=>CanvasSave(),
 
 	"space":StateKeyHandlerer({mode:{edit:Flipped}}),
 	"escape":StateKeyHandlerer({mode:{edit:false}}),
