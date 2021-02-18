@@ -115,23 +115,7 @@ SaveTest(IsObject,{},true,"object - empty");
 SaveTest(IsObject,"abcd",false,"string");
 
 
-
-
-
-//Values
-SaveTest(Values,{a:1,b:2,c:3,d:4},[1,2,3,4],"values");
-SaveTest(Values,{},[],"empty object");
-
-//Flip Keys with Values
-SaveTest(FlipKeysValues,{a:"A",b:"B"},{"A":"a","B":"b"},"simple flip");
-SaveTest(FlipKeysValues,{a:1,b:2,c:3,d:4},{"1":"a","2":"b","3":"c","4":"d"},"numeric values to string");
-SaveTest(FlipKeysValues,{},{},"empty object");
-
-
-
 //Update Object Keys
-SaveTest(ReKeyObject,[{a:"1",b:"2",c:"3",d:"4"},(a)=>(a==="a"?"e":a)],{b:"2",c:"3",d:"4",e:"1"},"matching key");
-SaveTest(ReKeyObject,[{a:"1",b:"2",c:"3",d:"4"},(e)=>(e==="e"?"f":e)],{a:"1",b:"2",c:"3",d:"4"},"non-matching key");
 
 SaveTest(InString,["","a"],false,"empty string");
 SaveTest(InString,["abcd","a"],true,"matching");
@@ -175,8 +159,6 @@ SaveTest(RotateMatrix,[[[1,2,7],[3,4,8]]],[[3,1],[4,2],[8,7]],"rotate right, hor
 SaveTest(RotateString,["Hi!"],"H\ni\n!","rotate right, monoline");
 SaveTest(RotateString,["NE\nWS"],"WN\nSE","rotate right, square");
 SaveTest(RotateString,[""],"","empty string");
-
-
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -226,29 +208,14 @@ SaveTest(EscapeToken ,"à","à","unescapable accented");
 
 SaveTest(EscapeTokens ,"(a-à)+b","\\(a\\-à\\)\\+b","mixture");
 
-
-SaveTest(Capitalise,"","","empty string");
-SaveTest(Capitalise,"marie","Marie","simple");
-SaveTest(Capitalise,"Marie","Marie","already capitalised");
-SaveTest(Capitalise,"mARIE","Marie","inversely capitalised");
-
-
-
 SaveTest(Parenthise,"ok","(ok)","parenthesis absent");
 SaveTest(Parenthise,"(ok)","(ok)","parenthesis present");
 
 SaveTest(Alternate,[["singleoption"]],"(singleoption)","alternate single");
 SaveTest(Alternate,[["option","alternative","extra"]],"(option)|(alternative)|(extra)","alternate many");
 
-
-
 SaveTest(PadLeft,["hi","-","4"],"--hi","smaler left");
 SaveTest(PadLeft,["hi there","-","4"],"hi there","larger left");
 SaveTest(PadLeft,["hi","-_","8"],"-_-_-_hi","multisymbol");
 SaveTest(PadLeft,["hi","-_","0"],"hi","zero");
 SaveTest(PadLeft,["hi","","8"],"hi","nosymbol");
-
-
-
-TestReportHTML();
-//setTimeout(()=>DynamicText("code-orphan-functions",Enumerate(OrphanFunctions())),2000);

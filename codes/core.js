@@ -1082,6 +1082,15 @@ Keys=function(Obj){
 };
 Values=function(Obj){
 	return Object.values(Obj)||[];
+/*
+array of values
+Values({a:1,b:2,c:3,d:4})
+[1,2,3,4]
+
+empty object
+Values({})
+[]
+*/
 };
 
 
@@ -1092,12 +1101,25 @@ SortedValues=function(Obj){
 	return SortedKeys(Obj).map(function(k){return Obj[k]});
 };
 
-//Flips object keys and values
+
 FlipKeysValues=function(Obj){
 	var k=Keys(Obj);
 	var O={};
 	k.map(function(x){O[Obj[x]]=x});
 	return O;
+/*
+flips object keys / values
+FlipKeysValues({a:"A",b:"B"})
+{"A":"a","B":"b"}
+
+numeric values to string
+FlipKeysValues({a:1,b:2,c:3,d:4})
+{"1":"a","2":"b","3":"c","4":"d"}
+
+empty object
+FlipKeysValues({})
+{}
+*/
 };
 
 ReKeyObject=function(Obj,Modifier){//key, then value (optional)
@@ -1105,6 +1127,15 @@ ReKeyObject=function(Obj,Modifier){//key, then value (optional)
 	var O={};
 	Keys(Obj).map(k=>(O[Modifier(k,Obj[k])]=Obj[k]));
 	return O;
+/*
+with matching key
+ReKeyObject({a:"1",b:"2",c:"3",d:"4"},(a)=>(a==="a"?"e":a))
+{b:"2",c:"3",d:"4",e:"1"}
+
+no matching keys
+ReKeyObject({a:"1",b:"2",c:"3",d:"4"},(e)=>(e==="e"?"f":e))
+{a:"1",b:"2",c:"3",d:"4"}
+*/
 };
 
 ReValueObject=function(Obj,Modifier){//value, then key (optional)
@@ -2433,6 +2464,14 @@ Capitalise=function(word){
 		return word[0].toUpperCase()+Rest(word).toLowerCase();
 	else
 		return word;
+/*
+empty string
+Capitalise("")
+""
+oddly capitalised
+Capitalise("mARiE")
+"Marie"
+*/
 }
 
 KebabCaseString=function(s){
@@ -2457,32 +2496,52 @@ KebabCaseString("|!\/!How\"#$%&/()=@£§€{[]}'to+*¨¨´´``~~-playçãôÒÌ"
 */
 }
 
-CommonWords=function(){
-	var prepositions=["aboard","about","above","across","after","against","along","amid","among","anti","around","as","at","before","behind","below","beneath","beside","besides","between","beyond","but","by","concerning","considering","de","despite","down","during","except","excepting","excluding","following","for","from","in","inside","into","like","minus","near","of","off","on","onto","opposite","outside","over","past","per","plus","regarding","round","save","since","than","through","to","toward","towards","under","underneath","unlike","until","up","upon","versus","vs","via","with","within","without"];
-	if(!CommonWords.list)
-		return CommonWords.list=["a","an","the"].concat(prepositions);
-	else
-		return CommonWords.list;
-}
+Prepositions=["aboard","about","above","across","after","against","along","amid","among","anti","around","as","at","before","behind","below","beneath","beside","besides","between","beyond","but","by","concerning","considering","de","despite","down","during","except","excepting","excluding","following","for","from","in","inside","into","like","minus","near","of","off","on","onto","opposite","outside","over","past","per","plus","regarding","round","save","since","than","through","to","toward","towards","under","underneath","unlike","until","up","upon","versus","vs","via","with","within","without"];
+
+CommonWords=["a","an","the","and","or"].concat(Prepositions);
 
 CapitaliseNoble=function(word){
-	if(In(CommonWords(),word))
+	if(In(CommonWords,word))
 		return word;
 	else
 		return Capitalise(word);
 }
 
-CapitaliseSentence=function(sentence){
+CapitaliseNoblesSentence=function(sentence){
 	return sentence.split(" ").map(CapitaliseNoble).join(" ");
+/*
+with common word
+CapitaliseNoblesSentence("john and jane")
+"John and Jane"
+*/
+}
+
+ReSentence=function(sentence,dot){
+	var sentence=sentence||"";
+	var dot=dot||".";
+	if(!Posfixed(sentence,DotCharacters))
+		sentence=Posfix(sentence,dot);
+	return Capitalise(TrimWhitespaceString(sentence));
+/*
+already punctuated
+PunctuateSentence("Well!")
+"Well!"
+
+custom period, and capitalise
+PunctuateSentence("so","?")
+"So?"
+*/
 }
 
 CapitaliseSlug=function(slug){
-	return CapitaliseSentence(slug.replaceAll("-"," "));
+	return CapitaliseNoblesSentence(slug.replaceAll("-"," "));
 }
 
 //Escape
 
-PunctuationSeparCharacters=",;.:-?!".split("");
+DotCharacters=".?!".split("");
+SeparCharacters=",;:-".split("");
+PunctuationSeparCharacters=Join(DotCharacters,SeparCharacters);
 PunctuationParenCaracters="(){}[]«»".split("");
 OtherCharacters="_~^*+´`¨''@£§#$%&/|=".split("");
 
@@ -3648,7 +3707,7 @@ TitleIndexer=function(h){
 }
 
 IndexCaseString=function(text){
-	return KebabCaseString(CapitaliseSentence(text));
+	return KebabCaseString(CapitaliseNoblesSentence(text));
 }
 
 ClosestFragment=function(fragment){

@@ -317,7 +317,7 @@ A=function(link){
 	if(cmslink){
 		var fragment=PageFragment(link);
 		if(fragment)
-			return AHTML(CapitaliseSentence(fragment.replace("-"," ")),PageReFragment(Posfix(cmslink.LINK(),".html"),fragment));
+			return AHTML(CapitaliseNoblesSentence(fragment.replace("-"," ")),PageReFragment(Posfix(cmslink.LINK(),".html"),fragment));
 		else
 			return AHTML(cmslink.TITLE(),Posfix(cmslink.LINK(),".html"));
 	}
