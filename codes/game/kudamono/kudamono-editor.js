@@ -1627,8 +1627,8 @@ BoardIncrementer=function(L,size){
 	var counterShifts={"L":Times([1,0],size),"U":Times([0,1],size),"R":Times([0,0],1),"D":Times([0,0],1)};
 	var w=counterShifts[L];
 	return StateKeyHandlerer({
-		W:w=>w+Abs(v[0])*size,
-		H:h=>h+Abs(v[1])*size,
+		W:w=>Max(2,w+Abs(v[0])*size),
+		H:h=>Max(2,h+Abs(v[1])*size),
 		segments:SegmentsShifter(w),
 		level:LevelShifter(w)
 	},{draw:["force-level","force-explainer"]})
