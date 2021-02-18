@@ -303,8 +303,6 @@ var BlankState={
 		error:false					//whether to display errors
 	},
 	monitor:{//for debugging
-		state:false,
-		xy:false
 	}
 }
 
@@ -1452,12 +1450,25 @@ CanvasPosition=function(x,y,w,h,state){
 	return [X,Y];
 }
 
-CanvasPoint=function(x,y,w,h,state){
+CanvasDot=function(x,y,w,h,state){
 	var p=CanvasPosition(x,y,w,h,state);
-	return [
+	var xy=[
 		Floor((p[0]+0.5)),
 		Floor((p[1]+0.5))
-	]
+	];
+	var centeredDistance=[-xy[0]+p[0],-xy[1]+p[1]];
+	var cornered=EuclideanDistance([0,0],centeredDistance)<0.4;
+	var bordered=Abs(centeredDistance[0])<0.2||Abs(centeredDistance[1])<0.2;
+	var dot={
+			p:p,
+			xy:xy,
+			diff:centeredDistance,
+			cornered:cornered,
+			bordered:bordered,
+			midbordered:!cornered&&bordered
+		};
+	StatePropertyMonitor(state,{x:x,y:y,w:w,h:h,...dot},"dragxy");
+	return dot
 }
 
 
@@ -1544,7 +1555,7 @@ DragActionAltStarter=function(x,y,w,h,target){
 
 DragActionStarter=function(x,y,w,h,target){
 	var state=TargetState(target);
-	var xy=CanvasPoint(x,y,w,h,state);
+	var xy=CanvasDot(x,y,w,h,state).xy;
 	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
 	var mode=Clone(state.mode);
@@ -1561,8 +1572,7 @@ DragActionStarter=function(x,y,w,h,target){
 }
 DragActionContinuer=function(x,y,w,h,target){
 	var state=TargetState(target);
-	var xy=CanvasPoint(x,y,w,h,state);
-	StatePropertyMonitor(state,{x,y,w,h,xy},"dragxy");
+	var xy=CanvasDot(x,y,w,h,state).xy;
 	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
 	var mode=Clone(state.mode);
