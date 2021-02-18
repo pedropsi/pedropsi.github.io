@@ -204,67 +204,72 @@ FruitIcons={
 }
 
 
-var BlankState={
-	
-	//visuals
-	id:"puzzle",
+var BlankState={							//default styles applied to all genres
+	id:"puzzle",							//key to identify this state among all others
 	render:{
-		main:true,
-		target:"kudamono-canvas",	   //where the canvas layers reside
-		container:".game-supra-canvas",// to calculate the available drawing space
-		once:false,
-		reduce:1
+		main:true,							//whether this is the main puzzle
+		target:"kudamono-canvas",	   		//where in the page the canvas layers reside
+		container:".game-supra-canvas",		//to calculate the available drawing space
+		once:false							
 	},
 	visuals:{
-		cursor:"pencil",
-		cursorsize:80,
-		monochrome:false,
-		solid:false,
-		skin:20								//fruit skin thickness
+		cursor:"pencil",					//name of the current symbol used as cursor
+		cursorsize:80,						//size of cursor
+		monochrome:false,					//whether to use grayscale instead of colour
+		solid:false,						//whether the fruits are solid-coloured
+		skin:20								//line thickness of the fruit skin
 	},
-	overline:{
-		opacity:0.6,
-		lineWidth:64,
-		colour:"#333333",
-		dash:[],
-		clearOpacity:0.6,
-		clearLineWidth:180,
-		clearColour:"#CCCCCC",
-		clearDash:[180,360]
+	overline:{								//styles for new "overlines" as we draw/erase
+		opacity:0.6,						//opacity of the overline
+		lineWidth:64,						//width of the overline
+		colour:"#333333",					//colour of the overline
+		dash:[],							//dash pattern of the overline
+		
+		clearOpacity:0.6,					//opacity of the overline, when erasing
+		clearLineWidth:180,					//width of the overline, when erasing
+		clearColour:"#CCCCCC",				//colour of the overline, when erasing
+		clearDash:[180,360]					//dash pattern of the overline, when erasing
 	},
-	line:{
-		dash:[],
-		wrongDash:[36,180],
-		opacity:0.5,
-		lineWidth:112,						//fruitline width
-		cap:"round",
-		lineJoin:"round",
-		colour:"rgba(155,155,155)",			//default line colour
-		excessColour:"#000000",				//path colour, too many fruit
-		deficitColour:"#777777" 			//path colour, zero		fruit
+	line:{									//default line styles
+		lineWidth:112,						//width of the default line
+		opacity:0.5,						//opacity of the default line
+		colour:"rgba(155,155,155)",			//colour of the default line
+		dash:[],							//dash pattern of the default line
+		cap:"round",						//cap style of the default line
+		lineJoin:"round",					//join style of the default line
+
+		wrongDash:[36,180],					//dash pattern applied on error
+
+		excessColour:"#000000",				//colour applied on an "excess fruit" error
+		deficitColour:"#777777" 			//colour applied on an "no fruit" error
 	},
-	grid:{
-		strokeColor:"#BBBBBB",				//grid lines
-		fillColor:"#FFFFFF",				//background
-		lineWidth:8,						//width   of grid lines
-		dash:[8,24], //dashing of grid lines
+	grid:{									//default grid styles
+		lineWidth:8,						//width of grid lines
+		strokeColor:"#BBBBBB",				//colour of grid lines
+		dash:[8,24], 						//dash pattern of grid lines
+
 		frame:{								//default frame style, around the board
 			lineWidth:12,					//width of the frame lines
 			dash:[],						//dash pattern of the frame lines
 			lineJoin:"miter"				//join style of the frame lines
 		},
-		edge:0.5,							//how many squares to add to the edge (to each of the shortest sides)
+
+		fillColor:"#FFFFFF",				//colour of the grid background
+
+		edge:0.5,							//how many squares to add to the edge (to each of the shortest sides) 
+		
 		scale:1,							//specific fruit scale 
 		grow:1,								//common   fruit scale (applies to all fruits)
 		nudge:0.3,							//fruit nudge (small adjustments to position)
+	
 		dual:false,							//disalign squares and grid
 		scaleGrid:1,						//reduce the grid size
 		offsetX:1,							//displace the grid horizontally
 		offsetY:1							//displace the grid verticallly
 	},
-	gridEdit:{//grid in edit mode
-		dash:[6,12,6,12,6,12,6,12,6,12,6],
-		lineWidth:6,
+	gridEdit:{								//styles for the grid, when in edit mode
+		lineWidth:6,						//line width of the editing grid
+		dash:[6,12,6,12,6,12,6,12,6,12,6],	//dash pattern of the editing grid
 		frame:{
 			lineWidth:12,					//width of the "editing" frame lines
 			strokeColor:"#BBBBBB",			//colour of the "editing" frame lines
@@ -274,35 +279,36 @@ var BlankState={
 	},
 
 	//Puzzle
-	W:7,
-	H:7,
-	level:{},
-	segments:[],
-	orchard:[],
-	crosses:{},
-
-	//global rules
-	rules:{
+	W:7,									//board size, horizontal
+	H:7,									//board size, vertical
+	level:{},								//pairs symbols with coordinates under them
+	segments:[],							//list of all segments (ungrouped)
+	orchard:[],								//list of all groups of contiguous segments
+	crosses:{
+		H:[],								//auxiliary crosses, on horizontal midpoints
+		V:[]								//auxiliary crosses, on vertical   midpoints
+	},
+	rules:{									//global rules, applying to all tracks
 		minconnected:2,
 		branchallowed:false,
 		loopallowed:false,
 		dangleallowed:false
 	},
 
-	groups:{},// multi-fruit lines, if allowed
+	groups:{},								// multi-fruit lines, if allowed
 	win:{
 		won:false
 	},
 	//Interaction
 	mode:{
-		fruitIndex:0,				//start with first fruit
-		edit:false,					//true:adding fruits, false:solving
-		dragging:false,				//whether dragging
-		clearing:false,				//whether clearing fruits, lines, etc...
-		selection:[],				//current points selected (accumulates)
-		error:false					//whether to display errors
+		fruitIndex:0,						//start with first fruit
+		edit:false,							//true:adding fruits, false:solving
+		dragging:false,						//whether dragging
+		clearing:false,						//whether clearing fruits, lines, etc...
+		selection:[],						//current points selected (accumulates)
+		error:false							//whether to display errors
 	},
-	monitor:{//for debugging
+	monitor:{								//debugging handles
 		state:false
 	}
 }
