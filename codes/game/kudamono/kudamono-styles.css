@@ -33,7 +33,6 @@
 	max-width:calc(var(--w8) + var(--h4));
 	padding:0;
 	margin:var(--h-4) var(--w-4) var(--h-4) var(--w-4);
-	position:relative;
 }
 .tabletop .explainer img{
 	align-self:center;
@@ -42,16 +41,18 @@
 
 .tabletop .explainer .description{
 	width:100%;
-	margin-top:calc( -1 * var(--h2))
+	margin-top:calc( -1 * var(--h-4))
 }
 
 .tabletop .explainer .description p{
 	font-style:italic;
 	font-weight:bold;
-    background-color:var(--lightyellow);
-    padding:var(--h1) var(--w1) var(--h1) var(--w1);
-    line-height:calc(0.75 * var(--fontheight));
+    background-color:var(--white);
+    padding:var(--h-2) var(--w-2) var(--h-2) 0;
+    margin:0;
+    line-height:calc(0.6 * var(--fontheight));
     font-size:calc(var(--fontheight)*0.6);
+    text-align:right
 }
 
 
