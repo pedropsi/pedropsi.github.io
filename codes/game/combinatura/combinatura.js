@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 function LoadGameHTML(frameHTML){
-	PrependElement(frameHTML,".main");
+	PrependAfterElement(frameHTML,".main");
 }
 
 function GameFrameHTML(){
@@ -198,7 +198,7 @@ function RevealCard(n){
 }
 function DisplayCard(n){
 	if(!GetElement("combina"-CardNumber(Card(n))))
-		AddElement(CardHTML(Card(n)),gameSelector);
+		AppendToElement(CardHTML(Card(n)),gameSelector);
 }
 
 function RevealDisplayCard(n){
@@ -308,7 +308,7 @@ function DexAdd(card,id){
 	var dexcard='<div class="Dex" id="'+idthis+'"><div class="Header">'+CardThumbHTML(card)+'</div></div>';
 	var i="dex-"+id;
 	if(id===0){i="Dex"};
-	AppendElement(dexcard,i);
+	AppendAfterElement(dexcard,i);
 	/*if($(i+" > .Header > .button").length===0)
 		$(i+" > .Header").append(OpenerHTML(id));*/
 }

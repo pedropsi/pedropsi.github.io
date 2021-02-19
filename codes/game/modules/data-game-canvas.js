@@ -388,7 +388,7 @@ DrawText=function(opts){
 FuseCanvas=function(id){
 	var layers=GetElements(id+" canvas");
 	var overlayer=MakeElement(layers[0].outerHTML);
-	AppendElement(overlayer,"BODY");
+	AppendAfterElement(overlayer,"BODY");
 	//overlayerClone.getContext("2d").clearRect(0,0,canvas.width,canvas.height);
 	var ctx=overlayer.getContext("2d")
 	layers.map(l=>ctx.drawImage(l,0,0));

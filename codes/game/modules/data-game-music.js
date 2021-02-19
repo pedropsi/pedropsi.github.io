@@ -25,7 +25,7 @@ SoundHTML=function(sourcepath,data,id){
 }
 
 LoadSound=function(soundpath,data,id,parentElement){
-	return AddElement(SoundHTML(soundpath,data,id),parentElement);
+	return AppendToElement(SoundHTML(soundpath,data,id),parentElement);
 }
 
 LS=function(soundobject,id,parentElement){

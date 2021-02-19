@@ -84,7 +84,7 @@ StartGIF=function(gid){
 	var g=GetElement(gid);
 
 	RemoveElement(GetInElement("CANVAS",g.parentElement));
-	var c=AddElement("<canvas class='gif gifcanvas' tabindex='0'></canvas>",g.parentElement);
+	var c=AppendToElement("<canvas class='gif gifcanvas' tabindex='0'></canvas>",g.parentElement);
 
 	HideElement(g);
 	ResizeGIF();

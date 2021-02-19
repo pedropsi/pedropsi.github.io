@@ -126,7 +126,7 @@ Identity([])
 
 a function
 Identity(Identity)
-Identity
+"Identity"
 */
 };
 
@@ -694,7 +694,7 @@ UnitVector=function(vector){
 
 Length=function(SAO){
 	if(IsArray(SAO)||IsString(SAO)){
-		return SAO.length
+		return SAO.length;
 	}
 	if(IsObject(SAO)){
 		return Keys(SAO).length;
@@ -1755,7 +1755,7 @@ BiJoinArray=function(A1,A2){
 /*
 Polyarity, ignore misformats, keep duplicates
 Join([],[1],[2],[2],null)
-[1,2,2]
+[1,2,24]
 
 Even with zero arguments
 Join()
@@ -2481,6 +2481,7 @@ Capitalise=function(word){
 empty string
 Capitalise("")
 ""
+
 oddly capitalised
 Capitalise("mARiE")
 "Marie"
@@ -2498,8 +2499,7 @@ starting hashtag removed
 KebabCaseString("#How to play")
 "How-to-play"
 
-trailing spaces)
- multiple spaces
+multiple spaces
 KebabCaseString("     How      to    play      ")
 "How-to-play"
 
@@ -2537,11 +2537,11 @@ ReSentence=function(sentence,dot){
 	return Capitalise(TrimWhitespaceString(sentence));
 /*
 already punctuated
-PunctuateSentence("Well!")
+ReSentence("Well!")
 "Well!"
 
 custom period, and capitalise
-PunctuateSentence("so","?")
+ReSentence("so","?")
 "So?"
 */
 }
@@ -3705,7 +3705,7 @@ AClick=function(url,opts){
 	var id=GenerateId();
 	var opts=opts||{};
 	opts.id=id;
-	PreAddElement(AHTML(" ",url,opts),"body");
+	PrependToElement(AHTML(" ",url,opts),"body");
 	GetElement(id).click();
 	RemoveElement(id);
 }
@@ -3781,7 +3781,7 @@ AddTitleIndex=function(section){
 	if(indexArray.length<=1)
 		return;
 	RemoveElement(".index",section);
-	PrependElement(PageIndexHTML(indexArray),section);
+	PrependAfterElement(PageIndexHTML(indexArray),section);
 	Class(".h1","collapse");
 	ShowHideIndex();
 }
@@ -3911,7 +3911,7 @@ LoadScript=function(source){
 LoadCode=function(code){
 	var g = document.createElement('script');
 		g.text = code;
-	AddElement(g,"BODY");
+	AppendToElement(g,"BODY");
 }
 
 LoadAsync=function(sourcename,folder){
@@ -3946,7 +3946,7 @@ LoadStyle=function(sourcename){
 
 ReplaceStyleElement=function(stylesource,id){
 	RemoveElement(id);
-	AddElement(`<style id="${id}">${stylesource}</style>`,'head');
+	AppendToElement(`<style id="${id}">${stylesource}</style>`,'head');
 }
 
 //Load objects from HTML pages
@@ -4455,28 +4455,28 @@ ElementAdder=function(Adder){
 	};
 };
 
-AddElement=function(htmlOrElement,parentIDsel){
+AppendToElement=function(htmlOrElement,parentIDsel){
 	function Adder(s,e){
 		return s.appendChild(e);
 	};
 	return ElementAdder(Adder)(htmlOrElement,parentIDsel);
 };
 
-PreAddElement=function(htmlOrElement,parentIDsel){
+PrependToElement=function(htmlOrElement,parentIDsel){
 	function Adder(s,e){
 		return s.prepend(e);
 	};
 	return ElementAdder(Adder)(htmlOrElement,parentIDsel);
 };
 
-AppendElement=function(htmlOrElement,parentIDsel){
+AppendAfterElement=function(htmlOrElement,parentIDsel){
 	function Adder(s,e){
 		return s.insertAdjacentElement('afterend',e);
 	};
 	return ElementAdder(Adder)(htmlOrElement,parentIDsel);
 };
 
-PrependElement=function(htmlOrElement,parentIDsel){
+PrependAfterElement=function(htmlOrElement,parentIDsel){
 	function Adder(s,e){
 		return s.insertAdjacentElement('beforebegin',e);
 	};
@@ -4494,7 +4494,7 @@ ReplaceChildren=function(html,parentIDsel){
 
 // Replace element with new element
 ReplaceElement=function(htmlOrElement,elemIDsel){
-	var a=AppendElement(htmlOrElement,elemIDsel);
+	var a=AppendAfterElement(htmlOrElement,elemIDsel);
 	RemoveElement(elemIDsel);
 	return a;
 };
@@ -4508,8 +4508,8 @@ ReplaceElements=function(htmlOrElement,elemIDsel){
 
 //Wrap Element
 WrapElement=function(html,elemIDsel,newparentIdsel){
-	AppendElement(html,elemIDsel);
-	AddElement(GetElement(elemIDsel),newparentIdsel);
+	AppendAfterElement(html,elemIDsel);
+	AppendToElement(GetElement(elemIDsel),newparentIdsel);
 }
 
 UnWrapElement=function(elemIDsel,wrapIDsel){
@@ -4567,7 +4567,7 @@ ApplyChildren=function(F,elem,children){
 	var children=F(children);
 	children.map(function(c){return c.cloneNode&&c.cloneNode(true)});
 	RemoveChildren(elem);
-	children.map(function(c){AddElement(c,elem)});
+	children.map(function(c){AppendToElement(c,elem)});
 }
 
 ApplyOriginalChildren=function(F,parentSelector,childselector,subparentSelector){
@@ -4644,7 +4644,7 @@ PrependFilterInput=function(InputFilterF,parentSelector){
 
 	var uid=UniqueId(parentSelector);
 	filterHTML=FilterHTML(FunctionName(InputFilterF),uid);
-	input=PrependElement(filterHTML,parentSelector);
+	input=PrependAfterElement(filterHTML,parentSelector);
 	if(value!==""&&input.value===""){
 		input.value=value;
 	}
@@ -4673,7 +4673,7 @@ AddShareSearch=function(patterntxt,elementSelector){
 	var shareLink=PageUnSearch()+"?search="+patterntxt+tableid;
 	RemoveElement(PosteriorElement(elementSelector,".share-link"));
 	if(patterntxt)
-		AppendElement("<div class='share-link'><b>Share this search:</b>"+AHTML(shareLink,shareLink)+"</div>",elementSelector);
+		AppendAfterElement("<div class='share-link'><b>Share this search:</b>"+AHTML(shareLink,shareLink)+"</div>",elementSelector);
 }
 
 // Recognise filter table
@@ -5486,7 +5486,7 @@ BalloonHTML=function(avatarHTML,content,id,classExtra){
 }
 
 OpenBalloon=function(content,id,targetid){
-	AddElement(BalloonHTML("",content,id),targetid);
+	AppendToElement(BalloonHTML("",content,id),targetid);
 }
 
 //Banner (e.g for keyboard)
@@ -5497,7 +5497,7 @@ BannerHTML=function(content,id,classExtra){
 }
 
 OpenKeyboardBanner=function(content,id,targetid){
-	return AddElement(BannerHTML(content,id,"keyboard"),targetid);
+	return AppendToElement(BannerHTML(content,id,"keyboard"),targetid);
 }
 
 LaunchKeyboardBanner=function(DP){
@@ -5505,7 +5505,7 @@ LaunchKeyboardBanner=function(DP){
 }
 
 OpenKeyboardBalloon=function(content,id,targetid){
-	return AddElement(BalloonHTML("",content,id,"keyboard"),targetid);
+	return AppendToElement(BalloonHTML("",content,id,"keyboard"),targetid);
 }
 
 LaunchKeyboardBalloon=function(DP){
@@ -5812,7 +5812,7 @@ OpenElement=function(e,parentIDsel,duration){
 	e=NewNode(e);
 	var duration=FadeDuration(duration)
 	UnHideUnFadeElement(e,duration);
-	AddElement(e,parentIDsel);
+	AppendToElement(e,parentIDsel);
 }
 
 CloseElement=function(targetIDsel,parentIDsel,duration,Callback){
@@ -6461,7 +6461,7 @@ InvalidateAnswer=function(DF){
 		var errormessage=validator.error;
 		if(!DF.qrequired)
 			errormessage=errormessage+" Or leave this field empty instead...";
-		AppendElement(ErrorHTML(errormessage,errorid),qid);
+		AppendAfterElement(ErrorHTML(errormessage,errorid),qid);
 	}
 	return invalid;
 }
@@ -6611,7 +6611,7 @@ ModalHTML=function(content,id,type){
 OpenModal=function(content,id,target){
 	var id=id||GenerateId();
 	var target=target||"body"
-	AddElement(ModalHTML(content,id),target);
+	AppendToElement(ModalHTML(content,id),target);
 	FocusInside(id);
 }
 
@@ -6624,7 +6624,7 @@ LaunchModal=function(DP){
 ///////////////////////////////////////////////////////////////////////////////
 //Embedded info
 LaunchEmbed=function(DP){
-	AddElement(QuestionHTML(DP),DP.qtargetid);
+	AppendToElement(QuestionHTML(DP),DP.qtargetid);
 }
 
 
@@ -6636,7 +6636,7 @@ VideoEmbedHTML=function(ytid,origin){
 	return '<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="100%" type="text/html" src="https://www.youtube.com/embed/'+ytid+'?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0'+ori+'"></iframe>'};
 
 OpenVideoModal=function(ytid){
-	AddElement(ModalHTML(VideoEmbedHTML(ytid,PageFragment()),GenerateId(),"gallery-video"),document.body.id);
+	AppendToElement(ModalHTML(VideoEmbedHTML(ytid,PageFragment()),GenerateId(),"gallery-video"),document.body.id);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -6740,7 +6740,7 @@ ConsoleAdd=function(messageHTML,wait,duration,mID,consoleID,mClass){
 	var duration=duration?Max(1000,duration):TextReadDuration(messageHTML);
 	var wait=wait?wait:0;
 	var mID=mID?mID:"c-"+GenerateId();//random id
-	setTimeout(function(){AddElement(ConsoleMessageHTML(messageHTML,mID,mClass),consoleID)},wait)
+	setTimeout(function(){AppendToElement(ConsoleMessageHTML(messageHTML,mID,mClass),consoleID)},wait)
 	setTimeout(function(){CloseElement(mID)},duration+wait);
 	if(!Console.buffer)
 		Console.buffer=[];
@@ -6754,7 +6754,7 @@ ConsoleLoad=function(selector,consoleID){
 	var consoleID=consoleID||"Console";
 	var selector=selector||'.main';
 	RemoveElement(consoleID,selector);
-	AddElement('<div class="Console" id="'+consoleID+'"></div>',selector);
+	AppendToElement('<div class="Console" id="'+consoleID+'"></div>',selector);
 }
 
 ConsoleAddMany=function(messagesArray,consoleID,mClass){
@@ -8260,7 +8260,7 @@ WallpaperHTML=function(opts){
 }
 
 AddWallpaper=function(patternObj,e){
-	AddElement(NewNode(WallpaperHTML(patternObj)),e);
+	AppendToElement(NewNode(WallpaperHTML(patternObj)),e);
 }
 
 RemoveWallpaper=function(name,e){
@@ -8402,7 +8402,7 @@ AddChartLine=function(opts,chart){
 	var type=opts.type;
 	for(var i=0;i<=major;i++){
 		var I=invert?(major-i):i;
-		AddElement(SVGLineHTML({
+		AppendToElement(SVGLineHTML({
 			x0:Round(I/major*xview,5),
 			x1:Round(I/major*xview,5),
 			y0:Round(down*yview,5),
@@ -8416,7 +8416,7 @@ AddChartLine=function(opts,chart){
 
 		for(var j=1;j<minor;j++){
 			var J=invert?(minor-j):j;
-			AddElement(SVGLineHTML({
+			AppendToElement(SVGLineHTML({
 				x0:Round((I+J/minor)/major*xview,5),
 				x1:Round((I+J/minor)/major*xview,5),
 				y0:Round(down*yview*scale,5),
@@ -8447,7 +8447,7 @@ AddChartAxisLegend=function(opts,chart){
 
 	for(var i=0;i<=major;i++){
 		var I=invert?(major-i):i;
-		AddElement(SVGTextHTML({
+		AppendToElement(SVGTextHTML({
 			x0:horizontal?Round(down*xview*scale,5):Round((I-right)/major*yview,5),
 			y0:horizontal?Round((I-right)/major*yview,5):Round(xview-down*xview*scale,5),
 			cla:"legend major "+(horizontal?"y":"x"),
@@ -8474,7 +8474,7 @@ AddChartLegend=function(opts,chart){
 	var x=typeof opts.x==="undefined"?(0+xview)/2:opts.x;
 	var y=typeof opts.y==="undefined"?(0+yview)/2:opts.y;
 	
-	AddElement(SVGTextHTML({
+	AppendToElement(SVGTextHTML({
 		x0:x,
 		y0:y,
 		txt:opts.txt,
@@ -8516,7 +8516,7 @@ AddChartBars=function(opts,chart){
 				opts.x1=opts.y1;
 				opts.y1=mem1;
 		}
-		AddElement(SVGBarHTML(opts),chart)
+		AppendToElement(SVGBarHTML(opts),chart)
 	}
 	RefreshSVG(chart);
 }
@@ -8544,7 +8544,7 @@ AddChartComponent=function(component,opts,chart){
 
 AddChart=function(opts,target){
 	var cla=opts.cla||"chart";
-	var chart=AddElement(SVGHTML2({cla:cla}),target);
+	var chart=AppendToElement(SVGHTML2({cla:cla}),target);
 	
 	Keys(opts).map(c=>AddChartComponent(c,opts[c],Prefix(cla,".")));
 	
@@ -8789,7 +8789,7 @@ SelectedNode=function(e){
 Monitor=function(Opts,id){
 	var id=id||GenerateId();
 	if(!GetElement(".monitor")){
-		AddElement(`<div class="monitor" id=${"monitor-"+id}></div>`,"BODY")
+		AppendToElement(`<div class="monitor" id=${"monitor-"+id}></div>`,"BODY")
 	}
 	report=Keys(Opts).map(name=>`<div><b>${name}:</b>${ReString(Opts[name])}</div>`).join("");
 	ReplaceChildren(report,".monitor");
@@ -8938,17 +8938,14 @@ RollsSave=function(){
 }
 
 
-TestingAreaSelector=".test-suite";
-
 UnitTestEvaluate=function(unitObj){
 	if(!unitObj)
 		return;
-	
 	var passed=false;
 	var result=null;
 	try{
 		result=eval(unitObj.call);
-		passed=Equal(result,unitObj.expected)||!!Evaluate(unitObj.VerifierF)
+		passed=Equal(result,unitObj.expected)||!!Evaluate(unitObj.VerifierF);
 	}
 	catch(e){
 		passed=false;
@@ -8963,20 +8960,12 @@ UnitTestEvaluate=function(unitObj){
 
 UnitTestReportHTML=function(unitTest){
 	if(!unitTest)
-		return null;
+		return;
 	
-	if(unitTest.passed)
-		return "";
-
 	var callerName=unitTest.callerName;
-	var tID="test-"+callerName;
-	var header=`
-		<h3 class='test-function' id='${tID}'>
-			${callerName}
-		</h3>`;
 
-	if(!GetElement(tID))
-		AddElement(header,TestingAreaSelector);
+	if(unitTest.passed)
+		return `${callerName} ${L("Passed")}`;
 
 	var callresult=`${unitTest.call}===${ReString(unitTest.result)}`;
 	var expected="";
@@ -8989,13 +8978,12 @@ UnitTestReportHTML=function(unitTest){
 	var title=unitTest.title;
 	var label=LabelHTML("Failed","test Problem");
 	var tried=`
-		<h4>${title}</h4>
+		<h4>${callerName}: ${title}</h4>
 		<p>
 			<code>${callresult}</code>${label}
 		</p>
 	`
 	var testid=KebabCaseString("test-"+callerName+" "+title);
-	RemoveElement(testid);
 
 	var report=`
 		<div class='test-result' id='${testid}'>
@@ -9003,7 +8991,7 @@ UnitTestReportHTML=function(unitTest){
 			${expected}
 		</div>`;
 
-	AppendElement(report,tID);
+	return report;
 }
 
 

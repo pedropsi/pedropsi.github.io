@@ -59,7 +59,7 @@ HeadReAdd=function(){
 	RemoveElements("meta");
 	RemoveElements("title");
 	GetElements("link").filter(e=>!In(e.type,"css")).map(RemoveElement);
-	AddElement(v.HEAD_ITEMS(),"HEAD");
+	AppendToElement(v.HEAD_ITEMS(),"HEAD");
 }
 
 BuildCMSPage=function(){
@@ -149,7 +149,7 @@ PageFeaturesDOM=function(){
 
 	ListenOnce('offline',MonitorConnection);
 	
-	AddElement(ScrollUpHTML(),".whiteboard");
+	AppendToElement(ScrollUpHTML(),".whiteboard");
 	setTimeout(PageIndex,2000);
 
 	if(PageSearch("debug"))

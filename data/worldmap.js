@@ -280,5 +280,5 @@ DeployCountry=function(data){
 }
 
 ReplaceElement(worldMap,"worldMap");
-PrependElement(DynamicText("worldMapCounter","Pick a country..."),"worldMap");
+PrependAfterElement(DynamicText("worldMapCounter","Pick a country..."),"worldMap");
 DisplayCountryCounter();

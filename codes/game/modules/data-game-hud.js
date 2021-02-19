@@ -41,7 +41,7 @@ RenderHUD=function(id,target){
 	var id=id?id:GenerateId();
 	ListenOnce("resize",function(){if(GetElement(id))RenderHUD(id,target)});
 	UnRenderHUD(id);
-	PreAddElement(HUDHtml(id),target);
+	PrependToElement(HUDHtml(id),target);
 	ListenOnce("touchstart",UnRenderHUD,id);
 }
 

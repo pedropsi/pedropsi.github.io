@@ -140,7 +140,7 @@ function ShoutStory(){
 
 ListenOnce("GameBar",function(){
 	ShoutStory["list"]=Memory("story");
-	AddElement('<div class="Console" id="Intercom"></div>',"puzzlescript-game")}
+	AppendToElement('<div class="Console" id="Intercom"></div>',"puzzlescript-game")}
 );
 
 var Stories={

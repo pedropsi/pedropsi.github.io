@@ -1892,7 +1892,7 @@ PreAddOuter=function(state,pagetarget){
 	</div>`;
 
 	if(!GetElement(state.render.target))
-		PreAddElement(GameHTML,GetElement(pagetarget)||"BODY");
+		PrependToElement(GameHTML,GetElement(pagetarget)||"BODY");
 }
 
 BoardPrepare=function(state){

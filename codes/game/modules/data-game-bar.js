@@ -399,9 +399,9 @@ function GameBar(){
 function AddGameBar(){
 	RemoveElement("GameBar");
 	if(Portable())
-		AddElement(GameBar(),ParentSelector(gameSelector));
+		AppendToElement(GameBar(),ParentSelector(gameSelector));
 	else
-		AddElement(GameBar(),".game-container");
+		AppendToElement(GameBar(),".game-container");
 }
 
 

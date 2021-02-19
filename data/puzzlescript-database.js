@@ -321,7 +321,7 @@ function PrototypeExampleRowHTML(id){
 
 function LoadGameHTML(frameHTML){
 	//RemoveElement(".game-console");
-	PrependElement(frameHTML,".main");
+	PrependAfterElement(frameHTML,".main");
 }
 
 function PGDMenuHTML(){

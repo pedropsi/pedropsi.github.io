@@ -165,7 +165,7 @@ function ExternalCompileASAP(fork){
 
 function PuzzlescriptPage(id){
 	// Add the game container to the top of the page
-	PreAddElement(	`<div id="puzzlescript-game" class="game">
+	PrependToElement(	`<div id="puzzlescript-game" class="game">
 						<canvas id="gameCanvas">Loading...</canvas>
 					</div>`,
 				"body");

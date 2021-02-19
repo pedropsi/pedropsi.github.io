@@ -1,5 +1,5 @@
 if(PageSearch("c")){
-	PreAddElement(HyperCanvas(),"BODY");
+	PrependToElement(HyperCanvas(),"BODY");
 	var statusElement = document.getElementById('status');
 	var progressElement = document.getElementById('progress');
 	showconsole = false;

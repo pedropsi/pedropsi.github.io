@@ -44,12 +44,12 @@ function GameFrameHTML(){
 
 function GameIntro(Callback){
 	RemoveElement("game-supra-Canvas");
-	PreAddElement(GameFrameHTML(),"BODY");
+	PrependToElement(GameFrameHTML(),"BODY");
 	HearElement(".game-supra-Canvas",()=>Clickwall(Callback));
 }
 
 function Clickwall(Callback){
-	AddElement(`
+	AppendToElement(`
 		<div class="clickwall faded">
 			<div class="circular">${ObtainSymbol("play")}</div>
 			<p>Please turn on the sound ${ObtainSymbol("music")}.</p><p><b>Click anywhere to start!</b></p>

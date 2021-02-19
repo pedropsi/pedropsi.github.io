@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 if(PageIdentifier()!=="puzzle-type")
-	AddElement("<style>html{overflow-y:hidden};</style>","HEAD")
+	AppendToElement("<style>html{overflow-y:hidden};</style>","HEAD")
 
 var gameTitle="Puzzle Type";
 
@@ -221,7 +221,7 @@ function GameTrailer(){
 		<source src="${MediaPath()}/trailorial.mp4" type="video/mp4">
   		Sorry! Your browser does not support the video tag.
 	</video>`;
-	PreAddElement(trailerHTML,"BODY");
+	PrependToElement(trailerHTML,"BODY");
 }
 //LoadAsync("cacher",".");
 //ServiceWorker();
@@ -2415,9 +2415,9 @@ function DrawCaret(){
 
 function DrawSingleCaret(p){
 	if(p<0)
-		PreAddElement(CaretHTML(),"#letters");
+		PrependToElement(CaretHTML(),"#letters");
 	if(p>=Letters().length)
-		AddElement(CaretHTML(),"#letters");
+		AppendToElement(CaretHTML(),"#letters");
 	else
 		Class("#letters .letter-"+p,"caret");
 }
@@ -2671,8 +2671,8 @@ function ModifyLetters(ChangeF,ConditionF){
 
 function InitialiseGameCanvas(){
 	RemoveChildren("gameCanvas");
-	AddElement(`<div class='top faded'></div>`,"gameCanvas");
-	AddElement(`<div class='middle faded'><div id='letters'></div></div>`,"gameCanvas");
+	AppendToElement(`<div class='top faded'></div>`,"gameCanvas");
+	AppendToElement(`<div class='middle faded'><div id='letters'></div></div>`,"gameCanvas");
 	UnFadeElement(".top",500);
 	UnFadeElement(".middle",500);
 }
@@ -2821,7 +2821,7 @@ function TransitionNotesIn(duration){
 	var duration=duration||200;
 	var notes=GetElement(".top .notes");
 	if(!notes)
-		PreAddElement(`<div class='notes faded'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="best">${BestMove(CurLevelTitle())||""}</p><p class="level-notes">${ObtainLevelNotes(CurLevelNumber())}</p></div>`,".top")
+		PrependToElement(`<div class='notes faded'><p class="level-number">${LevelNumberNotes(CurLevelNumber())}</p><p class="best">${BestMove(CurLevelTitle())||""}</p><p class="level-notes">${ObtainLevelNotes(CurLevelNumber())}</p></div>`,".top")
 	else{
 		GetElement(".level-number").innerHTML=LevelNumberNotes(CurLevelNumber());
 		GetElement(".level-notes").innerHTML=ObtainLevelNotes(CurLevelNumber());
@@ -2834,7 +2834,7 @@ function TransitionGoalIn(duration){
 	var goalE=GetElement(".top .goal");
 	var goal=GoalHTML(CurLevelTitle());
 	if(!goalE){
-		AppendElement(`<div class='goal goaly faded'>${goal}</div>`,".top .notes")
+		AppendAfterElement(`<div class='goal goaly faded'>${goal}</div>`,".top .notes")
 	}
 	else{
 		Class(".goal",".goaly");
@@ -2858,7 +2858,7 @@ var UnCapitalisedGoals=[
 function TransitionKeystrokesIn(duration){
 	var duration=duration||200;
 	if(!GetElement(".top .keystrokes")){
-		AddElement(`<div class='keystrokes faded'></div>`,".top");
+		AppendToElement(`<div class='keystrokes faded'></div>`,".top");
 	}
 	UnFadeElement(".top .keystrokes",duration);
 }
@@ -2866,7 +2866,7 @@ function TransitionKeystrokesIn(duration){
 function TransitionTitlescreenTitleIn(duration){
 	var duration=duration||200;
 	if(!GetElement(".top .game-title"))
-		AddElement(`<div class='game-title faded'>${gameTitle}</div>`,".top")
+		AppendToElement(`<div class='game-title faded'>${gameTitle}</div>`,".top")
 	UnFadeElement(".top .game-title",duration);
 }
 
