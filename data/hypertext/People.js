@@ -250,18 +250,13 @@ RegisterPerson=function(alias,key){
 	}
 }
 
-MemorableHyperStrings=function(string){
-	if(!string)
-		return [];
-	return string.split(/(\s|\.)+/).concat(string).filter(n=>n.length>2);
-}
 
 Keys(Persons).map(function(k){
 	RegisterPerson(k,k);
-	MemorableHyperStrings(Persons[k].alias||"").map(n=>RegisterPerson(n,k))
-	MemorableHyperStrings(Persons[k].name||"").map(n=>RegisterPerson(n,k))
-	MemorableHyperStrings(Persons[k].shorthand||"").map(n=>RegisterPerson(n,k))
-	MemorableHyperStrings(Persons[k].TWITTER||"").map(n=>RegisterPerson(n,k))
+	StringMemorables(Persons[k].alias||"").map(n=>RegisterPerson(n,k))
+	StringMemorables(Persons[k].name||"").map(n=>RegisterPerson(n,k))
+	StringMemorables(Persons[k].shorthand||"").map(n=>RegisterPerson(n,k))
+	StringMemorables(Persons[k].TWITTER||"").map(n=>RegisterPerson(n,k))
 });
 
 PeopleSelfReferencer=function(){

@@ -2556,6 +2556,12 @@ CapitaliseSlug=function(slug){
 	return CapitaliseNoblesSentence(slug.replaceAll("-"," "));
 }
 
+StringMemorables=function(string){
+	if(!string)
+		return [];
+	return string.split(/(\s|\.)+/).concat(string).filter(UnIner(CommonWords));
+}
+
 //Escape
 
 DotCharacters=".?!".split("");
