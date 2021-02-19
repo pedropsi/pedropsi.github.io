@@ -1021,6 +1021,16 @@ MiniBoardCanvasDraw=function(fruit,rule,state,rendering){
 	}
 }
 
+SerialDraw=function(serial,stateOpts){
+	var state=SerialState(SearchParameters(serial),BlankState);
+		state=CompleteState(Group(state,stateOpts));
+		BoardPrepare(state);
+		StateDraw(state);
+		CanvasResize(state);
+}
+
+
+
 RuleDescriptionDraw=function(fruit,rule,colour){
 	var description=`<p>${ReSentence(rule.description)}</p>`;
 		description=description.replace(new RegExp("("+UnTake(fruit,-1)+"\\w+)","ig"),`<b style="color:${colour};">$1</b>`);
@@ -1231,7 +1241,7 @@ StateSerial=function(state){
 
 
 FruitSerialState=function(fruit,serial,suprastate){
-	var state=SerialState(SearchParameters(serial),Clone(suprastate));
+	var state=SerialState(SearchParameters(serial),suprastate);
 		state.id="rule-"+fruit;
 		state.render={main:false,target:suprastate.render.target,once:true};
 		state.mode.selection=[];
