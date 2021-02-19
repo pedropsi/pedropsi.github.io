@@ -367,25 +367,33 @@ function FullscreenButton(){
 }
 
 function GameBar(){
+	var buttons={
+		"save":HiddenHTML('SaveButton'),
+		"how-to-play":GameBarButtonLinkHTML("How to play?","how-to-play"),
+		"hint":HiddenHTML('HintButton'),
+		"undo":UndoButton(),
+		"redo":RedoButton(),
+		"restart":RestartButton(),
+		"keyboard":KeyboardButton(),
+		"level-selector":LevelselectorButton(),
+		"feedback":FeedbackButton(),
+		"credits":GameBarButtonLinkHTML("Credits","credits"),
+		"wrench":HiddenHTML('WrenchButton'),
+		"more":HiddenHTML('MoreButton'),
+		"music":MusicButton(),
+		"fullscreen":FullscreenButton()
+	}
+	var CommonButtons=["save","hint","undo","redo","restart","level-selector","music","fullscreen"];
+	var InternalButtons=["how-to-play","credits","keyboard","feedback"];
+	var ExternalButtons=["wrench","more"];
+	if(ConsoleExternal())
+		buttons=FilterKeysObject(buttons,Iner(Join(CommonButtons,ExternalButtons)))
+	else if(Portable())
+		buttons=FilterKeysObject(buttons,Iner(CommonButtons))
+	else
+		buttons=FilterKeysObject(buttons,Iner(Join(CommonButtons,InternalButtons)))
 	
-	var buttons=[
-		HiddenHTML('SaveButton'),
-		GameBarButtonLinkHTML("How to play?","how-to-play"),
-		HiddenHTML('HintButton'),
-		UndoButton(),
-		RedoButton(),
-		RestartButton(),
-		KeyboardButton(),
-		LevelselectorButton(),
-		FeedbackButton(),
-		GameBarButtonLinkHTML("Credits","credits"),
-		HiddenHTML('WrenchButton'),
-		HiddenHTML('MoreButton'),
-		MusicButton(),
-		FullscreenButton()
-	].join("");
-	
-	return ButtonBar(buttons,"GameBar");
+	return ButtonBar(Values(buttons).join(""),"GameBar");
 }
 
 function AddGameBar(){
