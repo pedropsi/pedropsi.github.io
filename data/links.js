@@ -38,8 +38,6 @@ A_GAMES:{link:"tag",EXT:".html",TITLE:"games",AUTHOR:()=>v.NAME(),SEARCH:"Game"}
 A_GIST:{link:"https://gist.github.com",TITLE:"Gists",AUTHOR:"Github"},
 A_GRAVIRINTH_LOG:{link:"gravirinth-log",EXT:".html",TITLE:"Gravirinth's Devlog"},
 A_MOSAICS:{link:"tag-mosaic",EXT:".html",TITLE:"Mosaics",AUTHOR:()=>v.NAME()},
-A_PMGRP:{link:"pmgrp",EXT:".html",TITLE:"Play Mini Gemini Replay"},
-A_PRESS:{link:"press",EXT:".html",TITLE:"Press kit",AUTHOR:()=>v.SITE_NAME()},
 A_SB_HINTS:{link:"hints/skilleblokker",EXT:".txt",TITLE:"hints/skilleblokker.txt"},
 A_BW_HINTS:{link:"hints/blockworks",EXT:".txt",TITLE:"hints/blockworks.txt"},
 A_PT_HINTS:{link:"hints/platformer-template",EXT:".txt",TITLE:"hints/platformer-template.txt"},
