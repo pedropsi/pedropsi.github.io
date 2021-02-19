@@ -255,7 +255,7 @@ DebuggerHTML=function(){
 
 AutoTestButtonHTML=function(){
 	var b=ButtonHTML({
-		txt:"test!",
+		txt:"test",
 		tag:"span",
 		class:"inline",
 		onclick:`
