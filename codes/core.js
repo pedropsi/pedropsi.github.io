@@ -204,6 +204,14 @@ LazyPasser=function(F){
 	}
 }
 
+FirstCurrier=function(F){
+	return function(firstArgument){
+		return function(secondArgument){
+			return F(firstArgument,secondArgument);
+		}
+	}
+}
+
 MapThread=function(F){
 	var args=Rest(Values(arguments));
 	if(!args.length)
@@ -1381,9 +1389,14 @@ true
 absent from keys, even if in values
 In({a:"1",b:"2",c:"3",d:"4"},"1")
 false
+
+functional form
+Iner([1,2,3])(2)
+true
 */
 }
 
+Iner=FirstCurrier(In);
 
 Count=function(array,itemOrF){
 	if(typeof array==="string"&&typeof itemOrF==="string"){
