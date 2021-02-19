@@ -2,6 +2,22 @@
 // Customisation
 var ObtainLevelTitle="Previous";
 
+var ps="media/gravirinth/sound/";
+var sounds={
+		left:	{src:ps+'left.mp3',		volume:0.3,sfx:13614108},
+		up:		{src:ps+'up.mp3',		volume:0.3,sfx:25636708},
+		right:	{src:ps+'right.mp3',	volume:0.3,sfx:79636308},
+		down:	{src:ps+'down.mp3',		volume:0.3,sfx:76346108},
+		orb:	{src:ps+'orb.mp3',		volume:0.3,sfx:50758708},
+		type:	{src:ps+'type.mp3',		volume:0.1,sfx:27763708},
+		light:	{src:ps+'light.mp3',	volume:0.3,sfx:40605508},
+		save:	{src:ps+'save.mp3',		volume:0.1,sfx:4002908},
+		undo:	{src:ps+'undo.mp3',		volume:0.1,sfx:85375308},
+		restart:{src:ps+'restart.mp3',	volume:0.1,sfx:35446108}
+}
+
+HearOnce("data-game-music",()=>LoadSounds(sounds,"puzzlescript-game"));
+
 ////////////////////////////////////////////////////////////////////////////////
 // Source
 var sourceCode=`
