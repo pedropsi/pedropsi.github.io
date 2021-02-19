@@ -126,7 +126,7 @@ Identity([])
 
 a function
 Identity(Identity)
-"Identity"
+Identity
 */
 };
 
@@ -1755,7 +1755,7 @@ BiJoinArray=function(A1,A2){
 /*
 Polyarity, ignore misformats, keep duplicates
 Join([],[1],[2],[2],null)
-[1,2,24]
+[1,2,2]
 
 Even with zero arguments
 Join()
@@ -9021,18 +9021,17 @@ TestCoverageReport=function(unitTests,functionNames,maintarget){
 	var coveragereport=`
 	<h2>Code coverage</h2>
 		<h3>Testable functions</h3>
-			<p>Current code coverage stands at ${DynamicText("code-coverage")} of all testable functions.</p>
+			<p>Current code coverage stands at ${percent} of all testable functions.</p>
 			<h4>Functions not yet tested</h4>
 				<p>${Enumerate(untestedFunctionNames)}.</p>
 
 		<h3>Untestable functions</h3>
 			<p>These functions do not return a value, only a side effect, and are not currently testable.</p>
-			<p>${percent}.</p>
+			<p>${Enumerate(sideFunctionNames)}.</p>
 
 	<h2>Dependencies</h2>
 		<h3>Orphan Functions</h3>
 			<p>These functions are potentially no longer used (deeper check pending).</p>
-			<p>${Enumerate(sideFunctionNames)}.</p>
 			${ButtonHTML({txt:"Retrieve",onclick:`DynamicText("code-orphan-functions",Enumerate(OrphanFunctions()))`})}
 	`;
 	AppendToElement(coveragereport,maintarget);
@@ -9047,7 +9046,8 @@ TestsPassFailHTMLReport=function(unitTestsList,maintarget){
 	var passedid="tests-passed";
 	var testarea=`
 	<h2>Problems found?</h2>
-		<div id="${failedid}"></div> 
+		<div id="${failedid}"></div>
+		<p>That's all!</p>
 	<h2>Passed tests</h2>
 		<p id="${passedid}"></p> 
 	`;
