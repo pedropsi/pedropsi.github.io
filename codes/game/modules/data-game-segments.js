@@ -429,7 +429,7 @@ SegmentTrackContained=function(segment,track){
 }
 
 DeleteSegmentTrack=function(segment,track){
-	return track.filter(seg=>!In([segment,Reverse(segment)],seg));
+	return track.filter(UnIner([segment,Reverse(segment)]));
 }
 
 SegmentContiguousTrackSegments=function(segment,track){

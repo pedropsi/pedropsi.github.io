@@ -9157,7 +9157,7 @@ OrphanFunctions=function(dependencies){
 	if(!dependencies)
 		var dependencies=Dependencies();
 	var calledFunctionNames=Apply(Union,Values(dependencies));
-	var uncalled=Keys(FilterKeysObject(dependencies,k=>!In(calledFunctionNames,k)));
+	var uncalled=Keys(FilterKeysObject(dependencies,UnIner(calledFunctionNames)));
 	return uncalled;
 }
 

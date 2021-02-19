@@ -92,7 +92,7 @@ function NumberNote(number){
 
 function ParseChordList(chordtxt){
 	var ch=chordtxt.replace(/([ABCDEFG])/g,"-$1").split("-");
-	ch=ch.filter(x=>!In(["","#"],x));
+	ch=ch.filter(UnIner(["","#"]));
 	return ch
 }
 

@@ -283,7 +283,7 @@ function LetterCoordinates(Z){
 	if(LetterCoordinates[Z])
 		return LetterCoordinates[Z];
 	var explicitCoordinates=Clone(LetterShape[Z]);
-	var implicitPoints=ShapePoints.filter(c=>!In(explicitCoordinates,c));
+	var implicitPoints=ShapePoints.filter(UnIner(explicitCoordinates));
 	
 	for (var i=0;i<implicitPoints.length;i++){
 		var c=ShapePointConnections[implicitPoints[i]];

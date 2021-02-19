@@ -386,7 +386,7 @@ ValidSegments=function(segments,state){
 
 TrackDangled=function(track,state){
 	var endpoints=TrackEndpoints(track);
-	var dangled=endpoints.some(point=>!In(Join(...Values(state.level)),point));
+	var dangled=endpoints.some(UnIner(Join(...Values(state.level))));
 	return dangled;
 }
 
@@ -464,7 +464,7 @@ PointConnectablePoints=function(xy,fruits,state){
 	var nextPoints;
 	while(plannedPoints.length){
 		point=First(plannedPoints);
-		nextPoints=PointNeighbourPoints(point).filter(xy=>PointValid(xy,state)&&PointConnectableAble(xy,fruits,state)).filter(xy=>!In(plannedPoints,xy)&&!In(seenPoints,xy))
+		nextPoints=PointNeighbourPoints(point).filter(xy=>PointValid(xy,state)&&PointConnectableAble(xy,fruits,state)).filter(UnIner(Union(plannedPoints,seenPoints)))
 		plannedPoints=plannedPoints.concat(nextPoints);
 		plannedPoints=Rest(plannedPoints);
 		seenPoints.push(point);
@@ -495,7 +495,7 @@ PointTrackNextNodePoints=function(xy,track,state){
 		if(In(fruitPoints,xy)){
 			nodePoints.push(xy);
 		}
-		nextPoints=PointContiguousTrackPoints(point,track).filter(xy=>PointValid(xy,state)).filter(xy=>!In(plannedPoints,xy)&&!In(seenPoints,xy)&&!In(nodePoints,xy))
+		nextPoints=PointContiguousTrackPoints(point,track).filter(xy=>PointValid(xy,state)).filter(UnIner(Union(plannedPoints,seenPoints,nodePoints)))
 		plannedPoints=plannedPoints.concat(nextPoints);
 		plannedPoints=Rest(plannedPoints);
 	}
@@ -1879,8 +1879,7 @@ SubBoardHTML=function(name,state,cla){
 OuterLayers=["metadatacolophon","metadatatitle","explainer"]
 
 CanvasLayersHTML=function(state){
-	var container=GetElement(state.render.container,state.render.target);
-	var canvasLayers=Keys(LayersChanged).filter(layer=>!In(OuterLayers,layer));
+	var canvasLayers=Keys(LayersChanged).filter(UnIner(OuterLayers));
 	var subBoards=canvasLayers.map(name=>SubBoardHTML(name,state)).join("");
 	return subBoards;
 }

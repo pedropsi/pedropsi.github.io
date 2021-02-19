@@ -1969,7 +1969,7 @@ function EnDictionary(){
 			// "ing","ings","si","ting","tings","rin","rins","ping","pings","oping","pring","pling","plings","piling","pilings","til","tint","tints","comping","compting"
 		]);
 		var exclusions=["ins","ger"]
-		EnDictionary.list=EnDictionary.list.filter(w=>!In(exclusions,w))
+		EnDictionary.list=EnDictionary.list.filter(UnIner(exclusions))
 	}
 	return EnDictionary.list;
 }
