@@ -267,7 +267,7 @@ SBGRAPH=InitialiseGraph(SBGRAPH);
 //Validator
 
 function StarBattleFull(graph){
-	return Keys(graph.adjacencies).every(cell=>In(graph.stars,cell)||In(graph.crosses,cell));
+	return Keys(graph.adjacencies).every(Iner(graph.stars)||In(graph.crosses,cell));
 }
 
 
@@ -284,17 +284,17 @@ function StarBattleRegionsApply(Transform,graph){
 }
 
 function StarBattleRegionsSolved(graph){
-	function Test(regionstars,stars,n){return regionstars.every(region=>Count(region,cell=>In(stars,cell))===n)}
+	function Test(regionstars,stars,n){return regionstars.every(region=>Count(region,Iner(stars))===n)}
 	return StarBattleRegionsApply(Test,graph);
 }
 
 function StarBattleLongRegions(graph){
-	var FilterSB=function(regionstars,stars,n){return regionstars.filter(region=>Count(region,cell=>In(stars,cell))>n)}
+	var FilterSB=function(regionstars,stars,n){return regionstars.filter(region=>Count(region,Iner(stars))>n)}
 	return StarBattleRegionsApply(FilterSB,graph);
 }
 
 function StarBattleShortRegions(graph){
-	var FilterSB=function(regionstars,stars,n){return regionstars.filter(region=>Count(region,cell=>In(stars,cell))<n)}
+	var FilterSB=function(regionstars,stars,n){return regionstars.filter(region=>Count(region,Iner(stars))<n)}
 	return StarBattleRegionsApply(FilterSB,graph);
 }
 
@@ -307,13 +307,13 @@ function StarBattleAdjacenciesApply(Transform,graph){
 }
 
 function StarBattleAdjacenciesValid(graph){
-	function Test(activeadjacencies,stars,n){return activeadjacencies.every(adja=>Count(adja,cell=>In(stars,cell))===n);}
+	function Test(activeadjacencies,stars,n){return activeadjacencies.every(adja=>Count(adja,Iner(stars))===n);}
 	return StarBattleAdjacenciesApply(Test,graph);
 }
 
 function StarBattleInvalidAdjacencies(graph){
 	function Filter(activeadjacencies,stars,n){
-		adjacencies=activeadjacencies.filter(adja=>Count(adja,cell=>In(stars,cell))>n);
+		adjacencies=activeadjacencies.filter(adja=>Count(adja,Iner(stars))>n);
 		return Intersection(Union(...adjacencies),stars);
 	}
 	return StarBattleAdjacenciesApply(Filter,graph);
@@ -333,17 +333,17 @@ function StarBattleLinesApply(Transform,graph,lines){
 }
 
 function StarBattleLinesValid(graph,lines){
-	function Test(lines,stars,n){return lines.every(line=>Count(line,cell=>In(stars,cell))===n)};
+	function Test(lines,stars,n){return lines.every(line=>Count(line,Iner(stars))===n)};
 	return StarBattleLinesApply(Test,graph,lines);
 }
 
 function StarBattleLongSubLines(graph,lines){
-	function Filter(lines,stars,n){return lines.filter(line=>Count(line,cell=>In(stars,cell))>n)};
+	function Filter(lines,stars,n){return lines.filter(line=>Count(line,Iner(stars))>n)};
 	return StarBattleLinesApply(Filter,graph,lines);
 }
 
 function StarBattleShortSubLines(graph,lines){
-	function Filter(lines,stars,n){return lines.filter(line=>Count(line,cell=>In(stars,cell))<n)};
+	function Filter(lines,stars,n){return lines.filter(line=>Count(line,Iner(stars))<n)};
 	return StarBattleLinesApply(Filter,graph,lines);
 }
 

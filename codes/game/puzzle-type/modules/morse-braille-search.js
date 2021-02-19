@@ -148,7 +148,7 @@ function AddStringPair(pair){
 }
 
 
-//MorseWords(MorseNext(string)).filter(w=>In(EnDictionary(),w))
+//MorseWords(MorseNext(string)).filter(Iner(EnDictionary()))
 
 EnPairs=[
 	"ab",
@@ -969,7 +969,7 @@ EnPairs=[
   ];
 
 function MorseFind(string){
-	return MorseWords(MorseNext(string)).filter(w=>In(EnDictionary(),w))
+	return MorseWords(MorseNext(string)).filter(Iner(EnDictionary()))
 }
 
 var MSubstrings={};
