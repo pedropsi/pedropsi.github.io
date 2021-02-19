@@ -516,7 +516,7 @@ FruitStateRule=function(fruit,state){
 
 TrackFruits=function(track,state){
 	return Keys(state.level).filter(fruit=>state.level[fruit].some(
-		point=>track.some(Iner(segment))));
+		point=>track.some(segment=>In(segment,point))));
 }
 
 TrackFruitNumber=function(track,fruit,state){
