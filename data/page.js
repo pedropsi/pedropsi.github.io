@@ -253,11 +253,23 @@ DebuggerHTML=function(){
 	return `<span onclick="RequestDebugger()">Debug</span>`
 }
 
+AutoTestButtonHTML=function(){
+	var b=ButtonHTML({
+		txt:"test!",
+		tag:"span",
+		class:"inline",
+		onclick:`
+		TestHTMLReport(".whiteboard .post");
+		setTimeout(function(){ScrollInto("#Problems-Found")},10000);`
+	});
+	return b;
+}
+
 FooterHTML=function(){
 	return `
 	<footer class="footer">
 		<p>${ViewCounterHTML()}</p>
-		<p>${HyperText("Copyright")}. ${v.A_TERMS()}. ${A("privacy-policy")}. ${A("status")}. ${DebuggerHTML()}.</p>
+		<p>${HyperText("Copyright")}. ${v.A_TERMS()}. ${A("privacy-policy")}. ${A("status")} ${AutoTestButtonHTML()}. ${DebuggerHTML()}.</p>
 		<p> ${v.A_PRESS()}. ${A("subscribe")} and ${v.A_SUPPORT()}!</p>
 	</footer>`
 }

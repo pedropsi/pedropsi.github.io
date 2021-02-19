@@ -1183,8 +1183,8 @@ SerialMetadata=function(serialObj){
 	return metadata;
 /***
 sort, ignore capitalised abbreviations, anything not in abbreviations
-SerialMetadata({T:"Title",a:"Name Surname",thrash:"Thrash"})
-"a=Name%20Surname&t=Title"
+SerialMetadata("a=Name%20Surname&t=Title&etc=not useful")
+{title:"Title",author:"Name Surname"})
 ***/
 }
 

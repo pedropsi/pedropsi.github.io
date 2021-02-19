@@ -9038,21 +9038,17 @@ TestCoverageReport=function(unitTests,functionNames,maintarget){
 }
 
 TestsPassFailHTMLReport=function(unitTestsList,maintarget){
-	if(TestsPassFailHTMLReport.once)
-		return;
-	TestsPassFailHTMLReport.once=true;
-
 	var failedid="tests-failed";
 	var passedid="tests-passed";
 	var testarea=`
-	<h2>Problems found?</h2>
+	<h2 id="Problems-Found">Problems found?</h2>
 		<div id="${failedid}"></div>
 		<p>That's all!</p>
-	<h2>Passed tests</h2>
+	<h2 id="Passed-Tests">Passed tests</h2>
 		<p id="${passedid}"></p> 
 	`;
 
-	PrependToElement(testarea,maintarget);
+	AppendToElement(testarea,maintarget);
 	
 	for(var i in unitTestsList){
 		var report=TestPassFailHTMLReport(unitTestsList[i]);
@@ -9064,6 +9060,9 @@ TestsPassFailHTMLReport=function(unitTestsList,maintarget){
 }
 
 TestHTMLReport=function(maintarget){
+	if(TestHTMLReport.once)
+		return;
+	TestHTMLReport.once=true;
 	var functionNames=DistinctArray(Introspect());
 	var unitTestsList=functionNames.map(FunctionNameUnitTests).flat().filter(Length);
 
