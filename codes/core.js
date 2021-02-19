@@ -8994,25 +8994,81 @@ UnitTestReportHTML=function(unitTest){
 	return report;
 }
 
+UnitTestEvaluateHTMLReport=function(unitObj){
+	var evaluatedunit=UnitTestEvaluate(unitObj);
+	return UnitTestReportHTML(evaluatedunit);
+}
 
-TestReportHTML=function(){
-	var functionNames=Introspect();
-	var unitTests=functionNames.map(FunctionNameUnitTests).filter(Length);
-	
-	var report=unitTests.flat().map(UnitTestEvaluate).map(UnitTestReportHTML).filter(Identity).join("");
-	
-	AddElement("<p>Tests complete!</p>",TestingAreaSelector);
+TestPassFailHTMLReport=function(unitTest){
+	var report="";
+		try{
+			report=report+UnitTestEvaluateHTMLReport(unitTest);
+		}
+		catch(e){
+			Warn(i,"cannot test");
+			console.log(unitTest);
+			return "";
+		};
+	return report;
+}
 
-	var testedFunctionNames=unitTests.map(t=>First(t).callerName);
+TestCoverageReport=function(unitTests,functionNames,maintarget){
+	var testedFunctionNames=DistinctArray(unitTests.map(unit=>unit.callerName));
 	var sideFunctionNames=functionNames.filter(name=>!In(FunctionBody(window[name]),"return"));
 	var untestedFunctionNames=Complement(functionNames,testedFunctionNames,sideFunctionNames);
 	
-	DynamicText("code-coverage",PercentageText(Length(testedFunctionNames)/Length(untestedFunctionNames),2));
-	DynamicText("code-coverage-included",Enumerate(testedFunctionNames));
-	DynamicText("code-coverage-excluded",Enumerate(untestedFunctionNames));
-	DynamicText("code-coverage-side",Enumerate(sideFunctionNames));
+	var percent=PercentageText(Length(testedFunctionNames)/Length(untestedFunctionNames),2);
+	var coveragereport=`
+	<h2>Code coverage</h2>
+		<h3>Testable functions</h3>
+			<p>Current code coverage stands at ${DynamicText("code-coverage")} of all testable functions.</p>
+			<h4>Functions not yet tested</h4>
+				<p>${Enumerate(untestedFunctionNames)}.</p>
 
-	return report;
+		<h3>Untestable functions</h3>
+			<p>These functions do not return a value, only a side effect, and are not currently testable.</p>
+			<p>${percent}.</p>
+
+	<h2>Dependencies</h2>
+		<h3>Orphan Functions</h3>
+			<p>These functions are potentially no longer used (deeper check pending).</p>
+			<p>${Enumerate(sideFunctionNames)}.</p>
+			${ButtonHTML({txt:"Retrieve",onclick:`DynamicText("code-orphan-functions",Enumerate(OrphanFunctions()))`})}
+	`;
+	AppendToElement(coveragereport,maintarget);
+}
+
+TestsPassFailHTMLReport=function(unitTestsList,maintarget){
+	if(TestsPassFailHTMLReport.once)
+		return;
+	TestsPassFailHTMLReport.once=true;
+
+	var failedid="tests-failed";
+	var passedid="tests-passed";
+	var testarea=`
+	<h2>Problems found?</h2>
+		<div id="${failedid}"></div> 
+	<h2>Passed tests</h2>
+		<p id="${passedid}"></p> 
+	`;
+
+	PrependToElement(testarea,maintarget);
+	
+	for(var i in unitTestsList){
+		var report=TestPassFailHTMLReport(unitTestsList[i]);
+		if(In(report,"Passed"))
+			AppendToElement(report,passedid);
+		else
+			AppendToElement(report,failedid);
+	}
+}
+
+TestHTMLReport=function(maintarget){
+	var functionNames=DistinctArray(Introspect());
+	var unitTestsList=functionNames.map(FunctionNameUnitTests).flat().filter(Length);
+
+	TestsPassFailHTMLReport(unitTestsList,maintarget);
+	TestCoverageReport(unitTestsList,functionNames,maintarget);
 }
 
 
