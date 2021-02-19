@@ -67,7 +67,7 @@ PatchedPath=function(path){
 //Path + segment
 
 SegmentPathContained=function(segment,path){
-	return SegmentPoints(segment).every(point=>In(path,point));
+	return SegmentPoints(segment).every(Iner(path));
 }
 
 SegmentPathsContained=function(segment,paths){

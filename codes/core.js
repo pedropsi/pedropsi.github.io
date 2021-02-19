@@ -773,7 +773,7 @@ Rest=function(SAO){
 		return A;
 	}
 	if(IsObject(SAO))
-		return FilterKeysObject(SAO,k=>In(Rest(Keys(SAO)),k));
+		return FilterKeysObject(SAO,Iner(Rest(Keys(SAO))));
 	if(IsString(SAO))
 		return Rest(SAO.split("")).join("");
 	Wtyp("no string, array or object")
@@ -796,7 +796,7 @@ Most=function(SAO){
 		return A;
 	}
 	if(IsObject(SAO))
-		return FilterKeysObject(SAO,k=>In(Most(Keys(SAO)),k));
+		return FilterKeysObject(SAO,Iner(Most(Keys(SAO))));
 	if(IsString(SAO))
 		return Most(SAO.split("")).join("");
 	Wtyp("no string, array or object")
@@ -814,7 +814,7 @@ Most("")
 
 Take=function(SAO,n){
 	if(IsObject(SAO))
-		return FilterKeysObject(SAO,k=>In(Take(Keys(SAO),n),k));
+		return FilterKeysObject(SAO,Iner(Take(Keys(SAO),n)));
 	if(n<0)
 		return SAO.slice(SAO.length-1*Floor(Abs(n)),SAO.length);
 	return SAO.slice(0,Floor(n));
@@ -856,7 +856,7 @@ Take([1,2,3],-1.5)
 
 UnTake=function(SAO,n){
 	if(IsObject(SAO))
-		return FilterKeysObject(SAO,k=>In(UnTake(Keys(SAO),n),k));
+		return FilterKeysObject(SAO,Iner(UnTake(Keys(SAO),n)));
 	if(n<0)
 		return SAO.slice(0,SAO.length+Ceiling(n));
 	return SAO.slice(Floor(n),SAO.length);
@@ -1825,7 +1825,7 @@ TypeCombiners={
 Combiner=function(typeCombiners){
 	if(IsArray(typeCombiners)){
 		var names=typeCombiners;
-		var	typeCombiners=FilterKeysObject(TypeCombiners,name=>In(names,name))
+		var	typeCombiners=FilterKeysObject(TypeCombiners,Iner(names))
 	}
 	else{
 		var names=Keys(typeCombiners);	

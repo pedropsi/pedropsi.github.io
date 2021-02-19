@@ -753,7 +753,7 @@ var LevelGoals=[			//Required types of thinking:
 function RestrictPlayableLevels(){
 	var restricted=PageSearch("levels");
 	if(restricted){
-		LevelGoals=LevelGoals.filter(g=>In(restricted,g));
+		LevelGoals=LevelGoals.filter(Iner(restricted));
 		gameTitle="Puzzle Type Demo";
 		return true;
 	}
@@ -3277,7 +3277,7 @@ function LevelHighlightableWords(title){
 
 function HighlightableWords(title){
 	var keystrokes=Keystrokes().map(First).filter(Identity).join("").toLowerCase();
-	var combos=LevelHighlightableWords(title).filter(w=>In(keystrokes,w));
+	var combos=LevelHighlightableWords(title).filter(Iner(keystrokes));
 	combos.map(UnderlineWordstroke);
 }
 

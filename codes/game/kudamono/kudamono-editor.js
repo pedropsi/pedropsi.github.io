@@ -475,7 +475,7 @@ PointConnectablePoints=function(xy,fruits,state){
 PointConnectableFruitPoints=function(xy,fruit,state){
 	var connectablePoints=PointConnectablePoints(xy,[fruit],state);
 	var positions=(state.level[fruit]||[]);
-	return positions.filter(xy=>In(connectablePoints,xy));
+	return positions.filter(Iner(connectablePoints));
 }
 
 
@@ -516,7 +516,7 @@ FruitStateRule=function(fruit,state){
 
 TrackFruits=function(track,state){
 	return Keys(state.level).filter(fruit=>state.level[fruit].some(
-		point=>track.some(segment=>In(segment,point))));
+		point=>track.some(Iner(segment))));
 }
 
 TrackFruitNumber=function(track,fruit,state){
