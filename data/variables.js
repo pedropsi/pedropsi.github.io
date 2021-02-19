@@ -204,7 +204,7 @@ FEEDBACK					:	()=>	`<h2>Feedback</h2><h3>Problems? Suggestions?</h3><p>Please $
 
 PRESS_TEXT					:	()=>	`${v.PRESS_USAGE()}${ScreenshotGalleryHTML(v.LINK())}${v.OTHER_INQUIRIES()}`,
 PRESS_USAGE					:	()=>	`<h2>Editorial uses</h2><p>All the material on this page is ${HyperText("Copyright")}, but you are granted permission to use it for editorial purposes, as long as you provide appropriate credit (including a direct link to this page) and do not spoil other people's enjoyment.</p>`,
-OTHER_INQUIRIES				:	()=>	`<h3>Other inquiries</h3><p>Check also the ${v.A_PRESS()} or ${v.A_CONTACT_ME()} for all unusual requests!</p>`,
+OTHER_INQUIRIES				:	()=>	`<h3>Other inquiries</h3><p>Check also the ${A("press")} or ${v.A_CONTACT_ME()} for all unusual requests!</p>`,
 
 
 TRAILER_LAUNCHER			:	()=>	`<img class="card" onclick='OpenVideoModal("${v.TRAILER()}")' src="images/${v.TRAILER_IMAGE()}" alt="${v.TITLE()}'s trailer" title="${v.TITLE()} - ${v.TAGLINE()} (trailer)" loading="lazy"/>`,
