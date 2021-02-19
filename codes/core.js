@@ -1398,6 +1398,12 @@ true
 
 Iner=FirstCurrier(In);
 
+UnIn=function(SAO,n){
+	return !In(SAO,n);
+}
+
+UnIner=FirstCurrier(UnIn);
+
 Count=function(array,itemOrF){
 	if(typeof array==="string"&&typeof itemOrF==="string"){
 		var r=array.replace(itemOrF,"");
