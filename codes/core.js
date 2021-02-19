@@ -4842,10 +4842,10 @@ IconHTML=function(opts){
 
 SpanHTML=function(html,clas){
 	if(clas)
-		var clas=Exfix(clas," class='","'");
+		var cla=` class='${UnPrefix(clas,".")}'`;
 	else
-		var clas="";
-	return "<span"+clas+">"+html+"</span>";
+		var cla="";
+	return `<span${cla}>${html}</span>`;
 }
 
 HTMLIder=function(id){
