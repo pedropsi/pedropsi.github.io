@@ -560,7 +560,55 @@ ForestTwigs=function(forest){
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-//Geometric Transformations
+//Point Transformations
+
+
+PointTranslator=function(X,Y){
+	return function(xy){
+		return [xy[0]+X,xy[1]+Y];
+	}
+}
+
+PointRotator=function(w,h){
+	return function(xy){
+		return RotateXY(xy[0],xy[1],0,0,w,h);
+	}
+}
+
+PointXMirrorer=function(X){
+	return function(xy){
+		var dx=X-xy[0];
+		return [xy[0]+2*dx,xy[1]];
+	}
+}
+
+PointYMirrorer=function(Y){
+	return function(xy){
+		var dy=Y-xy[1];
+		return [xy[0],xy[1]+2*dy];
+	}
+}
+
+PointXYMirrorer=function(X,Y){
+	return function(xy){
+		var dx=X-xy[0];
+		var dy=Y-xy[1];
+		return [xy[0]+2*dx,xy[1]+2*dy];
+	}
+}
+
+PointFlipper=function(s){
+	return 	function(xy){
+		return [s*xy[1],s*xy[0]];
+	}
+}
+
+
+//Track Transformations
+
+TransformTrack=function(track,PointTransform){
+	return Clone(track).map(segment=>TransformSegment(segment,PointTransform));
+}
 
 PathXs=function(points){return points.map(First)};
 PathYs=function(points){return points.map(Last)};
@@ -570,44 +618,51 @@ TrackGeometricCentrePoint=function(track){
 	return Round([Mean(PathXs(points)),Mean(PathYs(points))],3);
 }
 
+
+
 //Translations
 
 UnTranslateTrack=function(track){
 	var XY=TrackGeometricCentrePoint(track);
-	var X=XY[0];
-	var Y=XY[1];
-	return Clone(track).map(segment=>TranslateSegment(segment,-1*X,-1*Y));
+	return TransformTrack(track,PointTranslator(-XY[0],-XY[1]));
 }
 
 //Symmetry
 
 TrackPointwiseSymmetrised=function(track,XY){
+	var XY=XY||TrackGeometricCentrePoint(track);
 	var X=XY[0];
 	var Y=XY[1];
-	var VHMirrorer=function(point){
-		var dx=X-point[0];
-		var dy=Y-point[1];
-		return [point[0]+2*dx,point[1]+2*dy];
-	}
+
 	var Dsegments=track.filter(segment=>PathYs(SegmentPoints(segment)).every(y=>y<=Y));
 	var Usegments=track.filter(segment=>PathYs(SegmentPoints(segment)).every(y=>y>=Y));
 	
-	Usegments=Usegments.map(segment=>TransformSegment(segment,VHMirrorer));
+	Usegments=TransformTrack(Usegments,PointXYMirrorer(X,Y));
 	Usegments=Sort(Usegments.map(CanonicalSegment));
 	Dsegments=Sort(Dsegments.map(CanonicalSegment));
 		
-	return Equal(Dsegments,Usegments)
+	return Equal(Dsegments,Usegments);
+/*
+accepts pointwise symmetry
+TrackPointwiseSymmetrised([[[1,3],[2,3]],[[2,2],[2,3]],[[2,2],[3,2]]])
+true
+
+rejects horizontal symmetry
+TrackPointwiseSymmetrised([[[1,2],[1,3]],[[1,2],[2,2]],[[2,2],[2,3]]])
+false
+
+rejects vertical symmetry
+TrackPointwiseSymmetrised([[[1,3],[2,3]],[[1,4],[2,4]],[[2,3],[2,4]]])
+false
+*/
 }
 
 SymmetriseVerticallyTrack=function(track,Y){
-	var VMirrorer=function(point){
-		var dy=Y-point[1];
-		return [point[0],point[1]+2*dy];
-	}
-	return track.map(segment=>TransformSegment(segment,VMirrorer));
+	return TransformTrack(track,PointYMirrorer(Y));
 }
 
 TrackVerticallySymmetrised=function(track,XY){
+	var XY=XY||TrackGeometricCentrePoint(track);
 	var Y=XY[1];
 	var Dsegments=track.filter(segment=>PathYs(SegmentPoints(segment)).every(y=>y<=Y));
 	var Usegments=track.filter(segment=>PathYs(SegmentPoints(segment)).every(y=>y>=Y));
@@ -615,19 +670,29 @@ TrackVerticallySymmetrised=function(track,XY){
 	Usegments=SymmetriseVerticallyTrack(Usegments,Y);
 	Usegments=Sort(Usegments.map(CanonicalSegment));
 	Dsegments=Sort(Dsegments.map(CanonicalSegment));
-	return Equal(Dsegments,Usegments)
+	return Equal(Dsegments,Usegments);
+/*
+rejects pointwise symmetry
+TrackVerticallySymmetrised([[[1,3],[2,3]],[[2,2],[2,3]],[[2,2],[3,2]]])
+false
+
+rejects horizontal symmetry
+TrackHorizontallySymmetrised([[[1,2],[1,3]],[[1,2],[2,2]],[[2,2],[2,3]]])
+false
+
+accepts vertical symmetry
+TrackVerticallySymmetrised([[[1,3],[2,3]],[[1,4],[2,4]],[[2,3],[2,4]]])
+true
+*/
 }
 
 SymmetriseHorizontallyTrack=function(track,X){
-	var HMirrorer=function(point){
-		var dx=X-point[0];
-		return [point[0]+2*dx,point[1]];
-	}
-	return track.map(segment=>TransformSegment(segment,HMirrorer));
+	return TransformTrack(track,PointXMirrorer(X))
 }
 
 
 TrackHorizontallySymmetrised=function(track,XY){
+	var XY=XY||TrackGeometricCentrePoint(track);
 	var X=XY[0];
 	var Lsegments=track.filter(segment=>PathXs(SegmentPoints(segment)).every(x=>x<=X));
 	var Rsegments=track.filter(segment=>PathXs(SegmentPoints(segment)).every(x=>x>=X));
@@ -636,32 +701,51 @@ TrackHorizontallySymmetrised=function(track,XY){
 	Rsegments=Sort(Rsegments.map(CanonicalSegment));
 	Lsegments=Sort(Lsegments.map(CanonicalSegment));
 		
-	return Equal(Lsegments,Rsegments)
+	return Equal(Lsegments,Rsegments);
+/*
+accepts horizontal symmetry
+TrackHorizontallySymmetrised([[[1,2],[1,3]],[[1,2],[2,2]],[[2,2],[2,3]]])
+true
+
+rejects vertical symmetry
+TrackVerticallySymmetrised([[[1,3],[2,3]],[[1,4],[2,4]],[[2,3],[2,4]]])
+false
+
+rejects pointwiswe symmetry
+TrackVerticallySymmetrised([[[1,3],[2,3]],[[2,2],[2,3]],[[2,2],[3,2]]])
+false
+*/
 }
 
 
 TrackDiagonallySymmetrised=function(track){
 	var track=UnTranslateTrack(track);
-
-	var Flipper=function(point){
-		return [point[1],point[0]];
-	}
-
-	fliptrack=Clone(track).map(segment=>TransformSegment(segment,Flipper));
-		
+	var fliptrack=TransformTrack(track,PointFlipper(1));
 	return Equaliser(track=>Sort(track.map(CanonicalSegment)))(fliptrack,track);
+/*
+Accepts Y=-X axis of symmetry
+TrackDiagonallySymmetrised([[[2,2],[2,3]],[[2,2],[3,2]],[[3,1],[3,2]],[[3,1],[4,1]]])
+true
+
+Rejects Y=X axis of symmetry
+TrackDiagonallySymmetrised([[[2,1],[3,1]],[[3,1],[3,2]],[[3,2],[4,2]],[[4,2],[4,3]]])
+false
+*/
 }
 
 TrackSlantlySymmetrised=function(track){
 	var track=UnTranslateTrack(track);
-
-	var Flipper=function(point){
-		return [-point[1],-point[0]];
-	}
-
-	fliptrack=Clone(track).map(segment=>TransformSegment(segment,Flipper));
-		
+	var fliptrack=TransformTrack(track,PointFlipper(-1));
 	return Equaliser(track=>Sort(track.map(CanonicalSegment)))(fliptrack,track);
+/*
+Rejects Y=-X axis of symmetry
+TrackSlantlySymmetrised([[[2,2],[2,3]],[[2,2],[3,2]],[[3,1],[3,2]],[[3,1],[4,1]]])
+false
+
+Accepts Y=X axis of symmetry
+TrackSlantlySymmetrised([[[2,1],[3,1]],[[3,1],[3,2]],[[3,2],[4,2]],[[4,2],[4,3]]])
+true
+*/
 }
 
 
@@ -669,7 +753,6 @@ TrackSymmetrised=function(track){
 	var XY=TrackGeometricCentrePoint(track);
 	return TrackHorizontallySymmetrised(track,XY)||TrackVerticallySymmetrised(track,XY)||TrackPointwiseSymmetrised(track,XY)||TrackDiagonallySymmetrised(track)||TrackSlantlySymmetrised(track);
 }
-
 
 
 

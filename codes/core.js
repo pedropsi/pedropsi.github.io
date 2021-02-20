@@ -221,7 +221,7 @@ Chainer=function(){
 			result=Fs[i](result);
 			i++;
 		}
-		return result
+		return result;
 	}
 /*
 Chains operations together as a single function
