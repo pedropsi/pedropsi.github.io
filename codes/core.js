@@ -473,18 +473,30 @@ Equal=function(a,b){
 	}
 }
 
-Equaler=function(value){
-	return function(n){return Equal(n,value)};
+UnEqual=function(a,b){
+	return !Equal(a,b);
 /*
 equal here
 Equaler(1)(1)
 true
 
-unequal there
+!equal there
 Equaler(1)(0)
 false
+
+!unequal here
+UnEqualer(1)(1)
+false
+
+unequal there
+UnEqualer(1)(0)
+true
 */
 }
+
+Equaler=FirstCurrier(Equal);
+UnEqualer=FirstCurrier(UnEqual);
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Math
@@ -3540,6 +3552,27 @@ SearchParameters=function(searchString){
 	UnPrefix(searchString,"?").split("&").map(parval=>searchObj[UnAfterfix(parval,"=")]=UnBeforfix(parval,"="));
 	return searchObj;
 }
+
+ReSearchParameters=function(stringOrParams){
+	if(IsString(stringOrParams))
+		return SearchParameters(stringOrParams);
+	else
+		return stringOrParams||{};
+/*
+search to parameters
+ReSearchParameters("W=2&L=3")
+{W:"2",L:"3"}
+
+keep parameters alread supplied
+ReSearchParameters({W:"2",L:"3"})
+{W:"2",L:"3"}
+
+return a safe empty object by default
+ReSearchParameters()
+{}
+*/
+}
+
 
 // Safe string loading
 SafeString=function(tex){
