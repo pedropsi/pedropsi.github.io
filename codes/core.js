@@ -9133,13 +9133,13 @@ FunctionCalledFunctions(FunctionCalledFunctions)
 
 JavascriptFunctionNames=["RegExp","Array","Object","Date","String","Number","Set","Math"];
 
-FunctionCalledDependents=function(F){
+FunctionAscendents=function(F){
 	var selfName=FunctionName(this);
-	return FunctionCalledFunctions(F).filter(Name=>Capitalise(Name[0])===Name[0]&&!In(JavascriptFunctionNames,Name)&&Name!==selfName);
+	return FunctionCalledFunctions(F).filter(Name=>Capitalise(Name[0])===Name[0]&&!In(JavascriptFunctionNames,Name)&&Name!==selfName).filter(Iner(Keys(globalThis)));
 /*
-self-inspect, removing itself
-FunctionCalledDependents(FunctionCalledDependents)
-["FunctionName","FunctionCalledFunctions","Capitalise","In"]
+self-inspect, removing itself and standard JS functions
+FunctionAscendents(FunctionAscendents)
+["FunctionName","FunctionCalledFunctions","Capitalise","In","Iner","Keys"]
 */
 }
 
@@ -9148,7 +9148,7 @@ Dependencies=function(nameslist){
 		var nameslist=Introspect();
 	var O={};
 	Introspect().map(function(fname){
-		O[fname]=FunctionCalledDependents(window[fname])
+		O[fname]=FunctionAscendents(globalThis[fname])
 	});
 	return O;
 }
@@ -9159,6 +9159,35 @@ OrphanFunctions=function(dependencies){
 	var calledFunctionNames=Apply(Union,Values(dependencies));
 	var uncalled=Keys(FilterKeysObject(dependencies,UnIner(calledFunctionNames)));
 	return uncalled;
+}
+
+FunctionDeepAscendents=function(F){
+	var seen=[];
+	var toSee=FunctionAscendents(F);
+	var G;
+	var ascendents=[];
+	while(toSee.length>0){
+		G=First(toSee);
+		seen=Append(seen,G);
+		ascendents=FunctionAscendents(globalThis[G]);
+		toSee=DistinctArray(
+			Rest(toSee).concat(Complement(ascendents,seen))
+		);
+	}
+	return Remove(seen,FunctionName(F));
+/*
+Identity has no ascendents
+FunctionDeepAscendents(Identity)
+[]
+
+IsObject one direct descendent
+FunctionDeepAscendents(function X(){return FunctionName()})
+["FunctionName"]
+
+Generated functions appear mistaken without dependents
+FunctionDeepAscendents(Iner)
+[]
+*/
 }
 
 //Node mass exporter (one-liner)
