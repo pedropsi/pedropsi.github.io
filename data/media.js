@@ -242,16 +242,8 @@ GalleryHTML=function(objects,Renderer){
 }
 
 
-FolderGalleryHTML=function(subfolder,names,ObjectRenderer){
-	if(IsArray(names)){
-		if(names.length<1)
-			return "";
-		var objects=names.map(name=>ImageObject({name:name,folder:subfolder}));
-	}
-	else if(IsObject(names)){
-		var objects=Keys(names).map(n=>ImageObject(Group(names[n],{name:n,folder:subfolder})));
-	}
-	
+FolderGalleryHTML=function(dict,subfolder,ObjectRenderer){
+	var objects=Keys(dict).map(n=>ImageObject(Group(dict[n],{name:n,folder:subfolder})));	
 	return GalleryHTML(objects,ObjectRenderer||ImageCardHTML);
 }
 

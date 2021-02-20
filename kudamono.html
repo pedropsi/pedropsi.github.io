@@ -128,7 +128,7 @@ ${kudamonosData={
 	""}
 
 <h2>Latest</h2>
-${FolderGalleryHTML("kudamono",Take(kudamonos,3))}
+${FolderGalleryHTML(Take(kudamonos,3),"kudamono")}
 
 ${
 	kudamonosFuture=FilterValuesObject(kudamonosData,o=>(o.date&&Days(StringDate(o.date))<0)),
@@ -150,7 +150,7 @@ ${I("kudamono/kudamono-issues")}
 ${I("kudamono/kudamono-issues-2")}
 
 <h2>${v.TITLE()} Collection</h2>
-${FolderGalleryHTML("kudamono",Keys(kudamonos))}
+${FolderGalleryHTML(kudamonos,"kudamono")}
 
 <h2>Make your own Kudamono</h2>
 <p>Simply download the ${AHTML("Kudamono template.pptx","images/kudamono/Kudamono-template.pptx")}!</p>

@@ -62,7 +62,7 @@ ${
 	""}
 
 <h2>Latest</h2>
-${FolderGalleryHTML("bonsai",Take(bonsais,3))}
+${FolderGalleryHTML(Take(bonsais,3),"bonsai")}
 
 ${
 	bonsaisFuture=FilterValuesObject(bonsaisData,o=>(o.date&&Days(StringDate(o.date))<0)),
@@ -97,7 +97,7 @@ ${I("bonsai/44-bonsai-four-way.png")}
 
 
 <h2>${v.TITLE()} Collection</h2>
-${FolderGalleryHTML("bonsai",Keys(bonsais))}
+${FolderGalleryHTML(bonsais,"bonsai")}
 
 <h2>Make your own ${v.TITLE()}</h2>
 <p>Simply load the ${bonsaimode} to start making your own ${v.TITLE()}!</p>
