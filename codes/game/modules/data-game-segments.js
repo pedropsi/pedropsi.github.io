@@ -569,9 +569,9 @@ PointTranslator=function(X,Y){
 	}
 }
 
-PointRotator=function(w,h){
+PointRotator=function(w,h,wise){
 	return function(xy){
-		return RotateXY(xy[0],xy[1],0,0,w,h);
+		return RotateXY(xy[0],xy[1],0,0,w,h,wise);
 	}
 }
 
@@ -677,7 +677,7 @@ TrackVerticallySymmetrised([[[1,3],[2,3]],[[2,2],[2,3]],[[2,2],[3,2]]])
 false
 
 rejects horizontal symmetry
-TrackHorizontallySymmetrised([[[1,2],[1,3]],[[1,2],[2,2]],[[2,2],[2,3]]])
+TrackVerticallySymmetrised([[[1,2],[1,3]],[[1,2],[2,2]],[[2,2],[2,3]]])
 false
 
 accepts vertical symmetry
@@ -708,7 +708,7 @@ TrackHorizontallySymmetrised([[[1,2],[1,3]],[[1,2],[2,2]],[[2,2],[2,3]]])
 true
 
 rejects vertical symmetry
-TrackVerticallySymmetrised([[[1,3],[2,3]],[[1,4],[2,4]],[[2,3],[2,4]]])
+TrackHorizontallySymmetrised([[[1,3],[2,3]],[[1,4],[2,4]],[[2,3],[2,4]]])
 false
 
 rejects pointwiswe symmetry
