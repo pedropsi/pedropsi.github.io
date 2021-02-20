@@ -54,7 +54,8 @@
 
 
 
-.tabletop .layer{
+.tabletop .layer,
+.gallery .layer{
 	top:0;
 	position: absolute;
 }

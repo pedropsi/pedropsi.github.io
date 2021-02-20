@@ -1951,8 +1951,6 @@ AutoInstructions=function(fruits){
 		})});
 }
 
-AutoInstructions(FruitIcons)
-
 
 
 var STATES={};
@@ -1971,10 +1969,45 @@ IdState=function(id){
 }
 
 
-if(PageSearch("W")||PageSearch("H")){
-	HearAll(sources,InitialisePuzzle)
+InitialisePuzzlePage=function(){
+	AutoInstructions(FruitIcons);
+	if(bonsais)
+		PuzzleGalleryDraw(bonsais)
+	if(["W","H","G"].some(Iner(PageSearch())))
+		InitialisePuzzle();
 }
 
 
+SerialImageCard=function(name,opts){
+	SerialImageCard[name]=opts;
+	return DynamicText(name,name);
+}
+
+PuzzlePictureDraw=function(target,puzzle){
+	var serialObj=SearchParameters(puzzle.board);
+		serialObj=FilterKeysObject(SearchParameters(puzzle.board),UnEqualer("S"));
+	var cla="."+target;
+	GetElement("."+target).style="position:relative;";
+
+	SerialDraw(
+		serialObj,
+		{render:{
+			target:target,
+			container:cla,
+			main:false
+		}})
+	
+	HearElement(cla+" canvas",function(){
+		var uri=FuseCanvasURI(target);
+		var iuri=I(uri)
+		ReplaceElement(iuri,cla);
+	})
+};
+
+PuzzleGalleryDraw=function(puzzles){
+	ThreadKeysValues(puzzles,(name,obj)=>PuzzlePictureDraw("dynamic-"+KebabCaseString(name),obj));
+}
+
+HearAll(sources,InitialisePuzzlePage);
 
 DefinedShout("kudamono-editor");

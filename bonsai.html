@@ -62,7 +62,7 @@ ${
 	""}
 
 <h2>Latest</h2>
-${GalleryHTML(Take(bonsais,3),SerialImageCard)}
+${GalleryHTML(Take(bonsais,3),PlaceholderCarder("card latest"))}
 
 ${
 	bonsaisFuture=FilterValuesObject(bonsaisData,o=>(o.date&&Days(StringDate(o.date))<0)),
@@ -97,7 +97,7 @@ ${I("bonsai/44-bonsai-four-way.png")}
 
 
 <h2>${v.TITLE()} Collection</h2>
-${GalleryHTML(bonsais,SerialImageCard)}
+${GalleryHTML(bonsais,PlaceholderCarder("card"))}
 
 <h2>Make your own ${v.TITLE()}</h2>
 <p>Simply load the ${bonsaimode} to start making your own ${v.TITLE()}!</p>
