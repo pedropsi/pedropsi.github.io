@@ -11,6 +11,7 @@ var sources=[
 	"data-game-segments"
 ];
 sources.map(LoaderInFolder("codes/game/modules"));
+
 if(PageSearch("G")){
 	LoaderInFolder("codes/game/kudamono")("genres.js");
 	sources=sources.concat("kudamono-genres")
@@ -21,7 +22,7 @@ if(PageSearch("G")){
 GlobalTrackRules=["trackequaliser","mintracks","maxtracks"];
 
 ///////////////////////////////////////////////////////////////////////////////
-//Line Shapes
+//Fruits & Rules
 
 var Shape1s=["L","U","R","D"];
 var Shape2Straights=["LR","UD"];
@@ -33,9 +34,6 @@ var Shape4s=["LURD"];
 var ShapeBranches=Join(Shape3s,Shape4s);
 
 
-
-///////////////////////////////////////////////////////////////////////////////
-//Fruits & Rules
 
 RuleVerifiers=function(){return {
 	"TrackSymmetrised":TrackSymmetrised,

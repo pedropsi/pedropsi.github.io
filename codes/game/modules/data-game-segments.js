@@ -954,16 +954,6 @@ var DirectionSort=Sorter(d=>Keys(LetterTriplets).findIndex(D=>D===d))
 ///////////////////////////////////////////////////////////////////////////////
 //Shapes
 
-var Shape1s=["L","U","R","D"];
-var Shape2Straights=["LR","UD"];
-var ShapeStraights=Join(Shape1s,Shape2Straights);
-var Shape2Corners=["LU","UR","RD","LD"];
-var Shape2s=Join(Shape2Straights,Shape2Corners);
-var Shape3s=["LUR","URD","LRD","LUD"];
-var Shape4s=["LURD"];
-var ShapeTwigs=Join(Shape3s,Shape4s);
-
-
 
 PointTrackShape=function(point,track){
 	var segments=PointContainedTrackSegments(point,track);
