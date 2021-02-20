@@ -135,7 +135,7 @@ UnLaunchTouchActions=function(touchSel,actions){
 	)
 }
 
-Shout("data-game-gestures")
+DefinedShout("data-game-gestures")
 
 //Tests
 // Listen("swipe-left",function(){ConsoleAdd("swipe-LEFT")})

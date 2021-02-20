@@ -149,5 +149,5 @@ LinkGroupHTML=function(GroupObject){
 
 
 DATA["links"]=Links;
-Shout("links");
+DefinedShout("links");
 ExportNodeFunctions();

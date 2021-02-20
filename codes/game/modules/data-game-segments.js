@@ -991,4 +991,4 @@ TrackConsecutiveShapePairs=function(track){
 
 
 
-Shout("data-game-segments")
+DefinedShout("data-game-segments")

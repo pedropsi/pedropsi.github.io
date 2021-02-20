@@ -38,4 +38,4 @@ DeployWon=function(jsonstring){
 
 DisplayWon();
 
-Shout("data-game-stats");
+DefinedShout("data-game-stats");

@@ -321,4 +321,4 @@ Keys(Genres).map(function(name){
 });
 var GenreLetters=FlipKeysValues(LettersGenre);
 
-Shout("kudamono-genres")
+DefinedShout("kudamono-genres")

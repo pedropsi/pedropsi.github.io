@@ -420,4 +420,4 @@ CanvasSave=function(source,name){
  
 
 ////////////////////////////////////////////////////////////////////////////////
-Shout("data-game-canvas");
+DefinedShout("data-game-canvas");

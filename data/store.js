@@ -65,4 +65,4 @@ function ProductHTML(ProdObj){
 
 
 if(DATA){DATA["Store"]=Store}else{var DATA={"Store":Store}}
-Shout("store");
+DefinedShout("store");

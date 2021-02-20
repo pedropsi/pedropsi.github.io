@@ -469,4 +469,4 @@ var ObtainRequestHint=RequestHint;
 
 HearOnce("GameBar",LoadHints);
 
-Shout("data-game-hints")
+DefinedShout("data-game-hints")

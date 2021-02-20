@@ -804,5 +804,5 @@ NewsSources={
 
 
 DATA["news"]=News;
-Shout("news");
+DefinedShout("news");
 ExportNodeFunctions();

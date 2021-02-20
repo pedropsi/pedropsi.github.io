@@ -73,8 +73,7 @@
 //		2.1) The "arrow notation" (=>) is replaced with function(...){...} ------------------TODO
 //
 
-
-
+var FunctionDefinedNames={"pre":Object.keys(globalThis)};
 
 ///////////////////////////////////////////////////////////////////////////////
 //Get Function Name as a string, or make up a unique one based on the function's body
@@ -9211,6 +9210,19 @@ FunctionDeepAscendents(Iner)
 []
 */
 }
+
+
+
+
+
+
+
+DefinedShout=function(name){
+	FunctionDefinedNames[name]=Complement(Object.keys(globalThis),Apply(Join,Values(FunctionDefinedNames)));
+	Shout(name);
+}
+
+DefinedShout("core");
 
 //Node mass exporter (one-liner)
 ExportFunction=function(name){

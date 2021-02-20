@@ -611,4 +611,4 @@ function LoadLevel(){
 }
 
 
-Shout("data-game-level")
+DefinedShout("data-game-level")

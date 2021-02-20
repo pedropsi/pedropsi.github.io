@@ -462,4 +462,4 @@ function ReRGBA(colour,opacity){
 
 
 ////////////////////////////////////////////////////////////////////////////////
-Shout("data-game-colours");
+DefinedShout("data-game-colours");

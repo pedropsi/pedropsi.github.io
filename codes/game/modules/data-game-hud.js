@@ -132,6 +132,6 @@ HighlightRing=function(radius,angle){
 }
 
 LoadSource("codes/game/modules/data-game-hud.css");
-Shout("data-game-hud")
+DefinedShout("data-game-hud")
 
 

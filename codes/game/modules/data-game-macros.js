@@ -27,4 +27,4 @@ function HallOfFameMacro(){
 }
  
 
-Shout("data-game-macros")
+DefinedShout("data-game-macros")

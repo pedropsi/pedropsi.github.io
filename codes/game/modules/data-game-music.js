@@ -328,4 +328,4 @@ PlaylistCrossFadeOutAction=function(song,duration){
 
 
 
-Shout("data-game-music");
+DefinedShout("data-game-music");

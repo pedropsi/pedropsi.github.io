@@ -247,4 +247,4 @@ if(typeof ObtainBestMoveSurpassed==="undefined")
 	}
 
 ////////////////////////////////////////////////////////////////////////////////
-Shout("data-game-moves");
+DefinedShout("data-game-moves");

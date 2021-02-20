@@ -77,4 +77,4 @@ function UnBlockUndo(){
 	Redo.blocked=false;
 }
 
-Shout("data-game-undo")
+DefinedShout("data-game-undo")

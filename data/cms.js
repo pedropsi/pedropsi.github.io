@@ -335,5 +335,5 @@ ExportCMSProperties=function(){
 }
 
 ExportCMSProperties();
-Shout("cms");
+DefinedShout("cms");
 ExportNodeFunctions();

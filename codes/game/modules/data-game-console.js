@@ -68,4 +68,4 @@ function RequestMore(){
 	});
 }
 
-Shout("data-game-console")
+DefinedShout("data-game-console")

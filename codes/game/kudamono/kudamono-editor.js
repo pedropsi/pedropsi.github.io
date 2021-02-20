@@ -1975,3 +1975,7 @@ IdState=function(id){
 if(PageSearch("W")||PageSearch("H")){
 	HearAll(sources,InitialisePuzzle)
 }
+
+
+
+DefinedShout("kudamono-editor");

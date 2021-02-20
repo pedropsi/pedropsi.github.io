@@ -230,4 +230,4 @@ AttendOnce("GameBar",function(){
 });
 
 
-Shout("data-game-save")
+DefinedShout("data-game-save")

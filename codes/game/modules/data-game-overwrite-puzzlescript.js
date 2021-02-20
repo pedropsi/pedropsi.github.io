@@ -302,4 +302,4 @@ if(typeof onKeyDown!=="undefined")
 
 
 ////////////////////////////////////////////////////////////////////////////////
-Shout("data-game-overwrite-puzzlescript")
+DefinedShout("data-game-overwrite-puzzlescript")

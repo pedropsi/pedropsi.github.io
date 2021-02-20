@@ -107,4 +107,4 @@ FreeFullscreenCursor=function(){
 		UnListen(HideFullscreenCursor.last);
 }
 
-Shout("data-game-fullscreen");
+DefinedShout("data-game-fullscreen");

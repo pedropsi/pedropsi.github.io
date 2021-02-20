@@ -249,5 +249,5 @@ PWA_ICONS					:	()=>	`"icons":[${v.PWA_ICON_OBJ(512)},${v.PWA_ICON_OBJ(192)},${v
 //Variables
 
 DATA["variables"]=Variables;
-Shout("variables");
+DefinedShout("variables");
 ExportNodeFunctions();

@@ -401,4 +401,4 @@ function GameTitle(){
 }
 
 //////////////////////////////////////////////////////////////////////
-Shout("puzzlescript-database")
+DefinedShout("puzzlescript-database")

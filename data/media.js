@@ -271,5 +271,5 @@ ModalImageFragment=function(obj){
 
 
 DATA["media"]=Media;
-Shout("media");
+DefinedShout("media");
 ExportNodeFunctions();

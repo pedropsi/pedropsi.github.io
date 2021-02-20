@@ -10981,4 +10981,4 @@ var PGDHTML=`
 
 try{v={...v,PGD:()=>PGDHTML}}
 catch{v={PGD:()=>PGDHTML}}
-Shout("puzzlescript-database-game");
+DefinedShout("puzzlescript-database-game");

@@ -110,4 +110,4 @@ NextReplyMessageId=function(id,dataarray){
 	return id+"»"+String(childrenThreadIds.length+1);
 }
 
-Shout("guestbook")
+DefinedShout("guestbook")

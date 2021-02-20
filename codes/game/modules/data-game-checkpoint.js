@@ -142,4 +142,4 @@ function ObtainLevelDescriptionTitle(lvl){
 
 
 //
-Shout("data-game-checkpoint");
+DefinedShout("data-game-checkpoint");
