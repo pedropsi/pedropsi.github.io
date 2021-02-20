@@ -1191,11 +1191,11 @@ SerialMetadata=function(serialObj){
 		metadata=ReKeyObject(metadata,Accesser(AbbreviationsMetadata));
 		Keys(metadata).map(k=>metadata[k]=decodeURIComponent(metadata[k]));
 	return metadata;
-/***
+/*
 sort, ignore capitalised abbreviations, anything not in abbreviations
 SerialMetadata("a=Name%20Surname&t=Title&etc=not useful")
-{title:"Title",author:"Name Surname"})
-***/
+{title:"Title",author:"Name Surname"}
+*/
 }
 
 MetadataSerial=function(metadata){
