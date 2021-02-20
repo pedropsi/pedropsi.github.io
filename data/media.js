@@ -236,15 +236,24 @@ function ImageObject(opts){
 		TRACK:name});
 };
 
-GalleryHTML=function(objects,Renderer){
-	var gallery=objects.map(Renderer).join("\n");
+GalleryHTML=function(objects,RenderHTML){
+	var gallery=ThreadKeysValues(objects,RenderHTML).join("\n");
 	return `<div class="featured">${gallery}</div>`
 }
 
+FolderGalleryHTML=function(objects,subfolder){
+	return GalleryHTML(objects,FolderCarder(subfolder));
+}
 
-FolderGalleryHTML=function(dict,subfolder,ObjectRenderer){
-	var objects=Keys(dict).map(n=>ImageObject(Group(dict[n],{name:n,folder:subfolder})));	
-	return GalleryHTML(objects,ObjectRenderer||ImageCardHTML);
+FolderCarder=function(subfolder){
+	return function(name,Obj){
+		return ImageCardHTML(ImageObject(Group(Obj,{name:name,folder:subfolder})))
+	};
+}
+
+SerialImageCard=function(name,opts){
+	SerialImageCard[name]=opts;
+	return DynamicText(name,name);
 }
 
 ModalImageFragment=function(obj){
