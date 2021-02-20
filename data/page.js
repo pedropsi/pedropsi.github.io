@@ -1,19 +1,17 @@
 //Page Build Sequence
-CMSDependenciesList=[
-	"data/variables.js",
-	"data/cms.js",
-	"data/links.js",
-	"data/media.js",
-	"data/news.js"];
+CMSModules=["variables","cms","links","media","news"];
+PageDependencyPaths=["codes/intercom.js","data/guestbook.js","codes/insight.js"];
+
+CMSDependencyPaths=CMSModules.map(name=>JoinPath("data",Posfix(name,".js")));
+PageModules=PageDependencyPaths.map(path=>UnPosfix(UnBeforfix(path,"/"),".js"));
+
 
 LoadCMS=function(){
-	var cms=CMSDependenciesList;
-	LoadSources(cms,LoadPrescript)
+	LoadSources(CMSDependencyPaths,LoadPrescript)
 }
 
 LoadNodeCMS=function(){
-	var cms=CMSDependenciesList;
-	LoadSources(cms,ConsolidateVariables);
+	LoadSources(CMSDependencyPaths,ConsolidateVariables);
 }
 
 if(typeof DATA==="undefined")
@@ -67,8 +65,7 @@ BuildCMSPage=function(){
 	
 	document.body.innerHTML=v.BODY();
 
-	var sources=["codes/intercom.js","data/guestbook.js","codes/insight.js"];
-	LoadSources(sources,PageFeatures);
+	LoadSources(PageDependencyPaths,PageFeatures);
 
 	if(v.POSTSCRIPT)
 		LoadSources(v.POSTSCRIPT(),Identity);
@@ -253,14 +250,23 @@ DebuggerHTML=function(){
 	return `<span onclick="RequestDebugger()">Debug</span>`
 }
 
-AutoTestButtonHTML=function(){
+PageTestReport=function(){
+	var coreModules=Join(["core"],CMSModules,PageModules);
+	if(PageIdentifier()==="status")
+		var modules=coreModules;
+	else
+		var modules=Complement(Keys(DefinedVariableNames),Append(coreModules,"pre"));
+	Wbug(modules);
+	TestHTMLReport(".whiteboard .post",modules);
+	setTimeout(function(){ScrollInto("#Problems-Found")},10000)
+}
+
+AutoTestButtonHTML=function(excludedModules){
 	var b=ButtonHTML({
 		txt:"test",
 		tag:"span",
 		class:"inline",
-		onclick:`
-		TestHTMLReport(".whiteboard .post");
-		setTimeout(function(){ScrollInto("#Problems-Found")},10000);`
+		onclick:`PageTestReport()`
 	});
 	return b;
 }

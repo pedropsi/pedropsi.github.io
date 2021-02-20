@@ -73,7 +73,7 @@
 //		2.1) The "arrow notation" (=>) is replaced with function(...){...} ------------------TODO
 //
 
-var FunctionDefinedNames={"pre":Object.keys(globalThis)};
+var DefinedVariableNames={"pre":Object.keys(globalThis)};
 
 ///////////////////////////////////////////////////////////////////////////////
 //Get Function Name as a string, or make up a unique one based on the function's body
@@ -9052,18 +9052,18 @@ TestCoverageReport=function(unitTests,functionNames,maintarget){
 	
 	var percent=PercentageText(Length(testedFunctionNames)/Length(untestedFunctionNames),2);
 	var coveragereport=`
-	<h2>Code coverage</h2>
-		<h3>Testable functions</h3>
+	<h3>Code coverage</h2>
+		<h4>Testable functions</h3>
 			<p>Current code coverage stands at ${percent} of all testable functions.</p>
-			<h4>Functions not yet tested</h4>
+			<h5>Functions not yet tested</h4>
 				<p>${Enumerate(untestedFunctionNames)}.</p>
 
-		<h3>Untestable functions</h3>
+		<h4>Untestable functions</h3>
 			<p>These functions do not return a value, only a side effect, and are not currently testable.</p>
 			<p>${Enumerate(sideFunctionNames)}.</p>
 
-	<h2>Dependencies</h2>
-		<h3>Orphan Functions</h3>
+	<h3>Dependencies</h2>
+		<h4>Orphan Functions</h3>
 			<p>These functions are potentially no longer used (deeper check pending).</p>
 			${ButtonHTML({txt:"Retrieve",onclick:`DynamicText("code-orphan-functions",Enumerate(OrphanFunctions()))`})}
 	`;
@@ -9074,10 +9074,10 @@ TestsPassFailHTMLReport=function(unitTestsList,maintarget){
 	var failedid="tests-failed";
 	var passedid="tests-passed";
 	var testarea=`
-	<h2 id="Problems-Found">Problems found?</h2>
+	<h3 id="Problems-Found">Problems found?</h3>
 		<div id="${failedid}"></div>
 		<p>That's all!</p>
-	<h2 id="Passed-Tests">Passed tests</h2>
+	<h3 id="Passed-Tests">Passed tests</h3>
 		<p id="${passedid}"></p> 
 	`;
 
@@ -9092,15 +9092,23 @@ TestsPassFailHTMLReport=function(unitTestsList,maintarget){
 	}
 }
 
-TestHTMLReport=function(maintarget){
+TestHTMLReport=function(maintarget,modules){
 	if(TestHTMLReport.once)
 		return;
 	TestHTMLReport.once=true;
-	var functionNames=DistinctArray(Introspect());
-	var unitTestsList=functionNames.map(FunctionNameUnitTests).flat().filter(Length);
+	if(!modules)
+		var moduleFunctionNames=DefinedFunctionNames;
+	else
+		var moduleFunctionNames=FilterKeysObject(DefinedFunctionNames,Iner(modules))
 
-	TestsPassFailHTMLReport(unitTestsList,maintarget);
-	TestCoverageReport(unitTestsList,functionNames,maintarget);
+	Keys(moduleFunctionNames).map(function(modul){
+		var functionNames=moduleFunctionNames[modul];
+		var unitTestsList=functionNames.map(FunctionNameUnitTests).flat().filter(Length);
+		var subtarget="test-"+modul;
+		AppendToElement(`<div id="${subtarget}"><h2><b>${modul}</b></h2></div>`,maintarget);
+		TestsPassFailHTMLReport(unitTestsList,subtarget);
+		TestCoverageReport(unitTestsList,functionNames,subtarget);
+	});
 }
 
 
@@ -9216,9 +9224,10 @@ FunctionDeepAscendents(Iner)
 
 
 
-
+DefinedFunctionNames={};
 DefinedShout=function(name){
-	FunctionDefinedNames[name]=Complement(Object.keys(globalThis),Apply(Join,Values(FunctionDefinedNames)));
+	DefinedVariableNames[name]=Complement(Object.keys(globalThis),Apply(Join,Values(DefinedVariableNames)));
+	DefinedFunctionNames[name]=DefinedVariableNames[name].filter(varname=>IsFunction(globalThis[varname]));
 	Shout(name);
 }
 
