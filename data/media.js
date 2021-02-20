@@ -238,7 +238,7 @@ function ImageObject(opts){
 
 GalleryHTML=function(objects,RenderHTML){
 	var gallery=ThreadKeysValues(objects,RenderHTML).join("\n");
-	return `<div class="featured">${gallery}</div>`
+	return `<div class="featured gallery">${gallery}</div>`
 }
 
 FolderGalleryHTML=function(objects,subfolder){
@@ -251,9 +251,12 @@ FolderCarder=function(subfolder){
 	};
 }
 
-SerialImageCard=function(name,opts){
-	SerialImageCard[name]=opts;
-	return DynamicText(name,name);
+PlaceholderCarder=function(cla){
+	return function(name){
+		return `<div class="${cla}">
+			${DynamicText(name,"loading... "+name)}
+		</div>`;
+	}
 }
 
 ModalImageFragment=function(obj){
