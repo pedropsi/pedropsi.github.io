@@ -1018,7 +1018,7 @@ MiniBoardCanvasDraw=function(fruit,rule,state,rendering){
 }
 
 SerialDraw=function(serial,stateOpts){
-	var state=SerialState(SearchParameters(serial),BlankState);
+	var state=SerialState(serial,BlankState);
 		state=CompleteState(Group(state,stateOpts));
 		BoardPrepare(state);
 		StateDraw(state);
@@ -1147,26 +1147,28 @@ GenreSerial=function(state){
 		return "";
 	return GenreLetters[state.genre];
 }
+
 SerialState=function(serialObj,state){
+	serialObj=ReKeyObject(ReSearchParameters(serialObj),LowerCase);
+
 	var state=Clone(state);
-	var serialObj=ReKeyObject(serialObj,LowerCase);
-		state.W=Max(Number(serialObj.w||serialObj.h)||0,2);
-		state.H=Max(Number(serialObj.h||serialObj.w)||0,2);
-		if(serialObj.g){
-			state=SerialGenreState(serialObj.g,state)
-		}
-		else
-			state=Merge(state,Kudamono);
-		if(serialObj.l)
-			state.level=SerialLevel(serialObj.l,state);
-		else{
-			state.mode.edit=true;
-		}
+	state.W=Max(Number(serialObj.w||serialObj.h)||0,2);
+	state.H=Max(Number(serialObj.h||serialObj.w)||0,2);
+	if(serialObj.g){
+		state=SerialGenreState(serialObj.g,state)
+	}
+	else
+		state=Merge(state,Kudamono);
+	if(serialObj.l)
+		state.level=SerialLevel(serialObj.l,state);
+	else{
+		state.mode.edit=true;
+	}
 
-		if(serialObj.s)
-			state.segments=SerialOrchard(serialObj.s,state.H);
+	if(serialObj.s)
+		state.segments=SerialOrchard(serialObj.s,state.H);
 
-		state.metadata=Merge(state.metadata||{},SerialMetadata(serialObj))
+	state.metadata=Merge(state.metadata||{},SerialMetadata(serialObj))
 	return state;
 }
 
@@ -1237,7 +1239,7 @@ StateSerial=function(state){
 
 
 FruitSerialState=function(fruit,serial,suprastate){
-	var state=SerialState(SearchParameters(serial),suprastate);
+	var state=SerialState(serial,suprastate);
 		state.id="rule-"+fruit;
 		state.render={main:false,target:suprastate.render.target,once:true};
 		state.mode.selection=[];
@@ -1929,6 +1931,7 @@ InitialisePuzzle=function(id){
 	//Auto instructions
 	AutoInstructions(state.fruits)
 }
+
 
 
 
