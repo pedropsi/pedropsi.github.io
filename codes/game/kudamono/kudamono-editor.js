@@ -1262,7 +1262,7 @@ ObtainSetLevelState=function(state){
 }
 
 CompleteState=function(state){
-	if(state.render.once&&state.render.expanded)
+	if(state.render&&state.render.once&&state.render.expanded)
 		return state;
 	var state=Clone(state);
 	state.orchard=SegmentsOrchard(ValidSegments(state.segments,state));
