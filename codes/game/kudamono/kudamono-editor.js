@@ -12,10 +12,8 @@ var sources=[
 ];
 sources.map(LoaderInFolder("codes/game/modules"));
 
-if(PageSearch("G")){
-	LoaderInFolder("codes/game/kudamono")("genres.js");
-	sources=sources.concat("kudamono-genres")
-}
+sources=sources.concat("kudamono-genres")
+LoaderInFolder("codes/game/kudamono")("genres.js");
 
 
 //Definitions
