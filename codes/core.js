@@ -212,6 +212,28 @@ FirstCurrier=function(F){
 	}
 }
 
+Chainer=function(){
+	var Fs=Values(arguments);
+	return function(arg){
+		var i=0;
+		result=arg;
+		while(i<Fs.length){
+			result=Fs[i](result);
+			i++;
+		}
+		return result
+	}
+/*
+Chains operations together as a single function
+Chainer(x=>x+1,y=>y*2,z=>z-1)(3)
+7
+
+If no operation is specified, returns the original result
+Chainer()(3)
+3
+*/
+}
+
 MapThread=function(F){
 	var args=Rest(Values(arguments));
 	if(!args.length)
