@@ -241,6 +241,34 @@ Chainer()(3)
 */
 }
 
+Ater=function(k,v){
+	if(typeof v==="undefined")
+		return function(item){
+			return item[k];
+		}
+	else
+		return function(item){
+			return item[k]=v;
+		}
+/*
+Arrays, get
+Ater(2)([9,8,7])
+7
+
+Objects, get
+Ater("a")({a:1})
+1
+
+Arrays, set
+Ater(2,0)(x=[9,8,7]);x
+[9,8,0]
+
+Objects, set
+Ater("a",2)(x={a:1});x
+{a:2}
+*/
+}
+
 MapThread=function(F){
 	var args=Rest(Values(arguments));
 	if(!args.length)
@@ -248,7 +276,7 @@ MapThread=function(F){
 	var l=Min(args.map(list=>list.length));
 	var result=[];
 	for(var i=0;i<l;i++){
-		result.push(Apply(F,args.map(li=>li[i])));
+		result.push(Apply(F,args.map(Ater(i))));
 	}
 	return result;
 /*
@@ -4685,7 +4713,7 @@ StringsContained=function(strings,patterntxt){
 }
 
 RowFiltered=function(row,patterntxt){
-	var strings=GetElements("td",row).map(r=>r.innerText);
+	var strings=GetElements("td",row).map(Ater("innerText"));
 	return StringsContained(strings,patterntxt);
 }
 
