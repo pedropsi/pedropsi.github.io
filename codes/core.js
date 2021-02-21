@@ -9170,7 +9170,7 @@ TestPassFailHTMLReport=function(unitTest){
 }
 
 TestCoverageReport=function(unitTests,functionNames,maintarget){
-	var testedFunctionNames=DistinctArray(unitTests.map(unit=>unit.callerName));
+	var testedFunctionNames=DistinctArray(unitTests.map(Ater("callerName")));
 	var sideFunctionNames=functionNames.filter(name=>!In(FunctionBody(window[name]),"return"));
 	var untestedFunctionNames=Complement(functionNames,testedFunctionNames,sideFunctionNames);
 	
