@@ -47,13 +47,6 @@ SaveTest(Equal,[{a:1,b:{bb:2},c:{cc:"3",d:{dd:4}}},{a:1,b:{bb:2},c:{cc:"3",d:{dd
 ///////////////////////////////////////////////////////////////////////////////
 // Math
 
-
-SaveTest("VectorPlus",[[],[]],[],"both empty");
-SaveTest("VectorPlus",[[1],[2]],[3],"monodimensional");
-SaveTest("VectorPlus",[[1,2],[3,4]],[4,6],"multidimensional");
-SaveTest("VectorPlus",[[1,2],[3]],[4],"ragged underflow");
-SaveTest("VectorPlus",[[1],[3,4]],[4],"ragged overflow");
-
 SaveTest(EuclideanDistance,[[],[]],0,"both empty");
 SaveTest(EuclideanDistance,[[1],[2]],1,"monodimensional");
 SaveTest(EuclideanDistance,[[0,3],[4,0]],5,"bidimensional");

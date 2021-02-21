@@ -571,6 +571,7 @@ BiPlus=function(a,b){
 		Warn("Plus error",a,b)
 		return 0;
 	}
+
 }
 
 BiTimes=function(a,b){
@@ -737,6 +738,27 @@ Vectoriser=function(Operation){
 	return function(vector1,vector2){
 		return VectorOperation(Operation,vector1,vector2);
 	}
+/*
+both arrays, empty
+VectorPlus([],[])
+[]
+
+monodmensional
+VectorPlus([1],[2])
+[3]
+
+multidimensional
+VectorPlus([1,2],[3,4])
+[4,6]
+
+ragged underflow
+VectorPlus([1,2],[3])
+[4]
+
+ragged overflow
+VectorPlus([1],[3,4])
+[4]
+*/
 }
 
 var VectorBiPlus=Vectoriser(Plus);
