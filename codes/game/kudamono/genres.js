@@ -63,12 +63,12 @@ var Genres={
 			dangleallowed:true,
 			loopallowed:false,
 			simpleshapes:Join(Shape1s,Shape2s,Shape3s),
-			unconsecutiveshapes:[ShapeStraights,Shape2Corners,Shape3s],
-			maxtracks:1
+			unconsecutiveshapes:[ShapeStraights,Shape2Corners,Shape3s]
 		},
 		win:{
 			rule:{
-				fillboard:true
+				fillboard:true,
+				maxlines:1
 			},
 			grid:{
 				fillColor:"#FFFFED",
@@ -271,8 +271,12 @@ var Genres={
 			nudge:0.25	
 		},
 		rules:{
-			simpleshapes:["LR","LE","LS","RN","RW","UD","UW","US","DN","DE","NS","EW","LURD","NESW"],
-			maxtracks:1
+			simpleshapes:["LR","LE","LS","RN","RW","UD","UW","US","DN","DE","NS","EW","LURD","NESW"]
+		},
+		win:{
+			rule:{
+				maxlines:1
+			}
 		},
 		groups:{
 			"subway":["station","park-N","park-E","park-S","park-W"]
