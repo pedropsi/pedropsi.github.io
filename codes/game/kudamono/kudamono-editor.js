@@ -1213,7 +1213,7 @@ SerialMetadata=function(serialObj){
 	return metadata;
 /*
 sort, ignore capitalised abbreviations, anything not in abbreviations
-SerialMetadata("a=Name%20Surname&t=Title&etc=not useful")
+SerialMetadata(SearchParameters("a=Name%20Surname&t=Title&etc=not useful"))
 {title:"Title",author:"Name Surname"}
 */
 }
