@@ -7147,7 +7147,17 @@ ComboKeystring=function(key){
 
 
 KeyNumberLookup=function(keynumber){
-	return Accesser(CodeKeys,String,()=>"")(keynumber);
+	return Accesser(CodeKeys,String,Waiter(""))(keynumber);
+
+/*
+known key
+KeyNumberLookup(13)
+"enter"
+
+unknown key
+KeyNumberLookup(2)
+""
+*/
 }
 
 KeyCodes={
