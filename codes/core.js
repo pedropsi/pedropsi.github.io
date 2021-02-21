@@ -1473,6 +1473,9 @@ UnIn=function(SAO,n){
 }
 
 UnIner=FirstCurrier(UnIn);
+Outer=LastCurrier(In);
+UnOuter=LastCurrier(UnIn);
+
 
 Count=function(array,itemOrF){
 	if(typeof array==="string"&&typeof itemOrF==="string"){
@@ -2074,11 +2077,7 @@ AccPermutations=function(array,n){
 	return permutations;
 }
 
-Outer=function(array1,array2,F){
-	for(var i=0;i<array1.length;i++)
-		for(var j=0;j<array2.length;j++)
-			F(array1[i],array2[j])
-}
+
 
 Substrings=function(string){
 	var subs=[];
@@ -3144,7 +3143,7 @@ Enumerate=function(StringArray,and){
 		return StringArray[0];
 
 	var comma=", ";
-	if(StringArray.some(a=>In(a,",")))
+	if(StringArray.some(Outer(",")))
 		var comma="; ";
 	
 	var prelast=Last(Most(StringArray));
