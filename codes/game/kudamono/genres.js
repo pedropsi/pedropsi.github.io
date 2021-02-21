@@ -92,7 +92,6 @@ var Genres={
 				path:"M 181 1 C 143 9 116 43 116 83 C 116 95 116 97 115 97 C 101 91 74 89 60 94 C -19 119 -19 233 60 256 L 66 258 62 265 C 50 285 48 312 55 334 C 75 392 152 411 194 367 L 201 360 203 363 C 207 368 219 376 228 380 C 301 414 375 339 339 266 C 337 261 335 257 335 257 C 335 257 338 256 342 255 C 395 240 417 172 384 126 C 363 97 324 84 291 94 L 283 97 283 85 C 285 31 234 -10 181 1 Z M 200 167 C 216 167 218 166 225 164 L 232 161 232 176 C 232 192 234 201 241 214 L 245 222 238 224 C 224 229 210 238 202 247 L 198 252 194 248 C 187 239 173 231 160 227 C 152 224 152 224 156 218 C 164 205 168 189 167 172 L 166 161 175 164 C 182 166 184 167 200 167 Z",
 				rule:{
 					fruitshapes:Shape1s,
-					minconnected:Infinity,
 					description:"each flower blossoms at an endpoint (1-piece)",
 					depiction:"W=4&L=w6w5w2&S=6D1V4W2N5U&G=b"
 				},
@@ -107,7 +106,6 @@ var Genres={
 				path:"M 460 58 L 412 61 L 412 214 C 168 225 49 425 40 603 C 39 798 184 1021 422 1022 C 646 1024 795 866 811 658 C 820 408 696 232 454 216 L 454 159 C 619 239 731 259 923 108 C 731 -56 612 -4 454 124 Z",
 				rule:{
 					fruitshapes:Shape2Straights,
-					minconnected:Infinity,
 					description:"each fruit occupies a straight trunk (2-piece)",
 					depiction:"W=4&L=f7f4&S=12R1ex5U&G=b"
 				},
@@ -121,7 +119,6 @@ var Genres={
 					path:"M 6 4 Q 5 3 5 3 Q 4 3 3 2 Q 2 2 1 1 Q -2 0 0 0 Q 9 0 19 6 Q 21 2 23 1 Q 27 0 29 3 Q 30 5 33 5 Q 63 5 33 6 Q 30 7 29 8 Q 26 11 25 14 Q 23 18 18 21 Q 15 23 13 23 Q 11 24 9 23 Q -1 29 8 23 Q -2 29 7 22 Q -3 30 6 21 Q -4 31 5 20 Q 8 14 12 12 Q 10 12 10 11 Q 8 11 8 10 Q 6 10 6 9 Q 5 9 4 8 Q 3 8 2 7 Q 1 7 0 6 Q -1 6 -2 5 Q -3 5 -4 4 Q -7 3 -4 3 Q 1 2 6 4 Z",
 					rule:{
 						fruitshapes:Shape2Corners,
-						minconnected:Infinity,
 						description:"each hummingbird must be at a corner (2-piece)",
 						depiction:"W=4&L=h6h2&S=7V4O2N3D2U&G=b"
 					},
