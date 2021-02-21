@@ -173,6 +173,19 @@ Evaluate(function(){return "wait"})
 */
 }
 
+LazyEvaluatir=function(F){
+	return function(){
+		var args=Values(arguments);
+		return function(){return Apply(F,args)}
+	}
+/*
+LazyEvaluatir(Evaluate)("wait")()
+"wait"
+
+Waiter("wait")()
+"wait"
+*/
+}
 Empty=function(SAO){
 	if(IsArray(SAO))
 		return [];
@@ -196,12 +209,7 @@ ArgumentExtender=function(F){ // From pairs to infinite number of arguments
 }
 
 
-LazyPasser=function(F){
-	return function(){
-		var args=Values(arguments);
-		return function(){return Apply(F,args)}
-	}
-}
+
 
 Currier1=function(F){
 	return function(firstArgument){

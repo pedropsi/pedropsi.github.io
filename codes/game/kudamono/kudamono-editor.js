@@ -1827,7 +1827,7 @@ var DragActions={
 	"drag-on-3":DragActionDrawStarter,
 	"drag-on-4":ClearSegments,
 	"drag-on-5":ClearFruit,
-	"drag-on-6":LazyPasser(ScrollInto)(".main"),
+	"drag-on-6":LazyEvaluatir(ScrollInto)(".main"),
 	"drag-continue":DragActionContinuer,
 	"drag-off":DragActionEnder
 }
@@ -1946,7 +1946,7 @@ InitialisePuzzle=function(id){
 		
 	PreAddPuzzle(state,"body");
 	ControlsBind(state);
-	setTimeout(LazyPasser(FocusElement)(state.render.target),500);
+	setTimeout(LazyEvaluatir(FocusElement)(state.render.target),500);
 	
 	SaveState(state);
 	var options={initialise:true,id:state.id,draw:["force-metadata"]};
