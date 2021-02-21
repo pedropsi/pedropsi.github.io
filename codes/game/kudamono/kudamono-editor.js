@@ -530,43 +530,65 @@ FruitNumber=function(fruit,state){
 FruitTrackStateLocallyErred=function(fruit,track,state){
 	var rule=Merge(state.rules,FruitStateRule(fruit,state));
 	
+	var errors={};
 	var wrong=false;
-	if(!wrong&&rule.crossforbidden)
+	if(!wrong&&rule.crossforbidden){
+		errors.crossforbidden=true;
 		wrong=true;
+	}
 
 	if(!wrong&&rule.minconnected||rule.maxconnected){
 		var min=rule.minconnected;
 		if(min===Infinity)
 			min=FruitNumber(fruit,state);
 		var n=TrackFruitNumber(track,fruit,state);
-		wrong=(n>rule.maxconnected||n<min)
+		if(n>rule.maxconnected){
+			errors.maxconnected=true;
+			wrong=true;
+		}
+		if(n<min){
+			errors.minconnected=true;
+			wrong=true;
+		}
 	}
 
-	if(!wrong&&rule.trackValidator&&!RuleVerifiers()[rule.trackValidator](track))
+	if(!wrong&&rule.trackValidator&&!RuleVerifiers()[rule.trackValidator](track)){
+		errors.trackValidator=true;
 		wrong=true;
+	}
 	if(!wrong&&rule.fruitshapes){
 		wrong=Complement(FruitTrackStateShapes(fruit,track,state),rule.fruitshapes).length>0;
+		if(wrong)
+			errors.fruitshapes=true;
+
 		rule.branchallowed=rule.branchallowed||Intersected(rule.fruitshapes,ShapeBranches);
 	}
 	if(!wrong&&rule.simpleshapes){
 		wrong=Complement(UnFruitTrackStateShapes(fruit,track,state),rule.simpleshapes).length>0;
+		if(wrong)
+			errors.simpleshapes=true;
+
 		rule.branchallowed=rule.branchallowed||Intersected(rule.simpleshapes,ShapeBranches);
 	}
 	if(!wrong&&rule.unconsecutiveshapes){
 		wrong=TrackConsecutiveShapePairs(track).some(pair=>rule.unconsecutiveshapes.some(incompatibles=>Subsetted(incompatibles,pair)));
+		if(wrong)
+			errors.unconsecutiveshapes=true;
 	}
 	if(!wrong&&!rule.loopallowed&&TrackLooped(track))
-		wrong=true;
+		errors.loopallowed=(wrong=true);
 		
 	if(!wrong&&rule.looprequired&&!TrackLooped(track))
-		wrong=true;
+		errors.looprequired=(wrong=true);
 		
 	if(!wrong&&!rule.branchallowed&&TrackBranched(track))
-		wrong=true;
+		errors.branchallowed=(wrong=true);
+
 	if(!wrong&&rule.simpleshapes&&Intersected(rule.simpleshapes,Shape1s))
 		rule.dangleallowed=true;
+
 	if(!wrong&&!rule.dangleallowed&&TrackDangled(track,state))
-		wrong=true;
+		errors.dangleallowed=(wrong=true);
 		
 	return wrong;
 }
