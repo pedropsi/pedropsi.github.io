@@ -186,6 +186,9 @@ Waiter("wait")()
 "wait"
 */
 }
+
+Waiter=LazyEvaluatir(Identity);
+
 Empty=function(SAO){
 	if(IsArray(SAO))
 		return [];
