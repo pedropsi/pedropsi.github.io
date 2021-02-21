@@ -1364,7 +1364,7 @@ LayersChanged={
 	overlevel:["force-overlevel","W","H","visuals.monochrome","mode.edit","mode.selection","mode.dragging","mode.fruitIndex"],
 	line:["force-line","W","H","visuals.monochrome","orchard"],
 	overline:["force-overline","W","H","visuals.monochrome","mode.edit","mode.selection"],
-	explainer:["force-level","level","W","H","force-explainer","visuals.monochrome"],
+	explainer:["W","H","force-explainer","visuals.monochrome"],
 	metadatatitle:["force-metadata","force-metadatatitle"],
 	metadatacolophon:["force-metadata","force-metadatacolophon"],
 	cursor:["visuals.monochrome","mode.fruitIndex","mode.edit","mode.clearing"]
