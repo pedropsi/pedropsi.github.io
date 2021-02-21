@@ -753,7 +753,7 @@ RequestPGDSubmission=function(editData,editmode){
 	else
 		var editData={"classification":"game"};
 	
-	var Game=Capitalise(editData.classification);
+	var Game=CapitalCase(editData.classification);
 	RequestPGDSubmission['lastdata']=editData;
 	var O=editData;
 	

@@ -265,7 +265,7 @@ function GameBarButtonHTML(action,attribs){
 			onfocus:TWB,
 			onmouseout:UnTWB,
 			onblur:UnTWB,
-			id:Capitalise(action)+'Button'
+			id:CapitalCase(action)+'Button'
 		}));
 }
 

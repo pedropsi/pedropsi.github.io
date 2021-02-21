@@ -2504,7 +2504,7 @@ UnquoteString=function(string){
 	return string.replaceAll(/\"/ig,"");
 }
 
-// Capitalise
+// CapitalCase
 LowerCase=function(string){
 	if(!string||!string.toLowerCase)
 		return "";
@@ -2520,18 +2520,18 @@ UpperCase=function(string){
 }
 
 
-Capitalise=function(word){
+CapitalCase=function(word){
 	if(word.length)
 		return word[0].toUpperCase()+Rest(word).toLowerCase();
 	else
 		return word;
 /*
 empty string
-Capitalise("")
+CapitalCase("")
 ""
 
 oddly capitalised
-Capitalise("mARiE")
+CapitalCase("mARiE")
 "Marie"
 */
 }
@@ -2565,7 +2565,7 @@ CapitaliseNoble=function(word){
 	if(In(CommonWords,word))
 		return word;
 	else
-		return Capitalise(word);
+		return CapitalCase(word);
 }
 
 CapitaliseNoblesSentence=function(sentence){
@@ -2582,7 +2582,7 @@ ReSentence=function(sentence,dot){
 	var dot=dot||".";
 	if(!Posfixed(sentence,DotCharacters))
 		sentence=Posfix(sentence,dot);
-	return Capitalise(TrimWhitespaceString(sentence));
+	return CapitalCase(TrimWhitespaceString(sentence));
 /*
 already punctuated
 ReSentence("Well!")
@@ -3156,7 +3156,7 @@ EnumerateSentence=function(list,and){
 	var sentence=Enumerate(list,and||"");
 	if(sentence)
 		sentence=Posfix(sentence,".");
-	return Capitalise(sentence);
+	return CapitalCase(sentence);
 }
 
 
@@ -9216,11 +9216,11 @@ JavascriptFunctionNames=["RegExp","Array","Object","Date","String","Number","Set
 
 FunctionAscendents=function(F){
 	var selfName=FunctionName(this);
-	return FunctionCalledFunctions(F).filter(Name=>Capitalise(Name[0])===Name[0]&&!In(JavascriptFunctionNames,Name)&&Name!==selfName).filter(Iner(Keys(globalThis)));
+	return FunctionCalledFunctions(F).filter(Name=>CapitalCase(Name[0])===Name[0]&&!In(JavascriptFunctionNames,Name)&&Name!==selfName).filter(Iner(Keys(globalThis)));
 /*
 self-inspect, removing itself and standard JS functions
 FunctionAscendents(FunctionAscendents)
-["FunctionName","FunctionCalledFunctions","Capitalise","In","Iner","Keys"]
+["FunctionName","FunctionCalledFunctions","CapitalCase","In","Iner","Keys"]
 */
 }
 

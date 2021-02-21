@@ -67,7 +67,7 @@ ToolRow=function(name,item){
 	var authorHTML=P(item.author);
 	var description=item.description;
 	var year=item.YEAR;
-	var tags=Enumerate(Sort(item.tags).map(Capitalise));
+	var tags=Enumerate(Sort(item.tags).map(CapitalCase));
 	return [titleHTML,authorHTML,year,tags,description];
 },
 ToolsHTML=function(caption,include,exclude){

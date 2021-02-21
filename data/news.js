@@ -753,7 +753,7 @@ PuzzleNewsObjecter=function(genre){
 	var genre=LowerCase(genre);
 	return function(item,key){
 		var number=UnAfterfix(key,"-");
-		var title=`${number}# `+Capitalise(genre);
+		var title=`${number}# `+CapitalCase(genre);
 		var board=item.board;
 		var url=genre+".html";
 		if(board){
@@ -771,7 +771,7 @@ PuzzleNewsObjecter=function(genre){
 			DATE:item.date,
 			HEADER:title,
 			PIECE:`
-			<p> ${link}, from the ${AHTML(Capitalise(genre)+" collection",PageUnSearch(url))}, now released.</p>`
+			<p> ${link}, from the ${AHTML(CapitalCase(genre)+" collection",PageUnSearch(url))}, now released.</p>`
 		}
 	}
 }

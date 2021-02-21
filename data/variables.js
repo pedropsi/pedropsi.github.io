@@ -67,7 +67,7 @@ HEAD_VIEWPORT				:	()=>	`<meta name="viewport" content="width=device-width, init
 HEAD_ICONS					:	()=>	`<link href="${v.FAVICON32()}" rel="icon" type="image/png"/><link href="${v.FAVICON32()}" rel="shortcut icon" type="image/x-icon"/><link href="${v.APPLEICON()}" rel="apple-touch-icon"/>`,
 HEAD_THEME					:	()=>	`<meta name="theme-color" content="${v.THEMECOLOUR()}">`,
 
-TITLE						:	()=>	Capitalise(PageIdentifier().replace("-"," ")),
+TITLE						:	()=>	CapitalCase(PageIdentifier().replace("-"," ")),
 LINK						:	()=>	PageIdentifier(),
 HEAD_DATA_GRAPH				:	()=>	`${v.HEAD_TITLE()}${v.HEAD_DESCRIPTION()}${v.HEAD_IMAGE()}${v.HEAD_LINK()}${v.HEAD_TYPE()}${v.HEAD_COPYRIGHT()}${v.HEAD_SITENAME()}${v.HEAD_OPENSEARCH()}${v.HEAD_KEYWORDS()}`,
 HEAD_TITLE					:	()=>	`<title>${v.TITLE()}</title><meta property="og:title" content="${v.TITLE()} by ${v.NAME()}"/><meta content="${v.TITLE()} by ${v.NAME()}" name="twitter:title">`,

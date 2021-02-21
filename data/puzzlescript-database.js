@@ -2,7 +2,7 @@
 //Starter
 
 var targetID=Posfix(PageIdentifier(),"-area");
-var databaseTitle=PageTitle()||Capitalise(PageIdentifier());
+var databaseTitle=PageTitle()||CapitalCase(PageIdentifier());
 
 if(PageIdentifier()==="puzzlescript-games-database"){
 	var headers=["Title","Author","Date"];

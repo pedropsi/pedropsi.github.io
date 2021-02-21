@@ -1092,7 +1092,7 @@ MetadataColophon=function(metadata){
 }
 
 MetadataTitleDraw=function(state){
-	var title=Capitalise(state.designation||state.genre);
+	var title=CapitalCase(state.designation||state.genre);
 	var subtitle=state.description.split("\n").map(ReSentence).map(PHTML).join("");
 
 	ReplaceChildren(`
