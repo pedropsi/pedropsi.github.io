@@ -2074,8 +2074,14 @@ Permutations=function(array,n,unique){
 		if(!In(pretuple,j))
 		permutations.push(pretuple.concat([j]));
 	}
-	Outer(pretuples,array,AddTuple);
+	OuterCombine(pretuples,array,AddTuple);
 	return permutations;
+}
+
+OuterCombine=function(array1,array2,F){
+	for(var i=0;i<array1.length;i++)
+		for(var j=0;j<array2.length;j++)
+			F(array1[i],array2[j])
 }
 
 AccPermutations=function(array,n){
