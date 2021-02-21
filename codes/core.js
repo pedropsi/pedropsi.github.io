@@ -1421,6 +1421,8 @@ InLazyString=function(string,n){ //Lazy matching, 1 error
 }
 
 In=function(SAO,n){
+	if(!SAO)
+		return false;
 	if(Arrayed(SAO)){
 		var i=0;
 		var l=SAO.length;
@@ -1475,16 +1477,31 @@ false
 functional form
 Iner([1,2,3])(2)
 true
+
+nothing
+In()
+false
 */
 }
-
-Iner=Currier1(In);
-
 UnIn=function(SAO,n){
 	return !In(SAO,n);
 }
-
+Iner=Currier1(In);
 UnIner=Currier1(UnIn);
+
+
+Out=function(sub,supra){
+	return In(supra,sub);
+/*
+contained
+Out(1,[1,2])
+true
+
+contained in ,othing
+Out(1)
+false
+*/
+}
 Outer=Currier2(In);
 UnOuter=Currier2(UnIn);
 
