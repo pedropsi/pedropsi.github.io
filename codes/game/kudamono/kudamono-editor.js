@@ -2005,12 +2005,19 @@ SerialImageCard=function(name,opts){
 	return DynamicText(name,name);
 }
 
-PuzzlePictureDraw=function(target,puzzle){
+PuzzlePictureDraw=function(name,puzzle){
+	var target="dynamic-"+KebabCaseString(name);
+	var cla="."+target;
+	var e=GetElement("."+target)
+	if(!e)
+		return;
+	
+	e.style="position:relative;";
+
 	var serialObj=SearchParameters(puzzle.board);
 		serialObj=FilterKeysObject(SearchParameters(puzzle.board),UnEqualer("S"));
-	var cla="."+target;
-	GetElement("."+target).style="position:relative;";
-
+	var metadata=SerialMetadata(serialObj);
+	
 	SerialDraw(
 		serialObj,
 		{render:{
@@ -2018,16 +2025,22 @@ PuzzlePictureDraw=function(target,puzzle){
 			container:cla,
 			main:false
 		}})
-	
+	var legend=MetadataColophon(metadata);
+
 	HearElement(cla+" canvas",function(){
 		var uri=FuseCanvasURI(target);
-		var iuri=I(uri)
-		ReplaceElement(iuri,cla);
+		var iCard=ImageCardHTML({
+			src:uri,
+			href:Prefix(ParameterString(serialObj),"?"),
+			ALT:legend,
+			LEGEND:legend
+		});
+		ReplaceElement(iCard,cla);
 	})
 };
 
 PuzzleGalleryDraw=function(puzzles){
-	ThreadKeysValues(puzzles,(name,obj)=>PuzzlePictureDraw("dynamic-"+KebabCaseString(name),obj));
+	ThreadKeysValues(puzzles,PuzzlePictureDraw);
 }
 
 HearAll(sources,InitialisePuzzlePage);
