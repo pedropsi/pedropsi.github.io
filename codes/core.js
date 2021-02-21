@@ -8193,7 +8193,16 @@ var KeyExplanations={
 KB=function(string,opts){
 	var opts=opts||{};
 	var options=LowerAccesser(MultimediaKeys,ReArray)(string);
-	return Enumerate(options.map(o=>KBDHTML(o,opts)),"or");
+	return Enumerate(options.map(Currier2(KBDHTML)(opts)),"or");
+/*
+multiplex
+KB("click")
+`${KBDHTML("tap")} or ${KBDHTML("cursor-click")}`
+
+all else kept as is
+KB("X")
+KBDHTML("X")
+*/
 }
 
 var MultimediaKeys={
