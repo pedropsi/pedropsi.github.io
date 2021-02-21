@@ -1563,24 +1563,6 @@ TransformAccesser=function(Dictionary,Transform,Retroform,Failform){
 	}
 }
 
-Register=function(Dict,Renamer){
-	var Renamer=Renamer||LowerCase;
-	return function(Name,Value){
-		var name=Renamer(Name);
-		Dict[name]=Value;
-		return Dict;
-	}
-}
-
-UnRegister=function(Dict,Renamer){
-	var Renamer=Renamer||LowerCase;
-	return function(Name){
-		var name=Renamer(Name);
-		delete Dict[name];
-		return Dict;
-	}
-}
-
 
 CanonicalObject=function(Obj,CanonicalName){
 	if(!CanonicalName)
