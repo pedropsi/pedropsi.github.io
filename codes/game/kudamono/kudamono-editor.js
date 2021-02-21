@@ -2024,7 +2024,10 @@ PuzzlePictureDraw=function(name,puzzle){
 			target:target,
 			container:cla,
 			main:false
-		}})
+		},
+		visuals:{solid:true}
+	
+	})
 	var legend=MetadataColophon(metadata);
 
 	HearElement(cla+" canvas",function(){
