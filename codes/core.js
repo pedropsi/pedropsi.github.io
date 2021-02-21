@@ -1329,11 +1329,21 @@ MapKeysObject({a:1,b:2},k=>k+k)
 }
 
 
+KeyerValuer=function(O,F){
+	return function(k){
+		return F(k,O[k]);
+	}
+}
+
+ValuerKeyer=function(O,F){
+	return KeyerValuer(O,ArgumentSwapper12(F));
+}
+
 FilterKeysObject=function(Obj,Validator){
 	if(!Validator)
 		return Obj;
 	var O={};
-	Keys(Obj).filter(k=>Validator(k,Obj[k])).map(k=>O[k]=Obj[k]);
+	Keys(Obj).filter(KeyerValuer(Obj,Validator)).map(k=>O[k]=Obj[k]);
 	return O;
 /*
 Simple filter
@@ -1346,7 +1356,7 @@ FilterValuesObject=function(Obj,Validator){
 	if(!Validator)
 		return obj;
 	var O={};
-	Keys(Obj).filter(k=>Validator(Obj[k],k)).map(k=>O[k]=Obj[k]);
+	Keys(Obj).filter(ValuerKeyer(Obj,Validator)).map(k=>O[k]=Obj[k]);
 	return O;
 /*
 Simple filter2
@@ -1398,9 +1408,8 @@ TreeKeys({a:1,b:{c:3}},"»»")
 */
 }
 
-
-ThreadKeysValues=function(Obj,KeyValuer){
-	return Keys(Obj).map(k=>KeyValuer(k,Obj[k]));
+ThreadKeysValues=function(Obj,KeyValueApplier){
+	return Keys(Obj).map(KeyerValuer(Obj,KeyValueApplier));
 /*
 list keys
 ThreadKeysValues({a:1,b:2},(a,b)=>b)
