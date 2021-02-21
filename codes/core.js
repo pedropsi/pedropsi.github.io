@@ -9281,6 +9281,13 @@ DefinedShout=function(name){
 	DefinedVariableNames[name]=Complement(Object.keys(globalThis),Apply(Join,Values(DefinedVariableNames)));
 	DefinedFunctionNames[name]=DefinedVariableNames[name].filter(varname=>IsFunction(globalThis[varname]));
 	Shout(name);
+	DefinedLog(name);
+}
+
+DefinedLog=function(name){
+	if(!GetElement("loadedconsole"))
+		AppendToElement(`<div id="loadedconsole"></div>`,"body");
+	AppendToElement(`<span class="inline"><b>${name}</b>|</span>`,"loadedconsole");
 }
 
 DefinedShout("core");

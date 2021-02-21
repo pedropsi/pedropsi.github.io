@@ -1468,7 +1468,8 @@ video{
 	font-weight:bold;
 	align-self:center;
 	flex-direction: row;
-}	
+}
+
 
 .closing{
   opacity:0;
@@ -1902,3 +1903,12 @@ svg.wallpaper path{
 	z-index: 1000;
 }
 
+
+#loadedconsole{
+	flex-direction:row;
+	font-size:var(--h2);
+	flex-wrap:wrap;
+	color:var(--blue);
+	background-color:transparent;
+	justify-content:center;
+}
