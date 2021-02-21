@@ -730,12 +730,11 @@ ImportNewsObject=function(newsObj){
 	LoadHTMLObject(newsObj,AddNews);	
 }
 
-PuzzleParameters=function(key,item,genre){
+PuzzleParameters=function(key,item){
+	Wbug(key,item)
 	var N=UnAfterfix(key,"-");
 	var name=UnPrefix(key,N+"-");
-		name=item.legend||name;
-		if(name===genre)
-			name="";
+
 	var params=SearchParameters(item.board);
 	delete params["S"];
 	params=Merge(
@@ -745,13 +744,12 @@ PuzzleParameters=function(key,item,genre){
 		"N":N,
 		"T":name,
 		"K":item.thanks?(item.thanks.join(",")):"",
-		"U":JoinPath(v.SITE(),genre)
 	},params);
 	params=FilterValuesObject(params,Identity);
 	return params;
 }
 
-PuzzleLinker=function(genre){
+PuzzleNewsObjecter=function(genre){
 	var genre=LowerCase(genre);
 	return function(item,key){
 		var number=UnAfterfix(key,"-");
@@ -759,7 +757,10 @@ PuzzleLinker=function(genre){
 		var board=item.board;
 		var url=genre+".html";
 		if(board){
-			var params=PuzzleParameters(key,item,genre);
+			var params=PuzzleParameters(key,item);
+			if(params["T"]===genre)
+				delete params["T"];
+			params["U"]=JoinPath(v.SITE(),genre);
 			var url=PageReSearch(url,params);
 		}else
 			var url=PageReFragment(url,key);
@@ -799,12 +800,12 @@ NewsSources={
 	kudamono:{
 		name:"puzzlesData",
 		source:"https://pedropsi.github.io/kudamono.html",
-		Transformer:PuzzleLinker("kudamono")
+		Transformer:PuzzleNewsObjecter("kudamono")
 	},
 	bonsai:{
 		name:"puzzlesData",
 		source:"https://pedropsi.github.io/bonsai.html",
-		Transformer:PuzzleLinker("bonsai")
+		Transformer:PuzzleNewsObjecter("bonsai")
 	}
 }
 

@@ -148,6 +148,7 @@ MusicCreditsHTML=function(id){
 }
 
 ImageSource=function(ImageObj){
+	var ImageObj=ReKeyObject(ImageObj,LowerCase);
 	if(ImageObj.src&&Prefixed(ImageObj.src,"data:"))
 		return ImageObj.src;
 	var src=ImageObj.src?`images/${ImageObj.src}`:`images/${ImageObj.FOLDER_SMALL||ImageObj.folder||""}/${ImageObj.name||ImageObj.name}`;
@@ -193,6 +194,8 @@ I=function(src){
 }
 
 ImageCardHTML=function(ImageObj){
+	var ImageObj=ReKeyObject(ImageObj,LowerCase);
+	
 	if(ImageObj.href){
 		var link=ImageObj.href;
 		var target="";
@@ -202,11 +205,11 @@ ImageCardHTML=function(ImageObj){
 		var target=v.BLANK()
 	}
 
-	var legend=ImageObj.LEGEND?`<div>${ImageObj.LEGEND}</div>`:"";
+	var legend=ImageObj.legend?`<div>${ImageObj.legend}</div>`:"";
 	var id=ImageObj.id||GenerateId();
-
+	
 	var cardTop=`
-	<div class="card ${ImageObj.CLA||""}">
+	<div class="card ${ImageObj.cla||""}">
 		${LazyImageHTML(ImageObj)}
 	</div>
 	`;
@@ -255,7 +258,10 @@ FolderGalleryHTML=function(objects,subfolder){
 
 FolderCarder=function(subfolder){
 	return function(name,Obj){
-		return ImageCardHTML(ImageObject(Group(Obj,{name:name,folder:subfolder})))
+		if(Obj.board)
+			return PlaceholderCarder(subfolder)(name);
+		else
+			return ImageCardHTML(ImageObject(Group(Obj,{name:name,folder:subfolder})))
 	};
 }
 

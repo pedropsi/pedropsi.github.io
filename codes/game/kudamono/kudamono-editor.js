@@ -2016,7 +2016,7 @@ PuzzlePictureDraw=function(name,puzzle){
 
 	var serialObj=SearchParameters(puzzle.board);
 		serialObj=FilterKeysObject(SearchParameters(puzzle.board),UnEqualer("S"));
-	var metadata=SerialMetadata(serialObj);
+	var metadata=PuzzleParameters(name,puzzle);
 	
 	SerialDraw(
 		serialObj,
@@ -2032,14 +2032,15 @@ PuzzlePictureDraw=function(name,puzzle){
 		var iCard=ImageCardHTML({
 			src:uri,
 			href:Prefix(ParameterString(serialObj),"?"),
-			ALT:legend,
-			LEGEND:legend
+			alt:legend,
+			legend:legend
 		});
 		ReplaceElements(iCard,cla);
 	})
 };
 
 PuzzleGalleryDraw=function(puzzles){
+	var puzzles=FilterValuesObject(puzzles,puzzle=>puzzle.board);
 	ThreadKeysValues(puzzles,PuzzlePictureDraw);
 }
 
