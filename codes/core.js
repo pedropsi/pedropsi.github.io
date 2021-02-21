@@ -273,7 +273,7 @@ MapThread=function(F){
 	var args=Rest(Values(arguments));
 	if(!args.length)
 		return [];
-	var l=Min(args.map(list=>list.length));
+	var l=Min(args.map(Length));
 	var result=[];
 	for(var i=0;i<l;i++){
 		result.push(Apply(F,args.map(Ater(i))));
@@ -2127,7 +2127,7 @@ Delete=function(array,i){
 }
 
 RemoveFirst=function(array,item){
-	var i=array.findIndex(x=>Equal(x,item));
+	var i=array.findIndex(Equaler(item));
 	if(i>=0)
 		return Delete(array,i);
 	else
