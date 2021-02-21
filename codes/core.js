@@ -2006,17 +2006,6 @@ StringPermutations=function(string){
 	return Permutations(string.split("")).map(function(p){return p.join("");});
 }
 
-//Factorial numbers and arrays
-Factorial=function(n){
-	if(n<=1)
-		return 1;
-	if(Factorial[n])
-		return Factorial[n];
-	else
-		return Factorial[n]=n*Factorial(n-1);
-}
-
-
 //Permutations of a set (enforces uniqueness or sort)
 Permutations=function(array,n,unique){
 	if(!array||n===0)
