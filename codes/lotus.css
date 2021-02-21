@@ -186,12 +186,28 @@ body{
 	text-align:center;
 	word-wrap:break-word;
 	font-feature-settings: "salt";
-	scrollbar-color: var(--darkblue) var(--lightyellow);
-	scrollbar-width:thin;
 	display:flex;/*Fix for overlapping layout issues*/
 	flex-direction:column;/*Fix for overlapping layout issues*/
 }
 
+/* Scrollbars */
+body{
+    scrollbar-color: var(--darkblue) var(--lightyellow);
+	scrollbar-width:thin;
+
+}
+::-webkit-scrollbar {
+  width: var(--w1);
+}
+::-webkit-scrollbar-track {
+  background: var(--white);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--darkblue);
+}
+::-webkit-scrollbar-thumb:hover {
+  background:var(--turquoise);
+}
 
 div{
 	max-width:100%;
