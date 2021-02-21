@@ -1082,11 +1082,12 @@ MetadataColophon=function(metadata){
 	var number=metadata.number?(Prefix(metadata.number,"#")+" "):"";
 	var difficulty=metadata.difficulty?(ObtainSymbol("asterisk-heavy").repeat(metadata.difficulty)+" "):"";
 	
-	var title=metadata.title?(Exfix(metadata.title,'"')+" "):"";
+	var title=metadata.title?CapitalCase(metadata.title.replace(/-+/g," ")):"";
+		title=title?(Exfix(title,'"')+" "):"";
 	var author=metadata.author?("by "+metadata.author):"";
 	var date=metadata.date||"";
 	if(date){
-		date=" — "+TrimWhitespaceString(SpacedString(StripHTML(StringDateName(date,{simplified:true}))))
+		date=" — "+TrimWhitespaceString(SpacedString(StringDateName(date)))
 	}
 	return number+title+difficulty+author+date;
 }
@@ -1103,15 +1104,19 @@ MetadataTitleDraw=function(state){
 
 MetadataColophonDraw=function(state){
 	var url=state.metadata.url||"";
-	var colophon=MetadataColophon(state.metadata);
+	if(url)
+		url=`<p class="url">${url}</p>`
+	var colophon=MetadataColophon(state.metadata)||"";
+	if(colophon)
+		colophon=`<p class="author">${colophon}</p>`
 	
 	var thanks=state.metadata.thanks?("With thanks to "+P(state.metadata.thanks)+"."):"";
 
 	ReplaceChildren(`
 	<div class="colophon">
 		<div class="authorship">
-			<div class="author">${colophon}</div>
-			<div class="url">${url}</div>
+			${colophon}
+			${url}
 		</div>
 		<div class="thanks">${thanks}</div>
 	</div>

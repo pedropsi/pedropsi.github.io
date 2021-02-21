@@ -25,6 +25,8 @@
 	flex-wrap:wrap;
 	margin:var(--h2) 0 0 var(--w2);
 	justify-content:center;
+	overflow-y:scroll;
+	overflow-x:hidden;
 
 }
 
@@ -98,8 +100,9 @@
 .colophon .authorship{
 	width:100%;
 	text-align:right;
+	line-height:0;
 }
 
-.authorship div{
-	padding:0 var(--w2) 0;
+.colophon .authorship .p{
+	padding-right:var(--w4)
 }
