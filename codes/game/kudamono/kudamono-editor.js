@@ -2008,11 +2008,11 @@ SerialImageCard=function(name,opts){
 PuzzlePictureDraw=function(name,puzzle){
 	var target="dynamic-"+KebabCaseString(name);
 	var cla="."+target;
-	var e=GetElement("."+target)
-	if(!e)
+	var es=GetElements(cla);
+	if(!es)
 		return;
 	
-	e.style="position:relative;";
+	es.map(e=>e.style="position:relative;");
 
 	var serialObj=SearchParameters(puzzle.board);
 		serialObj=FilterKeysObject(SearchParameters(puzzle.board),UnEqualer("S"));
@@ -2035,7 +2035,7 @@ PuzzlePictureDraw=function(name,puzzle){
 			ALT:legend,
 			LEGEND:legend
 		});
-		ReplaceElement(iCard,cla);
+		ReplaceElements(iCard,cla);
 	})
 };
 
