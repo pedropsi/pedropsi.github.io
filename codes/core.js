@@ -211,7 +211,7 @@ Currier1=function(F){
 	}
 }
 
-LastCurrier=function(F){
+Currier2=function(F){
 	return function(secondArgument){
 		return function(firstArgument){
 			return F(firstArgument,secondArgument);
@@ -524,8 +524,8 @@ true
 */
 }
 
-Equaler=FirstCurrier(Equal);
-UnEqualer=FirstCurrier(UnEqual);
+Equaler=Currier1(Equal);
+UnEqualer=Currier1(UnEqual);
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -681,7 +681,7 @@ Power(2,3)
 }
 
 PoweredSum=function(vector,power){
-	return Apply(Plus,vector.map(v=>Power(v,power)));
+	return Apply(Plus,vector.map(Currier2(Power)(power)));
 /*
 zero-dimensional
 PoweredSum([],2)
@@ -1459,15 +1459,15 @@ true
 */
 }
 
-Iner=FirstCurrier(In);
+Iner=Currier1(In);
 
 UnIn=function(SAO,n){
 	return !In(SAO,n);
 }
 
-UnIner=FirstCurrier(UnIn);
-Outer=LastCurrier(In);
-UnOuter=LastCurrier(UnIn);
+UnIner=Currier1(UnIn);
+Outer=Currier2(In);
+UnOuter=Currier2(UnIn);
 
 
 Count=function(array,itemOrF){
@@ -2753,8 +2753,8 @@ UnPrefixer("St.")("St.Mary")
 */
 }
 
-Prefixer=LastCurrier(Prefix);
-UnPrefixer=LastCurrier(UnPrefix);
+Prefixer=Currier2(Prefix);
+UnPrefixer=Currier2(UnPrefix);
 
 Posfix=function(word,suffix){ //suffix
 	if(!word)
@@ -2801,8 +2801,8 @@ UnPosfixer(" Jr.")("John Jr.")
 */
 }
 
-Posfixer=LastCurrier(Posfix);
-UnPosfixer=LastCurrier(UnPosfix);
+Posfixer=Currier2(Posfix);
+UnPosfixer=Currier2(UnPosfix);
 
 Exfix=function(word,prefix,suffix){
 	if(!word)
@@ -4721,7 +4721,7 @@ FilterChildren=function(filterF,parentSelector,childSelector,subparentSelector){
 	ApplyOriginalChildren(FilterCh,parentSelector,childSelector,subparentSelector);
 }
 
-InStringer=FirstCurrier(InString);
+InStringer=Currier1(InString);
 
 InSubPart=function(string,subparts){
 	var string=UnWhitespaceString(string);
@@ -4747,6 +4747,7 @@ StringsContained=function(strings,patterntxt){
 	var whole=UnWhitespaceString(strings.join(""));
 	return strings.some(celltxt=>InSubPart(celltxt,subparts))&&subparts.every(InStringer(whole));
 }
+
 
 RowFiltered=function(row,patterntxt){
 	var strings=GetElements("td",row).map(Ater("innerText"));
@@ -7136,6 +7137,7 @@ ComboKeystring=function(key){
 		return ReActionsKeyString(key);
 }
 
+
 KeyNumberLookup=function(keynumber){
 	return Accesser(CodeKeys,String,()=>"")(keynumber);
 }
@@ -9341,6 +9343,7 @@ DefinedLog=function(name){
 	if(!GetElement("loadedconsole"))
 		AppendToElement(`<div id="loadedconsole"></div>`,"body");
 	AppendToElement(`<span class="inline"><b>${name}</b>|</span>`,"loadedconsole");
+
 }
 
 DefinedShout("core");
