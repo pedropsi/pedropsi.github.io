@@ -25,7 +25,7 @@
 	flex-wrap:wrap;
 	margin:var(--h2) 0 0 var(--w2);
 	justify-content:center;
-	overflow-y:scroll;
+	overflow-y:auto;
 	overflow-x:hidden;
 
 }

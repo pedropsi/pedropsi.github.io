@@ -192,9 +192,8 @@ body{
 
 /* Scrollbars */
 body{
-    scrollbar-color: var(--darkblue) var(--lightyellow);
 	scrollbar-width:thin;
-
+  scrollbar-color: var(--darkblue) var(--white);
 }
 ::-webkit-scrollbar {
   width: var(--w1);
