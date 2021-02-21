@@ -3162,6 +3162,27 @@ Enumerate=function(StringArray,and){
 		return prelast+and+last;
 	
 	return Most(Most(StringArray)).join(comma)+comma+prelast+and+last;
+/*
+normal sentence
+Enumerate(["one","two","three"])
+"one, two and three"
+
+single element
+Enumerate(["alone"])
+"alone"
+
+nothing
+Enumerate([])
+""
+
+avoid ambiguity, conjunctions
+Enumerate(["john and jane","friends"])
+"john and jane & friends"
+
+avoid ambiguity, commas
+Enumerate(["1,5","2,6","3,7"])
+"1,5; 2,6 and 3,7"
+*/
 }
 
 var EnumerationSynonyms={
