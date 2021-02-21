@@ -4,7 +4,7 @@ function Translate(n,languagecodes){
 	else{
 		var transnames=TransNames(n);
 		var TransCode=function(code){return TranslateChoose(transnames,code)};
-		if(!IsArray(languagecodes))
+		if(!Arrayed(languagecodes))
 			languagecodes=[languagecodes];
 		return languagecodes.map(TransCode);
 	}

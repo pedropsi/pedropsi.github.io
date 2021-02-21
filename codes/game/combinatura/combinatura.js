@@ -153,7 +153,7 @@ PropertyEqualsF=function(propertyName,propertyValue){
 // Game Logic
 
 function Card(n){
-	if(IsObject(n))
+	if(Objected(n))
 		return n; //The card itself;
 	else if(typeof n==="number")
 		return CardGetBy("number",n);

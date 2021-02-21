@@ -190,8 +190,8 @@ NavbarItems=[
 
 NavLinkHTML=function(link){
 	return AnchorHTML(
-		IsString(link)?Access(link,"TITLE"):link.NAME,
-		IsString(link)?link+".html":link.LINK,
+		Stringed(link)?Access(link,"TITLE"):link.NAME,
+		Stringed(link)?link+".html":link.LINK,
 		{class:"nav-link"}
 	);
 }

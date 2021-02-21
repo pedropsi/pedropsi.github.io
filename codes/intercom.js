@@ -742,7 +742,7 @@ if(PageIdentifier()==="game-editor"){
 
 RequestPGDSubmission=function(editData,editmode){
 	if(editData){
-		if(IsString(editData))
+		if(Stringed(editData))
 			editData=Memory(editData);// game hook
 	
 		if(editmode===true)

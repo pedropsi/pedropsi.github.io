@@ -181,7 +181,7 @@ function StartHints(hints){
 
 	Hints.used=LocalHints();
 
-	if((IsArray(hints)&&hints.length===0)||Hints.used.length===0)
+	if((Arrayed(hints)&&hints.length===0)||Hints.used.length===0)
 		Hints.used=hints.map(function(x){return 0}); //will add 1s progressively as used
 
 	ShowButton(HintButton);

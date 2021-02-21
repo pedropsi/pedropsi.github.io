@@ -407,7 +407,7 @@ function SelectLevelFromPage(){
 	var level=PageSearch("level");
 	if(!level)
 		return;
-	if(IsNan(Number(level)))
+	if(Naned(Number(level)))
 		SelectLevelFromTitle(level);
 	else
 		SelectLevel(Round(Number(level),0));
@@ -473,7 +473,7 @@ function GoToScreen(lvl){
 // Keyboard to Pick Level - records multiple digits/letters within a 2000 ms timeframe to select the level number or title
 
 function DialedLevel(S){
-	if(!IsNan(Number(S))){
+	if(!Naned(Number(S))){
 		var lvl=Number(S);
 		return In(UnlockedLevels(),lvl)?lvl:false;
 	}

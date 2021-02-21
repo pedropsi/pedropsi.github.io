@@ -190,11 +190,11 @@ Waiter("wait")()
 Waiter=LazyEvaluatir(Identity);
 
 Empty=function(SAO){
-	if(IsArray(SAO))
+	if(Arrayed(SAO))
 		return [];
-	if(IsObject(SAO))
+	if(Objected(SAO))
 		return {};
-	if(IsString(SAO))
+	if(Stringed(SAO))
 		return "";
 	
 	Wtyp(SAO);
@@ -354,7 +354,7 @@ FindCallerName=function(code){
 	if(FunctionHead(code))
 		return FunctionHead(code);
 	if(!FindCallerName["caller-code-bodies"]){
-		FindCallerName["caller-code-bodies"]=ReValueObject(globalThis,(v,x)=>IsFunction(x)?UnWhitespaceString(FunctionBody(v)):"");
+		FindCallerName["caller-code-bodies"]=ReValueObject(globalThis,(v,x)=>Functioned(x)?UnWhitespaceString(FunctionBody(v)):"");
 		FindCallerName["caller-code-bodies"]=FlipKeysValues(FindCallerName["caller-code-bodies"])
 	}
 	if(!code)
@@ -404,9 +404,9 @@ SortObjectKeys=function(Obj){
 SortBy=function(AO){
 //SortBy=function(AO,...Sorters){
 	var Sorters=Rest(Values(arguments));
-	if(IsArray(AO))
+	if(Arrayed(AO))
 		return Apply(function(S){return SortArray(AO,S)},Sorters);
-	if(IsObject(AO))
+	if(Objected(AO))
 		return Apply(function(S){return SortObjectKeys(AO,S)},Sorters);
 	return AO;
 }
@@ -488,25 +488,25 @@ Equal=function(a,b){
 		return true;
 	else if(typeof a!==typeof b)
 		return false;
-	else if(IsNan(a)&&IsNan(b))
+	else if(Naned(a)&&Naned(b))
 		return true;
 	else if((typeof a==="string"&&typeof b==="string")||(typeof a==="boolean"&&typeof b==="boolean"))
 		return a===b;
 	else if((typeof a==="number"&&typeof b==="number"))
 		return (a===Infinity&&b===Infinity)||Abs(b-a)<1e-10;//precision limit
-	else if(IsArray(a)&&IsArray(b))
+	else if(Arrayed(a)&&Arrayed(b))
 		return EqualArray(a,b);
-	else if(IsObject(a)&&IsObject(b))
+	else if(Objected(a)&&Objected(b))
 		return EqualObject(a,b);
 	else if(typeof a==="function"&&typeof b==="function")
 		return EqualFunction(a,b);
-	else if(IsRegex(a)&&IsRegex(b))
+	else if(Regexed(a)&&Regexed(b))
 		return EqualRegex(a,b);
 	else if(a===b)
 		return true;
-	else if(IsNode(a)&&IsNode(b))
+	else if(Noded(a)&&Noded(b))
 		return a.isEqualNode(b);
-	else if(IsDate(a)&&IsDate(b))
+	else if(Dated(a)&&Dated(b))
 		return a===b;
 	else{
 		Warn("check this new case:",a,b);
@@ -545,7 +545,7 @@ UnEqualer=Currier1(UnEqual);
 ArgumentFlattener=function(Operation){
 	var Op=function(){
 		var args=Values(arguments);
-		args=args.map(arr=>IsArray(arr)?Apply(Op,arr):arr)
+		args=args.map(arr=>Arrayed(arr)?Apply(Op,arr):arr)
 		return Operation(args);
 	}
 	return Op;
@@ -559,13 +559,13 @@ Mean=ArgumentFlattener(function(args){return Apply(Plus,args)/args.length})
 BiPlus=function(a,b){
 	if(!b)
 		return a||0;
-	if(IsNumber(a)&&IsNumber(b))
+	if(Numbered(a)&&Numbered(b))
 		return a+b;
-	if(IsArray(a)&&IsArray(b))
+	if(Arrayed(a)&&Arrayed(b))
 		return MapThread(Plus,a,b);
-	else if(IsArray(a))
+	else if(Arrayed(a))
 		return a.map(n=>Plus(b,n));
-	else if(IsArray(b))
+	else if(Arrayed(b))
 		return b.map(n=>Plus(a,n));
 	else{
 		Warn("Plus error",a,b)
@@ -578,13 +578,13 @@ BiTimes=function(a,b){
 		return 1;
 	if(typeof b==="undefined")
 		return a;
-	if(IsNumber(a)&&IsNumber(b))
+	if(Numbered(a)&&Numbered(b))
 		return a*b;
-	if(IsArray(a)&&IsArray(b))
+	if(Arrayed(a)&&Arrayed(b))
 		return MapThread(Times,a,b);
-	else if(IsArray(a))
+	else if(Arrayed(a))
 		return a.map(n=>Times(b,n));
-	else if(IsArray(b))
+	else if(Arrayed(b))
 		return b.map(n=>Times(a,n));
 	else{
 		Wtyp(a,b);
@@ -597,9 +597,9 @@ Times=ArgumentExtender(BiTimes);
 
 
 Symmetric=function(a){
-	if(IsNumber(a))
+	if(Numbered(a))
 		return -a;
-	if(IsArray(a))
+	if(Arrayed(a))
 		return a.map(Symmetric);
 	else{
 		Wtyp(a,b);
@@ -616,9 +616,9 @@ Inverse=function(a){
 		return Infinity;
 	if(a===Infinity)
 		return 0;
-	if(IsNumber(a))
+	if(Numbered(a))
 		return 1/a;
-	if(IsArray(a))
+	if(Arrayed(a))
 		return a.map(Inverse);
 	else{
 		Wtyp(a);
@@ -660,7 +660,7 @@ Smaller=function(n,m){
 
 
 Round=function(n,m){
-	if(IsArray(n))
+	if(Arrayed(n))
 		return n.map(a=>Round(a,m));
 	var m=m||0;
 	return Floor(n*Power(10,m)+0.5)/Power(10,m);
@@ -767,10 +767,10 @@ UnitVector=function(vector){
 // Array, Object, String (SAO)
 
 Length=function(SAO){
-	if(IsArray(SAO)||IsString(SAO)){
+	if(Arrayed(SAO)||Stringed(SAO)){
 		return SAO.length;
 	}
-	if(IsObject(SAO)){
+	if(Objected(SAO)){
 		return Keys(SAO).length;
 	}
 	Wtyp("no string, array or object")
@@ -795,12 +795,12 @@ Length(Identity)
 }
 
 First=function(SAO){
-	if(IsArray(SAO)||IsString(SAO)){
+	if(Arrayed(SAO)||Stringed(SAO)){
 		if(SAO.length)
 			return SAO[0];
 		return null;
 	}
-	if(IsObject(SAO)){
+	if(Objected(SAO)){
 		var k=First(Keys(SAO));
 		return k?SAO[k]:null;
 	}
@@ -818,12 +818,12 @@ null
 }
 
 Last=function(SAO){
-	if(IsArray(SAO)||IsString(SAO)){
+	if(Arrayed(SAO)||Stringed(SAO)){
 		if(SAO.length)
 			return SAO[SAO.length-1];
 		return null;
 	}
-	if(IsObject(SAO)){
+	if(Objected(SAO)){
 		var k=Last(Keys(SAO));
 		return k?SAO[k]:null;
 	}
@@ -841,14 +841,14 @@ null
 }
 
 Rest=function(SAO){
-	if(IsArray(SAO)){
+	if(Arrayed(SAO)){
 		var A=CloneArray(SAO);
 		A.shift();
 		return A;
 	}
-	if(IsObject(SAO))
+	if(Objected(SAO))
 		return FilterKeysObject(SAO,Iner(Rest(Keys(SAO))));
-	if(IsString(SAO))
+	if(Stringed(SAO))
 		return Rest(SAO.split("")).join("");
 	Wtyp("no string, array or object")
 	return null;
@@ -864,14 +864,14 @@ Rest("")
 }
 
 Most=function(SAO){
-	if(IsArray(SAO)){
+	if(Arrayed(SAO)){
 		var A=CloneArray(SAO);
 		A.pop();
 		return A;
 	}
-	if(IsObject(SAO))
+	if(Objected(SAO))
 		return FilterKeysObject(SAO,Iner(Most(Keys(SAO))));
-	if(IsString(SAO))
+	if(Stringed(SAO))
 		return Most(SAO.split("")).join("");
 	Wtyp("no string, array or object")
 	return null;
@@ -887,7 +887,7 @@ Most("")
 }
 
 Take=function(SAO,n){
-	if(IsObject(SAO))
+	if(Objected(SAO))
 		return FilterKeysObject(SAO,Iner(Take(Keys(SAO),n)));
 	if(n<0)
 		return SAO.slice(SAO.length-1*Floor(Abs(n)),SAO.length);
@@ -929,7 +929,7 @@ Take([1,2,3],-1.5)
 }
 
 UnTake=function(SAO,n){
-	if(IsObject(SAO))
+	if(Objected(SAO))
 		return FilterKeysObject(SAO,Iner(UnTake(Keys(SAO),n)));
 	if(n<0)
 		return SAO.slice(0,SAO.length+Ceiling(n));
@@ -1030,38 +1030,38 @@ Iser=function(TypeConstructorName){
 	}
 /*
 not even an argument
-IsArray()
+Arrayed()
 false
 
 empty object
-IsArray({})
+Arrayed({})
 false
 
 empty array
-IsArray([])
+Arrayed([])
 true
 
 empty object
-IsObject({})
+Objected({})
 true
 
 empty array
-IsObject([])
+Objected([])
 false
 
 regex - valid, with flags
-IsRegex(/\d/mig)
+Regexed(/\d/mig)
 true
 
 regex - actually just a string
-IsRegex("/\d/mig")
+Regexed("/\d/mig")
 false
 */
 }
 
-IsArray=Iser("Array");
-IsObject=Iser("Object");
-IsRegex=Iser("RegExp")
+Arrayed=Iser("Array");
+Objected=Iser("Object");
+Regexed=Iser("RegExp")
 
 
 TypeOfer=function(typeName){
@@ -1072,49 +1072,57 @@ TypeOfer=function(typeName){
 	}
 /*
 Empty string
-IsString("")
+Stringed("")
 true
 
 requires an argument
-IsString()
+Stringed()
 false
 
 actual string
-IsString("hi")
+Stringed("hi")
 true
 
 function, named
-IsFunction(IsFunction)
+Functioned(Functioned)
 true
 
 function, anonymous
-IsFunction(x=>x)
+Functioned(x=>x)
 true
 
 number, falsy
-IsNumber(0)
+Numbered(0)
 true
 
 number, nan
-IsNumber(NaN)
+Numbered(NaN)
 true
+
+nan
+Naned(NaN)
+true
+
+no nan
+Naned(0)
+false
 */
 }
 
-IsString=TypeOfer("string");
-IsFunction=TypeOfer("function");
-IsNumber=TypeOfer("number");
+Stringed=TypeOfer("string");
+Functioned=TypeOfer("function");
+Numbered=TypeOfer("number");
 
 
-IsNode=function(node){
+Noded=function(node){
 	return node&&(typeof node==="object")&&node.isEqualNode;
 }
 
-IsNan=function(nan){
+Naned=function(nan){
 	return (typeof nan==="number")&&!(nan<0)&&!(nan===0)&&!(nan>0);
 }
 
-IsDate=function(n){
+Dated=function(n){
 	return n&&(typeof n==="object")&&n.getDate;
 }
 
@@ -1122,18 +1130,18 @@ IsDate=function(n){
 ReArray=function(a){
 	if(typeof a==="undefined")
 		return [];
-	else if(IsArray(a))
+	else if(Arrayed(a))
 		return a;
 	else
 		return [a];
 }
 
 ReString=function(a){
-	if(IsString(a))
+	if(Stringed(a))
 		return `'${a}'`;
-	if(IsArray(a))
+	if(Arrayed(a))
 		return `[${a.map(ReString).join(",")}]`;
-	if(IsObject(a))
+	if(Objected(a))
 		return `{${ThreadKeysValues(a,(k,v)=>(ReString(k)+":"+ReString(v))).join(",")}}`;
 	return String(a);
 
@@ -1221,7 +1229,7 @@ ReKeyObject({a:"1",b:"2",c:"3",d:"4"},(e)=>(e==="e"?"f":e))
 };
 
 ReValueObject=function(Obj,Modifier){//value, then key (optional)
-	if(IsObject(Modifier))
+	if(Objected(Modifier))
 		return ReValueObject(Obj,function(v,k){
 			if(In(Modifier,k)){
 				return Evaluate(Modifier[k],Obj[k])
@@ -1321,9 +1329,9 @@ FilterArray=function(A,Validator){
 }
 
 Filter=function(AO,Validator){
-	if(IsArray(AO))
+	if(Arrayed(AO))
 		return FilterArray(AO,Validator);
-	if(IsObject(AO))
+	if(Objected(AO))
 		return FilterValuesObject(AO,Validator);
 	Wtyp("no object or array");
 	return AO;
@@ -1338,7 +1346,7 @@ TreeKeys=function(Obj,separator){
 	var full=[];
 	var keys=Keys(Obj);
 		keys.map(function(k){
-			if(IsObject(Obj[k]))
+			if(Objected(Obj[k]))
 				full=full.concat(TreeKeys(Obj[k],separator).map(f=>k+separator+f));	
 			else
 				full.push(k);
@@ -1413,7 +1421,7 @@ InLazyString=function(string,n){ //Lazy matching, 1 error
 }
 
 In=function(SAO,n){
-	if(IsArray(SAO)){
+	if(Arrayed(SAO)){
 		var i=0;
 		var l=SAO.length;
 		var found=false;
@@ -1423,9 +1431,9 @@ In=function(SAO,n){
 		}
 		return found;	
 	}
-	if(IsObject(SAO))
+	if(Objected(SAO))
 		return In(Keys(SAO),n);
-	if(IsString(SAO))
+	if(Stringed(SAO))
 		return InString(SAO,n);
 	else {
 		Wtyp("expected string, array or object")
@@ -1500,10 +1508,10 @@ Count=function(array,itemOrF){
 
 ArrayObjectF=function(ArrayF,ObjectF){
 	return function(AOInclude,AOExclude){
-		if(IsArray(AOInclude)&&IsArray(AOExclude))
+		if(Arrayed(AOInclude)&&Arrayed(AOExclude))
 			return ArrayF(AOInclude,AOExclude);
 
-		if(IsObject(AOInclude)&&IsObject(AOExclude))
+		if(Objected(AOInclude)&&Objected(AOExclude))
 			return ObjectF(AOInclude,AOExclude);
 
 		return Wtyp(ArrayF,ObjectF);
@@ -1684,7 +1692,7 @@ ComplementArray([["d","c"],[["b"]],"a"],["c","d",[["b"]]])
 }
 
 ComplementObject=function(objInclude,objExclude){
-	if(typeof objExclude==="undefined"||!IsObject(objInclude)||!IsObject(objExclude))
+	if(typeof objExclude==="undefined"||!Objected(objInclude)||!Objected(objExclude))
 		return objInclude;
 
 	var unique={};
@@ -1720,9 +1728,9 @@ KeysComplementObject=function(keys,Obj){
 
 
 BiComplement=function(AO1,AO2){
-	if(IsArray(AO1)&&IsArray(AO2))
+	if(Arrayed(AO1)&&Arrayed(AO2))
 		return ComplementArray(AO1,AO2);
-	if(IsObject(AO1)&&IsObject(AO2))
+	if(Objected(AO1)&&Objected(AO2))
 		return ComplementObject(AO1,AO2);
 	if(typeof AO2==="undefined")
 		return AO1;
@@ -1880,33 +1888,33 @@ Pick=function(list,order){
 
 TypeCombiners={
 	"Array":{
-		Validate1:IsArray,
-		Validate2:IsArray,
+		Validate1:Arrayed,
+		Validate2:Arrayed,
 		ValidateKey:True,
 		Combine:BiJoinArray
 	},
 	"Evaluate":{
 		Validate1:True,
-		Validate2:IsFunction,
+		Validate2:Functioned,
 		ValidateKey:True,
 		Combine:(SAO1,F2)=>Evaluate(F2,SAO1)
 	},
 	"String":{
-		Validate1:IsString,
-		Validate2:IsString,
+		Validate1:Stringed,
+		Validate2:Stringed,
 		ValidateKey:True,
 		Combine:(S1,S2)=>S1+S2
 	},
 	"Object":{
-		Validate1:IsObject,
-		Validate2:IsObject,
+		Validate1:Objected,
+		Validate2:Objected,
 		ValidateKey:True,
 		Combine:function(O1,O2){return {...O1,...O2}}
 	}
 }
 
 Combiner=function(typeCombiners){
-	if(IsArray(typeCombiners)){
+	if(Arrayed(typeCombiners)){
 		var names=typeCombiners;
 		var	typeCombiners=FilterKeysObject(TypeCombiners,Iner(names))
 	}
@@ -1927,7 +1935,7 @@ Combiner=function(typeCombiners){
 				return typeCombiners[names[i]].Combine(SAO1,SAO2);
 			i++;
 		}
-		if(IsObject(SAO1)&&IsObject(SAO2)){//recursive by default, but this may be overriden
+		if(Objected(SAO1)&&Objected(SAO2)){//recursive by default, but this may be overriden
 			var O=Clone(SAO1);
 			Keys(SAO2).map(
 				function(k){
@@ -2115,7 +2123,7 @@ GatherObject({a:1,b:2,c:3,d:3},x=>x%2)
 }
 
 Gather=function(AO,Equaliser){
-	if(IsObject(AO))
+	if(Objected(AO))
 		return GatherObject(AO,Equaliser);
 	else
 		return GatherArray(AO,Equaliser);
@@ -2149,7 +2157,7 @@ RemoveKeyObject=function(O,key){
 }
 
 Remove=function(AO,key){
-	if(IsObject(AO))
+	if(Objected(AO))
 		return RemoveKeyObject(AO,key);
 	else
 		return RemoveItemArray(AO,key);
@@ -2177,9 +2185,9 @@ AddOnce=function(array,item){
 }
 
 Reverse=function(SAO){
-	if(IsString(SAO))
+	if(Stringed(SAO))
 		return SAO.split("").reverse().join("");
-	else if(IsObject(SAO))
+	else if(Objected(SAO))
 		return ReverseKeysObject(SAO);
 	else
 		return Clone(SAO).reverse();
@@ -2230,9 +2238,9 @@ SubsetObject=function(OSuper,OSub){
 }
 
 Subsetted=function(AOSuper,AOSub){
-	if(IsArray(AOSuper)&&IsArray(AOSub))
+	if(Arrayed(AOSuper)&&Arrayed(AOSub))
 		return SubsetArray(AOSuper,AOSub);
-	if(IsObject(AOSuper)&&IsObject(AOSub))
+	if(Objected(AOSuper)&&Objected(AOSub))
 		return SubsetObject(AOSuper,AOSub);
 	return false;
 /*
@@ -2265,7 +2273,7 @@ SupersetsArray=function(list){
 //Object Arrays (BASE)
 FilterBase=function(Base,GroupObject){
 	var Filterer=GroupObject;
-	if(IsObject(GroupObject))
+	if(Objected(GroupObject))
 		Filterer=function(g){return Subsetted(g,GroupObject)};
 	
 	return Values(FilterValuesObject(Base,Filterer));
@@ -2367,9 +2375,9 @@ CloneArray=function(A){
 }
 
 Clone=function(SAO){
-	if(IsArray(SAO))
+	if(Arrayed(SAO))
 		return CloneArray(SAO);
-	if(IsObject(SAO))
+	if(Objected(SAO))
 		return CloneObject(SAO);
 	return SAO;
 }
@@ -2423,11 +2431,11 @@ StringReplaceRulesObject=function(string,rulesObj){
 StringReplace=function(string,rules){
 	if(typeof rules==="string")
 		return string.replace(rules,"");
-	else if(IsObject(rules)){ //Inversion
+	else if(Objected(rules)){ //Inversion
 		return StringReplaceRulesObject(string,rules);
 	}
-	else if(IsArray(rules)){
-		if(IsArray(rules[0]))
+	else if(Arrayed(rules)){
+		if(Arrayed(rules[0]))
 			return StringReplaceRuleArray(string,rules);
 		else
 			return StringReplaceRule(string,rules);
@@ -2647,7 +2655,7 @@ EscapeTokensString=function(tokenString){
 }
 
 EscapeTokens=function(AS){
-	if(IsArray(AS))
+	if(Arrayed(AS))
 		return Alternate(AS.map(EscapeTokens));
 	return EscapeTokensString(AS);
 }
@@ -2671,7 +2679,7 @@ UnFixer=function(word,sfix,befor,after,flags){
 		var word="";
 	if(!sfix)
 		return word;
-	if(!IsArray(sfix))
+	if(!Arrayed(sfix))
 		var sfix=[sfix];
 	var pattern=new RegExp(befor+"(("+sfix.map(EscapeTokens).join(")|(")+"))+"+after,flags);
 	return word.replace(pattern,"");
@@ -3404,7 +3412,7 @@ PageUnSearch("pedropsi.github.io/console.html?game=2&level=3#tag")
 PageReSearch=function(url,searchstring){
 	if(!searchstring)
 		return url;
-	if(IsObject(searchstring))
+	if(Objected(searchstring))
 		var searchstring=ParameterString(searchstring);
 	var fragment=PageFragment(url);
 	var url=PageUnSearchFragment(url);
@@ -3623,7 +3631,7 @@ SearchParameters=function(searchString){
 }
 
 ReSearchParameters=function(stringOrParams){
-	if(IsString(stringOrParams))
+	if(Stringed(stringOrParams))
 		return SearchParameters(stringOrParams);
 	else
 		return stringOrParams||{};
@@ -4301,23 +4309,23 @@ MakeElement=function(html){
 HTMLTags=['!DOCTYPE','a','abbr','acronym','abbr','address','applet','embed','object','area','article','aside','audio','b','base','basefont','bdi','bdo','big','blockquote','body','br','button','canvas','caption','center','cite','code','col','colgroup','colgroup','data','datalist','dd','del','details','dfn','dialog','dir','ul','div','dl','dt','em','embed','fieldset','figcaption','figure','figure','font','footer','form','frame','frameset','h1','h2','h3','h4','h5','h6','head','header','hr','html','i','iframe','img','input','ins','kbd','label','input','legend','fieldset','li','link','main','map','mark','meta','meter','nav','noframes','noscript','object','ol','optgroup','option','output','p','param','picture','pre','progress','q','rp','rt','ruby','s','samp','script','section','select','small','source','video','audio','span','strike','del','s','strong','style','sub','summary','details','sup','svg','table','tbody','td','template','textarea','tfoot','th','thead','time','title','tr','track','video','audio','tt','u','ul','var','video','wbr'];
 HTMLTags=HTMLTags.map(function(s){return s.toUpperCase()});
 
-IsTag=function(selector){
-	if(!IsString(selector))
+Tagged=function(selector){
+	if(!Stringed(selector))
 		return false;
 	return In(HTMLTags,selector.toUpperCase());
 /*
-IsTag("BODY")
+Tagged("BODY")
 true
 
-IsTag(".random-class")
+Tagged(".random-class")
 false
 
-IsTag("#randomid")
+Tagged("#randomid")
 false
 */
 }
 IsClass=function(selector){
-	if(!IsString(selector))
+	if(!Stringed(selector))
 		return false;
 	return Prefixed(selector,".");
 /*
@@ -4331,32 +4339,32 @@ IsClass("#randomid")
 false
 */
 }
-IsID=function(selector){
-	if(!IsString(selector))
+Ided=function(selector){
+	if(!Stringed(selector))
 		return false;
 	return Prefixed(selector,"#");
 /*
-IsID("BODY")
+Ided("BODY")
 false
 
-IsID(".random-class")
+Ided(".random-class")
 false
 
-IsID("#randomid")
+Ided("#randomid")
 true
 */
 }
 
-IsQuerySelector=function(selector){
-	return IsID(selector)||IsClass(selector)||IsTag(selector);
+Queried=function(selector){
+	return Ided(selector)||IsClass(selector)||Tagged(selector);
 /*
-IsQuerySelector("BODY")
+Queried("BODY")
 true
 
-IsQuerySelector(".random-class")
+Queried(".random-class")
 true
 
-IsQuerySelector("#randomid")
+Queried("#randomid")
 true
 */
 }
@@ -4368,7 +4376,7 @@ ParentSelector=function(targetIDsel){
 }
 
 QuerySelector=function(selector){
-	if(IsQuerySelector(selector))
+	if(Queried(selector))
 		return selector;
 	else
 		return Prefix(selector,"#");
@@ -4478,7 +4486,7 @@ Outside=function(parentSelector,selector){
 
 // Get element based on selectors: .class, tag, or the element itself
 GetElements=function(selector,parentIDsel){
-	if(!selector||!IsString(selector))
+	if(!selector||!Stringed(selector))
 		return [];
 
 	var parent=GetElement(parentIDsel)||document;
@@ -4489,7 +4497,7 @@ GetElements=function(selector,parentIDsel){
 
 // Get Children Elements
 FirstChildren=function(targetIDsel){
-	if(IsArray(targetIDsel))
+	if(Arrayed(targetIDsel))
 		return targetIDsel.map(FirstChildren).flat();
 	var e=GetElement(targetIDsel);
 	if(e)
@@ -4575,7 +4583,7 @@ ElementAdder=function(Adder){
 
 		var e=GetElement(htmlOrElement);
 
-		if(IsString(htmlOrElement)&&!e){
+		if(Stringed(htmlOrElement)&&!e){
 			var id=GenerateId();
 			var e=NewNode(`<div id="${id}"></div>`);
 			Adder(s,e);
@@ -4835,7 +4843,7 @@ FilterSearchURL=function(){
 	var tableid=PageSearch("table");
 	if(tableid==="")									//Get the first table
 		table=GetElement("TABLE");
-	else if(!IsNan(Number(tableid))){ 					//Or the nth table
+	else if(!Naned(Number(tableid))){ 					//Or the nth table
 		tableid=Number(tableid);
 		table=GetElements("TABLE")[tableid];
 		table=table||GetElement("TABLE");
@@ -4891,7 +4899,7 @@ ScrollInto=function(elementIDsel){
 	var e=GetElement(elementIDsel);
 	if(e)
 		ScrollOnto(e);	
-	else if(IsString(elementIDsel)){
+	else if(Stringed(elementIDsel)){
 		e=ClosestFragment(elementIDsel);
 		if(e)
 			ScrollOnto(e);
@@ -4926,7 +4934,7 @@ ElementHTML=function(opts){
 // Basic Elements
 
 SVGObject=function(opts){
-	var path=IsString(opts)?opts:(opts.path||"M 10 10 L 20 10 L 10 20 Z");
+	var path=Stringed(opts)?opts:(opts.path||"M 10 10 L 20 10 L 10 20 Z");
 	
 	var name=opts.name||"unnamed";
 
@@ -4978,7 +4986,7 @@ SetCursor=function(element,nameSO,Opts){
 
 IconEncodedURL=function(nameSO,Opts){
 	var Opts=Opts||{};
-	var Obj=IsString(nameSO)?SymbolIcon(StringSymbol(nameSO)):nameSO;
+	var Obj=Stringed(nameSO)?SymbolIcon(StringSymbol(nameSO)):nameSO;
 	var icon=Merge(SVGObject(Obj),Opts);
 	return SVGEncodedURL(icon);
 }
@@ -5131,10 +5139,10 @@ TRHTML=function(dataArray){
 	if(!dataArray||dataArray.length<1)
 		return "";
 	
-	if(IsString(dataArray))
+	if(Stringed(dataArray))
 		return dataArray;
 
-	if(IsArray(dataArray))
+	if(Arrayed(dataArray))
 		var dataArray=dataArray.map(TDHTML).join("\n");
 	if(dataArray==="\n")
 		return "";
@@ -5146,9 +5154,9 @@ TheadHTML=function(headers){
 	var headersHTML="";
 	if(!headers)
 		return "";
-	if(IsString(headers))
+	if(Stringed(headers))
 		headersHTML=headers;
-	if(IsArray(headers))
+	if(Arrayed(headers))
 		headersHTML="<th>"+headers.join("</th><th>")+"</th>";
 	if(headersHTML)
 		headersHTML=`<thead>${headersHTML}</thead>`;
@@ -5159,9 +5167,9 @@ TbodyHTML=function(rows){
 	var rowsHTML="";
 	if(!rows)
 		return "";
-	if(IsString(rows))
+	if(Stringed(rows))
 		rowsHTML=rows;
-	if(IsArray(rows))
+	if(Arrayed(rows))
 		rowsHTML=rows.map(TRHTML).join("\n")
 	if(rowsHTML)
 		rowsHTML=`<tbody>${rowsHTML}</tbody>`;
@@ -5808,7 +5816,7 @@ Classed=function(selectorE,clas){
 
 Toggle=function(selectorE,clas){
 	var clas=clas||'selected';
-	if(IsString(clas))
+	if(Stringed(clas))
 		clas=[clas];
 	var e=GetElement(selectorE);
 	if(e)
@@ -5934,7 +5942,7 @@ ShowHide=function(selectorE){
 FadeDuration=function(n){
 	if(typeof n==="undefined")
 		return "1s";
-	if(IsNumber(n))
+	if(Numbered(n))
 		return n+"ms";
 	else
 		return n;
@@ -5943,7 +5951,7 @@ FadeDuration=function(n){
 MillisecondsDuration=function(n){
 	if(typeof n==="undefined")
 		return 1000;
-	if(IsNumber(n))
+	if(Numbered(n))
 		return n;
 	else if(Posfixed(n,"ms"))
 		return Number(UnPosfix(n,"ms"));
@@ -6364,7 +6372,7 @@ Hear=function(eventName,F,target){ //execute if heard or keep listening
 
 ListenF=function(EFTC){
 	var EFTC=EFTC;
-	if(!IsArray(EFTC.name))
+	if(!Arrayed(EFTC.name))
 		EFTC.name=[EFTC.name];
 
 	if(!NodejsDetected())
@@ -6867,7 +6875,7 @@ ConsoleMessageHTML=function(message,mID,mclass){
 }
 
 HTMLPattern=function(tags){
-	if(IsString(tags))
+	if(Stringed(tags))
 		var tags=[tags];
 	tags=Alternate(tags.map(Prefixer("?:")));
 	return new RegExp(`\\<(${tags})(?:.|\\n)*\\<\\/\\1\\>`,"mig");
@@ -8014,7 +8022,7 @@ SVGPathApply=function(path,CoordinatesF){
 ViewboxCoordinates=function(viewBox){
 	if(!viewBox)
 		return [0,0,1,1];
-	if(IsArray(viewBox))
+	if(Arrayed(viewBox))
 		return viewBox;
 	return TrimWhitespaceString(viewBox).split(new RegExp(SVGSpacePattern,"g")).map(Number);
 }
@@ -8084,7 +8092,7 @@ SVGPathDirectTransform=function(path,Transform,viewBox){
 }
 
 SVGPathTransform=function(path,nameorf,viewBox){
-	if(!IsString(nameorf))
+	if(!Stringed(nameorf))
 		var Transform=nameorf;
 	else{
 		if(!In(SVGTransforms,nameorf))
@@ -8399,7 +8407,7 @@ StatusReporter=function(name,DefaultStatusReporter){
 ///////////////////////////////////////////////////////////////////////////////
 //Patterns
 WallpaperHTML=function(opts){
-	if(IsString(opts)){
+	if(Stringed(opts)){
 		var w=Wallpaper(opts);
 		w?opts=w:{path:opts}
 	}
@@ -8958,7 +8966,7 @@ Monitor=function(Opts,id){
 	if(!GetElement(".monitor")){
 		AppendToElement(`<div class="monitor" id=${"monitor-"+id}></div>`,"BODY")
 	}
-	if(IsObject(Opts))
+	if(Objected(Opts))
 		report=Keys(Opts).map(name=>`<div><b>${name}:</b>${ReString(Opts[name])}</div>`).join("");
 	else
 		report=ReString(Opts);
@@ -9346,7 +9354,7 @@ Identity has no ascendents
 FunctionDeepAscendents(Identity)
 []
 
-IsObject one direct descendent
+Objected one direct descendent
 FunctionDeepAscendents(function X(){return FunctionName()})
 ["FunctionName"]
 
@@ -9364,7 +9372,7 @@ FunctionDeepAscendents(Iner)
 DefinedFunctionNames={};
 DefinedShout=function(name){
 	DefinedVariableNames[name]=Complement(Object.keys(globalThis),Apply(Join,Values(DefinedVariableNames)));
-	DefinedFunctionNames[name]=DefinedVariableNames[name].filter(varname=>IsFunction(globalThis[varname]));
+	DefinedFunctionNames[name]=DefinedVariableNames[name].filter(varname=>Functioned(globalThis[varname]));
 	Shout(name);
 	DefinedLog(name);
 }

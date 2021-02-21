@@ -210,7 +210,7 @@ if(typeof ObtainCanonicalTitle==="undefined")
 function BestMoves(){
 	if(!BestMoves.moves){
 		BestMoves.moves=LocalStorage("bestmoves");
-		if(IsArray(BestMoves.moves)){
+		if(Arrayed(BestMoves.moves)){
 			BestMoves.moves={};
 			LocalStorage("bestmoves",{});
 		}

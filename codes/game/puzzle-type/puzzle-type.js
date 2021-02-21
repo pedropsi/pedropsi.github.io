@@ -1776,7 +1776,7 @@ function WordTranslations(L,sentence){
 		var goal=CurLevelTitle().toLowerCase();
 		possibilities=possibilities.filter(i=>Prefixed(goal,prefix+i)).concat(possibilities.filter(i=>!Prefixed(goal,prefix+i)))
 		
-		found=(IsArray(possibilities)&&possibilities.length>0);
+		found=(Arrayed(possibilities)&&possibilities.length>0);
 		i++;
 	}
 		
@@ -2394,7 +2394,7 @@ function Caret(position){
 	if(position==="Full")
 		return Caret.array=Range(0,l-1);
 
-	if(IsArray(position))
+	if(Arrayed(position))
 		Caret.array=position;
 	else{
 		var position=Max(-1,Min(position,l));
@@ -3123,7 +3123,7 @@ function AddLetterStroke(L,symbol){
 function AddWordStroke(word,symbol){
 	Keystrokes();
 	word=CleanStroke(word);
-	if(!IsArray(word))
+	if(!Arrayed(word))
 		word=word.split("");
 		word.map(L=>AddLetterStroke(L,symbol));
 }

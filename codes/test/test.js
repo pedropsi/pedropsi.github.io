@@ -1,7 +1,7 @@
 
 SaveTest=function(F,argArray,expected,testname,VerifierF){
 	var callerName=FunctionNamecode(F);
-	var argArray=IsArray(argArray)?argArray:[argArray];
+	var argArray=Arrayed(argArray)?argArray:[argArray];
 	var call=callerName+JSON.stringify(argArray).replace(/^\[/,"(").replace(/\]$/,")")
 
 	UnitTestSave({
@@ -96,23 +96,23 @@ SaveTest(Most,[["a"]],[],"mono-element list");
 
 //Distinguish Objects and Arrays
 
-SaveTest(IsArray,true,false,"boolean - true");
-SaveTest(IsArray,false,false,"boolean -false");
-SaveTest(IsArray,[undefined],false,"no arguments (undefined)");
-SaveTest(IsArray,[["a","b","c","d"]],true,"array - normal");
-SaveTest(IsArray,[[]],true,"array - empty");
-SaveTest(IsArray,{a:"1",b:"2",c:"3",d:"4"},false,"object - normal");
-SaveTest(IsArray,{},false,"object - empty");
-SaveTest(IsArray,"abcd",false,"string");
+SaveTest(Arrayed,true,false,"boolean - true");
+SaveTest(Arrayed,false,false,"boolean -false");
+SaveTest(Arrayed,[undefined],false,"no arguments (undefined)");
+SaveTest(Arrayed,[["a","b","c","d"]],true,"array - normal");
+SaveTest(Arrayed,[[]],true,"array - empty");
+SaveTest(Arrayed,{a:"1",b:"2",c:"3",d:"4"},false,"object - normal");
+SaveTest(Arrayed,{},false,"object - empty");
+SaveTest(Arrayed,"abcd",false,"string");
 
-SaveTest(IsObject,true,false,"boolean - true");
-SaveTest(IsObject,false,false,"boolean -false");
-SaveTest(IsObject,[undefined],false,"no arguments (undefined)");
-SaveTest(IsObject,[["a","b","c","d"]],false,"array - normal");
-SaveTest(IsObject,[[]],false,"array - empty");
-SaveTest(IsObject,{a:"1",b:"2",c:"3",d:"4"},true,"object - normal");
-SaveTest(IsObject,{},true,"object - empty");
-SaveTest(IsObject,"abcd",false,"string");
+SaveTest(Objected,true,false,"boolean - true");
+SaveTest(Objected,false,false,"boolean -false");
+SaveTest(Objected,[undefined],false,"no arguments (undefined)");
+SaveTest(Objected,[["a","b","c","d"]],false,"array - normal");
+SaveTest(Objected,[[]],false,"array - empty");
+SaveTest(Objected,{a:"1",b:"2",c:"3",d:"4"},true,"object - normal");
+SaveTest(Objected,{},true,"object - empty");
+SaveTest(Objected,"abcd",false,"string");
 
 
 //Update Object Keys
