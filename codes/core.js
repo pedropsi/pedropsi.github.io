@@ -3425,8 +3425,11 @@ PageRelativeFolder=function(url){//folder only
 PageShallowPath=function(url){
 	var url=DefaultURL(url);
 		url=Posfix(PageDomain(url),"/")+PageFile(url);
-	return url
+	return url;
 }
+
+HTMLExtensions=[".html",".htm"];
+
 
 PageShallowURL=function(url){
 	return PageProtocol(url)+PageDomain(url)+PageShallowPath(url)+PageSearch(url)+PageFragment(url);

@@ -2005,6 +2005,8 @@ SerialImageCard=function(name,opts){
 	return DynamicText(name,name);
 }
 
+var puzzlePage=UnPosfix(PageShallowPath(),HTMLExtensions);
+
 PuzzlePictureDraw=function(name,puzzle){
 	var target="dynamic-"+KebabCaseString(name);
 	var cla="."+target;
@@ -2017,7 +2019,8 @@ PuzzlePictureDraw=function(name,puzzle){
 	var serialObj=SearchParameters(puzzle.board);
 		serialObj=FilterKeysObject(SearchParameters(puzzle.board),UnEqualer("S"));
 	var metadata=PuzzleParameters(name,puzzle);
-	
+		serialObj=Merge(serialObj,metadata);
+		serialObj.U=puzzlePage;
 	SerialDraw(
 		serialObj,
 		{render:{
