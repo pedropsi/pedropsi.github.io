@@ -311,6 +311,7 @@ Wnet=Warner("network");
 Wbug=Warner("debug");
 
 FindCallerName=function(code){
+	var code=String(code);
 	if(FunctionHead(code))
 		return FunctionHead(code);
 	if(!FindCallerName["caller-code-bodies"]){
