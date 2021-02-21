@@ -388,13 +388,6 @@ SortObjectKeys=function(Obj){
 		return o;
 }
 
-SortObjectValues=function(Obj){
-	var Sorters=Rest(Values(arguments));
-	var sortedkeys=Apply(Sorter,Sorters)(Values(Obj));
-	var o={};
-		sortedkeys.map(k=>o[k]=Obj[k]);
-		return o;
-}
 
 
 SortBy=function(AO){
@@ -2400,12 +2393,6 @@ FirstReplaceString=function(string,ruleArray){
 	return found?replaced:string;
 }
 
-StringPrefixes=function(string){
-	return Range(1,string.length).map(i=>string.slice(0,i))}
-
-StringSuffixes=function(string){
-	var l=string.length;
-	return Range(0,l-1).map(i=>string.slice(i,l))}
 
 ObjectRules=function(Obj){
 	var keys=Keys(Obj);
