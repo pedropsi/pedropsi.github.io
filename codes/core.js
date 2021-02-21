@@ -211,7 +211,16 @@ ArgumentExtender=function(F){ // From pairs to infinite number of arguments
 	}
 }
 
-
+ArgumentSwapper12=function(F){
+	return function(a,b){
+		return F(b,a);
+	}
+/*
+change the evaluation order
+ArgumentSwapper12(In)(1,[1,2])
+true
+*/
+}
 
 
 Currier1=function(F){
