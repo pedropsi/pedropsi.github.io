@@ -328,8 +328,8 @@ var Kudamono={
 	},
 	win:{
 		rule:{
-			minlines:1,
-			maxlines:Infinity,
+			mintracks:1,
+			maxtracks:Infinity,
 			fillgrid:false
 		},
 		grid:{
@@ -714,9 +714,9 @@ StateWon=function(state){
 	
 	var rule=state.win.rule;
 	if(!wrong&&rule){
-		if(!wrong&&rule.minlines&&state.orchard.length<rule.minlines)
+		if(!wrong&&rule.mintracks&&state.orchard.length<rule.mintracks)
 			wrong=true;
-		if(!wrong&&rule.maxlines&&state.orchard.length>rule.maxlines)
+		if(!wrong&&rule.maxtracks&&state.orchard.length>rule.maxtracks)
 			wrong=true;
 		if(!wrong&&rule.fillboard)
 			wrong=!BoardFilled(state);
