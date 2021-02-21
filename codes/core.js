@@ -9009,7 +9009,7 @@ UnitTextUnitTest=function(unitText){
 		return;
 	var lines=unitText.split("\n").filter(Identity);
 		lines=lines.map(TrimWhitespaceString);
-		lines=lines.map(line=>UnPosfix(line,[";",","]));
+		lines=lines.map(UnPosfixer([";",","]));
 	if(lines.length<2){
 		Warn("missing either the call or the expected result",lines,unitText)
 		return {};
@@ -9274,13 +9274,13 @@ FunctionCalledFunctions=function(F){
 	if(callers===null){
 		return [];
 	}
-	callers=callers.map(s=>UnPosfix(s,"("));
+	callers=callers.map(UnPosfixer("("));
 	callers=DistinctArray(callers);
 	return callers;
 /*
 self-inspect
 FunctionCalledFunctions(FunctionCalledFunctions)
-["UnCommentCode","FunctionBody","match","RegExp","if","map","UnPosfix","DistinctArray"]
+["UnCommentCode","FunctionBody","match","RegExp","if","map","UnPosfixer","DistinctArray"]
 */
 }
 
