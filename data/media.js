@@ -148,23 +148,33 @@ MusicCreditsHTML=function(id){
 }
 
 ImageSource=function(ImageObj){
+	if(ImageObj.src&&Prefixed(ImageObj.src,"data:"))
+		return ImageObj.src;
 	var src=ImageObj.src?`images/${ImageObj.src}`:`images/${ImageObj.FOLDER_SMALL||ImageObj.folder||""}/${ImageObj.name||ImageObj.name}`;
 		src=ReSourceExtension(src,ImageExtensions,"png");
 	if(Prefixed(ImageObj.src,"data:"))
 		src=ImageObj.src;
-	return src
+	return src;
 }
 
 ImageHTML=function(ImageObj){
 	var ImageObj=ReKeyObject(ImageObj,LowerCase);
-	if(!ImageObj.lazy)
-		var src=`src="${ImageSource(ImageObj)}"`;
+	var src="";
+	var lazy=`loading="lazy"`;
+	if(Prefixed(ImageObj.src,"data:")){
+		lazy="";
+		src=`src="${ImageObj.src}"`;
+	}else if(!ImageObj.lazy){
+		lazy="";
+		src=`src="${ImageSource(ImageObj)}"`;
+	}
+	var title=ImageObj.description||ImageObj.title||ImageObj.legend||ImageObj.src||"";
 	return `
 	<img
-		alt="${ImageObj.alt||ImageObj.description||ImageObj.src}" 
-		title="${ImageObj.description||ImageObj.title||ImageObj.src}"
+		alt="${ImageObj.alt||title}"
+		title="${title}"
 		class="image"
-		loading="lazy"
+		${lazy}
 		${src}
 		id="${ImageObj.id}"
 	/>`
@@ -177,9 +187,7 @@ LazyImageHTML=function(ImageObj){
 }
 
 I=function(src){
-	if(Prefixed(src,"data:"))
-		return `<img src="${src}"/>`
-	if(!Posfixed(src,ImageExtensions))
+	if(!Posfixed(src,ImageExtensions)&&!Prefixed(src,"data:"))
 		var src=Posfix(src,".png");
 	return LazyImageHTML({src:src});
 }
