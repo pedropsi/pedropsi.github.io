@@ -2742,10 +2742,19 @@ Prefix("rie","Ma")
 prefix already present, don't duplicate
 Prefix("Marie","Ma")
 "Marie"
+
+functional form
+Prefixer("St.")("Mary")
+"St.Mary"
+
+functional form, remove
+UnPrefixer("St.")("St.Mary")
+"Mary"
 */
 }
 
 Prefixer=LastCurrier(Prefix);
+UnPrefixer=LastCurrier(UnPrefix);
 
 Posfix=function(word,suffix){ //suffix
 	if(!word)
@@ -2781,10 +2790,19 @@ Posfix("blue"," button")
 posfix with spaces, a clever regex (present)
 Posfix("blue button"," button")
 "blue button"
+
+functional form
+Posfixer(" Jr.")("John")
+"John Jr."
+
+functional form, remove
+UnPosfixer(" Jr.")("John Jr.")
+"John"
 */
 }
 
 Posfixer=LastCurrier(Posfix);
+UnPosfixer=LastCurrier(UnPosfix);
 
 Exfix=function(word,prefix,suffix){
 	if(!word)
@@ -3155,7 +3173,7 @@ var EnumerationSynonyms={
 EnumerationSynonyms=Merge(EnumerationSynonyms,FlipKeysValues(EnumerationSynonyms));
 
 EnumerateSentence=function(list,and){
-	var list=(list||[]).map(s=>UnPosfix(s,PunctuationSeparCharacters));
+	var list=(list||[]).map(UnPosfixer(PunctuationSeparCharacters));
 	var sentence=Enumerate(list,and||"");
 	if(sentence)
 		sentence=Posfix(sentence,".");
@@ -4682,10 +4700,21 @@ FilterChildren=function(filterF,parentSelector,childSelector,subparentSelector){
 	ApplyOriginalChildren(FilterCh,parentSelector,childSelector,subparentSelector);
 }
 
+InStringer=FirstCurrier(InString);
+
 InSubPart=function(string,subparts){
 	var string=UnWhitespaceString(string);
 	var subparts=AccPermutations(subparts,3).map(p=>p.join(""));
-	return subparts.some(txt=>InString(string,txt));
+	return subparts.some(InStringer(string));
+/*
+matches at least one
+InSubPart("John Doe",["John","Dale"])
+true
+
+ignores whitespaces
+InSubPart("Joh nny",["John"])
+true
+*/
 }
 
 StringsContained=function(strings,patterntxt){
@@ -4695,7 +4724,7 @@ StringsContained=function(strings,patterntxt){
 	var strings=strings.map(LowerSpacedString);
 	var subparts=patterntxt.split(" ").filter(Identity);
 	var whole=UnWhitespaceString(strings.join(""));
-	return strings.some(celltxt=>InSubPart(celltxt,subparts))&&subparts.every(part=>InString(whole,part));
+	return strings.some(celltxt=>InSubPart(celltxt,subparts))&&subparts.every(InStringer(whole));
 }
 
 RowFiltered=function(row,patterntxt){
