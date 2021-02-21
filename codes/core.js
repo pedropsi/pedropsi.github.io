@@ -211,6 +211,14 @@ FirstCurrier=function(F){
 	}
 }
 
+LastCurrier=function(F){
+	return function(secondArgument){
+		return function(firstArgument){
+			return F(firstArgument,secondArgument);
+		}
+	}
+}
+
 Chainer=function(){
 	var Fs=Values(arguments);
 	return function(arg){
@@ -2733,6 +2741,8 @@ Prefix("Marie","Ma")
 */
 }
 
+Prefixer=LastCurrier(Prefix);
+
 Posfix=function(word,suffix){ //suffix
 	if(!word)
 		var word="";
@@ -2769,6 +2779,8 @@ Posfix("blue button"," button")
 "blue button"
 */
 }
+
+Posfixer=LastCurrier(Posfix);
 
 Exfix=function(word,prefix,suffix){
 	if(!word)
