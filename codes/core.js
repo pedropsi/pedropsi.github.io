@@ -203,7 +203,7 @@ LazyPasser=function(F){
 	}
 }
 
-FirstCurrier=function(F){
+Currier1=function(F){
 	return function(firstArgument){
 		return function(secondArgument){
 			return F(firstArgument,secondArgument);
@@ -6857,7 +6857,7 @@ ConsoleMessageHTML=function(message,mID,mclass){
 HTMLPattern=function(tags){
 	if(IsString(tags))
 		var tags=[tags];
-	tags=Alternate(tags.map(t=>Prefix(t,"?:")));
+	tags=Alternate(tags.map(Prefixer("?:")));
 	return new RegExp(`\\<(${tags})(?:.|\\n)*\\<\\/\\1\\>`,"mig");
 }
 
