@@ -8857,7 +8857,10 @@ Monitor=function(Opts,id){
 	if(!GetElement(".monitor")){
 		AppendToElement(`<div class="monitor" id=${"monitor-"+id}></div>`,"BODY")
 	}
-	report=Keys(Opts).map(name=>`<div><b>${name}:</b>${ReString(Opts[name])}</div>`).join("");
+	if(IsObject(Opts))
+		report=Keys(Opts).map(name=>`<div><b>${name}:</b>${ReString(Opts[name])}</div>`).join("");
+	else
+		report=ReString(Opts);
 	ReplaceChildren(report,".monitor");
 }
 
