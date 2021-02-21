@@ -205,7 +205,7 @@ ImageCardHTML=function(ImageObj){
 		var target=v.BLANK()
 	}
 
-	var legend=ImageObj.legend?`<div>${ImageObj.legend}</div>`:"";
+	var legend=ImageObj.legend?`<div class="legend">${ImageObj.legend}</div>`:"";
 	var id=ImageObj.id||GenerateId();
 	
 	var cardTop=`
@@ -213,7 +213,7 @@ ImageCardHTML=function(ImageObj){
 		${LazyImageHTML(ImageObj)}
 	</div>
 	`;
-	return AHTML(cardTop,link,{target:target,id:id,class:"card-supra underborderable"})+legend;
+	return AHTML(cardTop+legend,link,{target:target,id:id,class:"card-supra underborderable"});
 }
 
 LaunchImageModal=function(subfolder,title){
