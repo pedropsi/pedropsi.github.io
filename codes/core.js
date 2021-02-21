@@ -2050,11 +2050,11 @@ StringPermutations=function(string){
 }
 
 //Permutations of a set (enforces uniqueness or sort)
-Permutations=function(array,n,unique){
+Permutations=function(array,n,distinct){
 	if(!array||n===0)
 		return [];
 
-	if(!unique)
+	if(!distinct)
 		var array=Unique(array);
 
 	if(array.length<1)
@@ -2076,12 +2076,34 @@ Permutations=function(array,n,unique){
 	}
 	OuterCombine(pretuples,array,AddTuple);
 	return permutations;
+
+/*
+finds all permutations of length n
+Permutations([1,2,3],2)
+[[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]]
+
+removes duplicates and sorts by default
+Permutations([3,1,2,3,1],1)
+[[1],[2],[3]]
+*/
 }
 
 OuterCombine=function(array1,array2,F){
-	for(var i=0;i<array1.length;i++)
-		for(var j=0;j<array2.length;j++)
-			F(array1[i],array2[j])
+	var ii=[];
+	var jj;
+	for(var i=0;i<array1.length;i++){
+		jj=[];
+		for(var j=0;j<array2.length;j++){
+			jj.push(F(array1[i],array2[j]));
+		}
+		ii.push(jj);
+	}
+	return ii;
+/*
+Combines all pairs
+OuterCombine([1,2,3],[4,5,6],Times)
+[[4,5,6],[8,10,12],[12,15,18]]
+*/
 }
 
 AccPermutations=function(array,n){
