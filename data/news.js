@@ -797,12 +797,12 @@ NewsSources={
 		}
 	},
 	kudamono:{
-		name:"kudamonosData",
+		name:"puzzlesData",
 		source:"https://pedropsi.github.io/kudamono.html",
 		Transformer:PuzzleLinker("kudamono")
 	},
 	bonsai:{
-		name:"bonsaisData",
+		name:"puzzlesData",
 		source:"https://pedropsi.github.io/bonsai.html",
 		Transformer:PuzzleLinker("bonsai")
 	}

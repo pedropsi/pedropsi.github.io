@@ -8,7 +8,7 @@
 ${LoadSource("codes/game/kudamono/kudamono-editor.js"),""}
 
 
-${kudamonosData={
+${puzzlesData={
 	"52-kudamono":{
 		date:"21-02-2021",
 		difficulty:"easy",
@@ -123,16 +123,16 @@ ${kudamonosData={
 	}
 
 	},
-	kudamonos=FilterValuesObject(kudamonosData,o=>(!o.date||Days(StringDate(o.date))>=0)),
-	OnceDelayer(ModalImageFragment)(kudamonos),
+	puzzles=FilterValuesObject(puzzlesData,o=>(!o.date||Days(StringDate(o.date))>=0)),
+	OnceDelayer(ModalImageFragment)(puzzles),
 	""}
 
 <h2>Latest</h2>
-${FolderGalleryHTML(Take(kudamonos,3),"kudamono")}
+${FolderGalleryHTML(Take(puzzles,3),"kudamono")}
 
 ${
-	kudamonosFuture=FilterValuesObject(kudamonosData,o=>(o.date&&Days(StringDate(o.date))<0)),
-	l=Last(kudamonosFuture),
+	puzzlesFuture=FilterValuesObject(puzzlesData,o=>(o.date&&Days(StringDate(o.date))<0)),
+	l=Last(puzzlesFuture),
 	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>${l.legend?(", with <em>"+l.legend):""}</em>!</p>`:""
 }
 <p>Possible future puzzles are listed under ${A("#Fruit Expansions")}, alongside current ${A("#Issues")}. Suggestion? Excited about a particular idea? Do ${v.A_LET_ME_KNOW()}!</p>
@@ -150,7 +150,7 @@ ${I("kudamono/kudamono-issues")}
 ${I("kudamono/kudamono-issues-2")}
 
 <h2>${v.TITLE()} Collection</h2>
-${FolderGalleryHTML(kudamonos,"kudamono")}
+${FolderGalleryHTML(puzzles,"kudamono")}
 
 <h2>Make your own Kudamono</h2>
 <p>Simply download the ${AHTML("Kudamono template.pptx","images/kudamono/Kudamono-template.pptx")}!</p>

@@ -1993,8 +1993,8 @@ IdState=function(id){
 
 InitialisePuzzlePage=function(){
 	AutoInstructions(FruitIcons);
-	if(bonsais)
-		PuzzleGalleryDraw(bonsais)
+	if(typeof puzzles!=="undefined")
+		PuzzleGalleryDraw(puzzles)
 	if(["W","H","G"].some(Iner(PageSearch())))
 		InitialisePuzzle();
 }
