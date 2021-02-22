@@ -1474,7 +1474,7 @@ FilterKeysObject=function(Obj,Validator){
 	if(!Validator)
 		return Obj;
 	var O={};
-	Keys(Obj).filter(KeyerValuer(Obj,Validator)).map(k=>O[k]=Obj[k]);
+	Keys(Obj).filter(KeyerValuer(Obj,Validator)).map(Copier(Obj,O));
 	return O;
 /*
 Simple filter
@@ -1487,7 +1487,7 @@ FilterValuesObject=function(Obj,Validator){
 	if(!Validator)
 		return obj;
 	var O={};
-	Keys(Obj).filter(ValuerKeyer(Obj,Validator)).map(k=>O[k]=Obj[k]);
+	Keys(Obj).filter(ValuerKeyer(Obj,Validator)).map(Copier(Obj,O));
 	return O;
 /*
 Simple filter2
@@ -1519,7 +1519,7 @@ TreeKeys=function(Obj,separator){
 	var keys=Keys(Obj);
 		keys.map(function(k){
 			if(Objected(Obj[k]))
-				full=full.concat(TreeKeys(Obj[k],separator).map(f=>k+separator+f));	
+				full=full.concat(TreeKeys(Obj[k],separator).map(Prefixer(k+separator)));
 			else
 				full.push(k);
 		})
@@ -1748,7 +1748,7 @@ TransformAccesser=function(Dictionary,Transform,Retroform,Failform){
 CanonicalObject=function(Obj,CanonicalName){
 	if(!CanonicalName)
 		return Obj;
-	var keys=Keys(Obj).filter(k=>(k!==CanonicalName(k)));
+	var keys=Keys(Obj).filter(UnEqualiser(CanonicalName,Identity));
 		keys.map(function(k){
 			Obj[CanonicalName(k)]=Obj[k];
 			delete Obj[k];
@@ -2076,7 +2076,22 @@ Pick(["a","b","c"],[3,2,1])
 */
 }
 
+Copier=function(SAOsource,SAOtarget){
+	return function(n){
+		SAOtarget[n]=SAOsource[n];
+		return SAOtarget;
+	}
+/*
+pass values, replacing
+Copier(["a","b","c"],["d","e","f"])(1)
+["d","b","f"]
 
+create new slots
+Copier({a:1,b:2},{b:3})("b")
+{b:2}
+
+*/
+}
 ///////////////////////////////////////////////////////////////////////////////
 //Object combiners - combines objects in a myriad different ways
 
@@ -2522,7 +2537,7 @@ SupersetsArray=function(list){
 FilterBase=function(Base,GroupObject){
 	var Filterer=GroupObject;
 	if(Objected(GroupObject))
-		Filterer=Subsetteder(GroupObject);
+		Filterer=function(g){return Subsetted(g,GroupObject)};
 	return Values(FilterValuesObject(Base,Filterer));
 }
 
@@ -4996,7 +5011,7 @@ InStringer=Cur(1,-1)(InString);
 
 InSubPart=function(string,subparts){
 	var string=UnWhitespaceString(string);
-	var subparts=AccPermutations(subparts,3).map(p=>p.join(""));
+	var subparts=AccPermutations(subparts,3).map(Applier(Fuse));
 	return subparts.some(InStringer(string));
 /*
 matches at least one
@@ -5011,12 +5026,26 @@ true
 
 StringsContained=function(strings,patterntxt){
 	var patterntxt=LowerSpacedString(patterntxt);
-	if(patterntxt.replace(/\s*/g,"")==="")
+	if(UnWhitespaceString(patterntxt)==="")
 		return true;
 	var strings=strings.map(LowerSpacedString);
 	var subparts=patterntxt.split(" ").filter(Identity);
 	var whole=UnWhitespaceString(strings.join(""));
-	return strings.some(celltxt=>InSubPart(celltxt,subparts))&&subparts.every(InStringer(whole));
+	return strings.some(Cur(-1,1)(InSubPart)(subparts))&&subparts.every(InStringer(whole));
+
+/*
+at least one one string matches
+StringsContained(["john fitzpaul","2021","tokyo"],"paul")
+true
+
+all subparts of the patter must match that string
+StringsContained(["john fitzpaul","2021","tokyo"],"john paul")
+true
+
+otherwise there's a problem
+StringsContained(["john fitzpaul","2021","tokyo"],"john fritz")
+false
+*/
 }
 
 
