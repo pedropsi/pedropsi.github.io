@@ -2324,7 +2324,12 @@ RemoveFirst=function(array,item){
 }
 
 RemoveItemArray=function(array,item){
-	return FixedPoint(arr=>RemoveFirst(arr,item),array);
+	return FixedPoint(Cur(-1,1)(RemoveFirst)(item),array);
+/*
+removes all, but keeps order
+RemoveItemArray([1,2,3,1,3,2],1)
+[2,3,3,2]
+*/
 }
 
 RemoveKeyObject=function(O,key){
