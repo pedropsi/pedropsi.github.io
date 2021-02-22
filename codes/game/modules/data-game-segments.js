@@ -99,7 +99,7 @@ SegmentAligned=function(segment1,segment2){
 }
 
 SegmentFollowed=function(segment1,segment2){
-	return SegmentEquidirected(segment1,segment2)&&SegmentTouched(segment1,segment2);
+	return SegmentTouched(segment1,segment2)&&SegmentEquidirected(segment1,segment2);
 }
 
 FuseFollowedSegment=function(segment1,segment2){
