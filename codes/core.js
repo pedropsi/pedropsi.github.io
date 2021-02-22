@@ -2056,7 +2056,7 @@ TypeCombiners={
 		ValidateKey:True,
 		Combine:function(O1,O2){
 			var O=Clone(O1);
-			Keys(O2).map(k=>O[k]=O2[k]);
+			Keys(O2).map(function(k){O[k]=O2[k]});
 			return O;
 		}
 	}
@@ -2215,7 +2215,7 @@ Permutations=function(array,n,distinct){
 	
 	
 	if(n===1)
-		return array.map(a=>[a]);
+		return array.map(function(a){return [a]});
 
 	var permutations=[];
 	var pretuples=Permutations(array,n-1,true);
