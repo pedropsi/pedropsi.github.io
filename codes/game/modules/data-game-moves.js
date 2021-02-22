@@ -215,7 +215,7 @@ function BestMoves(){
 			LocalStorage("bestmoves",{});
 		}
 		else{
-			BestMoves.moves=CanonicalObject(BestMoves.moves,ObtainCanonicalTitle);
+			BestMoves.moves=ReKeyObject(BestMoves.moves,ObtainCanonicalTitle);
 			LocalStorage("bestmoves",BestMoves.moves);
 		}
 	}

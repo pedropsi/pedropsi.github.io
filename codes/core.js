@@ -1759,21 +1759,6 @@ TransformAccesser=function(Dictionary,Transform,Retroform,Failform){
 }
 
 
-CanonicalObject=function(Obj,CanonicalName){
-	if(!CanonicalName)
-		return Obj;
-	var keys=Keys(Obj).filter(UnEqualiser(CanonicalName,Identity));
-		keys.map(function(k){
-			Obj[CanonicalName(k)]=Obj[k];
-			delete Obj[k];
-		})
-	return Obj;
-/*
-CanonicalObject({a:1,d:4},n=>(In(["a"],n)?"b":""))
-{b:1,d:4}
-*/
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 //Set functions
 
