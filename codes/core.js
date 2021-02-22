@@ -638,9 +638,9 @@ BiPlus=function(a,b){
 	if(Arrayed(a)&&Arrayed(b))
 		return MapThread(Plus,a,b);
 	else if(Arrayed(a))
-		return a.map(n=>Plus(b,n));
+		return a.map(Cur(1,-1)(Plus)(b));
 	else if(Arrayed(b))
-		return b.map(n=>Plus(a,n));
+		return b.map(Cur(1,-1)(Plus)(a));
 	else{
 		Warn("Plus error",a,b)
 		return 0;
@@ -658,9 +658,9 @@ BiTimes=function(a,b){
 	if(Arrayed(a)&&Arrayed(b))
 		return MapThread(Times,a,b);
 	else if(Arrayed(a))
-		return a.map(n=>Times(b,n));
+		return a.map(Cur(1,-1)(Times)(b));
 	else if(Arrayed(b))
-		return b.map(n=>Times(a,n));
+		return b.map(Cur(1,-1)(Times)(a));
 	else{
 		Wtyp(a,b);
 		return 1;
