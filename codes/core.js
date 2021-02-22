@@ -4303,7 +4303,12 @@ LoadHTMLObject=function(Obj,Successer){
 		LoadCode(`
 			${name}=${code};
 		`);
-		Successer(globalThis[name]);
+		try{
+			Successer(globalThis[name]);
+		}
+		catch(e){
+			Wnet(name,code,e)
+		}
 	}
 	LoadData(source,Reader);	
 }
