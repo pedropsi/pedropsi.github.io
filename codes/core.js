@@ -279,6 +279,7 @@ true
 */
 }
 
+Cur=Cyr();
 
 Chainer=function(){
 	var Fs=Values(arguments);
