@@ -308,11 +308,11 @@ Ater("a")({a:1})
 1
 
 Arrays, set
-Ater(2,0)(x=[9,8,7]);x
+Ater(2,0)(_x=[9,8,7]);_x
 [9,8,0]
 
 Objects, set
-Ater("a",2)(x={a:1});x
+Ater("a",2)(_x={a:1});_x
 {a:2}
 */
 }
