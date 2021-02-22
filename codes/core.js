@@ -589,13 +589,40 @@ UnEqualer=Cur(1,-1)(UnEqual);
 ///////////////////////////////////////////////////////////////////////////////
 // Math
 
+Ifer=function(Verified,Modify,Keep){
+	var Modify=Modify||Identity;
+	var Keep=Keep||Identity;
+	return function(a){
+		return Verified(a)?Modify(a):Keep(a)
+	}
+}
+
 ArgumentFlattener=function(Operation){
 	var Op=function(){
 		var args=Values(arguments);
-		args=args.map(arr=>Arrayed(arr)?Apply(Op,arr):arr)
+		args=args.map(Ifer(Arrayed,Applier(Op)));
 		return Operation(args);
 	}
 	return Op;
+
+/*
+multiple levels
+Max(0,[1,2],[3,[4]])
+4
+
+infinity
+Min([-Infinity],1)
+-Infinity
+
+equal structure
+Mean([1,2,3],[4,5,6])
+3.5
+
+structure produces different weights
+Mean([1,2,3],[4,5],6)
+4.166666666666667
+
+*/
 }
 
 Max=ArgumentFlattener(Applier(Math.max));
@@ -9446,10 +9473,6 @@ FunctionDeepAscendents(Identity)
 Objected one direct descendent
 FunctionDeepAscendents(function X(){return FunctionName()})
 ["FunctionName"]
-
-Generated functions appear mistaken without dependents
-FunctionDeepAscendents(Iner)
-[]
 */
 }
 
