@@ -2445,8 +2445,25 @@ true
 only partial overlap
 Subsetted({A:1,B:2},{A:1,C:2})
 false
+
+Is the first a Subset of the second?
+Supersetted([1,2],[1,2,3])
+true
+
+Functional form of Subsetted
+Subsetteder([1,2,3])([1])
+true
+
+Functional form of Supersetted
+Supersetteder([1])([1,2,3])
+true
 */
 }
+
+Supersetted=Cur(-2,-1)(Subsetted)();
+
+Subsetteder=Cur(1,-1)(Subsetted);
+Supersetteder=Cur(-1,1)(Subsetted);
 
 SupersetsArray=function(list){
 	return list.filter(item=>Remove(list,item).every(other=>!Subsetted(other,item)));
@@ -2456,8 +2473,7 @@ SupersetsArray=function(list){
 FilterBase=function(Base,GroupObject){
 	var Filterer=GroupObject;
 	if(Objected(GroupObject))
-		Filterer=function(g){return Subsetted(g,GroupObject)};
-	
+		Filterer=Subsetteder(GroupObject);
 	return Values(FilterValuesObject(Base,Filterer));
 }
 
