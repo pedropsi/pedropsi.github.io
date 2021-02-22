@@ -103,6 +103,8 @@
 	line-height:0;
 }
 
-.colophon .authorship .p{
-	padding-right:var(--w4)
+.colophon .authorship p{
+	margin:unset;
+	margin-right:var(--w2);
+	line-height:var(--fontheight);
 }
