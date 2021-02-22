@@ -229,22 +229,25 @@ ArgumentExtender=function(F){ // From pairs to infinite number of arguments
 	}
 }
 
-Cur=function(){
-	var indices=Values(arguments);
-	return function(F){
-		return function(){
-			var fixedArgs=Values(arguments);
+Cyr=function(){
+	var Modifiers=Values(arguments);
+	return function(){
+		var indices=Values(arguments);
+		return function(F){
 			return function(){
-				var freeArgs=Values(arguments);
-				var fullArgs=indices.map(function(i){
-					if(i>0)
-						return fixedArgs[i-1];
-					if(i<0)
-						return freeArgs[-i-1];
-					else
-						return undefined});
-				return Apply(F,fullArgs);
-			}			
+				var fixedArgs=Values(arguments);
+				return function(){
+					var freeArgs=Values(arguments);
+					var fullArgs=indices.map(function(i){
+						if(i>0)
+							return (Modifiers[i-1]||Identity)(fixedArgs[i-1]);
+						if(i<0)
+							return (Modifiers[-i-1]||Identity)(freeArgs[-i-1]);
+						else
+							return undefined});
+					return Apply(F,fullArgs);
+				}			
+			}
 		}
 	}
 /*
@@ -263,6 +266,16 @@ Cur(-2,-1)(Minus)()(10,6)
 currying can be achieved
 Cur(1,-1)(Minus)(10)(6)
 4
+
+
+functions can be passed one level higher
+Cyr(x=>2*x,Identity)(1,2)(Equal)(3,6)()
+true
+
+passing no function causes no modifications
+Cyr()(1,2)(Equal)(6,6)()
+true
+
 */
 }
 
