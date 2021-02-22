@@ -1553,7 +1553,17 @@ InLazyString=function(string,n){ //Lazy matching, 1 error
 		matchers[l+i]=matchers[l+i].join("");
 	}
 
-	return matchers.some(m=>string.replace(m,"")!==string);
+	return matchers.some(function(m){return string.replace(m,"")!==string});
+
+/*
+One error
+InLazyString("banina","banana")
+true
+
+To many errors
+InLazyString("panina","banana")
+false
+*/
 }
 
 In=function(SAO,n){
