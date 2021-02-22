@@ -267,15 +267,6 @@ Cur(1,-1)(Minus)(10)(6)
 }
 
 
-
-Currier2=function(F){
-	return function(secondArgument){
-		return function(firstArgument){
-			return F(firstArgument,secondArgument);
-		}
-	}
-}
-
 Chainer=function(){
 	var Fs=Values(arguments);
 	return function(arg){
@@ -739,7 +730,7 @@ Power(2,3)
 }
 
 PoweredSum=function(vector,power){
-	return Apply(Plus,vector.map(Currier2(Power)(power)));
+	return Apply(Plus,vector.map(Cur(-1,1)(Power)(power)));
 /*
 zero-dimensional
 PoweredSum([],2)
@@ -1563,8 +1554,8 @@ Out(1)
 false
 */
 }
-Outer=Currier2(In);
-UnOuter=Currier2(UnIn);
+Outer=Cur(-1,1)(In);
+UnOuter=Cur(-1,1)(UnIn);
 
 
 Count=function(array,itemOrF){
@@ -2860,8 +2851,8 @@ UnPrefixer("St.")("St.Mary")
 */
 }
 
-Prefixer=Currier2(Prefix);
-UnPrefixer=Currier2(UnPrefix);
+Prefixer=Cur(-1,1)(Prefix);
+UnPrefixer=Cur(-1,1)(UnPrefix);
 
 Posfix=function(word,suffix){ //suffix
 	if(!word)
@@ -2908,8 +2899,8 @@ UnPosfixer(" Jr.")("John Jr.")
 */
 }
 
-Posfixer=Currier2(Posfix);
-UnPosfixer=Currier2(UnPosfix);
+Posfixer=Cur(-1,1)(Posfix);
+UnPosfixer=Cur(-1,1)(UnPosfix);
 
 Exfix=function(word,prefix,suffix){
 	if(!word)
@@ -8302,7 +8293,7 @@ var KeyExplanations={
 KB=function(string,opts){
 	var opts=opts||{};
 	var options=LowerAccesser(MultimediaKeys,ReArray)(string);
-	return Enumerate(options.map(Currier2(KBDHTML)(opts)),"or");
+	return Enumerate(options.map(Cur(-1,1)(KBDHTML)(opts)),"or");
 /*
 multiplex
 KB("click")
