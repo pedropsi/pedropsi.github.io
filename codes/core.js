@@ -586,6 +586,41 @@ Equaler=Cur(1,-1)(Equal);
 UnEqualer=Cur(1,-1)(UnEqual);
 
 
+
+Equaliser=function(StandardiseA,StandardiseB){
+	var StandardiseA=StandardiseA||Identity;
+	var StandardiseB=StandardiseB||StandardiseA||Identity;
+	return function(a,b){
+		if(typeof b==="undefined")
+			var b=a;
+		return Equal(StandardiseA(a),StandardiseB(b))
+	}
+/*
+Checks whether two values are equivalent up to a function
+Equaliser(Symmetric,Identity)(1,-1)
+true
+
+with only one argument, applies the tow functions and compares
+Equaliser(Symmetric,Identity)(0)
+true
+
+If only one function is given, it applies to all
+Equaliser(x=>x*0)(11,222)
+true
+*/
+}
+
+UnEqualiser=function(StandardiseA,StandardiseB){
+	var StandardiseA=StandardiseA||Identity;
+	var StandardiseB=StandardiseB||StandardiseA||Identity;
+	return function(a,b){
+		if(typeof b==="undefined")
+			var b=a;
+		return UnEqual(StandardiseA(a),StandardiseB(b))
+	}
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // Math
 
@@ -1753,14 +1788,14 @@ Unique([[1,2],[1,2]])
 */
 }
 
-DistinctArray=function(A,Equaliser){
-	var Equaliser=Equaliser||Identity;
+DistinctArray=function(A,Standardise){
+	var Standardise=Standardise||Identity;
 	var B=[];
 	var C=[];
 	var i=0;
 	while(i<A.length){
 		var a=A[i];
-		var b=Equaliser(a)
+		var b=Standardise(a)
 		if(!In(B,b)){
 			B.push(b);
 			C.push(a);
@@ -1775,14 +1810,14 @@ DistinctArray([1,2,2,3,3,0,0,0,0])
 */
 }
 
-UnDistinctArray=function(A,Equaliser){
-	var Equaliser=Equaliser||Identity;
+UnDistinctArray=function(A,Standardise){
+	var Standardise=Standardise||Identity;
 	var B=[];
 	var C=[];
 	var i=0;
 	while(i<A.length){
 		var a=A[i];
-		var b=Equaliser(a)
+		var b=Standardise(a)
 		if(!In(B,b))
 			B.push(b);
 		else
@@ -2007,12 +2042,7 @@ Join=ArgumentExtender(BiJoinArray);
 
 
 //Sort and Pick
-Equaliser=function(Standardise){
-	var Standardise=Standardise||Identity;
-	return function(a,b){
-		return Equal(Standardise(a),Standardise(b))
-	}
-}
+
 
 Order=function(canon,list,Standardise){
 	if(!list)
@@ -2297,32 +2327,32 @@ Substrings=function(string){
 
 //Gather Objects
 
-GatherArray=function(Arr,Equaliser){
-	var Equaliser=Equaliser||Identity;
-	var uniquekeys=Unique(Arr.map(Equaliser));
+GatherArray=function(Arr,Standardise){
+	var Standardise=Standardise||Identity;
+	var uniquekeys=Unique(Arr.map(Standardise));
 	var o=[];
-		uniquekeys.map(k=>(o.push(Arr.filter(v=>(Equaliser(v)===k)))));
+		uniquekeys.map(k=>(o.push(Arr.filter(v=>(Standardise(v)===k)))));
 	return o;
 }
 
-GatherObject=function(Obj,Equaliser){
-	var Equaliser=Equaliser||Identity;
-	var uniquekeys=Unique(Values(Obj).map(Equaliser).map(String));
+GatherObject=function(Obj,Standardise){
+	var Standardise=Standardise||Identity;
+	var uniquekeys=Unique(Values(Obj).map(Standardise).map(String));
 	var o={};
-		uniquekeys.map(k=>(o[k]=FilterValuesObject(Obj,v=>(String(Equaliser(v))===k))));
+		uniquekeys.map(k=>(o[k]=FilterValuesObject(Obj,v=>(String(Standardise(v))===k))));
 	return o;
 /*
-Custom equaliser
+Custom Standardise
 GatherObject({a:1,b:2,c:3,d:3},x=>x%2)
 {0:{b:2},1:{a:1,c:3,d:3}}
 */
 }
 
-Gather=function(AO,Equaliser){
+Gather=function(AO,Standardise){
 	if(Objected(AO))
-		return GatherObject(AO,Equaliser);
+		return GatherObject(AO,Standardise);
 	else
-		return GatherArray(AO,Equaliser);
+		return GatherArray(AO,Standardise);
 }
 
 
