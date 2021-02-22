@@ -201,6 +201,24 @@ Empty=function(SAO){
 	return SAO;
 }
 
+
+Keys=function(Obj){
+	return Object.keys(Obj)||[];
+};
+Values=function(Obj){
+	return Object.values(Obj)||[];
+/*
+array of values
+Values({a:1,b:2,c:3,d:4})
+[1,2,3,4]
+
+empty object
+Values({})
+[]
+*/
+};
+
+
 ArgumentExtender=function(F){ // From pairs to infinite number of arguments
 	return function(){
 		var args=Values(arguments);
@@ -211,17 +229,6 @@ ArgumentExtender=function(F){ // From pairs to infinite number of arguments
 	}
 }
 
-ArgumentSwapper12=function(F){
-	return function(a,b){
-		return F(b,a);
-	}
-/*
-change the evaluation order
-ArgumentSwapper12(In)(1,[1,2])
-true
-*/
-}
-
 Cur=function(){
 	var indices=Values(arguments);
 	return function(F){
@@ -229,24 +236,37 @@ Cur=function(){
 			var fixedArgs=Values(arguments);
 			return function(){
 				var freeArgs=Values(arguments);
-				var args=indices.map(i=>i>0?fixedArgs[i]:(i<0?freeArgs[1-i]:undefined));
-				return Apply(F,args);
+				var fullArgs=indices.map(function(i){
+					if(i>0)
+						return fixedArgs[i-1];
+					if(i<0)
+						return freeArgs[-i-1];
+					else
+						return undefined});
+				return Apply(F,fullArgs);
 			}			
 		}
 	}
 /*
-Cur(-2,-1)(Minus)()(4,10)
-6
+fixed arguments have a positive index
+Cur(1,2)(Minus)(10,6)()
+4
+
+free arguments have a negative index (ignore the sign, its the absolute valua that counts)
+Cur(-1,-2)(Minus)()(10,6)
+4
+
+swap arguments
+Cur(-2,-1)(Minus)()(10,6)
+-4
+
+currying can be achieved
+Cur(1,-1)(Minus)(10)(6)
+4
 */
 }
 
-Currier1=function(F){
-	return function(firstArgument){
-		return function(secondArgument){
-			return F(firstArgument,secondArgument);
-		}
-	}
-}
+
 
 Currier2=function(F){
 	return function(secondArgument){
@@ -561,8 +581,8 @@ true
 */
 }
 
-Equaler=Currier1(Equal);
-UnEqualer=Currier1(UnEqual);
+Equaler=Cur(1,-1)(Equal);
+UnEqualer=Cur(1,-1)(UnEqual);
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1215,22 +1235,6 @@ ReString(NaN)
 
 //Objects
 
-Keys=function(Obj){
-	return Object.keys(Obj)||[];
-};
-Values=function(Obj){
-	return Object.values(Obj)||[];
-/*
-array of values
-Values({a:1,b:2,c:3,d:4})
-[1,2,3,4]
-
-empty object
-Values({})
-[]
-*/
-};
-
 
 SortedKeys=function(Obj){
 	return Keys(Obj).sort();
@@ -1353,7 +1357,7 @@ KeyerValuer=function(O,F){
 }
 
 ValuerKeyer=function(O,F){
-	return KeyerValuer(O,ArgumentSwapper12(F));
+	return KeyerValuer(O,Cur(-2,-1)(F)());
 }
 
 FilterKeysObject=function(Obj,Validator){
@@ -1543,8 +1547,8 @@ false
 UnIn=function(SAO,n){
 	return !In(SAO,n);
 }
-Iner=Currier1(In);
-UnIner=Currier1(UnIn);
+Iner=Cur(1,-1)(In);
+UnIner=Cur(1,-1)(UnIn);
 
 
 Out=function(sub,supra){
@@ -4824,7 +4828,7 @@ FilterChildren=function(filterF,parentSelector,childSelector,subparentSelector){
 	ApplyOriginalChildren(FilterCh,parentSelector,childSelector,subparentSelector);
 }
 
-InStringer=Currier1(InString);
+InStringer=Cur(1,-1)(InString);
 
 InSubPart=function(string,subparts){
 	var string=UnWhitespaceString(string);
