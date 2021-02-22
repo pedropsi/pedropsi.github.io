@@ -1426,7 +1426,7 @@ UpdateState=function(substate,options){
 
 StateKeyHandlerer=function(substate){
 	return function(e){
-		var id=TargetState(Spotlight().id).id;
+		var id=TargetState().id;
 		UpdateState(Clone(substate),{id:id});
 	}
 };
@@ -1592,17 +1592,17 @@ XYSegmentsRemove=function(segments,state){
 }
 
 DragActionDrawStarter=function(x,y,w,h,target){
-	UpdateState({mode:{edit:false}},{id:TargetState(target).id});
+	UpdateState({mode:{edit:false}},{id:TargetState().id});
 	DragActionStarter(x,y,w,h,target);
 }
 
 DragActionAltStarter=function(x,y,w,h,target){
-	UpdateState({mode:{edit:Flipped}},{id:TargetState(target).id});
+	UpdateState({mode:{edit:Flipped}},{id:TargetState().id});
 	DragActionStarter(x,y,w,h,target);
 }
 
 DragActionStarter=function(x,y,w,h,target){
-	var state=TargetState(target);
+	var state=TargetState();
 	var dot=CanvasDot(x,y,w,h,state);
 	var xy=dot.xy;
 	if(!PointValid(xy,state))
@@ -1620,7 +1620,7 @@ DragActionStarter=function(x,y,w,h,target){
 		UpdateState({mode:mode},{id:state.id});
 }
 DragActionContinuer=function(x,y,w,h,target){
-	var state=TargetState(target);
+	var state=TargetState();
 	var dot=CanvasDot(x,y,w,h,state);
 	var xy=dot.xy;
 	if(!PointValid(xy,state))
@@ -1642,7 +1642,7 @@ DragActionContinuer=function(x,y,w,h,target){
 		UpdateState({mode:mode},{id:state.id});
 }
 DragActionEnder=function(x,y,w,h,target){
-	var state=TargetState(target);
+	var state=TargetState();
 	var mode=state.mode;
 		mode.dragging=false;
 	var selected=mode.selection||[];
@@ -1808,7 +1808,7 @@ KeyboardFruitsActions=function(state){
 
 FruitCycler=function(n){
 	return function(target){
-		var state=TargetState(target);
+		var state=TargetState();
 		UpdateState(
 			{mode:CycleFruitMode(state,n)},
 			{id:state.id,draw:["force-cursor"]}
@@ -1986,10 +1986,8 @@ var STATES={};
 SaveState=function(state){
 	STATES[state.id]=Clone(state);
 }
-TargetState=function(target){
-	var target=ParentElement(target).id||GetElement(target).id;
-	var state=First(FilterValuesObject(STATES,state=>state.render.main&&state.render.target===target));
-	return state;
+TargetState=function(){
+	return First(FilterValuesObject(STATES,state=>state.render.main));
 }
 
 IdState=function(id){
