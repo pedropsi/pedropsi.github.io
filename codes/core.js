@@ -469,6 +469,16 @@ CycleSort=function(array,Switcher){
 	var l=array.length;
 	var p=MinimalPosition(array,Switcher||Smaller);
 	return array.map((t,j)=>array[(j+p+l)%l]);
+
+/*
+finds the smallest number and cycles from there
+CycleSort([3,8,2,5,1])
+[1,3,8,2,5]
+
+can accept custom orderers
+CycleSort([3,8,2,5,1],(x,y)=>x>y)
+[8,2,5,1,3]
+*/
 }
 
 //Key characters
