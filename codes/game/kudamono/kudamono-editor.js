@@ -1719,6 +1719,14 @@ SegmentsShifter=function(v){
 }
 
 
+BoardRotaterHandlerer=function(wise){
+	return StateKeyHandlerer({
+		level:level=>TransformLevel(level,PointRotator(TargetState().W,TargetState().H,wise)),
+		segments:segments=>segments.map(seg=>seg.map(PointRotator(TargetState().W,TargetState().H,wise)))
+	},{draw:["force-level"]});
+}
+
+
 var ClearBoard=StateKeyHandlerer({segments:[],level:{}});
 var ClearSegments=StateKeyHandlerer({segments:[]});
 var ClearFruit=StateKeyHandlerer({level:{}});
@@ -1772,6 +1780,9 @@ var KeyboardActions=function(){return{
 	"space":StateKeyHandlerer({mode:{edit:Flipped}}),
 	"escape":StateKeyHandlerer({mode:{edit:false}}),
 	"insert":StateKeyHandlerer({mode:{edit:true}}),
+	
+	"r alt"			:BoardRotaterHandlerer(1),
+	"r shift alt"	:BoardRotaterHandlerer(-1),
 
 	"r ctrl"		:ClearSegments,
 	"r ctrl shift"	:ClearFruit,
