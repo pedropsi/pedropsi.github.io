@@ -1719,6 +1719,10 @@ CanonicalObject=function(Obj,CanonicalName){
 			delete Obj[k];
 		})
 	return Obj;
+/*
+CanonicalObject({a:1,d:4},n=>(In(["a"],n)?"b":""))
+{b:1,d:4}
+*/
 }
 
 ///////////////////////////////////////////////////////////////////////////////
