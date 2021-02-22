@@ -222,6 +222,23 @@ true
 */
 }
 
+Cur=function(){
+	var indices=Values(arguments);
+	return function(F){
+		return function(){
+			var fixedArgs=Values(arguments);
+			return function(){
+				var freeArgs=Values(arguments);
+				var args=indices.map(i=>i>0?fixedArgs[i]:(i<0?freeArgs[1-i]:undefined));
+				return Apply(F,args);
+			}			
+		}
+	}
+/*
+Cur(-2,-1)(Minus)()(4,10)
+6
+*/
+}
 
 Currier1=function(F){
 	return function(firstArgument){
