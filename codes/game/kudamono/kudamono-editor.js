@@ -1195,7 +1195,7 @@ SerialState=function(serialObj,state){
 	if(serialObj.s)
 		state.segments=SerialOrchard(serialObj.s,state.H);
 
-	state.metadata=Merge(state.metadata||{},SerialMetadata(serialObj))
+	state.metadata=Merge(state.metadata||{},ParametersMetadata(serialObj))
 	return state;
 }
 
@@ -1211,14 +1211,15 @@ var MetadataAbbreviations={
 
 var AbbreviationsMetadata=FlipKeysValues(MetadataAbbreviations);
 
-SerialMetadata=function(serialObj){
+ParametersMetadata=function(serialObj){
+	var serialObj=ReKeyObject(serialObj,LowerCase);
 	var metadata=IntersectionKeysObject(serialObj,AbbreviationsMetadata);
 		metadata=ReKeyObject(metadata,Accesser(AbbreviationsMetadata));
 		Keys(metadata).map(k=>metadata[k]=decodeURIComponent(metadata[k]));
 	return metadata;
 /*
 sort, ignore capitalised abbreviations, anything not in abbreviations
-SerialMetadata(SearchParameters("a=Name%20Surname&t=Title&etc=not useful"))
+ParametersMetadata(SearchParameters("a=Name%20Surname&t=Title&etc=not useful"))
 {title:"Title",author:"Name Surname"}
 */
 }
@@ -2023,9 +2024,10 @@ PuzzlePictureDraw=function(name,puzzle){
 
 	var serialObj=SearchParameters(puzzle.board);
 		serialObj=FilterKeysObject(SearchParameters(puzzle.board),UnEqualer("S"));
-	var metadata=PuzzleParameters(name,puzzle);
-		serialObj=Merge(serialObj,metadata);
+	var parameters=PuzzleParameters(name,puzzle);
+		serialObj=Merge(serialObj,parameters);
 		serialObj.U=puzzlePage;
+		
 	SerialDraw(
 		serialObj,
 		{render:{
@@ -2036,9 +2038,13 @@ PuzzlePictureDraw=function(name,puzzle){
 		visuals:{solid:true}
 	
 	})
-	var legend=MetadataColophon(metadata);
+	
+	metadata=ParametersMetadata(serialObj);
+	var legend=(metadata.title||"");
+	
 
 	HearElement(cla+" canvas",function(){
+		
 		var uri=FuseCanvasURI(target);
 		var iCard=ImageCardHTML({
 			src:uri,
