@@ -736,14 +736,48 @@ Smaller=function(n,m){
 
 Round=function(n,m){
 	if(Arrayed(n))
-		return n.map(a=>Round(a,m));
+		return n.map(Cur(-1,1)(Round)(m));
 	var m=m||0;
 	return Floor(n*Power(10,m)+0.5)/Power(10,m);
+/*
+no decimal places, down
+Round(12.3456789,0)
+12
+
+no decimal places, up
+Round(98.7654321,0)
+99
+
+3 decimal places, up
+Round(12.3456789,3)
+12.346
+
+3 decimal places, down
+Round(98.7654321,3)
+98.765
+*/
 }
 
 PercentageText=function(n,m){
 	var m=m||0;
 	return ""+Round(n*100,m)+"%";
+/*
+no decimal places, down
+PercentageText(0.123456789)
+"12%"
+
+no decimal places, up
+PercentageText(0.987654321)
+"99%"
+
+3 decimal places, up
+PercentageText(0.123456789,3)
+"12.346%"
+
+3 decimal places, down
+PercentageText(0.987654321,3)
+"98.765%"
+*/
 }
 
 Quotient=function(n,d){
@@ -751,6 +785,15 @@ Quotient=function(n,d){
 }
 Remainder=function(n,d){
 	return Max(n-d*Quotient(n,d),0);
+/*
+integer remainder
+Remainder(8,3)
+2
+
+fractional remainder
+Remainder(8,1.5)
+0.5
+*/
 }
 
 Power=function(n,exp){
@@ -763,6 +806,10 @@ Power(2,0)
 of a positive exponent
 Power(2,3)
 8
+
+of a fractional exponent
+Power(4,1/2)
+2
 */
 }
 
