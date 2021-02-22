@@ -656,12 +656,12 @@ ArgumentFlattener=function(Operation){
 
 /*
 multiple levels
-Max(0,[1,2],[3,[4]])
-4
+Min(4,[3,2],[1,[0]])
+0
 
-infinity
-Min([-Infinity],1)
--Infinity
+infinities
+Max([Infinity],1)
+Infinity
 
 equal structure
 Mean([1,2,3],[4,5,6])
