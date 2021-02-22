@@ -2021,14 +2021,29 @@ Order=function(canon,list,Standardise){
 	return list.map(item=>canon.findIndex(c=>Equaliser(Standardise)(item,c)))
 }
 
-Pick=function(list,order){
-	var picked=[];
-	for(var i=0;i<order.length;i++){
-		var o=order[i];
-		if(0<o<list.length)
-			picked=Append(picked,list[o])
+Getter=function(SAO){
+	return function(n){
+		return SAO[n];
 	}
-	return picked;
+/*
+[2,1,0].map(Getter(["a","b","c"]))
+["c","b","a"]
+*/
+}
+
+Pick=function(list,order){
+	if(!order)
+		return [];
+	return order.map(Getter(list)).filter(UnEqualer(undefined));
+/*
+repeat indices
+Pick(["a","b","c"],[2,2,1])
+["c","c","b"]
+
+absent elements
+Pick(["a","b","c"],[3,2,1])
+["c","b"]
+*/
 }
 
 
@@ -7268,7 +7283,7 @@ SubContext=function(elem){
 	if(!matches.length)
 		return undefined;
 
-	var keyActions=matches.map(k=>bindings[k]);
+	var keyActions=matches.map(Getter(bindings));
 		keyActions=Apply(Group,keyActions);
 
 		keyActions=ReKeyObject(keyActions,ComboKeystring);
