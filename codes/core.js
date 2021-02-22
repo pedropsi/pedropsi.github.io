@@ -2032,19 +2032,23 @@ TypeCombiners={
 		Validate1:True,
 		Validate2:Functioned,
 		ValidateKey:True,
-		Combine:(SAO1,F2)=>Evaluate(F2,SAO1)
+		Combine:function(SAO1,F2){return Evaluate(F2,SAO1);}
 	},
 	"String":{
 		Validate1:Stringed,
 		Validate2:Stringed,
 		ValidateKey:True,
-		Combine:(S1,S2)=>S1+S2
+		Combine:function(S1,S2){return S1+S2;}
 	},
 	"Object":{
 		Validate1:Objected,
 		Validate2:Objected,
 		ValidateKey:True,
-		Combine:function(O1,O2){return {...O1,...O2}}
+		Combine:function(O1,O2){
+			var O=Clone(O1);
+			Keys(O2).map(k=>O[k]=O2[k]);
+			return O;
+		}
 	}
 }
 
