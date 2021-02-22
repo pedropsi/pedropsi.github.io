@@ -3281,7 +3281,7 @@ UnFirstfix("ok!maybe!very!not!useful","!")
 UnInfix=function(word,prefix,suffix){
 	if(!word)
 		return "";
-	return FixedPoint(word=>UnLastfix(word,prefix,suffix),word);
+	return FixedPoint(Cur(-1,1,2)(UnLastfix)(prefix,suffix),word);
 
 /*
 remove all, keep stuff in between
