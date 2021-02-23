@@ -2,6 +2,7 @@ IrregularVerbPasts={
 	"am":"was",
 	"are":"was",
 	"is":"was",
+	"shall":"should",
 
 	"arise":"arose",
 	"awake":"awakened",
