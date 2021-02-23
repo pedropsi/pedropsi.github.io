@@ -798,7 +798,7 @@ NewsSources={
 		}
 	},
 	kudamono:{
-		name:"kudamonoData",
+		name:"kudamonosData",
 		source:"https://pedropsi.github.io/kudamono.html",
 		Transformer:PuzzleNewsObjecter("kudamono")
 	},
