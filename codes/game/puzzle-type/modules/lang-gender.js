@@ -16,6 +16,7 @@ var Gendered={//cherished woman//
 	"horse":"mare",
 	"stallion":"mare",
 	"cock":"hen",
+	"rooster":"hen",
 	"colt":"filly",
 	"stag":"hind",
 	"gander":"goose",
