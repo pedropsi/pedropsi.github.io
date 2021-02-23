@@ -4338,68 +4338,75 @@ var TimeStages={
 	"last":"first",
 	"afterwards":"beforehand",
 	"hereafter":"heretofore",
-
 	// "afterword":"foreword",
-	
 
 	
 	//Temporal adjectives
-	"early":"late",
-	"earliness":"lateness",
-	"contemporary":"historic",
-	"modern":"classical",
-	"recent":"ancient",
-	"coeval":"bygone",
-	"current":"historic",
-	
-	// "latter":"former",
-	"forthcoming":"bygone",
-
-	"cutting edge":"legacy",
 	"old":"new",
+	"bygone":"forthcoming",
+	"late":"early",
+	"lateness":"earliness",
+	"historic":"contemporary",
+	"classical":"modern",
+	"antique":"modern",
+	"vintage":"modern",
+	"retro":"modern",
+	"antiquarian":"modern",
+	"ancient":"recent",
+	"bygone":"coeval",
+	"historic":"current",
+	"ancestral":"current",
+	
+	"history":"news",
+	"heritage":"work",
 
-	//bygone, historic, heritage, antiquarian, traditional, folk, old-world, ancestral, time-honoured, vintage, quaint
-
+	"time-honoured":"innovative",
+	"traditional":"innovative",
+	"tradition":"innovation",
+	"legacy":"cutting edge",
+	
+	// "former":"latter",
+	
 
 	//Astronomy, natural cycles
-	"sunrise":"dawn",
-	"dawn":"morning",
-	"morning":"noon",
-	"noon":"afternoon",
-	"afternoon":"evening",
-	"evening":"dusk",
-	"dusk":"sunset",
-	"sunset":"night",
-	"night":"midnight",
-	"midnight":"wee hours",
-	"wee hours":"sunrise",
+	"dawn":"sunrise",
+	"morning":"dawn",
+	"noon":"morning",
+	"afternoon":"noon",
+	"evening":"afternoon",
+	"dusk":"evening",
+	"sunset":"dusk",
+	"night":"sunset",
+	"midnight":"night",
+	"wee hours":"midnight",
+	"sunrise":"wee hours",
 	
-	"spring":"summer",
-	"summer":"autumn",
-	"autumn":"winter",
-	"winter":"spring",
+	"summer":"spring",
+	"autumn":"summer",
+	"winter":"autumn",
+	"spring":"winter",
 
-	"solstice":"equinox",
 	"equinox":"solstice",
+	"solstice":"equinox",
 	
-	"vernal equinox":"summer solstice",
-	"spring equinox":"summer solstice",
+	"summer solstice":"vernal equinox",
+	"summer solstice":"spring equinox",
 	
-	"autumnal equinox":"winter solstice",
-	"march equinox":"winter solstice",
+	"winter solstice":"autumnal equinox",
+	"winter solstice":"march equinox",
 	
-	"summer solstice":"autumnal equinox",
-	"estival solstice":"autumnal equinox",
-	"midsummer":"autumnal equinox",
+	"autumnal equinox":"summer solstice",
+	"autumnal equinox":"estival solstice",
+	"autumnal equinox":"midsummer",
 
-	"winter solstice":"vernal equinox",
-	"hiernal solstice":"vernal equinox",
-	"hibernal solstice":"vernal equinox",
+	"vernal equinox":"winter solstice",
+	"vernal equinox":"hiernal solstice",
+	"vernal equinox":"hibernal solstice",
 
-	"new moon":"first quarter moon",
-	"first quarter moon":"full moon",
-	"full moon":"third quarter moon",
-	"third quarter moon":"new moon",
+	"first quarter moon":"new moon",
+	"full moon":"first quarter moon",
+	"third quarter moon":"full moon",
+	"new moon":"third quarter moon",
 
 	//Festive dates 
 	//"Xmas":
@@ -4411,9 +4418,13 @@ var TimeStages={
 
 
 HumanStages={
-    "human":"child",
-    "man":"boy",
-    "woman":"girl",
+	"human":"child",
+	"man":"boy",
+	"woman":"girl",
+	"men":"boys",
+	"women":"girls",
+	"lad":"boy",
+	"lass":"girl",
 	"boy":"toddler",
 	"girl":"toddler",
 	
@@ -4433,10 +4444,18 @@ HumanStages={
 
 	"mother":"daughter",
 	"father:":"son",
+	"mama":"daughter",
+	"papa:":"son",
+	"mom":"daughter",
+	"dad:":"son",
 	"grandfather":"father",
 	"grandmother":"mother",
 	"grandpa":"dad",
 	"grandma":"mom",
+	"husband":"fiancé",
+	"wife":"fiancée",
+	"fiancé":"boyfriend",
+	"fiancée":"girlfriend",
 	
 	//Learning
 	"veteran":"newbie",
@@ -4508,7 +4527,7 @@ AnimalStages={
 	"bear":"cub",
 	"bearcat":"pup",
 	"beaver":"pup",
-	"bee":"larva",
+	"bee":"pupa",
 	"beluga":"calf",
 	"binturong":"pup",
 	"bison":"calf",
@@ -4856,7 +4875,21 @@ AnimalStages={
 	"yak":"calf",
 	"yellow jacket":"larva",
 	"zebra":"colt",
-	"zoea":"egg"
+	"zoea":"egg",
+	//(fe)male forms
+	"cob":"cygnet",
+	"pen":"cygnet",
+	"bull":"calf",
+	"cow":"calf",
+	"ox":"calf",
+	"vixen":"kit",
+	"sow":"piglet",
+	"ewe":"lamb",
+	"gander":"gosling",
+	"drone":"pupa",
+	"drake":"duckling",
+	"tiger":"tigress",
+	"lioness":"cub"
 }
 
 
