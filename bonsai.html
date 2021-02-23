@@ -9,7 +9,7 @@ ${LoadSource("codes/game/kudamono/kudamono-editor.js"),""}
 
 
 ${
-	puzzlesData={
+	bonsaisData={
 		"53-Autumn-approaching":{
 			date:"19/03/2021",
 			mdate:"19/02/2021",
@@ -58,7 +58,7 @@ ${
 			board:"W=6&H=5&L=f13w1w7f1f4w1&G=b"
 		}
 	},
-	puzzles=FilterValuesObject(puzzlesData,o=>(!o.date||Days(StringDate(o.date))>=0)),
+	puzzles=FilterValuesObject(bonsaisData,o=>(!o.date||Days(StringDate(o.date))>=0)),
 	OnceDelayer(ModalImageFragment)(puzzles),
 	""}
 
@@ -66,7 +66,7 @@ ${
 ${GalleryHTML(Take(puzzles,3),PlaceholderCarder("card latest"))}
 
 ${
-	puzzlesFuture=FilterValuesObject(puzzlesData,o=>(o.date&&Days(StringDate(o.date))<0)),
+	puzzlesFuture=FilterValuesObject(bonsaisData,o=>(o.date&&Days(StringDate(o.date))<0)),
 	l=Last(puzzlesFuture),
 	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>${l.legend?(", with <em>"+l.legend):""}</em>!</p>`:""
 }
@@ -88,11 +88,11 @@ ${I("bonsai/bonsai-shapes")}
 <p>In this special Bonsai variant, the trunk may be rooted in any of the 4 sides of the board. Hence a single grid gives rise to 4 distinct, unique puzzles!</p>
 
 <h3>An earlier failed attempt</h3>
-<p>Although East and West are not unique, these are still ${AHTML("interesting puzzles","?"+puzzlesData["43-Cardinal"].board)}!</p>
+<p>Although East and West are not unique, these are still ${AHTML("interesting puzzles","?"+bonsaisData["43-Cardinal"].board)}!</p>
 ${I("bonsai/43-bonsai-cardinal.png")}
 
 <h3>A successful attempt</h3>
-<p>${P("knexator","dohz")} confirmed the uniqueness of this puzzle. Play it now in the ${AHTML("Kudamono editor (bonsai mode)","?"+puzzlesData["44-Four-way"].board)}!</p>
+<p>${P("knexator","dohz")} confirmed the uniqueness of this puzzle. Play it now in the ${AHTML("Kudamono editor (bonsai mode)","?"+bonsaisData["44-Four-way"].board)}!</p>
 ${I("bonsai/44-bonsai-four-way.png")}
 
 

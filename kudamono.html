@@ -8,7 +8,7 @@
 ${LoadSource("codes/game/kudamono/kudamono-editor.js"),""}
 
 
-${puzzlesData={
+${kudamonosData={
 	"52-apple-babble":{
 		date:"28/02/2021",
 		mdate:"16/02/2021",
@@ -124,7 +124,7 @@ ${puzzlesData={
 	}
 
 	},
-	puzzles=FilterValuesObject(puzzlesData,o=>(!o.date||Days(StringDate(o.date))>=0)),
+	puzzles=FilterValuesObject(kudamonosData,o=>(!o.date||Days(StringDate(o.date))>=0)),
 	OnceDelayer(ModalImageFragment)(puzzles),
 	""}
 
@@ -132,7 +132,7 @@ ${puzzlesData={
 ${FolderGalleryHTML(Take(puzzles,3),"kudamono")}
 
 ${
-	puzzlesFuture=FilterValuesObject(puzzlesData,o=>(o.date&&Days(StringDate(o.date))<0)),
+	puzzlesFuture=FilterValuesObject(kudamonosData,o=>(o.date&&Days(StringDate(o.date))<0)),
 	l=Last(puzzlesFuture),
 	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>${l.legend?(", with <em>"+l.legend):""}</em>!</p>`:""
 }
