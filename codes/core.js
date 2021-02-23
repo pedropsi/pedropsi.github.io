@@ -4462,7 +4462,8 @@ LoadData=function(url,Successer,header,FailureF){
 // Parsing
 
 IsolateCode=function(code,startstring,endstring){
-	var code=code.split("\n").join("").split(/\n/).join("").split(/\t/).join("");
+	var code=UnCommentCode(code);
+		code=code.split("\n").join("").split(/\n/).join("").split(/\t/).join("");
 	if(startstring)
 		code=UnBeforfix(code,startstring);
 	if(endstring)
