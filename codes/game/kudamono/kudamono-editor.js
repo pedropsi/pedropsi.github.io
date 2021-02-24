@@ -1755,14 +1755,14 @@ CycleFruitMode=function(state,n){
 		mode.sign=Sign(n);
 	}
 	
-	if(mode.sign>0&&index>=0){
+	if(index>=0){
 		mode.fruitIndex=Min(index,fruits.length-1);
 		if(index>=fruits.length)
-			mode.sign=2;	
+			mode.sign=2;
 	}
-	else if(mode.sign<0&&index<=0&&index>-fruits.length-1){
+	else if(index<0){
 		mode.fruitIndex=Max(index,-fruits.length+1);
-		if(index<=-fruits.length)
+		if(index<=-fruits.length+1)
 			mode.sign=-2;		
 	}
 	else{
