@@ -280,9 +280,10 @@ var BlankState={							//default styles applied to all genres
 	level:{},								//pairs symbols with coordinates under them
 	segments:[],							//list of all segments (ungrouped)
 	orchard:[],								//list of all groups of contiguous segments
-	crosses:{
+	auxiliary:{
 		H:[],								//auxiliary crosses, on horizontal midpoints
-		V:[]								//auxiliary crosses, on vertical   midpoints
+		V:[],								//auxiliary crosses, on vertical   midpoints
+		C:[],								//auxiliary dots, on centre points
 	},
 	rules:{									//global rules, applying to all tracks
 		minconnected:2,
@@ -340,7 +341,7 @@ var Kudamono={
 	}
 }
 
-MarkIcons={
+AuxiliaryIcons={
 	"cross":{
 		letter:"x",
 		path:"M 1 0 L 5 4 L 9 0 L 10 1 L 6 5 L 10 9 L 9 10 L 5 6 L 1 10 L 0 9 L 4 5 L 0 1 Z",
@@ -1305,7 +1306,7 @@ DrawableProperties=Join(CompletableProperties,["mode","visuals","win"]);
 StateCombiner=Combiner({
 	"Evaluate":TypeCombiners["Evaluate"],
 	"level":{
-		ValidateKey:Equaler("level"),
+		ValidateKey:Iner(["level","auxiliary"]),
 		Validate1:True,
 		Validate2:True,
 		Combine:(L1,L2)=>L2
@@ -1668,7 +1669,7 @@ DragActionEnder=function(x,y,w,h,target){
 	ClearCanvas(state.render.target+"-overline")
 
 	mode.selection=[];
-	mode.clearing=false;	
+	mode.clearing=false;
 	UpdateState({mode:mode},{id:state.id,draw:["force-level"]})
 }
 
