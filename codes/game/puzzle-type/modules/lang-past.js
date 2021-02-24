@@ -2376,6 +2376,7 @@ EnRegularVerbsInfinitive=[
 	"estimate",
 	"etch",
 	"evacuate",
+	"evade",
 	"evaluate",
 	"evangelize",
 	"evaporate",
