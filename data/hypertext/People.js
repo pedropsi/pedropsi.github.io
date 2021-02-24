@@ -71,7 +71,7 @@ var Contributors={//People
 	"toomblercazz":{alias:"Toombler",ITCH:"toombler"},
 	"zach":{name:"Zachary Barbanell",alias:"TheZachMan",ITCH:"zacharybarbanell"},
 	"norgg":{alias:"Norgg",TWITTER:"Norgg"},
-	"ihnn":{name:"Jeffrey",alias:"IHNN",PERSONAL_PAGE:"https://ihnnpuzzles.blogspot.com",TWITCH:"ihavenonamesda"},
+	"ihnn":{name:"Jeffrey Bardon",alias:"IHNN",PERSONAL_PAGE:"https://ihnnpuzzles.blogspot.com",TWITCH:"ihavenonamesda"},
 	"omnipresentoffee":{alias:"OmnipresentCoffee"},
 	"clickmazes":{name:"Andrea Gilbert",ALIAS:"Clickmazes",PERSONAL_PAGE:"https://clickmazes.com"},
 	"kneeckoh":{alias:"Kneeckoh",TWITTER:"Kneeckoh"},
