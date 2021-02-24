@@ -449,7 +449,7 @@ function ForbidSpaceActions(key){
 		"Loosely less",
 		"Latent clones",
 		"Shepherdess hence unladylike",
-		"Today doves flit before winter",
+		"Today doves flit before sunset",
 		"White chocolate mint",
 		"Nigeria",
 		"Polaris Australis",
@@ -583,7 +583,7 @@ var LevelDifficulty={
 	"Odd":3,
 	"Latent clones":3,
 	"Shepherdess hence unladylike":3,
-	"Today doves flit before winter":4,
+	"Today doves flit before sunset":4,
 	"La rapide surprise":5,
 	"White chocolate mint":2,
 	"Starting buds":5,
@@ -645,7 +645,7 @@ var LanguageLevels=[
 	"Anagram",
 	"Latent clones",
 	"Shepherdess hence unladylike",
-	"Today doves flit before winter",
+	"Today doves flit before sunset",
 	"Starting buds",
 	"La rapide surprise",
 ]
@@ -730,7 +730,7 @@ var LevelGoals=[			//Required types of thinking:
 	
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-	"Today doves flit before winter",	//Keyword, Swap, Retroactive, Language
+	"Today doves flit before sunset",	//Keyword, Swap, Retroactive, Language
 	"La rapide surprise",				//Keyword, Swap, Retroactive, Language
 	"Starting buds",					//Language
 
@@ -781,11 +781,12 @@ var LevelGoalAliases={
 	"Weightier":"Latent Clones",
 	"German Shepherd":"Shepherdess hence unladylike",
 	"Cherished Woman":"Shepherdess hence unladylike",
-	"Playmate resents flit":"Today doves flit before winter",
-	"Store delay corrodes present":"Today doves flit before winter",
-	"Present state delays":"Today doves flit before winter",
-	"Doves flit past":"Today doves flit before winter",
-	"Doves flit before winter":"Today doves flit before winter",
+	"Today doves flit before winter":"Today doves flit before sunset",
+	"Playmate resents flit":"Today doves flit before sunset",
+	"Store delay corrodes present":"Today doves flit before sunset",
+	"Present state delays":"Today doves flit before sunset",
+	"Doves flit past":"Today doves flit before sunset",
+	"Doves flit before winter":"Today doves flit before sunset",
 	"Denebola":"Polaris Australis",
 	"Fuchsia":"White chocolate mint",
 	"White":"White chocolate mint",
@@ -989,7 +990,7 @@ var LevelInstructions={
 		Letters(FirstReplaceString(Word(),GenderReplacementRules));
 		Caret(Infinity);		
 	},
-	"Today doves flit before winter":function(L){
+	"Today doves flit before sunset":function(L){
 		return EndSubstitutor(PastReplacementRules)(L)
 	},
 	"Latent clones":Weightier,
