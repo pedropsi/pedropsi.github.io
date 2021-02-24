@@ -901,7 +901,7 @@ DrawFruits=function(fruit,coordinates,Opts,state){
 StateIndexFruit=function(state){
 	var fruits=Keys(state.fruits);
 	var l=fruits.length;
-	return fruits[Max(0,state.mode.fruitIndex||0)%l];
+	return fruits[Abs(l+state.mode.fruitIndex)%l];
 }
 
 FruitStateIndex=function(fruit,state){
@@ -1741,11 +1741,11 @@ CycleFruitMode=function(state,n){
 	if(Abs(mode.sign)===2){
 		if(Sign(n)===Sign(mode.sign)){//just exited
 			mode.edit=false;
+			mode.fruitIndex=0;
 			return mode;
 		}
 		else{
 			mode.sign=Sign(n);
-			mode.fruitIndex=0;
 			mode.edit=true;
 			return mode;
 		}
