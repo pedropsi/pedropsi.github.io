@@ -1737,14 +1737,34 @@ CycleFruitMode=function(state,n){
 	var mode=Clone(state.mode);
 	var fruits=Keys(state.fruits);
 	var index=(mode.fruitIndex||0)+(n||1);
+	
+	if(Abs(mode.sign)===2){
+		if(Sign(n)===Sign(mode.sign)){//just exited
+			mode.edit=false;
+			return mode;
+		}
+		else{
+			mode.sign=Sign(n);
+			mode.fruitIndex=0;
+			mode.edit=true;
+			return mode;
+		}
+	}
 	if(!mode.edit){
 		mode.edit=true;
 		mode.sign=Sign(n);
 	}
-	if(mode.sign>0&&index>=0)
+	
+	if(mode.sign>0&&index>=0){
 		mode.fruitIndex=Min(index,fruits.length-1);
-	else if(mode.sign<0&&index<=0&&index>-fruits.length-1)
+		if(index>=fruits.length)
+			mode.sign=2;	
+	}
+	else if(mode.sign<0&&index<=0&&index>-fruits.length-1){
 		mode.fruitIndex=Max(index,-fruits.length+1);
+		if(index<=-fruits.length)
+			mode.sign=-2;		
+	}
 	else{
 		mode.edit=false;
 	}
