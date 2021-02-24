@@ -1737,36 +1737,36 @@ CycleFruitMode=function(state,n){
 	var mode=Clone(state.mode);
 	var fruits=Keys(state.fruits);
 	var index=(mode.fruitIndex||0)+(n||1);
+	var l=fruits.length;
 	
-	if(Abs(mode.sign)===2){
-		if(Sign(n)===Sign(mode.sign)){//just exited
-			mode.edit=false;
-			mode.fruitIndex=0;
-			return mode;
-		}
+	if(!mode.exceeded&&!mode.inceeded){
+		if(mode.edit)
+			mode.fruitIndex=Max(0,Min(index,l-1));
 		else{
-			mode.sign=Sign(n);
+			mode.fruitIndex=mode.fruitIndex||0;
 			mode.edit=true;
-			return mode;
+		}
+		mode.exceeded=index>=l;
+		mode.inceeded=index<0;
+		return mode;
+	}
+	if(mode.exceeded){
+		mode.edit=false;
+		if(Sign(n)<0){//going back
+			mode.fruitIndex=l-1;
+			mode.edit=true;
+			mode.exceeded=false;
+			mode.inceeded=false;
 		}
 	}
-	if(!mode.edit){
-		mode.edit=true;
-		mode.sign=Sign(n);
-	}
-	
-	if(index>=0){
-		mode.fruitIndex=Min(index,fruits.length-1);
-		if(index>=fruits.length)
-			mode.sign=2;
-	}
-	else if(index<0){
-		mode.fruitIndex=Max(index,-fruits.length+1);
-		if(index<=-fruits.length+1)
-			mode.sign=-2;		
-	}
-	else{
+	else if(mode.inceeded){
 		mode.edit=false;
+		if(Sign(n)>0){//going back
+			mode.fruitIndex=0;
+			mode.edit=true;
+			mode.exceeded=false;
+			mode.inceeded=false;
+		}
 	}
 	return mode;
 }
