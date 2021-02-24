@@ -1029,8 +1029,8 @@ function EndSubstitutor(ReplacementRules){
 		if(matched){
 			var newword=Word().replace(rule[0],rule[1]);
 			var stem=UnPosfix(rule[0].source,"$");
-			InvalidateScatteredWordstroke(stem);
-			AddStrokeUnderline(rule[1]);
+			ScatteredWordstroke(stem,UnderlineStroke,StrokeUnderlined);
+			AddStrokeInvalid(rule[1]);
 		}
 		Letters(newword);
 		Caret(Infinity);
@@ -3228,7 +3228,7 @@ function UnderlineWordstroke(word){
 	ModifyStroke(word,"*");
 }
 
-function InvalidateScatteredWordstroke(word){
+function ScatteredWordstroke(word,Modifier,Modified){
 	var keystrokes=Keystrokes();
 	var o=0;
 	var s=0;
@@ -3236,12 +3236,12 @@ function InvalidateScatteredWordstroke(word){
 	while((o+s<keystrokes.length)&&o<word.length){
 		k=keystrokes.length-1-o-s;
 		w=word.length-1-o;
-		while(StrokeInvalid(keystrokes[k])){
+		while(Modified(keystrokes[k])){
 			s++;
 			k=keystrokes.length-1-o-s;
 		}
 		if(word[w]===CleanStroke(keystrokes[k]))
-			keystrokes[k]=InvalidateStroke(keystrokes[k])
+			keystrokes[k]=Modifier(keystrokes[k])
 		o++
 	}
 	Keystrokes.array=keystrokes;
