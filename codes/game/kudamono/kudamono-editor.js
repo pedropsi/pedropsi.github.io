@@ -1736,9 +1736,18 @@ var ClearFruit=StateKeyHandlerer({level:{}});
 CycleFruitMode=function(state,n){
 	var mode=Clone(state.mode);
 	var fruits=Keys(state.fruits);
-	if(!mode.edit)
+	var index=(mode.fruitIndex||0)+(n||1);
+	if(!mode.edit){
 		mode.edit=true;
-	mode.fruitIndex=(fruits.length+(mode.fruitIndex||0)+(n||1))%fruits.length;
+		mode.sign=Sign(n);
+	}
+	if(mode.sign>0&&index>=0)
+		mode.fruitIndex=Min(index,fruits.length-1);
+	else if(mode.sign<0&&index<=0&&index>-fruits.length-1)
+		mode.fruitIndex=Max(index,-fruits.length+1);
+	else{
+		mode.edit=false;
+	}
 	return mode;
 }
 
@@ -1872,7 +1881,7 @@ CanvasResizer=function(state){
 
 ControlsBind=function(state){
 	AttendDrag(DragActions,state.render.target);
-	AttendWheel(WheelActions,state.render.target,75);
+	AttendWheel(WheelActions,state.render.target,0);
 
 	Attend('resize',CanvasResizer(state));
 
