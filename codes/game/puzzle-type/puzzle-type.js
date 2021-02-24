@@ -990,10 +990,7 @@ var LevelInstructions={
 		Caret(Infinity);		
 	},
 	"Today doves flit before winter":function(L){
-		InputLetterAfter(L);
-		AddStrokeValid(L);
-		Letters(FirstReplaceString(Word(),PastReplacementRules));
-		Caret(Infinity);		
+		return EndSubstitutor(PastReplacementRules)(L)
 	},
 	"Latent clones":Weightier,
 	"Starting buds":StartingBuds,
@@ -1015,6 +1012,31 @@ var LevelInstructions={
 	"Genetic.":Genetic,
 	"Wasd":Wasd
 }
+
+function EndSubstitutor(ReplacementRules){
+	return function(L){
+		InputLetterAfter(L);
+		AddStrokeValid(L);
+		var word=Word();
+		var matched=false;
+		var i=0;
+		var rule;
+		while(!matched&&i<ReplacementRules.length){
+			rule=ReplacementRules[i];
+			matched=!!(word.match(rule[0]));
+			i++;
+		}
+		if(matched){
+			var newword=Word().replace(rule[0],rule[1]);
+			var stem=UnPosfix(rule[0].source,"$");
+			InvalidateScatteredWordstroke(stem);
+			AddStrokeUnderline(rule[1]);
+		}
+		Letters(newword);
+		Caret(Infinity);
+	}		
+}
+
 
 function Wasd(L){
 	if(!In("WASD",L)&&!In(ArrowKeys,L)){
@@ -3199,6 +3221,26 @@ function UnderlineWordstroke(word){
 	ModifyStroke(word,"*");
 }
 
+function InvalidateScatteredWordstroke(word){
+	var keystrokes=Keystrokes();
+	var o=0;
+	var s=0;
+	var k;
+	while((o+s<keystrokes.length)&&o<word.length){
+		k=keystrokes.length-1-o-s;
+		w=word.length-1-o;
+		while(StrokeInvalid(keystrokes[k])){
+			s++;
+			k=keystrokes.length-1-o-s;
+		}
+		if(word[w]===CleanStroke(keystrokes[k]))
+			keystrokes[k]=InvalidateStroke(keystrokes[k])
+		o++
+	}
+	Keystrokes.array=keystrokes;
+}
+
+
 function LastSeparatorIndex(array){
 	var i=Reverse(array).indexOf(separator);
 	if(i===-1)
@@ -3264,7 +3306,6 @@ function LevelHighlightableWords(title){
 		"Odd":["Odd","Even"],
 		"Latent clones":NumberNames,
 		"Shepherdess hence unladylike":GenderedMale,
-		"Today doves flit before winter":HighlightablePast,
 		"White chocolate mint":ColourNames,
 		"Just cut and paste":["cut","copy","paste"],
 		"Order is all":["is"]

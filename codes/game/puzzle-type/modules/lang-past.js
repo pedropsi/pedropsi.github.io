@@ -1598,7 +1598,7 @@ EnRegularVerbsInfinitive=[
 	"bifurcate",
 	"bill",
 	"billow",
-	"bitch",
+	//"bitch",
 	"blacken",
 	"blame",
 	"blanch",
@@ -4025,6 +4025,7 @@ EnRegularVerbsInfinitive=[
 	"temper",
 	"temporize",
 	"tempt",
+	"tend",
 	"tenant",
 	"tense",
 	"tergiversate",
@@ -4734,6 +4735,7 @@ AnimalStages={
 	"myna":"hatchling",
 	"narwhal":"calf",
 	"newt":"eft",
+	"eft":"tadpole",
 	"nightingale":"chick",
 	"nilgai":"calf",
 	"nymph":"larva",
@@ -4910,7 +4912,7 @@ var PastReplacementRules=LongestSorter(Keys(PastWords)).map(
 PastReplacementRules=Join(VerbPastTenseReplacementRules,PastReplacementRules);
 PastReplacementRules=Sorter(rule=>-rule[0].source.length)(PastReplacementRules);
 
-var HighlightablePast=LongestSorter(Join(Keys(PastWords),EnVerbsInfinitive));
+//var HighlightablePast=LongestSorter(Join(Keys(PastWords),EnVerbsInfinitive));
 
 
 DefinedShout("lang-past");
