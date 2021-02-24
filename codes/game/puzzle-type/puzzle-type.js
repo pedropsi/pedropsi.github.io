@@ -2617,10 +2617,17 @@ function DrawKeystrokes(){
 }
 
 function KeystrokeHTML(K){
-	var type=StrokeInvalid(K)?"invalid":(StrokeUnderlined(K)?"combo":"valid");
+	var styles="";
+	if(StrokeInvalid(K))
+		styles+=" keystroke-invalid";
+	else
+		styles+=" keystroke-valid";
+	if(StrokeUnderlined(K))
+		styles+=" keystroke-combo";
+
 	var K=CleanStroke(K);
 		K=ObtainSymbol(K);//replace with icon, if available
-	return `<span class="keystroke keystroke-${type}">${K}</span>`;
+	return `<span class="keystroke ${styles}">${K}</span>`;
 }
 
 function DrawLevel(){
