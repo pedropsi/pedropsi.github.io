@@ -669,12 +669,10 @@ SemiRegularVerbPasts={
 	"fin":"finned",
 	"fit":"fitted",
 	"flag":"flagged",
-	"flam":"flammed",
 	"flannel":"flannelled",
 	"flap":"flapped",
 	"flat":"flatted",
 	"flee":"fled",
-	"flimflam":"flimflammed",
 	"flip":"flipped",
 	"flit":"flitted",
 	"flog":"flogged",
@@ -4327,38 +4325,54 @@ var	VerbPastTenseReplacementRules=LongestSorter(EnVerbsInfinitive).map(
 var TimeStages={
 	"present":"past",
 	"future":"present",
+
 	"now":"then",
+
 	"today":"yesterday",
 	"tomorrow":"today",
-	"tonight":"yestereve",
-	"tonight":"yestermorn",
+
+	"tonight":"last night",
+
+//	"yestereve","yestermorn"
 	"this year":"yesteryear",
 	"this week":"yesterweek",
 	"this month":"yestermonth",
 
 	"next":"previous",
 	"after":"before",
-	"last":"first",
 	"afterwards":"beforehand",
 	"hereafter":"heretofore",
 	// "afterword":"foreword",
 
-	
+	"latter":"former",
+	"hindmost":"foremost",
+	"closing":"opening",
+	"ending":"beginning",
+	"concluding":"beginning",
+	"final":"initial",
+
+	"last":"first",
+	"late":"early",
+	"later":"earlier",
+	"lateness":"earliness",
+
 	//Temporal adjectives
 	"old":"new",
 	"bygone":"forthcoming",
-	"late":"early",
-	"lateness":"earliness",
 	"historic":"contemporary",
+	"ancestral":"coeval",
 	"classical":"modern",
-	"antique":"modern",
-	"vintage":"modern",
+	"antique":"recent",
+	"vintage":"latest",
 	"retro":"modern",
 	"antiquarian":"modern",
-	"ancient":"recent",
-	"bygone":"coeval",
-	"historic":"current",
-	"ancestral":"current",
+	"ancient":"current",
+
+	"dead":"alive",
+	"death":"life",
+	"died":"lived",
+
+	"senescence":"growth",
 	
 	"history":"news",
 	"heritage":"work",
@@ -4368,43 +4382,101 @@ var TimeStages={
 	"tradition":"innovation",
 	"legacy":"cutting edge",
 	
-	// "former":"latter",
-	
+
+	// "matutinal":"crepuscular",
+	// "diurnal":"nocturnal",
+	// "nocturnal":"crepuscular",
+
+	//Meal times
+	"elevenses":"breakfast",
+	"lunch":"elevenses",
+	"tea":"lunch",
+	"supper":"tea",
+	"dinner":"supper",
 
 	//Astronomy, natural cycles
-	"dawn":"sunrise",
-	"morning":"dawn",
+	"sunrise":"dawn",
+	"sunup":"dawn",
+
+	"morning":"sunrise",//"morn"
+	"midmorning":"sunrise",
+	"forenoon":"sunrise",
+
 	"noon":"morning",
+	"midday":"morning",
+	"noontime":"morning",
+	"high noon":"morning",
+
 	"afternoon":"noon",
-	"evening":"afternoon",
-	"dusk":"evening",
-	"sunset":"dusk",
-	"night":"sunset",
-	"midnight":"night",
-	"wee hours":"midnight",
-	"sunrise":"wee hours",
+	"midafternoon":"noon",
+	"arvo":"noon",
+	"lunch hour":"noon",
+	"teatime":"lunchtime",
 	
+	"sunset":"afternoon",
+	"sundown":"afternoon",
+
+	"evening":"sunset",	//"eve"
+	"eventide":"sunset",
+	"happy hour":"sunset",
+	"nightfall":"sunset",
+	"dusk":"sunset",
+
+	"nite":"evening",
+	"night":"evening",
+	"nighttime":"evening",
+
+	"midnight":"night",
+	"witching hour":"night",
+
+	"early hours":"midnight",
+	"small hours":"midnight",
+	"wee hours":"midnight",
+
+	"dawn":"early hours",
+	"daybreak":"early hours",
+	"cockrow":"early hours",
+	"first light":"early hours",
+	
+
+	//seasons
 	"summer":"spring",
 	"autumn":"summer",
 	"winter":"autumn",
 	"spring":"winter",
 
-	"equinox":"solstice",
-	"solstice":"equinox",
-	
+	"estival":"vernal",
+	"aestival":"vernal",
+	"autumnal":"estival",
+	"brumal":"autumnal",
+	"vernal":"brumal",
+
+	"summery":"springlike",
+	"fall-like":"summery",
+	"wintry":"fall-like",
+	"springlike":"wintry",
+
 	"summer solstice":"vernal equinox",
-	"summer solstice":"spring equinox",
+	"midsummer":"vernal equinox",
+	"june solstice":"vernal equinox",
+	"estival solstice":"vernal equinox",
+	"aestival solstice":"vernal equinox",
+
+	"autumnal equinox":"summer solstice",
+	"fall equinox":"summer solstice",
+	"autumn equinox":"summer solstice",
+	"september equinox":"summer solstice",
 	
 	"winter solstice":"autumnal equinox",
-	"winter solstice":"march equinox",
-	
-	"autumnal equinox":"summer solstice",
-	"autumnal equinox":"estival solstice",
-	"autumnal equinox":"midsummer",
+	"midwinter":"autumnal equinox",
+	"december solstice":"autumnal equinox",
+	"hiernal solstice":"autumnal equinox",
+	"hibernal solstice":"autumnal equinox",
 
 	"vernal equinox":"winter solstice",
-	"vernal equinox":"hiernal solstice",
-	"vernal equinox":"hibernal solstice",
+	"spring equinox":"winter solstice",
+	"march equinox":"winter solstice",
+
 
 	"first quarter moon":"new moon",
 	"full moon":"first quarter moon",
@@ -4446,11 +4518,11 @@ HumanStages={
 	"ancestor":"descendant",
 
 	"mother":"daughter",
-	"father:":"son",
+	"father":"son",
 	"mama":"daughter",
-	"papa:":"son",
+	"papa":"son",
 	"mom":"daughter",
-	"dad:":"son",
+	"dad":"son",
 	"grandfather":"father",
 	"grandmother":"mother",
 	"grandpa":"dad",
@@ -4891,7 +4963,7 @@ AnimalStages={
 	"gander":"gosling",
 	"drone":"pupa",
 	"drake":"duckling",
-	"tiger":"tigress",
+	"tigress":"cub",
 	"lioness":"cub",
 
 	//more birds
