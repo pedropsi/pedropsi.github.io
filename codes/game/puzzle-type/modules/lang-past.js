@@ -4374,8 +4374,8 @@ var TimeStages={
 
 	"senescence":"growth",
 	
-	"history":"news",
-	"heritage":"work",
+	//"history":"news",
+	//"heritage":"work",
 
 	"time-honoured":"innovative",
 	"traditional":"innovative",

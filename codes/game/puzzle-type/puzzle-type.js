@@ -449,7 +449,7 @@ function ForbidSpaceActions(key){
 		"Loosely less",
 		"Latent clones",
 		"Shepherdess hence unladylike",
-		"Today doves flit before sunset",
+		"June got before late summer",
 		"White chocolate mint",
 		"Nigeria",
 		"Polaris Australis",
@@ -583,7 +583,7 @@ var LevelDifficulty={
 	"Odd":3,
 	"Latent clones":3,
 	"Shepherdess hence unladylike":3,
-	"Today doves flit before sunset":4,
+	"June got before late summer":4,
 	"La rapide surprise":5,
 	"White chocolate mint":2,
 	"Starting buds":5,
@@ -645,7 +645,7 @@ var LanguageLevels=[
 	"Anagram",
 	"Latent clones",
 	"Shepherdess hence unladylike",
-	"Today doves flit before sunset",
+	"June got before late summer",
 	"Starting buds",
 	"La rapide surprise",
 ]
@@ -730,7 +730,7 @@ var LevelGoals=[			//Required types of thinking:
 	
 	"Latent clones",					//Keyword, Increment, Retroactive, Language
 	"Shepherdess hence unladylike",		//Keyword, Swap, Retroactive, Language
-	"Today doves flit before sunset",	//Keyword, Swap, Retroactive, Language
+	"June got before late summer",	//Keyword, Swap, Retroactive, Language
 	"La rapide surprise",				//Keyword, Swap, Retroactive, Language
 	"Starting buds",					//Language
 
@@ -781,12 +781,13 @@ var LevelGoalAliases={
 	"Weightier":"Latent Clones",
 	"German Shepherd":"Shepherdess hence unladylike",
 	"Cherished Woman":"Shepherdess hence unladylike",
-	"Today doves flit before winter":"Today doves flit before sunset",
-	"Playmate resents flit":"Today doves flit before sunset",
-	"Store delay corrodes present":"Today doves flit before sunset",
-	"Present state delays":"Today doves flit before sunset",
-	"Doves flit past":"Today doves flit before sunset",
-	"Doves flit before winter":"Today doves flit before sunset",
+	"Today doves flit before sunset":"June got before late summer",
+	"Today doves flit before winter":"June got before late summer",
+	"Playmate resents flit":"June got before late summer",
+	"Store delay corrodes present":"June got before late summer",
+	"Present state delays":"June got before late summer",
+	"Doves flit past":"June got before late summer",
+	"Doves flit before winter":"June got before late summer",
 	"Denebola":"Polaris Australis",
 	"Fuchsia":"White chocolate mint",
 	"White":"White chocolate mint",
@@ -985,12 +986,9 @@ var LevelInstructions={
 		AddStrokeValid(L);
 	},
 	"Shepherdess hence unladylike":function(L){
-		InputLetterAfter(L);
-		AddStrokeValid(L);
-		Letters(FirstReplaceString(Word(),GenderReplacementRules));
-		Caret(Infinity);		
+		return EndSubstitutor(GenderReplacementRules)(L)	
 	},
-	"Today doves flit before sunset":function(L){
+	"June got before late summer":function(L){
 		return EndSubstitutor(PastReplacementRules)(L)
 	},
 	"Latent clones":Weightier,
@@ -1031,7 +1029,7 @@ function EndSubstitutor(ReplacementRules){
 			var newword=Word().replace(rule[0],rule[1]);
 			var stem=UnPosfix(rule[0].source,"$");
 			ScatteredWordstroke(stem,UnderlineStroke,StrokeUnderlined);
-			AddStrokeInvalid(rule[1]);
+			AddStrokeReduced(rule[1]);
 		}
 		Letters(newword);
 		Caret(Infinity);
@@ -2625,6 +2623,8 @@ function KeystrokeHTML(K){
 		styles+=" keystroke-valid";
 	if(StrokeUnderlined(K))
 		styles+=" keystroke-combo";
+	if(StrokeReduced(K))
+		styles+=" keystroke-reduced";
 
 	var K=CleanStroke(K);
 		K=ObtainSymbol(K);//replace with icon, if available
@@ -2773,7 +2773,7 @@ WinPassers={
 }
 
 function ObtainWonMoves(){
-	return Keystrokes().map(CleanStroke).join("");
+	return Keystrokes().filter(s=>!StrokeReduced(s)).map(CleanStroke).join("");
 }
 
 function CheckWin(){
@@ -3165,7 +3165,7 @@ function AddStroke(L,symbol){
 var separator=StringSymbol("interpunkt");
 
 function CleanStroke(L){
-	return L.replace(/\*|\-|\~/g,"");
+	return L.replace(/\*|\-|\~|!/g,"");
 }
 function ValidateStroke(L){
 	return CleanStroke(L);
@@ -3206,6 +3206,10 @@ function StrokeInvalid(L){
 function StrokeUnderlined(L){
 	return UnUnderlineStroke(L)!==L;
 }
+function StrokeReduced(L){
+	return InString(L,"!");
+}
+
 
 function AddStrokeSeparator(){
 	var l=Keystrokes().length;
@@ -3223,6 +3227,10 @@ function AddStrokeInvalid(L){
 function AddStrokeUnderline(L){
 	var L=L.replace(" ","_");
 	AddStroke(L,"*");
+}
+function AddStrokeReduced(L){
+	var L=L.replace(" ","_");
+	AddStroke(L,"!");
 }
 
 function UnderlineWordstroke(word){
@@ -3313,7 +3321,7 @@ function LevelHighlightableWords(title){
 		"Ironclad":NucleiNames,
 		"Odd":["Odd","Even"],
 		"Latent clones":NumberNames,
-		"Shepherdess hence unladylike":GenderedMale,
+		//"Shepherdess hence unladylike":GenderedMale,
 		"White chocolate mint":ColourNames,
 		"Just cut and paste":["cut","copy","paste"],
 		"Order is all":["is"]
@@ -3333,7 +3341,7 @@ function HighlightableWords(title){
 function ExtractKeystrokes(el){
 	var parent=ParentElement(el,".keystrokes");
 	var strokes=GetElements(".keystroke",parent);
-		strokes=strokes.filter(s=>!Classed(s,"keystroke-invalid")&&SelectedNode(s));
+		strokes=strokes.filter(s=>!Classed(s,"keystroke-invalid")&&!Classed(s,"keystroke-reduced")&&SelectedNode(s));
 	var text=strokes.map(LetterString).join("");	
 		text=KeystrokeSimplifier(CurLevelTitle())(text);
 		text=text.replace(/\n+/gmi,"");//ensure single line

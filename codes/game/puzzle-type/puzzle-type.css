@@ -432,7 +432,9 @@
 .keystroke-invalid svg{ /*just outline*/
    fill: none
 }
-
+.keystroke-reduced{
+   font-size: 50%;
+}
 .window.keyboard{
    position: absolute;
    width: 100%;

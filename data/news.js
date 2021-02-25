@@ -1,9 +1,9 @@
 News={
 	N_67:{
-		DATE:"2021-02-24",
+		DATE:"2021-02-25",
 		HEADER:()=>"Fixes",
 		PIECE:()=>`
-		<p>${A("puzzle-type")} level TOD*** is being upgraded, following encouraging feedback from ${P("Hedeholm")}.</p>
+		<p>${A("puzzle-type")} level TOD*** was upgraded to JUN***, following encouraging and insightful feedback from ${P("Hedeholm")}.</p>
 	`,ID:"puzzle-type"},
 	N_66:{
 		DATE:"2021-02-11",
