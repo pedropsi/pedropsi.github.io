@@ -8508,6 +8508,7 @@ KBDHTML("X")
 }
 
 var MultimediaKeys={
+	"wheel":["wheel-up","wheel-down"],
 	"click":["tap","cursor-click"],
 	"rightclick":["tap2","cursor-click2"],
 	"drag":["tapdrag","mousedrag"],
