@@ -205,7 +205,7 @@ ImageCardHTML=function(ImageObj){
 		var target=v.BLANK()
 	}
 
-	var legend=ImageObj.legend?`<div class="legend">${ImageObj.legend}</div>`:"";
+	var legend=ImageObj.legend?`<div class="legend selectable">${ImageObj.legend}</div>`:"";
 	var id=ImageObj.id||GenerateId();
 	
 	var cardTop=`
