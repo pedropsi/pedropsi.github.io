@@ -919,7 +919,7 @@ DrawFruits=function(fruit,coordinates,Opts,state){
 
 
 StateMarkDraw=function(state,type,xy,Opts){
-	Wbug(type,xy,Opts);
+	
 	if(!type||!xy||!PositionValid(xy[0],xy[1],state))
 		return;
 	
@@ -933,6 +933,24 @@ StateMarkDraw=function(state,type,xy,Opts){
 		px:xy[0]+(type==="H"?0.5:0),
 		py:xy[1]+(type==="V"?0.5:0)
 	};
+
+	var colour=Opts.colour;
+	var lineWidth=Opts.lineWidth;
+	var strokeStyle=Opts.strokeStyle;
+
+	if(In(state.mode.selection,xy)){
+		colour=HEXLightener(0.9)(colour);
+		lineWidth=2*lineWidth;
+	}
+	
+	if(state.visuals.monochrome){
+		strokeStyle=HEXSaturater(0)(strokeStyle);
+		colour=HEXSaturater(0)(colour);
+	}
+
+	Opts.strokeStyle=strokeStyle;
+	Opts.colour=colour;
+	Opts.lineWidth=lineWidth;
 
 	if(typeof Opts.shiftx==="undefined")
 		Opts.shiftx=0;
