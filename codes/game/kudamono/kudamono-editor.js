@@ -1324,6 +1324,10 @@ SerialGenreState=function(g,state){
 	}
 	else
 		state=Merge(state,Kudamono);//Default to kudamono
+
+	if(state.grid.dual){
+		state.markicons=ReKeyObject(state.markicons,Accesser({"V":"H","H":"V"}));
+	}
 	return state
 }
 
