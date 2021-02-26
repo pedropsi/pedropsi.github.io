@@ -87,20 +87,52 @@ FunctionName=function(FunctionF){
 		var body=FunctionBody(FunctionF);
 		return body.replace(/[^ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890]/gi,"").replace(/^[1234567890]*/,"");
 	}
+/*
+named function
+FunctionName(FunctionName)
+"FunctionName"
+
+anonymous function, f() form
+FunctionName(function(){return true})
+""
+*/
 }
 
 FunctionNamecode=function(F){
 	return FunctionName(F)||String(F);
+/*
+named function
+FunctionName(FunctionNamecode)
+"FunctionNamecode"
+
+anonymous function, f() form
+FunctionNamecode(function(){return true})
+"function(){return true}"
+*/
 }
 
 FunctionBody=function(FunctionF){
 	return UnUnderfix(FunctionF.toString(),")");
+/*
+retrieve the body
+FunctionBody(function(){return true})
+"{return true}"
+*/
 }
 
 FunctionHead=function(FunctionF){
 	if(FunctionF.name)
 		return FunctionF.name;
 	return UnPrefix(UnPrefix(UnAfterfix(FunctionF.toString(),"("),"function")," ");
+/*
+named function
+FunctionHead(FunctionHead)
+"FunctionHead"
+
+anonymous function, f() form
+FunctionHead(function(){return true})
+""
+*/
 }
 
 
