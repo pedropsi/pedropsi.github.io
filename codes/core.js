@@ -2091,6 +2091,26 @@ Copier({a:1,b:2},{b:3})("b")
 
 */
 }
+
+ArrayPosfixed=function(superA,subA){
+	return Equal(Take(superA,-subA.length),subA);
+/*
+empty list is always there
+ArrayPosfixed([1,2,3],[])
+true
+
+last subsequence
+ArrayPosfixed([1,2,3],[2,3])
+true
+
+inner subsequence
+ArrayPosfixed([1,2,3],[2])
+false
+*/
+}
+
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //Object combiners - combines objects in a myriad different ways
 
