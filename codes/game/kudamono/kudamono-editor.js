@@ -1641,6 +1641,8 @@ DragActionContinuer=function(x,y,w,h,target){
 	}
 	if(!Equal(mode,state.mode))
 		UpdateState({mode:mode},{id:state.id});
+
+		StatePropertyMonitor(state,state.mode,"mode");
 }
 DragActionEnder=function(x,y,w,h,target){
 	var state=TargetState();
@@ -1832,6 +1834,7 @@ var KeyboardActions=function(){return{
 
 	"m ctrl shift":StateKeyHandlerer({monitor:{state:Flipped}}),
 	"x ctrl shift":StateKeyHandlerer({monitor:{dragxy:Flipped}}),
+	"s ctrl shift":StateKeyHandlerer({monitor:{mode:Flipped}}),
 	"c ctrl shift":StateKeyHandlerer({monitor:{changed:Flipped}}),
 
 
