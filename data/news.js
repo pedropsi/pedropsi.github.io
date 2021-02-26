@@ -737,7 +737,6 @@ ImportNewsObject=function(newsObj){
 }
 
 PuzzleParameters=function(key,item){
-	Wbug(key,item)
 	var N=UnAfterfix(key,"-");
 	var name=UnPrefix(key,N+"-");
 
