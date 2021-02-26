@@ -1445,7 +1445,8 @@ video{
 .monitor div{
 	flex-direction: row;
 	width: 100%;
-	line-height:calc(0.90 * var(--fontheight));
+	line-height:calc(0.75 * var(--fontheight));
+	font-size: 75%;
 }
 .Console,.monitor{
 	pointer-events:none;
