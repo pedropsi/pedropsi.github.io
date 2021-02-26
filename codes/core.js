@@ -8072,6 +8072,7 @@ var Icons={
 	
 	"wheel-arrow-u":{path:"M 9 0 L 17 2 L 14 3 Q 20 12 10 11 Q 17 11 12 5 L 11 7 Z",vbmax:"25 25"},
 	"wheel-arrow-d":{primitive:"wheel-arrow-u",transform:"flip-vertical"},
+	"wheel-arrow-l":{path:"M 10 4 L 15 8 L 14 5 Q 16 6 24 4 Q 16 2 14 3 L 15 0 Z",vbmax:"25 25"},
 	"wheel-arrow-ud":{path:"M 9 0 L 17 2 L 14 3 Q 22 10 15 14 L 18 15 L 12 15 L 14 10 L 14 13 Q 19 10 12 5 L 11 7 Z",vbmax:"25 25"},
 
 	//Gestures 
@@ -8085,6 +8086,7 @@ var Icons={
 	"mousehold":{primitive:["cursor","hold"],vbmax:"50 50"},
 
 	"wheel-up":{primitive:["wheel","wheel-arrow-u"]},
+	"wheel-mid":{primitive:["wheel","wheel-arrow-l"]},
 	"wheel-down":{primitive:"wheel-up",transform:"flip-vertical"},
 
 	"swipe-left"	:{primitive:["hand","swipel"],vbmax:"50 50"},
@@ -8475,7 +8477,7 @@ var KeyExplanations={
 	"swipe-down":"swipe down",
 	"wheel-up":"scroll up with the mouse wheel",
 	"wheel-down":"scroll down with the mouse wheel",
-	"wheel-click":"wheel click",
+	"wheel-mid":"click the mouse wheel button",
 	"bifinger-up":"scroll up with two fingers",
 	"bifinger-down":"scroll down with two fingers",
 	"bifinger-click":"click with two fingers",
@@ -8508,7 +8510,6 @@ KBDHTML("X")
 }
 
 var MultimediaKeys={
-	"wheel":["wheel-up","wheel-down"],
 	"click":["tap","cursor-click"],
 	"rightclick":["tap2","cursor-click2"],
 	"drag":["tapdrag","mousedrag"],
