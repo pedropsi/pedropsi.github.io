@@ -1630,7 +1630,7 @@ DragActionContinuer=function(x,y,w,h,target){
 	if(!mode.selection)
 		mode.selection=[];
 	if(!In(Take(mode.selection,-2),xy)&&Count(mode.selection,xy)<4){
-		mode.selection=Append(mode.selection,xy);
+		mode.selection=UnPosfixSelfPath(Append(mode.selection,xy));
 	}
 	else if(mode.selection.length>1&&Equal(First(Take(mode.selection,-2)),xy)){
 		mode.selection=Most(mode.selection);
