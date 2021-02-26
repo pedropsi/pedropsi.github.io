@@ -1635,6 +1635,8 @@ DragActionContinuer=function(x,y,w,h,target){
 	else if(mode.selection.length>1&&Equal(First(Take(mode.selection,-2)),xy)){
 		mode.selection=Most(mode.selection);
 	}
+	if(mode.selection.length>1)
+		mode.selection=TrackPath(PathTrack(mode.selection));
 	if(!mode.edit){
 		var selected=mode.selection;
 		mode.clearing=Intersected(XYSegments(selected[0],state),XYSegments(selected[1],state));

@@ -86,6 +86,8 @@ PathTrack([[0,0],[0,1],[1,1],[1,0],[0,0]])
 }
 
 TrackPath=function(track){
+	if(!track.length)
+		return [];
 	var stas=track.map(First);
 	return stas.concat([Last(Last(track))]);
 }
