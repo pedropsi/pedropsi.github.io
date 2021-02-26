@@ -200,6 +200,34 @@ FruitIcons={
 }
 
 
+MarkIcons={
+	"H":{
+		letter:"v",
+		path:"M 5 0 L 7 1 L 5 10 L 3 9 Z",
+		viewBox:"0 0 10 10",
+		scale:0.2,
+		shiftx:-0.2,
+		shifty:-0.2,
+		colour:"rgb(155,155,155)"},
+	"V":{
+		letter:"h",
+		path:"M 1 3 L 10 6 L 9 8 L 0 5 Z",
+		viewBox:"0 0 10 10",
+		scale:0.2,
+		shiftx:-0.2,
+		shifty:-0.2,
+		colour:"rgb(155,155,155)"
+	},
+	"C":{
+		scale:0.6,
+		shiftx:-0.5,
+		shifty:-0.5,
+		letter:"c",
+		viewBox:"0 0 10 10",
+		path:"M 4 5 L 5 6 L 6 5 L 5 4 Z",
+		colour:"rgb(155,155,155)"}
+}
+
 var BlankState={							//default styles applied to all genres
 	id:"puzzle",							//key to identify this state among all others
 	render:{
@@ -273,6 +301,7 @@ var BlankState={							//default styles applied to all genres
 			lineJoin:"miter"				//line join style of the "editing" frame lines
 		},				
 	},
+	markicons:MarkIcons,
 
 	//Puzzle
 	W:7,									//board size, horizontal
@@ -280,10 +309,10 @@ var BlankState={							//default styles applied to all genres
 	level:{},								//pairs symbols with coordinates under them
 	segments:[],							//list of all segments (ungrouped)
 	orchard:[],								//list of all groups of contiguous segments
-	auxiliary:{
-		H:[],								//auxiliary crosses, on horizontal midpoints
-		V:[],								//auxiliary crosses, on vertical   midpoints
-		C:[],								//auxiliary dots, on centre points
+	marks:{
+		H:[],								//marks crosses, on horizontal midpoints
+		V:[],								//marks crosses, on vertical   midpoints
+		C:[],								//marks dots, on centre points
 	},
 	rules:{									//global rules, applying to all tracks
 		minconnected:2,
@@ -323,6 +352,7 @@ var Kudamono={
 		"W=24&H=13&L=d16d5o1b1d11d10g3g2d11g15g2a10c1c2a1a25a2o2q12q28l15o1l27k13l12k1k2k13p15p12p15p12m3m26o3b1&S=16DDDRDRUU3DD3RRRRRRR1RRRRRRRRRRRRRRRRRRRRRR10D13R1DDRRUU40RRDDDDLL1DD44DD28UULLDDRRDD15UUURRURRD1RRRRRRRRRRR24DDD16URRDDLLU43UUR27UUR14URRDDLLU"
 	],
 	fruits:FruitIcons,
+
 	//visuals
 	mode:{
 		fruit:First(FruitIcons),	//current fruit to be added
@@ -341,18 +371,6 @@ var Kudamono={
 	}
 }
 
-AuxiliaryIcons={
-	"cross":{
-		letter:"x",
-		path:"M 1 0 L 5 4 L 9 0 L 10 1 L 6 5 L 10 9 L 9 10 L 5 6 L 1 10 L 0 9 L 4 5 L 0 1 Z",
-		viewBox:"0 0 10 10",
-		colour:"rgb(155,155,155)"},
-	"dot":{
-		letter:"0",
-		viewBox:"0 0 10 10",
-		path:"M 4 5 L 5 6 L 6 5 L 5 4 Z",
-		colour:"rgb(155,155,155)"}
-}
 
 
 
@@ -899,6 +917,39 @@ DrawFruits=function(fruit,coordinates,Opts,state){
 	(coordinates||[]).map(xy=>StateFruitDraw(state,fruit,xy,Opts));
 }
 
+
+StateMarkDraw=function(state,type,xy,Opts){
+	Wbug(type,xy,Opts);
+	if(!type||!xy||!PositionValid(xy[0],xy[1],state))
+		return;
+	
+
+	var Opts={
+		...Opts,
+		...state.grid,
+		...state.markicons[type],
+		rows:state.H,
+		cols:state.W,
+		px:xy[0]+(type==="H"?0.5:0),
+		py:xy[1]+(type==="V"?0.5:0)
+	};
+
+	if(typeof Opts.shiftx==="undefined")
+		Opts.shiftx=0;
+	if(typeof Opts.shifty==="undefined")
+		Opts.shifty=0;
+
+	Opts.shiftx+=Opts.nudge;
+	Opts.shifty+=Opts.nudge;
+
+	SVGDraw(Opts);
+}
+
+DrawMarks=function(type,coordinates,Opts,state){
+	var Opts=Opts||{};
+	(coordinates||[]).map(xy=>StateMarkDraw(state,type,xy,Opts));
+}
+
 StateIndexFruit=function(state){
 	var fruits=Keys(state.fruits);
 	var l=fruits.length;
@@ -933,6 +984,13 @@ LevelDraw=function(state){
 	ClearCanvas(target);
 	var fruits=Keys(state.level);
 		fruits.map(fruit=>DrawFruits(fruit,state.level[fruit],{target:target},state));
+}
+
+MarksDraw=function(state){
+	var target=state.render.target+"-marks";
+	ClearCanvas(target);
+	var marks=Keys(state.marks);
+		marks.map(type=>DrawMarks(type,state.marks[type],{target:target},state));
 }
 
 GridDraw=function(state){
@@ -997,8 +1055,13 @@ OverlineDraw=function(state){
 	
 	var target=state.render.target+"-overline";
 	ClearCanvas(target);
-	if(!state.mode.edit&&state.mode.dragging)
-		TrackDraw(seltrack,state,Opts)
+	if(!state.mode.edit&&state.mode.dragging){
+		if(state.mode.marking){
+			DrawMarks(state.mode.marking,state.mode.selection,{...Opts,target:target},state)
+		}
+		else
+			TrackDraw(seltrack,state,Opts)
+	}
 }
 
 
@@ -1306,7 +1369,7 @@ DrawableProperties=Join(CompletableProperties,["mode","visuals","win"]);
 StateCombiner=Combiner({
 	"Evaluate":TypeCombiners["Evaluate"],
 	"level":{
-		ValidateKey:Iner(["level","auxiliary"]),
+		ValidateKey:Iner(["level","marks"]),
 		Validate1:True,
 		Validate2:True,
 		Combine:(L1,L2)=>L2
@@ -1353,6 +1416,7 @@ LayerPainter=function(layer){
 	"line":OrchardDraw,
 	"overline":OverlineDraw,
 	"level":LevelDraw,
+	"marks":MarksDraw,
 	"overlevel":OverLevelDraw,
 	"explainer":ExplainerDraw,
 	"metadatatitle":MetadataTitleDraw,
@@ -1370,6 +1434,7 @@ LayersChanged={
 	level:["force-level","W","H","visuals.monochrome","orchard","level"],
 	overlevel:["force-overlevel","W","H","visuals.monochrome","mode.edit","mode.selection","mode.dragging","mode.fruitIndex"],
 	line:["force-line","W","H","visuals.monochrome","orchard"],
+	marks:["force-marks","W","H","visuals.monochrome","marks"],
 	overline:["force-overline","W","H","visuals.monochrome","mode.edit","mode.selection"],
 	explainer:["force-level","level","W","H","force-explainer","visuals.monochrome"],
 	metadatatitle:["force-metadata","force-metadatatitle"],
@@ -1499,25 +1564,40 @@ CanvasPosition=function(x,y,w,h,state){
 
 CanvasDot=function(x,y,w,h,state){
 	var p=CanvasPosition(x,y,w,h,state);
-	var xy=[
+	var XY=[
 		Floor((p[0]+0.5)),
 		Floor((p[1]+0.5))
 	];
-	var centeredDistance=[-xy[0]+p[0],-xy[1]+p[1]];
+	var centeredDistance=[-XY[0]+p[0],-XY[1]+p[1]];
 	var cornered=EuclideanDistance([0,0],centeredDistance)<0.4;
 	var borderedH=Abs(centeredDistance[1])<0.2;
 	var borderedV=Abs(centeredDistance[0])<0.2;
 	var dot={
 			p:p,
-			xy:xy,
+			xy:XY,
+			F:XY,
+			H:[Floor(p[0]),Floor(p[1]+0.5)],
+			V:[Floor(p[0]+0.5),Floor(p[1])],
+			C:[Floor(p[0]),Floor(p[1])],
 			diff:centeredDistance,
 			cornered:cornered,
 			bordered:borderedH||borderedV,
 			midborderedH:!cornered&&borderedH,
 			midborderedV:!cornered&&borderedV
 		};
+	if(dot.cornered){
+		dot.type="F";
+	}else if(dot.midborderedH){
+		dot.type="H";
+	}else if(dot.midborderedV){
+		dot.type="V";
+	}else{
+		dot.type="C";
+	}
+
 	StatePropertyMonitor(state,{x:x,y:y,w:w,h:h,...dot},"dragxy");
-	return dot
+
+	return dot;
 }
 
 
@@ -1566,6 +1646,43 @@ XYFruitsAdd=function(points,state){
 }
 
 
+
+XYMarked=function(xy,type,state){
+	return In(state.marks[type],xy);
+}
+
+RemoveXYMarks=function(points,type,state){
+	var marks=Clone(state.marks);
+	points.map(function(xy){
+		if(!PointValid(xy,state))
+			return;
+		marks[type]=marks[type].filter(cr=>!Equal(cr,xy));
+	})
+	return marks;
+}
+
+XYMarksRemove=function(points,type,state){
+	var marks=RemoveXYMarks(points,type,state);
+	MarksUpdate(marks,state);
+}
+
+XYMarksAdd=function(points,type,state){
+	var marks=RemoveXYMarks(points,type,state);
+	points.map(function(xy){
+		if(!PointValid(xy,state))
+			return;
+			marks[type]=Union(marks[type],[xy]);
+	})
+	MarksUpdate(marks,state);
+}
+
+
+MarksUpdate=function(marks,state){
+	if(!Equal(marks,state.marks))
+		UpdateState({marks:marks},{id:state.id});
+}
+
+
 XYSegments=function(xy,state){
 	var segments=state.segments.filter(s=>In(s,xy));
 	return segments;
@@ -1604,19 +1721,32 @@ DragActionAltStarter=function(x,y,w,h,target){
 
 DragActionStarter=function(x,y,w,h,target){
 	var state=TargetState();
-	var dot=CanvasDot(x,y,w,h,state);
+	var dot=CanvasDot(x,y,w,h,state);//the type of dot is as yet undefined
 	var xy=dot.xy;
 	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
+
 	var mode=Clone(state.mode);
-	var atFruit=XYFruit(xy,state);
-	if(atFruit)
-		mode.fruitIndex=FruitStateIndex(atFruit,state);
-	mode.dragging=true;
+	var type=dot.type;
+
+	mode.marking=false;
+	if(type!=="F"){
+		xy=dot[type];
+		mode.marking=type;
+		mode.clearing=!!XYMarked(xy,dot.type,state);
+	}
+
 	mode.selection=[xy];
+
 	if(mode.edit){
 		mode.clearing=!!XYFruit(xy,state);
+		var atFruit=XYFruit(xy,state);
+		if(atFruit)
+			mode.fruitIndex=FruitStateIndex(atFruit,state);
 	}
+	
+	mode.dragging=true;
+
 	if(!Equal(mode,state.mode))
 		UpdateState({mode:mode},{id:state.id});
 }
@@ -1624,9 +1754,14 @@ DragActionContinuer=function(x,y,w,h,target){
 	var state=TargetState();
 	var dot=CanvasDot(x,y,w,h,state);
 	var xy=dot.xy;
+	var mode=Clone(state.mode);
 	if(!PointValid(xy,state))
 		return;//TODO OTHER OPTIONS
-	var mode=Clone(state.mode);
+
+	if(mode.marking){
+		xy=dot[mode.marking];
+	}		
+
 	if(!mode.selection)
 		mode.selection=[];
 	if(!In(Take(mode.selection,-2),xy)&&Count(mode.selection,xy)<4){
@@ -1637,26 +1772,37 @@ DragActionContinuer=function(x,y,w,h,target){
 	}
 	if(mode.selection.length>1)
 		mode.selection=TrackPath(PathTrack(mode.selection));
-	if(!mode.edit){
+		
+	if(!mode.edit&&!mode.marking){
 		var selected=mode.selection;
 		mode.clearing=Intersected(XYSegments(selected[0],state),XYSegments(selected[1],state));
 	}
+	
 	if(!Equal(mode,state.mode))
 		UpdateState({mode:mode},{id:state.id});
 
-		StatePropertyMonitor(state,state.mode,"mode");
+	StatePropertyMonitor(state,state.mode,"mode");
 }
+
 DragActionEnder=function(x,y,w,h,target){
 	var state=TargetState();
 	var mode=state.mode;
 		mode.dragging=false;
 	var selected=mode.selection||[];
+	var force="none";
 
 	if(mode.edit){
 		if(mode.clearing)
 			XYFruitsRemove(selected,state);
 		else
 			XYFruitsAdd(selected,state);
+	}
+	if(mode.marking){
+		if(mode.clearing)
+			XYMarksRemove(selected,mode.marking,state);
+		else
+			XYMarksAdd(selected,mode.marking,state);
+		force="force-marks";
 	}
 	else {
 		if(selected.length>1){
@@ -1667,6 +1813,7 @@ DragActionEnder=function(x,y,w,h,target){
 				XYSegmentsAdd(segments,state);
 			}
 		}
+		force="force-level";
 	}
 
 	ClearCanvas(state.render.target+"-overlevel")
@@ -1674,7 +1821,8 @@ DragActionEnder=function(x,y,w,h,target){
 
 	mode.selection=[];
 	mode.clearing=false;
-	UpdateState({mode:mode},{id:state.id,draw:["force-level"]})
+	mode.marking=false;
+	UpdateState({mode:mode},{id:state.id,draw:[force]})
 }
 
 
