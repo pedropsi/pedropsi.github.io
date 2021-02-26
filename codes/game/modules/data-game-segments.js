@@ -32,6 +32,36 @@ PointsOrdered=function(point1,point2){
 ///////////////////////////////////////////////////////////////////////////////
 //Paths
 
+UnPosfixSelfPath=function(path){
+	if(!path)
+		return [];
+	var i=path.length-1;
+	var head;
+	var tail;
+	while(i>0){
+		head=Take(path,i);
+		tail=UnTake(path,i);
+		if(ArrayPosfixed(head,tail)){
+			return UnPosfixSelfPath(head);
+		}
+		i--;
+	}
+	return path;
+/*
+repeating elements
+UnPosfixSelfPath([0,1,1,1,1,1])
+[0,1]
+
+repeating sequences
+UnPosfixSelfPath([0,1,1,1,1,2,1,2])
+[0,1,1,1,1,2]
+
+recursive repeating sequences
+UnPosfixSelfPath([0,1,1,1,1,2,1,2,2,2])
+[0,1,1,1,1,2]
+*/
+}
+
 PathTrack=function(path){
 	var path=Clone(path||[]);
 	
