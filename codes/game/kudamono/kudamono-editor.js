@@ -355,9 +355,7 @@ var Kudamono={
 	fruits:FruitIcons,
 
 	//visuals
-	mode:{
-		fruit:First(FruitIcons),	//current fruit to be added
-	},
+
 	win:{
 		rule:{
 			mintracks:1,
@@ -1467,8 +1465,8 @@ LayersChanged={
 	marks:["W","H","visuals.monochrome","marks","mode.xelection"],
 	overline:["W","H","visuals.monochrome","mode.edit","mode.selection","mode.xelection"],
 	explainer:["level","W","H","visuals.monochrome","explainer"],
-	metadatatitle:["force-metadata","force-metadatatitle"],
-	metadatacolophon:["force-metadata","force-metadatacolophon"],
+	metadatatitle:["metadata"],
+	metadatacolophon:["metadata"],
 	cursor:["visuals.monochrome","mode.fruitIndex","mode.edit","mode.clearing"]
 }
 
@@ -2216,7 +2214,7 @@ InitialisePuzzle=function(id){
 	setTimeout(LazyEvaluatir(FocusElement)(state.render.target),500);
 	
 	SaveState(state);
-	var options={initialise:true,id:state.id,draw:["force-metadata"]};
+	var options={initialise:true,id:state.id,draw:["metadata"]};
 	UpdateState({},options);
 
 	setTimeout(CanvasResizer(state),500)
