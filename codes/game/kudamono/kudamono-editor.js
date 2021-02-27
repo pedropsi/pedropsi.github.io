@@ -332,6 +332,7 @@ var BlankState={							//default styles applied to all genres
 		dragging:false,						//whether dragging
 		clearing:false,						//whether clearing fruits, lines, etc...
 		selection:[],						//current points selected (accumulates)
+		xelection:[],						//current marks  selected (accumulates)
 		error:false							//whether to display errors
 	},
 	monitor:{								//debugging handles
@@ -1460,11 +1461,11 @@ LayerPainter=function(layer){
 
 LayersChanged={
 	grid:["W","H","visuals.monochrome","win.won","grid","mode.edit"],
-	level:["W","H","visuals.monochrome","orchard","level"],
-	overlevel:["W","H","visuals.monochrome","mode.edit","mode.selection","mode.dragging","mode.fruitIndex"],
+	level:["W","H","visuals.monochrome","orchard","level","mode.selection"],
+	overlevel:["W","H","visuals.monochrome","mode.edit","mode.selection","mode.fruitIndex"],
 	line:["W","H","visuals.monochrome","orchard"],
-	marks:["W","H","visuals.monochrome","marks"],
-	overline:["W","H","visuals.monochrome","mode.edit","mode.selection"],
+	marks:["W","H","visuals.monochrome","marks","mode.xelection"],
+	overline:["W","H","visuals.monochrome","mode.edit","mode.selection","mode.xelection"],
 	explainer:["level","W","H","visuals.monochrome","explainer"],
 	metadatatitle:["force-metadata","force-metadatatitle"],
 	metadatacolophon:["force-metadata","force-metadatacolophon"],
@@ -1772,7 +1773,7 @@ DragActionAltStarter=function(x,y,w,h,target){
 		return;
 	}
 
-	mode.selection=[xy];
+	mode.xelection=[xy];
 	mode.dragging=true;
 
 	if(!Equal(mode,state.mode))
@@ -1819,23 +1820,31 @@ DragActionContinuer=function(x,y,w,h,target){
 		xy=dot[mode.marking];
 		if(!MarkingValid(xy,mode.marking,state))
 			return;//TODO OTHER OPTIONS
+		var selection=mode.xelection||[];
 	}
+	else
+		var selection=mode.selection||[];
 
-	if(!mode.selection)
-		mode.selection=[];
-	if(!In(Take(mode.selection,-2),xy)&&Count(mode.selection,xy)<4){
-		mode.selection=UnPosfixSelfPath(Append(mode.selection,xy));
+	if(!In(Take(selection,-2),xy)&&Count(selection,xy)<4){
+		selection=UnPosfixSelfPath(Append(selection,xy));
 	}
-	else if(mode.selection.length>1&&Equal(First(Take(mode.selection,-2)),xy)){
-		mode.selection=Most(mode.selection);
+	else if(selection.length>1&&Equal(First(Take(selection,-2)),xy)){
+		selection=Most(selection);
 	}
-	if(mode.selection.length>1)
-		mode.selection=TrackPath(PathTrack(mode.selection));
+	if(selection.length>1)
+		selection=TrackPath(PathTrack(selection));
 		
 	if(!mode.edit&&!mode.marking){
-		var selected=mode.selection;
+		var selected=selection;
 		mode.clearing=Intersected(XYSegments(selected[0],state),XYSegments(selected[1],state));
 	}
+
+	if(mode.marking)
+		mode.xelection=selection;
+	else
+		mode.selection=selection;
+
+	mode.dragging=true;	
 	
 	if(!Equal(mode,state.mode))
 		UpdateState({mode:mode},{id:state.id});
@@ -1846,22 +1855,24 @@ DragActionContinuer=function(x,y,w,h,target){
 DragActionEnder=function(x,y,w,h,target){
 	var state=TargetState();
 	var mode=state.mode;
-		mode.dragging=false;
-	var selected=mode.selection||[];
+		
 
 	if(mode.edit){
+		var selected=mode.selection||[];
 		if(mode.clearing)
 			XYFruitsRemove(selected,state);
 		else
 			XYFruitsAdd(selected,state);
 	}
 	else if(mode.marking){
+		var selected=mode.xelection||[];
 		if(mode.clearing)
 			XYMarksRemove(selected,mode.marking,state);
 		else
 			XYMarksAdd(selected,mode.marking,state);
 	}
 	else {
+		var selected=mode.selection||[];
 		if(selected.length>1){
 			var segments=PathTrack(selected);
 			if(mode.clearing)
@@ -1876,8 +1887,10 @@ DragActionEnder=function(x,y,w,h,target){
 	ClearCanvas(state.render.target+"-overline")
 
 	mode.selection=[];
+	mode.xelection=[];
 	mode.clearing=false;
 	mode.marking=false;
+	mode.dragging=false;
 	UpdateState({mode:mode},{id:state.id})
 }
 
