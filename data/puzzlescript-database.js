@@ -81,7 +81,14 @@ function LoadPGD(){
 function RegisterPGDEntries(data){
 	if(data!==""){
 		data=JSON.parse(data);
-		data.map(GameEntryData);
+		for(var i in data){
+			try{
+				GameEntryData(data[i]);
+			}
+			catch(e){
+				Warn(i,e,data[i])
+			}
+		}
 		Shout("LoadPGD");
 	}
 }
