@@ -1082,7 +1082,7 @@ OverlineDraw=function(state){
 	ClearCanvas(target);
 	if(!state.mode.edit&&state.mode.dragging){
 		if(state.mode.marking){
-			DrawMarks(state.mode.marking,state.mode.selection,{...Opts,target:target},state)
+			DrawMarks(state.mode.marking,state.mode.xelection,{...Opts,target:target},state)
 		}
 		else
 			TrackDraw(seltrack,state,Opts)
@@ -1413,7 +1413,7 @@ AdvanceState=function(substate,options){
 	state=StateCombiner(state,substate);
 	
 	changed=ComplementObject(state,OLDSTATE);
-	Monitor(changed,TreeKeys(changed));
+	//Monitor(changed,TreeKeys(changed));
 
 	if(Intersected(TreeKeys(changed),CompletableProperties)||options.initialise){
 		state=CompleteState(state);
