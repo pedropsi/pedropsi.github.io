@@ -1096,9 +1096,6 @@ MiniBoardDraw=function(fruit,rule,state){
 			main:false,
 			target:target,
 			container:container
-		},
-		line:{
-			lineWidth:24
 		}
 	}
 
