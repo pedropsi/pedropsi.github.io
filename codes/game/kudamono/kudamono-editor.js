@@ -1853,6 +1853,7 @@ DragActionEnder=function(x,y,w,h,target){
 			XYFruitsRemove(selected,state);
 		else
 			XYFruitsAdd(selected,state);
+		force="force-level";
 	}
 	else if(mode.marking){
 		if(mode.clearing)
