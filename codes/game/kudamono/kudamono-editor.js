@@ -138,7 +138,7 @@ FruitIcons={
 			loopallowed:true,
 			looprequired:true,
 			description:"Melons belong to closed loops.",
-			depiction:"W=2&L=m0m2m4m2&S=1URRDDLLU"
+			depiction:"W=2&L=m0m4m1&S=0JsP"
 		}
 	},
 	"grape":{
@@ -152,7 +152,7 @@ FruitIcons={
 		rule:{
 			minconnected:Infinity,
 			description:"All Grapes are connected by a single path.",
-			depiction:"W=2&L=g0g2g4g2&S=0DDRRUU"
+			depiction:"W=2&L=g1g2g2g1&S=3EvU"
 		}
 	},
 	"blackberry":{
