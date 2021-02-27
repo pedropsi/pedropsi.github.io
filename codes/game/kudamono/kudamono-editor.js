@@ -91,7 +91,7 @@ FruitIcons={
 		rule:{
 			maxconnected:2,
 			description:"Cherries connect only in pairs.",
-			depiction:"W=2&L=c0c2c4c2&S=0DD6DD"
+			depiction:"W=2&L=c0c2c2c4&S=0Z4W"
 		}
 	},
 	"coconut":{
