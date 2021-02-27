@@ -250,19 +250,19 @@ var BlankState={							//default styles applied to all genres
 		dash:[],							//dash pattern of the overline
 		
 		clearOpacity:0.6,					//opacity of the overline, when erasing
-		clearLineWidth:24,					//width of the overline, when erasing
+		clearLineWidth:44,					//width of the overline, when erasing
 		clearColour:"#CCCCCC",				//colour of the overline, when erasing
-		clearDash:[6,30]					//dash pattern of the overline, when erasing
+		clearDash:[30,60]					//dash pattern of the overline, when erasing
 	},
 	line:{									//default line styles
-		lineWidth:12,						//width of the default line
+		lineWidth:24,						//width of the default line
 		opacity:0.5,						//opacity of the default line
 		colour:"rgba(155,155,155)",			//colour of the default line
 		dash:[],							//dash pattern of the default line
 		cap:"round",						//cap style of the default line
 		lineJoin:"round",					//join style of the default line
 
-		wrongDash:[4,18],					//dash pattern applied on error
+		wrongDash:[8,36],					//dash pattern applied on error
 
 		excessColour:"#000000",				//colour applied on an "excess fruit" error
 		deficitColour:"#777777" 			//colour applied on an "no fruit" error
@@ -273,7 +273,7 @@ var BlankState={							//default styles applied to all genres
 		dash:[12,10,12,10],					//dash pattern of grid lines
 
 		frame:{								//default frame style, around the board
-			lineWidth:6,					//width of the frame lines
+			lineWidth:3,					//width of the frame lines
 			dash:[],						//dash pattern of the frame lines
 			lineJoin:"miter"				//join style of the frame lines
 		},
@@ -1459,8 +1459,8 @@ LayerPainter=function(layer){
 
 LayersChanged={
 	grid:["W","H","visuals.monochrome","win.won","grid","mode.edit"],
-	level:["W","H","visuals.monochrome","orchard","level","mode.selection"],
-	overlevel:["W","H","visuals.monochrome","mode.edit","mode.selection","mode.fruitIndex"],
+	level:["W","H","visuals.monochrome","visuals.solid","orchard","level","mode.selection"],
+	overlevel:["W","H","visuals.monochrome","visuals.solid","mode.edit","mode.selection","mode.fruitIndex"],
 	line:["W","H","visuals.monochrome","orchard"],
 	marks:["W","H","visuals.monochrome","marks","mode.xelection"],
 	overline:["W","H","visuals.monochrome","mode.edit","mode.selection","mode.xelection"],
