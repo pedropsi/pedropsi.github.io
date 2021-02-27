@@ -2032,17 +2032,20 @@ var KeyboardActions=function(){return{
 	
 	"z ctrl"			:function(){Undo()},
 	"z ctrl shift"		:function(){Redo()},
-	"backspace"			:function(){Undo()},
-	"shift backspace"	:function(){Redo()},
 	"y ctrl shift"		:function(){Undo()},
 	"y ctrl"			:function(){Redo()},
+
+	//"c ctrl":ExportSerial,
+	//"s ctrl":()=>CanvasSave(),
+	
+	"r alt"			:BoardRotaterHandlerer(1),
+	"r shift alt"	:BoardRotaterHandlerer(-1),
 
 
 	"m ctrl shift":StateKeyHandlerer({monitor:{state:Flipped}}),
 	"x ctrl shift":StateKeyHandlerer({monitor:{dragxy:Flipped}}),
 	"s ctrl shift":StateKeyHandlerer({monitor:{mode:Flipped}}),
 	"c ctrl shift":StateKeyHandlerer({monitor:{changed:Flipped}}),
-
 
 	}
 };
