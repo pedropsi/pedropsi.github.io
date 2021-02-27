@@ -8582,7 +8582,7 @@ HyperPerson=function(name){
 	var alias=UniformString(name);
 	if(In(HyperPerson.ambiguous,alias))
 		Winf("warning, ambiguous name:",name);
-	return HyperText("People/"+UniformString(name));
+	return HyperText("People/"+alias);
 }
 
 HyperPerson.ambiguous=[];
