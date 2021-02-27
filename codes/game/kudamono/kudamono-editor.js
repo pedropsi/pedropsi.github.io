@@ -389,6 +389,12 @@ PointValid=function(xy,state){
 	return PositionValid(xy[0],xy[1],state);
 }
 
+MarkingValid=function(xy,type,state){
+	var W=state.W+(type==="V"?1:0);
+	var H=state.H+(type==="H"?1:0);
+	return PointValid(xy,state)&&xy[0]<W&&xy[1]<H;
+}
+
 SegmentValid=function(segment,state){
 	return SegmentDiscretised(segment)&&SegmentPoints(segment).every(point=>PointValid(point,state));
 }
@@ -1737,25 +1743,51 @@ DragActionDrawStarter=function(x,y,w,h,target){
 }
 
 DragActionAltStarter=function(x,y,w,h,target){
-	UpdateState({mode:{edit:Flipped}},{id:TargetState().id});
-	DragActionStarter(x,y,w,h,target);
+	var state=TargetState();
+	var dot=CanvasDot(x,y,w,h,state);//the type of dot is as yet undefined
+	var xy=dot.xy;
+	var mode=Clone(state.mode);
+		mode.ended=false;
+
+	if(mode.edit){
+		mode.edit=false;
+		mode.ended=true;
+		UpdateState({mode:mode},{id:state.id});
+		return;
+	}
+
+	var type=dot.type;
+	if(type==="F")
+		type="C";
+
+	xy=dot[type];
+	mode.marking=type;
+	mode.clearing=!!XYMarked(xy,dot.type,state);
+
+	if(!MarkingValid(xy,type,state)){
+		mode.ended=true;
+		UpdateState({mode:mode},{id:state.id});
+		return;
+	}
+
+	mode.selection=[xy];
+	mode.dragging=true;
+
+	if(!Equal(mode,state.mode))
+		UpdateState({mode:mode},{id:state.id});
 }
 
 DragActionStarter=function(x,y,w,h,target){
 	var state=TargetState();
 	var dot=CanvasDot(x,y,w,h,state);//the type of dot is as yet undefined
 	var xy=dot.xy;
-	if(!PointValid(xy,state))
-		return;//TODO OTHER OPTIONS
-
 	var mode=Clone(state.mode);
-	var type=dot.type;
+		mode.ended=false;
 
-	mode.marking=false;
-	if(type!=="F"){
-		xy=dot[type];
-		mode.marking=type;
-		mode.clearing=!!XYMarked(xy,dot.type,state);
+	if(!PointValid(xy,state)){
+		mode.ended=true;
+		UpdateState({mode:mode},{id:state.id});
+		return;
 	}
 
 	mode.selection=[xy];
@@ -1772,17 +1804,20 @@ DragActionStarter=function(x,y,w,h,target){
 	if(!Equal(mode,state.mode))
 		UpdateState({mode:mode},{id:state.id});
 }
+
 DragActionContinuer=function(x,y,w,h,target){
 	var state=TargetState();
 	var dot=CanvasDot(x,y,w,h,state);
 	var xy=dot.xy;
 	var mode=Clone(state.mode);
-	if(!PointValid(xy,state))
+	if(!PointValid(xy,state)||mode.ended)
 		return;//TODO OTHER OPTIONS
 
 	if(mode.marking){
 		xy=dot[mode.marking];
-	}		
+		if(!MarkingValid(xy,mode.marking,state))
+			return;//TODO OTHER OPTIONS
+	}
 
 	if(!mode.selection)
 		mode.selection=[];
@@ -1819,7 +1854,7 @@ DragActionEnder=function(x,y,w,h,target){
 		else
 			XYFruitsAdd(selected,state);
 	}
-	if(mode.marking){
+	else if(mode.marking){
 		if(mode.clearing)
 			XYMarksRemove(selected,mode.marking,state);
 		else
@@ -2039,7 +2074,7 @@ var WheelActions={
 
 var DragActions={
 	"drag-on":DragActionStarter,
-	"drag-on-alt":DragActionDrawStarter,
+	"drag-on-alt":DragActionAltStarter,
 	"drag-on-2":WheelActions["wheel-down"],
 	"drag-on-3":DragActionDrawStarter,
 	"drag-on-4":ClearSegments,
