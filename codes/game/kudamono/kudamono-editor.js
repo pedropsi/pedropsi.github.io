@@ -1195,6 +1195,8 @@ MetadataColophonDraw=function(state){
 		colophon=`<p class="author">${colophon}</p>`
 	
 	var thanks=state.metadata.thanks?("With thanks to "+P(state.metadata.thanks)+"."):"";
+	if(thanks)
+		thanks=`<div class="thanks">${thanks}</div>`;
 
 	ReplaceChildren(`
 	<div class="colophon">
@@ -1202,7 +1204,7 @@ MetadataColophonDraw=function(state){
 			${colophon}
 			${url}
 		</div>
-		<div class="thanks">${thanks}</div>
+		${thanks}
 	</div>
 	`,
 	state.render.target+"-metadatacolophon");
