@@ -1412,6 +1412,7 @@ AdvanceState=function(substate,options){
 	state=StateCombiner(state,substate);
 	
 	changed=ComplementObject(state,OLDSTATE);
+	Monitor(changed,TreeKeys(changed));
 
 	if(Intersected(TreeKeys(changed),CompletableProperties)||options.initialise){
 		state=CompleteState(state);
@@ -1458,13 +1459,13 @@ LayerPainter=function(layer){
 }
 
 LayersChanged={
-	grid:["force-grid","W","H","visuals.monochrome","win.won","grid","mode.edit"],
-	level:["force-level","W","H","visuals.monochrome","orchard","level"],
-	overlevel:["force-overlevel","W","H","visuals.monochrome","mode.edit","mode.selection","mode.dragging","mode.fruitIndex"],
-	line:["force-line","W","H","visuals.monochrome","orchard"],
-	marks:["force-marks","W","H","visuals.monochrome","marks"],
-	overline:["force-overline","W","H","visuals.monochrome","mode.edit","mode.selection"],
-	explainer:["force-level","level","W","H","force-explainer","visuals.monochrome"],
+	grid:["W","H","visuals.monochrome","win.won","grid","mode.edit"],
+	level:["W","H","visuals.monochrome","orchard","level"],
+	overlevel:["W","H","visuals.monochrome","mode.edit","mode.selection","mode.dragging","mode.fruitIndex"],
+	line:["W","H","visuals.monochrome","orchard"],
+	marks:["W","H","visuals.monochrome","marks"],
+	overline:["W","H","visuals.monochrome","mode.edit","mode.selection"],
+	explainer:["level","W","H","visuals.monochrome","explainer"],
 	metadatatitle:["force-metadata","force-metadatatitle"],
 	metadatacolophon:["force-metadata","force-metadatacolophon"],
 	cursor:["visuals.monochrome","mode.fruitIndex","mode.edit","mode.clearing"]
@@ -1507,6 +1508,7 @@ StateDraw=function(state,changed){
 
 UpdateState=function(substate,options){
 	var state=AdvanceState(substate,options);
+	
 	var changed=TreeKeys(state.changed);
 		changed=Union(changed,options.draw||[])
 	StateDraw(state,changed);
@@ -1846,21 +1848,18 @@ DragActionEnder=function(x,y,w,h,target){
 	var mode=state.mode;
 		mode.dragging=false;
 	var selected=mode.selection||[];
-	var force="none";
 
 	if(mode.edit){
 		if(mode.clearing)
 			XYFruitsRemove(selected,state);
 		else
 			XYFruitsAdd(selected,state);
-		force="force-level";
 	}
 	else if(mode.marking){
 		if(mode.clearing)
 			XYMarksRemove(selected,mode.marking,state);
 		else
 			XYMarksAdd(selected,mode.marking,state);
-		force="force-marks";
 	}
 	else {
 		if(selected.length>1){
@@ -1871,7 +1870,6 @@ DragActionEnder=function(x,y,w,h,target){
 				XYSegmentsAdd(segments,state);
 			}
 		}
-		force="force-level";
 	}
 
 	ClearCanvas(state.render.target+"-overlevel")
@@ -1880,7 +1878,7 @@ DragActionEnder=function(x,y,w,h,target){
 	mode.selection=[];
 	mode.clearing=false;
 	mode.marking=false;
-	UpdateState({mode:mode},{id:state.id,draw:[force]})
+	UpdateState({mode:mode},{id:state.id})
 }
 
 
@@ -1902,7 +1900,7 @@ BoardIncrementer=function(L,size){
 		H:h=>Max(2,h+Abs(v[1])*size),
 		segments:SegmentsShifter(w),
 		level:LevelShifter(w)
-	},{draw:["force-level","force-explainer"]})
+	})
 }
 
 
@@ -1934,13 +1932,13 @@ BoardRotaterHandlerer=function(wise){
 	return StateKeyHandlerer({
 		level:level=>TransformLevel(level,PointRotator(TargetState().W,TargetState().H,wise)),
 		segments:segments=>segments.map(seg=>seg.map(PointRotator(TargetState().W,TargetState().H,wise)))
-	},{draw:["force-level"]});
+	});
 }
 
 
-var ClearBoard=StateKeyHandlerer({segments:[],level:{},draw:["force-level"]});
+var ClearBoard=StateKeyHandlerer({segments:[],level:{}});
 var ClearSegments=StateKeyHandlerer({segments:[]});
-var ClearFruit=StateKeyHandlerer({level:{},draw:["force-level","segments"]});
+var ClearFruit=StateKeyHandlerer({level:{}});
 
 
 
@@ -2064,7 +2062,7 @@ FruitCycler=function(n){
 		var state=TargetState();
 		UpdateState(
 			{mode:CycleFruitMode(state,n)},
-			{id:state.id,draw:["force-cursor"]}
+			{id:state.id}
 		)
 	}
 }

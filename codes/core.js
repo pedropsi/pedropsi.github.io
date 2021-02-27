@@ -1564,10 +1564,9 @@ TreeKeys=function(Obj,separator){
 	var full=[];
 	var keys=Keys(Obj);
 		keys.map(function(k){
+			full.push(k);
 			if(Objected(Obj[k]))
 				full=full.concat(TreeKeys(Obj[k],separator).map(Prefixer(k+separator)));
-			else
-				full.push(k);
 		})
 	return full;
 /*
@@ -1577,11 +1576,15 @@ TreeKeys({a:1,b:2})
 
 Deep Object
 TreeKeys({a:1,b:{c:3,d:{e:5}}})
-["a","b.c","b.d.e"]
+["a","b","b.c","b.d","b.d.e"]
 
 Custom separator
 TreeKeys({a:1,b:{c:3}},"»»")
-["a","b»»c"]
+["a","b","b»»c"]
+
+Mixed array object
+TreeKeys({a:{},b:["1","2"]})
+["a","b"]
 */
 }
 
