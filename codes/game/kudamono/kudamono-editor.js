@@ -1955,11 +1955,17 @@ var ClearFruit=StateKeyHandlerer({level:{}});
 
 
 
-CycleFruitMode=function(state,n){
+CycleFruitMode=function(state,n,around){
 	var mode=Clone(state.mode);
 	var fruits=Keys(state.fruits);
 	var index=(mode.fruitIndex||0)+(n||1);
 	var l=fruits.length;
+	if(around){
+		mode.edit=true;
+		mode.fruitIndex=index%l;
+		return mode;
+	}
+
 	
 	if(!mode.exceeded&&!mode.inceeded){
 		if(mode.edit)
@@ -2070,11 +2076,11 @@ KeyboardFruitsActions=function(state){
 	return Actions;
 }
 
-FruitCycler=function(n){
+FruitCycler=function(n,around){
 	return function(target){
 		var state=TargetState();
 		UpdateState(
-			{mode:CycleFruitMode(state,n)},
+			{mode:CycleFruitMode(state,n,around)},
 			{id:state.id}
 		)
 	}
@@ -2088,7 +2094,7 @@ var WheelActions={
 var DragActions={
 	"drag-on":DragActionStarter,
 	"drag-on-alt":DragActionAltStarter,
-	"drag-on-2":WheelActions["wheel-down"],
+	"drag-on-2":FruitCycler(1,true),
 	"drag-on-3":DragActionDrawStarter,
 	"drag-on-4":ClearSegments,
 	"drag-on-5":ClearFruit,
