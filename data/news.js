@@ -84,7 +84,7 @@ N_55:{
 		DATE:"2020-09-19",
 		HEADER:()=>"Reorderings, bugfix",
 		PIECE:()=>`
-		<p>${A("puzzle-type")} levels were reordered after playtesting feedback, and new labels ${ObtainSymbol("structure")} and  ${ObtainSymbol("math")} were added. Some bugfixes. Thanks ${P("hedeholm","deusovi")}!
+		<p>${A("puzzle-type")} levels were reordered after playtesting feedback, and new labels ${Glyph("structure")} and  ${Glyph("math")} were added. Some bugfixes. Thanks ${P("hedeholm","deusovi")}!
 		<p>Levels LOO*** added.</p>
 	`,ID:"puzzle-type"},
 N_54:{
@@ -121,7 +121,7 @@ N_50:{
 		DATE:"2020-06-06",
 		HEADER:()=>"Difficulty stars & symbols, trailer, new level",
 		PIECE:()=>`
-		<p>In ${A("puzzle-type")}, ${ObtainSymbol("asterisk-heavy")} indicates level difficulty, other symbols have different meanings: ${ObtainSymbol("eye")} ${ObtainSymbol("search")} ${ObtainSymbol("book")}. Thanks ${P("hedeholm","thinky")}!</p>
+		<p>In ${A("puzzle-type")}, ${Glyph("asterisk-heavy")} indicates level difficulty, other symbols have different meanings: ${Glyph("eye")} ${Glyph("search")} ${Glyph("book")}. Thanks ${P("hedeholm","thinky")}!</p>
 		<p>A small trailer was added.</p>
 		<p>New level! STA***. Level MON*** became LA****, provisionally.</p>
 	`,ID:"puzzle-type"},
@@ -788,7 +788,7 @@ NewsSources={
 		Transformer:function(item,key){
 			var number=UnAfterfix(key,"-");
 			var title=item.legend||key;
-			var stars=item.stars?(item.stars+ObtainSymbol("star")):"";
+			var stars=item.stars?(item.stars+Glyph("star")):"";
 			var suffix=(item.variant?(" - "+item.variant):"");
 				title=title+suffix;
 			var link=AHTML(title,item.href?item.href:("star-battle.html#"+key))

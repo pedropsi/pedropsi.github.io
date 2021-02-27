@@ -537,7 +537,7 @@ RequestGameFeedback=function(){
 	if(CurrentDatapack()&&CurrentDatapack().buttonSelector==="FeedbackButton")
 		CloseCurrentDatapack();
 	else if(TitleScreen()){
-		DFsettingsObj.questionname="<p>Press "+ObtainSymbol("feedback")+" or <kbd>"+ObtainMainKey("feedback")+"</kbd> as soon as you start the game to Email Pedro PSI real-time feedback. Much appreciated!</p>";
+		DFsettingsObj.questionname="<p>Press "+Glyph("feedback")+" or <kbd>"+ObtainMainKey("feedback")+"</kbd> as soon as you start the game to Email Pedro PSI real-time feedback. Much appreciated!</p>";
 		RequestDataPack([['plain',DFsettingsObj]],DPsettingsObj);
 	}
 	else if(HasFeedback()){
@@ -891,10 +891,10 @@ ActivateNightMode=function(){
 		Memory("nightmode_on",true);
 		ConsoleAddMany([
 		"Night mode active.",
-		`Find the ${ObtainSymbol("sun")} to change.`
+		`Find the ${Glyph("sun")} to change.`
 		]);
 	}
-	GetElement("NightMode").innerHTML=ObtainSymbol("sun");
+	GetElement("NightMode").innerHTML=Glyph("sun");
 }
 
 UnActivateNightMode=function(){
@@ -905,10 +905,10 @@ UnActivateNightMode=function(){
 		Memory("nightmode_off",true);
 		ConsoleAddMany([
 			`Bright mode active.`,
-			`Find the ${ObtainSymbol("moon")} to revert.`
+			`Find the ${Glyph("moon")} to revert.`
 		]);
 	}
-	GetElement("NightMode").innerHTML=ObtainSymbol("moon");
+	GetElement("NightMode").innerHTML=Glyph("moon");
 }
 
 ToggleNightMode=function(){

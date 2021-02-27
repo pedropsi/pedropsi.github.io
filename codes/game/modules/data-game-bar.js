@@ -102,7 +102,7 @@ if(typeof ObtainMainKey==="undefined")
 	}
 
 function ActionKeyText(action){
-	var S=ObtainSymbol(action);
+	var S=Glyph(action);
 	var K=ObtainMainKey(action);
 	
 	if(K!=="")
@@ -253,14 +253,14 @@ function GameBarTypewriterBanner(action){
 }
 
 function GameBarCancelTypewriterBanner(action){
-	return 'CancelTypewriterBanner(this,StringSymbol(\"'+action+'\"),\"'+action+'\")';
+	return 'CancelTypewriterBanner(this,StringGlyph(\"'+action+'\"),\"'+action+'\")';
 }
 
 function GameBarButtonHTML(action,attribs){
 	var TWB=GameBarTypewriterBanner(action);
 	var UnTWB=GameBarCancelTypewriterBanner(action);
 	return ButtonHTML(Merge(attribs,{
-			txt:ObtainSymbol(action),
+			txt:Glyph(action),
 			onmouseover:TWB,
 			onfocus:TWB,
 			onmouseout:UnTWB,
@@ -606,7 +606,7 @@ function RequestKeyboard(){
 	var DFOpts={
 		executeChoice:ObtainGameAction,
 		qchoices:ObtainKeyboardKeys(),
-		qchoicesViewF:ObtainSymbol
+		qchoicesViewF:Glyph
 	}
 	
 	var Shortcuts=ObtainKeyActionsGameBar();

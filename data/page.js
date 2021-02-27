@@ -197,7 +197,7 @@ NavLinkHTML=function(link){
 }
 
 NightModeButton=function(){
-	return `<div class="nav-link selectable" id="NightMode" onclick='ToggleNightMode()'>${ObtainSymbol("moon")}</div>`
+	return `<div class="nav-link selectable" id="NightMode" onclick='ToggleNightMode()'>${Glyph("moon")}</div>`
 }
 
 NavbarHTML=function(){

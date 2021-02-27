@@ -1162,7 +1162,7 @@ ExplainerDraw=function(state){
 
 MetadataColophon=function(metadata){
 	var number=metadata.number?(Prefix(metadata.number,"#")+" "):"";
-	var difficulty=metadata.difficulty?(ObtainSymbol("asterisk-heavy").repeat(metadata.difficulty)+" "):"";
+	var difficulty=metadata.difficulty?(Glyph("asterisk-heavy").repeat(metadata.difficulty)+" "):"";
 	
 	var title=metadata.title?CapitalCase(metadata.title.replace(/-+/g," ")):"";
 		title=title?(Exfix(title,'"')+" "):"";
@@ -1547,7 +1547,7 @@ CursorDraw=function(state){
 			cursor=RescalePath({...cursor,scale:1,square:100},true);
 			cursor=DisplacePath({...cursor,px:10,py:10});
 			cursor.viewBox="0 0 110 110",
-			cursor=BuildSymbolIcon({...cursor,primitive:"cursor-triangle"});
+			cursor=BuildGlyphIcon({...cursor,primitive:"cursor-triangle"});
 			CursorDraw[name]=cursor;
 		}
 		else
@@ -2254,7 +2254,12 @@ PuzzlePictureDraw=function(name,puzzle){
 	})
 	
 	metadata=ParametersMetadata(serialObj);
-	var legend=(metadata.title||"");
+	var title=CapitalCase(metadata.title||"").replace(/-/g," ");
+	var diff=Glyph("asterisk-heavy").repeat(metadata.difficulty||0);
+	var date=metadata.date;
+	var legend=`
+		${title}
+		${diff} ${date}`;
 	
 
 	HearElement(cla+" canvas",function(){

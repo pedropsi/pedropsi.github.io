@@ -314,7 +314,7 @@ function GameKeyHandler(key){
 }
 
 function GameKey(key){
-	var key=StringSymbol(key); //accept keywords space, dot, dash
+	var key=StringGlyph(key); //accept keywords space, dot, dash
 	function KeyInput(){
 		return InstructGameInput(key);
 	}
@@ -344,7 +344,7 @@ function GameInput(key){
 		return;
 	}
 
-	if(key===StringSymbol("interpunkt")){//neuter separator
+	if(key===StringGlyph("interpunkt")){//neuter separator
 		ForbidCaret();
 		return;
 	}
@@ -477,7 +477,7 @@ function ForbidArrowActions(key){
 	],CurLevelTitle())&&In(ArrowKeys,key));
 }
 
-var ArrowKeys=Directions.map(StringSymbol);
+var ArrowKeys=Directions.map(StringGlyph);
 
 function AllowExtraUndoKey(key){
 	return CurLevelTitle()==="Wasd"&&key==="Z";
@@ -602,7 +602,7 @@ function LevelWon(title){
 }
 
 function LevelDifficultyStars(title){
-	return ObtainSymbol("asterisk-heavy").repeat(LevelDifficulty[title]||0);
+	return Glyph("asterisk-heavy").repeat(LevelDifficulty[title]||0);
 }
 
 var ExternalLevels=[
@@ -670,17 +670,17 @@ function ObtainLevelNotes(lvl){
 	var title=LevelTitle(lvl);
 	var extras="";
 	if(In(SoundLevels,title))
-		extras+=" "+ObtainSymbol("music");
+		extras+=" "+Glyph("music");
 	if(In(VisualLevels,title))
-		extras+=" "+ObtainSymbol("eye");
+		extras+=" "+Glyph("eye");
 	if(In(LanguageLevels,title))
-		extras+=" "+ObtainSymbol("book");
+		extras+=" "+Glyph("book");
 	if(In(ExternalLevels,title))
-		extras+=" "+ObtainSymbol("magnifying-glass");
+		extras+=" "+Glyph("magnifying-glass");
 	if(In(MathematicalLevels,title))
-		extras+=" "+ObtainSymbol("math");
+		extras+=" "+Glyph("math");
 	if(In(StructuralLevels,title))
-		extras+=" "+ObtainSymbol("structure");
+		extras+=" "+Glyph("structure");
 
 	return 	LevelDifficultyStars(title)+extras;
 }
@@ -1046,13 +1046,13 @@ function Wasd(L){
 
 	var level=Memo();
 	
-	if(L==="W"||L===StringSymbol("up"))
+	if(L==="W"||L===StringGlyph("up"))
 		level=EmulateUp(level);
-	if(L==="A"||L===StringSymbol("left"))
+	if(L==="A"||L===StringGlyph("left"))
 		level=EmulateLeft(level);
-	if(L==="S"||L===StringSymbol("down"))
+	if(L==="S"||L===StringGlyph("down"))
 		level=EmulateDown(level);
-	if(L==="D"||L===StringSymbol("right"))
+	if(L==="D"||L===StringGlyph("right"))
 		level=EmulateRight(level);
 
 	Memo(level);
@@ -1702,8 +1702,8 @@ function Weightier(L){
 }
 
 function ArrowDisplay(word,type){
-	var left=(!type||type==="left")?StringSymbol("left"):"";
-	var right=(!type||type==="right")?StringSymbol("right"):"";
+	var left=(!type||type==="left")?StringGlyph("left"):"";
+	var right=(!type||type==="right")?StringGlyph("right"):"";
 	return left+word+right;
 }
 
@@ -1919,9 +1919,9 @@ function CyclePossibilities(L,insertions){
 	if(!In(LetterSpaceCharacters,L)){
 		if(In(NumberCharacters,L))
 			p=Number(L);
-		else if(In(["left","up"].map(StringSymbol),L))
+		else if(In(["left","up"].map(StringGlyph),L))
 			p=(p-1);
-		else if(In(["right","down"].map(StringSymbol),L))
+		else if(In(["right","down"].map(StringGlyph),L))
 			p=(p+1);
 	
 		p=Max(Min(p,possibilities.length-1),0);
@@ -2355,7 +2355,7 @@ function TemporaryWord(){
 
 function Word(){
 	var word=Letters.array.join("");
-	return word.replace(StringSymbol("left"),"").replace(StringSymbol("right"),"");
+	return word.replace(StringGlyph("left"),"").replace(StringGlyph("right"),"");
 }
 
 function Letters(array){
@@ -2562,7 +2562,7 @@ function ClearLetters(){
 function DrawLetters(){
 		
 	var letters=Letters();
-		letters=letters.map(ObtainSymbol);//Replace any icons
+		letters=letters.map(Glyph);//Replace any icons
 		letters=letters.map(LetterHTML(CurLevelTitle())).join("\n");
 	ReplaceChildren(letters,"#letters");
 	NumberLetterElements();
@@ -2599,7 +2599,7 @@ function TransitionExpansion(){
 	if(!memo||!memo.positions||memo.p===undefined||!memo.animate)
 		return;
 	
-	var p=memo.positions[memo.p]+(In(Letters(),StringSymbol("left"))?1:0);
+	var p=memo.positions[memo.p]+(In(Letters(),StringGlyph("left"))?1:0);
 
 	var letterE=GetElement("#letters .letter-"+p);
 	if(letterE){
@@ -2627,7 +2627,7 @@ function KeystrokeHTML(K){
 		styles+=" keystroke-reduced";
 
 	var K=CleanStroke(K);
-		K=ObtainSymbol(K);//replace with icon, if available
+		K=Glyph(K);//replace with icon, if available
 	return `<span class="keystroke ${styles}">${K}</span>`;
 }
 
@@ -3000,8 +3000,8 @@ function LevelWinMacro(){
 function GoalMatchedMacro(){
 	return [
 		{Starter:function(){
-			GetElements("#letters .icon-"+StringSymbol("left")).map(e=>ParentElement(e,".letter")).map(ShrinkElement);
-			GetElements("#letters .icon-"+StringSymbol("right")).map(e=>ParentElement(e,".letter")).map(ShrinkElement);
+			GetElements("#letters .icon-"+StringGlyph("left")).map(e=>ParentElement(e,".letter")).map(ShrinkElement);
+			GetElements("#letters .icon-"+StringGlyph("right")).map(e=>ParentElement(e,".letter")).map(ShrinkElement);
 			GetElements(".invisible").map(ShrinkElement);
 			UnWrapElement(".expanding");
 		},endDelay:500},
@@ -3162,7 +3162,7 @@ function AddStroke(L,symbol){
 	AddWordStroke(L,symbol);
 }
 
-var separator=StringSymbol("interpunkt");
+var separator=StringGlyph("interpunkt");
 
 function CleanStroke(L){
 	return L.replace(/\*|\-|\~|!/g,"");
@@ -3370,12 +3370,12 @@ function LetterString(e){
 	if(!GetElement(".iconpath",e))
 		return e.innerText;
 	else
-		return StringSymbol(IconName(e));
+		return StringGlyph(IconName(e));
 }
 
 function SimplerArrowCycleString(text){
-	var lr=StringSymbol("left")+StringSymbol("right");
-	var rl=StringSymbol("right")+StringSymbol("left");	
+	var lr=StringGlyph("left")+StringGlyph("right");
+	var rl=StringGlyph("right")+StringGlyph("left");	
 	return FixedPoint(t=>t.replace(lr,"").replace(rl,""),text);
 }
 

@@ -51,8 +51,8 @@ function GameIntro(Callback){
 function Clickwall(Callback){
 	AppendToElement(`
 		<div class="clickwall faded">
-			<div class="circular">${ObtainSymbol("play")}</div>
-			<p>Please turn on the sound ${ObtainSymbol("music")}.</p><p><b>Click anywhere to start!</b></p>
+			<div class="circular">${Glyph("play")}</div>
+			<p>Please turn on the sound ${Glyph("music")}.</p><p><b>Click anywhere to start!</b></p>
 		</div>`,".game");
 	UnFadeElement(".clickwall",500);
 	function Start(){

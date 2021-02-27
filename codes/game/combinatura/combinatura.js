@@ -61,7 +61,7 @@ function ObtainKeyActionsGame(){
 		"R":ObtainRestart
 	};
 	
-	keyactions[StringSymbol("restart")]=ObtainRestart;
+	keyactions[StringGlyph("restart")]=ObtainRestart;
 	
 	keyactions=Merge(
 		keyactions,

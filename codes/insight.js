@@ -215,7 +215,7 @@ DeployViewCounter=function(viewdata){
 	else
 		viewdata=viewdata[0][1];
 	
-	DynamicText("view-counter",ObtainSymbol("eye")+"\n"+viewdata+" (analytics are "+TogglerButtonHTML("AnalyticsAllowed")+")");
+	DynamicText("view-counter",Glyph("eye")+"\n"+viewdata+" (analytics are "+TogglerButtonHTML("AnalyticsAllowed")+")");
 }
 
 //////////////////////////////////////////////////////////////////////

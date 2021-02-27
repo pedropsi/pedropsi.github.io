@@ -249,7 +249,7 @@ function GameEntryData(dataline){
 			data.consolable=true;
 		
 		if(data.consolable)
-			data.titleHTML=AHTML(data.titleHTML,data.playlink)+" "+AHTML(ObtainSymbol("loz"),data.linkHTML);
+			data.titleHTML=AHTML(data.titleHTML,data.playlink)+" "+AHTML(Glyph("loz"),data.linkHTML);
 		else
 			data.titleHTML=AHTML(data.titleHTML,data.playlink=data.linkHTML);
 		
@@ -293,7 +293,7 @@ function GameEntryData(dataline){
 
 function EditButtonTD(id){
 	var bu=ButtonHTML({
-		txt:ObtainSymbol("edit"),
+		txt:Glyph("edit"),
 		onclick:"RequestPGDSubmission(\""+id+"\",true);"});
 	return "<td class='editTD'>"+bu+"</td>";
 };

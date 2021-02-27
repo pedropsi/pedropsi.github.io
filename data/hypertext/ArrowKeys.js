@@ -1,5 +1,5 @@
 ArrowGridKB=function(direction,i){
-	return `<kbd class="key-${Directions[i]}">${ObtainSymbol(direction)}</kbd>`;
+	return `<kbd class="key-${Directions[i]}">${Glyph(direction)}</kbd>`;
 }	
 ArrowKeysGridHTML=function(LURDArray){
 	return `<span class="grid controls-arrow">${LURDArray.map(ArrowGridKB).join("")}</span>`;

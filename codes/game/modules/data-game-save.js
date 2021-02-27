@@ -21,7 +21,7 @@ function ActivateSavePermission(thi){
 	Localsave();
 	ConsoleAddMany([
 		`The local save file is ON for ${PageTitle()}.`,
-		`To erase the save file, deselect ${ObtainSymbol("Save")} and reload the page.`
+		`To erase the save file, deselect ${Glyph("Save")} and reload the page.`
 		]);
 	Select(thi);
 }

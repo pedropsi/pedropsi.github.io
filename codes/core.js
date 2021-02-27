@@ -5142,7 +5142,7 @@ FilterHTML=function(functionname,uid){
 	return `
 	<input 
 		class='input search filter-${uid}'
-		placeholder='search ${StringSymbol("search")}'
+		placeholder='search ${StringGlyph("search")}'
 		onkeyup='${functionname}("${uid}",".filter-${uid}")'>
 	</input>`;
 }
@@ -5319,7 +5319,7 @@ SetCursor=function(element,nameSO,Opts){
 
 IconEncodedURL=function(nameSO,Opts){
 	var Opts=Opts||{};
-	var Obj=Stringed(nameSO)?SymbolIcon(StringSymbol(nameSO)):nameSO;
+	var Obj=Stringed(nameSO)?GlyphIcon(StringGlyph(nameSO)):nameSO;
 	var icon=Merge(SVGObject(Obj),Opts);
 	return SVGEncodedURL(icon);
 }
@@ -5448,7 +5448,7 @@ L=LabelHTML;
 
 ScrollUpHTML=function(){
 	return ButtonHTML({
-		txt:ObtainSymbol("scroll-up"),
+		txt:Glyph("scroll-up"),
 		class:"scrollTop",
 		onclick:"window.scrollTo(0,0)"
 	});
@@ -5728,7 +5728,7 @@ DataFieldTypes=function(){
 		qfield:"navi",
 		qclass:"nowrap",
 		questionname:"",
-		qchoices:[StringSymbol("left"),"OK",StringSymbol("right")],
+		qchoices:[StringGlyph("left"),"OK",StringGlyph("right")],
 		qtype:ExclusiveChoiceButtonRowHTML,
 		defaultChoice:function(i,txt){return txt==="OK";},
 		qsubmittable:false},
@@ -8064,7 +8064,7 @@ Range=function(min,max){
 ///////////////////////////////////////////////////////////////////////////////
 //Symbol designs
 
-var StringSymbols={
+var StringGlyphs={
 	"music":"♫",
 	"more":"+",
 	"scroll-up":"▵",
@@ -8207,41 +8207,41 @@ var MacKeys={
 	"alt":"opt"
 }
 
-StringSymbol=function(name){
-	return LowerAccesser(StringSymbols)(name);
+StringGlyph=function(name){
+	return LowerAccesser(StringGlyphs)(name);
 }
 
-var SymbolsNames=FlipKeysValues(StringSymbols);
+var GlyphsNames=FlipKeysValues(StringGlyphs);
 
-SymbolName=function(symbol){
-	return LowerAccesser(SymbolsNames)(symbol)
+GlyphName=function(symbol){
+	return LowerAccesser(GlyphsNames)(symbol)
 }
 
-ElementSymbolName=function(e){
-	var n=Keys(Symbols).filter(name=>(SymbolName(e.innerHTML)===NewNode("<span>"+SymbolIcon(name)+"</span>").innerHTML));
+ElementGlyphName=function(e){
+	var n=Keys(Symbols).filter(name=>(GlyphName(e.innerHTML)===NewNode("<span>"+GlyphIcon(name)+"</span>").innerHTML));
 	if(n.length)
 		return n[0];
 }
 
-SymbolIcon=function(name){
-	if(SymbolIcon[name])
-		return SymbolIcon[name];
+GlyphIcon=function(name){
+	if(GlyphIcon[name])
+		return GlyphIcon[name];
 
-	var name=SymbolName(StringSymbol(name));
+	var name=GlyphName(StringGlyph(name));
 	var symbolObj=LowerAccesser(Icons)(name);
 	
 	if(symbolObj===name)
 		return name;
 	
-	return SymbolIcon[name]=BuildSymbolIcon(symbolObj);
+	return GlyphIcon[name]=BuildGlyphIcon(symbolObj);
 }
 
-BuildSymbolIcon=function(symbolObj){
+BuildGlyphIcon=function(symbolObj){
 	var symbolObj=Clone(symbolObj);
-	var primitives=symbolObj.primitive?ReArray(symbolObj.primitive).map(SymbolIcon):[];
+	var primitives=symbolObj.primitive?ReArray(symbolObj.primitive).map(GlyphIcon):[];
 		delete symbolObj["primitive"];
 	
-	symbolObj=ComposeSymbols(symbolObj,primitives);
+	symbolObj=ComposeGlyphs(symbolObj,primitives);
 
 	var viewBox=symbolObj.viewBox||`${symbolObj.vbmin||"0 0"} ${symbolObj.vbmax||"400 400"}`;
 	if(symbolObj.transform) //transform name, that is
@@ -8250,13 +8250,13 @@ BuildSymbolIcon=function(symbolObj){
 	return symbolObj;
 }
 
-ComposeSymbols=function(symbolObj,primitives){
+ComposeGlyphs=function(symbolObj,primitives){
 	if(!primitives.length)
 		return symbolObj;
-	return Fold(ComposeSymbol,Clone(symbolObj),primitives);
+	return Fold(ComposeGlyph,Clone(symbolObj),primitives);
 }
 
-ComposeSymbol=function(symbolObj,primitive){
+ComposeGlyph=function(symbolObj,primitive){
 	var primitive=Clone(primitive);
 	if(primitive.path){
 		var derivative=(primitive.path||"")+" "+(symbolObj.path||"");
@@ -8267,15 +8267,15 @@ ComposeSymbol=function(symbolObj,primitive){
 		return Merge(primitive,symbolObj);
 }
 
-ObtainSymbol=function(name){
-	var i=SymbolIcon(StringSymbol(name));
-	if(i===name||i===SymbolName(name)||i===StringSymbol(name))
-		return StringSymbol(name);
+Glyph=function(name){
+	var i=GlyphIcon(StringGlyph(name));
+	if(i===name||i===GlyphName(name)||i===StringGlyph(name))
+		return StringGlyph(name);
 	else{
 		i.name=name;//name the icon in a class
-		if(ObtainSymbol[name])
-			return ObtainSymbol[name];
-		return ObtainSymbol[name]=IconHTML(i);
+		if(Glyph[name])
+			return Glyph[name];
+		return Glyph[name]=IconHTML(i);
 	}
 }
 
@@ -8485,8 +8485,8 @@ KBDPureHTML=function(key){
 KBDSymbol=function(key){
 	var mac="";
 	if(In(MacKeys,key))
-		mac=" / "+ObtainSymbol(MacKeys[key]);
-	return ObtainSymbol(key)+mac;
+		mac=" / "+Glyph(MacKeys[key]);
+	return Glyph(key)+mac;
 }
 
 //2
@@ -8513,7 +8513,7 @@ ExplainCombo=function(combo){
 }
 
 KeyExplainable=function(key){
-	return key!==ObtainSymbol(key);
+	return key!==Glyph(key);
 }
 
 ExplainKey=function(key){
