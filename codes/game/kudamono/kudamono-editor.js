@@ -1687,7 +1687,7 @@ RemoveXYMarks=function(points,type,state){
 	points.map(function(xy){
 		if(!PointValid(xy,state))
 			return;
-		marks[type]=marks[type].filter(cr=>!Equal(cr,xy));
+		marks[type]=(marks[type]||[]).filter(cr=>!Equal(cr,xy));
 	})
 	return marks;
 }
@@ -1702,7 +1702,7 @@ XYMarksAdd=function(points,type,state){
 	points.map(function(xy){
 		if(!PointValid(xy,state))
 			return;
-			marks[type]=Union(marks[type],[xy]);
+			marks[type]=Union(marks[type]||[],[xy]);
 	})
 	MarksUpdate(marks,state);
 }
@@ -1900,6 +1900,7 @@ DragActionEnder=function(x,y,w,h,target){
 BoardShifter=function(L){
 	return StateKeyHandlerer({
 		level:LevelShifter(DirectionsCoordinates[L]),
+		marks:LevelShifter(DirectionsCoordinates[L]),
 		segments:SegmentsShifter(DirectionsCoordinates[L])
 	});
 }
@@ -1912,7 +1913,8 @@ BoardIncrementer=function(L,size){
 		W:w=>Max(2,w+Abs(v[0])*size),
 		H:h=>Max(2,h+Abs(v[1])*size),
 		segments:SegmentsShifter(w),
-		level:LevelShifter(w)
+		level:LevelShifter(w),
+		marks:LevelShifter(w)
 	})
 }
 
@@ -1949,7 +1951,7 @@ BoardRotaterHandlerer=function(wise){
 }
 
 
-var ClearBoard=StateKeyHandlerer({segments:[],level:{}});
+var ClearBoard=StateKeyHandlerer({segments:[],level:{},marks:{}});
 var ClearSegments=StateKeyHandlerer({segments:[]});
 var ClearFruit=StateKeyHandlerer({level:{}});
 
