@@ -1938,9 +1938,9 @@ BoardRotaterHandlerer=function(wise){
 }
 
 
-var ClearBoard=StateKeyHandlerer({segments:[],level:{}});
+var ClearBoard=StateKeyHandlerer({segments:[],level:{},draw:["force-level"]});
 var ClearSegments=StateKeyHandlerer({segments:[]});
-var ClearFruit=StateKeyHandlerer({level:{}});
+var ClearFruit=StateKeyHandlerer({level:{},draw:["force-level","segments"]});
 
 
 
@@ -2010,28 +2010,26 @@ var KeyboardActions=function(){return{
 	"ctrl shift right"	:BoardShifter("R"),
 	"ctrl shift down"	:BoardShifter("D"),
 
-
-	"b ctrl"		:StateKeyHandlerer({visuals:{monochrome:Flipped}}),
-	"b ctrl shift"	:StateKeyHandlerer({visuals:{solid:Flipped}}),
-
-	//"c ctrl":ExportSerial,
-	//"s ctrl":()=>CanvasSave(),
-
 	"space":StateKeyHandlerer({mode:{edit:Flipped}}),
 	"escape":StateKeyHandlerer({mode:{edit:false}}),
 	"insert":StateKeyHandlerer({mode:{edit:true}}),
+
+	"backspace"				:ClearSegments,
+	"delete"				:ClearSegments,
+
+	"backspace shift"		:ClearFruit,
+	"delete shift"			:ClearFruit,
+
+	"backspace ctrl"		:ClearBoard,
+	"delete ctrl"			:ClearBoard,
+
+	"backspace ctrl shift"	:ClearBoard,
+	"delete ctrl shift"		:ClearBoard,
+
+
+	"b ctrl"		:StateKeyHandlerer({visuals:{monochrome:Flipped}}),
+	"b ctrl shift"	:StateKeyHandlerer({visuals:{solid:Flipped}}),
 	
-	"r alt"			:BoardRotaterHandlerer(1),
-	"r shift alt"	:BoardRotaterHandlerer(-1),
-
-	"r ctrl"		:ClearSegments,
-	"r ctrl shift"	:ClearFruit,
-	"r ctrl alt"	:ClearBoard,
-
-	"delete"		:ClearSegments,
-	"delete shift"	:ClearFruit,
-	"delete alt"	:ClearBoard,
-
 	"z ctrl"			:function(){Undo()},
 	"z ctrl shift"		:function(){Redo()},
 	"backspace"			:function(){Undo()},
