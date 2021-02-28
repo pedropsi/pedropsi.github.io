@@ -1154,10 +1154,10 @@ ExplainerBoardHTML=function(name){
 	</div>`;
 }
 
-RuleDraw=function(name,rule,state){
+RuleDraw=function(name,rule,colour,state){
 	if(RuleDrawable(rule)){
 		MiniBoardDraw(name,rule.depiction,state);
-		RuleDescriptionDraw(name,rule.description);
+		RuleDescriptionDraw(name,rule.description,colour);
 	}
 }
 
@@ -1175,12 +1175,12 @@ ExplainerDraw=function(state){
 
 	ReplaceChildren(miniboards,state.render.target+"-explainer");
 	
-	ThreadKeysValues(globalrules,(name,rule)=>RuleDraw(name,rule,state));
+	ThreadKeysValues(globalrules,(name,rule)=>RuleDraw(name,rule,undefined,state));
 
 	for(var i=0;i<levelFruits.length;i++){
 		var fruit=levelFruits[i];
 		var rule=state.fruits[fruit].rule;
-		RuleDraw(fruit,rule,state);
+		RuleDraw(fruit,rule,state.fruits[fruit].colour,state);
 	}
 }
 
