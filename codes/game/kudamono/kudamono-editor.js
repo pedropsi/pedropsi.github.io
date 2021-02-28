@@ -2080,8 +2080,8 @@ var KeyboardActions=function(){return{
 	"y ctrl shift"		:function(){Undo()},
 	"y ctrl"			:function(){Redo()},
 
-	//"c ctrl":ExportSerial,
 	//"s ctrl":()=>CanvasSave(),
+	"c ctrl":ExportSerial,
 	
 	"r alt"			:BoardRotaterHandlerer(1),
 	"r shift alt"	:BoardRotaterHandlerer(-1),
