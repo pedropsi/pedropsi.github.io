@@ -241,7 +241,8 @@ var BlankState={							//default styles applied to all genres
 		cursorsize:80,						//size of cursor
 		monochrome:false,					//whether to use grayscale instead of colour
 		solid:false,						//whether the fruits are solid-coloured
-		skin:4								//line thickness of the fruit skin
+		skin:4,								//line thickness of the fruit skin
+		errorChecked:true					//whether to check for errors
 	},
 	overline:{								//styles for new "overlines" as we draw/erase
 		opacity:0.6,						//opacity of the overline
@@ -335,7 +336,6 @@ var BlankState={							//default styles applied to all genres
 		clearing:false,						//whether clearing fruits, lines, etc...
 		selection:[],						//current points selected (accumulates)
 		xelection:[],						//current marks  selected (accumulates)
-		error:false,						//whether to display errors
 		marking:false						//whether adding marks 
 	},
 	monitor:{								//debugging handles
@@ -776,6 +776,9 @@ TrackStyles=function(track,state,styles,errors){
 	var group=FruitGroupName(fruit,state);
 	var styles={...styles};
 	var colour;
+
+	if(!state.visuals.errorChecked)
+		errors={};
 	
 	if(errors.deficit)
 		colour=state.line.deficitColour;
@@ -877,7 +880,7 @@ StateFruitDraw=function(state,fruit,xy,Opts){
 		py:xy[1]
 	};
 
-	var wrong=XYFruitErred(xy,fruit,state);
+	var wrong=XYFruitErred(xy,fruit,state)&&state.visuals.errorChecked;
 
 	var primarycolour=Opts.colour;
 	if(primarycolour&&Opts.coloriser)
@@ -1482,9 +1485,9 @@ LayerPainter=function(layer){
 
 LayersChanged={
 	grid:["W","H","visuals.monochrome","win.won","grid","mode.edit"],
-	level:["W","H","visuals.monochrome","visuals.solid","orchard","level","mode.selection"],
+	level:["W","H","visuals.monochrome","visuals.solid","orchard","level","mode.selection","visuals.errorChecked"],
 	overlevel:["W","H","visuals.monochrome","visuals.solid","mode.edit","mode.selection","mode.fruitIndex"],
-	line:["W","H","visuals.monochrome","orchard"],
+	line:["W","H","visuals.monochrome","orchard","visuals.errorChecked"],
 	marks:["W","H","visuals.monochrome","marks","mode.xelection"],
 	overline:["W","H","visuals.monochrome","mode.edit","mode.selection","mode.xelection"],
 	explainer:["level","W","H","visuals.monochrome","explainer"],
@@ -2069,6 +2072,8 @@ var KeyboardActions=function(){return{
 
 	"b ctrl"		:StateKeyHandlerer({visuals:{monochrome:Flipped}}),
 	"b ctrl shift"	:StateKeyHandlerer({visuals:{solid:Flipped}}),
+	"e ctrl"		:StateKeyHandlerer({visuals:{errorChecked:Flipped}}),
+	
 	
 	"z ctrl"			:function(){Undo()},
 	"z ctrl shift"		:function(){Redo()},
