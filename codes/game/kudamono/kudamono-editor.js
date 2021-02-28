@@ -335,7 +335,8 @@ var BlankState={							//default styles applied to all genres
 		clearing:false,						//whether clearing fruits, lines, etc...
 		selection:[],						//current points selected (accumulates)
 		xelection:[],						//current marks  selected (accumulates)
-		error:false							//whether to display errors
+		error:false,						//whether to display errors
+		marking:false						//whether adding marks 
 	},
 	monitor:{								//debugging handles
 		state:false
@@ -1107,7 +1108,7 @@ MiniBoardDraw=function(fruit,depiction,state){
 		MiniBoardCanvasDraw(fruit,depiction,state,rendering);
 		HearElement(container+" canvas",function(){
 			var uri=FuseCanvasURI(container);
-			var iuri=I(uri)
+			var iuri=ImageHTML({src:uri,legend:CapitalCase(fruit)+" rule."});
 			ReplaceElement(iuri,container);
 			MiniBoardDraw[fruit]=iuri;
 		})
@@ -2340,9 +2341,8 @@ PuzzlePictureDraw=function(name,puzzle){
 
 	HearElement(cla+" canvas",function(){
 		
-		var uri=FuseCanvasURI(target);
 		var iCard=ImageCardHTML({
-			src:uri,
+			src:FuseCanvasURI(target),
 			href:Prefix(ParameterString(serialObj),"?"),
 			alt:legend,
 			legend:legend
