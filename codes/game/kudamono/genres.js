@@ -72,7 +72,7 @@ var Genres={
 			"consecutives":{
 				unconsecutiveshapes:[ShapeStraights,Shape2Corners,Shape3s],
 				depiction:"W=4&L=w6&S=6xD&G=b",
-				description:"Consecutive rules imply straight endpoints must also not follow straight trunks."
+				description:"Endpoints may not follow straight trunks consecutively."
 			}
 		},
 		win:{
