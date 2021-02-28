@@ -1194,7 +1194,7 @@ MetadataColophonDraw=function(state){
 	if(colophon)
 		colophon=`<p class="author">${colophon}</p>`
 	
-	var thanks=state.metadata.thanks?("With thanks to "+P(state.metadata.thanks)+"."):"";
+	var thanks=""//state.metadata.thanks?("With thanks to "+P(state.metadata.thanks)+"."):"";
 	if(thanks)
 		thanks=`<div class="thanks">${thanks}</div>`;
 
