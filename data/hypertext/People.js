@@ -76,7 +76,8 @@ var Contributors={//People
 	"clickmazes":{name:"Andrea Gilbert",ALIAS:"Clickmazes",PERSONAL_PAGE:"https://clickmazes.com"},
 	"kneeckoh":{alias:"Kneeckoh",TWITTER:"Kneeckoh"},
 	"colin":{name:"Colin"},
-	"icewing":{alias:"IceWing"}
+	"icewing":{alias:"IceWing"},
+	"tjm":{alias:"tjm"}
 }
 
 var Musicians={
