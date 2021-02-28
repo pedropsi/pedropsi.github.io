@@ -29,6 +29,7 @@ var Genres={
 		],
 		visuals:{
 			solid:true,
+			errorChecked:true
 		},
 		overline:{
 			lineWidth:4,
