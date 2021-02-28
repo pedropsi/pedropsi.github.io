@@ -66,7 +66,7 @@ FruitIcons={
 			mintracks:2,
 			trackequaliser:"UnTranslateTrack",
 			description:"All paths under Pears are exact translations (there is more than one).",
-			depiction:"W=2&L=p1p2p2p2&S=1DR2DR"
+			depiction:"W=3&L=p0p2p4p7p2&S=0xR2xR"
 		}
 	},
 	"blueberry":{
