@@ -63,7 +63,9 @@ var Genres={
 			dangleallowed:true,
 			loopallowed:false,
 			simpleshapes:Join(Shape1s,Shape2s,Shape3s),
-			unconsecutiveshapes:[ShapeStraights,Shape2Corners,Shape3s]
+			unconsecutiveshapes:[ShapeStraights,Shape2Corners,Shape3s],
+			depiction:"W=5&S=7Kwna7UD1LR5RL1DU&G=b",
+			description:"Valid piece shapes are 3-junctions, straight trunks, corners and endpoints."
 		},
 		win:{
 			rule:{

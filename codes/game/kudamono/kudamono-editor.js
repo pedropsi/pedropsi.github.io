@@ -1135,23 +1135,34 @@ SerialDraw=function(serial,stateOpts){
 
 RuleDescriptionDraw=function(fruit,rule,colour){
 	var description=`<p>${ReSentence(rule.description)}</p>`;
+	if(colour)
 		description=description.replace(new RegExp("("+UnTake(fruit,-1)+"\\w+)","ig"),`<b style="color:${colour};">$1</b>`);
 
 	ReplaceChildren(description,".description-"+fruit);
 }
 
+ExplainerBoardHTML=function(name){
+	return `
+	<div class="explanation explanation-${name}">
+		<div class="supra-depiction">
+			<div class="depiction depiction-${name}">The picture will appear here.</div>
+		</div>
+		<div class="description description-${name}">The rule of this particular fruit will be here.</div>
+	</div>`;
+}
+
 ExplainerDraw=function(state){
 	var levelFruits=LevelFruits(state);
-	var miniboards=levelFruits.map(function(fruit){return `
-		<div class="explanation explanation-${fruit}">
-			<div class="supra-depiction">
-				<div class="depiction depiction-${fruit}">The picture will appear here.</div>
-			</div>
-			<div class="description description-${fruit}">The rule of this particular fruit will be here.</div>
-		</div>`;
-	});
-	ReplaceChildren(miniboards.join(""),state.render.target+"-explainer");
+	var miniboards=levelFruits.map(ExplainerBoardHTML);
+		miniboards=Prepend(miniboards,ExplainerBoardHTML("basis"));
+		miniboards=miniboards.join("");
+
+	ReplaceChildren(miniboards,state.render.target+"-explainer");
 	
+	if(state.rules.depiction){
+		MiniBoardDraw("basis",state.rules,state);
+		RuleDescriptionDraw("basis",state.rules);
+	}
 
 	for(var i=0;i<levelFruits.length;i++){
 		var fruit=levelFruits[i];
