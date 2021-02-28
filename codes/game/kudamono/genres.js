@@ -66,8 +66,8 @@ var Genres={
 			"valid-shapes":{
 				loopallowed:false,
 				simpleshapes:Join(Shape1s,Shape2s,Shape3s),
-				depiction:"W=5&L=f16&S=7Kwna7UD1LR5RL1DU&G=b",
-				description:"Given pieces are 3-junctions, straight trunks, corners and endpoints... but no loops are allowed.",
+				depiction:"W=5&L=f27&S=9oxI1U4U1L1R4R1D&G=b",
+				description:"Given pieces are 3-junctions, straight trunks, corners and endpoints.",
 			},
 			"consecutives":{
 				unconsecutiveshapes:[ShapeStraights,Shape2Corners,Shape3s],
@@ -143,7 +143,6 @@ var Genres={
 				path:"M 18 1 C 10 1 7 7 9 14 C 9 14 13 13 13 13 C 12 8 14 5 18 5 C 23 5 25 12 19 15 C 15 17 14 19 13 24 L 17 25 C 18 21 18 19 21 18 C 30 15 29 1 18 1 Z M 14 28 C 9 28 9 35 14 35 C 19 35 19 28 14 28 Z",
 				rule:{
 					fruitshapes:Join(Shape2Straights,Shape1s,Shape2Corners),
-					minconnected:Infinity,
 					description:"a question marks a flower, fruit or hummingbird",
 					depiction:"W=4&L=q6q6q6&S=6D1V1U3W2T&G=b"
 				},
