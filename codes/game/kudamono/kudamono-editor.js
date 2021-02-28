@@ -51,7 +51,7 @@ FruitIcons={
 			loopallowed:true,
 			trackValidator:"TrackSymmetrised",
 			description:"Every Apple belongs to a mirror or rotationally symmetric path (loops allowed).",
-			depiction:"W=2&L=a0a2a1a1a4&S=0Z3H"
+			depiction:"W=3&L=a1a3a3a6&S=1JsP3z"
 		}
 	},
 	"pear":{
