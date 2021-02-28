@@ -63,7 +63,7 @@ var Genres={
 			"global":{
 				dangleallowed:true,
 			},
-			"valid-shapes":{
+			"shapes":{
 				loopallowed:false,
 				simpleshapes:Join(Shape1s,Shape2s,Shape3s),
 				depiction:"W=5&L=f27&S=9oxI1U4U1L1R4R1D&G=b",
