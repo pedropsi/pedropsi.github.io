@@ -22,7 +22,7 @@ var Genres={
 		author:"Le Slo",
 		date:"2021-01-18",
 		description:`Pave the whole grid with a continuous path, rooted to the bottom via a straight trunk (2-piece).
-		Use the given pieces (rotations allowed), without repeating them consecutively.`,
+		Use the given pieces in any number, but without repeating them consecutively, nor looping.`,
 		examples:[
 			"W=7&L=f11f2f4w1w3w1f4f2f5f4f6w1w1f1f4f2&S=10R2R7RUDDLD3LUUUUURRDRRDRDDLLU22LDDRRULUU&G=b&A=Pedro PSI&D=26-01-2021&T=4-way Bonsai",
 			"W=6&L=w8f15f1f1&S=8DRUR8RRDLLDLDDR2RRDRD8R3RDDL&G=b&T=Triparityte&A=Pedro PSI&D=30-01-2021"
@@ -64,8 +64,8 @@ var Genres={
 			loopallowed:false,
 			simpleshapes:Join(Shape1s,Shape2s,Shape3s),
 			unconsecutiveshapes:[ShapeStraights,Shape2Corners,Shape3s],
-			depiction:"W=5&S=7Kwna7UD1LR5RL1DU&G=b",
-			description:"Valid piece shapes are 3-junctions, straight trunks, corners and endpoints."
+			depiction:"W=5&L=f16&S=7Kwna7UD1LR5RL1DU&G=b",
+			description:"Given pieces are 3-junctions, straight trunks, corners and endpoints... but no loops are allowed."
 		},
 		win:{
 			rule:{
