@@ -314,11 +314,13 @@ var BlankState={							//default styles applied to all genres
 		V:[],								//marks crosses, on vertical   midpoints
 		C:[],								//marks dots, on centre points
 	},
-	rules:{									//global rules, applying to all tracks
-		minconnected:2,
-		branchallowed:false,
-		loopallowed:false,
-		dangleallowed:false
+	rules:{
+		global:{									//global rules, applying to all tracks
+			minconnected:2,
+			branchallowed:false,
+			loopallowed:false,
+			dangleallowed:false
+		}
 	},
 
 	groups:{},								// multi-fruit lines, if allowed
@@ -552,8 +554,9 @@ FruitNumber=function(fruit,state){
 }
 
 FruitTrackStateLocallyErred=function(fruit,track,state){
-	var rule=Merge(state.rules,FruitStateRule(fruit,state));
-	
+	var staterules=Apply(Group,Values(state.rules));
+	var rule=Merge(staterules,FruitStateRule(fruit,state));
+
 	var errors={};
 	var wrong=false;
 	if(!wrong&&rule.crossforbidden){
@@ -1088,7 +1091,7 @@ OverlineDraw=function(state){
 }
 
 
-MiniBoardDraw=function(fruit,rule,state){
+MiniBoardDraw=function(fruit,depiction,state){
 	var target="depiction-"+fruit;
 	var container=".depiction-"+fruit;
 	var rendering={
@@ -1101,7 +1104,7 @@ MiniBoardDraw=function(fruit,rule,state){
 
 	var iuri=MiniBoardDraw[fruit];
 	if(!iuri){
-		MiniBoardCanvasDraw(fruit,rule,state,rendering);
+		MiniBoardCanvasDraw(fruit,depiction,state,rendering);
 		HearElement(container+" canvas",function(){
 			var uri=FuseCanvasURI(container);
 			var iuri=I(uri)
@@ -1113,8 +1116,8 @@ MiniBoardDraw=function(fruit,rule,state){
 		ReplaceElement(iuri,container);
 }
 
-MiniBoardCanvasDraw=function(fruit,rule,state,rendering){
-	var miniboard=FruitSerialState(fruit,rule.depiction,state);
+MiniBoardCanvasDraw=function(fruit,depiction,state,rendering){
+	var miniboard=FruitSerialState(fruit,depiction,state);
 		miniboard=CompleteState(Group(miniboard,rendering));
 
 	if(state.render.main){//prevent recursion
@@ -1133,8 +1136,8 @@ SerialDraw=function(serial,stateOpts){
 
 
 
-RuleDescriptionDraw=function(fruit,rule,colour){
-	var description=`<p>${ReSentence(rule.description)}</p>`;
+RuleDescriptionDraw=function(fruit,description,colour){
+	var description=`<p>${ReSentence(description)}</p>`;
 	if(colour)
 		description=description.replace(new RegExp("("+UnTake(fruit,-1)+"\\w+)","ig"),`<b style="color:${colour};">$1</b>`);
 
@@ -1151,24 +1154,33 @@ ExplainerBoardHTML=function(name){
 	</div>`;
 }
 
+RuleDraw=function(name,rule,state){
+	if(RuleDrawable(rule)){
+		MiniBoardDraw(name,rule.depiction,state);
+		RuleDescriptionDraw(name,rule.description);
+	}
+}
+
+RuleDrawable=function(rule){
+	return rule.depiction&&rule.depiction;
+}
+
+
 ExplainerDraw=function(state){
 	var levelFruits=LevelFruits(state);
-	var miniboards=levelFruits.map(ExplainerBoardHTML);
-		miniboards=Prepend(miniboards,ExplainerBoardHTML("basis"));
+	var globalrules=FilterValuesObject(state.rules,RuleDrawable);
+
+	var miniboards=Join(Keys(globalrules),levelFruits).map(ExplainerBoardHTML);
 		miniboards=miniboards.join("");
 
 	ReplaceChildren(miniboards,state.render.target+"-explainer");
 	
-	if(state.rules.depiction){
-		MiniBoardDraw("basis",state.rules,state);
-		RuleDescriptionDraw("basis",state.rules);
-	}
+	ThreadKeysValues(globalrules,(name,rule)=>RuleDraw(name,rule,state));
 
 	for(var i=0;i<levelFruits.length;i++){
 		var fruit=levelFruits[i];
 		var rule=state.fruits[fruit].rule;
-		MiniBoardDraw(fruit,rule,state);
-		RuleDescriptionDraw(fruit,rule,state.fruits[fruit].colour);
+		RuleDraw(fruit,rule,state);
 	}
 }
 
