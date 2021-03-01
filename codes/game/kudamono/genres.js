@@ -88,7 +88,7 @@ var Genres={
 		},
 		groups:{
 			"tree":{
-				fruits:["flower","fruit","hummingbird","question"],
+				fruits:["flower","fruit","hummingbird","question","slybon"],
 				colour:"rgb(134,0,16)"
 			}
 		},
@@ -148,6 +148,19 @@ var Genres={
 					depiction:"W=4&L=q6q6q6&S=6D1V1U3W2T&G=b"
 				},
 			},
+			"slybon":{
+				letter:"b",
+				colour:"rgb(190,150,100)",
+				viewBox:"0 0 28 25",
+				scale:0.65,
+				shiftx:-0.05,
+				path:"M 12 0 Q 16 0 16 4 Q 16 7 12.5 7 L 12.5 10 L 16 10 Q 16 7 20 7 Q 24 7 24 11 Q 24 15 20 15 Q 16 15 16 11 L 12.5 11 L 16 19 Q 18 24 14 24 L 14 26 Q 16 27 14 27 Q 13 27 13 24 L 11 24 Q 11 27 10 27 Q 8 27 10 26 L 10 24 Q 6 24 8 19 L 11.5 11 L 8 11 Q 8 15 4 15 Q 0 15 0 11 Q 0 7 4 7 Q 8 7 8 10 L 11.5 10 L 11.5 7 Q 8 7 8 4 Q 8 0 12 0",
+				rule:{
+					fruitshapes:Shape3s,
+					description:"Slybons appear only at T-junctions",
+					depiction:"W=4&L=b7b10&S=7V1U3O2T3D&G=b"
+				}
+			}
 			// "monkey":{
 			// 	letter:"m",
 			// 	colour:"rgb(173,107,178)",
