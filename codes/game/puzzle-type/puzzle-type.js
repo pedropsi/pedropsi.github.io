@@ -2319,6 +2319,7 @@ var Anagrams={
 //"anna":"a",
 //"gaga":"a",
 //"gang":"g",
+"garm":"m",//Mythological
 "gram":"m",
 "gran":"n",
 "maar":"r",
