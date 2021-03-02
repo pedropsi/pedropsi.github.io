@@ -469,6 +469,8 @@ SegmentContiguousTrackSegments=function(segment,track){
 	return Join(...SegmentPoints(segment).map(point=>PointContainedTrackSegments(point,intrack)))
 }
 
+
+
 TrackEndsegments=function(track){
 	return track.filter(segment=>SegmentContiguousTrackSegments(segment,track).length<=1);
 }
@@ -524,9 +526,38 @@ PointContainedTrackSegments=function(point,track){
 	return track.filter(seg=>In(SegmentPoints(seg),point));
 }
 
+PointContiguousTrackPoints=function(point,track){
+	return Apply(Union,PointContainedTrackSegments(point,track).map(SegmentPoints)).filter(UnEqualer(point));
+/*
+Gets all points contiguous to a certain point in a track (connected by a segment)
+PointContiguousTrackPoints([1,1],[[[0,1],[1,1]],[[1,0],[1,1]],[[1,1],[2,1]],[[2,1],[1,2]],[[1,2],[1,1]]])
+[[0,1],[1,0],[2,1],[1,2]]
+*/
+}
 
-
-
+PointTrackClosestFruitPoints=function(xy,track,fruitPoints){
+	var point=xy;
+	var seenPoints=[xy];
+	var nextPoints=PointContiguousTrackPoints(point,track);
+	var nodePoints=[];
+	while(nextPoints.length){
+		point=First(nextPoints);
+		seenPoints.push(point);
+		if(!In(fruitPoints,point)){
+			nextPoints=Join(Rest(nextPoints),PointContiguousTrackPoints(point,track).filter(UnIner(Union(nextPoints,seenPoints))));
+		}
+		else{
+			nodePoints.push(point);
+			nextPoints=Rest(nextPoints);
+		}
+	}
+	return nodePoints;
+/*
+Gets the next fruit points
+PointTrackNextFruitPoints([2,2],[[[1,2],[1,3]],[[1,2],[2,2]],[[1,3],[2,3]],[[2,1],[2,2]],[[2,1],[3,1]],[[2,2],[2,3]],[[2,2],[3,2]],[[3,1],[4,1]],[[3,2],[4,2]],[[4,1],[4,2]],[[4,2],[4,3]]],[[1,3],[2,2],[3,2],[4,2],[4,3]])
+[[3,2],[1,3],[4,2]]
+*/
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Forest
