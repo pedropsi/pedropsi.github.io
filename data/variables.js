@@ -79,7 +79,7 @@ HEAD_COPYRIGHT				:	()=>	`<meta itemprop="copyrightHolder" content="${v.NAME()}"
 HEAD_SITENAME				:	()=>	`<meta property="og:site_name" content="${v.TITLE()} | ${v.NAME()}"><meta content="${v.LINK_URL()}" name="twitter:url"></meta>`,
 HEAD_KEYWORDS				:	()=>	`<meta name="keywords" content="${[v.TITLE()].concat(v.TAGS?v.TAGS():[]).join(", ")}"></meta>`,
 HEAD_LD_JSON				:	()=>	`<script type="application/ld+json">{"@context":"http:\/\/schema.org\/","@type":"Product","name":"{v.NAME()})","description":"${v.DESCRIPTION()}"}</script>`,
-HEAD_OPENSEARCH				:	()=>	(PageIdentifier()!=="puzzlescript-games-database")?"":`<link href="/puzzlescript-games-database-search.xml" rel="search" title="Puzzlescript Games Database search" type="application/opensearchdescription+xml">`,
+HEAD_OPENSEARCH				:	()=>	(PageIdentifier()!=="puzzlescript-games-database")?"":`<link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="PuzzleScriptDB">`,
 
 DISPLAY_EXTERNAL			:	()=>	`<div id="${v.LINK()}-area" class="external-area">Loading...</div>`,
 
