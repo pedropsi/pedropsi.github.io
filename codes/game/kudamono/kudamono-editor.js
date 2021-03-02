@@ -649,6 +649,8 @@ StateAtErrors=function(state){
 	var globalOrder=Order(orchard,Apply(Join,globalOrchards));
 
 	globalOrder.map((p,i)=>positionErrors[p]=globalErrors[i]);
+
+	StatePropertyMonitor(state,positionErrors,"errors")
 	return positionErrors;
 }
 
@@ -1440,9 +1442,9 @@ AdvanceState=function(substate,options){
 
 StatePropertyMonitor=function(state,property,name){
 	if(state.monitor[name])
-		Monitor(property,"name");
+		Monitor(property,name);
 	else
-		UnMonitor("name")
+		UnMonitor(name)
 }
 
 LayerPainter=function(layer){
@@ -2072,6 +2074,7 @@ var KeyboardActions=function(){return{
 	"x ctrl shift":StateKeyHandlerer({monitor:{dragxy:Flipped}}),
 	"s ctrl shift":StateKeyHandlerer({monitor:{mode:Flipped}}),
 	"c ctrl shift":StateKeyHandlerer({monitor:{changed:Flipped}}),
+	"r ctrl shift":StateKeyHandlerer({monitor:{errors:Flipped}}),
 
 	}
 };
