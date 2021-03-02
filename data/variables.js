@@ -69,7 +69,7 @@ HEAD_THEME					:	()=>	`<meta name="theme-color" content="${v.THEMECOLOUR()}">`,
 
 TITLE						:	()=>	CapitalCase(PageIdentifier().replace("-"," ")),
 LINK						:	()=>	PageIdentifier(),
-HEAD_DATA_GRAPH				:	()=>	`${v.HEAD_TITLE()}${v.HEAD_DESCRIPTION()}${v.HEAD_IMAGE()}${v.HEAD_LINK()}${v.HEAD_TYPE()}${v.HEAD_COPYRIGHT()}${v.HEAD_SITENAME()}${v.HEAD_OPENSEARCH()}${v.HEAD_KEYWORDS()}`,
+HEAD_DATA_GRAPH				:	()=>	`${v.HEAD_TITLE()}${v.HEAD_OPENSEARCH()}${v.HEAD_DESCRIPTION()}${v.HEAD_IMAGE()}${v.HEAD_LINK()}${v.HEAD_TYPE()}${v.HEAD_COPYRIGHT()}${v.HEAD_SITENAME()}${v.HEAD_KEYWORDS()}`,
 HEAD_TITLE					:	()=>	`<title>${v.TITLE()}</title><meta property="og:title" content="${v.TITLE()} by ${v.NAME()}"/><meta content="${v.TITLE()} by ${v.NAME()}" name="twitter:title">`,
 HEAD_DESCRIPTION			:	()=>	`<meta name="description" content="${v.DESCRIPTION()}"/><meta property="og:description" content="${v.DESCRIPTION()}"/><meta content="${v.DESCRIPTION200()}" name="twitter:description">`,
 HEAD_TYPE					:	()=>	`<meta property="og:type" content="${v.TYPEGRAPH()}"/><meta property="og:image:alt" content="${v.IMAGE_ALT(v)}"/>`,
@@ -79,7 +79,7 @@ HEAD_COPYRIGHT				:	()=>	`<meta itemprop="copyrightHolder" content="${v.NAME()}"
 HEAD_SITENAME				:	()=>	`<meta property="og:site_name" content="${v.TITLE()} | ${v.NAME()}"><meta content="${v.LINK_URL()}" name="twitter:url"></meta>`,
 HEAD_KEYWORDS				:	()=>	`<meta name="keywords" content="${[v.TITLE()].concat(v.TAGS?v.TAGS():[]).join(", ")}"></meta>`,
 HEAD_LD_JSON				:	()=>	`<script type="application/ld+json">{"@context":"http:\/\/schema.org\/","@type":"Product","name":"{v.NAME()})","description":"${v.DESCRIPTION()}"}</script>`,
-HEAD_OPENSEARCH				:	()=>	(PageIdentifier()!=="puzzlescript-games-database")?"":`<link rel="search" type="application/opensearchdescription+xml" href="${v.SITE()}/opensearch.xml" title="PuzzleScriptDB">`,
+HEAD_OPENSEARCH				:	()=>	(PageIdentifier()!=="puzzlescript-games-database")?"":`<link rel="search" type="application/opensearchdescription+xml" title="PuzzleScriptDB" href="${v.SITE()}/opensearch.xml">`,
 
 DISPLAY_EXTERNAL			:	()=>	`<div id="${v.LINK()}-area" class="external-area">Loading...</div>`,
 

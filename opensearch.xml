@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
-	<ShortName>Puzzlescript Games Database</ShortName>
-	<Description>Search for puzzlescript games in a database by Pedro PSI et al</Description>
-	<Tags>puzzlescript game database browser pedropsi indie html5</Tags>
-	<Url type="text/html" method="get" template="https://pedropsi.github.io/puzzlescript-games-database?search={searchTerms}"/>
+	<ShortName>PuzzlescriptDB</ShortName>
+	<Description>Search puzzlescript games</Description>
+	<Url type="text/html" method="GET" template="https://pedropsi.github.io/puzzlescript-games-database">
+		<Param name="search" value="{searchTerms}"/>
+	</Url>
 	<Image height="16" width="16" type="image/x-icon">https://pedropsi.github.io/images/puzzlescript-games-database-favicon.ico</Image>
 	<InputEncoding>UTF-8</InputEncoding>
 	<moz:SearchForm>https://pedropsi.github.io/puzzlescript-games-database</moz:SearchForm>
