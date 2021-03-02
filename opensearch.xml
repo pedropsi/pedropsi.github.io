@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" ?> 
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
- <ShortName>PuzzlescriptDB</ShortName>
- <Description>Search puzzlescript games</Description>
- <Url type="text/html" method="GET" template="https://pedropsi.github.io/puzzlescript-games-database">
-  <Param name="search" value="{searchTerms}"/>
- </Url>
- <Image height="16" width="16" type="image/x-icon">data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFuoAABbqAeWOQxAAAAPaSURBVDhPHZN/TNR1GMc/eHcc3g85QOKHWMH8AQOWLttqWi2jXGtlLJcS47pDUWvoXEk/VhCNIDRFPBC1jPEromyFOn7JqagEoqAT0jiOH5WZjZKvzrkvB3ffV5/6471nz7M9r+fZ+/N8hIh33hKRduXtsp1Kv+fIVHLkkBImRpU37W7FG3BNxc50KCa6FENnnWJd6phyD5Uo93AprQMliiUl+7YQ0XafsGSxfU8eAyPVLDIPYxQ32JxxjjF/JXF0YaEHw09NhCZl0zu+GzhA1/BurKkbEas25Kor07fhOprPzzcOk/XKOV54uo89pcfx+sqJulCPsfcbdFUuTIsd7G3Ip6W7mNLaAkxJTsRv02Xq77P7uOnfx1+Bcn6dqWBiuoI//S48yl5sy7cgEnIIStiEiHdgSHRiTHZiWJqNePgNTRSxXS0gl1byuapV8ar2A09pJ9hFA2O3XcRHtRFuPI3VXIsu2c7jjQ6e73WwotaJLkkC1msONR07tVoevYFDRPo7Ef6zOPiesX8qSQr1ECv+IFzvxvCInbXjTnJw8uJ1J/oUCdiq5ajZbKJJ+4CLgYOk+lsJl5DtNDF6u5LFEf1EzbmOzXgcfaqdNRecvH7XSdp5CUiWgFE+VccpZlIufUcr57J2mD7tSyao4ubU54QufBdhlorYhliUgeWxTGwrM/+PIiFDepDfoha/107ByWYKtRrq+VDOzuOQtoud9+t59OBGlh/IZEnuDiyR1QS/40JfXoZxRwWWqCOamK/zqg8ETWDdeYUw/zHS2UoWmazSPsEc6CDDv4WNWiYvdRQRHTJO6GCPrJ/BdrGXWKtXEwvEiBonJgjfcYUofzMZ0o8c1vOsVoAt0CZRDllZx8td+UTN9WIdOYuJTmyD54mZN6wJU02faqq5hKm/WzZ0kEgdKXzFQ3zLvDunWLb5BCvszaQ+4yZa58WWNoT1tUHCVl8jRu/RxGqOqc8FjpGotWK+fxLjpaMEdzcRMtaM5e/ThIV1ETbnDBFBvTyoHyEtZYC1T/SxOvkyC3Vyg1HNpU6yn4/kxODxZsSTufLi5KW9X4J5qh1dai5BC50ER5SyZJ6Hzu5abt0rp+VUA4ut1zRxL1Cmwh5KaSTY+yMiUX4Q83oMbxVKQBtimbz3+HXo5heQaBumf+QLAvLJe65WS6AEVPlrZuqoZQPNhEy2Ycgvlc0fE9J4GIvixrRoP3MjdmOxNJAgTfysuIXGr7+jqLBd5sOI0Fn33VC/e8Y66/aZZ6SmO31mVcrv9lkmT/uibb/4YoKGfTHC44uVWqDz+OL0/8URmXum/wVw8JtKVlKhNwAAAABJRU5ErkJggg==</Image>
- <InputEncoding>UTF-8</InputEncoding>
- <moz:SearchForm>https://pedropsi.github.io/puzzlescript-games-database</moz:SearchForm>
+<?xml version="1.0"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+<ShortName>PuzzlescriptDB</ShortName>
+<Description>Find all puzzlescript games</Description>
+<Url type="text/html" template="https://pedropsi.github.io/puzzlescript-games-database.html?search={searchTerms}" />
+<Url type="application/rss+xml" template="https://pedropsi.github.io/puzzlescript-games-database.html?search={searchTerms}" />
+<Image height="16" width="16" type="image/icon">https://pedropsi.github.io/images/puzzlescript-games-database-favicon.ico</Image>
 </OpenSearchDescription>
