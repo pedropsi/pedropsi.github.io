@@ -5,5 +5,4 @@
 	<InputEncoding>UTF-8</InputEncoding>
 	<Image height="16" width="16" type="image/x-icon">https://pedropsi.github.io/images/puzzlescript-games-database-favicon.ico</Image>
 	<Url type="text/html" method="get" template="https://pedropsi.github.io/puzzlescript-games-database?search={searchTerms}"/>
-	<moz:SearchForm>https://pedropsi.github.io/puzzlescript-games-database</moz:SearchForm>
 </OpenSearchDescription>
