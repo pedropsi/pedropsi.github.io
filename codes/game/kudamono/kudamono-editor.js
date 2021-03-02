@@ -501,31 +501,6 @@ PointConnectableFruitPoints=function(xy,fruit,state){
 	return positions.filter(Iner(connectablePoints));
 }
 
-
-
-
-//TODO self-loop coconut - not working! (yet)
-PointTrackNextNodePoints=function(xy,track,state){
-	var seenPoints=[];
-	var plannedPoints=[xy];
-	var point;
-	var nextPoints;
-	var nodePoints=[];
-	var fruitPoints=TrackStateFruitPoints(track,state);
-	while(plannedPoints.length){
-		point=First(plannedPoints);
-		seenPoints.push(point);
-		if(In(fruitPoints,xy)){
-			nodePoints.push(xy);
-		}
-		nextPoints=PointContiguousTrackPoints(point,track).filter(xy=>PointValid(xy,state)).filter(UnIner(Union(plannedPoints,seenPoints,nodePoints)))
-		plannedPoints=plannedPoints.concat(nextPoints);
-		plannedPoints=Rest(plannedPoints);
-	}
-	return nodePoints;
-}
-
-
 LevelFruits=function(state){
 	return Keys(state.level).filter(s=>state.level[s].filter(xy=>PointValid(xy,state)).length);
 }
