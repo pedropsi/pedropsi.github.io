@@ -72,7 +72,7 @@ var Genres={
 			},
 			"consecutives":{
 				unconsecutiveshapes:[ShapeStraights,Shape2Corners,Shape3s],
-				depiction:"W=4&L=w6&S=6xD&G=b",
+				depiction:"W=4&H=3&L=h5&S=6q&G=b",
 				description:"Endpoints may not follow straight trunks consecutively."
 			}
 		},
