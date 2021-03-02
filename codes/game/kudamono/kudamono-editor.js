@@ -422,10 +422,6 @@ FruitTrackStatePoints=function(fruit,track,state){
 	return FruitStatePoints(fruit,state).filter(point=>PointTrackContained(point,track));
 }
 
-TrackStateFruitPoints=function(track,state){
-	return Apply(Union,TrackFruits(track,state).map(fruit=>FruitTrackStatePoints(fruit,track,state)));
-}
-
 
 
 FruitStateOrchard=function(fruit,state){
@@ -454,20 +450,13 @@ PointUnFruitTracked=function(xy,fruits,state){
 ///////////////////////////////////////////////////////////////////////////////
 //Shapes
 
-PointStateShape=function(point,state){
-	return Join(...state.orchard.map(track=>PointTrackShape(point,track)));
-}
-
-FruitStateShapes=function(fruit,state){
-	return FruitPoints(fruit,state).map(point=>PointStateShape(point,state));
-}
 
 FruitTrackStateShapes=function(fruit,track,state){
-	return FruitTrackStatePoints(fruit,track,state).map(point=>PointStateShape(point,state));
+	return FruitTrackStatePoints(fruit,track,state).map(point=>PointTrackShape(point,track));
 }
 
 UnFruitTrackStateShapes=function(fruit,track,state){
-	return Complement(TrackPoints(track),FruitTrackStatePoints(fruit,track,state)).map(point=>PointStateShape(point,state));
+	return Complement(TrackPoints(track),FruitTrackStatePoints(fruit,track,state)).map(point=>PointTrackShape(point,track));
 }
 
 
