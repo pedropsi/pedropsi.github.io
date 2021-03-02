@@ -106,7 +106,7 @@ FruitIcons={
 			simpleshapes:Shape2s,
 			description:"Paths branch, as T-junctions, only at every Coconut, and no branch returns to its origin.",
 			depiction:"W=2&L=q3q2&S=0RDDLUU3RDDL",
-			branchloop:false
+			selfloopforbidden:true
 		}
 	},
 	"date":{
@@ -583,6 +583,12 @@ FruitTrackStateLocallyErred=function(fruit,track,state){
 		
 	if(!wrong&&rule.looprequired&&!TrackLooped(track))
 		errors.looprequired=(wrong=true);
+	
+	if(!wrong&&rule.selfloopforbidden){
+		var fruitPoints=FruitTrackStatePoints(fruit,track,state);
+		errors.selfloopforbidden=fruitPoints.some(point=>TrackPointSelfLooped(track,point,Remove(fruitPoints,point)));
+		wrong=errors.selfloopforbidden;
+	}
 		
 	if(!wrong&&!rule.branchallowed&&TrackBranched(track))
 		errors.branchallowed=(wrong=true);

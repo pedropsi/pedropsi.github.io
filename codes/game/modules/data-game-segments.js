@@ -388,15 +388,15 @@ TrackPoints=function(track){
 	return DistinctArray(points);
 /*
 discards duplicates, in order
-TrackUnDistinctPoints([[[0,0],[0,1]],[[0,1],[1,1]],[[1,1],[1,0]],[[1,0],[0,0]]])
+TrackPoints([[[0,0],[0,1]],[[0,1],[1,1]],[[1,1],[1,0]],[[1,0],[0,0]]])
 [[0,0],[0,1],[1,1],[1,0]]
 */
 }
 
-TrackUnDistinctPoints=function(track){
+TrackUnDistinctPoints=function(track){//TODO improve this as it works only for linear well ordered tracks
 	if(!track.length)
 		return [];
-	return [First(First(track))].concat(Rest(track).map(Last));
+	return Append(track.map(First),Last(Last(track)));
 /*
 keeps duplicate points
 TrackUnDistinctPoints([[[0,0],[0,1]],[[0,1],[1,1]],[[1,1],[1,0]],[[1,0],[0,0]]])
@@ -529,9 +529,9 @@ PointContainedTrackSegments=function(point,track){
 PointContiguousTrackPoints=function(point,track){
 	return Apply(Union,PointContainedTrackSegments(point,track).map(SegmentPoints)).filter(UnEqualer(point));
 /*
-Gets all points contiguous to a certain point in a track (connected by a segment)
+Gets all points contiguous to a certain point in a track (connected by a segment), resorted
 PointContiguousTrackPoints([1,1],[[[0,1],[1,1]],[[1,0],[1,1]],[[1,1],[2,1]],[[2,1],[1,2]],[[1,2],[1,1]]])
-[[0,1],[1,0],[2,1],[1,2]]
+[[0,1],[1,0],[1,2],[2,1]]
 */
 }
 
@@ -554,8 +554,97 @@ PointTrackClosestFruitPoints=function(xy,track,fruitPoints){
 	return nodePoints;
 /*
 Gets the next fruit points
-PointTrackNextFruitPoints([2,2],[[[1,2],[1,3]],[[1,2],[2,2]],[[1,3],[2,3]],[[2,1],[2,2]],[[2,1],[3,1]],[[2,2],[2,3]],[[2,2],[3,2]],[[3,1],[4,1]],[[3,2],[4,2]],[[4,1],[4,2]],[[4,2],[4,3]]],[[1,3],[2,2],[3,2],[4,2],[4,3]])
+PointTrackClosestFruitPoints([2,2],[[[1,2],[1,3]],[[1,2],[2,2]],[[1,3],[2,3]],[[2,1],[2,2]],[[2,1],[3,1]],[[2,2],[2,3]],[[2,2],[3,2]],[[3,1],[4,1]],[[3,2],[4,2]],[[4,1],[4,2]],[[4,2],[4,3]]],[[1,3],[2,2],[3,2],[4,2],[4,3]])
 [[3,2],[1,3],[4,2]]
+*/
+}
+
+FromPointSegment=function(point,segment){
+	if(Equal(point,Last(segment)))
+		return Reverse(segment);
+	else
+		return segment;
+/*
+Well oriented
+FromPointSegment([0,0],[[0,0],[0,1]])
+[[0,0],[0,1]]
+
+Needs reversing
+FromPointSegment([0,1],[[0,0],[0,1]])
+[[0,1],[0,0]]
+
+Not actually there, no nothing changes
+FromPointSegment([0,2],[[0,0],[0,1]])
+[[0,0],[0,1]]
+*/
+}
+
+TrackPointVerified=function(track,xy,PointVerified,SegmentContinued){
+	var SegmentContinued=SegmentContinued||True;
+	var point=xy;
+	var nextSegments=PointContainedTrackSegments(point,track).map(segment=>FromPointSegment(point,segment)).filter(SegmentContinued);
+
+	var seenSegments=[];
+	var stopped=PointVerified(point);
+	var segment;
+	while(!stopped&&nextSegments.length){
+		segment=First(nextSegments);
+		seenSegments=Join(seenSegments,[segment,Reverse(segment)]);
+		nextSegments=Rest(nextSegments);
+		point=Last(segment);
+		stopped=PointVerified(point);
+		if(!stopped){
+			nextSegments=Join(
+				nextSegments,
+				PointContainedTrackSegments(point,track).filter(UnIner(seenSegments)).filter(SegmentContinued).map(segment=>FromPointSegment(point,segment))
+			);
+		}
+	}
+	return stopped;
+/*
+Does reach point [2,2]
+TrackPointVerified([[[0,0],[0,1]],[[0,1],[1,1]],[[1,1],[1,2]],[[1,1],[2,1]],[[2,1],[2,2]]],[0,0],Equaler([2,2]))
+true
+
+Does not reach points [3,3] or [4,4]
+TrackPointVerified([[[0,0],[0,1]],[[0,1],[1,1]],[[1,1],[1,2]],[[1,1],[2,1]],[[2,1],[2,2]]],[0,0],Iner([[3,3],[4,4]]))
+false
+
+Stops at any segment containing [1,1], not reaching [2,2]
+TrackPointVerified([[[0,0],[0,1]],[[0,1],[1,1]],[[1,1],[1,2]],[[1,1],[2,1]],[[2,1],[2,2]]],[0,0],Equaler([2,2]),segment=>!PointSegmentContained([1,1],segment))
+false
+
+Does not stop a [3,3], which is absent, thus reaching [2,2]
+TrackPointVerified([[[0,0],[0,1]],[[0,1],[1,1]],[[1,1],[1,2]],[[1,1],[2,1]],[[2,1],[2,2]]],[0,0],Equaler([2,2]),segment=>!PointSegmentContained([3,3],segment))
+true
+*/
+}
+
+TrackPointSelfLooped=function(track,point,fruitPoints){
+	var fruitPoints=fruitPoints||[];
+	var startsegments=PointContainedTrackSegments(point,track);
+	return startsegments.some(segment=>TrackPointVerified(
+		Remove(track,segment),
+		First(Remove(segment,point)),
+		Equaler(point),
+		segment=>segment.every(UnIner(fruitPoints))
+	))
+/*
+uninterrupted
+TrackPointSelfLooped([[[0,0],[0,1]],[[0,1],[1,1]],[[1,1],[1,0]],[[1,0],[0,0]]],[0,0],[[2,2]])
+true
+
+interrupted
+TrackPointSelfLooped([[[0,0],[0,1]],[[0,1],[1,1]],[[1,1],[1,0]],[[1,0],[0,0]]],[0,0],[[1,1]])
+false
+
+still loops
+TrackPointSelfLooped([[[0,0],[0,1]],[[0,0],[1,0]],[[0,1],[1,1]],[[1,0],[1,1]],[[1,1],[2,1]],[[2,0],[2,1]],[[2,0],[3,0]],[[2,1],[3,1]],[[3,0],[3,1]]],[1,1],[[2,1]])
+true
+
+auto exclusion bars loop detection
+TrackPointSelfLooped([[[0,0],[0,1]],[[0,0],[1,0]],[[0,1],[1,1]],[[1,0],[1,1]],[[1,1],[2,1]],[[2,0],[2,1]],[[2,0],[3,0]],[[2,1],[3,1]],[[3,0],[3,1]]],[1,1],[[1,1]])
+true
 */
 }
 
