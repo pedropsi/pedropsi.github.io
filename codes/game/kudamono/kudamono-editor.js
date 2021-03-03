@@ -518,7 +518,7 @@ FruitNumber=function(fruit,state){
 	return state.level[fruit].length;
 }
 
-FruitTrackStateLocallyErred=function(fruit,track,state){
+FruitTrackStateLocalErrors=function(fruit,track,state){
 	var staterules=Apply(Group,Values(state.rules));
 	var rule=Merge(staterules,FruitStateRule(fruit,state));
 
@@ -587,8 +587,8 @@ FruitTrackStateLocallyErred=function(fruit,track,state){
 
 	if(!wrong&&!rule.dangleallowed&&TrackDangled(track,state))
 		errors.dangleallowed=(wrong=true);
-		
-	return wrong;
+	
+	return errors;
 }
 
 FruitGroupName=function(fruit,state){
@@ -605,13 +605,12 @@ TrackStateErrors=function(track,state){
 	else if(Gather(fruits,type=>FruitGroupName(type,state)).length>1)
 		errors.excess=true;
 	else{
-		if(fruits.length===1) //Single-type paths
-			errors.localised=FruitTrackStateLocallyErred(First(fruits),track,state);
-		else
-			while(!errors.equalised&&fruits.length){ //Multi-type paths
-				errors.equalised=FruitTrackStateLocallyErred(First(fruits),track,state);
-				fruits=Rest(fruits);
-			}
+		fruits.map(function(fruit){
+			errors=Merge(errors,ReKeyObject(
+				FruitTrackStateLocalErrors(fruit,track,state),
+				Prefixer(fruit+"-")
+			))
+		})
 	}
 	return errors;
 }
