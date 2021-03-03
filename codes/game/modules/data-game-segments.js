@@ -143,7 +143,7 @@ FuseFollowedSegment=function(segment1,segment2){
 }
 
 CanonicalSegment=function(segment){
-	if(!In([[0,1],[1,0]],SegmentUnitDirection(segment)))
+	if(!In(UnitDirectionCoordinates,SegmentUnitDirection(segment)))
 		return Reverse(segment);
 	else
 		return segment;
@@ -982,7 +982,13 @@ DirectionsCoordinates={
 	"U":[0,-1],
 	"R":[1,0],
 	"D":[0,1]
+	// "N":[-1,1],
+	// "E":[1,1],
+	// "W":[1,-1],
+	// "S":[-1,1]
 }
+
+UnitDirectionCoordinates=["D","R"].map(Getter(DirectionsCoordinates));
 
 LetterTriplets=FlipKeysValues(TripletLetters);
 CoordinatesDirections=FlipKeysValues(DirectionsCoordinates);
