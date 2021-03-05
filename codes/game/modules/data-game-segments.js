@@ -526,6 +526,10 @@ PointContainedTrackSegments=function(point,track){
 	return track.filter(seg=>In(SegmentPoints(seg),point));
 }
 
+FromPointTrackSegments=function(point,track){
+	return PointContainedTrackSegments(point,track).map(segment=>FromPointSegment(point,segment));
+}
+
 PointContiguousTrackPoints=function(point,track){
 	return Apply(Union,PointContainedTrackSegments(point,track).map(SegmentPoints)).filter(UnEqualer(point));
 /*
@@ -582,7 +586,7 @@ FromPointSegment([0,2],[[0,0],[0,1]])
 TrackPointVerified=function(track,xy,PointVerified,SegmentContinued){
 	var SegmentContinued=SegmentContinued||True;
 	var point=xy;
-	var nextSegments=PointContainedTrackSegments(point,track).map(segment=>FromPointSegment(point,segment)).filter(SegmentContinued);
+	var nextSegments=FromPointTrackSegments(point,track).filter(SegmentContinued);
 
 	var seenSegments=[];
 	var stopped=PointVerified(point);
