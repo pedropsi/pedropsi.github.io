@@ -583,28 +583,39 @@ FromPointSegment([0,2],[[0,0],[0,1]])
 */
 }
 
-TrackPointVerified=function(track,xy,PointVerified,SegmentContinued){
+TrackPointWalk=function(track,xy,PointStopped,SegmentContinued){
 	var SegmentContinued=SegmentContinued||True;
+	var PointStopped=PointStopped||False;
 	var point=xy;
 	var nextSegments=FromPointTrackSegments(point,track).filter(SegmentContinued);
 
 	var seenSegments=[];
-	var stopped=PointVerified(point);
+	var seenPoints=[];
+	var stopped=PointStopped(point);
 	var segment;
 	while(!stopped&&nextSegments.length){
 		segment=First(nextSegments);
 		seenSegments=Join(seenSegments,[segment,Reverse(segment)]);
 		nextSegments=Rest(nextSegments);
 		point=Last(segment);
-		stopped=PointVerified(point);
+		seenPoints.push(point);
+		stopped=PointStopped(point);
 		if(!stopped){
 			nextSegments=Join(
 				nextSegments,
-				PointContainedTrackSegments(point,track).filter(UnIner(seenSegments)).filter(SegmentContinued).map(segment=>FromPointSegment(point,segment))
+				FromPointTrackSegments(point,track).filter(UnIner(seenSegments)).filter(SegmentContinued)
 			);
 		}
 	}
-	return stopped;
+	return {
+		segments:seenSegments,
+		points:seenPoints,
+		stopped:stopped
+	}
+}
+
+TrackPointVerified=function(track,xy,PointStopped,SegmentContinued){
+	return TrackPointWalk(track,xy,PointStopped,SegmentContinued).stopped;
 /*
 Does reach point [2,2]
 TrackPointVerified([[[0,0],[0,1]],[[0,1],[1,1]],[[1,1],[1,2]],[[1,1],[2,1]],[[2,1],[2,2]]],[0,0],Equaler([2,2]))
