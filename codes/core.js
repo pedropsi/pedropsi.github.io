@@ -167,6 +167,26 @@ Flipped=function(a){return !a};
 Trued=function(a){return a===true};
 Falsed=function(a){return a===false};
 
+Fallback=function(item,fallback,Transform){
+	if(typeof item==="undefined")
+		return fallback;
+	else{
+		return (Transform||Identity)(item);
+	}
+/*
+if defined, returns it
+Fallback(Fallback,True)
+Fallback
+
+if undefined, returns the fallback value
+Fallback(undefined,True)
+True
+
+may apply transforms
+Fallback("here","i am not here",x=>x+" i am")
+"here i am"
+*/
+}
 
 Apply=function(F,A){
 	return F.apply(null,A);
