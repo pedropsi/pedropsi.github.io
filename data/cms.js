@@ -188,9 +188,7 @@ PageCardHTML=function(page){
 
 MiniCardHTML=function(page){
 	var page=Merge(v,page);
-
 	var size=180;
-
 	var img=LazyImageHTML({
 		src:ImagePath(page.IMAGE_NAME(page),page.IMAGE_EXT(),size),
 		width:size,
@@ -202,7 +200,7 @@ MiniCardHTML=function(page){
 	var title=AnchorHTML(`<h3>${page.TITLE()}</h3>`,link);
 	
 	return`
-	<div class="mini selectable underborderable">
+	<div class="mini selectable underborderable" onclick="Navigate('${link}')">
 		<div>
 			${title}
 			${PageLabelsHTML(page)}
