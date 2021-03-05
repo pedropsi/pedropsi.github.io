@@ -686,6 +686,19 @@ TrackPointAlignedPoints([[[1,0],[1,1]],[[1,1],[1,2]],[[1,1],[2,1]],[[1,2],[1,3]]
 */
 }
 
+TrackPointsSightings=function(track,points){
+	var sightings=points.map(point=>TrackPointAlignedPoints(track,point));
+	return Apply(Group,sightings).filter(Iner(points));
+/*
+lists fruits that see each other
+TrackPointsSightings([[[0,1],[1,1]],[[0,2],[1,2]],[[1,0],[1,1]],[[1,1],[1,2]],[[1,2],[1,3]]],[[0,1],[0,2],[1,0],[1,3]])
+[[1,3],[1,0]]
+
+multiple sightings appear as many times as needed
+TrackPointsSightings([[[0,0],[0,1]],[[0,0],[1,0]]],[[0,0],[0,1],[1,0]])
+[[0,1],[1,0],[0,0],[0,0]]
+*/
+}
 ///////////////////////////////////////////////////////////////////////////////
 //Forest
 
