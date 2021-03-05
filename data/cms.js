@@ -170,14 +170,17 @@ PageCardHTML=function(page){
 	var page=Merge(v,page);
 	var size=180;
 	var path=ImagePath(page.IMAGE_NAME(page),page.IMAGE_EXT(),size);
-	
-	var id=GenerateId();
-	LazyImageLoader(id,path);
+	var img=LazyImageHTML({
+		width:size,
+		height:size,
+		title:page.IMAGE_ALT(page),
+		src:path
+	})
 	
 	var card=`
 		<div class="card">
 			<h3>${page.TITLE()}</h3>
-			<img id="${id}" class="image" width="${size}" height="${size}" alt="${page.IMAGE_ALT(page)}" title="${page.IMAGE_ALT(page)}" loading="lazy"/>
+			${img}
 		</div>`;
 
 	return AnchorHTML(card,page.LINK()+".html",{"class":"card-supra underborderable"});

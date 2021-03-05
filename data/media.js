@@ -161,23 +161,23 @@ ImageSource=function(ImageObj){
 
 ImageHTML=function(ImageObj){
 	var ImageObj=ReKeyObject(ImageObj,LowerCase);
-	var src="";
+	var attribs=FilterKeysObject(ImageObj,Iner(["width","height"]))
+		attribs.title=ImageObj.description||ImageObj.title||ImageObj.legend||ImageObj.src||undefined;
+		attribs.alt=ImageObj.alt||attribs.title;
+	
 	var lazy=`loading="lazy"`;
 	if(Prefixed(ImageObj.src,"data:")){
 		lazy="";
-		src=`src="${ImageObj.src}"`;
+		attribs.src=`src="${ImageObj.src}"`;
 	}else if(!ImageObj.lazy){
 		lazy="";
-		src=`src="${ImageSource(ImageObj)}"`;
+		attribs.src=`src="${ImageSource(ImageObj)}"`;
 	}
-	var title=ImageObj.description||ImageObj.title||ImageObj.legend||ImageObj.src||"";
+
 	return `
-	<img
-		alt="${ImageObj.alt||title}"
-		title="${title}"
+	<img ${AttributesHTML(attribs)}
 		class="image"
 		${lazy}
-		${src}
 		id="${ImageObj.id}"
 	/>`
 }
