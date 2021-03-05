@@ -168,10 +168,10 @@ ImageHTML=function(ImageObj){
 	var lazy=`loading="lazy"`;
 	if(Prefixed(ImageObj.src,"data:")){
 		lazy="";
-		attribs.src=`src="${ImageObj.src}"`;
+		attribs.src=ImageObj.src;
 	}else if(!ImageObj.lazy){
 		lazy="";
-		attribs.src=`src="${ImageSource(ImageObj)}"`;
+		attribs.src=ImageSource(ImageObj);
 	}
 
 	return `
