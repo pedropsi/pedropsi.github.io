@@ -151,7 +151,8 @@ ImageSource=function(ImageObj){
 	var ImageObj=ReKeyObject(ImageObj,LowerCase);
 	if(ImageObj.src&&Prefixed(ImageObj.src,"data:"))
 		return ImageObj.src;
-	var src=ImageObj.src?`images/${ImageObj.src}`:`images/${ImageObj.FOLDER_SMALL||ImageObj.folder||""}/${ImageObj.name||ImageObj.name}`;
+	var src=ImageObj.src?ImageObj.src:`${ImageObj["folder_small"]||ImageObj.folder||""}/${ImageObj.name}`;
+		src=Prefix(src,"images/");
 		src=ReSourceExtension(src,ImageExtensions,"png");
 	if(Prefixed(ImageObj.src,"data:"))
 		src=ImageObj.src;

@@ -187,12 +187,14 @@ MiniCardHTML=function(page){
 	var page=Merge(v,page);
 
 	var size=180;
-	var path=ImagePath(page.IMAGE_NAME(page),page.IMAGE_EXT(),size);
-	var id=GenerateId();
-	LazyImageLoader(id,path);
-	var img=`<img id=${id} class="image" width="${size}" height="${size}" alt="${page.IMAGE_ALT(page)}" title="${page.IMAGE_ALT(page)}" loading="lazy"/>`;
-		img=AnchorHTML(img,link)
 
+	var img=LazyImageHTML({
+		src:ImagePath(page.IMAGE_NAME(page),page.IMAGE_EXT(),size),
+		width:size,
+		height:size,
+		title:page.IMAGE_ALT(page)
+	})
+	
 	var link=page.LINK()+".html";
 	var title=AnchorHTML(`<h3>${page.TITLE()}</h3>`,link);
 	
