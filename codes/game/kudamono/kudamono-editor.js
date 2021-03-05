@@ -529,7 +529,7 @@ FruitTrackStateLocalErrors=function(fruit,track,state){
 		wrong=true;
 	}
 
-	if(!wrong&&rule.minconnected||rule.maxconnected){
+	if(!wrong&&(rule.minconnected||rule.maxconnected)){
 		var min=rule.minconnected;
 		if(min===Infinity)
 			min=FruitNumber(fruit,state);
