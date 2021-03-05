@@ -663,6 +663,29 @@ true
 */
 }
 
+TrackPointAlignedPoints=function(track,point){
+	var startsegments=FromPointTrackSegments(point,track);
+	var alignedPoints=startsegments.map(
+		function(segment){
+			var walk=TrackPointWalk(track,point,False,seg=>SegmentEquidirected(seg,segment));
+			return Last(walk.points);
+		});
+	return alignedPoints.filter(Identity);
+/*
+get the last points in line, no turns
+TrackPointAlignedPoints([[[0,0],[0,1]],[[0,1],[0,2]],[[0,2],[0,3]],[[0,0],[1,0]]],[0,0])
+[[0,3],[1,0]]
+
+get the last points in line, ignoring turns
+TrackPointAlignedPoints([[[0,0],[0,1]],[[0,1],[0,2]],[[0,2],[1,2]],[[0,0],[1,0]]],[0,0])
+[[0,2],[1,0]]
+
+segment orientation should not matter, only the direction
+TrackPointAlignedPoints([[[1,0],[1,1]],[[1,1],[1,2]],[[1,1],[2,1]],[[1,2],[1,3]],[[2,1],[3,1]]],[1,3])
+[[1,0]]
+*/
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Forest
 
