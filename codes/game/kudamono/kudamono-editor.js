@@ -122,8 +122,8 @@ FruitIcons={
 			simpleshapes:Join(Shape2Straights,Shape3s),
 			description:"The first two Dates connect via a straight line. Non-endpoints may spawn up to one straight branch ending at a Date.",
 			depiction:"W=2&L=d1d4d1d2&S=1RD3RU3D",
-			//TODO
-			specialstartbranch:true
+			maxlineofsight:1,
+			minlineofsight:1
 		}
 	},
 	"melon":{
@@ -573,10 +573,23 @@ FruitTrackStateLocalErrors=function(fruit,track,state){
 	if(!wrong&&rule.looprequired&&!TrackLooped(track))
 		errors.looprequired=(wrong=true);
 	
-	if(!wrong&&rule.selfloopforbidden){
+	if((rule.selfloopforbidden||rule.minlineofsight||rule.maxlineofsight)){
 		var fruitPoints=FruitTrackStatePoints(fruit,track,state);
+	}
+		
+	if(!wrong&&rule.selfloopforbidden){
 		errors.selfloopforbidden=fruitPoints.some(point=>TrackPointSelfLooped(track,point,Remove(fruitPoints,point)));
 		wrong=errors.selfloopforbidden;
+	}
+
+	if((rule.minlineofsight||rule.maxlineofsight)){
+		var count=Length(TrackPointsSightings(track,fruitPoints))/2;
+		
+		if(rule.minlineofsight&&count<rule.minlineofsight)
+			errors.minlineofsight=(wrong=true);
+
+		if(rule.maxlineofsight&&count>rule.maxlineofsight)
+			errors.maxlineofsight=(wrong=true);
 	}
 		
 	if(!wrong&&!rule.branchallowed&&TrackBranched(track))
