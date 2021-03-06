@@ -266,7 +266,8 @@ var BlankState={							//default styles applied to all genres
 		wrongDash:[8,36],					//dash pattern applied on error
 
 		excessColour:"#000000",				//colour applied on an "excess fruit" error
-		deficitColour:"#777777" 			//colour applied on an "no fruit" error
+		deficitColour:"#777777", 			//colour applied on an "no fruit" error
+		minconnectedOpacity:0.6 			//opacity factor applied on minconnected error
 	},
 	grid:{									//default grid styles
 		lineWidth:2,						//width of grid lines
@@ -782,7 +783,7 @@ TrackStyles=function(track,state,styles,errors){
 	var opacityFactor=1;
 	if(Keys(errors).some(error=>Posfixed(error,"minconnected"))){
 		errors=FilterKeysObject(errors,error=>!Posfixed(error,"minconnected"))
-		opacityFactor=0.6;
+		opacityFactor=state.line.minconnectedOpacity||1;
 	}
 
 	if(!errors.deficit&&Values(errors).some(Identity))//global and local errors

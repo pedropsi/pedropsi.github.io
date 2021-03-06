@@ -49,6 +49,7 @@ var Genres={
 			colour:"rgb(134,0,16)",
 			excessColour:"rgb(134,0,16)",
 			deficitColour:"#CCCCCC",
+			minconnectedOpacity:0.6,
 			wrongDash:[6,12],
 		},
 		grid:{
