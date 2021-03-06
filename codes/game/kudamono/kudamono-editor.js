@@ -782,7 +782,7 @@ TrackStyles=function(track,state,styles,errors){
 	var opacityFactor=1;
 	if(Keys(errors).some(error=>Posfixed(error,"minconnected"))){
 		errors=FilterKeysObject(errors,error=>!Posfixed(error,"minconnected"))
-		opacityFactor=0.75;
+		opacityFactor=0.6;
 	}
 
 	if(!errors.deficit&&Values(errors).some(Identity))//global and local errors
