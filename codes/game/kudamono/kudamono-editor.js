@@ -778,9 +778,15 @@ TrackStyles=function(track,state,styles,errors){
 	var opacity=styles.opacity||state.line.opacity||1;
 
 	var dash=state.line.dash;
+	
+	var opacityFactor=1;
+	if(Keys(errors).some(error=>Posfixed(error,"minconnected"))){
+		errors=FilterKeysObject(errors,error=>!Posfixed(error,"minconnected"))
+		opacityFactor=0.75;
+	}
+
 	if(!errors.deficit&&Values(errors).some(Identity))//global and local errors
 		dash=state.line.wrongDash;
-	
 
 	if(styles.edit&&!styles.clearing){
 		dash=state.overline.dash||dash;
@@ -798,7 +804,7 @@ TrackStyles=function(track,state,styles,errors){
 	if(state.visuals.monochrome)
 		colour=HEXSaturater(0)(styles.colour);
 	
-	colour=ReRGBA(colour,opacity);
+	colour=ReRGBA(colour,opacity*opacityFactor);
 	
 	styles.strokeColor=colour;
 	styles.dash=dash;

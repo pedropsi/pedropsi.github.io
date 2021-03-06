@@ -63,6 +63,7 @@ var Genres={
 		rules:{
 			"global":{
 				dangleallowed:true,
+				minconnected:Infinity
 			},
 			"shapes":{
 				loopallowed:false,
