@@ -175,7 +175,7 @@ ${v.HEADER()}
 <p>To play these, all you need is pen and paper! Or, if you prefer, the flood-fill tool will work on every puzzle, e.g using MSPaint or other image editing software.</p>
 <p>Shall a star battle be named <em>in space</em>, then part of the challenge is <b>folding the puzzle</b> either in your head or an actual paper version.</p>
 
-${FolderGalleryHTML(starbattles,"star-battle")}
+${FolderGalleryHTML(ReValueObject(starbattles,sb=>Remove(sb,"href")),"star-battle")}
 
 <h2>Interactive star battles</h2>
 <p>Pick one of the puzzles below to launch the interactive <b>3D star battle player</b> in your browser, thanks to ${P("zenorogue")}!</p>
