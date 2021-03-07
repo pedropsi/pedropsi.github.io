@@ -720,6 +720,9 @@ TrackPointsSightings([[[0,0],[0,1]],[[0,0],[1,0]]],[[0,0],[0,1],[1,0]])
 [[0,1],[1,0],[0,0],[0,0]]
 */
 }
+
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //Forest
 
@@ -1092,16 +1095,18 @@ SegmentPairSelfNextDirection=function(segment1,segment2){
 
 
 
-
-
-
-LetterContiguousPath=function(letters,startxy){
+LetterCoordinates=function(letters){
 	var directions=letters.split("").map(Accesser(LetterTriplets)).join("").split("");
 		directions=directions.map(Accesser(DirectionsCoordinates));
 	var coordinates=directions;
 		coordinates=coordinates.map((c,i)=>Apply(VectorPlus,Take(directions,i+1)));
 		coordinates.unshift([0,0]);
-		coordinates=coordinates.map(c=>VectorPlus(c,startxy))
+		return coordinates;
+}
+
+
+LetterContiguousPath=function(letters,startxy){
+		coordinates=LetterCoordinates(letters).map(c=>VectorPlus(c,startxy))
 	return SortTrack(PathTrack(coordinates));
 }
 
