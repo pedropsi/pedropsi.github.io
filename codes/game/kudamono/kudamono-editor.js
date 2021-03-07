@@ -1629,7 +1629,13 @@ CanvasDot=function(x,y,w,h,state){
 			cornered:cornered,
 			bordered:borderedH||borderedV,
 			midborderedH:!cornered&&borderedH,
-			midborderedV:!cornered&&borderedV
+			midborderedV:!cornered&&borderedV,
+			out:[
+				Min(0,XY[0]-(state.grid.dual?1:0))+
+				Max(0,XY[0]-state.W+(state.grid.dual?1:0)),
+				Min(0,XY[1]-(state.grid.dual?1:0))+
+				Max(0,XY[1]-state.H+(state.grid.dual?1:0))
+			]
 		};
 	if(dot.cornered){
 		dot.type="F";
