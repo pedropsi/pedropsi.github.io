@@ -90,11 +90,28 @@ var Genres={
 		},
 		groups:{
 			"tree":{
-				fruits:["flower","fruit","hummingbird","question","slybon"],
+				fruits:["root","flower","fruit","hummingbird","question","slybon"],
 				colour:"rgb(134,0,16)"
 			}
 		},
 		fruits:{
+			"root":{
+				letter:"r",
+				colour:"rgb(134,0,16)",
+				viewBox:"0 0 10 10",
+				path:"M 5 0 Q 10 0 10 2 Q 10 4 5 4 Q 0 4 0 2 Q 0 0 5 0 Z",
+				scale:0.7,
+				shifty:-0.2,
+				rule:{
+					maxconnected:1,
+					fruitshapes:["U"],
+					
+					spawnoutside:[0,1],
+					neighbourshapes:{"U":"UD"},
+					description:"the bonsai roots once via a straight vertical trunk towards the bottom",
+					depiction:"W=3&H=4&L=r8&S=8o&G=b"
+				},
+			},
 			"flower":{
 				letter:"w",
 				colour:"rgb(153,217,234)",
