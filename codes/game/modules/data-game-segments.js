@@ -1196,6 +1196,9 @@ PointTrackShape=function(point,track){
 	return DirectionSort(directions).join("");
 }
 
+PointsTrackShapes=function(points,track){
+	return Union(points.map(point=>PointTrackShape(point,track))).filter(Identity);
+}
 
 PointConsecutiveShapePairs=function(point,track){//Todo slash points in half
 	var consecutivepoints=PointTrackContiguousPoints(point,track);
