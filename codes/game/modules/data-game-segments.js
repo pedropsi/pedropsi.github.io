@@ -434,6 +434,10 @@ PointTrackContiguousUnBranchpoints=function(point,segments){
 	return PointTrackContiguousPoints(point,segments).filter(Point=>PointTrackUnBranchpointed(Point,segments));
 }
 
+PointTrackNeighbourPoints=function(point,track,neighbourletters){
+	return PointDistantPoints(point,neighbourletters).filter(xy=>PointTrackContained(xy,track));
+}
+
 PointTrackDegree=function(point,track){
 	return PointContainedTrackSegments(point,track).length;
 }
