@@ -20,8 +20,25 @@
 ///////////////////////////////////////////////////////////////////////////////
 //Point
 
-PointNeighbourPoints=function(point){
-	return Values(DirectionsCoordinates).map(v=>VectorPlus(point,v));
+PointNeighbourPoints=function(point,coordinates){
+	if(!coordinates)
+		var coordinates=Values(DirectionsCoordinates);
+	return coordinates.map(v=>VectorPlus(point,v));
+/*
+Gives the points a certain vector away
+PointNeighbourPoints([2,2],[[-1,0],[1,0]])
+[[1,2],[3,2]]
+*/
+}
+
+PointDistantPoints=function(point,letters){
+	var coordinates=letters.map(sequence=>Last(LetterCoordinates(sequence)));
+	return PointNeighbourPoints(point,coordinates);
+/*
+Gives the points a certain letter sequence away
+PointDistantPoints([2,2],["L","RUD"])
+[[1,2],[3,2]]
+*/
 }
 
 
