@@ -964,8 +964,17 @@ var ColourNames=Unique(ColourCoordinateNames.map(cn=>cn[3].toLowerCase()).filter
 
 function NamedColour(colorstring){
 	var rgb=RGB(Colour(colorstring)).colour;
-	var c=Sorter(a=>EuclideanDistance(a,rgb))(ColourCoordinateNames);
+	var c=NearestVector(ColourCoordinateNames,rgb);
 	return c[0][3];
+/*
+exact match
+NamedColour("#FF0000")
+"Red"
+
+close match
+NamedColour("#FFFEFF")
+"White"
+*/
 }
 
 var ColorSynonyms={
@@ -973,12 +982,6 @@ var ColorSynonyms={
 	"mint cream":"mint",
 	"magic mint":"mint"
 }
-
-try{
-	SaveTest(NamedColour,"#FFFFFF","White","hex to white");
-	SaveTest(NamedColour,"#FF0000","Red","hex to red");
-	SaveTest(NamedColour,"#000000","Black","hex to black");
-}catch(err){}
 
 
 ////////////////////////////////////////////////////////////////////////////////
