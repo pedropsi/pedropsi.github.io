@@ -503,41 +503,38 @@ EndsegmentsFirst=function(endsegments,segments){
 		return First(segments);
 }
 
+
+
+
+SegmentClosestDirection=function(segment,LetterUnitDirections){
+	var sdirection=SegmentUnitDirection(segment);
+	var nearest=NearestVector(Values(LetterUnitDirections),sdirection);
+	return DirectionsCoordinates[UnitDirectionsLetters[nearest]];
+/*
+closest direction, even if away from origin
+SegmentClosestDirection([[-2,-2],[-2.1,-3.1]],LetterUnitDirections)
+[0,-1]
+*/
+}
+
 SegmentDiscretiseTrack=function(segment){
 	var previousPoint=segment[0];
+	var lastPoint=segment[1];
 	var nextPoint;
-	var direction=SegmentDirection(segment);
-	var i=0;
-	var j=0;
 	var disctrack=[];
-	var dx=Sign(direction[0]);
-	var dy=Sign(direction[1]);
-	
-	while(Abs(i)<Abs(direction[0])&&Abs(j)<Abs(direction[1])){
-		nextPoint=VectorPlus(previousPoint,[dx,0]);
+	var direction;
+	while(!Equal(previousPoint,lastPoint)){
+		direction=SegmentClosestDirection([previousPoint,lastPoint],LetterUnitDirections);
+		nextPoint=VectorPlus(previousPoint,direction);
 		disctrack.push([previousPoint,nextPoint]);
-		previousPoint=Clone(nextPoint);
-		i+=dx;
-		nextPoint=VectorPlus(previousPoint,[0,dy]);
-		disctrack.push([previousPoint,nextPoint]);
-		previousPoint=Clone(nextPoint);
-		j+=dy;
-	}
-
-	while(Abs(i)<Abs(direction[0])){
-		nextPoint=VectorPlus(previousPoint,[dx,0]);
-		disctrack.push([previousPoint,nextPoint]);
-		previousPoint=Clone(nextPoint);
-		i+=dx;
-	}
-
-	while(Abs(j)<Abs(direction[1])){
-		nextPoint=VectorPlus(previousPoint,[0,dy]);
-		disctrack.push([previousPoint,nextPoint]);
-		previousPoint=Clone(nextPoint);
-		j+=dy;
+		previousPoint=nextPoint;
 	}
 	return disctrack;
+/*
+makes a disrete track
+SegmentDiscretiseTrack([[0,0],[0,2]])
+[[[0,0],[0,1]],[[0,1],[0,2]]]
+*/
 }
 
 
@@ -1067,6 +1064,9 @@ UnitDirectionCoordinates=["D","R"].map(Getter(DirectionsCoordinates));
 
 LetterTriplets=FlipKeysValues(TripletLetters);
 CoordinatesDirections=FlipKeysValues(DirectionsCoordinates);
+
+LetterUnitDirections=ReValueObject(DirectionsCoordinates,d=>SegmentUnitDirection([[0,0],d]));
+UnitDirectionsLetters=FlipKeysValues(LetterUnitDirections);
 
 CoordinateLetter=function(direction){
 	var direction=String(direction);
