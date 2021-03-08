@@ -50,8 +50,8 @@ FruitIcons={
 		rule:{
 			loopallowed:true,
 			trackValidator:"TrackSymmetrised",
-			description:"Every Apple belongs to a mirror or rotationally symmetric path (loops allowed).",
-			depiction:"W=3&L=a1a3a3a6&S=1JsP3z"
+			description:"Apples sit on mirror or rotationally symmetric paths, possibly looping.",
+			depiction:"W=3&L=a1a3a3a4a2&S=1JsP3z"
 		}
 	},
 	"pear":{
