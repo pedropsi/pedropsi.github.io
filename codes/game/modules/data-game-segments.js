@@ -1058,15 +1058,27 @@ TripletLetters={
 }
 
 DirectionsCoordinates={
+	// Horizontal and Vertical
 	"L":[-1,0],
 	"U":[0,-1],
 	"R":[1,0],
-	"D":[0,1]
+	"D":[0,1],
+	// // Diagonals
 	// "N":[-1,1],
 	// "E":[1,1],
-	// "W":[1,-1],
-	// "S":[-1,1]
+	// "S":[1,-1],
+	// "W":[-1,-1],
+	// // Knight Moves
+	// "A":[-2,-1],
+	// "B":[-2,1],
+	// "C":[-1,-2],
+	// "F":[-1,2],
+	// "G":[1,-2],
+	// "H":[1,2],
+	// "I":[2,-1],
+	// "J":[2,1]
 }
+CanonicalLetters=["R","D","E","S"];
 
 LetterTriplets=FlipKeysValues(TripletLetters);
 CoordinatesDirections=FlipKeysValues(DirectionsCoordinates);
