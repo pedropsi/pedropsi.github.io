@@ -1007,6 +1007,20 @@ UnitVector=function(vector){
 	return Divide(vector,d);
 }
 
+NearestVector=function(list,vector,Distance){
+	var Distance=Distance||EuclideanDistance;
+	var c=Sorter(a=>EuclideanDistance(a,vector))(list);
+	return First(c);
+/*
+finds closest element
+NearestVector([[1,2],[1,3],[1,4]],[0.9,3.1])
+[1,3]
+
+any dimension
+NearestVector([[1,2,3,4],[1,3,2,4],[1,4,2,3]],[4,3,2,1])
+[1,4,2,3]
+*/
+}
 ///////////////////////////////////////////////////////////////////////////////
 // Array, Object, String (SAO)
 
