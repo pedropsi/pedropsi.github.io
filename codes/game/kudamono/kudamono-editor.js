@@ -524,83 +524,72 @@ FruitTrackStateLocalErrors=function(fruit,track,state){
 	var rule=Merge(staterules,FruitStateRule(fruit,state));
 
 	var errors={};
-	var wrong=false;
-	if(!wrong&&rule.crossforbidden){
+	if(rule.crossforbidden){
 		errors.crossforbidden=true;
-		wrong=true;
 	}
 
-	if(!wrong&&(rule.minconnected||rule.maxconnected)){
+	if((rule.minconnected||rule.maxconnected)){
 		var min=rule.minconnected;
 		if(min===Infinity)
 			min=FruitNumber(fruit,state);
 		var n=TrackFruitNumber(track,fruit,state);
 		if(n>rule.maxconnected){
 			errors.maxconnected=true;
-			wrong=true;
 		}
 		if(n<min){
 			errors.minconnected=true;
-			wrong=true;
 		}
 	}
 
-	if(!wrong&&rule.trackValidator&&!RuleVerifiers()[rule.trackValidator](track)){
+	if(rule.trackValidator&&!RuleVerifiers()[rule.trackValidator](track)){
 		errors.trackValidator=true;
-		wrong=true;
 	}
-	if(!wrong&&rule.fruitshapes){
-		wrong=Complement(FruitTrackStateShapes(fruit,track,state),rule.fruitshapes).length>0;
-		if(wrong)
+	if(rule.fruitshapes){
+		if(Complement(FruitTrackStateShapes(fruit,track,state),rule.fruitshapes).length>0)
 			errors.fruitshapes=true;
-
 		rule.branchallowed=rule.branchallowed||Intersected(rule.fruitshapes,ShapeBranches);
 	}
-	if(!wrong&&rule.simpleshapes){
-		wrong=Complement(UnFruitTrackStateShapes(fruit,track,state),rule.simpleshapes).length>0;
-		if(wrong)
+	if(rule.simpleshapes){
+		if(Complement(UnFruitTrackStateShapes(fruit,track,state),rule.simpleshapes).length>0)
 			errors.simpleshapes=true;
-
 		rule.branchallowed=rule.branchallowed||Intersected(rule.simpleshapes,ShapeBranches);
 	}
-	if(!wrong&&rule.unconsecutiveshapes){
-		wrong=TrackConsecutiveShapePairs(track).some(pair=>rule.unconsecutiveshapes.some(incompatibles=>Subsetted(incompatibles,pair)));
-		if(wrong)
+	if(rule.unconsecutiveshapes){
+		if(TrackConsecutiveShapePairs(track).some(pair=>rule.unconsecutiveshapes.some(incompatibles=>Subsetted(incompatibles,pair))))
 			errors.unconsecutiveshapes=true;
 	}
-	if(!wrong&&!rule.loopallowed&&TrackLooped(track))
-		errors.loopallowed=(wrong=true);
+	if(!rule.loopallowed&&TrackLooped(track))
+		errors.loopallowed=true;
 		
-	if(!wrong&&rule.looprequired&&!TrackLooped(track))
-		errors.looprequired=(wrong=true);
+	if(rule.looprequired&&!TrackLooped(track))
+		errors.looprequired=true;
 	
 	if((rule.selfloopforbidden||rule.minlineofsight||rule.maxlineofsight)){
 		var fruitPoints=FruitTrackStatePoints(fruit,track,state);
 	}
 		
-	if(!wrong&&rule.selfloopforbidden){
+	if(rule.selfloopforbidden){
 		errors.selfloopforbidden=fruitPoints.some(point=>TrackPointSelfLooped(track,point,Remove(fruitPoints,point)));
-		wrong=errors.selfloopforbidden;
 	}
 
 	if((rule.minlineofsight||rule.maxlineofsight)){
 		var count=Length(TrackPointsSightings(track,fruitPoints))/2;
 		
 		if(rule.minlineofsight&&count<rule.minlineofsight)
-			errors.minlineofsight=(wrong=true);
+			errors.minlineofsight=true;
 
 		if(rule.maxlineofsight&&count>rule.maxlineofsight)
-			errors.maxlineofsight=(wrong=true);
+			errors.maxlineofsight=true;
 	}
 		
-	if(!wrong&&!rule.branchallowed&&TrackBranched(track))
-		errors.branchallowed=(wrong=true);
+	if(!rule.branchallowed&&TrackBranched(track))
+		errors.branchallowed=true;
 
-	if(!wrong&&rule.simpleshapes&&Intersected(rule.simpleshapes,Shape1s))
+	if(rule.simpleshapes&&Intersected(rule.simpleshapes,Shape1s))
 		rule.dangleallowed=true;
 
-	if(!wrong&&!rule.dangleallowed&&TrackDangled(track,state))
-		errors.dangleallowed=(wrong=true);
+	if(!rule.dangleallowed&&TrackDangled(track,state))
+		errors.dangleallowed=true;
 	
 	return errors;
 }
