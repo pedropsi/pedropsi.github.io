@@ -160,7 +160,8 @@ FuseFollowedSegment=function(segment1,segment2){
 }
 
 CanonicalSegment=function(segment){
-	if(!In(UnitDirectionCoordinates,SegmentUnitDirection(segment)))
+	var letter=SegmentClosestDirectionLetter(segment,LetterUnitDirections);
+	if(!In(CanonicalLetters,letter))
 		return Reverse(segment);
 	else
 		return segment;
@@ -504,12 +505,19 @@ EndsegmentsFirst=function(endsegments,segments){
 }
 
 
-
-
-SegmentClosestDirection=function(segment,LetterUnitDirections){
+SegmentClosestDirectionLetter=function(segment,LetterUnitDirections){
 	var sdirection=SegmentUnitDirection(segment);
 	var nearest=NearestVector(Values(LetterUnitDirections),sdirection);
-	return DirectionsCoordinates[UnitDirectionsLetters[nearest]];
+	return UnitDirectionsLetters[nearest];
+/*
+closest direction, even if away from origin
+SegmentClosestDirectionLetter([[-2,-2],[-2.1,-3.1]],LetterUnitDirections)
+"U"
+*/
+}
+
+SegmentClosestDirection=function(segment,LetterUnitDirections){
+	return DirectionsCoordinates[SegmentClosestDirectionLetter(segment,LetterUnitDirections)];
 /*
 closest direction, even if away from origin
 SegmentClosestDirection([[-2,-2],[-2.1,-3.1]],LetterUnitDirections)
@@ -1059,8 +1067,6 @@ DirectionsCoordinates={
 	// "W":[1,-1],
 	// "S":[-1,1]
 }
-
-UnitDirectionCoordinates=["D","R"].map(Getter(DirectionsCoordinates));
 
 LetterTriplets=FlipKeysValues(TripletLetters);
 CoordinatesDirections=FlipKeysValues(DirectionsCoordinates);
