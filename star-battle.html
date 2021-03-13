@@ -6,6 +6,13 @@
 		<script id="post">var v={POST:()=>`
 
 ${starbattlesData={
+	"54-aquarium-star-battle.png":{
+		date:"13/03/2021",
+		cell:"square",
+		legend:"Sea star battle Aquarium",
+		variant:"hybrid",
+		stars:2
+	},
 	"22-cairo-star-battle.png":{
 		date:"06/03/2021",
 		cell:"pentagon",
@@ -169,19 +176,26 @@ ${v.HEADER()}
 
 <p>Geometric star battles include triangular, penrose, Amman-beenker and hyperbolic tilings of the plane, star battle in polar corrdinates (polar star battle) and in three dimensions, folding cubes, icosahedron, and möbius strip (star battles in space)!</p>
 <p>The puzzles come in varying difficulties. One star puzzles tend to be easier, and two star puzzles a bit harder, but not always!</p>
-<p>Choose between old-school ${AHTML("#Paper star battles")}, and the newest ${AHTML("#Interactive star battles")}.</p>
+<p>Choose between old-school ${AHTML("#Paper star battles")} and the newest ${AHTML("#Interactive star battles")}.</p>
+</p>There are also a couple ${AHTML("#Hybrid star battles")}!<p>
 
 <h2>Paper star battles</h2>
 <p>To play these, all you need is pen and paper! Or, if you prefer, the flood-fill tool will work on every puzzle, e.g using MSPaint or other image editing software.</p>
 <p>Shall a star battle be named <em>in space</em>, then part of the challenge is <b>folding the puzzle</b> either in your head or an actual paper version.</p>
 
-${FolderGalleryHTML(ReValueObject(starbattles,sb=>Remove(sb,"href")),"star-battle")}
+${
+	geometrics=FilterValuesObject(starbattles,o=>o.variant!=="hybrid"),
+	hybrids=FilterValuesObject(starbattles,o=>o.variant==="hybrid"),
+	FolderGalleryHTML(ReValueObject(geometrics,sb=>Remove(sb,"href")),"star-battle")}
 
 <h2>Interactive star battles</h2>
 <p>Pick one of the puzzles below to launch the interactive <b>3D star battle player</b> in your browser, thanks to ${P("zenorogue")}!</p>
 
-${FolderGalleryHTML(FilterValuesObject(starbattles,o=>o.href),"star-battle")}
+${FolderGalleryHTML(FilterValuesObject(geometrics,o=>o.href),"star-battle")}
 
+<h2>Hybrid star battles</h2>
+<p>Hybrid star battles are a mix of star battle and other puzzle genres, such as Galaxies or Aquarium!</p>
+${FolderGalleryHTML(FilterValuesObject(hybrids,o=>o.variant==="hybrid"),"star-battle")}
 
 <h3>Controls</h3>
 <h4>Placing stars</h4>
