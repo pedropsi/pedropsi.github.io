@@ -1406,6 +1406,7 @@ false
 Stringed=TypeOfer("string");
 Functioned=TypeOfer("function");
 Numbered=TypeOfer("number");
+Defined=Chainer(TypeOfer("undefined"),Flipped);
 
 
 Noded=function(node){
