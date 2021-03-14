@@ -847,14 +847,6 @@ RequestContact=function(){
 			qrequired:false,
 			qplaceholder:'Op. Tiona Laswell'
 		}]
-		// ['exclusivechoice',{
-		// 	questionname:"Message Subject",
-		// 	qfield:"subject",
-		// 	qchoices:["Common goals","Help request","Problem or bug","Praise & criticism","Advertising","Other"],
-		// 	executeChoice:function(choice,id){
-		// 		SetData("subject",choice,id);
-		// 	}
-		// }]
 	];
 	RequestDataPack(DFOpts,{
 		destination:"contact",
