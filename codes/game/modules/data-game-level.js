@@ -287,10 +287,10 @@ function LevelSelectorMessage(){
 		return "Select one of the "+MaxLevel()+" levels";
 }
 
-if(typeof ObtainLevelSelectorOptions==="undefined")
-	var ObtainLevelSelectorOptions=LevelSelectorOptions;
+if(typeof ObtainLevelSelectorField==="undefined")
+	var ObtainLevelSelectorField=LevelSelectorField;
 
-function LevelSelectorOptions(){
+function LevelSelectorField(){
 	return {
 		questionname:ChosenLevelDescriptionHTML(),
 		qchoices:UnlockedLevels().map(StarLevelNumber),
@@ -299,24 +299,23 @@ function LevelSelectorOptions(){
 	};
 }
 
-function RequestLevelSelector(){
-	var DPOpts=ObtainLevelSelectorOptions();
-	
+function RequestLevelSelector(){	
 	//Add dialing shortcuts
 	var LevelSelectorShortcuts=Merge(ObtainKeyActionsGameBar(),{});
 		AlphanumericCharacters.map(function(C){LevelSelectorShortcuts[C]=function(){DialFocus(C)}});
 		LevelSelectorShortcuts[ObtainMainKey("levelselector")]=CloseLevelSelector;
 	
-	RequestDataPack([
-			['exclusivechoice',Merge(DPOpts,{
-				qsubmittable:false,
-				qfield:"level",
-				qclass:"level-selector",
-				executeChoice:ChooseLevelClose,
-				qtype:ExclusiveChoiceSectionsHTML(LevelSections())
-			})]
-		],
-		{
+	var fields={
+		'exclusivechoice':Merge(ObtainLevelSelectorField(),{
+			qsubmittable:false,
+			qfield:"level",
+			qclass:"level-selector",
+			executeChoice:ChooseLevelClose,
+			qtype:ExclusiveChoiceSectionsHTML(LevelSections())
+		})
+	}
+	
+	RequestDataPack(fields,{
 			action:LoadFromLevelSelectorButton,
 			qonsubmit:CloseLevelSelector,
 			qonclose:GameFocus,

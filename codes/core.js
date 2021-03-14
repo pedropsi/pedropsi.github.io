@@ -5639,9 +5639,9 @@ PlainMessageHTML=function(message){
 ButtonBar=function(buttonshtml,id){return '<div id="'+id+'" class="buttonbar buttonrow">'+buttonshtml+'</div>';}
 
 ////////////////////////////////////////////////////////////////////////////////
-// DataField and DataPack system : default DataField (customisable), many of which constitute a DataPack 
+// Field and DataPack system : default Field (customisable), many of which constitute a DataPack 
 
-DefaultDataField=function(){
+DefaultField=function(){
 	return {
 		questionname:"???",				//Display name of the field question
 		questioninfo:"",				//Display info below the field question
@@ -5655,14 +5655,14 @@ DefaultDataField=function(){
 		executeChoice:Identity,			//immediate changes on toggle receives (id, choice)
 		defaultChoice:DefaultChoice,	//choice formatting, based on itself, receives (index,choicetxt)
 
-		qtype:PlainHTML,				//Format of question :receives a DataField
+		qhtml:PlainHTML,				//Format of question :receives a Field
 		qplaceholder:"Dear Pedro PSI...",//Placeholder answer
 
 		shortcuts:Identity,				//Special shortcuts
 
 		qsubmittable:true, 				//whether the element expects submission (true) or merely presents information (false)
 		qrequired:true,
-		qvalidator:IdentityValidator,	//Receives a DataField
+		qvalidator:IdentityValidator,	//Receives a Field
 		qerrorcustom:''
 	}
 }
@@ -5707,22 +5707,22 @@ DefaultDataPack=function(){
 FindDestination=function(DP){return FindData("destination",DP.qid)};
 
 
-DataFieldTypes=function(){
+TypesFields=function(){
 	return {
 	plain:{
 		qsubmittable:false},
 	message:{
 		action:Close,
-		qtype:LongAnswerHTML,
+		qhtml:LongAnswerHTML,
 		qdisplay:LaunchConsoleThanks},
 	email:{
-		qtype:ShortAnswerHTML,
+		qhtml:ShortAnswerHTML,
 		qfield:"address",
 		qplaceholder:"_______@___.___",
 		questionname:"Your email address",
 		qvalidator:EmailValidator},
 	url:{
-		qtype:ShortAnswerHTML,
+		qhtml:ShortAnswerHTML,
 		qfield:"url",
 		qplaceholder:"https://www.example.org",
 		qvalidator:URLValidator},
@@ -5730,59 +5730,59 @@ DataFieldTypes=function(){
 		qrequired:false,
 		qvalidator:NameValidator,
 		qfield:"name",
-		qtype:ShortAnswerHTML,
+		qhtml:ShortAnswerHTML,
 		questionname:"Your name",
 		qplaceholder:"(optional)"},
 	alias:{
 		qrequired:false,
 		qvalidator:NameValidator,
 		qfield:"name",
-		qtype:ShortAnswerHTML,
+		qhtml:ShortAnswerHTML,
 		questionname:"Your name",
 		qplaceholder:"(or alias)"},
 	answer:{
 		qfield:"answer",
-		qtype:LongAnswerHTML,
+		qhtml:LongAnswerHTML,
 		qvalidator:SomeTextValidator},
 	shortanswer:{
 		qfield:"shortanswer",
-		qtype:ShortAnswerHTML,
+		qhtml:ShortAnswerHTML,
 		qvalidator:SomeTextValidator},
 	exclusivechoice:{
 		qfield:'answer',
 		questionname:"Which one?",
 		qchoices:["on","off"],
-		qtype:ExclusiveChoiceButtonRowHTML},
+		qhtml:ExclusiveChoiceButtonRowHTML},
 	multiplechoice:{
 		qfield:'answer',
 		questionname:"Which ones?",
 		qchoices:["1","2","3","4","5"],
-		qtype:ChoicesButtonRowHTML},
+		qhtml:ChoicesButtonRowHTML},
 	navi:{
 		qfield:"navi",
 		qclass:"nowrap",
 		questionname:"",
 		qchoices:[StringGlyph("left"),"OK",StringGlyph("right")],
-		qtype:ExclusiveChoiceButtonRowHTML,
+		qhtml:ExclusiveChoiceButtonRowHTML,
 		defaultChoice:function(i,txt){return txt==="OK";},
 		qsubmittable:false},
 	keyboard:{
 		qfield:"keyboard",
 		questionname:"",
 		qchoices:DefaultKeyboardKeys(),
-		qtype:KeyboardHTML,
+		qhtml:KeyboardHTML,
 		defaultChoice:function(i,txt){return txt==="⮐";},//Defaults to enter
 		qsubmittable:false},
 	password:{
 		questionname:"What is the password?",
 		qfield:'password',
-		qtype:ShortAnswerHTML,
+		qhtml:ShortAnswerHTML,
 		qvalidator:SomeTextValidator,
 		qplaceholder:"(top-secret)"},
 	snapshot:{
 		questionname:"Attach a snapshot?",
 		qfield:'snapshot',
-		qtype:ExclusiveChoiceButtonRowHTML,
+		qhtml:ExclusiveChoiceButtonRowHTML,
 		qchoices:["no","yes"]},
 	secret:{
 		questionname:"",
@@ -5790,35 +5790,40 @@ DataFieldTypes=function(){
 	}
 }
 
-CustomDataField=function(type,obj){
-	var DF=DefaultDataField();
-	var dataFieldTypes=DataFieldTypes();
-	if(In(dataFieldTypes,type))
-		DF=Merge(DF,dataFieldTypes[type]);
-	return Merge(DF,obj);
+CustomField=function(type,opts){
+	var field=DefaultField();
+	var typesFields=TypesFields();
+	if(In(typesFields,opts.type))
+		field=Merge(field,typesFields[opts.type]);
+	else if(In(typesFields,type))
+		field=Merge(field,typesFields[type]);
+	return Merge(field,opts);
 }
 
-UpdateDataPack=function(DP,obj){
+MergeDP=function(DP,obj){
 	return Merge(DP,obj);
 }
 
 NewDataPack=function(obj){
-	return UpdateDataPack(DefaultDataPack(),obj);
+	return MergeDP(DefaultDataPack(),obj);
 }
 
-NewDataPackFields=function(NamedFieldArray){
-	function CusDaFiel(ndf){return CustomDataField(ndf[0],ndf[1])};
-	var f=NamedFieldArray.map(CusDaFiel);
-	return {fields:f};
+FieldsArray=function(Fields){
+	function CusDaFiel(ndf){return CustomField(ndf[0],ndf[1])};
+	if(Arrayed(Fields)){
+		return Fields.map(CusDaFiel);
+	}
+	else
+		return ThreadKeysValues(Fields,CustomField);
 }
 
-RequestDataPack=function(NamedFieldArray,Options){
-	if(NamedFieldArray.length<1)
+RequestDataPack=function(Fields,Options){
+	if(Length(Fields)<1)
 		return;
 	else{
 		var o=Options||{};
-		var DP=NewDataPack(NewDataPackFields(NamedFieldArray));
-		DP=UpdateDataPack(DP,o);
+		var DP=NewDataPack({fields:FieldsArray(Fields)});
+		DP=MergeDP(DP,o);
 		DP.fields=DP.fields.map(function(f){var fi=f;fi.pid=DP.qid;return fi});
 
 		function SameType(DP1){return function(DP2){return DP1.buttonSelector===DP2.buttonSelector}};
@@ -5857,7 +5862,7 @@ RequestDataPack=function(NamedFieldArray,Options){
 	}
 };
 
-// DataField HTML Components
+// Field HTML Components
 
 PlainHTML=function(dataField){
 	return "<span class='field-"+dataField.qfield+"' data-"+dataField.qfield+"='"+dataField.qvalue+"'>"+PlainMessageHTML(dataField.questionname)+"</span>";
@@ -5961,11 +5966,11 @@ SubQuestionHTML=function(dataField){
 	var qname=dataField.questionname;
 	var questiontitle="";
 	var questioninfo="";
-	if(qname!==""&&dataField.qtype!==PlainHTML)
+	if(qname!==""&&dataField.qhtml!==PlainHTML)
 		questiontitle=MessageHTML(qname);
-	if(dataField.questioninfo!==""&&dataField.qtype!==PlainHTML)
+	if(dataField.questioninfo!==""&&dataField.qhtml!==PlainHTML)
 		questioninfo=MessageHTML(PHTML(dataField.questioninfo),"question-info");
-	var answerfields=dataField.qtype(dataField);
+	var answerfields=dataField.qhtml(dataField);
 	return questiontitle+questioninfo+answerfields;
 }
 
@@ -5988,7 +5993,7 @@ QuestionHTML=function(DP){
 
 LaunchThanksBalloon=function(DP){
 	RequestDataPack(
-		[['plain',{questionname:DP.thanksmessage}]],
+		{'plain':{questionname:DP.thanksmessage}},
 		{qtargetid:DP.qtargetid,
 		qdisplay:LaunchBalloon,
 		requireConnection:false});

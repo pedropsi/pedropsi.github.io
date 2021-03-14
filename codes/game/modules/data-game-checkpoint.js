@@ -109,11 +109,11 @@ function ObtainWonColumn(){
 
 
 
-function ObtainLevelSelectorOptions(){
+function ObtainLevelSelectorField(){
 	if(!Checkpointed())
-		return LevelSelectorOptions();
+		return LevelSelectorField();
 	else {
-		var checkpointIndices=Object.keys(GetCheckpoints());
+		var checkpointIndices=Keys(GetCheckpoints());
 		return {
 			questionname:"Reached checkpoints:",
 			qchoices:checkpointIndices.map(function(l){return (Number(l)+1)+"";}),

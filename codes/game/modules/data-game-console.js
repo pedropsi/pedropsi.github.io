@@ -50,13 +50,15 @@ function RequestMore(){
 			return In(d["author-consensus"],au)||In(au,d["author-consensus"]);
 		}
 	}
+	
 	var games=Memory("PGD").filter(SameAuthor(author)).map(function(id){return GameDropDownButtonHTML(id,false)});
-	var DPFields=[
-			['plain',{questionname:"More games by: <b>"+author+"</b>"}],
-			['plain',{questionname:games.join("\n")}],
-		];
 
-	RequestDataPack(DPFields,{
+	var fields={
+		"title":{type:"plain",questionname:"More games by: <b>"+author+"</b>"},
+		"choices":{type:'plain',questionname:games.join("\n")},
+	};
+
+	RequestDataPack(fields,{
 		qonclose:GameFocus,
 		qdisplay:LaunchBalloon,
 		qtargetid:".game-container",

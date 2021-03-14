@@ -347,13 +347,12 @@ function RequestHint(){
 	if(!RequestHint.requested||TitleScreen()){
 		RequestHint.requested=Hints().map(function(hl){return hl.map(function(x){return false;})});
 		var tip=CycleNextBounded(RequestHint["tips-welcome"]);
-		var DFOpts={questionname:tip};
-		var DPFields=[['plain',DFOpts]];
+		var fields={'plain':{questionname:tip}};
 	}
 	else if(IsScreenMessage(CurrentScreen())){
 		var tip=CycleNext(RequestHint["tips-interlevel"]);
-		var DFOpts={questionname:"<b>General tip:</b> "+HintDisplay(tip)};
-		var DPFields=[['plain',DFOpts]];
+			tip="<b>General tip:</b> "+HintDisplay(tip);
+		var fields={'plain':{questionname:tip}};
 	}
 	else{
 		var curlevelHints=CurrentLevelHints();
@@ -385,24 +384,27 @@ function RequestHint(){
 			delete naviactions[right];
 		}
 		
-		var DFOpts={questionname:tip};
-		var DFHintCounter={questionname:"<b>"+HintProgress(CurLevelNumber(),p+1)+"</b>"};
-		var DPFields=[
-			['plain',DFHintCounter],
-			['plain',DFOpts],
-			['navi',{
+		var fields={
+			"stars-counter":{
+				type:'plain',
+				questionname:"<b>"+HintProgress(CurLevelNumber(),p+1)+"</b>"
+			},
+			"tip":{
+				type:'plain',
+				questionname:tip
+			},
+			'navi':{
 				qchoices:navichoices,
 				qchoicesViewF:Glyph,
 				executeChoice:function(choice,pid){
 					if(In(naviactions,choice))
 						naviactions[choice]();
 				}
-			}]
-		];
-		
+			}
+		};
 	}
 	
-	RequestDataPack(DPFields,{
+	RequestDataPack(fields,{
 		actionvalid:CloseHint,
 		qonsubmit:CloseHint,
 		qonclose:GameFocus,

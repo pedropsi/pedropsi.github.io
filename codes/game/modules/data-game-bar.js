@@ -603,18 +603,17 @@ function RequestKeyboard(){
 	if(!ObtainKeyboardAllowed())
 		return;
 	
-	var DFOpts={
-		executeChoice:ObtainGameAction,
-		qchoices:ObtainKeyboardKeys(),
-		qchoicesViewF:Glyph
+	var fields={
+		"keyboard":{
+			executeChoice:ObtainGameAction,
+			qchoices:ObtainKeyboardKeys(),
+			qchoicesViewF:Glyph
+		}
 	}
 	
 	var Shortcuts=ObtainKeyActionsGameBar();
 	
-	RequestDataPack([
-			['keyboard',DFOpts]
-		],
-		{
+	RequestDataPack(fields,{
 			action:console.log,
 			qonsubmit:Identity,
 			qonclose:GameFocusAndRestartUndoButtons,
