@@ -425,47 +425,41 @@ RequestHallOfFame=function(){
 	if(LocalStorage("hall-of-fame")===true)
 		return RequestWinnerMessage();
 
-	var awaitwinner=true;
-
-	if(ConsoleExternal())
-		RequestDataPack([
-		['alias',{
-			questionname:"Enter the Global Hall of Fame:",
+	var fields={
+		'alias':{
+			questionname:"Enter the Hall of Fame:",
 			qplaceholder:"Your name or alias",
 			qrequired:true,
-			qerrorcustom:"The Hall of Fame's guards ask for at least 2 alphanumerics!"}
-		]],
-		{
+			qerrorcustom:"The Hall of Fame's guards ask for at least 2 alphanumerics!"
+		}
+	};
+
+	if(ConsoleExternal()){
+		fields.alias.questionname="Enter the Global Hall of Fame:";
+		RequestDataPack(fields,{
 			destination:"hall-of-fame-global",
 			qonsubmit:SuccessF
 		});
-	else
-		RequestDataPack([
-	['alias',{
-		questionname:"Enter the Hall of Fame:",
-		qplaceholder:"Your name or alias",
-		qrequired:true,
-		qerrorcustom:"The Hall of Fame's guards ask for at least 2 alphanumerics!"}
-	]],
-	{
+	}
+	else{
+		var awaitwinner=true;
+		RequestDataPack(fields,{
 		destination:"hall-of-fame",
 		qonclose:function(){
 			if(awaitwinner){
 				awaitwinner=false;
 				RequestWinnerMessage();
-				//console.log(1);
 			}
-			
 		},
 		qonsubmit:function(){
 			if(awaitwinner){
 				awaitwinner=false;
 				RequestWinnerMessage();
-				//console.log(2);
 			}				
 			LocalStorage("hall-of-fame",true);
-		}
-	});
+			}
+		});
+	}
 }
 
 RequestWinnerMessage=function(){
@@ -479,20 +473,19 @@ RequestWinnerMessage=function(){
 			return "feedback";
 	}
 	
-	RequestDataPack([
-		['answer',{
-			questionname:"As a winner, what would you tell Pedro PSI?",
-		}],
-		['exclusivechoice',{
+	var fields={
+		'answer':{questionname:"As a winner, what would you tell Pedro PSI?"},
+		'exclusivechoice':{
 			questionname:"",
 			qfield:"whence",
 			qchoices:["Private message","Public message in Guestbook"],
 			executeChoice:function(choice,id){
 				SetData("destination",DestinationChoice(choice),id);
 			}
-		}]
-	],
-	{
+		}
+	};
+
+	RequestDataPack(fields,{
 		thanksmessage:"Thank you for your message.",
 		qonclose:GameFocus,
 		qonsubmit:function(){
@@ -500,8 +493,7 @@ RequestWinnerMessage=function(){
 			GameFocus();
 		},
 		findDestination:function(DP){return DestinationChoice(FindData("whence",DP.qid));}
-	}
-	);
+	});
 }
 
 
@@ -518,7 +510,7 @@ RequestGameFeedback=function(){
 		LaunchConsoleThanks(DP);
 		FocusAndResetFunction(RequestGameFeedback,GameFocus)();};
 	
-	var DPsettingsObj={
+	var opts={
 		qtargetid:ParentSelector(gameSelector),
 		qdisplay:LaunchBalloon,
 		qonsubmit:RecordAndLaunchThanksBalloon,
@@ -529,30 +521,30 @@ RequestGameFeedback=function(){
 		shortcutTarget:"FeedbackWindow"
 	};
 	
-	var DFsettingsObj={};
-	var DFSnapshot=['snapshot',{}];
+	var fields={
+		"answer":{},
+		"snapshot":{}	
+	};
 	  
 	function HasFeedback(){return In(RequestGameFeedback.requests,CurrentScreen());};
 	
 	if(CurrentDatapack()&&CurrentDatapack().buttonSelector==="FeedbackButton")
 		CloseCurrentDatapack();
-	else if(TitleScreen()){
-		DFsettingsObj.questionname="<p>Press "+Glyph("feedback")+" or <kbd>"+ObtainMainKey("feedback")+"</kbd> as soon as you start the game to Email Pedro PSI real-time feedback. Much appreciated!</p>";
-		RequestDataPack([['plain',DFsettingsObj]],DPsettingsObj);
-	}
-	else if(HasFeedback()){
-		DFsettingsObj.questionname="<p>Any further comments on <b>"+ObtainLevelTitle(CurLevelNumber())+"</b>?</p>";
-		RequestDataPack([['answer',DFsettingsObj],DFSnapshot],DPsettingsObj);
-	}
-	else if(!IsScreenMessage(CurrentScreen())){
-		DFsettingsObj.questionname="<p>What do you think of <b>"+ObtainLevelTitle(CurLevelNumber())+"</b>, so far?</p>";
-		RequestDataPack([['answer',DFsettingsObj],DFSnapshot],DPsettingsObj);
-	}
-	else{
-		DFsettingsObj.questionname="<p>Comments or ideas?</p>";
-		RequestDataPack([['answer',DFsettingsObj],DFSnapshot],DPsettingsObj);
-	}
 
+	else if(TitleScreen()){
+		fields.answer.questionname="<p>Press "+KB("feedback")+" as soon as you start the game to Email Pedro PSI real-time feedback. Much appreciated!</p>";
+		delete fields.snapshot;
+		fields.plain=fields.answer;
+		delete fields.answer;
+	}
+	else if(HasFeedback())
+		fields.answer.questionname="<p>Any further comments on <b>"+ObtainLevelTitle(CurLevelNumber())+"</b>?</p>";
+	else if(!IsScreenMessage(CurrentScreen()))
+		fields.answer.questionname="<p>What do you think of <b>"+ObtainLevelTitle(CurLevelNumber())+"</b>, so far?</p>";
+	else
+		fields.answer.questionname="<p>Comments or ideas?</p>";
+
+	RequestDataPack(fields,opts);
 }
 
 CloseFeedback=function(){
@@ -569,30 +561,27 @@ PrintGameState=function(){
 // Guestbook & Comments
 
 RequestGuestbook=function(){
-	RequestDataPack([
-		['answer',{
+	var fields={
+		'answer':{
 			questionname:"Your message",
-			thanksmessage:"Thank you for your message in the Guestbook!"}],
-		['alias',{}]
-	],{
-		destination:'guestbook'
-		}
-	)
+			thanksmessage:"Thank you for your message in the Guestbook!"},
+		'alias':{}
+	};
+	RequestDataPack(fields,{destination:'guestbook'});
 }
 
 RequestMessageReply=function(nid,title){
 	RequestMessageReply.currentid=nid;
 	RequestMessageReply.title=title;
-	RequestDataPack([
-		['answer',{
+	var fields={
+		'answer':{
 			questionname:"Your polite reply",
 			qplaceholder:"I concur/beg to differ ...",
-			thanksmessage:"Your reply has been posted! Thank you."}],
-		['alias',{}]
-	],{
-		destination:'guestbook'
-		}
-	)
+			thanksmessage:"Your reply has been posted! Thank you."
+		},
+		'alias':{}
+	};
+	RequestDataPack(fields,{destination:'guestbook'});
 }
 
 
@@ -602,30 +591,29 @@ RequestMessageReply=function(nid,title){
 //Subscribe
 
 OpenModalSubscribe=function(){
-	RequestDataPack([
-		['exclusivechoice',{
+	var fields={
+		'exclusivechoice':{
 			qfield:"updates",
 			questionname:"Be the first to know about Pedro PSI's next project!",
 			qchoices:["New games only","All projects"]
-		}],
-		['email',{}],
-		['name',{}]
-	],
-		{destination:'subscription',
+		},
+		'email':{},
+		'name':{}
+	};
+	RequestDataPack(fields,{
+		destination:'subscription',
 		thanksmessage:"Thank you for subscribing!"
-		}
-	)
+	});
 }
 
 //////////////////////////////////////////////////////////////////////
 //Order
 
 OpenModalPreOrder=function(campaigntext){
-	RequestDataPack([
-		['email',{questionname:campaigntext}]],{
-			destination:'preorder',
-			thanksmessage:"Your booking was placed. Thank you!"
-		});
+	RequestDataPack({'email':{questionname:campaigntext}},{
+		destination:'preorder',
+		thanksmessage:"Your booking was placed. Thank you!"
+	});
 }
 
 
@@ -633,18 +621,15 @@ OpenModalPreOrder=function(campaigntext){
 //PWA Install
 
 RequestPWAInstall=function(){
-	RequestDataPack([
-		['exclusivechoice',{
+	var fields={
+		'exclusivechoice':{
 			questionname:"Add "+PageTitle()+" to your homescreen (offline)?",
 			qchoices:["Maybe later...","Yes, please!"],
 			executeChoice:InstallPWAMaybe,
 			qsubmittable:false
-			}]
-		],
-		{
-			qdisplay:LaunchConsoleMessage
 		}
-	)
+	};
+	RequestDataPack(fields,{qdisplay:LaunchConsoleMessage});
 }
 
 InstallPWAMaybe=function(choice,id){
@@ -687,16 +672,12 @@ PWAInstallConfirm=function(ev){
 //Password
 
 function RequestProductKey(SuccessF){
-	RequestDataPack([
-		['password',{
-			questionname:"Your purchased product key"
-		}],
-		],{
+	var fields={'password':{questionname:"Your purchased product key"}};
+	RequestDataPack(fields,{
 			actionText:'Verify',
 			actionvalid:function(){SubmitPassword(SuccessF)},
 			thanksmessage:"Key submitted! Verifying..."
-		}
-	)
+	});
 }
 
 function SubmitPassword(SuccessF){
@@ -757,71 +738,83 @@ RequestPGDSubmission=function(editData,editmode){
 	RequestPGDSubmission['lastdata']=editData;
 	var O=editData;
 	
-	var DFOpts=[
-		['plain',{
+	var fields={
+		'plain':{
 			questionname:"Thank you for improving the "+PageTitle()+(editmode?(". You're editing <b>"+(O.titleHTML)+"</b> by <b>"+O.authorHTML+"</b>"):". You're adding a <b>new "+Game+"</b>."),
 			qvalue:O.mode,
 			qfield:"mode"
-			}],
-		['url',{
+		},
+		'link':{
+			type:'url',
 			qfield:"link",
 			questionname:Game+" page",
 			questioninfo:(Game==="Game"?"Playable":"Hackable")+" "+Game+" link - associates with the "+Game+" title.",
 			qplaceholder:'https://puzzlescript.net/play.html?p=PUZZLESCRIPT_ID',
-			qvalue:O["link-consensus"]||""}],
-		['shortanswer',{
+			qvalue:O["link-consensus"]||""
+		},
+		'title':{
+			type:'shortanswer',
 			qfield:"title",
 			questionname:Game+" Title",
 			questioninfo:"Title only - any extra info belongs to the <em>Labels</em> field, below.",
 			qplaceholder:Game+' title',
-			qvalue:O["title-consensus"]||""}],
-		['shortanswer',{
+			qvalue:O["title-consensus"]||""
+		},
+		'author':{
+			type:'shortanswer',
 			qfield:"author",
 			questionname:Game+" Author(s)",
 			questioninfo:"Name of Author(s), without specifying roles.",
 			qplaceholder:'Author 1 (pseudonym1), Author 2...',
-			qvalue:O["author-consensus"]||""}],
-		['url',{
+			qvalue:O["author-consensus"]||""
+		},
+		'authorlink':{
+			type:'url',
 			qfield:"page",
 			questionname:"Author(s) contact page",
 			questioninfo:"Single contact page - associates with the "+Game+" Author(s).",
 			qplaceholder:'e.g. https://example.com/AUTHOR1',
 			qrequired:false,
-			qvalue:O["page-consensus"]||""}]
-	];
+			qvalue:O["page-consensus"]||""
+		}
+	};
 	
 	if(Game==="Game")
-		var DFOptsExtra=[
-			['shortanswer',{
+		var extraFields={
+			'year':{
+				type:'shortanswer',
 				qfield:"year",
 				questionname:"Release Year",
 				questioninfo:"Year the "+Game+" was first released (ignoring future updates).",
 				qplaceholder:String(Year()),
 				qrequired:false,
-				qvalue:O["year-consensus"]||""}],
-			['shortanswer',{
+				qvalue:O["year-consensus"]||""
+			},
+			'notes':{
+				type:'shortanswer',
 				qfield:"notes",
 				questionname:"Labels",
 				questioninfo:"Extra info to label the "+Game+". <b>Please follow the current database conventions (search for examples)!</b> For example: Version number (when indicated), beta (prototypes or works in progress), mod (heavily modified games), demake (ports from other formats). Comma-separated values will be displayed as individual tags. ",
 				qplaceholder:'v0.1.2, beta, mod, demake, your comments',
 				qrequired:false,
-				qvalue:O["notes-consensus"]||""}]
-		];
+				qvalue:O["notes-consensus"]||""
+			}
+		};
 	else
-		var DFOptsExtra=[
-			['shortanswer',{
+		var extraFields={
+			'notes':{
+				type:'shortanswer',
 				qfield:"notes",
 				questionname:"Tags",
 				questioninfo:"Tags that apply to the "+Game+". <b>Please follow the current database conventions (search for examples)!</b>",
 				qplaceholder:'counter, ice, gravity, pathfinding, line of sight',
 				qrequired:false,
-				qvalue:O["notes-consensus"]||""}]
-			];
+				qvalue:O["notes-consensus"]||""
+			}
+		};
 		
-	DFOpts=DFOpts.concat(DFOptsExtra);
-	RequestDataPack(DFOpts,{
-		destination:"PGD"
-	});
+	fields=Merge(fields,extraFields);
+	RequestDataPack(fields,{destination:"PGD"});
 }
 
 
@@ -915,22 +908,23 @@ ToggleNightMode=function(){
 // Debug tools
 
 RequestDebugger=function(){
-	RequestDataPack([
-		['answer',{
+	var fields={
+		'answer':{
 			questionname:"Javascript code to be evaluated:",
 			questioninfo:"(for cross-browser testing)",
 			thanksmessage:"Evaluated",
 			qplaceholder:`alert("It works!")`,
 			qfield:"code",
 			qid:"debugger"
-		}]
-	],{
+		}
+	};
+	var opts={
 		closeonblur:false,
 		actionText:'Evaluate',
 		action:DebuggerEvaluate,
 		requireConnection:false
-		}
-	)
+	}
+	RequestDataPack(fields,opts);
 }
 
 DebuggerEvaluate=function(){

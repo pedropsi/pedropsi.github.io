@@ -7408,7 +7408,7 @@ ExcludeContext=function(context,elem){
 	var exclusions=Keys(BlockedKeylists).filter(sel=>Match(elem,sel));
 	if(exclusions.length){
 		exclusions=exclusions.map(b=>BlockedKeylists[b].map(ComboKeystring));
-		exclusions=Appy(Union,exclusions);
+		exclusions=Apply(Union,exclusions);
 		exclusions.map(b=>delete context[b]);
 	}
 	return context;
