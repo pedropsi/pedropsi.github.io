@@ -9724,7 +9724,47 @@ FunctionCalledFunctions(FunctionCalledFunctions)
 */
 }
 
-JavascriptFunctionNames=["RegExp","Array","Object","Date","String","Number","Set","Math"];
+
+AssignmentPattern=/(\n.*\s([^=\s]+)=([^=;\n]+));/mig;
+FunctionLoggedBody=function(F,logString){
+	var code=UnCommentCode(FunctionBody(F));
+	var assignments=code.replaceAll(AssignmentPattern,`{$1;${logString||"console.log"}('$2',$2);}`);
+	return assignments;	
+}
+
+RedefineFunction=function(F,body){
+	eval(`${FunctionName(F)}=${F.toString().replace(FunctionBody(F),body)}`);
+}
+
+MonitoredFunctions={};
+
+FunctionMonitor=function(F,Logger){
+	var name=FunctionName(F);
+	if(In(MonitoredFunctions,name))
+		return;
+	var body=FunctionBody(F);
+	MonitoredFunctions[name]=body;
+	Winf("monitoring "+name);
+
+	var logString=Logger?functionName(Logger):"Winf";
+	var code=UnCommentCode(body);
+	var loggedBody=FunctionLoggedBody(F,logString);
+	if(loggedBody!==code)
+		RedefineFunction(F,loggedBody)
+}
+
+FunctionUnMonitor=function(F){
+	var name=FunctionName(F);
+	if(In(MonitoredFunctions,name)){
+		RedefineFunction(F,MonitoredFunctions[name]);
+		delete MonitoredFunctions[name];
+		Winf("stopped monitoring "+name)
+	}
+}
+
+
+
+JavascriptFunctionNames=["RegExp","Array","Object","Date","String","Number","Set","Math","Error","Map","Symbol"];
 
 FunctionAscendents=function(F){
 	var selfName=FunctionName(this);
@@ -9778,8 +9818,6 @@ FunctionDeepAscendents(function X(){return FunctionName()})
 ["FunctionName"]
 */
 }
-
-
 
 
 
