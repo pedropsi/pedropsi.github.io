@@ -1359,9 +1359,10 @@ Regexed=Iser("RegExp")
 
 TypeOfer=function(typeName){
 	return function(s){
-		if(typeof s==="undefined")
+		if(typeof s==="undefined"&&typeName!=="undefined")
 			return false;
-		return typeof s===typeName;
+		else
+			return typeof s===typeName;
 	}
 /*
 Empty string
