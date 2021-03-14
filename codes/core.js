@@ -442,37 +442,28 @@ false
 
 ///////////////////////////////////////////////////////////////////////////////
 //Error report
+
+ErrorColours={
+	"error":"gray",
+	"type error":"darkred",
+	"info":"darkgreen",
+	"network":"blue",
+	"debug":"purple"
+};
+
 Warner=function(type){
-	var font="font-family:Calibri,Arial; ";
-	var yellowfont="color:lightyellow; "+font;
+	var colour=ErrorColours[type]||ErrorColours["error"];
+	var yellowfont="color:lightyellow; font-family:Calibri,Arial; background:"+colour;
 	var bold="font-weight:bold; ";
-	var types={
-		"error":[
-			yellowfont+bold+' background: gray;',
-			yellowfont+' background: gray;'
-		],
-		"type error":[
-			yellowfont+bold+' background: darkred;',
-			yellowfont+' background: darkred;'
-		],
-		"info":[
-			yellowfont+bold+' background: darkgreen;',
-			yellowfont+' background: darkgreen;'
-		],
-		"network":[
-			yellowfont+bold+' background: blue;',
-			yellowfont+' background: blue;'
-		],
-		"debug":[
-			yellowfont+bold+' background: purple',
-			yellowfont+' background: purple'
-		]
-	};
+	
 	return function W(message){
 		var message=Fallback(message,"");
 		var caller=FindCallerName(W.caller||"")||"top level";
 		
-		var styles=types[type]||types[error];
+		var styles=[
+			yellowfont+bold,
+			yellowfont
+		]
 
 		var values=Rest(Values(arguments));
 			values=[`%c ${caller} %c ${type} `].concat(styles).concat([message]).concat(values);
