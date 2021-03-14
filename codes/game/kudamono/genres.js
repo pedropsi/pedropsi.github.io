@@ -90,7 +90,7 @@ var Genres={
 		},
 		groups:{
 			"tree":{
-				fruits:["root","flower","fruit","hummingbird","question","slybon"],
+				fruits:["flower","fruit","hummingbird","question","slybon","root"],
 				colour:"rgb(134,0,16)"
 			}
 		},
