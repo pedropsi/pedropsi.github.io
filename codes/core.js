@@ -4580,10 +4580,12 @@ MemorySlot=function(name){
 
 Memory=function(name,data,days){
 	if(typeof data==="undefined"){
-		var data=null;
-		try{data=JSON.parse(localStorage[MemorySlot(name)])}
-		catch(err){}
-		return data;
+		try{
+			return JSON.parse(localStorage[MemorySlot(name)])
+		}
+		catch(err){
+			return undefined;
+		}
 	}
 	try{
 		localStorage[MemorySlot(name)]=JSON.stringify(data);
@@ -8769,10 +8771,7 @@ TogglerButtonHTML=function(StatusReporterName,StatusChangerName){
 StatusReporter=function(name,DefaultStatusReporter){
 	return function(){
 		var status=DefaultStatusReporter();
-		if(Memory(name)!==null)
-			return Memory(name);
-		else
-			return status;
+		return Fallback(Memory(name),status);
 	}
 }
 

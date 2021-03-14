@@ -871,7 +871,7 @@ RequestContact=function(){
 // Night Mode
 
 StartNightMode=function(){
-	if(Memory("nightmode")===null){
+	if(typeof Memory("nightmode")==="undefined"){
 		//if(window.matchMedia('(prefers-color-scheme: dark)').matches)
 		//	ActivateNightMode();
 		//else
