@@ -9727,36 +9727,47 @@ FunctionCalledFunctions(FunctionCalledFunctions)
 
 AssignmentPattern=/(\n.*\s([^=\s]+)=([^=;\n]+));/mig;
 FunctionLoggedBody=function(F,logString){
+	var logString=logString||"console.log";
 	var code=UnCommentCode(FunctionBody(F));
-	var assignments=code.replaceAll(AssignmentPattern,`{$1;${logString||"console.log"}('$2',$2);}`);
+	var assignments=code.replaceAll(AssignmentPattern,"{$1;"+logString+"('$2',$2);}");
 	return assignments;	
 }
 
-RedefineFunction=function(F,body){
-	eval(`${FunctionName(F)}=${F.toString().replace(FunctionBody(F),body)}`);
+FunctionRedefine=function(F,body){
+	try{
+		eval(`${FunctionName(F)}=${F.toString().replace(FunctionBody(F),body)}`);
+		return true;
+	}
+	catch(e){
+		Warn("could not redefine",F,body);
+		return false;
+	}
 }
 
 MonitoredFunctions={};
 
-FunctionMonitor=function(F,Logger){
+FunctionMonitor=function(F,logString){
+	if(!Functioned(F))
+		return;
 	var name=FunctionName(F);
 	if(In(MonitoredFunctions,name))
 		return;
 	var body=FunctionBody(F);
 	MonitoredFunctions[name]=body;
-	Winf("monitoring "+name);
 
-	var logString=Logger?functionName(Logger):"Winf";
+	var logString=logString||"Winf";
 	var code=UnCommentCode(body);
 	var loggedBody=FunctionLoggedBody(F,logString);
 	if(loggedBody!==code)
-		RedefineFunction(F,loggedBody)
+		FunctionRedefine(F,loggedBody)?Winf("monitoring "+name):"";
 }
 
 FunctionUnMonitor=function(F){
+	if(!Functioned(F))
+		return;
 	var name=FunctionName(F);
 	if(In(MonitoredFunctions,name)){
-		RedefineFunction(F,MonitoredFunctions[name]);
+		FunctionRedefine(F,MonitoredFunctions[name]);
 		delete MonitoredFunctions[name];
 		Winf("stopped monitoring "+name)
 	}
