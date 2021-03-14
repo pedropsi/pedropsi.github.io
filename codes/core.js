@@ -5864,15 +5864,15 @@ RequestDataPack=function(Fields,Options){
 
 // Field HTML Components
 
-PlainHTML=function(dataField){
-	return "<span class='field-"+dataField.qfield+"' data-"+dataField.qfield+"='"+dataField.qvalue+"'>"+PlainMessageHTML(dataField.questionname)+"</span>";
+PlainHTML=function(field){
+	return "<span class='field-"+field.qfield+"' data-"+field.qfield+"='"+field.qvalue+"'>"+PlainMessageHTML(field.questionname)+"</span>";
 }
 
-ExclusiveChoiceButtonHTML=function(choice,dataField,i){
-	var args='(\"'+dataField.qfield+'\",\"'+choice+'\",\"'+dataField.pid+'\");';
+ExclusiveChoiceButtonHTML=function(choice,field,i){
+	var args='(\"'+field.qfield+'\",\"'+choice+'\",\"'+field.pid+'\");';
 	var SetF=' SetData'+args;
 	var ExecuteF='ExecuteChoice'+args;
-	var SelectF='ToggleThisOnly(event,this,'+dataField.pid+');'+SetF;
+	var SelectF='ToggleThisOnly(event,this,'+field.pid+');'+SetF;
 
 	var buAttribs={
 		'onfocus':SelectF,
@@ -5882,30 +5882,30 @@ ExclusiveChoiceButtonHTML=function(choice,dataField,i){
 		'ondblclick':ExecuteF,
 		id:"choice-"+choice};
 
-	if(dataField.defaultChoice(i,choice)){
+	if(field.defaultChoice(i,choice)){
 		buAttribs.class=" selected";
 		buAttribs.onload=SetF;
-		SetData(dataField.qfield,choice,dataField.pid);//Actualy choose it
+		SetData(field.qfield,choice,field.pid);//Actualy choose it
 	}
-	buAttribs.txt=dataField.qchoicesViewF(choice);
+	buAttribs.txt=field.qchoicesViewF(choice);
 	return ButtonHTML(buAttribs);
 };
 
-MultiChoiceButtonHTML=function(choice,dataField,i){
-		var args='(\''+dataField.qfield+'\',\''+choice+'\',\''+dataField.pid+'\')';
+MultiChoiceButtonHTML=function(choice,field,i){
+		var args='(\''+field.qfield+'\',\''+choice+'\',\''+field.pid+'\')';
 		var SelectF='ToggleThis(event,this);ToggleData'+args;
 		var buAttribs={
 			'onclick':SelectF,
 			'onfocus':SelectF,
 			id:"choice-"+choice,
-			txt:dataField.qchoicesViewF(choice)};
+			txt:field.qchoicesViewF(choice)};
 		return ButtonHTML(buAttribs);
 	};
 
-ChoiceRowHTML=function(dataField,buttontype){
+ChoiceRowHTML=function(field,buttontype){
 	var choi="";
-	for(var i in dataField.qchoices)
-		choi=choi+buttontype(dataField.qchoices[i],dataField,i);
+	for(var i in field.qchoices)
+		choi=choi+buttontype(field.qchoices[i],field,i);
 	return choi;
 }
 
@@ -5913,15 +5913,15 @@ SectionRowsHTML=function(sectionArray){
 	if(!sectionArray||sectionArray.length<0)
 		return ChoiceRowHTML;
 
-	function ChoiceSectionRowHTML(dataField,buttontype){
+	function ChoiceSectionRowHTML(field,buttontype){
 		var s=-1;
 		var choi="";
-		for(var i=0;i<dataField.qchoices.length;i++){
+		for(var i=0;i<field.qchoices.length;i++){
 			if(sectionArray[s+1]&&(i+1)===sectionArray[s+1].number){
 				choi=choi+"<h4 class='section-title'>"+sectionArray[s+1].section+"</h4>";
 				s=s+1;
 			}
-			choi=choi+buttontype(dataField.qchoices[i],dataField,i);
+			choi=choi+buttontype(field.qchoices[i],field,i);
 		}
 		return choi;
 	}
@@ -5929,48 +5929,48 @@ SectionRowsHTML=function(sectionArray){
 	return ChoiceSectionRowHTML;
 }
 
-LayoutHTML=function(dataField,buttontype,layoutclass,LayoutF){
-	ClearData(dataField.qfield,dataField.pid);
-	var clear='onload="ClearData(\''+dataField.qfield+'\',\''+dataField.pid+'\')" ';
-	var questionclass=dataField.qclass||"";
-	var choi=LayoutF(dataField,buttontype);
-	return '<div class="'+layoutclass+' '+questionclass+' field-'+dataField.qfield+'" '+clear+'id="'+dataField.qid+'">'+choi+'</div>';
+LayoutHTML=function(field,buttontype,layoutclass,LayoutF){
+	ClearData(field.qfield,field.pid);
+	var clear='onload="ClearData(\''+field.qfield+'\',\''+field.pid+'\')" ';
+	var questionclass=field.qclass||"";
+	var choi=LayoutF(field,buttontype);
+	return '<div class="'+layoutclass+' '+questionclass+' field-'+field.qfield+'" '+clear+'id="'+field.qid+'">'+choi+'</div>';
 }
 
 
-ExclusiveChoiceButtonRowHTML=function(dataField){
-	return LayoutHTML(dataField,ExclusiveChoiceButtonHTML,'buttonrow',ChoiceRowHTML);
+ExclusiveChoiceButtonRowHTML=function(field){
+	return LayoutHTML(field,ExclusiveChoiceButtonHTML,'buttonrow',ChoiceRowHTML);
 }
 
 ExclusiveChoiceSectionsHTML=function(sections){
-	function ExChS(dataField){
-		return LayoutHTML(dataField,ExclusiveChoiceButtonHTML,'buttonrow',SectionRowsHTML(sections));
+	function ExChS(field){
+		return LayoutHTML(field,ExclusiveChoiceButtonHTML,'buttonrow',SectionRowsHTML(sections));
 	};
 	return ExChS;
 }
 
-ChoicesButtonRowHTML=function(dataField){
-	return LayoutHTML(dataField,MultiChoiceButtonHTML,'buttonrow',ChoiceRowHTML);
+ChoicesButtonRowHTML=function(field){
+	return LayoutHTML(field,MultiChoiceButtonHTML,'buttonrow',ChoiceRowHTML);
 }
 
 
-ShortAnswerHTML=function(dataField){
-	return "<input class='input field-"+dataField.qfield+"' data-"+dataField.qfield+"='' placeholder='"+dataField.qplaceholder+"' id='"+dataField.qid+"' tabindex='0' value='"+dataField.qvalue+"'></input>";
+ShortAnswerHTML=function(field){
+	return "<input class='input field-"+field.qfield+"' data-"+field.qfield+"='' placeholder='"+field.qplaceholder+"' id='"+field.qid+"' tabindex='0' value='"+field.qvalue+"'></input>";
 }
 
-LongAnswerHTML=function(dataField){
-	return "<textarea class='input field-"+dataField.qfield+"' data-"+dataField.qfield+"='' placeholder='"+dataField.qplaceholder+"' id='"+dataField.qid+"' tabindex='0' value='"+dataField.qvalue+"'></textarea>";
+LongAnswerHTML=function(field){
+	return "<textarea class='input field-"+field.qfield+"' data-"+field.qfield+"='' placeholder='"+field.qplaceholder+"' id='"+field.qid+"' tabindex='0' value='"+field.qvalue+"'></textarea>";
 }
 
-SubQuestionHTML=function(dataField){
-	var qname=dataField.questionname;
+SubQuestionHTML=function(field){
+	var qname=field.questionname;
 	var questiontitle="";
 	var questioninfo="";
-	if(qname!==""&&dataField.qhtml!==PlainHTML)
+	if(qname!==""&&field.qhtml!==PlainHTML)
 		questiontitle=MessageHTML(qname);
-	if(dataField.questioninfo!==""&&dataField.qhtml!==PlainHTML)
-		questioninfo=MessageHTML(PHTML(dataField.questioninfo),"question-info");
-	var answerfields=dataField.qhtml(dataField);
+	if(field.questioninfo!==""&&field.qhtml!==PlainHTML)
+		questioninfo=MessageHTML(PHTML(field.questioninfo),"question-info");
+	var answerfields=field.qhtml(field);
 	return questiontitle+questioninfo+answerfields;
 }
 
@@ -6041,22 +6041,22 @@ LaunchKeyboardBalloon=function(DP){
 DefaultKeyboardKeys=function(){
 	return [["1","2","3","4","5","6","7","8","9","0"],["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M"],["undo","redo","space","restart","close"]]};
 
-KeyboardRowsHTML=function(dataField,buttontype){
+KeyboardRowsHTML=function(field,buttontype){
 	var kblines="";
 	var i=0;
-	for(var keyboardline in dataField.qchoices){
+	for(var keyboardline in field.qchoices){
 		var k="";
-		for (var key in dataField.qchoices[keyboardline]){
+		for (var key in field.qchoices[keyboardline]){
 			i=i+1;
-			k=k+buttontype(dataField.qchoices[keyboardline][key],dataField,i);
+			k=k+buttontype(field.qchoices[keyboardline][key],field,i);
 		}
 		kblines=kblines+"<div class='keyline'>"+k+"</div>";
 	}
 	return kblines;
 }
 
-KeyboardHTML=function(dataField){
-	return LayoutHTML(dataField,KeyboardButtonHTML,'keyboard',KeyboardRowsHTML)
+KeyboardHTML=function(field){
+	return LayoutHTML(field,KeyboardButtonHTML,'keyboard',KeyboardRowsHTML)
 }
 
 
