@@ -2123,7 +2123,7 @@ Getter=function(SAO){
 		return SAO[n];
 	}
 /*
-[2,1,0].map(Getter(["a","b","c"]))
+Getter();[2,1,0].map(Getter(["a","b","c"]))
 ["c","b","a"]
 */
 }
@@ -8070,20 +8070,21 @@ StringDateName=function(string,opts){
 ///////////////////////////////////////////////////////////////////////////////
 // Range, in different order
 Range=function(min,max){
-	if(typeof max==="undefined")
-		return Range(0,min);
-	else{
-		var r=[];
-		if(min<=max)
-			for(var i=min;i<=max;i++){
-				r.push(i);
-			}
-		else
-			for(var i=min;i>=max;i--){
-				r.push(i);
-			}
-		return r;
-	}
+	var r=[];
+	if(min<=max)
+		for(var i=min;i<=max;i++){
+			r.push(i);
+		}
+	else
+		for(var i=min;i>=max;i--){
+			r.push(i);
+		}
+	return r;
+/*
+includes extremes
+Range(3,5)
+[3,4,5]
+*/
 }
 
 
