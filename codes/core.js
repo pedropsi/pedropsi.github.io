@@ -444,7 +444,7 @@ false
 //Error report
 
 ErrorColours={
-	"error":"gray",
+	"error":"darkgray",
 	"type error":"darkred",
 	"info":"darkgreen",
 	"network":"blue",
@@ -452,21 +452,20 @@ ErrorColours={
 };
 
 Warner=function(type){
-	var colour=ErrorColours[type]||ErrorColours["error"];
-	var yellowfont="color:lightyellow; font-family:Calibri,Arial; background:"+colour;
-	var bold="font-weight:bold; ";
+	var colour=ErrorColours[type]||"darkgray";
+	var font="font-family:Calibri,Arial; background:"+colour;
+	var bold=" font-weight:bold; ";
 	
 	return function W(message){
 		var message=Fallback(message,"");
 		var caller=FindCallerName(W.caller||"")||"top level";
 		
-		var styles=[
-			yellowfont+bold,
-			yellowfont
-		]
-
-		var values=Rest(Values(arguments));
-			values=[`%c ${caller} %c ${type} `].concat(styles).concat([message]).concat(values);
+		var values=Join(
+			[`%c ${caller} %c ${type} `],
+			[font+bold,"color:lightyellow; "+font],
+			[message],
+			Rest(Values(arguments))
+		);
 
 		Apply(console.warn,values);
 	}
