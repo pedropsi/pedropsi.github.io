@@ -796,7 +796,7 @@ NewsSources={
 			var stars=item.stars?(item.stars+Glyph("star")):"";
 			var suffix=(item.variant?(" - "+item.variant):"");
 				title=title+suffix;
-			var link=AHTML(title,item.href?item.href:("star-battle.html#"+key))
+			var link=AHTML(title,"star-battle.html"+(item.href?item.href:("#"+key)))
 				title=title+(stars?(", "+stars):"");
 
 			return {
