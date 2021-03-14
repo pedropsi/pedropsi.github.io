@@ -39,7 +39,7 @@ function LoadCheckpoint(n){
 	var stack=GetCheckpoints();
 
 	if(n<stack.length)
-		Once(()=>ConsoleAddOnce("Beware! Saving at a past checkpoint will erase former future progress..."),"checkpoint");
+		Once(()=>ConsoleAdd("Beware! Saving at a past checkpoint will erase former future progress..."),"checkpoint");
 	
 	curcheckpoint=Min(Max(n-1,0),stack.length-1); //decrement 1 unit
 	return curlevelTarget=stack[curcheckpoint];
