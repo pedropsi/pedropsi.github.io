@@ -85,7 +85,7 @@ DISPLAY_EXTERNAL			:	()=>	`<div id="${v.LINK()}-area" class="external-area">Load
 
 AREA_PRE					:	()=>	`<div class="container">`,
 TABULAR_AREA				:	()=>	`${v.AREA_PRE()}${v.DISPLAY_EXTERNAL()}${v.POST_PLUS_LABELS()}</div>`,
-GUESTBOOK_AREA				:	()=>	`${v.AREA_PRE()}<h1 class="title">${v.TITLE()}</h1><div class="whiteboard"><div class="text ${v.STYLE()} post" id="post">${v.POST()}</div></div>${PageLabelsHTML(v)}${v.DISPLAY_EXTERNAL()}</div>`,
+GUESTBOOK_AREA				:	()=>	`${v.AREA_PRE()}<h1 class="title">${v.TITLE()}</h1><div class="whiteboard"><div class="text ${v.STYLE()} post" id="post">${Evaluate(v.POST)}</div></div>${PageLabelsHTML(v)}${v.DISPLAY_EXTERNAL()}</div>`,
 GUESTBOOK_COMMENTS			:	()=>	`<div id="guestbook-area"></div>`,
 
 
@@ -140,7 +140,7 @@ SHORTNAME					:	()=>	v.TITLE(),
 
 WHITEBOARD_OUT				:	(post)=>	`<div class="whiteboard"><div class="text ${v.STYLE()} post" id="post">${post}</div></div>`,
 WHITEBOARD					:	()=>		v.SECTION_OUT(v.POST_PLUS_LABELS(v)),
-POST_PLUS_LABELS			:	()=>		v.PAGE_TITLE()+v.WHITEBOARD_OUT(v.POST())+PageLabelsHTML(v),
+POST_PLUS_LABELS			:	()=>		v.PAGE_TITLE()+v.WHITEBOARD_OUT(Evaluate(v.POST))+PageLabelsHTML(v),
 WHITEBOARD_SIMPLE			:	()=>		v.SECTION_OUT(v.PAGE_TITLE()+v.WHITEBOARD_OUT(v.CONTENT())+PageLabelsHTML(v)),
 
 
@@ -220,7 +220,7 @@ PWA_MANIFEST				:	()=>	`<link rel="manifest" id="manifest" href='data:applicatio
 PWA_MANIFEST_CONTENT		:	()=>	`{${v.PWA_NAME()},${v.PWA_DISPLAY()},${v.PWA_ICONS()},${v.PWA_DESC()},${v.PWA_LANG()},${v.PWA_SCOPE()},${v.PWA_WORKER()}}`,
 
 DESCRIPTION200				:	()=>	DescriptionString(v.DESCRIPTION(),200),
-DESCRIPTION					:	()=>	DescriptionString(v.POST(),300),
+DESCRIPTION					:	()=>	DescriptionString(Evaluate(v.POST),300),
 PARSER_UNDERSCORE			:	(txt)=> StripHTML(txt).replace(/\s+/ig,"_").replace(/"/ig,""),
 
 ONE_LINER					:	()=>"",

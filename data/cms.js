@@ -6,7 +6,7 @@ CMSGame=Merge(WithImage,{POSTSCRIPT:()=>v.PUZZLE_SCRIPT(),TYPE:()=>`Game`,CATEGO
 
 
 CMS={
-"index":Merge(NoImage,{BODY:()=>v.POST(),TITLE:()=>v.SITE_NAME(),DATE:()=>"2017-12-01",TYPE:()=>`Home`,TAGS:()=>[`Sitemap`],DESCRIPTION:()=>`${v.SITE_NAME()} home page.`,TYPEGRAPH:()=>`website`}),
+"index":Merge(NoImage,{BODY:()=>Evaluate(v.POST),TITLE:()=>v.SITE_NAME(),DATE:()=>"2017-12-01",TYPE:()=>`Home`,TAGS:()=>[`Sitemap`],DESCRIPTION:()=>`${v.SITE_NAME()} home page.`,TYPEGRAPH:()=>`website`}),
 "purpose":Merge(NoImage,{TITLE:()=>`The purpose of the ${v.SITE_NAME()}`,SHORTNAME:()=>`Purpose`,DATE:()=>"2017-12-01",TAGS:()=>[`Creative-Archive`,`Post`],ONE_LINER:()=>`${v.SITE_NAME()}'s first post!`}),
 "support":Merge(NoImage,{TITLE:()=>`Support the ${v.SITE_NAME()}`,SHORTNAME:()=>`Suport`,DATE:()=>"2018-02-08",TAGS:()=>[`Creative-Archive`,`Finance`,`Post`],ONE_LINER:()=>`Support the ${v.SITE_NAME()}!`}),
 "making-of":Merge(NoImage,{TITLE:()=>`The making of the ${v.SITE_NAME()}`,SHORTNAME:()=>`making-of`,DATE:()=>"2019-12-15",TAGS:()=>[`Creative-Archive`,`Finance`,`Post`],ONE_LINER:()=>`Support the ${v.SITE_NAME()}!`}),
@@ -21,14 +21,14 @@ CMS={
 
 "status":Merge(WithImage,{POSTSCRIPT:()=>["codes/test/test.js"],TITLE:()=>`Status`,DATE:()=>"2019-11-25",TAGS:()=>[`Creative-Archive`,`Resource`,`Sitemap`],ONE_LINER:()=>`Test whether every ${v.SITE_NAME()} function is supported in your browser.`}),
 "lul":Merge(WithImage,{TITLE:()=>`Level unlocking language`,SHORTNAME:()=>`LUL`,DATE:()=>"2019-11-30",TAGS:()=>[`Prototype`,`Resource`,`Tutorial`],ONE_LINER:()=>`${v.TITLE()} (LUL) is a simple language to express level precedence rules, also known as level unlocking conditions.`}),
-"store":Merge(WithImage,{BODY:()=>v.PAGE_BARE(),CONTENT:()=>v.POST(),PRESCRIPT:()=>["data/store.js"],STYLE:()=>`store`,TITLE:()=>`Store`,DATE:()=>"2019-11-27",TYPE:()=>`Store`,TAGS:()=>[`Creative-Archive`,`Finance`,`List`,`Sitemap`],ONE_LINER:()=>`Shop for exclusive ${v.NAME()} games and more!`,TYPEGRAPH:()=>`site`}),
+"store":Merge(WithImage,{BODY:()=>v.PAGE_BARE(),CONTENT:()=>Evaluate(v.POST),PRESCRIPT:()=>["data/store.js"],STYLE:()=>`store`,TITLE:()=>`Store`,DATE:()=>"2019-11-27",TYPE:()=>`Store`,TAGS:()=>[`Creative-Archive`,`Finance`,`List`,`Sitemap`],ONE_LINER:()=>`Shop for exclusive ${v.NAME()} games and more!`,TYPEGRAPH:()=>`site`}),
 "press":Merge(WithImage,{TITLE:()=>`Press kit`,DATE:()=>"2019-02-02",TYPE:()=>`Post`,TAGS:()=>[`Creative-Archive`,`Press`,`Sitemap`],TYPEGRAPH:()=>`site`}),
 "news":Merge(WithImage,{TITLE:()=>`News`,DATE:()=>"2019-09-20",TYPE:()=>`Archive`,TAGS:()=>[`Creative-Archive`,`Log`,`Post`,`Press`,`Sitemap`],IMAGE_ALT:()=>`${v.SITE_NAME()} News`,TYPEGRAPH:()=>`site`}),
 
 "mosaic":Merge(WithImage,{IMAGE_NAME:()=>"fleur-de-lis",IMAGE_EXT:()=>"png",TITLE:()=>`Mosaic wallpaper gallery`,DATE:()=>"2018-02-14",TAGS:()=>[`Art`,`Travel`,`Wallpaper`],IMAGE_ALT:()=>`Wallpaper gallery`}),
 
-"about":Merge(NoImage,{CONTENT:()=>v.POST(),TITLE:()=>`About`,DATE:()=>"2018-02-02",TAGS:()=>[`Creative-Archive`,`Post`],TYPEGRAPH:()=>`profile`}),
-"404":Merge(NoImage,{BODY:()=>v.PAGE_SIMPLE(),CONTENT:()=>v.POST(),TITLE:()=>`Page not found….`,SHORTNAME:()=>`404`,DATE:()=>"2017-12-01",TYPE:()=>`Backend`,TAGS:()=>[`Sitemap`],DESCRIPTION:()=>`Page not found in ${v.SITE_NAME()}.`,TYPEGRAPH:()=>`website`}),
+"about":Merge(NoImage,{CONTENT:()=>Evaluate(v.POST),TITLE:()=>`About`,DATE:()=>"2018-02-02",TAGS:()=>[`Creative-Archive`,`Post`],TYPEGRAPH:()=>`profile`}),
+"404":Merge(NoImage,{BODY:()=>v.PAGE_SIMPLE(),CONTENT:()=>Evaluate(v.POST),TITLE:()=>`Page not found….`,SHORTNAME:()=>`404`,DATE:()=>"2017-12-01",TYPE:()=>`Backend`,TAGS:()=>[`Sitemap`],DESCRIPTION:()=>`Page not found in ${v.SITE_NAME()}.`,TYPEGRAPH:()=>`website`}),
 "guestbook":Merge(WithImage,{BODY:()=>v.PAGE_BARE(),CONTENT:()=>v.GUESTBOOK_AREA(),TITLE:()=>`Guestbook`,DATE:()=>"2018-07-22",TYPE:()=>`Guestbook`,TAGS:()=>[`Creative-Archive`],IMAGE_ALT:()=>`Write your message on the ${v.SITE_NAME()}'s guestbook!`,DESCRIPTION:()=>`The Guestbook of the ${v.SITE_NAME()}!`,TYPEGRAPH:()=>`website`}),
 "contact":Merge(NoImage,{TITLE:()=>`Contact`,TYPE:()=>`Backend`,TAGS:()=>[`Sitemap`],DESCRIPTION:()=>`Leave a message to contact ${v.NAME()}`,TYPEGRAPH:()=>`website`}),
 "hall-of-fame":Merge(WithImage,{BODY:()=>v.PAGE_BARE(),CONTENT:()=>v.TABULAR_AREA(),POSTSCRIPT:()=>["data/hof.js"],TITLE:()=>`Hall of Fame`,SHORTNAME:()=>`HOF`,DATE:()=>"2018-03-26",TYPE:()=>`Hall of Fame`,TAGS:()=>[`Creative-Archive`,`Community`],IMAGE_ALT:()=>`Hall of fame of the ${v.SITE_NAME()}. Laurel and stars.`,ONE_LINER:()=>`<p>Puzzlers who solved any of the puzzles in the ${v.SITE_NAME()} earn the right to record their name (or alias) for posterity in the ${A("hall-of-fame")}.</p>`,DESCRIPTION:()=>`Hall of fame: winners of ${v.NAME()}'s challenges.`,TYPEGRAPH:()=>`website`}),
