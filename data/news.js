@@ -747,7 +747,7 @@ PuzzleParameters=function(key,item){
 		"D":item.date,
 		"F":Accesser({"very easy":1,"easy":2,"medium":3,"hard":4,"very hard":5,"evil":5})(item.difficulty||""),
 		"N":N,
-		"T":name,
+		"T":item.title||name,
 		"K":item.thanks?(item.thanks.join(",")):"",
 	},params);
 	params=FilterValuesObject(params,Identity);
@@ -758,7 +758,6 @@ PuzzleNewsObjecter=function(genre){
 	var genre=LowerCase(genre);
 	return function(item,key){
 		var number=UnAfterfix(key,"-");
-		var title=`${number}# `+CapitalCase(genre);
 		var board=item.board;
 		var url=genre+".html";
 		if(board){
@@ -770,13 +769,19 @@ PuzzleNewsObjecter=function(genre){
 		}else
 			var url=PageReFragment(url,key);
 
-		var link=AHTML("Puzzle #"+number,url)
+			
+		var title=item.title||(`${number}# `+CapitalCase(genre));
+		if(item.title)
+			var link=AHTML(title,url)+`, puzzle #${number}`;
+		else
+			var link=AHTML("Puzzle #"+number);
+		
 
 		return {
 			DATE:item.date,
 			HEADER:title,
 			PIECE:`
-			<p> ${link}, from the ${AHTML(CapitalCase(genre)+" collection",PageUnSearch(url))}, now released.</p>`
+			<p> ${link} from the ${AHTML(CapitalCase(genre)+" collection",PageUnSearch(url))}, now released.</p>`
 		}
 	}
 }
