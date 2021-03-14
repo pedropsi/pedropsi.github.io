@@ -5320,7 +5320,7 @@ TagAttributesHTML=function(opts){
 	var opts=opts||{};
 	delete opts["tag"];
 	delete opts["txt"];
-	opts=FilterValuesObject(opts,UnEqualer(""));
+	opts=FilterValuesObject(opts,Ander(UnEqualer(""),Defined));
 	return Keys(opts).map(k=>`${k}='${opts[k]}'`).join(" ");
 }
 
@@ -8885,7 +8885,7 @@ Wallpaper=function(name){
 SVGHTML2=function(opts){
 	var tag={
 		"tag":"svg",
-		"class":opts.cla||"",
+		"class":opts.cla,
 		"viewBox":EnViewbox([
 			Fallback(opts.x0,0),
 			Fallback(opts.y0,0),
@@ -8900,7 +8900,7 @@ SVGHTML2=function(opts){
 SVGLineHTML=function(opts){
 	var tag={
 		"tag":"line",
-		"class":opts.cla||"",
+		"class":opts.cla,
 		x1:Fallback(opts.x0,0),
 		x2:Fallback(opts.x1,1),
 		y1:Fallback(opts.y0,0),
@@ -8916,7 +8916,7 @@ SVGBarHTML=function(opts){
 	var y0=Fallback(opts.y0,0);
 	var tag={
 		"tag":"rect",
-		"class":opts.cla||"",
+		"class":opts.cla,
 		x:x0,
 		y:y0,
 		width:Fallback(opts.x1,1)-x0,
@@ -8928,9 +8928,9 @@ SVGBarHTML=function(opts){
 SVGTextHTML=function(opts){
 	var tag={
 		"tag":"text",
-		"class":opts.cla||"",
-		"txt":opts.txt||"",
-		"font-size":opts.size||"",
+		"class":opts.cla,
+		"txt":opts.txt,
+		"font-size":opts.size,
 		x:Fallback(opts.x0,0),
 		y:Fallback(opts.y0,0)
 	}
