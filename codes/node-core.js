@@ -71,7 +71,7 @@ function ExtractText(file){
 	var text=`
 		${v.TITLE()}
 		${v.ONE_LINER()}
-		${StripHTML(v.POST())}
+		${StripHTML(Evaluate(v.POST))}
 	`;
 
 	return text;
