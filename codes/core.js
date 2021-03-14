@@ -404,6 +404,42 @@ MapThread(Plus,[1,2],[4,5,6],[7])
 */
 }
 
+Ander=function(){
+	var args=Values(arguments);
+	return function(item){
+		return args.every(F=>F(item));
+	}
+/*
+verifies several conditions
+Ander(Defined,Numbered,x=>x>0)(1)
+true
+
+one failure is sufficient
+Ander(Numbered,Stringed)("not a number")
+false
+
+defaults to true
+Ander()(1)
+true
+*/
+}
+
+Orer=function(){
+	var args=Values(arguments);
+	return function(item){
+		return args.some(F=>F(item));
+	}
+/*
+verifies at least one condition
+Orer(Stringed,x=>x>2,Numbered)(1)
+true
+
+defaults to false
+Orer()(1)
+false
+*/
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Error report
 Warner=function(type){
