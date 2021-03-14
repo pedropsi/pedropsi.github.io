@@ -433,8 +433,7 @@ Warner=function(type){
 		]
 	};
 	return function W(message){
-		if(typeof message==="undefined")
-			var message="";
+		var message=Fallback(message,"");
 		var caller=FindCallerName(W.caller||"")||"top level";
 		
 		var styles=types[type]||types[error];
@@ -3023,8 +3022,7 @@ EscapeTokens=function(AS){
 
 
 UnFixer=function(word,sfix,befor,after,flags){
-	if(typeof flags==="undefined")
-		var flags="sig";
+	var flags=Fallback(flags,"sig");
 	if(!word)
 		var word="";
 	if(!sfix)
@@ -3596,10 +3594,7 @@ PageTitle=function(){
 DefaultURL=function(url){//Default to the current page url
 	if(NodejsDetected()&&typeof url==="undefined")
 		return "https://pedropsi.github.io";
-	if(typeof url==="undefined")
-		return window.location.href;
-	else
-		return url;
+	return Fallback(url,window.location.href);
 }
 
 PageProtocol=function(url){
@@ -5821,9 +5816,7 @@ RequestDataPack=function(NamedFieldArray,Options){
 	if(NamedFieldArray.length<1)
 		return;
 	else{
-		var o=Options;
-		if(typeof o==="undefined")
-			o={};
+		var o=Options||{};
 		var DP=NewDataPack(NewDataPackFields(NamedFieldArray));
 		DP=UpdateDataPack(DP,o);
 		DP.fields=DP.fields.map(function(f){var fi=f;fi.pid=DP.qid;return fi});
@@ -7044,9 +7037,7 @@ FindData=function(field,pid){
 	if(!e)
 		return FindDataExternally(field,pid);
 
-	var data=GetNodeData(field,e);
-	if(typeof data==="undefined")
-		data=FindDataExternally(field,pid);
+	var data=Fallback(GetNodeData(field,e),FindDataExternally(field,pid));
 	return data;
 };
 
@@ -7375,11 +7366,8 @@ var Keybindings={};
 
 //Context finding
 Context=function(targetSelector){
-	var context;
-	if(typeof targetSelector==="undefined")
-		context=ElementContext(Spotlight());
-	else
-		context=ElementContext(targetSelector);
+	var context=Fallback(targetSelector,Spotlight());
+		context=ElementContext(context);
 
 	if(!context){
 		var e=FocusElement(document.activeElement);
@@ -8837,10 +8825,10 @@ Wallpaper=function(name){
 //SVG Drawing
 
 SVGHTML2=function(opts){
-	var x0=opts.x0||0;
-	var x1=typeof opts.x1==="undefined"?1:opts.x1;
-	var y0=opts.y0||0;
-	var y1=typeof opts.y1==="undefined"?1:opts.y1;
+	var x0=Fallback(opts.x0,0);
+	var x1=Fallback(opts.x1,1);
+	var y0=Fallback(opts.y0,0);
+	var y1=Fallback(opts.y1,1);
 	var cla=opts.cla||"";
 	return `<svg ${cla?`class="${cla}"`:""} viewBox="${x0} ${y0} ${x1} ${y1}" ></svg>`;
 }
@@ -8848,25 +8836,25 @@ SVGHTML2=function(opts){
 
 SVGLineHTML=function(opts){
 	if(opts.horizontal){
-		var y0=opts.x0||0;
-		var y1=typeof opts.x1==="undefined"?1:opts.x1;
-		var x0=opts.y0||0;
-		var x1=typeof opts.y1==="undefined"?1:opts.y1;
+		var y0=Fallback(opts.x0,0);
+		var y1=Fallback(opts.x1,1);
+		var x0=Fallback(opts.y0,0);
+		var x1=Fallback(opts.y1,1);
 	}else{//default
-		var x0=opts.x0||0;
-		var x1=typeof opts.x1==="undefined"?1:opts.x1;
-		var y0=opts.y0||0;
-		var y1=typeof opts.y1==="undefined"?1:opts.y1;
+		var x0=Fallback(opts.x0,0);
+		var x1=Fallback(opts.x1,1);
+		var y0=Fallback(opts.y0,0);
+		var y1=Fallback(opts.y1,1);
 	}
 	var cla=opts.cla||"";
 	return `<line ${cla?`class="${cla}"`:""} x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/>`;
 }
 
 SVGBarHTML=function(opts){
-	var x0=opts.x0||0;
-	var x1=typeof opts.x1==="undefined"?1:opts.x1;
-	var y0=opts.y0||0;
-	var y1=typeof opts.y1==="undefined"?1:opts.y1;
+	var x0=Fallback(opts.x0,0);
+	var x1=Fallback(opts.x1,1);
+	var y0=Fallback(opts.y0,0);
+	var y1=Fallback(opts.y1,1);
 	var width=x1-x0;
 	var height=y1-y0;
 	var cla=opts.cla||"";
@@ -8874,8 +8862,8 @@ SVGBarHTML=function(opts){
 }
 
 SVGTextHTML=function(opts){
-	var x0=typeof opts.x0==="undefined"?0:opts.x0;
-	var y0=typeof opts.y0==="undefined"?0:opts.y0;
+	var x0=Fallback(opts.x0,0);
+	var y0=Fallback(opts.y0,0);
 	var cla=opts.cla||"";
 	var txt=opts.txt||"";
 	var size=opts.size||"";
@@ -8934,17 +8922,18 @@ AddChartTick=function(opts,chart){
 }
 
 AddChartLine=function(opts,chart){
-	var major=typeof opts.major==="undefined"?4:opts.major;
-	var minor=typeof opts.minor==="undefined"?5:opts.minor;
+	var major=Fallback(opts.major,4);
+	var minor=Fallback(opts.minor,5);
 	var horizontal=!!opts.horizontal;
 	var invert=!!opts.invert;
 	var xview=horizontal?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
 	var yview=horizontal?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
 	xview=xview/1.1;
 	yview=yview/1.1;
-	var up=typeof opts.up==="undefined"?(1/100):opts.up;
-	var down=typeof opts.down==="undefined"?(-1/100):-Abs(opts.down);
-	var scale=typeof opts.scale==="undefined"?0.5:opts.scale;
+	var up=Fallback(opts.up,1/100);
+	var down=Fallback(opts.down,1/100);
+		down=-Abs(down);
+	var scale=Fallback(opts.scale,0.5);
 	var type=opts.type;
 	for(var i=0;i<=major;i++){
 		var I=invert?(major-i):i;
@@ -8976,20 +8965,22 @@ AddChartLine=function(opts,chart){
 }
 
 AddChartAxisLegend=function(opts,chart){
-	var major=typeof opts.major==="undefined"?4:opts.major;
+	var major=Fallback(opts.major,4);
 	var horizontal=!!opts.horizontal;
 	var invert=!!opts.invert;
 	var xview=horizontal?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
 	var yview=horizontal?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
 	xview=xview/1.1;
 	yview=yview/1.1;
-	var down=typeof opts.down==="undefined"?(-20/100):-Abs(opts.down);
-	var right=typeof opts.right==="undefined"?0:opts.right;
-	var scale=typeof opts.scale==="undefined"?0.5:opts.scale;
+	var down=Fallback(opts.down,20/100);
+		down=-Abs(down);
 
-	var min=typeof opts.min==="undefined"?0:opts.min;
-	var max=typeof opts.max==="undefined"?1:opts.max;
-	var fontsize=typeof opts.size==="undefined"?xview/20:opts.size;
+	var right=Fallback(opts.right,0);
+	var scale=Fallback(opts.scale,0.5);
+
+	var min=Fallback(opts.min,0);
+	var max=Fallback(opts.max,1);
+	var fontsize=Fallback(opts.size,xview/20);
 
 	for(var i=0;i<=major;i++){
 		var I=invert?(major-i):i;
@@ -9012,13 +9003,13 @@ AddChartLegend=function(opts,chart){
 	var horizontal=!!opts.horizontal;
 	var xview=horizontal?GetElement(chart).viewBox.baseVal.width:GetElement(chart).viewBox.baseVal.width;
 	var yview=horizontal?GetElement(chart).viewBox.baseVal.height:GetElement(chart).viewBox.baseVal.height;
-	xview=xview/1.1;
-	yview=yview/1.1;
+		xview=xview/1.1;
+		yview=yview/1.1;
 
-	var fontsize=typeof opts.size==="undefined"?xview/Min(opts.txt.length*1.5,20):opts.size;
+	var fontsize=Fallback(opts.size,xview/Min(opts.txt.length*1.5,20));
 
-	var x=typeof opts.x==="undefined"?(0+xview)/2:opts.x;
-	var y=typeof opts.y==="undefined"?(0+yview)/2:opts.y;
+	var x=Fallback(opts.x,(0+xview)/2);
+	var y=Fallback(opts.y,(0+yview)/2);
 	
 	AppendToElement(SVGTextHTML({
 		x0:x,
@@ -9042,7 +9033,7 @@ AddChartBars=function(opts,chart){
 	var xdivisions=values.length;
 	var widthmax=xview/xdivisions;
 	var xspacing=(opts.spacing||0)*widthmax/2;
-	var ymax=typeof opts.max==="undefined"?Max(values):opts.max;
+	var ymax=Fallback(opts.max,Max(values));
 	var yvalues=values.map(function(v){return v/ymax*yview});
 	
 	for(var i=0;i<yvalues.length;i++){
