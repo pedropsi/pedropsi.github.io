@@ -5282,6 +5282,7 @@ TagAttributesHTML=function(opts){
 	var opts=opts||{};
 	delete opts["tag"];
 	delete opts["txt"];
+	opts=FilterValuesObject(opts,UnEqualer(""));
 	return Keys(opts).map(k=>`${k}='${opts[k]}'`).join(" ");
 }
 
@@ -8844,49 +8845,58 @@ Wallpaper=function(name){
 //SVG Drawing
 
 SVGHTML2=function(opts){
-	var x0=Fallback(opts.x0,0);
-	var x1=Fallback(opts.x1,1);
-	var y0=Fallback(opts.y0,0);
-	var y1=Fallback(opts.y1,1);
-	var cla=opts.cla||"";
-	return `<svg ${cla?`class="${cla}"`:""} viewBox="${x0} ${y0} ${x1} ${y1}" ></svg>`;
+	var tag={
+		"tag":"svg",
+		"class":opts.cla||"",
+		"viewBox":EnViewbox([
+			Fallback(opts.x0,0),
+			Fallback(opts.y0,0),
+			Fallback(opts.x1,1),
+			Fallback(opts.y1,1)
+		])
+	}
+	return TagHTML(tag);
 }
 
 
 SVGLineHTML=function(opts){
-	if(opts.horizontal){
-		var y0=Fallback(opts.x0,0);
-		var y1=Fallback(opts.x1,1);
-		var x0=Fallback(opts.y0,0);
-		var x1=Fallback(opts.y1,1);
-	}else{//default
-		var x0=Fallback(opts.x0,0);
-		var x1=Fallback(opts.x1,1);
-		var y0=Fallback(opts.y0,0);
-		var y1=Fallback(opts.y1,1);
+	var tag={
+		"tag":"line",
+		"class":opts.cla||"",
+		x1:Fallback(opts.x0,0),
+		x2:Fallback(opts.x1,1),
+		y1:Fallback(opts.y0,0),
+		y2:Fallback(opts.y1,1)
 	}
-	var cla=opts.cla||"";
-	return `<line ${cla?`class="${cla}"`:""} x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/>`;
+	if(opts.horizontal)
+		tag=ReKeyObject(tag,Accesser({"x1":"y1","x2":"y2","y1":"x1","y2":"x2"}));
+	return TagHTML(tag);
 }
 
 SVGBarHTML=function(opts){
 	var x0=Fallback(opts.x0,0);
-	var x1=Fallback(opts.x1,1);
 	var y0=Fallback(opts.y0,0);
-	var y1=Fallback(opts.y1,1);
-	var width=x1-x0;
-	var height=y1-y0;
-	var cla=opts.cla||"";
-	return `<rect ${cla?`class="${cla}"`:""} x="${x0}" y="${y0}" width="${width}" height="${height}"/>`;
+	var tag={
+		"tag":"rect",
+		"class":opts.cla||"",
+		x:x0,
+		y:y0,
+		width:Fallback(opts.x1,1)-x0,
+		height:Fallback(opts.y1,1)-y0,
+	}
+	return TagHTML(tag);
 }
 
 SVGTextHTML=function(opts){
-	var x0=Fallback(opts.x0,0);
-	var y0=Fallback(opts.y0,0);
-	var cla=opts.cla||"";
-	var txt=opts.txt||"";
-	var size=opts.size||"";
-	return `<text ${cla?`class="${cla}"`:""} x="${x0}" y="${y0}" ${size?`font-size="${size}"`:""}>${txt}</text>`;
+	var tag={
+		"tag":"text",
+		"class":opts.cla||"",
+		"txt":opts.txt||"",
+		"font-size":opts.size||"",
+		x:Fallback(opts.x0,0),
+		y:Fallback(opts.y0,0)
+	}
+	return TagHTML(tag);
 }
 
 RefreshSVG=function(svge){// trick to force rerendering
