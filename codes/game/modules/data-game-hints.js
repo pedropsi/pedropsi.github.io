@@ -57,7 +57,7 @@ HintImageHTML=function(opts){
 	o.tag="img";
 	if(!o.attributes)
 		o.attributes={src:"images/splash.png",single:true}
-	return ElementHTML(o);
+	return TagHTML(o);
 };
 
 HintImage=function(fullpath){

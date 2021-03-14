@@ -21,7 +21,7 @@ SoundHTML=function(sourcepath,data,id){
 		'src':sourcepath,
 		'id':(id?id:KebabCaseString(sourcepath))
 	};
-	return ElementHTML(Merge(defaults,data));
+	return TagHTML(Merge(defaults,data));
 }
 
 LoadSound=function(soundpath,data,id,parentElement){

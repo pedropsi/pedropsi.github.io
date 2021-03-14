@@ -305,7 +305,7 @@ RescalePath=function(opts,heighted){
 	var viewBox=ViewboxCoordinates(opts.viewBox);
 	var Rescale=function(x,y){return Rescaler(opts.square*opts.scale*opts.grow)(x,y,viewBox)};
 	opts.path=SVGPathDirectTransform(opts.path,Rescale,viewBox);
-	opts.viewBox=ViewboxString(Rescale(viewBox[0],viewBox[1]).concat(Rescale(viewBox[2],viewBox[3])));
+	opts.viewBox=EnViewbox(Rescale(viewBox[0],viewBox[1]).concat(Rescale(viewBox[2],viewBox[3])));
 	return opts;
 }
 
@@ -316,7 +316,7 @@ DisplacePath=function(opts){
 	var viewBox=ViewboxCoordinates(opts.viewBox);
 	var Displace=function(x,y){return DisplaceXYer(dx,dy)(x,y)};
 	opts.path=SVGPathDirectTransform(opts.path,Displace,viewBox);
-	opts.viewBox=ViewboxString(Displace(viewBox[0],viewBox[1]).concat(Displace(viewBox[2],viewBox[3])));
+	opts.viewBox=EnViewbox(Displace(viewBox[0],viewBox[1]).concat(Displace(viewBox[2],viewBox[3])));
 	return opts;
 }
 

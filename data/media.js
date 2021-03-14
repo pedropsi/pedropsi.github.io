@@ -175,7 +175,7 @@ ImageHTML=function(ImageObj){
 	}
 
 	return `
-	<img ${AttributesHTML(attribs)}
+	<img ${TagAttributesHTML(attribs)}
 		class="image"
 		${lazy}
 		id="${ImageObj.id}"

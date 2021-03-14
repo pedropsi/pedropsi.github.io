@@ -14,7 +14,7 @@
 //	 	- "String", "S"			: a string
 //	 	- "Object", "Obj", "O"	: an object
 //
-//	 	- "-s", a plural noun	: an array		(occasionally an object)
+//	 	- "-s", a plural noun	: an array or an object dictionary
 //
 //	 	- "Element"				: a Node or HTML code or a Selector
 //	 	- "Node"				: a HTML node element
@@ -5278,18 +5278,18 @@ ScrollInto=function(elementIDsel){
 ////////////////////////////////////////////////////////////////////////////////
 // Element Generator
 
-AttributesHTML=function(opts){
+TagAttributesHTML=function(opts){
 	var opts=opts||{};
 	delete opts["tag"];
 	delete opts["txt"];
 	return Keys(opts).map(k=>`${k}='${opts[k]}'`).join(" ");
 }
 
-ElementHTML=function(opts){
+TagHTML=function(opts){
 	var tag=opts.tag?opts.tag:"div";
 	var txt=opts.txt?opts.txt:"";
 	
-	var attribs=AttributesHTML(opts);
+	var attribs=TagAttributesHTML(opts);
 	var start=`<${tag} ${attribs}>`
 	var end=`</${tag}>`
 	if(opts.single)
@@ -5396,7 +5396,7 @@ ButtonHTML=function(attribs){
 		delete joinableAttribs["href"];
 	}
 	var mergedAttribs=Fuse(joinableAttribs,Merge(overwritableAttribs,attribs));
-	return ElementHTML(mergedAttribs);
+	return TagHTML(mergedAttribs);
 };
 
 //Links 
@@ -5408,7 +5408,7 @@ AnchorHTML=function(content,ref,attribs){
 	if(OuterLinked(ref))
 		attribs.class=Posfix(attribs.class||""," outerlink");
 	attribs.class=Posfix(attribs.class||""," selectable");
-	return ElementHTML(Merge(attribs,{tag:"a",txt:content}));
+	return TagHTML(Merge(attribs,{tag:"a",txt:content}));
 }
 
 InnerAHTML=function(title,ref,attribs,header){
@@ -8393,10 +8393,23 @@ ViewboxCoordinates=function(viewBox){
 	if(Arrayed(viewBox))
 		return viewBox;
 	return TrimWhitespaceString(viewBox).split(new RegExp(SVGSpacePattern,"g")).map(Number);
+/*
+ViewboxCoordinates("   0 1  2 3  ")
+[0,1,2,3]
+*/
 }
 
-ViewboxString=function(viewBox){
-	return ViewboxCoordinates(viewBox).join(" ");
+EnViewbox=function(viewBoxOrCoordinates){
+	return ViewboxCoordinates(viewBoxOrCoordinates).join(" ");
+/*
+converts coordinates to viewbox
+EnViewbox([0,1,2,3])
+"0 1 2 3"
+
+formats viewbox, e.g. trims all spaces
+EnViewbox("   0  1  2  		 3   ")
+"0 1 2 3"
+*/
 }
 
 
