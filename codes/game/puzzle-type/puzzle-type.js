@@ -2207,7 +2207,6 @@ function Topological(L){
 				{Starter:BlockInput},
 				{Starter:
 					function(){
-						Wbug("started");
 						for(var i=0;i<letters.length;i++)
 							Morpher(i)
 					},

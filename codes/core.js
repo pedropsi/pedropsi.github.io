@@ -4528,7 +4528,7 @@ LoadDataFromNetwork=function(url,Successer,header,FailureF){
 					FailureF();
 				}
 				else{
-					Memory(url,rawFile.responseText,new Date());
+					Memory(url,rawFile.responseText,Today());
 					Successer(data);
 				}
 			}
@@ -4588,7 +4588,7 @@ Memory=function(name,data,days){
 	try{
 		localStorage[MemorySlot(name)]=JSON.stringify(data);
 		//Set expiry date
-		try{localStorage[MemorySlot(name+"_exp")]=JSON.stringify(new Date())}
+		try{localStorage[MemorySlot(name+"_exp")]=JSON.stringify(Today())}
 		catch(err){}
 	}
 	catch(err){};

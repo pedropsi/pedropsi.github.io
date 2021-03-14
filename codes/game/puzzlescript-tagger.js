@@ -147,7 +147,7 @@ LoadDataFromNetwork=function(url,SuccessF,header,FailureF){
 					FailureF();
 				}
 				else{
-					Memory(url,rawFile.responseText,new Date());
+					Memory(url,rawFile.responseText,Today());
 					SuccessF(data);
 				}
 			}
