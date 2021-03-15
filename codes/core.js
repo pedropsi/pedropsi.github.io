@@ -8101,8 +8101,28 @@ DateFormats={
 
 DateString=function(date,format){
 	var date=date||Today();
+	if(Stringed(date))
+		return DateString(StringDate(date),format);
 	var Formatter=DateFormats[format||"Normal"]||DateFormats["Normal"];
 	return Formatter(date);
+
+/*
+Format: normal by defaut
+DateString(StringDate("21-03-2021"))
+"Sunday, 21st of March 2021"
+
+accepts date strings diretly
+DateString("21-03-2021","Normal")
+"Sunday, 21st of March 2021"
+
+Format: super
+DateString("21-03-2021","Super")
+"Sunday, 21<sup>st</sup> of March 2021"
+
+Format: short
+DateString(StringDate("21-03-2021"),"Short")
+"Sun. Mar 21<sup>st</sup> 2021"
+*/
 }
 
 
