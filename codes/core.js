@@ -3469,8 +3469,12 @@ StripHTML=function(string){
 	//.replace(/\<(.*)[^\<\>]*\>([^\<\>]*)<\/\1\>/ig,"$2")
 	var string=string.replace(/\<(img|svg|script|style|meta|link)[^\<\>]*\>/ig,"");
 		string=string.replace(/\<[^\<\>]*\>/ig," ");
-		string=string.replace(/(\n)+/ig,"$1").replace(/( +)/ig,"$1");
-	return string;
+	return TrimWhitespaceString(SpacedString(string));
+/*
+replaces all html tags with a single space
+StripHTML("31<sup>st</sup>")
+"31 st"
+*/
 }
 
 
