@@ -1,6 +1,6 @@
 HyperText("CitationSelf",function(){return `
 	<p class="reference">
-		${v.TITLE_BY_AL()}, accessed ${DateString(false,"Super")}, ${SelfAHTML()}
+		${v.TITLE_BY_AL()}, accessed ${DateString(Today(),"Super")}, ${SelfAHTML()}
 	</p>
 `})
 
