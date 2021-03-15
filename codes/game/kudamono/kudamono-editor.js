@@ -1178,7 +1178,7 @@ MetadataColophon=function(metadata){
 	var author=metadata.author?("by "+metadata.author):"";
 	var date=metadata.date||"";
 	if(date){
-		date=" — "+TrimWhitespaceString(SpacedString(StringDateName(date)))
+		date=" — "+StringDateName(date,"Super")
 	}
 	return number+title+difficulty+author+date;
 }

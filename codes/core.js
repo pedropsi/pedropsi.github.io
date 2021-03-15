@@ -7964,26 +7964,20 @@ Month=function(date){
 	return Number(date.toLocaleDateString().replace(/(\d)*\//,"").replace(/\/(\d)*/,""));
 };
 
-Shorten3=function(name){
-	return name.slice(0,3);
-}
 
-Months=function(){
-	return ["January","February","March","April","May","June","July","August","September","October","November","December"];
+Months=["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+DayNames=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+Shorten3=function(name){
+	return Take(name,3);
 }
-MonthsShort=function(){
-	return Months().map(Shorten3);
-}
-DayNames=function(){
-	return ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-}
-DayNamesShort=function(){
-	return DayNames().map(Shorten3);
-}
+MonthsShort=Months.map(Shorten3).map(LowerCase);
+DayNamesShort=DayNames.map(Shorten3)
 
 
 DayName=function(n,dayNamesArray){
-	var dayNamesArray=dayNamesArray||DayNames();
+	var dayNamesArray=dayNamesArray||DayNames;
 	return dayNamesArray[n];
 }
 
@@ -8009,7 +8003,7 @@ DayST=function(day){
 }
 WeekDay=function(date,dayNamesArray){
 	var date=date||Today();
-	var dayNamesArray=dayNamesArray||DayNames();
+	var dayNamesArray=dayNamesArray||DayNames;
 	return DayName(date.getDay(),dayNamesArray);
 }
 
@@ -8027,6 +8021,9 @@ DaysSortF=function(date1,date2){
 DateDate=function(day,month,year){
 	if(typeof day==="undefined")
 		return Today();
+	var month=month;
+	if(Naned(Number(month)))
+		month=MonthsShort.indexOf(LowerCase(Take(month,3)))+1;
 	return 	new Date(Number(year),Number(month)-1,Number(day));
 }
 
@@ -8039,46 +8036,66 @@ YearsString=function(start,end){
 		return start;
 }
 
-DateName=function(date,opts){
-	return `${DayNamer(date,opts||{})} of ${MonthYearNamer(date)}`;
+
+
+DateFormats={
+	"Weekday":date=>WeekDay(date,DayNames),
+	"WeekdayShort":date=>WeekDay(date,DayNamesShort),
+	"Month":date=>MonthName(Month(date),Months),
+	"MonthShort":date=>MonthName(Month(date),MonthsShort),
+	"Normal":date=>`${WeekDay(date,DayNames)}, ${Day(date)}${DayST(Day(date))} of ${DateFormats["MonthYear"](date)}`,
+	"DaySuper":date=>`${WeekDay(date,DayNames)}, ${Day(date)}<sup>${DayST(Day(date))}</sup>`,
+	"Super":date=>DateFormats["DaySuper"](date)+" of "+DateFormats["MonthYear"](date),
+	"MonthYear":date=>`${DateFormats["Month"](date)} ${Year(date)}`,
+	"RSS":date=>`${DateFormats["WeekdayShort"](date)}, ${Day(date)} ${DateFormats["MonthShort"]} ${Year(date)}`
 }
 
-DayNamer=function(date,opts){
-	if(!date)
-		return MonthYearNamer(Today());
-	var st=DayST(Day(date));
-	if(!opts||!opts.simplified)
-		st=`<sup>${st}</sup>`;
-	return `${WeekDay(date,DayNames())}, ${Day(date)}${st}`;
+DateString=function(date,format){
+	var date=date||Today();
+	var Formatter=DateFormats[format||"Normal"]||DateFormats["Normal"];
+	return Formatter(date);
 }
+
+
 
 MonthYearNamer=function(date){
 	if(!date)
 		return MonthYearNamer(Today());
-	return `${MonthName(Month(date),Months())} ${Year(date)}`;
+	return DateFormats["MonthYear"](date);
 }
 
 DateRSS=function(date){
 	if(!date)
 		return DateRSS(Today());
-	return `${WeekDay(date,DayNamesShort())}, ${Day(date)} ${MonthName(Month(date),MonthsShort())} ${Year(date)}`;
+	return DateFormats["RSS"](date);
 }
 
 
-var DatePatterns={
+DatePatterns={
+	"Separator":"[-\\/\\\\\\s\\.]",
+	"MonthNamed":MonthsShort.map(m=>"(?:"+m+"\\w*)").join("|"),
+	"MonthDigit":"(?:0?\\d)|(?:10)|(?:11)|(?:12)",
+	"DayDigit":"((?:[012]\\d)|(?:30|31))",
+	"Year":"(\\d\\d\\d\\d)"
+}
+DatePatterns["Month"]="("+DatePatterns["MonthDigit"]+"|"+DatePatterns["MonthNamed"]+")";
+
+
+DateDetectors={
 	"DMY":{
-		pattern:/^((?:[012]\d)|(?:30|31))[-\/\\\s\.]((?:0\d)|(?:10)|(?:11)|(?:12))[-\/\\\s\.](\d\d\d\d)$/ig,
+		pattern:"^"+DatePatterns["DayDigit"]+DatePatterns["Separator"]+DatePatterns["Month"]+DatePatterns["Separator"]+DatePatterns["Year"]+"$",
 		order:["$1","$2","$3"]
 	},
 	"YMD":{
-		pattern:/^(\d\d\d\d)[-\/\\\s\.]((?:0\d)|(?:10)|(?:11)|(?:12))[-\/\\\s\.]((?:[012]\d)|(?:30|31))$/ig,
+		pattern:"^"+DatePatterns["Year"]+DatePatterns["Separator"]+DatePatterns["Month"]+DatePatterns["Separator"]+DatePatterns["DayDigit"]+"$",
 		order:["$3","$2","$1"]
 	}
-	//Month name patterns to do
 }
+
+
 StringPatternDate=function(string,patternObj){
-	var p=patternObj.pattern;
-	if(string.match(p)){
+	var p=new RegExp(patternObj.pattern,"ig");
+	if(patternObj.order&&string.match(p)){
 		var dmy=patternObj.order.map(s=>string.replace(p,s));
 		return Apply(DateDate,dmy);
 	}
@@ -8087,18 +8104,23 @@ StringPatternDate=function(string,patternObj){
 }
 
 StringDate=function(string){
-	var patternNames=Keys(DatePatterns);
+	var patternNames=Keys(DateDetectors);
 	var i=0;
 	var found=false;
 	while(!found&&i<patternNames.length){
-		found=StringPatternDate(string,DatePatterns[patternNames[i]]);
+		found=StringPatternDate(string,DateDetectors[patternNames[i]]);
 		i++;
 	}
 	return found;
+/*
+also text input for months
+StringDate("21/mArCHes/2021)
+"todo"
+*/
 }
 
-StringDateName=function(string,opts){
-	return DateName(StringDate(string),opts||{});
+StringDateName=function(string,format){
+	return DateString(StringDate(string),format);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

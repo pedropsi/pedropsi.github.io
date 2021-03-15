@@ -5002,7 +5002,7 @@ AnimalStages={
 
 
 	//Dates, hours
-Range(0,11).map(m=>TimeStages[Months()[m]]=Months()[(m+11)%12]);
+Range(0,11).map(m=>TimeStages[Months[m]]=Months[(m+11)%12]);
 Range(0,12).map(m=>TimeStages[ReadNumber(m)+" AM"]=ReadNumber((m+1)%12)+" AM");
 Range(0,12).map(m=>TimeStages[ReadNumber(m)+" PM"]=ReadNumber((m+1)%12)+" PM");
 Range(0,12).map(m=>TimeStages[ReadNumber(m)+" o clock"]=ReadNumber((m+11)%12)+" o clock");
