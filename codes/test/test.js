@@ -39,13 +39,6 @@ SaveTest(Equal,[{a:1,b:2,c:3},{a:1,b:2}],false,"object - different length, shall
 SaveTest(Equal,[{a:1,b:{bb:2},c:{cc:"3",d:{dd:4}}},{a:1,b:{bb:2},c:{cc:"3",d:{dd:4}}}],true,"object - equal, deep");
 SaveTest(Equal,[{a:1,b:{bb:2},c:{cc:"3",d:{dd:4}}},{a:1,b:{bb:2},c:{cc:"3",d:{dd:5}}}],false,"object - different, deep");
 
-///////////////////////////////////////////////////////////////////////////////
-
-SaveTest(EuclideanDistance,[[],[]],0,"both empty");
-SaveTest(EuclideanDistance,[[1],[2]],1,"monodimensional");
-SaveTest(EuclideanDistance,[[0,3],[4,0]],5,"bidimensional");
-SaveTest(EuclideanDistance,[[0,0,3],[4,0,0]],5,"tridimensional");
-
 
 ///////////////////////////////////////////////////////////////////////////////
 

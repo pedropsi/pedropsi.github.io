@@ -1071,6 +1071,23 @@ var VectorMin=Vectoriser(Min);
 
 EuclideanDistance=function(vector1,vector2){
 	return SquareRoot(PoweredSum(VectorMinus(vector2,vector1),2));
+/*
+both empty
+EuclideanDistance([],[])
+0
+
+monodimensional
+EuclideanDistance([1],[2])
+1
+
+bidimensional
+EuclideanDistance([0,3],[4,0])
+5
+
+tridimensional and up
+EuclideanDistance([0,0,3],[4,0,0])
+5
+*/
 }
 
 UnitVector=function(vector){
