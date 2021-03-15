@@ -519,7 +519,7 @@ SortArray=function(v){
 	return Apply(Sorter,Sorters)(v);
 }
 
-SortObjectKeys=function(Obj){
+SortKeysObject=function(Obj){
 	var Sorters=Rest(Values(arguments));
 	var sortedkeys=Apply(Sorter,Sorters)(Keys(Obj));
 	var o={};
@@ -527,6 +527,21 @@ SortObjectKeys=function(Obj){
 		return o;
 }
 
+SortValuesObject=function(Obj){
+	var Sorters=Rest(Values(arguments));
+	var values=Values(Obj);
+	var sortedvalues=Apply(Sorter,Sorters)(values);
+	var order=Order(values,sortedvalues);
+	var sortedkeys=Pick(Keys(Obj),order);
+	var o={};
+		sortedkeys.map(k=>o[k]=Obj[k]);
+		return o;
+/*
+Sorts by value
+SortValuesObject({a:3,b:1,c:2},Identity)
+{b:1,c:2,a:3}
+*/
+}
 
 
 SortBy=function(AO){
@@ -535,7 +550,7 @@ SortBy=function(AO){
 	if(Arrayed(AO))
 		return Apply(function(S){return SortArray(AO,S)},Sorters);
 	if(Objected(AO))
-		return Apply(function(S){return SortObjectKeys(AO,S)},Sorters);
+		return Apply(function(S){return SortKeysObject(AO,S)},Sorters);
 	return AO;
 }
 
