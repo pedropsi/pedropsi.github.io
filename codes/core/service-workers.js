@@ -35,7 +35,7 @@ ListDependencies=function(){
 		"codes/game/modules/rng.js",
 		"codes/game/modules/riffwave.js",
 		"codes/game/modules/sfxr.js",
-		"codes/game/modules/codemirror.js",
+		"codes/game/modules/stringstream.js",
 		"codes/game/modules/colors.js",
 		"codes/game/modules/graphics.js",
 		"codes/game/modules/engine.js",

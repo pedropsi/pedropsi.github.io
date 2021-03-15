@@ -13,7 +13,7 @@ var CoreModules=[
 		"rng",
 		"riffwave",
 		"sfxr",
-		"codemirror",
+		"stringstream",
 		"colors",
 		"graphics",
 		"engine"+JLRequire(),
