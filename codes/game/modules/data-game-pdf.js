@@ -44,7 +44,7 @@ PdfCover=function(data){
 		style:"header",
 		fontSize:48
 	},{
-		image:First(PuzzlePictures).src,
+		image:data.src,
 		style:"picture",
 	},{
 		text:"Paper Puzzle Pack",
@@ -88,33 +88,33 @@ PdfPuzzlePage=function(metadata){
 	}])
 };
 
+var PdfStyles={
+	"header":{
+		color:"#333333",
+		markerColor:"#333333",
+		//lineHeight:4,
+		fontSize:22,
+		alignment:"center",
+		bold:true
+	},
+	"colophon":{
+		color:"#333333",
+		markerColor:"#333333",
+		alignment:"right",
+		fontSize:14
+	},
+	"picture":{
+		width:100,
+		alignment:"center"
+	}
+}
 
-PdfOptions=function(data){
+PdfContent=function(data,PuzzlePictures){
 	return {
 		content:Prepend(
 			Values(PuzzlePictures).map(puzzlePic=>PdfPuzzlePage(puzzlePic,data)),
-			PdfCover(data)
+			PdfCover(Merge(data,{src:First(PuzzlePictures).src}))
 		),
-		styles:{
-			"header":{
-				color:"#333333",
-				markerColor:"#333333",
-				//lineHeight:4,
-				fontSize:22,
-				alignment:"center",
-				bold:true
-			},
-			"colophon":{
-				color:"#333333",
-				markerColor:"#333333",
-				alignment:"right",
-				fontSize:14
-			},
-			"picture":{
-				width:100,
-				alignment:"center"
-			}
-		}
 	}
 }
 
@@ -122,10 +122,11 @@ MakePdf=function(){
 	var options={
 		author:"Pedro PSI",
 		date:Today(),
-		genre:"Bonsai Gardening"	
+		genre:PageTitle()	
 	};
 	var format=Evaluate(PageFormats["Puzzlebook"],options);
-	return pdfMake.createPdf(Group(PdfOptions(options),format));
+	var content=PdfContent(options,PuzzlePictures);
+	return pdfMake.createPdf(Group(content,format,{styles:PdfStyles}));
 }
 
 

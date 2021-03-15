@@ -149,7 +149,7 @@ ${
 
 ${v.HEADER()}
 
-<p>To play ${v.TITLE()}, all you need is pen and paper... or the ${AHTML("Kudamono Editor","?W=6")}!</p>
+<p>To play ${v.TITLE()}, all you need is ${InlineButtonHTML({txt:"pen and paper",onclick:'MakePdf().open()'})}... or the ${AHTML("Kudamono Editor","?W=6")}!</p>
 
 <h3>Rules of Kudamono</h3>
 ${I("kudamono/kudamono-rules")}
