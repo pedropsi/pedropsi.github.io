@@ -8094,10 +8094,18 @@ DateDetectors={
 		pattern:"^"+DatePatterns["DayDigit"]+DatePatterns["Separator"]+DatePatterns["Month"]+DatePatterns["Separator"]+DatePatterns["Year"]+"$",
 		order:["$1","$2","$3"]
 	},
+	"DMY-UnSep":{
+		pattern:"^"+DatePatterns["DayDigit"]+"("+DatePatterns["MonthNamed"]+")"+DatePatterns["Year"]+"$",
+		order:["$1","$2","$3"]
+	},
 	"YMD":{
 		pattern:"^"+DatePatterns["Year"]+DatePatterns["Separator"]+DatePatterns["Month"]+DatePatterns["Separator"]+DatePatterns["DayDigit"]+"$",
 		order:["$3","$2","$1"]
-	}
+	},
+	"YMD-UnSep":{
+		pattern:"^"+DatePatterns["Year"]+"("+DatePatterns["MonthNamed"]+")"+DatePatterns["DayDigit"]+"$",
+		order:["$3","$2","$1"]
+	},
 }
 
 
@@ -8117,7 +8125,7 @@ StringDate=function(string){
 	var found=false;
 	while(!found&&i<patternNames.length){
 		found=StringPatternDate(string,DateDetectors[patternNames[i]]);
-		i++;
+		i=i+1;
 	}
 	return found;
 /*
@@ -8131,6 +8139,10 @@ new Date("2021-03-21")
 
 month names alowed in full or abbreviated form
 StringDate("21-Mar-2021")
+new Date("2021-03-21")
+
+with month names, no separator is needed
+StringDate("21Mar2021")
 new Date("2021-03-21")
 
 robust detection (for known patterns)
