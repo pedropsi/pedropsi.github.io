@@ -5408,12 +5408,13 @@ SVGObject=function(opts){
 	}
 }
 
-SVGHTML=function(opts){
+IconSVGHTML=function(opts){
 	var opts=SVGObject(opts);
-	return `
-		<svg class='iconpath icon-${opts.name} ${opts.cla}' width='${opts.width}' height='${opts.height}' viewBox='${opts.viewBox}'>
-			<path d='${opts.path}'/>
-		</svg>`;
+		opts["tag"]="svg";
+		opts["class"]=`iconpath icon-${opts.name} ${opts.cla}`;
+ 		delete opts.name;	
+		opts.txt=TagHTML({tag:"path",d:opts.path});
+	return TagHTML(opts);
 }
 
 SVGEncodedURL=function(opts){
@@ -5439,7 +5440,7 @@ IconEncodedURL=function(nameSO,Opts){
 }
 
 IconHTML=function(opts){
-	return SpanHTML(SVGHTML(opts),"icon");
+	return SpanHTML(IconSVGHTML(opts),"icon");
 }
 
 SpanHTML=function(html,clas){

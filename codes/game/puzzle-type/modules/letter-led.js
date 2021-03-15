@@ -141,7 +141,7 @@ function LEDLetterSVGHTML(ledstring){
 		coordinates=coordinates.map(c=>LEDCoordinates[c]);
 		coordinates=coordinates.join(" ");
 
-	return SVGHTML({
+	return IconSVGHTML({
 		path:coordinates,
 		transform:"flip-vertical",
 		cla:"bezier letter led",

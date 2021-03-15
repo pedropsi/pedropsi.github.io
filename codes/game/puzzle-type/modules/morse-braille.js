@@ -89,7 +89,7 @@ function BrailleLetterSVGHTML(bimorsestring){
 		path=path+" "+BrailleCoordinates(bimorsestring[j],j);
 	}
 
-	return SVGHTML({
+	return IconSVGHTML({
 		path:path,
 		cla:"bezier letter morse",
 		viewBox:"0 0 8 12",
