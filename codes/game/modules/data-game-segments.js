@@ -801,9 +801,9 @@ PointTranslator=function(X,Y){
 	}
 }
 
-PointRotator=function(w,h,wise){
+PointRotator=function(w,h,angle){
 	return function(xy){
-		return RotateXY(xy[0],xy[1],0,0,w,h,wise);
+		return RotateXY(xy[0],xy[1],0,0,w,h,angle);
 	}
 }
 
