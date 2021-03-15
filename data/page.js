@@ -306,7 +306,7 @@ AnnounceHTML=function(Opts){
 //Post HTML
 
 PagePost=function(code){
-	var start='<script id="post">var v={POST:()=>`';
+	var start='<script id="post">var v={POST:()=>v.POST=`';
 	var end='`};</script><script src="data/page.js"></script>';
 	var post="";
 
