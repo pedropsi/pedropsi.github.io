@@ -143,7 +143,7 @@ ${FolderGalleryHTML(Take(puzzles,3),"kudamono")}
 ${
 	puzzlesFuture=FilterValuesObject(kudamonosData,o=>(o.date&&ElapsedDays(StringDate(o.date))<0)),
 	l=Last(puzzlesFuture),
-	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>${l.legend?(", with <em>"+l.legend):""}</em>!</p>`:""
+	NextUpdateHTML(l&&l.date,` with <em>${l&&(l.title||l.legend)||"some certainty"}</em>!`)
 }
 <p>Possible future puzzles are listed under ${A("#Fruit Expansions")}, alongside current ${A("#Issues")}. Suggestion? Excited about a particular idea? Do ${v.A_LET_ME_KNOW()}!</p>
 

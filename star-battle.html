@@ -169,7 +169,7 @@ ${FolderGalleryHTML(Take(starbattles,3),"star-battle")}
 ${
 	starbattlesFuture=FilterValuesObject(starbattlesData,o=>(o.date&&ElapsedDays(StringDate(o.date))<0)),
 	l=Last(starbattlesFuture),
-	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>${l.legend?(", with <em>"+l.legend+" star battle"):""}</em>!</p>`:""
+	NextUpdateHTML(l&&l.date,` with <em>${l&&(l.title||l.legend)||"some certainty"}</em>!`)
 }
 <p>Possible future puzzles are listed under ${AHTML("#More Ideas")}. Excited about a particular idea? Do ${v.A_LET_ME_KNOW()}!</p>
 

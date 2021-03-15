@@ -18,7 +18,7 @@ ${
 		// 	difficulty:"medium"
 		// },
 		// "50-Long way up":{
-		// 	date:"12/03/2021",
+		// 	date:"21/03/2021",
 		// 	mdate:"16/02/2021",
 		// 	unique:"no, see top part",
 		// 	board:"W=5&H=10&L=w12q5w6w2h1f4w4w2h1q2w6&S=12Y2D3Y2Y4D1IHKtpkU10D4L7X2D4U2P&G=b",
@@ -74,7 +74,7 @@ ${GalleryHTML(Take(puzzles,3),PlaceholderCarder("card latest"))}
 ${
 	puzzlesFuture=FilterValuesObject(bonsaisData,o=>(o.date&&ElapsedDays(StringDate(o.date))<0)),
 	l=Last(puzzlesFuture),
-	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>${l.legend?(", with <em>"+l.legend):""}</em>!</p>`:""
+	NextUpdateHTML(l&&l.date,` with <em>${l&&(l.title||l.legend)||"some certainty"}</em>!`)
 }
 
 ${v.HEADER()}

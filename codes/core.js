@@ -8252,6 +8252,15 @@ DateHTML=function(dateOrString,format){
 	return `<time datetime="${DateString(dateOrString,"YYYY-MM-DD")}">${DateString(dateOrString,format)}</time>`;
 }
 
+NextUpdateHTML=function(date,text){
+	if(!date)
+		return "<p>At the moment, no updates are planned.</p>";
+	date=StringDateName(date,"Super");
+	if(!date)
+		return "<p>Updates are planned, but dates unclear <em>probably due to a typo</em>.</p>";
+	return `<p>Next update: <b>${date}</b>${text}</p>`;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //Symbol designs
 
