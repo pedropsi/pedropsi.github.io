@@ -9,12 +9,17 @@
 // 	1)	the last word reveals the return type:
 //		- verb					: side effects	(may optionally return a value)
 //	 	- "-ed", an adjective	: binary 		(true/false)
-//	 	- "-er", "-or", "F"		: another function
 //	 	- "Array", "A"			: an array
 //	 	- "String", "S"			: a string
 //	 	- "Object", "Obj", "O"	: an object
 //
 //	 	- "-s", a plural noun	: an array or an object dictionary
+//
+//	 	- "-er", "F"			: a function
+//	 		- "-ir"				: a function, that returns a function
+//	 			- "-or"			: a function, that returns a function 2x deep
+//	 				- "-ur"		: a function, that returns a function 3x deep
+//	 					- "-yr"	: a function, that returns a function 4x deep
 //
 //	 	- "Element"				: a Node or HTML code or a Selector
 //	 	- "Node"				: a HTML node element
