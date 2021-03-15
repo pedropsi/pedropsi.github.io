@@ -8080,11 +8080,11 @@ DateRSS=function(date){
 
 
 DatePatterns={
-	"Separator":"[-\\/\\\\\\s\\.]+",
-	"MonthNamed":MonthsShort.map(m=>"(?:"+m+"\\w*)").join("|"),
-	"MonthDigit":"(?:0?\\d)|(?:10)|(?:11)|(?:12)",
-	"DayDigit":"((?:[012]\\d)|(?:30|31))",
-	"Year":"(\\d\\d\\d\\d)"
+	"Separator":"[-\\/\\\\\\s\\.]+",							//Includes spaces, /, -
+	"MonthNamed":MonthsShort.map(m=>"(?:"+m+"\\w*)").join("|"), //Named months, with at least 3 letters
+	"MonthDigit":"(?:0?\\d)|(?:10)|(?:11)|(?:12)",				//numbers 1 to 12, with optional zero
+	"DayDigit":"((?:[012]\\d)|(?:30|31))",						//numbers 1 to 31, with optional zero
+	"Year":"(\\d\\d\\d\\d)"										//4-digit numbers
 }
 DatePatterns["Month"]="("+DatePatterns["MonthDigit"]+"|"+DatePatterns["MonthNamed"]+")";
 
