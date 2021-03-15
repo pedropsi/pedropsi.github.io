@@ -645,7 +645,7 @@ Equal=function(a,b){
 	else if(Noded(a)&&Noded(b))
 		return a.isEqualNode(b);
 	else if(Dated(a)&&Dated(b))
-		return a===b;
+		return a.getTime()===b.getTime();
 	else{
 		Warn("check this new case:",a,b);
 		return false;
@@ -670,6 +670,14 @@ false
 unequal there
 UnEqualer(1)(0)
 true
+
+equal dates
+Equal(new Date("2021-03-21"),new Date("2021-03-21"))
+true
+
+different dates
+Equal(new Date("2020-03-21"),new Date("2021-03-21"))
+false
 */
 }
 
@@ -8072,7 +8080,7 @@ DateRSS=function(date){
 
 
 DatePatterns={
-	"Separator":"[-\\/\\\\\\s\\.]",
+	"Separator":"[-\\/\\\\\\s\\.]+",
 	"MonthNamed":MonthsShort.map(m=>"(?:"+m+"\\w*)").join("|"),
 	"MonthDigit":"(?:0?\\d)|(?:10)|(?:11)|(?:12)",
 	"DayDigit":"((?:[012]\\d)|(?:30|31))",
@@ -8113,9 +8121,21 @@ StringDate=function(string){
 	}
 	return found;
 /*
-also text input for months
-StringDate("21/mArCHes/2021)
-"todo"
+detects dates, YMD
+StringDate("2021/03/21")
+new Date("2021-03-21")
+
+detects dates, DMY
+StringDate("21/03/2021")
+new Date("2021-03-21")
+
+month names alowed in full or abbreviated form
+StringDate("21-Mar-2021")
+new Date("2021-03-21")
+
+robust detection (for known patterns)
+StringDate("21 ///    mArCHes -2021")
+new Date("2021-03-21")
 */
 }
 
