@@ -57,7 +57,7 @@ CommentHTML=function(Obj){
 					</p>
 				</div>
 				<div class='date'>
-					${Obj.date}
+					${DateHTML(Obj.date,"Super")}
 					${b}
 				</div>
 			</div>`;
