@@ -549,7 +549,7 @@ NonFutureItem=function(npObj){//news or page Object
 NewsEntryHTML=function(change,Opts){
 	var d=Opts.depth||2;
 	return `
-	<h${d}>${StringDateName(change.DATE)}</h${d}>
+	<h${d}>${StringDateName(change.DATE,"Super")}</h${d}>
 	${change.HEADER?`<h${d+1}>${Evaluate(change.HEADER)}</h${d+1}>`:""}
 	${Evaluate(change.PIECE)}
 	`;
