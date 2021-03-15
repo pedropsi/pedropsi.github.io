@@ -3466,7 +3466,6 @@ AddRight=function(txt,symbol,n){
 
 //Stripping
 StripHTML=function(string){
-	//.replace(/\<(.*)[^\<\>]*\>([^\<\>]*)<\/\1\>/ig,"$2")
 	var string=string.replace(/\<(img|svg|script|style|meta|link)[^\<\>]*\>/ig,"");
 		string=string.replace(/\<[^\<\>]*\>/ig," ");
 	return TrimWhitespaceString(SpacedString(string));
