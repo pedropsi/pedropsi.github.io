@@ -8096,7 +8096,14 @@ DateFormats={
 	"Short":date=>`${DateFormats["WeekdaysShort"](date)}. ${DateFormats["MonthsShort"](date)} ${DateFormats["DaySuper"](date)} ${Year(date)}`,
 
 
-	"RSS":date=>`${DateFormats["WeekdaysShort"](date)}, ${Day(date)} ${DateFormats["MonthsShort"]} ${Year(date)}`
+	"RSS":date=>`${DateFormats["WeekdaysShort"](date)}, ${Day(date)} ${DateFormats["MonthsShort"]} ${Year(date)}`,
+
+	"MM":date=>PadLeft(String(Month(date)),"0",2),
+	"DD":date=>PadLeft(String(Day(date)),"0",2),
+	"YYYY":date=>PadLeft(String(Year(date)),"0",4),
+
+	"DD-MM-YYYY":date=>`${DateFormats["DD"](date)}-${DateFormats["MM"](date)}-${DateFormats["YYYY"](date)}`,
+	"YYYY-MM-DD":date=>`${DateFormats["YYYY"](date)}-${DateFormats["MM"](date)}-${DateFormats["DD"](date)}`
 }
 
 DateString=function(date,format){
@@ -8122,6 +8129,10 @@ DateString("21-03-2021","Super")
 Format: short
 DateString(StringDate("21-03-2021"),"Short")
 "Sun. Mar 21<sup>st</sup> 2021"
+
+Format YYYY-MM-DD
+DateString(StringDate("21-03-2021"),"YYYY-MM-DD")
+"2021-03-21"
 */
 }
 
@@ -8237,6 +8248,9 @@ StringDateName=function(string,format){
 	return DateString(StringDate(string),format);
 }
 
+DateHTML=function(dateOrString,format){
+	return `<time datetime="${DateString(dateOrString,"YYYY-MM-DD")}">${DateString(dateOrString,format)}</time>`;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Symbol designs

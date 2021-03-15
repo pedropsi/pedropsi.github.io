@@ -74,13 +74,9 @@ Keys(CMS).map(l=>CMS[l].LINK=()=>l);
 
 PageLabelsHTML=function(page){
 	var tags=page.TAGS?page.TAGS():[];
-	var date=Evaluate(page.DATE);
-	var time=date?`
-		<time datetime="${date}">
-			${StringDateName(date,"Short")}
-		</time>
-	`:"";
-	date=!date?"":AnchorHTML(time,"tag.html?search=!Class+!Sitemap",{"class":"tag button selectable"});
+	var date=Evaluate(page.DATE)||"";
+	if(date)
+		date=AnchorHTML(DateHTML(date,"Short"),"tag.html?search=!Class+!Sitemap",{"class":"tag button selectable"});
 
 	return `
 	<div class="tags buttonrow">
