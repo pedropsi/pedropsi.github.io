@@ -261,10 +261,8 @@ PageTestReport=function(){
 }
 
 AutoTestButtonHTML=function(excludedModules){
-	var b=ButtonHTML({
+	var b=InlineButtonHTML({
 		txt:"test",
-		tag:"span",
-		class:"inline",
 		onclick:`PageTestReport()`
 	});
 	return b;

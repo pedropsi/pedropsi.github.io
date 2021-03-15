@@ -5507,6 +5507,12 @@ ButtonHTML=function(attribs){
 	return TagHTML(mergedAttribs);
 };
 
+InlineButtonHTML=function(attribs){
+	var attribs=Merge(attribs,{tag:"span"});
+		attribs=Fuse(attribs,{class:" inline"});
+	return ButtonHTML(attribs);
+}
+
 //Links 
 AnchorHTML=function(content,ref,attribs){
 	var attribs=attribs||{};
@@ -8986,9 +8992,9 @@ TogglerButtonHTML=function(StatusReporterName,StatusChangerName){
 	if(!globalThis[StatusReporterName]||typeof globalThis[StatusReporterName]!=="function")
 		return DynamicText(StatusReporterName);
 
-	var status=ButtonHTML({
+	var status=InlineButtonHTML({
 		txt:globalThis[StatusReporterName]()?"active":"inactive",
-		href:"",onclick:'Toggler("'+StatusReporterName+'","'+StatusChangerName+'")()',class:"inline"
+		href:"",onclick:'Toggler("'+StatusReporterName+'","'+StatusChangerName+'")()'
 	});
 	
 	return DynamicText(StatusReporterName,status);

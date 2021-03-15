@@ -80,13 +80,12 @@ ${
 ${v.HEADER()}
 
 <p>This genre was designed by ${P("leslo")} in January 2021. Despite the simple Zen theme, the puzzles tend to grow in complexity fairly quickly.</p>
-<p><em>Bonsai gardening</em> puzzles are related to ${A("kudamono")}.</p>
+<p>To play ${v.TITLE()}, all you need is ${InlineButtonHTML({txt:"pen and paper",onclick:'MakePdf().open()'})}... or the ${bonsaimode=AHTML("Kudamono Editor (bonsai mode)","?W=6&G=b")}!</p>
+
 <h3>Goal</h3>
 <p>Your goal as a zen gardener is to ensure the bonsai tree keeps a perfect shape: flowers blossom at "1-pieces" (endings) and some fruits may only grow on straight "2-pieces" (trunks). There is only one tree, whose main trunk is rooted at the bottom of the board. Obviously, no loops are allowed.</p>
 <p>Importantly, no consecutive "pieces" may be of same type (see table below):</p>
 ${I("bonsai/bonsai-shapes")}
-
-<p>To play ${v.TITLE()}, all you need is pen and paper... or the ${bonsaimode=AHTML("Kudamono Editor (bonsai mode)","?W=6&G=b")}!</p>
 
 <h2>Variant: 4-way Bonsai</h2>
 <p>What if it was possible to design a Bonsai puzzle, which would not be symmetric, but if rotated, would still be uniquely solvable? This simple question, posed by ${P("Andrea")} gave rise to this variant.</p>
