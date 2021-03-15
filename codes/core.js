@@ -7,11 +7,12 @@
 // Naming conventions
 //
 // 	1)	the last word reveals the return type:
-//		- verb					: side effects	(may optionally return a value)
+//		- verb					: side effects only	(optionally a "success"/"failure" boolean)
 //	 	- "-ed", an adjective	: binary 		(true/false)
 //	 	- "Array", "A"			: an array
 //	 	- "String", "S"			: a string
 //	 	- "Object", "Obj", "O"	: an object
+//	 	- "AO","SAO","" 		: Array, Object or String (overloaded)
 //
 //	 	- "-s", a plural noun	: an array or an object dictionary
 //
@@ -21,7 +22,7 @@
 //	 				- "-ur"		: a function, that returns a function 3x deep
 //	 					- "-yr"	: a function, that returns a function 4x deep
 //
-//	 	- "Element"				: a Node or HTML code or a Selector
+//	 	- "Element"				: a Node or HTML code or a Selector (overloaded)
 //	 	- "Node"				: a HTML node element
 //	 	- "HTML"				: HTML code, as a string
 //		- ...
@@ -35,9 +36,9 @@
 //
 //	3) self-describing names are preferred. For instance "FirstSecond...Type" receives those "First","Second",... as arguments and returns "Type"
 //
-//  4) the first word may also refer to a particular set of related functions (to be improved). 
+//  4) the first word may also refer to a particular set of related functions (TBD). 
 //
-//  5) Forbidden names: anything vague, such as: "data" (to be improved)
+//  5) Forbidden names: anything vague, such as: "data" (TBD)
 //
 //	6) function names are Capitalised (and camel-cased):
 //		- avoids conflicts with most JS libraries
