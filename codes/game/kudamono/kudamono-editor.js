@@ -15,6 +15,7 @@ sources.map(LoaderInFolder("codes/game/modules"));
 sources=sources.concat("kudamono-genres")
 LoaderInFolder("codes/game/kudamono")("genres.js");
 
+LoaderInFolder("codes/game/modules")("data-game-pdf")
 
 //Definitions
 GlobalTrackRules=["trackequaliser","mintracks","maxtracks"];
