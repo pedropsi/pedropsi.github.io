@@ -8158,17 +8158,18 @@ DatePatterns={
 	"Separator":"[-\\/\\\\\\s\\.\\,]+",									//Includes spaces /,-
 	"WeekdayNamed":StringsUncapture(WeekdaysShort.map(m=>m+"\\w*")),	 	//Named weekdays, with at least 3 letters
 	"MonthNamed":StringsUncapture(MonthsShort.map(m=>m+"\\w*")), 		//Named months, with at least 3 letters
-	"MonthDigit":"(?:0?\\d)|(?:10)|(?:11)|(?:12)",						//numbers 1 to 12, with optional zero
-	"DayDigit":"((?:[012]\\d)|(?:30|31))",								//numbers 1 to 31, with optional zero
+	"MonthDigit":StringsUncapture(Range(1,12).map(n=>(n<10?("0?"+n):String(n)))),	//numbers 1 to 12, with optional zero
+	"DayDigit":StringsUncapture(Range(1,31).map(n=>(n<10?("0?"+n):String(n)))),	//numbers 1 to 31, with optional zero
 	"HourDigit":StringsUncapture(Range(0,23).map(n=>PadLeft(String(n),"0",2))),	//hour digits
 	"MinSecDigit":StringsUncapture(Range(0,60).map(n=>PadLeft(String(n),"0",2))),//minute or second digits
 	"Year":"(\\d\\d\\d\\d)"												//4-digit numbers
 }
 
+DatePatterns["Day"]="("+DatePatterns["DayDigit"]+")";
 DatePatterns["Weekday"]="(?:"+DatePatterns["WeekdayNamed"]+")";
 DatePatterns["Month"]="("+DatePatterns["MonthDigit"]+"|"+DatePatterns["MonthNamed"]+")";
 DatePatterns["Time"]="((?:"+DatePatterns["HourDigit"]+")(?:\:(?:"+DatePatterns["MinSecDigit"]+"))+)"; //todo dont repeat more than 2
-DatePatterns["DMY"]=DatePatterns["DayDigit"]+DatePatterns["Separator"]+DatePatterns["Month"]+DatePatterns["Separator"]+DatePatterns["Year"]
+DatePatterns["DMY"]=DatePatterns["Day"]+DatePatterns["Separator"]+DatePatterns["Month"]+DatePatterns["Separator"]+DatePatterns["Year"]
 
 DateDetectors={
 	"DMY":{
@@ -8176,15 +8177,15 @@ DateDetectors={
 		order:["$1","$2","$3"]
 	},
 	"DMY-UnSep":{
-		pattern:"^"+DatePatterns["DayDigit"]+"("+DatePatterns["MonthNamed"]+")"+DatePatterns["Year"]+"$",
+		pattern:"^"+DatePatterns["Day"]+"("+DatePatterns["MonthNamed"]+")"+DatePatterns["Year"]+"$",
 		order:["$1","$2","$3"]
 	},
 	"YMD":{
-		pattern:"^"+DatePatterns["Year"]+DatePatterns["Separator"]+DatePatterns["Month"]+DatePatterns["Separator"]+DatePatterns["DayDigit"]+"$",
+		pattern:"^"+DatePatterns["Year"]+DatePatterns["Separator"]+DatePatterns["Month"]+DatePatterns["Separator"]+DatePatterns["Day"]+"$",
 		order:["$3","$2","$1"]
 	},
 	"YMD-UnSep":{
-		pattern:"^"+DatePatterns["Year"]+"("+DatePatterns["MonthNamed"]+")"+DatePatterns["DayDigit"]+"$",
+		pattern:"^"+DatePatterns["Year"]+"("+DatePatterns["MonthNamed"]+")"+DatePatterns["Day"]+"$",
 		order:["$3","$2","$1"]
 	},
 	"Timestamp":{
@@ -8220,6 +8221,14 @@ new Date("2021-03-21")
 
 detects dates, DMY
 StringDate("21/03/2021")
+new Date("2021-03-21")
+
+variable number of digits in day
+StringDate("1/3/2021")
+new Date("2021-03-01")
+
+variable number of digits in month
+StringDate("21/3/2021")
 new Date("2021-03-21")
 
 month names alowed in full or abbreviated form
