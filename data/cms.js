@@ -80,7 +80,7 @@ PageLabelsHTML=function(page){
 			${StringDateName(date,"Super")}
 		</time>
 	`:"";
-	date=!date?"":AnchorHTML(time,"posts.html",{"class":"tag button selectable"});
+	date=!date?"":AnchorHTML(time,"tag.html?search=!Class+!Sitemap",{"class":"tag button selectable"});
 
 	return `
 	<div class="tags buttonrow">

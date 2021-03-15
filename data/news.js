@@ -583,7 +583,7 @@ NewsMonthSectionHTML=function(MonthNews){
 
 NewsDaySectionHTML=function(items){
 	var date=StringDate(First(items).DATE);
-	return `<h3>${DateString(date,"DaySuper")}</h3>
+	return `<h3>${DateString(date,"WeekdaySuper")}</h3>
 			${Keys(items).map(k=>NewsPieceHTML(items[k])).join(`
 			`)}`
 }

@@ -8064,10 +8064,18 @@ DateFormats={
 	"WeekdayShort":date=>WeekDay(date,DayNamesShort),
 	"Month":date=>MonthName(Month(date),Months),
 	"MonthShort":date=>MonthName(Month(date),MonthsShort),
-	"Normal":date=>`${WeekDay(date,DayNames)}, ${Day(date)}${DayST(Day(date))} of ${DateFormats["MonthYear"](date)}`,
-	"DaySuper":date=>`${WeekDay(date,DayNames)}, ${Day(date)}<sup>${DayST(Day(date))}</sup>`,
-	"Super":date=>DateFormats["DaySuper"](date)+" of "+DateFormats["MonthYear"](date),
+		
+	"DaySuper":date=>`${Day(date)}<sup>${DayST(Day(date))}</sup>`,
+	"WeekdaySuper":date=>`${DateFormats["Weekday"](date)}, ${DateFormats["DaySuper"](date)}`,
+	"WeekdaySuperShort":date=>`${DateFormats["WeekdayShort"](date)}, ${DateFormats["DaySuper"](date)}`,
+
 	"MonthYear":date=>`${DateFormats["Month"](date)} ${Year(date)}`,
+	
+	"Super":date=>DateFormats["WeekdaySuper"](date)+" of "+DateFormats["MonthYear"](date),
+	"Normal":date=>`${WeekDay(date,DayNames)}, ${Day(date)}${DayST(Day(date))} of ${DateFormats["MonthYear"](date)}`,
+	"Short":date=>`${DateFormats["WeekDayShort"](date)}. ${DateFormats["DaySuper"](date)} of ${DateFormats["MonthYear"](date)}`,
+
+
 	"RSS":date=>`${DateFormats["WeekdayShort"](date)}, ${Day(date)} ${DateFormats["MonthShort"]} ${Year(date)}`
 }
 
