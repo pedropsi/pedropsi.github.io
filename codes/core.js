@@ -4655,7 +4655,7 @@ MemoryExpired=function(name){
 	var expired=true;
 	try{
 		expired=localStorage[MemorySlot(name+"_exp")];
-		expired=Days(new Date(expired))>MemoryDuration();
+		expired=ElapsedDays(new Date(expired))>MemoryDuration();
 	}
 	catch(err){};
 	return expired;
@@ -8033,14 +8033,9 @@ WeekDay=function(date,dayNamesArray){
 	return DayName(date.getDay(),dayNamesArray);
 }
 
-Days=function(date1,date2){
+ElapsedDays=function(date1,date2){
 	var date2=date2||Today();
 	return (date2-date1)/1000/60/60/24
-};
-
-DaysSortF=function(date1,date2){
-	var d=Days(date1,date2);
-	return d>0?1:d<0?-1:0;
 };
 
 

@@ -516,7 +516,7 @@ PIECE:()=>`
 
 
 NewsDays=function(page){
-	return Days(StringDate(page.DATE));
+	return ElapsedDays(StringDate(page.DATE));
 }
 
 ChangelogEntryHTML=function(change){
@@ -539,7 +539,7 @@ ChangelogHTML=function(){
 
 NonFutureItem=function(npObj){//news or page Object
 	if(npObj.DATE)
-		return Days(StringDate(npObj.DATE))>=0
+		return ElapsedDays(StringDate(npObj.DATE))>=0
 	if(npObj.DAY){
 		var d=DateDate(Evaluate(npObj.DAY),Evaluate(npObj.MONTH),Evaluate(npObj.YEAR));
 		return d>=0;
@@ -707,7 +707,7 @@ SitemapItemXML=function(PageObj){
 	var id=PageObj.LINK();
 	var changes=Sorter(NewsDays)(FilterBase(News,{ID:id})).map(ch=>ch.DATE);
 		lastdate=changes[0]||lastdate;
-	var freq=FrequencyName(Days(new Date(lastdate)));//Days since last modification
+	var freq=FrequencyName(ElapsedDays(new Date(lastdate)));//ElapsedDays since last modification
 	
 	return `
 	<url>

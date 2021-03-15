@@ -194,7 +194,7 @@ function GameEntryData(dataline){
 	var data={
 		"classification":isduplicate,
 	//DATE
-		"days":Floor(Days(new Date(dataline[0].replace(".","")))),
+		"days":Floor(ElapsedDays(new Date(dataline[0].replace(".","")))),
 		"updated":"",
 	//From PS FILE
 		"title":SafeString(dataline[1]),

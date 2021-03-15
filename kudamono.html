@@ -132,7 +132,8 @@ ${kudamonosData={
 	}
 
 	},
-	puzzles=FilterValuesObject(kudamonosData,o=>(!o.date||Days(StringDate(o.date))>=0)),
+	puzzles=FilterValuesObject(kudamonosData,o=>(!o.date||ElapsedDays(StringDate(o.date))>=0)),
+	puzzles=SortValuesObject(puzzles,p=>ElapsedDays(StringDate(p.date))),
 	OnceDelayer(ModalImageFragment)(puzzles),
 	""}
 
@@ -140,7 +141,7 @@ ${kudamonosData={
 ${FolderGalleryHTML(Take(puzzles,3),"kudamono")}
 
 ${
-	puzzlesFuture=FilterValuesObject(kudamonosData,o=>(o.date&&Days(StringDate(o.date))<0)),
+	puzzlesFuture=FilterValuesObject(kudamonosData,o=>(o.date&&ElapsedDays(StringDate(o.date))<0)),
 	l=Last(puzzlesFuture),
 	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>${l.legend?(", with <em>"+l.legend):""}</em>!</p>`:""
 }

@@ -63,7 +63,8 @@ ${
 			board:"W=6&H=5&L=f13w1w7f1f4w1&G=b"
 		}
 	},
-	puzzles=FilterValuesObject(bonsaisData,o=>(!o.date||Days(StringDate(o.date))>=0)),
+	puzzles=FilterValuesObject(bonsaisData,o=>(!o.date||ElapsedDays(StringDate(o.date))>=0)),
+	puzzles=SortValuesObject(puzzles,p=>ElapsedDays(StringDate(p.date))),
 	OnceDelayer(ModalImageFragment)(puzzles),
 	""}
 
@@ -71,7 +72,7 @@ ${
 ${GalleryHTML(Take(puzzles,3),PlaceholderCarder("card latest"))}
 
 ${
-	puzzlesFuture=FilterValuesObject(bonsaisData,o=>(o.date&&Days(StringDate(o.date))<0)),
+	puzzlesFuture=FilterValuesObject(bonsaisData,o=>(o.date&&ElapsedDays(StringDate(o.date))<0)),
 	l=Last(puzzlesFuture),
 	l&&l.date?`<p>Next update: <b>${StringDateName(l.date)}</b>${l.legend?(", with <em>"+l.legend):""}</em>!</p>`:""
 }
