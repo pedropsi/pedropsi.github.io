@@ -123,14 +123,12 @@ PageFeatures=function(){
 }
 
 PageIndex=function(){
-	HearOnce("TitlesIndex",
-			function(){
-				AddTitleIndex(".main .whiteboard")//First whiteboard where main content is
-				var fragment=ClosestFragment(PageFragment()); //required for dynamism
-				if(fragment)
-					ScrollInto(fragment)
-			}
-		)
+	HearOnce("TitlesIndex",function(){
+		AddTitleIndex(".main .whiteboard")//First whiteboard where main content is
+		var fragment=ClosestFragment(PageFragment()); //required for dynamism
+		if(fragment)
+			ScrollInto(fragment)
+	})
 	TitlesIndex();
 }
 
@@ -147,6 +145,7 @@ PageFeaturesDOM=function(){
 	ListenOnce('offline',MonitorConnection);
 	
 	AppendToElement(ScrollUpHTML(),".whiteboard");
+	AppendToElement(Glyph("shards"),Last(GetElements(".whiteboard p")))
 	setTimeout(PageIndex,2000);
 
 	if(PageSearch("debug"))

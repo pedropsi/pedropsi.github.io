@@ -8408,8 +8408,16 @@ var Icons={
 
 	"human-half-left":{primitive:["body-arm-left-up","body-leg-left-down"]},
 	"human-half-right":{primitive:"human-half-left",transform:"flip-horizontal"},
-	"human-hello":{primitive:["human-half-left","human-half-right","body-head"]}
+	"human-hello":{primitive:["human-half-left","human-half-right","body-head"]},
+
+	"shards-left":{path:"M 10 10 L 8 4 L 3 3 L 4 8 Z M 10 3 L 12 10 L 14 3 L 12 0 Z",vbmax:"24 24"},
+	"shards-right":{primitive:"shards-left",transform:"rotate-90"},
+	"shards-up":{primitive:"shards-left",transform:"rotate-180"},
+	"shards-down":{primitive:"shards-left",transform:"rotate-270"},
+	"shards":{primitive:["shards-left","shards-up","shards-right","shards-down"]},
 }
+
+
 
 var MacKeys={
 	"ctrl":"cmd",
