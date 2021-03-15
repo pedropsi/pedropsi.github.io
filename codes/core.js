@@ -8017,7 +8017,7 @@ Weekdays=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"
 Shorten3=function(name){
 	return Take(name,3);
 }
-MonthsShort=Months.map(Shorten3).map(LowerCase);
+MonthsShort=Months.map(Shorten3);
 WeekdaysShort=Weekdays.map(Shorten3)
 
 
@@ -8063,7 +8063,7 @@ DateDate=function(day,month,year){
 		return Today();
 	var month=month;
 	if(Naned(Number(month)))
-		month=MonthsShort.indexOf(LowerCase(Take(month,3)))+1;
+		month=MonthsShort.map(LowerCase).indexOf(LowerCase(Take(month,3)))+1;
 	return 	new Date(Number(year),Number(month)-1,Number(day));
 }
 
@@ -8089,10 +8089,11 @@ DateFormats={
 	"WeekdaySuperShort":date=>`${DateFormats["WeekdaysShort"](date)}, ${DateFormats["DaySuper"](date)}`,
 
 	"MonthYear":date=>`${DateFormats["Month"](date)} ${Year(date)}`,
+	"MonthYearShort":date=>`${DateFormats["MonthsShort"](date)} ${Year(date)}`,
 	
 	"Super":date=>DateFormats["WeekdaySuper"](date)+" of "+DateFormats["MonthYear"](date),
 	"Normal":date=>`${WeekDay(date,Weekdays)}, ${Day(date)}${DayST(Day(date))} of ${DateFormats["MonthYear"](date)}`,
-	"Short":date=>`${DateFormats["WeekdaysShort"](date)}. ${DateFormats["DaySuper"](date)} of ${DateFormats["MonthYear"](date)}`,
+	"Short":date=>`${DateFormats["WeekdaysShort"](date)}. ${DateFormats["MonthsShort"](date)} ${DateFormats["DaySuper"](date)} ${Year(date)}`,
 
 
 	"RSS":date=>`${DateFormats["WeekdaysShort"](date)}, ${Day(date)} ${DateFormats["MonthsShort"]} ${Year(date)}`

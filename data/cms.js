@@ -77,7 +77,7 @@ PageLabelsHTML=function(page){
 	var date=Evaluate(page.DATE);
 	var time=date?`
 		<time datetime="${date}">
-			${StringDateName(date,"Super")}
+			${StringDateName(date,"Short")}
 		</time>
 	`:"";
 	date=!date?"":AnchorHTML(time,"tag.html?search=!Class+!Sitemap",{"class":"tag button selectable"});
