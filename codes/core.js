@@ -4321,7 +4321,7 @@ ShowHideIndex=function(){
 }
 
 TitleSelfLink=function(t){
-	var title=t.innerText;
+	var title=t.innerHTML;
 	t.innerHTML=HeaderAHTML(title);
 }
 
@@ -5468,7 +5468,7 @@ InnerAHTML=function(title,ref,attribs,header){
 
 HeaderAHTML=function(title,page,attribs){
 	var page=PageUnFragment(page);
-	var fragment=Prefix(IndexCaseString(title),"#");
+	var fragment=Prefix(IndexCaseString(StripHTML(title)),"#");
 	return InnerAHTML(title,page+fragment,attribs,true);
 }
 
