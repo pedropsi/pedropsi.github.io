@@ -8111,7 +8111,7 @@ Format: normal by defaut
 DateString(StringDate("21-03-2021"))
 "Sunday, 21st of March 2021"
 
-accepts date strings diretly
+accepts date strings directly
 DateString("21-03-2021","Normal")
 "Sunday, 21st of March 2021"
 
@@ -8154,8 +8154,9 @@ DatePatterns={
 	"Year":"(\\d\\d\\d\\d)"												//4-digit numbers
 }
 
+DatePatterns["Weekday"]="(?:"+DatePatterns["WeekdayNamed"]+")";
 DatePatterns["Month"]="("+DatePatterns["MonthDigit"]+"|"+DatePatterns["MonthNamed"]+")";
-DatePatterns["Time"]="("+DatePatterns["HourDigit"]+"(?:\:"+DatePatterns["MinSecDigit"]+")+)"; //todo dont repeat more than 2
+DatePatterns["Time"]="((?:"+DatePatterns["HourDigit"]+")(?:\:(?:"+DatePatterns["MinSecDigit"]+"))+)"; //todo dont repeat more than 2
 DatePatterns["DMY"]=DatePatterns["DayDigit"]+DatePatterns["Separator"]+DatePatterns["Month"]+DatePatterns["Separator"]+DatePatterns["Year"]
 
 DateDetectors={
@@ -8176,7 +8177,7 @@ DateDetectors={
 		order:["$3","$2","$1"]
 	},
 	"Timestamp":{
-		pattern:"^"+DatePatterns["WeekdayNamed"]+DatePatterns["Separator"]+DatePatterns["DMY"]+DatePatterns["Separator"]+DatePatterns["Time"]+"$",
+		pattern:"^"+DatePatterns["Weekday"]+DatePatterns["Separator"]+DatePatterns["DMY"]+DatePatterns["Separator"]+DatePatterns["Time"]+"$",
 		order:["$1","$2","$3"]
 	}
 }
