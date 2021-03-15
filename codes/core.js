@@ -3755,6 +3755,16 @@ PageRelative=function(url){
 	return PageProtocol(url)==="";
 }
 
+PageAbsolute=function(url){
+	var url=DefaultURL(url);
+	return "https://"+JoinPath(PageDomain(url),PageRelativePath(url));
+/*
+From local to global, remove search and fragment
+PageAbsolute("file:///D:/Robert/pedropsi.github.io/bonsai.html?W=6&L=h16f1h1f5f2h5f1w9&G=b")
+"https://pedropsi.github.io/bonsai.html"
+*/
+}
+
 PageDomain=function(url){
 	var url=DefaultURL(url);
 	
