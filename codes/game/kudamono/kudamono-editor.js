@@ -1171,10 +1171,13 @@ ExplainerDraw=function(state){
 	}
 }
 
+DifficultyStars=function(difficulty){
+	return difficulty?(Glyph("asterisk-heavy").repeat(difficulty)+" "):"";
+}
 
 MetadataColophon=function(metadata){
 	var number=metadata.number?(Prefix(metadata.number,"#")+" "):"";
-	var difficulty=metadata.difficulty?(Glyph("asterisk-heavy").repeat(metadata.difficulty)+" "):"";
+	var difficulty=DifficultyStars(metadata.difficulty);
 	
 	var title=metadata.title?CapitalCase(metadata.title.replace(/-+/g," ")):"";
 		title=title?(Exfix(title,'"')+" "):"";
@@ -2299,6 +2302,7 @@ SerialImageCard=function(name,opts){
 
 var puzzlePage=UnPosfix(PageShallowPath(),HTMLExtensions);
 
+PuzzlePictures={};
 PuzzlePictureDraw=function(name,puzzle){
 	var target="dynamic-"+KebabCaseString(name);
 	var cla="."+target;
@@ -2335,14 +2339,14 @@ PuzzlePictureDraw=function(name,puzzle){
 	
 
 	HearElement(cla+" canvas",function(){
-		
-		var iCard=ImageCardHTML({
+		var iCard={
 			src:FuseCanvasURI(target),
 			href:Prefix(ParameterString(serialObj),"?"),
 			alt:legend,
 			legend:legend
-		});
-		ReplaceElements(iCard,cla);
+		};
+		PuzzlePictures[name]=Group(iCard,puzzle,metadata);
+		ReplaceElements(ImageCardHTML(iCard),cla);
 	})
 };
 
