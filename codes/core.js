@@ -8595,13 +8595,14 @@ MirrorXY=function(x,min,max){
 	return -(x-xcentre)+xcentre;
 }
 
-RotateXY=function(x,y,xmin,ymin,xmax,ymax,wise){
+RotateXY=function(x,y,xmin,ymin,xmax,ymax,angle){
 	var xdelta=(xmax-xmin)/2;
-	var xcentre=xmax-xdelta;
 	var ydelta=(ymax-ymin)/2;
+	var xcentre=xmax-xdelta;
 	var ycentre=ymax-ydelta;
-	var wise=wise?1:-1;
-	return [-(y-ycentre)*wise+xcentre,(x-xcentre)*(-wise)+ycentre];
+	var x=(x-xcentre);
+	var y=(y-ycentre);
+	return VectorPlus([xcentre,ycentre],[x*Cos(angle)-y*Sin(angle),x*Sin(angle)+y*Cos(angle)]);
 }
 
 RescaleWidthXYer=function(W){
@@ -8633,8 +8634,9 @@ var SVGTransforms={
 	"flip-horizontal":(x,y,vbArray)=>[MirrorXY(x,vbArray[0],vbArray[2]),y],
 	"flip-vertical":(x,y,vbArray)=>[x,MirrorXY(y,vbArray[1],vbArray[3])],
 	"flip-both":(x,y,vbArray)=>[MirrorXY(x,vbArray[0],vbArray[2]),MirrorXY(y,vbArray[1],vbArray[3])],
-	"rotate-90":(x,y,vbArray)=>RotateXY(x,y,vbArray[0],vbArray[1],vbArray[2],vbArray[3],true),
-	"rotate-270":(x,y,vbArray)=>RotateXY(x,y,vbArray[0],vbArray[1],vbArray[2],vbArray[3],false)
+	"rotate-90":(x,y,vbArray)=>RotateXY(x,y,vbArray[0],vbArray[1],vbArray[2],vbArray[3],PI/2),
+	"rotate-180":(x,y,vbArray)=>RotateXY(x,y,vbArray[0],vbArray[1],vbArray[2],vbArray[3],PI),
+	"rotate-270":(x,y,vbArray)=>RotateXY(x,y,vbArray[0],vbArray[1],vbArray[2],vbArray[3],3*PI/2)
 }
 
 SVGPathDirectTransform=function(path,Transform,viewBox){

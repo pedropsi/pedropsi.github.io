@@ -466,6 +466,8 @@ UnFruitTrackStateShapes=function(fruit,track,state){
 ///////////////////////////////////////////////////////////////////////////////
 //Connectables
 
+
+
 PointConnectableAble=function(xy,fruits,state){
 	return PointUnFruited(xy,fruits,state)&&PointUnFruitTracked(xy,fruits,state);
 }
@@ -1953,10 +1955,10 @@ SegmentsShifter=function(v){
 }
 
 
-BoardRotaterHandlerer=function(wise){
+BoardRotaterHandlerer=function(angle){
 	return StateKeyHandlerer({
-		level:level=>TransformLevel(level,PointRotator(TargetState().W,TargetState().H,wise)),
-		segments:segments=>segments.map(seg=>seg.map(PointRotator(TargetState().W,TargetState().H,wise)))
+		level:level=>TransformLevel(level,PointRotator(TargetState().W,TargetState().H,angle)),
+		segments:segments=>segments.map(seg=>seg.map(PointRotator(TargetState().W,TargetState().H,angle)))
 	});
 }
 
@@ -2069,8 +2071,8 @@ var KeyboardActions=function(){return{
 	//"s ctrl":()=>CanvasSave(),
 	"c ctrl":ExportSerial,
 	
-	"r alt"			:BoardRotaterHandlerer(1),
-	"r shift alt"	:BoardRotaterHandlerer(-1),
+	"r alt"			:BoardRotaterHandlerer(PI/2),
+	"r shift alt"	:BoardRotaterHandlerer(-PI/2),
 
 
 	"m ctrl shift":StateKeyHandlerer({monitor:{state:Flipped}}),
@@ -2319,7 +2321,7 @@ PuzzlePictureDraw=function(name,puzzle){
 			main:false
 		},
 		visuals:{solid:true}
-	
+
 	})
 	
 	metadata=ParametersMetadata(serialObj);
