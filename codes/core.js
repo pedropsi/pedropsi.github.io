@@ -778,6 +778,25 @@ Max=ArgumentFlattener(Applier(Math.max));
 Min=ArgumentFlattener(Applier(Math.min));
 Mean=ArgumentFlattener(function(args){return Apply(Plus,args)/args.length})
 
+// Range, in different order
+Range=function(min,max){
+	var r=[];
+	if(min<=max)
+		for(var i=min;i<=max;i++){
+			r.push(i);
+		}
+	else
+		for(var i=min;i>=max;i--){
+			r.push(i);
+		}
+	return r;
+/*
+includes extremes
+Range(3,5)
+[3,4,5]
+*/
+}
+
 
 BiPlus=function(a,b){
 	if(!b)
@@ -7993,17 +8012,17 @@ Month=function(date){
 
 Months=["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-DayNames=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+Weekdays=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
 Shorten3=function(name){
 	return Take(name,3);
 }
 MonthsShort=Months.map(Shorten3).map(LowerCase);
-DayNamesShort=DayNames.map(Shorten3)
+WeekdaysShort=Weekdays.map(Shorten3)
 
 
-DayName=function(n,dayNamesArray){
-	var dayNamesArray=dayNamesArray||DayNames;
+Weekday=function(n,dayNamesArray){
+	var dayNamesArray=dayNamesArray||Weekdays;
 	return dayNamesArray[n];
 }
 
@@ -8029,8 +8048,8 @@ DayST=function(day){
 }
 WeekDay=function(date,dayNamesArray){
 	var date=date||Today();
-	var dayNamesArray=dayNamesArray||DayNames;
-	return DayName(date.getDay(),dayNamesArray);
+	var dayNamesArray=dayNamesArray||Weekdays;
+	return Weekday(date.getDay(),dayNamesArray);
 }
 
 ElapsedDays=function(date1,date2){
@@ -8060,23 +8079,23 @@ YearsString=function(start,end){
 
 
 DateFormats={
-	"Weekday":date=>WeekDay(date,DayNames),
-	"WeekdayShort":date=>WeekDay(date,DayNamesShort),
+	"Weekday":date=>WeekDay(date,Weekdays),
+	"WeekdaysShort":date=>WeekDay(date,WeekdaysShort),
 	"Month":date=>MonthName(Month(date),Months),
-	"MonthShort":date=>MonthName(Month(date),MonthsShort),
+	"MonthsShort":date=>MonthName(Month(date),MonthsShort),
 		
 	"DaySuper":date=>`${Day(date)}<sup>${DayST(Day(date))}</sup>`,
 	"WeekdaySuper":date=>`${DateFormats["Weekday"](date)}, ${DateFormats["DaySuper"](date)}`,
-	"WeekdaySuperShort":date=>`${DateFormats["WeekdayShort"](date)}, ${DateFormats["DaySuper"](date)}`,
+	"WeekdaySuperShort":date=>`${DateFormats["WeekdaysShort"](date)}, ${DateFormats["DaySuper"](date)}`,
 
 	"MonthYear":date=>`${DateFormats["Month"](date)} ${Year(date)}`,
 	
 	"Super":date=>DateFormats["WeekdaySuper"](date)+" of "+DateFormats["MonthYear"](date),
-	"Normal":date=>`${WeekDay(date,DayNames)}, ${Day(date)}${DayST(Day(date))} of ${DateFormats["MonthYear"](date)}`,
-	"Short":date=>`${DateFormats["WeekDayShort"](date)}. ${DateFormats["DaySuper"](date)} of ${DateFormats["MonthYear"](date)}`,
+	"Normal":date=>`${WeekDay(date,Weekdays)}, ${Day(date)}${DayST(Day(date))} of ${DateFormats["MonthYear"](date)}`,
+	"Short":date=>`${DateFormats["WeekdaysShort"](date)}. ${DateFormats["DaySuper"](date)} of ${DateFormats["MonthYear"](date)}`,
 
 
-	"RSS":date=>`${DateFormats["WeekdayShort"](date)}, ${Day(date)} ${DateFormats["MonthShort"]} ${Year(date)}`
+	"RSS":date=>`${DateFormats["WeekdaysShort"](date)}, ${Day(date)} ${DateFormats["MonthsShort"]} ${Year(date)}`
 }
 
 DateString=function(date,format){
@@ -8099,20 +8118,28 @@ DateRSS=function(date){
 	return DateFormats["RSS"](date);
 }
 
+StringsUncapture=function(strings){
+	return strings.map(s=>"(?:"+s+")").join("|");
+}
 
 DatePatterns={
-	"Separator":"[-\\/\\\\\\s\\.]+",							//Includes spaces, /, -
-	"MonthNamed":MonthsShort.map(m=>"(?:"+m+"\\w*)").join("|"), //Named months, with at least 3 letters
-	"MonthDigit":"(?:0?\\d)|(?:10)|(?:11)|(?:12)",				//numbers 1 to 12, with optional zero
-	"DayDigit":"((?:[012]\\d)|(?:30|31))",						//numbers 1 to 31, with optional zero
-	"Year":"(\\d\\d\\d\\d)"										//4-digit numbers
+	"Separator":"[-\\/\\\\\\s\\.\\,]+",									//Includes spaces /,-
+	"WeekdayNamed":StringsUncapture(WeekdaysShort.map(m=>m+"\\w*")),	 	//Named weekdays, with at least 3 letters
+	"MonthNamed":StringsUncapture(MonthsShort.map(m=>m+"\\w*")), 		//Named months, with at least 3 letters
+	"MonthDigit":"(?:0?\\d)|(?:10)|(?:11)|(?:12)",						//numbers 1 to 12, with optional zero
+	"DayDigit":"((?:[012]\\d)|(?:30|31))",								//numbers 1 to 31, with optional zero
+	"HourDigit":StringsUncapture(Range(0,23).map(n=>PadLeft(String(n),"0",2))),	//hour digits
+	"MinSecDigit":StringsUncapture(Range(0,60).map(n=>PadLeft(String(n),"0",2))),//minute or second digits
+	"Year":"(\\d\\d\\d\\d)"												//4-digit numbers
 }
-DatePatterns["Month"]="("+DatePatterns["MonthDigit"]+"|"+DatePatterns["MonthNamed"]+")";
 
+DatePatterns["Month"]="("+DatePatterns["MonthDigit"]+"|"+DatePatterns["MonthNamed"]+")";
+DatePatterns["Time"]="("+DatePatterns["HourDigit"]+"(?:\:"+DatePatterns["MinSecDigit"]+")+)"; //todo dont repeat more than 2
+DatePatterns["DMY"]=DatePatterns["DayDigit"]+DatePatterns["Separator"]+DatePatterns["Month"]+DatePatterns["Separator"]+DatePatterns["Year"]
 
 DateDetectors={
 	"DMY":{
-		pattern:"^"+DatePatterns["DayDigit"]+DatePatterns["Separator"]+DatePatterns["Month"]+DatePatterns["Separator"]+DatePatterns["Year"]+"$",
+		pattern:"^"+DatePatterns["DMY"]+"$",
 		order:["$1","$2","$3"]
 	},
 	"DMY-UnSep":{
@@ -8127,6 +8154,10 @@ DateDetectors={
 		pattern:"^"+DatePatterns["Year"]+"("+DatePatterns["MonthNamed"]+")"+DatePatterns["DayDigit"]+"$",
 		order:["$3","$2","$1"]
 	},
+	"Timestamp":{
+		pattern:"^"+DatePatterns["WeekdayNamed"]+DatePatterns["Separator"]+DatePatterns["DMY"]+DatePatterns["Separator"]+DatePatterns["Time"]+"$",
+		order:["$1","$2","$3"]
+	}
 }
 
 
@@ -8169,33 +8200,20 @@ new Date("2021-03-21")
 robust detection (for known patterns)
 StringDate("21 ///    mArCHes -2021")
 new Date("2021-03-21")
+
+more robustness
+StringDate("21. March 2021")
+new Date("2021-03-21")
+
+ignore time and weekday, for now
+StringDate("Sunday, 21. March 2021, 04:17:01")
+new Date("2021-03-21")
 */
 }
 
 StringDateName=function(string,format){
 	return DateString(StringDate(string),format);
 }
-
-///////////////////////////////////////////////////////////////////////////////
-// Range, in different order
-Range=function(min,max){
-	var r=[];
-	if(min<=max)
-		for(var i=min;i<=max;i++){
-			r.push(i);
-		}
-	else
-		for(var i=min;i>=max;i--){
-			r.push(i);
-		}
-	return r;
-/*
-includes extremes
-Range(3,5)
-[3,4,5]
-*/
-}
-
 
 
 ///////////////////////////////////////////////////////////////////////////////
