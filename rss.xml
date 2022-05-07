@@ -1,0 +1,1903 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" >
+	<channel>
+			
+				
+		<atom:link href="https://pedropsi.github.io/rss.xml" rel="self" type="application/rss+xml" />
+		<title>Creative Archive</title>
+		<link>https://pedropsi.github.io</link>
+		<description>Don't miss out on the Creative Archive!</description>
+		<language>en-US</language> 
+		<docs>https://cyber.harvard.edu/rss/rss.html</docs>
+		<copyright>Pedro 2010-2022</copyright>
+		<image>
+			<link>https://pedropsi.github.io</link>
+			<title>Creative Archive</title>
+			<url>https://pedropsi.github.io/images/logo.svg</url>
+		</image>
+				
+		<item>
+			<title>Square Jam page published!</title>
+			<link>https://pedropsi.github.io/square-jam.html#RSS</link>
+			<guid>https://pedropsi.github.io/square-jam.html#squarejampagepublished-2022-02-22</guid>
+			<pubDate>Tue, 22 Feb 2022 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Square Jam' alt='Divide the grid into square regions of orthogonally connected cells. A number indicates the side length of the square it’s in. Region borders may not form any four-way intersections.' src='https://pedropsi.github.io/images/180/square-jam.png' class='image'/>
+					Divide the grid into square regions of orthogonally connected cells. A number indicates the side length of the square it’s in. Region borders may not form any four-way intersections. Link: Square Jam .
+				]]>
+			</description>
+			<category>Eric Fox</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>numeric</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>Icosahedrons page published!</title>
+			<link>https://pedropsi.github.io/polypedron/icosahedron.html#RSS</link>
+			<guid>https://pedropsi.github.io/polypedron/icosahedron.html#icosahedronspagepublished-2022-02-20</guid>
+			<pubDate>Sun, 20 Feb 2022 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Icosahedrons' alt='Polypedron system' src='https://pedropsi.github.io/images/180/icosahedron.jpg' class='image'/>
+					Polypedron system Link: Icosahedrons .
+				]]>
+			</description>
+			<category>Polypedron</category>
+		<category>Sculpture</category>
+		<category>Geometry</category>
+		</item>
+			
+		
+		<item>
+			<title>Augmented icosahedron page published!</title>
+			<link>https://pedropsi.github.io/polypedron/augmented-icosahedron.html#RSS</link>
+			<guid>https://pedropsi.github.io/polypedron/augmented-icosahedron.html#augmentedicosahedronpagepublished-2022-02-20</guid>
+			<pubDate>Sun, 20 Feb 2022 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Augmented icosahedron' alt='Polypedron system' src='https://pedropsi.github.io/images/180/augmented-icosahedron.jpg' class='image'/>
+					Polypedron system Link: Augmented icosahedron .
+				]]>
+			</description>
+			<category>Polypedron</category>
+		<category>Sculpture</category>
+		<category>Geometry</category>
+		</item>
+			
+		
+		<item>
+			<title>Making Polypedrons page published!</title>
+			<link>https://pedropsi.github.io/polypedron/make.html#RSS</link>
+			<guid>https://pedropsi.github.io/polypedron/make.html#makingpolypedronspagepublished-2022-02-19</guid>
+			<pubDate>Sat, 19 Feb 2022 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Making Polypedrons' alt='The polypedron system - how to make. Polypedron system.' src='https://pedropsi.github.io/images/180/make.jpg' class='image'/>
+					The polypedron system - how to make. Polypedron system. Link: Making Polypedrons .
+				]]>
+			</description>
+			<category>Geometry</category>
+		<category>Guide</category>
+		<category>Polypedron</category>
+		<category>Sculpture</category>
+		</item>
+			
+		
+		<item>
+			<title>All polypedrons by Pedro page published!</title>
+			<link>https://pedropsi.github.io/index.html#RSS</link>
+			<guid>https://pedropsi.github.io/index.html#allpolypedronsbypedropagepublished-2022-02-19</guid>
+			<pubDate>Sat, 19 Feb 2022 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Creative Archive' alt='Creative Archive home page.' src='https://pedropsi.github.io/images/splash.svg' class='image'/>
+					List of all polypedrons made by Pedro . Polypedron system. Link: Creative Archive .
+				]]>
+			</description>
+			<category>Sitemap</category>
+		</item>
+			
+		
+		<item>
+			<title>Projects page published!</title>
+			<link>https://pedropsi.github.io/projects.html#RSS</link>
+			<guid>https://pedropsi.github.io/projects.html#projectspagepublished-2022-01-01</guid>
+			<pubDate>Sat, 1 Jan 2022 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Projects' alt='The main projects' src='https://pedropsi.github.io/images/projects.svg' class='image'/>
+					The main projects Link: Projects .
+				]]>
+			</description>
+			<category>Post</category>
+		</item>
+			
+		
+		<item>
+			<title>Hiking Track page published!</title>
+			<link>https://pedropsi.github.io/hiking-track.html#RSS</link>
+			<guid>https://pedropsi.github.io/hiking-track.html#hikingtrackpagepublished-2021-12-30</guid>
+			<pubDate>Thu, 30 Dec 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Hiking Track' alt='Connect all clues. Numbers indicate outgoing paths (circled) and turns on such paths (uncircled).' src='https://pedropsi.github.io/images/180/hiking-track.png' class='image'/>
+					Connect all clues. Numbers indicate outgoing paths (circled) and turns on such paths (uncircled). Link: Hiking Track .
+				]]>
+			</description>
+			<category>Arvi Teikari</category>
+		<category>Hempuli</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>numeric</category>
+		<category>tree</category>
+		</item>
+			
+		
+		<item>
+			<title>Winter begins</title>
+			<link>https://pedropsi.github.io/index.html#RSS</link>
+			<guid>https://pedropsi.github.io/index.html#winterbegins-2021-12-21</guid>
+			<pubDate>Tue, 21 Dec 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Creative Archive' alt='Creative Archive home page.' src='https://pedropsi.github.io/images/splash.svg' class='image'/>
+					There is now a compact mode available via the / buttons. Table headers and search bars now stick in place. Diverse theme and layout changes all across the site.
+				]]>
+			</description>
+			<category>Sitemap</category>
+		</item>
+			
+		
+		<item>
+			<title>Plot Twist page published!</title>
+			<link>https://pedropsi.github.io/plot-twist.html#RSS</link>
+			<guid>https://pedropsi.github.io/plot-twist.html#plottwistpagepublished-2021-12-18</guid>
+			<pubDate>Sat, 18 Dec 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Plot Twist' alt='Divide the grid into regions, one per clue. Numbers indicate region size (circled) and concave corners (uncircled) from their point of view.' src='https://pedropsi.github.io/images/180/plot-twist.png' class='image'/>
+					Divide the grid into regions, one per clue. Numbers indicate region size (circled) and concave corners (uncircled) from their point of view. Link: Plot Twist .
+				]]>
+			</description>
+			<category>Arvi Teikari</category>
+		<category>Hempuli</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>numeric</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>Diamond Puzzles page published!</title>
+			<link>https://pedropsi.github.io/diamond.html#RSS</link>
+			<guid>https://pedropsi.github.io/diamond.html#diamondpuzzlespagepublished-2021-12-15</guid>
+			<pubDate>Wed, 15 Dec 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Diamond Puzzles' alt='Divide the grid into squares, each containing exactly one diamond.' src='https://pedropsi.github.io/images/180/diamond.png' class='image'/>
+					Divide the grid into squares, each containing exactly one diamond. Link: Diamond Puzzles .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>Divide and Conquer page published!</title>
+			<link>https://pedropsi.github.io/divide-and-conquer.html#RSS</link>
+			<guid>https://pedropsi.github.io/divide-and-conquer.html#divideandconquerpagepublished-2021-12-14</guid>
+			<pubDate>Tue, 14 Dec 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Divide and Conquer' alt='Divide the territory into rectangular land strips of given dimensions. All strips are different, even if mirrored or rotated.' src='https://pedropsi.github.io/images/180/divide-and-conquer.png' class='image'/>
+					Divide the territory into rectangular land strips of given dimensions. All strips are different, even if mirrored or rotated. Link: Divide and Conquer .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>Shape Grid page published!</title>
+			<link>https://pedropsi.github.io/shape-grid.html#RSS</link>
+			<guid>https://pedropsi.github.io/shape-grid.html#shapegridpagepublished-2021-11-28</guid>
+			<pubDate>Sun, 28 Nov 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Shape Grid' alt='Divide the map into shape-shaped shapes.' src='https://pedropsi.github.io/images/180/shape-grid.png' class='image'/>
+					Divide the map into shape-shaped shapes. Link: Shape Grid .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>Different Rectangles page published!</title>
+			<link>https://pedropsi.github.io/different-rectangles.html#RSS</link>
+			<guid>https://pedropsi.github.io/different-rectangles.html#differentrectanglespagepublished-2021-11-27</guid>
+			<pubDate>Sat, 27 Nov 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Different Rectangles' alt='Divide the map different rectangular-shaped regions containing exactly one dot each.' src='https://pedropsi.github.io/images/180/different-rectangles.png' class='image'/>
+					Divide the map different rectangular-shaped regions containing exactly one dot each. Link: Different Rectangles .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>Room Puzzles page published!</title>
+			<link>https://pedropsi.github.io/room.html#RSS</link>
+			<guid>https://pedropsi.github.io/room.html#roompuzzlespagepublished-2021-11-26</guid>
+			<pubDate>Fri, 26 Nov 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Room Puzzles' alt='Divide the map into 3 rooms of equal area. Each number counts additional cells visible in all orthogonal straight lines within its room.' src='https://pedropsi.github.io/images/180/room.png' class='image'/>
+					Divide the map into 3 rooms of equal area. Each number counts additional cells visible in all orthogonal straight lines within its room. Link: Room Puzzles .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>numeric</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>Tet Color Puzzles page published!</title>
+			<link>https://pedropsi.github.io/tet-color.html#RSS</link>
+			<guid>https://pedropsi.github.io/tet-color.html#tetcolorpuzzlespagepublished-2021-11-21</guid>
+			<pubDate>Sun, 21 Nov 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Tet Color Puzzles' alt='Divide the map into regions. On equal colours stand tetrominos of equal shapes, possibly mirrored or rotated.' src='https://pedropsi.github.io/images/180/tet-color.png' class='image'/>
+					Divide the map into regions. On equal colours stand tetrominos of equal shapes, possibly mirrored or rotated. Link: Tet Color Puzzles .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>polyomino</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>Pent Color Puzzles page published!</title>
+			<link>https://pedropsi.github.io/pent-color.html#RSS</link>
+			<guid>https://pedropsi.github.io/pent-color.html#pentcolorpuzzlespagepublished-2021-11-21</guid>
+			<pubDate>Sun, 21 Nov 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Pent Color Puzzles' alt='Divide the map into regions. On equal colours stand pentominos of equal shapes, possibly mirrored or rotated.' src='https://pedropsi.github.io/images/180/pent-color.png' class='image'/>
+					Divide the map into regions. On equal colours stand pentominos of equal shapes, possibly mirrored or rotated. Link: Pent Color Puzzles .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>polyomino</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>Corner Meeting page published!</title>
+			<link>https://pedropsi.github.io/corner-meeting.html#RSS</link>
+			<guid>https://pedropsi.github.io/corner-meeting.html#cornermeetingpagepublished-2021-11-11</guid>
+			<pubDate>Thu, 11 Nov 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Corner Meeting' alt='Divide the map into areas, one per circle. Numbers count right angles in their four immediate corners.' src='https://pedropsi.github.io/images/180/corner-meeting.png' class='image'/>
+					Divide the map into areas, one per circle. Numbers count right angles in their four immediate corners. Link: Corner Meeting .
+				]]>
+			</description>
+			<category>Arvi Teikari</category>
+		<category>Hempuli</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>numeric</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>Deformable Masyu page published!</title>
+			<link>https://pedropsi.github.io/masyu-deformable.html#RSS</link>
+			<guid>https://pedropsi.github.io/masyu-deformable.html#deformablemasyupagepublished-2021-11-10</guid>
+			<pubDate>Wed, 10 Nov 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Deformable Masyu' alt='Draw a non-self-intersecting loop through all pearls: straight through whites, turning at blacks. Gray pearls stand for either.' src='https://pedropsi.github.io/images/180/masyu-deformable.png' class='image'/>
+					Draw a non-self-intersecting loop through all pearls: straight through whites, turning at blacks. Gray pearls stand for either. Link: Deformable Masyu .
+				]]>
+			</description>
+			<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>Serkan Yürekli</category>
+		<category>loop</category>
+		</item>
+			
+		
+		<item>
+			<title>Feather Syntax page published!</title>
+			<link>https://pedropsi.github.io/feather.html#RSS</link>
+			<guid>https://pedropsi.github.io/feather.html#feathersyntaxpagepublished-2021-11-07</guid>
+			<pubDate>Sun, 7 Nov 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Feather Syntax' alt="*Feather* is a lightweight syntax inspired by Markdown, specifically tailored to ºnameº's own productivity." src='https://pedropsi.github.io/images/feather.svg' class='image'/>
+					Feather is a lightweight syntax inspired by Markdown, specifically tailored to Pedro 's own productivity. Link: Feather Syntax .
+				]]>
+			</description>
+			<category>Docs</category>
+		<category>Internal</category>
+		<category>Post</category>
+		<category>Resource</category>
+		<category>Software</category>
+		<category>Syntax</category>
+		</item>
+			
+		
+		<item>
+			<title>Gerrymandering page published!</title>
+			<link>https://pedropsi.github.io/gerrymandering.html#RSS</link>
+			<guid>https://pedropsi.github.io/gerrymandering.html#gerrymanderingpagepublished-2021-11-05</guid>
+			<pubDate>Fri, 5 Nov 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Gerrymandering' alt='Divide the map into regions of area 4. On any given line or column, the number of distinct regions is indicated.' src='https://pedropsi.github.io/images/180/gerrymandering.png' class='image'/>
+					Divide the map into regions of area 4. On any given line or column, the number of distinct regions is indicated. Link: Gerrymandering .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>arrows</category>
+		<category>numeric</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>Colophon page published!</title>
+			<link>https://pedropsi.github.io/colophon.html#RSS</link>
+			<guid>https://pedropsi.github.io/colophon.html#colophonpagepublished-2021-11-03</guid>
+			<pubDate>Wed, 3 Nov 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Colophon' alt='Learn everything about the making of the Creative Archive' src='https://pedropsi.github.io/images/colophon.svg' class='image'/>
+					Learn everything about the making of the Creative Archive Link: Colophon .
+				]]>
+			</description>
+			<category>Internal</category>
+		<category>List</category>
+		<category>Post</category>
+		<category>Software</category>
+		</item>
+			
+		
+		<item>
+			<title>Commercial playtests page published!</title>
+			<link>https://pedropsi.github.io/commercial-playtests.html#RSS</link>
+			<guid>https://pedropsi.github.io/commercial-playtests.html#commercialplaytestspagepublished-2021-11-03</guid>
+			<pubDate>Wed, 3 Nov 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Commercial playtests' alt='Occasionally ºnameº playtested or somehow contributed to commercial games.' src='https://pedropsi.github.io/images/splash.svg' class='image'/>
+					Occasionally Pedro playtested or somehow contributed to commercial games. Link: Commercial playtests .
+				]]>
+			</description>
+			<category>List</category>
+		<category>Post</category>
+		</item>
+			
+		
+		<item>
+			<title>Five and Dime page published!</title>
+			<link>https://pedropsi.github.io/five-and-dime.html#RSS</link>
+			<guid>https://pedropsi.github.io/five-and-dime.html#fiveanddimepagepublished-2021-10-31</guid>
+			<pubDate>Sun, 31 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Five and Dime' alt='Connect all numbers into groups adding to 10, using non-intersecting horizontal and vertical lines.' src='https://pedropsi.github.io/images/180/five-and-dime.png' class='image'/>
+					Connect all numbers into groups adding to 10, using non-intersecting horizontal and vertical lines. Link: Five and Dime .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>sums</category>
+		<category>tree</category>
+		</item>
+			
+		
+		<item>
+			<title>Puzzlescript Games page published!</title>
+			<link>https://pedropsi.github.io/index.html#RSS</link>
+			<guid>https://pedropsi.github.io/index.html#puzzlescriptgamespagepublished-2021-10-30</guid>
+			<pubDate>Sat, 30 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Creative Archive' alt='Creative Archive home page.' src='https://pedropsi.github.io/images/splash.svg' class='image'/>
+					All puzzlescript games made by Pedro . Link: Creative Archive .
+				]]>
+			</description>
+			<category>Sitemap</category>
+		</item>
+			
+		
+		<item>
+			<title>Kudamono Genres Test page published!</title>
+			<link>https://pedropsi.github.io/kudamono-tests.html#RSS</link>
+			<guid>https://pedropsi.github.io/kudamono-tests.html#kudamonogenrestestpagepublished-2021-10-29</guid>
+			<pubDate>Fri, 29 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Kudamono Genres Test' alt='Test all kudamono genres for errors automatically here.' src='https://pedropsi.github.io/images/test.svg' class='image'/>
+					Test all kudamono genres for errors automatically here. Link: Kudamono Genres Test .
+				]]>
+			</description>
+			<category>Paper</category>
+		<category>Sitemap</category>
+		<category>Docs</category>
+		</item>
+			
+		
+		<item>
+			<title>Technical issues</title>
+			<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+			<guid>https://pedropsi.github.io/puzzle-type.html#technicalissues-2021-10-28</guid>
+			<pubDate>Thu, 28 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Puzzle type' alt='A single clue reveals the hidden typing rule . Explore each puzzle to discover its rule. To win, type the clue exactly as shown: every symbol counts !' src='https://pedropsi.github.io/images/180/puzzle-type.gif' class='image'/>
+					Many technical issues that were delaying Puzzle type development were overcome. Various bugfixes, plus level SYM*** was completely animated.
+				]]>
+			</description>
+			<category>Game</category>
+		<category>Inductive</category>
+		<category>Puzzle</category>
+		</item>
+			
+		
+		<item>
+			<title>Refactoring opportunities page published!</title>
+			<link>https://pedropsi.github.io/refactoring.html#RSS</link>
+			<guid>https://pedropsi.github.io/refactoring.html#refactoringopportunitiespagepublished-2021-10-25</guid>
+			<pubDate>Mon, 25 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Refactoring opportunities' alt='Code refactoring opportunities, such as humongous and lonely functions are detected here.' src='https://pedropsi.github.io/images/test.svg' class='image'/>
+					Code refactoring opportunities, such as humongous and lonely functions are detected here. Link: Refactoring opportunities .
+				]]>
+			</description>
+			<category>Docs</category>
+		<category>Internal</category>
+		<category>Sitemap</category>
+		</item>
+			
+		
+		<item>
+			<title>Interactive documentation page published!</title>
+			<link>https://pedropsi.github.io/docs.html#RSS</link>
+			<guid>https://pedropsi.github.io/docs.html#interactivedocumentationpagepublished-2021-10-22</guid>
+			<pubDate>Fri, 22 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Interactive documentation' alt='This page collates all documentation currently available for each function in the Creative Archive, interactively.' src='https://pedropsi.github.io/images/docs.svg' class='image'/>
+					This page collates all documentation currently available for each function in the Creative Archive, interactively. Link: Interactive documentation .
+				]]>
+			</description>
+			<category>Docs</category>
+		<category>Internal</category>
+		<category>Resource</category>
+		<category>Sitemap</category>
+		<category>Software</category>
+		</item>
+			
+		
+		<item>
+			<title>Total Masyu page published!</title>
+			<link>https://pedropsi.github.io/masyu-total.html#RSS</link>
+			<guid>https://pedropsi.github.io/masyu-total.html#totalmasyupagepublished-2021-10-19</guid>
+			<pubDate>Tue, 19 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Total Masyu' alt='Draw a non-self-intersecting loop through all pearls: straight through whites, turning at blacks. Before and/or after every white (and no black) pearl, the loop turns at least once. All possible pearls given.' src='https://pedropsi.github.io/images/180/masyu-total.png' class='image'/>
+					Draw a non-self-intersecting loop through all pearls: straight through whites, turning at blacks. Before and/or after every white (and no black) pearl, the loop turns at least once. All possible pearls given. Link: Total Masyu .
+				]]>
+			</description>
+			<category>Dr. Sudoku</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>Thomas Snyder</category>
+		<category>loop</category>
+		</item>
+			
+		
+		<item>
+			<title>Etymological programming page published!</title>
+			<link>https://pedropsi.github.io/etymological-programming.html#RSS</link>
+			<guid>https://pedropsi.github.io/etymological-programming.html#etymologicalprogrammingpagepublished-2021-10-19</guid>
+			<pubDate>Tue, 19 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Etymological programming' alt='*Etymological programing* is a set of conventions used by ºnameº to use a //couple thousand// different functions |fluently|.' src='https://pedropsi.github.io/images/etymological-programming.svg' class='image'/>
+					Etymological programing is a set of conventions used by Pedro to use a couple thousand different functions fluently . Link: Etymological programming .
+				]]>
+			</description>
+			<category>Docs</category>
+		<category>Internal</category>
+		<category>Post</category>
+		<category>Software</category>
+		<category>Syntax</category>
+		</item>
+			
+		
+		<item>
+			<title>Corner Packing page published!</title>
+			<link>https://pedropsi.github.io/corner-packing.html#RSS</link>
+			<guid>https://pedropsi.github.io/corner-packing.html#cornerpackingpagepublished-2021-10-18</guid>
+			<pubDate>Mon, 18 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Corner Packing' alt='Draw a path turning at crosses but not adjacently, avoiding blockers, such that each number counts corners on itself and all orthogonally adjacent squares.' src='https://pedropsi.github.io/images/180/corner-packing.png' class='image'/>
+					Draw a path that turns according to the numbers and symbols at and around it. Link: Corner Packing .
+				]]>
+			</description>
+			<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>Stingby12</category>
+		<category>numeric</category>
+		<category>path</category>
+		</item>
+			
+		
+		<item>
+			<title>Vegetable Garden page published!</title>
+			<link>https://pedropsi.github.io/vegetable-garden.html#RSS</link>
+			<guid>https://pedropsi.github.io/vegetable-garden.html#vegetablegardenpagepublished-2021-10-15</guid>
+			<pubDate>Fri, 15 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Vegetable Garden' alt='Divide the land into rectangular plots, each of a single vegetable type. Plots of the same type are equal in area, and different from any other type.' src='https://pedropsi.github.io/images/180/vegetable-garden.png' class='image'/>
+					Divide the land into rectangular plots, each of a single vegetable type. Plots of the same type are equal in area, and different from any other type. Link: Vegetable Garden .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>L o h k o u s page published!</title>
+			<link>https://pedropsi.github.io/lohkouses.html#RSS</link>
+			<guid>https://pedropsi.github.io/lohkouses.html#lohkouspagepublished-2021-10-14</guid>
+			<pubDate>Thu, 14 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='L o h k o u s' alt='Divide the map into rooms. All possible lengths of any straight line of cells within the room are given by the numbers within the room.' src='https://pedropsi.github.io/images/180/lohkouses.png' class='image'/>
+					Divide the map into rooms. All possible lengths of any straight line of cells within the room are given by the numbers within the room. This is a lohkous variant. Link: L o h k o u s .
+				]]>
+			</description>
+			<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>dohz</category>
+		<category>numeric</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>Boomerangs page published!</title>
+			<link>https://pedropsi.github.io/boomerangs.html#RSS</link>
+			<guid>https://pedropsi.github.io/boomerangs.html#boomerangspagepublished-2021-10-13</guid>
+			<pubDate>Wed, 13 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Boomerangs' alt='Fill the board with non-overlapping boomerangs, one per circle.' src='https://pedropsi.github.io/images/180/boomerangs.png' class='image'/>
+					Fill the board with non-overlapping boomerangs, one per circle. Link: Boomerangs .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>stick</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>The Great Divide page published!</title>
+			<link>https://pedropsi.github.io/great-divide.html#RSS</link>
+			<guid>https://pedropsi.github.io/great-divide.html#thegreatdividepagepublished-2021-10-12</guid>
+			<pubDate>Tue, 12 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='The Great Divide' alt='Divide the map orthogonally into equal regions, possibly rotated or mirrored.' src='https://pedropsi.github.io/images/180/great-divide.png' class='image'/>
+					Divide the map orthogonally into equal regions, possibly rotated or mirrored. Link: The Great Divide .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>Crowded Intersections page published!</title>
+			<link>https://pedropsi.github.io/crowded-intersections.html#RSS</link>
+			<guid>https://pedropsi.github.io/crowded-intersections.html#crowdedintersectionspagepublished-2021-10-11</guid>
+			<pubDate>Mon, 11 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Crowded Intersections' alt='Divide the map into regions of area 4 such that at every dot three regions meet. No four regions meet at a point.' src='https://pedropsi.github.io/images/180/crowded-intersections.png' class='image'/>
+					Divide the map into regions of area 4 such that at every dot three regions meet. No four regions meet at a point. Link: Crowded Intersections .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>territory</category>
+		</item>
+			
+		
+		<item>
+			<title>Chainlink page published!</title>
+			<link>https://pedropsi.github.io/chainlink.html#RSS</link>
+			<guid>https://pedropsi.github.io/chainlink.html#chainlinkpagepublished-2021-10-08</guid>
+			<pubDate>Fri, 8 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Chainlink' alt='Draw rectangular links, all chained together - each link has at least one corner within one other, but not all. Numbers count free contiguous spaces: white inside at least one link, black outside.' src='https://pedropsi.github.io/images/180/chainlink.png' class='image'/>
+					Draw rectangular chained links along the grid dots, sharing no corners nor surrounding another link. Numbers count free contiguous spaces: white inside one link, black outside any. Link: Chainlink .
+				]]>
+			</description>
+			<category>Arvi Teikari</category>
+		<category>Hempuli</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		<category>numeric</category>
+		<category>polygonal</category>
+		</item>
+			
+		
+		<item>
+			<title>Hamiltonian Mazes page published!</title>
+			<link>https://pedropsi.github.io/hamiltonian-mazes.html#RSS</link>
+			<guid>https://pedropsi.github.io/hamiltonian-mazes.html#hamiltonianmazespagepublished-2021-10-07</guid>
+			<pubDate>Thu, 7 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Hamiltonian Mazes' alt='Draw a loop through the maze visiting every circle exactly once.' src='https://pedropsi.github.io/images/180/hamiltonian-mazes.png' class='image'/>
+					Draw a loop through the maze visiting every circle exactly once. Link: Hamiltonian Mazes .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		</item>
+			
+		
+		<item>
+			<title>Rectangle Puzzles page published!</title>
+			<link>https://pedropsi.github.io/rectangle.html#RSS</link>
+			<guid>https://pedropsi.github.io/rectangle.html#rectanglepuzzlespagepublished-2021-10-06</guid>
+			<pubDate>Wed, 6 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Rectangle Puzzles' alt='Draw rectangles along the grid, sharing no vertices nor edge segments, but possibly intersecting. Numbers sum the areas of all rectangles containing them.' src='https://pedropsi.github.io/images/180/rectangle.png' class='image'/>
+					Draw rectangles along the grid, sharing no vertices nor edge segments, but possibly intersecting. Numbers sum the areas of all rectangles containing them. Link: Rectangle Puzzles .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		<category>numeric</category>
+		<category>polygonal</category>
+		</item>
+			
+		
+		<item>
+			<title>Connect the Dots Puzzles page published!</title>
+			<link>https://pedropsi.github.io/dot-square.html#RSS</link>
+			<guid>https://pedropsi.github.io/dot-square.html#connectthedotspuzzlespagepublished-2021-10-05</guid>
+			<pubDate>Tue, 5 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Connect the Dots Puzzles' alt='Cover every dot with exactly one vertex of a square. All vertices are at dots. Square edges may intersect and overlap.' src='https://pedropsi.github.io/images/180/dot-square.png' class='image'/>
+					Cover every dot with exactly one vertex of a square. All vertices are at dots. Square edges may intersect and overlap. Link: Connect the Dots Puzzles .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		<category>polygonal</category>
+		</item>
+			
+		
+		<item>
+			<title>Timber! page published!</title>
+			<link>https://pedropsi.github.io/timber.html#RSS</link>
+			<guid>https://pedropsi.github.io/timber.html#timberpagepublished-2021-10-04</guid>
+			<pubDate>Mon, 4 Oct 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Timber!' alt='As a lumberjack, fell all trees and leave a unique treeless path from start to finish. Trees fall orthogonally into one empty square.' src='https://pedropsi.github.io/images/180/timber.png' class='image'/>
+					As a lumberjack, fell all trees and leave a unique treeless path from start to finish. Trees fall orthogonally into one empty square.. Link: Timber! .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>stick</category>
+		</item>
+			
+		
+		<item>
+			<title>Dot Triangle Puzzles page published!</title>
+			<link>https://pedropsi.github.io/dot-triangle.html#RSS</link>
+			<guid>https://pedropsi.github.io/dot-triangle.html#dottrianglepuzzlespagepublished-2021-09-30</guid>
+			<pubDate>Thu, 30 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Dot Triangle Puzzles' alt='Gather every three points as vertices of right triangles, one of whose legs is twice the length of the other.' src='https://pedropsi.github.io/images/180/dot-triangle.png' class='image'/>
+					Gather every three points as vertices of right triangles, one of whose legs is twice the length of the other Link: Dot Triangle Puzzles .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		<category>polygonal</category>
+		</item>
+			
+		
+		<item>
+			<title>Try Angles page published!</title>
+			<link>https://pedropsi.github.io/try-angles.html#RSS</link>
+			<guid>https://pedropsi.github.io/try-angles.html#tryanglespagepublished-2021-09-29</guid>
+			<pubDate>Wed, 29 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Try Angles' alt='Join every three points into non-overlapping, non 180 angle trios, each composed of two equal length segments.' src='https://pedropsi.github.io/images/180/try-angles.png' class='image'/>
+					Join every three points into non-overlapping, non 180 angle trios, each composed of two equal length segments Link: Try Angles .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>polygonal</category>
+		<category>stick</category>
+		</item>
+			
+		
+		<item>
+			<title>House Puzzles page published!</title>
+			<link>https://pedropsi.github.io/house.html#RSS</link>
+			<guid>https://pedropsi.github.io/house.html#housepuzzlespagepublished-2021-09-28</guid>
+			<pubDate>Tue, 28 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='House Puzzles' alt='Connect all houses in pairs using only two different distances' src='https://pedropsi.github.io/images/180/house.png' class='image'/>
+					Connect all houses in pairs using only two different distances. Link: House Puzzles .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>polygonal</category>
+		<category>stick</category>
+		</item>
+			
+		
+		<item>
+			<title>Non-crossing Puzzles page published!</title>
+			<link>https://pedropsi.github.io/non-crossing.html#RSS</link>
+			<guid>https://pedropsi.github.io/non-crossing.html#noncrossingpuzzlespagepublished-2021-09-27</guid>
+			<pubDate>Mon, 27 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Non-crossing Puzzles' alt='Draw a polygonal non-self-intersecting path visiting all dots exactly once such that each number is at the nth visited dot.' src='https://pedropsi.github.io/images/180/non-crossing.png' class='image'/>
+					Draw a polygonal non-self-intersecting path visiting all dots exactly once such that each number is at the nth visited dot. Link: Non-crossing Puzzles .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>numeric</category>
+		<category>path</category>
+		<category>polygonal</category>
+		</item>
+			
+		
+		<item>
+			<title>Zig Zag page published!</title>
+			<link>https://pedropsi.github.io/zig-zag.html#RSS</link>
+			<guid>https://pedropsi.github.io/zig-zag.html#zigzagpagepublished-2021-09-26</guid>
+			<pubDate>Sun, 26 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Zig Zag' alt='From the start, draw a non-self-intersecting path joining all circles with straight lines, but not horizontally, vertically, nor 45-diagonally.' src='https://pedropsi.github.io/images/180/zig-zag.png' class='image'/>
+					From the start, draw a non-self-intersecting polygonal path joining all circles, but not horizontally, vertically, nor 45-diagonally. Link: Zig Zag .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>path</category>
+		<category>polygonal</category>
+		</item>
+			
+		
+		<item>
+			<title>Mountain Climber page published!</title>
+			<link>https://pedropsi.github.io/mountain-climber.html#RSS</link>
+			<guid>https://pedropsi.github.io/mountain-climber.html#mountainclimberpagepublished-2021-09-25</guid>
+			<pubDate>Sat, 25 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Mountain Climber' alt='Plan a climbing route from the lowest to the highest flag going through all of them once, after drawing the mountain contours.' src='https://pedropsi.github.io/images/180/mountain-climber.png' class='image'/>
+					Plan a climbing route from the lowest to the highest flag going through all of them once, after drawing the mountain contours. Link: Mountain Climber .
+				]]>
+			</description>
+			<category>Arvi Teikari</category>
+		<category>Hempuli</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		</item>
+			
+		
+		<item>
+			<title>Unparalleled page published!</title>
+			<link>https://pedropsi.github.io/unparalleled.html#RSS</link>
+			<guid>https://pedropsi.github.io/unparalleled.html#unparalleledpagepublished-2021-09-24</guid>
+			<pubDate>Fri, 24 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Unparalleled' alt='Draw a loop going through every point and none of the crosses, such that no two segments are parallel.' src='https://pedropsi.github.io/images/180/unparalleled.png' class='image'/>
+					Draw a polygonal loop through all points and no crosses such that no two segments are parallel. Link: Unparalleled .
+				]]>
+			</description>
+			<category>Martin Ender</category>
+		<category>Menderbug</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		<category>polygonal</category>
+		</item>
+			
+		
+		<item>
+			<title>Tricky Tour page published!</title>
+			<link>https://pedropsi.github.io/tricky-tour.html#RSS</link>
+			<guid>https://pedropsi.github.io/tricky-tour.html#trickytourpagepublished-2021-09-23</guid>
+			<pubDate>Thu, 23 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Tricky Tour' alt='Connect all dots in a loop so that each line segment has different length. The loop may cross itself outside any dot.' src='https://pedropsi.github.io/images/180/tricky-tour.png' class='image'/>
+					Connect the dots in a loop so that each line segment has different length. The loop may cross itself without revisiting a dot. Link: Tricky Tour .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		<category>polygonal</category>
+		</item>
+			
+		
+		<item>
+			<title>Hamiltonian plumbers page published!</title>
+			<link>https://pedropsi.github.io/hamiltonian-plumbers.html#RSS</link>
+			<guid>https://pedropsi.github.io/hamiltonian-plumbers.html#hamiltonianplumberspagepublished-2021-09-22</guid>
+			<pubDate>Wed, 22 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Hamiltonian Plumbers' alt='Fit the entire floor with pipes, connecting same-coloured ends.' src='https://pedropsi.github.io/images/180/hamiltonian-plumbers.png' class='image'/>
+					Connect same-coloured ends through an expensive network of hamiltonian pipes, covering the entire floor. Link: Hamiltonian plumbers .
+				]]>
+			</description>
+			<category>Paper</category>
+		<category>Ported</category>
+		<category>Portponky</category>
+		<category>Puzzle</category>
+		<category>tree</category>
+		</item>
+			
+		
+		<item>
+			<title>OX Loop (ループ) page published!</title>
+			<link>https://pedropsi.github.io/ox-loop.html#RSS</link>
+			<guid>https://pedropsi.github.io/ox-loop.html#oxloopループpagepublished-2021-09-17</guid>
+			<pubDate>Fri, 17 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='OX Loop (ループ)' alt='Draw a loop through all Os and none of the Xs.' src='https://pedropsi.github.io/images/180/ox-loop.png' class='image'/>
+					Draw a loop through all Os and none of the Xs. Link: OX Loop (ループ) .
+				]]>
+			</description>
+			<category>Naoki Inaba</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		</item>
+			
+		
+		<item>
+			<title>Chess Snake page published!</title>
+			<link>https://pedropsi.github.io/chess-snake.html#RSS</link>
+			<guid>https://pedropsi.github.io/chess-snake.html#chesssnakepagepublished-2021-09-16</guid>
+			<pubDate>Thu, 16 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Chess Snake' alt='Draw a snake from start to finish; such that each chess piece attacks an equal number of squares under the snake. The snake cannot touch itself, even diagonally.' src='https://pedropsi.github.io/images/180/chess-snake.png' class='image'/>
+					Draw a snake from start to finish; not touching itself even diagonally; such that each chess piece attacks an equal number of squares under it. Link: Chess Snake .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>chess</category>
+		<category>path</category>
+		<category>snake</category>
+		</item>
+			
+		
+		<item>
+			<title>Legalese page published!</title>
+			<link>https://pedropsi.github.io/legalese.html#RSS</link>
+			<guid>https://pedropsi.github.io/legalese.html#legalesepagepublished-2021-09-11</guid>
+			<pubDate>Sat, 11 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Legalese' alt='Draw a valid signature path, starting and ending at a dark dot and going through all white dots.' src='https://pedropsi.github.io/images/180/legalese.png' class='image'/>
+					Draw a signature, from start to finish, through all white dots. Link: Legalese .
+				]]>
+			</description>
+			<category>135</category>
+		<category>Arvi Teikari</category>
+		<category>Hempuli</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>path</category>
+		</item>
+			
+		
+		<item>
+			<title>Oddstitch page published!</title>
+			<link>https://pedropsi.github.io/oddstitch.html#RSS</link>
+			<guid>https://pedropsi.github.io/oddstitch.html#oddstitchpagepublished-2021-09-10</guid>
+			<pubDate>Fri, 10 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Oddstitch' alt='Draw two diagonally moving loops crossing in particular regions and touching particular squares a certain number of times.' src='https://pedropsi.github.io/images/180/oddstitch.png' class='image'/>
+					Draw two diagonally moving loops crossing in particular regions and touching particular squares a certain number of times. Link: Oddstitch .
+				]]>
+			</description>
+			<category>Arvi Teikari</category>
+		<category>Hempuli</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>arrows</category>
+		<category>knight</category>
+		<category>loop</category>
+		<category>numeric</category>
+		</item>
+			
+		
+		<item>
+			<title>Chess Path page published!</title>
+			<link>https://pedropsi.github.io/chess-path.html#RSS</link>
+			<guid>https://pedropsi.github.io/chess-path.html#chesspathpagepublished-2021-09-09</guid>
+			<pubDate>Thu, 9 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Chess Path' alt='Draw a path from start to finish, such that each chess piece attacks an equal number of squares under it.' src='https://pedropsi.github.io/images/180/chess-path.png' class='image'/>
+					Draw a path from start to finish, such that each chess piece attacks an equal number of squares under it. A work by Pedro . Link: Chess Path .
+				]]>
+			</description>
+			<category>Original</category>
+		<category>Paper</category>
+		<category>Puzzle</category>
+		<category>chess</category>
+		<category>path</category>
+		</item>
+			
+		
+		<item>
+			<title>Pathfinder page published!</title>
+			<link>https://pedropsi.github.io/pathfinder.html#RSS</link>
+			<guid>https://pedropsi.github.io/pathfinder.html#pathfinderpagepublished-2021-09-08</guid>
+			<pubDate>Wed, 8 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Pathfinder' alt='Draw a path from start to finish satisfying the number of points on each row and column; straight lines are worth 1 and corners 2 points.' src='https://pedropsi.github.io/images/180/pathfinder.png' class='image'/>
+					Draw a path from start to finish satisfying the number of points on each row and column; straight lines are worth 1 and corners 2 points. Link: Pathfinder .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>arrows</category>
+		<category>numeric</category>
+		<category>path</category>
+		</item>
+			
+		
+		<item>
+			<title>A streak of paper puzzles</title>
+			<link>https://pedropsi.github.io/kudamono-editor.html#RSS</link>
+			<guid>https://pedropsi.github.io/kudamono-editor.html#astreakofpaperpuzzles-2021-09-07</guid>
+			<pubDate>Tue, 7 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Kudamono Editor' alt='With the Kudamono Editor you can easily make paper puzzles and share them with your friends.' src='https://pedropsi.github.io/images/180/kudamono-editor.png' class='image'/>
+					Many paper puzzles have been ported, most from Erich Friedman, who also made a batch of Kudamono Date Puzzles. Check them out! Work on Puzzle type continues.
+				]]>
+			</description>
+			<category>Paper</category>
+		<category>Resource</category>
+		<category>Software</category>
+		</item>
+			
+		
+		<item>
+			<title>Unequaloop page published!</title>
+			<link>https://pedropsi.github.io/unequaloop.html#RSS</link>
+			<guid>https://pedropsi.github.io/unequaloop.html#unequalooppagepublished-2021-09-07</guid>
+			<pubDate>Tue, 7 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Unequaloop' alt='Draw a loop through all circles; no two segments of equal length may be consecutive nor touch a circle.' src='https://pedropsi.github.io/images/180/unequaloop.png' class='image'/>
+					Draw a loop through all circles without two consecutive segments of the same length; no more than one segment of any given length touches any circle. Link: Unequaloop .
+				]]>
+			</description>
+			<category>CHz</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		</item>
+			
+		
+		<item>
+			<title>Straight Mazes page published!</title>
+			<link>https://pedropsi.github.io/straight-mazes.html#RSS</link>
+			<guid>https://pedropsi.github.io/straight-mazes.html#straightmazespagepublished-2021-09-06</guid>
+			<pubDate>Mon, 6 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Straight Mazes' alt='Draw a path from start to finish; each number counts straight segments through itself and all orthogonally adjacent squares.' src='https://pedropsi.github.io/images/180/straight-mazes.png' class='image'/>
+					Draw a path from start to finish; each number counts straight segments through itself and all orthogonally adjacent squares. Link: Straight Mazes .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>numeric</category>
+		<category>path</category>
+		</item>
+			
+		
+		<item>
+			<title>Corner Mazes page published!</title>
+			<link>https://pedropsi.github.io/corner-mazes.html#RSS</link>
+			<guid>https://pedropsi.github.io/corner-mazes.html#cornermazespagepublished-2021-09-05</guid>
+			<pubDate>Sun, 5 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Corner Mazes' alt='Draw a path from start to finish; each number counts corners on itself and all orthogonally adjacent squares.' src='https://pedropsi.github.io/images/180/corner-mazes.png' class='image'/>
+					Draw a path from start to finish; each number counts corners on itself and all orthogonally adjacent squares. Link: Corner Mazes .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>numeric</category>
+		<category>path</category>
+		</item>
+			
+		
+		<item>
+			<title>Loop Count page published!</title>
+			<link>https://pedropsi.github.io/loop-count.html#RSS</link>
+			<guid>https://pedropsi.github.io/loop-count.html#loopcountpagepublished-2021-09-01</guid>
+			<pubDate>Wed, 1 Sep 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Loop Count Puzzles' alt='Draw a loop passing orthogonally through each square exactly once; the total length of all segments passing through a number adds up to it.' src='https://pedropsi.github.io/images/180/loop-count.png' class='image'/>
+					Fill the entire board with a loop; each number counts the total length of all loop segments passing through it. Link: Loop Count .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		<category>numeric</category>
+		</item>
+			
+		
+		<item>
+			<title>Field Trespass page published!</title>
+			<link>https://pedropsi.github.io/field-trespass.html#RSS</link>
+			<guid>https://pedropsi.github.io/field-trespass.html#fieldtrespasspagepublished-2021-08-31</guid>
+			<pubDate>Tue, 31 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Field Trespass' alt='Encircle all letters of each type inside a different loop; composed of straight lines or 45 degree turns.' src='https://pedropsi.github.io/images/180/field-trespass.png' class='image'/>
+					Encircle all letters of each type inside a different loop; composed of straight lines or 45 degree turns. Link: Field Trespass .
+				]]>
+			</description>
+			<category>135</category>
+		<category>Arvi Teikari</category>
+		<category>Hempuli</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		</item>
+			
+		
+		<item>
+			<title>Knight Tour page published!</title>
+			<link>https://pedropsi.github.io/knight-tour.html#RSS</link>
+			<guid>https://pedropsi.github.io/knight-tour.html#knighttourpagepublished-2021-08-30</guid>
+			<pubDate>Mon, 30 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Knight Tour' alt="Draw a closed loop whose edges follow knight's move directions; there are as many green squares in, on and out of the loop." src='https://pedropsi.github.io/images/180/knight-tour.png' class='image'/>
+					Draw a closed loop whose edges follow knight moves; there are as many green squares in, on and out of the loop. Link: Knight Tour .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>knight</category>
+		<category>loop</category>
+		</item>
+			
+		
+		<item>
+			<title>One Good Turn Deserves Another page published!</title>
+			<link>https://pedropsi.github.io/one-good-turn-deserves-another.html#RSS</link>
+			<guid>https://pedropsi.github.io/one-good-turn-deserves-another.html#onegoodturndeservesanotherpagepublished-2021-08-29</guid>
+			<pubDate>Sun, 29 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='One Good Turn Deserves Another' alt='Draw a path from start to finish through all squares, going straight or turning 90 degrees at shaded squares; and 45 or 135 degrees at white squares.' src='https://pedropsi.github.io/images/180/one-good-turn-deserves-another.png' class='image'/>
+					Draw a path from start to finish through all squares, turning 45 or 135 degrees at white squares going straight or turning 90 degrees at shaded squares. Link: One Good Turn Deserves Another .
+				]]>
+			</description>
+			<category>135</category>
+		<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>path</category>
+		</item>
+			
+		
+		<item>
+			<title>Color Mazes page published!</title>
+			<link>https://pedropsi.github.io/color-mazes.html#RSS</link>
+			<guid>https://pedropsi.github.io/color-mazes.html#colormazespagepublished-2021-08-28</guid>
+			<pubDate>Sat, 28 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Color Mazes' alt='Draw a path from start to finish crossing an equal number of squares of each color, bar white.' src='https://pedropsi.github.io/images/180/color-mazes.png' class='image'/>
+					Draw a path from start to finish stepping over an equal number of squares of every colour. Link: Color Mazes .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>path</category>
+		</item>
+			
+		
+		<item>
+			<title>Unequal Length Mazes page published!</title>
+			<link>https://pedropsi.github.io/unequal-length-mazes.html#RSS</link>
+			<guid>https://pedropsi.github.io/unequal-length-mazes.html#unequallengthmazespagepublished-2021-08-27</guid>
+			<pubDate>Fri, 27 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Unequal Length Mazes' alt='Draw a path from start to finish without two consecutive segments of the same length.' src='https://pedropsi.github.io/images/180/unequal-length-mazes.png' class='image'/>
+					Draw a path from start to finish without two consecutive segments of the same length. Link: Unequal Length Mazes .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>path</category>
+		</item>
+			
+		
+		<item>
+			<title>Palindrome Path page published!</title>
+			<link>https://pedropsi.github.io/palindrome-path.html#RSS</link>
+			<guid>https://pedropsi.github.io/palindrome-path.html#palindromepathpagepublished-2021-08-26</guid>
+			<pubDate>Thu, 26 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Palindrome Path' alt='Draw a path from start to finish, passing through each white square exactly once, such that the sequence of lengths of each straight segment forms a palindrome.' src='https://pedropsi.github.io/images/180/palindrome-path.png' class='image'/>
+					Draw a palindromic path, from start to finish, passing through each white square exactly once, such that the sequence of lengths of each straight segment forms a palindrome. Link: Palindrome Path .
+				]]>
+			</description>
+			<category>135</category>
+		<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>path</category>
+		</item>
+			
+		
+		<item>
+			<title>One of Each page published!</title>
+			<link>https://pedropsi.github.io/one-of-each.html#RSS</link>
+			<guid>https://pedropsi.github.io/one-of-each.html#oneofeachpagepublished-2021-08-25</guid>
+			<pubDate>Wed, 25 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='One of Each' alt='Draw a non-self-intersecting loop containing exactly one number of each.' src='https://pedropsi.github.io/images/180/one-of-each.png' class='image'/>
+					Loop once through a set of different numbers. Link: One of Each .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		<category>numeric</category>
+		</item>
+			
+		
+		<item>
+			<title>Following Suit page published!</title>
+			<link>https://pedropsi.github.io/following-suit.html#RSS</link>
+			<guid>https://pedropsi.github.io/following-suit.html#followingsuitpagepublished-2021-08-24</guid>
+			<pubDate>Tue, 24 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Following Suit' alt='Loop through the entire board without ever going through 4 different consecutive suits.' src='https://pedropsi.github.io/images/180/following-suit.png' class='image'/>
+					Loop once through all squares, without consecutively passing through 4 different suits. Link: Following Suit .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		</item>
+			
+		
+		<item>
+			<title>Jump Rope page published!</title>
+			<link>https://pedropsi.github.io/jump-rope.html#RSS</link>
+			<guid>https://pedropsi.github.io/jump-rope.html#jumpropepagepublished-2021-08-23</guid>
+			<pubDate>Mon, 23 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Jump Rope' alt='Loop once through all squares, my moving like a chess knight or by jumping orthogonally over one square.' src='https://pedropsi.github.io/images/180/jump-rope.png' class='image'/>
+					Loop once through all squares, my moving like a chess knight or by jumping orthogonally over one square. Link: Jump Rope .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>knight</category>
+		<category>loop</category>
+		</item>
+			
+		
+		<item>
+			<title>2-3-Mazes page published!</title>
+			<link>https://pedropsi.github.io/2-3-mazes.html#RSS</link>
+			<guid>https://pedropsi.github.io/2-3-mazes.html#23mazespagepublished-2021-08-22</guid>
+			<pubDate>Sun, 22 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='2-3 Mazes' alt='From start to finish, jump either 3 spaces orthogonally or 2 spaces diagonally, without hopping into water.' src='https://pedropsi.github.io/images/180/2-3-mazes.png' class='image'/>
+					Hop 2 diagonally or 3 orthogonally from start to finish without falling into water. Link: 2-3-Mazes .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>path</category>
+		</item>
+			
+		
+		<item>
+			<title>Line Segment page published!</title>
+			<link>https://pedropsi.github.io/line-segment.html#RSS</link>
+			<guid>https://pedropsi.github.io/line-segment.html#linesegmentpagepublished-2021-08-21</guid>
+			<pubDate>Sat, 21 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Line Segment' alt='Fill the board with horizontal (H), vertical (V) or diagonal (D) segments touching 3 or 4 square centres; some orientations are given.' src='https://pedropsi.github.io/images/180/line-segment.png' class='image'/>
+					Fill the board with short straight segments. Link: Line Segment .
+				]]>
+			</description>
+			<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>stick</category>
+		</item>
+			
+		
+		<item>
+			<title>That's Not Right page published!</title>
+			<link>https://pedropsi.github.io/thats-not-right.html#RSS</link>
+			<guid>https://pedropsi.github.io/thats-not-right.html#thatsnotrightpagepublished-2021-08-20</guid>
+			<pubDate>Fri, 20 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title="That's Not Right" alt='Draw a path from start to finish, passing through each white square exactly once, avoiding black squares and with no right angles.' src='https://pedropsi.github.io/images/180/thats-not-right.png' class='image'/>
+					Draw a path without right angles from start to finish. Link: That's Not Right .
+				]]>
+			</description>
+			<category>135</category>
+		<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>path</category>
+		</item>
+			
+		
+		<item>
+			<title>Slow Turn page published!</title>
+			<link>https://pedropsi.github.io/slow-turn.html#RSS</link>
+			<guid>https://pedropsi.github.io/slow-turn.html#slowturnpagepublished-2021-08-19</guid>
+			<pubDate>Thu, 19 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Slow Turn' alt='Draw a loop through all green squares, no red square, possibly self-intersecting but never revisiting the same square.' src='https://pedropsi.github.io/images/180/slow-turn.png' class='image'/>
+					Loop through all the green squares and none of the red squares. Link: Slow Turn .
+				]]>
+			</description>
+			<category>135</category>
+		<category>Erich Friedman</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		</item>
+			
+		
+		<item>
+			<title>Paper Puzzle Gallery page published!</title>
+			<link>https://pedropsi.github.io/paper-puzzle.html#RSS</link>
+			<guid>https://pedropsi.github.io/paper-puzzle.html#paperpuzzlegallerypagepublished-2021-08-07</guid>
+			<pubDate>Sat, 7 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Paper Puzzle Gallery' alt='Play and make paper puzzles, with the Kudamono Editor.' src='https://pedropsi.github.io/images/180/kudamono-editor.png' class='image'/>
+					Play and make paper puzzles, with the Kudamono Editor. Link: Paper Puzzle Gallery .
+				]]>
+			</description>
+			<category>Paper</category>
+		<category>Puzzle</category>
+		<category>Community</category>
+		</item>
+			
+		
+		<item>
+			<title>Localised error checking + new paper puzzle genre</title>
+			<link>https://pedropsi.github.io/kudamono-editor.html#RSS</link>
+			<guid>https://pedropsi.github.io/kudamono-editor.html#localisederrorcheckingnewpaperpuzzlegenre-2021-08-06</guid>
+			<pubDate>Fri, 6 Aug 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Kudamono Editor' alt='With the Kudamono Editor you can easily make paper puzzles and share them with your friends.' src='https://pedropsi.github.io/images/180/kudamono-editor.png' class='image'/>
+					The Roost genre, by Joseph Mansfield (sftrabbit) was added to the Kudamono Editor . This spurred the addition of new very specific error checking abilities. Finally, all puzzles will be gathered in a single Paper Puzzle Gallery page henceforth. Work on Puzzle type continues.
+				]]>
+			</description>
+			<category>Paper</category>
+		<category>Resource</category>
+		<category>Software</category>
+		</item>
+			
+		
+		<item>
+			<title>Improvements to subway and subwhirl + kudamono editor</title>
+			<link>https://pedropsi.github.io/kudamono-editor.html#RSS</link>
+			<guid>https://pedropsi.github.io/kudamono-editor.html#improvementstosubwayandsubwhirlkudamonoeditor-2021-07-09</guid>
+			<pubDate>Fri, 9 Jul 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Kudamono Editor' alt='With the Kudamono Editor you can easily make paper puzzles and share them with your friends.' src='https://pedropsi.github.io/images/180/kudamono-editor.png' class='image'/>
+					Subway diagonal mid-stations were added. Subwhirl error checking now accepts an interesting loophole. Thanks Dohz Karoo for the suggestions, puzzles and feedback! Sketch mode added to Kudamono Editor , finally. Thanks to Arvi Teikari (Hempuli) for the suggestion, initially for Bonsai Gardening . Diverse performance improvements.
+				]]>
+			</description>
+			<category>Paper</category>
+		<category>Resource</category>
+		<category>Software</category>
+		</item>
+			
+		
+		<item>
+			<title>Roost page published!</title>
+			<link>https://pedropsi.github.io/roost.html#RSS</link>
+			<guid>https://pedropsi.github.io/roost.html#roostpagepublished-2021-06-27</guid>
+			<pubDate>Sun, 27 Jun 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Roost' alt='Fly a path starting and ending at a chosen tree roost, collecting all bugs but avoiding cats.' src='https://pedropsi.github.io/images/180/roost.png' class='image'/>
+					Pass through all bird feeders while avoiding cat claws and trees in your way. Link: Roost .
+				]]>
+			</description>
+			<category>135</category>
+		<category>Joseph Mansfield</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		</item>
+			
+		
+		<item>
+			<title>Subwhirl page published!</title>
+			<link>https://pedropsi.github.io/subwhirl.html#RSS</link>
+			<guid>https://pedropsi.github.io/subwhirl.html#subwhirlpagepublished-2021-06-20</guid>
+			<pubDate>Sun, 20 Jun 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Subwhirl' alt='Draw an oriented loop straight through all numbers, each counting the turns until the next number.' src='https://pedropsi.github.io/images/180/subwhirl.png' class='image'/>
+					Draw an oriented loop through all numbers, such that each counts the number of turns until the next consecutive in the loop. A work by Pedro . Link: Subwhirl .
+				]]>
+			</description>
+			<category>135</category>
+		<category>Original</category>
+		<category>Paper</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		<category>numeric</category>
+		</item>
+			
+		
+		<item>
+			<title>Puzzlescript Sounds Catalog (SFX) page published!</title>
+			<link>https://pedropsi.github.io/index.html#RSS</link>
+			<guid>https://pedropsi.github.io/index.html#puzzlescriptsoundscatalogsfxpagepublished-2021-06-12</guid>
+			<pubDate>Sat, 12 Jun 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Creative Archive' alt='Creative Archive home page.' src='https://pedropsi.github.io/images/splash.svg' class='image'/>
+					Quickly find good Puzzlescript sound effects (SFX) with the Puzzlescript Sounds Catalog, or share your best SFX finds with the community! Link: Creative Archive .
+				]]>
+			</description>
+			<category>Sitemap</category>
+		</item>
+			
+		
+		<item>
+			<title>New level, changes</title>
+			<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+			<guid>https://pedropsi.github.io/puzzle-type.html#newlevelchanges-2021-05-23</guid>
+			<pubDate>Sun, 23 May 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Puzzle type' alt='A single clue reveals the hidden typing rule . Explore each puzzle to discover its rule. To win, type the clue exactly as shown: every symbol counts !' src='https://pedropsi.github.io/images/180/puzzle-type.gif' class='image'/>
+					Level MOS** added to Puzzle type , and level DVO * completely replaced by QWE **. The now serves as an entrypoint for the log while language-related levels received a new pictogram: . Other minor interface changes.
+				]]>
+			</description>
+			<category>Game</category>
+		<category>Inductive</category>
+		<category>Puzzle</category>
+		</item>
+			
+		
+		<item>
+			<title>Kudamono Editor page published!</title>
+			<link>https://pedropsi.github.io/kudamono-editor.html#RSS</link>
+			<guid>https://pedropsi.github.io/kudamono-editor.html#kudamonoeditorpagepublished-2021-05-16</guid>
+			<pubDate>Sun, 16 May 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Kudamono Editor' alt='With the Kudamono Editor you can easily make paper puzzles and share them with your friends.' src='https://pedropsi.github.io/images/180/kudamono-editor.png' class='image'/>
+					With the Kudamono Editor you can easily make paper puzzles and share them with your friends. Link: Kudamono Editor .
+				]]>
+			</description>
+			<category>Paper</category>
+		<category>Resource</category>
+		<category>Software</category>
+		</item>
+			
+		
+		<item>
+			<title>Tumbleweed page published!</title>
+			<link>https://pedropsi.github.io/tumbleweed.html#RSS</link>
+			<guid>https://pedropsi.github.io/tumbleweed.html#tumbleweedpagepublished-2021-05-15</guid>
+			<pubDate>Sat, 15 May 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Tumbleweed' alt='Draw a continuous, branching, non-looping tumbleweed connecting all thorny flowers.' src='https://pedropsi.github.io/images/180/tumbleweed.png' class='image'/>
+					Grow a curly tumbleweed and roam free in the desert, blowin' in the wind. A work by Pedro . Link: Tumbleweed .
+				]]>
+			</description>
+			<category>135</category>
+		<category>Original</category>
+		<category>Paper</category>
+		<category>Puzzle</category>
+		<category>tree</category>
+		</item>
+			
+		
+		<item>
+			<title>Gentler learning</title>
+			<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+			<guid>https://pedropsi.github.io/puzzle-type.html#gentlerlearning-2021-05-12</guid>
+			<pubDate>Wed, 12 May 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Puzzle type' alt='A single clue reveals the hidden typing rule . Explore each puzzle to discover its rule. To win, type the clue exactly as shown: every symbol counts !' src='https://pedropsi.github.io/images/180/puzzle-type.gif' class='image'/>
+					Every level Puzzle type now has a small log where players can more easily remember what was learned so far. This feature will be tested in the coming days.
+				]]>
+			</description>
+			<category>Game</category>
+		<category>Inductive</category>
+		<category>Puzzle</category>
+		</item>
+			
+		
+		<item>
+			<title>Subway page published!</title>
+			<link>https://pedropsi.github.io/subway.html#RSS</link>
+			<guid>https://pedropsi.github.io/subway.html#subwaypagepublished-2021-05-08</guid>
+			<pubDate>Sat, 8 May 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Subway' alt='Draw a loop through all stations' src='https://pedropsi.github.io/images/180/subway.png' class='image'/>
+					Subway is a paper puzzle about designing a safe and green subway system. Link: Subway .
+				]]>
+			</description>
+			<category>135</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Portponky</category>
+		<category>Puzzle</category>
+		<category>loop</category>
+		</item>
+			
+		
+		<item>
+			<title>Database update</title>
+			<link>https://pedropsi.github.io/puzzlescript-games-database.html#RSS</link>
+			<guid>https://pedropsi.github.io/puzzlescript-games-database.html#databaseupdate-2021-04-29</guid>
+			<pubDate>Thu, 29 Apr 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Puzzlescript games database' alt='The complete list of all puzzlescript games, good or bad.' src='https://pedropsi.github.io/images/puzzlescript-games-database.svg' class='image'/>
+					There are now +1700 games in the Puzzlescript games database . Speed improvements, spurred by Jack Kutilek , plus a fix to some incorrect game links noticed by Andrea Gilbert . Thanks!
+				]]>
+			</description>
+			<category>Community</category>
+		<category>List</category>
+		<category>Resource</category>
+		</item>
+			
+		
+		<item>
+			<title>Level changes</title>
+			<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+			<guid>https://pedropsi.github.io/puzzle-type.html#levelchanges-2021-03-28</guid>
+			<pubDate>Sun, 28 Mar 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Puzzle type' alt='A single clue reveals the hidden typing rule . Explore each puzzle to discover its rule. To win, type the clue exactly as shown: every symbol counts !' src='https://pedropsi.github.io/images/180/puzzle-type.gif' class='image'/>
+					Puzzle type level LOO** upgraded to MOR **.
+				]]>
+			</description>
+			<category>Game</category>
+		<category>Inductive</category>
+		<category>Puzzle</category>
+		</item>
+			
+		
+		<item>
+			<title>Spring renewal</title>
+			<link>https://pedropsi.github.io/index.html#RSS</link>
+			<guid>https://pedropsi.github.io/index.html#springrenewal-2021-03-27</guid>
+			<pubDate>Sat, 27 Mar 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Creative Archive' alt='Creative Archive home page.' src='https://pedropsi.github.io/images/splash.svg' class='image'/>
+					To mark early spring, the Creative Archive's infrastructure was renewed on several fronts. Some old branches were fused or pruned ( lul for instance), and a small was added to the end of every page. A suite of Automated tests is blossoming, speeding up development. Tags in tables such as those in the Selected Puzzlescript Games 2014-2021 and the Game tools matured and filter those tables.
+				]]>
+			</description>
+			<category>Sitemap</category>
+		</item>
+			
+		
+		<item>
+			<title>Several Fixes</title>
+			<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+			<guid>https://pedropsi.github.io/puzzle-type.html#severalfixes-2021-02-25</guid>
+			<pubDate>Thu, 25 Feb 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Puzzle type' alt='A single clue reveals the hidden typing rule . Explore each puzzle to discover its rule. To win, type the clue exactly as shown: every symbol counts !' src='https://pedropsi.github.io/images/180/puzzle-type.gif' class='image'/>
+					Puzzle type level TOD** was upgraded to JUN **, following encouraging and insightful feedback from Kristian Hedeholm .
+				]]>
+			</description>
+			<category>Game</category>
+		<category>Inductive</category>
+		<category>Puzzle</category>
+		</item>
+			
+		
+		<item>
+			<title>Game Tools reshuffle</title>
+			<link>https://pedropsi.github.io/game-tools.html#RSS</link>
+			<guid>https://pedropsi.github.io/game-tools.html#gametoolsreshuffle-2021-02-11</guid>
+			<pubDate>Thu, 11 Feb 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Game tools' alt='Useful tools to make games, including puzzlescript forks, wrappers and puzzlescript sprite editors.' src='https://pedropsi.github.io/images/game-tools.svg' class='image'/>
+					The list of Game tools was merged and split into smaller thematic lists, as it was becoming a bit too unwieldy.
+				]]>
+			</description>
+			<category>Community</category>
+		<category>List</category>
+		<category>Gamedev</category>
+		<category>Resource</category>
+		</item>
+			
+		
+		<item>
+			<title>Bonsai Gardening page published!</title>
+			<link>https://pedropsi.github.io/bonsai.html#RSS</link>
+			<guid>https://pedropsi.github.io/bonsai.html#bonsaigardeningpagepublished-2021-01-30</guid>
+			<pubDate>Sat, 30 Jan 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Bonsai Gardening' alt='Draw a continuous, vertically grounded path filling the entire board, without two consecutive pieces of the same type.' src='https://pedropsi.github.io/images/180/bonsai.png' class='image'/>
+					Bonsai Gardening is a paper puzzle where you must draw the perfect bonsai. This genre was invented by Lucas (Le Slo) in 2021. Link: Bonsai Gardening .
+				]]>
+			</description>
+			<category>Lucas Le Slo</category>
+		<category>Paper</category>
+		<category>Ported</category>
+		<category>Puzzle</category>
+		<category>tree</category>
+		</item>
+			
+		
+		<item>
+			<title>New level, improvements</title>
+			<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+			<guid>https://pedropsi.github.io/puzzle-type.html#newlevelimprovements-2021-01-22</guid>
+			<pubDate>Fri, 22 Jan 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Puzzle type' alt='A single clue reveals the hidden typing rule . Explore each puzzle to discover its rule. To win, type the clue exactly as shown: every symbol counts !' src='https://pedropsi.github.io/images/180/puzzle-type.gif' class='image'/>
+					Puzzle type received new level: TOD***, standing now comfortably at 40 levels The first level clue changed! Now it's more interesting and a gentler introduction to the game interface and mechanics.
+				]]>
+			</description>
+			<category>Game</category>
+		<category>Inductive</category>
+		<category>Puzzle</category>
+		</item>
+			
+		
+		<item>
+			<title>Kudamono set 3 and editor</title>
+			<link>https://pedropsi.github.io/kudamono.html#RSS</link>
+			<guid>https://pedropsi.github.io/kudamono.html#kudamonoset3andeditor-2021-01-17</guid>
+			<pubDate>Sun, 17 Jan 2021 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Kudamono' alt='Apples sit on mirror or rotationally symmetric paths, possibly looping.' src='https://pedropsi.github.io/images/180/kudamono.png' class='image'/>
+					Dates and Coconuts were the two new fruits added to the Kudamono Paper Puzzle Collection this week. The Roadmap for Kudamono as well as the Design Goals were clarified. The Editor is gaining shape.
+				]]>
+			</description>
+			<category>Original</category>
+		<category>Paper</category>
+		<category>Puzzle</category>
+		<category>tree</category>
+		</item>
+			
+		
+		<item>
+			<title>Kudamono Puzzle updates</title>
+			<link>https://pedropsi.github.io/kudamono.html#RSS</link>
+			<guid>https://pedropsi.github.io/kudamono.html#kudamonopuzzleupdates-2020-12-30</guid>
+			<pubDate>Wed, 30 Dec 2020 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Kudamono' alt='Apples sit on mirror or rotationally symmetric paths, possibly looping.' src='https://pedropsi.github.io/images/180/kudamono.png' class='image'/>
+					A second set of Kudamono fruit puzzles released this week, with a polished issues sheet. A list of Fruit Expansions and Issues under consideration (that emerged at the Thinky Puzzles server ) added to the page, along with a template so you can Make your own Kudamonos!
+				]]>
+			</description>
+			<category>Original</category>
+		<category>Paper</category>
+		<category>Puzzle</category>
+		<category>tree</category>
+		</item>
+			
+		
+		<item>
+			<title>Kudamono Puzzle</title>
+			<link>https://pedropsi.github.io/kudamono.html#RSS</link>
+			<guid>https://pedropsi.github.io/kudamono.html#kudamonopuzzle-2020-12-18</guid>
+			<pubDate>Fri, 18 Dec 2020 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Kudamono' alt='Apples sit on mirror or rotationally symmetric paths, possibly looping.' src='https://pedropsi.github.io/images/180/kudamono.png' class='image'/>
+					Kudamono fruit puzzles released, and polished. Special thanks to dohz for checking the puzzles and Portponky for suggesting the cantaloupe silhouette!
+				]]>
+			</description>
+			<category>Original</category>
+		<category>Paper</category>
+		<category>Puzzle</category>
+		<category>tree</category>
+		</item>
+			
+		
+		<item>
+			<title>Kudamono fruit puzzles page published!</title>
+			<link>https://pedropsi.github.io/kudamono.html#RSS</link>
+			<guid>https://pedropsi.github.io/kudamono.html#kudamonofruitpuzzlespagepublished-2020-12-18</guid>
+			<pubDate>Fri, 18 Dec 2020 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Kudamono' alt='Apples sit on mirror or rotationally symmetric paths, possibly looping.' src='https://pedropsi.github.io/images/180/kudamono.png' class='image'/>
+					Kudamono (fruits) is a paper puzzle, where you draw lines to connect fruits, with different rules for different fruit types. A work by Pedro . Link: Kudamono fruit puzzles .
+				]]>
+			</description>
+			<category>Original</category>
+		<category>Paper</category>
+		<category>Puzzle</category>
+		<category>tree</category>
+		</item>
+			
+		
+		<item>
+			<title>Level updates</title>
+			<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+			<guid>https://pedropsi.github.io/puzzle-type.html#levelupdates-2020-12-13</guid>
+			<pubDate>Sun, 13 Dec 2020 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Puzzle type' alt='A single clue reveals the hidden typing rule . Explore each puzzle to discover its rule. To win, type the clue exactly as shown: every symbol counts !' src='https://pedropsi.github.io/images/180/puzzle-type.gif' class='image'/>
+					Puzzle type levels POL** and WHI ** updated in response to player feedback. Thanks Deusovi Plurmorant !
+				]]>
+			</description>
+			<category>Game</category>
+		<category>Inductive</category>
+		<category>Puzzle</category>
+		</item>
+			
+		
+		<item>
+			<title>New level</title>
+			<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+			<guid>https://pedropsi.github.io/puzzle-type.html#newlevel-2020-11-28</guid>
+			<pubDate>Sat, 28 Nov 2020 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Puzzle type' alt='A single clue reveals the hidden typing rule . Explore each puzzle to discover its rule. To win, type the clue exactly as shown: every symbol counts !' src='https://pedropsi.github.io/images/180/puzzle-type.gif' class='image'/>
+					Puzzle type received new level: POL***.
+				]]>
+			</description>
+			<category>Game</category>
+		<category>Inductive</category>
+		<category>Puzzle</category>
+		</item>
+			
+		
+		<item>
+			<title>New levels + Sound fix</title>
+			<link>https://pedropsi.github.io/puzzle-type.html#RSS</link>
+			<guid>https://pedropsi.github.io/puzzle-type.html#newlevelssoundfix-2020-11-21</guid>
+			<pubDate>Sat, 21 Nov 2020 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Puzzle type' alt='A single clue reveals the hidden typing rule . Explore each puzzle to discover its rule. To win, type the clue exactly as shown: every symbol counts !' src='https://pedropsi.github.io/images/180/puzzle-type.gif' class='image'/>
+					Puzzle type received three new levels: RES** , РУС * and WHI ** (a nice remake of a wrongly discarded level). Fixed a minor sound bug. Other bugfixes. Major update and new trailer planned.
+				]]>
+			</description>
+			<category>Game</category>
+		<category>Inductive</category>
+		<category>Puzzle</category>
+		</item>
+			
+		
+		<item>
+			<title>Starkoban + bugfixes</title>
+			<link>https://pedropsi.github.io/index.html#RSS</link>
+			<guid>https://pedropsi.github.io/index.html#starkobanbugfixes-2020-11-15</guid>
+			<pubDate>Sun, 15 Nov 2020 07:06:05 GMT</pubDate>
+			<description>
+				<![CDATA[
+					<img width='180' height='180' title='Creative Archive' alt='Creative Archive home page.' src='https://pedropsi.github.io/images/splash.svg' class='image'/>
+					Starkoban , a puzzly mix of star battle and sokoban, was released! Controls in the landscape mode are now working correcly in all puzzlescript games. Thanks Cristopher Wells (Toph Wells) !
+				]]>
+			</description>
+			<category>Sitemap</category>
+		</item>
+			
+				
+			
+	</channel>
+</rss>
