@@ -1,0 +1,101 @@
+﻿#ADS MARKETING ETC
+User-agent: AhrefsBot
+User-agent: MJ12bot
+User-agent: AdsBot-Google
+User-Agent: AdsBot-Google-Mobile
+User-agent: Mediapartners-Google
+User-agent: PiplBot
+User-agent: seostats
+User-agent: TechSEO360
+User-agent: facebookexternalhit
+User-agent: magpie-crawler
+User-agent: BLEXBot
+User-agent: SemrushBot
+User-agent: BluechipBacklinks
+User-agent: SentiBot
+#WIKIPEDIA BLACKLIST
+User-agent: UbiCrawler
+User-agent: DOC
+User-agent: Zao
+User-agent: sitecheck.internetseer.com
+User-agent: Zealbot
+User-agent: MSIECrawler
+User-agent: SiteSnagger
+User-agent: WebStripper
+User-agent: WebCopier
+User-agent: Fetch
+User-agent: Offline Explorer
+User-agent: Teleport
+User-agent: TeleportPro
+User-agent: WebZIP
+User-agent: linko
+User-agent: HTTrack
+User-agent: Microsoft.URL.Control
+User-agent: Xenu
+User-agent: larbin
+User-agent: libwww
+User-agent: ZyBORG
+User-agent: Download Ninja
+User-agent: fast
+User-agent: wget
+User-agent: grub-client
+User-agent: k2spider
+User-agent: NPBot
+User-agent: WebReaper
+User-agent: Flamingo_SearchEngine
+User-agent: MauiBot
+#BLOCKED ELSEWHERE PROBABLY MISBEHAVING
+User-agent: EtaoSpider
+User-agent: Xombot
+User-agent: Vegi bot
+User-agent: MauiBot
+User-agent: nsa
+User-agent: 008
+User-agent: voltron
+User-Agent: bender
+User-Agent: Gort
+User-agent: WBSearchBot
+User-agent: bsalsa
+User-agent: GarlikCrawler
+User-agent: wadoo
+Disallow: /
+
+#OK bots
+User-agent: *
+Allow: /data
+Allow: /images
+Allow: /codes/lotus.css
+Allow: /codes/core.js
+Allow: /codes/core
+Disallow: /codes
+Disallow: /hints
+Disallow: /media
+Disallow: /font
+Sitemap: https://pedropsi.github.io/sitemap.xml
+
+
+#OK bots examples
+#User-agent: Pinterestbot		(links)
+#User-agent: LinkedInBot		(links)
+#User-agent: Discordbot 		(links)
+#User-agent: TelegramBot		(links)
+#User-agent: Twitterbot			(links)
+#User-agent: seznambot 			(freely available)
+#User-agent: HTTrack			(freely available, site copy)
+#User-agent: Applebot			(siri, etc...)
+#User-agent: teoma 				(ask.com)
+#User-agent: Slurp 				(yahoo.com)
+#User-agent: Yandex				(search engine)
+#User-agent: Yeti				(search engine)
+#User-agent: baiduspider		(search engine)
+#User-agent: Bingbot			(search engine)
+#User-agent: Googlebot			(search engine)
+#User-agent: LinkedInBot		(search engine)
+#User-agent: msnbot				(search engine)
+#User-agent: msnbot-media		(search engine)
+#User-agent: Bingbot			(search engine)
+#User-agent: Googlebot-Image	(search engine)
+#User-agent: Googlebot-News		(search engine)
+#User-agent: Googlebot-Video	(search engine)
+#User-agent: Googlebot-Mobile	(search engine)
+#User-agent: DuckDuckBot		(search engine)
